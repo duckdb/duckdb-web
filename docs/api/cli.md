@@ -539,8 +539,8 @@ To execute a command with SQL text passed in directly from the command line, cal
 The CLI does not use the SQLite shell's `.load` command. Instead, directly execute DuckDB's SQL `install` and `load` commands as you would other SQL statements. See the [Extension docs](../extensions/overview) for details.
 
 ```text
-INSTALL 'fts';
-LOAD 'fts';
+INSTALL fts;
+LOAD fts;
 ```
 
 <!-- SQL parameters do not appear to work -->
