@@ -7,8 +7,6 @@ The `aws` extension provides features that depend on the AWS SDK.
 
 > This extension is currently in an experimental state. Feel free to try it out, but be aware some things may not work as expected.
 
-> Binaries are available in the main extension repository for DuckDB only for nightly builds at the moment, but will be available next release of DuckDB (v0.9.0).
-
 ## Features
 
 | function | type | description | 
