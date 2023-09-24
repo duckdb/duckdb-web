@@ -5,6 +5,15 @@ title: TPC-H
 
 The `tpch` extension implements the data generator and queries for the [TPC-H benchmark](https://www.tpc.org/tpch/).
 
+## Installing and Loading
+
+The `tpch` extension is shipped in the default DuckDB build and is loaded automatically when used. If you would like to install and load it manually, run:
+
+```sql
+INSTALL tpch;
+LOAD tpch;
+```
+
 ## Usage
 
 To generate data for scale factor 1, use:

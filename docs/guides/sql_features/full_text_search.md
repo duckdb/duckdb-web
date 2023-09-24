@@ -33,7 +33,7 @@ The text of each line is in `text_entry`, and a unique key for each line is in `
 First, we create the index, specifying the table name, the unique id column, and the column(s) to index. We will just index the single column `text_entry`, which contains the text of the lines in the play.
 
 ```sql
-INSTALL 'fts';
+INSTALL fts;
 LOAD fts;
 PRAGMA create_fts_index('corpus', 'line_id', 'text_entry');
 ```

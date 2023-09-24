@@ -67,8 +67,8 @@ Some extensions make several changes to the running DuckDB instance, hence, auto
 These extensions have to be installed and loaded using the following SQL statements:
 
 ```sql
-INSTALL 'spatial';
-LOAD 'spatial';
+INSTALL spatial;
+LOAD spatial;
 ```
 
 ```sql
