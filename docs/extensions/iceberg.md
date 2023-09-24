@@ -9,7 +9,7 @@ The `iceberg` extension is a loadable extension that implements support for the 
 
 ## Usage
 
-To test the examples, download the [`iceberg_data.zip`](`/data/iceberg_data.zip`) file and unzip it.
+To test the examples, download the [`iceberg_data.zip`](/data/iceberg_data.zip) file and unzip it.
 
 ```sql
 SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
