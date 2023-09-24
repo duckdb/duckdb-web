@@ -960,6 +960,10 @@
               "url": "azure"
             },
             {
+              "page": "Excel",
+              "url": "excel"
+            },
+            {
               "page": "Full Text Search",
               "url": "full_text_search"
             },
@@ -980,6 +984,10 @@
               "url": "postgres_scanner"
             },
             {
+              "page": "Spatial",
+              "url": "spatial"
+            },
+            {
               "page": "SQLite Scanner",
               "url": "sqlite_scanner"
             },
@@ -988,12 +996,12 @@
               "url": "substrait"
             },
             {
-              "page": "Spatial",
-              "url": "spatial"
-            },            
+              "page": "TPC-H",
+              "url": "tpch"
+            },
             {
-              "page": "Excel",
-              "url": "excel"
+              "page": "TPC-DS",
+              "url": "tpcds"
             }
           ]
         }

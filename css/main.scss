@@ -966,7 +966,7 @@ body.landing{
 }
 
 body.landing label.onlymobile,
-body.installation .evironment label.onlymobile{
+body.installation .environment label.onlymobile{
 	position: relative;
 	&::after{
 		content: "\E010";
@@ -1010,7 +1010,7 @@ body.installation{
 		}
 	}
 }
-body.installation .evironment label.onlymobile{
+body.installation .environment label.onlymobile{
 	&::after{
 		color: black;
 	}

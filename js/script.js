@@ -72,8 +72,8 @@ $(document).ready(function(){
 		
 		var versionSelection = $('.yourselection ul.version li.selected').attr('data-id');
 		if(versionSelection){ userSelection.version = versionSelection; }
-		
-		if( $("body.installation .evironment .onlymobile").is(":visible") ){
+
+		if( $("body.installation .environment .onlymobile").is(":visible") ){
 			var environmentSelection = $('body.installation .environmentselect').val();
 		} else {
 			var environmentSelection = $('.yourselection ul.environment li.selected').attr('data-id');
@@ -110,8 +110,8 @@ $(document).ready(function(){
 		
 		var classList = userSelection.version + userSelection.environment + userSelection.pack + userSelection.platform;
 		var result = $('.possibleresults div'+classList).html();
-		$('.installartion.output .result').html(result);
-		
+		$('.installation.output .result').html(result);
+
 		var exampleResult = $('.possibleresults .example'+userSelection.environment).html();
 		$('.example.output .result').html(exampleResult);
 
