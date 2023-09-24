@@ -75,7 +75,7 @@ LOAD 'spatial';
 CREATE TABLE tbl(geom GEOMETRY);
 ```
 
-If you are using the [Python API client](../api/python/overview), you can install and load them with the `load_extension(name: str)` and `install_extension(name: str)` methods.
+If you are using the [Python API client](../api/python/overview), you can install and load them with the `install_extension(name: str)` and `load_extension(name: str)` methods.
 
 > Autoloadable extensions can also be installed explicitly.
 
@@ -87,16 +87,24 @@ All extensions provided by the DuckDB core team are signed.
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
 To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsigned` flag to it on startup.
 
-### Developing Extensions
+## Installation Location and Sharing Extensions between Clients
+
+Extensions are installed under the user's home directory, to `~/.duckdb/extensions/{DuckDB version}/{Platform name}`. For example, the extensions for DuckDB version 0.9.0 on macOS Arm64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.9.0/osx_arm64`.
+
+The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_. For example, if an extension is installed with version 0.9.0 of the CLI client, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.9.0.
+
+> For development builds, the directory of the extensions corresponds to the Git hash of the build, e.g., `~/.duckdb/extensions/fc2e4b26a6/linux_amd64_gcc4`.
+
+## Developing Extensions
 
 The same API that the official extensions use is available for developing extensions. This allows users to extend the functionaly of DuckDB such to suit their domain the best.
 A template for creating extensions is available in the [`extension-template` repository](https://github.com/duckdb/extension-template/).
 
-### Working with Extensions
+## Working with Extensions
 
 For more details, see the [Working with Extensions page](working_with_extensions).
 
-### Pages in This Section
+## Pages in This Section
 
 <!--
 any extensions that have their own pages will automatically be added to a table of contents that is rendered directly below this list.
