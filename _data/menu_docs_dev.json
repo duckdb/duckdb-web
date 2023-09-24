@@ -994,6 +994,14 @@
             {
               "page": "Substrait",
               "url": "substrait"
+            },
+            {
+              "page": "TPC-H",
+              "url": "tpch"
+            },
+            {
+              "page": "TPC-DS",
+              "url": "tpcds"
             }
           ]
         }
