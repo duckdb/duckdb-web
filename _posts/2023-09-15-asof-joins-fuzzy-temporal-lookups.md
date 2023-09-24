@@ -555,12 +555,12 @@ The probe tables have either 1 or 15 timestamps per key:
 
 ```sql
 CREATE OR REPLACE TABLE probe15 AS
-	SELECT k, purchase_timestamp
+	SELECT k, t
 	FROM range(10000) cs(k), 
 	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 26 DAY) ts(t);
 
 CREATE OR REPLACE TABLE probe1 AS
-	SELECT k, '2022-01-01'::TIMESTAMP + INTERVAL (customer_id) HOUR purchase_timestamp
+	SELECT k, '2022-01-01'::TIMESTAMP t
 	FROM range(10000) cs(k);
 ```
 
