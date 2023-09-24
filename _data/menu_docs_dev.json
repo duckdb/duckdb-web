@@ -960,6 +960,10 @@
               "url": "azure"
             },
             {
+              "page": "Excel",
+              "url": "excel"
+            },
+            {
               "page": "Full Text Search",
               "url": "full_text_search"
             },
@@ -980,20 +984,16 @@
               "url": "postgres_scanner"
             },
             {
+              "page": "Spatial",
+              "url": "spatial"
+            },
+            {
               "page": "SQLite Scanner",
               "url": "sqlite_scanner"
             },
             {
               "page": "Substrait",
               "url": "substrait"
-            },
-            {
-              "page": "Spatial",
-              "url": "spatial"
-            },            
-            {
-              "page": "Excel",
-              "url": "excel"
             }
           ]
         }
