@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+
 	if (window.location.hash) {
 		var hash = window.location.hash;
 		if ($(hash).length) {
@@ -12,10 +12,10 @@ $(document).ready(function(){
 			}
 		}
 	}
-	
+
 	var windowWidth = $( window ).width();
-	
-	// Simple detect OS 
+
+	// Simple detect OS
     if($('#quickinstall').length != 0 || $('.yourselection').length !=0 ){
 		var OSName="Unknown OS";
 		var OSdatid="Unknown OS";
@@ -28,11 +28,11 @@ $(document).ready(function(){
 		$('.ver-cli').not(OSdatid).remove()
 		$('.ver-odbc').not(OSdatid).remove()
 	}
-	
+
 	// Installation instructions on landingpage
 	var landingpageevaluation = function(environment){
 		var result = $('.install .hidden .'+environment).html();
-		$('.install .result').html(result);		
+		$('.install .result').html(result);
 	}
 	$('.environment ul li').click(function(){
 		var environment = $(this).attr("data-id");
@@ -45,47 +45,47 @@ $(document).ready(function(){
 	});
 	var environment = $('.environment ul li.active').attr("data-id");
 	landingpageevaluation(environment);
-	
-	
+
+
 	// Get URL Parameter
 	var getUrlParameter = function getUrlParameter(sParam) {
 	    var sPageURL = window.location.search.substring(1),
 	        sURLVariables = sPageURL.split('&'),
 	        sParameterName,
 	        i;
-	
+
 	    for (i = 0; i < sURLVariables.length; i++) {
 	        sParameterName = sURLVariables[i].split('=');
-	
+
 	        if (sParameterName[0] === sParam) {
 	            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
 	        }
 	    }
 	};
-	
-	
+
+
 	// Installation Selection
 	var userSelection = {version: ".latest", environment: ".python", pack: "", platform: ""};
 	var classList = "";
-	
+
 	var evaluation = function(){
-		
+
 		var versionSelection = $('.yourselection ul.version li.selected').attr('data-id');
 		if(versionSelection){ userSelection.version = versionSelection; }
-		
+
 		if( $("body.installation .evironment .onlymobile").is(":visible") ){
 			var environmentSelection = $('body.installation .environmentselect').val();
 		} else {
 			var environmentSelection = $('.yourselection ul.environment li.selected').attr('data-id');
 		}
 		if(environmentSelection){ userSelection.environment = environmentSelection; }
-		
+
 		var packSelection = $('.yourselection ul.pack li.selected').attr('data-id');
 		if(packSelection){ userSelection.pack = packSelection; }
-		
+
 		var platfromSelection = $('.yourselection ul.platform li.selected').attr('data-id');
 		if(platfromSelection){ userSelection.platform = platfromSelection; }
-		
+
 
 		if ( userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc"){
 			$('.installer.select, .platform.select').removeClass('inactive');
@@ -98,7 +98,7 @@ $(document).ready(function(){
 
 		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && userSelection.pack == ".source" ) {
 			$('.platform.select').addClass('inactive');
-			$('.platform.select ul li.selected').removeClass('selected');	
+			$('.platform.select ul li.selected').removeClass('selected');
 			userSelection.platform = "";
 		}
 		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0){
@@ -107,25 +107,25 @@ $(document).ready(function(){
 			userSelection.pack = ".binary";
 			userSelection.platform = OSdatid;
 		}
-		
+
 		var classList = userSelection.version + userSelection.environment + userSelection.pack + userSelection.platform;
 		var result = $('.possibleresults div'+classList).html();
 		$('.installartion.output .result').html(result);
-		
+
 		var exampleResult = $('.possibleresults .example'+userSelection.environment).html();
 		$('.example.output .result').html(exampleResult);
 
 	}
-	
+
 	$('body.installation .yourselection .select li').click(function(){
 		$(this).siblings('.selected').removeClass('selected');
 		$(this).addClass('selected');
 		evaluation();
 	});
-	
+
 	if($('body.installation .yourselection').length != 0){
 		var environment = "."+getUrlParameter('environment');
-		
+
 		if (environment !== '.undefined'){
 			$('.yourselection ul.environment li.selected').removeClass('selected')
 			$('.yourselection ul.environment li[data-id="'+environment+'"]').addClass('selected')
@@ -138,14 +138,14 @@ $(document).ready(function(){
 	if( $('body.installation').length ){
 		evaluation();
 	}
-	
+
 
 	if($('.archivedposts').length != 0){ // If Archive Page
 		var year = getUrlParameter('year');
 		var month = getUrlParameter('month');
 		$('.postpreview').hide();
 		$('.postpreview[data-year="'+year+'"][data-month="'+month+'"]').show();
-		
+
 		$('.collapse.show').removeClass('show');
 		$('.card-header[data-year="'+year+'"]').next('.collapse ').addClass('show');
 		$('.list-group a[data-year="'+year+'"][data-month="'+month+'"]').addClass('selected');
@@ -161,11 +161,11 @@ $(document).ready(function(){
 	$('.sidenavigation .hasSub').click(function(){
 		$(this).next('ul').slideToggle();
 	});
-	   
-    
-    // arrows in menu 
+
+
+    // arrows in menu
     $('.sidenavigation .hasSub').click(function(){
-	   $(this).toggleClass('opened'); 
+	   $(this).toggleClass('opened');
     });
     // only docu or benchmarking can be opened at once
     $('.sidenavigation li.benchmarking').click(function(){
@@ -177,8 +177,8 @@ $(document).ready(function(){
     if($('li.hasSub.opened.benchmarking').length != 0){
 	    $('.sidenavigation li.documentation.opened').toggleClass('opened').next('ul').hide();
     }
-    
-	
+
+
 	// Same Page Anchor Scroll Navigation
 	$('a[href*="#"]')
     .not('[href="#"]')
@@ -200,15 +200,15 @@ $(document).ready(function(){
         }
       }
     });
-    
-    
+
+
     // FAQs
     $('.wrap.frequentlyaskedquestions #main_content_wrap h1, .wrap.frequentlyaskedquestions #main_content_wrap h2, .wrap.frequentlyaskedquestions #main_content_wrap h3').click(function(){
 	    $(this).toggleClass('open');
 	    $(this).next('p').slideToggle();
     });
-    
-    
+
+
     // Mobile Menu
     var hamburgers = document.querySelectorAll(".hamburger");
     if ($('.hamburger').length > 0) {
@@ -223,27 +223,27 @@ $(document).ready(function(){
 			} else {
 				$(this).toggleClass('is-active');
 				$('.landingmenu nav').toggleClass('slidein');
-				$('body main').toggleClass('inactive');	
+				$('body main').toggleClass('inactive');
 			}
 		})
-	
+
     }
-    
-    
-    // Scroll Top Button 
+
+
+    // Scroll Top Button
     $('.scrolltop').click(function(){
 	    $("html, body").animate({ scrollTop: 0 }, 600, 'swing');
 	    return false;
 	});
-    
-	
+
+
 	// Header Animation
 	if( $('.hamburger').is(':visible') ){
 		var animationpath = "/js/duckdbanimation_search.json"
 	} else {
 		var animationpath = "/js/duckdbanimation.json"
 	}
-	let duckDBicon = document.getElementById('duckdbanimation');	
+	let duckDBicon = document.getElementById('duckdbanimation');
     let animationduckDBicon = lottie.loadAnimation({
             container: duckDBicon,
             renderer: 'svg',
@@ -251,7 +251,7 @@ $(document).ready(function(){
             autoplay: false,
             path: animationpath
     });
-    
+
 	if( !$('.hamburger').is(':visible') ){
 		$('#duckdbanimation, .duckdbhome img.downloadlogo').mouseenter(function() {
 			animationduckDBicon.play();
@@ -262,21 +262,21 @@ $(document).ready(function(){
 			animationduckDBicon.setDirection(-1)
 		})
 	}
-	
+
 	if ($('.wrap.livedemo').length =! 0){
 		lottie.loadAnimation({
-		  container: document.getElementById('loading-spinner'), 
+		  container: document.getElementById('loading-spinner'),
 		  renderer: 'svg',
 		  loop: true,
 		  autoplay: true,
 		  path: "/js/duckdbanimationloop.json"
 		});
 	}
-	
-	
+
+
 	// Landingpage Animation
 	if( $("body.landing").length != 0 ){
-		let duckDBcircled = document.getElementById('duckdbdanimationcircled');	
+		let duckDBcircled = document.getElementById('duckdbdanimationcircled');
 	    let animationduckDBcircled = lottie.loadAnimation({
 	            container: duckDBcircled,
 	            renderer: 'svg',
@@ -293,13 +293,13 @@ $(document).ready(function(){
 			animationduckDBcircled.setDirection(-1)
 		})
 	}
-	
+
 	// Appending "Note" to Blockquote
 	$('body.documentation #main_content_wrap blockquote').each(function() {
 		$(this).prepend("<h4>Note</h4>");
 	});
-	
-	
+
+
 	// Appending Content-List of Overview-Pages
 	if (window.location.href.indexOf("overview") > -1) {
 	    //contentlist = $('li.opened ~ .parentnav li.active ~ li').clone();
@@ -310,13 +310,13 @@ $(document).ready(function(){
 		clonedUL.find('ul').show();
 	    $('#main_content_wrap').append(clonedUL);
 	}
-	
+
 	// Appending Content-List of Documentation
 	if ( $('.wrap.documentation') != 0 ) {
 	    contentlist = $('ul.sidenav').clone()
 	    $('#docusitemaphere').append(contentlist).find("ul").removeAttr("style")
 	}
-	
+
 	// Add class-name to external Links
 	$('a').filter(function() {
 		return this.hostname && this.hostname !== location.hostname;
@@ -324,22 +324,22 @@ $(document).ready(function(){
 	$('.landingmenu .external a.externallink, .mainlinks a.externallink, .discord a.externallink').removeClass('externallink'); // Remove Class from header elements
 	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
 	$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
-	
+
 	// FOUNDATION PAGE SCRIPTS
 	if($('body').hasClass('foundation') && $('section.form').length){
 		var hash = window.location.hash.replace('#', '');
 		if( hash.length ){
 			$('div.select .select-text').val(hash);
 		}
-		
+
 		// AJAX FORM SEND
 		$("#ajaxForm").submit(function(e){
 			e.preventDefault();
 			var action = $(this).attr("action");
-			
+
 			$('#ajaxForm button[type="submit"]').hide();
 			$('#ajaxForm .lds-ellipsis').fadeIn();
-			
+
 			$.ajax({
 				type: "POST",
 				url: action,
@@ -360,12 +360,12 @@ $(document).ready(function(){
 				$('#ajaxForm button[type="submit"]').show();
 				$('#ajaxForm .lds-ellipsis').hide();
 			});
-			
+
 		});
-	
+
 	}
-	
-	
+
+
 	// CHANGE DOC VERSION
 	/*
 	$('.versionsidebar ul li').click(function(){
@@ -376,7 +376,7 @@ $(document).ready(function(){
 		} else {
 			var pathname = window.location.pathname.split("/docs");
 		}
-		
+
 		if( $(this).hasClass('latest') ){
 			var versionurl = "/docs"+pathname[1]
 		} else {
@@ -384,14 +384,14 @@ $(document).ready(function(){
 		}
 	})
 	*/
-	
+
 	// VERSION FIX ON MOBILE
 	$('.headlinebar .version').click(function(){
 		$('.versionsidebar').toggleClass('active');
 	})
-	
-	
-	
+
+
+
 	// LOCAL STORAGE
 	function setWithExpiry(key, value, ttl) {
 		const now = new Date()
@@ -427,8 +427,8 @@ $(document).ready(function(){
 		$('.discord').animate({ height: 0 }, 300);
 	});
 
-	
-	// SEARCH 
+
+	// SEARCH
 	var base_url = window.location.origin;
 	var resultSelected;
 	var toggleMobileSearchIcon = function(){
@@ -471,7 +471,7 @@ $(document).ready(function(){
 				$( ".searchoverlay form input" ).blur();
 			}
 		}
-		
+
 		// scroll through results with up and down keys
 		if ( !($("input").is(":focus")) && e.which === 40 && $('body').hasClass('search') || !($("input").is(":focus")) && e.which === 38 && $('body').hasClass('search') ) {
 			var result = $('.search_result');
@@ -502,7 +502,7 @@ $(document).ready(function(){
 			}
 		}
 	});
-	
+
 	$('nav .search_icon').click(function(){
 		toggleSearch();
 	});
@@ -537,7 +537,7 @@ $(document).ready(function(){
 			$('body.documentation main .wrap.inactive').removeClass('inactive');
 		}
 	});
-	
 
-	
+
+
 });
