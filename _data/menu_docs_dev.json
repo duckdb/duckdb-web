@@ -996,12 +996,12 @@
               "url": "substrait"
             },
             {
-              "page": "TPC-H",
-              "url": "tpch"
-            },
-            {
               "page": "TPC-DS",
               "url": "tpcds"
+            },
+            {
+              "page": "TPC-H",
+              "url": "tpch"
             }
           ]
         }
