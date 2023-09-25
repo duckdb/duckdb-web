@@ -50,19 +50,68 @@ INSERT INTO structs VALUES (ROW(42));
 ```
 
 #### Core System Improvements
+**[Out-Of-Core Hash Aggregates](https://github.com/duckdb/duckdb/pull/7931)** and **[Hash Aggregate Performance Improvements.](https://github.com/duckdb/duckdb/pull/8475)** When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques.
 
-**[Out-Of-Core Hash Aggregates.](https://github.com/duckdb/duckdb/pull/7931)** When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques.
+In this release, support for disk-spilling techniques is further extended through the support for out-of-core hash aggregates. Now, hash tables constructed during `GROUP BY` queries or `DISTINCT` operations that do not fit in memory due to a large number of unique groups will spill data to disk instead of throwing an out-of-memory exception. Due to the clever use of radix partitioning, performance degradation is gradual, and performance cliffs are avoided. Only the subset of the table that does not fit into memory will be spilled to disk.
 
-In this release support for disk-spilling techniques is further extended through the support for out-of-core hash aggregates. Now hash tables constructed during `GROUP BY` queries or `DISTINCT` operations that do not fit in memory due to the large amount of groups will spill data to disk instead of throwing an out-of-memory exception. Due to clever use of radix partitioning, performance degradation is gradual and performance cliffs are avoided. Only the subset of the table that does not fit into memory will be spilled to disk.
+The performance of our hash aggregate has also improved in general, especially when there are many groups. For example, we compute the number of unique rows in a data set with 30 million rows and 15 columns by using the following query:
 
-|  memory limit | runtime   |
-|:-------------:|:---------:|
-| 6.0GB         | 6.84s     |
-| 5.0GB         | 7.39s     |
-| 4.0GB         | 9.04s     |
-| 3.0GB         | 8.76s     |
-| 2.0GB         | 8.08s     |
-| 1.0GB         | 10.27s    |
+```sql
+SELECT COUNT(*) FROM (SELECT DISTINCT * FROM tbl);
+```
+If we keep all the data in memory, the query should use around 6GB. However, we can still complete the query if less memory is available. In the table below, we can see how the runtime is affected by lowering the memory limit:
+
+|  memory limit |  v0.8.1  |  v0.9.0  |
+|:-------------:|:--------:|:--------:|
+| 10.0GB        | 8.52s    | 2.91s    |
+| 9.0GB         | 8.52s    | 3.45s    |
+| 8.0GB         | 8.52s    | 3.45s    |
+| 7.0GB         | 8.52s    | 3.47s    |
+| 6.0GB         | OOM      | 3.41s    |
+| 5.0GB         | OOM      | 3.67s    |
+| 4.0GB         | OOM      | 3.87s    |
+| 3.0GB         | OOM      | 4.20s    |
+| 2.0GB         | OOM      | 4.39s    |
+| 1.0GB         | OOM      | 4.91s    |
+
+**[Compressed Materialization.](https://github.com/duckdb/duckdb/pull/7644)** DuckDB's streaming execution engine has a low memory footprint, but more memory is required for operations such as grouped aggregation. The memory footprint of these operations can be reduced by compression. DuckDB already uses [many compression techniques in its storage format](/2022/10/28/lightweight-compression.html), but many of these techniques are too costly to use during query execution. However, certain lightweight compression techniques are so cheap that the benefit of the reducing memory footprint outweight the cost of (de)compression.
+
+In this release, we add support for compression of strings and integer types right before data goes into the grouped aggregation and sorting operators. By using statistics, both types are compressed to the smallest possible integer type. For example, if we have the following table:
+
+```
+┌───────┬─────────┐
+│  id   │  name   │
+│ int32 │ varchar │
+├───────┼─────────┤
+│   300 │ alice   │
+│   301 │ bob     │
+│   302 │ eve     │
+│   303 │ mallory │
+│   304 │ trent   │
+└───────┴─────────┘
+```
+
+The `id` column uses a 32-bit integer. From our statistics we know that the minimum value is 300, and the maximum value is 304. We can subtract 300 and cast to an 8-bit integer instead, reducing the width from 4 bytes down to 1.
+
+The `name` column uses our internal string type, which is 16 bytes wide. However, our statistics tell us that the longest string here is only 7 bytes. We can fit this into a 64-bit integer like so:
+```
+alice   -> alice005
+bob     -> bob00003
+eve     -> eve00003
+mallory -> mallory7
+trent   -> trent005
+```
+
+This reduces the width from 16 bytes down to 8. To support sorting of compressed strings, we flip the bytes on big-endian machines so that our comparison operators are still correct:
+```
+alice005 -> 500ecila
+bob00003 -> 30000bob
+eve00003 -> 30000eve
+mallory7 -> 7yrollam
+trent005 -> 500tnert
+```
+
+By reducing the size of query intermediates, we can prevent/reduce spilling data to disk, reducing the need for costly I/O operations, thereby improving query performance.
 
 **Window Function Performance Improvements ([#7831](https://github.com/duckdb/duckdb/pull/7831), [#7996](https://github.com/duckdb/duckdb/pull/7996), [#8050](https://github.com/duckdb/duckdb/pull/8050), [#8491](https://github.com/duckdb/duckdb/pull/8491)).** This release features many improvements to the performance of Window functions due to improved vectorization of the code, more re-use of partial aggregates and improved parallelism through work stealing of tasks. As a result, performance of [Window functions has improved significantly, particularly in scenarios where there are no or few partitions](https://github.com/duckdb/duckdb/issues/7809#issuecomment-1679387022).
 
