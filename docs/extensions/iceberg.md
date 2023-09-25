@@ -5,8 +5,6 @@ title: Iceberg
 
 The `iceberg` extension is a loadable extension that implements support for the [Apache Iceberg format](https://iceberg.apache.org/).
 
-> This extension currently only works on the `main` branch of DuckDB (bleeding edge releases).
-
 ## Usage
 
 To test the examples, download the [`iceberg_data.zip`](/data/iceberg_data.zip) file and unzip it.
