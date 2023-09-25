@@ -56,12 +56,16 @@ SELECT new_db.my_schema.my_table.col FROM new_db.my_schema.my_table;
 
 Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the *catalog search path*. The default catalog search path includes the system catalog, the temporary catalog and the initially attached database together with the `main` schema.
 
+### Default Database and Schema
+
 When a table is created without any qualifications, the table is created in the default schema of the default database. The default database is the database that is launched when the system is created - and the default schema is `main`.
 
 ```sql
 -- create the table "my_table" in the default database
 CREATE TABLE my_table(col INTEGER);
 ```
+
+### Changing the Default Database and Schema
 
 The default database and schema can be changed using the `USE` command.
 
@@ -71,6 +75,8 @@ USE new_db;
 -- set the default database schema to `new_db.my_schema`
 USE new_db.my_schema;
 ```
+
+### Resolving Conflicts
 
 When providing only a single qualification, the system can interpret this as *either* a catalog *or* a schema, as long as there are no conflicts. For example:
 
@@ -89,6 +95,24 @@ If we create a conflict (i.e., we have both a schema and a catalog with the same
 CREATE SCHEMA new_db;
 CREATE TABLE new_db.tbl(i INTEGER);
 -- Error: Binder Error: Ambiguous reference to catalog or schema "new_db" - use a fully qualified path like "memory.new_db"
+```
+
+### Changing the Catalog Search Path
+
+The catalog search path can be adjusted by setting the `search_path` configuration option, which uses a comma-separated list of values that will be on the search path. The following example demonstrates searching in two databases:
+
+```sql
+ATTACH ':memory:' AS db1;
+ATTACH ':memory:' AS db2;
+CREATE table db1.tbl1 (i INTEGER);
+CREATE table db2.tbl2 (j INTEGER);
+-- reference the tables using their fully qualified name
+SELECT * FROM db1.tbl1;
+SELECT * FROM db2.tbl2;
+-- or set the search path and reference the tables using their name
+SET search_path='db1,db2';
+SELECT * FROM tbl1;
+SELECT * FROM tbl2;
 ```
 
 ## Transactional Semantics
