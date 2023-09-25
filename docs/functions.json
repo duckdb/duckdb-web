@@ -4,7 +4,7 @@
     "parameters": [
       "x"
     ],
-    "description": "factorial of x. Computes the product of the current integer and all integers below it",
+    "description": "Factorial of x. Computes the product of the current integer and all integers below it",
     "example": "4!",
     "type": "scalar_function",
     "struct": "FactorialOperatorFun",
@@ -33,7 +33,7 @@
       "x",
       "y"
     ],
-    "description": "computes x to the power of y",
+    "description": "Computes x to the power of y",
     "example": "pow(2, 3)",
     "type": "scalar_function",
     "struct": "PowOperatorFun",
@@ -50,7 +50,7 @@
     "parameters": [
       "input"
     ],
-    "description": "bitwise shift left",
+    "description": "Bitwise shift left",
     "example": "1 << 4",
     "type": "scalar_function_set",
     "struct": "LeftShiftFun",
@@ -62,7 +62,7 @@
     "parameters": [
       "input"
     ],
-    "description": "bitwise shift right",
+    "description": "Bitwise shift right",
     "example": "8 >> 2",
     "type": "scalar_function_set",
     "struct": "RightShiftFun",
@@ -74,7 +74,7 @@
     "parameters": [
       "x"
     ],
-    "description": "absolute value",
+    "description": "Absolute value",
     "example": "abs(-17.4)",
     "type": "scalar_function_set",
     "struct": "AbsOperatorFun",
@@ -90,7 +90,7 @@
       "string",
       "search_string"
     ],
-    "description": "Return true if string begins with search_string",
+    "description": "Returns true if string begins with search_string",
     "example": "starts_with('abc','a')",
     "type": "scalar_function",
     "struct": "StartsWithOperatorFun",
@@ -105,7 +105,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the arccosine of x",
+    "description": "Computes the arccosine of x",
     "example": "acos(0.5)",
     "type": "scalar_function",
     "category": "math",
@@ -194,7 +194,7 @@
     "parameters": [
       "string"
     ],
-    "description": "Returns an integer that represents the Unicode code point of the first character of the string.",
+    "description": "Returns an integer that represents the Unicode code point of the first character of the string",
     "example": "ascii('\u03a9')",
     "type": "scalar_function",
     "struct": "ASCIIFun",
@@ -206,7 +206,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the arcsine of x",
+    "description": "Computes the arcsine of x",
     "example": "asin(0.5)",
     "type": "scalar_function",
     "category": "math",
@@ -217,7 +217,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the arctangent of x",
+    "description": "Computes the arctangent of x",
     "example": "atan(0.5)",
     "type": "scalar_function",
     "category": "math",
@@ -229,7 +229,7 @@
       "y",
       "x"
     ],
-    "description": "computes the arctangent (y, x)",
+    "description": "Computes the arctangent (y, x)",
     "example": "atan2(1.0, 0.0)",
     "type": "scalar_function",
     "category": "math",
@@ -257,7 +257,7 @@
       "max",
       "width"
     ],
-    "description": "Draw a band whose width is proportional to (x - min) and equal to width characters when x = max. width defaults to 80.",
+    "description": "Draws a band whose width is proportional to (x - min) and equal to width characters when x = max. width defaults to 80",
     "example": "bar(5, 0, 20, 10)",
     "type": "scalar_function_set",
     "category": "string",
@@ -293,7 +293,7 @@
     "parameters": [
       "x"
     ],
-    "description": "returns the number of bits that are set",
+    "description": "Returns the number of bits that are set",
     "example": "bit_count(31)",
     "type": "scalar_function_set",
     "category": "math",
@@ -316,7 +316,7 @@
       "substring",
       "bitstring"
     ],
-    "description": "Returns first starting index of the specified substring within bits, or zero if it\u2019s not present. The first (leftmost) bit is indexed 1",
+    "description": "Returns first starting index of the specified substring within bits, or zero if it is not present. The first (leftmost) bit is indexed 1",
     "example": "bit_position('010'::BIT, '1110101'::BIT)",
     "type": "scalar_function",
     "category": "bit",
@@ -339,7 +339,7 @@
       "bitstring",
       "length"
     ],
-    "description": "Pads the bitstring until the specified length.",
+    "description": "Pads the bitstring until the specified length",
     "example": "bitstring('1010'::BIT, 7)",
     "struct": "BitStringFun",
     "type": "scalar_function",
@@ -384,7 +384,7 @@
     "parameters": [
       "map"
     ],
-    "description": "Return the size of the map (or the number of entries in the map).",
+    "description": "Returns the size of the map (or the number of entries in the map)",
     "example": "cardinality( map([4, 2], ['a', 'b']) );",
     "type": "scalar_function",
     "category": "map",
@@ -395,7 +395,7 @@
     "parameters": [
       "x"
     ],
-    "description": "returns the cube root of x",
+    "description": "Returns the cube root of x",
     "example": "cbrt(8)",
     "type": "scalar_function",
     "category": "math",
@@ -406,7 +406,7 @@
     "parameters": [
       "x"
     ],
-    "description": "rounds the number up",
+    "description": "Rounds the number up",
     "example": "ceil(17.4)",
     "type": "scalar_function_set",
     "aliases": [
@@ -431,7 +431,7 @@
     "parameters": [
       "code_point"
     ],
-    "description": "returns a character which is corresponding the ASCII code value or Unicode code point",
+    "description": "Returns a character which is corresponding the ASCII code value or Unicode code point",
     "example": "chr(65)",
     "type": "scalar_function",
     "category": "string",
@@ -454,7 +454,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the cos of x",
+    "description": "Computes the cos of x",
     "example": "cos(90)",
     "type": "scalar_function",
     "category": "math",
@@ -465,7 +465,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the cotangent of x",
+    "description": "Computes the cotangent of x",
     "example": "cot(0.5)",
     "type": "scalar_function",
     "category": "math",
@@ -498,7 +498,7 @@
   {
     "name": "current_database",
     "parameters": [],
-    "description": "Return the name of the currently active database.",
+    "description": "Returns the name of the currently active database",
     "example": "current_database()",
     "type": "scalar_function",
     "category": "generic",
@@ -528,7 +528,7 @@
   {
     "name": "current_schema",
     "parameters": [],
-    "description": "Return the name of the currently active schema. Default is main.",
+    "description": "Returns the name of the currently active schema. Default is main",
     "example": "current_schema()",
     "type": "scalar_function",
     "category": "generic",
@@ -539,7 +539,7 @@
     "parameters": [
       "include_implicit"
     ],
-    "description": "Return list of schemas. Pass a parameter of True to include implicit schemas.",
+    "description": "Returns list of schemas. Pass a parameter of True to include implicit schemas",
     "example": "current_schemas(true)",
     "type": "scalar_function",
     "category": "generic",
@@ -550,7 +550,7 @@
     "parameters": [
       "setting_name"
     ],
-    "description": "Return the current value of the configuration setting",
+    "description": "Returns the current value of the configuration setting",
     "example": "current_setting('access_mode')",
     "type": "scalar_function",
     "category": "generic",
@@ -562,7 +562,7 @@
       "str1",
       "str2"
     ],
-    "description": "Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Different case is considered different.",
+    "description": "Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Different case is considered different",
     "example": "damerau_levenshtein('hello', 'world')",
     "type": "scalar_function",
     "category": "string",
@@ -646,7 +646,7 @@
     "parameters": [
       "ts"
     ],
-    "description": "The (English) name of the weekday.",
+    "description": "The (English) name of the weekday",
     "example": "dayname(TIMESTAMP '1992-03-22')",
     "type": "scalar_function_set",
     "category": "date",
@@ -704,7 +704,7 @@
     "parameters": [
       "blob"
     ],
-    "description": "Convert blob to varchar. Fails if blob is not valid utf-8.",
+    "description": "Convert blob to varchar. Fails if blob is not valid utf-8",
     "example": "decode('\\xC3\\xBC'::BLOB)",
     "type": "scalar_function",
     "category": "blob",
@@ -715,7 +715,7 @@
     "parameters": [
       "x"
     ],
-    "description": "converts radians to degrees",
+    "description": "Converts radians to degrees",
     "example": "degrees(pi())",
     "type": "scalar_function",
     "category": "math",
@@ -726,7 +726,7 @@
     "parameters": [
       "string"
     ],
-    "description": "Convert varchar to blob. Converts utf-8 characters into literal encoding.",
+    "description": "Convert varchar to blob. Converts utf-8 characters into literal encoding",
     "example": "encode('my_string_with_\u00fc')",
     "type": "scalar_function",
     "category": "blob",
@@ -759,8 +759,8 @@
     "parameters": [
       "enum"
     ],
-    "description": "Returns the first value of the input enum type.",
-    "example": "enum_first(null::mood)",
+    "description": "Returns the first value of the input enum type",
+    "example": "enum_first(NULL::mood)",
     "type": "scalar_function",
     "category": "enum",
     "result": null
@@ -770,8 +770,8 @@
     "parameters": [
       "enum"
     ],
-    "description": "Returns the last value of the input enum type.",
-    "example": "enum_last(null::mood)",
+    "description": "Returns the last value of the input enum type",
+    "example": "enum_last(NULL::mood)",
     "type": "scalar_function",
     "category": "enum",
     "result": null
@@ -781,8 +781,8 @@
     "parameters": [
       "enum"
     ],
-    "description": "Returns all values of the input enum type as an array.",
-    "example": "enum_range(null::mood)",
+    "description": "Returns all values of the input enum type as an array",
+    "example": "enum_range(NULL::mood)",
     "type": "scalar_function",
     "category": "enum",
     "result": null
@@ -793,7 +793,7 @@
       "start",
       "end"
     ],
-    "description": "Returns the range between the two given enum values as an array. The values must be of the same enum type. When the first parameter is NULL, the result starts with the first value of the enum type. When the second parameter is NULL, the result ends with the last value of the enum type.",
+    "description": "Returns the range between the two given enum values as an array. The values must be of the same enum type. When the first parameter is NULL, the result starts with the first value of the enum type. When the second parameter is NULL, the result ends with the last value of the enum type",
     "example": "enum_range_boundary(NULL, 'happy'::mood)",
     "type": "scalar_function",
     "category": "enum",
@@ -808,7 +808,7 @@
     "example": "epoch(timestamp '2021-08-03 11:59:44.123456')",
     "type": "scalar_function_set",
     "category": "date",
-    "result": 1627991984
+    "result": 1627991984.123456
   },
   {
     "name": "epoch_ms",
@@ -870,7 +870,7 @@
     "parameters": [
       "x"
     ],
-    "description": "round to next even number by rounding away from zero.",
+    "description": "Rounds x to next even number by rounding away from zero",
     "example": "even(2.9)",
     "type": "scalar_function",
     "category": "math",
@@ -881,7 +881,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes e to the power of x",
+    "description": "Computes e to the power of x",
     "example": "exp(1)",
     "type": "scalar_function",
     "category": "math",
@@ -916,7 +916,7 @@
     "parameters": [
       "x"
     ],
-    "description": "rounds the number down",
+    "description": "Rounds the number down",
     "example": "floor(17.4)",
     "type": "scalar_function_set",
     "category": "math",
@@ -953,7 +953,7 @@
     "parameters": [
       "string"
     ],
-    "description": "Convert a base64 encoded string to a character string.",
+    "description": "Convert a base64 encoded string to a character string",
     "example": "from_base64('QQ==')",
     "type": "scalar_function",
     "category": "blob",
@@ -964,7 +964,7 @@
     "parameters": [
       "x"
     ],
-    "description": "interpolation of (x-1) factorial (so decimal inputs are allowed)",
+    "description": "Interpolation of (x-1) factorial (so decimal inputs are allowed)",
     "example": "gamma(5.5)",
     "type": "scalar_function",
     "category": "math",
@@ -989,7 +989,7 @@
       "bitstring",
       "index"
     ],
-    "description": "Extracts the nth bit from bitstring; the first (leftmost) bit is indexed 0.",
+    "description": "Extracts the nth bit from bitstring; the first (leftmost) bit is indexed 0",
     "example": "get_bit('0110010'::BIT, 2)",
     "type": "scalar_function",
     "category": "bit",
@@ -1025,7 +1025,7 @@
       "arg2",
       "..."
     ],
-    "description": "Returns the highest value of the set of input parameters.",
+    "description": "Returns the highest value of the set of input parameters",
     "example": "greatest(42, 84)",
     "type": "scalar_function_set",
     "category": "generic",
@@ -1037,7 +1037,7 @@
       "x",
       "y"
     ],
-    "description": "computes the greatest common divisor of x and y",
+    "description": "Computes the greatest common divisor of x and y",
     "example": "greatest_common_divisor(42, 57)",
     "type": "scalar_function_set",
     "aliases": [
@@ -1052,7 +1052,7 @@
       "str1",
       "str2"
     ],
-    "description": "The number of positions with different characters for 2 strings of equal length. Different case is considered different.",
+    "description": "The number of positions with different characters for 2 strings of equal length. Different case is considered different",
     "example": "hamming('duck','luck')",
     "type": "scalar_function",
     "aliases": [
@@ -1066,7 +1066,7 @@
     "parameters": [
       "param"
     ],
-    "description": "Returns an integer with the hash of the value. Note that this is not a cryptographic hash.",
+    "description": "Returns an integer with the hash of the value. Note that this is not a cryptographic hash",
     "example": "hash('\ud83e\udd86')",
     "type": "scalar_function",
     "category": "generic",
@@ -1118,7 +1118,7 @@
       "database_name",
       "schema_name"
     ],
-    "description": "Returns whether or not the database/schema are in the search path.",
+    "description": "Returns whether or not the database/schema are in the search path",
     "example": "in_search_path('memory', 'main')",
     "type": "scalar_function",
     "category": "generic",
@@ -1130,7 +1130,7 @@
       "haystack",
       "needle"
     ],
-    "description": "Return location of first occurrence of needle in haystack, counting from 1. Returns 0 if no match found.",
+    "description": "Returns location of first occurrence of needle in haystack, counting from 1. Returns 0 if no match found",
     "example": "instr('test test','es')",
     "type": "scalar_function",
     "aliases": [
@@ -1206,7 +1206,7 @@
       "str1",
       "str2"
     ],
-    "description": "The Jaccard similarity between two strings. Different case is considered different. Returns a number between 0 and 1.",
+    "description": "The Jaccard similarity between two strings. Different case is considered different. Returns a number between 0 and 1",
     "example": "jaccard('duck','luck')",
     "type": "scalar_function",
     "category": "string",
@@ -1218,7 +1218,7 @@
       "str1",
       "str2"
     ],
-    "description": "The Jaro similarity between two strings. Different case is considered different. Returns a number between 0 and 1.",
+    "description": "The Jaro similarity between two strings. Different case is considered different. Returns a number between 0 and 1",
     "example": "jaro_similarity('duck','duckdb')",
     "type": "scalar_function",
     "category": "string",
@@ -1230,7 +1230,7 @@
       "str1",
       "str2"
     ],
-    "description": "The Jaro-Winkler similarity between two strings. Different case is considered different. Returns a number between 0 and 1.",
+    "description": "The Jaro-Winkler similarity between two strings. Different case is considered different. Returns a number between 0 and 1",
     "example": "jaro_winkler_similarity('duck','duckdb')",
     "type": "scalar_function",
     "category": "string",
@@ -1292,7 +1292,7 @@
       "arg2",
       "..."
     ],
-    "description": "Returns the lowest value of the set of input parameters.",
+    "description": "Returns the lowest value of the set of input parameters",
     "example": "least(42, 84)",
     "type": "scalar_function_set",
     "category": "generic",
@@ -1304,7 +1304,7 @@
       "x",
       "y"
     ],
-    "description": "computes the least common multiple of x and y",
+    "description": "Computes the least common multiple of x and y",
     "example": "least_common_multiple(42, 57)",
     "type": "scalar_function_set",
     "aliases": [
@@ -1343,7 +1343,7 @@
       "str1",
       "str2"
     ],
-    "description": "The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different.",
+    "description": "The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different",
     "example": "levenshtein('duck','db')",
     "type": "scalar_function",
     "aliases": [
@@ -1357,7 +1357,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the log of the gamma function.",
+    "description": "Computes the log of the gamma function",
     "example": "lgamma(2)",
     "type": "scalar_function",
     "struct": "LogGammaFun",
@@ -1384,7 +1384,7 @@
       "list",
       "name"
     ],
-    "description": "Executes the aggregate function name on the elements of list.",
+    "description": "Executes the aggregate function name on the elements of list",
     "example": "list_aggregate([1, 2, NULL], 'min')",
     "type": "scalar_function",
     "aliases": [
@@ -1402,7 +1402,7 @@
       "list1",
       "list2"
     ],
-    "description": "Compute the cosine similarity between two lists.",
+    "description": "Compute the cosine similarity between two lists",
     "example": "list_cosine_similarity([1, 2, 3], [1, 2, 3])",
     "type": "scalar_function_set",
     "aliases": [
@@ -1417,7 +1417,7 @@
       "list1",
       "list2"
     ],
-    "description": "Compute the distance between two lists.",
+    "description": "Compute the distance between two lists",
     "example": "list_distance([1, 2, 3], [1, 2, 3])",
     "type": "scalar_function_set",
     "aliases": [
@@ -1431,7 +1431,7 @@
     "parameters": [
       "list"
     ],
-    "description": "Removes all duplicates and NULLs from a list. Does not preserve the original order.",
+    "description": "Removes all duplicates and NULLs from a list. Does not preserve the original order",
     "example": "list_distinct([1, 1, NULL, -3, 1, 5])",
     "type": "scalar_function",
     "aliases": [
@@ -1446,7 +1446,7 @@
       "list",
       "lambda"
     ],
-    "description": "Constructs a list from those elements of the input list for which the lambda function returns true.",
+    "description": "Constructs a list from those elements of the input list for which the lambda function returns true",
     "example": "list_filter([3, 4, 5], x -> x > 4)",
     "type": "scalar_function",
     "aliases": [
@@ -1462,7 +1462,7 @@
       "list1",
       "list2"
     ],
-    "description": "Compute the inner product between two lists.",
+    "description": "Compute the inner product between two lists",
     "example": "list_inner_product([1, 2, 3], [1, 2, 3])",
     "type": "scalar_function_set",
     "aliases": [
@@ -1477,7 +1477,7 @@
     "parameters": [
       "list"
     ],
-    "description": "Sorts the elements of the list in reverse order.",
+    "description": "Sorts the elements of the list in reverse order",
     "example": "list_reverse_sort([3, 6, 1, 2])",
     "type": "scalar_function_set",
     "aliases": [
@@ -1494,7 +1494,7 @@
       "end[",
       "step]"
     ],
-    "description": "Extract a sublist using slice conventions. Negative values are accepted.",
+    "description": "Extract a sublist using slice conventions. Negative values are accepted",
     "example": "list_slice(l, 2, 4)",
     "type": "scalar_function_set",
     "aliases": [
@@ -1508,7 +1508,7 @@
     "parameters": [
       "list"
     ],
-    "description": "Sorts the elements of the list.",
+    "description": "Sorts the elements of the list",
     "example": "list_sort([3, 6, 1, 2])",
     "type": "scalar_function_set",
     "aliases": [
@@ -1523,7 +1523,7 @@
       "list",
       "lambda"
     ],
-    "description": "Returns a list that is the result of applying the lambda function to each element of the input list. See the Lambda Functions section for more details.",
+    "description": "Returns a list that is the result of applying the lambda function to each element of the input list. See the Lambda Functions section for more details",
     "example": "list_transform([1, 2, 3], x -> x + 1)",
     "type": "scalar_function",
     "aliases": [
@@ -1540,7 +1540,7 @@
     "parameters": [
       "list"
     ],
-    "description": "Counts the unique elements of a list.",
+    "description": "Counts the unique elements of a list",
     "example": "list_unique([1, 1, NULL, -3, 1, 5])",
     "type": "scalar_function",
     "aliases": [
@@ -1555,7 +1555,7 @@
       "any",
       "..."
     ],
-    "description": "Create a LIST containing the argument values.",
+    "description": "Create a LIST containing the argument values",
     "example": "list_value(4, 5, 6)",
     "type": "scalar_function",
     "aliases": [
@@ -1569,7 +1569,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the natural logarithm of x",
+    "description": "Computes the natural logarithm of x",
     "example": "ln(2)",
     "type": "scalar_function",
     "category": "math",
@@ -1580,7 +1580,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the 10-log of x",
+    "description": "Computes the 10-log of x",
     "example": "log10(1000)",
     "type": "scalar_function",
     "aliases": [
@@ -1594,7 +1594,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the 2-log of x",
+    "description": "Computes the 2-log of x",
     "example": "log2(8)",
     "type": "scalar_function",
     "category": "math",
@@ -1684,7 +1684,7 @@
       "keys",
       "values"
     ],
-    "description": "Creates a map from a set of keys and values.",
+    "description": "Creates a map from a set of keys and values",
     "example": "map(['key1', 'key2'], ['val1', 'val2'])",
     "type": "scalar_function",
     "category": "map",
@@ -1719,7 +1719,7 @@
       "map",
       "key"
     ],
-    "description": "Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map\u2019s keys else an error is returned.",
+    "description": "Returns a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map\u2019s keys else an error is returned",
     "example": "map_extract(map(['key'], ['val']), 'key')",
     "type": "scalar_function",
     "aliases": [
@@ -1917,7 +1917,7 @@
     "parameters": [
       "ts"
     ],
-    "description": "The (English) name of the month.",
+    "description": "The (English) name of the month",
     "example": "monthname(TIMESTAMP '1992-09-20')",
     "type": "scalar_function_set",
     "category": "date",
@@ -1929,7 +1929,7 @@
       "x",
       "y"
     ],
-    "description": "return the next floating point value after x in the direction of y",
+    "description": "Returns the next floating point value after x in the direction of y",
     "example": "nextafter(1::float, 2::float)",
     "type": "scalar_function_set",
     "struct": "NextAfterFun",
@@ -1938,7 +1938,7 @@
   },
   {
     "name": "pi",
-    "description": "returns the value of pi",
+    "description": "Returns the value of pi",
     "example": "pi()",
     "type": "scalar_function",
     "parameters": [],
@@ -2011,7 +2011,7 @@
     "parameters": [
       "x"
     ],
-    "description": "converts degrees to radians",
+    "description": "Converts degrees to radians",
     "example": "radians(90)",
     "type": "scalar_function",
     "category": "math",
@@ -2019,7 +2019,7 @@
   },
   {
     "name": "random",
-    "description": "returns a random number between 0 and 1",
+    "description": "Returns a random number between 0 and 1",
     "example": "random()",
     "type": "scalar_function",
     "parameters": [],
@@ -2159,7 +2159,7 @@
     ],
     "description": "Repeats the string count number of times",
     "example": "repeat('A', 5)",
-    "type": "scalar_function",
+    "type": "scalar_function_set",
     "category": "string",
     "result": "AAAAA"
   },
@@ -2230,11 +2230,22 @@
       "x",
       "precision"
     ],
-    "description": "round to s decimal places",
+    "description": "Rounds x to s decimal places",
     "example": "round(42.4332, 2)",
     "type": "scalar_function_set",
     "category": "math",
     "result": 42.43
+  },
+  {
+    "name": "row",
+    "parameters": [
+      "any"
+    ],
+    "description": "Creates an unnamed STRUCT containing the argument values.",
+    "example": "row(4, 'hello')",
+    "type": "scalar_function",
+    "category": "struct",
+    "result": "{'': 4, '': hello}"
   },
   {
     "name": "rpad",
@@ -2292,7 +2303,7 @@
       "index",
       "new_value"
     ],
-    "description": "Sets the nth bit in bitstring to newvalue; the first (leftmost) bit is indexed 0. Returns a new bitstring.",
+    "description": "Sets the nth bit in bitstring to newvalue; the first (leftmost) bit is indexed 0. Returns a new bitstring",
     "example": "set_bit('0110010'::BIT, 2, 0)",
     "type": "scalar_function",
     "category": "bit",
@@ -2300,7 +2311,7 @@
   },
   {
     "name": "setseed",
-    "description": "sets the seed to be used for the random function",
+    "description": "Sets the seed to be used for the random function",
     "example": "setseed(0.42)",
     "type": "scalar_function",
     "parameters": [],
@@ -2324,7 +2335,7 @@
     "parameters": [
       "x"
     ],
-    "description": "returns the sign of x as -1, 0 or 1",
+    "description": "Returns the sign of x as -1, 0 or 1",
     "example": "sign(-349)",
     "type": "scalar_function_set",
     "category": "math",
@@ -2335,7 +2346,7 @@
     "parameters": [
       "x"
     ],
-    "description": "returns whether the signbit is set or not",
+    "description": "Returns whether the signbit is set or not",
     "example": "signbit(-0.0)",
     "type": "scalar_function_set",
     "struct": "SignBitFun",
@@ -2347,7 +2358,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the sin of x",
+    "description": "Computes the sin of x",
     "example": "sin(90)",
     "type": "scalar_function",
     "category": "math",
@@ -2369,7 +2380,7 @@
     "parameters": [
       "x"
     ],
-    "description": "returns the square root of x",
+    "description": "Returns the square root of x",
     "example": "sqrt(4)",
     "type": "scalar_function",
     "category": "math",
@@ -2380,7 +2391,7 @@
     "parameters": [
       "expression"
     ],
-    "description": "Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression.",
+    "description": "Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression",
     "example": "stats(5)",
     "type": "scalar_function",
     "category": "generic",
@@ -2481,7 +2492,7 @@
       "text",
       "format"
     ],
-    "description": "Converts string to timestamp with time zone according to the format string if %Z is specified.",
+    "description": "Converts string to timestamp with time zone according to the format string if %Z is specified",
     "example": "strptime('Wed, 1 January 1992 - 08:38:40 PST', '%a, %-d %B %Y - %H:%M:%S %Z')",
     "type": "scalar_function_set",
     "category": "date",
@@ -2493,7 +2504,7 @@
       "struct",
       "any"
     ],
-    "description": "Add field(s)/value(s) to an existing STRUCT with the argument values. The entry name(s) will be the bound variable name(s).",
+    "description": "Adds field(s)/value(s) to an existing STRUCT with the argument values. The entry name(s) will be the bound variable name(s)",
     "example": "struct_insert({'a': 1}, b := 2)",
     "type": "scalar_function",
     "category": "struct",
@@ -2504,12 +2515,9 @@
     "parameters": [
       "any"
     ],
-    "description": "Create a STRUCT containing the argument values. The entry name will be the bound variable name",
+    "description": "Creates a STRUCT containing the argument values. The entry name will be the bound variable name",
     "example": "struct_pack(i := 4, s := 'string')",
     "type": "scalar_function",
-    "aliases": [
-      "row"
-    ],
     "category": "struct",
     "result": "{'i': 4, 's': string}"
   },
@@ -2540,7 +2548,7 @@
     "parameters": [
       "x"
     ],
-    "description": "computes the tan of x",
+    "description": "Computes the tan of x",
     "example": "tan(90)",
     "type": "scalar_function",
     "category": "math",
@@ -2553,7 +2561,7 @@
       "timestamp",
       "origin"
     ],
-    "description": "Truncate timestamptz by the specified interval bucket_width. Buckets are aligned relative to origin timestamptz. origin defaults to 2000-01-03 00:00:00+00 for buckets that don\u2019t include a month or year interval, and to 2000-01-01 00:00:00+00 for month and year buckets.",
+    "description": "Truncate TIMESTAMPTZ by the specified interval bucket_width. Buckets are aligned relative to origin TIMESTAMPTZ. The origin defaults to 2000-01-03 00:00:00+00 for buckets that do not include a month or year interval, and to 2000-01-01 00:00:00+00 for month and year buckets",
     "example": "time_bucket(INTERVAL '2 weeks', TIMESTAMP '1992-04-20 15:26:00-07', TIMESTAMP '1992-04-01 00:00:00-07')",
     "type": "scalar_function_set",
     "category": "date",
@@ -2610,7 +2618,7 @@
     "parameters": [
       "blob"
     ],
-    "description": "Convert a blob to a base64 encoded string.",
+    "description": "Convert a blob to a base64 encoded string",
     "example": "base64('A'::blob)",
     "type": "scalar_function",
     "aliases": [
@@ -2725,7 +2733,7 @@
       "from",
       "to"
     ],
-    "description": "Replaces each character in string that matches a character in the from set with the corresponding character in the to set. If from is longer than to, occurrences of the extra characters in from are deleted.",
+    "description": "Replaces each character in string that matches a character in the from set with the corresponding character in the to set. If from is longer than to, occurrences of the extra characters in from are deleted",
     "example": "translate('12345', '143', 'ax')",
     "type": "scalar_function",
     "category": "string",
@@ -2748,7 +2756,7 @@
     "parameters": [
       "x"
     ],
-    "description": "truncates the number",
+    "description": "Truncates the number",
     "example": "trunc(17.4)",
     "type": "scalar_function_set",
     "category": "math",
@@ -2761,7 +2769,7 @@
       "text",
       "format"
     ],
-    "description": "Converts string to timestamp using the format string (timestamp with time zone if %Z is specified). Returns NULL on failure.",
+    "description": "Converts string to timestamp using the format string (timestamp with time zone if %Z is specified). Returns NULL on failure",
     "example": "try_strptime('Wed, 1 January 1992 - 08:38:40 PM', '%a, %-d %B %Y - %I:%M:%S %p')",
     "type": "scalar_function_set",
     "category": "date",
@@ -2770,7 +2778,7 @@
   {
     "name": "txid_current",
     "parameters": [],
-    "description": "Returns the current transaction\u2019s ID (a BIGINT). It will assign a new one if the current transaction does not have one already.",
+    "description": "Returns the current transaction\u2019s ID (a BIGINT). It will assign a new one if the current transaction does not have one already",
     "example": "txid_current()",
     "struct": "CurrentTransactionIdFun",
     "type": "scalar_function",
@@ -2782,7 +2790,7 @@
     "parameters": [
       "expression"
     ],
-    "description": "Returns the name of the data type of the result of the expression.",
+    "description": "Returns the name of the data type of the result of the expression",
     "example": "typeof('abc')",
     "struct": "TypeOfFun",
     "type": "scalar_function",
@@ -2848,7 +2856,7 @@
     "parameters": [
       "union"
     ],
-    "description": "Retrieve the currently selected tag of the union as an Enum.",
+    "description": "Retrieve the currently selected tag of the union as an ENUM",
     "example": "union_tag(union_value(k := 'foo'))",
     "type": "scalar_function",
     "category": "union",
@@ -2859,7 +2867,7 @@
     "parameters": [
       "tag"
     ],
-    "description": "Create a single member UNION containing the argument value. The tag of the value will be the bound variable name.",
+    "description": "Create a single member UNION containing the argument value. The tag of the value will be the bound variable name",
     "example": "union_value(k := 'hello')",
     "type": "scalar_function",
     "category": "union",
@@ -2867,7 +2875,7 @@
   },
   {
     "name": "uuid",
-    "description": "Return a random uuid similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687",
+    "description": "Returns a random UUID similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687",
     "example": "uuid()",
     "type": "scalar_function",
     "struct": "UUIDFun",
@@ -2917,11 +2925,11 @@
   {
     "name": "version",
     "parameters": [],
-    "description": "Return the currently active version of DuckDB in this format: v0.3.2\t",
+    "description": "Returns the currently active version of DuckDB in this format: v0.3.2\t",
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.8.2-dev4203"
+    "result": "v0.8.2-dev5154"
   },
   {
     "name": "week",
