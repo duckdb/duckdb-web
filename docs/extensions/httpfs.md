@@ -10,7 +10,7 @@ If you prefer to explicitly install and load this extension, you can always run 
 
 ## Running Queries over HTTP(S)
 
-With the `httpfs` extension, it is possible to directly query files over the HTTP(S) protocol. This currently works for CSV, JSON, and Parquet files, and provides read-only access.
+With the `httpfs` extension, it is possible to directly query files over the HTTP(S) protocol. This works for all files supported by DuckDB or its various extensions, and provides read-only access.
 
 ```sql
 SELECT * FROM 'https://domain.tld/file.extension';
