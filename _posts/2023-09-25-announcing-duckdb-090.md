@@ -102,6 +102,7 @@ In addition, due to improvements in the manner in which indexes are stored on di
 
 
 #### Extensions
+
 [**Extension Auto-Loading**](https://github.com/duckdb/duckdb/pull/8732). Starting from this release, DuckDB supports automatically installing and loading of trusted extensions. As many workflows rely on core extensions that are not bundled, such as `httpfs`, many users found themselves having to be wary to load the required extensions up front. With this change, the extensions will instead be automatically loaded (and optionally installed) when used in a query.
 
 For example, in Python the following code snippet now works without needing to explicitly 
