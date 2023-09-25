@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: AutoComplete
+title: AutoComplete Extension
 ---
 
 This extension adds supports for autocomplete. 

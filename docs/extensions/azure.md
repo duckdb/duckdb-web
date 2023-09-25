@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Azure
+title: Azure Extension
 ---
 
 The `azure` extension adds a filesystem abstraction for the [Azure Blob storage](https://azure.microsoft.com/en-us/products/storage/blobs) to DuckDB.

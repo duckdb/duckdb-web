@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Excel
+title: Excel Extension
 ---
 
 This extension, contrary to its name, does not provide support for reading Excel files.

@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: TPC-H
+title: TPC-H Extension
 ---
 
 The `tpch` extension implements the data generator and queries for the [TPC-H benchmark](https://www.tpc.org/tpch/).

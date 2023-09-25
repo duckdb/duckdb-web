@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Iceberg
+title: Iceberg Extension
 ---
 
 The `iceberg` extension is a loadable extension that implements support for the [Apache Iceberg format](https://iceberg.apache.org/).
