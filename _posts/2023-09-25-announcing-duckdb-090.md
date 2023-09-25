@@ -35,12 +35,18 @@ Below is a summary of those new features with examples, starting with a change i
 
 #### Breaking SQL Changes
 
-[**Struct Auto-Casting**](https://github.com/duckdb/duckdb/pull/8942). Previously the names of struct entries were ignored when determining auto-casting rules. As a result, struct field names could be silently renamed. Starting with this release, this will not throw an exception instead.
+[**Struct Auto-Casting**](https://github.com/duckdb/duckdb/pull/8942). Previously the names of struct entries were ignored when determining auto-casting rules. As a result, struct field names could be silently renamed. Starting with this release, this will result in an error instead.
 
 ```sql
 CREATE TABLE structs(s STRUCT(i INT));
-INSERT INTO structs SELECT {'k': 42};
+INSERT INTO structs VALUES ({'k': 42});
 -- Mismatch Type Error: Type STRUCT(k INTEGER) does not match with STRUCT(i INTEGER). Cannot cast STRUCTs with different names
+```
+
+Unnamed structs constructed using the `ROW` function can still be inserted into struct fields.
+
+```sql
+INSERT INTO structs VALUES (ROW(42));
 ```
 
 #### Core System Improvements
