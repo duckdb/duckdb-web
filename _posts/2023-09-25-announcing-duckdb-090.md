@@ -74,7 +74,7 @@ SELECT
         INTERVAL 3 DAYS PRECEDING AND
         INTERVAL 0 DAYS FOLLOWING
     )
-FROM tripdata
+FROM tripdata;
 ```
 
 Version | Time (s)
