@@ -122,7 +122,14 @@ LOAD inet;
 SELECT '127.0.0.1'::INET;
 ```
 
-[**AWS Extension**]. TODO
+[**AWS Extension**](https://github.com/duckdblabs/duckdb_aws). This release marks the launch of the DuckDB AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
+
+```sql
+CALL load_aws_credentials();
+SELECT * FROM "s3://some-bucket/that/requires/authentication.parquet";
+```
+
+[See the documentation for more information](https://duckdb.org/docs/extensions/aws).
 
 [**Experimental Iceberg Extension**](https://github.com/duckdblabs/duckdb_iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
