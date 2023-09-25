@@ -17,15 +17,6 @@ The `aws` extension provides features that depend on the AWS SDK.
 
 ### Load AWS Credentials
 
-Firstly ensure the `aws` and `httpfs` extensions are loaded and installed:
-
-```sql
-INSTALL aws;
-LOAD aws;
-INSTALL httpfs;
-LOAD httpfs;
-```
-
 To load the AWS credentials, run:
 
 ```sql
@@ -72,6 +63,16 @@ CALL load_aws_credentials('minio-testing-2', set_region=false, redact_secret=fal
 ```
 
 ## Related Extensions
+
+`aws` depends on `httpfs` extension capablities, and both will be autoloaded on the first call to `load_aws_credentials`.
+If autoinstall or autoload are disabled, you can always explicitly install and load httpfs and aws like:
+
+```sql
+INSTALL aws;
+LOAD aws;
+INSTALL httpfs;
+LOAD httpfs;
+```
 
 See also the [S3 API capabilities of the `httpfs` extension](httpfs#s3).
 

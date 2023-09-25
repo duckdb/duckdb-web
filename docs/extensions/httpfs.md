@@ -3,10 +3,10 @@ layout: docu
 title: httpfs
 ---
 
-The `httpfs` extension is a loadable extension implementing a file system that allows reading remote/writing remote files. For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the `httpfs` extension supports reading/writing/globbing files.
+The `httpfs` extension is an autoloadable extension implementing a file system that allows reading remote/writing remote files. For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the `httpfs` extension supports reading/writing/globbing files.
 
-Some clients come prebundled with this extension, in which case it's not necessary to first install or even load the extension.  
-Depending on the client you use, no action may be required, or you might have to `INSTALL httpfs` on first use and use `LOAD httpfs` at the start of every session.
+The `httpfs` extension will be, by default, autoloaded on first use of any functionality exposed by this extension.
+If you prefer to explicitly install and load this extension, you can always run `INSTALL httpfs` on first use and issue `LOAD httpfs` at the start of every session.
 
 ## HTTP(S)
 
