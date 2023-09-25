@@ -124,7 +124,7 @@ CALL sqlite_attach('sakila.db', overwrite=true);
 
 ## Loading the Extension
 
-Sqlite scanner extension is by default installed and loaded on first use. If you prefer to do so explicitly, you can always use the following commands:
+The SQLite Scanner extension is by default installed and loaded on first use. If you prefer to do so explicitly, run the following commands:
 
 ```sql
 INSTALL sqlite;

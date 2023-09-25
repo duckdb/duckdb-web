@@ -16,9 +16,8 @@ Here we depict how to consume and produce Substrait query plans in each API.
 
 In the SQL API, users can generate Substrait plans (into a BLOB or a JSON) and consume Substrait plans.
 
-Substrait extension is an autoloadable extensions, meaning that will be loaded at runtime whenever one of the substrait functions are called.
+The Substrait extension is an autoloadable extensions, meaning that it will be loaded at runtime whenever one of the substrait functions is called. To explicitly install and load the released version of the Substrait extension, you can also use the following SQL commands.
 
-To explicitly install and load the released version of the Substrait library, you can also use the following SQL commands.
 ```sql
 INSTALL substrait;
 LOAD substrait;
@@ -97,10 +96,11 @@ query_result = con.from_substrait(proto=proto_bytes)
 
 ## R
 
-By default the extension will be autoloaded on first use. To explicitly install and load this extension in R, you must execute the sql commands within a connection.
+By default the extension will be autoloaded on first use. To explicitly install and load this extension in R, use the following commands:
+
 ```r
 library("duckdb")
-`con <- dbConnect(duckdb::duckdb())`
+con <- dbConnect(duckdb::duckdb())
 dbExecute(con, "INSTALL substrait")
 dbExecute(con, "LOAD substrait")
 ```
