@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: AWS
+title: AWS Extension
 ---
 
 The `aws` extension provides features that depend on the AWS SDK.
