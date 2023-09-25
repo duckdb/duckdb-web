@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Parquet Loading
+title: Reading Parquet files
 redirect_from:
   - /docs/data/parquet
   - /docs/extensions/parquet
