@@ -154,7 +154,33 @@ SELECT * from 'azure://<my_container>/*.csv';
 [**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API](https://duckdb.org/docs/archive/0.8.1/api/python/relational_api) and executed using DuckDB's query engine.
 
 ```py
-# TODO
+from duckdb.experimental.spark.sql import SparkSession as session
+from duckdb.experimental.spark.sql.functions import lit, col
+import pandas as pd
+
+spark = session.builder.getOrCreate()
+
+pandas_df = pd.DataFrame({
+    'age': [34, 45, 23, 56],
+    'name': ['Joan', 'Peter', 'John', 'Bob']
+})
+
+df = spark.createDataFrame(pandas_df)
+df = df.withColumn(
+    'location', lit('Seattle')
+)
+res = df.select(
+    col('age'),
+    col('location')
+).collect()
+
+print(res)
+#[
+#    Row(age=34, location='Seattle'),
+#    Row(age=45, location='Seattle'),
+#    Row(age=23, location='Seattle'),
+#    Row(age=56, location='Seattle')
+#]
 ```
 
 Note that the API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through Discord or on Github.
