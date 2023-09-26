@@ -44,9 +44,8 @@ def linked_path_to_label(doc_file_path, link_relative_path):
 
 
 def reduce_clutter_in_doc(doc_body):
-    # drop "Pages in this Section" and "More" sections
-    doc_body = doc_body.replace("### Pages in this Section", "")
-    doc_body = doc_body.replace("### More", "")
+    # drop "Pages in This Section" sections which are only used in HTML
+    doc_body = doc_body.replace("## Pages in This Section", "")
 
     # drop lines containing "---", pandoc interprets these as h2 headers
     doc_body = re.sub(r"^---$", "", doc_body, flags=re.MULTILINE)
