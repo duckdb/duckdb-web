@@ -21,4 +21,4 @@ Another great resource is the [GitHub repository](https://github.com/duckdb/duck
 
 For details, see the full [DuckDB-Wasm API Documentation](https://shell.duckdb.org/docs/modules/index.html).
 
-### Pages in this Section
+### Pages in This Section

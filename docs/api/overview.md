@@ -15,4 +15,4 @@ There are also contributed third-party DuckDB wrappers for:
 * [Rust](https://github.com/wangfenjin/duckdb-rs), by [wangfenjin](https://github.com/wangfenjin)
 * [Zig](https://github.com/karlseguin/zuckdb.zig), by [karlseguin](https://github.com/karlseguin)
 
-## Pages in this Section
+## Pages in This Section
