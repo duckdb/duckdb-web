@@ -54,6 +54,9 @@ To see the commits that changed each storage version, see the [commit log](https
 
 | Storage version | DuckDB versions                                             |
 |-----------------|-------------------------------------------------------------|
+| 64              | [#9075](https://github.com/duckdb/duckdb/pull/9075) onwards |
+| 59              | [#8863](https://github.com/duckdb/duckdb/pull/8863) onwards |
+| 58              | [#8869](https://github.com/duckdb/duckdb/pull/8869) onwards |
 | 57              | [#8752](https://github.com/duckdb/duckdb/pull/8752) onwards |
 | 56              | [#8650](https://github.com/duckdb/duckdb/pull/8650) onwards |
 | 55              | [#8513](https://github.com/duckdb/duckdb/pull/8513) onwards |
