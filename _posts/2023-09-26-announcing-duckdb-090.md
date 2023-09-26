@@ -50,6 +50,7 @@ INSERT INTO structs VALUES (ROW(42));
 ```
 
 #### Core System Improvements
+
 **[Out-Of-Core Hash Aggregates](https://github.com/duckdb/duckdb/pull/7931)** and **[Hash Aggregate Performance Improvements.](https://github.com/duckdb/duckdb/pull/8475)** When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques.
 
 In this release, support for disk-spilling techniques is further extended through the support for out-of-core hash aggregates. Now, hash tables constructed during `GROUP BY` queries or `DISTINCT` operations that do not fit in memory due to a large number of unique groups will spill data to disk instead of throwing an out-of-memory exception. Due to the clever use of radix partitioning, performance degradation is gradual, and performance cliffs are avoided. Only the subset of the table that does not fit into memory will be spilled to disk.
@@ -78,7 +79,7 @@ If we keep all the data in memory, the query should use around 6GB. However, we 
 
 In this release, we add support for compression of strings and integer types right before data goes into the grouped aggregation and sorting operators. By using statistics, both types are compressed to the smallest possible integer type. For example, if we have the following table:
 
-```
+```text
 ┌───────┬─────────┐
 │  id   │  name   │
 │ int32 │ varchar │
@@ -94,7 +95,7 @@ In this release, we add support for compression of strings and integer types rig
 The `id` column uses a 32-bit integer. From our statistics we know that the minimum value is 300, and the maximum value is 304. We can subtract 300 and cast to an 8-bit integer instead, reducing the width from 4 bytes down to 1.
 
 The `name` column uses our internal string type, which is 16 bytes wide. However, our statistics tell us that the longest string here is only 7 bytes. We can fit this into a 64-bit integer like so:
-```
+```text
 alice   -> alice005
 bob     -> bob00003
 eve     -> eve00003
@@ -103,7 +104,7 @@ trent   -> trent005
 ```
 
 This reduces the width from 16 bytes down to 8. To support sorting of compressed strings, we flip the bytes on big-endian machines so that our comparison operators are still correct:
-```
+```text
 alice005 -> 500ecila
 bob00003 -> 30000bob
 eve00003 -> 30000eve
