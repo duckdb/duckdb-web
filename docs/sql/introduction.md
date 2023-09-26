@@ -8,7 +8,7 @@ Here we provide an overview of how to perform simple operations in SQL. This tut
 In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page](../installation?environment=cli) for information on how to install the CLI. Launching the shell should give you the following prompt:
 
 ```text
-v0.8.1 6536a77232
+v0.9.0 0d84ccf478
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
