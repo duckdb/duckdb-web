@@ -12,9 +12,7 @@ Here we depict how to consume and produce Substrait query plans in each API.
 > If you have not asked for permission to ask for support, [contact us prior to opening an issue](https://duckdblabs.com/contact/).
 > If you open an issue without doing so, we will close it without further review.
 
-## SQL
-
-In the SQL API, users can generate Substrait plans (into a BLOB or a JSON) and consume Substrait plans.
+## Installing and Loading
 
 The Substrait extension is an autoloadable extensions, meaning that it will be loaded at runtime whenever one of the substrait functions is called. To explicitly install and load the released version of the Substrait extension, you can also use the following SQL commands.
 
@@ -22,6 +20,10 @@ The Substrait extension is an autoloadable extensions, meaning that it will be l
 INSTALL substrait;
 LOAD substrait;
 ```
+
+## SQL
+
+In the SQL API, users can generate Substrait plans (into a BLOB or a JSON) and consume Substrait plans.
 
 ### BLOB Generation
 

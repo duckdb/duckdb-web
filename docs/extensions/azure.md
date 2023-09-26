@@ -3,9 +3,18 @@ layout: docu
 title: Azure Extension
 ---
 
-The `azure` extension adds a filesystem abstraction for the [Azure Blob storage](https://azure.microsoft.com/en-us/products/storage/blobs) to DuckDB.
+The `azure` extension is a loadable extension that adds a filesystem abstraction for the [Azure Blob storage](https://azure.microsoft.com/en-us/products/storage/blobs) to DuckDB.
 
 > This extension is currently in an experimental state. Feel free to try it out, but be aware some things may not work as expected.
+
+## Installing and Loading
+
+To install and load the `azure` extension, run:
+
+```sql
+INSTALL azure;
+LOAD azure;
+```
 
 ## Usage
 
