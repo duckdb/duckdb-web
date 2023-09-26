@@ -5,6 +5,26 @@ title: JSON Extension
 
 The `json` extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
 
+## Example uses
+
+```sql
+-- read a JSON file from disk, auto-infer options
+SELECT * FROM 'todos.json';
+-- read_json with custom options
+SELECT *
+FROM read_json('todos.json',
+               format='array',
+               columns={userId: 'UBIGINT',
+                        id: 'UBIGINT',
+                        title: 'VARCHAR',
+                        completed: 'BOOLEAN'});
+
+-- write the result of a query to a JSON file
+COPY (SELECT * FROM todos) TO 'todos.json';
+```
+
+See more examples on the [JSON data page](../data/json/overview#examples).
+
 ## JSON Type
 
 The JSON extension makes use of the `JSON` logical type.

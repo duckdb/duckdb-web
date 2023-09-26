@@ -5,6 +5,15 @@ title: Iceberg Extension
 
 The `iceberg` extension is a loadable extension that implements support for the [Apache Iceberg format](https://iceberg.apache.org/).
 
+## Installing and Loading
+
+To install and load the `iceberg` extension, run:
+
+```sql
+INSTALL iceberg;
+LOAD iceberg;
+```
+
 ## Usage
 
 To test the examples, download the [`iceberg_data.zip`](/data/iceberg_data.zip) file and unzip it.

@@ -6,6 +6,15 @@ title: Spatial Extension
 The `spatial` extension provides support for geospatial data processing in DuckDB.
 For an overview of the extension, see our [blog post](/2023/04/28/spatial).
 
+## Installing and Loading
+
+To install and load the `spatial` extension, run:
+
+```sql
+INSTALL spatial;
+LOAD spatial;
+```
+
 ## GEOMETRY type
 
 The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar with geospatial data and GIS tooling, this type probably works very different from what you'd expect. 
