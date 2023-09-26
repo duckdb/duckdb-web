@@ -133,3 +133,5 @@ CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCH
 COPY ontime FROM 'flights.csv' (AUTO_DETECT TRUE);
 SELECT * FROM ontime;
 ```
+
+## Pages in This Section
