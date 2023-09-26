@@ -47,7 +47,7 @@
       <item>RETURN</item>
       <item>THEN</item>
       <item>WHEN</item>
-  </list>
+    </list>
     <list name="operators">
       <item>AND</item>
       <item>BETWEEN</item>
@@ -58,32 +58,33 @@
       <item>OR</item>
     </list>
     <list name="keywords">
-      <item>A</item>
       <item>ABORT</item>
-      <item>ABSENT</item>
+      <item>ABS</item>
       <item>ABSOLUTE</item>
       <item>ACCESS</item>
-      <item>ACCORDING</item>
       <item>ACTION</item>
       <item>ADA</item>
       <item>ADD</item>
       <item>ADMIN</item>
       <item>AFTER</item>
       <item>AGGREGATE</item>
+      <item>ALIAS</item>
       <item>ALL</item>
       <item>ALLOCATE</item>
       <item>ALSO</item>
       <item>ALTER</item>
       <item>ALWAYS</item>
+      <item>ANALYSE</item>
       <item>ANALYZE</item>
+      <item>AND</item>
+      <item>ANTI</item>
       <item>ANY</item>
       <item>ARE</item>
       <item>ARRAY</item>
-      <item>ARRAY_AGG</item>
-      <item>ARRAY_MAX_CARDINALITY</item>
       <item>AS</item>
       <item>ASC</item>
       <item>ASENSITIVE</item>
+      <item>ASOF</item>
       <item>ASSERTION</item>
       <item>ASSIGNMENT</item>
       <item>ASYMMETRIC</item>
@@ -91,20 +92,23 @@
       <item>ATOMIC</item>
       <item>ATTACH</item>
       <item>ATTRIBUTE</item>
-      <item>ATTRIBUTES</item>
       <item>AUTHORIZATION</item>
+      <item>AUTO</item>
+      <item>AUTO_DETECT</item>
+      <item>AVG</item>
       <item>BACKWARD</item>
-      <item>BASE64</item>
       <item>BEFORE</item>
-      <item>BEGIN_FRAME</item>
-      <item>BEGIN_PARTITION</item>
-      <item>BERNOULLI</item>
+      <item>BEGIN</item>
+      <item>BETWEEN</item>
+      <item>BIGINT</item>
       <item>BINARY</item>
-      <item>BLOB</item>
-      <item>BLOCKED</item>
-      <item>BOM</item>
+      <item>BIT</item>
+      <item>BIT_LENGTH</item>
+      <item>BITVAR</item>
+      <item>BOOLEAN</item>
       <item>BOTH</item>
       <item>BREADTH</item>
+      <item>BROTLI</item>
       <item>BY</item>
       <item>C</item>
       <item>CACHE</item>
@@ -113,40 +117,47 @@
       <item>CARDINALITY</item>
       <item>CASCADE</item>
       <item>CASCADED</item>
+      <item>CASE</item>
       <item>CAST</item>
       <item>CATALOG</item>
       <item>CATALOG_NAME</item>
       <item>CHAIN</item>
-      <item>CHARACTERISTICS</item>
-      <item>CHARACTERS</item>
+      <item>CHAR</item>
+      <item>CHAR_LENGTH</item>
+      <item>CHARACTER</item>
+      <item>CHARACTER_LENGTH</item>
       <item>CHARACTER_SET_CATALOG</item>
       <item>CHARACTER_SET_NAME</item>
       <item>CHARACTER_SET_SCHEMA</item>
+      <item>CHARACTERISTICS</item>
       <item>CHECK</item>
+      <item>CHECKED</item>
       <item>CHECKPOINT</item>
       <item>CLASS</item>
       <item>CLASS_ORIGIN</item>
       <item>CLOB</item>
       <item>CLOSE</item>
       <item>CLUSTER</item>
+      <item>COALESCE</item>
+      <item>COALSECE</item>
       <item>COBOL</item>
       <item>COLLATE</item>
       <item>COLLATION</item>
       <item>COLLATION_CATALOG</item>
       <item>COLLATION_NAME</item>
       <item>COLLATION_SCHEMA</item>
-      <item>COLLECT</item>
       <item>COLUMN</item>
-      <item>COLUMNS</item>
       <item>COLUMN_NAME</item>
+      <item>COLUMNS</item>
       <item>COMMAND_FUNCTION</item>
       <item>COMMAND_FUNCTION_CODE</item>
       <item>COMMENT</item>
       <item>COMMENTS</item>
       <item>COMMIT</item>
       <item>COMMITTED</item>
+      <item>COMPLETION</item>
+      <item>COMPRESSION</item>
       <item>CONCURRENTLY</item>
-      <item>CONDITION</item>
       <item>CONDITION_NUMBER</item>
       <item>CONFIGURATION</item>
       <item>CONFLICT</item>
@@ -154,49 +165,45 @@
       <item>CONNECTION</item>
       <item>CONNECTION_NAME</item>
       <item>CONSTRAINT</item>
-      <item>CONSTRAINTS</item>
       <item>CONSTRAINT_CATALOG</item>
       <item>CONSTRAINT_NAME</item>
       <item>CONSTRAINT_SCHEMA</item>
+      <item>CONSTRAINTS</item>
       <item>CONSTRUCTOR</item>
       <item>CONTAINS</item>
       <item>CONTENT</item>
       <item>CONTINUE</item>
-      <item>CONTROL</item>
       <item>CONVERSION</item>
+      <item>CONVERT</item>
       <item>COPY</item>
-      <item>CORR</item>
-      <item>CORRESPONDING</item>
+      <item>CORRESPONTING</item>
       <item>COST</item>
-      <item>COVAR_POP</item>
-      <item>COVAR_SAMP</item>
+      <item>COUNT</item>
       <item>CREATE</item>
+      <item>CREATEDB</item>
+      <item>CREATEUSER</item>
       <item>CROSS</item>
       <item>CSV</item>
       <item>CUBE</item>
-      <item>CUME_DIST</item>
       <item>CURRENT</item>
-      <item>CURRENT_CATALOG</item>
       <item>CURRENT_DATE</item>
-      <item>CURRENT_DEFAULT_TRANSFORM_GROUP</item>
       <item>CURRENT_PATH</item>
       <item>CURRENT_ROLE</item>
-      <item>CURRENT_ROW</item>
       <item>CURRENT_TIME</item>
       <item>CURRENT_TIMESTAMP</item>
-      <item>CURRENT_TRANSFORM_GROUP_FOR_TYPE</item>
+      <item>CURRENT_USER</item>
       <item>CURSOR</item>
       <item>CURSOR_NAME</item>
       <item>CYCLE</item>
       <item>DATA</item>
       <item>DATABASE</item>
-      <item>DATALINK</item>
       <item>DATETIME_INTERVAL_CODE</item>
       <item>DATETIME_INTERVAL_PRECISION</item>
       <item>DAY</item>
-      <item>DB</item>
+      <item>DAYS</item>
       <item>DEALLOCATE</item>
       <item>DEC</item>
+      <item>DECIMAL</item>
       <item>DECLARE</item>
       <item>DEFAULT</item>
       <item>DEFAULTS</item>
@@ -204,15 +211,11 @@
       <item>DEFERRED</item>
       <item>DEFINED</item>
       <item>DEFINER</item>
-      <item>DEGREE</item>
       <item>DELETE</item>
       <item>DELIMITER</item>
       <item>DELIMITERS</item>
-      <item>DENSE_RANK</item>
       <item>DEPENDS</item>
-      <item>DEPTH</item>
       <item>DEREF</item>
-      <item>DERIVED</item>
       <item>DESC</item>
       <item>DESCRIBE</item>
       <item>DESCRIPTOR</item>
@@ -227,111 +230,108 @@
       <item>DISCONNECT</item>
       <item>DISPATCH</item>
       <item>DISTINCT</item>
-      <item>DLNEWCOPY</item>
-      <item>DLPREVIOUSCOPY</item>
-      <item>DLURLCOMPLETE</item>
-      <item>DLURLCOMPLETEONLY</item>
-      <item>DLURLCOMPLETEWRITE</item>
-      <item>DLURLPATH</item>
-      <item>DLURLPATHONLY</item>
-      <item>DLURLPATHWRITE</item>
-      <item>DLURLSCHEME</item>
-      <item>DLURLSERVER</item>
-      <item>DLVALUE</item>
       <item>DO</item>
       <item>DOCUMENT</item>
       <item>DOMAIN</item>
+      <item>DOUBLE</item>
+      <item>DRIVER</item>
       <item>DROP</item>
       <item>DYNAMIC</item>
       <item>DYNAMIC_FUNCTION</item>
       <item>DYNAMIC_FUNCTION_CODE</item>
       <item>EACH</item>
-      <item>ELEMENT</item>
-      <item>EMPTY</item>
+      <item>ELSE</item>
       <item>ENABLE</item>
       <item>ENCODING</item>
       <item>ENCRYPTED</item>
+      <item>END</item>
       <item>END-EXEC</item>
-      <item>END_FRAME</item>
-      <item>END_PARTITION</item>
-      <item>ENFORCED</item>
       <item>ENUM</item>
       <item>EQUALS</item>
       <item>ESCAPE</item>
+      <item>ESCEPTION</item>
       <item>EVENT</item>
+      <item>EVERY</item>
       <item>EXCEPT</item>
       <item>EXCLUDE</item>
       <item>EXCLUDING</item>
       <item>EXCLUSIVE</item>
       <item>EXEC</item>
       <item>EXECUTE</item>
+      <item>EXISTING</item>
       <item>EXISTS</item>
       <item>EXPLAIN</item>
-      <item>EXPRESSION</item>
+      <item>EXPORT</item>
+      <item>EXPORT_STATE</item>
       <item>EXTENSION</item>
       <item>EXTERNAL</item>
+      <item>EXTRACT</item>
       <item>FALSE</item>
+      <item>FAMILY</item>
       <item>FETCH</item>
-      <item>FILE</item>
+      <item>FIELD_IDS</item>
+      <item>FILENAME_PATTERN</item>
       <item>FILTER</item>
       <item>FINAL</item>
       <item>FIRST</item>
-      <item>FIRST_VALUE</item>
-      <item>FLAG</item>
       <item>FLOAT</item>
       <item>FOLLOWING</item>
+      <item>FOR</item>
       <item>FORCE</item>
       <item>FOREIGN</item>
+      <item>FORMAT</item>
       <item>FORTRAN</item>
       <item>FORWARD</item>
       <item>FOUND</item>
-      <item>FRAME_ROW</item>
       <item>FREE</item>
       <item>FREEZE</item>
       <item>FROM</item>
-      <item>FS</item>
       <item>FULL</item>
       <item>FUNCTION</item>
       <item>FUNCTIONS</item>
-      <item>FUSION</item>
       <item>G</item>
+      <item>GDAL</item>
       <item>GENERAL</item>
       <item>GENERATED</item>
       <item>GET</item>
+      <item>GLOB</item>
       <item>GLOBAL</item>
       <item>GO</item>
       <item>GOTO</item>
       <item>GRANT</item>
       <item>GRANTED</item>
-      <item>GREATEST</item>
       <item>GROUP</item>
       <item>GROUPING</item>
-      <item>GROUPS</item>
+      <item>GROUPING_ID</item>
+      <item>GZIP</item>
       <item>HANDLER</item>
       <item>HAVING</item>
       <item>HEADER</item>
-      <item>HEX</item>
       <item>HIERARCHY</item>
       <item>HOLD</item>
+      <item>HOST</item>
       <item>HOUR</item>
-      <item>ID</item>
+      <item>HOURS</item>
       <item>IDENTITY</item>
+      <item>IF</item>
       <item>IGNORE</item>
       <item>ILIKE</item>
       <item>IMMEDIATE</item>
-      <item>IMMEDIATELY</item>
       <item>IMMUTABLE</item>
       <item>IMPLEMENTATION</item>
       <item>IMPLICIT</item>
       <item>IMPORT</item>
+      <item>IN</item>
+      <item>INCLUDE</item>
       <item>INCLUDING</item>
       <item>INCREMENT</item>
-      <item>INDENT</item>
       <item>INDEX</item>
       <item>INDEXES</item>
-      <item>INDICATOR</item>
+      <item>INDITCATOR</item>
+      <item>INFIX</item>
       <item>INHERIT</item>
       <item>INHERITS</item>
+      <item>INITIALIZE</item>
       <item>INITIALLY</item>
       <item>INLINE</item>
       <item>INNER</item>
@@ -339,38 +339,39 @@
       <item>INPUT</item>
       <item>INSENSITIVE</item>
       <item>INSERT</item>
-      <item>INSTANCE</item>
+      <item>INSTALL</item>
       <item>INSTANTIABLE</item>
       <item>INSTEAD</item>
-      <item>INTEGRITY</item>
+      <item>INT</item>
+      <item>INTEGER</item>
       <item>INTERSECT</item>
-      <item>INTERSECTION</item>
+      <item>INTERVAL</item>
       <item>INTO</item>
       <item>INVOKER</item>
+      <item>IS</item>
       <item>ISNULL</item>
       <item>ISOLATION</item>
+      <item>ITERATE</item>
       <item>JOIN</item>
-      <item>K</item>
+      <item>JSON</item>
       <item>KEY</item>
       <item>KEY_MEMBER</item>
       <item>KEY_TYPE</item>
       <item>LABEL</item>
-      <item>LAG</item>
+      <item>LANCOMPILER</item>
       <item>LANGUAGE</item>
       <item>LARGE</item>
       <item>LAST</item>
-      <item>LAST_VALUE</item>
       <item>LATERAL</item>
-      <item>LEAD</item>
+      <item>LAYER_CREATION_OPTIONS</item>
       <item>LEADING</item>
       <item>LEAKPROOF</item>
-      <item>LEAST</item>
       <item>LEFT</item>
+      <item>LENGTH</item>
+      <item>LESS</item>
       <item>LEVEL</item>
-      <item>LIBRARY</item>
-      <item>LIKE_REGEX</item>
+      <item>LIKE</item>
       <item>LIMIT</item>
-      <item>LINK</item>
       <item>LISTEN</item>
       <item>LOAD</item>
       <item>LOCAL</item>
@@ -381,62 +382,62 @@
       <item>LOCK</item>
       <item>LOCKED</item>
       <item>LOGGED</item>
-      <item>M</item>
+      <item>LOWER</item>
+      <item>LZ4</item>
+      <item>LZO</item>
+      <item>MACRO</item>
       <item>MAP</item>
       <item>MAPPING</item>
       <item>MATCH</item>
-      <item>MATCHED</item>
       <item>MATERIALIZED</item>
+      <item>MAX</item>
       <item>MAXVALUE</item>
-      <item>MAX_CARDINALITY</item>
-      <item>MEMBER</item>
-      <item>MERGE</item>
       <item>MESSAGE_LENGTH</item>
       <item>MESSAGE_OCTET_LENGTH</item>
       <item>MESSAGE_TEXT</item>
       <item>METHOD</item>
+      <item>MICROSECOND</item>
+      <item>MICROSECONDS</item>
+      <item>MILLISECOND</item>
+      <item>MILLISECONDS</item>
+      <item>MIN</item>
       <item>MINUTE</item>
+      <item>MINUTES</item>
       <item>MINVALUE</item>
+      <item>MOD</item>
       <item>MODE</item>
       <item>MODIFIES</item>
-      <item>MODULE</item>
+      <item>MODIFY</item>
       <item>MONTH</item>
+      <item>MONTHS</item>
       <item>MORE</item>
       <item>MOVE</item>
-      <item>MULTISET</item>
       <item>MUMPS</item>
       <item>NAME</item>
       <item>NAMES</item>
-      <item>NAMESPACE</item>
       <item>NATIONAL</item>
       <item>NATURAL</item>
       <item>NCHAR</item>
       <item>NCLOB</item>
-      <item>NESTING</item>
       <item>NEW</item>
+      <item>NEWLINE_DELIMITED</item>
       <item>NEXT</item>
-      <item>NFC</item>
-      <item>NFD</item>
-      <item>NFKC</item>
-      <item>NFKD</item>
-      <item>NIL</item>
       <item>NO</item>
+      <item>NOCREATEDB</item>
+      <item>NOCREATEUSER</item>
       <item>NONE</item>
-      <item>NORMALIZE</item>
-      <item>NORMALIZED</item>
+      <item>NOT</item>
       <item>NOTHING</item>
       <item>NOTIFY</item>
       <item>NOTNULL</item>
       <item>NOWAIT</item>
-      <item>NTH_VALUE</item>
-      <item>NTILE</item>
       <item>NULL</item>
       <item>NULLABLE</item>
+      <item>NULLIF</item>
       <item>NULLS</item>
-      <item>NUMBER</item>
+      <item>NUMERIC</item>
       <item>OBJECT</item>
-      <item>OCCURRENCES_REGEX</item>
-      <item>OCTETS</item>
+      <item>OCTET_LENGTH</item>
       <item>OF</item>
       <item>OFF</item>
       <item>OFFSET</item>
@@ -445,53 +446,58 @@
       <item>ON</item>
       <item>ONLY</item>
       <item>OPEN</item>
+      <item>OPERATION</item>
       <item>OPERATOR</item>
       <item>OPTION</item>
       <item>OPTIONS</item>
+      <item>OR</item>
       <item>ORDER</item>
-      <item>ORDERING</item>
       <item>ORDINALITY</item>
-      <item>OTHERS</item>
       <item>OUT</item>
       <item>OUTER</item>
       <item>OUTPUT</item>
       <item>OVER</item>
       <item>OVERLAPS</item>
+      <item>OVERLAY</item>
       <item>OVERRIDING</item>
+      <item>OVERWRITE_OR_IGNORE</item>
       <item>OWNED</item>
       <item>OWNER</item>
-      <item>P</item>
       <item>PAD</item>
       <item>PARALLEL</item>
+      <item>PARAMATER_NAME</item>
+      <item>PARAMATER_ORDINAL_POSITION</item>
+      <item>PARAMATER_SPECIFIC_SCHEMA</item>
       <item>PARAMETER</item>
       <item>PARAMETER_MODE</item>
-      <item>PARAMETER_NAME</item>
-      <item>PARAMETER_ORDINAL_POSITION</item>
       <item>PARAMETER_SPECIFIC_CATALOG</item>
       <item>PARAMETER_SPECIFIC_NAME</item>
-      <item>PARAMETER_SPECIFIC_SCHEMA</item>
+      <item>PARAMETERS</item>
+      <item>PARQUET</item>
       <item>PARSER</item>
       <item>PARTIAL</item>
       <item>PARTITION</item>
+      <item>PARTITION_BY</item>
       <item>PASCAL</item>
       <item>PASSING</item>
-      <item>PASSTHROUGH</item>
       <item>PASSWORD</item>
+      <item>PENDANT</item>
       <item>PERCENT</item>
-      <item>PERCENTILE_CONT</item>
-      <item>PERCENTILE_DISC</item>
-      <item>PERCENT_RANK</item>
-      <item>PERIOD</item>
-      <item>PERMISSION</item>
+      <item>PIVOT</item>
+      <item>PIVOT_LONGER</item>
+      <item>PIVOT_WIDER</item>
       <item>PLACING</item>
       <item>PLANS</item>
       <item>PLI</item>
       <item>POLICY</item>
-      <item>PORTION</item>
-      <item>POSITION_REGEX</item>
-      <item>PRECEDES</item>
+      <item>POSITION</item>
+      <item>POSITIONAL</item>
+      <item>POSTFIX</item>
+      <item>PRAGMA</item>
       <item>PRECEDING</item>
       <item>PRECISION</item>
+      <item>PREFIX</item>
+      <item>PREORDER</item>
       <item>PREPARE</item>
       <item>PREPARED</item>
       <item>PRESERVE</item>
@@ -502,44 +508,34 @@
       <item>PROCEDURE</item>
       <item>PROGRAM</item>
       <item>PUBLIC</item>
-      <item>RANGE</item>
       <item>PUBLICATION</item>
+      <item>QUALIFY</item>
       <item>QUOTE</item>
       <item>RANGE</item>
-      <item>RANK</item>
       <item>READ</item>
+      <item>READ_ONLY</item>
       <item>READS</item>
+      <item>REAL</item>
       <item>REASSIGN</item>
       <item>RECHECK</item>
-      <item>RECOVERY</item>
       <item>RECURSIVE</item>
       <item>REF</item>
       <item>REFERENCES</item>
       <item>REFERENCING</item>
       <item>REFRESH</item>
-      <item>REGR_AVGX</item>
-      <item>REGR_AVGY</item>
-      <item>REGR_COUNT</item>
-      <item>REGR_INTERCEPT</item>
-      <item>REGR_R2</item>
-      <item>REGR_SLOPE</item>
-      <item>REGR_SXX</item>
-      <item>REGR_SXY</item>
-      <item>REGR_SYY</item>
       <item>REINDEX</item>
       <item>RELATIVE</item>
       <item>RELEASE</item>
       <item>RENAME</item>
       <item>REPEATABLE</item>
+      <item>REPLACE</item>
       <item>REPLICA</item>
-      <item>REQUIRING</item>
       <item>RESET</item>
       <item>RESPECT</item>
       <item>RESTART</item>
-      <item>RESTORE</item>
       <item>RESTRICT</item>
       <item>RESULT</item>
-      <item>RETURNED_CARDINALITY</item>
+      <item>RETURN</item>
       <item>RETURNED_LENGTH</item>
       <item>RETURNED_OCTET_LENGTH</item>
       <item>RETURNED_SQLSTATE</item>
@@ -555,27 +551,26 @@
       <item>ROUTINE_NAME</item>
       <item>ROUTINE_SCHEMA</item>
       <item>ROW</item>
-      <item>ROWS</item>
       <item>ROW_COUNT</item>
-      <item>ROW_NUMBER</item>
+      <item>ROW_GROUP_SIZE</item>
+      <item>ROWS</item>
       <item>RULE</item>
+      <item>SAMPLE</item>
+      <item>SAVE_POINT</item>
       <item>SAVEPOINT</item>
       <item>SCALE</item>
       <item>SCHEMA</item>
-      <item>SCHEMAS</item>
       <item>SCHEMA_NAME</item>
+      <item>SCHEMAS</item>
       <item>SCOPE</item>
-      <item>SCOPE_CATALOG</item>
-      <item>SCOPE_NAME</item>
-      <item>SCOPE_SCHEMA</item>
       <item>SCROLL</item>
       <item>SEARCH</item>
       <item>SECOND</item>
-      <item>SECTION</item>
+      <item>SECONDS</item>
       <item>SECURITY</item>
       <item>SELECT</item>
-      <item>SELECTIVE</item>
       <item>SELF</item>
+      <item>SEMI</item>
       <item>SENSITIVE</item>
       <item>SEQUENCE</item>
       <item>SEQUENCES</item>
@@ -583,6 +578,7 @@
       <item>SERVER</item>
       <item>SERVER_NAME</item>
       <item>SESSION</item>
+      <item>SESSION_USER</item>
       <item>SET</item>
       <item>SETOF</item>
       <item>SETS</item>
@@ -592,19 +588,21 @@
       <item>SIMPLE</item>
       <item>SIZE</item>
       <item>SKIP</item>
+      <item>SMALLINT</item>
+      <item>SNAPPY</item>
       <item>SNAPSHOT</item>
       <item>SOME</item>
       <item>SOURCE</item>
       <item>SPACE</item>
       <item>SPECIFIC</item>
-      <item>SPECIFICTYPE</item>
       <item>SPECIFIC_NAME</item>
+      <item>SPECIFICTYPE</item>
       <item>SQL</item>
       <item>SQLCODE</item>
       <item>SQLERROR</item>
       <item>SQLEXCEPTION</item>
       <item>SQLSTATE</item>
-      <item>SQLWARNING</item>
+      <item>SQLWARNINIG</item>
       <item>STABLE</item>
       <item>STANDALONE</item>
       <item>START</item>
@@ -612,81 +610,87 @@
       <item>STATEMENT</item>
       <item>STATIC</item>
       <item>STATISTICS</item>
-      <item>STDDEV_POP</item>
-      <item>STDDEV_SAMP</item>
       <item>STDIN</item>
       <item>STDOUT</item>
       <item>STORAGE</item>
+      <item>STORED</item>
       <item>STRICT</item>
       <item>STRIP</item>
+      <item>STRUCT</item>
       <item>STRUCTURE</item>
-      <item>STYLE</item>
+      <item>STYPE</item>
       <item>SUBCLASS_ORIGIN</item>
-      <item>SUBMULTISET</item>
+      <item>SUBLIST</item>
       <item>SUBSCRIPTION</item>
-      <item>SUBSTRING_REGEX</item>
-      <item>SUCCEEDS</item>
+      <item>SUBSTRING</item>
+      <item>SUM</item>
+      <item>SUMMARIZE</item>
       <item>SYMMETRIC</item>
       <item>SYSID</item>
       <item>SYSTEM</item>
-      <item>SYSTEM_TIME</item>
       <item>SYSTEM_USER</item>
-      <item>T</item>
       <item>TABLE</item>
+      <item>TABLE_NAME</item>
       <item>TABLES</item>
       <item>TABLESAMPLE</item>
       <item>TABLESPACE</item>
-      <item>TABLE_NAME</item>
       <item>TEMP</item>
       <item>TEMPLATE</item>
       <item>TEMPORARY</item>
-      <item>TIES</item>
+      <item>TERMINATE</item>
+      <item>TEXT</item>
+      <item>THAN</item>
+      <item>THEN</item>
+      <item>TIME</item>
+      <item>TIMESTAMP</item>
       <item>TIMEZONE_HOUR</item>
       <item>TIMEZONE_MINUTE</item>
       <item>TO</item>
-      <item>TOKEN</item>
-      <item>TOP_LEVEL_COUNT</item>
+      <item>TOAST</item>
       <item>TRAILING</item>
       <item>TRANSACTION</item>
       <item>TRANSACTIONS_COMMITTED</item>
       <item>TRANSACTIONS_ROLLED_BACK</item>
-      <item>TRANSACTION_ACTIVE</item>
+      <item>TRANSATION</item>
+      <item>TRANSATION_ACTIVE</item>
       <item>TRANSFORM</item>
       <item>TRANSFORMS</item>
-      <item>TRANSLATE_REGEX</item>
+      <item>TRANSLATE</item>
       <item>TRANSLATION</item>
       <item>TREAT</item>
       <item>TRIGGER</item>
       <item>TRIGGER_CATALOG</item>
       <item>TRIGGER_NAME</item>
       <item>TRIGGER_SCHEMA</item>
-      <item>TRIM_ARRAY</item>
+      <item>TRIM</item>
       <item>TRUE</item>
       <item>TRUNCATE</item>
       <item>TRUSTED</item>
+      <item>TRY_CAST</item>
       <item>TYPE</item>
       <item>TYPES</item>
-      <item>UESCAPE</item>
       <item>UNBOUNDED</item>
       <item>UNCOMMITTED</item>
+      <item>UNCOMPRESSED</item>
       <item>UNDER</item>
       <item>UNENCRYPTED</item>
       <item>UNION</item>
       <item>UNIQUE</item>
       <item>UNKNOWN</item>
-      <item>UNLINK</item>
       <item>UNLISTEN</item>
       <item>UNLOGGED</item>
       <item>UNNAMED</item>
       <item>UNNEST</item>
+      <item>UNPIVOT</item>
+      <item>UNSTRUCTURED</item>
       <item>UNTIL</item>
-      <item>UNTYPED</item>
       <item>UPDATE</item>
-      <item>URI</item>
+      <item>UPPER</item>
       <item>USAGE</item>
+      <item>USE</item>
+      <item>USE_TMP_FILE</item>
       <item>USER</item>
       <item>USER_DEFINED_TYPE_CATALOG</item>
-      <item>USER_DEFINED_TYPE_CODE</item>
       <item>USER_DEFINED_TYPE_NAME</item>
       <item>USER_DEFINED_TYPE_SCHEMA</item>
       <item>USING</item>
@@ -696,17 +700,17 @@
       <item>VALIDATOR</item>
       <item>VALUE</item>
       <item>VALUES</item>
-      <item>VALUE_OF</item>
-      <item>VARBINARY</item>
+      <item>VARCHAR</item>
+      <item>VARIABLE</item>
       <item>VARIADIC</item>
       <item>VARYING</item>
-      <item>VAR_POP</item>
-      <item>VAR_SAMP</item>
       <item>VERBOSE</item>
-      <item>VERSIONING</item>
+      <item>VERSION</item>
       <item>VIEW</item>
       <item>VIEWS</item>
+      <item>VIRTUAL</item>
       <item>VOLATILE</item>
+      <item>WHEN</item>
       <item>WHENEVER</item>
       <item>WHERE</item>
       <item>WHITESPACE</item>
@@ -717,31 +721,23 @@
       <item>WORK</item>
       <item>WRAPPER</item>
       <item>WRITE</item>
-      <item>XMLAGG</item>
+      <item>XML</item>
       <item>XMLATTRIBUTES</item>
-      <item>XMLBINARY</item>
-      <item>XMLCAST</item>
-      <item>XMLCOMMENT</item>
       <item>XMLCONCAT</item>
-      <item>XMLDECLARATION</item>
-      <item>XMLDOCUMENT</item>
       <item>XMLELEMENT</item>
       <item>XMLEXISTS</item>
       <item>XMLFOREST</item>
-      <item>XMLITERATE</item>
       <item>XMLNAMESPACES</item>
       <item>XMLPARSE</item>
       <item>XMLPI</item>
-      <item>XMLQUERY</item>
       <item>XMLROOT</item>
-      <item>XMLSCHEMA</item>
       <item>XMLSERIALIZE</item>
       <item>XMLTABLE</item>
-      <item>XMLTEXT</item>
-      <item>XMLVALIDATE</item>
       <item>YEAR</item>
+      <item>YEARS</item>
       <item>YES</item>
       <item>ZONE</item>
+      <item>ZSTD</item>
     </list>
     <list name="functions">
       <!-- math -->
