@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Timestamp With Time Zone Functions
+title: Timestamp with Time Zone Functions
 ---
 
 This section describes functions and operators for examining and manipulating `TIMESTAMP WITH TIME ZONE` values.
