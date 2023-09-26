@@ -479,6 +479,10 @@
                   "url": "expression"
                 },
                 {
+                  "page": "Spark API",
+                  "url": "spark_api"
+                },
+                {
                   "page": "API Reference",
                   "url": "reference"
                 },
