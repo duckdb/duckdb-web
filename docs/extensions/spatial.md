@@ -157,7 +157,7 @@ CREATE TABLE <table> AS SELECT * FROM ST_Read('some/file/path/filename.json');
 
 `ST_Read` can take a number of optional arguments, the full signature is: 
 ```sql
-ST_Read(VARCHAR, sequential_layer_scan : BOOLEAN, spatial_filter : WKB_BLOB, open_options : VARCHAR[], layer : VARCHAR, allowed_drivers : VARCHAR[], sibling_files : VARCHAR[], spatial_filter_box : BOX_2D, keep_wkb := BOOLEAN)
+ST_Read(VARCHAR, sequential_layer_scan : BOOLEAN, spatial_filter : WKB_BLOB, open_options : VARCHAR[], layer : VARCHAR, allowed_drivers : VARCHAR[], sibling_files : VARCHAR[], spatial_filter_box : BOX_2D, keep_wkb : BOOLEAN)
 ```
 * `sequential_layer_scan` (default: `false`): If set to `true`, the table function will scan through all layers sequentially and return the first layer that matches the given `layer` name. This is required for some drivers to work properly, e.g., the `OSM` driver.
 * `spatial_filter` (default: `NULL`): If set to a WKB blob, the table function will only return rows that intersect with the given WKB geometry. Some drivers may support efficient spatial filtering natively, in which case it will be pushed down. Otherwise the filtering is done by GDAL which may be much slower.
@@ -253,6 +253,7 @@ SELECT * FROM st_readosm('tmp/data/germany.osm.pbf') WHERE tags['highway'] != []
 ```
 
 ## Spatial replacement scans
+
 The spatial extension also provides "replacement scans" for common geospatial file formats, allowing you to query files of these formats as if they were tables.
 
 ```sql
