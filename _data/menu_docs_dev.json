@@ -926,6 +926,10 @@
             "url": "pragmas"
           },
           {
+            "page": "Rules for Case Sensitivity",
+            "url": "case_sensitivity"
+          },
+          {
             "page": "Samples",
             "url": "samples"
           },
