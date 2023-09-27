@@ -224,7 +224,7 @@ With this flag enabled, the sanitizers are disabled for the build.
 
 #### Building the R Package on Linux aarch64
 
-Building the R package on Linux running on an Arm64 architecture (aarch64) may result in the following error message:
+Building the R package on Linux running on an ARM64 architecture (AArch64) may result in the following error message:
 
 ```text
 /usr/bin/ld: /usr/include/c++/10/bits/basic_string.tcc:206: warning: too many GOT entries for -fpic, please recompile with -fPIC

@@ -1,11 +1,18 @@
 ---
 layout: docu
-title: Iceberg
+title: Iceberg Extension
 ---
 
 The `iceberg` extension is a loadable extension that implements support for the [Apache Iceberg format](https://iceberg.apache.org/).
 
-> This extension currently only works on the `main` branch of DuckDB (bleeding edge releases).
+## Installing and Loading
+
+To install and load the `iceberg` extension, run:
+
+```sql
+INSTALL iceberg;
+LOAD iceberg;
+```
 
 ## Usage
 

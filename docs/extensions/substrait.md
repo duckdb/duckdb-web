@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Substrait
+title: Substrait Extension
 ---
 
 The main goal of the `substrait` extension is to support both production and consumption of Substrait query plans in DuckDB.
@@ -12,16 +12,18 @@ Here we depict how to consume and produce Substrait query plans in each API.
 > If you have not asked for permission to ask for support, [contact us prior to opening an issue](https://duckdblabs.com/contact/).
 > If you open an issue without doing so, we will close it without further review.
 
-## SQL
+## Installing and Loading
 
-In the SQL API, users can generate Substrait plans (into a BLOB or a JSON) and consume Substrait plans.
+The Substrait extension is an autoloadable extensions, meaning that it will be loaded at runtime whenever one of the substrait functions is called. To explicitly install and load the released version of the Substrait extension, you can also use the following SQL commands.
 
-Before using the extension, you must always properly install and load it.
-To install and load the released version of the Substrait library, you must execute the following SQL commands.
 ```sql
 INSTALL substrait;
 LOAD substrait;
 ```
+
+## SQL
+
+In the SQL API, users can generate Substrait plans (into a BLOB or a JSON) and consume Substrait plans.
 
 ### BLOB Generation
 
@@ -38,7 +40,7 @@ CALL get_substrait('SELECT count(exercise) AS exercise FROM crossfit WHERE diffi
 Plan BLOB = \x12\x09\x1A\x07\x10\x01\x1A\x03lte\x12\x11\x1A\x0F\x10\x02\x1A\x0Bis_not_null\x12\x09\x1A\x07\x10\x03\x1A\x03and\x12\x0B\x1A\x09\x10\x04\x1A\x05count\x1A\xC8\x01\x12\xC5\x01\x0A\xB8\x01:\xB5\x01\x12\xA8\x01\x22\xA5\x01\x12\x94\x01\x0A\x91\x01\x12/\x0A\x08exercise\x0A\x10difficulty_level\x12\x11\x0A\x07\xB2\x01\x04\x08\x0D\x18\x01\x0A\x04*\x02\x10\x01\x18\x02\x1AJ\x1AH\x08\x03\x1A\x04\x0A\x02\x10\x01\x22\x22\x1A \x1A\x1E\x08\x01\x1A\x04*\x02\x10\x01\x22\x0C\x1A\x0A\x12\x08\x0A\x04\x12\x02\x08\x01\x22\x00\x22\x06\x1A\x04\x0A\x02(\x05\x22\x1A\x1A\x18\x1A\x16\x08\x02\x1A\x04*\x02\x10\x01\x22\x0C\x1A\x0A\x12\x08\x0A\x04\x12\x02\x08\x01\x22\x00\x22\x06\x0A\x02\x0A\x00\x10\x01:\x0A\x0A\x08crossfit\x1A\x00\x22\x0A\x0A\x08\x08\x04*\x04:\x02\x10\x01\x1A\x08\x12\x06\x0A\x02\x12\x00\x22\x00\x12\x08exercise2\x0A\x10\x18*\x06DuckDB
 ```
 
-### Json Generation
+### JSON Generation
 
 To generate a JSON representing the Substrait plan the `get_substrait_json(sql)` function must be called with a valid SQL select query.
 ```sql
@@ -60,7 +62,7 @@ exercise = 2
 
 ## Python
 
-Before using the extension you must remember to properly load it. To load an extension in python, you must execute the sql commands within a connection.
+Substrait extension is autoloadable, but if you prefer to do so explicitly, you can use the relevant Python syntax within a connection:
 ```python
 import duckdb
 
@@ -96,10 +98,11 @@ query_result = con.from_substrait(proto=proto_bytes)
 
 ## R
 
-Before using the extension you must remember to properly load it. To load an extension in R, you must execute the sql commands within a connection.
+By default the extension will be autoloaded on first use. To explicitly install and load this extension in R, use the following commands:
+
 ```r
 library("duckdb")
-`con <- dbConnect(duckdb::duckdb())`
+con <- dbConnect(duckdb::duckdb())
 dbExecute(con, "INSTALL substrait")
 dbExecute(con, "LOAD substrait")
 ```

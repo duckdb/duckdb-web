@@ -2,7 +2,6 @@
 layout: docu
 title: NodeJS API
 ---
-
 ## Modules
 
 <dl>
@@ -43,6 +42,7 @@ title: NodeJS API
         * [.unregister_udf(name, return_type, callback)](#module_duckdb..Connection+unregister_udf) ⇒ <code>void</code>
         * [.register_buffer(name, array, force, callback)](#module_duckdb..Connection+register_buffer) ⇒ <code>void</code>
         * [.unregister_buffer(name, callback)](#module_duckdb..Connection+unregister_buffer) ⇒ <code>void</code>
+        * [.close(callback)](#module_duckdb..Connection+close) ⇒ <code>void</code>
     * [~Statement](#module_duckdb..Statement)
         * [.sql](#module_duckdb..Statement+sql) ⇒
         * [.get()](#module_duckdb..Statement+get)
@@ -106,6 +106,7 @@ title: NodeJS API
     * [.unregister_udf(name, return_type, callback)](#module_duckdb..Connection+unregister_udf) ⇒ <code>void</code>
     * [.register_buffer(name, array, force, callback)](#module_duckdb..Connection+register_buffer) ⇒ <code>void</code>
     * [.unregister_buffer(name, callback)](#module_duckdb..Connection+unregister_buffer) ⇒ <code>void</code>
+    * [.close(callback)](#module_duckdb..Connection+close) ⇒ <code>void</code>
 
 <a name="module_duckdb..Connection+run"></a>
 
@@ -275,6 +276,17 @@ Unregister the Buffer
 | Param |
 | --- |
 | name | 
+| callback | 
+
+<a name="module_duckdb..Connection+close"></a>
+
+#### connection.close(callback) ⇒ <code>void</code>
+Closes connection
+
+**Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
+
+| Param |
+| --- |
 | callback | 
 
 <a name="module_duckdb..Statement"></a>

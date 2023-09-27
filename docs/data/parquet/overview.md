@@ -1,8 +1,9 @@
 ---
 layout: docu
-title: Parquet Loading
+title: Reading Parquet files
 redirect_from:
   - /docs/data/parquet
+  - /docs/extensions/parquet
 ---
 
 ## Examples
@@ -118,9 +119,9 @@ DuckDB's `EXPORT` command can be used to export an entire database to a series o
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
-## Installing and Loading `parquet` Extension
+## Installing and Loading the Parquet Extension
 
-The support for `parquet` files is enabled via extension. The extension is bundled with almost all clients. However, if your client does not bundle the Parquet extension, the extension must be installed and loaded separately.
+The support for Parquet files is enabled via extension. The `parquet` extension is bundled with almost all clients. However, if your client does not bundle the `parquet` extension, the extension must be installed and loaded separately.
 
 ```sql
 -- run once
@@ -128,3 +129,5 @@ INSTALL parquet;
 -- run before usage
 LOAD parquet;
 ```
+
+## Pages in This Section

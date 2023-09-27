@@ -28,18 +28,18 @@ In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session sto
 
 | Extension name | Description | Aliases |
 |---|-----|--|
-| autocomplete                                                                                                                         | Adds support for autocomplete in the shell                       |                 |
+| [autocomplete](../../extensions/autocomplete)                                                                                        | Adds support for autocomplete in the shell                       |                 |
 | [excel](../../extensions/excel)                                                                                                      | Adds support for Excel-like format strings                       |                 |
 | [fts](../../extensions/full_text_search)                                                                                             | Adds support for Full-Text Search Indexes                        |                 |
 | icu                                                                                                                                  | Adds support for time zones and collations using the ICU library |                 |
 | inet                                                                                                                                 | Adds support for IP-related data types and functions             |                 |
 | [json](../../extensions/json)                                                                                                        | Adds support for JSON operations                                 |                 |
-| parquet                                                                                                                              | Adds support for reading and writing parquet files               |                 |
+| [parquet](../../extensions/parquet)                                                                                                  | Adds support for reading and writing parquet files               |                 |
 | [sqlite_scanner](../../extensions/sqlite_scanner) [<span class="github">GitHub</span>](https://github.com/duckdblabs/sqlite_scanner) | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
-| sqlsmit                                                                                                                              |                                                                  |                 |
+| sqlsmith                                                                                                                             |                                                                  |                 |
 | [substrait](../../extensions/substrait) [<span class="github">GitHub</span>](https://github.com/duckdblabs/substrait)                | Adds support for the Substrait integration                       |                 |
-| tpcds                                                                                                                                | Adds TPC-DS data generation and query support                    |                 |
-| tpch                                                                                                                                 | Adds TPC-H data generation and query support                     |                 |
+| [tpcds](../../extensions/tpcds)                                                                                                      | Adds TPC-DS data generation and query support                    |                 |
+| [tpch](../../extensions/tpch)                                                                                                        | Adds TPC-H data generation and query support                     |                 |
 
 WebAssembly is basically an additional platform, and there might be platform-specific limitations that make some extensions not able to match their native capabilities or to perform them in a different way. We will document here relevant differences for DuckDB-hosted extensions.
 

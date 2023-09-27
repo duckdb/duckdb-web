@@ -1,29 +1,28 @@
 ---
 layout: docu
-title: httpfs
+title: httpfs Extension
 ---
 
-The `httpfs` extension is a loadable extension implementing a file system that allows reading remote/writing remote files. For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the `httpfs` extension supports reading/writing/globbing files.
+The `httpfs` extension is an autoloadable extension implementing a file system that allows reading remote/writing remote files. For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the `httpfs` extension supports reading/writing/globbing files.
 
-Some clients come prebundled with this extension, in which case it's not necessary to first install or even load the extension.  
-Depending on the client you use, no action may be required, or you might have to `INSTALL httpfs` on first use and use `LOAD httpfs` at the start of every session.
+The `httpfs` extension will be, by default, autoloaded on first use of any functionality exposed by this extension.
+If you prefer to explicitly install and load this extension, you can always run `INSTALL httpfs` on first use and issue `LOAD httpfs` at the start of every session.
 
-## HTTP(S)
+## Running Queries over HTTP(S)
 
-With the `httpfs` extension, it is possible to directly query files over the HTTP(S) protocol. This currently works for CSV, JSON, and Parquet files.
+With the `httpfs` extension, it is possible to directly query files over the HTTP(S) protocol. This works for all files supported by DuckDB or its various extensions, and provides read-only access.
 
 ```sql
 SELECT * FROM 'https://domain.tld/file.extension';
 ```
 
-For CSV files, files will be downloaded entirely in most cases, due to the row-based nature of the format. For parquet files, DuckDB can use a combination of the Parquet metadata and HTTP range requests to only download the parts of the file that are actually required by the query. For example, the query:
+For CSV files, files will be downloaded entirely in most cases, due to the row-based nature of the format. For Parquet files, DuckDB can use a combination of the Parquet metadata and HTTP range requests to only download the parts of the file that are actually required by the query. For example, the following query will only read the Parquet metadata and the data for the `column_a` column:
 
 ```sql
 SELECT column_a FROM 'https://domain.tld/file.parquet';
 ```
 
-will only read the parquet metadata and the data for the `column_a` column. In some cases even, no actual data needs to
-be read at all as they only require reading the metadata:
+In some cases even, no actual data needs to be read at all as they only require reading the metadata:
 
 ```sql
 SELECT COUNT(*) FROM 'https://domain.tld/file.parquet';
@@ -38,13 +37,13 @@ SELECT * FROM read_parquet(['https://domain.tld/file1.parquet', 'https://domain.
 SELECT * FROM parquet_scan(['https://domain.tld/file1.parquet', 'https://domain.tld/file2.parquet']);
 ```
 
-## S3
+## Running Queries over S3
 
-The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API.
+The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
 
 ### Requirements
 
-The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API should also work, but not all features may be supported. Below is a list of which parts of the S3 API are required for each `httpfs` feature.
+The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google Cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API should also work, but not all features may be supported. Below is a list of which parts of the S3 API are required for each `httpfs` feature.
 
 | Feature | Required S3 API features |
 |:---|:---|
@@ -94,15 +93,19 @@ Alternatively, session tokens are also supported and can be used instead:
 SET s3_session_token='<AWS session token>';
 ```
 
+The [`aws` extension](aws) allows for loading AWS credentials.
+
 #### Per-Request Configuration
 
-Aside from the global S3 configuration described above, specific configuration values can be used on a per-request basis. This allows for use of multiple sets of credentials, regions, etc. These are used by including them on the S3 URL as query parameters. All the individual configuration values listed above can be set as query parameters.
+Aside from the global S3 configuration described above, specific configuration values can be used on a per-request basis. This allows for use of multiple sets of credentials, regions, etc. These are used by including them on the S3 URL as query parameters. All the individual configuration values listed above can be set as query parameters. For instance:
 
-For instance,
-```text
-s3://bucket/file.parquet?s3_access_key_id=accessKey&s3_secret_access_key=secretKey
+```sql
+SELECT *
+FROM 's3://bucket/file.parquet?s3_access_key_id=accessKey&s3_secret_access_key=secretKey';
 ```
-or
+
+Multiple configurations per query are also allowed:
+
 ```sql
 SELECT *
 FROM 's3://bucket/file.parquet?s3_region=region&s3_session_token=session_token' T1

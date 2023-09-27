@@ -5,12 +5,7 @@ title: CLI API
 
 ## Installation
 
-The DuckDB CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, Mac, and Linux. Please see the [installation page](../installation) under the CLI tab, or download the version for your environment from the [DuckDB GitHub releases page](https://github.com/duckdb/duckdb/releases/) (in the "Assets" section).
-
-For pre-release versions, you may compile from source, or download the executable file that is produced from GitHub Actions:
-* [Linux](https://github.com/duckdb/duckdb/actions?query=workflow%3ALinuxRelease+is%3Asuccess+branch%3Amaster)
-* [Mac](https://github.com/duckdb/duckdb/actions?query=workflow%3AOSX+is%3Asuccess+branch%3Amaster)
-* [Windows](https://github.com/duckdb/duckdb/actions?query=workflow%3AWindows+is%3Asuccess+branch%3Amaster++)
+The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page](../installation) under the CLI tab for download links.
 
 The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
 
@@ -33,7 +28,7 @@ Frequently-used configurations can be stored in the file `~/.duckdbrc`. See the 
 By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a `D` on the final line.
 
 ```text
-v0.3.4 662041e2b
+v0.9.0 0d84ccf478
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
@@ -539,8 +534,8 @@ To execute a command with SQL text passed in directly from the command line, cal
 The CLI does not use the SQLite shell's `.load` command. Instead, directly execute DuckDB's SQL `install` and `load` commands as you would other SQL statements. See the [Extension docs](../extensions/overview) for details.
 
 ```text
-INSTALL 'fts';
-LOAD 'fts';
+INSTALL fts;
+LOAD fts;
 ```
 
 <!-- SQL parameters do not appear to work -->

@@ -1,13 +1,11 @@
 ---
 layout: docu
-title: AWS
+title: AWS Extension
 ---
 
 The `aws` extension provides features that depend on the AWS SDK.
 
 > This extension is currently in an experimental state. Feel free to try it out, but be aware some things may not work as expected.
-
-> Binaries are available in the main extension repository for DuckDB only for nightly builds at the moment, but will be available next release of DuckDB (v0.9.0).
 
 ## Features
 
@@ -18,15 +16,6 @@ The `aws` extension provides features that depend on the AWS SDK.
 ## Usage
 
 ### Load AWS Credentials
-
-Firstly ensure the `aws` and `httpfs` extensions are loaded and installed:
-
-```sql
-INSTALL aws;
-LOAD aws;
-INSTALL httpfs;
-LOAD httpfs;
-```
 
 To load the AWS credentials, run:
 
@@ -74,6 +63,16 @@ CALL load_aws_credentials('minio-testing-2', set_region=false, redact_secret=fal
 ```
 
 ## Related Extensions
+
+`aws` depends on `httpfs` extension capablities, and both will be autoloaded on the first call to `load_aws_credentials`.
+If autoinstall or autoload are disabled, you can always explicitly install and load httpfs and aws like:
+
+```sql
+INSTALL aws;
+LOAD aws;
+INSTALL httpfs;
+LOAD httpfs;
+```
 
 See also the [S3 API capabilities of the `httpfs` extension](httpfs#s3).
 

@@ -1,18 +1,9 @@
 ---
 layout: docu
-title: PostgreSQL Scanner
+title: PostgreSQL Scanner Extension
 ---
 
 The `postgres` extension allows DuckDB to directly read data from a running PostgreSQL instance. The data can be queried directly from the underlying PostgreSQL tables, or read into DuckDB tables. See the [official announcement](/2022/09/30/postgres-scanner) for implementation details and background.
-
-## Loading the Extension
-
-In order to use the PostgreSQL extension it must first be installed and loaded. This can be done using the following commands:
-
-```sql
-INSTALL postgres;
-LOAD postgres;
-```
 
 ## Usage
 
@@ -52,6 +43,15 @@ SELECT * FROM postgres_scan('', 'public', 'mytable');
 The `postgres_scan` function takes three string parameters, the `libpq` connection string (see above), a PostgreSQL schema name and a table name. The schema often used in PostgreSQL is `public`.
 
 To use `filter_pushdown` use the `postgres_scan_pushdown` function.
+
+## Loading the Extension
+
+PostgreSQL extension will be, by default, autoloaded on first use. If you prefer to do so explicitly, it can always be done using the following commands:
+
+```sql
+INSTALL postgres;
+LOAD postgres;
+```
 
 ## GitHub Repository
 
