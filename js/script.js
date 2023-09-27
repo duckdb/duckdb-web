@@ -301,10 +301,9 @@ $(document).ready(function(){
 	
 	
 	// Appending Content-List of Overview-Pages
-	if (window.location.href.indexOf("overview") > -1) {
-	    //contentlist = $('li.opened ~ .parentnav li.active ~ li').clone();
-	    // ontentlist = $('li.opened.'+expanded+' ~ .parentnav li.active ~ li').clone();
-		var selector = 'li.opened a[href="' + window.location.pathname + '"]';
+	if (window.location.href.indexOf("/overview") > -1) {
+		pathname = window.location.pathname.replace(/\.html$/, '')
+		var selector = 'li.opened a[href="' + pathname + '"]';
 		clonedUL = $(selector).parent().parent().clone();
 		clonedUL.find(selector).parent().remove();
 		clonedUL.find('ul').show();
