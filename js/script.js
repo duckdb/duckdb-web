@@ -303,7 +303,7 @@ $(document).ready(function(){
 	// Appending Content-List of Overview-Pages
 	if (window.location.href.indexOf("/overview") > -1) {
 		pathname = window.location.pathname.replace(/\.html$/, '')
-		var selector = 'li.opened a[href="' + pathname + '"]';
+		const selector = 'li.opened a[href="' + pathname + '"]';
 		clonedUL = $(selector).parent().parent().clone();
 		clonedUL.find(selector).parent().remove();
 		clonedUL.find('ul').show();
