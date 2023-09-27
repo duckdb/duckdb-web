@@ -58,7 +58,7 @@ SELECT * FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/wea
 ```
 
 To access files via the HTTPS protocol, DuckDB will automatically load the [`httpfs` extension](../extensions/httpfs).
-Similarly, other autoloadable extensions ([`aws`](aws), [`fts`](fts)) will be loaded on-demand.
+Similarly, other autoloadable extensions ([`aws`](aws), [`fts`](full_text_search)) will be loaded on-demand.
 If an extension is not already available locally, it will be installed from the official extension repository (`extensions.duckdb.org`).
 
 #### Explicitly Loadable Extensions
