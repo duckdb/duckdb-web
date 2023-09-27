@@ -32,7 +32,7 @@ SELECT * FROM duckdb_views();
 SELECT * FROM duckdb_views;
 ```
 
-## duckdb_columns
+## `duckdb_columns`
 
 The `duckdb_columns()` function provides metadata about the columns available in the DuckDB instance.
 
@@ -58,7 +58,7 @@ The `duckdb_columns()` function provides metadata about the columns available in
 
 The [`information_schema.columns`](information_schema#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
 
-## duckdb_constraints
+## `duckdb_constraints`
 
 The `duckdb_constraints()` function provides metadata about the constraints available in the DuckDB instance.
 
@@ -77,7 +77,7 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 | `constraint_column_indexes` |An array of table column indexes referring to the columns that appear in the constraint definition| `BIGINT[]` |
 | `constraint_column_names` |An array of table column names appearing in the constraint definition| `VARCHAR[]` |
 
-## duckdb_databases
+## `duckdb_databases`
 
 The `duckdb_databases()` function lists the databases that are accessible from within the current DuckDB process.
 Apart from the database associated at startup, the list also includes databases that were [attached](statements/attach) later on to the duckdb process
@@ -90,7 +90,7 @@ Apart from the database associated at startup, the list also includes databases 
 | `internal` | True indicates a system or built-in database. False indicates a user-defined database. | BOOLEAN
 | `type` | The type indicates the type of RDBMS implemented by the attached database. For DuckDB databases, that value is `duckdb`. 
 
-## duckdb_dependencies
+## `duckdb_dependencies`
 
 The `duckdb_dependencies()` function provides metadata about the dependencies available in the DuckDB instance.
 
@@ -104,7 +104,7 @@ The `duckdb_dependencies()` function provides metadata about the dependencies av
 | `refobjsubid` |Always 0| `INTEGER` |
 | `deptype` |The type of dependency. Either regular (n) or automatic (a).| `VARCHAR` |
 
-## duckdb_extensions
+## `duckdb_extensions`
 
 The `duckdb_extensions()` function provides metadata about the extensions available in the DuckDB instance.
 
@@ -117,7 +117,7 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 | `description` |Human readable text that describes the extension's functionality.| `VARCHAR` |
 | `aliases` |List of alternative names for this extension.| `VARCHAR[]` |
 
-## duckdb_functions
+## `duckdb_functions`
 
 The `duckdb_functions()` function provides metadata about the functions available in the DuckDB instance.
 
@@ -136,7 +136,7 @@ The `duckdb_functions()` function provides metadata about the functions availabl
 | `has_side_effects` |`false` if this is a pure function. `true` if this function changes the database state (like sequence functions `nextval()` and `curval()`).| `BOOLEAN` |
 | `function_oid` | The internal identifier for this function | `BIGINT` |
 
-## duckdb_indexes
+## `duckdb_indexes`
 
 The `duckdb_indexes()` function provides metadata about secondary indexes available in the DuckDB instance.
 
@@ -157,7 +157,7 @@ The `duckdb_indexes()` function provides metadata about secondary indexes availa
   
 Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e., those indexes created by explicit [`CREATE INDEX`](indexes#create-index) statements. Primary keys are maintained using indexes, but their details are included in the `duckdb_constraints()` function. 
 
-## duckdb_keywords
+## `duckdb_keywords`
 
 The `duckdb_keywords()` function provides metadata about DuckDB's keywords and reserved words.
 
@@ -166,7 +166,7 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 | `keyword_name` |The keyword.| `VARCHAR` |
 | `keyword_category` |Indicates the category of the keyword. Values are `column_name`, `reserved`, `type_function` and `unreserved`. | `VARCHAR` |
 
-## duckdb_schemas
+## `duckdb_schemas`
 
 The `duckdb_schemas()` function provides metadata about the schemas available in the DuckDB instance.
 
@@ -181,7 +181,7 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 
 The [`information_schema.schemata`](information_schema) system view provides a more standardized way to obtain metadata about database schemas.
 
-## duckdb_sequences
+## `duckdb_sequences`
 
 The `duckdb_sequences()` function provides metadata about the sequences available in the DuckDB instance.
 
@@ -208,7 +208,7 @@ Attributes like `temporary`, `start_value` etc. correspond to the various option
 >
 > 2. If the sequence cycles, then the sequence will start over from the boundary of its range, not necessarily from the value specified as start value.
 
-## duckdb_settings
+## `duckdb_settings`
 
 The `duckdb_settings()` function provides metadata about the settings available in the DuckDB instance. 
 
@@ -221,7 +221,7 @@ The `duckdb_settings()` function provides metadata about the settings available 
 
 The various settings are described in the [configuration page](configuration).
 
-## duckdb_tables
+## `duckdb_tables`
 
 The `duckdb_tables()` function provides metadata about the base tables available in the DuckDB instance.
 
@@ -244,7 +244,7 @@ The `duckdb_tables()` function provides metadata about the base tables available
 
 The [`information_schema.tables`](information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
 
-## duckdb_types
+## `duckdb_types`
 
 The `duckdb_types()` function provides metadata about the data types available in the DuckDB instance.
 
@@ -261,7 +261,7 @@ The `duckdb_types()` function provides metadata about the data types available i
 | `type_category` |The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expression. For example, the `NUMERIC` type_category includes integers, decimals, and floating point numbers. | `VARCHAR` |
 | `internal` |Whether this is an internal (built-in) or a user object.| `BOOLEAN` |
 
-## duckdb_views
+## `duckdb_views`
 
 The `duckdb_views()` function provides metadata about the views available in the DuckDB instance.
 
