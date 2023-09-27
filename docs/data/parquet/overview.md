@@ -45,7 +45,7 @@ Parquet files are compressed columnar files that are efficient to load and proce
 
 ## Parameters
 
-Parquet files are self-describing, as such far fewer parameters are required than with CSV files. Nevertheless, there are a number of options exposed that can be passed to the `read_parquet` function, or the `COPY` statement.
+Parquet files are self-describing, as such far fewer parameters are required than with CSV files. Nevertheless, there are a number of options exposed that can be passed to the `read_parquet` function, or the [`COPY` statement](../../sql/statements/copy).
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
@@ -100,7 +100,7 @@ SELECT * FROM people;
 
 ## Writing to Parquet Files
 
-DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [Copy Statement page](../../sql/statements/copy) for details, including all possible parameters for the copy statement.
+DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [`COPY` Statement page](../../sql/statements/copy) for details, including all possible parameters for the `COPY` statement.
 
 ```sql
 -- write a query to a snappy compressed parquet file
