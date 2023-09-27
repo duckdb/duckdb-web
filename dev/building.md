@@ -17,7 +17,7 @@ Install the required packages with the package manager of your distribution.
 Fedora, CentOS, and Red Hat:
 
 ```bash
-sudo dnf install -y git g++ cmake ninja-build
+sudo yum install -y git g++ cmake ninja-build
 ```
 
 Ubuntu and Debian:
