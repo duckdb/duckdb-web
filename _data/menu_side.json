@@ -77,6 +77,10 @@
       "url": "/why_duckdb"
     },
     {
+      "page": "Media",
+      "url": "/media"
+    },
+    {
       "page": "FAQ",
       "url": "/faq"
     },
