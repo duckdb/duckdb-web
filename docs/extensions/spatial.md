@@ -47,12 +47,14 @@ Convert between geometries and other formats.
 
 | Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
 |-----|---|--|--|--|---|
-| `VARCHAR ST_AsGeoJSON(GEOMETRY)`    | 🦆       | 🦆       | 🦆           | 🦆         | 🔄 (as `POLYGON`) |
-| `VARCHAR ST_AsHEXWKB(GEOMETRY)`     | 🦆       | 🦆       | 🦆           | 🦆         | 🦆              |
 | `VARCHAR ST_AsText(GEOMETRY)`       | 🧭       | 🦆       | 🦆           | 🦆         | 🔄 (as `POLYGON`) |
 | `WKB_BLOB ST_AsWKB(GEOMETRY)`       | 🦆       | 🦆       | 🦆           | 🦆         | 🦆              |
+| `VARCHAR ST_AsHEXWKB(GEOMETRY)`     | 🦆       | 🦆       | 🦆           | 🦆         | 🦆              |
+| `VARCHAR ST_AsGeoJSON(GEOMETRY)`    | 🔄       | 🔄       | 🔄           | 🔄         | 🔄 (as `POLYGON`) |
 | `GEOMETRY ST_GeomFromText(VARCHAR)` | 🧭       | 🔄       | 🔄           | 🔄         | 🔄 (as `POLYGON`) |
 | `GEOMETRY ST_GeomFromWKB(BLOB)`     | 🦆       | 🦆       | 🦆           | 🦆         | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_GeomFromHEXWKB(VARCHAR)` | 🦆     |          |              |             |                 |
+| `GEOMETRY ST_GeomFromGeoJSON(VARCHAR)` | 🦆    |          |              |             |                 |
 
 ### Geometry Construction
 
@@ -75,7 +77,18 @@ Construct new geometries from other geometries or other data.
 | `GEOMETRY ST_Envelope(GEOMETRY)`                         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
 | `GEOMETRY ST_FlipCoordinates(GEOMETRY)`                  | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
 | `GEOMETRY ST_Transform(GEOMETRY, VARCHAR, VARCHAR)`      | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
-
+| `BOX_2D ST_Extent(GEOMETRY)`                             | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
+| `GEOMETRY ST_PointN(GEOMETRY, INTEGER)`                  | 🦆        |           | 🦆             |             |                 |
+| `GEOMETRY ST_StartPoint(GEOMETRY)`                       | 🦆        |           | 🦆             |             |                 |
+| `GEOMETRY ST_EndPoint(GEOMETRY)`                         | 🦆        |           | 🦆             |             |                 |
+| `GEOMETRY ST_ExteriorRing(GEOMETRY)`                     | 🦆        |           |                | 🦆          |                 |
+| `GEOMETRY ST_Reverse(GEOMETRY)`                          | 🧭        | 🔄        | 🔄             | 🔄         | 🔄              |
+| `GEOMETRY ST_RemoveRepeatedPoints(GEOMETRY)`             | 🧭        | 🔄        | 🔄             | 🔄         | 🔄 (as `POLYGON` ) |
+| `GEOMETRY ST_RemoveRepeatedPoints(GEOMETRY, DOUBLE)`     | 🧭        | 🔄        | 🔄             | 🔄         | 🔄 (as `POLYGON` ) |
+| `GEOMETRY ST_ReducePrecision(GEOMETRY, DOUBLE)`          | 🧭        | 🔄        | 🔄             | 🔄         | 🔄 (as `POLYGON` ) |
+| `GEOMETRY ST_PointOnSurface(GEOMETRY)`                   | 🧭        | 🔄        | 🔄             | 🔄         | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_CollectionExtract(GEOMETRY)`                | 🦆        |           |                |            |                 |
+| `GEOMETRY ST_CollectionExtract(GEOMETRY, INTEGER)`       | 🦆        |           |                |            |                 |
 
 ### Spatial Properties
 
@@ -89,10 +102,17 @@ Calculate and access spatial properties of geometries.
 | `BOOLEAN ST_IsRing(GEOMETRY)`            | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
 | `BOOLEAN ST_IsSimple(GEOMETRY)`          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
 | `BOOLEAN ST_IsValid(GEOMETRY)`           | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
-| `DOUBLE ST_X(GEOMETRY)`                  | 🧭        | 🦆        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
-| `DOUBLE ST_Y(GEOMETRY)`                  | 🧭        | 🦆        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `DOUBLE ST_X(GEOMETRY)`                  | 🧭        | 🦆        |                |             |                    |
+| `DOUBLE ST_Y(GEOMETRY)`                  | 🧭        | 🦆        |                |             |                    |
+| `DOUBLE ST_XMax(GEOMETRY)`               | 🦆        | 🦆        | 🦆             | 🦆          | 🦆                |
+| `DOUBLE ST_YMax(GEOMETRY)`               | 🦆        | 🦆        | 🦆             | 🦆          | 🦆                |
+| `DOUBLE ST_XMin(GEOMETRY)`               | 🦆        | 🦆        | 🦆             | 🦆          | 🦆                |
+| `DOUBLE ST_YMin(GEOMETRY)`               | 🦆        | 🦆        | 🦆             | 🦆          | 🦆                |
 | `GeometryType ST_GeometryType(GEOMETRY)` | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as `POLYGON`) |
 | `DOUBLE ST_Length(GEOMETRY)`             | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as `POLYGON`) |
+| `INTEGER ST_NGeometries(GEOMETRY)`       | 🦆        |           |                |             |                    |
+| `INTEGER ST_NPoints(GEOMETRY)`           | 🦆        | 🦆        | 🦆             | 🦆         |  🦆                 |
+| `INTEGER ST_NInteriorRings(GEOMETRY)`    | 🦆        |           |                | 🦆         |                     |
 
 
 ### Spatial Relationships
@@ -110,13 +130,25 @@ Compute relationships and spatial predicates between geometries.
 | `BOOLEAN ST_Crosses(GEOMETRY, GEOMETRY)`         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
 | `BOOLEAN ST_Difference(GEOMETRY, GEOMETRY)`      | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
 | `BOOLEAN ST_Disjoint(GEOMETRY, GEOMETRY)`        | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
-| `BOOLEAN ST_Intersects(GEOMETRY, GEOMETRY)`      | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Intersects(GEOMETRY, GEOMETRY)`      | 🧭        | 🔄        | 🔄             | 🔄          | 🦆                |
 | `BOOLEAN ST_Equals(GEOMETRY, GEOMETRY)`          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
 | `DOUBLE ST_Distance(GEOMETRY, GEOMETRY)`         | 🧭        | 🦆 or 🔄  | 🦆 or 🔄        | 🔄          | 🔄 (as `POLYGON`) |
 | `BOOLEAN ST_DWithin(GEOMETRY, GEOMETRY, DOUBLE)` | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Intersects_Extent(GEOMETRY, GEOMETRY)`| 🦆        | 🦆        | 🦆             | 🦆          | 🦆                |
+
+## Spatial Aggregate Functions
+
+| Aggregate functions                       | Implemented with |
+|-------------------------------------------|------------------|
+| `GEOMETRY ST_Envelope_Agg(GEOMETRY)`      | 🦆               |
+| `GEOMETRY ST_Union_Agg(GEOMETRY)`         | 🧭               | 
+| `GEOMETRY ST_Intersection_Agg(GEOMETRY)`  | 🧭               |
+
 
 
 ## Spatial Table Functions
+
+### `ST_Read()` - Read spatial data from files
 
 The spatial extension provides a `ST_Read` table function based on the [GDAL](https://github.com/OSGeo/gdal) translator library to read spatial data from a variety of geospatial vector file formats as if they were DuckDB tables. For example to create a new table from a GeoJSON file, you can use the following query:
 ```sql
@@ -125,7 +157,7 @@ CREATE TABLE <table> AS SELECT * FROM ST_Read('some/file/path/filename.json');
 
 `ST_Read` can take a number of optional arguments, the full signature is: 
 ```sql
-ST_Read(VARCHAR, sequential_layer_scan : BOOLEAN, spatial_filter : WKB_BLOB, open_options : VARCHAR[], layer : VARCHAR, allowed_drivers : VARCHAR[], sibling_files : VARCHAR[], spatial_filter_box : BOX_2D)
+ST_Read(VARCHAR, sequential_layer_scan : BOOLEAN, spatial_filter : WKB_BLOB, open_options : VARCHAR[], layer : VARCHAR, allowed_drivers : VARCHAR[], sibling_files : VARCHAR[], spatial_filter_box : BOX_2D, keep_wkb : BOOLEAN)
 ```
 * `sequential_layer_scan` (default: `false`): If set to `true`, the table function will scan through all layers sequentially and return the first layer that matches the given `layer` name. This is required for some drivers to work properly, e.g., the `OSM` driver.
 * `spatial_filter` (default: `NULL`): If set to a WKB blob, the table function will only return rows that intersect with the given WKB geometry. Some drivers may support efficient spatial filtering natively, in which case it will be pushed down. Otherwise the filtering is done by GDAL which may be much slower.
@@ -134,6 +166,7 @@ ST_Read(VARCHAR, sequential_layer_scan : BOOLEAN, spatial_filter : WKB_BLOB, ope
 * `allowed_drivers` (default: `[]`): A list of GDAL driver names that are allowed to be used to open the file. If empty, all drivers are allowed.
 * `sibling_files` (default: `[]`): A list of sibling files that are required to open the file. E.g., the `ESRI Shapefile` driver requires a `.shx` file to be present. Although most of the time these can be discovered automatically.
 * `spatial_filter_box` (default: `NULL`): If set to a `BOX_2D`, the table function will only return rows that intersect with the given bounding box. Similar to `spatial_filter`.
+* `keep_wkb` (default: `false`): If set, the table function will return geometries in a `wkb_geometry` column with the type `WKB_BLOB` (which can be cast to `BLOB`) instead of `GEOMETRY`. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesnt support representing in the `GEOMETRY` type yet.
 
 Note that GDAL is single-threaded, so this table function will not be able to make full use of parallelism. We're planning to implement support for the most common vector formats natively in this extension with additional table functions in the future.
 
@@ -196,6 +229,47 @@ We currently support over 50 different formats. You can generate the following t
 Note that far from all of these drivers have been tested properly, and some may require additional options to be passed to work as expected. 
 If you run into any issues please first [consult the GDAL docs](https://gdal.org/drivers/vector/index.html).
 
+### ST_ReadOsm() - Read compressed OSM data
+
+The spatial extension also provides an experimental `ST_ReadOsm()` table function to read compressed OSM data directly from a `.osm.pbf` file. 
+
+This will use multithreading and zero-copy protobuf parsing which makes it a lot faster than using the `st_read()` `OSM` driver, but it only outputs the raw OSM data (Nodes, Ways, Relations), without constructing any geometries.
+For node entities you can trivially construct `POINT` geometries, but it is also possible to construct `LINESTRING` AND `POLYGON` by manually joining refs and nodes together in SQL.
+
+Example usage:
+
+```sql
+SELECT * FROM st_readosm('tmp/data/germany.osm.pbf') WHERE tags['highway'] != [] LIMIT 5;
+┌──────────────────────┬────────┬──────────────────────┬─────────┬────────────────────┬────────────┬───────────┬────────────────────────┐
+│         kind         │   id   │         tags         │  refs   │        lat         │    lon     │ ref_roles │       ref_types        │
+│ enum('node', 'way'…  │ int64  │ map(varchar, varch…  │ int64[] │       double       │   double   │ varchar[] │ enum('node', 'way', …  │
+├──────────────────────┼────────┼──────────────────────┼─────────┼────────────────────┼────────────┼───────────┼────────────────────────┤
+│ node                 │ 122351 │ {bicycle=yes, butt…  │         │         53.5492951 │   9.977553 │           │                        │
+│ node                 │ 122397 │ {crossing=no, high…  │         │ 53.520990100000006 │ 10.0156924 │           │                        │
+│ node                 │ 122493 │ {TMC:cid_58:tabcd_…  │         │ 53.129614600000004 │  8.1970173 │           │                        │
+│ node                 │ 123566 │ {highway=traffic_s…  │         │ 54.617268200000005 │  8.9718171 │           │                        │
+│ node                 │ 125801 │ {TMC:cid_58:tabcd_…  │         │ 53.070685000000005 │  8.7819939 │           │                        │
+└──────────────────────┴────────┴──────────────────────┴─────────┴────────────────────┴────────────┴───────────┴────────────────────────┘
+```
+
+## Spatial replacement scans
+
+The spatial extension also provides "replacement scans" for common geospatial file formats, allowing you to query files of these formats as if they were tables.
+
+```sql
+SELECT * FROM `./path/to/some/shapefile/dataset.shp`;
+```
+In practice this is just syntax-sugar for calling `ST_Read`, so there is no difference in performance. If you want to pass additional options, you should use the `ST_Read` table function directly.
+
+The following formats are currently recognized by their file extension:
+
+* ESRI ShapeFile, `.shp` 
+* GeoPackage, `.gpkg`
+* FlatGeoBuf, `.fgb`
+
+Similarly there is a `.osm.pbf` replacement scan for `ST_ReadOsm`.
+
+
 ## Spatial Copy Functions
 
 Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export duckdb tables to different geospatial vector formats.
@@ -205,9 +279,13 @@ COPY <table> TO 'some/file/path/filename.geojson'
 WITH (FORMAT GDAL, DRIVER 'GeoJSON', LAYER_CREATION_OPTIONS 'WRITE_BBOX=YES');
 ```
 
+Available options:
+
 * `FORMAT`: is the only required option and must be set to `GDAL` to use the GDAL based copy function.
 * `DRIVER`: is the GDAL driver to use for the export. See the table above for a list of available drivers.
 * `LAYER_CREATION_OPTIONS`: list of options to pass to the GDAL driver. See the GDAL docs for the driver you are using for a list of available options.
+* `SRS`: Set a spatial reference system as metadata to use for the export. This can be a WKT string, an EPSG code or a proj-string, basically anything you would normally be able to pass to GDAL/OGR. This will not perform any reprojection of the input geometry though, it just sets the metadata if the target driver supports it.
+
 
 ## GitHub Repository
 
