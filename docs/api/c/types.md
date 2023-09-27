@@ -52,7 +52,7 @@ typedef enum DUCKDB_TYPE {
 
 The enum type of a column in the result can be obtained using the `duckdb_column_type` function. The logical type of a column can be obtained using the `duckdb_column_logical_type` function.
 
-### duckdb_value
+### `duckdb_value`
 
 The `duckdb_value` functions will auto-cast values as required. For example, it is no problem to use
 `duckdb_value_double` on a column of type `duckdb_value_int32`. The value will be auto-cast and returned as a double.
@@ -64,7 +64,7 @@ The exception to the auto-cast rule is the `duckdb_value_varchar_internal` funct
 
 > Note that `duckdb_value_varchar` and `duckdb_value_blob` require the result to be de-allocated using `duckdb_free`.
 
-### duckdb_result_get_chunk
+### `duckdb_result_get_chunk`
 
 The `duckdb_result_get_chunk` function can be used to read data chunks from a DuckDB result set, and is the most efficient way of reading data from a DuckDB result using the C API. It is also the only way of reading data of certain types from a DuckDB result. For example, the `duckdb_value` functions do not support structural reading of composite types (lists or structs) or more complex types like enums and decimals.
 

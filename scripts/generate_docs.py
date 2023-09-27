@@ -327,7 +327,7 @@ for entry in documentation_list:
     if group_name is not current_group_name:
         if current_group_name is not None:
             total_quick_docs += quick_docs_end() + '\n'
-        total_quick_docs += '### ' + group_name + '\n\n'
+        total_quick_docs += '### `' + group_name + '`\n\n'
 
         total_quick_docs += quick_docs_start()
         current_group_name = group_name

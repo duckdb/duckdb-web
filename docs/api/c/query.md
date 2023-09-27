@@ -46,7 +46,7 @@ See the [Types](types) page for more information.
 from the query result. The `duckdb_value` functions perform internal type-checking, bounds-checking and casting
 which makes them slower.
 
-### duckdb_value
+### `duckdb_value`
 
 Below is an example that prints the above result to CSV format using the `duckdb_value_varchar` function.
 Note that the function is generic: we do not need to know about the types of the individual result columns.
@@ -66,7 +66,7 @@ for(idx_t row = 0; row < row_count; row++) {
 }
 ```
 
-### duckdb_column_data
+### `duckdb_column_data`
 
 Below is an example that prints the above result to CSV format using the `duckdb_column_data` function.
 Note that the function is NOT generic: we do need to know exactly what the types of the result columns are.
