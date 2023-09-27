@@ -53,6 +53,8 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 
 [The `SELECT` clause](../../sql/query_syntax/select) specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions. The `DISTINCT` keyword ensures that only unique tuples are returned.
 
+> Column names are case-insensitive. See the [Rules for Case Sensitivity](../case_sensitivity) for more details.
+
 ## FROM Clause
 
 <div id="rrdiagram4"></div>
