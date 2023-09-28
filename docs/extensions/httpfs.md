@@ -202,7 +202,7 @@ COPY table TO 's3://my-bucket/partitioned' (FORMAT PARQUET, PARTITION_BY (part_c
 An automatic check is performed for existing files/directories, which is currently quite conservative (and on S3 will add a bit of latency). To disable this check and force writing, an `ALLOW_OVERWRITE` flag is added:
 
 ```sql
-COPY table TO 's3://my-bucket/partitioned' (FORMAT PARQUET, PARTITION_BY (part_col_a, part_col_b), ALLOW_OVERWRITE TRUE);
+COPY table TO 's3://my-bucket/partitioned' (FORMAT PARQUET, PARTITION_BY (part_col_a, part_col_b), ALLOW_OVERWRITE true);
 ```
 
 The naming scheme of the written files looks like this:

@@ -16,7 +16,7 @@ The functions below are difficult to categorize into specific function types and
 | `ifnull(`*`expr`*`, `*`other`*`)` | A two-argument version of coalesce | `ifnull(NULL, 'default_string')` | `'default_string'`|
 | `nullif(`*`a`*`, `*`b`*`)` | Return null if a = b, else return a. Equivalent to `CASE WHEN a=b THEN NULL ELSE a END`. | `nullif(1+1, 2)` | `NULL`|
 | `current_schema()`| Return the name of the currently active schema. Default is main. | `current_schema()` | `'main'`|
-| `current_schemas(`*`boolean`*`)`| Return list of schemas. Pass a parameter of `True` to include implicit schemas.| `current_schemas(true)`| `['temp', 'main', 'pg_catalog']`|
+| `current_schemas(`*`boolean`*`)`| Return list of schemas. Pass a parameter of `true` to include implicit schemas.| `current_schemas(true)`| `['temp', 'main', 'pg_catalog']`|
 | `current_setting(`*`'setting_name'`*`)` | Return the current value of the configuration setting| `current_setting('access_mode')` | `'automatic'` |
 | `currval(`*`'sequence_name'`*`)`| Return the current value of the sequence. Note that `nextval` must be called at least once prior to calling `currval`. | `currval('my_sequence_name')`| `1` |
 | `force_checkpoint(`*`database`*`)`| Synchronize WAL with file for (optional) database interrupting transactions. | `force_checkpoint(my_db)`| success boolean |

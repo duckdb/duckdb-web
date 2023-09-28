@@ -23,7 +23,7 @@ If the final number of parquet files is not important, writing one file per thre
 Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [hive partitioning](../partitioning/hive_partitioning) structure are good ways to transparently handle multiple files.
 
 ```sql
-COPY (FROM generate_series(10000000)) TO 'test.parquet' (FORMAT PARQUET, PER_THREAD_OUTPUT TRUE);
+COPY (FROM generate_series(10000000)) TO 'test.parquet' (FORMAT PARQUET, PER_THREAD_OUTPUT true);
 ```
 
 ### Selecting a `row_group_size`

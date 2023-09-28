@@ -164,7 +164,7 @@ FROM t1;
 
 Nested types can be compared using all the [comparison operators](../expressions/comparison_operators).
 These comparisons can be used in [logical expressions](../expressions/logical_operators)
-for both `WHERE` and `HAVING` clauses, as well as for creating [Boolean values](boolean).
+for both `WHERE` and `HAVING` clauses, as well as for creating [`BOOLEAN` values](boolean).
 
 The ordering is defined positionally in the same way that words can be ordered in a dictionary.
 `NULL` values compare greater than all other values and are considered equal to each other.
