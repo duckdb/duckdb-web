@@ -33,7 +33,7 @@ SELECT count(*) FROM 'azure://<my_container>/<my_file>.<parquet_or_csv>';
 Blobs are also supported:
 
 ```sql
-SELECT * from 'azure://<my_container>/*.csv';
+SELECT * FROM 'azure://<my_container>/*.csv';
 ```
 
 ## GitHub Repository

@@ -99,7 +99,7 @@ import org.apache.arrow.vector.ipc.ArrowReader;
 import org.duckdb.DuckDBResultSet;
 
 try (var conn = DriverManager.getConnection("jdbc:duckdb:");
-     var p_stmt = conn.prepareStatement("SELECT * from generate_series(2000)");
+     var p_stmt = conn.prepareStatement("SELECT * FROM generate_series(2000)");
      var resultset = (DuckDBResultSet) p_stmt.executeQuery();
      var allocator = new RootAllocator()) {
   try (var reader = (ArrowReader) resultset.arrowExportStream(allocator, 256)) {
