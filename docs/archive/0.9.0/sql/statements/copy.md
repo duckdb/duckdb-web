@@ -106,7 +106,7 @@ The below options are applicable when writing `CSV` files.
 | `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
 | `delim` or `sep` | The character that is written to separate columns within each row. | varchar | `,` |
 | `escape` | The character that should appear before a character that matches the `quote` value. | varchar | `"` |
-| `header` | Whether or not to write a header for the CSV file. | bool | false |
+| `header` | Whether or not to write a header for the CSV file. | bool | true |
 | `nullstr` | The string that is written to represent a NULL value. | varchar | `(empty)` |
 | `quote` | The quoting character to be used when a data value is quoted. | varchar | `"` |
 | `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
