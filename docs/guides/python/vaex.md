@@ -40,18 +40,14 @@ Now we can directly query the Arrow Table using DuckDB, the output of which can 
 
 ```python
 query_result_arrow_table = duckdb.query('''
-
     SELECT
-
         pclass,
-        MEAN(age) as age,
-        MEAN(family_size) as family_size,
-        MEAN(fare_per_family_member) as fare_per_family_member,
-        COUNT(DISTINCT(name_title)) as distinct_titles,
+        MEAN(age) AS age,
+        MEAN(family_size) AS family_size,
+        MEAN(fare_per_family_member) AS fare_per_family_member,
+        COUNT(DISTINCT(name_title)) AS distinct_titles,
         LIST(DISTINCT(name_title))
-
     FROM arrow_table
-
     GROUP BY pclass
     ORDER BY pclass
 ''').arrow()

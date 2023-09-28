@@ -45,8 +45,8 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | `epoch_ns(`*`timestamp`*`)` | Return the total number of nanoseconds since the epoch | `epoch_ns(timestamp '2021-08-03 11:59:44.123456')` | `1627991984123456000` |
 | `extract(`*`field`* `from` *`timestamp`*`)` | Get [subfield](../../sql/functions/datepart) from a timestamp | `extract('hour' FROM TIMESTAMP '1992-09-20 20:38:48')` | `20` |
 | `greatest(`*`timestamp`*`, `*`timestamp`*`)` | The later of two timestamps | `greatest(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-09-20 20:38:48` |
-| `isfinite(`*`timestamp`*`)` | Returns true if the timestamp is finite, false otherwise | `isfinite(TIMESTAMP '1992-03-07')` | true |
-| `isinf(`*`timestamp`*`)` | Returns true if the timestamp is infinite, false otherwise | `isinf(TIMESTAMP '-infinity')` | true |
+| `isfinite(`*`timestamp`*`)` | Returns true if the timestamp is finite, false otherwise | `isfinite(TIMESTAMP '1992-03-07')` | `true` |
+| `isinf(`*`timestamp`*`)` | Returns true if the timestamp is infinite, false otherwise | `isinf(TIMESTAMP '-infinity')` | `true` |
 | `last_day(`*`timestamp`*`)` | The last day of the month. | `last_day(TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-03-31` |
 | `least(`*`timestamp`*`, `*`timestamp`*`)` | The earlier of two timestamps | `least(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-03-22 01:02:03.1234` |
 | `make_timestamp(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`)` | The timestamp for the given parts | `make_timestamp(1992, 9, 20, 13, 34, 27.123456)` | `1992-09-20 13:34:27.123456` |

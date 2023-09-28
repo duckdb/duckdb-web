@@ -26,7 +26,7 @@ CREATE TABLE tbl1(u UNION(num INT, str VARCHAR));
 -- More details in the 'Union casts' section below.
 INSERT INTO tbl1 values (1) , ('two') , (union_value(str := 'three'));
 -- Union use the member types varchar cast functions when casting to varchar.
-SELECT u from tbl1;
+SELECT u FROM tbl1;
 -- returns:
 --    1
 --    two

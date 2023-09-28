@@ -65,12 +65,3 @@ If `NO CYCLE` is specified, any calls to nextval after the sequence has reached 
 
 > Use `DROP SEQUENCE` to remove a sequence. 
 > Sequences are based on `BIGINT` arithmetic, so the range cannot exceed the range of an eight-byte integer (-9223372036854775808 to 9223372036854775807).
-
-<!-- Update the sequence value after a `COPY FROM`:
-
-```sql
-BEGIN;
-COPY distributors FROM 'input_file';
-SELECT setval('serial', max(id)) FROM distributors;
-END;
-``` -->
