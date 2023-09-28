@@ -94,3 +94,21 @@ SELECT MIN(grade) FROM grades WHERE course=?;
 ```
 
 Now when we execute this function for each of the rows, we can see that for `Math` this will return `7`, and for `CS` it will return `8`. We then compare it against the grade for that actual row. As a result, the row `(Math, 9)` will be filtered out, as `9 <> 7`.
+
+## Returning Each Row of the Subquery as a Struct
+
+Using the name of a subquery in the `SELECT` clause (without referring to a specific column) turns each row of the subquery into a struct whose fields correspond to the columns of the subquery. For example:
+
+```sql
+SELECT t FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
+```
+```text
+┌─────────────────────────────┐
+│              t              │
+│ struct(x bigint, y varchar) │
+├─────────────────────────────┤
+│ {'x': 41, 'y': hello}       │
+│ {'x': 42, 'y': hello}       │
+│ {'x': 43, 'y': hello}       │
+└─────────────────────────────┘
+```
