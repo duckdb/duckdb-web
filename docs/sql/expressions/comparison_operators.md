@@ -13,20 +13,20 @@ Whenever either of the input arguments is `NULL`, the output of the comparison i
 
 | Operator | Description | Example | Result |
 |:---|:---|:---|:---|
-| `<` | less than | `2 < 3` | `TRUE` |
-| `>` | greater than | `2 > 3` | `FALSE` |
-| `<=` | less than or equal to | `2 <= 3` | `TRUE` |
+| `<` | less than | `2 < 3` | `true` |
+| `>` | greater than | `2 > 3` | `false` |
+| `<=` | less than or equal to | `2 <= 3` | `true` |
 | `>=` | greater than or equal to | `4 >= NULL` | `NULL` |
 | `=` | equal | `NULL = NULL` | `NULL` |
-| `<>` or `!=` | not equal | `2 <> 2` | `FALSE` |
+| `<>` or `!=` | not equal | `2 <> 2` | `false` |
 
 The table below shows the standard distinction operators.
 These operators treat `NULL` values as equal.
 
 | Operator | Description | Example | Result |
 |:---|:---|:---|:-|
-| `IS DISTINCT FROM` | not equal, including `NULL` | `2 IS DISTINCT FROM NULL` | `TRUE` |
-| `IS NOT DISTINCT FROM` | equal, including `NULL` | `NULL IS NOT DISTINCT FROM NULL` | `TRUE` |
+| `IS DISTINCT FROM` | not equal, including `NULL` | `2 IS DISTINCT FROM NULL` | `true` |
+| `IS NOT DISTINCT FROM` | equal, including `NULL` | `NULL IS NOT DISTINCT FROM NULL` | `true` |
 
 ## BETWEEN and IS (NOT) NULL
 
@@ -39,7 +39,7 @@ Note that BETWEEN and NOT BETWEEN are only equivalent to the examples below in t
 |:---|:---|
 | `a BETWEEN x AND y` | equivalent to `a >= x AND a <= y` |
 | `a NOT BETWEEN x AND y` | equivalent to `a < x OR a > y` |
-| `expression IS NULL` | `TRUE` if expression is `NULL`, `FALSE` otherwise |
+| `expression IS NULL` | `true` if expression is `NULL`, `false` otherwise |
 | `expression ISNULL` | alias for `IS NULL` (non-standard) |
-| `expression IS NOT NULL` | `FALSE` if expression is `NULL`, `TRUE` otherwise |
+| `expression IS NOT NULL` | `false` if expression is `NULL`, `true` otherwise |
 | `expression NOTNULL` | alias for `IS NOT NULL` (non-standard) |

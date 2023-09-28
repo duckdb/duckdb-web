@@ -12,7 +12,7 @@ Below is a collection of tips to help when dealing with Parquet files.
 The `union_by_name` option can be used to unify the schema of files that have different or missing columns. For files that do not have certain columns, `NULL` values are filled in.  
 
 ```sql
-SELECT * FROM read_parquet('flights*.parquet', union_by_name=True);
+SELECT * FROM read_parquet('flights*.parquet', union_by_name=true);
 ```
 
 ## Tips for writing Parquet files
@@ -23,7 +23,7 @@ If the final number of parquet files is not important, writing one file per thre
 Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [hive partitioning](../partitioning/hive_partitioning) structure are good ways to transparently handle multiple files.
 
 ```sql
-COPY (FROM generate_series(10000000)) TO 'test.parquet' (FORMAT PARQUET, PER_THREAD_OUTPUT TRUE);
+COPY (FROM generate_series(10000000)) TO 'test.parquet' (FORMAT PARQUET, PER_THREAD_OUTPUT true);
 ```
 
 ### Selecting a `row_group_size`

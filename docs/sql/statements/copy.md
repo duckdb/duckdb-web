@@ -8,11 +8,11 @@ railroad: statements/copy.js
 
 ```sql
 -- read a CSV file into the lineitem table - using auto-detected options
-COPY lineitem FROM 'lineitem.csv' (AUTO_DETECT TRUE);
+COPY lineitem FROM 'lineitem.csv' (AUTO_DETECT true);
 -- read a parquet file into the lineitem table
 COPY lineitem FROM 'lineitem.pq' (FORMAT PARQUET);
 -- read a json file into the lineitem table - using auto-detected options
-COPY lineitem FROM 'lineitem.json' (FORMAT JSON, AUTO_DETECT TRUE);
+COPY lineitem FROM 'lineitem.json' (FORMAT JSON, AUTO_DETECT true);
 
 -- write a table to a CSV file
 COPY lineitem TO 'lineitem.csv' (FORMAT CSV, DELIMITER '|', HEADER);
@@ -39,7 +39,7 @@ COPY category FROM 'categories.csv' (HEADER);
 -- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the contents are delimited by a pipe character ('|')
 COPY lineitem FROM 'lineitem.tbl' (DELIMITER '|');
 -- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the delimiter, quote character, and presence of a header are automatically detected
-COPY lineitem FROM 'lineitem.tbl' (AUTO_DETECT TRUE);
+COPY lineitem FROM 'lineitem.tbl' (AUTO_DETECT true);
 -- Read the contents of a comma-separated file 'names.csv' into the 'name' column of the 'category' table. Any other columns of this table are filled with their default value.
 COPY category(name) FROM 'names.csv';
 -- Read the contents of a parquet file 'lineitem.parquet' into the lineitem table
@@ -47,7 +47,7 @@ COPY lineitem FROM 'lineitem.parquet' (FORMAT PARQUET);
 -- Read the contents of a newline-delimited json file 'lineitem.ndjson' into the lineitem table
 COPY lineitem FROM 'lineitem.ndjson' (FORMAT JSON);
 -- Read the contents of a json file 'lineitem.json' into the lineitem table
-COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY TRUE);
+COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY true);
 ```
 
 #### Syntax
@@ -72,7 +72,7 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.parquet' (FORMAT PARQUET);
 -- Copy the result of a query to the newline-delimited JSON file 'query.ndjson'
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.ndjson' (FORMAT JSON);
 -- Copy the result of a query to the JSON file 'query.json'
-COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY TRUE);
+COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY true);
 ```
 
 #### Syntax
@@ -83,7 +83,7 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY TRUE);
 
 Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes. 
 
-Any option that is a boolean can be enabled or disabled in multiple ways. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The `boolean` value can also be omitted, in which case `TRUE` is assumed.
+Any option that is a Boolean can be enabled or disabled in multiple ways. You can write `true`, `ON`, or `1` to enable the option, and `false`, `OFF`, or `0` to disable it. The Boolean value can also be omitted (e.g., by only passing `(HEADER)`), in which case `true` is assumed.
 
 The below options are applicable to all formats written with `COPY`. 
 
