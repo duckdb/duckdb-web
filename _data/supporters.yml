@@ -51,3 +51,7 @@ silver:
   - name: STOIC
     url: https://stoic.com/
     logoimg: stoic.svg
+
+  - name: BoilingData
+    url: https://www.boilingdata.com/
+    logoimg: boilingdata.svg
