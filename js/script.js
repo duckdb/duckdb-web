@@ -320,7 +320,7 @@ $(document).ready(function(){
 	$('a').filter(function() {
 		return this.hostname && this.hostname !== location.hostname;
 	}).addClass("externallink").attr('target','_blank');
-	$('.landingmenu .external a.externallink, .mainlinks a.externallink, .discord a.externallink').removeClass('externallink'); // Remove Class from header elements
+	$('.landingmenu .external a.externallink, .mainlinks a.externallink').removeClass('externallink'); // Remove Class from header elements
 	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
 	$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
 	
@@ -413,18 +413,7 @@ $(document).ready(function(){
 		}
 		return item.value
 	}
-	// CLOSE DISCORD BANNER ON HOME PAGE
-	const showdiscord = getWithExpiry("discordBanner");
-	if(showdiscord == false){
-		$('.discord').css('display', 'none');
-	} else {
-		$('.discord').css('display', 'flex');
-	}
-	$('.discordclose').click(function(){
-		setWithExpiry('discordBanner', false, 172800000); // 900000 = 15 min, 172800000 = 2 days
-		//$('.discord').slideUp();
-		$('.discord').animate({ height: 0 }, 300);
-	});
+
 
 	
 	// SEARCH 

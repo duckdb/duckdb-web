@@ -360,25 +360,6 @@
 		}
 	}
 	
-	.discord{
-		column-gap: 25px;
-		>p{
-			display: none;
-		}
-		>svg{
-			margin-left: -40px;
-		}
-		.button.notonmobile{
-			display: none;
-		}
-		.button.onlymobile{
-			display: block;
-		}
-		.discordclose{
-			right: 25px;
-		}
-	}
-	
 	/** NEWS **/
 	
 	.newswrap{

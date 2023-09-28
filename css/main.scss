@@ -1495,63 +1495,6 @@ body.installation{
 	}
 }
 
-/** DISCORD BANNER ON HOME PAGE **/
-.discord{
-	height: 55px;
-	color: white;
-	background-color: #5865f2;
-	margin-top: 53px;
-	position: relative;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	column-gap: 40px;
-	overflow: hidden;
-	display: none;
-	> svg{
-		width: 35px;
-		height: auto;
-	}
-	.button{
-		border: 1px solid white;
-		padding: 4px 27px 4px 10px;
-		display: block;
-		color: white;
-		text-decoration: none;
-		transition: color .4s, background .4s;
-		span::after{
-			content: "→";
-			font-family: "DuckDB-Symbol";
-			margin-left: 4px;
-			transition: transform .3s, color .3s;
-			position: absolute;
-		}
-		&:hover span::after{
-			transform: translateX(3px);
-			color: #5865f2;
-		}
-		&:hover{
-			color: #5865f2;
-			background-color: white;
-		}
-	}
-	.button.notonmobile{
-		display: block;
-	}
-	.button.onlymobile{
-		display: none;
-	}
-	p{
-		font-size: 120%;
-	}
-	.discordclose{
-		position: absolute;
-		right: 30px;
-		top: 19px;
-		cursor: pointer;
-	}
-}
-
 
 /** GENERATED HTML FIXES FOR DOCUMENTATION **/
 div.bodywrapper{
