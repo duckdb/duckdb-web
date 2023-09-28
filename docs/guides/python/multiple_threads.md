@@ -53,8 +53,8 @@ def read_from_thread(duckdb_con):
     thread_name = str(current_thread().name)
     results = local_con.execute("""
         SELECT 
-            ? as thread_name,
-            count(*) as row_counter,
+            ? AS thread_name,
+            count(*) AS row_counter,
             current_timestamp 
         FROM my_inserts
     """, (thread_name,)).fetchall()

@@ -139,7 +139,7 @@ The `q1` and `q2` aliases are optional.
 The number of columns in each set of columns in the `ON` clause must match the number of columns in the `VALUE` clause.
 ```sql
 UNPIVOT monthly_sales 
-    ON (jan, feb, mar) as q1, (apr, may, jun) as q2 
+    ON (jan, feb, mar) AS q1, (apr, may, jun) AS q2 
     INTO 
         NAME quarter 
         VALUE month_1_sales, month_2_sales, month_3_sales;
@@ -186,12 +186,6 @@ FROM (
         VALUE sales
 ) unpivot_alias;
 ```
-
-<!-- 
-#### Multiple Unpivots 
-(I didn't think this was quite as relevant, so I omitted it for brevity and since I didn't have a good example)
--->
-
 
 ### Internals
 
@@ -328,8 +322,8 @@ FROM monthly_sales
 UNPIVOT (
     (month_1_sales, month_2_sales, month_3_sales)
     FOR quarter IN (
-        (jan, feb, mar) as q1,
-        (apr, may, jun) as q2
+        (jan, feb, mar) AS q1,
+        (apr, may, jun) AS q2
     )
 );
 ```

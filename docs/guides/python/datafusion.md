@@ -71,7 +71,7 @@ Then query the Apache Arrow table using DuckDB, and output the results as anothe
 output = duckdb.query("""
   SELECT 
     fruits,
-    first(sum_A_by_fruits) as sum_A
+    first(sum_A_by_fruits) AS sum_A
   FROM datafusion_to_arrow
   GROUP BY ALL
   ORDER BY ALL
@@ -91,10 +91,10 @@ duckdb_to_arrow = duckdb.query("""
   SELECT
     fruits,
     cars,
-    'fruits' as literal_string_fruits,
-    SUM(B) FILTER (cars = 'beetle') OVER () as B,
-    SUM(A) FILTER (B > 2) OVER (PARTITION BY cars) as sum_A_by_cars,
-    SUM(A) OVER (PARTITION BY fruits) as sum_A_by_fruits
+    'fruits' AS literal_string_fruits,
+    SUM(B) FILTER (cars = 'beetle') OVER () AS B,
+    SUM(A) FILTER (B > 2) OVER (PARTITION BY cars) AS sum_A_by_cars,
+    SUM(A) OVER (PARTITION BY fruits) AS sum_A_by_fruits
   FROM df
   ORDER BY
     fruits,

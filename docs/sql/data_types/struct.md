@@ -130,8 +130,8 @@ When converting multiple expressions into a `STRUCT`, the `row` function name is
 
 ```sql
 SELECT 
-    row(my_column, another_column) as my_struct_column,
-    (my_column, another_column) as identical_struct_column
+    row(my_column, another_column) AS my_struct_column,
+    (my_column, another_column) AS identical_struct_column
 FROM t1;
 ```
 
@@ -148,8 +148,8 @@ The `row` function (or simplified parenthesis syntax) may also be used with arbi
 
 ```sql
 SELECT 
-    row(my_column, 42, my_column + 1) as my_struct_column,
-    (my_column, 42, my_column + 1) as identical_struct_column
+    row(my_column, 42, my_column + 1) AS my_struct_column,
+    (my_column, 42, my_column + 1) AS identical_struct_column
 FROM t1;
 ```
 

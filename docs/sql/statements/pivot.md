@@ -164,7 +164,7 @@ This makes the column naming convention much cleaner when multiple expressions a
 
 In this example, both the `SUM` and `MAX` of the Population column are calculated for each year and are split into separate columns.
 ```sql
-PIVOT Cities ON Year USING SUM(Population) as total, MAX(Population) as max GROUP BY Country;
+PIVOT Cities ON Year USING SUM(Population) AS total, MAX(Population) AS max GROUP BY Country;
 ```
 
 | Country | 2000_total | 2000_max | 2010_total | 2010_max | 2020_total | 2020_max |
@@ -339,8 +339,8 @@ This example is somewhat contrived, but serves as an example of using multiple v
 ```sql
 FROM Cities 
 PIVOT (
-    SUM(Population) as total,
-    COUNT(Population) as count
+    SUM(Population) AS total,
+    COUNT(Population) AS count
     FOR 
         Year IN (2000, 2010, 2020) 
         Country in ('NL', 'US')
