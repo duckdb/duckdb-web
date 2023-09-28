@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./images/logo-dl/DuckDB_Logo.svg" height="120">
+  <img src="./images/logo-dl/DuckDB_Logo-stacked.svg" height="120">
 </div>
 
 # DuckDB Website
