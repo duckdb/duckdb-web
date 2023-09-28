@@ -236,27 +236,27 @@ To work around this, create or edit the `~/.R/Makevars` file:
 ALL_CXXFLAGS =  $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 ```
 
-#### Building the httpfs extension for Python on macOS
+#### Building the httpfs Extension and Python Package on macOS
 
 **Problem:** The build fails on macOS when both the `httpfs` extension and the Python package are included:
 
 ```bash
-GEN=ninja BUILD_PYTHON=1 BUILD_HTTPFS=1 make debug
+GEN=ninja BUILD_PYTHON=1 BUILD_HTTPFS=1 make
 ```
 ```text
 ld: library not found for -lcrypto
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 error: command '/usr/bin/clang++' failed with exit code 1
 ninja: build stopped: subcommand failed.
-make: *** [debug] Error 1
+make: *** [release] Error 1
 ```
 
 **Solution:**
 In general, we recommended using the nightly builds, available under GitHub main (Bleeding Edge) on the [installation page](/docs/installation/).
 If you would like to build DuckDB from source, avoid using the `BUILD_PYTHON=1` flag unless you are actively developing the Python library.
-Instead, first build the `httpfs` extension, then install the Python package using the `setup.py` script:
+Instead, first build the `httpfs` extension, then build and install the Python package separately using the `setup.py` script:
 
 ```bash
-GEN=ninja BUILD_HTTPFS=1 make debug
+GEN=ninja BUILD_HTTPFS=1 make
 python tools/pythonpkg/setup.py install --user
 ```
