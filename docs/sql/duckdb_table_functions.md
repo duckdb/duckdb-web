@@ -87,7 +87,7 @@ Apart from the database associated at startup, the list also includes databases 
 | `database_name` | The name of the database, or the alias if the database was attached using an ALIAS-clause. | `VARCHAR` |
 | `database_oid` | The internal identifier of the database. | `VARCHAR` |
 | `path` | The file path associated with the database. | `VARCHAR` |
-| `internal` | True indicates a system or built-in database. False indicates a user-defined database. | BOOLEAN
+| `internal` | `true` indicates a system or built-in database. False indicates a user-defined database. | BOOLEAN
 | `type` | The type indicates the type of RDBMS implemented by the attached database. For DuckDB databases, that value is `duckdb`. 
 
 ## `duckdb_dependencies`

@@ -57,9 +57,9 @@ The table below shows the available mathematical functions.
 | `gcd(x, y)` | computes the greatest common divisor of x and y | `gcd(42, 57)` | 3 |
 | `greatest_common_divisor(x, y)` | computes the greatest common divisor of x and y | `greatest_common_divisor(42, 57)` | 3 |
 | `greatest(x1, x2, ...)` | selects the largest value | `greatest(3, 2, 4, 4)` | 4 |
-| `isfinite(x)` | Returns true if the floating point value is finite, false otherwise | `isfinite(5.5)` | true |
-| `isinf(x)` | Returns true if the floating point value is infinite, false otherwise | `isinf('Infinity'::float)` | true |
-| `isnan(x)` | Returns true if the floating point value is not a number, false otherwise | `isnan('NaN'::float)` | true |
+| `isfinite(x)` | Returns true if the floating point value is finite, false otherwise | `isfinite(5.5)` | `true` |
+| `isinf(x)` | Returns true if the floating point value is infinite, false otherwise | `isinf('Infinity'::float)` | `true` |
+| `isnan(x)` | Returns true if the floating point value is not a number, false otherwise | `isnan('NaN'::float)` | `true` |
 | `lcm(x, y)` | computes the least common multiple of x and y | `lcm(42, 57)` | 798 |
 | `least_common_multiple(x, y)` | computes the least common multiple of x and y | `least_common_multiple(42, 57)` | 798 |
 | `least(x1, x2, ...)` | selects the smallest value | `least(3, 2, 4, 4)` | 2 |
@@ -78,7 +78,7 @@ The table below shows the available mathematical functions.
 | `setseed(x)` | sets the seed to be used for the random function | `setseed(0.42)` | |
 | `sin(x)` | computes the sin of x | `sin(90)` | 0.8939966636005579 |
 | `sign(x)` | returns the sign of x as -1, 0 or 1 | `sign(-349)` | -1 |
-| `signbit(x)` | returns whether the signbit is set or not | `signbit(-0.0)` | true |
+| `signbit(x)` | returns whether the signbit is set or not | `signbit(-0.0)` | `true` |
 | `sqrt(x)` | returns the square root of the number | `sqrt(9)` | 3 |
 | `xor(x)` | bitwise XOR | `xor(17, 5)` | 20 |
 | `tan(x)` | computes the tangent of x | `tan(90)` | -1.995200412208242 |

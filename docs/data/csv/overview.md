@@ -41,32 +41,32 @@ Below are parameters that can be passed in to the CSV reader.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
-| `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. | bool | false |
-| `auto_detect` | Enables [auto detection of parameters](auto_detection) | bool | true |
-| `buffer_size` | The buffer size used by the CSV reader, specified in bytes. By default, it is set to 32MB or the size of the CSV file (if smaller). The buffer size must be at least as large as the longest line in the CSV file. Note: this is an advanced option that has a significant impact on performance and memory usage. | bigint | min(32000000, CSV file size) |
-| `columns` | A struct that specifies the column names and column types contained within the CSV file (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). | `struct` | `(empty)` |
-| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
-| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
-| `decimal_separator` | The decimal separator of numbers | varchar | `.` |
-| `delim` or `sep` | Specifies the string that separates columns within each row (line) of the file. | varchar | `,` |
-| `escape` | Specifies the string that should appear before a data character sequence that matches the `quote` value. | varchar | `"` |
-| `filename` | Whether or not an extra `filename` column should be included in the result. | bool | false |
-| `force_not_null` | Do not match the specified columns' values against the NULL string. In the default case where the NULL string is empty, this means that empty values will be read as zero-length strings rather than NULLs. | varchar[] | [] |
-| `header` | Specifies that the file contains a header line with the names of each column in the file. | bool | false |
-| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | bool | false |
-| `ignore_errors` | Option to ignore any parsing errors encountered - and instead ignore rows with errors. | bool | false |
-| `max_line_size` | The maximum line size in bytes | bigint | 2097152 |
-| `names` | The column names as a list. [Example here](tips#provide-names-if-the-file-does-not-contain-a-header). | varchar[] | `(empty)` |
-| `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | varchar | `(empty)` |
-| `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | bool | false |
-| `nullstr` | Specifies the string that represents a NULL value. | varchar | `(empty)` |
-| `parallel` | Whether or not the parallel CSV reader is used. | bool | true |
-| `quote` | Specifies the quoting string to be used when a data value is quoted. | varchar | `"` |
-| `sample_size` | The number of sample rows for [auto detection of parameters](auto_detection). | bigint | 20480 |
-| `skip` | The number of lines at the top of the file to skip. | bigint | 0 |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
-| `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here](tips#override-the-types-of-specific-columns). | varchar[] or struct | `(empty)` |
-| `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | bool | false |
+| `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type `VARCHAR`. | `BOOL` | `false` |
+| `auto_detect` | Enables [auto detection of parameters](auto_detection). | `BOOL` |  `true` |
+| `buffer_size` | The buffer size used by the CSV reader, specified in bytes. By default, it is set to 32MB or the size of the CSV file (if smaller). The buffer size must be at least as large as the longest line in the CSV file. Note: this is an advanced option that has a significant impact on performance and memory usage. | `BIGINT` | min(32000000, CSV file size) |
+| `columns` | A struct that specifies the column names and column types contained within the CSV file (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). | `STRUCT` | (empty) |
+| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
+| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat). | `VARCHAR` | (empty) |
+| `decimal_separator` | The decimal separator of numbers. | `VARCHAR` | `.` |
+| `delim` or `sep` | Specifies the string that separates columns within each row (line) of the file. | `VARCHAR` | `,` |
+| `escape` | Specifies the string that should appear before a data character sequence that matches the `quote` value. | `VARCHAR` | `"` |
+| `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
+| `force_not_null` | Do not match the specified columns' values against the NULL string. In the default case where the `NULL` string is empty, this means that empty values will be read as zero-length strings rather than `NULL`s. | `VARCHAR[]` | `[]` |
+| `header` | Specifies that the file contains a header line with the names of each column in the file. | `BOOL` | `false` |
+| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
+| `ignore_errors` | Option to ignore any parsing errors encountered - and instead ignore rows with errors. | `BOOL` | `false` |
+| `max_line_size` | The maximum line size in bytes. | `BIGINT` | 2097152 |
+| `names` | The column names as a list, see [example](tips#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
+| `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | `VARCHAR` | (empty) |
+| `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
+| `nullstr` | Specifies the string that represents a NULL value. | `VARCHAR` | (empty) |
+| `parallel` | Whether or not the parallel CSV reader is used. | `BOOL` |  `true` |
+| `quote` | Specifies the quoting string to be used when a data value is quoted. | `VARCHAR` | `"` |
+| `sample_size` | The number of sample rows for [auto detection of parameters](auto_detection). | `BIGINT` | 20480 |
+| `skip` | The number of lines at the top of the file to skip. | `BIGINT` | 0 |
+| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
+| `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here](tips#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
+| `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | `BOOL` | `false` |
 
 ## read_csv_auto Function
 
