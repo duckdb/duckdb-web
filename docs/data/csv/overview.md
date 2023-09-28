@@ -37,14 +37,14 @@ The DuckDB CSV reader can automatically infer which configuration flags to use b
 
 ## Parameters
 
-Below are parameters that can be passed in to the CSV reader. 
+Below are parameters that can be passed to the CSV reader. These parameters are accepted by both the [`COPY` statement](../../sql/statements/copy#copy-to) and the CSV reader functions ([`read_csv`](#read_csv-function) and [`read_csv_auto`](#read_csv_auto-function)).
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type `VARCHAR`. | `BOOL` | `false` |
 | `auto_detect` | Enables [auto detection of parameters](auto_detection). | `BOOL` |  `true` |
 | `buffer_size` | The buffer size used by the CSV reader, specified in bytes. By default, it is set to 32MB or the size of the CSV file (if smaller). The buffer size must be at least as large as the longest line in the CSV file. Note: this is an advanced option that has a significant impact on performance and memory usage. | `BIGINT` | min(32000000, CSV file size) |
-| `columns` | A struct that specifies the column names and column types contained within the CSV file (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). | `STRUCT` | (empty) |
+| `columns` | A struct that specifies the column names and column types contained within the CSV file (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). Using this option implies that auto detection is not used. | `STRUCT` | (empty) |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat). | `VARCHAR` | (empty) |
 | `decimal_separator` | The decimal separator of numbers. | `VARCHAR` | `.` |
@@ -109,6 +109,10 @@ SELECT * FROM read_csv_auto('flights.csv', HEADER=TRUE);
 ```
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
+
+## read_csv Function
+
+The `read_csv` function accepts the same parameters that `read_csv_auto` does but does not assume `AUTO_DETECT=TRUE`.
 
 ## Writing Using the COPY Statement
 
