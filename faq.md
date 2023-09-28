@@ -12,7 +12,7 @@ DuckDB's initial development took place at the [Database Architectures Group](ht
 Ducks are amazing animals. They can fly, walk and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck's song will bring people back from the dead and [inspires database research](/images/wilbur.jpg). They are thus the perfect mascot for a versatile and resilient data management system. Also the logo designs itself.
 
 ### Where do I find the DuckDB Logo?
-You can download the DuckDB Logo here: <br/> • Web: [png](/images/logo-dl/DuckDB_Logo.png) / [jpg](/images/logo-dl/DuckDB_Logo.jpg) <br/>  • Print: [svg](/images/logo-dl/DuckDB_Logo.svg) / [pdf](/images/logo-dl/DuckDB_Logo.pdf) <br/><br/>The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
+You can download the DuckDB Logo here: <br/> • Stacked logo: [png](/images/logo-dl/DuckDB_Logo-stacked.png) / [svg](/images/logo-dl/DuckDB_Logo-stacked.svg) <br/>  • Horizontal logo: [svg](/images/logo-dl/DuckDB-Logo-horizontal.svg) / [png](/images/logo-dl/DuckDB-Logo-horizontal.png) <br/><br/>The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
 
 ### Where do I find DuckDB trademark use guidelines?
 You can find the guidelines for DuckDB™ [here](/trademark_guidelines).
