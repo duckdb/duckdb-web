@@ -96,10 +96,10 @@ For example:
 -- regexp_matches is a function that takes a VARCHAR, hence current_mood is cast to VARCHAR
 SELECT regexp_matches(current_mood, '.*a.*') FROM person;
 ----
-TRUE
-FALSE
-TRUE
-FALSE
+true
+
+true
+false
 
 
 CREATE TYPE new_mood AS ENUM ('happy', 'anxious');
