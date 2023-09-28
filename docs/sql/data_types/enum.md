@@ -83,7 +83,7 @@ CREATE TYPE mood AS ENUM (SELECT mood FROM 'path/to/file.csv');
 
 -- Then you can create a table with the ENUM type and import using any data import statement
 CREATE TABLE person(name text, current_mood mood);
-COPY person FROM 'path/to/file.csv' (AUTO_DETECT TRUE);
+COPY person FROM 'path/to/file.csv' (AUTO_DETECT true);
 
 ```
 
@@ -96,10 +96,10 @@ For example:
 -- regexp_matches is a function that takes a VARCHAR, hence current_mood is cast to VARCHAR
 SELECT regexp_matches(current_mood, '.*a.*') FROM person;
 ----
-TRUE
-FALSE
-TRUE
-FALSE
+true
+
+true
+false
 
 
 CREATE TYPE new_mood AS ENUM ('happy', 'anxious');

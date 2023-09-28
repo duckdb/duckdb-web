@@ -11,13 +11,13 @@ redirect_from:
 -- read a CSV file from disk, auto-infer options
 SELECT * FROM 'flights.csv';
 -- read_csv with custom options
-SELECT * FROM read_csv('flights.csv', delim='|', header=True, columns={'FlightDate': 'DATE', 'UniqueCarrier': 'VARCHAR', 'OriginCityName': 'VARCHAR', 'DestCityName': 'VARCHAR'});
+SELECT * FROM read_csv('flights.csv', delim='|', header=true, columns={'FlightDate': 'DATE', 'UniqueCarrier': 'VARCHAR', 'OriginCityName': 'VARCHAR', 'DestCityName': 'VARCHAR'});
 -- read a CSV from stdin, auto-infer options
 cat data/csv/issue2471.csv | duckdb -c "SELECT * FROM read_csv_auto('/dev/stdin')"
 
 -- read a CSV file into a table
 CREATE TABLE ontime(FlightDate DATE, UniqueCarrier VARCHAR, OriginCityName VARCHAR, DestCityName VARCHAR);
-COPY ontime FROM 'flights.csv' (AUTO_DETECT TRUE);
+COPY ontime FROM 'flights.csv' (AUTO_DETECT true);
 -- alternatively, create a table without specifying the schema manually
 CREATE TABLE ontime AS SELECT * FROM 'flights.csv';
 -- we can use the FROM-first syntax to omit 'SELECT *'
@@ -105,14 +105,14 @@ SELECT * FROM read_csv_auto('flights.csv', SAMPLE_SIZE=20000);
 If we set `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, or `HEADER` explicitly, we can bypass the automatic detection of this particular parameter:
 
 ```sql
-SELECT * FROM read_csv_auto('flights.csv', HEADER=TRUE);
+SELECT * FROM read_csv_auto('flights.csv', HEADER=true);
 ```
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
 
 ## read_csv Function
 
-The `read_csv` function accepts the same parameters that `read_csv_auto` does but does not assume `AUTO_DETECT=TRUE`.
+The `read_csv` function accepts the same parameters that `read_csv_auto` does but does not assume `AUTO_DETECT=true`.
 
 ## Writing Using the COPY Statement
 
@@ -130,11 +130,11 @@ SELECT * FROM ontime;
 |1988-01-02|AA           |New York, NY     |Los Angeles, CA|
 |1988-01-03|AA           |New York, NY     |Los Angeles, CA|
 
-If we want to use the automatic format detection, we can set `AUTO_DETECT` to `TRUE` and omit the otherwise required configuration options.
+If we want to use the automatic format detection, we can set `AUTO_DETECT` to `true` and omit the otherwise required configuration options.
 
 ```sql
 CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
-COPY ontime FROM 'flights.csv' (AUTO_DETECT TRUE);
+COPY ontime FROM 'flights.csv' (AUTO_DETECT true);
 SELECT * FROM ontime;
 ```
 

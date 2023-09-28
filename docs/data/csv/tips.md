@@ -10,7 +10,7 @@ Below is a collection of tips to help when attempting to process especially gnar
 If a file contains only string columns the `header` auto-detection might fail. Provide the `header` option to override this behavior.
 
 ```sql
-SELECT * FROM read_csv_auto('flights.csv', header=True);
+SELECT * FROM read_csv_auto('flights.csv', header=true);
 ``` 
 
 #### Provide Names if the File Does Not Contain a Header
@@ -42,5 +42,5 @@ COPY tbl FROM 'test.csv' (AUTO_DETECT 1);
 The `union_by_name` option can be used to unify the schema of files that have different or missing columns. For files that do not have certain columns, `NULL` values are filled in.  
 
 ```sql
-SELECT * FROM read_csv_auto('flights*.csv', union_by_name=True);
+SELECT * FROM read_csv_auto('flights*.csv', union_by_name=true);
 ```

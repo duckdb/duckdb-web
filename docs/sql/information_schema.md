@@ -65,4 +65,4 @@ Several functions are also provided to see details about the schemas that are co
 | Function | Description | Example | Result |
 |:--|:---|:--|:--|
 | `current_schema()` | Return the name of the currently active schema. Default is main. | `current_schema()` | `'main'` |
-| `current_schemas(boolean)` | Return list of schemas. Pass a parameter of `True` to include implicit schemas. | `current_schemas(true)` | `['temp', 'main', 'pg_catalog']` |
+| `current_schemas(boolean)` | Return list of schemas. Pass a parameter of `true` to include implicit schemas. | `current_schemas(true)` | `['temp', 'main', 'pg_catalog']` |

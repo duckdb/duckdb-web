@@ -56,7 +56,7 @@ SELECT ARRAY_AGG('`' || name || '`')::VARCHAR AS name, description, input_type,
 	THEN 'System (locale) timezone'
 	WHEN name='Calendar'
 	THEN 'System (locale) calendar'
-	WHEN lower(value) IN ('null', 'nulls_last', 'asc', 'desc', 'true', 'false')
+	WHEN lower(value) IN ('null', 'nulls_last', 'asc', 'desc')
 	THEN '`' || upper(value) || '`'
     ELSE '`' || value || '`' END) AS default_value
 FROM duckdb_settings()

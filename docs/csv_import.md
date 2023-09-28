@@ -53,7 +53,7 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ','
 | `table_name` | The name (optionally schema-qualified) of an existing table. |
 | `column_name` | An optional list of columns to be copied. If no column list is specified, all columns of the table will be copied. |
 | `filename` | The path and name of the input or output file. |
-| `boolean` | Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The `boolean` value can also be omitted, in which case `TRUE` is assumed. |
+| `boolean` | Specifies whether the selected option should be turned on or off. You can write `true`, `ON`, or `1` to enable the option, and `false`, `OFF`, or `0` to disable it. The `boolean` value can also be omitted, in which case `true` is assumed. |
 | `FORMAT` | If this option is used, its value must be `CSV`. With any other format an error will be thrown. |
 | `DELIMITER` | Specifies the string that separates columns within each row (line) of the file. The default value is a comma (`,`). |
 | `NULL` | Specifies the string that represents a NULL value. The default is an empty string. Please note that in `COPY ... FROM` both an unquoted empty string and a quoted empty string represent a NULL value. If any other NULL string is specified, again both its quoted and its unquoted appearance represent a NULL value. `COPY ... TO` does not quote NULL values on output, even if `FORCE_QUOTE` is true. |
