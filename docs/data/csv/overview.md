@@ -42,7 +42,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type `VARCHAR`. | `BOOL` | `false` |
-| `auto_detect` | Enables [auto detection of parameters](auto_detection). | `BOOL` |  `true` |
+| `auto_detect` | Enables [auto detection of parameters](auto_detection). | `BOOL` | `true` |
 | `buffer_size` | The buffer size used by the CSV reader, specified in bytes. By default, it is set to 32MB or the size of the CSV file (if smaller). The buffer size must be at least as large as the longest line in the CSV file. Note: this is an advanced option that has a significant impact on performance and memory usage. | `BIGINT` | min(32000000, CSV file size) |
 | `columns` | A struct that specifies the column names and column types contained within the CSV file (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). Using this option implies that auto detection is not used. | `STRUCT` | (empty) |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
@@ -60,7 +60,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | `VARCHAR` | (empty) |
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
 | `nullstr` | Specifies the string that represents a NULL value. | `VARCHAR` | (empty) |
-| `parallel` | Whether or not the parallel CSV reader is used. | `BOOL` |  `true` |
+| `parallel` | Whether or not the parallel CSV reader is used. | `BOOL` | `true` |
 | `quote` | Specifies the quoting string to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `sample_size` | The number of sample rows for [auto detection of parameters](auto_detection). | `BIGINT` | 20480 |
 | `skip` | The number of lines at the top of the file to skip. | `BIGINT` | 0 |
