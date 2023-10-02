@@ -21,7 +21,7 @@ This section describes functions and operators for examining and manipulating st
 | `concat_ws(`*`separator`*`, `*`string`*`, ...)` | Concatenate strings together separated by the specified separator | `concat_ws(', ', 'Banana', 'Apple', 'Melon')` | `Banana, Apple, Melon` | |
 | `contains(`*`string`*`, `*`search_string`*`)` | Return true if *search_string* is found within *string* | `contains('abc', 'a')` | `true` | |
 | `ends_with(`*`string`*`, `*`search_string`*`)`| Return true if *string* ends with *search_string* | `ends_with('abc', 'c')` | `true` | `suffix` |
-| `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using fmt syntax | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` | |
+| `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using the [fmt syntax](https://github.com/fmtlib/fmt) | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` | |
 | `from_base64(`*`string`*`)`| Convert a base64 encoded string to a character string. | `from_base64('QQ==')` | `'A'` | |
 | `hash(`*`value`*`)` | Returns an integer with the hash of the *value* | `hash('🦆')` | `2595805878642663834` | |
 | `instr(`*`string`*`, `*`search_string`*`)`| Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `instr('test test', 'es')` | 2 | |
