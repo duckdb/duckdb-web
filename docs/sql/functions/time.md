@@ -27,7 +27,7 @@ The table below shows the available scalar functions for `TIME` types.
 | `datepart(`*`part`*`, `*`time`*`)` | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `datepart('minute', TIME '14:21:13')` | 21 |
 | `date_sub(`*`part`*`, `*`starttime`*`, `*`endtime`*`)` | The number of complete [partitions](../../sql/functions/datepart) between the times | `date_sub('hour', TIME '01:02:03', TIME '06:01:03')` | 4 |
 | `datesub(`*`part`*`, `*`starttime`*`, `*`endtime`*`)` | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the times | `datesub('hour', TIME '01:02:03', TIME '06:01:03')` | 4 |
-| `extract(`*`part`* `from` *`time`*`)` | Get subfield from a time | `extract('hour' FROM TIME '14:21:13')` | 14 |
+| `extract(`*`part`* `FROM` *`time`*`)` | Get subfield from a time | `extract('hour' FROM TIME '14:21:13')` | 14 |
 | `make_time(`*`bigint`*`, `*`bigint`*`, `*`double`*`)` | The time for the given parts | `make_time(13, 34, 27.123456)` | `13:34:27.123456` |
 
 The only [date parts](../../sql/functions/datepart) that are defined for times are `epoch`, `hours`, `minutes`, `seconds`, `milliseconds` and `microseconds`.
