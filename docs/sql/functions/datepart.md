@@ -57,7 +57,7 @@ There are dedicated extraction functions to get certain subfields:
 | `day(`*`date`*`)` | Day | `day(date '1992-02-15')` | `15` |
 | `dayofmonth(`*`date`*`)` | Day (synonym) | `dayofmonth(date '1992-02-15')` | `15` |
 | `dayofweek(`*`date`*`)` | Numeric weekday (Sunday = 0, Saturday = 6) | `dayofweek(date '1992-02-15')` | `6` |
-| `dayofyear(`*`date`*`)` | Numeric ISO weekday (Monday = 1, Sunday = 7) | `isodow(date '1992-02-15')` | `46` |
+| `dayofyear(`*`date`*`)` | Day of the year (starts from 1, i.e., January 1 = 1) | `dayofyear(date '1992-02-15')` | `46` |
 | `decade(`*`date`*`)` | Decade (year / 10) | `decade(date '1992-02-15')` | `199` |
 | `epoch(`*`date`*`)` | Seconds since 1970-01-01 | `epoch(date '1992-02-15')` | `698112000` |
 | `era(`*`date`*`)` | Calendar era | `era(date '0044-03-15 (BC)')` | `0` |
