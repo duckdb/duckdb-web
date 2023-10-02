@@ -46,3 +46,5 @@ In [2]: print(duckdb.sql("SELECT 42 AS x").explain())
 │         DUMMY_SCAN        │
 └───────────────────────────┘
 ```
+
+Please also check out the [Jupyter guide](../../guides/python/jupyter) for tips on using Jupyter with JupySQL.
