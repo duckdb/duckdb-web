@@ -19,6 +19,7 @@ LOAD iceberg;
 To test the examples, download the [`iceberg_data.zip`](/data/iceberg_data.zip) file and unzip it.
 
 ### Querying individual tables
+
 ```sql
 SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
 ```
@@ -29,11 +30,12 @@ SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_P
 > The `ALLOW_MOVED_PATHS` option ensures that some path resolution is performed, which allows scanning Iceberg tables that are moved.
 
 ### Access iceberg metadata
+
 ```sql
 SELECT * FROM iceberg_metadata('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
 ```
 
-```
+```text
 │                     manifest_path                      │ manifest_sequence_number │ manifest_content │ status  │ content  │                                     file_path                                      │ file_format │ record_count │
 │                        varchar                         │          int64           │     varchar      │ varchar │ varchar  │                                      varchar                                       │   varchar   │    int64     │
 ├────────────────────────────────────────────────────────┼──────────────────────────┼──────────────────┼─────────┼──────────┼────────────────────────────────────────────────────────────────────────────────────┼─────────────┼──────────────┤
