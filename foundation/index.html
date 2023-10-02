@@ -69,7 +69,7 @@ add_css: foundation.css
 	<h2>Supporters</h2>
 	{% if site.data.supporters.gold %}
 	<div class="supporterboard gold">
-		Gold membership
+		Gold
 		<ul>
 			{% for supporter in site.data.supporters.gold %}
 			<li><a href="{{ supporter.url }}"><img src="{{ '/images/foundation/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></a></li>
@@ -79,7 +79,7 @@ add_css: foundation.css
 	{% endif %}
 	{% if site.data.supporters.silver %}
 	<div class="supporterboard silver">
-		Silver membership
+		Silver
 		<ul>
 			{% for supporter in site.data.supporters.silver %}
 			<li><a href="{{ supporter.url }}"><img src="{{ '/images/foundation/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></a></li>
