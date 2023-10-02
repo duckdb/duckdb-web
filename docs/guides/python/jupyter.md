@@ -8,9 +8,7 @@ However, additional libraries can be used to simplify SQL query development.
 This guide will describe how to utilize those additional libraries.
 See other guides in the Python section for how to use DuckDB and Python together.  
 
-In this example, we used the [jupysql](https://github.com/ploomber/jupysql) package which is a direct fork of [ipython-sql](https://github.com/catherinedevlin/ipython-sql).
-The main difference is that `Jupysql` is well maintained, and has both newer features and bug fixes.
-
+In this example, we use the [JupySQL](https://github.com/ploomber/jupysql) package.
 
 This example workflow is also available as a [Google Colab notebook](https://colab.research.google.com/drive/1eOA2FYHqEfZWLYssbUxdIpSL3PFxWVjk?usp=sharing).
 
@@ -19,7 +17,7 @@ This example workflow is also available as a [Google Colab notebook](https://col
 Four additional libraries improve the DuckDB experience in Jupyter notebooks. 
 1. [jupysql](https://github.com/ploomber/jupysql)
     * Convert a Jupyter code cell into a SQL cell
-2. [duckdb_engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
+2. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
     * Used by SQLAlchemy to connect to DuckDB
 3. [Pandas](https://github.com/pandas-dev/pandas)
     * Clean table visualizations and compatibility with other analysis
@@ -37,7 +35,7 @@ pip install notebook
 # Install supporting libraries
 pip install jupysql
 pip install duckdb-engine
-pip install pandas       # conda install pandas (in case pip fails)
+pip install pandas
 pip install matplotlib
 ```
 
