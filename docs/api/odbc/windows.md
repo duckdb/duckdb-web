@@ -55,17 +55,17 @@ It also can be launched thought the Windows start:
 
 ### Default DuckDB DSN
 
-In the Windows ODBC Data Source Administrator tool, at ***System DSN*** tab is placed the default installed DSN for ***DuckDB***:
+The newly installed DSN is visible on the ***System DSN*** in the Windows ODBC Data Source Administrator tool:
 
 ![Windows ODBC Config Tool](/images/blog/odbc/odbcad32_exe.png)
 
 ### Changing DuckDB DSN
 
-Selecting the default DSN (i.e., `DuckDB`) or add a new configuration, the following setup window will display:
+When selecting the default DSN (i.e., `DuckDB`) or adding a new configuration, the following setup window will display:
 
 ![DuckDB Windows DSN Setup](/images/blog/odbc/duckdb_DSN_setup.png)
 
-For now, it is possible to set the DSN and the database file path associated with that DSN.
+This window allows you to set the DSN and the database file path associated with that DSN.
 
 
 ## More Detailed Windows Setup
