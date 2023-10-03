@@ -5,11 +5,8 @@ from pathlib import Path
 import re
 
 if len(sys.argv) < 3:
-    print(
-        "Expected usage: python3 scripts/redirect.py from_directory to_directory"
-    )
+    print("Expected usage: python3 scripts/redirect.py from_directory to_directory")
     exit(1)
-
 
 
 from_directory = sys.argv[1]
