@@ -19,6 +19,8 @@ The executable can be configured in many ways when started. Some common configur
 * `-json` to set the output mode to JSON
 * `-readonly` to open the database in read-only mode
 
+> DuckDB has two options for concurrent access: Either one process runs which can both read and write to the database, or multiple processes can read from the database but no processes can write (`-readonly`). See [concurrency in DuckDB](/faq#how-does-duckdb-handle-concurrency) for more details.
+
 To see additional command line options to use when starting the CLI, use the command `duckdb -help`.
 
 > DuckDB has a [tldr page](https://github.com/tldr-pages/tldr/blob/main/pages/common/duckdb.md). If you have [tldr](https://github.com/tldr-pages/tldr) installed, you can display it by running `tldr duckdb`.
