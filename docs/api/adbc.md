@@ -9,7 +9,7 @@ DuckDB's ADBC driver currently supports version 0.5.1 of ADBC.
 
 Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/0.5.1/cpp/index.html) for a more extensive discussion on ADBC and a detailed API explanation.
 
-**Note**: ADBC is not yet supported on Windows, but it is supported on macOS and Linux.
+> ADBC is not yet supported on Windows, but it is supported on macOS and Linux.
 
 ## Implemented Functionality
 
