@@ -9,6 +9,8 @@ DuckDB's ADBC driver currently supports version 0.5.1 of ADBC.
 
 Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/0.5.1/cpp/index.html) for a more extensive discussion on ADBC and a detailed API explanation.
 
+**Note**: ADBC is not yet supported on Windows, but it is supported on macOS and Linux.
+
 ## Implemented Functionality
 
 The DuckDB-ADBC driver implements the full ADBC specification, with the exception of the `ConnectionReadPartition` and `StatementExecutePartitions` functions. Both of these functions exist to support systems that internally partition the query results, which does not apply to DuckDB.
@@ -96,7 +98,7 @@ AdbcStatement adbc_statement;
 ArrowArrayStream arrow_stream;
 ```
 
-We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` options as mentioned above. Then we set the `path` option and initialize the database. With the example below, the string `"path/to/libduckdb.dylib"` should be the path to the dynamic library for DuckDB. This will be `.dylib` on macOS, `.so` on Linux, and `.dll` on Windows.
+We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` options as mentioned above. Then we set the `path` option and initialize the database. With the example below, the string `"path/to/libduckdb.dylib"` should be the path to the dynamic library for DuckDB. This will be `.dylib` on macOS, and `.so` on Linux.
 
 ```cpp
 AdbcDatabaseNew(&adbc_database, &adbc_error);
