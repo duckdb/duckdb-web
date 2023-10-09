@@ -94,10 +94,10 @@ ul {
     margin-bottom: 15px;
 }
 ul {
-    list-style-position: inside;
+    list-style-position: outside;
     list-style-type: '\2022 \00a0\00a0';
     padding: 0;
-    padding-left: 0px;
+    padding-left: 20px;
     ul{
 	    padding-left: 20px;
     }
@@ -247,7 +247,7 @@ div.flex{
 		display: -ms-flexbox;
 		display: flex;
 		padding-top: 60px;
-		h1{
+		h1,h2{
 			margin-left: 20px;
 			margin-top: 30px;
 			font-size: 140%;

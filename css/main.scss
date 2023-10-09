@@ -533,19 +533,19 @@ h6{
 h1 code{
 	background-color: transparent!important;
 	padding: 0!important;
-	font-size: 145%;
+	font-size: 28px;
 	font-family: $fontMono!important;
 }
 h2 code{
 	background-color: transparent!important;
 	padding: 0!important;
-	font-size: 140%;
+	font-size: 25px;
 	font-family: $fontMono!important;
 }
 h3 code{
 	background-color: transparent!important;
 	padding: 0!important;
-	font-size: 120%;
+	font-size: 20px;
 	font-family: $fontMono!important;
 }
 
@@ -966,7 +966,7 @@ body.landing{
 }
 
 body.landing label.onlymobile,
-body.installation .evironment label.onlymobile{
+body.installation div.environment.select label.onlymobile{
 	position: relative;
 	&::after{
 		content: "\E010";
@@ -1010,7 +1010,7 @@ body.installation{
 		}
 	}
 }
-body.installation .evironment label.onlymobile{
+body.installation .environment.select label.onlymobile{
 	&::after{
 		color: black;
 	}

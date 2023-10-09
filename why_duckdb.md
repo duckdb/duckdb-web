@@ -7,7 +7,7 @@ There are many database management systems (DBMS) out there. But there is [no on
 
 <div class="headline" id="duckdbisfast">
 	<div class="icon"><span class="duckdbsymbol">&#xE300;</span></div>
-	<h1>Fast Analytical Queries</h1>
+	<h2 id="fast-analytical-queries">Fast Analytical Queries</h2>
 </div>
 DuckDB is designed to support **analytical query workloads**, also known as [Online analytical processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing). These workloads are characterized by complex, relatively long-running queries that process significant portions of the stored dataset, for example aggregations over entire tables or joins between several large tables. Changes to the data are expected to be rather large-scale as well, with several rows being appended, or large portions of tables being changed or added at the same time.
 
@@ -15,7 +15,7 @@ To efficiently support this workload, it is critical to reduce the amount of CPU
 
 <div class="headline" id="duckdbissimple">
 	<div class="icon"><span class="duckdbsymbol">&#xE100;</span></div>
-	<h1>Simple and Portable Deployment</h1>
+	<h2 id="simple-and-portable-deployment">Simple and Portable Deployment</h2>
 </div>
 SQLite is the [world's most widely deployed DBMS](https://www.sqlite.org/mostdeployed.html). Simplicity in installation, and embedded in-process operation are central to its success. DuckDB adopts these ideas of simplicity and embedded operation.
 
@@ -25,7 +25,7 @@ For DuckDB, there is no DBMS server software to install, update and maintain. Du
 
 <div class="headline" id="duckdbisfeaturerich">
 	<div class="icon"><span class="duckdbsymbol">&#xE200;</span></div>
-	<h1>Feature-Rich</h1>
+	<h2 id="feature-rich">Feature-Rich</h2>
 </div>
 DuckDB provides serious data management features. There is extensive support for **complex queries** in SQL with a large function library, window functions etc. DuckDB provides **transactional guarantees** (ACID properties) through our custom, bulk-optimized [Multi-Version Concurrency Control (MVCC)](https://en.wikipedia.org/wiki/Multiversion_concurrency_control). Data can be stored in persistent, **single-file databases**. DuckDB supports secondary indexes to speed up queries trying to find a single table entry.
 
@@ -33,7 +33,7 @@ DuckDB is deeply integrated into Python and R for efficient interactive data ana
 
 <div class="headline" id="duckdbtesting">
 	<div class="icon"><span class="duckdbsymbol">&#xE250;</span></div>
-	<h1>Thorough Testing</h1>
+	<h2 id="duckdb-testing">Thorough Testing</h2>
 </div>
 While DuckDB is created by a research group, it is not intended to be a research prototype. DuckDB is intended to be a stable and mature database system.
 
@@ -44,7 +44,7 @@ In addition to this test suite, we run various tests that stress DuckDB under he
 
 <div class="headline" id="duckdbisfree">
 	<div class="icon"><span class="duckdbsymbol">&#xE400;</span></div>
-	<h1>Free &amp; Open Source License</h1>
+	<h2 id="free-open-source">Free &amp; Open Source License</h2>
 </div>
 DuckDB's development started while the main developers were public servants in The Netherlands. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in The Netherlands or elsewhere. This is why DuckDB is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License). DuckDB is Open Source, the entire source code is freely available on GitHub. We invite contributions from anyone provided they adhere to our [Code of Conduct](../code_of_conduct).
 
