@@ -1,13 +1,6 @@
 {
 	"data": [
 		{
-			"title": "",
-			"text": "-",
-			"category": "Nested Functions",
-			"url": "/docs/sql/functions/nested",
-			"blurb": "-"
-		},
-		{
 			"title": "!",
 			"text": "! - factorial of x. computes the product of the current integer and all integers below it",
 			"category": "Numeric Functions",
