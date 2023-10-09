@@ -34,16 +34,16 @@ $(document).ready(function(){
 		var result = $('.install .hidden .'+environment).html();
 		$('.install .result').html(result);		
 	}
-	$('.environment ul li').click(function(){
+	$('#quickinstall .environment ul li').click(function(){
 		var environment = $(this).attr("data-id");
-		$('.environment ul li.active').removeClass('active');
+		$('#quickinstall .environment ul li.active').removeClass('active');
 		$(this).addClass('active');
 		landingpageevaluation(environment);
 	});
 	$('body.landing .environmentselect').on('change', function() {
 		landingpageevaluation(this.value);
 	});
-	var environment = $('.environment ul li.active').attr("data-id");
+	var environment = $('#quickinstall .environment ul li.active').attr("data-id");
 	landingpageevaluation(environment);
 	
 	
@@ -73,7 +73,7 @@ $(document).ready(function(){
 		var versionSelection = $('.yourselection ul.version li.selected').attr('data-id');
 		if(versionSelection){ userSelection.version = versionSelection; }
 		
-		if( $("body.installation .evironment .onlymobile").is(":visible") ){
+		if( $("body.installation .environment.select .onlymobile").is(":visible") ){
 			var environmentSelection = $('body.installation .environmentselect').val();
 		} else {
 			var environmentSelection = $('.yourselection ul.environment li.selected').attr('data-id');
