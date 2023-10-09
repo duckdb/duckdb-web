@@ -81,13 +81,9 @@
 				
 				{% if page.url contains '/docs/' %}
 				<div class="improvethispage"><a href="{% github_edit_link %}" title="Go to GitHub">Page Source</a></div>
-				{% endif %}
 
-				{% if page.url contains '/docs/' %}
 				<div class="improvethispage"><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ page.title }}&body=Page source: Error on {% page.url %}" title="Go to GitHub">Report Issue</a></div>
-				{% endif %}
-				
-				{% if page.url contains '/docs/' %}
+
 				<div class="version">Version <span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span></div>
 				<div class="versionsidebar">
 					<span>Version: </span>
