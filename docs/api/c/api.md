@@ -350,7 +350,7 @@ title: C API - Complete API
 ### `duckdb_open`
 
 ---
-Creates a new database or opens an existing database file stored at the the given path.
+Creates a new database or opens an existing database file stored at the given path.
 If no path is given a new in-memory database is created instead.
 The instantiated database should be closed with 'duckdb_close'
 
@@ -382,7 +382,7 @@ The result database object.
 ### `duckdb_open_ext`
 
 ---
-Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the the given path.
+Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the given path.
 
 #### Syntax
 
@@ -2352,7 +2352,7 @@ Binds an int64_t value to the prepared statement at the specified index.
 ### `duckdb_bind_hugeint`
 
 ---
-Binds an duckdb_hugeint value to the prepared statement at the specified index.
+Binds a duckdb_hugeint value to the prepared statement at the specified index.
 
 #### Syntax
 
@@ -2454,7 +2454,7 @@ Binds an uint64_t value to the prepared statement at the specified index.
 ### `duckdb_bind_float`
 
 ---
-Binds an float value to the prepared statement at the specified index.
+Binds a float value to the prepared statement at the specified index.
 
 #### Syntax
 
@@ -2471,7 +2471,7 @@ Binds an float value to the prepared statement at the specified index.
 ### `duckdb_bind_double`
 
 ---
-Binds an double value to the prepared statement at the specified index.
+Binds a double value to the prepared statement at the specified index.
 
 #### Syntax
 
