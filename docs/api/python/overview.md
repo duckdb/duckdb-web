@@ -113,4 +113,16 @@ The connection object and the `duckdb` module can be used interchangeably – th
 
 Note that if you are developing a package designed for others to use using duckdb, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages. 
 
+## Loading and Installing Extensions
+
+DuckDB's Python API provides functions for installing and loading extensions, which perform the equivalent operations to running the `INSTALL` and `LOAD` SQL commands, respectively. An example that installs and loads the [`spatial` extension](../../extensions/spatial) looks like follows:
+
+```py
+import duckdb
+
+con = duckdb.connect()
+con.install_extension("spatial")
+con.load_extension("spatial")
+```
+
 ## Pages in This Section
