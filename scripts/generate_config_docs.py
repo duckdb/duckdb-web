@@ -102,7 +102,7 @@ text += (
 )
 
 text += '\n\n' + stdout + '\n'
-
+text = re.sub(r'^\|---*\|---*\|---*\|---*\|$', '|---|-----|--|--|', text)
 text = text.replace('**QUERY_TREE**_OPTIMIZER', '**QUERY_TREE_OPTIMIZER**')
 
 with open(doc_file, 'w+') as f:
