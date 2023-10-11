@@ -43,17 +43,43 @@ SELECT course FROM grades WHERE grade = (SELECT MIN(grade) FROM grades);
 
 <div id="rrdiagram2"></div>
 
-The `EXISTS` operator is used to test for the existence of any row inside the subquery. It returns either true when the subquery returns one or more records, or false otherwise. The `EXISTS` operator is generally the most useful as a *correlated* subquery. However, it can be used as an uncorrelated subquery as well.
+The `EXISTS` operator tests for the existence of any row inside the subquery. It returns either true when the subquery returns one or more records, and false otherwise. The `EXISTS` operator is generally the most useful as a *correlated* subquery to express semijoin operations. However, it can be used as an uncorrelated subquery as well.
 
 For example, we can use it to figure out if there are any grades present for a given course:
 
 ```sql
-SELECT EXISTS(SELECT * FROM grades WHERE course='Math');
--- {true}
+SELECT EXISTS (SELECT * FROM grades WHERE course='Math');
+-- true
 
-SELECT EXISTS(SELECT * FROM grades WHERE course='History');
+SELECT EXISTS (SELECT * FROM grades WHERE course='History');
 -- false
 ```
+
+### Not exists
+
+The `NOT EXISTS` operator tests for the absence of any row inside the subquery. It returns either true when the subquery returns an empty result, and false otherwise. The `NOT EXISTS` operator is generally the most useful as a *correlated* subquery to express antijoin operations. For example, to find Person nodes without an interest:
+
+```sql
+CREATE TABLE Person(id BIGINT, name VARCHAR);
+CREATE TABLE interest(PersonId BIGINT, topic VARCHAR);
+
+INSERT INTO Person VALUES (1, 'Jane'), (2, 'Joe');
+INSERT INTO interest VALUES (2, 'Music');
+
+SELECT *
+FROM Person
+WHERE NOT EXISTS (SELECT * FROM interest WHERE interest.PersonId = Person.id);
+```
+```text
+┌───────┬─────────┐
+│  id   │  name   │
+│ int64 │ varchar │
+├───────┼─────────┤
+│     1 │ Jane    │
+└───────┴─────────┘
+```
+
+> DuckDB automatically detects when a `NOT EXISTS` query expresses an antijoin operation. There is no need to manually rewrite such queries to use `LEFT OUTER JOIN ... WHERE ... IS NULL`.
 
 ## In Operator
 
