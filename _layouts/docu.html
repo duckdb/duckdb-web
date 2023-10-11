@@ -32,6 +32,14 @@
 	{% seo title=false %}
 
 </head>
+
+{% capture issue_title %}Issue found on page '{{ page.title }}'{% endcapture %}
+{% capture issue_body %}
+_Please describe the issue on the page._
+
+Page URL: <https://duckdb.org{{ page.url }}>
+{% endcapture %}
+
 <body class="documentation{% if page.body_class %} {{ page.body_class }} {% endif %}">
 
 	<header>
@@ -84,10 +92,8 @@
 
 				<div style="width: 0.2em"></div>
 
-{% capture newline %}
-{% endcapture %}
 				<div class="improvethispage">
-					<a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ "Issue found on page '" | append: page.title | append: "'" | uri_escape  }}&body={{ newline | append: newline | append: newline | append: "Page URL: <https://duckdb.org" | append: page.url | append: ">" | uri_escape }}" title="Create GitHub issue">Report Issue</a>
+					<a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report Issue</a>
 				</div>
 
 				<div class="version">Version <span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span></div>
