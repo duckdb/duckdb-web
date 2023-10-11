@@ -99,7 +99,7 @@ DuckDB is able to find and query any dataframe stored as a variable in the Jupyt
 input_df = pd.DataFrame.from_dict({"i":[1, 2, 3],
                                   "j":["one", "two", "three"]})
 ```
-The dataframe being queried can be specified just like any other table in the `FROM` clause.  
+The dataframe being queried can be specified just like any other table in the `FROM` clause.
 ```sql
 %sql output_df << SELECT sum(i) AS total_i FROM input_df
 ```
@@ -108,14 +108,14 @@ The dataframe being queried can be specified just like any other table in the `F
 
 The most common way to plot datasets in Python is to load them using Pandas and then use matplotlib or seaborn for plotting.
 This approach requires loading all data into memory which is highly inefficient.
-The plotting module in JupySQL runs computations in the SQL engine. 
+The plotting module in JupySQL runs computations in the SQL engine.
 This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, efficiently plotting massive datasets. 
 
 ### Install and Load DuckDB httpfs extension
 
-DuckDB's [httpfs extension](../../extensions/httpfs) allows parquet and csv files to be queried remotely over http. 
-These examples query a parquet file that contains historical taxi data from NYC. 
-Using the parquet format allows DuckDB to only pull the rows and columns into memory that are needed rather than download the entire file. 
+DuckDB's [httpfs extension](../../extensions/httpfs) allows parquet and CSV files to be queried remotely over http.
+These examples query a parquet file that contains historical taxi data from NYC.
+Using the parquet format allows DuckDB to only pull the rows and columns into memory that are needed rather than downloading the entire file.
 DuckDB can be used to process [local parquet files as well](../../data/parquet), which may be desirable if querying the entire parquet file, or running multiple queries that require large subsets of the file.
 
 ```sql
