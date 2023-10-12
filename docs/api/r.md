@@ -111,8 +111,10 @@ tbl(con, "flights") |>
 When using dbplyr, CSV and Parquet files can be read using the `dplyr::tbl` function.
 
 ```R
+# Establish a csv for the sake of this example
 write.csv(mtcars, "mtcars.csv")
 
+# Summarize the dataset in DuckDB to avoid reading the entire csv into R's memory
 tbl(con, "mtcars.csv") |>
   group_by(cyl) |>
   summarise(across(disp:wt, .fns = mean)) |>
@@ -120,8 +122,10 @@ tbl(con, "mtcars.csv") |>
 ```
 
 ```R
+# Establish a set of parquet files
 dbExecute(con, "COPY flights TO 'dataset' (FORMAT PARQUET, PARTITION_BY (year, month))")
 
+# Summarize the dataset in DuckDB to avoid reading 12 parquet files into R's memory
 tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning=1)") |>
   filter(month == "3") |>
   summarise(delay = mean(dep_time, na.rm = TRUE)) |>
