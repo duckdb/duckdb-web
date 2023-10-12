@@ -19,6 +19,8 @@ SELECT DATE '1992-09-20';
 
 There are also three special date values that can be used on input:
 
+<div class="narrow_table"></div>
+
 | Input String | Description                       |
 |:-------------|:----------------------------------|
 | epoch	       | 1970-01-01 (Unix system day zero) |

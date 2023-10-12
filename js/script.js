@@ -526,6 +526,13 @@ $(document).ready(function(){
 		}
 	});
 	
-
+	if( $('body').hasClass('documentation') ){
+		$('#main_content_wrap table').each(function(){
+			var tablelength = $(this).text().length;
+			if( tablelength < 400){
+				$(this).addClass('narrow')
+			}
+		})
+	}
 	
 });

@@ -83,60 +83,62 @@ Page URL: <https://duckdb.org{{ page.url }}>
 		{% else %}
 			{% assign basename = page.path | replace: "docs/", "" %}
 		{% endif %}
-		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " }}{% endif %}">
-			<div class="headlinebar">
-				<div class="title">{{ page.title }}</div>
-				
-				{% if page.url contains '/docs/' %}
-				<div class="improvethispage"><a href="{% github_edit_link %}" title="Go to GitHub">Page Source</a></div>
-
-				<div style="width: 0.2em"></div>
-
-				<div class="improvethispage">
-					<a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report Issue</a>
-				</div>
-
-				<div class="version">Version <span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span></div>
-				<div class="versionsidebar">
-					<span>Version: </span>
-					<ul>
-
-					{% assign candidate_pages = "" | split: ','  %}
-					{% for site_page in site.pages %}
-						{% if site_page.name == page.name %}
-							{% assign candidate_pages = candidate_pages | push: site_page.path %}
-						{% endif %}
-					{% endfor %}
-					<!-- check the current page -->
-					{% assign filename = "docs/" | append: basename %}
+		
+		<div class="headlinebar">
+			<div class="title">{{ page.title }}</div>
+			
+			{% if page.url contains '/docs/' %}
+			<div class="improvethispage">
+				<a href="{% github_edit_link %}" title="Go to GitHub">Page Source</a>
+			</div>
+			<div class="improvethispage">
+				<a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report Issue</a>
+			</div>
+		
+			<div class="version">Version <span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span></div>
+			<div class="versionsidebar">
+				<span>Version: </span>
+				<ul>
+		
+				{% assign candidate_pages = "" | split: ','  %}
+				{% for site_page in site.pages %}
+					{% if site_page.name == page.name %}
+						{% assign candidate_pages = candidate_pages | push: site_page.path %}
+					{% endif %}
+				{% endfor %}
+				<!-- check the current page -->
+				{% assign filename = "docs/" | append: basename %}
+				{% assign exists = "false" %}
+				{% for page_name in candidate_pages %}
+					{% if page_name == filename %}
+						{% assign exists = true %}
+					{% endif %}
+				{% endfor %}
+		
+				{% if exists == true %}
+					<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>dev</a></li>
+				{% endif %}
+				<!-- check the archived pages -->
+				{% for item in site.data.versions %}
+					{% assign filename = "docs/archive/" | append: item.version | append: "/" | append: basename %}
 					{% assign exists = "false" %}
 					{% for page_name in candidate_pages %}
 						{% if page_name == filename %}
 							{% assign exists = true %}
 						{% endif %}
 					{% endfor %}
-
 					{% if exists == true %}
-						<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>dev</a></li>
+						<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item.version }}</a></li>
 					{% endif %}
-					<!-- check the archived pages -->
-					{% for item in site.data.versions %}
-						{% assign filename = "docs/archive/" | append: item.version | append: "/" | append: basename %}
-						{% assign exists = "false" %}
-						{% for page_name in candidate_pages %}
-							{% if page_name == filename %}
-								{% assign exists = true %}
-							{% endif %}
-						{% endfor %}
-						{% if exists == true %}
-							<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item.version }}</a></li>
-						{% endif %}
-					{% endfor %}
-					</ul>
-				</div>
-				{% endif %}
-
+				{% endfor %}
+				</ul>
 			</div>
+			{% endif %}
+		
+		</div>
+		
+		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " }}{% endif %}">
+			
 			<div id="main_content_wrap">
 				{% include anchor_headings.html html=content %}
 			</div>
