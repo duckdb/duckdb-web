@@ -136,6 +136,12 @@ table {
     max-width: 1000px;
     font-variant-numeric: tabular-nums;
     font-variant-ligatures: none;
+    &.narrow{
+        width: auto;
+        td{
+            min-width: 40px;
+        }
+    }
 }
 th {
     padding: 7px;
@@ -148,6 +154,12 @@ td {
     padding: 7px;
     border: 1px solid white;
     font-size: 14px;
+}
+.narrow_table + table{
+    width: auto;
+    td{
+        min-width: 40px;
+    }
 }
 form {
     background: #f2f2f2;

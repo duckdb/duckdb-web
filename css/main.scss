@@ -1056,7 +1056,7 @@ body.documentation{
 		padding: 40px;
 		#main_content_wrap{
 			max-width: 720px;
-			margin-top: 100px;
+			margin-top: 50px;
 			img{
 				width: 100%;
 				height: auto;
@@ -1114,24 +1114,25 @@ body.documentation{
 		h2#notes{
 			margin-top: 5px;
 		}
-		a{
-			color: black;
-			background-color: transparent;
-			text-decoration: underline;
-			-webkit-transition: background-color .3s;
-			-o-transition: background-color .3s;
-			transition: background-color .3s;
-			&:hover{
-				background-color: $duckDByellow;
-				cursor: pointer;
-			}
-		}
 		.limit-width{
 			width: calc(100vw - 380px);
 		}
 	}
+	.headlinebar a,
+	main .wrap a{
+		color: black;
+		background-color: transparent;
+		text-decoration: underline;
+		-webkit-transition: background-color .3s;
+		-o-transition: background-color .3s;
+		transition: background-color .3s;
+		&:hover{
+			background-color: $duckDByellow;
+			cursor: pointer;
+		}
+	}
 	.headlinebar{
-		background-color: $duckDBlightgrey;
+		background-color: darken($duckDBlightgrey, 5%);
 		height: 52px;
 		line-height: 52px;
 		font-size: 32px;
@@ -1139,17 +1140,20 @@ body.documentation{
 		left: 252px;
 		padding-left: 40px;
 		position: absolute;
-		width: calc(100% - 252px);
+		width: calc(100vw - 252px);
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
+		position: sticky;
+		margin-left: -40px;
+		z-index: 800;
 		> div.version{
 			font-size: 14px;
 			color: rgba(184, 184, 184, 1);
 			padding-right: 30px;
 			padding-left: 30px;
 			cursor: pointer;
-			background-color: $duckDBlightgrey;
+			background-color: darken($duckDBlightgrey, 5%);
 			z-index: 500;
 			.selectedversion{
 				color: black;
@@ -1175,7 +1179,7 @@ body.documentation{
 		> div.title{
 			margin-right: auto;
 		}
-		> div.improvethispage{
+		div.improvethispage{
 			font-size: 12px;
 			a{
 				background: white;
@@ -1187,6 +1191,19 @@ body.documentation{
 					color: white;
 					background-color: black!important;
 				}
+			}
+			+ div.improvethispage{
+				margin-left: .7em;
+				a:hover{
+					color: white;
+					background-color: red!important;
+				}
+				@media only screen and (max-width: 1040px) {
+					display: none;
+				}
+			}
+			@media only screen and (max-width: 990px) {
+				display: none;
 			}
 		}
 	}
@@ -1203,6 +1220,7 @@ body.documentation{
 	transform: translateX(140px);
 	transition: transform .3s;
 	z-index: 400;
+	height: 52px;
 	> ul{
 		padding: 0;
 		margin: 0;
