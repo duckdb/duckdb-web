@@ -74,7 +74,7 @@ LOAD icu;
 Next, use the `Set TimeZone` command:
 
 ```sql
-Set TimeZone='America/Los_Angeles';
+SET TimeZone='America/Los_Angeles';
 ```
 
 Time binning operations for `TIMESTAMPTZ` will then be implemented using the given time zone.
