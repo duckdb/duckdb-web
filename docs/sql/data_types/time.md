@@ -1,10 +1,10 @@
 ---
 layout: docu
 title: Time Types
-blurb: A time instance represents the time of a day (hour, minute, second, millisecond).
+blurb: A time instance represents the time of a day (hour, minute, second, microsecond).
 ---
 
-The `TIME` and `TIMETZ` types specify the hour, minute, second, millisecond of a day. 
+The `TIME` and `TIMETZ` types specify the hour, minute, second, microsecond of a day.
 
 | Name     | Aliases                  | Description                     |
 | :------- | :----------------------- | :------------------------------ |
