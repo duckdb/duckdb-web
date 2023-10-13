@@ -1,20 +1,22 @@
 ---
 layout: docu
-title: Timestamp Type
+title: Timestamp Types
 blurb: A timestamp specifies a combination of a date (year, month, day) and a time (hour, minute, second, millisecond).
 ---
 
 Timestamps represent points in absolute time, usually called *instants*.
 DuckDB represents instants as the number of microseconds (µs) since `1970-01-01 00:00:00+00`.
 
+## Timestamp types
+
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `TIMESTAMP_NS` | `TIMESTAMP`, `DATETIME`    | time of day with nanosecond precision (ignores time zone)  |
-| `TIMESTAMP_MS` |                            | time of day with millisecond precision (ignores time zone) |
-| `TIMESTAMP_S`  |                            | time of day with second precision (ignores time zone)      |
-| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE` | time of day (uses time zone)                               |
+| `TIMESTAMP_NS` | `TIMESTAMP`, `DATETIME`    | timestamp with nanosecond precision (ignores time zone)  |
+| `TIMESTAMP_MS` |                            | timestamp with millisecond precision (ignores time zone) |
+| `TIMESTAMP_S`  |                            | timestamp with second precision (ignores time zone)      |
+| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE` | timestamp (uses time zone)                               |
 
-A timestamp specifies a combination of `DATE` (year, month, day) and a `TIME` (hour, minute, second, millisecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]`).
+A timestamp specifies a combination of [`DATE`](date) (year, month, day) and a [`TIME`](time) (hour, minute, second, millisecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]`).
 
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456'; -- 1992-09-20 11:30:00.123456
@@ -31,11 +33,11 @@ SELECT TIMESTAMP WITH TIME ZONE '1992-09-20 11:30:00.123456';
 
 There are also three special date values that can be used on input:
 
-| Input String | Valid Types                       | Description                                    |
-|:-------------|:----------------------------------|:-----------------------------------------------|
-| epoch	       | TIMESTAMP, TIMESTAMPTZ            | 1970-01-01 00:00:00+00 (Unix system time zero) |
-| infinity	   | TIMESTAMP, TIMESTAMPTZ            | later than all other time stamps               |
-| -infinity	   | TIMESTAMP, TIMESTAMPTZ            | earlier than all other time stamps             |
+| Input String | Valid Types                           | Description                                    |
+|:-------------|:--------------------------------------|:-----------------------------------------------|
+| epoch	       | `TIMESTAMP`, `TIMESTAMPTZ`            | 1970-01-01 00:00:00+00 (Unix system time zero) |
+| infinity	   | `TIMESTAMP`, `TIMESTAMPTZ`            | later than all other time stamps               |
+| -infinity	   | `TIMESTAMP`, `TIMESTAMPTZ`            | earlier than all other time stamps             |
 
 The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged; 
 but `epoch` is simply a notational shorthand that will be converted to the time stamp value when read.
