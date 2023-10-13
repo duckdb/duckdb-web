@@ -32,7 +32,7 @@ FROM star_wars sw, firefly ff
 Similarly, we often wish to use all of the columns in a table, aside from a few small adjustments. This would also prevent the use of `*` and require a list of all columns, including those that remain unedited. In DuckDB, easily apply changes to a small number of columns with `REPLACE`:
 ```sql
 SELECT 
-    * REPLACE (movie_count+3 as movie_count, show_count*1000 as show_count)
+    * REPLACE (movie_count+3 AS movie_count, show_count*1000 AS show_count)
 FROM star_wars_owned_by_disney
 ```
 This allows views, CTE's, or sub-queries to be built on one another in a highly concise way, while remaining adaptable to new underlying columns. 
@@ -46,7 +46,7 @@ SELECT
     planets,
     cities,
     cantinas,
-    SUM(scum + villainy) as total_scum_and_villainy
+    SUM(scum + villainy) AS total_scum_and_villainy
 FROM star_wars_locations
 GROUP BY ALL
 -- GROUP BY systems, planets, cities, cantinas
@@ -58,7 +58,7 @@ Not only does this dramatically simplify many queries, it also makes the above `
 ```sql
 SELECT
     * EXCLUDE (cantinas, booths, scum, villainy),
-    SUM(scum + villainy) as total_scum_and_villainy
+    SUM(scum + villainy) AS total_scum_and_villainy
 FROM star_wars_locations
 GROUP BY ALL
 -- GROUP BY systems, planets, cities
@@ -71,7 +71,7 @@ Another common cause for repetition in SQL is the `ORDER BY` clause. DuckDB and 
 ```sql
 SELECT
     age,
-    sum(civility) as total_civility
+    sum(civility) AS total_civility
 FROM star_wars_universe
 GROUP BY ALL
 ORDER BY ALL
@@ -85,9 +85,9 @@ In many SQL dialects, it is not possible to use an alias defined in a `SELECT` c
 
 ```sql
 SELECT
-    only_imperial_storm_troopers_are_so_precise as nope,
-    turns_out_a_parsec_is_a_distance as very_speedy,
-    SUM(mistakes) as total_oops
+    only_imperial_storm_troopers_are_so_precise AS nope,
+    turns_out_a_parsec_is_a_distance AS very_speedy,
+    SUM(mistakes) AS total_oops
 FROM oops
 WHERE
     nope = 1
@@ -103,7 +103,7 @@ HAVING
 DuckDB allows queries to be case insensitive, while maintaining the specified case as data flows into and out of the system. This simplifies queries within DuckDB while ensuring compatibility with external libraries.
 
 ```sql
-CREATE TABLE mandalorian as SELECT 1 as "THIS_IS_THE_WAY";
+CREATE TABLE mandalorian AS SELECT 1 AS "THIS_IS_THE_WAY";
 SELECT this_is_the_way FROM mandalorian;
 ```  
 
@@ -117,10 +117,12 @@ SELECT this_is_the_way FROM mandalorian;
 Regardless of expertise, and despite DuckDB's best efforts to understand our intentions, we all make mistakes in our SQL queries. Many RDBMSs leave you trying to use the force to detect an error. In DuckDB, if you make a typo on a column or table name, you will receive a helpful suggestion about the most similar name. Not only that, you will receive an arrow that points directly to the offending location within your query. 
 
 ```sql
-select * from star_trek;
+SELECT * FROM star_trek;
+```
+```text
 Error: Catalog Error: Table with name star_trek does not exist!
 Did you mean "star_wars"?
-LINE 1: select * from star_trek;
+LINE 1: SELECT * FROM star_trek;
                       ^
 ```
 (Don't worry, ducks and duck-themed databases still love some Trek as well).
@@ -128,10 +130,12 @@ LINE 1: select * from star_trek;
 DuckDB's suggestions are even context specific. Here, we receive a suggestion to use the most similar column from the table we are querying.
 
 ```sql
-select long_ago from star_wars;
+SELECT long_ago FROM star_wars;
+```
+```text
 Error: Binder Error: Referenced column "long_ago" not found in FROM clause!
 Candidate bindings: "star_wars.long_long_ago"
-LINE 1: select long_ago from star_wars;
+LINE 1: SELECT long_ago FROM star_wars;
                ^
 ```
 
@@ -140,7 +144,7 @@ LINE 1: select long_ago from star_wars;
 Even as SQL fans, we know that SQL can learn a thing or two from newer languages. Instead of using bulky `SUBSTRING` functions, you can slice strings in DuckDB using bracket syntax. As a note, SQL is required to be 1-indexed, so that is a slight difference from other languages (although it keeps DuckDB internally consistent and similar to other DBs). 
 
 ```sql
-SELECT 'I love you! I know'[:-3] as nearly_soloed;
+SELECT 'I love you! I know'[:-3] AS nearly_soloed;
 ```  
 
 |  nearly_soloed  |
@@ -153,8 +157,8 @@ DuckDB provides nested types to allow more flexible data structures than the pur
 
 ```sql
 SELECT
-    ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] as starfighter_list,
-    {name: 'Star Destroyer', common_misconceptions: 'Can''t in fact destroy a star'} as star_destroyer_facts
+    ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list,
+    {name: 'Star Destroyer', common_misconceptions: 'Can''t in fact destroy a star'} AS star_destroyer_facts
 ```
 
 ### List Slicing
@@ -162,8 +166,8 @@ SELECT
 Bracket syntax may also be used to slice a `LIST`. Again, note that this is 1-indexed for SQL compatibility.
 ```sql
 SELECT 
-    starfighter_list[2:2] as dont_forget_the_b_wing 
-FROM (SELECT ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] as starfighter_list);
+    starfighter_list[2:2] AS dont_forget_the_b_wing 
+FROM (SELECT ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list);
 ```  
 
 | dont_forget_the_b_wing |
@@ -178,7 +182,7 @@ Use convenient dot notation to access the value of a specific key in a DuckDB `S
 SELECT 
     planet.name,
     planet."Amount of sand" 
-FROM (SELECT {name: 'Tatooine', 'Amount of sand': 'High'} as planet)
+FROM (SELECT {name: 'Tatooine', 'Amount of sand': 'High'} AS planet)
 ```
 
 ### Trailing Commas
@@ -202,9 +206,9 @@ For many functions, DuckDB supports multiple names in order to align with other 
 
 ```sql
 SELECT
-    'Use the Force, Luke'[:13] as sliced_quote_1,
-    substr('I am your father', 1, 4) as sliced_quote_2,
-    substring('Obi-Wan Kenobi, you''re my only hope',17,100) as sliced_quote_3
+    'Use the Force, Luke'[:13] AS sliced_quote_1,
+    substr('I am your father', 1, 4) AS sliced_quote_2,
+    substring('Obi-Wan Kenobi, you''re my only hope',17,100) AS sliced_quote_3
 ```
 
 ### Auto-Increment Duplicate Column Names
@@ -233,14 +237,14 @@ FROM (
 DuckDB believes in using specific data types for performance, but attempts to automatically cast between types whenever necessary. For example, when joining between an integer and a varchar, DuckDB will automatically cast them to be the same type and complete the join successfully. A `List` or `IN` expression may also be created with a mixture of types, and they will be automatically cast as well. Also, `INT` and `BIGINT` are interchangeable, and thanks to DuckDB's new storage compression, a `BIGINT` usually doesn't even take up any extra space! Now you can store your data as the optimal data type, but use it easily for the best of both!
 
 ```sql
-CREATE TABLE sith_count_int as SELECT 2::INT as sith_count;
-CREATE TABLE sith_count_varchar as SELECT 2::VARCHAR as sith_count;
+CREATE TABLE sith_count_int AS SELECT 2::INT AS sith_count;
+CREATE TABLE sith_count_varchar AS SELECT 2::VARCHAR AS sith_count;
 
 SELECT 
     * 
 FROM sith_count_int s_int 
 JOIN sith_count_varchar s_char 
-    on s_int.sith_count = s_char.sith_count;
+    ON s_int.sith_count = s_char.sith_count;
 ```  
 
 | sith_count | sith_count |

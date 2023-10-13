@@ -141,7 +141,7 @@ DuckDB extensions can define and validate their own settings, and the ICU extens
 ```sql
 -- Load the extension
 -- This is not needed in Python or R, as the extension is already installed
-load icu;
+LOAD icu;
 
 -- Show the current time zone. The default is set to ICU's current time zone.
 SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
