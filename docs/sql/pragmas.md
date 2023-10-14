@@ -159,7 +159,7 @@ SELECT 42;
 
 The printing of profiling information can be disabled again using *disable_profiling*.
 
-By default, profiling information is printed to the console. However, if you prefer to write the profiling information to a file the `PRAGMA` **profiling_output** can be used to write to a specified file. **Note that the file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run.**
+By default, profiling information is printed to the console. However, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file. **Note that the file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run.**
 
 ### disable_optimizer, enable_optimizer
 
@@ -262,7 +262,7 @@ PRAGMA storage_info('table_name');
 CALL pragma_storage_info('table_name');
 ```
 
-returns the following, per column in the given table
+This call returns the following information for the given table:
 
 | name           | type      | description                                           |
 |----------------|-----------|-------------------------------------------------------|
