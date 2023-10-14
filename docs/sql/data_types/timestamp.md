@@ -1,20 +1,22 @@
 ---
 layout: docu
-title: Timestamp Type
-blurb: A timestamp specifies a combination of a date (year, month, day) and a time (hour, minute, second, millisecond).
+title: Timestamp Types
+blurb: A timestamp specifies a combination of a date (year, month, day) and a time (hour, minute, second, microsecond).
 ---
 
 Timestamps represent points in absolute time, usually called *instants*.
 DuckDB represents instants as the number of microseconds (µs) since `1970-01-01 00:00:00+00`.
 
+## Timestamp types
+
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `TIMESTAMP_NS` | `TIMESTAMP`, `DATETIME`    | time of day with nanosecond precision (ignores time zone)  |
-| `TIMESTAMP_MS` |                            | time of day with millisecond precision (ignores time zone) |
-| `TIMESTAMP_S`  |                            | time of day with second precision (ignores time zone)      |
-| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE` | time of day (uses time zone)                               |
+| `TIMESTAMP_NS` | `TIMESTAMP`, `DATETIME`    | timestamp with nanosecond precision (ignores time zone)  |
+| `TIMESTAMP_MS` |                            | timestamp with millisecond precision (ignores time zone) |
+| `TIMESTAMP_S`  |                            | timestamp with second precision (ignores time zone)      |
+| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE` | timestamp (uses time zone)                               |
 
-A timestamp specifies a combination of `DATE` (year, month, day) and a `TIME` (hour, minute, second, millisecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]`).
+A timestamp specifies a combination of [`DATE`](date) (year, month, day) and a [`TIME`](time) (hour, minute, second, microsecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]`).
 
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456'; -- 1992-09-20 11:30:00.123456
@@ -33,11 +35,11 @@ There are also three special date values that can be used on input:
 
 <div class="narrow_table"></div>
 
-| Input String | Valid Types                       | Description                                    |
-|:-------------|:----------------------------------|:-----------------------------------------------|
-| epoch	       | TIMESTAMP, TIMESTAMPTZ            | 1970-01-01 00:00:00+00 (Unix system time zero) |
-| infinity	   | TIMESTAMP, TIMESTAMPTZ            | later than all other time stamps               |
-| -infinity	   | TIMESTAMP, TIMESTAMPTZ            | earlier than all other time stamps             |
+| Input String | Valid Types                           | Description                                    |
+|:-------------|:--------------------------------------|:-----------------------------------------------|
+| epoch	       | `TIMESTAMP`, `TIMESTAMPTZ`            | 1970-01-01 00:00:00+00 (Unix system time zero) |
+| infinity	   | `TIMESTAMP`, `TIMESTAMPTZ`            | later than all other time stamps               |
+| -infinity	   | `TIMESTAMP`, `TIMESTAMPTZ`            | earlier than all other time stamps             |
 
 The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged; 
 but `epoch` is simply a notational shorthand that will be converted to the time stamp value when read.
@@ -67,15 +69,14 @@ The built in ICU extension implements all the binning and arithmetic functions u
     For JDBC/ODBC, check the GitHub Actions CI workflows (duckdb/.github/workflows/). 
     For NodeJS, I couldn't find anything
 -->
-To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled
-with several DuckDB clients (including Python, R, JDBC, and ODBC), so this step can be skipped in those cases. In other cases you might first need to install and load the ICU extension.
+To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled with several DuckDB clients (including Python, R, JDBC, and ODBC), so this step can be skipped in those cases. In other cases you might first need to install and load the ICU extension.
 
 ```sql
 INSTALL icu;
 LOAD icu;
 ```
 
-Next, use the `Set TimeZone` command:
+Next, use the `SET TimeZone` command:
 
 ```sql
 SET TimeZone='America/Los_Angeles';
@@ -99,18 +100,17 @@ You can also find a reference table of available time zones [here](../../sql/dat
 
 ## Calendars
 
-The ICU extension also supports non-Gregorian calendars using the `Set Calendar` command.
-Note that the `require icu` step is only required if the DuckDB client does not bundle the
-ICU extension. 
+The ICU extension also supports non-Gregorian calendars using the `SET Calendar` command.
+Note that the `INSTALL` and `LOAD` steps are only required if the DuckDB client does not bundle the ICU extension.
 
 ```sql
+INSTALL ICU;
 LOAD icu;
-
-Set Calendar='japanese';
+SET Calendar='japanese';
 ```
 
 Time binning operations for `TIMESTAMPTZ` will then be implemented using the given calendar.
-In  this example, the `era` part will now report the Japanese imperial era number.
+In this example, the `era` part will now report the Japanese imperial era number.
 
 A list of available calendars can be pulled from the `icu_calendar_names()` table function:
 

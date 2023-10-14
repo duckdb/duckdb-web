@@ -773,6 +773,10 @@
                   "url": "text"
                 },
                 {
+                  "page": "Time",
+                  "url": "time"
+                },
+                {
                   "page": "Timestamp",
                   "url": "timestamp"
                 },
