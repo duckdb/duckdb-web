@@ -38,7 +38,7 @@ Retrieving one or more values from a list can be accomplished using brackets and
 ```
 
 | example                                    | result     |
-| :----------------------------------------- | :--------- |
+|:-------------------------------------------|:-----------|
 | `SELECT (['a', 'b', 'c'])[3]`              | 'c'        |
 | `SELECT (['a', 'b', 'c'])[-1]`             | 'c'        |
 | `SELECT (['a', 'b', 'c'])[2 + 1]`          | 'c'        |

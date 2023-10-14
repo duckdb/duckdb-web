@@ -18,6 +18,7 @@ ORDER BY
     name;
 ```
 
+<div class="narrow_table"></div>
 
 |               name               |              abbrev              | utc_offset |
 |----------------------------------|----------------------------------|-----------:|

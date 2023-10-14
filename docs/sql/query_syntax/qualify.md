@@ -75,6 +75,8 @@ WHERE
     function_rank < 3;
 ```
 
+<div class="narrow_table"></div>
+
 | schema_name |  function_name  | function_rank |
 |:---|:---|:---|
 | main        | !__postfix      | 1             |

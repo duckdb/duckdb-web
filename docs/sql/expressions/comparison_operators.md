@@ -11,6 +11,8 @@ railroad: expressions/comparison.js
 The table below shows the standard comparison operators.
 Whenever either of the input arguments is `NULL`, the output of the comparison is `NULL`.
 
+<div class="narrow_table"></div>
+
 | Operator | Description | Example | Result |
 |:---|:---|:---|:---|
 | `<` | less than | `2 < 3` | `true` |
@@ -23,6 +25,8 @@ Whenever either of the input arguments is `NULL`, the output of the comparison i
 The table below shows the standard distinction operators.
 These operators treat `NULL` values as equal.
 
+<div class="narrow_table"></div>
+
 | Operator | Description | Example | Result |
 |:---|:---|:---|:-|
 | `IS DISTINCT FROM` | not equal, including `NULL` | `2 IS DISTINCT FROM NULL` | `true` |
@@ -34,6 +38,8 @@ These operators treat `NULL` values as equal.
 
 Besides the standard comparison operators there are also the `BETWEEN` and `IS (NOT) NULL` operators. These behave much like operators, but have special syntax mandated by the SQL standard. They are shown in the table below.  
 Note that BETWEEN and NOT BETWEEN are only equivalent to the examples below in the cases where both `a`, `x` and `y` are of the same type, as BETWEEN will cast all of its inputs to the same type.
+
+<div class="narrow_table"></div>
 
 | Predicate | Description |
 |:---|:---|

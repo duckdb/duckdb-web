@@ -161,6 +161,8 @@ Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e.
 
 The `duckdb_keywords()` function provides metadata about DuckDB's keywords and reserved words.
 
+<div class="narrow_table"></div>
+
 | Column | Description | Type |
 |:-|:---|:-|
 | `keyword_name` |The keyword.| `VARCHAR` |
@@ -211,6 +213,8 @@ Attributes like `temporary`, `start_value` etc. correspond to the various option
 ## `duckdb_settings`
 
 The `duckdb_settings()` function provides metadata about the settings available in the DuckDB instance. 
+
+<div class="narrow_table"></div>
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -283,6 +287,8 @@ The [`information_schema.tables`](information_schema#tables-and-views) system vi
 ## `duckdb_temporary_files`
 
 The `duckdb_temporary_files()` function provides metadata about the temporary files DuckDB has written to disk, to offload data from memory. This function mostly exists for debugging and testing purposes.
+
+<div class="narrow_table"></div>
 
 | Column | Description | Type |
 |:-|:---|:-|

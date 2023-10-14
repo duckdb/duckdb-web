@@ -42,6 +42,8 @@ INSERT INTO monthly_sales VALUES
 FROM monthly_sales;
 ```
 
+<div class="narrow_table"></div>
+
 | empid |    dept     | Jan | Feb | Mar | Apr | May | Jun |
 |-------|-------------|-----|-----|-----|-----|-----|-----|
 | 1     | electronics | 1   | 2   | 3   | 4   | 5   | 6   |
@@ -65,6 +67,8 @@ INTO
     NAME month
     VALUE sales;
 ```
+
+<div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
 |-------|-------------|-------|-------|
@@ -103,6 +107,8 @@ INTO
     NAME month
     VALUE sales;
 ```
+
+<div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
 |-------|-------------|-------|-------|
@@ -144,6 +150,8 @@ UNPIVOT monthly_sales
         NAME quarter 
         VALUE month_1_sales, month_2_sales, month_3_sales;
 ```
+
+<div class="narrow_table"></div>
 
 | empid |    dept     | quarter | month_1_sales | month_2_sales | month_3_sales |
 |-------|-------------|---------|---------------|---------------|---------------|
@@ -215,6 +223,8 @@ FROM monthly_sales;
 Note the single quotes to build a list of text strings to populate `month`, and the double quotes to pull the column values for use in `sales`.
 This produces the same result as the initial example:
 
+<div class="narrow_table"></div>
+
 | empid |    dept     | month | sales |
 |-------|-------------|-------|-------|
 | 1     | electronics | jan   | 1     |
@@ -269,6 +279,8 @@ FROM monthly_sales UNPIVOT (
     FOR month IN (jan, feb, mar, apr, may, jun)
 );
 ```
+
+<div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
 |-------|-------------|-------|-------|
@@ -327,6 +339,8 @@ UNPIVOT (
     )
 );
 ```
+
+<div class="narrow_table"></div>
 
 | empid |    dept     | quarter | month_1_sales | month_2_sales | month_3_sales |
 |-------|-------------|---------|---------------|---------------|---------------|

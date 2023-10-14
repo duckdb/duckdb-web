@@ -53,7 +53,6 @@ CREATE OR REPLACE TABLE addresses AS
     SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111'
     UNION ALL 
     SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111-0001';
-;
 ```
 
 ```sql
@@ -84,6 +83,8 @@ FROM addresses
 ORDER BY ALL;
 ```
 
+<div class="narrow_table"></div>
+
 |        address         |   city    |    zip     |
 |------------------------|-----------|------------|
 | 111 Duck Duck Goose Ln | Duck Town | 11111      |
@@ -99,14 +100,14 @@ FROM addresses
 ORDER BY ALL DESC;
 ```
 
+<div class="narrow_table"></div>
+
 |        address         |   city    |    zip     |
 |------------------------|-----------|------------|
 | 123 Quack Blvd         | DuckTown  | 11111      |
 | 111 Duck Duck Goose Ln | DuckTown  | 11111      |
 | 111 Duck Duck Goose Ln | Duck Town | 11111-0001 |
 | 111 Duck Duck Goose Ln | Duck Town | 11111      |
-
-
 
 ## Syntax
 

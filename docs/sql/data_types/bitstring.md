@@ -4,6 +4,8 @@ title: Bitstring Type
 blurb: The bitstring type are strings of 1's and 0's.
 ---
 
+<div class="narrow_table"></div>
+
 | Name | Aliases | Description |
 |:---|:---|:---|
 | `BIT` | `BITSTRING` | variable-length strings of 1's and 0's |
