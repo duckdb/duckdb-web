@@ -34,7 +34,7 @@ Please adhere the following style guide when submitting a pull request.
 
 Some of this style guide is automated with GitHub Actions, but feel free to run [`scripts/lint.sh`](scripts/lint.sh) to run them locally.
 
-### Syntax
+### Formatting
 
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
 * Do not hard-wrap lines in blocks of text.
@@ -44,6 +44,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `).
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
+* Narrow tables should be prepended with an empty div that has the `narrow` table class: `<div class="narrow_table"></div>`.
 
 ### Headers
 
