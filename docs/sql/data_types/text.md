@@ -6,6 +6,8 @@ blurb: In DuckDB, strings can be stored in the VARCHAR field.
 
 In DuckDB, strings can be stored in the `VARCHAR` field.
 
+<div class="narrow_table"></div>
+
 | Name | Aliases | Description |
 |:---|:---|:---|
 | `VARCHAR` | `CHAR`, `BPCHAR`, `TEXT`, `STRING` | variable-length character string |

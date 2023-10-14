@@ -6,6 +6,7 @@ blurb: An interval specifies a period of time measured in units of a specific da
 
 Intervals represent a period of time. This period can be measured in a specific unit or combination of units, for example years, days, or seconds. Intervals are generally used to *modify* timestamps or dates by either adding or subtracting them.
 
+<div class="narrow_table"></div>
 
 | Name | Description |
 |:---|:---|
@@ -50,6 +51,8 @@ If we subtract two timestamps from one another, we obtain an interval describing
 
 ```sql
 SELECT TIMESTAMP '2000-02-01 12:00:00' - TIMESTAMP '2000-01-01 11:00:00' AS diff;
+```
+```text
 ┌──────────────────┐
 │       diff       │
 │     interval     │
@@ -62,6 +65,8 @@ The `datediff` function can be used to obtain the difference between two dates f
 
 ```sql
 SELECT datediff('month', TIMESTAMP '2000-01-01 11:00:00', TIMESTAMP '2000-02-01 12:00:00') AS diff;
+```
+```text
 ┌───────┐
 │ diff  │
 │ int64 │
@@ -72,7 +77,6 @@ SELECT datediff('month', TIMESTAMP '2000-01-01 11:00:00', TIMESTAMP '2000-02-01 
 
 ## Functions
 
-See the [Date Part Functions docs](../../sql/functions/datepart) for a list of available
-date parts for use with an `INTERVAL`.
+See the [Date Part Functions page](../../sql/functions/datepart) for a list of available date parts for use with an `INTERVAL`.
 
-See the [Interval Operators](../../sql/functions/interval) for various functions that operate on intervals.
+See the [Interval Operators page](../../sql/functions/interval) for functions that operate on intervals.

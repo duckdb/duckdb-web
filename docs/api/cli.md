@@ -43,6 +43,8 @@ Once the CLI has been opened, enter a SQL statement followed by a semicolon, the
 SELECT 'quack' AS my_column;
 ```
 
+<div class="narrow_table"></div>
+
 | my_column |
 |-----------|
 | quack     |
@@ -52,6 +54,8 @@ SELECT
     'nicely formatted quack' AS my_column,
     'excited quacking' AS another_column;
 ```
+
+<div class="narrow_table"></div>
 
 |       my_column        |  another_column  |
 |------------------------|------------------|
@@ -177,6 +181,8 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 ## Output Formats
 
 The `.mode` command may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal output to a file, for example (see "Writing Results to a File" section below). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point. The `markdown` mode is particularly useful for building documentation!
+
+<div class="narrow_table"></div>
 
 |    mode    |                  description                 |
 |------------|----------------------------------------------|

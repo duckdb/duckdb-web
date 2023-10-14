@@ -10,6 +10,8 @@ Bitstrings must be of equal length when performing the bitwise operands AND, OR 
 
 The table below shows the available mathematical operators for `BIT` type.
 
+<div class="narrow_table"></div>
+
 | Operator | Description | Example | Result |
 |:---|:---|:---|:---|
 | `&` | bitwise AND | `'10101'::BIT & '10001'::BIT` | `10001` |

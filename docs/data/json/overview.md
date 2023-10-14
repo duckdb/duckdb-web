@@ -86,11 +86,13 @@ Each line is a JSON.
 SELECT * FROM read_json_auto('records.json', format='newline_delimited');
 ```
 
-|  key1  |  key2  |
-|--------|--------|
-| value1 | value1 |
-| value2 | value2 |
-| value3 | value3 |
+<div class="narrow_table"></div>
+
+|   key1   |   key2   |
+|----------|----------|
+| `value1` | `value1` |
+| `value2` | `value2` |
+| `value3` | `value3` |
 
 ### Format: array
 
@@ -105,6 +107,8 @@ If the JSON file contains a JSON array of objects (pretty-printed or not), `arra
 ```sql
 SELECT * FROM read_json_auto('array.json', format='array');
 ```
+
+<div class="narrow_table"></div>
 
 |   key1   |   key2   |
 |----------|----------|
@@ -133,6 +137,8 @@ If the JSON file contains JSON that is not newline-delimited or an array, `unstr
 SELECT * FROM read_json_auto('unstructured.json', format='unstructured');
 ```
 
+<div class="narrow_table"></div>
+
 |   key1   |   key2   |
 |----------|----------|
 | `value1` | `value1` |
@@ -154,6 +160,8 @@ Continuing with the same example file from before:
 SELECT * FROM read_json_auto('records.json', records=true);
 ```
 
+<div class="narrow_table"></div>
+
 |   key1   |   key2   |
 |----------|----------|
 | `value1` | `value1` |
@@ -164,6 +172,8 @@ When `records=false`, the JSON extension will not unpack the top-level objects, 
 ```sql
 SELECT * FROM read_json_auto('records.json', records=false);
 ```
+
+<div class="narrow_table"></div>
 
 |                json                |
 |------------------------------------|
@@ -180,6 +190,8 @@ This is especially useful if we have non-object JSON, for example:
 ```sql
 SELECT * FROM read_json_auto('arrays.json', records=false);
 ```
+
+<div class="narrow_table"></div>
 
 |    json     |
 |-------------|
@@ -199,6 +211,8 @@ The `read_json_auto` is the simplest method of loading JSON files: it automatica
 SELECT * FROM read_json_auto('todos.json') LIMIT 5;
 ```
 
+<div class="narrow_table"></div>
+
 | userId | id |                              title                              | completed |
 |--------|----|-----------------------------------------------------------------|-----------|
 | 1      | 1  | delectus aut autem                                              | false     |
@@ -215,6 +229,8 @@ We can use `read_json_auto` to create a persistent table as well:
 CREATE TABLE todos AS SELECT * FROM read_json_auto('todos.json');
 DESCRIBE todos;
 ```
+
+<div class="narrow_table"></div>
 
 | column_name | column_type | null | key | default | extra |
 |-------------|-------------|------|-----|---------|-------|
@@ -244,6 +260,8 @@ CREATE TABLE todos(userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN)
 COPY todos FROM 'todos.json';
 SELECT * FROM todos LIMIT 5;
 ```
+
+<div class="narrow_table"></div>
 
 | userId | id |                              title                              | completed |
 |--------|----|-----------------------------------------------------------------|-----------|

@@ -138,6 +138,8 @@ Compute relationships and spatial predicates between geometries.
 
 ## Spatial Aggregate Functions
 
+<div class="narrow_table"></div>
+
 | Aggregate functions                       | Implemented with |
 |-------------------------------------------|------------------|
 | `GEOMETRY ST_Envelope_Agg(GEOMETRY)`      | 🦆               |
@@ -239,7 +241,12 @@ For node entities you can trivially construct `POINT` geometries, but it is also
 Example usage:
 
 ```sql
-SELECT * FROM st_readosm('tmp/data/germany.osm.pbf') WHERE tags['highway'] != [] LIMIT 5;
+SELECT *
+FROM st_readosm('tmp/data/germany.osm.pbf')
+WHERE tags['highway'] != []
+LIMIT 5;
+```
+```text
 ┌──────────────────────┬────────┬──────────────────────┬─────────┬────────────────────┬────────────┬───────────┬────────────────────────┐
 │         kind         │   id   │         tags         │  refs   │        lat         │    lon     │ ref_roles │       ref_types        │
 │ enum('node', 'way'…  │ int64  │ map(varchar, varch…  │ int64[] │       double       │   double   │ varchar[] │ enum('node', 'way', …  │
@@ -257,7 +264,7 @@ SELECT * FROM st_readosm('tmp/data/germany.osm.pbf') WHERE tags['highway'] != []
 The spatial extension also provides "replacement scans" for common geospatial file formats, allowing you to query files of these formats as if they were tables.
 
 ```sql
-SELECT * FROM `./path/to/some/shapefile/dataset.shp`;
+SELECT * FROM './path/to/some/shapefile/dataset.shp';
 ```
 In practice this is just syntax-sugar for calling `ST_Read`, so there is no difference in performance. If you want to pass additional options, you should use the `ST_Read` table function directly.
 

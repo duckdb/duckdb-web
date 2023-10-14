@@ -4,6 +4,8 @@ title: Date Types
 blurb: A date specifies a combination of year, month and day.
 ---
 
+<div class="narrow_table"></div>
+
 | Name   | Aliases | Description                     |
 |:-------|:--------|:--------------------------------|
 | `DATE` |         | calendar date (year, month day) |
@@ -33,6 +35,8 @@ but `epoch` is simply a notational shorthand that will be converted to the date 
 ```sql
 SELECT '-infinity'::DATE, 'epoch'::DATE, 'infinity'::DATE;
 ```
+
+<div class="narrow_table"></div>
 
 | Negative  | Epoch      | Positive |
 |:----------|:-----------|:---------|

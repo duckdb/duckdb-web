@@ -45,6 +45,8 @@ The `httpfs` extension supports reading/writing/globbing files on object storage
 
 The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google Cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API should also work, but not all features may be supported. Below is a list of which parts of the S3 API are required for each `httpfs` feature.
 
+<div class="narrow_table"></div>
+
 | Feature | Required S3 API features |
 |:---|:---|
 | Public file reads | HTTP Range requests |
@@ -150,6 +152,8 @@ SELECT * FROM read_parquet('s3://bucket/*.parquet', FILENAME = 1);
 
 could for example result in:
 
+<div class="narrow_table"></div>
+
 | column_a | column_b | filename |
 |:---|:---|:---|
 | 1 | examplevalue1 | s3://bucket/file1.parquet |
@@ -172,6 +176,8 @@ SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1);
 ```
 
 could result in:
+
+<div class="narrow_table"></div>
 
 | column_a | column_b | year |
 |:---|:---|:---|
@@ -214,6 +220,8 @@ s3://my-bucket/partitioned/part_col_a=<val>/part_col_b=<val>/data_<thread_number
 #### Configuration
 
 Some additional configuration options exist for the S3 upload, though the default values should suffice for most use cases.
+
+<div class="narrow_table"></div>
 
 | setting | description |  
 |:---|:---|
