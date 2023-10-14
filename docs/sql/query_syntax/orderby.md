@@ -53,7 +53,6 @@ CREATE OR REPLACE TABLE addresses AS
     SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111'
     UNION ALL 
     SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111-0001';
-;
 ```
 
 ```sql
