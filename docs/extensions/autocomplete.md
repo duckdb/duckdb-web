@@ -5,6 +5,8 @@ title: AutoComplete Extension
 
 This extension adds supports for autocomplete in the [CLI client](../api/cli).
 
+<div class="narrow_table"></div>
+
 | Function                                | Description                                            |
 |:----------------------------------------|:-------------------------------------------------------|
 | `sql_auto_complete(`*`query_string`*`)` | Attempts autocompletion on the given *`query_string`*. |
@@ -17,8 +19,10 @@ SELECT * FROM sql_auto_complete('SEL');
 
 Returns:
 
+<div class="narrow_table"></div>
+
 | suggestion  | suggestion_start |
-| ----------- | ---------------- |
+|-------------|------------------|
 | SELECT      |                0 |
 | DELETE      |                0 |
 | INSERT      |                0 |

@@ -264,6 +264,8 @@ CALL pragma_storage_info('table_name');
 
 This call returns the following information for the given table:
 
+<div class="narrow_table"></div>
+
 | name           | type      | description                                           |
 |----------------|-----------|-------------------------------------------------------|
 | `row_group_id` | `BIGINT`  ||

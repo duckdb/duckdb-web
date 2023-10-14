@@ -6,6 +6,7 @@ blurb: An interval specifies a period of time measured in units of a specific da
 
 Intervals represent a period of time. This period can be measured in a specific unit or combination of units, for example years, days, or seconds. Intervals are generally used to *modify* timestamps or dates by either adding or subtracting them.
 
+<div class="narrow_table"></div>
 
 | Name | Description |
 |:---|:---|

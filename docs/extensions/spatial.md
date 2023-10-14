@@ -138,6 +138,8 @@ Compute relationships and spatial predicates between geometries.
 
 ## Spatial Aggregate Functions
 
+<div class="narrow_table"></div>
+
 | Aggregate functions                       | Implemented with |
 |-------------------------------------------|------------------|
 | `GEOMETRY ST_Envelope_Agg(GEOMETRY)`      | 🦆               |

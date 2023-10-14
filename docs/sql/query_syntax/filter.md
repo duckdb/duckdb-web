@@ -23,6 +23,8 @@ SELECT
 FROM generate_series(1, 10) tbl(i);
 ```
 
+<div class="narrow_table"></div>
+
 | total_rows | lte_five | odds |
 |:---|:---|:---|
 | 10 | 5 | 5 |
@@ -37,6 +39,8 @@ SELECT
     median(i) FILTER (WHERE i % 2 = 1 AND i <= 5) AS odds_lte_five_median
 FROM generate_series(1, 10) tbl(i);
 ```
+
+<div class="narrow_table"></div>
 
 | lte_five_sum | odds_median | odds_lte_five_median |
 |:---|:---|:---|
@@ -81,6 +85,8 @@ SELECT
 FROM stacked_data;
 ```
 
+<div class="narrow_table"></div>
+
 |   2022   |   2023   |   2024   |   2025   |  NULLs   |
 |:---|:---|:---|:---|:---|
 | 25000000 | 25000000 | 25000000 | 12500000 | 12500000 |
@@ -98,6 +104,8 @@ SELECT
 FROM stacked_data;
 ```
 
+<div class="narrow_table"></div>
+
 |   2022   |   2023   |   2024   |   2025   |  NULLs   |
 |:---|:---|:---|:---|:---|
 | 1474561 | 25804801 | 50749441 | 76431361 | 87500001 |
@@ -112,6 +120,8 @@ SELECT
     first(CASE WHEN year IS NULL THEN i END) AS "NULLs"
 FROM stacked_data;
 ```
+
+<div class="narrow_table"></div>
 
 |   2022   |   2023   |   2024   |   2025   |  NULLs   |
 |:---|:---|:---|:---|:---|

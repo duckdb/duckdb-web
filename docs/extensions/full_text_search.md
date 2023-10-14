@@ -39,6 +39,8 @@ drop_fts_index(input_table)
 
 Drops a FTS index for the specified table.
 
+<div class="narrow_table"></div>
+
 | Name | Type | Description |
 |:--|:--|:-----------|
 |input_table|`VARCHAR`|Qualified name of input table, e.g., `'table_name'` or `'main.table_name'`|

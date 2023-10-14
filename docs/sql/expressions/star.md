@@ -61,6 +61,8 @@ INSERT INTO numbers VALUES (1, 10), (2, 20), (3, NULL);
 SELECT MIN(COLUMNS(*)), COUNT(COLUMNS(*)) FROM numbers;
 ```
 
+<div class="narrow_table"></div>
+
 | min(numbers.id) | min(numbers.number) | count(numbers.id) | count(numbers.number) |
 |-----------------|---------------------|-------------------|-----------------------|
 | 1               | 10                  | 3                 | 2                     |
@@ -71,6 +73,8 @@ The `*` expression in the `COLUMNS` statement can also contain `EXCLUDE` or `REP
 SELECT MIN(COLUMNS(* REPLACE (number + id AS number))), COUNT(COLUMNS(* EXCLUDE (number))) FROM numbers;
 ```
 
+<div class="narrow_table"></div>
+
 | min(numbers.id) | min(number := (number + id)) | count(numbers.id) |
 |-----------------|------------------------------|-------------------|
 | 1               | 11                           | 3                 |
@@ -80,6 +84,8 @@ COLUMNS expressions can also be combined, as long as the `COLUMNS` contains the 
 ```sql
 SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 ```
+
+<div class="narrow_table"></div>
 
 | (numbers.id + numbers.id) | (numbers.number + numbers.number) |
 |---------------------------|-----------------------------------|
@@ -96,6 +102,8 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 SELECT COLUMNS('(id|numbers?)') FROM numbers;
 ```
 
+<div class="narrow_table"></div>
+
 | id | number |
 |----|--------|
 | 1  | 10     |
@@ -109,6 +117,8 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 ```sql
 SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 ```
+
+<div class="narrow_table"></div>
 
 | number |
 |--------|
@@ -126,6 +136,8 @@ See the [struct](../data_types/struct) and [nested function](../functions/nested
 -- All keys within a struct can be returned as separate columns using *
 SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} AS a);
 ```
+
+<div class="narrow_table"></div>
 
 | x | y | z |
 |:---|:---|:---|

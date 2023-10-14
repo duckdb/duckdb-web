@@ -36,6 +36,8 @@ The functions below are difficult to categorize into specific function types and
 
 A table function is used in place of a table in a `FROM` clause.
 
+<div class="narrow_table"></div>
+
 | Function | Description | Example |
 |:--|:---|:-|
 | `glob(`*`search_path`*`)` | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax](patternmatching). | `glob('*')` |

@@ -78,6 +78,8 @@ Functions related to query execution:
 
 Functions related to binding, used for bulk insertion or in prepared statements.
 
+<div class="narrow_table"></div>
+
 | Function Name | Description | Arguments | Example |
 |:---|:-|:---|:----|
 | `StatementBindStream` |  Bind Arrow Stream. This can be used for bulk inserts or prepared statements.| `(AdbcStatement*, ArrowArrayStream*, AdbcError*)` | `StatementBindStream(&adbc_statement, &input_data, &adbc_error)` |

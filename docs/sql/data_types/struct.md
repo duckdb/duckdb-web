@@ -79,6 +79,8 @@ This is particularly useful when a prior operation creates a struct of unknown s
 SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} AS a);
 ```
 
+<div class="narrow_table"></div>
+
 | x | y | z |
 |:---|:---|:---|
 | 1 | 2 | 3 |
@@ -121,6 +123,8 @@ When converting multiple expressions into a `STRUCT`, the `row` function name is
 
 #### Example Data Table Named t1
 
+<div class="narrow_table"></div>
+
 | my_column | another_column |
 |:---|:---|
 | 1 | a |
@@ -136,6 +140,8 @@ FROM t1;
 ```
 
 #### Example Output
+
+<div class="narrow_table"></div>
 
 | my_struct_column | identical_struct_column |
 |:---|:---|
@@ -154,6 +160,8 @@ FROM t1;
 ```
 
 #### Example Output
+
+<div class="narrow_table"></div>
 
 | my_struct_column | identical_struct_column |
 |:---|:---|

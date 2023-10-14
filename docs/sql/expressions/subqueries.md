@@ -14,6 +14,8 @@ Consider the following table:
 
 ### Grades
 
+<div class="narrow_table"></div>
+
 | grade | course |
 |---:|:---|
 | 7 | Math |

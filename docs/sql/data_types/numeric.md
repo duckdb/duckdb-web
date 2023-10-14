@@ -30,6 +30,8 @@ The data type `DECIMAL(WIDTH, SCALE)` represents an exact fixed-point decimal va
 
 Internally, decimals are represented as integers depending on their specified width.
 
+<div class="narrow_table"></div>
+
 | Width | Internal | Size (Bytes) |
 |:---|:---|---:|
 | 1-4 | `INT16` | 2 |
@@ -42,6 +44,8 @@ Performance can be impacted by using too large decimals when not required. In pa
 ## Floating-Point Types
 
 The data types `REAL` and `DOUBLE` precision are inexact, variable-precision numeric types. In practice, these types are usually implementations of IEEE Standard 754 for Binary Floating-Point Arithmetic (single and double precision, respectively), to the extent that the underlying processor, operating system, and compiler support it.
+
+<div class="narrow_table"></div>
 
 | Name | Aliases | Description |
 |:--|:--|:--------|

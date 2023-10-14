@@ -35,6 +35,8 @@ PRAGMA force_index_join;
 
 ### Parameters
 
+<div class="narrow_table"></div>
+
 | Name | Description |
 |:-|:-----|
 |`UNIQUE`|Causes the system to check for duplicate values in the table when the index is created (if data already exist) and each time data is added. Attempts to insert or update data that would result in duplicate entries will generate an error.|
@@ -65,6 +67,8 @@ CREATE INDEX i_index ON integers ((j+k));
 
 
 ### Parameters
+
+<div class="narrow_table"></div>
 
 | Name | Description |
 |:---|:---|

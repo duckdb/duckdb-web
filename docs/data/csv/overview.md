@@ -76,6 +76,8 @@ The `read_csv_auto` is the simplest method of loading CSV files: it automaticall
 SELECT * FROM read_csv_auto('flights.csv');
 ```
 
+<div class="narrow_table"></div>
+
 |FlightDate|UniqueCarrier| OriginCityName  | DestCityName  |
 |----------|-------------|-----------------|---------------|
 |1988-01-01|AA           |New York, NY     |Los Angeles, CA|
@@ -90,6 +92,8 @@ We can use `read_csv_auto` to create a persistent table as well:
 CREATE TABLE ontime AS SELECT * FROM read_csv_auto('flights.csv');
 DESCRIBE ontime;
 ```
+
+<div class="narrow_table"></div>
 
 |Field         |Type   |Null|Key |Default|Extra|
 |--------------|-------|----|----|-------|-----|
@@ -123,6 +127,8 @@ CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCH
 COPY ontime FROM 'flights.csv' (DELIMITER '|', HEADER);
 SELECT * FROM ontime;
 ```
+
+<div class="narrow_table"></div>
 
 |flightdate|uniquecarrier| origincityname  | destcityname  |
 |----------|-------------|-----------------|---------------|

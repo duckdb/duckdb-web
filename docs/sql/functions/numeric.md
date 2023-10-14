@@ -7,6 +7,8 @@ title: Numeric Functions
 
 The table below shows the available mathematical operators for numeric types.
 
+<div class="narrow_table"></div>
+
 | Operator | Description | Example | Result |
 |:-|:---|:-|:-|
 | `+` | addition | `2 + 3` | 5 |
