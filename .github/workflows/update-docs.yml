@@ -23,6 +23,7 @@ jobs:
       - run: pip install -r requirements.txt -U
       - run: pip install duckdb --pre -U  # grab the latest duckdb python dev version
       - run: gh repo clone duckdb/duckdb
+      - run: gh repo clone duckdb/duckdb-node
       - name: download latest duckdb cli binary
         run: |
           RUN_ID=$(gh run list --branch main --repo duckdb/duckdb --workflow LinuxRelease -q '.[] | select(.conclusion == "success").databaseId' --json conclusion,databaseId | head -n 1)
