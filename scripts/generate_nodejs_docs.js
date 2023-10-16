@@ -9,7 +9,7 @@ if (!duckdb) {
     process.exit(1);
 }
 
-let docs = jsdoc2md.renderSync({ files: duckdb + '/tools/nodejs/lib/*.js' });
+let docs = jsdoc2md.renderSync({ files: duckdb + '/lib/*.js' });
 docs = `\
 ---
 layout: docu
