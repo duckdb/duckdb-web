@@ -4,7 +4,7 @@ $(document).ready(function(){
 		var hash = window.location.hash;
 		if ($(hash).length) {
 			$('html, body').animate({
-				scrollTop: $(hash).offset().top-55
+				scrollTop: $(hash).offset().top-115
 			}, 300, 'swing');
 			if( $('.frequentlyaskedquestions').length ){
 				$('h3'+hash).toggleClass('open');
@@ -195,7 +195,7 @@ $(document).ready(function(){
         if (target.length) {
           // event.preventDefault();
           $('html, body').animate({
-            scrollTop: target.offset().top-75
+            scrollTop: target.offset().top-120
           }, 1000 );
         }
       }
@@ -526,13 +526,5 @@ $(document).ready(function(){
 		}
 	});
 	
-	if( $('body').hasClass('documentation') ){
-		$('#main_content_wrap table').each(function(){
-			var tablelength = $(this).text().length;
-			if( tablelength < 400){
-				$(this).addClass('narrow')
-			}
-		})
-	}
 	
 });
