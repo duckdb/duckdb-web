@@ -172,7 +172,7 @@ LOAD inet;
 SELECT '127.0.0.1'::INET;
 ```
 
-[**AWS Extension**](https://github.com/duckdblabs/duckdb_aws). This release marks the launch of the DuckDB AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
+[**AWS Extension**](https://github.com/duckdb/duckdb_aws). This release marks the launch of the DuckDB AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
 
 ```sql
 CALL load_aws_credentials();
@@ -181,7 +181,7 @@ SELECT * FROM "s3://some-bucket/that/requires/authentication.parquet";
 
 [See the documentation for more information](https://duckdb.org/docs/extensions/aws).
 
-[**Experimental Iceberg Extension**](https://github.com/duckdblabs/duckdb_iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
+[**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb_iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
 ```sql
 SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
@@ -189,7 +189,7 @@ SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_P
 
 [See the documentation for more information](https://duckdb.org/docs/extensions/iceberg).
 
-[**Experimental Azure Extension**](https://github.com/duckdblabs/duckdb_azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
+[**Experimental Azure Extension**](https://github.com/duckdb/duckdb_azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 
 ```sql
 SET azure_storage_connection_string = '<your_connection_string>';

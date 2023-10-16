@@ -55,4 +55,4 @@ LOAD postgres;
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/postgres_scanner)
+[<span class="github">GitHub</span>](https://github.com/duckdb/postgres_scanner)

@@ -35,9 +35,9 @@ In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session sto
 | inet                                                                                                                                 | Adds support for IP-related data types and functions             |                 |
 | [json](../../extensions/json)                                                                                                        | Adds support for JSON operations                                 |                 |
 | [parquet](../../extensions/parquet)                                                                                                  | Adds support for reading and writing parquet files               |                 |
-| [sqlite_scanner](../../extensions/sqlite_scanner) [<span class="github">GitHub</span>](https://github.com/duckdblabs/sqlite_scanner) | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
+| [sqlite_scanner](../../extensions/sqlite_scanner) [<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner) | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
 | sqlsmith                                                                                                                             |                                                                  |                 |
-| [substrait](../../extensions/substrait) [<span class="github">GitHub</span>](https://github.com/duckdblabs/substrait)                | Adds support for the Substrait integration                       |                 |
+| [substrait](../../extensions/substrait) [<span class="github">GitHub</span>](https://github.com/duckdb/substrait)                | Adds support for the Substrait integration                       |                 |
 | [tpcds](../../extensions/tpcds)                                                                                                      | Adds TPC-DS data generation and query support                    |                 |
 | [tpch](../../extensions/tpch)                                                                                                        | Adds TPC-H data generation and query support                     |                 |
 

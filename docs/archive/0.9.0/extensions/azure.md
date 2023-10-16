@@ -29,4 +29,4 @@ SELECT * from 'azure://<my_container>/*.csv';
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_azure)
+[<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_azure)

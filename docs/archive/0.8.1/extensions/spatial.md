@@ -189,4 +189,4 @@ WITH (FORMAT GDAL, DRIVER 'GeoJSON', LAYER_CREATION_OPTIONS 'WRITE_BBOX=YES');
 - `LAYER_CREATION_OPTIONS`: list of options to pass to the GDAL driver. See the GDAL docs for the driver you are using for a list of available options.
 
 ## Extra Information
-See [the repo](https://github.com/duckdblabs/duckdb_spatial) for the source code of the extension, or the [blog post](/2023/04/28/spatial).
+See [the repo](https://github.com/duckdb/duckdb_spatial) for the source code of the extension, or the [blog post](/2023/04/28/spatial).

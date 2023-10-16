@@ -130,4 +130,4 @@ CALL sqlite_attach('sakila.db', overwrite=true);
 ```
 
 ## Extra Information
-See [the repo](https://github.com/duckdblabs/sqlite_scanner) for the source code of the extension.
+See [the repo](https://github.com/duckdb/sqlite_scanner) for the source code of the extension.

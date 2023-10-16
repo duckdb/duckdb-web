@@ -132,4 +132,4 @@ df <- dbFetch(result)
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/substrait)
+[<span class="github">GitHub</span>](https://github.com/duckdb/substrait)
