@@ -54,4 +54,4 @@ SELECT * FROM POSTGRES_SCAN('', 'public', 'mytable');
 To use `filter_pushdown` use the `POSTGRES_SCAN_PUSHDOWN` function.
 
 ## Extra Information
-See [the repo](https://github.com/duckdb/postgresscanner) for the source code of the extension, or the [official announcement](/2022/09/30/postgres-scanner) for implementation details and background.
+See [the repo](https://github.com/duckdb/postgres_scanner) for the source code of the extension, or the [official announcement](/2022/09/30/postgres-scanner) for implementation details and background.
