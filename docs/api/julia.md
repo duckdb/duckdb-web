@@ -10,15 +10,25 @@ The package also supports multi-threaded execution. It uses Julia threads/tasks 
 
 ## Installation
 
+Install DuckDB as follows:
+
+```julia
+using Pkg
+Pkg.add("DuckDB")
+```
+
+Alternatively:
+
+
 ```julia
 pkg> add DuckDB
-
-julia> using DuckDB
 ```
 
 ## Basics
 
 ```julia
+using DuckDB
+
 # create a new in-memory database
 con = DBInterface.connect(DuckDB.DB, ":memory:")
 
