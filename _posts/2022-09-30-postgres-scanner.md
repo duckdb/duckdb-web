@@ -188,6 +188,6 @@ COPY(SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'lineitem')) TO '
 ## Conclusion
 
 DuckDB's new Postgres Scanner extension can read PostgreSQL's tables while PostgreSQL is running and compute the answers to complex OLAP SQL queries often faster than PostgreSQL itself can without the need to duplicate data. The Postgres Scanner is currently in preview and we are curious to hear what you think. 
-If you find any issues with the Postgres Scanner, please [report them](https://github.com/duckdb/postgresscanner/issues). 
+If you find any issues with the Postgres Scanner, please [report them](https://github.com/duckdb/postgres_scanner/issues). 
 
 
