@@ -296,4 +296,4 @@ Available options:
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_spatial)
+[<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_spatial)

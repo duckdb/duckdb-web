@@ -202,4 +202,4 @@ WITH (FORMAT GDAL, DRIVER 'GeoJSON', LAYER_CREATION_OPTIONS 'WRITE_BBOX=YES');
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_spatial)
+[<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_spatial)

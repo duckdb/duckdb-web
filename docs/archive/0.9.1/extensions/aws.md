@@ -78,4 +78,4 @@ See also the [S3 API capabilities of the `httpfs` extension](httpfs#s3).
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_aws)
+[<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_aws)

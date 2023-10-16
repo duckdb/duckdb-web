@@ -133,4 +133,4 @@ LOAD sqlite;
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/sqlite_scanner)
+[<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner)
