@@ -21,7 +21,6 @@
 			<li data-id=".r">R</li>
 			<li data-id=".java">Java</li>
 			<li data-id=".js">Node.js</li>
-			<li data-id=".julia">Julia</li>
 			<li data-id=".cplusplus">C/C++</li>
 			<li data-id=".odbc">ODBC</li>
 		</ul>
@@ -32,7 +31,6 @@
 				<option value=".r">R</option>
 				<option value=".java">Java</option>
 				<option value=".js">Node.js</option>
-				<option value=".julia">Julia</option>
 				<option value=".cplusplus">C/C++</option>
 				<option value=".odbc">ODBC</option>
 			</select>
@@ -90,25 +88,6 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	<div class="latest main cli binary"></div>
 	<!-- End Empty Results -->
 
-	<div class="latest julia">
-		{%- highlight julia -%}
-using Pkg
-Pkg.add("DuckDB"){%- endhighlight -%}
-	</div>
-
-	<div class="example julia">
-		{%- highlight julia -%}
-# create a new in-memory database
-con = DBInterface.connect(DuckDB.DB, ":memory:")
-
-# create a table
-DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
-	</div>
-
-	<div class="main julia">
-		Not available
-	</div>
-
 	<div class="latest python">
 		{% highlight bash %}pip install duckdb=={{ site.currentduckdbversion }}{% endhighlight %}
 	</div>
@@ -124,6 +103,8 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
  <artifactId>duckdb_jdbc</artifactId>
  <version>{{ site.currentjavaversion }}</version>
 </dependency>{% endhighlight %}
+<br/>
+Direct link to JAR: <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/duckdb_jdbc-{{ site.currentduckdbversion }}.jar">duckdb_jdbc-{{ site.currentduckdbversion }}.jar</a>
 	</div>
 
 		<div class="latest js">
