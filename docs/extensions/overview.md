@@ -91,9 +91,15 @@ To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsig
 
 ## Installation Location and Sharing Extensions between Clients
 
-Extensions are installed under the user's home directory, to `~/.duckdb/extensions/{DuckDB version}/{Platform name}`. For example, the extensions for DuckDB version 0.9.0 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.9.0/osx_arm64`.
+Extensions are by default installed under the user's home directory, to `~/.duckdb/extensions/{DuckDB version}/{Platform name}`. For example, the extensions for DuckDB version 0.9.0 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.9.0/osx_arm64`.
 
 The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_. For example, if an extension is installed with version 0.9.0 of the CLI client, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.9.0.
+
+To specify a different extension directory, use the `extension_directory` configuration option:
+
+```sql
+SET extension_directory=/path/to/your/extension/directory
+```
 
 > For development builds, the directory of the extensions corresponds to the Git hash of the build, e.g., `~/.duckdb/extensions/fc2e4b26a6/linux_amd64_gcc4`.
 
