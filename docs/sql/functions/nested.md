@@ -73,9 +73,9 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 | *`struct`*`.`*`entry`* | Dot notation serves as an alias for `struct_extract`. | `({'i': 3, 's': 'string'}).s` | `string` |
 | *`struct`*`[`*`entry`*`]` | Bracket notation serves as an alias for `struct_extract`. | `({'i': 3, 's': 'string'})['s']` | `string` |
 | `row(`*`any`*`, ...)` | Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. | `row(i, i % 4, i / 4)` | `{'i': 3, 'v2': 3, 'v3': 0}`|
-| `struct_extract(`*`struct`*`, `*`'entry'`*`)` | Extract the named entry from the struct. | `struct_extract(s, 'i')` | `4` |
-| `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`|
-| `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). | `struct_insert({'a': 1}, b := 2)`    | `{'a': 1, 'b': 2}`           |
+| `struct_extract(`*`struct`*`, `*`'entry'`*`)` | Extract the named entry from the struct. | `struct_extract({'i': 3, 'v2': 3, 'v3': 0}, 'i')` | `3` |
+| `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. | `struct_pack(i := 4, s := 'string')` | `{'i': 4, 's': string}` |
+| `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). | `struct_insert({'a': 1}, b := 2)` | `{'a': 1, 'b': 2}` |
 
 ## Map Functions
 
@@ -87,9 +87,9 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 | `cardinality(`*`map`*`)` | Return the size of the map (or the number of entries in the map). | `cardinality(map([4, 2], ['a', 'b']))` | `2` |
 | `map_from_entries(`*`STRUCT(k, v)[]`*`)` | Returns a map created from the entries of the array | `map_from_entries([{k: 5, v: 'val1'}, {k: 3, v: 'val2'}])` | `{5=val1, 3=val2}` |
 | `map()` | Returns an empty map. | `map()` | `{}` |
-| `map_keys(`*`map`*`)` | Return a list of all keys in the map. | `map_keys(map([100, 5], [42, 43]))` | `[100, 42]` |
-| `map_values(`*`map`*`)` | Return a list of all values in the map. | `map_values(map([100, 5], [42, 43]))` | `[5, 33]` |
-| `map_entries(`*`map`*`)` | Return a list of struct(k, v) for each key-value pair in the map. | `map_entries(map([100, 5], [42, 43]))` | `[{'k': 100, 'v': 42}, {'k': 5, 'v': 43}]` |
+| `map_keys(`*`map`*`)` | Return a list of all keys in the map. | `map_keys(map([100, 5], [42, 43]))` | `[100, 5]` |
+| `map_values(`*`map`*`)` | Return a list of all values in the map. | `map_values(map([100, 5], [42, 43]))` | `[42, 43]` |
+| `map_entries(`*`map`*`)` | Return a list of struct(k, v) for each key-value pair in the map. | `map_entries(map([100, 5], [42, 43]))` | `[{'key': 100, 'value': 42}, {'key': 5, 'value': 43}]` |
 
 ## Union Functions
 
