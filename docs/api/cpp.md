@@ -55,7 +55,7 @@ std::unique_ptr<QueryResult> result = prepare->Execute(12);
 
 ### UDF API
 
-The UDF API is exposed in duckdb:Connection through the methods: `CreateScalarFunction()` and `CreateVectorizedFunction()` and variants. 
+The UDF API allows the definition of user-defined functions. It is exposed in `duckdb:Connection` through the methods: `CreateScalarFunction()`, `CreateVectorizedFunction()`, and variants.
 These methods created UDFs into the temporary schema (TEMP_SCHEMA) of the owner connection that is the only one allowed to use and change them.
 
 #### CreateScalarFunction

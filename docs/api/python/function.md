@@ -3,10 +3,11 @@ layout: docu
 title: Python Function API
 ---
 
-You can create a DuckDB User Defined Function (UDF) out of a python function so it can be used in SQL queries.
-Just like regular [functions](../../sql/functions/overview) they need to have a name, a return type and parameter types.
+You can create a DuckDB user-defined function (UDF) out of a Python function so it can be used in SQL queries.
+Similarly to regular [functions](../../sql/functions/overview), they need to have a name, a return type and parameter types.
 
-Example using a python function that calls a third party library.
+Here is an example using a Python function that calls a third-party library.
+
 ```python
 import duckdb
 from duckdb.typing import *
