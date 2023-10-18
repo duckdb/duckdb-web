@@ -35,7 +35,7 @@ Among other things, DuckDB's design is different from conventional data manageme
 
 ## Usage
 
-The Postgres Scanner DuckDB extension source code [is available on GitHub](https://github.com/duckdb/postgresscanner), but it is directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
+The Postgres Scanner DuckDB extension source code [is available on GitHub](https://github.com/duckdb/postgres_scanner), but it is directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
 ```SQL
 INSTALL postgres_scanner;
 ```
