@@ -109,9 +109,23 @@ con.close()
 # Note: connections also closed implicitly when they go out of scope
 ```
 
+You can also use a context manager to ensure that the connection is closed:
+
+```python
+import duckdb
+
+with duckdb.connect('file.db') as con:
+    con.sql('CREATE TABLE test(i INTEGER)')
+    con.sql('INSERT INTO test VALUES (42)')
+    con.table('test').show()
+    # the context manager closes the connection automatically
+```
+
+### Connection Object and Module
+
 The connection object and the `duckdb` module can be used interchangeably – they support the same methods. The only difference is that when using the `duckdb` module a global in-memory database is used.
 
-Note that if you are developing a package designed for others to use using duckdb, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages. 
+Note that if you are developing a package designed for others to use, and use DuckDB in the package, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages.
 
 ## Loading and Installing Extensions
 
