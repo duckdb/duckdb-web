@@ -5,6 +5,10 @@
       "slug": "/dev/",
       "mainfolderitems": [
         {
+          "page": "DuckDB Repositories",
+          "url": "/internals/repositories"
+        },
+        {
           "page": "Testing",
           "slug": "sqllogictest",
           "subfolderitems": [
