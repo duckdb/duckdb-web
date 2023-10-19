@@ -997,6 +997,10 @@
               "url": "icu"
             },
             {
+              "page": "inet",
+              "url": "inet"
+            },
+            {
               "page": "JSON",
               "url": "json"
             },
