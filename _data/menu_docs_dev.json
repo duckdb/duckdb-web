@@ -993,6 +993,10 @@
               "url": "iceberg"
             },
             {
+              "page": "ICU",
+              "url": "icu"
+            },
+            {
               "page": "JSON",
               "url": "json"
             },
