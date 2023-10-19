@@ -45,7 +45,7 @@ The division into components makes the interval class suitable for adding or sub
 SELECT DATE '2000-01-01' + INTERVAL (i) MONTH FROM range(12) t(i);
 ```
 
-## Difference Between Dates
+## Difference between Dates
 
 If we subtract two timestamps from one another, we obtain an interval describing the difference between the timestamps with the *days and microseconds* components. For example:
 
