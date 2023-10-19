@@ -985,7 +985,7 @@
               "url": "full_text_search"
             },
             {
-              "page": "HTTPFS",
+              "page": "httpfs",
               "url": "httpfs"
             },
             {
