@@ -61,7 +61,7 @@ See [Timestamp Functions](../../sql/functions/timestamp).
 ## Time Zones
 
 The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitable extension.
-The built in ICU extension implements all the binning and arithmetic functions using the
+The built-in [ICU extension](../../extensions/icu) implements all the binning and arithmetic functions using the
 [International Components for Unicode](https://icu.unicode.org) time zone and calendar functions.
 
 <!-- 
