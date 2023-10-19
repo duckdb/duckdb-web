@@ -3,6 +3,7 @@ function GenerateCreateSequence(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Keyword("CREATE"),
+			GenerateOrReplace(),
 			GenerateTemporary(options),
 			Sequence([
 				Keyword("SEQUENCE"),
@@ -11,22 +12,22 @@ function GenerateCreateSequence(options = {}) {
 			Optional(Sequence([
 				Keyword("INCREMENT"),
 				Optional(Keyword("BY"), "skip"),
-				Expression()
+				Expression("increment")
 			]), "skip"),
 			Choice(0, [
 				new Skip(),
 				Sequence([Keyword("NO"), Keyword("MINVALUE")]),
-				Sequence([Keyword("MINVALUE"), Expression()])
+				Sequence([Keyword("MINVALUE"), Expression("minvalue")])
 			]),
 			Choice(0, [
 				new Skip(),
 				Sequence([Keyword("NO"), Keyword("MAXVALUE")]),
-				Sequence([Keyword("MAXVALUE"), Expression()])
+				Sequence([Keyword("MAXVALUE"), Expression("maxvalue")])
 			]),
 			Optional(Sequence([
 				Keyword("START"),
 				Optional(Keyword("WITH"), "skip"),
-				Expression()
+				Expression("start")
 			]), "skip"),
 			Optional(Sequence([
 				Optional(Keyword("NO"), "skip"),

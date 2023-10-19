@@ -8,35 +8,71 @@ The `CREATE SEQUENCE` statement creates a new sequence number generator.
 
 ### Examples
 
-Create an ascending sequence called serial, starting at 101:
-
 ```sql
+-- generate an ascending sequence starting from 1
+CREATE SEQUENCE serial;
+-- generate sequence from a given start number
 CREATE SEQUENCE serial START 101;
+-- generate odd numbers using INCREMENT BY
+CREATE SEQUENCE serial START WITH 1 INCREMENT BY 2;
+-- generate a descending sequqnce starting from 99
+CREATE SEQUENCE serial START WITH 99 INCREMENT BY -1 MAXVALUE 99;
+-- by default, cycles are not allowed and will result in a Serialization Error, e.g.:
+-- reached maximum value of sequence "serial" (10)
+CREATE SEQUENCE serial START WITH 1 MAXVALUE 10;
+-- CYCLE allows cycling through the same sequence repeatedly
+CREATE SEQUENCE serial START WITH 1 MAXVALUE 10 CYCLE;
 ```
 
-Select the next number from this sequence:
+Sequences can be created and dropped similarly to other catalogue items:
+
 ```sql
-SELECT nextval('serial');
-
- nextval
----------
-     101
+-- overwrite an existing sequence
+CREATE OR REPLACE SEQUENCE serial;
+-- only create sequence if no such sequence exists yet
+CREATE SEQUENCE IF NOT EXISTS serial;
+-- remove sequence
+DROP SEQUENCE serial;
+-- remove sequence if exists
+DROP SEQUENCE IF EXISTS serial;
 ```
 
-Optionally you may also view the current number from this sequence. 
-Note that the `nextval` function must have already been called before calling `currval`.
+### Selecting the Next Value
+
+Select the next number from a sequence:
+
 ```sql
-SELECT currval('serial');
-
- currval
----------
-     101
+SELECT nextval('serial') AS nextval;
+```
+```text
+┌─────────┐
+│ nextval │
+│  int64  │
+├─────────┤
+│       1 │
+└─────────┘
 ```
 
-Use this sequence in an `INSERT` command:
+Using this sequence in an `INSERT` command:
 
 ```sql
 INSERT INTO distributors VALUES (nextval('serial'), 'nothing');
+```
+
+### Selecting the Current Value
+
+You may also view the current number from the sequence. Note that the `nextval` function must have already been called before calling `currval`, otherwise a Serialization Error ("sequence is not yet defined in this session") will be thrown.
+
+```sql
+SELECT currval('serial') AS currval;
+```
+```text
+┌─────────┐
+│ currval │
+│  int64  │
+├─────────┤
+│       1 │
+└─────────┘
 ```
 
 ### Syntax
@@ -63,5 +99,4 @@ After a sequence is created, you use the function `nextval` to operate on the se
 
 If `NO CYCLE` is specified, any calls to nextval after the sequence has reached its maximum value will return an error. If neither `CYCLE` or `NO CYCLE` are specified, `NO CYCLE` is the default.
 
-> Use `DROP SEQUENCE` to remove a sequence. 
 > Sequences are based on `BIGINT` arithmetic, so the range cannot exceed the range of an eight-byte integer (-9223372036854775808 to 9223372036854775807).
