@@ -3,10 +3,33 @@ layout: docu
 title: Rules for Case Sensitivity
 ---
 
+## Keywords and Function Names
+
+SQL keywords and function names are case-insensitive in DuckDB.
+
+### Examples
+
+The following two queries are equivalent:
+
+```sql
+select COS(Pi()) as CosineOfPi;
+SELECT cos(pi()) AS CosineOfPi;
+```
+```text
+┌────────────┐
+│ CosineOfPi │
+│   double   │
+├────────────┤
+│       -1.0 │
+└────────────┘
+```
+
+## Identifiers
+
 Following the convention of the SQL standard, identifiers in DuckDB are case-insensitive.
 However, each character's case (uppercase/lowercase) is maintained as entered by the user.
 
-## Examples
+### Examples
 
 The case entered by the user is preserved even if a query uses different cases when referring to the identifier:
 
