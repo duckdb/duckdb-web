@@ -5,7 +5,7 @@ title: Official Extensions
 
 | Extension name | Description | Aliases |
 |---|-----|--|
-| arrow [<span class="github">GitHub</span>](https://github.com/duckdb/arrow)                                           | A zero-copy data integration between Apache Arrow and DuckDB                       |                 |
+| [arrow](arrow) [<span class="github">GitHub</span>](https://github.com/duckdb/arrow)                                           | A zero-copy data integration between Apache Arrow and DuckDB                       |                 |
 | [autocomplete](autocomplete)                                                                                              | Adds support for autocomplete in the shell                                         |                 |
 | [aws](aws) [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_aws)                                 | Provides features that depend on the AWS SDK                                       |                 |
 | [azure](azure) [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_azure)                           | Adds a filesystem abstraction for Azure blob storage to DuckDB                     |                 |
