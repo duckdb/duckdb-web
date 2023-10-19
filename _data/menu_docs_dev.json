@@ -961,6 +961,10 @@
               "url": "working_with_extensions"
             },
             {
+              "page": "Arrow",
+              "url": "arrow"
+            },
+            {
               "page": "AutoComplete",
               "url": "autocomplete"
             },
