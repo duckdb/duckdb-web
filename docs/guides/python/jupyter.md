@@ -17,12 +17,12 @@ This example workflow is also available as a [Google Colab notebook](https://col
 Four additional libraries improve the DuckDB experience in Jupyter notebooks. 
 1. [jupysql](https://github.com/ploomber/jupysql)
     * Convert a Jupyter code cell into a SQL cell
-2. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
-    * Used by SQLAlchemy to connect to DuckDB
-3. [Pandas](https://github.com/pandas-dev/pandas)
+2. [Pandas](https://github.com/pandas-dev/pandas)
     * Clean table visualizations and compatibility with other analysis
-4. [matplotlib](https://github.com/matplotlib/matplotlib)
+3. [matplotlib](https://github.com/matplotlib/matplotlib)
     * Plotting with Python
+4. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
+    * Used by SQLAlchemy to connect to DuckDB (optional)
 
 ```python
 # Run these pip install commands from the command line if Jupyter Notebook is not yet installed.
@@ -34,15 +34,31 @@ pip install notebook
 
 # Install supporting libraries
 pip install jupysql
-pip install duckdb-engine
 pip install pandas
 pip install matplotlib
+pip install duckdb-engine
 ```
 
 ## Library Import and Configuration
 
-Next, open a Jupyter Notebook and import the relevant libraries. 
-It's possible to have `%sql` commands and `duckdb.sql` share the same [default connection](../../api/python/dbapi) by providing `duckdb:///:default:` as the SQLAlchemy connection string.
+Open a Jupyter Notebook and import the relevant libraries.
+
+### Connecting to DuckDB Natively
+
+To connect to DuckDB, run:
+
+```python
+import duckdb
+import pandas as pd
+
+%load_ext sql
+conn = duckdb.connect()
+%sql conn --alias duckdb
+```
+
+### Connecting to DuckDB via SQLAlchemy Using duckdb_engine
+
+Alternatively, you can connect to DuckDB via SQLAlchemy Using duckdb_engine. See the [performance and feature differences](https://jupysql.ploomber.io/en/latest/tutorials/duckdb-native-sqlalchemy.html).
 
 ```python
 import duckdb
@@ -61,13 +77,16 @@ Set configurations on jupysql to directly output data to Pandas and to simplify 
 %config SqlMagic.displaycon = False
 ```
 
-Connect jupysql to DuckDB using a SQLAlchemy-style connection string. 
+Connect jupysql to DuckDB using a SQLAlchemy-style connection string.
 Either connect to a new in-memory DuckDB, the default connection or a file backed db.
+
 ```python
 %sql duckdb:///:default:
 # %sql duckdb:///:memory:
 # %sql duckdb:///path/to/file.db
 ```
+
+> The `%sql` command and `duckdb.sql` share the same [default connection](../../api/python/dbapi) if you provide `duckdb:///:default:` as the SQLAlchemy connection string.
 
 ## Querying DuckDB
 
