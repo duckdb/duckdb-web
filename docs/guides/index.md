@@ -28,9 +28,9 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to load an Excel file into a table](../guides/import/excel_import)
 * [How to export a table to an Excel file](../guides/import/excel_export)
 
-### HTTP, S3 and GCP
+### HTTP(S), S3 and GCP
 
-* [How to load a Parquet file directly from HTTP(s)](../guides/import/http_import)
+* [How to load a Parquet file directly from HTTP(S)](../guides/import/http_import)
 * [How to load a Parquet file directly from S3 or GCS](../guides/import/s3_import)
 
 ## Meta Queries
