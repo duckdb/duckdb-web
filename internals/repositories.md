@@ -20,6 +20,8 @@ Several components of DuckDB are maintained in separate repositories.
 
 ## Connectors
 
-* [`arrow`](https://github.com/duckdb/arrow): Arrow
 * [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb): dbt
-* [`substrait`](https://github.com/duckdb/substrait): Substrait
+
+## Extensions
+
+Extension repositories are linked in the [Official Extensions](docs/extensions/official_extensions) page.
