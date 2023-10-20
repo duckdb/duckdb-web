@@ -36,7 +36,7 @@ $ hexdump -n 20 -C mydata.db
 00000014
 ```
 
-A simple example of reading the storage version using python is below.
+A simple example of reading the storage version using Python is below.
 
 ```python
 import struct
