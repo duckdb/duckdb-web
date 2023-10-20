@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: CSV Loading Tips
+title: CSV Import Tips
 ---
 
-Below is a collection of tips to help when attempting to process especially gnarly CSV files. In the examples, we use the [`flights.csv`](/data/flights.csv) file.
+Below is a collection of tips to help when attempting to import complex CSV files. In the examples, we use the [`flights.csv`](/data/flights.csv) file.
 
 #### Override the Header Flag if the Header Is Not Correctly Detected
 
