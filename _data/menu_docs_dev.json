@@ -1001,6 +1001,10 @@
               "url": "inet"
             },
             {
+              "page": "jemalloc",
+              "url": "jemalloc"
+            },
+            {
               "page": "JSON",
               "url": "json"
             },
