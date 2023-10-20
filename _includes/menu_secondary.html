@@ -10,7 +10,7 @@
 					{% if mainentry.url %}
 						{% assign myurl = mainentry.url | slice: 0, 5 %}
 						{% if myurl == 'https' or myurl == 'http:' %}
-						<div class="external"><a href="{{ mainentry.url }}" target="_blank" >{{ mainentry.page }}</a></div>
+						<div class="external"><a href="{{ mainentry.url }}" target="_blank" >{{ mainentry.page }}</a>{% if mainentry.page == 'GitHub' and site.star_count %} <span class="starcount">{{ site.star_count }}</span> {% endif %} </div>
 						{% else %}
 						<div><a href="{{ site.baseurl }}{{ mainentry.url | replace: '/docs', archive_url_slug }}">{{ mainentry.page }}</a>
 				</div>
