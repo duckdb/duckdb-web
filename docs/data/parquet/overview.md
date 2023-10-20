@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Reading and Writing Parquet files
+title: Reading and Writing Parquet Files
 redirect_from:
   - /docs/data/parquet
   - /docs/extensions/parquet

@@ -25,7 +25,7 @@ duckdb.sql("SELECT * FROM 'example.csv'")
 duckdb.sql("SELECT * FROM read_csv_auto('example.csv')")
 ```
 
-See the [CSV Loading](../../data/csv) page for more information.
+See the [CSV Import](../../data/csv) page for more information.
 
 ## Parquet Files
 

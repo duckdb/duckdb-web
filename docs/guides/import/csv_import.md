@@ -33,4 +33,4 @@ Alternatively, the `COPY` statement can also be used to load data from a CSV fil
 COPY tbl FROM 'input.csv';
 ```
 
-For additional options, see the [CSV Loading reference](../../data/csv) and the [`COPY` statement documentation](../../sql/statements/copy).
+For additional options, see the [CSV Import reference](../../data/csv) and the [`COPY` statement documentation](../../sql/statements/copy).
