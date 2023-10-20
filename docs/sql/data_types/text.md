@@ -24,7 +24,37 @@ CREATE TABLE strings(
 );
 ```
 
-The `VARCHAR` field allows storage of unicode characters. Internally, the data is encoded as UTF-8.
+The `VARCHAR` field allows storage of Unicode characters. Internally, the data is encoded as UTF-8.
+
+## Formatting Strings
+
+Strings in DuckDB are surrounded by single quote (apostrophe) characters (`'`):
+
+```sql
+SELECT 'Hello world' AS msg;
+```
+```text
+┌─────────────┐
+│     msg     │
+│   varchar   │
+├─────────────┤
+│ Hello world │
+└─────────────┘
+```
+
+To include a single quote character in a string, use `''`:
+
+```sql
+SELECT 'Hello ''world''' AS msg;
+```
+```text
+┌───────────────┐
+│      msg      │
+│    varchar    │
+├───────────────┤
+│ Hello 'world' │
+└───────────────┘
+```
 
 ## Functions
 
