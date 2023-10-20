@@ -74,3 +74,8 @@ To see the commits that changed each storage version, see the [commit log](https
 | 6               | v0.2.3                 |
 | 4               | v0.2.2                 |
 | 1               | v0.2.1 and prior       |
+
+## Disk Usage
+
+The disk usage of DuckDB's format depends on a number of factors, including the data type and the data distribution, the compression methods used, etc.
+As a rough approximation, loading 100 GB of uncompressed CSV files into a DuckDB database file will require 25 GB of disk space, while loading 100 GB of Parquet files will require 120 GB of disk space.
