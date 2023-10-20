@@ -49,12 +49,14 @@ with open('test/sql/storage_version/storage_version.db', 'rb') as fh:
 
 ## Storage Version Table
 
-For changes in each given release, check out the [changelog](https://github.com/duckdb/duckdb/releases) on GitHub.
+For changes in each given release, check out the [change log](https://github.com/duckdb/duckdb/releases) on GitHub.
 To see the commits that changed each storage version, see the [commit log](https://github.com/duckdb/duckdb/commits/main/src/storage/storage_info.cpp).
+
+<div class="narrow_table"></div>
 
 | Storage version | DuckDB version(s)      |
 |-----------------|------------------------|
-| 64              | v0.9.0                 |
+| 64              | v0.9.0, v0.9.1         |
 | 51              | v0.8.0, v0.8.1         |
 | 43              | v0.7.0, v0.7.1         |
 | 39              | v0.6.0, v0.6.1         |
@@ -72,3 +74,8 @@ To see the commits that changed each storage version, see the [commit log](https
 | 6               | v0.2.3                 |
 | 4               | v0.2.2                 |
 | 1               | v0.2.1 and prior       |
+
+## Disk Usage
+
+The disk usage of DuckDB's format depends on a number of factors, including the data type and the data distribution, the compression methods used, etc.
+As a rough approximation, loading 100 GB of uncompressed CSV files into a DuckDB database file will require 25 GB of disk space, while loading 100 GB of Parquet files will require 120 GB of disk space.
