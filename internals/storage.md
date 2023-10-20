@@ -10,20 +10,19 @@ The DuckDB internal storage format is currently in flux, and is expected to chan
 When you update DuckDB and open a database file, you might encounter an error message about incompatible storage formats, pointing to this page.
 To move your database(s) to newer format you only need the older and the newer DuckDB executable.
 
-Opening your database file with the older DuckDB and using the SQL statement `"EXPORT DATABASE 'tmp';"` allows you to save the whole state of the current database in use inside folder `tmp`.
-`tmp` content will be overridden, so choose an empty/non yet existing folder.
+Open your database file with the older DuckDB and run the SQL statement `"EXPORT DATABASE 'tmp'"`. This allows you to save the whole state of the current database in use inside folder `tmp`.
+The content of the `tmp` folder will be overridden, so choose an empty/non yet existing location. Then, start the newer DuckDB and execute `"IMPORT DATABASE 'tmp'"` (pointing to the previously populated folder) to load the database, which can be then saved to the file you pointed DuckDB to.
 
-Then starting the newer DuckDB and execute `"IMPORT DATABASE 'tmp';"` (pointing to the previously populated folder) allows you to load the database, which can be then saved to the file you pointed DuckDB to.
+A bash two-liner (to be adapted with the file names and executable locations) is:
 
-A bash two-liner (to be adapted with the right file names and executable locations) is:
 ```bash
-$ /older/version/duckdb mydata.db -c "EXPORT DATABASE 'tmp';"
-$ /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp';"
+$ /older/version/duckdb mydata.db -c "EXPORT DATABASE 'tmp'"
+$ /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
 ```
 
 After this `mydata.db` will be untouched with the old format, `mydata.new.db` will contain the same data but in a format accessible from more recent DuckDB, and folder `tmp` will old the same data in an universal format as different files.
 
-Check [EXPORT documentation](../docs/sql/statements/export) for more details on the syntax.
+Check [`EXPORT` documentation](../docs/sql/statements/export) for more details on the syntax.
 
 ## Storage Header
 
@@ -36,7 +35,7 @@ $ hexdump -n 20 -C mydata.db
 00000014
 ```
 
-A simple example of reading the storage version using python is below.
+A simple example of reading the storage version using Python is below.
 
 ```python
 import struct
