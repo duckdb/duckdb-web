@@ -56,6 +56,20 @@ SELECT 'Hello ''world''' AS msg;
 └───────────────┘
 ```
 
+To include special characters such as newline, use the [`chr` character function](../../sql/functions/char):
+
+```sql
+SELECT 'Hello' || chr(10) || 'world' AS msg;
+```
+```text
+┌──────────────┐
+│     msg      │
+│   varchar    │
+├──────────────┤
+│ Hello\nworld │
+└──────────────┘
+```
+
 ## Functions
 
 See [Character Functions](../../sql/functions/char) and [Pattern Matching](../../sql/functions/patternmatching).
