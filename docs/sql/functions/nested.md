@@ -59,7 +59,6 @@ The following operators are supported for lists:
 | `||`  | Alias for `list_concat`                                                                   | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
 | `<=>` | Alias for `list_cosine_similarity`                                                        | `[1, 2, 3] <=> [1, 2, 5]` | `0.9759000729485332` |
 | `<->` | Alias for `list_distance`                                                                 | `[1, 2, 3] <-> [1, 2, 5]` | `2.0` |
-<!-- | `<#>` | Alias for `list_dot_product`                                                              | `[1, 2, 3] <#> [1, 2, 5]` | `20.0` | -- does not work -->
 
 ## List Comprehension
 
