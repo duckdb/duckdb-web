@@ -57,7 +57,7 @@ SELECT * FROM sales;
 └─────────┴─────────────────────┴──────────┘
 ```
 
-With a normal LEFT JOIN, there is a problem for the 18:30 sale.
+With a normal `LEFT JOIN`, there is a problem for the 18:30 sale.
 Since there is not a sale_time of 18:30, a join against that time
 will be NULL.
 
@@ -65,8 +65,9 @@ will be NULL.
 -- no price value for 18:30, so item b's unit_price and total are NULL!
 
 SELECT s.*, p.unit_price, s.quantity * p.unit_price AS total
- FROM sales s LEFT JOIN prices p
-   ON s.sale_time = p.ticker_time;
+FROM sales s
+LEFT JOIN prices p
+       ON s.sale_time = p.ticker_time;
 ```
 
 ```text
@@ -87,8 +88,9 @@ will cause the nearest lower value (in this case, for 18:00) to be used.
 -- using ASOF, 18:30 "rounds down" to use the 18:00 unit_price
 
 SELECT s.*, p.unit_price, s.quantity * p.unit_price AS total_cost
-  FROM sales s ASOF LEFT JOIN prices p
-    ON s.sale_time >= p.ticker_time;
+FROM sales s ASOF
+LEFT JOIN prices p
+       ON s.sale_time >= p.ticker_time;
 ```
 
 ```text
