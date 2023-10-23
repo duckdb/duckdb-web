@@ -33,16 +33,16 @@ CREATE TABLE map_table (map_col MAP(INT, DOUBLE));
 
 `MAP`s use bracket notation for retrieving values. Selecting from a `MAP` returns a `LIST` rather than an individual value, with an empty `LIST` meaning that the key was not found. 
 ```sql
--- Use bracket notation to retrieve a list containing the value at a key's location. This returns [42]
+-- Use bracket notation to retrieve a list containing the value at a key's location. This returns [5]
 -- Note that the expression in bracket notation must match the type of the map's key
 SELECT map { 'key1': 5, 'key2': 43 }['key1'];
 -- To retrieve the underlying value, use list selection syntax to grab the first element.
--- This returns 42
+-- This returns 5
 SELECT map { 'key1': 5, 'key2': 43 }['key1'][1];
 -- If the element is not in the map, an empty list will be returned. Returns []
 -- Note that the expression in bracket notation must match the type of the map's key else an error is returned
 SELECT map { 'key1': 5, 'key2': 43 }['key3'];
--- The element_at function can also be used to retrieve a map value. This returns [42]
+-- The element_at function can also be used to retrieve a map value. This returns [5]
 SELECT element_at(map { 'key1': 5, 'key2': 43 }, 'key1');
 ```
 
