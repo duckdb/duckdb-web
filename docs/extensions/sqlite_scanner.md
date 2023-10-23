@@ -53,22 +53,23 @@ PRAGMA show_tables;
 Then you can query those views normally using SQL, e.g., using the example queries from sakila-examples.sql
 
 ```sql
-SELECT cat.name category_name, 
-       sum(ifnull(pay.amount, 0)) revenue 
-FROM   category cat 
-       LEFT JOIN film_category flm_cat 
-              ON cat.category_id = flm_cat.category_id 
-       LEFT JOIN film fil 
-              ON flm_cat.film_id = fil.film_id 
-       LEFT JOIN inventory inv 
-              ON fil.film_id = inv.film_id 
-       LEFT JOIN rental ren 
-              ON inv.inventory_id = ren.inventory_id 
-       LEFT JOIN payment pay 
-              ON ren.rental_id = pay.rental_id 
-GROUP  BY cat.name 
-ORDER  BY revenue DESC 
-LIMIT  5; 
+SELECT
+  cat.name category_name,
+  sum(ifnull(pay.amount, 0)) revenue
+FROM category cat
+LEFT JOIN film_category flm_cat
+       ON cat.category_id = flm_cat.category_id
+LEFT JOIN film fil
+       ON flm_cat.film_id = fil.film_id
+LEFT JOIN inventory inv
+       ON fil.film_id = inv.film_id
+LEFT JOIN rental ren
+       ON inv.inventory_id = ren.inventory_id
+LEFT JOIN payment pay
+       ON ren.rental_id = pay.rental_id
+GROUP BY cat.name
+ORDER BY revenue DESC
+LIMIT 5;
 ```
 
 ## Querying Individual Tables
