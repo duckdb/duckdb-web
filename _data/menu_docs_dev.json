@@ -1009,6 +1009,10 @@
               "url": "json"
             },
             {
+              "page": "MySQL Scanner",
+              "url": "mysql_scanner"
+            },
+            {
               "page": "PostgreSQL Scanner",
               "url": "postgres_scanner"
             },
