@@ -5,6 +5,8 @@ title: MySQL Scanner Extension
 
 The [`mysql_scanner` extension](https://github.com/Mytherin/mysql_scanner) allows DuckDB to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DuckDB tables, or vice versa.
 
+> The MySQL Scanner extension is currently in preview and not yet available as a binary package.
+
 ## Reading Data from MySQL
 
 
