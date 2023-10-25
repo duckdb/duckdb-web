@@ -139,3 +139,14 @@ try (var allocator = new RootAllocator();
   }
 }
 ```
+
+### Streaming results
+
+Result streaming is opt-in in the JDBC driver - by setting the `jdbc_stream_results` config to `true` before running a query. The easiest way do that is to pass it in the `Properties` object.
+
+```java
+Properties props = new Properties();
+props.setProperty(DuckDBDriver.JDBC_STREAM_RESULTS, String.valueOf(true));
+
+Connection conn = DriverManager.getConnection("jdbc:duckdb:", props);
+```
