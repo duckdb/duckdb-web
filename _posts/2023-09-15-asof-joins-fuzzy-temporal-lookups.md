@@ -36,6 +36,8 @@ which can be cumbersome and slow to implement in standard SQL.
 Let's start with a concrete example.
 Suppose we have a table of stock [`prices`](/data/prices.csv) with timestamps:
 
+<div class="narrow_table"></div>
+
 | ticker | when | price |
 | :----- | :--- | ----: |
 | APPL   | 2001-01-01 00:00:00 | 1     |
@@ -49,6 +51,8 @@ Suppose we have a table of stock [`prices`](/data/prices.csv) with timestamps:
 | GOOG   | 2001-01-01 00:02:00 | 3     |
 
 We have another table containing portfolio [`holdings`](/data/holdings.csv) at various points in time:
+
+<div class="narrow_table"></div>
 
 | ticker | when | shares |
 | :----- | :--- | -----: |
@@ -74,8 +78,10 @@ FROM holdings h ASOF JOIN prices p
 
 This attaches the value of the holding at that time to each row:
 
-| ticker |        when         | value |
-| :----- | :--- | -----: |
+<div class="narrow_table"></div>
+
+| ticker | when | value |
+| :----- | :--- | ----: |
 | APPL   | 2001-01-01 00:00:30 | 2.94  |
 | APPL   | 2001-01-01 00:01:30 | 48.26 |
 | GOOG   | 2001-01-01 00:00:30 | 23.45 |
@@ -102,8 +108,10 @@ ORDER BY ALL;
 As you might expect, this will produce `NULL` prices and values instead of dropping left side rows
 when there is no ticker or the time is before the prices begin.
 
-| ticker |        when         | value |
-| :----- | :--- | -----: |
+<div class="narrow_table"></div>
+
+| ticker | when | value |
+| :----- | :--- | ----: |
 | APPL   | 2000-12-31 23:59:30 |       |
 | APPL   | 2001-01-01 00:00:30 | 2.94  |
 | APPL   | 2001-01-01 00:01:30 | 48.26 |
@@ -135,6 +143,8 @@ FROM holdings h INNER JOIN state s
 
 The default value of `infinity` is used to make sure there is an end value for the last row that can be compared.
 Here is what the `state` CTE looks like for our example:
+
+<div class="narrow_table"></div>
 
 | ticker | price |        when         |         end         |
 |:-------|------:|:--------------------|:--------------------|
@@ -214,6 +224,8 @@ But AsOf can now use any inequality, which allows it to handle other types of ev
 To explore this, let's use two very simple tables with no equality conditions.
 The build side will just have four integer "timestamps" with alphabetic values:
 
+<div class="narrow_table"></div>
+
 | Time | Value |
 | ---: | ----: |
 | 1 | a |
@@ -224,6 +236,8 @@ The build side will just have four integer "timestamps" with alphabetic values:
 The probe table will just be the time values plus the midpoints,
 and we can make a table showing what value each probe time matches 
 for greater than or equal to:
+
+<div class="narrow_table"></div>
 
 | Probe | >=  |
 | ----: | --- |
@@ -240,6 +254,8 @@ for greater than or equal to:
 This shows us that the interval a probe value matches is in the half-open interval `[Tn, Tn+1)`.
 
 Now let's see what happens if use strictly greater than as the inequality:
+
+<div class="narrow_table"></div>
 
 | Probe |  >  |
 | ----: | --- |
@@ -258,6 +274,8 @@ The only difference is that the interval is closed at the end instead of the beg
 This means that for this inequality type, the time is not part of the interval.
 
 What if the inequality goes in the other direction, say less than or equal to?
+
+<div class="narrow_table"></div>
 
 | Probe | <=  |
 | ----: | --- |
@@ -282,6 +300,8 @@ when non-strict inequalities are used.
 
 We can check this by looking at the last inequality: strictly less than:
 
+<div class="narrow_table"></div>
+
 | Probe |  <  |
 | ----: | --- |
 |   0.5 |  a  |
@@ -299,6 +319,8 @@ This is a strict inequality, so the table time is not in the interval,
 and it is a less than, so the time is the end of the interval.
 
 To sum up, here is the full list:
+
+<div class="narrow_table"></div>
 
 | Inequality | Interval   |
 | -- | ---------- |
@@ -356,6 +378,7 @@ WITH state AS (
   FROM prices
 )
 ```
+
 The state table CTE is created by hash partitioning the table on `ticker`,
 sorting on `when` and then computing another column that is just `when` shifted down by one.
 The join is then implemented with a hash join on `ticker` and two comparisons on `when`.
@@ -413,6 +436,8 @@ CREATE OR REPLACE TABLE probe AS (
 
 The `build` table looks like this:
 
+<div class="narrow_table"></div>
+
 | k |          t          | v |
 |---|---------------------|---|
 | 0 | 2001-01-01 00:00:00 | 0 |
@@ -422,6 +447,8 @@ The `build` table looks like this:
 | ... | ... | ... |
 
 and the probe table looks like this (with only even values for k):
+
+<div class="narrow_table"></div>
 
 | k |          t          |
 |---|---------------------|
@@ -460,6 +487,8 @@ This works because the planner assumes that equality conditions are more selecti
 than inequalities and generates a hash join with a filter.
 
 Running the benchmark, we get results like this:
+
+<div class="narrow_table"></div>
 
 | Algorithm | Median of 5 |
 | :-------- | ----------: |
@@ -502,6 +531,8 @@ SELECT SUM(v)
 FROM probe p INNER JOIN state s
   ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
 ```
+
+<div class="narrow_table"></div>
 
 | Algorithm | Median of 5 |
 | :-------- | ----------: |
