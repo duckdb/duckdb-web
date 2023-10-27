@@ -9,7 +9,7 @@ excerpt_separator: <!--more-->
 
 <img src="/images/blog/csv-sniffer/ducktetive.jpg"
      alt="ducktetive"
-     width=300
+     width="300"
      />
 
 *TLDR: DuckDB is primarily focused on performance, leveraging the capabilities of modern file formats. However, we do not overlook flexible, non-performance-driven formats like CSV files. To create a nice and pleasant experience when reading from CSV files, DuckDB implements a CSV sniffer that automatically detects CSV dialect options, column types, and even skips dirty data. The sniffing process allows users to efficiently explore CSV files without needing to know the specific options used to create the file or provide any basic setup.*
@@ -44,7 +44,7 @@ Name, Height, Vegetarian, Birthday
 
 <img src="/images/blog/csv-sniffer/sniffer.png"
      alt="sniffing overview"
-     width=1000
+     width="680"
      />
 
 In the first phase, we perform _Dialect Detection_, where we select the dialect candidates that generate the most per-row columns in the CSV file while maintaining consistency (i.e., not exhibiting significant variations in the number of columns throughout the file). In our example, we can observe that, after this phase, the sniffer successfully detects the necessary options for the delimiter, quotes, escapes, and new line delimiters.
@@ -170,7 +170,7 @@ Below, you can see how increasing the default sample size by multiplier (see X a
 
 <img src="/images/blog/csv-sniffer/sample.png"
      alt="sample benchmark"
-     width=500
+     width="500"
      />
 
 ### Varying Number of Columns
@@ -179,7 +179,7 @@ The other main characteristic of a CSV file that will affect the auto-detection 
 
 <img src="/images/blog/csv-sniffer/columns.png"
      alt="sniffer benchmark"
-     width=500
+     width="500"
      />
 
 ## Conclusion & Future Work
