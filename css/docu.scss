@@ -157,6 +157,7 @@ td {
 }
 .narrow_table + table{
     width: auto;
+    min-width: auto;
     td{
         min-width: 40px;
     }
