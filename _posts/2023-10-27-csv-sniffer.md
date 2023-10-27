@@ -59,7 +59,7 @@ Finally, we progress to our last phase, _Type Refinement_. In this phase, we ana
 
 The automatic detection is only executed on a sequential sample of the CSV file. By default, the size of the sample is 20,480 tuples (i.e., 10 DuckDB execution chunks). This can be configured via the `sample_size` option, and can be set to -1 in case the user wants to sniff the complete file. Since the same data is repeatedly read with various options, and users can scan the entire file, all CSV buffers generated during sniffing are cached and efficiently managed to ensure high performance.
 
-Of course, running the CSV Sniffer on very large files will have a drastic impact in the overall performance (See our [benchmark section below](#Varying Sampling Size)). In these cases, 
+Of course, running the CSV Sniffer on very large files will have a drastic impact on the overall performance (see our [benchmark section below](#varying-sampling-size)). In these cases, the sample size should be kept at a reasonable level.
 
 In the next subsections, I will describe each phase in detail.
 
