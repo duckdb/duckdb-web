@@ -12,7 +12,7 @@ excerpt_separator: <!--more-->
      width="300"
      />
 
-*TLDR: DuckDB is primarily focused on performance, leveraging the capabilities of modern file formats. However, we do not overlook flexible, non-performance-driven formats like CSV files. To create a nice and pleasant experience when reading from CSV files, DuckDB implements a CSV sniffer that automatically detects CSV dialect options, column types, and even skips dirty data. The sniffing process allows users to efficiently explore CSV files without needing to know the specific options used to create the file or provide any basic setup.*
+*TLDR: DuckDB is primarily focused on performance, leveraging the capabilities of modern file formats. At the same time, we also pay attention to flexible, non-performance-driven formats like CSV files. To create a nice and pleasant experience when reading from CSV files, DuckDB implements a CSV sniffer that automatically detects CSV dialect options, column types, and even skips dirty data. The sniffing process allows users to efficiently explore CSV files without needing to provide any input about the file format.*
 
 There are many different file formats that users can choose from when storing their data. For example, there are performance-oriented binary formats like Parquet, where data is stored in a columnar format, partitioned into row-groups, and heavily compressed. However, Parquet is known for its rigidity, requiring specialized systems to read and write these files.
 
@@ -77,7 +77,7 @@ If `null_padding` is set to true, CSV files with inconsistent rows will still be
 
 ```csv
 I like my csv files to have notes to make dialect detection harder
-i also like commas like this one : ,
+I also like commas like this one : ,
 A,B,C
 1,2,3
 4,5,6
@@ -108,7 +108,7 @@ After deciding the dialect that will be used, we detect the types of each column
 
 At this phase, the type detection algorithm goes over the first chunk of data (i.e., 2048 tuples). This process starts on the second valid row (i.e., not a note) of the file. The first row is stored separately and not used for type detection. It will be later detected if the first row is a header or not. The type detection runs a per-column, per-value casting trial process to determine the column types. It starts off with a unique, per-column array with all types to be checked. It tries to cast the value of the column to that type; if it fails, it removes the type from the array, attempts to cast with the new type, and continues that process until the whole chunk is finished.
 
-At this phase, we also determine what is the format of `DATE` and `TIMESTAMP` columns. The following formats are considered for `DATE` columns: `%m-%d-%Y`, `%m-%d-%y`, `%d-%m-Y`, `%d-%m-%y`, `%Y-%m-%d`, `%y-%m-%d`, and the following for `TIMESTAMP` columns: `%Y-%m-%dT%H:%M:%S.%f`,`%Y-%m-%d %H:%M:%S.%f`, `%m-%d-%Y %I:%M:%S %p`, `%m-%d-%y %I:%M:%S %p`, `%d-%m-%Y %H:%M:%S`, `%d-%m-%y %H:%M:%S`, `%Y-%m-%d %H:%M:%S`, `%y-%m-%d %H:%M:%S`. For columns that use formats outside this search space, they must be defined with the `dateformat` and `timestampformat` options.
+At this phase, we also determine the format of `DATE` and `TIMESTAMP` columns. The following formats are considered for `DATE` columns: `%m-%d-%Y`, `%m-%d-%y`, `%d-%m-Y`, `%d-%m-%y`, `%Y-%m-%d`, `%y-%m-%d`, and the following for `TIMESTAMP` columns: `%Y-%m-%dT%H:%M:%S.%f`,`%Y-%m-%d %H:%M:%S.%f`, `%m-%d-%Y %I:%M:%S %p`, `%m-%d-%y %I:%M:%S %p`, `%d-%m-%Y %H:%M:%S`, `%d-%m-%y %H:%M:%S`, `%Y-%m-%d %H:%M:%S`, `%y-%m-%d %H:%M:%S`. For columns that use formats outside this search space, they must be defined with the `dateformat` and `timestampformat` options.
 
 As an example, let's consider the following CSV file.
 
@@ -175,7 +175,7 @@ Below, you can see how increasing the default sample size by multiplier (see X a
 
 ### Varying Number of Columns
 
-The other main characteristic of a CSV file that will affect the auto-detection is the number of columns the file has. Here, we test the sniffer against a varying number of `INTEGER` type columns in files with 10,906,858 tuples. The results are depicted in the figure below. We can see that from one column to two, we have a steeper increase in runtime. That's because for single columns, we have a simplified dialect detection due to the lack of delimiters. For the other columns, as expected, we have a more linear increase in runtime, depending on the number of columns.
+The other main characteristic of a CSV file that will affect the auto-detection is the number of columns the file has. Here, we test the sniffer against a varying number of `INTEGER` type columns in files with 10,906,858 tuples. The results are depicted in the figure below. We can see that from one column to two, we have a steeper increase in runtime. That's because, for single columns, we have a simplified dialect detection due to the lack of delimiters. For the other columns, as expected, we have a more linear increase in runtime, depending on the number of columns.
 
 <img src="/images/blog/csv-sniffer/columns.png"
      alt="sniffer benchmark"
@@ -192,8 +192,8 @@ DuckDB's CSV auto-detection algorithm is an important tool to facilitate the exp
 
 We have a list of points related to the sniffer that we would like to improve in the future.
 
-1. *Advanced Header Detection.* We currently determine if a CSV has a header by identifying a type mismatch between the first valid row and the remainder of the CSV file. However, this can generate false negatives, if, for example, all the columns of a CSV are of a type `VARCHAR`. We plan on enhancing our Header Detection to perform matches with commonly used names for headers.
-2. *Adding Accuracy and Speed Benchmarks.* We currently implement many accuracy and regression tests; however, due to the CSV's inherent flexibility, creating test cases manually is quite daunting. The plan moving forward is to implement a whole accuracy and regression test suite using the [Pollock Benchmark](https://www.vldb.org/pvldb/vol16/p1870-vitagliano.pdf)
+1. *Advanced Header Detection.* We currently determine if a CSV has a header by identifying a type mismatch between the first valid row and the remainder of the CSV file. However, this can generate false negatives if, for example, all the columns of a CSV are of a type `VARCHAR`. We plan on enhancing our Header Detection to perform matches with commonly used names for headers.
+2. *Adding Accuracy and Speed Benchmarks.* We currently implement many accuracy and regression tests; however, due to the CSV's inherent flexibility, manually creating test cases is quite daunting. The plan moving forward is to implement a whole accuracy and regression test suite using the [Pollock Benchmark](https://www.vldb.org/pvldb/vol16/p1870-vitagliano.pdf)
 3. *Improved Sampling.* We currently execute the auto-detection algorithm on a sequential sample of data. However, it's very common that new settings are only introduced later in the file (e.g., quotes might be used only in the last 10% of the file). Hence, being able to execute the sniffer in distinct parts of the file can improve accuracy.
 4. *Multi-Table CSV File.* Multiple tables can be present in the same CSV file, which is a common scenario when exporting spreadsheets to CSVs. Therefore, we would like to be able to identify and support these.
 5. *Null-String Detection.* We currently do not have an algorithm in place to identify the representation of null strings.
