@@ -84,7 +84,7 @@ A,B,C
 ```
 
 Here the sniffer would detect that with the delimiter set to `,` the first row has one column, the second has two, but the remaining rows have 3 columns. Hence, if `null_padding` is set to false, it would still select `,` as a delimiter candidate, by assuming the top rows are dirty notes. (Believe me, CSV notes are a thing!). Resulting in the following table:
-``` csv
+```csv
 A,B,C
 1, 2, 3
 4, 5, 6
@@ -93,7 +93,7 @@ A,B,C
 If `null_padding` is set to true, all lines would be accepted, resulting in the following table:
 ```csv
 'I like my csv files to have notes to make dialect detection harder', None, None
-'i like commas like this one : ', None, None
+'I also like commas like this one : ', None, None
 'A', 'B', 'C'
 '1', '2', '3'
 '4', '5', '6'
@@ -185,9 +185,11 @@ The other main characteristic of a CSV file that will affect the auto-detection 
 ## Conclusion & Future Work
 
 If you have unusual CSV files and want to query, clean up, or normalize them, DuckDB is already one of the top solutions available. It is very easy to get started. To read a CSV file with the sniffer, you can simply:
+
 ```sql
-select * from 'path/to/csv_file.csv';
+SELECT * FROM 'path/to/csv_file.csv';
 ```
+
 DuckDB's CSV auto-detection algorithm is an important tool to facilitate the exploration of CSV files. With its default options, it has a low impact on the total cost of loading and reading CSV files. Its main goal is to always be capable of reading files, doing a best-effort job even on files that are ill-defined.
 
 We have a list of points related to the sniffer that we would like to improve in the future.
