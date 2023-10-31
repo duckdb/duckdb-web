@@ -112,3 +112,87 @@ The sample size can be changed by setting the `pandas_analyze_sample` config opt
 # example setting the sample size to 100000
 duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
 ```
+
+### Object Conversion
+
+This is a mapping of python object type to DuckDB logical type:
+
+`None` -> `NULL`  
+`bool` -> `BOOLEAN`  
+
+#### `int`
+Since integers can be of arbitrary size in Python, there is not a one-to-one conversion possible for ints.  
+Intead we perform these casts in order until one succeeds:  
+- `BIGINT`
+- `INTEGER`
+- `UBIGINT`
+- `UINTEGER`
+- `DOUBLE`
+
+When using the DuckDB Value class it's possible to set a target type, which will influence the conversion.  
+
+#### `float`
+These casts are tried in order:  
+- `DOUBLE`  
+- `FLOAT`  
+
+`decimal.Decimal` -> `DECIMAL` / `DOUBLE`  
+`uuid.UUID` -> `UUID`
+
+#### `datetime.datetime`
+For datetimes we will check `pandas.isnat` if it's available and return `NULL` if it returns true.  
+We also support `+inf` and `-inf` conversions.  
+If it has tzinfo we will use `TIMESTAMPTZ`, otherwise it becomes `TIMESTAMP`.  
+
+#### `datetime.time`
+If it has tzinfo we will use `TIMETZ`, otherwise it becomes `TIME`.  
+
+#### `datetime.date`
+We support `+inf` and `-inf` conversions.  
+It maps to the `DATE` type.  
+
+#### `datetime.timedelta`
+It maps to the `INTERVAL` type.  
+
+`str` -> `VARCHAR`  
+`bytearray` -> `BLOB`  
+`memoryview` -> `BLOB`  
+
+#### `bytes`
+It converts to `BLOB` by default, when it's used to construct a Value object of type `BITSTRING` it maps to `BITSTRING` instead.  
+
+#### `list`
+It becomes the "biggest" type of its children, for example:  
+```py
+my_list_value = [
+	12345,
+	'test'
+]
+```
+Will become `VARCHAR[]` because 12345 can convert to `VARCHAR` but `test` can not convert to `INTEGER`.  
+
+#### `dict`
+This object can convert to either `STRUCT(...)` or `MAP(..., ...)` depending on its structure.  
+If the dict has a structure similar to:  
+```py
+my_map_dict = {
+	'keys': [
+		1, 2, 3
+	],
+	'values': [
+		'one', 'two', 'three'
+	]
+}
+```
+Then we'll convert it as a `MAP` of key-value pairs of the two lists zipped together.  
+NOTE: the name of the fields matters and the two lists need to have the same size.  
+
+Otherwise we'll try to convert it as a `STRUCT`  
+Where every key of the dictionary is converted to `str` to form the field names of the STRUCT.  
+The fields are populated by converting every value of the dictionary.  
+
+#### `tuple`
+It converts to `LIST` by default, when it's used to construct a Value object of type `STRUCT` it maps to `STRUCT` instead.  
+
+#### `numpy.ndarray` | `numpy.datetime64`
+It's converted by calling `tolist()` and converting the result of that.  
