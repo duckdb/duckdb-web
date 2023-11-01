@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Updates to the h2oai db-benchmark!"
+title:  "Updates to the hf2oai db-benchmark!"
 author: Tom Ebergen
 excerpt_separator: <!--more-->
 ---
