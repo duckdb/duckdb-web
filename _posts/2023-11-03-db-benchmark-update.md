@@ -9,11 +9,11 @@ excerpt_separator: <!--more-->
 
 [Skip directly to the results](#results)
 
-# The Benchmark Has Been Updated!
+## The Benchmark Has Been Updated!
 
 In April, DuckDB Labs published a blog post reporting updated H2O.ai db-benchmark results. Since then, the results haven't been updated. The original plan was to update the results with every DuckDB release. DuckDB 0.9.1 was recently released, and DuckDB Labs has updated the benchmark. While updating the benchmark, however, we noticed that our initial setup did not lend itself to being fair to all solution. The machine used had network storage and could suffer from noisy neighbors. To avoid these issues, the whole benchmark was re-run on a c6id.metal machine.
 
-# New Benchmark Environment: c6id.metal Instance
+## New Benchmark Environment: c6id.metal Instance
 
 Updating the results to the benchmark showed strange results with some solutions regressing even though the same version was used, and other solutions improving with the same version. We believe this variance came from the AWS EC2 instance we chose, which was an m4.10xlarge instance. The m4.10xlarge has 40 virtual CPUs and EBS storage. EBS storage is highly available network block storage for EC2 instances. When running compute-heavy benchmarks, a machine like the m4.10xlarge can suffer from the following issues; 
 
@@ -27,12 +27,11 @@ Another benefit of the the c6id.metal box is that it stresses parallelism perfor
 
 See the [updated settings](#updated-settings) section on how settings were change for each solution when run on the new machine.
 
-# Updating the Benchmark
+## Updating the Benchmark
 
 Moving forward we will update the benchmark when PRs with new performance numbers are provided. The PR should include a description of the changes to a solution script or a version update and new entries in the `time.csv` and `logs.csv` files. These entries will be verified using a different c6id.metal instance, and if there is no variance, the PR will be merged and the results will be updated!
 
-
-## Updated Settings
+### Updated Settings
 
 1. ClickHouse
 	- Storage: Any data this gets spilled to disk also needs to be on the NVMe drive. This has been changed, see the `format_and_mount.sh` script, and the `clickhouse/clickhouse-mount-config.xml` files on how this is done.
@@ -46,6 +45,6 @@ Moving forward we will update the benchmark when PRs with new performance number
 Many solutions do not spill to disk, so they did not require any modification to use the instance storage. Other solutions use `parallel::ncores()` or default to a maximum number of cores for parallelism. Solution scripts were run in their current form on [github.com/duckdblabs/db-benchmark](https://github.com/duckdblabs/db-benchmark). Please read the [Updating the Benchmark](https://github.com/duckdblabs/db-benchmark#updating-the-benchmark) section on how to re-run your solution.
 
 
-## Results
+### Results
 
 <iframe src="https://duckdblabs.github.io/db-benchmark/"  title="h2oai db benchmmark" height="500" width="1000"></iframe>
