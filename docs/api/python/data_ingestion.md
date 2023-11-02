@@ -159,7 +159,7 @@ It maps to the `INTERVAL` type.
 `memoryview` -> `BLOB`  
 
 #### `bytes`
-It converts to `BLOB` by default, when it's used to construct a Value object of type `BITSTRING` it maps to `BITSTRING` instead.  
+It converts to `BLOB` by default, when it's used to construct a Value object of type `BITSTRING`, it maps to `BITSTRING` instead.  
 
 #### `list`
 It becomes the "biggest" type of its children, for example:  
