@@ -188,7 +188,7 @@ Then we'll convert it as a `MAP` of key-value pairs of the two lists zipped toge
 NOTE: the name of the fields matters and the two lists need to have the same size.  
 
 Otherwise we'll try to convert it as a `STRUCT`  
-Where every key of the dictionary is converted to `str` to form the field names of the STRUCT.  
+Where every key of the dictionary is converted to `str` to form the field names of the `STRUCT`.
 The fields are populated by converting every value of the dictionary.  
 
 #### `tuple`
