@@ -146,8 +146,8 @@ These casts are tried in order until one succeeds:
 
 ### `datetime.datetime`
 
-For `datetime` we will check `pandas.isnull` if it's available and return `NULL` if it returns true.
-We also support `+inf` and `-inf` conversions.
+For `datetime` we will check `pandas.isnull` if it's available and return `NULL` if it returns true.  
+We check against `datetime.datetime.min` and `datetime.datetime.max` to convert to `-inf` and `+inf` respectively.
 
 If the `datetime` has tzinfo, we will use `TIMESTAMPTZ`, otherwise it becomes `TIMESTAMP`.
 
@@ -157,8 +157,8 @@ If the `time` has tzinfo, we will use `TIMETZ`, otherwise it becomes `TIME`.
 
 ### `datetime.date`
 
-We support `+inf` and `-inf` conversions.
-`date` converts to the `DATE` type.
+`date` converts to the `DATE` type.  
+We check against `datetime.date.min` and `datetime.date.max` to convert to `-inf` and `+inf` respectively.
 
 ### `bytes`
 
@@ -174,8 +174,10 @@ my_list_value = [
     'test'
 ]
 ```
-
 Will become `VARCHAR[]` because 12345 can convert to `VARCHAR` but `test` can not convert to `INTEGER`.
+```sql
+[12345, test]
+```
 
 ### `dict`
 
@@ -184,16 +186,19 @@ If the dict has a structure similar to:
 
 ```python
 my_map_dict = {
-    'keys': [
+    'key': [
         1, 2, 3
     ],
-    'values': [
+    'value': [
         'one', 'two', 'three'
     ]
 }
 ```
-
-Then we'll convert it to a `MAP` of key-value pairs of the two lists zipped together.
+Then we'll convert it to a `MAP` of key-value pairs of the two lists zipped together.  
+The example above becomes a `MAP(INTEGER, VARCHAR)`:
+```sql
+{1=one, 2=two, 3=three}
+```
 
 > The name of the fields matters and the two lists need to have the same size.
 
