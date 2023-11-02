@@ -172,7 +172,7 @@ my_list_value = [
 Will become `VARCHAR[]` because 12345 can convert to `VARCHAR` but `test` can not convert to `INTEGER`.  
 
 #### `dict`
-This object can convert to either `STRUCT(...)` or `MAP(..., ...)` depending on its structure.  
+The `dict` object can convert to either `STRUCT(...)` or `MAP(..., ...)` depending on its structure.  
 If the dict has a structure similar to:  
 ```py
 my_map_dict = {
