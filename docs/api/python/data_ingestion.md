@@ -117,63 +117,60 @@ duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
 
 This is a mapping of Python object types to DuckDB [Logical Types](../../sql/data_types/overview.html):
 
-`None` -> `NULL`  
-`bool` -> `BOOLEAN`  
+- `None` -> `NULL`  
+- `bool` -> `BOOLEAN`  
+- `datetime.timedelta` -> `INTERVAL`  
+- `str` -> `VARCHAR`  
+- `bytearray` -> `BLOB`  
+- `memoryview` -> `BLOB`  
+- `decimal.Decimal` -> `DECIMAL` / `DOUBLE`  
+- `uuid.UUID` -> `UUID`  
 
-#### `int`
+- #### `int`
 Since integers can be of arbitrary size in Python, there is not a one-to-one conversion possible for ints.  
 Intead we perform these casts in order until one succeeds:  
-- `BIGINT`  
-- `INTEGER`  
-- `UBIGINT`  
-- `UINTEGER`  
-- `DOUBLE`  
+  - `BIGINT`  
+  - `INTEGER`  
+  - `UBIGINT`  
+  - `UINTEGER`  
+  - `DOUBLE`  
 
-When using the DuckDB Value class, it's possible to set a target type, which will influence the conversion.  
+  When using the DuckDB Value class, it's possible to set a target type, which will influence the conversion.  
 
-#### `float`
+- #### `float`
 These casts are tried in order:  
-- `DOUBLE`  
-- `FLOAT`  
+  - `DOUBLE`  
+  - `FLOAT`  
 
-`decimal.Decimal` -> `DECIMAL` / `DOUBLE`  
-`uuid.UUID` -> `UUID`
+- #### `datetime.datetime`
+  For `datetime` we will check `pandas.isnull` if it's available and return `NULL` if it returns true.  
+  We also support `+inf` and `-inf` conversions.  
 
-#### `datetime.datetime`
-For `datetime` we will check `pandas.isnull` if it's available and return `NULL` if it returns true.  
-We also support `+inf` and `-inf` conversions.  
-If the `datetime` has tzinfo, we will use `TIMESTAMPTZ`, otherwise it becomes `TIMESTAMP`.  
+  If the `datetime` has tzinfo, we will use `TIMESTAMPTZ`, otherwise it becomes `TIMESTAMP`.  
 
-#### `datetime.time`
-If the `time` has tzinfo, we will use `TIMETZ`, otherwise it becomes `TIME`.  
+- #### `datetime.time`
+  If the `time` has tzinfo, we will use `TIMETZ`, otherwise it becomes `TIME`.  
 
-#### `datetime.date`
-We support `+inf` and `-inf` conversions.  
-It maps to the `DATE` type.  
+- #### `datetime.date`
+  We support `+inf` and `-inf` conversions.  
+  `date` converts to the `DATE` type.  
 
-#### `datetime.timedelta`
-`timedelta` is converted to the `INTERVAL` DuckDB type.  
-The Python `timedelta` type maps to the `INTERVAL` DuckDB type.  
-`str` -> `VARCHAR`  
-`bytearray` -> `BLOB`  
-`memoryview` -> `BLOB`  
+- #### `bytes`
+  `bytes` converts to `BLOB` by default, when it's used to construct a Value object of type `BITSTRING`, it maps to `BITSTRING` instead.  
 
-#### `bytes`
-It converts to `BLOB` by default, when it's used to construct a Value object of type `BITSTRING`, it maps to `BITSTRING` instead.  
-
-#### `list`
-It becomes the "most permissive" type of its children, for example:  
+- #### `list`
+  `list` becomes a `LIST` type of the "most permissive" type of its children, for example:  
 ```py
 my_list_value = [
 	12345,
 	'test'
 ]
 ```
-Will become `VARCHAR[]` because 12345 can convert to `VARCHAR` but `test` can not convert to `INTEGER`.  
+  Will become `VARCHAR[]` because 12345 can convert to `VARCHAR` but `test` can not convert to `INTEGER`.  
 
-#### `dict`
-The `dict` object can convert to either `STRUCT(...)` or `MAP(..., ...)` depending on its structure.  
-If the dict has a structure similar to:  
+- #### `dict`
+  The `dict` object can convert to either `STRUCT(...)` or `MAP(..., ...)` depending on its structure.  
+  If the dict has a structure similar to:  
 ```py
 my_map_dict = {
 	'keys': [
@@ -184,15 +181,26 @@ my_map_dict = {
 	]
 }
 ```
-Then we'll convert it to a `MAP` of key-value pairs of the two lists zipped together.  
-> The name of the fields matters and the two lists need to have the same size.  
+  Then we'll convert it to a `MAP` of key-value pairs of the two lists zipped together.  
+  > The name of the fields matters and the two lists need to have the same size.  
 
-Otherwise we'll try to convert it as a `STRUCT`  
-Where every key of the dictionary is converted to `str` to form the field names of the `STRUCT`.
-The fields are populated by converting every value of the dictionary.  
+  Otherwise we'll try to convert it to a `STRUCT`.  
+```py
+my_struct_dict = {
+	1: 'one',
+	'2': 2,
+	'three': [1,2,3],
+	False: True
+}
+```
+  Becomes:
+```sql
+{'1': one, '2': 2, 'three': [1, 2, 3], 'False': true}
+```
+> Every `key` of the dictionary is converted to string.
 
-#### `tuple`
-It converts to `LIST` by default, when it's used to construct a Value object of type `STRUCT` it maps to `STRUCT` instead.  
+- #### `tuple`
+  `tuple` converts to `LIST` by default, when it's used to construct a Value object of type `STRUCT` it will convert to `STRUCT` instead.  
 
-#### `numpy.ndarray` | `numpy.datetime64`
-`ndarray` and `datetime64` are converted by calling `tolist()` and converting the result of that.  
+- #### `numpy.ndarray` | `numpy.datetime64`
+  `ndarray` and `datetime64` are converted by calling `tolist()` and converting the result of that.  
