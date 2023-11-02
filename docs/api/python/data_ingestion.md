@@ -159,7 +159,7 @@ It maps to the `INTERVAL` type.
 `memoryview` -> `BLOB`  
 
 #### `bytes`
-It converts to `BLOB` by default, when it's used to construct a Value object of type `BITSTRING` it maps to `BITSTRING` instead.  
+It converts to `BLOB` by default, when it's used to construct a Value object of type `BITSTRING`, it maps to `BITSTRING` instead.  
 
 #### `list`
 It becomes the "biggest" type of its children, for example:  
@@ -172,7 +172,7 @@ my_list_value = [
 Will become `VARCHAR[]` because 12345 can convert to `VARCHAR` but `test` can not convert to `INTEGER`.  
 
 #### `dict`
-This object can convert to either `STRUCT(...)` or `MAP(..., ...)` depending on its structure.  
+The `dict` object can convert to either `STRUCT(...)` or `MAP(..., ...)` depending on its structure.  
 If the dict has a structure similar to:  
 ```py
 my_map_dict = {
@@ -184,15 +184,15 @@ my_map_dict = {
 	]
 }
 ```
-Then we'll convert it as a `MAP` of key-value pairs of the two lists zipped together.  
+Then we'll convert it to a `MAP` of key-value pairs of the two lists zipped together.  
 NOTE: the name of the fields matters and the two lists need to have the same size.  
 
 Otherwise we'll try to convert it as a `STRUCT`  
-Where every key of the dictionary is converted to `str` to form the field names of the STRUCT.  
+Where every key of the dictionary is converted to `str` to form the field names of the `STRUCT`.
 The fields are populated by converting every value of the dictionary.  
 
 #### `tuple`
 It converts to `LIST` by default, when it's used to construct a Value object of type `STRUCT` it maps to `STRUCT` instead.  
 
 #### `numpy.ndarray` | `numpy.datetime64`
-It's converted by calling `tolist()` and converting the result of that.  
+`ndarray` and `datetime64` are converted by calling `tolist()` and converting the result of that.  
