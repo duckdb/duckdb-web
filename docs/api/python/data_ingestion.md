@@ -184,7 +184,7 @@ my_map_dict = {
 	]
 }
 ```
-Then we'll convert it as a `MAP` of key-value pairs of the two lists zipped together.  
+Then we'll convert it to a `MAP` of key-value pairs of the two lists zipped together.  
 NOTE: the name of the fields matters and the two lists need to have the same size.  
 
 Otherwise we'll try to convert it as a `STRUCT`  
