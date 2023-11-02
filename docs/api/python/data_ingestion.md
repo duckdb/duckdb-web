@@ -195,4 +195,4 @@ The fields are populated by converting every value of the dictionary.
 It converts to `LIST` by default, when it's used to construct a Value object of type `STRUCT` it maps to `STRUCT` instead.  
 
 #### `numpy.ndarray` | `numpy.datetime64`
-It's converted by calling `tolist()` and converting the result of that.  
+`ndarray` and `datetime64` are converted by calling `tolist()` and converting the result of that.  
