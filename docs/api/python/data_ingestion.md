@@ -115,7 +115,7 @@ duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
 
 ### Object Conversion
 
-This is a mapping of Python object types to DuckDB logical types:
+This is a mapping of Python object types to DuckDB [Logical Types](../../sql/data_types/overview.html):
 
 `None` -> `NULL`  
 `bool` -> `BOOLEAN`  
@@ -123,11 +123,11 @@ This is a mapping of Python object types to DuckDB logical types:
 #### `int`
 Since integers can be of arbitrary size in Python, there is not a one-to-one conversion possible for ints.  
 Intead we perform these casts in order until one succeeds:  
-- `BIGINT`
-- `INTEGER`
-- `UBIGINT`
-- `UINTEGER`
-- `DOUBLE`
+- `BIGINT`  
+- `INTEGER`  
+- `UBIGINT`  
+- `UINTEGER`  
+- `DOUBLE`  
 
 When using the DuckDB Value class, it's possible to set a target type, which will influence the conversion.  
 
@@ -140,7 +140,7 @@ These casts are tried in order:
 `uuid.UUID` -> `UUID`
 
 #### `datetime.datetime`
-For datetimes we will check `pandas.isnat` if it's available and return `NULL` if it returns true.  
+For `datetime` we will check `pandas.isnull` if it's available and return `NULL` if it returns true.  
 We also support `+inf` and `-inf` conversions.  
 If the `datetime` has tzinfo, we will use `TIMESTAMPTZ`, otherwise it becomes `TIMESTAMP`.  
 
