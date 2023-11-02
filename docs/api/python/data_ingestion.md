@@ -129,7 +129,7 @@ Intead we perform these casts in order until one succeeds:
 - `UINTEGER`
 - `DOUBLE`
 
-When using the DuckDB Value class it's possible to set a target type, which will influence the conversion.  
+When using the DuckDB Value class, it's possible to set a target type, which will influence the conversion.  
 
 #### `float`
 These casts are tried in order:  
