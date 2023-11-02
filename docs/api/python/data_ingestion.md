@@ -142,7 +142,7 @@ These casts are tried in order:
 #### `datetime.datetime`
 For datetimes we will check `pandas.isnat` if it's available and return `NULL` if it returns true.  
 We also support `+inf` and `-inf` conversions.  
-If it has tzinfo we will use `TIMESTAMPTZ`, otherwise it becomes `TIMESTAMP`.  
+If the `datetime` has tzinfo, we will use `TIMESTAMPTZ`, otherwise it becomes `TIMESTAMP`.  
 
 #### `datetime.time`
 If it has tzinfo we will use `TIMETZ`, otherwise it becomes `TIME`.  
