@@ -36,7 +36,7 @@ as the database format you are using.
 
 # Connecting Tableau Desktop to DuckDB
 
-Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-us/jdbc_tableau.htm) for Tableau to use.
+Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-gb/jdbc_tableau.htm) for Tableau to use.
 Note that Tableau needs to be restarted any time you add or modify drivers.
 
 ## MacOS
