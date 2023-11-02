@@ -153,7 +153,7 @@ It maps to the `DATE` type.
 
 #### `datetime.timedelta`
 `timedelta` is converted to the `INTERVAL` DuckDB type.  
-
+The Python `timedelta` type maps to the `INTERVAL` DuckDB type.  
 `str` -> `VARCHAR`  
 `bytearray` -> `BLOB`  
 `memoryview` -> `BLOB`  
