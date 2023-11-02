@@ -152,7 +152,7 @@ We support `+inf` and `-inf` conversions.
 It maps to the `DATE` type.  
 
 #### `datetime.timedelta`
-It maps to the `INTERVAL` type.  
+`timedelta` is converted to the `INTERVAL` DuckDB type.  
 
 `str` -> `VARCHAR`  
 `bytearray` -> `BLOB`  
