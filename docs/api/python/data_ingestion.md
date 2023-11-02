@@ -145,7 +145,7 @@ We also support `+inf` and `-inf` conversions.
 If the `datetime` has tzinfo, we will use `TIMESTAMPTZ`, otherwise it becomes `TIMESTAMP`.  
 
 #### `datetime.time`
-If it has tzinfo we will use `TIMETZ`, otherwise it becomes `TIME`.  
+If the `time` has tzinfo, we will use `TIMETZ`, otherwise it becomes `TIME`.  
 
 #### `datetime.date`
 We support `+inf` and `-inf` conversions.  
