@@ -22,6 +22,7 @@
 			<li data-id=".java">Java</li>
 			<li data-id=".js">Node.js</li>
 			<li data-id=".rust">Rust</li>
+			<li data-id=".go">Go</li>
 			<li data-id=".cplusplus">C/C++</li>
 			<li data-id=".odbc">ODBC</li>
 		</ul>
@@ -33,6 +34,7 @@
 				<option value=".java">Java</option>
 				<option value=".js">Node.js</option>
 				<option value=".rust">Rust</option>
+				<option value=".go">Go</option>
 				<option value=".cplusplus">C/C++</option>
 				<option value=".odbc">ODBC</option>
 			</select>
@@ -115,6 +117,10 @@ Direct link to JAR: <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jd
 
 	<div class="latest rust">
 		{% highlight bash %}cargo add duckdb --features bundled{% endhighlight %}
+	</div>
+
+	<div class="latest go">
+		{% highlight bash %}go get github.com/marcboeker/go-duckdb{% endhighlight %}
 	</div>
 
 	<div class="latest cplusplus source">
@@ -239,6 +245,10 @@ Direct link to JAR: <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jd
 		<a href="https://github.com/duckdb/duckdb-rs" target="_blank">https://github.com/duckdb/duckdb-rs</a>
 	</div>
 
+	<div class="main go source">
+		<a href="https://github.com/marcboeker/go-duckdb" target="_blank">https://github.com/marcboeker/go-duckdb</a>
+	</div>
+
 	<div class="main cplusplus source">
 		<a href="https://github.com/duckdb/duckdb" target="_blank">https://github.com/duckdb/duckdb</a>
 	</div>
@@ -320,6 +330,32 @@ fn main() -> Result<()> {
         println!("Found person {:?}", person.unwrap());
     }
     Ok(())
+}{% endhighlight %}
+	</div>
+
+	<div class="example go">
+{% highlight swift %}
+package main
+
+import (
+	"database/sql"
+	"fmt"
+	_ "github.com/marcboeker/go-duckdb"
+)
+
+func main() {
+	db, _ := sql.Open("duckdb", "")
+
+	db.Exec(`CREATE TABLE person (id INTEGER, name VARCHAR)`)
+	db.Exec(`INSERT INTO person VALUES (42, 'John')`)
+
+	var (
+		id   int
+		name string
+	)
+	row := db.QueryRow(`SELECT id, name FROM person`)
+	_ = row.Scan(&id, &name)
+	fmt.Println("id:", id, "name:", name)
 }{% endhighlight %}
 	</div>
 
