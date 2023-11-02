@@ -21,6 +21,7 @@
 			<li data-id=".r">R</li>
 			<li data-id=".java">Java</li>
 			<li data-id=".js">Node.js</li>
+			<li data-id=".rust">Rust</li>
 			<li data-id=".cplusplus">C/C++</li>
 			<li data-id=".odbc">ODBC</li>
 		</ul>
@@ -31,6 +32,7 @@
 				<option value=".r">R</option>
 				<option value=".java">Java</option>
 				<option value=".js">Node.js</option>
+				<option value=".rust">Rust</option>
 				<option value=".cplusplus">C/C++</option>
 				<option value=".odbc">ODBC</option>
 			</select>
@@ -109,6 +111,10 @@ Direct link to JAR: <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jd
 
 		<div class="latest js">
 {% highlight bash %}npm install duckdb{% endhighlight %}
+	</div>
+
+	<div class="latest rust">
+		{% highlight bash %}cargo add duckdb --features bundled{% endhighlight %}
 	</div>
 
 	<div class="latest cplusplus source">
@@ -229,6 +235,9 @@ Direct link to JAR: <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jd
 {% highlight bash %}npm install duckdb@next{% endhighlight %}
 	</div>
 
+	<div class="main rust source">
+		<a href="https://github.com/duckdb/duckdb-rs" target="_blank">https://github.com/duckdb/duckdb-rs</a>
+	</div>
 
 	<div class="main cplusplus source">
 		<a href="https://github.com/duckdb/duckdb" target="_blank">https://github.com/duckdb/duckdb</a>
@@ -286,6 +295,32 @@ db.all('SELECT 42 AS fortytwo', function(err, res) {
   }
   console.log(res[0].fortytwo)
 });{% endhighlight %}
+	</div>
+
+	<div class="example rust">
+{% highlight rust %}
+use duckdb::{Connection, Result};
+
+#[derive(Debug)]
+struct Person { id: i32, name: String, }
+
+fn main() -> Result<()> {
+    let conn = Connection::open_in_memory()?;
+
+    conn.execute_batch(
+        r"CREATE TABLE person (id BIGINT, name VARCHAR);
+          INSERT INTO person VALUES (42, 'John');
+        ")?;
+    let mut stmt = conn.prepare("SELECT id, name FROM person")?;
+    let person_iter = stmt.query_map([], |row| {
+        Ok(Person {id: row.get(0)?, name: row.get(1)?})
+    })?;
+
+    for person in person_iter {
+        println!("Found person {:?}", person.unwrap());
+    }
+    Ok(())
+}{% endhighlight %}
 	</div>
 
 	<div class="example cplusplus">
