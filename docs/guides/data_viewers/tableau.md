@@ -31,7 +31,7 @@ as the database format used by the DuckDB tool (e.g., Python module, command lin
 
 ## Installing the JDBC Driver
 
-Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-us/jdbc_tableau.htm) 
+Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-gb/jdbc_tableau.htm)
 for Tableau to use.
 For now, we recommend using the latest bleeding edge JDBC driver (0.8.2) as a number of fixes have been made 
 for time compatibility.
