@@ -11,7 +11,7 @@ excerpt_separator: <!--more-->
 
 ## The Benchmark Has Been Updated!
 
-In April, DuckDB Labs published a blog post reporting updated H2O.ai db-benchmark results. Since then, the results haven't been updated. The original plan was to update the results with every DuckDB release. DuckDB 0.9.1 was recently released, and DuckDB Labs has updated the benchmark. While updating the benchmark, however, we noticed that our initial setup did not lend itself to being fair to all solution. The machine used had network storage and could suffer from noisy neighbors. To avoid these issues, the whole benchmark was re-run on a c6id.metal machine.
+In April, DuckDB Labs published a [blog post reporting updated H2O.ai db-benchmark results](https://duckdb.org/2023/04/14/h2oai.html). Since then, the results haven't been updated. The original plan was to update the results with every DuckDB release. DuckDB 0.9.1 was recently released, and DuckDB Labs has updated the benchmark. While updating the benchmark, however, we noticed that our initial setup did not lend itself to being fair to all solution. The machine used had network storage and could suffer from noisy neighbors. To avoid these issues, the whole benchmark was re-run on a c6id.metal machine.
 
 ## New Benchmark Environment: c6id.metal Instance
 
