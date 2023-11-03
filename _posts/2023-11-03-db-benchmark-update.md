@@ -6,7 +6,7 @@ excerpt_separator: <!--more-->
 ---
 
 
-*TL;DR: the H2O.ai db-benchmark has been updated with new results. In addition, the AWS EC2 instance used for benchmarking has been changed to a c6id.metal for improved repeatability and fairness across libraries.*
+*TL;DR: the H2O.ai db-benchmark has been updated with new results. In addition, the AWS EC2 instance used for benchmarking has been changed to a c6id.metal for improved repeatability and fairness across libraries. DuckDB is the fastest library for both join and group by queries at all data sizes.*
 
 
 [Skip directly to the results](#results)
@@ -40,7 +40,7 @@ Moving forward we will update the benchmark when PRs with new performance number
 ### Updated Settings
 
 1. ClickHouse
-	* Storage: Any data this gets spilled to disk also needs to be on the NVMe drive. This has been changed in the `format_and_mount.sh` script and the `clickhouse/clickhouse-mount-config.xml` file.
+	* Storage: Any data this gets spilled to disk also needs to be on the NVMe drive. This has been changed in the new `format_and_mount.sh` script and the `clickhouse/clickhouse-mount-config.xml` file.
 2. Julia (juliadf & juliads)
 	* Threads: The threads were hardcoded for juliadf/juliads to 20/40 threads. Now the max number of threads are used. No option was given to spill to disk, so this was not changed/researched.
 3. DuckDB
@@ -53,7 +53,7 @@ Many solutions do not spill to disk, so they did not require any modification to
 
 ### Results
 
-The first results you see are the 50GB group by results. The benchmark runs every query twice per solution, and both runtimes reported. The "first time" can be considered a cold run, and the "second time" can be considered a hot run. DuckDB and DuckDB-latest perform very well among all dataset sizes and variations. 
+The first results you see are the 50GB group by results. The benchmark runs every query twice per solution, and both runtimes are reported. The "first time" can be considered a cold run, and the "second time" can be considered a hot run. DuckDB and DuckDB-latest perform very well among all dataset sizes and variations. 
 
 The team at DuckDB Labs has been hard at work improving the performance of the out-of-core hash aggregates and joins. The most notable improvement is the performance of query 5 in the advanced group by queries. The cold run is almost an order of magnitude better than every other solution! DuckDB is also one of only two solutions to finish the 50GB join query. Some solutions are experiencing timeouts on the 50GB datasets. Solutions running the 50GB group by queries are killed after running for 180 minutes, meaning all 10 group by queries need to finish within the 180 minutes. Solutions running the 50GB join queries are killed after running for 360 minutes.
 
