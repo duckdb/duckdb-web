@@ -138,7 +138,7 @@ DuckDB will find the distinct values in each `ON` clause column and create one n
 In the below example, all combinations of unique countries and unique cities receive their own column. 
 Some combinations may not be present in the underlying data, so those columns are populated with `NULL` values.
 ```sql
-PIVOT Cities on Country, Name USING SUM(Population);
+PIVOT Cities ON Country, Name USING SUM(Population);
 ```
 
 <div class="narrow_table"></div>
@@ -156,7 +156,7 @@ Here, Country and Name are concatenated together and the resulting concatenation
 Any arbitrary non-aggregating expression may be used.
 In this case, concatenating with an underscore is used to imitate the naming convention the `PIVOT` clause uses when multiple `ON` columns are provided (like in the prior example).
 ```sql
-PIVOT Cities on Country || '_' || Name USING SUM(Population);
+PIVOT Cities ON Country || '_' || Name USING SUM(Population);
 ```
 
 <div class="narrow_table"></div>
@@ -193,7 +193,7 @@ Multiple `GROUP BY` columns may also be provided.
 Note that column names must be used rather than column positions (1, 2, etc.), and that expressions are not supported in the `GROUP BY` clause.
 
 ```sql
-PIVOT Cities on Year USING SUM(Population) GROUP BY Country, Name;
+PIVOT Cities ON Year USING SUM(Population) GROUP BY Country, Name;
 ```
 
 <div class="narrow_table"></div>
@@ -213,7 +213,7 @@ This allows for a `PIVOT` to be used alongside other SQL logic, as well as for m
 No `SELECT` is needed within the CTE, the `PIVOT` keyword can be thought of as taking its place.
 ```sql
 WITH pivot_alias AS (
-    PIVOT Cities on Year USING SUM(Population) GROUP BY Country
+    PIVOT Cities ON Year USING SUM(Population) GROUP BY Country
 ) 
 SELECT * FROM pivot_alias;
 ```
@@ -224,7 +224,7 @@ Note that this behavior is different than the SQL Standard Pivot, as illustrated
 SELECT 
     * 
 FROM (
-    PIVOT Cities on Year USING SUM(Population) GROUP BY Country
+    PIVOT Cities ON Year USING SUM(Population) GROUP BY Country
 ) pivot_alias;
 ```
 
