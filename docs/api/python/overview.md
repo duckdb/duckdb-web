@@ -90,9 +90,22 @@ duckdb.sql('SELECT 42').write_csv('out.csv')         # Write to a CSV file
 duckdb.sql("COPY (SELECT 42) TO 'out.parquet'")      # Copy to a parquet file
 ```
 
+## Using an In-memory Database
+
+When using DuckDB through `duckdb.sql()`, it operates on an **in-memory** database, i.e., no tables are persisted on disk.
+The `duckdb.connect()` method returns a connection to an in-memory database:
+
+```python
+import duckdb
+
+con = duckdb.connect()
+con.sql('SELECT 42 AS x').show()
+```
+
 ## Persistent Storage
 
-By default DuckDB operates on an **in-memory** database. That means that any tables that are created are not persisted to disk. Using the `.connect` method a connection can be made to a **persistent** database. Any data written to that connection will be persisted, and can be reloaded by re-connecting to the same file. 
+The `duckdb.connect(`*`dbname`*`)` creates a connection to a **persistent** database.
+Any data written to that connection will be persisted, and can be reloaded by re-connecting to the same file, both from Python and from other DuckDB clients.
 
 ```python
 import duckdb
