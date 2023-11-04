@@ -105,7 +105,7 @@ ORDER BY ALL DESC
 LIMIT 5
 ```
 
-To return the query results into a Python variable, use `<<` as an assignment operator.
+To store the query results in a Python variable, use `<<` as an assignment operator.
 This can be used with both the `%sql` and `%%sql` Jupyter magics.
 ```sql
 %sql res << SELECT 'Off and flying!' AS a_duckdb_column
