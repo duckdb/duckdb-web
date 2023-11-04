@@ -121,7 +121,7 @@ with duckdb.connect('file.db') as con:
     # the context manager closes the connection automatically
 ```
 
-### Connection Object and Module
+## Connection Object and Module
 
 The connection object and the `duckdb` module can be used interchangeably – they support the same methods. The only difference is that when using the `duckdb` module a global in-memory database is used.
 
