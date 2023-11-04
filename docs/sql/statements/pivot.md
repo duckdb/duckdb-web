@@ -207,7 +207,7 @@ PIVOT Cities ON Year USING SUM(Population) GROUP BY Country, Name;
 
 ### Using PIVOT within a SELECT Statement
 
-The `PIVOT` statement may be included within a SELECT statement as a CTE ([a Common Table Expression, or WITH clause](../query_syntax/with)), or a subquery.
+The `PIVOT` statement may be included within a `SELECT` statement as a CTE ([a Common Table Expression, or `WITH` clause](../query_syntax/with)), or a subquery.
 This allows for a `PIVOT` to be used alongside other SQL logic, as well as for multiple `PIVOT`s to be used in one query.
 
 No `SELECT` is needed within the CTE, the `PIVOT` keyword can be thought of as taking its place.
