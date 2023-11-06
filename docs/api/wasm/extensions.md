@@ -46,6 +46,7 @@ WebAssembly is basically an additional platform, and there might be platform-spe
 ### HTTPFS
 
 The HTTPFS extension is, at the moment, not available in DuckDB-Wasm. Https protocol capabilities needs to go through an additional layer, the browser, which adds both differences and some restrictions to what is doable from native.
+Instead, DuckDB-Wasm has a separate implementation that for most purposes is interchangable, but does not support all use cases (as it must follow security rules imposed by the browser, such as CORS).
 
 ## Extension Signing
 
