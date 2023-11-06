@@ -117,9 +117,22 @@ Any extra parts (e.g., .part4.part5 etc) are always treated as properties
 
 ### Creating Structs with the Row Function
 
-The `row` function can be used to automatically convert multiple columns to a single struct column. The name of each input column is used as a key, and the value of each column becomes the struct's value at that key.
+The `row` function can be used to automatically convert multiple columns to a single struct column.  
 
-When converting multiple expressions into a `STRUCT`, the `row` function name is optional - a set of parenthesis is all that is needed.
+> This behavior was introduced in DuckDB v0.9.0
+
+When casting structs, the names of fields have to match.
+```sql
+select {'a': 42} as a, a::STRUCT(b INTEGER);
+```
+Will result in:
+```
+Mismatch Type Error: Type STRUCT(a INTEGER) does not match with STRUCT(b INTEGER). Cannot cast STRUCTs with different names
+```
+
+Because `row` does not require explicit aliases, it creates an "unnamed struct" which can be cast to any name.  
+`row` can be used to populate a table with a struct column without needing to repeat the field names for every added row.  
+This makes it not a good candidate to use directly in the result of a query, `struct_pack` would be more suited for that.
 
 #### Example Data Table Named t1
 
