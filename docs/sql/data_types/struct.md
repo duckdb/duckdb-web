@@ -104,7 +104,7 @@ SELECT part1.part2 FROM tbl
 1. part1 is a table, part2 is a column
 2. part1 is a column, part2 is a property of that column
 
-#### Two (or more) Dots
+#### Two (or More) Dots
 
 ```sql
 SELECT part1.part2.part3 FROM tbl
