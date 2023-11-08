@@ -62,6 +62,8 @@ SELECT COUNT(*) FROM (SELECT DISTINCT * FROM tbl);
 ```
 If we keep all the data in memory, the query should use around 6GB. However, we can still complete the query if less memory is available. In the table below, we can see how the runtime is affected by lowering the memory limit:
 
+<div class="narrow_table"></div>
+
 |  memory limit |  v0.8.1  |  v0.9.0  |
 |:-------------:|:--------:|:--------:|
 | 10.0GB        | 8.52s    | 2.91s    |
