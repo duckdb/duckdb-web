@@ -139,6 +139,46 @@ $(document).ready(function(){
 		evaluation();
 	}
 	
+	if ($('.yourselection > .select').length) {
+		function setQueryString() {
+			const urlSearchP = new URLSearchParams();
+	
+			$('.yourselection > .select').each(function () {
+				if (!$(this).hasClass('inactive') && $(this).find('.selected').length) {
+					const queryParam = $(this).data('select');
+					const selected = $(this).find('.selected').data('id').replace('.', '');
+					urlSearchP.set(queryParam, selected);
+				}
+			});
+	
+			// Get the current URL and append the new query parameters
+			const currentURL = window.location.href;
+			const newURL = new URL(currentURL);
+			newURL.search = urlSearchP.toString();
+	
+			// Update the URL with the new query parameters
+			window.history.pushState({}, '', newURL.toString());
+		}
+	
+		function handleQueryParameters() {
+			const urlSearchParams = new URLSearchParams(window.location.search);
+			urlSearchParams.forEach(function(value, key) {
+				const parentWrapper = $('[data-select="' + key + '"]');
+				parentWrapper.find('.selected').removeClass('selected');
+				parentWrapper.find('[data-id=".' + value + '"]').addClass('selected')
+			});
+		}
+	
+		if ( window.location.search.length ) {
+			handleQueryParameters();
+		} else {
+			setQueryString();
+		}
+		$(document).on('click', '.yourselection > .select li', setQueryString)
+		window.addEventListener('popstate', handleQueryParameters);
+	
+	}
+	
 
 	if($('.archivedposts').length != 0){ // If Archive Page
 		var year = getUrlParameter('year');
