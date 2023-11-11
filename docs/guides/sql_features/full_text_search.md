@@ -8,8 +8,8 @@ Here's an example of building a full text index of Shakespeare's plays.
 
 ```sql
 CREATE TABLE corpus AS
-  SELECT * FROM read_parquet(
-    'https://github.com/marhar/duckdb_tools/raw/main/full-text-shakespeare/shakespeare.parquet');
+    SELECT * FROM read_parquet(
+        'https://github.com/marhar/duckdb_tools/raw/main/full-text-shakespeare/shakespeare.parquet');
 ```
 
 ```sql
