@@ -17,6 +17,7 @@ function GenerateAttach(options = {}) {
 		AutomaticStack([
 			Keyword("ATTACH"),
 			Optional(Keyword("DATABASE"), "skip"),
+			Optional(Sequence([Keyword("IF"), Keyword("NOT"), Keyword("EXISTS")]), "skip"),
 			Expression("database-path"),
 			Optional(Sequence([
 				Keyword("AS"),
