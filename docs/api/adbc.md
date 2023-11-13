@@ -141,8 +141,7 @@ The first thing to do is to use `pip` and install the ADBC Driver manager. You w
 pip install adbc_driver_manager pyarrow
 ```
 
-The full documentation for the `adbc_driver_manager` package can be found
-[here](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
+> For details on the `adbc_driver_manager` package, see the [`adbc_driver_manager` package documentation](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
 
 As with C++, we need to provide initialization options consisting of the location of the libduckdb shared object and entrypoint function. Notice that the `path` argument for DuckDB is passed in through the `db_kwargs` dictionary.
 ```python

@@ -13,7 +13,7 @@ Insert statements are the standard way of loading data into a database system. T
 INSERT INTO people VALUES (1, 'Mark');
 ```
 
-See [here](../data/insert) for a more detailed description of insert statements.
+For a more detailed description, see the [page on the `INSERT statement`](../data/insert).
 
 ## CSV Loading
 
@@ -29,7 +29,7 @@ You can also load data from **compressed** (e.g., compressed with [gzip](https:/
 SELECT * FROM read_csv_auto('test.csv.gz');
 ```
 
-See [here](../data/csv) for a detailed description of CSV loading.
+For more details, see the [page on CSV loading](../data/csv).
 
 ## Parquet Loading
 
@@ -39,7 +39,7 @@ Parquet files can be efficiently loaded and queried using the `read_parquet` fun
 SELECT * FROM read_parquet('test.parquet');
 ```
 
-See [here](../data/parquet) for a detailed description of Parquet loading.
+For more details, see the [page on Parquet loading](../data/parquet).
 
 ## JSON Loading
 
@@ -49,7 +49,7 @@ JSON files can be efficiently loaded and queried using the `read_json_auto` func
 SELECT * FROM read_json_auto('test.json');
 ```
 
-See [here](../data/json) for a detailed description of JSON loading.
+For more details, see the [page on JSON loading](../data/json).
 
 ## Appender (C++ and Java)
 
@@ -73,6 +73,6 @@ appender.endRow();
 appender.close();
 ```
 
-See [here](../data/appender) for a detailed description of the C++ appender.
+For a detailed description, see the [page on the C++ appender](../data/appender).
 
 ## Pages in This Section
