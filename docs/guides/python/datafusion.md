@@ -64,12 +64,12 @@ Calculate a new DataFusion DataFrame and output it to a variable as an Apache Ar
 ```python
 arrow_batches = (
     datafusion_df
-    .aggregate(
-        [df.col("fruits")],
-        [f.sum(df.col("A")).alias("sum_A_by_fruits")]
-    )
-    .sort(df.col("fruits").sort(ascending=True))
-    .collect()
+        .aggregate(
+            [df.col("fruits")],
+            [f.sum(df.col("A")).alias("sum_A_by_fruits")]
+        )
+        .sort(df.col("fruits").sort(ascending=True))
+        .collect()
 )
 datafusion_to_arrow = (
     pa.Table.from_batches(arrow_batches)
@@ -81,12 +81,12 @@ Then query the Apache Arrow table using DuckDB, and output the results as anothe
 
 ```python
 output = duckdb.query("""
-  SELECT 
-    fruits,
-    first(sum_A_by_fruits) AS sum_A
-  FROM datafusion_to_arrow
-  GROUP BY ALL
-  ORDER BY ALL
+    SELECT
+          fruits,
+          first(sum_A_by_fruits) AS sum_A
+    FROM datafusion_to_arrow
+    GROUP BY ALL
+    ORDER BY ALL
 """).arrow()
 ```
 
@@ -100,17 +100,17 @@ After the import statements and example DataFrame creation above, query the Pand
 
 ```python
 duckdb_to_arrow = duckdb.query("""
-  SELECT
-    fruits,
-    cars,
-    'fruits' AS literal_string_fruits,
-    SUM(B) FILTER (cars = 'beetle') OVER () AS B,
-    SUM(A) FILTER (B > 2) OVER (PARTITION BY cars) AS sum_A_by_cars,
-    SUM(A) OVER (PARTITION BY fruits) AS sum_A_by_fruits
-  FROM df
-  ORDER BY
-    fruits,
-    df.B
+    SELECT
+        fruits,
+        cars,
+        'fruits' AS literal_string_fruits,
+        SUM(B) FILTER (cars = 'beetle') OVER () AS B,
+        SUM(A) FILTER (B > 2) OVER (PARTITION BY cars) AS sum_A_by_cars,
+        SUM(A) OVER (PARTITION BY fruits) AS sum_A_by_fruits
+    FROM df
+    ORDER BY
+        fruits,
+        df.B
 """).arrow()
 ```
 
