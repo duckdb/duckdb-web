@@ -148,13 +148,11 @@ As with C++, we need to provide initialization options consisting of the locatio
 ```python
 import adbc_driver_duckdb.dbapi
 
-with adbc_driver_duckdb.dbapi.connect("test.db"
-  ) as conn, conn.cursor() as cur:
-  cur.execute("SELECT 42")
-  # fetch a pyarrow table
-  tbl = cur.fetch_arrow_table()
-  print(tbl)
-
+with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
+    cur.execute("SELECT 42")
+    # fetch a pyarrow table
+    tbl = cur.fetch_arrow_table()
+    print(tbl)
 ```
 
 Alongside `fetch_arrow_table`, other methods from DBApi are also implemented on the cursor, such as `fetchone` and `fetchall`. Data can also be ingested via `arrow_streams`. We just need to set options on the statement to bind the stream of data and execute the query.
@@ -168,7 +166,6 @@ data = pyarrow.record_batch(
     names=["ints", "strs"],
 )
 
-with adbc_driver_duckdb.dbapi.connect("test.db"
-  ) as conn, conn.cursor() as cur:
-  cur.adbc_ingest("AnswerToEverything", data)
+with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
+    cur.adbc_ingest("AnswerToEverything", data)
 ```
