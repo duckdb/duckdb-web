@@ -381,8 +381,8 @@ SELECT json_extract(j, 'family') AS family,
 FROM example;
 -- The following is faster and more memory efficient 
 WITH extracted AS (
-  SELECT json_extract(j, ['family', 'species']) extracted_list
-  FROM example
+    SELECT json_extract(j, ['family', 'species']) extracted_list
+    FROM example
 )
 SELECT extracted_list[1] AS family,
        extracted_list[2] AS species

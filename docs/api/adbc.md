@@ -141,20 +141,17 @@ The first thing to do is to use `pip` and install the ADBC Driver manager. You w
 pip install adbc_driver_manager pyarrow
 ```
 
-The full documentation for the `adbc_driver_manager` package can be found
-[here](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
+> For details on the `adbc_driver_manager` package, see the [`adbc_driver_manager` package documentation](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
 
 As with C++, we need to provide initialization options consisting of the location of the libduckdb shared object and entrypoint function. Notice that the `path` argument for DuckDB is passed in through the `db_kwargs` dictionary.
 ```python
 import adbc_driver_duckdb.dbapi
 
-with adbc_driver_duckdb.dbapi.connect("test.db"
-  ) as conn, conn.cursor() as cur:
-  cur.execute("SELECT 42")
-  # fetch a pyarrow table
-  tbl = cur.fetch_arrow_table()
-  print(tbl)
-
+with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
+    cur.execute("SELECT 42")
+    # fetch a pyarrow table
+    tbl = cur.fetch_arrow_table()
+    print(tbl)
 ```
 
 Alongside `fetch_arrow_table`, other methods from DBApi are also implemented on the cursor, such as `fetchone` and `fetchall`. Data can also be ingested via `arrow_streams`. We just need to set options on the statement to bind the stream of data and execute the query.
@@ -168,7 +165,6 @@ data = pyarrow.record_batch(
     names=["ints", "strs"],
 )
 
-with adbc_driver_duckdb.dbapi.connect("test.db"
-  ) as conn, conn.cursor() as cur:
-  cur.adbc_ingest("AnswerToEverything", data)
+with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
+    cur.adbc_ingest("AnswerToEverything", data)
 ```

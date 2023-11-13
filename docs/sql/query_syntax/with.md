@@ -93,13 +93,13 @@ The following query returns the path from the node `Oasis` to the root of the tr
 
 ```sql
 WITH RECURSIVE tag_hierarchy(id, source, path) AS (
-  SELECT id, name, [name] AS path
-  FROM tag
-  WHERE subclassof IS NULL
+    SELECT id, name, [name] AS path
+    FROM tag
+    WHERE subclassof IS NULL
 UNION ALL
-  SELECT tag.id, tag.name, list_prepend(tag.name, tag_hierarchy.path)
-  FROM tag, tag_hierarchy
-  WHERE tag.subclassof = tag_hierarchy.id
+    SELECT tag.id, tag.name, list_prepend(tag.name, tag_hierarchy.path)
+    FROM tag, tag_hierarchy
+    WHERE tag.subclassof = tag_hierarchy.id
 )
 SELECT path
 FROM tag_hierarchy
@@ -137,19 +137,19 @@ The following query returns **all paths** starting in node 1:
 
 ```sql
 WITH RECURSIVE paths(startNode, endNode, path) AS (
-   SELECT -- define the path as the first edge of the traversal
+    SELECT -- define the path as the first edge of the traversal
         node1id AS startNode,
         node2id AS endNode,
         [node1id, node2id] AS path
-     FROM edge
-     WHERE startNode = 1
-   UNION ALL
-   SELECT -- concatenate new edge to the path
+    FROM edge
+    WHERE startNode = 1
+    UNION ALL
+    SELECT -- concatenate new edge to the path
         paths.startNode AS startNode,
         node2id AS endNode,
         array_append(path, node2id) AS path
-     FROM paths
-     JOIN edge ON paths.endNode = node1id
+    FROM paths
+    JOIN edge ON paths.endNode = node1id
     -- Prevent adding a repeated node to the path.
     -- This ensures that no cycles occur.
     WHERE node2id != ALL(paths.path)
