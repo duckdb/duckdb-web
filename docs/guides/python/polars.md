@@ -58,4 +58,4 @@ shape: (3, 2)
 └─────┴────────┘
 ```
 
-To learn more about Polars, feel free to explore their [Python API Reference](https://pola-rs.github.io/polars/py-polars/html/reference/index.html)! 
+To learn more about Polars, feel free to explore their [Python API Reference](https://pola-rs.github.io/polars/py-polars/html/reference/index.html).

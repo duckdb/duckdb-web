@@ -135,4 +135,4 @@ output_2 = (
 output_2
 ```
 
-To learn more about DataFusion, feel free to explore their [GitHub repository](https://github.com/apache/arrow-datafusion-python/)! 
+To learn more about DataFusion, feel free to explore their [API documentation](https://arrow.apache.org/datafusion-python/).
