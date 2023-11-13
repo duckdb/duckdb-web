@@ -42,7 +42,7 @@ pandas_df = pd.DataFrame(
 arrow_table = table = pa.Table.from_pandas(pandas_df)
 arrow_batches = table.to_batches()
 
-ctx = SessionContext()
+ctx = df.SessionContext()
 datafusion_df = ctx.create_dataframe([arrow_batches])
 datafusion_df
 ```
