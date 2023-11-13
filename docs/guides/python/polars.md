@@ -44,5 +44,17 @@ UNION ALL
 SELECT 3, 'mango'""").pl()
 print(df)
 ```
+```text
+shape: (3, 2)
+┌─────┬────────┐
+│ id  ┆ fruit  │
+│ --- ┆ ---    │
+│ i32 ┆ str    │
+╞═════╪════════╡
+│ 1   ┆ banana │
+│ 2   ┆ apple  │
+│ 3   ┆ mango  │
+└─────┴────────┘
+```
 
 To learn more about Polars, feel free to explore their [Python API Reference](https://pola-rs.github.io/polars/py-polars/html/reference/index.html)! 

@@ -46,6 +46,18 @@ ctx = df.SessionContext()
 datafusion_df = ctx.create_dataframe([arrow_batches])
 datafusion_df
 ```
+```text
+DataFrame()
++---+--------+---+--------+
+| A | fruits | B | cars   |
++---+--------+---+--------+
+| 1 | banana | 5 | beetle |
+| 2 | banana | 4 | audi   |
+| 3 | apple  | 3 | beetle |
+| 4 | apple  | 2 | beetle |
+| 5 | banana | 1 | beetle |
++---+--------+---+--------+
+```
 
 Calculate a new DataFusion DataFrame and output it to a variable as an Apache Arrow table.
 
