@@ -9,11 +9,11 @@ A `LIST` column encodes lists of values. Fields in the column can have values wi
 
 See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
-Lists can be created using the [`list_value(expr, ...)`](../functions/nested#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions.
-
 > For storing fixed-length lists, DuckDB uses the [`ARRAY` type](array).
 
 ## Creating Lists
+
+Lists can be created using the [`list_value(expr, ...)`](../functions/nested#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions.
 
 ```sql
 -- List of integers
