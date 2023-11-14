@@ -592,3 +592,35 @@ woot
 42
 43
 ```
+
+
+## Reading Environment Variables
+
+The `getenv` function can read environment variables.
+
+### Examples
+
+To retrieve the home directory's path from the `HOME` environment variable, use:
+
+```sql
+SELECT getenv('HOME') AS home;
+```
+```text
+┌──────────────────┐
+│       home       │
+│     varchar      │
+├──────────────────┤
+│ /Users/user_name │
+└──────────────────┘
+```
+
+The output of the `getenv` function can be used to set [configuration options](../sql/configuration). For example, to set the `NULL` order based on the environment variable `DEFAULT_NULL_ORDER`, use:
+
+```sql
+SET default_null_order=getenv('DEFAULT_NULL_ORDER');
+```
+
+### Restrictions for Reading Environment Variables
+
+The `getenv` function can only be run when the [`enable_external_access`](../sql/configuration#configuration-reference) is set to `true` (the default setting).
+It is only available in the CLI client and is not supported in other DuckDB clients.
