@@ -773,6 +773,10 @@
                   "url": "text"
                 },
                 {
+                  "page": "Time",
+                  "url": "time"
+                },
+                {
                   "page": "Timestamp",
                   "url": "timestamp"
                 },
@@ -957,6 +961,10 @@
               "url": "working_with_extensions"
             },
             {
+              "page": "Arrow",
+              "url": "arrow"
+            },
+            {
               "page": "AutoComplete",
               "url": "autocomplete"
             },
@@ -977,7 +985,7 @@
               "url": "full_text_search"
             },
             {
-              "page": "HTTPFS",
+              "page": "httpfs",
               "url": "httpfs"
             },
             {
@@ -985,8 +993,24 @@
               "url": "iceberg"
             },
             {
+              "page": "ICU",
+              "url": "icu"
+            },
+            {
+              "page": "inet",
+              "url": "inet"
+            },
+            {
+              "page": "jemalloc",
+              "url": "jemalloc"
+            },
+            {
               "page": "JSON",
               "url": "json"
+            },
+            {
+              "page": "MySQL Scanner",
+              "url": "mysql_scanner"
             },
             {
               "page": "PostgreSQL Scanner",
