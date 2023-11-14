@@ -6,7 +6,7 @@ excerpt_separator: <!--more-->
 ---
 
 
-*TLDR: DuckDB can now directly query queries stored in PostgreSQL and speed up complex analytical queries without duplicating data.*
+*TLDR: DuckDB can now directly query tables stored in PostgreSQL and speed up complex analytical queries without duplicating data.*
 
 <!--more-->
 

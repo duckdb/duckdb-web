@@ -56,9 +56,9 @@ conn = duckdb.connect()
 %sql conn --alias duckdb
 ```
 
-### Connecting to DuckDB via SQLAlchemy Using duckdb_engine
+### Connecting to DuckDB via SQLAlchemy Using `duckdb_engine`
 
-Alternatively, you can connect to DuckDB via SQLAlchemy Using duckdb_engine. See the [performance and feature differences](https://jupysql.ploomber.io/en/latest/tutorials/duckdb-native-sqlalchemy.html).
+Alternatively, you can connect to DuckDB via SQLAlchemy using `duckdb_engine`. See the [performance and feature differences](https://jupysql.ploomber.io/en/latest/tutorials/duckdb-native-sqlalchemy.html).
 
 ```python
 import duckdb
@@ -105,11 +105,12 @@ ORDER BY ALL DESC
 LIMIT 5
 ```
 
-To return query results into a Pandas dataframe for future usage, use `<<` as an assignment operator.
+To store the query results in a Python variable, use `<<` as an assignment operator.
 This can be used with both the `%sql` and `%%sql` Jupyter magics.
 ```sql
-%sql my_df << SELECT 'Off and flying!' AS a_duckdb_column
+%sql res << SELECT 'Off and flying!' AS a_duckdb_column
 ```
+If the `%config SqlMagic.autopandas = True` option is set, the variable is a Pandas dataframe, otherwise, it is a `ResultSet` that can be converted to Pandas with the `DataFrame()` function.
 
 ## Querying Pandas Dataframes
 

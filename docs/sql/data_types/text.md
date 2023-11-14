@@ -70,6 +70,16 @@ SELECT 'Hello' || chr(10) || 'world' AS msg;
 └──────────────┘
 ```
 
+## Double Quote Characters
+
+Double quote characters (`"`) are used to denote table and column names. Surrounding their names allows the use of keywords, e.g.:
+
+```sql
+CREATE TABLE "table"("order" BIGINT);
+```
+
+While DuckDB occasionally accepts both single quote and double quotes for strings (e.g., both `FROM "filename.csv"` and `FROM 'filename.csv'` work), their use is not recommended.
+
 ## Functions
 
 See [Character Functions](../../sql/functions/char) and [Pattern Matching](../../sql/functions/patternmatching).

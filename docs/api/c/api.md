@@ -108,6 +108,7 @@ title: C API - Complete API
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_prepare">duckdb_destroy_prepare</a></span>(<span class="kt">duckdb_prepared_statement</span> *<span class="k">prepared_statement</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_prepare_error">duckdb_prepare_error</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_nparams">duckdb_nparams</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_parameter_name">duckdb_parameter_name</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_param_type">duckdb_param_type</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_clear_bindings">duckdb_clear_bindings</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_value">duckdb_bind_value</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">duckdb_value</span> <span class="k">val</span>);
@@ -2179,6 +2180,33 @@ Returns 0 if the query was not successfully prepared.
 * `prepared_statement`
 
 The prepared statement to obtain the number of parameters for.
+
+<br>
+
+
+### `duckdb_parameter_name`
+
+---
+Returns the name used to identify the parameter
+The returned string should be freed using `duckdb_free`.
+
+Returns NULL if the index is out of range for the provided prepared statement.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_parameter_name</span>(<span class="k">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">index
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `prepared_statement`
+
+The prepared statement for which to get the parameter name from.
 
 <br>
 

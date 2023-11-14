@@ -78,7 +78,9 @@ title: NodeJS API
         * [.unregister_buffer(name)](#module_duckdb..Database+unregister_buffer) ⇒ <code>this</code>
         * [.unregister_udf(name)](#module_duckdb..Database+unregister_udf) ⇒ <code>this</code>
         * [.registerReplacementScan(fun)](#module_duckdb..Database+registerReplacementScan) ⇒ <code>this</code>
+        * [.tokenize(text)](#module_duckdb..Database+tokenize) ⇒ <code>ScriptTokens</code>
         * [.get()](#module_duckdb..Database+get)
+    * [~TokenType](#module_duckdb..TokenType)
     * [~ERROR](#module_duckdb..ERROR) : <code>number</code>
     * [~OPEN_READONLY](#module_duckdb..OPEN_READONLY) : <code>number</code>
     * [~OPEN_READWRITE](#module_duckdb..OPEN_READWRITE) : <code>number</code>
@@ -450,6 +452,7 @@ Main database interface
     * [.unregister_buffer(name)](#module_duckdb..Database+unregister_buffer) ⇒ <code>this</code>
     * [.unregister_udf(name)](#module_duckdb..Database+unregister_udf) ⇒ <code>this</code>
     * [.registerReplacementScan(fun)](#module_duckdb..Database+registerReplacementScan) ⇒ <code>this</code>
+    * [.tokenize(text)](#module_duckdb..Database+tokenize) ⇒ <code>ScriptTokens</code>
     * [.get()](#module_duckdb..Database+get)
 
 <a name="module_duckdb..Database+close"></a>
@@ -692,12 +695,29 @@ Register a table replace scan function
 | --- | --- |
 | fun | Replacement scan function |
 
+<a name="module_duckdb..Database+tokenize"></a>
+
+#### database.tokenize(text) ⇒ <code>ScriptTokens</code>
+Return positions and types of tokens in given text
+
+**Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
+
+| Param |
+| --- |
+| text | 
+
 <a name="module_duckdb..Database+get"></a>
 
 #### database.get()
 Not implemented
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
+<a name="module_duckdb..TokenType"></a>
+
+### duckdb~TokenType
+Types of tokens return by `tokenize`.
+
+**Kind**: inner property of [<code>duckdb</code>](#module_duckdb)  
 <a name="module_duckdb..ERROR"></a>
 
 ### duckdb~ERROR : <code>number</code>

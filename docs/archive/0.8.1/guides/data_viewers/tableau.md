@@ -36,7 +36,7 @@ as the database format you are using.
 
 # Connecting Tableau Desktop to DuckDB
 
-Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-us/jdbc_tableau.htm) for Tableau to use.
+Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-gb/jdbc_tableau.htm) for Tableau to use.
 Note that Tableau needs to be restarted any time you add or modify drivers.
 
 ## MacOS
@@ -48,7 +48,7 @@ This means you should use the JDBC driver for now.
 ### Install the DuckDB JDBC Driver:
 
 1. [Download](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_jdbc-osx-universal.jar) the DuckDB JDBC driver. This is a file called `duckdb_jdbc-osx-universal.jar`. Make sure this is from the same build as the version of DuckDB used to create the database file!
-2. Follow the [Tableau directions](https://help.tableau.com/current/pro/desktop/en-us/jdbc_tableau.htm) and copy this file to either `/Library/JDBC` (for access by all users) or `~/Library/JDBC` (for access by your login alone) (e.g., `cp ~/Downloads/duckdb_jdbc-osx-universal.jar ~/Library/JDBC`)
+2. Follow the [Tableau directions](https://help.tableau.com/current/pro/desktop/en-gb/jdbc_tableau.htm) and copy this file to either `/Library/JDBC` (for access by all users) or `~/Library/JDBC` (for access by your login alone) (e.g., `cp ~/Downloads/duckdb_jdbc-osx-universal.jar ~/Library/JDBC`)
 
 ### Connect to your data
 

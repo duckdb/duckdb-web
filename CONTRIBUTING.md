@@ -58,6 +58,14 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/archive/0.8.1/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
 * Use **4 spaces** for indentation.
 
+### Python style
+
+* Use **4 spaces** for indentation.
+
+## Links
+
+* Please avoid using the term "here" for links (e.g., "for more details, click [here](https://example.org/)" should be avoided). For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
+
 ### Spelling
 
 * Use [American English (en-US) spelling](https://en.wikipedia.org/wiki/Oxford_spelling#Language_tag_comparison).

@@ -96,7 +96,7 @@ ORDER BY
     name;
 ```
 
-You can also find a reference table of available time zones [here](../../sql/data_types/timezones).
+You can also find a reference table of [available time zones](../../sql/data_types/timezones).
 
 ## Calendars
 

@@ -264,7 +264,7 @@ ORDER BY 1, 2;
 
 The queries above do not use a number of clauses commonly found in select statements, like
 `WHERE`, `GROUP BY`, etc. For more complex queries you can find where `WINDOW` clauses fall in
-the canonical order of a select statement [here](../sql/statements/select).
+the canonical order of the [`SELECT statement`](../sql/statements/select).
 
 ### Box and Whisker Queries
 

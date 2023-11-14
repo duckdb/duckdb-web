@@ -271,6 +271,6 @@ SELECT * FROM todos LIMIT 5;
 | 1      | 4  | et porro tempora                                                | true      |
 | 1      | 5  | laboriosam mollitia et enim quasi adipisci quia provident illum | false     |
 
-More on the `COPY` statement can be found [here](../../sql/statements/copy).
+For more details, see the [page on the `COPY` statement](../../sql/statements/copy).
 
 ## Pages in This Section
