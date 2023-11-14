@@ -17,6 +17,10 @@ ATTACH 'file.db' AS file_db;
 ATTACH 'file.db' (READ_ONLY);
 -- attach a SQLite database for reading and writing (see sqlite extension for more information)
 ATTACH 'sqlite_file.db' AS sqlite (TYPE SQLITE);
+-- attach the database "file.db" if inferred database alias "file_db" does not yet exist
+ATTACH IF NOT EXISTS 'file.db';
+-- attach the database "file.db" if explicit database alias "file_db" does not yet exist
+ATTACH IF NOT EXISTS 'file.db' AS file_db;
 -- create a table in the attached database with alias "file"
 CREATE TABLE file.new_table(i INTEGER);
 -- detach the database with alias "file"
