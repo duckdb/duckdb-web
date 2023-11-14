@@ -9,7 +9,6 @@ The DuckDB CLI (Command Line Interface) is a single, dependency-free executable.
 
 The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
 
-
 ## Getting Started
 
 Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `duckdb` to run the executable. If in a PowerShell or POSIX shell environment, use the command `./duckdb` instead.
@@ -27,8 +26,13 @@ To see additional command line options to use when starting the CLI, use the com
 
 Frequently-used configurations can be stored in the file `~/.duckdbrc`. See the [Configuring the CLI](#configuring-the-cli) below for further information on these options.
 
+## In-Memory vs. Persistent Database
+
 By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a `D` on the final line.
 
+```bash
+$ duckdb
+```
 ```text
 v0.9.2 3c695d7ba9
 Enter ".help" for usage hints.
@@ -36,6 +40,8 @@ Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
 D
 ```
+
+## Using the CLI
 
 Once the CLI has been opened, enter a SQL statement followed by a semicolon, then hit enter and it will be executed. Results will be displayed in a table in the terminal. If a semicolon is omitted, hitting enter will allow for multi-line SQL statements to be entered.
 
