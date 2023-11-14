@@ -11,6 +11,8 @@ See the [data types overview](../../sql/data_types/overview) for a comparison be
 
 Lists can be created using the [`list_value(expr, ...)`](../functions/nested#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions.
 
+> For storing fixed-length lists, DuckDB uses the [`ARRAY` type](array).
+
 ## Creating Lists
 
 ```sql

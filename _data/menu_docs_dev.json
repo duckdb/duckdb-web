@@ -725,6 +725,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Array",
+                  "url": "Array"
+                },
+                {
                   "page": "Bitstring",
                   "url": "bitstring"
                 },
