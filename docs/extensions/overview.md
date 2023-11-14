@@ -105,7 +105,7 @@ SET extension_directory=/path/to/your/extension/directory
 
 ## Developing Extensions
 
-The same API that the official extensions use is available for developing extensions. This allows users to extend the functionaly of DuckDB such to suit their domain the best.
+The same API that the official extensions use is available for developing extensions. This allows users to extend the functionality of DuckDB such that it suits their domain the best.
 A template for creating extensions is available in the [`extension-template` repository](https://github.com/duckdb/extension-template/).
 
 ## Working with Extensions
