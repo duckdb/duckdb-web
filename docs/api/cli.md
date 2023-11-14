@@ -509,7 +509,7 @@ Use ".open FILENAME" to reopen on a persistent database.
 ⚫◗
 ```
 
-## Non-interactive Usage
+## Non-Interactive Usage
 
 To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
 

@@ -14,7 +14,7 @@ such as the [ICU extension](../../extensions/icu) that ships with DuckDB.
 In the examples below, the current time zone is presumed to be America/Los_Angeles
 using the Gregorian calendar.
 
-## Built-in Timestamp With Time Zone Functions
+## Built-In Timestamp With Time Zone Functions
 
 The table below shows the available scalar functions for `TIMESTAMP WITH TIME ZONE` values.
 Since these functions do not involve binning or display,
