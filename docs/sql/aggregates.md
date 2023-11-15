@@ -61,7 +61,7 @@ The table below shows the available general aggregate functions.
 | `max(arg)` |Returns the maximum value present in arg. | `max(A)` | - |
 | `min(arg)` |Returns the minimum value present in arg. | `min(A)` | - |
 | `product(arg)` |Calculates the product of all tuples in arg | `product(A)` | - |
-| `string_agg(arg, sep)` |Concatenates the column string values with a separator | `string_agg(S, ',')` | `group_concat` |
+| `string_agg(arg, sep)` |Concatenates the column string values with a separator | `string_agg(S, ',')` | `group_concat(arg, sep)`, `listagg(arg, sep)` |
 | `sum(arg)` |Calculates the sum value for all tuples in arg. | `sum(A)` | - |
 
 ## Approximate Aggregates
