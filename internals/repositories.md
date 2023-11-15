@@ -17,6 +17,7 @@ Several components of DuckDB are maintained in separate repositories.
 * [`duckdb-r`](https://github.com/duckdb/duckdb-r): R client
 * [`duckdb-rs`](https://github.com/duckdb/duckdb-rs): Rust client
 * [`duckdb-swift`](https://github.com/duckdb/duckdb-swift): Swift client
+* [`go-duckdb`](https://github.com/marcboeker/go-duckdb): Go client
 
 ## Connectors
 
