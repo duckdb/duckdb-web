@@ -36,22 +36,23 @@ SELECT COS(NULL);
 -- NULL
 ```
 
-`COALESCE` is an exception to this. `COALESCE` takes any number of arguments, and returns for each row the first argument that is not `NULL`. If all arguments are `NULL`, `COALESCE` also returns `NULL`.
+The `coalesce` function is an exception to this: it takes any number of arguments, and returns for each row the first argument that is not `NULL`. If all arguments are `NULL`, `coalesce` also returns `NULL`.
 
 ```sql
-SELECT COALESCE(NULL, NULL, 1);
+SELECT coalesce(NULL, NULL, 1);
 -- 1
-SELECT COALESCE(10, 20);
+SELECT coalesce(10, 20);
 -- 10
-SELECT COALESCE(NULL, NULL);
+SELECT coalesce(NULL, NULL);
 -- NULL
 ```
 
-`IFNULL` is a two-argument version of `COALESCE`
+The `ifnull` function is a two-argument version of `COALESCE`.
+
 ```sql
-SELECT IFNULL(NULL, 'default_string');
+SELECT ifnull(NULL, 'default_string');
 -- default_string
-SELECT IFNULL(1, 'default_string');
+SELECT ifnull(1, 'default_string');
 -- 1
 ```
 
@@ -63,15 +64,15 @@ SELECT IFNULL(1, 'default_string');
 
 `NULL` values are ignored in most aggregate functions. 
 
-Aggregate functions that do not ignore `NULL` values include: `FIRST`, `LAST`, `LIST`, and `ARRAY_AGG`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause](../../sql/query_syntax/filter) can be used.
+Aggregate functions that do not ignore `NULL` values include: `first`, `last`, `list`, and `array_agg`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause](../../sql/query_syntax/filter) can be used.
 
 ```sql
 CREATE TABLE integers(i INTEGER);
 INSERT INTO integers VALUES (1), (10), (NULL);
 
-SELECT MIN(i) FROM integers;
+SELECT min(i) FROM integers;
 -- 1
 
-SELECT MAX(i) FROM integers;
+SELECT max(i) FROM integers;
 -- 10
 ```

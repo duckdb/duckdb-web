@@ -16,7 +16,7 @@ SELECT row_number() OVER (PARTITION BY region ORDER BY time) FROM sales;
 -- compute the difference between the current amount, and the previous amount, by order of time
 SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
 -- compute the percentage of the total amount of sales per region for each row
-SELECT amount / SUM(amount) OVER (PARTITION BY region) FROM sales;
+SELECT amount / sum(amount) OVER (PARTITION BY region) FROM sales;
 ```
 
 ## Syntax
@@ -167,12 +167,12 @@ Here is a simple `ROW` frame query, using an aggregate function:
 
 ```sql
 SELECT points,
-    SUM(points) OVER (
+    sum(points) OVER (
         ROWS BETWEEN 1 PRECEDING
                  AND 1 FOLLOWING) we
 FROM results;
 ```
-This query computes the `SUM` of each point and the points on either side of it:
+This query computes the `sum` of each point and the points on either side of it:
 
 <img src="/images/blog/windowing/moving-sum.jpg" alt="Moving SUM of three values" title="Figure 2: A moving SUM of three values" style="max-width:90%;width:90%;height:auto"/>
 
@@ -187,7 +187,7 @@ To do this, we can use this window query:
 
 ```sql
 SELECT "Plant", "Date",
-    AVG("MWh") OVER (
+    avg("MWh") OVER (
         PARTITION BY "Plant"
         ORDER BY "Date" ASC
         RANGE BETWEEN INTERVAL 3 DAYS PRECEDING
@@ -199,7 +199,7 @@ ORDER BY 1, 2;
 
 This query partitions the data by `Plant` (to keep the different power plants' data separate),
 orders each plant's partition by `Date` (to put the energy measurements next to each other),
-and uses a `RANGE` frame of three days on either side of each day for the `AVG`
+and uses a `RANGE` frame of three days on either side of each day for the `avg`
 (to handle any missing days).
 This is the result:
 
@@ -223,9 +223,9 @@ The `WINDOW` clause can be used to define a *named* window that can be shared be
 
 ```sql
 SELECT "Plant", "Date",
-    MIN("MWh") OVER seven AS "MWh 7-day Moving Minimum",
-    AVG("MWh") OVER seven AS "MWh 7-day Moving Average",
-    MAX("MWh") OVER seven AS "MWh 7-day Moving Maximum"
+    min("MWh") OVER seven AS "MWh 7-day Moving Minimum",
+    avg("MWh") OVER seven AS "MWh 7-day Moving Average",
+    max("MWh") OVER seven AS "MWh 7-day Moving Maximum"
 FROM "Generation History"
 WINDOW seven AS (
     PARTITION BY "Plant"
@@ -241,12 +241,12 @@ Multiple windows can be defined in the same `WINDOW` clause by comma-separating 
 
 ```sql
 SELECT "Plant", "Date",
-    MIN("MWh") OVER seven AS "MWh 7-day Moving Minimum",
-    AVG("MWh") OVER seven AS "MWh 7-day Moving Average",
-    MAX("MWh") OVER seven AS "MWh 7-day Moving Maximum",
-    MIN("MWh") OVER three AS "MWh 3-day Moving Minimum",
-    AVG("MWh") OVER three AS "MWh 3-day Moving Average",
-    MAX("MWh") OVER three AS "MWh 3-day Moving Maximum"
+    min("MWh") OVER seven AS "MWh 7-day Moving Minimum",
+    avg("MWh") OVER seven AS "MWh 7-day Moving Average",
+    max("MWh") OVER seven AS "MWh 7-day Moving Maximum",
+    min("MWh") OVER three AS "MWh 3-day Moving Minimum",
+    avg("MWh") OVER three AS "MWh 3-day Moving Average",
+    max("MWh") OVER three AS "MWh 3-day Moving Maximum"
 FROM "Generation History"
 WINDOW
     seven AS (
@@ -274,10 +274,10 @@ and we can use the window syntax to write queries that generate the data for mov
 
 ```sql
 SELECT "Plant", "Date",
-    MIN("MWh") OVER seven AS "MWh 7-day Moving Minimum",
-    QUANTILE_CONT("MWh", [0.25, 0.5, 0.75]) OVER seven
+    min("MWh") OVER seven AS "MWh 7-day Moving Minimum",
+    quantile_cont("MWh", [0.25, 0.5, 0.75]) OVER seven
         AS "MWh 7-day Moving IQR",
-    MAX("MWh") OVER seven AS "MWh 7-day Moving Maximum",
+    max("MWh") OVER seven AS "MWh 7-day Moving Maximum",
 FROM "Generation History"
 WINDOW seven AS (
     PARTITION BY "Plant"

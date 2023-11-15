@@ -32,7 +32,7 @@ By combining the [`COPY...TO`](../../sql/statements/copy#copy-to) function with 
 2. To prepare the data for YouPlot, write a simple aggregate:
 
     ```bash
-    duckdb -s "SELECT date, SUM(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10"
+    duckdb -s "SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10"
     ```
 
 3. Finally, wrap the `SELECT` in the `COPY...TO` function with an output location of `/dev/stdout`.
@@ -46,7 +46,7 @@ By combining the [`COPY...TO`](../../sql/statements/copy#copy-to) function with 
     The full DuckDB command below outputs the query in CSV format with a header:
 
     ```bash
-    duckdb -s "COPY (SELECT date, SUM(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
+    duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
     ```
 
 ## Connecting DuckDB to YouPlot
@@ -54,7 +54,7 @@ By combining the [`COPY...TO`](../../sql/statements/copy#copy-to) function with 
 Finally, the data can now be piped to YouPlot! Let's assume we have an `input.json` file with dates and number of purchases made by somebody on that date. Using the query above, we'll pipe the data to the `uplot` command to draw a plot of the Top 10 Purchase Dates
 
 ```bash
-duckdb -s "COPY (SELECT date, SUM(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" | uplot bar -d, -H -t "Top 10 Purchase Dates"
+duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" | uplot bar -d, -H -t "Top 10 Purchase Dates"
 ```
 
 This tells `uplot` to draw a bar plot, use a comma-seperated delimiter (`-d,`), that the data has a header (`-H`), and give the plot a title (`-t`).

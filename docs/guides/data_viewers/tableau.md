@@ -61,7 +61,7 @@ and using Tableau-provided PostgreSQL dialect.
 
 ![Tableau PostgreSQL](/images/guides/tableau/tableau-osx-jdbc.png)
 
-However, functionality will be missing such as MEDIAN and PERCENTILE aggregate functions. 
+However, functionality will be missing such as `median` and `percentile` aggregate functions. 
 To make the data source connection more compatible with the PostgreSQL dialect, 
 please use the DuckDB taco connector as described below.
 

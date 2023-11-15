@@ -17,7 +17,7 @@ SELECT col1 + col2 AS res, sqrt(col1) AS root FROM table_name;
 -- select all unique cities from the addresses table
 SELECT DISTINCT city FROM addresses;
 -- return the total number of rows in the addresses table
-SELECT COUNT(*) FROM addresses;
+SELECT count(*) FROM addresses;
 -- select all columns except the city column from the addresses table
 SELECT * EXCLUDE (city) FROM addresses;
 -- select all columns from the addresses table, but replace city with LOWER(city)
@@ -25,7 +25,7 @@ SELECT * REPLACE (LOWER(city) AS city) FROM addresses;
 -- select all columns matching the given regex from the table
 SELECT COLUMNS('number\d+') FROM addresses;
 -- compute a function on all given columns of a table
-SELECT MIN(COLUMNS(*)) FROM addresses;
+SELECT min(COLUMNS(*)) FROM addresses;
 ```
 
 ## Syntax
@@ -75,9 +75,9 @@ The `DISTINCT ON` clause returns only one row per unique value in the set of exp
 
 ```sql
 -- return the total number of rows in the addresses table
-SELECT COUNT(*) FROM addresses;
+SELECT count(*) FROM addresses;
 -- return the total number of rows in the addresses table grouped by city
-SELECT city, COUNT(*) FROM addresses GROUP BY city;
+SELECT city, count(*) FROM addresses GROUP BY city;
 ```
 
 [Aggregate functions](../aggregates) are special functions that *combine* multiple rows into a single value. When aggregate functions are present in the `SELECT` clause, the query is turned into an aggregate query. In an aggregate query, **all** expressions must either be part of an aggregate function, or part of a group (as specified by the [`GROUP BY clause`](groupby)).

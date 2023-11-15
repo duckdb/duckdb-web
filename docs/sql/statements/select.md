@@ -15,7 +15,7 @@ SELECT * FROM tbl;
 -- select the rows from tbl
 SELECT j FROM tbl WHERE i=3;
 -- perform an aggregate grouped by the column "i"
-SELECT i, SUM(j) FROM tbl GROUP BY i;
+SELECT i, sum(j) FROM tbl GROUP BY i;
 -- select only the top 3 rows from the tbl
 SELECT * FROM tbl ORDER BY i DESC LIMIT 3;
 -- join two tables together using the USING clause
