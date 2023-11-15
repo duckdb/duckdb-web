@@ -27,6 +27,13 @@ You can `conn.close()` the `Connection` manually, or just leave it out of scope,
 SQL queries can be sent to DuckDB using the `execute()` method of connections, or we can also prepare the statement and then query on that.
 
 ```rust
+#[derive(Debug)]
+struct Person {
+    id: i32,
+    name: String,
+    data: Option<Vec<u8>>,
+}
+
 conn.execute(
     "INSERT INTO person (name, data) VALUES (?, ?)",
     params![me.name, me.data],
