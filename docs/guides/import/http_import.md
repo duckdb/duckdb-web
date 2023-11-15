@@ -15,8 +15,20 @@ To load the `httpfs` extension for usage, use the `LOAD` SQL command:
 LOAD httpfs;
 ```
 
-After the `httpfs` extension is set up, Parquet files can be read over `http(s)` using the following command:
+After the `httpfs` extension is set up, Parquet files can be read over `http(s)`:
 
 ```sql
 SELECT * FROM read_parquet('https://<domain>/path/to/file.parquet');
+```
+
+For example:
+
+```sql
+SELECT * FROM read_parquet('https://duckdb.org/data/prices.parquet');
+```
+
+The function `read_parquet` can be omitted if the URL ends with `.parquet`:
+
+```sql
+SELECT * FROM read_parquet('https://duckdb.org/data/holdings.parquet');
 ```
