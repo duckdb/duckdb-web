@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Java JDBC API
+redirect_from:
+  - /docs/api/scala
 ---
 
 ## Installation
