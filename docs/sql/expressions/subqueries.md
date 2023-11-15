@@ -41,7 +41,7 @@ SELECT course FROM grades WHERE grade = (SELECT MIN(grade) FROM grades);
 -- {Math}
 ```
 
-## Exists
+## `EXISTS`
 
 <div id="rrdiagram2"></div>
 
@@ -57,7 +57,7 @@ SELECT EXISTS (SELECT * FROM grades WHERE course='History');
 -- false
 ```
 
-### Not exists
+### `NOT EXISTS`
 
 The `NOT EXISTS` operator tests for the absence of any row inside the subquery. It returns either true when the subquery returns an empty result, and false otherwise. The `NOT EXISTS` operator is generally the most useful as a *correlated* subquery to express antijoin operations. For example, to find Person nodes without an interest:
 
@@ -83,7 +83,7 @@ WHERE NOT EXISTS (SELECT * FROM interest WHERE interest.PersonId = Person.id);
 
 > DuckDB automatically detects when a `NOT EXISTS` query expresses an antijoin operation. There is no need to manually rewrite such queries to use `LEFT OUTER JOIN ... WHERE ... IS NULL`.
 
-## In Operator
+## `IN` Operator
 
 <div id="rrdiagram3"></div>
 

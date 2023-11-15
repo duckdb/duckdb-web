@@ -13,7 +13,7 @@ If this module has not been imported from the main thread, and a different threa
 
 To avoid this, it's recommended to `import numpy.core.multiarray` before starting up threads.  
 
-## Running EXPLAIN renders newlines in Jupyter and IPython
+## Running EXPLAIN Renders Newlines in Jupyter and IPython
 
 When DuckDB is run in Jupyter notebooks or in the IPython shell, the output of the [`EXPLAIN` statement](../../guides/meta/explain) contains hard line breaks (`\n`):
 

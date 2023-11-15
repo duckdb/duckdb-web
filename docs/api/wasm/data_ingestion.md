@@ -15,7 +15,7 @@ Then, the data file is imported into DuckDB using insert functions ([insertArrow
 
 ## Data Import
 
-### Open & Close connection
+### Open & Close Connection
 
 ```ts
 // Create a new connection
@@ -139,7 +139,7 @@ await c.query(`
 `);
 ```
 
-### Insert statement
+### Insert Statement
 
 ```ts
 // ..., or by executing raw insert statements

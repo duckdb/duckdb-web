@@ -92,7 +92,7 @@ INTO
 | 3     | cars        | Jun   | 600   |
 
 
-### UNPIVOT Dynamically using Columns Expression
+### UNPIVOT Dynamically Using Columns Expression
 
 In many cases, the number of columns to unpivot is not easy to predetermine ahead of time. 
 In the case of this dataset, the query above would have to change each time a new month is added. 
@@ -132,7 +132,7 @@ INTO
 | 3     | cars        | Jun   | 600   |
 
 
-### UNPIVOT into multiple value columns
+### UNPIVOT into Multiple Value Columns
 
 The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported. 
 This can be useful when the goal is to reduce the extent to which a dataset is pivoted, but not completely stack all pivoted columns.
@@ -269,7 +269,7 @@ UNPIVOT [INCLUDE NULLS] (
 
 Note that only one column can be included in the `name-column-name` expression. 
 
-### SQL Standard Unpivot manually
+### SQL Standard Unpivot Manually
 
 To complete the basic `UNPIVOT` operation using the SQL standard syntax, only a few additions are needed.
 
@@ -303,7 +303,7 @@ FROM monthly_sales UNPIVOT (
 | 3     | cars        | May   | 500   |
 | 3     | cars        | Jun   | 600   |
 
-### SQL Standard Unpivot Dynamically using Columns Expression
+### SQL Standard Unpivot Dynamically Using Columns Expression
 
 The [`COLUMNS` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically. 
 This will continue to work even if additional `month` columns are added to the dataset. 
@@ -316,7 +316,7 @@ FROM monthly_sales UNPIVOT (
 );
 ```
 
-### SQL Standard UNPIVOT into multiple value columns
+### SQL Standard UNPIVOT into Multiple Value Columns
 
 The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported. 
 This can be useful when the goal is to reduce the extent to which a dataset is pivoted, but not completely stack all pivoted columns.
