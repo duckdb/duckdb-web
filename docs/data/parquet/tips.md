@@ -5,9 +5,9 @@ title: Parquet Tips
 
 Below is a collection of tips to help when dealing with Parquet files.
 
-## Tips for reading Parquet files
+## Tips for Reading Parquet files
 
-### Use `union_by_name` when loading files with different schemas
+### Use `union_by_name` When Loading Files with Different Schemas
 
 The `union_by_name` option can be used to unify the schema of files that have different or missing columns. For files that do not have certain columns, `NULL` values are filled in.  
 
@@ -15,7 +15,7 @@ The `union_by_name` option can be used to unify the schema of files that have di
 SELECT * FROM read_parquet('flights*.parquet', union_by_name=true);
 ```
 
-## Tips for writing Parquet files
+## Tips for Writing Parquet files
 
 ### Enabling `per_thread_output`
 
