@@ -92,7 +92,7 @@ Besides direct result verification, the sqllogic test suite also has the option 
 
 ```sql
 query I
-SELECT g, STRING_AGG(x,',') FROM strings GROUP BY g
+SELECT g, string_agg(x,',') FROM strings GROUP BY g
 ----
 200 values hashing to b8126ea73f21372cdb3f2dc483106a12
 ```
