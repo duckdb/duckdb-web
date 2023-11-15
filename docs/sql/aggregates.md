@@ -41,8 +41,8 @@ The table below shows the available general aggregate functions.
 | Function | Description | Example | Alias(es) |
 |:--|:---|:--|:--|
 | `any_value(arg)` |Returns the first _non-null_ value from arg. | `any_value(A)` | - |
-| `arg_max(arg, val)` |Finds the row with the maximum `val`. Calculates the `arg` expression at that row. | `arg_max(A, B)` | `argMax(A, B)`, `max_by(A, b)` |
-| `arg_min(arg, val)` |Finds the row with the minimum `val`. Calculates the `arg` expression at that row. | `arg_min(A, B)` | `argMin(A, B)`, `min_by(A, B)` |
+| `arg_max(arg, val)` |Finds the row with the maximum `val`. Calculates the `arg` expression at that row. | `arg_max(A, B)` | `argMax(arg, val)`, `max_by(arg, val)` |
+| `arg_min(arg, val)` |Finds the row with the minimum `val`. Calculates the `arg` expression at that row. | `arg_min(A, B)` | `argMin(arg, val)`, `min_by(arg, val)` |
 | `avg(arg)` |Calculates the average value for all tuples in arg. | `avg(A)` | - |
 | `bit_and(arg)` |Returns the bitwise AND of all bits in a given expression . | `bit_and(A)` | - |
 | `bit_or(arg)` |Returns the bitwise OR of all bits in a given expression.  | `bit_or(A)` | - |
@@ -59,7 +59,7 @@ The table below shows the available general aggregate functions.
 | `last(arg)` |Returns the last value of a column. | `last(A)` | - |
 | `list(arg)` |Returns a `LIST` containing all the values of a column. | `list(A)` |`array_agg` |
 | `max(arg)` |Returns the maximum value present in arg. | `max(A)` | - |
-| `min(arg)` | Returns the minimum value present in arg. | `min(A)` | - |
+| `min(arg)` |Returns the minimum value present in arg. | `min(A)` | - |
 | `product(arg)` |Calculates the product of all tuples in arg | `product(A)` | - |
 | `string_agg(arg, sep)` |Concatenates the column string values with a separator | `string_agg(S, ',')` | `group_concat` |
 | `sum(arg)` |Calculates the sum value for all tuples in arg. | `sum(A)` | - |
