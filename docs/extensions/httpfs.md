@@ -25,7 +25,7 @@ SELECT column_a FROM 'https://domain.tld/file.parquet';
 In some cases even, no actual data needs to be read at all as they only require reading the metadata:
 
 ```sql
-SELECT COUNT(*) FROM 'https://domain.tld/file.parquet';
+SELECT count(*) FROM 'https://domain.tld/file.parquet';
 ```
 
 Scanning multiple files over HTTP(S) is also supported:
@@ -141,7 +141,7 @@ This query matches all files in the root of the bucket with the parquet extensio
 Several features for matching are supported, such as `*` to match any number of any character, `?` for any single character or `[0-9]` for a single character in a range of characters:
 
 ```sql
-SELECT COUNT(*) FROM read_parquet('s3://bucket/folder*/100?/t[0-9].parquet');
+SELECT count(*) FROM read_parquet('s3://bucket/folder*/100?/t[0-9].parquet');
 ```
 
 A useful feature when using globs is the `filename` option which adds a column with the file that a row originated from:

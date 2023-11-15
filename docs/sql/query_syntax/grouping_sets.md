@@ -12,15 +12,15 @@ Note that this syntax is not compatible with [`GROUP BY ALL`](groupby#group-by-a
 ```sql
 -- compute the average income along the provided four different dimensions
 -- () signifies the empty set (i.e., computing an ungrouped aggregate)
-SELECT city, street_name, AVG(income)
+SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY GROUPING SETS ((city, street_name), (city), (street_name), ());
 -- compute the average income along the same dimensions
-SELECT city, street_name, AVG(income)
+SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY CUBE (city, street_name);
 -- compute the average income along the dimensions (city, street_name), (city) and ()
-SELECT city, street_name, AVG(income)
+SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY ROLLUP (city, street_name);
 ```
@@ -35,7 +35,7 @@ INSERT INTO students (course, type) VALUES ('CS', 'Bachelor'), ('CS', 'Bachelor'
 ```
 
 ```sql
-SELECT course, type, COUNT(*)
+SELECT course, type, count(*)
 FROM students
 GROUP BY GROUPING SETS ((course, type), course, type, ());
 ```
@@ -63,22 +63,22 @@ In the above query, we group across four different sets: `course, type`, `course
 
 ```sql
 -- group by course, type
-SELECT course, type, COUNT(*)
+SELECT course, type, count(*)
 FROM students
 GROUP BY course, type
 UNION ALL
 -- group by type
-SELECT NULL AS course, type, COUNT(*)
+SELECT NULL AS course, type, count(*)
 FROM students
 GROUP BY type
 UNION ALL
 -- group by course
-SELECT course, NULL AS type, COUNT(*)
+SELECT course, NULL AS type, count(*)
 FROM students
 GROUP BY course
 UNION ALL
 -- group by nothing
-SELECT NULL AS course, NULL AS type, COUNT(*)
+SELECT NULL AS course, NULL AS type, count(*)
 FROM students;
 ```
 

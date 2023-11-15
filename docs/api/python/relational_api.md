@@ -72,7 +72,7 @@ Relation objects can be queried through SQL through so-called **replacement scan
 ```python
 import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
-duckdb.sql('SELECT SUM(id) FROM rel').show()
+duckdb.sql('SELECT sum(id) FROM rel').show()
 ```
 
 ```text

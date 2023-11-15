@@ -8,17 +8,17 @@ railroad: expressions/aggregate.js
 
 ```sql
 -- produce a single row containing the sum of the "amount" column
-SELECT SUM(amount) FROM sales;
+SELECT sum(amount) FROM sales;
 -- produce one row per unique region, containing the sum of "amount" for each group
-SELECT region, SUM(amount) FROM sales GROUP BY region;
+SELECT region, sum(amount) FROM sales GROUP BY region;
 -- return only the regions that have a sum of "amount" higher than 100
-SELECT region FROM sales GROUP BY region HAVING SUM(amount) > 100;
+SELECT region FROM sales GROUP BY region HAVING sum(amount) > 100;
 -- return the number of unique values in the "region" column
-SELECT COUNT(DISTINCT region) FROM sales;
+SELECT count(DISTINCT region) FROM sales;
 -- return two values, the total sum of "amount" and the sum of "amount" minus columns where the region is "north"
-SELECT SUM(amount), SUM(amount) FILTER (region != 'north') FROM sales;
+SELECT sum(amount), sum(amount) FILTER (region != 'north') FROM sales;
 -- returns a list of all regions in order of the "amount" column
-SELECT LIST(region ORDER BY amount DESC) FROM sales;
+SELECT list(region ORDER BY amount DESC) FROM sales;
 ```
 
 ## Syntax
@@ -27,7 +27,7 @@ SELECT LIST(region ORDER BY amount DESC) FROM sales;
 
 Aggregates are functions that *combine* multiple rows into a single value. Aggregates are different from scalar functions and window functions because they change the cardinality of the result. As such, aggregates can only be used in the `SELECT` and `HAVING` clauses of a SQL query.
 
-When the `DISTINCT` clause is provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination with the `COUNT` aggregate to get the number of distinct elements; but it can be used together with any aggregate function in the system.
+When the `DISTINCT` clause is provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination with the `count` aggregate to get the number of distinct elements; but it can be used together with any aggregate function in the system.
 
 When the `ORDER BY` clause is provided, the values being aggregated are sorted before applying the function.
 Usually this is not important, but there are some order-sensitive aggregates that can have indeterminate results
@@ -80,35 +80,35 @@ The table below shows the available statistical aggregate functions.
 
 | Function | Description | Formula | Alias |
 |:--|:---|:--|:-|
-| `corr(y, x)` | Returns the correlation coefficient for non-null pairs in a group. | `COVAR_POP(y, x) / (STDDEV_POP(x) * STDDEV_POP(y))`| - |
-| `covar_pop(y, x)` | Returns the population covariance of input values. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*) ` | - |
-| `covar_samp(y, x)` | Returns the sample covariance for non-null pairs in a group. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / (COUNT(*) - 1)` | - |
+| `corr(y, x)` | Returns the correlation coefficient for non-null pairs in a group. | `covar_pop(y, x) / (stddev_pop(x) * stddev_pop(y))`| - |
+| `covar_pop(y, x)` | Returns the population covariance of input values. | `(sum(x*y) - sum(x) * sum(y) / count(*)) / count(*)` | - |
+| `covar_samp(y, x)` | Returns the sample covariance for non-null pairs in a group. | `(sum(x*y) - sum(x) * sum(y) / count(*)) / (count(*) - 1)` | - |
 | `entropy(x)` | Returns the log-2 entropy of count input-values. | - | - |
 | `kurtosis(x)` | Returns the excess kurtosis (Fisher's definition) of all input values, with a bias correction according to the sample size. | - | - |
-| `mad(x)` | Returns the median absolute deviation for the values within x. NULL values are ignored. Temporal types return a positive `INTERVAL`. | `MEDIAN(ABS(x-MEDIAN(x)))` | - |
-| `median(x)` | Returns the middle value of the set. NULL values are ignored. For even value counts, quantitative values are averaged and ordinal values return the lower value. | `QUANTILE_CONT(x, 0.5)` | - |
+| `mad(x)` | Returns the median absolute deviation for the values within x. NULL values are ignored. Temporal types return a positive `INTERVAL`. | `median(abs(x - median(x)))` | - |
+| `median(x)` | Returns the middle value of the set. NULL values are ignored. For even value counts, quantitative values are averaged and ordinal values return the lower value. | `quantile_cont(x, 0.5)` | - |
 | `mode(x)` | Returns the most frequent value for the values within x. NULL values are ignored. | - | - |
 | `quantile_cont(x, pos)` | Returns the interpolated quantile number between 0 and 1 . If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding interpolated quantiles. | - | - |
 | `quantile_disc(x, pos)` | Returns the exact quantile number between 0 and 1 . If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding exact quantiles. | - | `quantile` |
 | `regr_avgx(y, x)` | Returns the average of the independent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. | - | - |
 | `regr_avgy(y, x)` | Returns the average of the dependent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. | - | - |
-| `regr_count(y, x)` | Returns the number of non-null number pairs in a group. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*)` | - |
-| `regr_intercept(y, x)` | Returns the intercept of the univariate linear regression line for non-null pairs in a group. | `AVG(y)-REGR_SLOPE(y, x)*AVG(x)` | - |
+| `regr_count(y, x)` | Returns the number of non-null number pairs in a group. | `(sum(x*y) - sum(x) * sum(y) / count(*)) / count(*)` | - |
+| `regr_intercept(y, x)` | Returns the intercept of the univariate linear regression line for non-null pairs in a group. | `avg(y) - regr_slope(y, x) * avg(x)` | - |
 | `regr_r2(y, x)` | Returns the coefficient of determination for non-null pairs in a group. | - | - |
-| `regr_slope(y, x)` | Returns the slope of the linear regression line for non-null pairs in a group.| `COVAR_POP(x, y) / VAR_POP(x)` | - |
-| `regr_sxx(y, x)` | -  | `REGR_COUNT(y, x) * VAR_POP(x)` | - |
-| `regr_sxy(y, x)` | Returns the population covariance of input values. | `REGR_COUNT(y, x) * COVAR_POP(y, x) ` | - |
-| `regr_syy(y, x)` | - | `REGR_COUNT(y, x) * VAR_POP(y) f` | - |
+| `regr_slope(y, x)` | Returns the slope of the linear regression line for non-null pairs in a group.| `covar_pop(x, y) / var_pop(x)` | - |
+| `regr_sxx(y, x)` | -  | `regr_count(y, x) * var_pop(x)` | - |
+| `regr_sxy(y, x)` | Returns the population covariance of input values. | `regr_count(y, x) * covar_pop(y, x)` | - |
+| `regr_syy(y, x)` | - | `regr_count(y, x) * var_pop(y)` | - |
 | `skewness(x)` | Returns the skewness of all input values. | - | - |
 | `stddev_pop(x)` | Returns the population standard deviation.  | `sqrt(var_pop(x))` | - |
 | `stddev_samp(x)` | Returns the sample standard deviation. | `sqrt(var_samp(x))` | `stddev(x)` |
 | `var_pop(x)` | Returns the population variance. | - | - |
-| `var_samp(x)` | Returns the sample variance of all input values. | `(SUM(x^2) - SUM(x)^2 / COUNT(x)) / (COUNT(x) - 1)` | `variance(arg, val)` |
+| `var_samp(x)` | Returns the sample variance of all input values. | `(sum(x^2) - sum(x)^2 / count(x)) / (count(x) - 1)` | `variance(arg, val)` |
 
 ## Ordered Set Aggregate Functions
 
 The table below shows the available "ordered set" aggregate functions.
-These functions are specified using the `WITHIN GROUP(ORDER BY sort_expression)` syntax,
+These functions are specified using the `WITHIN GROUP (ORDER BY sort_expression)` syntax,
 and they are converted to an equivalent aggregate function that takes the ordering expression
 as the first argument.
 

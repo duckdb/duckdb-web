@@ -30,14 +30,14 @@ INSERT INTO grades VALUES (7, 'Math'), (9, 'Math'), (8, 'CS');
 We can run the following query to obtain the minimum grade:
 
 ```sql
-SELECT MIN(grade) FROM grades;
+SELECT min(grade) FROM grades;
 -- {7}
 ```
 
 By using a scalar subquery in the `WHERE` clause, we can figure out for which course this grade was obtained:
 
 ```sql
-SELECT course FROM grades WHERE grade = (SELECT MIN(grade) FROM grades);
+SELECT course FROM grades WHERE grade = (SELECT min(grade) FROM grades);
 -- {Math}
 ```
 
@@ -109,7 +109,7 @@ For example, suppose that we want to find the minimum grade for every course. We
 SELECT *
 FROM grades grades_parent
 WHERE grade=
-    (SELECT MIN(grade)
+    (SELECT min(grade)
      FROM grades
      WHERE grades.course=grades_parent.course);
 -- {7, Math}, {8, CS}
@@ -118,7 +118,7 @@ WHERE grade=
 The subquery uses a column from the parent query (`grades_parent.course`). Conceptually, we can see the subquery as a function where the correlated column is a parameter to that function:
 
 ```sql
-SELECT MIN(grade) FROM grades WHERE course=?;
+SELECT min(grade) FROM grades WHERE course=?;
 ```
 
 Now when we execute this function for each of the rows, we can see that for `Math` this will return `7`, and for `CS` it will return `8`. We then compare it against the grade for that actual row. As a result, the row `(Math, 9)` will be filtered out, as `9 <> 7`.

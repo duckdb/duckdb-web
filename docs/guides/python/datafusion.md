@@ -104,9 +104,9 @@ duckdb_to_arrow = duckdb.query("""
         fruits,
         cars,
         'fruits' AS literal_string_fruits,
-        SUM(B) FILTER (cars = 'beetle') OVER () AS B,
-        SUM(A) FILTER (B > 2) OVER (PARTITION BY cars) AS sum_A_by_cars,
-        SUM(A) OVER (PARTITION BY fruits) AS sum_A_by_fruits
+        sum(B) FILTER (cars = 'beetle') OVER () AS B,
+        sum(A) FILTER (B > 2) OVER (PARTITION BY cars) AS sum_A_by_cars,
+        sum(A) OVER (PARTITION BY fruits) AS sum_A_by_fruits
     FROM df
     ORDER BY
         fruits,

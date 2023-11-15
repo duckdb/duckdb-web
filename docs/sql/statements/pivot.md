@@ -67,10 +67,10 @@ It is equivalent to the columns parameter in a spreadsheet pivot table.
 
 The `USING` clause determines how to aggregate the values that are split into separate columns.
 This is equivalent to the values parameter in a spreadsheet pivot table.
-If the `USING` clause is not included, it defaults to `COUNT(*)`.
+If the `USING` clause is not included, it defaults to `count(*)`.
 
 ```sql
-PIVOT Cities ON Year USING SUM(Population);
+PIVOT Cities ON Year USING sum(Population);
 ```
 
 <div class="narrow_table"></div>
@@ -81,7 +81,7 @@ PIVOT Cities ON Year USING SUM(Population);
 | US      | Seattle       | 564  | 608  | 738  |
 | US      | New York City | 8015 | 8175 | 8772 |
 
-In the above example, the `SUM` aggregate is always operating on a single value. 
+In the above example, the `sum` aggregate is always operating on a single value. 
 If we only want to change the orientation of how the data is displayed without aggregating, use the `FIRST` aggregate function.
 In this example, we are pivoting numeric values, but the `FIRST` function works very well for pivoting out a text column.
 (This is something that is difficult to do in a spreadsheet pivot table, but easy in DuckDB!)
@@ -99,7 +99,7 @@ This is equivalent to the rows parameter of a spreadsheet pivot table.
 
 In the below example, the Name column is no longer included in the output, and the data is aggregated up to the Country level.
 ```sql
-PIVOT Cities ON Year USING SUM(Population) GROUP BY Country;
+PIVOT Cities ON Year USING sum(Population) GROUP BY Country;
 ```
 
 <div class="narrow_table"></div>
@@ -115,7 +115,7 @@ PIVOT Cities ON Year USING SUM(Population) GROUP BY Country;
 To only create a separate column for specific values within a column in the `ON` clause, use an optional `IN` expression.
 Let's say for example that we wanted to forget about the year 2020 for no particular reason...
 ```sql
-PIVOT Cities ON Year IN (2000, 2010) USING SUM(Population) GROUP BY Country;
+PIVOT Cities ON Year IN (2000, 2010) USING sum(Population) GROUP BY Country;
 ```
 
 <div class="narrow_table"></div>
@@ -138,7 +138,7 @@ DuckDB will find the distinct values in each `ON` clause column and create one n
 In the below example, all combinations of unique countries and unique cities receive their own column. 
 Some combinations may not be present in the underlying data, so those columns are populated with `NULL` values.
 ```sql
-PIVOT Cities ON Country, Name USING SUM(Population);
+PIVOT Cities ON Country, Name USING sum(Population);
 ```
 
 <div class="narrow_table"></div>
@@ -156,7 +156,7 @@ Here, Country and Name are concatenated together and the resulting concatenation
 Any arbitrary non-aggregating expression may be used.
 In this case, concatenating with an underscore is used to imitate the naming convention the `PIVOT` clause uses when multiple `ON` columns are provided (like in the prior example).
 ```sql
-PIVOT Cities ON Country || '_' || Name USING SUM(Population);
+PIVOT Cities ON Country || '_' || Name USING sum(Population);
 ```
 
 <div class="narrow_table"></div>
@@ -174,9 +174,9 @@ An alias may also be included for each expression in the `USING` clause.
 It will be appended to the generated column names after an underscore (`_`).
 This makes the column naming convention much cleaner when multiple expressions are included in the `USING` clause.
 
-In this example, both the `SUM` and `MAX` of the Population column are calculated for each year and are split into separate columns.
+In this example, both the `sum` and `max` of the Population column are calculated for each year and are split into separate columns.
 ```sql
-PIVOT Cities ON Year USING SUM(Population) AS total, MAX(Population) AS max GROUP BY Country;
+PIVOT Cities ON Year USING sum(Population) AS total, max(Population) AS max GROUP BY Country;
 ```
 
 <div class="narrow_table"></div>
@@ -193,7 +193,7 @@ Multiple `GROUP BY` columns may also be provided.
 Note that column names must be used rather than column positions (1, 2, etc.), and that expressions are not supported in the `GROUP BY` clause.
 
 ```sql
-PIVOT Cities ON Year USING SUM(Population) GROUP BY Country, Name;
+PIVOT Cities ON Year USING sum(Population) GROUP BY Country, Name;
 ```
 
 <div class="narrow_table"></div>
@@ -213,7 +213,7 @@ This allows for a `PIVOT` to be used alongside other SQL logic, as well as for m
 No `SELECT` is needed within the CTE, the `PIVOT` keyword can be thought of as taking its place.
 ```sql
 WITH pivot_alias AS (
-    PIVOT Cities ON Year USING SUM(Population) GROUP BY Country
+    PIVOT Cities ON Year USING sum(Population) GROUP BY Country
 ) 
 SELECT * FROM pivot_alias;
 ```
@@ -224,7 +224,7 @@ Note that this behavior is different than the SQL Standard Pivot, as illustrated
 SELECT 
     * 
 FROM (
-    PIVOT Cities ON Year USING SUM(Population) GROUP BY Country
+    PIVOT Cities ON Year USING sum(Population) GROUP BY Country
 ) pivot_alias;
 ```
 
@@ -235,9 +235,9 @@ Each `PIVOT` can be treated as if it were a `SELECT` node, so they can be joined
 For example, if two `PIVOT` statements share the same `GROUP BY` expression, they can be joined together using the columns in the `GROUP BY` clause into a wider pivot.
 ```sql
 FROM
-    (PIVOT Cities ON Year USING SUM(Population) GROUP BY Country) year_pivot
+    (PIVOT Cities ON Year USING sum(Population) GROUP BY Country) year_pivot
 JOIN
-    (PIVOT Cities ON Name USING SUM(Population) GROUP BY Country) name_pivot
+    (PIVOT Cities ON Name USING sum(Population) GROUP BY Country) name_pivot
 USING (Country);
 ```
 
@@ -264,7 +264,7 @@ After the `IN` clauses have been populated with `ENUM`s, the query is re-written
 
 For example:
 ```sql
-PIVOT Cities ON Year USING SUM(Population);
+PIVOT Cities ON Year USING sum(Population);
 ```
 
 is initially translated into:
@@ -276,14 +276,14 @@ CREATE TEMPORARY TYPE __pivot_enum_0_0 AS ENUM (
     ORDER BY 
         Year
     );
-PIVOT Cities ON Year IN __pivot_enum_0_0 USING SUM(Population);
+PIVOT Cities ON Year IN __pivot_enum_0_0 USING sum(Population);
 ```
 
 and finally translated into:
 ```sql
-SELECT Country, Name, LIST(Year), LIST(population_sum)
+SELECT Country, Name, list(Year), list(population_sum)
 FROM (
-    SELECT Country, Name, Year, SUM(population) AS population_sum
+    SELECT Country, Name, Year, sum(population) AS population_sum
     FROM Cities
     GROUP BY ALL
 )
@@ -343,7 +343,7 @@ This example uses a single value expression, a single column expression, and a s
 ```sql
 FROM Cities 
 PIVOT (
-    SUM(Population) 
+    sum(Population) 
     FOR 
         Year IN (2000, 2010, 2020) 
     GROUP BY Country
@@ -362,8 +362,8 @@ This example is somewhat contrived, but serves as an example of using multiple v
 ```sql
 FROM Cities 
 PIVOT (
-    SUM(Population) AS total,
-    COUNT(Population) AS count
+    sum(Population) AS total,
+    count(Population) AS count
     FOR 
         Year IN (2000, 2010)
         Country in ('NL', 'US')

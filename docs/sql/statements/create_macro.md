@@ -24,7 +24,7 @@ CREATE MACRO one() AS (SELECT 1);
 -- (parameter names get priority over column names: disambiguate using the table name)
 CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a FROM cte);
 -- macro's are schema-dependent, and have an alias: FUNCTION
-CREATE FUNCTION main.myavg(x) AS SUM(x) / COUNT(x);
+CREATE FUNCTION main.myavg(x) AS sum(x) / count(x);
 -- create a macro with default constant parameters
 CREATE MACRO add_default(a, b := 5) AS a + b;
 -- create a macro arr_append (with a functionality equivalent to array_append)
