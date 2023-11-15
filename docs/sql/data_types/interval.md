@@ -26,6 +26,9 @@ SELECT DATE '2000-01-01' - INTERVAL 1 YEAR;
 SELECT INTERVAL (i) YEAR FROM range(1, 5) t(i);
 -- construct an interval with mixed units
 SELECT INTERVAL '1 month 1 day';
+-- intervals greater than 24 hours/12 months/etc. are supported
+SELECT '540:58:47.210'::INTERVAL;
+SELECT INTERVAL '16 MONTHS';
 
 -- WARNING: If a decimal value is specified, it will be automatically rounded to an integer
 -- To use more precise values, simply use a more granular date part 
