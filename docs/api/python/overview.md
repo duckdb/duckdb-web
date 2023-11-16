@@ -34,13 +34,13 @@ DuckDB can ingest data from a wide variety of formats – both on-disk and in-me
 
 ```python
 import duckdb
-duckdb.read_csv('example.csv')                # read a CSV file into a Relation
-duckdb.read_parquet('example.parquet')        # read a Parquet file into a Relation
-duckdb.read_json('example.json')              # read a JSON file into a Relation
+duckdb.read_csv("example.csv")                # read a CSV file into a Relation
+duckdb.read_parquet("example.parquet")        # read a Parquet file into a Relation
+duckdb.read_json("example.json")              # read a JSON file into a Relation
 
-duckdb.sql('SELECT * FROM "example.csv"')     # directly query a CSV file
-duckdb.sql('SELECT * FROM "example.parquet"') # directly query a Parquet file
-duckdb.sql('SELECT * FROM "example.json"')    # directly query a JSON file
+duckdb.sql("SELECT * FROM 'example.csv'")     # directly query a CSV file
+duckdb.sql("SELECT * FROM 'example.parquet'") # directly query a Parquet file
+duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
 ```
 
 ### DataFrames
