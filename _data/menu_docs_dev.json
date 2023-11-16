@@ -395,6 +395,10 @@
               "url": "cli"
             },
             {
+              "page": "Go",
+              "url": "go"
+            },
+            {
               "page": "Java",
               "url": "java"
             },
