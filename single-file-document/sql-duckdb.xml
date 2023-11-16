@@ -1463,7 +1463,7 @@
       <comment name="singleLine" start="--" position="afterwhitespace"/>
       <comment name="multiLine" start="/*" end="*/" region="Comment"/>
     </comments>
-    <keywords casesensitive="0"/>
+    <keywords casesensitive="1"/>
   </general>
 </language>
 <!-- kate: replace-tabs on; tab-width 2; indent-width 2; -->
