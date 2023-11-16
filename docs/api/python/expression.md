@@ -20,7 +20,7 @@ This expression references a column by name.
 import duckdb
 import pandas as pd
 
-df = pd.DataFrame({'a': [1,2,3,4]})
+df = pd.DataFrame({'a': [1, 2, 3, 4]})
 
 col = duckdb.ColumnExpression('a')
 res = duckdb.df(df).select(col).fetchall()
@@ -40,8 +40,8 @@ import duckdb
 import pandas as pd
 
 df = pd.DataFrame({
-	'a': [1,2,3,4],
-	'b': [True, None, False,True],
+	'a': [1, 2, 3, 4],
+	'b': [True, None, False, True],
 	'c': [42, 21, 13, 14]
 })
 
@@ -60,8 +60,8 @@ import duckdb
 import pandas as pd
 
 df = pd.DataFrame({
-	'a': [1,2,3,4],
-	'b': [True, None, False,True],
+	'a': [1, 2, 3, 4],
+	'b': [True, None, False, True],
 	'c': [42, 21, 13, 14]
 })
 
@@ -87,8 +87,8 @@ from duckdb import (
 )
 
 df = pd.DataFrame({
-    'a': [1,2,3,4],
-    'b': [True, None, False,True],
+    'a': [1, 2, 3, 4],
+    'b': [True, None, False, True],
     'c': [42, 21, 13, 14]
 })
 

@@ -208,7 +208,7 @@ Otherwise we'll try to convert it to a `STRUCT`.
 my_struct_dict = {
     1: "one",
     "2": 2,
-    "three": [1,2,3],
+    "three": [1, 2, 3],
     False: True
 }
 ```
