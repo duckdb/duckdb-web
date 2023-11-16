@@ -15,7 +15,7 @@ The most straight-forward manner of running SQL queries using DuckDB is using th
 
 ```python
 import duckdb
-duckdb.sql('SELECT 42').show()
+duckdb.sql("SELECT 42").show()
 ```
 
 This will run queries using an **in-memory database** that is stored globally inside the Python module. The result of the query is returned as a **Relation**. A relation is a symbolic representation of the query. The query is not executed until the result is fetched or requested to be printed to the screen.
@@ -24,8 +24,8 @@ Relations can be referenced in subsequent queries by storing them inside variabl
 
 ```python
 import duckdb
-r1 = duckdb.sql('SELECT 42 AS i')
-duckdb.sql('SELECT i * 2 AS k FROM r1').show()
+r1 = duckdb.sql("SELECT 42 AS i")
+duckdb.sql("SELECT i * 2 AS k FROM r1").show()
 ```
 
 ## Data Input
@@ -34,13 +34,13 @@ DuckDB can ingest data from a wide variety of formats – both on-disk and in-me
 
 ```python
 import duckdb
-duckdb.read_csv('example.csv')                # read a CSV file into a Relation
-duckdb.read_parquet('example.parquet')        # read a Parquet file into a Relation
-duckdb.read_json('example.json')              # read a JSON file into a Relation
+duckdb.read_csv("example.csv")                # read a CSV file into a Relation
+duckdb.read_parquet("example.parquet")        # read a Parquet file into a Relation
+duckdb.read_json("example.json")              # read a JSON file into a Relation
 
-duckdb.sql('SELECT * FROM "example.csv"')     # directly query a CSV file
-duckdb.sql('SELECT * FROM "example.parquet"') # directly query a Parquet file
-duckdb.sql('SELECT * FROM "example.json"')    # directly query a JSON file
+duckdb.sql("SELECT * FROM 'example.csv'")     # directly query a CSV file
+duckdb.sql("SELECT * FROM 'example.parquet'") # directly query a Parquet file
+duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
 ```
 
 ### DataFrames
@@ -52,18 +52,18 @@ import duckdb
 
 # directly query a Pandas DataFrame
 import pandas as pd
-pandas_df = pd.DataFrame({'a': [42]})
-duckdb.sql('SELECT * FROM pandas_df')
+pandas_df = pd.DataFrame({"a": [42]})
+duckdb.sql("SELECT * FROM pandas_df")
 
 # directly query a Polars DataFrame
 import polars as pl
-polars_df = pl.DataFrame({'a': [42]})
-duckdb.sql('SELECT * FROM polars_df')
+polars_df = pl.DataFrame({"a": [42]})
+duckdb.sql("SELECT * FROM polars_df")
 
 # directly query a pyarrow table
 import pyarrow as pa
-arrow_table = pa.Table.from_pydict({'a':[42]})
-duckdb.sql('SELECT * FROM arrow_table')
+arrow_table = pa.Table.from_pydict({"a": [42]})
+duckdb.sql("SELECT * FROM arrow_table")
 ```
 
 ## Result Conversion
@@ -72,11 +72,11 @@ DuckDB supports converting query results efficiently to a variety of formats. Se
 
 ```python
 import duckdb
-duckdb.sql('SELECT 42').fetchall()   # Python objects
-duckdb.sql('SELECT 42').df()         # Pandas DataFrame
-duckdb.sql('SELECT 42').pl()         # Polars DataFrame
-duckdb.sql('SELECT 42').arrow()      # Arrow Table
-duckdb.sql('SELECT 42').fetchnumpy() # NumPy Arrays
+duckdb.sql("SELECT 42").fetchall()   # Python objects
+duckdb.sql("SELECT 42").df()         # Pandas DataFrame
+duckdb.sql("SELECT 42").pl()         # Polars DataFrame
+duckdb.sql("SELECT 42").arrow()      # Arrow Table
+duckdb.sql("SELECT 42").fetchnumpy() # NumPy Arrays
 ```
 
 ## Writing Data to Disk
@@ -85,21 +85,21 @@ DuckDB supports writing Relation objects directly to disk in a variety of format
 
 ```python
 import duckdb
-duckdb.sql('SELECT 42').write_parquet('out.parquet') # Write to a Parquet file
-duckdb.sql('SELECT 42').write_csv('out.csv')         # Write to a CSV file
+duckdb.sql("SELECT 42").write_parquet("out.parquet") # Write to a Parquet file
+duckdb.sql("SELECT 42").write_csv("out.csv")         # Write to a CSV file
 duckdb.sql("COPY (SELECT 42) TO 'out.parquet'")      # Copy to a parquet file
 ```
 
 ## Using an In-Memory Database
 
 When using DuckDB through `duckdb.sql()`, it operates on an **in-memory** database, i.e., no tables are persisted on disk.
-The `duckdb.connect()` method returns a connection to an in-memory database:
+Invoking the `duckdb.connect()` method without arguments returns a connection, which also uses an in-memory database:
 
 ```python
 import duckdb
 
 con = duckdb.connect()
-con.sql('SELECT 42 AS x').show()
+con.sql("SELECT 42 AS x").show()
 ```
 
 ## Persistent Storage
@@ -111,12 +111,12 @@ Any data written to that connection will be persisted, and can be reloaded by re
 import duckdb
 
 # create a connection to a file called 'file.db'
-con = duckdb.connect('file.db')
+con = duckdb.connect("file.db")
 # create a table and load data into it
-con.sql('CREATE TABLE test(i INTEGER)')
-con.sql('INSERT INTO test VALUES (42)')
+con.sql("CREATE TABLE test(i INTEGER)")
+con.sql("INSERT INTO test VALUES (42)")
 # query the table
-con.table('test').show()
+con.table("test").show()
 # explicitly close the connection
 con.close()
 # Note: connections also closed implicitly when they go out of scope
@@ -127,10 +127,10 @@ You can also use a context manager to ensure that the connection is closed:
 ```python
 import duckdb
 
-with duckdb.connect('file.db') as con:
-    con.sql('CREATE TABLE test(i INTEGER)')
-    con.sql('INSERT INTO test VALUES (42)')
-    con.table('test').show()
+with duckdb.connect("file.db") as con:
+    con.sql("CREATE TABLE test(i INTEGER)")
+    con.sql("INSERT INTO test VALUES (42)")
+    con.table("test").show()
     # the context manager closes the connection automatically
 ```
 

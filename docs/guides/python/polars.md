@@ -28,7 +28,7 @@ df = pl.DataFrame(
         "cars": ["beetle", "audi", "beetle", "beetle", "beetle"],
     }
 )
-duckdb.sql('SELECT * FROM df').show()
+duckdb.sql("SELECT * FROM df").show()
 ```
 
 ## DuckDB to Polars

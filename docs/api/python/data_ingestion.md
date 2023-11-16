@@ -10,15 +10,15 @@ CSV files can be read using the `read_csv` function, called either from within P
 ```python
 import duckdb
 # read from a file using fully auto-detected settings
-duckdb.read_csv('example.csv')
+duckdb.read_csv("example.csv")
 # read multiple CSV files from a folder
-duckdb.read_csv('folder/*.csv')
+duckdb.read_csv("folder/*.csv")
 # specify options on how the CSV is formatted internally
-duckdb.read_csv('example.csv', header=False, sep=',')
+duckdb.read_csv("example.csv", header=False, sep=",")
 # override types of the first two columns
-duckdb.read_csv('example.csv', dtype=['int', 'varchar'])
+duckdb.read_csv("example.csv", dtype=["int", "varchar"])
 # use the (experimental) parallel CSV reader
-duckdb.read_csv('example.csv', parallel=True)
+duckdb.read_csv("example.csv", parallel=True)
 # directly read a CSV file from within SQL
 duckdb.sql("SELECT * FROM 'example.csv'")
 # call read_csv from within SQL
@@ -34,9 +34,9 @@ Parquet files can be read using the `read_parquet` function, called either from 
 ```python
 import duckdb
 # read from a single Parquet file
-duckdb.read_parquet('example.parquet')
+duckdb.read_parquet("example.parquet")
 # read multiple Parquet files from a folder
-duckdb.read_parquet('folder/*.parquet')
+duckdb.read_parquet("folder/*.parquet")
 # directly read a Parquet file from within SQL
 duckdb.sql("SELECT * FROM 'example.parquet'")
 # call read_parquet from within SQL
@@ -52,9 +52,9 @@ JSON files can be read using the `read_json` function, called either from within
 ```python
 import duckdb
 # read from a single JSON file
-duckdb.read_json('example.json')
+duckdb.read_json("example.json")
 # read multiple JSON files from a folder
-duckdb.read_json('folder/*.json')
+duckdb.read_json("folder/*.json")
 # directly read a JSON file from within SQL
 duckdb.sql("SELECT * FROM 'example.json'")
 # call read_json from within SQL
@@ -68,8 +68,8 @@ DuckDB is automatically able to query a Pandas DataFrame, Polars DataFrame, or A
 ```python
 import duckdb
 import pandas as pd
-test_df = pd.DataFrame.from_dict({"i":[1, 2, 3, 4], "j":["one", "two", "three", "four"]})
-duckdb.sql('SELECT * FROM test_df').fetchall()
+test_df = pd.DataFrame.from_dict({"i": [1, 2, 3, 4], "j": ["one", "two", "three", "four"]})
+duckdb.sql("SELECT * FROM test_df").fetchall()
 # [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
@@ -80,9 +80,9 @@ If your Pandas DataFrame is stored in another location, here is an example of ma
 import duckdb
 import pandas as pd
 my_dictionary = {}
-my_dictionary['test_df'] = pd.DataFrame.from_dict({"i":[1, 2, 3, 4], "j":["one", "two", "three", "four"]})
-duckdb.register('test_df_view', my_dictionary['test_df'])
-duckdb.sql('SELECT * FROM test_df_view').fetchall()
+my_dictionary["test_df"] = pd.DataFrame.from_dict({"i": [1, 2, 3, 4], "j": ["one", "two", "three", "four"]})
+duckdb.register("test_df_view", my_dictionary["test_df"])
+duckdb.sql("SELECT * FROM test_df_view").fetchall()
 # [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
@@ -90,9 +90,9 @@ You can also create a persistent table in DuckDB from the contents of the DataFr
 
 ```python
 # create a new table from the contents of a DataFrame
-con.execute('CREATE TABLE test_df_table AS SELECT * FROM test_df')
+con.execute("CREATE TABLE test_df_table AS SELECT * FROM test_df")
 # insert into an existing table from the contents of a DataFrame
-con.execute('INSERT INTO test_df_table SELECT * FROM test_df')
+con.execute("INSERT INTO test_df_table SELECT * FROM test_df")
 ```
 
 ### Pandas DataFrames – `object` Columns
@@ -171,7 +171,7 @@ We check against `datetime.date.min` and `datetime.date.max` to convert to `-inf
 ```python
 my_list_value = [
     12345,
-    'test'
+    "test"
 ]
 ```
 Will become `VARCHAR[]` because 12345 can convert to `VARCHAR` but `test` can not convert to `INTEGER`.
@@ -186,11 +186,11 @@ If the dict has a structure similar to:
 
 ```python
 my_map_dict = {
-    'key': [
+    "key": [
         1, 2, 3
     ],
-    'value': [
-        'one', 'two', 'three'
+    "value": [
+        "one", "two", "three"
     ]
 }
 ```
@@ -206,9 +206,9 @@ Otherwise we'll try to convert it to a `STRUCT`.
 
 ```python
 my_struct_dict = {
-    1: 'one',
-    '2': 2,
-    'three': [1,2,3],
+    1: "one",
+    "2": 2,
+    "three": [1,2,3],
     False: True
 }
 ```
