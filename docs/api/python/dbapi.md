@@ -16,9 +16,9 @@ You can also get a reference to this connection by providing the special value `
 ```python
 import duckdb
 
-duckdb.execute('CREATE TABLE tbl AS SELECT 42 a')
-con = duckdb.connect(':default:')
-con.sql('SELECT * FROM tbl')
+duckdb.execute("CREATE TABLE tbl AS SELECT 42 a")
+con = duckdb.connect(":default:")
+con.sql("SELECT * FROM tbl")
 # ┌───────┐
 # │   a   │
 # │ int32 │
@@ -30,13 +30,13 @@ con.sql('SELECT * FROM tbl')
 ```python
 import duckdb
 # to start an in-memory database
-con = duckdb.connect(database=':memory:')
+con = duckdb.connect(database=":memory:")
 # to use a database file (not shared between processes)
-con = duckdb.connect(database='my-db.duckdb', read_only=False)
+con = duckdb.connect(database="my-db.duckdb", read_only=False)
 # to use a database file (shared between processes)
-con = duckdb.connect(database='my-db.duckdb', read_only=True)
+con = duckdb.connect(database="my-db.duckdb", read_only=True)
 # to explicitly get the default connection
-con = duckdb.connect(database=':default:')
+con = duckdb.connect(database=":default:")
 ```
 If you want to create a second connection to an existing database, you can use the `cursor()` method. This might be useful for example to allow parallel threads running queries independently. A single connection is thread-safe but is locked for the duration of the queries, effectively serializing database access in this case.
 
@@ -75,10 +75,10 @@ Here are some examples:
 
 ```python
 # insert a row using prepared statements
-con.execute("INSERT INTO items VALUES (?, ?, ?)", ['laptop', 2000, 1])
+con.execute("INSERT INTO items VALUES (?, ?, ?)", ["laptop", 2000, 1])
 
 # insert several rows using prepared statements
-con.executemany("INSERT INTO items VALUES (?, ?, ?)", [['chainsaw', 500, 10], ['iphone', 300, 2]] )
+con.executemany("INSERT INTO items VALUES (?, ?, ?)", [["chainsaw", 500, 10], ["iphone", 300, 2]] )
 
 # query the database using a prepared statement
 con.execute("SELECT item FROM items WHERE value > ?", [400])
@@ -99,18 +99,19 @@ An example use:
 ```python
 import duckdb
 
-duckdb.execute("""
+res = duckdb.execute("""
     SELECT
         $my_param,
         $other_param,
         $also_param
     """,
     {
-        'my_param': 5,
-        'other_param': 'DuckDB',
-        'also_param': [42]
+        "my_param": 5,
+        "other_param": "DuckDB",
+        "also_param": [42]
     }
 ).fetchall()
+print(res)
 # [(5, 'DuckDB', [42])]
 ```
 
