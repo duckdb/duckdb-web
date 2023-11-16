@@ -73,7 +73,7 @@ con.all('SELECT 42 AS fortytwo', function(err, res) {
 From connections, you can create prepared statements (and only that) using `con.prepare()`:
 
 ```js
-const stmt = con.prepare('select ?::INTEGER as fortytwo');
+const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo');
 ``` 
 
 To execute this statement, you can call for example `all()` on the `stmt` object:
@@ -107,7 +107,7 @@ con.all('SELECT * FROM a', function(err, res) {
 `prepare()` can also take a callback which gets the prepared statement as an argument:
 
 ```js
-const stmt = con.prepare('select ?::INTEGER as fortytwo', function(err, stmt) {
+const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo', function(err, stmt) {
   stmt.all(42, function(err, res) {
     if (err) {
       throw err;
