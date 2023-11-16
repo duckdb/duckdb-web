@@ -122,11 +122,12 @@ await db.registerFileBuffer('buffer.parquet', new Uint8Array(await res.arrayBuff
 // ..., by specifying URLs in the SQL text
 await c.query(`
     CREATE TABLE direct AS
-        SELECT * FROM "https://origin/remote.parquet"
+        SELECT * FROM 'https://origin/remote.parquet'
 `);
 // ..., or by executing raw insert statements
-await c.query(`INSERT INTO existing_table
-    VALUES (1, "foo"), (2, "bar")`);
+await c.query(`
+    INSERT INTO existing_table
+    VALUES (1, 'foo'), (2, 'bar')`);
 ```
 
 ### httpfs (wasm flavoured)
@@ -135,7 +136,7 @@ await c.query(`INSERT INTO existing_table
 // ..., by specifying URLs in the SQL text
 await c.query(`
     CREATE TABLE direct AS
-        SELECT * FROM "https://origin/remote.parquet"
+        SELECT * FROM 'https://origin/remote.parquet'
 `);
 ```
 
@@ -143,6 +144,7 @@ await c.query(`
 
 ```ts
 // ..., or by executing raw insert statements
-await c.query(`INSERT INTO existing_table
-    VALUES (1, "foo"), (2, "bar")`);
+await c.query(`
+    INSERT INTO existing_table
+    VALUES (1, 'foo'), (2, 'bar')`);
 ```

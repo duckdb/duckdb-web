@@ -116,8 +116,8 @@ If the `%config SqlMagic.autopandas = True` option is set, the variable is a Pan
 
 DuckDB is able to find and query any dataframe stored as a variable in the Jupyter notebook.
 ```python
-input_df = pd.DataFrame.from_dict({"i":[1, 2, 3],
-                                  "j":["one", "two", "three"]})
+input_df = pd.DataFrame.from_dict({"i": [1, 2, 3],
+                                   "j": ["one", "two", "three"]})
 ```
 The dataframe being queried can be specified just like any other table in the `FROM` clause.
 ```sql
@@ -165,7 +165,7 @@ This tells JupySQL to store the query, but skips execution. It will be reference
 ```python
 %%sql --save short-trips --no-execute
 SELECT *
-FROM "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet"
+FROM 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet'
 WHERE trip_distance < 6.3
 ```
 
