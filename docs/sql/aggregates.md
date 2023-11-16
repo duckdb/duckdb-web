@@ -55,7 +55,7 @@ The table below shows the available general aggregate functions.
 | `first(arg)` |Returns the first value of a column. | `first(A)` |`arbitrary(A)` |
 | `fsum(arg)` |Calculates the sum using a more accurate floating point summation (Kahan Sum). | `fsum(A)` | `sumKahan`, `kahan_sum` |
 | `geomean(arg)` |Calculates the geometric mean for all tuples in arg. | `geomean(A)` | `geometric_mean(A)` |
-| `histogram(arg)` |Returns a `LIST` of `STRUCT`s with the fields `bucket` and `count`. | `histogram(A)` | - |
+| `histogram(arg)` |Returns a `MAP` of key-value pairs representing buckets and counts. | `histogram(A)` | - |
 | `last(arg)` |Returns the last value of a column. | `last(A)` | - |
 | `list(arg)` |Returns a `LIST` containing all the values of a column. | `list(A)` |`array_agg` |
 | `max(arg)` |Returns the maximum value present in arg. | `max(A)` | - |
