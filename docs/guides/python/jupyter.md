@@ -165,7 +165,7 @@ This tells JupySQL to store the query, but skips execution. It will be reference
 ```python
 %%sql --save short-trips --no-execute
 SELECT *
-FROM "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet"
+FROM 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet'
 WHERE trip_distance < 6.3
 ```
 
