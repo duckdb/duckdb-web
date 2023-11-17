@@ -1,5 +1,5 @@
 ---
-title: Filesystems
+title: Using fsspec Filesystems
 layout: docu
 ---
 

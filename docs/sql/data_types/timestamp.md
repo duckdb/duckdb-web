@@ -64,11 +64,6 @@ The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitab
 The built-in [ICU extension](../../extensions/icu) implements all the binning and arithmetic functions using the
 [International Components for Unicode](https://icu.unicode.org) time zone and calendar functions.
 
-<!-- 
-    To find the ICU installation information, for Python and R look in CMakeLists.txt.
-    For JDBC/ODBC, check the GitHub Actions CI workflows (duckdb/.github/workflows/). 
-    For NodeJS, I couldn't find anything
--->
 To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled with several DuckDB clients (including Python, R, JDBC, and ODBC), so this step can be skipped in those cases. In other cases you might first need to install and load the ICU extension.
 
 ```sql

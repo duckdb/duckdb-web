@@ -13,7 +13,7 @@ Several components of DuckDB are maintained in separate repositories.
 
 ## Clients
 
-* [`duckdb-node`](https://github.com/duckdb/duckdb-node): Node.JS client
+* [`duckdb-node`](https://github.com/duckdb/duckdb-node): Node.js client
 * [`duckdb-r`](https://github.com/duckdb/duckdb-r): R client
 * [`duckdb-rs`](https://github.com/duckdb/duckdb-rs): Rust client
 * [`duckdb-swift`](https://github.com/duckdb/duckdb-swift): Swift client
