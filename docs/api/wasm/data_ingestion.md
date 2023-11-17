@@ -62,7 +62,7 @@ await Promise.all(streamInserts);
 const csvContent = '1|foo\n2|bar\n';
 await db.registerFileText(`data.csv`, csvContent);
 // ... with typed insert options
-await db.insertCSVFromPath('data.csv', {
+await c.insertCSVFromPath('data.csv', {
     schema: 'main',
     name: 'foo',
     detect: false,
