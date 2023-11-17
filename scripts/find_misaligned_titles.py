@@ -4,10 +4,11 @@ import frontmatter
 
 # This script finds misaligned titles, i.e., instances where the page title displayed in the menu bar
 # (on the left side) and the title in the page header do not align.
-# 
+#
 # Usage: in the scripts/ directory, run
 #
 # $ python find_misaligned_titles.py
+
 
 def check_page_for_misaligned_title(menu_bar_title, docs_root, doc_file_path):
     # skip index files
@@ -21,7 +22,7 @@ def check_page_for_misaligned_title(menu_bar_title, docs_root, doc_file_path):
     with open(doc_file_full_path) as doc_file:
         doc = frontmatter.load(doc_file)
         doc_title = doc["title"]
-    
+
     if menu_bar_title == "Overview":
         return
 
@@ -43,7 +44,9 @@ def check_section(docs_root, data, section_title):
         main_slug = main_level_page.get("slug")
 
         if main_url:
-            check_page_for_misaligned_title(main_title, docs_root, f"{section_slug}{main_url}")
+            check_page_for_misaligned_title(
+                main_title, docs_root, f"{section_slug}{main_url}"
+            )
 
         if not main_slug:
             continue
@@ -54,7 +57,11 @@ def check_section(docs_root, data, section_title):
             subfolder_slug = subfolder_page.get("slug")
 
             if subfolder_url:
-                check_page_for_misaligned_title(subfolder_page_title, docs_root, f"{section_slug}{main_slug}/{subfolder_url}")
+                check_page_for_misaligned_title(
+                    subfolder_page_title,
+                    docs_root,
+                    f"{section_slug}{main_slug}/{subfolder_url}",
+                )
 
             if not subfolder_slug:
                 continue
@@ -63,7 +70,11 @@ def check_section(docs_root, data, section_title):
                 subsubfolder_page_title = subsubfolder_page["page"]
                 subsubfolder_url = subsubfolder_page.get("url")
 
-                check_page_for_misaligned_title(subsubfolder_page_title, docs_root, f"{section_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
+                check_page_for_misaligned_title(
+                    subsubfolder_page_title,
+                    docs_root,
+                    f"{section_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}",
+                )
 
 
 docs_root = "../docs"
