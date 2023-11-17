@@ -23,15 +23,11 @@ To get a list of extensions, run:
 FROM duckdb_extensions();
 ```
 
-```text
-┌────────────────┬─────────┬───────────┬──────────────┬────────────────────────────────────────────┬───────────┐
-│ extension_name │ loaded  │ installed │ install_path │                description                 │  aliases  │
-│    varchar     │ boolean │  boolean  │   varchar    │                  varchar                   │ varchar[] │
-├────────────────┼─────────┼───────────┼──────────────┼────────────────────────────────────────────┼───────────┤
-│ autocomplete   │ true    │ true      │ (BUILT-IN)   │ Add supports for autocomplete in the shell │ []        │
-| ...            | ...     | ...       | ...          | ...                                        |           |
-└────────────────┴─────────┴───────────┴──────────────┴────────────────────────────────────────────┴───────────┘
-```
+|  extension_name  | loaded | installed | install_path |                                    description                                     |      aliases      |
+|------------------|--------|-----------|--------------|------------------------------------------------------------------------------------|-------------------|
+| arrow            | false  | false     |              | A zero-copy data integration between Apache Arrow and DuckDB                       | []                |
+| autocomplete     | false  | false     |              | Adds support for autocomplete in the shell                                         | []                |
+| ... | ... | ... | ... | ... | ... |
 
 ### Extension Types 
 
@@ -81,27 +77,38 @@ If you are using the [Python API client](../api/python/overview), you can instal
 
 > Autoloadable extensions can also be installed explicitly.
 
-### Ensuring the Integrity of Extensions
+## Ensuring the Integrity of Extensions
 
-Extensions are signed with a cryptographic key, which also simplifies distribution (this is why they are served over HTTP and not HTTPS). By default, DuckDB uses its built-in public keys to verify the integrity of extension before loading them.
+Extensions are signed with a cryptographic key, which also simplifies distribution (this is why they are served over HTTP and not HTTPS).
+By default, DuckDB uses its built-in public keys to verify the integrity of extension before loading them.
 All extensions provided by the DuckDB core team are signed.
 
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
 To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsigned` flag to it on startup.
 
-## Installation Location and Sharing Extensions between Clients
+## Installation Location
 
-Extensions are by default installed under the user's home directory, to `~/.duckdb/extensions/{DuckDB version}/{Platform name}`. For example, the extensions for DuckDB version 0.9.0 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.9.0/osx_arm64`.
+Extensions are by default installed under the user's home directory:
+
+```text
+~/.duckdb/extensions/{DuckDB version}/{Platform name}
+```
+
+For example, the extensions for DuckDB version 0.9.0 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.9.0/osx_arm64`.
+
+> For development builds, the directory of the extensions corresponds to the Git hash of the build, e.g., `~/.duckdb/extensions/fc2e4b26a6/linux_amd64_gcc4`.
+
+### Sharing Extensions between Clients
 
 The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_. For example, if an extension is installed with version 0.9.0 of the CLI client, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.9.0.
+
+### Changing the Extension Directory
 
 To specify a different extension directory, use the `extension_directory` configuration option:
 
 ```sql
 SET extension_directory=/path/to/your/extension/directory
 ```
-
-> For development builds, the directory of the extensions corresponds to the Git hash of the build, e.g., `~/.duckdb/extensions/fc2e4b26a6/linux_amd64_gcc4`.
 
 ## Developing Extensions
 
