@@ -1,11 +1,11 @@
 ---
 layout: docu
-title: MySQL Scanner Extension
+title: MySQL Extension
 ---
 
-The [`mysql_scanner` extension](https://github.com/duckdb/duckdb_mysql) allows DuckDB to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DuckDB tables, or vice versa.
+The [`mysql` extension](https://github.com/duckdb/duckdb_mysql) allows DuckDB to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DuckDB tables, or vice versa.
 
-> The MySQL Scanner extension is currently in preview and not yet available as a binary package.
+> The MySQL extension is currently in preview and not yet available as a binary package.
 
 ## Reading Data from MySQL
 
@@ -219,5 +219,5 @@ To run, run the bundled `duckdb` shell:
 Then, load the MySQL extension like so:
 
 ```sql
-LOAD 'build/release/extension/mysql_scanner/mysql_scanner.duckdb_extension';
+LOAD 'build/release/extension/mysql/mysql.duckdb_extension';
 ```

@@ -1005,8 +1005,8 @@
               "url": "json"
             },
             {
-              "page": "MySQL Scanner",
-              "url": "mysql_scanner"
+              "page": "MySQL",
+              "url": "mysql"
             },
             {
               "page": "PostgreSQL Scanner",
