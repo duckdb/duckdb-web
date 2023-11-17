@@ -573,6 +573,10 @@
                   "url": "copy"
                 },
                 {
+                  "page": "Create Index",
+                  "url": "create_index"
+                },
+                {
                   "page": "Create Macro",
                   "url": "create_macro"
                 },
