@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: NodeJS API
+title: Node.js API
 ---
 ## Modules
 

@@ -35,7 +35,7 @@
               "url": "parquet_export"
             },
             {
-              "page": "Query Parquet",
+              "page": "Querying Parquet Files",
               "url": "query_parquet"
             },
             {
@@ -161,23 +161,23 @@
               "url": "multiple_threads"
             },
             {
-              "page": "DuckDB with Ibis",
+              "page": "Integration with Ibis",
               "url": "ibis"
             },
             {
-              "page": "DuckDB with Polars",
+              "page": "Integration with Polars",
               "url": "polars"
             },
             {
-              "page": "DuckDB with Vaex",
+              "page": "Integration with Vaex",
               "url": "vaex"
             },
             {
-              "page": "DuckDB with DataFusion",
+              "page": "Integration with DataFusion",
               "url": "datafusion"
             },
             {
-              "page": "DuckDB with fsspec Filesystems",
+              "page": "Using fsspec Filesystems",
               "url": "filesystems"
             }
           ]
@@ -215,7 +215,7 @@
               "url": "tableau"
             },
             {
-              "page": "YouPlot",
+              "page": "CLI Charting with YouPlot",
               "url": "youplot"
             }
           ]
@@ -345,7 +345,7 @@
                   "url": "connect"
                 },
                 {
-                  "page": "Configure",
+                  "page": "Configuration",
                   "url": "config"
                 },
                 {
@@ -811,7 +811,7 @@
                 "url": "comparison_operators"
               },
               {
-                "page": "In",
+                "page": "IN Operator",
                 "url": "in"
               },
               {
@@ -899,7 +899,7 @@
             ]
           },
           {
-            "page": "Aggregates",
+            "page": "Aggregate Functions",
             "url": "aggregates"
           },
           {
