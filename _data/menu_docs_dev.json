@@ -121,7 +121,7 @@
               "url": "install"
             },
             {
-              "page": "Execute SQL",
+              "page": "Execution SQL",
               "url": "execute_sql"
             },
             {

@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Execute SQL
+title: Executing SQL in Python
 ---
 
-SQL queries can be executed using the `duckdb.sql` command.
+SQL queries can be executed using the `duckdb.sql` function.
 
 ```python
 import duckdb
