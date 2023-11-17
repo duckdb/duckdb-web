@@ -1,12 +1,10 @@
 ---
 layout: docu
 title: Create Index
-railroad: statements/createindex.js
+railroad: statements/indexes.js
 ---
 
 ## `CREATE INDEX`
-
-<div id="rrdiagram1"></div>
 
 The `CREATE INDEX` statement constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported.
 
@@ -37,9 +35,11 @@ CREATE INDEX i_index ON integers ((j+k));
 |`column`|The name of the column to be indexed.|
 |`expression`|An expression based on one or more columns of the table. The expression usually must be written with surrounding parentheses, as shown in the syntax. However, the parentheses can be omitted if the expression has the form of a function call.|
 
-## `DROP INDEX`
+### Syntax
 
-<div id="rrdiagram2"></div>
+<div id="rrdiagram1"></div>
+
+## `DROP INDEX`
 
 `DROP INDEX` drops an existing index from the database system.
 
@@ -58,3 +58,7 @@ DROP INDEX title_idx;
 |:---|:---|
 |`IF EXISTS`|Do not throw an error if the index does not exist.|
 |`name`|The name of an index to remove.|
+
+### Syntax
+
+<div id="rrdiagram2"></div>
