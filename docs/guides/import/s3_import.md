@@ -41,6 +41,8 @@ After the `httpfs` extension is set up and the S3 configuration is set correctly
 SELECT * FROM read_parquet('s3://<bucket>/<file>');
 ```
 
+## Google Cloud Storage (GCS)
+
 For Google Cloud Storage (GCS), the Interoperability API enables you to have access to it like an S3 connection.
 You need to create [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and declare them:
 
@@ -55,6 +57,8 @@ Please note you will need to use the `s3://` URL to read your data.
 ```sql
 SELECT * FROM read_parquet('s3://<gcs_bucket>/<file>');
 ```
+
+## Cloudflare R2
 
 For Cloudflare R2, the [S3 Compatibility API](https://developers.cloudflare.com/r2/data-access/s3-api/api/) allows you to use DuckDB's S3 support to read and write from R2 buckets. You will need to [generate an S3 auth token](https://developers.cloudflare.com/r2/data-access/s3-api/tokens/) and update the `s3_endpoint` used:
 
