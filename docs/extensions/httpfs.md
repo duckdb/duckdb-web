@@ -136,7 +136,7 @@ File globbing is implemented using the ListObjectV2 API call and allows to use f
 SELECT * FROM read_parquet('s3://bucket/*.parquet');
 ```
 
-This query matches all files in the root of the bucket with the parquet extension.
+This query matches all files in the root of the bucket with the [Parquet extension](../extensions/parquet).
 
 Several features for matching are supported, such as `*` to match any number of any character, `?` for any single character or `[0-9]` for a single character in a range of characters:
 
@@ -161,7 +161,7 @@ could for example result in:
 
 #### Hive Partitioning
 
-DuckDB also offers support for the Hive partitioning scheme. In the Hive partitioning scheme, data is partitioned in separate files. The columns by which the data is partitioned, are not actually in the files, but are encoded in the file path. So for example let us consider three parquet files Hive paritioned by year:
+DuckDB also offers support for the Hive partitioning scheme. In the Hive partitioning scheme, data is partitioned in separate files. The columns by which the data is partitioned, are not actually in the files, but are encoded in the file path. So for example let us consider three Parquet files Hive paritioned by year:
 
 ```text
 s3://bucket/year=2012/file.parquet
@@ -185,7 +185,7 @@ could result in:
 | 2 | examplevalue2 | 2013 |
 | 3 | examplevalue3 | 2014 |
 
-Note that the year column does not actually exist in the parquet files, it is parsed from the filenames. Within DuckDB however, these columns behave just like regular columns. For example, filters can be applied on Hive partition columns:
+Note that the year column does not actually exist in the Parquet files, it is parsed from the filenames. Within DuckDB however, these columns behave just like regular columns. For example, filters can be applied on Hive partition columns:
 
 ```sql
 SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) where year=2013;

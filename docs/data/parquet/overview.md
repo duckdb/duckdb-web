@@ -9,30 +9,30 @@ redirect_from:
 ## Examples
 
 ```sql
--- read a single parquet file
+-- read a single Parquet file
 SELECT * FROM 'test.parquet';
--- figure out which columns/types are in a parquet file
+-- figure out which columns/types are in a Parquet file
 DESCRIBE SELECT * FROM 'test.parquet';
--- create a table from a parquet file
+-- create a table from a Parquet file
 CREATE TABLE test AS SELECT * FROM 'test.parquet';
 -- if the file does not end in ".parquet", use the read_parquet function
 SELECT * FROM read_parquet('test.parq');
--- use list parameter to read 3 parquet files and treat them as a single table
+-- use list parameter to read 3 Parquet files and treat them as a single table
 SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 -- read all files that match the glob pattern
 SELECT * FROM 'test/*.parquet';
 -- read all files that match the glob pattern, and include a "filename" column that specifies which file each row came from
 SELECT * FROM read_parquet('test/*.parquet', filename=true);
--- use a list of globs to read all parquet files from 2 specific folders
+-- use a list of globs to read all Parquet files from 2 specific folders
 SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
--- query the metadata of a parquet file
+-- query the metadata of a Parquet file
 SELECT * FROM parquet_metadata('test.parquet');
--- query the schema of a parquet file
+-- query the schema of a Parquet file
 SELECT * FROM parquet_schema('test.parquet');
 
--- write the results of a query to a parquet file
+-- write the results of a query to a Parquet file
 COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet');
--- write the results from a query to a parquet file with specific compression and row_group_size
+-- write the results from a query to a Parquet file with specific compression and row_group_size
 COPY (FROM generate_series(100000)) TO 'test.parquet' (FORMAT 'parquet', COMPRESSION 'ZSTD', ROW_GROUP_SIZE 100000);
 
 -- export the table contents of the entire database as parquet
@@ -80,21 +80,21 @@ Filter and projection pushdown provide significant performance benefits. See [ou
 
 ## Inserts and Views
 
-You can also insert the data into a table or create a table from the parquet file directly. This will load the data from the parquet file and insert it into the database.
+You can also insert the data into a table or create a table from the Parquet file directly. This will load the data from the Parquet file and insert it into the database.
 
 ```sql
--- insert the data from the parquet file in the table
+-- insert the data from the Parquet file in the table
 INSERT INTO people SELECT * FROM read_parquet('test.parquet');
--- create a table directly from a parquet file
+-- create a table directly from a Parquet file
 CREATE TABLE people AS SELECT * FROM read_parquet('test.parquet');
 ```
 
-If you wish to keep the data stored inside the parquet file, but want to query the parquet file directly, you can create a view over the `read_parquet` function. You can then query the parquet file as if it were a built-in table.
+If you wish to keep the data stored inside the Parquet file, but want to query the Parquet file directly, you can create a view over the `read_parquet` function. You can then query the Parquet file as if it were a built-in table.
 
 ```sql
--- create a view over the parquet file
+-- create a view over the Parquet file
 CREATE VIEW people AS SELECT * FROM read_parquet('test.parquet');
--- query the parquet file
+-- query the Parquet file
 SELECT * FROM people;
 ```
 
@@ -103,13 +103,13 @@ SELECT * FROM people;
 DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [`COPY` Statement page](../../sql/statements/copy) for details, including all possible parameters for the `COPY` statement.
 
 ```sql
--- write a query to a snappy compressed parquet file
+-- write a query to a snappy compressed Parquet file
 COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet')
--- write "tbl" to a zstd compressed parquet file
+-- write "tbl" to a zstd compressed Parquet file
 COPY tbl TO 'result-zstd.parquet' (FORMAT 'PARQUET', CODEC 'ZSTD')
--- write a csv file to an uncompressed parquet file
+-- write a CSV file to an uncompressed Parquet file
 COPY 'test.csv' TO 'result-uncompressed.parquet' (FORMAT 'PARQUET', CODEC 'UNCOMPRESSED')
--- write a query to a parquet file with ZSTD compression (same as CODEC) and row_group_size
+-- write a query to a Parquet file with ZSTD compression (same as CODEC) and row_group_size
 COPY (FROM generate_series(100000)) TO 'row-groups-zstd.parquet' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000);
 ```
 

@@ -6,7 +6,7 @@ title: Partitioned Writes
 ## Examples
 
 ```sql
--- write a table to a hive partitioned data set of parquet files
+-- write a table to a hive partitioned data set of Parquet files
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
 -- write a table to a hive partitioned data set of CSV files, allowing overwrites
 COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE 1);

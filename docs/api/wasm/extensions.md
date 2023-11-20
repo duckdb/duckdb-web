@@ -8,17 +8,17 @@ DuckDB-Wasm's (dynamic) extension loading is modeled after the regular DuckDB's 
 ## Format
 
 Extensions in DuckDB are binaries to be dynamically loaded via `dlopen`. A cryptographical signature is appended to the binary.
-An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via Emscripten's dlopen. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
+An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via Emscripten's `dlopen`. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
 This ensures the file remains a valid WebAssembly file.
 
 > Currently we require this custom section to be the last one, but this can be potentially relaxed in the future.
 
-## INSTALL and LOAD
+## `INSTALL` and `LOAD`
 
 The `INSTALL` semantic in native embeddings of DuckDB is to fetch, decompress from `gzip` and store data in local disk.
 The `LOAD` semantic in native embeddings of DuckDB is to (optionally) perform signature checks *and* dynamic load the binary with the main DuckDB binary.
 
-In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session storage. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of dlopen.
+In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session storage. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of `dlopen`.
 
 ## Autoloading
 
@@ -34,7 +34,7 @@ In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session sto
 | icu                                                                                                                                  | Adds support for time zones and collations using the ICU library |                 |
 | inet                                                                                                                                 | Adds support for IP-related data types and functions             |                 |
 | [json](../../extensions/json)                                                                                                        | Adds support for JSON operations                                 |                 |
-| [parquet](../../extensions/parquet)                                                                                                  | Adds support for reading and writing parquet files               |                 |
+| [parquet](../../extensions/parquet)                                                                                                  | Adds support for reading and writing Parquet files               |                 |
 | [sqlite_scanner](../../extensions/sqlite_scanner) [<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner) | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
 | sqlsmith                                                                                                                             |                                                                  |                 |
 | [substrait](../../extensions/substrait) [<span class="github">GitHub</span>](https://github.com/duckdb/substrait)                | Adds support for the Substrait integration                       |                 |
