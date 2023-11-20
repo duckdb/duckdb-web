@@ -725,7 +725,11 @@
                   "url": "overview"
                 },
                 {
-                  "page":"Bitstring",
+                  "page": "Array",
+                  "url": "Array"
+                },
+                {
+                  "page": "Bitstring",
                   "url": "bitstring"
                 },
                 {
@@ -749,11 +753,11 @@
                   "url": "interval"
                 },
                 {
-                  "page":"List",
+                  "page": "List",
                   "url": "list"
                 },
                 {
-                  "page":"Map",
+                  "page": "Map",
                   "url": "map"
                 },
                 {
@@ -765,7 +769,7 @@
                   "url": "numeric"
                 },
                 {
-                  "page":"Struct",
+                  "page": "Struct",
                   "url": "struct"
                 },
                 {
@@ -785,7 +789,7 @@
                   "url": "timezones"
                 },
                 {
-                  "page":"Union",
+                  "page": "Union",
                   "url": "union"
                 }
               ]
