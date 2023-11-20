@@ -91,7 +91,7 @@ To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsig
 Extensions are by default installed under the user's home directory:
 
 ```text
-~/.duckdb/extensions/{DuckDB version}/{Platform name}
+~/.duckdb/extensions/v{duckdb_version}/{platform_name}
 ```
 
 For example, the extensions for DuckDB version 0.9.0 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.9.0/osx_arm64`.
