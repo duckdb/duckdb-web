@@ -136,7 +136,7 @@ File globbing is implemented using the ListObjectV2 API call and allows to use f
 SELECT * FROM read_parquet('s3://bucket/*.parquet');
 ```
 
-This query matches all files in the root of the bucket with the [Parquet extension](../extensions/parquet).
+This query matches all files in the root of the bucket with the [Parquet extension](parquet).
 
 Several features for matching are supported, such as `*` to match any number of any character, `?` for any single character or `[0-9]` for a single character in a range of characters:
 
