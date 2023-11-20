@@ -11,13 +11,6 @@ DuckDB currently uses two index types:
 * A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as zonemap and block range index) is automatically created for columns of all [general-purpose data types](../sql/data_types/overview).
 * An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Such an index is automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`.
 
-Joins on columns with an ART index can make use of the [index join algorithm](https://en.wikipedia.org/wiki/Nested_loop_join#Index_join_variation).
-Index joins are disabled by default, forcing them is possible by issuing the following [`PRAGMA`](../sql/pragmas):
-
-```sql
-PRAGMA force_index_join;
-```
-
 > ART indexes must currently be able to fit in-memory. Avoid creating ART indexes if the index does not fit in memory.
 
 ## Persistence
