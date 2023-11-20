@@ -2,13 +2,12 @@
 layout: docu
 title: Array
 ---
-An `ARRAY` column stores arrays. All fields in the column must have the same length and the same underlying type. `ARRAY`s are typically used to store arrays of numbers, but can contain any uniform data type, including other `ARRAY`s, `LIST`s and `STRUCT`s.
+
+An `ARRAY` column stores fixed-sized arrays. All fields in the column must have the same length and the same underlying type. `ARRAY`s are typically used to store arrays of numbers, but can contain any uniform data type, including `ARRAY`, `LIST` and `STRUCT` types.
+
+To store variable-length lists, use the [`LIST` type](list). See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
 > The `ARRAY` type in PostgreSQL allows variable-length fields. DuckDB's `ARRAY` type is fixed-length.
-
-See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
-
-> To store variable-length lists, use the [`LIST` type](list).
 
 ## Creating Arrays
 
