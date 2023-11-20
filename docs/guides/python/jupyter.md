@@ -133,10 +133,10 @@ This delegates memory management to the engine and ensures that intermediate com
 
 ### Install and Load DuckDB httpfs extension
 
-DuckDB's [httpfs extension](../../extensions/httpfs) allows parquet and CSV files to be queried remotely over http.
-These examples query a parquet file that contains historical taxi data from NYC.
-Using the parquet format allows DuckDB to only pull the rows and columns into memory that are needed rather than downloading the entire file.
-DuckDB can be used to process [local parquet files as well](../../data/parquet), which may be desirable if querying the entire parquet file, or running multiple queries that require large subsets of the file.
+DuckDB's [httpfs extension](../../extensions/httpfs) allows Parquet and CSV files to be queried remotely over http.
+These examples query a Parquet file that contains historical taxi data from NYC.
+Using the Parquet format allows DuckDB to only pull the rows and columns into memory that are needed rather than downloading the entire file.
+DuckDB can be used to process local [Parquet files](../../data/parquet) as well, which may be desirable if querying the entire Parquet file, or running multiple queries that require large subsets of the file.
 
 ```sql
 %%sql
@@ -147,7 +147,7 @@ LOAD httpfs;
 ### Boxplot & Histogram
 
 To create a boxplot, call `%sqlplot boxplot`, passing the name of the table and the column to plot.
-In this case, the name of the table is the URL of the remotely stored parquet file.
+In this case, the name of the table is the URL of the remotely stored Parquet file.
 
 ```python
 %sqlplot boxplot --table https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet --column trip_distance

@@ -9,9 +9,9 @@ railroad: statements/copy.js
 ```sql
 -- read a CSV file into the lineitem table - using auto-detected options
 COPY lineitem FROM 'lineitem.csv' (AUTO_DETECT true);
--- read a parquet file into the lineitem table
+-- read a Parquet file into the lineitem table
 COPY lineitem FROM 'lineitem.pq' (FORMAT PARQUET);
--- read a json file into the lineitem table - using auto-detected options
+-- read a JSON file into the lineitem table - using auto-detected options
 COPY lineitem FROM 'lineitem.json' (FORMAT JSON, AUTO_DETECT true);
 
 -- write a table to a CSV file
@@ -42,11 +42,11 @@ COPY lineitem FROM 'lineitem.tbl' (DELIMITER '|');
 COPY lineitem FROM 'lineitem.tbl' (AUTO_DETECT true);
 -- Read the contents of a comma-separated file 'names.csv' into the 'name' column of the 'category' table. Any other columns of this table are filled with their default value.
 COPY category(name) FROM 'names.csv';
--- Read the contents of a parquet file 'lineitem.parquet' into the lineitem table
+-- Read the contents of a Parquet file 'lineitem.parquet' into the lineitem table
 COPY lineitem FROM 'lineitem.parquet' (FORMAT PARQUET);
--- Read the contents of a newline-delimited json file 'lineitem.ndjson' into the lineitem table
+-- Read the contents of a newline-delimited JSON file 'lineitem.ndjson' into the lineitem table
 COPY lineitem FROM 'lineitem.ndjson' (FORMAT JSON);
--- Read the contents of a json file 'lineitem.json' into the lineitem table
+-- Read the contents of a JSON file 'lineitem.json' into the lineitem table
 COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY true);
 ```
 

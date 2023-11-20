@@ -360,7 +360,7 @@ UNION ALL
 SELECT 10 AS col1, 20 AS col_2;
 ```
 
-The file my_output_file.csv will then contain:
+The file `my_output_file.csv` will then contain:
 
 ```csv
 col_1,col_2

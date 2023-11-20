@@ -49,7 +49,7 @@ The `parquet_schema` function can be used to query the internal schema contained
 ```sql
 -- fetch the column names and column types
 DESCRIBE SELECT * FROM 'test.parquet';
--- fetch the internal schema of a parquet file
+-- fetch the internal schema of a Parquet file
 SELECT * FROM parquet_schema('test.parquet');
 ```
 

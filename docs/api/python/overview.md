@@ -87,7 +87,7 @@ DuckDB supports writing Relation objects directly to disk in a variety of format
 import duckdb
 duckdb.sql("SELECT 42").write_parquet("out.parquet") # Write to a Parquet file
 duckdb.sql("SELECT 42").write_csv("out.csv")         # Write to a CSV file
-duckdb.sql("COPY (SELECT 42) TO 'out.parquet'")      # Copy to a parquet file
+duckdb.sql("COPY (SELECT 42) TO 'out.parquet'")      # Copy to a Parquet file
 ```
 
 ## Using an In-Memory Database

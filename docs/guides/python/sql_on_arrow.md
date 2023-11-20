@@ -43,12 +43,12 @@ con = duckdb.connect()
 my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
                                        'j': ["one", "two", "three", "four"]})
 
-# create example parquet files and save in a folder
+# create example Parquet files and save in a folder
 base_path = pathlib.Path(tempfile.gettempdir())
 (base_path / "parquet_folder").mkdir(exist_ok=True)
 pq.write_to_dataset(my_arrow_table, str(base_path / "parquet_folder"))
 
-# link to parquet files using an Arrow Dataset
+# link to Parquet files using an Arrow Dataset
 my_arrow_dataset = ds.dataset(str(base_path / 'parquet_folder/'))
 
 # query the Apache Arrow Dataset "my_arrow_dataset" and return as an Arrow Table
@@ -74,12 +74,12 @@ con = duckdb.connect()
 my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
                                        'j': ["one", "two", "three", "four"]})
 
-# create example parquet files and save in a folder
+# create example Parquet files and save in a folder
 base_path = pathlib.Path(tempfile.gettempdir())
 (base_path / "parquet_folder").mkdir(exist_ok=True)
 pq.write_to_dataset(my_arrow_table, str(base_path / "parquet_folder"))
 
-# link to parquet files using an Arrow Dataset
+# link to Parquet files using an Arrow Dataset
 my_arrow_dataset = ds.dataset(str(base_path / 'parquet_folder/'))
 
 # define the filter to be applied while scanning

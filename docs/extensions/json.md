@@ -401,7 +401,7 @@ The following functions are used to create JSON.
 | `row_to_json(`*`list`*`)` | Alias for `to_json` that only accepts `STRUCT` |
 | `json_array([`*`any`*`, ...])` | Create a JSON array from *`any`* number of values |
 | `json_object([`*`key`*`,`*`value`*`, ...])` | Create a JSON object from any number of *`key`*, *`value`* pairs |
-| `json_merge_patch(`*`json`*`,`*`json`*`)` | Merge two json documents together |
+| `json_merge_patch(`*`json`*`,`*`json`*`)` | Merge two JSON documents together |
 
 Examples:
 ```sql
