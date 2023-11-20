@@ -35,18 +35,19 @@ The table below shows all the built-in general-purpose data types. The alternati
 
 ## Nested / Composite Types
 
-DuckDB supports four nested data types: `LIST`, `STRUCT`, `MAP` and `UNION`. Each supports different use cases and has a different structure. 
+DuckDB supports five nested data types: `ARRAY`, `LIST`, `STRUCT`, `MAP`, and `UNION`. Each supports different use cases and has a different structure. 
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
 |:-|:---|:---|:--|:--|
-| [`LIST`](../../sql/data_types/list) | An ordered sequence of data values of the same type. | Each row must have the same data type within each `LIST`, but can have any number of elements. | `[1, 2, 3]` | `INT[]` |
+| [`ARRAY`](../../sql/data_types/array) | An ordered, fixed-length sequence of data values of the same type. | Each row must have the same data type within each instance of the `ARRAY` and the same number of elements of elements. | `[1, 2, 3]` | `INT[3]` |
+| [`LIST`](../../sql/data_types/list) | An ordered sequence of data values of the same type. | Each row must have the same data type within each instance of the `LIST`, but can have any number of elements. | `[1, 2, 3]` | `INT[]` |
 | [`MAP`](../../sql/data_types/map) | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | `map([1, 2], ['a', 'b'])` | `MAP(INT, VARCHAR)` |
 | [`STRUCT`](../../sql/data_types/struct) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | `{'i': 42, 'j': 'a'}` | `STRUCT(i INT, j VARCHAR)` |
 | [`UNION`](../../sql/data_types/union) | A union of multiple alternative data types, storing one of them in each value at a time. A union also contains a discriminator "tag" value to inspect and access the currently set member type. | Rows may be set to different member types of the union. | `union_value(num := 2)` | `UNION(num INT, text VARCHAR)` |
 
 ## Nesting
 
-`LIST`, `STRUCT`, `MAP` and `UNION` types can be arbitrarily nested to any depth, so long as the type rules are observed.
+`ARRAY`, `LIST`, `MAP`, `STRUCT`, and `UNION` types can be arbitrarily nested to any depth, so long as the type rules are observed.
 
 ```sql
 -- Struct with lists
