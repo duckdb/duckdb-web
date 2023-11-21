@@ -45,6 +45,8 @@ brew install cmake ninja
 
 Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.9.2/.github/workflows/Windows.yml#L158) for a list of packages used to build DuckDB on Windows.
 
+The DuckDB Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../docs/api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
+
 ## Building DuckDB
 
 To build DuckDB we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
@@ -219,29 +221,6 @@ This can however hide include bugs, this flag disables using the unity build so 
 
 In some situations, running an executable that has been built with sanitizers enabled is not support / can cause problems. Julia is an example of this.  
 With this flag enabled, the sanitizers are disabled for the build.
-
-## Dependencies of the Python Library on Windows
-
-The DuckDB dynamic library used on Windows (`.pyd`) has the following dependencies when built with Python 3.10:
-
-- `MSVCP140.dll`
-- `WS2_32.dll`
-- `python310.dll`
-- `KERNEL32.dll`
-- `VCRUNTIME140_1.dll`
-- `VCRUNTIME140.dll`
-- `api-ms-win-crt-runtime-l1-1-0.dll`
-- `api-ms-win-crt-math-l1-1-0.dll`
-- `api-ms-win-crt-stdio-l1-1-0.dll`
-- `api-ms-win-crt-heap-l1-1-0.dll`
-- `api-ms-win-crt-string-l1-1-0.dll`
-- `api-ms-win-crt-environment-l1-1-0.dll`
-- `api-ms-win-crt-convert-l1-1-0.dll`
-- `api-ms-win-crt-time-l1-1-0.dll`
-- `api-ms-win-crt-utility-l1-1-0.dll`
-- `api-ms-win-crt-filesystem-l1-1-0.dll`
-
-Note that you need the [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to [run the DuckDB Python package](../docs/api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
 
 ## Troubleshooting
 

@@ -56,9 +56,9 @@ When importing DuckDB on Windows, the Python runtime may return the following er
 ```python
 import duckdb
 ```
-```
->     from duckdb.duckdb.functional import (
-> ImportError: DLL load failed while importing duckdb: The specified module could not be found.
+```text
+from duckdb.duckdb.functional import (
+ImportError: DLL load failed while importing duckdb: The specified module could not be found.
 ```
 
 The solution is to install the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist).
