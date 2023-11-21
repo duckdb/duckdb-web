@@ -2939,7 +2939,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.2-dev385"
+    "result": "v0.9.3-dev42"
   },
   {
     "name": "week",
