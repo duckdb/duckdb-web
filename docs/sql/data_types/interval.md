@@ -30,12 +30,12 @@ SELECT INTERVAL '1 month 1 day';
 SELECT '540:58:47.210'::INTERVAL;
 SELECT INTERVAL '16 MONTHS';
 
--- WARNING: If a decimal value is specified, it will be automatically rounded to an integer
+-- WARNING:
+-- If a decimal value is specified, it will be automatically rounded to an integer
 -- To use more precise values, simply use a more granular date part 
 -- (In this example use 18 MONTHS instead of 1.5 YEARS)
 -- The statement below is equivalent to to_years(CAST(1.5 AS INTEGER))
--- 2 years
-SELECT INTERVAL '1.5' YEARS; --WARNING! This returns 2 years!
+SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years!
 ```
 
 ## Details
