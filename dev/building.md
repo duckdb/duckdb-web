@@ -8,7 +8,7 @@ title: Building DuckDB from Source
 
 ### Prerequisites
 
-DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Clang, MSVC). Additionally, we recommend using the [Ninja build system](https://ninja-build.org/).
+DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC). Additionally, we recommend using the [Ninja build system](https://ninja-build.org/).
 
 #### Linux Packages
 
