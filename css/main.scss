@@ -1168,19 +1168,23 @@ body.documentation{
 		z-index: 800;
 		> div.version{
 			font-size: 14px;
+			line-height: 1;
 			color: rgba(184, 184, 184, 1);
 			padding-right: 30px;
 			padding-left: 30px;
 			cursor: pointer;
 			background-color: darken($duckDBlightgrey, 5%);
 			z-index: 500;
+			height: 51px;
+			display: flex;
+			align-items: center;
+			flex-shrink: 0;
 			.selectedversion{
 				color: black;
 				text-decoration: underline;
 				margin-left: 10px;
-				
 			}
-			&::after{
+			span.arrow::after{
 				content: "\E010";
 				font-family: "DuckDB-Symbol";
 				margin-left: 5px;
@@ -1197,6 +1201,7 @@ body.documentation{
 		}
 		> div.title{
 			margin-right: auto;
+			line-height: 1;
 		}
 		div.improvethispage{
 			font-size: 12px;

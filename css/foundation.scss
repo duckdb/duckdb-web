@@ -94,6 +94,10 @@ body.foundation{
 				}
 				.button{
 					@include button();
+					position: relative;
+					span::after{
+						top: -1px;
+					}
 				}
 				ul{
 					padding: 0;
