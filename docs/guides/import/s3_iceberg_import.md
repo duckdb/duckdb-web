@@ -33,10 +33,10 @@ SET s3_region='us-east-1';
 SET s3_session_token='<AWS session token>';
 ```
 
-Note: You can additionaly use the aws extension to retrieve the credentials from the aws config file. See [AWS Credentials](/docs/0.4.0/extensions/aws.html) for more information. To load the credentials:
+Note: You can additionaly use the aws extension to retrieve the credentials from the aws config file. See [AWS Credentials](/docs/extensions/aws.html) for more information. To load the credentials:
 
 ```sql
-call load_aws_credentials();
+CALL load_aws_credentials();
 ```
 
 After the extensions are set up and the S3 credentials are correctly configured, Iceberg table can be read from S3 using the following command:
