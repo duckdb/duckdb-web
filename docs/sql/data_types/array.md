@@ -59,7 +59,7 @@ SELECT id, array_extract(arr, 1) AS element FROM array_table;
 └───────┴─────────┘
 ```
 
-Slicing notation returns a `LIST`:
+Using the slicing notation returns a `LIST`:
 
 ```sql
 SELECT id, arr[1:2] AS elements FROM array_table;
