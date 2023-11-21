@@ -85,6 +85,7 @@ All extensions provided by the DuckDB core team are signed.
 
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
 To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsigned` flag to it on startup.
+For the Python client, see the [Loading and Installing Extensions section in the Python API documentation](../api/python/overview#loading-and-installing-extensions).
 
 ## Installation Location
 
