@@ -15,7 +15,7 @@ INSERT INTO students VALUES (1, 'Mark'), (2, 'Hannes'), (3, 'Pedro');
 INSERT INTO exams VALUES (1, 1, 8), (1, 2, 8), (1, 3, 7), (2, 1, 9), (2, 2, 10);
 ```
 
-### Explain Statement
+## Explain Statement
 
 The first step to profiling a database engine is figuring out what execution plan the engine is using. The `EXPLAIN` statement allows you to peek into the query plan and see what is going on under the hood.
 
@@ -76,7 +76,7 @@ EXPLAIN SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
 
 Note that the query is not actually executed – therefore, we can only see the estimated cardinality (`EC`) for each operator, which is calculated by using the statistics of the base tables and applying heuristics for each operator.
 
-### Run-Time Profiling
+## Run-Time Profiling
 
 The query plan helps understand the performance characteristics of the system. However, often it is also necessary to look at the performance numbers of individual operators and the cardinalities that pass through them. For this, you can create a query-profile graph.
 
