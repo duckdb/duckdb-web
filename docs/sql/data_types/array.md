@@ -89,6 +89,24 @@ In the following, `l1` stands for the 3-element list created by `array_value(1.0
 | *`array_inner_product`*`(`*`array1`*, *`array2`*`)`     | Compute the inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments.     | `array_inner_product(l1, l2)`                     | `20.0`              |
 | *`array_dot_product`*`(`*`array1`*, *`array2`*`)`       | Alias for *`array_inner_product`*`(`*`array1`*, *`array2`*`)`.                                                                                                                            | `array_dot_product(l1, l2)`                       | `20.0`              |
 
+## Examples
+
+```sql
+-- create sample data
+CREATE TABLE x(i INT, v FLOAT[3]);
+CREATE TABLE y(i INT, v FLOAT[3]);
+INSERT INTO x VALUES (1, array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT));
+INSERT INTO y VALUES (1, array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT));
+-- compute cross product
+SELECT array_cross_product(x.v, y.v)
+FROM x, y
+WHERE x.i = y.i;
+-- compute cosine similarity
+SELECT array_cosine_similarity(x.v, y.v)
+FROM x, y
+WHERE x.i = y.i;
+```
+
 ## Ordering
 
 The ordering of `ARRAY` instances is defined using a lexicographical order. `NULL` values compare greater than all other values and are considered equal to each other.
