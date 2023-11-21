@@ -48,3 +48,17 @@ In [2]: print(duckdb.sql("SELECT 42 AS x").explain())
 ```
 
 Please also check out the [Jupyter guide](../../guides/python/jupyter) for tips on using Jupyter with JupySQL.
+
+## Error When Importing the DuckDB Python Package on Windows
+
+When importing DuckDB on Windows, the Python runtime may return the following error:
+
+```python
+import duckdb
+```
+```
+>     from duckdb.duckdb.functional import (
+> ImportError: DLL load failed while importing duckdb: The specified module could not be found.
+```
+
+The solution is to install the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist).
