@@ -23,7 +23,7 @@ The addition of a new guide requires one additional edit:
 * Add a link to the new page within the Guides landing page: `docs/guides/index.md`
 
 Before creating a pull request, please perform the following steps:
-* Preview your changes in the browser using the [Building](building.md) guide.
+* Preview your changes in the browser using the [site build guide](BUILDING.md).
 * Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for MarkdownLint.
 
 When creating a PR, please check the box to "Allow edits from maintainers".
