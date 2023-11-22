@@ -17,7 +17,7 @@
               "url": "/dev/testing"
             },
             {
-              "page": "SQLLogicTest",
+              "page": "sqllogictest",
               "url": "/dev/sqllogictest/intro"
             },
             {

@@ -13,7 +13,7 @@ The tests can be run by running the `unittest` program located in the `test` fol
 
 When testing DuckDB, we aim to route all the tests through SQL. We try to avoid testing components individually because that makes those components more difficult to change later on. As such, almost all of our tests can (and should) be expressed in pure SQL. There are certain exceptions to this, which we will discuss in the section "Catch Tests". However, in most cases you should write your tests in plain SQL.
 
-SQL tests should be written using the [SQLLogicTest framework](/dev/sqllogictest/intro).
+SQL tests should be written using the [sqllogictest framework](/dev/sqllogictest/intro).
 
 C++ tests can be written using the [Catch framework](/dev/sqllogictest/catch).
 
