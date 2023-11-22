@@ -173,14 +173,6 @@
               "url": "polars"
             },
             {
-              "page": "Integration with Vaex",
-              "url": "vaex"
-            },
-            {
-              "page": "Integration with DataFusion",
-              "url": "datafusion"
-            },
-            {
               "page": "Using fsspec Filesystems",
               "url": "filesystems"
             }
