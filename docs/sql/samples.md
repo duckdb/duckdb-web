@@ -20,9 +20,9 @@ SELECT * FROM tbl USING SAMPLE reservoir(50 ROWS) REPEATABLE (100);
 -- select a sample of 20% of the table using system sampling with a fixed seed (377)
 SELECT * FROM tbl USING SAMPLE 10% (system, 377);
 -- select a sample of 10% of "tbl" BEFORE the join with tbl2
-SELECT * FROM tbl TABLESAMPLE RESERVOIR(20%), tbl2 WHERE tbl.i=tbl2.i;
+SELECT * FROM tbl TABLESAMPLE reservoir(20%), tbl2 WHERE tbl.i = tbl2.i;
 -- select a sample of 10% of "tbl" AFTER the join with tbl2
-SELECT * FROM tbl, tbl2 WHERE tbl.i=tbl2.i USING SAMPLE RESERVOIR(20%);
+SELECT * FROM tbl, tbl2 WHERE tbl.i = tbl2.i USING SAMPLE reservoir(20%);
 ```
 
 ### Syntax
@@ -67,9 +67,11 @@ The `TABLESAMPLE` clause is essentially equivalent to creating a subquery with t
 
 ```sql
 -- sample 20% of tbl BEFORE the join
-SELECT * FROM tbl TABLESAMPLE RESERVOIR(20%), tbl2 WHERE tbl.i=tbl2.i;
+SELECT * FROM tbl TABLESAMPLE reservoir(20%), tbl2 WHERE tbl.i = tbl2.i;
 -- sample 20% of tbl BEFORE the join
-SELECT * FROM (SELECT * FROM tbl USING SAMPLE RESERVOIR(20%)) tbl, tbl2 WHERE tbl.i=tbl2.i;
+SELECT *
+FROM (SELECT * FROM tbl USING SAMPLE reservoir(20%)) tbl, tbl2
+WHERE tbl.i = tbl2.i;
 -- sample 20% AFTER the join (i.e., sample 20% of the join result)
-SELECT * FROM tbl, tbl2 WHERE tbl.i=tbl2.i USING SAMPLE RESERVOIR(20%);
+SELECT * FROM tbl, tbl2 WHERE tbl.i = tbl2.i USING SAMPLE reservoir(20%);
 ```
