@@ -51,7 +51,7 @@
               "url": "s3_export"
             },
             {
-              "page": "S3 iceberg Import",
+              "page": "S3 Iceberg Import",
               "url": "s3_iceberg_import"
             },
             {
