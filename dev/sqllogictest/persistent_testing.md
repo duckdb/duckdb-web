@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: SQLLogicTest - Persistent Testing
+title: sqllogictest - Persistent Testing
 ---
 
 By default, all tests are run in in-memory mode (unless `--force-storage` is enabled). In certain cases, we want to force the usage of a persistent database. We can initiate a persistent database using the `load` command, and trigger a reload of the database using the `restart` command.
