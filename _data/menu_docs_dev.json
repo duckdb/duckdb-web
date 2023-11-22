@@ -51,6 +51,10 @@
               "url": "s3_export"
             },
             {
+              "page": "S3 Iceberg Import",
+              "url": "s3_iceberg_import"
+            },
+            {
               "page": "JSON Import",
               "url": "json_import"
             },
@@ -220,7 +224,6 @@
             }
           ]
         }
-
       ]
     },
     {
@@ -795,157 +798,157 @@
               ]
             },
             {
-            "page": "Expressions",
-            "slug": "expressions",
-            "subsubfolderitems": [
-              {
-                "page": "Overview",
-                "url": "overview"
-              },
-              {
-                "page": "Case",
-                "url": "case"
-              },
-              {
-                "page": "Casting",
-                "url": "cast"
-              },
-              {
-                "page": "Collations",
-                "url": "collations"
-              },
-              {
-                "page": "Comparisons",
-                "url": "comparison_operators"
-              },
-              {
-                "page": "IN Operator",
-                "url": "in"
-              },
-              {
-                "page": "Logical",
-                "url": "logical_operators"
-              },
-              {
-                "page": "Star",
-                "url": "star"
-              },
-              {
-                "page": "Subqueries",
-                "url": "subqueries"
-              }
-            ]
-          },
-          {
-            "page": "Functions",
-            "slug": "functions",
-            "subsubfolderitems": [
-              {
-                "page": "Overview",
-                "url": "overview"
-              },
-              {
-                "page": "Bitstring Functions",
-                "url": "bitstring"
-              },
-              {
-                "page": "Blob Functions",
-                "url": "blob"
-              },
-              {
-                "page": "Date Format Functions",
-                "url": "dateformat"
-              },
-              {
-                "page": "Date Functions",
-                "url": "date"
-              },
-              {
-                "page": "Date Part Functions",
-                "url": "datepart"
-              },
-              {
-                "page": "Enum Functions",
-                "url": "enum"
-              },
-              {
-                "page": "Interval Functions",
-                "url": "interval"
-              },
-              {
-                "page": "Nested Functions",
-                "url": "nested"
-              },
-              {
-                "page": "Numeric Functions",
-                "url": "numeric"
-              },
-              {
-                "page": "Pattern Matching",
-                "url": "patternmatching"
-              },
-              {
-                "page": "Text Functions",
-                "url": "char"
-              },
-              {
-                "page": "Time Functions",
-                "url": "time"
-              },
-              {
-                "page": "Timestamp Functions",
-                "url": "timestamp"
-              },
-              {
-                "page": "Timestamp with Time Zone Functions",
-                "url": "timestamptz"
-              },
-              {
-                "page": "Utility Functions",
-                "url": "utility"
-              }
-            ]
-          },
-          {
-            "page": "Aggregate Functions",
-            "url": "aggregates"
-          },
-          {
-            "page": "Configuration",
-            "url": "configuration"
-          },
-          {
-            "page": "Constraints",
-            "url": "constraints"
-          },
-          {
-            "page": "Indexes",
-            "url": "indexes"
-          },
-          {
-            "page": "Information Schema",
-            "url": "information_schema"
-          },
-          {
-            "page": "Metadata Functions",
-            "url": "duckdb_table_functions"
-          },
-          {
-            "page": "Pragmas",
-            "url": "pragmas"
-          },
-          {
-            "page": "Rules for Case Sensitivity",
-            "url": "case_sensitivity"
-          },
-          {
-            "page": "Samples",
-            "url": "samples"
-          },
-          {
-            "page": "Window Functions",
-            "url": "window_functions"
-          }
+              "page": "Expressions",
+              "slug": "expressions",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Case",
+                  "url": "case"
+                },
+                {
+                  "page": "Casting",
+                  "url": "cast"
+                },
+                {
+                  "page": "Collations",
+                  "url": "collations"
+                },
+                {
+                  "page": "Comparisons",
+                  "url": "comparison_operators"
+                },
+                {
+                  "page": "IN Operator",
+                  "url": "in"
+                },
+                {
+                  "page": "Logical",
+                  "url": "logical_operators"
+                },
+                {
+                  "page": "Star",
+                  "url": "star"
+                },
+                {
+                  "page": "Subqueries",
+                  "url": "subqueries"
+                }
+              ]
+            },
+            {
+              "page": "Functions",
+              "slug": "functions",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Bitstring Functions",
+                  "url": "bitstring"
+                },
+                {
+                  "page": "Blob Functions",
+                  "url": "blob"
+                },
+                {
+                  "page": "Date Format Functions",
+                  "url": "dateformat"
+                },
+                {
+                  "page": "Date Functions",
+                  "url": "date"
+                },
+                {
+                  "page": "Date Part Functions",
+                  "url": "datepart"
+                },
+                {
+                  "page": "Enum Functions",
+                  "url": "enum"
+                },
+                {
+                  "page": "Interval Functions",
+                  "url": "interval"
+                },
+                {
+                  "page": "Nested Functions",
+                  "url": "nested"
+                },
+                {
+                  "page": "Numeric Functions",
+                  "url": "numeric"
+                },
+                {
+                  "page": "Pattern Matching",
+                  "url": "patternmatching"
+                },
+                {
+                  "page": "Text Functions",
+                  "url": "char"
+                },
+                {
+                  "page": "Time Functions",
+                  "url": "time"
+                },
+                {
+                  "page": "Timestamp Functions",
+                  "url": "timestamp"
+                },
+                {
+                  "page": "Timestamp with Time Zone Functions",
+                  "url": "timestamptz"
+                },
+                {
+                  "page": "Utility Functions",
+                  "url": "utility"
+                }
+              ]
+            },
+            {
+              "page": "Aggregate Functions",
+              "url": "aggregates"
+            },
+            {
+              "page": "Configuration",
+              "url": "configuration"
+            },
+            {
+              "page": "Constraints",
+              "url": "constraints"
+            },
+            {
+              "page": "Indexes",
+              "url": "indexes"
+            },
+            {
+              "page": "Information Schema",
+              "url": "information_schema"
+            },
+            {
+              "page": "Metadata Functions",
+              "url": "duckdb_table_functions"
+            },
+            {
+              "page": "Pragmas",
+              "url": "pragmas"
+            },
+            {
+              "page": "Rules for Case Sensitivity",
+              "url": "case_sensitivity"
+            },
+            {
+              "page": "Samples",
+              "url": "samples"
+            },
+            {
+              "page": "Window Functions",
+              "url": "window_functions"
+            }
           ]
         },
         {
