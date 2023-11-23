@@ -118,11 +118,11 @@ CREATE TABLE person_2(
 
 -- Since current_mood and future_mood are constructed on different ENUMs
 -- DuckDB will cast both ENUMs to strings and perform a string comparison.
-SELECT * FROM person_2 where current_mood = future_mood;
+SELECT * FROM person_2 WHERE current_mood = future_mood;
 
 -- Since current_mood is an ENUM
 -- DuckDB will cast the current_mood ENUM to VARCHAR and perform a string comparison
-SELECT * FROM person_2 where current_mood = past_mood;
+SELECT * FROM person_2 WHERE current_mood = past_mood;
 ```
 
 ### Enum Removal

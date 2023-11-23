@@ -188,7 +188,7 @@ could result in:
 Note that the year column does not actually exist in the Parquet files, it is parsed from the filenames. Within DuckDB however, these columns behave just like regular columns. For example, filters can be applied on Hive partition columns:
 
 ```sql
-SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) where year=2013;
+SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) WHERE year = 2013;
 ```
 
 ### Writing

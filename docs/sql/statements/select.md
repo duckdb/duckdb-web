@@ -13,7 +13,7 @@ The `SELECT` statement retrieves rows from the database.
 -- select all columns from the table "tbl"
 SELECT * FROM tbl;
 -- select the rows from tbl
-SELECT j FROM tbl WHERE i=3;
+SELECT j FROM tbl WHERE i = 3;
 -- perform an aggregate grouped by the column "i"
 SELECT i, sum(j) FROM tbl GROUP BY i;
 -- select only the top 3 rows from the tbl
@@ -108,7 +108,7 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 For each table, the [`rowid` pseudocolumn](https://docs.oracle.com/cd/B19306_01/server.102/b14200/pseudocolumns008.htm) returns the row identifiers based on the physical storage.
 
 ```sql
-CREATE TABLE t(id int, content string);
+CREATE TABLE t(id INT, content STRING);
 INSERT INTO t VALUES (42, 'hello'), (43, 'world');
 SELECT rowid, id, content FROM t;
 ```

@@ -11,7 +11,12 @@ SQL keywords and function names are case-insensitive in DuckDB.
 
 The following two queries are equivalent:
 
-```sql
+<!-- 
+    syntax highlighting is omitted here on purpose:
+    our SQL formatter only picks up uppercase keywords and lowercase functions,
+    so applying it would be confusing
+-->
+```text
 select COS(Pi()) as CosineOfPi;
 SELECT cos(pi()) AS CosineOfPi;
 ```
@@ -49,8 +54,8 @@ SELECT cosineofpi FROM CosPi;
 In case of a conflict, when the same identifier is spelt with different cases, one will be selected randomly. For example:
 
 ```sql
-CREATE TABLE t1(idfield int, x int);
-CREATE TABLE t2(IdField int, y int);
+CREATE TABLE t1(idfield INT, x INT);
+CREATE TABLE t2(IdField INT, y INT);
 SELECT * FROM t1 NATURAL JOIN t2;
 ```
 

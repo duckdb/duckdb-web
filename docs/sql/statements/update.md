@@ -10,9 +10,9 @@ The `UPDATE` statement modifies the values of rows in a table.
 
 ```sql
 -- for every row where "i" is NULL, set the value to 0 instead
-UPDATE tbl SET i=0 WHERE i IS NULL;
+UPDATE tbl SET i = 0 WHERE i IS NULL;
 -- set all values of "i" to 1 and all values of "j" to 2
-UPDATE tbl SET i=1, j = 2;
+UPDATE tbl SET i = 1, j = 2;
 ```
 
 ## Syntax

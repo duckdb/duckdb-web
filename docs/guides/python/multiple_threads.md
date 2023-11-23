@@ -20,11 +20,12 @@ from threading import Thread, current_thread
 import random
 
 duckdb_con = duckdb.connect('my_peristent_db.duckdb') 
-# duckdb_con = duckdb.connect() # Pass in no parameters for an in memory database
+# Use connect without parameters for an in-memory database
+# duckdb_con = duckdb.connect()
 duckdb_con.execute("""
     CREATE OR REPLACE TABLE my_inserts (
-        thread_name varchar, 
-        insert_time timestamp DEFAULT current_timestamp
+        thread_name VARCHAR,
+        insert_time TIMESTAMP DEFAULT current_timestamp
     )
 """)
 ```

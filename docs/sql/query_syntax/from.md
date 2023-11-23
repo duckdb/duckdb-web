@@ -214,8 +214,9 @@ the rows may have a natural correspondence based on their physical order.
 In scripting languages, this is easily expressed using a loop:
 
 ```cpp
-for (i=0;i<n;i++) 
+for (i = 0; i < n; i++) {
     f(t1.a[i], t2.b[i])
+}
 ```
 
 It is difficult to express this in standard SQL because 

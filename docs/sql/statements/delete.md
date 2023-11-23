@@ -9,8 +9,8 @@ The `DELETE` statement removes rows from the table identified by the table-name.
 ## Examples
 
 ```sql
--- remove the rows matching the condition "i=2" from the database
-DELETE FROM tbl WHERE i=2;
+-- remove the rows matching the condition "i = 2" from the database
+DELETE FROM tbl WHERE i = 2;
 -- delete all rows in the table "tbl"
 DELETE FROM tbl;
 ```

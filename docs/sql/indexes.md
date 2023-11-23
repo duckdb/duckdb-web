@@ -38,7 +38,7 @@ Due to the presence of transactions, data can only be removed from the index aft
 CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR);
 INSERT INTO students VALUES (1, 'Student 1');
 BEGIN;
-DELETE FROM students WHERE id=1;
+DELETE FROM students WHERE id = 1;
 INSERT INTO students VALUES (1, 'Student 2');
 -- Constraint Error: Duplicate key "id: 1" violates primary key constraint
 ```
@@ -48,7 +48,7 @@ This, combined with the fact that updates are turned into deletions and insertio
 ```sql
 CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR);
 INSERT INTO students VALUES (1, 'Student 1');
-UPDATE students SET name='Student 2', id=1 WHERE id=1;
+UPDATE students SET name='Student 2', id = 1 WHERE id = 1;
 -- Constraint Error: Duplicate key "id: 1" violates primary key constraint
 ```
 

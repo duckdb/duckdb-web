@@ -125,13 +125,13 @@ COPY mysql_db.tbl FROM 'data.parquet';
 ### UPDATE
 
 ```sql
-UPDATE mysql_db.tbl SET name='Woohoo' WHERE id=42;
+UPDATE mysql_db.tbl SET name='Woohoo' WHERE id = 42;
 ```
 
 ### DELETE
 
 ```sql
-DELETE FROM mysql_db.tbl WHERE id=42;
+DELETE FROM mysql_db.tbl WHERE id = 42;
 ```
 
 ### ALTER TABLE

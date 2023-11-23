@@ -26,7 +26,7 @@ Below is an example of `SUMMARIZE` on the `lineitem` table of TPC-H `SF1` table,
 ```sql
 INSTALL tpch;
 LOAD tpch;
-CALL dbgen(sf=1);
+CALL dbgen(sf = 1);
 ```
 
 ```sql
