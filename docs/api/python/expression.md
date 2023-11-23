@@ -45,7 +45,7 @@ df = pd.DataFrame({
 	'c': [42, 21, 13, 14]
 })
 
-star = duckdb.StarExpression(exclude=['b'])
+star = duckdb.StarExpression(exclude = ['b'])
 res = duckdb.df(df).select(star).fetchall()
 print(res)
 # [(1, 42), (2, 21), (3, 13), (4, 14)]
@@ -53,7 +53,7 @@ print(res)
 
 ## Constant Expression
 
-This expression contains a single value.  
+This expression contains a single value.
 
 ```py
 import duckdb
@@ -73,9 +73,9 @@ print(res)
 
 ## Case Expression
 
-This expression contains a CASE WHEN (...) THEN (...) ELSE (...) END expression.  
-By default ELSE is NULL, it can be set using `.else(value=...)`  
-Additional `WHEN (...) THEN (...)` blocks can be added with `.when(condition=..., value=...)`
+This expression contains a `CASE WHEN (...) THEN (...) ELSE (...) END` expression.  
+By default `ELSE` is `NULL` and it can be set using `.else(value = ...)`.
+Additional `WHEN (...) THEN (...)` blocks can be added with `.when(condition = ..., value = ...)`.
 
 ```py
 import duckdb
@@ -95,10 +95,10 @@ df = pd.DataFrame({
 hello = ConstantExpression('hello')
 world = ConstantExpression('world')
 
-case = CaseExpression(condition=ColumnExpression('b') == False, value=world).otherwise(hello)
-res = duckdb.df(df).select(
-    case
-).fetchall()
+case = \
+  CaseExpression(condition = ColumnExpression('b') == False, value = world) \
+  .otherwise(hello)
+res = duckdb.df(df).select(case).fetchall()
 print(res)
 # [('hello',), ('hello',), ('world',), ('hello',)]
 ```
