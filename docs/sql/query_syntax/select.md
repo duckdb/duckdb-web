@@ -49,7 +49,7 @@ SELECT COLUMNS('number\d+') FROM addresses;
 
 The [star expression](../expressions/star) is a special expression that expands to *multiple expressions* based on the contents of the `FROM` clause. In the simplest case, `*` expands to **all** expressions in the `FROM` clause. Columns can also be selected using regular expressions or lambda functions. See the [star expression page](../expressions/star) for more details.
 
-### Distinct Clause
+### `DISTINCT` Clause
 
 ```sql
 -- select all unique cities from the addresses table
@@ -60,7 +60,7 @@ The `DISTINCT` clause can be used to return **only** the unique rows in the resu
 
 > Queries starting with `SELECT DISTINCT` run deduplication, which is an expensive operation. Therefore, only use `DISTINCT` if necessary.
 
-### Distinct On Clause
+### `DISTINCT ON` Clause
 
 ```sql
 -- select only the highest population city for each country
@@ -93,7 +93,7 @@ SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
 
 [Window functions](../window_functions) are special functions that allow the computation of values relative to *other rows* in a result. Window functions are marked by the `OVER` clause which contains the *window specification*. The window specification defines the frame or context in which the window function is computed. See the [window functions page](../window_functions) for more information.
 
-### Unnest
+### `UNNEST`
 
 ```sql
 -- unnest an array by one level
@@ -102,4 +102,4 @@ SELECT UNNEST([1, 2, 3]);
 SELECT UNNEST({'a': 42, 'b': 84});
 ```
 
-[Unnest](unnest) is a special function that can be used together with arrays or structs. The unnest function strips one level of nesting from the type. For example, `INT[]` is transformed into `INT`. `STRUCT(a INT, b INT)` is transformed into `a INT, b INT`. The unnest function can be used to transform nested types into regular scalar types, which makes them easier to operate on.
+[`UNNEST`](unnest) is a special function that can be used together with [arrays](../data_types/array), [lists](../data_types/list), or [structs](../data_types/struct). The unnest function strips one level of nesting from the type. For example, `INT[]` is transformed into `INT`. `STRUCT(a INT, b INT)` is transformed into `a INT, b INT`. The unnest function can be used to transform nested types into regular scalar types, which makes them easier to operate on.

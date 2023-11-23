@@ -29,7 +29,7 @@ SELECT 24 AS id UNION ALL BY NAME SELECT 'Amsterdam' AS City;
 
 <div id="rrdiagram"></div>
 
-## Example Table
+## Example Tables
 
 ```sql
 CREATE TABLE capitals(city VARCHAR, country VARCHAR);
@@ -39,7 +39,7 @@ CREATE TABLE weather(city VARCHAR, degrees INTEGER, date DATE);
 INSERT INTO weather VALUES ('Amsterdam', 10, '2022-10-14'), ('Seattle', 8, '2022-10-12');
 ```
 
-## UNION (ALL)
+## `UNION (ALL)`
 
 The `UNION` clause can be used to combine rows from multiple queries. The queries are required to have the same number of columns and the same column types.
 
@@ -55,7 +55,7 @@ SELECT city FROM capitals UNION ALL SELECT city FROM weather;
 -- Amsterdam, Amsterdam, Berlin, Seattle
 ```
 
-## INTERSECT
+## `INTERSECT`
 
 The `INTERSECT` clause can be used to select all rows that occur in the result of **both** queries. Note that `INTERSECT` performs duplicate elimination, so only unique rows are returned.
 
@@ -64,7 +64,7 @@ SELECT city FROM capitals INTERSECT SELECT city FROM weather;
 -- Amsterdam
 ```
 
-## EXCEPT
+## `EXCEPT`
 
 The `EXCEPT` clause can be used to select all rows that **only** occur in the left query. Note that `EXCEPT` performs duplicate elimination, so only unique rows are returned.
 
@@ -73,7 +73,7 @@ SELECT city FROM capitals EXCEPT SELECT city FROM weather;
 -- Berlin
 ```
 
-## UNION (ALL) BY NAME
+## `UNION (ALL) BY NAME`
 
 The `UNION (ALL) BY NAME` clause can be used to combine rows from different tables by name, instead of by position. `UNION BY NAME` does not require both queries to have the same number of columns. Any columns that are only found in one of the queries are filled with `NULL` values for the other query.   
 

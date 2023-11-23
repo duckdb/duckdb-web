@@ -46,7 +46,7 @@ CREATE INDEX i_index ON integers ((j + k));
 ### Examples
 
 ```sql
--- Remove the index title_idx.
+-- Remove the index title_idx
 DROP INDEX title_idx;
 ```
 

@@ -30,4 +30,4 @@ statement is for manual checkpoint actions.
 The default `CHECKPOINT` command will fail if there are any running transactions. Including `FORCE` will abort any
 transactions and execute the checkpoint operation.
 
-Also see the related [pragma](../pragmas#force_checkpoint) for further behavior modification.
+Also see the related [`PRAGMA` option](../pragmas#force_checkpoint) for further behavior modification.
