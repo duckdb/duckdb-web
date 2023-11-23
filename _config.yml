@@ -39,6 +39,7 @@ plugins:
   - jekyll-redirect-from
   - jekyll-sitemap
   - jekyll-github-metadata
+  - jekyll-git-hash
 excerpt_separator: <!--more-->
 
 twitter:
