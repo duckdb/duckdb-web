@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Create Index
+title: CREATE INDEX Statement
 railroad: statements/indexes.js
 ---
 

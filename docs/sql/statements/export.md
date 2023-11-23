@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Export & Import Database
+title: EXPORT/IMPORT DATABASE Statements
 railroad: statements/export.js
 ---
 

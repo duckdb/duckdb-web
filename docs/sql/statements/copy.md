@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Copy
+title: COPY Statement
 railroad: statements/copy.js
 ---
 

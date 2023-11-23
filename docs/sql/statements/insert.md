@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Insert Statement
+title: INSERT Statement
 railroad: statements/insert.js
 ---
 

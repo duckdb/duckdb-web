@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Create Sequence
+title: CREATE SEQUENCE Statement
 railroad: statements/createsequence.js
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Call
+title: CALL Statement
 railroad: statements/call.js
 ---
 

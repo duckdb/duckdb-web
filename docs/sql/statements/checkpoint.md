@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Checkpoint
+title: CHECKPOINT Statement
 railroad: statements/checkpoint.js
 ---
 

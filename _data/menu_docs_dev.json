@@ -314,7 +314,7 @@
               "url": "appender"
             },
             {
-              "page": "Insert Statements",
+              "page": "INSERT Statements",
               "url": "insert"
             }
           ]
@@ -544,99 +544,99 @@
                   "url": "overview"
                 },
                 {
-                  "page": "Alter Table",
+                  "page": "ALTER TABLE",
                   "url": "alter_table"
                 },
                 {
-                  "page": "Alter View",
+                  "page": "ALTER VIEW",
                   "url": "alter_view"
                 },
                 {
-                  "page": "Attach/Detach",
+                  "page": "ATTACH/DETACH",
                   "url": "attach"
                 },
                 {
-                  "page": "Call",
+                  "page": "CALL",
                   "url": "call"
                 },
                 {
-                  "page": "Checkpoint",
+                  "page": "CHECKPOINT",
                   "url": "checkpoint"
                 },
                 {
-                  "page": "Copy",
+                  "page": "COPY",
                   "url": "copy"
                 },
                 {
-                  "page": "Create Index",
+                  "page": "CREATE INDEX",
                   "url": "create_index"
                 },
                 {
-                  "page": "Create Macro",
+                  "page": "CREATE MACRO",
                   "url": "create_macro"
                 },
                 {
-                  "page": "Create Schema",
+                  "page": "CREATE SCHEMA",
                   "url": "create_schema"
                 },
                 {
-                  "page": "Create Sequence",
+                  "page": "CREATE SEQUENCE",
                   "url": "create_sequence"
                 },
                 {
-                  "page": "Create Table",
+                  "page": "CREATE TABLE",
                   "url": "create_table"
                 },
                 {
-                  "page": "Create View",
+                  "page": "CREATE VIEW",
                   "url": "create_view"
                 },
                 {
-                  "page": "Create Type",
+                  "page": "CREATE TYPE",
                   "url": "create_type"
                 },
                 {
-                  "page": "Delete",
+                  "page": "DELETE",
                   "url": "delete"
                 },
                 {
-                  "page": "Drop",
+                  "page": "DROP",
                   "url": "drop"
                 },
                 {
-                  "page": "Export",
+                  "page": "EXPORT/IMPORT DATABASE",
                   "url": "export"
                 },
                 {
-                  "page": "Insert",
+                  "page": "INSERT",
                   "url": "insert"
                 },
                 {
-                  "page": "Pivot",
+                  "page": "PIVOT",
                   "url": "pivot"
                 },
                 {
-                  "page": "Select",
+                  "page": "SELECT",
                   "url": "select"
                 },
                 {
-                  "page": "Set/Reset",
+                  "page": "SET/RESET",
                   "url": "set"
                 },
                 {
-                  "page": "Unpivot",
+                  "page": "UNPIVOT",
                   "url": "unpivot"
                 },
                 {
-                  "page": "Update",
+                  "page": "UPDATE",
                   "url": "update"
                 },
                 {
-                  "page": "Use",
+                  "page": "USE",
                   "url": "use"
                 },
                 {
-                  "page": "Vacuum",
+                  "page": "VACUUM",
                   "url": "vacuum"
                 }
               ]

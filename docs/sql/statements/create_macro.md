@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Create Macro
+title: CREATE MACRO Statement
 railroad: statements/createmacro.js
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Pivot Statement
+title: PIVOT Statement
 railroad: statements/pivot.js
 blurb: The PIVOT statement allows values within a column to be separated into their own columns.
 ---

@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Update Statement
+title: UPDATE Statement
 railroad: statements/update.js
 ---
 

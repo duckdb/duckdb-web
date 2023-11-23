@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Select Statement
+title: SELECT Statement
 railroad: statements/select.js
 blurb: The SELECT statement retrieves rows from the database.
 ---

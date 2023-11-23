@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Alter Table
+title: ALTER TABLE Statement
 railroad: statements/alter.js
 ---
 
