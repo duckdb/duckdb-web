@@ -1,9 +1,7 @@
 ---
 layout: docu
-title: Map
+title: Map Type
 ---
-
-## Map Data Type
 
 `MAP`s are similar to `STRUCT`s in that they are an ordered list of "entries" where a key maps to a value. However, `MAP`s do not need to have the same keys present for each row, and thus are suitable for other use cases. `MAP`s are useful when the schema is unknown beforehand or when the schema varies per row; their flexibility is a key differentiator.
 
@@ -13,7 +11,7 @@ In contrast, `STRUCT`s must have string keys, but each key may have a value of a
 
 To construct a `MAP`, use the bracket syntax preceded by the `MAP` keyword.
 
-### Creating Maps
+## Creating Maps
 
 ```sql
 -- A map with varchar keys and integer values. This returns {key1=1, key2=5}
@@ -29,7 +27,7 @@ SELECT map { ['a', 'b']: [1.1, 2.2], ['c', 'd']: [3.3, 4.4] };
 CREATE TABLE map_table (map_col MAP(INT, DOUBLE));
 ```
 
-### Retrieving from Maps
+## Retrieving from Maps
 
 `MAP`s use bracket notation for retrieving values. Selecting from a `MAP` returns a `LIST` rather than an individual value, with an empty `LIST` meaning that the key was not found. 
 ```sql

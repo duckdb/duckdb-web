@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Array
+title: Array Type
 ---
 
-An `ARRAY` column stores fixed-sized arrays. All fields in the column must have the same length and the same underlying type. `ARRAY`s are typically used to store arrays of numbers, but can contain any uniform data type, including `ARRAY`, `LIST` and `STRUCT` types.
+An `ARRAY` column stores fixed-sized arrays. All fields in the column must have the same length and the same underlying type. Arrays are typically used to store arrays of numbers, but can contain any uniform data type, including `ARRAY`, [`LIST`](list) and [`STRUCT`](struct) types.
 
 Arrays can be used to store vectors such as [word embeddings](https://en.wikipedia.org/wiki/Word_embedding) or image embeddings.
 
