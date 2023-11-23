@@ -9,13 +9,13 @@
     <title>{{ page.title }} - DuckDB</title>
 	{% endif %}
 	
-	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
-	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/blog.css">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css?{{ site.data['hash'] }}">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css?{{ site.data['hash'] }}">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/blog.css?{{ site.data['hash'] }}">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-	<link rel="stylesheet" href="/css/railroad.css">
+	<link rel="stylesheet" href="/css/railroad.css?{{ site.data['hash'] }}">
 	{% endif %}
 	
 	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
