@@ -5,7 +5,7 @@ title: JSON Extension
 
 The `json` extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
 
-## Example uses
+## Example Uses
 
 ```sql
 -- read a JSON file from disk, auto-infer options
