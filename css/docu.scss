@@ -348,46 +348,52 @@ table pre {
 
 /* color scheme */
 
-// comment
-.c1 {
+// comments
+.c, .g, .cm, .cp, .c1 {
     color: #a0a1a7;
     font-family: $fontMonoItalic;
 }
 
 // keywords
-.k, .kn, .kv {
+.k, .kn, .kv, .kd {
     color: #0098dd;
     font-family: $fontMonoBold;
 }
 
 // numbers
-.mi {
+.m, .mf, .mh, .mi, .mo, .il {
     color: #ce33c0;
 }
 
 // foreground
-.n, .nn {
+.l, .x, .no, .nd, .nl, .nx, .py, .w, .nn {
     color: #383a42;
 }
 
 // type names
-.nb {
+.nb, .bp, .vcb {
     color: #0098dd;
     font-family: $fontMonoBold;
 }
 
 // functions
-.nf {
+.nf, .na, .nt {
     color: #23974a;
     font-family: $fontMonoBold;
 }
 
-.p {
+// class names
+.nc {
+    color: #d52753;
+}
+
+// punctuation
+.p, .x {
     color: #7a82da;
 }
 
 // strings
-.s, .s1 {
+.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl {
     color: #c5a332;
 }
 
@@ -400,6 +406,18 @@ th .k {
 // background
 .highlight {
     background-color :#f9f9f9;
+}
+
+// ??
+.n, .nv, .vg {
+}
+
+// ??
+.o, .ow {
+}
+
+// ??
+.gh, .gp {
 }
 
 table {

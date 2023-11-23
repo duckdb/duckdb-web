@@ -20,7 +20,7 @@ LOAD tpch;
 To generate data for scale factor 1, use:
 
 ```sql
-CALL dbgen(sf=1);
+CALL dbgen(sf = 1);
 ```
 
 To run a query, e.g., query 4, use:
