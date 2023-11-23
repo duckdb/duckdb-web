@@ -1,5 +1,22 @@
 # Contributing
 
+- [Contributing](#contributing)
+  - [Code of Conduct](#code-of-conduct)
+  - [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
+  - [Eligibility](#eligibility)
+  - [Adding a New Page](#adding-a-new-page)
+  - [Style Guide](#style-guide)
+    - [Formatting](#formatting)
+    - [Headers](#headers)
+    - [SQL Style](#sql-style)
+    - [Python Style](#python-style)
+    - [Links](#links)
+    - [Spelling](#spelling)
+  - [Example Code Snippets](#example-code-snippets)
+  - [Cross-References](#cross-references)
+  - [Achive and Generated Pages](#achive-and-generated-pages)
+  - [Notice](#notice)
+
 ## Code of Conduct
 
 This project and everyone participating in it is governed by a [Code of Conduct](code_of_conduct.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [quack@duckdb.org](mailto:quack@duckdb.org).
@@ -66,7 +83,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Use **4 spaces** for indentation.
 
-## Links
+### Links
 
 * Please avoid using the term "here" for links (e.g., "for more details, click [here](https://example.org/)" should be avoided). For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
 
