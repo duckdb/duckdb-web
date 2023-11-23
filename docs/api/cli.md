@@ -171,16 +171,20 @@ The shell offers context-aware auto-complete of SQL queries. Auto-complete is tr
 
 ```sql
 S -> SELECT
-
+```
+```sql
 SELECT s -> student_id
-
+```
+```sql
 SELECT student_id F -> FROM
-
-
+```
+```sql
 SELECT student_id FROM g -> grades
-
+```
+```sql
 SELECT student_id FROM 'd -> data/
-
+```
+```sql
 SELECT student_id FROM 'data/ -> data/grades.csv
 ```
 
