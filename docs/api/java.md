@@ -39,7 +39,7 @@ ro_prop.setProperty("duckdb.read_only", "true");
 Connection conn_ro = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", ro_prop);
 ```
 
-Additional connections can be created using the `DriverManager`. A more efficient mechanism is to call the `DuckDBConnecttion#duplicate()` method like so:
+Additional connections can be created using the `DriverManager`. A more efficient mechanism is to call the `DuckDBConnection#duplicate()` method like so:
 
 ```java
 Connection conn2 = ((DuckDBConnection) conn).duplicate();

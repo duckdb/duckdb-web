@@ -20,7 +20,7 @@ LOAD tpcds;
 To generate data for scale factor 1, use:
 
 ```sql
-CALL dsdgen(sf=1);
+CALL dsdgen(sf = 1);
 ```
 
 To run a query, e.g., query 8, use:
