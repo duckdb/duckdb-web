@@ -1,8 +1,29 @@
 # Contributing
 
+- [Contributing](#contributing)
+  - [Code of Conduct](#code-of-conduct)
+  - [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
+  - [Eligibility](#eligibility)
+  - [Adding a New Page](#adding-a-new-page)
+  - [Style Guide](#style-guide)
+    - [Formatting](#formatting)
+    - [Headers](#headers)
+    - [SQL Style](#sql-style)
+    - [Python Style](#python-style)
+    - [Links](#links)
+    - [Spelling](#spelling)
+  - [Example Code Snippets](#example-code-snippets)
+  - [Cross-References](#cross-references)
+  - [Achive and Generated Pages](#achive-and-generated-pages)
+  - [Notice](#notice)
+
 ## Code of Conduct
 
 This project and everyone participating in it is governed by a [Code of Conduct](code_of_conduct.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [quack@duckdb.org](mailto:quack@duckdb.org).
+
+## Contributing to the DuckDB Documentation
+
+Contributions to the [DuckDB Documentation](https://duckdb.org/) are welcome. To submit a contribution, please open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) in the [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web) repository.
 
 ## Eligibility
 
@@ -11,7 +32,7 @@ Before submitting a contribution, please check whether your contribution is elig
 1. Before creating a new page, please [search the existing documentation](https://duckdb.org/docs/search) for similar pages.
 2. In general, guides for third-party tools using DuckDB should not be included in the DuckDB documentation. Rather, these tools and their documentation should be collected in the [`awesome-duckdb` community repository](https://github.com/davidgasquez/awesome-duckdb).
 
-## Adding a new page
+## Adding a New Page
 
 Thank you for contributing to the DuckDB documentation!
 
@@ -28,7 +49,7 @@ Before creating a pull request, please perform the following steps:
 
 When creating a PR, please check the box to "Allow edits from maintainers".
 
-## Style guide
+## Style Guide
 
 Please adhere the following style guide when submitting a pull request.
 
@@ -52,17 +73,17 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * In the body of the page, restrict the use of headers to the following levels: h2 (`##`), h3 (`###`), and h4 (`####`).
 * Use headline capitalization as defined in the [Chicago Manual of Style](https://headlinecapitalization.com/).
 
-### SQL style
+### SQL Style
 
 * Use SQL uppercase keywords, e.g., `SELECT ... FROM ...`.
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/archive/0.8.1/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
 * Use **4 spaces** for indentation.
 
-### Python style
+### Python Style
 
 * Use **4 spaces** for indentation.
 
-## Links
+### Links
 
 * Please avoid using the term "here" for links (e.g., "for more details, click [here](https://example.org/)" should be avoided). For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
 
@@ -70,12 +91,12 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Use [American English (en-US) spelling](https://en.wikipedia.org/wiki/Oxford_spelling#Language_tag_comparison).
 
-## Examples
+## Example Code Snippets
 
 * Examples that illustrate the use of features are very welcome. Where applicable, consider starting the page with a few simple examples that demonstrate the most common uses of the feature described.
-* All examples should be self-contained and reproducible if possible, meaning that any example tables must be created as a part of the documentation.
+* If possible, examples should be self-contained and reproducible. For example, the tables used in the example must be created as a part of the example code snippet.
 
-## Cross-references
+## Cross-References
 
 * Where applicable, add cross-references to relevant other pages in the documentation.
 * Use descriptive links:
@@ -90,9 +111,9 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
     * :white_check_mark: `../../sql/statements/copy#copy-from`
 * Do **not** link related GitHub issues/discussions. This allows the documentation to be self-contained.
 
-## Achive and generated pages
+## Achive and Generated Pages
 
-* The archive pages (e.g., <https://duckdb.org/docs/archive/0.5.1/>) contain documentation for old versions of DuckDB. In general, we do not accept contributions to these pages – please target the latest version of the page when submitting your contributions.
+* The archive pages (e.g., <https://duckdb.org/docs/archive/0.8.1/>) contain documentation for old versions of DuckDB. In general, we do not accept contributions to these pages – please target the latest version of the page when submitting your contributions.
 * Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Do not edit the generated content, instead, edit the source files (often found in the [`duckdb` repository](https://github.com/duckdb/duckdb)).
 
 ## Notice
