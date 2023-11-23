@@ -90,9 +90,9 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
     * :white_check_mark: `../../sql/statements/copy#copy-from`
 * Do **not** link related GitHub issues/discussions. This allows the documentation to be self-contained.
 
-## Achive and generated pages
+## Achive and Generated Pages
 
-* The archive pages (e.g., <https://duckdb.org/docs/archive/0.5.1/>) contain documentation for old versions of DuckDB. In general, we do not accept contributions to these pages – please target the latest version of the page when submitting your contributions.
+* The archive pages (e.g., <https://duckdb.org/docs/archive/0.8.1/>) contain documentation for old versions of DuckDB. In general, we do not accept contributions to these pages – please target the latest version of the page when submitting your contributions.
 * Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Do not edit the generated content, instead, edit the source files (often found in the [`duckdb` repository](https://github.com/duckdb/duckdb)).
 
 ## Notice
