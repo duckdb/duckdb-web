@@ -262,3 +262,21 @@ Instead, first build the `httpfs` extension, then build and install the Python p
 GEN=ninja BUILD_HTTPFS=1 make
 python tools/pythonpkg/setup.py install --user
 ```
+
+### Building the httpfs Extension on Linux
+
+**Problem:** When building the `httpfs` extension on Linux, the build may fail with the following error.
+
+```text
+CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
+  Could NOT find OpenSSL, try to set the path to OpenSSL root folder in the
+  system variable OPENSSL_ROOT_DIR (missing: OPENSSL_CRYPTO_LIBRARY
+  OPENSSL_INCLUDE_DIR)
+```
+
+**Solution:** Install the `libssl-dev` library.
+
+```bash
+sudo apt install -y libssl-dev
+GEN=ninja BUILD_HTTPFS=1 make
+```
