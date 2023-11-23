@@ -295,9 +295,9 @@ The `.schema` command will show all of the SQL statements used to define the sch
 ```
 
 ```sql
-CREATE TABLE fliers(animal VARCHAR);
-CREATE TABLE swimmers(animal VARCHAR);
-CREATE TABLE walkers(animal VARCHAR);
+CREATE TABLE fliers (animal VARCHAR);
+CREATE TABLE swimmers (animal VARCHAR);
+CREATE TABLE walkers (animal VARCHAR);
 ```
 
 ## Opening Database Files

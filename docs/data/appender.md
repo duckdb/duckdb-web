@@ -9,7 +9,7 @@ The C++ Appender can be used to load bulk data into a DuckDB database. The Appen
 DuckDB db;
 Connection con(db);
 // create the table
-con.Query("CREATE TABLE people(id INTEGER, name VARCHAR)");
+con.Query("CREATE TABLE people (id INTEGER, name VARCHAR)");
 // initialize the appender
 Appender appender(con, "people");
 ```
@@ -40,7 +40,7 @@ While numbers and strings are rather self-explanatory, dates, times and timestam
 Below is a short example:
 
 ```cpp
-con.Query("CREATE TABLE dates(d DATE, t TIME, ts TIMESTAMP)");
+con.Query("CREATE TABLE dates (d DATE, t TIME, ts TIMESTAMP)");
 Appender appender(con, "dates");
 
 // construct the values using the Date/Time/Timestamp types - this is the most efficient

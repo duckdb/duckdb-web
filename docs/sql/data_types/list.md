@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: List
+title: List Type
 ---
 
 A `LIST` column encodes lists of values. Fields in the column can have values with different lengths, but they must all have the same underlying type. `LIST`s are typically used to store arrays of numbers, but can contain any uniform data type, including other `LIST`s and `STRUCT`s.

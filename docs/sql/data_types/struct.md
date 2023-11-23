@@ -1,9 +1,7 @@
 ---
 layout: docu
-title: Struct
+title: Struct Data Type
 ---
-
-## Struct Data Type
 
 Conceptually, a `STRUCT` column contains an ordered list of columns called "entries". The entries are referenced by name using strings. This document refers to those entry names as keys. Each row in the `STRUCT` column must have the same keys. The names of the struct entries are part of the *schema*. Each row in a `STRUCT` column must have the same layout. The names of the struct entries are case-insensitive.
 

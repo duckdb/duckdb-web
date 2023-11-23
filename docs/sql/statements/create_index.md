@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Create Index
+title: CREATE INDEX Statement
 railroad: statements/indexes.js
 ---
 
@@ -46,7 +46,7 @@ CREATE INDEX i_index ON integers ((j + k));
 ### Examples
 
 ```sql
--- Remove the index title_idx.
+-- Remove the index title_idx
 DROP INDEX title_idx;
 ```
 

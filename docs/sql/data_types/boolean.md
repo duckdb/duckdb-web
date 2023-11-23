@@ -21,7 +21,7 @@ Boolean values can be explicitly created using the literals `true` and `false`. 
 
 ```sql
 -- create a table with the value (5), (15) and (NULL)
-CREATE TABLE integers(i INTEGER);
+CREATE TABLE integers (i INTEGER);
 INSERT INTO integers VALUES (5), (15), (NULL);
 
 -- select all entries where i > 10

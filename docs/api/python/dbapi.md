@@ -48,7 +48,7 @@ SQL queries can be sent to DuckDB using the `execute()` method of connections. O
 
 ```python
 # create a table
-con.execute("CREATE TABLE items(item VARCHAR, value DECIMAL(10, 2), count INTEGER)")
+con.execute("CREATE TABLE items (item VARCHAR, value DECIMAL(10, 2), count INTEGER)")
 # insert two items into the table
 con.execute("INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)")
 

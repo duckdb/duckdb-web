@@ -30,7 +30,7 @@ SELECT '127.0.0.1'::INET AS addr;
 ```
 
 ```sql
-CREATE TABLE tbl(id INTEGER, ip INET);
+CREATE TABLE tbl (id INTEGER, ip INET);
 INSERT INTO tbl VALUES (1, '192.168.0.0/16'), (2, '127.0.0.1'), (2, '8.8.8.8');
 ```
 ```text

@@ -33,7 +33,7 @@ using DuckDB
 con = DBInterface.connect(DuckDB.DB, ":memory:")
 
 # create a table
-DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)")
+DBInterface.execute(con, "CREATE TABLE integers (i INTEGER)")
 
 # insert data using a prepared statement
 stmt = DBInterface.prepare(con, "INSERT INTO integers VALUES(?)")
@@ -48,7 +48,7 @@ print(results)
 
 The DuckDB Julia package also provides support for querying Julia DataFrames. Note that the DataFrames are directly read by DuckDB - they are not inserted or copied into the database itself.
 
-If you wish to load data from a DataFrame into a DuckDB table you can run a `CREATE TABLE AS` or `INSERT INTO` query.
+If you wish to load data from a DataFrame into a DuckDB table you can run a `CREATE TABLE ... AS` or `INSERT INTO` query.
 
 ```julia
 using DuckDB

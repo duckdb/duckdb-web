@@ -19,7 +19,7 @@ If you wish to restrict the number of characters in a `VARCHAR` column for data 
 
 
 ```sql
-CREATE TABLE strings(
+CREATE TABLE strings (
     val VARCHAR CHECK(LENGTH(val) <= 10) -- val has a maximum length of 10 characters
 );
 ```
@@ -75,7 +75,7 @@ SELECT 'Hello' || chr(10) || 'world' AS msg;
 Double quote characters (`"`) are used to denote table and column names. Surrounding their names allows the use of keywords, e.g.:
 
 ```sql
-CREATE TABLE "table"("order" BIGINT);
+CREATE TABLE "table" ("order" BIGINT);
 ```
 
 While DuckDB occasionally accepts both single quote and double quotes for strings (e.g., both `FROM "filename.csv"` and `FROM 'filename.csv'` work), their use is not recommended.

@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Create Table
+title: CREATE TABLE Statement
 railroad: statements/createtable.js
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Delete Statement
+title: DELETE Statement
 railroad: statements/delete.js
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Create View
+title: CREATE VIEW Statement
 railroad: statements/createview.js
 ---
 

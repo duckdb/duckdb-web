@@ -16,7 +16,7 @@ SELECT * FROM read_csv('flights.csv', delim='|', header=true, columns={'FlightDa
 cat data/csv/issue2471.csv | duckdb -c "SELECT * FROM read_csv_auto('/dev/stdin')"
 
 -- read a CSV file into a table
-CREATE TABLE ontime(FlightDate DATE, UniqueCarrier VARCHAR, OriginCityName VARCHAR, DestCityName VARCHAR);
+CREATE TABLE ontime (FlightDate DATE, UniqueCarrier VARCHAR, OriginCityName VARCHAR, DestCityName VARCHAR);
 COPY ontime FROM 'flights.csv' (AUTO_DETECT true);
 -- alternatively, create a table without specifying the schema manually
 CREATE TABLE ontime AS SELECT * FROM 'flights.csv';
@@ -125,7 +125,7 @@ The `read_csv` function accepts the same parameters that `read_csv_auto` does bu
 The [`COPY` statement](../../sql/statements/copy#copy-to) can be used to load data from a CSV file into a table. This statement has the same syntax as the one used in PostgreSQL. To load the data using the `COPY` statement, we must first create a table with the correct schema (which matches the order of the columns in the CSV file and uses types that fit the values in the CSV file). We then specify the CSV file to load from plus any configuration options separately.
 
 ```sql
-CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
+CREATE TABLE ontime (flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
 COPY ontime FROM 'flights.csv' (DELIMITER '|', HEADER);
 SELECT * FROM ontime;
 ```
@@ -141,7 +141,7 @@ SELECT * FROM ontime;
 If we want to use the automatic format detection, we can set `AUTO_DETECT` to `true` and omit the otherwise required configuration options.
 
 ```sql
-CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
+CREATE TABLE ontime (flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
 COPY ontime FROM 'flights.csv' (AUTO_DETECT true);
 SELECT * FROM ontime;
 ```

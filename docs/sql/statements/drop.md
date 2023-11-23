@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Drop Statement
+title: DROP Statement
 railroad: statements/drop.js
 ---
 

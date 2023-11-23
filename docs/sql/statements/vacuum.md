@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Vacuum
+title: VACUUM Statement
 railroad: statements/vacuum.js
 ---
 

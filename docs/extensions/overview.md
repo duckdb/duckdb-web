@@ -68,7 +68,7 @@ LOAD spatial;
 ```
 
 ```sql
-CREATE TABLE tbl(geom GEOMETRY);
+CREATE TABLE tbl (geom GEOMETRY);
 ```
 
 #### Extension Handling through the Python API

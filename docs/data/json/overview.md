@@ -22,7 +22,7 @@ FROM read_json('todos.json',
 cat data/json/todos.json | duckdb -c "SELECT * FROM read_json_auto('/dev/stdin')"
 
 -- read a JSON file into a table
-CREATE TABLE todos(userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN);
+CREATE TABLE todos (userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN);
 COPY todos FROM 'todos.json';
 -- alternatively, create a table without specifying the schema manually
 CREATE TABLE todos AS SELECT * FROM 'todos.json';
@@ -256,7 +256,7 @@ Multiple files can be read at once by providing a glob or a list of files. Refer
 The `COPY` statement can be used to load data from a JSON file into a table. For the `COPY` statement, we must first create a table with the correct schema to load the data into. We then specify the JSON file to load from plus any configuration options separately.
 
 ```sql
-CREATE TABLE todos(userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN);
+CREATE TABLE todos (userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN);
 COPY todos FROM 'todos.json';
 SELECT * FROM todos LIMIT 5;
 ```

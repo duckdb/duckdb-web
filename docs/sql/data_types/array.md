@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Array
+title: Array Type
 ---
 
-An `ARRAY` column stores fixed-sized arrays. All fields in the column must have the same length and the same underlying type. `ARRAY`s are typically used to store arrays of numbers, but can contain any uniform data type, including `ARRAY`, `LIST` and `STRUCT` types.
+An `ARRAY` column stores fixed-sized arrays. All fields in the column must have the same length and the same underlying type. Arrays are typically used to store arrays of numbers, but can contain any uniform data type, including `ARRAY`, [`LIST`](list) and [`STRUCT`](struct) types.
 
 Arrays can be used to store vectors such as [word embeddings](https://en.wikipedia.org/wiki/Word_embedding) or image embeddings.
 
@@ -33,7 +33,7 @@ SELECT array_value({'a': 1, 'b': 2}, {'a': 3, 'b': 4});
 Arrays can be created using the `<TYPE_NAME>[<LENGTH>]` syntax. For example, to create an array field for 3 integers, run:
 
 ```sql
-CREATE TABLE array_table(id INT, arr INT[3]);
+CREATE TABLE array_table (id INT, arr INT[3]);
 INSERT INTO array_table VALUES (10, [1, 2, 3]), (20, [4, 5, 6]);
 ```
 
@@ -93,8 +93,8 @@ In the following, `l1` stands for the 3-element list created by `array_value(1.0
 
 ```sql
 -- create sample data
-CREATE TABLE x(i INT, v FLOAT[3]);
-CREATE TABLE y(i INT, v FLOAT[3]);
+CREATE TABLE x (i INT, v FLOAT[3]);
+CREATE TABLE y (i INT, v FLOAT[3]);
 INSERT INTO x VALUES (1, array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT));
 INSERT INTO y VALUES (1, array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT));
 -- compute cross product

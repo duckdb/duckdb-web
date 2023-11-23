@@ -5,6 +5,16 @@ title: Full Text Search Extension
 
 Full Text Search is an extension to DuckDB that allows for search through strings, similar to SQLite's FTS5 extension.  
 
+## Installing and Loading
+
+The `fts` extension will be transparently autoloaded on first use from the official extension repository.
+If you would like to install and load it manually, run:
+
+```sql
+INSTALL fts;
+LOAD fts;
+```
+
 ## API
 
 The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to drop an index. Additionally, a scalar macro `stem` is added, which is used internally by the extension.
@@ -77,7 +87,7 @@ Reduces words to their base. Used internally by the extension.
 
 ```sql
 -- create a table and fill it with text data
-CREATE TABLE documents(document_identifier VARCHAR, text_content VARCHAR, author VARCHAR, doc_version INTEGER);
+CREATE TABLE documents (document_identifier VARCHAR, text_content VARCHAR, author VARCHAR, doc_version INTEGER);
 INSERT INTO documents
 VALUES ('doc1', 'The mallard is a dabbling duck that breeds throughout the temperate.', 'Hannes Mühleisen', 3),
        ('doc2', 'The cat is a domestic species of small carnivorous mammal.', 'Laurens Kuiper', 2);

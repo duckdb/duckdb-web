@@ -16,7 +16,7 @@ Note that `duckdb_appender_destroy` should always be called on the resulting app
 ## Example
 
 ```c
-duckdb_query(con, "CREATE TABLE people(id INTEGER, name VARCHAR)", NULL);
+duckdb_query(con, "CREATE TABLE people (id INTEGER, name VARCHAR)", NULL);
 
 duckdb_appender appender;
 if (duckdb_appender_create(con, NULL, "people", &appender) == DuckDBError) {
