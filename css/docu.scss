@@ -349,35 +349,35 @@ table pre {
 /* color scheme */
 
 // comments
-.c, .c1, .cm {
+.c, .g, .cm, .cp, .c1 {
     color: #a0a1a7;
     font-family: $fontMonoItalic;
 }
 
 // keywords
-.k, .kn, .kv {
+.k, .kn, .kv, .kd {
     color: #0098dd;
     font-family: $fontMonoBold;
 }
 
 // numbers
-.m, .mi, .mf {
+.m, .mf, .mh, .mi, .mo, .il {
     color: #ce33c0;
 }
 
 // foreground
-.n, .nn, .nd {
+.l, .x, .no, .nd, .nl, .nx, .py, .w, .nn {
     color: #383a42;
 }
 
 // type names
-.nb {
+.nb, .bp, .vcb {
     color: #0098dd;
     font-family: $fontMonoBold;
 }
 
 // functions
-.nf, .na {
+.nf, .na, .nt {
     color: #23974a;
     font-family: $fontMonoBold;
 }
@@ -393,7 +393,7 @@ table pre {
 }
 
 // strings
-.s, .s1, .s2 {
+.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl {
     color: #c5a332;
 }
 
@@ -406,6 +406,18 @@ th .k {
 // background
 .highlight {
     background-color :#f9f9f9;
+}
+
+// ??
+.n, .nv, .vg {
+}
+
+// ??
+.o, .ow {
+}
+
+// ??
+.gh, .gp {
 }
 
 table {
