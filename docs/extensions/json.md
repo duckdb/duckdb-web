@@ -13,11 +13,11 @@ SELECT * FROM 'todos.json';
 -- read_json with custom options
 SELECT *
 FROM read_json('todos.json',
-               format='array',
-               columns={userId: 'UBIGINT',
-                        id: 'UBIGINT',
-                        title: 'VARCHAR',
-                        completed: 'BOOLEAN'});
+               format = 'array',
+               columns = {userId: 'UBIGINT',
+                          id: 'UBIGINT',
+                          title: 'VARCHAR',
+                          completed: 'BOOLEAN'});
 
 -- write the result of a query to a JSON file
 COPY (SELECT * FROM todos) TO 'todos.json';
@@ -34,7 +34,7 @@ All JSON creation functions return values of this type.
 We also allow any of our types to be casted to JSON, and JSON to be casted back to any of our types, for example:
 ```sql
 -- Cast JSON to our STRUCT type
-SELECT '{"duck":42}'::JSON::STRUCT(duck INTEGER);
+SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
 -- {'duck': 42}
 
 -- And back:
@@ -139,7 +139,7 @@ Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, 
 
 Example usage:
 ```sql
-SELECT * FROM read_json('my_file1.json', columns={duck: 'INTEGER'});
+SELECT * FROM read_json('my_file1.json', columns = {duck: 'INTEGER'});
 ```
 
 | duck |
@@ -151,7 +151,7 @@ DuckDB can convert JSON arrays directly to its internal `LIST` type, and missing
 ```sql
 SELECT *
 FROM read_json(['my_file1.json', 'my_file2.json'],
-               columns={duck: 'INTEGER', goose: 'INTEGER[]', swan: 'DOUBLE'});
+               columns = {duck: 'INTEGER', goose: 'INTEGER[]', swan: 'DOUBLE'});
 ```
 
 | duck | goose | swan |
@@ -302,7 +302,7 @@ Other examples:
 ```sql
 CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
-  (' { "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
+  ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
 SELECT json(j) FROM example;
 -- {"family":"anatidae","species":["duck","goose","swan",null]}
 SELECT json_valid(j) FROM example;
@@ -325,13 +325,13 @@ SELECT json_keys FROM example;
 -- [family, species]
 SELECT json_structure(j) FROM example;
 -- {"family":"VARCHAR","species":["VARCHAR"]}
-SELECT json_structure('["duck",{"family":"anatidae"}]');
+SELECT json_structure('["duck", {"family": "anatidae"}]');
 -- ["JSON"]
-SELECT json_contains('{"key":"value"}', '"value"');
+SELECT json_contains('{"key": "value"}', '"value"');
 -- true
-SELECT json_contains('{"key":1}', 1);
+SELECT json_contains('{"key": 1}', 1);
 -- true
-SELECT json_contains('{"top_key":{"key":"value"}}', '{"key":"value"}');
+SELECT json_contains('{"top_key": {"key": "value"}}', '{"key": "value"}');
 -- true
 ```
 
