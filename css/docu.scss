@@ -339,230 +339,67 @@ div.flex{
 }
 
 
-
-/** SLATE IMPORT **/
-
 table td {
     padding: 5px;
 }
 table pre {
     margin: 0;
 }
-.cm {
-    color: #777772;
-    font-family: $fontMonoItalic;
-}
-.cp {
-    color: #797676;
-    font-family: $fontMonoBold;
-}
+
+/* color scheme */
+
+// comment
 .c1 {
-    color: #929292;
+    color: #a0a1a7;
     font-family: $fontMonoItalic;
 }
-.cs {
-    color: #797676;
-    font-family: $fontMonoItalicBold;
-}
-.c,
-.cd {
-    color: #777772;
-    font-family: $fontMonoItalic;
-}
-.err {
-    /*
-    color: #a61717;
-    background-color: #e3d2d2;
-    */
-}
-.gd {
-    color: #000000;
-    background-color: #ffdddd;
-}
-.ge {
-    color: #000000;
-    font-family: $fontMonoItalic;
-}
-.gr {
-    color: #aa0000;
-}
-.gh {
-    color: #797676;
-}
-.gi {
-    color: #000000;
-    background-color: #ddffdd;
-}
-.go {
-    color: #888888;
-}
-.gp {
-    color: #555555;
-}
-.gs {
+
+// keywords
+.k, .kn, .kv {
+    color: #0098dd;
     font-family: $fontMonoBold;
 }
-.gu {
-    color: #aaaaaa;
+
+// numbers
+.mi {
+    color: #ce33c0;
 }
-.gt {
-    color: #aa0000;
+
+// foreground
+.n, .nn {
+    color: #383a42;
 }
-.kc {
-    color: #000000;
+
+// type names
+.nb {
+    color: #0098dd;
     font-family: $fontMonoBold;
 }
-.kd {
-    color: #000000;
+
+// functions
+.nf {
+    color: #23974a;
     font-family: $fontMonoBold;
 }
-.kn {
-    color: #000000;
-    font-family: $fontMonoBold;
+
+.p {
+    color: #7a82da;
 }
-.kp {
-    color: #000000;
-    font-family: $fontMonoBold;
+
+// strings
+.s, .s1 {
+    color: #c5a332;
 }
-.kr {
-    color: #000000;
-    font-family: $fontMonoBold;
-}
-.kt {
-    color: #445588;
-    font-family: $fontMonoBold;
-}
-.k,
-.kv {
-    color: #000000;
-    font-family: $fontMonoBold;
-}
-th .k{
+
+// keywords in table headers
+th .k {
     color: #fff;
     font-family: $fontMonoBold;
 }
-.mf {
-    color: #009999;
-}
-.mh {
-    color: #009999;
-}
-.il {
-    color: #009999;
-}
-.mi {
-    color: #32cd32;
-}
-.mo {
-    color: #009999;
-}
-.m,
-.mb,
-.mx {
-    color: #009999;
-}
-.sb {
-    color: rgb(255,0,0);
-}
-.sc {
-    color: #d14;
-}
-.sd {
-    color: #d14;
-}
-.s2 {
-    color: rgb(255,0,0);
-}
-.se {
-    color: #d14;
-}
-.sh {
-    color: #d14;
-}
-.si {
-    color: #d14;
-}
-.sx {
-    color: #d14;
-}
-.sr {
-    color: #009926;
-}
-.s1 {
-    color: rgb(255,0,0);
-}
-.ss {
-    color: #990073;
-}
-.s {
-    color: rgb(255,0,0);
-}
-.na {
-    color: #008080;
-}
-.bp {
-    color: #797676;
-}
-.nb {
-    color: rgb(0,0,255);
-}
-.nc {
-    color: #445588;
-    font-family: $fontMonoBold;
-}
-.no {
-    color: #008080;
-}
-.nd {
-    color: #3c5d5d;
-    font-family: $fontMonoBold;
-}
-.ni {
-    color: #800080;
-}
-.ne {
-    color: #990000;
-    font-family: $fontMonoBold;
-}
-.nf {
-    color: #a1045a;
-    font-family: $fontMonoBold;
-}
-.nl {
-    color: #990000;
-    font-family: $fontMonoBold;
-}
-.nn {
-    color: #555555;
-}
-.nt {
-    color: #000080;
-}
-.vc {
-    color: #008080;
-}
-.vg {
-    color: #008080;
-}
-.vi {
-    color: #008080;
-}
-.nv {
-    color: #008080;
-}
-.ow {
-    color: #000000;
-    font-family: $fontMonoBold;
-}
-.o {
-    color: #000000;
-    font-family: $fontMonoBold;
-}
-.w {
-    color: #bbbbbb;
-}
+
+// background
 .highlight {
-    background-color: rgb(245, 245, 245);
+    background-color :#f9f9f9;
 }
 
 table {
