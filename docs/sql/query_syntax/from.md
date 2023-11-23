@@ -82,9 +82,9 @@ with the join (clearer) or implied by the `WHERE` clause (old-fashioned).
 We use the `l_regions` and the `l_nations` tables from the TPC-H schema:
 
 ```sql
-CREATE TABLE l_regions(r_regionkey INTEGER NOT NULL PRIMARY KEY,
-                       r_name      CHAR(25) NOT NULL,
-                       r_comment   VARCHAR(152));
+CREATE TABLE l_regions (r_regionkey INTEGER NOT NULL PRIMARY KEY,
+                        r_name      CHAR(25) NOT NULL,
+                        r_comment   VARCHAR(152));
 
 CREATE TABLE l_nations (n_nationkey INTEGER NOT NULL PRIMARY KEY,
                         n_name      CHAR(25) NOT NULL,
@@ -103,9 +103,9 @@ If the column names are the same and are required to be equal,
 then the simpler `USING` syntax can be used:
 
 ```sql
-CREATE TABLE l_regions(regionkey INTEGER NOT NULL PRIMARY KEY,
-                       name      CHAR(25) NOT NULL,
-                       comment   VARCHAR(152));
+CREATE TABLE l_regions (regionkey INTEGER NOT NULL PRIMARY KEY,
+                        name      CHAR(25) NOT NULL,
+                        comment   VARCHAR(152));
 
 CREATE TABLE l_nations (nationkey INTEGER NOT NULL PRIMARY KEY,
                         name      CHAR(25) NOT NULL,

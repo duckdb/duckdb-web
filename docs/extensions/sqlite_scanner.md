@@ -85,7 +85,7 @@ SELECT * FROM sqlite_scan('sakila.db', 'film');
 SQLite is a [weakly typed database system](https://www.sqlite.org/datatype3.html). As such, when storing data in a SQLite table, types are not enforced. The following is valid SQL in SQLite:
 
 ```sql
-CREATE TABLE numbers(i INTEGER);
+CREATE TABLE numbers (i INTEGER);
 INSERT INTO numbers VALUES ('hello');
 ```
 

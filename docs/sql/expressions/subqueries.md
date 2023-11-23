@@ -23,7 +23,7 @@ Consider the following table:
 | 8 | CS |
 
 ```sql
-CREATE TABLE grades(grade INTEGER, course VARCHAR);
+CREATE TABLE grades (grade INTEGER, course VARCHAR);
 INSERT INTO grades VALUES (7, 'Math'), (9, 'Math'), (8, 'CS');
 ```
 
@@ -62,8 +62,8 @@ SELECT EXISTS (SELECT * FROM grades WHERE course='History');
 The `NOT EXISTS` operator tests for the absence of any row inside the subquery. It returns either true when the subquery returns an empty result, and false otherwise. The `NOT EXISTS` operator is generally the most useful as a *correlated* subquery to express antijoin operations. For example, to find Person nodes without an interest:
 
 ```sql
-CREATE TABLE Person(id BIGINT, name VARCHAR);
-CREATE TABLE interest(PersonId BIGINT, topic VARCHAR);
+CREATE TABLE Person (id BIGINT, name VARCHAR);
+CREATE TABLE interest (PersonId BIGINT, topic VARCHAR);
 
 INSERT INTO Person VALUES (1, 'Jane'), (2, 'Joe');
 INSERT INTO interest VALUES (2, 'Music');

@@ -32,10 +32,10 @@ SELECT 24 AS id UNION ALL BY NAME SELECT 'Amsterdam' AS City;
 ## Example Tables
 
 ```sql
-CREATE TABLE capitals(city VARCHAR, country VARCHAR);
+CREATE TABLE capitals (city VARCHAR, country VARCHAR);
 INSERT INTO capitals VALUES ('Amsterdam', 'NL'), ('Berlin', 'Germany');
 
-CREATE TABLE weather(city VARCHAR, degrees INTEGER, date DATE);
+CREATE TABLE weather (city VARCHAR, degrees INTEGER, date DATE);
 INSERT INTO weather VALUES ('Amsterdam', 10, '2022-10-14'), ('Seattle', 8, '2022-10-12');
 ```
 

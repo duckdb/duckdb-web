@@ -113,7 +113,7 @@ import duckdb
 # create a connection to a file called 'file.db'
 con = duckdb.connect("file.db")
 # create a table and load data into it
-con.sql("CREATE TABLE test(i INTEGER)")
+con.sql("CREATE TABLE test (i INTEGER)")
 con.sql("INSERT INTO test VALUES (42)")
 # query the table
 con.table("test").show()
@@ -128,7 +128,7 @@ You can also use a context manager to ensure that the connection is closed:
 import duckdb
 
 with duckdb.connect("file.db") as con:
-    con.sql("CREATE TABLE test(i INTEGER)")
+    con.sql("CREATE TABLE test (i INTEGER)")
     con.sql("INSERT INTO test VALUES (42)")
     con.table("test").show()
     # the context manager closes the connection automatically

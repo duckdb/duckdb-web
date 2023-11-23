@@ -51,7 +51,7 @@ SELECT 'hello'='HeLlo';
 Collations can also be specified per-column when creating a table. When that column is then used in a comparison, the per-column collation is used to perform that comparison.
 
 ```sql
-CREATE TABLE names(name VARCHAR COLLATE NOACCENT);
+CREATE TABLE names (name VARCHAR COLLATE NOACCENT);
 INSERT INTO names VALUES ('hännes');
 SELECT name FROM names WHERE name='hannes';
 -- hännes
@@ -63,7 +63,7 @@ Be careful here, however, as different collations cannot be combined. This can b
 SELECT name FROM names WHERE name='hannes' COLLATE NOCASE;
 -- ERROR: Cannot combine types with different collation!
 
-CREATE TABLE other_names(name VARCHAR COLLATE NOCASE);
+CREATE TABLE other_names (name VARCHAR COLLATE NOCASE);
 INSERT INTO other_names VALUES ('HÄNNES');
 
 SELECT * FROM names, other_names WHERE names.name=other_names.name;
@@ -97,7 +97,7 @@ SELECT * FROM pragma_collations();
 These collations can then be used as the other collations would be used before. They can also be combined with the `NOCASE` collation. For example, to use the German collation rules you could use the following code snippet:
 
 ```sql
-CREATE TABLE strings(s VARCHAR COLLATE DE);
+CREATE TABLE strings (s VARCHAR COLLATE DE);
 INSERT INTO strings VALUES ('Gabel'), ('Göbel'), ('Goethe'), ('Goldmann'), ('Göthe'), ('Götz');
 SELECT * FROM strings ORDER BY s;
 -- "Gabel", "Göbel", "Goethe", "Goldmann", "Göthe", "Götz"

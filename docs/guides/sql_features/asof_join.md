@@ -17,7 +17,7 @@ CREATE TABLE prices AS (
     FROM range(0, 5) vals(v)
 );
 
-CREATE TABLE sales(item TEXT, sale_time TIMESTAMP, quantity INT);
+CREATE TABLE sales (item TEXT, sale_time TIMESTAMP, quantity INT);
 INSERT INTO sales VALUES('a', '2001-01-01 00:18:00', 10);
 INSERT INTO sales VALUES('b', '2001-01-01 00:18:30', 20);
 INSERT INTO sales VALUES('c', '2001-01-01 00:19:00', 30);

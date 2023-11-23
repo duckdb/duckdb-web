@@ -83,7 +83,7 @@ Pagliacci
 CREATE TYPE mood AS ENUM (SELECT mood FROM 'path/to/file.csv');
 
 -- Then you can create a table with the ENUM type and import using any data import statement
-CREATE TABLE person(name text, current_mood mood);
+CREATE TABLE person (name text, current_mood mood);
 COPY person FROM 'path/to/file.csv' (AUTO_DETECT true);
 
 ```
@@ -106,7 +106,7 @@ false
 
 CREATE TYPE new_mood AS ENUM ('happy', 'anxious');
 
-CREATE TABLE person_2(
+CREATE TABLE person_2 (
     name text,
     current_mood mood,
     future_mood new_mood

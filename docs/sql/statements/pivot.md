@@ -30,7 +30,7 @@ The `ON`, `USING`, and `GROUP BY` clauses are each optional, but they may not al
 
 All examples use the dataset produced by the queries below:
 ```sql
-CREATE TABLE Cities(Country VARCHAR, Name VARCHAR, Year INT, Population INT);
+CREATE TABLE Cities (Country VARCHAR, Name VARCHAR, Year INT, Population INT);
 INSERT INTO Cities VALUES ('NL', 'Amsterdam', 2000, 1005);
 INSERT INTO Cities VALUES ('NL', 'Amsterdam', 2010, 1065);
 INSERT INTO Cities VALUES ('NL', 'Amsterdam', 2020, 1158);

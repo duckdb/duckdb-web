@@ -76,7 +76,7 @@ SELECT * FROM t AS t1,
 ![](/images/examples/with-recursive-tree-example.png)
 
 ```sql
-CREATE TABLE tag(id INT, name VARCHAR, subclassof INT);
+CREATE TABLE tag (id INT, name VARCHAR, subclassof INT);
 INSERT INTO tag VALUES
  (1, 'U2',     5),
  (2, 'Blur',   5),
@@ -124,7 +124,7 @@ Take the following directed graph from the [LDBC Graphalytics benchmark](https:/
 ![](/images/examples/with-recursive-graph-example.png)
 
 ```sql
-CREATE TABLE edge(node1id INT, node2id INT);
+CREATE TABLE edge (node1id INT, node2id INT);
 INSERT INTO edge VALUES (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5),
   (3, 8), (3, 10), (5, 3), (5, 4), (5, 8), (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
 ```

@@ -16,7 +16,7 @@ If you must use `INSERT` statements to load data in a loop, avoid executing the 
 An example of using `INSERT INTO` to load data in a table is as follows:
 
 ```sql
-CREATE TABLE people(id INTEGER, name VARCHAR);
+CREATE TABLE people (id INTEGER, name VARCHAR);
 INSERT INTO people VALUES (1, 'Mark'), (2, 'Hannes');
 ```
 

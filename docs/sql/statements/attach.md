@@ -22,7 +22,7 @@ ATTACH IF NOT EXISTS 'file.db';
 -- attach the database "file.db" if explicit database alias "file_db" does not yet exist
 ATTACH IF NOT EXISTS 'file.db' AS file_db;
 -- create a table in the attached database with alias "file"
-CREATE TABLE file.new_table(i INTEGER);
+CREATE TABLE file.new_table (i INTEGER);
 -- detach the database with alias "file"
 DETACH file;
 -- show a list of all attached databases
@@ -55,7 +55,7 @@ ATTACH 'new_db.db';
 -- create the schema "my_schema" in the database "new_db"
 CREATE SCHEMA new_db.my_schema;
 -- create the table "my_table" in the schema "my_schema"
-CREATE TABLE new_db.my_schema.my_table(col INTEGER);
+CREATE TABLE new_db.my_schema.my_table (col INTEGER);
 -- refer to the column "col" inside the table "my_table"
 SELECT new_db.my_schema.my_table.col FROM new_db.my_schema.my_table;
 ```
@@ -68,7 +68,7 @@ When a table is created without any qualifications, the table is created in the 
 
 ```sql
 -- create the table "my_table" in the default database
-CREATE TABLE my_table(col INTEGER);
+CREATE TABLE my_table (col INTEGER);
 ```
 
 ### Changing the Default Database and Schema
@@ -90,16 +90,16 @@ When providing only a single qualification, the system can interpret this as *ei
 ATTACH 'new_db.db';
 CREATE SCHEMA my_schema;
 -- creates the table "new_db.main.tbl"
-CREATE TABLE new_db.tbl(i INTEGER);
+CREATE TABLE new_db.tbl (i INTEGER);
 -- creates the table "default_db.my_schema.tbl"
-CREATE TABLE my_schema.tbl(i INTEGER);
+CREATE TABLE my_schema.tbl (i INTEGER);
 ```
 
 If we create a conflict (i.e., we have both a schema and a catalog with the same name) the system requests that a fully qualified path is used instead:
 
 ```sql
 CREATE SCHEMA new_db;
-CREATE TABLE new_db.tbl(i INTEGER);
+CREATE TABLE new_db.tbl (i INTEGER);
 -- Error: Binder Error: Ambiguous reference to catalog or schema "new_db" - use a fully qualified path like "memory.new_db"
 ```
 

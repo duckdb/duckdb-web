@@ -14,7 +14,7 @@ duckdb_state state;
 duckdb_result result;
 
 // create a table
-state = duckdb_query(con, "CREATE TABLE integers(i INTEGER, j INTEGER);", NULL);
+state = duckdb_query(con, "CREATE TABLE integers (i INTEGER, j INTEGER);", NULL);
 if (state == DuckDBError) {
     // handle error
 }

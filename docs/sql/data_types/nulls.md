@@ -8,7 +8,7 @@ blurb: The NULL value represents a missing value.
 
 ```sql
 -- insert a null value into a table
-CREATE TABLE integers(i INTEGER);
+CREATE TABLE integers (i INTEGER);
 INSERT INTO integers VALUES (NULL);
 ```
 
@@ -67,7 +67,7 @@ SELECT ifnull(1, 'default_string');
 Aggregate functions that do not ignore `NULL` values include: `first`, `last`, `list`, and `array_agg`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause](../../sql/query_syntax/filter) can be used.
 
 ```sql
-CREATE TABLE integers(i INTEGER);
+CREATE TABLE integers (i INTEGER);
 INSERT INTO integers VALUES (1), (10), (NULL);
 
 SELECT min(i) FROM integers;

@@ -6,7 +6,7 @@ title: List Tables
 The `SHOW TABLES` command can be used to obtain a list of all tables within the selected schema.
 
 ```sql
-CREATE TABLE tbl(i INTEGER);
+CREATE TABLE tbl (i INTEGER);
 SHOW TABLES;
 ```
 
@@ -19,9 +19,9 @@ SHOW TABLES;
 `DESCRIBE`, `SHOW` or `SHOW ALL TABLES` can be used to obtain a list of all tables within **all** attached databases and schemas.
 
 ```sql
-CREATE TABLE tbl(i INTEGER);
+CREATE TABLE tbl (i INTEGER);
 CREATE SCHEMA s1;
-CREATE TABLE s1.tbl(v VARCHAR);
+CREATE TABLE s1.tbl (v VARCHAR);
 SHOW ALL TABLES;
 ```
 
@@ -35,7 +35,7 @@ SHOW ALL TABLES;
 To view the schema of an individual table, use the `DESCRIBE` command.
 
 ```sql
-CREATE TABLE tbl(i INTEGER PRIMARY KEY, j VARCHAR);
+CREATE TABLE tbl (i INTEGER PRIMARY KEY, j VARCHAR);
 DESCRIBE tbl;
 ```
 
