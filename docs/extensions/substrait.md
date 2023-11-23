@@ -29,7 +29,7 @@ In the SQL API, users can generate Substrait plans (into a BLOB or a JSON) and c
 
 To generate a Substrait BLOB the `get_substrait(sql)` function must be called with a valid SQL select query.
 ```sql
-CREATE TABLE crossfit (exercise text, difficulty_level int);
+CREATE TABLE crossfit (exercise TEXT, difficulty_level INT);
 INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , ('Push Jerk', 7), ('Bar Muscle Up', 10);
 ```
 ```sql
@@ -75,7 +75,7 @@ con.load_extension("substrait")
 
 To generate a Substrait BLOB the `get_substrait(sql)` function must be called, from a connection, with a valid SQL select query.
 ```python
-con.execute(query='CREATE TABLE crossfit (exercise text, difficulty_level int)')
+con.execute(query='CREATE TABLE crossfit (exercise TEXT, difficulty_level INT)')
 con.execute(query="INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , ('Push Jerk', 7), ('Bar Muscle Up', 10)")
 
 proto_bytes = con.get_substrait(query="SELECT count(exercise) AS exercise FROM crossfit WHERE difficulty_level <= 5").fetchone()[0]
@@ -111,7 +111,7 @@ dbExecute(con, "LOAD substrait")
 
 To generate a Substrait BLOB the `duckdb_get_substrait(con, sql)` function must be called, with a connection and a valid SQL select query.
 ```r
-dbExecute(con, "CREATE TABLE crossfit (exercise text, difficulty_level int)")
+dbExecute(con, "CREATE TABLE crossfit (exercise TEXT, difficulty_level INT)")
 dbExecute(con, "INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , ('Push Jerk', 7), ('Bar Muscle Up', 10)")
 
 proto_bytes <- duckdb::duckdb_get_substrait(con, "SELECT * FROM crossfit LIMIT 5")

@@ -62,7 +62,7 @@ After an enum has been created, it can be used anywhere a standard built-in type
 ```sql
 -- Creates a table person, with attributes name (string type) and current_mood (mood type)
 CREATE TABLE person (
-    name text,
+    name TEXT,
     current_mood mood
 );
 
@@ -72,7 +72,7 @@ INSERT INTO person VALUES ('Pedro', 'happy'), ('Mark', NULL), ('Pagliacci', 'sad
 -- This will fail since the mood type does not have a 'quackity-quack' value.
 INSERT INTO person VALUES ('Hannes', 'quackity-quack');
 
--- The string 'sad' is cast to the type Mood, returning a numerical reference value.
+-- The string 'sad' is cast to the type mood, returning a numerical reference value.
 -- This makes the comparison a numerical comparison instead of a string comparison.
 SELECT * FROM person WHERE current_mood = 'sad';
 ----
@@ -83,9 +83,8 @@ Pagliacci
 CREATE TYPE mood AS ENUM (SELECT mood FROM 'path/to/file.csv');
 
 -- Then you can create a table with the ENUM type and import using any data import statement
-CREATE TABLE person (name text, current_mood mood);
+CREATE TABLE person (name TEXT, current_mood mood);
 COPY person FROM 'path/to/file.csv' (AUTO_DETECT true);
-
 ```
 
 ## Enum vs. Strings

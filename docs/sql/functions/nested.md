@@ -322,7 +322,7 @@ SELECT list_transform(['duck', 'a', 'b'], duck -> CONCAT(duck, 'DB'));
 [duckDB, aDB, bDB]
 
 -- combining lambda functions with other functions
-SELECT list_transform([5, NULL, 6], x -> COALESCE(x, 0) + 1);
+SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
 ----
 [6, 1, 7]
 ```

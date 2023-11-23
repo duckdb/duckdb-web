@@ -392,6 +392,11 @@ table pre {
     color: #7a82da;
 }
 
+// operators
+.o, .ow {
+    color: #7a82da
+}
+
 // strings
 .ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl {
     color: #c5a332;
@@ -410,10 +415,6 @@ th .k {
 
 // ??
 .n, .nv, .vg {
-}
-
-// ??
-.o, .ow {
 }
 
 // ??
