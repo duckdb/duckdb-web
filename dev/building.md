@@ -84,7 +84,7 @@ This build is a shorthand for `release` with `BUILD_BENCHMARK=1` set.
 
 #### `tidy-check`
 
-This creates a build and then runs [clang tidy](https://clang.llvm.org/extra/clang-tidy/) to check for issues or style violations through static analysis.  
+This creates a build and then runs [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/) to check for issues or style violations through static analysis.  
 The CI will also run this check, causing it to fail if this check fails.
 
 #### `format-fix` | `format-changes` | `format-main`
@@ -235,7 +235,7 @@ Building the R package on Linux running on an ARM64 architecture (AArch64) may r
 To work around this, create or edit the `~/.R/Makevars` file:
 
 ```text
-ALL_CXXFLAGS =  $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
+ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 ```
 
 ### Building the httpfs Extension and Python Package on macOS
@@ -277,6 +277,6 @@ CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake
 **Solution:** Install the `libssl-dev` library.
 
 ```bash
-sudo apt install -y libssl-dev
+sudo apt-get install -y libssl-dev
 GEN=ninja BUILD_HTTPFS=1 make
 ```
