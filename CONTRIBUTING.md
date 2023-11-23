@@ -70,10 +70,10 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Use [American English (en-US) spelling](https://en.wikipedia.org/wiki/Oxford_spelling#Language_tag_comparison).
 
-## Examples
+## Example Code Snippets
 
 * Examples that illustrate the use of features are very welcome. Where applicable, consider starting the page with a few simple examples that demonstrate the most common uses of the feature described.
-* All examples should be self-contained and reproducible if possible, meaning that any example tables must be created as a part of the documentation.
+* If possible, examples should be self-contained and reproducible. For example, the tables used in the example must be created as a part of the example code snippet.
 
 ## Cross-References
 
