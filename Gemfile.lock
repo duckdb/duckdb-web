@@ -74,6 +74,8 @@ GEM
       jekyll (>= 3.7, < 5.0)
     jekyll-gist (1.5.0)
       octokit (~> 4.2)
+    jekyll-git-hash (0.1.0)
+      jekyll (>= 3.9.2)
     jekyll-github-metadata (2.16.0)
       jekyll (>= 3.4, < 5.0)
       octokit (>= 4, < 7, != 4.4.0)
@@ -201,6 +203,7 @@ DEPENDENCIES
   jekyll-default-layout (= 0.1.5)
   jekyll-feed (= 0.17.0)
   jekyll-gist (= 1.5.0)
+  jekyll-git-hash
   jekyll-github-metadata (= 2.16.0)
   jekyll-include-cache (= 0.2.1)
   jekyll-optional-front-matter (= 0.3.2)
