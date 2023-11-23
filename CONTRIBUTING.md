@@ -4,6 +4,10 @@
 
 This project and everyone participating in it is governed by a [Code of Conduct](code_of_conduct.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [quack@duckdb.org](mailto:quack@duckdb.org).
 
+## Contributing to the DuckDB Documentation
+
+Contributions to the [DuckDB Documentation](https://duckdb.org/) are welcome. To submit a contribution, please open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) in the [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web) repository.
+
 ## Eligibility
 
 Before submitting a contribution, please check whether your contribution is eligible.
