@@ -240,7 +240,7 @@ ALL_CXXFLAGS =  $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 
 ### Building the httpfs Extension and Python Package on macOS
 
-**Problem:** The build fails on macOS when both the `httpfs` extension and the Python package are included:
+**Problem:** The build fails on macOS when both the [`httpfs` extension](/docs/extensions/httpfs) and the Python package are included:
 
 ```bash
 GEN=ninja BUILD_PYTHON=1 BUILD_HTTPFS=1 make
@@ -254,18 +254,18 @@ make: *** [release] Error 1
 ```
 
 **Solution:**
-In general, we recommended using the nightly builds, available under GitHub main (Bleeding Edge) on the [installation page](/docs/installation/).
+In general, we recommended using the nightly builds, available under GitHub main (Bleeding Edge) on the [installation page](/docs/installation).
 If you would like to build DuckDB from source, avoid using the `BUILD_PYTHON=1` flag unless you are actively developing the Python library.
 Instead, first build the `httpfs` extension, then build and install the Python package separately using the `setup.py` script:
 
 ```bash
 GEN=ninja BUILD_HTTPFS=1 make
-python tools/pythonpkg/setup.py install --user
+python3 tools/pythonpkg/setup.py install --user
 ```
 
 ### Building the httpfs Extension on Linux
 
-**Problem:** When building the `httpfs` extension on Linux, the build may fail with the following error.
+**Problem:** When building the [`httpfs` extension](/docs/extensions/httpfs) on Linux, the build may fail with the following error.
 
 ```text
 CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
