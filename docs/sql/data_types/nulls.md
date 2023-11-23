@@ -47,7 +47,7 @@ SELECT coalesce(NULL, NULL);
 -- NULL
 ```
 
-The `ifnull` function is a two-argument version of `COALESCE`.
+The `ifnull` function is a two-argument version of `coalesce`.
 
 ```sql
 SELECT ifnull(NULL, 'default_string');
