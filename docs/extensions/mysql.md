@@ -187,6 +187,7 @@ SELECT * FROM mysql_db.tmp;
 ├───────┤
 │    42 │
 └───────┘
+```
 ```sql
 ROLLBACK;
 SELECT * FROM mysql_db.tmp;
