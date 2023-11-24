@@ -54,8 +54,8 @@ SELECT cosineofpi FROM CosPi;
 In case of a conflict, when the same identifier is spelt with different cases, one will be selected randomly. For example:
 
 ```sql
-CREATE TABLE t1(idfield INT, x INT);
-CREATE TABLE t2(IdField INT, y INT);
+CREATE TABLE t1 (idfield INT, x INT);
+CREATE TABLE t2 (IdField INT, y INT);
 SELECT * FROM t1 NATURAL JOIN t2;
 ```
 

@@ -12,7 +12,7 @@ statement ok con1
 BEGIN TRANSACTION
 
 statement ok con1
-CREATE TABLE integers(i INTEGER);
+CREATE TABLE integers (i INTEGER);
 
 statement error con2
 SELECT * FROM integers;
