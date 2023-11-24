@@ -95,11 +95,11 @@ You can also find a reference table of [available time zones](../../sql/data_typ
 
 ## Calendars
 
-The ICU extension also supports non-Gregorian calendars using the `SET Calendar` command.
+The [ICU extension](../../extensions/icu) also supports non-Gregorian calendars using the `SET Calendar` command.
 Note that the `INSTALL` and `LOAD` steps are only required if the DuckDB client does not bundle the ICU extension.
 
 ```sql
-INSTALL ICU;
+INSTALL icu;
 LOAD icu;
 SET Calendar='japanese';
 ```

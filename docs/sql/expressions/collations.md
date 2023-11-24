@@ -15,9 +15,9 @@ By default, the `BINARY` collation is used. That means that strings are ordered 
 In the stand-alone installation of DuckDB three collations are included: `NOCASE`, `NOACCENT` and `NFC`. The `NOCASE` collation compares characters as equal regardless of their casing. The `NOACCENT` collation compares characters as equal regardless of their accents. The `NFC` collation performs NFC-normalized comparisons, see [Unicode normalization](https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization) for more information.
 
 ```sql
-SELECT 'hello'='hElLO';
+SELECT 'hello' = 'hElLO';
 -- false
-SELECT 'hello' COLLATE NOCASE='hElLO';
+SELECT 'hello' COLLATE NOCASE = 'hElLO';
 -- true
 
 SELECT 'hello' = 'hëllo';
@@ -29,11 +29,11 @@ SELECT 'hello' COLLATE NOACCENT = 'hëllo';
 Collations can be combined by chaining them using the dot operator. Note, however, that not all collations can be combined together. In general, the `NOCASE` collation can be combined with any other collator, but most other collations cannot be combined.
 
 ```sql
-SELECT 'hello' COLLATE NOCASE='hElLÖ';
+SELECT 'hello' COLLATE NOCASE = 'hElLÖ';
 -- false
-SELECT 'hello' COLLATE NOACCENT='hElLÖ';
+SELECT 'hello' COLLATE NOACCENT = 'hElLÖ';
 -- false
-SELECT 'hello' COLLATE NOCASE.NOACCENT='hElLÖ';
+SELECT 'hello' COLLATE NOCASE.NOACCENT = 'hElLÖ';
 -- true
 ```
 
@@ -44,7 +44,7 @@ The collations we have seen so far have all been specified *per expression*. It 
 ```sql
 PRAGMA default_collation=NOCASE;
 
-SELECT 'hello'='HeLlo';
+SELECT 'hello' = 'HeLlo';
 -- true
 ```
 
@@ -53,14 +53,14 @@ Collations can also be specified per-column when creating a table. When that col
 ```sql
 CREATE TABLE names (name VARCHAR COLLATE NOACCENT);
 INSERT INTO names VALUES ('hännes');
-SELECT name FROM names WHERE name='hannes';
+SELECT name FROM names WHERE name = 'hannes';
 -- hännes
 ```
 
 Be careful here, however, as different collations cannot be combined. This can be problematic when you want to compare columns that have a different collation specified.
 
 ```sql
-SELECT name FROM names WHERE name='hannes' COLLATE NOCASE;
+SELECT name FROM names WHERE name = 'hannes' COLLATE NOCASE;
 -- ERROR: Cannot combine types with different collation!
 
 CREATE TABLE other_names (name VARCHAR COLLATE NOCASE);

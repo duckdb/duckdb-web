@@ -75,8 +75,8 @@ con.load_extension("substrait")
 
 To generate a Substrait BLOB the `get_substrait(sql)` function must be called, from a connection, with a valid SQL select query.
 ```python
-con.execute(query='CREATE TABLE crossfit (exercise TEXT, difficulty_level INT)')
-con.execute(query="INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , ('Push Jerk', 7), ('Bar Muscle Up', 10)")
+con.execute(query = "CREATE TABLE crossfit (exercise TEXT, difficulty_level INT)")
+con.execute(query = "INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , ('Push Jerk', 7), ('Bar Muscle Up', 10)")
 
 proto_bytes = con.get_substrait(query="SELECT count(exercise) AS exercise FROM crossfit WHERE difficulty_level <= 5").fetchone()[0]
 ```

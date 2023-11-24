@@ -41,7 +41,7 @@ An example of `.odbc.ini` with DuckDB would be:
 ```ini
 [DuckDB]
 Driver = DuckDB Driver
-Database=:memory:
+Database = :memory:
 ```
 
 **[DuckDB]**: between the brackets is a DSN for the DuckDB.

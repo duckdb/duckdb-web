@@ -72,7 +72,7 @@ The table below shows the available approximate aggregate functions.
 |:---|:---|:---|
 | `approx_count_distinct(x)` | Gives the approximate count of distinct elements using HyperLogLog. | `approx_count_distinct(A)` |
 | `approx_quantile(x, pos)` | Gives the approximate quantile using T-Digest. | `approx_quantile(A, 0.5)` |
-| `reservoir_quantile(x, quantile, sample_size=8192)` | Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A, 0.5, 1024)` |
+| `reservoir_quantile(x, quantile, sample_size = 8192)` | Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A, 0.5, 1024)` |
 
 ## Statistical Aggregates
 

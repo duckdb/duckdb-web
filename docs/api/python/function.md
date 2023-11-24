@@ -39,8 +39,8 @@ The `create_function` method requires the following parameters:
 2. **function**: The Python function you wish to register as a UDF.
 3. **return_type**: Scalar functions return one element per row. This parameter specifies the return type of the function.
 3. **parameters**: Scalar functions can operate on one or more columns. This parameter takes a list of column types used as input.
-5. **type** (Optional): DuckDB supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type='arrow'` to use PyArrow Tables.
-6. **null_handling** (Optional): By default, null values are automatically handled as Null-In Null-Out. Users can specify a desired behavior for null values by setting `null_handling='special'`.
+5. **type** (Optional): DuckDB supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type = 'arrow'` to use PyArrow Tables.
+6. **null_handling** (Optional): By default, null values are automatically handled as Null-In Null-Out. Users can specify a desired behavior for null values by setting `null_handling = 'special'`.
 7. **exception_handling** (Optional): By default, when an exception is thrown from the Python function, it will be re-thrown in Python. Users can disable this behavior, and instead return `null`, by set this parameter to `'return_null'`
 8. **side_effects** (Optional): By default, functions are expected to produce the same result for the same input. If the result of a function is impacted by any type of randomness, `side_effects` must be set to `True`.
 
@@ -142,18 +142,18 @@ If we create this function without marking it as having side effects, the result
 
 ```python
 con = duckdb.connect()
-con.create_function("my_counter", count, side_effects=False)
+con.create_function("my_counter", count, side_effects = False)
 res = con.sql("SELECT my_counter() FROM range(10)").fetchall()
 print(res)
 # [(0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,)]
 ```
 
-Which is obviously not the desired result, when we add `side_effects=True`, the result is as we would expect:
+Which is obviously not the desired result, when we add `side_effects = True`, the result is as we would expect:
 
 ```python
 con.remove_function("my_counter")
 count.counter = 0
-con.create_function("my_counter", count, side_effects=True)
+con.create_function("my_counter", count, side_effects = True)
 res = con.sql("SELECT my_counter() FROM range(10)").fetchall()
 print(res)
 # [(0,), (1,), (2,), (3,), (4,), (5,), (6,), (7,), (8,), (9,)]

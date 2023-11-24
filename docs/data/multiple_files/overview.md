@@ -19,7 +19,7 @@ SELECT * FROM 'dir/**/*.csv';
 -- read the CSV files 'flights1.csv' and 'flights2.csv'
 SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv']);
 -- read the CSV files 'flights1.csv' and 'flights2.csv', unifying schemas by name and outputting a `filename` column
-SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name=true, filename=true);
+SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = true);
 ```
 
 ## Parquet
@@ -88,7 +88,7 @@ DuckDB can read multiple CSV files at the same time using either the glob syntax
 The `filename` argument can be used to add an extra `filename` column to the result that indicates which row came from which file. For example:
 
 ```sql
-SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name=true, filename=true);
+SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = true);
 ```
 
 <div class="narrow_table"></div>

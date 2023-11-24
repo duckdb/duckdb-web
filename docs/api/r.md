@@ -26,7 +26,7 @@ con <- dbConnect(duckdb(), dbdir = "my-db.duckdb", read_only = FALSE)
 # to use a database file (shared between processes)
 con <- dbConnect(duckdb(), dbdir = "my-db.duckdb", read_only = TRUE)
 ```
-Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `dbDisconnect(con, shutdown=TRUE)`
+Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `dbDisconnect(con, shutdown = TRUE)`
 
 ### Querying
 
@@ -126,7 +126,7 @@ tbl(con, "mtcars.csv") |>
 dbExecute(con, "COPY flights TO 'dataset' (FORMAT PARQUET, PARTITION_BY (year, month))")
 
 # Summarize the dataset in DuckDB to avoid reading 12 Parquet files into R's memory
-tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning=1)") |>
+tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning = 1)") |>
   filter(month == "3") |>
   summarise(delay = mean(dep_time, na.rm = TRUE)) |>
   collect()
