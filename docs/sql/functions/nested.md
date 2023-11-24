@@ -67,7 +67,7 @@ Python-style list comprehension can be used to compute expressions over elements
 ```sql
 SELECT [lower(x) for x in strings] FROM (VALUES (['Hello', '', 'World'])) t(strings);
 -- ['hello', '', 'world']
-SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'World'])) t(strings);
+SELECT [upper(x) for x in strings if len(x) > 0] FROM (VALUES (['Hello', '', 'World'])) t(strings);
 -- [HELLO, WORLD]
 ```
 

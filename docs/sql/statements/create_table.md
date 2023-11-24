@@ -16,13 +16,13 @@ CREATE TABLE t1(id INTEGER PRIMARY KEY, j VARCHAR);
 -- create a table with a composite primary key
 CREATE TABLE t1(id INTEGER, j VARCHAR, PRIMARY KEY(id, j));
 -- create a table with various different types and constraints
-CREATE TABLE t1(i INTEGER NOT NULL, decimalnr DOUBLE CHECK(decimalnr<10), date DATE UNIQUE, time TIMESTAMP);
+CREATE TABLE t1(i INTEGER NOT NULL, decimalnr DOUBLE CHECK(decimalnr < 10), date DATE UNIQUE, time TIMESTAMP);
 -- create a table from the result of a query
 CREATE TABLE t1 AS SELECT 42 AS i, 84 AS j;
 -- create a table from a CSV file using AUTO-DETECT (i.e., automatically detecting column names and types)
-CREATE TABLE t1 AS SELECT * FROM read_csv_auto ('path/file.csv');
+CREATE TABLE t1 AS SELECT * FROM read_csv_auto('path/file.csv');
 -- we can use the FROM-first syntax to omit 'SELECT *'
-CREATE TABLE t1 AS FROM read_csv_auto ('path/file.csv');
+CREATE TABLE t1 AS FROM read_csv_auto('path/file.csv');
 ```
 
 ## Temporary Tables
@@ -33,7 +33,7 @@ Temporary tables reside in memory rather than on disk (even when connecting to a
 
 ```sql
 -- create a temporary table from a CSV file using AUTO-DETECT (i.e., automatically detecting column names and types)
-CREATE TEMP TABLE t1 AS SELECT * FROM read_csv_auto ('path/file.csv');
+CREATE TEMP TABLE t1 AS SELECT * FROM read_csv_auto('path/file.csv');
 
 -- allow temporary tables to off-load excess memory to disk
 SET temp_directory='/path/to/directory/';
