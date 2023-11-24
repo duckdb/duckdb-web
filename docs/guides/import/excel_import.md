@@ -24,7 +24,7 @@ SELECT * FROM st_read('test_excel.xlsx');
 The `layer` parameter allows specifying the name of the Excel worksheet.
 
 ```sql
-SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1');
+SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1');
 ```
 
 ### Creating a New Table
@@ -33,7 +33,7 @@ To create a new table using the result from a query, use `CREATE TABLE ... AS` f
 
 ```sql
 CREATE TABLE new_tbl AS 
-    SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1');
+    SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1');
 ```
 
 ### Loading to an Existing Table
@@ -42,7 +42,7 @@ To load data into an existing table from a query, use `INSERT INTO` from a `SELE
 
 ```sql
 INSERT INTO tbl
-    SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1');
+    SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1');
 ```
 
 ### Options
@@ -61,7 +61,7 @@ The option `HEADERS` has three possible values:
 For example, to treat the first row as a header, run:
 
 ```sql
-SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1', open_options=['HEADERS=FORCE']);
+SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1', open_options=['HEADERS=FORCE']);
 ```
 
 #### Detecting Types
@@ -74,13 +74,13 @@ The option `FIELD_TYPE` defines how field types should be treated:
 For example, to treat the first row as a header and use auto-detection for types, run:
 
 ```sql
-SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1', open_options=['HEADERS=FORCE', 'FIELD_TYPES=AUTO']);
+SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1', open_options=['HEADERS=FORCE', 'FIELD_TYPES=AUTO']);
 ```
 
 To treat the fields as strings:
 
 ```sql
-SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1', open_options=['FIELD_TYPES=STRING']);
+SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1', open_options=['FIELD_TYPES=STRING']);
 ```
 
 ## See Also

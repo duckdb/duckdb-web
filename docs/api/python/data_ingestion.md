@@ -14,11 +14,11 @@ duckdb.read_csv("example.csv")
 # read multiple CSV files from a folder
 duckdb.read_csv("folder/*.csv")
 # specify options on how the CSV is formatted internally
-duckdb.read_csv("example.csv", header=False, sep=",")
+duckdb.read_csv("example.csv", header = False, sep = ",")
 # override types of the first two columns
-duckdb.read_csv("example.csv", dtype=["int", "varchar"])
+duckdb.read_csv("example.csv", dtype = ["int", "varchar"])
 # use the (experimental) parallel CSV reader
-duckdb.read_csv("example.csv", parallel=True)
+duckdb.read_csv("example.csv", parallel = True)
 # directly read a CSV file from within SQL
 duckdb.sql("SELECT * FROM 'example.csv'")
 # call read_csv from within SQL

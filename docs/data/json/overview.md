@@ -13,11 +13,11 @@ SELECT * FROM 'todos.json';
 -- read_json with custom options
 SELECT *
 FROM read_json('todos.json',
-               format='array',
-               columns={userId: 'UBIGINT',
-                        id: 'UBIGINT',
-                        title: 'VARCHAR',
-                        completed: 'BOOLEAN'});
+               format = 'array',
+               columns = {userId: 'UBIGINT',
+                         id: 'UBIGINT',
+                         title: 'VARCHAR',
+                         completed: 'BOOLEAN'});
 -- read a JSON file from stdin, auto-infer options
 cat data/json/todos.json | duckdb -c "SELECT * FROM read_json_auto('/dev/stdin')"
 
@@ -74,7 +74,7 @@ SELECT * FROM filename.json;
 
 ### Format: newline_delimited
 
-With `format='newline_delimited'` newline-delimited JSON can be parsed.
+With `format = 'newline_delimited'` newline-delimited JSON can be parsed.
 Each line is a JSON.
 
 ```json
@@ -83,7 +83,7 @@ Each line is a JSON.
 {"key1":"value3", "key2": "value3"}
 ```
 ```sql
-SELECT * FROM read_json_auto('records.json', format='newline_delimited');
+SELECT * FROM read_json_auto('records.json', format = 'newline_delimited');
 ```
 
 <div class="narrow_table"></div>
@@ -105,7 +105,7 @@ If the JSON file contains a JSON array of objects (pretty-printed or not), `arra
 ]
 ```
 ```sql
-SELECT * FROM read_json_auto('array.json', format='array');
+SELECT * FROM read_json_auto('array.json', format = 'array');
 ```
 
 <div class="narrow_table"></div>
@@ -134,7 +134,7 @@ If the JSON file contains JSON that is not newline-delimited or an array, `unstr
 }
 ```
 ```sql
-SELECT * FROM read_json_auto('unstructured.json', format='unstructured');
+SELECT * FROM read_json_auto('unstructured.json', format = 'unstructured');
 ```
 
 <div class="narrow_table"></div>
@@ -148,7 +148,7 @@ SELECT * FROM read_json_auto('unstructured.json', format='unstructured');
 ## Examples of Records Settings
 
 The JSON extension can attempt to determine whether a JSON file contains records when setting `records=auto`.
-When `records=true`, the JSON extension expects JSON objects, and will unpack the fields of JSON objects into individual columns.
+When `records = true`, the JSON extension expects JSON objects, and will unpack the fields of JSON objects into individual columns.
 
 Continuing with the same example file from before:
 ```json
@@ -157,7 +157,7 @@ Continuing with the same example file from before:
 {"key1":"value3", "key2": "value3"}
 ```
 ```sql
-SELECT * FROM read_json_auto('records.json', records=true);
+SELECT * FROM read_json_auto('records.json', records = true);
 ```
 
 <div class="narrow_table"></div>
@@ -168,9 +168,9 @@ SELECT * FROM read_json_auto('records.json', records=true);
 | `value2` | `value2` |
 | `value3` | `value3` |
 
-When `records=false`, the JSON extension will not unpack the top-level objects, and create `STRUCT`s instead:
+When `records = false`, the JSON extension will not unpack the top-level objects, and create `STRUCT`s instead:
 ```sql
-SELECT * FROM read_json_auto('records.json', records=false);
+SELECT * FROM read_json_auto('records.json', records = false);
 ```
 
 <div class="narrow_table"></div>
@@ -188,7 +188,7 @@ This is especially useful if we have non-object JSON, for example:
 [7, 8, 9]
 ```
 ```sql
-SELECT * FROM read_json_auto('arrays.json', records=false);
+SELECT * FROM read_json_auto('arrays.json', records = false);
 ```
 
 <div class="narrow_table"></div>

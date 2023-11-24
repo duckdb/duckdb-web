@@ -120,7 +120,7 @@ When set, this option overrides the type conversion rules described above, and i
 If you want to run the `sqlite_scan` procedure more than once in the same DuckDB session, you'll need to pass in the `overwrite` flag, as shown below:
 
 ```sql
-CALL sqlite_attach('sakila.db', overwrite=true);
+CALL sqlite_attach('sakila.db', overwrite = true);
 ```
 
 ## Loading the Extension

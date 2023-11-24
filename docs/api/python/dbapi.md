@@ -30,13 +30,13 @@ con.sql("SELECT * FROM tbl")
 ```python
 import duckdb
 # to start an in-memory database
-con = duckdb.connect(database=":memory:")
+con = duckdb.connect(database = ":memory:")
 # to use a database file (not shared between processes)
-con = duckdb.connect(database="my-db.duckdb", read_only=False)
+con = duckdb.connect(database = "my-db.duckdb", read_only = False)
 # to use a database file (shared between processes)
-con = duckdb.connect(database="my-db.duckdb", read_only=True)
+con = duckdb.connect(database = "my-db.duckdb", read_only = True)
 # to explicitly get the default connection
-con = duckdb.connect(database=":default:")
+con = duckdb.connect(database = ":default:")
 ```
 If you want to create a second connection to an existing database, you can use the `cursor()` method. This might be useful for example to allow parallel threads running queries independently. A single connection is thread-safe but is locked for the duration of the queries, effectively serializing database access in this case.
 

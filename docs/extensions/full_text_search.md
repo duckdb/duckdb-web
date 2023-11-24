@@ -22,8 +22,8 @@ The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to 
 ### PRAGMA create_fts_index
 
 ```python
-create_fts_index(input_table, input_id, *input_values, stemmer='porter', stopwords='english',
-                 ignore='(\\.|[^a-z])+', strip_accents=1, lower=1, overwrite=0)
+create_fts_index(input_table, input_id, *input_values, stemmer = 'porter', stopwords = 'english',
+                 ignore = '(\\.|[^a-z])+', strip_accents = 1, lower = 1, overwrite = 0)
 ```
 `PRAGMA` that creates a FTS index for the specified table.
 

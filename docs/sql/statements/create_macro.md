@@ -42,7 +42,7 @@ CREATE OR REPLACE TEMP MACRO dynamic_table(col1_value, col2_value) AS TABLE
     UNION ALL 
     SELECT 'Hello' AS col1_value, 456 AS col2_value;
 -- pass an argument as a list: SELECT * FROM get_users([1, 5])
-CREATE MACRO get_users(i) AS TABLE SELECT * FROM users WHERE uid IN (SELECT unnest(i));
+CREATE MACRO get_users(i) AS TABLE SELECT * FROM users WHERE uid IN (SELECT UNNEST(i));
 ```
 
 ## Syntax

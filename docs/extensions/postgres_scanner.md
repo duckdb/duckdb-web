@@ -13,7 +13,7 @@ To make a PostgreSQL database accessible to DuckDB, use the `postgres_attach` co
 -- load all data from "public" schema of the postgres instance running on localhost into the schema "main"  
 CALL postgres_attach('');
 -- attach the database with the given schema, loading tables from the source schema "public" into the target schema "abc"
-CALL postgres_attach('dbname=postgres user=postgres host=127.0.0.1', source_schema='public', sink_schema='abc');
+CALL postgres_attach('dbname=postgres user=postgres host=127.0.0.1', source_schema = 'public', sink_schema = 'abc');
 ```
 
 `postgres_attach` takes a single required string parameter, which is the [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING). For example you can pass `'dbname=postgresscanner'` to select a different database name. In the simplest case, the parameter is just `''`. There are three additional named parameters:

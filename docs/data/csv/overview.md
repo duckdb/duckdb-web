@@ -11,7 +11,7 @@ redirect_from:
 -- read a CSV file from disk, auto-infer options
 SELECT * FROM 'flights.csv';
 -- read_csv with custom options
-SELECT * FROM read_csv('flights.csv', delim='|', header=true, columns={'FlightDate': 'DATE', 'UniqueCarrier': 'VARCHAR', 'OriginCityName': 'VARCHAR', 'DestCityName': 'VARCHAR'});
+SELECT * FROM read_csv('flights.csv', delim = '|', header = true, columns = {'FlightDate': 'DATE', 'UniqueCarrier': 'VARCHAR', 'OriginCityName': 'VARCHAR', 'DestCityName': 'VARCHAR'});
 -- read a CSV from stdin, auto-infer options
 cat data/csv/issue2471.csv | duckdb -c "SELECT * FROM read_csv_auto('/dev/stdin')"
 
@@ -105,20 +105,20 @@ DESCRIBE ontime;
 |DestCityName  |VARCHAR|YES |NULL|NULL   |NULL |
 
 ```sql
-SELECT * FROM read_csv_auto('flights.csv', SAMPLE_SIZE=20000);
+SELECT * FROM read_csv_auto('flights.csv', sample_size = 20000);
 ```
 
-If we set `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, or `HEADER` explicitly, we can bypass the automatic detection of this particular parameter:
+If we set `delim`/`sep`, `quote`, `escape`, or `header` explicitly, we can bypass the automatic detection of this particular parameter:
 
 ```sql
-SELECT * FROM read_csv_auto('flights.csv', HEADER=true);
+SELECT * FROM read_csv_auto('flights.csv', header = true);
 ```
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
 
 ## read_csv Function
 
-The `read_csv` function accepts the same parameters that `read_csv_auto` does but does not assume `AUTO_DETECT=true`.
+The `read_csv` function accepts the same parameters that `read_csv_auto` does but does not assume `auto_detect = true`.
 
 ## Writing Using the COPY Statement
 

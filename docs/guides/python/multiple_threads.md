@@ -76,14 +76,14 @@ threads = []
 # Create multiple writer and reader threads (in the same process) 
 # Pass in the same connection as an argument
 for i in range(write_thread_count):
-    threads.append(Thread(target=write_from_thread,
-                            args=(duckdb_con,),
-                            name='write_thread_'+str(i)))
+    threads.append(Thread(target = write_from_thread,
+                            args = (duckdb_con,),
+                            name = 'write_thread_'+str(i)))
 
 for j in range(read_thread_count):
-    threads.append(Thread(target=read_from_thread,
-                            args=(duckdb_con,),
-                            name='read_thread_'+str(j)))
+    threads.append(Thread(target = read_from_thread,
+                            args = (duckdb_con,),
+                            name = 'read_thread_'+str(j)))
 
 # Shuffle the threads to simulate a mix of readers and writers
 random.seed(6) # Set the seed to ensure consistent results when testing

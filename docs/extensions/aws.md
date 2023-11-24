@@ -50,7 +50,7 @@ CALL load_aws_credentials('minio-testing-2');
 There are several parameters to tweak the behavior of the call:
 
 ```sql
-CALL load_aws_credentials('minio-testing-2', set_region=false, redact_secret=false);
+CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret = false);
 ```
 
 ```text

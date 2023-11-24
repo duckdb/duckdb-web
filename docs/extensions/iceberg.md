@@ -21,18 +21,18 @@ To test the examples, download the [`iceberg_data.zip`](/data/iceberg_data.zip) 
 ### Querying Individual Tables
 
 ```sql
-SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
+SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 ```text
 51793
 ```
 
-> The `ALLOW_MOVED_PATHS` option ensures that some path resolution is performed, which allows scanning Iceberg tables that are moved.
+> The `allow_moved_paths` option ensures that some path resolution is performed, which allows scanning Iceberg tables that are moved.
 
 ### Access Iceberg Metadata
 
 ```sql
-SELECT * FROM iceberg_metadata('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
+SELECT * FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 
 ```text
