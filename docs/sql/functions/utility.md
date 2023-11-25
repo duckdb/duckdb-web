@@ -30,7 +30,7 @@ The functions below are difficult to categorize into specific function types and
 | `txid_current()`| Returns the current transaction's ID (a `BIGINT`). It will assign a new one if the current transaction does not have one already.| `txid_current()` | various |
 | `typeof(`*`expression`*`)`| Returns the name of the data type of the result of the expression. | `typeof('abc')`| `'VARCHAR'` |
 | `uuid()`| Return a random uuid similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687.| `uuid()` | various |
-| `version()` | Return the currently active version of DuckDB in this format: `v0.3.2` | `version()`| various |
+| `version()` | Return the currently active version of DuckDB in this format | `version()`| various |
 
 ## Utility Table Functions
 
