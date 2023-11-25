@@ -87,6 +87,41 @@ UPDATE original as true_original
     );
 ```
 
+## Update Using Joins
+
+To select the rows to update, `UPDATE` statements can use the `FROM` clause and express joins via the `WHERE` clause. For example:
+
+```sql
+CREATE TABLE city (name VARCHAR, revenue BIGINT, country_code VARCHAR);
+CREATE TABLE country (code VARCHAR, name VARCHAR);
+INSERT INTO city VALUES ('Paris', 700, 'FR'), ('Lyon', 200, 'FR'), ('Brussels', 400, 'BE');
+INSERT INTO country VALUES ('FR', 'France'), ('BE', 'Belgium');
+```
+
+To increase the revenue of all cities in France, join the `city` and the `country` tables, and filter on the latter:
+
+```sql
+UPDATE city
+SET revenue = revenue + 100
+FROM country
+WHERE city.country_code = country.code
+  AND country.name = 'France';
+```
+
+```sql
+SELECT * FROM city;
+```
+```text
+┌──────────┬─────────┬──────────────┐
+│   name   │ revenue │ country_code │
+│ varchar  │  int64  │   varchar    │
+├──────────┼─────────┼──────────────┤
+│ Paris    │     800 │ FR           │
+│ Lyon     │     300 │ FR           │
+│ Brussels │     400 │ BE           │
+└──────────┴─────────┴──────────────┘
+```
+
 ## Upsert (Insert or Update)
 
 See the [Insert documentation](insert#on-conflict-clause) for details.
