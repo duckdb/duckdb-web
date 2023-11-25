@@ -28,6 +28,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | Function | Description | Example | Result |
 |:--|:--|:---|:-|
 | `current_date` | Current date (at start of current transaction) | `current_date` | `2022-10-08` |
+| `date_add(`*`date`*`, `*`interval`*`)` | Add the interval to the date | `date_add(DATE '1992-09-15', INTERVAL 2 MONTH)` | `1992-11-15` |
 | `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of [partition](../../sql/functions/datepart) boundaries between the dates | `date_diff('month', DATE '1992-09-15', DATE '1992-11-14')` | `2` |
 | `datediff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the dates | `datediff('month', DATE '1992-09-15', DATE '1992-11-14')` | `2` |
 | `date_part(`*`part`*`, `*`date`*`)` | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`) | `date_part('year', DATE '1992-09-20')` | `1992` |
