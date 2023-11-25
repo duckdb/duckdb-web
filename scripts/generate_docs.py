@@ -160,7 +160,7 @@ def process_function_part(function_part, function_name):
         return f'<a href="#{function_name}"><span class="nf">{function_part}</span></a>'
     if function_part in keywords:
         return f'<span class="kt">{function_part}</span>'
-    return f'<span class="k">{function_part}</span>'
+    return f'<span class="nv">{function_part}</span>'
 
 
 def highlight_function_prototype(function_prototype, function_name):
