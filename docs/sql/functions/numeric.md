@@ -60,9 +60,9 @@ The table below shows the available mathematical functions.
 | `even(x)` | Round to next even number by rounding away from zero | `even(2.9)` | 4 |
 | `exp(x)` | Computes `e ** x` | `exp(0.693)` | 2 |
 | `factorial(x)` | See `!` operator. Computes the product of the current integer and all integers below it | `factorial(4)` | 24 |
-| `fdiv(x, y)` | Performs integer division (`x // y`). Returns a `DOUBLE` value | `fdiv(5, 2)` | `2.0` |
+| `fdiv(x, y)` | Performs integer division (`x // y`) but returns a `DOUBLE` value | `fdiv(5, 2)` | `2.0` |
 | `floor(x)` | Rounds the number down | `floor(17.4)` | 17 |
-| `fmod(x, y)` | Calculates the modulo value. Returns a `DOUBLE` value | `fmod(5, 2)` | `1.0` |
+| `fmod(x, y)` | Calculates the modulo value. Always returns a `DOUBLE` value | `fmod(5, 2)` | `1.0` |
 | `gamma(x)` | Interpolation of (x-1) factorial (so decimal inputs are allowed) | `gamma(5.5)` | 52.34277778455352 |
 | `gcd(x, y)` | Computes the greatest common divisor of x and y | `gcd(42, 57)` | 3 |
 | `greatest_common_divisor(x, y)` | Computes the greatest common divisor of x and y | `greatest_common_divisor(42, 57)` | 3 |
