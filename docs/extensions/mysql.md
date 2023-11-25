@@ -5,10 +5,21 @@ title: MySQL Extension
 
 The [`mysql` extension](https://github.com/duckdb/duckdb_mysql) allows DuckDB to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DuckDB tables, or vice versa.
 
-> The MySQL extension is currently in preview and not yet available as a binary package.
+## Installing and Loading
+
+To install the `mysql` extension, run:
+
+```sql
+INSTALL mysql;
+```
+
+The extension is loaded automatically upon first use. If you prefer to load it manually, run:
+
+```sql
+LOAD mysql;
+```
 
 ## Reading Data from MySQL
-
 
 To make a MySQL database accessible to DuckDB use the `ATTACH` command:
 

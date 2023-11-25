@@ -5,6 +5,16 @@ title: JSON Extension
 
 The `json` extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
 
+## Installing and Loading
+
+The `json` extension is shipped by default in DuckDB builds, otherwise it will be transparently autoloaded on first use.
+If you would like to install and load it manually, run:
+
+```sql
+INSTALL json;
+LOAD json;
+```
+
 ## Example Uses
 
 ```sql

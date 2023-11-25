@@ -7,6 +7,20 @@ The `aws` extension provides features that depend on the AWS SDK.
 
 > This extension is currently in an experimental state. Feel free to try it out, but be aware some things may not work as expected.
 
+## Installing and Loading
+
+`aws` depends on `httpfs` extension capablities, and both will be autoloaded on the first call to `load_aws_credentials`.
+If autoinstall or autoload are disabled, you can always explicitly install and load httpfs and aws like:
+
+```sql
+INSTALL aws;
+LOAD aws;
+INSTALL httpfs;
+LOAD httpfs;
+```
+
+See also the [S3 API capabilities of the `httpfs` extension](httpfs#s3).
+
 ## Features
 
 | function | type | description | 
@@ -61,20 +75,6 @@ CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret =
 │ minio_duckdb_user_2  │ minio_duckdb_user_password_2 │                      │               │
 └──────────────────────┴──────────────────────────────┴──────────────────────┴───────────────┘
 ```
-
-## Related Extensions
-
-`aws` depends on `httpfs` extension capablities, and both will be autoloaded on the first call to `load_aws_credentials`.
-If autoinstall or autoload are disabled, you can always explicitly install and load httpfs and aws like:
-
-```sql
-INSTALL aws;
-LOAD aws;
-INSTALL httpfs;
-LOAD httpfs;
-```
-
-See also the [S3 API capabilities of the `httpfs` extension](httpfs#s3).
 
 ## GitHub Repository
 
