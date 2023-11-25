@@ -383,7 +383,7 @@ table pre {
 }
 
 // class names
-.highlight :is(.nc) {
+.highlight :is(.nc, .nv) {
     color: #d52753;
 }
 
@@ -414,7 +414,7 @@ th .k {
 }
 
 // ??
-.highlight :is(.n, .nv, .vg) {
+.highlight :is(.n, .vg) {
     color: #383a42;
 }
 
