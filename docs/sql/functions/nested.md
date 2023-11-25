@@ -162,6 +162,7 @@ SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
 ```
 
 ## Slicing
+
 The function `list_slice` can be used to extract a sublist from a list.  The following variants exist:
 * `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
 * `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
