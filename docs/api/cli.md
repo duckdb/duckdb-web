@@ -165,29 +165,6 @@ Error: Expected usage: .keywordcode [terminal_code]
 Error: Expected usage: .constantcode [terminal_code]
 ```
 
-## Auto-Complete
-
-The shell offers context-aware auto-complete of SQL queries. Auto-complete is triggered by pressing the tab character. The shell auto-completes four different groups: (1) keywords, (2) table names + table functions, (3) column names + scalar functions, and (4) file names. The shell looks at the position in the SQL statement to determine which of these auto-completions to trigger. For example:
-
-```sql
-S -> SELECT
-```
-```sql
-SELECT s -> student_id
-```
-```sql
-SELECT student_id F -> FROM
-```
-```sql
-SELECT student_id FROM g -> grades
-```
-```sql
-SELECT student_id FROM 'd -> data/
-```
-```sql
-SELECT student_id FROM 'data/ -> data/grades.csv
-```
-
 ## Output Formats
 
 The `.mode` command may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal output to a file, for example (see "Writing Results to a File" section below). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point. The `markdown` mode is particularly useful for building documentation!
