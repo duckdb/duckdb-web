@@ -39,7 +39,7 @@ PRAGMA version;
 
 ## Platform
 
-The platform infromation consists of the operating system, compiler, and, optionally, the compiler.
+The platform information consists of the operating system, compiler, and, optionally, the compiler.
 The platform is used when [installing extensions](../../extensions/working_with_extensions#platforms).
 To retrieve the platform, use the following `PRAGMA`:
 
