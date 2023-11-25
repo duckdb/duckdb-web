@@ -85,24 +85,28 @@
           "slug": "meta",
           "subfolderitems": [
             {
-              "page": "List Tables",
-              "url": "list_tables"
-            },
-            {
-              "page": "Describe",
+              "page": "Describe Table",
               "url": "describe"
-            },
-            {
-              "page": "Summarize",
-              "url": "summarize"
             },
             {
               "page": "Inspect Query Plan",
               "url": "explain"
             },
             {
+              "page": "List Tables",
+              "url": "list_tables"
+            },
+            {
               "page": "Profile Queries",
               "url": "explain_analyze"
+            },
+            {
+              "page": "Summarize",
+              "url": "summarize"
+            },
+            {
+              "page": "DuckDB Environment",
+              "url": "duckdb_environment"
             }
           ]
         },

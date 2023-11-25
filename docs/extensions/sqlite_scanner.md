@@ -5,11 +5,26 @@ title: SQLite Scanner Extension
 
 The `sqlite` extension allows DuckDB to directly read data from a SQLite database file. The data can be queried directly from the underlying SQLite tables, or read into DuckDB tables.
 
+## Installing and Loading
+
+To install the `sqlite` extension, run:
+
+```sql
+INSTALL sqlite;
+```
+
+The extension is loaded automatically upon first use. If you prefer to load it manually, run:
+
+```sql
+LOAD sqlite;
+```
+
 ## Usage
 
-To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function
+To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function.
 
-For example with the bundled `sakila.db` file:
+For example with the [`sakila.db` file](https://github.com/duckdb/sqlite_scanner/blob/main/data/db/sakila.db):
+
 ```sql
 ATTACH 'sakila.db' (TYPE sqlite);
 -- or
@@ -50,12 +65,12 @@ PRAGMA show_tables;
 └────────────────────────┘
 ```
 
-Then you can query those views normally using SQL, e.g., using the example queries from sakila-examples.sql
+Then you can query those views normally using SQL, e.g., using the example queries from [`sakila-examples.sql`](https://github.com/duckdb/sqlite_scanner/blob/main/data/sql/sakila-examples.sql):
 
 ```sql
 SELECT
-  cat.name category_name,
-  sum(ifnull(pay.amount, 0)) revenue
+    cat.name AS category_name,
+    sum(ifnull(pay.amount, 0)) AS revenue
 FROM category cat
 LEFT JOIN film_category flm_cat
        ON cat.category_id = flm_cat.category_id
@@ -121,15 +136,6 @@ If you want to run the `sqlite_scan` procedure more than once in the same DuckDB
 
 ```sql
 CALL sqlite_attach('sakila.db', overwrite = true);
-```
-
-## Loading the Extension
-
-The SQLite Scanner extension is by default installed and loaded on first use. If you prefer to do so explicitly, run the following commands:
-
-```sql
-INSTALL sqlite;
-LOAD sqlite;
 ```
 
 ## GitHub Repository
