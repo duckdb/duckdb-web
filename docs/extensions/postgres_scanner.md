@@ -15,7 +15,7 @@ INSTALL postgres;
 
 The extension is loaded automatically upon first use. If you prefer to load it manually, run:
 
-```
+```sql
 LOAD postgres;
 ```
 
