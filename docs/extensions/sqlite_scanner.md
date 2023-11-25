@@ -5,6 +5,20 @@ title: SQLite Scanner Extension
 
 The `sqlite` extension allows DuckDB to directly read data from a SQLite database file. The data can be queried directly from the underlying SQLite tables, or read into DuckDB tables.
 
+## Installing and Loading
+
+To install the `sqlite` extension, run:
+
+```sql
+INSTALL sqlite;
+```
+
+The extension is loaded automatically upon first use. If you prefer to load it manually, run:
+
+```
+LOAD sqlite;
+```
+
 ## Usage
 
 To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function
@@ -121,15 +135,6 @@ If you want to run the `sqlite_scan` procedure more than once in the same DuckDB
 
 ```sql
 CALL sqlite_attach('sakila.db', overwrite = true);
-```
-
-## Loading the Extension
-
-The SQLite Scanner extension is by default installed and loaded on first use. If you prefer to do so explicitly, run the following commands:
-
-```sql
-INSTALL sqlite;
-LOAD sqlite;
 ```
 
 ## GitHub Repository
