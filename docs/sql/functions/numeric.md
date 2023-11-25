@@ -11,20 +11,20 @@ The table below shows the available mathematical operators for numeric types.
 
 | Operator | Description | Function Alias | Example | Result |
 |-|-|---|-|-|
-| `+`      | addition                                                                                | `add(x, y)`      | `2 + 3`    | `5`   |
-| `-`      | subtraction                                                                             | `subtract(x, y)` | `2 - 3`    | `-1`  |
-| `*`      | multiplication                                                                          | `multiply(x, y)` | `2 * 3`    | `6`   |
-| `/`      | float division                                                                          |                  | `5 / 2`    | `2.5` |
-| `//`     | division                                                                                | `divide(x, y)`   | `5 // 2`   | `2`   |
-| `%`      | modulo (remainder)                                                                      |                  | `5 % 4`    | `1`   |
-| `**`     | exponent                                                                                |                  | `3 ** 4`   | `81`  |
-| `^`      | exponent (alias for `**`)                                                               |                  | `3 ^ 4`    | `81`  |
-| `&`      | bitwise AND                                                                             |                  | `91 & 15`  | `11`  |
-| `|`      | bitwise OR                                                                              |                  | `32 | 3`   | `35`  |
-| `<<`     | bitwise shift left                                                                      |                  | `1 << 4`   | `16`  |
-| `>>`     | bitwise shift right                                                                     |                  | `8 >> 2`   | `2`   |
-| `~`      | bitwise negation                                                                        |                  | `~15`      | `-16` |
-| `!`      | factorial of `x`. Computes the product of the current integer and all integers below it |                  | `4!`       | `24`  |
+| `+`      | addition                  | `add(x, y)`      | `2 + 3`   | `5`   |
+| `-`      | subtraction               | `subtract(x, y)` | `2 - 3`   | `-1`  |
+| `*`      | multiplication            | `multiply(x, y)` | `2 * 3`   | `6`   |
+| `/`      | float division            |                  | `5 / 2`   | `2.5` |
+| `//`     | division                  | `divide(x, y)`   | `5 // 2`  | `2`   |
+| `%`      | modulo (remainder)        |                  | `5 % 4`   | `1`   |
+| `**`     | exponent                  |                  | `3 ** 4`  | `81`  |
+| `^`      | exponent (alias for `**`) |                  | `3 ^ 4`   | `81`  |
+| `&`      | bitwise AND               |                  | `91 & 15` | `11`  |
+| `|`      | bitwise OR                |                  | `32 | 3`  | `35`  |
+| `<<`     | bitwise shift left        |                  | `1 << 4`  | `16`  |
+| `>>`     | bitwise shift right       |                  | `8 >> 2`  | `2`   |
+| `~`      | bitwise negation          |                  | `~15`     | `-16` |
+| `!`      | factorial of `x`          |                  | `4!`      | `24`  |
 
 There are two division operators: `/` and `//`.
 They are equivalent when at least one of the operands is a FLOAT or a DOUBLE.
