@@ -3,7 +3,7 @@ layout: docu
 title: PostgreSQL Import
 ---
 
-To run a query directly on a running PostgreSQL database, the `postgres` extension is required.  This can be installed use the `INSTALL` SQL command. This only needs to be run once.
+To run a query directly on a running PostgreSQL database, the [`postgres` extension](../../extensions/postgres_scanner) is required.  This can be installed use the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL postgres;
@@ -22,7 +22,7 @@ After the `postgres` extension is installed, tables can be queried from PostgreS
 SELECT * FROM postgres_scan('', 'public', 'mytable');
 ```
 
-The first parameter to the `postgres_scan` function is the [postgres connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
+The first parameter to the `postgres_scan` function is the [PostgreSQL connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
 
 Alternatively, the entire file can be attached using the `postgres_attach` command. This creates views over all of the tables in the PostgreSQL database that allow you to query the tables using regular SQL syntax.
 
