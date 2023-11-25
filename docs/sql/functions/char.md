@@ -59,7 +59,7 @@ This section describes functions and operators for examining and manipulating st
 | `starts_with(`*`string`*`, `*`search_string`*`)`| Return true if *string* begins with *search_string* | `starts_with('abc', 'a')` | `true` | |
 | *`string`*` SIMILAR TO `*`regex`* | Returns `true` if the *string* matches the *regex*; identical to `regexp_full_match` (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' SIMILAR TO 'l+'` | `false` | |
 | `strlen(`*`string`*`)` | Number of bytes in *string* | `strlen('🦆')` | `4` | |
-| `strpos(`*`string`*`, `*`search_string`*`)`| Alias of `instr`. Return location of first occurrence of *search_string* in *string*, counting from 1. Returns 0 if no match found. | `strpos('test test', 'es')` | 2 | |
+| `strpos(`*`string`*`, `*`search_string`*`)`| Alias for `instr`. Return location of first occurrence of *search_string* in *string*, counting from 1. Returns 0 if no match found. | `strpos('test test', 'es')` | 2 | |
 | `strip_accents(`*`string`*`)`| Strips accents from *string* | `strip_accents('mühleisen')` | `muhleisen` | |
 | `string_split(`*`string`*`, `*`separator`*`)` | Splits the *string* along the *separator* | `string_split('hello␣world', '␣')` | `['hello', 'world']` | `str_split`, `string_to_array` |
 | `string_split_regex(`*`string`*`, `*`regex`*`)` | Splits the *string* along the *regex* | `string_split_regex('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` | `regexp_split_to_array`, `str_split_regex` |
@@ -74,15 +74,14 @@ This section describes functions and operators for examining and manipulating st
 
 ## Text Similarity Functions
 
-These functions are used to measure the similarity of two strings using various metrics.
+These functions are used to measure the similarity of two strings using various [similarity measures](https://en.wikipedia.org/wiki/Similarity_measure).
 
 | Function | Description | Example | Result |
 |:--|:--|:---|:-|
-| `editdist3(`*`string`*`,` *`string`*`)` | Alias of `levenshtein` for SQLite compatibility. The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different. | `editdist3('duck', 'db')` | 3 |
-| `hamming(`*`string`*`,` *`string`*`)` | The number of positions with different characters for 2 strings of equal length. Different case is considered different. | `hamming('duck', 'luck')` | 1 |
-| `jaccard(`*`string`*`,` *`string`*`)` | The Jaccard similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaccard('duck', 'luck')` | 0.6 |
-| `jaro_similarity(`*`string`*`,` *`string`*`)` | The Jaro similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_similarity('duck', 'duckdb')` | 0.88 |
-| `jaro_winkler_similarity(`*`string`*`,` *`string`*`)` | The Jaro-Winkler similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_winkler_similarity('duck', 'duckdb')` | 0.93 |
-| `levenshtein(`*`string`*`,` *`string`*`)` | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different. | `levenshtein('duck', 'db')` | 3 |
-| `damerau_levenshtein(`*`string`*`,` *`string`*`)` | Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Different case is considered different. | `damerau_levenshtein('duckdb', 'udckbd')` | 2 |
-| `mismatches(`*`string`*`,` *`string`*`)` | The number of positions with different characters for 2 strings of equal length. Different case is considered different. | `mismatches('duck', 'luck')` | 1 |
+| `damerau_levenshtein(`*`s1`*`,` *`s2`*`)` | Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Different case is considered different. | `damerau_levenshtein('duckdb', 'udckbd')` | `2` |
+| `editdist3(`*`s1`*`,` *`s2`*`)` | Alias of `levenshtein` for SQLite compatibility. The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different. | `editdist3('duck', 'db')` | `3` |
+| `jaccard(`*`s1`*`,` *`s2`*`)` | The Jaccard similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaccard('duck', 'luck')` | `0.6` |
+| `jaro_similarity(`*`s1`*`,` *`s2`*`)` | The Jaro similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_similarity('duck', 'duckdb')` | `0.88` |
+| `jaro_winkler_similarity(`*`s1`*`,` *`s2`*`)` | The Jaro-Winkler similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_winkler_similarity('duck', 'duckdb')` | `0.93` |
+| `levenshtein(`*`s1`*`,` *`s2`*`)` | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different. | `levenshtein('duck', 'db')` | `3` |
+| `mismatches(`*`s1`*`,` *`s2`*`)` | Alias for `hamming(`*`s1`*`,` *`s2`*`)`. The number of positions with different characters for two strings of equal length. Different case is considered different. | `mismatches('duck', 'luck')` | `1` |
