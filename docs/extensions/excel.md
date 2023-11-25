@@ -17,6 +17,20 @@ INSTALL excel;
 LOAD excel;
 ```
 
+## Usage
+
+```sql
+SELECT excel_text(1234567.897, 'h:mm AM/PM') AS timestamp;
+```
+```
+┌───────────┐
+│ timestamp │
+│  varchar  │
+├───────────┤
+│ 9:31 PM   │
+└───────────┘
+```
+
 ## Functions
 
 | Function | Description | Example | Result |
