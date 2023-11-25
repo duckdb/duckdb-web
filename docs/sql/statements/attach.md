@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: ATTACH/DETACH Statemtn
+title: ATTACH/DETACH Statement
 railroad: statements/attach.js
 ---
 
@@ -26,7 +26,7 @@ CREATE TABLE file.new_table (i INTEGER);
 -- detach the database with alias "file"
 DETACH file;
 -- show a list of all attached databases
-SHOW databases;
+SHOW DATABASES;
 -- change the default database that is used to the database "file"
 USE file;
 ```

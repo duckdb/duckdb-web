@@ -9,16 +9,18 @@ The `EXPORT DATABASE` command allows you to export the contents of the database 
 ## Examples
 
 ```sql
--- export the database to the target directory
-EXPORT DATABASE 'target_directory';
--- export the table contents with the given options
-EXPORT DATABASE 'target_directory' (FORMAT CSV, DELIMITER '|');
--- export the table contents as parquet
-EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
--- export as parquet, compressed with ZSTD, with a row_group_size of 100000
-EXPORT DATABASE 'target_directory' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000);
---reload the database again
-IMPORT DATABASE 'target_directory';
+-- export the database to the target directory 'db_name' as CSV files
+EXPORT DATABASE 'db_name';
+-- export to directory 'db_name', using the given options for the CSV serialization
+EXPORT DATABASE 'db_name' (FORMAT CSV, DELIMITER '|');
+-- export to directory 'db_name', tables serialized as Parquet
+EXPORT DATABASE 'db_name' (FORMAT PARQUET);
+-- export to directory 'db_name', tables serialized as Parquet, compressed with ZSTD, with a row_group_size of 100000
+EXPORT DATABASE 'db_name' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000);
+-- reload the database again
+IMPORT DATABASE 'db_name';
+-- alternatively, use a PRAGMA
+PRAGMA import_database('db_name');
 ```
 
 For details regarding the writing of Parquet files, see the [Parquet Files page in the Data Import section](../../data/parquet/overview#writing-to-parquet-files), and the [`COPY` Statement page](copy).

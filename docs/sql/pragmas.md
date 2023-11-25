@@ -116,10 +116,17 @@ PRAGMA enable_progress_bar;
 PRAGMA disable_progress_bar;
 -- Enable profiling
 PRAGMA enable_profiling;
+PRAGMA enable_profile;
 -- Enable profiling in a specified format
-PRAGMA enable_profiling=[json, query_tree, query_tree_optimizer]
+-- Return the logical query plan as JSON
+PRAGMA enable_profiling='json';
+-- Return the logical query plan
+PRAGMA enable_profiling='query_tree';
+-- Return the physical query plan
+PRAGMA enable_profiling='query_tree_optimizer';
 -- Disable profiling
 PRAGMA disable_profiling;
+PRAGMA disable_profile;
 -- Specify a file to save the profiling output to
 PRAGMA profiling_output='/path/to/file.json';
 PRAGMA profile_output='/path/to/file.json';
@@ -284,3 +291,11 @@ This call returns the following information for the given table:
 | `block_offset` | `BIGINT`  | empty unless persistent                               |
 
 See [Storage](/internals/storage) for more information.
+
+### `show_databases`
+
+The following statement is equivalent to the [`SHOW DATABASES` statement](statements/attach):
+
+```sql
+PRAGMA show_databases;
+```

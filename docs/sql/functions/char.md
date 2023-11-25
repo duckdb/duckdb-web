@@ -25,20 +25,22 @@ This section describes functions and operators for examining and manipulating st
 | `format_bytes(`*`bytes`*`)` | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). | `format_bytes(16384)` | `16.0 KiB` | |
 | `from_base64(`*`string`*`)`| Convert a base64 encoded string to a character string. | `from_base64('QQ==')` | `'A'` | |
 | `hash(`*`value`*`)` | Returns an integer with the hash of the *value* | `hash('🦆')` | `2595805878642663834` | |
+| `ilike_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `ilike_escape('A%c', 'a$%C', '$')` | `true` | |
 | `instr(`*`string`*`, `*`search_string`*`)`| Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `instr('test test', 'es')` | 2 | |
 | `left(`*`string`*`, `*`count`*`)`| Extract the left-most count characters | `left('Hello🦆', 2)` | `He` | |
 | `left_grapheme(`*`string`*`, `*`count`*`)`| Extract the left-most grapheme clusters | `left_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)` | `🤦🏼‍♂️` | |
 | `length(`*`string`*`)` | Number of characters in *string* | `length('Hello🦆')` | `6` | |
 | `length_grapheme(`*`string`*`)` | Number of grapheme clusters in *string* | `length_grapheme('🤦🏼‍♂️🤦🏽‍♀️')` | `2` | |
 | *`string`*` LIKE `*`target`* | Returns true if the *string* matches the like specifier (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' LIKE '%lo'` | `true` | |
-| `like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)). *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` | |
+| `like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` | |
 | `lower(`*`string`*`)` | Convert *string* to lower case | `lower('Hello')` | `hello` | `lcase` |
 | `lpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string*  with the character from the left until it has count characters | `lpad('hello', 10, '>')` | `>>>>>hello` | |
 | `ltrim(`*`string`*`)`| Removes any spaces from the left side of the *string* | `ltrim('␣␣␣␣test␣␣')` | `test␣␣` | |
-| `ltrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the left side of the *string* | `ltrim('>>>>test<<', '><')` | `test<<` | |
+| `ltrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the left sduide of the *string* | `ltrim('>>>>test<<', '><')` | `test<<` | |
 | `md5(`*`value`*`)` | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the *value*  | `md5('123')` | `'202cb962ac59075b964b07152d234b70'` | |
 | `nfc_normalize(`*`string`*`)`| Convert string to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. | `nfc_normalize('ardèch')` | ``arde`ch`` | |
-| `not_like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)). *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` | |
+| `not_ilike_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `not_ilike_escape('A%c', 'a$%C', '$')` | `false` | |
+| `not_like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `not_like_escape('a%c', 'a$%c', '$')` | `false` | |
 | `ord(`*`string`*`)`| Return ASCII character code of the leftmost character in a string.  | `ord('ü')` | `252` | |
 | `position(`*`search_string`*` in `*`string`*`)` | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `position('b' in 'abc')` | `2` | |
 | `printf(`*`format`*`, `*`parameters`*`...)` | Formats a *string* using printf syntax | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds`     | |
