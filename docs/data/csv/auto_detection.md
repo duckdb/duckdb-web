@@ -5,7 +5,8 @@ title: CSV Auto Detection
 
 <!-- markdownlint-disable MD036 -->
 
-When using `read_csv_auto`, or reading a CSV file with the `auto_detect` flag set, the system tries to automatically infer how to read the CSV file. This step is necessary because CSV files are not self-describing and come in many different dialects. The auto-detection works roughly as follows:
+When using `read_csv_auto`, or reading a CSV file with the `auto_detect` flag set, the system tries to automatically infer how to read the CSV file using the [CSV sniffer](/2023/10/27/csv-sniffer).
+This step is necessary because CSV files are not self-describing and come in many different dialects. The auto-detection works roughly as follows:
 
 * Detect the dialect of the CSV file (delimiter, quoting rule, escape)
 * Detect the types of each of the columns

@@ -13,7 +13,7 @@ SELECT * FROM 'flights.csv';
 -- read_csv with custom options
 SELECT * FROM read_csv('flights.csv', delim = '|', header = true, columns = {'FlightDate': 'DATE', 'UniqueCarrier': 'VARCHAR', 'OriginCityName': 'VARCHAR', 'DestCityName': 'VARCHAR'});
 -- read a CSV from stdin, auto-infer options
-cat data/csv/issue2471.csv | duckdb -c "SELECT * FROM read_csv_auto('/dev/stdin')"
+cat data/csv/issue2471.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 
 -- read a CSV file into a table
 CREATE TABLE ontime (FlightDate DATE, UniqueCarrier VARCHAR, OriginCityName VARCHAR, DestCityName VARCHAR);
@@ -33,17 +33,17 @@ COPY (FROM ontime) TO 'flights.csv' WITH (HEADER 1, DELIMITER '|');
 
 CSV loading, i.e., importing CSV files to the database, is a very common, and yet surprisingly tricky, task. While CSVs seem simple on the surface, there are a lot of inconsistencies found within CSV files that can make loading them a challenge. CSV files come in many different varieties, are often corrupt, and do not have a schema. The CSV reader needs to cope with all of these different situations.
 
-The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file. This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page](auto_detection) for more information.
+The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file using the [CSV sniffer](/2023/10/27/csv-sniffer). This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page](auto_detection) for more information.
 
 ## Parameters
 
-Below are parameters that can be passed to the CSV reader. These parameters are accepted by both the [`COPY` statement](../../sql/statements/copy#copy-to) and the CSV reader functions ([`read_csv`](#read_csv-function) and [`read_csv_auto`](#read_csv_auto-function)).
+Below are parameters that can be passed to the CSV reader. These parameters are accepted by both the [`COPY` statement](../../sql/statements/copy#copy-to) and the [`read_csv` function](#read_csv-function).
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type `VARCHAR`. | `BOOL` | `false` |
-| `auto_detect` | Enables [auto detection of parameters](auto_detection). | `BOOL` | `true` |
-| `auto_type_candidates` | This option allows you to specify the types that the sniffer will use when detecting CSV column types, e.g., `SELECT * FROM read_csv_auto('csv_file.csv', auto_type_candidates=['BIGINT', 'DATE'])`. The `VARCHAR` type is always included in the detected types (as a fallback option). | `TYPE[]` | `['SQLNULL', 'BOOLEAN', 'BIGINT', 'DOUBLE', 'TIME', 'DATE', 'TIMESTAMP', 'VARCHAR']` |
+| `auto_detect` | Enables [auto detection of CSV parameters](auto_detection). | `BOOL` | `true` |
+| `auto_type_candidates` | This option allows you to specify the types that the sniffer will use when detecting CSV column types, e.g., `SELECT * FROM read_csv('csv_file.csv', auto_type_candidates=['BIGINT', 'DATE'])`. The `VARCHAR` type is always included in the detected types (as a fallback option). | `TYPE[]` | `['SQLNULL', 'BOOLEAN', 'BIGINT', 'DOUBLE', 'TIME', 'DATE', 'TIMESTAMP', 'VARCHAR']` |
 | `buffer_size` | The buffer size used by the CSV reader, specified in bytes. By default, it is set to 32MB or the size of the CSV file (if smaller). The buffer size must be at least as large as the longest line in the CSV file. Note: this is an advanced option that has a significant impact on performance and memory usage. | `BIGINT` | min(32000000, CSV file size) |
 | `columns` | A struct that specifies the column names and column types contained within the CSV file (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). Using this option implies that auto detection is not used. | `STRUCT` | (empty) |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
@@ -70,12 +70,16 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here](tips#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | `BOOL` | `false` |
 
-## read_csv_auto Function
+## CSV Functions
 
-The `read_csv_auto` is the simplest method of loading CSV files: it automatically attempts to figure out the correct configuration of the CSV reader. It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`. An example with the [`flights.csv`](/data/flights.csv) file:
+> DuckDB 0.9.3-dev and the upcoming v0.10.0 versions introduce breaking changes to the `read_csv` function.
+> Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the [old `read_csv_auto` function](../../../docs/archive/0.9.2/data/csv/overview#read_csv_auto-function).
+> If you would like to use `read_csv` with its old behavior, turn off the auto-detection manually by using `read_csv(..., auto_detect = false)`.
+
+The `read_csv` automatically attempts to figure out the correct configuration of the CSV reader using the [CSV sniffer](/2023/10/27/csv-sniffer)). It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`. An example with the [`flights.csv`](/data/flights.csv) file:
 
 ```sql
-SELECT * FROM read_csv_auto('flights.csv');
+SELECT * FROM read_csv('flights.csv');
 ```
 
 <div class="narrow_table"></div>
@@ -88,10 +92,10 @@ SELECT * FROM read_csv_auto('flights.csv');
 
 The path can either be a relative path (relative to the current working directory) or an absolute path.
 
-We can use `read_csv_auto` to create a persistent table as well:
+We can use `read_csv` to create a persistent table as well:
 
 ```sql
-CREATE TABLE ontime AS SELECT * FROM read_csv_auto('flights.csv');
+CREATE TABLE ontime AS SELECT * FROM read_csv('flights.csv');
 DESCRIBE ontime;
 ```
 
@@ -105,20 +109,16 @@ DESCRIBE ontime;
 |DestCityName  |VARCHAR|YES |NULL|NULL   |NULL |
 
 ```sql
-SELECT * FROM read_csv_auto('flights.csv', sample_size = 20000);
+SELECT * FROM read_csv('flights.csv', sample_size = 20000);
 ```
 
 If we set `delim`/`sep`, `quote`, `escape`, or `header` explicitly, we can bypass the automatic detection of this particular parameter:
 
 ```sql
-SELECT * FROM read_csv_auto('flights.csv', header = true);
+SELECT * FROM read_csv('flights.csv', header = true);
 ```
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
-
-## read_csv Function
-
-The `read_csv` function accepts the same parameters that `read_csv_auto` does but does not assume `auto_detect = true`.
 
 ## Writing Using the COPY Statement
 
