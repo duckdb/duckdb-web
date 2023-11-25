@@ -77,6 +77,7 @@ The table below shows the available mathematical functions.
 | `radians(x)` | Converts degrees to radians | `radians(90)` | 1.5707963267948966 |
 | `random()` | Returns a random number between 0 and 1 | `random()` | various |
 | `round(v NUMERIC, s INT)` | Round to *s* decimal places. Values *s < 0* are allowed | `round(42.4332, 2)` | 42.43 |
+| `round_even(v NUMERIC, s INT)` | Alias of `roundbankers(v, s)`. Round to *s* decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values *s < 0* are allowed | `round_even(24.5, 0)` | `24.0` |
 | `setseed(x)` | Sets the seed to be used for the random function | `setseed(0.42)` | |
 | `sin(x)` | Computes the sin of x | `sin(90)` | 0.8939966636005579 |
 | `sign(x)` | Returns the sign of x as -1, 0 or 1 | `sign(-349)` | -1 |
