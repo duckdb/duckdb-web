@@ -91,8 +91,15 @@ Window functions cannot access values outside of the partition containing the ro
 Ordering is also optional, but without it the results are not well-defined.
 Each partition is ordered using the same ordering clause.
 
-Here is a table of power generation data.
+Here is a table of power generation data, available as a CSV file ([`power-plant-generation-history.csv`](/data/power-plant-generation-history.csv)). To load the data, run:
+
+```sql
+CREATE TABLE "Generation History" AS FROM 'power-plant-generation-history.csv';
+```
+
 After partitioning by plant and ordering by date, it will have this layout:
+
+<div class="narrow_table"></div>
 
 | Plant | Date | MWh |
 |:---|:---|---:|
@@ -129,11 +136,13 @@ This function just computes the 1-based row number within the partition using th
 
 ```sql
 SELECT "Plant", "Date", row_number() OVER (PARTITION BY "Plant" ORDER  BY "Date") AS "Row"
-FROM "History"
+FROM "Generation History"
 ORDER BY 1, 2;
 ```
 
-The result will be
+The result will be the following:
+
+<div class="narrow_table"></div>
 
 | Plant | Date | Row |
 |:---|:---|---:|
@@ -202,6 +211,8 @@ orders each plant's partition by `Date` (to put the energy measurements next to 
 and uses a `RANGE` frame of three days on either side of each day for the `avg`
 (to handle any missing days).
 This is the result:
+
+<div class="narrow_table"></div>
 
 | Plant | Date | MWh 7-day<br>Moving Average |
 |:---|:---|---:|
