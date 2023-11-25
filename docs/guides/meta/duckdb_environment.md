@@ -58,16 +58,9 @@ On macOS, running on Apple Silicon architecture, the result is:
 └───────────┘
 ```
 
-On CentOS 7, running on the AMD64 architecture, the result is:
-
-```text
-┌──────────────────┐
-│     platform     │
-│     varchar      │
-├──────────────────┤
-│ linux_amd64_gcc4 │
-└──────────────────┘
-```
+On Windows, running on an AMD64 architecture, the platform is `windows_amd64`.
+On CentOS 7, running on the AMD64 architecture, the platform is `linux_amd64_gcc4`.
+On Ubuntu 22.04, running on the ARM64 architecture, the platform is `linux_arm64`.
 
 ## Extensions
 
