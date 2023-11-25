@@ -91,6 +91,7 @@ The table below shows the available statistical aggregate functions.
 | `covar_samp(y, x)` | Returns the sample covariance for non-null pairs in a group. | `(sum(x*y) - sum(x) * sum(y) / count(*)) / (count(*) - 1)` | - |
 | `entropy(x)` | Returns the log-2 entropy of count input-values. | - | - |
 | `kurtosis(x)` | Returns the excess kurtosis (Fisher's definition) of all input values, with a bias correction according to the sample size. | - | - |
+| `kurtosis_pop(x)` | Returns the excess kurtosis (Fisher's definition) of all input values. Bias correction is not applied. |
 | `mad(x)` | Returns the median absolute deviation for the values within x. NULL values are ignored. Temporal types return a positive `INTERVAL`. | `median(abs(x - median(x)))` | - |
 | `median(x)` | Returns the middle value of the set. NULL values are ignored. For even value counts, quantitative values are averaged and ordinal values return the lower value. | `quantile_cont(x, 0.5)` | - |
 | `mode(x)` | Returns the most frequent value for the values within x. NULL values are ignored. | - | - |
