@@ -12,6 +12,8 @@ The functions below are difficult to categorize into specific function types and
 | `alias(`*`column`*`)` | Return the name of the column| `alias(column1)` | `'column1'` |
 | `checkpoint(`*`database`*`)`| Synchronize WAL with file for (optional) database without interrupting transactions. | `checkpoint(my_db)`| success boolean |
 | `coalesce(`*`expr`*`, `*`...`*`)` | Return the first expression that evaluates to a non-`NULL` value. Accepts 1 or more parameters. Each expression can be a column, literal value, function result, or many others. | `coalesce(NULL, NULL, 'default_string')` | `'default_string'`|
+| `constant_or_null(`*`arg1`*`, `*`arg2`*`)` | If *`arg2`* is `NULL`, return `NULL`. Otherwise, return *`arg1`*. | `constant_or_null(42, NULL)` | `NULL` |
+| `count_if(`*`x`*`)` | Returns 1 if *x* is `true` or a non-zero number | `count_if(42)` | 1 |
 | `error(`*`message`*`)` | Throws the given error *`message`* | `error('access_mode')` | |
 | `ifnull(`*`expr`*`, `*`other`*`)` | A two-argument version of coalesce | `ifnull(NULL, 'default_string')` | `'default_string'`|
 | `nullif(`*`a`*`, `*`b`*`)` | Return null if a = b, else return a. Equivalent to `CASE WHEN a=b THEN NULL ELSE a END`. | `nullif(1+1, 2)` | `NULL`|
