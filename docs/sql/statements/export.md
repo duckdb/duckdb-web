@@ -19,6 +19,8 @@ EXPORT DATABASE 'db_name' (FORMAT PARQUET);
 EXPORT DATABASE 'db_name' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000);
 -- reload the database again
 IMPORT DATABASE 'db_name';
+-- alternatively, use a PRAGMA
+PRAGMA import_database('db_name');
 ```
 
 For details regarding the writing of Parquet files, see the [Parquet Files page in the Data Import section](../../data/parquet/overview#writing-to-parquet-files), and the [`COPY` Statement page](copy).
