@@ -3,13 +3,16 @@ layout: docu
 title: DuckDB Full Text Search
 ---
 
+DuckDB supports full text search via the [`fts` extension](../../extensions/full_text_search).
 A full text index allows for a query to quickly search for all occurrences of individual words within longer text strings.
+
+## Example: Shakespeare Corpus
+
 Here's an example of building a full text index of Shakespeare's plays.
 
 ```sql
 CREATE TABLE corpus AS
-    SELECT * FROM read_parquet(
-        'https://blobs.duckdb.org/data/shakespeare.parquet');
+    SELECT * FROM 'https://blobs.duckdb.org/data/shakespeare.parquet';
 ```
 
 ```sql
@@ -30,11 +33,11 @@ DESCRIBE corpus;
 
 The text of each line is in `text_entry`, and a unique key for each line is in `line_id`.
 
+## Creating a Full Text Search Index
+
 First, we create the index, specifying the table name, the unique id column, and the column(s) to index. We will just index the single column `text_entry`, which contains the text of the lines in the play.
 
 ```sql
-INSTALL fts;
-LOAD fts;
 PRAGMA create_fts_index('corpus', 'line_id', 'text_entry');
 ```
 
@@ -78,7 +81,7 @@ Unlike standard indexes, full text indexes don't auto-update as the underlying d
 
 ## Note on Generating the Corpus Table
 
-For details, see the ["Generating a Shakespeare corpus for full-text searching from JSON" blog post](https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html)
-* The Columns are:  line_id, play_name, line_number, speaker, text_entry.
+For more details, see the ["Generating a Shakespeare corpus for full-text searching from JSON" blog post](https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html)
+* The Columns are: line_id, play_name, line_number, speaker, text_entry.
 * We need a unique key for each row in order for full text searching to work.
 * The line_id "KL/2.4.132" means King Lear, Act 2, Scene 4, Line 132.
