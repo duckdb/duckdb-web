@@ -97,54 +97,57 @@ def extract_parameters(docs_str):
 
 
 keyword_list = '''
-duckdb_state
-duckdb_result
 bool
-int8_t
+char
+const
+double
+float
+idx_t
 int16_t
 int32_t
 int64_t
-idx_t
-duckdb_database
-duckdb_hugeint
-uint8_t
+int8_t
+size_t
 uint16_t
 uint32_t
 uint64_t
-float
-double
-duckdb_date
-duckdb_time
-duckdb_timestamp
-duckdb_interval
-char
-duckdb_blob
-size_t
+uint8_t
 void
-duckdb_date_struct
-duckdb_time_struct
-duckdb_timestamp_struct
-duckdb_connection
-duckdb_prepared_statement
+'''
+
+duckdb_type_list = '''
 duckdb_appender
-duckdb_config
-const
 duckdb_arrow
-duckdb_arrow_schema
 duckdb_arrow_array
-duckdb_logical_type
-duckdb_data_chunk
-duckdb_vector
-duckdb_logical_type
-duckdb_value
-duckdb_table_function
+duckdb_arrow_schema
 duckdb_bind_info
-duckdb_init_info
+duckdb_blob
+duckdb_config
+duckdb_connection
+duckdb_data_chunk
+duckdb_database
+duckdb_date
+duckdb_date_struct
 duckdb_function_info
+duckdb_hugeint
+duckdb_init_info
+duckdb_interval
+duckdb_logical_type
+duckdb_prepared_statement
 duckdb_replacement_scan_info
+duckdb_result
+duckdb_state
+duckdb_table_function
+duckdb_time
+duckdb_time_struct
+duckdb_timestamp
+duckdb_timestamp_struct
+duckdb_value
+duckdb_vector
 '''
 
 keywords = [x.strip() for x in keyword_list.split('\n') if len(x.strip()) > 0]
+duckdb_types = [x.strip() for x in duckdb_type_list.split('\n') if len(x.strip()) > 0]
 
 
 def quick_docs_start():
@@ -157,10 +160,12 @@ def quick_docs_end():
 
 def process_function_part(function_part, function_name):
     if function_part == function_name:
-        return f'<span class="nf"><a href="#{function_name}">{function_part}</a></span>'
+        return f'<a href="#{function_name}"><span class="nf">{function_part}</span></a>'
     if function_part in keywords:
         return f'<span class="kt">{function_part}</span>'
-    return f'<span class="k">{function_part}</span>'
+    if function_part in duckdb_types:
+        return f'<span class="kt">{function_part}</span>'
+    return f'<span class="nv">{function_part}</span>'
 
 
 def highlight_function_prototype(function_prototype, function_name):
