@@ -349,56 +349,56 @@ table pre {
 /* color scheme */
 
 // comments
-.c, .g, .cm, .cp, .c1 {
+.highlight :is(.c, .g, .cm, .cp, .c1) {
     color: #a0a1a7;
     font-family: $fontMonoItalic;
 }
 
 // keywords
-.k, .kn, .kv, .kd {
+.highlight :is(.k, .kn, .kv, .kd) {
     color: #0098dd;
     font-family: $fontMonoBold;
 }
 
 // numbers
-.m, .mf, .mh, .mi, .mo, .il {
+.highlight :is(.m, .mf, .mh, .mi, .mo, .il) {
     color: #ce33c0;
 }
 
 // foreground
-.l, .x, .no, .nd, .nx, .py, .w, .nn {
+.highlight :is(.l, .x, .no, .nd, .nx, .py, .w, .nn) {
     color: #383a42;
 }
 
 // type names
-.nb, .bp, .vcb {
+.highlight :is(.nb, .bp, .vcb) {
     color: #0098dd;
     font-family: $fontMonoBold;
 }
 
 // functions
-.nf, .na, .nt {
+.highlight :is(.nf, .na, .nt) {
     color: #23974a;
     font-family: $fontMonoBold;
 }
 
 // class names
-.nc {
+.highlight :is(.nc) {
     color: #d52753;
 }
 
 // punctuation
-.p, .x {
+.highlight :is(.p, .x) {
     color: #7a82da;
 }
 
 // operators
-.o, .ow {
+.highlight :is(.o, .ow) {
     color: #7a82da
 }
 
 // strings
-.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl, .nl {
+.highlight :is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl, .nl) {
     color: #c5a332;
 }
 
@@ -414,11 +414,11 @@ th .k {
 }
 
 // ??
-.n, .nv, .vg {
+.highlight :is(.n, .nv, .vg) {
 }
 
 // ??
-.gh, .gp {
+.highlight :is(.gh, .gp) {
 }
 
 table {
