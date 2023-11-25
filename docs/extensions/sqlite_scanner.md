@@ -54,8 +54,8 @@ Then you can query those views normally using SQL, e.g., using the example queri
 
 ```sql
 SELECT
-  cat.name category_name,
-  sum(ifnull(pay.amount, 0)) revenue
+  cat.name AS category_name,
+  sum(ifnull(pay.amount, 0)) AS revenue
 FROM category cat
 LEFT JOIN film_category flm_cat
        ON cat.category_id = flm_cat.category_id
