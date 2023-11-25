@@ -284,3 +284,11 @@ This call returns the following information for the given table:
 | `block_offset` | `BIGINT`  | empty unless persistent                               |
 
 See [Storage](/internals/storage) for more information.
+
+### `show_databases`
+
+The following statement is equivalent to the [`SHOW DATABASES` statement](statements/attach):
+
+```sql
+PRAGMA show_databases;
+```
