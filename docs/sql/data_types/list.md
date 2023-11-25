@@ -13,7 +13,7 @@ See the [data types overview](../../sql/data_types/overview) for a comparison be
 
 ## Creating Lists
 
-Lists can be created using the [`list_value(expr, ...)`](../functions/nested#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions. To create a list from a table column, use the [`list`](../aggregates.md#general-aggregate-functions) aggregate function.
+Lists can be created using the [`list_value(expr, ...)`](../functions/nested#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions. To create a list from a table column, use the [`list`](../aggregates#general-aggregate-functions) aggregate function.
 
 ```sql
 -- List of integers
