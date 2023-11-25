@@ -26,9 +26,13 @@ The table below shows the available mathematical operators for numeric types.
 | `~`      | bitwise negation          |                  | `~15`     | `-16` |
 | `!`      | factorial of `x`          |                  | `4!`      | `24`  |
 
+### Division and Modulo Operators
+
 There are two division operators: `/` and `//`.
-They are equivalent when at least one of the operands is a FLOAT or a DOUBLE.
+They are equivalent when at least one of the operands is a `FLOAT` or a `DOUBLE`.
 When both operands are integers, `/` performs floating points division (`5 / 2 = 2.5`) while `//` performs integer division (`5 // 2 = 2`).
+
+### Supported Types
 
 The modulo, bitwise, and negation and factorial operators work only on integral data types,
 whereas the others are available for all numeric data types.
@@ -54,6 +58,8 @@ The table below shows the available mathematical functions.
 | `even(x)` | Round to next even number by rounding away from zero | `even(2.9)` | 4 |
 | `exp(x)` | Computes `e ** x` | `exp(0.693)` | 2 |
 | `factorial(x)` | See `!` operator. Computes the product of the current integer and all integers below it | `factorial(4)` | 24 |
+| `fdiv(x, y)` | Performs integer division (`x // y`). Returns a `DOUBLE` value | `fdiv(5, 2)` | `2.0` |
+| `fmod(x, y)` | Calculates the modulo value. Returns a `DOUBLE` value | `fmod(5, 2)` | `1.0` |
 | `floor(x)` | Rounds the number down | `floor(17.4)` | 17 |
 | `gamma(x)` | Interpolation of (x-1) factorial (so decimal inputs are allowed) | `gamma(5.5)` | 52.34277778455352 |
 | `gcd(x, y)` | Computes the greatest common divisor of x and y | `gcd(42, 57)` | 3 |
