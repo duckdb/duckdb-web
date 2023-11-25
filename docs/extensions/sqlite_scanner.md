@@ -21,9 +21,10 @@ LOAD sqlite;
 
 ## Usage
 
-To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function
+To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function.
 
-For example with the bundled `sakila.db` file:
+For example with the [`sakila.db` file](https://github.com/duckdb/sqlite_scanner/blob/main/data/db/sakila.db):
+
 ```sql
 ATTACH 'sakila.db' (TYPE sqlite);
 -- or
@@ -64,12 +65,12 @@ PRAGMA show_tables;
 └────────────────────────┘
 ```
 
-Then you can query those views normally using SQL, e.g., using the example queries from sakila-examples.sql
+Then you can query those views normally using SQL, e.g., using the example queries from [`sakila-examples.sql`](https://github.com/duckdb/sqlite_scanner/blob/main/data/sql/sakila-examples.sql):
 
 ```sql
 SELECT
-  cat.name AS category_name,
-  sum(ifnull(pay.amount, 0)) AS revenue
+    cat.name AS category_name,
+    sum(ifnull(pay.amount, 0)) AS revenue
 FROM category cat
 LEFT JOIN film_category flm_cat
        ON cat.category_id = flm_cat.category_id
