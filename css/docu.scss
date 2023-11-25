@@ -349,13 +349,13 @@ table pre {
 /* color scheme */
 
 // comments
-.highlight :is(.c, .g, .cm, .cp, .c1) {
+.highlight :is(.c, .ch, .cm, .cp, .cpf, .cs, .c1) {
     color: #a0a1a7;
     font-family: $fontMonoItalic;
 }
 
 // keywords
-.highlight :is(.k, .kn, .kv, .kd) {
+.highlight :is(.k, .kc, .kd, .kn, .kr, .kt, .kv) {
     color: #0098dd;
     font-family: $fontMonoBold;
 }
@@ -366,7 +366,7 @@ table pre {
 }
 
 // foreground
-.highlight :is(.l, .x, .no, .nd, .nx, .py, .w, .nn) {
+.highlight :is(.g, .l, .no, .nd, .nx, .py, .w, .nn) {
     color: #383a42;
 }
 
@@ -415,6 +415,7 @@ th .k {
 
 // ??
 .highlight :is(.n, .nv, .vg) {
+    color: #383a42;
 }
 
 // ??
