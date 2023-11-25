@@ -14,8 +14,33 @@ By default the system will try to auto-detect all options. However, options can 
 
 The detection works by operating on a sample of the file. The size of the sample can be modified by setting the `sample_size` parameter. The default sample size is `20480` rows. Setting the `sample_size` parameter to `-1` means the entire file is read for sampling. The way sampling is performed depends on the type of file. If we are reading from a regular file on disk, we will jump into the file and try to sample from different locations in the file. If we are reading from a file in which we cannot jump - such as a `.gz` compressed CSV file or `stdin` - samples are taken only from the beginning of the file.
 
+## `sniff_csv` Function
 
-## Dialect Detection
+It is possible to run the CSV sniffer as a separate step using the `sniff_csv(filename)` function, which returns the detected CSV properties.
+The `sniff_csv` function accepts an optional `sample_size` parameter to configure the number of rows sampled.
+
+```sql
+FROM sniff_csv('my_file.csv');
+FROM sniff_csv('my_file.csv', sample_size = 1000);
+```
+
+| Column Name | Description | Example |
+|--|-----|-------|
+| `Delimiter` | delimiter | `,` |
+| `Quote` | quote character | `"` |
+| `Escape` | escape | `\` |
+| `NewLineDelimiter` | new-line delimiter | `\r\n` |
+| `SkipRow` | number of rows skipped | 1 |
+| `HasHeader` | whether the CSV has a header | `true` |
+| `Columns` | column types encoded as a `LIST` of `STRUCT`s | `({'name': 'VARCHAR', 'age': 'BIGINT'})` |
+| `DateFormat` | date Format | `%d/%m/%Y` |
+| `TimestampFormat` | timestamp Format | `%Y-%m-%dT%H:%M:%S.%f` |
+| `UserArguments` | arguments used to invoke `sniff_csv` | `sample_size=1000` |
+| `Prompt` | prompt ready to be used to read the CSV | `FROM read_csv('my_file.csv', auto_detect=false, delim=',', ...)` |
+
+## Detection Steps
+
+### Dialect Detection
 
 Dialect detection works by attempting to parse the samples using the set of considered values. The detected dialect is the dialect that has (1) a consistent number of columns for each row, and (2) the highest number of columns for each row.
 
@@ -47,7 +72,7 @@ In this file, the dialect detection works as follows:
 
 In this example - the system selects the `|` as the delimiter. All rows are split into the same amount of columns, and there is more than one column per row meaning the delimiter was actually found in the CSV file.
 
-## Type Detection
+### Type Detection
 
 After detecting the dialect, the system will attempt to figure out the types of each of the columns. Note that this step is only performed if we are calling `read_csv_auto`. In case of the `COPY` statement the types of the table that we are copying into will be used instead.
 
@@ -79,7 +104,7 @@ In files that do not have a header row, the column names are generated as `colum
 
 Note that headers cannot be detected correctly if all columns are of type `VARCHAR` - as in this case the system cannot distinguish the header row from the other rows in the file. In this case the system assumes the file has no header. This can be overridden using the `header` option.
 
-## Dates and Timestamps
+### Dates and Timestamps
 
 DuckDB supports the [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) format by default for timestamps, dates and times. Unfortunately, not all dates and times are formatted using this standard. For that reason, the CSV reader also supports the `dateformat` and `timestampformat` options. Using this format the user can specify a [format string](../../sql/functions/dateformat) that specifies how the date or timestamp should be read.
 
