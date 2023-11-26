@@ -29,11 +29,11 @@ FROM duckdb_extensions();
 | autocomplete     | false  | false     |              | Adds support for autocomplete in the shell                                         | []                |
 | ... | ... | ... | ... | ... | ... |
 
-### Extension Types 
+## Extension Types 
 
 DuckDB has three types of extensions.
 
-#### Built-In Extensions
+### Built-In Extensions
 
 Built-in extensions are loaded at startup and are immediately available for use.
 
@@ -45,7 +45,7 @@ This will use the [`json` extension](json) to read the JSON file.
 
 > To make the DuckDB distribution lightweight, it only contains a few fundamental built-in extensions (e.g., [`autocomplete`](autocomplete), [`json`](json), [`parquet`](parquet)), which are loaded automatically.
 
-#### Autoloadable Extensions
+### Autoloadable Extensions
 
 Autoloadable extensions are loaded on first use.
 
@@ -57,7 +57,7 @@ To access files via the HTTPS protocol, DuckDB will automatically load the [`htt
 Similarly, other autoloadable extensions ([`aws`](aws), [`fts`](full_text_search)) will be loaded on-demand.
 If an extension is not already available locally, it will be installed from the official extension repository (`extensions.duckdb.org`).
 
-#### Explicitly Loadable Extensions
+### Explicitly Loadable Extensions
 
 Some extensions make several changes to the running DuckDB instance, hence, autoloading them may not be possible.
 These extensions have to be installed and loaded using the following SQL statements:
@@ -67,11 +67,7 @@ INSTALL spatial;
 LOAD spatial;
 ```
 
-```sql
-CREATE TABLE tbl (geom GEOMETRY);
-```
-
-#### Extension Handling through the Python API
+### Extension Handling through the Python API
 
 If you are using the [Python API client](../api/python/overview), you can install and load them with the `install_extension(name: str)` and `load_extension(name: str)` methods.
 
@@ -118,6 +114,6 @@ A template for creating extensions is available in the [`extension-template` rep
 
 ## Working with Extensions
 
-For more details, see the [Working with Extensions page](working_with_extensions).
+For advanced installation instructions and more details on extensions, see the [Working with Extensions page](working_with_extensions).
 
 ## Pages in This Section
