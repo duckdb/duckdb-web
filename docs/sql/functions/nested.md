@@ -49,7 +49,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_value(`*`any`*`, ...)`                                 | `list_pack`                                               | Create a `LIST` containing the argument values.                                                                                                                                                  | `list_value(4, 5, 6)`                                      | `[4, 5, 6]`                                                                          |
 | `list_where(`*`value_list`*`, `*`mask_list`*`)`              | `array_where`                                             | Returns a list with the `BOOLEAN`s in `mask_list` applied as a mask to the `value_list`.                                                                                                         | `list_where([10, 20, 30, 40], [true, false, false, true])` | `[10, 40]`                                                                           |
 | `list_zip(`*`list1`*`, `*`list2`*`, ...)`                    | `array_zip`                                               | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements `list_1`, ..., `list_k`. Elements missing will be replaced with `NULL`. | `list_zip([1, 2], [3, 4], [5, 6])`                         | `[{'list_1': 1, 'list_2': 3, 'list_3': 5}, {'list_1': 2, 'list_2': 4, 'list_3': 6}]` |
-| `UNNEST(`*`list`*`)`                                         |                                                           | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](../query_syntax/unnest) for more details.                     | `UNNEST([1, 2, 3])`                                        | `1`, `2`, `3`                                                                        |
+| `unnest(`*`list`*`)`                                         |                                                           | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [`unnest` page](../query_syntax/unnest) for more details.                     | `unnest([1, 2, 3])`                                        | `1`, `2`, `3`                                                                        |
 
 ## List Operators
 
@@ -249,6 +249,7 @@ SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
 ### array_to_string
 
 Concatenates list/array elements using an optional delimiter.
+
 ```sql
 SELECT array_to_string([1, 2, 3], '-') AS str;
 -- 1-2-3
@@ -303,7 +304,7 @@ SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 
 ```sql
 param -> param > 1
-duck -> CONTAINS(CONCAT(duck, 'DB'), 'duck')
+duck -> contains(concat(duck, 'DB'), 'duck')
 (x, y) -> x + y
 ```
 
@@ -322,7 +323,7 @@ SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
 [2, 3, NULL, 4]
 
 -- transforming strings
-SELECT list_transform(['duck', 'a', 'b'], duck -> CONCAT(duck, 'DB'));
+SELECT list_transform(['duck', 'a', 'b'], duck -> concat(duck, 'DB'));
 ----
 [duckDB, aDB, bDB]
 
@@ -456,4 +457,4 @@ SELECT generate_subscripts([4, 5, 6], 1) AS i;
 ## Related Functions
 
 There are also [aggregate functions](../aggregates) `list` and `histogram` that produces lists and lists of structs.
-[UNNEST](../query_syntax/unnest) is used to unnest a list by one level.
+The [`unnest`](../query_syntax/unnest) function is used to unnest a list by one level.

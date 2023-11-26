@@ -131,7 +131,7 @@ After partitioning by plant and ordering by date, it will have this layout:
 In what follows,
 we shall use this table (or small sections of it) to illustrate various pieces of window function evaluation.
 
-The simplest window function is `ROW_NUMBER()`.
+The simplest window function is `row_number()`.
 This function just computes the 1-based row number within the partition using the query:
 
 ```sql

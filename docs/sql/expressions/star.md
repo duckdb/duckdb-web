@@ -13,8 +13,8 @@ SELECT * FROM table_name;
 SELECT table_name.* FROM table_name JOIN other_table_name USING (id);
 -- select all columns except the city column from the addresses table
 SELECT * EXCLUDE (city) FROM addresses;
--- select all columns from the addresses table, but replace city with LOWER(city)
-SELECT * REPLACE (LOWER(city) AS city) FROM addresses;
+-- select all columns from the addresses table, but replace city with lower(city)
+SELECT * REPLACE (lower(city) AS city) FROM addresses;
 -- select all columns matching the given expression
 SELECT COLUMNS(c -> c LIKE '%num%') FROM addresses;
 -- select all columns matching the given regex from the table

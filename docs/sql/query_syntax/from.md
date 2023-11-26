@@ -27,7 +27,7 @@ SELECT * FROM (SELECT * FROM table_name);
 -- select the entire row of the table as a struct
 SELECT t FROM t;
 -- select the entire row of the subquery as a struct (i.e., a single column)
-SELECT t FROM (SELECT UNNEST(generate_series(41, 43)) AS x, 'hello' AS y) t;
+SELECT t FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
 -- join two tables together
 SELECT * FROM table_name JOIN other_table ON (table_name.key = other_table.key);
 -- select a 10% sample from a table
