@@ -15,4 +15,4 @@ If you are made uncomfortable in your role as DuckDB community member, please le
 
 #### Attribution
 
-This Code of Conduct is adapted from the [CCC event CoC](https://www.ccc.de/en/updates/2016/a-reminder-to-be-excellent-to-each-other)
+This Code of Conduct is adapted from the [CCC event CoC](https://www.ccc.de/en/updates/2016/a-reminder-to-be-excellent-to-each-other).
