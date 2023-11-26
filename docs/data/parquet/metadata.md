@@ -15,8 +15,8 @@ Below is a table of the columns returned by `parquet_metadata`.
 
 <div class="narrow_table"></div>
 
-|           Field           |   Type    |
-|---------------------------|-----------|
+| Field                     | Type      |
+| ------------------------- | --------- |
 | `file_name`               | `VARCHAR` |
 | `row_group_id`            | `BIGINT`  |
 | `row_group_num_rows`      | `BIGINT`  |
@@ -57,8 +57,8 @@ Below is a table of the columns returned by `parquet_schema`.
 
 <div class="narrow_table"></div>
 
-|      Field        |   Type    |
-|-------------------|-----------|
+| Field             | Type      |
+| ----------------- | --------- |
 | `file_name`       | `VARCHAR` |
 | `name`            | `VARCHAR` |
 | `type`            | `VARCHAR` |
