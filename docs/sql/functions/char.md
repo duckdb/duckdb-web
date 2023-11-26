@@ -103,6 +103,20 @@ SELECT format('The answer is {}', 42); -- The answer is 42
 SELECT format('I''d rather be {1} than {0}.', 'right', 'happy'); -- I'd rather be happy than right.
 ```
 
+#### Format Specifiers
+
+<div class="narrow_table"></div>
+
+| Specifier | Description | Example |
+|:-|:------|:---|
+| `{:d}`   | integer                                | `123456`       |
+| `{:E}`   | scientific notation                    | `3.141593E+00` |
+| `{:f}`   | float                                  | `4.560000`     |
+| `{:o}`   | octal                                  | `361100`       |
+| `{:s}`   | string                                 | `asd`          |
+| `{:x}`   | hexadecimal                            | `1e240`        |
+| `{:tX}`  | integer, `X` is the thousand separator | `123 456`      |
+
 #### Formatting Types
 
 ```sql
@@ -152,6 +166,24 @@ SELECT printf('The answer is %d', 42); -- The answer is 42
 -- e.g., the second parameter as a string is encoded as '%2$s'
 SELECT printf('I''d rather be %2$s than %1$s.', 'right', 'happy'); -- I'd rather be happy than right.
 ```
+
+#### Format Specifiers
+
+<div class="narrow_table"></div>
+
+| Specifier | Description | Example |
+|:-|:------|:---|
+| `%c`   | character code to character                                    | `a`            |
+| `%d`   | integer                                                        | `123456`       |
+| `%Xd`  | integer with thousand seperarator `X` from `,`, `.`, `''`, `_` | `123_456`      |
+| `%E`   | scientific notation                                            | `3.141593E+00` |
+| `%f`   | float                                                          | `4.560000`     |
+| `%hd`  | integer                                                        | `123456`       |
+| `%hhd` | integer                                                        | `123456`       |
+| `%lld` | integer                                                        | `123456`       |
+| `%o`   | octal                                                          | `361100`       |
+| `%s`   | string                                                         | `asd`          |
+| `%x`   | hexadecimal                                                    | `1e240`        |
 
 #### Formatting Types
 
