@@ -18,14 +18,19 @@ COPY lineitem FROM 'lineitem.json' (FORMAT JSON, AUTO_DETECT true);
 COPY lineitem TO 'lineitem.csv' (FORMAT CSV, DELIMITER '|', HEADER);
 -- write the result of a query to a Parquet file
 COPY (SELECT l_orderkey, l_partkey FROM lineitem) TO 'lineitem.parquet' (COMPRESSION ZSTD);
+
+-- copy the entire content of database 'db1' to database 'db2'
+COPY FROM DATABASE db1 TO db2;
+-- copy only the schema (catalog elements) but not any data
+COPY FROM DATABASE db1 TO db2 (SCHEMA);
 ```
 
-## COPY Statements
+## `COPY` Statements
 
 `COPY` moves data between DuckDB and external files. `COPY ... FROM` imports data into DuckDB from an external file. `COPY ... TO` writes data from DuckDB to an external file. The `COPY` command can be used for `CSV`, `PARQUET` and `JSON` files.
 
 
-### COPY FROM
+### `COPY ... FROM`
 
 `COPY ... FROM` imports data from an external file into an existing table. The data is appended to whatever data is in the table already. The amount of columns inside the file must match the amount of columns in the table `table_name`, and the contents of the columns must be convertible to the column types of the table. In case this is not possible, an error will be thrown.
 
@@ -54,7 +59,7 @@ COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY true);
 
 <div id="rrdiagram1"></div>
 
-### COPY TO
+### `COPY ... TO`
 
 `COPY ... TO` exports data from DuckDB to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
 
@@ -75,11 +80,44 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.ndjson' (FORMAT JSON);
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY true);
 ```
 
+### `COPY FROM DATABASE ... TO`
+
+> This statement is currently only available in nightly builds (DuckDB 0.9.3-dev) and will be released in the upcoming v0.10.0 version.
+
+The `COPY FROM DATABASE ... TO` statement copies the entire content from one attached database to another attached database. This includes the schema, including constraints, indexes, sequences, macros, and the data itself.
+
+```sql
+ATTACH 'db1.db' AS db1;
+USE db1;
+CREATE TABLE tbl AS SELECT 42 AS x, 3 AS y;
+CREATE MACRO two_x_plus_y(x, y) AS 2 * x + y;
+
+ATTACH 'db2.db' AS db2;
+COPY FROM DATABASE db1 TO db2;
+USE db2;
+SELECT two_x_plus_y(x, y) AS z FROM tbl;
+```
+
+```text
+┌───────┐
+│   z   │
+│ int32 │
+├───────┤
+│    87 │
+└───────┘
+```
+
+To only copy the **schema** of `db1` to `db2` but omit copying the data, add `SCHEMA` to the statement:
+
+```sql
+COPY FROM DATABASE db1 TO db2 (SCHEMA);
+```
+
 #### Syntax
 
 <div id="rrdiagram2"></div>
 
-#### COPY Options
+#### `COPY` Options
 
 Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes. 
 
