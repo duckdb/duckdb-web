@@ -37,6 +37,10 @@ import duckdb
 duckdb.read_parquet("example.parquet")
 # read multiple Parquet files from a folder
 duckdb.read_parquet("folder/*.parquet")
+# read a Parquet over https
+duckdb.read_parquet("https://some.url/some_file.parquet")
+# read a list of Parquet files
+duckdb.read_parquet(["file1.parquet", "file2.parquet", "file3.parquet"])
 # directly read a Parquet file from within SQL
 duckdb.sql("SELECT * FROM 'example.parquet'")
 # call read_parquet from within SQL
