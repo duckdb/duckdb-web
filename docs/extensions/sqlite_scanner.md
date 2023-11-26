@@ -26,7 +26,7 @@ To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which su
 For example with the [`sakila.db` file](https://github.com/duckdb/sqlite_scanner/blob/main/data/db/sakila.db):
 
 ```sql
-ATTACH 'sakila.db' (TYPE sqlite);
+ATTACH 'sakila.db' (TYPE SQLITE);
 -- or
 CALL sqlite_attach('sakila.db');
 ```
