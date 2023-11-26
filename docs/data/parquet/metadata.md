@@ -70,3 +70,43 @@ Below is a table of the columns returned by `parquet_schema`.
 | `precision`       | `BIGINT`  |
 | `field_id`        | `BIGINT`  |
 | `logical_type`    | `VARCHAR` |
+
+## Parquet File Metadata
+
+The `parquet_file_metadata` function can be used to query file-level metadata such as the format version and the encryption algorithm used.
+
+```sql
+SELECT * FROM parquet_file_metadata('test.parquet');
+```
+
+Below is a table of the columns returned by `parquet_file_metadata`.
+
+<div class="narrow_table"></div>
+
+| Field                         | Type      |
+| ----------------------------- | --------- |
+| `file_name`                   | `VARCHAR` |
+| `created_by`                  | `VARCHAR` |
+| `num_rows`                    | `BIGINT`  |
+| `num_row_groups`              | `BIGINT`  |
+| `format_version`              | `BIGINT`  |
+| `encryption_algorithm`        | `VARCHAR` |
+| `footer_signing_key_metadata` | `VARCHAR` |
+
+## Parquet Key-Value Metadata
+
+The `parquet_kv_metadata` function can be used to query custom metadata defined as key-value pairs.
+
+```sql
+SELECT * FROM parquet_kv_metadata('test.parquet');
+```
+
+Below is a table of the columns returned by `parquet_kv_metadata`.
+
+<div class="narrow_table"></div>
+
+| Field       | Type      |
+| ----------- | --------- |
+| `file_name` | `VARCHAR` |
+| `key`       | `BLOB`    |
+| `value`     | `BLOB`    |
