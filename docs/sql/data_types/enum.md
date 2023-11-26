@@ -59,35 +59,57 @@ SELECT enum_range(NULL::birds) AS my_enum_range;
 ## Enum Usage
 
 After an enum has been created, it can be used anywhere a standard built-in type is used. For example, we can create a table with a column that references the enum.
+
+Creates a table `person`, with attributes `name` (string type) and `current_mood` (mood type):
+
 ```sql
--- Creates a table person, with attributes name (string type) and current_mood (mood type)
 CREATE TABLE person (
     name TEXT,
     current_mood mood
 );
+```
 
--- Inserts tuples in the person table
+Inserts tuples in the `person` table:
+
+```sql
 INSERT INTO person VALUES ('Pedro', 'happy'), ('Mark', NULL), ('Pagliacci', 'sad'), ('Mr. Mackey', 'ok');
+```
 
--- This will fail since the mood type does not have a 'quackity-quack' value.
+The following query will fail since the mood type does not have a 'quackity-quack' value.
+
+```sql
 INSERT INTO person VALUES ('Hannes', 'quackity-quack');
+```
 
--- The string 'sad' is cast to the type mood, returning a numerical reference value.
--- This makes the comparison a numerical comparison instead of a string comparison.
+The string 'sad' is cast to the type mood, returning a numerical reference value.
+This makes the comparison a numerical comparison instead of a string comparison.
+```sql
 SELECT * FROM person WHERE current_mood = 'sad';
-----
-Pagliacci
+```
+```text
+┌───────────┬───────────────────────────────────────┐
+│   name    │             current_mood              │
+│  varchar  │ enum('sad', 'ok', 'happy', 'anxious') │
+├───────────┼───────────────────────────────────────┤
+│ Pagliacci │ sad                                   │
+└───────────┴───────────────────────────────────────┘
+```
 
--- If you are importing data from a file, you can create an Enum for a VARCHAR column before importing
--- The subquery select automatically selects only distinct values
+If you are importing data from a file, you can create an Enum for a `VARCHAR` column before importing.
+Given this, the following subquery selects automatically selects only distinct values:
+
+```sql
 CREATE TYPE mood AS ENUM (SELECT mood FROM 'path/to/file.csv');
+```
 
--- Then you can create a table with the ENUM type and import using any data import statement
+Then you can create a table with the `ENUM` type and import using any data import statement
+
+```sql
 CREATE TABLE person (name TEXT, current_mood mood);
 COPY person FROM 'path/to/file.csv' (AUTO_DETECT true);
 ```
 
-## Enum vs. Strings
+## Enums vs. Strings
 
 DuckDB Enums are automatically cast to `VARCHAR` types whenever necessary. This characteristic allows for `ENUM` columns to be used in any `VARCHAR` function. In addition, it also allows for comparisons between different `ENUM` columns, or an `ENUM` and a `VARCHAR` column.
 
@@ -95,29 +117,41 @@ For example:
 
 ```sql
 -- regexp_matches is a function that takes a VARCHAR, hence current_mood is cast to VARCHAR
-SELECT regexp_matches(current_mood, '.*a.*') FROM person;
-----
-true
+SELECT regexp_matches(current_mood, '.*a.*') AS contains_a FROM person;
+```
+```text
+┌────────────┐
+│ contains_a │
+│  boolean   │
+├────────────┤
+│ true       │
+│ NULL       │
+│ true       │
+│ false      │
+└────────────┘
+```
 
-true
-false
+Create a new mood and table:
 
-
+```sql
 CREATE TYPE new_mood AS ENUM ('happy', 'anxious');
-
 CREATE TABLE person_2 (
     name text,
     current_mood mood,
-    future_mood new_mood
+    future_mood new_mood,
     past_mood VARCHAR
 );
+```
 
--- Since current_mood and future_mood are constructed on different ENUMs
--- DuckDB will cast both ENUMs to strings and perform a string comparison.
+Since the `current_mood` and `future_mood` columns are constructed on different `ENUM` types, DuckDB will cast both `ENUM`s to strings and perform a string comparison:
+
+```sql
 SELECT * FROM person_2 WHERE current_mood = future_mood;
+```
 
--- Since current_mood is an ENUM
--- DuckDB will cast the current_mood ENUM to VARCHAR and perform a string comparison
+When comparing the `past_mood` column (string), DuckDB will cast the `current_mood` `ENUM` to `VARCHAR` and perform a string comparison:
+
+```sql
 SELECT * FROM person_2 WHERE current_mood = past_mood;
 ```
 
@@ -134,16 +168,24 @@ Currently, it is possible to drop Enums that are used in tables without affectin
 > This feature is subject to change in future releases.
 <!-- any dependent must be removed before dropping the enum, or the enum must be dropped with the additional `CASCADE` parameter.-->
 
-For example:
+For example, this will fail since person has a catalog dependency to the `mood` type:
 
+<!--
 ```sql
--- This will fail since person has a catalog dependency to the mood type
-DROP TYPE mood;
-
-DROP TABLE person;
-DROP TABLE person_2;
-
--- This successfully removes the mood type.
--- Another option would be to DROP TYPE mood CASCADE (Drops the type and its dependents)
 DROP TYPE mood;
 ```
+
+```sql
+DROP TABLE person;
+DROP TABLE person_2;
+```
+-- This successfully removes the mood type.
+DROP TYPE mood;
+```
+
+Another option would be to use cascading `DROP`, which drops the type and its dependents.
+
+```sql
+DROP TYPE mood CASCADE;
+```
+-->
