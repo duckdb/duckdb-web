@@ -152,7 +152,14 @@ db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
         // `SELECT * FROM jsonDataTable` would return the entries in `jsonData`
     });
 });
+```
 
+## Loading Unsigned Extensions
+
+To load [unsigned extensions](../../extensions/overview#ensuring-the-integrity-of-extensions), instantiate the database as follows:
+
+```js
+db = new duckdb.Database(':memory:', {"allow_unsigned_extensions": "true"});
 ```
 
 ## Pages in This Section
