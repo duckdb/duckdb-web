@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Case Statement
+title: CASE Statement
 railroad: expressions/case.js
 ---
 
