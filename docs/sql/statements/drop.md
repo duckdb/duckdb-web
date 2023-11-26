@@ -31,3 +31,14 @@ DROP SCHEMA myschema;
 -- Cascade drops both myschema and myschema.t1
 DROP SCHEMA myschema CASCADE;
 ```
+
+## Limitations on Reclaiming Disk Space
+
+Running `DROP TABLE` should free the memory used by the table, but not always disk space.
+Even if disk space does not decrease, the free blocks will be marked as "free".
+For example, if we have a 2 GB file and we drop a 1 GB table, the file might still be 2 GB, but it should have 1 GB of free blocks in it.
+To check this, use the following `PRAGMA` and check the number of `free_blocks` in the output:
+
+```sql
+PRAGMA database_size;
+```
