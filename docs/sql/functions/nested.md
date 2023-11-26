@@ -249,6 +249,7 @@ SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
 ### array_to_string
 
 Concatenates list/array elements using an optional delimiter.
+
 ```sql
 SELECT array_to_string([1, 2, 3], '-') AS str;
 -- 1-2-3
@@ -303,7 +304,7 @@ SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 
 ```sql
 param -> param > 1
-duck -> CONTAINS(CONCAT(duck, 'DB'), 'duck')
+duck -> contains(concat(duck, 'DB'), 'duck')
 (x, y) -> x + y
 ```
 
@@ -322,7 +323,7 @@ SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
 [2, 3, NULL, 4]
 
 -- transforming strings
-SELECT list_transform(['duck', 'a', 'b'], duck -> CONCAT(duck, 'DB'));
+SELECT list_transform(['duck', 'a', 'b'], duck -> concat(duck, 'DB'));
 ----
 [duckDB, aDB, bDB]
 

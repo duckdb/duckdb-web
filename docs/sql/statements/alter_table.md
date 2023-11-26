@@ -20,7 +20,7 @@ ALTER TABLE integers DROP k;
 -- change the type of the column "i" to the type "VARCHAR" using a standard cast
 ALTER TABLE integers ALTER i TYPE VARCHAR;
 -- change the type of the column "i" to the type "VARCHAR", using the specified expression to convert the data for each row
-ALTER TABLE integers ALTER i SET DATA TYPE VARCHAR USING CONCAT(i, '_', j);
+ALTER TABLE integers ALTER i SET DATA TYPE VARCHAR USING concat(i, '_', j);
 
 -- set the default value of a column
 ALTER TABLE integers ALTER COLUMN i SET DEFAULT 10;
@@ -90,7 +90,7 @@ The `DROP COLUMN` clause can be used to remove a column from a table. Note that 
 -- change the type of the column "i" to the type "VARCHAR" using a standard cast
 ALTER TABLE integers ALTER i TYPE VARCHAR;
 -- change the type of the column "i" to the type "VARCHAR", using the specified expression to convert the data for each row
-ALTER TABLE integers ALTER i SET DATA TYPE VARCHAR USING CONCAT(i, '_', j);
+ALTER TABLE integers ALTER i SET DATA TYPE VARCHAR USING concat(i, '_', j);
 ```
 
 The `SET DATA TYPE` clause changes the type of a column in a table. Any data present in the column is converted according to the provided expression in the `USING` clause, or, if the `USING` clause is absent, cast to the new data type. Note that columns can only have their type changed if they do not have any indexes that rely on them and are not part of any `CHECK` constraints.
