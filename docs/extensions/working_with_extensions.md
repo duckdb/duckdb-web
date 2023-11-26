@@ -41,6 +41,14 @@ Only core extensions are distributed for the following platforms:
 
 We currently do not distribute binaries for extensions on the `linux_arm64_gcc4` platform.
 
+## Using a Custom Extension Repository
+
+To load extensions from a custom extension repository, set the following configuration option:
+
+```sql
+SET custom_extension_repository='bucket.s3.<region>.amazonaws.com/<your_extension_name>/latest';
+```
+
 ## Loading and Installing an Extension from Local Storage
 
 ### Building Extensions
@@ -69,4 +77,12 @@ For example, if the file was unzipped into the same directory as where DuckDB is
 ```sql
 INSTALL 'httpfs.duckdb_extension';
 LOAD 'httpfs.duckdb_extension';
+```
+
+## Force Installing Extensions
+
+In rare cases, ?? something goes wrong and you need force install ??. To resolve this, run:
+
+```sql
+FORCE INSTALL extension_name;
 ```
