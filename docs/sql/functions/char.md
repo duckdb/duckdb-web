@@ -21,7 +21,7 @@ This section describes functions and operators for examining and manipulating st
 | `concat_ws(`*`separator`*`, `*`string`*`, ...)` | Concatenate strings together separated by the specified separator | `concat_ws(', ', 'Banana', 'Apple', 'Melon')` | `Banana, Apple, Melon` | |
 | `contains(`*`string`*`, `*`search_string`*`)` | Return true if *search_string* is found within *string* | `contains('abc', 'a')` | `true` | |
 | `ends_with(`*`string`*`, `*`search_string`*`)`| Return true if *string* ends with *search_string* | `ends_with('abc', 'c')` | `true` | `suffix` |
-| `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using the [fmt syntax](https://github.com/fmtlib/fmt) | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` | |
+| `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using the [fmt syntax](#fmt-syntax) | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` | |
 | `format_bytes(`*`bytes`*`)` | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). | `format_bytes(16384)` | `16.0 KiB` | |
 | `from_base64(`*`string`*`)`| Convert a base64 encoded string to a character string. | `from_base64('QQ==')` | `'A'` | |
 | `hash(`*`value`*`)` | Returns an integer with the hash of the *value* | `hash('🦆')` | `2595805878642663834` | |
@@ -43,7 +43,7 @@ This section describes functions and operators for examining and manipulating st
 | `not_like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `not_like_escape('a%c', 'a$%c', '$')` | `false` | |
 | `ord(`*`string`*`)`| Return ASCII character code of the leftmost character in a string.  | `ord('ü')` | `252` | |
 | `position(`*`search_string`*` in `*`string`*`)` | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `position('b' in 'abc')` | `2` | |
-| `printf(`*`format`*`, `*`parameters`*`...)` | Formats a *string* using printf syntax | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds`     | |
+| `printf(`*`format`*`, `*`parameters`*`...)` | Formats a *string* using [printf syntax](#printf-syntax) | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds`     | |
 | `regexp_full_match(`*`string`*`, `*`regex`*`)`| Returns true if the entire *string* matches the *regex* (see [Pattern Matching](../../sql/functions/patternmatching)) | `regexp_full_match('anabanana', '(an)*')` | `false` | |
 | `regexp_matches(`*`string`*`, `*`regex`*`)`| Returns true if a part of *string* matches the *regex* (see [Pattern Matching](../../sql/functions/patternmatching)) | `regexp_matches('anabanana', '(an)*')` | `true` | |
 | `regexp_replace(`*`string`*`, `*`regex`*`, `*`replacement`*`, `*`modifiers`*`)`| Replaces the first occurrence of *regex* with the *replacement*, use `'g'` modifier to replace all occurrences instead (see [Pattern Matching](../../sql/functions/patternmatching)) | `select regexp_replace('hello', '[lo]', '-')` | `he-lo` | |
@@ -73,7 +73,6 @@ This section describes functions and operators for examining and manipulating st
 | `unicode(`*`string`*`)`| Returns the unicode code of the first character of the *string* | `unicode('ü')` | `252` | |
 | `upper(`*`string`*`)`| Convert *string* to upper case | `upper('Hello')` | `HELLO` | `ucase` |
 
-
 ## Text Similarity Functions
 
 These functions are used to measure the similarity of two strings using various [similarity measures](https://en.wikipedia.org/wiki/Similarity_measure).
@@ -87,3 +86,133 @@ These functions are used to measure the similarity of two strings using various 
 | `jaro_winkler_similarity(`*`s1`*`,` *`s2`*`)` | The Jaro-Winkler similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_winkler_similarity('duck', 'duckdb')` | `0.93` |
 | `levenshtein(`*`s1`*`,` *`s2`*`)` | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different. | `levenshtein('duck', 'db')` | `3` |
 | `mismatches(`*`s1`*`,` *`s2`*`)` | Alias for `hamming(`*`s1`*`,` *`s2`*`)`. The number of positions with different characters for two strings of equal length. Different case is considered different. | `mismatches('duck', 'luck')` | `1` |
+
+## Formatters
+
+### `fmt` Syntax
+
+The `format(`*`format`*`, `*`parameters`*`...)` function formats strings, loosely following the syntax of the [{fmt} open-source formatting library](https://fmt.dev/latest/syntax.html).
+
+```sql
+-- Format without additional parameters
+SELECT format('Hello world'); -- Hello world
+-- Format a string using {}
+SELECT format('The answer is {}', 42); -- The answer is 42
+// s == "The answer is 42."
+-- Format a string using positional arguments
+SELECT format('I''d rather be {1} than {0}.', 'right', 'happy'); -- I'd rather be happy than right.
+```
+
+#### Format Specifiers
+
+<div class="narrow_table"></div>
+
+| Specifier | Description | Example |
+|:-|:------|:---|
+| `{:d}`   | integer                                | `123456`       |
+| `{:E}`   | scientific notation                    | `3.141593E+00` |
+| `{:f}`   | float                                  | `4.560000`     |
+| `{:o}`   | octal                                  | `361100`       |
+| `{:s}`   | string                                 | `asd`          |
+| `{:x}`   | hexadecimal                            | `1e240`        |
+| `{:tX}`  | integer, `X` is the thousand separator | `123 456`      |
+
+#### Formatting Types
+
+```sql
+-- Integers
+SELECT format('{} + {} = {}', 3, 5, 3 + 5); -- 3 + 5 = 8
+-- Booleans
+SELECT format('{} != {}', true, false); -- true != false
+-- Format datetime values
+SELECT format('{}', DATE '1992-01-01'); -- 1992-01-01
+SELECT format('{}', TIME '12:01:00'); -- 12:01:00
+SELECT format('{}', TIMESTAMP '1992-01-01 12:01:00'); -- 1992-01-01 12:01:00
+-- Format BLOB
+SELECT format('{}', BLOB '\x00hello'); -- \x00hello
+-- Pad integers with 0s
+SELECT format('{:04d}', 33); -- 0033
+-- Create timestamps from integers
+SELECT format('{:02d}:{:02d}:{:02d} {}', 12, 3, 16, 'AM'); -- 12:03:16 AM
+-- Convert to hexadecimal
+SELECT format('{:x}', 123456789); -- 75bcd15
+-- Convert to binary
+SELECT format('{:b}', 123456789); -- 111010110111100110100010101
+```
+
+#### Print Numbers with Thousand Separators
+
+```sql
+SELECT format('{:,}',  123456789); -- 123,456,789
+SELECT format('{:t.}', 123456789); -- 123.456.789
+SELECT format('{:''}', 123456789); -- 123'456'789
+SELECT format('{:_}',  123456789); -- 123_456_789
+SELECT format('{:t }', 123456789); -- 123 456 789
+SELECT format('{:tX}', 123456789); -- 123X456X789
+
+```
+
+### `printf` Syntax
+
+The `printf(`*`format`*`, `*`parameters`*`...)` function formats strings using the [`printf` syntax](https://cplusplus.com/reference/cstdio/printf/).
+
+```sql
+-- Format without additional parameters
+SELECT printf('Hello world'); -- Hello world
+-- Format a string using {}
+SELECT printf('The answer is %d', 42); -- The answer is 42
+// s == "The answer is 42."
+-- Format a string using positional arguments '%position$formatter',
+-- e.g., the second parameter as a string is encoded as '%2$s'
+SELECT printf('I''d rather be %2$s than %1$s.', 'right', 'happy'); -- I'd rather be happy than right.
+```
+
+#### Format Specifiers
+
+<div class="narrow_table"></div>
+
+| Specifier | Description | Example |
+|:-|:------|:---|
+| `%c`   | character code to character                                    | `a`            |
+| `%d`   | integer                                                        | `123456`       |
+| `%Xd`  | integer with thousand seperarator `X` from `,`, `.`, `''`, `_` | `123_456`      |
+| `%E`   | scientific notation                                            | `3.141593E+00` |
+| `%f`   | float                                                          | `4.560000`     |
+| `%hd`  | integer                                                        | `123456`       |
+| `%hhd` | integer                                                        | `123456`       |
+| `%lld` | integer                                                        | `123456`       |
+| `%o`   | octal                                                          | `361100`       |
+| `%s`   | string                                                         | `asd`          |
+| `%x`   | hexadecimal                                                    | `1e240`        |
+
+#### Formatting Types
+
+```sql
+-- Integers
+SELECT printf('%d + %d = %d', 3, 5, 3 + 5); -- 3 + 5 = 8
+-- Booleans
+SELECT printf('%s != %s', true, false); -- true != false
+-- Format datetime values
+SELECT printf('%s', DATE '1992-01-01'); -- 1992-01-01
+SELECT printf('%s', TIME '12:01:00'); -- 12:01:00
+SELECT printf('%s', TIMESTAMP '1992-01-01 12:01:00'); -- 1992-01-01 12:01:00
+-- Format BLOB
+SELECT printf('%s', BLOB '\x00hello'); -- \x00hello
+-- Pad integers with 0s
+SELECT printf('%04d', 33); -- 0033
+-- Create timestamps from integers
+SELECT printf('%02d:%02d:%02d %s', 12, 3, 16, 'AM'); -- 12:03:16 AM
+-- Convert to hexadecimal
+SELECT printf('%x', 123456789); -- 75bcd15
+-- Convert to binary
+SELECT printf('%b', 123456789); -- 111010110111100110100010101
+```
+
+#### Thousand Separators
+
+```sql
+SELECT printf('%,d', 123456789);  -- 123,456,789
+SELECT printf('%.d', 123456789);  -- 123.456.789
+SELECT printf('%''d', 123456789); -- 123'456'789
+SELECT printf('%_d', 123456789);  -- 123_456_789
+```
