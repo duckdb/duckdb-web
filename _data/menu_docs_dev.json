@@ -802,7 +802,7 @@
                   "url": "overview"
                 },
                 {
-                  "page": "Case",
+                  "page": "CASE statement",
                   "url": "case"
                 },
                 {
@@ -822,11 +822,11 @@
                   "url": "in"
                 },
                 {
-                  "page": "Logical",
+                  "page": "Logical Operators",
                   "url": "logical_operators"
                 },
                 {
-                  "page": "Star",
+                  "page": "Star Expression",
                   "url": "star"
                 },
                 {

@@ -35,7 +35,7 @@ SELECT * FROM tbl;
 
 The `*` expression can be modified using the `EXCLUDE` and `REPLACE`.
 
-### EXCLUDE Clause
+### `EXCLUDE` Clause
 
 `EXCLUDE` allows us to exclude specific columns from the `*` expression.
 
@@ -43,7 +43,7 @@ The `*` expression can be modified using the `EXCLUDE` and `REPLACE`.
 SELECT * EXCLUDE (col) FROM tbl;
 ```
 
-### Replace Clause
+### `REPLACE` Clause
 
 `REPLACE` allows us to replace specific columns with different expressions.
 
@@ -51,7 +51,7 @@ SELECT * EXCLUDE (col) FROM tbl;
 SELECT * REPLACE (col / 1000 AS col) FROM tbl;
 ```
 
-## COLUMNS
+## `COLUMNS` Expression
 
 The `COLUMNS` expression can be used to execute the same expression on multiple columns. Like the `*` expression, it can only be used in the `SELECT` clause.
 
@@ -79,7 +79,7 @@ SELECT min(COLUMNS(* REPLACE (number + id AS number))), count(COLUMNS(* EXCLUDE 
 |-----------------|------------------------------|-------------------|
 | 1               | 11                           | 3                 |
 
-COLUMNS expressions can also be combined, as long as the `COLUMNS` contains the same (star) expression:
+`COLUMNS` expressions can also be combined, as long as the `COLUMNS` contains the same (star) expression:
 
 ```sql
 SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
@@ -110,7 +110,7 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 | 2  | 20     |
 | 3  | NULL   |
 
-## COLUMNS Lambda Function
+## `COLUMNS` Lambda Function
 
 `COLUMNS` also supports passing in a lambda function. The lambda function will be evaluated for all columns present in the `FROM` clause, and only columns that match the lambda function will be returned. This allows the execution of arbitrary expressions in order to select columns.
 

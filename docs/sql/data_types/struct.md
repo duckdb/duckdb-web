@@ -11,7 +11,7 @@ Conceptually, a `STRUCT` column contains an ordered list of columns called "entr
 
 See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
-Structs can be created using the [`STRUCT_PACK(name := expr, ...)`](../functions/nested#struct-functions) function or the equivalent array notation `{'name': expr, ...}` notation. The expressions can be constants or arbitrary expressions.
+Structs can be created using the [`struct_pack(name := expr, ...)`](../functions/nested#struct-functions) function or the equivalent array notation `{'name': expr, ...}` notation. The expressions can be constants or arbitrary expressions.
 
 ### Creating Structs
 
