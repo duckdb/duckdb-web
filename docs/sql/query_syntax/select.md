@@ -20,8 +20,8 @@ SELECT DISTINCT city FROM addresses;
 SELECT count(*) FROM addresses;
 -- select all columns except the city column from the addresses table
 SELECT * EXCLUDE (city) FROM addresses;
--- select all columns from the addresses table, but replace city with LOWER(city)
-SELECT * REPLACE (LOWER(city) AS city) FROM addresses;
+-- select all columns from the addresses table, but replace city with lower(city)
+SELECT * REPLACE (lower(city) AS city) FROM addresses;
 -- select all columns matching the given regex from the table
 SELECT COLUMNS('number\d+') FROM addresses;
 -- compute a function on all given columns of a table

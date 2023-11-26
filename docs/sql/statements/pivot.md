@@ -82,13 +82,13 @@ PIVOT Cities ON Year USING sum(Population);
 | US      | New York City | 8015 | 8175 | 8772 |
 
 In the above example, the `sum` aggregate is always operating on a single value. 
-If we only want to change the orientation of how the data is displayed without aggregating, use the `FIRST` aggregate function.
-In this example, we are pivoting numeric values, but the `FIRST` function works very well for pivoting out a text column.
+If we only want to change the orientation of how the data is displayed without aggregating, use the `first` aggregate function.
+In this example, we are pivoting numeric values, but the `first` function works very well for pivoting out a text column.
 (This is something that is difficult to do in a spreadsheet pivot table, but easy in DuckDB!)
 
 This query produces a result that is identical to the one above:
 ```sql
-PIVOT Cities ON Year USING FIRST(Population);
+PIVOT Cities ON Year USING first(Population);
 ```
 
 ### PIVOT ON, USING, and GROUP BY
