@@ -299,3 +299,19 @@ The following statement is equivalent to the [`SHOW DATABASES` statement](statem
 ```sql
 PRAGMA show_databases;
 ```
+
+### `user_agent`
+
+The following statement returns the user agent information, e.g., `duckdb/v0.9.2(osx_arm64)`.
+
+```sql
+PRAGMA user_agent;
+```
+
+### `metadata_info`
+
+The following statement returns information on the metadata store (`block_id`, `total_blocks`, `free_blocks`, and `free_list`).
+
+```sql
+PRAGMA metadata_info;
+```
