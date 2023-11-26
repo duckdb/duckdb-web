@@ -198,7 +198,7 @@ FROM (
 ### Internals
 
 Unpivoting is implemented entirely as rewrites into SQL queries. 
-Each `UNPIVOT` is implemented as set of `UNNEST` functions, operating on a list of the column names and a list of the column values.
+Each `UNPIVOT` is implemented as set of `unnest` functions, operating on a list of the column names and a list of the column values.
 If dynamically unpivoting, the `COLUMNS` expression is evaluated first to calculate the column list.
 
 For example:
@@ -215,8 +215,8 @@ is translated into:
 SELECT 
     empid,
     dept,
-    UNNEST(['jan', 'feb', 'mar', 'apr', 'may', 'jun']) AS month,
-    UNNEST(["jan", "feb", "mar", "apr", "may", "jun"]) AS sales
+    unnest(['jan', 'feb', 'mar', 'apr', 'may', 'jun']) AS month,
+    unnest(["jan", "feb", "mar", "apr", "may", "jun"]) AS sales
 FROM monthly_sales;
 ```
 
