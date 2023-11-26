@@ -5,7 +5,7 @@ title: Extensions
 
 ## Overview
 
-DuckDB has a flexible extension mechanism that allows for dynamically loading extension.
+DuckDB has a flexible extension mechanism that allows for dynamically loading extensions.
 These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
 
 > Extensions are loadable on all clients (e.g., Python and R).
