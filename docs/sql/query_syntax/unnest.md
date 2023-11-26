@@ -14,7 +14,7 @@ SELECT UNNEST({'a': 42, 'b': 84});
 SELECT UNNEST([{'a': 42, 'b': 84}, {'a': 100, 'b': NULL}], recursive := true);
 ```
 
-The `UNNEST` function is used to unnest lists or structs by one level. The function can be used as a regular scalar function, but only in the `SELECT` clause. `UNNEST` with the `recursive` parameter will unnest lists and structs of multiple levels.
+The `UNNEST` function is used to unnest lists or structs by one level. The function can be used as a regular scalar function, but only in the `SELECT` clause. Invoking `UNNEST` with the `recursive` parameter will unnest lists and structs of multiple levels.
 
 ### Unnesting Lists
 
@@ -33,7 +33,7 @@ SELECT UNNEST([]);
 SELECT UNNEST(NULL);
 ```
 
-`UNNEST` on a list will emit one tuple per entry in the list. When `UNNEST` is combined with regular scalar expressions, those expressions are repeated for every entry in the list. When multiple lists are unnested in the same `SELECT` clause, the lists are unnested side-by-side. If one list is longer than the other, the shorter list will be padded with `NULL` values.
+Using `UNNEST` on a list will emit one tuple per entry in the list. When `UNNEST` is combined with regular scalar expressions, those expressions are repeated for every entry in the list. When multiple lists are unnested in the same `SELECT` clause, the lists are unnested side-by-side. If one list is longer than the other, the shorter list will be padded with `NULL` values.
 
 An empty list and a `NULL` list will both unnest to zero elements.
 

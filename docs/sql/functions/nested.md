@@ -457,4 +457,4 @@ SELECT generate_subscripts([4, 5, 6], 1) AS i;
 ## Related Functions
 
 There are also [aggregate functions](../aggregates) `list` and `histogram` that produces lists and lists of structs.
-[UNNEST](../query_syntax/unnest) is used to unnest a list by one level.
+The [`UNNEST`](../query_syntax/unnest) function is used to unnest a list by one level.

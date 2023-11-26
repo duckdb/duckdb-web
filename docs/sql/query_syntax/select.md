@@ -102,4 +102,4 @@ SELECT UNNEST([1, 2, 3]);
 SELECT UNNEST({'a': 42, 'b': 84});
 ```
 
-[`UNNEST`](unnest) is a special function that can be used together with [arrays](../data_types/array), [lists](../data_types/list), or [structs](../data_types/struct). The unnest function strips one level of nesting from the type. For example, `INT[]` is transformed into `INT`. `STRUCT(a INT, b INT)` is transformed into `a INT, b INT`. The unnest function can be used to transform nested types into regular scalar types, which makes them easier to operate on.
+The [`UNNEST`](unnest) function is a special function that can be used together with [arrays](../data_types/array), [lists](../data_types/list), or [structs](../data_types/struct). The unnest function strips one level of nesting from the type. For example, `INT[]` is transformed into `INT`. `STRUCT(a INT, b INT)` is transformed into `a INT, b INT`. The unnest function can be used to transform nested types into regular scalar types, which makes them easier to operate on.
