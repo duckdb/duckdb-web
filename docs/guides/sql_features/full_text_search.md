@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: DuckDB Full Text Search
+title: Full Text Search
 ---
 
 DuckDB supports full text search via the [`fts` extension](../../extensions/full_text_search).
