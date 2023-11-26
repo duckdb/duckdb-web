@@ -32,7 +32,7 @@ SELECT min(COLUMNS(*)) FROM addresses;
 
 <div id="rrdiagram"></div>
 
-## Select List
+## `SELECT` List
 
 The `SELECT` clause contains a list of expressions that specify the result of a query. The select list can refer to any columns in the `FROM` clause, and combine them using expressions. As the output of a SQL query is a table - every expression in the `SELECT` clause also has a name. The expressions can be explicitly named using the `AS` clause (e.g., `expr AS name`). If a name is not provided by the user the expressions are named automatically by the system.
 
@@ -93,7 +93,7 @@ SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
 
 [Window functions](../window_functions) are special functions that allow the computation of values relative to *other rows* in a result. Window functions are marked by the `OVER` clause which contains the *window specification*. The window specification defines the frame or context in which the window function is computed. See the [window functions page](../window_functions) for more information.
 
-### `UNNEST`
+### `UNNEST` Function
 
 ```sql
 -- unnest an array by one level

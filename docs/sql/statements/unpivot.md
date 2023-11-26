@@ -94,9 +94,9 @@ INTO
 
 ### UNPIVOT Dynamically Using Columns Expression
 
-In many cases, the number of columns to unpivot is not easy to predetermine ahead of time. 
-In the case of this dataset, the query above would have to change each time a new month is added. 
-The [`COLUMNS` expression](../expressions/star#columns) can be used to select all columns that are not `empid` or `dept`. 
+In many cases, the number of columns to unpivot is not easy to predetermine ahead of time.
+In the case of this dataset, the query above would have to change each time a new month is added.
+The [`COLUMNS` expression](../expressions/star#columns-expression) can be used to select all columns that are not `empid` or `dept`.
 This enables dynamic unpivoting that will work regardless of how many months are added.
 The query below returns identical results to the one above.
 
