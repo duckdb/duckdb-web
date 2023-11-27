@@ -88,14 +88,12 @@ The `COPY FROM DATABASE ... TO` statement copies the entire content from one att
 
 ```sql
 ATTACH 'db1.db' AS db1;
-USE db1;
-CREATE TABLE tbl AS SELECT 42 AS x, 3 AS y;
-CREATE MACRO two_x_plus_y(x, y) AS 2 * x + y;
+CREATE TABLE db1.tbl AS SELECT 42 AS x, 3 AS y;
+CREATE MACRO db1.two_x_plus_y(x, y) AS 2 * x + y;
 
 ATTACH 'db2.db' AS db2;
 COPY FROM DATABASE db1 TO db2;
-USE db2;
-SELECT two_x_plus_y(x, y) AS z FROM tbl;
+SELECT db2.two_x_plus_y(x, y) AS z FROM db2.tbl;
 ```
 
 ```text
