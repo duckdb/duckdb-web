@@ -171,7 +171,7 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 ## `duckdb_optimizers`
 
 The `duckdb_optimizers()` function provides metadata about the optimization rules (e.g., `expression_rewriter`, `filter_pushdown`) available in the DuckDB instance.
-These can be selectively turned off using [`PRAGMA disabled_optimizers'](pragmas#disabled_optimizers).
+These can be selectively turned off using [`PRAGMA disabled_optimizers`](pragmas#disabled_optimizers).
 
 <div class="narrow_table"></div>
 
