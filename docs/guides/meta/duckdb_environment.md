@@ -83,6 +83,7 @@ DuckDB has the following built-in table functions to obtain metadata about avail
 * [`duckdb_functions()`](../../sql/duckdb_table_functions#duckdb_functions): functions 
 * [`duckdb_indexes()`](../../sql/duckdb_table_functions#duckdb_indexes): secondary indexes 
 * [`duckdb_keywords()`](../../sql/duckdb_table_functions#duckdb_keywords): DuckDB's keywords and reserved words
+* [`duckdb_optimizers()`](../../sql/duckdb_table_functions#duckdb_optimizers): the optimization rules (e.g., `expression_rewriter`, `filter_pushdown`) available in the DuckDB instance
 * [`duckdb_schemas()`](../../sql/duckdb_table_functions#duckdb_schemas): schemas 
 * [`duckdb_sequences()`](../../sql/duckdb_table_functions#duckdb_sequences): sequences 
 * [`duckdb_settings()`](../../sql/duckdb_table_functions#duckdb_settings): settings  
