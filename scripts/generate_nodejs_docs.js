@@ -13,7 +13,7 @@ let docs = jsdoc2md.renderSync({ files: duckdb + '/lib/*.js' });
 docs = `\
 ---
 layout: docu
-title: NodeJS API
+title: Node.js API
 ---
 ` + docs;
 
