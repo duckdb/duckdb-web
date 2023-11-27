@@ -69,6 +69,10 @@
         {
           "page": "Building",
           "url": "/dev/building"
+        },
+        {
+          "page": "Benchmark Suite",
+          "url": "/dev/benchmark"
         }
       ]
     },
