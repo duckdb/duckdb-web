@@ -315,3 +315,16 @@ The following statement returns information on the metadata store (`block_id`, `
 ```sql
 PRAGMA metadata_info;
 ```
+
+### `disabled_optimizers`
+
+The `disabled_optimizers` option allows selectively disabling optimization steps.
+For example, to disable `filter_pushdown` and `statistics_propagation`, run:
+
+```sql
+PRAGMA disabled_optimizers='filter_pushdown,statistics_propagation';
+```
+
+The available optimizations are the following: `expression_rewriter`, `filter_pullup`, `filter_pushdown`, `regex_range`, `in_clause`, `join_order`, `deliminator`, `unnest_rewriter`, `unused_columns`, `statistics_propagation`, `common_subexpressions`, `common_aggregate`, `column_lifetime`, `top_n`, `compressed_materialization`, `duplicate_groups`, `reorder_filter`, `extension`.
+
+> `PRAGMA disabled_optimizers` should only be used for debugging performance issues and should be avoided in production.
