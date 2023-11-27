@@ -9,343 +9,349 @@ title: C API - Complete API
 
 ### `Open/Connect`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_open">duckdb_open</a></span>(<span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>, <span class="kt">duckdb_database</span> *<span class="k">out_database</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_open_ext">duckdb_open_ext</a></span>(<span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>, <span class="kt">duckdb_database</span> *<span class="k">out_database</span>, <span class="kt">duckdb_config</span> <span class="k">config</span>, <span class="kt">char</span> **<span class="k">out_error</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_close">duckdb_close</a></span>(<span class="kt">duckdb_database</span> *<span class="k">database</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_connect">duckdb_connect</a></span>(<span class="kt">duckdb_database</span> <span class="k">database</span>, <span class="kt">duckdb_connection</span> *<span class="k">out_connection</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_interrupt">duckdb_interrupt</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>);
-<span class="kt">double</span> <span class="nf"><a href="#duckdb_query_progress">duckdb_query_progress</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_disconnect">duckdb_disconnect</a></span>(<span class="kt">duckdb_connection</span> *<span class="k">connection</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_library_version">duckdb_library_version</a></span>();
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_open"><span class="nf">duckdb_open</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>, <span class="kt">duckdb_database</span> *<span class="nv">out_database</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_open_ext"><span class="nf">duckdb_open_ext</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>, <span class="kt">duckdb_database</span> *<span class="nv">out_database</span>, <span class="kt">duckdb_config</span> <span class="nv">config</span>, <span class="kt">char</span> **<span class="nv">out_error</span>);
+<span class="kt">void</span> <a href="#duckdb_close"><span class="nf">duckdb_close</span></a>(<span class="kt">duckdb_database</span> *<span class="nv">database</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_connect"><span class="nf">duckdb_connect</span></a>(<span class="kt">duckdb_database</span> <span class="nv">database</span>, <span class="kt">duckdb_connection</span> *<span class="nv">out_connection</span>);
+<span class="kt">void</span> <a href="#duckdb_interrupt"><span class="nf">duckdb_interrupt</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
+<span class="kt">double</span> <a href="#duckdb_query_progress"><span class="nf">duckdb_query_progress</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
+<span class="kt">void</span> <a href="#duckdb_disconnect"><span class="nf">duckdb_disconnect</span></a>(<span class="kt">duckdb_connection</span> *<span class="nv">connection</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_library_version"><span class="nf">duckdb_library_version</span></a>();
 </code></pre></div></div>
 
 ### `Configuration`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_create_config">duckdb_create_config</a></span>(<span class="kt">duckdb_config</span> *<span class="k">out_config</span>);
-<span class="kt">size_t</span> <span class="nf"><a href="#duckdb_config_count">duckdb_config_count</a></span>();
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_get_config_flag">duckdb_get_config_flag</a></span>(<span class="kt">size_t</span> <span class="k">index</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="k">out_name</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="k">out_description</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_set_config">duckdb_set_config</a></span>(<span class="kt">duckdb_config</span> <span class="k">config</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">option</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_config">duckdb_destroy_config</a></span>(<span class="kt">duckdb_config</span> *<span class="k">config</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_create_config"><span class="nf">duckdb_create_config</span></a>(<span class="kt">duckdb_config</span> *<span class="nv">out_config</span>);
+<span class="kt">size_t</span> <a href="#duckdb_config_count"><span class="nf">duckdb_config_count</span></a>();
+<span class="kt">duckdb_state</span> <a href="#duckdb_get_config_flag"><span class="nf">duckdb_get_config_flag</span></a>(<span class="kt">size_t</span> <span class="nv">index</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_name</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_description</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_set_config"><span class="nf">duckdb_set_config</span></a>(<span class="kt">duckdb_config</span> <span class="nv">config</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">option</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_config"><span class="nf">duckdb_destroy_config</span></a>(<span class="kt">duckdb_config</span> *<span class="nv">config</span>);
 </code></pre></div></div>
 
 ### `Query Execution`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_query">duckdb_query</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>, <span class="kt">duckdb_result</span> *<span class="k">out_result</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_result">duckdb_destroy_result</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_column_name">duckdb_column_name</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
-<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_column_type">duckdb_column_type</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_column_logical_type">duckdb_column_logical_type</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_column_count">duckdb_column_count</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_row_count">duckdb_row_count</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_rows_changed">duckdb_rows_changed</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
-<span class="kt">void</span> *<span class="nf"><a href="#duckdb_column_data">duckdb_column_data</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
-<span class="kt">bool</span> *<span class="nf"><a href="#duckdb_nullmask_data">duckdb_nullmask_data</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_result_error">duckdb_result_error</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_query"><span class="nf">duckdb_query</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_result"><span class="nf">duckdb_destroy_result</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_column_name"><span class="nf">duckdb_column_name</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="nv">duckdb_type</span> <a href="#duckdb_column_type"><span class="nf">duckdb_column_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="nv">duckdb_statement_type</span> <a href="#duckdb_result_statement_type"><span class="nf">duckdb_result_statement_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_column_logical_type"><span class="nf">duckdb_column_logical_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_column_count"><span class="nf">duckdb_column_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_row_count"><span class="nf">duckdb_row_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_rows_changed"><span class="nf">duckdb_rows_changed</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
+<span class="kt">void</span> *<a href="#duckdb_column_data"><span class="nf">duckdb_column_data</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">bool</span> *<a href="#duckdb_nullmask_data"><span class="nf">duckdb_nullmask_data</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_result_error"><span class="nf">duckdb_result_error</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 </code></pre></div></div>
 
 ### `Result Functions`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nf"><a href="#duckdb_result_get_chunk">duckdb_result_get_chunk</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">chunk_index</span>);
-<span class="kt">bool</span> <span class="nf"><a href="#duckdb_result_is_streaming">duckdb_result_is_streaming</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_result_chunk_count">duckdb_result_chunk_count</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>);
-<span class="kt">bool</span> <span class="nf"><a href="#duckdb_value_boolean">duckdb_value_boolean</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">int8_t</span> <span class="nf"><a href="#duckdb_value_int8">duckdb_value_int8</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">int16_t</span> <span class="nf"><a href="#duckdb_value_int16">duckdb_value_int16</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">int32_t</span> <span class="nf"><a href="#duckdb_value_int32">duckdb_value_int32</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">int64_t</span> <span class="nf"><a href="#duckdb_value_int64">duckdb_value_int64</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_hugeint</span> <span class="nf"><a href="#duckdb_value_hugeint">duckdb_value_hugeint</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="k">duckdb_decimal</span> <span class="nf"><a href="#duckdb_value_decimal">duckdb_value_decimal</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_value_uint8">duckdb_value_uint8</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">uint16_t</span> <span class="nf"><a href="#duckdb_value_uint16">duckdb_value_uint16</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">uint32_t</span> <span class="nf"><a href="#duckdb_value_uint32">duckdb_value_uint32</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">uint64_t</span> <span class="nf"><a href="#duckdb_value_uint64">duckdb_value_uint64</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">float</span> <span class="nf"><a href="#duckdb_value_float">duckdb_value_float</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">double</span> <span class="nf"><a href="#duckdb_value_double">duckdb_value_double</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_date</span> <span class="nf"><a href="#duckdb_value_date">duckdb_value_date</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_time</span> <span class="nf"><a href="#duckdb_value_time">duckdb_value_time</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_timestamp</span> <span class="nf"><a href="#duckdb_value_timestamp">duckdb_value_timestamp</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_interval</span> <span class="nf"><a href="#duckdb_value_interval">duckdb_value_interval</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_value_varchar">duckdb_value_varchar</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_value_varchar_internal">duckdb_value_varchar_internal</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="k">duckdb_string</span> <span class="nf"><a href="#duckdb_value_string_internal">duckdb_value_string_internal</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_blob</span> <span class="nf"><a href="#duckdb_value_blob">duckdb_value_blob</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">bool</span> <span class="nf"><a href="#duckdb_value_is_null">duckdb_value_is_null</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <a href="#duckdb_result_get_chunk"><span class="nf">duckdb_result_get_chunk</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">chunk_index</span>);
+<span class="kt">bool</span> <a href="#duckdb_result_is_streaming"><span class="nf">duckdb_result_is_streaming</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_result_chunk_count"><span class="nf">duckdb_result_chunk_count</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="nv">duckdb_result_type</span> <a href="#duckdb_result_return_type"><span class="nf">duckdb_result_return_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">bool</span> <a href="#duckdb_value_boolean"><span class="nf">duckdb_value_boolean</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">int8_t</span> <a href="#duckdb_value_int8"><span class="nf">duckdb_value_int8</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">int16_t</span> <a href="#duckdb_value_int16"><span class="nf">duckdb_value_int16</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">int32_t</span> <a href="#duckdb_value_int32"><span class="nf">duckdb_value_int32</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">int64_t</span> <a href="#duckdb_value_int64"><span class="nf">duckdb_value_int64</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">duckdb_hugeint</span> <a href="#duckdb_value_hugeint"><span class="nf">duckdb_value_hugeint</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="nv">duckdb_decimal</span> <a href="#duckdb_value_decimal"><span class="nf">duckdb_value_decimal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">uint8_t</span> <a href="#duckdb_value_uint8"><span class="nf">duckdb_value_uint8</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">uint16_t</span> <a href="#duckdb_value_uint16"><span class="nf">duckdb_value_uint16</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">uint32_t</span> <a href="#duckdb_value_uint32"><span class="nf">duckdb_value_uint32</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">uint64_t</span> <a href="#duckdb_value_uint64"><span class="nf">duckdb_value_uint64</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">float</span> <a href="#duckdb_value_float"><span class="nf">duckdb_value_float</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">double</span> <a href="#duckdb_value_double"><span class="nf">duckdb_value_double</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">duckdb_date</span> <a href="#duckdb_value_date"><span class="nf">duckdb_value_date</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">duckdb_time</span> <a href="#duckdb_value_time"><span class="nf">duckdb_value_time</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">duckdb_timestamp</span> <a href="#duckdb_value_timestamp"><span class="nf">duckdb_value_timestamp</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">duckdb_interval</span> <a href="#duckdb_value_interval"><span class="nf">duckdb_value_interval</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">char</span> *<a href="#duckdb_value_varchar"><span class="nf">duckdb_value_varchar</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">char</span> *<a href="#duckdb_value_varchar_internal"><span class="nf">duckdb_value_varchar_internal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="nv">duckdb_string</span> <a href="#duckdb_value_string_internal"><span class="nf">duckdb_value_string_internal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">duckdb_blob</span> <a href="#duckdb_value_blob"><span class="nf">duckdb_value_blob</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">bool</span> <a href="#duckdb_value_is_null"><span class="nf">duckdb_value_is_null</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 </code></pre></div></div>
 
 ### `Helpers`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nf"><a href="#duckdb_malloc">duckdb_malloc</a></span>(<span class="kt">size_t</span> <span class="k">size</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_free">duckdb_free</a></span>(<span class="kt">void</span> *<span class="k">ptr</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_vector_size">duckdb_vector_size</a></span>();
-<span class="kt">bool</span> <span class="nf"><a href="#duckdb_string_is_inlined">duckdb_string_is_inlined</a></span>(<span class="k">duckdb_string_t</span> <span class="k">string</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#duckdb_malloc"><span class="nf">duckdb_malloc</span></a>(<span class="kt">size_t</span> <span class="nv">size</span>);
+<span class="kt">void</span> <a href="#duckdb_free"><span class="nf">duckdb_free</span></a>(<span class="kt">void</span> *<span class="nv">ptr</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_vector_size"><span class="nf">duckdb_vector_size</span></a>();
+<span class="kt">bool</span> <a href="#duckdb_string_is_inlined"><span class="nf">duckdb_string_is_inlined</span></a>(<span class="nv">duckdb_string_t</span> <span class="nv">string</span>);
 </code></pre></div></div>
 
 ### `Date/Time/Timestamp Helpers`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <span class="nf"><a href="#duckdb_from_date">duckdb_from_date</a></span>(<span class="kt">duckdb_date</span> <span class="k">date</span>);
-<span class="kt">duckdb_date</span> <span class="nf"><a href="#duckdb_to_date">duckdb_to_date</a></span>(<span class="kt">duckdb_date_struct</span> <span class="k">date</span>);
-<span class="kt">duckdb_time_struct</span> <span class="nf"><a href="#duckdb_from_time">duckdb_from_time</a></span>(<span class="kt">duckdb_time</span> <span class="k">time</span>);
-<span class="kt">duckdb_time</span> <span class="nf"><a href="#duckdb_to_time">duckdb_to_time</a></span>(<span class="kt">duckdb_time_struct</span> <span class="k">time</span>);
-<span class="kt">duckdb_timestamp_struct</span> <span class="nf"><a href="#duckdb_from_timestamp">duckdb_from_timestamp</a></span>(<span class="kt">duckdb_timestamp</span> <span class="k">ts</span>);
-<span class="kt">duckdb_timestamp</span> <span class="nf"><a href="#duckdb_to_timestamp">duckdb_to_timestamp</a></span>(<span class="kt">duckdb_timestamp_struct</span> <span class="k">ts</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <a href="#duckdb_from_date"><span class="nf">duckdb_from_date</span></a>(<span class="kt">duckdb_date</span> <span class="nv">date</span>);
+<span class="kt">duckdb_date</span> <a href="#duckdb_to_date"><span class="nf">duckdb_to_date</span></a>(<span class="kt">duckdb_date_struct</span> <span class="nv">date</span>);
+<span class="kt">duckdb_time_struct</span> <a href="#duckdb_from_time"><span class="nf">duckdb_from_time</span></a>(<span class="kt">duckdb_time</span> <span class="nv">time</span>);
+<span class="kt">duckdb_time</span> <a href="#duckdb_to_time"><span class="nf">duckdb_to_time</span></a>(<span class="kt">duckdb_time_struct</span> <span class="nv">time</span>);
+<span class="kt">duckdb_timestamp_struct</span> <a href="#duckdb_from_timestamp"><span class="nf">duckdb_from_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
+<span class="kt">duckdb_timestamp</span> <a href="#duckdb_to_timestamp"><span class="nf">duckdb_to_timestamp</span></a>(<span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts</span>);
 </code></pre></div></div>
 
 ### `Hugeint Helpers`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf"><a href="#duckdb_hugeint_to_double">duckdb_hugeint_to_double</a></span>(<span class="kt">duckdb_hugeint</span> <span class="k">val</span>);
-<span class="kt">duckdb_hugeint</span> <span class="nf"><a href="#duckdb_double_to_hugeint">duckdb_double_to_hugeint</a></span>(<span class="kt">double</span> <span class="k">val</span>);
-<span class="k">duckdb_decimal</span> <span class="nf"><a href="#duckdb_double_to_decimal">duckdb_double_to_decimal</a></span>(<span class="kt">double</span> <span class="k">val</span>, <span class="kt">uint8_t</span> <span class="k">width</span>, <span class="kt">uint8_t</span> <span class="k">scale</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_hugeint_to_double"><span class="nf">duckdb_hugeint_to_double</span></a>(<span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
+<span class="kt">duckdb_hugeint</span> <a href="#duckdb_double_to_hugeint"><span class="nf">duckdb_double_to_hugeint</span></a>(<span class="kt">double</span> <span class="nv">val</span>);
+<span class="nv">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
 </code></pre></div></div>
 
 ### `Decimal Helpers`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf"><a href="#duckdb_decimal_to_double">duckdb_decimal_to_double</a></span>(<span class="k">duckdb_decimal</span> <span class="k">val</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
 </code></pre></div></div>
 
 ### `Prepared Statements`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_prepare">duckdb_prepare</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>, <span class="kt">duckdb_prepared_statement</span> *<span class="k">out_prepared_statement</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_prepare">duckdb_destroy_prepare</a></span>(<span class="kt">duckdb_prepared_statement</span> *<span class="k">prepared_statement</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_prepare_error">duckdb_prepare_error</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_nparams">duckdb_nparams</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_parameter_name">duckdb_parameter_name</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_param_type">duckdb_param_type</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_clear_bindings">duckdb_clear_bindings</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_value">duckdb_bind_value</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">duckdb_value</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_parameter_index">duckdb_bind_parameter_index</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> *<span class="k">param_idx_out</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_boolean">duckdb_bind_boolean</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">bool</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int8">duckdb_bind_int8</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int8_t</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int16">duckdb_bind_int16</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int16_t</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int32">duckdb_bind_int32</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int32_t</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int64">duckdb_bind_int64</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int64_t</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_hugeint">duckdb_bind_hugeint</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">duckdb_hugeint</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_decimal">duckdb_bind_decimal</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="k">duckdb_decimal</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_uint8">duckdb_bind_uint8</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">uint8_t</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_uint16">duckdb_bind_uint16</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">uint16_t</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_uint32">duckdb_bind_uint32</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">uint32_t</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_uint64">duckdb_bind_uint64</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">uint64_t</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_float">duckdb_bind_float</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">float</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_double">duckdb_bind_double</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">double</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_date">duckdb_bind_date</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">duckdb_date</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_time">duckdb_bind_time</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">duckdb_time</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_timestamp">duckdb_bind_timestamp</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">duckdb_timestamp</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_interval">duckdb_bind_interval</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">duckdb_interval</span> <span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_varchar">duckdb_bind_varchar</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_varchar_length">duckdb_bind_varchar_length</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val</span>, <span class="kt">idx_t</span> <span class="k">length</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_blob">duckdb_bind_blob</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="k">data</span>, <span class="kt">idx_t</span> <span class="k">length</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_null">duckdb_bind_null</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_prepared">duckdb_execute_prepared</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="k">out_result</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_prepared_arrow">duckdb_execute_prepared_arrow</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">duckdb_arrow</span> *<span class="k">out_result</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_arrow_scan">duckdb_arrow_scan</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>, <span class="k">duckdb_arrow_stream</span> <span class="k">arrow</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_arrow_array_scan">duckdb_arrow_array_scan</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>, <span class="kt">duckdb_arrow_schema</span> <span class="k">arrow_schema</span>, <span class="kt">duckdb_arrow_array</span> <span class="k">arrow_array</span>, <span class="k">duckdb_arrow_stream</span> *<span class="k">out_stream</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_prepare"><span class="nf">duckdb_prepare</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">duckdb_prepared_statement</span> *<span class="nv">out_prepared_statement</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_prepare"><span class="nf">duckdb_destroy_prepare</span></a>(<span class="kt">duckdb_prepared_statement</span> *<span class="nv">prepared_statement</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_prepare_error"><span class="nf">duckdb_prepare_error</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_nparams"><span class="nf">duckdb_nparams</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_parameter_name"><span class="nf">duckdb_parameter_name</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="nv">duckdb_type</span> <a href="#duckdb_param_type"><span class="nf">duckdb_param_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_clear_bindings"><span class="nf">duckdb_clear_bindings</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
+<span class="nv">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_value"><span class="nf">duckdb_bind_value</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_value</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_parameter_index"><span class="nf">duckdb_bind_parameter_index</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> *<span class="nv">param_idx_out</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_boolean"><span class="nf">duckdb_bind_boolean</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">bool</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int8"><span class="nf">duckdb_bind_int8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int8_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int16"><span class="nf">duckdb_bind_int16</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int16_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int32"><span class="nf">duckdb_bind_int32</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int32_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int64"><span class="nf">duckdb_bind_int64</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int64_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_hugeint"><span class="nf">duckdb_bind_hugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_decimal"><span class="nf">duckdb_bind_decimal</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint8"><span class="nf">duckdb_bind_uint8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint8_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint16"><span class="nf">duckdb_bind_uint16</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint16_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint32"><span class="nf">duckdb_bind_uint32</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint32_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint64"><span class="nf">duckdb_bind_uint64</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint64_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_float"><span class="nf">duckdb_bind_float</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">float</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_double"><span class="nf">duckdb_bind_double</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">double</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_date"><span class="nf">duckdb_bind_date</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_date</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_time"><span class="nf">duckdb_bind_time</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_time</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_timestamp"><span class="nf">duckdb_bind_timestamp</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_timestamp</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_interval"><span class="nf">duckdb_bind_interval</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_interval</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar"><span class="nf">duckdb_bind_varchar</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar_length"><span class="nf">duckdb_bind_varchar_length</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_blob"><span class="nf">duckdb_bind_blob</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_null"><span class="nf">duckdb_bind_null</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared"><span class="nf">duckdb_execute_prepared</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_arrow"><span class="nf">duckdb_execute_prepared_arrow</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_arrow</span> *<span class="nv">out_result</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_arrow_scan"><span class="nf">duckdb_arrow_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_arrow_array_scan"><span class="nf">duckdb_arrow_array_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>, <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>, <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream</span>);
 </code></pre></div></div>
 
 ### `Extract Statements`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_extract_statements">duckdb_extract_statements</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>, <span class="k">duckdb_extracted_statements</span> *<span class="k">out_extracted_statements</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_prepare_extracted_statement">duckdb_prepare_extracted_statement</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="k">duckdb_extracted_statements</span> <span class="k">extracted_statements</span>, <span class="kt">idx_t</span> <span class="k">index</span>, <span class="kt">duckdb_prepared_statement</span> *<span class="k">out_prepared_statement</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_extract_statements_error">duckdb_extract_statements_error</a></span>(<span class="k">duckdb_extracted_statements</span> <span class="k">extracted_statements</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_extracted">duckdb_destroy_extracted</a></span>(<span class="k">duckdb_extracted_statements</span> *<span class="k">extracted_statements</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <a href="#duckdb_extract_statements"><span class="nf">duckdb_extract_statements</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="nv">duckdb_extracted_statements</span> *<span class="nv">out_extracted_statements</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_prepare_extracted_statement"><span class="nf">duckdb_prepare_extracted_statement</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">duckdb_extracted_statements</span> <span class="nv">extracted_statements</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">duckdb_prepared_statement</span> *<span class="nv">out_prepared_statement</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_extract_statements_error"><span class="nf">duckdb_extract_statements_error</span></a>(<span class="nv">duckdb_extracted_statements</span> <span class="nv">extracted_statements</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_extracted"><span class="nf">duckdb_destroy_extracted</span></a>(<span class="nv">duckdb_extracted_statements</span> *<span class="nv">extracted_statements</span>);
 </code></pre></div></div>
 
 ### `Pending Result Interface`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_pending_prepared">duckdb_pending_prepared</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="k">duckdb_pending_result</span> *<span class="k">out_result</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_pending_prepared_streaming">duckdb_pending_prepared_streaming</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="k">duckdb_pending_result</span> *<span class="k">out_result</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_pending">duckdb_destroy_pending</a></span>(<span class="k">duckdb_pending_result</span> *<span class="k">pending_result</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_pending_error">duckdb_pending_error</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>);
-<span class="k">duckdb_pending_state</span> <span class="nf"><a href="#duckdb_pending_execute_task">duckdb_pending_execute_task</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_pending">duckdb_execute_pending</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>, <span class="kt">duckdb_result</span> *<span class="k">out_result</span>);
-<span class="kt">bool</span> <span class="nf"><a href="#duckdb_pending_execution_is_finished">duckdb_pending_execution_is_finished</a></span>(<span class="k">duckdb_pending_state</span> <span class="k">pending_state</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_pending_prepared"><span class="nf">duckdb_pending_prepared</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="nv">duckdb_pending_result</span> *<span class="nv">out_result</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_pending_prepared_streaming"><span class="nf">duckdb_pending_prepared_streaming</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="nv">duckdb_pending_result</span> *<span class="nv">out_result</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_pending"><span class="nf">duckdb_destroy_pending</span></a>(<span class="nv">duckdb_pending_result</span> *<span class="nv">pending_result</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_pending_error"><span class="nf">duckdb_pending_error</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>);
+<span class="nv">duckdb_pending_state</span> <a href="#duckdb_pending_execute_task"><span class="nf">duckdb_pending_execute_task</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_execute_pending"><span class="nf">duckdb_execute_pending</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
+<span class="kt">bool</span> <a href="#duckdb_pending_execution_is_finished"><span class="nf">duckdb_pending_execution_is_finished</span></a>(<span class="nv">duckdb_pending_state</span> <span class="nv">pending_state</span>);
 </code></pre></div></div>
 
 ### `Value Interface`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_value">duckdb_destroy_value</a></span>(<span class="kt">duckdb_value</span> *<span class="k">value</span>);
-<span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_create_varchar">duckdb_create_varchar</a></span>(<span class="kt">const</span> <span class="kt">char</span> *<span class="k">text</span>);
-<span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_create_varchar_length">duckdb_create_varchar_length</a></span>(<span class="kt">const</span> <span class="kt">char</span> *<span class="k">text</span>, <span class="kt">idx_t</span> <span class="k">length</span>);
-<span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_create_int64">duckdb_create_int64</a></span>(<span class="kt">int64_t</span> <span class="k">val</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_get_varchar">duckdb_get_varchar</a></span>(<span class="kt">duckdb_value</span> <span class="k">value</span>);
-<span class="kt">int64_t</span> <span class="nf"><a href="#duckdb_get_int64">duckdb_get_int64</a></span>(<span class="kt">duckdb_value</span> <span class="k">value</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <a href="#duckdb_destroy_value"><span class="nf">duckdb_destroy_value</span></a>(<span class="kt">duckdb_value</span> *<span class="nv">value</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_varchar"><span class="nf">duckdb_create_varchar</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_varchar_length"><span class="nf">duckdb_create_varchar_length</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_int64"><span class="nf">duckdb_create_int64</span></a>(<span class="kt">int64_t</span> <span class="nv">val</span>);
+<span class="kt">char</span> *<a href="#duckdb_get_varchar"><span class="nf">duckdb_get_varchar</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
+<span class="kt">int64_t</span> <a href="#duckdb_get_int64"><span class="nf">duckdb_get_int64</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 </code></pre></div></div>
 
 ### `Logical Type Interface`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_logical_type">duckdb_create_logical_type</a></span>(<span class="k">duckdb_type</span> <span class="k">type</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_list_type">duckdb_create_list_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_map_type">duckdb_create_map_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="k">value_type</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_union_type">duckdb_create_union_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>, <span class="kt">idx_t</span> <span class="k">member_count</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_struct_type">duckdb_create_struct_type</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>, <span class="kt">idx_t</span> <span class="k">member_count</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_decimal_type">duckdb_create_decimal_type</a></span>(<span class="kt">uint8_t</span> <span class="k">width</span>, <span class="kt">uint8_t</span> <span class="k">scale</span>);
-<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_get_type_id">duckdb_get_type_id</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_width">duckdb_decimal_width</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_scale">duckdb_decimal_scale</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_decimal_internal_type">duckdb_decimal_internal_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_enum_internal_type">duckdb_enum_internal_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">uint32_t</span> <span class="nf"><a href="#duckdb_enum_dictionary_size">duckdb_enum_dictionary_size</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_enum_dictionary_value">duckdb_enum_dictionary_value</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_list_type_child_type">duckdb_list_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_map_type_key_type">duckdb_map_type_key_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_map_type_value_type">duckdb_map_type_value_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_struct_type_child_count">duckdb_struct_type_child_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_struct_type_child_name">duckdb_struct_type_child_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_struct_type_child_type">duckdb_struct_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_union_type_member_count">duckdb_union_type_member_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_union_type_member_name">duckdb_union_type_member_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_union_type_member_type">duckdb_union_type_member_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_logical_type">duckdb_destroy_logical_type</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">type</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_logical_type"><span class="nf">duckdb_create_logical_type</span></a>(<span class="nv">duckdb_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#duckdb_logical_type_get_alias"><span class="nf">duckdb_logical_type_get_alias</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_list_type"><span class="nf">duckdb_create_list_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_map_type"><span class="nf">duckdb_create_map_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">value_type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_union_type"><span class="nf">duckdb_create_union_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_struct_type"><span class="nf">duckdb_create_struct_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_enum_type"><span class="nf">duckdb_create_enum_type</span></a>(<span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_decimal_type"><span class="nf">duckdb_create_decimal_type</span></a>(<span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
+<span class="nv">duckdb_type</span> <a href="#duckdb_get_type_id"><span class="nf">duckdb_get_type_id</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">uint8_t</span> <a href="#duckdb_decimal_width"><span class="nf">duckdb_decimal_width</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">uint8_t</span> <a href="#duckdb_decimal_scale"><span class="nf">duckdb_decimal_scale</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="nv">duckdb_type</span> <a href="#duckdb_decimal_internal_type"><span class="nf">duckdb_decimal_internal_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="nv">duckdb_type</span> <a href="#duckdb_enum_internal_type"><span class="nf">duckdb_enum_internal_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">uint32_t</span> <a href="#duckdb_enum_dictionary_size"><span class="nf">duckdb_enum_dictionary_size</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#duckdb_enum_dictionary_value"><span class="nf">duckdb_enum_dictionary_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_list_type_child_type"><span class="nf">duckdb_list_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_map_type_key_type"><span class="nf">duckdb_map_type_key_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_map_type_value_type"><span class="nf">duckdb_map_type_value_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_struct_type_child_count"><span class="nf">duckdb_struct_type_child_count</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#duckdb_struct_type_child_name"><span class="nf">duckdb_struct_type_child_name</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_struct_type_child_type"><span class="nf">duckdb_struct_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_union_type_member_count"><span class="nf">duckdb_union_type_member_count</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#duckdb_union_type_member_name"><span class="nf">duckdb_union_type_member_name</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_union_type_member_type"><span class="nf">duckdb_union_type_member_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_logical_type"><span class="nf">duckdb_destroy_logical_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">type</span>);
 </code></pre></div></div>
 
 ### `Data Chunk Interface`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nf"><a href="#duckdb_create_data_chunk">duckdb_create_data_chunk</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">types</span>, <span class="kt">idx_t</span> <span class="k">column_count</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_data_chunk">duckdb_destroy_data_chunk</a></span>(<span class="kt">duckdb_data_chunk</span> *<span class="k">chunk</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_data_chunk_reset">duckdb_data_chunk_reset</a></span>(<span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_data_chunk_get_column_count">duckdb_data_chunk_get_column_count</a></span>(<span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>);
-<span class="kt">duckdb_vector</span> <span class="nf"><a href="#duckdb_data_chunk_get_vector">duckdb_data_chunk_get_vector</a></span>(<span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>, <span class="kt">idx_t</span> <span class="k">col_idx</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_data_chunk_get_size">duckdb_data_chunk_get_size</a></span>(<span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_data_chunk_set_size">duckdb_data_chunk_set_size</a></span>(<span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>, <span class="kt">idx_t</span> <span class="k">size</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <a href="#duckdb_create_data_chunk"><span class="nf">duckdb_create_data_chunk</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>, <span class="kt">idx_t</span> <span class="nv">column_count</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_data_chunk"><span class="nf">duckdb_destroy_data_chunk</span></a>(<span class="kt">duckdb_data_chunk</span> *<span class="nv">chunk</span>);
+<span class="kt">void</span> <a href="#duckdb_data_chunk_reset"><span class="nf">duckdb_data_chunk_reset</span></a>(<span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_data_chunk_get_column_count"><span class="nf">duckdb_data_chunk_get_column_count</span></a>(<span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
+<span class="kt">duckdb_vector</span> <a href="#duckdb_data_chunk_get_vector"><span class="nf">duckdb_data_chunk_get_vector</span></a>(<span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_data_chunk_get_size"><span class="nf">duckdb_data_chunk_get_size</span></a>(<span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
+<span class="kt">void</span> <a href="#duckdb_data_chunk_set_size"><span class="nf">duckdb_data_chunk_set_size</span></a>(<span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>, <span class="kt">idx_t</span> <span class="nv">size</span>);
 </code></pre></div></div>
 
 ### `Vector Interface`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_vector_get_column_type">duckdb_vector_get_column_type</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>);
-<span class="kt">void</span> *<span class="nf"><a href="#duckdb_vector_get_data">duckdb_vector_get_data</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>);
-<span class="kt">uint64_t</span> *<span class="nf"><a href="#duckdb_vector_get_validity">duckdb_vector_get_validity</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_vector_ensure_validity_writable">duckdb_vector_ensure_validity_writable</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_vector_assign_string_element">duckdb_vector_assign_string_element</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>, <span class="kt">idx_t</span> <span class="k">index</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">str</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_vector_assign_string_element_len">duckdb_vector_assign_string_element_len</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>, <span class="kt">idx_t</span> <span class="k">index</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">str</span>, <span class="kt">idx_t</span> <span class="k">str_len</span>);
-<span class="kt">duckdb_vector</span> <span class="nf"><a href="#duckdb_list_vector_get_child">duckdb_list_vector_get_child</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_list_vector_get_size">duckdb_list_vector_get_size</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_list_vector_set_size">duckdb_list_vector_set_size</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>, <span class="kt">idx_t</span> <span class="k">size</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_list_vector_reserve">duckdb_list_vector_reserve</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>, <span class="kt">idx_t</span> <span class="k">required_capacity</span>);
-<span class="kt">duckdb_vector</span> <span class="nf"><a href="#duckdb_struct_vector_get_child">duckdb_struct_vector_get_child</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <a href="#duckdb_vector_get_column_type"><span class="nf">duckdb_vector_get_column_type</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
+<span class="kt">void</span> *<a href="#duckdb_vector_get_data"><span class="nf">duckdb_vector_get_data</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
+<span class="kt">uint64_t</span> *<a href="#duckdb_vector_get_validity"><span class="nf">duckdb_vector_get_validity</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
+<span class="kt">void</span> <a href="#duckdb_vector_ensure_validity_writable"><span class="nf">duckdb_vector_ensure_validity_writable</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
+<span class="kt">void</span> <a href="#duckdb_vector_assign_string_element"><span class="nf">duckdb_vector_assign_string_element</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str</span>);
+<span class="kt">void</span> <a href="#duckdb_vector_assign_string_element_len"><span class="nf">duckdb_vector_assign_string_element_len</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str</span>, <span class="kt">idx_t</span> <span class="nv">str_len</span>);
+<span class="kt">duckdb_vector</span> <a href="#duckdb_list_vector_get_child"><span class="nf">duckdb_list_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_list_vector_get_size"><span class="nf">duckdb_list_vector_get_size</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_set_size"><span class="nf">duckdb_list_vector_set_size</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">size</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_reserve"><span class="nf">duckdb_list_vector_reserve</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">required_capacity</span>);
+<span class="kt">duckdb_vector</span> <a href="#duckdb_struct_vector_get_child"><span class="nf">duckdb_struct_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 </code></pre></div></div>
 
 ### `Validity Mask Functions`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf"><a href="#duckdb_validity_row_is_valid">duckdb_validity_row_is_valid</a></span>(<span class="kt">uint64_t</span> *<span class="k">validity</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_validity_set_row_validity">duckdb_validity_set_row_validity</a></span>(<span class="kt">uint64_t</span> *<span class="k">validity</span>, <span class="kt">idx_t</span> <span class="k">row</span>, <span class="kt">bool</span> <span class="k">valid</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_validity_set_row_invalid">duckdb_validity_set_row_invalid</a></span>(<span class="kt">uint64_t</span> *<span class="k">validity</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_validity_set_row_valid">duckdb_validity_set_row_valid</a></span>(<span class="kt">uint64_t</span> *<span class="k">validity</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <a href="#duckdb_validity_row_is_valid"><span class="nf">duckdb_validity_row_is_valid</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">void</span> <a href="#duckdb_validity_set_row_validity"><span class="nf">duckdb_validity_set_row_validity</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>, <span class="kt">bool</span> <span class="nv">valid</span>);
+<span class="kt">void</span> <a href="#duckdb_validity_set_row_invalid"><span class="nf">duckdb_validity_set_row_invalid</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">void</span> <a href="#duckdb_validity_set_row_valid"><span class="nf">duckdb_validity_set_row_valid</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 </code></pre></div></div>
 
 ### `Table Functions`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_table_function</span> <span class="nf"><a href="#duckdb_create_table_function">duckdb_create_table_function</a></span>();
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_table_function">duckdb_destroy_table_function</a></span>(<span class="kt">duckdb_table_function</span> *<span class="k">table_function</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_name">duckdb_table_function_set_name</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_add_parameter">duckdb_table_function_add_parameter</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_add_named_parameter">duckdb_table_function_add_named_parameter</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>, <span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_extra_info">duckdb_table_function_set_extra_info</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">void</span> *<span class="k">extra_info</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_bind">duckdb_table_function_set_bind</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_bind_t</span> <span class="k">bind</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_init">duckdb_table_function_set_init</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_init_t</span> <span class="k">init</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_local_init">duckdb_table_function_set_local_init</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_init_t</span> <span class="k">init</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_function">duckdb_table_function_set_function</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_t</span> <span class="k">function</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_supports_projection_pushdown">duckdb_table_function_supports_projection_pushdown</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">bool</span> <span class="k">pushdown</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_register_table_function">duckdb_register_table_function</a></span>(<span class="kt">duckdb_connection</span> <span class="k">con</span>, <span class="kt">duckdb_table_function</span> <span class="k">function</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_table_function</span> <a href="#duckdb_create_table_function"><span class="nf">duckdb_create_table_function</span></a>();
+<span class="kt">void</span> <a href="#duckdb_destroy_table_function"><span class="nf">duckdb_destroy_table_function</span></a>(<span class="kt">duckdb_table_function</span> *<span class="nv">table_function</span>);
+<span class="kt">void</span> <a href="#duckdb_table_function_set_name"><span class="nf">duckdb_table_function_set_name</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
+<span class="kt">void</span> <a href="#duckdb_table_function_add_parameter"><span class="nf">duckdb_table_function_add_parameter</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">void</span> <a href="#duckdb_table_function_add_named_parameter"><span class="nf">duckdb_table_function_add_named_parameter</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">void</span> <a href="#duckdb_table_function_set_extra_info"><span class="nf">duckdb_table_function_set_extra_info</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">void</span> *<span class="nv">extra_info</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy</span>);
+<span class="kt">void</span> <a href="#duckdb_table_function_set_bind"><span class="nf">duckdb_table_function_set_bind</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="nv">duckdb_table_function_bind_t</span> <span class="nv">bind</span>);
+<span class="kt">void</span> <a href="#duckdb_table_function_set_init"><span class="nf">duckdb_table_function_set_init</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="nv">duckdb_table_function_init_t</span> <span class="nv">init</span>);
+<span class="kt">void</span> <a href="#duckdb_table_function_set_local_init"><span class="nf">duckdb_table_function_set_local_init</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="nv">duckdb_table_function_init_t</span> <span class="nv">init</span>);
+<span class="kt">void</span> <a href="#duckdb_table_function_set_function"><span class="nf">duckdb_table_function_set_function</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="nv">duckdb_table_function_t</span> <span class="nv">function</span>);
+<span class="kt">void</span> <a href="#duckdb_table_function_supports_projection_pushdown"><span class="nf">duckdb_table_function_supports_projection_pushdown</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">bool</span> <span class="nv">pushdown</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_register_table_function"><span class="nf">duckdb_register_table_function</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">con</span>, <span class="kt">duckdb_table_function</span> <span class="nv">function</span>);
 </code></pre></div></div>
 
 ### `Table Function Bind`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nf"><a href="#duckdb_bind_get_extra_info">duckdb_bind_get_extra_info</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_add_result_column">duckdb_bind_add_result_column</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>, <span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_bind_get_parameter_count">duckdb_bind_get_parameter_count</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>);
-<span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_bind_get_parameter">duckdb_bind_get_parameter</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_bind_get_named_parameter">duckdb_bind_get_named_parameter</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_bind_data">duckdb_bind_set_bind_data</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">void</span> *<span class="k">bind_data</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_cardinality">duckdb_bind_set_cardinality</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">cardinality</span>, <span class="kt">bool</span> <span class="k">is_exact</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_error">duckdb_bind_set_error</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#duckdb_bind_get_extra_info"><span class="nf">duckdb_bind_get_extra_info</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> <a href="#duckdb_bind_add_result_column"><span class="nf">duckdb_bind_add_result_column</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_bind_get_parameter_count"><span class="nf">duckdb_bind_get_parameter_count</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_bind_get_parameter"><span class="nf">duckdb_bind_get_parameter</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_bind_get_named_parameter"><span class="nf">duckdb_bind_get_named_parameter</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
+<span class="kt">void</span> <a href="#duckdb_bind_set_bind_data"><span class="nf">duckdb_bind_set_bind_data</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">void</span> *<span class="nv">bind_data</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy</span>);
+<span class="kt">void</span> <a href="#duckdb_bind_set_cardinality"><span class="nf">duckdb_bind_set_cardinality</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">cardinality</span>, <span class="kt">bool</span> <span class="nv">is_exact</span>);
+<span class="kt">void</span> <a href="#duckdb_bind_set_error"><span class="nf">duckdb_bind_set_error</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 </code></pre></div></div>
 
 ### `Table Function Init`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nf"><a href="#duckdb_init_get_extra_info">duckdb_init_get_extra_info</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>);
-<span class="kt">void</span> *<span class="nf"><a href="#duckdb_init_get_bind_data">duckdb_init_get_bind_data</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_init_set_init_data">duckdb_init_set_init_data</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">void</span> *<span class="k">init_data</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_init_get_column_count">duckdb_init_get_column_count</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_init_get_column_index">duckdb_init_get_column_index</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">column_index</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_init_set_max_threads">duckdb_init_set_max_threads</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">max_threads</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_init_set_error">duckdb_init_set_error</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#duckdb_init_get_extra_info"><span class="nf">duckdb_init_get_extra_info</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> *<a href="#duckdb_init_get_bind_data"><span class="nf">duckdb_init_get_bind_data</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> <a href="#duckdb_init_set_init_data"><span class="nf">duckdb_init_set_init_data</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">void</span> *<span class="nv">init_data</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_init_get_column_count"><span class="nf">duckdb_init_get_column_count</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_init_get_column_index"><span class="nf">duckdb_init_get_column_index</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">column_index</span>);
+<span class="kt">void</span> <a href="#duckdb_init_set_max_threads"><span class="nf">duckdb_init_set_max_threads</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">max_threads</span>);
+<span class="kt">void</span> <a href="#duckdb_init_set_error"><span class="nf">duckdb_init_set_error</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 </code></pre></div></div>
 
 ### `Table Function`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_extra_info">duckdb_function_get_extra_info</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
-<span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_bind_data">duckdb_function_get_bind_data</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
-<span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_init_data">duckdb_function_get_init_data</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
-<span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_local_init_data">duckdb_function_get_local_init_data</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_function_set_error">duckdb_function_set_error</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#duckdb_function_get_extra_info"><span class="nf">duckdb_function_get_extra_info</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> *<a href="#duckdb_function_get_bind_data"><span class="nf">duckdb_function_get_bind_data</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> *<a href="#duckdb_function_get_init_data"><span class="nf">duckdb_function_get_init_data</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> *<a href="#duckdb_function_get_local_init_data"><span class="nf">duckdb_function_get_local_init_data</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> <a href="#duckdb_function_set_error"><span class="nf">duckdb_function_set_error</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 </code></pre></div></div>
 
 ### `Replacement Scans`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf"><a href="#duckdb_add_replacement_scan">duckdb_add_replacement_scan</a></span>(<span class="kt">duckdb_database</span> <span class="k">db</span>, <span class="k">duckdb_replacement_callback_t</span> <span class="k">replacement</span>, <span class="kt">void</span> *<span class="k">extra_data</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">delete_callback</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_replacement_scan_set_function_name">duckdb_replacement_scan_set_function_name</a></span>(<span class="kt">duckdb_replacement_scan_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">function_name</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_replacement_scan_add_parameter">duckdb_replacement_scan_add_parameter</a></span>(<span class="kt">duckdb_replacement_scan_info</span> <span class="k">info</span>, <span class="kt">duckdb_value</span> <span class="k">parameter</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_replacement_scan_set_error">duckdb_replacement_scan_set_error</a></span>(<span class="kt">duckdb_replacement_scan_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <a href="#duckdb_add_replacement_scan"><span class="nf">duckdb_add_replacement_scan</span></a>(<span class="kt">duckdb_database</span> <span class="nv">db</span>, <span class="nv">duckdb_replacement_callback_t</span> <span class="nv">replacement</span>, <span class="kt">void</span> *<span class="nv">extra_data</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">delete_callback</span>);
+<span class="kt">void</span> <a href="#duckdb_replacement_scan_set_function_name"><span class="nf">duckdb_replacement_scan_set_function_name</span></a>(<span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">function_name</span>);
+<span class="kt">void</span> <a href="#duckdb_replacement_scan_add_parameter"><span class="nf">duckdb_replacement_scan_add_parameter</span></a>(<span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>, <span class="kt">duckdb_value</span> <span class="nv">parameter</span>);
+<span class="kt">void</span> <a href="#duckdb_replacement_scan_set_error"><span class="nf">duckdb_replacement_scan_set_error</span></a>(<span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 </code></pre></div></div>
 
 ### `Appender`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_create">duckdb_appender_create</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table</span>, <span class="kt">duckdb_appender</span> *<span class="k">out_appender</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_appender_error">duckdb_appender_error</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_flush">duckdb_appender_flush</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_close">duckdb_appender_close</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_destroy">duckdb_appender_destroy</a></span>(<span class="kt">duckdb_appender</span> *<span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_begin_row">duckdb_appender_begin_row</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_end_row">duckdb_appender_end_row</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_bool">duckdb_append_bool</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">bool</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_int8">duckdb_append_int8</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">int8_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_int16">duckdb_append_int16</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">int16_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_int32">duckdb_append_int32</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">int32_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_int64">duckdb_append_int64</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">int64_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_hugeint">duckdb_append_hugeint</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_hugeint</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_uint8">duckdb_append_uint8</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">uint8_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_uint16">duckdb_append_uint16</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">uint16_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_uint32">duckdb_append_uint32</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">uint32_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_uint64">duckdb_append_uint64</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">uint64_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_float">duckdb_append_float</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">float</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_double">duckdb_append_double</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">double</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_date">duckdb_append_date</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_date</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_time">duckdb_append_time</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_time</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_timestamp">duckdb_append_timestamp</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_timestamp</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_interval">duckdb_append_interval</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_interval</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_varchar">duckdb_append_varchar</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_varchar_length">duckdb_append_varchar_length</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val</span>, <span class="kt">idx_t</span> <span class="k">length</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_blob">duckdb_append_blob</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="k">data</span>, <span class="kt">idx_t</span> <span class="k">length</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_null">duckdb_append_null</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_data_chunk">duckdb_append_data_chunk</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_appender_create"><span class="nf">duckdb_appender_create</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">duckdb_appender</span> *<span class="nv">out_appender</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_appender_error"><span class="nf">duckdb_appender_error</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_flush"><span class="nf">duckdb_appender_flush</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_close"><span class="nf">duckdb_appender_close</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_destroy"><span class="nf">duckdb_appender_destroy</span></a>(<span class="kt">duckdb_appender</span> *<span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_begin_row"><span class="nf">duckdb_appender_begin_row</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_end_row"><span class="nf">duckdb_appender_end_row</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_bool"><span class="nf">duckdb_append_bool</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">bool</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_int8"><span class="nf">duckdb_append_int8</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int8_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_int16"><span class="nf">duckdb_append_int16</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int16_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_int32"><span class="nf">duckdb_append_int32</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int32_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_int64"><span class="nf">duckdb_append_int64</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int64_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_hugeint"><span class="nf">duckdb_append_hugeint</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_hugeint</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint8"><span class="nf">duckdb_append_uint8</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint8_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint16"><span class="nf">duckdb_append_uint16</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint16_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint32"><span class="nf">duckdb_append_uint32</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint32_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint64"><span class="nf">duckdb_append_uint64</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint64_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_float"><span class="nf">duckdb_append_float</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">float</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_double"><span class="nf">duckdb_append_double</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">double</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_date"><span class="nf">duckdb_append_date</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_date</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_time"><span class="nf">duckdb_append_time</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_time</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_timestamp"><span class="nf">duckdb_append_timestamp</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_timestamp</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_interval"><span class="nf">duckdb_append_interval</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_interval</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_varchar"><span class="nf">duckdb_append_varchar</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_varchar_length"><span class="nf">duckdb_append_varchar_length</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_blob"><span class="nf">duckdb_append_blob</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_null"><span class="nf">duckdb_append_null</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_data_chunk"><span class="nf">duckdb_append_data_chunk</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
 </code></pre></div></div>
 
 ### `Arrow Interface`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_query_arrow">duckdb_query_arrow</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>, <span class="kt">duckdb_arrow</span> *<span class="k">out_result</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_query_arrow_schema">duckdb_query_arrow_schema</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>, <span class="kt">duckdb_arrow_schema</span> *<span class="k">out_schema</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_prepared_arrow_schema">duckdb_prepared_arrow_schema</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared</span>, <span class="kt">duckdb_arrow_schema</span> *<span class="k">out_schema</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_query_arrow_array">duckdb_query_arrow_array</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>, <span class="kt">duckdb_arrow_array</span> *<span class="k">out_array</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_arrow_column_count">duckdb_arrow_column_count</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_arrow_row_count">duckdb_arrow_row_count</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_arrow_rows_changed">duckdb_arrow_rows_changed</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_query_arrow_error">duckdb_query_arrow_error</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_arrow">duckdb_destroy_arrow</a></span>(<span class="kt">duckdb_arrow</span> *<span class="k">result</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_query_arrow"><span class="nf">duckdb_query_arrow</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">duckdb_arrow</span> *<span class="nv">out_result</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_query_arrow_schema"><span class="nf">duckdb_query_arrow_schema</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>, <span class="kt">duckdb_arrow_schema</span> *<span class="nv">out_schema</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_prepared_arrow_schema"><span class="nf">duckdb_prepared_arrow_schema</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared</span>, <span class="kt">duckdb_arrow_schema</span> *<span class="nv">out_schema</span>);
+<span class="kt">void</span> <a href="#duckdb_result_arrow_array"><span class="nf">duckdb_result_arrow_array</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>, <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>, <span class="kt">duckdb_arrow_array</span> *<span class="nv">out_array</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_query_arrow_array"><span class="nf">duckdb_query_arrow_array</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>, <span class="kt">duckdb_arrow_array</span> *<span class="nv">out_array</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_arrow_column_count"><span class="nf">duckdb_arrow_column_count</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_arrow_row_count"><span class="nf">duckdb_arrow_row_count</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_arrow_rows_changed"><span class="nf">duckdb_arrow_rows_changed</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_query_arrow_error"><span class="nf">duckdb_query_arrow_error</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_arrow"><span class="nf">duckdb_destroy_arrow</span></a>(<span class="kt">duckdb_arrow</span> *<span class="nv">result</span>);
 </code></pre></div></div>
 
 ### `Threading Information`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf"><a href="#duckdb_execute_tasks">duckdb_execute_tasks</a></span>(<span class="kt">duckdb_database</span> <span class="k">database</span>, <span class="kt">idx_t</span> <span class="k">max_tasks</span>);
-<span class="k">duckdb_task_state</span> <span class="nf"><a href="#duckdb_create_task_state">duckdb_create_task_state</a></span>(<span class="kt">duckdb_database</span> <span class="k">database</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_execute_tasks_state">duckdb_execute_tasks_state</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_execute_n_tasks_state">duckdb_execute_n_tasks_state</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>, <span class="kt">idx_t</span> <span class="k">max_tasks</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_finish_execution">duckdb_finish_execution</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
-<span class="kt">bool</span> <span class="nf"><a href="#duckdb_task_state_is_finished">duckdb_task_state_is_finished</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_task_state">duckdb_destroy_task_state</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
-<span class="kt">bool</span> <span class="nf"><a href="#duckdb_execution_is_finished">duckdb_execution_is_finished</a></span>(<span class="kt">duckdb_connection</span> <span class="k">con</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <a href="#duckdb_execute_tasks"><span class="nf">duckdb_execute_tasks</span></a>(<span class="kt">duckdb_database</span> <span class="nv">database</span>, <span class="kt">idx_t</span> <span class="nv">max_tasks</span>);
+<span class="nv">duckdb_task_state</span> <a href="#duckdb_create_task_state"><span class="nf">duckdb_create_task_state</span></a>(<span class="kt">duckdb_database</span> <span class="nv">database</span>);
+<span class="kt">void</span> <a href="#duckdb_execute_tasks_state"><span class="nf">duckdb_execute_tasks_state</span></a>(<span class="nv">duckdb_task_state</span> <span class="nv">state</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_execute_n_tasks_state"><span class="nf">duckdb_execute_n_tasks_state</span></a>(<span class="nv">duckdb_task_state</span> <span class="nv">state</span>, <span class="kt">idx_t</span> <span class="nv">max_tasks</span>);
+<span class="kt">void</span> <a href="#duckdb_finish_execution"><span class="nf">duckdb_finish_execution</span></a>(<span class="nv">duckdb_task_state</span> <span class="nv">state</span>);
+<span class="kt">bool</span> <a href="#duckdb_task_state_is_finished"><span class="nf">duckdb_task_state_is_finished</span></a>(<span class="nv">duckdb_task_state</span> <span class="nv">state</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_task_state"><span class="nf">duckdb_destroy_task_state</span></a>(<span class="nv">duckdb_task_state</span> <span class="nv">state</span>);
+<span class="kt">bool</span> <a href="#duckdb_execution_is_finished"><span class="nf">duckdb_execution_is_finished</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">con</span>);
 </code></pre></div></div>
 
 ### `Streaming Result Interface`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nf"><a href="#duckdb_stream_fetch_chunk">duckdb_stream_fetch_chunk</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <a href="#duckdb_stream_fetch_chunk"><span class="nf">duckdb_stream_fetch_chunk</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 </code></pre></div></div>
 
 ### `duckdb_open`
@@ -358,9 +364,9 @@ The instantiated database should be closed with 'duckdb_close'
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_open</span>(<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>,<span class="k">
-</span>  <span class="kt">duckdb_database</span> *<span class="k">out_database
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_open</span>(<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>,<span class="nv">
+</span>  <span class="kt">duckdb_database</span> *<span class="nv">out_database
 </span>);
 </code></pre></div></div>
 
@@ -388,11 +394,11 @@ Extended version of duckdb_open. Creates a new database or opens an existing dat
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_open_ext</span>(<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>,<span class="k">
-</span>  <span class="kt">duckdb_database</span> *<span class="k">out_database</span>,<span class="k">
-</span>  <span class="kt">duckdb_config</span> <span class="k">config</span>,<span class="k">
-</span>  <span class="kt">char</span> **<span class="k">out_error
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_open_ext</span>(<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>,<span class="nv">
+</span>  <span class="kt">duckdb_database</span> *<span class="nv">out_database</span>,<span class="nv">
+</span>  <span class="kt">duckdb_config</span> <span class="nv">config</span>,<span class="nv">
+</span>  <span class="kt">char</span> **<span class="nv">out_error
 </span>);
 </code></pre></div></div>
 
@@ -430,8 +436,8 @@ Still it is recommended to always correctly close a database object after you ar
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_close</span>(<span class="k">
-</span>  <span class="kt">duckdb_database</span> *<span class="k">database
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_close</span>(<span class="nv">
+</span>  <span class="kt">duckdb_database</span> *<span class="nv">database
 </span>);
 </code></pre></div></div>
 
@@ -455,9 +461,9 @@ The instantiated connection should be closed using 'duckdb_disconnect'
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_connect</span>(<span class="k">
-</span>  <span class="kt">duckdb_database</span> <span class="k">database</span>,<span class="k">
-</span>  <span class="kt">duckdb_connection</span> *<span class="k">out_connection
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_connect</span>(<span class="nv">
+</span>  <span class="kt">duckdb_database</span> <span class="nv">database</span>,<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> *<span class="nv">out_connection
 </span>);
 </code></pre></div></div>
 
@@ -485,8 +491,8 @@ Interrupt running query
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_interrupt</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_interrupt</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection
 </span>);
 </code></pre></div></div>
 
@@ -508,8 +514,8 @@ Get progress of the running query
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="k">duckdb_query_progress</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_query_progress</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection
 </span>);
 </code></pre></div></div>
 
@@ -534,8 +540,8 @@ Closes the specified connection and de-allocates all memory allocated for that c
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_disconnect</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> *<span class="k">connection
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_disconnect</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> *<span class="nv">connection
 </span>);
 </code></pre></div></div>
 
@@ -559,8 +565,8 @@ Usually used for developing C extensions that must return this for a compatibili
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_library_version</span>(<span class="k">
-</span>  <span class="k">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_library_version</span>(<span class="nv">
+</span>  <span class="nv">
 </span>);
 </code></pre></div></div>
 <br>
@@ -577,8 +583,8 @@ This will always succeed unless there is a malloc failure.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_create_config</span>(<span class="k">
-</span>  <span class="kt">duckdb_config</span> *<span class="k">out_config
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_create_config</span>(<span class="nv">
+</span>  <span class="kt">duckdb_config</span> *<span class="nv">out_config
 </span>);
 </code></pre></div></div>
 
@@ -605,8 +611,8 @@ This should not be called in a loop as it internally loops over all the options.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">size_t</span> <span class="k">duckdb_config_count</span>(<span class="k">
-</span>  <span class="k">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">size_t</span> <span class="nv">duckdb_config_count</span>(<span class="nv">
+</span>  <span class="nv">
 </span>);
 </code></pre></div></div>
 
@@ -631,10 +637,10 @@ The result name or description MUST NOT be freed.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_get_config_flag</span>(<span class="k">
-</span>  <span class="kt">size_t</span> <span class="k">index</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="k">out_name</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="k">out_description
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_get_config_flag</span>(<span class="nv">
+</span>  <span class="kt">size_t</span> <span class="nv">index</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_name</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_description
 </span>);
 </code></pre></div></div>
 
@@ -670,10 +676,10 @@ This can fail if either the name is invalid, or if the value provided for the op
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_set_config</span>(<span class="k">
-</span>  <span class="kt">duckdb_config</span> <span class="k">config</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">option
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_set_config</span>(<span class="nv">
+</span>  <span class="kt">duckdb_config</span> <span class="nv">config</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">option
 </span>);
 </code></pre></div></div>
 
@@ -704,8 +710,8 @@ Destroys the specified configuration option and de-allocates all memory allocate
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_config</span>(<span class="k">
-</span>  <span class="kt">duckdb_config</span> *<span class="k">config
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_config</span>(<span class="nv">
+</span>  <span class="kt">duckdb_config</span> *<span class="nv">config
 </span>);
 </code></pre></div></div>
 
@@ -732,10 +738,10 @@ query fails, otherwise the error stored within the result will not be freed corr
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_query</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>,<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -766,8 +772,8 @@ Closes the result and de-allocates all memory allocated for that connection.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_result</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_result</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -792,9 +798,9 @@ Returns `NULL` if the column is out of range.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_column_name</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_column_name</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
 </code></pre></div></div>
 
@@ -824,9 +830,9 @@ Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_column_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_column_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
 </code></pre></div></div>
 
@@ -846,6 +852,32 @@ The column type of the specified column.
 <br>
 
 
+### `duckdb_result_statement_type`
+
+---
+Returns the statement type of the statement that was executed
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_statement_type</span> <span class="nv">duckdb_result_statement_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `result`
+
+The result object to fetch the statement type from.
+* `returns`
+
+duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
+
+<br>
+
+
 ### `duckdb_column_logical_type`
 
 ---
@@ -858,9 +890,9 @@ Returns `NULL` if the column is out of range.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_column_logical_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_column_logical_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
 </code></pre></div></div>
 
@@ -888,8 +920,8 @@ Returns the number of columns present in a the result object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_column_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_column_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -914,8 +946,8 @@ Returns the number of rows present in a the result object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_row_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_row_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -941,8 +973,8 @@ queries. For other queries the rows_changed will be 0.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_rows_changed</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_rows_changed</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -979,9 +1011,9 @@ printf("Data for row %d: %d\n", row, data[row]);
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_column_data</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_column_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
 </code></pre></div></div>
 
@@ -1023,9 +1055,9 @@ printf("Data for row %d: %d\n", row, data[row]);
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> *<span class="k">duckdb_nullmask_data</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> *<span class="nv">duckdb_nullmask_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
 </code></pre></div></div>
 
@@ -1055,8 +1087,8 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_result_error</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_result_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -1091,9 +1123,9 @@ Use `duckdb_result_chunk_count` to figure out how many chunks there are in the r
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="k">duckdb_result_get_chunk</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> <span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">chunk_index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_result_get_chunk</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">chunk_index
 </span>);
 </code></pre></div></div>
 
@@ -1121,8 +1153,8 @@ Checks if the type of the internal result is StreamQueryResult.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_result_is_streaming</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> <span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_result_is_streaming</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -1147,8 +1179,8 @@ Returns the number of data chunks present in the result.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_result_chunk_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> <span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_result_chunk_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -1165,6 +1197,32 @@ Number of data chunks present in the result.
 <br>
 
 
+### `duckdb_result_return_type`
+
+---
+Returns the return_type of the given result, or DUCKDB_RETURN_TYPE_INVALID on error
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_result_type</span> <span class="nv">duckdb_result_return_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `result`
+
+The result object
+* `returns`
+
+The return_type
+
+<br>
+
+
 ### `duckdb_value_boolean`
 
 ---
@@ -1172,10 +1230,10 @@ Number of data chunks present in the result.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_value_boolean</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_value_boolean</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1196,10 +1254,10 @@ The boolean value at the specified location, or false if the value cannot be con
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int8_t</span> <span class="k">duckdb_value_int8</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int8_t</span> <span class="nv">duckdb_value_int8</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1220,10 +1278,10 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int16_t</span> <span class="k">duckdb_value_int16</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int16_t</span> <span class="nv">duckdb_value_int16</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1244,10 +1302,10 @@ The int16_t value at the specified location, or 0 if the value cannot be convert
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int32_t</span> <span class="k">duckdb_value_int32</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int32_t</span> <span class="nv">duckdb_value_int32</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1268,10 +1326,10 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="k">duckdb_value_int64</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="nv">duckdb_value_int64</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1292,10 +1350,10 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="k">duckdb_value_hugeint</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="nv">duckdb_value_hugeint</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1316,10 +1374,10 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_decimal</span> <span class="k">duckdb_value_decimal</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_decimal</span> <span class="nv">duckdb_value_decimal</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1340,10 +1398,10 @@ The duckdb_decimal value at the specified location, or 0 if the value cannot be 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="k">duckdb_value_uint8</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_value_uint8</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1364,10 +1422,10 @@ The uint8_t value at the specified location, or 0 if the value cannot be convert
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint16_t</span> <span class="k">duckdb_value_uint16</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint16_t</span> <span class="nv">duckdb_value_uint16</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1388,10 +1446,10 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="k">duckdb_value_uint32</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nv">duckdb_value_uint32</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1412,10 +1470,10 @@ The uint32_t value at the specified location, or 0 if the value cannot be conver
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> <span class="k">duckdb_value_uint64</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> <span class="nv">duckdb_value_uint64</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1436,10 +1494,10 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="k">duckdb_value_float</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="nv">duckdb_value_float</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1460,10 +1518,10 @@ The float value at the specified location, or 0 if the value cannot be converted
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="k">duckdb_value_double</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_value_double</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1484,10 +1542,10 @@ The double value at the specified location, or 0 if the value cannot be converte
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="k">duckdb_value_date</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="nv">duckdb_value_date</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1508,10 +1566,10 @@ The duckdb_date value at the specified location, or 0 if the value cannot be con
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="k">duckdb_value_time</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="nv">duckdb_value_time</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1532,10 +1590,10 @@ The duckdb_time value at the specified location, or 0 if the value cannot be con
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="k">duckdb_value_timestamp</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="nv">duckdb_value_timestamp</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1556,10 +1614,10 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_interval</span> <span class="k">duckdb_value_interval</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_interval</span> <span class="nv">duckdb_value_interval</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1580,10 +1638,10 @@ The duckdb_interval value at the specified location, or 0 if the value cannot be
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_value_varchar</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_value_varchar</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1608,10 +1666,10 @@ converted. The result must be freed with `duckdb_free`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_value_varchar_internal</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_value_varchar_internal</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1639,10 +1697,10 @@ The result must NOT be freed.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_string</span> <span class="k">duckdb_value_string_internal</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_string</span> <span class="nv">duckdb_value_string_internal</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1670,10 +1728,10 @@ The result must NOT be freed.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_blob</span> <span class="k">duckdb_value_blob</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_blob</span> <span class="nv">duckdb_value_blob</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1695,10 +1753,10 @@ value cannot be converted. The resulting "blob.data" must be freed with `duckdb_
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_value_is_null</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_value_is_null</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -1721,8 +1779,8 @@ should be freed using `duckdb_free`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_malloc</span>(<span class="k">
-</span>  <span class="kt">size_t</span> <span class="k">size
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_malloc</span>(<span class="nv">
+</span>  <span class="kt">size_t</span> <span class="nv">size
 </span>);
 </code></pre></div></div>
 
@@ -1747,8 +1805,8 @@ Free a value returned from `duckdb_malloc`, `duckdb_value_varchar` or `duckdb_va
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_free</span>(<span class="k">
-</span>  <span class="kt">void</span> *<span class="k">ptr
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_free</span>(<span class="nv">
+</span>  <span class="kt">void</span> *<span class="nv">ptr
 </span>);
 </code></pre></div></div>
 
@@ -1771,8 +1829,8 @@ This is the amount of tuples that will fit into a data chunk created by `duckdb_
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_vector_size</span>(<span class="k">
-</span>  <span class="k">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_vector_size</span>(<span class="nv">
+</span>  <span class="nv">
 </span>);
 </code></pre></div></div>
 
@@ -1795,8 +1853,8 @@ This means that the data of the string does not have a separate allocation.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_string_is_inlined</span>(<span class="k">
-</span>  <span class="k">duckdb_string_t</span> <span class="k">string
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_string_is_inlined</span>(<span class="nv">
+</span>  <span class="nv">duckdb_string_t</span> <span class="nv">string
 </span>);
 </code></pre></div></div>
 <br>
@@ -1810,8 +1868,8 @@ Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_da
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <span class="k">duckdb_from_date</span>(<span class="k">
-</span>  <span class="kt">duckdb_date</span> <span class="k">date
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <span class="nv">duckdb_from_date</span>(<span class="nv">
+</span>  <span class="kt">duckdb_date</span> <span class="nv">date
 </span>);
 </code></pre></div></div>
 
@@ -1836,8 +1894,8 @@ Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="k">duckdb_to_date</span>(<span class="k">
-</span>  <span class="kt">duckdb_date_struct</span> <span class="k">date
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="nv">duckdb_to_date</span>(<span class="nv">
+</span>  <span class="kt">duckdb_date_struct</span> <span class="nv">date
 </span>);
 </code></pre></div></div>
 
@@ -1862,8 +1920,8 @@ Decompose a `duckdb_time` object into hour, minute, second and microsecond (stor
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_struct</span> <span class="k">duckdb_from_time</span>(<span class="k">
-</span>  <span class="kt">duckdb_time</span> <span class="k">time
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_struct</span> <span class="nv">duckdb_from_time</span>(<span class="nv">
+</span>  <span class="kt">duckdb_time</span> <span class="nv">time
 </span>);
 </code></pre></div></div>
 
@@ -1888,8 +1946,8 @@ Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_ti
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="k">duckdb_to_time</span>(<span class="k">
-</span>  <span class="kt">duckdb_time_struct</span> <span class="k">time
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="nv">duckdb_to_time</span>(<span class="nv">
+</span>  <span class="kt">duckdb_time_struct</span> <span class="nv">time
 </span>);
 </code></pre></div></div>
 
@@ -1914,8 +1972,8 @@ Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp_struct</span> <span class="k">duckdb_from_timestamp</span>(<span class="k">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="k">ts
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp_struct</span> <span class="nv">duckdb_from_timestamp</span>(<span class="nv">
+</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">ts
 </span>);
 </code></pre></div></div>
 
@@ -1940,8 +1998,8 @@ Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="k">duckdb_to_timestamp</span>(<span class="k">
-</span>  <span class="kt">duckdb_timestamp_struct</span> <span class="k">ts
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="nv">duckdb_to_timestamp</span>(<span class="nv">
+</span>  <span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts
 </span>);
 </code></pre></div></div>
 
@@ -1966,8 +2024,8 @@ Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` colum
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="k">duckdb_hugeint_to_double</span>(<span class="k">
-</span>  <span class="kt">duckdb_hugeint</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_hugeint_to_double</span>(<span class="nv">
+</span>  <span class="kt">duckdb_hugeint</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
@@ -1994,8 +2052,8 @@ If the conversion fails because the double value is too big the result will be 0
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="k">duckdb_double_to_hugeint</span>(<span class="k">
-</span>  <span class="kt">double</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="nv">duckdb_double_to_hugeint</span>(<span class="nv">
+</span>  <span class="kt">double</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
@@ -2022,10 +2080,10 @@ If the conversion fails because the double value is too big, or the width/scale 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_decimal</span> <span class="k">duckdb_double_to_decimal</span>(<span class="k">
-</span>  <span class="kt">double</span> <span class="k">val</span>,<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">width</span>,<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">scale
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_decimal</span> <span class="nv">duckdb_double_to_decimal</span>(<span class="nv">
+</span>  <span class="kt">double</span> <span class="nv">val</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">scale
 </span>);
 </code></pre></div></div>
 
@@ -2050,8 +2108,8 @@ Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` colum
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="k">duckdb_decimal_to_double</span>(<span class="k">
-</span>  <span class="k">duckdb_decimal</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_decimal_to_double</span>(<span class="nv">
+</span>  <span class="nv">duckdb_decimal</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
@@ -2081,10 +2139,10 @@ If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_prepare</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>,<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="k">out_prepared_statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_prepare</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="nv">out_prepared_statement
 </span>);
 </code></pre></div></div>
 
@@ -2115,8 +2173,8 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_prepare</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="k">prepared_statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_prepare</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="nv">prepared_statement
 </span>);
 </code></pre></div></div>
 
@@ -2141,8 +2199,8 @@ The error message should not be freed. It will be de-allocated when `duckdb_dest
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_prepare_error</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_prepare_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
 </span>);
 </code></pre></div></div>
 
@@ -2169,8 +2227,8 @@ Returns 0 if the query was not successfully prepared.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_nparams</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_nparams</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
 </span>);
 </code></pre></div></div>
 
@@ -2195,9 +2253,9 @@ Returns NULL if the index is out of range for the provided prepared statement.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_parameter_name</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_parameter_name</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
@@ -2221,9 +2279,9 @@ Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the stat
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_param_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_param_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx
 </span>);
 </code></pre></div></div>
 
@@ -2251,10 +2309,36 @@ Clear the params bind to the prepared statement.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_clear_bindings</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_clear_bindings</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
 </span>);
 </code></pre></div></div>
+<br>
+
+
+### `duckdb_prepared_statement_type`
+
+---
+Returns the statement type of the statement to be executed
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_statement_type</span> <span class="nv">duckdb_prepared_statement_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">statement
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `statement`
+
+The prepared statement.
+* `returns`
+
+duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
+
 <br>
 
 
@@ -2266,10 +2350,10 @@ Binds a value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_value</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">duckdb_value</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2283,10 +2367,10 @@ Retrieve the index of the parameter for the prepared statement, identified by na
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_parameter_index</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> *<span class="k">param_idx_out</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_parameter_index</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> *<span class="nv">param_idx_out</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
 </span>);
 </code></pre></div></div>
 <br>
@@ -2300,10 +2384,10 @@ Binds a bool value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_boolean</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">bool</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_boolean</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">bool</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2317,10 +2401,10 @@ Binds an int8_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_int8</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">int8_t</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int8</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">int8_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2334,10 +2418,10 @@ Binds an int16_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_int16</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">int16_t</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int16</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">int16_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2351,10 +2435,10 @@ Binds an int32_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_int32</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">int32_t</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int32</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">int32_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2368,10 +2452,10 @@ Binds an int64_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_int64</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">int64_t</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int64</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">int64_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2385,10 +2469,10 @@ Binds a duckdb_hugeint value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_hugeint</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">duckdb_hugeint</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_hugeint</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">duckdb_hugeint</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2402,10 +2486,10 @@ Binds a duckdb_decimal value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_decimal</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="k">duckdb_decimal</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_decimal</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="nv">duckdb_decimal</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2419,10 +2503,10 @@ Binds an uint8_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_uint8</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint8</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2436,10 +2520,10 @@ Binds an uint16_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_uint16</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">uint16_t</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint16</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">uint16_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2453,10 +2537,10 @@ Binds an uint32_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_uint32</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">uint32_t</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint32</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">uint32_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2470,10 +2554,10 @@ Binds an uint64_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_uint64</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">uint64_t</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint64</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">uint64_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2487,10 +2571,10 @@ Binds a float value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_float</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">float</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_float</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">float</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2504,10 +2588,10 @@ Binds a double value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_double</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">double</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_double</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">double</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2521,10 +2605,10 @@ Binds a duckdb_date value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_date</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">duckdb_date</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_date</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">duckdb_date</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2538,10 +2622,10 @@ Binds a duckdb_time value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_time</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">duckdb_time</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_time</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">duckdb_time</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2555,10 +2639,10 @@ Binds a duckdb_timestamp value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_timestamp</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_timestamp</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2572,10 +2656,10 @@ Binds a duckdb_interval value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_interval</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">duckdb_interval</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_interval</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">duckdb_interval</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2589,10 +2673,10 @@ Binds a null-terminated varchar value to the prepared statement at the specified
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_varchar</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_varchar</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -2606,11 +2690,11 @@ Binds a varchar value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_varchar_length</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">length
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_varchar_length</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">length
 </span>);
 </code></pre></div></div>
 <br>
@@ -2624,11 +2708,11 @@ Binds a blob value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_blob</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">void</span> *<span class="k">data</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">length
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_blob</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">length
 </span>);
 </code></pre></div></div>
 <br>
@@ -2642,9 +2726,9 @@ Binds a NULL value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_null</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">param_idx
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_null</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx
 </span>);
 </code></pre></div></div>
 <br>
@@ -2661,9 +2745,9 @@ between calls to this function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_execute_prepared</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -2691,9 +2775,9 @@ Executes the prepared statement with the given bound parameters, and returns an 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_execute_prepared_arrow</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="kt">duckdb_arrow</span> *<span class="k">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared_arrow</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -2721,10 +2805,10 @@ Scans the Arrow stream and creates a view with the given name.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_arrow_scan</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>,<span class="k">
-</span>  <span class="k">duckdb_arrow_stream</span> <span class="k">arrow
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_arrow_scan</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
+</span>  <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow
 </span>);
 </code></pre></div></div>
 
@@ -2755,12 +2839,12 @@ Scans the Arrow array and creates a view with the given name.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_arrow_array_scan</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>,<span class="k">
-</span>  <span class="kt">duckdb_arrow_schema</span> <span class="k">arrow_schema</span>,<span class="k">
-</span>  <span class="kt">duckdb_arrow_array</span> <span class="k">arrow_array</span>,<span class="k">
-</span>  <span class="k">duckdb_arrow_stream</span> *<span class="k">out_stream
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_arrow_array_scan</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>,<span class="nv">
+</span>  <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream
 </span>);
 </code></pre></div></div>
 
@@ -2800,10 +2884,10 @@ If the extract fails, `duckdb_extract_statements_error` can be called to obtain 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_extract_statements</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>,<span class="k">
-</span>  <span class="k">duckdb_extracted_statements</span> *<span class="k">out_extracted_statements
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_extract_statements</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
+</span>  <span class="nv">duckdb_extracted_statements</span> *<span class="nv">out_extracted_statements
 </span>);
 </code></pre></div></div>
 
@@ -2837,11 +2921,11 @@ If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_prepare_extracted_statement</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
-</span>  <span class="k">duckdb_extracted_statements</span> <span class="k">extracted_statements</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index</span>,<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="k">out_prepared_statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_prepare_extracted_statement</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="nv">duckdb_extracted_statements</span> <span class="nv">extracted_statements</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index</span>,<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="nv">out_prepared_statement
 </span>);
 </code></pre></div></div>
 
@@ -2876,8 +2960,8 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_extract_statements_error</span>(<span class="k">
-</span>  <span class="k">duckdb_extracted_statements</span> <span class="k">extracted_statements
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_extract_statements_error</span>(<span class="nv">
+</span>  <span class="nv">duckdb_extracted_statements</span> <span class="nv">extracted_statements
 </span>);
 </code></pre></div></div>
 
@@ -2902,8 +2986,8 @@ De-allocates all memory allocated for the extracted statements.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_extracted</span>(<span class="k">
-</span>  <span class="k">duckdb_extracted_statements</span> *<span class="k">extracted_statements
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_extracted</span>(<span class="nv">
+</span>  <span class="nv">duckdb_extracted_statements</span> *<span class="nv">extracted_statements
 </span>);
 </code></pre></div></div>
 
@@ -2930,9 +3014,9 @@ Note that after calling `duckdb_pending_prepared`, the pending result should alw
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_pending_prepared</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="k">duckdb_pending_result</span> *<span class="k">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_pending_prepared</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="nv">duckdb_pending_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -2965,9 +3049,9 @@ Note that after calling `duckdb_pending_prepared_streaming`, the pending result 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_pending_prepared_streaming</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
-</span>  <span class="k">duckdb_pending_result</span> *<span class="k">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_pending_prepared_streaming</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="nv">duckdb_pending_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -2995,8 +3079,8 @@ Closes the pending result and de-allocates all memory allocated for the result.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_pending</span>(<span class="k">
-</span>  <span class="k">duckdb_pending_result</span> *<span class="k">pending_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_pending</span>(<span class="nv">
+</span>  <span class="nv">duckdb_pending_result</span> *<span class="nv">pending_result
 </span>);
 </code></pre></div></div>
 
@@ -3020,8 +3104,8 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_pending_error</span>(<span class="k">
-</span>  <span class="k">duckdb_pending_result</span> <span class="k">pending_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_pending_error</span>(<span class="nv">
+</span>  <span class="nv">duckdb_pending_result</span> <span class="nv">pending_result
 </span>);
 </code></pre></div></div>
 
@@ -3052,8 +3136,8 @@ The error message can be obtained by calling duckdb_pending_error on the pending
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_pending_state</span> <span class="k">duckdb_pending_execute_task</span>(<span class="k">
-</span>  <span class="k">duckdb_pending_result</span> <span class="k">pending_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_pending_state</span> <span class="nv">duckdb_pending_execute_task</span>(<span class="nv">
+</span>  <span class="nv">duckdb_pending_result</span> <span class="nv">pending_result
 </span>);
 </code></pre></div></div>
 
@@ -3081,9 +3165,9 @@ Otherwise, all remaining tasks must be executed first.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_execute_pending</span>(<span class="k">
-</span>  <span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>,<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_pending</span>(<span class="nv">
+</span>  <span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>,<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -3112,8 +3196,8 @@ DUCKDB_PENDING_RESULT_READY, this function will return true.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_pending_execution_is_finished</span>(<span class="k">
-</span>  <span class="k">duckdb_pending_state</span> <span class="k">pending_state
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_pending_execution_is_finished</span>(<span class="nv">
+</span>  <span class="nv">duckdb_pending_state</span> <span class="nv">pending_state
 </span>);
 </code></pre></div></div>
 
@@ -3138,8 +3222,8 @@ Destroys the value and de-allocates all memory allocated for that type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_value</span>(<span class="k">
-</span>  <span class="kt">duckdb_value</span> *<span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> *<span class="nv">value
 </span>);
 </code></pre></div></div>
 
@@ -3161,8 +3245,8 @@ Creates a value from a null-terminated string
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="k">duckdb_create_varchar</span>(<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">text
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_varchar</span>(<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text
 </span>);
 </code></pre></div></div>
 
@@ -3187,9 +3271,9 @@ Creates a value from a string
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="k">duckdb_create_varchar_length</span>(<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">text</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">length
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_varchar_length</span>(<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">length
 </span>);
 </code></pre></div></div>
 
@@ -3217,8 +3301,8 @@ Creates a value from an int64
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="k">duckdb_create_int64</span>(<span class="k">
-</span>  <span class="kt">int64_t</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_int64</span>(<span class="nv">
+</span>  <span class="kt">int64_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
@@ -3244,8 +3328,8 @@ The result must be destroyed with `duckdb_free`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_get_varchar</span>(<span class="k">
-</span>  <span class="kt">duckdb_value</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_get_varchar</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 
@@ -3270,8 +3354,8 @@ Obtains an int64 of the given value.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="k">duckdb_get_int64</span>(<span class="k">
-</span>  <span class="kt">duckdb_value</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="nv">duckdb_get_int64</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 
@@ -3299,8 +3383,8 @@ This should not be used with `DUCKDB_TYPE_DECIMAL`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_logical_type</span>(<span class="k">
-</span>  <span class="k">duckdb_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_logical_type</span>(<span class="nv">
+</span>  <span class="nv">duckdb_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3317,6 +3401,33 @@ The logical type.
 <br>
 
 
+### `duckdb_logical_type_get_alias`
+
+---
+Returns the alias of a duckdb_logical_type, if one is set, else `NULL`
+You must free the result.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_logical_type_get_alias</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `type`
+
+The logical type to return the alias of
+* `returns`
+
+The alias or `NULL`
+
+<br>
+
+
 ### `duckdb_create_list_type`
 
 ---
@@ -3326,8 +3437,8 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_list_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_list_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3353,9 +3464,9 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_map_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">key_type</span>,<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">value_type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_map_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">key_type</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">value_type
 </span>);
 </code></pre></div></div>
 
@@ -3381,10 +3492,10 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_union_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">member_types</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">member_count
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_union_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">member_types</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">member_count
 </span>);
 </code></pre></div></div>
 
@@ -3413,10 +3524,10 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_struct_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="k">member_types</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">member_count
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_struct_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">member_count
 </span>);
 </code></pre></div></div>
 
@@ -3439,6 +3550,40 @@ The logical type.
 <br>
 
 
+### `duckdb_create_enum_type`
+
+---
+Creates an ENUM type from the passed member name array.
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_enum_type</span>(<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">member_count
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `enum_name`
+
+The name of the enum.
+* `member_names`
+
+The array of names that the enum should consist of.
+* `member_count`
+
+The number of elements that were specified in the array.
+* `returns`
+
+The logical type.
+
+<br>
+
+
 ### `duckdb_create_decimal_type`
 
 ---
@@ -3448,9 +3593,9 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_decimal_type</span>(<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">width</span>,<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">scale
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_decimal_type</span>(<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">scale
 </span>);
 </code></pre></div></div>
 
@@ -3478,8 +3623,8 @@ Retrieves the type class of a `duckdb_logical_type`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_get_type_id</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_get_type_id</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3504,8 +3649,8 @@ Retrieves the width of a decimal type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="k">duckdb_decimal_width</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_decimal_width</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3530,8 +3675,8 @@ Retrieves the scale of a decimal type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="k">duckdb_decimal_scale</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_decimal_scale</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3556,8 +3701,8 @@ Retrieves the internal storage type of a decimal type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_decimal_internal_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_decimal_internal_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3582,8 +3727,8 @@ Retrieves the internal storage type of an enum type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_enum_internal_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_enum_internal_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3608,8 +3753,8 @@ Retrieves the dictionary size of the enum type
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="k">duckdb_enum_dictionary_size</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nv">duckdb_enum_dictionary_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3636,9 +3781,9 @@ The result must be freed with `duckdb_free`
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_enum_dictionary_value</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_enum_dictionary_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
@@ -3668,8 +3813,8 @@ The result must be freed with `duckdb_destroy_logical_type`
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_list_type_child_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_list_type_child_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3696,8 +3841,8 @@ The result must be freed with `duckdb_destroy_logical_type`
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_map_type_key_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_map_type_key_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3724,8 +3869,8 @@ The result must be freed with `duckdb_destroy_logical_type`
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_map_type_value_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_map_type_value_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3750,8 +3895,8 @@ Returns the number of children of a struct type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_struct_type_child_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_struct_type_child_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3778,9 +3923,9 @@ The result must be freed with `duckdb_free`
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_struct_type_child_name</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_struct_type_child_name</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
@@ -3810,9 +3955,9 @@ The result must be freed with `duckdb_destroy_logical_type`
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_struct_type_child_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_struct_type_child_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
@@ -3840,8 +3985,8 @@ Returns the number of members that the union type has.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_union_type_member_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_union_type_member_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3868,9 +4013,9 @@ The result must be freed with `duckdb_free`
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_union_type_member_name</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_union_type_member_name</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
@@ -3900,9 +4045,9 @@ The result must be freed with `duckdb_destroy_logical_type`
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_union_type_member_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_union_type_member_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
@@ -3930,8 +4075,8 @@ Destroys the logical type and de-allocates all memory allocated for that type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_logical_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_logical_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3953,9 +4098,9 @@ Creates an empty DataChunk with the specified set of types.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="k">duckdb_create_data_chunk</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="k">types</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">column_count
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_create_data_chunk</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">column_count
 </span>);
 </code></pre></div></div>
 
@@ -3983,8 +4128,8 @@ Destroys the data chunk and de-allocates all memory allocated for that chunk.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_data_chunk</span>(<span class="k">
-</span>  <span class="kt">duckdb_data_chunk</span> *<span class="k">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_data_chunk</span>(<span class="nv">
+</span>  <span class="kt">duckdb_data_chunk</span> *<span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
@@ -4006,8 +4151,8 @@ Resets a data chunk, clearing the validity masks and setting the cardinality of 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_data_chunk_reset</span>(<span class="k">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_data_chunk_reset</span>(<span class="nv">
+</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
@@ -4029,8 +4174,8 @@ Retrieves the number of columns in a data chunk.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_data_chunk_get_column_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_data_chunk_get_column_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
@@ -4058,9 +4203,9 @@ It does NOT need to be destroyed.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="k">duckdb_data_chunk_get_vector</span>(<span class="k">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col_idx
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_data_chunk_get_vector</span>(<span class="nv">
+</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
 </span>);
 </code></pre></div></div>
 
@@ -4085,8 +4230,8 @@ Retrieves the current number of tuples in a data chunk.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_data_chunk_get_size</span>(<span class="k">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_data_chunk_get_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
@@ -4111,9 +4256,9 @@ Sets the current number of tuples in a data chunk.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_data_chunk_set_size</span>(<span class="k">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">size
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_data_chunk_set_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">size
 </span>);
 </code></pre></div></div>
 
@@ -4140,8 +4285,8 @@ The result must be destroyed with `duckdb_destroy_logical_type`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_vector_get_column_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_vector_get_column_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4169,8 +4314,8 @@ How to read or write values depends on the type of the vector.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_vector_get_data</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_vector_get_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4209,8 +4354,8 @@ Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> *<span class="k">duckdb_vector_get_validity</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> *<span class="nv">duckdb_vector_get_validity</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4238,8 +4383,8 @@ This allows null values to be written to the vector, regardless of whether a val
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_vector_ensure_validity_writable</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_ensure_validity_writable</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4261,10 +4406,10 @@ Assigns a string element in the vector at the specified location.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_vector_assign_string_element</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">str
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_assign_string_element</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str
 </span>);
 </code></pre></div></div>
 
@@ -4292,11 +4437,11 @@ Assigns a string element in the vector at the specified location.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_vector_assign_string_element_len</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">str</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">str_len
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_assign_string_element_len</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">str_len
 </span>);
 </code></pre></div></div>
 
@@ -4329,8 +4474,8 @@ The resulting vector is valid as long as the parent vector is valid.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="k">duckdb_list_vector_get_child</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_list_vector_get_child</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4355,8 +4500,8 @@ Returns the size of the child vector of the list
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_list_vector_get_size</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_list_vector_get_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4381,9 +4526,9 @@ Sets the total size of the underlying child-vector of a list vector.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_list_vector_set_size</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">size
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_list_vector_set_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">size
 </span>);
 </code></pre></div></div>
 
@@ -4411,9 +4556,9 @@ Sets the total capacity of the underlying child-vector of a list.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_list_vector_reserve</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">required_capacity
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_list_vector_reserve</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">required_capacity
 </span>);
 </code></pre></div></div>
 
@@ -4443,9 +4588,9 @@ The resulting vector is valid as long as the parent vector is valid.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="k">duckdb_struct_vector_get_child</span>(<span class="k">
-</span>  <span class="kt">duckdb_vector</span> <span class="k">vector</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_struct_vector_get_child</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
@@ -4473,9 +4618,9 @@ Returns whether or not a row is valid (i.e., not NULL) in the given validity mas
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_validity_row_is_valid</span>(<span class="k">
-</span>  <span class="kt">uint64_t</span> *<span class="k">validity</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_validity_row_is_valid</span>(<span class="nv">
+</span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -4506,10 +4651,10 @@ to ensure that there is a validity mask to write to.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_validity_set_row_validity</span>(<span class="k">
-</span>  <span class="kt">uint64_t</span> *<span class="k">validity</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row</span>,<span class="k">
-</span>  <span class="kt">bool</span> <span class="k">valid
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_validity_set_row_validity</span>(<span class="nv">
+</span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row</span>,<span class="nv">
+</span>  <span class="kt">bool</span> <span class="nv">valid
 </span>);
 </code></pre></div></div>
 
@@ -4539,9 +4684,9 @@ Equivalent to `duckdb_validity_set_row_validity` with valid set to false.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_validity_set_row_invalid</span>(<span class="k">
-</span>  <span class="kt">uint64_t</span> *<span class="k">validity</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_validity_set_row_invalid</span>(<span class="nv">
+</span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -4568,9 +4713,9 @@ Equivalent to `duckdb_validity_set_row_validity` with valid set to true.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_validity_set_row_valid</span>(<span class="k">
-</span>  <span class="kt">uint64_t</span> *<span class="k">validity</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_validity_set_row_valid</span>(<span class="nv">
+</span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
 </code></pre></div></div>
 
@@ -4597,8 +4742,8 @@ The return value should be destroyed with `duckdb_destroy_table_function`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_table_function</span> <span class="k">duckdb_create_table_function</span>(<span class="k">
-</span>  <span class="k">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_table_function</span> <span class="nv">duckdb_create_table_function</span>(<span class="nv">
+</span>  <span class="nv">
 </span>);
 </code></pre></div></div>
 
@@ -4620,8 +4765,8 @@ Destroys the given table function object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_table_function</span>(<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> *<span class="k">table_function
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_table_function</span>(<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> *<span class="nv">table_function
 </span>);
 </code></pre></div></div>
 
@@ -4643,9 +4788,9 @@ Sets the name of the given table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_set_name</span>(<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_name</span>(<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
 </span>);
 </code></pre></div></div>
 
@@ -4670,9 +4815,9 @@ Adds a parameter to the table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_add_parameter</span>(<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_add_parameter</span>(<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4697,10 +4842,10 @@ Adds a named parameter to the table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_add_named_parameter</span>(<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>,<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_add_named_parameter</span>(<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4728,10 +4873,10 @@ Assigns extra information to the table function that can be fetched during bindi
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_set_extra_info</span>(<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
-</span>  <span class="kt">void</span> *<span class="k">extra_info</span>,<span class="k">
-</span>  <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_extra_info</span>(<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="kt">void</span> *<span class="nv">extra_info</span>,<span class="nv">
+</span>  <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy
 </span>);
 </code></pre></div></div>
 
@@ -4759,9 +4904,9 @@ Sets the bind function of the table function
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_set_bind</span>(<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
-</span>  <span class="k">duckdb_table_function_bind_t</span> <span class="k">bind
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_bind</span>(<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="nv">duckdb_table_function_bind_t</span> <span class="nv">bind
 </span>);
 </code></pre></div></div>
 
@@ -4786,9 +4931,9 @@ Sets the init function of the table function
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_set_init</span>(<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
-</span>  <span class="k">duckdb_table_function_init_t</span> <span class="k">init
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_init</span>(<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="nv">duckdb_table_function_init_t</span> <span class="nv">init
 </span>);
 </code></pre></div></div>
 
@@ -4813,9 +4958,9 @@ Sets the thread-local init function of the table function
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_set_local_init</span>(<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
-</span>  <span class="k">duckdb_table_function_init_t</span> <span class="k">init
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_local_init</span>(<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="nv">duckdb_table_function_init_t</span> <span class="nv">init
 </span>);
 </code></pre></div></div>
 
@@ -4840,9 +4985,9 @@ Sets the main function of the table function
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_set_function</span>(<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
-</span>  <span class="k">duckdb_table_function_t</span> <span class="k">function
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_function</span>(<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="nv">duckdb_table_function_t</span> <span class="nv">function
 </span>);
 </code></pre></div></div>
 
@@ -4871,9 +5016,9 @@ If this is set to false (the default), the system will expect all columns to be 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_supports_projection_pushdown</span>(<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
-</span>  <span class="kt">bool</span> <span class="k">pushdown
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_supports_projection_pushdown</span>(<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="kt">bool</span> <span class="nv">pushdown
 </span>);
 </code></pre></div></div>
 
@@ -4902,9 +5047,9 @@ If the function is incomplete or a function with this name already exists DuckDB
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_register_table_function</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">con</span>,<span class="k">
-</span>  <span class="kt">duckdb_table_function</span> <span class="k">function
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_register_table_function</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">con</span>,<span class="nv">
+</span>  <span class="kt">duckdb_table_function</span> <span class="nv">function
 </span>);
 </code></pre></div></div>
 
@@ -4932,8 +5077,8 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_bind_get_extra_info</span>(<span class="k">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_bind_get_extra_info</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -4958,10 +5103,10 @@ Adds a result column to the output of the table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_bind_add_result_column</span>(<span class="k">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>,<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_add_result_column</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4989,8 +5134,8 @@ Retrieves the number of regular (non-named) parameters to the function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_bind_get_parameter_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_bind_get_parameter_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5017,9 +5162,9 @@ The result must be destroyed with `duckdb_destroy_value`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="k">duckdb_bind_get_parameter</span>(<span class="k">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_bind_get_parameter</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
@@ -5049,9 +5194,9 @@ The result must be destroyed with `duckdb_destroy_value`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="k">duckdb_bind_get_named_parameter</span>(<span class="k">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_bind_get_named_parameter</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
 </span>);
 </code></pre></div></div>
 
@@ -5079,10 +5224,10 @@ Sets the user-provided bind data in the bind object. This object can be retrieve
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_bind_set_bind_data</span>(<span class="k">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">void</span> *<span class="k">bind_data</span>,<span class="k">
-</span>  <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_set_bind_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">void</span> *<span class="nv">bind_data</span>,<span class="nv">
+</span>  <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy
 </span>);
 </code></pre></div></div>
 
@@ -5110,10 +5255,10 @@ Sets the cardinality estimate for the table function, used for optimization.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_bind_set_cardinality</span>(<span class="k">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">cardinality</span>,<span class="k">
-</span>  <span class="kt">bool</span> <span class="k">is_exact
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_set_cardinality</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">cardinality</span>,<span class="nv">
+</span>  <span class="kt">bool</span> <span class="nv">is_exact
 </span>);
 </code></pre></div></div>
 
@@ -5138,9 +5283,9 @@ Report that an error has occurred while calling bind.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_bind_set_error</span>(<span class="k">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_set_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
 </span>);
 </code></pre></div></div>
 
@@ -5165,8 +5310,8 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_init_get_extra_info</span>(<span class="k">
-</span>  <span class="kt">duckdb_init_info</span> <span class="k">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_init_get_extra_info</span>(<span class="nv">
+</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5194,8 +5339,8 @@ For tracking state, use the init data instead.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_init_get_bind_data</span>(<span class="k">
-</span>  <span class="kt">duckdb_init_info</span> <span class="k">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_init_get_bind_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5220,10 +5365,10 @@ Sets the user-provided init data in the init object. This object can be retrieve
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_init_set_init_data</span>(<span class="k">
-</span>  <span class="kt">duckdb_init_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">void</span> *<span class="k">init_data</span>,<span class="k">
-</span>  <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_init_set_init_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">void</span> *<span class="nv">init_data</span>,<span class="nv">
+</span>  <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy
 </span>);
 </code></pre></div></div>
 
@@ -5253,8 +5398,8 @@ This function must be used if projection pushdown is enabled to figure out which
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_init_get_column_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_init_info</span> <span class="k">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_init_get_column_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5281,9 +5426,9 @@ This function must be used if projection pushdown is enabled to figure out which
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_init_get_column_index</span>(<span class="k">
-</span>  <span class="kt">duckdb_init_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">column_index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_init_get_column_index</span>(<span class="nv">
+</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">column_index
 </span>);
 </code></pre></div></div>
 
@@ -5311,9 +5456,9 @@ Sets how many threads can process this table function in parallel (default: 1)
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_init_set_max_threads</span>(<span class="k">
-</span>  <span class="kt">duckdb_init_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">max_threads
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_init_set_max_threads</span>(<span class="nv">
+</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">max_threads
 </span>);
 </code></pre></div></div>
 
@@ -5338,9 +5483,9 @@ Report that an error has occurred while calling init.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_init_set_error</span>(<span class="k">
-</span>  <span class="kt">duckdb_init_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_init_set_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
 </span>);
 </code></pre></div></div>
 
@@ -5365,8 +5510,8 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_function_get_extra_info</span>(<span class="k">
-</span>  <span class="kt">duckdb_function_info</span> <span class="k">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_extra_info</span>(<span class="nv">
+</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5394,8 +5539,8 @@ For tracking state, use the init data instead.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_function_get_bind_data</span>(<span class="k">
-</span>  <span class="kt">duckdb_function_info</span> <span class="k">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_bind_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5420,8 +5565,8 @@ Gets the init data set by `duckdb_init_set_init_data` during the init.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_function_get_init_data</span>(<span class="k">
-</span>  <span class="kt">duckdb_function_info</span> <span class="k">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_init_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5446,8 +5591,8 @@ Gets the thread-local init data set by `duckdb_init_set_init_data` during the lo
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_function_get_local_init_data</span>(<span class="k">
-</span>  <span class="kt">duckdb_function_info</span> <span class="k">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_local_init_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5472,9 +5617,9 @@ Report that an error has occurred while executing the function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_function_set_error</span>(<span class="k">
-</span>  <span class="kt">duckdb_function_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_function_set_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
 </span>);
 </code></pre></div></div>
 
@@ -5499,11 +5644,11 @@ Add a replacement scan definition to the specified database
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_add_replacement_scan</span>(<span class="k">
-</span>  <span class="kt">duckdb_database</span> <span class="k">db</span>,<span class="k">
-</span>  <span class="k">duckdb_replacement_callback_t</span> <span class="k">replacement</span>,<span class="k">
-</span>  <span class="kt">void</span> *<span class="k">extra_data</span>,<span class="k">
-</span>  <span class="k">duckdb_delete_callback_t</span> <span class="k">delete_callback
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_add_replacement_scan</span>(<span class="nv">
+</span>  <span class="kt">duckdb_database</span> <span class="nv">db</span>,<span class="nv">
+</span>  <span class="nv">duckdb_replacement_callback_t</span> <span class="nv">replacement</span>,<span class="nv">
+</span>  <span class="kt">void</span> *<span class="nv">extra_data</span>,<span class="nv">
+</span>  <span class="nv">duckdb_delete_callback_t</span> <span class="nv">delete_callback
 </span>);
 </code></pre></div></div>
 
@@ -5535,9 +5680,9 @@ the replacement scan is performed. If it is not called, the replacement callback
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_replacement_scan_set_function_name</span>(<span class="k">
-</span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">function_name
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_set_function_name</span>(<span class="nv">
+</span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">function_name
 </span>);
 </code></pre></div></div>
 
@@ -5562,9 +5707,9 @@ Adds a parameter to the replacement scan function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_replacement_scan_add_parameter</span>(<span class="k">
-</span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">duckdb_value</span> <span class="k">parameter
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_add_parameter</span>(<span class="nv">
+</span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">parameter
 </span>);
 </code></pre></div></div>
 
@@ -5589,9 +5734,9 @@ Report that an error has occurred while executing the replacement scan.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_replacement_scan_set_error</span>(<span class="k">
-</span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="k">info</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_set_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
 </span>);
 </code></pre></div></div>
 
@@ -5616,11 +5761,11 @@ Creates an appender object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_create</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">schema</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table</span>,<span class="k">
-</span>  <span class="kt">duckdb_appender</span> *<span class="k">out_appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_create</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>,<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> *<span class="nv">out_appender
 </span>);
 </code></pre></div></div>
 
@@ -5657,8 +5802,8 @@ The error message should not be freed. It will be de-allocated when `duckdb_appe
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_appender_error</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_appender_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -5687,8 +5832,8 @@ are done with the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_flush</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_flush</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -5715,8 +5860,8 @@ This is generally not necessary. Call `duckdb_appender_destroy` instead.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_close</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_close</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -5742,8 +5887,8 @@ all memory associated with the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_destroy</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> *<span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_destroy</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> *<span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -5768,8 +5913,8 @@ A nop function, provided for backwards compatibility reasons. Does nothing. Only
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_begin_row</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_begin_row</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 <br>
@@ -5783,8 +5928,8 @@ Finish the current row of appends. After end_row is called, the next row can be 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_end_row</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_end_row</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -5809,9 +5954,9 @@ Append a bool value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_bool</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">bool</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_bool</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">bool</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5825,9 +5970,9 @@ Append an int8_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_int8</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">int8_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int8</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">int8_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5841,9 +5986,9 @@ Append an int16_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_int16</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">int16_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int16</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">int16_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5857,9 +6002,9 @@ Append an int32_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_int32</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">int32_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int32</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">int32_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5873,9 +6018,9 @@ Append an int64_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_int64</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">int64_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int64</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">int64_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5889,9 +6034,9 @@ Append a duckdb_hugeint value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_hugeint</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_hugeint</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_hugeint</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_hugeint</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5905,9 +6050,9 @@ Append a uint8_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_uint8</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint8</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5921,9 +6066,9 @@ Append a uint16_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_uint16</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">uint16_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint16</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">uint16_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5937,9 +6082,9 @@ Append a uint32_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_uint32</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">uint32_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint32</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">uint32_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5953,9 +6098,9 @@ Append a uint64_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_uint64</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">uint64_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint64</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">uint64_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5969,9 +6114,9 @@ Append a float value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_float</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">float</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_float</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">float</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -5985,9 +6130,9 @@ Append a double value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_double</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">double</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_double</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">double</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -6001,9 +6146,9 @@ Append a duckdb_date value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_date</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_date</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_date</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_date</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -6017,9 +6162,9 @@ Append a duckdb_time value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_time</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_time</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_time</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_time</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -6033,9 +6178,9 @@ Append a duckdb_timestamp value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_timestamp</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_timestamp</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -6049,9 +6194,9 @@ Append a duckdb_interval value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_interval</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_interval</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_interval</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_interval</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
@@ -6065,9 +6210,9 @@ Append a varchar value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_varchar</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_varchar</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -6081,10 +6226,10 @@ Append a varchar value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_varchar_length</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">length
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_varchar_length</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">length
 </span>);
 </code></pre></div></div>
 <br>
@@ -6098,10 +6243,10 @@ Append a blob value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_blob</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">void</span> *<span class="k">data</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">length
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_blob</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">length
 </span>);
 </code></pre></div></div>
 <br>
@@ -6115,8 +6260,8 @@ Append a NULL value to the appender (of any type).
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_null</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_null</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 <br>
@@ -6134,9 +6279,9 @@ If the append is successful, DuckDBSuccess is returned.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_data_chunk</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_data_chunk</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
@@ -6169,10 +6314,10 @@ query fails, otherwise the error stored within the result will not be freed corr
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_query_arrow</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>,<span class="k">
-</span>  <span class="kt">duckdb_arrow</span> *<span class="k">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query_arrow</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -6203,9 +6348,9 @@ Fetch the internal arrow schema from the arrow result.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_query_arrow_schema</span>(<span class="k">
-</span>  <span class="kt">duckdb_arrow</span> <span class="k">result</span>,<span class="k">
-</span>  <span class="kt">duckdb_arrow_schema</span> *<span class="k">out_schema
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query_arrow_schema</span>(<span class="nv">
+</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow_schema</span> *<span class="nv">out_schema
 </span>);
 </code></pre></div></div>
 
@@ -6233,9 +6378,9 @@ Fetch the internal arrow schema from the prepared statement.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_prepared_arrow_schema</span>(<span class="k">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared</span>,<span class="k">
-</span>  <span class="kt">duckdb_arrow_schema</span> *<span class="k">out_schema
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_prepared_arrow_schema</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow_schema</span> *<span class="nv">out_schema
 </span>);
 </code></pre></div></div>
 
@@ -6255,10 +6400,41 @@ The output schema.
 <br>
 
 
+### `duckdb_result_arrow_array`
+
+---
+Convert a data chunk into an arrow struct array.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_result_arrow_array</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow_array</span> *<span class="nv">out_array
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `result`
+
+The result object the data chunk have been fetched from.
+* `chunk`
+
+The data chunk to convert.
+* `out_array`
+
+The output array.
+
+<br>
+
+
 ### `duckdb_query_arrow_array`
 
 ---
-Fetch an internal arrow array from the arrow result.
+Fetch an internal arrow struct array from the arrow result.
 
 This function can be called multiple time to get next chunks, which will free the previous out_array.
 So consume the out_array before calling this function again.
@@ -6266,9 +6442,9 @@ So consume the out_array before calling this function again.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_query_arrow_array</span>(<span class="k">
-</span>  <span class="kt">duckdb_arrow</span> <span class="k">result</span>,<span class="k">
-</span>  <span class="kt">duckdb_arrow_array</span> *<span class="k">out_array
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query_arrow_array</span>(<span class="nv">
+</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow_array</span> *<span class="nv">out_array
 </span>);
 </code></pre></div></div>
 
@@ -6296,8 +6472,8 @@ Returns the number of columns present in a the arrow result object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_arrow_column_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_arrow</span> <span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_arrow_column_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -6322,8 +6498,8 @@ Returns the number of rows present in a the arrow result object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_arrow_row_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_arrow</span> <span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_arrow_row_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -6349,8 +6525,8 @@ INSERT/UPDATE/DELETE queries. For other queries the rows_changed will be 0.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_arrow_rows_changed</span>(<span class="k">
-</span>  <span class="kt">duckdb_arrow</span> <span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_arrow_rows_changed</span>(<span class="nv">
+</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -6378,8 +6554,8 @@ The error message should not be freed. It will be de-allocated when `duckdb_dest
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_query_arrow_error</span>(<span class="k">
-</span>  <span class="kt">duckdb_arrow</span> <span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_query_arrow_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -6404,8 +6580,8 @@ Closes the result and de-allocates all memory allocated for the arrow result.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_arrow</span>(<span class="k">
-</span>  <span class="kt">duckdb_arrow</span> *<span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_arrow</span>(<span class="nv">
+</span>  <span class="kt">duckdb_arrow</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -6429,9 +6605,9 @@ Will return after `max_tasks` have been executed, or if there are no more tasks 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_execute_tasks</span>(<span class="k">
-</span>  <span class="kt">duckdb_database</span> <span class="k">database</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">max_tasks
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_execute_tasks</span>(<span class="nv">
+</span>  <span class="kt">duckdb_database</span> <span class="nv">database</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">max_tasks
 </span>);
 </code></pre></div></div>
 
@@ -6459,8 +6635,8 @@ duckdb_destroy_state should be called on the result in order to free memory.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_task_state</span> <span class="k">duckdb_create_task_state</span>(<span class="k">
-</span>  <span class="kt">duckdb_database</span> <span class="k">database
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_task_state</span> <span class="nv">duckdb_create_task_state</span>(<span class="nv">
+</span>  <span class="kt">duckdb_database</span> <span class="nv">database
 </span>);
 </code></pre></div></div>
 
@@ -6488,8 +6664,8 @@ Multiple threads can share the same duckdb_task_state.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_execute_tasks_state</span>(<span class="k">
-</span>  <span class="k">duckdb_task_state</span> <span class="k">state
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_execute_tasks_state</span>(<span class="nv">
+</span>  <span class="nv">duckdb_task_state</span> <span class="nv">state
 </span>);
 </code></pre></div></div>
 
@@ -6516,9 +6692,9 @@ Multiple threads can share the same duckdb_task_state.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_execute_n_tasks_state</span>(<span class="k">
-</span>  <span class="k">duckdb_task_state</span> <span class="k">state</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">max_tasks
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_execute_n_tasks_state</span>(<span class="nv">
+</span>  <span class="nv">duckdb_task_state</span> <span class="nv">state</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">max_tasks
 </span>);
 </code></pre></div></div>
 
@@ -6546,8 +6722,8 @@ Finish execution on a specific task.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_finish_execution</span>(<span class="k">
-</span>  <span class="k">duckdb_task_state</span> <span class="k">state
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_finish_execution</span>(<span class="nv">
+</span>  <span class="nv">duckdb_task_state</span> <span class="nv">state
 </span>);
 </code></pre></div></div>
 
@@ -6569,8 +6745,8 @@ Check if the provided duckdb_task_state has finished execution
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_task_state_is_finished</span>(<span class="k">
-</span>  <span class="k">duckdb_task_state</span> <span class="k">state
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_task_state_is_finished</span>(<span class="nv">
+</span>  <span class="nv">duckdb_task_state</span> <span class="nv">state
 </span>);
 </code></pre></div></div>
 
@@ -6598,8 +6774,8 @@ on the task state.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_task_state</span>(<span class="k">
-</span>  <span class="k">duckdb_task_state</span> <span class="k">state
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_task_state</span>(<span class="nv">
+</span>  <span class="nv">duckdb_task_state</span> <span class="nv">state
 </span>);
 </code></pre></div></div>
 
@@ -6621,8 +6797,8 @@ Returns true if execution of the current query is finished.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_execution_is_finished</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">con
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_execution_is_finished</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">con
 </span>);
 </code></pre></div></div>
 
@@ -6654,8 +6830,8 @@ It is not known beforehand how many chunks will be returned by this result.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="k">duckdb_stream_fetch_chunk</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> <span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_stream_fetch_chunk</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
