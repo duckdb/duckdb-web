@@ -81,7 +81,7 @@ LOAD 'httpfs.duckdb_extension';
 
 ## Force Installing Extensions
 
-In rare cases, ?? something goes wrong and you need force install ??. To resolve this, run:
+When DuckDB installs an extension, they are copied to a local directory, by default in `~/.duckdb`. Any subsequent calls to `INSTALL <extension>` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
 
 ```sql
 FORCE INSTALL extension_name;
