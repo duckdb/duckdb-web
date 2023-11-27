@@ -43,10 +43,19 @@ We currently do not distribute binaries for extensions on the `linux_arm64_gcc4`
 
 ## Using a Custom Extension Repository
 
-To load extensions from a custom extension repository, set the following configuration option:
+To load extensions from a custom extension repository, set the following configuration option. For example:
 
 ```sql
+-- S3 bucket
 SET custom_extension_repository='bucket.s3.<region>.amazonaws.com/<your_extension_name>/latest';
+-- http
+SET custom_extension_repository='http://nightly-extensions.duckdb.org';
+```
+
+You can also use the `INSTALL` command's `FROM` clause to specify the path of the custom extension repository. For example:
+
+```sql
+INSTALL azure FROM 'http://nightly-extensions.duckdb.org';
 ```
 
 ## Loading and Installing an Extension from Local Storage
@@ -81,7 +90,7 @@ LOAD 'httpfs.duckdb_extension';
 
 ## Force Installing Extensions
 
-When DuckDB installs an extension, they are copied to a local directory, by default in `~/.duckdb`. Any subsequent calls to `INSTALL <extension>` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
+When DuckDB installs an extension, it is copied to a local directory, by default in `~/.duckdb`. Any subsequent calls to `INSTALL extension_name` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
 
 ```sql
 FORCE INSTALL extension_name;
