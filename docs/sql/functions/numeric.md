@@ -94,5 +94,6 @@ The table below shows the available mathematical functions.
 | `sqrt(x)` | Returns the square root of the number | `sqrt(9)` | `3` |
 | `subtract(x, y)` | Alias for `x - y` | `subtract(2, 3)` | `-1`|
 | `tan(x)` | Computes the tangent of x | `tan(90)` | `-1.995200412208242` |
+| `trunc(x)` | Truncates the number | `trunc(17.4)` | `17` |
 | `xor(x)` | Bitwise XOR | `xor(17, 5)` | `20` |
 | `@` | Absolute value (parentheses optional if operating on a column) | `@(-2)` | `2` |
