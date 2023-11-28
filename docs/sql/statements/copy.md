@@ -7,11 +7,13 @@ railroad: statements/copy.js
 ## Examples
 
 ```sql
--- read a CSV file into the lineitem table - using auto-detected options
-COPY lineitem FROM 'lineitem.csv' (AUTO_DETECT true);
+-- read a CSV file into the lineitem table, using auto-detected CSV options
+COPY lineitem FROM 'lineitem.csv';
+-- read a CSV file into the lineitem table, using manually specified CSV options
+COPY lineitem FROM 'lineitem.csv' (DELIMITER '|');
 -- read a Parquet file into the lineitem table
 COPY lineitem FROM 'lineitem.pq' (FORMAT PARQUET);
--- read a JSON file into the lineitem table - using auto-detected options
+-- read a JSON file into the lineitem table, using auto-detected options
 COPY lineitem FROM 'lineitem.json' (FORMAT JSON, AUTO_DETECT true);
 
 -- write a table to a CSV file

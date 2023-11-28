@@ -106,7 +106,7 @@ Then you can create a table with the `ENUM` type and import using any data impor
 
 ```sql
 CREATE TABLE person (name TEXT, current_mood mood);
-COPY person FROM 'path/to/file.csv' (AUTO_DETECT true);
+COPY person FROM 'path/to/file.csv';
 ```
 
 ## Enums vs. Strings

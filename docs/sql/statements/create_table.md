@@ -24,10 +24,10 @@ CREATE TABLE t1 (
 );
 -- create a table from the result of a query
 CREATE TABLE t1 AS SELECT 42 AS i, 84 AS j;
--- create a table from a CSV file using AUTO-DETECT (i.e., automatically detecting column names and types)
-CREATE TABLE t1 AS SELECT * FROM read_csv_auto('path/file.csv');
+-- create a table from a CSV file (automatically detecting column names and types)
+CREATE TABLE t1 AS SELECT * FROM read_csv('path/file.csv');
 -- we can use the FROM-first syntax to omit 'SELECT *'
-CREATE TABLE t1 AS FROM read_csv_auto('path/file.csv');
+CREATE TABLE t1 AS FROM read_csv('path/file.csv');
 ```
 
 ## Temporary Tables
@@ -37,8 +37,8 @@ Temporary tables are session scoped (similar to PostgreSQL for example), meaning
 Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](../../sql/configuration) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained. 
 
 ```sql
--- create a temporary table from a CSV file using AUTO-DETECT (i.e., automatically detecting column names and types)
-CREATE TEMP TABLE t1 AS SELECT * FROM read_csv_auto('path/file.csv');
+-- create a temporary table from a CSV file (automatically detecting column names and types)
+CREATE TEMP TABLE t1 AS SELECT * FROM read_csv('path/file.csv');
 
 -- allow temporary tables to off-load excess memory to disk
 SET temp_directory='/path/to/directory/';

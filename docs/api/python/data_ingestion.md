@@ -22,7 +22,7 @@ duckdb.read_csv("example.csv", parallel = True)
 # directly read a CSV file from within SQL
 duckdb.sql("SELECT * FROM 'example.csv'")
 # call read_csv from within SQL
-duckdb.sql("SELECT * FROM read_csv_auto('example.csv')")
+duckdb.sql("SELECT * FROM read_csv('example.csv')")
 ```
 
 See the [CSV Import](../../data/csv) page for more information.

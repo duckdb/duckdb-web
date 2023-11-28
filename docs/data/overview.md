@@ -17,16 +17,16 @@ For a more detailed description, see the [page on the `INSERT statement`](../dat
 
 ## CSV Loading
 
-Data can be efficiently loaded from CSV files using the `read_csv_auto` function or the `COPY` statement.
+Data can be efficiently loaded from CSV files using the `read_csv` function or the `COPY` statement.
 
 ```sql
-SELECT * FROM read_csv_auto('test.csv');
+SELECT * FROM read_csv('test.csv');
 ```
 
 You can also load data from **compressed** (e.g., compressed with [gzip](https://www.gzip.org/)) CSV files, for example:
 
 ```sql
-SELECT * FROM read_csv_auto('test.csv.gz');
+SELECT * FROM read_csv('test.csv.gz');
 ```
 
 For more details, see the [page on CSV loading](../data/csv).

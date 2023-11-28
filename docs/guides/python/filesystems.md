@@ -24,7 +24,7 @@ from fsspec import filesystem
 # this line will throw an exception if the appropriate filesystem interface is not installed
 duckdb.register_filesystem(filesystem('gcs'))
 
-duckdb.sql("SELECT * FROM read_csv_auto('gcs:///bucket/file.csv')")
+duckdb.sql("SELECT * FROM read_csv('gcs:///bucket/file.csv')")
 ```
 
 > These filesystems are not implemented in C++, hence, their performance may not be comparable to the ones provided by the `httpfs` extension.
