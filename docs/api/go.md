@@ -27,7 +27,9 @@ import (
 )
 ```
 
-## Example
+## Examples
+
+### Simple Example
 
 An example for using the Go API is as follows:
 
