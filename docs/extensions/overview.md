@@ -87,7 +87,7 @@ For the Python client, see the [Loading and Installing Extensions section in the
 
 The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.9.2 of the CLI client on MacOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.9.2.
 
-See https://duckdb.org/docs/extensions/working_with_extensions#platforms for details on available platform.
+See the [Working with Extensions page](https://duckdb.org/docs/extensions/working_with_extensions#platforms) for details on available platforms.
 
 ## Installation Location
 

@@ -45,13 +45,15 @@ We currently do not distribute binaries for extensions on the `linux_arm64_gcc4`
 
 To load extensions from a custom extension repository, set the following configuration option;
 
-### Local files
+### Local Files
+
 ```sql
 SET custom_extension_repository='path/to/folder';
 ```
 
 This assumes the pointed folder has a structure similar to:
-```
+
+```text
 folder
 └── 0fd6fb9198
     └── osx_arm64
@@ -73,14 +75,16 @@ INSTALL icu;
 ```
 for example will look for either `icu.duckdb_extension.gz` (first) or `icu.duckdb_extension` (second) in the repository structure, and install it to the `extension_directory` (that defaults to `~/.duckdb/extensions`), if file is compressed, decompression will be handled at this step.
 
-### Remote file over http
+### Remote File over http
+
 ```sql
 SET custom_extension_repository='http://nightly-extensions.duckdb.org';
 ```
 
 They work the same as local ones, and expect a similar folder structure.
 
-### Remote files over https or s3 protocol
+### Remote Files over https or s3 Protocol
+
 ```sql
 SET custom_extension_repository='s3://bucket/your-repository-name/';
 ```
@@ -88,39 +92,43 @@ SET custom_extension_repository='s3://bucket/your-repository-name/';
 Remote extension repositories act similarly to local ones, as in the file structure should be the same and either gzipped or non-gzipped file are supported.
 
 Only special case here is that `httpfs` extension should be available locally. You can get it for example doing:
+
 ```sql
 RESET custom_extension_repository;
 INSTALL httpfs;
 ```
-That will INSTALL the official `httpfs` extension locally.
+
+That will install the official `httpfs` extension locally.
 
 This is since httpfs extension will be needed to actually access remote encrypted files.
 
-### INSTALL x FROM y
+### `INSTALL x FROM y`
 
 You can also use the `INSTALL` command's `FROM` clause to specify the path of the custom extension repository. For example:
 
 ```sql
 FORCE INSTALL azure FROM 'http://nightly-extensions.duckdb.org';
 ```
-This will 
 
-## Loading and Installing an Extension from explicit paths
+This will [force install](#force-installing-extensions) the `azure` extension from the specified URL.
 
-### Installing Extensions from explicit path
+## Loading and Installing an Extension from Explicit Paths
+
+### Installing Extensions from an Explicit Path
 
 `INSTALL` can be used with the path to either a `.duckdb_extension` file or a `.duckdb_extension.gz` file.
 For example, if the file was available into the same directory as where DuckDB is being executed, you can install it as follows:
 
 ```sql
---uncompressed file
+-- uncompressed file
 INSTALL 'path/to/httpfs.duckdb_extension';
---gzip-compressed file
+-- gzip-compressed file
 INSTALL 'path/to/httpfs.duckdb_extension.gz';
 ```
+
 These will have the same results.
 
-Remote paths are also possible.
+It is also possible to specify remote paths.
 
 ## Force Installing Extensions
 
