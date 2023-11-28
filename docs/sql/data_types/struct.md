@@ -34,10 +34,10 @@ SELECT {'birds':
             {'yes':'frog', 'maybe': 'salamander', 'huh': 'dragon', 'no':'toad'}
         };
 -- Create a struct from columns and/or expressions using the row function.
--- This returns {'x': 1, 'v2': 2, 'y': a}
+-- This returns {'': 1, '': 2, '': a}
 SELECT row(x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);
 -- If using multiple expressions when creating a struct, the row function is optional
--- This also returns {'x': 1, 'v2': 2, 'y': a}
+-- This also returns {'': 1, '': 2, '': a}
 SELECT (x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);
 ```
 
@@ -116,8 +116,27 @@ Any extra parts (e.g., .part4.part5 etc) are always treated as properties
 ### Creating Structs with the `row` Function
 
 The `row` function can be used to automatically convert multiple columns to a single struct column.
+When using `row` the keys will be empty strings allowing for easy insertion into a table with a struct column.
+Columns, however, cannot be initialized with the `row` function, and must be explicitly named.
+For example:
 
-> This behavior was introduced in DuckDB v0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
+```sql
+-- Inserting values into a struct column using the row function
+CREATE TABLE t1 (s STRUCT(v VARCHAR, i INTEGER));
+INSERT INTO t1 VALUES (ROW('a', 42));
+-- The table will contain a single entry:
+-- {'v': a, 'i': 42}
+
+-- The following produces the same result as above
+CREATE TABLE t1 AS (
+    SELECT ROW('a', 42)::STRUCT(v VARCHAR, i INTEGER)
+);
+
+-- Initializing a struct column with the row function will fail
+CREATE TABLE t2 AS SELECT ROW('a');
+-- The following error is thrown:
+-- "Error: Invalid Input Error: A table cannot be created from an unnamed struct"
+```
 
 When casting structs, the names of fields have to match. Therefore, the following query will fail:
 
@@ -131,10 +150,7 @@ FROM
 Error: Mismatch Type Error: Type STRUCT(x INTEGER) does not match with STRUCT(y INTEGER). Cannot cast STRUCTs with different names
 ```
 
-Because `row` does not require explicit aliases, it creates an "unnamed `STRUCT`" which can be cast to any name.
-`row` can be used to populate a table with a struct column without needing to repeat the field names for every added row.
-Therefore, it is not recommended to use `row` for constructing the result of a query.
-Use [`struct_pack`](#creating-structs) instead:
+A workaround for this would be to use [`struct_pack`](#creating-structs) instead:
 
 ```sql
 SELECT struct_pack(y := a.x) AS b
@@ -142,52 +158,7 @@ FROM
     (SELECT {'x': 42} AS a);
 ```
 
-#### Example Data Table Named `t1`
-
-<div class="narrow_table"></div>
-
-| my_column | another_column |
-|:---|:---|
-| 1 | a |
-| 2 | b |
-
-#### `row` Function Example
-
-```sql
-SELECT 
-    row(my_column, another_column) AS my_struct_column,
-    (my_column, another_column) AS identical_struct_column
-FROM t1;
-```
-
-#### Example Output
-
-<div class="narrow_table"></div>
-
-| my_struct_column | identical_struct_column |
-|:---|:---|
-| {'my_column': 1, 'another_column': a} | {'my_column': 1, 'another_column': a} |
-| {'my_column': 2, 'another_column': b} | {'my_column': 2, 'another_column': b} |
-
-The `row` function (or simplified parenthesis syntax) may also be used with arbitrary expressions as input rather than column names. In the case of an expression, a key will be automatically generated in the format of 'vN' where N is a number that refers to its parameter location in the row function (Ex: v1, v2, etc.). This can be combined with column names as an input in the same call to the `row` function. This example uses the same input table as above.
-
-#### `row` Function with a Column Name, a Constant, and an Expression as Input
-
-```sql
-SELECT 
-    row(my_column, 42, my_column + 1) AS my_struct_column,
-    (my_column, 42, my_column + 1) AS identical_struct_column
-FROM t1;
-```
-
-#### Example Output
-
-<div class="narrow_table"></div>
-
-| my_struct_column | identical_struct_column |
-|:---|:---|
-| {'my_column': 1, 'v2': 42, 'v3': 2} | {'my_column': 1, 'v2': 42, 'v3': 2} |
-| {'my_column': 2, 'v2': 42, 'v3': 3} | {'my_column': 2, 'v2': 42, 'v3': 3} |
+> This behavior was introduced in DuckDB v0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
 
 ## Comparison Operators
 
