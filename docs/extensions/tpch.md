@@ -71,8 +71,8 @@ The data generator function `dbgen` has the following parameters:
 
 <div class="narrow_table"></div>
 
-| Name        | Type       | Description                                                                                                                       |
-| ----------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Name | Type | Description |
+|--|--|------------|
 | `catalog`   | `VARCHAR`  | Target catalog                                                                                                                    |
 | `children`  | `UINTEGER` | Number of partitions (max. 1000)                                                                                                  |
 | `overwrite` | `BOOLEAN`  | (Not used)                                                                                                                        |
