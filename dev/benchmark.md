@@ -8,12 +8,10 @@ When making changes that have potential performance implications, it is importan
 
 ## Getting Started
 
-To build the benchmark suite, run:
+To build the benchmark suite, run the following command in the [DuckDB repository](https://github.com/duckdb/duckdb):
 
 ```bash
-git clone https://github.com/duckdb/duckdb
-cd duckdb
-BUILD_BENCHMARK=1 BUILD_TPCH=1 make
+BUILD_BENCHMARK=1 BUILD_TPCH=1 BUILD_TPCH=1 make
 ```
 
 ## Listing Benchmarks
@@ -63,7 +61,8 @@ The output will contain the following:
 
 ### Running Multiple Benchmark Using a Regular Expression
 
-You can also use a regular expression to specify which benchmarks to run. Be careful of shell expansion of certain regex characters (e.g. `*` will likely be expanded by your shell, hence this requires proper quoting or escaping).
+You can also use a regular expression to specify which benchmarks to run.
+Be careful of shell expansion of certain regex characters (e.g., `*` will likely be expanded by your shell, hence this requires proper quoting or escaping).
 
 ```bash
 build/release/benchmark/benchmark_runner "benchmark/micro/nulls/.*"
