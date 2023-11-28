@@ -141,7 +141,7 @@ Any subsequent calls to `INSTALL extension_name` will use the local version inst
 FORCE INSTALL extension_name;
 ```
 
-### Loading Extension from a path
+### Loading Extension from a Path
 
 `LOAD` can be used with the path to a `.duckdb_extension`.
 For example, if the file was available at the (relative) path `path/to/httpfs.duckdb_extension`, you can load it as follows:
