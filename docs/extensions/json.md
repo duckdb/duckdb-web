@@ -366,6 +366,8 @@ SELECT j->'$.family' FROM example;
 -- "anatidae"
 SELECT j->'$.species[0]' FROM example;
 -- "duck"
+SELECT j->>'$.species[*]' FROM example;
+-- ["duck", "goose", "swan", null]
 SELECT j->'$.species'->0 FROM example;
 -- "duck"
 SELECT j->'species'->>[0,1] FROM example;
