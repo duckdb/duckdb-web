@@ -23,7 +23,7 @@ http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json
 ## Platforms
 
 Extension binaries must be built for each platform. We distribute pre-built binaries for several platforms (see below).
-For platforms where packages for certain extensions are not available, users can build them from source and [install the resulting binaries manually](#loading-and-installing-an-extension-from-local-storage).
+For platforms where packages for certain extensions are not available, users can build them from source and [install the resulting binaries manually](#installing-extensions-from-an-explicit-path).
 
 All official extensions are distributed for the following platforms:
 
