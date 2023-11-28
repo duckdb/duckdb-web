@@ -83,21 +83,23 @@ If you wish to load your own extensions or extensions from third-parties you wil
 To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsigned` flag to it on startup.
 For the Python client, see the [Loading and Installing Extensions section in the Python API documentation](../api/python/overview#loading-and-installing-extensions).
 
+### Sharing Extensions between Clients
+
+The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.9.2 of the CLI client on MacOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.9.2.
+
+See the [Working with Extensions page](https://duckdb.org/docs/extensions/working_with_extensions#platforms) for details on available platforms.
+
 ## Installation Location
 
 Extensions are by default installed under the user's home directory:
 
 ```text
-~/.duckdb/extensions/v{duckdb_version}/{platform_name}
+~/.duckdb/extensions/v{duckdb_version}/{platform_name}/
 ```
 
-For example, the extensions for DuckDB version 0.9.0 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.9.0/osx_arm64`.
+For example, the extensions for DuckDB version 0.9.2 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.9.2/osx_arm64/`.
 
 > For development builds, the directory of the extensions corresponds to the Git hash of the build, e.g., `~/.duckdb/extensions/fc2e4b26a6/linux_amd64_gcc4`.
-
-### Sharing Extensions between Clients
-
-The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_. For example, if an extension is installed with version 0.9.0 of the CLI client, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.9.0.
 
 ### Changing the Extension Directory
 

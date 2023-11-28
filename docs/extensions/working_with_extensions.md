@@ -23,7 +23,7 @@ http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json
 ## Platforms
 
 Extension binaries must be built for each platform. We distribute pre-built binaries for several platforms (see below).
-For platforms where packages for certain extensions are not available, users can build them from source and [install the resulting binaries manually](#loading-and-installing-an-extension-from-local-storage).
+For platforms where packages for certain extensions are not available, users can build them from source and [install the resulting binaries manually](#installing-extensions-from-an-explicit-path).
 
 All official extensions are distributed for the following platforms:
 
@@ -43,55 +43,118 @@ We currently do not distribute binaries for extensions on the `linux_arm64_gcc4`
 
 ## Using a Custom Extension Repository
 
-To load extensions from a custom extension repository, set the following configuration option. For example:
+To load extensions from a custom extension repository, set the following configuration option;
+
+### Local Files
 
 ```sql
--- S3 bucket
-SET custom_extension_repository='bucket.s3.<region>.amazonaws.com/<your_extension_name>/latest';
--- http
+SET custom_extension_repository='path/to/folder';
+```
+
+This assumes the pointed folder has a structure similar to:
+
+```text
+folder
+└── 0fd6fb9198
+    └── osx_arm64
+        ├── autocomplete.duckdb_extension
+        ├── httpfs.duckdb_extension
+        ├── icu.duckdb_extension.gz
+        ├── inet.duckdb_extension
+        ├── json.duckdb_extension
+        ├── parquet.duckdb_extension
+        ├── tpcds.duckdb_extension
+        ├── tpcds.duckdb_extension.gz
+        └── tpch.duckdb_extension.gz
+```
+
+With at the first level the DuckDB version, at the second the DuckDB platform, and then extensions either as `name.duckdb_extension` or gzip-compressed files `name.duckdb_extension.gz`.
+
+```sql
+INSTALL icu;
+```
+for example will look for either `icu.duckdb_extension.gz` (first) or `icu.duckdb_extension` (second) in the repository structure, and install it to the `extension_directory` (that defaults to `~/.duckdb/extensions`), if file is compressed, decompression will be handled at this step.
+
+### Remote File over http
+
+```sql
 SET custom_extension_repository='http://nightly-extensions.duckdb.org';
 ```
+
+They work the same as local ones, and expect a similar folder structure.
+
+### Remote Files over https or s3 Protocol
+
+```sql
+SET custom_extension_repository='s3://bucket/your-repository-name/';
+```
+
+Remote extension repositories act similarly to local ones, as in the file structure should be the same and either gzipped or non-gzipped file are supported.
+
+Only special case here is that `httpfs` extension should be available locally. You can get it for example doing:
+
+```sql
+RESET custom_extension_repository;
+INSTALL httpfs;
+```
+
+That will install the official `httpfs` extension locally.
+
+This is since httpfs extension will be needed to actually access remote encrypted files.
+
+### `INSTALL x FROM y`
 
 You can also use the `INSTALL` command's `FROM` clause to specify the path of the custom extension repository. For example:
 
 ```sql
-INSTALL azure FROM 'http://nightly-extensions.duckdb.org';
+FORCE INSTALL azure FROM 'http://nightly-extensions.duckdb.org';
 ```
 
-## Loading and Installing an Extension from Local Storage
+This will [force install](#force-installing-extensions) the `azure` extension from the specified URL.
 
-### Building Extensions
+## Loading and Installing an Extension from Explicit Paths
 
-Build the extension following the instructions provided in the extension's README.
+### Installing Extensions from an Explicit Path
 
-### Decompressing gzip Files
-
-Extensions are stored in gzip format, so they must be decompressed prior to use. There are many methods to decompress gzip, including the command line `gunzip` tool available on most UNIX platforms.
-The following code snippet uses Python to decompress a `.gz` file:
-
-```python
-import gzip
-import shutil
-
-with gzip.open('httpfs.duckdb_extension.gz','rb') as f_in:
-   with open('httpfs.duckdb_extension', 'wb') as f_out:
-     shutil.copyfileobj(f_in, f_out)
-```
-
-### Installing Extensions
-
-After decompression, the `INSTALL` and `LOAD` commands can be used with the path to the `.duckdb_extension` file.
-For example, if the file was unzipped into the same directory as where DuckDB is being executed, you can install it as follows:
+`INSTALL` can be used with the path to either a `.duckdb_extension` file or a `.duckdb_extension.gz` file.
+For example, if the file was available into the same directory as where DuckDB is being executed, you can install it as follows:
 
 ```sql
-INSTALL 'httpfs.duckdb_extension';
-LOAD 'httpfs.duckdb_extension';
+-- uncompressed file
+INSTALL 'path/to/httpfs.duckdb_extension';
+-- gzip-compressed file
+INSTALL 'path/to/httpfs.duckdb_extension.gz';
 ```
+
+These will have the same results.
+
+It is also possible to specify remote paths.
 
 ## Force Installing Extensions
 
-When DuckDB installs an extension, it is copied to a local directory, by default in `~/.duckdb`. Any subsequent calls to `INSTALL extension_name` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
+When DuckDB installs an extension, it is copied to a local directory to be cached, avoiding any network traffic.
+Any subsequent calls to `INSTALL extension_name` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
+
+ by default in `~/.duckdb/extensions` but configurable via `SET extension_directory=path/to/existing/directory;`.
 
 ```sql
 FORCE INSTALL extension_name;
 ```
+
+### Loading Extension from a Path
+
+`LOAD` can be used with the path to a `.duckdb_extension`.
+For example, if the file was available at the (relative) path `path/to/httpfs.duckdb_extension`, you can load it as follows:
+
+```sql
+--uncompressed file
+LOAD 'path/to/httpfs.duckdb_extension';
+```
+
+This will skip any currently installed file in the `
+
+Remote paths or compressed files are not possible.
+
+### Building Extensions
+
+Build the extension following the ded in the extension's README.
