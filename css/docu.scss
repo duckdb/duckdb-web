@@ -55,8 +55,9 @@ pre code {
             box-shadow: none;
 }
 pre.highlight{
-	white-space: pre;
-	overflow-x: auto;
+    tab-size: 4;
+    white-space: pre;
+    overflow-x: auto;
     padding-bottom: 0px;
     margin: 0;
     code, pre{
