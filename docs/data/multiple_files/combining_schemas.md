@@ -9,9 +9,9 @@ title: Combining Schemas
 
 ```sql
 -- read a set of CSV files combining columns by position
-SELECT * FROM read_csv_auto('flights*.csv');
+SELECT * FROM read_csv('flights*.csv');
 -- read a set of CSV files combining columns by name 
-SELECT * FROM read_csv_auto('flights*.csv', union_by_name = true);
+SELECT * FROM read_csv('flights*.csv', union_by_name = true);
 ```
 
 ## Combining Schemas
@@ -75,7 +75,7 @@ FlightDate|UniqueCarrier|OriginCityName|DestCityName
 Reading these when unifying column names **by position** results in an error - as the two files have a different number of columns. When specifying the `union_by_name` option, the columns are correctly unified, and any missing values are set to `NULL`. 
 
 ```sql
-SELECT * FROM read_csv_auto(['flights3.csv', 'flights4.csv'], union_by_name = true);
+SELECT * FROM read_csv(['flights3.csv', 'flights4.csv'], union_by_name = true);
 ```
 
 <div class="narrow_table"></div>
