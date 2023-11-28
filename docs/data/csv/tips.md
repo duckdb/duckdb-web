@@ -34,7 +34,7 @@ SELECT * FROM read_csv('flights.csv', types={'FlightDate': 'DATE'});
 The [`COPY` statement](../../sql/statements/copy) copies data directly into a table. The CSV reader uses the schema of the table instead of auto-detecting types from the file. This speeds up the auto-detection, and prevents mistakes from being made during auto-detection.
 
 ```sql
-COPY tbl FROM 'test.csv' (AUTO_DETECT 1);
+COPY tbl FROM 'test.csv';
 ```
 
 #### Use `union_by_name` When Loading Files with Different Schemas
