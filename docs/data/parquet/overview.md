@@ -25,10 +25,13 @@ SELECT * FROM 'test/*.parquet';
 SELECT * FROM read_parquet('test/*.parquet', filename = true);
 -- use a list of globs to read all Parquet files from 2 specific folders
 SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
+-- read over https
+SELECT * FROM read_parquet('https://some.url/some_file.parquet');
 -- query the metadata of a Parquet file
 SELECT * FROM parquet_metadata('test.parquet');
 -- query the schema of a Parquet file
 SELECT * FROM parquet_schema('test.parquet');
+
 
 -- write the results of a query to a Parquet file
 COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet');

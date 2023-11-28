@@ -15,31 +15,32 @@ Below is a table of the columns returned by `parquet_metadata`.
 
 <div class="narrow_table"></div>
 
-|           Field           |   Type    |
-|---------------------------|-----------|
-| `file_name`               | `VARCHAR` |
-| `row_group_id`            | `BIGINT`  |
-| `row_group_num_rows`      | `BIGINT`  |
-| `row_group_num_columns`   | `BIGINT`  |
-| `row_group_bytes`         | `BIGINT`  |
-| `column_id`               | `BIGINT`  |
-| `file_offset`             | `BIGINT`  |
-| `num_values`              | `BIGINT`  |
-| `path_in_schema`          | `VARCHAR` |
-| `type`                    | `VARCHAR` |
-| `stats_min`               | `VARCHAR` |
-| `stats_max`               | `VARCHAR` |
-| `stats_null_count`        | `BIGINT`  |
-| `stats_distinct_count`    | `BIGINT`  |
-| `stats_min_value`         | `VARCHAR` |
-| `stats_max_value`         | `VARCHAR` |
-| `compression`             | `VARCHAR` |
-| `encodings`               | `VARCHAR` |
-| `index_page_offset`       | `BIGINT`  |
-| `dictionary_page_offset`  | `BIGINT`  |
-| `data_page_offset`        | `BIGINT`  |
-| `total_compressed_size`   | `BIGINT`  |
-| `total_uncompressed_size` | `BIGINT`  |
+| Field                     | Type              |
+| ------------------------- | ----------------- |
+| `file_name`               | `VARCHAR`         |
+| `row_group_id`            | `BIGINT`          |
+| `row_group_num_rows`      | `BIGINT`          |
+| `row_group_num_columns`   | `BIGINT`          |
+| `row_group_bytes`         | `BIGINT`          |
+| `column_id`               | `BIGINT`          |
+| `file_offset`             | `BIGINT`          |
+| `num_values`              | `BIGINT`          |
+| `path_in_schema`          | `VARCHAR`         |
+| `type`                    | `VARCHAR`         |
+| `stats_min`               | `VARCHAR`         |
+| `stats_max`               | `VARCHAR`         |
+| `stats_null_count`        | `BIGINT`          |
+| `stats_distinct_count`    | `BIGINT`          |
+| `stats_min_value`         | `VARCHAR`         |
+| `stats_max_value`         | `VARCHAR`         |
+| `compression`             | `VARCHAR`         |
+| `encodings`               | `VARCHAR`         |
+| `index_page_offset`       | `BIGINT`          |
+| `dictionary_page_offset`  | `BIGINT`          |
+| `data_page_offset`        | `BIGINT`          |
+| `total_compressed_size`   | `BIGINT`          |
+| `total_uncompressed_size` | `BIGINT`          |
+| `key_value_metadata`      | `MAP(BLOB, BLOB)` |
 
 
 ## Parquet Schema
@@ -57,8 +58,8 @@ Below is a table of the columns returned by `parquet_schema`.
 
 <div class="narrow_table"></div>
 
-|      Field        |   Type    |
-|-------------------|-----------|
+| Field             | Type      |
+| ----------------- | --------- |
 | `file_name`       | `VARCHAR` |
 | `name`            | `VARCHAR` |
 | `type`            | `VARCHAR` |
@@ -70,3 +71,43 @@ Below is a table of the columns returned by `parquet_schema`.
 | `precision`       | `BIGINT`  |
 | `field_id`        | `BIGINT`  |
 | `logical_type`    | `VARCHAR` |
+
+## Parquet File Metadata
+
+The `parquet_file_metadata` function can be used to query file-level metadata such as the format version and the encryption algorithm used.
+
+```sql
+SELECT * FROM parquet_file_metadata('test.parquet');
+```
+
+Below is a table of the columns returned by `parquet_file_metadata`.
+
+<div class="narrow_table"></div>
+
+| Field                         | Type      |
+| ----------------------------- | --------- |
+| `file_name`                   | `VARCHAR` |
+| `created_by`                  | `VARCHAR` |
+| `num_rows`                    | `BIGINT`  |
+| `num_row_groups`              | `BIGINT`  |
+| `format_version`              | `BIGINT`  |
+| `encryption_algorithm`        | `VARCHAR` |
+| `footer_signing_key_metadata` | `VARCHAR` |
+
+## Parquet Key-Value Metadata
+
+The `parquet_kv_metadata` function can be used to query custom metadata defined as key-value pairs.
+
+```sql
+SELECT * FROM parquet_kv_metadata('test.parquet');
+```
+
+Below is a table of the columns returned by `parquet_kv_metadata`.
+
+<div class="narrow_table"></div>
+
+| Field       | Type      |
+| ----------- | --------- |
+| `file_name` | `VARCHAR` |
+| `key`       | `BLOB`    |
+| `value`     | `BLOB`    |

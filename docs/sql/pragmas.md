@@ -315,3 +315,16 @@ The following statement returns information on the metadata store (`block_id`, `
 ```sql
 PRAGMA metadata_info;
 ```
+
+### `disabled_optimizers`
+
+The `disabled_optimizers` option allows selectively disabling optimization steps.
+For example, to disable `filter_pushdown` and `statistics_propagation`, run:
+
+```sql
+PRAGMA disabled_optimizers='filter_pushdown,statistics_propagation';
+```
+
+The available optimizations can be queried using the [`duckdb_optimizers()` table function](duckdb_table_functions#duckdb_optimizers).
+
+> `PRAGMA disabled_optimizers` should only be used for debugging performance issues and should be avoided in production.

@@ -190,6 +190,69 @@
     "result": null
   },
   {
+    "name": "array_cosine_similarity",
+    "parameters": [
+      "array1",
+      "array2"
+    ],
+    "description": "Compute the cosine similarity between two arrays of the same size. The array elements can not be NULL. The arrays can have any size as long as the size is the same for both arguments.",
+    "example": "array_cosine_similarity([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "category": "array",
+    "result": null
+  },
+  {
+    "name": "array_cross_product",
+    "parameters": [
+      "array",
+      "array"
+    ],
+    "description": "Compute the cross product of two arrays of size 3. The array elements can not be NULL.",
+    "example": "array_cross_product([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "category": "array",
+    "result": "[0.0, 0.0, 0.0]"
+  },
+  {
+    "name": "array_distance",
+    "parameters": [
+      "array1",
+      "array2"
+    ],
+    "description": "Compute the distance between two arrays of the same size. The array elements can not be NULL. The arrays can have any size as long as the size is the same for both arguments.",
+    "example": "array_distance([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "category": "array",
+    "result": null
+  },
+  {
+    "name": "array_inner_product",
+    "parameters": [
+      "array1",
+      "array2"
+    ],
+    "description": "Compute the inner product between two arrays of the same size. The array elements can not be NULL. The arrays can have any size as long as the size is the same for both arguments.",
+    "example": "array_inner_product([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "aliases": [
+      "array_dot_product"
+    ],
+    "category": "array",
+    "result": null
+  },
+  {
+    "name": "array_value",
+    "parameters": [
+      "any",
+      "..."
+    ],
+    "description": "Create an ARRAY containing the argument values.",
+    "example": "array_value(4, 5, 6)",
+    "type": "scalar_function",
+    "category": "array",
+    "result": "[4, 5, 6]"
+  },
+  {
     "name": "ascii",
     "parameters": [
       "string"
@@ -261,7 +324,7 @@
     "example": "bar(5, 0, 20, 10)",
     "type": "scalar_function_set",
     "category": "string",
-    "result": "\u2588\u2588\u258c"
+    "result": "\u2588\u2588\u258c "
   },
   {
     "name": "bin",
@@ -935,18 +998,29 @@
     "result": "Benchmark \"CSV\" took 42 seconds"
   },
   {
+    "name": "formatReadableDecimalSize",
+    "parameters": [
+      "bytes"
+    ],
+    "description": "Converts bytes to a human-readable presentation (e.g. 16000 -> 16.0 KB)",
+    "example": "format_bytes(1000 * 16)",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "15.6 KiB"
+  },
+  {
     "name": "format_bytes",
     "parameters": [
       "bytes"
     ],
-    "description": "Converts bytes to a human-readable presentation (e.g. 16000 -> 16KB)",
+    "description": "Converts bytes to a human-readable presentation (e.g. 16000 -> 15.6 KiB)",
     "example": "format_bytes(1000 * 16)",
     "type": "scalar_function",
     "aliases": [
-      "formatReadableDecimalSize"
+      "formatReadableSize"
     ],
     "category": "string",
-    "result": "16KB"
+    "result": "15.6 KiB"
   },
   {
     "name": "from_base64",
@@ -1455,6 +1529,21 @@
     ],
     "category": "list",
     "result": "[5]"
+  },
+  {
+    "name": "list_grade_up",
+    "parameters": [
+      "list"
+    ],
+    "description": "Returns the index of their sorted position.",
+    "example": "list_grade_up([3, 6, 1, 2])",
+    "type": "scalar_function_set",
+    "aliases": [
+      "array_grade_up",
+      "grade_up"
+    ],
+    "category": "list",
+    "result": "[3, 4, 1, 2]"
   },
   {
     "name": "list_inner_product",
@@ -2651,13 +2740,13 @@
   {
     "name": "to_hours",
     "parameters": [
-      "integer"
+      "double"
     ],
     "description": "Construct a hour interval",
-    "example": "to_hours(5)",
+    "example": "to_hours(5.5)",
     "type": "scalar_function",
     "category": "date",
-    "result": "05:00:00"
+    "result": "05:30:00"
   },
   {
     "name": "to_microseconds",
@@ -2673,24 +2762,24 @@
   {
     "name": "to_milliseconds",
     "parameters": [
-      "integer"
+      "double"
     ],
     "description": "Construct a millisecond interval",
-    "example": "to_milliseconds(5)",
+    "example": "to_milliseconds(5.5)",
     "type": "scalar_function",
     "category": "date",
-    "result": "00:00:00.005"
+    "result": "00:00:00.0055"
   },
   {
     "name": "to_minutes",
     "parameters": [
-      "integer"
+      "double"
     ],
     "description": "Construct a minute interval",
-    "example": "to_minutes(5)",
+    "example": "to_minutes(5.5)",
     "type": "scalar_function",
     "category": "date",
-    "result": "00:05:00"
+    "result": "00:05:30"
   },
   {
     "name": "to_months",
@@ -2706,13 +2795,13 @@
   {
     "name": "to_seconds",
     "parameters": [
-      "integer"
+      "double"
     ],
     "description": "Construct a second interval",
-    "example": "to_seconds(5)",
+    "example": "to_seconds(5.5)",
     "type": "scalar_function",
     "category": "date",
-    "result": "00:00:05"
+    "result": "00:00:05.5"
   },
   {
     "name": "to_timestamp",
@@ -2939,7 +3028,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.3-dev42"
+    "result": "v0.9.3-dev879"
   },
   {
     "name": "week",

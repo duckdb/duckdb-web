@@ -6,6 +6,8 @@ title: Node.js API
 This package provides a Node.js API for DuckDB.
 The API for this client is somewhat compliant to the SQLite node.js client for easier transition.
 
+## Initializing
+
 Load the package and create a database object:
 
 ```js
@@ -27,7 +29,9 @@ const db = new duckdb.Database(':memory:', {
 });
 ```
 
-Then you can run a query:
+## Running a Query
+
+The following code snippet runs a simple query using the `Database.all()` method.
 
 ```js
 db.all('SELECT 42 AS fortytwo', function(err, res) {
@@ -50,14 +54,15 @@ db.all('SELECT ?::INTEGER AS fortytwo, ?::STRING AS hello', 42, 'Hello, World', 
 });
 ```
 
-However, these are all shorthands for something much more elegant. A database can have multiple `Connection`s, those are created using `db.connect()`.
+## Connections
+
+A database can have multiple `Connection`s, those are created using `db.connect()`.
 
 ```js
 const con = db.connect();
 ```
 
 You can create multiple connections, each with their own transaction context.
-
 
 `Connection` objects also contain shorthands to directly call `run()`, `all()` and `each()` with parameters and callbacks, respectively, for example:
 
@@ -69,6 +74,8 @@ con.all('SELECT 42 AS fortytwo', function(err, res) {
   console.log(res[0].fortytwo)
 });
 ```
+
+## Prepared Statements
 
 From connections, you can create prepared statements (and only that) using `con.prepare()`:
 
@@ -117,6 +124,8 @@ const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo', function(err, stmt) {
 });
 ```
 
+## Inserting Data via Arrow
+
 [Apache Arrow](https://duckdb.org/docs/guides/python/sql_on_arrow) can be used to insert data into DuckDB without making a copy:
 
 ```js
@@ -143,7 +152,14 @@ db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
         // `SELECT * FROM jsonDataTable` would return the entries in `jsonData`
     });
 });
+```
 
+## Loading Unsigned Extensions
+
+To load [unsigned extensions](../../extensions/overview#ensuring-the-integrity-of-extensions), instantiate the database as follows:
+
+```js
+db = new duckdb.Database(':memory:', {"allow_unsigned_extensions": "true"});
 ```
 
 ## Pages in This Section

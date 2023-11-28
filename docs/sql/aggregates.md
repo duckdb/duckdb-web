@@ -19,6 +19,8 @@ SELECT count(DISTINCT region) FROM sales;
 SELECT sum(amount), sum(amount) FILTER (region != 'north') FROM sales;
 -- returns a list of all regions in order of the "amount" column
 SELECT list(region ORDER BY amount DESC) FROM sales;
+-- returns the amount of the first sale using the first() aggregate function
+SELECT first(amount ORDER BY date ASC) FROM sales;
 ```
 
 ## Syntax
@@ -27,7 +29,11 @@ SELECT list(region ORDER BY amount DESC) FROM sales;
 
 Aggregates are functions that *combine* multiple rows into a single value. Aggregates are different from scalar functions and window functions because they change the cardinality of the result. As such, aggregates can only be used in the `SELECT` and `HAVING` clauses of a SQL query.
 
+### `DISTINCT` Clause in Aggregate Functions
+
 When the `DISTINCT` clause is provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination with the `count` aggregate to get the number of distinct elements; but it can be used together with any aggregate function in the system.
+
+### `ORDER BY` Clause in Aggregate Functions
 
 When the `ORDER BY` clause is provided, the values being aggregated are sorted before applying the function.
 Usually this is not important, but there are some order-sensitive aggregates that can have indeterminate results

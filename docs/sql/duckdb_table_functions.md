@@ -168,6 +168,17 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 | `keyword_name` |The keyword.| `VARCHAR` |
 | `keyword_category` |Indicates the category of the keyword. Values are `column_name`, `reserved`, `type_function` and `unreserved`. | `VARCHAR` |
 
+## `duckdb_optimizers`
+
+The `duckdb_optimizers()` function provides metadata about the optimization rules (e.g., `expression_rewriter`, `filter_pushdown`) available in the DuckDB instance.
+These can be selectively turned off using [`PRAGMA disabled_optimizers`](pragmas#disabled_optimizers).
+
+<div class="narrow_table"></div>
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `name` | The name of the optimization rule. | `VARCHAR` |
+
 ## `duckdb_schemas`
 
 The `duckdb_schemas()` function provides metadata about the schemas available in the DuckDB instance.

@@ -41,3 +41,11 @@ print(res)
     Row(age=56, location='Seattle')
 ]
 ```
+
+## Contribution Guidelines
+
+Contributions to the experimental Spark API are welcome.
+When making a contribution, please follow these guidelines:
+
+* Instead of using temporary files, use our `pytest` testing framework.
+* When adding new functions, ensure that method signatures comply with those in the [PySpark API](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/index.html).
