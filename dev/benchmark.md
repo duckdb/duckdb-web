@@ -13,7 +13,7 @@ To build the benchmark suite, run:
 ```bash
 git clone https://github.com/duckdb/duckdb
 cd duckdb
-BUILD_BENCHMARK=1 BUILD_TPCH=1 LTO='thin' make
+BUILD_BENCHMARK=1 BUILD_TPCH=1 make
 ```
 
 ## Listing Benchmarks
