@@ -391,7 +391,25 @@
             },
             {
               "page": "CLI",
-              "url": "cli"
+              "slug": "cli",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Arguments",
+                  "url": "arguments"
+                },
+                {
+                  "page": "Dot Commands",
+                  "url": "dot-commands"
+                },
+                {
+                  "page": "Output Formats",
+                  "url": "output-formats"
+                }
+              ]
             },
             {
               "page": "Go",
