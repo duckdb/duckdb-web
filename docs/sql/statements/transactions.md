@@ -7,6 +7,8 @@ DuckDB supports [ACID database transactions](https://en.wikipedia.org/wiki/Datab
 Transactions provide isolation, i.e., changes made by a transaction are not visible from concurrent transactions until it is committed.
 A transaction can also be aborted, which discards any changes it made so far.
 
+## Statements
+
 DuckDB provides the following statements for transaction management.
 
 ### Starting a Transaction
