@@ -26,6 +26,8 @@ SELECT * REPLACE (lower(city) AS city) FROM addresses;
 SELECT COLUMNS('number\d+') FROM addresses;
 -- compute a function on all given columns of a table
 SELECT min(COLUMNS(*)) FROM addresses;
+-- to select columns with spaces or special characters, use double quotes
+SELECT "Some Column Name" FROM tbl;
 ```
 
 ## Syntax
