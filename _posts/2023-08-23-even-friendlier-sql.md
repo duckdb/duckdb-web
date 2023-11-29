@@ -3,14 +3,14 @@
 layout: post
 title:  "Even Friendlier SQL with DuckDB"
 author: Alex Monahan
-
 ---
+
 <img src="/images/blog/ai_generated_star_trek_rubber_duck.png"
      alt="Looks like a Duck ready to boldly go where databases have not gone before"
      width=200
 />
 
-TLDR; DuckDB continues to push the boundaries of SQL syntax to both simplify queries and make more advanced analyses possible. Highlights include dynamic column selection, queries that start with the FROM clause, function chaining, and list comprehensions. We boldly go where no SQL engine has gone before!
+_TL;DR: DuckDB continues to push the boundaries of SQL syntax to both simplify queries and make more advanced analyses possible. Highlights include dynamic column selection, queries that start with the FROM clause, function chaining, and list comprehensions. We boldly go where no SQL engine has gone before!_
 
 Who says that SQL should stay frozen in time, chained to a 1999 version of the specification? As a comparison, do folks remember what JavaScript felt like before Promises? Those didn’t launch until 2012! It’s clear that innovation at the programming syntax layer can have a profoundly positive impact on an entire language ecosystem. 
 
