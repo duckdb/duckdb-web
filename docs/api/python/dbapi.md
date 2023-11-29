@@ -13,6 +13,7 @@ The connection object takes as a parameter the database file to read and write f
 By default we create an **in-memory-database** that lives inside the `duckdb` module.
 Every method of `DuckDBPyConnection` is also available on the `duckdb` module, this connection is what's used by these methods. 
 You can also get a reference to this connection by providing the special value `:default:` to `connect`.
+
 ```python
 import duckdb
 
@@ -69,7 +70,9 @@ print(con.fetchone()) # This closes the transaction. Any subsequent calls to .fe
 
 The `description` property of the connection object contains the column names as per the standard.
 
-DuckDB also supports prepared statements in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter.
+### Prepared Statement
+
+DuckDB also supports [prepared statements](../../sql/query_syntax/prepared_statements) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter.
 
 Here are some examples:
 

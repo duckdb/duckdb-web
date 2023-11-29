@@ -233,12 +233,16 @@ col_1|col_2
 
 ## Prepared Statements
 
-The DuckDB CLI supports executing prepared statements in addition to normal `SELECT` statements. To create a prepared
-statement, use the `PREPARE` statement
+The DuckDB CLI supports executing [prepared statements](../sql/query_syntax/prepared_statements) in addition to regular `SELECT` statements.
+To create a prepared statement in the CLI client, use the `PREPARE` clause:
+
 ```sql
-PREPARE s1 AS SELECT * FROM my_table WHERE my_column < $1 OR my_column > $2;
+PREPARE s1 AS
+    SELECT * FROM my_table WHERE my_column < $1 OR my_column > $2;
 ```
+
 To run the prepared statement with parameters, use the `EXECUTE` statement
+
 ```sql
 EXECUTE s1(42, 101);
 ```
