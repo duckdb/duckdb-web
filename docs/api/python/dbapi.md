@@ -70,7 +70,7 @@ print(con.fetchone()) # This closes the transaction. Any subsequent calls to .fe
 
 The `description` property of the connection object contains the column names as per the standard.
 
-### Prepared Statement
+### Prepared Statements
 
 DuckDB also supports [prepared statements](../../sql/query_syntax/prepared_statements) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter.
 
