@@ -716,6 +716,10 @@
                 {
                   "page": "Set Operations",
                   "url": "setops"
+                },
+                {
+                  "page": "Prepared Statements",
+                  "url": "prepared_statements"
                 }
               ]
             },
