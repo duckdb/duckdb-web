@@ -140,6 +140,10 @@ The connection object and the `duckdb` module can be used interchangeably – th
 
 Note that if you are developing a package designed for others to use, and use DuckDB in the package, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages.
 
+## Using Connections in Parallel Python Programs
+
+The `DuckDBPyConnection` object is not thread-safe. If you would like to write to the same database from multiple threads, create a cursor for each thread with the [`DuckDBPyConnection.cursor()` method](reference/#duckdb.DuckDBPyConnection.cursor).
+
 ## Loading and Installing Extensions
 
 DuckDB's Python API provides functions for installing and loading extensions, which perform the equivalent operations to running the `INSTALL` and `LOAD` SQL commands, respectively. An example that installs and loads the [`spatial` extension](../../extensions/spatial) looks like follows:

@@ -90,7 +90,7 @@ duckdb.sql('SELECT 42').write_csv('out.csv')         # Write to a CSV file
 duckdb.sql("COPY (SELECT 42) TO 'out.parquet'")      # Copy to a parquet file
 ```
 
-## Using an In-memory Database
+## Using an In-Memory Database
 
 When using DuckDB through `duckdb.sql()`, it operates on an **in-memory** database, i.e., no tables are persisted on disk.
 The `duckdb.connect()` method returns a connection to an in-memory database:
