@@ -13,6 +13,8 @@ The `DROP` statement removes a catalog entry added previously with the `CREATE` 
 DROP TABLE tbl;
 -- drop the view with the name "v1"; do not throw an error if the view does not exist
 DROP VIEW IF EXISTS v1;
+-- drop type
+DROP TYPE type_name;
 ```
 
 ## Syntax

@@ -624,12 +624,20 @@
                   "url": "pivot"
                 },
                 {
+                  "page": "Profiling",
+                  "url": "profiling"
+                },
+                {
                   "page": "SELECT",
                   "url": "select"
                 },
                 {
                   "page": "SET/RESET",
                   "url": "set"
+                },
+                {
+                  "page": "Transaction Management",
+                  "url": "transactions"
                 },
                 {
                   "page": "UNPIVOT",
