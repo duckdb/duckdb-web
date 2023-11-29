@@ -5,7 +5,7 @@ author: Richard Wesley
 excerpt_separator: <!--more-->
 ---
 
-*TLDR: The DuckDB ICU extension now provides time zone support.*
+_TL;DR: The DuckDB ICU extension now provides time zone support._
 
 Time zone support is a common request for temporal analytics, but the rules are complex and somewhat arbitrary. 
 The most well supported library for locale-specific operations is the [International Components for Unicode (ICU)](https://icu.unicode.org).

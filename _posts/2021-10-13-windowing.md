@@ -7,7 +7,7 @@ excerpt_separator: <!--more-->
 
 ---
 
-_TLDR: DuckDB, a free and Open-Source analytical data management system, has a state-of-the-art windowing engine
+_TL;DR: DuckDB, a free and Open-Source analytical data management system, has a state-of-the-art windowing engine
 that can compute complex moving aggregates like inter-quartile ranges as well as simpler moving averages._
 
 Window functions (those using the `OVER` clause) are important tools for analysing data series,

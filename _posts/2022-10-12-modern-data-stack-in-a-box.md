@@ -11,7 +11,7 @@ excerpt_separator: <!--more-->
      width=200
  />
 
-*TLDR: A fast, free, and open-source Modern Data Stack (MDS) can now be fully deployed on your laptop or to a single machine using the combination of [DuckDB](https://duckdb.org/), [Meltano](https://meltano.com/), [dbt](https://www.getdbt.com/), and [Apache Superset](https://superset.apache.org/).*
+_TL;DR: A fast, free, and open-source Modern Data Stack (MDS) can now be fully deployed on your laptop or to a single machine using the combination of [DuckDB](https://duckdb.org/), [Meltano](https://meltano.com/), [dbt](https://www.getdbt.com/), and [Apache Superset](https://superset.apache.org/)._
 
 This post is a collaboration with Jacob Matson and cross-posted on [dataduel.co](https://www.dataduel.co/modern-data-stack-in-a-box-with-duckdb/).
 

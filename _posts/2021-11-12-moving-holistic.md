@@ -7,7 +7,7 @@ excerpt_separator: <!--more-->
 
 ---
 
-_TLDR: DuckDB, a free and Open-Source analytical data management system, has a windowing API
+_TL;DR: DuckDB, a free and Open-Source analytical data management system, has a windowing API
 that can compute complex moving aggregates like interquartile ranges and median absolute deviation
 much faster than the conventional approaches._
 
