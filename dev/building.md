@@ -224,6 +224,15 @@ With this flag enabled, the sanitizers are disabled for the build.
 
 ## Troubleshooting
 
+### Building the R Package is Slow
+
+By default, R compiles packages using a single thread.
+To parallelize the compilation, create or edit the `~/.R/Makevars` file, and add the following content:
+
+```text
+MAKEFLAGS = -j8
+```
+
 ### Building the R Package on Linux aarch64
 
 Building the R package on Linux running on an ARM64 architecture (AArch64) may result in the following error message:
