@@ -27,3 +27,25 @@ title: Official Extensions
 | [substrait](substrait) [<span class="github">GitHub</span>](https://github.com/duckdb/substrait)                      | Adds support for the Substrait integration                                         |                 |
 | [tpcds](tpcds)                                                                                                        | Adds TPC-DS data generation and query support                                      |                 |
 | [tpch](tpch)                                                                                                          | Adds TPC-H data generation and query support                                       |                 |
+
+## Default Extensions
+
+Different DuckDB clients ship a different set of extensions.
+We summarize the main distributions in the table below.
+
+<div class="narrow_table"></div>
+
+| Extension Name | CLI (duckdb.org) | CLI (Homebrew) | Python | R | Java | Julia | Node.JS
+|------|------|------|---|---|---|---|---|
+| [autocomplete](autocomplete) | yes | yes | no  | no  | no  | no  | no  |
+| [excel](excel)               | yes | no  | no  | no  | no  | no  | no  |
+| [fts](full_text_search)      | yes | no  | yes | no  | no  | no  | no  |
+| [httpfs](httpfs)             | no  | no  | yes | no  | no  | no  | no  |
+| [icu](icu)                   | yes | yes | yes | no  | yes | yes | yes |
+| [json](json)                 | yes | yes | yes | no  | yes | yes | yes |
+| [parquet](parquet)           | yes | yes | yes | yes | yes | yes | yes |
+| [tpcds](tpcds)               | no  | no  | yes | no  | no  | no  | no  |
+| [tpch](tpch)                 | yes | no  | yes | no  | no  | no  | no  |
+
+The [jemalloc](jemalloc) extension's availability is based on the operating system.
+It is a built-in extension on Linux and macOS versions, while on Windows, it is not available.
