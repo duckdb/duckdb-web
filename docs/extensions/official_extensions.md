@@ -3,7 +3,9 @@ layout: docu
 title: Official Extensions
 ---
 
-| Extension name | Description | Aliases |
+## List of Official Extensions
+
+| Extension Name | Description | Aliases |
 |---|-----|--|
 | [arrow](arrow) [<span class="github">GitHub</span>](https://github.com/duckdb/arrow)                                  | A zero-copy data integration between Apache Arrow and DuckDB                       |                 |
 | [autocomplete](autocomplete)                                                                                          | Adds support for autocomplete in the shell                                         |                 |
@@ -25,3 +27,25 @@ title: Official Extensions
 | [substrait](substrait) [<span class="github">GitHub</span>](https://github.com/duckdb/substrait)                      | Adds support for the Substrait integration                                         |                 |
 | [tpcds](tpcds)                                                                                                        | Adds TPC-DS data generation and query support                                      |                 |
 | [tpch](tpch)                                                                                                          | Adds TPC-H data generation and query support                                       |                 |
+
+## Default Extensions
+
+Different DuckDB clients ship a different set of extensions.
+We summarize the main distributions in the table below.
+
+<div class="narrow_table"></div>
+
+| Extension Name | CLI (duckdb.org) | CLI (Homebrew) | Python | R | Java | Julia | Node.JS
+|------|------|------|---|---|---|---|---|
+| [autocomplete](autocomplete) | yes | yes |     |     |     |     |     |
+| [excel](excel)               | yes |     |     |     |     |     |     |
+| [fts](full_text_search)      | yes |     | yes |     |     |     |     |
+| [httpfs](httpfs)             |     |     | yes |     |     |     |     |
+| [icu](icu)                   | yes | yes | yes |     | yes | yes | yes |
+| [json](json)                 | yes | yes | yes |     | yes | yes | yes |
+| [parquet](parquet)           | yes | yes | yes | yes | yes | yes | yes |
+| [tpcds](tpcds)               |     |     | yes |     |     |     |     |
+| [tpch](tpch)                 | yes |     | yes |     |     |     |     |
+
+The [jemalloc](jemalloc) extension's availability is based on the operating system.
+It is a built-in extension on Linux and macOS versions, while on Windows, it is not available.
