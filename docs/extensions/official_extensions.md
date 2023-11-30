@@ -47,5 +47,8 @@ We summarize the main distributions in the table below.
 | [tpcds](tpcds)               |     |     | yes |     |     |     |     |
 | [tpch](tpch)                 | yes |     | yes |     |     |     |     |
 
+The [json](json) and [parquet](parquet) extensions are central pieces of
+infrastructure and are always built-in.
+
 The [jemalloc](jemalloc) extension's availability is based on the operating system.
 It is a built-in extension on Linux and macOS versions, while on Windows, it is not available.
