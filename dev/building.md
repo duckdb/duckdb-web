@@ -125,33 +125,25 @@ When this flag is set, the [Java](../docs/api/java) package is built.
 
 When this flag is set, the [ODBC](../docs/api/odbc/overview) package is built.
 
-#### `BUILD_R`
-
-When this flag is set, the [R](../docs/api/r) package is built.
-
-#### `BUILD_NODE`
-
-When this flag is set, the [Node](../docs/api/nodejs/overview) package is built.
-
 ### Extension Flags
 
 For every in-tree extension that is maintained by core DuckDB there exists a flag to enable building and statically linking the extension into the build.
 
 #### `BUILD_AUTOCOMPLETE`
 
-When this flag is set, the [AutoComplete](https://github.com/duckdb/duckdb/pull/4921) extension is built.
+When this flag is set, the [`autocomplete` extension](/docs/extensions/autocomplete) is built.
 
 #### `BUILD_ICU`
 
-When this flag is set, the [ICU](../2022/01/06/time-zones.html) extension is built.
+When this flag is set, the [`icu` extension](/docs/extensions/icu) is built.
 
 #### `BUILD_TPCH`
 
-When this flag is set, the [TPCH](https://www.tpc.org/tpch/) extension is built, this enables TPCH-H data generation and query support using `dbgen`.
+When this flag is set, the [`tpch` extension](/docs/extensions/tpch) is built, this enables TPCH-H data generation and query support using `dbgen`.
 
 #### `BUILD_TPCDS`
 
-When this flag is set, the [TPCDS](https://www.tpc.org/tpcds/) extension is built, this enables TPC-DS data generation and query support using `dsdgen`.
+When this flag is set, the [`tpcds` extension](/docs/extensions/tpcd) is built, this enables TPC-DS data generation and query support using `dsdgen`.
 
 #### `BUILD_TPCE`
 
@@ -159,27 +151,23 @@ When this flag is set, the [TPCE](https://www.tpc.org/tpce/) extension is built,
 
 #### `BUILD_FTS`
 
-When this flag is set, the [Full Text Search](../docs/extensions/full_text_search) extension is built.
-
-#### `BUILD_VISUALIZER`
-
-When this flag is set, the [Visualizer](https://github.com/duckdb/duckdb/pull/1832) extension is built.
+When this flag is set, the [`fts` (full text search) extension](/docs/extensions/full_text_search) is built.
 
 #### `BUILD_HTTPFS`
 
-When this flag is set, the [HTTP File System](../docs/extensions/httpfs) extension is built.
+When this flag is set, the [`httpfs` extension](/docs/extensions/httpfs) is built.
 
 #### `BUILD_JSON`
 
-When this flag is set, the [JSON](../docs/extensions/json) extension is built.
+When this flag is set, the [`json` extension](/docs/extensions/json) is built.
 
 #### `BUILD_INET`
 
-When this flag is set, the [INET](https://github.com/duckdb/duckdb/pull/4785) extension is built.
+When this flag is set, the [`inet` extension](/docs/extensions/inet) is built.
 
 #### `BUILD_SQLSMITH`
 
-When this flag is set, the [SQLSmith](https://github.com/duckdb/duckdb/pull/3410) extension is built.
+When this flag is set, the [SQLSmith extension](https://github.com/duckdb/duckdb/pull/3410) is built.
 
 ### Debug Flags
 
