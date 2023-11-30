@@ -3,7 +3,9 @@ layout: docu
 title: Official Extensions
 ---
 
-| Extension name | Description | Aliases |
+## List of Official Extensions
+
+| Extension Name | Description | Aliases |
 |---|-----|--|
 | [arrow](arrow) [<span class="github">GitHub</span>](https://github.com/duckdb/arrow)                                  | A zero-copy data integration between Apache Arrow and DuckDB                       |                 |
 | [autocomplete](autocomplete)                                                                                          | Adds support for autocomplete in the shell                                         |                 |
