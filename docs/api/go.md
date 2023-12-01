@@ -48,19 +48,16 @@ import (
 func main() {
 	db, err := sql.Open("duckdb", "")
 	if err != nil {
-		fmt.Println(1)
 		log.Fatal(err)
 	}
 	defer db.Close()
 
 	_, err = db.Exec(`CREATE TABLE people (id INTEGER, name VARCHAR)`)
 	if err != nil {
-		fmt.Println(2)
 		log.Fatal(err)
 	}
 	_, err = db.Exec(`INSERT INTO people VALUES (42, 'John')`)
 	if err != nil {
-		fmt.Println(3)
 		log.Fatal(err)
 	}
 
