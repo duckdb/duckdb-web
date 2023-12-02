@@ -40,44 +40,40 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	_ "github.com/marcboeker/go-duckdb"
 	"log"
-)
 
-func check(msg string, args ...interface{}) {
-	err := args[len(args)-1]
-	if err != nil {
-		log.Println(fmt.Sprintf("fatal error: %s", msg))
-		log.Fatal(err)
-	}
-}
+	_ "github.com/marcboeker/go-duckdb"
+)
 
 func main() {
 	db, err := sql.Open("duckdb", "")
-	check("failed to open db", err)
-	defer func(db *sql.DB) {
-		err = db.Close()
-		check("failed to close db", err)
-	}(db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
 
-	_, err = db.Exec(`CREATE TABLE person (id INTEGER, name VARCHAR)`)
-	check("failed to create table", err)
-	_, err = db.Exec(`INSERT INTO person VALUES (42, 'John')`)
-	check("failed to insert values into table", err)
+	_, err = db.Exec(`CREATE TABLE people (id INTEGER, name VARCHAR)`)
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = db.Exec(`INSERT INTO people VALUES (42, 'John')`)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	var (
 		id   int
 		name string
 	)
-	row := db.QueryRow(`SELECT id, name FROM person`)
+	row := db.QueryRow(`SELECT id, name FROM people`)
 	err = row.Scan(&id, &name)
 	if errors.Is(err, sql.ErrNoRows) {
 		log.Println("no rows")
-	} else {
-		check("failed to query rows", err)
+	} else if err != nil {
+		log.Fatal(err)
 	}
 
-	fmt.Println("id:", id, "name:", name)
+	fmt.Printf("id: %d, name: %s\n", id, name)
 }
 ```
 
