@@ -15,14 +15,14 @@ To construct a `MAP`, use the bracket syntax preceded by the `MAP` keyword.
 
 ```sql
 -- A map with varchar keys and integer values. This returns {key1=1, key2=5}
-SELECT MAP { 'key1': 1, 'key2': 5 };
+SELECT MAP {'key1': 1, 'key2': 5};
 -- Alternatively use the map_from_entries function. This returns {key1=1, key2=5}
 SELECT map_from_entries([(key1, 1), (key2, 5)]);
 -- A map with integer keys and numeric values. This returns {1=42.001, 5=-32.100} 
-SELECT MAP { 1: 42.001, 5: -32.1 };
+SELECT MAP {1: 42.001, 5: -32.1};
 -- Keys and/or values can also be nested types.
 -- This returns {[a, b]=[1.1, 2.2], [c, d]=[3.3, 4.4]}
-SELECT MAP { ['a', 'b']: [1.1, 2.2], ['c', 'd']: [3.3, 4.4] };
+SELECT MAP {['a', 'b']: [1.1, 2.2], ['c', 'd']: [3.3, 4.4]};
 -- Create a table with a map column that has integer keys and double values
 CREATE TABLE map_table (map_col MAP(INT, DOUBLE));
 ```
@@ -33,15 +33,15 @@ CREATE TABLE map_table (map_col MAP(INT, DOUBLE));
 ```sql
 -- Use bracket notation to retrieve a list containing the value at a key's location. This returns [5]
 -- Note that the expression in bracket notation must match the type of the map's key
-SELECT MAP { 'key1': 5, 'key2': 43 }['key1'];
+SELECT MAP {'key1': 5, 'key2': 43}['key1'];
 -- To retrieve the underlying value, use list selection syntax to grab the first element.
 -- This returns 5
-SELECT MAP { 'key1': 5, 'key2': 43 }['key1'][1];
+SELECT MAP {'key1': 5, 'key2': 43}['key1'][1];
 -- If the element is not in the map, an empty list will be returned. Returns []
 -- Note that the expression in bracket notation must match the type of the map's key else an error is returned
-SELECT MAP { 'key1': 5, 'key2': 43 }['key3'];
+SELECT MAP {'key1': 5, 'key2': 43}['key3'];
 -- The element_at function can also be used to retrieve a map value. This returns [5]
-SELECT element_at(MAP { 'key1': 5, 'key2': 43 }, 'key1');
+SELECT element_at(MAP {'key1': 5, 'key2': 43}, 'key1');
 ```
 
 ## Comparison Operators
