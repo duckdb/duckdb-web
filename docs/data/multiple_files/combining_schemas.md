@@ -22,7 +22,7 @@ By default, DuckDB reads the schema of the first file provided, and then unifies
 
 Below is an example of how both methods work.
 
-## Union By Position
+## Union by Position
 
 By default, DuckDB unifies the columns of these different files **by position**. This means that the first column in each file is combined together, as well as the second column in each file, etc. For example, consider the following two files.
 
@@ -53,7 +53,7 @@ Reading the two files at the same time will produce the following result set:
 
 This is equivalent to the SQL construct [`UNION ALL`](../../sql/query_syntax/setops#union-all).
 
-## Union By Name
+## Union by Name
 
 If you are processing multiple files that have different schemas, perhaps because columns have been added or renamed, it might be desirable to unify the columns of different files **by name** instead. This can be done by providing the `union_by_name` option. For example, consider the following two files, where `flights4.csv` has an extra column (`UniqueCarrier`).
 
