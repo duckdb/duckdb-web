@@ -40,6 +40,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-github-metadata
   - jekyll-git-hash
+  - jekyll-toc
 excerpt_separator: <!--more-->
 
 twitter:
@@ -70,5 +71,11 @@ repository: "duckdb/duckdb-web"
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+# _config.yml
+toc:
+  min_level: 1
+  max_level: 3
+  ordered_list: true
 
 exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle']

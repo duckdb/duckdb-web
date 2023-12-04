@@ -140,7 +140,8 @@ Page URL: <https://duckdb.org{{ page.url }}>
 		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " }}{% endif %}">
 			
 			<div id="main_content_wrap">
-				{% include anchor_headings.html html=content %}
+				{% assign ct = content | toc %}
+				{% include anchor_headings.html html=ct %}
 			</div>
 
 			<div class="searchoverlay">
