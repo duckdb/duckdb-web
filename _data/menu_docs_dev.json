@@ -252,6 +252,10 @@
                   "url": "auto_detection"
                 },
                 {
+                  "page": "Reading Faulty CSV Files",
+                  "url": "reading_faulty_csv_files"
+                },
+                {
                   "page": "Tips",
                   "url": "tips"
                 }
