@@ -35,12 +35,19 @@ await c.close();
 // More Example https://arrow.apache.org/docs/js/
 import { tableFromArrays } from 'apache-arrow';
 
+// EOS signal according to Arrorw IPC streaming format
+// See https://arrow.apache.org/docs/format/Columnar.html#ipc-streaming-format
+const EOS = new Uint8Array([255, 255, 255, 255, 0, 0, 0, 0]);
+
 const arrowTable = tableFromArrays({
   id: [1, 2, 3],
   name: ['John', 'Jane', 'Jack'],
   age: [20, 21, 22],
 });
+
 await c.insertArrowTable(arrowTable, { name: 'arrow_table' });
+// Write EOS
+await c.insertArrowTable(EOS, { name: 'arrow_table' });
 
 // ..., from a raw Arrow IPC stream
 const streamResponse = await fetch(`someapi`);
@@ -52,9 +59,8 @@ while (true) {
     streamInserts.push(c.insertArrowFromIPCStream(value, { name: 'streamed' }));
 }
 
-// Add EOS buffer according to Arrorw IPC streaming format
-// See https://arrow.apache.org/docs/format/Columnar.html#ipc-streaming-format
-await c.insertArrowFromIPCStream(new Uint8Array([255, 255, 255, 255, 0, 0, 0, 0]), { name: 'streamed' });
+// Write EOS
+streamInserts.push(c.insertArrowFromIPCStream(EOS, { name: 'streamed' }));
 
 await Promise.all(streamInserts);
 ```
