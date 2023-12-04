@@ -82,5 +82,5 @@ The data generator function `dbgen` has the following parameters:
 
 ## Limitations
 
-The `tpch({query_id})` function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters).
-It is not possible to change the query parameters using the `tpch` extension.
+* The data generator function `dbgen` is single-threaded and does not support concurrency. Running multiple steps to parallelize over different partitions is also not supported at the moment.
+* The `tpch({query_id})` function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters). It is not possible to change the query parameters using the `tpch` extension.
