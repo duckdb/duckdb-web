@@ -26,7 +26,11 @@ FROM read_csv('faulty.csv', columns = {'name': 'VARCHAR', 'age': 'INTEGER'});
 However, with `ignore_errors` set, the second row of the file is skipped, outputting only the complete first row. For example:
 
 ```sql
-FROM read_csv('faulty.csv', columns = {'name': 'VARCHAR', 'age': 'INTEGER'}, ignore_errors = true);
+FROM read_csv(
+    'faulty.csv',
+    columns = {'name': 'VARCHAR', 'age': 'INTEGER'},
+    ignore_errors = true
+);
 ```
 
 Outputs:
@@ -69,7 +73,7 @@ The CSV Rejects Table returns the following information:
 | `column` | Column number, from the CSV File, where the error occured.| `INTEGER` |
 | `column_name` | Column name, from the CSV File, where the error occured.| `VARCHAR` |
 | `parsed_value` | The value, where the casting error happened, in a string format.| `VARCHAR` |
-| `recovery_columns` | An optional primary key of the CSV File.| `STRUCT { NAME: VALUE }` |
+| `recovery_columns` | An optional primary key of the CSV File.| `STRUCT {NAME: VALUE}` |
 | `error` | Exact error encountered by the parser. | `VARCHAR` |
 
 ## Parameters
@@ -87,7 +91,12 @@ The parameters listed below are used in the `read_csv` function to configure the
 To store the information of the faulty CSV lines in a rejects table, the user must simply provide the rejects table name in the`rejects_table` option. For example:
 
 ```sql
-FROM read_csv('faulty.csv', columns = {'name': 'VARCHAR', 'age': 'INTEGER'}, rejects_table = 'rejects_table', ignore_errors = true);
+FROM read_csv(
+    'faulty.csv',
+    columns = {'name': 'VARCHAR', 'age': 'INTEGER'},
+    rejects_table = 'rejects_table',
+    ignore_errors = true
+);
 ```
 
 You can then query the `rejects_table` table, to retrieve information about the rejected tuples. For example:
@@ -106,7 +115,13 @@ Outputs:
 Additionally, the `name` column could also be provided as a primary key via the `rejects_recovery_columns` option to provide more information over the faulty lines. For example:
 
 ```sql
-FROM read_csv('faulty.csv', columns = {'name': 'VARCHAR', 'age': 'INTEGER'}, rejects_table = 'rejects_table', rejects_recovery_columns = '[name]', ignore_errors = true);
+FROM read_csv(
+    'faulty.csv',
+    columns = {'name': 'VARCHAR', 'age': 'INTEGER'},
+    rejects_table = 'rejects_table',
+    rejects_recovery_columns = '[name]',
+    ignore_errors = true
+);
 ```
 
 Reading from the `rejects_table` will return:
