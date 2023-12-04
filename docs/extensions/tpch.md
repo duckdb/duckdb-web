@@ -25,6 +25,20 @@ To generate data for scale factor 1, use:
 CALL dbgen(sf = 1);
 ```
 
+Calling `dbgen` does not clean up existing TPC-H tables.
+To clean up existing tables, use `DROP TABLE` before running `dbgen`:
+
+```sql
+DROP TABLE IF EXISTS customer;
+DROP TABLE IF EXISTS lineitem;
+DROP TABLE IF EXISTS nation;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS part;
+DROP TABLE IF EXISTS partsupp;
+DROP TABLE IF EXISTS region;
+DROP TABLE IF EXISTS supplier;
+```
+
 ### Running a Query
 
 To run a query, e.g., query 4, use:
@@ -74,11 +88,22 @@ The data generator function `dbgen` has the following parameters:
 | Name | Type | Description |
 |--|--|------------|
 | `catalog`   | `VARCHAR`  | Target catalog                                                                                                                    |
-| `children`  | `UINTEGER` | Number of partitions (max. 1000)                                                                                                  |
+| `children`  | `UINTEGER` | Number of partitions                                                                                                              |
 | `overwrite` | `BOOLEAN`  | (Not used)                                                                                                                        |
 | `sf`        | `DOUBLE`   | Scale factor                                                                                                                      |
 | `step`      | `UINTEGER` | Defines the partition to be generated, indexed from 0 to `children` - 1. Must be defined when the `children` arguments is defined |
 | `suffix`    | `VARCHAR`  | Append the `suffix` to table names                                                                                                |
+
+## Generating Larger Than Memory Data Sets Scale Factors
+
+To generate larger than memory data sets, run the `dbgen` function in steps. For example:
+
+```sql
+CALL dbgen(sf = 1000, children = 100, step = 0);
+CALL dbgen(sf = 1000, children = 100, step = 1);
+...
+CALL dbgen(sf = 1000, children = 100, step = 99);
+```
 
 ## Limitations
 
