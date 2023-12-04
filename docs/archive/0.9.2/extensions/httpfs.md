@@ -99,7 +99,7 @@ The [`aws` extension](aws) allows for loading AWS credentials.
 
 #### Per-Request Configuration
 
-Aside from the global S3 configuration described above, specific configuration values can be used on a per-request basis. This allows for use of multiple sets of credentials, regions, etc. These are used by including them on the S3 URL as query parameters. All the individual configuration values listed above can be set as query parameters. For instance:
+Aside from the global S3 configuration described above, specific configuration values can be used on a per-request basis. This allows for use of multiple sets of credentials, regions, etc. These are used by including them on the S3 URI as query parameters. All the individual configuration values listed above can be set as query parameters. For instance:
 
 ```sql
 SELECT *
