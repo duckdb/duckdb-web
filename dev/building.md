@@ -143,7 +143,7 @@ When this flag is set, the [`tpch` extension](/docs/extensions/tpch) is built, t
 
 #### `BUILD_TPCDS`
 
-When this flag is set, the [`tpcds` extension](/docs/extensions/tpcd) is built, this enables TPC-DS data generation and query support using `dsdgen`.
+When this flag is set, the [`tpcds` extension](/docs/extensions/tpcds) is built, this enables TPC-DS data generation and query support using `dsdgen`.
 
 #### `BUILD_TPCE`
 
