@@ -120,7 +120,6 @@ con.Query("INSERT INTO dates VALUES ('1992-01-01')");
 con.CreateScalarFunction<int32_t, int32_t>("udf_date", {LogicalType::DATE}, LogicalType::DATE, &udf_date);
 
 con.Query("SELECT udf_date(d) FROM dates")->Print();
-
 ```
 
 - template parameters:
