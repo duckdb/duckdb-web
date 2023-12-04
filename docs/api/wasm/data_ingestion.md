@@ -51,6 +51,11 @@ while (true) {
     if (done) break;
     streamInserts.push(c.insertArrowFromIPCStream(value, { name: 'streamed' }));
 }
+
+// Add EOS buffer according to Arrorw IPC streaming format
+// See https://arrow.apache.org/docs/format/Columnar.html#ipc-streaming-format
+await c.insertArrowFromIPCStream(new Uint8Array([255, 255, 255, 255, 0, 0, 0, 0]), { name: 'streamed' });
+
 await Promise.all(streamInserts);
 ```
 
