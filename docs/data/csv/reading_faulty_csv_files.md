@@ -6,7 +6,7 @@ redirect_from:
 
 Reading erroneous CSV files is possible by utilizing the `ignore_errors` option. With that option set, rows containing data that would otherwise cause the CSV Parser to generate an error will be ignored.
 
-## Using the `ignore_error` Option
+## Using the `ignore_errors` Option
 
 For example, consider the following CSV file, [`faulty.csv`](/data/faulty.csv):
 
