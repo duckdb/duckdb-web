@@ -25,7 +25,6 @@ const c = await db.connect();
 
 // Close the connection to release memory
 await c.close();
-
 ```
 
 ### Apache Arrow
