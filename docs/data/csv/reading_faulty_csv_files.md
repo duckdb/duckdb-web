@@ -107,6 +107,8 @@ FROM rejects_table;
 
 Outputs:
 
+<div class="narrow_table"></div>
+
 |    file    | line | column | column_name | parsed_value |                     error                      |
 |------------|------|--------|-------------|--------------|------------------------------------------------|
 | faulty.csv |  2   |    1   |     age     |     three    | Could not convert string ' three' to 'INTEGER' |
@@ -125,6 +127,8 @@ FROM read_csv(
 ```
 
 Reading from the `rejects_table` will return:
+
+<div class="narrow_table"></div>
 
 |    file    | line | column | column_name | parsed_value |     recovery_columns     |                     error                      |
 |------------|------|--------|-------------|--------------|--------------------------|------------------------------------------------|
