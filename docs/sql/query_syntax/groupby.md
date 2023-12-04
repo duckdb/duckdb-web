@@ -53,7 +53,6 @@ FROM addresses
 GROUP BY ALL;
 -- GROUP BY city, street_name
 ;
-
 ```
 
 ## Syntax

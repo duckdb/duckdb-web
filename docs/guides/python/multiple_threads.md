@@ -110,5 +110,4 @@ print(duckdb_con.execute("""
     ORDER BY 
         insert_time
 """).df())
-
 ```

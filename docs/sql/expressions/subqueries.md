@@ -94,7 +94,6 @@ We can use the `IN` operator in a similar manner as we used the `EXISTS` operato
 ```sql
 SELECT 'Math' IN (SELECT course FROM grades);
 -- true
-
 ```
 
 ## Correlated Subqueries

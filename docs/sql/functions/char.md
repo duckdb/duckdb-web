@@ -149,7 +149,6 @@ SELECT format('{:''}', 123456789); -- 123'456'789
 SELECT format('{:_}',  123456789); -- 123_456_789
 SELECT format('{:t }', 123456789); -- 123 456 789
 SELECT format('{:tX}', 123456789); -- 123X456X789
-
 ```
 
 ### `printf` Syntax
