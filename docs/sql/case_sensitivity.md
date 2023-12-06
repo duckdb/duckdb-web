@@ -34,7 +34,11 @@ SELECT cos(pi()) AS CosineOfPi;
 Following the convention of the SQL standard, identifiers in DuckDB are case-insensitive.
 However, each character's case (uppercase/lowercase) is maintained as entered by the user.
 
+To change this behavior, set the `preserve_identifier_case` [configuration option](configuration#configuration-reference) to `false`.
+
 ### Examples
+
+#### Preserving Cases
 
 The case entered by the user is preserved even if a query uses different cases when referring to the identifier:
 
@@ -51,6 +55,8 @@ SELECT cosineofpi FROM CosPi;
 └────────────┘
 ```
 
+#### Handling Conflicts
+
 In case of a conflict, when the same identifier is spelt with different cases, one will be selected randomly. For example:
 
 ```sql
@@ -66,4 +72,24 @@ SELECT * FROM t1 NATURAL JOIN t2;
 ├─────────────────────────┤
 │         0 rows          │
 └─────────────────────────┘
+```
+
+
+
+#### Disabling Preserving Cases
+
+With `preserve_identifier_case` set to `false`, all identifiers are turned into lowercase:
+
+```sql
+SET preserve_identifier_case=false;
+CREATE TABLE CosPi AS SELECT cos(pi()) AS CosineOfPi;
+SELECT CosineOfPi FROM CosPi;
+```
+```text
+┌────────────┐
+│ cosineofpi │
+│   double   │
+├────────────┤
+│       -1.0 │
+└────────────┘
 ```
