@@ -52,6 +52,19 @@ function GeneratePivot(options) {
 					OneOrMore(Expression("group-by-expr"), ","),
 				]),
 				"skip"),
+			Optional(Sequence([
+				Keyword("ORDER"),
+				Keyword("BY"),
+				GenerateOrderTerms()
+			])),
+			Optional(Sequence([
+				Keyword("LIMIT"),
+				Expression()
+			])),
+			Optional(Sequence([
+				Keyword("OFFSET"),
+				Expression()
+			])),
 		])
 	])
 }
@@ -98,6 +111,19 @@ function GenerateSQLStandardPivot(options) {
 					OneOrMore(Expression("group-by-expr"), ","),
 				]),
 				"skip"),
+			Optional(Sequence([
+				Keyword("ORDER"),
+				Keyword("BY"),
+				GenerateOrderTerms()
+			])),
+			Optional(Sequence([
+				Keyword("LIMIT"),
+				Expression()
+			])),
+			Optional(Sequence([
+				Keyword("OFFSET"),
+				Expression()
+			])),
 			Keyword(")"),
 		])
 	])
