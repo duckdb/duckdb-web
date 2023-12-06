@@ -75,8 +75,8 @@ Below is a full list of all available format specifiers.
 | `%Z` | Time zone name. | Europe/Amsterdam  |
 | `%j` | Day of the year as a zero-padded decimal number. | 001, 002, ..., 366 |
 | `%-j` | Day of the year as a decimal number. | 1, 2, ..., 366 |
-| `%U` | Week number of the year (Sunday as the first day of the week). | 00, 01, ..., 53 |
-| `%W` | Week number of the year (Monday as the first day of the week). | 00, 01, ..., 53 |
+| `%U` | Week number of the year. Week 01 starts on the first Sunday of the year, so there can be week 00. Note that this is not compliant with the week date standard in ISO-8601. | 00, 01, ..., 53 |
+| `%W` | Week number of the year. Week 01 starts on the first Monday of the year, so there can be week 00. Note that this is not compliant with the week date standard in ISO-8601. | 00, 01, ..., 53 |
 | `%c` | ISO date and time representation | 1992-03-02 10:30:20 |
 | `%x` | ISO date representation | 1992-03-02 |
 | `%X` | ISO time representation | 10:30:20 |
