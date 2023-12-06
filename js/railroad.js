@@ -2015,12 +2015,12 @@ function GenerateLimitAndOrderBy(options) {
 		Sequence(GenerateOrderBy(options)),
 		Optional(Sequence([
 			Keyword("LIMIT"),
-			Expression(),
-			Optional(Sequence([
-				Keyword("OFFSET"),
-				Expression()
-			]), "skip")
-		]))
+			Expression()
+		])),
+		Optional(Sequence([
+			Keyword("OFFSET"),
+			Expression()
+		])),
 	]
 }
 
