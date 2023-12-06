@@ -7,7 +7,7 @@ DuckDB has a number of configuration options that can be used to change the beha
 The configuration options can be set using either the `SET` statement or the `PRAGMA` statement.
 They can also be reset to their original values using the `RESET` statement.
 
-### Examples
+## Examples
 
 ```sql
 -- set the memory limit of the system to 10GB
