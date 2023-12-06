@@ -55,11 +55,11 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ','
 | `filename` | The path and name of the input or output file. |
 | `boolean` | Specifies whether the selected option should be turned on or off. You can write `true`, `ON`, or `1` to enable the option, and `false`, `OFF`, or `0` to disable it. The `boolean` value can also be omitted, in which case `true` is assumed. |
 | `FORMAT` | If this option is used, its value must be `CSV`. With any other format an error will be thrown. |
-| `DELIMITER` | Specifies the string that separates columns within each row (line) of the file. The default value is a comma (`,`). |
+| `DELIMITER` | Specifies the character that separates columns within each row (line) of the file. Its maximum length is 1 byte. The default value is a comma (`,`). |
 | `NULL` | Specifies the string that represents a NULL value. The default is an empty string. Please note that in `COPY ... FROM` both an unquoted empty string and a quoted empty string represent a NULL value. If any other NULL string is specified, again both its quoted and its unquoted appearance represent a NULL value. `COPY ... TO` does not quote NULL values on output, even if `FORCE_QUOTE` is true. |
 | `HEADER` | Specifies that the file contains a header line with the names of each column in the file. Thus, `COPY ... FROM` ignores the first line when importing data, whereas on output (`COPY ... TO`) the first line of the file contains the column names of the exported columns. |
-| `QUOTE` | Specifies the quoting string to be used when a data value is quoted. The default is the double quote character (`"`). |
-| `ESCAPE` | Specifies the string that should appear before a data character sequence that matches the `QUOTE` value. The default is the same as the `QUOTE` value (so that the quoting string is doubled if it appears in the data). |
+| `QUOTE` | Specifies the quoting character to be used when a data value is quoted. Its maximum length is 1 byte. The default is the double quote character (`"`). |
+| `ESCAPE` | Specifies the character that should appear before a data character sequence that matches the `QUOTE` value. Its maximum length is 1 byte. The default value is the same as the `QUOTE` value (so that the quoting string is doubled if it appears in the data). |
 | `FORCE_QUOTE` | Forces quoting to be used for all non-NULL values in each specified column. `NULL` output is never quoted. If `*` is specified, non-NULL values will be quoted in all columns. This option is allowed only in `COPY ... TO`. |
 | `FORCE_NOT_NULL` | Do not match the specified columns' values against the NULL string. In the default case where the NULL string is empty, this means that empty values will be read as zero-length strings rather than NULLs. This option is allowed only in `COPY ... FROM`. |
 | `ENCODING` | If this option is used, its value must be `UTF8`. With any other encoding an error will be thrown. |
