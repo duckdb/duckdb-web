@@ -6,7 +6,7 @@
 			{% if item.mainfolderitems[0] %}
 			{% for mainentry in item.mainfolderitems %}
 			{% if mainentry.subfolderitems[0] %} <div> {% endif %}
-				{% if mainentry.subfolderitems[0] %} <div class="hasSub" > {% endif %}
+				{% if mainentry.subfolderitems[0] %} <div class="hasSub"> {% endif %}
 					{% if mainentry.url %}
 						{% assign myurl = mainentry.url | slice: 0, 5 %}
 						{% if myurl == 'https' or myurl == 'http:' %}
@@ -16,7 +16,7 @@
 				</div>
 						{% endif %}
 					{% else %} <a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>{% endif %}
-			   {% if mainentry.subfolderitems[0] %}  </div> {% endif %}
+			   {% if mainentry.subfolderitems[0] %} </div> {% endif %}
 		
 				{% if mainentry.subfolderitems[0] %}
 					<ul>
