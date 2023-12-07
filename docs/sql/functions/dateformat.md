@@ -56,6 +56,7 @@ Below is a full list of all available format specifiers.
 | `%-d` | Day of the month as a decimal number. | 1, 2, ..., 30 |
 | `%f` | Microsecond as a decimal number, zero-padded on the left. | 000000 - 999999 |
 | `%g` | Millisecond as a decimal number, zero-padded on the left. | 000 - 999 |
+| `%G` | ISO 8601 year with century representing the year that contains the greater part of the ISO week (see `%V`). | 0001, 0002, ..., 2013, 2014, ..., 9998, 9999 |
 | `%H` | Hour (24-hour clock) as a zero-padded decimal number. | 00, 01, ..., 23 |
 | `%-H` | Hour (24-hour clock) as a decimal number. | 0, 1, ..., 23 |
 | `%I` | Hour (12-hour clock) as a zero-padded decimal number. | 01, 02, ..., 12 |
@@ -70,7 +71,9 @@ Below is a full list of all available format specifiers.
 | `%p` | Locale's AM or PM. | AM, PM |
 | `%S` | Second as a zero-padded decimal number. | 00, 01, ..., 59 |
 | `%-S` | Second as a decimal number. | 0, 1, ..., 59 |
+| `%u` | ISO 8601 weekday as a decimal number where 1 is Monday. | 1, 2, ..., 7 |
 | `%U` | Week number of the year. Week 01 starts on the first Sunday of the year, so there can be week 00. Note that this is not compliant with the week date standard in ISO-8601. | 00, 01, ..., 53 |
+| `%V` | ISO 8601 week as a decimal number with Monday as the first day of the week. Week 01 is the week containing Jan 4. | 01, ..., 53 |
 | `%w` | Weekday as a decimal number. | 0, 1, ..., 6 |
 | `%W` | Week number of the year. Week 01 starts on the first Monday of the year, so there can be week 00. Note that this is not compliant with the week date standard in ISO-8601. | 00, 01, ..., 53 |
 | `%x` | ISO date representation | 1992-03-02 |
