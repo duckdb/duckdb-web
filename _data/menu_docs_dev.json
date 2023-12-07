@@ -1054,16 +1054,16 @@
               "url": "mysql"
             },
             {
-              "page": "PostgreSQL Scanner",
-              "url": "postgres_scanner"
+              "page": "PostgreSQL",
+              "url": "postgres"
             },
             {
               "page": "Spatial",
               "url": "spatial"
             },
             {
-              "page": "SQLite Scanner",
-              "url": "sqlite_scanner"
+              "page": "SQLite",
+              "url": "sqlite"
             },
             {
               "page": "Substrait",
