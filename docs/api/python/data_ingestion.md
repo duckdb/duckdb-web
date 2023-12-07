@@ -112,7 +112,7 @@ The sample size can be changed by setting the `pandas_analyze_sample` config opt
 
 ```python
 # example setting the sample size to 100000
-duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
+duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample = 100000")
 ```
 
 ## Object Conversion

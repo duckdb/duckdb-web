@@ -35,8 +35,8 @@ FROM sniff_csv('my_file.csv', sample_size = 1000);
 | `Columns` | column types encoded as a `LIST` of `STRUCT`s | `({'name': 'VARCHAR', 'age': 'BIGINT'})` |
 | `DateFormat` | date Format | `%d/%m/%Y` |
 | `TimestampFormat` | timestamp Format | `%Y-%m-%dT%H:%M:%S.%f` |
-| `UserArguments` | arguments used to invoke `sniff_csv` | `sample_size=1000` |
-| `Prompt` | prompt ready to be used to read the CSV | `FROM read_csv('my_file.csv', auto_detect=false, delim=',', ...)` |
+| `UserArguments` | arguments used to invoke `sniff_csv` | `sample_size = 1000` |
+| `Prompt` | prompt ready to be used to read the CSV | `FROM read_csv('my_file.csv', auto_detect = false, delim = ',', ...)` |
 
 ## Detection Steps
 

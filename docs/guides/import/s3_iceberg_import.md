@@ -25,16 +25,16 @@ LOAD iceberg;
 After loading the extensions, set up the credentials and S3 region to read data. You may either use an access key and secret, or a token.
 
 ```sql
-SET s3_region='us-east-1';
-SET s3_access_key_id='<AWS access key id>';
-SET s3_secret_access_key='<AWS secret access key>';
+SET s3_region = 'us-east-1';
+SET s3_access_key_id = '<AWS access key id>';
+SET s3_secret_access_key = '<AWS secret access key>';
 ```
 
 The alternative is to use a token:
 
 ```sql
-SET s3_region='us-east-1';
-SET s3_session_token='<AWS session token>';
+SET s3_region = 'us-east-1';
+SET s3_session_token = '<AWS session token>';
 ```
 
 ALternatively, use the [`aws` extension](../../extensions/aws) to retrieve the credentials from the aws config file. To load the credentials:

@@ -147,7 +147,7 @@ SELECT * FROM read_json_auto('unstructured.json', format = 'unstructured');
 
 ## Examples of Records Settings
 
-The JSON extension can attempt to determine whether a JSON file contains records when setting `records=auto`.
+The JSON extension can attempt to determine whether a JSON file contains records when setting `records = auto`.
 When `records = true`, the JSON extension expects JSON objects, and will unpack the fields of JSON objects into individual columns.
 
 Continuing with the same example file from before:
@@ -244,8 +244,8 @@ If we specify the columns, we can bypass the automatic detection. Note that not 
 ```sql
 SELECT *
 FROM read_json_auto('todos.json',
-                    columns={userId: 'UBIGINT',
-                             completed: 'BOOLEAN'});
+                    columns = {userId: 'UBIGINT',
+                               completed: 'BOOLEAN'});
 ```
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.

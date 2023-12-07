@@ -43,9 +43,9 @@ pk BOOLEAN          -- part of the primary key or not
 
 ```sql
 -- set the memory limit
-PRAGMA memory_limit='1GB';
+PRAGMA memory_limit = '1GB';
 -- set the amount of threads for parallel query execution
-PRAGMA threads=4;
+PRAGMA threads = 4;
 ```
 
 ### `database_size`
@@ -76,7 +76,7 @@ memory_limit VARCHAR   -- maximum memory allowed for the database
 -- list all available collations
 PRAGMA collations;
 -- set the default collation to one of the available ones
-PRAGMA default_collation='nocase';
+PRAGMA default_collation = 'nocase';
 ```
 
 
@@ -84,9 +84,9 @@ PRAGMA default_collation='nocase';
 
 ```sql
 -- set the ordering for NULLs to be either NULLS FIRST or NULLS LAST
-PRAGMA default_null_order='NULLS LAST';
+PRAGMA default_null_order = 'NULLS LAST';
 -- set the default result set ordering direction to ASCENDING or DESCENDING
-PRAGMA default_order='DESCENDING';
+PRAGMA default_order = 'DESCENDING';
 ```
 
 ### `version`
@@ -119,17 +119,17 @@ PRAGMA enable_profiling;
 PRAGMA enable_profile;
 -- Enable profiling in a specified format
 -- Return the logical query plan as JSON
-PRAGMA enable_profiling='json';
+PRAGMA enable_profiling = 'json';
 -- Return the logical query plan
-PRAGMA enable_profiling='query_tree';
+PRAGMA enable_profiling = 'query_tree';
 -- Return the physical query plan
-PRAGMA enable_profiling='query_tree_optimizer';
+PRAGMA enable_profiling = 'query_tree_optimizer';
 -- Disable profiling
 PRAGMA disable_profiling;
 PRAGMA disable_profile;
 -- Specify a file to save the profiling output to
-PRAGMA profiling_output='/path/to/file.json';
-PRAGMA profile_output='/path/to/file.json';
+PRAGMA profiling_output = '/path/to/file.json';
+PRAGMA profile_output = '/path/to/file.json';
 ```
 
 Enable the gathering and printing of profiling information after the execution of a query. Optionally, the format of the resulting profiling information can be specified as either *json*, *query_tree*, or *query_tree_optimizer*. The default format is *query_tree*, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
@@ -181,11 +181,11 @@ PRAGMA enable_optimizer;
 
 ```sql
 -- Set a path for query logging
-PRAGMA log_query_path='/tmp/duckdb_log/';
+PRAGMA log_query_path = '/tmp/duckdb_log/';
 -- Disable query logging again
-PRAGMA log_query_path='';
+PRAGMA log_query_path = '';
 -- either show 'all' or only 'optimized' plans in the EXPLAIN output
-PRAGMA explain_output='optimized';
+PRAGMA explain_output = 'optimized';
 -- Enable query verification (for development)
 PRAGMA enable_verification;
 -- Disable query verification (for development)
@@ -259,7 +259,7 @@ PRAGMA disable_checkpoint_on_shutdown;
 By default, DuckDB uses the `.tmp` directory to spill to disk. To change this, use:
 
 ```sql
-PRAGMA temp_directory='/path/to/temp.tmp'
+PRAGMA temp_directory = '/path/to/temp.tmp'
 ```
 
 ### `storage_info`
@@ -322,7 +322,7 @@ The `disabled_optimizers` option allows selectively disabling optimization steps
 For example, to disable `filter_pushdown` and `statistics_propagation`, run:
 
 ```sql
-PRAGMA disabled_optimizers='filter_pushdown,statistics_propagation';
+PRAGMA disabled_optimizers = 'filter_pushdown,statistics_propagation';
 ```
 
 The available optimizations can be queried using the [`duckdb_optimizers()` table function](duckdb_table_functions#duckdb_optimizers).

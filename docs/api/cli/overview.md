@@ -299,7 +299,7 @@ SELECT getenv('HOME') AS home;
 The output of the `getenv` function can be used to set [configuration options](../../sql/configuration). For example, to set the `NULL` order based on the environment variable `DEFAULT_NULL_ORDER`, use:
 
 ```sql
-SET default_null_order=getenv('DEFAULT_NULL_ORDER');
+SET default_null_order = getenv('DEFAULT_NULL_ORDER');
 ```
 
 ### Restrictions for Reading Environment Variables

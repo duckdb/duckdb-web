@@ -29,9 +29,9 @@ This is identical to the default sort order of PostgreSQL. The default sort orde
 
 ```sql
 -- change the default null sorting order to either NULLS FIRST and NULLS LAST
-PRAGMA default_null_order='NULLS FIRST';
+PRAGMA default_null_order = 'NULLS FIRST';
 -- change the default sorting order to either DESC or ASC
-PRAGMA default_order='DESC';
+PRAGMA default_order = 'DESC';
 ```
 
 ## Collations
