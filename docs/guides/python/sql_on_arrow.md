@@ -86,7 +86,7 @@ my_arrow_dataset = ds.dataset(str(base_path / 'parquet_folder/'))
 # equivalent to "WHERE i = 2"
 scanner_filter = (pc.field("i") == pc.scalar(2))
 
-arrow_scanner = ds.Scanner.from_dataset(my_arrow_dataset, filter=scanner_filter)
+arrow_scanner = ds.Scanner.from_dataset(my_arrow_dataset, filter = scanner_filter)
 
 # query the Apache Arrow scanner "arrow_scanner" and return as an Arrow Table
 results = con.execute("SELECT * FROM arrow_scanner").arrow()

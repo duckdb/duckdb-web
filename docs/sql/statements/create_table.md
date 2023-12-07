@@ -41,7 +41,7 @@ Temporary tables reside in memory rather than on disk (even when connecting to a
 CREATE TEMP TABLE t1 AS SELECT * FROM read_csv('path/file.csv');
 
 -- allow temporary tables to off-load excess memory to disk
-SET temp_directory='/path/to/directory/';
+SET temp_directory = '/path/to/directory/';
 ```
 
 Temporary tables are part of the `temp.main` schema. While discouraged, their names can overlap with the names of the regular database tables. In these cases, use their fully qualified name, e.g., `temp.main.t1`, for disambiguation.
