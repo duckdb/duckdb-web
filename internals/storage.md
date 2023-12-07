@@ -10,8 +10,8 @@ The DuckDB internal storage format is currently in flux, and is expected to chan
 When you update DuckDB and open a database file, you might encounter an error message about incompatible storage formats, pointing to this page.
 To move your database(s) to newer format you only need the older and the newer DuckDB executable.
 
-Open your database file with the older DuckDB and run the SQL statement `"EXPORT DATABASE 'tmp'"`. This allows you to save the whole state of the current database in use inside folder `tmp`.
-The content of the `tmp` folder will be overridden, so choose an empty/non yet existing location. Then, start the newer DuckDB and execute `"IMPORT DATABASE 'tmp'"` (pointing to the previously populated folder) to load the database, which can be then saved to the file you pointed DuckDB to.
+Open your database file with the older DuckDB and run the SQL statement `EXPORT DATABASE 'tmp'`. This allows you to save the whole state of the current database in use inside folder `tmp`.
+The content of the `tmp` folder will be overridden, so choose an empty/non yet existing location. Then, start the newer DuckDB and execute `IMPORT DATABASE 'tmp'` (pointing to the previously populated folder) to load the database, which can be then saved to the file you pointed DuckDB to.
 
 A bash two-liner (to be adapted with the file names and executable locations) is:
 
