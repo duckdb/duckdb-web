@@ -6,7 +6,11 @@ railroad: expressions/cast.js
 
 <div id="rrdiagram"></div>
 
-Casting refers to the process of changing the type of a row from one type to another. The standard SQL syntax for this is `CAST(expr AS typename)`. DuckDB also supports the easier to type shorthand `expr::typename`, which is also present in PostgreSQL.
+Casting refers to the process of changing the type of a row from one type to another.
+
+## Explicit Casting
+
+The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`. DuckDB also supports the easier to type shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
 
 ```sql
 SELECT CAST(i AS VARCHAR) FROM generate_series(1, 3) tbl(i);
