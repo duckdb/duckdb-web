@@ -23,7 +23,7 @@ def cleanup_links_in_directory(current_path, depth=0):
                 continue
             with open(abs_path, 'r') as f:
                 text = f.read()
-            new_text = text.replace('](/docs/', '](' + depth * '../')
+            new_text = text.replace('](/docs/dev/', '](' + depth * '../')
             if new_text == text:
                 continue
             if check_only:

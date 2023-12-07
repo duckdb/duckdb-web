@@ -81,7 +81,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				{% endif %}
 			{% endfor %}
 		{% else %}
-			{% assign basename = page.path | replace: "docs/", "" %}
+			{% assign basename = page.path | replace: "docs/dev/", "" %}
 		{% endif %}
 		
 		<div class="headlinebar">
@@ -107,27 +107,15 @@ Page URL: <https://duckdb.org{{ page.url }}>
 					{% endif %}
 				{% endfor %}
 				<!-- check the current page -->
-				{% assign filename = "docs/" | append: basename %}
-				{% assign exists = "false" %}
-				{% for page_name in candidate_pages %}
-					{% if page_name == filename %}
-						{% assign exists = true %}
-					{% endif %}
-				{% endfor %}
-		
-				{% if exists == true %}
-					<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>dev</a></li>
+				{% assign filename = "docs/dev/" | append: basename %}
+
+				{% if candidate_pages contains filename %}
+					<li class="latest"><a href='{{ site.baseurl }}/docs/dev/{{ basename | replace: ".md", "" }}'>dev</a></li>
 				{% endif %}
 				<!-- check the archived pages -->
 				{% for item in site.data.versions %}
 					{% assign filename = "docs/archive/" | append: item.version | append: "/" | append: basename %}
-					{% assign exists = "false" %}
-					{% for page_name in candidate_pages %}
-						{% if page_name == filename %}
-							{% assign exists = true %}
-						{% endif %}
-					{% endfor %}
-					{% if exists == true %}
+					{% if candidate_pages contains filename %}
 						<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item.version }}</a></li>
 					{% endif %}
 				{% endfor %}

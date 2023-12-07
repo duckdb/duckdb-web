@@ -17,4 +17,4 @@ title: Node.js API
 ---
 ` + docs;
 
-fs.writeFileSync(__dirname + '/../docs/api/nodejs/reference.md', docs);
+fs.writeFileSync(__dirname + '/../docs/dev/api/nodejs/reference.md', docs);

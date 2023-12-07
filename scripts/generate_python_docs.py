@@ -14,6 +14,8 @@ FRONTMATTER = """\
 # this file is GENERATED, regenerate it with scripts/generate_python_docs.py
 layout: docu
 title: Python Client API
+redirect_from:
+- /docs/api/python/reference/
 ---
 """
 
@@ -56,7 +58,7 @@ def main():
         version('pandas'),
     )
 
-    destdir = join(dirname(__file__), "../docs/api/python/reference/")
+    destdir = join(dirname(__file__), "../docs/dev/api/python/reference/")
     app = Sphinx(
         srcdir=destdir + "templates",
         confdir=None,

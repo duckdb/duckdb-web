@@ -299,7 +299,7 @@ with open("../_config.yml") as config_file, open("metadata/metadata.yaml", "w") 
           ---
         """))
 
-docs_root = "../docs"
+docs_root = "../docs/"
 
 # compile concatenated document
 with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.md", "w") as of:

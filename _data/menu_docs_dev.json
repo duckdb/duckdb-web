@@ -8,7 +8,7 @@
     {
       "page": "Guides",
       "open": true,
-      "slug": "guides/",
+      "slug": "dev/guides/",
       "mainfolderitems": [
         {
           "page": "Overview",
@@ -225,7 +225,7 @@
     {
       "page": "Documentation",
       "open": true,
-      "slug": "",
+      "slug": "dev/",
       "mainfolderitems": [
         {
           "page": "Connect",

@@ -181,7 +181,7 @@ def extract_functions(text, full_path):
         }
 
 
-function_dir = os.path.sep.join('docs/sql/functions'.split('/'))
+function_dir = os.path.sep.join('docs/dev/sql/functions'.split('/'))
 files = os.listdir(function_dir)
 files.sort()
 for file in files:

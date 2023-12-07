@@ -64,9 +64,6 @@ def main():
 
     functions = sorted(functions, key=lambda fn: fn['name'])
 
-    with open('docs/functions.json', 'w') as fh:
-        json.dump(functions, fh, indent=2)
-
 
 if __name__ == '__main__':
     main()

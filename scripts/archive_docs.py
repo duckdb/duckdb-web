@@ -109,7 +109,7 @@ def copy_file(source_path, target_path, version):
                 redirect_from_field = doc.get("redirect_from")
                 if redirect_from_field:
                     redirect_from_field_to_archive = [
-                        x.replace("docs/", f"docs/archive/{version}/")
+                        x.replace("docs/dev/", f"docs/archive/{version}/")
                         for x in redirect_from_field
                     ]
                     doc["redirect_from"] = redirect_from_field_to_archive
