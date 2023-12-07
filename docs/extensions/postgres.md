@@ -34,7 +34,7 @@ ATTACH ('dbname=postgres user=postgres host=127.0.0.1', source_schema = 'public'
 
 The `ATTACH` command takes as input a [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) - which is a set of `key=value` pairs separated by spaces. Below are some example connection strings and commonly used parameters. A full list of available parameters can be found [in the Postgres documentation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS).
 
-```
+```text
 dbname=postgresscanner
 host=localhost port=5432 dbname=mydb connect_timeout=10
 ```
@@ -102,17 +102,20 @@ ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres, READ_ONLY);
 
 Below is a list of supported operations.
 
-###### CREATE TABLE
+### CREATE TABLE
+
 ```sql
 CREATE TABLE postgres_db.tbl(id INTEGER, name VARCHAR);
 ```
 
-###### INSERT INTO
+### INSERT INTO
+
 ```sql
 INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```
 
-###### SELECT
+### SELECT
+
 ```sql
 SELECT * FROM postgres_db.tbl;
 ┌───────┬─────────┐
@@ -123,38 +126,45 @@ SELECT * FROM postgres_db.tbl;
 └───────┴─────────┘
 ```
 
-###### COPY
+### COPY
+
 ```sql
 COPY postgres_db.tbl TO 'data.parquet';
 COPY postgres_db.tbl FROM 'data.parquet';
 ```
 
-###### UPDATE
+### UPDATE
+
 ```sql
 UPDATE postgres_db.tbl SET name='Woohoo' WHERE id=42;
 ```
 
-###### DELETE
+### DELETE
+
 ```sql
 DELETE FROM postgres_db.tbl WHERE id=42;
 ```
 
-###### ALTER TABLE
+### ALTER TABLE
+
 ```sql
 ALTER TABLE postgres_db.tbl ADD COLUMN k INTEGER;
 ```
 
-###### DROP TABLE
+### DROP TABLE
+
 ```sql
 DROP TABLE postgres_db.tbl;
 ```
 
-###### CREATE VIEW
+### CREATE VIEW
+
 ```sql
 CREATE VIEW postgres_db.v1 AS SELECT 42;
 ```
 
-###### CREATE SCHEMA/DROP SCHEMA
+### CREATE SCHEMA/DROP SCHEMA
+
 ```sql
 CREATE SCHEMA postgres_db.s1;
 CREATE TABLE postgres_db.s1.integers(i int);
@@ -169,7 +179,8 @@ SELECT * FROM postgres_db.s1.integers;
 DROP SCHEMA postgres_db.s1;
 ```
 
-###### Transactions
+### Transactions
+
 ```sql
 CREATE TABLE postgres_db.tmp(i INTEGER);
 BEGIN;
@@ -199,7 +210,7 @@ The postgres_query function allows you to run arbitrary SQL within an attached d
 postgres_query(attached_database::VARCHAR, query::VARCHAR)
 ```
 
-###### Example
+### Example
 
 ```sql
 ATTACH 'dbname=postgresscanner' AS s (TYPE POSTGRES);

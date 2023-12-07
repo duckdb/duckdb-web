@@ -5,6 +5,7 @@ redirect_from:
   - docs/archive/0.9.2/extensions/sqlite_scanner
 ---
 
+
 The SQLite extension allows DuckDB to directly read and write data from a SQLite database file. The data can be queried directly from the underlying SQLite tables. Data can be loaded from SQLite tables into DuckDB tables, or vice versa.
 
 ## Installing and Loading
@@ -180,17 +181,20 @@ Many operations on SQLite tables are supported. All these operations directly mo
 
 Below is a list of supported operations.
 
-###### CREATE TABLE
+### CREATE TABLE
+
 ```sql
 CREATE TABLE sqlite_db.tbl(id INTEGER, name VARCHAR);
 ```
 
-###### INSERT INTO
+### INSERT INTO
+
 ```sql
 INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
 ```
 
-###### SELECT
+### SELECT
+
 ```sql
 SELECT * FROM sqlite_db.tbl;
 ┌───────┬─────────┐
@@ -201,38 +205,45 @@ SELECT * FROM sqlite_db.tbl;
 └───────┴─────────┘
 ```
 
-###### COPY
+### COPY
+
 ```sql
 COPY sqlite_db.tbl TO 'data.parquet';
 COPY sqlite_db.tbl FROM 'data.parquet';
 ```
 
-###### UPDATE
+### UPDATE
+
 ```sql
 UPDATE sqlite_db.tbl SET name='Woohoo' WHERE id=42;
 ```
 
-###### DELETE
+### DELETE
+
 ```sql
 DELETE FROM sqlite_db.tbl WHERE id=42;
 ```
 
-###### ALTER TABLE
+### ALTER TABLE
+
 ```sql
 ALTER TABLE sqlite_db.tbl ADD COLUMN k INTEGER;
 ```
 
-###### DROP TABLE
+### DROP TABLE
+
 ```sql
 DROP TABLE sqlite_db.tbl;
 ```
 
-###### CREATE VIEW
+### CREATE VIEW
+
 ```sql
 CREATE VIEW sqlite_db.v1 AS SELECT 42;
 ```
 
-###### Transactions
+### Transactions
+
 ```sql
 CREATE TABLE sqlite_db.tmp(i INTEGER);
 BEGIN;
