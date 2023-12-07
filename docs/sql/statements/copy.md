@@ -157,8 +157,8 @@ The below options are applicable when writing `Parquet` files.
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `compression` | The compression format to use (`uncompressed`, `snappy`, `gzip` or `zstd`). | `VARCHAR` | `snappy` |
-| `row_group_size` | The target size, i.e., number of rows, of each row-group. | `BIGINT` | 122880 |
-| `row_group_size_bytes` | The target size of each row-group. You can pass either a human-readable string, e.g., '2MB', or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order=false;`, otherwise it is ignored. | `BIGINT` | `row_group_size * 1024` |
+| `row_group_size` | The target size, i.e., number of rows, of each row group. | `BIGINT` | 122,880 |
+| `row_group_size_bytes` | The target size of each row group. You can pass either a human-readable string, e.g., '2MB', or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order=false;`, otherwise it is ignored. | `BIGINT` | `row_group_size * 1024` |
 | `field_ids` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | `STRUCT` | (empty) |
 
 Some examples of `FIELD_IDS` are:
