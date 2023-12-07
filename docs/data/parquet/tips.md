@@ -28,7 +28,7 @@ COPY (FROM generate_series(10000000)) TO 'test.parquet' (FORMAT PARQUET, PER_THR
 
 ### Selecting a `row_group_size`
 
-The `ROW_GROUP_SIZE` parameter specifies the minimum number of rows in a Parquet row group, with a minimum value equal to DuckDB's vector size (currently 2048, but adjustable when compiling DuckDB), and a default of 122880.
+The `ROW_GROUP_SIZE` parameter specifies the minimum number of rows in a Parquet row group, with a minimum value equal to DuckDB's vector size (currently 2048, but adjustable when compiling DuckDB), and a default of 122,880.
 A Parquet row group is a partition of rows, consisting of a column chunk for each column in the dataset.
 
 Compression algorithms are only applied per row group, so the larger the row group size, the more opportunities to compress the data.
