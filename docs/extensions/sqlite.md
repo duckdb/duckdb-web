@@ -67,7 +67,7 @@ SHOW TABLES;
 └────────────────────────┘
 ```
 
-You can query the tables using SQL, e.g. using the example queries from [`sakila-examples.sql`](https://github.com/duckdb/sqlite_scanner/blob/main/data/sql/sakila-examples.sql):
+You can query the tables using SQL, e.g., using the example queries from [`sakila-examples.sql`](https://github.com/duckdb/sqlite_scanner/blob/main/data/sql/sakila-examples.sql):
 
 ```sql
 SELECT
@@ -119,7 +119,7 @@ Error: Mismatch Type Error: Invalid type in column "i": column was declared as i
 This error can be avoided by setting the `sqlite_all_varchar` option:
 
 ```sql
-SET GLOBAL sqlite_all_varchar=true;
+SET GLOBAL sqlite_all_varchar = true;
 ```
 
 When set, this option overrides the type conversion rules described above, and instead always converts the SQLite columns into a `VARCHAR` column. Note that this setting must be set *before* `sqlite_attach` is called.
@@ -214,13 +214,13 @@ COPY sqlite_db.tbl FROM 'data.parquet';
 ### UPDATE
 
 ```sql
-UPDATE sqlite_db.tbl SET name='Woohoo' WHERE id=42;
+UPDATE sqlite_db.tbl SET name = 'Woohoo' WHERE id = 42;
 ```
 
 ### DELETE
 
 ```sql
-DELETE FROM sqlite_db.tbl WHERE id=42;
+DELETE FROM sqlite_db.tbl WHERE id = 42;
 ```
 
 ### ALTER TABLE
@@ -264,7 +264,7 @@ SELECT * FROM sqlite_db.tmp;
 └────────┘
 ```
 
-> The old sqlite_attach function is deprecated. It is recommended to switch over to the new ATTACH syntax.
+> The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax](../sql/statements/attach).
 
 ## GitHub Repository
 
