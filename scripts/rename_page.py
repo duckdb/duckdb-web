@@ -45,6 +45,7 @@ if not args.execute:
     print('Run with --execute to perform rename')
     print('-----------------------------------------')
 
+
 def rename_page(source, target):
     print(f'{source} -> {target}')
     if not args.execute:
@@ -53,14 +54,17 @@ def rename_page(source, target):
         text = f.read()
     index = text.find(jekyll_marker)
     if index < 0:
-        raise Exception(f"Could not find --- marker in jekyll file {source} - failed to add redirect")
+        raise Exception(
+            f"Could not find --- marker in jekyll file {source} - failed to add redirect"
+        )
     redirect_target = source.replace('.md', '')
     new_text = text[:index]
     new_text += f'\nredirect_from:\n  - {redirect_target}' + jekyll_marker
-    new_text += text[index + len(jekyll_marker):]
+    new_text += text[index + len(jekyll_marker) :]
     with open(target, 'w+') as f:
         f.write(new_text)
     os.remove(source)
+
 
 # rename the main page
 rename_page(source_page, target_page)
