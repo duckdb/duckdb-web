@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: SQLite Scanner Extension
+redirect_from:
+  - docs/archive/0.9.0/extensions/sqlite_scanner.md
 ---
 
 The `sqlite` extension allows DuckDB to directly read data from a SQLite database file. The data can be queried directly from the underlying SQLite tables, or read into DuckDB tables.

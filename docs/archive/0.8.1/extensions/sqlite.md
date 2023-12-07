@@ -1,32 +1,29 @@
 ---
 layout: docu
-title: SQLite Scanner Extension
+title: SQLite Scanner
+selected: Documentation/SQLite Scanner
+redirect_from:
+  - docs/archive/0.8.1/extensions/sqlite_scanner.md
 ---
 
 The `sqlite` extension allows DuckDB to directly read data from a SQLite database file. The data can be queried directly from the underlying SQLite tables, or read into DuckDB tables.
 
-## Installing and Loading
+## Loading the Extension
 
-To install the `sqlite` extension, run:
+In order to use the SQLite extension it must first be installed and loaded. This can be done using the following commands:
 
 ```sql
 INSTALL sqlite;
-```
-
-The extension is loaded automatically upon first use. If you prefer to load it manually, run:
-
-```sql
 LOAD sqlite;
 ```
 
 ## Usage
 
-To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function.
+To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function
 
-For example with the [`sakila.db` file](https://github.com/duckdb/sqlite_scanner/blob/main/data/db/sakila.db):
-
+For example with the bundled `sakila.db` file:
 ```sql
-ATTACH 'sakila.db' (TYPE SQLITE);
+ATTACH 'sakila.db' (TYPE sqlite);
 -- or
 CALL sqlite_attach('sakila.db');
 ```
@@ -36,8 +33,7 @@ The tables in the file are registered as views in DuckDB, you can list them as f
 ```sql
 PRAGMA show_tables;
 ```
-
-```text
+```
 ┌────────────────────────┐
 │          name          │
 ├────────────────────────┤
@@ -65,29 +61,28 @@ PRAGMA show_tables;
 └────────────────────────┘
 ```
 
-Then you can query those views normally using SQL, e.g., using the example queries from [`sakila-examples.sql`](https://github.com/duckdb/sqlite_scanner/blob/main/data/sql/sakila-examples.sql):
+Then you can query those views normally using SQL, e.g. using the example queries from sakila-examples.sql
 
 ```sql
-SELECT
-    cat.name AS category_name,
-    sum(ifnull(pay.amount, 0)) AS revenue
-FROM category cat
-LEFT JOIN film_category flm_cat
-       ON cat.category_id = flm_cat.category_id
-LEFT JOIN film fil
-       ON flm_cat.film_id = fil.film_id
-LEFT JOIN inventory inv
-       ON fil.film_id = inv.film_id
-LEFT JOIN rental ren
-       ON inv.inventory_id = ren.inventory_id
-LEFT JOIN payment pay
-       ON ren.rental_id = pay.rental_id
-GROUP BY cat.name
-ORDER BY revenue DESC
-LIMIT 5;
+SELECT cat.name category_name, 
+       Sum(Ifnull(pay.amount, 0)) revenue 
+FROM   category cat 
+       LEFT JOIN film_category flm_cat 
+              ON cat.category_id = flm_cat.category_id 
+       LEFT JOIN film fil 
+              ON flm_cat.film_id = fil.film_id 
+       LEFT JOIN inventory inv 
+              ON fil.film_id = inv.film_id 
+       LEFT JOIN rental ren 
+              ON inv.inventory_id = ren.inventory_id 
+       LEFT JOIN payment pay 
+              ON ren.rental_id = pay.rental_id 
+GROUP  BY cat.name 
+ORDER  BY revenue DESC 
+LIMIT  5; 
 ```
 
-## Querying Individual Tables
+## Querying individual tables
 
 Instead of attaching, you can also query individual tables using the `sqlite_scan` function.
 
@@ -100,7 +95,7 @@ SELECT * FROM sqlite_scan('sakila.db', 'film');
 SQLite is a [weakly typed database system](https://www.sqlite.org/datatype3.html). As such, when storing data in a SQLite table, types are not enforced. The following is valid SQL in SQLite:
 
 ```sql
-CREATE TABLE numbers (i INTEGER);
+CREATE TABLE numbers(i INTEGER);
 INSERT INTO numbers VALUES ('hello');
 ```
 
@@ -118,9 +113,7 @@ When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB 
 
 As DuckDB enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
 
-```text
-Error: Mismatch Type Error: Invalid type in column "i": column was declared as integer, found "hello" of type "text" instead.
-```
+> Error: Mismatch Type Error: Invalid type in column "i": column was declared as integer, found "hello" of type "text" instead.
 
 This error can be avoided by setting the `sqlite_all_varchar` option:
 
@@ -130,14 +123,13 @@ SET GLOBAL sqlite_all_varchar=true;
 
 When set, this option overrides the type conversion rules described above, and instead always converts the SQLite columns into a `VARCHAR` column. Note that this setting must be set *before* `sqlite_attach` is called.
 
-## Running More Than Once
+## Running more than once
 
 If you want to run the `sqlite_scan` procedure more than once in the same DuckDB session, you'll need to pass in the `overwrite` flag, as shown below:
 
 ```sql
-CALL sqlite_attach('sakila.db', overwrite = true);
+CALL sqlite_attach('sakila.db', overwrite=true);
 ```
 
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner)
+## Extra Information
+See [the repo](https://github.com/duckdb/sqlite_scanner) for the source code of the extension.
