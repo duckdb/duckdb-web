@@ -4,7 +4,8 @@ import argparse
 
 parser = argparse.ArgumentParser(
     description='Rename a page in the docs, propagate rename to archived versions and add correct redirects.'
-)parser.add_argument(
+)
+parser.add_argument(
     '--source',
     dest='source_file',
     action='store',
