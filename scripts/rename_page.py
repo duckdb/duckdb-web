@@ -45,8 +45,9 @@ def rename_page(source, target):
 	index = text.find(jekyll_marker)
 	if index < 0:
 		raise Exception(f"Could not find --- marker in jekyll file {source} - failed to add redirect")
+	redirect_target = source.replace('.md', '')
 	new_text = text[:index]
-	new_text += f'\nredirect_from:\n  - {source}' + jekyll_marker
+	new_text += f'\nredirect_from:\n  - {redirect_target}' + jekyll_marker
 	new_text += text[index + len(jekyll_marker):]
 	with open(target, 'w+') as f:
 		f.write(new_text)

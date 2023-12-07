@@ -2,7 +2,7 @@
 layout: docu
 title: PostgreSQL Extension
 redirect_from:
-  - docs/extensions/postgres_scanner.md
+  - docs/extensions/postgres_scanner
 ---
 
 The `postgres` extension allows DuckDB to directly read and write data from a running Postgres database instance. The data can be queried directly from the underlying Postgres database. Data can be loaded from Postgres tables into DuckDB tables, or vice versa.See the [official announcement](/2022/09/30/postgres-scanner) for implementation details and background.
