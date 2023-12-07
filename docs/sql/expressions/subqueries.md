@@ -110,7 +110,7 @@ FROM grades grades_parent
 WHERE grade=
     (SELECT min(grade)
      FROM grades
-     WHERE grades.course=grades_parent.course);
+     WHERE grades.course = grades_parent.course);
 -- {7, Math}, {8, CS}
 ```
 

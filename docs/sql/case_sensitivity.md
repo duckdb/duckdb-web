@@ -81,7 +81,7 @@ SELECT * FROM t1 NATURAL JOIN t2;
 With `preserve_identifier_case` set to `false`, all identifiers are turned into lowercase:
 
 ```sql
-SET preserve_identifier_case=false;
+SET preserve_identifier_case = false;
 CREATE TABLE CosPi AS SELECT cos(pi()) AS CosineOfPi;
 SELECT CosineOfPi FROM CosPi;
 ```

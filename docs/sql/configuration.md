@@ -11,13 +11,13 @@ They can also be reset to their original values using the `RESET` statement.
 
 ```sql
 -- set the memory limit of the system to 10GB
-SET memory_limit='10GB';
+SET memory_limit = '10GB';
 -- configure the system to use 1 thread
 SET threads TO 1;
 -- enable printing of a progress bar during long-running queries
-SET enable_progress_bar=true;
+SET enable_progress_bar = true;
 -- set the default null order to NULLS LAST
-PRAGMA default_null_order='nulls_last';
+PRAGMA default_null_order = 'nulls_last';
 
 -- show a list of all available settings
 SELECT * FROM duckdb_settings();

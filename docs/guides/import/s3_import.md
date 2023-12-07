@@ -19,20 +19,20 @@ After loading the `httpfs` extension, set up the credentials and S3 region to re
 resides needs to be configured:
 
 ```sql
-SET s3_region='us-east-1';
+SET s3_region = 'us-east-1';
 ```
 
 With the only the region set, public S3 data can be queried. To query private S3 data, you need to either use an access key and secret:
 
 ```sql
-SET s3_access_key_id='<AWS access key id>';
-SET s3_secret_access_key='<AWS secret access key>';
+SET s3_access_key_id = '<AWS access key id>';
+SET s3_secret_access_key = '<AWS secret access key>';
 ```
 
 or a session token:
 
 ```sql
-SET s3_session_token='<AWS session token>';
+SET s3_session_token = '<AWS session token>';
 ```
 
 After the `httpfs` extension is set up and the S3 configuration is set correctly, Parquet files can be read from S3 using the following command:
@@ -47,9 +47,9 @@ For Google Cloud Storage (GCS), the Interoperability API enables you to have acc
 You need to create [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and declare them:
 
 ```sql
-SET s3_endpoint='storage.googleapis.com';
-SET s3_access_key_id='key_id';
-SET s3_secret_access_key='access_key';
+SET s3_endpoint = 'storage.googleapis.com';
+SET s3_access_key_id = 'key_id';
+SET s3_secret_access_key = 'access_key';
 ```
 
 Please note you will need to use the `s3://` URL to read your data.
@@ -63,10 +63,10 @@ SELECT * FROM read_parquet('s3://<gcs_bucket>/<file>');
 For Cloudflare R2, the [S3 Compatibility API](https://developers.cloudflare.com/r2/data-access/s3-api/api/) allows you to use DuckDB's S3 support to read and write from R2 buckets. You will need to [generate an S3 auth token](https://developers.cloudflare.com/r2/data-access/s3-api/tokens/) and update the `s3_endpoint` used:
 
 ```sql
-SET s3_region="auto"
-SET s3_endpoint='<your-account-id>.r2.cloudflarestorage.com';
-SET s3_access_key_id='key_id';
-SET s3_secret_access_key='access_key';
+SET s3_region = "auto"
+SET s3_endpoint = '<your-account-id>.r2.cloudflarestorage.com';
+SET s3_access_key_id = 'key_id';
+SET s3_secret_access_key = 'access_key';
 ```
 
 Note that you will need to use the `s3://` URL to read your data from R2:

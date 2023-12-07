@@ -48,7 +48,7 @@ To load extensions from a custom extension repository, set the following configu
 ### Local Files
 
 ```sql
-SET custom_extension_repository='path/to/folder';
+SET custom_extension_repository = 'path/to/folder';
 ```
 
 This assumes the pointed folder has a structure similar to:
@@ -78,7 +78,7 @@ for example will look for either `icu.duckdb_extension.gz` (first) or `icu.duckd
 ### Remote File over http
 
 ```sql
-SET custom_extension_repository='http://nightly-extensions.duckdb.org';
+SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
 ```
 
 They work the same as local ones, and expect a similar folder structure.
@@ -86,7 +86,7 @@ They work the same as local ones, and expect a similar folder structure.
 ### Remote Files over https or s3 Protocol
 
 ```sql
-SET custom_extension_repository='s3://bucket/your-repository-name/';
+SET custom_extension_repository = 's3://bucket/your-repository-name/';
 ```
 
 Remote extension repositories act similarly to local ones, as in the file structure should be the same and either gzipped or non-gzipped file are supported.
@@ -135,7 +135,7 @@ It is also possible to specify remote paths.
 When DuckDB installs an extension, it is copied to a local directory to be cached, avoiding any network traffic.
 Any subsequent calls to `INSTALL extension_name` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
 
- by default in `~/.duckdb/extensions` but configurable via `SET extension_directory=path/to/existing/directory;`.
+ by default in `~/.duckdb/extensions` but configurable via `SET extension_directory = path/to/existing/directory;`.
 
 ```sql
 FORCE INSTALL extension_name;

@@ -14,12 +14,12 @@ INSERT INTO integers VALUES (NULL);
 
 `NULL` values have special semantics in many parts of the query as well as in many functions:
 
-> Any comparison with a `NULL` value returns `NULL`, including `NULL=NULL`.
+> Any comparison with a `NULL` value returns `NULL`, including `NULL = NULL`.
 
 You can use `IS NOT DISTINCT FROM` to perform an equality comparison where `NULL` values compare equal to each other. Use `IS (NOT) NULL` to check if a value is `NULL`.
 
 ```sql
-SELECT NULL=NULL;
+SELECT NULL = NULL;
 -- returns NULL
 SELECT NULL IS NOT DISTINCT FROM NULL;
 -- returns true

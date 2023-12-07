@@ -74,7 +74,7 @@ LOAD icu;
 Next, use the `SET TimeZone` command:
 
 ```sql
-SET TimeZone='America/Los_Angeles';
+SET TimeZone = 'America/Los_Angeles';
 ```
 
 Time binning operations for `TIMESTAMPTZ` will then be implemented using the given time zone.
@@ -101,7 +101,7 @@ Note that the `INSTALL` and `LOAD` steps are only required if the DuckDB client 
 ```sql
 INSTALL icu;
 LOAD icu;
-SET Calendar='japanese';
+SET Calendar = 'japanese';
 ```
 
 Time binning operations for `TIMESTAMPTZ` will then be implemented using the given calendar.

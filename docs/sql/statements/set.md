@@ -10,7 +10,7 @@ The `SET` statement modifies the provided DuckDB configuration option at the spe
 
 ```sql
 -- Update the `memory_limit` configuration value.
-SET memory_limit='10GB';
+SET memory_limit = '10GB';
 -- configure the system to use 1 thread
 SET threads TO 1;
 -- Change configuration option to default value

@@ -42,7 +42,7 @@ SELECT 'hello' COLLATE NOCASE.NOACCENT = 'hElLÖ';
 The collations we have seen so far have all been specified *per expression*. It is also possible to specify a default collator, either on the global database level or on a base table column. The `PRAGMA` `default_collation` can be used to specify the global default collator. This is the collator that will be used if no other one is specified.
 
 ```sql
-PRAGMA default_collation=NOCASE;
+PRAGMA default_collation = NOCASE;
 
 SELECT 'hello' = 'HeLlo';
 -- true
@@ -66,12 +66,12 @@ SELECT name FROM names WHERE name = 'hannes' COLLATE NOCASE;
 CREATE TABLE other_names (name VARCHAR COLLATE NOCASE);
 INSERT INTO other_names VALUES ('HÄNNES');
 
-SELECT * FROM names, other_names WHERE names.name=other_names.name;
+SELECT * FROM names, other_names WHERE names.name = other_names.name;
 -- ERROR: Cannot combine types with different collation!
 
 -- need to manually overwrite the collation!
 
-SELECT * FROM names, other_names WHERE names.name COLLATE NOACCENT.NOCASE=other_names.name COLLATE NOACCENT.NOCASE;
+SELECT * FROM names, other_names WHERE names.name COLLATE NOACCENT.NOCASE = other_names.name COLLATE NOACCENT.NOCASE;
 -- hännes|HÄNNES
 ```
 
