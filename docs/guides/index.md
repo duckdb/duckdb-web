@@ -34,6 +34,15 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to load a Parquet file directly from S3 or GCS](../guides/import/s3_import)
 * [How to load an Iceberg table directly from S3](../guides/import/s3_iceberg_import)
 
+## Performance
+
+* [My workload is slow (troubleshooting guide)](../guides/performance/my-workload-is-slow)
+* [How to design the schema for optimal performance](../guides/performance/schema)
+* [What is the ideal hardware environment for DuckDB](../guides/performance/environment)
+* [What performance implications do Parquet files and (compressed) CSV files have](../guides/performance/file-formats)
+* [How to tune workloads](../guides/performance/how-to-tune-workloads)
+* [Benchmarks](../guides/performance/benchmarks)
+
 ## Meta Queries
 
 * [How to list all tables](../guides/meta/list_tables)

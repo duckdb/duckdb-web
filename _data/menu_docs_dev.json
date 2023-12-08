@@ -81,6 +81,36 @@
           ]
         },
         {
+          "page": "Performance",
+          "slug": "performance",
+          "subfolderitems": [
+            {
+              "page": "Schema",
+              "url": "schema"
+            },
+            {
+              "page": "Environment",
+              "url": "environment"
+            },
+            {
+              "page": "File Formats",
+              "url": "file-formats"
+            },
+            {
+              "page": "How to Tune Workloads",
+              "url": "how-to-tune-workloads"
+            },
+            {
+              "page": "My Workload is Slow",
+              "url": "my-workload-is-slow"
+            },
+            {
+              "page": "Benchmarks",
+              "url": "benchmarks"
+            },
+          ]
+        },
+        {
           "page": "Meta Queries",
           "slug": "meta",
           "subfolderitems": [
