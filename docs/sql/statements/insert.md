@@ -36,7 +36,7 @@ Each column not present in the explicit or implicit column list will be filled w
 
 If the expression for any column is not of the correct data type, automatic type conversion will be attempted.
 
-### `INSRET INTO ... [BY POSITION]`
+### `INSERT INTO ... [BY POSITION]`
 
 The order that values are inserted into the columns of the table is determined by the order that the columns were declared in.
 That is, the values supplied by the `VALUES` clause or query are associated with the column list left-to-right.
