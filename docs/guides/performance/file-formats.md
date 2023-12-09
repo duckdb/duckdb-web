@@ -79,10 +79,5 @@ CSV files are often distributed in compressed format such as GZIP archives (`.cs
 
 | Schema | Load Time |
 |---|---|
-| Load from GZIP-compressed CSV files (`.csv.gz`) | 107.104s |
+| Load from GZIP-compressed CSV files (`.csv.gz`) | 107.1s |
 | Decompressing (using parallel `gunzip`) and loading from decompressed CSV files | 121.3s |
-
-<!--
-| Decompressing the GZIP files using parallel gunzip | 32.049s |
-| Load from uncompressed CSV files (`.csv`) | 89.3s |
--->
