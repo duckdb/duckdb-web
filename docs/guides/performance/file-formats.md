@@ -5,18 +5,18 @@ title: File Formats
 
 ## Handling Parquet Files
 
-DuckDB has advanced support for Parquet files, which includes querying [directly on Parquet files](/2021/06/25/querying-parquet).
-When deciding on whether to query these files directly or first loading them to the database, you need to consider several factors.
+DuckDB has advanced support for Parquet files, which includes [directly querying Parquet files](/2021/06/25/querying-parquet).
+When deciding on whether to query these files directly or to first load them to the database, you need to consider several factors.
 
 ### Reasons for Querying Parquet Files
 
-**Availability of basic statistics:** Parquet files use a columnar storage format and contain basic statistics such as [zonemaps](schema#zonemaps). Thanks to these features, DuckDB can leverage optimizations such as projection and filter pushdown on Parquet files. Thanks to these, DuckDB can achieve reasonably good performance when running simple queries on Parquet files but will likely be unable to find a good join order for join-heavy queries due to the lack of detailed statistics. As a rule of thumb, aggregation-heavy workloads will fare better on Parquet files than join-heavy workloads.
+**Availability of basic statistics:** Parquet files use a columnar storage format and contain basic statistics such as [zonemaps](schema#zonemaps). Thanks to these features, DuckDB can leverage optimizations such as projection and filter pushdown on Parquet files. Therefore, workloads that combine projectio, filtering, and aggregation tend to perform quite well when run on Parquet files.
 
 **Storage considerations:** Loading the data from Parquet files will require approximately the same amount of space for the DuckDB database file. Therefore, if the available disk space is constrained, it is worth running the queries directly on Parquet files.
 
 ### Reasons against Querying Parquet Files
 
-**Lack of advanced statistics:** DuckDB has the hyperloglog statistics that Parquet files do not have. These improve the accuracy of cardinality estimates, and are especially important if the queries contain a large number of join operators.
+**Lack of advanced statistics:** The DuckDB database format has the [hyperloglog statistics](https://en.wikipedia.org/wiki/HyperLogLog) that Parquet files do not have. These improve the accuracy of cardinality estimates, and are especially important if the queries contain a large number of join operators.
 
 **Tip.** If you find that DuckDB produces a suboptimal join order on Parquet files, try loading the Parquet files to DuckDB tables. The improved statistics likely help obtain a better join order.
 

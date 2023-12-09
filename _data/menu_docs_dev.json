@@ -85,8 +85,16 @@
           "slug": "performance",
           "subfolderitems": [
             {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
               "page": "Schema",
               "url": "schema"
+            },
+            {
+              "page": "Indexing",
+              "url": "indexing"
             },
             {
               "page": "Environment",

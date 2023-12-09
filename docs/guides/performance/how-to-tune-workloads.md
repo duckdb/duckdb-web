@@ -5,7 +5,13 @@ title: Tuning Workloads
 
 ## Parallelism 
 
-DuckDB parallelizes the workload based on row groups. Parallelism starts at the level of row groups, which have 122,880 rows each. Therefore, for the query to run on _k_ threads, you need at least _k_ * 122,880 rows.
+### The Effect of Row Groups on Parallelism
+
+DuckDB parallelizes the workload based on _row groups,_ i.e., groups of rows that are stored together at the storage level.
+A row group in DuckDB's database format consists of max. 122,880 rows.
+Parallelism starts at the level of row groups, therefore, for a query to run on _k_ threads, it needs to scan at least _k_ * 122,880 rows.
+
+### Too Many Threads
 
 Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`PRAGMA threads = X`](../../sql/pragmas#memory_limit-threads).
 
@@ -13,12 +19,12 @@ Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to Hy
 
 If your queries are not performing as well as expected, it’s worth studying their query plans:
 * Use [`EXPLAIN`](../meta/explain) to print the physical query plan without running the query.
-* Use [`EXPLAIN ANALYZE`](../meta/explain_analyze) to run and profile the query. This will show the CPU time that each step in the query takes. Note that due to multi-threading, adding up each individual time will be larger than the total query processing time.
+* Use [`EXPLAIN ANALYZE`](../meta/explain_analyze) to run and profile the query. This will show the CPU time that each step in the query takes. Note that due to multi-threading, adding up the individual times will be larger than the total query processing time.
 
-Query plans can point to the root of performance issues. For example:
-Avoiding nested loop joins in favor or hash joins.
-A scan that does not include a filter pushdown for a filter condition that is later applied.
-Bad join orders where the cardinality of an operator explodes to billions of tuples.
+Query plans can point to the root of performance issues. A few general directions:
+* Avoid nested loop joins in favor or hash joins.
+* A scan that does not include a filter pushdown for a filter condition that is later applied performs unnecessary IO. Try rewriting the query to apply a pushdown.
+* Bad join orders where the cardinality of an operator explodes to billions of tuples should be avoided at all costs.
 
 ## Prepared Statements
 
@@ -28,7 +34,7 @@ Note that it is not a primary design goal for DuckDB to quickly execute many sma
 
 ## Querying Remote Files
 
-DuckDB uses synchronous IO when reading remote files. This means that each DuckDB thread can make at most one HTTP request at a time. If a query must make many small requests over the network, increasing DuckDB’s `threads` setting to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
+DuckDB uses synchronous IO when reading remote files. This means that each DuckDB thread can make at most one HTTP request at a time. If a query must make many small requests over the network, increasing DuckDB's [`threads` setting](../../sql/pragmas#memory_limit-threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
 
 ## Best Practices for Using Connections
 
