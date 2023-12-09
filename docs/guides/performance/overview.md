@@ -3,8 +3,8 @@ layout: docu
 title: Performance Guide
 ---
 
-DuckDB aims to automatically achieve high performance using proven default configurations and having a forgiving architecture. Of course, there are still opportunities for tuning the system for specific workloads. This page contains guidelines for achieving good performance when loading and processing data with DuckDB.
+DuckDB aims to automatically achieve high performance by using well-chosen default configurations and having a forgiving architecture. Of course, there are still opportunities for tuning the system for specific workloads. The Performance Guide's page contain guidelines and tips for achieving good performance when loading and processing data with DuckDB.
 
-The guides include several microbenchmarks, these use the [LDBC BI SF300 data set](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst) (20GB `.tar.zst` archive, 21GB when decompressed into `.csv.gz` files).
+The guides include several microbenchmarks. You may find details about these on the [Benchmarks page](benchmarks).
 
 ## Pages in This Section
