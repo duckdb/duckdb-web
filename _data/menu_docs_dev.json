@@ -866,6 +866,10 @@
                 {
                   "page": "Union",
                   "url": "union"
+                },
+                {
+                  "page": "Typecasting",
+                  "url": "typecasting"
                 }
               ]
             },

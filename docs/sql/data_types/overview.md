@@ -33,6 +33,8 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `UUID` | | UUID data type |
 | `VARCHAR` | `CHAR`, `BPCHAR`, `TEXT`, `STRING` | variable-length character string |
 
+Implicit and explicit typecasting is possible between numerous types, see the [Typecasting](typecasting) page for details.
+
 ## Nested / Composite Types
 
 DuckDB supports five nested data types: `ARRAY`, `LIST`, `STRUCT`, `MAP`, and `UNION`. Each supports different use cases and has a different structure. 
