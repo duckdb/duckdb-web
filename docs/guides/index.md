@@ -18,6 +18,12 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to export a table to a Parquet file](../guides/import/parquet_export)
 * [How to run a query directly on a Parquet file](../guides/import/query_parquet)
 
+### HTTP(S), S3 and GCP
+
+* [How to load a Parquet file directly from HTTP(S)](../guides/import/http_import)
+* [How to load a Parquet file directly from S3 or GCS](../guides/import/s3_import)
+* [How to load an Iceberg table directly from S3](../guides/import/s3_iceberg_import)
+ 
 ### JSON Files
 
 * [How to load a JSON file into a table](../guides/import/json_import)
@@ -28,11 +34,11 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to load an Excel file into a table](../guides/import/excel_import)
 * [How to export a table to an Excel file](../guides/import/excel_export)
 
-### HTTP(S), S3 and GCP
+### Querying Other Database Systems
 
-* [How to load a Parquet file directly from HTTP(S)](../guides/import/http_import)
-* [How to load a Parquet file directly from S3 or GCS](../guides/import/s3_import)
-* [How to load an Iceberg table directly from S3](../guides/import/s3_iceberg_import)
+* [How to directly query a PostgreSQL database](../guides/import/query_postgres)
+* [How to directly query a SQLite database](../guides/import/query_sqlite)
+* [How to directly query a MySQL database](../guides/import/query_mysql)
 
 ## Performance
 
