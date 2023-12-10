@@ -49,35 +49,38 @@ Below is a full list of all available format specifiers.
 |:-|:------|:---|
 | `%a` | Abbreviated weekday name. | Sun, Mon, ... |
 | `%A` | Full weekday name. | Sunday, Monday, ... |
-| `%w` | Weekday as a decimal number. | 0, 1, ..., 6 |
-| `%d` | Day of the month as a zero-padded decimal. | 01, 02, ..., 31 |
-| `%-d` | Day of the month as a decimal number. | 1, 2, ..., 30 |
 | `%b` | Abbreviated month name. | Jan, Feb, ..., Dec |
 | `%B` | Full month name. | January, February, ... |
-| `%m` | Month as a zero-padded decimal number. | 01, 02, ..., 12 |
-| `%-m` | Month as a decimal number. | 1, 2, ..., 12 |
-| `%y` | Year without century as a zero-padded decimal number. | 00, 01, ..., 99 |
-| `%-y` | Year without century as a decimal number. | 0, 1, ..., 99 |
-| `%Y` | Year with century as a decimal number. | 2013, 2019 etc. |
+| `%c` | ISO date and time representation | 1992-03-02 10:30:20 |
+| `%d` | Day of the month as a zero-padded decimal. | 01, 02, ..., 31 |
+| `%-d` | Day of the month as a decimal number. | 1, 2, ..., 30 |
+| `%f` | Microsecond as a decimal number, zero-padded on the left. | 000000 - 999999 |
+| `%g` | Millisecond as a decimal number, zero-padded on the left. | 000 - 999 |
+| `%G` | ISO 8601 year with century representing the year that contains the greater part of the ISO week (see `%V`). | 0001, 0002, ..., 2013, 2014, ..., 9998, 9999 |
 | `%H` | Hour (24-hour clock) as a zero-padded decimal number. | 00, 01, ..., 23 |
 | `%-H` | Hour (24-hour clock) as a decimal number. | 0, 1, ..., 23 |
 | `%I` | Hour (12-hour clock) as a zero-padded decimal number. | 01, 02, ..., 12 |
 | `%-I` | Hour (12-hour clock) as a decimal number. | 1, 2, ... 12 |
-| `%p` | Locale's AM or PM. | AM, PM |
-| `%M` | Minute as a zero-padded decimal number. | 00, 01, ..., 59 |
-| `%-M` | Minute as a decimal number. | 0, 1, ..., 59 |
-| `%S` | Second as a zero-padded decimal number. | 00, 01, ..., 59 |
-| `%-S` | Second as a decimal number. | 0, 1, ..., 59 |
-| `%g` | Millisecond as a decimal number, zero-padded on the left. | 000 - 999 |
-| `%f` | Microsecond as a decimal number, zero-padded on the left. | 000000 - 999999 |
-| `%n` | Nanosecond as a decimal number, zero-padded on the left. | 000000000 - 999999999 |
-| `%z` | [Time offset from UTC](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC) in the form ±HH:MM, ±HHMM, or ±HH. | -0700 |
-| `%Z` | Time zone name. | Europe/Amsterdam  |
 | `%j` | Day of the year as a zero-padded decimal number. | 001, 002, ..., 366 |
 | `%-j` | Day of the year as a decimal number. | 1, 2, ..., 366 |
-| `%U` | Week number of the year (Sunday as the first day of the week). | 00, 01, ..., 53 |
-| `%W` | Week number of the year (Monday as the first day of the week). | 00, 01, ..., 53 |
-| `%c` | ISO date and time representation | 1992-03-02 10:30:20 |
+| `%m` | Month as a zero-padded decimal number. | 01, 02, ..., 12 |
+| `%-m` | Month as a decimal number. | 1, 2, ..., 12 |
+| `%M` | Minute as a zero-padded decimal number. | 00, 01, ..., 59 |
+| `%-M` | Minute as a decimal number. | 0, 1, ..., 59 |
+| `%n` | Nanosecond as a decimal number, zero-padded on the left. | 000000000 - 999999999 |
+| `%p` | Locale's AM or PM. | AM, PM |
+| `%S` | Second as a zero-padded decimal number. | 00, 01, ..., 59 |
+| `%-S` | Second as a decimal number. | 0, 1, ..., 59 |
+| `%u` | ISO 8601 weekday as a decimal number where 1 is Monday. | 1, 2, ..., 7 |
+| `%U` | Week number of the year. Week 01 starts on the first Sunday of the year, so there can be week 00. Note that this is not compliant with the week date standard in ISO-8601. | 00, 01, ..., 53 |
+| `%V` | ISO 8601 week as a decimal number with Monday as the first day of the week. Week 01 is the week containing Jan 4. | 01, ..., 53 |
+| `%w` | Weekday as a decimal number. | 0, 1, ..., 6 |
+| `%W` | Week number of the year. Week 01 starts on the first Monday of the year, so there can be week 00. Note that this is not compliant with the week date standard in ISO-8601. | 00, 01, ..., 53 |
 | `%x` | ISO date representation | 1992-03-02 |
 | `%X` | ISO time representation | 10:30:20 |
+| `%y` | Year without century as a zero-padded decimal number. | 00, 01, ..., 99 |
+| `%-y` | Year without century as a decimal number. | 0, 1, ..., 99 |
+| `%Y` | Year with century as a decimal number. | 2013, 2019 etc. |
+| `%z` | [Time offset from UTC](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC) in the form ±HH:MM, ±HHMM, or ±HH. | -0700 |
+| `%Z` | Time zone name. | Europe/Amsterdam  |
 | `%%` | A literal '%' character. | % |
