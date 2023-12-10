@@ -49,7 +49,7 @@ host=localhost port=5432 dbname=mydb connect_timeout=10
 | dbname   | Database Name                        | [user]         |
 | passfile | Name of file passwords are stored in | ~/.pgpass      |
 
-The tables in the file can be read as if they were normal DuckDB tables, but the underlying data is read directly from Postgres at query time.
+The tables in the PostgreSQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from Postgres at query time.
 
 ```sql
 D SHOW TABLES;

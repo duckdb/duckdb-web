@@ -41,7 +41,7 @@ The connection string determines the parameters for how to connect to MySQL as a
 | port     | 0            |
 | socket   | NULL         |
 
-The tables in the file can be read as if they were normal DuckDB tables, but the underlying data is read directly from MySQL at query time.
+The tables in the MySQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from MySQL at query time.
 
 ```sql
 SHOW TABLES;
@@ -98,21 +98,23 @@ Note that if modifications are not desired, `ATTACH` can be run with the `READ_O
 ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE mysql_scanner, READ_ONLY);
 ```
 
+## Supported Operations
+
 Below is a list of supported operations.
 
-### CREATE TABLE
+### `CREATE TABLE`
 
 ```sql
 CREATE TABLE mysql_db.tbl(id INTEGER, name VARCHAR);
 ```
 
-### INSERT INTO
+### `INSERT INTO`
 
 ```sql
 INSERT INTO mysql_db.tbl VALUES (42, 'DuckDB');
 ```
 
-### SELECT
+### `SELECT`
 
 ```sql
 SELECT * FROM mysql_db.tbl;
@@ -126,44 +128,44 @@ SELECT * FROM mysql_db.tbl;
 └───────┴─────────┘
 ```
 
-### COPY
+### `COPY`
 
 ```sql
 COPY mysql_db.tbl TO 'data.parquet';
 COPY mysql_db.tbl FROM 'data.parquet';
 ```
 
-### UPDATE
+### `UPDATE`
 
 ```sql
 UPDATE mysql_db.tbl SET name = 'Woohoo' WHERE id = 42;
 ```
 
-### DELETE
+### `DELETE`
 
 ```sql
 DELETE FROM mysql_db.tbl WHERE id = 42;
 ```
 
-### ALTER TABLE
+### `ALTER TABLE`
 
 ```sql
 ALTER TABLE mysql_db.tbl ADD COLUMN k INTEGER;
 ```
 
-### DROP TABLE
+### `DROP TABLE`
 
 ```sql
 DROP TABLE mysql_db.tbl;
 ```
 
-### CREATE VIEW
+### `CREATE VIEW`
 
 ```sql
 CREATE VIEW mysql_db.v1 AS SELECT 42;
 ```
 
-### CREATE SCHEMA/DROP SCHEMA
+### `CREATE SCHEMA` and `DROP SCHEMA`
 
 ```sql
 CREATE SCHEMA mysql_db.s1;
@@ -214,22 +216,6 @@ SELECT * FROM mysql_db.tmp;
 
 > Note that DDL statements are not transactional in MySQL.
 
-## Building & Loading the Extension
+## GitHub Repository
 
-The extension currently cannot be installed from a binary package. To build it, type:
-
-```bash
-make
-```
-
-To run, run the bundled `duckdb` shell:
-
-```bash
-./build/release/duckdb -unsigned
-```
-
-Then, load the MySQL extension like so:
-
-```sql
-LOAD 'build/release/extension/mysql/mysql.duckdb_extension';
-```
+[<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_mysql)

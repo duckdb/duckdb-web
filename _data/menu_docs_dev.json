@@ -71,12 +71,16 @@
               "url": "excel_export"
             },
             {
-              "page": "SQLite Import",
-              "url": "query_sqlite"
+              "page": "MySQL Import",
+              "url": "query_mysql"
             },
             {
               "page": "PostgreSQL Import",
               "url": "query_postgres"
+            },
+            {
+              "page": "SQLite Import",
+              "url": "query_sqlite"
             }
           ]
         },

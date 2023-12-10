@@ -3,7 +3,11 @@ layout: docu
 title: SQLite Import
 ---
 
-To run a query directly on a SQLite file, the `sqlite` extension is required.  This can be installed use the `INSTALL` SQL command. This only needs to be run once.
+To run a query directly on a SQLite file, the `sqlite` extension is required.
+
+## Installation and Loading
+
+The extension can be installed use the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL sqlite;
@@ -14,6 +18,8 @@ To load the `sqlite` extension for usage, use the `LOAD` SQL command:
 ```sql
 LOAD sqlite;
 ```
+
+## Usage
 
 After the SQLite extension is installed, tables can be queried from SQLite using the `sqlite_scan` function:
 
