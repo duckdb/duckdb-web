@@ -17,7 +17,7 @@ _**Best Practice:**_ Use the most restrictive types possible when creating colum
 
 We illustrate the difference using the `creationDate` column of the [LDBC Comment table on scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet). This table has approx. 554 million unordered timestamp values. We run a simple aggregation query that returns the average day-of-the month from the timestamps in two configurations.
 
-First, we use a `DATETIME` to encode the values and run the query using the [`extract` datetime function](../../sql/functions/timestamp.md):
+First, we use a `DATETIME` to encode the values and run the query using the [`extract` datetime function](../../sql/functions/timestamp):
 
 ```sql
 SELECT avg(extract('day' FROM creationDate)) FROM Comment;
