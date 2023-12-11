@@ -12,4 +12,4 @@ If you find that your workload in DuckDB is slow, we recommend performing the fo
 1. Are you using a fast disk? Network-attached disks can cause the workload to slow down, especially for [larger than memory workloads](environment#disk).
 1. Does the query plan look right? Study it with [`EXPLAIN`](how-to-tune-workloads#profiling) to ensure there are no exploding joins and filters are pushed down when possible.
 1. Is the workload running [in parallel](how-to-tune-workloads#paralellism)? Use `htop` or the operating system's task manager to observe this.
-1. Is DuckDB using too many threads? Try [limiting the amount of threads](how-to-tune-workloads#parallelism).
+1. Is DuckDB using too many threads? Try [limiting the amount of threads](how-to-tune-workloads#parallelism-multi-core-processing).

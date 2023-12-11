@@ -254,7 +254,7 @@ PRAGMA enable_checkpoint_on_shutdown;
 PRAGMA disable_checkpoint_on_shutdown;
 ```
 
-### `temp_directory` for spilling data to disk
+### `temp_directory` for Spilling Data to Disk
 
 By default, DuckDB uses the `.tmp` directory to spill to disk. To change this, use:
 

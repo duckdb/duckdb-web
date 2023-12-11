@@ -3,7 +3,7 @@ layout: docu
 title: Tuning Workloads
 ---
 
-## Parallelism 
+## Parallelism (Multi-Core Processing)
 
 ### The Effect of Row Groups on Parallelism
 
@@ -13,7 +13,46 @@ Parallelism starts at the level of row groups, therefore, for a query to run on 
 
 ### Too Many Threads
 
-Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`PRAGMA threads = X`](../../sql/pragmas#memory_limit-threads).
+Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`](../../sql/pragmas#memory_limit-threads).
+
+## Larger-Than-Memory Workloads (Out-of-Core Processing)
+
+A key strength of DuckDB is support for larger-than-memory workloads, i.e., it is able to process data sets that are larger than the available system memory (also known as _out-of-core processing_).
+It can also run queries where the intermediate results cannot fit into memory.
+This section explains the prerequisites, scope, and known limitations of larger-than-memory processing in DuckDB.
+
+### Prerequisites
+
+Spilling to disk is automatically supported when connected to a [persistent database file](../../api/cli/overview#in-memory-vs-persistent-database).
+
+When running in in-memory mode, DuckDB cannot use disk to offload data if it does not fit into main memory.
+To enable offloading in the absence of a persistent database file, use the [`SET temp_directory` statement](../../sql/pragmas#temp_directory-for-spilling-data-to-disk):
+
+```sql
+SET temp_directory = '/path/to/temp.tmp'
+```
+
+### Operators
+
+Some operators cannot output a single row until the last row of their input has been seen.
+These are called _blocking operators_ as they require their entire input to be buffered,
+and are the most memory-instensive operators in relational database systems.
+The main blocking operators are the following:
+* _sorting:_ [`ORDER BY`](../../sql/query_syntax/orderby),
+* _grouping:_ [`GROUP BY`](../../sql/query_syntax/groupby),
+* _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`](../../sql/window_functions),
+* _joining:_ [`JOIN`](../../sql/query_syntax/from#joins).
+
+DuckDB supports larger-than-memory processing for all of these operators.
+
+### Limitations
+
+DuckDB strives to always complete workloads even if they are larger-than-memory.
+That said, there are some limitations:
+
+* If multiple blocking operators appear in the same query, DuckDB may still throw an out-of-memory exception due to the complex interplay of these operators.
+* Currently, some [aggregate functions](../../sql/aggregates), such as `list()` and `string_agg()`, do not support offloading to disk.
+* The `PIVOT` operation [internally uses the `list()` function](../../sql/statements/pivot#internals), therefore it is subject to the same limitation.
 
 ## Profiling
 
