@@ -13,7 +13,7 @@ As a rule of thumb, aggregation-heavy workloads require approx. 5 GB memory per 
 In AWS EC2, the former are available as general-purpose instances (e.g., [M7g](https://aws.amazon.com/ec2/instance-types/m7g/))
 and the latter as memory-optimized instances (e.g., [R7g](https://aws.amazon.com/ec2/instance-types/r7g/)).
 
-_**Best Practice:**_ Aim for 5-10 GB memory / CPU core.
+_**Best Practice:**_ Aim for 5-10 GB memory per CPU core.
 
 ### Disk
 
