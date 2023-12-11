@@ -31,3 +31,9 @@ The default `CHECKPOINT` command will fail if there are any running transactions
 transactions and execute the checkpoint operation.
 
 Also see the related [`PRAGMA` option](../pragmas#force_checkpoint) for further behavior modification.
+
+### Vacuuming Deletes
+
+As part of performing a checkpoint (automatic or otherwise), vacuuming deleted rows is triggered. Note that this does not remove all deletes, but rather merges row groups that have a significant amount of deletes together. In the current implementation this requires ~25% of rows to be deleted in adjacent row groups.
+
+> The [`VACUUM` statement](vacuum) does _not_ trigger vacuuming deletes.
