@@ -32,7 +32,7 @@ _**Best Practice:**_ If you have the storage space available, and have a join-he
 
 ### The Effect of Row Group Sizes
 
-DuckDB works best on Parquet files with row groups of 100K-1M rows each. The reason for this is that DuckDB can only [parallelize over row groups](#parallelism) – so if a Parquet file has a single giant row group it can only be processed by a single thread. You can use the [`parquet_metadata` function](../../data/parquet/metadata.html#parquet-metadata) to figure out how many row groups a Parquet file has. When writing Parquet files, use the [`row_group_size`](../../sql/statements/copy#parquet-options) option.
+DuckDB works best on Parquet files with row groups of 100K-1M rows each. The reason for this is that DuckDB can only [parallelize over row groups](how-to-tune-workloads#parallelism-multi-core-processing) – so if a Parquet file has a single giant row group it can only be processed by a single thread. You can use the [`parquet_metadata` function](../../data/parquet/metadata.html#parquet-metadata) to figure out how many row groups a Parquet file has. When writing Parquet files, use the [`row_group_size`](../../sql/statements/copy#parquet-options) option.
 
 #### Microbenchmark: Running Aggregation Query at Different Row Group Sizes
 
