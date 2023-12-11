@@ -24,8 +24,8 @@ LOAD mysql;
 To make a MySQL database accessible to DuckDB use the `ATTACH` command:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysqlscanner (TYPE mysql_scanner)
-USE mysqlscanner;
+ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql)
+USE mysqldb;
 ```
 
 The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below.
