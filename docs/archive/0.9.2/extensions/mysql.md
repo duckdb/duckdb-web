@@ -1,11 +1,25 @@
 ---
 layout: docu
 title: MySQL Scanner Extension
+redirect_from:
+  - docs/archive/0.9.2/extensions/mysql_scanner
 ---
 
-The [`mysql_scanner` extension](https://github.com/duckdb/duckdb_mysql) allows DuckDB to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DuckDB tables, or vice versa.
+The [`mysql` extension](https://github.com/duckdb/duckdb_mysql) allows DuckDB to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DuckDB tables, or vice versa.
 
-> The MySQL Scanner extension is currently in preview and not yet available as a binary package.
+## Installing and Loading
+
+To install the `mysql` extension, run:
+
+```sql
+INSTALL mysql;
+```
+
+The extension is loaded automatically upon first use. If you prefer to load it manually, run:
+
+```sql
+LOAD mysql;
+```
 
 ## Reading Data from MySQL
 
@@ -13,8 +27,8 @@ The [`mysql_scanner` extension](https://github.com/duckdb/duckdb_mysql) allows D
 To make a MySQL database accessible to DuckDB use the `ATTACH` command:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysqlscanner (TYPE mysql_scanner)
-USE mysqlscanner;
+ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql)
+USE mysqldb;
 ```
 
 The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below.
