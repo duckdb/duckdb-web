@@ -13,6 +13,8 @@ The value class represents a single value of any type.
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_varchar"><span class="nf">duckdb_create_varchar</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_varchar_length"><span class="nf">duckdb_create_varchar_length</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_int64"><span class="nf">duckdb_create_int64</span></a>(<span class="kt">int64_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_struct_value"><span class="nf">duckdb_create_struct_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_list_value"><span class="nf">duckdb_create_list_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
 <span class="kt">char</span> *<a href="#duckdb_get_varchar"><span class="nf">duckdb_get_varchar</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">int64_t</span> <a href="#duckdb_get_int64"><span class="nf">duckdb_get_int64</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 </code></pre></div></div>
@@ -115,6 +117,70 @@ Creates a value from an int64
 * `value`
 
 The bigint value
+* `returns`
+
+The value. This must be destroyed with `duckdb_destroy_value`.
+
+<br>
+
+
+### `duckdb_create_struct_value`
+
+---
+Creates a struct value from a type and an array of values
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_struct_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> *<span class="nv">values
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `type`
+
+The type of the struct
+* `values`
+
+The values for the struct fields
+* `returns`
+
+The value. This must be destroyed with `duckdb_destroy_value`.
+
+<br>
+
+
+### `duckdb_create_list_value`
+
+---
+Creates a list value from a type and an array of values of length `value_count`
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_list_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> *<span class="nv">values</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">value_count
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `type`
+
+The type of the list
+* `values`
+
+The values for the list
+* `value_count`
+
+The number of values in the list
 * `returns`
 
 The value. This must be destroyed with `duckdb_destroy_value`.
