@@ -82,6 +82,7 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_blob"><span class="nf">duckdb_bind_blob</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_null"><span class="nf">duckdb_bind_null</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared"><span class="nf">duckdb_execute_prepared</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_streaming"><span class="nf">duckdb_execute_prepared_streaming</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_arrow"><span class="nf">duckdb_execute_prepared_arrow</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_arrow</span> *<span class="nv">out_result</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_arrow_scan"><span class="nf">duckdb_arrow_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_arrow_array_scan"><span class="nf">duckdb_arrow_array_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>, <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>, <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream</span>);
@@ -707,6 +708,40 @@ between calls to this function.
 
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `prepared_statement`
+
+The prepared statement to execute.
+* `out_result`
+
+The query result.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+
+### `duckdb_execute_prepared_streaming`
+
+---
+Executes the prepared statement with the given bound parameters, and returns an optionally-streaming query result.
+To determine if the resulting query was in fact streamed, use `duckdb_result_is_streaming`
+
+This method can be called multiple times for each prepared statement, and the parameters can be modified
+between calls to this function.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared_streaming</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
 </span>);

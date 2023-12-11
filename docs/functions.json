@@ -2727,6 +2727,17 @@
     "result": "QQ=="
   },
   {
+    "name": "to_centuries",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a century interval",
+    "example": "to_centuries(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "500 years"
+  },
+  {
     "name": "to_days",
     "parameters": [
       "integer"
@@ -2736,6 +2747,17 @@
     "type": "scalar_function",
     "category": "date",
     "result": "5 days"
+  },
+  {
+    "name": "to_decades",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a decade interval",
+    "example": "to_decades(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "50 years"
   },
   {
     "name": "to_hours",
@@ -2758,6 +2780,17 @@
     "type": "scalar_function",
     "category": "date",
     "result": "00:00:00.000005"
+  },
+  {
+    "name": "to_millennia",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a millenium interval",
+    "example": "to_millennia(1)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "1000 years"
   },
   {
     "name": "to_milliseconds",
@@ -2813,6 +2846,17 @@
     "type": "scalar_function",
     "category": "date",
     "result": "2010-09-13 04:32:03.5+00"
+  },
+  {
+    "name": "to_weeks",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a week interval",
+    "example": "to_weeks(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "35 days"
   },
   {
     "name": "to_years",
@@ -3028,7 +3072,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.3-dev879"
+    "result": "v0.9.3-dev1257"
   },
   {
     "name": "week",
