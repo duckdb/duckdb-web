@@ -28,6 +28,8 @@ CREATE TABLE t1 AS SELECT 42 AS i, 84 AS j;
 CREATE TABLE t1 AS SELECT * FROM read_csv('path/file.csv');
 -- we can use the FROM-first syntax to omit 'SELECT *'
 CREATE TABLE t1 AS FROM read_csv('path/file.csv');
+-- copy the schema of t2 to t1
+CREATE TABLE t1 AS FROM t2 LIMIT 0;
 ```
 
 ## Temporary Tables
