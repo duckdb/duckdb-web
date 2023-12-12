@@ -7,7 +7,7 @@ title: Tuning Workloads
 
 ### The Effect of Row Groups on Parallelism
 
-DuckDB parallelizes the workload based on _row groups,_ i.e., groups of rows that are stored together at the storage level.
+DuckDB parallelizes the workload based on _[row groups](/internals/storage#row-groups),_ i.e., groups of rows that are stored together at the storage level.
 A row group in DuckDB's database format consists of max. 122,880 rows.
 Parallelism starts at the level of row groups, therefore, for a query to run on _k_ threads, it needs to scan at least _k_ * 122,880 rows.
 
