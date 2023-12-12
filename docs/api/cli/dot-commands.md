@@ -36,7 +36,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.log FILE|off`          | Turn logging on or off.  `FILE` can be `stderr`/`stdout`                                                     |
 | `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode](#output-formats)                        |
 | `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode](#output-formats) |
-| `.mode MODE ?TABLE?`     | Set output mode                                                                                              |
+| `.mode MODE ?TABLE?`     | Set [output mode](output-formats)                                                                            |
 | `.nullvalue STRING`      | Use `STRING` in place of `NULL` values                                                                       |
 | `.once ?OPTIONS? ?FILE?` | Output for the next SQL command only to `FILE`                                                               |
 | `.open ?OPTIONS? ?FILE?` | Close existing database and reopen `FILE`                                                                    |
