@@ -13,6 +13,8 @@ If a `MACRO` is temporary, it is only usable within the same database connection
 
 ## Examples
 
+### Scalar Macros
+
 ```sql
 -- create a macro that adds two expressions (a and b)
 CREATE MACRO add(a, b) AS a + b;
@@ -23,14 +25,17 @@ CREATE MACRO one() AS (SELECT 1);
 -- create a macro with a common table expression
 -- (parameter names get priority over column names: disambiguate using the table name)
 CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a FROM cte);
--- macro's are schema-dependent, and have an alias: FUNCTION
+-- macros are schema-dependent, and have an alias: FUNCTION
 CREATE FUNCTION main.myavg(x) AS sum(x) / count(x);
 -- create a macro with default constant parameters
 CREATE MACRO add_default(a, b := 5) AS a + b;
 -- create a macro arr_append (with a functionality equivalent to array_append)
 CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
+```
 
--- TABLE MACROS
+### Table Macros
+
+```sql
 -- create a table macro without parameters
 CREATE MACRO static_table() AS TABLE SELECT 'Hello' AS column1, 'World' AS column2;
 -- create a table macro with parameters (that can be of any type)
@@ -63,8 +68,9 @@ SELECT add(1, 2);
 -- 3
 ```
 
-Macro's can have default parameters.  Unlike some languages, default parameters must be named
+Macros can have default parameters.  Unlike some languages, default parameters must be named
 when the macro is invoked.
+
 ```sql
 -- b is a default parameter
 CREATE MACRO add_default(a, b := 5) AS a + b;
@@ -83,7 +89,7 @@ SELECT triple_add(40, c := 1, b := 1);
 -- 42
 ```
 
-When macro's are used, they are expanded (i.e., replaced with the original expression), and the parameters within the expanded expression are replaced with the supplied arguments. Step by step:
+When macros are used, they are expanded (i.e., replaced with the original expression), and the parameters within the expanded expression are replaced with the supplied arguments. Step by step:
 ```sql
 -- the 'add' macro we defined above is used in a query
 SELECT add(40, 2);

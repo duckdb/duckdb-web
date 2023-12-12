@@ -22,12 +22,14 @@ CREATE TABLE t1 (
     date DATE UNIQUE,
     time TIMESTAMP
 );
--- create a table from the result of a query
+-- create table as select (CTAS)
 CREATE TABLE t1 AS SELECT 42 AS i, 84 AS j;
 -- create a table from a CSV file (automatically detecting column names and types)
 CREATE TABLE t1 AS SELECT * FROM read_csv('path/file.csv');
 -- we can use the FROM-first syntax to omit 'SELECT *'
 CREATE TABLE t1 AS FROM read_csv('path/file.csv');
+-- copy the schema of t2 to t1
+CREATE TABLE t1 AS FROM t2 LIMIT 0;
 ```
 
 ## Temporary Tables
@@ -46,7 +48,7 @@ SET temp_directory = '/path/to/directory/';
 
 Temporary tables are part of the `temp.main` schema. While discouraged, their names can overlap with the names of the regular database tables. In these cases, use their fully qualified name, e.g., `temp.main.t1`, for disambiguation.
 
-## Create or Replace
+## `CREATE OR REPLACE`
 
 The `CREATE OR REPLACE` syntax allows a new table to be created or for an existing table to be overwritten by the new table. This is shorthand for dropping the existing table and then creating the new one.
 
@@ -55,7 +57,7 @@ The `CREATE OR REPLACE` syntax allows a new table to be created or for an existi
 CREATE OR REPLACE TABLE t1 (i INTEGER, j INTEGER);
 ```
 
-## If Not Exists
+## `IF NOT EXISTS`
 
 The `IF NOT EXISTS` syntax will only proceed with the creation of the table if it does not already exist. If the table already exists, no action will be taken and the existing table will remain in the database. 
 

@@ -34,7 +34,7 @@ Another practical way to exploit ordering is to use the `INTEGER` type with auto
 ## ART Indexes
 
 DuckDB allows defining [Adaptive Radix Tree (ART) indexes](https://db.in.tum.de/~leis/papers/ART.pdf) in two ways.
-First, such an index is created implicitly for columns with a `PRIMARY KEY`, a `FOREIGN KEY`, and a `UNIQUE` constraint.
+First, such an index is created implicitly for columns with `PRIMARY KEY`, `FOREIGN KEY`, and `UNIQUE` [constraints](schema#constraints).
 Second, explicitly running a the [`CREATE INDEX`](../../sql/indexes) statement creates an ART index on the target column(s).
 
 The tradeoffs of having an ART index on a column are as follows:
@@ -60,20 +60,3 @@ _**Best Practices:**_
 | `CREATE UNIQUE INDEX`    | 123.038s       |
 The results show that loading the data with a primary key defined adds a significant overhead: in fact, it takes significantly longer than loading the data without a primary key and running `CREATE UNIQUE INDEX` after loading the data.
 -->
-
-## Constraints
-
-DuckDB allows defining [constraints](../../sql/constraints) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DuckDB does not rely on these indexes for join and aggregation operators (see [indexing](#indexing) for more details).
-
-_**Best Practice:**_ Do not define constraints unless your goal is to ensure data integrity.
-
-## Microbenchmark: The Effect of Primary Keys
-
-We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst). This table has approx. 554 million entries. We first create the schema without a primary key, then load the data. In the second experiment, we create the schema with a primary key, then load the data. In both cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
-
-<div class="narrow_table"></div>
-
-|      Operation           | Execution Time |
-|--------------------------|----------------|
-| Load without primary key | 92.168s        |
-| Load with primary key    | 286.765s       |
