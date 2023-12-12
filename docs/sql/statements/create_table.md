@@ -22,7 +22,7 @@ CREATE TABLE t1 (
     date DATE UNIQUE,
     time TIMESTAMP
 );
--- create a table from the result of a query
+-- create table as select (CTAS)
 CREATE TABLE t1 AS SELECT 42 AS i, 84 AS j;
 -- create a table from a CSV file (automatically detecting column names and types)
 CREATE TABLE t1 AS SELECT * FROM read_csv('path/file.csv');
