@@ -17,7 +17,7 @@ SET threads TO 1;
 -- enable printing of a progress bar during long-running queries
 SET enable_progress_bar = true;
 -- set the default null order to NULLS LAST
-PRAGMA default_null_order = 'nulls_last';
+SET default_null_order = 'nulls_last';
 
 -- show a list of all available settings
 SELECT * FROM duckdb_settings();
