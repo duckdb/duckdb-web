@@ -39,3 +39,20 @@ The results of the microbenchmark are as follows:
 | `VARCHAR` | 5.2 GB | 3.919 s |
 
 The results show that using the `DATETIME` value yields smaller storage sizes and faster processing. 
+
+## Constraints
+
+DuckDB allows defining [constraints](../../sql/constraints) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DuckDB does not rely on these indexes for join and aggregation operators (see [indexing](indexing) for more details).
+
+_**Best Practice:**_ Do not define constraints unless your goal is to ensure data integrity.
+
+## Microbenchmark: The Effect of Primary Keys
+
+We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst). This table has approx. 554 million entries. We first create the schema without a primary key, then load the data. In the second experiment, we create the schema with a primary key, then load the data. In both cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
+
+<div class="narrow_table"></div>
+
+|      Operation           | Execution Time |
+|--------------------------|----------------|
+| Load without primary key | 92.168s        |
+| Load with primary key    | 286.765s       |
