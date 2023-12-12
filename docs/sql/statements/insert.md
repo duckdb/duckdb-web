@@ -143,7 +143,7 @@ These statements finish successfully and leaves the table with a single row `<i:
 
 #### Shorthand
 
-The `INSERT OR REPLACE INTO ...` statement is a shorter syntax alternative to `INSERT INTO ... DO UPDATE SET (c1 = EXCLUDED.c1, c2 = EXCLUDED.c2, ...)`.
+The `INSERT OR REPLACE INTO ...` statement is a shorter syntax alternative to `INSERT INTO ... DO UPDATE SET c1 = EXCLUDED.c1, c2 = EXCLUDED.c2, ...`.
 That is, it updates every column of the **existing** row to the new values of the **to-be-inserted** row.
 For example, given the following input table:
 
