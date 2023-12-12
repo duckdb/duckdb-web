@@ -164,7 +164,7 @@ UNPIVOT monthly_sales
 
 
 
-### Using UNPIVOT within a SELECT statement
+### Using `UNPIVOT` within a `SELECT` statement
 
 The `UNPIVOT` statement may be included within a `SELECT` statement as a CTE ([a Common Table Expression, or WITH clause](../query_syntax/with)), or a subquery.
 This allows for an `UNPIVOT` to be used alongside other SQL logic, as well as for multiple `UNPIVOT`s to be used in one query.
@@ -256,7 +256,7 @@ Below is the full syntax diagram of the `UNPIVOT` statement.
 <div id="rrdiagram"></div>
 
 
-## SQL Standard Unpivot Syntax
+## SQL Standard `UNPIVOT` Syntax
 
 The full syntax diagram is below, but the SQL Standard `UNPIVOT` syntax can be summarized as:
 ```sql
@@ -269,7 +269,7 @@ UNPIVOT [INCLUDE NULLS] (
 
 Note that only one column can be included in the `name-column-name` expression. 
 
-### SQL Standard Unpivot Manually
+### SQL Standard `UNPIVOT` Manually
 
 To complete the basic `UNPIVOT` operation using the SQL standard syntax, only a few additions are needed.
 
@@ -303,7 +303,7 @@ FROM monthly_sales UNPIVOT (
 | 3     | cars        | May   | 500   |
 | 3     | cars        | Jun   | 600   |
 
-### SQL Standard Unpivot Dynamically Using Columns Expression
+### SQL Standard Unpivot Dynamically Using the `COLUMNS` Expression
 
 The [`COLUMNS` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically. 
 This will continue to work even if additional `month` columns are added to the dataset. 
@@ -316,7 +316,7 @@ FROM monthly_sales UNPIVOT (
 );
 ```
 
-### SQL Standard UNPIVOT into Multiple Value Columns
+### SQL Standard `UNPIVOT` into Multiple Value Columns
 
 The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported. 
 This can be useful when the goal is to reduce the extent to which a dataset is pivoted, but not completely stack all pivoted columns.
@@ -352,7 +352,7 @@ UNPIVOT (
 | 3     | cars        | q2      | 400           | 500           | 600           |
 
 
-### SQL Standard Unpivot Full Syntax Diagram
+### SQL Standard `UNPIVOT` Full Syntax Diagram
 
 Below is the full syntax diagram of the SQL Standard version of the `UNPIVOT` statement. 
 

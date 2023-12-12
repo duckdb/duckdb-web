@@ -13,6 +13,8 @@ If a `MACRO` is temporary, it is only usable within the same database connection
 
 ## Examples
 
+### Scalar Macros
+
 ```sql
 -- create a macro that adds two expressions (a and b)
 CREATE MACRO add(a, b) AS a + b;
@@ -29,8 +31,11 @@ CREATE FUNCTION main.myavg(x) AS sum(x) / count(x);
 CREATE MACRO add_default(a, b := 5) AS a + b;
 -- create a macro arr_append (with a functionality equivalent to array_append)
 CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
+```
 
--- TABLE MACROS
+### Table Macros
+
+```sql
 -- create a table macro without parameters
 CREATE MACRO static_table() AS TABLE SELECT 'Hello' AS column1, 'World' AS column2;
 -- create a table macro with parameters (that can be of any type)
