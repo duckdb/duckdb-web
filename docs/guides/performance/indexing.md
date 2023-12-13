@@ -24,7 +24,7 @@ For an example, let’s repeat the [microbenchmark for timestamps](#microbenchma
 | `DATETIME` | yes | 1.3 GB | 0.578 s |
 | `DATETIME` | no | 3.3 GB | 0.904 s |
 
-The results show that simply keeping the column order allows for improved compression, yieldin a 2.5x smaller storage size.
+The results show that simply keeping the column order allows for improved compression, yielding a 2.5x smaller storage size.
 It also allows the computation to be 1.5x faster.
 
 ### Ordered Integers
@@ -51,7 +51,7 @@ Indexes are serialized to disk and deserialized lazily, i.e., when the database 
 
 _**Best Practices:**_
 * Only use primary keys, foreign keys, or unique constraints, if these are necessary for enforcing constraints on your data.
-* Do not define explicit indexes unless you have highly-selective queries.
+* Do not define explicit indexes unless you have highly selective queries.
 * If you define an ART index, do so after bulk loading the data to the table.
 
 <!--
