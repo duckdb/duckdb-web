@@ -49,7 +49,7 @@ The table below shows the available general aggregate functions.
 | `any_value(arg)` |Returns the first _non-null_ value from arg. | `any_value(A)` | - |
 | `arg_max(arg, val)` |Finds the row with the maximum `val`. Calculates the `arg` expression at that row. | `arg_max(A, B)` | `argMax(arg, val)`, `max_by(arg, val)` |
 | `arg_min(arg, val)` |Finds the row with the minimum `val`. Calculates the `arg` expression at that row. | `arg_min(A, B)` | `argMin(arg, val)`, `min_by(arg, val)` |
-| `avg(arg)` |Calculates the average value for all tuples in arg. | `avg(A)` | - |
+| `avg(arg)` |Calculates the average value for all tuples in arg. | `avg(A)` | `mean` |
 | `bit_and(arg)` |Returns the bitwise AND of all bits in a given expression . | `bit_and(A)` | - |
 | `bit_or(arg)` |Returns the bitwise OR of all bits in a given expression.  | `bit_or(A)` | - |
 | `bit_xor(arg)` |Returns the bitwise XOR of all bits in a given expression. | `bit_xor(A)` | - |
