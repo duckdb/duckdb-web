@@ -127,9 +127,7 @@ df = pd.DataFrame({
 })
 
 ends_with = FunctionExpression('ends_with', ColumnExpression('a'), ConstantExpression('est'))
-res = duckdb.df(df).select(
-    ends_with
-).fetchall()
+res = duckdb.df(df).select(ends_with).fetchall()
 print(res)
 # [(True,), (True,), (False,), (True,)]
 ```
