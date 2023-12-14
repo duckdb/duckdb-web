@@ -300,7 +300,7 @@ SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 
 ## Lambda Functions
 
-`(parameter1, parameter2, ...) -> expression`. If the lambda function has only one parameter, then the brackets can be omitted. The parameters can have any names.
+DuckDB supports lambda functions in the form `(parameter1, parameter2, ...) -> expression`. If the lambda function has only one parameter, then the brackets can be omitted. The parameters can have any names.
 
 ```sql
 param -> param > 1
