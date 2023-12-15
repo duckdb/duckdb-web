@@ -44,7 +44,7 @@ SELECT * FROM parquet_scan(['https://domain.tld/file1.parquet', 'https://domain.
 
 ## Running Queries over S3
 
-The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
+The `httpfs` extension supports reading, writing, and globbing files on object storage servers using the AWS S3 API. S3 offers a standard API to read and write to remote files (while regular HTTP servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
 
 ### Requirements
 
@@ -61,7 +61,15 @@ The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Mi
 
 ### Configuration
 
-To be able to read or write from S3, the correct region should be set:
+#### Automatic Settings and Credential Configuration
+
+The `httpfs` extensions automatically finds the local settings for the [AWS CLI client](https://aws.amazon.com/cli/), located in `~/.aws`, and uses its configuration (e.g., region) and credentials by default.
+
+#### Configuring the S3 Settings Manually
+
+To manually configure the `httpfs` extension's S3 settings, use the following configuration options.
+
+To set the region, run:
 
 ```sql
 SET s3_region = 'us-east-1';
@@ -86,6 +94,8 @@ SET s3_url_style = 'path';
 ```
 
 However, note that this may also require updating the endpoint. For example for AWS S3 it is required to change the endpoint to `s3.<region>.amazonaws.com`.
+
+#### Setting the Credentials Manually
 
 After configuring the correct endpoint and region, public files can be read. To also read private files, authentication credentials can be added:
 
