@@ -94,15 +94,15 @@ The data generator function `dbgen` has the following parameters:
 | `step`      | `UINTEGER` | Defines the partition to be generated, indexed from 0 to `children` - 1. Must be defined when the `children` arguments is defined |
 | `suffix`    | `VARCHAR`  | Append the `suffix` to table names                                                                                                |
 
-## Generating Larger Than Memory Data Sets Scale Factors
+## Generating Larger Than Memory Data Sets
 
-To generate larger than memory data sets, run the `dbgen` function in steps. For example:
+To generate data sets for large scale factors, which yield larger than memory data sets, run the `dbgen` function in steps. For example, you may generate SF300 in 10 steps:
 
 ```sql
-CALL dbgen(sf = 1000, children = 100, step = 0);
-CALL dbgen(sf = 1000, children = 100, step = 1);
+CALL dbgen(sf = 300, children = 10, step = 0);
+CALL dbgen(sf = 300, children = 10, step = 1);
 ...
-CALL dbgen(sf = 1000, children = 100, step = 99);
+CALL dbgen(sf = 300, children = 10, step = 9);
 ```
 
 ## Limitations
