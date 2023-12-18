@@ -43,7 +43,7 @@ Thanks to DuckDB-Wasm, anyone has access to a DuckDB instance only a browser tab
 
 DuckDB-Wasm now supports DuckDB extensions.
 To demonstrate this, we will again use the [TPC-H data generation example](#running-duckdb-extensions-locally).
-To run this script in your browser, [start an online DuckDB shell that runs these commands](https://shell.duckdb.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D1)~,DESCRIBE~,COPY-customer-TO-'customer.parquet'~). The script will generate the TPC-H data set at scale factor 0.1, which corresponds to 100MB in uncompressed CSV format.
+To run this script in your browser, [start an online DuckDB shell that runs these commands](https://shell.duckdb.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D0.1)~,PRAGMA-tpch(7)~). The script will generate the TPC-H data set at scale factor 0.1, which corresponds to 100MB in uncompressed CSV format.
 
 Once the script finished, you can keep executing queries, or you could even download the `customer.parquet` file (1MB) using the following commands:
 
@@ -56,12 +56,11 @@ This will first copy the `customer.parquet` to the DuckDB-Wasm file system, then
 
 In short, your DuckDB instance, which _runs entirely within your browser,_ first installed and loaded the [TPC-H extension](/docs/extensions/tpch). It then used the extension logic to generate data and convert it to a Parquet file. Finally, you could download the Parquet file as a regular file to your local file system.
 
+<a href="https://shell.duckdb.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D0.1)~,PRAGMA-tpch(7)~">
 <img src="/images/wasm-blog-post-shell-tpch.png"
      alt="Wasm shell using the TPC-H extension"
-     width="820"
-     />
-
-TODO replace
+     width="800"
+     /></a>
 
 ## Key Features
 
@@ -81,7 +80,6 @@ Both components in the figure run within the web browser.
      alt="Overview of the architecture of DuckDB-Wasm"
      width="600"
      />
-
 
 When you load DuckDB-Wasm in your browser, there are two components that will be set up:
 A main-thread wrapper library that act as a bridge between users or code using DuckDB-Wasm and drives the background component. 
@@ -140,13 +138,11 @@ Second, we leverage Emscripten's [`dlopen` implementation](https://emscripten.or
 We see two main groups of developers using extensions with DuckDB-Wasm.
 
 * Developers working with DuckDB-Wasm: If you are building a website or a library that wraps DuckDB-Wasm, the new extension support means that there is now a wider range of functionality that can be exposed to your users.
-* Developers working on DuckDB extensions: If you have written a DuckDB extension already, or are thinking of doing so, consider porting that also to DuckDB-Wasm. It might be the easiest way to get your extension in the hands of users.
-
-In any case, the [`duckdb/extension-template` repository](https://github.com/duckdb/extension-template) is the place where to start.
+* Developers working on DuckDB extensions: If you have written a DuckDB extension, or are thinking of doing so, consider porting it to DuckDB-Wasm. The [DuckDB extension template repository](https://github.com/duckdb/extension-template) contains the configuration required for compiling to DuckDB-Wasm.
 
 ## The Spatial Extension
 
-To show the possibilities unlocked by DuckDB-Wasm extensions, and test the capabilities of what's possible, what about using the [spatial extension](/docs/extensions/spatial) within DuckDB-Wasm.
+To show the possibilities unlocked by DuckDB-Wasm extensions, and test the capabilities of what's possible, what about using the [spatial extension](/docs/extensions/spatial) within DuckDB-Wasm?
 This extension implements geospatial types and functions that allow it to work with geospatial data and relevant workloads.
 
 To install and load the spatial extension in DuckDB-Wasm, run:
@@ -172,15 +168,22 @@ SELECT borough, area, centroid::VARCHAR, count
 FROM nyc;
 ```
 
-Both in your local DuckDB client and the [online DuckDB shell](https://shell.duckdb.org/#queries=v0,INSTALL-spatial~,LOAD-spatial~,CREATE-TABLE-nyc-AS-SELECT-borough%2C-st_union_agg(geom)-AS-full_geom%2C-st_area(full_geom)-AS-area%2C-st_centroid(full_geom)-AS-centroid%2C-count(*)-AS-count-FROM-st_read('https%3A%2F%2Fraw.githubusercontent.com%2Fduckdb%2Fduckdb_spatial%2Fmain%2Ftest%2Fdata%2Fnyc_taxi%2Ftaxi_zones%2Ftaxi_zones.shp')-GROUP-BY-borough~,SELECT-borough%2C-area%2C-centroid%3A%3AVARCHAR%2C-count-FROM-nyc~) will perform the same analysis.
+Both your local DuckDB client and the [online DuckDB shell](https://shell.duckdb.org/#queries=v0,INSTALL-spatial~,LOAD-spatial~,CREATE-TABLE-nyc-AS-SELECT-borough%2C-st_union_agg(geom)-AS-full_geom%2C-st_area(full_geom)-AS-area%2C-st_centroid(full_geom)-AS-centroid%2C-count(*)-AS-count-FROM-st_read('https%3A%2F%2Fraw.githubusercontent.com%2Fduckdb%2Fduckdb_spatial%2Fmain%2Ftest%2Fdata%2Fnyc_taxi%2Ftaxi_zones%2Ftaxi_zones.shp')-GROUP-BY-borough~,SELECT-borough%2C-area%2C-centroid%3A%3AVARCHAR%2C-count-FROM-nyc~) will perform the same analysis.
 
 ## Limitations
 
-DuckDB-Wasm extensions have a few inherent limitations. For example, it is not possible to communicate with native executables living on your machine, which is required by (e.g.,) the [`aws`](/docs/extensions/aws) or [`azure`](/docs/extensions/azure) extensions. Moreover, 
-compilation to Wasm may not be currently supported for some libraries you are relying on, or capabilities might not be one-to-one with local executables due to additional requirements imposed on the browser, in particular around [non-secure HTTP requests](https://duckdb.org/docs/api/wasm/extensions#httpfs).
+DuckDB-Wasm extensions have a few inherent limitations. For example, it is not possible to communicate with native executables living on your machine, which is required by some extensions, such as the [`postgres` scanner extension](/docs/extensions/postgres).
+Moreover, compilation to Wasm may not be currently supported for some libraries you are relying on, or capabilities might not be one-to-one with local executables due to additional requirements imposed on the browser, in particular around [non-secure HTTP requests](https://duckdb.org/docs/api/wasm/extensions#httpfs).
 
 ## Conclusions
 
 In this blog post, we explained how DuckDB-Wasm supports extensions, and demonstrated with with multiple extensions: [TPC-H](/docs/extensions/tpch), [Parquet](/docs/extensions/parquet), and [spatial](/docs/extensions/spatial).
+
+Thanks to DuckDB and DuckDB-Wasm's portability, the scripts shown in this blog post also work on your smartphone:
+
+<img src="/images/wasm-blog-post-ios-shell.png"
+     alt="Wasm shell using the TPC-H extension on iOS"
+     width="400"
+     />
 
 For updates on the latest developments, follow this blog and join the Wasm channel in [our Discord](https://discord.duckdb.org). If you have an example of what's possible with extensions in DuckDB, let us know!
