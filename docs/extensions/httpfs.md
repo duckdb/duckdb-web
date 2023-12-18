@@ -245,3 +245,7 @@ Additionally, most of the configuration options can be set via environment varia
 | `s3_session_token`     | `AWS_SESSION_TOKEN`     |                                          |
 | `s3_endpoint`          | `DUCKDB_S3_ENDPOINT`    |                                          |
 | `s3_use_ssl`           | `DUCKDB_S3_USE_SSL`     |                                          |
+
+## GitHub
+
+The `httpfs` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/httpfs).

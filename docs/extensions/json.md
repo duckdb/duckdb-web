@@ -539,3 +539,7 @@ SELECT * FROM json_execute_serialized_sql(json_serialize_sql('SELECT 1 + 2'));
 SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID SQL'));
 -- Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALLY"
 ```
+
+## GitHub
+
+The `json` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/json).
