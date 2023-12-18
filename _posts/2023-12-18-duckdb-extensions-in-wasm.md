@@ -92,7 +92,7 @@ Let’s dig into how this all works.
 
 When you load DuckDB-Wasm in your browser, there are two components that will be set up:
 A library that handles interactions with the user or code using DuckDB-Wasm. This component lives in the main thread, and one of its first tasks is to initialize the second component.
-A DuckDB engine due to execute queries. This component lives in a Web Worker, and communicates with the main thread component via messages. This component has a JavaScript layer that handles messages but it’s mostly comprised of the original C++ DuckDB logic compiled down as a single WebAssembly file
+A DuckDB engine due to execute queries. This component lives in a Web Worker, and communicates with the main thread component via messages. This component has a JavaScript layer that handles messages but it’s mostly comprised of the original C++ DuckDB logic compiled down as a single WebAssembly file.
 
 
 What about adding extensions to the mix?
