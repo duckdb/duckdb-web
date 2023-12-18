@@ -47,7 +47,7 @@ jobs:
         env:
           JEKYLL_ENV: production
       - name: Upload HTML artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: html_artifact
           path: _site
@@ -79,7 +79,7 @@ jobs:
           mkdir -p ../_pdf
           mv duckdb-docs.pdf ../_pdf
       - name: Upload PDF artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pdf_artifact
           path: _pdf
@@ -89,11 +89,11 @@ jobs:
     needs: [build_html, build_pdf]
     steps:
       # download both the html and the pdf artifacts into the _site directory
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: html_artifact
           path: _site
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: pdf_artifact
           path: _site
