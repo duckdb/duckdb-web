@@ -37,3 +37,7 @@ SELECT excel_text(1234567.897, 'h:mm AM/PM') AS timestamp;
 |:--|:---|:--|:-|
 | `text(`*`number`*`, `*`format_string`*`)`       | Format the given `number` per the rules given in the `format_string` | `text(1234567.897, 'h AM/PM')`          | `9 PM`    |
 | `excel_text(`*`number`*`, `*`format_string`*`)` | Alias for `text`.                                                    | `excel_text(1234567.897, 'h:mm AM/PM')` | `9:31 PM` |
+
+## GitHub
+
+The `excel` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/excel).

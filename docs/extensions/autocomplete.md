@@ -69,3 +69,7 @@ Returns:
 | DEALLOCATE  |                0 |
 | UPDATE      |                0 |
 | DROP        |                0 |
+
+## GitHub
+
+The `autocomplete` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/autocomplete).

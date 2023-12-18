@@ -20,3 +20,7 @@ The `icu` extension introduces the following features:
 
 * [region-dependent collations](../sql/expressions/collations)
 * [time zones](../sql/data_types/timezones), used for [timestamp data types](../sql/data_types/timestamp) and [timestamp functions](../sql/functions/timestamptz)
+
+## GitHub
+
+The `icu` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/icu).

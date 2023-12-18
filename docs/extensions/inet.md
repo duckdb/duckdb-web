@@ -43,3 +43,7 @@ INSERT INTO tbl VALUES (1, '192.168.0.0/16'), (2, '127.0.0.1'), (2, '8.8.8.8');
 │     2 │ 8.8.8.8        │
 └───────┴────────────────┘
 ```
+
+## GitHub
+
+The `inet` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/inet).
