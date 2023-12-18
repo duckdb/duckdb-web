@@ -5,80 +5,73 @@ author: Carlo Piovesan
 excerpt_separator: <!--more-->
 ---
 
-    
-
 
 _TL;DR: DuckDB-Wasm users can now load DuckDB extensions, allowing them to run extensions in the browser._
 
-In this blog post, we will go over two exciting DuckDB features: the DuckDB-Wasm client and DuckDB extensions. I will discuss how these disjoint features have now been adapted to work together. These features are now available for DuckDB-Wasm users and you can try them out at <https://shell.duckdb.org>.
-
-
-
-## DuckDB-Wasm
-
-In an effort spearheaded by Andre Kohn, [DuckDB has been ported to the Web Assembly platform](/2021/10/29/duckdb-wasm.html). [WebAssembly](https://webassembly.org/), also known as Wasm, is a W3C standard language developed in recent years. Think of it as a machine-independent binary format that you can execute from within the sandbox of a Web browser.
-
-Thanks to DuckDB-Wasm, anyone has access to a DuckDB instance only a browser tab away, with all computation being executed locally within your browser and no data leaving your device. DuckDB-Wasm is a library that can be used in various deployments, but for this article we will use the Web shell, where SQL statements are entered by users line by line, with the behavior modeled after the DuckDB [CLI shell](/docs/api/cli/).
+In this blog post, we will go over two exciting DuckDB features: the DuckDB-Wasm client and DuckDB extensions. I will discuss how these disjoint features have now been adapted to work together. These features are now available for DuckDB-Wasm users and you can try them out at [shell.duckdb.org](https://shell.duckdb.org).
 
 ## DuckDB Extensions
 
 DuckDB’s philosophy is to have a lean core system to ensure robustness and portability.
 However, a competing design goal is to be flexible and allow powerful third-party libraries to be used to transform and process data within the database.
+In this regard, DuckDB was inspired by [SQLite](https://www.sqlite.org/)'s extensions:
+it has an extension mechanism that allows installing and loading extensions during runtime.
 
-Here, DuckDB was inspired by [SQLite](https://www.sqlite.org/), an in-process transactional database system and the most-deployed DBMS of all time. SQLite has plugins, so-called “extensions”, which DuckDB took inspiration from and improved upon.
+### Running DuckDB Extensions Locally
 
-For DuckDB, here is a simple end-to-end example, using the command line interface:
+For DuckDB, here is a simple end-to-end example, using the [command line interface](/docs/api/cli):
 
 ```sql
 INSTALL tpch;
 LOAD tpch;
-CALL dbgen(sf=1);
-DESCRIBE;
-COPY customer TO 'customer.parquet';
+CALL dbgen(sf=0.1);
+PRAGMA tpch(7);
 ```
 
-This script first installs the [TPC-H extension](/docs/extensions/tpch) from the official extension repository, which implemented the popular TPC-H benchmark. It then loads the TPC-H extension, uses it to populate the default database with generated data with the `dbgen` function, then shows the state the database is in using `DESCRIBE`. Finally, it copies the `customer` table to a Parquet file (~11MB) that will be saved as a file in your current work folder.
-This example demonstrates a case where we install an extension to complement DuckDB with a new feature (The TPC-H data generator) that is not part of the base DuckDB executable. Instead, it is downloaded from the extension repository, then loaded and executed locally within the framework (and with the capabilities) of DuckDB.
-Currently, there are several extensions that deal with filesystems ([HTTP(S) and AWS S3](docs/extensions/httpfs), [Azure](/docs/extensions/azure), etc.), file formats ([Parquet](/docs/extensions/parquet), [JSON](/docs/extensions/json]), or [Arrow](/docs/extensions/arrow)), database protocols ([sqlite](/docs/extensions/sqlite), [mysql](/docs/extensions/mysql), [postgresql](/docs/extensions/postgres)), utility functions ([ICU for handling time zones](/docs/extensions/icu) and [FTS for full text search](/docs/extensions/full_text_search)). Extensions can also extend the parser and type system (e.g., the [geospatial extension](/docs/extensions/spatial)).
+This script first installs the [TPC-H extension](/docs/extensions/tpch) from the official extension repository, which implements the popular TPC-H benchmark. It then loads the TPC-H extension, uses it to populate the database with generated data using the `dbgen` function, then we run [TPC-H query 7](https://github.com/duckdb/duckdb/blob/v0.9.2/extension/tpch/dbgen/queries/q07.sql).
+
+This example demonstrates a case where we install an extension to complement DuckDB with a new feature (the TPC-H data generator), which is not part of the base DuckDB executable. Instead, it is downloaded from the extension repository, then loaded and executed it locally within the framework of DuckDB.
+
+Currently, DuckDB has several extensions that deal with filesystems ([HTTP(S) and AWS S3](/docs/extensions/httpfs), [Azure](/docs/extensions/azure), etc.), file formats ([Parquet](/docs/extensions/parquet), [JSON](/docs/extensions/json), and [Arrow](/docs/extensions/arrow)), database protocols ([sqlite](/docs/extensions/sqlite), [mysql](/docs/extensions/mysql), and [postgresql](/docs/extensions/postgres)), utility functions ([ICU for handling time zones](/docs/extensions/icu) and [FTS for full text search](/docs/extensions/full_text_search)). Extensions can also extend the parser and type system (e.g., the [spatial extension](/docs/extensions/spatial)).
+
+## DuckDB-Wasm
+
+In an effort spearheaded by André Kohn, [DuckDB has been ported to the WebAssembly platform](/2021/10/29/duckdb-wasm.html) in 2021. [WebAssembly](https://webassembly.org/), also known as Wasm, is a W3C standard language developed in recent years. Think of it as a machine-independent binary format that you can execute from within the sandbox of a web browser.
+
+Thanks to DuckDB-Wasm, anyone has access to a DuckDB instance only a browser tab away, with all computation being executed locally within your browser and no data leaving your device. DuckDB-Wasm is a library that can be used in various deployments (e.g., [notebooks that run inside your browser without a server](https://observablehq.com/@cmudig/duckdb)). For simplicity, in this post we will use the Web shell, where SQL statements are entered by the user line by line, with the behavior modeled after the DuckDB [CLI shell](/docs/api/cli/).
 
 ## DuckDB Extensions, in DuckDB-Wasm!
 
-DuckDB-Wasm now supports DuckDB extensions. To try this, go to the [online DuckDB shell](https://shell.duckdb.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D1)~,DESCRIBE~,COPY-customer-TO-'customer.parquet'~), which will execute the following commands:
+DuckDB-Wasm now supports DuckDB extensions.
+To demonstrate this, we will again use the [TPC-H data generation example](#running-duckdb-extensions-locally).
+To run this script in your browser, [start an online DuckDB shell that runs these commands](https://shell.duckdb.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D1)~,DESCRIBE~,COPY-customer-TO-'customer.parquet'~). The script will generate the TPC-H data set at scale factor 0.1, which corresponds to 100MB in uncompressed CSV format.
+
+Once the script finished, you can keep executing queries, or you could even download the `customer.parquet` file (1MB) using the following commands:
 
 ```sql
-INSTALL tpch;
-LOAD tpch;
-CALL dbgen(sf=1);
-DESCRIBE;
 COPY customer TO 'customer.parquet';
-```
-
-Once the script finished, you can keep executing queries, or you could even copy the `customer.parquet` file using the following command:
-
-```sql
 .files download customer.parquet
 ```
-that will copy to ~/Dowloads/ or your relevant default download directory.
 
-In short, your DuckDB instance, which _runs entirely within your browser,_ first installed and loaded the TPC-H extension. It then used the extension logic to generate data and convert it to a Parquet file, that you could then use as a regular file.
+This will first copy the `customer.parquet` to the DuckDB-Wasm file system, then download it via your browser.
+
+In short, your DuckDB instance, which _runs entirely within your browser,_ first installed and loaded the TPC-H extension. It then used the extension logic to generate data and convert it to a Parquet file, that you could then save as a regular file to your local file system.
 
 <img src="/images/wasm-blog-post-shell-tpch.png"
      alt="Wasm shell using the TPC-H extension"
      width="820"
      />
 
-Here we are keeping at the simple example, but there will be libraries that might be helpful to the field you work on, to generate, process and transform data that suits your needs. Wrapping these as DuckDB extensions makes them easily available in DuckDB, now also via the browser.
-
-
+TODO replace
 
 ## Key Features
 
 DuckDB-Wasm’s new extension support comes with the following key features:
-DuckDB-Wasm library can be compiled with dynamic extension support.
+the DuckDB-Wasm library can be compiled with dynamic extension support.
 DuckDB extensions can be compiled to a single WebAssembly module.
-If they share the same DuckDB-version, the duckdb-wasm library AND the extension will work together
-Users and developers working with DuckDB-Wasm can now pick and choose the set of extensions they load
-DuckDB-Wasm is now much closer to the native [CLI functionality](/docs/api/cli)
+If they share the same DuckDB version, the DuckDB-Wasm library and the extension will work together.
+Users and developers working with DuckDB-Wasm can now pick and choose the set of extensions they load.
+Moreover, the DuckDB-Wasm shell's features are now much closer to the native [CLI functionality](/docs/api/cli).
 
 ## Architecture
 
