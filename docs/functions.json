@@ -3072,7 +3072,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.3-dev1257"
+    "result": "v0.9.3-dev1619"
   },
   {
     "name": "week",
