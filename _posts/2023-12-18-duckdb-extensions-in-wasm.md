@@ -36,7 +36,7 @@ Currently, DuckDB has [several extensions](/docs/extensions/official_extensions)
 
 In an effort spearheaded by André Kohn, [DuckDB was ported to the WebAssembly platform](/2021/10/29/duckdb-wasm.html) in 2021. [WebAssembly](https://webassembly.org/), also known as Wasm, is a W3C standard language developed in recent years. Think of it as a machine-independent binary format that you can execute from within the sandbox of a web browser.
 
-Thanks to DuckDB-Wasm, anyone has access to a DuckDB instance only a browser tab away, with all computation being executed locally within your browser and no data leaving your device. DuckDB-Wasm is a library that can be used in various deployments (e.g., [notebooks that run inside your browser without a server](https://observablehq.com/@cmudig/duckdb)). In this post, we will use the Web shell, where SQL statements are entered by the user line by line, with the behavior modeled after the DuckDB [CLI shell](/docs/api/cli/).
+Thanks to DuckDB-Wasm, anyone has access to a DuckDB instance only a browser tab away, with all computation being executed locally within your browser and no data leaving your device. DuckDB-Wasm is a library that can be used in various deployments (e.g., [notebooks that run inside your browser without a server](https://observablehq.com/@cmudig/duckdb)). In this post, we will use the Web shell, where SQL statements are entered by the user line by line, with the behavior modeled after the DuckDB [CLI shell](/docs/api/cli).
 
 ## DuckDB Extensions, in DuckDB-Wasm!
 
