@@ -256,6 +256,7 @@ If you would like to build DuckDB from source, avoid using the `BUILD_PYTHON=1` 
 Instead, first build the `httpfs` extension, then build and install the Python package separately using the `setup.py` script:
 
 ```bash
+pip3 install pybind11
 GEN=ninja BUILD_HTTPFS=1 make
 python3 tools/pythonpkg/setup.py install --user
 ```
