@@ -253,12 +253,17 @@ make: *** [release] Error 1
 **Solution:**
 In general, we recommended using the nightly builds, available under GitHub main (Bleeding Edge) on the [installation page](/docs/installation).
 If you would like to build DuckDB from source, avoid using the `BUILD_PYTHON=1` flag unless you are actively developing the Python library.
-Instead, first build the `httpfs` extension, then build and install the Python package separately using the `setup.py` script:
+Instead, first build the `httpfs` extension (if required), then build and install the Python package separately using pip:
 
 ```bash
-pip3 install pybind11
 GEN=ninja BUILD_HTTPFS=1 make
-python3 tools/pythonpkg/setup.py install --user
+```
+
+If the next line complains about pybind11 being missing, or `--use-pep517` not being supported, make sure you're using a modern version of pip and setuptools.
+`python3-pip` on your OS may not be modern, so you may need to run `python3 -m pip install pip -U` first.
+
+```bash
+python3 -m pip install tools/pythonpkg --use-pep517 --user
 ```
 
 ### Building the httpfs Extension on Linux
