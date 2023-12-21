@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: ASOF JOIN
+title: AsOf Join
 ---
 
 ## What is an AsOf Join?

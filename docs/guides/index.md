@@ -92,8 +92,8 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## SQL Features
 
-* [ASOF Join](../guides/sql_features/asof_join)
-* [Full Text Search](../guides/sql_features/full_text_search)
+* [As-of join](../guides/sql_features/asof_join)
+* [Full-text search](../guides/sql_features/full_text_search)
 
 ## SQL Editors and IDEs
 

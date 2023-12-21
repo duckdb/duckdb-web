@@ -229,11 +229,11 @@
           "slug": "sql_features",
           "subfolderitems": [
             {
-              "page": "ASOF JOIN",
+              "page": "AsOf Join",
               "url": "asof_join"
             },
             {
-              "page": "Full Text Search",
+              "page": "Full-Text Search",
               "url": "full_text_search"
             }
           ]
