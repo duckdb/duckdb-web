@@ -101,5 +101,5 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## Data Viewers
 
-* [How to Visualise DuckDB databases with Tableau](../guides/data_viewers/tableau)
+* [How to visualize DuckDB databases with Tableau](../guides/data_viewers/tableau)
 * [How to draw command-line plots with DuckDB and YouPlot](../guides/data_viewers/youplot)

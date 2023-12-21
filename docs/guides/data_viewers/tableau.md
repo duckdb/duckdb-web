@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Tableau - A Data Visualisation Tool
+title: Tableau - A Data Visualization Tool
 ---
 
-[Tableau](https://www.tableau.com/) is a popular commercial data visualisation tool. 
+[Tableau](https://www.tableau.com/) is a popular commercial data visualization tool. 
 In addition to a large number of built in connectors,
 it also provides generic database connectivity via ODBC and JDBC connectors.
 
