@@ -66,6 +66,7 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_int32"><span class="nf">duckdb_bind_int32</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int32_t</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_int64"><span class="nf">duckdb_bind_int64</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int64_t</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_hugeint"><span class="nf">duckdb_bind_hugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uhugeint"><span class="nf">duckdb_bind_uhugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="nv">duckdb_uhugeint</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_decimal"><span class="nf">duckdb_bind_decimal</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint8"><span class="nf">duckdb_bind_uint8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint8_t</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint16"><span class="nf">duckdb_bind_uint16</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint16_t</span> <span class="nv">val</span>);
@@ -435,6 +436,23 @@ Binds a duckdb_hugeint value to the prepared statement at the specified index.
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">duckdb_hugeint</span> <span class="nv">val
+</span>);
+</code></pre></div></div>
+<br>
+
+
+### `duckdb_bind_uhugeint`
+
+---
+Binds an duckdb_uhugeint value to the prepared statement at the specified index.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uhugeint</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="nv">duckdb_uhugeint</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
