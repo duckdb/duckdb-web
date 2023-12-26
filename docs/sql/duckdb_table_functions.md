@@ -119,7 +119,7 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 
 ## `duckdb_functions`
 
-The `duckdb_functions()` function provides metadata about the functions available in the DuckDB instance.
+The `duckdb_functions()` function provides metadata about the functions (including macros) available in the DuckDB instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
