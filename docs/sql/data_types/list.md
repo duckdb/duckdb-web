@@ -37,6 +37,8 @@ Retrieving one or more values from a list can be accomplished using brackets and
 -- For example, this can't be parsed: SELECT ['a', 'b', 'c'][1]
 ```
 
+<div class="narrow_table"></div>
+
 | example                                    | result     |
 |:-------------------------------------------|:-----------|
 | `SELECT (['a', 'b', 'c'])[3]`              | 'c'        |
