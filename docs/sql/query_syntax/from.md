@@ -223,7 +223,7 @@ It is difficult to express this in standard SQL because
 relational tables are not ordered, but imported tables (like data frames)
 or disk files (like CSVs or Parquet files) do have a natural ordering.
 
-Connecting them using this ordering is called a _positional join_:
+Connecting them using this ordering is called a _positional join:_
 
 ```sql
 -- treat two data frames as a single table
@@ -237,7 +237,7 @@ Positional joins are always `FULL OUTER` joins.
 
 A common operation when working with temporal or similarly-ordered data
 is to find the nearest (first) event in a reference table (such as prices).
-This is called an _as-of join_:
+This is called an _as-of join:_
 
 ```sql
 -- attach prices to stock trades
