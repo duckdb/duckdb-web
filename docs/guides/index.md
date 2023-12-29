@@ -92,8 +92,8 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## SQL Features
 
-* [ASOF Join](../guides/sql_features/asof_join)
-* [Full Text Search](../guides/sql_features/full_text_search)
+* [As-of join](../guides/sql_features/asof_join)
+* [Full-text search](../guides/sql_features/full_text_search)
 
 ## SQL Editors and IDEs
 
@@ -101,5 +101,5 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## Data Viewers
 
-* [How to Visualise DuckDB databases with Tableau](../guides/data_viewers/tableau)
+* [How to visualize DuckDB databases with Tableau](../guides/data_viewers/tableau)
 * [How to draw command-line plots with DuckDB and YouPlot](../guides/data_viewers/youplot)
