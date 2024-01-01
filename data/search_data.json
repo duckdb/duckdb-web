@@ -1,13 +1,6 @@
 {
 	"data": [
 		{
-			"title": "",
-			"text": "-",
-			"category": "Nested Functions",
-			"url": "/docs/sql/functions/nested",
-			"blurb": "-"
-		},
-		{
 			"title": "!",
 			"text": "! - factorial of x",
 			"category": "Numeric Functions",
