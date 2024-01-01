@@ -84,6 +84,7 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">int32_t</span> <a href="#duckdb_value_int32"><span class="nf">duckdb_value_int32</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">int64_t</span> <a href="#duckdb_value_int64"><span class="nf">duckdb_value_int64</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">duckdb_hugeint</span> <a href="#duckdb_value_hugeint"><span class="nf">duckdb_value_hugeint</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="nv">duckdb_uhugeint</span> <a href="#duckdb_value_uhugeint"><span class="nf">duckdb_value_uhugeint</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="nv">duckdb_decimal</span> <a href="#duckdb_value_decimal"><span class="nf">duckdb_value_decimal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">uint8_t</span> <a href="#duckdb_value_uint8"><span class="nf">duckdb_value_uint8</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">uint16_t</span> <a href="#duckdb_value_uint16"><span class="nf">duckdb_value_uint16</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
@@ -411,6 +412,30 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 * `returns`
 
 The duckdb_hugeint value at the specified location, or 0 if the value cannot be converted.
+
+<br>
+
+
+### `duckdb_value_uhugeint`
+
+---
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_uhugeint</span> <span class="nv">duckdb_value_uhugeint</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `returns`
+
+The duckdb_uhugeint value at the specified location, or 0 if the value cannot be converted.
 
 <br>
 

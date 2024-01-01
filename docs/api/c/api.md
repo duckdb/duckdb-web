@@ -56,6 +56,7 @@ title: C API - Complete API
 <span class="kt">int32_t</span> <a href="#duckdb_value_int32"><span class="nf">duckdb_value_int32</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">int64_t</span> <a href="#duckdb_value_int64"><span class="nf">duckdb_value_int64</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">duckdb_hugeint</span> <a href="#duckdb_value_hugeint"><span class="nf">duckdb_value_hugeint</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="nv">duckdb_uhugeint</span> <a href="#duckdb_value_uhugeint"><span class="nf">duckdb_value_uhugeint</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="nv">duckdb_decimal</span> <a href="#duckdb_value_decimal"><span class="nf">duckdb_value_decimal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">uint8_t</span> <a href="#duckdb_value_uint8"><span class="nf">duckdb_value_uint8</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">uint16_t</span> <a href="#duckdb_value_uint16"><span class="nf">duckdb_value_uint16</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
@@ -99,6 +100,12 @@ title: C API - Complete API
 <span class="nv">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
 </code></pre></div></div>
 
+### `Unsigned Hugeint Helpers`
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_uhugeint_to_double"><span class="nf">duckdb_uhugeint_to_double</span></a>(<span class="nv">duckdb_uhugeint</span> <span class="nv">val</span>);
+<span class="nv">duckdb_uhugeint</span> <a href="#duckdb_double_to_uhugeint"><span class="nf">duckdb_double_to_uhugeint</span></a>(<span class="kt">double</span> <span class="nv">val</span>);
+</code></pre></div></div>
+
 ### `Decimal Helpers`
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
@@ -122,6 +129,7 @@ title: C API - Complete API
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_int32"><span class="nf">duckdb_bind_int32</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int32_t</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_int64"><span class="nf">duckdb_bind_int64</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int64_t</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_hugeint"><span class="nf">duckdb_bind_hugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uhugeint"><span class="nf">duckdb_bind_uhugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="nv">duckdb_uhugeint</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_decimal"><span class="nf">duckdb_bind_decimal</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint8"><span class="nf">duckdb_bind_uint8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint8_t</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint16"><span class="nf">duckdb_bind_uint16</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint16_t</span> <span class="nv">val</span>);
@@ -313,6 +321,7 @@ title: C API - Complete API
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_uint16"><span class="nf">duckdb_append_uint16</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint16_t</span> <span class="nv">value</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_uint32"><span class="nf">duckdb_append_uint32</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint32_t</span> <span class="nv">value</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_uint64"><span class="nf">duckdb_append_uint64</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint64_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_uhugeint"><span class="nf">duckdb_append_uhugeint</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="nv">duckdb_uhugeint</span> <span class="nv">value</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_float"><span class="nf">duckdb_append_float</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">float</span> <span class="nv">value</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_double"><span class="nf">duckdb_append_double</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">double</span> <span class="nv">value</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_date"><span class="nf">duckdb_append_date</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_date</span> <span class="nv">value</span>);
@@ -1370,6 +1379,30 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 <br>
 
 
+### `duckdb_value_uhugeint`
+
+---
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_uhugeint</span> <span class="nv">duckdb_value_uhugeint</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `returns`
+
+The duckdb_uhugeint value at the specified location, or 0 if the value cannot be converted.
+
+<br>
+
+
 ### `duckdb_value_decimal`
 
 ---
@@ -2103,6 +2136,60 @@ The converted `duckdb_decimal` element.
 <br>
 
 
+### `duckdb_uhugeint_to_double`
+
+---
+Converts a duckdb_uhugeint object (as obtained from a `DUCKDB_TYPE_UHUGEINT` column) into a double.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_uhugeint_to_double</span>(<span class="nv">
+</span>  <span class="nv">duckdb_uhugeint</span> <span class="nv">val
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `val`
+
+The uhugeint value.
+* `returns`
+
+The converted `double` element.
+
+<br>
+
+
+### `duckdb_double_to_uhugeint`
+
+---
+Converts a double value to a duckdb_uhugeint object.
+
+If the conversion fails because the double value is too big the result will be 0.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_uhugeint</span> <span class="nv">duckdb_double_to_uhugeint</span>(<span class="nv">
+</span>  <span class="kt">double</span> <span class="nv">val
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `val`
+
+The double value.
+* `returns`
+
+The converted `duckdb_uhugeint` element.
+
+<br>
+
+
 ### `duckdb_decimal_to_double`
 
 ---
@@ -2476,6 +2563,23 @@ Binds a duckdb_hugeint value to the prepared statement at the specified index.
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">duckdb_hugeint</span> <span class="nv">val
+</span>);
+</code></pre></div></div>
+<br>
+
+
+### `duckdb_bind_uhugeint`
+
+---
+Binds an duckdb_uhugeint value to the prepared statement at the specified index.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uhugeint</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="nv">duckdb_uhugeint</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -6202,6 +6306,22 @@ Append a uint64_t value to the appender.
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint64</span>(<span class="nv">
 </span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">uint64_t</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+<br>
+
+
+### `duckdb_append_uhugeint`
+
+---
+Append a duckdb_uhugeint value to the appender.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uhugeint</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="nv">duckdb_uhugeint</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>

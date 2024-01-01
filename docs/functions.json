@@ -2762,13 +2762,13 @@
   {
     "name": "to_hours",
     "parameters": [
-      "double"
+      "integer"
     ],
     "description": "Construct a hour interval",
-    "example": "to_hours(5.5)",
+    "example": "to_hours(5)",
     "type": "scalar_function",
     "category": "date",
-    "result": "05:30:00"
+    "result": "05:00:00"
   },
   {
     "name": "to_microseconds",
@@ -2806,13 +2806,13 @@
   {
     "name": "to_minutes",
     "parameters": [
-      "double"
+      "integer"
     ],
     "description": "Construct a minute interval",
-    "example": "to_minutes(5.5)",
+    "example": "to_minutes(5)",
     "type": "scalar_function",
     "category": "date",
-    "result": "00:05:30"
+    "result": "00:05:00"
   },
   {
     "name": "to_months",
@@ -3072,7 +3072,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.3-dev1619"
+    "result": "v0.9.3-dev1990"
   },
   {
     "name": "week",
@@ -3108,6 +3108,18 @@
     "type": "scalar_function_set",
     "category": "date",
     "result": 31
+  },
+  {
+    "name": "which_secret",
+    "parameters": [
+      "path",
+      "type"
+    ],
+    "description": "Print out the name of the secret that will be used for reading a path",
+    "example": "which_secret('s3://some/authenticated/path.csv', 's3')",
+    "type": "scalar_function",
+    "category": "secret",
+    "result": ""
   },
   {
     "name": "xor",
