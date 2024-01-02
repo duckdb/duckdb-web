@@ -171,7 +171,9 @@ regexp_matches('abc', '^(b|c).*')  -- false
 regexp_matches('abc', '(?i)A')     -- true
 ```
 
-The `regexp_matches` function also supports the following options.
+### Options for Regular Expression Functions
+
+The `regexp_matches` and `regexp_replace` functions also support the following options.
 
 <div class="narrow_table"></div>
 
@@ -192,7 +194,9 @@ regexp_matches('hello\nworld', 'hello.world', 'p') -- false
 regexp_matches('hello\nworld', 'hello.world', 's') -- true
 ```
 
-The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve the best results, the `'s'` option should be passed. By default the [`RE2` library](#the-re2-library) doesn't match '.' to newline.
+### Using `regexp_matches`
+
+The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve best performance, the `'s'` option (case-sensitive matching) should be passed if applicable. Note that by default the [`RE2` library](#the-re2-library) doesn't match '.' to newline.
 
 <div class="narrow_table"></div>
 
@@ -203,8 +207,11 @@ The `regexp_matches` operator will be optimized to the `LIKE` operator when poss
 |`regexp_matches('hello world', 'hello.world', 's')`|`LIKE 'hello_world'`|
 |`regexp_matches('hello world', 'he.*rld', 's')`|`LIKE '%he%rld'`|
 
+### Using `regexp_replace`
 
-The `regexp_replace` function can be used to replace the part of a string that matches the regexp pattern with a replacement string. The notation `\d` (where d is a number indicating the group) can be used to refer to groups captured in the regular expression in the replacement string. Below are some examples:
+The `regexp_replace` function can be used to replace the part of a string that matches the regexp pattern with a replacement string. The notation `\d` (where `d` is a number indicating the group) can be used to refer to groups captured in the regular expression in the replacement string. Note that by default, `regexp_replace` only replaces the first occurrence of the regular expression. To replace all occurrences, use the global replace (`g`) flag.
+
+Some examples for using `regexp_replace`:
 
 ```sql
 regexp_replace('abc', '(b|c)', 'X')        -- aXc
@@ -213,6 +220,8 @@ regexp_replace('abc', '(b|c)', '\1\1\1\1') -- abbbbc
 regexp_replace('abc', '(.*)c', '\1e')      -- abe
 regexp_replace('abc', '(a)(b)', '\2\1')    -- bac
 ```
+
+### Using `regexp_extract`
 
 The `regexp_extract` function is used to extract a part of a string that matches the regexp pattern. A specific capturing group within the pattern can be extracted using the *`idx`* parameter. If *`idx`* is not specified, it defaults to 0, extracting the first match with the whole pattern.
 
