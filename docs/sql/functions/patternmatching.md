@@ -182,7 +182,7 @@ The `regexp_matches` function also supports the following options.
 |`'l'`|match literals instead of regular expression tokens|
 |`'m'`, `'n'`, `'p'`|newline sensitive matching|
 |`'s'`| non-newline sensitive matching|
-|`'g'`| global replace, only available for regexp_replace|
+|`'g'`| global replace, only available for `regexp_replace`|
 
 ```sql
 regexp_matches('abcd', 'ABC', 'c')-- false
