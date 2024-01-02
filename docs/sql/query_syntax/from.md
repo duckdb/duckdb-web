@@ -269,7 +269,7 @@ which will be greater than or equal to (`>=`):
 
 ```sql
 SELECT *
-FROM trades t ASOF JOIN prices p USING (symbol, when);
+FROM trades t ASOF JOIN prices p USING (symbol, "when");
 -- Returns symbol, trades.when, price (but NOT prices.when)
 ```
 
@@ -280,7 +280,7 @@ To get the `prices` times in the example, you will need to list the columns expl
 
 ```sql
 SELECT t.symbol, t.when AS trade_when, p.when AS price_when, price
-FROM trades t ASOF LEFT JOIN prices p USING (symbol, when);
+FROM trades t ASOF LEFT JOIN prices p USING (symbol, "when");
 ```
 
 ## Syntax
