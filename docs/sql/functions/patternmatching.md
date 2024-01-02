@@ -152,7 +152,7 @@ SELECT * FROM glob('*');
 |:---|:---|:---|:--|
 | `regexp_full_match(`*`string`*`, `*`regex`*`)`| Returns `true` if the entire *string* matches the *regex* | `regexp_full_match('anabanana', '(an)*')` | `false` |
 | `regexp_matches(`*`string`*`, `*`pattern`*`)` | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise | `regexp_matches('anabanana', '(an)*')` | `true` |
-| `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | If *string* contains the regexp *pattern*, replaces the matching part with *replacement* | `select regexp_replace('hello', '[lo]', '-')` | `he-lo` |
+| `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | If *string* contains the regexp *pattern*, replaces the matching part with *replacement* | `regexp_replace('hello', '[lo]', '-')` | `he-lo` |
 | `regexp_split_to_array(`*`string`*`, `*`regex`*`)` | Alias of `string_split_regex`. Splits the *string* along the *regex* | `regexp_split_to_array('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` |
 | `regexp_extract(`*`string`*`, `*`pattern `*`[, `*`idx`*`])`; | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx* | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` | `hello` |
 | `regexp_extract(`*`string`*`, `*`pattern `*`, `*`name_list`*`)`; | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list* | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` | `{'y':'2023', 'm':'04', 'd':'15'}` |
@@ -171,7 +171,9 @@ regexp_matches('abc', '^(b|c).*')  -- false
 regexp_matches('abc', '(?i)A')     -- true
 ```
 
-The `regexp_matches` function also supports the following options.
+### Options for Regular Expression Functions
+
+The `regexp_matches` and `regexp_replace` functions also support the following options.
 
 <div class="narrow_table"></div>
 
@@ -182,7 +184,7 @@ The `regexp_matches` function also supports the following options.
 |`'l'`|match literals instead of regular expression tokens|
 |`'m'`, `'n'`, `'p'`|newline sensitive matching|
 |`'s'`| non-newline sensitive matching|
-|`'g'`| global replace, only available for regexp_replace|
+|`'g'`| global replace, only available for `regexp_replace`|
 
 ```sql
 regexp_matches('abcd', 'ABC', 'c')-- false
@@ -192,7 +194,9 @@ regexp_matches('hello\nworld', 'hello.world', 'p') -- false
 regexp_matches('hello\nworld', 'hello.world', 's') -- true
 ```
 
-The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve the best results, the `'s'` option should be passed. By default the `RE2` library doesn't match '.' to newline.
+### Using `regexp_matches`
+
+The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve best performance, the `'s'` option (case-sensitive matching) should be passed if applicable. Note that by default the [`RE2` library](#the-re2-library) doesn't match '.' to newline.
 
 <div class="narrow_table"></div>
 
@@ -203,15 +207,21 @@ The `regexp_matches` operator will be optimized to the `LIKE` operator when poss
 |`regexp_matches('hello world', 'hello.world', 's')`|`LIKE 'hello_world'`|
 |`regexp_matches('hello world', 'he.*rld', 's')`|`LIKE '%he%rld'`|
 
+### Using `regexp_replace`
 
-The `regexp_replace` function can be used to replace the part of a string that matches the regexp pattern with a replacement string. The notation `\d` (where d is a number indicating the group) can be used to refer to groups captured in the regular expression in the replacement string. Below are some examples:
+The `regexp_replace` function can be used to replace the part of a string that matches the regexp pattern with a replacement string. The notation `\d` (where `d` is a number indicating the group) can be used to refer to groups captured in the regular expression in the replacement string. Note that by default, `regexp_replace` only replaces the first occurrence of the regular expression. To replace all occurrences, use the global replace (`g`) flag.
+
+Some examples for using `regexp_replace`:
 
 ```sql
 regexp_replace('abc', '(b|c)', 'X')        -- aXc
+regexp_replace('abc', '(b|c)', 'X', 'g')   -- aXX
 regexp_replace('abc', '(b|c)', '\1\1\1\1') -- abbbbc
 regexp_replace('abc', '(.*)c', '\1e')      -- abe
 regexp_replace('abc', '(a)(b)', '\2\1')    -- bac
 ```
+
+### Using `regexp_extract`
 
 The `regexp_extract` function is used to extract a part of a string that matches the regexp pattern. A specific capturing group within the pattern can be extracted using the *`idx`* parameter. If *`idx`* is not specified, it defaults to 0, extracting the first match with the whole pattern.
 
@@ -234,4 +244,6 @@ regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.
 If the number of column names is greater, then an error is generated.
 
-DuckDB uses RE2 as its regex engine. For more information see the [RE2 docs](https://github.com/google/re2/wiki/Syntax)
+## The RE2 Library
+
+DuckDB uses RE2 as its regular expression engine. For more information see the [RE2 docs](https://github.com/google/re2/wiki/Syntax)
