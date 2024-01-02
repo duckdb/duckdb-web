@@ -208,6 +208,7 @@ The `regexp_replace` function can be used to replace the part of a string that m
 
 ```sql
 regexp_replace('abc', '(b|c)', 'X')        -- aXc
+regexp_replace('abc', '(b|c)', 'X', 'g')   -- aXX
 regexp_replace('abc', '(b|c)', '\1\1\1\1') -- abbbbc
 regexp_replace('abc', '(.*)c', '\1e')      -- abe
 regexp_replace('abc', '(a)(b)', '\2\1')    -- bac
