@@ -69,6 +69,7 @@ The table below shows the available general aggregate functions.
 | `product(arg)` |Calculates the product of all tuples in arg | `product(A)` | - |
 | `string_agg(arg, sep)` |Concatenates the column string values with a separator | `string_agg(S, ',')` | `group_concat(arg, sep)`, `listagg(arg, sep)` |
 | `sum(arg)` |Calculates the sum value for all tuples in arg. | `sum(A)` | - |
+| `sum_no_overflow(arg)` |Calculates the sum value for all tuples in arg without [overflow](https://en.wikipedia.org/wiki/Integer_overflow) checks. Unlike `sum`, which works on floating-point values, `sum_no_overflow` only accepts `INTEGER` and `DECIMAL` values.| `sum_no_overflow(A)` | - |
 
 ## Approximate Aggregates
 
