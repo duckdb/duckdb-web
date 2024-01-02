@@ -50,7 +50,7 @@ The table below shows the available general aggregate functions.
 | `arg_max(arg, val)` |Finds the row with the maximum `val`. Calculates the `arg` expression at that row. | `arg_max(A, B)` | `argMax(arg, val)`, `max_by(arg, val)` |
 | `arg_min(arg, val)` |Finds the row with the minimum `val`. Calculates the `arg` expression at that row. | `arg_min(A, B)` | `argMin(arg, val)`, `min_by(arg, val)` |
 | `avg(arg)` |Calculates the average value for all tuples in arg. | `avg(A)` | `mean` |
-| `bit_and(arg)` |Returns the bitwise AND of all bits in a given expression . | `bit_and(A)` | - |
+| `bit_and(arg)` |Returns the bitwise AND of all bits in a given expression. | `bit_and(A)` | - |
 | `bit_or(arg)` |Returns the bitwise OR of all bits in a given expression.  | `bit_or(A)` | - |
 | `bit_xor(arg)` |Returns the bitwise XOR of all bits in a given expression. | `bit_xor(A)` | - |
 | `bitstring_agg(arg)` |Returns a bitstring with bits set for each distinct value. | `bitstring_agg(A)` | - |
@@ -58,16 +58,16 @@ The table below shows the available general aggregate functions.
 | `bool_or(arg)` |Returns `true` if any input value is `true`, otherwise `false`. | `bool_or(A)` | - |
 | `count(arg)` |Calculates the number of tuples in arg. | `count(A)` | - |
 | `favg(arg)` |Calculates the average using a more accurate floating point summation (Kahan Sum). | `favg(A)` | - |
-| `first(arg)` |Returns the first value of a column. | `first(A)` |`arbitrary(A)` |
+| `first(arg)` |Returns the first value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `first(A)` |`arbitrary(A)` |
 | `fsum(arg)` |Calculates the sum using a more accurate floating point summation (Kahan Sum). | `fsum(A)` | `sumKahan`, `kahan_sum` |
 | `geomean(arg)` |Calculates the geometric mean for all tuples in arg. | `geomean(A)` | `geometric_mean(A)` |
 | `histogram(arg)` |Returns a `MAP` of key-value pairs representing buckets and counts. | `histogram(A)` | - |
-| `last(arg)` |Returns the last value of a column. | `last(A)` | - |
-| `list(arg)` |Returns a `LIST` containing all the values of a column. | `list(A)` |`array_agg` |
+| `last(arg)` |Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `last(A)` | - |
+| `list(arg)` |Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `list(A)` |`array_agg` |
 | `max(arg)` |Returns the maximum value present in arg. | `max(A)` | - |
 | `min(arg)` |Returns the minimum value present in arg. | `min(A)` | - |
-| `product(arg)` |Calculates the product of all tuples in arg | `product(A)` | - |
-| `string_agg(arg, sep)` |Concatenates the column string values with a separator | `string_agg(S, ',')` | `group_concat(arg, sep)`, `listagg(arg, sep)` |
+| `product(arg)` |Calculates the product of all tuples in arg. | `product(A)` | - |
+| `string_agg(arg, sep)` |Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `string_agg(S, ',')` | `group_concat(arg, sep)`, `listagg(arg, sep)` |
 | `sum(arg)` |Calculates the sum value for all tuples in arg. | `sum(A)` | - |
 
 ## Approximate Aggregates
