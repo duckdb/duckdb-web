@@ -35,7 +35,7 @@ We summarize the main distributions in the table below.
 
 <div class="narrow_table"></div>
 
-| Extension Name | CLI (duckdb.org) | CLI (Homebrew) | Python | R | Java | Julia | Node.JS
+| Extension Name | CLI (duckdb.org) | CLI (Homebrew) | Python | R | Java | Julia | Node.js |
 |------|------|------|---|---|---|---|---|
 | [autocomplete](autocomplete) | yes | yes |     |     |     |     |     |
 | [excel](excel)               | yes |     |     |     |     |     |     |
