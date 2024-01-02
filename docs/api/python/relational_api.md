@@ -300,5 +300,5 @@ The result of relations can be converted to various types of Python structures, 
 
 The result of relations can also be directly written to files using the below methods.
 
-* `write_csv`
-* `write_parquet`
+* [`write_csv`](reference/index#duckdb.DuckDBPyRelation.write_csv)
+* [`write_parquet`](reference/index#duckdb.DuckDBPyRelation.write_parquet)
