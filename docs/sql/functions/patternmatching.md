@@ -192,7 +192,7 @@ regexp_matches('hello\nworld', 'hello.world', 'p') -- false
 regexp_matches('hello\nworld', 'hello.world', 's') -- true
 ```
 
-The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve the best results, the `'s'` option should be passed. By default the `RE2` library doesn't match '.' to newline.
+The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve the best results, the `'s'` option should be passed. By default the [`RE2` library](#the-re2-library) doesn't match '.' to newline.
 
 <div class="narrow_table"></div>
 
@@ -234,4 +234,6 @@ regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.
 If the number of column names is greater, then an error is generated.
 
-DuckDB uses RE2 as its regex engine. For more information see the [RE2 docs](https://github.com/google/re2/wiki/Syntax)
+## The RE2 Library
+
+DuckDB uses RE2 as its regular expression engine. For more information see the [RE2 docs](https://github.com/google/re2/wiki/Syntax)
