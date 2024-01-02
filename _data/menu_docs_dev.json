@@ -956,6 +956,10 @@
                   "url": "interval"
                 },
                 {
+                  "page": "Lambda Functions",
+                  "url": "lambda"
+                },
+                {
                   "page": "Nested Functions",
                   "url": "nested"
                 },
