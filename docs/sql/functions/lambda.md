@@ -3,12 +3,17 @@ layout: docu
 title: Lambda Functions
 ---
 
-DuckDB supports lambda functions in the form `(parameter1, parameter2, ...) -> expression`. If the lambda function has only one parameter, then the brackets can be omitted. The parameters can have any names.  For example, the following are all valid lambda functions:
+Lambda functions enable the use of more complex and flexible expressions in queries.
+DuckDB supports several scalar functions that accept lambda functions as parameters
+in the form `(parameter1, parameter2, ...) -> expression`.
+If the lambda function has only one parameter, then the brackets can be omitted.
+The parameters can have any names.
+For example, the following are all valid lambda functions:
 - `param -> param > 1`
 - `duck -> contains(concat(duck, 'DB'), 'duck')`
 - `(x, y) -> x + y`
 
-### Functions That Accept Lambda Functions
+### Scalar Functions That Accept Lambda Functions
 
 | Function                                                | Aliases                                                 | Description                                                                                                  | Example                                   | Result      |
 |---------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------|-------------|
@@ -17,8 +22,8 @@ DuckDB supports lambda functions in the form `(parameter1, parameter2, ...) -> e
 | [`list_reduce(`*`list`*`, `*`lambda`*`)`](#reduce)      | `array_reduce`, `reduce`                                | Returns a single value that is the result of applying the lambda function to each element of the input list. | `list_reduce([4, 5, 6], (x, y) -> x + y)` | `15`        |
 
 
-### Nesting Lambda Functions
-All lambda functions can be arbitrarily nested.
+### Nesting
+All scalar functions can be arbitrarily nested.
 
 ```sql
 -- nested lambda functions to get all squares of even list elements
@@ -128,7 +133,7 @@ SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
 `list_reduce(list, lambda)`
 
 **Description:**<br>
-The function returns a single value
+The scalar function returns a single value
 that is the result of applying the lambda function to each element of the input list.
 Starting with the first element
 and then repeatedly applying the lambda function to the result of the previous application and the next element of the list.
