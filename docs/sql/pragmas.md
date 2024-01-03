@@ -39,11 +39,16 @@ dflt_value VARCHAR, -- default value of the column, or NULL if not specified
 pk BOOLEAN          -- part of the primary key or not
 ```
 
-### `memory_limit`, `threads`
+### `memory_limit`
 
 ```sql
 -- set the memory limit
 SET memory_limit = '1GB';
+```
+
+### `threads`
+
+```sql
 -- set the amount of threads for parallel query execution
 SET threads = 4;
 ```

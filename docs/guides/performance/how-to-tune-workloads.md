@@ -13,7 +13,7 @@ Parallelism starts at the level of row groups, therefore, for a query to run on 
 
 ### Too Many Threads
 
-Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`](../../sql/pragmas#memory_limit-threads).
+Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`](../../sql/pragmas#threads).
 
 ## Larger-Than-Memory Workloads (Out-of-Core Processing)
 
@@ -73,7 +73,7 @@ Note that it is not a primary design goal for DuckDB to quickly execute many sma
 
 ## Querying Remote Files
 
-DuckDB uses synchronous IO when reading remote files. This means that each DuckDB thread can make at most one HTTP request at a time. If a query must make many small requests over the network, increasing DuckDB's [`threads` setting](../../sql/pragmas#memory_limit-threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
+DuckDB uses synchronous IO when reading remote files. This means that each DuckDB thread can make at most one HTTP request at a time. If a query must make many small requests over the network, increasing DuckDB's [`threads` setting](../../sql/pragmas#threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
 
 ## Best Practices for Using Connections
 
