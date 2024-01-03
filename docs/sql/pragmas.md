@@ -11,7 +11,6 @@ The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGM
 
 Below is a list of supported `PRAGMA` statements.
 
-
 ### Schema Information
 
 List all databases:
@@ -267,34 +266,6 @@ To show all query plans:
 SET explain_output = 'all';
 ```
 
-### Query Verification (for Development)
-
-The following `PRAGMA`s are mostly used for development and internal testing.
-
-Enable query verification:
-
-```sql
-PRAGMA enable_verification;
-```
-
-Disable query verification:
-
-```sql
-PRAGMA disable_verification;
-```
-
-Enable force parallel query processing:
-
-```sql
-PRAGMA verify_parallelism;
-```
-
-Disable force parallel query processing:
-
-```sql
-PRAGMA disable_verify_parallelism;
-```
-
 ### Full-Text Search Indexes
 
 The `create_fts_index` and `drop_fts_index` options are only available when the [`fts` extension](../extensions/full_text_search) is loaded. Their usage is documented on the [Full-Text Search extension page](../extensions/full_text_search).
@@ -443,7 +414,7 @@ The following statement returns information on the metadata store (`block_id`, `
 PRAGMA metadata_info;
 ```
 
-### Selectively Disabling Optimizers
+#### Selectively Disabling Optimizers
 
 The `disabled_optimizers` option allows selectively disabling optimization steps.
 For example, to disable `filter_pushdown` and `statistics_propagation`, run:
@@ -455,3 +426,31 @@ SET disabled_optimizers = 'filter_pushdown,statistics_propagation';
 The available optimizations can be queried using the [`duckdb_optimizers()` table function](duckdb_table_functions#duckdb_optimizers).
 
 > The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
+
+### Query Verification (for Development)
+
+The following `PRAGMA`s are mostly used for development and internal testing.
+
+Enable query verification:
+
+```sql
+PRAGMA enable_verification;
+```
+
+Disable query verification:
+
+```sql
+PRAGMA disable_verification;
+```
+
+Enable force parallel query processing:
+
+```sql
+PRAGMA verify_parallelism;
+```
+
+Disable force parallel query processing:
+
+```sql
+PRAGMA disable_verify_parallelism;
+```
