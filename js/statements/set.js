@@ -14,7 +14,7 @@ function GenerateReset(options = {}) {
     return Diagram([
         AutomaticStack([
             Keyword("RESET"),
-            Choice(0, [new Skip(), Keyword("local"), Keyword("session"), Keyword("global")]),
+            Choice(0, [new Skip(), Keyword("LOCAL"), Keyword("SESSION"), Keyword("GLOBAL")]),
             Expression("configuration-option")
         ])
     ])

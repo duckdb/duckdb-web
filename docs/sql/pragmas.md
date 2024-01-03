@@ -3,32 +3,50 @@ layout: docu
 title: Pragmas
 ---
 
-The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine. `PRAGMA` statements assigning a value can also be issued using the `SET` statement.
+The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
+
+`PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement](statements/set) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
 
 ## List of Supported `PRAGMA` Statements
 
 Below is a list of supported `PRAGMA` statements.
 
+### Schema Information
 
-### `database_list`, `show_tables`, `show_tables_expanded`, `table_info`, `show`, `functions`
+List all databases:
 
 ```sql
--- List all databases, usually one
 PRAGMA database_list;
--- List all tables
+```
+
+List all tables:
+
+```sql
 PRAGMA show_tables;
--- List all tables, with extra information, similar to DESCRIBE
+```
+
+List all tables, with extra information, similarly to [`DESCRIBE`](../guides/meta/describe):
+
+```sql
 PRAGMA show_tables_expanded;
--- Get info for a specific table
-PRAGMA table_info('table_name');
-CALL pragma_table_info('table_name');
--- Also show table structure, but slightly different format (for compatibility)
-PRAGMA show('table_name');
--- List all functions
+```
+
+To list all functions:
+
+```sql
 PRAGMA functions;
 ```
 
-`table_info` returns information about the columns of the table with name *table_name*. The exact format of the table returned is given below:
+### Table Information
+
+Get info for a specific table:
+
+```sql
+PRAGMA table_info('table_name');
+CALL pragma_table_info('table_name');
+```
+
+`table_info` returns information about the columns of the table with name `table_name`. The exact format of the table returned is given below:
 
 ```sql
 cid INTEGER,        -- cid of the column
@@ -39,19 +57,34 @@ dflt_value VARCHAR, -- default value of the column, or NULL if not specified
 pk BOOLEAN          -- part of the primary key or not
 ```
 
-### `memory_limit`, `threads`
+To also show table structure, but in a slightly different format (included for compatibility):
 
 ```sql
--- set the memory limit
+PRAGMA show('table_name');
+```
+
+### Memory Limit
+
+Set the memory limit:
+
+```sql
 SET memory_limit = '1GB';
--- set the amount of threads for parallel query execution
+SET max_memory = '1GB';
+```
+
+### Threads
+
+Set the amount of threads for parallel query execution:
+
+```sql
 SET threads = 4;
 ```
 
-### `database_size`
+### Database Size
+
+Get the file and memory size of each database:
 
 ```sql
--- get the file and memory size of each database
 SET database_size;
 CALL pragma_database_size();
 ```
@@ -70,191 +103,253 @@ memory_usage VARCHAR,  -- memory used by the database buffer manager
 memory_limit VARCHAR   -- maximum memory allowed for the database
 ```
 
-### `collations`, `default_collation`
+### Collations
+
+List all available collations:
 
 ```sql
--- list all available collations
 PRAGMA collations;
--- set the default collation to one of the available ones
+```
+
+Set the default collation to one of the available ones:
+
+```sql
 SET default_collation = 'nocase';
 ```
 
+### Ordering
 
-### `default_null_order`, `default_order`
+Set the ordering for NULLs to be either `NULLS FIRST` or `NULLS LAST`:
 
 ```sql
--- set the ordering for NULLs to be either NULLS FIRST or NULLS LAST
+SET default_null_order = 'NULLS FIRST';
 SET default_null_order = 'NULLS LAST';
--- set the default result set ordering direction to ASCENDING or DESCENDING
+```
+
+Set the default result set ordering direction to `ASCENDING` or `DESCENDING`:
+
+```sql
+SET default_order = 'ASCENDING';
 SET default_order = 'DESCENDING';
 ```
 
-### `version`
+### Version
+
+Show DuckDB version:
 
 ```sql
--- show DuckDB version
 PRAGMA version;
 CALL pragma_version();
 ```
 
-### `platform`
+### Platform
 
-`platform` returns an identifier for the platform the current DuckDB executable has been compiled for.
-This matches the platform_name as described [on the extension loading explainer](../extensions/overview#downloading-extensions-directly-from-s3).
+`platform` returns an identifier for the platform the current DuckDB executable has been compiled for, e.g., `osx_arm64`.
+The format of this identifier matches the platform name as described [on the extension loading explainer](../extensions/working_with_extensions#platforms).
+
 ```sql
--- show platform of current DuckDB executable
 PRAGMA platform;
 CALL pragma_platform();
 ```
 
-### `enable_progress_bar`, `disable_progress_bar`, `enable_profiling`, `disable_profiling`, `profiling_output`
+### Progress Bar
+
+Show progress bar when running queries:
 
 ```sql
--- Show progress bar when running queries
 PRAGMA enable_progress_bar;
--- Don't show a progress bar for running queries
+```
+
+Don't show a progress bar for running queries:
+
+```sql
 PRAGMA disable_progress_bar;
--- Enable profiling
+```
+
+### Profiling
+
+#### Enable Profiling
+
+To enable profiling:
+
+```sql
 PRAGMA enable_profiling;
 PRAGMA enable_profile;
--- Enable profiling in a specified format
--- Return the logical query plan as JSON
+```
+
+#### Profiling Format
+
+The format of the resulting profiling information can be specified as either `json`, `query_tree`, or `query_tree_optimizer`. The default format is `query_tree`, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
+
+To return the logical query plan as JSON:
+
+```sql
 SET enable_profiling = 'json';
--- Return the logical query plan
+```
+
+To return the logical query plan:
+
+```sql
 SET enable_profiling = 'query_tree';
--- Return the physical query plan
+```
+
+To return the physical query plan:
+
+```sql
 SET enable_profiling = 'query_tree_optimizer';
--- Disable profiling
+```
+
+#### Disable Profiling
+
+To disable profiling:
+
+```sql
 PRAGMA disable_profiling;
 PRAGMA disable_profile;
--- Specify a file to save the profiling output to
+```
+
+#### Profiling Output
+
+By default, profiling information is printed to the console. However, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file. **Note that the file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run.**
+
+```sql
 SET profiling_output = '/path/to/file.json';
 SET profile_output = '/path/to/file.json';
 ```
 
-Enable the gathering and printing of profiling information after the execution of a query. Optionally, the format of the resulting profiling information can be specified as either *json*, *query_tree*, or *query_tree_optimizer*. The default format is *query_tree*, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
+### Optimizer
 
-Below is an example output of the profiling information for the simple query `SELECT 42`:
-
-```text
-┌─────────────────────────────────────┐
-│┌───────────────────────────────────┐│
-││    Query Profiling Information    ││
-│└───────────────────────────────────┘│
-└─────────────────────────────────────┘
-SELECT 42;
-┌─────────────────────────────────────┐
-│┌───────────────────────────────────┐│
-││        Total Time: 0.0001s        ││
-│└───────────────────────────────────┘│
-└─────────────────────────────────────┘
-┌───────────────────────────┐
-│         PROJECTION        │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             42            │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             1             │
-│          (0.00s)          │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
-│         DUMMY_SCAN        │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             1             │
-│          (0.00s)          │
-└───────────────────────────┘
-```
-
-The printing of profiling information can be disabled again using *disable_profiling*.
-
-By default, profiling information is printed to the console. However, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file. **Note that the file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run.**
-
-### `disable_optimizer`, `enable_optimizer`
+To disable the query optimizer:
 
 ```sql
--- disables the query optimizer
 PRAGMA disable_optimizer;
--- enables the query optimizer
+```
+
+To enable the query optimizer:
+
+```sql
 PRAGMA enable_optimizer;
 ```
 
-### `log_query_path`, `explain_output`, `enable_verification`, `disable_verification`, `verify_parallelism`, `disable_verify_parallelism`
+### Logging
+
+Set a path for query logging:
 
 ```sql
--- Set a path for query logging
 SET log_query_path = '/tmp/duckdb_log/';
--- Disable query logging again
-SET log_query_path = '';
--- either show 'all' or only 'optimized' plans in the EXPLAIN output
-SET explain_output = 'optimized';
--- Enable query verification (for development)
-PRAGMA enable_verification;
--- Disable query verification (for development)
-PRAGMA disable_verification;
--- Enable force parallel query processing (for development)
-PRAGMA verify_parallelism;
--- Disable force parallel query processing (for development)
-PRAGMA disable_verify_parallelism;
 ```
 
-These are `PRAGMA`s mostly used for development and internal testing.
-
-### `create_fts_index`, `drop_fts_index`
-
-Only available when the [`fts` extension](../extensions/full_text_search) is built, [documented here](../extensions/full_text_search).
-
-### `verify_external`, `disable_verify_external`
+Disable query logging:
 
 ```sql
--- Enable verification of external operators
+SET log_query_path = '';
+```
+
+### Explain Plan Output
+
+The output of [`EXPLAIN`](statements/profiling) output can be configured to show only the physical plan. This is the default configuration.
+
+```sql
+SET explain_output = 'physical_only';
+```
+
+To only show the optimized query plan:
+
+```sql
+SET explain_output = 'optimized_only';
+```
+
+To show all query plans:
+
+```sql
+SET explain_output = 'all';
+```
+
+### Full-Text Search Indexes
+
+The `create_fts_index` and `drop_fts_index` options are only available when the [`fts` extension](../extensions/full_text_search) is loaded. Their usage is documented on the [Full-Text Search extension page](../extensions/full_text_search).
+
+### Verification of External Operators
+
+Enable verification of external operators:
+
+```sql
 PRAGMA verify_external;
--- Disable verification of external operators
+```
+
+Disable verification of external operators:
+
+```sql
 PRAGMA disable_verify_external;
 ```
 
-### `verify_serializer`, `disable_verify_serializer`
+### Verification of Round-Trip Capabilities
+
+Enable verification of round-trip capabilities for supported logical plans:
 
 ```sql
--- Enable verification of round-trip capabilities for supported Logical Plans
 PRAGMA verify_serializer;
--- Disable verification of round-trip capabilities
+```
+
+Disable verification of round-trip capabilities:
+
+```sql
 PRAGMA disable_verify_serializer;
 ```
 
-### `enable_object_cache`, `disable_object_cache`
+### Object Cache
+
+Enable caching of objects for e.g., Parquet metadata:
 
 ```sql
--- Enable caching of objects for e.g., Parquet metadata
 PRAGMA enable_object_cache;
--- Disable caching of objects
+```
+
+Disable caching of objects:
+
+```sql
 PRAGMA disable_object_cache;
 ```
 
-### `force_checkpoint`
+### Checkpoint
+
+#### Force Checkpoint
+
+When [`CHECKPOINT`](statements/checkpoint) is called when no changes are made, force a checkpoint regardless.
 
 ```sql
--- When CHECKPOINT is called when no changes are made, force a CHECKPOINT regardless.
 PRAGMA force_checkpoint;
 ```
 
-### `enable_print_progress_bar`, `disable_print_progress_bar`
+#### Checkpoint on Shutdown
+
+Run a `CHECKPOINT` on successful shutdown and delete the WAL, to leave only a single database file behind:
 
 ```sql
--- Enable printing of the progress bar, if it's enabled
-PRAGMA enable_print_progress_bar;
--- Disable printing of the progress bar
-PRAGMA disable_print_progress_bar;
+PRAGMA enable_checkpoint_on_shutdown;
 ```
 
-### `enable_checkpoint_on_shutdown`, `disable_checkpoint_on_shutdown`
+Don't run a `CHECKPOINT` on shutdown:
 
 ```sql
--- Run a CHECKPOINT on successful shutdown and delete the WAL, to leave only a single database file behind
-PRAGMA enable_checkpoint_on_shutdown;
--- Don't run a CHECKPOINT on shutdown
 PRAGMA disable_checkpoint_on_shutdown;
 ```
 
-### `temp_directory` for Spilling Data to Disk
+### Progress Bar
+
+Enable printing of the progress bar (if it's possible):
+
+```sql
+PRAGMA enable_print_progress_bar;
+```
+
+Disable printing of the progress bar:
+
+```sql
+PRAGMA disable_print_progress_bar;
+```
+
+### Temp Directory for Spilling Data to Disk
 
 By default, DuckDB uses the `.tmp` directory to spill to disk. To change this, use:
 
@@ -262,7 +357,9 @@ By default, DuckDB uses the `.tmp` directory to spill to disk. To change this, u
 SET temp_directory = '/path/to/temp.tmp'
 ```
 
-### `storage_info`
+### Storage Information
+
+To get storage information:
 
 ```sql
 PRAGMA storage_info('table_name');
@@ -292,7 +389,7 @@ This call returns the following information for the given table:
 
 See [Storage](/internals/storage) for more information.
 
-### `show_databases`
+### Show Databases
 
 The following statement is equivalent to the [`SHOW DATABASES` statement](statements/attach):
 
@@ -300,7 +397,7 @@ The following statement is equivalent to the [`SHOW DATABASES` statement](statem
 PRAGMA show_databases;
 ```
 
-### `user_agent`
+### User Agent
 
 The following statement returns the user agent information, e.g., `duckdb/v0.9.2(osx_arm64)`.
 
@@ -308,7 +405,7 @@ The following statement returns the user agent information, e.g., `duckdb/v0.9.2
 PRAGMA user_agent;
 ```
 
-### `metadata_info`
+### Metadata Information
 
 The following statement returns information on the metadata store (`block_id`, `total_blocks`, `free_blocks`, and `free_list`).
 
@@ -316,7 +413,7 @@ The following statement returns information on the metadata store (`block_id`, `
 PRAGMA metadata_info;
 ```
 
-### `disabled_optimizers`
+#### Selectively Disabling Optimizers
 
 The `disabled_optimizers` option allows selectively disabling optimization steps.
 For example, to disable `filter_pushdown` and `statistics_propagation`, run:
@@ -328,3 +425,31 @@ SET disabled_optimizers = 'filter_pushdown,statistics_propagation';
 The available optimizations can be queried using the [`duckdb_optimizers()` table function](duckdb_table_functions#duckdb_optimizers).
 
 > The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
+
+### Query Verification (for Development)
+
+The following `PRAGMA`s are mostly used for development and internal testing.
+
+Enable query verification:
+
+```sql
+PRAGMA enable_verification;
+```
+
+Disable query verification:
+
+```sql
+PRAGMA disable_verification;
+```
+
+Enable force parallel query processing:
+
+```sql
+PRAGMA verify_parallelism;
+```
+
+Disable force parallel query processing:
+
+```sql
+PRAGMA disable_verify_parallelism;
+```
