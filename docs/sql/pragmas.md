@@ -65,12 +65,18 @@ PRAGMA show('table_name');
 
 ### Memory Limit
 
-Set the memory limit:
+Set the memory limit for the buffer manager:
 
 ```sql
 SET memory_limit = '1GB';
 SET max_memory = '1GB';
 ```
+
+> The specified memory limit is only applied to the buffer manager.
+> For most queries, the buffer manager handles the majority of the data processed.
+> However, certain in-memory data structures such as [vectors](/internals/vector) and query results are allocated outside of the buffer manager.
+> Additionally, [aggregate functions](aggregates) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
+> Therefore, the actual memory consumption can be higher than the specified memory limit.
 
 ### Threads
 
