@@ -26,17 +26,18 @@ For example, the following are all valid lambda functions:
 
 All scalar functions can be arbitrarily nested.
 
+_Nested lambda functions to get all squares of even list elements_
 ```sql
--- nested lambda functions to get all squares of even list elements
 SELECT list_transform(list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0), y -> y * y);
-----
-[0, 4, 16]
 ```
 ```sql
--- nested lambda function to add each element of the first list to the sum
--- of the second list
+[0, 4, 16]
+```
+_Nested lambda function to add each element of the first list to the sum of the second list_
+```sql
 SELECT list_transform([1, 2, 3], x -> list_reduce([4, 5, 6], (a, b) -> a + b + x));
-----
+```
+```sql
 [17, 19, 21]
 ```
 
@@ -44,10 +45,11 @@ SELECT list_transform([1, 2, 3], x -> list_reduce([4, 5, 6], (a, b) -> a + b + x
 All lambda functions accept an optional extra parameter that represents the index of the current element.
 This is always the last parameter of the lambda function, and is 1-based (i.e., the first element has index 1).
 
+_Get all elements that are larger than their index_
 ```sql
--- get all elements that are larger than their index
 SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
-----
+```
+```sql
 [3, 5]
 ```
 
@@ -69,22 +71,25 @@ SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 **Return type:** Defined by the Return type of the lambda function
 
 **Examples:**  
+_Incrementing each list element by one_
 ```sql
--- incrementing each list element by one
 SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
-----
+```
+```sql
 [2, 3, NULL, 4]
 ```
+_Transforming strings_
 ```sql
--- transforming strings
 SELECT list_transform(['duck', 'a', 'b'], s -> concat(s, 'DB'));
-----
-[duckDB, aDB, bDB]
 ```
 ```sql
--- combining lambda functions with other functions
+[duckDB, aDB, bDB]
+```
+_Combining lambda functions with other functions_
+```sql
 SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
-----
+```
+```sql
 [6, 1, 7]
 ```
 
@@ -105,22 +110,25 @@ The lambda function must have the Return type of `BOOLEAN`.
 **Return type:** The same type as the input list
 
 **Examples:**  
+_Filter out negative values_
 ```sql
--- filter out negative values
 SELECT list_filter([5, -6, NULL, 7], x -> x > 0);
-----
+```
+```sql
 [5, 7]
 ```
+_Divisible by 2 and 5_
 ```sql
--- divisible by 2 and 5
 SELECT list_filter(list_filter([2, 4, 3, 1, 20, 10, 3, 30], x -> x % 2 == 0), y -> y % 5 == 0);
-----
-[20, 10, 30]
 ```
 ```sql
--- in combination with range(...) to construct lists
+[20, 10, 30]
+```
+_In combination with range(...) to construct lists_
+```sql
 SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
-----
+```
+```sql
 [1, 2, 3, 4]
 [2, 3, 4]
 [3, 4]
@@ -148,21 +156,24 @@ The list must have at least one element.
 **Return type:** The underlying list type
 
 **Examples:**  
+_Sum of all list elements_
 ```sql
---- sum of all list elements
 SELECT list_reduce([1, 2, 3, 4], (x, y) -> x + y);
-----
+```
+```sql
 10
 ```
+_Only add up list elements if they are greater than 2_
 ```sql
---- only add up list elements if they are greater than 2
 SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (x, y) -> x + y);
-----
-7
 ```
 ```sql
---- concat all list elements
+7
+```
+_Concat all list elements_
+```sql
 SELECT list_reduce(['DuckDB', 'is', 'awesome'], (x, y) -> concat(x, ' ', y));
-----
+```
+```sql
 DuckDB is awesome
 ```
