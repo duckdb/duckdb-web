@@ -7,26 +7,47 @@ redirect_from:
 
 ## Examples
 
+The following examples use the [`flights.csv`](/data/flights.csv) file.
+
 ```sql
 -- read a CSV file from disk, auto-infer options
 SELECT * FROM 'flights.csv';
 -- read_csv with custom options
-SELECT * FROM read_csv('flights.csv', delim = '|', header = true, columns = {'FlightDate': 'DATE', 'UniqueCarrier': 'VARCHAR', 'OriginCityName': 'VARCHAR', 'DestCityName': 'VARCHAR'});
--- read a CSV from stdin, auto-infer options
-cat data/csv/issue2471.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
-
+SELECT * FROM read_csv('flights.csv',
+  delim = '|',
+  header = true,
+  columns = {
+    'FlightDate': 'DATE',
+    'UniqueCarrier': 'VARCHAR',
+    'OriginCityName': 'VARCHAR',
+    'DestCityName': 'VARCHAR'
+  });
+```
+```bash
+# read a CSV from stdin, auto-infer options
+cat flights.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
+```
+```sql
 -- read a CSV file into a table
-CREATE TABLE ontime (FlightDate DATE, UniqueCarrier VARCHAR, OriginCityName VARCHAR, DestCityName VARCHAR);
+CREATE TABLE ontime (
+    FlightDate DATE,
+    UniqueCarrier VARCHAR,
+    OriginCityName VARCHAR,
+    DestCityName VARCHAR
+);
 COPY ontime FROM 'flights.csv';
+```
+```sql
 -- alternatively, create a table without specifying the schema manually
 CREATE TABLE ontime AS SELECT * FROM 'flights.csv';
 -- we can use the FROM-first syntax to omit 'SELECT *'
 CREATE TABLE ontime AS FROM 'flights.csv';
-
+```
+```sql
 -- write the result of a query to a CSV file
-COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER 1, DELIMITER '|');
--- we can use the FROM-first syntax to omit 'SELECT *'
-COPY (FROM ontime) TO 'flights.csv' WITH (HEADER 1, DELIMITER '|');
+COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER true, DELIMITER '|');
+-- if we serialize the entire table, we can simply refer to it with its name
+COPY ontime TO 'flights.csv' WITH (HEADER true, DELIMITER '|');
 ```
 
 ## CSV Loading
@@ -125,7 +146,12 @@ Multiple files can be read at once by providing a glob or a list of files. Refer
 The [`COPY` statement](../../sql/statements/copy#copy-to) can be used to load data from a CSV file into a table. This statement has the same syntax as the one used in PostgreSQL. To load the data using the `COPY` statement, we must first create a table with the correct schema (which matches the order of the columns in the CSV file and uses types that fit the values in the CSV file). `COPY` detects the CSV's configuration options automatically.
 
 ```sql
-CREATE TABLE ontime (flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
+CREATE TABLE ontime (
+    flightdate DATE,
+    uniquecarrier VARCHAR,
+    origincityname VARCHAR,
+    destcityname VARCHAR
+);
 COPY ontime FROM 'flights.csv';
 SELECT * FROM ontime;
 ```
