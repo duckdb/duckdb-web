@@ -144,11 +144,10 @@ CALL pragma_version();
 
 ### Platform
 
-`platform` returns an identifier for the platform the current DuckDB executable has been compiled for.
-This matches the platform_name as described [on the extension loading explainer](../extensions/overview#downloading-extensions-directly-from-s3).
+`platform` returns an identifier for the platform the current DuckDB executable has been compiled for, e.g., `osx_arm64`.
+The format of this identifier matches the platform name as described [on the extension loading explainer](../extensions/working_with_extensions#platforms).
 
 ```sql
--- show platform of current DuckDB executable
 PRAGMA platform;
 CALL pragma_platform();
 ```
