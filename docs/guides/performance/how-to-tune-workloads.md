@@ -26,7 +26,7 @@ This section explains the prerequisites, scope, and known limitations of larger-
 Spilling to disk is automatically supported when connected to a [persistent database file](../../api/cli/overview#in-memory-vs-persistent-database).
 
 When running in in-memory mode, DuckDB cannot use disk to offload data if it does not fit into main memory.
-To enable offloading in the absence of a persistent database file, use the [`SET temp_directory` statement](../../sql/pragmas#temp_directory-for-spilling-data-to-disk):
+To enable offloading in the absence of a persistent database file, use the [`SET temp_directory` statement](../../sql/pragmas#temp-directory-for-spilling-data-to-disk):
 
 ```sql
 SET temp_directory = '/path/to/temp.tmp'
