@@ -157,4 +157,8 @@ Using remote paths or compressed files is currently not possible.
 
 ## Building Extensions
 
-Build the extension following the ded in the extension's README.
+Build the extension following the extension's README.
+
+## Statically Linking Extensions
+
+To statically link extensions, follow the [developer documentation's "Using extension config files" section](https://github.com/duckdb/duckdb/blob/main/extension/README.md#using-extension-config-files).
