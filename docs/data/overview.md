@@ -73,6 +73,6 @@ appender.endRow();
 appender.close();
 ```
 
-For a detailed description, see the [page on the C++ appender](../data/appender).
+For a detailed description, see the pages on the [C++ appender](../data/appender) and the [Java appender](../api/java#appender).
 
 ## Pages in This Section
