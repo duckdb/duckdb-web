@@ -16,7 +16,7 @@ The detection works by operating on a sample of the file. The size of the sample
 
 ## `sniff_csv` Function
 
-It is possible to run the CSV sniffer as a separate step using the `sniff_csv(filename)` function, which returns the detected CSV properties.
+It is possible to run the CSV sniffer as a separate step using the `sniff_csv(filename)` function, which returns the detected CSV properties as a table with a single row.
 The `sniff_csv` function accepts an optional `sample_size` parameter to configure the number of rows sampled.
 
 ```sql
@@ -36,7 +36,21 @@ FROM sniff_csv('my_file.csv', sample_size = 1000);
 | `DateFormat` | date Format | `%d/%m/%Y` |
 | `TimestampFormat` | timestamp Format | `%Y-%m-%dT%H:%M:%S.%f` |
 | `UserArguments` | arguments used to invoke `sniff_csv` | `sample_size = 1000` |
-| `Prompt` | prompt ready to be used to read the CSV | `FROM read_csv('my_file.csv', auto_detect = false, delim = ',', ...)` |
+| `Prompt` | prompt ready to be used to read the CSV | `FROM read_csv('my_file.csv', auto_detect=false, delim=',', ...)` |
+
+### Prompt
+
+The `Prompt` column contains a SQL command with the configurations detected by the sniffer.
+
+```sql
+-- use line mode in CLI to get the full command
+.mode line
+SELECT Prompt FROM sniff_csv('my_file.csv');
+```
+
+```text
+Prompt = FROM read_csv('my_file.csv', auto_detect=false, delim=',', quote='"', escape='"', new_line='\n', skip=0, header=true, columns={...});
+```
 
 ## Detection Steps
 
