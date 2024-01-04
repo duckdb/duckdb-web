@@ -141,7 +141,7 @@ Any subsequent calls to `INSTALL extension_name` will use the local version inst
 FORCE INSTALL extension_name;
 ```
 
-### Loading Extension from a Path
+## Loading Extension from a Path
 
 `LOAD` can be used with the path to a `.duckdb_extension`.
 For example, if the file was available at the (relative) path `path/to/httpfs.duckdb_extension`, you can load it as follows:
@@ -151,10 +151,10 @@ For example, if the file was available at the (relative) path `path/to/httpfs.du
 LOAD 'path/to/httpfs.duckdb_extension';
 ```
 
-This will skip any currently installed file in the `
+This will skip any currently installed file in the specifed path.
 
-Remote paths or compressed files are not possible.
+Using remote paths or compressed files is currently not possible.
 
-### Building Extensions
+## Building Extensions
 
 Build the extension following the ded in the extension's README.
