@@ -35,10 +35,30 @@ When the `DISTINCT` clause is provided, only distinct values are considered in t
 
 ### `ORDER BY` Clause in Aggregate Functions
 
-When the `ORDER BY` clause is provided, the values being aggregated are sorted before applying the function.
-Usually this is not important, but there are some order-sensitive aggregates that can have indeterminate results
-(e.g., `first`, `last`, `list` and `string_agg`). These can be made deterministic by ordering the arguments.
-For order-insensitive aggregates, this clause is parsed and applied, which is inefficient, but still produces the same result.
+An `ORDER BY` clause can be provided after the last argument of the function call. Note the lack of the comma separator before the clause.
+
+```sql
+SELECT <aggregate_function>(<arg>, <sep> ORDER BY <ordering_criteria>);
+```
+
+This clause ensures that the values being aggregated are sorted before applying the function.
+Most aggregate functions are order-insensitive, therefore, this clause is parsed and applied, which is inefficient, but has on effect on the results.However, there are some order-sensitive aggregates that can have non-deterministic results without ordering, e.g., `first`, `last`, `list` and `string_agg` / `group_concat` / `listagg`.
+These can be made deterministic by ordering the arguments.
+
+For example:
+
+```sql
+CREATE TABLE tbl AS SELECT s FROM range(1, 4) r(s);
+SELECT string_agg(s, ', ' ORDER BY s DESC) AS countdown FROM tbl;
+```
+```text
+┌───────────┐
+│ countdown │
+│  varchar  │
+├───────────┤
+│ 3, 2, 1   │
+└───────────┘
+```
 
 ## General Aggregate Functions
 
