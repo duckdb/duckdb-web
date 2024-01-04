@@ -251,7 +251,7 @@ FROM read_json_auto('todos.json',
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
 
 
-## COPY Statement
+## `COPY` Statement
 
 The `COPY` statement can be used to load data from a JSON file into a table. For the `COPY` statement, we must first create a table with the correct schema to load the data into. We then specify the JSON file to load from plus any configuration options separately.
 
