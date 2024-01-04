@@ -17,7 +17,8 @@ Refer to the externally hosted [API Reference](https://javadoc.io/doc/org.duckdb
 
 ### Startup & Shutdown
 
-In JDBC, database connections are created through the standard `java.sql.DriverManager` class.  The driver should auto-register in the DriverManager, if that does not work for some reason, you can enforce registration like so:
+In JDBC, database connections are created through the standard `java.sql.DriverManager` class.
+The driver should auto-register in the `DriverManager`, if that does not work for some reason, you can enforce registration like so:
 
 ```java
 Class.forName("org.duckdb.DuckDBDriver");
@@ -27,6 +28,12 @@ To create a DuckDB connection, call `DriverManager` with the `jdbc:duckdb:` JDBC
 
 ```java
 Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+```
+
+To use DuckDB-specific features such as the [appender](#appender), cast the object to a `DuckDBConnection`:
+
+```java
+DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
 ```
 
 When using the `jdbc:duckdb:`  URL alone, an **in-memory database** is created. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Java program). If you would like to access or create a persistent database, append its file name after the path. For example, if your database is stored in `/tmp/my_database`, use the JDBC URL `jdbc:duckdb:/tmp/my_database` to create a connection to it. 
@@ -151,4 +158,34 @@ Properties props = new Properties();
 props.setProperty(DuckDBDriver.JDBC_STREAM_RESULTS, String.valueOf(true));
 
 Connection conn = DriverManager.getConnection("jdbc:duckdb:", props);
+```
+
+### Appender
+
+The [appender](../data/appender) is available in the DuckDB JDBC driver via the `org.duckdb.DuckDBAppender` class.
+The constructor of the class requires the schema name and the table name it is applied to.
+The appender is flushed when the `close()` method is called.
+
+Example:
+
+```java
+import org.duckdb.DuckDBConnection;
+
+DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+Statement stmt = conn.createStatement();
+stmt.execute("CREATE TABLE tbl (x BIGINT, y FLOAT, s VARCHAR)");
+
+// using try-with-resources to automatically close the appender at the end of the scope
+try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl")) {
+    appender.beginRow();
+    appender.append(10);
+    appender.append(3.2);
+    appender.append("hello");
+    appender.endRow();
+    appender.beginRow();
+    appender.append(20);
+    appender.append(-8.1);
+    appender.append("world");
+    appender.endRow();
+}
 ```

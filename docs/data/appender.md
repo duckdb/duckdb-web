@@ -32,7 +32,6 @@ appender.EndRow();
 Any values added to the appender are cached prior to being inserted into the database system
 for performance reasons. That means that, while appending, the rows might not be immediately visible in the system. The cache is automatically flushed when the appender goes out of scope or when `appender.Close()` is called. The cache can also be manually flushed using the `appender.Flush()` method. After either `Flush` or `Close` is called, all the data has been written to the database system.
 
-
 ## Date, Time and Timestamps
 
 While numbers and strings are rather self-explanatory, dates, times and timestamps require some explanation. They can be directly appended using the methods provided by `duckdb::Date`, `duckdb::Time` or `duckdb::Timestamp`. They can also be appended using the internal `duckdb::Value` type, however, this adds some additional overheads and should be avoided if possible.
@@ -48,3 +47,7 @@ appender.AppendRow(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0), Times
 // construct duckdb::Value objects
 appender.AppendRow(Value::DATE(1992, 1, 1), Value::TIME(1, 1, 1, 0), Value::TIMESTAMP(1992, 1, 1, 1, 1, 1, 0));
 ```
+
+## JDBC Appender
+
+The appender is available in the [JDBC driver](../api/java#appender).
