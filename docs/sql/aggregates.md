@@ -79,7 +79,7 @@ The table below shows the available general aggregate functions.
 | `bool_or(arg)` |Returns `true` if any input value is `true`, otherwise `false`. | `bool_or(A)` | - |
 | `count(arg)` |Calculates the number of tuples in `arg`. | `count(A)` | - |
 | `favg(arg)` |Calculates the average using a more accurate floating point summation (Kahan Sum). | `favg(A)` | - |
-| `first(arg)` |Returns the first non-null value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `first(A)` | `arbitrary(A)`, `any_value(A)` |
+| `first(arg)` |Returns the first non-null value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `first(A)` | `any_value(A)`, `arbitrary(A)` |
 | `fsum(arg)` |Calculates the sum using a more accurate floating point summation (Kahan Sum). | `fsum(A)` | `sumKahan`, `kahan_sum` |
 | `geomean(arg)` |Calculates the geometric mean for all tuples in `arg`. | `geomean(A)` | `geometric_mean(A)` |
 | `histogram(arg)` |Returns a `MAP` of key-value pairs representing buckets and counts. | `histogram(A)` | - |
