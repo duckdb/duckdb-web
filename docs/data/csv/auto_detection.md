@@ -25,7 +25,7 @@ FROM sniff_csv('my_file.csv', sample_size = 1000);
 ```
 
 | Column Name | Description | Example |
-|--|-----|-------|
+|----|-----|-------|
 | `Delimiter` | delimiter | `,` |
 | `Quote` | quote character | `"` |
 | `Escape` | escape | `\` |
