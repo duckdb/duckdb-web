@@ -93,8 +93,6 @@
       <item>ATTACH</item>
       <item>ATTRIBUTE</item>
       <item>AUTHORIZATION</item>
-      <item>AUTO</item>
-      <item>AUTO_DETECT</item>
       <item>AVG</item>
       <item>BACKWARD</item>
       <item>BEFORE</item>
@@ -108,7 +106,6 @@
       <item>BOOLEAN</item>
       <item>BOTH</item>
       <item>BREADTH</item>
-      <item>BROTLI</item>
       <item>BY</item>
       <item>C</item>
       <item>CACHE</item>
@@ -139,7 +136,6 @@
       <item>CLOSE</item>
       <item>CLUSTER</item>
       <item>COALESCE</item>
-      <item>COALSECE</item>
       <item>COBOL</item>
       <item>COLLATE</item>
       <item>COLLATION</item>
@@ -197,6 +193,7 @@
       <item>CYCLE</item>
       <item>DATA</item>
       <item>DATABASE</item>
+      <item>DATABASES</item>
       <item>DATETIME_INTERVAL_CODE</item>
       <item>DATETIME_INTERVAL_PRECISION</item>
       <item>DAY</item>
@@ -234,7 +231,6 @@
       <item>DOCUMENT</item>
       <item>DOMAIN</item>
       <item>DOUBLE</item>
-      <item>DRIVER</item>
       <item>DROP</item>
       <item>DYNAMIC</item>
       <item>DYNAMIC_FUNCTION</item>
@@ -245,7 +241,7 @@
       <item>ENCODING</item>
       <item>ENCRYPTED</item>
       <item>END</item>
-      <item>END-EXEC</item>
+      END-<item>EXEC</item>
       <item>ENUM</item>
       <item>EQUALS</item>
       <item>ESCAPE</item>
@@ -254,6 +250,7 @@
       <item>EVERY</item>
       <item>EXCEPT</item>
       <item>EXCLUDE</item>
+      <item>EXCLUDED</item>
       <item>EXCLUDING</item>
       <item>EXCLUSIVE</item>
       <item>EXEC</item>
@@ -266,11 +263,10 @@
       <item>EXTENSION</item>
       <item>EXTERNAL</item>
       <item>EXTRACT</item>
+      <item>false</item>
       <item>FALSE</item>
       <item>FAMILY</item>
       <item>FETCH</item>
-      <item>FIELD_IDS</item>
-      <item>FILENAME_PATTERN</item>
       <item>FILTER</item>
       <item>FINAL</item>
       <item>FIRST</item>
@@ -279,7 +275,6 @@
       <item>FOR</item>
       <item>FORCE</item>
       <item>FOREIGN</item>
-      <item>FORMAT</item>
       <item>FORTRAN</item>
       <item>FORWARD</item>
       <item>FOUND</item>
@@ -290,7 +285,6 @@
       <item>FUNCTION</item>
       <item>FUNCTIONS</item>
       <item>G</item>
-      <item>GDAL</item>
       <item>GENERAL</item>
       <item>GENERATED</item>
       <item>GET</item>
@@ -303,7 +297,6 @@
       <item>GROUP</item>
       <item>GROUPING</item>
       <item>GROUPING_ID</item>
-      <item>GZIP</item>
       <item>HANDLER</item>
       <item>HAVING</item>
       <item>HEADER</item>
@@ -363,7 +356,6 @@
       <item>LARGE</item>
       <item>LAST</item>
       <item>LATERAL</item>
-      <item>LAYER_CREATION_OPTIONS</item>
       <item>LEADING</item>
       <item>LEAKPROOF</item>
       <item>LEFT</item>
@@ -383,8 +375,6 @@
       <item>LOCKED</item>
       <item>LOGGED</item>
       <item>LOWER</item>
-      <item>LZ4</item>
-      <item>LZO</item>
       <item>MACRO</item>
       <item>MAP</item>
       <item>MAPPING</item>
@@ -420,7 +410,6 @@
       <item>NCHAR</item>
       <item>NCLOB</item>
       <item>NEW</item>
-      <item>NEWLINE_DELIMITED</item>
       <item>NEXT</item>
       <item>NO</item>
       <item>NOCREATEDB</item>
@@ -460,7 +449,6 @@
       <item>OVERLAPS</item>
       <item>OVERLAY</item>
       <item>OVERRIDING</item>
-      <item>OVERWRITE_OR_IGNORE</item>
       <item>OWNED</item>
       <item>OWNER</item>
       <item>PAD</item>
@@ -473,11 +461,9 @@
       <item>PARAMETER_SPECIFIC_CATALOG</item>
       <item>PARAMETER_SPECIFIC_NAME</item>
       <item>PARAMETERS</item>
-      <item>PARQUET</item>
       <item>PARSER</item>
       <item>PARTIAL</item>
       <item>PARTITION</item>
-      <item>PARTITION_BY</item>
       <item>PASCAL</item>
       <item>PASSING</item>
       <item>PASSWORD</item>
@@ -513,7 +499,6 @@
       <item>QUOTE</item>
       <item>RANGE</item>
       <item>READ</item>
-      <item>READ_ONLY</item>
       <item>READS</item>
       <item>REAL</item>
       <item>REASSIGN</item>
@@ -552,7 +537,6 @@
       <item>ROUTINE_SCHEMA</item>
       <item>ROW</item>
       <item>ROW_COUNT</item>
-      <item>ROW_GROUP_SIZE</item>
       <item>ROWS</item>
       <item>RULE</item>
       <item>SAMPLE</item>
@@ -589,7 +573,6 @@
       <item>SIZE</item>
       <item>SKIP</item>
       <item>SMALLINT</item>
-      <item>SNAPPY</item>
       <item>SNAPSHOT</item>
       <item>SOME</item>
       <item>SOURCE</item>
@@ -663,6 +646,7 @@
       <item>TRIGGER_NAME</item>
       <item>TRIGGER_SCHEMA</item>
       <item>TRIM</item>
+      <item>true</item>
       <item>TRUE</item>
       <item>TRUNCATE</item>
       <item>TRUSTED</item>
@@ -671,7 +655,6 @@
       <item>TYPES</item>
       <item>UNBOUNDED</item>
       <item>UNCOMMITTED</item>
-      <item>UNCOMPRESSED</item>
       <item>UNDER</item>
       <item>UNENCRYPTED</item>
       <item>UNION</item>
@@ -682,13 +665,11 @@
       <item>UNNAMED</item>
       <item>UNNEST</item>
       <item>UNPIVOT</item>
-      <item>UNSTRUCTURED</item>
       <item>UNTIL</item>
       <item>UPDATE</item>
       <item>UPPER</item>
       <item>USAGE</item>
       <item>USE</item>
-      <item>USE_TMP_FILE</item>
       <item>USER</item>
       <item>USER_DEFINED_TYPE_CATALOG</item>
       <item>USER_DEFINED_TYPE_NAME</item>
@@ -737,222 +718,996 @@
       <item>YEARS</item>
       <item>YES</item>
       <item>ZONE</item>
+      <item>AUTO_DETECT</item>
+      <item>FORMAT</item>
+      <item>READ_ONLY</item>
+      <item>PARQUET</item>
+      <item>UNCOMPRESSED</item>
+      <item>SNAPPY</item>
+      <item>GZIP</item>
+      <item>LZO</item>
+      <item>BROTLI</item>
+      <item>LZ4</item>
       <item>ZSTD</item>
+      <item>FIELD_IDS</item>
+      <item>ROW_GROUP_SIZE</item>
+      <item>PARTITION_BY</item>
+      <item>OVERWRITE_OR_IGNORE</item>
+      <item>FILENAME_PATTERN</item>
+      <item>USE_TMP_FILE</item>
+      <item>AUTO</item>
+      <item>UNSTRUCTURED</item>
+      <item>NEWLINE_DELIMITED</item>
+      <item>GDAL</item>
+      <item>DRIVER</item>
+      <item>LAYER_CREATION_OPTIONS</item>
+      <item>ALLOW_MOVED_PATHS</item>
+      <item>PER_THREAD_OUTPUT</item>
+      <item>BIGINT</item>
+      <item>BINARY</item>
+      <item>BIT</item>
+      <item>BITSTRING</item>
+      <item>BLOB</item>
+      <item>BOOL</item>
+      <item>BOOLEAN</item>
+      <item>BPCHAR</item>
+      <item>BYTEA</item>
+      <item>CHAR</item>
+      <item>DATE</item>
+      <item>DATETIME</item>
+      <item>DEC</item>
+      <item>DECIMAL</item>
+      <item>DOUBLE</item>
+      <item>ENUM</item>
+      <item>FLOAT</item>
+      <item>FLOAT4</item>
+      <item>FLOAT8</item>
+      <item>GUID</item>
+      <item>HUGEINT</item>
+      <item>INT</item>
+      <item>INT1</item>
+      <item>INT128</item>
+      <item>INT16</item>
+      <item>INT2</item>
+      <item>INT32</item>
+      <item>INT4</item>
+      <item>INT64</item>
+      <item>INT8</item>
+      <item>INTEGER</item>
+      <item>INTEGRAL</item>
+      <item>INTERVAL</item>
+      <item>LIST</item>
+      <item>LOGICAL</item>
+      <item>LONG</item>
+      <item>MAP</item>
+      <item>NULL</item>
+      <item>NUMERIC</item>
+      <item>NVARCHAR</item>
+      <item>OID</item>
+      <item>REAL</item>
+      <item>ROW</item>
+      <item>SHORT</item>
+      <item>SIGNED</item>
+      <item>SMALLINT</item>
+      <item>SQLNULL</item>
+      <item>STRING</item>
+      <item>STRUCT</item>
+      <item>TEXT</item>
+      <item>TIME</item>
+      <item>TIMESTAMP</item>
+      <item>TIMESTAMPTZ</item>
+      <item>TIMESTAMP_MS</item>
+      <item>TIMESTAMP_NS</item>
+      <item>TIMESTAMP_S</item>
+      <item>TIMESTAMP_SEC</item>
+      <item>TIMESTAMP_TZ</item>
+      <item>TIMESTAMP_US</item>
+      <item>TIMETZ</item>
+      <item>TIME_TZ</item>
+      <item>TINYINT</item>
+      <item>UBIGINT</item>
+      <item>UINT16</item>
+      <item>UINT32</item>
+      <item>UINT64</item>
+      <item>UINT8</item>
+      <item>UINTEGER</item>
+      <item>UNION</item>
+      <item>USMALLINT</item>
+      <item>UTINYINT</item>
+      <item>UUID</item>
+      <item>VARBINARY</item>
+      <item>VARCHAR</item>
+      <item>ARRAY</item>
+      <item>GEOMETRY</item>
+      <item>POINT</item>
+      <item>LINESTRING</item>
+      <item>POLYGON</item>
+      <item>MULTIPOINT</item>
+      <item>MULTILINESTRING</item>
+      <item>MULTIPOLYGON</item>
+      <item>GEOMETRYCOLLECTION</item>
+      <item>POINT_2D</item>
+      <item>LINESTRING_2D</item>
+      <item>POLYGON_2D</item>
+      <item>BOX_2D</item>
+      <item>WKB_BLOB</item>
+      <item>GeometryType</item>
+      <item>SQLITE</item>
     </list>
     <list name="functions">
-      <!-- math -->
-      <item>ABS</item>
-      <item>CBRT</item>
-      <item>CEIL</item>
-      <item>CEILING</item>
-      <item>DEGREES</item>
-      <item>EXP</item>
-      <item>FLOOR</item>
-      <item>LN</item>
-      <item>LOG</item>
-      <item>MOD</item>
-      <item>PI</item>
-      <item>POW</item>
-      <item>POWER</item>
-      <item>RADIANS</item>
-      <item>RANDOM</item>
-      <item>ROUND</item>
-      <item>SETSEED</item>
-      <item>SIGN</item>
-      <item>SQRT</item>
-      <item>TRUNC</item>
-      <item>WIDTH_BUCKET</item>
-      <!-- trig -->
-      <item>ACOS</item>
-      <item>ASIN</item>
-      <item>ATAN</item>
-      <item>ATAN2</item>
-      <item>COS</item>
-      <item>COT</item>
-      <item>SIN</item>
-      <item>TAN</item>
-      <!-- string -->
-      <item>BIT_LENGTH</item>
-      <item>CHAR_LENGTH</item>
-      <item>CHARACTER_LENGTH</item>
-      <item>CONCAT</item>
-      <item>CONCAT_WS</item>
-      <item>CONVERT</item>
-      <item>GET_BYTE</item>
-      <item>GET_BIT</item>
-      <item>LOWER</item>
-      <item>OCTET_LENGTH</item>
-      <item>OVERLAY</item>
-      <item>POSITION</item>
-      <item>SET_BIT</item>
-      <item>SUBSTRING</item>
-      <item>TRIM</item>
-      <item>UPPER</item>
-      <!-- other string -->
-      <item>ASCII</item>
-      <item>BTRIM</item>
-      <item>CHR</item>
-      <item>DECODE</item>
-      <item>ENCODE</item>
-      <item>INITCAP</item>
-      <item>LENGTH</item>
-      <item>LPAD</item>
-      <item>LTRIM</item>
-      <item>MD5</item>
-      <item>PG_CLIENT_ENCODING</item>
-      <item>QUOTE_IDENT</item>
-      <item>QUOTE_LITERAL</item>
-      <item>REGEXP_REPLACE</item>
-      <item>REPEAT</item>
-      <item>REPLACE</item>
-      <item>RPAD</item>
-      <item>RTRIM</item>
-      <item>SPLIT_PART</item>
-      <item>STRPOS</item>
-      <item>SUBSTR</item>
-      <item>TO_ASCII</item>
-      <item>TO_HEX</item>
-      <item>TRANSLATE</item>
-      <!-- data type formatting -->
-      <item>TO_CHAR</item>
-      <item>TO_DATE</item>
-      <item>TO_TIMESTAMP</item>
-      <item>TO_NUMBER</item>
-      <!-- date/time -->
-      <item>AGE</item>
-      <item>DATE_PART</item>
-      <item>DATE_TRUNC</item>
-      <item>EXTRACT</item>
-      <item>ISFINITE</item>
-      <item>JUSTIFY_HOURS</item>
-      <item>JUSTIFY_DAYS</item>
-      <item>NOW</item>
-      <item>TIMEOFDAY</item>
-      <item>TIMESTAMP</item>
-      <!-- geometric -->
-      <item>AREA</item>
-      <item>CENTER</item>
-      <item>DIAMETER</item>
-      <item>HEIGHT</item>
-      <item>ISCLOSED</item>
-      <item>ISOPEN</item>
-      <item>NPOINTS</item>
-      <item>PCLOSE</item>
-      <item>POPEN</item>
-      <item>RADIUS</item>
-      <item>WIDTH</item>
-      <!-- geometric type conversion -->
-      <item>BOX</item>
-      <item>CIRCLE</item>
-      <item>LSEG</item>
-      <item>PATH</item>
-      <item>POINT</item>
-      <item>POLYGON</item>
-      <!-- array -->
-      <item>ARRAY_CAT</item>
-      <item>ARRAY_APPEND</item>
-      <item>ARRAY_PREPEND</item>
-      <item>ARRAY_DIMS</item>
-      <item>ARRAY_LOWER</item>
-      <item>ARRAY_UPPER</item>
-      <item>ARRAY_TO_STRING</item>
-      <item>STRING_TO_ARRAY</item>
-      <!-- network address type, TEXT is omitted as it is more commonly a data type -->
-      <item>BROADCAST</item>
-      <item>HOST</item>
-      <item>MASKLEN</item>
-      <item>SET_MASKLEN</item>
-      <item>NETMASK</item>
-      <item>HOSTMASK</item>
-      <item>NETWORK</item>
-      <item>TEXT</item>
-      <item>ABBREV</item>
-      <item>FAMILY</item>
-      <!-- sequence manipulation -->
-      <item>NEXTVAL</item>
-      <item>CURRVAL</item>
-      <item>LASTVAL</item>
-      <item>SETVAL</item>
-      <!-- conditional expressions -->
-      <item>COALESCE</item>
-      <item>NULLIF</item>
-      <!-- aggregate -->
-      <item>AVG</item>
-      <item>BIT_AND</item>
-      <item>BIT_OR</item>
-      <item>BOOL_AND</item>
-      <item>BOOL_OR</item>
-      <item>COUNT</item>
-      <item>EVERY</item>
-      <item>MAX</item>
-      <item>MIN</item>
-      <item>STDDEV</item>
-      <item>SUM</item>
-      <item>VARIANCE</item>
-      <!-- series generating -->
-      <item>GENERATE_SERIES</item>
-      <!-- system information -->
-      <item>CURRENT_DATABASE</item>
-      <item>CURRENT_SCHEMA</item>
-      <item>CURRENT_SCHEMAS</item>
-      <item>CURRENT_USER</item>
-      <item>INET_CLIENT_ADDR</item>
-      <item>INET_CLIENT_PORT</item>
-      <item>INET_SERVER_ADDR</item>
-      <item>INET_SERVER_PORT</item>
-      <item>SESSION_USER</item>
-      <item>PG_POSTMASTER_START_TIME</item>
-      <item>VERSION</item>
-      <!-- access privilege inquiry  -->
-      <item>HAS_TABLE_PRIVILEGE</item>
-      <item>HAS_DATABASE_PRIVILEGE</item>
-      <item>HAS_FUNCTION_PRIVILEGE</item>
-      <item>HAS_LANGUAGE_PRIVILEGE</item>
-      <item>PG_HAS_ROLE</item>
-      <item>HAS_SCHEMA_PRIVILEGE</item>
-      <item>HAS_TABLESPACE_PRIVILEGE</item>
-      <!--  schema visibility inquiry -->
-      <item>PG_TABLE_IS_VISIBLE</item>
-      <item>PG_TYPE_IS_VISIBLE</item>
-      <item>PG_FUNCTION_IS_VISIBLE</item>
-      <item>PG_OPERATOR_IS_VISIBLE</item>
-      <item>PG_OPCLASS_IS_VISIBLE</item>
-      <item>PG_CONVERSION_IS_VISIBLE</item>
-      <!-- system catalog information -->
-      <item>FORMAT_TYPE</item>
-      <item>PG_GET_CONSTRAINTDEF</item>
-      <item>PG_GET_EXPR</item>
-      <item>PG_GET_INDEXDEF</item>
-      <item>PG_GET_RULEDEF</item>
-      <item>PG_GET_SERIAL_SEQUENCE</item>
-      <item>PG_TABLESPACE_DATABASES</item>
-      <item>PG_GET_TRIGGERDEF</item>
-      <item>PG_GET_USERBYID</item>
-      <item>PG_GET_VIEWDEF</item>
-      <!-- comment information -->
-      <item>OBJ_DESCRIPTION</item>
-      <item>COL_DESCRIPTION</item>
-      <!-- configuration settings -->
-      <item>CURRENT_SETTING</item>
-      <item>SET_CONFIG</item>
-      <!-- server signalling -->
-      <item>PG_CANCEL_BACKEND</item>
-      <item>PG_RELOAD_CONF</item>
-      <item>PG_ROTATE_LOGFILE</item>
-      <!-- backup control -->
-      <item>PG_START_BACKUP</item>
-      <item>PG_STOP_BACKUP</item>
-      <!-- database object Sizes-->
-      <item>PG_COLUMN_SIZE</item>
-      <item>PG_TABLESPACE_SIZE</item>
-      <item>PG_DATABASE_SIZE</item>
-      <item>PG_RELATION_SIZE</item>
-      <item>PG_TOTAL_RELATION_SIZE</item>
-      <item>PG_SIZE_PRETTY</item>
-      <!-- generic file access -->
-      <item>PG_LS_DIR</item>
-      <item>PG_READ_FILE</item>
-      <item>PG_STAT_FILE</item>
+      <item>__internal_compress_integral_ubigint</item>
+      <item>__internal_compress_integral_uinteger</item>
+      <item>__internal_compress_integral_usmallint</item>
+      <item>__internal_compress_integral_utinyint</item>
+      <item>__internal_compress_string_hugeint</item>
+      <item>__internal_compress_string_ubigint</item>
+      <item>__internal_compress_string_uinteger</item>
+      <item>__internal_compress_string_usmallint</item>
+      <item>__internal_compress_string_utinyint</item>
+      <item>__internal_decompress_integral_bigint</item>
+      <item>__internal_decompress_integral_hugeint</item>
+      <item>__internal_decompress_integral_integer</item>
+      <item>__internal_decompress_integral_smallint</item>
+      <item>__internal_decompress_integral_ubigint</item>
+      <item>__internal_decompress_integral_uinteger</item>
+      <item>__internal_decompress_integral_usmallint</item>
+      <item>__internal_decompress_string</item>
+      <item>abs</item>
+      <item>acos</item>
+      <item>add</item>
+      <item>add_parquet_key</item>
+      <item>age</item>
+      <item>aggregate</item>
+      <item>alias</item>
+      <item>all_profiling_output</item>
+      <item>any_value</item>
+      <item>apply</item>
+      <item>approx_count_distinct</item>
+      <item>approx_quantile</item>
+      <item>arbitrary</item>
+      <item>arg_max</item>
+      <item>arg_min</item>
+      <item>argmax</item>
+      <item>argmin</item>
+      <item>array_agg</item>
+      <item>array_aggr</item>
+      <item>array_aggregate</item>
+      <item>array_any_value</item>
+      <item>array_append</item>
+      <item>array_apply</item>
+      <item>array_cat</item>
+      <item>array_concat</item>
+      <item>array_contains</item>
+      <item>array_cosine_similarity</item>
+      <item>array_cross_product</item>
+      <item>array_distance</item>
+      <item>array_distinct</item>
+      <item>array_dot_product</item>
+      <item>array_extract</item>
+      <item>array_filter</item>
+      <item>array_grade_up</item>
+      <item>array_has</item>
+      <item>array_has_all</item>
+      <item>array_has_any</item>
+      <item>array_indexof</item>
+      <item>array_inner_product</item>
+      <item>array_intersect</item>
+      <item>array_length</item>
+      <item>array_pop_back</item>
+      <item>array_pop_front</item>
+      <item>array_position</item>
+      <item>array_prepend</item>
+      <item>array_push_back</item>
+      <item>array_push_front</item>
+      <item>array_resize</item>
+      <item>array_reverse</item>
+      <item>array_reverse_sort</item>
+      <item>array_select</item>
+      <item>array_slice</item>
+      <item>array_sort</item>
+      <item>array_to_json</item>
+      <item>array_to_string</item>
+      <item>array_transform</item>
+      <item>array_unique</item>
+      <item>array_value</item>
+      <item>array_where</item>
+      <item>array_zip</item>
+      <item>arrow_scan</item>
+      <item>arrow_scan_dumb</item>
+      <item>ascii</item>
+      <item>asin</item>
+      <item>atan</item>
+      <item>atan2</item>
+      <item>avg</item>
+      <item>bar</item>
+      <item>base64</item>
+      <item>bernoulli</item>
+      <item>bin</item>
+      <item>bit_and</item>
+      <item>bit_count</item>
+      <item>bit_length</item>
+      <item>bit_or</item>
+      <item>bit_position</item>
+      <item>bit_xor</item>
+      <item>bitstring</item>
+      <item>bitstring_agg</item>
+      <item>bool_and</item>
+      <item>bool_or</item>
+      <item>cardinality</item>
+      <item>cbrt</item>
+      <item>ceil</item>
+      <item>ceiling</item>
+      <item>century</item>
+      <item>checkpoint</item>
+      <item>chr</item>
+      <item>coalesce</item>
+      <item>col_description</item>
+      <item>collations</item>
+      <item>combine</item>
+      <item>concat</item>
+      <item>concat_ws</item>
+      <item>constant_or_null</item>
+      <item>contains</item>
+      <item>corr</item>
+      <item>cos</item>
+      <item>cot</item>
+      <item>count</item>
+      <item>count_if</item>
+      <item>count_star</item>
+      <item>covar_pop</item>
+      <item>covar_samp</item>
+      <item>create_fts_index</item>
+      <item>cume_dist</item>
+      <item>current_catalog</item>
+      <item>current_database</item>
+      <item>current_date</item>
+      <item>current_localtime</item>
+      <item>current_localtimestamp</item>
+      <item>current_query</item>
+      <item>current_role</item>
+      <item>current_schema</item>
+      <item>current_schemas</item>
+      <item>current_setting</item>
+      <item>current_user</item>
+      <item>currval</item>
+      <item>damerau_levenshtein</item>
+      <item>database_list</item>
+      <item>database_size</item>
+      <item>date_add</item>
+      <item>date_diff</item>
+      <item>date_part</item>
+      <item>date_sub</item>
+      <item>date_trunc</item>
+      <item>datediff</item>
+      <item>datepart</item>
+      <item>datesub</item>
+      <item>datetrunc</item>
+      <item>day</item>
+      <item>dayname</item>
+      <item>dayofmonth</item>
+      <item>dayofweek</item>
+      <item>dayofyear</item>
+      <item>dbgen</item>
+      <item>decade</item>
+      <item>decimal</item>
+      <item>decimal_add</item>
+      <item>decimal_cmp</item>
+      <item>decimal_mul</item>
+      <item>decimal_sub</item>
+      <item>decode</item>
+      <item>degrees</item>
+      <item>disable_checkpoint_on_shutdown</item>
+      <item>disable_object_cache</item>
+      <item>disable_optimizer</item>
+      <item>disable_print_progress_bar</item>
+      <item>disable_profile</item>
+      <item>disable_profiling</item>
+      <item>disable_progress_bar</item>
+      <item>disable_verification</item>
+      <item>disable_verify_external</item>
+      <item>disable_verify_parallelism</item>
+      <item>disable_verify_serializer</item>
+      <item>divide</item>
+      <item>drop_fts_index</item>
+      <item>dsdgen</item>
+      <item>duckdb_columns</item>
+      <item>duckdb_constraints</item>
+      <item>duckdb_databases</item>
+      <item>duckdb_dependencies</item>
+      <item>duckdb_extensions</item>
+      <item>duckdb_functions</item>
+      <item>duckdb_indexes</item>
+      <item>duckdb_keywords</item>
+      <item>duckdb_schemas</item>
+      <item>duckdb_sequences</item>
+      <item>duckdb_settings</item>
+      <item>duckdb_tables</item>
+      <item>duckdb_temporary_files</item>
+      <item>duckdb_types</item>
+      <item>duckdb_views</item>
+      <item>edit</item>
+      <item>editdist3</item>
+      <item>element_at</item>
+      <item>enable_checkpoint_on_shutdown</item>
+      <item>enable_index_join</item>
+      <item>enable_object_cache</item>
+      <item>enable_optimizer</item>
+      <item>enable_print_progress_bar</item>
+      <item>enable_profile</item>
+      <item>enable_profiling</item>
+      <item>enable_progress_bar</item>
+      <item>enable_verification</item>
+      <item>encode</item>
+      <item>ends_with</item>
+      <item>entropy</item>
+      <item>enum_code</item>
+      <item>enum_first</item>
+      <item>enum_last</item>
+      <item>enum_range</item>
+      <item>enum_range_boundary</item>
+      <item>epoch</item>
+      <item>epoch_ms</item>
+      <item>epoch_ns</item>
+      <item>epoch_us</item>
+      <item>era</item>
+      <item>error</item>
+      <item>even</item>
+      <item>excel_text</item>
+      <item>exp</item>
+      <item>extract</item>
+      <item>factorial</item>
+      <item>favg</item>
+      <item>fdiv</item>
+      <item>filter</item>
+      <item>finalize</item>
+      <item>first</item>
+      <item>first_value</item>
+      <item>flatten</item>
+      <item>floor</item>
+      <item>fmod</item>
+      <item>force_checkpoint</item>
+      <item>force_index_join</item>
+      <item>format</item>
+      <item>format_bytes</item>
+      <item>format_pg_type</item>
+      <item>format_type</item>
+      <item>formatReadableDecimalSize</item>
+      <item>from_base64</item>
+      <item>from_binary</item>
+      <item>from_hex</item>
+      <item>from_json</item>
+      <item>from_json_strict</item>
+      <item>from_substrait</item>
+      <item>from_substrait_json</item>
+      <item>fsum</item>
+      <item>fts_main_documents</item>
+      <item>function_name</item>
+      <item>functions</item>
+      <item>fuzz_all_functions</item>
+      <item>fuzzyduck</item>
+      <item>gamma</item>
+      <item>gcd</item>
+      <item>gen_random_uuid</item>
+      <item>generate_series</item>
+      <item>generate_subscripts</item>
+      <item>geomean</item>
+      <item>geometric_mean</item>
+      <item>get_bit</item>
+      <item>get_current_time</item>
+      <item>get_current_timestamp</item>
+      <item>get_substrait</item>
+      <item>get_substrait_json</item>
+      <item>glob</item>
+      <item>greatest</item>
+      <item>greatest_common_divisor</item>
+      <item>group_concat</item>
+      <item>hamming</item>
+      <item>has_any_column_privilege</item>
+      <item>has_column_privilege</item>
+      <item>has_database_privilege</item>
+      <item>has_foreign_data_wrapper_privilege</item>
+      <item>has_function_privilege</item>
+      <item>has_language_privilege</item>
+      <item>has_schema_privilege</item>
+      <item>has_sequence_privilege</item>
+      <item>has_server_privilege</item>
+      <item>has_table_privilege</item>
+      <item>has_tablespace_privilege</item>
+      <item>hash</item>
+      <item>hex</item>
+      <item>histogram</item>
+      <item>host</item>
+      <item>hour</item>
+      <item>iceberg_metadata</item>
+      <item>iceberg_scan</item>
+      <item>iceberg_snapshots</item>
+      <item>icu_calendar_names</item>
+      <item>icu_sort_key</item>
+      <item>ieee754</item>
+      <item>ieee754_exponent</item>
+      <item>ieee754_from_blob</item>
+      <item>ieee754_mantissa</item>
+      <item>ieee754_to_blob</item>
+      <item>ifnull</item>
+      <item>ilike_escape</item>
+      <item>import_database</item>
+      <item>in_search_path</item>
+      <item>index_scan</item>
+      <item>inet_client_addr</item>
+      <item>inet_client_port</item>
+      <item>inet_server_addr</item>
+      <item>inet_server_port</item>
+      <item>instr</item>
+      <item>isfinite</item>
+      <item>isinf</item>
+      <item>isnan</item>
+      <item>isodow</item>
+      <item>isoyear</item>
+      <item>jaccard</item>
+      <item>jaro_similarity</item>
+      <item>jaro_winkler_similarity</item>
+      <item>json</item>
+      <item>json_array</item>
+      <item>json_array_length</item>
+      <item>json_contains</item>
+      <item>json_deserialize_sql</item>
+      <item>json_execute_serialized_sql</item>
+      <item>json_extract</item>
+      <item>json_extract_path</item>
+      <item>json_extract_path_text</item>
+      <item>json_extract_string</item>
+      <item>json_group_array</item>
+      <item>json_group_object</item>
+      <item>json_group_structure</item>
+      <item>json_keys</item>
+      <item>json_merge_patch</item>
+      <item>json_object</item>
+      <item>json_quote</item>
+      <item>json_serialize_plan</item>
+      <item>json_serialize_sql</item>
+      <item>json_structure</item>
+      <item>json_transform</item>
+      <item>json_transform_strict</item>
+      <item>json_type</item>
+      <item>json_valid</item>
+      <item>julian</item>
+      <item>kahan_sum</item>
+      <item>kurtosis</item>
+      <item>lag</item>
+      <item>last</item>
+      <item>last_day</item>
+      <item>last_value</item>
+      <item>lcase</item>
+      <item>lcm</item>
+      <item>lead</item>
+      <item>least</item>
+      <item>least_common_multiple</item>
+      <item>left</item>
+      <item>left_grapheme</item>
+      <item>len</item>
+      <item>length</item>
+      <item>length_grapheme</item>
+      <item>levenshtein</item>
+      <item>lgamma</item>
+      <item>like_escape</item>
+      <item>list</item>
+      <item>list_aggr</item>
+      <item>list_aggregate</item>
+      <item>list_any_value</item>
+      <item>list_append</item>
+      <item>list_apply</item>
+      <item>list_approx_count_distinct</item>
+      <item>list_avg</item>
+      <item>list_bit_and</item>
+      <item>list_bit_or</item>
+      <item>list_bit_xor</item>
+      <item>list_bool_and</item>
+      <item>list_bool_or</item>
+      <item>list_cat</item>
+      <item>list_concat</item>
+      <item>list_contains</item>
+      <item>list_cosine_similarity</item>
+      <item>list_count</item>
+      <item>list_distance</item>
+      <item>list_distinct</item>
+      <item>list_dot_product</item>
+      <item>list_element</item>
+      <item>list_entropy</item>
+      <item>list_extract</item>
+      <item>list_filter</item>
+      <item>list_first</item>
+      <item>list_grade_up</item>
+      <item>list_has</item>
+      <item>list_has_all</item>
+      <item>list_has_any</item>
+      <item>list_histogram</item>
+      <item>list_indexof</item>
+      <item>list_inner_product</item>
+      <item>list_intersect</item>
+      <item>list_kurtosis</item>
+      <item>list_last</item>
+      <item>list_mad</item>
+      <item>list_max</item>
+      <item>list_median</item>
+      <item>list_min</item>
+      <item>list_mode</item>
+      <item>list_pack</item>
+      <item>list_position</item>
+      <item>list_prepend</item>
+      <item>list_product</item>
+      <item>list_reduce</item>
+      <item>list_resize</item>
+      <item>list_reverse</item>
+      <item>list_reverse_sort</item>
+      <item>list_select</item>
+      <item>list_sem</item>
+      <item>list_skewness</item>
+      <item>list_slice</item>
+      <item>list_sort</item>
+      <item>list_stddev_pop</item>
+      <item>list_stddev_samp</item>
+      <item>list_string_agg</item>
+      <item>list_sum</item>
+      <item>list_transform</item>
+      <item>list_unique</item>
+      <item>list_value</item>
+      <item>list_var_pop</item>
+      <item>list_var_samp</item>
+      <item>list_where</item>
+      <item>list_zip</item>
+      <item>listagg</item>
+      <item>ln</item>
+      <item>load_aws_credentials</item>
+      <item>log</item>
+      <item>log10</item>
+      <item>log2</item>
+      <item>lower</item>
+      <item>lpad</item>
+      <item>lsmode</item>
+      <item>ltrim</item>
+      <item>mad</item>
+      <item>make_date</item>
+      <item>make_time</item>
+      <item>make_timestamp</item>
+      <item>make_timestamptz</item>
+      <item>map</item>
+      <item>map_concat</item>
+      <item>map_entries</item>
+      <item>map_extract</item>
+      <item>map_from_entries</item>
+      <item>map_keys</item>
+      <item>map_values</item>
+      <item>match_bm25</item>
+      <item>max</item>
+      <item>max_by</item>
+      <item>md5</item>
+      <item>md5_number</item>
+      <item>md5_number_lower</item>
+      <item>md5_number_upper</item>
+      <item>mean</item>
+      <item>median</item>
+      <item>metadata_info</item>
+      <item>microsecond</item>
+      <item>millennium</item>
+      <item>millisecond</item>
+      <item>min</item>
+      <item>min_by</item>
+      <item>minute</item>
+      <item>mismatches</item>
+      <item>mod</item>
+      <item>mode</item>
+      <item>month</item>
+      <item>monthname</item>
+      <item>multiply</item>
+      <item>nextafter</item>
+      <item>nextval</item>
+      <item>nfc_normalize</item>
+      <item>not_ilike_escape</item>
+      <item>not_like_escape</item>
+      <item>now</item>
+      <item>nth_value</item>
+      <item>ntile</item>
+      <item>nullif</item>
+      <item>obj_description</item>
+      <item>octet_length</item>
+      <item>ord</item>
+      <item>parquet_file_metadata</item>
+      <item>parquet_kv_metadata</item>
+      <item>parquet_metadata</item>
+      <item>parquet_scan</item>
+      <item>parquet_schema</item>
+      <item>percent_rank</item>
+      <item>pg_clear_cache</item>
+      <item>pg_collation_is_visible</item>
+      <item>pg_conf_load_time</item>
+      <item>pg_conversion_is_visible</item>
+      <item>pg_function_is_visible</item>
+      <item>pg_get_constraintdef</item>
+      <item>pg_get_expr</item>
+      <item>pg_get_viewdef</item>
+      <item>pg_has_role</item>
+      <item>pg_is_other_temp_schema</item>
+      <item>pg_my_temp_schema</item>
+      <item>pg_opclass_is_visible</item>
+      <item>pg_operator_is_visible</item>
+      <item>pg_opfamily_is_visible</item>
+      <item>pg_postmaster_start_time</item>
+      <item>pg_size_pretty</item>
+      <item>pg_table_is_visible</item>
+      <item>pg_timezone_names</item>
+      <item>pg_ts_config_is_visible</item>
+      <item>pg_ts_dict_is_visible</item>
+      <item>pg_ts_parser_is_visible</item>
+      <item>pg_ts_template_is_visible</item>
+      <item>pg_type_is_visible</item>
+      <item>pg_typeof</item>
+      <item>pi</item>
+      <item>platform</item>
+      <item>position</item>
+      <item>postgres_attach</item>
+      <item>postgres_query</item>
+      <item>postgres_scan</item>
+      <item>postgres_scan_pushdown</item>
+      <item>pow</item>
+      <item>power</item>
+      <item>pragma_collations</item>
+      <item>pragma_database_size</item>
+      <item>pragma_detailed_profiling_output</item>
+      <item>pragma_last_profiling_output</item>
+      <item>pragma_metadata_info</item>
+      <item>pragma_platform</item>
+      <item>pragma_storage_info</item>
+      <item>pragma_table_info</item>
+      <item>pragma_user_agent</item>
+      <item>pragma_version</item>
+      <item>prefix</item>
+      <item>printf</item>
+      <item>product</item>
+      <item>quantile</item>
+      <item>quantile_cont</item>
+      <item>quantile_disc</item>
+      <item>quarter</item>
+      <item>radians</item>
+      <item>random</item>
+      <item>range</item>
+      <item>rank</item>
+      <item>rank_dense</item>
+      <item>read_csv</item>
+      <item>read_csv_auto</item>
+      <item>read_json</item>
+      <item>read_json_auto</item>
+      <item>read_json_objects</item>
+      <item>read_json_objects_auto</item>
+      <item>read_ndjson</item>
+      <item>read_ndjson_auto</item>
+      <item>read_ndjson_objects</item>
+      <item>read_parquet</item>
+      <item>readfile</item>
+      <item>reduce_sql_statement</item>
+      <item>regexp_extract</item>
+      <item>regexp_extract_all</item>
+      <item>regexp_full_match</item>
+      <item>regexp_matches</item>
+      <item>regexp_replace</item>
+      <item>regexp_split_to_array</item>
+      <item>regr_avgx</item>
+      <item>regr_avgy</item>
+      <item>regr_count</item>
+      <item>regr_intercept</item>
+      <item>regr_r2</item>
+      <item>regr_slope</item>
+      <item>regr_sxx</item>
+      <item>regr_sxy</item>
+      <item>regr_syy</item>
+      <item>repeat</item>
+      <item>repeat_row</item>
+      <item>replace</item>
+      <item>reservoir</item>
+      <item>reservoir_quantile</item>
+      <item>reverse</item>
+      <item>right</item>
+      <item>right_grapheme</item>
+      <item>round</item>
+      <item>round_even</item>
+      <item>roundbankers</item>
+      <item>row</item>
+      <item>row_number</item>
+      <item>row_to_json</item>
+      <item>rpad</item>
+      <item>rtrim</item>
+      <item>scan_arrow_ipc</item>
+      <item>second</item>
+      <item>sem</item>
+      <item>seq_scan</item>
+      <item>session_user</item>
+      <item>set_bit</item>
+      <item>setseed</item>
+      <item>sha256</item>
+      <item>sha3</item>
+      <item>sha3_query</item>
+      <item>shell_add_schema</item>
+      <item>shell_escape_crnl</item>
+      <item>shell_idquote</item>
+      <item>shell_int32</item>
+      <item>shell_module_schema</item>
+      <item>shell_putsnl</item>
+      <item>shobj_description</item>
+      <item>show</item>
+      <item>show_databases</item>
+      <item>show_tables</item>
+      <item>show_tables_expanded</item>
+      <item>sign</item>
+      <item>signbit</item>
+      <item>sin</item>
+      <item>skewness</item>
+      <item>split</item>
+      <item>split_part</item>
+      <item>sql_auto_complete</item>
+      <item>sqlite_attach</item>
+      <item>sqlite_scan</item>
+      <item>sqlsmith</item>
+      <item>sqrt</item>
+      <item>st_area</item>
+      <item>ST_Area</item>
+      <item>st_area_spheroid</item>
+      <item>ST_Area_Spheroid</item>
+      <item>st_asgeojson</item>
+      <item>ST_AsGeoJSON</item>
+      <item>st_ashexwkb</item>
+      <item>st_astext</item>
+      <item>ST_AsText</item>
+      <item>st_aswkb</item>
+      <item>ST_AsWKB</item>
+      <item>st_boundary</item>
+      <item>ST_Boundary</item>
+      <item>st_buffer</item>
+      <item>ST_Buffer</item>
+      <item>st_centroid</item>
+      <item>ST_Centroid</item>
+      <item>st_collect</item>
+      <item>ST_Collect</item>
+      <item>st_collectionextract</item>
+      <item>ST_CollectionExtract</item>
+      <item>st_contains</item>
+      <item>ST_Contains</item>
+      <item>st_containsproperly</item>
+      <item>ST_ContainsProperly</item>
+      <item>st_convexhull</item>
+      <item>ST_ConvexHull</item>
+      <item>st_coveredby</item>
+      <item>ST_CoveredBy</item>
+      <item>st_covers</item>
+      <item>ST_Covers</item>
+      <item>st_crosses</item>
+      <item>ST_Crosses</item>
+      <item>st_difference</item>
+      <item>ST_Difference</item>
+      <item>st_dimension</item>
+      <item>ST_Dimension</item>
+      <item>st_disjoint</item>
+      <item>ST_Disjoint</item>
+      <item>st_distance</item>
+      <item>ST_Distance</item>
+      <item>st_distance_spheroid</item>
+      <item>ST_Distance_Spheroid</item>
+      <item>st_drivers</item>
+      <item>st_dump</item>
+      <item>st_dwithin</item>
+      <item>ST_DWithin</item>
+      <item>st_dwithin_spheroid</item>
+      <item>ST_DWithin_Spheroid</item>
+      <item>st_endpoint</item>
+      <item>st_envelope</item>
+      <item>ST_Envelope</item>
+      <item>st_envelope_agg</item>
+      <item>st_equals</item>
+      <item>ST_Equals</item>
+      <item>st_extent</item>
+      <item>ST_Extent</item>
+      <item>st_exteriorring</item>
+      <item>ST_ExteriorRing</item>
+      <item>st_flipcoordinates</item>
+      <item>ST_FlipCoordinates</item>
+      <item>st_geometrytype</item>
+      <item>ST_GeometryType</item>
+      <item>st_geomfromgeojson</item>
+      <item>ST_GeomFromGeoJSON</item>
+      <item>st_geomfromhexewkb</item>
+      <item>st_geomfromhexwkb</item>
+      <item>st_geomfromtext</item>
+      <item>ST_GeomFromText</item>
+      <item>st_geomfromwkb</item>
+      <item>ST_GeomFromWKB</item>
+      <item>st_intersection</item>
+      <item>ST_Intersection</item>
+      <item>st_intersection_agg</item>
+      <item>st_intersects</item>
+      <item>ST_Intersects</item>
+      <item>st_intersects_extent</item>
+      <item>st_isclosed</item>
+      <item>ST_IsClosed</item>
+      <item>st_isempty</item>
+      <item>ST_IsEmpty</item>
+      <item>st_isring</item>
+      <item>ST_IsRing</item>
+      <item>st_issimple</item>
+      <item>ST_IsSimple</item>
+      <item>st_isvalid</item>
+      <item>ST_IsValid</item>
+      <item>st_length</item>
+      <item>ST_Length</item>
+      <item>st_length_spheroid</item>
+      <item>ST_Length_Spheroid</item>
+      <item>st_linemerge</item>
+      <item>st_linestring2dfromwkb</item>
+      <item>st_list_proj_crs</item>
+      <item>st_makeenvelope</item>
+      <item>st_makeline</item>
+      <item>ST_MakeLine</item>
+      <item>st_makepolygon</item>
+      <item>st_ngeometries</item>
+      <item>st_ninteriorrings</item>
+      <item>st_normalize</item>
+      <item>ST_Normalize</item>
+      <item>st_npoints</item>
+      <item>st_numgeometries</item>
+      <item>st_numinteriorrings</item>
+      <item>st_numpoints</item>
+      <item>st_overlaps</item>
+      <item>ST_Overlaps</item>
+      <item>st_perimeter</item>
+      <item>ST_Perimeter</item>
+      <item>st_perimeter_spheroid</item>
+      <item>ST_Perimeter_Spheroid</item>
+      <item>st_point</item>
+      <item>st_point2d</item>
+      <item>st_point2dfromwkb</item>
+      <item>st_point3d</item>
+      <item>st_point4d</item>
+      <item>st_pointn</item>
+      <item>ST_PointN</item>
+      <item>st_pointonsurface</item>
+      <item>ST_PointOnSurface</item>
+      <item>st_polygon2dfromwkb</item>
+      <item>st_read</item>
+      <item>st_readosm</item>
+      <item>st_reduceprecision</item>
+      <item>ST_ReducePrecision</item>
+      <item>st_removerepeatedpoints</item>
+      <item>ST_RemoveRepeatedPoints</item>
+      <item>st_reverse</item>
+      <item>st_simplify</item>
+      <item>ST_Simplify</item>
+      <item>st_simplifypreservetopology</item>
+      <item>ST_SimplifyPreserveTopology</item>
+      <item>st_startpoint</item>
+      <item>st_touches</item>
+      <item>ST_Touches</item>
+      <item>st_transform</item>
+      <item>ST_Transform</item>
+      <item>st_union</item>
+      <item>ST_Union</item>
+      <item>st_union_agg</item>
+      <item>st_within</item>
+      <item>ST_Within</item>
+      <item>st_x</item>
+      <item>ST_X</item>
+      <item>st_xmax</item>
+      <item>ST_Xmax</item>
+      <item>st_xmin</item>
+      <item>ST_Xmin</item>
+      <item>st_y</item>
+      <item>ST_Y</item>
+      <item>st_ymax</item>
+      <item>ST_Ymax</item>
+      <item>st_ymin</item>
+      <item>ST_Ymin</item>
+      <item>starts_with</item>
+      <item>stats</item>
+      <item>stddev</item>
+      <item>stddev_pop</item>
+      <item>stddev_samp</item>
+      <item>stem</item>
+      <item>storage_info</item>
+      <item>str_split</item>
+      <item>str_split_regex</item>
+      <item>strftime</item>
+      <item>string_agg</item>
+      <item>string_split</item>
+      <item>string_split_regex</item>
+      <item>string_to_array</item>
+      <item>strip_accents</item>
+      <item>strlen</item>
+      <item>strpos</item>
+      <item>strptime</item>
+      <item>struct_extract</item>
+      <item>struct_insert</item>
+      <item>struct_pack</item>
+      <item>substr</item>
+      <item>substring</item>
+      <item>substring_grapheme</item>
+      <item>subtract</item>
+      <item>suffix</item>
+      <item>sum</item>
+      <item>sum_no_overflow</item>
+      <item>sumkahan</item>
+      <item>summary</item>
+      <item>system</item>
+      <item>table_info</item>
+      <item>tan</item>
+      <item>test_all_types</item>
+      <item>test_vector_types</item>
+      <item>text</item>
+      <item>time_bucket</item>
+      <item>timezone</item>
+      <item>timezone_hour</item>
+      <item>timezone_minute</item>
+      <item>to_arrow_ipc</item>
+      <item>to_base</item>
+      <item>to_base64</item>
+      <item>to_binary</item>
+      <item>to_days</item>
+      <item>to_hex</item>
+      <item>to_hours</item>
+      <item>to_json</item>
+      <item>to_microseconds</item>
+      <item>to_milliseconds</item>
+      <item>to_minutes</item>
+      <item>to_months</item>
+      <item>to_seconds</item>
+      <item>to_timestamp</item>
+      <item>to_years</item>
+      <item>today</item>
+      <item>tpcds</item>
+      <item>tpcds_answers</item>
+      <item>tpcds_queries</item>
+      <item>tpch</item>
+      <item>tpch_answers</item>
+      <item>tpch_queries</item>
+      <item>transaction_timestamp</item>
+      <item>translate</item>
+      <item>trim</item>
+      <item>trunc</item>
+      <item>try_strptime</item>
+      <item>txid_current</item>
+      <item>typeof</item>
+      <item>ucase</item>
+      <item>unbin</item>
+      <item>unhex</item>
+      <item>unicode</item>
+      <item>union_extract</item>
+      <item>union_tag</item>
+      <item>union_value</item>
+      <item>unnest</item>
+      <item>upper</item>
+      <item>user</item>
+      <item>user_agent</item>
+      <item>uuid</item>
+      <item>var_pop</item>
+      <item>var_samp</item>
+      <item>variance</item>
+      <item>vector_type</item>
+      <item>verify_external</item>
+      <item>verify_parallelism</item>
+      <item>verify_serializer</item>
+      <item>version</item>
+      <item>week</item>
+      <item>weekday</item>
+      <item>weekofyear</item>
+      <item>writefile</item>
+      <item>xor</item>
+      <item>year</item>
+      <item>yearweek</item>
+      <item>add_default</item>
+      <item>arr_append</item>
+      <item>dynamic_table</item>
+      <item>get_users</item>
+      <item>ifelse</item>
+      <item>one</item>
+      <item>plus_one</item>
+      <item>static_table</item>
+      <item>triple_add</item>
+      <item>myavg</item>
     </list>
     <list name="postgisFunctions">
       <!-- From https://postgis.net/docs/PostGIS_Special_Functions_Index.html#PostGIS_TypeFunctionMatrix at 2022-09-16 19:15 GMT -->
