@@ -170,7 +170,7 @@ Specifying a conflict target is optional unless using a [`DO UPDATE`](#on-confli
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT UNIQUE, k INT);
 INSERT INTO tbl VALUES (1, 20, 300);
-INSERT INTO tbl VALUES (1, 40, 700) ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.;
+INSERT INTO tbl VALUES (1, 40, 700) ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k;
 -- tbl will contain <1, 20, 1400>
 INSERT INTO tbl VALUES (1, 20, 900) ON CONFLICT (j) DO UPDATE SET k = 5 * EXCLUDED.k;
 -- tbl will contain <1, 20, 4500> 
