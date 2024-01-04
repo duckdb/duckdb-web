@@ -12,13 +12,14 @@ The `FROM` clause specifies the *source* of the data on which the remainder of t
 ```sql
 -- select all columns from the table called "table_name"
 SELECT * FROM table_name;
--- select all columns from the table called "table_name" using the FROM-first syntax
+-- select all columns from the table using the FROM-first syntax
 FROM table_name SELECT *;
 -- select all columns using the FROM-first syntax and omitting the SELECT clause
 FROM table_name;
--- select all columns from the table called "table_name" in the schema "schema_name
+-- select all columns from the table "table_name" in the schema "schema_name"
 SELECT * FROM schema_name.table_name;
--- select the column "i" from the table function "range", where the first column of the range function is renamed to "i"
+-- select the column "i" from the table function "range",
+-- where the first column of the range function is renamed to "i"
 SELECT t.i FROM range(100) AS t(i);
 -- select all columns from the CSV file called "test.csv"
 SELECT * FROM 'test.csv';
@@ -82,15 +83,19 @@ with the join (clearer) or implied by the `WHERE` clause (old-fashioned).
 We use the `l_regions` and the `l_nations` tables from the TPC-H schema:
 
 ```sql
-CREATE TABLE l_regions (r_regionkey INTEGER NOT NULL PRIMARY KEY,
-                        r_name      CHAR(25) NOT NULL,
-                        r_comment   VARCHAR(152));
+CREATE TABLE l_regions (
+    r_regionkey INTEGER NOT NULL PRIMARY KEY,
+    r_name      CHAR(25) NOT NULL,
+    r_comment   VARCHAR(152)
+);
 
-CREATE TABLE l_nations (n_nationkey INTEGER NOT NULL PRIMARY KEY,
-                        n_name      CHAR(25) NOT NULL,
-                        n_regionkey INTEGER NOT NULL,
-                        n_comment   VARCHAR(152),
-                        FOREIGN KEY (n_regionkey) REFERENCES l_regions(r_regionkey));
+CREATE TABLE l_nations (
+    n_nationkey INTEGER NOT NULL PRIMARY KEY,
+    n_name      CHAR(25) NOT NULL,
+    n_regionkey INTEGER NOT NULL,
+    n_comment   VARCHAR(152),
+    FOREIGN KEY (n_regionkey) REFERENCES l_regions(r_regionkey)
+);
 ```
 
 ```sql
@@ -171,7 +176,9 @@ Lateral joins are a generalization of correlated subqueries, as they can return 
 
 ```sql
 SELECT *
-FROM generate_series(0, 1) t(i), LATERAL (SELECT i + 10 UNION ALL SELECT i + 100) t2(j);
+FROM 
+    generate_series(0, 1) t(i),
+    LATERAL (SELECT i + 10 UNION ALL SELECT i + 100) t2(j);
 ```
 ```text
 ┌───────┬───────┐
