@@ -176,5 +176,4 @@ SELECT * FROM ontime;
 
 DuckDB supports reading erroneous CSV files. For details, see the [Reading Faulty CSV Files page](reading_faulty_csv_files).
 
-
 ## Pages in This Section
