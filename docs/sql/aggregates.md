@@ -66,7 +66,8 @@ The table below shows the available general aggregate functions.
 
 | Function | Description | Example | Alias(es) |
 |:--|:---|:--|:--|
-| `any_value(arg)` |Returns the first _non-null_ value from arg. | `any_value(A)` | - |
+| `any_value(arg)` |Returns the first non-null value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `any_value(A)` | `arbitrary(A)`, `first(A)` |
+| `arbitrary(arg)` |Returns the first non-null value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `arbitrary(A)` | `any_value(A)`, `first(A)` |
 | `arg_max(arg, val)` |Finds the row with the maximum `val`. Calculates the `arg` expression at that row. | `arg_max(A, B)` | `argMax(arg, val)`, `max_by(arg, val)` |
 | `arg_min(arg, val)` |Finds the row with the minimum `val`. Calculates the `arg` expression at that row. | `arg_min(A, B)` | `argMin(arg, val)`, `min_by(arg, val)` |
 | `avg(arg)` |Calculates the average value for all tuples in arg. | `avg(A)` | `mean` |
@@ -78,7 +79,7 @@ The table below shows the available general aggregate functions.
 | `bool_or(arg)` |Returns `true` if any input value is `true`, otherwise `false`. | `bool_or(A)` | - |
 | `count(arg)` |Calculates the number of tuples in arg. | `count(A)` | - |
 | `favg(arg)` |Calculates the average using a more accurate floating point summation (Kahan Sum). | `favg(A)` | - |
-| `first(arg)` |Returns the first value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `first(A)` |`arbitrary(A)` |
+| `first(arg)` |Returns the first non-null value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `first(A)` | `arbitrary(A)`, `any_value(A)` |
 | `fsum(arg)` |Calculates the sum using a more accurate floating point summation (Kahan Sum). | `fsum(A)` | `sumKahan`, `kahan_sum` |
 | `geomean(arg)` |Calculates the geometric mean for all tuples in arg. | `geomean(A)` | `geometric_mean(A)` |
 | `histogram(arg)` |Returns a `MAP` of key-value pairs representing buckets and counts. | `histogram(A)` | - |
