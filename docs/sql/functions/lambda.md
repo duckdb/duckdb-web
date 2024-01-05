@@ -77,21 +77,21 @@ SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 **Return type:** Defined by the Return type of the lambda function
 
 **Examples:**  
-_Incrementing each list element by one_
+_Incrementing each list element by one:_
 ```sql
 SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
 ```
 ```sql
 [2, 3, NULL, 4]
 ```
-_Transforming strings_
+_Transforming strings:_
 ```sql
 SELECT list_transform(['duck', 'a', 'b'], s -> concat(s, 'DB'));
 ```
 ```sql
 [duckDB, aDB, bDB]
 ```
-_Combining lambda functions with other functions_
+_Combining lambda functions with other functions:_
 ```sql
 SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
 ```
@@ -116,21 +116,21 @@ The lambda function must have the Return type of `BOOLEAN`.
 **Return type:** The same type as the input list
 
 **Examples:**  
-_Filter out negative values_
+_Filter out negative values:_
 ```sql
 SELECT list_filter([5, -6, NULL, 7], x -> x > 0);
 ```
 ```sql
 [5, 7]
 ```
-_Divisible by 2 and 5_
+_Divisible by 2 and 5:_
 ```sql
 SELECT list_filter(list_filter([2, 4, 3, 1, 20, 10, 3, 30], x -> x % 2 == 0), y -> y % 5 == 0);
 ```
 ```sql
 [20, 10, 30]
 ```
-_In combination with range(...) to construct lists_
+_In combination with `range(...)` to construct lists:_
 ```sql
 SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
 ```
@@ -162,21 +162,21 @@ The list must have at least one element.
 **Return type:** The underlying list type
 
 **Examples:**  
-_Sum of all list elements_
+_Sum of all list elements:_
 ```sql
 SELECT list_reduce([1, 2, 3, 4], (x, y) -> x + y);
 ```
 ```sql
 10
 ```
-_Only add up list elements if they are greater than 2_
+_Only add up list elements if they are greater than 2:_
 ```sql
 SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (x, y) -> x + y);
 ```
 ```sql
 7
 ```
-_Concat all list elements_
+_Concat all list elements:_
 ```sql
 SELECT list_reduce(['DuckDB', 'is', 'awesome'], (x, y) -> concat(x, ' ', y));
 ```
