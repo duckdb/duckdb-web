@@ -40,11 +40,11 @@ To search within a string for a character that is a wildcard (`%` or `_`), the p
 Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs](../../sql/functions/char) for details.
 
 ```sql
---Search for strings with 'a' then a literal percent sign then 'c'
+-- Search for strings with 'a' then a literal percent sign then 'c'
 'a%c' LIKE 'a$%c' ESCAPE '$'        -- true
 'azc' LIKE 'a$%c' ESCAPE '$'        -- false
 
---Case insensitive ILIKE with ESCAPE
+-- Case insensitive ILIKE with ESCAPE
 'A%c' ILIKE 'a$%c' ESCAPE '$';      --true
 ```
 

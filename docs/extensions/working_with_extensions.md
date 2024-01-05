@@ -147,7 +147,7 @@ FORCE INSTALL extension_name;
 For example, if the file was available at the (relative) path `path/to/httpfs.duckdb_extension`, you can load it as follows:
 
 ```sql
---uncompressed file
+-- uncompressed file
 LOAD 'path/to/httpfs.duckdb_extension';
 ```
 
