@@ -14,6 +14,7 @@ top-level-division: part
 variables:
   book: true
   numbersections: false
+  fontsize: 10pt
   titlepage: true
   titlepage-color: F5F5F5
   titlepage-logo: ../images/duckdb-logo.pdf
