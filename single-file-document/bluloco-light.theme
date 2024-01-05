@@ -119,7 +119,7 @@
         "Function": {
             "text-color": "#23974a",
             "background-color": null,
-            "bold": false,
+            "bold": true,
             "italic": false,
             "underline": false
         },
