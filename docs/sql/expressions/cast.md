@@ -41,4 +41,4 @@ Generally, implicit casts only cast upwards. That is to say, we can implicitly c
 
 ## Allowed Casting Operations
 
-Values of a given particular data type can typically not be casted to any arbitrary target data type. The supported cast operations are described in the [typecasting page](../data_types/typecasting) as part of the data types documentation.
+Values of a particular data type can typically not be casted to any arbitrary target data type. The supported cast operations are described in the [typecasting page](../data_types/typecasting) as part of the data types documentation.
