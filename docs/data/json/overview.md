@@ -122,15 +122,15 @@ If the JSON file contains JSON that is not newline-delimited or an array, `unstr
 ```json
 {
     "key1":"value1",
-    "key2": "value1"
+    "key2":"value1"
 }
 {
     "key1":"value2",
-    "key2": "value2"
+    "key2":"value2"
 }
 {
     "key1":"value3",
-    "key2": "value3"
+    "key2":"value3"
 }
 ```
 ```sql
