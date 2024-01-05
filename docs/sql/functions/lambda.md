@@ -26,16 +26,22 @@ For example, the following are all valid lambda functions:
 
 All scalar functions can be arbitrarily nested.
 
-_Nested lambda functions to get all squares of even list elements_
+_Nested lambda functions to get all squares of even list elements:_
 ```sql
-SELECT list_transform(list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0), y -> y * y);
+SELECT list_transform(
+        list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0),
+        y -> y * y
+    );
 ```
 ```sql
 [0, 4, 16]
 ```
-_Nested lambda function to add each element of the first list to the sum of the second list_
+_Nested lambda function to add each element of the first list to the sum of the second list:_
 ```sql
-SELECT list_transform([1, 2, 3], x -> list_reduce([4, 5, 6], (a, b) -> a + b + x));
+SELECT list_transform(
+        [1, 2, 3],
+        x -> list_reduce([4, 5, 6], (a, b) -> a + b + x)
+    );
 ```
 ```sql
 [17, 19, 21]
@@ -45,7 +51,7 @@ SELECT list_transform([1, 2, 3], x -> list_reduce([4, 5, 6], (a, b) -> a + b + x
 All lambda functions accept an optional extra parameter that represents the index of the current element.
 This is always the last parameter of the lambda function, and is 1-based (i.e., the first element has index 1).
 
-_Get all elements that are larger than their index_
+_Get all elements that are larger than their index:_
 ```sql
 SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 ```
