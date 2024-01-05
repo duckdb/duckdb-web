@@ -6,11 +6,12 @@ railroad: expressions/cast.js
 
 <div id="rrdiagram"></div>
 
-Casting refers to the process of changing the type of a row from one type to another.
+Casting refers to the operation of converting a value in a particular data type to the corresponding value in another data type.
+Casting can occur either implicitly or explicitly.
 
 ## Explicit Casting
 
-The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`. DuckDB also supports the easier to type shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
+The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`, where `TYPENAME` is a name (or alias) of one of [DuckDB's data types](../data_types/overview). DuckDB also supports the easier to type shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
 
 ```sql
 SELECT CAST(i AS VARCHAR) FROM generate_series(1, 3) tbl(i);
@@ -37,3 +38,7 @@ In many situations, the system will add casts by itself. This is called *implici
 Consider the function `sin(DOUBLE)`. This function takes as input argument a column of type `DOUBLE`, however, it can be called with an integer as well: `sin(1)`. The integer is converted into a double before being passed to the `sin` function.
 
 Generally, implicit casts only cast upwards. That is to say, we can implicitly cast an `INTEGER` to a `BIGINT`, but not the other way around.
+
+## Allowed Casting Operations
+
+Values of a particular data type can typically not be casted to any arbitrary target data type. The supported cast operations are described in the [typecasting page](../data_types/typecasting) as part of the data types documentation.
