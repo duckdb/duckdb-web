@@ -7,7 +7,10 @@ title: Python API
 
 The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](../../installation?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
 
-You must be using Python 3.7 or newer.
+**Python version:**
+DuckDB requires Python 3.7 or newer.
+DuckDB v0.9 does not yet support Python 3.12.
+The next version, [v0.10](/dev/release-dates), will support Python 3.12.
 
 ## Basic API Usage
 
