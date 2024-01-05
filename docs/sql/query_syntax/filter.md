@@ -49,7 +49,7 @@ FROM generate_series(1, 10) tbl(i);
 
 The `FILTER` clause can also be used to pivot data from rows into columns. This is a static pivot, as columns must be defined prior to runtime in SQL. However, this kind of statement can be dynamically generated in a host programming language to leverage DuckDB's SQL engine for rapid, larger than memory pivoting.
 ```sql
---First generate an example dataset
+-- First generate an example dataset
 CREATE TEMP TABLE stacked_data AS 
     SELECT 
         i,
@@ -66,7 +66,7 @@ CREATE TEMP TABLE stacked_data AS
         FROM generate_series(1, 100000000) tbl(i)
     ) tbl;
 
---"Pivot" the data out by year (move each year out to a separate column)
+-- "Pivot" the data out by year (move each year out to a separate column)
 SELECT
     count(i) FILTER (WHERE year = 2022) AS "2022",
     count(i) FILTER (WHERE year = 2023) AS "2023",
@@ -75,7 +75,7 @@ SELECT
     count(i) FILTER (WHERE year IS NULL) AS "NULLs"
 FROM stacked_data;
 
---This syntax produces the same results as the FILTER clauses above
+-- This syntax produces the same results as the FILTER clauses above
 SELECT
     count(CASE WHEN year = 2022 THEN i END) AS "2022",
     count(CASE WHEN year = 2023 THEN i END) AS "2023",
@@ -94,7 +94,7 @@ FROM stacked_data;
 However, the `CASE WHEN` approach will not work as expected when using an aggregate function that does not ignore `NULL` values. The `FIRST` function falls into this category, so `FILTER` is preferred in this case.
 
 ```sql
---"Pivot" the data out by year (move each year out to a separate column)
+-- "Pivot" the data out by year (move each year out to a separate column)
 SELECT
     first(i) FILTER (WHERE year = 2022) AS "2022",
     first(i) FILTER (WHERE year = 2023) AS "2023",
@@ -111,7 +111,7 @@ FROM stacked_data;
 | 1474561 | 25804801 | 50749441 | 76431361 | 87500001 |
 
 ```sql
---This will produce NULL values whenever the first evaluation of the CASE WHEN clause returns a NULL
+-- This will produce NULL values whenever the first evaluation of the CASE WHEN clause returns a NULL
 SELECT
     first(CASE WHEN year = 2022 THEN i END) AS "2022",
     first(CASE WHEN year = 2023 THEN i END) AS "2023",
