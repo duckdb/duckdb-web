@@ -290,11 +290,13 @@ SELECT json_extract('{"duck": [1, 2, 3]}', '/duck/0');
 -- 1
 ```
 
-The JSONPath syntax separates fields with a `.`, and accesses array elements with `[i]`, and always starts with `$`. Using the same example, we can do:
+The JSONPath syntax separates fields with a `.`, and accesses array elements with `[i]`, and always starts with `$`. Using the same example, we can do the following:
 ```sql
 SELECT json_extract('{"duck": [1, 2, 3]}', '$.duck[0]');
 -- 1
 ```
+
+Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
 
 JSONPath is more expressive, and can also access from the back of lists:
 ```sql
@@ -355,6 +357,8 @@ These functions supports the same two location notations as the previous functio
 | `json_extract(`*`json`*`,`*`path`*`)` | `json_extract_path` | `->` | Extract `JSON` from *`json`* at the given *`path`*. If *`path`* is a `LIST`, the result will be a `LIST` of `JSON` |
 | `json_extract_string(`*`json`*`,`*`path`*`)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from *`json`* at the given *`path`*. If *`path`* is a `LIST`, the result will be a `LIST` of `VARCHAR` |
 
+Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
+
 Examples:
 ```sql
 CREATE TABLE example (j JSON);
@@ -383,6 +387,8 @@ SELECT j->'species'->>0 FROM example;
 SELECT j->'species'->>[0,1] FROM example;
 -- [duck, goose]
 ```
+
+Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
 
 If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
 ```sql
@@ -539,6 +545,10 @@ SELECT * FROM json_execute_serialized_sql(json_serialize_sql('SELECT 1 + 2'));
 SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID SQL'));
 -- Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALLY"
 ```
+
+## Indexing
+
+Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays](../sql/data_types/array) and [lists](../sql/data_types/list) but 0-based indexing for the JSON data type.
 
 ## GitHub
 
