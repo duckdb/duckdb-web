@@ -49,7 +49,7 @@ DatabaseTable: penguins
   body_mass_g       int64
   sex               string
   year              int64
-``````
+```
 
 You can now see the example dataset copied over to the database:
 
