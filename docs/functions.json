@@ -407,7 +407,7 @@
     "struct": "BitStringFun",
     "type": "scalar_function",
     "category": "bit",
-    "result": "0001010"
+    "result": null
   },
   {
     "name": "bitstring_agg",
@@ -1562,6 +1562,22 @@
     "result": 14.0
   },
   {
+    "name": "list_reduce",
+    "parameters": [
+      "list",
+      "lambda"
+    ],
+    "description": "Returns a single value that is the result of applying the lambda function to each element of the input list, starting with the first element and then repeatedly applying the lambda function to the result of the previous application and the next element of the list.",
+    "example": "list_reduce([1, 2, 3], (x, y) -> x + y)",
+    "type": "scalar_function",
+    "aliases": [
+      "array_reduce",
+      "reduce"
+    ],
+    "category": "list",
+    "result": 6
+  },
+  {
     "name": "list_reverse_sort",
     "parameters": [
       "list"
@@ -2343,7 +2359,7 @@
     "example": "row(4, 'hello')",
     "type": "scalar_function",
     "category": "struct",
-    "result": "{'': 4, '': hello}"
+    "result": "(4, hello)"
   },
   {
     "name": "rpad",
@@ -3072,7 +3088,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.3-dev1990"
+    "result": "v0.9.3-dev2267"
   },
   {
     "name": "week",
