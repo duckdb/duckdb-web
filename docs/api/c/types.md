@@ -131,7 +131,7 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">char</span> *<a href="#duckdb_logical_type_get_alias"><span class="nf">duckdb_logical_type_get_alias</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_list_type"><span class="nf">duckdb_create_list_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_map_type"><span class="nf">duckdb_create_map_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">value_type</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_union_type"><span class="nf">duckdb_create_union_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_union_type"><span class="nf">duckdb_create_union_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_struct_type"><span class="nf">duckdb_create_struct_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_enum_type"><span class="nf">duckdb_create_enum_type</span></a>(<span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_decimal_type"><span class="nf">duckdb_create_decimal_type</span></a>(<span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
@@ -1230,7 +1230,7 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_union_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">member_types</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">member_count
 </span>);
