@@ -153,7 +153,7 @@ LOAD 'path/to/httpfs.duckdb_extension';
 
 This will skip any currently installed file in the specifed path.
 
-Using remote paths or compressed files is currently not possible.
+Using remote paths for compressed files is currently not possible.
 
 ## Building Extensions
 
