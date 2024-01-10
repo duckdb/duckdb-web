@@ -55,3 +55,7 @@ silver:
   - name: BoilingData
     url: https://www.boilingdata.com/
     logoimg: boilingdata.svg
+
+  - name: Overture Maps Foundation
+    url: https://overturemaps.org/
+    logoimg: overture-maps.svg
