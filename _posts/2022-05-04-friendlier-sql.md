@@ -14,12 +14,15 @@ However, SQL is not famous for being user-friendly. DuckDB aims to change that! 
 ### SELECT * EXCLUDE 
 
 A traditional SQL `SELECT` query requires that requested columns be explicitly specified, with one notable exception: the `*` wildcard. `SELECT *` allows SQL to return all relevant columns. This adds tremendous flexibility, especially when building queries on top of one another. However, we are often interested in *almost* all columns. In DuckDB, simply specify which columns to `EXCLUDE`:
+
 ```sql
 SELECT * EXCLUDE (jar_jar_binks, midichlorians) FROM star_wars
 ```
+
 Now we can save time repeatedly typing all columns, improve code readability, and retain flexibility as additional columns are added to underlying tables.  
 
 DuckDB's implementation of this concept can even handle exclusions from multiple tables within a single statement:
+
 ```sql
 SELECT 
     sw.* EXCLUDE (jar_jar_binks, midichlorians),
@@ -30,6 +33,7 @@ FROM star_wars sw, firefly ff
 ### SELECT * REPLACE
 
 Similarly, we often wish to use all of the columns in a table, aside from a few small adjustments. This would also prevent the use of `*` and require a list of all columns, including those that remain unedited. In DuckDB, easily apply changes to a small number of columns with `REPLACE`:
+
 ```sql
 SELECT 
     * REPLACE (movie_count+3 AS movie_count, show_count*1000 AS show_count)
@@ -40,6 +44,7 @@ This allows views, CTE's, or sub-queries to be built on one another in a highly 
 ### GROUP BY ALL
 
 A common cause of repetitive and verbose SQL code is the need to specify columns in both the `SELECT` clause and the `GROUP BY` clause. In theory this adds flexibility to SQL, but in practice it rarely adds value. DuckDB now offers the `GROUP BY` we all expected when we first learned SQL - just `GROUP BY ALL` columns in the `SELECT` clause that aren't wrapped in an aggregate function!
+
 ```sql
 SELECT
     systems,
@@ -55,6 +60,7 @@ GROUP BY ALL
 Now changes to a query can be made in only one place instead of two! Plus this prevents many mistakes where columns are removed from a `SELECT` list, but not from the `GROUP BY`, causing duplication.
 
 Not only does this dramatically simplify many queries, it also makes the above `EXCLUDE` and `REPLACE` clauses useful in far more situations. Imagine if we wanted to adjust the above query by no longer considering the level of scum and villainy in each specific cantina:
+
 ```sql
 SELECT
     * EXCLUDE (cantinas, booths, scum, villainy),
@@ -63,11 +69,13 @@ FROM star_wars_locations
 GROUP BY ALL
 -- GROUP BY systems, planets, cities
 ```
+
 Now that is some concise and flexible SQL! How many of your `GROUP BY` clauses could be re-written this way?
 
 ### ORDER BY ALL
 
 Another common cause for repetition in SQL is the `ORDER BY` clause. DuckDB and other RDBMSs have previously tackled this issue by allowing queries to specify the numbers of columns to `ORDER BY` (For example, `ORDER BY 1, 2, 3`). However, frequently the goal is to order by all columns in the query from left to right, and maintaining that numeric list when adding or subtracting columns can be error prone. In DuckDB, simply `ORDER BY ALL`: 
+
 ```sql
 SELECT
     age,
@@ -77,6 +85,7 @@ GROUP BY ALL
 ORDER BY ALL
 -- ORDER BY age, total_civility
 ```
+
 This is particularly useful when building summaries, as many other client tools automatically sort results in this manner. DuckDB also supports `ORDER BY ALL DESC` to sort each column in reverse order, and options to specify `NULLS FIRST` or `NULLS LAST`.
 
 ### Column Aliases in WHERE / GROUP BY / HAVING
@@ -107,6 +116,8 @@ CREATE TABLE mandalorian AS SELECT 1 AS "THIS_IS_THE_WAY";
 SELECT this_is_the_way FROM mandalorian;
 ```  
 
+<div class="narrow_table"></div>
+
 | THIS_IS_THE_WAY |
 |:---|
 | 1               |
@@ -119,6 +130,7 @@ Regardless of expertise, and despite DuckDB's best efforts to understand our int
 ```sql
 SELECT * FROM star_trek;
 ```
+
 ```text
 Error: Catalog Error: Table with name star_trek does not exist!
 Did you mean "star_wars"?
@@ -132,6 +144,7 @@ DuckDB's suggestions are even context specific. Here, we receive a suggestion to
 ```sql
 SELECT long_ago FROM star_wars;
 ```
+
 ```text
 Error: Binder Error: Referenced column "long_ago" not found in FROM clause!
 Candidate bindings: "star_wars.long_long_ago"
@@ -146,6 +159,8 @@ Even as SQL fans, we know that SQL can learn a thing or two from newer languages
 ```sql
 SELECT 'I love you! I know'[:-3] AS nearly_soloed;
 ```  
+
+<div class="narrow_table"></div>
 
 |  nearly_soloed  |
 |:---|
@@ -169,6 +184,8 @@ SELECT
     starfighter_list[2:2] AS dont_forget_the_b_wing 
 FROM (SELECT ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list);
 ```  
+
+<div class="narrow_table"></div>
 
 | dont_forget_the_b_wing |
 |:---|
@@ -228,6 +245,8 @@ FROM (
     ) theyre_coming_in_too_fast
 ```  
 
+<div class="narrow_table"></div>
+
 | tie_fighter | tie_fighter:1 |
 |:---|:---|
 | green_one   | green_two     |
@@ -245,7 +264,9 @@ SELECT
 FROM sith_count_int s_int 
 JOIN sith_count_varchar s_char 
     ON s_int.sith_count = s_char.sith_count;
-```  
+```
+
+<div class="narrow_table"></div>
 
 | sith_count | sith_count |
 |:---|:---|
