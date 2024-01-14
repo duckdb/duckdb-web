@@ -63,6 +63,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type `VARCHAR`. | `BOOL` | `false` |
+| `allow_quoted_nulls` | Option to allow the conversion of quoted values to `NULL` values | `BOOL` | `true` |
 | `auto_detect` | Enables [auto detection of CSV parameters](auto_detection). | `BOOL` | `true` |
 | `auto_type_candidates` | This option allows you to specify the types that the sniffer will use when detecting CSV column types, e.g., `SELECT * FROM read_csv('csv_file.csv', auto_type_candidates=['BIGINT', 'DATE'])`. The `VARCHAR` type is always included in the detected types (as a fallback option). | `TYPE[]` | `['SQLNULL', 'BOOLEAN', 'BIGINT', 'DOUBLE', 'TIME', 'DATE', 'TIMESTAMP', 'VARCHAR']` |
 | `buffer_size` | The buffer size used by the CSV reader, specified in bytes. By default, it is set to 32MB or the size of the CSV file (if smaller). The buffer size must be at least as large as the longest line in the CSV file. Note: this is an advanced option that has a significant impact on performance and memory usage. | `BIGINT` | min(32000000, CSV file size) |
