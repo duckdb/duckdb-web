@@ -48,10 +48,11 @@ DuckDB supports larger-than-memory processing for all of these operators.
 ### Limitations
 
 DuckDB strives to always complete workloads even if they are larger-than-memory.
-That said, there are some limitations:
+That said, there are some limitations at the moment:
 
 * If multiple blocking operators appear in the same query, DuckDB may still throw an out-of-memory exception due to the complex interplay of these operators.
-* Currently, some [aggregate functions](../../sql/aggregates), such as `list()` and `string_agg()`, do not support offloading to disk.
+* Some [aggregate functions](../../sql/aggregates), such as `list()` and `string_agg()`, do not support offloading to disk.
+* [Aggregate functions that use sorting](../../sql/aggregates#order-by-clause-in-aggregate-functions) are holistic, i.e., they need all inputs before the aggregation can start. As DuckDB cannot yet offload some complex intermediate aggregate states to disk, these functions can cause an out-of-memory exception when run on large data sets.
 * The `PIVOT` operation [internally uses the `list()` function](../../sql/statements/pivot#internals), therefore it is subject to the same limitation.
 
 ## Profiling
