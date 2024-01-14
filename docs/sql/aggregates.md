@@ -42,7 +42,8 @@ SELECT <aggregate_function>(<arg>, <sep> ORDER BY <ordering_criteria>);
 ```
 
 This clause ensures that the values being aggregated are sorted before applying the function.
-Most aggregate functions are order-insensitive, therefore, this clause is parsed and applied, which is inefficient, but has on effect on the results.However, there are some order-sensitive aggregates that can have non-deterministic results without ordering, e.g., `first`, `last`, `list` and `string_agg` / `group_concat` / `listagg`.
+Most aggregate functions are order-insensitive, therefore, this clause is parsed and applied, which is inefficient, but has on effect on the results.
+However, there are some order-sensitive aggregates that can have non-deterministic results without ordering, e.g., `first`, `last`, `list` and `string_agg` / `group_concat` / `listagg`.
 These can be made deterministic by ordering the arguments.
 
 For example:
