@@ -16,7 +16,7 @@ This section describes functions and operators for examining and manipulating st
 | `ascii(`*`string`*`)`| Returns an integer that represents the Unicode code point of the first character of the *string* | `ascii('Ω')` | `937` | |
 | `bar(`*`x`*`, `*`min`*`, `*`max`*`[, `*`width`*`])` | Draw a band whose width is proportional to (*x* - *min*) and equal to *width* characters when *x* = *max*. *width* defaults to 80. | `bar(5, 0, 20, 10)` | `██▌` | |
 | `bit_length(`*`string`*`)`| Number of bits in a string. | `bit_length('abc')` | `24` | |
-| `chr(`*`x`*`)` | returns a character which is corresponding the ASCII code value or Unicode code point | `chr(65)` | A | |
+| `chr(`*`x`*`)` | Returns a character which is corresponding the ASCII code value or Unicode code point | `chr(65)` | A | |
 | `concat(`*`string`*`, ...)` | Concatenate many strings together | `concat('Hello', ' ', 'World')` | `Hello World` | |
 | `concat_ws(`*`separator`*`, `*`string`*`, ...)` | Concatenate strings together separated by the specified separator | `concat_ws(', ', 'Banana', 'Apple', 'Melon')` | `Banana, Apple, Melon` | |
 | `contains(`*`string`*`, `*`search_string`*`)` | Return true if *search_string* is found within *string* | `contains('abc', 'a')` | `true` | |
@@ -24,7 +24,7 @@ This section describes functions and operators for examining and manipulating st
 | `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using the [fmt syntax](#fmt-syntax) | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` | |
 | `format_bytes(`*`bytes`*`)` | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). | `format_bytes(16384)` | `16.0 KiB` | |
 | `from_base64(`*`string`*`)`| Convert a base64 encoded string to a character string. | `from_base64('QQ==')` | `'A'` | |
-| `hash(`*`value`*`)` | Returns an integer with the hash of the *value* | `hash('🦆')` | `2595805878642663834` | |
+| `hash(`*`value`*`)` | Returns a `UBIGINT` with the hash of the *value* | `hash('🦆')` | `2595805878642663834` | |
 | `ilike_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `ilike_escape('A%c', 'a$%C', '$')` | `true` | |
 | `instr(`*`string`*`, `*`search_string`*`)`| Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `instr('test test', 'es')` | 2 | |
 | `left(`*`string`*`, `*`count`*`)`| Extract the left-most count characters | `left('Hello🦆', 2)` | `He` | |
