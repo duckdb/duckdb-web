@@ -107,10 +107,12 @@ For more information about data chunks, see the [documentation on data chunks](d
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <a href="#duckdb_from_date"><span class="nf">duckdb_from_date</span></a>(<span class="kt">duckdb_date</span> <span class="nv">date</span>);
 <span class="kt">duckdb_date</span> <a href="#duckdb_to_date"><span class="nf">duckdb_to_date</span></a>(<span class="kt">duckdb_date_struct</span> <span class="nv">date</span>);
+<span class="kt">bool</span> <a href="#duckdb_is_finite_date"><span class="nf">duckdb_is_finite_date</span></a>(<span class="kt">duckdb_date</span> <span class="nv">date</span>);
 <span class="kt">duckdb_time_struct</span> <a href="#duckdb_from_time"><span class="nf">duckdb_from_time</span></a>(<span class="kt">duckdb_time</span> <span class="nv">time</span>);
 <span class="kt">duckdb_time</span> <a href="#duckdb_to_time"><span class="nf">duckdb_to_time</span></a>(<span class="kt">duckdb_time_struct</span> <span class="nv">time</span>);
 <span class="kt">duckdb_timestamp_struct</span> <a href="#duckdb_from_timestamp"><span class="nf">duckdb_from_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
 <span class="kt">duckdb_timestamp</span> <a href="#duckdb_to_timestamp"><span class="nf">duckdb_to_timestamp</span></a>(<span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts</span>);
+<span class="kt">bool</span> <a href="#duckdb_is_finite_timestamp"><span class="nf">duckdb_is_finite_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
 </code></pre></div></div>
 
 ### Hugeint Helpers
@@ -895,6 +897,32 @@ The `duckdb_date` element.
 <br>
 
 
+### `duckdb_is_finite_date`
+
+---
+Test a `duckdb_date` to see if it is a finite value.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_date</span>(<span class="nv">
+</span>  <span class="kt">duckdb_date</span> <span class="nv">date
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `date`
+
+The date object, as obtained from a `DUCKDB_TYPE_DATE` column.
+* `returns`
+
+True if the date is finite, false if it is ±infinity.
+
+<br>
+
+
 ### `duckdb_from_time`
 
 ---
@@ -995,6 +1023,32 @@ The de-composed elements in a `duckdb_timestamp_struct`.
 * `returns`
 
 The `duckdb_timestamp` element.
+
+<br>
+
+
+### `duckdb_is_finite_timestamp`
+
+---
+Test a `duckdb_timestamp` to see if it is a finite value.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_timestamp</span>(<span class="nv">
+</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">ts
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `ts`
+
+The timestamp object, as obtained from a `DUCKDB_TYPE_TIMESTAMP` column.
+* `returns`
+
+True if the timestamp is finite, false if it is ±infinity.
 
 <br>
 
