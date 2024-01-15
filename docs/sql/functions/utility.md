@@ -29,6 +29,7 @@ The functions below are difficult to categorize into specific function types and
 | `nextval(`*`'sequence_name'`*`)`| Return the following value of the sequence.| `nextval('my_sequence_name')`| `2` |
 | `pg_typeof(`*`expression`*`)` | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility.| `pg_typeof('abc')` | `'varchar'` |
 | `repeat_row(`*`varargs`*`, `*`num_rows`*`)` | Returns a table with *`num_rows`* rows, each containing the fields defined in *`varargs`* | `repeat_row(1, 2, 'foo', num_rows = 3)` | 3 rows of `1, 2, 'foo'` |
+| `sha256(`*`value`*`)` | Returns a `VARCHAR` with the SHA-256 hash of the *`value`*| `sha-256('🦆')` | `d7a5c5e0d1d94c32218539e7e47d4ba9c3c7b77d61332fb60d633dde89e473fb` |
 | `stats(`*`expression`*`)` | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression.| `stats(5)` | `'[Min: 5, Max: 5][Has Null: false]'` |
 | `txid_current()`| Returns the current transaction's ID (a `BIGINT`). It will assign a new one if the current transaction does not have one already.| `txid_current()` | various |
 | `typeof(`*`expression`*`)`| Returns the name of the data type of the result of the expression. | `typeof('abc')`| `'VARCHAR'` |
