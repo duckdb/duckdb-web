@@ -2155,6 +2155,18 @@
     "result": "[2]"
   },
   {
+    "name": "regexp_escape",
+    "parameters": [
+      "string"
+    ],
+    "description": "Escapes all potentially meaningful regexp characters in the input string",
+    "example": "regexp_escape('https://duckdb.org')",
+    "struct": "RegexpEscapeFun",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "https\\:\\/\\/duckdb\\.org"
+  },
+  {
     "name": "regr_avgx",
     "parameters": [
       "y",
@@ -3088,7 +3100,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.3-dev2267"
+    "result": "v0.9.3-dev2533"
   },
   {
     "name": "week",
