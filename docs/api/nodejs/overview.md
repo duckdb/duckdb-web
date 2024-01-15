@@ -4,7 +4,7 @@ title: Node.js API
 ---
 
 This package provides a Node.js API for DuckDB.
-The API for this client is somewhat compliant to the SQLite node.js client for easier transition.
+The API for this client is somewhat compliant to the SQLite Node.js client for easier transition.
 
 ## Initializing
 
