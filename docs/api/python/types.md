@@ -109,6 +109,7 @@ For the builtin types, you can use the constants defined in `duckdb.typing`
 |BIGINT|
 |UBIGINT|
 |HUGEINT|
+|UHUGEINT|
 |UUID|
 |FLOAT|
 |DOUBLE|
