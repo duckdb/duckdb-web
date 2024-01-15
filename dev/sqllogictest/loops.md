@@ -41,12 +41,12 @@ endloop
 
 |      Preset      |                           Expansion                            |
 |------------------|----------------------------------------------------------------|
-| `<compression>`` | `none uncompressed rle bitpacking dictionary fsst chimp patas` |
-| `<signed>``      | `tinyint smallint integer bigint hugeint`                      |
-| `<unsigned>``    | `utinyint usmallint uinteger ubigint`                          |
-| `<integral>``    | `<signed> <unsigned>`                                          |
-| `<numeric>``     | `<integral> float double`                                      |
-| `<alltypes>``    | `<numeric> bool interval varchar json`                         |
+| `<compression>`  | `none uncompressed rle bitpacking dictionary fsst chimp patas` |
+| `<signed>`       | `tinyint smallint integer bigint hugeint`                      |
+| `<unsigned>`     | `utinyint usmallint uinteger ubigint uhugeint`                 |
+| `<integral>`     | `<signed> <unsigned>`                                          |
+| `<numeric>`      | `<integral> float double`                                      |
+| `<alltypes>`     | `<numeric> bool interval varchar json`                         |
 
 > Use large loops sparingly. Executing hundreds of thousands of SQL statements will slow down tests unnecessarily. Do not use loops for inserting data.
 
