@@ -6,6 +6,8 @@ title: Node.js API
 This package provides a Node.js API for DuckDB.
 The API for this client is somewhat compliant to the SQLite Node.js client for easier transition.
 
+For TypeScript wrappers, see the [duckdb-async project](https://www.npmjs.com/package/duckdb-async).
+
 ## Initializing
 
 Load the package and create a database object:
