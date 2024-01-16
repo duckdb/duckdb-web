@@ -33,7 +33,7 @@ SELECT list_transform(
         y -> y * y
     );
 ```
-```sql
+```text
 [0, 4, 16]
 ```
 _Nested lambda function to add each element of the first list to the sum of the second list:_
@@ -43,23 +43,24 @@ SELECT list_transform(
         x -> list_reduce([4, 5, 6], (a, b) -> a + b) + x
     );
 ```
-```sql
-[17, 19, 21]
+```text
+[16, 17, 18]
 ```
 
 ### Scoping
 
-Lambda functions confirm to the following scoping rules:
+Lambda functions confirm to scoping rules in the following order:
 - inner lambda parameters
 - outer lambda parameters
-- column names/ macro parameters/ etc.
+- column names
+- macro parameters
 
 ```sql
 CREATE TABLE tbl (x INT);
 INSERT INTO tbl VALUES (10);
 SELECT apply([1, 2], x -> apply([4], x -> x + tbl.x)[1] + x) FROM tbl;
 ```
-```sql
+```text
 [15, 16]
 ```
 
@@ -71,7 +72,7 @@ _Get all elements that are larger than their index:_
 ```sql
 SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 ```
-```sql
+```text
 [3, 5]
 ```
 
