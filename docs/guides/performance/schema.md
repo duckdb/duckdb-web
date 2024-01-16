@@ -5,7 +5,7 @@ title: Schema
 
 ## Types
 
-It is important to use the correct type for encoding columns (e.g., `BIGINT`, `DATE`, `DATETIME`). While it is always possible to use string types (`VARCHAR`, etc.) to encode more specific values, this is not recommended as strings are generally slower to process.
+It is important to use the correct type for encoding columns (e.g., `BIGINT`, `DATE`, `DATETIME`). While it is always possible to use string types (`VARCHAR`, etc.) to encode more specific values, this is not recommended. Strings use more space and are slower to process in operations such as filtering, join, and aggregation.
 
 When loading CSV files, you may leverage the CSV reader's [auto-detection mechanism](../../data/csv/auto_detection) to get the correct types for CSV inputs.
 
@@ -15,7 +15,7 @@ _**Best Practice:**_ Use the most restrictive types possible when creating colum
 
 ### Microbenchmark: Using Timestamps
 
-We illustrate the difference using the `creationDate` column of the [LDBC Comment table on scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet). This table has approx. 554 million unordered timestamp values. We run a simple aggregation query that returns the average day-of-the month from the timestamps in two configurations.
+We illustrate the difference in aggregation speed using the [`creationDate` column of the LDBC Comment table on scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet). This table has approx. 554 million unordered timestamp values. We run a simple aggregation query that returns the average day-of-the month from the timestamps in two configurations.
 
 First, we use a `DATETIME` to encode the values and run the query using the [`extract` datetime function](../../sql/functions/timestamp):
 
@@ -39,6 +39,27 @@ The results of the microbenchmark are as follows:
 | `VARCHAR` | 5.2 GB | 3.919 s |
 
 The results show that using the `DATETIME` value yields smaller storage sizes and faster processing. 
+
+### Microbenchmark: Joining on Strings
+
+We illustrate the difference in join speed by computing a self-join on the [full LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst):
+
+```sql
+SELECT count(*) AS count
+FROM Comment c1
+JOIN Comment c2 ON c1.ParentCommentId = c2.id
+```
+
+In the first experiment, we use the correct (most restrictive) types, i.e., both the `id` and the `ParentCommentId` columns are defined as `BIGINT`.
+In the second experiment, we define all columns with the `VARCHAR` type.
+While the results are the same, the query runtime varies significantly: joining on `BIGINT` columns is approximately 2.6× faster than performing the same join on `VARCHAR` columns.
+
+<div class="narrow_table"></div>
+
+| Join Column Type | Query Time |
+|---|---|
+| `BIGINT` | 63.3s |
+| `VARCHAR` | 164.0s |
 
 ## Constraints
 
