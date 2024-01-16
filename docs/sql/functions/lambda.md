@@ -16,11 +16,11 @@ For example, the following are all valid lambda functions:
 
 ### Scalar Functions That Accept Lambda Functions
 
-| Function | Aliases | Description | Example | Result |
-|--|--|---|--|-|
-| [`list_transform(`*`list`*`, `*`lambda`*`)`](#transform) | `array_transform`, `apply`, `list_apply`, `array_apply` | Returns a list that is the result of applying the lambda function to each element of the input list.         | `list_transform([4, 5, 6], x -> x + 1)`   | `[5, 6, 7]` |
-| [`list_filter(`*`list`*`, `*`lambda`*`)`](#filter)      | `array_filter`, `filter`                                | Constructs a list from those elements of the input list for which the lambda function returns true.          | `list_filter([4, 5, 6], x -> x > 4)`      | `[5, 6]`    |
-| [`list_reduce(`*`list`*`, `*`lambda`*`)`](#reduce)      | `array_reduce`, `reduce`                                | Returns a single value that is the result of applying the lambda function to each element of the input list. | `list_reduce([4, 5, 6], (x, y) -> x + y)` | `15`        |
+| Function | Aliases | Description                                                                                                                                | Example | Result |
+|--|--|--------------------------------------------------------------------------------------------------------------------------------------------|--|-|
+| [`list_transform(`*`list`*`, `*`lambda`*`)`](#transform) | `array_transform`, `apply`, `list_apply`, `array_apply` | Returns a list that is the result of applying the lambda function to each element of the input list.                                       | `list_transform([4, 5, 6], x -> x + 1)`   | `[5, 6, 7]` |
+| [`list_filter(`*`list`*`, `*`lambda`*`)`](#filter)      | `array_filter`, `filter`                                | Constructs a list from those elements of the input list for which the lambda function returns `True`.                                      | `list_filter([4, 5, 6], x -> x > 4)`      | `[5, 6]`    |
+| [`list_reduce(`*`list`*`, `*`lambda`*`)`](#reduce)      | `array_reduce`, `reduce`                                | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. | `list_reduce([4, 5, 6], (x, y) -> x + y)` | `15`        |
 
 ### Nesting
 
@@ -40,11 +40,27 @@ _Nested lambda function to add each element of the first list to the sum of the 
 ```sql
 SELECT list_transform(
         [1, 2, 3],
-        x -> list_reduce([4, 5, 6], (a, b) -> a + b + x)
+        x -> list_reduce([4, 5, 6], (a, b) -> a + b) + x
     );
 ```
 ```sql
 [17, 19, 21]
+```
+
+### Scoping
+
+Lambda functions confirm to the following scoping rules:
+- inner lambda parameters
+- outer lambda parameters
+- column names/ macro parameters/ etc.
+
+```sql
+CREATE TABLE tbl (x INT);
+INSERT INTO tbl VALUES (10);
+SELECT apply([1, 2], x -> apply([4], x -> x + tbl.x)[1] + x) FROM tbl;
+```
+```sql
+[15, 16]
 ```
 
 ### Indexes as Parameters
@@ -72,9 +88,9 @@ SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 - `list_apply`
 - `array_apply`
  
-**Number of parameters (excluding indexes):** 1
+**Number of parameters excluding indexes:** 1
 
-**Return type:** Defined by the Return type of the lambda function
+**Return type:** Defined by the return type of the lambda function
 
 **Examples:**  
 _Incrementing each list element by one:_
@@ -104,14 +120,14 @@ SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
 **Signature:** `list_filter(list, lambda)`
 
 **Description:**  
-Constructs a list from those elements of the input list for which the lambda function returns true.
-The lambda function must have the Return type of `BOOLEAN`.
+Constructs a list from those elements of the input list for which the lambda function returns `True`.
+DuckDB must be able to cast the lambda function's return type to `BOOL`.
 
 **Aliases:**  
 - `array_filter`
 - `filter`
 
-**Number of parameters (excluding indexes):** 1
+**Number of parameters excluding indexes:** 1
 
 **Return type:** The same type as the input list
 
@@ -157,9 +173,9 @@ The list must have at least one element.
 - `array_reduce`
 - `reduce`
 
-**Number of parameters (excluding indexes):** 2
+**Number of parameters excluding indexes:** 2
 
-**Return type:** The underlying list type
+**Return type:** The type of the input list's elements
 
 **Examples:**  
 _Sum of all list elements:_
