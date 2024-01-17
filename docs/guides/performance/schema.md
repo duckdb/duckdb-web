@@ -47,7 +47,7 @@ We illustrate the difference caused by joining on different types by computing a
 ```sql
 SELECT count(*) AS count
 FROM Comment c1
-JOIN Comment c2 ON c1.ParentCommentId = c2.id
+JOIN Comment c2 ON c1.ParentCommentId = c2.id;
 ```
 
 In the first experiment, we use the correct (most restrictive) types, i.e., both the `id` and the `ParentCommentId` columns are defined as `BIGINT`.
