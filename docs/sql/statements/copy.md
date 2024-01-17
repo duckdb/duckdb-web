@@ -15,9 +15,17 @@ COPY lineitem FROM 'lineitem.csv' (DELIMITER '|');
 COPY lineitem FROM 'lineitem.pq' (FORMAT PARQUET);
 -- read a JSON file into the lineitem table, using auto-detected options
 COPY lineitem FROM 'lineitem.json' (FORMAT JSON, AUTO_DETECT true);
+-- read a CSV file into the lineitem table, using double quotes
+COPY lineitem FROM "lineitem.csv";
+-- read a CSV file into the lineitem table, omitting quotes
+COPY lineitem FROM lineitem.csv;
 
 -- write a table to a CSV file
 COPY lineitem TO 'lineitem.csv' (FORMAT CSV, DELIMITER '|', HEADER);
+-- write a table to a CSV file, using double quotes
+COPY lineitem TO "lineitem.csv";
+-- write a table to a CSV file, omitting quotes
+COPY lineitem TO lineitem.csv;
 -- write the result of a query to a Parquet file
 COPY (SELECT l_orderkey, l_partkey FROM lineitem) TO 'lineitem.parquet' (COMPRESSION ZSTD);
 
