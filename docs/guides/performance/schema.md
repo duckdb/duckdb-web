@@ -60,9 +60,9 @@ Joining on `BIGINT` columns is approximately 5.3× faster than performing the sa
 
 | Join Column Type | Query Time |
 |---|---|
-| `BIGINT`  |  1.8s |
-| `VARCHAR` |  9.5s |
-| `UUID`    | 14.6s |
+| `BIGINT`  |  1.8 s |
+| `VARCHAR` |  9.5 s |
+| `UUID`    | 14.6 s |
 
 ## Constraints
 

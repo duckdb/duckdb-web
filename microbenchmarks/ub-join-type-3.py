@@ -1,7 +1,7 @@
 import duckdb
 import time
 
-print("Benchmark to join on BIGINT field")
+print("Benchmark to join on UUID field")
 print(f"DuckDB version: {duckdb.__version__}")
 con = duckdb.connect(database = "ldbc.duckdb")
 con.sql("""
