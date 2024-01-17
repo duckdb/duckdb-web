@@ -47,12 +47,12 @@ We illustrate the difference caused by joining on different types by computing a
 ```sql
 SELECT count(*) AS count
 FROM Comment c1
-JOIN Comment c2 ON c1.ParentCommentId = c2.id
+JOIN Comment c2 ON c1.ParentCommentId = c2.id;
 ```
 
 In the first experiment, we use the correct (most restrictive) types, i.e., both the `id` and the `ParentCommentId` columns are defined as `BIGINT`.
 In the second experiment, we define all columns with the `VARCHAR` type.
-In the third experiment, we first assign a `UUID` to each row and set the parent comments UUIDs accordingly (this is done outside of the benchmark).
+In the third experiment, we first assign a `UUID` value to each row and set the parent comment's `UUID` accordingly (these are done as a precomputation outside of the benchmark window, which only measures the join time).
 While the result of the query is the same for all three experiments, it runtime varies significantly.
 Joining on `BIGINT` columns is approximately 5.3× faster than performing the same join on `VARCHAR` columns, and 8.1× faster than joining on `UUID` columns.
 
