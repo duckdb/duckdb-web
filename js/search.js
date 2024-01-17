@@ -20,6 +20,7 @@ const tokenize = (string) => string.split(/[\s-]+/); // search query tokenizer
 const miniSearch = new MiniSearch({
 	fields: ['title', 'text', 'category', 'blurb'],
 	storeFields: ['title', 'text', 'category', 'url', 'blurb'],
+	tokenize,
 	searchOptions: { tokenize }
 })
 
@@ -114,7 +115,8 @@ text_div.addEventListener('input', on_update);
 inp = document.getElementById("q")
 const miniPredictor = new MiniSearch({
 	fields: ['title', 'category', 'blurb'],
-	storeFields: ['title', 'category', 'blurb']
+	storeFields: ['title', 'category', 'blurb'],
+	tokenize,
 	searchOptions: { tokenize }
 })
 /*the autocomplete function takes two arguments,
