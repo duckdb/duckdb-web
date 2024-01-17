@@ -25,13 +25,29 @@ con.sql("""
             FROM read_csv('ldbc-sf300-comments/*.csv.gz', auto_detect=true, delim='|', header=true);
         """)
 
+print("Adding UUIDs to the schema")
+con.sql("ALTER TABLE Comment ADD COLUMN id_uuid UUID;")
+con.sql("ALTER TABLE Comment ADD COLUMN ParentCommentId_uuid UUID;")
+
+print("Assigning UUIDs to id_uuid")
+con.sql("""
+        UPDATE Comment
+        SET id_uuid = uuid();
+        """)
+con.sql("""
+        UPDATE Comment
+        SET ParentCommentId_uuid = ParentComment.id_uuid
+        FROM Comment ParentComment
+        WHERE ParentComment.id = Comment.ParentCommentId;
+        """)
+
 print("Running the join 5 times")
 for i in range(0, 5):
         start = time.time()
         con.sql("""
                 SELECT count(*) AS count
                 FROM Comment c1
-                JOIN Comment c2 ON c1.ParentCommentId = c2.id;
+                JOIN Comment c2 ON c1.ParentCommentId_uuid = c2.id_uuid;
                 """).show()
         end = time.time()
         duration = end - start
