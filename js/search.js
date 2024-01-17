@@ -12,7 +12,7 @@ xhr.onreadystatechange = function(event) {
 }
 xhr.send();
 
-const tokenize = (string) => string.split(/[\s-]+/); // search query tokenizer
+const tokenize = (string) => string.split(/[\s-.]+/); // search query tokenizer
 
 // Create a search engine that indexes the 'title' and 'text' fields for
 // full-text search. Search results will include 'title' and 'category' (plus the
