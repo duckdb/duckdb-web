@@ -16,4 +16,8 @@ rm -rf ldbc.duckdb*
 python3 ub-join-type-3.py
 du -hd0 ldbc.duckdb
 
+rm -rf ldbc.duckdb*
+python3 ub-join-type-4.py
+du -hd0 ldbc.duckdb
+
 python3 ub-join-type-analyze.py
