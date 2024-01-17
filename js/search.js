@@ -12,12 +12,15 @@ xhr.onreadystatechange = function(event) {
 }
 xhr.send();
 
+const tokenize = (string) => string.split(/[\s-]+/); // search query tokenizer
+
 // Create a search engine that indexes the 'title' and 'text' fields for
 // full-text search. Search results will include 'title' and 'category' (plus the
 // id field, that is always stored and returned)
 const miniSearch = new MiniSearch({
 	fields: ['title', 'text', 'category', 'blurb'],
-	storeFields: ['title', 'text', 'category', 'url', 'blurb']
+	storeFields: ['title', 'text', 'category', 'url', 'blurb'],
+	searchOptions: { tokenize }
 })
 
 // read GET parameters (https://stackoverflow.com/questions/12049620/how-to-get-get-variables-value-in-javascript)
@@ -112,6 +115,7 @@ inp = document.getElementById("q")
 const miniPredictor = new MiniSearch({
 	fields: ['title', 'category', 'blurb'],
 	storeFields: ['title', 'category', 'blurb']
+	searchOptions: { tokenize }
 })
 /*the autocomplete function takes two arguments,
 the text field element and an array of possible autocompleted values:*/
