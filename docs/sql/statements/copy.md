@@ -27,12 +27,12 @@ COPY FROM DATABASE db1 TO db2;
 COPY FROM DATABASE db1 TO db2 (SCHEMA);
 ```
 
-## `COPY` Statements
+## Overview
 
 `COPY` moves data between DuckDB and external files. `COPY ... FROM` imports data into DuckDB from an external file. `COPY ... TO` writes data from DuckDB to an external file. The `COPY` command can be used for `CSV`, `PARQUET` and `JSON` files.
 
 
-### `COPY ... FROM`
+## `COPY ... FROM`
 
 `COPY ... FROM` imports data from an external file into an existing table. The data is appended to whatever data is in the table already. The amount of columns inside the file must match the amount of columns in the table `table_name`, and the contents of the columns must be convertible to the column types of the table. In case this is not possible, an error will be thrown.
 
@@ -57,11 +57,11 @@ COPY lineitem FROM 'lineitem.ndjson' (FORMAT JSON);
 COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY true);
 ```
 
-#### Syntax
+### Syntax
 
 <div id="rrdiagram1"></div>
 
-### `COPY ... TO`
+## `COPY ... TO`
 
 `COPY ... TO` exports data from DuckDB to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
 
@@ -82,7 +82,28 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.ndjson' (FORMAT JSON);
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY true);
 ```
 
-### `COPY FROM DATABASE ... TO`
+### `COPY ... TO` Options
+
+Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes. 
+
+Any option that is a Boolean can be enabled or disabled in multiple ways. You can write `true`, `ON`, or `1` to enable the option, and `false`, `OFF`, or `0` to disable it. The Boolean value can also be omitted (e.g., by only passing `(HEADER)`), in which case `true` is assumed.
+
+The below options are applicable to all formats written with `COPY`. 
+
+| Name | Description | Type | Default |
+|:--|:-----|:-|:-|
+| `allow_overwrite` | Whether or not to allow overwriting a directory if one already exists. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
+| `file_size_bytes` | If this parameter is set, the `COPY` process creates a directory which will contain the exported files. If a file exceeds the set limit (specified as bytes such as `1000` or in human-readable format such as `1k`), the process creates a new file in the directory. This parameter works in combination with `per_thread_output`. Note that the size is used as an approximation, and files can be occasionally slightly over the limit. | `BOOL` | `false` |
+| `format` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Available options are `CSV`, `PARQUET` and `JSON`. | `VARCHAR` | auto |
+| `partition_by` | The columns to partition by using a hive partitioning scheme, see the [partitioned writes section](../../data/partitioning/partitioned_writes). | `VARCHAR[]` | (empty) |
+| `per_thread_output` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
+| `use_tmp_file` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | `BOOL` | `auto` |
+
+### Syntax
+
+<div id="rrdiagram2"></div>
+
+## `COPY FROM DATABASE ... TO`
 
 > This statement is currently only available in nightly builds (DuckDB 0.9.3-dev) and will be released in the upcoming v0.10.0 version.
 
@@ -113,28 +134,13 @@ To only copy the **schema** of `db1` to `db2` but omit copying the data, add `SC
 COPY FROM DATABASE db1 TO db2 (SCHEMA);
 ```
 
-#### Syntax
+### Syntax
 
-<div id="rrdiagram2"></div>
+<div id="rrdiagram3"></div>
 
-#### `COPY ... TO` Options
+## Format-Specific Options
 
-Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes. 
-
-Any option that is a Boolean can be enabled or disabled in multiple ways. You can write `true`, `ON`, or `1` to enable the option, and `false`, `OFF`, or `0` to disable it. The Boolean value can also be omitted (e.g., by only passing `(HEADER)`), in which case `true` is assumed.
-
-The below options are applicable to all formats written with `COPY`. 
-
-| Name | Description | Type | Default |
-|:--|:-----|:-|:-|
-| `allow_overwrite` | Whether or not to allow overwriting a directory if one already exists. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
-| `file_size_bytes` | If this parameter is set, the `COPY` process creates a directory which will contain the exported files. If a file exceeds the set limit (specified as bytes such as `1000` or in human-readable format such as `1k`), the process creates a new file in the directory. This parameter works in combination with `per_thread_output`. Note that the size is used as an approximation, and files can be occasionally slightly over the limit. | `BOOL` | `false` |
-| `format` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Available options are `CSV`, `PARQUET` and `JSON`. | `VARCHAR` | auto |
-| `partition_by` | The columns to partition by using a hive partitioning scheme, see the [partitioned writes section](../../data/partitioning/partitioned_writes). | `VARCHAR[]` | (empty) |
-| `per_thread_output` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
-| `use_tmp_file` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | `BOOL` | `auto` |
-
-#### CSV Options
+### CSV Options
 
 The below options are applicable when writing `CSV` files.
 
@@ -150,8 +156,7 @@ The below options are applicable when writing `CSV` files.
 | `quote` | The quoting character to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
 
-
-#### Parquet Options
+### Parquet Options
 
 The below options are applicable when writing `Parquet` files.
 
@@ -163,6 +168,7 @@ The below options are applicable when writing `Parquet` files.
 | `field_ids` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | `STRUCT` | (empty) |
 
 Some examples of `FIELD_IDS` are:
+
 ```sql
 -- Assign field_ids automatically
 COPY (SELECT 128 AS i)
@@ -188,7 +194,7 @@ TO 'my.parquet' (FIELD_IDS {my_map: {__duckdb_field_id: 42, key: 43, value: 44}}
 ```
 
 
-#### JSON Options
+### JSON Options
 
 The below options are applicable when writing `JSON` files.
 

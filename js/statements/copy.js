@@ -39,11 +39,34 @@ function GenerateCopyTo(options = {}) {
 	])
 }
 
+
+function GenerateCopyFromDatabase(options = {}) {
+	return Diagram([
+		AutomaticStack([
+			Keyword("COPY"),
+			Keyword("FROM"),
+			Keyword("DATABASE"),
+			Expression("source-database"),
+			Keyword("TO"),
+			Expression("target-database"),
+			Choice(0, [
+				Sequence([
+					Keyword("("),
+					Keyword("SCHEMA"),
+					Keyword(")")
+				])
+			])
+		])
+	])
+}
+
 function Initialize(options = {}) {
 	document.getElementById("rrdiagram1").classList.add("limit-width");
 	document.getElementById("rrdiagram2").classList.add("limit-width");
+	document.getElementById("rrdiagram3").classList.add("limit-width");
 	document.getElementById("rrdiagram1").innerHTML = GenerateCopyFrom(options).toString()
 	document.getElementById("rrdiagram2").innerHTML = GenerateCopyTo(options).toString();
+	document.getElementById("rrdiagram3").innerHTML = GenerateCopyFromDatabase(options).toString();
 }
 
 function Refresh(node_name, set_node) {
@@ -53,4 +76,3 @@ function Refresh(node_name, set_node) {
 
 options = {}
 Initialize()
-
