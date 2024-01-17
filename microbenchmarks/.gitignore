@@ -1,2 +1,3 @@
 *.duckdb*
-ldbc-sf*/
+ldbc-sf*
+results.csv

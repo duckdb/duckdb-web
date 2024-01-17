@@ -2,14 +2,18 @@
 
 set -Eeuo pipefail
 
+echo "type,iteration,duration" > results.csv
+
 rm -rf ldbc.duckdb*
-python3 ub-string-joins-1.py
+python3 ub-join-type-1.py
 du -hd0 ldbc.duckdb
 
 rm -rf ldbc.duckdb*
-python3 ub-string-joins-2.py
+python3 ub-join-type-2.py
 du -hd0 ldbc.duckdb
 
 rm -rf ldbc.duckdb*
-python3 ub-string-joins-3.py
+python3 ub-join-type-3.py
 du -hd0 ldbc.duckdb
+
+python3 ub-join-type-analyze.py
