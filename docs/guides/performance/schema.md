@@ -35,14 +35,14 @@ The results of the microbenchmark are as follows:
 
 | Column Type | Storage Size | Query Time |
 |---|---|---|
-| `DATETIME` | 3.3 GB | 0.904 s |
-| `VARCHAR` | 5.2 GB | 3.919 s |
+| `DATETIME` | 3.3 GB | 0.9 s |
+| `VARCHAR` | 5.2 GB | 3.9 s |
 
 The results show that using the `DATETIME` value yields smaller storage sizes and faster processing. 
 
-### Microbenchmark: Joining on Strings
+### Microbenchmark: Joining on Strings and UUIDs
 
-We illustrate the difference in join speed by computing a self-join on the [full LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst):
+We illustrate the difference caused by joining on different types by computing a self-join on the [LDBC Comment table at scale factor 100](https://blobs.duckdb.org/data/ldbc-sf100-comments.tar.zst):
 
 ```sql
 SELECT count(*) AS count
@@ -52,14 +52,17 @@ JOIN Comment c2 ON c1.ParentCommentId = c2.id
 
 In the first experiment, we use the correct (most restrictive) types, i.e., both the `id` and the `ParentCommentId` columns are defined as `BIGINT`.
 In the second experiment, we define all columns with the `VARCHAR` type.
-While the results are the same, the query runtime varies significantly: joining on `BIGINT` columns is approximately 2.6× faster than performing the same join on `VARCHAR` columns.
+In the third experiment, we first assign a `UUID` to each row and set the parent comments UUIDs accordingly (this is done outside of the benchmark).
+While the result of the query is the same for all three experiments, it runtime varies significantly.
+Joining on `BIGINT` columns is approximately 5.3× faster than performing the same join on `VARCHAR` columns, and 8.1× faster than joining on `UUID` columns.
 
 <div class="narrow_table"></div>
 
 | Join Column Type | Query Time |
 |---|---|
-| `BIGINT` | 63.3s |
-| `VARCHAR` | 164.0s |
+| `BIGINT`  |  1.8s |
+| `VARCHAR` |  9.5s |
+| `UUID`    | 14.6s |
 
 ## Constraints
 
