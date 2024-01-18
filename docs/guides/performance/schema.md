@@ -40,7 +40,7 @@ The results of the microbenchmark are as follows:
 
 The results show that using the `DATETIME` value yields smaller storage sizes and faster processing. 
 
-### Microbenchmark: Joining on Strings and UUIDs
+### Microbenchmark: Joining on Strings
 
 We illustrate the difference caused by joining on different types by computing a self-join on the [LDBC Comment table at scale factor 100](https://blobs.duckdb.org/data/ldbc-sf100-comments.tar.zst). The table has 64-bit integer identifiers used as the `id` attribute of each row. We perform the following join operation:
 
@@ -53,7 +53,7 @@ JOIN Comment c2 ON c1.ParentCommentId = c2.id;
 In the first experiment, we use the correct (most restrictive) types, i.e., both the `id` and the `ParentCommentId` columns are defined as `BIGINT`.
 In the second experiment, we define all columns with the `VARCHAR` type.
 While the results of the queries are the same for all both experiments, their runtime vary significantly.
-The results below show that joining on `BIGINT` columns is more than 2× faster than performing the same join on `VARCHAR`-typed columns encoding the same value.
+The results below show that joining on `BIGINT` columns is approx. 1.8× faster than performing the same join on `VARCHAR`-typed columns encoding the same value.
 
 <div class="narrow_table"></div>
 
@@ -61,14 +61,6 @@ The results below show that joining on `BIGINT` columns is more than 2× faster 
 | ------------------------ | ----------------------- | ---------------------------------------- | ---------- |
 | `BIGINT`                 | `BIGINT`                | `70368755640078`                         | 1.2 s      |
 | `BIGINT`                 | `VARCHAR`               | `'70368755640078'`                       | 2.1 s      |
-
-In another set of experiments, we replace the 64-bit integer identifiers with [128-bit `UUID`](https://en.wikipedia.org/wiki/Universally_unique_identifier) values. We also change the parent comment's `UUID` accordingly. These replacements are done as a precomputation outside of the benchmark window, which only measures the join time.
-Our results show that joining on `UUID` columns is slightly slower than joining on `BIGINT` columns. Encoding `UUID` values as `VARCHAR`s is detrimental to performance, yielding a slowdown of 10× compared to using the original 64-bit integer values.
-
-| Join Column Payload Type | Join Column Schema Type | Example Value                            | Query Time |
-| ------------------------ | ----------------------- | ---------------------------------------- | ---------- |
-| `UUID`                   | `UUID`                  | `2c4b0a44-de50-4162-9835-175e0fe513ea`   | 1.1 s      |
-| `UUID`                   | `VARCHAR`               | `'2c4b0a44-de50-4162-9835-175e0fe513ea'` | 2.8 s      |
 
 ## Constraints
 
