@@ -76,7 +76,7 @@ We illustrate the effect of using primary keys with the [LDBC Comment table at s
 
 <div class="narrow_table"></div>
 
-|      Operation           | Execution Time |
-|--------------------------|----------------|
+| Operation                | Execution Time |
+| ------------------------ | -------------- |
 | Load without primary key | 92.168s        |
 | Load with primary key    | 286.765s       |
