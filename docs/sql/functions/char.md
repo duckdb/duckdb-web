@@ -63,6 +63,7 @@ This section describes functions and operators for examining and manipulating st
 | `rpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string* with the character from the right until it has *count* characters | `rpad('hello', 10, '<')` | `hello<<<<<` | |
 | `rtrim(`*`string`*`)`| Removes any spaces from the right side of the *string* | `rtrim('␣␣␣␣test␣␣')` | `␣␣␣␣test` | |
 | `rtrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the right side of the *string* | `rtrim('>>>>test<<', '><')` | `>>>>test` | |
+| `sha256(`*`value`*`)` | Returns a `VARCHAR` with the SHA-256 hash of the *`value`*| `sha-256('🦆')` | `d7a5c5e0d1d94c32218539e7e47d4ba9c3c7b77d61332fb60d633dde89e473fb` |
 | `split_part(`*`string`*`, `*`separator`*`, `*`index`*`)` | Split the *string* along the *separator* and return the data at the (1-based) *index* of the list. If the *index* is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior). | `split_part('a|b|c', '|', 2)` | `b` | |
 | `starts_with(`*`string`*`, `*`search_string`*`)`| Return true if *string* begins with *search_string* | `starts_with('abc', 'a')` | `true` | |
 | *`string`*` SIMILAR TO `*`regex`* | Returns `true` if the *string* matches the *regex*; identical to `regexp_full_match` (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' SIMILAR TO 'l+'` | `false` | |

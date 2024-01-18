@@ -27,6 +27,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ` | combination of time and date that uses the current time zone |
 | `TINYINT` | `INT1` | signed one-byte integer|
 | `UBIGINT` | | unsigned eight-byte integer |
+| `UHUGEINT` | | unsigned sixteen-byte integer |
 | `UINTEGER` | | unsigned four-byte integer |
 | `USMALLINT` | | unsigned two-byte integer |
 | `UTINYINT` | | unsigned one-byte integer |
