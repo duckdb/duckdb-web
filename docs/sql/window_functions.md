@@ -277,6 +277,16 @@ The queries above do not use a number of clauses commonly found in select statem
 `WHERE`, `GROUP BY`, etc. For more complex queries you can find where `WINDOW` clauses fall in
 the canonical order of the [`SELECT statement`](../sql/statements/select).
 
+### Filtering the results of Window Functions using QUALIFY
+
+Window Functions are executed after the [`WHERE`](../../sql/query_syntax/where) and 
+[`HAVING`](../../sql/query_syntax/having) clauses have been already evaluated, so you 
+cannot use those to filter their results. 
+
+The [`QUALIFY`](../../sql/query_syntax/qualify) clause avoids the need for a subquery or 
+[`WITH` clause](../../sql/query_syntax/with) to perform this filtering. 
+
+
 ### Box and Whisker Queries
 
 All aggregates can be used as windowing functions, including the complex statistical functions.
