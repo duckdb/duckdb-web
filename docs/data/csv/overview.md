@@ -175,4 +175,8 @@ SELECT * FROM ontime;
 
 DuckDB supports reading erroneous CSV files. For details, see the [Reading Faulty CSV Files page](reading_faulty_csv_files).
 
+## Limitations
+
+The CSV reader only supports input files using UTF-8 character encoding. For CSV files using different encodings, use e.g. the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert them to UTF-8.
+
 ## Pages in This Section
