@@ -22,4 +22,4 @@ with open("results.csv", "a") as f:
                         """).show()
                 end = time.time()
                 duration = end - start
-                f.write(f"VARCHAR,{i},{duration}\n")
+                f.write(f"UINT64 as VARCHAR,{i},{duration}\n")

@@ -34,6 +34,7 @@ con.sql("""
         UPDATE Comment
         SET id_uuid = uuid();
         """)
+print("Assigning UUIDs to ParentCommentId_uuid")
 con.sql("""
         UPDATE Comment
         SET ParentCommentId_uuid = ParentComment.id_uuid
@@ -52,4 +53,4 @@ with open("results.csv", "a") as f:
                         """).show()
                 end = time.time()
                 duration = end - start
-                f.write(f"UUID,{i},{duration}\n")
+                f.write(f"UUID as UUID,{i},{duration}\n")
