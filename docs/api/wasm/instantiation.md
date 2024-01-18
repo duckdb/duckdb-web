@@ -36,11 +36,11 @@ import duckdb_wasm_next from '@duckdb/duckdb-wasm/dist/duckdb-eh.wasm';
 const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
     mvp: {
         mainModule: duckdb_wasm,
-        mainWorker: new URL('@duckdb/duckdb-wasm@v1.28/dist/duckdb-browser-mvp.worker.js', import.meta.url).toString(),
+        mainWorker: new URL('@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js', import.meta.url).toString(),
     },
     eh: {
         mainModule: duckdb_wasm_next,
-        mainWorker: new URL('@duckdb/duckdb-wasm@v1.28/dist/duckdb-browser-eh.worker.js', import.meta.url).toString(),
+        mainWorker: new URL('@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js', import.meta.url).toString(),
     },
 };
 // Select a bundle based on browser checks
@@ -77,7 +77,7 @@ const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
-static served (manually download the files from <https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@v1.28.0/dist/>)
+static served (manually download the files from <https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/>)
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
 
