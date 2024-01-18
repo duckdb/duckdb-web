@@ -2,6 +2,8 @@
 
 set -Eeuo pipefail
 
+echo "Running join type experiments on scale factor SF${SF}"
+
 echo "type,iteration,duration" > results.csv
 
 rm -rf ldbc.duckdb*

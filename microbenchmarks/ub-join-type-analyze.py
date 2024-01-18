@@ -1,5 +1,4 @@
 import duckdb
-import time
 
 print("Analyze the join type results")
 con = duckdb.connect()
@@ -8,4 +7,5 @@ con.sql("""
         SELECT type, median(duration) AS median_duration
         FROM results
         GROUP BY ALL
+        ORDER BY type
         """).show()
