@@ -217,6 +217,7 @@ SELECT * FROM mysql_db.tmp;
 > Note that DDL statements are not transactional in MySQL.
 
 ## Settings
+
 |                name                |                          description                           | default |
 |------------------------------------|----------------------------------------------------------------|---------|
 | mysql_experimental_filter_pushdown | Whether or not to use filter pushdown (currently experimental) | false   |
