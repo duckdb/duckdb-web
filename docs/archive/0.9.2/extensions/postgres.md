@@ -232,23 +232,20 @@ The extension exposes the following configuration parameters.
 |              name               |                                description                                 | default |
 |---------------------------------|----------------------------------------------------------------------------|---------|
 | pg_debug_show_queries           | DEBUG SETTING: print all queries sent to Postgres to stdout                | false   |
+| pg_connection_cache             | Whether or not to use the connection cache                                 | true    |
 | pg_experimental_filter_pushdown | Whether or not to use filter pushdown (currently experimental)             | false   |
 | pg_array_as_varchar             | Read Postgres arrays as varchar - enables reading mixed dimensional arrays | false   |
 | pg_connection_limit             | The maximum amount of concurrent Postgres connections                      | 64      |
 | pg_pages_per_task               | The amount of pages per task                                               | 1000    |
 | pg_use_binary_copy              | Whether or not to use BINARY copy to read data                             | true    |
 
-## Querying Individual Tables
+## Schema Cache
 
-If you prefer to not attach all tables, but just query a single table, that is possible using the `postgres_scan` function, e.g.:
+To avoid having to continuously fetch schema data from Postgres, DuckDB keeps schema information - such as the names of tables, their columns, etc -  cached. If changes are made to the schema through a different connection to the Postgres instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `pg_clear_cache` can be executed to clear the internal caches.
 
 ```sql
-SELECT * FROM postgres_scan('', 'public', 'mytable');
+CALL pg_clear_cache();
 ```
-
-The `postgres_scan` function takes three string parameters, the `libpq` connection string (see above), a PostgreSQL schema name and a table name. The schema often used in PostgreSQL is `public`.
-
-To use `filter_pushdown` use the `postgres_scan_pushdown` function.
 
 > The old postgres_attach function is deprecated. It is recommended to switch over to the new ATTACH syntax.
 
