@@ -32,8 +32,10 @@ transactions and execute the checkpoint operation.
 
 Also see the related [`PRAGMA` option](../pragmas#force-checkpoint) for further behavior modification.
 
-### Vacuuming Deletes
+### Reclaiming Space
 
-As part of performing a checkpoint (automatic or otherwise), vacuuming deleted rows is triggered. Note that this does not remove all deletes, but rather merges row groups that have a significant amount of deletes together. In the current implementation this requires ~25% of rows to be deleted in adjacent row groups.
+When performing a checkpoint (automatic or otherwise), the space occupied by deleted rows is partially reclaimed. Note that this does not remove all deleted rows, but rather merges row groups that have a significant amount of deletes together. In the current implementation this requires ~25% of rows to be deleted in adjacent row groups.
 
-> The [`VACUUM` statement](vacuum) does _not_ trigger vacuuming deletes.
+When running in in-memory mode, checkpointing has no effect, hence it does not reclaim space after deletes in in-memory databases.
+
+> The [`VACUUM` statement](vacuum) does _not_ trigger vacuuming deletes and hence does not reclaim space.
