@@ -20,6 +20,10 @@ VACUUM ANALYZE memory.main.my_table(my_column);
 VACUUM FULL; -- error
 ```
 
+## Reclaiming Space
+
+To reclaim space after deleting rows, use the [`CHECKPOINT` statement](checkpoint).
+
 ## Syntax
 
 <div id="rrdiagram1"></div>
