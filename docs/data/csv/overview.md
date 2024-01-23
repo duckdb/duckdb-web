@@ -83,6 +83,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
 | `null_padding` | If this option is enabled, when a row lacks columns, it will pad the remaining columns on the right with null values.| `BOOL` | `false` |
 | `nullstr` | Specifies the string that represents a NULL value. | `VARCHAR` | (empty) |
+| `parallel` | Whether or not the parallel CSV reader is used. | `BOOL` | `true` |
 | `quote` | Specifies the quoting string to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `sample_size` | The number of sample rows for [auto detection of parameters](auto_detection). | `BIGINT` | 20480 |
 | `skip` | The number of lines at the top of the file to skip. | `BIGINT` | 0 |
