@@ -8,8 +8,6 @@ title: Hive Partitioning
 ```sql
 -- read data from a hive partitioned data set
 SELECT * FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = 1);
--- parquet_scan is an alias of read_parquet, so they are equivalent
-SELECT * FROM parquet_scan('orders/*/*/*.parquet', hive_partitioning = 1);
 -- write a table to a hive partitioned data set
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
 ```
