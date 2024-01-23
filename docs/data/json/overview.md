@@ -58,6 +58,7 @@ Below are parameters that can be passed in to the JSON reader.
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
 | `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../multiple_files/combining_schemas). | `BOOL` | `false` |
+| `convert_strings_to_integers` | Whether strings representing integer values should be converted to a numerical type. | `BOOL` | `false` |
 
 When using `read_json_auto`, every parameter that supports auto-detection is enabled.
 
