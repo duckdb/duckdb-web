@@ -39,19 +39,19 @@ $fontSansBold: "SuisseIntl-SemiBold", Helvetica, Arial, sans-serif;
 
 @font-face{
 	font-family: "JetBrainsMono-Regular";
-	src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Regular.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Regular.woff") format("woff");
+	src: url("webfont/JetBrainsMono/woff2/JetBrainsMonoNL-Regular.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMonoNL-Regular.woff") format("woff");
 }
 @font-face{
 	font-family: "JetBrainsMono-Bold";
-	src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Bold.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Bold.woff") format("woff");
+	src: url("webfont/JetBrainsMono/woff2/JetBrainsMonoNL-Bold.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMonoNL-Bold.woff") format("woff");
 }
 @font-face{
 	font-family: "JetBrainsMono-Italic";
-	src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Italic.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Italic.woff") format("woff");
+	src: url("webfont/JetBrainsMono/woff2/JetBrainsMonoNL-Italic.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMonoNL-Italic.woff") format("woff");
 }
 @font-face{
 	font-family: "JetBrainsMono-Bold-Italic";
-	src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Bold-Italic.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Bold-Italic.woff") format("woff");
+	src: url("webfont/JetBrainsMono/woff2/JetBrainsMonoNL-BoldItalic.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMonoNL-BoldItalic.woff") format("woff");
 }
 
 @import "hamburgers.min.css";
