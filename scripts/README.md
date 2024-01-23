@@ -4,19 +4,33 @@
 
 ### Prerequisites
 
-Get the DuckDB nightly build from the [installation page](https://duckdb.org/docs/installation/), available under the GitHub main (Nightly Build) tab.
-
-Install the NodeJS and Python dependencies:
+Install the NodeJS and Python dependencies in the `duckdb-web directory`:
 
 ```bash
 npm install
 pip install -r requirements.txt
 ```
 
-### Running the script
+### Using DuckDB Nightly Build
+
+Download the Nightly DuckDB distribution. Run the script as follows:
+
+```bash
+./scripts/generate_all_docs.sh <path_to_duckdb_binary>
+```
+
+### Using DuckDB `main`
+
+Build DuckDB and install the `httpfs` and `icu` extensions. Go to the DuckDB directory and run:
+
+```bash
+GEN=ninja BUILD_HTTPFS=1 BUILD_ICU=1 make
+build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
+build/debug/duckdb -c "INSTALL 'build/debug/extension/icu/icu.duckdb_extension';"
+```
 
 Run the script as follows:
 
 ```bash
-./scripts/generate_all_docs.sh <path_to_bleeding_edge_duckdb_dir>
+./scripts/generate_all_docs.sh <path_to_duckdb_source_directory>
 ```
