@@ -15,7 +15,17 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 
 ### Where do I find the DuckDB Logo?
 
-You can download the DuckDB Logo here: <br/> • Stacked logo: [png](/images/logo-dl/DuckDB_Logo-stacked.png) / [svg](/images/logo-dl/DuckDB_Logo-stacked.svg) <br/>  • Horizontal logo: [svg](/images/logo-dl/DuckDB-Logo-horizontal.svg) / [png](/images/logo-dl/DuckDB-Logo-horizontal.png) <br/><br/>The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
+You can download the DuckDB Logo here: <br/>
+<br/>
+• Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked.png) <br/>
+• Horizontal logo: [svg](/images/logo-dl/DuckDB-Logo-horizontal.svg) / [png](/images/logo-dl/DuckDB-Logo-horizontal.png) <br/>
+<br/>
+Inverted variants for dark backgrounds: <br/>
+<br/>
+• Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.png) <br/>
+• Horizontal logo: [svg](/images/logo-dl/DuckDB-Logo-horizontal-dark-mode.svg) / [png](/images/logo-dl/DuckDB-Logo-horizontal-dark-mode.png) <br/>
+<br/>
+The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
 
 ### Where do I find DuckDB trademark use guidelines?
 
@@ -31,7 +41,7 @@ Before opening a pull request, please consult our [Contributor Guide](https://gi
 ### I benchmarked DuckDB and its slower than \[some other system\]
 We welcome experiments comparing DuckDB's performance to other systems.
 To ensure fair comparison, we have two recommendations.
-First, try to use the [latest (bleeding edge) DuckDB version](https://duckdb.org/docs/installation/), which often has significant performance improvements compared to the last stable release.
+First, try to use the [latest DuckDB version available as a nightly build](https://duckdb.org/docs/installation/), which often has significant performance improvements compared to the last stable release.
 Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
 
 ### Does DuckDB use SIMD?

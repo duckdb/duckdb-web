@@ -275,7 +275,12 @@ ORDER BY 1, 2;
 
 The queries above do not use a number of clauses commonly found in select statements, like
 `WHERE`, `GROUP BY`, etc. For more complex queries you can find where `WINDOW` clauses fall in
-the canonical order of the [`SELECT statement`](../sql/statements/select).
+the canonical order of the [`SELECT statement`](statements/select).
+
+### Filtering the Results of Window Functions Using `QUALIFY`
+
+Window functions are executed after the [`WHERE`](query_syntax/where) and [`HAVING`](query_syntax/having) clauses have been already evaluated, so it's not possible to use these clauses to filter the results of window functions
+The [`QUALIFY` clause](query_syntax/qualify) avoids the need for a subquery or [`WITH` clause](query_syntax/with) to perform this filtering.
 
 ### Box and Whisker Queries
 

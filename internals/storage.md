@@ -74,6 +74,11 @@ To see the commits that changed each storage version, see the [commit log](https
 | 4               | v0.2.2                 |
 | 1               | v0.2.1 and prior       |
 
+## Compression
+
+DuckDB applies [lightweight compression](https://duckdb.org/2022/10/28/lightweight-compression.html) to persistent databases.
+Note that in-memory instances are not compressed.
+
 ## Disk Usage
 
 The disk usage of DuckDB's format depends on a number of factors, including the data type and the data distribution, the compression methods used, etc.

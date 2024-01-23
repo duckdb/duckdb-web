@@ -94,6 +94,8 @@ print(con.fetchall())
 # [('duck', 'duck', 'goose')]
 ```
 
+> Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page](data_ingestion) for better options.
+
 ## Named Parameters
 
 Besides the standard unnamed parameters, like `$1`, `$2` etc, it's also possible to supply named parameters, like `$my_parameter`.  
@@ -117,5 +119,3 @@ res = duckdb.execute("""
 print(res)
 # [(5, 'DuckDB', [42])]
 ```
-
-> Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page](data_ingestion) for better options.

@@ -63,6 +63,8 @@ SELECT
      substr(intro, starship_loc + len('starship') + 1) AS trimmed_intro;
 ```
 
+<div class="narrow_table"></div>
+
 |                        intro                        | starship_loc | trimmed_intro |
 |:---|:---|:---|
 | These are the voyages of the starship Enterprise... | 30           | Enterprise... |
@@ -83,6 +85,8 @@ CREATE TABLE trek_facts AS
 
 DESCRIBE trek_facts;
 ```
+
+<div class="narrow_table"></div>
 
 |               column_name               | column_type | null | key  | default | extra |
 |:---|:---|:---|:---|:---|:---|
@@ -116,6 +120,8 @@ SELECT
 FROM trek_facts;
 ```
 
+<div class="narrow_table"></div>
+
 | episode_num | cnt_warp_speed_orders | highest_warp_speed_issued |
 |:---|:---|:---|
 | 0           | 1                     | 1                         |
@@ -135,6 +141,8 @@ SELECT
 FROM trek_facts;
 ```
 
+<div class="narrow_table"></div>
+
 | max(trek_facts.cnt_warp_speed_orders) | max(trek_facts.highest_warp_speed_issued) |
 |:---|:---|
 | 5                                     | 8                                         |
@@ -152,6 +160,8 @@ WHERE
     -- AND 
     -- highest_warp_speed_issued >= 2
 ```
+
+<div class="narrow_table"></div>
 
 | episode_num | cnt_warp_speed_orders | highest_warp_speed_issued |
 |:---|:---|:---|
@@ -171,6 +181,8 @@ SELECT
 FROM trek_facts;
 ```
 
+<div class="narrow_table"></div>
+
 | max(trek_facts.<br>episode_num) | max(trek_facts.<br>aired_date) | max(trek_facts.<br>cnt_kirk_hookups) | ... | max(trek_facts.<br>bool_enterprise_saved_the_day) |
 |:---|:---|:---|:---|:---|
 | 29                          | 1967-04-13                 | 2                                | ... | 1                                          |
@@ -182,6 +194,8 @@ SELECT
     MAX(COLUMNS(* REPLACE aired_date::timestamp AS aired_date))
 FROM trek_facts;
 ```
+
+<div class="narrow_table"></div>
 
 | max(trek_facts.<br>season_num) | max(trek_facts.<br>episode_num) | max(aired_date := <br>CAST(aired_date AS TIMESTAMP)) | ... | max(trek_facts.<br>bool_enterprise_saved_the_day) |
 |:---|:---|:---|:---|:---|
@@ -201,6 +215,8 @@ FROM trek_facts
 WHERE
     COLUMNS(col -> col LIKE '%warp%') >= 2;
 ```
+
+<div class="narrow_table"></div>
 
 | episode_num | cnt_warp_speed_orders | highest_warp_speed_issued |
 |:---|:---|:---|
@@ -225,6 +241,8 @@ SELECT
      starfleet[10].model AS starship 
 FROM 'https://raw.githubusercontent.com/vlad-saling/star-trek-ipsum/master/src/content/content.json';
 ```
+
+<div class="narrow_table"></div>
 
 |                                                                            starship                                                                            |
 |:---|
@@ -270,6 +288,8 @@ SELECT
           .concat('.') AS im_not_messing_around_number_one;
 ```
 
+<div class="narrow_table"></div>
+
 | im_not_messing_around_number_one |
 |:---|
 | MAKE.IT.SO.                      |
@@ -286,6 +306,8 @@ SELECT
           'string_agg','.'),
      '.') AS oof;
 ```
+
+<div class="narrow_table"></div>
 
 |      oof      |
 |:---|
@@ -308,6 +330,8 @@ CREATE TABLE proverbs AS
 FROM proverbs;
 ```
 
+<div class="narrow_table"></div>
+
 |               klingon_proverb                |      borg_proverb       |
 |:---|:---|
 | Revenge is a dish best served cold           | NULL                    |
@@ -327,6 +351,8 @@ INSERT INTO proverbs BY NAME
 
 SELECT * FROM proverbs;
 ```
+
+<div class="narrow_table"></div>
 
 |               klingon_proverb                |      borg_proverb       |
 |:---|:---|
@@ -349,6 +375,8 @@ INSERT INTO purchases
 FROM purchases;
 ```
 
+<div class="narrow_table"></div>
+
 |       item       | year | count |
 |:---|:---|:---|
 | phasers          | 2155 | 1035  |
@@ -359,6 +387,7 @@ FROM purchases;
 | photon torpedoes | 2157 | 87492 |
 
 It is easier to compare our phaser needs to our photon torpedo needs if each year’s data is visually close together. Let’s pivot this into a friendlier format! Each year should receive its own column (but each year shouldn’t need to be specified in the query!), we want to sum up the total `count`, and we still want to keep a separate group (row) for each `item`. 
+
 ```sql
 CREATE TABLE pivoted_purchases AS
      PIVOT purchases 
@@ -368,6 +397,8 @@ CREATE TABLE pivoted_purchases AS
 
 FROM pivoted_purchases;
 ```
+
+<div class="narrow_table"></div>
 
 |       item       | 2155 | 2156  | 2157  |
 |:---|:---|:---|:---|
@@ -379,6 +410,7 @@ Looks like photon torpedoes went on sale...
 Now imagine the reverse situation. Scotty in engineering has been visually analyzing and manually constructing his purchases forecast. He prefers things pivoted so it’s easier to read. Now you need to fit it back into the database! This war may go on for a bit, so you may need to do this again next year. Let’s write an `UNPIVOT` query to return to the original format that can handle any year. 
 
 The `COLUMNS` expression will use all columns except `item`. After stacking, the column containing the column names from `pivoted_purchases` should be renamed to `year`, and the values within those columns represent the `count`. The result is the same dataset as the original. 
+
 ```sql
 UNPIVOT pivoted_purchases
      ON COLUMNS(* EXCLUDE item)
@@ -386,6 +418,8 @@ UNPIVOT pivoted_purchases
           NAME year
           VALUE count;
 ```
+
+<div class="narrow_table"></div>
 
 |       item       | year | count |
 |:---|:---|:---|
@@ -412,6 +446,8 @@ SELECT
           .list_transform(x -> x.string_split(' ')[1]) AS short_name;
 ```
 
+<div class="narrow_table"></div>
+
 |            ship_name             |
 |:---|
 | [Enterprise, Voyager, Discovery] |
@@ -423,6 +459,8 @@ SELECT
      (['Enterprise NCC-1701', 'Voyager NCC-74656', 'Discovery NCC-1031'])
           .list_filter(x -> x.contains('1701')) AS the_original;
 ```
+
+<div class="narrow_table"></div>
 
 |     the_original      |
 |:---|
@@ -441,6 +479,8 @@ SELECT
      IF x.contains('1701')] AS ready_to_boldly_go;
 ```
 
+<div class="narrow_table"></div>
+
 | ready_to_boldly_go |
 |:---|
 | [Enterprise]       |
@@ -457,6 +497,8 @@ FROM damage_report
 SELECT 
      casualties.*;
 ```
+
+<div class="narrow_table"></div>
 
 | gold_casualties | blue_casualties | red_casualties |
 |:---|:---|:---|
@@ -475,6 +517,8 @@ WITH officers AS (
 FROM officers 
 SELECT officers;
 ```
+
+<div class="narrow_table"></div>
 
 |                   officers                   |
 |:---|
@@ -498,6 +542,8 @@ SELECT 5 UNION ALL
 SELECT 6 UNION ALL 
 SELECT 'First Contact';
 ```
+
+<div class="narrow_table"></div>
 
 |       movie        |
 |     varchar        |
@@ -525,6 +571,8 @@ SELECT
      movie.name,
      movie.num;
 ```
+
+<div class="narrow_table"></div>
 
 |       movie        | type |        name        | num |
 | union(num integer, name varchar) | varchar |        varchar        | int32 |

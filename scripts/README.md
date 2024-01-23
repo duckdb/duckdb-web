@@ -4,7 +4,7 @@
 
 ### Prerequisites
 
-Get the DuckDB nightly build from the [installation page](https://duckdb.org/docs/installation/), available under the GitHub main (Bleeding Edge) tab.
+Get the DuckDB nightly build from the [installation page](https://duckdb.org/docs/installation/), available under the GitHub main (Nightly Build) tab.
 
 Install the NodeJS and Python dependencies:
 

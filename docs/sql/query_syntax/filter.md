@@ -18,8 +18,8 @@ Some aggregate functions also do not filter out null values, so using a `FILTER`
 --   The number of rows where i is odd 
 SELECT 
     count(*) AS total_rows,
-    count(*) FILTER (WHERE i <= 5) AS lte_five,
-    count(*) FILTER (WHERE i % 2 = 1) AS odds
+    count(*) FILTER (i <= 5) AS lte_five,
+    count(*) FILTER (i % 2 = 1) AS odds
 FROM generate_series(1, 10) tbl(i);
 ```
 
@@ -34,9 +34,9 @@ FROM generate_series(1, 10) tbl(i);
 --   The sum of i for rows where i <= 5 
 --   The median of i where i is odd 
 SELECT 
-    sum(i) FILTER (WHERE i <= 5) AS lte_five_sum,
-    median(i) FILTER (WHERE i % 2 = 1) AS odds_median,
-    median(i) FILTER (WHERE i % 2 = 1 AND i <= 5) AS odds_lte_five_median
+    sum(i) FILTER (i <= 5) AS lte_five_sum,
+    median(i) FILTER (i % 2 = 1) AS odds_median,
+    median(i) FILTER (i % 2 = 1 AND i <= 5) AS odds_lte_five_median
 FROM generate_series(1, 10) tbl(i);
 ```
 
@@ -68,11 +68,11 @@ CREATE TEMP TABLE stacked_data AS
 
 -- "Pivot" the data out by year (move each year out to a separate column)
 SELECT
-    count(i) FILTER (WHERE year = 2022) AS "2022",
-    count(i) FILTER (WHERE year = 2023) AS "2023",
-    count(i) FILTER (WHERE year = 2024) AS "2024",
-    count(i) FILTER (WHERE year = 2025) AS "2025",
-    count(i) FILTER (WHERE year IS NULL) AS "NULLs"
+    count(i) FILTER (year = 2022) AS "2022",
+    count(i) FILTER (year = 2023) AS "2023",
+    count(i) FILTER (year = 2024) AS "2024",
+    count(i) FILTER (year = 2025) AS "2025",
+    count(i) FILTER (year IS NULL) AS "NULLs"
 FROM stacked_data;
 
 -- This syntax produces the same results as the FILTER clauses above
@@ -96,11 +96,11 @@ However, the `CASE WHEN` approach will not work as expected when using an aggreg
 ```sql
 -- "Pivot" the data out by year (move each year out to a separate column)
 SELECT
-    first(i) FILTER (WHERE year = 2022) AS "2022",
-    first(i) FILTER (WHERE year = 2023) AS "2023",
-    first(i) FILTER (WHERE year = 2024) AS "2024",
-    first(i) FILTER (WHERE year = 2025) AS "2025",
-    first(i) FILTER (WHERE year IS NULL) AS "NULLs"
+    first(i) FILTER (year = 2022) AS "2022",
+    first(i) FILTER (year = 2023) AS "2023",
+    first(i) FILTER (year = 2024) AS "2024",
+    first(i) FILTER (year = 2025) AS "2025",
+    first(i) FILTER (year IS NULL) AS "NULLs"
 FROM stacked_data;
 ```
 
@@ -127,6 +127,6 @@ FROM stacked_data;
 |:---|:---|:---|:---|:---|
 | 1228801 | NULL | NULL | NULL | NULL  |
 
-## Aggregate Function Syntax (Including Filter Clause)
+## Aggregate Function Syntax (Including `FILTER` Clause)
 
 <div id="rrdiagram"></div>

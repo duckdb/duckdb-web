@@ -37,9 +37,6 @@ Scanning multiple files over HTTP(S) is also supported:
 
 ```sql
 SELECT * FROM read_parquet(['https://domain.tld/file1.parquet', 'https://domain.tld/file2.parquet']);
-
--- parquet_scan is an alias of read_parquet, so they are equivalent
-SELECT * FROM parquet_scan(['https://domain.tld/file1.parquet', 'https://domain.tld/file2.parquet']);
 ```
 
 ## Running Queries over S3

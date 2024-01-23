@@ -16,7 +16,7 @@ This section describes functions and operators for examining and manipulating st
 | `ascii(`*`string`*`)`| Returns an integer that represents the Unicode code point of the first character of the *string* | `ascii('Ω')` | `937` | |
 | `bar(`*`x`*`, `*`min`*`, `*`max`*`[, `*`width`*`])` | Draw a band whose width is proportional to (*x* - *min*) and equal to *width* characters when *x* = *max*. *width* defaults to 80. | `bar(5, 0, 20, 10)` | `██▌` | |
 | `bit_length(`*`string`*`)`| Number of bits in a string. | `bit_length('abc')` | `24` | |
-| `chr(`*`x`*`)` | returns a character which is corresponding the ASCII code value or Unicode code point | `chr(65)` | A | |
+| `chr(`*`x`*`)` | Returns a character which is corresponding the ASCII code value or Unicode code point | `chr(65)` | A | |
 | `concat(`*`string`*`, ...)` | Concatenate many strings together | `concat('Hello', ' ', 'World')` | `Hello World` | |
 | `concat_ws(`*`separator`*`, `*`string`*`, ...)` | Concatenate strings together separated by the specified separator | `concat_ws(', ', 'Banana', 'Apple', 'Melon')` | `Banana, Apple, Melon` | |
 | `contains(`*`string`*`, `*`search_string`*`)` | Return true if *search_string* is found within *string* | `contains('abc', 'a')` | `true` | |
@@ -24,7 +24,7 @@ This section describes functions and operators for examining and manipulating st
 | `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using the [fmt syntax](#fmt-syntax) | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` | |
 | `format_bytes(`*`bytes`*`)` | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). | `format_bytes(16384)` | `16.0 KiB` | |
 | `from_base64(`*`string`*`)`| Convert a base64 encoded string to a character string. | `from_base64('QQ==')` | `'A'` | |
-| `hash(`*`value`*`)` | Returns an integer with the hash of the *value* | `hash('🦆')` | `2595805878642663834` | |
+| `hash(`*`value`*`)` | Returns a `UBIGINT` with the hash of the *value* | `hash('🦆')` | `2595805878642663834` | |
 | `ilike_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `ilike_escape('A%c', 'a$%C', '$')` | `true` | |
 | `instr(`*`string`*`, `*`search_string`*`)`| Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `instr('test test', 'es')` | 2 | |
 | `left(`*`string`*`, `*`count`*`)`| Extract the left-most count characters | `left('Hello🦆', 2)` | `He` | |
@@ -42,6 +42,10 @@ This section describes functions and operators for examining and manipulating st
 | `not_ilike_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `not_ilike_escape('A%c', 'a$%C', '$')` | `false` | |
 | `not_like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `not_like_escape('a%c', 'a$%c', '$')` | `false` | |
 | `ord(`*`string`*`)`| Return ASCII character code of the leftmost character in a string.  | `ord('ü')` | `252` | |
+| `parse_dirname(`*`path`*`, `*`separator`*`)`| Returns the top-level directory name from the given path. *`separator`* options: `system`, `both_slash` (default), `forward_slash`, `backslash`.  | `parse_dirname('path/to/file.csv', 'system')` | `path` | |
+| `parse_dirpath(`*`path`*`, `*`separator`*`)`| Returns the head of the path (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname) function. *`separator`* options: `system`, `both_slash` (default), `forward_slash`, `backslash`.  | `parse_dirpath('/path/to/file.csv', 'forward_slash')` | `/path/to` | |
+| `parse_filename(`*`path`*`, `*`trim_extension`*`, `*`separator`*`)`| Returns the last component of the path similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. If *`trim_extension`* is true, the file extension will be removed (defaults to `false`). *`separator`* options: `system`, `both_slash` (default), `forward_slash`, `backslash`.  | `parse_filename('path/to/file.csv', true, 'system')` | `file` | |
+| `parse_path(`*`path`*`, `*`separator`*`)`| Returns a list of the components (directories and filename) in the path similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function. *`separator`* options: `system`, `both_slash` (default), `forward_slash`, `backslash`.  | `parse_path('/path/to/file.csv', 'system')` | `[/, path, to, file.csv]` | |
 | `position(`*`search_string`*` in `*`string`*`)` | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `position('b' in 'abc')` | `2` | |
 | `printf(`*`format`*`, `*`parameters`*`...)` | Formats a *string* using [printf syntax](#printf-syntax) | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds`     | |
 | `regexp_full_match(`*`string`*`, `*`regex`*`)`| Returns `true` if the entire *string* matches the *regex* (see [Pattern Matching](patternmatching)) | `regexp_full_match('anabanana', '(an)*')` | `false` |
@@ -60,6 +64,7 @@ This section describes functions and operators for examining and manipulating st
 | `rpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string* with the character from the right until it has *count* characters | `rpad('hello', 10, '<')` | `hello<<<<<` | |
 | `rtrim(`*`string`*`)`| Removes any spaces from the right side of the *string* | `rtrim('␣␣␣␣test␣␣')` | `␣␣␣␣test` | |
 | `rtrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the right side of the *string* | `rtrim('>>>>test<<', '><')` | `>>>>test` | |
+| `sha256(`*`value`*`)` | Returns a `VARCHAR` with the SHA-256 hash of the *`value`*| `sha-256('🦆')` | `d7a5c5e0d1d94c32218539e7e47d4ba9c3c7b77d61332fb60d633dde89e473fb` |
 | `split_part(`*`string`*`, `*`separator`*`, `*`index`*`)` | Split the *string* along the *separator* and return the data at the (1-based) *index* of the list. If the *index* is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior). | `split_part('a|b|c', '|', 2)` | `b` | |
 | `starts_with(`*`string`*`, `*`search_string`*`)`| Return true if *string* begins with *search_string* | `starts_with('abc', 'a')` | `true` | |
 | *`string`*` SIMILAR TO `*`regex`* | Returns `true` if the *string* matches the *regex*; identical to `regexp_full_match` (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' SIMILAR TO 'l+'` | `false` | |

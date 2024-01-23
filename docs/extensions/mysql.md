@@ -216,6 +216,23 @@ SELECT * FROM mysql_db.tmp;
 
 > Note that DDL statements are not transactional in MySQL.
 
+## Settings
+
+|                name                |                          description                           | default |
+|------------------------------------|----------------------------------------------------------------|---------|
+| mysql_experimental_filter_pushdown | Whether or not to use filter pushdown (currently experimental) | false   |
+| mysql_tinyint1_as_boolean          | Whether or not to convert TINYINT(1) columns to BOOLEAN        | true    |
+| mysql_debug_show_queries           | DEBUG SETTING: print all queries sent to MySQL to stdout       | false   |
+| mysql_bit1_as_boolean              | Whether or not to convert BIT(1) columns to BOOLEAN            | true    |
+
+## Schema Cache
+
+To avoid having to continuously fetch schema data from MySQL, DuckDB keeps schema information - such as the names of tables, their columns, etc -  cached. If changes are made to the schema through a different connection to the MySQL instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `mysql_clear_cache` can be executed to clear the internal caches.
+
+```sql
+CALL mysql_clear_cache();
+```
+
 ## GitHub Repository
 
 [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_mysql)

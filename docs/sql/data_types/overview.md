@@ -27,6 +27,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ` | combination of time and date that uses the current time zone |
 | `TINYINT` | `INT1` | signed one-byte integer|
 | `UBIGINT` | | unsigned eight-byte integer |
+| `UHUGEINT` | | unsigned sixteen-byte integer |
 | `UINTEGER` | | unsigned four-byte integer |
 | `USMALLINT` | | unsigned two-byte integer |
 | `UTINYINT` | | unsigned one-byte integer |
@@ -41,7 +42,7 @@ DuckDB supports five nested data types: `ARRAY`, `LIST`, `STRUCT`, `MAP`, and `U
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
 |:-|:---|:---|:--|:--|
-| [`ARRAY`](../../sql/data_types/array) | An ordered, fixed-length sequence of data values of the same type. | Each row must have the same data type within each instance of the `ARRAY` and the same number of elements of elements. | `[1, 2, 3]` | `INT[3]` |
+| [`ARRAY`](../../sql/data_types/array) | An ordered, fixed-length sequence of data values of the same type. | Each row must have the same data type within each instance of the `ARRAY` and the same number of elements. | `[1, 2, 3]` | `INT[3]` |
 | [`LIST`](../../sql/data_types/list) | An ordered sequence of data values of the same type. | Each row must have the same data type within each instance of the `LIST`, but can have any number of elements. | `[1, 2, 3]` | `INT[]` |
 | [`MAP`](../../sql/data_types/map) | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | `map([1, 2], ['a', 'b'])` | `MAP(INT, VARCHAR)` |
 | [`STRUCT`](../../sql/data_types/struct) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | `{'i': 42, 'j': 'a'}` | `STRUCT(i INT, j VARCHAR)` |
