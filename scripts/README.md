@@ -25,8 +25,8 @@ Build DuckDB and install the `httpfs` and `icu` extensions. Go to the DuckDB dir
 
 ```bash
 GEN=ninja BUILD_HTTPFS=1 BUILD_ICU=1 make
-build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
-build/debug/duckdb -c "INSTALL 'build/debug/extension/icu/icu.duckdb_extension';"
+build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
+build/release/duckdb -c "INSTALL 'build/release/extension/icu/icu.duckdb_extension';"
 ```
 
 Run the script as follows:
