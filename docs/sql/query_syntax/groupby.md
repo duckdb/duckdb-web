@@ -29,7 +29,8 @@ See the [`GROUPING SETS`](../../sql/query_syntax/grouping_sets) page for more in
 SELECT city, count(*)
 FROM addresses
 GROUP BY city;
-
+```
+```sql
 -- compute the average income per city per street_name
 SELECT city, street_name, avg(income)
 FROM addresses
@@ -44,15 +45,14 @@ SELECT city, street_name
 FROM addresses
 GROUP BY ALL;
 -- GROUP BY city, street_name
-;
-
+```
+```sql
 -- compute the average income per city per street_name
 -- Since income is wrapped in an aggregate function, do not include it in the GROUP BY
 SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY ALL;
 -- GROUP BY city, street_name
-;
 ```
 
 ## Syntax
