@@ -89,6 +89,8 @@ title: C API - Complete API
 <span class="kt">duckdb_date</span> <a href="#duckdb_to_date"><span class="nf">duckdb_to_date</span></a>(<span class="kt">duckdb_date_struct</span> <span class="nv">date</span>);
 <span class="kt">bool</span> <a href="#duckdb_is_finite_date"><span class="nf">duckdb_is_finite_date</span></a>(<span class="kt">duckdb_date</span> <span class="nv">date</span>);
 <span class="kt">duckdb_time_struct</span> <a href="#duckdb_from_time"><span class="nf">duckdb_from_time</span></a>(<span class="kt">duckdb_time</span> <span class="nv">time</span>);
+<span class="nv">duckdb_time_tz</span> <a href="#duckdb_create_time_tz"><span class="nf">duckdb_create_time_tz</span></a>(<span class="kt">int64_t</span> <span class="nv">micros</span>, <span class="kt">int32_t</span> <span class="nv">offset</span>);
+<span class="nv">duckdb_time_tz_struct</span> <a href="#duckdb_from_time_tz"><span class="nf">duckdb_from_time_tz</span></a>(<span class="nv">duckdb_time_tz</span> <span class="nv">micros</span>);
 <span class="kt">duckdb_time</span> <a href="#duckdb_to_time"><span class="nf">duckdb_to_time</span></a>(<span class="kt">duckdb_time_struct</span> <span class="nv">time</span>);
 <span class="kt">duckdb_timestamp_struct</span> <a href="#duckdb_from_timestamp"><span class="nf">duckdb_from_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
 <span class="kt">duckdb_timestamp</span> <a href="#duckdb_to_timestamp"><span class="nf">duckdb_to_timestamp</span></a>(<span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts</span>);
@@ -1998,6 +2000,67 @@ The time object, as obtained from a `DUCKDB_TYPE_TIME` column.
 * `returns`
 
 The `duckdb_time_struct` with the decomposed elements.
+
+<br>
+
+
+### `duckdb_create_time_tz`
+
+---
+Create a `duckdb_time_tz` object from micros and a timezone offset.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_time_tz</span> <span class="nv">duckdb_create_time_tz</span>(<span class="nv">
+</span>  <span class="kt">int64_t</span> <span class="nv">micros</span>,<span class="nv">
+</span>  <span class="kt">int32_t</span> <span class="nv">offset
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `micros`
+
+The microsecond component of the time.
+* `offset`
+
+The timezone offset component of the time.
+* `returns`
+
+The `duckdb_time_tz` element.
+
+<br>
+
+
+### `duckdb_from_time_tz`
+
+---
+Decompose a TIME_TZ objects into micros and a timezone offset.
+
+Use `duckdb_from_time` to further decompose the micros into hour, minute, second and microsecond.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_time_tz_struct</span> <span class="nv">duckdb_from_time_tz</span>(<span class="nv">
+</span>  <span class="nv">duckdb_time_tz</span> <span class="nv">micros
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `micros`
+
+The time object, as obtained from a `DUCKDB_TYPE_TIME_TZ` column.
+* `out_micros`
+
+The microsecond component of the time.
+* `out_offset`
+
+The timezone offset component of the time.
 
 <br>
 
