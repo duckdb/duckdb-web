@@ -6,7 +6,7 @@ railroad: statements/constraints.js
 
 In SQL, constraints can be specified for tables. Constraints enforce certain properties over data that is inserted into a table. Constraints can be specified along with the schema of the table as part of the [`CREATE TABLE` statement](statements/create_table). In certain cases, constraints can also be added to a table using the [`ALTER TABLE` statement](statements/alter_table), but this is not currently supported for all constraints.
 
-> Constraints can have a strong effect on performance, slowing down loading/updates and speeding up certain queries. Please consult the [Performance Guide](../guides/performance/schema#constraints) for details.
+> Constraints have a strong impact on performance: they slow down loading and updates but speed up certain queries. Please consult the [Performance Guide](../guides/performance/schema#constraints) for details.
 
 ## Syntax
 
