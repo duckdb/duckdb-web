@@ -38,8 +38,8 @@ To change this behavior, set the `preserve_identifier_case` [configuration optio
 The case entered by the user is preserved even if a query uses different cases when referring to the identifier:
 
 ```sql
-CREATE TABLE CosPi AS SELECT cos(pi()) AS CosineOfPi;
-SELECT cosineofpi FROM CosPi;
+CREATE TABLE tbl AS SELECT cos(pi()) AS CosineOfPi;
+SELECT cosineofpi FROM tbl;
 ```
 ```text
 ┌────────────┐
@@ -73,12 +73,12 @@ SELECT * FROM t1 NATURAL JOIN t2;
 
 #### Disabling Preserving Cases
 
-With `preserve_identifier_case` set to `false`, all identifiers are turned into lowercase:
+With the `preserve_identifier_case` [configuration option](configuration#configuration-reference) set to `false`, all identifiers are turned into lowercase:
 
 ```sql
 SET preserve_identifier_case = false;
-CREATE TABLE CosPi AS SELECT cos(pi()) AS CosineOfPi;
-SELECT CosineOfPi FROM CosPi;
+CREATE TABLE tbl AS SELECT cos(pi()) AS CosineOfPi;
+SELECT CosineOfPi FROM tbl;
 ```
 ```text
 ┌────────────┐
