@@ -26,6 +26,8 @@ To drop an index, use the [`DROP INDEX` statement](statements/create_index#drop-
 
 ART indexes create a secondary copy of the data in a second location - this complicates processing, particularly when combined with transactions. Certain limitations apply when it comes to modifying data that is also stored in secondary indexes.
 
+> As expected, indexes have a strong effect on performance, slowing down loading and updates, but speeding up certain queries. Please consult the [Performance Guide](../guides/performance/indexing) for details.
+
 ### Updates Become Deletes and Inserts
 
 When an update statement is executed on a column that is present in an index - the statement is transformed into a *delete* of the original row followed by an *insert*. This has certain performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.

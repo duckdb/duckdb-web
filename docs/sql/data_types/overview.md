@@ -61,4 +61,8 @@ SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
 SELECT [union_value(num := 2), union_value(str := 'ABC')::UNION(str VARCHAR, num INTEGER)];
 ```
 
+## Performance Implications
+
+The choice of data types can have a strong effect on performance. Please consult the [Performance Guide](../../guides/performance/schema) for details.
+
 ## Pages in This Section
