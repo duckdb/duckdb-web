@@ -65,7 +65,9 @@ CREATE TEMP TABLE stacked_data AS
             count(*) OVER () AS rows 
         FROM generate_series(1, 100000000) tbl(i)
     ) tbl;
+```
 
+```sql
 -- "Pivot" the data out by year (move each year out to a separate column)
 SELECT
     count(i) FILTER (year = 2022) AS "2022",
@@ -74,7 +76,9 @@ SELECT
     count(i) FILTER (year = 2025) AS "2025",
     count(i) FILTER (year IS NULL) AS "NULLs"
 FROM stacked_data;
+```
 
+```sql
 -- This syntax produces the same results as the FILTER clauses above
 SELECT
     count(CASE WHEN year = 2022 THEN i END) AS "2022",

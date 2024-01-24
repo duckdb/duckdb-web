@@ -248,14 +248,20 @@ CREATE TABLE sqlite_db.tmp(i INTEGER);
 BEGIN;
 INSERT INTO sqlite_db.tmp VALUES (42);
 SELECT * FROM sqlite_db.tmp;
+```
+```text
 ┌───────┐
 │   i   │
 │ int64 │
 ├───────┤
 │    42 │
 └───────┘
+```
+```sql
 ROLLBACK;
 SELECT * FROM sqlite_db.tmp;
+```
+```text
 ┌────────┐
 │   i    │
 │ int64  │

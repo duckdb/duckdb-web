@@ -15,10 +15,16 @@ Note that this syntax is not compatible with [`GROUP BY ALL`](groupby#group-by-a
 SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY GROUPING SETS ((city, street_name), (city), (street_name), ());
+```
+
+```sql
 -- compute the average income along the same dimensions
 SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY CUBE (city, street_name);
+```
+
+```sql
 -- compute the average income along the dimensions (city, street_name), (city) and ()
 SELECT city, street_name, avg(income)
 FROM addresses
