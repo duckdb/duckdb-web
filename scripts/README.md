@@ -4,7 +4,7 @@
 
 ### Prerequisites
 
-Install the NodeJS and Python dependencies in the `duckdb-web directory`:
+Install the NodeJS and Python dependencies in the `duckdb-web` directory:
 
 ```bash
 npm install
