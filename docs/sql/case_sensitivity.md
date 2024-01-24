@@ -11,12 +11,7 @@ SQL keywords and function names are case-insensitive in DuckDB.
 
 The following two queries are equivalent:
 
-<!-- 
-    syntax highlighting is omitted here on purpose:
-    our SQL formatter only picks up uppercase keywords and lowercase functions,
-    so applying it would be confusing
--->
-```text
+```matlab
 select COS(Pi()) as CosineOfPi;
 SELECT cos(pi()) AS CosineOfPi;
 ```

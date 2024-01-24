@@ -52,14 +52,21 @@ host=localhost port=5432 dbname=mydb connect_timeout=10
 The tables in the PostgreSQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from Postgres at query time.
 
 ```sql
-D SHOW TABLES;
+SHOW TABLES;
+```
+```text
 ┌───────────────────────────────────────┐
 │                 name                  │
 │                varchar                │
 ├───────────────────────────────────────┤
 │ uuids                                 │
 └───────────────────────────────────────┘
-D SELECT * FROM uuids;
+```
+
+```sql
+SELECT * FROM uuids;
+```
+```text
 ┌──────────────────────────────────────┐
 │                  u                   │
 │                 uuid                 │
@@ -118,6 +125,8 @@ INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 
 ```sql
 SELECT * FROM postgres_db.tbl;
+```
+```text
 ┌───────┬─────────┐
 │  id   │  name   │
 │ int64 │ varchar │
@@ -170,12 +179,15 @@ CREATE SCHEMA postgres_db.s1;
 CREATE TABLE postgres_db.s1.integers(i int);
 INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
+```
+```text
 ┌───────┐
 │   i   │
 │ int32 │
 ├───────┤
 │    42 │
 └───────┘
+```sql
 DROP SCHEMA postgres_db.s1;
 ```
 
@@ -186,14 +198,20 @@ CREATE TABLE postgres_db.tmp(i INTEGER);
 BEGIN;
 INSERT INTO postgres_db.tmp VALUES (42);
 SELECT * FROM postgres_db.tmp;
+```
+```text
 ┌───────┐
 │   i   │
 │ int64 │
 ├───────┤
 │    42 │
 └───────┘
+```
+```sql
 ROLLBACK;
 SELECT * FROM postgres_db.tmp;
+```
+```text
 ┌────────┐
 │   i    │
 │ int64  │
@@ -215,6 +233,8 @@ postgres_query(attached_database::VARCHAR, query::VARCHAR)
 ```sql
 ATTACH 'dbname=postgresscanner' AS s (TYPE POSTGRES);
 SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
+```
+```text
 ┌──────────────┬───────────┬─────────┐
 │    brand     │   model   │  color  │
 │   varchar    │  varchar  │ varchar │

@@ -132,8 +132,12 @@ SQLite databases can also be opened directly and can be used transparently inste
 For example, with the shell:
 
 ```sql
-$ > duckdb data/db/sakila.db 
-D SHOW tables;
+$ duckdb data/db/sakila.db 
+```
+```sql
+SHOW tables;
+```
+```text
 ┌────────────┐
 │    name    │
 │  varchar   │
@@ -167,10 +171,14 @@ INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
 
 The resulting SQLite database can then be read into from SQLite.
 
+```bash
+$ sqlite3 new_sqlite_database.db 
+```
 ```sql
-$r > sqlite3 new_sqlite_database.db 
 SQLite version 3.39.5 2022-10-14 20:58:05
 sqlite> SELECT * FROM tbl;
+```
+```text
 id  name  
 --  ------
 42  DuckDB
@@ -248,14 +256,20 @@ CREATE TABLE sqlite_db.tmp(i INTEGER);
 BEGIN;
 INSERT INTO sqlite_db.tmp VALUES (42);
 SELECT * FROM sqlite_db.tmp;
+```
+```text
 ┌───────┐
 │   i   │
 │ int64 │
 ├───────┤
 │    42 │
 └───────┘
+```
+```sql
 ROLLBACK;
 SELECT * FROM sqlite_db.tmp;
+```
+```text
 ┌────────┐
 │   i    │
 │ int64  │

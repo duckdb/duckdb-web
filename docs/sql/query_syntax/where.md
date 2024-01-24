@@ -13,10 +13,16 @@ The `WHERE` clause specifies any filters to apply to the data. This allows you t
 SELECT *
 FROM table_name
 WHERE id = 3;
+```
+
+```sql
 -- select all rows that match the given case-insensitive LIKE expression
 SELECT *
 FROM table_name
 WHERE name ILIKE '%mark%';
+```
+
+```sql
 -- select all rows that match the given composite expression
 SELECT *
 FROM table_name
