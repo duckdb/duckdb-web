@@ -3,6 +3,7 @@ layout: docu
 title: CLI API
 redirect_from:
   - /docs/api/cli
+  - /docs/api/cli/
 ---
 
 ## Installation
