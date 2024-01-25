@@ -18,12 +18,12 @@ The table below shows the mapping of Python Builtin type to DuckDB type.
 
 | Type                                          | DuckDB Type        |
 |:----------------------------------------------|:-------------------|
-|*`str`*|VARCHAR|
-|*`int`*|BIGINT|
+|*`bool`*|BOOLEAN|
 |*`bytearray`*|BLOB|
 |*`bytes`*|BLOB|
 |*`float`*|DOUBLE|
-|*`bool`*|BOOLEAN|
+|*`int`*|BIGINT|
+|*`str`*|VARCHAR|
 
 ### Numpy DTypes
 
@@ -34,16 +34,16 @@ The table below shows the mapping of Numpy DType to DuckDB type.
 | Type                                          | DuckDB Type        |
 |:----------------------------------------------|:-------------------|
 |*`bool`*|BOOLEAN|
-|*`int8`*|TINYINT|
+|*`float32`*|FLOAT|
+|*`float64`*|DOUBLE|
 |*`int16`*|SMALLINT|
 |*`int32`*|INTEGER|
 |*`int64`*|BIGINT|
-|*`uint8`*|UTINYINT|
+|*`int8`*|TINYINT|
 |*`uint16`*|USMALLINT|
 |*`uint32`*|UINTEGER|
 |*`uint64`*|UBIGINT|
-|*`float32`*|FLOAT|
-|*`float64`*|DOUBLE|
+|*`uint8`*|UTINYINT|
 
 ### Nested Types
 
@@ -98,33 +98,33 @@ For the builtin types, you can use the constants defined in `duckdb.typing`
 
 | DuckDB Type        |
 |:-------------------|
-|SQLNULL|
-|BOOLEAN|
-|TINYINT|
-|UTINYINT|
-|SMALLINT|
-|USMALLINT|
-|INTEGER|
-|UINTEGER|
 |BIGINT|
-|UBIGINT|
-|HUGEINT|
-|UHUGEINT|
-|UUID|
-|FLOAT|
-|DOUBLE|
+|BIT|
+|BLOB|
+|BOOLEAN|
 |DATE|
-|TIMESTAMP|
+|DOUBLE|
+|FLOAT|
+|HUGEINT|
+|INTEGER|
+|INTERVAL|
+|SMALLINT|
+|SQLNULL|
+|TIME_TZ|
+|TIME|
 |TIMESTAMP_MS|
 |TIMESTAMP_NS|
 |TIMESTAMP_S|
-|TIME|
-|TIME_TZ|
 |TIMESTAMP_TZ|
+|TIMESTAMP|
+|TINYINT|
+|UBIGINT|
+|UHUGEINT|
+|UINTEGER|
+|USMALLINT|
+|UTINYINT|
+|UUID|
 |VARCHAR|
-|BLOB|
-|BIT|
-|INTERVAL|
 
 For the complex types there are methods available on the `DuckDBPyConnection` object or the `duckdb` module.  
 Anywhere a `DuckDBPyType` is accepted, we will also accept one of the type objects that can implicitly convert to a `DuckDBPyType`.

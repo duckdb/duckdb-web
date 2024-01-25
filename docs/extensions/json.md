@@ -130,22 +130,22 @@ DuckDB also supports reading JSON as a table, using the following functions:
 | Function | Description |
 |:----|:-------|
 | `read_json(`*`filename`*`)`   | Read JSON from `filename`, where `filename` can also be a list of files, or a glob pattern |
-| `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter `format` set to `'newline_delimited'` |
 | `read_json_auto(`*`filename`*`)`   | Alias for `read_json` with all auto-detection enabled |
+| `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter `format` set to `'newline_delimited'` |
 | `read_ndjson_auto(`*`filename`*`)` | Alias for `read_json_auto` with parameter `format` set to `'newline_delimited'` |
 
 Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, these functions have additional parameters:
 
 | Name | Description | Type | Default |
 |:--|:------|:-|:-|
-| `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | `STRUCT` | `(empty)` |
-| `records` | Can be one of `['auto', 'true', 'false']` | `VARCHAR` | `'records'` |
 | `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | `BOOL` | `false` |
-| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
-| `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |
+| `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | `STRUCT` | `(empty)` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | `VARCHAR` | `'iso'` |
+| `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |
+| `records` | Can be one of `['auto', 'true', 'false']` | `VARCHAR` | `'records'` |
+| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) | `VARCHAR` | `'iso'`|
-| `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../data/multiple_files/combining_schemas). | `BOOL` | `false` |
+| `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../data/multiple_files/combining_schemas) | `BOOL` | `false` |
 
 Example usage:
 ```sql
@@ -275,13 +275,13 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 
 | Function | Description |
 |:---|:----|
-| `json(`*`json`*`)` | Parse and minify *`json`* |
-| `json_valid(`*`json`*`)` | Return whether *`json`* is valid JSON |
 | `json_array_length(`*`json `*`[, `*`path`*`])` | Return the number of elements in the JSON array *`json`*, or `0` if it is not a JSON array. If *`path`* is specified, return the number of elements in the JSON array at the given *`path`*. If *`path`* is a `LIST`, the result will be `LIST` of array lengths |
-| `json_type(`*`json `*`[, `*`path`*`])` | Return the type of the supplied *`json`*, which is one of `OBJECT`, `ARRAY`, `BIGINT`, `UBIGINT`, `VARCHAR`, `BOOLEAN`, `NULL`. If *`path`* is specified, return the type of the element at the given *`path`*. If *`path`* is a `LIST`, the result will be `LIST` of types |
+| `json_contains(`*`json_haystack`*`, `*`json_needle`*`)` | Returns `true` if *`json_needle`* is contained in *`json_haystack`*. Both parameters are of JSON type, but *`json_needle`* can also be a numeric value or a string, however the string must be wrapped in double quotes |
 | `json_keys(`*`json `*`[, `*`path`*`])` | Returns the keys of `json` as a `LIST` of `VARCHAR`, if `json` is a JSON object. If *`path`* is specified, return the keys of the JSON object at the given *`path`*. If *`path`* is a `LIST`, the result will be `LIST` of `LIST` of `VARCHAR` |
 | `json_structure(`*`json`*`)` | Return the structure of *`json`*. Defaults to `JSON` the structure is inconsistent (e.g., incompatible types in an array) |
-| `json_contains(`*`json_haystack`*`, `*`json_needle`*`)` | Returns `true` if *`json_needle`* is contained in *`json_haystack`*. Both parameters are of JSON type, but *`json_needle`* can also be a numeric value or a string, however the string must be wrapped in double quotes |
+| `json_type(`*`json `*`[, `*`path`*`])` | Return the type of the supplied *`json`*, which is one of `OBJECT`, `ARRAY`, `BIGINT`, `UBIGINT`, `VARCHAR`, `BOOLEAN`, `NULL`. If *`path`* is specified, return the type of the element at the given *`path`*. If *`path`* is a `LIST`, the result will be `LIST` of types |
+| `json_valid(`*`json`*`)` | Return whether *`json`* is valid JSON |
+| `json(`*`json`*`)` | Parse and minify *`json`* |
 
 The JSONPointer syntax separates each field with a `/`.
 For example, to extract the first element of the array with key `"duck"`, you can do:
@@ -504,9 +504,9 @@ The JSON extension also provides functions to serialize and deserialize `SELECT`
 
 | Function | Type | Description |
 |:------|:-|:---------|
-| `json_serialize_sql(`*`varchar`*`, skip_empty := `*`boolean`*`, skip_null := `*`boolean`*`, format := `*`boolean`*`)` | Scalar | Serialize a set of `;` separated select statments to an equivalent list of *`json`* serialized statements |
 | `json_deserialize_sql(`*`json`*`)` | Scalar  | Deserialize one or many *`json`* serialized statements back to an equivalent sql string |
 | `json_execute_serialized_sql(`*`varchar`*`)` | Table | Execute *`json`* serialized statements and return the resulting rows. Only one statement at a time is supported for now. |
+| `json_serialize_sql(`*`varchar`*`, skip_empty := `*`boolean`*`, skip_null := `*`boolean`*`, format := `*`boolean`*`)` | Scalar | Serialize a set of `;` separated select statments to an equivalent list of *`json`* serialized statements |
 | `PRAGMA json_execute_serialized_sql(`*`varchar`*`)` | Pragma | Pragma version of the `json_execute_serialized_sql` function. |
 
 The `json_serialize_sql(varchar)` function takes three optional parameters, `skip_empty`, `skip_null`, and `format` that can be used to control the output of the serialized statements.

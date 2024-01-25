@@ -38,9 +38,9 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 | `'era'` | Gregorian era (CE/AD, BCE/BC) | | `1` |
 | `'isodow'` | ISO day of the week (Monday = 1, Sunday = 7) | | `2` |
 | `'isoyear'` | ISO Year number (Starts on Monday of week containing Jan 4th) | | `2021` |
-| `'timezone'` | Time zone offset in seconds | | `0` |
 | `'timezone_hour'` | Time zone offset hour portion | | `0` |
 | `'timezone_minute'` | Time zone offset minute portion | | `0` |
+| `'timezone'` | Time zone offset in seconds | | `0` |
 | `'week'` | Week number | `'weeks'`, `'w'` | `31` |
 | `'yearweek'` | ISO year and week number in `YYYYWW` format | | `202131` |
 
@@ -71,9 +71,9 @@ There are dedicated extraction functions to get certain subfields:
 | `month(`*`date`*`)` | Month | `month(date '1992-02-15')` | `2` |
 | `quarter(`*`date`*`)` | Quarter | `quarter(date '1992-02-15')` | `1` |
 | `second(`*`date`*`)` | Seconds | `second(timestamp '2021-08-03 11:59:44.123456')` | `44` |
-| `timezone(`*`date`*`)` | Time Zone offset in minutes | `timezone(date '1992-02-15')` | `0` |
 | `timezone_hour(`*`date`*`)` | Time zone offset hour portion | `timezone_hour(date '1992-02-15')` | `0` |
 | `timezone_minute(`*`date`*`)` | Time zone offset minutes portion | `timezone_minute(date '1992-02-15')` | `0` |
+| `timezone(`*`date`*`)` | Time Zone offset in minutes | `timezone(date '1992-02-15')` | `0` |
 | `week(`*`date`*`)` | ISO Week | `week(date '1992-02-15')` | `7` |
 | `weekday(`*`date`*`)` | Numeric weekday synonym (Sunday = 0, Saturday = 6) | `weekday(date '1992-02-15')` | `6` |
 | `weekofyear(`*`date`*`)` | ISO Week (synonym) | `weekofyear(date '1992-02-15')` | `7` |
