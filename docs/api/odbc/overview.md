@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: ODBC API - Overview
+redirect_from:
+  - /docs/api/odbc
+  - /docs/api/odbc/
 ---
 
 The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of Database Management Systems (DBMSs).

@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: Node.js API
+redirect_from:
+  - /docs/api/nodejs
+  - /docs/api/nodejs/
 ---
 
 This package provides a Node.js API for DuckDB.
