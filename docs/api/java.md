@@ -27,12 +27,17 @@ Class.forName("org.duckdb.DuckDBDriver");
 To create a DuckDB connection, call `DriverManager` with the `jdbc:duckdb:` JDBC URL prefix, like so:
 
 ```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 Connection conn = DriverManager.getConnection("jdbc:duckdb:");
 ```
 
 To use DuckDB-specific features such as the [appender](#appender), cast the object to a `DuckDBConnection`:
 
 ```java
+import org.duckdb.DuckDBConnection;
+
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
 ```
 
