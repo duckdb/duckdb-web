@@ -12,19 +12,19 @@ The table below shows all the built-in general-purpose data types. The alternati
 |:--|:--|:----|
 | `BIGINT` | `INT8`, `LONG` | signed eight-byte integer |
 | `BIT` | `BITSTRING` | string of 1s and 0s |
-| `BOOLEAN` | `BOOL`, `LOGICAL` | logical boolean (true/false) |
 | `BLOB` | `BYTEA`, `BINARY,` `VARBINARY` | variable-length binary data |
+| `BOOLEAN` | `BOOL`, `LOGICAL` | logical boolean (true/false) |
 | `DATE` |   | calendar date (year, month day) |
-| `DOUBLE` | `FLOAT8`, | double precision floating-point number (8 bytes) |
 | `DECIMAL(prec, scale)` | `NUMERIC(prec, scale)` | fixed-precision number with the given width (precision) and scale, defaults to `prec = 18` and `scale = 3` |
+| `DOUBLE` | `FLOAT8`, | double precision floating-point number (8 bytes) |
 | `HUGEINT` | | signed sixteen-byte integer|
 | `INTEGER` | `INT4`, `INT`, `SIGNED` | signed four-byte integer |
 | `INTERVAL` |  | date / time delta |
 | `REAL` | `FLOAT4`, `FLOAT` | single precision floating-point number (4 bytes)|
 | `SMALLINT` | `INT2`, `SHORT` | signed two-byte integer|
 | `TIME` | | time of day (no time zone) |
-| `TIMESTAMP` | `DATETIME` | combination of time and date |
 | `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ` | combination of time and date that uses the current time zone |
+| `TIMESTAMP` | `DATETIME` | combination of time and date |
 | `TINYINT` | `INT1` | signed one-byte integer|
 | `UBIGINT` | | unsigned eight-byte integer |
 | `UHUGEINT` | | unsigned sixteen-byte integer |

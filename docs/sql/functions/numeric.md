@@ -43,6 +43,7 @@ The table below shows the available mathematical functions.
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:--|
+| `@` | Absolute value (parentheses optional if operating on a column) | `@(-2)` | `2` |
 | `abs(x)` | Absolute value | `abs(-17.4)` | `17.4` |
 | `acos(x)` | Computes the arccosine of x | `acos(0.5)` | `1.0471975511965976` |
 | `add(x, y)` | Alias for `x + y` | `add(2, 3)` | `5` |
@@ -96,4 +97,3 @@ The table below shows the available mathematical functions.
 | `tan(x)` | Computes the tangent of x | `tan(90)` | `-1.995200412208242` |
 | `trunc(x)` | Truncates the number | `trunc(17.4)` | `17` |
 | `xor(x)` | Bitwise XOR | `xor(17, 5)` | `20` |
-| `@` | Absolute value (parentheses optional if operating on a column) | `@(-2)` | `2` |

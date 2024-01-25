@@ -44,21 +44,21 @@ Below are parameters that can be passed in to the JSON reader.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
-| `maximum_object_size` | The maximum size of a JSON object (in bytes) | `UINTEGER` | `16777216` |
-| `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | `VARCHAR` | `'array'` |
-| `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`) | `BOOL` | `false` |
-| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | `VARCHAR` | `'auto'` |
-| `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | `STRUCT` | `(empty)` |
-| `records` | Can be one of `['auto', 'true', 'false']` | `VARCHAR` | `'records'` |
 | `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | `BOOL` | `false` |
-| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
-| `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |
-| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | `'iso'` |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | `'iso'`|
-| `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
-| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
-| `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../multiple_files/combining_schemas). | `BOOL` | `false` |
+| `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | `STRUCT` | `(empty)` |
+| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | `VARCHAR` | `'auto'` |
 | `convert_strings_to_integers` | Whether strings representing integer values should be converted to a numerical type. | `BOOL` | `false` |
+| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | `'iso'` |
+| `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
+| `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | `VARCHAR` | `'array'` |
+| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
+| `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`) | `BOOL` | `false` |
+| `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |
+| `maximum_object_size` | The maximum size of a JSON object (in bytes) | `UINTEGER` | `16777216` |
+| `records` | Can be one of `['auto', 'true', 'false']` | `VARCHAR` | `'records'` |
+| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
+| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | `'iso'`|
+| `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../multiple_files/combining_schemas). | `BOOL` | `false` |
 
 When using `read_json_auto`, every parameter that supports auto-detection is enabled.
 
