@@ -54,16 +54,17 @@ This can be useful in a production environment where the connection information 
 and passed in to the environment.
 
 ```bash
-% export PGPASSWORD="secret"
-% export PGHOST=localhost
-% export PGUSER=owner
-% export PGDATABASE=mydatabase
-% duckdb
-D attach '' as p (type postgres);
+export PGPASSWORD="secret"
+export PGHOST=localhost
+export PGUSER=owner
+export PGDATABASE=mydatabase
+duckdb
+```
+```sql
+ATTACH '' AS p (TYPE postgres);
 ```
 
 ## Usage
-
 
 The tables in the PostgreSQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from Postgres at query time.
 
