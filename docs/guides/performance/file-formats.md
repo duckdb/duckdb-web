@@ -42,18 +42,18 @@ We run a simple aggregation query over Parquet files using different row group s
 
 | Row Group Size | Execution Time |
 |----------------|----------------|
-| 960            | 8.772s         |
-| 1920           | 8.951s         |
-| 3840           | 4.331s         |
+| 960            | 8.77s          |
+| 1920           | 8.95s          |
+| 3840           | 4.33s          |
 | 7680           | 2.35s          |
-| 15360          | 1.584s         |
+| 15360          | 1.58s          |
 | 30720          | 1.17s          |
-| 61440          | 0.948s         |
-| 122880         | 0.875s         |
-| 245760         | 0.931s         |
-| 491520         | 0.955s         |
-| 983040         | 0.973s         |
-| 1966080        | 0.886s         |
+| 61440          | 0.94s          |
+| 122880         | 0.87s          |
+| 245760         | 0.93s          |
+| 491520         | 0.95s          |
+| 983040         | 0.97s          |
+| 1966080        | 0.88s          |
 
 The results show that row group sizes <5,000 have a strongly detrimental effect, making runtimes more than 5-10x larger than ideally-sized row groups, while row group sizes between 5,000 and 20,000 are still 1.5-2.5x off from best performance. Above row group size of 100,000, the differences are small: the gap is about 10% between the best and the worst runtime.
 
