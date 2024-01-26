@@ -216,11 +216,11 @@ import pyarrow as pa
 
 # Built-In UDF
 def add_built_in_type(x):
-     return x + 1
+    return x + 1
 
-#Arrow UDF
+# Arrow UDF
 def add_arrow_type(x):
-     return pc.add(x,1)
+    return pc.add(x,1)
 
 con = duckdb.connect()
 
@@ -230,16 +230,16 @@ con.create_function('add_arrow_type', add_arrow_type, ['BIGINT'], 'BIGINT', type
 
 # Integer View with 10,000,000 elements.
 con.sql("""
-     select
-          i
-          from range(10000000) tbl(i);
+     select i
+     from range(10000000) tbl(i);
 """).to_view("numbers")
 
 # Calls for both UDFs
 native_res = con.sql("select sum(add_built_in_type(i)) from numbers").fetchall()
 arrow_res = con.sql("select sum(add_arrow_type(i)) from numbers").fetchall()
-
 ```
+
+<div class="narrow_table"></div>
 
 |    Name     | Time (s) |
 |-------------|----------|
@@ -296,9 +296,9 @@ con.sql("""
 con.sql("select sum(strlen_arrow(i)) from strings tbl(i)").fetchall()
 
 exec_external(con)
-
 ```
 
+<div class="narrow_table"></div>
 
 |    Name     | Time (s) | Peak Memory Consumption (MB) |
 |-------------|----------|------------------------------|
