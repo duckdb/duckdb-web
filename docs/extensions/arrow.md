@@ -17,6 +17,8 @@ LOAD arrow;
 
 ## Functions
 
+<div class="narrow_table"></div>
+
 | Function | Type | Description |
 |--|----|-------|
 | `to_arrow_ipc` | Table in-out-function | Serializes a table into a stream of blobs containing Arrow IPC buffers  
