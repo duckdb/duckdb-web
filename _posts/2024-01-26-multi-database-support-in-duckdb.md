@@ -5,7 +5,7 @@ author: Mark Raasveldt
 excerpt_separator: <!--more-->
 ---
 
-_TL;DR: DuckDB can attach SQLite, Postgres and MySQL databases in addition to databases stored in its own format. This allows data to be read into DuckDB and moved between these systems in a convenient manner._
+_TL;DR: DuckDB can attach Postgres, MySQL, and SQLite databases in addition to databases stored in its own format. This allows data to be read into DuckDB and moved between these systems in a convenient manner._
 
 <img src="/images/blog/duckdb-multidb-support.png"
      alt="DuckDB supports reading and writing to MySQL, Postgres, and SQLite"
@@ -18,7 +18,7 @@ DuckDB supports advanced operations on its own native storage format – such as
 
 DuckDB now has a pluggable storage and transactional layer. This flexible layer allows new storage back-ends to be created by DuckDB extensions. These storage back-ends can support all database operations in the same way that DuckDB supports them, including inserting data and even modifying schemas.
 
-The [SQLite](/docs/extensions/sqlite), [Postgres](/docs/extensions/postgres) and [MySQL](/docs/extensions/mysql) extensions implement this new pluggable storage and transactional layer, allowing DuckDB to connect to those systems and operate on them in the same way that it operates on its own native storage engine.
+The [MySQL](/docs/extensions/mysql), [Postgres](/docs/extensions/postgres), and [SQLite](/docs/extensions/sqlite) extensions implement this new pluggable storage and transactional layer, allowing DuckDB to connect to those systems and operate on them in the same way that it operates on its own native storage engine.
 
 These extensions enable a number of useful features. For example, using these extensions you can:
 
