@@ -5,7 +5,8 @@ title: Configuration
 
 DuckDB has a number of configuration options that can be used to change the behavior of the system.  
 The configuration options can be set using either the [`SET` statement](statements/set) or the [`PRAGMA` statement](pragmas).
-They can also be reset to their original values using the [`RESET` statement](statements/set#reset).
+They can be reset to their original values using the [`RESET` statement](statements/set#reset)
+and queried in `duckdb_settings()`.
 
 ## Examples
 
