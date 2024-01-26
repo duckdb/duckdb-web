@@ -9,7 +9,7 @@ _TL;DR: DuckDB can attach SQLite, Postgres and MySQL databases in addition to da
 
 In modern data analysis, data must often be combined from a wide variety of different sources. Data might sit in CSV files on your machine, in Parquet files in a data lake, or in an operational database. DuckDB has strong support for moving data between many different data sources. However, this support has previously been limited to reading data and writing data to files.
 
-DuckDB supports advanced operations on its own native storage format - such as deleting rows, updating values, or altering the schema of a table. It supports all of these operations using ACID semantics. This guarantees that your database is always left in a sane state - operations are atomic and do not partially complete.
+DuckDB supports advanced operations on its own native storage format – such as deleting rows, updating values, or altering the schema of a table. It supports all of these operations using ACID semantics. This guarantees that your database is always left in a sane state – operations are atomic and do not partially complete.
 
 DuckDB now has a pluggable storage and transactional layer. This flexible layer allows new storage back-ends to be created by DuckDB extensions. These storage back-ends can support all database operations in the same way that DuckDB supports them, including inserting data and even modifying schemas.
 
@@ -89,7 +89,7 @@ SELECT database_name, path, type FROM duckdb_databases;
 
 ## Mix and Match
 
-While attaching to different database types is useful - it becomes even more powerful when used in combination. For example, we can attach both a SQLite, MySQL and a Postgres database.
+While attaching to different database types is useful – it becomes even more powerful when used in combination. For example, we can attach both a SQLite, MySQL and a Postgres database.
 
 ```sql
 ATTACH 'sqlite:sakila.db' AS sqlite;
@@ -112,6 +112,8 @@ FROM mysql.film
 JOIN sqlite.film_actor ON (film.film_id = film_actor.film_id)
 JOIN postgres.actor ON (actor.actor_id = film_actor.actor_id)
 WHERE title = 'ACE GOLDFINGER';
+```
+```text
 ┌────────────┬───────────┐
 │ first_name │ last_name │
 │  varchar   │  varchar  │
@@ -155,7 +157,7 @@ Running `EXPLAIN` on the query shows how the data from the different engines is 
 └───────────────────────────┘└───────────────────────────┘└───────────────────────────┘ 
 ```
 
-> Several changes have been made to Postgres extension since the last release. Use `FORCE INSTALL postgres` to install the latest version of thee xtension.
+> Several changes have been made to Postgres extension since the last release. Use `FORCE INSTALL postgres` to install the latest version of the extension.
 
 ## Transactions
 
@@ -167,14 +169,20 @@ For example, we can begin a transaction within our attached `SQLite` database, m
 BEGIN;
 TRUNCATE film;
 SELECT title, release_year, length FROM film;
+```
+```text
 ┌─────────┬──────────────┬────────┐
 │  title  │ release_year │ length │
 │ varchar │   varchar    │ int64  │
 ├─────────────────────────────────┤
 │             0 rows              │
 └─────────────────────────────────┘
+```
+```sql
 ROLLBACK;
 SELECT title, release_year, length FROM film LIMIT 5;
+```
+```text
 ┌──────────────────┬──────────────┬────────┐
 │      title       │ release_year │ length │
 │     varchar      │   varchar    │ int64  │
@@ -203,7 +211,9 @@ CREATE TABLE postgres.new_table(i INT);
 CREATE TABLE mysql.new_table(i INT);
 ```
 ```text
-Error: Attempting to write to database "mysql" in a transaction that has already modified database "postgres" - a single transaction can only write to a single attached database.
+Error: Attempting to write to database "mysql" in a transaction that has
+already modified database "postgres" – a single transaction can only write
+to a single attached database.
 ```
 
 ## Copying Data Between Databases
@@ -225,15 +235,15 @@ Note that this statement is currently only available in the development build. I
 
 The explicit `ATTACH` statement is not required to connect to a different database type. When instantiating a DuckDB instance a connection can be made directly to a different database type using the `{type}:` prefix. For example, to connect to a SQLite file, use `sqlite:file.db`. To connect to a Postgres instance, use `postgres:dbname=postgresscanner`. This can be done in any client, including the CLI. For instance:
 
-### CLI
+**CLI:**
 
 ```bash
 duckdb sqlite:file.db
 ```
 
-### Python
+**Python:**
 
-```py
+```python
 import duckdb
 con = duckdb.connect('sqlite:file.db')
 ```
@@ -242,12 +252,12 @@ This is equivalent to attaching the storage engine and running `USE` afterwards.
 
 ## Conclusion
 
-DuckDB's pluggable storage engine architecture enables many use cases. By attaching multiple databases, data can be extracted in a transactionally safe manner for bulk ETL or ELT workloads, as well as for on-the-fly data virtualization workloads. These techniques also work well in combination, for example by moving data in bulk on a regular cadence, while filling in the last few data points on the fly.
+DuckDB's pluggable storage engine architecture enables many use cases. By attaching multiple databases, data can be extracted in a transactionally safe manner for bulk ETL or ELT workloads, as well as for on-the-fly data virtualization workloads. These techniques also work well in combination, for example, by moving data in bulk on a regular cadence, while filling in the last few data points on the fly.
 
-Pluggable storage engines also unlock new ways to handle concurrent writers in a data platform. Each separate process could write its output to a transactional database, and the results could be combined within DuckDB - all in a transactionally safe manner. Then data analysis tasks can occur on the centralized DuckDB database for improved performance.
+Pluggable storage engines also unlock new ways to handle concurrent writers in a data platform. Each separate process could write its output to a transactional database, and the results could be combined within DuckDB – all in a transactionally safe manner. Then, data analysis tasks can occur on the centralized DuckDB database for improved performance.
 
 We look forward to hearing the many creative ways you are able to use this feature!
 
 ## Future Work
 
-We intend to continue enhancing performance and capabilities of the existing extensions. In addition, all of these features can be leveraged by the community to connect to other databases.
+We intend to continue enhancing the performance and capabilities of the existing extensions. In addition, all of these features can be leveraged by the community to connect to other databases.
