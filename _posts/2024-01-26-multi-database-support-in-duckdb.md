@@ -7,6 +7,11 @@ excerpt_separator: <!--more-->
 
 _TL;DR: DuckDB can attach SQLite, Postgres and MySQL databases in addition to databases stored in its own format. This allows data to be read into DuckDB and moved between these systems in a convenient manner._
 
+<img src="/images/blog/duckdb-multidb-support.png"
+     alt="DuckDB supports reading and writing to MySQL, Postgres, and SQLite"
+     width=700
+/>
+
 In modern data analysis, data must often be combined from a wide variety of different sources. Data might sit in CSV files on your machine, in Parquet files in a data lake, or in an operational database. DuckDB has strong support for moving data between many different data sources. However, this support has previously been limited to reading data and writing data to files.
 
 DuckDB supports advanced operations on its own native storage format – such as deleting rows, updating values, or altering the schema of a table. It supports all of these operations using ACID semantics. This guarantees that your database is always left in a sane state – operations are atomic and do not partially complete.
