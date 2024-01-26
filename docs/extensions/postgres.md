@@ -32,7 +32,10 @@ ATTACH '' AS postgres_db (TYPE postgres);
 ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres);
 ```
 
-The `ATTACH` command takes as input a [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) - which is a set of `key=value` pairs separated by spaces. Below are some example connection strings and commonly used parameters. A full list of available parameters can be found [in the Postgres documentation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS).
+The `ATTACH` command takes as input either a [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
+or a [PostgreSQL URI](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS).
+
+Below are some example connection strings and commonly used parameters. A full list of available parameters can be found [in the Postgres documentation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS).
 
 ```text
 dbname=postgresscanner
@@ -48,6 +51,8 @@ host=localhost port=5432 dbname=mydb connect_timeout=10
 | password | Postgres Password                    |                |
 | dbname   | Database Name                        | [user]         |
 | passfile | Name of file passwords are stored in | ~/.pgpass      |
+
+An example URI is `postgresql://username@hostname/dbname`.
 
 Postgres connection information can also be specified with [environment variables](https://www.postgresql.org/docs/current/libpq-envars.html).
 This can be useful in a production environment where the connection information is managed externally
