@@ -45,7 +45,7 @@ Also, check that there is only one version of the driver installed as there are 
 
 Download the [snapshot jar](https://oss.sonatype.org/service/local/repositories/snapshots/content/org/duckdb/duckdb_jdbc/0.9.0-SNAPSHOT/duckdb_jdbc-0.9.0-20230806.020824-235.jar)
 
-* MacOS: Copy it to `~/Library/Tableau/Drivers/`
+* macOS: Copy it to `~/Library/Tableau/Drivers/`
 * Windows: Copy it to `C:\Program Files\Tableau\Drivers`
 * Linux: Copy it to `/opt/tableau/tableau_driver/jdbc`.
 
@@ -91,9 +91,9 @@ $ tsm pending-changes apply
 ```
 The last command will restart the server with the new settings.
 
-### MacOS Desktop
+### macOS
 
-Copy the Taco file to the `/Users/[MacOS User]/Documents/My Tableau Repository/Connectors` folder.
+Copy the Taco file to the `/Users/[User]/Documents/My Tableau Repository/Connectors` folder.
 Then launch Tableau Desktop from the Terminal with the command line argument to disable signature validation:
 
 ```sh
