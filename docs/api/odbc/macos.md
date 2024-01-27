@@ -1,10 +1,10 @@
 ---
 layout: docu
-title: ODBC API - MacOS
+title: ODBC API - macOS
 ---
 
 A driver manager is required to manage communication between applications and the ODBC driver.
-We tested and support `unixODBC` that is a complete ODBC driver manager for MacOS (and Linux).
+We tested and support `unixODBC` that is a complete ODBC driver manager for macOS (and Linux).
 Users can install it from the command line:
 
 ## Brew
@@ -15,9 +15,9 @@ brew install unixodbc
 
 ## Step 1: Download ODBC Driver
 
-DuckDB releases the ODBC driver as asset. For MacOS, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC Linux Asset</a> that contains the following artifacts:
+DuckDB releases the ODBC driver as asset. For macOS, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC Linux Asset</a> that contains the following artifacts:
 
-**libduckdb_odbc.dylib**: the DuckDB driver compiled to MacOS (with Intel and Apple M1 support).
+**libduckdb_odbc.dylib**: the DuckDB driver compiled to macOS (with Intel and Apple Silicon support).
 
 ## Step 2: Extracting ODBC Artifacts
 

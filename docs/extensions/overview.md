@@ -9,7 +9,7 @@ DuckDB has a flexible extension mechanism that allows for dynamically loading ex
 These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
 
 > Extensions are loadable on all clients (e.g., Python and R).
-> Extensions distributed via the official repository are built and tested on MacOS (AMD64 and ARM64), Windows (AMD64) and Linux (AMD64 and ARM64).
+> Extensions distributed via the official repository are built and tested on macOS (AMD64 and ARM64), Windows (AMD64) and Linux (AMD64 and ARM64).
 
 We maintain a [list of official extensions](official_extensions).
 
@@ -85,7 +85,7 @@ For the Python client, see the [Loading and Installing Extensions section in the
 
 ### Sharing Extensions between Clients
 
-The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.9.2 of the CLI client on MacOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.9.2.
+The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.9.2 of the CLI client on macOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.9.2.
 
 See the [Working with Extensions page](https://duckdb.org/docs/extensions/working_with_extensions#platforms) for details on available platforms.
 
