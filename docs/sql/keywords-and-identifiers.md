@@ -2,7 +2,8 @@
 layout: docu
 title: Keywords and Identifiers
 redirect_from:
-  - /docs/data/sql/case_sensitivity
+  - /docs/sql/case_sensitivity
+  - /docs/sql/case_sensitivity/
 ---
 
 ## Identifiers
