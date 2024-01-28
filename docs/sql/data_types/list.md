@@ -58,7 +58,7 @@ The ordering is defined positionally. `NULL` values compare greater than all oth
 
 At the top level, `NULL` nested values obey standard SQL `NULL` comparison rules:
 comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` result.
-Comparing nested value _members_ , however, uses the internal nested value rules for `NULL`s,
+Comparing nested value _members_, however, uses the internal nested value rules for `NULL`s,
 and a `NULL` nested value member will compare above a non-`NULL` nested value member.
 
 ## Functions
