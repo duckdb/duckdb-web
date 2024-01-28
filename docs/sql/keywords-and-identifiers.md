@@ -1,9 +1,22 @@
 ---
 layout: docu
-title: Rules for Case Sensitivity
+title: Keywords and Identifiers
+redirect_from:
+  - /docs/data/sql/case_sensitivity
 ---
 
-## Keywords and Function Names
+## Identifiers
+
+Similarly to other SQL dialects and programming languages, identifiers in DuckDB's SQL are subject to several rules.
+
+* Unquoted identifiers need to conform to a number of rules:
+    * They must not be a reserved keyword (see [`duckdb_keywords()`](duckdb_table_functions#duckdb_keywords)), e.g., `SELECT 123 AS SELECT` will fail.
+    * They must not start with a number or special character, e.g., `SELECT 123 AS 1col` is invalid.
+    * They cannot contain whitespaces (including tabs and newline characters).
+* Identifiers can be quoted using double-quote characters (`"`). Quoted identifiers can use any keyword, whitespace or special character, e.g., `"SELECT"` and `" § 🦆 ¶ "` are valid identifiers.
+* Quotes themselves can be escaped by repeating the quote character, e.g., to create an identifier named `IDENTIFIER "X"`, use `"IDENTIFIER ""X"""`.
+
+## Rules for Case-Sensitivity
 
 SQL keywords and function names are case-insensitive in DuckDB.
 
