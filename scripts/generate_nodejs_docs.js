@@ -10,11 +10,19 @@ if (!duckdb) {
 }
 
 let docs = jsdoc2md.renderSync({ files: duckdb + '/lib/*.js' });
+
+// Add newline after headers to conform to the Markdown linter's rules.
+// To achieve this, the regex looks for headers starting with two or more # characters,
+// that are followed by a non-empty line, using global and multi-line matching.
+add_newline_after_headers = /^(##+ .*\n)([^\n])/gm
+docs = docs.replace(add_newline_after_headers, "$1\n$2");
+
 docs = `\
 ---
 layout: docu
 title: Node.js API
 ---
+
 ` + docs;
 
 fs.writeFileSync(__dirname + '/../docs/api/nodejs/reference.md', docs);
