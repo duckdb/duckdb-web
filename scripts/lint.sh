@@ -7,7 +7,7 @@ check='--check --diff'
 while getopts "f" opt; do
     case $opt in
         f) fix="--fix"
-           check='';
+           check='';;
         *) exit
     esac
 done
