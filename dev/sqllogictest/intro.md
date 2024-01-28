@@ -56,7 +56,7 @@ Query verification is very useful because it not only discovers bugs in optimize
 
 The sqllogictests are not exactly an industry standard, but several other systems have adopted them as well. Parsing sqllogictests is intentionally simple. All statements have to be separated by empty lines. For that reason, writing a syntax highlighter is not extremely difficult.
 
-A syntax highlighter exists for [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=benesch.sqllogictest). We have also [made a fork that supports the DuckDB dialect of the sqllogictests](https://github.com/Mytherin/vscode-sqllogictest). You can use the fork by installing the original, then copying the `syntaxes/sqllogictest.tmLanguage.json` into the installed extension (on MacOS this is located in `~/.vscode/extensions/benesch.sqllogictest-0.1.1`).
+A syntax highlighter exists for [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=benesch.sqllogictest). We have also [made a fork that supports the DuckDB dialect of the sqllogictests](https://github.com/Mytherin/vscode-sqllogictest). You can use the fork by installing the original, then copying the `syntaxes/sqllogictest.tmLanguage.json` into the installed extension (on macOS this is located in `~/.vscode/extensions/benesch.sqllogictest-0.1.1`).
 
 A syntax highlighter is also available for [CLion](https://plugins.jetbrains.com/plugin/15295-sqltest). It can be installed directly on the IDE by searching SQLTest on the marketplace. A [GitHub repository](https://github.com/pdet/SQLTest) is also available, with extensions and bug reports being welcome.
 

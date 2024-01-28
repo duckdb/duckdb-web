@@ -199,7 +199,7 @@ This release further improves on that by greatly optimizing the [out-of-core has
 |2|7.69|3.28|
 |1|17.73|4.35|
 
-**jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/duckdb/duckdb/pull/4971) with the Linux version of DuckDB by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on MacOS or Windows, and as such we continue using the standard allocators there (at least for now).
+**jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/duckdb/duckdb/pull/4971) with the Linux version of DuckDB by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on macOS or Windows, and as such we continue using the standard allocators there (at least for now).
 
 #### Shell Improvements
 
