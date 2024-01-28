@@ -25,7 +25,7 @@ The site is built using [Jekyll](https://jekyllrb.com/) 3.9.x.
 
 #### Ruby
 
-Jekyll 3.9.x requires Ruby v2.7.x+. Note that in some systems, the built-in Ruby distribution is older. On MacOS, you can install a new Ruby version via [Homebew](https://brew.sh/):
+Jekyll 3.9.x requires Ruby v2.7.x+. Note that in some systems, the built-in Ruby distribution is older. On macOS, you can install a new Ruby version via [Homebew](https://brew.sh/):
 
 ```bash
 brew install ruby

@@ -264,7 +264,7 @@ We have set the memory limit to 12GB, and `max_bytes_before_external_sort` to 10
 
 HyPer is [Tableau's data engine](https://www.tableau.com/products/new-features/hyper), created by the [database group at the University of Munich](http://db.in.tum.de).
 It does not run natively (yet) on ARM-based processors like the M1.
-We will use [Rosetta 2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2), MacOS's x86 emulator to run it.
+We will use [Rosetta 2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2), macOS's x86 emulator to run it.
 Emulation causes some overhead, so we have included an experiment on an x86 machine in [the appendix](#x86).
 
 Benchmarking sorting in database systems is not straightforward.
@@ -385,7 +385,7 @@ This allows the operating system to move data between memory and disk.
 While useful, it is no substitute for a proper external sort, as it creates random access to disk, which is very slow.
 
 Pandas performs surprisingly well on SF100, despite the data not fitting in memory.
-Pandas can only do this because MacOS dynamically increases swap size.
+Pandas can only do this because macOS dynamically increases swap size.
 Most operating systems do not do this and would fail to load the data at all.
 Using swap usually slows down processing significantly, but the SSD is so fast that there is no visible performance drop!
 
