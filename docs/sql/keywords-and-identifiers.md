@@ -49,6 +49,23 @@ WHERE internal = true;
 ```
 -->
 
+## Numeric Literals
+
+DuckDB's SQL dialect allows using the underscore character `_` in numeric literals as an optional separator. The rules for using underscores are as follows:
+
+* Underscores are allowed in integer, decimal, hexadecimal and binary notation.
+* Underscores can not be the first or last character in a literal.
+* Underscores have to have an integer/numeric part on either side of them, i.e., there can not be multiple underscores in a row and not immediately before/after a decimal or exponent.
+
+### Examples
+
+```sql
+SELECT 100_000_000;      -- 100000000
+SELECT '0xFF_FF'::INT;   -- 65535
+SELECT 1_2.1_2E0_1;      -- 121.2
+SELECT '0b0_1_0_1'::INT; -- 5
+```
+
 ## Rules for Case-Sensitivity
 
 ### Keywords and Function Names
