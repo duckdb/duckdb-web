@@ -36,6 +36,13 @@ build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_e
 build/release/duckdb -c "INSTALL 'build/release/extension/icu/icu.duckdb_extension';"
 ```
 
+If you want to include the `spatial` extension, [build it](https://github.com/duckdb/duckdb_spatial#building-from-source) and install it:
+
+```bash
+cd duckdb_spatial
+build/release/duckdb -c "INSTALL 'build/release/extension/icu/icu.duckdb_extension';"
+```
+
 Run the script as follows:
 
 ```bash
