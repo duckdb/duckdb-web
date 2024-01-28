@@ -16,13 +16,46 @@ Similarly to other SQL dialects and programming languages, identifiers in DuckDB
 * Identifiers can be quoted using double-quote characters (`"`). Quoted identifiers can use any keyword, whitespace or special character, e.g., `"SELECT"` and `" § 🦆 ¶ "` are valid identifiers.
 * Quotes themselves can be escaped by repeating the quote character, e.g., to create an identifier named `IDENTIFIER "X"`, use `"IDENTIFIER ""X"""`.
 
+## Database Names
+
+Database names are subject to the rules for [identifiers](#identifiers).
+
+Additionally, it is best practive to avoid DuckDB's two internal [database schema names](duckdb_table_functions#duckdb_databases), `system` and `temp`.
+By default, persistent databases are named after their filename without the extension.
+Therefore, the filenames `system.db` and `temp.db` (as well as `system.duckdb` and `temp.duckdb`) result in the database names `system` and `temp`, respectively.
+If you need to attach to a database that has one of these names, use an alias, e.g.:
+
+```sql
+ATTACH 'temp.db' AS temp2;
+USE temp2;
+```
+
+<!--
+The list of internal schemas can be retrieved as follows:
+
+```sql
+SELECT database_name
+FROM duckdb_databases()
+WHERE internal = true;
+```
+```text
+┌───────────────┐
+│ database_name │
+│    varchar    │
+├───────────────┤
+│ system        │
+│ temp          │
+└───────────────┘
+```
+-->
+
 ## Rules for Case-Sensitivity
+
+### Keywords and Function Names
 
 SQL keywords and function names are case-insensitive in DuckDB.
 
-### Examples
-
-The following two queries are equivalent:
+For example, the following two queries are equivalent:
 
 ```matlab
 select COS(Pi()) as CosineOfPi;
@@ -37,18 +70,11 @@ SELECT cos(pi()) AS CosineOfPi;
 └────────────┘
 ```
 
-## Identifiers
+### Case-Sensitivity of Identifiers
 
 Following the convention of the SQL standard, identifiers in DuckDB are case-insensitive.
-However, each character's case (uppercase/lowercase) is maintained as entered by the user.
-
-To change this behavior, set the `preserve_identifier_case` [configuration option](configuration#configuration-reference) to `false`.
-
-### Examples
-
-#### Preserving Cases
-
-The case entered by the user is preserved even if a query uses different cases when referring to the identifier:
+However, each character's case (uppercase/lowercase) is maintained as originally specified by the user even if a query uses different cases when referring to the identifier.
+For example:
 
 ```sql
 CREATE TABLE tbl AS SELECT cos(pi()) AS CosineOfPi;
@@ -62,6 +88,8 @@ SELECT cosineofpi FROM tbl;
 │       -1.0 │
 └────────────┘
 ```
+
+To change this behavior, set the `preserve_identifier_case` [configuration option](configuration#configuration-reference) to `false`.
 
 #### Handling Conflicts
 
@@ -81,8 +109,6 @@ SELECT * FROM t1 NATURAL JOIN t2;
 │         0 rows          │
 └─────────────────────────┘
 ```
-
-
 
 #### Disabling Preserving Cases
 
