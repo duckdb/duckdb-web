@@ -21,7 +21,6 @@ The table below shows the available mathematical operators for `BIT` type.
 | `<<` | bitwise shift left | `'1001011'::BIT << 3` | `1011000` |
 | `>>` | bitwise shift right | `'1001011'::BIT >> 3` | `0001001` |
 
-
 ## Bitstring Functions
 
 The table below shows the available scalar functions for `BIT` type.
