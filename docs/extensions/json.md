@@ -72,7 +72,7 @@ The following two table functions are used to read JSON:
 
 These functions have the following parameters:
 
-| Name | Description | Type | Default
+| Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `maximum_object_size` | The maximum size of a JSON object (in bytes) | `UINTEGER` | `16777216` |
 | `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | `VARCHAR` | `'array'` |

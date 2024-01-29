@@ -7,6 +7,7 @@ This section describes functions and operators for examining and manipulating bl
 
 | Function | Description | Example | Result |
 |:-|:--|:---|:-|
+<!-- markdownlint-disable-next-line MD056 -->
 | *`blob`* `||` *`blob`* | Blob concatenation | `'\xAA'::BLOB || '\xBB'::BLOB` | `\xAA\xBB` |
 | `decode(`*`blob`*`)` | Convert blob to varchar. Fails if blob is not valid utf-8. | `decode('\xC3\xBC'::BLOB)` | `ü` |
 | `encode(`*`string`*`)` | Convert varchar to blob. Converts utf-8 characters into literal encoding. | `encode('my_string_with_ü')` | `my_string_with_\xC3\xBC` |

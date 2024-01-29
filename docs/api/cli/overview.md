@@ -31,7 +31,7 @@ $ duckdb [OPTIONS] [FILENAME]
 
 ### Options
 
-The `[OPTIONS]` part encodes [arguments for the CLI client](#command-line-arguments). Common options include:
+The `[OPTIONS]` part encodes [arguments for the CLI client](arguments). Common options include:
 
 * `-csv`: sets the output mode to CSV
 * `-json`: sets the output mode to JSON

@@ -64,10 +64,10 @@ The following dialects are considered for automatic dialect detection.
 
 | Parameters | Considered values     |
 |------------|-----------------------|
+<!-- markdownlint-disable-next-line MD056 -->
 | `delim`    | `,` `|` `;` `\t`      |
 | `quote`    | `"` `'` (empty)       |
 | `escape`   | `"` `'` `\` (empty)   |
-
 
 Consider the example file [`flights.csv`](/data/flights.csv):
 

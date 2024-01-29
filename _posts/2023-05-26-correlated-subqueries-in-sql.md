@@ -163,7 +163,7 @@ WHERE NOT EXISTS (
 | uniquecarrier |           origincityname           |            destcityname            | flightdate | distance |
 |---------------|------------------------------------|------------------------------------|------------|----------|
 | AA            | Daytona Beach, FL                  | Charlotte, NC                      | 2017-02-27 | 416.0    |
-| EV            | Abilene, TX                        | Dallas/Fort Worth, TX              | 2017-02-15 | 158.0    ||
+| EV            | Abilene, TX                        | Dallas/Fort Worth, TX              | 2017-02-15 | 158.0    |
 | EV            | Dallas/Fort Worth, TX              | Durango, CO                        | 2017-02-13 | 674.0    |
 
 #### IN / ANY / ALL

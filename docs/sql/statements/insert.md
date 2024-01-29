@@ -165,7 +165,7 @@ INSERT INTO tbl BY NAME (SELECT 84 AS j, 1 AS i) ON CONFLICT DO UPDATE SET j = E
 
 A conflict target may be provided as `ON CONFLICT (confict_target)`. This is a group of columns that an index or uniqueness/key constraint is defined on. If the conflict target is omitted, or `PRIMARY KEY` constraint(s) on the table are targeted.
 
-Specifying a conflict target is optional unless using a [`DO UPDATE`](#on-conflict-do-update) and there are multiple unique/primary key constraints on the table.
+Specifying a conflict target is optional unless using a [`DO UPDATE`](#do-update-clause) and there are multiple unique/primary key constraints on the table.
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT UNIQUE, k INT);

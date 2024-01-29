@@ -28,12 +28,14 @@ Run the script as follows:
 
 ### Using DuckDB `main`
 
-Build DuckDB and install the `httpfs` and `icu` extensions. Go to the DuckDB directory and run:
+Build DuckDB and install the in-tree. Go to the DuckDB directory and run:
 
 ```bash
-GEN=ninja BUILD_HTTPFS=1 BUILD_ICU=1 make
-build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
-build/release/duckdb -c "INSTALL 'build/release/extension/icu/icu.duckdb_extension';"
+GEN=ninja EXTENSION_CONFIGS=".github/config/in_tree_extensions.cmake" make
+cd build/release/extension/
+for EXTENSION in *; do
+    ../duckdb -c "INSTALL '${EXTENSION}/${EXTENSION}.duckdb_extension';"
+done
 ```
 
 Run the script as follows:

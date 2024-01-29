@@ -71,12 +71,25 @@ The following is a step-by-step guide to setting up an application that uses ODB
 
 > To install the driver as well as anything else you will need follow these [instructions](https://duckdb.org/docs/api/odbc/overview).
 
-1. [Include the SQL Header Files](#1-include-the-sql-header-files)
-2. [Define the ODBC Handles and Connect to the Database](#2-define-the-odbc-handles-and-connect-to-the-database)
-3. [Adding a Query](#3-adding-a-query)
-4. [Fetching Results](#4-fetching-results)
-5. [Go Wild](#5-go-wild)
-6. [Free the Handles and Disconnecting](#6-free-the-handles-and-disconnecting)
+* [What is ODBC?](#what-is-odbc)
+* [General Concepts](#general-concepts)
+  * [Handles](#handles)
+    * [Handle Types](#handle-types)
+  * [Connecting](#connecting)
+    * [Connection String](#connection-string)
+    * [DSN](#dsn)
+  * [Error Handling and Diagnostics](#error-handling-and-diagnostics)
+  * [Buffers and Binding](#buffers-and-binding)
+* [Setting up an Application](#setting-up-an-application)
+  * [1. Include the SQL Header Files](#1-include-the-sql-header-files)
+  * [2. Define the ODBC Handles and Connect to the Database](#2-define-the-odbc-handles-and-connect-to-the-database)
+  * [3. Adding a Query](#3-adding-a-query)
+  * [4. Fetching Results](#4-fetching-results)
+  * [5. Go Wild](#5-go-wild)
+  * [6. Free the Handles and Disconnecting](#6-free-the-handles-and-disconnecting)
+* [Sample Application](#sample-application)
+  * [Sample `.cpp` file](#sample-cpp-file)
+  * [Sample `CMakelists.txt` file](#sample-cmakeliststxt-file)
 
 ### 1. Include the SQL Header Files
 
@@ -211,7 +224,7 @@ Freeing the connection and environment handles can only be done after the connec
 
 The following is a sample application that includes a `cpp` file that connects to the database, executes a query, fetches the results, and prints them.  It also disconnects from the database and frees the handles, and includes a function to check the return value of ODBC functions.  It also includes a `CMakeLists.txt` file that can be used to build the application.
 
-#### Sample `.cpp` file
+### Sample `.cpp` file
 
 ```cpp
 #include <iostream>
@@ -279,7 +292,7 @@ int main() {
 }
 ```
 
-#### Sample `CMakelists.txt` file
+### Sample `CMakelists.txt` file
 
 ```CMAKE
 cmake_minimum_required(VERSION 3.25)

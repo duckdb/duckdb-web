@@ -129,10 +129,10 @@ SELECT
 FROM tripdata;
 ```
 
-Version | Time (s)
--- | --:
-v0.8.0 | 33.8
-v0.9.0 | 3.8
+| Version | Time (s) |
+| -- | --: |
+| v0.8.0 | 33.8 |
+| v0.9.0 | 3.8 |
 
 #### Storage Improvements
 
@@ -145,10 +145,10 @@ CREATE TABLE integers(i INTEGER PRIMARY KEY);
 INSERT INTO integers FROM range(10000000);
 ```
 
-Version | Size
--- | --:
-v0.8.0 | 278MB
-v0.9.0 | 78MB
+| Version | Size |
+| -- | --: |
+| v0.8.0 | 278MB |
+| v0.9.0 | 78MB |
 
 In addition, due to improvements in the manner in which indexes are stored on disk they can now be written to disk incrementally instead of always requiring a full rewrite. This allows for much quicker checkpointing for tables that have indexes.
 

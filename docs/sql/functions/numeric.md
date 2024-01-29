@@ -20,6 +20,7 @@ The table below shows the available mathematical operators for numeric types.
 | `**`     | exponent                  | `3 ** 4`  | `81`  |
 | `^`      | exponent (alias for `**`) | `3 ^ 4`   | `81`  |
 | `&`      | bitwise AND               | `91 & 15` | `11`  |
+<!-- markdownlint-disable-next-line MD056 -->
 | `|`      | bitwise OR                | `32 | 3`  | `35`  |
 | `<<`     | bitwise shift left        | `1 << 4`  | `16`  |
 | `>>`     | bitwise shift right       | `8 >> 2`  | `2`   |
