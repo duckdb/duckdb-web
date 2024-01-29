@@ -244,7 +244,7 @@ SELECT * FROM postgres_db.tmp;
 
 ## Running SQL Queries in Postgres with postgres_query
 
-The postgres_query function allows you to run arbitrary SQL within an attached database. `postgres_query` takes the name of the atached Postgres database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
+The `postgres_query` function allows you to run arbitrary SQL within an attached database. `postgres_query` takes the name of the attached Postgres database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
 
 ```sql
 postgres_query(attached_database::VARCHAR, query::VARCHAR)
@@ -254,7 +254,7 @@ postgres_query(attached_database::VARCHAR, query::VARCHAR)
 
 ```sql
 ATTACH 'dbname=postgresscanner' AS s (TYPE POSTGRES);
-SELECT * FROM postgres_query('s', 'SELECT * FROM cars WHERE color IN (''red'', ''blue'', ''gray'') LIMIT 3');
+SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
 ```
 ```text
 ┌──────────────┬───────────┬─────────┐
