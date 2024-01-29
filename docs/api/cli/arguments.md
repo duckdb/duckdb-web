@@ -9,6 +9,8 @@ Fot a list of dot commands available in the CLI shell, see the [Dot Commands pag
 
 <div class="narrow_table"></div>
 
+<!-- markdownlint-disable MD056 -->
+
 | Argument | Description |
 |---|-------|
 | `-append`         | Append the database to the end of the file                           |
@@ -38,9 +40,10 @@ Fot a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-quote`          | Set [output mode](output-formats) to `quote`                         |
 | `-readonly`       | Open the database read-only                                          |
 | `-s COMMAND`      | Run `COMMAND` and exit                                               |
-<!-- markdownlint-disable-next-line MD056 -->
 | `-separator SEP`  | Set output column separator to SEP. Default: `|`                     |
 | `-stats`          | Print memory stats before each finalize                              |
 | `-table`          | Set [output mode](output-formats) to `table`                         |
 | `-unsigned`       | Allow loading of unsigned extensions                                 |
 | `-version`        | Show DuckDB version                                                  |
+
+<!-- markdownlint-enable MD056 -->

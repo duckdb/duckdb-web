@@ -9,6 +9,8 @@ The table below shows the available mathematical operators for numeric types.
 
 <div class="narrow_table"></div>
 
+<!-- markdownlint-disable MD056 -->
+
 | Operator | Description | Example | Result |
 |-|-----|--|-|
 | `+`      | addition                  | `2 + 3`   | `5`   |
@@ -20,12 +22,13 @@ The table below shows the available mathematical operators for numeric types.
 | `**`     | exponent                  | `3 ** 4`  | `81`  |
 | `^`      | exponent (alias for `**`) | `3 ^ 4`   | `81`  |
 | `&`      | bitwise AND               | `91 & 15` | `11`  |
-<!-- markdownlint-disable-next-line MD056 -->
 | `|`      | bitwise OR                | `32 | 3`  | `35`  |
 | `<<`     | bitwise shift left        | `1 << 4`  | `16`  |
 | `>>`     | bitwise shift right       | `8 >> 2`  | `2`   |
 | `~`      | bitwise negation          | `~15`     | `-16` |
 | `!`      | factorial of `x`          | `4!`      | `24`  |
+
+<!-- markdownlint-enable MD056 -->
 
 ### Division and Modulo Operators
 
