@@ -56,6 +56,8 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
 The following operators are supported for lists:
 
+<!-- markdownlint-disable MD056 -->
+
 | Operator | Description | Example | Result |
 |-|--|---|-|
 | `&&`  | Alias for `list_intersect`                                                                | `[1, 2, 3, 4, 5] && [2, 5, 5, 6]` | `[2, 5]`             |

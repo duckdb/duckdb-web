@@ -15,7 +15,7 @@ The more ordered the data within a column, the more useful the zonemap indexes w
 
 ### Microbenchmark: The Effect of Ordering
 
-For an example, let’s repeat the [microbenchmark for timestamps](#microbenchmark-using-timestamps) with a timestamp column that sorted using an ascending order vs. an unordered one.
+For an example, let’s repeat the [microbenchmark for timestamps](schema#microbenchmark-using-timestamps) with a timestamp column that sorted using an ascending order vs. an unordered one.
 
 <div class="narrow_table"></div>
 

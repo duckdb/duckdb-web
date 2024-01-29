@@ -5,6 +5,8 @@ title: Text Functions
 
 This section describes functions and operators for examining and manipulating string values. The `␣` symbol denotes a space character.
 
+<!-- markdownlint-disable MD056 -->
+
 | Function | Description | Example | Result | Alias |
 |:--|:--|:---|:--|:--|
 | *`string`* `^@` *`search_string`* | Alias for `starts_with`. | `'abc' ^@ 'a'` | `true` | |

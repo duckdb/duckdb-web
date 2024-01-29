@@ -9,6 +9,8 @@ The table below shows the available mathematical operators for numeric types.
 
 <div class="narrow_table"></div>
 
+<!-- markdownlint-disable MD056 -->
+
 | Operator | Description | Example | Result |
 |-|-----|--|-|
 | `+`      | addition                  | `2 + 3`   | `5`   |
