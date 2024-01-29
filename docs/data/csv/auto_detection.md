@@ -62,12 +62,15 @@ The following dialects are considered for automatic dialect detection.
 
 <div class="narrow_table"></div>
 
+<!-- markdownlint-disable MD056 -->
+
 | Parameters | Considered values     |
 |------------|-----------------------|
-<!-- markdownlint-disable-next-line MD056 -->
 | `delim`    | `,` `|` `;` `\t`      |
 | `quote`    | `"` `'` (empty)       |
 | `escape`   | `"` `'` `\` (empty)   |
+
+<!-- markdownlint-enable MD056 -->
 
 Consider the example file [`flights.csv`](/data/flights.csv):
 
