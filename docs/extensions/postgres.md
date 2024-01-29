@@ -254,7 +254,7 @@ postgres_query(attached_database::VARCHAR, query::VARCHAR)
 
 ```sql
 ATTACH 'dbname=postgresscanner' AS s (TYPE POSTGRES);
-SELECT * FROM postgres_query('s', 'SELECT * FROM cars WHERE color IN (''red'', ''blue'', ''gray'') LIMIT 3');
+SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
 ```
 ```text
 ┌──────────────┬───────────┬─────────┐
