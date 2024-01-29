@@ -87,8 +87,8 @@ Apart from the database associated at startup, the list also includes databases 
 | `database_name` | The name of the database, or the alias if the database was attached using an ALIAS-clause. | `VARCHAR` |
 | `database_oid` | The internal identifier of the database. | `VARCHAR` |
 | `path` | The file path associated with the database. | `VARCHAR` |
-| `internal` | `true` indicates a system or built-in database. False indicates a user-defined database. | BOOLEAN
-| `type` | The type indicates the type of RDBMS implemented by the attached database. For DuckDB databases, that value is `duckdb`. 
+| `internal` | `true` indicates a system or built-in database. False indicates a user-defined database. | `BOOLEAN` |
+| `type` | The type indicates the type of RDBMS implemented by the attached database. For DuckDB databases, that value is `duckdb`. | `VARCHAR` |
 
 ## `duckdb_dependencies`
 
@@ -99,7 +99,7 @@ The `duckdb_dependencies()` function provides metadata about the dependencies av
 | `classid` |Always 0| `BIGINT` |
 | `objid` |The internal id of the object.| `BIGINT` |
 | `objsubid` |Always 0| `INTEGER` |
-| `refclassid` |Always 0| `BIGINT` |s
+| `refclassid` |Always 0| `BIGINT` |
 | `refobjid` |The internal id of the dependent object.| `BIGINT` |
 | `refobjsubid` |Always 0| `INTEGER` |
 | `deptype` |The type of dependency. Either regular (n) or automatic (a).| `VARCHAR` |

@@ -9,7 +9,9 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 
 <div class="narrow_table"></div>
 
-| Command | Description | 
+<!-- markdownlint-disable MD056 -->
+
+| Command | Description |
 |---|------|
 | `.bail on|off`           | Stop after hitting an error.  Default: `off`                                                                 |
 | `.binary on|off`         | Turn binary output on or off.  Default: `off`                                                                |
@@ -58,9 +60,6 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.timer on|off`          | Turn SQL timer on or off                                                                                     |
 | `.width NUM1 NUM2 ...`   | Set minimum column widths for columnar output                                                                |
 
-<!-- | `.clone NEWDB`           | Clone data into `NEWDB` from the existing database                                                           | -->
-<!-- | `.dump ?TABLE?`          | Render database content as SQL                                                                               | -->
-
 ## Using the `.help` Commmand
 
 The `.help` text may be filtered by passing in a text string as the second argument.
@@ -75,7 +74,7 @@ The `.help` text may be filtered by passing in a text string as the second argum
 .mode MODE ?TABLE?       Set output mode
 ```
 
-#### `.output`: Writing Results to a File
+### `.output`: Writing Results to a File
 
 By default, the DuckDB CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands. Pass in the desired output file location as a parameter. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
 

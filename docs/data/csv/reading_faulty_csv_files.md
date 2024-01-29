@@ -82,7 +82,7 @@ The CSV Rejects Table returns the following information:
 
 The parameters listed below are used in the `read_csv` function to configure the CSV Rejects Table.
 
-| Name | Description | Type | Default 
+| Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `rejects_table` | Name of a temporary table where the information of the faulty lines of a CSV file are stored.| `VARCHAR` | (empty) |
 | `rejects_limit` | Upper limit on the number of faulty records from a CSV file that will be recorded in the rejects table. 0 is used when no limit should be applied.| `BIGINT` | 0 |

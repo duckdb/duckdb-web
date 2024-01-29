@@ -5,11 +5,10 @@ title: Text Functions
 
 This section describes functions and operators for examining and manipulating string values. The `␣` symbol denotes a space character.
 
-<!-- markdownlint-disable MD056 -->
-
 | Function | Description | Example | Result | Alias |
 |:--|:--|:---|:--|:--|
 | *`string`* `^@` *`search_string`* | Alias for `starts_with`. | `'abc' ^@ 'a'` | `true` | |
+<!-- markdownlint-disable-next-line MD056 -->
 | *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `DuckDB` | |
 | *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'DuckDB'[4]` | `'k'` | |
 | *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. | `'DuckDB'[:4]` | `'Duck'` |
