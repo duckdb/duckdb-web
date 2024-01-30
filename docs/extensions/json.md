@@ -335,7 +335,7 @@ SELECT json_array_length(j, ['$.species']) FROM example;
 -- [4]
 SELECT json_type(j) FROM example;
 -- OBJECT
-SELECT json_keys FROM example;
+SELECT json_keys(j) FROM example;
 -- [family, species]
 SELECT json_structure(j) FROM example;
 -- {"family":"VARCHAR","species":["VARCHAR"]}
@@ -343,7 +343,7 @@ SELECT json_structure('["duck", {"family": "anatidae"}]');
 -- ["JSON"]
 SELECT json_contains('{"key": "value"}', '"value"');
 -- true
-SELECT json_contains('{"key": 1}', 1);
+SELECT json_contains('{"key": 1}', '1');
 -- true
 SELECT json_contains('{"top_key": {"key": "value"}}', '{"key": "value"}');
 -- true
@@ -386,7 +386,7 @@ SELECT j->>'$.species[0]' FROM example;
 -- duck
 SELECT j->'species'->>0 FROM example;
 -- duck
-SELECT j->'species'->>[0,1] FROM example;
+SELECT j->'species'->>['0','1'] FROM example;
 -- [duck, goose]
 ```
 
