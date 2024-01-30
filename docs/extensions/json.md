@@ -42,6 +42,7 @@ The `JSON` logical type is interpreted as JSON, i.e., parsed, in JSON functions 
 All JSON creation functions return values of this type.
 
 We also allow any of our types to be casted to JSON, and JSON to be casted back to any of our types, for example:
+
 ```sql
 -- Cast JSON to our STRUCT type
 SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
@@ -53,6 +54,7 @@ SELECT {duck: 42}::JSON;
 ```
 
 This works for our nested types as shown in the example, but also for non-nested types:
+
 ```sql
 SELECT '2023-05-12'::DATE::JSON;
 -- "2023-05-12"
@@ -83,6 +85,7 @@ These functions have the following parameters:
 
 The `format` parameter specifies how to read the JSON from a file.
 With `'unstructured'`, the top-level JSON is read, e.g.:
+
 ```json
 {
   "duck": 42
@@ -91,16 +94,20 @@ With `'unstructured'`, the top-level JSON is read, e.g.:
   "goose": [1, 2, 3]
 }
 ```
+
 Will result in two objects being read.
 
 With `'newline_delimited'`, [NDJSON](http://ndjson.org) is read, where each JSON is separated by a newline (`\n`), e.g.:
+
 ```json
 {"duck": 42}
 {"goose": [1, 2, 3]}
 ```
+
 Will also result in two objects being read.
 
 With `'array'`, each array element is read, e.g.:
+
 ```json
 [
   {
@@ -111,9 +118,11 @@ With `'array'`, each array element is read, e.g.:
   }
 ]
 ```
+
 Again, will result in two objects being read.
 
 Example usage:
+
 ```sql
 SELECT * FROM read_json_objects('my_file1.json');
 -- {"duck":42,"goose":[1,2,3]}
@@ -148,6 +157,7 @@ Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, 
 | `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../data/multiple_files/combining_schemas) | `BOOL` | `false` |
 
 Example usage:
+
 ```sql
 SELECT * FROM read_json('my_file1.json', columns = {duck: 'INTEGER'});
 ```
@@ -164,16 +174,21 @@ FROM read_json(['my_file1.json', 'my_file2.json'],
                columns = {duck: 'INTEGER', goose: 'INTEGER[]', swan: 'DOUBLE'});
 ```
 
+<div class="narrow_table"></div>
+
 | duck | goose | swan |
 |:---|:---|:---|
 | 42 | [1, 2, 3] | NULL |
 | 43 | [4, 5, 6] | 3.3 |
 
 DuckDB can automatically detect the types like so:
+
 ```sql
 SELECT goose, duck FROM read_json_auto('*.json.gz');
 SELECT goose, duck FROM '*.json.gz'; -- equivalent
 ```
+
+<div class="narrow_table"></div>
 
 | goose | duck |
 |:---|:---|
@@ -182,6 +197,7 @@ SELECT goose, duck FROM '*.json.gz'; -- equivalent
 
 DuckDB can read (and auto-detect) a variety of formats, specified with the `format` parameter.
 Querying a JSON file that contains an `'array'`, e.g.:
+
 ```json
 [
   {
@@ -196,6 +212,7 @@ Querying a JSON file that contains an `'array'`, e.g.:
 ```
 
 Can be queried exactly the same as a JSON file that contains `'unstructured'` JSON, e.g.:
+
 ```json
 {
   "duck": 42,
@@ -206,7 +223,10 @@ Can be queried exactly the same as a JSON file that contains `'unstructured'` JS
   "goose": 4.3
 }
 ```
+
 Both can be read as the table:
+
+<div class="narrow_table"></div>
 
 | duck | goose |
 |:---|:---|
@@ -216,11 +236,15 @@ Both can be read as the table:
 If your JSON file does not contain 'records', i.e., any other type of JSON than objects, DuckDB can still read it.
 This is specified with the `records` parameter.
 The `records` parameter specifies whether the JSON contains records that should be unpacked into individual columns, i.e., reading the following file with `records`:
+
 ```json
 {"duck": 42, "goose": [1, 2, 3]}
 {"duck": 43, "goose": [4, 5, 6]}
 ```
+
 Results in two columns:
+
+<div class="narrow_table"></div>
 
 | duck | goose |
 |:---|:---|
@@ -228,6 +252,8 @@ Results in two columns:
 | 42 | [4,5,6] |
 
 You can read the same file with `records` set to `'false'`, to get a single column, which is a `STRUCT` containing the data:
+
+<div class="narrow_table"></div>
 
 | json |
 |:---|
@@ -241,10 +267,13 @@ For additional examples reading more complex data, please see the [Shredding Dee
 When the JSON extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy](../sql/statements/copy) and [Import/Export](../sql/statements/export).
 
 By default, `COPY` expects newline-delimited JSON. If you prefer copying data to/from a JSON array, you can specify `ARRAY true`, i.e.,
+
 ```sql
 COPY (SELECT * FROM range(5)) TO 'my.json' (ARRAY true);
 ```
+
 Will create the following file:
+
 ```json
 [
   {"range":0},
@@ -256,12 +285,14 @@ Will create the following file:
 ```
 
 This can be read like so:
+
 ```sql
 CREATE TABLE test (range BIGINT);
 COPY test FROM 'my.json' (ARRAY true);
 ```
 
 The format can be detected automatically the format like so:
+
 ```sql
 COPY test FROM 'my.json' (AUTO_DETECT true);
 ```
@@ -378,6 +409,7 @@ CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
   (' { "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
 ```
+
 ```sql
 SELECT json_extract(j, '$.family') FROM example;
 -- "anatidae"
@@ -406,6 +438,7 @@ SELECT j->'species'->>['0','1'] FROM example;
 Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
 
 If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
+
 ```sql
 -- The following will cause the JSON to be parsed twice,
 -- resulting in a slower query that uses more memory
@@ -426,6 +459,8 @@ FROM extracted;
 
 The following functions are used to create JSON.
 
+<div class="narrow_table"></div>
+
 | Function | Description |
 |:--|:----|
 | `to_json(`*`any`*`)` | Create `JSON` from a value of *`any`* type. Our `LIST` is converted to a JSON array, and our `STRUCT` and `MAP` are converted to a JSON object |
@@ -437,6 +472,7 @@ The following functions are used to create JSON.
 | `json_merge_patch(`*`json`*`,`*`json`*`)` | Merge two JSON documents together |
 
 Examples:
+
 ```sql
 SELECT to_json('duck');
 -- "duck"
@@ -458,6 +494,8 @@ SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
 
 There are three JSON aggregate functions.
 
+<div class="narrow_table"></div>
+
 | Function | Description |
 |:---|:----|
 | `json_group_array(`*`any`*`)` | Return a JSON array with all values of *`any`* in the aggregation |
@@ -465,9 +503,13 @@ There are three JSON aggregate functions.
 | `json_group_structure(`*`json`*`)` | Return the combined `json_structure` of all *`json`* in the aggregation |
 
 Examples:
+
 ```sql
 CREATE TABLE example (k VARCHAR, v INTEGER);
 INSERT INTO example VALUES ('duck', 42), ('goose', 7);
+```
+
+```sql
 SELECT json_group_array(v) FROM example;
 -- [42, 7]
 SELECT json_group_object(k, v) FROM example;
@@ -475,8 +517,8 @@ SELECT json_group_object(k, v) FROM example;
 DROP TABLE example;
 CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
-  ('{"family": "anatidae", "species": ["duck", "goose"], "coolness": 42.42}'),
-  ('{"family": "canidae", "species": ["labrador", "bulldog"], "hair": true}');
+    ('{"family": "anatidae", "species": ["duck", "goose"], "coolness": 42.42}'),
+    ('{"family": "canidae", "species": ["labrador", "bulldog"], "hair": true}');
 SELECT json_group_structure(j) FROM example;
 -- {"family":"VARCHAR","species":["VARCHAR"],"coolness":"DOUBLE","hair":"BOOLEAN"}
 ```
@@ -485,6 +527,8 @@ SELECT json_group_structure(j) FROM example;
 
 In many cases, it is inefficient to extract values from JSON one-by-one.
 Instead, we can "extract" all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
+
+<div class="narrow_table"></div>
 
 | Function | Description |
 |:---|:---|
@@ -498,11 +542,15 @@ The *`structure`* argument can be modified to transform the JSON into the desire
 It is possible to extract fewer key/value pairs than are present in the JSON, and it is also possible to extract more: missing keys become `NULL`.
 
 Examples:
+
 ```sql
 CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
-  ('{"family": "anatidae", "species": ["duck", "goose"], "coolness": 42.42}'),
-  ('{"family": "canidae", "species": ["labrador", "bulldog"], "hair": true}');
+    ('{"family": "anatidae", "species": ["duck", "goose"], "coolness": 42.42}'),
+    ('{"family": "canidae", "species": ["labrador", "bulldog"], "hair": true}');
+```
+
+```sql
 SELECT json_transform(j, '{"family": "VARCHAR", "coolness": "DOUBLE"}') FROM example;
 -- {'family': anatidae, 'coolness': 42.420000}
 -- {'family': canidae, 'coolness': NULL}
@@ -531,6 +579,7 @@ If you run the `json_execute_serialize_sql(varchar)` table function inside of a 
 Note that these functions do not preserve syntactic sugar such as `FROM * SELECT ...`, so a statement round-tripped through `json_deserialize_sql(json_serialize_sql(...))` may not be identical to the original statement, but should always be semantically equivalent and produce the same output.
 
 Examples:
+
 ```sql
 -- Simple example
 SELECT json_serialize_sql('SELECT 2');
