@@ -315,6 +315,8 @@ Other examples:
 CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
   ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
+```
+```sql
 SELECT json(j) FROM example;
 -- {"family":"anatidae","species":["duck","goose","swan",null]}
 SELECT json_valid(j) FROM example;
