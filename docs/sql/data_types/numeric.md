@@ -26,7 +26,7 @@ The type integer is the common choice, as it offers the best balance between ran
 
 ## Fixed-Point Decimals
 
-The data type `DECIMAL(WIDTH, SCALE)` represents an exact fixed-point decimal value. When creating a value of type `DECIMAL`, the `WIDTH` and `SCALE` can be specified to define which size of decimal values can be held in the field. The `WIDTH` field determines how many digits can be held, and the `scale` determines the amount of digits after the decimal point. For example, the type `DECIMAL(3, 2)` can fit the value `1.23`, but cannot fit the value `12.3` or the value `1.234`. The default `WIDTH` and `SCALE` is `DECIMAL(18, 3)`, if none are specified.
+The data type `DECIMAL(WIDTH, SCALE)` (also available under the alias `NUMERIC(WIDTH, SCALE)`) represents an exact fixed-point decimal value. When creating a value of type `DECIMAL`, the `WIDTH` and `SCALE` can be specified to define which size of decimal values can be held in the field. The `WIDTH` field determines how many digits can be held, and the `scale` determines the amount of digits after the decimal point. For example, the type `DECIMAL(3, 2)` can fit the value `1.23`, but cannot fit the value `12.3` or the value `1.234`. The default `WIDTH` and `SCALE` is `DECIMAL(18, 3)`, if none are specified.
 
 Internally, decimals are represented as integers depending on their specified width.
 
@@ -54,7 +54,7 @@ The data types `REAL` and `DOUBLE` precision are inexact, variable-precision num
 
 Inexact means that some values cannot be converted exactly to the internal format and are stored as approximations, so that storing and retrieving a value might show slight discrepancies. Managing these errors and how they propagate through calculations is the subject of an entire branch of mathematics and computer science and will not be discussed here, except for the following points:
 
-* If you require exact storage and calculations (such as for monetary amounts), use the numeric type instead.
+* If you require exact storage and calculations (such as for monetary amounts), use the [`DECIMAL` data type](#fixed-point-decimals) or its `NUMERIC` alias instead.
 * If you want to do complicated calculations with these types for anything important, especially if you rely on certain behavior in boundary cases (infinity, underflow), you should evaluate the implementation carefully.
 * Comparing two floating-point values for equality might not always work as expected.
 
