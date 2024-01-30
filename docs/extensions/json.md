@@ -299,26 +299,34 @@ SELECT json_extract('{"duck": [1, 2, 3]}', '$.duck[0]');
 Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
 
 JSONPath is more expressive, and can also access from the back of lists:
+
 ```sql
 SELECT json_extract('{"duck": [1, 2, 3]}', '$.duck[#-1]');
 -- 3
 ```
 
 JSONPath also allows escaping syntax tokens, using double quotes:
+
 ```sql
 SELECT json_extract('{"duck.goose": [1, 2, 3]}', '$."duck.goose"[1]');
 -- 2
 ```
 
-Other examples:
+Examples using the [anatidae biological family](https://en.wikipedia.org/wiki/Anatidae):
+
 ```sql
 CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
   ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
 ```
+
 ```sql
 SELECT json(j) FROM example;
 -- {"family":"anatidae","species":["duck","goose","swan",null]}
+SELECT j.family FROM example;
+-- "anatidae"
+SELECT j.species[0] FROM example;
+-- "duck"
 SELECT json_valid(j) FROM example;
 -- true
 SELECT json_valid('{');
