@@ -285,12 +285,14 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 
 The JSONPointer syntax separates each field with a `/`.
 For example, to extract the first element of the array with key `"duck"`, you can do:
+
 ```sql
 SELECT json_extract('{"duck": [1, 2, 3]}', '/duck/0');
 -- 1
 ```
 
 The JSONPath syntax separates fields with a `.`, and accesses array elements with `[i]`, and always starts with `$`. Using the same example, we can do the following:
+
 ```sql
 SELECT json_extract('{"duck": [1, 2, 3]}', '$.duck[0]');
 -- 1
@@ -370,10 +372,13 @@ These functions supports the same two location notations as the previous functio
 Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
 
 Examples:
+
 ```sql
 CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
   (' { "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
+```
+```sql
 SELECT json_extract(j, '$.family') FROM example;
 -- "anatidae"
 SELECT j->'$.family' FROM example;
