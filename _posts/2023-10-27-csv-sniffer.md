@@ -4,6 +4,7 @@ layout: post
 title:  "DuckDB's CSV Sniffer: Automatic Detection of Types and Dialects"
 author: Pedro Holanda
 excerpt_separator: <!--more-->
+thumb: "/images/blog/csv-sniffer/ducktetive.jpg"
 
 ---
 

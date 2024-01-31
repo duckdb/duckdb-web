@@ -9,215 +9,397 @@ body_class: landing nowrap
 <div class="dummy">
 </div>
 
-<section>
-	<div class="welcome">
-		<div id="duckdbdanimationcircled" style="width: 75px; height: 75px; margin: 0 auto; margin-bottom: 35px;"></div>
-		<!--<img src="{{ site.baseurl }}/images/duckdb-circle.svg" alt="DuckDB Logo">-->
-		<h1>DuckDB is an <nobr>in-process</nobr> <br class="break">SQL <nobr class="break">OLAP database </nobr>management system</h1>
-		<div class="mainlinks">
-			<ul>
-				<a href="#quickinstall"><li class="highlighted">Installation <span class="duckdbsymbol">&#x2193;</span> </li></a>
-				<a href="/docs/archive/{{ site.currentduckdbversion }}/"><li>Documentation</li></a>
-				<a href="https://shell.duckdb.org"><li>Live Demo</li></a>
-				<a href="https://duckdblabs.com/support/"><li>Support</li></a>
-			</ul>
+<section class="welcome">
+	<div class="flexwrap wrap">
+		<div class="duckdb">
+			<h1>DuckDB is a fast <nobr>in-process</nobr> analytical database</h1>
+			<p>It is an in-process SQL analytical database management system with integrations to 10+ programming languages</p>
+			<a class="button transparent arrow-down dark" href="#quickinstall">Installation</a>
+			<a class="button yellow" href="/docs/archive/{{ site.currentduckdbversion }}/">Documentation</a>
 		</div>
-	</div>
-</section>
-
-
-<section>
-	<div class="wrap">
-
-		<div class="whyduckdb">
-
-			<h2>Why DuckDB?</h2>
-
-			<div class="boxlayout">
-				<div class="box">
-					<div>
-						<div class="icon"><span class="duckdbsymbol">&#xE100;</span></div>
-					</div>
-					<div>
-						<h3>Simple and portable</h3>
-						<ul>
-							<li>In-process, serverless</li>
-							<li>C++11, no dependencies, single-file build</li>
-							<li>APIs for Python, R, Java, Julia, Swift, …</li>
-							<li>Runs on Windows, Linux, macOS, OpenBSD, …</li>
-						</ul>
-						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbissimple">more <span></span></a>
-					</div>
+		<div class="demo window">
+			<div>
+				<div class="topbar">
+					<ul class="lang">
+						<li data-language="python" class="active">Python</li>
+						<li data-language="r">R</li>
+						<li data-language="nodejs">NodeJS</li>
+						<li data-language="java">Java</li>
+						<li data-language="rust">Rust</li>
+					</ul>
 				</div>
+				<div class="content haslines">
+					<div class="lines"></div>
+						<div class="code dark">
+{% highlight sql %}
+-- LANGUAGE: PYTHON, EXAMPLE: JOIN QUERY
+-- set the memory limit of the system to 10GB
+SET memory_limit='10GB';
+-- configure the system to use 1 thread
+SET threads TO 1;
+-- enable printing of a progress bar during long-running queries
+SET enable_progress_bar=true;
+-- set the default null order to NULLS LAST
+PRAGMA default_null_order='nulls_last';
 
-				<div class="box">
-					<div>
-						<div class="icon"><span class="duckdbsymbol">&#xE200;</span></div>
-					</div>
-					<div>
-						<h3>Feature-rich</h3>
-						<ul>
-							<li>Transactions, persistence</li>
-							<li>Extensive SQL support</li>
-							<li>Direct Parquet, CSV, and JSON querying</li>
-							<li>Joins, aggregates, window functions</li>
-						</ul>
-						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbisfeaturerich">more <span></span></a>
-					</div>
+-- show a list of all available settings
+SELECT * FROM duckdb_settings();
+
+-- return the current value of a specific setting
+-- this example returns 'automatic'
+SELECT current_setting('access_mode');
+
+-- reset the memory limit of the system back to the default
+RESET memory_limit;
+{% endhighlight %}
+						</div>
 				</div>
-
-				<div class="box">
-					<div>
-						<div class="icon"><span class="duckdbsymbol">&#xE300;</span></div>
+				<div class="bottombar flexwrap">
+					<div class="select">
+						<select id="example-select">
+							<option value="join-query">Join query</option>
+							<option value="aggregation-query">Aggregation query</option>
+							<option value="parquet-reading">Parquet reading</option>
+							<option value="as-of-join">As-of join</option>
+							<option value="s3-access">S3 access</option>
+						</select>
 					</div>
-					<div>
-						<h3>Fast</h3>
-						<ul>
-							<li>Optimized for analytics</li>
-							<li>Vectorized and parallel engine</li>
-							<li>Larger than memory processing</li>
-							<li>Parallel Parquet, CSV, and NDJSON loaders</li>
-						</ul>
-						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbisfast">more <span></span></a>
-					</div>
-				</div>
-
-				<div class="box">
-					<div>
-						<div class="icon"><span class="duckdbsymbol">&#xE400;</span></div>
-					</div>
-					<div>
-						<h3>Free and extensible</h3>
-						<ul>
-							<li>Free &amp; open-source</li>
-							<li>Permissive MIT License</li>
-							<li>Flexible extension mechanism</li>
-						</ul>
-						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbisfree">more <span></span></a>
-					</div>
+					<a class="button arrow-right livedemo" href="#">Live Demo</a>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </section>
 
 
-<section>
-	<div class="benefits">
-		<h1>All the benefits of a database, <nobr>none of the hassle.</nobr></h1>
+<section class="whyduckdb">
+	<div class="wrap">
+		<h1>Why DuckDB Transforms Data Management</h1>
+		<div class="flexwrap">
+			<div class="featurebox">
+				<div class="icon simple"></div>
+				<h3>Simple</h3>
+				<p>Secure, extensive SQL, query Parquet, CSV, JSON with advanced joins, aggregates, and window functions for precise data handling.</p>
+				<a href="#" class="textbutton arrow-right">Read more</a>
+			</div>
+			<div class="featurebox">
+				<div class="icon featurerich"></div>
+				<h3>Feature-Rich</h3>
+				<p>DuckDB: Secure, extensive SQL, query Parquet, CSV, JSON with advanced joins, aggregates, and window functions for precise data handling.</p>
+				<a href="#" class="textbutton arrow-right">Read more</a>
+			</div>
+			<div class="featurebox">
+				<div class="icon speed"></div>
+				<h3>Blazing Speed</h3>
+				<p>Lightning-fast, optimized for analytics, with a vectorized, parallel engine. Experience blazing in-memory processing and parallel loading for data formats.</p>
+				<a href="#" class="textbutton arrow-right">Read more</a>
+			</div>
+			<div class="featurebox">
+				<div class="icon free"></div>
+				<h3>Free</h3>
+				<p>Embrace freedom and adaptability with DuckDB, a free, open-source solution under the MIT License, offering flexibility through a robust extension mechanism. </p>
+				<a href="#" class="textbutton arrow-right">Read more</a>
+			</div>
+			<div class="featurebox">
+				<div class="icon portable"></div>
+				<h3>Portable</h3>
+				<p>Embrace freedom and adaptability with DuckDB, a free, open-source solution under the MIT License, offering flexibility through a robust extension mechanism.</p>
+				<a href="#" class="textbutton arrow-right">Read more</a>
+			</div>
+			<div class="featurebox">
+				<div class="icon extensible"></div>
+				<h3>Extensible</h3>
+				<p>Embrace freedom and adaptability with DuckDB, a free, open-source solution under the MIT License, offering flexibility through a robust extension mechanism.</p>
+				<a href="#" class="textbutton arrow-right">Read more</a>
+			</div>
+		</div>
 	</div>
 </section>
 
 <section id="quickinstall">
-	<div class="wrap install">
-		<h2>Installation</h2>
-		<p>Choose your environment to use for DuckDB</p>
-		<div class="environment">
-			<ul>
-				<li data-id="ver-cli" class="active">Command Line</li>
-				<li data-id="ver-python">Python</li>
-				<li data-id="ver-r">R</li>
-				<li data-id="ver-java">Java</li>
-				<li data-id="ver-js">Node.js</li>
-				<li data-id="ver-odbc">ODBC</li>
-			</ul>
+	<div class="flexwrap wrap">
+		<div class="intro">
+			<h1>Installation</h1>
+			<p>Your in-process SQL OLAP database management system. Seamlessly integrated with 15 programming languages. </p>
+			<a href="/docs/archive/{{ site.currentduckdbversion }}/installation/" class="white dark button">More installations</a>
 		</div>
-		<label class="onlymobile">
-			<select name="environment" class="environmentselect onlymobile">
-				<option value="ver-cli">Command Line</option>
-				<option value="ver-python">Python</option>
-				<option value="ver-r">R</option>
-				<option value="ver-java">Java</option>
-				<option value="ver-js">Node.js</option>
-				<option value="ver-odbc">ODBC</option>
-			</select>
-		</label>
-		<div class="result">
-			<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a>
-		</div>
-		<p class="system">
-			<span>Latest release: DuckDB {{ site.currentduckdbversion }}</span>
-			<span class="systemdetected">System detected: </span>
-			<span><a href="docs/installation/">Other Installations</a></span>
-		</p>
-
-		<div class="hidden">
-			<p class="ver-python">pip install duckdb=={{ site.currentduckdbversion }}</p>
-			<p class="ver-r">install.packages("duckdb")</p>
-			<p class="ver-java">
-			&lt;dependency&gt;<br>
-				&nbsp;&nbsp;&lt;groupId&gt;org.duckdb&lt;/groupId&gt;<br>
-				&nbsp;&nbsp;&lt;artifactId&gt;duckdb_jdbc&lt;/artifactId&gt;<br>
-				&nbsp;&nbsp;&lt;version&gt;{{ site.currentjavaversion }}&lt;/version&gt;<br>
-				&lt;/dependency&gt;<br><br>
-				<a href="https://search.maven.org/artifact/org.duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/jar">More Options</a>
-			</p>
-			<p class="ver-js">npm install duckdb</p>
-			<p class="ver-cli macos">brew install duckdb<br/>---<br/>Direct download: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip</a></p>
-			<p class="ver-cli linux"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a></p>
-			<p class="ver-cli win"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a></p>
-			<p class="ver-odbc linux"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip</a></p>
-			<p class="ver-odbc win"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a></p>
-			<p class="ver-odbc macos">Not available</p>
-
-		</div>
-
-	</div>
-</section>
-
-<section>
-	<div class="wrap">
-		<div class="using">
-			<div class="box">
-				<h2>When to use DuckDB</h2>
-				<div class="icon">
-					<span class="duckdbsymbol">&#xE600;</span>
-				</div>
-				<div>
+		<div class="install">
+			<div class="window">
+				<div class="topbar environment">
 					<ul>
-						<li>Processing and storing tabular datasets, e.g., from CSV or Parquet files</li>
-						<li>Interactive data analysis, e.g., join & aggregate multiple large tables</li>
-						<li>Concurrent large changes, to multiple large tables, e.g., appending rows, adding/removing/updating columns</li>
-						<li>Large result set transfer to client</li>
+						<li data-id="cli" class="active">Command Line</li>
+						<li data-id="python">Python</li>
+						<li data-id="r">R</li>
+						<li data-id="java">Java</li>
+						<li data-id="js">Node.js</li>
+						<li data-id="odbc">ODBC</li>
 					</ul>
 				</div>
-			</div>
-			<div class="box">
-				<h2>When to not use DuckDB</h2>
-				<div class="icon">
-					<span class="duckdbsymbol">&#xE500;</span>
+				<label class="onlymobile">
+					<select name="environment" class="environmentselect onlymobile">
+						<option value="cli">Command Line</option>
+						<option value="python">Python</option>
+						<option value="r">R</option>
+						<option value="java">Java</option>
+						<option value="js">Node.js</option>
+						<option value="odbc">ODBC</option>
+					</select>
+				</label>
+				
+				<div class="result content dark">
+					<pre><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a></pre>
 				</div>
-				<div>
-					<ul>
-						<li>High-volume transactional use cases (e.g., tracking orders in a webshop)</li>
-						<li>Large client/server installations for centralized enterprise data warehousing</li>
-						<li>Writing to a single database from multiple concurrent processes</li>
-						<li>Multiple concurrent processes reading from a single writable database</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+				
+				<div class="bottombar">
+					<p class="system">
+						<span>Latest release: DuckDB {{ site.currentduckdbversion }}</span>
+						<span class="systemdetected">System detected: </span>
+					</p>
+				</div>	
 	</div>
 </section>
 
 
-<section>
+<section class="blog">
 	<div class="wrap">
-		<div class="newsblog">
-			<h2>Blog</h2><a href="{{ site.url }}{{ site.baseurl }}/news" class="newsarchive">Archive <span></span></a>
-			<div class="newswrap">
-				{% for post in site.posts limit:3 %}
+		<h1>Blog</h1>
+		<div class="newswrap">
+			{% for post in site.posts limit:4 %}
 				{% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
 				{% capture month %}{{post.date | date: "%B"}}{% endcapture %}
+				{% assign random_number = forloop.index | modulo: 5 %}
 				<div class="postpreview" data-year="{{year}}" data-month="{{month}}">
+					{% if post.thumb %}
+					<div class="postimg custom" style="background-image: url('{{ post.thumb }}');">
+					{% else %}
+					<div class="postimg bg_{{ random_number }}">
+					{% endif %}
+						<a href="{{ post.url }}" class="blocklink"></a>
+					</div>
 					<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
 					<h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-					<p>{{ post.content | strip_html | truncatewords: 50, " […]" }}</p>
-					<a class="continue" href="{{ post.url }}">continue reading <span></span></a>
+					<a class="textbutton arrow-right" href="{{ post.url }}">Read more</a>
 				</div>
-				{% endfor %}
+			{% endfor %}
+		</div>
+		<a href="{{ site.url }}{{ site.baseurl }}/news" class="button transparent arrow-right">Archive <span></span></a>
+	</div>
+</section>
+
+
+<section class="faq">
+	<div class="wrap">
+		<h1>Frequently Asked Questions</h1>
+		<div class="flexwrap">
+			<div class="accordion">
+				
+				<div>
+					<div class="foldout">
+						<div class="head">
+							<h4>Is DuckDB offered as a hosted service?</h4>
+						</div>
+						<div class="content">
+							<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+						</div>
+					</div>
+					<div class="foldout">
+						<div class="head">
+							<h4>Is DuckDB offered as a hosted service?</h4>
+						</div>
+						<div class="content">
+							<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+						</div>
+					</div>
+				</div>
+				
+				<div>
+					<div class="foldout">
+						<div class="head">
+							<h4>Is DuckDB offered as a hosted service?</h4>
+						</div>
+						<div class="content">
+							<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+						</div>
+					</div>
+					<div class="foldout">
+						<div class="head">
+							<h4>Is DuckDB offered as a hosted service?</h4>
+						</div>
+						<div class="content">
+							<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+						</div>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>
+</section>
+
+
+
+
+<section class="hidden">
+	
+	
+<div class="dropdown hero-demo">
+	
+<!-- SPECIFIC EXAMPLE LIST FOR PYTHON -->	
+<div data-language="python">
+	<option value="join-query">Join query</option>
+	<option value="aggregation-query">Aggregation query</option>
+	<option value="parquet-reading">Parquet reading</option>
+	<option value="as-of-join">As-of join</option>
+	<option value="s3-access">S3 access</option>
+</div>
+
+<!-- SPECIFIC EXAMPLE LIST FOR R -->	
+<div data-language="r">
+	<option value="example-option-1">Example Option 1</option>
+	<option value="example-option-2">Example Option 2</option>
+	<option value="example-option-3">Example Option 3</option>
+	<option value="example-option-4">Example Option 4</option>
+</div>
+	
+</div>
+
+	
+<div class="examples hero-demo">
+	
+<!-- PYTHON -->	
+<div data-language="python" data-example="join-query" data-buttontxt="Python Docs" data-buttonurl="https://duckdb.org/docs/archive/0.9.2/api/python/overview">
+{% highlight sql %}
+-- LANGUAGE: PYTHON, EXAMPLE: JOIN QUERY
+-- set the memory limit of the system to 10GB
+SET memory_limit='10GB';
+-- configure the system to use 1 thread
+SET threads TO 1;
+-- enable printing of a progress bar during long-running queries
+SET enable_progress_bar=true;
+-- set the default null order to NULLS LAST
+PRAGMA default_null_order='nulls_last';
+
+-- show a list of all available settings
+SELECT * FROM duckdb_settings();
+
+-- return the current value of a specific setting
+-- this example returns 'automatic'
+SELECT current_setting('access_mode');
+
+-- reset the memory limit of the system back to the default
+RESET memory_limit;
+{% endhighlight %}
+</div>	
+
+<div data-language="python" data-example="aggregation-query" data-buttontxt="Python Docs" data-buttonurl="">
+{% highlight sql %}
+-- LANGUAGE: PYTHON, EXAMPLE: AGGREGATION QUERY
+{% endhighlight %}
+</div>
+
+<div data-language="python" data-example="parquet-reading" data-buttontxt="Python Docs" data-buttonurl="">
+{% highlight sql %}
+-- LANGUAGE: PYTHON, EXAMPLE: PARQUET READING
+{% endhighlight %}
+</div>
+
+<div data-language="python" data-example="as-of-join" data-buttontxt="Python Docs" data-buttonurl="">
+{% highlight sql %}
+-- LANGUAGE: PYTHON, EXAMPLE: AS-OF JOIN
+{% endhighlight %}
+</div>
+
+<div data-language="python" data-example="s3-access" data-buttontxt="Python Docs" data-buttonurl="">
+{% highlight sql %}
+-- LANGUAGE: PYTHON, EXAMPLE: S3 ACCESS
+{% endhighlight %}
+</div>
+	
+<!-- R -->
+<div data-language="r" data-example="example-option-1" data-buttontxt="XY" data-buttonurl="XY">
+{% highlight sql %}
+-- LANGUAGE: R, EXAMPLE: EXAMPLE OPTION 1
+{% endhighlight %}
+</div>
+
+<div data-language="r" data-example="example-option-2" data-buttontxt="XY" data-buttonurl="XY">
+{% highlight sql %}
+-- LANGUAGE: R, EXAMPLE: EXAMPLE OPTION 2
+{% endhighlight %}
+</div>
+
+<div data-language="r" data-example="example-option-3" data-buttontxt="XY" data-buttonurl="XY">
+{% highlight sql %}
+-- LANGUAGE: R, EXAMPLE: EXAMPLE OPTION 3
+{% endhighlight %}
+</div>
+
+<div data-language="r" data-example="example-option-4" data-buttontxt="XY" data-buttonurl="XY">
+{% highlight sql %}
+-- LANGUAGE: R, EXAMPLE: EXAMPLE OPTION 4
+{% endhighlight %}
+</div>
+
+	
+</div>
+
+
+
+
+<div class="quick-installation">
+
+<div data-install="python">
+{% highlight python %}
+pip install duckdb=={{ site.currentduckdbversion }}
+{% endhighlight %}
+</div>
+
+<div data-install="r">
+install.packages("duckdb")
+</div>
+
+<div data-install="java">
+{% highlight java %}
+<dependency>
+ <groupId>org.duckdb</groupId>
+ <artifactId>duckdb_jdbc</artifactId>
+ <version>0.9.2</version>
+</dependency>
+{% endhighlight %}<br/>
+<a href="https://search.maven.org/artifact/org.duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/jar">More Options</a>
+</div>
+
+<div data-install="js">
+{% highlight javascript %}
+npm install duckdb
+{% endhighlight %}
+</div>
+
+<div data-install="cli macos">
+brew install duckdb<br/>---<br/>Direct download: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip</a>
+</div>
+
+<div data-install="cli linux">
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a>
+</div>
+
+<div data-install="cli win">
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a>
+</div>
+
+<div data-install="odbc macos">
+Not available
+</div>
+
+<div data-install="odbc linux">
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip</a>
+</div>
+
+<div data-install="odbc win">
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a>
+</div>
+
+</div>
+
+	
 </section>

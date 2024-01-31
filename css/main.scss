@@ -8,6 +8,7 @@ $duckDBlightyellow: #fffee6;
 $duckDBgrey: #ebebeb;
 $duckDBblue: #e0f1fd;
 $duckDBlightgrey: #f5f5f5;
+$purple: #7D66FF;
 $maxContentWidth: 950px;
 
 $fontMono:  "JetBrainsMono-Regular", "Lucida Console", monospace;
@@ -15,21 +16,37 @@ $fontMonoBold: "JetBrainsMono-Bold", "Lucida Console", monospace;
 $fontMonoItalic: "JetBrainsMono-Italic", "Lucida Console", monospace;
 $fontMonoItalicBold: "JetBrainsMono-Bold-Italic", "Lucida Console", monospace;
 
-$fontSans: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
-$fontSansBold: "SuisseIntl-SemiBold", Helvetica, Arial, sans-serif;
+$fontSans: "SuisseIntl", Helvetica, Arial, sans-serif;
+$fontSansBold: "SuisseIntl", Helvetica, Arial, sans-serif;
 
 /** FONT IMPORT **/
 @font-face{
-	font-family: "SuisseIntl-Book";
+	font-family: "SuisseIntl";
 	src: url("webfont/SuisseIntl-Book-WebXL.woff2") format("woff2"),url("webfont/SuisseIntl-Book-WebXL.woff") format("woff");
+	font-weight: 450;
+	font-style: normal;
+	font-display: swap;
 }
 @font-face{
-	font-family: "SuisseIntl-Medium";
-	src: url("webfont/SuisseIntl-Medium-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-SemiBold-WebS.woff") format("woff");
+	font-family: "SuisseIntl";
+	src: url("webfont/SuisseIntl-Medium-WebXL.woff2") format("woff2"),url("webfont/SuisseIntl-SemiBold-WebXL.woff") format("woff");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
 }
 @font-face{
-	font-family: "SuisseIntl-SemiBold";
-	src: url("webfont/SuisseIntl-SemiBold-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-SemiBold-WebS.woff") format("woff");
+	font-family: "SuisseIntl";
+	src: url("webfont/SuisseIntl-SemiBold-WebXL.woff2") format("woff2"),url("webfont/SuisseIntl-SemiBold-WebXL.woff") format("woff");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face{
+	font-family: "SuisseIntl";
+	src: url("webfont/SuisseIntl-Bold-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Bold-WebS.woff") format("woff");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face{
@@ -108,6 +125,7 @@ $fontSansBold: "SuisseIntl-SemiBold", Helvetica, Arial, sans-serif;
 body{
 	font-size: 100%;
 	font-family: $fontSans;
+	font-weight: 450;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -145,6 +163,7 @@ ul{
 
 strong{
 	font-family: $fontSansBold;
+	font-weight: 600;
 	font-weight: normal;
 }
 
@@ -249,17 +268,18 @@ img.downloadlogo{
 
 header .headerline{
 	background-color: black;
-	height: 53px;
+	height: 70px;
 	width: 100%;
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 9000;
 	.headercontent{
-		max-width: calc(100% - 60px);
+		max-width: calc(100% - 40px);
+		height: 100%;
 		margin: 0 auto;
 		color: white;
-		line-height: 53px;
+		align-items: center;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -281,10 +301,14 @@ header .headerline{
 			}
 		}
 		.landingmenu{
+			font-size: 16px;
+			height: 100%;
 			nav{
 				display: -webkit-box;
 				display: -ms-flexbox;
 				display: flex;
+				height: 100%;
+				align-items: center;
 				> div{
 					margin-left: 35px;
 					position: relative;
@@ -295,6 +319,7 @@ header .headerline{
 					-webkit-transition: color .3s;
 					-o-transition: color .3s;
 					transition: color .3s;
+					line-height: 70px;
 					&:hover{
 						color: $duckDByellow;
 					}
@@ -304,26 +329,41 @@ header .headerline{
 					display: none;
 				}
 				.hasSub + ul{
-					padding: 7px 15px;
-					padding-right: 20px;
-					margin: 0;
-					background-color: $duckDByellow;
+					border-radius: 0px 0px 15px 15px;
+					border: 1px solid #393939;
+					border-top: 0;
+					padding: 15px 10px;
+					background: rgba(9, 9, 9, 0.85);
+					backdrop-filter: blur(5px);
 					position: absolute;
-					top: 63px;
-					left: -3px;
+					top: 65px;
+					left: -15px;
 					-webkit-transition: all .3s ease;
 					-o-transition: all .3s ease;
 					transition: all .3s ease;
 					opacity: 0;
 					visibility: hidden;
-					li{
-						line-height: 29px;
-						font-size: 15px;
-						white-space: nowrap;
-						color: black;
+					display: flex;
+					flex-direction: column;
+					margin: 0;
+					li{	
 						a{
 							text-decoration: none;
-							color: black;
+							color: rgb(255, 255, 255);
+							line-height: 1;
+							padding: 15px 20px;
+							border-radius: 120px;
+							display: block;
+							font-size: 14px;
+							white-space: nowrap;
+							transition: all .2s;
+							margin-top: -3px;
+							margin-bottom: -3px;
+							background: rgba(93, 93, 93, 0);
+						}
+						a:hover{
+							background: rgba(93, 93, 93, 0.20);
+							color: $duckDByellow;
 						}
 					}
 					ul{
@@ -339,9 +379,9 @@ header .headerline{
 				.hasSub + ul:hover{
 					opacity: 1;
 					visibility: visible;
-					-webkit-transform: translateY(-10px);
-						-ms-transform: translateY(-10px);
-							transform: translateY(-10px);
+					-webkit-transform: translateY(5px);
+						-ms-transform: translateY(5px);
+							transform: translateY(5px);
 				}
 				.hasSub{
 					cursor: pointer;
@@ -355,9 +395,9 @@ header .headerline{
 						& ~ ul{
 							opacity: 1;
 							visibility: visible;
-							-webkit-transform: translateY(-10px);
-								-ms-transform: translateY(-10px);
-									transform: translateY(-10px);
+							-webkit-transform: translateY(5px);
+								-ms-transform: translateY(5px);
+									transform: translateY(5px);
 							ul{
 								visibility: visible;
 							}
@@ -369,7 +409,7 @@ header .headerline{
 				}
 				.search_icon{
 					width: 17px;
-					height: 53px;
+					height: 70px;
 					background-image: url("data:image/svg+xml,%3Csvg width='15' height='14' viewBox='0 0 15 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.073 9.312 14 13.238' stroke='%23fff' stroke-width='1.5'/%3E%3Ccircle cx='5.923' cy='5.923' r='5.173' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E");
 					background-repeat: no-repeat;
 					background-size: contain;
@@ -384,6 +424,7 @@ header .headerline{
 					color: #A5A5A5;
 					margin-left: 25px;
 					position: relative;
+					transition: color .3s;
 					&::before{
 						content: " ";
 						background-image: url("data:image/svg+xml,%3Csvg width='18' height='17' viewBox='0 0 18 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.83063 13.817C8.98898 13.722 9.1868 13.722 9.34515 13.817L13.6356 16.3914C14.0146 16.6188 14.4806 16.2787 14.3797 15.8484L13.2432 11.0052C13.2006 10.8238 13.2624 10.6337 13.4037 10.5121L17.1857 7.25491C17.5214 6.96575 17.343 6.41506 16.9014 6.37782L11.9168 5.9574C11.7323 5.94184 11.5715 5.82558 11.4989 5.65525L9.54784 1.07886C9.37508 0.673645 8.8007 0.673645 8.62794 1.07886L6.67692 5.65525C6.6043 5.82558 6.4435 5.94184 6.259 5.9574L1.27437 6.37782C0.83283 6.41506 0.654351 6.96575 0.990107 7.25491L4.77213 10.5121C4.91333 10.6337 4.97519 10.8238 4.93262 11.0052L3.79611 15.8484C3.69514 16.2787 4.16116 16.6188 4.54015 16.3914L8.83063 13.817Z' fill='%23A5A5A5'/%3E%3C/svg%3E%0A");
@@ -393,9 +434,23 @@ header .headerline{
 						position: absolute;
 						left: -22px;
 						top: 1px;
+						transition: all 350ms cubic-bezier(.47,1.64,.41,.8);
+					}
+				}
+				a.github:hover{
+					.starcount{
+						color: $duckDByellow;
+						&::before{
+							scale: 1.25;
+							background-image: url("data:image/svg+xml,%3Csvg width='18' height='17' viewBox='0 0 18 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.83063 13.817C8.98898 13.722 9.1868 13.722 9.34515 13.817L13.6356 16.3914C14.0146 16.6188 14.4806 16.2787 14.3797 15.8484L13.2432 11.0052C13.2006 10.8238 13.2624 10.6337 13.4037 10.5121L17.1857 7.25491C17.5214 6.96575 17.343 6.41506 16.9014 6.37782L11.9168 5.9574C11.7323 5.94184 11.5715 5.82558 11.4989 5.65525L9.54784 1.07886C9.37508 0.673645 8.8007 0.673645 8.62794 1.07886L6.67692 5.65525C6.6043 5.82558 6.4435 5.94184 6.259 5.9574L1.27437 6.37782C0.83283 6.41506 0.654351 6.96575 0.990107 7.25491L4.77213 10.5121C4.91333 10.6337 4.97519 10.8238 4.93262 11.0052L3.79611 15.8484C3.69514 16.2787 4.16116 16.6188 4.54015 16.3914L8.83063 13.817Z' fill='%23FFEF00'/%3E%3C/svg%3E%0A");
+						}
 					}
 				}
 			}
+		}
+		.button{
+			line-height: 1;
+			margin: 0;
 		}
 	}
 }
@@ -406,7 +461,7 @@ body.documentation header .headerline .headercontent .landingmenu nav .search_ic
 
 .hamburger{
 	padding: 3px;
-	margin-top: 3px;
+	margin-top: 4px;
 	display: none;
 }
 
@@ -446,9 +501,9 @@ footer{
 		background-color: black;
 		color: white;
 		.footercontent{
-			max-width: 980px;
+			max-width: 1150px;
 			margin: 0 auto;
-			padding: 45px 30px;
+			padding: 60px 15px 20px 15px;
 			//padding-bottom: 45px;
 			display: -webkit-box;
 			display: -ms-flexbox;
@@ -456,6 +511,20 @@ footer{
 			justify-content: space-between;
 			column-gap: 80px;
 			font-size: 14px;
+			flex-wrap: wrap;
+			.footernavigation{
+				display: flex;
+				column-gap: 50px;
+				a{
+					line-height: 2;
+				}
+			}
+			.bottomline{
+				width: 100%;
+				margin-top: 60px;
+				font-weight: 400;
+				color: #979797;
+			}
 			strong{
 					font-weight: normal;
 				color: $duckDByellow;
@@ -464,28 +533,27 @@ footer{
 				overflow: visible;
 				position: relative;
 				a{
-					color: #878787;
-					text-decoration: underline;
+					color: #B8B8B8;
+					text-decoration: none;
 					-webkit-transition: color .3s;
 					-o-transition: color .3s;
 					transition: color .3s;
 					&:hover{
-						color: $duckDByellow;
+						color: $purple;
 					}
 				}
 			}
 			h6{
 				text-decoration: none;
 				font-family: $fontSans;
-				font-weight: normal;
+				font-weight: 500;
 				margin-top: 0px;
-				margin-bottom: 4px;
+				margin-bottom: 20px;
 				color: white;
 			}
 			img.duckdbfooter{
-				width: 120px;
+				width: 140px;
 				height: auto;
-				transform: translateY(-3px);
 			}
 			.icons a{
 				text-decoration: none;
@@ -567,421 +635,6 @@ h3 code{
 	font-family: $fontMono!important;
 }
 
-/** SPECIAL LANDING PAGE **/
-
-body.landing{
-	section:nth-child(even){
-		background-color: $duckDBlightgrey;
-	}
-	section{
-		padding: 70px 15px;
-		&.reducedpadding{
-			padding: 40px 15px;
-		}
-	}
-	.welcome, .benefits{
-		width: 100%;
-		text-align: center;
-		margin-top: 33px;
-		img{
-			width: 100px;
-			margin-bottom: 35px;
-		}
-		h1{
-			max-width: 1000px;
-			margin: 0 auto;
-			font-size: 34px;
-			line-height: 1;
-		}
-		h2{
-			font-size: 145%;
-		}
-		.mainlinks{
-			ul{
-				list-style: none;
-				padding: 0px;
-				display: -webkit-box;
-				display: -ms-flexbox;
-				display: flex;
-				-webkit-box-pack: center;
-					-ms-flex-pack: center;
-						justify-content: center;
-				margin: 0 auto;
-				margin-top: 50px;
-				max-width: $maxContentWidth;
-				a{
-					text-decoration: none;
-					color: #4D4D4D;
-				}
-				li.highlighted{
-					background-color: black;
-					color: white;
-					border-color: black;
-					&:hover{
-						background-color: black;
-						color: $duckDByellow;
-						border-color: transparent;
-					}
-				}
-				li{
-					min-width: 160px;
-					//flex: 1 1 0px;
-					border: 1px solid darken($duckDBgrey,20);
-					margin-left: 5px;
-					margin-right: 5px;
-					padding: 0px 0px;
-					-webkit-transition: all .3s;
-					-o-transition: all .3s;
-					transition: all .3s;
-					height: 32x;
-					line-height: 31px;
-					background-color: transparent;
-					font-size: 14px;
-					&:hover{
-						background-color:  $duckDByellow;
-						color: black;
-						border-color: transparent;
-					}
-				}
-			}
-		}
-	}
-	.benefits{
-		margin-top: 0;
-		h1{
-			font-size: 210%;
-		}
-	}
-	.boxlayout{
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-		-webkit-box-pack: justify;
-			-ms-flex-pack: justify;
-				justify-content: space-between;
-		-ms-flex-wrap: wrap;
-			flex-wrap: wrap;
-		.box{
-			width: 50%;
-			display: -webkit-box;
-			display: -ms-flexbox;
-			display: flex;
-			position: relative;
-			margin-bottom: 30px;
-			div:first-child{
-				width: 135px;
-				margin-top: 0px;
-			}
-			div:nth-child(2){
-				width: calc(100% - 150px);
-				max-width: 390px;
-				ul{
-					padding-left: 15px;
-					margin-top: 10px;
-					margin-bottom: 2px;
-					font-size: 14px;
-					color: #4D4D4D;
-					ul{
-						margin: 0;
-					}
-				}
-				span.duckdbsymbol{
-					font-size: 14px;
-					color: darken($duckDBgrey,20);
-				}
-				a{	
-					@include textlink();
-					color: darken($duckDBgrey,20);
-					font-size: 14px;
-					&:hover{
-						//background-color: $duckDByellow;
-						color: black;
-	}
-				}
-			}
-		}
-	}
-	.whyduckdb{
-		.boxlayout{
-			.box{
-				.duckdbsymbol{
-					font-size: 70px;
-				}
-				div.icon{
-					width: 120px;
-					height: 120px;
-					background-color: $duckDBlightgrey;
-					text-align: center;
-					display: table-cell;
-					vertical-align: middle;
-				}
-			}
-		}
-	}
-	.using{
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-		-webkit-box-pack: justify;
-			-ms-flex-pack: justify;
-				justify-content: space-between;
-		.box{
-			-webkit-box-flex: 1;
-				-ms-flex: 1 1 0px;
-					flex: 1 1 0px;
-			position: relative;
-			overflow: hidden;
-			div.icon{
-				width: 90px;
-				float: left;
-				font-size: 85px;
-				margin-top: 10px;
-			}
-			div:not(.icon){
-				margin-top: 20px;
-				width: calc(100% - 90px);
-				float: left;
-				padding-left: 45px;
-				padding-right: 50px;
-			}
-			ul {
-				padding: 0;
-				margin: 0;
-				list-style-type: '\2022 \00a0\00a0';
-				li{
-					margin-bottom: 10px;
-				}
-			}
-		}
-	}
-	.docu{
-		.boxlayout{
-			.box{
-				display: block;
-				-webkit-box-flex: 1;
-					-ms-flex: 1 1 0px;
-						flex: 1 1 0px;
-				.button{
-					border: 1px solid black;
-					padding: 4px 0px;
-					color: black;
-					text-align: center;
-					width: 100%;
-					margin-top: 15px;
-					cursor: pointer;
-					-webkit-transition: all .3s;
-					-o-transition: all .3s;
-					transition: all .3s;
-					max-width: 320px;
-					&:hover{
-						background-color: $duckDByellow;
-						border: 1px solid black;
-					}
-				}
-				a:nth-child(3) .button{
-					color: white;
-					background-color: black;
-					&:hover{
-						border: 1px solid black;
-						color: $duckDByellow;
-					}
-				}
-				a:nth-child(2) .button{
-					margin-top: 40px;
-				}
-				div.quicklinks{
-					width: 100%;
-					position: relative;
-					overflow: hidden;
-					display: -webkit-box;
-					display: -ms-flexbox;
-					display: flex;
-					-webkit-box-pack: center;
-						-ms-flex-pack: center;
-							justify-content: center;
-					margin-top: 10px;
-				}
-				div.quickaccess{
-					border: 1px solid black;
-					padding: 10px 15px;
-					width: 50%;
-					margin-top: 0px;
-					//max-width: none;
-					&:first-child{
-						border-right: 0px;
-					}
-					li{
-						list-style-type: '\2022 \00a0\00a0';
-					}
-					p{
-						margin-bottom: 4px;
-						margin-top: 0px;
-					}
-					a{
-						color: black;
-						text-decoration: underline;
-						&:hover{
-							background-color: $duckDByellow;
-						}
-					}
-				}
-			}
-			.box:first-child{
-				padding-right: 40px;
-			}
-		}
-		a{
-			text-decoration: none;
-			color: black;
-		}
-
-	}
-
-	.install{
-		p{
-			max-width: 450px;
-			margin-bottom: 50px;
-		}
-		.environment{
-			ul{
-				padding: 0;
-				margin: 0;
-				display: -webkit-box;
-				display: -ms-flexbox;
-				display: flex;
-				-webkit-box-pack: justify;
-					-ms-flex-pack: justify;
-						justify-content: space-between;
-				list-style: none;
-				li{
-					/*
-					-webkit-box-flex: 1;
-						-ms-flex: 1 1 0px;
-							flex: 1 1 0px;
-					*/
-					flex: auto;
-					flex-grow: 3;
-					-webkit-transition: all .3s;
-					-o-transition: all .3s;
-					transition: all .3s;
-					color: darken($duckDBgrey,20);
-					border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-					text-align: center;
-					cursor: pointer;
-					height: 40px;
-					line-height: 40px;
-					white-space: nowrap;
-					&:hover{
-						color: black;
-					}
-				}
-				li.active{
-					border-bottom: 2px solid black;
-					color: black;
-				}
-			}
-		}
-		.result{
-			background-color: $duckDBlightgrey;
-			min-height: 80px;
-			font-family: $fontMono;
-			padding: 15px;
-			margin-top: 10px;
-			font-size: 14px;
-			position: relative;
-			a{
-				color: black;
-				background-color: transparent;
-				font-family: $fontMono;
-				&:hover{
-					color: black;
-					background-color: $duckDByellow;
-				}
-			}
-		}
-		.result + p{
-			color: darken($duckDBgrey,20);
-			max-width: 100%;
-			span{
-				margin-left: 15px;
-				margin-right: 15px;
-				font-size: 14px;
-			}
-			span:first-child{
-				margin-left: 0px;
-			}
-		}
-		.hidden{
-			display: none;
-		}
-	}
-	.newsblog{
-		h2{
-			display: inline;
-		}
-		a.newsarchive{
-			margin-left: 40px;
-			@include textlink();
-			text-decoration: none;
-			span::after{
-				line-height: 2.4;
-			}
-			&:hover{
-				color: black;
-			}
-		}
-		.newswrap{
-			display: flex;
-			justify-content: space-between;
-			margin-top: 50px;
-			.postpreview{
-				width: 29%;
-				.date{
-					color: darken($duckDBgrey,20);
-					margin-bottom: 3px;
-					font-size: 13.5px;
-				}
-				h3{
-					font-weight: normal;
-					font-size: 20px;
-					a{
-						color: black;
-						text-decoration: inherit;
-					}
-				}
-				p{
-					hyphens: auto;
-					font-size: 16px;
-				}
-				span.duckdbsymbol{
-					color: darken($duckDBgrey,20);
-					margin-right: 5px;
-				}
-				a.continue{
-					@include textlink();
-					font-size: 14px;
-					&:hover{
-						color: black;
-						//background-color: $duckDByellow;
-					}
-				}
-			}
-		}
-	}
-	.stickerbanner{
-		display: flex;
-		> div{
-			width: 50%;
-		}
-		.button{
-			@include button();
-			background-color: $duckDByellow;
-			span::after{
-				line-height: 27px;
-			}
-		}
-	}
-}
 
 body.landing label.onlymobile,
 body.installation div.environment.select label.onlymobile{
@@ -1039,7 +692,7 @@ body.installation .environment.select label.onlymobile{
 /** DOCUMENTATION **/
 
 body.documentation{
-	nav.mobile{
+	.headerline .headercontent .landingmenu nav.mobile{
 		display: none;
 	}
 	span.github{
@@ -1074,7 +727,7 @@ body.documentation{
 		padding: 40px;
 		#main_content_wrap{
 			max-width: 720px;
-			margin-top: 50px;
+			margin-top: 70px;
 			img{
 				width: 100%;
 				height: auto;
@@ -1154,22 +807,22 @@ body.documentation{
 		height: 52px;
 		line-height: 52px;
 		font-size: 32px;
-		top: 53px;
+		top: 70px;
 		left: 252px;
 		padding-left: 40px;
 		position: absolute;
-		width: calc(100vw - 252px);
+		width: calc(100% - 252px);
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
 		position: sticky;
-		margin-left: -40px;
+		//margin-left: -40px;
 		z-index: 800;
 		> div.version{
 			font-size: 14px;
 			line-height: 1;
 			color: rgba(184, 184, 184, 1);
-			padding-right: 30px;
+			padding-right: 20px;
 			padding-left: 30px;
 			cursor: pointer;
 			background-color: darken($duckDBlightgrey, 5%);
@@ -1234,7 +887,7 @@ body.documentation{
 }
 .versionsidebar{
 	position: fixed;
-	top: 50px;
+	top: 70px;
 	height: calc(100vh - 50px);
 	right: 0;
 	width: 135px;
@@ -1271,10 +924,10 @@ body.documentation{
 
 .sidenavigation{
 	position: fixed;
-	top: 53px;
+	top: 70px;
 	background-color: $duckDByellow;
 	width: 252px;
-	height: calc(100vh - 53px);
+	height: calc(100vh - 70px);
 	padding: 20px;
 	padding-left: 30px;
 	z-index: 999;
@@ -1603,3 +1256,4 @@ body.tmguidelines{
 }
 
 @import url(search.css);
+@import url(home.css);
