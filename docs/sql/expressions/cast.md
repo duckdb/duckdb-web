@@ -11,16 +11,21 @@ Casting can occur either implicitly or explicitly.
 
 ## Explicit Casting
 
-The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`, where `TYPENAME` is a name (or alias) of one of [DuckDB's data types](../data_types/overview). DuckDB also supports the easier to type shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
+The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`, where `TYPENAME` is a name (or alias) of one of [DuckDB's data types](../data_types/overview). DuckDB also supports the shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
 
 ```sql
 SELECT CAST(i AS VARCHAR) FROM generate_series(1, 3) tbl(i);
 -- "1", "2", "3"
+```
+```sql
 SELECT i::DOUBLE FROM generate_series(1, 3) tbl(i);
 -- 1.0, 2.0, 3.0
-
+```
+```sql
 SELECT CAST('hello' AS INTEGER);
 -- Conversion Error: Could not convert string 'hello' to INT32
+```
+```sql
 SELECT TRY_CAST('hello' AS INTEGER);
 -- NULL
 ```
