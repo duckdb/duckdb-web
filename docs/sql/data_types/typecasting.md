@@ -16,7 +16,7 @@ Even though a casting operation is supported based on the source and target data
 Casting operations that result in loss of precision are typically allowed. For example, it is possible to cast a numeric type with fractional digits like `DECIMAL`, `FLOAT` or `DOUBLE` to an integral type like `INTEGER`:
 
 ```sql
-SELECT cast(pi() AS INTEGER);
+SELECT CAST(pi() AS INTEGER);
 ```
 
 Casting operations that would result in a value overflow are typically not allowed. For example, the value `999` is too large to be represented by the `TINYINT` data type. Therefore, an attempt to cast that value to that type results in a runtime error:
@@ -25,7 +25,7 @@ Casting operations that would result in a value overflow are typically not allow
 SELECT CAST(999 AS TINYINT);
 ```
 
-So even though the cast operation from `INTEGER` to `TINYINT` is supported, it is not possible for this particular value. 
+So even though the cast operation from `INTEGER` to `TINYINT` is supported, it is not possible for this particular value.
   
 The [`VARCHAR`](text) type (also available under the aliases `TEXT` and `STRING`) acts like an univeral target: any arbitrary value of any arbitrary type can always be cast to the `VARCHAR` type.
 Casting from `VARCHAR` to another data type is generally supported, but may fail at runtime if DuckDB cannot figure out how to parse and convert the provided value to the target data type.
