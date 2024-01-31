@@ -76,12 +76,17 @@ COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY true);
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
 
 ```sql
--- Copy the contents of the 'lineitem' table to the file 'lineitem.tbl', where the columns are delimited by a pipe character ('|'), including a header line.
-COPY lineitem TO 'lineitem.tbl' (DELIMITER '|', HEADER);
+-- Copy the contents of the 'lineitem' table to a CSV file with a header
+COPY lineitem TO 'lineitem.csv';
+-- Copy the contents of the 'lineitem' table to the file 'lineitem.tbl',
+-- where the columns are delimited by a pipe character ('|'), including a header line.
+COPY lineitem TO 'lineitem.tbl' (DELIMITER '|');
+-- Use tab separators to create a TSV file without a header
+COPY lineitem TO 'lineitem.tsv' (DELIMITER '\t', HEADER false);
 -- Copy the l_orderkey column of the 'lineitem' table to the file 'orderkey.tbl'
 COPY lineitem(l_orderkey) TO 'orderkey.tbl' (DELIMITER '|');
 -- Copy the result of a query to the file 'query.csv', including a header with column names
-COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ',');
+COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' (DELIMITER ',');
 -- Copy the result of a query to the Parquet file 'query.parquet'
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.parquet' (FORMAT PARQUET);
 -- Copy the result of a query to the newline-delimited JSON file 'query.ndjson'
@@ -92,11 +97,11 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY true);
 
 ### `COPY ... TO` Options
 
-Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes. 
+Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes.
 
-Any option that is a Boolean can be enabled or disabled in multiple ways. You can write `true`, `ON`, or `1` to enable the option, and `false`, `OFF`, or `0` to disable it. The Boolean value can also be omitted (e.g., by only passing `(HEADER)`), in which case `true` is assumed.
+Any option that is a Boolean can be enabled or disabled in multiple ways. You can write `true`, `ON`, or `1` to enable the option, and `false`, `OFF`, or `0` to disable it. The `BOOLEAN` value can also be omitted (e.g., by only passing `(HEADER)`), in which case `true` is assumed.
 
-The below options are applicable to all formats written with `COPY`. 
+The below options are applicable to all formats written with `COPY`.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
