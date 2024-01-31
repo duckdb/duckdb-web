@@ -13,7 +13,7 @@ body_class: landing nowrap
 	<div class="flexwrap wrap">
 		<div class="duckdb">
 			<h1>DuckDB is a fast <nobr>in-process</nobr> analytical database</h1>
-			<p>It is an in-process SQL analytical database management system with integrations to 10+ programming languages</p>
+			<p>DuckDB supports a feature-rich SQL dialect complemented with deep integrations into client APIs</p>
 			<a class="button transparent arrow-down dark" href="#quickinstall">Installation</a>
 			<a class="button yellow" href="/docs/archive/{{ site.currentduckdbversion }}/">Documentation</a>
 		</div>
@@ -21,47 +21,29 @@ body_class: landing nowrap
 			<div>
 				<div class="topbar">
 					<ul class="lang">
-						<li data-language="python" class="active">Python</li>
+						<li data-language="sql" class="active">SQL</li>
+						<li data-language="python">Python</li>
 						<li data-language="r">R</li>
-						<li data-language="nodejs">NodeJS</li>
 						<li data-language="java">Java</li>
-						<li data-language="rust">Rust</li>
+						<li data-language="nodejs">Node.js</li>
 					</ul>
 				</div>
 				<div class="content haslines">
 					<div class="lines"></div>
 						<div class="code dark">
 {% highlight sql %}
--- LANGUAGE: PYTHON, EXAMPLE: JOIN QUERY
--- set the memory limit of the system to 10GB
-SET memory_limit='10GB';
--- configure the system to use 1 thread
-SET threads TO 1;
--- enable printing of a progress bar during long-running queries
-SET enable_progress_bar=true;
--- set the default null order to NULLS LAST
-PRAGMA default_null_order='nulls_last';
-
--- show a list of all available settings
-SELECT * FROM duckdb_settings();
-
--- return the current value of a specific setting
--- this example returns 'automatic'
-SELECT current_setting('access_mode');
-
--- reset the memory limit of the system back to the default
-RESET memory_limit;
-{% endhighlight %}
+{% include landing-page/sql/aggregation.sql %}
+{% endhighlight -%}
 						</div>
 				</div>
 				<div class="bottombar flexwrap">
 					<div class="select">
 						<select id="example-select">
-							<option value="join-query">Join query</option>
-							<option value="aggregation-query">Aggregation query</option>
-							<option value="parquet-reading">Parquet reading</option>
-							<option value="as-of-join">As-of join</option>
-							<option value="s3-access">S3 access</option>
+							<option value="sql-aggregation-query">Aggregation query</option>
+							<option value="sql-join-query">Join query</option>
+							<option value="sql-csv-reader">Read CSV files</option>
+							<option value="sql-parquet-reading-s3">Read Parquet files from S3</option>
+							<option value="sql-spatial-extension">Spatial extension</option>
 						</select>
 					</div>
 					<a class="button arrow-right livedemo" href="#">Live Demo</a>
@@ -74,54 +56,55 @@ RESET memory_limit;
 
 <section class="whyduckdb">
 	<div class="wrap">
-		<h1>Why DuckDB Transforms Data Management</h1>
+		<h1>DuckDB at a glance</h1>
 		<div class="flexwrap">
 			<div class="featurebox">
 				<div class="icon simple"></div>
 				<h3>Simple</h3>
-				<p>Secure, extensive SQL, query Parquet, CSV, JSON with advanced joins, aggregates, and window functions for precise data handling.</p>
-				<a href="#" class="textbutton arrow-right">Read more</a>
-			</div>
-			<div class="featurebox">
-				<div class="icon featurerich"></div>
-				<h3>Feature-Rich</h3>
-				<p>DuckDB: Secure, extensive SQL, query Parquet, CSV, JSON with advanced joins, aggregates, and window functions for precise data handling.</p>
-				<a href="#" class="textbutton arrow-right">Read more</a>
-			</div>
-			<div class="featurebox">
-				<div class="icon speed"></div>
-				<h3>Blazing Speed</h3>
-				<p>Lightning-fast, optimized for analytics, with a vectorized, parallel engine. Experience blazing in-memory processing and parallel loading for data formats.</p>
-				<a href="#" class="textbutton arrow-right">Read more</a>
-			</div>
-			<div class="featurebox">
-				<div class="icon free"></div>
-				<h3>Free</h3>
-				<p>Embrace freedom and adaptability with DuckDB, a free, open-source solution under the MIT License, offering flexibility through a robust extension mechanism. </p>
-				<a href="#" class="textbutton arrow-right">Read more</a>
+				<p>DuckDB is easy to install and deploy. It has zero external dependencies and runs <nobr>in-process</nobr> in its host application or as a single binary.</p>
+				<a href="why_duckdb#simple" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="featurebox">
 				<div class="icon portable"></div>
 				<h3>Portable</h3>
-				<p>Embrace freedom and adaptability with DuckDB, a free, open-source solution under the MIT License, offering flexibility through a robust extension mechanism.</p>
-				<a href="#" class="textbutton arrow-right">Read more</a>
+				<p>DuckDB runs on Linux, macOS, Windows, and all popular hardware architectures. It has client APIs for major programming languages.</p>
+				<a href="why_duckdb#portable" class="textbutton arrow-right">Read more</a>
+			</div>
+			<div class="featurebox">
+				<div class="icon featurerich"></div>
+				<h3>Feature-Rich</h3>
+				<p>DuckDB offers a rich SQL dialect. It can read and write file formats such as CSV, Parquet, and JSON, to and from the local file system or S3 buckets.</p>
+				<a href="why_duckdb#feature-rich" class="textbutton arrow-right">Read more</a>
+			</div>
+			<div class="featurebox">
+				<div class="icon speed"></div>
+				<h3>Fast</h3>
+				<p>DuckDB runs analytical queries at blazing speed thanks to its columnar engine, which supports parallel execution and can process larger-than-memory workloads.</p>
+				<a href="why_duckdb#fast" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="featurebox">
 				<div class="icon extensible"></div>
 				<h3>Extensible</h3>
-				<p>Embrace freedom and adaptability with DuckDB, a free, open-source solution under the MIT License, offering flexibility through a robust extension mechanism.</p>
-				<a href="#" class="textbutton arrow-right">Read more</a>
+				<p>DuckDB is extensible by third-party features such as new data types, functions, file formats and even new SQL syntax.</p>
+				<a href="why_duckdb#extensible" class="textbutton arrow-right">Read more</a>
+			</div>
+			<div class="featurebox">
+				<div class="icon free"></div>
+				<h3>Free</h3>
+				<p>DuckDB and its core extensions are <nobr>open-source</nobr> under the permissive MIT License.</p>
+				<a href="why_duckdb#free" class="textbutton arrow-right">Read more</a>
 			</div>
 		</div>
 	</div>
 </section>
 
+
 <section id="quickinstall">
 	<div class="flexwrap wrap">
 		<div class="intro">
 			<h1>Installation</h1>
-			<p>Your in-process SQL OLAP database management system. Seamlessly integrated with 15 programming languages. </p>
-			<a href="/docs/archive/{{ site.currentduckdbversion }}/installation/" class="white dark button">More installations</a>
+			<p>DuckDB is seamlessly integrated with major programming languages. It can be installed in less than 20 seconds on most platforms.</p>
+			<a href="/docs/archive/{{ site.currentduckdbversion }}/installation/" class="white dark button">More Installation Options</a>
 		</div>
 		<div class="install">
 			<div class="window">
@@ -131,7 +114,7 @@ RESET memory_limit;
 						<li data-id="python">Python</li>
 						<li data-id="r">R</li>
 						<li data-id="java">Java</li>
-						<li data-id="js">Node.js</li>
+						<li data-id="nodejs">Node.js</li>
 						<li data-id="odbc">ODBC</li>
 					</ul>
 				</div>
@@ -141,7 +124,7 @@ RESET memory_limit;
 						<option value="python">Python</option>
 						<option value="r">R</option>
 						<option value="java">Java</option>
-						<option value="js">Node.js</option>
+						<option value="nodejs">Node.js</option>
 						<option value="odbc">ODBC</option>
 					</select>
 				</label>
@@ -152,7 +135,7 @@ RESET memory_limit;
 				
 				<div class="bottombar">
 					<p class="system">
-						<span>Latest release: DuckDB {{ site.currentduckdbversion }}</span>
+						<span>Latest release: DuckDB {{ site.currentduckdbversion }} | </span>
 						<span class="systemdetected">System detected: </span>
 					</p>
 				</div>	
@@ -195,103 +178,146 @@ RESET memory_limit;
 	
 <div class="dropdown hero-demo">
 	
-<!-- SPECIFIC EXAMPLE LIST FOR PYTHON -->	
+<!-- example list for SQL -->	
+<div data-language="sql">
+	<option value="sql-aggregation-query">Aggregation Query</option>
+	<option value="sql-join-query">Join Query</option>
+	<option value="sql-csv-reader">Read CSV Files</option>
+	<option value="sql-parquet-reading-s3">Read Parquet Files from S3</option>
+	<option value="sql-spatial-extension">Spatial Extension</option>
+</div>
+
+<!-- example list for Python -->	
 <div data-language="python">
-	<option value="join-query">Join query</option>
-	<option value="aggregation-query">Aggregation query</option>
-	<option value="parquet-reading">Parquet reading</option>
-	<option value="as-of-join">As-of join</option>
-	<option value="s3-access">S3 access</option>
+	<option value="python-pandas-integration">Pandas Integration</option>
+	<option value="python-numpy-integration">Numpy Integration</option>
+	<option value="python-udf">Custom UDFs</option>
+	<option value="python-sql-query">SQL Query</option>
 </div>
 
-<!-- SPECIFIC EXAMPLE LIST FOR R -->	
+<!-- specific example list for R -->	
 <div data-language="r">
-	<option value="example-option-1">Example Option 1</option>
-	<option value="example-option-2">Example Option 2</option>
-	<option value="example-option-3">Example Option 3</option>
-	<option value="example-option-4">Example Option 4</option>
-</div>
-	
+	<option value="r-dplyr-integration">dplyr Integration</option>
+	<option value="r-sql-query">SQL Query</option>
 </div>
 
+<!-- specific example list for Java -->	
+<div data-language="java">
+	<option value="java-sql-query">SQL Query</option>
+	<option value="java-appender">Appender</option>
+</div>
+
+<!-- specific example list for Node.js -->	
+<div data-language="nodejs">
+	<option value="nodejs-arrow-integration">Arrow Integration</option>
+	<option value="nodejs-sql-query">SQL Query</option>
+</div>
+
+</div>
 	
 <div class="examples hero-demo">
 	
-<!-- PYTHON -->	
-<div data-language="python" data-example="join-query" data-buttontxt="Python Docs" data-buttonurl="https://duckdb.org/docs/archive/0.9.2/api/python/overview">
+<!-- ------------------- SQL ------------------- -->
+
+<div data-language="sql" data-example="sql-aggregation-query" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/">
 {% highlight sql %}
--- LANGUAGE: PYTHON, EXAMPLE: JOIN QUERY
--- set the memory limit of the system to 10GB
-SET memory_limit='10GB';
--- configure the system to use 1 thread
-SET threads TO 1;
--- enable printing of a progress bar during long-running queries
-SET enable_progress_bar=true;
--- set the default null order to NULLS LAST
-PRAGMA default_null_order='nulls_last';
-
--- show a list of all available settings
-SELECT * FROM duckdb_settings();
-
--- return the current value of a specific setting
--- this example returns 'automatic'
-SELECT current_setting('access_mode');
-
--- reset the memory limit of the system back to the default
-RESET memory_limit;
+{% include landing-page/sql/aggregation.sql %}
 {% endhighlight %}
 </div>	
 
-<div data-language="python" data-example="aggregation-query" data-buttontxt="Python Docs" data-buttonurl="">
+<div data-language="sql" data-example="sql-csv-reader" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/">
 {% highlight sql %}
--- LANGUAGE: PYTHON, EXAMPLE: AGGREGATION QUERY
+{% include landing-page/sql/csv-loader.sql %}
 {% endhighlight %}
 </div>
 
-<div data-language="python" data-example="parquet-reading" data-buttontxt="Python Docs" data-buttonurl="">
+<div data-language="sql" data-example="sql-parquet-reading-s3" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/">
 {% highlight sql %}
--- LANGUAGE: PYTHON, EXAMPLE: PARQUET READING
+{% include landing-page/sql/s3-parquet.sql %}
 {% endhighlight %}
 </div>
 
-<div data-language="python" data-example="as-of-join" data-buttontxt="Python Docs" data-buttonurl="">
+<div data-language="sql" data-example="sql-join-query" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/">
 {% highlight sql %}
--- LANGUAGE: PYTHON, EXAMPLE: AS-OF JOIN
+{% include landing-page/sql/join.sql %}
 {% endhighlight %}
 </div>
 
-<div data-language="python" data-example="s3-access" data-buttontxt="Python Docs" data-buttonurl="">
+<div data-language="sql" data-example="sql-spatial-extension" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/">
 {% highlight sql %}
--- LANGUAGE: PYTHON, EXAMPLE: S3 ACCESS
-{% endhighlight %}
-</div>
-	
-<!-- R -->
-<div data-language="r" data-example="example-option-1" data-buttontxt="XY" data-buttonurl="XY">
-{% highlight sql %}
--- LANGUAGE: R, EXAMPLE: EXAMPLE OPTION 1
+{% include landing-page/sql/spatial-extension.sql %}
 {% endhighlight %}
 </div>
 
-<div data-language="r" data-example="example-option-2" data-buttontxt="XY" data-buttonurl="XY">
-{% highlight sql %}
--- LANGUAGE: R, EXAMPLE: EXAMPLE OPTION 2
+<!-- ------------------- Python -------------------- -->
+
+<div data-language="python" data-example="python-sql-query" data-buttontxt="Python Docs" data-buttonurl="/docs/archive/0.9.2/api/python/overview">
+{% highlight python %}
+{% include landing-page/python/sql-query.py %}
+{% endhighlight %}
+</div>	
+
+<div data-language="python" data-example="python-pandas-integration" data-buttontxt="Blog Post" data-buttonurl="/2021/05/14/sql-on-pandas.html">
+{% highlight python %}
+{% include landing-page/python/pandas-integration.py %}
 {% endhighlight %}
 </div>
 
-<div data-language="r" data-example="example-option-3" data-buttontxt="XY" data-buttonurl="XY">
-{% highlight sql %}
--- LANGUAGE: R, EXAMPLE: EXAMPLE OPTION 3
+<div data-language="python" data-example="python-udf" data-buttontxt="Blog Post" data-buttonurl="/2023/07/07/python-udf.html">
+{% highlight python %}
+{% include landing-page/python/udf.py %}
 {% endhighlight %}
 </div>
 
-<div data-language="r" data-example="example-option-4" data-buttontxt="XY" data-buttonurl="XY">
-{% highlight sql %}
--- LANGUAGE: R, EXAMPLE: EXAMPLE OPTION 4
+<div data-language="python" data-example="python-numpy-integration" data-buttontxt="Python Docs" data-buttonurl="/docs/archive/0.9.2/api/python/result_conversion">
+{% highlight python %}
+{% include landing-page/python/numpy-integration.py %}
 {% endhighlight %}
 </div>
 
-	
+<!-- ------------------- R -------------------- -->
+
+<div data-language="r" data-example="r-sql-query" data-buttontxt="R documentation" data-buttonurl="/docs/api/r">
+{% highlight r %}
+{% include landing-page/r/sql-query.r %}
+{% endhighlight %}
+</div>
+
+<div data-language="r" data-example="r-dplyr-integration" data-buttontxt="R documentation" data-buttonurl="/docs/api/r">
+{% highlight r %}
+{% include landing-page/r/dplyr-integration.r %}
+{% endhighlight %}
+</div>
+
+<!-- ------------------- Java -------------------- -->
+
+<div data-language="java" data-example="java-sql-query" data-buttontxt="Java Docs" data-buttonurl="/docs/api/java">
+{% highlight java %}
+{% include landing-page/java/sql-query.java %}
+{% endhighlight %}
+</div>
+
+
+<div data-language="java" data-example="java-appender" data-buttontxt="Java Docs" data-buttonurl="/docs/api/java">
+{% highlight java %}
+{% include landing-page/java/appender.java %}
+{% endhighlight %}
+</div>
+
+<!-- ------------------- Node.js -------------------- -->
+
+<div data-language="nodejs" data-example="nodejs-sql-query" data-buttontxt="Node.js Docs" data-buttonurl="/docs/api/nodejs/overview">
+{% highlight javascript %}
+{% include landing-page/nodejs/sql-query.js %}
+{% endhighlight %}
+</div>
+
+<div data-language="nodejs" data-example="nodejs-arrow-integration" data-buttontxt="Node.js Docs" data-buttonurl="/docs/api/nodejs/overview">
+{% highlight javascript %}
+{% include landing-page/nodejs/arrow.js %}
+{% endhighlight %}
+</div>
+
 </div>
 
 
@@ -300,34 +326,38 @@ RESET memory_limit;
 <div class="quick-installation">
 
 <div data-install="python">
-{% highlight python %}
+{% highlight console %}
 pip install duckdb=={{ site.currentduckdbversion }}
 {% endhighlight %}
 </div>
 
 <div data-install="r">
+{% highlight r %}
 install.packages("duckdb")
+{% endhighlight %}
 </div>
 
 <div data-install="java">
-{% highlight java %}
+{% highlight xml %}
 <dependency>
- <groupId>org.duckdb</groupId>
- <artifactId>duckdb_jdbc</artifactId>
- <version>0.9.2</version>
+    <groupId>org.duckdb</groupId>
+    <artifactId>duckdb_jdbc</artifactId>
+    <version>0.9.2</version>
 </dependency>
 {% endhighlight %}<br/>
 <a href="https://search.maven.org/artifact/org.duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/jar">More Options</a>
 </div>
 
-<div data-install="js">
-{% highlight javascript %}
+<div data-install="nodejs">
+{% highlight console %}
 npm install duckdb
 {% endhighlight %}
 </div>
 
 <div data-install="cli macos">
-brew install duckdb<br/>---<br/>Direct download: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip</a>
+{% highlight console %}
+brew install duckdb
+{% endhighlight %}
 </div>
 
 <div data-install="cli linux">
@@ -339,7 +369,7 @@ brew install duckdb<br/>---<br/>Direct download: <a href="https://github.com/duc
 </div>
 
 <div data-install="odbc macos">
-Not available
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">duckdb_odbc-osx-universal.zip</a>
 </div>
 
 <div data-install="odbc linux">
