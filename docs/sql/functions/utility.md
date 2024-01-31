@@ -14,6 +14,7 @@ The functions below are difficult to categorize into specific function types and
 | `coalesce(`*`expr`*`, `*`...`*`)` | Return the first expression that evaluates to a non-`NULL` value. Accepts 1 or more parameters. Each expression can be a column, literal value, function result, or many others. | `coalesce(NULL, NULL, 'default_string')` | `'default_string'`|
 | `constant_or_null(`*`arg1`*`, `*`arg2`*`)` | If *`arg2`* is `NULL`, return `NULL`. Otherwise, return *`arg1`*. | `constant_or_null(42, NULL)` | `NULL` |
 | `count_if(`*`x`*`)` | Returns 1 if *x* is `true` or a non-zero number | `count_if(42)` | 1 |
+| `current_catalog()` | Return the name of the currently active catalog. Default is memory. | `current_catalog()` | `'memory'` |
 | `current_schema()`| Return the name of the currently active schema. Default is main. | `current_schema()` | `'main'`|
 | `current_schemas(`*`boolean`*`)`| Return list of schemas. Pass a parameter of `true` to include implicit schemas.| `current_schemas(true)`| `['temp', 'main', 'pg_catalog']`|
 | `current_setting(`*`'setting_name'`*`)` | Return the current value of the configuration setting| `current_setting('access_mode')` | `'automatic'` |

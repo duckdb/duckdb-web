@@ -60,9 +60,10 @@ The view that describes the catalog information for columns is `information_sche
 
 ## Catalog Functions
 
-Several functions are also provided to see details about the schemas that are configured in the database.
+Several functions are also provided to see details about the catalogs and schemas that are configured in the database.
 
 | Function | Description | Example | Result |
 |:--|:---|:--|:--|
 | `current_schema()` | Return the name of the currently active schema. Default is main. | `current_schema()` | `'main'` |
+| `current_catalog()` | Return the name of the currently active catalog. Default is memory. | `current_catalog()` | `'memory'` |
 | `current_schemas(boolean)` | Return list of schemas. Pass a parameter of `true` to include implicit schemas. | `current_schemas(true)` | `['temp', 'main', 'pg_catalog']` |
