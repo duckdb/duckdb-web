@@ -42,10 +42,19 @@ Below is a short example:
 con.Query("CREATE TABLE dates (d DATE, t TIME, ts TIMESTAMP)");
 Appender appender(con, "dates");
 
-// construct the values using the Date/Time/Timestamp types - this is the most efficient
-appender.AppendRow(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0), Timestamp::FromDatetime(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0)));
+// construct the values using the Date/Time/Timestamp types
+// (this is the most efficient approach)
+appender.AppendRow(
+    Date::FromDate(1992, 1, 1),
+    Time::FromTime(1, 1, 1, 0),
+    Timestamp::FromDatetime(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0))
+);
 // construct duckdb::Value objects
-appender.AppendRow(Value::DATE(1992, 1, 1), Value::TIME(1, 1, 1, 0), Value::TIMESTAMP(1992, 1, 1, 1, 1, 1, 0));
+appender.AppendRow(
+    Value::DATE(1992, 1, 1),
+    Value::TIME(1, 1, 1, 0),
+    Value::TIMESTAMP(1992, 1, 1, 1, 1, 1, 0)
+);
 ```
 
 ## Appender Support in Other Clients
