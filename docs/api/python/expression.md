@@ -7,10 +7,10 @@ The `Expression` class represents an instance of an [expression](../../sql/expre
 
 ## Why Would I Use the Expression API?
 
-Using this API makes it possible to dynamically build up expressions, which are typically created by the parser from the query string.  
+Using this API makes it possible to dynamically build up expressions, which are typically created by the parser from the query string.
 This allows you to skip that and have more fine-grained control over the used expressions.
 
-Below is a list of currently supported expressions that can be created through the API.  
+Below is a list of currently supported expressions that can be created through the API.
 
 ## Column Expression
 
@@ -30,9 +30,9 @@ print(res)
 
 ## Star Expression
 
-This expression selects all columns of the input source.  
+This expression selects all columns of the input source.
 
-Optionally it's possible to provide an `exclude` list to filter out columns of the table.  
+Optionally it's possible to provide an `exclude` list to filter out columns of the table.
 This `exclude` list can contain either strings or Expressions.
 
 ```py
@@ -96,8 +96,8 @@ hello = ConstantExpression('hello')
 world = ConstantExpression('world')
 
 case = \
-  CaseExpression(condition = ColumnExpression('b') == False, value = world) \
-  .otherwise(hello)
+    CaseExpression(condition = ColumnExpression('b') == False, value = world) \
+    .otherwise(hello)
 res = duckdb.df(df).select(case).fetchall()
 print(res)
 # [('hello',), ('hello',), ('world',), ('hello',)]
@@ -105,7 +105,7 @@ print(res)
 
 ## Function Expression
 
-This expression contains a function call.  
+This expression contains a function call.
 It can be constructed by providing the function name and an arbitrary amount of Expressions as arguments.
 
 ```py
@@ -134,7 +134,7 @@ print(res)
 
 ## Common Operations
 
-The Expression class also contains many operations that can be applied to any Expression type.  
+The Expression class also contains many operations that can be applied to any Expression type.
 
 `.cast(type: DuckDBPyType)`  
 Applies a cast to the provided type on the expression.

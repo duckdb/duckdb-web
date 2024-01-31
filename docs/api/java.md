@@ -133,24 +133,24 @@ import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.ipc.ArrowReader;
 import org.duckdb.DuckDBConnection;
 
-// arrow stuff
+// Arrow stuff
 try (var allocator = new RootAllocator();
-     ArrowStreamReader reader = null; /* should not be null of course */
+     ArrowStreamReader reader = null; // should not be null of course
      var arrow_array_stream = ArrowArrayStream.allocateNew(allocator)) {
-  Data.exportArrayStream(allocator, reader, arrow_array_stream);
+    Data.exportArrayStream(allocator, reader, arrow_array_stream);
 
-  // duckdb stuff
-  try (var conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:")) {
-    conn.registerArrowStream("adsf", arrow_array_stream);
+    // DuckDB stuff
+    try (var conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:")) {
+        conn.registerArrowStream("asdf", arrow_array_stream);
 
-    // run a query
-    try (var stmt = conn.createStatement();
-         var rs = (DuckDBResultSet) stmt.executeQuery("SELECT count(*) FROM adsf")) {
-      while (rs.next()) {
-        System.out.println(rs.getInt(1));
-      }
+        // run a query
+        try (var stmt = conn.createStatement();
+             var rs = (DuckDBResultSet) stmt.executeQuery("SELECT count(*) FROM asdf")) {
+            while (rs.next()) {
+                System.out.println(rs.getInt(1));
+            }
+        }
     }
-  }
 }
 ```
 

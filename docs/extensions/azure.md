@@ -41,14 +41,14 @@ SELECT * FROM 'azure://<my_container>/*.csv';
 Use the following [configuration options](../sql/configuration) how the extension reads remote files:
 
 * `azure_http_stats` [type: `BOOLEAN`] (default: `false`)  
-  Include http info from Azure Storage in the [`EXPLAIN ANALYZE` statement](/dev/profiling).
-  Notice that the result may be incorrect for more than one active DuckDB connection and the calculation of total received and sent bytes is not yet implemented.
+    Include http info from Azure Storage in the [`EXPLAIN ANALYZE` statement](/dev/profiling).
+    Notice that the result may be incorrect for more than one active DuckDB connection and the calculation of total received and sent bytes is not yet implemented.
 * `azure_read_transfer_concurrency` [type: `BIGINT`] (default: `5`)  
-  Maximum number of threads the Azure client can use for a single parallel read. If `azure_read_transfer_chunk_size` is less than `azure_read_buffer_size` then setting this > 1 will allow the Azure client to do concurrent requests to fill the buffer.
+    Maximum number of threads the Azure client can use for a single parallel read. If `azure_read_transfer_chunk_size` is less than `azure_read_buffer_size` then setting this > 1 will allow the Azure client to do concurrent requests to fill the buffer.
 * `azure_read_transfer_chunk_size` [type: `BIGINT`] (default: `1 * 1024 * 1024`)  
-  Maximum size in bytes that the Azure client will read in a single request. It is recommended that this is a factor of `azure_read_buffer_size`.
+    Maximum size in bytes that the Azure client will read in a single request. It is recommended that this is a factor of `azure_read_buffer_size`.
 * `azure_read_buffer_size` [type: `UBIGINT`] (default: `1 * 1024 * 1024`)  
-  Size of the read buffer. It is recommended that this is evenly divisible by `azure_read_transfer_chunk_size`.
+    Size of the read buffer. It is recommended that this is evenly divisible by `azure_read_transfer_chunk_size`.
 
 Example:
 
@@ -77,29 +77,29 @@ SET variable_name = variable_value;
 Where `variable_name` can be one of the following:
 
 * `azure_storage_connection_string` [type: `STRING`]  
-  Azure connection string, used for authenticating and configuring azure requests.
+    Azure connection string, used for authenticating and configuring azure requests.
 * `azure_account_name` [type: `STRING`]  
-  Azure account name, when set, the extension will attempt to automatically detect credentials (not used if you pass the connection string)
+    Azure account name, when set, the extension will attempt to automatically detect credentials (not used if you pass the connection string)
 * `azure_endpoint` [type: `STRING`] (default: `blob.core.windows.net`)  
-  Override the azure endpoint for when the Azure credential providers are used.
+    Override the azure endpoint for when the Azure credential providers are used.
 * `azure_credential_chain` [type: `STRING`] (default: `none`)  
-  Ordered list of Azure credential providers, in string format separated by `;`. E.g., `'cli;managed_identity;env'` (not used if you pass the connection string).
+    Ordered list of Azure credential providers, in string format separated by `;`. E.g., `'cli;managed_identity;env'` (not used if you pass the connection string).
   
-  Possible values:
-  [`cli`](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli);
-  [`managed_identity`](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview);
-  [`env`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#environment-variables);
-  [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential);
-  `none` (The latest will result in an exception (invalid input))
+    Possible values:
+    [`cli`](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli);
+    [`managed_identity`](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview);
+    [`env`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#environment-variables);
+    [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential);
+    `none`. The latest will result in an exception (invalid input).
 
 Additional variable to use a proxy:
 
 * `azure_http_proxy` [type: `STRING`] (default: `HTTP_PROXY environment variable if set`)  
-  Proxy to use when login & performing request to azure.
+    Proxy to use when login & performing request to azure.
 * `azure_proxy_user_name` [type: `STRING`]  
-  Http proxy username if needed.
+    Http proxy username if needed.
 * `azure_proxy_password` [type: `STRING`]  
-  Http proxy password if needed.
+    Http proxy password if needed.
 
 ### Authentication with Secret
 
