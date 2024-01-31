@@ -127,7 +127,7 @@ To make extension loading work, the DuckDB engine component blocks, fetches, and
 
 The central code block that makes this possible is the following:
 
-```c++
+```cpp
 EM_ASM(
     {
         const xhr = new XMLHttpRequest();

@@ -74,7 +74,7 @@ This format essentially acts as a generic view over the contents of the Vector. 
 
 To efficiently store strings, we make use of our `string_t` class.
 
-```c++
+```cpp
 struct string_t {
 	union {
 		struct {
@@ -96,7 +96,7 @@ Short strings (`<= 12 bytes`) are inlined into the structure, while larger strin
 
 List vectors are stored as a series of *list entries* together with a child Vector. The child vector contains the *values* that are present in the list, and the list entries specify how each individual list is constructed.
 
-```c++
+```cpp
 struct list_entry_t {
 	idx_t offset;
 	idx_t length;
