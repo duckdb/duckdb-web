@@ -27,6 +27,40 @@ import (
 )
 ```
 
+## Appender
+
+If you would like to use the [DuckDB Appender API](../data/appender), you can obtain a new Appender by supplying a DuckDB connection to `NewAppenderFromConn()`. For example:
+
+```go
+connector, err := duckdb.NewConnector("test.db", nil)
+if err != nil {
+  ...
+}
+conn, err := connector.Connect(context.Background())
+if err != nil {
+  ...
+}
+defer conn.Close()
+
+// Retrieve appender from connection (note that you have to create the table 'test' beforehand).
+appender, err := NewAppenderFromConn(conn, "", "test")
+if err != nil {
+  ...
+}
+defer appender.Close()
+
+err = appender.AppendRow(...)
+if err != nil {
+  ...
+}
+
+// Optional, if you want to access the appended rows immediately.
+err = appender.Flush()
+if err != nil {
+  ...
+}
+```
+
 ## Examples
 
 ### Simple Example

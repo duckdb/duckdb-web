@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Appender (C++/Java)
+title: Appender (C++/Go/Java)
 ---
 
-The C++ Appender can be used to load bulk data into a DuckDB database. The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
+The Appender can be used to load bulk data into a DuckDB database. It is currently available in the C++, Go, and Java APIs. The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
 
 ```cpp
 DuckDB db;
@@ -48,6 +48,6 @@ appender.AppendRow(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0), Times
 appender.AppendRow(Value::DATE(1992, 1, 1), Value::TIME(1, 1, 1, 0), Value::TIMESTAMP(1992, 1, 1, 1, 1, 1, 0));
 ```
 
-## Java Appender
+## Appender Support in Other Clients
 
-The Java appender is available in the [JDBC driver](../api/java#appender).
+Appender is also available in the [Go driver](../api/go#appender) and in the [JDBC (Java) driver](../api/java#appender).
