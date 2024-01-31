@@ -20,12 +20,14 @@ import duckdb
 duckdb.execute("CREATE TABLE tbl AS SELECT 42 a")
 con = duckdb.connect(":default:")
 con.sql("SELECT * FROM tbl")
-# ┌───────┐
-# │   a   │
-# │ int32 │
-# ├───────┤
-# │    42 │
-# └───────┘
+```
+```text
+┌───────┐
+│   a   │
+│ int32 │
+├───────┤
+│    42 │
+└───────┘
 ```
 
 ```python

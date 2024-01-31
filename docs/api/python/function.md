@@ -64,12 +64,14 @@ def my_function(x: int) -> str:
 
 duckdb.create_function("my_func", my_function)
 duckdb.sql("SELECT my_func(42)")
-# ┌─────────────┐
-# │ my_func(42) │
-# │   varchar   │
-# ├─────────────┤
-# │ 42          │
-# └─────────────┘
+```
+```text
+┌─────────────┐
+│ my_func(42) │
+│   varchar   │
+├─────────────┤
+│ 42          │
+└─────────────┘
 ```
 
 If only the parameter list types can be inferred, you'll need to pass in `None` as `argument_type_list`.
