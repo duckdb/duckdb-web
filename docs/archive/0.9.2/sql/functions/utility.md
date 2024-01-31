@@ -15,6 +15,7 @@ The functions below are difficult to categorize into specific function types and
 | `error(`*`message`*`)` | Throws the given error *message* | `error('access_mode')` | |
 | `ifnull(`*`expr`*`, `*`other`*`)` | A two-argument version of coalesce | `ifnull(NULL, 'default_string')` | `'default_string'`|
 | `nullif(`*`a`*`, `*`b`*`)` | Return null if a = b, else return a. Equivalent to `CASE WHEN a=b THEN NULL ELSE a END`. | `nullif(1+1, 2)` | `NULL`|
+| `current_catalog()` | Return the name of the currently active catalog. Default is memory. | `current_catalog()` | `'memory'` |
 | `current_schema()`| Return the name of the currently active schema. Default is main. | `current_schema()` | `'main'`|
 | `current_schemas(`*`boolean`*`)`| Return list of schemas. Pass a parameter of `true` to include implicit schemas.| `current_schemas(true)`| `['temp', 'main', 'pg_catalog']`|
 | `current_setting(`*`'setting_name'`*`)` | Return the current value of the configuration setting| `current_setting('access_mode')` | `'automatic'` |
