@@ -271,7 +271,17 @@
       "mainfolderitems": [
         {
           "page": "Connect",
-          "url": "connect"
+          "slug": "connect",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "Concurrency",
+              "url": "concurrency"
+            }
+          ]
         },
         {
           "page": "Data Import",
