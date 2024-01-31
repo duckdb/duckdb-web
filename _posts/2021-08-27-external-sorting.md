@@ -453,7 +453,7 @@ Modern CPUs try to predict whether the _if_, or the _else_ branch will be predic
 If this is hard to predict, it can slow down the code.
 Take a look at the example of pseudo-code with branches below.
 
-```c++
+```cpp
 // continue until merged
 while (l_ptr && r_ptr) {
   // check which side is smaller
@@ -474,7 +474,7 @@ while (l_ptr && r_ptr) {
 We are merging the data from the left and right blocks into a result block, one entry at a time, by advancing pointers.
 This code can be made _branchless_ by using the comparison boolean as a 0 or 1, shown in the pseudo-code below.
 
-```c++
+```cpp
 // continue until merged
 while (l_ptr && r_ptr) {
   // store comparison result in a bool
