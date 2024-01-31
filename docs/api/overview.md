@@ -7,6 +7,7 @@ There are various client APIs for DuckDB:
 
 * [C](c/overview)
 * [C++](cpp)
+* [Go](go) by [marcboeker](https://github.com/marcboeker)
 * [Java](java)
 * [Julia](julia)
 * [Node.js](nodejs/overview)
@@ -19,12 +20,11 @@ There are various client APIs for DuckDB:
 
 Additionally, there is a standalone [Command Line Interface (CLI)](cli) client.
 
-There are also contributed third-party DuckDB wrappers for:
+There are also contributed third-party DuckDB wrappers, which currently do not have an official documentation page:
 
 * [C#](https://github.com/Giorgi/DuckDB.NET) by [Giorgi](https://github.com/Giorgi)
 * [Common Lisp](https://github.com/ak-coram/cl-duckdb) by [ak-coram](https://github.com/ak-coram)
 * [Crystal](https://github.com/amauryt/crystal-duckdb) by [amauryt](https://github.com/amauryt)
-* [Go](https://github.com/marcboeker/go-duckdb) by [marcboeker](https://github.com/marcboeker)
 * [Ruby](https://github.com/suketa/ruby-duckdb) by [suketa](https://github.com/suketa)
 * [Zig](https://github.com/karlseguin/zuckdb.zig) by [karlseguin](https://github.com/karlseguin)
 
