@@ -32,10 +32,9 @@ SELECT * FROM parquet_metadata('test.parquet');
 -- query the schema of a Parquet file
 SELECT * FROM parquet_schema('test.parquet');
 
-
--- write the results of a query to a Parquet file
+-- write the results of a query to a Parquet file using the default compression (Snappy)
 COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet');
--- write the results from a query to a Parquet file with specific compression and row_group_size
+-- write the results from a query to a Parquet file with specific compression and row group size
 COPY (FROM generate_series(100000)) TO 'test.parquet' (FORMAT 'parquet', COMPRESSION 'zstd', ROW_GROUP_SIZE 100000);
 
 -- export the table contents of the entire database as parquet
@@ -113,9 +112,11 @@ COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet')
 -- write "tbl" to a zstd compressed Parquet file
 COPY tbl TO 'result-zstd.parquet' (FORMAT 'parquet', CODEC 'zstd')
 -- write a CSV file to an uncompressed Parquet file
-COPY 'test.csv' TO 'result-uncompressed.parquet' (FORMAT 'parquet', CODEC 'uncompressed')
+COPY 'test.csv' TO 'result-uncompressed.parquet'
+    (FORMAT 'parquet', CODEC 'uncompressed')
 -- write a query to a Parquet file with ZSTD compression (same as CODEC) and row_group_size
-COPY (FROM generate_series(100000)) TO 'row-groups-zstd.parquet' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000);
+COPY (FROM generate_series(100000)) TO 'row-groups-zstd.parquet'
+    (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000);
 ```
 
 DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../../sql/statements/export) for more details.
