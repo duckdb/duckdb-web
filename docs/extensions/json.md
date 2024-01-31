@@ -81,6 +81,7 @@ These functions have the following parameters:
 | `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']`. | `VARCHAR` | `'array'` |
 | `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../data/partitioning/hive_partitioning). | `BOOL` | `false` |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`). | `BOOL` | `false` |
+| `maximum_sample_files` | The maximum number of JSON files sampled for auto-detection. | `BIGINT` | `32` |
 | `maximum_object_size` | The maximum size of a JSON object (in bytes). | `UINTEGER` | `16777216` |
 
 The `format` parameter specifies how to read the JSON from a file.
