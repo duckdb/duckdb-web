@@ -29,7 +29,7 @@ FROM duckdb_extensions();
 | autocomplete     | false  | false     |              | Adds support for autocomplete in the shell                                         | []                |
 | ... | ... | ... | ... | ... | ... |
 
-## Extension Types 
+## Extension Types
 
 DuckDB has three types of extensions.
 

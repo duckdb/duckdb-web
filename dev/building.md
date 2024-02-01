@@ -210,6 +210,20 @@ This can however hide include bugs, this flag disables using the unity build so 
 In some situations, running an executable that has been built with sanitizers enabled is not support / can cause problems. Julia is an example of this.  
 With this flag enabled, the sanitizers are disabled for the build.
 
+## Building and Installing Extensions from Source
+
+[Extensions](../docs/extensions/overview) can be built from source and installed from the resulting local binary. To do so, set the corresponding [`BUILD_[EXTENSION_NAME]` extension flag](#extension-flags) when running the build, then use the `INSTALL` command.
+
+For example, to install the [`httpfs` extension](../docs/extensions/httpfs), run the following script:
+
+```bash
+GEN=ninja BUILD_HTTPFS=1 make
+# for release builds
+build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
+# for debug builds
+build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
+```
+
 ## Troubleshooting
 
 ### Building the R Package is Slow
