@@ -81,3 +81,23 @@ CSV files are often distributed in compressed format such as GZIP archives (`.cs
 |---|---|
 | Load from GZIP-compressed CSV files (`.csv.gz`) | 107.1s |
 | Decompressing (using parallel `gunzip`) and loading from decompressed CSV files | 121.3s |
+
+### Loading Many Small CSV Files
+
+The [CSV reader](../../data/csv/overview) runs the [CSV sniffer](/2023/10/27/csv-sniffer) on all files. For many small files, this may cause an unnecessarily high overhead.
+A potential optimization to speed this up is to turn the sniffer off. Assuming that all files have the same CSV dialect and colum names/types, get the sniffer options as follows:
+
+```sql
+.mode line
+SELECT Prompt FROM sniff_csv('part-0001.csv');
+```
+
+```text
+Prompt = FROM read_csv('file_path.csv', auto_detect=false, delim=',', quote='"', escape='"', new_line='\n', skip=0, header=true, columns={'hello': 'BIGINT', 'world': 'VARCHAR'});
+```
+
+Then, you can adjust `read_csv` command, by e.g. applying filename expansion (globbing), and run with the rest of the options detected by the sniffer:
+
+```sql
+FROM read_csv('part-*.csv', auto_detect=false, delim=',', quote='"', escape='"', new_line='\n', skip=0, header=true, columns={'hello': 'BIGINT', 'world': 'VARCHAR'});
+```
