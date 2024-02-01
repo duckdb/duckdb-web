@@ -220,6 +220,7 @@ body.landing{
 				color: #535353;
 				font-size: 14px;
 				line-height: 17px;
+				font-family: "JetBrainsMono-Regular";
 				pointer-events: none;
 			}
 			code{
@@ -356,6 +357,7 @@ body.landing{
 	  font-size: 14px;
 	  cursor: pointer;
 	  line-height: 1.1;
+	  color: black;
 	
 	  background-color: $duckDByellow;
 	  transition: background-color .3s;
