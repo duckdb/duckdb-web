@@ -129,6 +129,8 @@ SELECT
 FROM tripdata;
 ```
 
+<div class="narrow_table"></div>
+
 | Version | Time (s) |
 | -- | --: |
 | v0.8.0 | 33.8 |
@@ -144,6 +146,8 @@ FROM tripdata;
 CREATE TABLE integers(i INTEGER PRIMARY KEY);
 INSERT INTO integers FROM range(10000000);
 ```
+
+<div class="narrow_table"></div>
 
 | Version | Size |
 | -- | --: |
@@ -186,7 +190,8 @@ SELECT * FROM "s3://some-bucket/that/requires/authentication.parquet";
 [**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb_iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
 ```sql
-SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
+SELECT count(*)
+FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
 ```
 
 [See the documentation for more information](https://duckdb.org/docs/extensions/iceberg).
@@ -195,7 +200,7 @@ SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_P
 
 ```sql
 SET azure_storage_connection_string = '<your_connection_string>';
-SELECT * from 'azure://<my_container>/*.csv';
+SELECT * FROM 'azure://<my_container>/*.csv';
 ```
 
 [See the documentation for more information](https://duckdb.org/docs/extensions/azure).
@@ -240,4 +245,4 @@ Note that the API is currently experimental and features are still missing. We a
 
 #### Final Thoughts
 
-The full release notes can be [found on Github](https://github.com/duckdb/duckdb/releases/tag/v0.9.0). We would like to thank all of the contributors for their hard work on improving DuckDB.
+The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.9.0). We would like to thank all of the contributors for their hard work on improving DuckDB.
