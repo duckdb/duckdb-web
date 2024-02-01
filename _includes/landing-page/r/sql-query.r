@@ -1,4 +1,4 @@
-# Get the top-3 busiest train stations in May
+# Find the largest sepals and petals in the Iris data set
 library(duckdb)
 
 con <- dbConnect(duckdb())
