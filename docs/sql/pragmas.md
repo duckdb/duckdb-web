@@ -419,7 +419,7 @@ The following statement returns information on the metadata store (`block_id`, `
 PRAGMA metadata_info;
 ```
 
-#### Selectively Disabling Optimizers
+### Selectively Disabling Optimizers
 
 The `disabled_optimizers` option allows selectively disabling optimization steps.
 For example, to disable `filter_pushdown` and `statistics_propagation`, run:
