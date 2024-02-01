@@ -432,6 +432,32 @@ The available optimizations can be queried using the [`duckdb_optimizers()` tabl
 
 > The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
 
+### Returning Errors as JSON
+
+The `errors_as_json` option can be set to obtain error information in raw JSON format. For certain errors, extra information or decomposed information is provided for easier machine processing. For example:
+
+```sql
+SET errors_as_json = true;
+```
+
+Then, running a query that results in an error produces a JSON output:
+
+```sql
+SELECT * FROM nonexistent_tbl;
+```
+
+```json
+{
+   "exception_type":"Catalog",
+   "exception_message":"Table with name nonexistent_tbl does not exist!\nDid you mean \"temp.information_schema.tables\"?",
+   "name":"nonexistent_tbl",
+   "candidates":"temp.information_schema.tables",
+   "position":"14",
+   "type":"Table",
+   "error_subtype":"MISSING_ENTRY"
+}
+```
+
 ### Query Verification (for Development)
 
 The following `PRAGMA`s are mostly used for development and internal testing.
