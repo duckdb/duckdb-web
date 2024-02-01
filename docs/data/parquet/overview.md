@@ -21,7 +21,8 @@ SELECT * FROM read_parquet('test.parq');
 SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 -- read all files that match the glob pattern
 SELECT * FROM 'test/*.parquet';
--- read all files that match the glob pattern, and include a "filename" column that specifies which file each row came from
+-- read all files that match the glob pattern, and include a "filename" column
+-- that specifies which file each row came from
 SELECT * FROM read_parquet('test/*.parquet', filename = true);
 -- use a list of globs to read all Parquet files from 2 specific folders
 SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
@@ -35,7 +36,8 @@ SELECT * FROM parquet_schema('test.parquet');
 -- write the results of a query to a Parquet file using the default compression (Snappy)
 COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet');
 -- write the results from a query to a Parquet file with specific compression and row group size
-COPY (FROM generate_series(100000)) TO 'test.parquet' (FORMAT 'parquet', COMPRESSION 'zstd', ROW_GROUP_SIZE 100000);
+COPY (FROM generate_series(100_000)) TO 'test.parquet'
+    (FORMAT 'parquet', COMPRESSION 'zstd', ROW_GROUP_SIZE 100_000);
 
 -- export the table contents of the entire database as parquet
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
