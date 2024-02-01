@@ -36,8 +36,8 @@ pre.highlight > button,
     }
 }
 
-.code.dark pre.highlight > button,
-.code.dark .highlight button.copy{
+.dark pre.highlight > button,
+.dark .highlight button.copy{
     background-color: #151515;
     &:hover{
         background-color: #2b2b2b;
