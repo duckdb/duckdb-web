@@ -1,5 +1,6 @@
 # Get the top-3 busiest train stations in May
 library(duckdb)
+
 con <- dbConnect(duckdb())
 duckdb_register(con, "iris", iris)
 
