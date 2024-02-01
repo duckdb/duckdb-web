@@ -30,7 +30,7 @@ pre {
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    line-height: 1.4;
+    line-height: 1.2;
 }
 code.language-plaintext{
 	background-color: rgb(245, 245, 245);
@@ -49,6 +49,9 @@ code {
     margin: 0 3px;
 }
 
+body.documentation code{
+    font-feature-settings: "ss19";
+}
 pre code {
     display: block;
     -webkit-box-shadow: none;
