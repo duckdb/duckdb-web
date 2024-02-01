@@ -1,4 +1,7 @@
 -- Spatial extension for geospatial support
+INSTALL spatial;
+LOAD spatial;
+
 SELECT 
     ST_Point(pickup_latitude, pickup_longitude) AS pickup_point,
     ST_Point(dropoff_latitude, dropoff_longitude) AS dropoff_point,

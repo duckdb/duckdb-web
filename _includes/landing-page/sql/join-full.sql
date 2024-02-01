@@ -1,3 +1,8 @@
+CREATE TABLE stations AS
+    FROM 's3://duckdb-blobs/stations.parquet';
+CREATE TABLE tariffs AS
+    FROM 's3://duckdb-blobs/tariffs.parquet';
+
 -- Find the top-5 most expensive domestice train routes
 SELECT s1.name_short, s2.name_short, tariffs.price
 FROM tariffs
