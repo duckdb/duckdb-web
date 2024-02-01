@@ -1,4 +1,5 @@
-// Web Service Integration
+// Web Service Integration:
+// create endpoint to generate numbers
 var express = require('express');
 var duckdb = require('duckdb');
 var app = express();
@@ -13,7 +14,7 @@ app.get('/getnumbers', function (req, res) {
 
 var server = app.listen(8082, function () {
     console.log(
-        "Example live at http://localhost:8082/getnumbers",
+        "Go to: http://localhost:8082/getnumbers",
         host, port
     )
 })
