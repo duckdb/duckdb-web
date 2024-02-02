@@ -175,33 +175,33 @@
 	}
 	header .headerline .headercontent .landingmenu nav:not(.mobile){
 		display: block;
-		width: 75%;
-		background: #fff100;
 		position: fixed;
+		height: 100%;
+		width: 75%;
 		right: 0;
-		top: 53px;
-		margin-right: 0px;
-		padding-top: 15px;
-		padding-bottom: 15px;
-		pointer-events: none;
-		transition: all .5s;
+		top: 70px;
+		border-radius: 0px 0px 15px 15px;
+		border: 1px solid #393939;
+		border-top: 0;
+		background: rgba(9, 9, 9, 0.85);
+		backdrop-filter: blur(5px);
 		right: -100%;
-		height: calc(100vh - 53px);
-		> div{
-			margin-left: 20px;
-		}
+		pointer-events: none;
+		transition: all .3s;
 		&.slidein{
 			pointer-events: all;
 			right: 0%;
 		}
-	}
-	header .headerline .headercontent .landingmenu nav:not(.mobile){
 		div{
-			line-height: 40px;
+			line-height: 20px;
 		}
 		a{
-			color: black;
+			color: rgb(255, 255, 255);
+			line-height: 3;
 		}
+	}
+	header .headerline .headercontent .landingmenu nav > div{
+		margin-left: 20px;
 	}
 	header .headerline .headercontent .landingmenu nav .hasSub + ul{
 		position: relative;
@@ -213,6 +213,11 @@
 	body.landing .welcome .mainlinks ul, body.landing .benefits .mainlinks ul{
 		max-width: 80%;
 		display: block;
+	}
+	header .headerline .headercontent .landingmenu{
+		display: flex;
+		align-items: center;
+		position: relative;
 	}
 	body.landing .welcome h1{
 		font-size: 200%;
@@ -279,13 +284,13 @@
 		width: 75px;
 	}
 	main.inactive{
-		opacity: .4;
+		//opacity: .4;
 	}
 	body.documentation header .headerline .headercontent .landingmenu nav.mobile > div:last-of-type{
 		display: block;
 	}
 	body.documentation header .headerline .headercontent .landingmenu nav.mobile{
-		display: block;
+		display: flex;
 		div{
 			color: white;
 			font-size: 22px;
@@ -401,6 +406,11 @@
 	}
 	.newswrap .sidebar .latestnews{
 		display: none;
+	}
+	body.documentation .headlinebar{
+		position: relative;
+		width: 100%;
+		margin-left: 0;
 	}
 	body.documentation .headlinebar > div.version{
 		padding-right: 15px;

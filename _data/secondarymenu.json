@@ -48,10 +48,6 @@
         {
           "page": "GitHub",
           "url": "https://github.com/duckdb/duckdb"
-        },
-        {
-          "page": "Support",
-          "url": "https://duckdblabs.com/support/"
         }
       ]
     }
