@@ -70,7 +70,7 @@ $(document).ready(function(){
 	
 	
 	// Installation Selection
-	var userSelection = {version: ".latest", environment: ".python", pack: "", platform: ""};
+	var userSelection = {version: "", environment: "", pack: "", platform: ""};
 	var classList = "";
 	
 	var evaluation = function(){
@@ -130,10 +130,15 @@ $(document).ready(function(){
 	
 	if($('body.installation .yourselection').length != 0){
 		var environment = "."+getUrlParameter('environment');
-		
 		if (environment !== '.undefined'){
 			$('.yourselection ul.environment li.selected').removeClass('selected')
 			$('.yourselection ul.environment li[data-id="'+environment+'"]').addClass('selected')
+			evaluation();
+		}
+		var platform = "."+getUrlParameter('platform');
+		if (platform == '.undefined'){
+			$('.yourselection ul.platform li.selected').removeClass('selected')
+			$('.yourselection ul.platform li[data-id=".'+OSdatid+'"]').addClass('selected')
 			evaluation();
 		}
 	}
@@ -141,7 +146,9 @@ $(document).ready(function(){
 		evaluation();
 	});
 	if( $('body.installation').length ){
-		evaluation();
+		setTimeout(function() {
+			evaluation();
+		}, 100);
 	}
 	
 	if ($('.yourselection > .select').length) {

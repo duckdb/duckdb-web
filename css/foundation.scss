@@ -5,16 +5,14 @@
 
 @mixin button {
 	color: black;
-	height: 30px;
+	/*height: 30px;*/
 	display: inline-block;
 	background-color: black;
-	line-height: 30px;
-	padding-left: 8px;
-	padding-right: 25px;
+	/*line-height: 30px;*/
 	cursor: pointer;
 	font-size: 14px;
 	transition: background-color .3s;
-	span::after{
+	/*span::after{
 		content: "→";
 		font-family: "DuckDB-Symbol";
 		margin-left: 4px;
@@ -23,7 +21,7 @@
 	}
 	&:hover span::after{
 		transform: translateX(3px);
-	}
+	}*/
 }
 	
 
