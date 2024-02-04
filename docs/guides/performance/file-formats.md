@@ -10,7 +10,7 @@ When deciding on whether to query these files directly or to first load them to 
 
 ### Reasons for Querying Parquet Files
 
-**Availability of basic statistics:** Parquet files use a columnar storage format and contain basic statistics such as [zonemaps](schema#zonemaps). Thanks to these features, DuckDB can leverage optimizations such as projection and filter pushdown on Parquet files. Therefore, workloads that combine projectio, filtering, and aggregation tend to perform quite well when run on Parquet files.
+**Availability of basic statistics:** Parquet files use a columnar storage format and contain basic statistics such as [zonemaps](schema#zonemaps). Thanks to these features, DuckDB can leverage optimizations such as projection and filter pushdown on Parquet files. Therefore, workloads that combine projection, filtering, and aggregation tend to perform quite well when run on Parquet files.
 
 **Storage considerations:** Loading the data from Parquet files will require approximately the same amount of space for the DuckDB database file. Therefore, if the available disk space is constrained, it is worth running the queries directly on Parquet files.
 
