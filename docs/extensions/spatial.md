@@ -293,6 +293,9 @@ Available options:
 * `LAYER_CREATION_OPTIONS`: list of options to pass to the GDAL driver. See the GDAL docs for the driver you are using for a list of available options.
 * `SRS`: Set a spatial reference system as metadata to use for the export. This can be a WKT string, an EPSG code or a proj-string, basically anything you would normally be able to pass to GDAL/OGR. This will not perform any reprojection of the input geometry though, it just sets the metadata if the target driver supports it.
 
+## Limitations
+
+Raster types are not supported and there is currently no plan to add them to the extension.
 
 ## GitHub Repository
 
