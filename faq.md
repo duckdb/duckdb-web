@@ -18,12 +18,12 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 You can download the DuckDB Logo here: <br/>
 <br/>
 • Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked.png) <br/>
-• Horizontal logo: [svg](/images/logo-dl/DuckDB-Logo-horizontal.svg) / [png](/images/logo-dl/DuckDB-Logo-horizontal.png) <br/>
+• Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal.png) <br/>
 <br/>
 Inverted variants for dark backgrounds: <br/>
 <br/>
 • Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.png) <br/>
-• Horizontal logo: [svg](/images/logo-dl/DuckDB-Logo-horizontal-dark-mode.svg) / [png](/images/logo-dl/DuckDB-Logo-horizontal-dark-mode.png) <br/>
+• Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.png) <br/>
 <br/>
 The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
 
