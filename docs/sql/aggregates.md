@@ -150,3 +150,9 @@ as the first argument.
 | `percentile_disc(fraction) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_disc(sort_expression, fraction)` |
 | `percentile_disc(fractions) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_disc(sort_expression, fractions)` |
 
+## Miscellaneous Aggregate Functions
+
+| Function | Description | Alias |
+|:--|:---|:--|
+| `grouping()` | For queries with `GROUP BY` and either [`ROLLUP` or `GROUPING SETS`](query_syntax/grouping_sets#identifying-grouping-sets-with-grouping_id): Returns an integer identifying which of the argument expressions where used to group on to create the current supper-aggregate row. | `grouping_id()` |
+
