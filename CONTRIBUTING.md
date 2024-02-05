@@ -75,13 +75,33 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 ### SQL Style
 
-* Use SQL uppercase keywords, e.g., `SELECT ... FROM ...`.
-* Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/archive/0.8.1/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
 * Use **4 spaces** for indentation.
+* Use uppercase SQL keywords, e.g., `SELECT 42 AS x, 'hello world' AS y FROM ...;`.
+* Use lowercase function names, e.g., `SELECT cos(pi()), date_part('year', DATE '1992-09-20');`.
+* Use snake case (lowercase with underscore separators) for table and column names, e.g. `SELECT departure_time FROM train_services;`
+* Add spaces around commas and operators, e.g. `SELECT FROM tbl WHERE x > 42;`.
+* Add a semicolon to the end of each SQL statement, e.g., `SELECT 42 AS x;`.
+* Commas should be placed at the end of each line.
+* _Do not_ add clauses or expressions purely for aligning lines. For exampe, avoid adding `WHERE 1 = 1` and `WHERE true`.
+* _Do not_ include the DuckDB prompt. For example, avoid the following: `D SELECT 42;`.
+* Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
+* The returned tables should be formatted using the DuckDB CLI's duckbox mode (`.mode duckbox`) and marked with the `text` language tag, e.g.:
+
+    ````
+    ```text
+    ┌───────┐
+    │   x   │
+    │ int32 │
+    ├───────┤
+    │    42 │
+    └───────┘
+    ```
+    ````    
 
 ### Python Style
 
 * Use **4 spaces** for indentation.
+* Use double quotes (`"`) by default for strings.
 
 ### Links
 
