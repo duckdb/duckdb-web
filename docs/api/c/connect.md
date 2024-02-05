@@ -48,7 +48,7 @@ duckdb_close(&db);
 ---
 Creates a new database or opens an existing database file stored at the given path.
 If no path is given a new in-memory database is created instead.
-The instantiated database should be closed with 'duckdb_close'
+The instantiated database should be closed with 'duckdb_close'.
 
 #### Syntax
 
@@ -79,6 +79,7 @@ The result database object.
 
 ---
 Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the given path.
+The instantiated database should be closed with 'duckdb_close'.
 
 #### Syntax
 
@@ -118,9 +119,9 @@ Note that the error must be freed using `duckdb_free`.
 
 ---
 Closes the specified database and de-allocates all memory allocated for that database.
-This should be called after you are done with any database allocated through `duckdb_open`.
+This should be called after you are done with any database allocated through `duckdb_open` or `duckdb_open_ext`.
 Note that failing to call `duckdb_close` (in case of e.g., a program crash) will not cause data corruption.
-Still it is recommended to always correctly close a database object after you are done with it.
+Still, it is recommended to always correctly close a database object after you are done with it.
 
 #### Syntax
 
@@ -145,7 +146,7 @@ The database object to shut down.
 ---
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
-The instantiated connection should be closed using 'duckdb_disconnect'
+The instantiated connection should be closed using 'duckdb_disconnect'.
 
 #### Syntax
 
@@ -190,7 +191,7 @@ Interrupt running query
 ---
 * `connection`
 
-The connection to interruot
+The connection to interrupt
 
 <br>
 

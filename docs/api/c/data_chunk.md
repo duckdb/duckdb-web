@@ -52,6 +52,8 @@ The primary manner of interfacing with data chunks is by obtaining the internal 
 ---
 Creates an empty DataChunk with the specified set of types.
 
+Note that the result must be destroyed with `duckdb_destroy_data_chunk`.
+
 #### Syntax
 
 ---
@@ -452,7 +454,7 @@ The child vector
 ### `duckdb_list_vector_get_size`
 
 ---
-Returns the size of the child vector of the list
+Returns the size of the child vector of the list.
 
 #### Syntax
 

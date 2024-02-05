@@ -181,7 +181,7 @@ The result to destroy.
 ### `duckdb_column_name`
 
 ---
-Returns the column name of the specified column. The result should not need be freed; the column names will
+Returns the column name of the specified column. The result should not need to be freed; the column names will
 automatically be destroyed when the result is destroyed.
 
 Returns `NULL` if the column is out of range.
@@ -332,7 +332,7 @@ The number of columns present in the result object.
 ### `duckdb_row_count`
 
 ---
-Returns the number of rows present in a the result object.
+Returns the number of rows present in the result object.
 
 #### Syntax
 

@@ -18,7 +18,7 @@ The replacement scan API can be used to register a callback that is called when 
 ### `duckdb_add_replacement_scan`
 
 ---
-Add a replacement scan definition to the specified database
+Add a replacement scan definition to the specified database.
 
 #### Syntax
 
@@ -53,7 +53,7 @@ The delete callback to call on the extra data, if any
 ### `duckdb_replacement_scan_set_function_name`
 
 ---
-Sets the replacement function name to use. If this function is called in the replacement callback,
+Sets the replacement function name. If this function is called in the replacement callback,
 the replacement scan is performed. If it is not called, the replacement callback is not performed.
 
 #### Syntax
