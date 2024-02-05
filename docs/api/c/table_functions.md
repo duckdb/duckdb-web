@@ -222,7 +222,7 @@ The callback that will be called to destroy the bind data (if any)
 ### `duckdb_table_function_set_bind`
 
 ---
-Sets the bind function of the table function
+Sets the bind function of the table function.
 
 #### Syntax
 
@@ -249,7 +249,7 @@ The bind function
 ### `duckdb_table_function_set_init`
 
 ---
-Sets the init function of the table function
+Sets the init function of the table function.
 
 #### Syntax
 
@@ -276,7 +276,7 @@ The init function
 ### `duckdb_table_function_set_local_init`
 
 ---
-Sets the thread-local init function of the table function
+Sets the thread-local init function of the table function.
 
 #### Syntax
 
@@ -303,7 +303,7 @@ The init function
 ### `duckdb_table_function_set_function`
 
 ---
-Sets the main function of the table function
+Sets the main function of the table function.
 
 #### Syntax
 
@@ -395,7 +395,7 @@ Whether or not the registration was successful.
 ### `duckdb_bind_get_extra_info`
 
 ---
-Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`
+Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
 
@@ -628,7 +628,7 @@ The error message
 ### `duckdb_init_get_extra_info`
 
 ---
-Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`
+Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
 
@@ -828,7 +828,7 @@ The error message
 ### `duckdb_function_get_extra_info`
 
 ---
-Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`
+Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
 

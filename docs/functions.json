@@ -163,7 +163,7 @@
       "arg",
       "val"
     ],
-    "description": "Finds the row with the maximum val. Calculates the arg expression at that row.",
+    "description": "Finds the row with the maximum val. Calculates the non-NULL arg expression at that row.",
     "example": "arg_max(A,B)",
     "type": "aggregate_function_set",
     "aliases": [
@@ -174,18 +174,42 @@
     "result": null
   },
   {
+    "name": "arg_max_null",
+    "parameters": [
+      "arg",
+      "val"
+    ],
+    "description": "Finds the row with the maximum val. Calculates the arg expression at that row.",
+    "example": "arg_max_null(A,B)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
     "name": "arg_min",
     "parameters": [
       "arg",
       "val"
     ],
-    "description": "Finds the row with the minimum val. Calculates the arg expression at that row.",
+    "description": "Finds the row with the minimum val. Calculates the non-NULL arg expression at that row.",
     "example": "arg_min(A,B)",
     "type": "aggregate_function_set",
     "aliases": [
       "argmin",
       "min_by"
     ],
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "arg_min_null",
+    "parameters": [
+      "arg",
+      "val"
+    ],
+    "description": "Finds the row with the minimum val. Calculates the arg expression at that row.",
+    "example": "arg_min_null(A,B)",
+    "type": "aggregate_function_set",
     "category": "distributive",
     "result": null
   },
@@ -556,6 +580,17 @@
     "example": "(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / (COUNT(*) - 1)",
     "type": "aggregate_function",
     "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "create_sort_key",
+    "parameters": [
+      "parameters..."
+    ],
+    "description": "Constructs a binary-comparable sort key based on a set of input parameters and sort qualifiers",
+    "example": "create_sort_key('A', 'DESC')",
+    "type": "scalar_function",
+    "category": "blob",
     "result": null
   },
   {
@@ -3018,7 +3053,7 @@
     "struct": "CurrentTransactionIdFun",
     "type": "scalar_function",
     "category": "generic",
-    "result": 56
+    "result": 58
   },
   {
     "name": "typeof",
@@ -3164,7 +3199,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.3-dev3077"
+    "result": "v0.9.3-dev3719"
   },
   {
     "name": "week",

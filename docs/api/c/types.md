@@ -78,29 +78,6 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">bool</span> <a href="#duckdb_result_is_streaming"><span class="nf">duckdb_result_is_streaming</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_result_chunk_count"><span class="nf">duckdb_result_chunk_count</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 <span class="nv">duckdb_result_type</span> <a href="#duckdb_result_return_type"><span class="nf">duckdb_result_return_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
-<span class="kt">bool</span> <a href="#duckdb_value_boolean"><span class="nf">duckdb_value_boolean</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">int8_t</span> <a href="#duckdb_value_int8"><span class="nf">duckdb_value_int8</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">int16_t</span> <a href="#duckdb_value_int16"><span class="nf">duckdb_value_int16</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">int32_t</span> <a href="#duckdb_value_int32"><span class="nf">duckdb_value_int32</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">int64_t</span> <a href="#duckdb_value_int64"><span class="nf">duckdb_value_int64</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_hugeint</span> <a href="#duckdb_value_hugeint"><span class="nf">duckdb_value_hugeint</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="nv">duckdb_uhugeint</span> <a href="#duckdb_value_uhugeint"><span class="nf">duckdb_value_uhugeint</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="nv">duckdb_decimal</span> <a href="#duckdb_value_decimal"><span class="nf">duckdb_value_decimal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">uint8_t</span> <a href="#duckdb_value_uint8"><span class="nf">duckdb_value_uint8</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">uint16_t</span> <a href="#duckdb_value_uint16"><span class="nf">duckdb_value_uint16</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">uint32_t</span> <a href="#duckdb_value_uint32"><span class="nf">duckdb_value_uint32</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">uint64_t</span> <a href="#duckdb_value_uint64"><span class="nf">duckdb_value_uint64</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">float</span> <a href="#duckdb_value_float"><span class="nf">duckdb_value_float</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">double</span> <a href="#duckdb_value_double"><span class="nf">duckdb_value_double</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_date</span> <a href="#duckdb_value_date"><span class="nf">duckdb_value_date</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_time</span> <a href="#duckdb_value_time"><span class="nf">duckdb_value_time</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_timestamp</span> <a href="#duckdb_value_timestamp"><span class="nf">duckdb_value_timestamp</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_interval</span> <a href="#duckdb_value_interval"><span class="nf">duckdb_value_interval</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">char</span> *<a href="#duckdb_value_varchar"><span class="nf">duckdb_value_varchar</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">char</span> *<a href="#duckdb_value_varchar_internal"><span class="nf">duckdb_value_varchar_internal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="nv">duckdb_string</span> <a href="#duckdb_value_string_internal"><span class="nf">duckdb_value_string_internal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_blob</span> <a href="#duckdb_value_blob"><span class="nf">duckdb_value_blob</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">bool</span> <a href="#duckdb_value_is_null"><span class="nf">duckdb_value_is_null</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 </code></pre></div></div>
 
 ### Date/Time/Timestamp Helpers
@@ -121,12 +98,12 @@ For more information about data chunks, see the [documentation on data chunks](d
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_hugeint_to_double"><span class="nf">duckdb_hugeint_to_double</span></a>(<span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
 <span class="kt">duckdb_hugeint</span> <a href="#duckdb_double_to_hugeint"><span class="nf">duckdb_double_to_hugeint</span></a>(<span class="kt">double</span> <span class="nv">val</span>);
-<span class="nv">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
 </code></pre></div></div>
 
 ### Decimal Helpers
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
+<span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
 </code></pre></div></div>
 
 ### Logical Type Interface
@@ -272,577 +249,6 @@ The result object
 * `returns`
 
 The return_type
-
-<br>
-
-
-### `duckdb_value_boolean`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_value_boolean</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The boolean value at the specified location, or false if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_int8`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int8_t</span> <span class="nv">duckdb_value_int8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The int8_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_int16`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int16_t</span> <span class="nv">duckdb_value_int16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The int16_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_int32`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int32_t</span> <span class="nv">duckdb_value_int32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The int32_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_int64`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="nv">duckdb_value_int64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The int64_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_hugeint`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="nv">duckdb_value_hugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_hugeint value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_uhugeint`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_uhugeint</span> <span class="nv">duckdb_value_uhugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_uhugeint value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_decimal`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_decimal</span> <span class="nv">duckdb_value_decimal</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_decimal value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_uint8`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_value_uint8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The uint8_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_uint16`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint16_t</span> <span class="nv">duckdb_value_uint16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The uint16_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_uint32`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nv">duckdb_value_uint32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The uint32_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_uint64`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> <span class="nv">duckdb_value_uint64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The uint64_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_float`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="nv">duckdb_value_float</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The float value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_double`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_value_double</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The double value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_date`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="nv">duckdb_value_date</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_date value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_time`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="nv">duckdb_value_time</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_time value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_timestamp`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="nv">duckdb_value_timestamp</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_timestamp value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_interval`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_interval</span> <span class="nv">duckdb_value_interval</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_interval value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_varchar`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_value_varchar</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `DEPRECATED`
-
-use duckdb_value_string instead. This function does not work correctly if the string contains null bytes.
-* `returns`
-
-The text value at the specified location as a null-terminated string, or nullptr if the value cannot be
-converted. The result must be freed with `duckdb_free`.
-
-<br>
-
-
-### `duckdb_value_varchar_internal`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_value_varchar_internal</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `DEPRECATED`
-
-use duckdb_value_string_internal instead. This function does not work correctly if the string contains
-null bytes.
-* `returns`
-
-The char* value at the specified location. ONLY works on VARCHAR columns and does not auto-cast.
-If the column is NOT a VARCHAR column this function will return NULL.
-
-The result must NOT be freed.
-
-<br>
-
-
-### `duckdb_value_string_internal`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_string</span> <span class="nv">duckdb_value_string_internal</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `DEPRECATED`
-
-use duckdb_value_string_internal instead. This function does not work correctly if the string contains
-null bytes.
-* `returns`
-
-The char* value at the specified location. ONLY works on VARCHAR columns and does not auto-cast.
-If the column is NOT a VARCHAR column this function will return NULL.
-
-The result must NOT be freed.
-
-<br>
-
-
-### `duckdb_value_blob`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_blob</span> <span class="nv">duckdb_value_blob</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_blob value at the specified location. Returns a blob with blob.data set to nullptr if the
-value cannot be converted. The resulting "blob.data" must be freed with `duckdb_free.`
-
-<br>
-
-
-### `duckdb_value_is_null`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_value_is_null</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-Returns true if the value at the specified index is NULL, and false otherwise.
 
 <br>
 
@@ -1258,8 +664,8 @@ The logical type.
 ### `duckdb_logical_type_get_alias`
 
 ---
-Returns the alias of a duckdb_logical_type, if one is set, else `NULL`
-You must free the result.
+Returns the alias of a duckdb_logical_type, if one is set, else `NULL`.
+The result must be destroyed with `duckdb_free`.
 
 #### Syntax
 
@@ -1340,7 +746,7 @@ The logical type.
 ### `duckdb_create_union_type`
 
 ---
-Creates a UNION type from the passed types array
+Creates a UNION type from the passed types array.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
@@ -1441,7 +847,7 @@ The logical type.
 ### `duckdb_create_decimal_type`
 
 ---
-Creates a `duckdb_logical_type` of type decimal with the specified width and scale
+Creates a `duckdb_logical_type` of type decimal with the specified width and scale.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
@@ -1472,7 +878,7 @@ The logical type.
 ### `duckdb_get_type_id`
 
 ---
-Retrieves the type class of a `duckdb_logical_type`.
+Retrieves the enum type class of a `duckdb_logical_type`.
 
 #### Syntax
 
@@ -1602,7 +1008,7 @@ The internal type of the enum type
 ### `duckdb_enum_dictionary_size`
 
 ---
-Retrieves the dictionary size of the enum type
+Retrieves the dictionary size of the enum type.
 
 #### Syntax
 
@@ -1630,7 +1036,7 @@ The dictionary size of the enum type
 ---
 Retrieves the dictionary value at the specified position from the enum.
 
-The result must be freed with `duckdb_free`
+The result must be freed with `duckdb_free`.
 
 #### Syntax
 
@@ -1662,7 +1068,7 @@ The string value of the enum type. Must be freed with `duckdb_free`.
 ---
 Retrieves the child type of the given list type.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
@@ -1690,7 +1096,7 @@ The child type of the list type. Must be destroyed with `duckdb_destroy_logical_
 ---
 Retrieves the key type of the given map type.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
@@ -1718,7 +1124,7 @@ The key type of the map type. Must be destroyed with `duckdb_destroy_logical_typ
 ---
 Retrieves the value type of the given map type.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
@@ -1772,7 +1178,7 @@ The number of children of a struct type.
 ---
 Retrieves the name of the struct child.
 
-The result must be freed with `duckdb_free`
+The result must be freed with `duckdb_free`.
 
 #### Syntax
 
@@ -1804,7 +1210,7 @@ The name of the struct type. Must be freed with `duckdb_free`.
 ---
 Retrieves the child type of the given struct type at the specified index.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
@@ -1862,7 +1268,7 @@ The number of members of a union type.
 ---
 Retrieves the name of the union member.
 
-The result must be freed with `duckdb_free`
+The result must be freed with `duckdb_free`.
 
 #### Syntax
 
@@ -1894,7 +1300,7 @@ The name of the union member. Must be freed with `duckdb_free`.
 ---
 Retrieves the child type of the given union member at the specified index.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 

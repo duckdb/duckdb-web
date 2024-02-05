@@ -96,15 +96,6 @@ title: Python Client API
 </dl>
 
 <dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.CastException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">CastException</span></span><a class="headerlink" href="#duckdb.CastException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.DataError" title="duckdb.duckdb.DataError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
 <dt class="sig sig-object py" id="duckdb.CatalogException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">CatalogException</span></span><a class="headerlink" href="#duckdb.CatalogException" title="Link to this definition">&#182;</a>
 </dt>
@@ -163,7 +154,7 @@ title: Python Client API
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">DataError</span></span><a class="headerlink" href="#duckdb.DataError" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
 </dd>
 </dl>
 
@@ -2007,7 +1998,7 @@ value: The value to use if the condition is met.</p>
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">FatalException</span></span><a class="headerlink" href="#duckdb.FatalException" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
 </dd>
 </dl>
 
@@ -2097,7 +2088,7 @@ value: The value to use if the condition is met.</p>
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">IntegrityError</span></span><a class="headerlink" href="#duckdb.IntegrityError" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
 </dd>
 </dl>
 
@@ -2106,7 +2097,7 @@ value: The value to use if the condition is met.</p>
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">InternalError</span></span><a class="headerlink" href="#duckdb.InternalError" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
 </dd>
 </dl>
 
@@ -2124,7 +2115,7 @@ value: The value to use if the condition is met.</p>
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">InterruptException</span></span><a class="headerlink" href="#duckdb.InterruptException" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
 </dd>
 </dl>
 
@@ -2178,7 +2169,7 @@ value: The value to use if the condition is met.</p>
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">NotSupportedError</span></span><a class="headerlink" href="#duckdb.NotSupportedError" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
 </dd>
 </dl>
 
@@ -2196,7 +2187,7 @@ value: The value to use if the condition is met.</p>
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">OperationalError</span></span><a class="headerlink" href="#duckdb.OperationalError" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
 </dd>
 </dl>
 
@@ -2232,7 +2223,7 @@ value: The value to use if the condition is met.</p>
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">PermissionException</span></span><a class="headerlink" href="#duckdb.PermissionException" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
 </dd>
 </dl>
 
@@ -2241,7 +2232,7 @@ value: The value to use if the condition is met.</p>
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ProgrammingError</span></span><a class="headerlink" href="#duckdb.ProgrammingError" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
 </dd>
 </dl>
 
@@ -2290,7 +2281,7 @@ value: The value to use if the condition is met.</p>
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">SequenceException</span></span><a class="headerlink" href="#duckdb.SequenceException" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
 </dd>
 </dl>
 
@@ -2309,15 +2300,6 @@ value: The value to use if the condition is met.</p>
 </dt>
 <dd>
 <p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.StandardException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">StandardException</span></span><a class="headerlink" href="#duckdb.StandardException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
 </dd>
 </dl>
 
@@ -2484,15 +2466,6 @@ value: The value to use if the condition is met.</p>
 </dt>
 <dd>
 <p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.ValueOutOfRangeException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ValueOutOfRangeException</span></span><a class="headerlink" href="#duckdb.ValueOutOfRangeException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.DataError" title="duckdb.duckdb.DataError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataError</span></code></a></p>
 </dd>
 </dl>
 

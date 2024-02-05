@@ -50,7 +50,11 @@ title: C API - Complete API
 <span class="kt">bool</span> <a href="#duckdb_result_is_streaming"><span class="nf">duckdb_result_is_streaming</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_result_chunk_count"><span class="nf">duckdb_result_chunk_count</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 <span class="nv">duckdb_result_type</span> <a href="#duckdb_result_return_type"><span class="nf">duckdb_result_return_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
-<span class="kt">bool</span> <a href="#duckdb_value_boolean"><span class="nf">duckdb_value_boolean</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+</code></pre></div></div>
+
+### `Safe fetch functions`
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <a href="#duckdb_value_boolean"><span class="nf">duckdb_value_boolean</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">int8_t</span> <a href="#duckdb_value_int8"><span class="nf">duckdb_value_int8</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">int16_t</span> <a href="#duckdb_value_int16"><span class="nf">duckdb_value_int16</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">int32_t</span> <a href="#duckdb_value_int32"><span class="nf">duckdb_value_int32</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
@@ -69,6 +73,7 @@ title: C API - Complete API
 <span class="kt">duckdb_timestamp</span> <a href="#duckdb_value_timestamp"><span class="nf">duckdb_value_timestamp</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">duckdb_interval</span> <a href="#duckdb_value_interval"><span class="nf">duckdb_value_interval</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">char</span> *<a href="#duckdb_value_varchar"><span class="nf">duckdb_value_varchar</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="nv">duckdb_string</span> <a href="#duckdb_value_string"><span class="nf">duckdb_value_string</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">char</span> *<a href="#duckdb_value_varchar_internal"><span class="nf">duckdb_value_varchar_internal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="nv">duckdb_string</span> <a href="#duckdb_value_string_internal"><span class="nf">duckdb_value_string_internal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">duckdb_blob</span> <a href="#duckdb_value_blob"><span class="nf">duckdb_value_blob</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
@@ -101,7 +106,6 @@ title: C API - Complete API
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_hugeint_to_double"><span class="nf">duckdb_hugeint_to_double</span></a>(<span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
 <span class="kt">duckdb_hugeint</span> <a href="#duckdb_double_to_hugeint"><span class="nf">duckdb_double_to_hugeint</span></a>(<span class="kt">double</span> <span class="nv">val</span>);
-<span class="nv">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
 </code></pre></div></div>
 
 ### `Unsigned Hugeint Helpers`
@@ -112,7 +116,8 @@ title: C API - Complete API
 
 ### `Decimal Helpers`
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
+<span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
 </code></pre></div></div>
 
 ### `Prepared Statements`
@@ -125,7 +130,11 @@ title: C API - Complete API
 <span class="nv">duckdb_type</span> <a href="#duckdb_param_type"><span class="nf">duckdb_param_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_clear_bindings"><span class="nf">duckdb_clear_bindings</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
 <span class="nv">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_value"><span class="nf">duckdb_bind_value</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_value</span> <span class="nv">val</span>);
+</code></pre></div></div>
+
+### `Bind Values to Prepared Statements`
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_bind_value"><span class="nf">duckdb_bind_value</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_parameter_index"><span class="nf">duckdb_bind_parameter_index</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> *<span class="nv">param_idx_out</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_boolean"><span class="nf">duckdb_bind_boolean</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">bool</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_int8"><span class="nf">duckdb_bind_int8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int8_t</span> <span class="nv">val</span>);
@@ -149,11 +158,12 @@ title: C API - Complete API
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar_length"><span class="nf">duckdb_bind_varchar_length</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_blob"><span class="nf">duckdb_bind_blob</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_null"><span class="nf">duckdb_bind_null</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared"><span class="nf">duckdb_execute_prepared</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
+</code></pre></div></div>
+
+### `Execute Prepared Statements`
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared"><span class="nf">duckdb_execute_prepared</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_streaming"><span class="nf">duckdb_execute_prepared_streaming</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_arrow"><span class="nf">duckdb_execute_prepared_arrow</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_arrow</span> *<span class="nv">out_result</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_arrow_scan"><span class="nf">duckdb_arrow_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_arrow_array_scan"><span class="nf">duckdb_arrow_array_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>, <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>, <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream</span>);
 </code></pre></div></div>
 
 ### `Extract Statements`
@@ -309,6 +319,8 @@ title: C API - Complete API
 ### `Appender`
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_appender_create"><span class="nf">duckdb_appender_create</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">duckdb_appender</span> *<span class="nv">out_appender</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_appender_column_count"><span class="nf">duckdb_appender_column_count</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_appender_column_type"><span class="nf">duckdb_appender_column_type</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_appender_error"><span class="nf">duckdb_appender_error</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_flush"><span class="nf">duckdb_appender_flush</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_close"><span class="nf">duckdb_appender_close</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
@@ -351,6 +363,10 @@ title: C API - Complete API
 <span class="kt">idx_t</span> <a href="#duckdb_arrow_rows_changed"><span class="nf">duckdb_arrow_rows_changed</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_query_arrow_error"><span class="nf">duckdb_query_arrow_error</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>);
 <span class="kt">void</span> <a href="#duckdb_destroy_arrow"><span class="nf">duckdb_destroy_arrow</span></a>(<span class="kt">duckdb_arrow</span> *<span class="nv">result</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_arrow_stream"><span class="nf">duckdb_destroy_arrow_stream</span></a>(<span class="nv">duckdb_arrow_stream</span> *<span class="nv">stream_p</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_arrow"><span class="nf">duckdb_execute_prepared_arrow</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_arrow</span> *<span class="nv">out_result</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_arrow_scan"><span class="nf">duckdb_arrow_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_arrow_array_scan"><span class="nf">duckdb_arrow_array_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>, <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>, <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream</span>);
 </code></pre></div></div>
 
 ### `Threading Information`
@@ -375,7 +391,7 @@ title: C API - Complete API
 ---
 Creates a new database or opens an existing database file stored at the given path.
 If no path is given a new in-memory database is created instead.
-The instantiated database should be closed with 'duckdb_close'
+The instantiated database should be closed with 'duckdb_close'.
 
 #### Syntax
 
@@ -406,6 +422,7 @@ The result database object.
 
 ---
 Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the given path.
+The instantiated database should be closed with 'duckdb_close'.
 
 #### Syntax
 
@@ -445,9 +462,9 @@ Note that the error must be freed using `duckdb_free`.
 
 ---
 Closes the specified database and de-allocates all memory allocated for that database.
-This should be called after you are done with any database allocated through `duckdb_open`.
+This should be called after you are done with any database allocated through `duckdb_open` or `duckdb_open_ext`.
 Note that failing to call `duckdb_close` (in case of e.g., a program crash) will not cause data corruption.
-Still it is recommended to always correctly close a database object after you are done with it.
+Still, it is recommended to always correctly close a database object after you are done with it.
 
 #### Syntax
 
@@ -472,7 +489,7 @@ The database object to shut down.
 ---
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
-The instantiated connection should be closed using 'duckdb_disconnect'
+The instantiated connection should be closed using 'duckdb_disconnect'.
 
 #### Syntax
 
@@ -517,7 +534,7 @@ Interrupt running query
 ---
 * `connection`
 
-The connection to interruot
+The connection to interrupt
 
 <br>
 
@@ -593,6 +610,7 @@ Usually used for developing C extensions that must return this for a compatibili
 ---
 Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
 through `duckdb_open_ext`.
+The duckdb_config must be destroyed using 'duckdb_destroy_config'
 
 This will always succeed unless there is a malloc failure.
 
@@ -721,7 +739,7 @@ The value to set the configuration flag to.
 ### `duckdb_destroy_config`
 
 ---
-Destroys the specified configuration option and de-allocates all memory allocated for the object.
+Destroys the specified configuration object and de-allocates all memory allocated for the object.
 
 #### Syntax
 
@@ -806,7 +824,7 @@ The result to destroy.
 ### `duckdb_column_name`
 
 ---
-Returns the column name of the specified column. The result should not need be freed; the column names will
+Returns the column name of the specified column. The result should not need to be freed; the column names will
 automatically be destroyed when the result is destroyed.
 
 Returns `NULL` if the column is out of range.
@@ -957,7 +975,7 @@ The number of columns present in the result object.
 ### `duckdb_row_count`
 
 ---
-Returns the number of rows present in a the result object.
+Returns the number of rows present in the result object.
 
 #### Syntax
 
@@ -1699,6 +1717,31 @@ converted. The result must be freed with `duckdb_free`.
 <br>
 
 
+### `duckdb_value_string`
+
+---
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_string</span> <span class="nv">duckdb_value_string</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">row
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `returns`
+
+The string value at the specified location.
+* The resulting field "string.data" must be freed with `duckdb_free.`
+
+<br>
+
+
 ### `duckdb_value_varchar_internal`
 
 ---
@@ -1781,7 +1824,7 @@ The result must NOT be freed.
 * `returns`
 
 The duckdb_blob value at the specified location. Returns a blob with blob.data set to nullptr if the
-value cannot be converted. The resulting "blob.data" must be freed with `duckdb_free.`
+value cannot be converted. The resulting field "blob.data" must be freed with `duckdb_free.`
 
 <br>
 
@@ -1840,7 +1883,8 @@ A pointer to the allocated memory region.
 ### `duckdb_free`
 
 ---
-Free a value returned from `duckdb_malloc`, `duckdb_value_varchar` or `duckdb_value_blob`.
+Free a value returned from `duckdb_malloc`, `duckdb_value_varchar`, `duckdb_value_blob`, or
+`duckdb_value_string`.
 
 #### Syntax
 
@@ -2223,36 +2267,6 @@ The converted `duckdb_hugeint` element.
 <br>
 
 
-### `duckdb_double_to_decimal`
-
----
-Converts a double value to a duckdb_decimal object.
-
-If the conversion fails because the double value is too big, or the width/scale are invalid the result will be 0.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_decimal</span> <span class="nv">duckdb_double_to_decimal</span>(<span class="nv">
-</span>  <span class="kt">double</span> <span class="nv">val</span>,<span class="nv">
-</span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
-</span>  <span class="kt">uint8_t</span> <span class="nv">scale
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `val`
-
-The double value.
-* `returns`
-
-The converted `duckdb_decimal` element.
-
-<br>
-
-
 ### `duckdb_uhugeint_to_double`
 
 ---
@@ -2303,6 +2317,36 @@ The double value.
 * `returns`
 
 The converted `duckdb_uhugeint` element.
+
+<br>
+
+
+### `duckdb_double_to_decimal`
+
+---
+Converts a double value to a duckdb_decimal object.
+
+If the conversion fails because the double value is too big, or the width/scale are invalid the result will be 0.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_decimal</span> <span class="nv">duckdb_double_to_decimal</span>(<span class="nv">
+</span>  <span class="kt">double</span> <span class="nv">val</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">scale
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `val`
+
+The double value.
+* `returns`
+
+The converted `duckdb_decimal` element.
 
 <br>
 
@@ -2966,6 +3010,8 @@ Executes the prepared statement with the given bound parameters, and returns a m
 This method can be called multiple times for each prepared statement, and the parameters can be modified
 between calls to this function.
 
+Note that the result must be freed with `duckdb_destroy_result`.
+
 #### Syntax
 
 ---
@@ -3000,6 +3046,8 @@ To determine if the resulting query was in fact streamed, use `duckdb_result_is_
 This method can be called multiple times for each prepared statement, and the parameters can be modified
 between calls to this function.
 
+Note that the result must be freed with `duckdb_destroy_result`.
+
 #### Syntax
 
 ---
@@ -3025,118 +3073,13 @@ The query result.
 <br>
 
 
-### `duckdb_execute_prepared_arrow`
-
----
-Executes the prepared statement with the given bound parameters, and returns an arrow query result.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared_arrow</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> *<span class="nv">out_result
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `prepared_statement`
-
-The prepared statement to execute.
-* `out_result`
-
-The query result.
-* `returns`
-
-`DuckDBSuccess` on success or `DuckDBError` on failure.
-
-<br>
-
-
-### `duckdb_arrow_scan`
-
----
-Scans the Arrow stream and creates a view with the given name.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_arrow_scan</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
-</span>  <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `connection`
-
-The connection on which to execute the scan.
-* `table_name`
-
-Name of the temporary view to create.
-* `arrow`
-
-Arrow stream wrapper.
-* `returns`
-
-`DuckDBSuccess` on success or `DuckDBError` on failure.
-
-<br>
-
-
-### `duckdb_arrow_array_scan`
-
----
-Scans the Arrow array and creates a view with the given name.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_arrow_array_scan</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>,<span class="nv">
-</span>  <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `connection`
-
-The connection on which to execute the scan.
-* `table_name`
-
-Name of the temporary view to create.
-* `arrow_schema`
-
-Arrow schema wrapper.
-* `arrow_array`
-
-Arrow array wrapper.
-* `out_stream`
-
-Output array stream that wraps around the passed schema, for releasing/deleting once done.
-* `returns`
-
-`DuckDBSuccess` on success or `DuckDBError` on failure.
-
-<br>
-
-
 ### `duckdb_extract_statements`
 
 ---
 Extract all statements from a query.
 Note that after calling `duckdb_extract_statements`, the extracted statements should always be destroyed using
 `duckdb_destroy_extracted`, even if no statements were extracted.
+
 If the extract fails, `duckdb_extract_statements_error` can be called to obtain the reason why the extract failed.
 
 #### Syntax
@@ -3174,6 +3117,7 @@ The number of extracted statements or 0 on failure.
 Prepare an extracted statement.
 Note that after calling `duckdb_prepare_extracted_statement`, the prepared statement should always be destroyed using
 `duckdb_destroy_prepare`, even if the prepare fails.
+
 If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason why the prepare failed.
 
 #### Syntax
@@ -3404,7 +3348,7 @@ The error message can be obtained by calling duckdb_pending_error on the pending
 ---
 * `pending_result`
 
-The pending result to execute a task within..
+The pending result to execute a task within.
 * `returns`
 
 The state of the pending result after the execution.
@@ -3419,6 +3363,8 @@ Fully execute a pending query result, returning the final query result.
 
 If duckdb_pending_execute_task has been called until DUCKDB_PENDING_RESULT_READY was returned, this will return fast.
 Otherwise, all remaining tasks must be executed first.
+
+Note that the result must be freed with `duckdb_destroy_result`.
 
 #### Syntax
 
@@ -3726,8 +3672,8 @@ The logical type.
 ### `duckdb_logical_type_get_alias`
 
 ---
-Returns the alias of a duckdb_logical_type, if one is set, else `NULL`
-You must free the result.
+Returns the alias of a duckdb_logical_type, if one is set, else `NULL`.
+The result must be destroyed with `duckdb_free`.
 
 #### Syntax
 
@@ -3808,7 +3754,7 @@ The logical type.
 ### `duckdb_create_union_type`
 
 ---
-Creates a UNION type from the passed types array
+Creates a UNION type from the passed types array.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
@@ -3909,7 +3855,7 @@ The logical type.
 ### `duckdb_create_decimal_type`
 
 ---
-Creates a `duckdb_logical_type` of type decimal with the specified width and scale
+Creates a `duckdb_logical_type` of type decimal with the specified width and scale.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
@@ -3940,7 +3886,7 @@ The logical type.
 ### `duckdb_get_type_id`
 
 ---
-Retrieves the type class of a `duckdb_logical_type`.
+Retrieves the enum type class of a `duckdb_logical_type`.
 
 #### Syntax
 
@@ -4070,7 +4016,7 @@ The internal type of the enum type
 ### `duckdb_enum_dictionary_size`
 
 ---
-Retrieves the dictionary size of the enum type
+Retrieves the dictionary size of the enum type.
 
 #### Syntax
 
@@ -4098,7 +4044,7 @@ The dictionary size of the enum type
 ---
 Retrieves the dictionary value at the specified position from the enum.
 
-The result must be freed with `duckdb_free`
+The result must be freed with `duckdb_free`.
 
 #### Syntax
 
@@ -4130,7 +4076,7 @@ The string value of the enum type. Must be freed with `duckdb_free`.
 ---
 Retrieves the child type of the given list type.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
@@ -4158,7 +4104,7 @@ The child type of the list type. Must be destroyed with `duckdb_destroy_logical_
 ---
 Retrieves the key type of the given map type.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
@@ -4186,7 +4132,7 @@ The key type of the map type. Must be destroyed with `duckdb_destroy_logical_typ
 ---
 Retrieves the value type of the given map type.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
@@ -4240,7 +4186,7 @@ The number of children of a struct type.
 ---
 Retrieves the name of the struct child.
 
-The result must be freed with `duckdb_free`
+The result must be freed with `duckdb_free`.
 
 #### Syntax
 
@@ -4272,7 +4218,7 @@ The name of the struct type. Must be freed with `duckdb_free`.
 ---
 Retrieves the child type of the given struct type at the specified index.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
@@ -4330,7 +4276,7 @@ The number of members of a union type.
 ---
 Retrieves the name of the union member.
 
-The result must be freed with `duckdb_free`
+The result must be freed with `duckdb_free`.
 
 #### Syntax
 
@@ -4362,7 +4308,7 @@ The name of the union member. Must be freed with `duckdb_free`.
 ---
 Retrieves the child type of the given union member at the specified index.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
@@ -4416,6 +4362,8 @@ The logical type to destroy.
 
 ---
 Creates an empty DataChunk with the specified set of types.
+
+Note that the result must be destroyed with `duckdb_destroy_data_chunk`.
 
 #### Syntax
 
@@ -4817,7 +4765,7 @@ The child vector
 ### `duckdb_list_vector_get_size`
 
 ---
-Returns the size of the child vector of the list
+Returns the size of the child vector of the list.
 
 #### Syntax
 
@@ -5221,7 +5169,7 @@ The callback that will be called to destroy the bind data (if any)
 ### `duckdb_table_function_set_bind`
 
 ---
-Sets the bind function of the table function
+Sets the bind function of the table function.
 
 #### Syntax
 
@@ -5248,7 +5196,7 @@ The bind function
 ### `duckdb_table_function_set_init`
 
 ---
-Sets the init function of the table function
+Sets the init function of the table function.
 
 #### Syntax
 
@@ -5275,7 +5223,7 @@ The init function
 ### `duckdb_table_function_set_local_init`
 
 ---
-Sets the thread-local init function of the table function
+Sets the thread-local init function of the table function.
 
 #### Syntax
 
@@ -5302,7 +5250,7 @@ The init function
 ### `duckdb_table_function_set_function`
 
 ---
-Sets the main function of the table function
+Sets the main function of the table function.
 
 #### Syntax
 
@@ -5394,7 +5342,7 @@ Whether or not the registration was successful.
 ### `duckdb_bind_get_extra_info`
 
 ---
-Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`
+Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
 
@@ -5627,7 +5575,7 @@ The error message
 ### `duckdb_init_get_extra_info`
 
 ---
-Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`
+Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
 
@@ -5827,7 +5775,7 @@ The error message
 ### `duckdb_function_get_extra_info`
 
 ---
-Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`
+Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
 
@@ -5961,7 +5909,7 @@ The error message
 ### `duckdb_add_replacement_scan`
 
 ---
-Add a replacement scan definition to the specified database
+Add a replacement scan definition to the specified database.
 
 #### Syntax
 
@@ -5996,7 +5944,7 @@ The delete callback to call on the extra data, if any
 ### `duckdb_replacement_scan_set_function_name`
 
 ---
-Sets the replacement function name to use. If this function is called in the replacement callback,
+Sets the replacement function name. If this function is called in the replacement callback,
 the replacement scan is performed. If it is not called, the replacement callback is not performed.
 
 #### Syntax
@@ -6080,6 +6028,8 @@ The error message
 ---
 Creates an appender object.
 
+Note that the object must be destroyed with `duckdb_appender_destroy`.
+
 #### Syntax
 
 ---
@@ -6109,6 +6059,60 @@ The resulting appender object.
 * `returns`
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+
+### `duckdb_appender_column_count`
+
+---
+Returns the number of columns in the table that belongs to the appender.
+
+* appender The appender to get the column count from.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_appender_column_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `returns`
+
+The number of columns in the table.
+
+<br>
+
+
+### `duckdb_appender_column_type`
+
+---
+Returns the type of the column at the specified index.
+
+Note: The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+* appender The appender to get the column type from.
+* col_idx The index of the column to get the type of.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_appender_column_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `returns`
+
+The duckdb_logical_type of the column.
 
 <br>
 
@@ -6681,7 +6685,8 @@ The query result.
 ### `duckdb_query_arrow_schema`
 
 ---
-Fetch the internal arrow schema from the arrow result.
+Fetch the internal arrow schema from the arrow result. Remember to call release on the respective
+ArrowSchema object.
 
 #### Syntax
 
@@ -6711,7 +6716,8 @@ The output schema.
 ### `duckdb_prepared_arrow_schema`
 
 ---
-Fetch the internal arrow schema from the prepared statement.
+Fetch the internal arrow schema from the prepared statement. Remember to call release on the respective
+ArrowSchema object.
 
 #### Syntax
 
@@ -6741,7 +6747,8 @@ The output schema.
 ### `duckdb_result_arrow_array`
 
 ---
-Convert a data chunk into an arrow struct array.
+Convert a data chunk into an arrow struct array. Remember to call release on the respective
+ArrowArray object.
 
 #### Syntax
 
@@ -6772,7 +6779,8 @@ The output array.
 ### `duckdb_query_arrow_array`
 
 ---
-Fetch an internal arrow struct array from the arrow result.
+Fetch an internal arrow struct array from the arrow result. Remember to call release on the respective
+ArrowArray object.
 
 This function can be called multiple time to get next chunks, which will free the previous out_array.
 So consume the out_array before calling this function again.
@@ -6805,7 +6813,7 @@ The output array.
 ### `duckdb_arrow_column_count`
 
 ---
-Returns the number of columns present in a the arrow result object.
+Returns the number of columns present in the arrow result object.
 
 #### Syntax
 
@@ -6831,7 +6839,7 @@ The number of columns present in the result object.
 ### `duckdb_arrow_row_count`
 
 ---
-Returns the number of rows present in a the arrow result object.
+Returns the number of rows present in the arrow result object.
 
 #### Syntax
 
@@ -6902,7 +6910,7 @@ The error message should not be freed. It will be de-allocated when `duckdb_dest
 ---
 * `result`
 
-The result object to fetch the nullmask from.
+The result object to fetch the error from.
 * `returns`
 
 The error of the result.
@@ -6929,6 +6937,137 @@ Closes the result and de-allocates all memory allocated for the arrow result.
 * `result`
 
 The result to destroy.
+
+<br>
+
+
+### `duckdb_destroy_arrow_stream`
+
+---
+Releases the arrow array stream and de-allocates its memory.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_arrow_stream</span>(<span class="nv">
+</span>  <span class="nv">duckdb_arrow_stream</span> *<span class="nv">stream_p
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `stream`
+
+The arrow array stream to destroy.
+
+<br>
+
+
+### `duckdb_execute_prepared_arrow`
+
+---
+Executes the prepared statement with the given bound parameters, and returns an arrow query result.
+Note that after running `duckdb_execute_prepared_arrow`, `duckdb_destroy_arrow` must be called on the result object.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared_arrow</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow</span> *<span class="nv">out_result
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `prepared_statement`
+
+The prepared statement to execute.
+* `out_result`
+
+The query result.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+
+### `duckdb_arrow_scan`
+
+---
+Scans the Arrow stream and creates a view with the given name.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_arrow_scan</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
+</span>  <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `connection`
+
+The connection on which to execute the scan.
+* `table_name`
+
+Name of the temporary view to create.
+* `arrow`
+
+Arrow stream wrapper.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+
+### `duckdb_arrow_array_scan`
+
+---
+Scans the Arrow array and creates a view with the given name.
+Note that after running `duckdb_arrow_array_scan`, `duckdb_destroy_arrow_stream` must be called on the out stream.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_arrow_array_scan</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>,<span class="nv">
+</span>  <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `connection`
+
+The connection on which to execute the scan.
+* `table_name`
+
+Name of the temporary view to create.
+* `arrow_schema`
+
+Arrow schema wrapper.
+* `arrow_array`
+
+Arrow array wrapper.
+* `out_stream`
+
+Output array stream that wraps around the passed schema, for releasing/deleting once done.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
 
@@ -6966,9 +7105,9 @@ The maximum amount of tasks to execute
 
 ---
 Creates a task state that can be used with duckdb_execute_tasks_state to execute tasks until
-duckdb_finish_execution is called on the state.
+`duckdb_finish_execution` is called on the state.
 
-duckdb_destroy_state should be called on the result in order to free memory.
+`duckdb_destroy_state` must be called on the result.
 
 #### Syntax
 
@@ -7130,7 +7269,7 @@ The task state to clean up
 ### `duckdb_execution_is_finished`
 
 ---
-Returns true if execution of the current query is finished.
+Returns true if the execution of the current query is finished.
 
 #### Syntax
 

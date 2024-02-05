@@ -52,6 +52,7 @@ duckdb_close(&db);
 ---
 Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
 through `duckdb_open_ext`.
+The duckdb_config must be destroyed using 'duckdb_destroy_config'
 
 This will always succeed unless there is a malloc failure.
 
@@ -180,7 +181,7 @@ The value to set the configuration flag to.
 ### `duckdb_destroy_config`
 
 ---
-Destroys the specified configuration option and de-allocates all memory allocated for the object.
+Destroys the specified configuration object and de-allocates all memory allocated for the object.
 
 #### Syntax
 
