@@ -43,8 +43,8 @@ Note that `BETWEEN` and `NOT BETWEEN` are only equivalent to the examples below 
 
 | Predicate | Description |
 |:---|:---|
-| `a BETWEEN x AND y` | equivalent to `a >= x AND a <= y` |
-| `a NOT BETWEEN x AND y` | equivalent to `a < x OR a > y` |
+| `a BETWEEN x AND y` | equivalent to `x <= a AND a <= y` |
+| `a NOT BETWEEN x AND y` | equivalent to `x > a OR a > y` |
 | `expression IS NULL` | `true` if expression is `NULL`, `false` otherwise |
 | `expression ISNULL` | alias for `IS NULL` (non-standard) |
 | `expression IS NOT NULL` | `false` if expression is `NULL`, `true` otherwise |
