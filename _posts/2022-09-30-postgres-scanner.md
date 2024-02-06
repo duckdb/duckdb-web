@@ -2,19 +2,13 @@
 layout: post
 title:  "Querying Postgres Tables Directly From DuckDB"
 author: Hannes Mühleisen
-excerpt_separator: <!--more-->
+excerpt: DuckDB can now directly query tables stored in PostgreSQL and speed up complex analytical queries without duplicating data.
 ---
-
-
-_TL;DR: DuckDB can now directly query tables stored in PostgreSQL and speed up complex analytical queries without duplicating data._
-
-<!--more-->
 
 <img src="/images/blog/elephant-duck.jpg"
      alt="DuckDB goes Postgres"
      width=200
  />
-
 
 ## Introduction
 
