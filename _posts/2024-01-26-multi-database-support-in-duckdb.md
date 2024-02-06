@@ -2,8 +2,7 @@
 layout: post
 title:  "Multi-Database Support in DuckDB"
 author: Mark Raasveldt
-excerpt_separator: <!--more-->
-tldr: DuckDB can attach MySQL, Postgres, and SQLite databases in addition to databases stored in its own format. This allows data to be read into DuckDB and moved between these systems in a convenient manner.
+excerpt: DuckDB can attach MySQL, Postgres, and SQLite databases in addition to databases stored in its own format. This allows data to be read into DuckDB and moved between these systems in a convenient manner.
 ---
 
 <img src="/images/blog/duckdb-multidb-support.png"

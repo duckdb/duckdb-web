@@ -2,8 +2,7 @@
 layout: post
 title:  "Windowing in DuckDB"
 author: Richard Wesley
-excerpt_separator: <!--more-->
-tldr: DuckDB, a free and Open-Source analytical data management system, has a state-of-the-art windowing engine that can compute complex moving aggregates like inter-quartile ranges as well as simpler moving averages.
+excerpt: DuckDB, a free and Open-Source analytical data management system, has a state-of-the-art windowing engine that can compute complex moving aggregates like inter-quartile ranges as well as simpler moving averages.
 ---
 
 Window functions (those using the `OVER` clause) are important tools for analysing data series,

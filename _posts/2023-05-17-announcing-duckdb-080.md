@@ -2,7 +2,7 @@
 layout: post
 title:  "Announcing DuckDB 0.8.0"
 author: Mark Raasveldt and Hannes Mühleisen
-excerpt_separator: <!--more-->
+excerpt: ""
 ---
 
 <img src="/images/blog/mottled_duck.jpg"

@@ -3,9 +3,8 @@
 layout: post
 title:  "DuckDB's CSV Sniffer: Automatic Detection of Types and Dialects"
 author: Pedro Holanda
-excerpt_separator: <!--more-->
 thumb: "/images/blog/csv-sniffer/ducktetive.jpg"
-tldr: DuckDB is primarily focused on performance, leveraging the capabilities of modern file formats. At the same time, we also pay attention to flexible, non-performance-driven formats like CSV files. To create a nice and pleasant experience when reading from CSV files, DuckDB implements a CSV sniffer that automatically detects CSV dialect options, column types, and even skips dirty data. The sniffing process allows users to efficiently explore CSV files without needing to provide any input about the file format.
+excerpt: DuckDB is primarily focused on performance, leveraging the capabilities of modern file formats. At the same time, we also pay attention to flexible, non-performance-driven formats like CSV files. To create a nice and pleasant experience when reading from CSV files, DuckDB implements a CSV sniffer that automatically detects CSV dialect options, column types, and even skips dirty data. The sniffing process allows users to efficiently explore CSV files without needing to provide any input about the file format.
 ---
 
 <img src="/images/blog/csv-sniffer/ducktetive.jpg"

@@ -2,8 +2,7 @@
 layout: post  
 title:  "DuckDB Time Zones: Supporting Calendar Extensions"
 author: Richard Wesley
-excerpt_separator: <!--more-->
-tldr: The DuckDB ICU extension now provides time zone support.
+excerpt: The DuckDB ICU extension now provides time zone support.
 ---
 
 Time zone support is a common request for temporal analytics, but the rules are complex and somewhat arbitrary. 
