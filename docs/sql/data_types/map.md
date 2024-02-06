@@ -14,17 +14,19 @@ To construct a `MAP`, use the bracket syntax preceded by the `MAP` keyword.
 ## Creating Maps
 
 ```sql
--- A map with varchar keys and integer values. This returns {key1=1, key2=5}
-SELECT MAP {'key1': 1, 'key2': 5};
--- Alternatively use the map_from_entries function. This returns {key1=1, key2=5}
-SELECT map_from_entries([(key1, 1), (key2, 5)]);
--- A map with integer keys and numeric values. This returns {1=42.001, 5=-32.100} 
+-- A map with VARCHAR keys and INTEGER values. This returns {key1=10, key2=20, key3=30}
+SELECT MAP {'key1': 10, 'key2': 20, 'key3': 30};
+-- Alternatively use the map_from_entries function. This returns {key1=10, key2=20, key3=30}
+SELECT map_from_entries([('key1', 10), ('key2', 20), ('key3', 30)]);
+-- A map can be also created using two lists: keys and values. This returns {key1=10, key2=20, key3=30}
+SELECT MAP(['key1', 'key2', 'key3'], [10, 20, 30]);
+-- A map can also use INTEGER keys and NUMERIC values. This returns {1=42.001, 5=-32.100}
 SELECT MAP {1: 42.001, 5: -32.1};
 -- Keys and/or values can also be nested types.
 -- This returns {[a, b]=[1.1, 2.2], [c, d]=[3.3, 4.4]}
 SELECT MAP {['a', 'b']: [1.1, 2.2], ['c', 'd']: [3.3, 4.4]};
--- Create a table with a map column that has integer keys and double values
-CREATE TABLE map_table (map_col MAP(INT, DOUBLE));
+-- Create a table with a map column that has INTEGER keys and DOUBLE values
+CREATE TABLE tbl (col MAP(INTEGER, DOUBLE));
 ```
 
 ## Retrieving from Maps
