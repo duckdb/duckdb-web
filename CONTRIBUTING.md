@@ -30,7 +30,7 @@ Contributions to the [DuckDB Documentation](https://duckdb.org/) are welcome. To
 Before submitting a contribution, please check whether your contribution is eligible.
 
 1. Before creating a new page, please [search the existing documentation](https://duckdb.org/docs/search) for similar pages.
-2. In general, guides for third-party tools using DuckDB should not be included in the DuckDB documentation. Rather, these tools and their documentation should be collected in the [`awesome-duckdb` community repository](https://github.com/davidgasquez/awesome-duckdb).
+2. In general, guides for third-party tools using DuckDB should not be included in the DuckDB documentation. Rather, these tools and their documentation should be collected in the [Awesome DuckDB community repository](https://github.com/davidgasquez/awesome-duckdb).
 
 ## Adding a New Page
 
