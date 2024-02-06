@@ -69,7 +69,7 @@
 						<div class="singleentry">
 							<div class="infoline"><span>{{ page.date | date: "%Y-%m-%d" }}</span><span>{{ page.author }}</span></div>
 							<h1>{{ page.title }}</h1>
-							{% if page.tldr %}<p><em>TL;DR: {{ page.tldr }}</em></p>{% endif %}
+							{% if page.tldr %}{{ '_TL;DR: ' | append: page.tldr | append: '_' | markdownify }}{% endif %}
 
 							{% include anchor_headings.html html=content %}
 							<a href="/news/" class="backtoarchive">back to news archive <span></span></a>
