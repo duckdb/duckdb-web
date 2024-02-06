@@ -3,7 +3,7 @@ layout: docu
 title: Excel Import
 ---
 
-## Installating the Extension
+## Installing the Extension
 
 To read data from an Excel file, install and load the [spatial extension](../../extensions/spatial).
 This is only needed once per DuckDB connection.
@@ -61,7 +61,12 @@ The option `HEADERS` has three possible values:
 For example, to treat the first row as a header, run:
 
 ```sql
-SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1', open_options=['HEADERS=FORCE']);
+SELECT *
+FROM st_read(
+    'test_excel.xlsx',
+    layer = 'Sheet1',
+    open_options=['HEADERS=FORCE']
+);
 ```
 
 #### Detecting Types
@@ -74,15 +79,26 @@ The option `FIELD_TYPE` defines how field types should be treated:
 For example, to treat the first row as a header and use auto-detection for types, run:
 
 ```sql
-SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1', open_options=['HEADERS=FORCE', 'FIELD_TYPES=AUTO']);
+SELECT *
+FROM st_read(
+    'test_excel.xlsx',
+    layer = 'Sheet1',
+    open_options=['HEADERS=FORCE', 'FIELD_TYPES=AUTO']
+);
 ```
 
 To treat the fields as strings:
 
 ```sql
-SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1', open_options=['FIELD_TYPES=STRING']);
+SELECT *
+FROM st_read(
+    'test_excel.xlsx',
+    layer = 'Sheet1',
+    open_options=['FIELD_TYPES=STRING']
+);
 ```
 
 ## See Also
 
-For additional details, see the [spatial extension page](../../extensions/spatial), the [GDAL XLSX driver page](https://gdal.org/drivers/vector/xlsx.html), and the [GDAL configuration options page](https://gdal.org/user/configoptions.html#configoptions).
+DuckDB can also [export Export files](excel_export).
+For additional details on Excel support, see the [spatial extension page](../../extensions/spatial), the [GDAL XLSX driver page](https://gdal.org/drivers/vector/xlsx.html), and the [GDAL configuration options page](https://gdal.org/user/configoptions.html#configoptions).
