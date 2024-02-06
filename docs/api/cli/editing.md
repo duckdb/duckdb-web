@@ -79,6 +79,7 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | Ctrl+G | Cancel editing of current query                            |
 | Ctrl+L | Clear screen                                               |
 | Ctrl+O | Cancel editing of current query                            |
+| Ctrl+Z | Suspend CLI and return to shell, use `fg` to re-open       |
 
 
 ### Using Read-Line
