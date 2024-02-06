@@ -1,13 +1,10 @@
 ---
-
 layout: post  
 title:  "Fastest table sort in the West - Redesigning DuckDB’s sort"
 author: Laurens Kuiper  
 excerpt_separator: <!--more-->
-
+tldr: DuckDB, a free and Open-Source analytical data management system, has a new highly efficient parallel sorting implementation that can sort much more data than fits in main memory.
 ---
-
-_TL;DR: DuckDB, a free and Open-Source analytical data management system, has a new highly efficient parallel sorting implementation that can sort much more data than fits in main memory._
 
 Database systems use sorting for many purposes, the most obvious purpose being when a user adds an `ORDER BY` clause to their query.
 Sorting is also used within operators, such as window functions.
