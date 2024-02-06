@@ -464,6 +464,18 @@
                 {
                   "page": "Output Formats",
                   "url": "output_formats"
+                },
+                {
+                  "page": "Editing",
+                  "url": "editing"
+                },
+                {
+                  "page": "Auto Complete",
+                  "url": "autocomplete"
+                },
+                {
+                  "page": "Syntax Highlighting",
+                  "url": "syntax_highlighting"
                 }
               ]
             },
