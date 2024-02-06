@@ -37,7 +37,7 @@ Before submitting a contribution, please check whether your contribution is elig
 Thank you for contributing to the DuckDB documentation!
 
 Each new page requires at least 2 edits:
-* The creation of a new Markdown page with the documentation. Please follow the format of another `.md` file in the `docs` folder.
+* Create new Markdown file (using the `snake_case` naming convention). Please follow the format of another `.md` file in the `docs` folder.
 * Add a link to the new page within `_data/menu_docs_dev.json`. This populates the dropdown menus.
 
 The addition of a new guide requires one additional edit:
@@ -45,7 +45,7 @@ The addition of a new guide requires one additional edit:
 
 Before creating a pull request, please perform the following steps:
 * Preview your changes in the browser using the [site build guide](BUILDING.md).
-* Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for MarkdownLint.
+* Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for markdownlint.
 
 When creating a PR, please check the box to "Allow edits from maintainers".
 
