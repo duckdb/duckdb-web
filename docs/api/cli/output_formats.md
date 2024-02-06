@@ -3,7 +3,7 @@ layout: docu
 title: Output Formats
 ---
 
-The `.mode` [dot command](dot-commands) may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal [output to a file](dot-commands#output-writing-results-to-a-file). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point.
+The `.mode` [dot command](dot_commands) may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal [output to a file](dot_commands#output-writing-results-to-a-file). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point.
 The `markdown` mode is particularly useful for building documentation and the `latex` mode is useful for writing academic papers.
 
 <div class="narrow_table"></div>

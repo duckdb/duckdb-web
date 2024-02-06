@@ -82,11 +82,11 @@ To exit the CLI, press `Ctrl`-`D` if your platform supports it. Otherwise press 
 
 ### Dot Commands
 
-In addition to SQL syntax, special [dot commands](dot-commands) may be entered into the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line.
+In addition to SQL syntax, special [dot commands](dot_commands) may be entered into the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line.
 
 Frequently-used configurations can be stored in the file `~/.duckdbrc`, which will be loaded when starting the CLI client. See the [Configuring the CLI](#configuring-the-cli) section below for further information on these options.
 
-Below, we summarize a few important dot commands. To see all available commands, see the [dot commands page](dot-commands) or use the `.help` command.
+Below, we summarize a few important dot commands. To see all available commands, see the [dot commands page](dot_commands) or use the `.help` command.
 
 #### Opening Database Files
 
@@ -110,13 +110,13 @@ One important option accepted by `.open` is the `--readonly` flag. This disallow
 
 #### Output Formats
 
-The `.mode` [dot command](dot-commands#mode) may be used to change the appearance of the tables returned in the terminal output.
+The `.mode` [dot command](dot_commands#mode) may be used to change the appearance of the tables returned in the terminal output.
 These include the default `duckbox` mode, `csv` and `json` mode for ingestion by other tools, `markdown` and `latex` for documents, and `insert` mode for generating SQL statements.
 
 #### Writing Results to a File
 
 By default, the DuckDB CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands.
-For details, see the documentation for the [output dot command](dot-commands#output-writing-results-to-a-file).
+For details, see the documentation for the [output dot command](dot_commands#output-writing-results-to-a-file).
 
 #### Reading SQL from a File
 
