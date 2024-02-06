@@ -49,3 +49,5 @@ Note that `BETWEEN` and `NOT BETWEEN` are only equivalent to the examples below 
 | `expression ISNULL` | alias for `IS NULL` (non-standard) |
 | `expression IS NOT NULL` | `false` if expression is `NULL`, `true` otherwise |
 | `expression NOTNULL` | alias for `IS NOT NULL` (non-standard) |
+
+> For the expression `BETWEEN x AND y`, `x` is used as the lower bound and `y` is used as the upper bound. Therefore, if `x > y`, the result will always be `false`.
