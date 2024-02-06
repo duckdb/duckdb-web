@@ -19,7 +19,7 @@ SELECT i, sum(j) FROM tbl GROUP BY i;
 -- select only the top 3 rows from the tbl
 SELECT * FROM tbl ORDER BY i DESC LIMIT 3;
 -- join two tables together using the USING clause
-SELECT * FROM t1 JOIN t2 USING(a, b);
+SELECT * FROM t1 JOIN t2 USING (a, b);
 -- use column indexes to select the first and third column from the table "tbl"
 SELECT #1, #3 FROM tbl;
 -- select all unique cities from the addresses table

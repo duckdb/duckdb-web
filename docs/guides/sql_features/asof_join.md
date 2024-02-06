@@ -133,7 +133,7 @@ Our first query can then be written as:
 
 ```sql
 SELECT ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p USING(ticker, when);
+FROM holdings h ASOF JOIN prices p USING (ticker, when);
 ```
 
 Be aware that if you don't explicitly list the columns in the `SELECT`,
