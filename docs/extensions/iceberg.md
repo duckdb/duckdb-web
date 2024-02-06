@@ -21,7 +21,8 @@ To test the examples, download the [`iceberg_data.zip`](/data/iceberg_data.zip) 
 ### Querying Individual Tables
 
 ```sql
-SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
+SELECT count(*)
+FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 ```text
 51793
@@ -32,7 +33,8 @@ SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_p
 ### Access Iceberg Metadata
 
 ```sql
-SELECT * FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
+SELECT *
+FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 
 ```text
@@ -48,7 +50,8 @@ SELECT * FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_path
 ### Visualizing Snapshots
 
 ```sql
-SELECT * FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
+SELECT *
+FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 ```
 
 ```text
@@ -60,6 +63,10 @@ SELECT * FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 │               2 │ 7635660646343998149 │ 2023-02-15 15:08:14.73  │ lineitem_iceberg/metadata/snap-7635660646343998149-1-10eaca8a-1e1c-421e-ad6d-b232e5ee23d3.avro │
 └─────────────────┴─────────────────────┴─────────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
+## Limitations
+
+Writing (i.e., exporting to) Iceberg files is currently not supported.
 
 ## GitHub Repository
 
