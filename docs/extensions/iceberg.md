@@ -21,7 +21,8 @@ To test the examples, download the [`iceberg_data.zip`](/data/iceberg_data.zip) 
 ### Querying Individual Tables
 
 ```sql
-SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
+SELECT count(*)
+FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 ```text
 51793
@@ -32,7 +33,8 @@ SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_p
 ### Access Iceberg Metadata
 
 ```sql
-SELECT * FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
+SELECT *
+FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 
 ```text
@@ -48,7 +50,8 @@ SELECT * FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_path
 ### Visualizing Snapshots
 
 ```sql
-SELECT * FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
+SELECT *
+FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 ```
 
 ```text
