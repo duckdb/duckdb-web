@@ -64,6 +64,10 @@ FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 └─────────────────┴─────────────────────┴─────────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+## Limitations
+
+Writing (i.e., exporting to) Iceberg files is currently not supported.
+
 ## GitHub Repository
 
 [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_iceberg)
