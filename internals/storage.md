@@ -88,4 +88,4 @@ As a rough approximation, loading 100 GB of uncompressed CSV files into a DuckDB
 
 DuckDB's storage format stores the data in _row groups,_ i.e., horizontal partitions of the data.
 This concept is equivalent to [Parquet's row groups](https://parquet.apache.org/docs/concepts/).
-Several features in DuckDB, including [parallelism](/docs/guides/performance/how-to-tune-workloads) and [compression](/2022/10/28/lightweight-compression) are based on row groups.
+Several features in DuckDB, including [parallelism](/docs/guides/performance/how_to_tune_workloads) and [compression](/2022/10/28/lightweight-compression) are based on row groups.

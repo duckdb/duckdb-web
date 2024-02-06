@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Dot Commands
+redirect_from:
+  - /docs/api/cli/dot-commands
 ---
 
 Dot commands are available in the DuckDB CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command.
@@ -135,7 +137,7 @@ The results then open in the default text file editor of the system, for example
 
 ## Querying the Database Schema
 
-All DuckDB clients support [querying the database schema with SQL](../../sql/information_schema), but the CLI has additional [dot commands](dot-commands) that can make it easier to understand the contents of a database.
+All DuckDB clients support [querying the database schema with SQL](../../sql/information_schema), but the CLI has additional [dot commands](dot_commands) that can make it easier to understand the contents of a database.
 The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern](../../sql/functions/patternmatching#like).
 
 ```sql

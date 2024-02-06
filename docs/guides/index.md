@@ -42,11 +42,11 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## Performance
 
-* [My workload is slow (troubleshooting guide)](../guides/performance/my-workload-is-slow)
+* [My workload is slow (troubleshooting guide)](../guides/performance/my_workload_is_slow)
 * [How to design the schema for optimal performance](../guides/performance/schema)
 * [What is the ideal hardware environment for DuckDB](../guides/performance/environment)
-* [What performance implications do Parquet files and (compressed) CSV files have](../guides/performance/file-formats)
-* [How to tune workloads](../guides/performance/how-to-tune-workloads)
+* [What performance implications do Parquet files and (compressed) CSV files have](../guides/performance/file_formats)
+* [How to tune workloads](../guides/performance/how_to_tune_workloads)
 * [Benchmarks](../guides/performance/benchmarks)
 
 ## Meta Queries

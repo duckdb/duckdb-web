@@ -106,15 +106,15 @@
             },
             {
               "page": "File Formats",
-              "url": "file-formats"
+              "url": "file_formats"
             },
             {
               "page": "How to Tune Workloads",
-              "url": "how-to-tune-workloads"
+              "url": "how_to_tune_workloads"
             },
             {
               "page": "My Workload Is Slow",
-              "url": "my-workload-is-slow"
+              "url": "my_workload_is_slow"
             },
             {
               "page": "Benchmarks",
@@ -459,11 +459,11 @@
                 },
                 {
                   "page": "Dot Commands",
-                  "url": "dot-commands"
+                  "url": "dot_commands"
                 },
                 {
                   "page": "Output Formats",
-                  "url": "output-formats"
+                  "url": "output_formats"
                 }
               ]
             },
@@ -1033,7 +1033,7 @@
             },
             {
               "page": "Keywords and Identifiers",
-              "url": "keywords-and-identifiers"
+              "url": "keywords_and_identifiers"
             },
             {
               "page": "Samples",

@@ -5,7 +5,7 @@ title: Command Line Arguments
 
 The table below summarizes DuckDB's command line options.
 To list all command line options, use the command `duckdb -help`.
-Fot a list of dot commands available in the CLI shell, see the [Dot Commands page](dot-commands).
+Fot a list of dot commands available in the CLI shell, see the [Dot Commands page](dot_commands).
 
 <div class="narrow_table"></div>
 
