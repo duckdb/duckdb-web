@@ -23,7 +23,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to load a Parquet file directly from HTTP(S)](../guides/import/http_import)
 * [How to load a Parquet file directly from S3 or GCS](../guides/import/s3_import)
 * [How to load an Iceberg table directly from S3](../guides/import/s3_iceberg_import)
- 
+
 ### JSON Files
 
 * [How to load a JSON file into a table](../guides/import/json_import)
@@ -92,6 +92,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## SQL Features
 
+* [Friendly SQL extensions](../guides/sql_features/friendly_sql_extensions)
 * [As-of join](../guides/sql_features/asof_join)
 * [Full-text search](../guides/sql_features/full_text_search)
 

@@ -229,6 +229,10 @@
           "slug": "sql_features",
           "subfolderitems": [
             {
+              "page": "Friendly SQL Extendions",
+              "url": "friendly_sql_extensions"
+            },
+            {
               "page": "AsOf Join",
               "url": "asof_join"
             },
