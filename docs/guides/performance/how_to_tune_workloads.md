@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Tuning Workloads
+redirect_from:
+  - /docs/guides/performance/how-to-tune-workloads
 ---
 
 ## Parallelism (Multi-Core Processing)

@@ -4,6 +4,7 @@ title: Keywords and Identifiers
 redirect_from:
   - /docs/sql/case_sensitivity
   - /docs/sql/case_sensitivity/
+  - /docs/sql/keywords-and-identifiers
 ---
 
 ## Identifiers

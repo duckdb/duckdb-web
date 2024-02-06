@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Dot Commands
+redirect_from:
+  - /docs/api/cli/dot-commands
 ---
 
 Dot commands are available in the DuckDB CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command.
