@@ -9,8 +9,8 @@ SQL queries that are written in the shell are automatically highlighted using sy
 
 <img src="/images/syntax_highlighting_screenshot.png" alt="Image showing syntax highlighting in the shell"/>
 
-There are several components of a query that are highlighted in different colors. The colors can be configured using [Dot Command](dot_commands).
-Syntax highlighting can also ax_highlightingbe disabled entirely using the `.highlight off` command.
+There are several components of a query that are highlighted in different colors. The colors can be configured using [dot commands](dot_commands).
+Syntax highlighting can also be disabled entirely using the `.highlight off` command.
 
 Below is a list of components that can be configured.
 
