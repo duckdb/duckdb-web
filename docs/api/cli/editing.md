@@ -57,7 +57,7 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | Alt+R         | Delete all text                                          |
 | Alt+T         | Swap current and next word                               |
 | Alt+U         | Convert next word to uppercase                           |
-| Alt+Backspace | Delete previous] word                                    |
+| Alt+Backspace | Delete previous word                                    |
 | Alt+\         | Delete spaces around cursor                              |
 
 ### Completing
