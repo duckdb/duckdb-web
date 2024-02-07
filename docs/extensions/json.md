@@ -20,6 +20,9 @@ LOAD json;
 ```sql
 -- read a JSON file from disk, auto-infer options
 SELECT * FROM 'todos.json';
+```
+
+```sql
 -- read_json with custom options
 SELECT *
 FROM read_json('todos.json',
@@ -28,7 +31,9 @@ FROM read_json('todos.json',
                           id: 'UBIGINT',
                           title: 'VARCHAR',
                           completed: 'BOOLEAN'});
+```
 
+```sql
 -- write the result of a query to a JSON file
 COPY (SELECT * FROM todos) TO 'todos.json';
 ```
@@ -47,7 +52,9 @@ We also allow any of our types to be casted to JSON, and JSON to be casted back 
 -- Cast JSON to our STRUCT type
 SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
 -- {'duck': 42}
+```
 
+```sql
 -- And back:
 SELECT {duck: 42}::JSON;
 -- {"duck":42}
@@ -96,7 +103,7 @@ With `'unstructured'`, the top-level JSON is read, e.g.:
 }
 ```
 
-Will result in two objects being read.
+will result in two objects being read.
 
 With `'newline_delimited'`, [NDJSON](http://ndjson.org) is read, where each JSON is separated by a newline (`\n`), e.g.:
 
@@ -105,18 +112,18 @@ With `'newline_delimited'`, [NDJSON](http://ndjson.org) is read, where each JSON
 {"goose": [1, 2, 3]}
 ```
 
-Will also result in two objects being read.
+will also result in two objects being read.
 
 With `'array'`, each array element is read, e.g.:
 
 ```json
 [
-  {
-    "duck": 42
-  },
-  {
-    "goose": [1, 2, 3]
-  }
+    {
+        "duck": 42
+    },
+    {
+        "goose": [1, 2, 3]
+    }
 ]
 ```
 
@@ -127,9 +134,15 @@ Example usage:
 ```sql
 SELECT * FROM read_json_objects('my_file1.json');
 -- {"duck":42,"goose":[1,2,3]}
+```
+
+```sql
 SELECT * FROM read_json_objects(['my_file1.json', 'my_file2.json']);
 -- {"duck":42,"goose":[1,2,3]}
 -- {"duck":43,"goose":[4,5,6],"swan":3.3}
+```
+
+```sql
 SELECT * FROM read_ndjson_objects('*.json.gz');
 -- {"duck":42,"goose":[1,2,3]}
 -- {"duck":43,"goose":[4,5,6],"swan":3.3}
@@ -216,12 +229,12 @@ Can be queried exactly the same as a JSON file that contains `'unstructured'` JS
 
 ```json
 {
-  "duck": 42,
-  "goose": 4.2
+    "duck": 42,
+    "goose": 4.2
 }
 {
-  "duck": 43,
-  "goose": 4.3
+    "duck": 43,
+    "goose": 4.3
 }
 ```
 
@@ -277,11 +290,11 @@ will create the following file:
 
 ```json
 [
-  {"range":0},
-  {"range":1},
-  {"range":2},
-  {"range":3},
-  {"range":4}
+    {"range":0},
+    {"range":1},
+    {"range":2},
+    {"range":3},
+    {"range":4}
 ]
 ```
 
@@ -448,6 +461,9 @@ If multiple values need to be extracted from the same JSON, it is more efficient
 SELECT json_extract(j, 'family') AS family,
        json_extract(j, 'species') AS species
 FROM example;
+```
+
+```sql
 -- The following is faster and more memory efficient 
 WITH extracted AS (
     SELECT json_extract(j, ['family', 'species']) extracted_list
@@ -508,21 +524,26 @@ There are three JSON aggregate functions.
 Examples:
 
 ```sql
-CREATE TABLE example (k VARCHAR, v INTEGER);
-INSERT INTO example VALUES ('duck', 42), ('goose', 7);
+CREATE TABLE example1 (k VARCHAR, v INTEGER);
+INSERT INTO example1 VALUES ('duck', 42), ('goose', 7);
 ```
 
 ```sql
-SELECT json_group_array(v) FROM example;
+SELECT json_group_array(v) FROM example1;
 -- [42, 7]
-SELECT json_group_object(k, v) FROM example;
+SELECT json_group_object(k, v) FROM example1;
 -- {"duck":42,"goose":7}
-DROP TABLE example;
-CREATE TABLE example (j JSON);
-INSERT INTO example VALUES
+```
+
+```sql
+CREATE TABLE example2 (j JSON);
+INSERT INTO example2 VALUES
     ('{"family": "anatidae", "species": ["duck", "goose"], "coolness": 42.42}'),
     ('{"family": "canidae", "species": ["labrador", "bulldog"], "hair": true}');
-SELECT json_group_structure(j) FROM example;
+```
+
+```sql
+SELECT json_group_structure(j) FROM example2;
 -- {"family":"VARCHAR","species":["VARCHAR"],"coolness":"DOUBLE","hair":"BOOLEAN"}
 ```
 
@@ -557,14 +578,20 @@ INSERT INTO example VALUES
 SELECT json_transform(j, '{"family": "VARCHAR", "coolness": "DOUBLE"}') FROM example;
 -- {'family': anatidae, 'coolness': 42.420000}
 -- {'family': canidae, 'coolness': NULL}
+```
+
+```sql
 SELECT json_transform(j, '{"family": "TINYINT", "coolness": "DECIMAL(4, 2)"}') FROM example;
 -- {'family': NULL, 'coolness': 42.42}
 -- {'family': NULL, 'coolness': NULL}
+```
+
+```sql
 SELECT json_transform_strict(j, '{"family": "TINYINT", "coolness": "DOUBLE"}') FROM example;
 -- Invalid Input Error: Failed to cast value: "anatidae"
 ```
 
-## De/Serializing SQL to JSON and Vice Versa
+## Serializing and Deserializing SQL to JSON and Vice Versa
 
 The JSON extension also provides functions to serialize and deserialize `SELECT` statements between SQL and JSON, as well as executing JSON serialized statements.
 
@@ -587,27 +614,39 @@ Examples:
 -- Simple example
 SELECT json_serialize_sql('SELECT 2');
 -- '{"error":false,"statements":[{"node":{"type":"SELECT_NODE","modifiers":[],"cte_map":{"map":[]},"select_list":[{"class":"CONSTANT","type":"VALUE_CONSTANT","alias":"","value":{"type":{"id":"INTEGER","type_info":null},"is_null":false,"value":2}}],"from_table":{"type":"EMPTY","alias":"","sample":null},"where_clause":null,"group_expressions":[],"group_sets":[],"aggregate_handling":"STANDARD_HANDLING","having":null,"sample":null,"qualify":null}}]}'
+```
 
+```sql
 -- Example with multiple statements and skip options
 SELECT json_serialize_sql('SELECT 1 + 2; SELECT a + b FROM tbl1', skip_empty := true, skip_null := true);
 -- '{"error":false,"statements":[{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","function_name":"+","children":[{"class":"CONSTANT","type":"VALUE_CONSTANT","value":{"type":{"id":"INTEGER"},"is_null":false,"value":1}},{"class":"CONSTANT","type":"VALUE_CONSTANT","value":{"type":{"id":"INTEGER"},"is_null":false,"value":2}}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"EMPTY"},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","function_name":"+","children":[{"class":"COLUMN_REF","type":"COLUMN_REF","column_names":["a"]},{"class":"COLUMN_REF","type":"COLUMN_REF","column_names":["b"]}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"BASE_TABLE","table_name":"tbl1"},"aggregate_handling":"STANDARD_HANDLING"}}]}'
+```
 
+```sql
 -- Example with a syntax error
 SELECT json_serialize_sql('TOTALLY NOT VALID SQL');
 -- '{"error":true,"error_type":"parser","error_message":"syntax error at or near \"TOTALLY\"\nLINE 1: TOTALLY NOT VALID SQL\n        ^"}'
+```
 
+```sql
 -- Example with deserialize
 SELECT json_deserialize_sql(json_serialize_sql('SELECT 1 + 2'));
 -- 'SELECT (1 + 2)'
+```
 
+```sql
 -- Example with deserialize and syntax sugar
 SELECT json_deserialize_sql(json_serialize_sql('FROM x SELECT 1 + 2'));
 -- 'SELECT (1 + 2) FROM x'
+```
 
+```sql
 -- Example with execute
 SELECT * FROM json_execute_serialized_sql(json_serialize_sql('SELECT 1 + 2'));
 -- 3
+```
 
+```sql
 -- Example with error
 SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID SQL'));
 -- Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALLY"
