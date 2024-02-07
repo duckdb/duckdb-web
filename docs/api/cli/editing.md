@@ -57,16 +57,16 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | Alt+R         | Delete all text                                          |
 | Alt+T         | Swap current and next word                               |
 | Alt+U         | Convert next word to uppercase                           |
-| Alt+Backspace | Delete previous word                                    |
+| Alt+Backspace | Delete previous word                                     |
 | Alt+\         | Delete spaces around cursor                              |
 
 ## Completing
 
 |    Key    |                          Action                           |
 |-----------|-----------------------------------------------------------|
-| Tab       | Auto-complete. When auto-completing, cycle to next entry. |
-| Shift+Tab | When auto-completing, cycle to previous entry.            |
-| ESC+ESC   | When auto-completing, revert auto-completion.             |
+| Tab       | Autocomplete. When autocompleting, cycle to next entry.   |
+| Shift+Tab | When autocompleting, cycle to previous entry.             |
+| ESC+ESC   | When autocompleting, revert autocompletion.               |
 
 ## Miscellaneous
 
