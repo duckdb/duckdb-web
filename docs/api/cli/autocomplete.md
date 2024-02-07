@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Command Line Arguments
+title: Autocomplete
 ---
 
 The shell offers context-aware auto-complete of SQL queries through the [`autocomplete` extension](../../extensions/autocomplete). Auto-complete is triggered by pressing `Tab`.
