@@ -223,7 +223,7 @@ $ duckdb < select_example.sql
 
 To execute a command with SQL text passed in directly from the command line, call `duckdb` with two arguments: the database location (or `:memory:`), and a string with the SQL statement to execute.
 
-```sql
+```bash
 $ duckdb :memory: "SELECT 42 AS the_answer"
 ```
 
@@ -231,7 +231,7 @@ $ duckdb :memory: "SELECT 42 AS the_answer"
 
 To load extensions, use DuckDB's SQL `INSTALL` and `LOAD` commands as you would other SQL statements.
 
-```text
+```sql
 INSTALL fts;
 LOAD fts;
 ```
@@ -251,7 +251,7 @@ COPY (SELECT 42 AS woot UNION ALL SELECT 43 AS woot) TO 'test.csv' (HEADER);
 
 First, read a file and pipe it to the `duckdb` CLI executable. As arguments to the DuckDB CLI, pass in the location of the database to open, in this case, an in-memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
 
-```sql
+```bash
 $ cat test.csv | duckdb :memory: "SELECT * FROM read_csv('/dev/stdin')"
 ```
 

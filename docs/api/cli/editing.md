@@ -3,11 +3,11 @@ layout: docu
 title: Editing
 ---
 
-> linenoise is currently only available for MacOS and Linux.
+> linenoise is currently only available for macOS and Linux.
 
 DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com/antirez/linenoise), which has short-cuts that are based on [Emacs mode of readline](https://readline.kablamo.org/emacs.html). Below is a list of available commands.
 
-### Moving
+## Moving
 
 |      Key      |                                 Action                                  |
 |---------------|-------------------------------------------------------------------------|
@@ -26,7 +26,7 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | Alt+Left      | Move back a word                                                        |
 | Alt+Right     | Move forward a word                                                     |
 
-### History
+## History
 
 | Key    | Action                         |
 |--------|--------------------------------|
@@ -39,7 +39,7 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | Alt+N  | Search the history             |
 | Alt+P  | Search the history             |
 
-### Changing Text
+## Changing Text
 
 | Key           | Action                                                   |
 |---------------|----------------------------------------------------------|
@@ -60,7 +60,7 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | Alt+Backspace | Delete previous word                                    |
 | Alt+\         | Delete spaces around cursor                              |
 
-### Completing
+## Completing
 
 |    Key    |                          Action                           |
 |-----------|-----------------------------------------------------------|
@@ -68,8 +68,7 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | Shift+Tab | When auto-completing, cycle to previous entry.            |
 | ESC+ESC   | When auto-completing, revert auto-completion.             |
 
-
-### Miscellaneous
+## Miscellaneous
 
 |  Key   |                           Action                           |
 |--------|------------------------------------------------------------|
@@ -81,12 +80,10 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | Ctrl+O | Cancel editing of current query                            |
 | Ctrl+Z | Suspend CLI and return to shell, use `fg` to re-open       |
 
-
-### Using Read-Line
+## Using Read-Line
 
 If you prefer, you can use [`rlwrap`](https://github.com/hanslub42/rlwrap) to use read-line directly with the shell:
 
 ```bash
 rlwrap --substitute-prompt="D " duckdb -batch
 ```
-
