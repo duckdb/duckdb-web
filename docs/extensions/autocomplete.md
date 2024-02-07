@@ -6,28 +6,9 @@ title: AutoComplete Extension
 The `autocomplete` extension adds supports for autocomplete in the [CLI client](../api/cli).
 The extension is shipped by default with the CLI client.
 
-## Auto-Completion Rules
+## Behavior
 
-The DuckDB shell auto-completes four different groups: (1) keywords, (2) table names + table functions, (3) column names + scalar functions, and (4) file names. The shell looks at the position in the SQL statement to determine which of these auto-completions to trigger. For example:
-
-```sql
-S -> SELECT
-```
-```sql
-SELECT s -> student_id
-```
-```sql
-SELECT student_id F -> FROM
-```
-```sql
-SELECT student_id FROM g -> grades
-```
-```sql
-SELECT student_id FROM 'd -> data/
-```
-```sql
-SELECT student_id FROM 'data/ -> data/grades.csv
-```
+For the behavior of the `autocomplete` extension, see the [documentation of the CLI client](../api/cli/autocomplete).
 
 ## Functions
 

@@ -55,7 +55,7 @@ Use ".open FILENAME" to reopen on a persistent database.
 D
 ```
 
-To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. Running on a persistent database allows spilling to disk, thus facilitating larger-than-memory workloads (i.e. out-of-core-processing).
+To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. Running on a persistent database allows spilling to disk, thus facilitating larger-than-memory workloads (i.e., out-of-core-processing).
 
 ### Running SQL Statements in the CLI
 
@@ -75,6 +75,10 @@ SELECT 'quack' AS my_column;
 ```
 
 The CLI supports all of DuckDB's rich [SQL syntax](../../sql/introduction) including `SELECT`, `CREATE`, and `ALTER` statements.
+
+### Editor Features
+
+The CLI supports [autocompletion](autocomplete), and has sophisticated [editor features](editing) and [syntax highlighting](syntax_highlighting) on certain platforms.
 
 ### Exiting the CLI
 
@@ -223,7 +227,7 @@ $ duckdb < select_example.sql
 
 To execute a command with SQL text passed in directly from the command line, call `duckdb` with two arguments: the database location (or `:memory:`), and a string with the SQL statement to execute.
 
-```sql
+```bash
 $ duckdb :memory: "SELECT 42 AS the_answer"
 ```
 
@@ -231,7 +235,7 @@ $ duckdb :memory: "SELECT 42 AS the_answer"
 
 To load extensions, use DuckDB's SQL `INSTALL` and `LOAD` commands as you would other SQL statements.
 
-```text
+```sql
 INSTALL fts;
 LOAD fts;
 ```
@@ -251,7 +255,7 @@ COPY (SELECT 42 AS woot UNION ALL SELECT 43 AS woot) TO 'test.csv' (HEADER);
 
 First, read a file and pipe it to the `duckdb` CLI executable. As arguments to the DuckDB CLI, pass in the location of the database to open, in this case, an in-memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
 
-```sql
+```bash
 $ cat test.csv | duckdb :memory: "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
@@ -312,3 +316,5 @@ It is only available in the CLI client and is not supported in other DuckDB clie
 
 The DuckDB CLI supports executing [prepared statements](../../sql/query_syntax/prepared_statements) in addition to regular `SELECT` statements.
 To create and execute a prepared statement in the CLI client, use the `PREPARE` clause and the `EXECUTE` statement.
+
+## Pages in This Section
