@@ -55,7 +55,7 @@ Use ".open FILENAME" to reopen on a persistent database.
 D
 ```
 
-To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. Running on a persistent database allows spilling to disk, thus facilitating larger-than-memory workloads (i.e. out-of-core-processing).
+To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. Running on a persistent database allows spilling to disk, thus facilitating larger-than-memory workloads (i.e., out-of-core-processing).
 
 ### Running SQL Statements in the CLI
 
