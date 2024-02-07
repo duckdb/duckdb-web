@@ -312,3 +312,5 @@ It is only available in the CLI client and is not supported in other DuckDB clie
 
 The DuckDB CLI supports executing [prepared statements](../../sql/query_syntax/prepared_statements) in addition to regular `SELECT` statements.
 To create and execute a prepared statement in the CLI client, use the `PREPARE` clause and the `EXECUTE` statement.
+
+## Pages in This Section
