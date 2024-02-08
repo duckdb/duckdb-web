@@ -2,16 +2,21 @@
 INSTALL spatial;
 LOAD spatial;
 
-SELECT 
-    ST_Point(pickup_latitude, pickup_longitude) AS pickup_point,
-    ST_Point(dropoff_latitude, dropoff_longitude) AS dropoff_point,
-    dropoff_datetime::TIMESTAMP - pickup_datetime::TIMESTAMP AS time,
-    trip_distance,
+CREATE TABLE stations AS
+    FROM 's3://duckdb-blobs/stations.parquet';
+
+-- What are the top-3 closest Intercity stations
+-- using aerial distance?
+SELECT
+    s1.name_long AS station1,
+    s2.name_long AS station2,
     ST_Distance(
-        ST_Transform(pickup_point, 'EPSG:4326', 'ESRI:102718'), 
-        ST_Transform(dropoff_point, 'EPSG:4326', 'ESRI:102718')) / 5280 
-    AS aerial_distance, 
-    trip_distance - aerial_distance AS diff
-FROM rides 
-WHERE diff > 0
-ORDER BY diff DESC;
+        ST_Point(s1.geo_lng, s1.geo_lat),
+        ST_Point(s2.geo_lng, s2.geo_lat)
+    ) * 111139 AS distance
+FROM stations s1, stations s2
+WHERE s1.type LIKE '%Intercity%'
+  AND s2.type LIKE '%Intercity%'
+  AND s1.id < s2.id
+ORDER BY distance ASC
+LIMIT 3;
