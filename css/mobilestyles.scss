@@ -441,6 +441,18 @@
 		background: white;
 		padding-left: 10px;
 	}
+	body.landing footer .sitefooter .footercontent .footernavigation,
+	.sitefooter .footercontent .footernavigation{
+		column-gap: 30px;
+		row-gap: 40px;
+		flex-wrap: wrap;
+		>div{
+			width: calc(50% - 15px);
+		}
+		a{
+			line-height: 1.5;
+		}
+	}
 }
 
 @media only screen and (max-height: 840px) {
