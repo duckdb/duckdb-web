@@ -218,31 +218,31 @@ body_class: landing nowrap
 	
 <!-- ------------------- SQL ------------------- -->
 
-<div data-language="sql" data-example="sql-aggregation-query" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/">
+<div data-language="sql" data-example="sql-aggregation-query" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Create-table-from-Parquet-file%0ACREATE-TABLE-train_services-AS%0A----FROM-'s3%3A%2F%2Fduckdb%20blobs%2Ftrain_services.parquet'~,%20%20-Get-the-top%203-busiest-train-stations%0ASELECT-station_name%2C-count(*)-AS-num_services%0AFROM-train_services%0AGROUP-BY-ALL%0AORDER-BY-num_services-DESC%0ALIMIT-3~">
 {% highlight sql %}
 {% include landing-page/sql/aggregation.sql %}
 {% endhighlight %}
 </div>	
 
-<div data-language="sql" data-example="sql-csv-reader" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/">
+<div data-language="sql" data-example="sql-csv-reader" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Load-CSV-file%2C-auto%20detecting-column-name-and-types%0ACREATE-TABLE-stations-AS%0A----FROM-'https%3A%2F%2Fblobs.duckdb.org%2Fstations.csv'~,%20%20-Sample-10-stations-using-replacement-sample%0AFROM-stations-USING-SAMPLE-10~,%20%20-Compute-some-property-on-the-stations-table%0ASUMMARIZE-stations~">
 {% highlight sql %}
 {% include landing-page/sql/csv-loader.sql %}
 {% endhighlight %}
 </div>
 
-<div data-language="sql" data-example="sql-parquet-reading-s3" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/">
+<div data-language="sql" data-example="sql-parquet-reading-s3" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Directly-query-Parquet-file-in-S3%0ASELECT-station_name%2C-count(*)-AS-num_services%0AFROM-'s3%3A%2F%2Fduckdb%20blobs%2Ftrain_services.parquet'%0AGROUP-BY-ALL%0AORDER-BY-num_services-DESC%0ALIMIT-10~">
 {% highlight sql %}
 {% include landing-page/sql/s3-parquet.sql %}
 {% endhighlight %}
 </div>
 
-<div data-language="sql" data-example="sql-join-query" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/">
+<div data-language="sql" data-example="sql-join-query" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,CREATE-TABLE-stations-AS%0A----FROM-'s3%3A%2F%2Fduckdb%20blobs%2Fstations.parquet'~,CREATE-TABLE-tariffs-AS%0A----FROM-'s3%3A%2F%2Fduckdb%20blobs%2Ftariffs.parquet'~,%20%20-Find-the-top%205-most-expensive-domestice-train-routes%0ASELECT-s1.name_short%2C-s2.name_short%2C-tariffs.price%0AFROM-tariffs%0AJOIN-stations-s1-ON-tariffs.station1-%3D-s1.code%0AJOIN-stations-s2-ON-tariffs.station2-%3D-s2.code%0AWHERE-s1.country-%3D-s2.country%0A--AND-s1.code-%3C-s2.code%0AORDER-BY-price-DESC%0ALIMIT-5~">
 {% highlight sql %}
 {% include landing-page/sql/join.sql %}
 {% endhighlight %}
 </div>
 
-<div data-language="sql" data-example="sql-spatial-extension" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/">
+<div data-language="sql" data-example="sql-spatial-extension" data-buttontxt="Live Demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Spatial-extension-for-geospatial-support%0AINSTALL-spatial~%0ALOAD-spatial~,CREATE-TABLE-stations-AS%0A----FROM-'s3%3A%2F%2Fduckdb%20blobs%2Fstations.parquet'~,%20%20-What-are-the-top%203-closest-Intercity-stations%0A%20%20-using-aerial-distance%3F%0ASELECT%0A----s1.name_long-AS-station1%2C%0A----s2.name_long-AS-station2%2C%0A----ST_Distance(%0A--------ST_Point(s1.geo_lng%2C-s1.geo_lat)%2C%0A--------ST_Point(s2.geo_lng%2C-s2.geo_lat)%0A----)-*-111139-AS-distance%0AFROM-stations-s1%2C-stations-s2%0AWHERE-s1.type-LIKE-'%25Intercity%25'%0A--AND-s2.type-LIKE-'%25Intercity%25'%0A--AND-s1.id-%3C-s2.id%0AORDER-BY-distance-ASC%0ALIMIT-3~">
 {% highlight sql %}
 {% include landing-page/sql/spatial-extension.sql %}
 {% endhighlight %}
