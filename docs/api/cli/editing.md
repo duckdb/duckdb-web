@@ -70,15 +70,16 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Miscellaneous
 
-|  Key   |                           Action                           |
-|--------|------------------------------------------------------------|
-| Enter  | Execute query. If query is not complete, insert a newline. |
-| Ctrl+J | Execute query. If query is not complete, insert a newline. |
-| Ctrl+C | Cancel editing of current query                            |
-| Ctrl+G | Cancel editing of current query                            |
-| Ctrl+L | Clear screen                                               |
-| Ctrl+O | Cancel editing of current query                            |
-| Ctrl+Z | Suspend CLI and return to shell, use `fg` to re-open       |
+|  Key   |                           Action                                                    |
+|--------|-------------------------------------------------------------------------------------|
+| Enter  | Execute query. If query is not complete, insert a newline at the end of the buffer. |
+| Ctrl+J | Execute query. If query is not complete, insert a newline at the end of the buffer. |
+| Ctrl+C | Cancel editing of current query                                                     |
+| Ctrl+G | Cancel editing of current query                                                     |
+| Ctrl+L | Clear screen                                                                        |
+| Ctrl+O | Cancel editing of current query                                                     |
+| Ctrl+X | Insert a newline after the cursor                                                   |
+| Ctrl+Z | Suspend CLI and return to shell, use `fg` to re-open                                |
 
 ## Using Read-Line
 
