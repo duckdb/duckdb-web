@@ -56,25 +56,32 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
 The following operators are supported for lists:
 
+<!-- markdownlint-disable MD056 -->
 
 | Operator | Description | Example | Result |
 |-|--|---|-|
 | `&&`  | Alias for `list_intersect`                                                                | `[1, 2, 3, 4, 5] && [2, 5, 5, 6]` | `[2, 5]`             |
 | `@>`  | Alias for `list_has_all`, where the list on the **right** of the operator is the sublist. | `[1, 2, 3, 4] @> [3, 4, 3]`       | `true`               |
 | `<@`  | Alias for `list_has_all`, where the list on the **left** of the operator is the sublist.  | `[1, 4] <@ [1, 2, 3, 4]`          | `true`               |
-<!-- markdownlint-disable-next-line MD056 -->
 | `||`  | Alias for `list_concat`                                                                   | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
 | `<=>` | Alias for `list_cosine_similarity`                                                        | `[1, 2, 3] <=> [1, 2, 5]`         | `0.9759000729485332` |
 | `<->` | Alias for `list_distance`                                                                 | `[1, 2, 3] <-> [1, 2, 5]`         | `2.0`                |
+
+<!-- markdownlint-enable MD056 -->
 
 ## List Comprehension
 
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
 
 ```sql
-SELECT [lower(x) for x in strings] FROM (VALUES (['Hello', '', 'World'])) t(strings);
--- ['hello', '', 'world']
-SELECT [upper(x) for x in strings if len(x) > 0] FROM (VALUES (['Hello', '', 'World'])) t(strings);
+SELECT [lower(x) for x in strings]
+FROM (VALUES (['Hello', '', 'World'])) t(strings);
+-- [hello, , world]
+```
+
+```sql
+SELECT [upper(x) for x in strings if len(x) > 0]
+FROM (VALUES (['Hello', '', 'World'])) t(strings);
 -- [HELLO, WORLD]
 ```
 
