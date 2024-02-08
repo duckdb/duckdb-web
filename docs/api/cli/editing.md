@@ -9,22 +9,22 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Moving
 
-|      Key      |                                 Action                                  |
-|---------------|-------------------------------------------------------------------------|
-| Left          | Move back a character                                                   |
-| Right         | Move forward a character                                                |
-| Up            | Move up a line. When on the first line, move to previous history entry  |
-| Down          | Move down a line. When on last line, move to next history entry         |
-| Home          | Move to beginning of buffer                                             |
-| End           | Move to end of buffer                                                   |
-| Ctrl+Left     | Move back a word                                                        |
-| Ctrl+Right    | Move forward a word                                                     |
-| Ctrl+A        | Move to beginning of buffer                                             |
-| Ctrl+B        | Move back a character                                                   |
-| Ctrl+E        | Move to end of buffer                                                   |
-| Ctrl+F        | Move forward a character                                                |
-| Alt+Left      | Move back a word                                                        |
-| Alt+Right     | Move forward a word                                                     |
+|      Key      |                                 Action                                 |
+|---------------|------------------------------------------------------------------------|
+| Left          | Move back a character                                                  |
+| Right         | Move forward a character                                               |
+| Up            | Move up a line. When on the first line, move to previous history entry |
+| Down          | Move down a line. When on last line, move to next history entry        |
+| Home          | Move to beginning of buffer                                            |
+| End           | Move to end of buffer                                                  |
+| Ctrl+Left     | Move back a word                                                       |
+| Ctrl+Right    | Move forward a word                                                    |
+| Ctrl+A        | Move to beginning of buffer                                            |
+| Ctrl+B        | Move back a character                                                  |
+| Ctrl+E        | Move to end of buffer                                                  |
+| Ctrl+F        | Move forward a character                                               |
+| Alt+Left      | Move back a word                                                       |
+| Alt+Right     | Move forward a word                                                    |
 
 ## History
 
@@ -62,23 +62,24 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Completing
 
-|    Key    |                          Action                           |
-|-----------|-----------------------------------------------------------|
-| Tab       | Autocomplete. When autocompleting, cycle to next entry.   |
-| Shift+Tab | When autocompleting, cycle to previous entry.             |
-| ESC+ESC   | When autocompleting, revert autocompletion.               |
+|    Key    |                          Action                        |
+|-----------|--------------------------------------------------------|
+| Tab       | Autocomplete. When autocompleting, cycle to next entry |
+| Shift+Tab | When autocompleting, cycle to previous entry           |
+| ESC+ESC   | When autocompleting, revert autocompletion             |
 
 ## Miscellaneous
 
-|  Key   |                           Action                           |
-|--------|------------------------------------------------------------|
-| Enter  | Execute query. If query is not complete, insert a newline. |
-| Ctrl+J | Execute query. If query is not complete, insert a newline. |
-| Ctrl+C | Cancel editing of current query                            |
-| Ctrl+G | Cancel editing of current query                            |
-| Ctrl+L | Clear screen                                               |
-| Ctrl+O | Cancel editing of current query                            |
-| Ctrl+Z | Suspend CLI and return to shell, use `fg` to re-open       |
+|  Key   |                           Action                                                   |
+|--------|------------------------------------------------------------------------------------|
+| Enter  | Execute query. If query is not complete, insert a newline at the end of the buffer |
+| Ctrl+J | Execute query. If query is not complete, insert a newline at the end of the buffer |
+| Ctrl+C | Cancel editing of current query                                                    |
+| Ctrl+G | Cancel editing of current query                                                    |
+| Ctrl+L | Clear screen                                                                       |
+| Ctrl+O | Cancel editing of current query                                                    |
+| Ctrl+X | Insert a newline after the cursor                                                  |
+| Ctrl+Z | Suspend CLI and return to shell, use `fg` to re-open                               |
 
 ## Using Read-Line
 
