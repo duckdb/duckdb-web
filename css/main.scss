@@ -1,23 +1,9 @@
 ---
 ---
 
+@import 'variables';
+
 /** DUCKDB MAIN CSS **/
-
-$duckDByellow: #fff100;
-$duckDBlightyellow: #fffee6;
-$duckDBgrey: #ebebeb;
-$duckDBblue: #e0f1fd;
-$duckDBlightgrey: #f5f5f5;
-$purple: #7D66FF;
-$maxContentWidth: 950px;
-
-$fontMono:  "JetBrainsMono-Regular", "Lucida Console", monospace;
-$fontMonoBold: "JetBrainsMono-Bold", "Lucida Console", monospace;
-$fontMonoItalic: "JetBrainsMono-Italic", "Lucida Console", monospace;
-$fontMonoItalicBold: "JetBrainsMono-Bold-Italic", "Lucida Console", monospace;
-
-$fontSans: "SuisseIntl", Helvetica, Arial, sans-serif;
-$fontSansBold: "SuisseIntl", Helvetica, Arial, sans-serif;
 
 /** FONT IMPORT **/
 @font-face{
@@ -162,7 +148,7 @@ ul{
 }
 
 strong{
-	font-family: $fontSansBold;
+	font-family: $fontSans;
 	font-weight: 600;
 	font-weight: normal;
 }
@@ -264,6 +250,24 @@ img.downloadlogo{
 	z-index: 999;
 	background: red;
 	opacity: 0!important;
+}
+
+.flexwrap{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.pagehead{
+	background-color: #161616;
+	background-image: url("data:image/svg+xml,%3Csvg width='1440' height='257' viewBox='0 0 1440 257' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_2960_5714)'%3E%3Crect width='1440' height='257' fill='%23161616'/%3E%3Cpath d='M1762 710.626L1762 -53.9999C1762 -142.365 1690.37 -214 1602 -214L1344.05 -214C1255.69 -214 1184.05 -142.366 1184.05 -54L1184.05 270.996C1184.05 359.361 1112.42 430.996 1024.05 430.996L942 430.996C853.635 430.996 782 502.63 782 590.996L782 1058' stroke='url(%23paint0_linear_2960_5714)' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M-664.793 1108L850 1108C938.366 1108 1010 1036.37 1010 948L1010 220.616C1010 132.25 938.366 60.6156 850 60.6155L1.7064 60.6155C-86.6592 60.6155 -158.294 -11.019 -158.294 -99.3845L-158.294 -508C-158.294 -596.365 -229.928 -668 -318.294 -668L-1294 -668' stroke='url(%23paint1_linear_2960_5714)' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_2960_5714' x1='1556.56' y1='-272.688' x2='965.893' y2='681.719' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23292058'/%3E%3Cstop offset='1' stop-color='%235C4CB8'/%3E%3C/linearGradient%3E%3ClinearGradient id='paint1_linear_2960_5714' x1='1116.3' y1='735.688' x2='-612.923' y2='-333.951' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23292058'/%3E%3Cstop offset='1' stop-color='%235C4CB8'/%3E%3C/linearGradient%3E%3CclipPath id='clip0_2960_5714'%3E%3Crect width='1440' height='257' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+	background-size: cover;
+	background-position: center center;
+	h1{
+		padding: 105px 15px;
+		color: white;
+		font-size: $fontSizeh1;
+	}
 }
 
 header .headerline{
@@ -486,11 +490,11 @@ main{
 		margin-bottom: 50px;
 	}
 	.wrap{
-		max-width: $maxContentWidth;
+		max-width: $maxContentWidthOld;
 		margin: 0 auto;
 	}
 	#main_content_wrap{
-		margin-top: 80px;
+		margin-top: 70px;
 	}
 }
 
