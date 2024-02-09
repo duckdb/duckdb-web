@@ -710,7 +710,8 @@ body.documentation{
 		font-size: 10px;
 		color: black;
 		margin-left: 2px;
-		font-family: "SuisseIntl-Medium";
+		font-family: $fontSans;
+		font-weight: 500;
 		transition: background .2s;
 		&::after{
 			content: "";
@@ -735,8 +736,8 @@ body.documentation{
 			img{
 				width: 100%;
 				height: auto;
-				margin-bottom: 50px;
-				margin-top: 50px;
+				margin-bottom: 20px;
+				margin-top: 20px;
 			}
 			table{ img{
 				width: auto;
@@ -769,7 +770,8 @@ body.documentation{
 			font-size: 21px;
 			margin-bottom: 10px;
 			margin-top: 30px;
-			font-family: "SuisseIntl-Medium";
+			font-family: $fontSans;
+			font-weight: 500;
 		}
 		h4{
 			font-size: 19px;
