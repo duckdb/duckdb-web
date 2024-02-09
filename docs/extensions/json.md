@@ -71,7 +71,7 @@ The only exception to this behavior is the cast from `VARCHAR` to `JSON`, which 
 
 ## JSON Table Functions
 
-The following two table functions are used to read JSON:
+The following table functions are used to read JSON:
 
 | Function | Description |
 |:---|:---|
