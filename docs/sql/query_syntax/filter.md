@@ -63,7 +63,7 @@ CREATE TEMP TABLE stacked_data AS
         SELECT 
             i, 
             count(*) OVER () AS rows 
-        FROM generate_series(1, 100000000) tbl(i)
+        FROM generate_series(1, 100_000_000) tbl(i)
     ) tbl;
 ```
 
