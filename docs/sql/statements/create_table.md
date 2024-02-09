@@ -84,7 +84,7 @@ INSERT INTO t1 VALUES (3, 101);
 
 ```sql
 CREATE TABLE t2 (id INTEGER PRIMARY KEY, x INTEGER, y INTEGER CHECK (x < y));
-INSERT NTO t2 VALUES (1, 5, 10);
+INSERT INTO t2 VALUES (1, 5, 10);
 INSERT INTO t2 VALUES (2, 5, 3);
 -- Error: Constraint Error: CHECK constraint failed: t2
 ```
