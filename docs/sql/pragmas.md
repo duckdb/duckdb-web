@@ -123,9 +123,9 @@ Set the default collation to one of the available ones:
 SET default_collation = 'nocase';
 ```
 
-### Ordering
+### Deafult Ordering for NULLs
 
-Set the ordering for NULLs to be either `NULLS FIRST` or `NULLS LAST`:
+Set the default ordering for NULLs to be either `NULLS FIRST` or `NULLS LAST`:
 
 ```sql
 SET default_null_order = 'NULLS FIRST';
