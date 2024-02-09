@@ -16,10 +16,10 @@ The `CREATE SECRET` statement creates a new secret in the **Secrets Manager**, w
 
 Secrets are typed, their type identifies which service they are for. Currently, the following cloud services are available:
 
-* AWS S3
-* Google Cloud Storage
-* Cloudflare R2
-* Azure Blob Storage
+* AWS S3 (`S3`), through the [`httpfs` extension](../../extensions/httpfs)
+* Google Cloud Storage (`GCS`), through the [`httpfs` extension](../../extensions/httpfs)
+* Cloudflare R2 (`R2`), through the [`httpfs` extension](../../extensions/httpfs)
+* Azure Blob Storage, through the [`azure` extension](../../extensions/azure)
 
 For each type, there are one or more "secret providers" that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
@@ -84,12 +84,18 @@ Now, if the user queries something from `s3://my-other-bucket/something`, secret
 
 ### Listing Secrets
 
-Secrets can be listed using the built-in table-producing function, e.g., by using `FROM duckdb_secrets();`. Sensitive information will be redacted.
+Secrets can be listed using the built-in table-producing function, e.g., by using the [`duckdb_secrets()` table function](../duckdb_table_functions#duckdb_secrets):
+
+```sql
+FROM duckdb_secrets();
+```
+
+Sensitive information will be redacted.
 
 ### Syntax for `CREATE SECRET`
 
 <div id="rrdiagram1"></div>
 
-#### Syntax for `DROP SECRET`
+### Syntax for `DROP SECRET`
 
 <div id="rrdiagram2"></div>

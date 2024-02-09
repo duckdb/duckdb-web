@@ -1,24 +1,22 @@
-
-
 function GenerateCreateSecret(options = {}) {
 	return Diagram([
 		Stack([
 			Sequence([
 				Keyword("CREATE"),
+				GenerateOrReplace(),
+				Optional(Choice(0, [Keyword("PERSISTENT"), Keyword("TEMPORARY")]), "skip"),
 				Keyword("SECRET"),
-				Expression("name"),
-				Keyword("ON"),
-				Expression("table"),
+			]),
+			Sequence([
+				GenerateIfNotExists(),
+				Expression("secret_name"),
+				Optional(Sequence([Keyword("IN"), Expression("storage_specifier")]), "skip")
 			]),
 			Sequence([
 				Keyword("("),
-				OneOrMore(
-					Choice(0, [
-						Expression("column"),
-						Sequence([Keyword("("),  Expression("expression"), Keyword(")")])
-					]),
-				Keyword(",")),
-				Keyword(")")
+				Keyword("TYPE"), Expression("secret_type"),
+				ZeroOrMore(Sequence([Keyword(","), Keyword("KEY_n"), Expression("VALUE_n")])),
+				Keyword(")"),
 			]),
 		])
 	])
@@ -26,12 +24,18 @@ function GenerateCreateSecret(options = {}) {
 
 function GenerateDropSecret(options = {}) {
 	return Diagram([
-		Sequence([
-			Keyword("DROP"),
-			Keyword("SECRET"),
-			Optional(Sequence([Keyword("IF"), Keyword("EXISTS")]), "skip"),
-			Expression("name")
-		]),
+		Stack([
+			Sequence([
+				Keyword("DROP"),
+				Optional(Choice(0, [Keyword("PERSISTENT"), Keyword("TEMPORARY")]), "skip"),
+				Keyword("SECRET"),
+				Optional(Sequence([Keyword("IF"), Keyword("EXISTS")]), "skip")
+			]),
+			Sequence([
+				Expression("secret_name"),
+				Optional(Sequence([Keyword("FROM"), Expression("storage_specifier")]), "skip")
+			]),
+		])
 	])
 }
 

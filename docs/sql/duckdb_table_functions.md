@@ -194,6 +194,20 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 
 The [`information_schema.schemata`](information_schema) system view provides a more standardized way to obtain metadata about database schemas.
 
+## `duckdb_secrets`
+
+The `duckdb_secrets()` function provides metadata about the secrets available in the DuckDB instance.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `name` | The name of the secret. | `VARCHAR` |
+| `type` | The type of the secret, e.g., `S3`, `GCS`, `R2`. | `VARCHAR` |
+| `provider` | TODO | `VARCHAR` |
+| `persistent` | TODO | `BOOLEAN` |
+| `storage` | TODO | `VARCHAR` |
+| `scope` | TODO | `VARCHAR[]` |
+| `secret_string` | TODO. Sensitive information is redacted. | `VARCHAR` |
+
 ## `duckdb_sequences`
 
 The `duckdb_sequences()` function provides metadata about the sequences available in the DuckDB instance.
