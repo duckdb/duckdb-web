@@ -8,8 +8,10 @@
 		{% assign urlString = page.url | replace: ".html", "" | replace: startingUrl, "" %}
 		{% assign urlParts = urlString | split: "/"  %}
 		{% assign startingUrl = startingUrl | append: "/" %}
+	{% elsif page.url contains '/docs/latest/' %}
+		<!-- todo -->
 	{% else %}
-		{% assign versionviewed = "dev" %}
+		{% assign versionviewed = site.currentduckdbversion | append: " (stable)" %}
 		{% assign startingUrl = "docs/" %}
 		{% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
 	{% endif %}
