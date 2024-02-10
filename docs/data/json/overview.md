@@ -274,4 +274,4 @@ SELECT * FROM todos LIMIT 5;
 
 For more details, see the [page on the `COPY` statement](../../sql/statements/copy).
 
-## Pages in This Section
+<!-- ## Pages in This Section -->
