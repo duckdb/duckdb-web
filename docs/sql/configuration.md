@@ -5,8 +5,8 @@ title: Configuration
 
 DuckDB has a number of configuration options that can be used to change the behavior of the system.  
 The configuration options can be set using either the [`SET` statement](statements/set) or the [`PRAGMA` statement](pragmas).
-They can be reset to their original values using the [`RESET` statement](statements/set#reset)
-and queried in `duckdb_settings()`.
+They can be reset to their original values using the [`RESET` statement](statements/set#reset).
+The values of configuration options can be queried via the [`current_setting()` scalar function](functions/utility) or using the [`duckdb_settings()` table function](duckdb_table_functions#duckdb_settings).
 
 ## Examples
 
@@ -19,14 +19,36 @@ SET threads TO 1;
 SET enable_progress_bar = true;
 -- set the default null order to NULLS LAST
 SET default_null_order = 'nulls_last';
-
+```
+```sql
+-- return the current value of a specific setting
+SELECT current_setting('threads') as threads;
+```
+```text
+┌─────────┐
+│ threads │
+│  int64  │
+├─────────┤
+│      10 │
+└─────────┘
+```
+```sql
+-- query a specific setting
+SELECT * FROM duckdb_settings() WHERE name = 'threads';
+```
+```text
+┌─────────┬─────────┬─────────────────────────────────────────────────┬────────────┐
+│  name   │  value  │                   description                   │ input_type │
+│ varchar │ varchar │                     varchar                     │  varchar   │
+├─────────┼─────────┼─────────────────────────────────────────────────┼────────────┤
+│ threads │ 10      │ The number of total threads used by the system. │ BIGINT     │
+└─────────┴─────────┴─────────────────────────────────────────────────┴────────────┘
+```
+```sql
 -- show a list of all available settings
 SELECT * FROM duckdb_settings();
-
--- return the current value of a specific setting
--- this example returns 'automatic'
-SELECT current_setting('access_mode');
-
+```
+```sql
 -- reset the memory limit of the system back to the default
 RESET memory_limit;
 ```
