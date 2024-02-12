@@ -35,8 +35,8 @@ CREATE TABLE t1 AS FROM t2 LIMIT 0;
 ## Temporary Tables
 
 Temporary tables can be created using the `CREATE TEMP TABLE` or the `CREATE TEMPORARY TABLE` statement (see diagram below).
-Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DuckDB is closed they will be automatically dropped. 
-Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](../../sql/configuration) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained. 
+Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DuckDB is closed they will be automatically dropped.
+Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](../../sql/configuration) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained.
 
 ```sql
 -- create a temporary table from a CSV file (automatically detecting column names and types)
@@ -59,10 +59,10 @@ CREATE OR REPLACE TABLE t1 (i INTEGER, j INTEGER);
 
 ## `IF NOT EXISTS`
 
-The `IF NOT EXISTS` syntax will only proceed with the creation of the table if it does not already exist. If the table already exists, no action will be taken and the existing table will remain in the database. 
+The `IF NOT EXISTS` syntax will only proceed with the creation of the table if it does not already exist. If the table already exists, no action will be taken and the existing table will remain in the database.
 
 ```sql
--- create a table with two integer columns (i and j) only if t1 does not exist yet. 
+-- create a table with two integer columns (i and j) only if t1 does not exist yet
 CREATE TABLE IF NOT EXISTS t1 (i INTEGER, j INTEGER);
 ```
 
@@ -157,15 +157,15 @@ The `[type] [GENERATED ALWAYS] AS (expr) [VIRTUAL|STORED]` syntax will create a 
 
 DuckDB can infer the type of the generated column based on the expression's return type. This allows you to leave out the type when declaring a generated column. It is possible to explicitly set a type, but insertions into the referenced columns might fail if the type can not be cast to the type of the generated column.
   
-Generated columns come in two varieties: `VIRTUAL` and `STORED`.  
-The data of virtual generated columns is not stored on disk, instead it is computed from the expression every time the column is referenced (through a select statement).  
+Generated columns come in two varieties: `VIRTUAL` and `STORED`.
+The data of virtual generated columns is not stored on disk, instead it is computed from the expression every time the column is referenced (through a select statement).
 
-The data of stored generated columns is stored on disk and is computed every time the data of their dependencies change (through an insert/update/drop statement).  
+The data of stored generated columns is stored on disk and is computed every time the data of their dependencies change (through an insert/update/drop statement).
 
 Currently only the `VIRTUAL` kind is supported, and it is also the default option if the last field is left blank.
 
 ```sql
--- The simplest syntax for a generated column. 
+-- The simplest syntax for a generated column
 -- The type is derived from the expression, and the variant defaults to VIRTUAL
 CREATE TABLE t1 (x FLOAT, two_x AS (2 * x));
 

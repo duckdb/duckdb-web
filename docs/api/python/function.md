@@ -52,8 +52,8 @@ con.remove_function(name)
 
 ## Type Annotation
 
-When the function has type annotation it's often possible to leave out all of the optional parameters.  
-Using `DuckDBPyType` we can implicitly convert many known types to DuckDBs type system.  
+When the function has type annotation it's often possible to leave out all of the optional parameters.
+Using `DuckDBPyType` we can implicitly convert many known types to DuckDBs type system.
 For example:
 
 ```python
@@ -78,7 +78,7 @@ If only the parameter list types can be inferred, you'll need to pass in `None` 
 
 ## Null Handling
 
-By default when functions receive a NULL value, this instantly returns NULL, as part of the default null handling.  
+By default when functions receive a `NULL` value, this instantly returns `NULL`, as part of the default `NULL`-handling.
 When this is not desired, you need to explicitly set this parameter to `"special"`.
 
 ```python
@@ -126,7 +126,7 @@ print(res)
 
 ## Side Effects
 
-By default DuckDB will assume the created function is a *pure* function, meaning it will produce the same output when given the same input. 
+By default DuckDB will assume the created function is a *pure* function, meaning it will produce the same output when given the same input.
 If your function does not follow that rule, for example when your function makes use of randomness, then you will need to mark this function as having `side_effects`.
 
 For example, this function will produce a new count for every invocation
@@ -167,13 +167,13 @@ Currently two function types are supported, `native` (default) and `arrow`.
 
 ### Arrow
 
-If the function is expected to receive arrow arrays, set the `type` parameter to `'arrow'`.  
+If the function is expected to receive arrow arrays, set the `type` parameter to `'arrow'`.
 
 This will let the system know to provide arrow arrays of up to `STANDARD_VECTOR_SIZE` tuples to the function, and also expect an array of the same amount of tuples to be returned from the function.
 
 ### Native
 
-When the function type is set to `native` the function will be provided with a single tuple at a time, and expect only a single value to be returned.  
+When the function type is set to `native` the function will be provided with a single tuple at a time, and expect only a single value to be returned.
 This can be useful to interact with Python libraries that don't operate on Arrow, such as `faker`:
 
 ```python

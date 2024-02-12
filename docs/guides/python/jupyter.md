@@ -3,10 +3,10 @@ layout: docu
 title: Jupyter Notebooks
 ---
 
-DuckDB's Python client can be used directly in Jupyter notebooks with no additional configuration if desired. 
-However, additional libraries can be used to simplify SQL query development. 
+DuckDB's Python client can be used directly in Jupyter notebooks with no additional configuration if desired.
+However, additional libraries can be used to simplify SQL query development.
 This guide will describe how to utilize those additional libraries.
-See other guides in the Python section for how to use DuckDB and Python together.  
+See other guides in the Python section for how to use DuckDB and Python together.
 
 In this example, we use the [JupySQL](https://github.com/ploomber/jupysql) package.
 
@@ -14,7 +14,7 @@ This example workflow is also available as a [Google Colab notebook](https://col
 
 ## Library Installation
 
-Four additional libraries improve the DuckDB experience in Jupyter notebooks. 
+Four additional libraries improve the DuckDB experience in Jupyter notebooks.
 1. [jupysql](https://github.com/ploomber/jupysql)
     * Convert a Jupyter code cell into a SQL cell
 2. [Pandas](https://github.com/pandas-dev/pandas)
@@ -129,7 +129,7 @@ The dataframe being queried can be specified just like any other table in the `F
 The most common way to plot datasets in Python is to load them using Pandas and then use matplotlib or seaborn for plotting.
 This approach requires loading all data into memory which is highly inefficient.
 The plotting module in JupySQL runs computations in the SQL engine.
-This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, efficiently plotting massive datasets. 
+This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, efficiently plotting massive datasets.
 
 ### Install and Load DuckDB httpfs extension
 
@@ -157,8 +157,8 @@ In this case, the name of the table is the URL of the remotely stored Parquet fi
 ![Boxplot of the trip_distance column](/images/trip-distance-boxplot.png)
 
 
-Now, create a query that filters by the 90th percentile. 
-Note the use of the `--save`, and `--no-execute` functions. 
+Now, create a query that filters by the 90th percentile.
+Note the use of the `--save`, and `--no-execute` functions.
 This tells JupySQL to store the query, but skips execution. It will be referenced in the next plotting call.
 
 
@@ -169,7 +169,7 @@ FROM 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.pa
 WHERE trip_distance < 6.3
 ```
 
-To create a histogram, call `%sqlplot histogram` and pass the name of the table, the column to plot, and the number of bins. 
+To create a histogram, call `%sqlplot histogram` and pass the name of the table, the column to plot, and the number of bins.
 This uses `--with short-trips` so JupySQL uses the query defined previously and therefore only plots a subset of the data.
 
 ```python
