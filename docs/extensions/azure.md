@@ -54,7 +54,7 @@ The Azure extension has two ways to configure the authentication. The preferred 
 
 ### Authentication with Secret
 
-Multiple secret providers are available for the Azure extension:
+Multiple [Secret Providers](../sql/statements/create_secret#secret-providers) are available for the Azure extension:
 
 #### `CONFIG` Provider
 
@@ -92,7 +92,7 @@ CREATE SECRET secret3 (
 );
 ```
 
-DuckDB also allows specifying a specific chain using the `CHAIN` keyword. For example:
+DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a `;` separated list of providers that will be tried in order. For example:
 
 ```sql
 CREATE SECRET secret4 (
