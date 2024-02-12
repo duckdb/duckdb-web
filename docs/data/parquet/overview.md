@@ -49,7 +49,7 @@ Parquet files are compressed columnar files that are efficient to load and proce
 
 > Parquet data sets differ based on the number of files, the size of individual files, the compression algorithm used row group size, etc. These have a significant effect on performance. Please consult the [Performance Guide](../../guides/performance/file_formats) for details.
 
-## read_parquet Function
+## `read_parquet` Function
 
 | Function | Description | Example |
 |:--|:--|:-----|
