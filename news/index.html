@@ -7,6 +7,7 @@ layoutpart: postsoverview
 <div class="post-list">
 {% for post in site.posts %}
 	{% assign currentdate = post.date | date: "%Y" %}
+	{% assign random_number = forloop.index | modulo: 5 %}
 	{% if currentdate != date %}
 		{% unless forloop.first %}</section>{% endunless %}
 		<section><div class="wrap">
@@ -18,7 +19,7 @@ layoutpart: postsoverview
 			{% if post.thumb %}
 			<div class="postimg custom" style="background-image: url('{{ post.thumb }}');">
 			{% else %}
-			<div class="postimg bg_1">
+			<div class="postimg bg_{{ random_number }}">
 			{% endif %}
 				<a href="{{ post.url }}" class="blocklink"></a>
 			</div>
