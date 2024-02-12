@@ -360,7 +360,7 @@ PRAGMA disable_print_progress_bar;
 By default, DuckDB uses the `.tmp` directory to spill to disk. To change this, use:
 
 ```sql
-SET temp_directory = '/path/to/temp/dir/'
+SET temp_directory = '/path/to/temp_dir.tmp/'
 ```
 
 ### Storage Information
