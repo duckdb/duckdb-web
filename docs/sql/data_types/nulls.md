@@ -56,11 +56,11 @@ SELECT ifnull(1, 'default_string');
 -- 1
 ```
 
-## NULL and Conjunctions
+## `NULL` and Conjunctions
 
 `NULL` values have special semantics in `AND`/`OR` conjunctions. For the ternary logic truth tables, see the [Boolean Type documentation](../../sql/data_types/boolean).
 
-## NULL and Aggregate Functions
+## `NULL` and Aggregate Functions
 
 `NULL` values are ignored in most aggregate functions. 
 
