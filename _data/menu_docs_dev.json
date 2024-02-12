@@ -674,6 +674,10 @@
                   "url": "create_schema"
                 },
                 {
+                  "page": "CREATE SECRET",
+                  "url": "create_secret"
+                },
+                {
                   "page": "CREATE SEQUENCE",
                   "url": "create_sequence"
                 },
@@ -1102,7 +1106,7 @@
               "url": "full_text_search"
             },
             {
-              "page": "httpfs",
+              "page": "httpfs (http and S3)",
               "url": "httpfs"
             },
             {

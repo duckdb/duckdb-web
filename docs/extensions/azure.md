@@ -5,8 +5,6 @@ title: Azure Extension
 
 The `azure` extension is a loadable extension that adds a filesystem abstraction for the [Azure Blob storage](https://azure.microsoft.com/en-us/products/storage/blobs) to DuckDB.
 
-> This extension is currently in an experimental state. Feel free to try it out, but be aware some things may not work as expected.
-
 ## Installing and Loading
 
 To install and load the `azure` extension, run:
@@ -18,37 +16,28 @@ LOAD azure;
 
 ## Usage
 
-Authentication is done by setting the connection string:
+Once the [authentication](#authentication) is set up, the Azure Blob Storage can be queried as follows:
 
 ```sql
-SET azure_storage_connection_string = '<your_connection_string>';
+SELECT count(*) FROM 'az://<my_container>/<my_file>.<parquet_or_csv>';
 ```
 
-After setting the connection string, the Azure Blob Storage can be queried:
+Globs are also supported:
 
 ```sql
-SELECT count(*) FROM 'azure://<my_container>/<my_file>.<parquet_or_csv>';
-```
-
-Blobs are also supported:
-
-```sql
-SELECT * FROM 'azure://<my_container>/*.csv';
+SELECT * FROM 'az://<my_container>/*.csv';
 ```
 
 ## Configuration
 
 Use the following [configuration options](../sql/configuration) how the extension reads remote files:
 
-* `azure_http_stats` [type: `BOOLEAN`] (default: `false`)  
-    Include http info from Azure Storage in the [`EXPLAIN ANALYZE` statement](/dev/profiling).
-    Notice that the result may be incorrect for more than one active DuckDB connection and the calculation of total received and sent bytes is not yet implemented.
-* `azure_read_transfer_concurrency` [type: `BIGINT`] (default: `5`)  
-    Maximum number of threads the Azure client can use for a single parallel read. If `azure_read_transfer_chunk_size` is less than `azure_read_buffer_size` then setting this > 1 will allow the Azure client to do concurrent requests to fill the buffer.
-* `azure_read_transfer_chunk_size` [type: `BIGINT`] (default: `1 * 1024 * 1024`)  
-    Maximum size in bytes that the Azure client will read in a single request. It is recommended that this is a factor of `azure_read_buffer_size`.
-* `azure_read_buffer_size` [type: `UBIGINT`] (default: `1 * 1024 * 1024`)  
-    Size of the read buffer. It is recommended that this is evenly divisible by `azure_read_transfer_chunk_size`.
+| Name | Description | Type | Default |
+|:---|:---|:---|:---|
+| `azure_http_stats` | Include http info from Azure Storage in the [`EXPLAIN ANALYZE` statement](/dev/profiling). Notice that the result may be incorrect for more than one active DuckDB connection and the calculation of total received and sent bytes is not yet implemented. | `BOOLEAN` | `false` |
+| `azure_read_transfer_concurrency` | Maximum number of threads the Azure client can use for a single parallel read. If `azure_read_transfer_chunk_size` is less than `azure_read_buffer_size` then setting this > 1 will allow the Azure client to do concurrent requests to fill the buffer. | `BIGINT` | `5` |
+| `azure_read_transfer_chunk_size` | Maximum size in bytes that the Azure client will read in a single request. It is recommended that this is a factor of `azure_read_buffer_size`. | `BIGINT` | `1024*1024` |
+| `azure_read_buffer_size` | Size of the read buffer. It is recommended that this is evenly divisible by `azure_read_transfer_chunk_size`. | `UBIGINT` | `1024*1024` |
 
 Example:
 
@@ -59,16 +48,80 @@ SET azure_read_transfer_chunk_size = 1048576;
 SET azure_read_buffer_size = 1048576;
 ```
 
-## Authentication Configuration
+## Authentication
 
-The Azure extension has two ways to configure the authentication:
+The Azure extension has two ways to configure the authentication. The preferred way is to use Secrets.
 
-* with variables
-* with secret
+### Authentication with Secret
 
-These are exclusive and cannot be mixed.
+Multiple secret providers are available for the Azure extension:
 
-### Authentication with Variables
+#### `CONFIG` Provider
+
+The default provider, `CONFIG` (i.e., user-configured), allows access to the storage account using a connection string or anonymously. For example:
+
+```sql
+CREATE SECRET secret1 (
+    TYPE AZURE,
+    CONNECTION_STRING '<value>'
+);
+```
+
+If you do not use authentication, you still need to specify the storage account name. For example:
+
+```sql
+-- Note that PROVIDER CONFIG is optional as it is the default one
+CREATE SECRET secret2 (
+    TYPE AZURE,
+    PROVIDER CONFIG,
+    ACCOUNT_NAME '<storage account name>'
+);
+```
+
+#### `CREDENTIAL_CHAIN` Provider
+
+The `CREDENTIAL_CHAIN` provider allows connecting using credentials automatically fetched by the Azure SDK via the Azure credential chain.
+By default, the `DefaultAzureCredential` chain used, which tries credentials according to the order specified by the [Azure documentation](https://learn.microsoft.com/en-us/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest#@azure-identity-defaultazurecredential-constructor).
+For example:
+
+```sql
+CREATE SECRET secret3 (
+    TYPE AZURE,
+    PROVIDER CREDENTIAL_CHAIN,
+    ACCOUNT_NAME '<storage account name>'
+);
+```
+
+DuckDB also allows specifying a specific chain using the `CHAIN` keyword. For example:
+
+```sql
+CREATE SECRET secret4 (
+    TYPE AZURE,
+    PROVIDER CREDENTIAL_CHAIN,
+    CHAIN 'cli;env;managed_identity',
+    ACCOUNT_NAME '<storage account name>'
+);
+```
+
+#### Configuring a Proxy
+
+To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME`, and `PROXY_PASSWORD` in the secret definition. For example:
+
+```sql
+CREATE SECRET secret5 (
+    TYPE AZURE,
+    CONNECTION_STRING '<value>',
+    HTTP_PROXY 'http://localhost:3128',
+    PROXY_USER_NAME 'john',
+    PROXY_PASSWORD 'doe'
+);
+```
+
+> * When using secrets, the `HTTP_PROXY` environment variable will still be honored except is you provide an explicit value for it.
+> * When using secrets, the `SET` variable of the *Authentication with variables* session will be ignore.
+> * The Azure `CREDENTIAL_CHAIN` provider, the actual token is fetched at query time, not at the time of creating the secret.
+
+### Authentication with Variables (Deprecated)
 
 ```sql
 SET variable_name = variable_value;
@@ -100,56 +153,6 @@ Additional variable to use a proxy:
     Http proxy username if needed.
 * `azure_proxy_password` [type: `STRING`]  
     Http proxy password if needed.
-
-### Authentication with Secret
-
-Two secret providers are available at the moment for the Azure extension:
-
-1. The default one `CONFIG` allowing access to storage account using a connection string or anonymously.
-   ```sql
-   -- Note that PROVIDER CONFIG is optional as it is the default one
-   CREATE SECRET s1 (
-       TYPE AZURE,
-       PROVIDER CONFIG,
-       CONNECTION_STRING '<value>'
-   )
-   ```
-   ```sql
-   -- Note that PROVIDER CONFIG is optional as it is the default one
-   CREATE SECRET s1 (
-       TYPE AZURE,
-       PROVIDER CONFIG,
-       ACCOUNT_NAME '<storage account name>'
-   )
-   ```
-2. The `CREDENTIAL_CHAIN` one allow to connect with an identity
-   ```sql
-   CREATE SECRET az1 (
-       TYPE AZURE,
-       PROVIDER CREDENTIAL_CHAIN,
-       CHAIN 'cli;env',
-       ACCOUNT_NAME '<storage account name>'
-   )
-   ```
-   Check `azure_credential_chain` variable description for the `CHAIN` value. Also, note that when using `CREDENTIAL_CHAIN` provider the default chain value is `default`.
-
-To configure proxy information when using secret, you can add `HTTP_PROXY`, `PROXY_USER_NAME` & `PROXY_PASSWORD` in the secret definition.
-
-Example:
-
-```sql
-CREATE SECRET s1 (
-    TYPE AZURE,
-    CONNECTION_STRING '<value>',
-    HTTP_PROXY        'http://localhost:3128',
-    PROXY_USER_NAME   'john',
-    PROXY_PASSWORD    'doe'
-)
-```
-
-> * When using secret, the `HTTP_PROXY` env variable will still be honored except is you provide an explicit value for it.
-> * When using secret, the `SET variable` of the *Authentication with variables* session will be ignore.
-> * If you want to make your secrets persistent replace `CREATE SECRET` by `CREATE PERSISTENT SECRET`.
 
 ## GitHub Repository
 
