@@ -19,7 +19,11 @@ _**Best Practice:**_ Aim for 5-10 GB memory per CPU core.
 
 DuckDB is capable of operating both as an in-memory and as a disk-based database system. In the latter case, it can spill to disk to process larger-than-memory workloads (a.k.a. out-of-core processing). In these cases, a fast disk is highly beneficial. However, if the workload fits in memory, the disk speed only has a limited effect on performance.
 
-In general, network disks – e.g., [NFS](https://en.wikipedia.org/wiki/Network_File_System), network drives on Windows, and network-backed cloud disks (such as [AWS EBS](https://aws.amazon.com/ebs/)) – will result in slower DuckDB workloads than using local disks. However, different network disks can have vastly varying IO performance, ranging from very slow to almost as fast as local. Therefore, for optimal performance, only use network disks that can provide high IO performance.
+In general, network-based storage will result in slower DuckDB workloads than using local disks.
+This includes network disks such as [NFS](https://en.wikipedia.org/wiki/Network_File_System),
+network drives such as [SMB](https://en.wikipedia.org/wiki/Server_Message_Block) and [Samba](https://en.wikipedia.org/wiki/Samba_(software)),
+and network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/).
+However, different network disks can have vastly varying IO performance, ranging from very slow to almost as fast as local. Therefore, for optimal performance, only use network disks that can provide high IO performance.
 
 _**Best Practice:**_ Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they guarantee high IO.
 
