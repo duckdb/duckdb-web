@@ -64,7 +64,7 @@ When using `read_json_auto`, every parameter that supports auto-detection is ena
 
 ## Examples of Format Settings
 
-The JSON extension can attempt to determine the format of a JSON file when setting `format` to `auto`.  
+The JSON extension can attempt to determine the format of a JSON file when setting `format` to `auto`.
 Here are some example JSON files and the corresponding `format` settings that should be used.
 
 In each of the below cases, the `format` setting was not needed, as DuckDB was able to infer it correctly, but it is included for illustrative purposes.
@@ -274,4 +274,4 @@ SELECT * FROM todos LIMIT 5;
 
 For more details, see the [page on the `COPY` statement](../../sql/statements/copy).
 
-## Pages in This Section
+<!-- ## Pages in This Section -->

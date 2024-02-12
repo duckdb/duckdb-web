@@ -3,7 +3,7 @@ layout: docu
 title: DuckDB_% Metadata Functions
 ---
 
-DuckDB offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`. 
+DuckDB offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`.
 
 The resultset returned by a `duckdb_` table function may be used just like an ordinary table or view. For example, you can use a `duckdb_` function call in the `FROM` clause of a `SELECT` statement, and you may refer to the columns of its returned resultset elsewhere in the statement, for example in the `WHERE` clause.
 
@@ -19,7 +19,7 @@ Alternatively, you may execute table functions also using the `CALL`-syntax:
 CALL duckdb_settings();
 ```
 
-In this case too, the parentheses are mandatory. 
+In this case too, the parentheses are mandatory.
 
 > For some of the `duckdb_%` functions, there is also an identically named view available, which also resides in the `main` schema. Typically, these views do a `SELECT` on the `duckdb_` table function with the same name, while filtering out those objects that are marked as internal. We mention it here, because if you accidentally omit the parentheses in your `duckdb_` table function call, you might still get a result, but from the identically named view.
 
@@ -168,6 +168,16 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 | `keyword_name` |The keyword.| `VARCHAR` |
 | `keyword_category` |Indicates the category of the keyword. Values are `column_name`, `reserved`, `type_function` and `unreserved`. | `VARCHAR` |
 
+## `duckdb_memory`
+
+The `duckdb_memory()` function provides metadata about DuckDB's buffer manager.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `tag` | The memory tag. It has one of the following values: `BASE_TABLE`, `HASH_TABLE`, `PARQUET_READER`, `CSV_READER`, `ORDER_BY`, `ART_INDEX`, `COLUMN_DATA`, `METADATA`, `OVERFLOW_STRINGS`, `IN_MEMORY_TABLE`, `ALLOCATOR`, `EXTENSION`. | `VARCHAR` |
+| `memory_usage_bytes` | The memory used (in bytes). | `BIGINT` |
+| `temporary_storage_bytes` | The disk storage used (in bytes). | `BIGINT` |
+
 ## `duckdb_optimizers`
 
 The `duckdb_optimizers()` function provides metadata about the optimization rules (e.g., `expression_rewriter`, `filter_pushdown`) available in the DuckDB instance.
@@ -237,7 +247,7 @@ Attributes like `temporary`, `start_value` etc. correspond to the various option
 
 ## `duckdb_settings`
 
-The `duckdb_settings()` function provides metadata about the settings available in the DuckDB instance. 
+The `duckdb_settings()` function provides metadata about the settings available in the DuckDB instance.
 
 <div class="narrow_table"></div>
 
