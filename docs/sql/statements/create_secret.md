@@ -6,11 +6,11 @@ railroad: statements/secrets.js
 
 The `CREATE SECRET` statement creates a new secret in the **Secrets Manager**, which provides unified user interface for secrets across all backends that use them. Secrets can be scoped, so different storage prefixes can have different secrets, allowing for example to join data across organizations in a single query. Secrets can also be persisted, so that they do not need to be specified every time DuckDB is launched.
 
-> The Secrets Manager was introduced with DuckDB version 0.10.
+> Secrets were introduced with DuckDB version 0.10.
 
-> The Secrets Manager stored data in unencrypted binary format on the disk.
+> Persistent secrets are stored in unencrypted binary format on the disk
 
-## Secrets Manager
+## Secrets
 
 ### Types of Secrets
 
@@ -25,7 +25,11 @@ For each type, there are one or more "secret providers" that specify how the sec
 
 ### Creating a Secret
 
-Secrets can be temporary or persistent. Temporary secrets are used by default – and are stored in-memory for the life span of the DuckDB instance similar to how settings worked previously. Persistent secrets are stored in **unencrypted binary format** in the `~/.duckdb/stored_secrets` directory. On startup of DuckDB, persistent secrets are read from this directory and automatically loaded.
+Secrets can be **temporary** or **persistent**. Temporary secrets are used by default – and are stored in-memory for the life span of the DuckDB instance similar to how settings worked previously. Persistent secrets are stored in **unencrypted binary format** in the `~/.duckdb/stored_secrets` directory. On startup of DuckDB, persistent secrets are read from this directory and automatically loaded.
+
+#### Secret Providers
+
+To create a secret, a **Secret Provider** needs to be used. A Secret Provider is a mechanism through which a secret is generated. To illustrate this, for the `S3`, `GCS`, `R2`, and `AZURE` secret types, DuckDB currently supports two providers: `CONFIG` and `CREDENTIAL_CHAIN`. The `CONFIG` provider requires the user to pass all configuration information into the `CREATE SECRET`, whereas the `CREDENTIAL_CHAIN` provider will automatically try to fetch credentials. When no Secret Provider is specified, the `CONFIG` provider is used. For more details on how to create secrets using different providers checkout the respective pages on [httpfs](../../extensions/httpfs#configuration-and-authentication-using-secrets) and [azure](../../extensions/azure#authentication-with-secret)
 
 #### Temporary Secrets
 
@@ -38,6 +42,8 @@ CREATE SECRET (
     SECRET 'mysecret',
     REGION 'myregion');
 ```
+
+Note that we implicitly use the default `CONFIG` secret provider here.
 
 #### Persistent Secrets
 
@@ -80,7 +86,11 @@ CREATE SECRET secret2 (
     SCOPE 's3://my-other-bucket');
 ```
 
-Now, if the user queries something from `s3://my-other-bucket/something`, secret `secret2` will be chosen automatically for that request.
+Now, if the user queries something from `s3://my-other-bucket/something`, secret `secret2` will be chosen automatically for that request. To see which secret is being used, the `which_secret` scalar function can be used, which takes a path and a secret type as parameters:
+
+```sql
+SELECT which_secret('s3://my-other-bucket/file.parquet', 'S3');
+```
 
 ### Listing Secrets
 
