@@ -32,7 +32,7 @@ function GenerateDropSecret(options = {}) {
 				Optional(Sequence([Keyword("IF"), Keyword("EXISTS")]), "skip")
 			]),
 			Sequence([
-				Optional(Expression("secret_name"), "skip"),
+				Expression("secret_name"),
 				Optional(Sequence([Keyword("FROM"), Expression("storage_specifier")]), "skip")
 			]),
 		])
