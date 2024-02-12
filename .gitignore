@@ -314,3 +314,4 @@ report.html
 
 # Python pickle files
 environment.pickle
+.ruby-version
