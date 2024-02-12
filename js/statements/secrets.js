@@ -9,7 +9,7 @@ function GenerateCreateSecret(options = {}) {
 			]),
 			Sequence([
 				GenerateIfNotExists(),
-				Expression("secret_name"),
+				Optional(Expression("secret_name"), "skip"),
 				Optional(Sequence([Keyword("IN"), Expression("storage_specifier")]), "skip")
 			]),
 			Sequence([
@@ -32,7 +32,7 @@ function GenerateDropSecret(options = {}) {
 				Optional(Sequence([Keyword("IF"), Keyword("EXISTS")]), "skip")
 			]),
 			Sequence([
-				Expression("secret_name"),
+				Optional(Expression("secret_name"), "skip"),
 				Optional(Sequence([Keyword("FROM"), Expression("storage_specifier")]), "skip")
 			]),
 		])

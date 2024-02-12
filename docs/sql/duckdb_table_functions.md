@@ -201,12 +201,12 @@ The `duckdb_secrets()` function provides metadata about the secrets available in
 | Column | Description | Type |
 |:-|:---|:-|
 | `name` | The name of the secret. | `VARCHAR` |
-| `type` | The type of the secret, e.g., `S3`, `GCS`, `R2`. | `VARCHAR` |
-| `provider` | TODO | `VARCHAR` |
-| `persistent` | TODO | `BOOLEAN` |
-| `storage` | TODO | `VARCHAR` |
-| `scope` | TODO | `VARCHAR[]` |
-| `secret_string` | TODO. Sensitive information is redacted. | `VARCHAR` |
+| `type` | The type of the secret, e.g., `S3`, `GCS`, `R2`, `AZURE`. | `VARCHAR` |
+| `provider` | The provider of the secret. | `VARCHAR` |
+| `persistent` | Denotes whether the secret is persisent. | `BOOLEAN` |
+| `storage` | The backend for storing the secret. | `VARCHAR` |
+| `scope` | The scope of the secret. | `VARCHAR[]` |
+| `secret_string` | Returns the content of the secret as a string. Sensitive pieces of information, e.g., they access key, are redacted. | `VARCHAR` |
 
 ## `duckdb_sequences`
 

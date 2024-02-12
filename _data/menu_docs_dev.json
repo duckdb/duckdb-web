@@ -1106,7 +1106,7 @@
               "url": "full_text_search"
             },
             {
-              "page": "httpfs",
+              "page": "httpfs (http and S3)",
               "url": "httpfs"
             },
             {

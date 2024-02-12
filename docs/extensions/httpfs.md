@@ -1,19 +1,23 @@
 ---
 layout: docu
-title: httpfs Extension
+title: httpfs Extension for HTTP and S3 Support
 ---
 
-The `httpfs` extension is an autoloadable extension implementing a file system that allows reading remote/writing remote files. For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the `httpfs` extension supports reading/writing/globbing files.
+The `httpfs` extension is an autoloadable extension implementing a file system that allows reading remote/writing remote files.
+For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the `httpfs` extension supports reading/writing/globbing files.
+
+## Installation and Loading
 
 The `httpfs` extension will be, by default, autoloaded on first use of any functionality exposed by this extension.
-If you prefer to explicitly install this extension and load it at the start of every session, use the following commands:
+
+To manually install and load the `httpfs` extension, run:
 
 ```sql
 INSTALL httpfs;
 LOAD httpfs;
 ```
 
-## Running Queries over HTTP(S)
+## HTTP(S)
 
 With the `httpfs` extension, it is possible to directly query files over the HTTP(S) protocol. This works for all files supported by DuckDB or its various extensions, and provides read-only access.
 
@@ -36,16 +40,21 @@ SELECT count(*) FROM 'https://domain.tld/file.parquet';
 Scanning multiple files over HTTP(S) is also supported:
 
 ```sql
-SELECT * FROM read_parquet(['https://domain.tld/file1.parquet', 'https://domain.tld/file2.parquet']);
+SELECT * FROM read_parquet([
+    'https://domain.tld/file1.parquet',
+    'https://domain.tld/file2.parquet'
+]);
 ```
 
-## Running Queries over S3
+## S3 API
 
 The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
 
-### Requirements
+### Platforms
 
-The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google Cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API should also work, but not all features may be supported. Below is a list of which parts of the S3 API are required for each `httpfs` feature.
+The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google Cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API (such as [Cloudflare R2](https://www.cloudflare.com/en-gb/developer-platform/r2/)) should also work, but not all features may be supported.
+
+The following table shows which parts of the S3 API are required for each `httpfs` feature.
 
 <div class="narrow_table"></div>
 
@@ -53,10 +62,32 @@ The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Mi
 |:---|:---|
 | Public file reads | HTTP Range requests |
 | Private file reads | Secret key or session token authentication |
-| File glob | [ListObjectV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)|
-| File writes | [Multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html)|
+| File glob | [ListObjectV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html) |
+| File writes | [Multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html) |
 
-### Configuration
+### Configuration and Authentication using Secrets
+
+The preferred way to configure and authenticate to S3 endpoints is to use secrets.
+Multiple secret providers are available.
+
+#### `CONFIG` Provider
+
+The default provider, `CONFIG` (i.e., user-configured), allows access to the S3 bucket. For example:
+
+```sql
+CREATE SECRET secret1 (
+    TYPE S3,
+    KEY_ID 'AKIAIOSFODNN7EXAMPLE',
+    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+    REGION 'us-east-1'
+);
+```
+
+#### `CREDENTIAL_CHAIN` Provider
+
+The `CREDENTIAL_CHAIN` provider allows connecting using credentials automatically fetched by the AWS SDK via the AWS defaults credential provider.
+
+### Configuration and Authentication using `SET` Variables (Deprecated)
 
 To be able to read or write from S3, the correct region should be set:
 
