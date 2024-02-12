@@ -2,6 +2,7 @@
 layout: post
 title:  "Updates to the H2O.ai db-benchmark!"
 author: Tom Ebergen
+thumb: "/images/blog/thumbs/231103.png"
 excerpt: The H2O.ai db-benchmark has been updated with new results. In addition, the AWS EC2 instance used for benchmarking has been changed to a c6id.metal for improved repeatability and fairness across libraries. DuckDB is the fastest library for both join and group by queries at almost every data size.
 ---
 

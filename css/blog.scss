@@ -231,6 +231,16 @@ h5 {
 			}
 		}
 		.infoline{
+			display: flex;
+			align-items: center;
+			.icon{
+				width: 45px;
+				height: 45px;
+				background-image: url("../images/duckdb-circle.svg");
+				background-size: contain;
+				background-repeat: no-repeat;
+				margin-right: 10px;
+			}
 			span{
 				display: block;
 				font-size: 16px;
@@ -302,7 +312,7 @@ h5 {
 				font-style: normal;
 				font-weight: 500;
 				margin-top: 0;
-				margin-bottom: 70px;
+				margin-bottom: 50px;
 			}
 			h3{
 				margin-top: 0;

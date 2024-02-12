@@ -74,7 +74,10 @@
 					{% else %}
 						<div class="singleentry">
 							<h1>{{ page.title }}</h1>
-							<div class="infoline"><span class="author">{{ page.author }}</span><span>{{ page.date | date: "%Y-%m-%d" }}</span></div>
+							<div class="infoline">
+								<div class="icon"></div>
+								<div><span class="author">{{ page.author }}</span><span>{{ page.date | date: "%Y-%m-%d" }}</span></div>
+							</div>
 							{% if page.excerpt != "" %}
 								<div class="excerpt">{{ '_TL;DR: ' | append: page.excerpt | append: '_' | markdownify }}</div>
 							{% endif %}
