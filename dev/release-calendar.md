@@ -19,6 +19,7 @@ The planned dates of upcoming DuckDB releases are shown below.
 
 | Date | Version | Codename | Named after |
 |--|--|--|--|
+| 2024-02-13 | [0.10.0](https://github.com/duckdb/duckdb/releases/tag/v0.10.0) | Fusca | [Velvet scoter _(Melanitta fusca)_](https://en.wikipedia.org/wiki/Velvet_scoter) |
 | 2023-09-26 | [0.9.0](https://github.com/duckdb/duckdb/releases/tag/v0.9.0) | Undulata | [Yellow-billed duck _(Anas undulata)_](https://en.wikipedia.org/wiki/Yellow-billed_duck) |
 | 2023-05-17 | [0.8.0](https://github.com/duckdb/duckdb/releases/tag/v0.8.0) | Fulvigula | [Mottled duck _(Anas fulvigula)_](https://en.wikipedia.org/wiki/Mottled_duck) |
 | 2023-02-13 | [0.7.0](https://github.com/duckdb/duckdb/releases/tag/v0.7.0) | Labradorius | [Labrador duck _(Camptorhynchus labradorius)_](https://en.wikipedia.org/wiki/Labrador_duck) |
@@ -33,7 +34,7 @@ The planned dates of upcoming DuckDB releases are shown below.
 | 2021-08-02 | [0.2.8](https://github.com/duckdb/duckdb/releases/tag/v0.2.8) | Ceruttii | [_Histrionicus ceruttii_](https://en.wikipedia.org/wiki/Harlequin_duck#Taxonomy) |
 | 2021-06-14 | [0.2.7](https://github.com/duckdb/duckdb/releases/tag/v0.2.7) | Mollissima | [Common eider _(Somateria mollissima)_](https://en.wikipedia.org/wiki/Common_eider) |
 | 2021-05-08 | [0.2.6](https://github.com/duckdb/duckdb/releases/tag/v0.2.6) | Jamaicensis | [Blue-billed ruddy duck _(Oxyura jamaicensis)_](https://en.wikipedia.org/wiki/Ruddy_duck) |
-| 2021-03-10 | [0.2.5](https://github.com/duckdb/duckdb/releases/tag/v0.2.5) | Falcata | [Falcated Duck _(Mareca falcata)_](https://en.wikipedia.org/wiki/Falcated_duck) |
+| 2021-03-10 | [0.2.5](https://github.com/duckdb/duckdb/releases/tag/v0.2.5) | Falcata | [Falcated duck _(Mareca falcata)_](https://en.wikipedia.org/wiki/Falcated_duck) |
 | 2021-02-02 | [0.2.4](https://github.com/duckdb/duckdb/releases/tag/v0.2.4) | Jubata | [Australian wood duck _(Chenonetta jubata)_](https://en.wikipedia.org/wiki/Australian_wood_duck) |
 | 2020-12-03 | [0.2.3](https://github.com/duckdb/duckdb/releases/tag/v0.2.3) | Serrator | [Red-breasted merganser _(Mergus serrator)_](https://en.wikipedia.org/wiki/Red-breasted_merganser) |
 | 2020-11-01 | [0.2.2](https://github.com/duckdb/duckdb/releases/tag/v0.2.2) | Clypeata | [Northern shoveler _(Spatula clypeata)_](https://en.wikipedia.org/wiki/Northern_shoveler) |
