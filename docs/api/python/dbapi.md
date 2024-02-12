@@ -11,7 +11,7 @@ To use the module, you must first create a `DuckDBPyConnection` object that repr
 The connection object takes as a parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Python process). If you would like to connect to an existing database in read-only mode, you can set the `read_only` flag to `True`. Read-only mode is required if multiple Python processes want to access the same database file at the same time.
 
 By default we create an **in-memory-database** that lives inside the `duckdb` module.
-Every method of `DuckDBPyConnection` is also available on the `duckdb` module, this connection is what's used by these methods. 
+Every method of `DuckDBPyConnection` is also available on the `duckdb` module, this connection is what's used by these methods.
 You can also get a reference to this connection by providing the special value `:default:` to `connect`.
 
 ```python
@@ -100,9 +100,10 @@ print(con.fetchall())
 
 ## Named Parameters
 
-Besides the standard unnamed parameters, like `$1`, `$2` etc, it's also possible to supply named parameters, like `$my_parameter`.  
+Besides the standard unnamed parameters, like `$1`, `$2` etc, it's also possible to supply named parameters, like `$my_parameter`.
 When using named parameters, you have to provide a dictionary mapping of `str` to value in the `parameters` argument  
 An example use:
+
 ```python
 import duckdb
 

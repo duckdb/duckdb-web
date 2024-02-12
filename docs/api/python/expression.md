@@ -73,7 +73,7 @@ print(res)
 
 ## Case Expression
 
-This expression contains a `CASE WHEN (...) THEN (...) ELSE (...) END` expression.  
+This expression contains a `CASE WHEN (...) THEN (...) ELSE (...) END` expression.
 By default `ELSE` is `NULL` and it can be set using `.else(value = ...)`.
 Additional `WHEN (...) THEN (...)` blocks can be added with `.when(condition = ..., value = ...)`.
 
