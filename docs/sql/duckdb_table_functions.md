@@ -168,6 +168,16 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 | `keyword_name` |The keyword.| `VARCHAR` |
 | `keyword_category` |Indicates the category of the keyword. Values are `column_name`, `reserved`, `type_function` and `unreserved`. | `VARCHAR` |
 
+## `duckdb_memory`
+
+The `duckdb_memory()` function provides metadata about DuckDB's buffer manager.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `tag` | The memory tag. It has one of the following values: `BASE_TABLE`, `HASH_TABLE`, `PARQUET_READER`, `CSV_READER`, `ORDER_BY`, `ART_INDEX`, `COLUMN_DATA`, `METADATA`, `OVERFLOW_STRINGS`, `IN_MEMORY_TABLE`, `ALLOCATOR`, `EXTENSION`. | `VARCHAR` |
+| `memory_usage_bytes` | The memory used (in bytes). | `BIGINT` |
+| `temporary_storage_bytes` | The disk storage used (in bytes). | `BIGINT` |
+
 ## `duckdb_optimizers`
 
 The `duckdb_optimizers()` function provides metadata about the optimization rules (e.g., `expression_rewriter`, `filter_pushdown`) available in the DuckDB instance.
