@@ -6,7 +6,7 @@ railroad: expressions/like.js
 
 There are four separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), a `GLOB` operator, and POSIX-style regular expressions.
 
-## LIKE
+## `LIKE`
 
 <div id="rrdiagram1"></div>
 
@@ -60,7 +60,7 @@ There are also alternative characters that can be used as keywords in place of `
 | `NOT ILIKE` | `!~~*` |
 
 
-## SIMILAR TO
+## `SIMILAR TO`
 
 <div id="rrdiagram2"></div>
 
@@ -87,7 +87,7 @@ There are also alternative characters that can be used as keywords in place of `
 | `SIMILAR TO` | `~` |
 | `NOT SIMILAR TO` | `!~` |
 
-## GLOB
+## `GLOB`
 
 <div id="rrdiagram3"></div>
 

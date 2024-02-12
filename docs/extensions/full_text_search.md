@@ -22,9 +22,11 @@ The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to 
 ### `PRAGMA create_fts_index`
 
 ```python
-create_fts_index(input_table, input_id, *input_values, stemmer = 'porter', stopwords = 'english',
-                 ignore = '(\\.|[^a-z])+', strip_accents = 1, lower = 1, overwrite = 0)
+create_fts_index(input_table, input_id, *input_values, stemmer = 'porter',
+                 stopwords = 'english', ignore = '(\\.|[^a-z])+',
+                 strip_accents = 1, lower = 1, overwrite = 0)
 ```
+
 `PRAGMA` that creates a FTS index for the specified table.
 
 <!-- markdownlint-disable MD056 -->
@@ -92,16 +94,30 @@ Reduces words to their base. Used internally by the extension.
 Create a table and fill it with text data:
 
 ```sql
-CREATE TABLE documents (document_identifier VARCHAR, text_content VARCHAR, author VARCHAR, doc_version INTEGER);
+CREATE TABLE documents (
+    document_identifier VARCHAR,
+    text_content VARCHAR,
+    author VARCHAR,
+    doc_version INTEGER
+);
 INSERT INTO documents
-    VALUES ('doc1', 'The mallard is a dabbling duck that breeds throughout the temperate.', 'Hannes Mühleisen', 3),
-           ('doc2', 'The cat is a domestic species of small carnivorous mammal.', 'Laurens Kuiper', 2);
+    VALUES ('doc1',
+            'The mallard is a dabbling duck that breeds throughout the temperate.',
+            'Hannes Mühleisen',
+            3),
+           ('doc2',
+            'The cat is a domestic species of small carnivorous mammal.',
+            'Laurens Kuiper',
+            2
+           );
 ```
 
 Build the index, and make both the `text_content` and `author` columns searchable.
 
 ```sql
-PRAGMA create_fts_index('documents', 'document_identifier', 'text_content', 'author');
+PRAGMA create_fts_index(
+    'documents', 'document_identifier', 'text_content', 'author'
+);
 ```
 
 Search the `author` field index for documents that are authored by "Muhleisen". This retrieves "doc1":

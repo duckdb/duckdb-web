@@ -258,7 +258,7 @@ SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
 -- [2, 10, 3]
 ```
 
-### array_to_string
+### `array_to_string`
 
 Concatenates list/array elements using an optional delimiter.
 

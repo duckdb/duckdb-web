@@ -32,7 +32,7 @@ These operators treat `NULL` values as equal.
 | `IS DISTINCT FROM` | not equal, including `NULL` | `2 IS DISTINCT FROM NULL` | `true` |
 | `IS NOT DISTINCT FROM` | equal, including `NULL` | `NULL IS NOT DISTINCT FROM NULL` | `true` |
 
-## BETWEEN and IS (NOT) NULL
+## `BETWEEN` and `IS [NOT] NULL`
 
 <div id="rrdiagram1"></div>
 
