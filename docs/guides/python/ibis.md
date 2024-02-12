@@ -383,7 +383,7 @@ penguins.select("island", s.numeric())
 
 You can read more about [`selectors`](https://ibis-project.org/reference/selectors/) in the docs!
 
-### order_by
+### `order_by`
 
 `order_by` arranges the values of one or more columns in ascending or descending order.
 
@@ -506,7 +506,7 @@ penguins.aggregate([penguins.flipper_length_mm.mean(), penguins.bill_depth_mm.ma
 
 But `aggregate` _really_ shines when it's paired with `group_by`.
 
-### group_by
+### `group_by`
 
 `group_by` creates groupings of rows that have the same value for one or more columns.
 

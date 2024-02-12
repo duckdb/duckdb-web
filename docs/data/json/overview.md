@@ -73,7 +73,7 @@ A query of this shape would work in each case:
 SELECT * FROM filename.json;
 ```
 
-### Format: newline_delimited
+### Format: `newline_delimited`
 
 With `format = 'newline_delimited'` newline-delimited JSON can be parsed.
 Each line is a JSON.
@@ -95,7 +95,7 @@ SELECT * FROM read_json_auto('records.json', format = 'newline_delimited');
 | `value2` | `value2` |
 | `value3` | `value3` |
 
-### Format: array
+### Format: `array`
 
 If the JSON file contains a JSON array of objects (pretty-printed or not), `array_of_objects` may be used.
 ```json
@@ -117,7 +117,7 @@ SELECT * FROM read_json_auto('array.json', format = 'array');
 | `value2` | `value2` |
 | `value3` | `value3` |
 
-### Format: unstructured
+### Format: `unstructured`
 
 If the JSON file contains JSON that is not newline-delimited or an array, `unstructured` may be used.
 ```json
@@ -204,7 +204,7 @@ SELECT * FROM read_json_auto('arrays.json', records = false);
 
 The contents of tables or the result of queries can be written directly to a JSON file using the `COPY` statement. See the [COPY documentation](../../sql/statements/copy#copy-to) for more information.
 
-## read_json_auto Function
+## `read_json_auto` Function
 
 The `read_json_auto` is the simplest method of loading JSON files: it automatically attempts to figure out the correct configuration of the JSON reader. It also automatically deduces types of columns.
 

@@ -231,7 +231,7 @@ We currently support over 50 different formats. You can generate the following t
 Note that far from all of these drivers have been tested properly, and some may require additional options to be passed to work as expected. 
 If you run into any issues please first [consult the GDAL docs](https://gdal.org/drivers/vector/index.html).
 
-### ST_ReadOsm() - Read compressed OSM data
+### `ST_ReadOsm()` - Read Compressed OSM Data
 
 The spatial extension also provides an experimental `ST_ReadOsm()` table function to read compressed OSM data directly from a `.osm.pbf` file. 
 
