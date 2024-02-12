@@ -98,10 +98,17 @@ DuckDB also allows specifying a specific chain using the `CHAIN` keyword. For ex
 CREATE SECRET secret4 (
     TYPE AZURE,
     PROVIDER CREDENTIAL_CHAIN,
-    CHAIN 'cli;env;managed_identity',
+    CHAIN 'cli;env',
     ACCOUNT_NAME '<storage account name>'
 );
 ```
+
+The possible values are the following:
+[`cli`](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli);
+[`managed_identity`](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview);
+[`env`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#environment-variables);
+[`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential);
+`none`. The latest will result in an exception (invalid input).
 
 #### Configuring a Proxy
 
@@ -129,30 +136,15 @@ SET variable_name = variable_value;
 
 Where `variable_name` can be one of the following:
 
-* `azure_storage_connection_string` [type: `STRING`]  
-    Azure connection string, used for authenticating and configuring azure requests.
-* `azure_account_name` [type: `STRING`]  
-    Azure account name, when set, the extension will attempt to automatically detect credentials (not used if you pass the connection string)
-* `azure_endpoint` [type: `STRING`] (default: `blob.core.windows.net`)  
-    Override the azure endpoint for when the Azure credential providers are used.
-* `azure_credential_chain` [type: `STRING`] (default: `none`)  
-    Ordered list of Azure credential providers, in string format separated by `;`. E.g., `'cli;managed_identity;env'` (not used if you pass the connection string).
-  
-    Possible values:
-    [`cli`](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli);
-    [`managed_identity`](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview);
-    [`env`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#environment-variables);
-    [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential);
-    `none`. The latest will result in an exception (invalid input).
-
-Additional variable to use a proxy:
-
-* `azure_http_proxy` [type: `STRING`] (default: `HTTP_PROXY environment variable if set`)  
-    Proxy to use when login & performing request to azure.
-* `azure_proxy_user_name` [type: `STRING`]  
-    Http proxy username if needed.
-* `azure_proxy_password` [type: `STRING`]  
-    Http proxy password if needed.
+| Name | Description | Type | Default |
+|:---|:---|:---|:---|
+| `azure_storage_connection_string` | Azure connection string, used for authenticating and configuring azure requests. | `STRING` | - |
+| `azure_account_name` | Azure account name, when set, the extension will attempt to automatically detect credentials (not used if you pass the connection string). | `STRING` | - |
+| `azure_endpoint` | Override the azure endpoint for when the Azure credential providers are used. | `STRING` | `blob.core.windows.net` |
+| `azure_credential_chain`| Ordered list of Azure credential providers, in string format separated by `;`. For example: `'cli;managed_identity;env'`. See the list of possible values in the [`CREDENTIAL_CHAIN` provider section](#credential_chain-provider). Not used if you pass the connection string. | `STRING` | - |
+| `azure_http_proxy`| Proxy to use when login & performing request to azure. | `STRING` | `HTTP_PROXY` environment variable (if set). |
+| `azure_proxy_user_name`| Http proxy username if needed. | `STRING` | - |
+| `azure_proxy_password`| Http proxy password if needed. | `STRING` | - |
 
 ## GitHub Repository
 
