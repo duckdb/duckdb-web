@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: httpfs Extension for HTTP and S3 Support
+redirect_from:
+  - /docs/extensions/httpfs
+  - /docs/extensions/httpfs/
 ---
 
 The `httpfs` extension is an autoloadable extension implementing a file system that allows reading remote/writing remote files.
@@ -191,7 +194,7 @@ Optionally, the endpoint can be configured in case a non-AWS object storage serv
 SET s3_endpoint = '<domain>.<tld>:<port>';
 ```
 
-If the endpoint is not SSL-enabled then run: 
+If the endpoint is not SSL-enabled then run:
 
 ```sql
 SET s3_use_ssl = false;
@@ -367,3 +370,5 @@ Additionally, most of the configuration options can be set via environment varia
 ## GitHub
 
 The `httpfs` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/httpfs).
+
+## Pages in this Section
