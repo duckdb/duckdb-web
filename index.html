@@ -146,7 +146,7 @@ body_class: landing nowrap
 <section class="blog">
 	<div class="wrap">
 		<h1>Blog</h1>
-		<div class="newswrap">
+		<div class="newstileswrap">
 			{% for post in site.posts limit:4 %}
 				{% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
 				{% capture month %}{{post.date | date: "%B"}}{% endcapture %}
