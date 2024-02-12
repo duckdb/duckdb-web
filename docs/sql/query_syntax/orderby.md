@@ -13,7 +13,7 @@ An error will be thrown if no expressions are included, since the `ORDER BY` cla
 The expressions may begin with either an arbitrary scalar expression (which could be a column name), a column position number (Ex: `1`. Note that it is 1-indexed), or the keyword `ALL`.
 Each expression can optionally be followed by an order modifier (`ASC` or `DESC`, default is `ASC`), and/or a `NULL` order modifier (`NULLS FIRST` or `NULLS LAST`, default is `NULLS LAST`).
 
-## ORDER BY ALL
+## `ORDER BY ALL`
 
 The `ALL` keyword indicates that the output should be sorted by every column in order from left to right. 
 The direction of this sort may be modified using either `ORDER BY ALL ASC` or `ORDER BY ALL DESC` and/or `NULLS FIRST` or `NULLS LAST`.
@@ -74,7 +74,7 @@ FROM addresses
 ORDER BY city COLLATE DE;
 ```
 
-### ORDER BY ALL Examples
+### `ORDER BY ALL` Examples
 
 ```sql
 -- Order from left to right (by address, then by city, then by zip) in ascending order

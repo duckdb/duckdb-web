@@ -10,7 +10,7 @@ If the `GROUP BY` clause is specified, the query is always an aggregate query, e
 When a `GROUP BY` clause is specified, all tuples that have matching data in the grouping columns (i.e., all tuples that belong to the same group) will be combined.
 The values of the grouping columns themselves are unchanged, and any other columns can be combined using an aggregate function (such as `count`, `sum`, `avg`, etc).
 
-## GROUP BY ALL
+## `GROUP BY ALL`
 
 Use `GROUP BY ALL` to `GROUP BY` all columns in the `SELECT` statement that are not wrapped in aggregate functions. 
 This simplifies the syntax by allowing the columns list to be maintained in a single location, and prevents bugs by keeping the `SELECT` granularity aligned to the `GROUP BY` granularity (Ex: Prevents any duplication).
@@ -37,7 +37,7 @@ FROM addresses
 GROUP BY city, street_name;
 ```
 
-### GROUP BY ALL Examples
+### `GROUP BY ALL` Examples
 
 ```sql
 -- Group by city and street_name to remove any duplicate values

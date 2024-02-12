@@ -132,19 +132,19 @@ ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres, READ_ONLY);
 
 Below is a list of supported operations.
 
-### CREATE TABLE
+### `CREATE TABLE`
 
 ```sql
 CREATE TABLE postgres_db.tbl(id INTEGER, name VARCHAR);
 ```
 
-### INSERT INTO
+### `INSERT INTO`
 
 ```sql
 INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```
 
-### SELECT
+### `SELECT`
 
 ```sql
 SELECT * FROM postgres_db.tbl;
@@ -158,44 +158,44 @@ SELECT * FROM postgres_db.tbl;
 └───────┴─────────┘
 ```
 
-### COPY
+### `COPY`
 
 ```sql
 COPY postgres_db.tbl TO 'data.parquet';
 COPY postgres_db.tbl FROM 'data.parquet';
 ```
 
-### UPDATE
+### `UPDATE`
 
 ```sql
 UPDATE postgres_db.tbl SET name='Woohoo' WHERE id=42;
 ```
 
-### DELETE
+### `DELETE`
 
 ```sql
 DELETE FROM postgres_db.tbl WHERE id=42;
 ```
 
-### ALTER TABLE
+### `ALTER TABLE`
 
 ```sql
 ALTER TABLE postgres_db.tbl ADD COLUMN k INTEGER;
 ```
 
-### DROP TABLE
+### `DROP TABLE`
 
 ```sql
 DROP TABLE postgres_db.tbl;
 ```
 
-### CREATE VIEW
+### `CREATE VIEW`
 
 ```sql
 CREATE VIEW postgres_db.v1 AS SELECT 42;
 ```
 
-### CREATE SCHEMA/DROP SCHEMA
+### `CREATE SCHEMA` / `DROP SCHEMA`
 
 ```sql
 CREATE SCHEMA postgres_db.s1;
@@ -243,7 +243,7 @@ SELECT * FROM postgres_db.tmp;
 └────────┘
 ```
 
-## Running SQL Queries in Postgres with postgres_query
+## Running SQL Queries in Postgres with `postgres_query`
 
 The `postgres_query` function allows you to run arbitrary SQL within an attached database. `postgres_query` takes the name of the attached Postgres database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
 
