@@ -1118,8 +1118,12 @@
                   "url": "https"
                 },
                 {
-                  "page": "S3 Support",
-                  "url": "s3"
+                  "page": "S3 API Support",
+                  "url": "s3api"
+                },
+                {
+                  "page": "Legacy Authentication Scheme for S3 API",
+                  "url": "s3api-legacy-authentication"
                 }
               ]
             },
