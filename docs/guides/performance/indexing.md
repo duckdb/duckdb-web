@@ -52,7 +52,7 @@ Indexes are serialized to disk and deserialized lazily, i.e., when the database 
 _**Best Practices:**_
 * Only use primary keys, foreign keys, or unique constraints, if these are necessary for enforcing constraints on your data.
 * Do not define explicit indexes unless you have highly selective queries.
-* If you define an ART index, do so after bulk loading the data to the table.
+* If you define an ART index, do so after bulk loading the data to the table. Adding an index prior to loading, either explicitly or via primary/foreign keys, is [detrimental to load performance](schema#microbenchmark-the-effect-of-primary-keys).
 
 <!--
 ## Microbenchmark: The Timing of Index Creation
