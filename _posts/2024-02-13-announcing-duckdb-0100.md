@@ -15,6 +15,8 @@ To install the new version, please visit the [installation guide](/docs/installa
 
 <!--more-->
 
+Note: Some versions and extensions are still being built. It might take some more time till the latest version is available.
+
 ## What's New in 0.10.0
 
 There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
