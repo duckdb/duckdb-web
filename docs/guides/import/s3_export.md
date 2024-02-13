@@ -15,19 +15,24 @@ To load the `httpfs` extension for usage, use the `LOAD` SQL command:
 LOAD httpfs;
 ```
 
-After loading the `httpfs` extension, set up the credentials and S3 region to write data. You may either use an access key and secret, or a token.
+After loading the `httpfs` extension, set up the credentials to write data. Note that the `region` param should match the region of the bucket you want to access.
 
 ```sql
-SET s3_region = 'us-east-1';
-SET s3_access_key_id = '<AWS access key id>';
-SET s3_secret_access_key = '<AWS secret access key>';
+CREATE SECRET (
+    TYPE S3,
+    KEY_ID 'AKIAIOSFODNN7EXAMPLE',
+    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+    REGION 'us-east-1'
+);
 ```
 
-The alternative is to use a token:
+Alternatively, use the [`aws` extension](../../extensions/aws) to retrieve the credentials automatically:
 
 ```sql
-SET s3_region = 'us-east-1';
-SET s3_session_token = '<AWS session token>';
+CREATE SECRET (
+    TYPE S3,
+    PROVIDER CREDENTIAL_CHAIN
+);
 ```
 
 After the `httpfs` extension is set up and the S3 credentials are correctly configured, Parquet files can be written to S3 using the following command:
@@ -36,16 +41,18 @@ After the `httpfs` extension is set up and the S3 credentials are correctly conf
 COPY <table_name> TO 's3://bucket/file.parquet';
 ```
 
-Similarly, Google Cloud Storage (GCS) is supported through the Interoperability API. You need to create [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and declare them:
+Similarly, Google Cloud Storage (GCS) is supported through the Interoperability API. You need to create [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and provide the credentials as follows:
 
 ```sql
-SET s3_endpoint = 'storage.googleapis.com';
-SET s3_access_key_id = 'key_id';
-SET s3_secret_access_key = 'access_key';
+CREATE SECRET (
+    TYPE GCS,
+    KEY_ID 'AKIAIOSFODNN7EXAMPLE',
+    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+)
 ```
 
-Please note you will need to use the `s3://` URL to write your files.
+After setting up the GCS credentials, you can export using: 
 
 ```sql
-COPY <table_name> TO 's3://gcs_bucket/file.parquet';
+COPY <table_name> TO 'gs://gcs_bucket/file.parquet';
 ```
