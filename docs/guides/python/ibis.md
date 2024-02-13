@@ -179,7 +179,7 @@ penguins.filter(penguins.species == "Gentoo")
 └─────────┴────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┘
 ```
 
-Or filter for Adelie penguins that reside on the island of Torgersen:
+Or filter for Gentoo penguins that have a body mass larger than 6 kg.
 
 ```python
 penguins.filter((penguins.species == "Gentoo") & (penguins.body_mass_g > 6000))
