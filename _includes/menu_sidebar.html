@@ -16,7 +16,11 @@
 		{% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
 	{% endif %}
 
-	{%- assign menudocfile = "menu_docs_" | append: versionviewed | replace: ".", "" -%}
+	{% if versionviewed == '0.10.0 (stable)' %}
+		{%- assign menudocfile = "menu_docs_dev" -%}
+	{% else %}
+		{%- assign menudocfile = "menu_docs_" | append: versionviewed | replace: ".", "" -%}
+	{% endif %}
 
 	<ul class="sidenav">
 		{% if site.data[menudocfile].docsmenu %}
