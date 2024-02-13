@@ -15,7 +15,7 @@ To load the `httpfs` extension for usage, use the `LOAD` SQL command:
 LOAD httpfs;
 ```
 
-After loading the `httpfs` extension, set up the credentials to write data. Note that the `region` param should match the region of the bucket you want to access.
+After loading the `httpfs` extension, set up the credentials to write data. Note that the `region` parameter should match the region of the bucket you want to access.
 
 ```sql
 CREATE SECRET (
