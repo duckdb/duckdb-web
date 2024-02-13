@@ -148,6 +148,7 @@ For this release, DuckDB v0.9 is able to read files created by DuckDB v0.10 prov
 
 * The database file does not contain views
 * The database file does not contain new types (`ARRAY`, `UHUGEINT`)
+* The database file does not contain indexes (`PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`, explicit indexes)
 * The database file does not contain new compression methods (`ALP`). As ALP is automatically used to compress `FLOAT` and `DOUBLE` columns - that means forward compatibility in practice often does not work for `FLOAT` and `DOUBLE` columns unless `ALP` is explicitly disabled through configuration.
 
 We expect that as the format stabilizes and matures this will happen less frequently – and we hope to offer better guarantees in allowing DuckDB to read files written by future DuckDB versions.
