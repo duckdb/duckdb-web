@@ -15,11 +15,11 @@ Who says that SQL should stay frozen in time, chained to a 1999 version of the s
 
 We believe there are many valid reasons for innovation in the SQL language, among them opportunities to simplify basic queries and also to make more dynamic analyses possible. Many of these features arose from community suggestions! Please let us know your SQL pain points on [Discord](https://discord.duckdb.org/) or [GitHub](https://github.com/duckdb/duckdb/discussions) and join us as we change what it feels like to write SQL!
 
-If you have not had a chance to read the first installment in this series, please take a quick look [here](/2022/05/04/friendlier-sql).
+If you have not had a chance to read the first installment in this series, please take a quick look to the prior blog post, [“Friendlier SQL with DuckDB”](/2022/05/04/friendlier-sql).
 
 ## The future is now
 
-The first few enhancements in this list were included in the “Ideas for the Future” section of the prior post. 
+The first few enhancements in this list were included in the “Ideas for the Future” section of the prior post.
 
 ### Reusable column aliases
 
@@ -30,8 +30,11 @@ When working with incremental calculated expressions in a select statement, trad
 ```sql
 SELECT 
     'These are the voyages of the starship Enterprise...' AS intro,
-    instr('These are the voyages of the starship Enterprise...', 'starship') AS starship_loc
-    substr('These are the voyages of the starship Enterprise...', instr('These are the voyages of the starship Enterprise...', 'starship') + len('starship') + 1) AS trimmed_intro;
+    instr('These are the voyages of the starship Enterprise...', 'starship')
+        AS starship_loc
+    substr('These are the voyages of the starship Enterprise...',
+    instr('These are the voyages of the starship Enterprise...', 'starship')
+        + len('starship') + 1) AS trimmed_intro;
 ```
 
 #### Old way 2: All the CTEs
@@ -79,8 +82,10 @@ Let’s take a look at some facts gathered about the first season of Star Trek. 
 ```sql
 INSTALL httpfs;
 LOAD httpfs;
+
 CREATE TABLE trek_facts AS
-    SELECT * FROM 'https://raw.githubusercontent.com/Alex-Monahan/example_datasets/main/Star_Trek-Season_1.csv';
+    SELECT *
+    FROM 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
 
 DESCRIBE trek_facts;
 ```
@@ -368,8 +373,12 @@ For example, let’s take a look at some procurement forecast data just as the E
 CREATE TABLE purchases (item VARCHAR, year INT, count INT);
 
 INSERT INTO purchases
-    VALUES ('phasers', 2155, 1035), ('phasers', 2156, 25039), ('phasers', 2157, 95000),
-           ('photon torpedoes', 2155, 255), ('photon torpedoes', 2156, 17899), ('photon torpedoes', 2157, 87492);
+    VALUES ('phasers', 2155, 1035),
+           ('phasers', 2156, 25039),
+           ('phasers', 2157, 95000),
+           ('photon torpedoes', 2155, 255),
+           ('photon torpedoes', 2156, 17899),
+           ('photon torpedoes', 2157, 87492);
 
 FROM purchases;
 ```
@@ -560,8 +569,8 @@ However, if a `UNION` type is used, each individual row retains its original dat
 CREATE TABLE movies (
      movie UNION(num INT, name VARCHAR)
 );
-INSERT INTO movies 
-     VALUES ('The Motion Picture'), (2), (3), (4), (5), (6), ('First Contact');
+INSERT INTO movies VALUES
+     ('The Motion Picture'), (2), (3), (4), (5), (6), ('First Contact');
 
 FROM movies 
 SELECT 
@@ -590,7 +599,7 @@ Several other friendly features are worth mentioning and some are powerful enoug
 
 DuckDB takes a nod from the [`describe` function in Pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html) and implements a `SUMMARIZE` keyword that will calculate a variety of statistics about each column in a dataset for a quick, high-level overview. Simply prepend `SUMMARIZE` to any table or `SELECT` statement. 
 
-Have a look at the [correlated subqueries post](/2023/05/26/correlated-subqueries-in-sql.html) to see how to use subqueries that refer to each others’ columns. DuckDB’s advanced optimizer improves correlated subquery performance by orders of magnitude, allowing for queries to be expressed as naturally as possible. What was once an anti-pattern for performance reasons can now be used freely!
+Have a look at the [correlated subqueries post](/2023/05/26/correlated-subqueries-in-sql) to see how to use subqueries that refer to each others’ columns. DuckDB’s advanced optimizer improves correlated subquery performance by orders of magnitude, allowing for queries to be expressed as naturally as possible. What was once an anti-pattern for performance reasons can now be used freely!
 
 DuckDB has added more ways to `JOIN` tables together that make expressing common calculations much easier. Some like `LATERAL`, `ASOF`, `SEMI`, and `ANTI` joins are present in other systems, but have high-performance implementations in DuckDB. DuckDB also adds a new `POSITIONAL` join that combines by the row numbers in each table to match the commonly used Pandas capability of joining on row number indexes. See the [`JOIN` documentation](/docs/sql/query_syntax/from) for details, and look out for a blog post describing DuckDB’s state of the art `ASOF` joins!
 
@@ -600,7 +609,7 @@ DuckDB aims to be the easiest database to use. Fundamental architectural decisio
 
 Future work for friendlier SQL includes:
 * Lambda functions with more than 1 argument, like `list_zip`
-* Underscores as digit separators (Ex: 1_000_000 instead of 1000000)
+* Underscores as digit separators (Ex: `1_000_000` instead of `1000000`)
 * Extension user experience, including autoloading
 * Improvements to file globbing
 * Your suggestions!
