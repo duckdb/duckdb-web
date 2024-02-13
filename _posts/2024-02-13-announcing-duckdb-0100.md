@@ -20,14 +20,15 @@ To install the new version, please visit the [installation guide](/docs/installa
 
 There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
 
-* Storage Backward Compatibility
-* CSV Reader Rework
-* Fixed-Length Arrays
-* Multi-Database Support
-* Secrets
-* Temporary Memory Manager
-* Adaptive Lossless Floating-Point Compression
-* CLI Improvements
+* [Storage Backward Compatibility](#backward-compatibility)
+* [CSV Reader Rework](#csv-reader-rework)
+* [Fixed-Length Arrays](#fixed-length-arrays)
+* [Multi-Database Support](#multi-database-support)
+* [Secrets](#secret-manager)
+* [Temporary Memory Manager](#temporary-memory-manager)
+* [Adaptive Lossless Floating-Point Compression](#adaptive-lossless-floating-point-compression-alp)
+* [CLI Improvements](#cli-improvements)
+* [... and more!](#new-features)
 
 Below is a summary of those new features with examples, starting with a change in our SQL dialect that is designed to produce more intuitive results by default.
 
