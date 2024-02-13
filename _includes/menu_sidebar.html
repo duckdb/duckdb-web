@@ -16,7 +16,7 @@
 		{% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
 	{% endif %}
 
-	{% if versionviewed == '0.10.0 (stable)' %}
+	{% if versionviewed contains 'stable' %}
 		{%- assign menudocfile = "menu_docs_dev" -%}
 	{% else %}
 		{%- assign menudocfile = "menu_docs_" | append: versionviewed | replace: ".", "" -%}
