@@ -18,6 +18,30 @@ Similarly to other SQL dialects and programming languages, identifiers in DuckDB
 * Identifiers can be quoted using double-quote characters (`"`). Quoted identifiers can use any keyword, whitespace or special character, e.g., `"SELECT"` and `" § 🦆 ¶ "` are valid identifiers.
 * Quotes themselves can be escaped by repeating the quote character, e.g., to create an identifier named `IDENTIFIER "X"`, use `"IDENTIFIER ""X"""`.
 
+### Deduplicating Identifiers
+
+In some cases, duplicate identifiers can occur, e.g., column names may conflict when unnesting a nested data structure.
+In these cases, DuckDB automatically deduplicates column names by renaming them according to the following rules:
+
+* For a column named `<name>`, the first instance is not renamed.
+* Subsequent instances are renamed to `<name>_<count>`, where `<count>` starts at 1.
+
+For example:
+
+```sql
+SELECT *
+FROM (SELECT UNNEST({'a': 42, 'b': {'a': 88, 'b': 99}}, recursive := true));
+```
+
+```text
+┌───────┬───────┬───────┐
+│   a   │  a_1  │   b   │
+│ int32 │ int32 │ int32 │
+├───────┼───────┼───────┤
+│    42 │    88 │    99 │
+└───────┴───────┴───────┘
+```
+
 ## Database Names
 
 Database names are subject to the rules for [identifiers](#identifiers).
