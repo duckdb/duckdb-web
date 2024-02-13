@@ -30,8 +30,11 @@ When working with incremental calculated expressions in a select statement, trad
 ```sql
 SELECT 
     'These are the voyages of the starship Enterprise...' AS intro,
-    instr('These are the voyages of the starship Enterprise...', 'starship') AS starship_loc
-    substr('These are the voyages of the starship Enterprise...', instr('These are the voyages of the starship Enterprise...', 'starship') + len('starship') + 1) AS trimmed_intro;
+    instr('These are the voyages of the starship Enterprise...', 'starship')
+        AS starship_loc
+    substr('These are the voyages of the starship Enterprise...',
+    instr('These are the voyages of the starship Enterprise...', 'starship')
+        + len('starship') + 1) AS trimmed_intro;
 ```
 
 #### Old way 2: All the CTEs
@@ -79,8 +82,10 @@ Let’s take a look at some facts gathered about the first season of Star Trek. 
 ```sql
 INSTALL httpfs;
 LOAD httpfs;
+
 CREATE TABLE trek_facts AS
-    SELECT * FROM 'https://raw.githubusercontent.com/Alex-Monahan/example_datasets/main/Star_Trek-Season_1.csv';
+    SELECT *
+    FROM 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
 
 DESCRIBE trek_facts;
 ```
