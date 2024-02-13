@@ -13,7 +13,7 @@ title: Official Extensions
 | [azure](azure) [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_azure)                           | Adds a filesystem abstraction for Azure blob storage to DuckDB                     |                 |
 | [excel](excel)                                                                                                        | Adds support for Excel-like format strings                                         |                 |
 | [fts](full_text_search)                                                                                               | Adds support for Full-Text Search Indexes                                          |                 |
-| [httpfs](httpfs)                                                                                                      | Adds support for reading and writing files over a HTTP(S) connection               | http, https, s3 |
+| [httpfs](httpfs)                                                                                                      | Adds support for reading and writing files over an HTTP(S) or S3 connection        | http, https, s3 |
 | [iceberg](iceberg) [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_iceberg)                     | Adds support for Apache Iceberg                                                    |                 |
 | [icu](icu)                                                                                                            | Adds support for time zones and collations using the ICU library                   |                 |
 | [inet](inet)                                                                                                          | Adds support for IP-related data types and functions                               |                 |
@@ -21,9 +21,9 @@ title: Official Extensions
 | [json](json)                                                                                                          | Adds support for JSON operations                                                   |                 |
 | [mysql](mysql) [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_mysql)                           | Adds support for reading from and writing to a MySQL database                      |                 |
 | [parquet](parquet)                                                                                                    | Adds support for reading and writing Parquet files                                 |                 |
-| [postgres](postgres) [<span class="github">GitHub</span>](https://github.com/duckdb/postgres_scanner) | Adds support for reading from and writing to a Postgres database                                   | postgres_scanner        |
+| [postgres](postgres) [<span class="github">GitHub</span>](https://github.com/duckdb/postgres_scanner)                 | Adds support for reading from and writing to a Postgres database                   | postgres_scanner |
 | [spatial](spatial) [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_spatial)                     | Geospatial extension that adds support for working with spatial data and functions |                 |
-| [sqlite](sqlite) [<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner)       | Adds support for reading from and writing to SQLite database files                                     | sqlite_scanner, sqlite3 |
+| [sqlite](sqlite) [<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner)                       | Adds support for reading from and writing to SQLite database files                 | sqlite_scanner, sqlite3 |
 | [substrait](substrait) [<span class="github">GitHub</span>](https://github.com/duckdb/substrait)                      | Adds support for the Substrait integration                                         |                 |
 | [tpcds](tpcds)                                                                                                        | Adds TPC-DS data generation and query support                                      |                 |
 | [tpch](tpch)                                                                                                          | Adds TPC-H data generation and query support                                       |                 |
@@ -35,17 +35,17 @@ We summarize the main distributions in the table below.
 
 <div class="narrow_table"></div>
 
-| Extension Name | CLI (duckdb.org) | CLI (Homebrew) | Python | R | Java | Julia | Node.js |
+| Extension Name | CLI (duckdb.org) | CLI (Homebrew) | Python | R | Java | Node.js |
 |------|------|------|---|---|---|---|---|
-| [autocomplete](autocomplete) | yes | yes |     |     |     |     |     |
-| [excel](excel)               | yes |     |     |     |     |     |     |
-| [fts](full_text_search)      | yes |     | yes |     |     |     |     |
-| [httpfs](httpfs)             |     |     | yes |     |     |     |     |
-| [icu](icu)                   | yes | yes | yes |     | yes | yes | yes |
-| [json](json)                 | yes | yes | yes |     | yes | yes | yes |
-| [parquet](parquet)           | yes | yes | yes | yes | yes | yes | yes |
-| [tpcds](tpcds)               |     |     | yes |     |     |     |     |
-| [tpch](tpch)                 | yes |     | yes |     |     |     |     |
+| [autocomplete](autocomplete) | yes | yes |     |     |     |     |
+| [excel](excel)               | yes |     |     |     |     |     |
+| [fts](full_text_search)      | yes |     | yes |     |     |     |
+| [httpfs](httpfs)             |     |     | yes |     |     |     |
+| [icu](icu)                   | yes | yes | yes |     | yes | yes |
+| [json](json)                 | yes | yes | yes |     | yes | yes |
+| [parquet](parquet)           | yes | yes | yes | yes | yes | yes |
+| [tpcds](tpcds)               |     |     | yes |     |     |     |
+| [tpch](tpch)                 | yes |     | yes |     |     |     |
 
 The [jemalloc](jemalloc) extension's availability is based on the operating system.
 It is a built-in extension on Linux and macOS versions, while on Windows, it is not available.

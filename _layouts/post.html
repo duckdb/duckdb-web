@@ -29,7 +29,13 @@
 	<meta name="msapplication-config" content="{{ site.baseurl }}/images/favicon/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 
-	{% seo title=false %}
+	{% if page.url == "/news" or page.url == "/news/" %}
+		{% comment %}
+		<!-- skip description tags for the main blog page -->
+		{% endcomment %}
+	{% else %}
+		{% seo title=false %}
+	{% endif %}
 
 </head>
 <body {% if page.body_class %} class="{{ page.body_class }}" {% endif %}>

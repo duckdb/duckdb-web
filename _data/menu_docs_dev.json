@@ -350,6 +350,10 @@
                   "url": "metadata"
                 },
                 {
+                  "page": "Encryption",
+                  "url": "encryption"
+                },
+                {
                   "page": "Tips",
                   "url": "tips"
                 }
@@ -656,6 +660,10 @@
                 {
                   "page": "CHECKPOINT",
                   "url": "checkpoint"
+                },
+                {
+                  "page": "COMMENT ON",
+                  "url": "comment_on"
                 },
                 {
                   "page": "COPY",
@@ -1106,8 +1114,26 @@
               "url": "full_text_search"
             },
             {
-              "page": "httpfs (http and S3)",
-              "url": "httpfs"
+              "page": "httpfs (HTTP and S3)",
+              "slug": "httpfs",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "HTTP(S) Support",
+                  "url": "https"
+                },
+                {
+                  "page": "S3 API Support",
+                  "url": "s3api"
+                },
+                {
+                  "page": "Legacy Authentication Scheme for S3 API",
+                  "url": "s3api-legacy-authentication"
+                }
+              ]
             },
             {
               "page": "Iceberg",
