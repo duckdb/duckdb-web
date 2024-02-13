@@ -662,6 +662,10 @@
                   "url": "checkpoint"
                 },
                 {
+                  "page": "COMMENT ON",
+                  "url": "comment_on"
+                },
+                {
                   "page": "COPY",
                   "url": "copy"
                 },
