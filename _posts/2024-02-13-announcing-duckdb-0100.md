@@ -33,7 +33,7 @@ Below is a summary of those new features with examples, starting with a change i
 
 ## Breaking SQL Changes
 
-[**Implicit Cast to `VARCHAR`**](https://github.com/duckdb/duckdb/pull/10115). Previously, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an implicit cast. Starting with this release, you will need to use an explicit cast here instead.
+[**Implicit Cast to VARCHAR**](https://github.com/duckdb/duckdb/pull/10115). Previously, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an implicit cast. Starting with this release, you will need to use an explicit cast here instead.
 
 ```sql
 SELECT substring(42, 1, 1) AS substr;
@@ -82,17 +82,17 @@ SELECT d > '1992-01-01'::VARCHAR FROM (VALUES (DATE '1992-01-01')) t(d);
 
 ## Backward Compatibility
 
-Backward compatibility refers to the ability of a newer DuckDB version to read storage files created by an older DuckDB version. This release is the first release of DuckDB that supports backward compatibility in the storage format. DuckDB v0.10.0 can read and operate on files created by the previous DuckDB version – DuckDB v0.9.2. [This is made possible by the implementation of a new serialization framework](https://github.com/duckdb/duckdb/pull/8156).
+Backward compatibility refers to the ability of a newer DuckDB version to read storage files created by an older DuckDB version. This release is the first release of DuckDB that supports backward compatibility in the storage format. DuckDB v0.10 can read and operate on files created by the previous DuckDB version – DuckDB v0.9. [This is made possible by the implementation of a new serialization framework](https://github.com/duckdb/duckdb/pull/8156).
 
 ```bash
-# write with v0.9.2
+# write with v0.9
 $ duckdb_092 v092.db
 ```
 ```sql
 CREATE TABLE lineitem AS FROM lineitem.parquet;
 ```
 ```bash
-# read with v0.10.0
+# read with v0.10
 $ duckdb_0100 v092.db 
 ```
 ```sql
@@ -111,17 +111,17 @@ For future DuckDB versions, our goal is to ensure that any DuckDB version releas
 
 ## Forward Compatibility
 
-Forward compatibility refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB v0.9.2 is **partially** forward compatible with DuckDB v0.10.0. Certain files created by DuckDB v0.10.0 can be read by DuckDB v0.9.2.
+Forward compatibility refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB v0.9 is **partially** forward compatible with DuckDB v0.10. Certain files created by DuckDB v0.10 can be read by DuckDB v0.9.
 
 ```bash
-# write with v0.10.0
+# write with v0.10
 $ duckdb_0100 v010.db
 ```
 ```sql
 CREATE TABLE lineitem AS FROM lineitem.parquet;
 ```
 ```bash
-# read with v0.9.2
+# read with v0.9
 $ duckdb_092 v010.db
 ```
 ```sql
@@ -138,7 +138,7 @@ SELECT l_orderkey, l_partkey, l_comment FROM lineitem LIMIT 1;
 
 Forward compatibility is provided on a **best effort** basis. While stability of the storage format is important – there are still many improvements and innovations that we want to make to the storage format in the future. As such, forward compatibility may be (partially) broken on occasion.
 
-For this release, DuckDB v0.9.2 is able to read files created by DuckDB v0.10.0 provided that:
+For this release, DuckDB v0.9 is able to read files created by DuckDB v0.10 provided that:
 
 * The database file does not contain views
 * The database file does not contain new types (`ARRAY`, `UHUGEINT`)
