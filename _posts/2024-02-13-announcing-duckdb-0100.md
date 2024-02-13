@@ -18,22 +18,22 @@ To install the new version, please visit the [installation guide](/docs/installa
 
 There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
 
-- [What's New in 0.10.0](#whats-new-in-0100)
-- [Breaking SQL Changes](#breaking-sql-changes)
-- [Backward Compatibility](#backward-compatibility)
-- [Forward Compatibility](#forward-compatibility)
-- [CSV Reader Rework](#csv-reader-rework)
-- [Fixed-Length Arrays](#fixed-length-arrays)
-- [Multi-Database Support](#multi-database-support)
-- [Secret Manager](#secret-manager)
-- [Temporary Memory Manager](#temporary-memory-manager)
-- [Adaptive Lossless Floating-Point Compression (ALP)](#adaptive-lossless-floating-point-compression-alp)
-- [CLI Improvements](#cli-improvements)
-- [Final Thoughts](#final-thoughts)
-  - [New Features](#new-features)
-  - [New Functions](#new-functions)
-  - [Storage Improvements](#storage-improvements)
-  - [Optimizations](#optimizations)
+* [What's New in 0.10.0](#whats-new-in-0100)
+* [Breaking SQL Changes](#breaking-sql-changes)
+* [Backward Compatibility](#backward-compatibility)
+* [Forward Compatibility](#forward-compatibility)
+* [CSV Reader Rework](#csv-reader-rework)
+* [Fixed-Length Arrays](#fixed-length-arrays)
+* [Multi-Database Support](#multi-database-support)
+* [Secret Manager](#secret-manager)
+* [Temporary Memory Manager](#temporary-memory-manager)
+* [Adaptive Lossless Floating-Point Compression (ALP)](#adaptive-lossless-floating-point-compression-alp)
+* [CLI Improvements](#cli-improvements)
+* [Final Thoughts](#final-thoughts)
+    * [New Features](#new-features)
+    * [New Functions](#new-functions)
+    * [Storage Improvements](#storage-improvements)
+    * [Optimizations](#optimizations)
 
 Below is a summary of those new features with examples, starting with a change in our SQL dialect that is designed to produce more intuitive results by default.
 
