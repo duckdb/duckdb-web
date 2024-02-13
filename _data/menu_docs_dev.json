@@ -350,6 +350,10 @@
                   "url": "metadata"
                 },
                 {
+                  "page": "Encryption",
+                  "url": "encryption"
+                },
+                {
                   "page": "Tips",
                   "url": "tips"
                 }
