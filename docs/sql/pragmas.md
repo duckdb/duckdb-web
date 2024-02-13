@@ -223,6 +223,16 @@ SET profiling_output = '/path/to/file.json';
 SET profile_output = '/path/to/file.json';
 ```
 
+#### Profiling Mode
+
+By default, a limited amount of profiling information is provided (`standard`).
+For more details, use the detailed profiling mode by setting `profiling_mode` to `detailed`.
+The output of this mode shows how long it takes to apply certain optimizers on the query tree and how long physical planning takes.
+
+```sql
+SET profiling_mode = 'detailed';
+```
+
 ### Optimizer
 
 To disable the query optimizer:
