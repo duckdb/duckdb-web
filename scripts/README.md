@@ -16,8 +16,8 @@ pip install -r requirements.txt
 Download the [Nightly DuckDB distribution](https://duckdb.org/docs/installation/?version=main), extract the `duckdb` file and move it to the directory expected by the scripts:
 
 ```bash
-mkdir -p duckdb/build/release
-mv duckdb duckdb/build/release
+mkdir -p build/release
+mv duckdb build/release
 ```
 
 Run the script as follows:
