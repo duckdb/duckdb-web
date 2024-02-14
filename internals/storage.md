@@ -76,7 +76,7 @@ To see the commits that changed each storage version, see the [commit log](https
 
 ## Compression
 
-DuckDB applies [lightweight compression](https://duckdb.org/2022/10/28/lightweight-compression.html) to persistent databases.
+DuckDB applies [lightweight compression](/2022/10/28/lightweight-compression) to persistent databases.
 Note that in-memory instances are not compressed.
 
 ## Disk Usage
@@ -89,3 +89,20 @@ As a rough approximation, loading 100 GB of uncompressed CSV files into a DuckDB
 DuckDB's storage format stores the data in _row groups,_ i.e., horizontal partitions of the data.
 This concept is equivalent to [Parquet's row groups](https://parquet.apache.org/docs/concepts/).
 Several features in DuckDB, including [parallelism](/docs/guides/performance/how_to_tune_workloads) and [compression](/2022/10/28/lightweight-compression) are based on row groups.
+
+## Compatibility
+
+### Error Message
+
+When opening a database file with an uncompatible DuckDB version, the following error message may occur:
+
+```text
+Error: unable to open database "...": Serialization Error: Failed to deserialize: ...
+```
+
+The message implies that the database file was created with a newer DuckDB version and uses features that are not yet supported in the DuckDB version used to read the file.
+
+There are two potential workarounds:
+
+1. Update your DuckDB version to the latest stable version.
+2. If you are unable to update your DuckDB version, open the database with the latest version of DuckDB, export it to a standard format (e.g., Parquet), then import it using to the old version of DuckDB. See the [`EXPORT/IMPORT DATABASE` statements](../docs/sql/statements/export) for details.
