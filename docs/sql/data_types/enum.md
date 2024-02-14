@@ -15,6 +15,7 @@ The `ENUM` type represents a dictionary data structure with all possible unique 
 ## Enum Definition
 
 Enum types are created from either a hardcoded set of values or from a select statement that returns a single column of varchars. The set of values in the select statement will be deduplicated, but if the enum is created from a hardcoded set there may not be any duplicates.
+
 ```sql
 -- Create enum using hardcoded values
 CREATE TYPE ${enum_name} AS ENUM ([${value_1}, ${value_2},...]);
@@ -22,7 +23,9 @@ CREATE TYPE ${enum_name} AS ENUM ([${value_1}, ${value_2},...]);
 -- Create enum using a select statement that returns a single column of varchars
 CREATE TYPE ${enum_name} AS ENUM (${SELECT expression});
 ```
+
 For example:
+
 ```sql
 -- Creates new user defined type 'mood' as an Enum
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
@@ -83,9 +86,11 @@ INSERT INTO person VALUES ('Hannes', 'quackity-quack');
 
 The string 'sad' is cast to the type mood, returning a numerical reference value.
 This makes the comparison a numerical comparison instead of a string comparison.
+
 ```sql
 SELECT * FROM person WHERE current_mood = 'sad';
 ```
+
 ```text
 ┌───────────┬───────────────────────────────────────┐
 │   name    │             current_mood              │
@@ -119,6 +124,7 @@ For example:
 -- regexp_matches is a function that takes a VARCHAR, hence current_mood is cast to VARCHAR
 SELECT regexp_matches(current_mood, '.*a.*') AS contains_a FROM person;
 ```
+
 ```text
 ┌────────────┐
 │ contains_a │
@@ -167,9 +173,46 @@ Currently, it is possible to drop Enums that are used in tables without affectin
 
 > This behavior of the Enum Removal feature is subject to change. In future releases, it is expected that any dependent columns must be removed before dropping the Enum, or the Enum must be dropped with the additional `CASCADE` parameter.
 
-For example, this will fail since person has a catalog dependency to the `mood` type:
+## Comparison of Enums
+
+Enum values are compared according to their order in the Enum's definition. For example:
+
+```sql
+CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
+```
+
+```sql
+SELECT 'sad'::mood < 'ok'::mood AS comp;
+```
+
+```text
+┌─────────┐
+│  comp   │
+│ boolean │
+├─────────┤
+│ true    │
+└─────────┘
+```
+
+```sql
+SELECT unnest(['ok'::mood, 'happy'::mood, 'sad'::mood]) AS m
+ORDER BY m;
+```
+
+```text
+┌────────────────────────────┐
+│             m              │
+│ enum('sad', 'ok', 'happy') │
+├────────────────────────────┤
+│ sad                        │
+│ ok                         │
+│ happy                      │
+└────────────────────────────┘
+```
 
 <!--
+For example, this will fail since person has a catalog dependency to the `mood` type:
+
 ```sql
 DROP TYPE mood;
 ```
