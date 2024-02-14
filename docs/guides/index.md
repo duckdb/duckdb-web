@@ -25,7 +25,7 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 * [How to load a Parquet file directly from HTTP(S)](../guides/import/http_import)
 * [How to load a Parquet file directly from S3 or GCS](../guides/import/s3_import)
 * [How to load an Iceberg table directly from S3](../guides/import/s3_iceberg_import)
- 
+
 ### JSON Files
 
 * [How to load a JSON file into a table](../guides/import/json_import)
@@ -94,6 +94,7 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 
 ## SQL Features
 
+* [Friendly SQL](../guides/sql_features/friendly_sql)
 * [As-of join](../guides/sql_features/asof_join)
 * [Full-text search](../guides/sql_features/full_text_search)
 
