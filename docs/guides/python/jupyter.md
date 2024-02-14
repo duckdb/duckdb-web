@@ -131,7 +131,7 @@ This approach requires loading all data into memory which is highly inefficient.
 The plotting module in JupySQL runs computations in the SQL engine.
 This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, efficiently plotting massive datasets.
 
-### Install and Load DuckDB httpfs extension
+### Install and Load DuckDB httpfs Extension
 
 DuckDB's [httpfs extension](../../extensions/httpfs) allows Parquet and CSV files to be queried remotely over http.
 These examples query a Parquet file that contains historical taxi data from NYC.
