@@ -5,7 +5,7 @@ title: Parquet Tips
 
 Below is a collection of tips to help when dealing with Parquet files.
 
-## Tips for Reading Parquet files
+## Tips for Reading Parquet Files
 
 ### Use `union_by_name` When Loading Files with Different Schemas
 
@@ -15,7 +15,7 @@ The `union_by_name` option can be used to unify the schema of files that have di
 SELECT * FROM read_parquet('flights*.parquet', union_by_name = true);
 ```
 
-## Tips for Writing Parquet files
+## Tips for Writing Parquet Files
 
 ### Enabling `PER_THREAD_OUTPUT`
 
@@ -46,4 +46,4 @@ COPY (FROM generate_series(100000))
     (FORMAT PARQUET, ROW_GROUP_SIZE 100000);
 ```
 
-See the [performance guide on file formats](../../guides/performance/file_formats#parquet-file-sizes) for more tips.
+See the [Performance Guide on file formats](../../guides/performance/file_formats#parquet-file-sizes) for more tips.

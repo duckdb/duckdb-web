@@ -415,7 +415,7 @@ PRAGMA show_databases;
 
 ### User Agent
 
-The following statement returns the user agent information, e.g., `duckdb/v0.9.2(osx_arm64)`.
+The following statement returns the user agent information, e.g., `duckdb/v0.10.0(osx_arm64)`.
 
 ```sql
 PRAGMA user_agent;
