@@ -4,7 +4,7 @@ title: CREATE SECRET Statement
 railroad: statements/secrets.js
 ---
 
-The `CREATE SECRET` statement creates a new secret in the **Secrets Manager**, which provides unified user interface for secrets across all backends that use them. Secrets can be scoped, so different storage prefixes can have different secrets, allowing for example to join data across organizations in a single query. Secrets can also be persisted, so that they do not need to be specified every time DuckDB is launched.
+The `CREATE SECRET` statement creates a new secret in the **Secrets manager**, which provides unified user interface for secrets across all backends that use them. Secrets can be scoped, so different storage prefixes can have different secrets, allowing for example to join data across organizations in a single query. Secrets can also be persisted, so that they do not need to be specified every time DuckDB is launched.
 
 > Secrets were introduced with DuckDB version 0.10.
 
