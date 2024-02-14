@@ -2,10 +2,7 @@
 function GenerateCommentOn(options = {}) {
 	return Diagram([
 		AutomaticStack([
-			Sequence([
-				Keyword("COMMENT"),
-				Keyword("ON"),
-			]),
+			Keyword("COMMENT ON"),
 			Choice(0, [
 				Keyword("TABLE"),
 				Keyword("COLUMN"),

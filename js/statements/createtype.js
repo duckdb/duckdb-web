@@ -4,8 +4,7 @@ function GenerateCreateType(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Sequence([
-				Keyword("CREATE"),
-				Keyword("TYPE"),
+				Keyword("CREATE TYPE"),
 				Expression("type-name"),
 				Keyword("AS"),
 			]),

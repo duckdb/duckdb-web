@@ -26,10 +26,7 @@ function GenerateInsert(options = {}) {
 			Choice(0, [
 				Sequence(GenerateValues(options)),
 				Expression("select-node"),
-				Sequence([
-					Keyword("DEFAULT"),
-					Keyword("VALUES")
-				])
+				Keyword("DEFAULT VALUES"),
 			]),
 			Optional(
 				Expandable("on-conflict-clause", options, "on-confict-clause", GenerateOnConflict),
