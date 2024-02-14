@@ -3,7 +3,7 @@ layout: docu
 title: Swift API
 ---
 
-DuckDB offers a Swift API. See the [announcement post](https://duckdb.org/2023/04/21/swift) for details.
+DuckDB offers a Swift API. See the [announcement post](/2023/04/21/swift) for details.
 
 ## Instantiating DuckDB
 
@@ -30,7 +30,7 @@ DuckDB supports multiple connections per database.
 
 ## Application Example
 
-The rest of the page is based on the example of our [announcement post](https://duckdb.org/2023/04/21/swift), which uses raw data from [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu) loaded directly into DuckDB.
+The rest of the page is based on the example of our [announcement post](/2023/04/21/swift), which uses raw data from [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu) loaded directly into DuckDB.
 
 ### Creating an Application-Specific Type
 
