@@ -94,7 +94,7 @@ Several features in DuckDB, including [parallelism](/docs/guides/performance/how
 
 ### Error Message
 
-When opening a database file that has been written by a differtn DuckDB version from the one you are using, the following error message may occur:
+When opening a database file that has been written by a different DuckDB version from the one you are using, the following error message may occur:
 
 ```text
 Error: unable to open database "...": Serialization Error: Failed to deserialize: ...
