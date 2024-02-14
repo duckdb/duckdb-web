@@ -44,9 +44,6 @@
 }
 
 @media only screen and (max-width: 980px) {
-	.newswrap .postwrap .postcontent{
-		max-width: 550px;
-	}
 	.newswrap .postwrap{
 		position: relative;
 	}
@@ -101,11 +98,6 @@
 	.wrap.whyduckdb .footnotes.mobilesups div.sup{
 		position: relative;
 		margin-top: 20px;
-	}
-	.newswrap .postwrap{
-		width: 100%;
-		padding: 15px;
-		box-sizing: border-box;
 	}
 	.newswrap .sidebar{
 		display: none;
@@ -219,6 +211,10 @@
 		align-items: center;
 		position: relative;
 	}
+	.pagehead h1{
+		font-size: 35px;
+		padding: 50px 15px;
+	}
 	body.landing .welcome h1{
 		font-size: 200%;
 	}
@@ -265,7 +261,7 @@
 		width: 100%;
 		max-width: 100%;
 	}
-	body.landing .newsblog .newswrap{
+	body.landing .newsblog .newstileswrap{
 		flex-wrap: wrap;
 		.postpreview{
 			width: 100%;
@@ -274,14 +270,6 @@
 	}
 	.newswrap .headlinebar{
 		padding-left: 15px;
-	}
-	.newswrap .postwrap .post-list ul li{
-		align-items: flex-start;
-	}
-	.newswrap .postwrap .post-list ul li div.date{
-		margin-right: 15px;
-		font-size: 10px;
-		width: 75px;
 	}
 	main.inactive{
 		//opacity: .4;
@@ -375,37 +363,6 @@
 	
 	.newswrap{
 		display: block;
-		.sidebar{
-			width: 100%;
-			/*
-			position: fixed;
-			right: 0;
-			width: 75%;
-			-webkit-transform: translateX(100%);
-			    -ms-transform: translateX(100%);
-			        transform: translateX(100%);
-			-webkit-transition: -webkit-transform .5s;
-			transition: -webkit-transform .5s;
-			-o-transition: transform .5s;
-			transition: transform .5s;
-			transition: transform .5s, -webkit-transform .5s;
-			padding-top: 14px;
-			&.slidein{
-				-webkit-transform: translateX(0%);
-				    -ms-transform: translateX(0%);
-				        transform: translateX(0%);
-			}
-			*/
-		}
-	}
-	.newswrap .postwrap .infoline span:first-child{
-		margin-right: 30px;
-	}
-	.newswrap .sidebar .newsarchive{
-		margin-top: 0px;
-	}
-	.newswrap .sidebar .latestnews{
-		display: none;
 	}
 	body.documentation .headlinebar{
 		position: relative;
@@ -441,6 +398,18 @@
 		background: white;
 		padding-left: 10px;
 	}
+	body.landing footer .sitefooter .footercontent .footernavigation,
+	.sitefooter .footercontent .footernavigation{
+		column-gap: 30px;
+		row-gap: 40px;
+		flex-wrap: wrap;
+		>div{
+			width: calc(50% - 15px);
+		}
+		a{
+			line-height: 1.5;
+		}
+	}
 }
 
 @media only screen and (max-height: 840px) {
@@ -474,10 +443,6 @@
 	}
 	body.landing .welcome .mainlinks ul{
 		margin-top: 60px;
-	}
-	.newswrap .postwrap .postcontent p, .newswrap .postwrap .postcontent ul li, .newswrap .postwrap .postcontent ol li{
-		font-size: 17px;
-		line-height: 27.5px;
 	}
 	.newswrap .postwrap .singleentry h1{
 		font-size: 30px; 

@@ -5,6 +5,8 @@ title: Guides
 
 The guides section contains compact how-to guides that are focused on achieving a single goal. For an in-depth reference see the Documentation section.
 
+Note that there are many tools using DuckDB, which are not covered in the official guides. To find a list of these tools, check out the [Awesome DuckDB repository](https://github.com/davidgasquez/awesome-duckdb).
+
 ## Data Import and Export
 
 ### CSV Files

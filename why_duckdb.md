@@ -90,7 +90,7 @@ In addition to this test suite, we run various tests that stress DuckDB under he
 
 ## Other Projects
 
-To learn about projects using DuckDB, visit the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).
+To learn about projects using DuckDB, visit the [Awesome DuckDB repository](https://github.com/davidgasquez/awesome-duckdb).
 
 ## Standing on the Shoulders of Giants
 DuckDB uses some components from various Open-Source projects and draws inspiration from scientific publications. We are very grateful for this. Here is an overview:

@@ -1,9 +1,11 @@
 ---
 layout: docu
-title: Appender (C++/Java)
+title: Appender
 ---
 
-The C++ Appender can be used to load bulk data into a DuckDB database. The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
+The Appender can be used to load bulk data into a DuckDB database. It is currently available in the [C, C++, Go, Java, and Rust APIs](#appender-support-in-other-clients). The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
+
+In the [C++ API](../api/cpp), the Appender works as follows:
 
 ```cpp
 DuckDB db;
@@ -42,12 +44,26 @@ Below is a short example:
 con.Query("CREATE TABLE dates (d DATE, t TIME, ts TIMESTAMP)");
 Appender appender(con, "dates");
 
-// construct the values using the Date/Time/Timestamp types - this is the most efficient
-appender.AppendRow(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0), Timestamp::FromDatetime(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0)));
+// construct the values using the Date/Time/Timestamp types
+// (this is the most efficient approach)
+appender.AppendRow(
+    Date::FromDate(1992, 1, 1),
+    Time::FromTime(1, 1, 1, 0),
+    Timestamp::FromDatetime(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0))
+);
 // construct duckdb::Value objects
-appender.AppendRow(Value::DATE(1992, 1, 1), Value::TIME(1, 1, 1, 0), Value::TIMESTAMP(1992, 1, 1, 1, 1, 1, 0));
+appender.AppendRow(
+    Value::DATE(1992, 1, 1),
+    Value::TIME(1, 1, 1, 0),
+    Value::TIMESTAMP(1992, 1, 1, 1, 1, 1, 0)
+);
 ```
 
-## Java Appender
+## Appender Support in Other Clients
 
-The Java appender is available in the [JDBC driver](../api/java#appender).
+The appender is also available in the following client APIs:
+
+* [C](../api/c/appender)
+* [Go](../api/go#appender)
+* [JDBC (Java)](../api/java#appender)
+* [Rust](../api/rust#appender)

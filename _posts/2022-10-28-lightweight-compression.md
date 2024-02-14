@@ -2,15 +2,13 @@
 layout: post
 title:  "Lightweight Compression in DuckDB"
 author: Mark Raasveldt
-excerpt_separator: <!--more-->
+excerpt: DuckDB supports efficient lightweight compression that is automatically used to keep data size down without incurring high costs for compression and decompression.
 ---
 
 <img src="/images/compression/matroshka-duck.png"
      alt="Matroshka Ducks (ducks going from big to small)"
      width=200px
      />
-
-_TL;DR: DuckDB supports efficient lightweight compression that is automatically used to keep data size down without incurring high costs for compression and decompression._
 
 When working with large amounts of data, compression is critical for reducing storage size and egress costs. Compression algorithms typically reduce data set size by **75-95%**, depending on how compressible the data is. Compression not only reduces the storage footprint of a data set, but also often **improves performance** as less data has to be read from disk or over a network connection.
 

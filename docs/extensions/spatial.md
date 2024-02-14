@@ -15,7 +15,7 @@ INSTALL spatial;
 LOAD spatial;
 ```
 
-## GEOMETRY type
+## `GEOMETRY` Type
 
 The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar with geospatial data and GIS tooling, this type probably works very different from what you'd expect. 
 
@@ -114,7 +114,6 @@ Calculate and access spatial properties of geometries.
 | `INTEGER ST_NPoints(GEOMETRY)`           | 🦆        | 🦆        | 🦆             | 🦆         |  🦆                 |
 | `INTEGER ST_NInteriorRings(GEOMETRY)`    | 🦆        |           |                | 🦆         |                     |
 
-
 ### Spatial Relationships
 
 Compute relationships and spatial predicates between geometries.
@@ -146,11 +145,9 @@ Compute relationships and spatial predicates between geometries.
 | `GEOMETRY ST_Union_Agg(GEOMETRY)`         | 🧭               | 
 | `GEOMETRY ST_Intersection_Agg(GEOMETRY)`  | 🧭               |
 
-
-
 ## Spatial Table Functions
 
-### `ST_Read()` - Read spatial data from files
+### `ST_Read()` - Read Spatial Data from Files
 
 The spatial extension provides a `ST_Read` table function based on the [GDAL](https://github.com/OSGeo/gdal) translator library to read spatial data from a variety of geospatial vector file formats as if they were DuckDB tables. For example to create a new table from a GeoJSON file, you can use the following query:
 ```sql
@@ -231,7 +228,7 @@ We currently support over 50 different formats. You can generate the following t
 Note that far from all of these drivers have been tested properly, and some may require additional options to be passed to work as expected. 
 If you run into any issues please first [consult the GDAL docs](https://gdal.org/drivers/vector/index.html).
 
-### ST_ReadOsm() - Read compressed OSM data
+### `ST_ReadOsm()` - Read Compressed OSM Data
 
 The spatial extension also provides an experimental `ST_ReadOsm()` table function to read compressed OSM data directly from a `.osm.pbf` file. 
 
@@ -259,7 +256,7 @@ LIMIT 5;
 └──────────────────────┴────────┴──────────────────────┴─────────┴────────────────────┴────────────┴───────────┴────────────────────────┘
 ```
 
-## Spatial replacement scans
+## Spatial Replacement Scans
 
 The spatial extension also provides "replacement scans" for common geospatial file formats, allowing you to query files of these formats as if they were tables.
 

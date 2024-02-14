@@ -64,7 +64,7 @@ When using `read_json_auto`, every parameter that supports auto-detection is ena
 
 ## Examples of Format Settings
 
-The JSON extension can attempt to determine the format of a JSON file when setting `format` to `auto`.  
+The JSON extension can attempt to determine the format of a JSON file when setting `format` to `auto`.
 Here are some example JSON files and the corresponding `format` settings that should be used.
 
 In each of the below cases, the `format` setting was not needed, as DuckDB was able to infer it correctly, but it is included for illustrative purposes.
@@ -73,7 +73,7 @@ A query of this shape would work in each case:
 SELECT * FROM filename.json;
 ```
 
-### Format: newline_delimited
+### Format: `newline_delimited`
 
 With `format = 'newline_delimited'` newline-delimited JSON can be parsed.
 Each line is a JSON.
@@ -95,7 +95,7 @@ SELECT * FROM read_json_auto('records.json', format = 'newline_delimited');
 | `value2` | `value2` |
 | `value3` | `value3` |
 
-### Format: array
+### Format: `array`
 
 If the JSON file contains a JSON array of objects (pretty-printed or not), `array_of_objects` may be used.
 ```json
@@ -117,7 +117,7 @@ SELECT * FROM read_json_auto('array.json', format = 'array');
 | `value2` | `value2` |
 | `value3` | `value3` |
 
-### Format: unstructured
+### Format: `unstructured`
 
 If the JSON file contains JSON that is not newline-delimited or an array, `unstructured` may be used.
 ```json
@@ -204,7 +204,7 @@ SELECT * FROM read_json_auto('arrays.json', records = false);
 
 The contents of tables or the result of queries can be written directly to a JSON file using the `COPY` statement. See the [COPY documentation](../../sql/statements/copy#copy-to) for more information.
 
-## read_json_auto Function
+## `read_json_auto` Function
 
 The `read_json_auto` is the simplest method of loading JSON files: it automatically attempts to figure out the correct configuration of the JSON reader. It also automatically deduces types of columns.
 
@@ -274,4 +274,4 @@ SELECT * FROM todos LIMIT 5;
 
 For more details, see the [page on the `COPY` statement](../../sql/statements/copy).
 
-## Pages in This Section
+<!-- ## Pages in This Section -->

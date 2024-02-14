@@ -3,10 +3,11 @@ layout: docu
 title: Configuration
 ---
 
-DuckDB has a number of configuration options that can be used to change the behavior of the system.  
+DuckDB has a number of configuration options that can be used to change the behavior of the system.
+
 The configuration options can be set using either the [`SET` statement](statements/set) or the [`PRAGMA` statement](pragmas).
-They can be reset to their original values using the [`RESET` statement](statements/set#reset)
-and queried in `duckdb_settings()`.
+They can be reset to their original values using the [`RESET` statement](statements/set#reset).
+The values of configuration options can be queried via the [`current_setting()` scalar function](functions/utility) or using the [`duckdb_settings()` table function](duckdb_table_functions#duckdb_settings).
 
 ## Examples
 
@@ -19,17 +20,43 @@ SET threads TO 1;
 SET enable_progress_bar = true;
 -- set the default null order to NULLS LAST
 SET default_null_order = 'nulls_last';
-
+```
+```sql
+-- return the current value of a specific setting
+SELECT current_setting('threads') as threads;
+```
+```text
+┌─────────┐
+│ threads │
+│  int64  │
+├─────────┤
+│      10 │
+└─────────┘
+```
+```sql
+-- query a specific setting
+SELECT * FROM duckdb_settings() WHERE name = 'threads';
+```
+```text
+┌─────────┬─────────┬─────────────────────────────────────────────────┬────────────┐
+│  name   │  value  │                   description                   │ input_type │
+│ varchar │ varchar │                     varchar                     │  varchar   │
+├─────────┼─────────┼─────────────────────────────────────────────────┼────────────┤
+│ threads │ 10      │ The number of total threads used by the system. │ BIGINT     │
+└─────────┴─────────┴─────────────────────────────────────────────────┴────────────┘
+```
+```sql
 -- show a list of all available settings
 SELECT * FROM duckdb_settings();
-
--- return the current value of a specific setting
--- this example returns 'automatic'
-SELECT current_setting('access_mode');
-
+```
+```sql
 -- reset the memory limit of the system back to the default
 RESET memory_limit;
 ```
+
+## Secrets Manager
+
+DuckDB has a [Secrets manager](../sql/statements/create_secret), which provides a unified user interface for secrets across all backends (e.g., AWS S3) that use them.
 
 ## Configuration Reference
 
@@ -69,7 +96,7 @@ Below is a list of all available settings.
 | `errors_as_json`                             | Output error messages as structured **JSON** instead of as a raw string                                                                                 | `BOOLEAN`  | `false`                                          |
 | `explain_output`                             | Output of EXPLAIN statements (**ALL**, **OPTIMIZED_ONLY**, **PHYSICAL_ONLY**)                                                                           | `VARCHAR`  | `physical_only`                                  |
 | `extension_directory`                        | Set the directory to store extensions in                                                                                                                | `VARCHAR`  |                                                  |
-| `external_threads`                           | The number of external threads that work on DuckDB tasks.                                                                                               | `BIGINT`   | `0`                                              |
+| `external_threads`                           | The number of external threads that work on DuckDB tasks.                                                                                               | `BIGINT`   | `1`                                              |
 | `file_search_path`                           | A comma separated list of directories to search for input files                                                                                         | `VARCHAR`  |                                                  |
 | `force_download`                             | Forces upfront download of file                                                                                                                         | `BOOLEAN`  | `0`                                              |
 | `home_directory`                             | Sets the home directory used by the system                                                                                                              | `VARCHAR`  |                                                  |
@@ -94,7 +121,6 @@ Below is a list of all available settings.
 | `preserve_identifier_case`                   | Whether or not to preserve the identifier case, instead of always lowercasing all non-quoted identifiers                                                | `BOOLEAN`  | `true`                                           |
 | `preserve_insertion_order`                   | Whether or not to preserve insertion order. If set to false the system is allowed to re-order any results that do not contain ORDER BY clauses.         | `BOOLEAN`  | `true`                                           |
 | `profile_output`, `profiling_output`         | The file to which profile output should be saved, or empty to print to the terminal                                                                     | `VARCHAR`  |                                                  |
-| `profiler_history_size`                      | Sets the profiler history size                                                                                                                          | `BIGINT`   | `NULL`                                           |
 | `profiling_mode`                             | The profiling mode (**STANDARD** or **DETAILED**)                                                                                                       | `VARCHAR`  | `NULL`                                           |
 | `progress_bar_time`                          | Sets the time (in milliseconds) how long a query needs to take before we start printing a progress bar                                                  | `BIGINT`   | `2000`                                           |
 | `s3_access_key_id`                           | S3 Access Key ID                                                                                                                                        | `VARCHAR`  |                                                  |
@@ -110,7 +136,7 @@ Below is a list of all available settings.
 | `s3_use_ssl`                                 | S3 use SSL (default true)                                                                                                                               | `BOOLEAN`  | `1`                                              |
 | `schema`                                     | Sets the default search schema. Equivalent to setting search_path to a single value.                                                                    | `VARCHAR`  | `main`                                           |
 | `search_path`                                | Sets the default catalog search path as a comma-separated list of values                                                                                | `VARCHAR`  |                                                  |
-| `secret_directory`                           | Set the directory to which persistent secrets are stored                                                                                                | `VARCHAR`  | `/home/runner/.duckdb/stored_secrets/b705829be4` |
+| `secret_directory`                           | Set the directory to which persistent secrets are stored                                                                                                | `VARCHAR`  | `/home/runner/.duckdb/stored_secrets/fefb0708ed` |
 | `temp_directory`                             | Set the directory to which to write temp files                                                                                                          | `VARCHAR`  |                                                  |
 | `threads`, `worker_threads`                  | The number of total threads used by the system.                                                                                                         | `BIGINT`   | # Cores                                          |
 | `username`, `user`                           | The username to use. Ignored for legacy compatibility.                                                                                                  | `VARCHAR`  | `NULL`                                           |

@@ -32,20 +32,23 @@ These operators treat `NULL` values as equal.
 | `IS DISTINCT FROM` | not equal, including `NULL` | `2 IS DISTINCT FROM NULL` | `true` |
 | `IS NOT DISTINCT FROM` | equal, including `NULL` | `NULL IS NOT DISTINCT FROM NULL` | `true` |
 
-## BETWEEN and IS (NOT) NULL
+## `BETWEEN` and `IS [NOT] NULL`
 
 <div id="rrdiagram1"></div>
 
-Besides the standard comparison operators there are also the `BETWEEN` and `IS (NOT) NULL` operators. These behave much like operators, but have special syntax mandated by the SQL standard. They are shown in the table below.  
-Note that BETWEEN and NOT BETWEEN are only equivalent to the examples below in the cases where both `a`, `x` and `y` are of the same type, as BETWEEN will cast all of its inputs to the same type.
+Besides the standard comparison operators there are also the `BETWEEN` and `IS (NOT) NULL` operators. These behave much like operators, but have special syntax mandated by the SQL standard. They are shown in the table below.
+
+Note that `BETWEEN` and `NOT BETWEEN` are only equivalent to the examples below in the cases where both `a`, `x` and `y` are of the same type, as `BETWEEN` will cast all of its inputs to the same type.
 
 <div class="narrow_table"></div>
 
 | Predicate | Description |
 |:---|:---|
-| `a BETWEEN x AND y` | equivalent to `a >= x AND a <= y` |
-| `a NOT BETWEEN x AND y` | equivalent to `a < x OR a > y` |
+| `a BETWEEN x AND y` | equivalent to `x <= a AND a <= y` |
+| `a NOT BETWEEN x AND y` | equivalent to `x > a OR a > y` |
 | `expression IS NULL` | `true` if expression is `NULL`, `false` otherwise |
 | `expression ISNULL` | alias for `IS NULL` (non-standard) |
 | `expression IS NOT NULL` | `false` if expression is `NULL`, `true` otherwise |
 | `expression NOTNULL` | alias for `IS NOT NULL` (non-standard) |
+
+> For the expression `BETWEEN x AND y`, `x` is used as the lower bound and `y` is used as the upper bound. Therefore, if `x > y`, the result will always be `false`.

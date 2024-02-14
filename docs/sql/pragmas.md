@@ -123,9 +123,17 @@ Set the default collation to one of the available ones:
 SET default_collation = 'nocase';
 ```
 
-### Ordering
+### Implicit Casting to `VARCHAR`
 
-Set the ordering for NULLs to be either `NULLS FIRST` or `NULLS LAST`:
+Prior to version 0.10.0, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an implicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behaviour that performs implicit casting, set the `old_implicit_casting` variable to `true`.
+
+```sql
+SET old_implicit_casting = true;
+```
+
+### Deafult Ordering for NULLs
+
+Set the default ordering for NULLs to be either `NULLS FIRST` or `NULLS LAST`:
 
 ```sql
 SET default_null_order = 'NULLS FIRST';
@@ -221,6 +229,16 @@ By default, profiling information is printed to the console. However, if you pre
 ```sql
 SET profiling_output = '/path/to/file.json';
 SET profile_output = '/path/to/file.json';
+```
+
+#### Profiling Mode
+
+By default, a limited amount of profiling information is provided (`standard`).
+For more details, use the detailed profiling mode by setting `profiling_mode` to `detailed`.
+The output of this mode shows how long it takes to apply certain optimizers on the query tree and how long physical planning takes.
+
+```sql
+SET profiling_mode = 'detailed';
 ```
 
 ### Optimizer
@@ -357,10 +375,10 @@ PRAGMA disable_print_progress_bar;
 
 ### Temp Directory for Spilling Data to Disk
 
-By default, DuckDB uses the `.tmp` directory to spill to disk. To change this, use:
+By default, DuckDB uses a temporary directory named `<database_file_name>.tmp` to spill to disk, located in the same directory as the database file. To change this, use:
 
 ```sql
-SET temp_directory = '/path/to/temp.tmp'
+SET temp_directory = '/path/to/temp_dir.tmp/'
 ```
 
 ### Storage Information
@@ -405,7 +423,7 @@ PRAGMA show_databases;
 
 ### User Agent
 
-The following statement returns the user agent information, e.g., `duckdb/v0.9.2(osx_arm64)`.
+The following statement returns the user agent information, e.g., `duckdb/v0.10.0(osx_arm64)`.
 
 ```sql
 PRAGMA user_agent;

@@ -30,7 +30,7 @@ Contributions to the [DuckDB Documentation](https://duckdb.org/) are welcome. To
 Before submitting a contribution, please check whether your contribution is eligible.
 
 1. Before creating a new page, please [search the existing documentation](https://duckdb.org/docs/search) for similar pages.
-2. In general, guides for third-party tools using DuckDB should not be included in the DuckDB documentation. Rather, these tools and their documentation should be collected in the [`awesome-duckdb` community repository](https://github.com/davidgasquez/awesome-duckdb).
+2. In general, guides for third-party tools using DuckDB should not be included in the DuckDB documentation. Rather, these tools and their documentation should be collected in the [Awesome DuckDB community repository](https://github.com/davidgasquez/awesome-duckdb).
 
 ## Adding a New Page
 
@@ -65,7 +65,8 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `).
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
-* Narrow tables should be prepended with an empty div that has the `narrow` table class: `<div class="narrow_table"></div>`.
+* Narrow tables – that do not span horizontally across the entire page – should be prepended with an empty div that has the `narrow_table` class: `<div class="narrow_table"></div>`.
+* Do not introduce hard line breaks if possible. Therefore, avoid using the `<br/>` HTML tag and avoid [double spaces at the end of a line in Markdown](https://spec.commonmark.org/0.28/#hard-line-breaks).
 
 ### Headers
 

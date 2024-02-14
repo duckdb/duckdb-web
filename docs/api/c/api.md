@@ -181,6 +181,7 @@ title: C API - Complete API
 <span class="kt">void</span> <a href="#duckdb_destroy_pending"><span class="nf">duckdb_destroy_pending</span></a>(<span class="nv">duckdb_pending_result</span> *<span class="nv">pending_result</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_pending_error"><span class="nf">duckdb_pending_error</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>);
 <span class="nv">duckdb_pending_state</span> <a href="#duckdb_pending_execute_task"><span class="nf">duckdb_pending_execute_task</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>);
+<span class="nv">duckdb_pending_state</span> <a href="#duckdb_pending_execute_check_state"><span class="nf">duckdb_pending_execute_check_state</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_execute_pending"><span class="nf">duckdb_execute_pending</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
 <span class="kt">bool</span> <a href="#duckdb_pending_execution_is_finished"><span class="nf">duckdb_pending_execution_is_finished</span></a>(<span class="nv">duckdb_pending_state</span> <span class="nv">pending_state</span>);
 </code></pre></div></div>
@@ -3352,6 +3353,36 @@ The pending result to execute a task within.
 * `returns`
 
 The state of the pending result after the execution.
+
+<br>
+
+
+### `duckdb_pending_execute_check_state`
+
+---
+If this returns DUCKDB_PENDING_RESULT_READY, the duckdb_execute_pending function can be called to obtain the result.
+If this returns DUCKDB_PENDING_RESULT_NOT_READY, the duckdb_pending_execute_check_state function should be called again.
+If this returns DUCKDB_PENDING_ERROR, an error occurred during execution.
+
+The error message can be obtained by calling duckdb_pending_error on the pending_result.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_pending_state</span> <span class="nv">duckdb_pending_execute_check_state</span>(<span class="nv">
+</span>  <span class="nv">duckdb_pending_result</span> <span class="nv">pending_result
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `pending_result`
+
+The pending result.
+* `returns`
+
+The state of the pending result.
 
 <br>
 

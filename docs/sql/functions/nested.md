@@ -3,7 +3,7 @@ layout: docu
 title: Nested Functions
 ---
 
-This section describes functions and operators for examining and manipulating nested values. There are five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `UNION`.
+This section describes functions and operators for examining and manipulating nested values. There are five nested data types: [`ARRAY`](../data_types/array), [`LIST`](../data_types/list), [`MAP`](../data_types/map), [`STRUCT`](../data_types/struct), and [`UNION`](../data_types/union).
 
 ## List Functions
 
@@ -56,25 +56,32 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
 The following operators are supported for lists:
 
+<!-- markdownlint-disable MD056 -->
 
 | Operator | Description | Example | Result |
 |-|--|---|-|
 | `&&`  | Alias for `list_intersect`                                                                | `[1, 2, 3, 4, 5] && [2, 5, 5, 6]` | `[2, 5]`             |
 | `@>`  | Alias for `list_has_all`, where the list on the **right** of the operator is the sublist. | `[1, 2, 3, 4] @> [3, 4, 3]`       | `true`               |
 | `<@`  | Alias for `list_has_all`, where the list on the **left** of the operator is the sublist.  | `[1, 4] <@ [1, 2, 3, 4]`          | `true`               |
-<!-- markdownlint-disable-next-line MD056 -->
 | `||`  | Alias for `list_concat`                                                                   | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
 | `<=>` | Alias for `list_cosine_similarity`                                                        | `[1, 2, 3] <=> [1, 2, 5]`         | `0.9759000729485332` |
 | `<->` | Alias for `list_distance`                                                                 | `[1, 2, 3] <-> [1, 2, 5]`         | `2.0`                |
+
+<!-- markdownlint-enable MD056 -->
 
 ## List Comprehension
 
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
 
 ```sql
-SELECT [lower(x) for x in strings] FROM (VALUES (['Hello', '', 'World'])) t(strings);
--- ['hello', '', 'world']
-SELECT [upper(x) for x in strings if len(x) > 0] FROM (VALUES (['Hello', '', 'World'])) t(strings);
+SELECT [lower(x) for x in strings]
+FROM (VALUES (['Hello', '', 'World'])) t(strings);
+-- [hello, , world]
+```
+
+```sql
+SELECT [upper(x) for x in strings if len(x) > 0]
+FROM (VALUES (['Hello', '', 'World'])) t(strings);
 -- [HELLO, WORLD]
 ```
 
@@ -82,10 +89,12 @@ SELECT [upper(x) for x in strings if len(x) > 0] FROM (VALUES (['Hello', '', 'Wo
 
 | Function | Description | Example | Result |
 |:--|:---|:---|:--|
-| *`struct`*`.`*`entry`* | Dot notation serves as an alias for `struct_extract`. | `({'i': 3, 's': 'string'}).s` | `string` |
-| *`struct`*`[`*`entry`*`]` | Bracket notation serves as an alias for `struct_extract`. | `({'i': 3, 's': 'string'})['s']` | `string` |
-| `row(`*`any`*`, ...)` | Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. | `row(i, i % 4, i / 4)` | `{'i': 3, 'v2': 3, 'v3': 0}`|
-| `struct_extract(`*`struct`*`, `*`'entry'`*`)` | Extract the named entry from the struct. | `struct_extract({'i': 3, 'v2': 3, 'v3': 0}, 'i')` | `3` |
+| *`struct`*`.`*`entry`* | Dot notation that serves as an alias for `struct_extract` from named `STRUCT`s. | `({'i': 3, 's': 'string'}).i` | `3` |
+| *`struct`*`[`*`entry`*`]` | Bracket notation that serves as an alias for `struct_extract` from named `STRUCT`s. | `({'i': 3, 's': 'string'})['i']` | `3` |
+| *`struct`*`[`*`idx`*`]` | Bracket notation that serves as an alias for `struct_extract` from unnamed `STRUCT`s (tuples), using an index (1-based). | `(row(42, 84))[1]` | `42` |
+| `row(`*`any`*`, ...)` | Create an unnamed `STRUCT` (tuple) containing the argument values. | `row(i, i % 4, i / 4)` | `(10, 2, 2.5)`|
+| `struct_extract(`*`struct`*`, `*`'entry'`*`)` | Extract the named entry from the `STRUCT`. | `struct_extract({'i': 3, 'v2': 3, 'v3': 0}, 'i')` | `3` |
+| `struct_extract(`*`struct`*`, `*`idx`*`)` | Extract the entry from an unnamed `STRUCT` (tuple) using an index (1-based). | `struct_extract(row(42, 84), 1)` | `42` |
 | `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). | `struct_insert({'a': 1}, b := 2)` | `{'a': 1, 'b': 2}` |
 | `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. | `struct_pack(i := 4, s := 'string')` | `{'i': 4, 's': string}` |
 
@@ -249,7 +258,7 @@ SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
 -- [2, 10, 3]
 ```
 
-### array_to_string
+### `array_to_string`
 
 Concatenates list/array elements using an optional delimiter.
 
@@ -266,7 +275,7 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 
 The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether NULL values should be moved to the beginning or to the end of the list.
 
-By default if no modifiers are provided, DuckDB sorts ASC NULLS FIRST, i.e., the values are sorted in ascending order and NULL values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [these](../query_syntax/orderby) PRAGMA statements.
+By default if no modifiers are provided, DuckDB sorts `ASC NULLS FIRST`, i.e., the values are sorted in ascending order and NULL values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [`PRAGMA` statements](../pragmas#default-ordering-for-nulls).
 
 `list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. `list_sort` takes up to two additional optional parameters. The second parameter provides the sort order and can be either `ASC` or `DESC`. The third parameter provides the NULL sort order and can be either `NULLS FIRST` or `NULLS LAST`.
 

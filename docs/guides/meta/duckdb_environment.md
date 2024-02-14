@@ -18,7 +18,7 @@ SELECT version();
 │ version() │
 │  varchar  │
 ├───────────┤
-│ v0.9.2    │
+│ v0.10.0   │
 └───────────┘
 ```
 
@@ -33,7 +33,7 @@ PRAGMA version;
 │ library_version │ source_id  │
 │     varchar     │  varchar   │
 ├─────────────────┼────────────┤
-│ v0.9.2          │ 3c695d7ba9 │
+│ v0.10.0         │ 20b1486d11 │
 └─────────────────┴────────────┘
 ```
 

@@ -16,7 +16,7 @@ EXPORT DATABASE 'db_name' (FORMAT CSV, DELIMITER '|');
 -- export to directory 'db_name', tables serialized as Parquet
 EXPORT DATABASE 'db_name' (FORMAT PARQUET);
 -- export to directory 'db_name', tables serialized as Parquet, compressed with ZSTD, with a row_group_size of 100000
-EXPORT DATABASE 'db_name' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000);
+EXPORT DATABASE 'db_name' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100_000);
 -- reload the database again
 IMPORT DATABASE 'db_name';
 -- alternatively, use a PRAGMA

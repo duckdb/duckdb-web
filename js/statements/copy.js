@@ -64,7 +64,7 @@ function Initialize(options = {}) {
 	document.getElementById("rrdiagram1").classList.add("limit-width");
 	document.getElementById("rrdiagram2").classList.add("limit-width");
 	document.getElementById("rrdiagram3").classList.add("limit-width");
-	document.getElementById("rrdiagram1").innerHTML = GenerateCopyFrom(options).toString()
+	document.getElementById("rrdiagram1").innerHTML = GenerateCopyFrom(options).toString();
 	document.getElementById("rrdiagram2").innerHTML = GenerateCopyTo(options).toString();
 	document.getElementById("rrdiagram3").innerHTML = GenerateCopyFromDatabase(options).toString();
 }

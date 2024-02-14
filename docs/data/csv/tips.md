@@ -39,7 +39,7 @@ COPY tbl FROM 'test.csv';
 
 #### Use `union_by_name` When Loading Files with Different Schemas
 
-The `union_by_name` option can be used to unify the schema of files that have different or missing columns. For files that do not have certain columns, `NULL` values are filled in.  
+The `union_by_name` option can be used to unify the schema of files that have different or missing columns. For files that do not have certain columns, `NULL` values are filled in.
 
 ```sql
 SELECT * FROM read_csv('flights*.csv', union_by_name = true);
