@@ -94,7 +94,7 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 
 ## SQL Features
 
-* [Friendly SQL extensions](../guides/sql_features/friendly_sql_extensions)
+* [Friendly SQL](../guides/sql_features/friendly_sql)
 * [As-of join](../guides/sql_features/asof_join)
 * [Full-text search](../guides/sql_features/full_text_search)
 
