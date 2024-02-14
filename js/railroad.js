@@ -2054,10 +2054,9 @@ function GenerateSelectNode(options) {
 function GenerateSetOperation(options) {
 	return [
 		Choice(0, [
-			Keyword("UNION"),
-			Keyword("UNION ALL"),
-			Keyword("INTERSECT"),
-			Keyword("EXCEPT")
+			Sequence([Keyword("UNION"), Optional(Keyword("ALL"), "skip"), Optional(Sequence([Keyword("BY NAME")]), "skip")]),
+			Sequence([Keyword("INTERSECT"), Optional(Keyword("ALL"), "skip")]),
+			Sequence([Keyword("EXCEPT"), Optional(Keyword("ALL"), "skip")]),
 		])
 	]
 }
