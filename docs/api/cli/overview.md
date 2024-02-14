@@ -48,7 +48,7 @@ You will see DuckDB's version number, the information on the connection and a pr
 $ duckdb
 ```
 ```text
-v0.9.2 3c695d7ba9
+v0.10.0 20b1486d11
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
