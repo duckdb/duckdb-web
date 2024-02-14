@@ -94,15 +94,15 @@ Several features in DuckDB, including [parallelism](/docs/guides/performance/how
 
 ### Error Message
 
-When opening a database file with an uncompatible DuckDB version, the following error message may occur:
+When opening a database file that has been written by a different DuckDB version from the one you are using, the following error message may occur:
 
 ```text
 Error: unable to open database "...": Serialization Error: Failed to deserialize: ...
 ```
 
-The message implies that the database file was created with a newer DuckDB version and uses features that are not yet supported in the DuckDB version used to read the file.
+The message implies that the database file was created with a newer DuckDB version and uses features that are backward incompatible with the DuckDB version used to read the file.
 
 There are two potential workarounds:
 
 1. Update your DuckDB version to the latest stable version.
-2. If you are unable to update your DuckDB version, open the database with the latest version of DuckDB, export it to a standard format (e.g., Parquet), then import it using to the old version of DuckDB. See the [`EXPORT/IMPORT DATABASE` statements](../docs/sql/statements/export) for details.
+2. Open the database with the latest version of DuckDB, export it to a standard format (e.g., Parquet), then import it using to any version of DuckDB. See the [`EXPORT/IMPORT DATABASE` statements](../docs/sql/statements/export) for details.
