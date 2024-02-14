@@ -404,7 +404,7 @@ This call returns the following information for the given table:
 | `segment_type` | `VARCHAR` ||
 | `start`        | `BIGINT`  | The start row id of this chunk                        |
 | `count`        | `BIGINT`  | The amount of entries in this storage chunk           |
-| `compression`  | `VARCHAR` | Compression type used for this column - see [blog post](/2022/10/28/lightweight-compression.html) |
+| `compression`  | `VARCHAR` | Compression type used for this column - see [blog post](/2022/10/28/lightweight-compression) |
 | `stats`        | `VARCHAR` ||
 | `has_updates`  | `BOOLEAN` ||
 | `persistent`   | `BOOLEAN` | false if temporary table                              |

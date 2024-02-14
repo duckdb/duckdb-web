@@ -274,7 +274,7 @@ You can read the same file with `records` set to `'false'`, to get a single colu
 | {'duck': 42, 'goose': [1,2,3]} |
 | {'duck': 43, 'goose': [4,5,6]} |
 
-For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post](https://duckdb.org/2023/03/03/json.html).
+For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post](/2023/03/03/json).
 
 ## JSON Import/Export
 
