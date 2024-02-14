@@ -180,10 +180,10 @@ Several features for matching are supported, such as `*` to match any number of 
 SELECT count(*) FROM read_parquet('s3://bucket/folder*/100?/t[0-9].parquet');
 ```
 
-A useful feature when using globs is the `filename` option which adds a column named `filename`, encoding the file that a particular row originated from:
+A useful feature when using globs is the `filename` option, which adds a column named `filename` that encodes the file that a particular row originated from:
 
 ```sql
-SELECT * FROM read_parquet('s3://bucket/*.parquet', FILENAME = true);
+SELECT * FROM read_parquet('s3://bucket/*.parquet', filename = true);
 ```
 
 could for example result in:
@@ -210,13 +210,20 @@ COPY table_name TO 's3://bucket/file.extension';
 Partitioned copy to S3 also works:
 
 ```sql
-COPY table TO 's3://my-bucket/partitioned' (FORMAT PARQUET, PARTITION_BY (part_col_a, part_col_b));
+COPY table TO 's3://my-bucket/partitioned' (
+    FORMAT PARQUET,
+    PARTITION_BY (part_col_a, part_col_b)
+);
 ```
 
 An automatic check is performed for existing files/directories, which is currently quite conservative (and on S3 will add a bit of latency). To disable this check and force writing, an `OVERWRITE_OR_IGNORE` flag is added:
 
 ```sql
-COPY table TO 's3://my-bucket/partitioned' (FORMAT PARQUET, PARTITION_BY (part_col_a, part_col_b), OVERWRITE_OR_IGNORE true);
+COPY table TO 's3://my-bucket/partitioned' (
+    FORMAT PARQUET,
+    PARTITION_BY (part_col_a, part_col_b),
+    OVERWRITE_OR_IGNORE true
+);
 ```
 
 The naming scheme of the written files looks like this:

@@ -85,7 +85,7 @@ For the Python client, see the [Loading and Installing Extensions section in the
 
 ### Sharing Extensions between Clients
 
-The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.9.2 of the CLI client on macOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.9.2.
+The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.10.0 of the CLI client on macOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.10.0.
 
 See the [Working with Extensions page](https://duckdb.org/docs/extensions/working_with_extensions#platforms) for details on available platforms.
 
@@ -97,7 +97,7 @@ Extensions are by default installed under the user's home directory:
 ~/.duckdb/extensions/v{duckdb_version}/{platform_name}/
 ```
 
-For example, the extensions for DuckDB version 0.9.2 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.9.2/osx_arm64/`.
+For example, the extensions for DuckDB version 0.10.0 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.10.0/osx_arm64/`.
 
 > For development builds, the directory of the extensions corresponds to the Git hash of the build, e.g., `~/.duckdb/extensions/fc2e4b26a6/linux_amd64_gcc4`.
 

@@ -56,7 +56,7 @@ RESET memory_limit;
 
 ## Secrets Manager
 
-DuckDB has a [Secrets Manager](../sql/statements/create_secret), which provides a unified user interface for secrets across all backends (e.g., AWS S3) that use them.
+DuckDB has a [Secrets manager](../sql/statements/create_secret), which provides a unified user interface for secrets across all backends (e.g., AWS S3) that use them.
 
 ## Configuration Reference
 

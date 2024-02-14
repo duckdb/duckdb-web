@@ -7,7 +7,7 @@ blurb: A timestamp specifies a combination of a date (year, month, day) and a ti
 Timestamps represent points in absolute time, usually called *instants*.
 DuckDB represents instants as the number of microseconds (µs) since `1970-01-01 00:00:00+00`.
 
-## Timestamp types
+## Timestamp Types
 
 | Name | Aliases | Description |
 |:---|:---|:---|

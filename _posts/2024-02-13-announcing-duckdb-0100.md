@@ -2,6 +2,7 @@
 layout: post
 title: "Announcing DuckDB 0.10.0"
 author: Mark Raasveldt and Hannes Mühleisen
+thumb: "/images/blog/thumbs/240213.svg"
 excerpt: "The DuckDB team is happy to announce the latest DuckDB release (0.10.0). This release is named Fusca after the [Velvet scoter](https://en.wikipedia.org/wiki/Velvet_scoter) native to Europe."
 ---
 
@@ -13,6 +14,8 @@ excerpt: "The DuckDB team is happy to announce the latest DuckDB release (0.10.0
 To install the new version, please visit the [installation guide](/docs/installation). The full release notes can be found [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
 
 <!--more-->
+
+Note: Some versions and extensions are still being built. It might take some more time till the latest version is available.
 
 ## What's New in 0.10.0
 
@@ -148,6 +151,7 @@ For this release, DuckDB v0.9 is able to read files created by DuckDB v0.10 prov
 
 * The database file does not contain views
 * The database file does not contain new types (`ARRAY`, `UHUGEINT`)
+* The database file does not contain indexes (`PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`, explicit indexes)
 * The database file does not contain new compression methods (`ALP`). As ALP is automatically used to compress `FLOAT` and `DOUBLE` columns - that means forward compatibility in practice often does not work for `FLOAT` and `DOUBLE` columns unless `ALP` is explicitly disabled through configuration.
 
 We expect that as the format stabilizes and matures this will happen less frequently – and we hope to offer better guarantees in allowing DuckDB to read files written by future DuckDB versions.

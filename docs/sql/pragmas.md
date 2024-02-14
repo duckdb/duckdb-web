@@ -123,6 +123,14 @@ Set the default collation to one of the available ones:
 SET default_collation = 'nocase';
 ```
 
+### Implicit Casting to `VARCHAR`
+
+Prior to version 0.10.0, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an implicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behaviour that performs implicit casting, set the `old_implicit_casting` variable to `true`.
+
+```sql
+SET old_implicit_casting = true;
+```
+
 ### Deafult Ordering for NULLs
 
 Set the default ordering for NULLs to be either `NULLS FIRST` or `NULLS LAST`:
@@ -415,7 +423,7 @@ PRAGMA show_databases;
 
 ### User Agent
 
-The following statement returns the user agent information, e.g., `duckdb/v0.9.2(osx_arm64)`.
+The following statement returns the user agent information, e.g., `duckdb/v0.10.0(osx_arm64)`.
 
 ```sql
 PRAGMA user_agent;
