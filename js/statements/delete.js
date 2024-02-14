@@ -1,8 +1,7 @@
 function GenerateDelete(options = {}) {
 	return Diagram([
 		AutomaticStack([
-			Keyword("DELETE"),
-			Keyword("FROM"),
+			Keyword("DELETE FROM"),
 			GenerateQualifiedTableName(),
 			Optional(Sequence([
 				Keyword("USING"),

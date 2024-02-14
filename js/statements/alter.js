@@ -4,8 +4,7 @@ function GenerateAlterColumnOptions(options) {
 		Choice(0, [
 			Sequence([
 				Optional(Sequence([
-					Keyword("SET"),
-					Keyword("DATA")
+					Keyword("SET DATA")
 				])),
 				Keyword("TYPE"),
 				Expression("data-type"),
@@ -23,13 +22,11 @@ function GenerateAlterColumnOptions(options) {
 				)
 			]),
 			Sequence([
-				Keyword("SET"),
-				Keyword("DEFAULT"),
+				Keyword("SET DEFAULT"),
 				Expression()
 			]),
 			Sequence([
-				Keyword("DROP"),
-				Keyword("DEFAULT")
+				Keyword("DROP DEFAULT")
 			])
 		])
 	]
@@ -38,18 +35,13 @@ function GenerateAlterColumnOptions(options) {
 function GenerateAlterTable(options = {}) {
 	return Diagram([
 		AutomaticStack([
-			Keyword("ALTER"),
-			Keyword("TABLE"),
+			Keyword("ALTER TABLE"),
 			Expression("table-name"),
 			Choice(0, [
 				Sequence([
 					Keyword("ADD"),
 					Optional("COLUMN"),
-					Optional(Sequence([
-						Keyword("IF"),
-						Keyword("NOT"),
-						Keyword("EXISTS")
-					]), "skip"),
+					GenerateIfNotExists(),
 					Expression("column-name"),
 					Expression("type-name"),
 					Expandable("column-constraints", options, "column-constraints", GenerateColumnConstraints)
@@ -57,10 +49,7 @@ function GenerateAlterTable(options = {}) {
 				Sequence([
 					Keyword("DROP"),
 					Optional("COLUMN"),
-					Optional(Sequence([
-						Keyword("IF"),
-						Keyword("EXISTS")
-					]), "skip"),
+					GenerateIfExists(),
 					Expression("column-name")
 				]),
 				Sequence([
@@ -77,8 +66,7 @@ function GenerateAlterTable(options = {}) {
 					Expression("new-column")
 				]),
 				Sequence([
-					Keyword("RENAME"),
-					Keyword("TO"),
+					Keyword("RENAME TO"),
 					Expression("new-name")
 				])
 			])

@@ -17,10 +17,7 @@ function GenerateDrop(options = {}) {
 				Keyword("VIEW"),
 				Keyword("TYPE"),
 			]),
-			Optional(Sequence([
-				Keyword("IF"),
-				Keyword("EXISTS")
-			]), "skip"),
+			GenerateIfExists(),
 			GenerateQualifiedTableName(options, "entry-name"),
 			Choice(0, [
 				new Skip(),

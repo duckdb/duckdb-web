@@ -3,10 +3,7 @@ function GenerateTableConstraints(options) {
 	return [ZeroOrMore(Choice(0, [
 		Sequence([
 			Choice(0, [
-				Sequence([
-					Keyword("PRIMARY"),
-					Keyword("KEY")
-				]),
+				Keyword("PRIMARY KEY"),
 				Keyword("UNIQUE")
 			]),
 			Keyword("("),
@@ -20,8 +17,7 @@ function GenerateTableConstraints(options) {
 			Keyword(")")
 		]),
 		Sequence([
-			Keyword("FOREIGN"),
-			Keyword("KEY"),
+			Keyword("FOREIGN KEY"),
 			Keyword("("),
 			OneOrMore(Expression("column-name"), ","),
 			Keyword(")"),
@@ -59,10 +55,7 @@ function GenerateOptionalType(options) {
 
 function GenerateGeneratedColumnSyntax(options) {
 	return Sequence([
-		Optional(Sequence([
-			Keyword("GENERATED"),
-			Keyword("ALWAYS"),
-		]), "skip"),
+		Optional(Keyword("GENERATED ALWAYS"), "skip"),
 		Keyword("AS")
 	]);
 }

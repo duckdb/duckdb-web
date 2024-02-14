@@ -25,9 +25,7 @@ PRAGMA import_database('db_name');
 
 For details regarding the writing of Parquet files, see the [Parquet Files page in the Data Import section](../../data/parquet/overview#writing-to-parquet-files), and the [`COPY` Statement page](copy).
 
-## Syntax
-
-<div id="rrdiagram"></div>
+## `EXPORT DATABASE`
 
 The `EXPORT DATABASE` command exports the full contents of the database - including schema information, tables, views and sequences - to a specific directory that can then be loaded again. The created directory will be structured as follows:
 
@@ -43,4 +41,14 @@ The `schema.sql` file contains the schema statements that are found in the datab
 
 The `load.sql` file contains a set of `COPY` statements that can be used to read the data from the CSV files again. The file contains a single `COPY` statement for every table found in the schema.
 
+### Syntax
+
+<div id="rrdiagram1"></div>
+
+## `IMPORT DATABASE`
+
 The database can be reloaded by using the `IMPORT DATABASE` command again, or manually by running `schema.sql` followed by `load.sql` to re-load the data.
+
+### Syntax
+
+<div id="rrdiagram2"></div>

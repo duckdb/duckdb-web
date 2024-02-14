@@ -28,9 +28,8 @@ function GenerateCreateIndex(options = {}) {
 function GenerateDropIndex(options = {}) {
 	return Diagram([
 		Sequence([
-			Keyword("DROP"),
-			Keyword("INDEX"),
-			Optional(Sequence([Keyword("IF"), Keyword("EXISTS")]), "skip"),
+			Keyword("DROP INDEX"),
+			Optional(Sequence([Keyword("IF EXISTS")]), "skip"),
 			Expression("name")
 		]),
 	])
