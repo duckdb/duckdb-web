@@ -3,11 +3,12 @@ layout: docu
 title: Instantiation
 ---
 
-DuckDB-Wasm has multiple ways to be instantiated depending on the use case.
-
 ## Instantiation
 
-cdn(jsdelivr)
+DuckDB-Wasm has multiple ways to be instantiated depending on the use case.
+
+### `cdn(jsdelivr)`
+
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
 
@@ -28,7 +29,8 @@ await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 URL.revokeObjectURL(worker_url);
 ```
 
-webpack
+### `webpack`
+
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
 import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm';
@@ -51,7 +53,9 @@ const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
-vite
+
+### `vite`
+
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
 import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm?url';
@@ -77,7 +81,11 @@ const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
-static served (manually download the files from <https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/>)
+
+## Statically Served
+
+It is possible to manually download the files from <https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/>.
+
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
 
@@ -99,4 +107,3 @@ const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```  
-
