@@ -9,7 +9,7 @@ The DuckDB R API can be installed using `install.packages("duckdb")`. Please see
 
 ## Reference Manual
 
-The reference manual for the DuckDB R API is available at <https://r.duckdb.org>.
+The reference manual for the DuckDB R API is available at [R.duckdb.org](https://r.duckdb.org).
 
 ## Basic API Usage
 
