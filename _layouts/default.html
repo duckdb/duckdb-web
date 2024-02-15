@@ -14,9 +14,6 @@
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css?{{ site.data['hash'] }}">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css?{{ site.data['hash'] }}">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
-	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-	<link rel="stylesheet" href="/css/railroad.css?{{ site.data['hash'] }}">
-	{% endif %}
 	{% if page.add_css %}
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/{{ page.add_css }}?{{ site.data['hash'] }}">
 	{% endif %}
@@ -93,10 +90,6 @@
 	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
 	<script src="{{ site.baseurl }}/js/copy_button.js"></script>
 	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}"></script>
-	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-	<script src="/js/railroad.js"></script>
-	<script src="/js/{{ page.railroad }}"></script>
-	{% endif %}
 
 </body>
 </html>
