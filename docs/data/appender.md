@@ -59,6 +59,16 @@ appender.AppendRow(
 );
 ```
 
+## Handling Constraint Violations
+
+If the appender encounters a `PRIMARY KEY` conflict or a `UNIQUE` constraint violation, it fails and returns the following error:
+
+```text
+Constraint Error: PRIMARY KEY or UNIQUE constraint violated: duplicate key "..."
+```
+
+In this case, the entire append operation fails and no rows are inserted.
+
 ## Appender Support in Other Clients
 
 The appender is also available in the following client APIs:
