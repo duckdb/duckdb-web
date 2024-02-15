@@ -874,6 +874,10 @@
                   "url": "list"
                 },
                 {
+                  "page": "Literal Types",
+                  "url": "literal_types"
+                },
+                {
                   "page": "Map",
                   "url": "map"
                 },
