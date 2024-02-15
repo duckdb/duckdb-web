@@ -307,7 +307,7 @@ Floating point numbers are notoriously difficult to compress efficiently, both i
 <div class="narrow_table"></div>
 
 | Compression  | Load   | Query  | Size   |
-|--------------|--------|--------|--------|
+|:-------------|--------|--------|--------|
 | ALP          | 0.434s | 0.02s  | 184 MB |
 | Patas        | 0.603s | 0.08s  | 275 MB |
 | Uncompressed | 0.316s | 0.012s | 489 MB |

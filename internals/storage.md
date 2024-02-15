@@ -54,7 +54,7 @@ To see the commits that changed each storage version, see the [commit log](https
 <div class="narrow_table"></div>
 
 | Storage version | DuckDB version(s)               |
-|-----------------|---------------------------------|
+|----------------:|---------------------------------|
 | 64              | v0.9.0, v0.9.1, v0.9.2, v0.10.0 |
 | 51              | v0.8.0, v0.8.1                  |
 | 43              | v0.7.0, v0.7.1                  |
@@ -76,8 +76,22 @@ To see the commits that changed each storage version, see the [commit log](https
 
 ## Compression
 
-DuckDB applies [lightweight compression](/2022/10/28/lightweight-compression) to persistent databases.
-Note that in-memory instances are not compressed.
+DuckDB uses [lightweight compression](/2022/10/28/lightweight-compression).
+Note that compression is only applied to persistent databases and is **not applied to in-memory instances**.
+
+### Compression Algorithms
+
+The compression algorithms supported by DuckDB include the following:
+
+* [Constant Encoding](/2022/10/28/lightweight-compression#constant-encoding)
+* [Run-Length Encoding (RLE)](/2022/10/28/lightweight-compression#run-length-encoding-rle)
+* [Bit Packing](/2022/10/28/lightweight-compression#bit-packing)
+* [Frame of Reference (FOR)](/2022/10/28/lightweight-compression#frame-of-reference)
+* [Dictionary Encoding](/2022/10/28/lightweight-compression#dictionary-encoding)
+* [Fast Static Symbol Table (FSST)](/2022/10/28/lightweight-compression#fsst) – [VLDB 2020 paper](https://www.vldb.org/pvldb/vol13/p2649-boncz.pdf)
+* [Adaptive Lossless Floating-Point Compression (ALP)](/2024/02/13/announcing-duckdb-0100#adaptive-lossless-floating-point-compression-alp) – [SIGMOD 2024 paper](https://ir.cwi.nl/pub/33334/33334.pdf)
+* [Chimp](/2022/10/28/lightweight-compression#chimp--patas) – [VLDB 2022 paper](https://www.vldb.org/pvldb/vol15/p3058-liakos.pdf)
+* [Patas](/2022/11/14/announcing-duckdb-060#compression-improvements)
 
 ## Disk Usage
 
