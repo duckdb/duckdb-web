@@ -15,9 +15,9 @@ we have to specify the endpoint according to the following pattern:
 s3express-<availability zone>.<region>.amazonaws.com
 ```
 
-where the `<availability zone>` can be obtained from the S3 Express One bucket's configuration page (e.g., `use-az5`) and the `<region>` is the AWS region (e.g., `us-east-1`).
+where the `<availability zone>` (e.g., `use-az5`) can be obtained from the S3 Express One bucket's configuration page and the `<region>` is the AWS region (e.g., `us-east-1`).
 
-For example, to create the secret for an S3 Express One bucket, run the following statement:
+For example, to allow DuckDB to use an S3 Express One bucket, configure the [Secrets manager](../../sql/statements/create_secret) as follows:
 
 ```sql
 CREATE SECRET (
@@ -42,11 +42,11 @@ FROM 's3://express-bucket-name--use1-az5--x-s3/my-file.parquet';
 
 We ran two experiments on a `c7gd.12xlarge` instance using the [LDBC SF300 Comments `creationDate` Parquet file](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet) file (also used in the [microbenchmarks of the performance guide](../performance/benchmarks#data-sets)).
 
-The "loaing only" variant is running the load as part of an [`EXPLAIN ANALYZE`](../meta/explain_analyze) statement to measure the runtime without account creating a local table, while the "creating local table" variant uses [`CREATE TABLE ... AS`](../../sql/statements/create_table) to create a persistent table on the local disk.
-
 <div class="narrow_table"></div>
 
 | Experiment | File size | Runtime |
 |:---|:-|:---|
 | Loading only from Parquet | 4.1 GB | 3.5s |
 | Creating local table from Parquet | 4.1 GB | 5.1s |
+
+The "loading only" variant is running the load as part of an [`EXPLAIN ANALYZE`](../meta/explain_analyze) statement to measure the runtime without account creating a local table, while the "creating local table" variant uses [`CREATE TABLE ... AS`](../../sql/statements/create_table) to create a persistent table on the local disk.
