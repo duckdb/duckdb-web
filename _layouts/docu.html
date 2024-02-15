@@ -161,13 +161,13 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	</main>
 
 
-	<script src="{{ site.baseurl }}/js/minisearch.js"></script>
-	<script src="{{ site.baseurl }}/js/search.js"></script>
+	<script src="{{ site.baseurl }}/js/minisearch.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/search.js?{{ site.data['hash'] }}"></script>
 
-	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
-	<script src="{{ site.baseurl }}/js/script.js"></script>
-	<script src="{{ site.baseurl }}/js/copy_button.js"></script>
-	<script src="{{ site.baseurl }}/js/noteboxes.js"></script>
+	<script src="{{ site.baseurl }}/js/lottie.min.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/copy_button.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}"></script>
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
 		{% assign startingUrlParts = startingUrl | split: "/"  %}
 		{% if startingUrlParts[1] == "archive" %}
