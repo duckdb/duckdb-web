@@ -33,10 +33,11 @@ pre {
     line-height: 1.4;
 }
 code.language-plaintext{
-	background-color: rgb(245, 245, 245);
+	background-color: #F3F3F3;
 	font-family: $fontMonoBold;
-	border-radius: 7px;
-	padding: 2px 5px 2px 5px;
+	border-radius: 2px;
+	padding: 0px 4px;
+    border: 1px solid #CFCFCF;
 	margin: 0;
 }
 pre {
