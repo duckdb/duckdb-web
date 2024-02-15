@@ -26,7 +26,7 @@ import pyarrow as pa
 
 my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
                                        'j': ["one", "two", "three", "four"]})
-                                       
+
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow RecordBatchReader
 chunk_size = 1_000_000
 results = duckdb.sql("SELECT * FROM my_arrow_table").fetch_record_batch(chunk_size)

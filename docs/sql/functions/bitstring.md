@@ -56,5 +56,5 @@ These aggregate functions are available for `BIT` type.
 
 The `bitstring_agg` function takes any integer type as input and returns a bitstring with bits set for each distinct value.
 The left-most bit represents the smallest value in the column and the right-most bit the maximum value. If possible, the min and max are retrieved from the column statistics. Otherwise, it is also possible to provide the min and max values.
-  
+
 The combination of `bit_count` and `bitstring_agg` could be used as an alternative to `count(DISTINCT ...)`, with possible performance improvements in cases of low cardinality and dense values.

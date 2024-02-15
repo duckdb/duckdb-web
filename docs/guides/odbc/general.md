@@ -245,48 +245,48 @@ int main() {
     SQLHANDLE env;
     SQLHANDLE dbc;
     SQLRETURN ret;
-	
+
     ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
     check_ret(ret, "SQLAllocHandle(env)");
-    
+
     ret = SQLSetEnvAttr(env, SQL_ATTR_ODBC_VERSION, (void*)SQL_OV_ODBC3, 0);
     check_ret(ret, "SQLSetEnvAttr");
-    
+
     ret = SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
     check_ret(ret, "SQLAllocHandle(dbc)");
-    
+
     std::string dsn = "DSN=duckdbmemory";
     ret = SQLConnect(dbc, (SQLCHAR*)dsn.c_str(), SQL_NTS, NULL, 0, NULL, 0);
     check_ret(ret, "SQLConnect");
-    
+
     std::cout << "Connected!" << std::endl;
-    
+
     SQLHANDLE stmt;
     ret = SQLAllocHandle(SQL_HANDLE_STMT, dbc, &stmt);
-	check_ret(ret, "SQLAllocHandle(stmt)");
-    
+    check_ret(ret, "SQLAllocHandle(stmt)");
+
     ret = SQLExecDirect(stmt, (SQLCHAR*)"SELECT * FROM integers", SQL_NTS);
     check_ret(ret, "SQLExecDirect(SELECT * FROM integers)");
-    
+
     SQLLEN int_val;
     SQLLEN null_val;
     ret = SQLBindCol(stmt, 1, SQL_C_SLONG, &int_val, 0, &null_val);
     check_ret(ret, "SQLBindCol");
-    
+
     ret = SQLFetch(stmt);
     check_ret(ret, "SQLFetch");
-    
+
     std::cout << "Value: " << int_val << std::endl;
-    
+
     ret = SQLFreeHandle(SQL_HANDLE_STMT, stmt);
     check_ret(ret, "SQLFreeHandle(stmt)");
-    
+
     ret = SQLDisconnect(dbc);
     check_ret(ret, "SQLDisconnect");
-    
+
     ret = SQLFreeHandle(SQL_HANDLE_DBC, dbc);
     check_ret(ret, "SQLFreeHandle(dbc)");
-    
+
     ret = SQLFreeHandle(SQL_HANDLE_ENV, env);
     check_ret(ret, "SQLFreeHandle(env)");
 }
