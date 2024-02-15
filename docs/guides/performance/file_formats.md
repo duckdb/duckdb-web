@@ -30,7 +30,7 @@ When deciding on whether to query these files directly or to first load them to 
 
 The queries on the [TPC-H benchmark](/docs/extensions/tpch) run approximately 1.1-5.0x slower on Parquet files than on a DuckDB database.
 
-_**Best Practice:**_ If you have the storage space available, and have a join-heavy workload and/or plan to run many queries on the same dataset, load the Parquet files into the database first. The compression algorithm and the row group sizes in the Parquet files have a large effect on performance: study these using the [`parquet_metadata` function](../../data/parquet/metadata#parquet-metadata).
+> Bestpractice If you have the storage space available, and have a join-heavy workload and/or plan to run many queries on the same dataset, load the Parquet files into the database first. The compression algorithm and the row group sizes in the Parquet files have a large effect on performance: study these using the [`parquet_metadata` function](../../data/parquet/metadata#parquet-metadata).
 
 ### The Effect of Row Group Sizes
 
@@ -63,7 +63,7 @@ The results show that row group sizes <5,000 have a strongly detrimental effect,
 
 DuckDB can also parallelize across multiple Parquet files. It is advisable to have at least as many total row groups across all files as there are CPU threads. For example, with a machine having 10 threads, both 10 files with 1 row group or 1 file with 10 row groups will achieve full parallelism. It is also beneficial to keep the size of individual Parquet files moderate.
 
-_**Best Practice:**_ The ideal range is between 100MB and 10GB per individual Parquet file.
+> Bestpractice The ideal range is between 100MB and 10GB per individual Parquet file.
 
 ### Hive Partitioning for Filter Pushdown
 

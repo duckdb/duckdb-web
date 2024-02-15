@@ -13,7 +13,7 @@ As a rule of thumb, aggregation-heavy workloads require approx. 5 GB memory per 
 In AWS EC2, the former are available as general-purpose instances (e.g., [M7g](https://aws.amazon.com/ec2/instance-types/m7g/))
 and the latter as memory-optimized instances (e.g., [R7g](https://aws.amazon.com/ec2/instance-types/r7g/)).
 
-_**Best Practice:**_ Aim for 5-10 GB memory per CPU core.
+> Bestpractice Aim for 5-10 GB memory per CPU core.
 
 ### Disk
 
@@ -25,7 +25,7 @@ network drives such as [SMB](https://en.wikipedia.org/wiki/Server_Message_Block)
 and network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/).
 However, different network disks can have vastly varying IO performance, ranging from very slow to almost as fast as local. Therefore, for optimal performance, only use network disks that can provide high IO performance.
 
-_**Best Practice:**_ Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they guarantee high IO.
+> Bestpractice Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they guarantee high IO.
 
 ## Operating System
 
