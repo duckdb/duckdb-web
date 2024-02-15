@@ -1514,7 +1514,19 @@ function GenerateFrameSpec(options) {
 			Sequence([
 				Keyword("CURRENT ROW")
 			])
-		])
+		]),
+		Optional(
+			Sequence([
+				Keyword("EXCLUDE"),
+				Choice(0, [
+					Keyword("CURRENT ROW"),
+					Keyword("GROUP"),
+					Keyword("TIES"),
+					Keyword("NO OTHERS"),
+				]),
+			]),
+			"skip"
+		),
 	]
 }
 function GenerateWindowSpec(options) {
