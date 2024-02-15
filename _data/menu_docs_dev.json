@@ -81,6 +81,10 @@
             {
               "page": "SQLite Import",
               "url": "query_sqlite"
+            },
+            {
+              "page": "Directly Reading Files",
+              "url": "read_file"
             }
           ]
         },
