@@ -80,6 +80,7 @@ Statement stmt = conn.createStatement();
 stmt.execute("CREATE TABLE items (item VARCHAR, value DECIMAL(10, 2), count INTEGER)");
 // insert two items into the table
 stmt.execute("INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)");
+stmt.close();
 ```
 
 ```java
@@ -103,7 +104,6 @@ try (PreparedStatement p_stmt = conn.prepareStatement("INSERT INTO items VALUES 
     p_stmt.setDouble(2, 500.0);
     p_stmt.setInt(3, 42);
     p_stmt.execute();
-    
     // more calls to execute() possible
 }
 ```
@@ -124,14 +124,15 @@ import org.apache.arrow.vector.ipc.ArrowReader;
 import org.duckdb.DuckDBResultSet;
 
 try (var conn = DriverManager.getConnection("jdbc:duckdb:");
-     var p_stmt = conn.prepareStatement("SELECT * FROM generate_series(2000)");
-     var resultset = (DuckDBResultSet) p_stmt.executeQuery();
-     var allocator = new RootAllocator()) {
-  try (var reader = (ArrowReader) resultset.arrowExportStream(allocator, 256)) {
-    while (reader.loadNextBatch()) {
-      System.out.println(reader.getVectorSchemaRoot().getVector("generate_series"));
+    var p_stmt = conn.prepareStatement("SELECT * FROM generate_series(2000)");
+    var resultset = (DuckDBResultSet) p_stmt.executeQuery();
+    var allocator = new RootAllocator()) {
+    try (var reader = (ArrowReader) resultset.arrowExportStream(allocator, 256)) {
+        while (reader.loadNextBatch()) {
+            System.out.println(reader.getVectorSchemaRoot().getVector("generate_series"));
+        }
     }
-  }
+    p_stmt.close();
 }
 ```
 
