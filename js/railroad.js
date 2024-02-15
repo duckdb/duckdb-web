@@ -1843,7 +1843,7 @@ function GenerateDistinctClause(options) {
 					Keyword("("),
 					OneOrMore(Expression(), ","),
 					Keyword(")"),
-				]) , "skip")
+				]), "skip")
 			]),
 			Keyword("ALL")
 		])
