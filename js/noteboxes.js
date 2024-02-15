@@ -31,9 +31,11 @@ $(document).ready(function(){
 			
 			$blockquote.addClass(className);
 			
-			$blockquote.find('p:first-child').html(function(_, oldHtml) {
-			  return oldHtml.replace(firstWord, '').trim();
-			});
+			if (className !== "default") {
+				$blockquote.find('p:first-child').html(function(_, oldHtml) {
+					return oldHtml.replace(firstWord, '').trim();
+				});
+			}
 			
 			$blockquote.wrapInner('<div class="content"></div>');
 			
