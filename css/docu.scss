@@ -39,6 +39,7 @@ code.language-plaintext{
 	padding: 0px 2px;
     	border: 1px solid #DEDEDE;
 	margin: 0;
+    	text-wrap: nowrap;
 }
 pre {
     padding: 10px;
@@ -65,7 +66,7 @@ pre.highlight{
     overflow-x: auto;
     padding-bottom: 0px;
     margin: 0;
-    padding: 20px;
+    padding: 12px 12px 14px 14px;
     code, pre{
         /*
         margin-bottom: 15px;
@@ -162,6 +163,9 @@ ul {
     ul{
 	    padding-left: 20px;
     }
+}
+li {
+    line-height: 24px;
 }
 ul + p{
 	margin-top: 3px;
