@@ -55,6 +55,14 @@
               "url": "s3_iceberg_import"
             },
             {
+              "page": "GCS Import",
+              "url": "gcs_import"
+            },
+            {
+              "page": "Cloudflare R2 Import",
+              "url": "cloudflare_r2_import"
+            },
+            {
               "page": "JSON Import",
               "url": "json_import"
             },

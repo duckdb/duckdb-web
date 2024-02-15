@@ -23,7 +23,9 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 ### HTTP(S), S3 and GCP
 
 * [How to load a Parquet file directly from HTTP(S)](import/http_import)
-* [How to load a Parquet file directly from S3 or GCS](import/s3_import)
+* [How to load a Parquet file directly from S3](import/s3_import)
+* [How to load a Parquet file directly from GCS](import/gcs_import)
+* [How to load a Parquet file directly from Cloudflare R2](import/cloudflare_r2_import)
 * [How to load an Iceberg table directly from S3](import/s3_iceberg_import)
 
 ### JSON Files
