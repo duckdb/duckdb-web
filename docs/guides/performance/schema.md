@@ -11,7 +11,7 @@ When loading CSV files, you may leverage the CSV reader's [auto-detection mechan
 
 If you run in a memory-constrained environment, using smaller data types (e.g., `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DuckDB’s [bitpacking compression](/2022/10/28/lightweight-compression#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing.
 
-_**Best Practice:**_ Use the most restrictive types possible when creating columns. Avoid using strings for encoding more specific data items.
+> Bestpractice Use the most restrictive types possible when creating columns. Avoid using strings for encoding more specific data items.
 
 ### Microbenchmark: Using Timestamps
 
@@ -66,7 +66,7 @@ The results below show that joining on `BIGINT` columns is approx. 1.8× faster 
 
 DuckDB allows defining [constraints](../../sql/constraints) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DuckDB does not rely on these indexes for join and aggregation operators (see [indexing](indexing) for more details).
 
-_**Best Practice:**_ Do not define constraints unless your goal is to ensure data integrity.
+> Bestpractice Do not define constraints unless your goal is to ensure data integrity.
 
 ## Microbenchmark: The Effect of Primary Keys
 
