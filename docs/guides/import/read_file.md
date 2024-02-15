@@ -4,9 +4,11 @@ title: Directly Reading Files
 ---
 
 DuckDB allows directly reading files via the [`read_text`](#read_text) and [`read_blob`](#read_blob) functions.
-These functions accept a file name, a list of file names or a glob pattern, and output the content of each file as a `VARCHAR` or `BLOB`, respectively, as well as additional metadata such as the file size and last modified time.
+These functions accept a filename, a list of filenames or a glob pattern, and output the content of each file as a `VARCHAR` or `BLOB`, respectively, as well as additional metadata such as the file size and last modified time.
 
 ## `read_text`
+
+The `read_text` table function reads from the selected source(s) to a `VARCHAR`.
 
 ```sql
 SELECT size, parse_path(filename), content
@@ -24,7 +26,13 @@ FROM read_text('test/sql/table_function/files/*.txt');
 └───────┴───────────────────────────────────────────────┴──────────────┘
 ```
 
+The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use [`read_blob`](#read_blob) instead.
+
+The sche
+
 ## `read_blob`
+
+The `read_blob` table function reads from the selected source(s) to a `BLOB`.
 
 ```sql
 SELECT size, content, filename
@@ -41,6 +49,22 @@ FROM read_blob('test/sql/table_function/files/*');
 │     2 │ 42                                                                                               │ test/sql/table_function/files/three.txt │
 │    10 │ F\xC3\xB6\xC3\xB6 B\xC3\xA4r                                                                     │ test/sql/table_function/files/two.txt   │
 └───────┴──────────────────────────────────────────────────────────────────────────────────────────────────┴─────────────────────────────────────────┘
+```
+
+## Schema
+
+The schemas of the tables returned by `read_text` and `read_blob` are identical:
+
+```text
+┌───────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│  column_name  │ column_type │  null   │   key   │ default │  extra  │
+│    varchar    │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├───────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ filename      │ VARCHAR     │ YES     │         │         │         │
+│ content       │ VARCHAR     │ YES     │         │         │         │
+│ size          │ BIGINT      │ YES     │         │         │         │
+│ last_modified │ TIMESTAMP   │ YES     │         │         │         │
+└───────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
 ```
 
 ## Handling Missing Metadata
