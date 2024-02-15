@@ -3,16 +3,6 @@
 
 @import 'variables';
 
-@font-face{
-	font-family: "SuisseIntl-Regular";
-	src: url("webfont/SuisseIntl-Regular-WebXL.woff2") format("woff2"),url("webfont/SuisseIntl-Regular-WebXL.woff") format("woff");
-}
-
-@font-face{
-	font-family: "SuisseIntl-RegularItalic";
-	src: url("webfont/SuisseIntl-RegularItalic-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-RegularItalic-WebS.woff") format("woff");
-}
-
 @mixin button {
 	color: black;
 	height: 30px;
@@ -79,10 +69,6 @@ table td, table th {
 	font-weight: bold;
 	color: #000000;
 }
-  table thead {
-	background: #FEED36;
-	border-bottom: 3px solid #1E1E1E;
-}
   table thead th {
 	font-size: 15px;
 	font-weight: bold;
@@ -147,6 +133,7 @@ h5 {
 			margin: 0 auto;
 			h1{
 				margin-top: 60px;
+				font-weight: 500;
 			}
 			blockquote p {
 				margin-top: 0;
@@ -157,11 +144,12 @@ h5 {
 				line-height: 29px;
 				margin-top: 30px;
 				margin-bottom: 30px;
-				font-family: "SuisseIntl-Regular", Helvetica, Arial, sans-serif;
+				font-family: $fontSans;
+				font-weight: 450;
 				letter-spacing: .1px;
 				i, em{
-					font-family: "SuisseIntl-RegularItalic", Helvetica, Arial, sans-serif;
-					font-style: normal;
+					font-family: $fontSans;
+					font-style: italic;
 				}
 			}
 			ul li, ol li{
@@ -176,29 +164,36 @@ h5 {
 				font-size: 31px;
 				line-height: 35px;
 				margin-top: 60px;
+				font-weight: 500;
 			}
 			h3{
 				font-size: 28px;
 				line-height: 33px;
 				font-weight: normal;
 				margin-top: 60px;
+				font-weight: 500;
 			}
 			h4{
 				font-size: 24px;
 				line-height: 31px;
 				font-weight: normal;
 				margin-top: 60px;
+				font-weight: 500;
+			}
+			table{
+				text-align: left;
+				code{
+					font-size: 15.5px;
+				}
 			}
 			table thead th{
-				color: white;
-				font-weight: normal;
-				text-align: right;
-				font-size: 14px;
+				font-weight: 700;
+				font-size: 16px;
 			}
 			table tbody td{
 				font-weight: normal;
-				text-align: right;
-				font-size: 14px;
+				font-size: 16px;
+				padding: 10px;
 			}
 			table tbody tr:hover{
 				background-color: $duckDByellow;

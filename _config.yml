@@ -40,7 +40,11 @@ plugins:
   - jekyll-sitemap
   - jekyll-github-metadata
   - jekyll-git-hash
+  - jekyll-last-modified-at
 excerpt_separator: <!--more-->
+
+last-modified-at:
+    date-format: '%Y-%m-%d'
 
 twitter:
   username: DuckDB

@@ -22,13 +22,6 @@
 	}
 }
 
-@media only screen and (max-width: 1100px) {
-	.searchoverlay > div form input,
-	.autocomplete{
-		width: 100%;
-	}
-}
-
 @media only screen and (max-width: 980px) {
 	.singleentry table{
 		margin: 0px;
@@ -389,11 +382,6 @@
 	.searchoverlay{
 		z-index: 1000;
 	}
-	.searchoverlay > div{
-		left: 0;
-		width: 100%;
-		padding: 25px 15px 15px 15px;
-	}
 	.searchoverlay > div form input{
 		background: white;
 		padding-left: 10px;
@@ -461,5 +449,14 @@
 	body.installation .output .result a{
 		word-break: break-all;
 		word-break: break-word;
+	}
+	.pagemeta{
+		flex-wrap: wrap;
+		>div{
+			width: 100%;
+		}
+		>div:first-child{
+			margin-bottom: 0.8em;
+		}
 	}
 }
