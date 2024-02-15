@@ -55,6 +55,10 @@
               "url": "s3_iceberg_import"
             },
             {
+              "page": "S3 Express One",
+              "url": "s3_express_one"
+            },
+            {
               "page": "GCS Import",
               "url": "gcs_import"
             },

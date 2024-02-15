@@ -8,7 +8,7 @@ The `CREATE SECRET` statement creates a new secret in the **Secrets manager**, w
 
 > Secrets were introduced with DuckDB version 0.10.
 
-> Persistent secrets are stored in unencrypted binary format on the disk
+> Persistent secrets are stored in unencrypted binary format on the disk.
 
 ## Secrets
 
@@ -40,7 +40,8 @@ CREATE SECRET (
     TYPE S3,
     KEY_ID 'mykey',
     SECRET 'mysecret',
-    REGION 'myregion');
+    REGION 'myregion'
+);
 ```
 
 Note that we implicitly use the default `CONFIG` secret provider here.
@@ -53,7 +54,8 @@ In order to persist secrets between DuckDB database instances, we can now use th
 CREATE PERSISTENT SECRET my_persistent_secret (
     TYPE S3,
     KEY_ID 'key',
-    SECRET 'secret');
+    SECRET 'secret'
+);
 ```
 
 This will write the secret (unencrypted) to the `~/.duckdb/stored_secrets` directory.
@@ -75,7 +77,8 @@ CREATE SECRET secret1 (
     TYPE S3,
     KEY_ID 'my_key1',
     SECRET 'my_secret1',
-    SCOPE 's3://my-bucket');
+    SCOPE 's3://my-bucket'
+);
 ```
 
 ```sql
@@ -83,7 +86,8 @@ CREATE SECRET secret2 (
     TYPE S3,
     KEY_ID 'my_key2',
     SECRET 'my_secret2',
-    SCOPE 's3://my-other-bucket');
+    SCOPE 's3://my-other-bucket'
+);
 ```
 
 Now, if the user queries something from `s3://my-other-bucket/something`, secret `secret2` will be chosen automatically for that request. To see which secret is being used, the `which_secret` scalar function can be used, which takes a path and a secret type as parameters:
