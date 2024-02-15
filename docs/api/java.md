@@ -205,4 +205,53 @@ try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl"))
     appender.append("world");
     appender.endRow();
 }
+stmt.close();
+```
+
+### Batch Writer
+
+The DuckDB JDBC driver offers batch write functionality.
+The batch writer supports prepared statements to mitigate the overhead of query parsing.
+
+> Note that the preferred method for bulk inserts is to use the [appender](#appender) due to its higher performance. However, when using the appender is not possbile, the batch writer is available as alternative.
+
+#### Batch Writer with Prepared Statements
+
+```java
+import org.duckdb.DuckDBConnection;
+
+DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+PreparedStatement stmt = conn.prepareStatement("INSERT INTO test (x, y, z) VALUES (?, ?, ?);");
+
+stmt.setObject(1, 1);
+stmt.setObject(2, 2);
+stmt.setObject(3, 3);
+stmt.addBatch();
+
+stmt.setObject(1, 4);
+stmt.setObject(2, 5);
+stmt.setObject(3, 6);
+stmt.addBatch();
+
+stmt.executeBatch();
+stmt.close();
+```
+
+#### Batch Writer with Vanilla Statements
+
+The batch writer also supports vanilla SQL statements:
+
+```java
+import org.duckdb.DuckDBConnection;
+
+DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+Statement stmt = conn.createStatement();
+
+stmt.execute("CREATE TABLE test (x INT, y INT, z INT)");
+
+stmt.addBatch("INSERT INTO test (x, y, z) VALUES (1, 2, 3);");
+stmt.addBatch("INSERT INTO test (x, y, z) VALUES (4, 5, 6);");
+
+stmt.executeBatch();
+stmt.close();
 ```
