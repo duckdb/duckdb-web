@@ -1825,8 +1825,11 @@ function GenerateTableOrSubquery(options) {
 				Optional(Expandable("table-alias", options, "table-alias", GenerateTableAlias), "skip"),
 				Optional(Expandable("table-sample", options, "table-sample-reference", GenerateTableSample), "skip")
 			]),
-
-			Expandable("join-clause", options, "join-clause", GenerateJoinClause)
+			Expandable("join-clause", options, "join-clause", GenerateJoinClause),
+			Sequence([
+				Keyword("("), Expandable("join-clause", options, "join-clause", GenerateJoinClause), Keyword(")"),
+				Optional(Sequence([Keyword("AS"), Expression("join-alias")]), "skip"),
+			]),
 		])
 	]
 }
@@ -1843,7 +1846,7 @@ function GenerateDistinctClause(options) {
 					Keyword("("),
 					OneOrMore(Expression(), ","),
 					Keyword(")"),
-				]) , "skip")
+				]), "skip")
 			]),
 			Keyword("ALL")
 		])
