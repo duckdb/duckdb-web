@@ -33,11 +33,11 @@ pre {
     line-height: 1.4;
 }
 code.language-plaintext{
-	background-color: #F3F3F3;
+	background-color: #F7F7F7;
 	font-family: $fontMonoBold;
-	border-radius: 2px;
-	padding: 0px 4px;
-    border: 1px solid #CFCFCF;
+	border-radius: 3px;
+	padding: 0px 2px;
+    	border: 1px solid #DEDEDE;
 	margin: 0;
 }
 pre {
@@ -294,10 +294,6 @@ body.documentation main .wrap a.pill{
 	table{
         -webkit-font-variant-ligatures: none;
             font-variant-ligatures: none;
-		code.language-plaintext{
-			padding: 0;
-			background-color: transparent;
-		}
 		em code{
 			font-family: $fontMonoItalicBold;
 			font-style: normal;
@@ -310,7 +306,7 @@ body.documentation main .wrap a.pill{
 		a{
 			background-color: transparent;
 			&:hover{
-				background-color: $duckDByellow;
+				color: #4396D7;
 			}
 		}
 		th a{
