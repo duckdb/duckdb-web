@@ -68,7 +68,8 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	</header>
 
 	<main>
-
+		
+		{% include searchoverlay.html %}
 
 		{% include menu_sidebar.html %}
 
@@ -90,12 +91,6 @@ Page URL: <https://duckdb.org{{ page.url }}>
 			<div class="title">{{ page.title }}</div>
 			
 			{% if page.url contains '/docs/' %}
-			<div class="improvethispage">
-				<a href="{% github_edit_link %}" title="Go to GitHub">Page Source</a>
-			</div>
-			<div class="improvethispage">
-				<a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report Issue</a>
-			</div>
 		
 			<div class="version"><div>Version <span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span><span class="arrow"></div></div>
 			<div class="versionsidebar">
@@ -144,22 +139,22 @@ Page URL: <https://duckdb.org{{ page.url }}>
 			<div id="main_content_wrap">
 				{% include anchor_headings.html html=content %}
 			</div>
-
-			<div class="searchoverlay">
+			
+			{% if page.url contains '/docs/' %}
+			<div class="pagemeta">
 				<div>
-					<form autocomplete="off">
-						<div class="autocomplete">
-							<div class="empty_input"></div>
-							<input id="q" type="text" name="q" placeholder="Search docs">
-						</div>
-					</form>
-					<div id="search_results"></div>
-					<div class="shortcuts">
-						Search Shortcut <span>cmd</span> + <span>k</span> | <span>ctrl</span> + <span>k</span>
-					</div>
+					<h5>Improve this page</h5>
+					<ul>
+						<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report content issue</a></li>
+						<li><a href="{% github_edit_link %}" title="Go to GitHub">Edit this page on GitHub</a></li>
+					</ul>
+				</div>
+				<div>
+					<p>Last modified: {% last_modified_at %}</p>
 				</div>
 			</div>
-
+			{% endif %}
+			
 		</div>
 
 	</main>
@@ -171,6 +166,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
 	<script src="{{ site.baseurl }}/js/script.js"></script>
 	<script src="{{ site.baseurl }}/js/copy_button.js"></script>
+	<script src="{{ site.baseurl }}/js/noteboxes.js"></script>
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
 	<script src="{{ site.baseurl }}/js/railroad.js"></script>
 	<script src="{{ site.baseurl }}/js/{{ page.railroad }}"></script>

@@ -346,11 +346,6 @@ $(document).ready(function(){
 		})
 	}
 	
-	// Appending "Note" to Blockquote
-	$('body.documentation #main_content_wrap blockquote').each(function() {
-		$(this).prepend("<h4>Note</h4>");
-	});
-	
 	
 	// Appending Content-List of Overview-Pages
 	if (window.location.href.indexOf("/overview") > -1) {

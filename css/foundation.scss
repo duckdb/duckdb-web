@@ -1,6 +1,5 @@
 ---
 ---
-
 @import 'variables';
 
 /** ADDITIONAL CSS FOR FOUNDATION PAGE **/
@@ -13,6 +12,8 @@
 	/*line-height: 30px;*/
 	cursor: pointer;
 	font-size: 14px;
+	-webkit-transition: background-color .3s;
+	-o-transition: background-color .3s;
 	transition: background-color .3s;
 	/*span::after{
 		content: "→";
@@ -73,24 +74,33 @@ body.foundation{
 		background-size: cover;
 		background-position: center center;
 		.levels{
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
-			column-gap: 20px;
+			-webkit-column-gap: 20px;
+			   -moz-column-gap: 20px;
+					column-gap: 20px;
 			color: white;
 			> div{
 				width: 33%;
 			}
 			.level{
 				border: 1px solid rgba(151, 151, 151, 0.2);
-				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+						box-sizing: border-box;
 				padding: 20px;
 				position: relative;
 				border-bottom-left-radius: 15px;
 				border-bottom-right-radius: 15px;
 				background-color: rgba(248, 248, 248, 0.05);
-				backdrop-filter: blur(14px);
+				-webkit-backdrop-filter: blur(14px);
+						backdrop-filter: blur(14px);
 				.head{
+					display: -webkit-box;
+					display: -ms-flexbox;
 					display: flex;
-					flex-wrap: wrap;
+					-ms-flex-wrap: wrap;
+						flex-wrap: wrap;
 					border-bottom: 1px solid rgba(151, 151, 151, 0.2);
 					margin-bottom: 20px;
 					h3{
@@ -101,7 +111,8 @@ body.foundation{
 						width: calc(100% - 80px);
 						font-size: 18px;
 						text-align: right;
-						align-self: flex-end;
+						-ms-flex-item-align: end;
+							align-self: flex-end;
 						span{
 							font-size: 14px;
 						}
@@ -203,8 +214,10 @@ body.foundation{
 			}
 			> ul{
 				padding: 60px;
+				-ms-grid-columns: (1fr)[4];
 				grid-template-columns: repeat(4, 1fr);
 				list-style: none;
+				display: -ms-grid;
 				display: grid;
 				row-gap: 70px;
 				li{
@@ -221,8 +234,11 @@ body.foundation{
 			&.gold{
 				border-top: 15px solid #C09600;
 				ul{
+					display: -webkit-box;
+					display: -ms-flexbox;
 					display: flex;
-					justify-content: space-around;
+					-ms-flex-pack: distribute;
+						justify-content: space-around;
 				}
 			}
 		}
@@ -238,19 +254,34 @@ body.foundation{
 			margin-top: 70px;
 			border: 1px solid rgba(151, 151, 151, 0.2);
 			padding: 50px;
-			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+					box-sizing: border-box;
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
+			-ms-flex-wrap: wrap;
+				flex-wrap: wrap;
+			-webkit-box-pack: justify;
+				-ms-flex-pack: justify;
+					justify-content: space-between;
 			background-color: rgba(248, 248, 248, 0.05);
-			backdrop-filter: blur(14px);
+			-webkit-backdrop-filter: blur(14px);
+					backdrop-filter: blur(14px);
 			border-radius: 15px;
 			.member{
 				width: 33.3%;
-				column-gap: 10px;
+				-webkit-column-gap: 10px;
+				   -moz-column-gap: 10px;
+						column-gap: 10px;
+				display: -webkit-box;
+				display: -ms-flexbox;
 				display: flex;
-				justify-content: space-between;
-				align-items: center;
+				-webkit-box-pack: justify;
+					-ms-flex-pack: justify;
+						justify-content: space-between;
+				-webkit-box-align: center;
+					-ms-flex-align: center;
+						align-items: center;
 				margin-top: 30px;
 				&:nth-child(1), &:nth-child(2), &:nth-child(3){
 					margin-top: 0;
@@ -266,7 +297,8 @@ body.foundation{
 				.info{
 					width: calc(100% - 60px);
 					padding-left: 15px;
-					box-sizing: border-box;
+					-webkit-box-sizing: border-box;
+							box-sizing: border-box;
 					.name{
 						display: block;
 						font-size: 16px;
@@ -303,7 +335,8 @@ body.foundation{
 		*,
 		:before,
 		:after {
-			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+					box-sizing: border-box;
 		}
 		.formwrap{
 			background-color: white;
@@ -311,13 +344,19 @@ body.foundation{
 			padding: 20px;
 			padding-top: 6px;
 			width: 65%;
-			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+					box-sizing: border-box;
 			position: relative;
 			margin: 0 auto;
 			form{
+				display: -webkit-box;
+				display: -ms-flexbox;
 				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
+				-ms-flex-wrap: wrap;
+					flex-wrap: wrap;
+				-webkit-box-pack: justify;
+					-ms-flex-pack: justify;
+						justify-content: space-between;
 			}
 		}
 		.success{
@@ -326,15 +365,21 @@ body.foundation{
 			display: none;
 			margin-top: 15px;
 			&.is-active{
+				display: -webkit-box;
+				display: -ms-flexbox;
 				display: flex;
-				justify-content: space-between;
+				-webkit-box-pack: justify;
+					-ms-flex-pack: justify;
+						justify-content: space-between;
 			}
 			> div:first-of-type{
 				width: 55%;
 			}
 			> div:nth-child(2){
 				width: 45%;
-				align-self: center;
+				-ms-flex-item-align: center;
+					-ms-grid-row-align: center;
+					align-self: center;
 				.button{
 					float: right;
 					background: #F6F6F6;
@@ -368,10 +413,22 @@ body.foundation{
 			border: none;
 			border-radius: 0;
 			border-bottom: 1px solid black;
+			-webkit-transition: background-color .3s;
+			-o-transition: background-color .3s;
 			transition: background-color .3s;
 			&:focus {
 				outline: none;
 				
+			}
+			&:valid:not(:-moz-placeholder-shown) ~ label{
+				top: 8px;
+				font-size: 12px;
+				color: #585630;
+			}
+			&:valid:not(:-ms-input-placeholder) ~ label{
+				top: 8px;
+				font-size: 12px;
+				color: #585630;
 			}
 			&:focus ~ label,
 			&:valid:not(:placeholder-shown) ~ label{
@@ -408,6 +465,8 @@ body.foundation{
 			pointer-events: none;
 			left: 10px;
 			top: 23px;
+			-webkit-transition: $trans-time ease all;
+			-o-transition: $trans-time ease all;
 			transition: $trans-time ease all;
 		}
 		
@@ -422,6 +481,8 @@ body.foundation{
 			bottom: 0px;
 			position: absolute;
 			background: $hl-color;
+			-webkit-transition: $trans-time ease all;
+			-o-transition: $trans-time ease all;
 			transition: $trans-time ease all;
 			left: 0%;
 			}
@@ -449,6 +510,8 @@ body.foundation{
 		}
 	}
 	#ajaxForm div.group{
+		-webkit-transition: opacity .5s;
+		-o-transition: opacity .5s;
 		transition: opacity .5s;
 	}
 	#ajaxForm.inactive{
@@ -489,7 +552,8 @@ body.foundation{
 	
 	/* Use custom arrow */
 	.select .select-text {
-		appearance: none;
+		-moz-appearance: none;
+			 appearance: none;
 		-webkit-appearance:none
 	}
 	
@@ -518,6 +582,8 @@ body.foundation{
 		pointer-events: none;
 		left: 0;
 		top: 10px;
+		-webkit-transition: 0.2s ease all;
+		-o-transition: 0.2s ease all;
 		transition: 0.2s ease all;
 	}
 	
@@ -525,6 +591,8 @@ body.foundation{
 	.select-text:focus ~ .select-label, .select-text:valid ~ .select-label {
 		color: #585630;
 		top: 6px;
+		-webkit-transition: 0.2s ease all;
+		-o-transition: 0.2s ease all;
 		transition: 0.2s ease all;
 		font-size: 12px;
 	}
@@ -543,6 +611,8 @@ body.foundation{
 		bottom: 1px;
 		position: absolute;
 		background: $hl-color;
+		-webkit-transition: 0.2s ease all;
+		-o-transition: 0.2s ease all;
 		transition: 0.2s ease all;
 	}
 	
@@ -587,46 +657,87 @@ body.foundation{
 	height: 10px;
 	border-radius: 50%;
 	background: black;
-	animation-timing-function: cubic-bezier(0, 1, 1, 0);
+	-webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);
+			animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {
 	left: 8px;
-	animation: lds-ellipsis1 0.6s infinite;
+	-webkit-animation: lds-ellipsis1 0.6s infinite;
+			animation: lds-ellipsis1 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(2) {
 	left: 8px;
-	animation: lds-ellipsis2 0.6s infinite;
+	-webkit-animation: lds-ellipsis2 0.6s infinite;
+			animation: lds-ellipsis2 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(3) {
 	left: 32px;
-	animation: lds-ellipsis2 0.6s infinite;
+	-webkit-animation: lds-ellipsis2 0.6s infinite;
+			animation: lds-ellipsis2 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(4) {
 	left: 56px;
-	animation: lds-ellipsis3 0.6s infinite;
+	-webkit-animation: lds-ellipsis3 0.6s infinite;
+			animation: lds-ellipsis3 0.6s infinite;
+}
+@-webkit-keyframes lds-ellipsis1 {
+	0% {
+		-webkit-transform: scale(0);
+				transform: scale(0);
+	}
+	100% {
+		-webkit-transform: scale(1);
+				transform: scale(1);
+	}
 }
 @keyframes lds-ellipsis1 {
 	0% {
-		transform: scale(0);
+		-webkit-transform: scale(0);
+				transform: scale(0);
 	}
 	100% {
-		transform: scale(1);
+		-webkit-transform: scale(1);
+				transform: scale(1);
+	}
+}
+@-webkit-keyframes lds-ellipsis3 {
+	0% {
+		-webkit-transform: scale(1);
+				transform: scale(1);
+	}
+	100% {
+		-webkit-transform: scale(0);
+				transform: scale(0);
 	}
 }
 @keyframes lds-ellipsis3 {
 	0% {
-		transform: scale(1);
+		-webkit-transform: scale(1);
+				transform: scale(1);
 	}
 	100% {
-		transform: scale(0);
+		-webkit-transform: scale(0);
+				transform: scale(0);
+	}
+}
+@-webkit-keyframes lds-ellipsis2 {
+	0% {
+		-webkit-transform: translate(0, 0);
+				transform: translate(0, 0);
+	}
+	100% {
+		-webkit-transform: translate(24px, 0);
+				transform: translate(24px, 0);
 	}
 }
 @keyframes lds-ellipsis2 {
 	0% {
-		transform: translate(0, 0);
+		-webkit-transform: translate(0, 0);
+				transform: translate(0, 0);
 	}
 	100% {
-		transform: translate(24px, 0);
+		-webkit-transform: translate(24px, 0);
+				transform: translate(24px, 0);
 	}
 }
 
@@ -635,10 +746,16 @@ body.foundation{
 
 @media only screen and (max-width: 900px) {
 	body.foundation section.membership .levels{
-		flex-wrap: wrap;
-		box-sizing: border-box;
-		column-gap: 0;
-		justify-content: space-between;
+		-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+		-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+		-webkit-column-gap: 0;
+		   -moz-column-gap: 0;
+				column-gap: 0;
+		-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
+				justify-content: space-between;
 	}
 	body.foundation section.membership .levels > div{
 		width: calc(50% - 10px);
@@ -650,6 +767,7 @@ body.foundation{
 		}
 	}
 	body.foundation section.supporters .supporterboard > ul{
+		-ms-grid-columns: (1fr)[3];
 		grid-template-columns: repeat(3, 1fr);
 	}
 }
@@ -657,19 +775,24 @@ body.foundation{
 @media only screen and (max-width: 840px) {
 	main .wrap{
 		width: 100%;
-		box-sizing: border-box;	
+		-webkit-box-sizing: border-box;
+				box-sizing: border-box;	
 	}
 	body.foundation section.form .formwrap{
 		width: 80%;
 	}
 	body.foundation section.supporters .supporterboard.gold ul{
-		justify-content: space-between;
-		flex-wrap: wrap;
+		-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
+				justify-content: space-between;
+		-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
 	}
 }
 
 @media only screen and (max-width: 700px) {
 	body.foundation section.supporters .supporterboard > ul {
+		-ms-grid-columns: (1fr)[2];
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
@@ -734,7 +857,9 @@ body.foundation{
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 	body.foundation p{
-		hyphens: auto;
+		-webkit-hyphens: auto;
+			-ms-hyphens: auto;
+				hyphens: auto;
 	}
 	body.foundation section.form .formwrap{
 		width: 100%;

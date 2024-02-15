@@ -57,7 +57,7 @@ function bold_blurb(blurb, query) {
 			if (index < 0) {
 				break
 			}
-			blurb = blurb.substr(0, index) + "<b>" + blurb.substr(index, splitLength) + "</b>" + blurb.substr(index + splitLength)
+			blurb = blurb.substr(0, index) + "<u>" + blurb.substr(index, splitLength) + "</u>" + blurb.substr(index + splitLength)
 			startIndex = index + splitLength + 7
 		}
 	}
@@ -123,58 +123,59 @@ const miniPredictor = new MiniSearch({
 the text field element and an array of possible autocompleted values:*/
 var currentFocus;
 /*execute a function when someone writes in the text field:*/
-inp.addEventListener("input", function(e) {
-	var a, b, i, val = this.value;
-	/*close any already open lists of autocompleted values*/
-	closeAllLists();
-	if (!val) { return false;}
-	currentFocus = -1;
-	/*create a DIV element that will contain the items (values):*/
-	a = document.createElement("DIV");
-	a.setAttribute("id", this.id + "autocomplete-list");
-	a.setAttribute("class", "autocomplete-items");
-	/*append the DIV element as a child of the autocomplete container:*/
-	this.parentNode.appendChild(a);
 
-	let suggestions = miniPredictor.search(val, { boost: { title: 100, category: 20, blurb: 2 }, prefix: true});
-	let max_count = 5;
-	let current_count = 0;
-	for (suggest_index in suggestions) {
-		current_count += 1;
-		if (current_count > max_count) {
-			break;
-		}
-		let suggest = suggestions[suggest_index];
-		/*create a DIV element for each matching element:*/
-		b = document.createElement("DIV");
-		let result = suggest.title.toLowerCase().indexOf(val.toLowerCase());
-		/*make the matching letters bold (if any):*/
-		if (result >= 0) {
-			if (result > 0) {
-				b.innerHTML += suggest.title.substr(0, result);
-			}
-			b.innerHTML += "<strong>" + suggest.title.substr(result, val.length) + "</strong>";
-			let final_pos = result + val.length;
-			if (final_pos < suggest.title.length) {
-				b.innerHTML += suggest.title.substr(final_pos, suggest.title.length - final_pos);
-			}
-		} else {
-			b.innerHTML = suggest.title;
-		}
-		/*insert a input field that will hold the current array item's value:*/
-		b.innerHTML += "<input type='hidden' value='" + suggest.title + "'>";
-		/*execute a function when someone clicks on the item value (DIV element):*/
-			b.addEventListener("click", function(e) {
-			/*insert the value for the autocomplete text field:*/
-			inp.value = this.getElementsByTagName("input")[0].value;
-			perform_search(inp.value);
-			/*close the list of autocompleted values,
-			(or any other open lists of autocompleted values:*/
-			closeAllLists();
-		});
-		a.appendChild(b);
-	}
-});
+/* APPEND AUTOCOMPLETE SUGGESTIONS */
+// inp.addEventListener("input", function(e) {
+//   var a, b, i, val = this.value;
+//   /*close any already open lists of autocompleted values*/
+//   closeAllLists();
+//   if (!val) { return false;}
+//   currentFocus = -1;
+//   /*create a DIV element that will contain the items (values):*/
+//   a = document.createElement("DIV");
+//   a.setAttribute("id", this.id + "autocomplete-list");
+//   a.setAttribute("class", "autocomplete-items");
+//   /*append the DIV element as a child of the autocomplete container:*/
+//   this.parentNode.appendChild(a);
+
+//   let suggestions = miniPredictor.search(val, { boost: { title: 100, category: 20, blurb: 2 }, prefix: true});
+//   let max_count = 4;
+//   let current_count = 0;
+//   for (suggest_index in suggestions) {
+//     current_count += 1;
+//     if (current_count > max_count) {
+//       break;
+//     }
+//     let suggest = suggestions[suggest_index];
+//     /*create a DIV element for each matching element:*/
+//     b = document.createElement("DIV");
+//     let result = suggest.title.toLowerCase().indexOf(val.toLowerCase());
+//     /*make the matching letters bold (if any):*/
+//     if (result >= 0) {
+//       if (result > 0) {
+//         b.innerHTML += suggest.title.substr(0, result);
+//       }
+//       b.innerHTML += "<u>" + suggest.title.substr(result, val.length) + "</u>";
+//       let final_pos = result + val.length;
+//       if (final_pos < suggest.title.length) {
+//         b.innerHTML += suggest.title.substr(final_pos, suggest.title.length - final_pos);
+//       }
+//     } else {
+//       b.innerHTML = suggest.title;
+//     }
+//     /*insert a input field that will hold the current array item's value:*/
+//     b.innerHTML += "<input type='hidden' value='" + suggest.title + "'>";
+//     /*execute a function when someone clicks on the item value (DIV element):*/
+//     b.addEventListener("click", function(e) {
+//       inp.value = this.getElementsByTagName("input")[0].value;
+//       perform_search(inp.value);
+//       closeAllLists();
+//     });
+//     a.appendChild(b);
+//   }
+// });
+
+
 /*execute a function presses a key on the keyboard:*/
 inp.addEventListener("keydown", function(e) {
 	var x = document.getElementById(this.id + "autocomplete-list");
