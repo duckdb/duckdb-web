@@ -90,9 +90,10 @@ div.highlight{
     border-radius: 10px;
     overflow: hidden;
     transition: border-color .3s;
-    &:hover{
-        border: 1px solid #E6E6E6;
-    }
+    border: 1px solid #E6E6E6;
+}
+.language-text div.highlight{
+    border: 1px solid #f9f9f9;
 }
 blockquote {
     border-radius: 10px;

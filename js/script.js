@@ -7,8 +7,9 @@ $(document).ready(function(){
 				scrollTop: $(hash).offset().top-130
 			}, 300, 'swing');
 			if( $('.frequentlyaskedquestions').length ){
-				$('h3'+hash).toggleClass('open');
-				$('h3'+hash).next('p').slideToggle();
+				console.log($('h3'+hash).parent('.qa-wrap'))
+				$('h3'+hash).parent('.qa-wrap').addClass('open');
+				$('h3'+hash).parent('.qa-wrap').find('.answer').slideToggle(300);
 			}
 		}
 	}
@@ -255,11 +256,11 @@ $(document).ready(function(){
     
     
     // FAQs
-    $('.wrap.frequentlyaskedquestions #main_content_wrap h1, .wrap.frequentlyaskedquestions #main_content_wrap h2, .wrap.frequentlyaskedquestions #main_content_wrap h3').click(function(){
-	    $(this).toggleClass('open');
-	    $(this).next('p').slideToggle();
-    });
-    
+	$('.qa-wrap').click(function(){
+		$(this).toggleClass('open');
+		$(this).find('.answer').slideToggle(400);
+	})
+	
     
     // Mobile Menu
     var hamburgers = document.querySelectorAll(".hamburger");
