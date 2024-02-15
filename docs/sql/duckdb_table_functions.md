@@ -154,7 +154,7 @@ The `duckdb_indexes()` function provides metadata about secondary indexes availa
 | `is_primary` |Always `false`| `BOOLEAN` |
 | `expressions` |Always `NULL`| `VARCHAR` |
 | `sql` |The definition of the index, expressed as a `CREATE INDEX` SQL statement.| `VARCHAR` |
-  
+
 Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e., those indexes created by explicit [`CREATE INDEX`](indexes#create-index) statements. Primary keys, foreign keys, and `UNIQUE` constraints are maintained using indexes, but their details are included in the `duckdb_constraints()` function.
 
 ## `duckdb_keywords`

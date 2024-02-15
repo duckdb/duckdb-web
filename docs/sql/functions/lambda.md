@@ -89,7 +89,7 @@ SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 - `apply`
 - `list_apply`
 - `array_apply`
- 
+
 **Number of parameters excluding indexes:** 1
 
 **Return type:** Defined by the return type of the lambda function

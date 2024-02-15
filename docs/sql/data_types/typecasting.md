@@ -26,6 +26,6 @@ SELECT CAST(999 AS TINYINT);
 ```
 
 So even though the cast operation from `INTEGER` to `TINYINT` is supported, it is not possible for this particular value.
-  
+
 The [`VARCHAR`](text) type (also available under the aliases `TEXT` and `STRING`) acts like an univeral target: any arbitrary value of any arbitrary type can always be cast to the `VARCHAR` type.
 Casting from `VARCHAR` to another data type is generally supported, but may fail at runtime if DuckDB cannot figure out how to parse and convert the provided value to the target data type.

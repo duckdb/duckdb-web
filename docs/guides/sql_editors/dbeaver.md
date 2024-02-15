@@ -60,5 +60,5 @@ title: DBeaver SQL IDE
 4. Click "Download" to download DuckDB's JDBC driver from Maven. Once download is complete, click "OK", then return to the main DBeaver window and continue with step 7 above.
 
     * Note: If you are in a corporate environment or behind a firewall, before clicking download, click the "Download Configuration" link to configure your proxy settings.
-    
+
     <img src="/images/guides/DBeaver_download_driver_files_from_driver_settings.png" alt="DBeaver Download Driver Files 2" title="DBeaver Download Driver Files 2" />
