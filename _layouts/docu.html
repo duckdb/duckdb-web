@@ -169,8 +169,15 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="{{ site.baseurl }}/js/copy_button.js"></script>
 	<script src="{{ site.baseurl }}/js/noteboxes.js"></script>
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-	<script src="{{ site.baseurl }}/js/railroad.js"></script>
-	<script src="{{ site.baseurl }}/js/{{ page.railroad }}"></script>
+		{% assign startingUrlParts = startingUrl | split: "/"  %}
+		{% if startingUrlParts[1] == "archive" %}
+			{% capture version_url %}/{{ startingUrlParts[1] }}/{{ startingUrlParts[2] }}{% endcapture %}
+		{% else %}
+			{% assign version_url = "" %}
+		{% endif %}
+
+		<script src="{{ site.baseurl }}/js{{ version_url }}/railroad.js"></script>
+		<script src="{{ site.baseurl }}/js{{ version_url }}/{{ page.railroad }}"></script>
 	{% endif %}
 
 </body>
