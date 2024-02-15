@@ -34,3 +34,25 @@ DESCRIBE SELECT * FROM tbl;
 | j           | VARCHAR     | YES  | NULL | NULL    | NULL  |
 
 Note that there are subtle differences: compared to the result when [describing a table](#describing-a-table), nullability (`null`) and key information (`key`) are lost.
+
+## Describing Remote Tables
+
+It is possible to describe remote tables via the [`httpfs` extension](../../extensions/httpfs) using the `DESCRIBE TABLE` statement. For example:
+
+```sql
+DESCRIBE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
+```
+
+```text
+┌─────────────────────────────────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│               column_name               │ column_type │  null   │   key   │ default │  extra  │
+│                 varchar                 │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────────────────────────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ season_num                              │ BIGINT      │ YES     │         │         │         │
+│ episode_num                             │ BIGINT      │ YES     │         │         │         │
+│ aired_date                              │ DATE        │ YES     │         │         │         │
+│ ...                                     │ ...         │ ...     │         │         │         │
+├─────────────────────────────────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┤
+│ 18 rows                                                                             6 columns │
+└───────────────────────────────────────────────────────────────────────────────────────────────┘
+```
