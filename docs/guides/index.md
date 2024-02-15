@@ -42,6 +42,11 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 * [How to directly query a SQLite database](import/query_sqlite)
 * [How to directly query a MySQL database](import/query_mysql)
 
+### Directly Reading Files
+
+* [How to directly read a binary file](import/read_file#read_blob)
+* [How to directly read a text file](import/read_file#read_text)
+
 ## Performance
 
 * [My workload is slow (troubleshooting guide)](performance/my_workload_is_slow)
