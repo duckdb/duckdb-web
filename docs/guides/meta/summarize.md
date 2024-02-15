@@ -51,3 +51,19 @@ SUMMARIZE lineitem;
 | l_shipinstruct  | VARCHAR       | COLLECT COD | TAKE BACK RETURN    | 4             | NULL                | NULL                 | NULL    | NULL    | NULL    | 6001215 | 0.0%            |
 | l_shipmode      | VARCHAR       | AIR         | TRUCK               | 7             | NULL                | NULL                 | NULL    | NULL    | NULL    | 6001215 | 0.0%            |
 | l_comment       | VARCHAR       |  Tiresias   | zzle? furiously iro | 3558599       | NULL                | NULL                 | NULL    | NULL    | NULL    | 6001215 | 0.0%            |
+
+## Using `SUMMARIZE` in a Subquery
+
+`SUMMARIZE` can be used a subquery. This allows creating a table from the summary, for example:
+
+```sql
+CREATE TABLE tbl_summary AS SELECT * FROM (SUMMARIZE tbl);
+```
+
+## Summarizing Remote Tables
+
+It is possible to summarize remote tables via the [`httpfs` extension](../../extensions/httpfs) using the `SUMMARIZE TABLE` statement. For example:
+
+```sql
+SUMMARIZE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
+```
