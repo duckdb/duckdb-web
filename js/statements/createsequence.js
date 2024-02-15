@@ -16,12 +16,12 @@ function GenerateCreateSequence(options = {}) {
 			]), "skip"),
 			Choice(0, [
 				new Skip(),
-				Sequence([Keyword("NO"), Keyword("MINVALUE")]),
+				Keyword("NO MINVALUE"),
 				Sequence([Keyword("MINVALUE"), Expression("minvalue")])
 			]),
 			Choice(0, [
 				new Skip(),
-				Sequence([Keyword("NO"), Keyword("MAXVALUE")]),
+				Keyword("NO MAXVALUE"),
 				Sequence([Keyword("MAXVALUE"), Expression("maxvalue")])
 			]),
 			Optional(Sequence([

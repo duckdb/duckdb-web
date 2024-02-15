@@ -20,12 +20,23 @@ This expression references a column by name.
 import duckdb
 import pandas as pd
 
-df = pd.DataFrame({'a': [1, 2, 3, 4]})
+df = pd.DataFrame({
+	'a': [1, 2, 3, 4],
+	'b': [True, None, False, True],
+	'c': [42, 21, 13, 14]
+})
 
+# selecting a single column
 col = duckdb.ColumnExpression('a')
 res = duckdb.df(df).select(col).fetchall()
 print(res)
 # [(1,), (2,), (3,), (4,)]
+
+# selecting multiple columns
+col_list = [duckdb.ColumnExpression('a'), duckdb.ColumnExpression('c')]
+res = duckdb.df(df).select(*col_list).fetchall()
+print(res)
+# [(1, 42), (2, 21), (3, 13), (4, 14)]
 ```
 
 ## Star Expression

@@ -117,7 +117,7 @@ duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample = 100000")
 
 ## Object Conversion
 
-This is a mapping of Python object types to DuckDB [Logical Types](../../sql/data_types/overview.html):
+This is a mapping of Python object types to DuckDB [Logical Types](../../sql/data_types/overview):
 
 * `None` -> `NULL`
 * `bool` -> `BOOLEAN`

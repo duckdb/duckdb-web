@@ -131,7 +131,7 @@ const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo', function(err, stmt) {
 
 ## Inserting Data via Arrow
 
-[Apache Arrow](https://duckdb.org/docs/guides/python/sql_on_arrow) can be used to insert data into DuckDB without making a copy:
+[Apache Arrow](../../guides/python/sql_on_arrow) can be used to insert data into DuckDB without making a copy:
 
 ```js
 const arrow = require('apache-arrow');

@@ -131,7 +131,7 @@ Prior to version 0.10.0, DuckDB would automatically allow any type to be implici
 SET old_implicit_casting = true;
 ```
 
-### Deafult Ordering for NULLs
+### Default Ordering for NULLs
 
 Set the default ordering for NULLs to be either `NULLS FIRST` or `NULLS LAST`:
 
@@ -404,7 +404,7 @@ This call returns the following information for the given table:
 | `segment_type` | `VARCHAR` ||
 | `start`        | `BIGINT`  | The start row id of this chunk                        |
 | `count`        | `BIGINT`  | The amount of entries in this storage chunk           |
-| `compression`  | `VARCHAR` | Compression type used for this column - see [blog post](/2022/10/28/lightweight-compression.html) |
+| `compression`  | `VARCHAR` | Compression type used for this column - see [blog post](/2022/10/28/lightweight-compression) |
 | `stats`        | `VARCHAR` ||
 | `has_updates`  | `BOOLEAN` ||
 | `persistent`   | `BOOLEAN` | false if temporary table                              |

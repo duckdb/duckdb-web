@@ -25,7 +25,7 @@ INSERT INTO students VALUES ('this name contains spaces');
 ## Not Null
 
 A not-null constraint specifies that the column cannot contain any `NULL` values. By default, all columns in tables are nullable. Adding `NOT NULL` to a column definition enforces that a column cannot contain `NULL` values.
- 
+
 ```sql
 CREATE TABLE students (name VARCHAR NOT NULL);
 INSERT INTO students VALUES (NULL);

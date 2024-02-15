@@ -31,8 +31,8 @@ The table below shows the available general window functions.
 
 | Function | Return Type | Description | Example |
 |:---|:-|:---|:--|
-| `cume_dist()` | `double` | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. | `cume_dist()` |
-| `dense_rank()` | `bigint` | The rank of the current row *without gaps*; this function counts peer groups. | `dense_rank()` |
+| `cume_dist()` | `DOUBLE` | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. | `cume_dist()` |
+| `dense_rank()` | `BIGINT` | The rank of the current row *without gaps*; this function counts peer groups. | `dense_rank()` |
 | `first_value(expr any)` | same type as **expr** | Returns `expr` evaluated at the row that is the first row of the window frame. | `first_value(column)` |
 | `first(expr any)` | same type as **expr** | Alias for `first_value`. | `first(column)` |
 | `lag(expr any [, offset integer [, default any ]])` | same type as **expr** | Returns `expr` evaluated at the row that is `offset` rows before the current row within the partition; if there is no such row, instead return `default` (which must be of the same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `null`. | `lag(column, 3, 0)` |
@@ -40,11 +40,11 @@ The table below shows the available general window functions.
 | `last(expr any)` | same type as **expr** | Alias for `last_value`. | `last(column)` |
 | `lead(expr any [, offset integer [, default any ]])` | same type as **expr** | Returns `expr` evaluated at the row that is `offset` rows after the current row within the partition; if there is no such row, instead return `default` (which must be of the same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `null`. | `lead(column, 3, 0)` |
 | `nth_value(expr any, nth integer)` | same type as **expr** | Returns `expr` evaluated at the nth row of the window frame (counting from 1); null if no such row. | `nth_value(column, 2)` |
-| `ntile(num_buckets integer)` | `bigint` | An integer ranging from 1 to the argument value, dividing the partition as equally as possible. | `ntile(4)` |
-| `percent_rank()` | `double` | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. | `percent_rank()` |
-| `rank_dense()` | `bigint` | Alias for `dense_rank`. | `rank_dense()` |
-| `rank()` | `bigint` | The rank of the current row *with gaps*; same as `row_number` of its first peer. | `rank()` |
-| `row_number()` | `bigint` | The number of the current row within the partition, counting from 1. | `row_number()` |
+| `ntile(num_buckets integer)` | `BIGINT` | An integer ranging from 1 to the argument value, dividing the partition as equally as possible. | `ntile(4)` |
+| `percent_rank()` | `DOUBLE` | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. | `percent_rank()` |
+| `rank_dense()` | `BIGINT` | Alias for `dense_rank`. | `rank_dense()` |
+| `rank()` | `BIGINT` | The rank of the current row *with gaps*; same as `row_number` of its first peer. | `rank()` |
+| `row_number()` | `BIGINT` | The number of the current row within the partition, counting from 1. | `row_number()` |
 
 ## Aggregate Window Functions
 
@@ -169,6 +169,7 @@ For a `RANGE` specification, there must  be only one ordering expression,
 and it has to support addition and subtraction (i.e., numbers or `INTERVAL`s).
 The default values for frames are from `UNBOUNDED PRECEDING` to `CURRENT ROW`.
 It is invalid for a frame to start after it ends.
+Using the [`EXCLUDE` clause](#exclude-clause), rows around the current row can be excluded from the frame.
 
 #### `ROW` Framing
 
@@ -181,6 +182,7 @@ SELECT points,
                  AND 1 FOLLOWING) we
 FROM results;
 ```
+
 This query computes the `sum` of each point and the points on either side of it:
 
 <img src="/images/blog/windowing/moving-sum.jpg" alt="Moving SUM of three values" title="Figure 2: A moving SUM of three values" style="max-width:90%;width:90%;height:auto"/>
@@ -225,6 +227,15 @@ This is the result:
 | Worcester | 2019-01-03 | 102713.00 |
 | Worcester | 2019-01-04 | 102249.50 |
 | ... | ... | ... |
+
+#### `EXCLUDE` Clause
+
+The `EXCLUDE` clause allows rows around the current row to be excluded from the frame. It has the following options:
+
+* `EXCLUDE NO OTHERS`: exclude nothing (default)
+* `EXCLUDE CURRENT ROW`: exclude the current row from the window frame
+* `EXCLUDE GROUP`: exclude the current row and all its peers (according to the columns specified by `ORDER BY`) from the window frame
+* `EXCLUDE TIES`: exclude only the current row's peers from the window frame
 
 ### `WINDOW` Clauses
 

@@ -13,6 +13,9 @@ The `DELETE` statement removes rows from the table identified by the table-name.
 DELETE FROM tbl WHERE i = 2;
 -- delete all rows in the table "tbl"
 DELETE FROM tbl;
+-- the TRUNCATE statement removes all rows from a table,
+-- acting as an alias for DELETE FROM without a WHERE clause
+TRUNCATE tbl;
 ```
 
 ## Syntax

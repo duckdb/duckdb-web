@@ -80,6 +80,7 @@ Statement stmt = conn.createStatement();
 stmt.execute("CREATE TABLE items (item VARCHAR, value DECIMAL(10, 2), count INTEGER)");
 // insert two items into the table
 stmt.execute("INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)");
+stmt.close();
 ```
 
 ```java
@@ -103,7 +104,6 @@ try (PreparedStatement p_stmt = conn.prepareStatement("INSERT INTO items VALUES 
     p_stmt.setDouble(2, 500.0);
     p_stmt.setInt(3, 42);
     p_stmt.execute();
-    
     // more calls to execute() possible
 }
 ```
@@ -124,14 +124,15 @@ import org.apache.arrow.vector.ipc.ArrowReader;
 import org.duckdb.DuckDBResultSet;
 
 try (var conn = DriverManager.getConnection("jdbc:duckdb:");
-     var p_stmt = conn.prepareStatement("SELECT * FROM generate_series(2000)");
-     var resultset = (DuckDBResultSet) p_stmt.executeQuery();
-     var allocator = new RootAllocator()) {
-  try (var reader = (ArrowReader) resultset.arrowExportStream(allocator, 256)) {
-    while (reader.loadNextBatch()) {
-      System.out.println(reader.getVectorSchemaRoot().getVector("generate_series"));
+    var p_stmt = conn.prepareStatement("SELECT * FROM generate_series(2000)");
+    var resultset = (DuckDBResultSet) p_stmt.executeQuery();
+    var allocator = new RootAllocator()) {
+    try (var reader = (ArrowReader) resultset.arrowExportStream(allocator, 256)) {
+        while (reader.loadNextBatch()) {
+            System.out.println(reader.getVectorSchemaRoot().getVector("generate_series"));
+        }
     }
-  }
+    p_stmt.close();
 }
 ```
 
@@ -204,4 +205,53 @@ try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl"))
     appender.append("world");
     appender.endRow();
 }
+stmt.close();
+```
+
+### Batch Writer
+
+The DuckDB JDBC driver offers batch write functionality.
+The batch writer supports prepared statements to mitigate the overhead of query parsing.
+
+> Note that the preferred method for bulk inserts is to use the [appender](#appender) due to its higher performance. However, when using the appender is not possbile, the batch writer is available as alternative.
+
+#### Batch Writer with Prepared Statements
+
+```java
+import org.duckdb.DuckDBConnection;
+
+DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+PreparedStatement stmt = conn.prepareStatement("INSERT INTO test (x, y, z) VALUES (?, ?, ?);");
+
+stmt.setObject(1, 1);
+stmt.setObject(2, 2);
+stmt.setObject(3, 3);
+stmt.addBatch();
+
+stmt.setObject(1, 4);
+stmt.setObject(2, 5);
+stmt.setObject(3, 6);
+stmt.addBatch();
+
+stmt.executeBatch();
+stmt.close();
+```
+
+#### Batch Writer with Vanilla Statements
+
+The batch writer also supports vanilla SQL statements:
+
+```java
+import org.duckdb.DuckDBConnection;
+
+DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+Statement stmt = conn.createStatement();
+
+stmt.execute("CREATE TABLE test (x INT, y INT, z INT)");
+
+stmt.addBatch("INSERT INTO test (x, y, z) VALUES (1, 2, 3);");
+stmt.addBatch("INSERT INTO test (x, y, z) VALUES (4, 5, 6);");
+
+stmt.executeBatch();
+stmt.close();
 ```

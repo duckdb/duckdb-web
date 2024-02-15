@@ -81,6 +81,10 @@
             {
               "page": "SQLite Import",
               "url": "query_sqlite"
+            },
+            {
+              "page": "Directly Reading Files",
+              "url": "read_file"
             }
           ]
         },
@@ -228,6 +232,10 @@
           "page": "SQL Features",
           "slug": "sql_features",
           "subfolderitems": [
+            {
+              "page": "Friendly SQL",
+              "url": "friendly_sql"
+            },
             {
               "page": "AsOf Join",
               "url": "asof_join"
@@ -868,6 +876,10 @@
                 {
                   "page": "List",
                   "url": "list"
+                },
+                {
+                  "page": "Literal Types",
+                  "url": "literal_types"
                 },
                 {
                   "page": "Map",

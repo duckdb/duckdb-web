@@ -7,9 +7,9 @@ railroad: statements/createmacro.js
 The `CREATE MACRO` statement can create a scalar or table macro (function) in the catalog. 
 A macro may only be a single `SELECT` statement (similar to a `VIEW`), but it has the benefit of accepting parameters.
 For a scalar macro, `CREATE MACRO` is followed by the name of the macro, and optionally parameters within a set of parentheses. The keyword `AS` is next, followed by the text of the macro. By design, a scalar macro may only return a single value.
-For a table macro, the syntax is similar to a scalar macro except `AS` is replaced with `AS TABLE`. A table macro may return a table of arbitrary size and shape. 
+For a table macro, the syntax is similar to a scalar macro except `AS` is replaced with `AS TABLE`. A table macro may return a table of arbitrary size and shape.
 
-If a `MACRO` is temporary, it is only usable within the same database connection and is deleted when the connection is closed.
+> If a `MACRO` is temporary, it is only usable within the same database connection and is deleted when the connection is closed.
 
 ## Examples
 
@@ -54,8 +54,8 @@ CREATE MACRO get_users(i) AS TABLE SELECT * FROM users WHERE uid IN (SELECT unne
 
 <div id="rrdiagram"></div>
 
-
 Macros allow you to create shortcuts for combinations of expressions.
+
 ```sql
 -- failure! cannot find column "b"
 CREATE MACRO add(a) AS a + b;
@@ -90,6 +90,7 @@ SELECT triple_add(40, c := 1, b := 1);
 ```
 
 When macros are used, they are expanded (i.e., replaced with the original expression), and the parameters within the expanded expression are replaced with the supplied arguments. Step by step:
+
 ```sql
 -- the 'add' macro we defined above is used in a query
 SELECT add(40, 2);
@@ -98,4 +99,12 @@ SELECT a + b;
 -- then, the parameters are replaced by the supplied arguments
 SELECT 40 + 2;
 -- 42
+```
+
+## Limitations
+
+If a `MACRO` is defined as a subquery, it cannot be invoked in a table function. DuckDB will return the following error:
+
+```text
+Binder Error: Table function cannot contain subqueries
 ```

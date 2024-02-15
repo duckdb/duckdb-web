@@ -1400,18 +1400,15 @@ function GenerateTemporary(options) {
 }
 
 function GenerateIfNotExists(options) {
-	return Optional(Sequence([
-		Keyword("IF"),
-		Keyword("NOT"),
-		Keyword("EXISTS")
-	]), "skip");
+	return Optional(Keyword("IF NOT EXISTS"), "skip");
+}
+
+function GenerateIfExists(options) {
+	return Optional(Keyword("IF EXISTS"), "skip");
 }
 
 function GenerateOrReplace(options) {
-	return Optional(Sequence([
-		Keyword("OR"),
-		Keyword("REPLACE")
-	]), "skip");
+	return Optional(Keyword("OR REPLACE"), "skip");
 }
 
 function GenerateOptionalColumnList(options) {
@@ -1435,11 +1432,10 @@ function GenerateOrderTerms(options) {
 				Skip(),
 				Sequence([
 					Keyword("NULLS"),
-					Keyword("FIRST")
-				]),
-				Sequence([
-					Keyword("NULLS"),
-					Keyword("LAST")
+					Choice(0, [
+						Keyword("FIRST"),
+						Keyword("LAST"),
+					]),
 				])
 			])
 		]), ","),
@@ -1454,11 +1450,10 @@ function GenerateOrderTerms(options) {
 				Skip(),
 				Sequence([
 					Keyword("NULLS"),
-					Keyword("FIRST")
-				]),
-				Sequence([
-					Keyword("NULLS"),
-					Keyword("LAST")
+					Choice(0, [
+						Keyword("FIRST"),
+						Keyword("LAST"),
+					]),
 				])
 			])
 		]),
@@ -1477,16 +1472,14 @@ function GenerateFrameSpec(options) {
 				Keyword("BETWEEN"),
 				Choice(0, [
 					Sequence([
-						Keyword("UNBOUNDED"),
-						Keyword("PRECEDING")
+						Keyword("UNBOUNDED PRECEDING")
 					]),
 					Sequence([
 						Expression(),
 						Keyword("PRECEDING")
 					]),
 					Sequence([
-						Keyword("CURRENT"),
-						Keyword("ROW")
+						Keyword("CURRENT ROW")
 					]),
 					Sequence([
 						Expression(),
@@ -1500,32 +1493,40 @@ function GenerateFrameSpec(options) {
 						Keyword("PRECEDING")
 					]),
 					Sequence([
-						Keyword("CURRENT"),
-						Keyword("ROW")
+						Keyword("CURRENT ROW")
 					]),
 					Sequence([
 						Expression(),
 						Keyword("FOLLOWING")
 					]),
 					Sequence([
-						Keyword("UNBOUNDED"),
-						Keyword("FOLLOWING")
+						Keyword("UNBOUNDED FOLLOWING")
 					])
 				]),
 			]),
 			Sequence([
-				Keyword("UNBOUNDED"),
-				Keyword("PRECEDING")
+				Keyword("UNBOUNDED PRECEDING")
 			]),
 			Sequence([
 				Expression(),
 				Keyword("PRECEDING")
 			]),
 			Sequence([
-				Keyword("CURRENT"),
-				Keyword("ROW")
+				Keyword("CURRENT ROW")
 			])
-		])
+		]),
+		Optional(
+			Sequence([
+				Keyword("EXCLUDE"),
+				Choice(0, [
+					Keyword("CURRENT ROW"),
+					Keyword("GROUP"),
+					Keyword("TIES"),
+					Keyword("NO OTHERS"),
+				]),
+			]),
+			"skip"
+		),
 	]
 }
 function GenerateWindowSpec(options) {
@@ -1534,13 +1535,11 @@ function GenerateWindowSpec(options) {
 		Optional(Expression("base-window-name"), "skip"),
 		Stack([
 			Optional(Sequence([
-				Keyword("PARTITION"),
-				Keyword("BY"),
+				Keyword("PARTITION BY"),
 				OneOrMore(Expression(), ",")
 			])),
 			Optional(Sequence([
-				Keyword("ORDER"),
-				Keyword("BY"),
+				Keyword("ORDER BY"),
 				GenerateOrderTerms()
 			])),
 			Expandable("frame-spec", options, "frame-spec", GenerateFrameSpec),
@@ -1552,8 +1551,7 @@ function GenerateWindowSpec(options) {
 function GenerateColumnConstraints(options) {
 	return [ZeroOrMore(Choice(0, [
 		Sequence([
-			Keyword("PRIMARY"),
-			Keyword("KEY")
+			Keyword("PRIMARY KEY")
 		]),
 		Sequence([
 			Optional(Keyword("NOT")),
@@ -1611,16 +1609,16 @@ function GenerateCopyFromOptions(options) {
 				Sequence([Keyword("FORMAT"), Expression("format-type")]),
 				Sequence([Keyword("DELIMITER"), Expression("delimiter")]),
 				Sequence([Keyword("NULL"), Expression("null-string")]),
-				Sequence([Keyword("HEADER"), Choice(0, [new Skip(), Keyword("TRUE"), Keyword("FALSE")])]),
+				Sequence([Keyword("HEADER"), Choice(0, [new Skip(), Keyword("true"), Keyword("false")])]),
 				Sequence([Keyword("QUOTE"), Expression("quote-string")]),
 				Sequence([Keyword("ESCAPE"), Expression("escape-string")]),
 				Sequence([Keyword("DATEFORMAT"), Expression("date-format")]),
 				Sequence([Keyword("TIMESTAMPFORMAT"), Expression("timestamp-format")]),
 				Sequence([Keyword("FORCE_NOT_NULL"), GenerateColumnList()]),
 				Sequence([Keyword("ENCODING"), Expression("UTF8")]),
-				Sequence([Keyword("AUTO_DETECT"),  Choice(0, [new Skip(), Keyword("TRUE"), Keyword("FALSE")])]),
+				Sequence([Keyword("AUTO_DETECT"),  Choice(0, [new Skip(), Keyword("true"), Keyword("false")])]),
 				Sequence([Keyword("SAMPLE_SIZE"), Expression("sample-size")]),
-				Sequence([Keyword("ALL_VARCHAR"), Choice(0, [new Skip(), Keyword("TRUE"), Keyword("FALSE")])]),
+				Sequence([Keyword("ALL_VARCHAR"), Choice(0, [new Skip(), Keyword("true"), Keyword("false")])]),
 				Sequence([Keyword("COMPRESSION"), Choice(0, [Expression('UNCOMPRESSED'),Expression('SNAPPY'),Expression('GZIP'),Expression('ZSTD')])]),
 				Sequence([Keyword("CODEC"), Choice(0, [Expression('UNCOMPRESSED'),Expression('SNAPPY'),Expression('GZIP'),Expression('ZSTD')])]),
 			]), ",", "skip"),
@@ -1638,7 +1636,7 @@ function GenerateCopyToOptions(options) {
 				Sequence([Keyword("FORMAT"), Expression("format-type")]),
 				Sequence([Keyword("DELIMITER"), Expression("delimiter")]),
 				Sequence([Keyword("NULL"), Expression("null-string")]),
-				Sequence([Keyword("HEADER"), Choice(0, [new Skip(), Keyword("TRUE"), Keyword("FALSE")])]),
+				Sequence([Keyword("HEADER"), Choice(0, [new Skip(), Keyword("true"), Keyword("false")])]),
 				Sequence([Keyword("QUOTE"), Expression("quote-string")]),
 				Sequence([Keyword("ESCAPE"), Expression("escape-string")]),
 				Sequence([Keyword("DATEFORMAT"), Expression("date-format")]),
@@ -1699,10 +1697,7 @@ function GenerateSample(options) {
 
 function GenerateSampleClause(options) {
 	return [
-		Sequence([
-			Keyword("USING"),
-			Keyword("SAMPLE")
-		].concat(GenerateSample(options)))
+		Sequence([Keyword("USING SAMPLE")].concat(GenerateSample(options)))
 	]
 }
 
@@ -1842,8 +1837,11 @@ function GenerateTableOrSubquery(options) {
 				Optional(Expandable("table-alias", options, "table-alias", GenerateTableAlias), "skip"),
 				Optional(Expandable("table-sample", options, "table-sample-reference", GenerateTableSample), "skip")
 			]),
-
-			Expandable("join-clause", options, "join-clause", GenerateJoinClause)
+			Expandable("join-clause", options, "join-clause", GenerateJoinClause),
+			Sequence([
+				Keyword("("), Expandable("join-clause", options, "join-clause", GenerateJoinClause), Keyword(")"),
+				Optional(Sequence([Keyword("AS"), Expression("join-alias")]), "skip"),
+			]),
 		])
 	]
 }
@@ -1860,7 +1858,7 @@ function GenerateDistinctClause(options) {
 					Keyword("("),
 					OneOrMore(Expression(), ","),
 					Keyword(")"),
-				]) , "skip")
+				]), "skip")
 			]),
 			Keyword("ALL")
 		])
@@ -1885,8 +1883,7 @@ function GenerateCommonTableExpression(options) {
 
 function GenerateOrderBy(options) {
 	return [
-		Keyword("ORDER"),
-		Keyword("BY"),
+		Keyword("ORDER BY"),
 		GenerateOrderTerms()
 	]
 }
@@ -1965,15 +1962,13 @@ function GenerateFromClause(options) {
 function GenerateGroupByClause(options) {
 	return [
 		Optional(Sequence([
-			Keyword("GROUP"),
-			Keyword("BY"),
+			Keyword("GROUP BY"),
 			Choice(0,[
 				OneOrMore(
 					Choice(0, [
 					Expression(),
 					Sequence([
-						Keyword("GROUPING"),
-						Keyword("SETS"),
+						Keyword("GROUPING SETS"),
 						Keyword("("),
 						OneOrMore(Sequence([
 							Keyword("("),
@@ -2015,7 +2010,7 @@ function GenerateLimitAndOrderBy(options) {
 		Sequence(GenerateOrderBy(options)),
 		Optional(Sequence([
 			Keyword("LIMIT"),
-			Expression()
+			Expression(),
 		])),
 		Optional(Sequence([
 			Keyword("OFFSET"),

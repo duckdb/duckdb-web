@@ -24,17 +24,17 @@ When deciding on whether to query these files directly or to first load them to 
 
 **Repeated queries:** If you plan to run multiple queries on the same data set, it is worth loading the data into DuckDB. The queries will always be somewhat faster, which over time amortizes the initial load time.
 
-**High decompression times:** Some Parquet files are compressed using heavyweight compression algorithms such as gzip. In these cases, querying the Parquet files will necessitate an expensive decompression time every time the file is accessed. Meanwhile, lightweight compression methods like snappy, lz4, zstd, are faster to decompress. You may use the [`parquet_metadata` function](../../data/parquet/metadata.html#parquet-metadata) to find out the compression algorithm used.
+**High decompression times:** Some Parquet files are compressed using heavyweight compression algorithms such as gzip. In these cases, querying the Parquet files will necessitate an expensive decompression time every time the file is accessed. Meanwhile, lightweight compression methods like snappy, lz4, zstd, are faster to decompress. You may use the [`parquet_metadata` function](../../data/parquet/metadata#parquet-metadata) to find out the compression algorithm used.
 
 #### Microbenchmark: Running TPC-H on a DuckDB Database vs. Parquet
 
 The queries on the [TPC-H benchmark](/docs/extensions/tpch) run approximately 1.1-5.0x slower on Parquet files than on a DuckDB database.
 
-_**Best Practice:**_ If you have the storage space available, and have a join-heavy workload and/or plan to run many queries on the same dataset, load the Parquet files into the database first. The compression algorithm and the row group sizes in the Parquet files have a large effect on performance: study these using the [`parquet_metadata` function](../../data/parquet/metadata.html#parquet-metadata).
+_**Best Practice:**_ If you have the storage space available, and have a join-heavy workload and/or plan to run many queries on the same dataset, load the Parquet files into the database first. The compression algorithm and the row group sizes in the Parquet files have a large effect on performance: study these using the [`parquet_metadata` function](../../data/parquet/metadata#parquet-metadata).
 
 ### The Effect of Row Group Sizes
 
-DuckDB works best on Parquet files with row groups of 100K-1M rows each. The reason for this is that DuckDB can only [parallelize over row groups](how_to_tune_workloads#parallelism-multi-core-processing) – so if a Parquet file has a single giant row group it can only be processed by a single thread. You can use the [`parquet_metadata` function](../../data/parquet/metadata.html#parquet-metadata) to figure out how many row groups a Parquet file has. When writing Parquet files, use the [`row_group_size`](../../sql/statements/copy#parquet-options) option.
+DuckDB works best on Parquet files with row groups of 100K-1M rows each. The reason for this is that DuckDB can only [parallelize over row groups](how_to_tune_workloads#parallelism-multi-core-processing) – so if a Parquet file has a single giant row group it can only be processed by a single thread. You can use the [`parquet_metadata` function](../../data/parquet/metadata#parquet-metadata) to figure out how many row groups a Parquet file has. When writing Parquet files, use the [`row_group_size`](../../sql/statements/copy#parquet-options) option.
 
 #### Microbenchmark: Running Aggregation Query at Different Row Group Sizes
 
@@ -67,11 +67,11 @@ _**Best Practice:**_ The ideal range is between 100MB and 10GB per individual Pa
 
 ### Hive Partitioning for Filter Pushdown
 
-When querying many files with filter conditions, performance can be improved by using a [Hive-format folder structure](https://duckdb.org/docs/data/partitioning/hive_partitioning) to partition the data along the columns used in the filter condition. DuckDB will only need to read the folders and files that meet the filter criteria. This can be especially helpful when querying remote files.
+When querying many files with filter conditions, performance can be improved by using a [Hive-format folder structure](../../data/partitioning/hive_partitioning) to partition the data along the columns used in the filter condition. DuckDB will only need to read the folders and files that meet the filter criteria. This can be especially helpful when querying remote files.
 
 ### More Tips on Reading and Writing Parquet Files
 
-For tips on reading and writing Parquet files, see the [Parquet Tips page](https://duckdb.org/docs/data/parquet/tips.html).
+For tips on reading and writing Parquet files, see the [Parquet Tips page](../../data/parquet/tips).
 
 ## Loading CSV Files
 

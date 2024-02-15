@@ -83,8 +83,7 @@ function GenerateUnpivot(options) {
 				]),
 			Optional(
 				Sequence([
-					Keyword("INTO"),
-					Keyword("NAME"),
+					Keyword("INTO NAME"),
 					Expression("name-column-name"),
 					Keyword("VALUE"),
 					OneOrMore(

@@ -9,7 +9,7 @@ It is important to use the correct type for encoding columns (e.g., `BIGINT`, `D
 
 When loading CSV files, you may leverage the CSV reader's [auto-detection mechanism](../../data/csv/auto_detection) to get the correct types for CSV inputs.
 
-If you run in a memory-constrained environment, using smaller data types (e.g., `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DuckDB’s [bitpacking compression](/2022/10/28/lightweight-compression.html#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing.
+If you run in a memory-constrained environment, using smaller data types (e.g., `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DuckDB’s [bitpacking compression](/2022/10/28/lightweight-compression#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing.
 
 _**Best Practice:**_ Use the most restrictive types possible when creating columns. Avoid using strings for encoding more specific data items.
 
