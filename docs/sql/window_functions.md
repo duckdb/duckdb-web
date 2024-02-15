@@ -216,7 +216,7 @@ This is the result:
 
 <div class="narrow_table"></div>
 
-| Plant | Date | MWh 7-day<br>Moving Average |
+| Plant | Date | MWh 7-day Moving Average |
 |:---|:---|---:|
 | Boston | 2019-01-02 | 517450.75 |
 | Boston | 2019-01-03 | 508793.20 |
