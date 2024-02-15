@@ -35,6 +35,15 @@ DESCRIBE SELECT * FROM tbl;
 
 Note that there are subtle differences: compared to the result when [describing a table](#describing-a-table), nullability (`null`) and key information (`key`) are lost.
 
+## Using `DESCRIBE` in a Subquery
+
+`DESCRIBE` can be used a subquery. For example:
+
+```sql
+CREATE TABLE AS
+    DESCRIBE tbl;
+```
+
 ## Describing Remote Tables
 
 It is possible to describe remote tables via the [`httpfs` extension](../../extensions/httpfs) using the `DESCRIBE TABLE` statement. For example:
