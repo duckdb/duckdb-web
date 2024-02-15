@@ -28,8 +28,6 @@ FROM read_text('test/sql/table_function/files/*.txt');
 
 The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use [`read_blob`](#read_blob) instead.
 
-The sche
-
 ## `read_blob`
 
 The `read_blob` table function reads from the selected source(s) to a `BLOB`.
