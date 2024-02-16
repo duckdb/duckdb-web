@@ -42,9 +42,9 @@ g.non-terminal text {
 	/*font-style: italic;*/
 }
 .railroad-diagram rect {
-	stroke-width: 0;
-	stroke: black;
-	fill: rgb(245, 245, 245);
+	stroke-width: 1;
+	stroke: #E5E5E5;
+	fill: #F5F5F5;
 }
 .expandable, .expanded {
 	cursor:pointer;

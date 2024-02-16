@@ -1,22 +1,7 @@
 ---
 ---
 
-/** DUCKDB DOCUMENTATION CONTENT CSS **/
-
-$duckDByellow: #fff100;
-$duckDBlightyellow: #fffee6;
-$duckDBgrey: #ebebeb;
-$duckDBlightgrey: #f5f5f5;
-$maxContentWidth: 1000px;
-$duckDBblue: #e0f1fd;
-
-$fontMono:  "JetBrainsMono-Regular", "Lucida Console", monospace;
-$fontMonoBold: "JetBrainsMono-Bold", "Lucida Console", monospace;
-$fontMonoItalic: "JetBrainsMono-Italic", "Lucida Console", monospace;
-$fontMonoItalicBold: "JetBrainsMono-Bold-Italic", "Lucida Console", monospace;
-
-$fontSans: "SuisseIntl", Helvetica, Arial, sans-serif;
-$fontSansBold: "SuisseIntl", Helvetica, Arial, sans-serif;
+@import 'variables';
 
 body{
 	background-color: white;
@@ -33,13 +18,13 @@ pre {
     line-height: 1.4;
 }
 code.language-plaintext{
-	background-color: #F7F7F7;
+	background-color: $black100;
 	font-family: $fontMonoBold;
 	border-radius: 3px;
 	padding: 0px 2px;
-    	border: 1px solid #DEDEDE;
+    border: 1px solid $black200;
 	margin: 0;
-    	text-wrap: nowrap;
+    text-wrap: nowrap;
 }
 pre {
     padding: 10px;
@@ -87,11 +72,10 @@ div.highlight{
 	width: calc(100vw - 380px);
 	max-width: 720px;
     position: relative;
-    border: 1px solid #f9f9f9;
     border-radius: 10px;
     overflow: hidden;
     transition: border-color .3s;
-    border: 1px solid #E6E6E6;
+    border: 1px solid $black200;
 }
 .language-text div.highlight{
     border: 1px solid #f9f9f9;
@@ -100,7 +84,7 @@ blockquote {
     border-radius: 10px;
     margin: 0;
     padding: 0px;
-    background-color: #F5F5F5;
+    background-color: $black100;
     margin-top: 40px;
     margin-bottom: 40px;
     position: relative;
@@ -123,7 +107,7 @@ blockquote {
     .symbol{
         width: 45px;
         flex-shrink: 0;
-        background-color: #B8B8B8;
+        background-color: $black400;
         background-repeat: no-repeat;
         background-position: center 13px;
         border-top-left-radius: 10px;
@@ -207,6 +191,9 @@ table {
     }
     tr{
         border-bottom: 1px solid #E9E9E9;
+        &:last-child{
+            border-bottom: 0;
+        }
     }
 }
 th {
@@ -216,10 +203,8 @@ th {
 }
 td {
     padding: 10px;
-    /*border: 1px solid white;*/
     border-bottom: 1px solid #E9E9E9;
     font-size: 14px;
-    /*background-color: $duckDBlightgrey;*/
 }
 .narrow_table + table{
     width: auto;
@@ -310,7 +295,7 @@ body.documentation main .wrap a.pill{
 		a{
 			background-color: transparent;
 			&:hover{
-				color: #4396D7;
+				color: $blue;
 			}
 		}
 		th a{
@@ -345,7 +330,7 @@ div.flex{
 	div.icon{
 		width: 90px;
 		height: 90px;
-		background-color: #f5f5f5;
+		background-color: $black100;
 		text-align: center;
 		font-size: 60px;
 		padding-top: 9px;
@@ -462,7 +447,7 @@ a:hover {
 }
 strong {
     font-weight: normal;
-    font-family: $fontSansBold;
+    font-family: $fontSans;
     font-weight: 600;
 }
 p{
@@ -487,7 +472,7 @@ p img {
 
 .pagemeta{
     border-radius: 10px;
-    background: #F5F5F5;
+    background: $black100;
     padding: 20px;
     display: flex;
     justify-content: space-between;

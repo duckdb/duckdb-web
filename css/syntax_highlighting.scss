@@ -1,10 +1,7 @@
 ---
 ---
 
-$fontMono:  "JetBrainsMono-Regular", "Lucida Console", monospace;
-$fontMonoBold: "JetBrainsMono-Bold", "Lucida Console", monospace;
-$fontMonoItalic: "JetBrainsMono-Italic", "Lucida Console", monospace;
-$fontMonoItalicBold: "JetBrainsMono-Bold-Italic", "Lucida Console", monospace;
+@import 'variables';
 
 /* SYNTAX HIGHLIGHTING COLORS */
 
@@ -70,7 +67,7 @@ th .k {
 
 // background
 .highlight {
-	background-color :#f9f9f9;
+	background-color: $black50;
 }
 
 // ??
