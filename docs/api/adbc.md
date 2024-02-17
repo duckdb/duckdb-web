@@ -7,7 +7,7 @@ title: ADBC API
 
 DuckDB's ADBC driver currently supports version 0.7 of ADBC.
 
-Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/0.5.1/cpp/index.html) for a more extensive discussion on ADBC and a detailed API explanation.
+Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/0.7.0/cpp/index.html) for a more extensive discussion on ADBC and a detailed API explanation.
 
 ## Implemented Functionality
 
