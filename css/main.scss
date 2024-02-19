@@ -351,7 +351,7 @@ header .headerline{
 					li{	
 						a{
 							text-decoration: none;
-							color: black;
+							color: rgb(255, 255, 255);
 							line-height: 1;
 							padding: 15px 20px;
 							border-radius: 120px;
@@ -364,7 +364,8 @@ header .headerline{
 							background: rgba(93, 93, 93, 0);
 						}
 						a:hover{
-							color: #4396D7;
+							background: rgba(93, 93, 93, 0.20);
+							color: $duckDByellow;
 						}
 					}
 					ul{
@@ -747,10 +748,9 @@ body.documentation{
 			font-size: 26px;
 			margin-bottom: 10px;
 			margin-top: 40px;
-			a:hover{
-				color: black;
-				text-decoration: underline;
-			}
+			/** Offset fix for Anchor links **/
+			/*padding-top: 100px;
+			margin-top: -70px;*/
 		}
 		h3{
 			font-size: 21px;
@@ -758,17 +758,9 @@ body.documentation{
 			margin-top: 30px;
 			font-family: $fontSans;
 			font-weight: 500;
-			a:hover{
-				color: black;
-				text-decoration: underline;
-			}
 		}
 		h4{
 			font-size: 19px;
-			a:hover{
-				color: black;
-				text-decoration: underline;
-			}
 		}
 		h4 + .highlighter-rouge{
 			margin-top: 5px;
@@ -1224,13 +1216,13 @@ body.installation{
 			display: flex;
 			flex-wrap: wrap;
 			pointer-events: all;
-			gap: 5px;
+			gap: 10px;
 			align-items: center;
 			li{
 				line-height: 1;
 				display: block;
 				white-space: nowrap;
-				padding: 8px 14px;
+				padding: 10px 14px;
 				background-color: $black200;
 				border-radius: 50px;
 				font-weight: 500;
@@ -1275,7 +1267,7 @@ body.installation{
 			font-family: $fontMono;
 			background-color: #f5f5f5;
 			min-height: 100px;
-			padding: 12px 12px 14px 14px;
+			padding: 20px;
 			border-radius: 10px;
 			border: 1px solid $black200;
 			font-size: 14px;
