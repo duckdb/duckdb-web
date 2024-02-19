@@ -16,4 +16,4 @@ If you find that your workload in DuckDB is slow, we recommend performing the fo
 1. Is the workload running [in parallel](how_to_tune_workloads#paralellism)? Use `htop` or the operating system's task manager to observe this.
 1. Is DuckDB using too many threads? Try [limiting the amount of threads](how_to_tune_workloads#parallelism-multi-core-processing).
 
-Are you aware of other common issues? If so, please click the _Report Issue_ button above and describe them along with their workarounds.
+Are you aware of other common issues? If so, please click the _Report content issue_ link below and describe them along with their workarounds.
