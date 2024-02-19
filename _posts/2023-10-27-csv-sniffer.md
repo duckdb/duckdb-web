@@ -106,7 +106,27 @@ After deciding the dialect that will be used, we detect the types of each column
 
 At this phase, the type detection algorithm goes over the first chunk of data (i.e., 2048 tuples). This process starts on the second valid row (i.e., not a note) of the file. The first row is stored separately and not used for type detection. It will be later detected if the first row is a header or not. The type detection runs a per-column, per-value casting trial process to determine the column types. It starts off with a unique, per-column array with all types to be checked. It tries to cast the value of the column to that type; if it fails, it removes the type from the array, attempts to cast with the new type, and continues that process until the whole chunk is finished.
 
-At this phase, we also determine the format of `DATE` and `TIMESTAMP` columns. The following formats are considered for `DATE` columns: `%m-%d-%Y`, `%m-%d-%y`, `%d-%m-Y`, `%d-%m-%y`, `%Y-%m-%d`, `%y-%m-%d`, and the following for `TIMESTAMP` columns: `%Y-%m-%dT%H:%M:%S.%f`,`%Y-%m-%d %H:%M:%S.%f`, `%m-%d-%Y %I:%M:%S %p`, `%m-%d-%y %I:%M:%S %p`, `%d-%m-%Y %H:%M:%S`, `%d-%m-%y %H:%M:%S`, `%Y-%m-%d %H:%M:%S`, `%y-%m-%d %H:%M:%S`. For columns that use formats outside this search space, they must be defined with the `dateformat` and `timestampformat` options.
+At this phase, we also determine the format of `DATE` and `TIMESTAMP` columns. The following formats are considered for `DATE` columns:
+
+* `%m-%d-%Y`
+* `%m-%d-%y`
+* `%d-%m-Y`
+* `%d-%m-%y`
+* `%Y-%m-%d`
+* `%y-%m-%d`
+
+The following are considered for `TIMESTAMP` columns:
+
+* `%Y-%m-%dT%H:%M:%S.%f`
+* `%Y-%m-%d %H:%M:%S.%f`
+* `%m-%d-%Y %I:%M:%S %p`
+* `%m-%d-%y %I:%M:%S %p`
+* `%d-%m-%Y %H:%M:%S`
+* `%d-%m-%y %H:%M:%S`
+* `%Y-%m-%d %H:%M:%S`
+* `%y-%m-%d %H:%M:%S`
+
+For columns that use formats outside this search space, they must be defined with the `dateformat` and `timestampformat` options.
 
 As an example, let's consider the following CSV file.
 
@@ -136,7 +156,8 @@ If a header is not detected, column names will be automatically generated with t
 Now that the auto-detection algorithm has discovered the header names, if the user specifies column types, the types detected by the sniffer will be replaced with them in the _Type Replacement_ phase. For example, we can replace the `Age` type with `FLOAT` by using:
 
 ```sql
-SELECT * FROM read_csv('greatest_band_in_the_world.csv', types = {'Age': 'FLOAT'})
+SELECT *
+FROM read_csv('greatest_band_in_the_world.csv', types = {'Age': 'FLOAT'});
 ```
 
 This phase is optional and will only be triggered if there are manually defined types.
@@ -185,7 +206,8 @@ The other main characteristic of a CSV file that will affect the auto-detection 
 If you have unusual CSV files and want to query, clean up, or normalize them, DuckDB is already one of the top solutions available. It is very easy to get started. To read a CSV file with the sniffer, you can simply:
 
 ```sql
-SELECT * FROM 'path/to/csv_file.csv';
+SELECT *
+FROM 'path/to/csv_file.csv';
 ```
 
 DuckDB's CSV auto-detection algorithm is an important tool to facilitate the exploration of CSV files. With its default options, it has a low impact on the total cost of loading and reading CSV files. Its main goal is to always be capable of reading files, doing a best-effort job even on files that are ill-defined.
