@@ -130,11 +130,9 @@ a, a:active, a:focus, button, button:active, button:focus {
 p a{
 	color: black;
 	text-decoration: underline;
-	-webkit-transition: background-color .3s;
-	-o-transition: background-color .3s;
-	transition: background-color .3s;
+	transition: color .3s;
 	&:hover{
-		background-color: $duckDByellow;
+		color: $blue;
 		cursor: pointer;
 	}
 }
@@ -181,14 +179,13 @@ a.externallink::after {
 a.externallink{
 	margin-right: 3px;
 }
-*/
 
 a.externallink:hover{
 	cursor: url("data:image/svg+xml,%3Csvg version='1.1' id='Ebene_1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='17' height='17' viewBox='0 0 28.3 28.3' style='enable-background:new 0 0 28.3 28.3' xml:space='preserve'%3E%3Cstyle%3E.st0%7Bfill:%23fff%7D%3C/style%3E%3Cpath d='M1.2 27.2V4.5h10.9v3.9h-7v14.9h14.8v-7h3.9v10.9z'/%3E%3Cpath class='st0' d='M11.5 5.2v2.6h-7v16.1h16.1v-7h2.6v9.6H1.8V5.2h9.7m1.2-1.3H.6V27.7H24.4V15.6h-5v7H5.7V9h7V3.9z'/%3E%3Cg%3E%3Cpath d='m11.6 14 9-9h-5.9V1.2h12.5v12.4h-3.9V7.8l-9 8.9z'/%3E%3Cpath class='st0' d='M26.6 1.8V13H24V6.3l-9.6 9.6-1.9-1.9 9.6-9.6h-6.8V1.8h11.3M27.8.5H14.1v5H19L11.5 13l-.8 1 .9.9 1.9 1.9.9.9.9-.9 7.5-7.5v4.9h5V.5z'/%3E%3C/g%3E%3C/svg%3E") 2 2, alias;
 	background-color: $duckDBblue!important;
 }
 
-/** External Links in Header **/
+
 .external a::after{
 	content: "\E000";
 	font-family: "DuckDB-Symbol";
@@ -215,7 +212,7 @@ a.externallink:hover{
 .external a:hover{
 	background-color: transparent!important;
 }
-
+*/
 
 .duckdbsymbol{
 	font-family: "DuckDB-Symbol";
@@ -581,18 +578,12 @@ footer{
 
 
 h1{
-	/*font-size: 145%;
-	line-height: 145%;*/
 	font-size: 29px;
 	line-height: 1.0;
 	font-weight: normal;
 	margin-bottom: 50px;
 }
 h2{
-	/*
-	font-size: 140%;
-	line-height: 140%;
-	*/
 	font-size: 26px;
 	line-height: 1.0;
 	font-weight: normal;
@@ -602,10 +593,6 @@ h3{
 	font-weight: normal;
 	font-size: 21px;
 	line-height: 1.1;
-	/*
-	font-size: 120%;
-	line-height: 120%;
-	*/
 }
 h4{
 	font-weight: normal;
@@ -623,24 +610,17 @@ h6{
 	font-size: 14px;
 }
 h1 code{
-	background-color: transparent!important;
-	padding: 0!important;
 	font-size: 28px;
-	font-family: $fontMono!important;
+	font-family: $fontMonoBold!important;
 }
 h2 code{
-	background-color: transparent!important;
-	padding: 0!important;
 	font-size: 25px;
-	font-family: $fontMono!important;
-	border: none;
+	font-family: $fontMonoBold!important;
 	font-weight: 600;
 }
 h3 code{
-	background-color: transparent!important;
-	padding: 0!important;
 	font-size: 20px;
-	font-family: $fontMono!important;
+	font-family: $fontMonoBold!important;
 }
 
 
@@ -816,12 +796,9 @@ body.documentation{
 		color: black;
 		background-color: transparent;
 		text-decoration: underline;
-		-webkit-transition: background-color .3s;
-		-o-transition: background-color .3s;
-		transition: background-color .3s;
+		transition: color .3s;
 		&:hover{
-			background-color: $duckDByellow;
-			cursor: pointer;
+			color: $blue;
 		}
 	}
 	.headlinebar{
@@ -1207,14 +1184,29 @@ body.installation{
 				user-select: none;
 	}
 	.yourselection{
-		
+		background-color: $black50;
 		position: relative;
 		max-width: 780px;
+		border: 1px solid $black200;
+		border-radius: 15px;
+		margin-top: 25px;
 	}
 	.wrap{
 		margin-bottom: 100px;
 	}
 	.select{
+		display: flex;
+		border-bottom: 1px solid #E5E5E5;
+		padding: 25px 20px;
+		h3{
+			font-size: 17px!important;
+			font-weight: 600!important;
+			width: 150px;
+			flex-shrink: 0;
+			margin: 0!important;
+			letter-spacing: -0.17px;
+			padding-top: 8px;
+		}
 		ul{
 			padding: 0;
 			margin: 0;
@@ -1222,31 +1214,22 @@ body.installation{
 			display: -webkit-box;
 			display: -ms-flexbox;
 			display: flex;
-			-webkit-box-pack: justify;
-				-ms-flex-pack: justify;
-					justify-content: space-between;
+			flex-wrap: wrap;
 			pointer-events: all;
-			/**margin-bottom: 53px;**/
+			gap: 10px;
+			align-items: center;
 			li{
+				line-height: 1;
 				display: block;
 				white-space: nowrap;
-				background-color: $duckDBlightgrey;
-				color: darken($duckDBlightgrey,40);
-				border: 1px solid white;
-				border-bottom: 1px solid rgba(0,0,0,0.2);
-				border-left: 0px;
-				flex: auto;
-				-webkit-transition: background-color .3s;
-				-o-transition: background-color .3s;
-				transition: background-color .3s;
+				padding: 10px 14px;
+				background-color: #E5E5E5;
+				border-radius: 50px;
+				font-weight: 500;
+				font-size: 14px;
 				cursor: pointer;
-				-webkit-user-select: none;
-				   -moz-user-select: none;
-					-ms-user-select: none;
-						user-select: none;
-				text-align: center;
-				height: 35px;
-				line-height: 35px;
+				transition: background-color .2s;
+				user-select: none;
 				span.versioninfo{
 					color: darken($duckDBlightgrey,40);
 				}
@@ -1254,9 +1237,8 @@ body.installation{
 				background-color: darken($duckDBlightgrey,10);
 				}
 			&.selected{
-				 background-color: darken($duckDBlightgrey,5);
-				 border-bottom: 2px solid rgba(0,0,0,0.4);
-				 color: black;
+				 background-color: black;
+				 color: white;
 				}
 			}
 		}
@@ -1269,14 +1251,28 @@ body.installation{
 		}
 	}
 	.output{
+		display: flex;
+		padding: 25px 20px;
+		position: relative;
+		h3{
+			font-size: 17px!important;
+			font-weight: 600!important;
+			width: 150px;
+			flex-shrink: 0;
+			margin: 0!important;
+			letter-spacing: -0.17px;
+			padding-top: 8px;
+		}
 		.result{
 			font-family: $fontMono;
-			background-color: $duckDBlightgrey;
-			border-top: 0;
+			background-color: #f5f5f5;
 			min-height: 100px;
-			padding: 10px;
+			padding: 20px;
+			border-radius: 10px;
+			border: 1px solid #E5E5E5;
 			font-size: 14px;
 			position: relative;
+			width: calc(100% - 150px);
 			pre{
 				padding: 0;
 				margin: 0;

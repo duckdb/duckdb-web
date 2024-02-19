@@ -1,13 +1,6 @@
 ---
 ---
 
-@media only screen and (max-width: 1300px) {
-	body.installation .select ul.environment{
-		li{
-			flex: auto;
-		}
-	}
-}
 
 @media only screen and (max-width: 1200px) {
 	main .wrap,
@@ -23,24 +16,11 @@
 }
 
 @media only screen and (max-width: 980px) {
-	.singleentry table{
-		margin: 0px;
-	}
-	body.installation{
-		.evironment .onlymobile{
-			display: block;
-		}
-		ul.environment{
-			display: none;
-		}
-	}
-}
-
-@media only screen and (max-width: 980px) {
 	.newswrap .postwrap{
 		position: relative;
 	}
-	.singleentry div.highlight{
+	.singleentry div.highlight,
+	body.installation .output .result{
 		width: 100%;
 	}
 	footer .sitefooter .footercontent{
@@ -50,6 +30,25 @@
 	}
 	body.documentation .headlinebar{
 		font-size: 130%;
+	}
+	.singleentry table{
+		margin: 0px;
+	}
+	body.installation .select,
+	body.installation .output{
+		flex-wrap: wrap;
+	}
+	body.installation .select h3,
+	body.installation .output h3{
+		width: 100%;
+		padding: 0;
+		padding-bottom: 15px;
+	}
+	body.installation .output .result{
+		overflow: auto;
+	}
+	body.installation .select ul{
+		gap: 8px;
 	}
 }
 
