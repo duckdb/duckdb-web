@@ -77,7 +77,8 @@ using DuckDB, DataFrames, Dates
 db = DuckDB.DB()
 # create a table
 DBInterface.execute(db, "CREATE OR REPLACE
-                         TABLE data(id INT PRIMARY KEY, value FLOAT, timestamp TIMESTAMP, date DATE)")
+                         TABLE data(id INT PRIMARY KEY, value FLOAT,
+                         timestamp TIMESTAMP, date DATE)")
 # create data to insert 
 len = 100
 df = DataFrames.DataFrame(id=collect(1:len),
@@ -99,7 +100,7 @@ DuckDB.close(appender)
 
 ## Concurrency
 
-Within a julia process, tasks are able to concurrency read and write to the database, as long as each task maintains its own connection to the database.  In the example below, a single task is spawned to periodically read the database and many tasks are spawned to write to the database using both INSERT statements as well as the appender api.
+Within a julia process, tasks are able to concurrently read and write to the database, as long as each task maintains its own connection to the database.  In the example below, a single task is spawned to periodically read the database and many tasks are spawned to write to the database using both INSERT statements as well as the appender api.
 
 ```julia
 using Dates, DataFrames, DuckDB
@@ -111,8 +112,9 @@ function run_reader(db)
     # create a DuckDB connection specifically for this task
     conn = DBInterface.connect(db)
     while true
-        println(DBInterface.execute(conn, "SELECT id, count(date) as count, max(date) as max_date
-                                           FROM data group by id order by id") |> DataFrames.DataFrame)
+        println(DBInterface.execute(conn,
+                "SELECT id, count(date) as count, max(date) as max_date
+                FROM data group by id order by id") |> DataFrames.DataFrame)
         Threads.sleep(1)
     end
     DBInterface.close(conn)
