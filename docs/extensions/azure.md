@@ -125,7 +125,7 @@ CREATE SECRET secret5 (
 );
 ```
 
-> * When using secrets, the `HTTP_PROXY` environment variable will still be honored except is you provide an explicit value for it.
+> * When using secrets, the `HTTP_PROXY` environment variable will still be honored except if you provide an explicit value for it.
 > * When using secrets, the `SET` variable of the *Authentication with variables* session will be ignore.
 > * The Azure `CREDENTIAL_CHAIN` provider, the actual token is fetched at query time, not at the time of creating the secret.
 
