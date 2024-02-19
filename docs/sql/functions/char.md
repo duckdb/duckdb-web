@@ -170,13 +170,21 @@ The `printf(`*`format`*`, `*`parameters`*`...)` function formats strings using t
 
 ```sql
 -- Format without additional parameters
-SELECT printf('Hello world'); -- Hello world
--- Format a string using {}
-SELECT printf('The answer is %d', 42); -- The answer is 42
-// s == "The answer is 42."
+SELECT printf('Hello world');
+-- output: Hello world
+```
+
+```sql
+-- Format a string using arguments in a given order
+SELECT printf('The answer to %s is %d', 'life', 42);
+-- output: The answer to life is 42
+```
+
+```sql
 -- Format a string using positional arguments '%position$formatter',
 -- e.g., the second parameter as a string is encoded as '%2$s'
-SELECT printf('I''d rather be %2$s than %1$s.', 'right', 'happy'); -- I'd rather be happy than right.
+SELECT printf('I''d rather be %2$s than %1$s.', 'right', 'happy');
+-- output: I'd rather be happy than right.
 ```
 
 #### Format Specifiers
