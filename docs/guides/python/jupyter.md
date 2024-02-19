@@ -163,7 +163,7 @@ This tells JupySQL to store the query, but skips execution. It will be reference
 
 
 ```python
-%%sql --save short-trips --no-execute
+%%sql --save short_trips --no-execute
 SELECT *
 FROM 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet'
 WHERE trip_distance < 6.3
@@ -173,7 +173,7 @@ To create a histogram, call `%sqlplot histogram` and pass the name of the table,
 This uses `--with short-trips` so JupySQL uses the query defined previously and therefore only plots a subset of the data.
 
 ```python
-%sqlplot histogram --table short-trips --column trip_distance --bins 10 --with short-trips
+%sqlplot histogram --table short_trips --column trip_distance --bins 10 --with short_trips
 ```
 
 
