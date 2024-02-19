@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: Go
+github_repository: https://github.com/marcboeker/go-duckdb
 ---
 
 The DuckDB Go driver, `go-duckdb`, allows using DuckDB via the `database/sql` interface.
@@ -114,7 +115,3 @@ func main() {
 ### More Examples
 
 For more examples, see the [examples in the `duckdb-go` repository](https://github.com/marcboeker/go-duckdb/tree/master/examples).
-
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/marcboeker/go-duckdb)

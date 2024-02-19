@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: Spatial Extension
+github_repository: https://github.com/duckdb/duckdb_spatial
 ---
 
 The `spatial` extension provides support for geospatial data processing in DuckDB.
@@ -27,7 +28,7 @@ That said, the spatial extension also includes a couple of experimental non-stan
 
 All of these are implicitly castable to `GEOMETRY` but with a conversion cost, so the `GEOMETRY` type is still the recommended type to use for now if you are planning to work with a lot of different spatial functions.
 
-`GEOMETRY` is not currently capable of storing additional geometry types, Z/M coordinates, or SRID information. These features may be added in the future. 
+`GEOMETRY` is not currently capable of storing additional geometry types, Z/M coordinates, or SRID information. These features may be added in the future.
 
 ## Spatial Scalar Functions
 
@@ -267,12 +268,11 @@ In practice this is just syntax-sugar for calling `ST_Read`, so there is no diff
 
 The following formats are currently recognized by their file extension:
 
-* ESRI ShapeFile, `.shp` 
+* ESRI ShapeFile, `.shp`
 * GeoPackage, `.gpkg`
 * FlatGeoBuf, `.fgb`
 
 Similarly there is a `.osm.pbf` replacement scan for `ST_ReadOsm`.
-
 
 ## Spatial Copy Functions
 
@@ -293,7 +293,3 @@ Available options:
 ## Limitations
 
 Raster types are not supported and there is currently no plan to add them to the extension.
-
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_spatial)

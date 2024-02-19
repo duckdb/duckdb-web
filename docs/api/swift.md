@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: Swift API
+github_repository: https://github.com/duckdb/duckdb-swift
 ---
 
 DuckDB offers a Swift API. See the [announcement post](/2023/04/21/swift) for details.
@@ -148,7 +149,3 @@ extension ExoplanetStore {
 ### Complete Project
 
 For the complete example project, clone [the DuckDB Swift repo](https://github.com/duckdb/duckdb-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/duckdb/duckdb-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).
-
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/duckdb/duckdb-swift)
