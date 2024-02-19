@@ -238,7 +238,8 @@ CREATE SECRET (
     TYPE S3,
     KEY_ID 'mykey',
     SECRET 'mysecret',
-    REGION 'myregion');
+    REGION 'myregion'
+);
 ```
 
 If two secrets exist for a service type, the scope can be used to decide which one should be used. For example:
@@ -248,13 +249,15 @@ CREATE SECRET secret1 (
     TYPE S3,
     KEY_ID 'my_key1',
     SECRET 'my_secret1',
-    SCOPE 's3://my-bucket');
+    SCOPE 's3://my-bucket'
+);
 
 CREATE SECRET secret2 (
     TYPE S3,
     KEY_ID 'my_key2',
     SECRET 'my_secret2',
-    SCOPE 's3://my-other-bucket');
+    SCOPE 's3://my-other-bucket'
+);
 ```
 
 Now, if the user queries something from `s3://my-other-bucket/something`, secret `secret2` will be chosen automatically for that request.
@@ -267,7 +270,8 @@ In order to persist secrets between DuckDB database instances, we can now use th
 CREATE PERSISTENT SECRET my_persistent_secret (
     TYPE S3,
     KEY_ID 'key',
-    SECRET 'secret');
+    SECRET 'secret'
+);
 ```
 
 As mentioned, this will write the secret (unencrypted, so beware) to the `~/.duckdb/stored_secrets` directory.
