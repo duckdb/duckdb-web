@@ -73,7 +73,8 @@ SELECT substring(42, 1, 1) AS substr;
 This aligns DuckDB with Postgres, and makes operations on literals more intuitive. For example, we can compare string literals with dates – but we cannot compare `VARCHAR` values with dates.
 
 ```sql
-SELECT d > '1992-01-01' AS result FROM (VALUES (DATE '1992-01-01')) t(d);
+SELECT d > '1992-01-01' AS result
+FROM (VALUES (DATE '1992-01-01')) t(d);
 ```
 ```text
 ┌─────────┐
@@ -84,7 +85,8 @@ SELECT d > '1992-01-01' AS result FROM (VALUES (DATE '1992-01-01')) t(d);
 └─────────┘
 ```
 ```sql
-SELECT d > '1992-01-01'::VARCHAR FROM (VALUES (DATE '1992-01-01')) t(d);
+SELECT d > '1992-01-01'::VARCHAR
+FROM (VALUES (DATE '1992-01-01')) t(d);
 -- Binder Error: Cannot compare values of type DATE and type VARCHAR –
 -- an explicit cast is required
 ```
@@ -98,14 +100,16 @@ Backward compatibility refers to the ability of a newer DuckDB version to read s
 $ duckdb_092 v092.db
 ```
 ```sql
-CREATE TABLE lineitem AS FROM lineitem.parquet;
+CREATE TABLE lineitem AS
+FROM lineitem.parquet;
 ```
 ```bash
 # read with v0.10
 $ duckdb_0100 v092.db 
 ```
 ```sql
-SELECT l_orderkey, l_partkey, l_comment FROM lineitem LIMIT 1;
+SELECT l_orderkey, l_partkey, l_comment
+FROM lineitem LIMIT 1;
 ```
 ```text
 ┌────────────┬───────────┬─────────────────────────┐
@@ -127,14 +131,17 @@ Forward compatibility refers to the ability of an older DuckDB version to read s
 $ duckdb_0100 v010.db
 ```
 ```sql
-CREATE TABLE lineitem AS FROM lineitem.parquet;
+CREATE TABLE lineitem AS
+FROM lineitem.parquet;
 ```
 ```bash
 # read with v0.9
 $ duckdb_092 v010.db
 ```
 ```sql
-SELECT l_orderkey, l_partkey, l_comment FROM lineitem LIMIT 1;
+SELECT l_orderkey, l_partkey, l_comment
+FROM lineitem
+LIMIT 1;
 ```
 ```text
 ┌────────────┬───────────┬─────────────────────────┐
@@ -190,7 +197,8 @@ INSERT INTO vectors VALUES ([1, 2, 3]);
 Fixed-length arrays can be operated on faster than variable-length lists as the size of each list element is known ahead of time. This release also introduces specialized functions that operate over these arrays, such as `array_cross_product`, `array_cosine_similarity`, and `array_inner_product`.
 
 ```sql
-SELECT array_cross_product(v, [1, 1, 1]) AS result FROM vectors;
+SELECT array_cross_product(v, [1, 1, 1]) AS result
+FROM vectors;
 ```
 ```text
 ┌───────────────────┐
