@@ -1196,7 +1196,7 @@ body.installation{
 	}
 	.select{
 		display: flex;
-		border-bottom: 1px solid #E5E5E5;
+		border-bottom: 1px solid $black200;
 		padding: 25px 20px;
 		h3{
 			font-size: 17px!important;
@@ -1223,7 +1223,7 @@ body.installation{
 				display: block;
 				white-space: nowrap;
 				padding: 10px 14px;
-				background-color: #E5E5E5;
+				background-color: $black200;
 				border-radius: 50px;
 				font-weight: 500;
 				font-size: 14px;
@@ -1269,7 +1269,7 @@ body.installation{
 			min-height: 100px;
 			padding: 20px;
 			border-radius: 10px;
-			border: 1px solid #E5E5E5;
+			border: 1px solid $black200;
 			font-size: 14px;
 			position: relative;
 			width: calc(100% - 150px);

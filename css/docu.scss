@@ -25,6 +25,9 @@ code.language-plaintext{
     border: 1px solid $black200;
 	margin: 0;
     text-wrap: nowrap;
+    em{
+        font-family: $fontMonoItalicBold;
+    }
 }
 pre {
     padding: 10px;
@@ -284,6 +287,7 @@ body.documentation main .wrap a.pill{
         -webkit-font-variant-ligatures: none;
             font-variant-ligatures: none;
 		em code{
+            padding: .06em 0px;
 			font-family: $fontMonoItalicBold;
 			font-style: normal;
             -webkit-font-variant-ligatures: none;
