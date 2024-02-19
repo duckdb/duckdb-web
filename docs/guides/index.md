@@ -9,6 +9,8 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 
 ## Data Import and Export
 
+* [Data import overview](import/overview)
+
 ### CSV Files
 
 * [How to load a CSV file into a table](import/csv_import)

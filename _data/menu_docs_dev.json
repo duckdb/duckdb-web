@@ -19,6 +19,10 @@
           "slug": "import",
           "subfolderitems": [
             {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
               "page": "CSV Import",
               "url": "csv_import"
             },
