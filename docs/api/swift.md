@@ -64,7 +64,7 @@ Once we have our CSV downloaded locally, we can use the following SQL command to
 
 ```sql
 CREATE TABLE exoplanets AS
-  SELECT * FROM read_csv('downloaded_exoplanets.csv');
+    SELECT * FROM read_csv('downloaded_exoplanets.csv');
 ```
 
 Let's package this up as a new asynchronous factory method on our `ExoplanetStore` type:

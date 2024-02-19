@@ -9,7 +9,7 @@ This can improve readability and is useful for preventing [SQL injections](https
 ## Syntax
 
 There are three syntaxes for denoting parameters in prepared statements:
-auto-incremented (`?`), 
+auto-incremented (`?`),
 positional (`$1`),
 and named (`$param`).
 Note that not all clients support all of these syntaxes, e.g., the [JDBC client](../../api/java) only supports auto-incremented parameters in prepared statements.
