@@ -64,7 +64,7 @@ If your queries are not performing as well as expected, it’s worth studying th
 * Use [`EXPLAIN ANALYZE`](../meta/explain_analyze) to run and profile the query. This will show the CPU time that each step in the query takes. Note that due to multi-threading, adding up the individual times will be larger than the total query processing time.
 
 Query plans can point to the root of performance issues. A few general directions:
-* Avoid nested loop joins in favor or hash joins.
+* Avoid nested loop joins in favor of hash joins.
 * A scan that does not include a filter pushdown for a filter condition that is later applied performs unnecessary IO. Try rewriting the query to apply a pushdown.
 * Bad join orders where the cardinality of an operator explodes to billions of tuples should be avoided at all costs.
 
