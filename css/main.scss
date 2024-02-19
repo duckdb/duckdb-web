@@ -749,6 +749,7 @@ body.documentation{
 			margin-top: 40px;
 			a:hover{
 				color: black;
+				text-decoration: underline;
 			}
 		}
 		h3{
@@ -759,12 +760,14 @@ body.documentation{
 			font-weight: 500;
 			a:hover{
 				color: black;
+				text-decoration: underline;
 			}
 		}
 		h4{
 			font-size: 19px;
 			a:hover{
 				color: black;
+				text-decoration: underline;
 			}
 		}
 		h4 + .highlighter-rouge{
