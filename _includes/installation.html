@@ -1,8 +1,8 @@
-<p>You have three options for getting up and running with DuckDB:</p>
+<p>This page contains installation options for DuckDB:</p>
 <ul>
-	<li><a href="https://duckdblabs.com/" target="_blank">DuckDB Labs</a>: The official DuckDB as a service, - built by, maintained and supported by the creators of DuckDB</li>
-	<li>Quick Install: an easy-to-download binary for testing and developing with DuckDB</li>
-	<li>Docker Image: use the official Docker image in Docker Hub</li>
+	<li>Binaries are available for major programming languages and platforms</li>
+	<li>We recommend using the latest release (currently {{site.currentduckdbversion }})</li>
+	<li>If there are no pre-packaged binaries for a platform, consider <a href="https://duckdb.org/dev/building">building DuckDB from source</a></li>
 </ul>
 
 <div class="yourselection">
@@ -86,7 +86,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	<!-- End Empty Results -->
 
 	<div class="latest python">
-		{% highlight bash %}pip install duckdb=={{ site.currentduckdbversion }}{% endhighlight %}
+		{% highlight bash %}pip install duckdb{% endhighlight %}
 	</div>
 
 	<div class="latest r">
@@ -96,9 +96,9 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	<div class="latest java">
 {% highlight xml %}
 <dependency>
- <groupId>org.duckdb</groupId>
- <artifactId>duckdb_jdbc</artifactId>
- <version>{{ site.currentjavaversion }}</version>
+    <groupId>org.duckdb</groupId>
+    <artifactId>duckdb_jdbc</artifactId>
+    <version>{{ site.currentjavaversion }}</version>
 </dependency>{% endhighlight %}
 <br/>
 Direct link to JAR: <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/duckdb_jdbc-{{ site.currentduckdbversion }}.jar">duckdb_jdbc-{{ site.currentduckdbversion }}.jar</a>
@@ -213,22 +213,22 @@ Direct link to JAR: <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jd
 		Java dev builds are available in the sonatype snapshots repository, which can be accessed with the following:
 		{% highlight xml %}
 <dependency>
-	<groupId>org.duckdb</groupId>
-	<artifactId>duckdb_jdbc</artifactId>
-	<version>{{ site.nextjavaversion }}-SNAPSHOT</version>
+    <groupId>org.duckdb</groupId>
+    <artifactId>duckdb_jdbc</artifactId>
+    <version>{{ site.nextjavaversion }}-SNAPSHOT</version>
 </dependency>
 
 ...
 
 <repositories>
-	<repository>
-		<id>oss-sonatype</id>
-		<name>oss-sonatype</name>
-		<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		<snapshots>
-			<enabled>true</enabled>
-		</snapshots>
-	</repository>
+    <repository>
+        <id>oss-sonatype</id>
+        <name>oss-sonatype</name>
+        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
 </repositories>
 		{% endhighlight %}
 	</div>
@@ -269,7 +269,7 @@ Direct link to JAR: <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jd
 	</div>
 
 	<div class="main binary macos odbc">
-		Not available
+		macOS (Universal): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">duckdb_odbc-osx-universal.zip</a>
 	</div>
 
 	<div class="example python">
