@@ -422,10 +422,37 @@ footer{
 	section.blog .postpreview{
 		margin-bottom: 0px;
 	}
-	.newswrap .postwrap .singleentry{
+	.newswrap .postwrap .postcontent .singleentry{
 		padding-top: 50px;
 		padding-bottom: 50px;
+		.infoline span{
+			font-size: 14px;
+			.author{
+				font-weight: 600;
+				}
+		}
+		p{
+			font-size: 15px;
+			line-height: 23px;
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+		h2 {
+			font-size: 25px;
+			line-height: 28px;
+    			margin-top: 35px;
+    			margin-bottom: 20px;
+		}
+		ul li ul {
+   			 margin-top: 0px;
+			}
 	}
+
+	code, pre{
+		font-size: 14px;
+    		line-height: 1.5em;
+	}
+	
 	.newswrap .postwrap .post-list h1,
 	.newswrap .postwrap .postcontent .recentposts h1{
 		font-size: 35px;
