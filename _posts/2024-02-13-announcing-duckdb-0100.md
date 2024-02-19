@@ -310,7 +310,7 @@ JOIN tbl AS t3 USING (i);
 
 Note that a temporary directory has to be set here, because the operators actually need to offload data to disk to complete this query given this memory limit.
 
-With the new version 0.10.0, this query completes in ca. 5s on a MacBook, while it would error out with `Error: Out of Memory Error: failed to pin block of size ...` on the previous version.
+With the new version 0.10.0, this query completes in ca. 5s on a MacBook, while it would error out on the previous version with `Error: Out of Memory Error: failed to pin block of size ...`.
 
 ## Adaptive Lossless Floating-Point Compression (ALP)
 
