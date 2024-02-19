@@ -7,13 +7,14 @@ railroad: expressions/window.js
 ## Examples
 
 ```sql
--- generate a "row_number" column containing incremental identifiers for each row
+-- generate a "row_number" column with containing incremental identifiers for each row
 SELECT row_number() OVER () FROM sales;
 -- generate a "row_number" column, by order of time
 SELECT row_number() OVER (ORDER BY time) FROM sales;
 -- generate a "row_number" column, by order of time partitioned by region
 SELECT row_number() OVER (PARTITION BY region ORDER BY time) FROM sales;
--- compute the difference between the current amount, and the previous amount, by order of time
+-- compute the difference between the current amount, and the previous amount,
+-- by order of time
 SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
 -- compute the percentage of the total amount of sales per region for each row
 SELECT amount / sum(amount) OVER (PARTITION BY region) FROM sales;
@@ -135,7 +136,10 @@ The simplest window function is `row_number()`.
 This function just computes the 1-based row number within the partition using the query:
 
 ```sql
-SELECT "Plant", "Date", row_number() OVER (PARTITION BY "Plant" ORDER  BY "Date") AS "Row"
+SELECT
+    "Plant",
+    "Date",
+    row_number() OVER (PARTITION BY "Plant" ORDER  BY "Date") AS "Row"
 FROM "Generation History"
 ORDER BY 1, 2;
 ```
