@@ -3199,7 +3199,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.3-dev4167"
+    "result": "v0.10.1-dev130"
   },
   {
     "name": "week",
