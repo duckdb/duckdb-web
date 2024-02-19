@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: Substrait Extension
+github_repository: https://github.com/duckdb/substrait
 ---
 
 The main goal of the `substrait` extension is to support both production and consumption of Substrait query plans in DuckDB.
@@ -74,6 +75,7 @@ con.load_extension("substrait")
 ### BLOB Generation
 
 To generate a Substrait BLOB the `get_substrait(sql)` function must be called, from a connection, with a valid SQL select query.
+
 ```python
 con.execute(query = "CREATE TABLE crossfit (exercise TEXT, difficulty_level INT)")
 con.execute(query = "INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , ('Push Jerk', 7), ('Bar Muscle Up', 10)")
@@ -81,10 +83,10 @@ con.execute(query = "INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5
 proto_bytes = con.get_substrait(query="SELECT count(exercise) AS exercise FROM crossfit WHERE difficulty_level <= 5").fetchone()[0]
 ```
 
-
-### Json Generation
+### JSON Generation
 
 To generate a JSON representing the Substrait plan the `get_substrait_json(sql)` function, from a connection, must be called with a valid SQL select query.
+
 ```python
 json = con.get_substrait_json("SELECT count(exercise) AS exercise FROM crossfit WHERE difficulty_level <= 5").fetchone()[0]
 ```
@@ -131,7 +133,3 @@ To consume a Substrait BLOB the `duckdb_prepare_substrait(con, blob)` function m
 result <- duckdb::duckdb_prepare_substrait(con, proto_bytes)
 df <- dbFetch(result)
 ```
-
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/duckdb/substrait)

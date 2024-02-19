@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: R API
+github_repository: https://github.com/duckdb/duckdb-r
 ---
 
 ## Installation
@@ -96,7 +97,7 @@ print(res)
 
 Also refer to [the data import documentation](../data/overview) for more options of efficiently importing data.
 
-## dbplyr 
+## dbplyr
 
 DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Here is an example:
 
@@ -135,7 +136,3 @@ tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning = 1)") |>
   summarise(delay = mean(dep_time, na.rm = TRUE)) |>
   collect()
 ```
-
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/duckdb/duckdb-r)

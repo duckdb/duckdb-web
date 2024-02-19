@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: SQLite Extension
+github_repository: https://github.com/duckdb/sqlite_scanner
 redirect_from:
   - docs/extensions/sqlite_scanner
 ---
@@ -279,7 +280,3 @@ SELECT * FROM sqlite_db.tmp;
 ```
 
 > The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax](../sql/statements/attach).
-
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner)
