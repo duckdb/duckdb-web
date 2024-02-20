@@ -52,7 +52,7 @@ FROM Cities;
 <div class="narrow_table"></div>
 
 | Country |     Name      | Year | Population |
-|---------|---------------|------|------------|
+|---------|---------------|-----:|-----------:|
 | NL      | Amsterdam     | 2000 | 1005       |
 | NL      | Amsterdam     | 2010 | 1065       |
 | NL      | Amsterdam     | 2020 | 1158       |
@@ -80,12 +80,12 @@ PIVOT Cities ON Year USING sum(Population);
 <div class="narrow_table"></div>
 
 | Country |     Name      | 2000 | 2010 | 2020 |
-|---------|---------------|------|------|------|
+|---------|---------------|-----:|-----:|-----:|
 | NL      | Amsterdam     | 1005 | 1065 | 1158 |
 | US      | Seattle       | 564  | 608  | 738  |
 | US      | New York City | 8015 | 8175 | 8772 |
 
-In the above example, the `sum` aggregate is always operating on a single value. 
+In the above example, the `sum` aggregate is always operating on a single value.
 If we only want to change the orientation of how the data is displayed without aggregating, use the `first` aggregate function.
 In this example, we are pivoting numeric values, but the `first` function works very well for pivoting out a text column.
 (This is something that is difficult to do in a spreadsheet pivot table, but easy in DuckDB!)
@@ -111,7 +111,7 @@ PIVOT Cities ON Year USING sum(Population) GROUP BY Country;
 <div class="narrow_table"></div>
 
 | Country | 2000 | 2010 | 2020 |
-|---------|------|------|------|
+|---------|-----:|-----:|-----:|
 | NL      | 1005 | 1065 | 1158 |
 | US      | 8579 | 8783 | 9510 |
 
@@ -128,10 +128,9 @@ PIVOT Cities ON Year IN (2000, 2010) USING sum(Population) GROUP BY Country;
 <div class="narrow_table"></div>
 
 | Country | 2000 | 2010 |
-|---------|------|------|
+|---------|-----:|-----:|
 | NL      | 1005 | 1065 |
 | US      | 8579 | 8783 |
-
 
 ### Multiple Expressions per Clause
 
@@ -152,7 +151,7 @@ PIVOT Cities ON Country, Name USING sum(Population);
 <div class="narrow_table"></div>
 
 | Year | NL_Amsterdam | NL_New York City | NL_Seattle | US_Amsterdam | US_New York City | US_Seattle |
-|------|--------------|------------------|------------|--------------|------------------|------------|
+|-----:|-------------:|------------------|------------|--------------|-----------------:|-----------:|
 | 2000 | 1005         | NULL             | NULL       | NULL         | 8015             | 564        |
 | 2010 | 1065         | NULL             | NULL       | NULL         | 8175             | 608        |
 | 2020 | 1158         | NULL             | NULL       | NULL         | 8772             | 738        |
@@ -171,15 +170,14 @@ PIVOT Cities ON Country || '_' || Name USING sum(Population);
 <div class="narrow_table"></div>
 
 | Year | NL_Amsterdam | US_New York City | US_Seattle |
-|------|--------------|------------------|------------|
+|-----:|-------------:|-----------------:|-----------:|
 | 2000 | 1005         | 8015             | 564        |
 | 2010 | 1065         | 8175             | 608        |
 | 2020 | 1158         | 8772             | 738        |
 
-
 #### Multiple `USING` Expressions
 
-An alias may also be included for each expression in the `USING` clause. 
+An alias may also be included for each expression in the `USING` clause.
 It will be appended to the generated column names after an underscore (`_`).
 This makes the column naming convention much cleaner when multiple expressions are included in the `USING` clause.
 
@@ -192,7 +190,7 @@ PIVOT Cities ON Year USING sum(Population) AS total, max(Population) AS max GROU
 <div class="narrow_table"></div>
 
 | Country | 2000_total | 2000_max | 2010_total | 2010_max | 2020_total | 2020_max |
-|---------|------------|----------|------------|----------|------------|----------|
+|---------|-----------:|---------:|-----------:|---------:|-----------:|---------:|
 | NL      | 1005       | 1005     | 1065       | 1065     | 1158       | 1158     |
 | US      | 8579       | 8015     | 8783       | 8175     | 9510       | 8772     |
 
@@ -209,7 +207,7 @@ PIVOT Cities ON Year USING sum(Population) GROUP BY Country, Name;
 <div class="narrow_table"></div>
 
 | Country |     Name      | 2000 | 2010 | 2020 |
-|---------|---------------|------|------|------|
+|---------|---------------|-----:|-----:|-----:|
 | NL      | Amsterdam     | 1005 | 1065 | 1158 |
 | US      | Seattle       | 564  | 608  | 738  |
 | US      | New York City | 8015 | 8175 | 8772 |
@@ -254,14 +252,13 @@ USING (Country);
 <div class="narrow_table"></div>
 
 | Country | 2000 | 2010 | 2020 | Amsterdam | New York City | Seattle |
-|---------|------|------|------|-----------|---------------|---------|
+|---------|-----:|-----:|-----:|----------:|--------------:|--------:|
 | NL      | 1005 | 1065 | 1158 | 3228      | NULL          | NULL    |
 | US      | 8579 | 8783 | 9510 | NULL      | 24962         | 1910    |
 
-
 ## Internals
 
-Pivoting is implemented as a combination of SQL query re-writing and a dedicated `PhysicalPivot` operator for higher performance. 
+Pivoting is implemented as a combination of SQL query re-writing and a dedicated `PhysicalPivot` operator for higher performance.
 Each `PIVOT` is implemented as set of aggregations into lists and then the dedicated `PhysicalPivot` operator converts those lists into column names and values.
 Additional pre-processing steps are required if the columns to be created when pivoting are detected dynamically (which occurs when the `IN` clause is not in use).
 
@@ -318,7 +315,7 @@ The `PhysicalPivot` operator converts those lists into column names and values t
 <div class="narrow_table"></div>
 
 | Country |     Name      | 2000 | 2010 | 2020 |
-|---------|---------------|------|------|------|
+|---------|---------------|-----:|-----:|-----:|
 | NL      | Amsterdam     | 1005 | 1065 | 1158 |
 | US      | Seattle       | 564  | 608  | 738  |
 | US      | New York City | 8015 | 8175 | 8772 |
@@ -326,7 +323,7 @@ The `PhysicalPivot` operator converts those lists into column names and values t
 
 ## Simplified `PIVOT` Full Syntax Diagram
 
-Below is the full syntax diagram of the `PIVOT` statement. 
+Below is the full syntax diagram of the `PIVOT` statement.
 
 <div id="rrdiagram"></div>
 
@@ -368,7 +365,7 @@ PIVOT (
 <div class="narrow_table"></div>
 
 | Country | 2000 | 2010 | 2020 |
-|---------|------|------|------|
+|---------|-----:|-----:|-----:|
 | NL      | 1005 | 1065 | 1158 |
 | US      | 8579 | 8783 | 9510 |
 
@@ -386,7 +383,7 @@ PIVOT (
 ```
 
 |     Name      | 2000_NL_total | 2000_NL_count | 2000_US_total | 2000_US_count | 2010_NL_total | 2010_NL_count | 2010_US_total | 2010_US_count |
-|--|-|-|-|-|-|-|-|-|
+|--|-:|-:|-:|-:|-:|-:|-:|-:|
 | Amsterdam     | 1005          | 1             | NULL          | 0             | 1065          | 1             | NULL          | 0             |
 | Seattle       | NULL          | 0             | 564           | 1             | NULL          | 0             | 608           | 1             |
 | New York City | NULL          | 0             | 8015          | 1             | NULL          | 0             | 8175          | 1             |
