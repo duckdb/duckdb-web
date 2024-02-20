@@ -48,4 +48,5 @@ We summarize the main distributions in the table below.
 | [tpch](tpch)                 | yes |     | yes |     |     |     |
 
 The [jemalloc](jemalloc) extension's availability is based on the operating system.
-It is a built-in extension on Linux and macOS versions, while on Windows, it is not available.
+It is a built-in extension on Linux versions and optionally available on macOS (via compiling from source).
+On Windows, it is not available.

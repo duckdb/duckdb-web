@@ -155,9 +155,9 @@ This will skip any currently installed file in the specifed path.
 
 Using remote paths for compressed files is currently not possible.
 
-## Building Extensions
+## Building and Installing Extensions
 
-Build the extension following the extension's README.
+For building and installing extensions from source, see the [building guide](https://duckdb.org/dev/building#building-and-installing-extensions-from-source).
 
 ## Statically Linking Extensions
 
