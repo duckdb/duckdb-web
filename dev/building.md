@@ -235,7 +235,7 @@ To parallelize the compilation, create or edit the `~/.R/Makevars` file, and add
 MAKEFLAGS = -j8
 ```
 
-### Building the R Package on Linux aarch64
+### Building the R Package on Linux AArch64
 
 Building the R package on Linux running on an ARM64 architecture (AArch64) may result in the following error message:
 
