@@ -8,7 +8,7 @@ The `CREATE SECRET` statement creates a new secret in the **Secrets manager**, w
 
 > Secrets were introduced with DuckDB version 0.10.
 
-> Persistent secrets are stored in unencrypted binary format on the disk.
+> Warning Persistent secrets are stored in unencrypted binary format on the disk.
 
 ## Secrets
 
