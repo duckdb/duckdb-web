@@ -805,6 +805,8 @@ body.documentation{
 		background-color: transparent;
 		text-decoration: underline;
 		transition: color .3s;
+    		word-wrap: break-word;
+    		word-break: break-word;
 		&:hover{
 			color: $blue;
 		}
