@@ -261,8 +261,6 @@ for EXTENSION in *; do
 done
 ```
 
-## Build
-
 ## Troubleshooting
 
 ### Building the R Package is Slow
