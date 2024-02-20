@@ -248,6 +248,19 @@ Build DuckDB as follows:
 GEN=ninja EXTENSION_CONFIGS="extension_config.cmake" make
 ```
 
+Then, to install the extensions in one go, run:
+
+```bash
+# for release builds
+cd build/release/extension/
+# for debug builds
+cd build/debug/extension/
+# install extensions
+for EXTENSION in *; do
+    ../duckdb -c "INSTALL '${EXTENSION}/${EXTENSION}.duckdb_extension';"
+done
+```
+
 ## Build
 
 ## Troubleshooting
