@@ -10,6 +10,14 @@ The `jemalloc` extension replaces the system's memory allocator with [jemalloc](
 The Linux and macOS versions of DuckDB ship with the `jemalloc` extension by default.
 On Windows, this extension is not available.
 
+## Disabling the `jemalloc` Extension
+
+To disable the `jemalloc` extension, [build DuckDB from source](/dev/building) and set the `SKIP_EXTENSIONS` flags as follows:
+
+```bash
+GEN=ninja SKIP_EXTENSIONS="jemalloc" make
+```
+
 ## GitHub
 
 The `jemalloc` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/jemalloc).
