@@ -25,7 +25,7 @@ After the `mysql` extension is installed, you can attach to a MySQL database usi
 
 ```sql
 ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE mysql_scanner, READ_ONLY);
-USE mysqlscanner;
+USE mysql_db;
 ```
 
 The string used by `ATTACH` is a PostgreSQL-style connection string (_not_ a MySQL connection string!). It is a list of connection arguments provided in `{key}={value}` format. Below is a list of valid arguments. Any options not provided are replaced by their default values.
