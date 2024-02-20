@@ -41,7 +41,8 @@ The following code snippet runs a simple query using the `Database.all()` method
 ```js
 db.all('SELECT 42 AS fortytwo', function(err, res) {
   if (err) {
-    throw err;
+    console.warn(err);
+    return;
   }
   console.log(res[0].fortytwo)
 });
@@ -52,7 +53,8 @@ Other available methods are `each`, where the callback is invoked for each row, 
 ```js
 db.all('SELECT ?::INTEGER AS fortytwo, ?::STRING AS hello', 42, 'Hello, World', function(err, res) {
   if (err) {
-    throw err;
+    console.warn(err);
+    return;
   }
   console.log(res[0].fortytwo)
   console.log(res[0].hello)
@@ -74,7 +76,8 @@ You can create multiple connections, each with their own transaction context.
 ```js
 con.all('SELECT 42 AS fortytwo', function(err, res) {
   if (err) {
-    throw err;
+    console.warn(err);
+    return;
   }
   console.log(res[0].fortytwo)
 });
@@ -93,9 +96,10 @@ To execute this statement, you can call for example `all()` on the `stmt` object
 ```js
 stmt.all(42, function(err, res) {
   if (err) {
-    throw err;
+    console.warn(err);
+  } else {
+    console.log(res[0].fortytwo)
   }
-  console.log(res[0].fortytwo)
 });
 ```
 
@@ -110,9 +114,10 @@ for (let i = 0; i < 10; i++) {
 stmt.finalize();
 con.all('SELECT * FROM a', function(err, res) {
   if (err) {
-    throw err;
+    console.warn(err);
+  } else {
+    console.log(res)
   }
-  console.log(res)
 });
 ```
 
@@ -122,9 +127,10 @@ con.all('SELECT * FROM a', function(err, res) {
 const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo', function(err, stmt) {
   stmt.all(42, function(err, res) {
     if (err) {
-      throw err;
+      console.warn(err);
+    } else {
+      console.log(res[0].fortytwo)
     }
-    console.log(res[0].fortytwo)
   });
 });
 ```
@@ -145,13 +151,15 @@ const jsonData = [
 // note; doesn't work on Windows yet
 db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
     if (err) {
-        throw err;
+        console.warn(err);
+        return;
     }
 
     const arrowTable = arrow.tableFromJSON(jsonData);
     db.register_buffer("jsonDataTable", [arrow.tableToIPC(arrowTable)], true, (err, res) => {
         if (err) {
-            throw err;
+            console.warn(err);
+            return;
         }
 
         // `SELECT * FROM jsonDataTable` would return the entries in `jsonData`
