@@ -44,6 +44,11 @@ Consider the function `sin(DOUBLE)`. This function takes as input argument a col
 
 Generally, implicit casts only cast upwards. That is to say, we can implicitly cast an `INTEGER` to a `BIGINT`, but not the other way around.
 
+> Prior to version 0.10.0, DuckDB allowed any type to be implicitly cast to `VARCHAR` during function binding.
+> Version 0.10.0 introduced a [breaking change which no longer allows implicit casts to `VARCHAR`](/2024/02/13/announcing-duckdb-0100#breaking-sql-changes).
+> The [`old_implicit_casting` configuration option](../pragmas#implicit-casting-to-varchar) setting can be used to revert to the old behavior.
+> However, please note that this flag will be deprecated in the future.
+
 ## Allowed Casting Operations
 
 Values of a particular data type can typically not be casted to any arbitrary target data type. The supported cast operations are described in the [typecasting page](../data_types/typecasting) as part of the data types documentation.
