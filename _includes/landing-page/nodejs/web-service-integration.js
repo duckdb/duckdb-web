@@ -7,7 +7,8 @@ const db = new duckdb.Database(":memory:");
 app.get("/getnumbers", (req, res) => {
   db.all("SELECT random() AS num FROM range(10)", (a, b) => {
     if (a) {
-      throw a;
+      console.warn(a);
+      res.end("Error " + a);
     }
     res.end(JSON.stringify(b));
   });
