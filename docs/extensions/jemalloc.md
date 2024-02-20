@@ -12,7 +12,11 @@ On Windows, this extension is not available.
 
 ## Disabling the `jemalloc` Extension
 
-TODO
+To disable the `jemalloc` extension, [build DuckDB from source](/dev/building) and set the `SKIP_EXTENSIONS` flags as follows:
+
+```bash
+GEN=ninja SKIP_EXTENSIONS="jemalloc" make
+```
 
 ## GitHub
 

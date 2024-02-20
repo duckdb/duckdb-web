@@ -228,7 +228,7 @@ build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_e
 build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
 ```
 
-### Using CMake Configuration File
+### Using a CMake Configuration File
 
 Create an extension configuration file named `extension_config.cmake` with e.g. the following content:
 
