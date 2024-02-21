@@ -118,8 +118,8 @@ COPY tbl TO 'result-zstd.parquet' (FORMAT 'parquet', CODEC 'zstd')
 COPY 'test.csv' TO 'result-uncompressed.parquet'
     (FORMAT 'parquet', CODEC 'uncompressed')
 -- write a query to a Parquet file with ZSTD compression (same as CODEC) and row_group_size
-COPY (FROM generate_series(100000)) TO 'row-groups-zstd.parquet'
-    (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000);
+COPY (FROM generate_series(100_000)) TO 'row-groups-zstd.parquet'
+    (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100_000);
 ```
 
 DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../../sql/statements/export) for more details.
