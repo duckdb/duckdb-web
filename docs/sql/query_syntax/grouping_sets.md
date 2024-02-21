@@ -37,7 +37,10 @@ GROUP BY ROLLUP (city, street_name);
 
 ```sql
 CREATE TABLE students (course VARCHAR, type VARCHAR);
-INSERT INTO students (course, type) VALUES ('CS', 'Bachelor'), ('CS', 'Bachelor'), ('CS', 'PhD'), ('Math', 'Masters'), ('CS', NULL), ('CS', NULL), ('Math', NULL);
+INSERT INTO students (course, type)
+VALUES
+    ('CS', 'Bachelor'), ('CS', 'Bachelor'), ('CS', 'PhD'), ('Math', 'Masters'),
+    ('CS', NULL), ('CS', NULL), ('Math', NULL);
 ```
 
 ```sql
