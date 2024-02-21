@@ -13,7 +13,7 @@ For example, here we create a relation from a SQL query:
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(10000000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(10_000_000_000) tbl(id)")
 rel.show()
 ```
 
@@ -71,7 +71,7 @@ Relation objects can be queried through SQL through so-called **replacement scan
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 duckdb.sql("SELECT sum(id) FROM rel").show()
 ```
 
@@ -94,7 +94,7 @@ Apply an (optionally grouped) aggregate over the relation. The system will autom
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.aggregate("id % 2 AS g, sum(id), min(id), max(id)")
 ```
 
@@ -138,7 +138,7 @@ Apply the given condition to the relation, filtering any rows that do not satisf
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.filter("id > 5").limit(3).show()
 ```
 
@@ -207,7 +207,7 @@ Select the first *n* rows, optionally offset by *offset*.
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.limit(3).show()
 ```
 
@@ -228,7 +228,7 @@ Sort the relation by the given set of expressions.
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.order("id DESC").limit(3).show()
 ```
 
@@ -249,7 +249,7 @@ Apply the given expression to each row in the relation.
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.project("id + 10 AS id_plus_ten").limit(3).show()
 ```
 

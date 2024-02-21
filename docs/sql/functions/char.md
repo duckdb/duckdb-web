@@ -148,20 +148,20 @@ SELECT format('{:04d}', 33); -- 0033
 -- Create timestamps from integers
 SELECT format('{:02d}:{:02d}:{:02d} {}', 12, 3, 16, 'AM'); -- 12:03:16 AM
 -- Convert to hexadecimal
-SELECT format('{:x}', 123456789); -- 75bcd15
+SELECT format('{:x}', 123_456_789); -- 75bcd15
 -- Convert to binary
-SELECT format('{:b}', 123456789); -- 111010110111100110100010101
+SELECT format('{:b}', 123_456_789); -- 111010110111100110100010101
 ```
 
 #### Print Numbers with Thousand Separators
 
 ```sql
-SELECT format('{:,}',  123456789); -- 123,456,789
-SELECT format('{:t.}', 123456789); -- 123.456.789
-SELECT format('{:''}', 123456789); -- 123'456'789
-SELECT format('{:_}',  123456789); -- 123_456_789
-SELECT format('{:t }', 123456789); -- 123 456 789
-SELECT format('{:tX}', 123456789); -- 123X456X789
+SELECT format('{:,}',  123_456_789); -- 123,456,789
+SELECT format('{:t.}', 123_456_789); -- 123.456.789
+SELECT format('{:''}', 123_456_789); -- 123'456'789
+SELECT format('{:_}',  123_456_789); -- 123_456_789
+SELECT format('{:t }', 123_456_789); -- 123 456 789
+SELECT format('{:tX}', 123_456_789); -- 123X456X789
 ```
 
 ### `printf` Syntax
@@ -223,16 +223,16 @@ SELECT printf('%04d', 33); -- 0033
 -- Create timestamps from integers
 SELECT printf('%02d:%02d:%02d %s', 12, 3, 16, 'AM'); -- 12:03:16 AM
 -- Convert to hexadecimal
-SELECT printf('%x', 123456789); -- 75bcd15
+SELECT printf('%x', 123_456_789); -- 75bcd15
 -- Convert to binary
-SELECT printf('%b', 123456789); -- 111010110111100110100010101
+SELECT printf('%b', 123_456_789); -- 111010110111100110100010101
 ```
 
 #### Thousand Separators
 
 ```sql
-SELECT printf('%,d',  123456789); -- 123,456,789
-SELECT printf('%.d',  123456789); -- 123.456.789
-SELECT printf('%''d', 123456789); -- 123'456'789
-SELECT printf('%_d',  123456789); -- 123_456_789
+SELECT printf('%,d',  123_456)789); -- 123,456,789
+SELECT printf('%.d',  123_456)789); -- 123.456.789
+SELECT printf('%''d', 123_456)789); -- 123'456'789
+SELECT printf('%_d',  123_456)789); -- 123_456_789
 ```

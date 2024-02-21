@@ -41,9 +41,9 @@ More row groups beyond the thread count would improve the speed of highly select
 
 ```sql
 -- write a query to a Parquet file with a different row_group_size
-COPY (FROM generate_series(100000))
+COPY (FROM generate_series(100_000))
     TO 'row-groups.parquet'
-    (FORMAT PARQUET, ROW_GROUP_SIZE 100000);
+    (FORMAT PARQUET, ROW_GROUP_SIZE 100_000);
 ```
 
 See the [Performance Guide on file formats](../../guides/performance/file_formats#parquet-file-sizes) for more tips.
