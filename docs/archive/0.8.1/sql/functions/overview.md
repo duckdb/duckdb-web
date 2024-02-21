@@ -32,4 +32,3 @@ D select distinct on(function_name) function_name, function_type, return_type, p
 
 Currently the description and parameter names of functions are still missing.
 
-### More

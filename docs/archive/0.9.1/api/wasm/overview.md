@@ -20,5 +20,3 @@ A great starting point is to read the [DuckDB-Wasm launch blog post](https://duc
 Another great resource is the [GitHub repository](https://github.com/duckdb/duckdb-wasm).
 
 For details, see the full [DuckDB-Wasm API Documentation](https://shell.duckdb.org/docs/modules/index.html).
-
-## Pages in This Section

@@ -42,5 +42,3 @@ Users can download them from the [Latest Release of DuckDB](https://github.com/d
   </tr>
 </table>
 
-
-### Pages in this Section

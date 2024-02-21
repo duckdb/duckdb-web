@@ -128,4 +128,3 @@ con.install_extension("spatial")
 con.load_extension("spatial")
 ```
 
-## Pages in This Section

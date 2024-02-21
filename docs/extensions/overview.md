@@ -118,4 +118,3 @@ A template for creating extensions is available in the [`extension-template` rep
 
 For advanced installation instructions and more details on extensions, see the [Working with Extensions page](working_with_extensions).
 
-## Pages in This Section

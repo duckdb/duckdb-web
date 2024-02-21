@@ -3,9 +3,9 @@
 
 {% for crumb in crumbs offset: 1 %}
   {% if forloop.last %}
-    <span class="slash">/</span> <span class="current">{{ page.title }}</span>
+  <span class="slash">/</span> <span class="current">{{ page.title }}</span>
   {% else %}
-    <span class="slash">/</span> <span>{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</span>
+  <span class="slash">/</span> <span>{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</span>
   {% endif %}
 {% endfor %}
 </div>

@@ -137,8 +137,9 @@ Page URL: <https://duckdb.org{{ page.url }}>
 								</ul>
 							</div>
 						</div>
-						{% endif %}
 					</div>
+					{% endif %}
+					
 					
 					<div class="title">{{ page.title }}</div>
 				
@@ -147,6 +148,11 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				
 				{% include anchor_headings.html html=content %}
 				
+				{% if page.url contains 'overview' %}
+				<div class="index">
+					<h2>Pages in This Section</h2>
+				</div>
+				{% endif %}
 				
 				{% if page.url contains '/docs/' %}
 				<div class="pagemeta">
