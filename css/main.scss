@@ -362,9 +362,10 @@ header .headerline{
 							margin-top: -3px;
 							margin-bottom: -3px;
 							background: rgba(93, 93, 93, 0);
-						}
-						a:hover{
-							color: #4396D7;
+							&:hover{
+								background: rgba(0, 0, 0, 0.5);
+								color: $duckDByellow;
+							}
 						}
 					}
 					ul{
@@ -463,14 +464,34 @@ body.documentation header .headerline .headercontent .landingmenu nav .search_ic
 
 .hamburger{
 	padding: 3px;
-	margin-top: 4px;
+	margin-top: 2px;
 	display: none;
+	background: #2E2E2E;
+	border-radius: 100px;
+	width: 41px;
+	height: 41px;
+	align-items: center; 
+	justify-content: center; 
 }
 
 .hamburger-inner, .hamburger-inner:after, .hamburger-inner:before{
-	background-color: #ffffff;
+	background-color: $duckDByellow;
 	border-radius: 0px;
 	height: 2px;
+	width: 16px;
+}
+
+.hamburger-box{
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+}
+
+.hamburger-inner:after{
+	bottom: -6px;
+}
+.hamburger-inner:before{
+	top: -6px;
 }
 
 .hamburger.is-active:hover, .hamburger:hover{
@@ -675,380 +696,6 @@ body.installation .environment.select label.onlymobile{
 }
 
 
-
-/** DOCUMENTATION **/
-
-body.documentation{
-	.headerline .headercontent .landingmenu nav.mobile{
-		display: none;
-	}
-	span.github{
-		vertical-align: 1px;
-		display: inline-block;
-		background: #D9D9D9;
-		height: 17px;
-		line-height: 17px;
-		padding: 0 5px;
-		border-radius: 50px;
-		font-size: 10px;
-		color: black;
-		margin-left: 2px;
-		font-family: $fontSans;
-		font-weight: 500;
-		transition: background .2s;
-		&::after{
-			content: "";
-			background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m4.625 2.373.75-.751a2.123 2.123 0 1 1 3.003 3.003l-.75.75M5.374 7.627l-.75.751a2.123 2.123 0 0 1-3.003-3.003l.75-.75m.751 2.252 3.754-3.754' stroke='%23000' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-			display: inline-block;
-			width: 10px;
-			height: 10px;
-			margin-left: 5px;
-			vertical-align: -1px;
-		}
-		&:hover{
-			background: #78A6FF;
-		}
-	}
-	main .wrap{
-		width: calc(100% - 252px);
-		margin-left: 252px;
-		padding: 40px;
-		#main_content_wrap{
-			max-width: 720px;
-			margin-top: 70px;
-			img{
-				width: 100%;
-				height: auto;
-				margin-bottom: 20px;
-				margin-top: 20px;
-			}
-			table{ 
-				img{
-					width: auto;
-					height: auto;
-					margin-bottom: -4px;
-					margin-top: 0px;
-				}
-			}
-			/*#all-available-extensions td > a:first-of-type{
-				margin-right: 8px;
-			}*/
-			table a.nobg:hover{
-				background: none;
-				display: inline-block;
-			}
-		}
-		h1{
-			font-size: 29px;
-			margin-bottom: 20px;
-			margin-top: 50px;
-		}
-		h2{
-			font-size: 26px;
-			margin-bottom: 10px;
-			margin-top: 40px;
-			a:hover{
-				color: black;
-				text-decoration: underline;
-			}
-		}
-		h3{
-			font-size: 21px;
-			margin-bottom: 10px;
-			margin-top: 30px;
-			font-family: $fontSans;
-			font-weight: 500;
-			a:hover{
-				color: black;
-				text-decoration: underline;
-			}
-		}
-		h4{
-			font-size: 19px;
-			a:hover{
-				color: black;
-				text-decoration: underline;
-			}
-		}
-		h4 + .highlighter-rouge{
-			margin-top: 5px;
-		}
-		
-		p + h4, .highlighter-rouge + h4{
-			margin-top: 30px;
-		}
-		p + table{
-			margin-top: 22px;
-		}
-		table + p {
-			margin-top: 22px;
-		}
-		.highlighter-rouge + .highlighter-rouge{
-			margin-top: 22px;
-		}
-		p + .highlighter-rouge{
-			margin-top: 22px;
-		}
-		.highlighter-rouge + p{
-			margin-top: 20px;
-		}
-		h2#notes{
-			margin-top: 5px;
-		}
-		.limit-width{
-			width: calc(100vw - 380px);
-		}
-	}
-	.headlinebar a,
-	main .wrap a{
-		color: black;
-		background-color: transparent;
-		text-decoration: underline;
-		transition: color .3s;
-    		word-wrap: break-word;
-    		word-break: break-word;
-		&:hover{
-			color: $blue;
-		}
-	}
-	.headlinebar{
-		background-color: darken($duckDBlightgrey, 5%);
-		height: 52px;
-		line-height: 52px;
-		font-size: 32px;
-		top: 70px;
-		left: 252px;
-		padding-left: 40px;
-		position: absolute;
-		width: calc(100% - 252px);
-		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-		position: sticky;
-		//margin-left: -40px;
-		z-index: 800;
-		> div.version{
-			font-size: 14px;
-			line-height: 1;
-			color: rgba(184, 184, 184, 1);
-			padding-right: 20px;
-			padding-left: 30px;
-			cursor: pointer;
-			background-color: darken($duckDBlightgrey, 5%);
-			z-index: 500;
-			height: 51px;
-			display: flex;
-			align-items: center;
-			flex-shrink: 0;
-			.selectedversion{
-				color: black;
-				text-decoration: underline;
-				margin-left: 10px;
-			}
-			span.arrow::after{
-				content: "\E010";
-				font-family: "DuckDB-Symbol";
-				margin-left: 5px;
-				text-decoration: none;
-				color: black;
-			}
-			&:hover ~ .versionsidebar{
-				transform: translateX(0px);
-			}
-			.versionsidebar:hover, 
-			.versionsidebar.active{
-				transform: translateX(0px);
-			}
-		}
-		> div.title{
-			margin-right: auto;
-			line-height: .8;
-		}
-		div.improvethispage{
-			font-size: 12px;
-			a{
-				background: white;
-				border-radius: 50px;
-				padding: .3em .8em;
-				text-decoration: none;
-				transition: color .3s, background .3s;
-				white-space: nowrap;
-				&:hover{
-					color: white;
-					background-color: black!important;
-				}
-			}
-			+ div.improvethispage{
-				margin-left: .7em;
-				a:hover{
-					color: white;
-					background-color: red!important;
-				}
-				@media only screen and (max-width: 1040px) {
-					display: none;
-				}
-			}
-			@media only screen and (max-width: 990px) {
-				display: none;
-			}
-		}
-	}
-}
-.versionsidebar{
-	position: fixed;
-	top: 70px;
-	height: calc(100vh - 50px);
-	right: 0;
-	width: 135px;
-	background-color: $duckDByellow;
-	padding: 20px;
-	padding-top: 13px;
-	transform: translateX(140px);
-	transition: transform .3s;
-	z-index: 400;
-	> ul{
-		padding: 0;
-		margin: 0;
-		list-style: none;
-		li{
-			line-height: 1.8;
-			font-size: 14px;
-			cursor: pointer;
-			&:hover{
-				text-decoration: underline;
-			}
-			a{
-				text-decoration: none!important;
-			}
-		}
-	}
-	&:hover{
-		transform: translateX(0px);
-	}
-	>span{
-		font-size: 14px;
-		line-height: 1;
-	}
-}
-
-.sidenavigation{
-	position: fixed;
-	top: 70px;
-	background-color: $duckDByellow;
-	width: 252px;
-	height: calc(100vh - 70px);
-	padding: 20px;
-	padding-left: 30px;
-	z-index: 999;
-	overflow: auto;
-	-webkit-box-sizing: border-box;
-		box-sizing: border-box;
-	a{
-		color: black;
-		text-decoration: none;
-	}
-	ul{
-		padding: 0;
-		margin: 0;
-		list-style: none;
-		overflow: hidden;
-		position: relative;
-		zoom: 1;
-	}
-	li{
-		line-height: 1.2em;
-		cursor: pointer;
-		padding: 5px 0 5px 0;
-		&.active{
-			text-decoration: underline;
-			&.hasSub {
-				text-decoration: none;
-			}
-		}
-	}
-	li.active{
-		text-decoration: underline;
-	}
-	li.hasSub span{
-		-webkit-transition: -webkit-transform .3s;
-		transition: -webkit-transform .3s;
-		-o-transition: transform .3s;
-		transition: transform .3s;
-		transition: transform .3s, -webkit-transform .3s;
-		display: inline-block;
-		font-size: 14px;
-		position: absolute;
-		-webkit-transform: translateX(-13px);
-			-ms-transform: translateX(-13px);
-				transform: translateX(-13px);
-	}
-	li.hasSub span.show::before{
-		content: ' \25BA';
-		font-family: "DuckDB-Symbol";
-	}
-	li.hasSub.opened span.show{
-		-webkit-transform: translateX(-13px) rotate(90deg);
-			-ms-transform: translateX(-13px) rotate(90deg);
-				transform: translateX(-13px) rotate(90deg);
-		-webkit-transition: -webkit-transform .3s;
-		transition: -webkit-transform .3s;
-		-o-transition: transform .3s;
-		transition: transform .3s;
-		transition: transform .3s, -webkit-transform .3s;
-		position: absolute;
-	}
-	ul.sidenav{
-		overflow: visible;
-		> ul{
-			padding-left: 20px;
-			overflow: hidden;
-			&.parentnav{
-				display: block;
-			}
-			ul{
-				padding-left: 20px;
-				overflow: hidden;
-				display: none;
-				li{
-					font-size: 14px;
-				}
-				&.parentnav{
-					display: block;
-				}
-				ul{
-					display: none; // Dritte Navigationsebene ausblenden
-					li{
-						font-size: 12px;
-						line-height: 1;
-					}
-				}
-			}
-			/*
-			> ul:nth-of-type(3){
-				display: block; // SQL ausklappen
-				&.parentnav{
-					display: block;
-				}
-			}
-			*/
-		}
-		ul:nth-of-type(2){
-			display: none; // Benchmarking einklappen
-			&.parentnav{
-				display: block;
-			}
-		}
-	}
-	&::-webkit-scrollbar {
-	  width: 5px;
-	}
-	&::-webkit-scrollbar-track {
-	  background: #ebde00;
-	}
-	&::-webkit-scrollbar-thumb {
-	  background: #d5ca0a;
-	}
-}
 
 
 /** FAQ **/

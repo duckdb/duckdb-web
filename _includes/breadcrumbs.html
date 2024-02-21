@@ -1,0 +1,11 @@
+<div id="breadcrumbs">
+{% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
+
+{% for crumb in crumbs offset: 1 %}
+  {% if forloop.last %}
+    <span class="slash">/</span> <span class="current">{{ page.title }}</span>
+  {% else %}
+    <span class="slash">/</span> <span>{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</span>
+  {% endif %}
+{% endfor %}
+</div>
