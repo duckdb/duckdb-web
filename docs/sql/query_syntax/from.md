@@ -16,6 +16,8 @@ SELECT * FROM table_name;
 FROM table_name SELECT *;
 -- select all columns using the FROM-first syntax and omitting the SELECT clause
 FROM table_name;
+-- select all columns from the table called "table_name" through an alias "tn"
+SELECT tn.* FROM table_name tn;
 -- select all columns from the table "table_name" in the schema "schema_name"
 SELECT * FROM schema_name.table_name;
 -- select the column "i" from the table function "range",
