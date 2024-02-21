@@ -36,11 +36,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_STAR_COUNT_TOKEN }}
         run: |
-          STAR_COUNT=$(curl -s https://api.github.com/repos/duckdb/duckdb | jq ".stargazers_count")
+          STAR_COUNT=$(gh api repos/duckdb/duckdb | jq ".stargazers_count")
           STAR_COUNT_FORMATTED=$(ruby -e 'printf("%.01fk", ARGV[0].to_i / 1000.0)' ${STAR_COUNT})
           echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
-          gh api repos/duckdb/duckdb | jq ".stargazers_count"
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
