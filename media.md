@@ -3,6 +3,8 @@ layout: docu
 title: Media
 ---
 
+* [State of the Duck at DuckCon #4](https://www.youtube.com/watch?v=cyZfpXxXojEl) (Technical talk, ca. 20 min)
+* [Implementing Hardware-Friendly Databases, with DuckDB co-creator, Hannes Mühleisen (Developer Voices)](https://www.youtube.com/watch?v=pZV9FvdKmLc) (Podcast, ca. 80 min)
 * [Deep Dive into DuckDB (episode of The Geek Narrator)](https://www.youtube.com/watch?v=f9QlkXW4H9A) (Podcast, ca. 60 min)
 * [Two Tier Architectures are Anachronistic (guest lecture at the Hasso-Plattner-Institute)](https://www.tele-task.de/lecture/video/10304/) (Technical talk, ca. 60 min)
 * [In-Process Analytical Data Management with DuckDB (PyData Amsterdam 2023)](https://www.youtube.com/watch?v=5ddoZR6PYNU) (Technical talk, ca. 25min) – [Slide deck](/pdf/duckdb-pydata-amsterdam-2023.pdf)
