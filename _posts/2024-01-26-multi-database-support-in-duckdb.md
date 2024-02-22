@@ -82,6 +82,8 @@ The `duckdb_databases` table contains a list of all attached databases and their
 
 ```sql
 SELECT database_name, path, type FROM duckdb_databases;
+```
+```text
 ┌───────────────┬───────────┬─────────┐
 │ database_name │   path    │  type   │
 │    varchar    │  varchar  │ varchar │
@@ -131,7 +133,7 @@ WHERE title = 'ACE GOLDFINGER';
 
 Running `EXPLAIN` on the query shows how the data from the different engines is combined into the final query result.
 
-```sql
+```text
 ┌───────────────────────────┐                                                          
 │         PROJECTION        │                                                          
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                                                          
