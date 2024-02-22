@@ -12,4 +12,3 @@ To use DuckDB, you must first create a connection to a database. The exact proce
 
 See the [API docs](../api/overview) for client-specific details.
 
-## Pages in This Section

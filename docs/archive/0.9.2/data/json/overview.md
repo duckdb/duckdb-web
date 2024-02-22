@@ -272,5 +272,3 @@ SELECT * FROM todos LIMIT 5;
 | 1      | 5  | laboriosam mollitia et enim quasi adipisci quia provident illum | false     |
 
 For more details, see the [page on the `COPY` statement](../../sql/statements/copy).
-
-## Pages in This Section

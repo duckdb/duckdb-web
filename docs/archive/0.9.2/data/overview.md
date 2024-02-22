@@ -74,5 +74,3 @@ appender.close();
 ```
 
 For a detailed description, see the [page on the C++ appender](../data/appender).
-
-## Pages in This Section

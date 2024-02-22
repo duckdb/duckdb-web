@@ -33,4 +33,3 @@ Users can download them from the [Latest Release of DuckDB](https://github.com/d
 | Linux              | Ubuntu 20.04 or later          |
 | Microsoft Windows  | Microsoft Windows 10 or later  |
 
-## Pages in This Section

@@ -129,5 +129,3 @@ INSTALL parquet;
 -- run before usage
 LOAD parquet;
 ```
-
-## Pages in This Section

@@ -144,4 +144,3 @@ INSTALL parquet;
 LOAD parquet;
 ```
 
-## Pages in This Section

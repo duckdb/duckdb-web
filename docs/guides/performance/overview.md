@@ -9,4 +9,3 @@ DuckDB aims to automatically achieve high performance by using well-chosen defau
 
 The guides include several microbenchmarks. You may find details about these on the [Benchmarks page](benchmarks).
 
-## Pages in This Section

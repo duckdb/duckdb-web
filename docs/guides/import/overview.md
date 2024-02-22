@@ -20,4 +20,3 @@ Performing row-by-row inserts (even with prepared statements) is detrimental to 
 
 > Bestpractice Unless your data is small (<100k rows), avoid using looping for inserts.
 
-## Pages in This Section

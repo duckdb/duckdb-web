@@ -41,5 +41,3 @@ Users can download them from the [Latest Release of DuckDB](https://github.com/d
     <td>Microsoft Windows 10 or later</td>
   </tr>
 </table>
-
-## Pages in This Section

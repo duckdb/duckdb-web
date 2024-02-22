@@ -122,4 +122,3 @@ SELECT * FROM glob('*');
 | test2.parquet |
 | todos.json    |
 
-## Pages in This Section
