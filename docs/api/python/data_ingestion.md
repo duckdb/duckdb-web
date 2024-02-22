@@ -111,8 +111,8 @@ If the type picked during the analyze step is incorrect, this will result in a "
 The sample size can be changed by setting the `pandas_analyze_sample` config option.
 
 ```python
-# example setting the sample size to 100000
-duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample = 100000")
+# example setting the sample size to 100k
+duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample = 100_000")
 ```
 
 ## Object Conversion
