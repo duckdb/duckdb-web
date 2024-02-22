@@ -1,11 +1,69 @@
-<div id="breadcrumbs">
-{% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
+{% if page.url contains '/docs/archive/' %}
+  {% assign urlVersionParts = page.url | split: "/docs/archive/" %}
+  {% assign urlVersionParts = urlVersionParts[1] | split: "/" %}
+  {% assign versionviewed = urlVersionParts[0] %}
+  {% assign startingUrl = "docs/archive/" | append: versionviewed %}
+  {% assign urlString = page.url | replace: ".html", "" | replace: startingUrl, "" %}
+  {% assign urlParts = urlString | split: "/"  %}
+  {% assign startingUrl = startingUrl | append: "/" %}
+{% else %}
+  {% assign versionviewed = site.currentduckdbversion | append: " (stable)" %}
+  {% assign startingUrl = "docs/" %}
+  {% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
+{% endif %}
+{% if versionviewed contains 'stable' %}
+  {%- assign menudocfile = "menu_docs_dev" -%}
+{% else %}
+  {%- assign menudocfile = "menu_docs_" | append: versionviewed | replace: ".", "" -%}
+{% endif %}
 
-{% for crumb in crumbs offset: 1 %}
-  {% if forloop.last %}
-  <span class="slash">/</span> <span class="current">{{ page.title }}</span>
-  {% else %}
-  <span class="slash">/</span> <span>{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</span>
-  {% endif %}
-{% endfor %}
+{{ menudocfile }}
+
+{% assign menudocfile = site.data[menudocfile].docsmenu %}
+
+<div id="breadcrumbs">
+  {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
+
+  {% for crumb in crumbs offset: 1 %}
+    {% if forloop.last %}
+      <span class="slash">/</span> <span class="current">{{ page.title }}</span>
+    {% else %}
+      <b>{{crumb}}: </b>
+      {% for doc_entry in menudocfile %}
+        
+        {% if doc_entry.mainfolderitems %}
+          {% for main_entry in doc_entry.mainfolderitems %}
+            {% if main_entry.slug | replace: '/', '' != '' and main_entry.slug | replace: '/', '' == crumb %}
+              <span class="slash">/</span> <span>{{ main_entry.slug }}</span>
+              {% break %}
+            {% endif %}
+            
+            {% if main_entry.subfolderitems %}
+              {% for sub_entry in main_entry.subfolderitems %}
+                {% if sub_entry.slug | replace: '/', '' != '' and sub_entry.slug | replace: '/', '' == crumb %}
+                  <span class="slash">/</span> <span>{{ sub_entry.slug }}</span>
+                  {% break %}
+                {% endif %}
+                {% if sub_entry.subsubfolderitems %}
+                 {% for subsub_entry in sub_entry.subsubfolderitems %}
+                  {% if subsub_entry.slug | replace: '/', '' != '' and subsub_entry.slug | replace: '/', '' == crumb %}
+                    <span class="slash">/</span> <span>{{ subsub_entry.slug }}</span>
+                    {% break %}
+                  {% endif %}
+                 {% endfor %}
+                
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            
+          {% endfor %}
+          
+        {% endif %}
+        
+      {% endfor %}
+
+    {% endif %}
+  {% endfor %}
+  <br/>
 </div>
+
