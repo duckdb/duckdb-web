@@ -37,6 +37,7 @@ To work around this, `print` the output of the `explain()` function:
 In [2]: print(duckdb.sql("SELECT 42 AS x").explain())
 ```
 ```text
+Out[2]:
 ┌───────────────────────────┐
 │         PROJECTION        │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
