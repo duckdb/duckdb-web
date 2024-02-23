@@ -185,20 +185,22 @@ The `regexp_matches` and `regexp_replace` functions also support the following o
 |`'i'`|case-insensitive matching|
 |`'l'`|match literals instead of regular expression tokens|
 |`'m'`, `'n'`, `'p'`|newline sensitive matching|
-|`'s'`| non-newline sensitive matching|
 |`'g'`| global replace, only available for `regexp_replace`|
 
+<!-- |`'s'`| non-newline sensitive matching| -->
+
 ```sql
-regexp_matches('abcd', 'ABC', 'c')-- false
+regexp_matches('abcd', 'ABC', 'c') -- false
 regexp_matches('abcd', 'ABC', 'i') -- true
 regexp_matches('ab^/$cd', '^/$', 'l') -- true
 regexp_matches('hello\nworld', 'hello.world', 'p') -- false
-regexp_matches('hello\nworld', 'hello.world', 's') -- false
 ```
+
+<!-- regexp_matches('hello\nworld', 'hello.world', 's') -- false -->
 
 ### Using `regexp_matches`
 
-The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve best performance, the `'s'` option (case-sensitive matching) should be passed if applicable. Note that by default the [`RE2` library](#the-re2-library) doesn't match '.' to newline.
+The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve best performance, the `'c'` option (case-sensitive matching) should be passed if applicable. Note that by default the [`RE2` library](#the-re2-library) doesn't match '.' to newline.
 
 <div class="narrow_table"></div>
 
@@ -238,9 +240,14 @@ regexp_extract('abc', '([a-z])(b)', 2) -- b
 If *`ids`* is a `LIST` of strings, then `regexp_extract` will return the corresponding capture groups as fields of a `STRUCT`:
 
 ```sql
-regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd']) -- {'y':'2023', 'm':'04', 'd':'15'}
-regexp_extract('2023-04-15 07:59:56', '^(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', ['y', 'm', 'd']) -- {'y':'2023', 'm':'04', 'd':'15'}
-regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 'fix']) -- error
+regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])
+-- {'y':'2023', 'm':'04', 'd':'15'}
+```sql
+regexp_extract('2023-04-15 07:59:56', '^(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', ['y', 'm', 'd'])
+-- {'y':'2023', 'm':'04', 'd':'15'}
+```sql
+regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 'fix'])
+-- error
 ```
 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.
