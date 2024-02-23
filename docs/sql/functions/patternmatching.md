@@ -6,6 +6,8 @@ railroad: expressions/like.js
 
 There are four separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), a `GLOB` operator, and POSIX-style regular expressions.
 
+DuckDB uses the RE2 library as its regular expression engine. For the regular expression syntax, see the [RE2 docs](https://github.com/google/re2/wiki/Syntax).
+
 ## `LIKE`
 
 <div id="rrdiagram1"></div>
@@ -243,7 +245,3 @@ regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 
 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.
 If the number of column names is greater, then an error is generated.
-
-## The RE2 Library
-
-DuckDB uses RE2 as its regular expression engine. For more information see the [RE2 docs](https://github.com/google/re2/wiki/Syntax)
