@@ -23,20 +23,20 @@ If pattern does not contain percent signs or underscores, then the pattern only 
 Some examples:
 
 ```sql
-'abc' LIKE 'abc' -- true
-'abc' LIKE 'a%'  -- true
-'abc' LIKE '_b_' -- true
-'abc' LIKE 'c'   -- false
-'abc' LIKE 'c%'  -- false
-'abc' LIKE '%c'  -- true
-'abc' NOT LIKE '%c'  -- false
+SELECT 'abc' LIKE 'abc'; -- true
+SELECT 'abc' LIKE 'a%' ; -- true
+SELECT 'abc' LIKE '_b_'; -- true
+SELECT 'abc' LIKE 'c';   -- false
+SELECT 'abc' LIKE 'c%' ; -- false
+SELECT 'abc' LIKE '%c';  -- true
+SELECT 'abc' NOT LIKE '%c'; -- false
 ```
 
 The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale. 
 
 ```sql
-'abc' ILIKE '%C' -- true
-'abc' NOT ILIKE '%C' -- false
+SELECT 'abc' ILIKE '%C'; -- true
+SELECT 'abc' NOT ILIKE '%C'; -- false
 ```
 
 To search within a string for a character that is a wildcard (`%` or `_`), the pattern must use an `ESCAPE` clause and an escape character to indicate the wildcard should be treated as a literal character instead of a wildcard. See an example below.
@@ -45,11 +45,11 @@ Additionally, the function `like_escape` has the same functionality as a `LIKE` 
 
 ```sql
 -- Search for strings with 'a' then a literal percent sign then 'c'
-'a%c' LIKE 'a$%c' ESCAPE '$'        -- true
-'azc' LIKE 'a$%c' ESCAPE '$'        -- false
+SELECT 'a%c' LIKE 'a$%c' ESCAPE '$'; -- true
+SELECT 'azc' LIKE 'a$%c' ESCAPE '$'; -- false
 
 -- Case insensitive ILIKE with ESCAPE
-'A%c' ILIKE 'a$%c' ESCAPE '$';      --true
+SELECT 'A%c' ILIKE 'a$%c' ESCAPE '$'; -- true
 ```
 
 There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance PostgreSQL compatibility.
@@ -75,11 +75,11 @@ A regular expression is a character sequence that is an abbreviated definition o
 Some examples:
 
 ```sql
-'abc' SIMILAR TO 'abc'       -- true
-'abc' SIMILAR TO 'a'         -- false
-'abc' SIMILAR TO '.*(b|d).*' -- true
-'abc' SIMILAR TO '(b|c).*'   -- false
-'abc' NOT SIMILAR TO 'abc'   -- false
+SELECT 'abc' SIMILAR TO 'abc';       -- true
+SELECT 'abc' SIMILAR TO 'a';         -- false
+SELECT 'abc' SIMILAR TO '.*(b|d).*'; -- true
+SELECT 'abc' SIMILAR TO '(b|c).*';   -- false
+SELECT 'abc' NOT SIMILAR TO 'abc';   -- false
 ```
 
 There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
@@ -100,22 +100,22 @@ The `GLOB` operator returns `true` or `false` if the string matches the `GLOB` p
 Some examples:
 
 ```sql
-'best.txt' GLOB '*.txt'            -- true
-'best.txt' GLOB '????.txt'         -- true
-'best.txt' GLOB '?.txt'            -- false
-'best.txt' GLOB '[abc]est.txt'     -- true
-'best.txt' GLOB '[a-z]est.txt'     -- true
+SELECT 'best.txt' GLOB '*.txt';            -- true
+SELECT 'best.txt' GLOB '????.txt';         -- true
+SELECT 'best.txt' GLOB '?.txt';            -- false
+SELECT 'best.txt' GLOB '[abc]est.txt';     -- true
+SELECT 'best.txt' GLOB '[a-z]est.txt';     -- true
 
 -- The bracket syntax is case sensitive
-'Best.txt' GLOB '[a-z]est.txt'     -- false
-'Best.txt' GLOB '[a-zA-Z]est.txt'  -- true
+SELECT 'Best.txt' GLOB '[a-z]est.txt';     -- false
+SELECT 'Best.txt' GLOB '[a-zA-Z]est.txt';  -- true
 
 -- The ! applies to all characters within the brackets
-'Best.txt' GLOB '[!a-zA-Z]est.txt' -- false
+SELECT 'Best.txt' GLOB '[!a-zA-Z]est.txt'; -- false
 
 -- To negate a GLOB operator, negate the entire expression 
 -- (NOT GLOB is not valid syntax)
-NOT 'best.txt' GLOB '*.txt'        -- false
+SELECT NOT 'best.txt' GLOB '*.txt';        -- false
 ```
 
 Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
@@ -148,8 +148,6 @@ SELECT * FROM glob('*');
 | test2.parquet |
 | todos.json    |
 
-
-
 ## Regular Expressions
 
 | Function | Description | Example | Result |
@@ -165,14 +163,14 @@ SELECT * FROM glob('*');
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `true` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
 
 ```sql
-regexp_matches('abc', 'abc')       -- true
-regexp_matches('abc', '^abc$')     -- true
-regexp_matches('abc', 'a')         -- true
-regexp_matches('abc', '^a$')       -- false
-regexp_matches('abc', '.*(b|d).*') -- true
-regexp_matches('abc', '(b|c).*')   -- true
-regexp_matches('abc', '^(b|c).*')  -- false
-regexp_matches('abc', '(?i)A')     -- true
+SELECT regexp_matches('abc', 'abc');       -- true
+SELECT regexp_matches('abc', '^abc$');     -- true
+SELECT regexp_matches('abc', 'a');         -- true
+SELECT regexp_matches('abc', '^a$');       -- false
+SELECT regexp_matches('abc', '.*(b|d).*'); -- true
+SELECT regexp_matches('abc', '(b|c).*');   -- true
+SELECT regexp_matches('abc', '^(b|c).*');  -- false
+SELECT regexp_matches('abc', '(?i)A');     -- true
 ```
 
 ### Options for Regular Expression Functions
@@ -190,13 +188,12 @@ The `regexp_matches` and `regexp_replace` functions also support the following o
 |`'g'`| global replace, only available for `regexp_replace`|
 |`'s'`| non-newline sensitive matching|
 
-
 ```sql
-regexp_matches('abcd', 'ABC', 'c') -- false
-regexp_matches('abcd', 'ABC', 'i') -- true
-regexp_matches('ab^/$cd', '^/$', 'l') -- true
-regexp_matches('hello' || chr(10) || 'world', 'hello.world', 'p') -- false
-regexp_matches('hello' || chr(10) || 'world', 'hello.world', 's') -- true
+SELECT regexp_matches('abcd', 'ABC', 'c'); -- false
+SELECT regexp_matches('abcd', 'ABC', 'i'); -- true
+SELECT regexp_matches('ab^/$cd', '^/$', 'l'); -- true
+SELECT regexp_matches('hello' || chr(10) || 'world', 'hello.world', 'p'); -- false
+SELECT regexp_matches('hello' || chr(10) || 'world', 'hello.world', 's'); -- true
 ```
 
 ### Using `regexp_matches`
@@ -219,11 +216,11 @@ The `regexp_replace` function can be used to replace the part of a string that m
 Some examples for using `regexp_replace`:
 
 ```sql
-regexp_replace('abc', '(b|c)', 'X')        -- aXc
-regexp_replace('abc', '(b|c)', 'X', 'g')   -- aXX
-regexp_replace('abc', '(b|c)', '\1\1\1\1') -- abbbbc
-regexp_replace('abc', '(.*)c', '\1e')      -- abe
-regexp_replace('abc', '(a)(b)', '\2\1')    -- bac
+SELECT regexp_replace('abc', '(b|c)', 'X');        -- aXc
+SELECT regexp_replace('abc', '(b|c)', 'X', 'g');   -- aXX
+SELECT regexp_replace('abc', '(b|c)', '\1\1\1\1'); -- abbbbc
+SELECT regexp_replace('abc', '(.*)c', '\1e');      -- abe
+SELECT regexp_replace('abc', '(a)(b)', '\2\1');    -- bac
 ```
 
 ### Using `regexp_extract`
@@ -231,23 +228,25 @@ regexp_replace('abc', '(a)(b)', '\2\1')    -- bac
 The `regexp_extract` function is used to extract a part of a string that matches the regexp pattern. A specific capturing group within the pattern can be extracted using the *`idx`* parameter. If *`idx`* is not specified, it defaults to 0, extracting the first match with the whole pattern.
 
 ```sql
-regexp_extract('abc', '.b.')     -- abc
-regexp_extract('abc', '.b.', 0)  -- abc
-regexp_extract('abc', '.b.', 1)  -- (empty)
-regexp_extract('abc', '([a-z])(b)', 1) -- a
-regexp_extract('abc', '([a-z])(b)', 2) -- b
+SELECT regexp_extract('abc', '.b.');     -- abc
+SELECT regexp_extract('abc', '.b.', 0);  -- abc
+SELECT regexp_extract('abc', '.b.', 1);  -- (empty)
+SELECT regexp_extract('abc', '([a-z])(b)', 1); -- a
+SELECT regexp_extract('abc', '([a-z])(b)', 2); -- b
 ```
 
 If *`ids`* is a `LIST` of strings, then `regexp_extract` will return the corresponding capture groups as fields of a `STRUCT`:
 
 ```sql
-regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])
+SELECT regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd']);
 -- {'y':'2023', 'm':'04', 'd':'15'}
+```
 ```sql
-regexp_extract('2023-04-15 07:59:56', '^(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', ['y', 'm', 'd'])
+SELECT regexp_extract('2023-04-15 07:59:56', '^(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', ['y', 'm', 'd']);
 -- {'y':'2023', 'm':'04', 'd':'15'}
+```
 ```sql
-regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 'fix'])
+SELECT regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 'fix']);
 -- error
 ```
 
