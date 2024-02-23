@@ -193,7 +193,7 @@ regexp_matches('abcd', 'ABC', 'c')-- false
 regexp_matches('abcd', 'ABC', 'i') -- true
 regexp_matches('ab^/$cd', '^/$', 'l') -- true
 regexp_matches('hello\nworld', 'hello.world', 'p') -- false
-regexp_matches('hello\nworld', 'hello.world', 's') -- true
+regexp_matches('hello\nworld', 'hello.world', 's') -- false
 ```
 
 ### Using `regexp_matches`
@@ -204,10 +204,10 @@ The `regexp_matches` operator will be optimized to the `LIKE` operator when poss
 
 | Original | Optimized equivalent |
 |:---|:---|
-|`regexp_matches('hello world', '^hello', 's')`|`prefix('hello world', 'hello')`|
-|`regexp_matches('hello world', 'world$', 's')`|`suffix('hello world', 'world')`|
-|`regexp_matches('hello world', 'hello.world', 's')`|`LIKE 'hello_world'`|
-|`regexp_matches('hello world', 'he.*rld', 's')`|`LIKE '%he%rld'`|
+|`regexp_matches('hello world', '^hello', 'c')`|`prefix('hello world', 'hello')`|
+|`regexp_matches('hello world', 'world$', 'c')`|`suffix('hello world', 'world')`|
+|`regexp_matches('hello world', 'hello.world', 'c')`|`LIKE 'hello_world'`|
+|`regexp_matches('hello world', 'he.*rld', 'c')`|`LIKE '%he%rld'`|
 
 ### Using `regexp_replace`
 
