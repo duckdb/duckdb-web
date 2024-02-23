@@ -116,11 +116,27 @@ SELECT name FROM icu_calendar_names() ORDER BY 1;
 ## Settings
 
 The current value of the `TimeZone` and `Calendar` settings are determined by ICU when it starts up.
-They can be looked from in the `duckdb_settings()` table function:
+They can be queried from in the `duckdb_settings()` table function:
 
 ```sql
 SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
--- America/Los_Angeles
+```
+```text
+┌──────────┬──────────────────┬───────────────────────┬────────────┐
+│   name   │      value       │      description      │ input_type │
+│ varchar  │     varchar      │        varchar        │  varchar   │
+├──────────┼──────────────────┼───────────────────────┼────────────┤
+│ TimeZone │ Europe/Amsterdam │ The current time zone │ VARCHAR    │
+└──────────┴──────────────────┴───────────────────────┴────────────┘
+```
+```sql
 SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
--- gregorian
+```
+```
+┌──────────┬───────────┬──────────────────────┬────────────┐
+│   name   │   value   │     description      │ input_type │
+│ varchar  │  varchar  │       varchar        │  varchar   │
+├──────────┼───────────┼──────────────────────┼────────────┤
+│ Calendar │ gregorian │ The current calendar │ VARCHAR    │
+└──────────┴───────────┴──────────────────────┴────────────┘
 ```
