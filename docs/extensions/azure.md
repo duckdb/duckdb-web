@@ -113,6 +113,36 @@ The possible values are the following:
 [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential);
 `none`. The latest will result in an exception (invalid input).
 
+#### `SERVICE_PRINCIPAL` Provider
+
+The `SERVICE_PRINCIPAL` provider allows connecting using a [Azure Service Principal (SPN)](https://learn.microsoft.com/en-us/entra/architecture/service-accounts-principal).
+
+either with a secret:
+
+```sql
+CREATE SECRET azure_spn (
+    TYPE AZURE,
+    PROVIDER SERVICE_PRINCIPAL,
+    TENANT_ID '<tenant id>',
+    CLIENT_ID '<client id>',
+    CLIENT_SECRET '<client secret>',
+    ACCOUNT_NAME '<storage account name>'
+);
+```
+
+or with a certificate:
+
+```sql
+CREATE SECRET azure_spn_cert (
+    TYPE AZURE,
+    PROVIDER SERVICE_PRINCIPAL,
+    TENANT_ID '<tenant id>',
+    CLIENT_ID '<client id>',
+    CLIENT_CERTIFICATE_PATH '<client cert path>',
+    ACCOUNT_NAME '<storage account name>'
+);
+```
+
 #### Configuring a Proxy
 
 To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME`, and `PROXY_PASSWORD` in the secret definition. For example:
