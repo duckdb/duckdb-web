@@ -22,11 +22,15 @@
 <div id="breadcrumbs">
   {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
   
-  {% if crumbs[2] == "guides" %}
-    {% assign offset = 3 %}
+  {% assign offset = 2 %}
+  {% if crumbs[offset] == "archive" %}
+    {% assign offset = offset | plus:2 %}
+  {% endif %}
+
+  {% if crumbs[offset] == "guides" %}
+    {% assign offset = offset | plus:1 %}
     <span class="slash">/</span> <span>Guides</span>
   {% else %}
-    {% assign offset = 2 %}
     <span class="slash">/</span> <span>Documentation</span>
   {% endif %}
 
@@ -61,7 +65,13 @@
       {% endfor %}
     {% endif %}
   {% endfor %}
-  <span class="slash">/</span> <span class="current">{{ page.title }}</span>
+
+  {% if crumbs.last == "overview.html" %}
+    <span class="slash">/</span> <span class="current">Overview</span>
+  {% else %}
+    <span class="slash">/</span> <span class="current">{{ page.title }}</span>
+  {% endif %}
+
   <br/>
 </div>
 
