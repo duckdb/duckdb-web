@@ -6,6 +6,8 @@ railroad: expressions/like.js
 
 There are four separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), a `GLOB` operator, and POSIX-style regular expressions.
 
+## The RE2 Library
+
 DuckDB uses the RE2 library as its regular expression engine. For the regular expression syntax, see the [RE2 docs](https://github.com/google/re2/wiki/Syntax).
 
 ## `LIKE`
@@ -186,21 +188,20 @@ The `regexp_matches` and `regexp_replace` functions also support the following o
 |`'l'`|match literals instead of regular expression tokens|
 |`'m'`, `'n'`, `'p'`|newline sensitive matching|
 |`'g'`| global replace, only available for `regexp_replace`|
+|`'s'`| non-newline sensitive matching|
 
-<!-- |`'s'`| non-newline sensitive matching| -->
 
 ```sql
 regexp_matches('abcd', 'ABC', 'c') -- false
 regexp_matches('abcd', 'ABC', 'i') -- true
 regexp_matches('ab^/$cd', '^/$', 'l') -- true
-regexp_matches('hello\nworld', 'hello.world', 'p') -- false
+regexp_matches('hello' || chr(10) || 'world', 'hello.world', 'p') -- false
+regexp_matches('hello' || chr(10) || 'world', 'hello.world', 's') -- true
 ```
-
-<!-- regexp_matches('hello\nworld', 'hello.world', 's') -- false -->
 
 ### Using `regexp_matches`
 
-The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve best performance, the `'c'` option (case-sensitive matching) should be passed if applicable. Note that by default the [`RE2` library](#the-re2-library) doesn't match '.' to newline.
+The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve best performance, the `'c'` option (case-sensitive matching) should be passed if applicable. Note that by default the [`RE2` library](#the-re2-library) doesn't match the `.` character to newline.
 
 <div class="narrow_table"></div>
 
