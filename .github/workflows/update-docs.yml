@@ -4,7 +4,7 @@ on:
   workflow_dispatch: {}  # allow running manually from the github ui
 
 env:
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
 
 name: Update docs
 jobs:
