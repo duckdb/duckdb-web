@@ -394,7 +394,7 @@ This call returns the following information for the given table:
 
 <div class="narrow_table"></div>
 
-| name           | type      | description                                           |
+| Name           | Type      | Description                                           |
 |----------------|-----------|-------------------------------------------------------|
 | `row_group_id` | `BIGINT`  ||
 | `column_name`  | `VARCHAR` ||
@@ -407,7 +407,7 @@ This call returns the following information for the given table:
 | `compression`  | `VARCHAR` | Compression type used for this column - see [blog post](/2022/10/28/lightweight-compression) |
 | `stats`        | `VARCHAR` ||
 | `has_updates`  | `BOOLEAN` ||
-| `persistent`   | `BOOLEAN` | false if temporary table                              |
+| `persistent`   | `BOOLEAN` | `false` if temporary table                            |
 | `block_id`     | `BIGINT`  | empty unless persistent                               |
 | `block_offset` | `BIGINT`  | empty unless persistent                               |
 

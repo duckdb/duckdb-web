@@ -205,6 +205,8 @@ INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
 
 ```sql
 SELECT * FROM sqlite_db.tbl;
+```
+```text
 ┌───────┬─────────┐
 │  id   │  name   │
 │ int64 │ varchar │

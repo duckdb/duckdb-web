@@ -66,7 +66,7 @@ The CSV Rejects Table returns the following information:
 
 <div class="narrow_table"></div>
 
-| Column Name | Description | Type |
+| Column name | Description | Type |
 |:--|:-----|:-|
 | `file` | File path.| `VARCHAR` |
 | `line` | Line number, from the CSV File, where the error occured.| `INTEGER` |

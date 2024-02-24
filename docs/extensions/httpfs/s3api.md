@@ -238,7 +238,7 @@ Some additional configuration options exist for the S3 upload, though the defaul
 
 <div class="narrow_table"></div>
 
-| setting | description |  
+| Name | Description |  
 |:---|:---|
 | `s3_uploader_max_parts_per_file` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
 | `s3_uploader_max_filesize` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
