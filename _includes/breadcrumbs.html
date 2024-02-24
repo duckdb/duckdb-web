@@ -29,9 +29,13 @@
 
   {% if crumbs[offset] == "guides" %}
     {% assign offset = offset | plus:1 %}
-    <span class="slash">/</span> <span>Guides</span>
+    {% assign part = "Guides" %}
   {% else %}
-    <span class="slash">/</span> <span>Documentation</span>
+    {% assign part = "Documentation" %}
+  {% endif %}
+
+  {% if crumbs.last != "docs" and crumbs.last != "guides" %}
+    <span class="slash">/</span> <span>{{ part }}</span>
   {% endif %}
 
   {% for doc_entry in menudocfile %}
