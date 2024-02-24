@@ -291,4 +291,4 @@ To avoid having to continuously fetch schema data from Postgres, DuckDB keeps sc
 CALL pg_clear_cache();
 ```
 
-> The old `postgres_attach` function is deprecated. It is recommended to switch over to the new `ATTACH` syntax.
+> Deprecated The old `postgres_attach` function is deprecated. It is recommended to switch over to the new `ATTACH` syntax.
