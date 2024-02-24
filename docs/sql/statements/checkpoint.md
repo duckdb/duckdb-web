@@ -38,4 +38,4 @@ When performing a checkpoint (automatic or otherwise), the space occupied by del
 
 When running in in-memory mode, checkpointing has no effect, hence it does not reclaim space after deletes in in-memory databases.
 
-> The [`VACUUM` statement](vacuum) does _not_ trigger vacuuming deletes and hence does not reclaim space.
+> Warning The [`VACUUM` statement](vacuum) does _not_ trigger vacuuming deletes and hence does not reclaim space.

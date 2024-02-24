@@ -3,7 +3,7 @@ layout: docu
 title: Editing
 ---
 
-> linenoise is currently only available for macOS and Linux.
+> The linenoise-based CLI editor is currently only available for macOS and Linux.
 
 DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com/antirez/linenoise), which has short-cuts that are based on [Emacs mode of readline](https://readline.kablamo.org/emacs.html). Below is a list of available commands.
 

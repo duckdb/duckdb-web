@@ -160,5 +160,5 @@ con.install_extension("spatial")
 con.load_extension("spatial")
 ```
 
-> To load unsigned extensions, add the `config={"allow_unsigned_extensions": "true"}` argument to the `duckdb.connect()` method.
+> To load unsigned extensions, add the `config = {"allow_unsigned_extensions": "true"}` argument to the `duckdb.connect()` method.
 

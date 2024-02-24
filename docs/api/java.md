@@ -108,7 +108,7 @@ try (PreparedStatement p_stmt = conn.prepareStatement("INSERT INTO items VALUES 
 }
 ```
 
-> Do *not* use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
+> Warning Do *not* use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
 
 ### Arrow Methods
 

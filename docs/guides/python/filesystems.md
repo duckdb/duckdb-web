@@ -28,4 +28,4 @@ duckdb.sql("SELECT * FROM read_csv('gcs:///bucket/file.csv')")
 ```
 
 > These filesystems are not implemented in C++, hence, their performance may not be comparable to the ones provided by the `httpfs` extension.
-> It is also worth noting that as they are third party libraries, they may contain bugs that are beyond our control.
+> It is also worth noting that as they are third-party libraries, they may contain bugs that are beyond our control.

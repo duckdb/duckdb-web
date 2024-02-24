@@ -6,7 +6,7 @@ railroad: statements/constraints.js
 
 In SQL, constraints can be specified for tables. Constraints enforce certain properties over data that is inserted into a table. Constraints can be specified along with the schema of the table as part of the [`CREATE TABLE` statement](statements/create_table). In certain cases, constraints can also be added to a table using the [`ALTER TABLE` statement](statements/alter_table), but this is not currently supported for all constraints.
 
-> Constraints have a strong impact on performance: they slow down loading and updates but speed up certain queries. Please consult the [Performance Guide](../guides/performance/schema#constraints) for details.
+> Warning Constraints have a strong impact on performance: they slow down loading and updates but speed up certain queries. Please consult the [Performance Guide](../guides/performance/schema#constraints) for details.
 
 ## Syntax
 
@@ -50,7 +50,7 @@ Primary key constraints and unique constraints are identical except for two poin
 * A table can only have one primary key constraint defined, but many unique constraints
 * A primary key constraint also enforces the keys to not be `NULL`. 
 
-> Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations)
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations)
 
 ## Foreign Key
 
@@ -67,4 +67,4 @@ INSERT INTO exams VALUES (2, 10);
 
 In order to enforce this property efficiently, an [ART index is automatically created](indexes) for every foreign key constraint that is defined in the table.
 
-> Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations)
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations)

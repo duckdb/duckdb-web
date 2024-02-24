@@ -171,7 +171,7 @@ DROP TYPE ${enum_name};
 
 Currently, it is possible to drop Enums that are used in tables without affecting the tables.
 
-> This behavior of the Enum Removal feature is subject to change. In future releases, it is expected that any dependent columns must be removed before dropping the Enum, or the Enum must be dropped with the additional `CASCADE` parameter.
+> Warning This behavior of the Enum Removal feature is subject to change. In future releases, it is expected that any dependent columns must be removed before dropping the Enum, or the Enum must be dropped with the additional `CASCADE` parameter.
 
 ## Comparison of Enums
 

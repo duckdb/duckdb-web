@@ -96,7 +96,7 @@ print(con.fetchall())
 # [('duck', 'duck', 'goose')]
 ```
 
-> Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page](data_ingestion) for better options.
+> Warning Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page](data_ingestion) for better options.
 
 ## Named Parameters
 

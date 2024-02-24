@@ -93,7 +93,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 
 ## CSV Functions
 
-> DuckDB 0.9.3-dev and the upcoming v0.10.0 versions introduce breaking changes to the `read_csv` function.
+> Deprecated DuckDB v0.10.0 introduced breaking changes to the `read_csv` function.
 > Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the [old `read_csv_auto` function](../../../docs/archive/0.9.2/data/csv/overview#read_csv_auto-function).
 > If you would like to use `read_csv` with its old behavior, turn off the auto-detection manually by using `read_csv(..., auto_detect = false)`.
 
