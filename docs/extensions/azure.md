@@ -47,7 +47,7 @@ Use the following [configuration options](../sql/configuration) how the extensio
 > Setting `azure_transport_option_type` explicitly to `curl` with have the following effect:
 > * On Linux, this may solve certificates issue (`Error: Invalid Error: Fail to get a new connection for: https://<storage account name>.blob.core.windows.net/. Problem with the SSL CA cert (path? access rights?)`) because when specifying the extension will try to find the bundle certificate in various paths (that is not done by *curl* by default and might be wrong due to static linking see issue).
 > * On Windows, this replaces the default adapter (*WinHTTP*) allowing you to use all *curl* capabilities (for example using a socks proxies).
-> * On all OS, it will honor the following environment variables:
+> * On all operating systems, it will honor the following environment variables:
 >   * `CURL_CA_INFO`: Path to a PEM encoded file containing the certificate authorities sent to libcurl. Note that this option is known to only work on Linux and might throw if set on other platforms.
 >   * `CURL_CA_PATH`: Path to a directory which holds PEM encoded file, containing the certificate authorities sent to libcurl.
 
@@ -68,7 +68,7 @@ The Azure extension has two ways to configure the authentication. The preferred 
 
 Multiple [Secret Providers](../sql/statements/create_secret#secret-providers) are available for the Azure extension:
 
-Note if you need to define different secrets for different storage accounts you can use [the SCOPE configuration](../sql/statements/create_secret#creating-multiple-secrets-for-the-same-service-type).
+> If you need to define different secrets for different storage accounts you can use [the `SCOPE` configuration](../sql/statements/create_secret#creating-multiple-secrets-for-the-same-service-type).
 
 #### `CONFIG` Provider
 
@@ -129,7 +129,7 @@ If not explicit `CHAIN` is provide the default one will be [`default`](https://g
 
 The `SERVICE_PRINCIPAL` provider allows connecting using a [Azure Service Principal (SPN)](https://learn.microsoft.com/en-us/entra/architecture/service-accounts-principal).
 
-either with a secret:
+Either with a secret:
 
 ```sql
 CREATE SECRET azure_spn (
@@ -142,7 +142,7 @@ CREATE SECRET azure_spn (
 );
 ```
 
-or with a certificate:
+Or with a certificate:
 
 ```sql
 CREATE SECRET azure_spn_cert (
