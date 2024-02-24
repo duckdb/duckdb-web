@@ -68,6 +68,8 @@ The Azure extension has two ways to configure the authentication. The preferred 
 
 Multiple [Secret Providers](../sql/statements/create_secret#secret-providers) are available for the Azure extension:
 
+Note if you need to define different secrets for different storage accounts you can use [the SCOPE configuration](../sql/statements/create_secret#creating-multiple-secrets-for-the-same-service-type).
+
 #### `CONFIG` Provider
 
 The default provider, `CONFIG` (i.e., user-configured), allows access to the storage account using a connection string or anonymously. For example:
