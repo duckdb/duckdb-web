@@ -118,8 +118,6 @@ The below options are applicable to all formats written with `COPY`.
 
 ## `COPY FROM DATABASE ... TO`
 
-> This statement is currently only available in nightly builds (DuckDB 0.9.3-dev) and will be released in the upcoming v0.10.0 version.
-
 The `COPY FROM DATABASE ... TO` statement copies the entire content from one attached database to another attached database. This includes the schema, including constraints, indexes, sequences, macros, and the data itself.
 
 ```sql
