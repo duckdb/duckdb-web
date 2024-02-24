@@ -4,7 +4,7 @@ $(document).ready(function(){
 		var hash = window.location.hash;
 		if ($(hash).length) {
 			$('html, body').animate({
-				scrollTop: $(hash).offset().top-130
+				scrollTop: $(hash).offset().top-90
 			}, 300, 'swing');
 			if( $('.frequentlyaskedquestions').length ){
 				console.log($('h3'+hash).parent('.qa-wrap'))
@@ -71,29 +71,29 @@ $(document).ready(function(){
 	
 	
 	// Installation Selection
-	var userSelection = {version: "", environment: "", pack: "", platform: ""};
+	var userSelection = { version: "", environment: "", pack: "", platform: "", architecture: "", download: "" };
 	var classList = "";
 	
-	var evaluation = function(){
-		
+	var evaluation = function () {
+	
 		var versionSelection = $('.yourselection ul.version li.selected').attr('data-id');
-		if(versionSelection){ userSelection.version = versionSelection; }
-		
-		if( $("body.installation .environment.select .onlymobile").is(":visible") ){
+		if (versionSelection) { userSelection.version = versionSelection; }
+	
+		if ($("body.installation .environment.select .onlymobile").is(":visible")) {
 			var environmentSelection = $('body.installation .environmentselect').val();
 		} else {
 			var environmentSelection = $('.yourselection ul.environment li.selected').attr('data-id');
 		}
-		if(environmentSelection){ userSelection.environment = environmentSelection; }
-		
+		if (environmentSelection) { userSelection.environment = environmentSelection; }
+	
 		var packSelection = $('.yourselection ul.pack li.selected').attr('data-id');
-		if(packSelection){ userSelection.pack = packSelection; }
-		
+		if (packSelection) { userSelection.pack = packSelection; }
+	
 		var platfromSelection = $('.yourselection ul.platform li.selected').attr('data-id');
-		if(platfromSelection){ userSelection.platform = platfromSelection; }
-		
-
-		if ( userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc"){
+		if (platfromSelection) { userSelection.platform = platfromSelection; }
+	
+	
+		if (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") {
 			$('.installer.select, .platform.select').removeClass('inactive');
 		} else {
 			$('.installer.select, .platform.select').addClass('inactive');
@@ -101,26 +101,41 @@ $(document).ready(function(){
 			userSelection.pack = "";
 			userSelection.platform = "";
 		}
-
-		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && userSelection.pack == ".source" ) {
+	
+		$('.architecture.select, .download_method.select').removeClass('inactive');
+		if ( environmentSelection === '.python' ) {
+			$('.architecture.select, .download_method.select').addClass('inactive');
+			$('.architecture.select ul li.selected, .download_method.select ul li.selected').removeClass('selected');
+			userSelection.architecture = '';
+			userSelection.download = '';
+		} else {
+			var architectureSelection = $('.yourselection ul.architecture li.selected').attr('data-id');
+			if (architectureSelection) { userSelection.architecture = architectureSelection; }
+			var downloadMethodSelection = $('.yourselection ul.download_method li.selected').attr('data-id');
+			if (downloadMethodSelection) { userSelection.download = downloadMethodSelection; }
+		}
+	
+		if ((userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && userSelection.pack == ".source") {
 			$('.platform.select').addClass('inactive');
-			$('.platform.select ul li.selected').removeClass('selected');	
+			$('.platform.select ul li.selected').removeClass('selected');
 			userSelection.platform = "";
 		}
-		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0){
-			$('.installer.select ul li[data-id=".binary"').addClass('selected');
-			$('.platform.select ul li[data-id="'+OSdatid+'"').addClass('selected');
-			userSelection.pack = ".binary";
-			userSelection.platform = OSdatid;
-		}
 		
+		if ((userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0) {
+			$('.installer.select ul li[data-id=".binary"').addClass('selected');
+			$('.platform.select ul li[data-id=".' + OSdatid + '"').addClass('selected');
+			userSelection.pack = ".binary";
+			userSelection.platform = "." + OSdatid;
+		}
+		console.log(userSelection)
 		var classList = userSelection.version + userSelection.environment + userSelection.pack + userSelection.platform;
-		var result = $('.possibleresults div'+classList).html();
+		console.log(classList)
+		var result = $('.possibleresults div' + classList).html();
 		$('.installation.output .result').html(result);
-
-		var exampleResult = $('.possibleresults .example'+userSelection.environment).html();
+	
+		var exampleResult = $('.possibleresults .example' + userSelection.environment).html();
 		$('.example.output .result').html(exampleResult);
-
+	
 	}
 	
 	$('body.installation .yourselection .select li').click(function(){
@@ -248,7 +263,7 @@ $(document).ready(function(){
         if (target.length) {
           // event.preventDefault();
           $('html, body').animate({
-            scrollTop: target.offset().top-65
+            scrollTop: target.offset().top-90
           }, 1000 );
         }
       }

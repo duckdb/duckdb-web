@@ -513,7 +513,7 @@ main{
 		margin: 0 auto;
 	}
 	#main_content_wrap{
-		margin-top: 70px;
+		margin-top: 100px;
 	}
 }
 
@@ -732,7 +732,7 @@ body.documentation main .wrap.frequentlyaskedquestions{
 		margin-bottom: 5px;
 		border-radius: 10px;
 		&.open h3::after{
-			transform: rotate(90deg);
+			transform: rotate(180deg);
 		}
 		&:hover{
 			background-color: #f5f5f5;
