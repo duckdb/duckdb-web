@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Complete API
+title: Complete API
 ---
 
 ## API Reference
