@@ -71,7 +71,7 @@ print(res)
 # 1 laptop
 ```
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. See below for better options.
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See below for better options.
 
 ## Efficient Transfer
 

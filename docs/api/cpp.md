@@ -51,7 +51,7 @@ std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT count(*) FROM a
 std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ```
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
 
 ### UDF API
 

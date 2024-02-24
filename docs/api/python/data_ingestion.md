@@ -208,7 +208,7 @@ The example above becomes a `MAP(INTEGER, VARCHAR)`:
 {1=one, 2=two, 3=three}
 ```
 
-> The name of the fields matters and the two lists need to have the same size.
+> The names of the fields matter and the two lists need to have the same size.
 
 Otherwise we'll try to convert it to a `STRUCT`.
 

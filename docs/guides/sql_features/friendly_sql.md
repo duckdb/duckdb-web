@@ -4,6 +4,7 @@ title: Friendly SQL
 ---
 
 DuckDB offers several advanced SQL features as well as extensions to the SQL syntax. We call these colloquially as "friendly SQL".
+
 > Several of these features are also supported in other systems while some are (currently) exclusive to DuckDB.
 
 ## Clauses

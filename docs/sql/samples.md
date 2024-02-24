@@ -45,7 +45,8 @@ Reservoir sampling is only recommended for small sample sizes, and is not recomm
 
 Reservoir sampling also incurs an additional performance penalty when multi-processing is used, since the reservoir is to be shared amongst the different threads to ensure unbiased sampling. This is not a big problem when the reservoir is very small, but becomes costly when the sample is large.
 
-> Avoid using Reservoir Sample with large sample sizes if possible. Reservoir sampling requires the entire sample to be materialized in memory.
+> Bestpractice Avoid using Reservoir Sample with large sample sizes if possible.
+> Reservoir sampling requires the entire sample to be materialized in memory.
 
 ### bernoulli
 

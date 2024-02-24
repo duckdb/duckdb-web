@@ -170,7 +170,7 @@ ORDER BY score DESC;
 └─────────────────────┴────────────────────────────────────────────────────────────┴────────┘
 ```
 
-> The FTS index will not update automatically when input table changes.
+> Warning The FTS index will not update automatically when input table changes.
 > A workaround of this limitation can be recreating the index to refresh.
 
 ## GitHub

@@ -279,4 +279,4 @@ SELECT * FROM sqlite_db.tmp;
 └────────┘
 ```
 
-> The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax](../sql/statements/attach).
+> Deprecated The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax](../sql/statements/attach).

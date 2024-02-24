@@ -41,7 +41,7 @@ USE file;
 
 The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file. It is not possible to detach from the default database: if you would like to do so, issue the [`USE` statement](use) to change the default database to another one.
 
-> Closing the connection, e.g., invoking the [`close()` function in Python](../../api/python/dbapi#connection), does not release the locks held on the database files as the file handles are held by the main DuckDB instance (in Python's case, the `duckdb` module).
+> Warning Closing the connection, e.g., invoking the [`close()` function in Python](../../api/python/dbapi#connection), does not release the locks held on the database files as the file handles are held by the main DuckDB instance (in Python's case, the `duckdb` module).
 
 ### Syntax
 
