@@ -92,6 +92,29 @@ $(document).ready(function(){
 		var platfromSelection = $('.yourselection ul.platform li.selected').attr('data-id');
 		if (platfromSelection) { userSelection.platform = platfromSelection; }
 	
+		// for binaries
+		if (userSelection.installer == ".binary") {
+			// macOS builds are always universal
+			if (userSelection.platform == ".macos") {
+				$('.architecture.select').removeClass('active');
+				$('.architecture.select').addClass('inactive');
+				// we can
+				// - or either select both x86_64 and ARM64 at the same time
+				// - or allow the user to change the selection (but it will not do anything)
+			}
+			// Linux has builds for both architectures
+			else if (userSelection.platform == ".linux") {
+				$('.architecture.select').removeClass('inactive');
+				$('.architecture.select').addClass('active');
+				// we should select x86_64 and keep ARM64 enabled
+			}
+			// Windows only has x86_64 binaries
+			else if (userSelection.platform == ".win") {
+				$('.architecture.select').removeClass('inactive');
+				$('.architecture.select').addClass('active');
+				// we should pre-select x86_64 and disable ARM64
+			}
+		}
 	
 		if (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") {
 			$('.installer.select, .platform.select').removeClass('inactive');
@@ -102,18 +125,18 @@ $(document).ready(function(){
 			userSelection.platform = "";
 		}
 	
-		$('.architecture.select, .download_method.select').removeClass('inactive');
-		if ( environmentSelection === '.python' ) {
-			$('.architecture.select, .download_method.select').addClass('inactive');
-			$('.architecture.select ul li.selected, .download_method.select ul li.selected').removeClass('selected');
-			userSelection.architecture = '';
-			userSelection.download = '';
-		} else {
-			var architectureSelection = $('.yourselection ul.architecture li.selected').attr('data-id');
-			if (architectureSelection) { userSelection.architecture = architectureSelection; }
-			var downloadMethodSelection = $('.yourselection ul.download_method li.selected').attr('data-id');
-			if (downloadMethodSelection) { userSelection.download = downloadMethodSelection; }
-		}
+		// $('.architecture.select, .download_method.select').removeClass('inactive');
+		// if ( environmentSelection === '.python' ) {
+		// 	$('.architecture.select, .download_method.select').addClass('inactive');
+		// 	$('.architecture.select ul li.selected, .download_method.select ul li.selected').removeClass('selected');
+		// 	userSelection.architecture = '';
+		// 	userSelection.download = '';
+		// } else {
+		// 	var architectureSelection = $('.yourselection ul.architecture li.selected').attr('data-id');
+		// 	if (architectureSelection) { userSelection.architecture = architectureSelection; }
+		// 	var downloadMethodSelection = $('.yourselection ul.download_method li.selected').attr('data-id');
+		// 	if (downloadMethodSelection) { userSelection.download = downloadMethodSelection; }
+		// }
 	
 		if ((userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && userSelection.pack == ".source") {
 			$('.platform.select').addClass('inactive');
