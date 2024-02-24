@@ -33,14 +33,14 @@ The connection string determines the parameters for how to connect to MySQL as a
 
 <div class="narrow_table"></div>
 
-| Setting  |   Default    |
-|----------|--------------|
-| host     | localhost    |
-| user     | current user |
-| password |              |
-| database | NULL         |
-| port     | 0            |
-| socket   | NULL         |
+|  Setting   |   Default    |
+|------------|--------------|
+| `database` | `NULL`       |
+| `host`     | `localhost`  |
+| `password` |              |
+| `port`     | `0`          |
+| `socket`   | `NULL`       |
+| `user`     | current user |
 
 The tables in the MySQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from MySQL at query time.
 
@@ -219,12 +219,12 @@ SELECT * FROM mysql_db.tmp;
 
 ## Settings
 
-|                name                |                          description                           | default |
-|------------------------------------|----------------------------------------------------------------|---------|
-| mysql_experimental_filter_pushdown | Whether or not to use filter pushdown (currently experimental) | false   |
-| mysql_tinyint1_as_boolean          | Whether or not to convert TINYINT(1) columns to BOOLEAN        | true    |
-| mysql_debug_show_queries           | DEBUG SETTING: print all queries sent to MySQL to stdout       | false   |
-| mysql_bit1_as_boolean              | Whether or not to convert BIT(1) columns to BOOLEAN            | true    |
+|                 Name                 |                          Description                           |  Default  |
+|--------------------------------------|----------------------------------------------------------------|-----------|
+| `mysql_bit1_as_boolean`              | Whether or not to convert `BIT(1)` columns to `BOOLEAN`        | `true`    |
+| `mysql_debug_show_queries`           | DEBUG SETTING: print all queries sent to MySQL to stdout       | `false`   |
+| `mysql_experimental_filter_pushdown` | Whether or not to use filter pushdown (currently experimental) | `false`   |
+| `mysql_tinyint1_as_boolean`          | Whether or not to convert `TINYINT(1)` columns to `BOOLEAN`    | `true`    |
 
 ## Schema Cache
 
