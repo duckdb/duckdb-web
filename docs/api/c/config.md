@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Configuration
+title: Configuration
 ---
 
 Configuration options can be provided to change different settings of the database system. Note that many of these

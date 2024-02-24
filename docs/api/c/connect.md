@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Startup & Shutdown
+title: Startup & Shutdown
 ---
 
 To use DuckDB, you must first initialize a `duckdb_database` handle using `duckdb_open()`. `duckdb_open()` takes as parameter the database file to read and write from. The special value `NULL` (`nullptr`) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the process).
