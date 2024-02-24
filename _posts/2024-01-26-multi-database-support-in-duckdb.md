@@ -163,8 +163,6 @@ Running `EXPLAIN` on the query shows how the data from the different engines is 
 └───────────────────────────┘└───────────────────────────┘└───────────────────────────┘
 ```
 
-> Several changes have been made to Postgres extension since the last release. Use `FORCE INSTALL postgres` to install the latest version of the extension.
-
 ## Transactions
 
 All statements executed within DuckDB are executed within a transaction. If an explicit `BEGIN TRANSACTION` is not called, every statement will execute in its own transaction. This also applies to queries that are executed over other storage engines. These storage engines also support explicit `BEGIN`, `COMMIT` and `ROLLBACK` statements.
