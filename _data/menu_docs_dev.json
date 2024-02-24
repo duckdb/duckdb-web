@@ -294,6 +294,10 @@
       "slug": "",
       "mainfolderitems": [
         {
+          "page": "Overview",
+          "url": "index"
+        },
+        {
           "page": "Connect",
           "slug": "connect",
           "subfolderitems": [
