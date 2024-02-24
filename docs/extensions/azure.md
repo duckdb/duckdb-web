@@ -21,14 +21,14 @@ Once the [authentication](#authentication) is set up, the Azure Blob Storage can
 
 ```sql
 SELECT count(*)
-FROM 'az://⟨my_container⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
+FROM 'az://<my_container>@<my_storage_account>.blob.core.windows.net/<my_file>.<parquet_or_csv>';
 ```
 
 Globs are also supported:
 
 ```sql
 SELECT *
-FROM 'az://⟨my_container⟩/*.csv';
+FROM 'az://<my_container>@<my_storage_account>.blob.core.windows.net/*.csv';
 ```
 
 ## Configuration
