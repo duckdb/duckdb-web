@@ -21,7 +21,7 @@ The functions below are difficult to categorize into specific function types and
 | `currval(`*`'sequence_name'`*`)`| Return the current value of the sequence. Note that `nextval` must be called at least once prior to calling `currval`. | `currval('my_sequence_name')`| `1` |
 | `error(`*`message`*`)` | Throws the given error *`message`* | `error('access_mode')` | |
 | `force_checkpoint(`*`database`*`)`| Synchronize WAL with file for (optional) database interrupting transactions. | `force_checkpoint(my_db)`| success boolean |
-| `gen_random_uuid()` | Alias of `uuid`. Return a random uuid similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687. | `gen_random_uuid()`| various |
+| `gen_random_uuid()` | Alias of `uuid`. Return a random uuid similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. | `gen_random_uuid()`| various |
 | `hash(`*`value`*`)` | Returns a `UBIGINT` with the hash of the *`value`*| `hash('🦆')` | `2595805878642663834` |
 | `icu_sort_key(`*`string`*`, `*`collator`*`)` | Surrogate key used to sort special characters according to the specific locale. Collator parameter is optional. Valid only when ICU extension is installed.| `icu_sort_key('ö', 'DE')` | `460145960106` |
 | `ifnull(`*`expr`*`, `*`other`*`)` | A two-argument version of coalesce | `ifnull(NULL, 'default_string')` | `'default_string'`|
@@ -29,8 +29,8 @@ The functions below are difficult to categorize into specific function types and
 | `nextval(`*`'sequence_name'`*`)`| Return the following value of the sequence.| `nextval('my_sequence_name')`| `2` |
 | `nullif(`*`a`*`, `*`b`*`)` | Return null if a = b, else return a. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. | `nullif(1+1, 2)` | `NULL`|
 | `pg_typeof(`*`expression`*`)` | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility.| `pg_typeof('abc')` | `'varchar'` |
-| `read_blob(`*`source`*`)` | Returns the content from *`source`* (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide](../../guides/import/read_file#read_blob) for more details. | `hello\x0A` |
-| `read_text(`*`source`*`)` | Returns the content from *`source`* (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide](../../guides/import/read_file#read_text) for more details. | `hello\n` |
+| `read_blob(`*`source`*`)` | Returns the content from *`source`* (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide](../../guides/import/read_file#read_blob) for more details. | `read_blob('hello.bin')` | `hello\x0A` |
+| `read_text(`*`source`*`)` | Returns the content from *`source`* (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide](../../guides/import/read_file#read_text) for more details. | `read_text('hello.txt')` | `hello\n` |
 | `repeat_row(`*`varargs`*`, `*`num_rows`*`)` | Returns a table with *`num_rows`* rows, each containing the fields defined in *`varargs`* | `repeat_row(1, 2, 'foo', num_rows = 3)` | 3 rows of `1, 2, 'foo'` |
 | `sha256(`*`value`*`)` | Returns a `VARCHAR` with the SHA-256 hash of the *`value`*| `sha-256('🦆')` | `d7a5c5e0d1d94c32218539e7e47d4ba9c3c7b77d61332fb60d633dde89e473fb` |
 | `stats(`*`expression`*`)` | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression.| `stats(5)` | `'[Min: 5, Max: 5][Has Null: false]'` |
