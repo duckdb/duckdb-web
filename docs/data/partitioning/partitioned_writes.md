@@ -6,15 +6,15 @@ title: Partitioned Writes
 ## Examples
 
 ```sql
--- write a table to a hive partitioned data set of Parquet files
+-- write a table to a Hive partitioned data set of Parquet files
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
--- write a table to a hive partitioned data set of CSV files, allowing overwrites
+-- write a table to a Hive partitioned data set of CSV files, allowing overwrites
 COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE 1);
 ```
 
 ## Partitioned Writes
 
-When the `partition_by` clause is specified for the [`COPY` statement](../../sql/statements/copy), the files are written in a [hive partitioned](hive_partitioning) folder hierarchy. The target is the name of the root directory (in the example above: `orders`). The files are written in-order in the file hierarchy. Currently, one file is written per thread to each directory.
+When the `partition_by` clause is specified for the [`COPY` statement](../../sql/statements/copy), the files are written in a [Hive partitioned](hive_partitioning) folder hierarchy. The target is the name of the root directory (in the example above: `orders`). The files are written in-order in the file hierarchy. Currently, one file is written per thread to each directory.
 
 ```text
 orders
@@ -48,8 +48,8 @@ By default, files will be named `data_0.parquet` or `data_0.csv`. With the flag 
 * `{uuid}` will be replaced by a 128 bits long UUID
 
 ```sql
--- write a table to a hive partitioned data set of .parquet files, with an index in the filename
+-- write a table to a Hive partitioned data set of .parquet files, with an index in the filename
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "orders_{i}");
--- write a table to a hive partitioned data set of .parquet files, with unique filenames
+-- write a table to a Hive partitioned data set of .parquet files, with unique filenames
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "file_{uuid}");
 ```
