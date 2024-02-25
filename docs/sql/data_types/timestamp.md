@@ -132,7 +132,7 @@ SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
 ```sql
 SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
 ```
-```
+```text
 ┌──────────┬───────────┬──────────────────────┬────────────┐
 │   name   │   value   │     description      │ input_type │
 │ varchar  │  varchar  │       varchar        │  varchar   │
