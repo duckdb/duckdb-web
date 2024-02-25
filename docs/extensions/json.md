@@ -86,7 +86,7 @@ These functions have the following parameters:
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | `VARCHAR` | `'auto'` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']`. | `VARCHAR` | `'array'` |
-| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../data/partitioning/hive_partitioning). | `BOOL` | `false` |
+| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path](../data/partitioning/hive_partitioning). | `BOOL` | `false` |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`). | `BOOL` | `false` |
 | `maximum_sample_files` | The maximum number of JSON files sampled for auto-detection. | `BIGINT` | `32` |
 | `maximum_object_size` | The maximum size of a JSON object (in bytes). | `UINTEGER` | `16777216` |

@@ -108,7 +108,7 @@ The below options are applicable to all formats written with `COPY`.
 | `overwrite_or_ignore` | Whether or not to allow overwriting a directory if one already exists. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
 | `file_size_bytes` | If this parameter is set, the `COPY` process creates a directory which will contain the exported files. If a file exceeds the set limit (specified as bytes such as `1000` or in human-readable format such as `1k`), the process creates a new file in the directory. This parameter works in combination with `per_thread_output`. Note that the size is used as an approximation, and files can be occasionally slightly over the limit. | `VARCHAR` or `BIGINT` | (empty) |
 | `format` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Available options are `CSV`, `PARQUET` and `JSON`. | `VARCHAR` | auto |
-| `partition_by` | The columns to partition by using a hive partitioning scheme, see the [partitioned writes section](../../data/partitioning/partitioned_writes). | `VARCHAR[]` | (empty) |
+| `partition_by` | The columns to partition by using a Hive partitioning scheme, see the [partitioned writes section](../../data/partitioning/partitioned_writes). | `VARCHAR[]` | (empty) |
 | `per_thread_output` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
 | `use_tmp_file` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | `BOOL` | `auto` |
 
