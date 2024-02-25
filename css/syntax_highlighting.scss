@@ -23,7 +23,7 @@
 }
 
 // foreground
-.highlight :is(.g, .l, .no, .nd, .nx, .py, .w, .nn){
+.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
 	color: #383a42;
 }
 
@@ -97,6 +97,10 @@ th .k {
 	color: #aaaaaa;
 }
 
+.landing .highlight :is(.py){
+	color: #ce9887;
+}
+
 .dark{
 	// comments
 	.highlight :is(.c, .ch, .cm, .cp, .cpf, .cs, .c1){
@@ -116,7 +120,7 @@ th .k {
 	}
 	
 	// foreground
-	.highlight :is(.g, .l, .no, .nd, .nx, .py, .w, .nn){
+	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
 		color: #abb2bf;
 	}
 	
