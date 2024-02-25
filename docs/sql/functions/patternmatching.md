@@ -192,8 +192,8 @@ The `regexp_matches` and `regexp_replace` functions also support the following o
 SELECT regexp_matches('abcd', 'ABC', 'c'); -- false
 SELECT regexp_matches('abcd', 'ABC', 'i'); -- true
 SELECT regexp_matches('ab^/$cd', '^/$', 'l'); -- true
-SELECT regexp_matches('hello' || chr(10) || 'world', 'hello.world', 'p'); -- false
-SELECT regexp_matches('hello' || chr(10) || 'world', 'hello.world', 's'); -- true
+SELECT regexp_matches(E'hello\nworld', 'hello.world', 'p'); -- false
+SELECT regexp_matches(E'hello\nworld', 'hello.world', 's'); -- true
 ```
 
 ### Using `regexp_matches`
