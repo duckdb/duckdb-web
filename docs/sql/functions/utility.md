@@ -21,7 +21,7 @@ The functions below are difficult to categorize into specific function types and
 | `currval(`*`'sequence_name'`*`)`| Return the current value of the sequence. Note that `nextval` must be called at least once prior to calling `currval`. | `currval('my_sequence_name')`| `1` |
 | `error(`*`message`*`)` | Throws the given error *`message`* | `error('access_mode')` | |
 | `force_checkpoint(`*`database`*`)`| Synchronize WAL with file for (optional) database interrupting transactions. | `force_checkpoint(my_db)`| success boolean |
-| `gen_random_uuid()` | Alias of `uuid`. Return a random uuid similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687. | `gen_random_uuid()`| various |
+| `gen_random_uuid()` | Alias of `uuid`. Return a random uuid similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. | `gen_random_uuid()`| various |
 | `hash(`*`value`*`)` | Returns a `UBIGINT` with the hash of the *`value`*| `hash('🦆')` | `2595805878642663834` |
 | `icu_sort_key(`*`string`*`, `*`collator`*`)` | Surrogate key used to sort special characters according to the specific locale. Collator parameter is optional. Valid only when ICU extension is installed.| `icu_sort_key('ö', 'DE')` | `460145960106` |
 | `ifnull(`*`expr`*`, `*`other`*`)` | A two-argument version of coalesce | `ifnull(NULL, 'default_string')` | `'default_string'`|
