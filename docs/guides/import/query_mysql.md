@@ -44,7 +44,7 @@ The string used by `ATTACH` is a PostgreSQL-style connection string (_not_ a MyS
 You can directly read and write the MySQL database:
 
 ```sql
-CREATE TABLE tbl(id INTEGER, name VARCHAR);
+CREATE TABLE tbl (id INTEGER, name VARCHAR);
 INSERT INTO tbl VALUES (42, 'DuckDB');
 ```
 

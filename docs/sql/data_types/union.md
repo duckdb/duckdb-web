@@ -15,7 +15,7 @@ Under the hood, `UNION` types are implemented on top of `STRUCT` types, and simp
 
 ```sql
 -- Create a table with a union column
-CREATE TABLE tbl1(u UNION(num INT, str VARCHAR));
+CREATE TABLE tbl1 (u UNION(num INT, str VARCHAR));
 
 -- Any type can be implicitly cast to a union containing the type.
 -- Any union can also be implicitly cast to another union if 
