@@ -160,7 +160,7 @@ import pyarrow
 
 data = pyarrow.record_batch(
     [[1, 2, 3, 4], ["a", "b", "c", "d"]],
-    names=["ints", "strs"],
+    names = ["ints", "strs"],
 )
 
 with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:

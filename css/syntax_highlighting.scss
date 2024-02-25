@@ -44,6 +44,12 @@
 	color: #d52753;
 }
 
+// property names
+.highlight :is(.py){
+	color: #a05a48;
+	font-family: $fontMonoBold;
+}
+
 // punctuation
 .highlight :is(.p, .x){
 	color: #7a82da;
