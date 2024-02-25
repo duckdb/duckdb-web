@@ -138,9 +138,6 @@ DuckDB supports reading and writing [encrypted Parquet files](encryption).
 The support for Parquet files is enabled via extension. The `parquet` extension is bundled with almost all clients. However, if your client does not bundle the `parquet` extension, the extension must be installed and loaded separately.
 
 ```sql
--- run once
 INSTALL parquet;
--- run before usage
 LOAD parquet;
 ```
-
