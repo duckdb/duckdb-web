@@ -15,9 +15,9 @@ brew install unixodbc
 
 ## Step 1: Download ODBC Driver
 
-DuckDB releases the ODBC driver as asset. For macOS, download it from the <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC macOS Asset</a> that contains the following artifacts:
+DuckDB releases the ODBC driver as asset. For macOS, download it from the <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC macOS asset</a> that contains the following artifacts:
 
-**libduckdb_odbc.dylib**: the DuckDB driver compiled to macOS (with Intel and Apple Silicon support).
+**libduckdb_odbc.dylib**: the DuckDB ODBC driver compiled to macOS (with Intel and Apple Silicon support).
 
 ## Step 2: Extracting ODBC Artifacts
 
@@ -28,34 +28,43 @@ mkdir duckdb_odbc
 unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
 ```
 
+## Step 3: Configure the ODBC Driver
 
-## Step 3:  Configure the ODBC Driver
+There are two ways to configure the ODBC driver, either by initializing the configuration files listed below,
+or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
+A combination of the two is also possible.
 
+Furthermore, the ODBC driver supports all the [configuration options](../../sql/configuration) included in DuckDB.
+
+> If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
+> the one passed to `SQLDriverConnect` will take precedence.
 
 ### The `odbc.ini` or `.odbc.ini` File
 
 The `.odbc.ini` contains the DSNs for the drivers, which can have specific knobs.
 
-An example of `.odbc.ini` with DuckDB would be:
+Example of `.odbc.ini` with DuckDB:
 
 ```ini
 [DuckDB]
 Driver = DuckDB Driver
-Database = :memory:
+Database=:memory:
+access_mode=read_only
+allow_unsigned_extensions=true
+
 ```
-
-**[DuckDB]**: between the brackets is a DSN for the DuckDB.
-
-**Driver**: it describes the driver's name, and other configurations will be placed at the **.odbcinst.ini**.
-
-**Database**: it describes the database name used by DuckDB, and it can also be a file path to a `.db` in the system.
+* `[DuckDB]`: between the brackets is a DSN for the DuckDB.
+* `Driver`: Describes the driver's name, as well as where to find the configurations in the **.odbcinst.ini**.
+* `Database`: Describes the database name used by DuckDB, can also be a file path to a `.db` in the system.
+* `access_mode`: The mode in which to connect to the database
+* `allow_unsigned_extensions`: Allow the use of unsigned extensions
 
 ### The `.odbcinst.ini` File
 
 The `.odbcinst.ini` contains general configurations for the ODBC installed drivers in the system.
 A driver section starts with the driver name between brackets, and then it follows specific configuration knobs belonging to that driver.
 
-An example of `.odbcinst.ini` with the DuckDB driver would be:
+Example of `.odbcinst.ini` with the DuckDB:
 
 ```ini
 [ODBC]
@@ -66,17 +75,11 @@ TraceFile = /tmp/odbctrace
 Driver = /User/<user>/duckdb_odbc/libduckdb_odbc.dylib
 ```
 
-
-**[ODBC]**: it is the DM configuration section.
-
-**Trace**: it enables the ODBC trace file using the option `yes`.
-
-**TraceFile**: the absolute system file path for the ODBC trace file.
-
-
-**[DuckDB Driver]**: the section of the DuckDB installed driver.
-
-**Driver**: the absolute system file path of the DuckDB driver.
+* `[ODBC]`: it is the DM configuration section.
+* `Trace`: it enables the ODBC trace file using the option `yes`.
+* `TraceFile`: the absolute system file path for the ODBC trace file.
+* `[DuckDB Driver]`: the section of the DuckDB installed driver.
+* `Driver`: the absolute system file path of the DuckDB driver.
 
 ## Step 4 (Optional): Test the ODBC Driver
 
