@@ -24,7 +24,7 @@ Unzip the file to a permanent directory (e.g., duckdb_odbc).
 
 An example with `PowerShell` and `unzip` command would be:
 
-```PowerShell
+```bash
 mkdir duckdb_odbc
 unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
 ```
