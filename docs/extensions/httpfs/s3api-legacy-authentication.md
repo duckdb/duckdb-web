@@ -21,7 +21,7 @@ Optionally, the endpoint can be configured in case a non-AWS object storage serv
 SET s3_endpoint = '<domain>.<tld>:<port>';
 ```
 
-If the endpoint is not SSL-enabled then run: 
+If the endpoint is not SSL-enabled then run:
 
 ```sql
 SET s3_use_ssl = false;
@@ -63,8 +63,8 @@ Multiple configurations per query are also allowed:
 
 ```sql
 SELECT *
-FROM 's3://bucket/file.parquet?s3_region=region&s3_session_token=session_token' T1
-INNER JOIN 's3://bucket/file.csv?s3_access_key_id=accessKey&s3_secret_access_key=secretKey' T2;
+FROM 's3://bucket/file.parquet?s3_region=region&s3_session_token=session_token' t1
+INNER JOIN 's3://bucket/file.csv?s3_access_key_id=accessKey&s3_secret_access_key=secretKey' t2;
 ```
 
 ## Configuration

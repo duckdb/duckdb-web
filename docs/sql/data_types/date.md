@@ -33,14 +33,20 @@ The values `infinity` and `-infinity` are specially represented inside the syste
 but `epoch` is simply a notational shorthand that will be converted to the date value when read.
 
 ```sql
-SELECT '-infinity'::DATE, 'epoch'::DATE, 'infinity'::DATE;
+SELECT
+    '-infinity'::DATE AS negative,
+    'epoch'::DATE AS epoch,
+    'infinity'::DATE AS positive;
 ```
 
-<div class="narrow_table"></div>
-
-| Negative  | Epoch      | Positive |
-|:----------|:-----------|:---------|
-| -infinity | 1970-01-01 | infinity |
+```text
+┌───────────┬────────────┬──────────┐
+│ negative  │   epoch    │ positive │
+│   date    │    date    │   date   │
+├───────────┼────────────┼──────────┤
+│ -infinity │ 1970-01-01 │ infinity │
+└───────────┴────────────┴──────────┘
+```
 
 ## Functions
 

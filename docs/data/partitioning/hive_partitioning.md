@@ -72,11 +72,15 @@ By default the system tries to infer if the provided files are in a hive partiti
 `hive_types` is a way to specify the logical types of the hive partitions in a struct:
 
 ```sql
-FROM read_parquet('dir/**/*.parquet', hive_partitioning = true, hive_types = {'release': date, 'orders': bigint});
+SELECT *
+FROM read_parquet(
+    'dir/**/*.parquet',
+    hive_partitioning = true,
+    hive_types = {'release': DATE, 'orders': BIGINT}
+);
 ```
 
 `hive_types` will be autodetected for the following types: `DATE`, `TIMESTAMP` and `BIGINT`. To switch off the autodetection, the flag `hive_types_autocast = 0` can be set.
-
 
 ### Writing Partitioned Files
 

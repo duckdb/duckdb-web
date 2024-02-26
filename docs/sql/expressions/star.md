@@ -30,7 +30,8 @@ SELECT COLUMNS('number\d+') FROM addresses;
 The `*` expression can be used in a `SELECT` statement to select all columns that are projected in the `FROM` clause.
 
 ```sql
-SELECT * FROM tbl;
+SELECT *
+FROM tbl;
 ```
 
 The `*` expression can be modified using the `EXCLUDE` and `REPLACE`.
@@ -40,7 +41,8 @@ The `*` expression can be modified using the `EXCLUDE` and `REPLACE`.
 `EXCLUDE` allows us to exclude specific columns from the `*` expression.
 
 ```sql
-SELECT * EXCLUDE (col) FROM tbl;
+SELECT * EXCLUDE (col)
+FROM tbl;
 ```
 
 ### `REPLACE` Clause
@@ -48,7 +50,8 @@ SELECT * EXCLUDE (col) FROM tbl;
 `REPLACE` allows us to replace specific columns with different expressions.
 
 ```sql
-SELECT * REPLACE (col / 1000 AS col) FROM tbl;
+SELECT * REPLACE (col / 1000 AS col)
+FROM tbl;
 ```
 
 ## `COLUMNS` Expression

@@ -20,13 +20,15 @@ LOAD azure;
 Once the [authentication](#authentication) is set up, the Azure Blob Storage can be queried as follows:
 
 ```sql
-SELECT count(*) FROM 'az://<my_container>/<my_file>.<parquet_or_csv>';
+SELECT count(*)
+FROM 'az://<my_container>/<my_file>.<parquet_or_csv>';
 ```
 
 Globs are also supported:
 
 ```sql
-SELECT * FROM 'az://<my_container>/*.csv';
+SELECT *
+FROM 'az://<my_container>/*.csv';
 ```
 
 ## Configuration

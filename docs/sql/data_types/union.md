@@ -70,13 +70,13 @@ So how do we disambiguate if we want to create a `UNION` with multiple members o
 
 <div class="narrow_table"></div>
 
-| Ok | Source               |          Target       |               Comments             |
-|----|----------------------|-----------------------|------------------------------------|
-| ✅ | UNION(a A, b B)      | UNION(a A, b B, c C)  |                                    |
-| ✅ | UNION(a A, b B)      | UNION(a A, b C)       | if B can be implicitly cast to C   |
-| ❌ | UNION(a A, b B, c C) | UNION(a A, b B)       |                                    |
-| ❌ | UNION(a A, b B)      | UNION(a A, b C)       | if B can't be implicitly cast to C |
-| ❌ | UNION(A, B, D)       | UNION(A, B, C)        |                                    |
+| Ok | Source                 | Target                 | Comments                               |
+|----|------------------------|------------------------|----------------------------------------|
+| ✅ | `UNION(a A, b B)`      | `UNION(a A, b B, c C)` |                                        |
+| ✅ | `UNION(a A, b B)`      | `UNION(a A, b C)`      | if `B` can be implicitly cast to `C`   |
+| ❌ | `UNION(a A, b B, c C)` | `UNION(a A, b B)`      |                                        |
+| ❌ | `UNION(a A, b B)`      | `UNION(a A, b C)`      | if `B` can't be implicitly cast to `C` |
+| ❌ | `UNION(A, B, D)`       | `UNION(A, B, C)`       |                                        |
 
 ## Comparison and Sorting
 

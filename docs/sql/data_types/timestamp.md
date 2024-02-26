@@ -110,7 +110,9 @@ In this example, the `era` part will now report the Japanese imperial era number
 A list of available calendars can be pulled from the `icu_calendar_names()` table function:
 
 ```sql
-SELECT name FROM icu_calendar_names() ORDER BY 1;
+SELECT name
+FROM icu_calendar_names()
+ORDER BY 1;
 ```
 
 ## Settings
@@ -119,7 +121,9 @@ The current value of the `TimeZone` and `Calendar` settings are determined by IC
 They can be queried from in the `duckdb_settings()` table function:
 
 ```sql
-SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
+SELECT *
+FROM duckdb_settings()
+WHERE name = 'TimeZone';
 ```
 ```text
 ┌──────────┬──────────────────┬───────────────────────┬────────────┐
@@ -130,7 +134,9 @@ SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
 └──────────┴──────────────────┴───────────────────────┴────────────┘
 ```
 ```sql
-SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
+SELECT *
+FROM duckdb_settings()
+WHERE name = 'Calendar';
 ```
 ```text
 ┌──────────┬───────────┬──────────────────────┬────────────┐

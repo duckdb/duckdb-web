@@ -170,19 +170,23 @@ COPY postgres_db.tbl FROM 'data.parquet';
 ### `UPDATE`
 
 ```sql
-UPDATE postgres_db.tbl SET name='Woohoo' WHERE id=42;
+UPDATE postgres_db.tbl
+SET name = 'Woohoo'
+WHERE id = 42;
 ```
 
 ### `DELETE`
 
 ```sql
-DELETE FROM postgres_db.tbl WHERE id=42;
+DELETE FROM postgres_db.tbl
+WHERE id = 42;
 ```
 
 ### `ALTER TABLE`
 
 ```sql
-ALTER TABLE postgres_db.tbl ADD COLUMN k INTEGER;
+ALTER TABLE postgres_db.tbl
+ADD COLUMN k INTEGER;
 ```
 
 ### `DROP TABLE`
@@ -201,7 +205,7 @@ CREATE VIEW postgres_db.v1 AS SELECT 42;
 
 ```sql
 CREATE SCHEMA postgres_db.s1;
-CREATE TABLE postgres_db.s1.integers(i int);
+CREATE TABLE postgres_db.s1.integers(i INT);
 INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
 ```

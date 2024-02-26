@@ -10,8 +10,8 @@ Multiple autocomplete suggestions can be present. You can cycle forwards through
 The shell autocompletes four different groups:
 
 * Keywords
-* Table names & Table functions
-* Column names + scalar functions
+* Table names and table functions
+* Column names and scalar functions
 * File names
 
 The shell looks at the position in the SQL statement to determine which of these autocompletions to trigger. For example:

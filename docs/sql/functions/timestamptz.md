@@ -15,7 +15,7 @@ such as the [ICU extension](../../extensions/icu) that ships with DuckDB.
 In the examples below, the current time zone is presumed to be America/Los_Angeles
 using the Gregorian calendar.
 
-## Built-In Timestamp With Time Zone Functions
+## Built-In Timestamp with Time Zone Functions
 
 The table below shows the available scalar functions for `TIMESTAMPTZ` values.
 Since these functions do not involve binning or display,
@@ -32,7 +32,7 @@ they are always available.
 | `now()` | Current date and time (start of current transaction) | `now()` | `2022-10-08 12:44:46.122-07`|
 | `transaction_timestamp()` | Current date and time (start of current transaction) | `transaction_timestamp()` | `2022-10-08 12:44:46.122-07`|
 
-## Timestamp With Time Zone Strings
+## Timestamp with Time Zone Strings
 
 With no time zone extension loaded, `TIMESTAMPTZ` values will be cast to and from strings
 using offset notation.
@@ -52,7 +52,7 @@ SELECT '2022-10-08 13:13:34 Europe/Amsterdam'::TIMESTAMPTZ::VARCHAR;
 -- 2022-10-08 04:13:34-07 -- the offset will differ based on your local time zone
 ```
 
-## ICU Timestamp With Time Zone Operators
+## ICU Timestamp with Time Zone Operators
 
 The table below shows the available mathematical operators for `TIMESTAMP WITH TIME ZONE` values
 provided by the ICU extension.
@@ -65,7 +65,7 @@ provided by the ICU extension.
 
 Adding to or subtracting from [infinite values](../../sql/data_types/timestamp#special-values) produces the same infinite value.
 
-## ICU Timestamp With Time Zone Functions
+## ICU Timestamp with Time Zone Functions
 
 The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME ZONE` values.
 
@@ -108,7 +108,7 @@ The table below shows the available table functions for `TIMESTAMP WITH TIME ZON
 | `generate_series(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)` | Generate a table of timestamps in the closed range (including both the starting timestamp and the ending timestamp), stepping by the interval | `generate_series(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
 | `range(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)` | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp) , stepping by the interval | `range(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
 
-Infinite values are not allowed as table function bounds.
+> Infinite values are not allowed as table function bounds.
 
 ## ICU Timestamp Without Time Zone Functions
 

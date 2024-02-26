@@ -36,7 +36,7 @@ SET default_order = 'DESC';
 
 ## Collations
 
-Text is sorted using the binary comparison collation by default, which means values are sorted on their binary UTF8 values.
+Text is sorted using the binary comparison collation by default, which means values are sorted on their binary UTF-8 values.
 While this works well for ASCII text (e.g., for English language data), the sorting order can be incorrect for other languages.
 For this purpose, DuckDB provides collations.
 For more information on collations, see the [Collation page](../../sql/expressions/collations).
@@ -60,14 +60,23 @@ CREATE OR REPLACE TABLE addresses AS
 SELECT *
 FROM addresses
 ORDER BY city;
+```
+
+```sql
 -- select the addresses, ordered by city name in descending order with nulls at the end
 SELECT *
 FROM addresses
 ORDER BY city DESC NULLS LAST;
+```
+
+```sql
 -- order by city and then by zip code, both using the default orderings
 SELECT *
 FROM addresses
 ORDER BY city, zip;
+```
+
+```sql
 -- order by city using german collation rules
 SELECT *
 FROM addresses
@@ -91,7 +100,6 @@ ORDER BY ALL;
 | 111 Duck Duck Goose Ln | Duck Town | 11111-0001 |
 | 111 Duck Duck Goose Ln | DuckTown  | 11111      |
 | 123 Quack Blvd         | DuckTown  | 11111      |
-
 
 ```sql
 -- Order from left to right (by address, then by city, then by zip) in descending order

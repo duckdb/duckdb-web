@@ -44,9 +44,11 @@ The `SELECT` clause contains a list of expressions that specify the result of a 
 
 ```sql
 -- select all columns from the table called "table_name"
-SELECT * FROM table_name;
+SELECT *
+FROM table_name;
 -- select all columns matching the given regex from the table
-SELECT COLUMNS('number\d+') FROM addresses;
+SELECT COLUMNS('number\d+')
+FROM addresses;
 ```
 
 The [star expression](../expressions/star) is a special expression that expands to *multiple expressions* based on the contents of the `FROM` clause. In the simplest case, `*` expands to **all** expressions in the `FROM` clause. Columns can also be selected using regular expressions or lambda functions. See the [star expression page](../expressions/star) for more details.
@@ -55,7 +57,8 @@ The [star expression](../expressions/star) is a special expression that expands 
 
 ```sql
 -- select all unique cities from the addresses table
-SELECT DISTINCT city FROM addresses;
+SELECT DISTINCT city
+FROM addresses;
 ```
 
 The `DISTINCT` clause can be used to return **only** the unique rows in the result - so that any duplicate rows are filtered out.
@@ -66,7 +69,9 @@ The `DISTINCT` clause can be used to return **only** the unique rows in the resu
 
 ```sql
 -- select only the highest population city for each country
-SELECT DISTINCT ON(country) city, population FROM cities ORDER BY population DESC;
+SELECT DISTINCT ON(country) city, population
+FROM cities
+ORDER BY population DESC;
 ```
 
 The `DISTINCT ON` clause returns only one row per unique value in the set of expressions as defined in the `ON` clause. If an `ORDER BY` clause is present, the row that is returned is the first row that is encountered *as per the `ORDER BY`* criteria. If an `ORDER BY` clause is not present, the first row that is encountered is not defined and can be any row in the table.
@@ -77,9 +82,12 @@ The `DISTINCT ON` clause returns only one row per unique value in the set of exp
 
 ```sql
 -- return the total number of rows in the addresses table
-SELECT count(*) FROM addresses;
+SELECT count(*)
+FROM addresses;
 -- return the total number of rows in the addresses table grouped by city
-SELECT city, count(*) FROM addresses GROUP BY city;
+SELECT city, count(*)
+FROM addresses
+GROUP BY city;
 ```
 
 [Aggregate functions](../aggregates) are special functions that *combine* multiple rows into a single value. When aggregate functions are present in the `SELECT` clause, the query is turned into an aggregate query. In an aggregate query, **all** expressions must either be part of an aggregate function, or part of a group (as specified by the [`GROUP BY clause`](groupby)).
@@ -88,9 +96,11 @@ SELECT city, count(*) FROM addresses GROUP BY city;
 
 ```sql
 -- generate a "row_number" column containing incremental identifiers for each row
-SELECT row_number() OVER () FROM sales;
+SELECT row_number() OVER ()
+FROM sales;
 -- compute the difference between the current amount, and the previous amount, by order of time
-SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
+SELECT amount - lag(amount) OVER (ORDER BY time)
+FROM sales;
 ```
 
 [Window functions](../window_functions) are special functions that allow the computation of values relative to *other rows* in a result. Window functions are marked by the `OVER` clause which contains the *window specification*. The window specification defines the frame or context in which the window function is computed. See the [window functions page](../window_functions) for more information.

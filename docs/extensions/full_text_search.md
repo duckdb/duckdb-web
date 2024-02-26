@@ -44,7 +44,7 @@ create_fts_index(input_table, input_id, *input_values, stemmer = 'porter',
 |`overwrite`|`BOOLEAN`|Whether to overwrite an existing index on a table. Defaults to `0`|
 
 <!-- markdownlint-enable MD056 -->
-ß
+
 This `PRAGMA` builds the index under a newly created schema. The schema will be named after the input table: if an index is created on table `'main.table_name'`, then the schema will be named `'fts_main_table_name'`.
 
 ### `PRAGMA drop_fts_index`
@@ -59,7 +59,7 @@ Drops a FTS index for the specified table.
 
 | Name | Type | Description |
 |:--|:--|:-----------|
-|input_table|`VARCHAR`|Qualified name of input table, e.g., `'table_name'` or `'main.table_name'`|
+|`input_table`|`VARCHAR`|Qualified name of input table, e.g., `'table_name'` or `'main.table_name'`|
 
 ### `match_bm25` Function
 
@@ -70,12 +70,12 @@ When an index is built, this retrieval macro is created that can be used to sear
 
 | Name | Type | Description |
 |:--|:--|:----------|
-|input_id|`VARCHAR`|Column name of document identifier, e.g., `'document_identifier'`|
-|query_string|`VARCHAR`|The string to search the index for|
-|fields|`VARCHAR`|Comma-separarated list of fields to search in, e.g., `'text_field_2, text_field_N'`. Defaults to `NULL` to search all indexed fields|
-|k|`DOUBLE`|Parameter _k<sub>1</sub>_ in the Okapi BM25 retrieval model. Defaults to `1.2`|
-|b|`DOUBLE`|Parameter _b_ in the Okapi BM25 retrieval model. Defaults to `0.75`|
-|conjunctive|`BOOLEAN`|Whether to make the query conjunctive i.e., all terms in the query string must be present in order for a document to be retrieved|
+|`input_id`|`VARCHAR`|Column name of document identifier, e.g., `'document_identifier'`|
+|`query_string`|`VARCHAR`|The string to search the index for|
+|`fields`|`VARCHAR`|Comma-separarated list of fields to search in, e.g., `'text_field_2, text_field_N'`. Defaults to `NULL` to search all indexed fields|
+|`k`|`DOUBLE`|Parameter _k<sub>1</sub>_ in the Okapi BM25 retrieval model. Defaults to `1.2`|
+|`b`|`DOUBLE`|Parameter _b_ in the Okapi BM25 retrieval model. Defaults to `0.75`|
+|`conjunctive`|`BOOLEAN`|Whether to make the query conjunctive i.e., all terms in the query string must be present in order for a document to be retrieved|
 
 ### `stem` Function
 
@@ -86,8 +86,8 @@ Reduces words to their base. Used internally by the extension.
 
 | Name | Type | Description |
 |:--|:--|:----------|
-|input_string|`VARCHAR`|The column or constant to be stemmed|
-|stemmer|`VARCHAR`|The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used.|
+|`input_string`|`VARCHAR`|The column or constant to be stemmed|
+|`stemmer`|`VARCHAR`|The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used.|
 
 ## Example Usage
 
