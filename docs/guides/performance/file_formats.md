@@ -42,7 +42,7 @@ We run a simple aggregation query over Parquet files using different row group s
 
 <div class="narrow_table"></div>
 
-| Row Group Size | Execution Time |
+| Row group size | Execution time |
 |---------------:|---------------:|
 | 960            | 8.77s          |
 | 1920           | 8.95s          |

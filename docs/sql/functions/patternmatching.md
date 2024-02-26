@@ -63,7 +63,6 @@ There are also alternative characters that can be used as keywords in place of `
 | `ILIKE` | `~~*` |
 | `NOT ILIKE` | `!~~*` |
 
-
 ## `SIMILAR TO`
 
 <div id="rrdiagram2"></div>

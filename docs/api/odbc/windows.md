@@ -40,7 +40,6 @@ Windows administrator privileges is required, in case of a non-administrator a U
 
 <img src="/images/blog/odbc/windows_privileges.png" style="width: 60%; height: 60%"/>
 
-
 ## Step 4: Configure the ODBC Driver
 
 The `odbc_install.exe` adds a default DSN configuration into the ODBC registries with a default database `:memory:`.
