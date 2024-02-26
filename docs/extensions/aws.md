@@ -32,12 +32,12 @@ CALL load_aws_credentials();
 ```
 
 ```text
-┌─────────────────────────┬──────────────────────────┬──────────────────────┬───────────────┐
-│ loaded_access_key_id    │ loaded_secret_access_key │ loaded_session_token │ loaded_region │
-│       varchar           │         varchar          │       varchar        │    varchar    │
-├─────────────────────────┼──────────────────────────┼──────────────────────┼───────────────┤
-│ AKIAIOSFODNN7EXAMPLE    │ <redacted>               │                      │ eu-west-1     │
-└─────────────────────────┴──────────────────────────┴──────────────────────┴───────────────┘
+┌──────────────────────┬──────────────────────────┬──────────────────────┬───────────────┐
+│ loaded_access_key_id │ loaded_secret_access_key │ loaded_session_token │ loaded_region │
+│       varchar        │         varchar          │       varchar        │    varchar    │
+├──────────────────────┼──────────────────────────┼──────────────────────┼───────────────┤
+│ AKIAIOSFODNN7EXAMPLE │ <redacted>               │                      │ eu-west-1     │
+└──────────────────────┴──────────────────────────┴──────────────────────┴───────────────┘
 ```
 
 The function takes a string parameter to specify a specific profile:
@@ -58,7 +58,7 @@ CALL load_aws_credentials('minio-testing-2');
 There are several parameters to tweak the behavior of the call:
 
 ```sql
-CALL load_aws_credentials('minio-testing-2', set_region=false, redact_secret=false);
+CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret = false);
 ```
 
 ```text
