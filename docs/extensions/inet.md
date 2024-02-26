@@ -7,7 +7,7 @@ The `inet` extension defines the `INET` data type for storing [IPv4](https://en.
 
 ## Installing and Loading
 
-The `inet` extension will typically automatically load on first use, but to explicitly install and load the extension run:
+The `inet` extension will typically automatically load on first use, but to explicitly install and load the extension, run:
 
 ```sql
 INSTALL inet;
@@ -45,7 +45,7 @@ INSERT INTO tbl VALUES (1, '192.168.0.0/16'), (2, '127.0.0.1'), (3, '8.8.8.8'), 
 └───────┴─────────────────────────────┘
 ```
 
-## Operations on INET values
+## Operations on `INET` Values
 
 `INET` values can be compared naturally, and IPv4 will sort before IPv6. Additionally, IP addresses can be modified by adding or subtracting integers.
 
@@ -66,7 +66,7 @@ SELECT cidr from tbl ORDER BY cidr ASC;
 └─────────────────────────────┘
 ```
 
-## HOST INET function
+## `HOST` Function
 
 The host component of an `INET` value can be extracted using the `HOST()` function.
 
@@ -85,7 +85,6 @@ SELECT cidr, HOST(cidr) from tbl;
 │ 2001:db8:3c4d:15::1a2f:1a2b/96 │ 2001:db8:3c4d:15::1a2f:1a2b │
 └────────────────────────────────┴─────────────────────────────┘
 ```
-
 
 ## GitHub
 
