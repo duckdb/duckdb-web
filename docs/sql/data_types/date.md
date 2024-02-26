@@ -4,6 +4,8 @@ title: Date Types
 blurb: A date specifies a combination of year, month and day.
 ---
 
+<div class="narrow_table"></div>
+
 | Name   | Aliases | Description                     |
 |:-------|:--------|:--------------------------------|
 | `DATE` |         | calendar date (year, month day) |
@@ -19,6 +21,8 @@ SELECT DATE '1992-09-20';
 
 There are also three special date values that can be used on input:
 
+<div class="narrow_table"></div>
+
 | Input String | Description                       |
 |:-------------|:----------------------------------|
 | epoch	       | 1970-01-01 (Unix system day zero) |
@@ -31,6 +35,8 @@ but `epoch` is simply a notational shorthand that will be converted to the date 
 ```sql
 SELECT '-infinity'::DATE, 'epoch'::DATE, 'infinity'::DATE;
 ```
+
+<div class="narrow_table"></div>
 
 | Negative  | Epoch      | Positive |
 |:----------|:-----------|:---------|

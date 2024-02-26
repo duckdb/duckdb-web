@@ -18,7 +18,7 @@ DuckDB releases the ODBC driver as asset. For Windows, download it from <a href=
 
 **odbc_install.exe**: an installation script to aid the configuration on Windows.
 
-## Step 2: Extracting ODBC artifacts
+## Step 2: Extracting ODBC Artifacts
 
 Unzip the file to a permanent directory (e.g., duckdb_odbc).
 

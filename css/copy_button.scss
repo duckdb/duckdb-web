@@ -26,6 +26,7 @@ pre.highlight > button,
         height: 13px;
         background-size: contain;
         display: inline-block;
+        background-repeat: no-repeat;
     }
     span.copied{
         background-image: url("data:image/svg+xml,%3Csvg width='13' height='10' viewBox='0 0 13 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m1 5.642 3.343 3.343 7.642-7.642' stroke='%23000'/%3E%3C/svg%3E");
@@ -33,5 +34,20 @@ pre.highlight > button,
         height: 10px;
         background-size: contain;
         display: inline-block;
+        background-repeat: no-repeat;
+    }
+}
+
+.dark pre.highlight > button,
+.dark .highlight button.copy{
+    background-color: #151515;
+    &:hover{
+        background-color: #2b2b2b;
+    }
+    span.copy{
+        background-image: url("data:image/svg+xml,%3Csvg width='13' height='13' viewBox='0 0 13 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%234e4e4e' d='M3.5.5h9v9h-9z'/%3E%3Cpath d='M1 4v8h8' stroke='%234e4e4e'/%3E%3C/svg%3E");
+    }
+    span.copied{
+        background-image: url("data:image/svg+xml,%3Csvg width='13' height='10' viewBox='0 0 13 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m1 5.642 3.343 3.343 7.642-7.642' stroke='%234e4e4e'/%3E%3C/svg%3E");
     }
 }

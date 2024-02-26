@@ -6,6 +6,7 @@ blurb: An interval specifies a period of time measured in units of a specific da
 
 Intervals represent a period of time. This period can be measured in a specific unit or combination of units, for example years, days, or seconds. Intervals are generally used to *modify* timestamps or dates by either adding or subtracting them.
 
+<div class="narrow_table"></div>
 
 | Name | Description |
 |:---|:---|
@@ -25,13 +26,16 @@ SELECT DATE '2000-01-01' - INTERVAL 1 YEAR;
 SELECT INTERVAL (i) YEAR FROM range(1, 5) t(i);
 -- construct an interval with mixed units
 SELECT INTERVAL '1 month 1 day';
+-- intervals greater than 24 hours/12 months/etc. are supported
+SELECT '540:58:47.210'::INTERVAL;
+SELECT INTERVAL '16 MONTHS';
 
--- WARNING: If a decimal value is specified, it will be automatically rounded to an integer
+-- WARNING:
+-- If a decimal value is specified, it will be automatically rounded to an integer
 -- To use more precise values, simply use a more granular date part 
 -- (In this example use 18 MONTHS instead of 1.5 YEARS)
 -- The statement below is equivalent to to_years(CAST(1.5 AS INTEGER))
--- 2 years
-SELECT INTERVAL '1.5' YEARS; --WARNING! This returns 2 years!
+SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years!
 ```
 
 ## Details
@@ -44,12 +48,14 @@ The division into components makes the interval class suitable for adding or sub
 SELECT DATE '2000-01-01' + INTERVAL (i) MONTH FROM range(12) t(i);
 ```
 
-## Difference Between Dates
+## Difference between Dates
 
 If we subtract two timestamps from one another, we obtain an interval describing the difference between the timestamps with the *days and microseconds* components. For example:
 
 ```sql
 SELECT TIMESTAMP '2000-02-01 12:00:00' - TIMESTAMP '2000-01-01 11:00:00' AS diff;
+```
+```text
 ┌──────────────────┐
 │       diff       │
 │     interval     │
@@ -62,6 +68,8 @@ The `datediff` function can be used to obtain the difference between two dates f
 
 ```sql
 SELECT datediff('month', TIMESTAMP '2000-01-01 11:00:00', TIMESTAMP '2000-02-01 12:00:00') AS diff;
+```
+```text
 ┌───────┐
 │ diff  │
 │ int64 │
@@ -72,7 +80,6 @@ SELECT datediff('month', TIMESTAMP '2000-01-01 11:00:00', TIMESTAMP '2000-02-01 
 
 ## Functions
 
-See the [Date Part Functions docs](../../sql/functions/datepart) for a list of available
-date parts for use with an `INTERVAL`.
+See the [Date Part Functions page](../../sql/functions/datepart) for a list of available date parts for use with an `INTERVAL`.
 
-See the [Interval Operators](../../sql/functions/interval) for various functions that operate on intervals.
+See the [Interval Operators page](../../sql/functions/interval) for functions that operate on intervals.

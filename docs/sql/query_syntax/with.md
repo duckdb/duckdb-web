@@ -73,10 +73,10 @@ SELECT * FROM t AS t1,
 
 `WITH RECURSIVE` can be used to traverse trees. For example, take a hierarchy of tags:
 
-![](/images/examples/with-recursive-tree-example.png)
+![Example tree graph](/images/examples/with-recursive-tree-example.png)
 
 ```sql
-CREATE TABLE tag(id int, name varchar, subclassof int);
+CREATE TABLE tag (id INT, name VARCHAR, subclassof INT);
 INSERT INTO tag VALUES
  (1, 'U2',     5),
  (2, 'Blur',   5),
@@ -93,13 +93,13 @@ The following query returns the path from the node `Oasis` to the root of the tr
 
 ```sql
 WITH RECURSIVE tag_hierarchy(id, source, path) AS (
-  SELECT id, name, [name] AS path
-  FROM tag
-  WHERE subclassof IS NULL
+    SELECT id, name, [name] AS path
+    FROM tag
+    WHERE subclassof IS NULL
 UNION ALL
-  SELECT tag.id, tag.name, list_prepend(tag.name, tag_hierarchy.path)
-  FROM tag, tag_hierarchy
-  WHERE tag.subclassof = tag_hierarchy.id
+    SELECT tag.id, tag.name, list_prepend(tag.name, tag_hierarchy.path)
+    FROM tag, tag_hierarchy
+    WHERE tag.subclassof = tag_hierarchy.id
 )
 SELECT path
 FROM tag_hierarchy
@@ -121,10 +121,10 @@ One way to achieve this is to store the path of a traversal in a [list](../../sq
 
 Take the following directed graph from the [LDBC Graphalytics benchmark](https://arxiv.org/pdf/2011.15028.pdf):
 
-![](/images/examples/with-recursive-graph-example.png)
+![Example simple graph](/images/examples/with-recursive-graph-example.png)
 
 ```sql
-CREATE TABLE edge(node1id int, node2id int);
+CREATE TABLE edge (node1id INT, node2id INT);
 INSERT INTO edge VALUES (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5),
   (3, 8), (3, 10), (5, 3), (5, 4), (5, 8), (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
 ```
@@ -137,19 +137,19 @@ The following query returns **all paths** starting in node 1:
 
 ```sql
 WITH RECURSIVE paths(startNode, endNode, path) AS (
-   SELECT -- define the path as the first edge of the traversal
+    SELECT -- define the path as the first edge of the traversal
         node1id AS startNode,
         node2id AS endNode,
         [node1id, node2id] AS path
-     FROM edge
-     WHERE startNode = 1
-   UNION ALL
-   SELECT -- concatenate new edge to the path
+    FROM edge
+    WHERE startNode = 1
+    UNION ALL
+    SELECT -- concatenate new edge to the path
         paths.startNode AS startNode,
         node2id AS endNode,
         array_append(path, node2id) AS path
-     FROM paths
-     JOIN edge ON paths.endNode = node1id
+    FROM paths
+    JOIN edge ON paths.endNode = node1id
     -- Prevent adding a repeated node to the path.
     -- This ensures that no cycles occur.
     WHERE node2id != ALL(paths.path)

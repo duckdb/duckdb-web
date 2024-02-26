@@ -1,13 +1,13 @@
 ---
 layout: docu
-title: DuckDB with Polars
+title: Integration with Polars
 ---
 
 [Polars](https://github.com/pola-rs/polars) is a DataFrames library built in Rust with bindings for Python and Node.js. It uses [Apache Arrow's columnar format](https://arrow.apache.org/docs/format/Columnar.html) as its memory model. DuckDB can read Polars DataFrames and convert query results to Polars DataFrames. It does this internally using the efficient Apache Arrow integration. Note that the `pyarrow` library must be installed for the integration to work.
 
 ## Installation
 
-```python
+```bash
 pip install duckdb
 pip install -U 'polars[pyarrow]'
 ```
@@ -28,7 +28,7 @@ df = pl.DataFrame(
         "cars": ["beetle", "audi", "beetle", "beetle", "beetle"],
     }
 )
-duckdb.sql('SELECT * FROM df').show()
+duckdb.sql("SELECT * FROM df").show()
 ```
 
 ## DuckDB to Polars
@@ -37,12 +37,25 @@ DuckDB can output results as Polars DataFrames using the `.pl()` result-conversi
 
 ```python
 df = duckdb.sql("""
-SELECT 1 AS id, 'banana' AS fruit
-UNION ALL
-SELECT 2, 'apple'
-UNION ALL
-SELECT 3, 'mango'""").pl()
+    SELECT 1 AS id, 'banana' AS fruit
+    UNION ALL
+    SELECT 2, 'apple'
+    UNION ALL
+    SELECT 3, 'mango'"""
+).pl()
 print(df)
 ```
+```text
+shape: (3, 2)
+┌─────┬────────┐
+│ id  ┆ fruit  │
+│ --- ┆ ---    │
+│ i32 ┆ str    │
+╞═════╪════════╡
+│ 1   ┆ banana │
+│ 2   ┆ apple  │
+│ 3   ┆ mango  │
+└─────┴────────┘
+```
 
-To learn more about Polars, feel free to explore their [Python API Reference](https://pola-rs.github.io/polars/py-polars/html/reference/index.html)! 
+To learn more about Polars, feel free to explore their [Python API Reference](https://pola-rs.github.io/polars/py-polars/html/reference/index.html).

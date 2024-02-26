@@ -1,21 +1,35 @@
 ---
 layout: docu
-title: Full Text Search Extension
+title: Full-Text Search Extension
 ---
 
-Full Text Search is an extension to DuckDB that allows for search through strings, similar to SQLite's FTS5 extension.  
+Full-Text Search is an extension to DuckDB that allows for search through strings, similar to [SQLite's FTS5 extension](https://www.sqlite.org/fts5.html).
 
-## API
+## Installing and Loading
+
+The `fts` extension will be transparently autoloaded on first use from the official extension repository.
+If you would like to install and load it manually, run:
+
+```sql
+INSTALL fts;
+LOAD fts;
+```
+
+## Usage
 
 The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to drop an index. Additionally, a scalar macro `stem` is added, which is used internally by the extension.
 
-### PRAGMA create_fts_index
+### `PRAGMA create_fts_index`
 
 ```python
-create_fts_index(input_table, input_id, *input_values, stemmer='porter', stopwords='english',
-                 ignore='(\\.|[^a-z])+', strip_accents=1, lower=1, overwrite=0)
+create_fts_index(input_table, input_id, *input_values, stemmer = 'porter',
+                 stopwords = 'english', ignore = '(\\.|[^a-z])+',
+                 strip_accents = 1, lower = 1, overwrite = 0)
 ```
+
 `PRAGMA` that creates a FTS index for the specified table.
+
+<!-- markdownlint-disable MD056 -->
 
 | Name | Type | Description |
 |:--|:--|:----------|
@@ -29,9 +43,11 @@ create_fts_index(input_table, input_id, *input_values, stemmer='porter', stopwor
 |`lower`|`BOOLEAN`|Whether to convert all text to lowercase. Defaults to `1`|
 |`overwrite`|`BOOLEAN`|Whether to overwrite an existing index on a table. Defaults to `0`|
 
+<!-- markdownlint-enable MD056 -->
+ß
 This `PRAGMA` builds the index under a newly created schema. The schema will be named after the input table: if an index is created on table `'main.table_name'`, then the schema will be named `'fts_main_table_name'`.
 
-### PRAGMA drop_fts_index
+### `PRAGMA drop_fts_index`
 
 ```python
 drop_fts_index(input_table)
@@ -39,11 +55,13 @@ drop_fts_index(input_table)
 
 Drops a FTS index for the specified table.
 
+<div class="narrow_table"></div>
+
 | Name | Type | Description |
 |:--|:--|:-----------|
 |input_table|`VARCHAR`|Qualified name of input table, e.g., `'table_name'` or `'main.table_name'`|
 
-### match_bm25
+### `match_bm25` Function
 
 ```python
 match_bm25(input_id, query_string, fields := NULL, k := 1.2, b:= 0.75, conjunctive := 0)
@@ -59,7 +77,7 @@ When an index is built, this retrieval macro is created that can be used to sear
 |b|`DOUBLE`|Parameter _b_ in the Okapi BM25 retrieval model. Defaults to `0.75`|
 |conjunctive|`BOOLEAN`|Whether to make the query conjunctive i.e., all terms in the query string must be present in order for a document to be retrieved|
 
-### stem
+### `stem` Function
 
 ```python
 stem(input_string, stemmer)
@@ -73,27 +91,88 @@ Reduces words to their base. Used internally by the extension.
 
 ## Example Usage
 
+Create a table and fill it with text data:
+
 ```sql
--- create a table and fill it with text data
-CREATE TABLE documents(document_identifier VARCHAR, text_content VARCHAR, author VARCHAR, doc_version INTEGER);
+CREATE TABLE documents (
+    document_identifier VARCHAR,
+    text_content VARCHAR,
+    author VARCHAR,
+    doc_version INTEGER
+);
 INSERT INTO documents
-VALUES ('doc1', 'The mallard is a dabbling duck that breeds throughout the temperate.', 'Hannes Mühleisen', 3),
-       ('doc2', 'The cat is a domestic species of small carnivorous mammal.', 'Laurens Kuiper', 2);
--- build the index (make both the 'text_content' and 'author' columns searchable)
-PRAGMA create_fts_index('documents', 'document_identifier', 'text_content', 'author');
--- search the 'author' field index for documents that are written by Hannes - this retrieves 'doc1'
-SELECT text_content, score
-FROM (SELECT *, fts_main_documents.match_bm25(document_identifier, 'Muhleisen', fields := 'author') AS score
-      FROM documents) sq
+    VALUES ('doc1',
+            'The mallard is a dabbling duck that breeds throughout the temperate.',
+            'Hannes Mühleisen',
+            3),
+           ('doc2',
+            'The cat is a domestic species of small carnivorous mammal.',
+            'Laurens Kuiper',
+            2
+           );
+```
+
+Build the index, and make both the `text_content` and `author` columns searchable.
+
+```sql
+PRAGMA create_fts_index(
+    'documents', 'document_identifier', 'text_content', 'author'
+);
+```
+
+Search the `author` field index for documents that are authored by "Muhleisen". This retrieves "doc1":
+
+```sql
+SELECT document_identifier, text_content, score
+FROM (
+    SELECT *, fts_main_documents.match_bm25(
+        document_identifier,
+        'Muhleisen',
+        fields := 'author'
+    ) AS score
+    FROM documents
+) sq
 WHERE score IS NOT NULL
   AND doc_version > 2
 ORDER BY score DESC;
--- search for documents about 'small cats' - this retrieves 'doc2'
-SELECT text_content, score
-FROM (SELECT *, fts_main_documents.match_bm25(document_identifier, 'small cats') AS score
-      FROM documents) sq
+```
+
+```text
+┌─────────────────────┬──────────────────────────────────────────────────────────────────────┬────────┐
+│ document_identifier │                             text_content                             │ score  │
+│       varchar       │                               varchar                                │ double │
+├─────────────────────┼──────────────────────────────────────────────────────────────────────┼────────┤
+│ doc1                │ The mallard is a dabbling duck that breeds throughout the temperate. │    0.0 │
+└─────────────────────┴──────────────────────────────────────────────────────────────────────┴────────┘
+```
+
+Search for documents about "small cats". This retrieves "doc2":
+
+```sql
+SELECT document_identifier, text_content, score
+FROM (
+    SELECT *, fts_main_documents.match_bm25(
+        document_identifier,
+        'small cats'
+    ) AS score
+    FROM documents
+) sq
 WHERE score IS NOT NULL
 ORDER BY score DESC;
 ```
 
-> The FTS index will not update automatically when input table changes. A workaround of this limitation can be recreating the index to refresh.
+```text
+┌─────────────────────┬────────────────────────────────────────────────────────────┬────────┐
+│ document_identifier │                        text_content                        │ score  │
+│       varchar       │                          varchar                           │ double │
+├─────────────────────┼────────────────────────────────────────────────────────────┼────────┤
+│ doc2                │ The cat is a domestic species of small carnivorous mammal. │    0.0 │
+└─────────────────────┴────────────────────────────────────────────────────────────┴────────┘
+```
+
+> Warning The FTS index will not update automatically when input table changes.
+> A workaround of this limitation can be recreating the index to refresh.
+
+## GitHub
+
+The `fts` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/fts).

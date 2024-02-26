@@ -20,9 +20,9 @@ SELECT * FROM tbl USING SAMPLE reservoir(50 ROWS) REPEATABLE (100);
 -- select a sample of 20% of the table using system sampling with a fixed seed (377)
 SELECT * FROM tbl USING SAMPLE 10% (system, 377);
 -- select a sample of 10% of "tbl" BEFORE the join with tbl2
-SELECT * FROM tbl TABLESAMPLE RESERVOIR(20%), tbl2 WHERE tbl.i=tbl2.i;
+SELECT * FROM tbl TABLESAMPLE reservoir(20%), tbl2 WHERE tbl.i = tbl2.i;
 -- select a sample of 10% of "tbl" AFTER the join with tbl2
-SELECT * FROM tbl, tbl2 WHERE tbl.i=tbl2.i USING SAMPLE RESERVOIR(20%);
+SELECT * FROM tbl, tbl2 WHERE tbl.i = tbl2.i USING SAMPLE reservoir(20%);
 ```
 
 ### Syntax
@@ -35,7 +35,7 @@ DuckDB supports three different types of sampling methods: `reservoir`, `bernoul
 
 Samples require a *sample size*, which is an indication of how many elements will be sampled from the total population. Samples can either be given as a percentage (`10%`) or as a fixed number of rows (`10 rows`). All three sampling methods support sampling over a percentage, but **only** reservoir sampling supports sampling a fixed number of rows.
 
-Samples are probablistic, that is to say, samples can be different between runs *unless* the seed is specifically specified. Specifying the seed *only* guarantees that the sample is the same if multi-threading is not enabled (i.e., `PRAGMA threads=1`). In the case of multiple threads running over a sample, samples are not necessarily consistent even with a fixed seed.
+Samples are probablistic, that is to say, samples can be different between runs *unless* the seed is specifically specified. Specifying the seed *only* guarantees that the sample is the same if multi-threading is not enabled (i.e., `SET threads = 1`). In the case of multiple threads running over a sample, samples are not necessarily consistent even with a fixed seed.
 
 ### reservoir
 
@@ -45,7 +45,8 @@ Reservoir sampling is only recommended for small sample sizes, and is not recomm
 
 Reservoir sampling also incurs an additional performance penalty when multi-processing is used, since the reservoir is to be shared amongst the different threads to ensure unbiased sampling. This is not a big problem when the reservoir is very small, but becomes costly when the sample is large.
 
-> Avoid using Reservoir Sample with large sample sizes if possible. Reservoir sampling requires the entire sample to be materialized in memory.
+> Bestpractice Avoid using Reservoir Sample with large sample sizes if possible.
+> Reservoir sampling requires the entire sample to be materialized in memory.
 
 ### bernoulli
 
@@ -67,9 +68,11 @@ The `TABLESAMPLE` clause is essentially equivalent to creating a subquery with t
 
 ```sql
 -- sample 20% of tbl BEFORE the join
-SELECT * FROM tbl TABLESAMPLE RESERVOIR(20%), tbl2 WHERE tbl.i=tbl2.i;
+SELECT * FROM tbl TABLESAMPLE reservoir(20%), tbl2 WHERE tbl.i = tbl2.i;
 -- sample 20% of tbl BEFORE the join
-SELECT * FROM (SELECT * FROM tbl USING SAMPLE RESERVOIR(20%)) tbl, tbl2 WHERE tbl.i=tbl2.i;
+SELECT *
+FROM (SELECT * FROM tbl USING SAMPLE reservoir(20%)) tbl, tbl2
+WHERE tbl.i = tbl2.i;
 -- sample 20% AFTER the join (i.e., sample 20% of the join result)
-SELECT * FROM tbl, tbl2 WHERE tbl.i=tbl2.i USING SAMPLE RESERVOIR(20%);
+SELECT * FROM tbl, tbl2 WHERE tbl.i = tbl2.i USING SAMPLE reservoir(20%);
 ```

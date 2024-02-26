@@ -20,7 +20,7 @@ LOAD tpcds;
 To generate data for scale factor 1, use:
 
 ```sql
-CALL dsdgen(sf=1);
+CALL dsdgen(sf = 1);
 ```
 
 To run a query, e.g., query 8, use:
@@ -40,3 +40,12 @@ PRAGMA tpcds(8);
 │ ought        │       -10994052.78 │
 └──────────────┴────────────────────┘
 ```
+
+## Limitations
+
+The `tpchds({query_id})` function runs a fixed TPC-DS query with pre-defined bind parameters (a.k.a. substitution parameters).
+It is not possible to change the query parameters using the `tpcds` extension.
+
+## GitHub
+
+The `tpcds` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/tpcds).

@@ -44,7 +44,7 @@ A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/devel
 
 #### DSN
 
-A DSN (_Data Source Name_) is a string that identifies a database.  It can be a file path, URL, or a database name.  For example:  `C:\Users\me\duckdb.db` and `DuckDB` are both valid DSNs. More information on DSNs can be found [here](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
+A DSN (_Data Source Name_) is a string that identifies a database.  It can be a file path, URL, or a database name.  For example:  `C:\Users\me\duckdb.db` and `DuckDB` are both valid DSNs. More information on DSNs can be found on the ["Choosing a Data Source or Driver" page of the SQL Server documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
 
 
 ### Error Handling and Diagnostics
@@ -69,14 +69,27 @@ A buffer is a block of memory used to store data.  Buffers are used to store dat
 
 The following is a step-by-step guide to setting up an application that uses ODBC to connect to a database, execute a query, and fetch the results in `C++`.
 
-> To install the driver as well as anything else you will need follow these [instructions](https://duckdb.org/docs/api/odbc/overview).
+> To install the driver as well as anything else you will need follow these [instructions](../../api/odbc/overview).
 
-1. [Include the SQL Header Files](#1-include-the-sql-header-files)
-2. [Define the ODBC Handles and Connect to the Database](#2-define-the-odbc-handles-and-connect-to-the-database)
-3. [Adding a Query](#3-adding-a-query)
-4. [Fetching Results](#4-fetching-results)
-5. [Go Wild](#5-go-wild)
-6. [Free the Handles and Disconnecting](#6-free-the-handles-and-disconnecting)
+* [What is ODBC?](#what-is-odbc)
+* [General Concepts](#general-concepts)
+  * [Handles](#handles)
+    * [Handle Types](#handle-types)
+  * [Connecting](#connecting)
+    * [Connection String](#connection-string)
+    * [DSN](#dsn)
+  * [Error Handling and Diagnostics](#error-handling-and-diagnostics)
+  * [Buffers and Binding](#buffers-and-binding)
+* [Setting up an Application](#setting-up-an-application)
+  * [1. Include the SQL Header Files](#1-include-the-sql-header-files)
+  * [2. Define the ODBC Handles and Connect to the Database](#2-define-the-odbc-handles-and-connect-to-the-database)
+  * [3. Adding a Query](#3-adding-a-query)
+  * [4. Fetching Results](#4-fetching-results)
+  * [5. Go Wild](#5-go-wild)
+  * [6. Free the Handles and Disconnecting](#6-free-the-handles-and-disconnecting)
+* [Sample Application](#sample-application)
+  * [Sample `.cpp` file](#sample-cpp-file)
+  * [Sample `CMakelists.txt` file](#sample-cmakeliststxt-file)
 
 ### 1. Include the SQL Header Files
 
@@ -235,7 +248,7 @@ Freeing the connection and environment handles can only be done after the connec
 
 The following is a sample application that includes a `cpp` file that connects to the database, executes a query, fetches the results, and prints them.  It also disconnects from the database and frees the handles, and includes a function to check the return value of ODBC functions.  It also includes a `CMakeLists.txt` file that can be used to build the application.
 
-#### Sample `.cpp` file
+### Sample `.cpp` file
 
 ```cpp
 #include <iostream>
@@ -256,54 +269,54 @@ int main() {
     SQLHANDLE env;
     SQLHANDLE dbc;
     SQLRETURN ret;
-	
+
     ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
     check_ret(ret, "SQLAllocHandle(env)");
-    
+
     ret = SQLSetEnvAttr(env, SQL_ATTR_ODBC_VERSION, (void*)SQL_OV_ODBC3, 0);
     check_ret(ret, "SQLSetEnvAttr");
-    
+
     ret = SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
     check_ret(ret, "SQLAllocHandle(dbc)");
-    
+
     std::string dsn = "DSN=duckdbmemory";
     ret = SQLConnect(dbc, (SQLCHAR*)dsn.c_str(), SQL_NTS, NULL, 0, NULL, 0);
     check_ret(ret, "SQLConnect");
-    
+
     std::cout << "Connected!" << std::endl;
-    
+
     SQLHANDLE stmt;
     ret = SQLAllocHandle(SQL_HANDLE_STMT, dbc, &stmt);
-	check_ret(ret, "SQLAllocHandle(stmt)");
-    
+    check_ret(ret, "SQLAllocHandle(stmt)");
+
     ret = SQLExecDirect(stmt, (SQLCHAR*)"SELECT * FROM integers", SQL_NTS);
     check_ret(ret, "SQLExecDirect(SELECT * FROM integers)");
-    
+
     SQLLEN int_val;
     SQLLEN null_val;
     ret = SQLBindCol(stmt, 1, SQL_C_SLONG, &int_val, 0, &null_val);
     check_ret(ret, "SQLBindCol");
-    
+
     ret = SQLFetch(stmt);
     check_ret(ret, "SQLFetch");
-    
+
     std::cout << "Value: " << int_val << std::endl;
-    
+
     ret = SQLFreeHandle(SQL_HANDLE_STMT, stmt);
     check_ret(ret, "SQLFreeHandle(stmt)");
-    
+
     ret = SQLDisconnect(dbc);
     check_ret(ret, "SQLDisconnect");
-    
+
     ret = SQLFreeHandle(SQL_HANDLE_DBC, dbc);
     check_ret(ret, "SQLFreeHandle(dbc)");
-    
+
     ret = SQLFreeHandle(SQL_HANDLE_ENV, env);
     check_ret(ret, "SQLFreeHandle(env)");
 }
 ```
 
-#### Sample `CMakelists.txt` file
+### Sample `CMakelists.txt` file
 
 ```CMAKE
 cmake_minimum_required(VERSION 3.25)

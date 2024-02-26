@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Explain
+title: Inspecting Query Plans Using EXPLAIN
 ---
 
 In order to view the query plan of a query, prepend `EXPLAIN` to a query.
@@ -12,7 +12,7 @@ EXPLAIN SELECT * FROM tbl;
 By default only the final physical plan is shown. In order to see the unoptimized and optimized logical plans, change the `explain_output` setting:
 
 ```sql
-SET explain_output='all'; 
+SET explain_output = 'all'; 
 ```
 
 Below is an example of running `EXPLAIN` on `Q1` of the TPC-H benchmark.

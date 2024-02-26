@@ -51,4 +51,4 @@ SELECT {'birds': ['duck', 'goose', 'heron'], 'aliens': NULL, 'amphibians': ['fro
 -- Struct with list of maps
 SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
 ```
-## Links to Detailed Documentation
+

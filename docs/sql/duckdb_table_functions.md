@@ -3,7 +3,7 @@ layout: docu
 title: DuckDB_% Metadata Functions
 ---
 
-DuckDB offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`. 
+DuckDB offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`.
 
 The resultset returned by a `duckdb_` table function may be used just like an ordinary table or view. For example, you can use a `duckdb_` function call in the `FROM` clause of a `SELECT` statement, and you may refer to the columns of its returned resultset elsewhere in the statement, for example in the `WHERE` clause.
 
@@ -19,7 +19,7 @@ Alternatively, you may execute table functions also using the `CALL`-syntax:
 CALL duckdb_settings();
 ```
 
-In this case too, the parentheses are mandatory. 
+In this case too, the parentheses are mandatory.
 
 > For some of the `duckdb_%` functions, there is also an identically named view available, which also resides in the `main` schema. Typically, these views do a `SELECT` on the `duckdb_` table function with the same name, while filtering out those objects that are marked as internal. We mention it here, because if you accidentally omit the parentheses in your `duckdb_` table function call, you might still get a result, but from the identically named view.
 
@@ -87,8 +87,8 @@ Apart from the database associated at startup, the list also includes databases 
 | `database_name` | The name of the database, or the alias if the database was attached using an ALIAS-clause. | `VARCHAR` |
 | `database_oid` | The internal identifier of the database. | `VARCHAR` |
 | `path` | The file path associated with the database. | `VARCHAR` |
-| `internal` | `true` indicates a system or built-in database. False indicates a user-defined database. | BOOLEAN
-| `type` | The type indicates the type of RDBMS implemented by the attached database. For DuckDB databases, that value is `duckdb`. 
+| `internal` | `true` indicates a system or built-in database. False indicates a user-defined database. | `BOOLEAN` |
+| `type` | The type indicates the type of RDBMS implemented by the attached database. For DuckDB databases, that value is `duckdb`. | `VARCHAR` |
 
 ## `duckdb_dependencies`
 
@@ -99,7 +99,7 @@ The `duckdb_dependencies()` function provides metadata about the dependencies av
 | `classid` |Always 0| `BIGINT` |
 | `objid` |The internal id of the object.| `BIGINT` |
 | `objsubid` |Always 0| `INTEGER` |
-| `refclassid` |Always 0| `BIGINT` |s
+| `refclassid` |Always 0| `BIGINT` |
 | `refobjid` |The internal id of the dependent object.| `BIGINT` |
 | `refobjsubid` |Always 0| `INTEGER` |
 | `deptype` |The type of dependency. Either regular (n) or automatic (a).| `VARCHAR` |
@@ -119,7 +119,7 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 
 ## `duckdb_functions`
 
-The `duckdb_functions()` function provides metadata about the functions available in the DuckDB instance.
+The `duckdb_functions()` function provides metadata about the functions (including macros) available in the DuckDB instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -154,17 +154,40 @@ The `duckdb_indexes()` function provides metadata about secondary indexes availa
 | `is_primary` |Always `false`| `BOOLEAN` |
 | `expressions` |Always `NULL`| `VARCHAR` |
 | `sql` |The definition of the index, expressed as a `CREATE INDEX` SQL statement.| `VARCHAR` |
-  
-Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e., those indexes created by explicit [`CREATE INDEX`](indexes#create-index) statements. Primary keys are maintained using indexes, but their details are included in the `duckdb_constraints()` function. 
+
+Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e., those indexes created by explicit [`CREATE INDEX`](indexes#create-index) statements. Primary keys, foreign keys, and `UNIQUE` constraints are maintained using indexes, but their details are included in the `duckdb_constraints()` function.
 
 ## `duckdb_keywords`
 
 The `duckdb_keywords()` function provides metadata about DuckDB's keywords and reserved words.
 
+<div class="narrow_table"></div>
+
 | Column | Description | Type |
 |:-|:---|:-|
 | `keyword_name` |The keyword.| `VARCHAR` |
 | `keyword_category` |Indicates the category of the keyword. Values are `column_name`, `reserved`, `type_function` and `unreserved`. | `VARCHAR` |
+
+## `duckdb_memory`
+
+The `duckdb_memory()` function provides metadata about DuckDB's buffer manager.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `tag` | The memory tag. It has one of the following values: `BASE_TABLE`, `HASH_TABLE`, `PARQUET_READER`, `CSV_READER`, `ORDER_BY`, `ART_INDEX`, `COLUMN_DATA`, `METADATA`, `OVERFLOW_STRINGS`, `IN_MEMORY_TABLE`, `ALLOCATOR`, `EXTENSION`. | `VARCHAR` |
+| `memory_usage_bytes` | The memory used (in bytes). | `BIGINT` |
+| `temporary_storage_bytes` | The disk storage used (in bytes). | `BIGINT` |
+
+## `duckdb_optimizers`
+
+The `duckdb_optimizers()` function provides metadata about the optimization rules (e.g., `expression_rewriter`, `filter_pushdown`) available in the DuckDB instance.
+These can be selectively turned off using [`PRAGMA disabled_optimizers`](pragmas#selectively-disabling-optimizers).
+
+<div class="narrow_table"></div>
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `name` | The name of the optimization rule. | `VARCHAR` |
 
 ## `duckdb_schemas`
 
@@ -180,6 +203,20 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 | `sql` |Always `NULL`| `VARCHAR` |
 
 The [`information_schema.schemata`](information_schema) system view provides a more standardized way to obtain metadata about database schemas.
+
+## `duckdb_secrets`
+
+The `duckdb_secrets()` function provides metadata about the secrets available in the DuckDB instance.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `name` | The name of the secret. | `VARCHAR` |
+| `type` | The type of the secret, e.g., `S3`, `GCS`, `R2`, `AZURE`. | `VARCHAR` |
+| `provider` | The provider of the secret. | `VARCHAR` |
+| `persistent` | Denotes whether the secret is persisent. | `BOOLEAN` |
+| `storage` | The backend for storing the secret. | `VARCHAR` |
+| `scope` | The scope of the secret. | `VARCHAR[]` |
+| `secret_string` | Returns the content of the secret as a string. Sensitive pieces of information, e.g., they access key, are redacted. | `VARCHAR` |
 
 ## `duckdb_sequences`
 
@@ -210,7 +247,9 @@ Attributes like `temporary`, `start_value` etc. correspond to the various option
 
 ## `duckdb_settings`
 
-The `duckdb_settings()` function provides metadata about the settings available in the DuckDB instance. 
+The `duckdb_settings()` function provides metadata about the settings available in the DuckDB instance.
+
+<div class="narrow_table"></div>
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -283,6 +322,8 @@ The [`information_schema.tables`](information_schema#tables-and-views) system vi
 ## `duckdb_temporary_files`
 
 The `duckdb_temporary_files()` function provides metadata about the temporary files DuckDB has written to disk, to offload data from memory. This function mostly exists for debugging and testing purposes.
+
+<div class="narrow_table"></div>
 
 | Column | Description | Type |
 |:-|:---|:-|

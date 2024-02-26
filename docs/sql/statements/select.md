@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Select Statement
+title: SELECT Statement
 railroad: statements/select.js
 blurb: The SELECT statement retrieves rows from the database.
 ---
@@ -13,13 +13,13 @@ The `SELECT` statement retrieves rows from the database.
 -- select all columns from the table "tbl"
 SELECT * FROM tbl;
 -- select the rows from tbl
-SELECT j FROM tbl WHERE i=3;
+SELECT j FROM tbl WHERE i = 3;
 -- perform an aggregate grouped by the column "i"
-SELECT i, SUM(j) FROM tbl GROUP BY i;
+SELECT i, sum(j) FROM tbl GROUP BY i;
 -- select only the top 3 rows from the tbl
 SELECT * FROM tbl ORDER BY i DESC LIMIT 3;
 -- join two tables together using the USING clause
-SELECT * FROM t1 JOIN t2 USING(a, b);
+SELECT * FROM t1 JOIN t2 USING (a, b);
 -- use column indexes to select the first and third column from the table "tbl"
 SELECT #1, #3 FROM tbl;
 -- select all unique cities from the addresses table
@@ -47,57 +47,57 @@ Optionally, the `SELECT` statement can be prefixed with a [`WITH` clause](../../
 
 As the `SELECT` statement is so complex, we have split up the syntax diagrams into several parts. The full syntax diagram can be found at the bottom of the page.
 
-## SELECT Clause
+## `SELECT` Clause
 
 <div id="rrdiagram3"></div>
 
 [The `SELECT` clause](../../sql/query_syntax/select) specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions. The `DISTINCT` keyword ensures that only unique tuples are returned.
 
-> Column names are case-insensitive. See the [Rules for Case Sensitivity](../case_sensitivity) for more details.
+> Column names are case-insensitive. See the [Rules for Case Sensitivity](../keywords_and_identifiers#rules-for-case-sensitivity) for more details.
 
-## FROM Clause
+## `FROM` Clause
 
 <div id="rrdiagram4"></div>
 
 [The `FROM` clause](../../sql/query_syntax/from) specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together, or another `SELECT` query inside a subquery node.
 
-## SAMPLE Clause
+## `SAMPLE` Clause
 
 <div id="rrdiagram10"></div>
 
 [The `SAMPLE` clause](../../sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `from` clause (i.e., after any joins, but before the where clause or any aggregates). See the [sample](../../sql/samples) page for more information.
 
-## WHERE Clause
+## `WHERE` Clause
 
 <div id="rrdiagram5"></div>
 
 [The `WHERE` clause](../../sql/query_syntax/where) specifies any filters to apply to the data. This allows you to select only a subset of the data in which you are interested. Logically the `WHERE` clause is applied immediately after the `FROM` clause.
 
-## GROUP BY/HAVING Clause
+## `GROUP BY` and `HAVING` Clauses
 
 <div id="rrdiagram6"></div>
 
 [The `GROUP BY` clause](../../sql/query_syntax/groupby) specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause. If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
 
-## WINDOW Clause
+## `WINDOW` Clause
 
 <div id="rrdiagram7"></div>
 
 [The `WINDOW` clause](../../sql/query_syntax/window) allows you to specify named windows that can be used within window functions. These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
 
-## QUALIFY Clause
+## `QUALIFY` Clause
 
 <div id="rrdiagram11"></div>
 
 [The `QUALIFY` clause](../../sql/query_syntax/qualify) is used to filter the result of [`WINDOW` functions](../../sql/window_functions).
 
-## ORDER BY/LIMIT Clause
+## `ORDER BY` and `LIMIT` Clauses
 
 <div id="rrdiagram8"></div>
 
 [`ORDER BY`](../../sql/query_syntax/orderby) and [`LIMIT`](../../sql/query_syntax/limit) are output modifiers. Logically they are applied at the very end of the query. The `LIMIT` clause restricts the amount of rows fetched, and the `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order.
 
-## VALUES List
+## `VALUES` List
 
 <div id="rrdiagram9"></div>
 
@@ -108,7 +108,7 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 For each table, the [`rowid` pseudocolumn](https://docs.oracle.com/cd/B19306_01/server.102/b14200/pseudocolumns008.htm) returns the row identifiers based on the physical storage.
 
 ```sql
-CREATE TABLE t(id int, content string);
+CREATE TABLE t (id INT, content STRING);
 INSERT INTO t VALUES (42, 'hello'), (43, 'world');
 SELECT rowid, id, content FROM t;
 ```
@@ -123,7 +123,7 @@ SELECT rowid, id, content FROM t;
 
 In the current storage, these identifiers are contiguous unsigned integers (0, 1, ...) if no rows were deleted. Deletions introduce gaps in the rowids which may be reclaimed later. Therefore, it is strongly recommended *not to use rowids as identifiers*.
 
-> The `rowid` values are stable within a transaction.
+> Tip The `rowid` values are stable within a transaction.
 
 > If there is a user-defined column named `rowid`, it shadows the `rowid` pseudocolumn.
 

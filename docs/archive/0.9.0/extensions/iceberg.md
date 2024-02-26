@@ -28,4 +28,4 @@ SELECT * FROM iceberg_snapshots('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PAT
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_iceberg)
+[<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_iceberg)

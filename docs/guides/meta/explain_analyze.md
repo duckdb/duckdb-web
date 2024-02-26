@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Profile Queries
+title: Profile Queries Using EXPLAIN ANALYZE
 ---
 
 In order to profile a query, prepend `EXPLAIN ANALYZE` to a query.

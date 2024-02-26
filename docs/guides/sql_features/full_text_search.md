@@ -1,15 +1,18 @@
 ---
 layout: docu
-title: DuckDB Full Text Search
+title: Full-Text Search
 ---
 
-A full text index allows for a query to quickly search for all occurrences of individual words within longer text strings.
-Here's an example of building a full text index of Shakespeare's plays.
+DuckDB supports full-text search via the [`fts` extension](../../extensions/full_text_search).
+A full-text index allows for a query to quickly search for all occurrences of individual words within longer text strings.
+
+## Example: Shakespeare Corpus
+
+Here's an example of building a full-text index of Shakespeare's plays.
 
 ```sql
 CREATE TABLE corpus AS
-  SELECT * FROM read_parquet(
-    'https://github.com/marhar/duckdb_tools/raw/main/full-text-shakespeare/shakespeare.parquet');
+    SELECT * FROM 'https://blobs.duckdb.org/data/shakespeare.parquet';
 ```
 
 ```sql
@@ -30,11 +33,11 @@ DESCRIBE corpus;
 
 The text of each line is in `text_entry`, and a unique key for each line is in `line_id`.
 
+## Creating a Full-Text Search Index
+
 First, we create the index, specifying the table name, the unique id column, and the column(s) to index. We will just index the single column `text_entry`, which contains the text of the lines in the play.
 
 ```sql
-INSTALL fts;
-LOAD fts;
 PRAGMA create_fts_index('corpus', 'line_id', 'text_entry');
 ```
 
@@ -43,11 +46,12 @@ The table is now ready to query using the [Okapi BM25](https://en.wikipedia.org/
 What does Shakespeare say about butter?
 
 ```sql
-SELECT fts_main_corpus.match_bm25(line_id, 'butter') AS score,
+SELECT
+    fts_main_corpus.match_bm25(line_id, 'butter') AS score,
     line_id, play_name, speaker, text_entry
-  FROM corpus
-  WHERE score IS NOT NULL
-  ORDER BY score;
+FROM corpus
+WHERE score IS NOT NULL
+ORDER BY score;
 ```
 
 ```text
@@ -74,11 +78,11 @@ SELECT fts_main_corpus.match_bm25(line_id, 'butter') AS score,
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-Unlike standard indexes, full text indexes don't auto-update as the underlying data is changed, so you need to `PRAGMA drop_fts_index(my_fts_index)` and recreate it when appropriate.
+Unlike standard indexes, full-text indexes don't auto-update as the underlying data is changed, so you need to `PRAGMA drop_fts_index(my_fts_index)` and recreate it when appropriate.
 
 ## Note on Generating the Corpus Table
 
-Details are [here](https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html)
-* The Columns are:  line_id, play_name, line_number, speaker, text_entry.
-* We need a unique key for each row in order for full text searching to work.
+For more details, see the ["Generating a Shakespeare corpus for full-text searching from JSON" blog post](https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html)
+* The Columns are: line_id, play_name, line_number, speaker, text_entry.
+* We need a unique key for each row in order for full-text searching to work.
 * The line_id "KL/2.4.132" means King Lear, Act 2, Scene 4, Line 132.

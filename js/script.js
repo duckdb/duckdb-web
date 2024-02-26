@@ -4,11 +4,12 @@ $(document).ready(function(){
 		var hash = window.location.hash;
 		if ($(hash).length) {
 			$('html, body').animate({
-				scrollTop: $(hash).offset().top-55
+				scrollTop: $(hash).offset().top-130
 			}, 300, 'swing');
 			if( $('.frequentlyaskedquestions').length ){
-				$('h3'+hash).toggleClass('open');
-				$('h3'+hash).next('p').slideToggle();
+				console.log($('h3'+hash).parent('.qa-wrap'))
+				$('h3'+hash).parent('.qa-wrap').addClass('open');
+				$('h3'+hash).parent('.qa-wrap').find('.answer').slideToggle(300);
 			}
 		}
 	}
@@ -19,31 +20,36 @@ $(document).ready(function(){
     if($('#quickinstall').length != 0 || $('.yourselection').length !=0 ){
 		var OSName="Unknown OS";
 		var OSdatid="Unknown OS";
-		if (navigator.appVersion.indexOf("Win")!=-1) { OSName="Windows"; OSdatid=".win" };
-		if (navigator.appVersion.indexOf("Mac")!=-1) { OSName="macOS"; OSdatid=".macos" };
-		if (navigator.appVersion.indexOf("X11")!=-1) { OSName="UNIX"; OSdatid=".linux" };
-		if (navigator.appVersion.indexOf("Linux")!=-1) { OSName="Linux"; OSdatid=".linux"};
+		if (navigator.appVersion.indexOf("Win")!=-1) { OSName="Windows"; OSdatid="win" };
+		if (navigator.appVersion.indexOf("Mac")!=-1) { OSName="macOS"; OSdatid="macos" };
+		if (navigator.appVersion.indexOf("X11")!=-1) { OSName="UNIX"; OSdatid="linux" };
+		if (navigator.appVersion.indexOf("Linux")!=-1) { OSName="Linux"; OSdatid="linux"};
 		$('.systemdetected').html('System detected: '+OSName);
-		$('.ver-cplusplus').not(OSdatid).remove()
+		/*$('.ver-cplusplus').not(OSdatid).remove()
 		$('.ver-cli').not(OSdatid).remove()
-		$('.ver-odbc').not(OSdatid).remove()
+		$('.ver-odbc').not(OSdatid).remove()*/
 	}
 	
 	// Installation instructions on landingpage
 	var landingpageevaluation = function(environment){
-		var result = $('.install .hidden .'+environment).html();
-		$('.install .result').html(result);		
+		if( environment == "odbc" || environment == "cli"){
+			var result = $('section.hidden .quick-installation div[data-install="'+ environment +' '+ OSdatid +'"]').html();
+		} else {
+			var result = $('section.hidden .quick-installation div[data-install="'+ environment +'"]').html();
+		}
+		$('.install .result').html(result);
 	}
-	$('.environment ul li').click(function(){
+	$('#quickinstall .environment ul li').click(function(){
 		var environment = $(this).attr("data-id");
-		$('.environment ul li.active').removeClass('active');
+		$('#quickinstall .environment ul li.active').removeClass('active');
 		$(this).addClass('active');
 		landingpageevaluation(environment);
+		console.log(environment)
 	});
 	$('body.landing .environmentselect').on('change', function() {
 		landingpageevaluation(this.value);
 	});
-	var environment = $('.environment ul li.active').attr("data-id");
+	var environment = $('#quickinstall .environment ul li.active').attr("data-id");
 	landingpageevaluation(environment);
 	
 	
@@ -65,7 +71,7 @@ $(document).ready(function(){
 	
 	
 	// Installation Selection
-	var userSelection = {version: ".latest", environment: ".python", pack: "", platform: ""};
+	var userSelection = {version: "", environment: "", pack: "", platform: ""};
 	var classList = "";
 	
 	var evaluation = function(){
@@ -73,7 +79,7 @@ $(document).ready(function(){
 		var versionSelection = $('.yourselection ul.version li.selected').attr('data-id');
 		if(versionSelection){ userSelection.version = versionSelection; }
 		
-		if( $("body.installation .evironment .onlymobile").is(":visible") ){
+		if( $("body.installation .environment.select .onlymobile").is(":visible") ){
 			var environmentSelection = $('body.installation .environmentselect').val();
 		} else {
 			var environmentSelection = $('.yourselection ul.environment li.selected').attr('data-id');
@@ -125,10 +131,15 @@ $(document).ready(function(){
 	
 	if($('body.installation .yourselection').length != 0){
 		var environment = "."+getUrlParameter('environment');
-		
 		if (environment !== '.undefined'){
 			$('.yourselection ul.environment li.selected').removeClass('selected')
 			$('.yourselection ul.environment li[data-id="'+environment+'"]').addClass('selected')
+			evaluation();
+		}
+		var platform = "."+getUrlParameter('platform');
+		if (platform == '.undefined'){
+			$('.yourselection ul.platform li.selected').removeClass('selected')
+			$('.yourselection ul.platform li[data-id=".'+OSdatid+'"]').addClass('selected')
 			evaluation();
 		}
 	}
@@ -136,7 +147,49 @@ $(document).ready(function(){
 		evaluation();
 	});
 	if( $('body.installation').length ){
-		evaluation();
+		setTimeout(function() {
+			evaluation();
+		}, 100);
+	}
+	
+	if ($('.yourselection > .select').length) {
+		function setQueryString() {
+			const urlSearchP = new URLSearchParams();
+	
+			$('.yourselection > .select').each(function () {
+				if (!$(this).hasClass('inactive') && $(this).find('.selected').length) {
+					const queryParam = $(this).data('select');
+					const selected = $(this).find('.selected').data('id').replace('.', '');
+					urlSearchP.set(queryParam, selected);
+				}
+			});
+	
+			// Get the current URL and append the new query parameters
+			const currentURL = window.location.href;
+			const newURL = new URL(currentURL);
+			newURL.search = urlSearchP.toString();
+	
+			// Update the URL with the new query parameters
+			window.history.pushState({}, '', newURL.toString());
+		}
+	
+		function handleQueryParameters() {
+			const urlSearchParams = new URLSearchParams(window.location.search);
+			urlSearchParams.forEach(function(value, key) {
+				const parentWrapper = $('[data-select="' + key + '"]');
+				parentWrapper.find('.selected').removeClass('selected');
+				parentWrapper.find('[data-id=".' + value + '"]').addClass('selected')
+			});
+		}
+	
+		if ( window.location.search.length ) {
+			handleQueryParameters();
+		} else {
+			setQueryString();
+		}
+		$(document).on('click', '.yourselection > .select li', setQueryString)
+		window.addEventListener('popstate', handleQueryParameters);
+	
 	}
 	
 
@@ -195,7 +248,7 @@ $(document).ready(function(){
         if (target.length) {
           // event.preventDefault();
           $('html, body').animate({
-            scrollTop: target.offset().top-75
+            scrollTop: target.offset().top-65
           }, 1000 );
         }
       }
@@ -203,11 +256,11 @@ $(document).ready(function(){
     
     
     // FAQs
-    $('.wrap.frequentlyaskedquestions #main_content_wrap h1, .wrap.frequentlyaskedquestions #main_content_wrap h2, .wrap.frequentlyaskedquestions #main_content_wrap h3').click(function(){
-	    $(this).toggleClass('open');
-	    $(this).next('p').slideToggle();
-    });
-    
+	$('.qa-wrap').click(function(){
+		$(this).toggleClass('open');
+		$(this).find('.answer').slideToggle(400);
+	})
+	
     
     // Mobile Menu
     var hamburgers = document.querySelectorAll(".hamburger");
@@ -217,9 +270,9 @@ $(document).ready(function(){
 			    $(this).toggleClass('is-active');
 			    $('div.sidenavigation').toggleClass('slidein');
 				$('body.documentation main .wrap').toggleClass('inactive');
-				if ( $('body').hasClass('documentation') ){
+				/*if ( $('body').hasClass('documentation') ){
 					toggleMobileSearchIcon();
-				}
+				}*/
 			} else {
 				$(this).toggleClass('is-active');
 				$('.landingmenu nav').toggleClass('slidein');
@@ -294,21 +347,17 @@ $(document).ready(function(){
 		})
 	}
 	
-	// Appending "Note" to Blockquote
-	$('body.documentation #main_content_wrap blockquote').each(function() {
-		$(this).prepend("<h4>Note</h4>");
-	});
-	
 	
 	// Appending Content-List of Overview-Pages
-	if (window.location.href.indexOf("/overview") > -1) {
-		pathname = window.location.pathname.replace(/\.html$/, '')
-		const selector = 'li.opened a[href="' + pathname + '"]';
-		clonedUL = $(selector).parent().parent().clone();
+	const pathname = window.location.pathname.replace(/\.html$/, '');
+	if (window.location.href.includes("/overview")) {
+		const selector = `li.opened a[href="${pathname}"]`;
+		const clonedUL = $(selector).parent().parent().clone();
 		clonedUL.find(selector).parent().remove();
 		clonedUL.find('ul').show();
-	    $('#main_content_wrap').append(clonedUL);
+		$('#main_content_wrap .index').append(clonedUL);
 	}
+
 	
 	// Appending Content-List of Documentation
 	if ( $('.wrap.documentation') != 0 ) {
@@ -320,9 +369,10 @@ $(document).ready(function(){
 	$('a').filter(function() {
 		return this.hostname && this.hostname !== location.hostname;
 	}).addClass("externallink").attr('target','_blank');
-	$('.landingmenu .external a.externallink, .mainlinks a.externallink').removeClass('externallink'); // Remove Class from header elements
+	$('.headercontent a.externallink, .mainlinks a.externallink').removeClass('externallink'); // Remove Class from header elements
 	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
 	$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
+	$('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
 	
 	// FOUNDATION PAGE SCRIPTS
 	if($('body').hasClass('foundation') && $('section.form').length){
@@ -384,9 +434,10 @@ $(document).ready(function(){
 	})
 	*/
 	
-	// VERSION FIX ON MOBILE
+
 	$('.headlinebar .version').click(function(){
-		$('.versionsidebar').toggleClass('active');
+		$(this).toggleClass('active');
+		$(this).find('.versionsidebar').slideToggle();
 	})
 	
 	
@@ -419,6 +470,7 @@ $(document).ready(function(){
 	// SEARCH 
 	var base_url = window.location.origin;
 	var resultSelected;
+	/*
 	var toggleMobileSearchIcon = function(){
 		if( $('.hamburger').hasClass('is-active') ){
 			animationduckDBicon.play();
@@ -428,6 +480,7 @@ $(document).ready(function(){
 			animationduckDBicon.setDirection(-1);
 		}
 	}
+	*/
 	var toggleSearch = function(){
 		if( $('body').hasClass('search') ){
 			$('.searchoverlay').removeClass('active');
@@ -504,15 +557,15 @@ $(document).ready(function(){
 		$("#search_results").empty();
 	})
 	if( $('.hamburger').is(':visible') ){
-		$('.duckdbhome a').click(function(e){
+		$('.search_icon').click(function(e){
 			if ( $('.hamburger').hasClass('is-active') ){
-				e.preventDefault();
-				toggleSearch();
 				if( $('body').hasClass('search') ){
+					$('.hamburger').removeClass('is-active');
 					$('body.documentation main .wrap.inactive').removeClass('inactive');
-					$('.sidenavigation').fadeOut();
+					$('.sidenavigation.slidein').removeClass('slidein');
+					$('nav.slidein').removeClass('slidein');
 				} else {
-					$('.sidenavigation').fadeIn();
+					$('.sidenavigation').addClass('slidein')
 					$('body.documentation main .wrap').addClass('inactive');
 				}
 			}
@@ -526,6 +579,61 @@ $(document).ready(function(){
 		}
 	});
 	
+	// ADDING LINES TO CODE FIELDS IF DEFINED
+	var addLineNumbers = function(){
+		if( $('.window .content.haslines').length ){
+			$('.window .content.haslines').each(function(){
+				var height = $(this).find('pre').height()
+				var fontSize = $(this).find('pre').css('font-size');
+				var lineHeight = 17;//Math.floor(parseInt(fontSize.replace('px','')) * 1.2);
+				var lines = Math.ceil(height / lineHeight) + 1
+				var linenumbers = '';
+				for (i = 1; i < lines; i++) {
+					linenumbers += i + '<br>'
+				}
+				$(this).find('.lines').html(linenumbers);
+			})
+		}
+	}
+	addLineNumbers();
 
+	
+	// GENERAL ACCORDION FOLDOUT
+	if( $('.accordion').length ){
+		$('.foldout').click(function(){
+			$(this).toggleClass('active').find('.content').slideToggle();
+		})
+	}
+	
+	// STARTPAGE EXAMPLE CODE WINDOW
+	var updateExample = function(){
+		var exampleSelection = $('#example-select').find(":selected").val();
+		var languageSelection = $('.demo.window ul.lang li.active').attr('data-language');
+		var exampleCode = $('.examples.hero-demo').find('div[data-language='+languageSelection+'][data-example='+exampleSelection+']').html();
+		var buttonTxt = $('.examples.hero-demo').find('div[data-language='+languageSelection+'][data-example='+exampleSelection+']').attr('data-buttontxt');
+		var buttonUrl = $('.examples.hero-demo').find('div[data-language='+languageSelection+'][data-example='+exampleSelection+']').attr('data-buttonurl');
+		//console.log("Example: " + exampleSelection + " Language: " + languageSelection);
+		//console.log("Buttontext: " + buttonTxt);
+		$('.demo.window .content .code').html(exampleCode);
+		addLineNumbers();
+		if( buttonTxt.length ){
+			$('.demo.window .bottombar a.livedemo').text(buttonTxt);
+			$('.demo.window .bottombar a.livedemo').attr('href', buttonUrl);
+		}
+	}
+	
+	if( $('section.welcome').length ){
+		$('.demo.window ul.lang li').click(function(){
+			$('.demo.window ul.lang li.active').removeClass('active');
+			$(this).addClass('active');
+			var languageChange = $('.demo.window ul.lang li.active').attr('data-language');
+			var dropdown = $('.dropdown.hero-demo').find('div[data-language='+languageChange+']').html();
+			$('.demo.window .bottombar #example-select').html(dropdown);
+			updateExample();
+		})
+		$('#example-select').on('change', function() {
+			updateExample();
+		});
+	}
 	
 });

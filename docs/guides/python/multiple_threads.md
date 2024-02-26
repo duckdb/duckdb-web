@@ -10,7 +10,7 @@ Feel free to follow along in this [Google Colab notebook](https://colab.research
 
 ## Setup
 
-First, import duckdb and several modules from the Python standard library. 
+First, import DuckDB and several modules from the Python standard library. 
 Note: if using Pandas, add `import pandas` at the top of the script as well (as it must be imported prior to the multi-threading). 
 Then connect to a file-backed DuckDB database and create an example table to store inserted data. 
 This table will track the name of the thread that completed the insert and automatically insert the timestamp when that insert occurred using the [`DEFAULT` expression](../../sql/statements/create_table#syntax).
@@ -20,11 +20,12 @@ from threading import Thread, current_thread
 import random
 
 duckdb_con = duckdb.connect('my_peristent_db.duckdb') 
-# duckdb_con = duckdb.connect() # Pass in no parameters for an in memory database
+# Use connect without parameters for an in-memory database
+# duckdb_con = duckdb.connect()
 duckdb_con.execute("""
     CREATE OR REPLACE TABLE my_inserts (
-        thread_name varchar, 
-        insert_time timestamp DEFAULT current_timestamp
+        thread_name VARCHAR,
+        insert_time TIMESTAMP DEFAULT current_timestamp
     )
 """)
 ```
@@ -75,14 +76,14 @@ threads = []
 # Create multiple writer and reader threads (in the same process) 
 # Pass in the same connection as an argument
 for i in range(write_thread_count):
-    threads.append(Thread(target=write_from_thread,
-                            args=(duckdb_con,),
-                            name='write_thread_'+str(i)))
+    threads.append(Thread(target = write_from_thread,
+                            args = (duckdb_con,),
+                            name = 'write_thread_' + str(i)))
 
 for j in range(read_thread_count):
-    threads.append(Thread(target=read_from_thread,
-                            args=(duckdb_con,),
-                            name='read_thread_'+str(j)))
+    threads.append(Thread(target = read_from_thread,
+                            args = (duckdb_con,),
+                            name = 'read_thread_' + str(j)))
 
 # Shuffle the threads to simulate a mix of readers and writers
 random.seed(6) # Set the seed to ensure consistent results when testing
@@ -109,5 +110,4 @@ print(duckdb_con.execute("""
     ORDER BY 
         insert_time
 """).df())
-
 ```

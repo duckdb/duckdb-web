@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: ODBC API - Overview
+redirect_from:
+  - /docs/api/odbc
+  - /docs/api/odbc/
 ---
 
 The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of Database Management Systems (DBMSs).
@@ -21,25 +24,12 @@ DuckDB supports the ODBC version 3.0 according to the [Core Interface Conformanc
 We release the ODBC driver as assets for Linux and Windows.
 Users can download them from the [Latest Release of DuckDB](https://github.com/duckdb/duckdb/releases).
 
-## Operating System
+## Operating Systems
 
-<table>
-  <tr>
-    <th>Operating System</th>
-    <th>Supported/Tested Versions</th>
-  </tr>
-  <tr>
-    <td>Linux</td>
-    <td>Ubuntu 16 or later</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>Fedora 31 or later</td>
-  </tr>
-  <tr>
-    <td>Microsoft Windows</td>
-    <td>Microsoft Windows 10 or later</td>
-  </tr>
-</table>
+<div class="narrow_table"></div>
 
-## Pages in This Section
+| Operating System   | Supported Versions             |
+|--------------------|--------------------------------|
+| Linux              | Ubuntu 20.04 or later          |
+| Microsoft Windows  | Microsoft Windows 10 or later  |
+

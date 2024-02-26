@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Alter View
+title: ALTER VIEW Statement
 ---
 
 The `ALTER VIEW` statement changes the schema of an existing view in the catalog.

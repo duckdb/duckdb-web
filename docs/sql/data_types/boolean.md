@@ -4,6 +4,8 @@ title: Boolean Type
 blurb: The BOOLEAN type represents a statement of truth ("true" or "false").
 ---
 
+<div class="narrow_table"></div>
+
 | Name | Aliases | Description |
 |:---|:---|:---|
 | `BOOLEAN` | `BOOL` | logical boolean (`true`/`false`) |
@@ -19,7 +21,7 @@ Boolean values can be explicitly created using the literals `true` and `false`. 
 
 ```sql
 -- create a table with the value (5), (15) and (NULL)
-CREATE TABLE integers(i INTEGER);
+CREATE TABLE integers (i INTEGER);
 INSERT INTO integers VALUES (5), (15), (NULL);
 
 -- select all entries where i > 10
@@ -34,7 +36,9 @@ SELECT * FROM integers WHERE i > 10;
 
 The `AND`/`OR` conjunctions can be used to combine boolean values.
 
-Below is a truth table for the `AND` conjunction (i.e., `x AND y`).
+Below is the truth table for the `AND` conjunction (i.e., `x AND y`).
+
+<div class="narrow_table"></div>
 
 |  X  | X AND true  | X AND false | X AND NULL  |
 |-------|-------|-------|-------|
@@ -42,7 +46,9 @@ Below is a truth table for the `AND` conjunction (i.e., `x AND y`).
 | false | false | false | false |
 | NULL  | NULL  | false | NULL  |
 
-Below is a truth table for the `OR` conjunction (i.e., `x OR y`).
+Below is the truth table for the `OR` conjunction (i.e., `x OR y`).
+
+<div class="narrow_table"></div>
 
 |  X   | X OR true | X OR false | X OR NULL |
 |-------|------|-------|------|

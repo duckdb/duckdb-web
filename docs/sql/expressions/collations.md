@@ -12,12 +12,12 @@ By default, the `BINARY` collation is used. That means that strings are ordered 
 
 ## Using Collations
 
-In the stand-alone installation of DuckDB three collations are included: `NOCASE`, `NOACCENT` and `NFC`. The `NOCASE` collation compares characters as equal regardless of their casing. The `NOACCENT` collation compares characters as equal regardless of their accents. The `NFC` collation performs NFC-normalized comparisons, see [here](https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization) for more information.
+In the stand-alone installation of DuckDB three collations are included: `NOCASE`, `NOACCENT` and `NFC`. The `NOCASE` collation compares characters as equal regardless of their casing. The `NOACCENT` collation compares characters as equal regardless of their accents. The `NFC` collation performs NFC-normalized comparisons, see [Unicode normalization](https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization) for more information.
 
 ```sql
-SELECT 'hello'='hElLO';
+SELECT 'hello' = 'hElLO';
 -- false
-SELECT 'hello' COLLATE NOCASE='hElLO';
+SELECT 'hello' COLLATE NOCASE = 'hElLO';
 -- true
 
 SELECT 'hello' = 'hëllo';
@@ -29,11 +29,11 @@ SELECT 'hello' COLLATE NOACCENT = 'hëllo';
 Collations can be combined by chaining them using the dot operator. Note, however, that not all collations can be combined together. In general, the `NOCASE` collation can be combined with any other collator, but most other collations cannot be combined.
 
 ```sql
-SELECT 'hello' COLLATE NOCASE='hElLÖ';
+SELECT 'hello' COLLATE NOCASE = 'hElLÖ';
 -- false
-SELECT 'hello' COLLATE NOACCENT='hElLÖ';
+SELECT 'hello' COLLATE NOACCENT = 'hElLÖ';
 -- false
-SELECT 'hello' COLLATE NOCASE.NOACCENT='hElLÖ';
+SELECT 'hello' COLLATE NOCASE.NOACCENT = 'hElLÖ';
 -- true
 ```
 
@@ -42,42 +42,44 @@ SELECT 'hello' COLLATE NOCASE.NOACCENT='hElLÖ';
 The collations we have seen so far have all been specified *per expression*. It is also possible to specify a default collator, either on the global database level or on a base table column. The `PRAGMA` `default_collation` can be used to specify the global default collator. This is the collator that will be used if no other one is specified.
 
 ```sql
-PRAGMA default_collation=NOCASE;
+SET default_collation = NOCASE;
 
-SELECT 'hello'='HeLlo';
+SELECT 'hello' = 'HeLlo';
 -- true
 ```
 
 Collations can also be specified per-column when creating a table. When that column is then used in a comparison, the per-column collation is used to perform that comparison.
 
 ```sql
-CREATE TABLE names(name VARCHAR COLLATE NOACCENT);
+CREATE TABLE names (name VARCHAR COLLATE NOACCENT);
 INSERT INTO names VALUES ('hännes');
-SELECT name FROM names WHERE name='hannes';
+SELECT name FROM names WHERE name = 'hannes';
 -- hännes
 ```
 
 Be careful here, however, as different collations cannot be combined. This can be problematic when you want to compare columns that have a different collation specified.
 
 ```sql
-SELECT name FROM names WHERE name='hannes' COLLATE NOCASE;
+SELECT name FROM names WHERE name = 'hannes' COLLATE NOCASE;
 -- ERROR: Cannot combine types with different collation!
 
-CREATE TABLE other_names(name VARCHAR COLLATE NOCASE);
+CREATE TABLE other_names (name VARCHAR COLLATE NOCASE);
 INSERT INTO other_names VALUES ('HÄNNES');
 
-SELECT * FROM names, other_names WHERE names.name=other_names.name;
+SELECT * FROM names, other_names WHERE names.name = other_names.name;
 -- ERROR: Cannot combine types with different collation!
 
 -- need to manually overwrite the collation!
 
-SELECT * FROM names, other_names WHERE names.name COLLATE NOACCENT.NOCASE=other_names.name COLLATE NOACCENT.NOCASE;
+SELECT * FROM names, other_names WHERE names.name COLLATE NOACCENT.NOCASE = other_names.name COLLATE NOACCENT.NOCASE;
 -- hännes|HÄNNES
 ```
 
 ## ICU Collations
 
-The collations we have seen so far are not region dependent, and do not follow any specific regional rules. If you wish to follow the rules of a specific region or language, you will need to use one of the ICU collations. For that, you need to include the ICU extension. This can be found in the `extension/icu` folder in the project. Using the C++ API, the extension can be loaded as follows:
+The collations we have seen so far are not region-dependent, and do not follow any specific regional rules. If you wish to follow the rules of a specific region or language, you will need to use one of the ICU collations. For that, you need to [load the ICU extension](../../extensions/icu#installing-and-loading).
+
+If you are using the C++ API, you may find the extension in the `extension/icu` folder of the DuckDB project. Using the C++ API, the extension can be loaded as follows:
 
 ```cpp
 DuckDB db;
@@ -95,7 +97,7 @@ SELECT * FROM pragma_collations();
 These collations can then be used as the other collations would be used before. They can also be combined with the `NOCASE` collation. For example, to use the German collation rules you could use the following code snippet:
 
 ```sql
-CREATE TABLE strings(s VARCHAR COLLATE DE);
+CREATE TABLE strings (s VARCHAR COLLATE DE);
 INSERT INTO strings VALUES ('Gabel'), ('Göbel'), ('Goethe'), ('Goldmann'), ('Göthe'), ('Götz');
 SELECT * FROM strings ORDER BY s;
 -- "Gabel", "Göbel", "Goethe", "Goldmann", "Göthe", "Götz"

@@ -1,18 +1,14 @@
 ---
-
 layout: post
 title:  "From Waddle to Flying: Quickly expanding DuckDB's functionality with Scalar Python UDFs"
 author: Pedro Holanda, Thijs Bruineman and Phillip Cloud
-excerpt_separator: <!--more-->
-
+excerpt: DuckDB now supports vectorized Scalar Python User Defined Functions (UDFs). By implementing Python UDFs, users can easily expand the functionality of DuckDB while taking advantage of DuckDB's fast execution model, SQL and data safety.
 ---
 
 <img src="/images/blog/bird-dance.gif"
      alt="DuckDB-Waddle-fly"
      width=100
      />
-
-*TLDR: DuckDB now supports vectorized Scalar Python User Defined Functions (UDFs). By implementing Python UDFs, users can easily expand the functionality of DuckDB while taking advantage of DuckDB's fast execution model, SQL and data safety.*
 
 User Defined Functions (UDFs) enable users to extend the functionality of a Database Management System (DBMS) to perform domain-specific tasks that are not implemented as built-in functions. For instance, users who frequently need to export private data can benefit from an anonymization function that masks the local part of an email while preserving the domain. Ideally, this function would be executed directly in the DBMS. This approach offers several advantages:
 
@@ -216,11 +212,11 @@ import pyarrow as pa
 
 # Built-In UDF
 def add_built_in_type(x):
-     return x + 1
+    return x + 1
 
-#Arrow UDF
+# Arrow UDF
 def add_arrow_type(x):
-     return pc.add(x,1)
+    return pc.add(x,1)
 
 con = duckdb.connect()
 
@@ -230,16 +226,16 @@ con.create_function('add_arrow_type', add_arrow_type, ['BIGINT'], 'BIGINT', type
 
 # Integer View with 10,000,000 elements.
 con.sql("""
-     select
-          i
-          from range(10000000) tbl(i);
+     select i
+     from range(10000000) tbl(i);
 """).to_view("numbers")
 
 # Calls for both UDFs
 native_res = con.sql("select sum(add_built_in_type(i)) from numbers").fetchall()
 arrow_res = con.sql("select sum(add_arrow_type(i)) from numbers").fetchall()
-
 ```
+
+<div class="narrow_table"></div>
 
 |    Name     | Time (s) |
 |-------------|----------|
@@ -296,9 +292,9 @@ con.sql("""
 con.sql("select sum(strlen_arrow(i)) from strings tbl(i)").fetchall()
 
 exec_external(con)
-
 ```
 
+<div class="narrow_table"></div>
 
 |    Name     | Time (s) | Peak Memory Consumption (MB) |
 |-------------|----------|------------------------------|

@@ -3,20 +3,20 @@
 set -xeuo pipefail
 
 fix=''
-check=''
+check='--check --diff'
 while getopts "f" opt; do
     case $opt in
         f) fix="--fix"
-           check='--check --diff';;
+           check='';;
         *) exit
     esac
 done
 
 npx markdownlint-cli docs/ dev/ _posts/ --config .markdownlint.jsonc --ignore docs/archive $fix || echo 'mdlit failed'
 
-black scripts --skip-string-normalization $check || echo 'black failed'
+black scripts --skip-string-normalization $check  || echo 'black failed'
 
-if [[ ! -z $(which vale) ]]; then
+if ! $(which vale); then
     echo "Vale binary not found, please install it from https://vale.sh/docs/vale-cli/installation/"
     exit 1
 fi

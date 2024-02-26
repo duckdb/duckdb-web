@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: SQLLogicTest - Debugging
+title: sqllogictest - Debugging
 ---
 
 The purpose of the tests is to figure out when things break. Inevitably changes made to the system will cause one of the tests to fail, and when that happens the test needs to be debugged.
@@ -18,7 +18,7 @@ You can also skip certain queries from executing by placing `mode skip` in the f
 
 ## Triggering Which Tests to Run
 
-When running the unittest program, by default all the fast tests are run. A specific test can be run by adding the name of the test as an argument. For the SQLLogicTests, this is the relative path to the test file.
+When running the unittest program, by default all the fast tests are run. A specific test can be run by adding the name of the test as an argument. For the sqllogictests, this is the relative path to the test file.
 
 ```bash
 # run only a single test

@@ -5,6 +5,10 @@
       "slug": "/dev/",
       "mainfolderitems": [
         {
+          "page": "DuckDB Repositories",
+          "url": "/internals/repositories"
+        },
+        {
           "page": "Testing",
           "slug": "sqllogictest",
           "subfolderitems": [
@@ -13,7 +17,7 @@
               "url": "/dev/testing"
             },
             {
-              "page": "SQLLogicTest",
+              "page": "sqllogictest",
               "url": "/dev/sqllogictest/intro"
             },
             {
@@ -59,12 +63,16 @@
           "url": "/dev/profiling"
         },
         {
-          "page": "Release Dates",
-          "url": "/dev/release-dates"
+          "page": "Release Calendar",
+          "url": "/dev/release-calendar"
         },
         {
           "page": "Building",
           "url": "/dev/building"
+        },
+        {
+          "page": "Benchmark Suite",
+          "url": "/dev/benchmark"
         }
       ]
     },

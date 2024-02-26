@@ -1,19 +1,19 @@
 ---
 layout: docu
-title: List
+title: List Type
 ---
 
-## List Data Type
-
-A `LIST` column can have values with different lengths, but they must all have the same underlying type. `LIST`s are typically used to store arrays of numbers, but can contain any uniform data type, including other `LIST`s and `STRUCT`s.
+A `LIST` column encodes lists of values. Fields in the column can have values with different lengths, but they must all have the same underlying type. `LIST`s are typically used to store arrays of numbers, but can contain any uniform data type, including other `LIST`s and `STRUCT`s.
 
 `LIST`s are similar to PostgreSQL's `ARRAY` type. DuckDB uses the `LIST` terminology, but some [array functions](../functions/nested#list-functions) are provided for PostgreSQL compatibility.
 
 See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
-Lists can be created using the [`LIST_VALUE(expr, ...)`](../functions/nested#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions.
+> For storing fixed-length lists, DuckDB uses the [`ARRAY` type](array).
 
-### Creating Lists
+## Creating Lists
+
+Lists can be created using the [`list_value(expr, ...)`](../functions/nested#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions. To create a list from a table column, use the [`list`](../aggregates#general-aggregate-functions) aggregate function.
 
 ```sql
 -- List of integers
@@ -28,7 +28,7 @@ SELECT list_value(1, 2, 3);
 CREATE TABLE list_table (int_list INT[], varchar_list VARCHAR[]);
 ```
 
-### Retrieving from Lists
+## Retrieving from Lists
 
 Retrieving one or more values from a list can be accomplished using brackets and slicing notation, or through [list functions](../functions/nested#list-functions) like `list_extract`. Multiple equivalent functions are provided as aliases for compatibility with systems that refer to lists as arrays. For example, the function `array_slice`.
 ```sql
@@ -37,8 +37,10 @@ Retrieving one or more values from a list can be accomplished using brackets and
 -- For example, this can't be parsed: SELECT ['a', 'b', 'c'][1]
 ```
 
+<div class="narrow_table"></div>
+
 | example                                    | result     |
-| :----------------------------------------- | :--------- |
+|:-------------------------------------------|:-----------|
 | `SELECT (['a', 'b', 'c'])[3]`              | 'c'        |
 | `SELECT (['a', 'b', 'c'])[-1]`             | 'c'        |
 | `SELECT (['a', 'b', 'c'])[2 + 1]`          | 'c'        |
@@ -56,7 +58,7 @@ The ordering is defined positionally. `NULL` values compare greater than all oth
 
 At the top level, `NULL` nested values obey standard SQL `NULL` comparison rules:
 comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` result.
-Comparing nested value _members_ , however, uses the internal nested value rules for `NULL`s,
+Comparing nested value _members_, however, uses the internal nested value rules for `NULL`s,
 and a `NULL` nested value member will compare above a non-`NULL` nested value member.
 
 ## Functions

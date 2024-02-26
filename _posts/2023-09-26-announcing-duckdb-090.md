@@ -2,7 +2,8 @@
 layout: post
 title:  "Announcing DuckDB 0.9.0"
 author: Mark Raasveldt and Hannes Mühleisen
-excerpt_separator: <!--more-->
+thumb: "/images/blog/thumbs/230926.png"
+excerpt: ""
 ---
 
 <img src="/images/blog/yellow-billed-duck.jpg"
@@ -61,6 +62,8 @@ The performance of our hash aggregate has also improved in general, especially w
 SELECT COUNT(*) FROM (SELECT DISTINCT * FROM tbl);
 ```
 If we keep all the data in memory, the query should use around 6GB. However, we can still complete the query if less memory is available. In the table below, we can see how the runtime is affected by lowering the memory limit:
+
+<div class="narrow_table"></div>
 
 |  memory limit |  v0.8.1  |  v0.9.0  |
 |:-------------:|:--------:|:--------:|
@@ -127,10 +130,12 @@ SELECT
 FROM tripdata;
 ```
 
-Version | Time (s)
--- | --:
-v0.8.0 | 33.8
-v0.9.0 | 3.8
+<div class="narrow_table"></div>
+
+| Version | Time (s) |
+| -- | --: |
+| v0.8.0 | 33.8 |
+| v0.9.0 | 3.8 |
 
 #### Storage Improvements
 
@@ -143,10 +148,12 @@ CREATE TABLE integers(i INTEGER PRIMARY KEY);
 INSERT INTO integers FROM range(10000000);
 ```
 
-Version | Size
--- | --:
-v0.8.0 | 278MB
-v0.9.0 | 78MB
+<div class="narrow_table"></div>
+
+| Version | Size |
+| -- | --: |
+| v0.8.0 | 278MB |
+| v0.9.0 | 78MB |
 
 In addition, due to improvements in the manner in which indexes are stored on disk they can now be written to disk incrementally instead of always requiring a full rewrite. This allows for much quicker checkpointing for tables that have indexes.
 
@@ -172,7 +179,7 @@ LOAD inet;
 SELECT '127.0.0.1'::INET;
 ```
 
-[**AWS Extension**](https://github.com/duckdblabs/duckdb_aws). This release marks the launch of the DuckDB AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
+[**AWS Extension**](https://github.com/duckdb/duckdb_aws). This release marks the launch of the DuckDB AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
 
 ```sql
 CALL load_aws_credentials();
@@ -181,19 +188,20 @@ SELECT * FROM "s3://some-bucket/that/requires/authentication.parquet";
 
 [See the documentation for more information](https://duckdb.org/docs/extensions/aws).
 
-[**Experimental Iceberg Extension**](https://github.com/duckdblabs/duckdb_iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
+[**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb_iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
 ```sql
-SELECT count(*) FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
+SELECT count(*)
+FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
 ```
 
 [See the documentation for more information](https://duckdb.org/docs/extensions/iceberg).
 
-[**Experimental Azure Extension**](https://github.com/duckdblabs/duckdb_azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
+[**Experimental Azure Extension**](https://github.com/duckdb/duckdb_azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 
 ```sql
 SET azure_storage_connection_string = '<your_connection_string>';
-SELECT * from 'azure://<my_container>/*.csv';
+SELECT * FROM 'azure://<my_container>/*.csv';
 ```
 
 [See the documentation for more information](https://duckdb.org/docs/extensions/azure).
@@ -238,4 +246,4 @@ Note that the API is currently experimental and features are still missing. We a
 
 #### Final Thoughts
 
-The full release notes can be [found on Github](https://github.com/duckdb/duckdb/releases/tag/v0.9.0). We would like to thank all of the contributors for their hard work on improving DuckDB.
+The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.9.0). We would like to thank all of the contributors for their hard work on improving DuckDB.

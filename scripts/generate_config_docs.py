@@ -38,13 +38,14 @@ cmd = f'''
 .mode markdown
 INSTALL httpfs;
 LOAD httpfs;
+CREATE MACRO surround_with_backticks(str) AS '`' || str || '`';
 SELECT
     substr(name, 2, (LEN(name) - 2)::int) AS Name,
     {description_replacement} AS Description,
-    '`' || input_type || '`' AS "Input type",
+    surround_with_backticks(input_type) AS "Input type",
     default_value AS "Default value"
 FROM (
-SELECT ARRAY_AGG('`' || name || '`')::VARCHAR AS name, description, input_type,
+SELECT ARRAY_AGG(surround_with_backticks(name))::VARCHAR AS name, description, input_type,
 	FIRST(CASE
     WHEN value = ''
     THEN ''
@@ -57,8 +58,8 @@ SELECT ARRAY_AGG('`' || name || '`')::VARCHAR AS name, description, input_type,
 	WHEN name='Calendar'
 	THEN 'System (locale) calendar'
 	WHEN lower(value) IN ('null', 'nulls_last', 'asc', 'desc')
-	THEN '`' || upper(value) || '`'
-    ELSE '`' || value || '`' END) AS default_value
+	THEN surround_with_backticks(upper(value))
+    ELSE surround_with_backticks(value) END) AS default_value
 FROM duckdb_settings()
 WHERE name NOT LIKE '%debug%' AND description NOT ILIKE '%debug%'
 GROUP BY description, input_type
@@ -102,7 +103,9 @@ text += (
 )
 
 text += '\n\n' + stdout + '\n'
-
+text = re.sub(
+    r'^\|---*\|---*\|---*\|---*\|$', '|----|--------|--|---|', text, flags=re.MULTILINE
+)
 text = text.replace('**QUERY_TREE**_OPTIMIZER', '**QUERY_TREE_OPTIMIZER**')
 
 with open(doc_file, 'w+') as f:

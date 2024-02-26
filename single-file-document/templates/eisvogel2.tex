@@ -49,7 +49,6 @@ $if(CJKmainfont)$
 $endif$
 %
 \documentclass[
-%  landscape,
 $if(fontsize)$
   $fontsize$,
 $endif$
@@ -319,7 +318,7 @@ $endif$
 $else$
 $if(beamer)$
 $else$
-\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+\usepackage[margin=1.5cm,includehead=true,includefoot=true,centering,$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
 $endif$
 $if(titlepage-logo)$
@@ -354,7 +353,7 @@ $highlighting-macros$
 % the help of fvextra). Redefinition is necessary because it is unlikely that
 % pandoc includes fvextra in the default template.
 \usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\},breaksymbol=}
 
 $endif$
 $if(tables)$
@@ -611,7 +610,7 @@ $if(titlepage-background)$
 $endif$
 $if(geometry)$
 $else$
-\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering]{geometry}
+\usepackage[margin=1.5cm,includehead=true,includefoot=true,centering]{geometry}
 $endif$
 $endif$
 

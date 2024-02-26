@@ -1,19 +1,25 @@
+<p>This page contains installation options for DuckDB:</p>
+<ul>
+	<li>Binaries are available for major programming languages and platforms</li>
+	<li>We recommend using the latest release (currently {{site.currentduckdbversion }})</li>
+	<li>If there are no pre-packaged binaries for a platform, consider <a href="https://duckdb.org/dev/building">building DuckDB from source</a></li>
+</ul>
 
 <div class="yourselection">
 
-	<div class="version select">
+	<div class="version select" data-select="version">
 		<h3>Version</h3>
 		<ul class="version">
 			<li class="selected" data-id=".latest">
 				<div> {{ site.currentduckdbversion }} <span class="versioninfo">(Latest Release)</span></div>
 			</li>
 			<li data-id=".main">
-				<div>GitHub main <span class="versioninfo">(Bleeding Edge)</span></div>
+				<div>GitHub main <span class="versioninfo">(Nightly Build)</span></div>
 			</li>
 		</ul>
 	</div>
 
-	<div class="evironment select">
+	<div class="environment select" data-select="environment">
 		<h3>Environment</h3>
 		<ul class="environment">
 			<li data-id=".cli" class="selected">Command Line</li>
@@ -21,26 +27,15 @@
 			<li data-id=".r">R</li>
 			<li data-id=".java">Java</li>
 			<li data-id=".js">Node.js</li>
-			<li data-id=".julia">Julia</li>
+			<li data-id=".rust">Rust</li>
+			<li data-id=".go">Go</li>
 			<li data-id=".cplusplus">C/C++</li>
 			<li data-id=".odbc">ODBC</li>
 		</ul>
-		<label class="onlymobile">
-			<select name="environment" class="environmentselect onlymobile">
-				<option value=".cli">Command Line</option>
-				<option value=".python">Python</option>
-				<option value=".r">R</option>
-				<option value=".java">Java</option>
-				<option value=".js">Node.js</option>
-				<option value=".julia">Julia</option>
-				<option value=".cplusplus">C/C++</option>
-				<option value=".odbc">ODBC</option>
-			</select>
-		</label>
 	</div>
 
 
-	<div class="installer select">
+	<div class="installer select" data-select="installer">
 		<h3>Package</h3>
 		<ul class="pack">
 			<li data-id=".source">Source</li>
@@ -48,7 +43,7 @@
 		</ul>
 	</div>
 
-	<div class="platform select">
+	<div class="platform select" data-select="platform">
 		<h3>Platform</h3>
 		<ul class="platform">
 			<li data-id=".win">Windows</li>
@@ -90,27 +85,8 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	<div class="latest main cli binary"></div>
 	<!-- End Empty Results -->
 
-	<div class="latest julia">
-		{%- highlight julia -%}
-using Pkg
-Pkg.add("DuckDB"){%- endhighlight -%}
-	</div>
-
-	<div class="example julia">
-		{%- highlight julia -%}
-# create a new in-memory database
-con = DBInterface.connect(DuckDB.DB, ":memory:")
-
-# create a table
-DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
-	</div>
-
-	<div class="main julia">
-		Not available
-	</div>
-
 	<div class="latest python">
-		{% highlight bash %}pip install duckdb=={{ site.currentduckdbversion }}{% endhighlight %}
+		{% highlight bash %}pip install -U duckdb{% endhighlight %}
 	</div>
 
 	<div class="latest r">
@@ -120,14 +96,27 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 	<div class="latest java">
 {% highlight xml %}
 <dependency>
- <groupId>org.duckdb</groupId>
- <artifactId>duckdb_jdbc</artifactId>
- <version>{{ site.currentjavaversion }}</version>
+    <groupId>org.duckdb</groupId>
+    <artifactId>duckdb_jdbc</artifactId>
+    <version>{{ site.currentjavaversion }}</version>
 </dependency>{% endhighlight %}
+<br/>
+Direct link to JAR: <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/duckdb_jdbc-{{ site.currentduckdbversion }}.jar">duckdb_jdbc-{{ site.currentduckdbversion }}.jar</a>
 	</div>
 
 		<div class="latest js">
 {% highlight bash %}npm install duckdb{% endhighlight %}
+	</div>
+
+	<div class="latest rust">
+		{% highlight bash %}cargo add duckdb --features bundled{% endhighlight %}
+	</div>
+
+	<div class="latest go">
+		go get github.com/marcboeker/go-duckdb
+		<br/><br/>
+
+		<span style="opacity: 0.5;"><font color="black">(third-party library)</font></span>
 	</div>
 
 	<div class="latest cplusplus source">
@@ -184,6 +173,9 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 	</div>
 
 	<div class="latest cli binary win">
+		winget: winget install DuckDB.cli
+		<br/><br/>
+
 		Windows (64-bit): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a>
 	</div>
 
@@ -199,13 +191,14 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 	</div>
 
 	<div class="latest odbc binary macos">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">duckdb_odbc-osx-universal.zip</a>
 	</div>
 
 	<div class="latest odbc binary win">
 		Windows (64-bit): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a>
 		<br/><br/>
 
-		./odbc_install.exe <span style="opacity: 0.5;"><font color="black">(double-click)</font>
+		./odbc_install.exe <span style="opacity: 0.5;"><font color="black">(double-click)</font></span>
 	</div>
 
 	<div class="main python">
@@ -220,22 +213,22 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 		Java dev builds are available in the sonatype snapshots repository, which can be accessed with the following:
 		{% highlight xml %}
 <dependency>
-	<groupId>org.duckdb</groupId>
-	<artifactId>duckdb_jdbc</artifactId>
-	<version>{{ site.nextjavaversion }}-SNAPSHOT</version>
+    <groupId>org.duckdb</groupId>
+    <artifactId>duckdb_jdbc</artifactId>
+    <version>{{ site.nextjavaversion }}-SNAPSHOT</version>
 </dependency>
 
 ...
 
 <repositories>
-	<repository>
-		<id>oss-sonatype</id>
-		<name>oss-sonatype</name>
-		<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		<snapshots>
-			<enabled>true</enabled>
-		</snapshots>
-	</repository>
+    <repository>
+        <id>oss-sonatype</id>
+        <name>oss-sonatype</name>
+        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
 </repositories>
 		{% endhighlight %}
 	</div>
@@ -245,6 +238,16 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 {% highlight bash %}npm install duckdb@next{% endhighlight %}
 	</div>
 
+	<div class="main rust source">
+		<a href="https://github.com/duckdb/duckdb-rs" target="_blank">https://github.com/duckdb/duckdb-rs</a>
+	</div>
+
+	<div class="main go source">
+		<a href="https://github.com/marcboeker/go-duckdb" target="_blank">https://github.com/marcboeker/go-duckdb</a>
+		<br/><br/>
+
+		<span style="opacity: 0.5;"><font color="black">(third-party library)</font></span>
+	</div>
 
 	<div class="main cplusplus source">
 		<a href="https://github.com/duckdb/duckdb" target="_blank">https://github.com/duckdb/duckdb</a>
@@ -266,7 +269,7 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 	</div>
 
 	<div class="main binary macos odbc">
-		Not available
+		macOS (Universal): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">duckdb_odbc-osx-universal.zip</a>
 	</div>
 
 	<div class="example python">
@@ -302,6 +305,58 @@ db.all('SELECT 42 AS fortytwo', function(err, res) {
   }
   console.log(res[0].fortytwo)
 });{% endhighlight %}
+	</div>
+
+	<div class="example rust">
+{% highlight rust %}
+use duckdb::{Connection, Result};
+
+#[derive(Debug)]
+struct Person { id: i32, name: String, }
+
+fn main() -> Result<()> {
+    let conn = Connection::open_in_memory()?;
+
+    conn.execute_batch(
+        r"CREATE TABLE person (id BIGINT, name VARCHAR);
+          INSERT INTO person VALUES (42, 'John');
+        ")?;
+    let mut stmt = conn.prepare("SELECT id, name FROM person")?;
+    let person_iter = stmt.query_map([], |row| {
+        Ok(Person {id: row.get(0)?, name: row.get(1)?})
+    })?;
+
+    for person in person_iter {
+        println!("Found person {:?}", person.unwrap());
+    }
+    Ok(())
+}{% endhighlight %}
+	</div>
+
+	<div class="example go">
+{% highlight go %}
+package main
+
+import (
+	"database/sql"
+	"fmt"
+	_ "github.com/marcboeker/go-duckdb"
+)
+
+func main() {
+	db, _ := sql.Open("duckdb", "")
+
+	db.Exec(`CREATE TABLE person (id INTEGER, name VARCHAR)`)
+	db.Exec(`INSERT INTO person VALUES (42, 'John')`)
+
+	var (
+		id   int
+		name string
+	)
+	row := db.QueryRow(`SELECT id, name FROM person`)
+	_ = row.Scan(&id, &name)
+	fmt.Println("id:", id, "name:", name)
+}{% endhighlight %}
 	</div>
 
 	<div class="example cplusplus">

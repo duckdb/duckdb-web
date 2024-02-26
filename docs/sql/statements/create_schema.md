@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Create Schema
+title: CREATE SCHEMA Statement
 railroad: statements/createschema.js
 ---
 

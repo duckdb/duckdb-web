@@ -1,21 +1,19 @@
 ---
 layout: docu
-title: Struct
+title: Struct Data Type
 ---
-
-## Struct Data Type
 
 Conceptually, a `STRUCT` column contains an ordered list of columns called "entries". The entries are referenced by name using strings. This document refers to those entry names as keys. Each row in the `STRUCT` column must have the same keys. The names of the struct entries are part of the *schema*. Each row in a `STRUCT` column must have the same layout. The names of the struct entries are case-insensitive.
 
 `STRUCT`s are typically used to nest multiple columns into a single column, and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
 
-`STRUCT`s are similar to PostgreSQL's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a struct, but does not have a `ROW` data type. See an example below and the [nested functions docs](../functions/nested#struct-functions) for details.
+`STRUCT`s are similar to PostgreSQL's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a `STRUCT`, but does not have a `ROW` data type. See an example below and the [nested functions docs](../functions/nested#struct-functions) for details.
 
 See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
-Structs can be created using the [`STRUCT_PACK(name := expr, ...)`](../functions/nested#struct-functions) function or the equivalent array notation `{'name': expr, ...}` notation. The expressions can be constants or arbitrary expressions.
-
 ### Creating Structs
+
+Structs can be created using the [`struct_pack(name := expr, ...)`](../functions/nested#struct-functions) function or the equivalent array notation `{'name': expr, ...}` notation. The expressions can be constants or arbitrary expressions.
 
 ```sql
 -- Struct of integers
@@ -36,10 +34,10 @@ SELECT {'birds':
             {'yes':'frog', 'maybe': 'salamander', 'huh': 'dragon', 'no':'toad'}
         };
 -- Create a struct from columns and/or expressions using the row function.
--- This returns {'x': 1, 'v2': 2, 'y': a}
+-- This returns {'': 1, '': 2, '': a}
 SELECT row(x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);
 -- If using multiple expressions when creating a struct, the row function is optional
--- This also returns {'x': 1, 'v2': 2, 'y': a}
+-- This also returns {'': 1, '': 2, '': a}
 SELECT (x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);
 ```
 
@@ -53,6 +51,7 @@ SELECT struct_insert({'a': 1, 'b': 2, 'c': 3}, d := 4);
 ### Retrieving from Structs
 
 Retrieving a value from a struct can be accomplished using dot notation, bracket notation, or through [struct functions](../functions/nested#struct-functions) like `struct_extract`.
+
 ```sql
 -- Use dot notation to retrieve the value at a key's location. This returns 1
 -- The subquery generates a struct column "a", which we then query with a.x
@@ -69,7 +68,7 @@ SELECT a['x space'] FROM (SELECT {'x space': 1, 'y': 2, 'z': 3} AS a);
 SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3}, 'x space');
 ```
 
-#### Struct.*
+#### `Struct.*`
 
 Rather than retrieving a single key from a struct, star notation (`*`) can be used to retrieve all keys from a struct as separate columns. 
 This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys.
@@ -78,6 +77,8 @@ This is particularly useful when a prior operation creates a struct of unknown s
 -- All keys within a struct can be returned as separate columns using *
 SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} AS a);
 ```
+
+<div class="narrow_table"></div>
 
 | x | y | z |
 |:---|:---|:---|
@@ -102,7 +103,7 @@ SELECT part1.part2 FROM tbl
 1. part1 is a table, part2 is a column
 2. part1 is a column, part2 is a property of that column
 
-#### Two (or more) Dots
+#### Two (or More) Dots
 
 ```sql
 SELECT part1.part2.part3 FROM tbl
@@ -113,52 +114,52 @@ SELECT part1.part2.part3 FROM tbl
 
 Any extra parts (e.g., .part4.part5 etc) are always treated as properties
 
-### Creating Structs with the Row Function
+### Creating Structs with the `row` Function
 
-The `row` function can be used to automatically convert multiple columns to a single struct column. The name of each input column is used as a key, and the value of each column becomes the struct's value at that key.
-
-When converting multiple expressions into a `STRUCT`, the `row` function name is optional - a set of parenthesis is all that is needed.
-
-#### Example Data Table Named t1
-
-| my_column | another_column |
-|:---|:---|
-| 1 | a |
-| 2 | b |
-
-#### Row Function Example
+The `row` function can be used to automatically convert multiple columns to a single struct column.
+When using `row` the keys will be empty strings allowing for easy insertion into a table with a struct column.
+Columns, however, cannot be initialized with the `row` function, and must be explicitly named.
+For example:
 
 ```sql
-SELECT 
-    row(my_column, another_column) AS my_struct_column,
-    (my_column, another_column) AS identical_struct_column
-FROM t1;
+-- Inserting values into a struct column using the row function
+CREATE TABLE t1 (s STRUCT(v VARCHAR, i INTEGER));
+INSERT INTO t1 VALUES (ROW('a', 42));
+-- The table will contain a single entry:
+-- {'v': a, 'i': 42}
+
+-- The following produces the same result as above
+CREATE TABLE t1 AS (
+    SELECT ROW('a', 42)::STRUCT(v VARCHAR, i INTEGER)
+);
+
+-- Initializing a struct column with the row function will fail
+CREATE TABLE t2 AS SELECT ROW('a');
+-- The following error is thrown:
+-- "Error: Invalid Input Error: A table cannot be created from an unnamed struct"
 ```
 
-#### Example Output
-
-| my_struct_column | identical_struct_column |
-|:---|:---|
-| {'my_column': 1, 'another_column': a} | {'my_column': 1, 'another_column': a} |
-| {'my_column': 2, 'another_column': b} | {'my_column': 2, 'another_column': b} |
-
-The `row` function (or simplified parenthesis syntax) may also be used with arbitrary expressions as input rather than column names. In the case of an expression, a key will be automatically generated in the format of 'vN' where N is a number that refers to its parameter location in the row function (Ex: v1, v2, etc.). This can be combined with column names as an input in the same call to the `row` function. This example uses the same input table as above.
-
-#### Row Function Example with a Column Name, a Constant, and an Expression as Input
+When casting structs, the names of fields have to match. Therefore, the following query will fail:
 
 ```sql
-SELECT 
-    row(my_column, 42, my_column + 1) AS my_struct_column,
-    (my_column, 42, my_column + 1) AS identical_struct_column
-FROM t1;
+SELECT a::STRUCT(y INTEGER) AS b
+FROM
+    (SELECT {'x': 42} AS a);
 ```
 
-#### Example Output
+```text
+Error: Mismatch Type Error: Type STRUCT(x INTEGER) does not match with STRUCT(y INTEGER). Cannot cast STRUCTs with different names
+```
 
-| my_struct_column | identical_struct_column |
-|:---|:---|
-| {'my_column': 1, 'v2': 42, 'v3': 2} | {'my_column': 1, 'v2': 42, 'v3': 2} |
-| {'my_column': 2, 'v2': 42, 'v3': 3} | {'my_column': 2, 'v2': 42, 'v3': 3} |
+A workaround for this would be to use [`struct_pack`](#creating-structs) instead:
+
+```sql
+SELECT struct_pack(y := a.x) AS b
+FROM
+    (SELECT {'x': 42} AS a);
+```
+
+> This behavior was introduced in DuckDB v0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
 
 ## Comparison Operators
 
@@ -171,7 +172,7 @@ The ordering is defined positionally in the same way that words can be ordered i
 
 At the top level, `NULL` nested values obey standard SQL `NULL` comparison rules:
 comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` result.
-Comparing nested value _members_ , however, uses the internal nested value rules for `NULL`s,
+Comparing nested value _members_, however, uses the internal nested value rules for `NULL`s,
 and a `NULL` nested value member will compare above a non-`NULL` nested value member.
 
 ## Functions

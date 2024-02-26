@@ -12,11 +12,11 @@
               "url": "/docs/installation/"
             },
             {
-              "page": "How-To Guides",
+              "page": "How-to guides",
               "url": "/docs/guides/index"
             },
             {
-              "page": "Data Import",
+              "page": "Data import",
               "url": "/docs/data/overview"
             },
             {
@@ -48,10 +48,6 @@
         {
           "page": "GitHub",
           "url": "https://github.com/duckdb/duckdb"
-        },
-        {
-          "page": "Support",
-          "url": "https://duckdblabs.com/support/"
         }
       ]
     }

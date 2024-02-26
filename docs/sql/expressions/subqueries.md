@@ -14,6 +14,8 @@ Consider the following table:
 
 ### Grades
 
+<div class="narrow_table"></div>
+
 | grade | course |
 |---:|:---|
 | 7 | Math |
@@ -21,41 +23,67 @@ Consider the following table:
 | 8 | CS |
 
 ```sql
-CREATE TABLE grades(grade INTEGER, course VARCHAR);
+CREATE TABLE grades (grade INTEGER, course VARCHAR);
 INSERT INTO grades VALUES (7, 'Math'), (9, 'Math'), (8, 'CS');
 ```
 
 We can run the following query to obtain the minimum grade:
 
 ```sql
-SELECT MIN(grade) FROM grades;
+SELECT min(grade) FROM grades;
 -- {7}
 ```
 
 By using a scalar subquery in the `WHERE` clause, we can figure out for which course this grade was obtained:
 
 ```sql
-SELECT course FROM grades WHERE grade = (SELECT MIN(grade) FROM grades);
+SELECT course FROM grades WHERE grade = (SELECT min(grade) FROM grades);
 -- {Math}
 ```
 
-## Exists
+## `EXISTS`
 
 <div id="rrdiagram2"></div>
 
-The `EXISTS` operator is used to test for the existence of any row inside the subquery. It returns either true when the subquery returns one or more records, or false otherwise. The `EXISTS` operator is generally the most useful as a *correlated* subquery. However, it can be used as an uncorrelated subquery as well.
+The `EXISTS` operator tests for the existence of any row inside the subquery. It returns either true when the subquery returns one or more records, and false otherwise. The `EXISTS` operator is generally the most useful as a *correlated* subquery to express semijoin operations. However, it can be used as an uncorrelated subquery as well.
 
 For example, we can use it to figure out if there are any grades present for a given course:
 
 ```sql
-SELECT EXISTS(SELECT * FROM grades WHERE course='Math');
--- {true}
+SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math');
+-- true
 
-SELECT EXISTS(SELECT * FROM grades WHERE course='History');
+SELECT EXISTS (SELECT * FROM grades WHERE course = 'History');
 -- false
 ```
 
-## In Operator
+### `NOT EXISTS`
+
+The `NOT EXISTS` operator tests for the absence of any row inside the subquery. It returns either true when the subquery returns an empty result, and false otherwise. The `NOT EXISTS` operator is generally the most useful as a *correlated* subquery to express antijoin operations. For example, to find Person nodes without an interest:
+
+```sql
+CREATE TABLE Person (id BIGINT, name VARCHAR);
+CREATE TABLE interest (PersonId BIGINT, topic VARCHAR);
+
+INSERT INTO Person VALUES (1, 'Jane'), (2, 'Joe');
+INSERT INTO interest VALUES (2, 'Music');
+
+SELECT *
+FROM Person
+WHERE NOT EXISTS (SELECT * FROM interest WHERE interest.PersonId = Person.id);
+```
+```text
+┌───────┬─────────┐
+│  id   │  name   │
+│ int64 │ varchar │
+├───────┼─────────┤
+│     1 │ Jane    │
+└───────┴─────────┘
+```
+
+> DuckDB automatically detects when a `NOT EXISTS` query expresses an antijoin operation. There is no need to manually rewrite such queries to use `LEFT OUTER JOIN ... WHERE ... IS NULL`.
+
+## `IN` Operator
 
 <div id="rrdiagram3"></div>
 
@@ -66,7 +94,6 @@ We can use the `IN` operator in a similar manner as we used the `EXISTS` operato
 ```sql
 SELECT 'Math' IN (SELECT course FROM grades);
 -- true
-
 ```
 
 ## Correlated Subqueries
@@ -81,16 +108,16 @@ For example, suppose that we want to find the minimum grade for every course. We
 SELECT *
 FROM grades grades_parent
 WHERE grade=
-    (SELECT MIN(grade)
+    (SELECT min(grade)
      FROM grades
-     WHERE grades.course=grades_parent.course);
+     WHERE grades.course = grades_parent.course);
 -- {7, Math}, {8, CS}
 ```
 
 The subquery uses a column from the parent query (`grades_parent.course`). Conceptually, we can see the subquery as a function where the correlated column is a parameter to that function:
 
 ```sql
-SELECT MIN(grade) FROM grades WHERE course=?;
+SELECT min(grade) FROM grades WHERE course = ?;
 ```
 
 Now when we execute this function for each of the rows, we can see that for `Math` this will return `7`, and for `CS` it will return `8`. We then compare it against the grade for that actual row. As a result, the row `(Math, 9)` will be filtered out, as `9 <> 7`.

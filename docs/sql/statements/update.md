@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Update Statement
+title: UPDATE Statement
 railroad: statements/update.js
 ---
 
@@ -10,9 +10,9 @@ The `UPDATE` statement modifies the values of rows in a table.
 
 ```sql
 -- for every row where "i" is NULL, set the value to 0 instead
-UPDATE tbl SET i=0 WHERE i IS NULL;
+UPDATE tbl SET i = 0 WHERE i IS NULL;
 -- set all values of "i" to 1 and all values of "j" to 2
-UPDATE tbl SET i=1, j = 2;
+UPDATE tbl SET i = 1, j = 2;
 ```
 
 ## Syntax
@@ -37,6 +37,8 @@ CREATE OR REPLACE TABLE new AS
 
 SELECT * FROM original;
 ```
+
+<div class="narrow_table"></div>
 
 | key |      value       |
 |-----|------------------|
@@ -63,6 +65,8 @@ UPDATE original
 SELECT * FROM original;
 ```
 
+<div class="narrow_table"></div>
+
 | key |    value    |
 |-----|-------------|
 | 1   | new value   |
@@ -81,6 +85,41 @@ UPDATE original as true_original
         FROM original as new
         WHERE true_original.key = new.key
     );
+```
+
+## Update Using Joins
+
+To select the rows to update, `UPDATE` statements can use the `FROM` clause and express joins via the `WHERE` clause. For example:
+
+```sql
+CREATE TABLE city (name VARCHAR, revenue BIGINT, country_code VARCHAR);
+CREATE TABLE country (code VARCHAR, name VARCHAR);
+INSERT INTO city VALUES ('Paris', 700, 'FR'), ('Lyon', 200, 'FR'), ('Brussels', 400, 'BE');
+INSERT INTO country VALUES ('FR', 'France'), ('BE', 'Belgium');
+```
+
+To increase the revenue of all cities in France, join the `city` and the `country` tables, and filter on the latter:
+
+```sql
+UPDATE city
+SET revenue = revenue + 100
+FROM country
+WHERE city.country_code = country.code
+  AND country.name = 'France';
+```
+
+```sql
+SELECT * FROM city;
+```
+```text
+┌──────────┬─────────┬──────────────┐
+│   name   │ revenue │ country_code │
+│ varchar  │  int64  │   varchar    │
+├──────────┼─────────┼──────────────┤
+│ Paris    │     800 │ FR           │
+│ Lyon     │     300 │ FR           │
+│ Brussels │     400 │ BE           │
+└──────────┴─────────┴──────────────┘
 ```
 
 ## Upsert (Insert or Update)

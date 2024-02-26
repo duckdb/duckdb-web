@@ -8,17 +8,17 @@ DuckDB-Wasm's (dynamic) extension loading is modeled after the regular DuckDB's 
 ## Format
 
 Extensions in DuckDB are binaries to be dynamically loaded via `dlopen`. A cryptographical signature is appended to the binary.
-An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via Emscripten's dlopen. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
+An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via Emscripten's `dlopen`. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
 This ensures the file remains a valid WebAssembly file.
 
 > Currently we require this custom section to be the last one, but this can be potentially relaxed in the future.
 
-## INSTALL and LOAD
+## `INSTALL` and `LOAD`
 
 The `INSTALL` semantic in native embeddings of DuckDB is to fetch, decompress from `gzip` and store data in local disk.
 The `LOAD` semantic in native embeddings of DuckDB is to (optionally) perform signature checks *and* dynamic load the binary with the main DuckDB binary.
 
-In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session storage. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of dlopen.
+In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session storage. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of `dlopen`.
 
 ## Autoloading
 
@@ -34,10 +34,10 @@ In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session sto
 | icu                                                                                                                                  | Adds support for time zones and collations using the ICU library |                 |
 | inet                                                                                                                                 | Adds support for IP-related data types and functions             |                 |
 | [json](../../extensions/json)                                                                                                        | Adds support for JSON operations                                 |                 |
-| [parquet](../../extensions/parquet)                                                                                                  | Adds support for reading and writing parquet files               |                 |
-| [sqlite_scanner](../../extensions/sqlite_scanner) [<span class="github">GitHub</span>](https://github.com/duckdblabs/sqlite_scanner) | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
+| [parquet](../../extensions/parquet)                                                                                                  | Adds support for reading and writing Parquet files               |                 |
+| [sqlite](../../extensions/sqlite) [<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner) | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
 | sqlsmith                                                                                                                             |                                                                  |                 |
-| [substrait](../../extensions/substrait) [<span class="github">GitHub</span>](https://github.com/duckdblabs/substrait)                | Adds support for the Substrait integration                       |                 |
+| [substrait](../../extensions/substrait) [<span class="github">GitHub</span>](https://github.com/duckdb/substrait)                | Adds support for the Substrait integration                       |                 |
 | [tpcds](../../extensions/tpcds)                                                                                                      | Adds TPC-DS data generation and query support                    |                 |
 | [tpch](../../extensions/tpch)                                                                                                        | Adds TPC-H data generation and query support                     |                 |
 
@@ -46,6 +46,10 @@ WebAssembly is basically an additional platform, and there might be platform-spe
 ### HTTPFS
 
 The HTTPFS extension is, at the moment, not available in DuckDB-Wasm. Https protocol capabilities needs to go through an additional layer, the browser, which adds both differences and some restrictions to what is doable from native.
+
+Instead, DuckDB-Wasm has a separate implementation that for most purposes is interchangable, but does not support all use cases (as it must follow security rules imposed by the browser, such as CORS).
+Due to this CORS restriction, any requests for data made using the HTTPFS extension must be to websites that allow (using CORS headers) the website hosting the DuckDB-Wasm instance to access that data.
+The [MDN website](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a great resource for more information regarding CORS.
 
 ## Extension Signing
 

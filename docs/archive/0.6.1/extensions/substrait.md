@@ -10,7 +10,7 @@ This extension is mainly exposed via 3 different APIs - the SQL API, the Python 
 Here we depict how to consume and produce substrait query plans in each API.
 
 <!--
-Additionally, see the [repo](https://github.com/duckdblabs/substrait) for further usage details.
+Additionally, see the [repo](https://github.com/duckdb/substrait) for further usage details.
 -->
 
 ## SQL

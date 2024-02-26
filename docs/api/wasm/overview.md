@@ -3,6 +3,7 @@ layout: docu
 title: DuckDB Wasm
 redirect_from:
   - /docs/api/wasm
+  - /docs/api/wasm/
 ---
 
 DuckDB has been compiled to WebAssembly, so it can run inside any browser on any device.
@@ -15,10 +16,9 @@ DuckDB-Wasm offers a layered API, it can be embedded as a [JavaScript + WebAssem
 
 ## Getting Started with DuckDB-Wasm
 
-A great starting point is to read the [DuckDB-Wasm launch blog post](https://duckdb.org/2021/10/29/duckdb-wasm.html)!
+A great starting point is to read the [DuckDB-Wasm launch blog post](/2021/10/29/duckdb-wasm)!
 
 Another great resource is the [GitHub repository](https://github.com/duckdb/duckdb-wasm).
 
 For details, see the full [DuckDB-Wasm API Documentation](https://shell.duckdb.org/docs/modules/index.html).
 
-## Pages in This Section

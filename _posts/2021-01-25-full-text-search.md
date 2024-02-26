@@ -3,11 +3,8 @@
 layout: post
 title:  "Testing out DuckDB's Full Text Search Extension"
 author: Laurens Kuiper
-excerpt_separator: <!--more-->
-
+excerpt: DuckDB now has full-text search functionality, similar to the FTS5 extension in SQLite. The main difference is that our FTS extension is fully formulated in SQL. We tested it out on TREC disks 4 and 5.
 ---
-
-_TLDR: DuckDB now has full-text search functionality, similar to the FTS5 extension in SQLite. The main difference is that our FTS extension is fully formulated in SQL. We tested it out on TREC disks 4 and 5._
 
 Searching through textual data stored in a database can be cumbersome, as SQL does not provide a good way of formulating questions such as "Give me all the documents about __Mallard Ducks__": string patterns with `LIKE` will only get you so far. Despite SQL's shortcomings here, storing textual data in a database is commonplace. Consider the table `products (id INT, name VARCHAR, description VARCHAR`) - it would be useful to search through the `name` and `description` columns for a website that sells these products.
 

@@ -2,19 +2,13 @@
 layout: post
 title:  "Querying Postgres Tables Directly From DuckDB"
 author: Hannes Mühleisen
-excerpt_separator: <!--more-->
+excerpt: DuckDB can now directly query tables stored in PostgreSQL and speed up complex analytical queries without duplicating data.
 ---
-
-
-*TLDR: DuckDB can now directly query queries stored in PostgreSQL and speed up complex analytical queries without duplicating data.*
-
-<!--more-->
 
 <img src="/images/blog/elephant-duck.jpg"
      alt="DuckDB goes Postgres"
      width=200
  />
-
 
 ## Introduction
 
@@ -30,12 +24,12 @@ But the design space is not as black and white as it seems. For example, the OLA
 
  To allow for fast and consistent analytical reads of Postgres databases, we designed and implemented the "Postgres Scanner". This scanner leverages the *binary transfer mode* of the Postgres client-server protocol (See the [Implementation Section](#implementation) for more details.), allowing us to efficiently transform and use the data directly in DuckDB.
      
-Among other things, DuckDB's design is different from conventional data management systems because DuckDB's query processing engine can run on nearly arbitrary data sources without needing to copy the data into its own storage format. For example, DuckDB can currently directly run queries on [Parquet files](https://duckdb.org/docs/data/parquet), [CSV files](https://duckdb.org/docs/data/csv), [SQLite files](https://github.com/duckdblabs/sqlite_scanner), [Pandas](https://duckdb.org/docs/guides/python/sql_on_pandas), [R](https://duckdb.org/docs/api/r#efficient-transfer) and [Julia](https://duckdb.org/docs/api/julia#scanning-dataframes) data frames as well as [Apache Arrow sources](https://duckdb.org/docs/guides/python/sql_on_arrow). This new extension adds the capability to directly query PostgreSQL tables from DuckDB. 
+Among other things, DuckDB's design is different from conventional data management systems because DuckDB's query processing engine can run on nearly arbitrary data sources without needing to copy the data into its own storage format. For example, DuckDB can currently directly run queries on [Parquet files](https://duckdb.org/docs/data/parquet), [CSV files](https://duckdb.org/docs/data/csv), [SQLite files](https://github.com/duckdb/sqlite_scanner), [Pandas](https://duckdb.org/docs/guides/python/sql_on_pandas), [R](https://duckdb.org/docs/api/r#efficient-transfer) and [Julia](https://duckdb.org/docs/api/julia#scanning-dataframes) data frames as well as [Apache Arrow sources](https://duckdb.org/docs/guides/python/sql_on_arrow). This new extension adds the capability to directly query PostgreSQL tables from DuckDB. 
 
 
 ## Usage
 
-The Postgres Scanner DuckDB extension source code [is available on GitHub](https://github.com/duckdblabs/postgresscanner), but it is directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
+The Postgres Scanner DuckDB extension source code [is available on GitHub](https://github.com/duckdb/postgres_scanner), but it is directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
 ```SQL
 INSTALL postgres_scanner;
 ```
@@ -75,7 +69,7 @@ The Postgres scanner will only be able to read actual tables, views are not supp
 
 From an architectural perspective, the Postgres Scanner is implemented as a plug-in extension for DuckDB that provides a so-called table scan function (`postgres_scan`) in DuckDB. There are many such functions in DuckDB and in extensions, such as the Parquet and CSV readers, Arrow readers etc. 
 
-The Postgres Scanner uses the standard `libpq` library, which it statically links in. Ironically, this makes the Postgres Scanner easier to install than the other Postgres clients. However, Postgres' normal client-server protocol is [quite slow](https://ir.cwi.nl/pub/26415/p852-muehleisen.pdf), so we spent quite some time optimizing this. As a note, DuckDB's [SQLite Scanner](https://github.com/duckdblabs/sqlite_scanner) does not face this issue, as SQLite is also an in-process database.
+The Postgres Scanner uses the standard `libpq` library, which it statically links in. Ironically, this makes the Postgres Scanner easier to install than the other Postgres clients. However, Postgres' normal client-server protocol is [quite slow](https://ir.cwi.nl/pub/26415/p852-muehleisen.pdf), so we spent quite some time optimizing this. As a note, DuckDB's [SQLite Scanner](https://github.com/duckdb/sqlite_scanner) does not face this issue, as SQLite is also an in-process database.
 
 We actually implemented a prototype direct reader for Postgres' database files, but while performance was great, there is the issue that committed but not yet checkpointed data would not be stored in the heap files yet. In addition, if a checkpoint was currently running, our reader would frequently overtake the checkpointer, causing additional inconsistencies. We abandoned that approach since we want to be able to query an actively used Postgres database and believe that consistency is important. Another architectural option would have been to implement a DuckDB Foreign Data Wrapper (FDW) for Postgres similar to [duckdb_fdw](https://github.com/alitrack/duckdb_fdw) but while this could improve the protocol situation, deployment of a postgres extension is quite risky on production servers so we expect few people will be able to do so.
 
@@ -188,6 +182,6 @@ COPY(SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'lineitem')) TO '
 ## Conclusion
 
 DuckDB's new Postgres Scanner extension can read PostgreSQL's tables while PostgreSQL is running and compute the answers to complex OLAP SQL queries often faster than PostgreSQL itself can without the need to duplicate data. The Postgres Scanner is currently in preview and we are curious to hear what you think. 
-If you find any issues with the Postgres Scanner, please [report them](https://github.com/duckdblabs/postgresscanner/issues). 
+If you find any issues with the Postgres Scanner, please [report them](https://github.com/duckdb/postgres_scanner/issues). 
 
 

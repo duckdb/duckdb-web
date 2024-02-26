@@ -163,7 +163,7 @@
       "arg",
       "val"
     ],
-    "description": "Finds the row with the maximum val. Calculates the arg expression at that row.",
+    "description": "Finds the row with the maximum val. Calculates the non-NULL arg expression at that row.",
     "example": "arg_max(A,B)",
     "type": "aggregate_function_set",
     "aliases": [
@@ -174,12 +174,24 @@
     "result": null
   },
   {
+    "name": "arg_max_null",
+    "parameters": [
+      "arg",
+      "val"
+    ],
+    "description": "Finds the row with the maximum val. Calculates the arg expression at that row.",
+    "example": "arg_max_null(A,B)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
     "name": "arg_min",
     "parameters": [
       "arg",
       "val"
     ],
-    "description": "Finds the row with the minimum val. Calculates the arg expression at that row.",
+    "description": "Finds the row with the minimum val. Calculates the non-NULL arg expression at that row.",
     "example": "arg_min(A,B)",
     "type": "aggregate_function_set",
     "aliases": [
@@ -188,6 +200,81 @@
     ],
     "category": "distributive",
     "result": null
+  },
+  {
+    "name": "arg_min_null",
+    "parameters": [
+      "arg",
+      "val"
+    ],
+    "description": "Finds the row with the minimum val. Calculates the arg expression at that row.",
+    "example": "arg_min_null(A,B)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "array_cosine_similarity",
+    "parameters": [
+      "array1",
+      "array2"
+    ],
+    "description": "Compute the cosine similarity between two arrays of the same size. The array elements can not be NULL. The arrays can have any size as long as the size is the same for both arguments.",
+    "example": "array_cosine_similarity([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "category": "array",
+    "result": null
+  },
+  {
+    "name": "array_cross_product",
+    "parameters": [
+      "array",
+      "array"
+    ],
+    "description": "Compute the cross product of two arrays of size 3. The array elements can not be NULL.",
+    "example": "array_cross_product([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "category": "array",
+    "result": "[0.0, 0.0, 0.0]"
+  },
+  {
+    "name": "array_distance",
+    "parameters": [
+      "array1",
+      "array2"
+    ],
+    "description": "Compute the distance between two arrays of the same size. The array elements can not be NULL. The arrays can have any size as long as the size is the same for both arguments.",
+    "example": "array_distance([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "category": "array",
+    "result": null
+  },
+  {
+    "name": "array_inner_product",
+    "parameters": [
+      "array1",
+      "array2"
+    ],
+    "description": "Compute the inner product between two arrays of the same size. The array elements can not be NULL. The arrays can have any size as long as the size is the same for both arguments.",
+    "example": "array_inner_product([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "aliases": [
+      "array_dot_product"
+    ],
+    "category": "array",
+    "result": null
+  },
+  {
+    "name": "array_value",
+    "parameters": [
+      "any",
+      "..."
+    ],
+    "description": "Create an ARRAY containing the argument values.",
+    "example": "array_value(4, 5, 6)",
+    "type": "scalar_function",
+    "category": "array",
+    "result": "[4, 5, 6]"
   },
   {
     "name": "ascii",
@@ -261,7 +348,7 @@
     "example": "bar(5, 0, 20, 10)",
     "type": "scalar_function_set",
     "category": "string",
-    "result": "\u2588\u2588\u258c"
+    "result": "\u2588\u2588\u258c "
   },
   {
     "name": "bin",
@@ -344,7 +431,7 @@
     "struct": "BitStringFun",
     "type": "scalar_function",
     "category": "bit",
-    "result": "0001010"
+    "result": null
   },
   {
     "name": "bitstring_agg",
@@ -413,7 +500,7 @@
       "ceiling"
     ],
     "category": "math",
-    "result": 18.0
+    "result": 18
   },
   {
     "name": "century",
@@ -493,6 +580,17 @@
     "example": "(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / (COUNT(*) - 1)",
     "type": "aggregate_function",
     "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "create_sort_key",
+    "parameters": [
+      "parameters..."
+    ],
+    "description": "Constructs a binary-comparable sort key based on a set of input parameters and sort qualifiers",
+    "example": "create_sort_key('A', 'DESC')",
+    "type": "scalar_function",
+    "category": "blob",
     "result": null
   },
   {
@@ -920,7 +1018,7 @@
     "example": "floor(17.4)",
     "type": "scalar_function_set",
     "category": "math",
-    "result": 17.0
+    "result": 17
   },
   {
     "name": "format",
@@ -935,18 +1033,29 @@
     "result": "Benchmark \"CSV\" took 42 seconds"
   },
   {
+    "name": "formatReadableDecimalSize",
+    "parameters": [
+      "bytes"
+    ],
+    "description": "Converts bytes to a human-readable presentation (e.g. 16000 -> 16.0 KB)",
+    "example": "format_bytes(1000 * 16)",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "15.6 KiB"
+  },
+  {
     "name": "format_bytes",
     "parameters": [
       "bytes"
     ],
-    "description": "Converts bytes to a human-readable presentation (e.g. 16000 -> 16KB)",
+    "description": "Converts bytes to a human-readable presentation (e.g. 16000 -> 15.6 KiB)",
     "example": "format_bytes(1000 * 16)",
     "type": "scalar_function",
     "aliases": [
-      "formatReadableDecimalSize"
+      "formatReadableSize"
     ],
     "category": "string",
-    "result": "16KB"
+    "result": "15.6 KiB"
   },
   {
     "name": "from_base64",
@@ -1275,6 +1384,17 @@
     "result": null
   },
   {
+    "name": "kurtosis_pop",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the excess kurtosis (Fisher\u2019s definition) of all input values, without bias correction",
+    "example": "",
+    "type": "aggregate_function",
+    "category": "distributive",
+    "result": null
+  },
+  {
     "name": "last_day",
     "parameters": [
       "ts"
@@ -1457,6 +1577,21 @@
     "result": "[5]"
   },
   {
+    "name": "list_grade_up",
+    "parameters": [
+      "list"
+    ],
+    "description": "Returns the index of their sorted position.",
+    "example": "list_grade_up([3, 6, 1, 2])",
+    "type": "scalar_function_set",
+    "aliases": [
+      "array_grade_up",
+      "grade_up"
+    ],
+    "category": "list",
+    "result": "[3, 4, 1, 2]"
+  },
+  {
     "name": "list_inner_product",
     "parameters": [
       "list1",
@@ -1471,6 +1606,22 @@
     ],
     "category": "list",
     "result": 14.0
+  },
+  {
+    "name": "list_reduce",
+    "parameters": [
+      "list",
+      "lambda"
+    ],
+    "description": "Returns a single value that is the result of applying the lambda function to each element of the input list, starting with the first element and then repeatedly applying the lambda function to the result of the previous application and the next element of the list.",
+    "example": "list_reduce([1, 2, 3], (x, y) -> x + y)",
+    "type": "scalar_function",
+    "aliases": [
+      "array_reduce",
+      "reduce"
+    ],
+    "category": "list",
+    "result": 6
   },
   {
     "name": "list_reverse_sort",
@@ -1576,6 +1727,18 @@
     "result": 0.6931471805599453
   },
   {
+    "name": "log",
+    "parameters": [
+      "b",
+      "x"
+    ],
+    "description": "Computes the logarithm of x to base b. b may be omitted, in which case the default 10",
+    "example": "log(2, 64)",
+    "type": "scalar_function_set",
+    "category": "math",
+    "result": 6.0
+  },
+  {
     "name": "log10",
     "parameters": [
       "x"
@@ -1583,9 +1746,6 @@
     "description": "Computes the 10-log of x",
     "example": "log10(1000)",
     "type": "scalar_function",
-    "aliases": [
-      "log"
-    ],
     "category": "math",
     "result": 3.0
   },
@@ -1934,7 +2094,60 @@
     "type": "scalar_function_set",
     "struct": "NextAfterFun",
     "category": "math",
-    "result": 1.0000001192092896
+    "result": 1.0000001
+  },
+  {
+    "name": "parse_dirname",
+    "parameters": [
+      "string",
+      "separator"
+    ],
+    "description": "Returns the top-level directory name. separator options: system, both_slash (default), forward_slash, backslash",
+    "example": "parse_dirname('path/to/file.csv', 'system')",
+    "type": "scalar_function_set",
+    "struct": "ParseDirnameFun",
+    "category": "string",
+    "result": "path"
+  },
+  {
+    "name": "parse_dirpath",
+    "parameters": [
+      "string",
+      "separator"
+    ],
+    "description": "Returns the head of the path similarly to Python's os.path.dirname. separator options: system, both_slash (default), forward_slash, backslash",
+    "example": "parse_dirpath('path/to/file.csv', 'system')",
+    "type": "scalar_function_set",
+    "struct": "ParseDirpathFun",
+    "category": "string",
+    "result": "path/to"
+  },
+  {
+    "name": "parse_filename",
+    "parameters": [
+      "string",
+      "trim_extension",
+      "separator"
+    ],
+    "description": "Returns the last component of the path similarly to Python's os.path.basename. If trim_extension is true, the file extension will be removed (it defaults to false). separator options: system, both_slash (default), forward_slash, backslash",
+    "example": "parse_filename('path/to/file.csv', true, 'forward_slash')",
+    "type": "scalar_function_set",
+    "struct": "ParseFilenameFun",
+    "category": "string",
+    "result": "file"
+  },
+  {
+    "name": "parse_path",
+    "parameters": [
+      "string",
+      "separator"
+    ],
+    "description": "Returns a list of the components (directories and filename) in the path similarly to Python's pathlib.PurePath::parts. separator options: system, both_slash (default), forward_slash, backslash",
+    "example": "parse_path('path/to/file.csv', 'system')",
+    "type": "scalar_function_set",
+    "struct": "ParsePathFun",
+    "category": "string",
+    "result": "[path, to, file.csv]"
   },
   {
     "name": "pi",
@@ -2039,6 +2252,18 @@
     "struct": "ListRangeFun",
     "category": "list",
     "result": "[2]"
+  },
+  {
+    "name": "regexp_escape",
+    "parameters": [
+      "string"
+    ],
+    "description": "Escapes all potentially meaningful regexp characters in the input string",
+    "example": "regexp_escape('https://duckdb.org')",
+    "struct": "RegexpEscapeFun",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "https\\:\\/\\/duckdb\\.org"
   },
   {
     "name": "regr_avgx",
@@ -2245,7 +2470,7 @@
     "example": "row(4, 'hello')",
     "type": "scalar_function",
     "category": "struct",
-    "result": "{'': 4, '': hello}"
+    "result": "(4, hello)"
   },
   {
     "name": "rpad",
@@ -2447,7 +2672,8 @@
     "example": "string_agg(A, '-')",
     "type": "aggregate_function_set",
     "aliases": [
-      "group_concat"
+      "group_concat",
+      "listagg"
     ],
     "category": "distributive",
     "result": null
@@ -2628,6 +2854,17 @@
     "result": "QQ=="
   },
   {
+    "name": "to_centuries",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a century interval",
+    "example": "to_centuries(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "500 years"
+  },
+  {
     "name": "to_days",
     "parameters": [
       "integer"
@@ -2637,6 +2874,17 @@
     "type": "scalar_function",
     "category": "date",
     "result": "5 days"
+  },
+  {
+    "name": "to_decades",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a decade interval",
+    "example": "to_decades(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "50 years"
   },
   {
     "name": "to_hours",
@@ -2661,15 +2909,26 @@
     "result": "00:00:00.000005"
   },
   {
-    "name": "to_milliseconds",
+    "name": "to_millennia",
     "parameters": [
       "integer"
     ],
-    "description": "Construct a millisecond interval",
-    "example": "to_milliseconds(5)",
+    "description": "Construct a millenium interval",
+    "example": "to_millennia(1)",
     "type": "scalar_function",
     "category": "date",
-    "result": "00:00:00.005"
+    "result": "1000 years"
+  },
+  {
+    "name": "to_milliseconds",
+    "parameters": [
+      "double"
+    ],
+    "description": "Construct a millisecond interval",
+    "example": "to_milliseconds(5.5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "00:00:00.0055"
   },
   {
     "name": "to_minutes",
@@ -2696,13 +2955,13 @@
   {
     "name": "to_seconds",
     "parameters": [
-      "integer"
+      "double"
     ],
     "description": "Construct a second interval",
-    "example": "to_seconds(5)",
+    "example": "to_seconds(5.5)",
     "type": "scalar_function",
     "category": "date",
-    "result": "00:00:05"
+    "result": "00:00:05.5"
   },
   {
     "name": "to_timestamp",
@@ -2714,6 +2973,17 @@
     "type": "scalar_function",
     "category": "date",
     "result": "2010-09-13 04:32:03.5+00"
+  },
+  {
+    "name": "to_weeks",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a week interval",
+    "example": "to_weeks(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "35 days"
   },
   {
     "name": "to_years",
@@ -2760,7 +3030,7 @@
     "example": "trunc(17.4)",
     "type": "scalar_function_set",
     "category": "math",
-    "result": 17.0
+    "result": 17
   },
   {
     "struct": "TryStrpTimeFun",
@@ -2783,7 +3053,7 @@
     "struct": "CurrentTransactionIdFun",
     "type": "scalar_function",
     "category": "generic",
-    "result": 56
+    "result": 58
   },
   {
     "name": "typeof",
@@ -2929,7 +3199,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.1-dev69"
+    "result": "v0.10.1-dev130"
   },
   {
     "name": "week",
@@ -2965,6 +3235,18 @@
     "type": "scalar_function_set",
     "category": "date",
     "result": 31
+  },
+  {
+    "name": "which_secret",
+    "parameters": [
+      "path",
+      "type"
+    ],
+    "description": "Print out the name of the secret that will be used for reading a path",
+    "example": "which_secret('s3://some/authenticated/path.csv', 's3')",
+    "type": "scalar_function",
+    "category": "secret",
+    "result": ""
   },
   {
     "name": "xor",

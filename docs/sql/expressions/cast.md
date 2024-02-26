@@ -6,16 +6,26 @@ railroad: expressions/cast.js
 
 <div id="rrdiagram"></div>
 
-Casting refers to the process of changing the type of a row from one type to another. The standard SQL syntax for this is `CAST(expr AS typename)`. DuckDB also supports the easier to type shorthand `expr::typename`, which is also present in PostgreSQL.
+Casting refers to the operation of converting a value in a particular data type to the corresponding value in another data type.
+Casting can occur either implicitly or explicitly.
+
+## Explicit Casting
+
+The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`, where `TYPENAME` is a name (or alias) of one of [DuckDB's data types](../data_types/overview). DuckDB also supports the shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
 
 ```sql
 SELECT CAST(i AS VARCHAR) FROM generate_series(1, 3) tbl(i);
 -- "1", "2", "3"
+```
+```sql
 SELECT i::DOUBLE FROM generate_series(1, 3) tbl(i);
 -- 1.0, 2.0, 3.0
-
+```
+```sql
 SELECT CAST('hello' AS INTEGER);
 -- Conversion Error: Could not convert string 'hello' to INT32
+```
+```sql
 SELECT TRY_CAST('hello' AS INTEGER);
 -- NULL
 ```
@@ -30,6 +40,15 @@ Not all casts are possible. For example, it is not possible to convert an `INTEG
 
 In many situations, the system will add casts by itself. This is called *implicit* casting. This happens for example when a function is called with an argument that does not match the type of the function, but can be casted to the desired type.
 
-Consider the function `SIN(DOUBLE)`. This function takes as input argument a column of type `DOUBLE`, however, it can be called with an integer as well: `SIN(1)`. The integer is converted into a double before being passed to the `SIN` function.
+Consider the function `sin(DOUBLE)`. This function takes as input argument a column of type `DOUBLE`, however, it can be called with an integer as well: `sin(1)`. The integer is converted into a double before being passed to the `sin` function.
 
 Generally, implicit casts only cast upwards. That is to say, we can implicitly cast an `INTEGER` to a `BIGINT`, but not the other way around.
+
+> Deprecated Prior to version 0.10.0, DuckDB allowed any type to be implicitly cast to `VARCHAR` during function binding.
+> Version 0.10.0 introduced a [breaking change which no longer allows implicit casts to `VARCHAR`](/2024/02/13/announcing-duckdb-0100#breaking-sql-changes).
+> The [`old_implicit_casting` configuration option](../pragmas#implicit-casting-to-varchar) setting can be used to revert to the old behavior.
+> However, please note that this flag will be deprecated in the future.
+
+## Allowed Casting Operations
+
+Values of a particular data type can typically not be casted to any arbitrary target data type. The supported cast operations are described in the [typecasting page](../data_types/typecasting) as part of the data types documentation.

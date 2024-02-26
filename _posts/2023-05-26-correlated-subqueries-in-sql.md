@@ -2,9 +2,8 @@
 layout: post
 title:  "Correlated Subqueries in SQL"
 author: Mark Raasveldt
-excerpt_separator: <!--more-->
+excerpt: ""
 ---
-
 
 Subqueries in SQL are a powerful abstraction that allow simple queries to be used as composable building blocks. They allow you to break down complex problems into smaller parts, and subsequently make it easier to write, understand and maintain large and complex queries.
 
@@ -163,7 +162,7 @@ WHERE NOT EXISTS (
 | uniquecarrier |           origincityname           |            destcityname            | flightdate | distance |
 |---------------|------------------------------------|------------------------------------|------------|----------|
 | AA            | Daytona Beach, FL                  | Charlotte, NC                      | 2017-02-27 | 416.0    |
-| EV            | Abilene, TX                        | Dallas/Fort Worth, TX              | 2017-02-15 | 158.0    ||
+| EV            | Abilene, TX                        | Dallas/Fort Worth, TX              | 2017-02-15 | 158.0    |
 | EV            | Dallas/Fort Worth, TX              | Durango, CO                        | 2017-02-13 | 674.0    |
 
 #### IN / ANY / ALL

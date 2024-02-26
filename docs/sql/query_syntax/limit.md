@@ -22,7 +22,7 @@ FROM addresses
 LIMIT 5
 OFFSET 5;
 -- select the top 5 cities with the highest population
-SELECT city, COUNT(*) AS population
+SELECT city, count(*) AS population
 FROM addresses
 GROUP BY city
 ORDER BY population DESC

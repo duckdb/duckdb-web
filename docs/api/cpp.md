@@ -31,7 +31,7 @@ Connections expose the `Query()` method to send a SQL query string to DuckDB fro
 
 ```cpp
 // create a table
-con.Query("CREATE TABLE integers(i INTEGER, j INTEGER)");
+con.Query("CREATE TABLE integers (i INTEGER, j INTEGER)");
 
 // insert three rows into the table
 con.Query("INSERT INTO integers VALUES (3, 4), (5, 6), (7, NULL)");
@@ -47,15 +47,15 @@ The `MaterializedQueryResult` instance contains firstly two fields that indicate
 DuckDB also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
 
 ```cpp
-std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT COUNT(*) FROM a WHERE i=$1");
+std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT count(*) FROM a WHERE i = $1");
 std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ```
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
 
 ### UDF API
 
-The UDF API is exposed in duckdb:Connection through the methods: `CreateScalarFunction()` and `CreateVectorizedFunction()` and variants. 
+The UDF API allows the definition of user-defined functions. It is exposed in `duckdb:Connection` through the methods: `CreateScalarFunction()`, `CreateVectorizedFunction()`, and variants.
 These methods created UDFs into the temporary schema (TEMP_SCHEMA) of the owner connection that is the only one allowed to use and change them.
 
 #### CreateScalarFunction
@@ -120,7 +120,6 @@ con.Query("INSERT INTO dates VALUES ('1992-01-01')");
 con.CreateScalarFunction<int32_t, int32_t>("udf_date", {LogicalType::DATE}, LogicalType::DATE, &udf_date);
 
 con.Query("SELECT udf_date(d) FROM dates")->Print();
-
 ```
 
 - template parameters:

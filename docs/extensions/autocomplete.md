@@ -3,7 +3,16 @@ layout: docu
 title: AutoComplete Extension
 ---
 
-This extension adds supports for autocomplete in the [CLI client](../api/cli).
+The `autocomplete` extension adds supports for autocomplete in the [CLI client](../api/cli).
+The extension is shipped by default with the CLI client.
+
+## Behavior
+
+For the behavior of the `autocomplete` extension, see the [documentation of the CLI client](../api/cli/autocomplete).
+
+## Functions
+
+<div class="narrow_table"></div>
 
 | Function                                | Description                                            |
 |:----------------------------------------|:-------------------------------------------------------|
@@ -17,8 +26,10 @@ SELECT * FROM sql_auto_complete('SEL');
 
 Returns:
 
+<div class="narrow_table"></div>
+
 | suggestion  | suggestion_start |
-| ----------- | ---------------- |
+|-------------|------------------|
 | SELECT      |                0 |
 | DELETE      |                0 |
 | INSERT      |                0 |
@@ -39,3 +50,7 @@ Returns:
 | DEALLOCATE  |                0 |
 | UPDATE      |                0 |
 | DROP        |                0 |
+
+## GitHub
+
+The `autocomplete` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/autocomplete).

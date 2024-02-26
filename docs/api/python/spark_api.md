@@ -3,9 +3,10 @@ layout: docu
 title: Spark API
 ---
 
-DuckDB's Python client offers a Spark-compatible API. The API aims to be fully compatible with the [PySpark API](https://spark.apache.org/docs/3.5.0/api/python/reference/index.html), allowing you to use the familiar Spark API. All statements are translated to DuckDB's internal plans using our [relational API](relational_api) and executed using DuckDB's query engine.
+The DuckDB Spark API implements the [PySpark API](https://spark.apache.org/docs/3.5.0/api/python/reference/index.html), allowing you to use the familiar Spark API to interact with DuckDB.
+All statements are translated to DuckDB's internal plans using our [relational API](relational_api) and executed using DuckDB's query engine.
 
-> This API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through [Discord](https://discord.duckdb.org) or on [GitHub](https://github.com/duckdb/duckdb/issues).
+> Warning The DuckDB Spark API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through [Discord](https://discord.duckdb.org) or on [GitHub](https://github.com/duckdb/duckdb/issues).
 
 ## Example
 
@@ -40,3 +41,11 @@ print(res)
     Row(age=56, location='Seattle')
 ]
 ```
+
+## Contribution Guidelines
+
+Contributions to the experimental Spark API are welcome.
+When making a contribution, please follow these guidelines:
+
+* Instead of using temporary files, use our `pytest` testing framework.
+* When adding new functions, ensure that method signatures comply with those in the [PySpark API](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/index.html).

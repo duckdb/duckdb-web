@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Tableau - A Data Visualisation Tool
+title: Tableau - A Data Visualization Tool
 ---
 
-[Tableau](https://www.tableau.com/) is a popular commercial data visualisation tool. 
+[Tableau](https://www.tableau.com/) is a popular commercial data visualization tool. 
 In addition to a large number of built in connectors,
 it also provides generic database connectivity via ODBC and JDBC connectors.
 
@@ -17,7 +17,7 @@ or in a remote data bucket that is accessible from the server.
 When using a DuckDB database file
 the data sets do not actually need to be imported into DuckDB tables;
 it suffices to create views of the data.
-For example, this will create a view of the `h2oai` parquet test file in the current DuckDB code base:
+For example, this will create a view of the `h2oai` Parquet test file in the current DuckDB code base:
 
 ```sql
 CREATE VIEW h2oai AS (
@@ -31,11 +31,10 @@ as the database format used by the DuckDB tool (e.g., Python module, command lin
 
 ## Installing the JDBC Driver
 
-Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-us/jdbc_tableau.htm) 
+Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-gb/jdbc_tableau.htm)
 for Tableau to use.
-For now, we recommend using the latest bleeding edge JDBC driver (0.8.2) as a number of fixes have been made 
-for time compatibility.
-Note that Tableau (both Desktop and Server versions) need to be restarted any time you add or modify drivers.
+
+> Tableau (both Desktop and Server versions) need to be restarted any time you add or modify drivers.
 
 ### Driver Links
 
@@ -46,7 +45,7 @@ Also, check that there is only one version of the driver installed as there are 
 
 Download the [snapshot jar](https://oss.sonatype.org/service/local/repositories/snapshots/content/org/duckdb/duckdb_jdbc/0.9.0-SNAPSHOT/duckdb_jdbc-0.9.0-20230806.020824-235.jar)
 
-* MacOS: Copy it to `~/Library/Tableau/Drivers/`
+* macOS: Copy it to `~/Library/Tableau/Drivers/`
 * Windows: Copy it to `C:\Program Files\Tableau\Drivers`
 * Linux: Copy it to `/opt/tableau/tableau_driver/jdbc`.
 
@@ -61,7 +60,7 @@ and using Tableau-provided PostgreSQL dialect.
 
 ![Tableau PostgreSQL](/images/guides/tableau/tableau-osx-jdbc.png)
 
-However, functionality will be missing such as MEDIAN and PERCENTILE aggregate functions. 
+However, functionality will be missing such as `median` and `percentile` aggregate functions. 
 To make the data source connection more compatible with the PostgreSQL dialect, 
 please use the DuckDB taco connector as described below.
 
@@ -92,9 +91,9 @@ $ tsm pending-changes apply
 ```
 The last command will restart the server with the new settings.
 
-### MacOS Desktop
+### macOS
 
-Copy the Taco file to the `/Users/[MacOS User]/Documents/My Tableau Repository/Connectors` folder.
+Copy the Taco file to the `/Users/[User]/Documents/My Tableau Repository/Connectors` folder.
 Then launch Tableau Desktop from the Terminal with the command line argument to disable signature validation:
 
 ```sh
@@ -126,6 +125,6 @@ to disable signature validation.
 ## Output
 
 Once loaded, you can run queries against your data!
-Here is the result of the first h2oai benchmark query from the parquet test file:
+Here is the result of the first H2O.ai benchmark query from the Parquet test file:
 
 ![tableau-parquet](/images/guides/tableau/h2oai-group-by-1.png)

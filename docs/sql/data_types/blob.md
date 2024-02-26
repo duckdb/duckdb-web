@@ -4,9 +4,11 @@ title: Blob Type
 blurb: The blob (Binary Large OBject) type represents an arbitrary binary object stored in the database system.
 ---
 
+<div class="narrow_table"></div>
+
 | Name | Aliases | Description |
 |:---|:---|:---|
-| blob | bytea | variable-length binary data |
+| `BLOB` | `BYTEA`, `BINARY`, `VARBINARY` | variable-length binary data |
 
 The blob (**B**inary **L**arge **OB**ject) type represents an arbitrary binary object stored in the database system. The blob type can contain any type of binary data with no restrictions. What the actual bytes represent is opaque to the database system.
 
