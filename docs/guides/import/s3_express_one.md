@@ -45,7 +45,7 @@ We ran two experiments on a `c7gd.12xlarge` instance using the [LDBC SF300 Comme
 <div class="narrow_table"></div>
 
 | Experiment | File size | Runtime |
-|:---|:-|:---|
+|:-----|--:|--:|
 | Loading only from Parquet | 4.1 GB | 3.5s |
 | Creating local table from Parquet | 4.1 GB | 5.1s |
 
