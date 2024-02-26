@@ -86,7 +86,13 @@ Using multiple connections can parallelize some operations, although it is typic
 
 ## The `preserve_insertion_order` Option
 
-When importing or exporting data sets that are much larger than the available memory, out of memory errors may occur. In these cases, it’s worth setting the [`preserve_insertion_order` configuration option](../../sql/configuration) to `false`:
+When importing or exporting data sets (from/to the Parquet or CSV formats), which are much larger than the available memory, an out of memory error may occur:
+
+```text
+Error: Out of Memory Error: failed to allocate data of size ... (.../... used)
+```
+
+In these cases, consider setting the [`preserve_insertion_order` configuration option](../../sql/configuration) to `false`:
 
 ```sql
 SET preserve_insertion_order = false;
