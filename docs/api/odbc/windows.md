@@ -67,18 +67,17 @@ When selecting the default DSN (i.e., `DuckDB`) or adding a new configuration, t
 
 This window allows you to set the DSN and the database file path associated with that DSN.
 
-
 ## More Detailed Windows Setup
 
 There are two ways to configure the ODBC driver, either by altering the registry keys as detailed below,
 or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
 A combination of the two is also possible.
 
-Furthermore, the ODBC driver supports all the [configuration options](https://duckdb.org/docs/sql/configuration.html)
+Furthermore, the ODBC driver supports all the [configuration options](../../sql/configuration)
 included in DuckDB.
 
-_Note:_ if a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
-the one passed to `SQLDriverConnect` will take precedence.
+> If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
+> the one passed to `SQLDriverConnect` will take precedence.
 
 ### Registry Keys
 

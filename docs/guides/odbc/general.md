@@ -159,8 +159,8 @@ std::cout << "Connected!" << std::endl;
 
 #### 2.b. Connecting with SQLDriverConnect
 
-Alternatively, you can connect to the ODBC driver using  [`SQLDriverConnect`](.https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
-`SQLDriverConnect` accepts a connection string in which you can configure the database using any of the available [DuckDB configuration options](https://duckdb.org/docs/sql/configuration.html).
+Alternatively, you can connect to the ODBC driver using  [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
+`SQLDriverConnect` accepts a connection string in which you can configure the database using any of the available [DuckDB configuration options](../../sql/configuration).
 
 ```cpp
 SQLHANDLE env;

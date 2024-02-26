@@ -15,9 +15,9 @@ brew install unixodbc
 
 ## Step 1: Download ODBC Driver
 
-DuckDB releases the ODBC driver as asset. For macOS, download it from the <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC macOS Asset</a> that contains the following artifacts:
+DuckDB releases the ODBC driver as asset. For macOS, download it from the <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC macOS asset</a> that contains the following artifacts:
 
-**libduckdb_odbc.dylib**: the DuckDB driver compiled to macOS (with Intel and Apple Silicon support).
+**libduckdb_odbc.dylib**: the DuckDB ODBC driver compiled to macOS (with Intel and Apple Silicon support).
 
 ## Step 2: Extracting ODBC Artifacts
 
@@ -28,18 +28,16 @@ mkdir duckdb_odbc
 unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
 ```
 
-
 ## Step 3: Configure the ODBC Driver
 
 There are two ways to configure the ODBC driver, either by initializing the configuration files listed below,
 or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
 A combination of the two is also possible.
 
-Furthermore, the ODBC driver supports all the [configuration options](https://duckdb.org/docs/sql/configuration.html)
-included in DuckDB.
+Furthermore, the ODBC driver supports all the [configuration options](../../sql/configuration) included in DuckDB.
 
-_Note:_ if a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
-the one passed to `SQLDriverConnect` will take precedence. 
+> If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
+> the one passed to `SQLDriverConnect` will take precedence.
 
 ### The `odbc.ini` or `.odbc.ini` File
 
