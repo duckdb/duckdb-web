@@ -24,7 +24,7 @@ Unzip the file to a permanent directory (e.g., duckdb_odbc).
 
 An example with `PowerShell` and `unzip` command would be:
 
-```PowerShell
+```bash
 mkdir duckdb_odbc
 unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
 ```
@@ -39,7 +39,6 @@ Inside the permanent directory (e.g., `duckdb_odbc`), double-click on the `odbc_
 Windows administrator privileges is required, in case of a non-administrator a User Account Control shall display:
 
 <img src="/images/blog/odbc/windows_privileges.png" style="width: 60%; height: 60%"/>
-
 
 ## Step 4: Configure the ODBC Driver
 

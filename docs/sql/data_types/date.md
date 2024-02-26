@@ -23,7 +23,7 @@ There are also three special date values that can be used on input:
 
 <div class="narrow_table"></div>
 
-| Input String | Description                       |
+| Input string | Description                       |
 |:-------------|:----------------------------------|
 | epoch	       | 1970-01-01 (Unix system day zero) |
 | infinity	   | later than all other dates        |

@@ -16,14 +16,14 @@ The table below shows the mapping of Python Built-in types to DuckDB type.
 
 <div class="narrow_table"></div>
 
-| Built-in types                                | DuckDB Type        |
-|:----------------------------------------------|:-------------------|
-|*`bool`*|BOOLEAN|
-|*`bytearray`*|BLOB|
-|*`bytes`*|BLOB|
-|*`float`*|DOUBLE|
-|*`int`*|BIGINT|
-|*`str`*|VARCHAR|
+| Built-in types | DuckDB type |
+|:---------------|:------------|
+| *`bool`*       | `BOOLEAN`   |
+| *`bytearray`*  | `BLOB`      |
+| *`bytes`*      | `BLOB`      |
+| *`float`*      | `DOUBLE`    |
+| *`int`*        | `BIGINT`    |
+| *`str`*        | `VARCHAR`   |
 
 ### Numpy DTypes
 
@@ -31,19 +31,19 @@ The table below shows the mapping of Numpy DType to DuckDB type.
 
 <div class="narrow_table"></div>
 
-| Type                                          | DuckDB Type        |
-|:----------------------------------------------|:-------------------|
-|*`bool`*|BOOLEAN|
-|*`float32`*|FLOAT|
-|*`float64`*|DOUBLE|
-|*`int16`*|SMALLINT|
-|*`int32`*|INTEGER|
-|*`int64`*|BIGINT|
-|*`int8`*|TINYINT|
-|*`uint16`*|USMALLINT|
-|*`uint32`*|UINTEGER|
-|*`uint64`*|UBIGINT|
-|*`uint8`*|UTINYINT|
+| Type        | DuckDB type |
+|:------------|:------------|
+| *`bool`*    | `BOOLEAN`   |
+| *`float32`* | `FLOAT`     |
+| *`float64`* | `DOUBLE`    |
+| *`int16`*   | `SMALLINT`  |
+| *`int32`*   | `INTEGER`   |
+| *`int64`*   | `BIGINT`    |
+| *`int8`*    | `TINYINT`   |
+| *`uint16`*  | `USMALLINT` |
+| *`uint32`*  | `UINTEGER`  |
+| *`uint64`*  | `UBIGINT`   |
+| *`uint8`*   | `UTINYINT`  |
 
 ### Nested Types
 
@@ -96,39 +96,39 @@ duckdb.typing.DuckDBPyType(Union[int, str, bool, bytearray])
 
 ### Creation Functions
 
-For the built-in types, you can use the constants defined in `duckdb.typing`
+For the built-in types, you can use the constants defined in `duckdb.typing`:
 
 <div class="narrow_table"></div>
 
-| DuckDB Type        |
-|:-------------------|
-|`BIGINT`|
-|`BIT`|
-|`BLOB`|
-|`BOOLEAN`|
-|`DATE`|
-|`DOUBLE`|
-|`FLOAT`|
-|`HUGEINT`|
-|`INTEGER`|
-|`INTERVAL`|
-|`SMALLINT`|
-|`SQLNULL`|
-|`TIME_TZ`|
-|`TIME`|
-|`TIMESTAMP_MS`|
-|`TIMESTAMP_NS`|
-|`TIMESTAMP_S`|
-|`TIMESTAMP_TZ`|
-|`TIMESTAMP`|
-|`TINYINT`|
-|`UBIGINT`|
-|`UHUGEINT`|
-|`UINTEGER`|
-|`USMALLINT`|
-|`UTINYINT`|
-|`UUID`|
-|`VARCHAR`|
+| DuckDB type    |
+|:---------------|
+| `BIGINT`       |
+| `BIT`          |
+| `BLOB`         |
+| `BOOLEAN`      |
+| `DATE`         |
+| `DOUBLE`       |
+| `FLOAT`        |
+| `HUGEINT`      |
+| `INTEGER`      |
+| `INTERVAL`     |
+| `SMALLINT`     |
+| `SQLNULL`      |
+| `TIME_TZ`      |
+| `TIME`         |
+| `TIMESTAMP_MS` |
+| `TIMESTAMP_NS` |
+| `TIMESTAMP_S`  |
+| `TIMESTAMP_TZ` |
+| `TIMESTAMP`    |
+| `TINYINT`      |
+| `UBIGINT`      |
+| `UHUGEINT`     |
+| `UINTEGER`     |
+| `USMALLINT`    |
+| `UTINYINT`     |
+| `UUID`         |
+| `VARCHAR`      |
 
 For the complex types there are methods available on the `DuckDBPyConnection` object or the `duckdb` module.
 Anywhere a `DuckDBPyType` is accepted, we will also accept one of the type objects that can implicitly convert to a `DuckDBPyType`.

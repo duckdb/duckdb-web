@@ -51,8 +51,8 @@ Driver = DuckDB Driver
 Database=:memory:
 access_mode=read_only
 allow_unsigned_extensions=true
-
 ```
+
 * `[DuckDB]`: between the brackets is a DSN for the DuckDB.
 * `Driver`: Describes the driver's name, as well as where to find the configurations in the **.odbcinst.ini**.
 * `Database`: Describes the database name used by DuckDB, can also be a file path to a `.db` in the system.
@@ -87,8 +87,10 @@ After the configuration, for validate the installation, it is possible to use an
 
 Use the DSN defined in `odbc.ini` as a parameter of `isql`.
 
-```text
+```bash
 isql DuckDB
+```
+```text
 +---------------------------------------+
 | Connected!                            |
 |                                       |
@@ -98,7 +100,11 @@ isql DuckDB
 | quit                                  |
 |                                       |
 +---------------------------------------+
+```
+```sql
 SQL> SELECT 42;
+```
+```text
 +------------+
 | 42         |
 +------------+

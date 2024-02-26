@@ -17,7 +17,7 @@ Below is a list of components that can be configured.
 |          Type           |  Command  | Default Color |
 |-------------------------|-----------|---------------|
 | Keywords                | .keyword  | green         |
-| Constants & Literals    | .constant | yellow        |
+| Constants & literals    | .constant | yellow        |
 | Comments                | .comment  | brightblack   |
 | Errors                  | .error    | red           |
 | Continuation            | .cont     | brightblack   |

@@ -35,11 +35,11 @@ There are also three special date values that can be used on input:
 
 <div class="narrow_table"></div>
 
-| Input String | Valid Types                           | Description                                    |
-|:-------------|:--------------------------------------|:-----------------------------------------------|
-| epoch	       | `TIMESTAMP`, `TIMESTAMPTZ`            | 1970-01-01 00:00:00+00 (Unix system time zero) |
-| infinity	   | `TIMESTAMP`, `TIMESTAMPTZ`            | later than all other time stamps               |
-| -infinity	   | `TIMESTAMP`, `TIMESTAMPTZ`            | earlier than all other time stamps             |
+| Input string | Valid types                | Description                                    |
+|:-------------|:---------------------------|:-----------------------------------------------|
+| `epoch`      | `TIMESTAMP`, `TIMESTAMPTZ` | 1970-01-01 00:00:00+00 (Unix system time zero) |
+| `infinity`   | `TIMESTAMP`, `TIMESTAMPTZ` | later than all other time stamps               |
+| `-infinity`  | `TIMESTAMP`, `TIMESTAMPTZ` | earlier than all other time stamps             |
 
 The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged; 
 but `epoch` is simply a notational shorthand that will be converted to the time stamp value when read.
