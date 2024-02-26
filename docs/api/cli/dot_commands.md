@@ -71,9 +71,9 @@ The `.help` text may be filtered by passing in a text string as the second argum
 ```
 
 ```text
-.maxrows COUNT           Sets the maximum number of rows for display (default: 40). Only for duckbox mode.
-.maxwidth COUNT          Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
-.mode MODE ?TABLE?       Set output mode
+.maxrows COUNT      Sets the maximum number of rows for display (default: 40). Only for duckbox mode.
+.maxwidth COUNT     Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
+.mode MODE ?TABLE?  Set output mode
 ```
 
 ### `.output`: Writing Results to a File

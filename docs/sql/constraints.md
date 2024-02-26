@@ -12,7 +12,7 @@ In SQL, constraints can be specified for tables. Constraints enforce certain pro
 
 <div id="rrdiagram"></div>
 
-## Check
+## Check Constraint
 
 Check constraints allow you to specify an arbitrary boolean expression. Any columns that *do not* satisfy this expression violate the constraint. For example, we could enforce that the `name` column does not contain spaces using the following `CHECK` constraint.
 
@@ -22,7 +22,7 @@ INSERT INTO students VALUES ('this name contains spaces');
 -- Constraint Error: CHECK constraint failed: students
 ```
 
-## Not Null
+## Not Null Constraint
 
 A not-null constraint specifies that the column cannot contain any `NULL` values. By default, all columns in tables are nullable. Adding `NOT NULL` to a column definition enforces that a column cannot contain `NULL` values.
 
@@ -32,7 +32,7 @@ INSERT INTO students VALUES (NULL);
 -- Constraint Error: NOT NULL constraint failed: students.name
 ```
 
-## Primary Key/Unique
+## Primary Key and Unique Constraint
 
 Primary key or unique constraints define a column, or set of columns, that are a unique identifier for a row in the table. The constraint enforces that the specified columns are *unique* within a table, i.e., that at most one row contains the given values for the set of columns.
 
@@ -48,13 +48,13 @@ In order to enforce this property efficiently, an [ART index is automatically cr
 Primary key constraints and unique constraints are identical except for two points:
 
 * A table can only have one primary key constraint defined, but many unique constraints
-* A primary key constraint also enforces the keys to not be `NULL`. 
+* A primary key constraint also enforces the keys to not be `NULL`.
 
-> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations)
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations).
 
-## Foreign Key
+## Foreign Keys
 
-Foreign keys define a column, or set of columns, that refer to a primary key or unique constraint from *another* table. The constraint enforces that the key exists in the other table. 
+Foreign keys define a column, or set of columns, that refer to a primary key or unique constraint from *another* table. The constraint enforces that the key exists in the other table.
 
 ```sql
 CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
@@ -67,4 +67,4 @@ INSERT INTO exams VALUES (2, 10);
 
 In order to enforce this property efficiently, an [ART index is automatically created](indexes) for every foreign key constraint that is defined in the table.
 
-> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations)
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations).

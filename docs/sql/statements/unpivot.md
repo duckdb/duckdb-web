@@ -33,7 +33,8 @@ LIMIT [number-of-rows];
 
 All examples use the dataset produced by the queries below:
 ```sql
-CREATE OR REPLACE TABLE monthly_sales(empid INT, dept TEXT, Jan INT, Feb INT, Mar INT, Apr INT, May INT, Jun INT);
+CREATE OR REPLACE TABLE monthly_sales
+    (empid INT, dept TEXT, Jan INT, Feb INT, Mar INT, Apr INT, May INT, Jun INT);
 INSERT INTO monthly_sales VALUES
     (1, 'electronics', 1, 2, 3, 4, 5, 6),
     (2, 'clothes', 10, 20, 30, 40, 50, 60),
@@ -171,6 +172,7 @@ The `UNPIVOT` statement may be included within a `SELECT` statement as a CTE ([a
 This allows for an `UNPIVOT` to be used alongside other SQL logic, as well as for multiple `UNPIVOT`s to be used in one query.
 
 No `SELECT` is needed within the CTE, the `UNPIVOT` keyword can be thought of as taking its place.
+
 ```sql
 WITH unpivot_alias AS (
     UNPIVOT monthly_sales
@@ -186,8 +188,7 @@ An `UNPIVOT` may be used in a subquery and must be wrapped in parentheses.
 Note that this behavior is different than the SQL Standard Unpivot, as illustrated in subsequent examples.
 
 ```sql
-SELECT 
-    * 
+SELECT * 
 FROM (
     UNPIVOT monthly_sales
     ON COLUMNS(* EXCLUDE (empid, dept))
@@ -204,6 +205,7 @@ Each `UNPIVOT` is implemented as set of `unnest` functions, operating on a list 
 If dynamically unpivoting, the `COLUMNS` expression is evaluated first to calculate the column list.
 
 For example:
+
 ```sql
 UNPIVOT monthly_sales
 ON jan, feb, mar, apr, may, jun
@@ -213,6 +215,7 @@ INTO
 ```
 
 is translated into:
+
 ```sql
 SELECT 
     empid,
@@ -248,15 +251,11 @@ This produces the same result as the initial example:
 | 3     | cars        | may   | 500   |
 | 3     | cars        | jun   | 600   |
 
-
-
-
 ### Simplified Unpivot Full Syntax Diagram
 
 Below is the full syntax diagram of the `UNPIVOT` statement.
 
 <div id="rrdiagram"></div>
-
 
 ## SQL Standard `UNPIVOT` Syntax
 

@@ -23,7 +23,7 @@ SET default_null_order = 'nulls_last';
 ```
 ```sql
 -- return the current value of a specific setting
-SELECT current_setting('threads') as threads;
+SELECT current_setting('threads') AS threads;
 ```
 ```text
 ┌─────────┐
@@ -35,7 +35,9 @@ SELECT current_setting('threads') as threads;
 ```
 ```sql
 -- query a specific setting
-SELECT * FROM duckdb_settings() WHERE name = 'threads';
+SELECT *
+FROM duckdb_settings()
+WHERE name = 'threads';
 ```
 ```text
 ┌─────────┬─────────┬─────────────────────────────────────────────────┬────────────┐
@@ -47,7 +49,8 @@ SELECT * FROM duckdb_settings() WHERE name = 'threads';
 ```
 ```sql
 -- show a list of all available settings
-SELECT * FROM duckdb_settings();
+SELECT *
+FROM duckdb_settings();
 ```
 ```sql
 -- reset the memory limit of the system back to the default

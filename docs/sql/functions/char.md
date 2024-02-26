@@ -11,12 +11,12 @@ This section describes functions and operators for examining and manipulating st
 |:--|:--|:---|:--|:--|
 | *`string`* `^@` *`search_string`* | Alias for `starts_with`. | `'abc' ^@ 'a'` | `true` | `starts_with` |
 | *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `DuckDB` | |
-| *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'DuckDB'[4]` | `'k'` | `array_extract` |
-| *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. | `'DuckDB'[:4]` | `'Duck'` | `array_slice` |
+| *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'DuckDB'[4]` | `k` | `array_extract` |
+| *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. | `'DuckDB'[:4]` | `Duck` | `array_slice` |
 | *`string`*` LIKE `*`target`* | Returns true if the *string* matches the like specifier (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' LIKE '%lo'` | `true` | |
 | *`string`*` SIMILAR TO `*`regex`* | Returns `true` if the *string* matches the *regex*; identical to `regexp_full_match` (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' SIMILAR TO 'l+'` | `false` | |
-| `array_extract(`*`list`*`, `*`index`*`)` | Extract a single character using a (1-based) index. | `array_extract('DuckDB', 2)` | `'u'` | `list_element`, `list_extract` | |
-| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a string using slice conventions. Negative values are accepted. | `array_slice('DuckDB', 5, NULL)` | `'DB'` | |
+| `array_extract(`*`list`*`, `*`index`*`)` | Extract a single character using a (1-based) index. | `array_extract('DuckDB', 2)` | `u` | `list_element`, `list_extract` | |
+| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a string using slice conventions. Negative values are accepted. | `array_slice('DuckDB', 5, NULL)` | `DB` | |
 | `ascii(`*`string`*`)`| Returns an integer that represents the Unicode code point of the first character of the *string* | `ascii('Ω')` | `937` | |
 | `bar(`*`x`*`, `*`min`*`, `*`max`*`[, `*`width`*`])` | Draw a band whose width is proportional to (*x* - *min*) and equal to *width* characters when *x* = *max*. *width* defaults to 80. | `bar(5, 0, 20, 10)` | `██▌` | |
 | `bit_length(`*`string`*`)`| Number of bits in a string. | `bit_length('abc')` | `24` | |
@@ -40,7 +40,7 @@ This section describes functions and operators for examining and manipulating st
 | `lpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string*  with the character from the left until it has count characters | `lpad('hello', 10, '>')` | `>>>>>hello` | |
 | `ltrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the left sduide of the *string* | `ltrim('>>>>test<<', '><')` | `test<<` | |
 | `ltrim(`*`string`*`)`| Removes any spaces from the left side of the *string* | `ltrim('␣␣␣␣test␣␣')` | `test␣␣` | |
-| `md5(`*`value`*`)` | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the *value*  | `md5('123')` | `'202cb962ac59075b964b07152d234b70'` | |
+| `md5(`*`value`*`)` | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the *value*  | `md5('123')` | `202c...` | |
 | `nfc_normalize(`*`string`*`)`| Convert string to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. | `nfc_normalize('ardèch')` | `ardèch` | |
 | `not_ilike_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `not_ilike_escape('A%c', 'a$%C', '$')` | `false` | |
 | `not_like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `not_like_escape('a%c', 'a$%c', '$')` | `false` | |
@@ -51,6 +51,7 @@ This section describes functions and operators for examining and manipulating st
 | `parse_path(`*`path`*`, `*`separator`*`)`| Returns a list of the components (directories and filename) in the path similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function. *`separator`* options: `system`, `both_slash` (default), `forward_slash`, `backslash`.  | `parse_path('/path/to/file.csv', 'system')` | `[/, path, to, file.csv]` | |
 | `position(`*`search_string`*` in `*`string`*`)` | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `position('b' in 'abc')` | `2` | |
 | `printf(`*`format`*`, `*`parameters`*`...)` | Formats a *string* using [printf syntax](#printf-syntax) | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds`     | |
+| `read_text(`*`source`*`)` | Returns the content from *`source`* (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide](../../guides/import/read_file#read_text) for more details. | `read_text('hello.txt')` | `hello\n` |
 | `regexp_escape(`*`string`*`)` | Escapes special patterns to turn *string* into a regular expression similarly to Python's [`re.escape` function](https://docs.python.org/3/library/re.html#re.escape) | `regexp_escape('https://duckdb.org')` | `https\:\/\/duckdb\.org` |
 | `regexp_extract_all(`*`string`*`, `*`regex`*`[, `*`group`*` = 0])` | Split the *string* along the *regex* and extract all occurrences of *group* | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` | `[hello, world]` |
 | `regexp_extract(`*`string`*`, `*`pattern `*`, `*`name_list`*`)`; | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list* (see [Pattern Matching](patternmatching#using-regexp_extract)) | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` | `{'y':'2023', 'm':'04', 'd':'15'}` |
@@ -67,7 +68,7 @@ This section describes functions and operators for examining and manipulating st
 | `rpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string* with the character from the right until it has *count* characters | `rpad('hello', 10, '<')` | `hello<<<<<` | |
 | `rtrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the right side of the *string* | `rtrim('>>>>test<<', '><')` | `>>>>test` | |
 | `rtrim(`*`string`*`)`| Removes any spaces from the right side of the *string* | `rtrim('␣␣␣␣test␣␣')` | `␣␣␣␣test` | |
-| `sha256(`*`value`*`)` | Returns a `VARCHAR` with the SHA-256 hash of the *`value`*| `sha-256('🦆')` | `d7a5c5e0d1d94c32218539e7e47d4ba9c3c7b77d61332fb60d633dde89e473fb` |
+| `sha256(`*`value`*`)` | Returns a `VARCHAR` with the SHA-256 hash of the *`value`*| `sha-256('🦆')` | `d7a5...` |
 | `split_part(`*`string`*`, `*`separator`*`, `*`index`*`)` | Split the *string* along the *separator* and return the data at the (1-based) *index* of the list. If the *index* is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior). | `split_part('a|b|c', '|', 2)` | `b` | |
 | `starts_with(`*`string`*`, `*`search_string`*`)`| Return true if *string* begins with *search_string* | `starts_with('abc', 'a')` | `true` | |
 | `str_split_regex(`*`string`*`, `*`regex`*`)` | Splits the *string* along the *regex* | `str_split_regex('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` | `string_split_regex`, `regexp_split_to_array` |

@@ -6,7 +6,7 @@ title: jemalloc Extension
 The `jemalloc` extension replaces the system's memory allocator with [jemalloc](https://jemalloc.net/).
 Unlike other DuckDB extensions, the `jemalloc` extension is statically linked and cannot be installed or loaded during runtime.
 
-## Availability
+## Operating System Support
 
 The availability of the `jemalloc` extension depends on the operating system.
 
@@ -31,7 +31,6 @@ GEN=ninja BUILD_JEMALLOC=1 make
 ### Windows
 
 On Windows, this extension is not available.
-
 
 ## GitHub
 

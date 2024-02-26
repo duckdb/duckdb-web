@@ -139,19 +139,23 @@ COPY mysql_db.tbl FROM 'data.parquet';
 ### `UPDATE`
 
 ```sql
-UPDATE mysql_db.tbl SET name = 'Woohoo' WHERE id = 42;
+UPDATE mysql_db.tbl
+SET name = 'Woohoo'
+WHERE id = 42;
 ```
 
 ### `DELETE`
 
 ```sql
-DELETE FROM mysql_db.tbl WHERE id = 42;
+DELETE FROM mysql_db.tbl
+WHERE id = 42;
 ```
 
 ### `ALTER TABLE`
 
 ```sql
-ALTER TABLE mysql_db.tbl ADD COLUMN k INTEGER;
+ALTER TABLE mysql_db.tbl
+ADD COLUMN k INTEGER;
 ```
 
 ### `DROP TABLE`
@@ -170,7 +174,7 @@ CREATE VIEW mysql_db.v1 AS SELECT 42;
 
 ```sql
 CREATE SCHEMA mysql_db.s1;
-CREATE TABLE mysql_db.s1.integers(i int);
+CREATE TABLE mysql_db.s1.integers(i INT);
 INSERT INTO mysql_db.s1.integers VALUES (42);
 SELECT * FROM mysql_db.s1.integers;
 ```
@@ -215,7 +219,7 @@ SELECT * FROM mysql_db.tmp;
 └────────┘
 ```
 
-> Note that DDL statements are not transactional in MySQL.
+> The DDL statements are not transactional in MySQL.
 
 ## Settings
 

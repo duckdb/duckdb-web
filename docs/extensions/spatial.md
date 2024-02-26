@@ -151,13 +151,25 @@ Compute relationships and spatial predicates between geometries.
 ### `ST_Read()` - Read Spatial Data from Files
 
 The spatial extension provides a `ST_Read` table function based on the [GDAL](https://github.com/OSGeo/gdal) translator library to read spatial data from a variety of geospatial vector file formats as if they were DuckDB tables. For example to create a new table from a GeoJSON file, you can use the following query:
+
 ```sql
 CREATE TABLE <table> AS SELECT * FROM ST_Read('some/file/path/filename.json');
 ```
 
 `ST_Read` can take a number of optional arguments, the full signature is: 
+
 ```sql
-ST_Read(VARCHAR, sequential_layer_scan : BOOLEAN, spatial_filter : WKB_BLOB, open_options : VARCHAR[], layer : VARCHAR, allowed_drivers : VARCHAR[], sibling_files : VARCHAR[], spatial_filter_box : BOX_2D, keep_wkb : BOOLEAN)
+ST_Read(
+    VARCHAR,
+    sequential_layer_scan : BOOLEAN,
+    spatial_filter : WKB_BLOB,
+    open_options : VARCHAR[],
+    layer : VARCHAR,
+    allowed_drivers : VARCHAR[],
+    sibling_files : VARCHAR[],
+    spatial_filter_box : BOX_2D,
+    keep_wkb : BOOLEAN
+)
 ```
 * `sequential_layer_scan` (default: `false`): If set to `true`, the table function will scan through all layers sequentially and return the first layer that matches the given `layer` name. This is required for some drivers to work properly, e.g., the `OSM` driver.
 * `spatial_filter` (default: `NULL`): If set to a WKB blob, the table function will only return rows that intersect with the given WKB geometry. Some drivers may support efficient spatial filtering natively, in which case it will be pushed down. Otherwise the filtering is done by GDAL which may be much slower.

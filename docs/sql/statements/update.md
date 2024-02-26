@@ -10,9 +10,13 @@ The `UPDATE` statement modifies the values of rows in a table.
 
 ```sql
 -- for every row where "i" is NULL, set the value to 0 instead
-UPDATE tbl SET i = 0 WHERE i IS NULL;
+UPDATE tbl
+SET i = 0
+WHERE i IS NULL;
+
 -- set all values of "i" to 1 and all values of "j" to 2
-UPDATE tbl SET i = 1, j = 2;
+UPDATE tbl
+SET i = 1, j = 2;
 ```
 
 ## Syntax
@@ -30,12 +34,14 @@ CREATE OR REPLACE TABLE original AS
     SELECT 1 AS key, 'original value' AS value 
     UNION ALL 
     SELECT 2 AS key, 'original value 2' AS value;
+
 CREATE OR REPLACE TABLE new AS 
     SELECT 1 AS key, 'new value' AS value 
     UNION ALL 
     SELECT 2 AS key, 'new value 2' AS value;
 
-SELECT * FROM original;
+SELECT *
+FROM original;
 ```
 
 <div class="narrow_table"></div>
@@ -62,7 +68,8 @@ UPDATE original
 ```
 
 ```sql
-SELECT * FROM original;
+SELECT *
+FROM original;
 ```
 
 <div class="narrow_table"></div>
@@ -109,7 +116,8 @@ WHERE city.country_code = country.code
 ```
 
 ```sql
-SELECT * FROM city;
+SELECT *
+FROM city;
 ```
 ```text
 ┌──────────┬─────────┬──────────────┐

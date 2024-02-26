@@ -95,7 +95,8 @@ Each partition is ordered using the same ordering clause.
 Here is a table of power generation data, available as a CSV file ([`power-plant-generation-history.csv`](/data/power-plant-generation-history.csv)). To load the data, run:
 
 ```sql
-CREATE TABLE "Generation History" AS FROM 'power-plant-generation-history.csv';
+CREATE TABLE "Generation History" AS
+    FROM 'power-plant-generation-history.csv';
 ```
 
 After partitioning by plant and ordering by date, it will have this layout:

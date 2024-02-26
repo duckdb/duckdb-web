@@ -14,16 +14,20 @@ Syntax highlighting can also be disabled entirely using the `.highlight off` com
 
 Below is a list of components that can be configured.
 
+<div class="narrow_table"></div>
+
 |          Type           |  Command  | Default Color |
 |-------------------------|-----------|---------------|
 | Keywords                | .keyword  | green         |
-| Constants & literals    | .constant | yellow        |
+| Constants ad literals   | .constant | yellow        |
 | Comments                | .comment  | brightblack   |
 | Errors                  | .error    | red           |
 | Continuation            | .cont     | brightblack   |
 | Continuation (Selected) | .cont_sel | green         |
 
 The components can be configured using either a supported color name (e.g., `.keyword red`), or by directly providing a terminal code to use for rendering (e.g., `.keywordcode \033[31m`). Below is a list of supported color names and their corresponding terminal codes.
+
+<div class="narrow_table"></div>
 
 |     Color     | Terminal Code |
 |---------------|---------------|

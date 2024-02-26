@@ -33,7 +33,7 @@ import java.sql.DriverManager;
 Connection conn = DriverManager.getConnection("jdbc:duckdb:");
 ```
 
-To use DuckDB-specific features such as the [appender](#appender), cast the object to a `DuckDBConnection`:
+To use DuckDB-specific features such as the [Appender](#appender), cast the object to a `DuckDBConnection`:
 
 ```java
 import org.duckdb.DuckDBConnection;
@@ -179,9 +179,9 @@ Connection conn = DriverManager.getConnection("jdbc:duckdb:", props);
 
 ### Appender
 
-The [appender](../data/appender) is available in the DuckDB JDBC driver via the `org.duckdb.DuckDBAppender` class.
+The [Appender](../data/appender) is available in the DuckDB JDBC driver via the `org.duckdb.DuckDBAppender` class.
 The constructor of the class requires the schema name and the table name it is applied to.
-The appender is flushed when the `close()` method is called.
+The Appender is flushed when the `close()` method is called.
 
 Example:
 
@@ -213,7 +213,8 @@ stmt.close();
 The DuckDB JDBC driver offers batch write functionality.
 The batch writer supports prepared statements to mitigate the overhead of query parsing.
 
-> Note that the preferred method for bulk inserts is to use the [appender](#appender) due to its higher performance. However, when using the appender is not possbile, the batch writer is available as alternative.
+> The preferred method for bulk inserts is to use the [Appender](#appender) due to its higher performance.
+> However, when using the Appender is not possbile, the batch writer is available as alternative.
 
 #### Batch Writer with Prepared Statements
 

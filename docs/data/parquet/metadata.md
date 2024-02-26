@@ -8,7 +8,8 @@ title: Querying Parquet Metadata
 The `parquet_metadata` function can be used to query the metadata contained within a Parquet file, which reveals various internal details of the Parquet file such as the statistics of the different columns. This can be useful for figuring out what kind of skipping is possible in Parquet files, or even to obtain a quick overview of what the different columns contain.
 
 ```sql
-SELECT * FROM parquet_metadata('test.parquet');
+SELECT *
+FROM parquet_metadata('test.parquet');
 ```
 
 Below is a table of the columns returned by `parquet_metadata`.
@@ -51,7 +52,8 @@ The `parquet_schema` function can be used to query the internal schema contained
 -- fetch the column names and column types
 DESCRIBE SELECT * FROM 'test.parquet';
 -- fetch the internal schema of a Parquet file
-SELECT * FROM parquet_schema('test.parquet');
+SELECT *
+FROM parquet_schema('test.parquet');
 ```
 
 Below is a table of the columns returned by `parquet_schema`.
@@ -77,7 +79,8 @@ Below is a table of the columns returned by `parquet_schema`.
 The `parquet_file_metadata` function can be used to query file-level metadata such as the format version and the encryption algorithm used.
 
 ```sql
-SELECT * FROM parquet_file_metadata('test.parquet');
+SELECT *
+FROM parquet_file_metadata('test.parquet');
 ```
 
 Below is a table of the columns returned by `parquet_file_metadata`.
@@ -99,7 +102,8 @@ Below is a table of the columns returned by `parquet_file_metadata`.
 The `parquet_kv_metadata` function can be used to query custom metadata defined as key-value pairs.
 
 ```sql
-SELECT * FROM parquet_kv_metadata('test.parquet');
+SELECT *
+FROM parquet_kv_metadata('test.parquet');
 ```
 
 Below is a table of the columns returned by `parquet_kv_metadata`.

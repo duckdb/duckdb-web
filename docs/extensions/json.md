@@ -654,7 +654,7 @@ SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID 
 
 ## Indexing
 
-Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays](../sql/data_types/array) and [lists](../sql/data_types/list) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
+> Warning Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays](../sql/data_types/array) and [lists](../sql/data_types/list) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
 
 ## GitHub
 
