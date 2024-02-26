@@ -137,6 +137,7 @@ LDLIBS=-L/path/to/duckdb_odbc/libduckdb_odbc.dylib
 ```
 
 ### 2. Define the ODBC Handles and Connect to the Database
+
 #### 2.a. Connecting with SQLConnect
 
 Then set up the ODBC handles, allocate them, and connect to the database.  First the environment handle is allocated, then the environment is set to ODBC version 3, then the connection handle is allocated, and finally the connection is made to the database.  The following code snippet shows how to do this:
