@@ -7,15 +7,15 @@ DuckDB support for [`fsspec`](https://filesystem-spec.readthedocs.io) filesystem
 
 ## Example
 
-The following is an example of using `fsspec` to query a file in Google Cloud Storage (instead of using their s3 inter-compatibility api).
+The following is an example of using `fsspec` to query a file in Google Cloud Storage (instead of using their S3-compatible API).
 
-Firstly, you must install `duckdb` and `fsspec`, and a filesystem interface of your choice
+Firstly, you must install `duckdb` and `fsspec`, and a filesystem interface of your choice.
 
 ```bash
-$ pip install duckdb fsspec gcsfs
+pip install duckdb fsspec gcsfs
 ```
 
-then you can register whichever filesystem you'd like to query
+Then, you can register whichever filesystem you'd like to query:
 
 ```python
 import duckdb

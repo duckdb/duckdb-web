@@ -67,9 +67,10 @@ the most recent price before the holding's timestamp by using an AsOf Join:
 
 ```sql
 SELECT h.ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p
-  ON h.ticker = p.ticker
- AND h.when >= p.when;
+FROM holdings h
+ASOF JOIN prices p
+       ON h.ticker = p.ticker
+      AND h.when >= p.when;
 ```
 
 This attaches the value of the holding at that time to each row:
@@ -95,9 +96,10 @@ To handle this situation, you can use an *outer* AsOf Join:
 
 ```sql
 SELECT h.ticker, h.when, price * shares AS value
-FROM holdings h ASOF LEFT JOIN prices p
-  ON h.ticker = p.ticker
- AND h.when >= p.when
+FROM holdings h
+ASOF LEFT JOIN prices p
+            ON h.ticker = p.ticker
+           AND h.when >= p.when
 ORDER BY ALL;
 ```
 
@@ -133,7 +135,8 @@ Our first query can then be written as:
 
 ```sql
 SELECT ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p USING (ticker, when);
+FROM holdings h
+ASOF JOIN prices p USING (ticker, when);
 ```
 
 Be aware that if you don't explicitly list the columns in the `SELECT`,

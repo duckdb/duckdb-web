@@ -71,7 +71,7 @@ penguins = con.table("penguins")
 penguins
 ```
 
-```python
+```text
 # Output:
 DatabaseTable: penguins
   species           string
@@ -90,7 +90,7 @@ Ibis is lazily evaluated, so instead of seeing the data, we see the schema of th
 penguins.head().to_pandas()
 ```
 
-```html
+```text
   species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex  year
 0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    male  2007
 1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  female  2007
@@ -131,7 +131,7 @@ ibis.options.interactive = True
 penguins.head()
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┓
 ┃ species ┃ island    ┃ bill_length_mm ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━┩
@@ -159,7 +159,7 @@ We can filter so we only have penguins of the species Adelie:
 penguins.filter(penguins.species == "Gentoo")
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┓
 ┃ species ┃ island ┃ bill_length_mm ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃
 ┡━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━┩
@@ -185,7 +185,7 @@ Or filter for Gentoo penguins that have a body mass larger than 6 kg.
 penguins.filter((penguins.species == "Gentoo") & (penguins.body_mass_g > 6000))
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┓
 ┃ species ┃ island ┃ bill_length_mm ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃
 ┡━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━┩
@@ -208,7 +208,7 @@ To select a column you can use the name of the column as a string:
 penguins.select("species", "island", "year").limit(3)
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━┓
 ┃ species ┃ island    ┃ year  ┃
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━┩
@@ -227,7 +227,7 @@ Or you can use column objects directly (this can be convenient when paired with 
 penguins.select(penguins.species, penguins.island, penguins.year).limit(3)
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━┓
 ┃ species ┃ island    ┃ year  ┃
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━┩
@@ -246,7 +246,7 @@ Or you can mix-and-match:
 penguins.select("species", "island", penguins.year).limit(3)
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━┓
 ┃ species ┃ island    ┃ year  ┃
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━┩
@@ -267,7 +267,7 @@ penguins.select("species", "island", penguins.year).limit(3)
 penguins.mutate(bill_length_cm=penguins.bill_length_mm / 10)
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━┓
 ┃ species ┃ island    ┃ bill_length_mm ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃ bill_length_cm ┃
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━┩
@@ -302,7 +302,7 @@ penguins.mutate(bill_length_cm=penguins.bill_length_mm / 10).select(
 )
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━┓
 ┃ species ┃ island    ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃ bill_length_cm ┃
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━┩
@@ -335,7 +335,7 @@ penguins.mutate(bill_length_cm=penguins.bill_length_mm / 10).select(
 )
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━┓
 ┃ species ┃ island    ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃ bill_length_cm ┃
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━┩
@@ -361,7 +361,7 @@ You can also use a `selector` alongside a column name.
 penguins.select("island", s.numeric())
 ```
 
-```html
+```text
 ┏━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━┓
 ┃ island    ┃ bill_length_mm ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ year  ┃
 ┡━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━┩
@@ -395,7 +395,7 @@ penguins.order_by(penguins.flipper_length_mm).select(
 )
 ```
 
-```html
+```text
 ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
 ┃ species   ┃ island    ┃ flipper_length_mm ┃
 ┡━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
@@ -423,7 +423,7 @@ penguins.order_by(penguins.flipper_length_mm.desc()).select(
 )
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
 ┃ species ┃ island ┃ flipper_length_mm ┃
 ┡━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
@@ -451,7 +451,7 @@ penguins.order_by(ibis.desc("flipper_length_mm")).select(
 )
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
 ┃ species ┃ island ┃ flipper_length_mm ┃
 ┡━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
@@ -494,7 +494,7 @@ You can compute multiple aggregates at once using the `aggregate` method:
 penguins.aggregate([penguins.flipper_length_mm.mean(), penguins.bill_depth_mm.max()])
 ```
 
-```html
+```text
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┓
 ┃ Mean(flipper_length_mm) ┃ Max(bill_depth_mm) ┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━┩
@@ -516,7 +516,7 @@ But it doesn't do much on its own -- you can pair it with `aggregate` to get a r
 penguins.group_by("species").aggregate()
 ```
 
-```html
+```text
 ┏━━━━━━━━━━━┓
 ┃ species   ┃
 ┡━━━━━━━━━━━┩
@@ -536,7 +536,7 @@ If we add a second column to the `group_by`, we'll get each unique pairing of th
 penguins.group_by(["species", "island"]).aggregate()
 ```
 
-```html
+```text
 ┏━━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃ species   ┃ island    ┃
 ┡━━━━━━━━━━━╇━━━━━━━━━━━┩
@@ -556,7 +556,7 @@ Now, if we add an aggregation function to that, we start to really open things u
 penguins.group_by(["species", "island"]).aggregate(penguins.bill_length_mm.mean())
 ```
 
-```html
+```text
 ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ species   ┃ island    ┃ Mean(bill_length_mm) ┃
 ┡━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
@@ -578,7 +578,7 @@ penguins.group_by(["species", "island"]).aggregate(
 )
 ```
 
-```html
+```text
 ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ species   ┃ island    ┃ Mean(bill_length_mm) ┃ Max(flipper_length_mm) ┃
 ┡━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -600,7 +600,7 @@ penguins.group_by(["species", "island", "sex"]).aggregate(
 )
 ```
 
-```html
+```text
 ┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ species ┃ island    ┃ sex    ┃ Mean(bill_length_mm) ┃ Max(flipper_length_mm) ┃
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -636,7 +636,7 @@ penguins.filter((penguins.sex == "female") & (penguins.year == 2008)).group_by(
 ).aggregate(penguins.body_mass_g.max())
 ```
 
-```html
+```text
 ┏━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
 ┃ island    ┃ Max(body_mass_g) ┃
 ┡━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
@@ -656,7 +656,7 @@ penguins.filter(penguins.sex == "male").group_by(["island", "year"]).aggregate(
 ).order_by(["year", "max_body_mass"])
 ```
 
-```html
+```text
 ┏━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━┓
 ┃ island    ┃ year  ┃ max_body_mass ┃
 ┡━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━┩

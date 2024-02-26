@@ -43,7 +43,7 @@ We run a simple aggregation query over Parquet files using different row group s
 <div class="narrow_table"></div>
 
 | Row Group Size | Execution Time |
-|----------------|----------------|
+|---------------:|---------------:|
 | 960            | 8.77s          |
 | 1920           | 8.95s          |
 | 3840           | 4.33s          |
@@ -80,7 +80,7 @@ CSV files are often distributed in compressed format such as GZIP archives (`.cs
 <div class="narrow_table"></div>
 
 | Schema | Load Time |
-|---|---|
+|---|--:|
 | Load from GZIP-compressed CSV files (`.csv.gz`) | 107.1s |
 | Decompressing (using parallel `gunzip`) and loading from decompressed CSV files | 121.3s |
 

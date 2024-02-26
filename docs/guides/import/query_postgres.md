@@ -30,15 +30,18 @@ SELECT * FROM postgres_scan('host=localhost port=5432 dbname=mydb', 'public', 'm
 
 The first parameter to the `postgres_scan` function is the [PostgreSQL connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), a list of connection arguments provided in `{key}={value}` format. Below is a list of valid arguments.
 
-|   Name   |             Description              |    Default     |
-|----------|--------------------------------------|----------------|
-| host     | Name of host to connect to           | localhost      |
-| hostaddr | Host IP address                      | localhost      |
-| port     | Port Number                          | 5432           |
-| user     | Postgres User Name                   | [OS user name] |
-| password | Postgres Password                    |                |
-| dbname   | Database Name                        | [user]         |
-| passfile | Name of file passwords are stored in | ~/.pgpass      |
+<div class="narrow_table"></div>
+
+
+|    Name    |             Description              |    Default     |
+|------------|--------------------------------------|----------------|
+| `host`     | Name of host to connect to           | `localhost`    |
+| `hostaddr` | Host IP address                      | `localhost`    |
+| `port`     | Port number                          | `5432`         |
+| `user`     | Postgres user name                   | [OS user name] |
+| `password` | Postgres password                    |                |
+| `dbname`   | Database name                        | [user]         |
+| `passfile` | Name of file passwords are stored in | `~/.pgpass`    |
 
 Alternatively, the entire database can be attached using the `ATTACH` command. This allows you to query all tables stored within the PostgreSQL database as if it was a regular database.
 
