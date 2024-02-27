@@ -82,7 +82,7 @@ duckdb.typing.DuckDBPyType({'a': str, 'b': int})
 # STRUCT(a VARCHAR, b BIGINT)
 ```
 
-#### *`Union[<type_one>, ... <type_n>]`*
+#### *`Union[⟨type_1⟩, ... ⟨type_n⟩]`*
 
 `typing.Union` objects map to a `UNION` type of the provided types.
 

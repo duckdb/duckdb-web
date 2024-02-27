@@ -38,7 +38,7 @@ When the `DISTINCT` clause is provided, only distinct values are considered in t
 An `ORDER BY` clause can be provided after the last argument of the function call. Note the lack of the comma separator before the clause.
 
 ```sql
-SELECT <aggregate_function>(<arg>, <sep> ORDER BY <ordering_criteria>);
+SELECT ⟨aggregate_function⟩(⟨arg⟩, ⟨sep⟩ ORDER BY ⟨ordering_criteria⟩);
 ```
 
 This clause ensures that the values being aggregated are sorted before applying the function.

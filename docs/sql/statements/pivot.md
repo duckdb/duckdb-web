@@ -18,12 +18,12 @@ DuckDB implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` 
 The full syntax diagram is below, but the simplified `PIVOT` syntax can be summarized using spreadsheet pivot table naming conventions as:
 
 ```sql
-PIVOT <dataset> 
-ON <columns>
-USING <values> 
-GROUP BY <rows>
-ORDER BY <columns-with-order-directions>
-LIMIT <number-of-rows>;
+PIVOT ⟨dataset⟩ 
+ON ⟨columns⟩
+USING ⟨values⟩ 
+GROUP BY ⟨rows⟩
+ORDER BY ⟨columns_with_order_directions⟩
+LIMIT ⟨number_of_rows⟩;
 ```
 
 The `ON`, `USING`, and `GROUP BY` clauses are each optional, but they may not all be omitted.
@@ -355,14 +355,14 @@ Below is the full syntax diagram of the `PIVOT` statement.
 The full syntax diagram is below, but the SQL Standard `PIVOT` syntax can be summarized as:
 
 ```sql
-FROM <dataset>
+FROM ⟨dataset⟩
 PIVOT (
-    <values>
+    ⟨values⟩
     FOR 
-        <column_1> IN (<in_list>)
-        <column_2> IN (<in_list>)
+        ⟨column_1⟩ IN (⟨in_list⟩)
+        ⟨column_2⟩ IN (⟨in_list⟩)
         ...
-    GROUP BY <rows>
+    GROUP BY ⟨rows⟩
 );
 ```
 Unlike the simplified syntax, the `IN` clause must be specified for each column to be pivoted.
@@ -378,7 +378,7 @@ This example uses a single value expression, a single column expression, and a s
 FROM Cities 
 PIVOT (
     sum(Population) 
-    FOR 
+    FOR
         Year IN (2000, 2010, 2020) 
     GROUP BY Country
 );

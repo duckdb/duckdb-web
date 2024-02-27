@@ -26,5 +26,5 @@ CREATE SECRET (
 After setting up the R2 credentials, you can query the R2 data using:
 
 ```sql
-SELECT * FROM read_parquet('r2://<r2_bucket_name>/<file>');
+SELECT * FROM read_parquet('r2://⟨r2_bucket_name⟩/⟨file⟩');
 ```

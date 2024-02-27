@@ -18,7 +18,7 @@ SET s3_region = 'us-east-1';
 Optionally, the endpoint can be configured in case a non-AWS object storage server is used:
 
 ```sql
-SET s3_endpoint = '<domain>.<tld>:<port>';
+SET s3_endpoint = '⟨domain⟩.⟨tld⟩:⟨port⟩';
 ```
 
 If the endpoint is not SSL-enabled then run:
@@ -33,19 +33,19 @@ Switching between [path-style](https://docs.aws.amazon.com/AmazonS3/latest/userg
 SET s3_url_style = 'path';
 ```
 
-However, note that this may also require updating the endpoint. For example for AWS S3 it is required to change the endpoint to `s3.<region>.amazonaws.com`.
+However, note that this may also require updating the endpoint. For example for AWS S3 it is required to change the endpoint to `s3.⟨region⟩.amazonaws.com`.
 
 After configuring the correct endpoint and region, public files can be read. To also read private files, authentication credentials can be added:
 
 ```sql
-SET s3_access_key_id = '<AWS access key id>';
-SET s3_secret_access_key = '<AWS secret access key>';
+SET s3_access_key_id = '⟨AWS access key id⟩';
+SET s3_secret_access_key = '⟨AWS secret access key⟩';
 ```
 
 Alternatively, session tokens are also supported and can be used instead:
 
 ```sql
-SET s3_session_token = '<AWS session token>';
+SET s3_session_token = '⟨AWS session token⟩';
 ```
 
 The [`aws` extension](../aws) allows for loading AWS credentials.

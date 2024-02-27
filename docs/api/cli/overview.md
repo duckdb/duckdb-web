@@ -210,7 +210,7 @@ This outputs:
 
 ```text
 -- Loading resources from prompt.sql
-v<version> <git hash>
+v⟨version⟩ ⟨git hash⟩
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.

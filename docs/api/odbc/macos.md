@@ -72,7 +72,7 @@ Trace = yes
 TraceFile = /tmp/odbctrace
 
 [DuckDB Driver]
-Driver = /User/<user>/duckdb_odbc/libduckdb_odbc.dylib
+Driver = /User/⟨user⟩/duckdb_odbc/libduckdb_odbc.dylib
 ```
 
 * `[ODBC]`: it is the DM configuration section.

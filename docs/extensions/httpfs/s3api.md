@@ -235,7 +235,7 @@ COPY table TO 's3://my-bucket/partitioned' (
 The naming scheme of the written files looks like this:
 
 ```text
-s3://my-bucket/partitioned/part_col_a=<val>/part_col_b=<val>/data_<thread_number>.parquet
+s3://my-bucket/partitioned/part_col_a=⟨val⟩/part_col_b=⟨val⟩/data_⟨thread_number⟩.parquet
 ```
 
 ### Configuration

@@ -12,10 +12,10 @@ The configuration of S3 Express One buckets is similar to [regular S3 buckets](s
 we have to specify the endpoint according to the following pattern:
 
 ```text
-s3express-<availability zone>.<region>.amazonaws.com
+s3express-⟨availability zone⟩.⟨region⟩.amazonaws.com
 ```
 
-where the `<availability zone>` (e.g., `use-az5`) can be obtained from the S3 Express One bucket's configuration page and the `<region>` is the AWS region (e.g., `us-east-1`).
+where the `⟨availability zone⟩` (e.g., `use-az5`) can be obtained from the S3 Express One bucket's configuration page and the `⟨region⟩` is the AWS region (e.g., `us-east-1`).
 
 For example, to allow DuckDB to use an S3 Express One bucket, configure the [Secrets manager](../../sql/statements/create_secret) as follows:
 
