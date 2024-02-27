@@ -44,4 +44,4 @@ jobs:
           COMMIT_EMAIL: "example@example.com"
           PR_BRANCH_NAME: "chore-update-docs-${PR_ID}"
           PR_TITLE: "chore: auto update docs"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
