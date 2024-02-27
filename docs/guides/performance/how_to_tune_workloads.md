@@ -25,7 +25,7 @@ This section explains the prerequisites, scope, and known limitations of larger-
 
 ### Spilling to Disk
 
-Larger-than-memory workloads are supported by spilling to disk. If DuckDB is connected to a [persistent database file](../../api/cli/overview#in-memory-vs-persistent-database), DuckDB will create a temporary directory named `<database_file_name>.tmp` when the available memory is no longer sufficient to continue processing.
+Larger-than-memory workloads are supported by spilling to disk. If DuckDB is connected to a [persistent database file](../../api/cli/overview#in-memory-vs-persistent-database), DuckDB will create a temporary directory named `⟨database_file_name⟩.tmp` when the available memory is no longer sufficient to continue processing.
 
 If DuckDB is running in in-memory mode, it cannot use disk to offload data if it does not fit into main memory.
 To enable offloading in the absence of a persistent database file, use the [`SET temp_directory` statement](../../sql/pragmas#temp-directory-for-spilling-data-to-disk):

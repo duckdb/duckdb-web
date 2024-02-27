@@ -19,19 +19,19 @@ Both can utilize a [`COLUMNS` expression](../expressions/star#columns) to automa
 The full syntax diagram is below, but the simplified `UNPIVOT` syntax can be summarized using spreadsheet pivot table naming conventions as:
 
 ```sql
-UNPIVOT [dataset]
-ON [column(s)]
+UNPIVOT ⟨dataset⟩
+ON ⟨column(s)⟩
 INTO 
-    NAME [name-column-name]
-    VALUE [value-column-name(s)]
-ORDER BY [column(s)-with-order-direction(s)]
-LIMIT [number-of-rows];
+    NAME ⟨name-column-name⟩
+    VALUE ⟨value-column-name(s)⟩
+ORDER BY ⟨column(s)-with-order-direction(s)⟩
+LIMIT ⟨number-of-rows⟩;
 ```
-
 
 ### Example Data
 
 All examples use the dataset produced by the queries below:
+
 ```sql
 CREATE OR REPLACE TABLE monthly_sales
     (empid INT, dept TEXT, Jan INT, Feb INT, Mar INT, Apr INT, May INT, Jun INT);
@@ -40,6 +40,7 @@ INSERT INTO monthly_sales VALUES
     (2, 'clothes', 10, 20, 30, 40, 50, 60),
     (3, 'cars', 100, 200, 300, 400, 500, 600);
 ```
+
 ```sql
 FROM monthly_sales;
 ```

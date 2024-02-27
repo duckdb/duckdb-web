@@ -21,14 +21,14 @@ Once the [authentication](#authentication) is set up, the Azure Blob Storage can
 
 ```sql
 SELECT count(*)
-FROM 'az://<my_container>/<my_file>.<parquet_or_csv>';
+FROM 'az://⟨my_container⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
 ```
 
 Globs are also supported:
 
 ```sql
 SELECT *
-FROM 'az://<my_container>/*.csv';
+FROM 'az://⟨my_container⟩/*.csv';
 ```
 
 ## Configuration
@@ -66,7 +66,7 @@ The default provider, `CONFIG` (i.e., user-configured), allows access to the sto
 ```sql
 CREATE SECRET secret1 (
     TYPE AZURE,
-    CONNECTION_STRING '<value>'
+    CONNECTION_STRING '⟨value⟩'
 );
 ```
 
@@ -77,7 +77,7 @@ If you do not use authentication, you still need to specify the storage account 
 CREATE SECRET secret2 (
     TYPE AZURE,
     PROVIDER CONFIG,
-    ACCOUNT_NAME '<storage account name>'
+    ACCOUNT_NAME '⟨storage account name⟩'
 );
 ```
 
@@ -91,7 +91,7 @@ For example:
 CREATE SECRET secret3 (
     TYPE AZURE,
     PROVIDER CREDENTIAL_CHAIN,
-    ACCOUNT_NAME '<storage account name>'
+    ACCOUNT_NAME '⟨storage account name⟩'
 );
 ```
 
@@ -102,7 +102,7 @@ CREATE SECRET secret4 (
     TYPE AZURE,
     PROVIDER CREDENTIAL_CHAIN,
     CHAIN 'cli;env',
-    ACCOUNT_NAME '<storage account name>'
+    ACCOUNT_NAME '⟨storage account name⟩'
 );
 ```
 
@@ -120,7 +120,7 @@ To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PR
 ```sql
 CREATE SECRET secret5 (
     TYPE AZURE,
-    CONNECTION_STRING '<value>',
+    CONNECTION_STRING '⟨value⟩',
     HTTP_PROXY 'http://localhost:3128',
     PROXY_USER_NAME 'john',
     PROXY_PASSWORD 'doe'

@@ -88,7 +88,7 @@ Options:
 ## Step 4 (Optional): Configure the ODBC Driver
 
 The ODBC setup on Linux is based on files, the well-known `.odbc.ini` and `.odbcinst.ini`.
-These files can be placed at the system `/etc` directory or at the user home directory `/home/<user>` (shortcut as `~/`).
+These files can be placed at the system `/etc` directory or at the user home directory `/home/⟨user⟩` (shortcut as `~/`).
 The DM prioritizes the user configuration files and then the system files.
 
 ### The `.odbc.ini` File
@@ -122,7 +122,7 @@ Trace = yes
 TraceFile = /tmp/odbctrace
 
 [DuckDB Driver]
-Driver = /home/<user>/duckdb_odbc/libduckdb_odbc.so
+Driver = /home/⟨user⟩/duckdb_odbc/libduckdb_odbc.so
 ```
 
 **[ODBC]**: it is the DM configuration section.
