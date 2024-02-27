@@ -12,7 +12,8 @@ AsOf joins are a tool for solving this and other similar problems.
 
 One of the problems that AsOf joins are used to solve is
 finding the value of a varying property at a specific point in time.
-This use case is so common that it is where the name came from:  
+This use case is so common that it is where the name came from:
+
 _Give me the value of the property **as of this time**_.
 
 More generally, however, AsOf joins embody some common temporal analytic semantics,
