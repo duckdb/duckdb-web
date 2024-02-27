@@ -21,14 +21,28 @@ Once the [authentication](#authentication) is set up, the Azure Blob Storage can
 
 ```sql
 SELECT count(*)
-FROM 'az://<my_container>@<my_storage_account>.blob.core.windows.net/<my_file>.<parquet_or_csv>';
+FROM 'az://⟨my_container⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
+```
+
+Or with a fully qualified path syntax:
+
+```sql
+SELECT count(*)
+FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
 ```
 
 Globs are also supported:
 
 ```sql
 SELECT *
-FROM 'az://<my_container>@<my_storage_account>.blob.core.windows.net/*.csv';
+FROM 'az://⟨my_container⟩/*.csv';
+```
+
+Alternatively:
+
+```sql
+SELECT *
+FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/*.csv';
 ```
 
 ## Configuration
@@ -45,7 +59,7 @@ Use the following [configuration options](../sql/configuration) how the extensio
 | `azure_context_caching` | Enable/disable the caching of the underlying Azure SDK HTTP connection in the DuckDB connection context when performing queries. If you suspect that this is causing some side effect, you can try to disable it by setting it to false (not recommended). | `BOOLEAN` | `true` |
 
 > Setting `azure_transport_option_type` explicitly to `curl` with have the following effect:
-> * On Linux, this may solve certificates issue (`Error: Invalid Error: Fail to get a new connection for: https://<storage account name>.blob.core.windows.net/. Problem with the SSL CA cert (path? access rights?)`) because when specifying the extension will try to find the bundle certificate in various paths (that is not done by *curl* by default and might be wrong due to static linking see issue).
+> * On Linux, this may solve certificates issue (`Error: Invalid Error: Fail to get a new connection for: https://⟨storage account name⟩.blob.core.windows.net/. Problem with the SSL CA cert (path? access rights?)`) because when specifying the extension will try to find the bundle certificate in various paths (that is not done by *curl* by default and might be wrong due to static linking see issue).
 > * On Windows, this replaces the default adapter (*WinHTTP*) allowing you to use all *curl* capabilities (for example using a socks proxies).
 > * On all operating systems, it will honor the following environment variables:
 >   * `CURL_CA_INFO`: Path to a PEM encoded file containing the certificate authorities sent to libcurl. Note that this option is known to only work on Linux and might throw if set on other platforms.
@@ -68,7 +82,8 @@ The Azure extension has two ways to configure the authentication. The preferred 
 
 Multiple [Secret Providers](../sql/statements/create_secret#secret-providers) are available for the Azure extension:
 
-> If you need to define different secrets for different storage accounts you can use [the `SCOPE` configuration](../sql/statements/create_secret#creating-multiple-secrets-for-the-same-service-type).
+> * If you need to define different secrets for different storage accounts you can use [the `SCOPE` configuration](../sql/statements/create_secret#creating-multiple-secrets-for-the-same-service-type).
+> * If you use fully qualified path then the `ACCOUNT_NAME` attribute is optional.
 
 #### `CONFIG` Provider
 
@@ -135,10 +150,10 @@ Either with a secret:
 CREATE SECRET azure_spn (
     TYPE AZURE,
     PROVIDER SERVICE_PRINCIPAL,
-    TENANT_ID '<tenant id>',
-    CLIENT_ID '<client id>',
-    CLIENT_SECRET '<client secret>',
-    ACCOUNT_NAME '<storage account name>'
+    TENANT_ID '⟨tenant id⟩',
+    CLIENT_ID '⟨client id⟩',
+    CLIENT_SECRET '⟨client secret⟩',
+    ACCOUNT_NAME '⟨storage account name⟩'
 );
 ```
 
@@ -148,10 +163,10 @@ Or with a certificate:
 CREATE SECRET azure_spn_cert (
     TYPE AZURE,
     PROVIDER SERVICE_PRINCIPAL,
-    TENANT_ID '<tenant id>',
-    CLIENT_ID '<client id>',
-    CLIENT_CERTIFICATE_PATH '<client cert path>',
-    ACCOUNT_NAME '<storage account name>'
+    TENANT_ID '⟨tenant id⟩',
+    CLIENT_ID '⟨client id⟩',
+    CLIENT_CERTIFICATE_PATH '⟨client cert path⟩',
+    ACCOUNT_NAME '⟨storage account name⟩'
 );
 ```
 
