@@ -1035,7 +1035,11 @@
                 },
                 {
                   "page": "Pattern Matching",
-                  "url": "patternmatching"
+                  "url": "pattern_matching"
+                },
+                {
+                  "page": "Regular Expressions",
+                  "url": "regular_expressions"
                 },
                 {
                   "page": "Text Functions",
