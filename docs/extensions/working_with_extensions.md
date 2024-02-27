@@ -78,7 +78,8 @@ With at the first level the DuckDB version, at the second the DuckDB platform, a
 INSTALL icu;
 ```
 
-for example will look for either `icu.duckdb_extension.gz` (first) or `icu.duckdb_extension` (second) in the repository structure, and install it to the `extension_directory` (that defaults to `~/.duckdb/extensions`), if file is compressed, decompression will be handled at this step.
+The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` the folder's file structure.
+If it finds either of the extension binaries, it will install the extension to the location specified by the [`extension_directory` option](overview#changing-the-extension-directory) (which defaults to `~/.duckdb/extensions`). If the file is compressed, it will be decompressed at this step.
 
 ### Remote File over http
 
@@ -140,11 +141,11 @@ It is also possible to specify remote paths.
 When DuckDB installs an extension, it is copied to a local directory to be cached, avoiding any network traffic.
 Any subsequent calls to `INSTALL extension_name` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
 
- by default in `~/.duckdb/extensions` but configurable via `SET extension_directory = path/to/existing/directory;`.
-
 ```sql
 FORCE INSTALL extension_name;
 ```
+
+For more details, see the [Versioning of Extensions](versioning_of_extensions) page.
 
 ## Loading Extension from a Path
 
