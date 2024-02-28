@@ -13,7 +13,7 @@ DuckDB implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` 
 
 > The [`UNPIVOT` statement](unpivot) is the inverse of the `PIVOT` statement.
 
-## Simplified Pivot Syntax
+## Simplified `PIVOT` Syntax
 
 The full syntax diagram is below, but the simplified `PIVOT` syntax can be summarized using spreadsheet pivot table naming conventions as:
 
@@ -257,7 +257,7 @@ FROM (
 ) pivot_alias;
 ```
 
-### Multiple Pivots
+### Multiple `PIVOT` Statements
 
 Each `PIVOT` can be treated as if it were a `SELECT` node, so they can be joined together or manipulated in other ways.
 
