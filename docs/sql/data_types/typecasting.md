@@ -74,7 +74,7 @@ SELECT CAST(CAST([1, 2, 3] AS VARCHAR) AS INT[]);
 
 ### Literal Types
 
-Integer literals (such as `42`) and string literals (such as `'string'`) have special implicit casting rules. See the [literal types page](../data_types/literal_types) for more information.
+Integer literals (such as `42`) and string literals (such as `'string'`) have special implicit casting rules. See the [literal types page](literal_types) for more information.
 
 ### Lists / Arrays
 
@@ -104,5 +104,4 @@ SELECT CAST({'a': 42, 'b': 84} AS STRUCT(b VARCHAR, a VARCHAR));
 
 ### Unions
 
-Union casting rules can be found on the [`UNION type page`](../data_types/union#casting-to-unions)
-
+Union casting rules can be found on the [`UNION type page`](union#casting-to-unions).
