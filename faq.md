@@ -120,6 +120,21 @@ DuckDB does not use *explicit SIMD* instructions because they greatly complicate
 
 <div class="qa-wrap" markdown="1">
 	
+### Does DuckDB support persistent storage?
+
+<div class="answer" markdown="1">
+	
+DuckDB can persist the database into a single file, which includes all tables, views, indexes, macros, etc. stored in the database.
+DuckDB's [storag format](/internals/storage) uses a compressed columnar representation, which is compact but allows for efficient bulk updates.
+
+</div>
+
+</div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+	
 ### How does DuckDB handle concurrency?
 
 <div class="answer" markdown="1">
