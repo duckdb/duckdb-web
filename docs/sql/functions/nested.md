@@ -408,7 +408,7 @@ SELECT flatten([[NULL],[NULL]]);
 
 ## `generate_subscripts`
 
-The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along the `dim`th dimension of array `arr`.
+The `generate_subscripts(`*`arr`*`, `*`dim`*`)` function generates indexes along the `dim`th dimension of array `arr`.
 
 ```sql
 SELECT generate_subscripts([4, 5, 6], 1) AS i;
