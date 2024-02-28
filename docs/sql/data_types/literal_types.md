@@ -44,3 +44,53 @@ SELECT d > '1992-01-01'::VARCHAR FROM (VALUES (DATE '1992-01-01')) t(d);
 -- Binder Error: Cannot compare values of type DATE and type VARCHAR –
 -- an explicit cast is required
 ```
+
+### Escape String Literals
+
+To include special characters such as newline, use `E` escape the string. Both the uppercase (`E'...'`) and lowercase variants (`e'...'`) work.
+
+```sql
+SELECT E'Hello\nworld' AS msg;
+-- or
+SELECT e'Hello\nworld' AS msg;
+```
+
+```text
+┌──────────────┐
+│     msg      │
+│   varchar    │
+├──────────────┤
+│ Hello\nworld │
+└──────────────┘
+```
+
+### Dollar-Quoted String Literals
+
+DuckDB supports dollar-quoted string literals, which are surrounded by double-dollar symbols (`$$`):
+
+```sql
+SELECT $$Hello
+world$$ AS msg
+```
+
+```text
+┌──────────────┐
+│     msg      │
+│   varchar    │
+├──────────────┤
+│ Hello\nworld │
+└──────────────┘
+```
+
+```sql
+SELECT $$The price is $9.95$$ AS msg;
+```
+
+```text
+┌────────────────────┐
+│        msg         │
+│      varchar       │
+├────────────────────┤
+│ The price is $9.95 │
+└────────────────────┘
+```
