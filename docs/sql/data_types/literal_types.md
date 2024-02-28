@@ -3,13 +3,17 @@ layout: docu
 title: Literal Types
 ---
 
-DuckDB has literal types for representing integer and string literals in queries. These have their own binding and conversion rules.
+DuckDB has special literal types for representing null, integer and string literals in queries. These have their own binding and conversion rules.
 
 > Prior to version 0.10.0, integer and string literals behaved identically to the `INTEGER` and `VARCHAR` types.
 
+## Null Literals
+
+The `NULL` literal can be implicitly converted to any other type.
+
 ## Integer Literals
 
-`INTEGER_LITERAL` types can be implicitly converted to any [integer type](numeric#integer-types) in which the value fits.
+`INTEGER_LITERAL` types can be implicitly converted to any [integer type](numeric#integer-types) in which the value fits. For example, the integer literal `42` can be implicitly converted to a `TINYINT`, but the integer literal `1000` cannot be.
 
 ## String Literals
 

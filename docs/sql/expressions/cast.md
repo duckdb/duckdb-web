@@ -7,7 +7,7 @@ railroad: expressions/cast.js
 <div id="rrdiagram"></div>
 
 Casting refers to the operation of converting a value in a particular data type to the corresponding value in another data type.
-Casting can occur either implicitly or explicitly.
+Casting can occur either implicitly or explicitly. The syntax described here described how to perform an explicit cast. More information on casting can be found on the [typecasting page](../data_types/typecasting).
 
 ## Explicit Casting
 
@@ -36,14 +36,3 @@ Not all casts are possible. For example, it is not possible to convert an `INTEG
 
 `TRY_CAST` can be used when the preferred behavior is not to throw an error, but instead to return a `NULL` value. `TRY_CAST` will never throw an error, and will instead return `NULL` if a cast is not possible.
 
-## Implicit Casting
-
-In many situations, the system will add casts by itself. This is called *implicit* casting. This happens for example when a function is called with an argument that does not match the type of the function, but can be casted to the desired type.
-
-Consider the function `sin(DOUBLE)`. This function takes as input argument a column of type `DOUBLE`, however, it can be called with an integer as well: `sin(1)`. The integer is converted into a double before being passed to the `sin` function.
-
-Generally, implicit casts only cast upwards. That is to say, we can implicitly cast an `INTEGER` to a `BIGINT`, but not the other way around.
-
-## Allowed Casting Operations
-
-Values of a particular data type can typically not be casted to any arbitrary target data type. The supported cast operations are described in the [typecasting page](../data_types/typecasting) as part of the data types documentation.

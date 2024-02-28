@@ -39,7 +39,7 @@ Internally, decimals are represented as integers depending on their specified wi
 | 10-18 | `INT64` | 8 |
 | 19-38 | `INT128` | 16 |
 
-Performance can be impacted by using too large decimals when not required. In particular decimal values with a width above 19 are very slow, as arithmetic involving the `INT128` type is much more expensive than operations involving the `INT32` or `INT64` types. It is therefore recommended to stick with a width of `18` or below, unless there is a good reason for why this is insufficient.
+Performance can be impacted by using too large decimals when not required. In particular decimal values with a width above 19 are slow, as arithmetic involving the `INT128` type is much more expensive than operations involving the `INT32` or `INT64` types. It is therefore recommended to stick with a width of `18` or below, unless there is a good reason for why this is insufficient.
 
 ## Floating-Point Types
 
