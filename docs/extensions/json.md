@@ -414,7 +414,13 @@ These functions supports the same two location notations as the previous functio
 | `json_extract(`*`json`*`,`*`path`*`)` | `json_extract_path` | `->` | Extract `JSON` from *`json`* at the given *`path`*. If *`path`* is a `LIST`, the result will be a `LIST` of `JSON` |
 | `json_extract_string(`*`json`*`,`*`path`*`)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from *`json`* at the given *`path`*. If *`path`* is a `LIST`, the result will be a `LIST` of `VARCHAR` |
 
-Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
+Note that the equality comparison operator (`=`) has a higher precedence than the `->` JSON extract operator. Therefore, surround the uses of the `->` operator with parentheses when making equality comparisons. For example:
+
+```sql
+SELECT ((JSON '{"field": 42}')->'field') = 42;
+```
+
+> Warning DuckDB's JSON data type uses [0-based indexing](#indexing).
 
 Examples:
 
