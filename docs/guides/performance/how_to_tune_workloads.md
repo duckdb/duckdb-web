@@ -25,7 +25,7 @@ This section explains the prerequisites, scope, and known limitations of larger-
 
 ### Spilling to Disk
 
-Larger-than-memory workloads are supported by spilling to disk. If DuckDB is connected to a [persistent database file](../../api/cli/overview#in-memory-vs-persistent-database), DuckDB will create a temporary directory named `<database_file_name>.tmp` when the available memory is no longer sufficient to continue processing.
+Larger-than-memory workloads are supported by spilling to disk. If DuckDB is connected to a [persistent database file](../../api/cli/overview#in-memory-vs-persistent-database), DuckDB will create a temporary directory named `⟨database_file_name⟩.tmp` when the available memory is no longer sufficient to continue processing.
 
 If DuckDB is running in in-memory mode, it cannot use disk to offload data if it does not fit into main memory.
 To enable offloading in the absence of a persistent database file, use the [`SET temp_directory` statement](../../sql/pragmas#temp-directory-for-spilling-data-to-disk):
@@ -86,7 +86,13 @@ Using multiple connections can parallelize some operations, although it is typic
 
 ## The `preserve_insertion_order` Option
 
-When importing or exporting data sets that are much larger than the available memory, out of memory errors may occur. In these cases, it’s worth setting the [`preserve_insertion_order` configuration option](../../sql/configuration) to `false`:
+When importing or exporting data sets (from/to the Parquet or CSV formats), which are much larger than the available memory, an out of memory error may occur:
+
+```text
+Error: Out of Memory Error: failed to allocate data of size ... (.../... used)
+```
+
+In these cases, consider setting the [`preserve_insertion_order` configuration option](../../sql/configuration) to `false`:
 
 ```sql
 SET preserve_insertion_order = false;

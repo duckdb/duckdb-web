@@ -18,9 +18,14 @@ FROM read_json('todos.json',
                          id: 'UBIGINT',
                          title: 'VARCHAR',
                          completed: 'BOOLEAN'});
+```
+
+```bash
 -- read a JSON file from stdin, auto-infer options
 cat data/json/todos.json | duckdb -c "SELECT * FROM read_json_auto('/dev/stdin')"
+```
 
+```sql
 -- read a JSON file into a table
 CREATE TABLE todos (userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN);
 COPY todos FROM 'todos.json';
@@ -51,7 +56,7 @@ Below are parameters that can be passed in to the JSON reader.
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | `'iso'` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | `VARCHAR` | `'array'` |
-| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
+| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`) | `BOOL` | `false` |
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |
 | `maximum_object_size` | The maximum size of a JSON object (in bytes) | `UINTEGER` | `16777216` |
@@ -69,8 +74,10 @@ Here are some example JSON files and the corresponding `format` settings that sh
 
 In each of the below cases, the `format` setting was not needed, as DuckDB was able to infer it correctly, but it is included for illustrative purposes.
 A query of this shape would work in each case:
+
 ```sql
-SELECT * FROM filename.json;
+SELECT *
+FROM filename.json;
 ```
 
 ### Format: `newline_delimited`
@@ -83,8 +90,10 @@ Each line is a JSON.
 {"key1":"value2", "key2": "value2"}
 {"key1":"value3", "key2": "value3"}
 ```
+
 ```sql
-SELECT * FROM read_json_auto('records.json', format = 'newline_delimited');
+SELECT *
+FROM read_json_auto('records.json', format = 'newline_delimited');
 ```
 
 <div class="narrow_table"></div>
@@ -98,6 +107,7 @@ SELECT * FROM read_json_auto('records.json', format = 'newline_delimited');
 ### Format: `array`
 
 If the JSON file contains a JSON array of objects (pretty-printed or not), `array_of_objects` may be used.
+
 ```json
 [
     {"key1":"value1", "key2": "value1"},
@@ -105,8 +115,10 @@ If the JSON file contains a JSON array of objects (pretty-printed or not), `arra
     {"key1":"value3", "key2": "value3"}
 ]
 ```
+
 ```sql
-SELECT * FROM read_json_auto('array.json', format = 'array');
+SELECT *
+FROM read_json_auto('array.json', format = 'array');
 ```
 
 <div class="narrow_table"></div>
@@ -135,7 +147,8 @@ If the JSON file contains JSON that is not newline-delimited or an array, `unstr
 }
 ```
 ```sql
-SELECT * FROM read_json_auto('unstructured.json', format = 'unstructured');
+SELECT *
+FROM read_json_auto('unstructured.json', format = 'unstructured');
 ```
 
 <div class="narrow_table"></div>
@@ -152,13 +165,15 @@ The JSON extension can attempt to determine whether a JSON file contains records
 When `records = true`, the JSON extension expects JSON objects, and will unpack the fields of JSON objects into individual columns.
 
 Continuing with the same example file from before:
+
 ```json
 {"key1":"value1", "key2": "value1"}
 {"key1":"value2", "key2": "value2"}
 {"key1":"value3", "key2": "value3"}
 ```
 ```sql
-SELECT * FROM read_json_auto('records.json', records = true);
+SELECT *
+FROM read_json_auto('records.json', records = true);
 ```
 
 <div class="narrow_table"></div>
@@ -170,8 +185,10 @@ SELECT * FROM read_json_auto('records.json', records = true);
 | `value3` | `value3` |
 
 When `records = false`, the JSON extension will not unpack the top-level objects, and create `STRUCT`s instead:
+
 ```sql
-SELECT * FROM read_json_auto('records.json', records = false);
+SELECT *
+FROM read_json_auto('records.json', records = false);
 ```
 
 <div class="narrow_table"></div>
@@ -183,13 +200,15 @@ SELECT * FROM read_json_auto('records.json', records = false);
 | `{'key1': value3, 'key2': value3}` |
 
 This is especially useful if we have non-object JSON, for example:
+
 ```json
 [1, 2, 3]
 [4, 5, 6]
 [7, 8, 9]
 ```
 ```sql
-SELECT * FROM read_json_auto('arrays.json', records = false);
+SELECT *
+FROM read_json_auto('arrays.json', records = false);
 ```
 
 <div class="narrow_table"></div>
@@ -209,7 +228,9 @@ The contents of tables or the result of queries can be written directly to a JSO
 The `read_json_auto` is the simplest method of loading JSON files: it automatically attempts to figure out the correct configuration of the JSON reader. It also automatically deduces types of columns.
 
 ```sql
-SELECT * FROM read_json_auto('todos.json') LIMIT 5;
+SELECT *
+FROM read_json_auto('todos.json')
+LIMIT 5;
 ```
 
 <div class="narrow_table"></div>
@@ -227,7 +248,9 @@ The path can either be a relative path (relative to the current working director
 We can use `read_json_auto` to create a persistent table as well:
 
 ```sql
-CREATE TABLE todos AS SELECT * FROM read_json_auto('todos.json');
+CREATE TABLE todos AS
+    SELECT *
+    FROM read_json_auto('todos.json');
 DESCRIBE todos;
 ```
 
@@ -250,7 +273,6 @@ FROM read_json_auto('todos.json',
 ```
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
-
 
 ## `COPY` Statement
 

@@ -16,6 +16,8 @@ SELECT * FROM table_name;
 FROM table_name SELECT *;
 -- select all columns using the FROM-first syntax and omitting the SELECT clause
 FROM table_name;
+-- select all columns from the table called "table_name" through an alias "tn"
+SELECT tn.* FROM table_name tn;
 -- select all columns from the table "table_name" in the schema "schema_name"
 SELECT * FROM schema_name.table_name;
 -- select the column "i" from the table function "range",
@@ -142,15 +144,17 @@ Semi joins return rows from the left table that have at least one match in the r
 ```sql
 -- return a list of cars that have a valid region.
 SELECT cars.name, cars.manufacturer 
-FROM cars SEMI JOIN region
-ON cars.region = region.id;
+FROM cars
+SEMI JOIN region
+       ON cars.region = region.id;
 ```
 
 ```sql
 -- return a list of cars with no recorded safety data.
 SELECT cars.name, cars.manufacturer
-FROM cars ANTI JOIN safety_data
-ON cars.safety_report_id = safety_data.report_id;
+FROM cars
+ANTI JOIN safety_data
+       ON cars.safety_report_id = safety_data.report_id;
 ```
 
 ### Lateral Joins
@@ -199,7 +203,7 @@ It is possible to refer to multiple attributes from the `LATERAL` subquery. Usin
 
 ```sql
 CREATE TABLE t1 AS SELECT * FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
-SELECT * FROM t1, LATERAL (SELECT i + j) t2(k);
+SELECT * FROM t1, LATERAL (SELECT i + j) t2(k) ORDER BY ALL;
 ```
 ```text
 ┌───────┬───────┬───────┐
@@ -235,7 +239,8 @@ Connecting them using this ordering is called a _positional join:_
 ```sql
 -- treat two data frames as a single table
 SELECT df1.*, df2.*
-FROM df1 POSITIONAL JOIN df2;
+FROM df1
+POSITIONAL JOIN df2;
 ```
 
 Positional joins are always `FULL OUTER` joins.
@@ -249,8 +254,9 @@ This is called an _as-of join:_
 ```sql
 -- attach prices to stock trades
 SELECT t.*, p.price
-FROM trades t ASOF JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when;
+FROM trades t
+ASOF JOIN prices p 
+       ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 The `ASOF` join requires at least one inequality condition on the ordering field.
@@ -266,8 +272,9 @@ It can be specified as an `OUTER` join to find unpaired rows
 ```sql
 -- attach prices or NULLs to stock trades
 SELECT *
-FROM trades t ASOF LEFT JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when;
+FROM trades t
+ASOF LEFT JOIN prices p 
+            ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 `ASOF` joins can also specify join conditions on matching column names with the `USING` syntax,
@@ -276,7 +283,8 @@ which will be greater than or equal to (`>=`):
 
 ```sql
 SELECT *
-FROM trades t ASOF JOIN prices p USING (symbol, "when");
+FROM trades t
+ASOF JOIN prices p USING (symbol, "when");
 -- Returns symbol, trades.when, price (but NOT prices.when)
 ```
 
@@ -287,7 +295,8 @@ To get the `prices` times in the example, you will need to list the columns expl
 
 ```sql
 SELECT t.symbol, t.when AS trade_when, p.when AS price_when, price
-FROM trades t ASOF LEFT JOIN prices p USING (symbol, "when");
+FROM trades t
+ASOF LEFT JOIN prices p USING (symbol, "when");
 ```
 
 ## Syntax

@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Table Functions
+title: Table Functions
 ---
 
 The table function API can be used to define a table function that can then be called from within DuckDB in the `FROM` clause of a query.

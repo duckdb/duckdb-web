@@ -23,7 +23,7 @@
 }
 
 // foreground
-.highlight :is(.g, .l, .no, .nd, .nx, .py, .w, .nn){
+.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
 	color: #383a42;
 }
 
@@ -42,6 +42,12 @@
 // class names
 .highlight :is(.nc, .nv){
 	color: #d52753;
+}
+
+// property names
+.highlight :is(.py){
+	color: #a05a48;
+	font-family: $fontMonoBold;
 }
 
 // punctuation
@@ -91,6 +97,10 @@ th .k {
 	color: #aaaaaa;
 }
 
+.landing .highlight :is(.py){
+	color: #ce9887;
+}
+
 .dark{
 	// comments
 	.highlight :is(.c, .ch, .cm, .cp, .cpf, .cs, .c1){
@@ -110,7 +120,7 @@ th .k {
 	}
 	
 	// foreground
-	.highlight :is(.g, .l, .no, .nd, .nx, .py, .w, .nn){
+	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
 		color: #abb2bf;
 	}
 	

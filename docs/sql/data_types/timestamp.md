@@ -35,11 +35,11 @@ There are also three special date values that can be used on input:
 
 <div class="narrow_table"></div>
 
-| Input String | Valid Types                           | Description                                    |
-|:-------------|:--------------------------------------|:-----------------------------------------------|
-| epoch	       | `TIMESTAMP`, `TIMESTAMPTZ`            | 1970-01-01 00:00:00+00 (Unix system time zero) |
-| infinity	   | `TIMESTAMP`, `TIMESTAMPTZ`            | later than all other time stamps               |
-| -infinity	   | `TIMESTAMP`, `TIMESTAMPTZ`            | earlier than all other time stamps             |
+| Input string | Valid types                | Description                                    |
+|:-------------|:---------------------------|:-----------------------------------------------|
+| `epoch`      | `TIMESTAMP`, `TIMESTAMPTZ` | 1970-01-01 00:00:00+00 (Unix system time zero) |
+| `infinity`   | `TIMESTAMP`, `TIMESTAMPTZ` | later than all other time stamps               |
+| `-infinity`  | `TIMESTAMP`, `TIMESTAMPTZ` | earlier than all other time stamps             |
 
 The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged; 
 but `epoch` is simply a notational shorthand that will be converted to the time stamp value when read.
@@ -110,17 +110,39 @@ In this example, the `era` part will now report the Japanese imperial era number
 A list of available calendars can be pulled from the `icu_calendar_names()` table function:
 
 ```sql
-SELECT name FROM icu_calendar_names() ORDER BY 1;
+SELECT name
+FROM icu_calendar_names()
+ORDER BY 1;
 ```
 
 ## Settings
 
 The current value of the `TimeZone` and `Calendar` settings are determined by ICU when it starts up.
-They can be looked from in the `duckdb_settings()` table function:
+They can be queried from in the `duckdb_settings()` table function:
 
 ```sql
-SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
--- America/Los_Angeles
-SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
--- gregorian
+SELECT *
+FROM duckdb_settings()
+WHERE name = 'TimeZone';
+```
+```text
+┌──────────┬──────────────────┬───────────────────────┬────────────┐
+│   name   │      value       │      description      │ input_type │
+│ varchar  │     varchar      │        varchar        │  varchar   │
+├──────────┼──────────────────┼───────────────────────┼────────────┤
+│ TimeZone │ Europe/Amsterdam │ The current time zone │ VARCHAR    │
+└──────────┴──────────────────┴───────────────────────┴────────────┘
+```
+```sql
+SELECT *
+FROM duckdb_settings()
+WHERE name = 'Calendar';
+```
+```text
+┌──────────┬───────────┬──────────────────────┬────────────┐
+│   name   │   value   │     description      │ input_type │
+│ varchar  │  varchar  │       varchar        │  varchar   │
+├──────────┼───────────┼──────────────────────┼────────────┤
+│ Calendar │ gregorian │ The current calendar │ VARCHAR    │
+└──────────┴───────────┴──────────────────────┴────────────┘
 ```

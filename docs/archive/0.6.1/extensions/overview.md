@@ -49,7 +49,6 @@ select * from duckdb_extensions();
 | visualizer        |                                                                      |                 |
 
 
-## Pages in this Section
 
 <!--
 any extensions that have their own pages will automatically be added to a table of contents that is rendered directly below this list.

@@ -95,7 +95,7 @@ scripts/docker-build.sh
 Serve the website (latest only, archives excluded) with:
 
 ```sh
-scripts/docker-serve.sh
+scripts/docker-serve-latest.sh
 ```
 
 The website can be browsed by going to <http://localhost:4000/docs/> in your browser.
@@ -103,7 +103,7 @@ The website can be browsed by going to <http://localhost:4000/docs/> in your bro
 Serve the full website with:
 
 ```sh
-scripts/docker-serve-full.sh
+scripts/docker-serve.sh
 ```
 
 To stop the container, run:

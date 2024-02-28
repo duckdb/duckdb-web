@@ -3,8 +3,10 @@ layout: docu
 title: Media
 ---
 
-* [Deep Dive into DuckDB (episode of The Geek Narrator)](https://www.youtube.com/watch?v=f9QlkXW4H9A) (Podcast, ca. 60 min)
-* [Two Tier Architectures are Anachronistic (guest lecture at the Hasso-Plattner-Institute)](https://www.tele-task.de/lecture/video/10304/) (Technical talk, ca. 60 min)
+* [State of the Duck at DuckCon #4](https://www.youtube.com/watch?v=cyZfpXxXojEl) (Technical talk, ca. 20min)
+* [Implementing Hardware-Friendly Databases (Developer Voices)](https://www.youtube.com/watch?v=pZV9FvdKmLc) (Podcast, ca. 80min)
+* [Deep Dive into DuckDB (episode of The Geek Narrator)](https://www.youtube.com/watch?v=f9QlkXW4H9A) (Podcast, ca. 60min)
+* [Two Tier Architectures are Anachronistic (guest lecture at the Hasso-Plattner-Institute)](https://www.tele-task.de/lecture/video/10304/) (Technical talk, ca. 60min)
 * [In-Process Analytical Data Management with DuckDB (PyData Amsterdam 2023)](https://www.youtube.com/watch?v=5ddoZR6PYNU) (Technical talk, ca. 25min) – [Slide deck](/pdf/duckdb-pydata-amsterdam-2023.pdf)
 * [DuckDB: Bringing analytical SQL directly to your Python shell (EuroPython 2023)](https://www.youtube.com/watch?v=egN4TwVyJss) (Technical talk, ca. 40min)
 * [DuckCon #3](https://www.youtube.com/watch?v=9p_sQfy8uuk&list=PLzIMXBizEZjhy6QG4Eqoe9k9NgBa-w67Y) (Latest updates and technical talks about projects using DuckDB)

@@ -30,19 +30,21 @@ USE mysql_db;
 
 The string used by `ATTACH` is a PostgreSQL-style connection string (_not_ a MySQL connection string!). It is a list of connection arguments provided in `{key}={value}` format. Below is a list of valid arguments. Any options not provided are replaced by their default values.
 
-| Setting  |   Default    |
-|----------|--------------|
-| host     | localhost    |
-| user     | current user |
-| password |              |
-| database | NULL         |
-| port     | 0            |
-| socket   | NULL         |
+<div class="narrow_table"></div>
+
+|  Setting   |   Default    |
+|------------|--------------|
+| `database` | `NULL`       |
+| `host`     | `localhost`  |
+| `password` |              |
+| `port`     | `0`          |
+| `socket`   | `NULL`       |
+| `user`     | current user |
 
 You can directly read and write the MySQL database:
 
 ```sql
-CREATE TABLE tbl(id INTEGER, name VARCHAR);
+CREATE TABLE tbl (id INTEGER, name VARCHAR);
 INSERT INTO tbl VALUES (42, 'DuckDB');
 ```
 

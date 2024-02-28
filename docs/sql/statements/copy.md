@@ -108,7 +108,7 @@ The below options are applicable to all formats written with `COPY`.
 | `overwrite_or_ignore` | Whether or not to allow overwriting a directory if one already exists. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
 | `file_size_bytes` | If this parameter is set, the `COPY` process creates a directory which will contain the exported files. If a file exceeds the set limit (specified as bytes such as `1000` or in human-readable format such as `1k`), the process creates a new file in the directory. This parameter works in combination with `per_thread_output`. Note that the size is used as an approximation, and files can be occasionally slightly over the limit. | `VARCHAR` or `BIGINT` | (empty) |
 | `format` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Available options are `CSV`, `PARQUET` and `JSON`. | `VARCHAR` | auto |
-| `partition_by` | The columns to partition by using a hive partitioning scheme, see the [partitioned writes section](../../data/partitioning/partitioned_writes). | `VARCHAR[]` | (empty) |
+| `partition_by` | The columns to partition by using a Hive partitioning scheme, see the [partitioned writes section](../../data/partitioning/partitioned_writes). | `VARCHAR[]` | (empty) |
 | `per_thread_output` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
 | `use_tmp_file` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | `BOOL` | `auto` |
 
@@ -117,8 +117,6 @@ The below options are applicable to all formats written with `COPY`.
 <div id="rrdiagram2"></div>
 
 ## `COPY FROM DATABASE ... TO`
-
-> This statement is currently only available in nightly builds (DuckDB 0.9.3-dev) and will be released in the upcoming v0.10.0 version.
 
 The `COPY FROM DATABASE ... TO` statement copies the entire content from one attached database to another attached database. This includes the schema, including constraints, indexes, sequences, macros, and the data itself.
 
@@ -184,28 +182,54 @@ Some examples of `FIELD_IDS` are:
 
 ```sql
 -- Assign field_ids automatically
-COPY (SELECT 128 AS i)
-TO 'my.parquet' (FIELD_IDS 'auto');
--- Sets the field_id of column 'i' to 42
-COPY (SELECT 128 AS i)
-TO 'my.parquet' (FIELD_IDS {i: 42});
--- Sets the field_id of column 'i' to 42, and column 'j' to 43
-COPY (SELECT 128 AS i, 256 AS j)
-TO 'my.parquet' (FIELD_IDS {i: 42, j: 43});
--- Sets the field_id of column 'my_struct' to 43,
--- and column 'i' (nested inside 'my_struct') to 43
-COPY (SELECT {i: 128} AS my_struct)
-TO 'my.parquet' (FIELD_IDS {my_struct: {__duckdb_field_id: 42, i: 43}});
--- Sets the field_id of column 'my_list' to 42, 
--- and column 'element' (default name of list child) to 43
-COPY (SELECT [128, 256] AS my_list)
-TO 'my.parquet' (FIELD_IDS {my_list: {__duckdb_field_id: 42, element: 43}});
--- Sets the field_id of colum 'my_map' to 42, 
--- and columns 'key' and 'value' (default names of map children) to 43 and 44
-COPY (SELECT MAP {'key1' : 128, 'key2': 256} my_map)
-TO 'my.parquet' (FIELD_IDS {my_map: {__duckdb_field_id: 42, key: 43, value: 44}});
+COPY
+    (SELECT 128 AS i)
+    TO 'my.parquet'
+    (FIELD_IDS 'auto');
 ```
 
+```sql
+-- Sets the field_id of column 'i' to 42
+COPY
+    (SELECT 128 AS i)
+    TO 'my.parquet'
+    (FIELD_IDS {i: 42});
+```
+
+```sql
+-- Sets the field_id of column 'i' to 42, and column 'j' to 43
+COPY
+    (SELECT 128 AS i, 256 AS j)
+    TO 'my.parquet'
+    (FIELD_IDS {i: 42, j: 43});
+```
+
+```sql
+-- Sets the field_id of column 'my_struct' to 43,
+-- and column 'i' (nested inside 'my_struct') to 43
+COPY
+    (SELECT {i: 128} AS my_struct)
+    TO 'my.parquet'
+    (FIELD_IDS {my_struct: {__duckdb_field_id: 42, i: 43}});
+```
+
+```sql
+-- Sets the field_id of column 'my_list' to 42, 
+-- and column 'element' (default name of list child) to 43
+COPY
+    (SELECT [128, 256] AS my_list)
+    TO 'my.parquet'
+    (FIELD_IDS {my_list: {__duckdb_field_id: 42, element: 43}});
+```
+
+```sql
+-- Sets the field_id of colum 'my_map' to 42, 
+-- and columns 'key' and 'value' (default names of map children) to 43 and 44
+COPY
+    (SELECT MAP {'key1' : 128, 'key2': 256} my_map)
+    TO 'my.parquet'
+    (FIELD_IDS {my_map: {__duckdb_field_id: 42, key: 43, value: 44}});
+```
 
 ### JSON Options
 

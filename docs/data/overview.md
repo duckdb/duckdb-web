@@ -51,28 +51,7 @@ SELECT * FROM read_json_auto('test.json');
 
 For more details, see the [page on JSON loading](../data/json).
 
-## Appender (C++ and Java)
+## Appender
 
-In C++ and Java, the appender can be used as an alternative for bulk data loading. This class can be used to efficiently add rows to the database system without needing to use SQL.
-
-C++:
-
-```cpp
-Appender appender(con, "people");
-appender.AppendRow(1, "Mark");
-appender.Close();
-```
-
-Java:
-
-```java
-con.createAppender("main", "people");
-appender.beginRow();
-appender.append("Mark");
-appender.endRow();
-appender.close();
-```
-
-For a detailed description, see the pages on the [C++ appender](../data/appender) and the [Java appender](../api/java#appender).
-
-## Pages in This Section
+In several APIs (C, C++, Go, Java, and Rust), the [Appender](appender) can be used as an alternative for bulk data loading.
+This class can be used to efficiently add rows to the database system without using SQL statements.

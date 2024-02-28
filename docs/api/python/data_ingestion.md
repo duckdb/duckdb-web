@@ -111,8 +111,8 @@ If the type picked during the analyze step is incorrect, this will result in a "
 The sample size can be changed by setting the `pandas_analyze_sample` config option.
 
 ```python
-# example setting the sample size to 100000
-duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample = 100000")
+# example setting the sample size to 100k
+duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample = 100_000")
 ```
 
 ## Object Conversion
@@ -208,7 +208,7 @@ The example above becomes a `MAP(INTEGER, VARCHAR)`:
 {1=one, 2=two, 3=three}
 ```
 
-> The name of the fields matters and the two lists need to have the same size.
+> The names of the fields matter and the two lists need to have the same size.
 
 Otherwise we'll try to convert it to a `STRUCT`.
 

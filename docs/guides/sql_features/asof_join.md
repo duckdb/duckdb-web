@@ -12,7 +12,8 @@ AsOf joins are a tool for solving this and other similar problems.
 
 One of the problems that AsOf joins are used to solve is
 finding the value of a varying property at a specific point in time.
-This use case is so common that it is where the name came from:  
+This use case is so common that it is where the name came from:
+
 _Give me the value of the property **as of this time**_.
 
 More generally, however, AsOf joins embody some common temporal analytic semantics,
@@ -67,9 +68,10 @@ the most recent price before the holding's timestamp by using an AsOf Join:
 
 ```sql
 SELECT h.ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p
-  ON h.ticker = p.ticker
- AND h.when >= p.when;
+FROM holdings h
+ASOF JOIN prices p
+       ON h.ticker = p.ticker
+      AND h.when >= p.when;
 ```
 
 This attaches the value of the holding at that time to each row:
@@ -95,9 +97,10 @@ To handle this situation, you can use an *outer* AsOf Join:
 
 ```sql
 SELECT h.ticker, h.when, price * shares AS value
-FROM holdings h ASOF LEFT JOIN prices p
-  ON h.ticker = p.ticker
- AND h.when >= p.when
+FROM holdings h
+ASOF LEFT JOIN prices p
+            ON h.ticker = p.ticker
+           AND h.when >= p.when
 ORDER BY ALL;
 ```
 
@@ -133,7 +136,8 @@ Our first query can then be written as:
 
 ```sql
 SELECT ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p USING (ticker, when);
+FROM holdings h
+ASOF JOIN prices p USING (ticker, when);
 ```
 
 Be aware that if you don't explicitly list the columns in the `SELECT`,

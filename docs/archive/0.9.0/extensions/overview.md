@@ -106,7 +106,6 @@ A template for creating extensions is available in the [`extension-template` rep
 
 For more details, see the [Working with Extensions page](working_with_extensions).
 
-## Pages in This Section
 
 <!--
 any extensions that have their own pages will automatically be added to a table of contents that is rendered directly below this list.

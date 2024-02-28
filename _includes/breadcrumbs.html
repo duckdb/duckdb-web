@@ -1,0 +1,75 @@
+{% if page.url contains '/docs/archive/' %}
+  {% assign urlVersionParts = page.url | split: "/docs/archive/" %}
+  {% assign urlVersionParts = urlVersionParts[1] | split: "/" %}
+  {% assign versionviewed = urlVersionParts[0] %}
+  {% assign startingUrl = "docs/archive/" | append: versionviewed %}
+  {% assign urlString = page.url | replace: ".html", "" | replace: startingUrl, "" %}
+  {% assign urlParts = urlString | split: "/"  %}
+  {% assign startingUrl = startingUrl | append: "/" %}
+{% else %}
+  {% assign versionviewed = site.currentduckdbversion | append: " (stable)" %}
+  {% assign startingUrl = "docs/" %}
+  {% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
+{% endif %}
+{% if versionviewed contains 'stable' %}
+  {%- assign menudocfile = "menu_docs_dev" -%}
+{% else %}
+  {%- assign menudocfile = "menu_docs_" | append: versionviewed | replace: ".", "" -%}
+{% endif %}
+
+{% assign menudocfile = site.data[menudocfile].docsmenu %}
+
+<div id="breadcrumbs">
+  {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
+  
+  {% assign offset = 2 %}
+  {% if crumbs[offset] == "archive" %}
+    {% assign offset = offset | plus:2 %}
+  {% endif %}
+
+  {% if crumbs[offset] == "guides" %}
+    {% assign offset = offset | plus:1 %}
+    {% assign part = "Guides" %}
+  {% else %}
+    {% assign part = "Documentation" %}
+  {% endif %}
+
+  {% if crumbs.last != "docs" and crumbs.last != "guides" %}
+    <span>{{ part }}</span>
+  {% endif %}
+
+  {% for doc_entry in menudocfile %}
+    {% assign crumb = crumbs[offset] %}
+    {% if doc_entry.mainfolderitems %}
+      {% for main_entry in doc_entry.mainfolderitems %}
+        {% assign main_entry_slug_trimmed = main_entry.slug | replace: '/', '' %}
+        {% if main_entry_slug_trimmed == crumb %}
+          <span class="slash">/</span> <span>{{ main_entry.page }}</span>
+          {% assign offset = offset | plus:1 %}
+          {% assign crumb = crumbs[offset] %}
+          {% if main_entry.subfolderitems %}
+            {% for sub_entry in main_entry.subfolderitems %}
+              {% assign sub_entry_slug_trimmed = sub_entry.slug | replace: '/', '' %}
+              {% if sub_entry_slug_trimmed == crumb %}
+                <span class="slash">/</span> <span>{{ sub_entry.page }}</span>
+                {% assign offset = offset | plus:1 %}
+                {% assign crumb = crumbs[offset] %}
+                {% if sub_entry.subsubfolderitems %}
+                  {% for subsub_entry in sub_entry.subsubfolderitems %}
+                    {% assign subsub_entry_slug_trimmed = subsub_entry.slug | replace: '/', '' %}
+                    {% if subsub_entry_slug_trimmed == crumb %}
+                      <span class="slash">/</span> <span>{{ subsub_entry.page }}</span>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
+  <br/>
+</div>
+

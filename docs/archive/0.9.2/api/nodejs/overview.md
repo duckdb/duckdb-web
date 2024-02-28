@@ -145,5 +145,3 @@ db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
 });
 
 ```
-
-## Pages in This Section

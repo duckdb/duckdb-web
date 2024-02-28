@@ -8,7 +8,8 @@ title: Building DuckDB from Source
 
 ## Prerequisites
 
-DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC). Additionally, we recommend using the [Ninja build system](https://ninja-build.org/).
+DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
+Additionally, we recommend using the [Ninja build system](https://ninja-build.org/), which automatically parallelizes the build process.
 
 ### Linux Packages
 
@@ -17,14 +18,14 @@ Install the required packages with the package manager of your distribution.
 Fedora, CentOS, and Red Hat:
 
 ```bash
-sudo yum install -y git g++ cmake ninja-build
+sudo yum install -y git g++ cmake ninja-build openssl-devel
 ```
 
 Ubuntu and Debian:
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y git g++ cmake ninja-build
+sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
 Alpine Linux:
@@ -212,7 +213,11 @@ With this flag enabled, the sanitizers are disabled for the build.
 
 ## Building and Installing Extensions from Source
 
-[Extensions](../docs/extensions/overview) can be built from source and installed from the resulting local binary. To do so, set the corresponding [`BUILD_[EXTENSION_NAME]` extension flag](#extension-flags) when running the build, then use the `INSTALL` command.
+[Extensions](../docs/extensions/overview) can be built from source and installed from the resulting local binary.
+
+### Using Build Flags
+
+Set the corresponding [`BUILD_[EXTENSION_NAME]` extension flag](#extension-flags) when running the build, then use the `INSTALL` command.
 
 For example, to install the [`httpfs` extension](../docs/extensions/httpfs), run the following script:
 
@@ -222,6 +227,39 @@ GEN=ninja BUILD_HTTPFS=1 make
 build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
 # for debug builds
 build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
+```
+
+### Using a CMake Configuration File
+
+Create an extension configuration file named `extension_config.cmake` with e.g. the following content:
+
+```cmake
+duckdb_extension_load(autocomplete)
+duckdb_extension_load(fts)
+duckdb_extension_load(httpfs)
+duckdb_extension_load(inet)
+duckdb_extension_load(icu)
+duckdb_extension_load(json)
+duckdb_extension_load(parquet)
+```
+
+Build DuckDB as follows:
+
+```bash
+GEN=ninja EXTENSION_CONFIGS="extension_config.cmake" make
+```
+
+Then, to install the extensions in one go, run:
+
+```bash
+# for release builds
+cd build/release/extension/
+# for debug builds
+cd build/debug/extension/
+# install extensions
+for EXTENSION in *; do
+    ../duckdb -c "INSTALL '${EXTENSION}/${EXTENSION}.duckdb_extension';"
+done
 ```
 
 ## Troubleshooting

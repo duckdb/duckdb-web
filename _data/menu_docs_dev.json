@@ -191,7 +191,7 @@
               "url": "install"
             },
             {
-              "page": "Execution SQL",
+              "page": "Executing SQL",
               "url": "execute_sql"
             },
             {
@@ -293,6 +293,10 @@
       "open": true,
       "slug": "",
       "mainfolderitems": [
+        {
+          "page": "Overview",
+          "url": "index"
+        },
         {
           "page": "Connect",
           "slug": "connect",
@@ -1031,7 +1035,11 @@
                 },
                 {
                   "page": "Pattern Matching",
-                  "url": "patternmatching"
+                  "url": "pattern_matching"
+                },
+                {
+                  "page": "Regular Expressions",
+                  "url": "regular_expressions"
                 },
                 {
                   "page": "Text Functions",

@@ -82,6 +82,8 @@ The `duckdb_databases` table contains a list of all attached databases and their
 
 ```sql
 SELECT database_name, path, type FROM duckdb_databases;
+```
+```text
 ┌───────────────┬───────────┬─────────┐
 │ database_name │   path    │  type   │
 │    varchar    │  varchar  │ varchar │
@@ -131,25 +133,25 @@ WHERE title = 'ACE GOLDFINGER';
 
 Running `EXPLAIN` on the query shows how the data from the different engines is combined into the final query result.
 
-```sql
+```text
 ┌───────────────────────────┐                                                          
 │         PROJECTION        │                                                          
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                                                          
 │         first_name        │                                                          
 │         last_name         │                                                          
-└─────────────┬─────────────┘                                                                                       
+└─────────────┬─────────────┘                                                          
 ┌─────────────┴─────────────┐                                                          
 │         HASH_JOIN         │                                                          
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                                                          
 │           INNER           │                                                          
 │     film_id = film_id     ├───────────────────────────────────────────┐              
-└─────────────┬─────────────┘                                           │                                           
+└─────────────┬─────────────┘                                           │              
 ┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐
 │         HASH_JOIN         │                             │           FILTER          │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
 │           INNER           │                             │ (title = 'ACE GOLDFINGER')│
 │    actor_id = actor_id    ├──────────────┐              │                           │
-└─────────────┬─────────────┘              │              └─────────────┬─────────────┘                             
+└─────────────┬─────────────┘              │              └─────────────┬─────────────┘
 ┌─────────────┴─────────────┐┌─────────────┴─────────────┐┌─────────────┴─────────────┐
 │        SQLITE_SCAN        ││       POSTGRES_SCAN       ││        MYSQL_SCAN         │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
@@ -158,10 +160,8 @@ Running `EXPLAIN` on the query shows how the data from the different engines is 
 │          film_id          ││          actor_id         ││          film_id          │
 │          actor_id         ││         first_name        ││           title           │
 │                           ││         last_name         ││                           │
-└───────────────────────────┘└───────────────────────────┘└───────────────────────────┘ 
+└───────────────────────────┘└───────────────────────────┘└───────────────────────────┘
 ```
-
-> Several changes have been made to Postgres extension since the last release. Use `FORCE INSTALL postgres` to install the latest version of the extension.
 
 ## Transactions
 

@@ -150,7 +150,7 @@ The `DuckDBPyConnection` object is not thread-safe. If you would like to write t
 
 ## Loading and Installing Extensions
 
-DuckDB's Python API provides functions for installing and loading extensions, which perform the equivalent operations to running the `INSTALL` and `LOAD` SQL commands, respectively. An example that installs and loads the [`spatial` extension](../../extensions/spatial) looks like follows:
+DuckDB's Python API provides functions for installing and loading [extensions](../../extensions/overview), which perform the equivalent operations to running the `INSTALL` and `LOAD` SQL commands, respectively. An example that installs and loads the [`spatial` extension](../../extensions/spatial) looks like follows:
 
 ```py
 import duckdb
@@ -160,6 +160,5 @@ con.install_extension("spatial")
 con.load_extension("spatial")
 ```
 
-> To load unsigned extensions, add the `config={"allow_unsigned_extensions": "true"}` argument to the `duckdb.connect()` method.
+> To load unsigned extensions, add the `config = {"allow_unsigned_extensions": "true"}` argument to the `duckdb.connect()` method.
 
-## Pages in This Section

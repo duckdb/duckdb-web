@@ -28,9 +28,7 @@ Users can download them from the [Latest Release of DuckDB](https://github.com/d
 
 <div class="narrow_table"></div>
 
-| Operating System   | Supported Versions             |
+| Operating system   | Supported versions             |
 |--------------------|--------------------------------|
 | Linux              | Ubuntu 20.04 or later          |
 | Microsoft Windows  | Microsoft Windows 10 or later  |
-
-## Pages in This Section

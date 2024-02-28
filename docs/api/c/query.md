@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Query
+title: Query
 ---
 
 The `duckdb_query` method allows SQL queries to be run in DuckDB from C. This method takes two parameters, a (null-terminated) SQL query string and a `duckdb_result` result pointer. The result pointer may be `NULL` if the application is not interested in the result set or if the query produces no result. After the result is consumed, the `duckdb_destroy_result` method should be used to clean up the result.
@@ -42,9 +42,8 @@ a pointer to the result arrays in columnar format, and can therefore be very fas
 
 See the [Types](types) page for more information.
 
-> For optimal performance, use `duckdb_column_data` and `duckdb_nullmask_data` to extract data
-from the query result. The `duckdb_value` functions perform internal type-checking, bounds-checking and casting
-which makes them slower.
+> For optimal performance, use `duckdb_column_data` and `duckdb_nullmask_data` to extract data from the query result.
+> The `duckdb_value` functions perform internal type-checking, bounds-checking and casting which makes them slower.
 
 ### `duckdb_value`
 
@@ -93,9 +92,9 @@ for(idx_t row = 0; row < row_count; row++) {
 }
 ```
 
-> When using `duckdb_column_data`, be careful that the type matches exactly what you expect it to be. As the code
-directly accesses an internal array, there is no type-checking. Accessing a `DUCKDB_TYPE_INTEGER` column as if it was
-a `DUCKDB_TYPE_BIGINT` column will provide unpredictable results!
+> Warning When using `duckdb_column_data`, be careful that the type matches exactly what you expect it to be.
+> As the code directly accesses an internal array, there is no type-checking.
+> Accessing a `DUCKDB_TYPE_INTEGER` column as if it was a `DUCKDB_TYPE_BIGINT` column will provide unpredictable results!
 
 
 ## API Reference

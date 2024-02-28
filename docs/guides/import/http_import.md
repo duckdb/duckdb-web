@@ -18,7 +18,7 @@ LOAD httpfs;
 After the `httpfs` extension is set up, Parquet files can be read over `http(s)`:
 
 ```sql
-SELECT * FROM read_parquet('https://<domain>/path/to/file.parquet');
+SELECT * FROM read_parquet('https://⟨domain⟩/path/to/file.parquet');
 ```
 
 For example:

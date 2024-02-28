@@ -65,4 +65,3 @@ SELECT [union_value(num := 2), union_value(str := 'ABC')::UNION(str VARCHAR, num
 
 The choice of data types can have a strong effect on performance. Please consult the [Performance Guide](../../guides/performance/schema) for details.
 
-## Pages in This Section

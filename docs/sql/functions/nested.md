@@ -74,13 +74,13 @@ The following operators are supported for lists:
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
 
 ```sql
-SELECT [lower(x) for x in strings]
+SELECT [lower(x) FOR x IN strings]
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 -- [hello, , world]
 ```
 
 ```sql
-SELECT [upper(x) for x in strings if len(x) > 0]
+SELECT [upper(x) FOR x IN strings IF len(x) > 0]
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 -- [HELLO, WORLD]
 ```
@@ -107,7 +107,7 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 | `map_entries(`*`map`*`)` | Return a list of struct(k, v) for each key-value pair in the map. | `map_entries(map([100, 5], [42, 43]))` | `[{'key': 100, 'value': 42}, {'key': 5, 'value': 43}]` |
 | `map_extract(`*`map, key`*`)` | Alias of `element_at`. Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `map_extract(map([100, 5], [42, 43]), 100)` | `[42]` |
 | `map_from_entries(`*`STRUCT(k, v)[]`*`)` | Returns a map created from the entries of the array | `map_from_entries([{k: 5, v: 'val1'}, {k: 3, v: 'val2'}])` | `{5=val1, 3=val2}` |
-| `map_keys(`*`map`*`)` | Return a list of all keys in the map. | `map_keys(map([100, 5], [42, 43]))` | `[100, 5]` |
+| `map_keys(`*`map`*`)` | Return a list of all keys in the map. | `map_keys(map([100, 5], [42,43]))` | `[100, 5]` |
 | `map_values(`*`map`*`)` | Return a list of all values in the map. | `map_values(map([100, 5], [42, 43]))` | `[42, 43]` |
 | `map()` | Returns an empty map. | `map()` | `{}` |
 | `map[`*`entry`*`]` | Alias for `element_at` | `map([100, 5], ['a', 'b'])[100]` | `[a]` |
@@ -141,19 +141,24 @@ The default value of `start` is 0 and the default value of `step` is 1.
 ```sql
 SELECT range(5);
 -- [0, 1, 2, 3, 4]
-
+```
+```sql
 SELECT range(2, 5);
 -- [2, 3, 4]
-
+```
+```sql
 SELECT range(2, 5, 3);
 -- [2]
-
+```
+```sql
 SELECT generate_series(5);
 -- [0, 1, 2, 3, 4, 5]
-
+```
+```sql
 SELECT generate_series(2, 5);
 -- [2, 3, 4, 5]
-
+```
+```sql
 SELECT generate_series(2, 5, 3);
 -- [2, 5]
 ```
@@ -161,7 +166,8 @@ SELECT generate_series(2, 5, 3);
 Date ranges are also supported:
 
 ```sql
-SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
+SELECT *
+FROM range(DATE '1992-01-01', DATE '1992-03-01', INTERVAL '1' MONTH);
 ```
 
 ```text
@@ -208,19 +214,24 @@ The function `list_slice` can be used to extract a sublist from a list.  The fol
 ```sql
 SELECT list_slice([1, 2, 3, 4, 5], 2, 4);
 -- [2, 3, 4]
-
+```
+```sql
 SELECT ([1, 2, 3, 4, 5])[2:4:2];
 -- [2, 4]
-
+```
+```sql
 SELECT([1, 2, 3, 4, 5])[4:2:-2];
 -- [4, 2]
-
+```
+```sql
 SELECT ([1, 2, 3, 4, 5])[:];
 -- [1, 2, 3, 4, 5]
-
+```
+```sql
 SELECT ([1, 2, 3, 4, 5])[:-:2];
 -- [1, 3, 5]
-
+```
+```sql
 SELECT ([1, 2, 3, 4, 5])[:-:-2];
 -- [5, 3, 1]
 ```
@@ -234,13 +245,16 @@ The function `list_aggregate` allows the execution of arbitrary existing aggrega
 ```sql
 SELECT list_aggregate([1, 2, -4, NULL], 'min');
 -- -4
-
+```
+```sql
 SELECT list_aggregate([2, 4, 8, 42], 'sum');
 -- 56
-
+```
+```sql
 SELECT list_aggregate([[1, 2], [NULL], [2, 10, 3]], 'last');
 -- [2, 10, 3]
-
+```
+```sql
 SELECT list_aggregate([2, 4, 8, 42], 'string_agg', '|');
 -- 2|4|8|42
 ```
@@ -250,10 +264,12 @@ The following is a list of existing rewrites. Rewrites simplify the use of the l
 ```sql
 SELECT list_min([1, 2, -4, NULL]);
 -- -4
-
+```
+```sql
 SELECT list_sum([2, 4, 8, 42]);
 -- 56
-
+```
+```sql
 SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
 -- [2, 10, 3]
 ```
@@ -265,7 +281,8 @@ Concatenates list/array elements using an optional delimiter.
 ```sql
 SELECT array_to_string([1, 2, 3], '-') AS str;
 -- 1-2-3
-
+```
+```sql
 -- this is equivalent to the following SQL
 SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 -- 1-2-3
@@ -284,12 +301,14 @@ By default if no modifiers are provided, DuckDB sorts `ASC NULLS FIRST`, i.e., t
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ----
 [NULL, NULL, -5, 1, 3, 5]
-
+```
+```sql
 -- only providing the sort order
 SELECT list_sort([1, 3, NULL, 2], 'ASC');
 ----
 [NULL, 1, 2, 3]
-
+```
+```sql
 -- providing the sort order and the NULL sort order
 SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 ----
@@ -303,7 +322,8 @@ SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ----
 [NULL, NULL, -5, 1, 3, 5]
-
+```
+```sql
 -- providing the NULL sort order
 SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 ----
@@ -328,7 +348,8 @@ SELECT
     ]);
 ----
 [1, 2, 3, 4]
-
+```
+```sql
 -- If the list has multiple levels of lists, 
 -- only the first level of sub-lists is concatenated into a single list
 SELECT 
@@ -348,29 +369,34 @@ SELECT
 
 In general, the input to the flatten function should be a list of lists (not a single level list). 
 However, the behavior of the flatten function has specific behavior when handling empty lists and `NULL` values.
+
 ```sql
 -- If the input list is empty, return an empty list
 SELECT flatten([]);
 ----
 []
-
+```
+```sql
 -- If the entire input to flatten is NULL, return NULL
 SELECT flatten(NULL);
 ----
 NULL
-
+```
+```sql
 -- If a list whose only entry is NULL is flattened, return an empty list
 SELECT flatten([NULL]);
 ----
 []
-
+```
+```sql
 -- If the sub-list in a list of lists only contains NULL, 
 -- do not modify the sub-list
 -- (Note the extra set of parentheses vs. the prior example)
 SELECT flatten([[NULL]]);
 ----
 [NULL]
-
+```
+```sql
 -- Even if the only contents of each sub-list is NULL,
 -- still concatenate them together
 -- Note that no de-duplication occurs when flattening. 
@@ -382,7 +408,7 @@ SELECT flatten([[NULL],[NULL]]);
 
 ## `generate_subscripts`
 
-The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along the `dim`th dimension of array `arr`.
+The `generate_subscripts(`*`arr`*`, `*`dim`*`)` function generates indexes along the `dim`th dimension of array `arr`.
 
 ```sql
 SELECT generate_subscripts([4, 5, 6], 1) AS i;

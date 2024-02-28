@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Prepared Statements
+title: Prepared Statements
 ---
 
 A prepared statement is a parameterized query. The query is prepared with question marks (`?`) or dollar symbols (`$1`) indicating the parameters of the query. Values can then be bound to these parameters, after which the prepared statement can be executed using those parameters. A single query can be prepared once and executed many times.
@@ -44,7 +44,7 @@ After calling `duckdb_prepare`, the prepared statement parameters can be inspect
 
 It is not required that the `duckdb_bind` family of functions matches the prepared statement parameter type exactly. The values will be auto-cast to the required value as required. For example, calling `duckdb_bind_int8` on a parameter type of `DUCKDB_TYPE_INTEGER` will work as expected.
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. Instead it is recommended to use the [Appender](appender).
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. Instead it is recommended to use the [Appender](appender).
 
 ## API Reference
 

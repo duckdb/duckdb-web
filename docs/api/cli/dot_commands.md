@@ -71,9 +71,9 @@ The `.help` text may be filtered by passing in a text string as the second argum
 ```
 
 ```text
-.maxrows COUNT           Sets the maximum number of rows for display (default: 40). Only for duckbox mode.
-.maxwidth COUNT          Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
-.mode MODE ?TABLE?       Set output mode
+.maxrows COUNT      Sets the maximum number of rows for display (default: 40). Only for duckbox mode.
+.maxwidth COUNT     Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
+.mode MODE ?TABLE?  Set output mode
 ```
 
 ### `.output`: Writing Results to a File
@@ -212,7 +212,7 @@ To configure the color used to highlight keywords:
 
 ## Importing Data from CSV
 
-> This feature is only included for compatibility reasons and may be removed in the future.
+> Deprecated This feature is only included for compatibility reasons and may be removed in the future.
 > Use the [`read_csv` function or the `COPY` statement](../../data/csv) to load CSV files.
 
 DuckDB supports [SQL syntax to directly query or import CSV files](../../data/csv), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the CSV file, and the second is the name of the DuckDB table to create. Since DuckDB requires stricter typing than SQLite (upon which the DuckDB CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv` examples in the import docs](../../data/csv).

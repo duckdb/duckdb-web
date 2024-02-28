@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: Extensions
+redirect_from:
+  - /docs/extensions
+  - /docs/extensions/
 ---
 
 ## Overview
@@ -38,7 +41,8 @@ DuckDB has three types of extensions.
 Built-in extensions are loaded at startup and are immediately available for use.
 
 ```sql
-SELECT * FROM 'test.json';
+SELECT *
+FROM 'test.json';
 ```
 
 This will use the [`json` extension](json) to read the JSON file.
@@ -50,7 +54,8 @@ This will use the [`json` extension](json) to read the JSON file.
 Autoloadable extensions are loaded on first use.
 
 ```sql
-SELECT * FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv';
+SELECT *
+FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv';
 ```
 
 To access files via the HTTPS protocol, DuckDB will automatically load the [`httpfs` extension](../extensions/httpfs).
@@ -106,7 +111,7 @@ For example, the extensions for DuckDB version 0.10.0 on macOS ARM64 (Apple Sili
 To specify a different extension directory, use the `extension_directory` configuration option:
 
 ```sql
-SET extension_directory=/path/to/your/extension/directory
+SET extension_directory = '/path/to/your/extension/directory';
 ```
 
 ## Developing Extensions
@@ -117,5 +122,3 @@ A template for creating extensions is available in the [`extension-template` rep
 ## Working with Extensions
 
 For advanced installation instructions and more details on extensions, see the [Working with Extensions page](working_with_extensions).
-
-## Pages in This Section

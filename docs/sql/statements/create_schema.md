@@ -17,7 +17,9 @@ CREATE SCHEMA IF NOT EXISTS s2;
 CREATE TABLE s1.t(id INTEGER PRIMARY KEY, other_id INTEGER);
 CREATE TABLE s2.t(id INTEGER PRIMARY KEY, j VARCHAR);
 -- compute a join between tables from two schemas
-SELECT * FROM s1.t s1t, s2.t s2t WHERE s1t.other_id = s2t.id;
+SELECT *
+FROM s1.t s1t, s2.t s2t
+WHERE s1t.other_id = s2t.id;
 ```
 
 ## Syntax

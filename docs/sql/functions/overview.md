@@ -8,12 +8,18 @@ railroad: expressions/function.js
 
 <div id="rrdiagram"></div>
 
-### Query Functions
+## Query Functions
 
 `duckdb_functions` table function shows the list of functions currently built into the system.
 
 ```sql
-SELECT DISTINCT ON(function_name) function_name, function_type, return_type, parameters, parameter_types, description
+SELECT DISTINCT ON(function_name)
+    function_name,
+    function_type,
+    return_type,
+    parameters,
+    parameter_types,
+    description
 FROM duckdb_functions()
 WHERE function_type = 'scalar' AND function_name LIKE 'b%'
 ORDER BY function_name;
@@ -34,5 +40,3 @@ ORDER BY function_name;
 ```
 
 Currently the description and parameter names of functions are still missing.
-
-## Pages in This Section

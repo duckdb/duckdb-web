@@ -9,7 +9,7 @@ The `UNPIVOT` statement allows multiple columns to be stacked into fewer columns
 In the basic case, multiple columns are stacked into two columns: a `NAME` column (which contains the name of the source column) and a `VALUE` column (which contains the value from the source column).
 
 DuckDB implements both the SQL Standard `UNPIVOT` syntax and a simplified `UNPIVOT` syntax.
-Both can utilize a [`COLUMNS` expression](../expressions/star#columns) to automatically detect the columns to unpivot. 
+Both can utilize a [`COLUMNS` expression](../expressions/star#columns) to automatically detect the columns to unpivot.
 `PIVOT_LONGER` may also be used in place of the `UNPIVOT` keyword.
 
 > The [`PIVOT` statement](pivot) is the inverse of the `UNPIVOT` statement.
@@ -17,27 +17,30 @@ Both can utilize a [`COLUMNS` expression](../expressions/star#columns) to automa
 ## Simplified UNPIVOT Syntax
 
 The full syntax diagram is below, but the simplified `UNPIVOT` syntax can be summarized using spreadsheet pivot table naming conventions as:
-```sql
-UNPIVOT [dataset]
-ON [column(s)]
-INTO 
-    NAME [name-column-name]
-    VALUE [value-column-name(s)]
-ORDER BY [column(s)-with-order-direction(s)]
-LIMIT [number-of-rows];
-```
 
+```sql
+UNPIVOT ⟨dataset⟩
+ON ⟨column(s)⟩
+INTO 
+    NAME ⟨name-column-name⟩
+    VALUE ⟨value-column-name(s)⟩
+ORDER BY ⟨column(s)-with-order-direction(s)⟩
+LIMIT ⟨number-of-rows⟩;
+```
 
 ### Example Data
 
 All examples use the dataset produced by the queries below:
+
 ```sql
-CREATE OR REPLACE TABLE monthly_sales(empid INT, dept TEXT, Jan INT, Feb INT, Mar INT, Apr INT, May INT, Jun INT);
+CREATE OR REPLACE TABLE monthly_sales
+    (empid INT, dept TEXT, Jan INT, Feb INT, Mar INT, Apr INT, May INT, Jun INT);
 INSERT INTO monthly_sales VALUES
     (1, 'electronics', 1, 2, 3, 4, 5, 6),
     (2, 'clothes', 10, 20, 30, 40, 50, 60),
     (3, 'cars', 100, 200, 300, 400, 500, 600);
 ```
+
 ```sql
 FROM monthly_sales;
 ```
@@ -45,7 +48,7 @@ FROM monthly_sales;
 <div class="narrow_table"></div>
 
 | empid |    dept     | Jan | Feb | Mar | Apr | May | Jun |
-|-------|-------------|-----|-----|-----|-----|-----|-----|
+|------:|-------------|----:|----:|----:|----:|----:|----:|
 | 1     | electronics | 1   | 2   | 3   | 4   | 5   | 6   |
 | 2     | clothes     | 10  | 20  | 30  | 40  | 50  | 60  |
 | 3     | cars        | 100 | 200 | 300 | 400 | 500 | 600 |
@@ -71,7 +74,7 @@ INTO
 <div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
-|-------|-------------|-------|-------|
+|------:|-------------|-------|------:|
 | 1     | electronics | Jan   | 1     |
 | 1     | electronics | Feb   | 2     |
 | 1     | electronics | Mar   | 3     |
@@ -111,7 +114,7 @@ INTO
 <div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
-|-------|-------------|-------|-------|
+|------:|-------------|-------|------:|
 | 1     | electronics | Jan   | 1     |
 | 1     | electronics | Feb   | 2     |
 | 1     | electronics | Mar   | 3     |
@@ -154,7 +157,7 @@ UNPIVOT monthly_sales
 <div class="narrow_table"></div>
 
 | empid |    dept     | quarter | month_1_sales | month_2_sales | month_3_sales |
-|-------|-------------|---------|---------------|---------------|---------------|
+|------:|-------------|---------|--------------:|--------------:|--------------:|
 | 1     | electronics | q1      | 1             | 2             | 3             |
 | 1     | electronics | q2      | 4             | 5             | 6             |
 | 2     | clothes     | q1      | 10            | 20            | 30            |
@@ -170,6 +173,7 @@ The `UNPIVOT` statement may be included within a `SELECT` statement as a CTE ([a
 This allows for an `UNPIVOT` to be used alongside other SQL logic, as well as for multiple `UNPIVOT`s to be used in one query.
 
 No `SELECT` is needed within the CTE, the `UNPIVOT` keyword can be thought of as taking its place.
+
 ```sql
 WITH unpivot_alias AS (
     UNPIVOT monthly_sales
@@ -181,11 +185,11 @@ WITH unpivot_alias AS (
 SELECT * FROM unpivot_alias;
 ```
 
-An `UNPIVOT` may be used in a subquery and must be wrapped in parentheses. 
+An `UNPIVOT` may be used in a subquery and must be wrapped in parentheses.
 Note that this behavior is different than the SQL Standard Unpivot, as illustrated in subsequent examples.
+
 ```sql
-SELECT 
-    * 
+SELECT * 
 FROM (
     UNPIVOT monthly_sales
     ON COLUMNS(* EXCLUDE (empid, dept))
@@ -197,11 +201,12 @@ FROM (
 
 ### Internals
 
-Unpivoting is implemented entirely as rewrites into SQL queries. 
+Unpivoting is implemented entirely as rewrites into SQL queries.
 Each `UNPIVOT` is implemented as set of `unnest` functions, operating on a list of the column names and a list of the column values.
 If dynamically unpivoting, the `COLUMNS` expression is evaluated first to calculate the column list.
 
 For example:
+
 ```sql
 UNPIVOT monthly_sales
 ON jan, feb, mar, apr, may, jun
@@ -211,6 +216,7 @@ INTO
 ```
 
 is translated into:
+
 ```sql
 SELECT 
     empid,
@@ -226,7 +232,7 @@ This produces the same result as the initial example:
 <div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
-|-------|-------------|-------|-------|
+|------:|-------------|-------|------:|
 | 1     | electronics | jan   | 1     |
 | 1     | electronics | feb   | 2     |
 | 1     | electronics | mar   | 3     |
@@ -246,19 +252,16 @@ This produces the same result as the initial example:
 | 3     | cars        | may   | 500   |
 | 3     | cars        | jun   | 600   |
 
-
-
-
 ### Simplified Unpivot Full Syntax Diagram
 
-Below is the full syntax diagram of the `UNPIVOT` statement. 
+Below is the full syntax diagram of the `UNPIVOT` statement.
 
 <div id="rrdiagram"></div>
-
 
 ## SQL Standard `UNPIVOT` Syntax
 
 The full syntax diagram is below, but the SQL Standard `UNPIVOT` syntax can be summarized as:
+
 ```sql
 FROM [dataset]
 UNPIVOT [INCLUDE NULLS] (
@@ -267,7 +270,7 @@ UNPIVOT [INCLUDE NULLS] (
 );
 ```
 
-Note that only one column can be included in the `name-column-name` expression. 
+Note that only one column can be included in the `name-column-name` expression.
 
 ### SQL Standard `UNPIVOT` Manually
 
@@ -283,7 +286,7 @@ FROM monthly_sales UNPIVOT (
 <div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
-|-------|-------------|-------|-------|
+|------:|-------------|-------|------:|
 | 1     | electronics | Jan   | 1     |
 | 1     | electronics | Feb   | 2     |
 | 1     | electronics | Mar   | 3     |
@@ -306,7 +309,7 @@ FROM monthly_sales UNPIVOT (
 ### SQL Standard Unpivot Dynamically Using the `COLUMNS` Expression
 
 The [`COLUMNS` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically. 
-This will continue to work even if additional `month` columns are added to the dataset. 
+This will continue to work even if additional `month` columns are added to the dataset.
 It produces the same result as the query above.
 
 ```sql
@@ -318,11 +321,10 @@ FROM monthly_sales UNPIVOT (
 
 ### SQL Standard `UNPIVOT` into Multiple Value Columns
 
-The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported. 
+The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported.
 This can be useful when the goal is to reduce the extent to which a dataset is pivoted, but not completely stack all pivoted columns.
-To demonstrate this, the query below will generate a dataset with a separate column for the number of each month within the quarter (month 1, 2, or 3), and a separate row for each quarter. 
+To demonstrate this, the query below will generate a dataset with a separate column for the number of each month within the quarter (month 1, 2, or 3), and a separate row for each quarter.
 Since there are fewer quarters than months, this does make the dataset longer, but not as long as the above.
-
 
 To accomplish this, multiple columns are included in the `value-column-name` portion of the `UNPIVOT` statement.
 Multiple sets of columns are included in the `IN` clause.
@@ -343,7 +345,7 @@ UNPIVOT (
 <div class="narrow_table"></div>
 
 | empid |    dept     | quarter | month_1_sales | month_2_sales | month_3_sales |
-|-------|-------------|---------|---------------|---------------|---------------|
+|------:|-------------|---------|--------------:|--------------:|--------------:|
 | 1     | electronics | q1      | 1             | 2             | 3             |
 | 1     | electronics | q2      | 4             | 5             | 6             |
 | 2     | clothes     | q1      | 10            | 20            | 30            |
@@ -351,9 +353,8 @@ UNPIVOT (
 | 3     | cars        | q1      | 100           | 200           | 300           |
 | 3     | cars        | q2      | 400           | 500           | 600           |
 
-
 ### SQL Standard `UNPIVOT` Full Syntax Diagram
 
-Below is the full syntax diagram of the SQL Standard version of the `UNPIVOT` statement. 
+Below is the full syntax diagram of the SQL Standard version of the `UNPIVOT` statement.
 
 <div id="rrdiagram2"></div>

@@ -44,7 +44,7 @@ CREATE SECRET (
 After the `httpfs` extension is set up and the S3 configuration is set correctly, Parquet files can be read from S3 using the following command:
 
 ```sql
-SELECT * FROM read_parquet('s3://<bucket>/<file>');
+SELECT * FROM read_parquet('s3://⟨bucket⟩/⟨file⟩');
 ```
 
 ## Google Cloud Storage (GCS) and Cloudflare R2

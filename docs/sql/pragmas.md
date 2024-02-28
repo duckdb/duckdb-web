@@ -72,7 +72,7 @@ SET memory_limit = '1GB';
 SET max_memory = '1GB';
 ```
 
-> The specified memory limit is only applied to the buffer manager.
+> Warning The specified memory limit is only applied to the buffer manager.
 > For most queries, the buffer manager handles the majority of the data processed.
 > However, certain in-memory data structures such as [vectors](/internals/vector) and query results are allocated outside of the buffer manager.
 > Additionally, [aggregate functions](aggregates) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
@@ -375,7 +375,7 @@ PRAGMA disable_print_progress_bar;
 
 ### Temp Directory for Spilling Data to Disk
 
-By default, DuckDB uses a temporary directory named `<database_file_name>.tmp` to spill to disk, located in the same directory as the database file. To change this, use:
+By default, DuckDB uses a temporary directory named `⟨database_file_name⟩.tmp` to spill to disk, located in the same directory as the database file. To change this, use:
 
 ```sql
 SET temp_directory = '/path/to/temp_dir.tmp/'
@@ -394,7 +394,7 @@ This call returns the following information for the given table:
 
 <div class="narrow_table"></div>
 
-| name           | type      | description                                           |
+| Name           | Type      | Description                                           |
 |----------------|-----------|-------------------------------------------------------|
 | `row_group_id` | `BIGINT`  ||
 | `column_name`  | `VARCHAR` ||
@@ -407,7 +407,7 @@ This call returns the following information for the given table:
 | `compression`  | `VARCHAR` | Compression type used for this column - see [blog post](/2022/10/28/lightweight-compression) |
 | `stats`        | `VARCHAR` ||
 | `has_updates`  | `BOOLEAN` ||
-| `persistent`   | `BOOLEAN` | false if temporary table                              |
+| `persistent`   | `BOOLEAN` | `false` if temporary table                            |
 | `block_id`     | `BIGINT`  | empty unless persistent                               |
 | `block_offset` | `BIGINT`  | empty unless persistent                               |
 
@@ -448,7 +448,7 @@ SET disabled_optimizers = 'filter_pushdown,statistics_propagation';
 
 The available optimizations can be queried using the [`duckdb_optimizers()` table function](duckdb_table_functions#duckdb_optimizers).
 
-> The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
+> Warning The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
 
 ### Returning Errors as JSON
 

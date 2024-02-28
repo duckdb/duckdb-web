@@ -75,7 +75,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `force_not_null` | Do not match the specified columns' values against the NULL string. In the default case where the `NULL` string is empty, this means that empty values will be read as zero-length strings rather than `NULL`s. | `VARCHAR[]` | `[]` |
 | `header` | Specifies that the file contains a header line with the names of each column in the file. | `BOOL` | `false` |
-| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
+| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
 | `ignore_errors` | Option to ignore any parsing errors encountered - and instead ignore rows with errors. | `BOOL` | `false` |
 | `max_line_size` | The maximum line size in bytes. | `BIGINT` | 2097152 |
 | `names` | The column names as a list, see [example](tips#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
@@ -93,7 +93,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 
 ## CSV Functions
 
-> DuckDB 0.9.3-dev and the upcoming v0.10.0 versions introduce breaking changes to the `read_csv` function.
+> Deprecated DuckDB v0.10.0 introduced breaking changes to the `read_csv` function.
 > Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the [old `read_csv_auto` function](../../../docs/archive/0.9.2/data/csv/overview#read_csv_auto-function).
 > If you would like to use `read_csv` with its old behavior, turn off the auto-detection manually by using `read_csv(..., auto_detect = false)`.
 
@@ -180,4 +180,3 @@ DuckDB supports reading erroneous CSV files. For details, see the [Reading Fault
 
 The CSV reader only supports input files using UTF-8 character encoding. For CSV files using different encodings, use e.g. the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert them to UTF-8.
 
-## Pages in This Section

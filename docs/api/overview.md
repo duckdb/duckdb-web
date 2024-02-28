@@ -28,4 +28,3 @@ There are also contributed third-party DuckDB wrappers, which currently do not h
 * [Ruby](https://github.com/suketa/ruby-duckdb) by [suketa](https://github.com/suketa)
 * [Zig](https://github.com/karlseguin/zuckdb.zig) by [karlseguin](https://github.com/karlseguin)
 
-## Pages in This Section
