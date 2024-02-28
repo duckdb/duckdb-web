@@ -60,6 +60,7 @@ This section describes functions and operators for examining and manipulating st
 | `regexp_matches(`*`string`*`, `*`pattern`*`)` | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise (see [Pattern Matching](patternmatching#using-regexp_matches))| `regexp_matches('anabanana', '(an)*')` | `true` |
 | `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | If *string* contains the regexp *pattern*, replaces the matching part with *replacement* (see [Pattern Matching](patternmatching#using-regexp_replace))| `regexp_replace('hello', '[lo]', '-')` | `he-lo` |
 | `regexp_split_to_array(`*`string`*`, `*`regex`*`)` | Splits the *string* along the *regex* | `regexp_split_to_array('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` | `string_split_regex`, `str_split_regex`|
+| `regexp_split_to_table(`*`string`*`, `*`regex`*`)` | Splits the *string* along the *regex* and returns a row for each part | `regexp_split_to_array('hello␣world; 42', ';?␣')` | Two rows: `'hello'`, `'world'` |
 | `repeat(`*`string`*`, `*`count`*`)`| Repeats the *string* *count* number of times | `repeat('A', 5)` | `AAAAA` | |
 | `replace(`*`string`*`, `*`source`*`, `*`target`*`)`| Replaces any occurrences of the *source* with *target* in *string* | `replace('hello', 'l', '-')` | `he--o` | |
 | `reverse(`*`string`*`)`| Reverses the *string* | `reverse('hello')` | `olleh` | |

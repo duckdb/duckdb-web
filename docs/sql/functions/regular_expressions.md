@@ -25,6 +25,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 | `regexp_matches(`*`string`*`, `*`pattern`*`)` | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise | `regexp_matches('anabanana', '(an)*')` | `true` |
 | `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | If *string* contains the regexp *pattern*, replaces the matching part with *replacement* | `regexp_replace('hello', '[lo]', '-')` | `he-lo` |
 | `regexp_split_to_array(`*`string`*`, `*`regex`*`)` | Alias of `string_split_regex`. Splits the *string* along the *regex* | `regexp_split_to_array('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` |
+| `regexp_split_to_table(`*`string`*`, `*`regex`*`)` | Splits the *string* along the *regex* and returns a row for each part | `regexp_split_to_array('hello␣world; 42', ';?␣')` | Two rows: `'hello'`, `'world'` |
 
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `true` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
 
