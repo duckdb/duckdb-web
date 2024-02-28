@@ -78,6 +78,34 @@ Note that it is not a primary design goal for DuckDB to quickly execute many sma
 
 DuckDB uses synchronous IO when reading remote files. This means that each DuckDB thread can make at most one HTTP request at a time. If a query must make many small requests over the network, increasing DuckDB's [`threads` setting](../../sql/pragmas#threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
 
+### Avoid reading unnecessary data
+The main bottleneck in workloads reading remote files is likely to be the IO. This means that minimizing the unnecessarily read data can be highly beneficial.
+
+Some basic SQL tricks can help with this:
+- avoid `SELECT *`. Instead, only select columns that are actually used. DuckDB will try to only download the data it actually needs.
+- apply filters on remote parquet files when possible. DuckDB can use these filters to reduce the amount of data that is scanned.
+- either [sort](../../sql/query_syntax/orderby) or [partition](../../data/partitioning/partitioned_writes) data by columns that are regularly used for filters: this increases the effectiveness of the filters in reducing IO.
+
+To inspect how much remote data is transferred for a query, [`EXPLAIN ANALYZE`](../meta/explain_analyze) can be used to print out the total number of requests and total data transferred for queries on remote files.
+
+### Avoid reading data more than once
+DuckDB does not cache data from remote files automatically. This means that running a query on a remote file twice will download the required data twice. So if data needs to be accessed multiple times, storing it locally can make sense. To illustrate this, lets look at an example:
+
+Consider the following queries: 
+```
+SELECT col_a+col_b from 's3://bucket/file.parquet' WHERE col_a > 10;
+SELECT col_a*col_b from 's3://bucket/file.parquet' WHERE col_a > 10;
+```
+These queries download the columns `col_a` and `col_b` from `s3://bucket/file.parquet` twice. Now consider the following queries:
+```
+CREATE TABLE local_copy_of_file AS SELECT col_a, col_b from 's3://bucket/file.parquet' WHERE col_a > 10;
+SELECT col_a+col_b from local_copy_of_file;
+SELECT col_a*col_b from local_copy_of_file;
+```
+Here DuckDB will first copy `col_a` and `col_b` from `s3://bucket/file.parquet` into a local table, and then query the local in-memory columns twice. Note also that the filter `WHERE col_a > 10` is also now applied only once. 
+
+An important side note needs to be made here though. The first two queries are fully streaming, with only a small memory footprint, whereas the second requires full materialization of columns `col_a` and `col_b`. This means that in some cases (e.g. with a high-speed network, but with highly limited memory available) it could actually be beneficial to download the data twice.
+
 ## Best Practices for Using Connections
 
 DuckDB will perform best when reusing the same database connection many times. Disconnecting and reconnecting on every query will incur some overhead, which can reduce performance when running many small queries. DuckDB also caches some data and metadata in memory, and that cache is lost when the last open connection is closed. Frequently, a single connection will work best, but a connection pool may also be used. 
