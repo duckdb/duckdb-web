@@ -3,7 +3,7 @@ layout: docu
 title: Literal Types
 ---
 
-DuckDB has special literal types for representing null, integer and string literals in queries. These have their own binding and conversion rules.
+DuckDB has special literal types for representing `NULL`, integer and string literals in queries. These have their own binding and conversion rules.
 
 > Prior to version 0.10.0, integer and string literals behaved identically to the `INTEGER` and `VARCHAR` types.
 
