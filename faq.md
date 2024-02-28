@@ -16,8 +16,10 @@ DuckDB's initial development took place at the [Database Architectures Group](ht
 
 </div>
 
+<!-- Q&A entry -->
+
 <div class="qa-wrap" markdown="1">
-	
+
 ### Why call it DuckDB?
 
 <div class="answer" markdown="1">
@@ -27,6 +29,8 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 </div>
 
 </div>
+
+<!-- Q&A entry -->
 
 <div class="qa-wrap" markdown="1">
 	
@@ -50,17 +54,21 @@ The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.
 
 </div>
 
+<!-- Q&A entry -->
+
 <div class="qa-wrap" markdown="1">
 	
 ### Where do I find DuckDB trademark use guidelines?
 
 <div class="answer" markdown="1">
 	
-You can find the guidelines for DuckDB™ [here](/trademark_guidelines).
+Please consult the [trademark guidelines for DuckDB™](/trademark_guidelines).
 
 </div>
 
 </div>
+
+<!-- Q&A entry -->
 
 <div class="qa-wrap" markdown="1">
 	
@@ -77,6 +85,8 @@ Before opening a pull request, please consult our [Contributor Guide](https://gi
 
 </div>
 
+<!-- Q&A entry -->
+
 <div class="qa-wrap" markdown="1">
 	
 ### I benchmarked DuckDB and its slower than \[some other system\]
@@ -92,6 +102,8 @@ Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered
 
 </div>
 
+<!-- Q&A entry -->
+
 <div class="qa-wrap" markdown="1">
 	
 ### Does DuckDB use SIMD?
@@ -104,25 +116,19 @@ DuckDB does not use *explicit SIMD* instructions because they greatly complicate
 
 </div>
 
+<!-- Q&A entry -->
+
 <div class="qa-wrap" markdown="1">
 	
 ### How does DuckDB handle concurrency?
 
 <div class="answer" markdown="1">
-See the [documentation on concurrency](/docs/connect/concurrency#handling-concurrency).
+See the documentation on [concurrency](/docs/connect/concurrency#handling-concurrency).
 </div>
 
 </div>
 
-<div class="qa-wrap" markdown="1">
-	
-### How does DuckDB handle concurrency within a single process?
-
-<div class="answer" markdown="1">
-See the [documentation on concurrency](/docs/connect/concurrency#concurrency-within-a-single-process).
-</div>
-
-</div>
+<!-- Q&A entry -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -133,6 +139,8 @@ See the [documentation on concurrency](/docs/connect/concurrency#writing-to-duck
 </div>
 
 </div>
+
+<!-- Q&A entry -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -149,6 +157,8 @@ Here is a glossay of a few common terms used in DuckDB.<br/>
 </div>
 
 </div>
+
+<!-- Q&A entry -->
 
 <div class="qa-wrap" markdown="1">
 
