@@ -196,6 +196,28 @@ FROM (
 ) unpivot_alias;
 ```
 
+### Expressions within `UNPIVOT` Statements
+
+DuckDB allows expressions within the `UNPIVOT` statements, provided that they only involve a single column. These can be used to perform computations as well as [explicit casts](../data_types/typecasting#explicit-casting). For example:
+
+```sql
+UNPIVOT
+    (SELECT 42 as col1, 'woot' as col2)
+    ON
+        (col1 * 2)::VARCHAR,
+        col2;
+```
+
+```text
+┌─────────┬─────────┐
+│  name   │  value  │
+│ varchar │ varchar │
+├─────────┼─────────┤
+│ col1    │ 84      │
+│ col2    │ woot    │
+└─────────┴─────────┘
+```
+
 ### Internals
 
 Unpivoting is implemented entirely as rewrites into SQL queries.
