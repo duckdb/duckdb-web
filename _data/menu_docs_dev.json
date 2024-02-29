@@ -654,6 +654,24 @@
           ]
         },
         {
+          "page": "Configuration",
+          "slug": "configuration",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "Pragmas",
+              "url": "pragmas"
+            },          
+            {
+              "page": "Secret Manager",
+              "url": "secret_manager"
+            }
+          ]
+        },
+        {
           "page": "SQL",
           "slug": "sql",
           "subfolderitems": [
@@ -1068,10 +1086,6 @@
               "url": "aggregates"
             },
             {
-              "page": "Configuration",
-              "url": "configuration"
-            },
-            {
               "page": "Constraints",
               "url": "constraints"
             },
@@ -1086,10 +1100,6 @@
             {
               "page": "Metadata Functions",
               "url": "duckdb_table_functions"
-            },
-            {
-              "page": "Pragmas",
-              "url": "pragmas"
             },
             {
               "page": "Keywords and Identifiers",
