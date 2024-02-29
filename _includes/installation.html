@@ -11,10 +11,10 @@
 		<h3>Version</h3>
 		<ul class="version">
 			<li class="selected" data-id=".latest">
-				<div> {{ site.currentduckdbversion }} <span class="versioninfo">(Latest Release)</span></div>
+				<div> {{ site.currentduckdbversion }} <span class="versioninfo">(latest release)</span></div>
 			</li>
 			<li data-id=".main">
-				<div>GitHub main <span class="versioninfo">(Nightly Build)</span></div>
+				<div>GitHub main <span class="versioninfo">(nightly build)</span></div>
 			</li>
 		</ul>
 	</div>
@@ -22,18 +22,17 @@
 	<div class="environment select" data-select="environment">
 		<h3>Environment</h3>
 		<ul class="environment">
-			<li data-id=".cli" data-hide-section="" class="selected">Command Line</li>
+			<li data-id=".cli" data-hide-section="" class="selected">Command line</li>
 			<li data-id=".python" data-hide-section="pack,platform,architecture,download_method">Python</li>
-			<li data-id=".r" data-hide-section="pack,platform,architecture">R</li>
+			<li data-id=".r" data-hide-section="pack,platform,architecture,download_method">R</li>
 			<li data-id=".java" data-hide-section="pack,platform,architecture">Java</li>
-			<li data-id=".js" data-hide-section="pack,platform,architecture">Node.js</li>
-			<li data-id=".rust" data-hide-section="pack,platform,architecture">Rust</li>
-			<li data-id=".go" data-hide-section="pack,platform,architecture">Go</li>
+			<li data-id=".js" data-hide-section="pack,platform,architecture,download_method">Node.js</li>
+			<li data-id=".rust" data-hide-section="pack,platform,architecture,download_method">Rust</li>
+			<li data-id=".go" data-hide-section="pack,platform,architecture,download_method">Go</li>
 			<li data-id=".cplusplus" data-hide-section="">C/C++</li>
-			<li data-id=".odbc" data-hide-section="">ODBC</li>
+			<li data-id=".odbc" data-hide-section="download_method">ODBC</li>
 		</ul>
 	</div>
-
 
 	<div class="installer select" data-select="installer">
 		<h3>Package</h3>
@@ -55,8 +54,8 @@
 	<div class="architecture select" data-select="architecture">
 		<h3>Architecture</h3>
 		<ul class="architecture">
-			<li data-id=".x86_64">x86_64 (AMD64)</li>
-			<li data-id=".arm64">ARM64 (AArch64)</li>
+			<li data-id=".x86_64">x86_64</li>
+			<li data-id=".arm64">arm64</li>
 		</ul>
 	</div>
 	
@@ -80,7 +79,7 @@
 	</div>
 
 	<div class="example output">
-		<h3>Usage Example</h3>
+		<h3>Usage example</h3>
 		<div class="result">
 {% highlight python %}
 import duckdb
