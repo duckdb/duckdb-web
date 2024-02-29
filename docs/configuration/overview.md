@@ -23,10 +23,12 @@ SET enable_progress_bar = true;
 -- set the default null order to NULLS LAST
 SET default_null_order = 'nulls_last';
 ```
+
 ```sql
 -- return the current value of a specific setting
 SELECT current_setting('threads') AS threads;
 ```
+
 ```text
 ┌─────────┐
 │ threads │
@@ -35,12 +37,14 @@ SELECT current_setting('threads') AS threads;
 │      10 │
 └─────────┘
 ```
+
 ```sql
 -- query a specific setting
 SELECT *
 FROM duckdb_settings()
 WHERE name = 'threads';
 ```
+
 ```text
 ┌─────────┬─────────┬─────────────────────────────────────────────────┬────────────┐
 │  name   │  value  │                   description                   │ input_type │
@@ -49,11 +53,13 @@ WHERE name = 'threads';
 │ threads │ 10      │ The number of total threads used by the system. │ BIGINT     │
 └─────────┴─────────┴─────────────────────────────────────────────────┴────────────┘
 ```
+
 ```sql
 -- show a list of all available settings
 SELECT *
 FROM duckdb_settings();
 ```
+
 ```sql
 -- reset the memory limit of the system back to the default
 RESET memory_limit;
@@ -69,8 +75,8 @@ DuckDB has a [Secrets manager](../sql/statements/create_secret), which provides 
 
 Below is a list of all available settings.
 
-|                     Name                     |                                                                       Description                                                                       | Input type |             Default value             |
-|----|--------|--|---|
+| Name                                         | Description                                                                                                                                             | Input type | Default value                         |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------- |
 | `Calendar`                                   | The current calendar                                                                                                                                    | `VARCHAR`  | System (locale) calendar              |
 | `TimeZone`                                   | The current time zone                                                                                                                                   | `VARCHAR`  | System (locale) timezone              |
 | `access_mode`                                | Access mode of the database (**AUTOMATIC**, **READ_ONLY** or **READ_WRITE**)                                                                            | `VARCHAR`  | `automatic`                           |
@@ -110,6 +116,8 @@ Below is a list of all available settings.
 | `http_retry_backoff`                         | Backoff factor for exponentially increasing retry wait time (default 4)                                                                                 | `FLOAT`    | `4`                                   |
 | `http_retry_wait_ms`                         | Time between retries (default 100ms)                                                                                                                    | `UBIGINT`  | `100`                                 |
 | `http_timeout`                               | HTTP timeout read/write/connection/retry (default 30000ms)                                                                                              | `UBIGINT`  | `30000`                               |
+| `enable_server_cert_verification`            | Whether to enable server side certificate verification (default False)                                                                                  | `BOOLEAN`  | `False`                               |
+| `ca_cert_file`                               | The custom certificate file to use for HTTPS connections (default not configured)                                                                       | `VARCHAR`  | `""`                                  |
 | `immediate_transaction_mode`                 | Whether transactions should be started lazily when needed, or immediately when BEGIN TRANSACTION is called                                              | `BOOLEAN`  | `false`                               |
 | `integer_division`                           | Whether or not the / operator defaults to integer division, or to floating point division                                                               | `BOOLEAN`  | `0`                                   |
 | `lock_configuration`                         | Whether or not the configuration can be altered                                                                                                         | `BOOLEAN`  | `false`                               |
