@@ -83,7 +83,11 @@ The query plan helps understand the performance characteristics of the system. H
 To create the query graphs it is first necessary to gather the necessary data by running the query. In order to do that, we must first enable the run-time profiling. This can be done by prefixing the query with `EXPLAIN ANALYZE`:
 
 ```sql
-EXPLAIN ANALYZE SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
+EXPLAIN ANALYZE
+    SELECT name
+    FROM students
+    JOIN exams USING (sid)
+    WHERE name LIKE 'Ma%';
 ```
 
 ```text
@@ -166,12 +170,15 @@ PRAGMA profile_output='/path/to/file.json';
 Now let us run the query that we inspected before:
 
 ```sql
-SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
+SELECT name
+FROM students
+JOIN exams USING (sid)
+WHERE name LIKE 'Ma%';
 ```
 
 After the query is completed, the JSON file containing the profiling output has been written to the specified file. We can then render the query graph using the Python script, provided we have the `duckdb` python module installed. This script will generate a HTML file and open it in your web browser.
 
-```sql
+```bash
 python -m duckdb.query_graph /path/to/file.json
 ```
 
