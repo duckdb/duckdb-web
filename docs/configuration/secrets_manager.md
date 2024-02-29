@@ -24,7 +24,7 @@ For each type, there are one or more "secret providers" that specify how the sec
 
 ### Creating a Secret
 
-Secrets can be created using the [`CREATE SECRET` SQL statement](sql/statements/create_secret).
+Secrets can be created using the [`CREATE SECRET` SQL statement](../sql/statements/create_secret).
 Secrets can be **temporary** or **persistent**. Temporary secrets are used by default – and are stored in-memory for the life span of the DuckDB instance similar to how settings worked previously. Persistent secrets are stored in **unencrypted binary format** in the `~/.duckdb/stored_secrets` directory. On startup of DuckDB, persistent secrets are read from this directory and automatically loaded.
 
 #### Secret Providers
@@ -62,7 +62,7 @@ This will write the secret (unencrypted) to the `~/.duckdb/stored_secrets` direc
 
 ### Deleting Secrets
 
-Secrets can be deleted using the [`DROP SECRET` statement](sql/statements/create_secret#syntax-for-drop-secret), e.g.:
+Secrets can be deleted using the [`DROP SECRET` statement](../sql/statements/create_secret#syntax-for-drop-secret), e.g.:
 
 ```sql
 DROP PERSISTENT SECRET my_persistent_secret;
