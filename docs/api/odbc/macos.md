@@ -34,7 +34,7 @@ There are two ways to configure the ODBC driver, either by initializing the conf
 or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
 A combination of the two is also possible.
 
-Furthermore, the ODBC driver supports all the [configuration options](../../sql/configuration) included in DuckDB.
+Furthermore, the ODBC driver supports all the [configuration options](../../configuration/overview) included in DuckDB.
 
 > If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
 > the one passed to `SQLDriverConnect` will take precedence.

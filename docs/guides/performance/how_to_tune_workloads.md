@@ -15,7 +15,7 @@ Parallelism starts at the level of row groups, therefore, for a query to run on 
 
 ### Too Many Threads
 
-Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`](../../configuration/pragmas#threads).
+Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`](../configuration/pragmas#threads).
 
 ## Larger-Than-Memory Workloads (Out-of-Core Processing)
 
@@ -129,7 +129,7 @@ When importing or exporting data sets (from/to the Parquet or CSV formats), whic
 Error: Out of Memory Error: failed to allocate data of size ... (.../... used)
 ```
 
-In these cases, consider setting the [`preserve_insertion_order` configuration option](../../sql/configuration) to `false`:
+In these cases, consider setting the [`preserve_insertion_order` configuration option](../../configuration/overview) to `false`:
 
 ```sql
 SET preserve_insertion_order = false;

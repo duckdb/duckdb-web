@@ -301,7 +301,7 @@ SELECT getenv('HOME') AS home;
 └──────────────────┘
 ```
 
-The output of the `getenv` function can be used to set [configuration options](../../sql/configuration). For example, to set the `NULL` order based on the environment variable `DEFAULT_NULL_ORDER`, use:
+The output of the `getenv` function can be used to set [configuration options](../../configuration/overview). For example, to set the `NULL` order based on the environment variable `DEFAULT_NULL_ORDER`, use:
 
 ```sql
 SET default_null_order = getenv('DEFAULT_NULL_ORDER');
@@ -309,7 +309,7 @@ SET default_null_order = getenv('DEFAULT_NULL_ORDER');
 
 ### Restrictions for Reading Environment Variables
 
-The `getenv` function can only be run when the [`enable_external_access`](../../sql/configuration#configuration-reference) is set to `true` (the default setting).
+The `getenv` function can only be run when the [`enable_external_access`](../../configuration/overview#configuration-reference) is set to `true` (the default setting).
 It is only available in the CLI client and is not supported in other DuckDB clients.
 
 ## Prepared Statements

@@ -47,7 +47,7 @@ FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/*.c
 
 ## Configuration
 
-Use the following [configuration options](../sql/configuration) how the extension reads remote files:
+Use the following [configuration options](../configuration/overview) how the extension reads remote files:
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
@@ -80,9 +80,9 @@ The Azure extension has two ways to configure the authentication. The preferred 
 
 ### Authentication with Secret
 
-Multiple [Secret Providers](../sql/statements/create_secret#secret-providers) are available for the Azure extension:
+Multiple [Secret Providers](../configuration/secrets_manager#secret-providers) are available for the Azure extension:
 
-> * If you need to define different secrets for different storage accounts you can use [the `SCOPE` configuration](../sql/statements/create_secret#creating-multiple-secrets-for-the-same-service-type).
+> * If you need to define different secrets for different storage accounts you can use [the `SCOPE` configuration](../configuration/secrets_manager#creating-multiple-secrets-for-the-same-service-type).
 > * If you use fully qualified path then the `ACCOUNT_NAME` attribute is optional.
 
 #### `CONFIG` Provider

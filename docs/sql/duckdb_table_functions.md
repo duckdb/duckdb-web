@@ -258,7 +258,7 @@ The `duckdb_settings()` function provides metadata about the settings available 
 | `description` |A description of the setting.| `VARCHAR` |
 | `input_type` |The logical datatype of the setting's value.| `VARCHAR` |
 
-The various settings are described in the [configuration page](configuration).
+The various settings are described in the [configuration page](../configuration/overview).
 
 ## `duckdb_tables`
 
