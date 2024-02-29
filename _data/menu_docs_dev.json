@@ -666,8 +666,8 @@
               "url": "pragmas"
             },          
             {
-              "page": "Secret Manager",
-              "url": "secret_manager"
+              "page": "Secrets Manager",
+              "url": "secrets_manager"
             }
           ]
         },
