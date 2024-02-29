@@ -113,7 +113,7 @@ SELECT cosineofpi FROM tbl;
 └────────────┘
 ```
 
-To change this behavior, set the `preserve_identifier_case` [configuration option](configuration/overview#configuration-reference) to `false`.
+To change this behavior, set the `preserve_identifier_case` [configuration option](../configuration/overview#configuration-reference) to `false`.
 
 #### Handling Conflicts
 
