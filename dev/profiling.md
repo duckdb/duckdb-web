@@ -15,7 +15,7 @@ INSERT INTO students VALUES (1, 'Mark'), (2, 'Hannes'), (3, 'Pedro');
 INSERT INTO exams VALUES (1, 1, 8), (1, 2, 8), (1, 3, 7), (2, 1, 9), (2, 2, 10);
 ```
 
-## Explain Statement
+## `EXPLAIN` Statement
 
 The first step to profiling a database engine is figuring out what execution plan the engine is using. The `EXPLAIN` statement allows you to peek into the query plan and see what is going on under the hood.
 
@@ -76,7 +76,7 @@ EXPLAIN SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
 
 Note that the query is not actually executed – therefore, we can only see the estimated cardinality (`EC`) for each operator, which is calculated by using the statistics of the base tables and applying heuristics for each operator.
 
-## Run-Time Profiling
+## Run-Time Profiling with the `EXPLAIN ANALYZE` Statement
 
 The query plan helps understand the performance characteristics of the system. However, often it is also necessary to look at the performance numbers of individual operators and the cardinalities that pass through them. For this, you can create a query-profile graph.
 
@@ -174,3 +174,15 @@ After the query is completed, the JSON file containing the profiling output has 
 ```sql
 python -m duckdb.query_graph /path/to/file.json
 ```
+
+## Notation in Query Plans
+
+In query plans, the [hash join](https://en.wikipedia.org/wiki/Hash_join) operators adhere to the following convention:
+the _probe side_ of the join is the left operand,
+while the _build side_ is the right operand.
+
+Join operators in the query plan show the join type used:
+
+* Inner joins are denoted as `INNER`.
+* Left outer joins and right outer joins are denoted as `LEFT` and `RIGHT`, respectively.
+* Full outer joins are denoted as `FULL`.
