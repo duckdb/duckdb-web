@@ -846,10 +846,16 @@ body.installation{
 	.yourselection{
 		background-color: $black50;
 		position: relative;
-		max-width: 780px;
 		border: 1px solid $black200;
 		border-radius: 15px;
 		margin-top: 25px;
+		.select.hide {
+			display: none;
+		}
+		.select li.inactive {
+			opacity: 0.4;
+			pointer-events: none;
+		}
 	}
 	.wrap{
 		margin-bottom: 100px;
