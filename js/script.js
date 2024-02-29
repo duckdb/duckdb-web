@@ -87,7 +87,7 @@ $(document).ready(function(){
 	}
 	
 	// Docs Installation Selection
-	var userSelection = { version: "", environment: "", pack: "", platform: "", architecture: "", download: "" };
+	var userSelection = { version: "", environment: "", pack: "", platform: "", architecture: "", download_method: "" };
 	var classList = "";
 	
 	var evaluation = function () {
@@ -129,7 +129,7 @@ $(document).ready(function(){
 			}
 		})
 	
-		var classList = userSelection.version + userSelection.environment + userSelection.pack + userSelection.platform + userSelection.architecture + userSelection.download;
+		var classList = userSelection.version + userSelection.environment + userSelection.pack + userSelection.platform + userSelection.architecture + userSelection.download_method;
 	
 		var result = $('.possibleresults div' + classList).html();
 		$('.installation.output .result').html(result);
