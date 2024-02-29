@@ -113,7 +113,7 @@ SELECT cosineofpi FROM tbl;
 └────────────┘
 ```
 
-To change this behavior, set the `preserve_identifier_case` [configuration option](configuration#configuration-reference) to `false`.
+To change this behavior, set the `preserve_identifier_case` [configuration option](configuration/overview#configuration-reference) to `false`.
 
 #### Handling Conflicts
 
@@ -136,7 +136,7 @@ SELECT * FROM t1 NATURAL JOIN t2;
 
 #### Disabling Preserving Cases
 
-With the `preserve_identifier_case` [configuration option](configuration#configuration-reference) set to `false`, all identifiers are turned into lowercase:
+With the `preserve_identifier_case` [configuration option](configuration/overview#configuration-reference) set to `false`, all identifiers are turned into lowercase:
 
 ```sql
 SET preserve_identifier_case = false;

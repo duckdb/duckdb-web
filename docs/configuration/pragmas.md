@@ -8,7 +8,7 @@ redirect_from:
 
 The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
 
-`PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement](statements/set) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
+`PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement](../sql/statements/set) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
 
 For DuckDB's built in configuration options, see the [Configuration Reference](overview#configuration-reference).
 
@@ -80,7 +80,7 @@ SET max_memory = '1GB';
 > Warning The specified memory limit is only applied to the buffer manager.
 > For most queries, the buffer manager handles the majority of the data processed.
 > However, certain in-memory data structures such as [vectors](/internals/vector) and query results are allocated outside of the buffer manager.
-> Additionally, [aggregate functions](aggregates) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
+> Additionally, [aggregate functions](../sql/aggregates) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
 > Therefore, the actual memory consumption can be higher than the specified memory limit.
 
 ### Threads
@@ -276,7 +276,7 @@ SET log_query_path = '';
 
 ### Explain Plan Output
 
-The output of [`EXPLAIN`](statements/profiling) output can be configured to show only the physical plan. This is the default configuration.
+The output of [`EXPLAIN`](../sql/statements/profiling) output can be configured to show only the physical plan. This is the default configuration.
 
 ```sql
 SET explain_output = 'physical_only';
@@ -344,7 +344,7 @@ PRAGMA disable_object_cache;
 
 #### Force Checkpoint
 
-When [`CHECKPOINT`](statements/checkpoint) is called when no changes are made, force a checkpoint regardless.
+When [`CHECKPOINT`](../sql/statements/checkpoint) is called when no changes are made, force a checkpoint regardless.
 
 ```sql
 PRAGMA force_checkpoint;
@@ -420,7 +420,7 @@ See [Storage](/internals/storage) for more information.
 
 ### Show Databases
 
-The following statement is equivalent to the [`SHOW DATABASES` statement](statements/attach):
+The following statement is equivalent to the [`SHOW DATABASES` statement](../sql/statements/attach):
 
 ```sql
 PRAGMA show_databases;
@@ -451,7 +451,7 @@ For example, to disable `filter_pushdown` and `statistics_propagation`, run:
 SET disabled_optimizers = 'filter_pushdown,statistics_propagation';
 ```
 
-The available optimizations can be queried using the [`duckdb_optimizers()` table function](duckdb_table_functions#duckdb_optimizers).
+The available optimizations can be queried using the [`duckdb_optimizers()` table function](../sql/duckdb_table_functions#duckdb_optimizers).
 
 > Warning The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
 
