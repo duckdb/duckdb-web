@@ -15,7 +15,7 @@ Parallelism starts at the level of row groups, therefore, for a query to run on 
 
 ### Too Many Threads
 
-Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`](../../sql/pragmas#threads).
+Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`](../../configuration/pragmas#threads).
 
 ## Larger-Than-Memory Workloads (Out-of-Core Processing)
 
@@ -28,7 +28,7 @@ This section explains the prerequisites, scope, and known limitations of larger-
 Larger-than-memory workloads are supported by spilling to disk. If DuckDB is connected to a [persistent database file](../../api/cli/overview#in-memory-vs-persistent-database), DuckDB will create a temporary directory named `⟨database_file_name⟩.tmp` when the available memory is no longer sufficient to continue processing.
 
 If DuckDB is running in in-memory mode, it cannot use disk to offload data if it does not fit into main memory.
-To enable offloading in the absence of a persistent database file, use the [`SET temp_directory` statement](../../sql/pragmas#temp-directory-for-spilling-data-to-disk):
+To enable offloading in the absence of a persistent database file, use the [`SET temp_directory` statement](../../configuration/pragmas#temp-directory-for-spilling-data-to-disk):
 
 ```sql
 SET temp_directory = '/path/to/temp_dir.tmp/'
@@ -76,7 +76,7 @@ Note that it is not a primary design goal for DuckDB to quickly execute many sma
 
 ## Querying Remote Files
 
-DuckDB uses synchronous IO when reading remote files. This means that each DuckDB thread can make at most one HTTP request at a time. If a query must make many small requests over the network, increasing DuckDB's [`threads` setting](../../sql/pragmas#threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
+DuckDB uses synchronous IO when reading remote files. This means that each DuckDB thread can make at most one HTTP request at a time. If a query must make many small requests over the network, increasing DuckDB's [`threads` setting](../../configuration/pragmas#threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
 
 ### Avoid Reading Unnecessary Data
 

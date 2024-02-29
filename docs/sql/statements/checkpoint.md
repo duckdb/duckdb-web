@@ -22,7 +22,7 @@ FORCE CHECKPOINT;
 
 <div id="rrdiagram1"></div>
 
-Checkpoint operations happen automatically based on the WAL size (see [Configuration](../configuration)). This
+Checkpoint operations happen automatically based on the WAL size (see [Configuration](../../configuration/overview)). This
 statement is for manual checkpoint actions.
 
 ## Behavior
@@ -30,7 +30,7 @@ statement is for manual checkpoint actions.
 The default `CHECKPOINT` command will fail if there are any running transactions. Including `FORCE` will abort any
 transactions and execute the checkpoint operation.
 
-Also see the related [`PRAGMA` option](../pragmas#force-checkpoint) for further behavior modification.
+Also see the related [`PRAGMA` option](../../configuration/pragmas#force-checkpoint) for further behavior modification.
 
 ### Reclaiming Space
 

@@ -10,7 +10,7 @@ DuckDB offers [pattern matching operators](pattern_matching)
 [`GLOB`](pattern_matching#glob)),
 as well as support for regular expressions via functions.
 
-## Regular Exppression Syntax
+## Regular Expression Syntax
 
 DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expression engine. For the regular expression syntax, see the [RE2 docs](https://github.com/google/re2/wiki/Syntax).
 
@@ -65,7 +65,7 @@ SELECT regexp_matches(E'hello\nworld', 'hello.world', 's'); -- true
 
 ### Using `regexp_matches`
 
-The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve best performance, the `'c'` option (case-sensitive matching) should be passed if applicable. Note that by default the [`RE2` library](#the-re2-library) doesn't match the `.` character to newline.
+The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve best performance, the `'c'` option (case-sensitive matching) should be passed if applicable. Note that by default the [`RE2` library](#regular-expression-syntax) doesn't match the `.` character to newline.
 
 <div class="narrow_table"></div>
 

@@ -62,7 +62,7 @@ Multiple connections are allowed, but mixing read-write and read-only connection
 ### Configuring Connections
 
 Configuration options can be provided to change different settings of the database system. Note that many of these
-settings can be changed later on using [`PRAGMA` statements](../sql/pragmas) as well.
+settings can be changed later on using [`PRAGMA` statements](../configuration/pragmas) as well.
 
 ```java
 Properties connectionProperties = new Properties();
