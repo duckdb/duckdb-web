@@ -7,7 +7,7 @@
   {% assign urlParts = urlString | split: "/"  %}
   {% assign startingUrl = startingUrl | append: "/" %}
 {% else %}
-  {% assign versionviewed = site.currentduckdbversion | append: " (stable)" %}
+  {% assign versionviewed = site.currentshortduckdbversion | append: " (stable)" %}
   {% assign startingUrl = "docs/" %}
   {% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
 {% endif %}
