@@ -45,7 +45,8 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 
 * Formatters: [`format()` function with the `fmt` syntax](../../sql/functions/char#fmt-syntax) and the [`printf() function`](../../sql/functions/char#printf-syntax)
 * [List comprehensions](/2023/08/23/even-friendlier-sql#list-comprehensions)
-* [String slicing](/2022/05/04/friendlier-sql#string-slicing) and [list slicing](/2022/05/04/friendlier-sql#string-slicing)
+* [List slicing](/2022/05/04/friendlier-sql#string-slicing)
+* [String slicing](/2022/05/04/friendlier-sql#string-slicing)
 * [`STRUCT.*` notation](/2022/05/04/friendlier-sql#struct-dot-notation)
 * [Simple `LIST` and `STRUCT` creation](/2022/05/04/friendlier-sql#simple-list-and-struct-creation)
 

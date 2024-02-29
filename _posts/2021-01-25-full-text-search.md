@@ -10,7 +10,7 @@ Searching through textual data stored in a database can be cumbersome, as SQL do
 
 <!--more-->
 
-We expect a search engine to return us results within milliseconds. For a long time databases were unsuitable for this task, because they could not search large inverted indices at this speed: transactional database systems are not made for this use case. However, analytical database systems, can keep up with state-of-the art information retrieval systems. The company [Spinque](https://www.spinque.com/) is a good example of this. At Spinque, MonetDB is used as a computation engine for customized search engines.
+We expect a search engine to return us results within milliseconds. For a long time databases were unsuitable for this task, because they could not search large inverted indexes at this speed: transactional database systems are not made for this use case. However, analytical database systems, can keep up with state-of-the art information retrieval systems. The company [Spinque](https://www.spinque.com/) is a good example of this. At Spinque, MonetDB is used as a computation engine for customized search engines.
 
 DuckDB's FTS implementation follows the paper "[Old Dogs Are Great at New Tricks](https://www.duckdb.org/pdf/SIGIR2014-column-stores-ir-prototyping.pdf)". A keen observation there is that advances made to the database system, such as parallelization, will speed up your search engine "for free"!
 

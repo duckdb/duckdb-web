@@ -25,5 +25,6 @@ CREATE SECRET (
 After setting up the GCS credentials, you can query the GCS data using:
 
 ```sql
-SELECT * FROM read_parquet('gs://<gcs_bucket>/<file>');
+SELECT *
+FROM read_parquet('gs://⟨gcs_bucket⟩/⟨file⟩');
 ```

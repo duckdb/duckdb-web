@@ -125,8 +125,10 @@ Take the following directed graph from the [LDBC Graphalytics benchmark](https:/
 
 ```sql
 CREATE TABLE edge (node1id INT, node2id INT);
-INSERT INTO edge VALUES (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5),
-  (3, 8), (3, 10), (5, 3), (5, 4), (5, 8), (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
+INSERT INTO edge
+    VALUES
+        (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5), (3, 8), (3, 10),
+        (5, 3), (5, 4), (5, 8), (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
 ```
 
 Note that the graph contains directed cycles, e.g., between nodes 1, 2, and 5.

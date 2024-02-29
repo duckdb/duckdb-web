@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Values
+title: Values
 ---
 
 The value class represents a single value of any type.

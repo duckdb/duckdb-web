@@ -15,7 +15,7 @@ Under the hood, `UNION` types are implemented on top of `STRUCT` types, and simp
 
 ```sql
 -- Create a table with a union column
-CREATE TABLE tbl1(u UNION(num INT, str VARCHAR));
+CREATE TABLE tbl1 (u UNION(num INT, str VARCHAR));
 
 -- Any type can be implicitly cast to a union containing the type.
 -- Any union can also be implicitly cast to another union if 
@@ -70,13 +70,13 @@ So how do we disambiguate if we want to create a `UNION` with multiple members o
 
 <div class="narrow_table"></div>
 
-| Ok | Source               |          Target       |               Comments             |
-|----|----------------------|-----------------------|------------------------------------|
-| ✅ | UNION(a A, b B)      | UNION(a A, b B, c C)  |                                    |
-| ✅ | UNION(a A, b B)      | UNION(a A, b C)       | if B can be implicitly cast to C   |
-| ❌ | UNION(a A, b B, c C) | UNION(a A, b B)       |                                    |
-| ❌ | UNION(a A, b B)      | UNION(a A, b C)       | if B can't be implicitly cast to C |
-| ❌ | UNION(A, B, D)       | UNION(A, B, C)        |                                    |
+| Ok | Source                 | Target                 | Comments                               |
+|----|------------------------|------------------------|----------------------------------------|
+| ✅ | `UNION(a A, b B)`      | `UNION(a A, b B, c C)` |                                        |
+| ✅ | `UNION(a A, b B)`      | `UNION(a A, b C)`      | if `B` can be implicitly cast to `C`   |
+| ❌ | `UNION(a A, b B, c C)` | `UNION(a A, b B)`      |                                        |
+| ❌ | `UNION(a A, b B)`      | `UNION(a A, b C)`      | if `B` can't be implicitly cast to `C` |
+| ❌ | `UNION(A, B, D)`       | `UNION(A, B, C)`       |                                        |
 
 ## Comparison and Sorting
 

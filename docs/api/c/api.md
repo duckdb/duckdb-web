@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Complete API
+title: Complete API
 ---
 
 ## API Reference
@@ -4733,7 +4733,7 @@ The null-terminated string
 ### `duckdb_vector_assign_string_element_len`
 
 ---
-Assigns a string element in the vector at the specified location.
+Assigns a string element in the vector at the specified location. You may also use this function to assign BLOBs.
 
 #### Syntax
 

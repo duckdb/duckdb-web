@@ -7,7 +7,7 @@
   {% assign urlParts = urlString | split: "/"  %}
   {% assign startingUrl = startingUrl | append: "/" %}
 {% else %}
-  {% assign versionviewed = site.currentduckdbversion | append: " (stable)" %}
+  {% assign versionviewed = site.currentshortduckdbversion | append: " (stable)" %}
   {% assign startingUrl = "docs/" %}
   {% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
 {% endif %}
@@ -29,9 +29,13 @@
 
   {% if crumbs[offset] == "guides" %}
     {% assign offset = offset | plus:1 %}
-    <span>Guides</span>
+    {% assign part = "Guides" %}
   {% else %}
-    <span>Documentation</span>
+    {% assign part = "Documentation" %}
+  {% endif %}
+
+  {% if crumbs.last != "docs" and crumbs.last != "guides" %}
+    <span>{{ part }}</span>
   {% endif %}
 
   {% for doc_entry in menudocfile %}
@@ -65,12 +69,6 @@
       {% endfor %}
     {% endif %}
   {% endfor %}
-
-  {% if crumbs.last == "overview.html" %}
-    <span class="slash">/</span> <span class="current">Overview</span>
-  {% else %}
-    <span class="slash">/</span> <span class="current">{{ page.title }}</span>
-  {% endif %}
 
   <br/>
 </div>

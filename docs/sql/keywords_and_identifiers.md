@@ -23,8 +23,8 @@ Similarly to other SQL dialects and programming languages, identifiers in DuckDB
 In some cases, duplicate identifiers can occur, e.g., column names may conflict when unnesting a nested data structure.
 In these cases, DuckDB automatically deduplicates column names by renaming them according to the following rules:
 
-* For a column named `<name>`, the first instance is not renamed.
-* Subsequent instances are renamed to `<name>_<count>`, where `<count>` starts at 1.
+* For a column named `⟨name⟩`, the first instance is not renamed.
+* Subsequent instances are renamed to `⟨name⟩_⟨count⟩`, where `⟨count⟩` starts at 1.
 
 For example:
 
@@ -55,25 +55,6 @@ If you need to attach to a database that has one of these names, use an alias, e
 ATTACH 'temp.db' AS temp2;
 USE temp2;
 ```
-
-<!--
-The list of internal schemas can be retrieved as follows:
-
-```sql
-SELECT database_name
-FROM duckdb_databases()
-WHERE internal = true;
-```
-```text
-┌───────────────┐
-│ database_name │
-│    varchar    │
-├───────────────┤
-│ system        │
-│ temp          │
-└───────────────┘
-```
--->
 
 ## Numeric Literals
 

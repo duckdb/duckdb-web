@@ -41,7 +41,6 @@ Outputs:
 |-------|-----|
 | Pedro | 31  |
 
-
 One should note that the CSV Parser is affected by the projection pushdown optimization. Hence, if we were to select only the name column, both rows would be considered valid, as the casting error on the age would never occur. For example:
 
 ```sql
@@ -56,7 +55,7 @@ Outputs:
 |     name     |
 |--------------|
 |     Pedro    |
-| Oogie Boogie | 
+| Oogie Boogie |
 
 ## Retrieving Faulty CSV Lines
 
@@ -66,7 +65,7 @@ The CSV Rejects Table returns the following information:
 
 <div class="narrow_table"></div>
 
-| Column Name | Description | Type |
+| Column name | Description | Type |
 |:--|:-----|:-|
 | `file` | File path.| `VARCHAR` |
 | `line` | Line number, from the CSV File, where the error occured.| `INTEGER` |

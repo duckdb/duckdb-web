@@ -3144,6 +3144,18 @@
     "result": "hello"
   },
   {
+    "name": "unpivot_list",
+    "parameters": [
+      "any",
+      "..."
+    ],
+    "description": "Identical to list_value, but generated as part of unpivot for better error messages",
+    "example": "unpivot_list(4, 5, 6)",
+    "type": "scalar_function",
+    "category": "list",
+    "result": "[4, 5, 6]"
+  },
+  {
     "name": "uuid",
     "description": "Returns a random UUID similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687",
     "example": "uuid()",
@@ -3199,7 +3211,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.10.1-dev130"
+    "result": "v0.10.1-dev595"
   },
   {
     "name": "week",

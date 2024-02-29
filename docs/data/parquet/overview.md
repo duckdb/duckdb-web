@@ -34,9 +34,15 @@ SELECT * FROM parquet_metadata('test.parquet');
 SELECT * FROM parquet_schema('test.parquet');
 
 -- write the results of a query to a Parquet file using the default compression (Snappy)
-COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet');
+COPY
+    (SELECT * FROM tbl)
+    TO 'result-snappy.parquet'
+    (FORMAT 'parquet');
+
 -- write the results from a query to a Parquet file with specific compression and row group size
-COPY (FROM generate_series(100_000)) TO 'test.parquet'
+COPY
+    (FROM generate_series(100_000))
+    TO 'test.parquet'
     (FORMAT 'parquet', COMPRESSION 'zstd', ROW_GROUP_SIZE 100_000);
 
 -- export the table contents of the entire database as parquet
@@ -74,7 +80,7 @@ There are a number of options exposed that can be passed to the `read_parquet` f
 | `encryption_config` | Configuration for [Parquet encryption](encryption). | `STRUCT` | - |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `file_row_number` | Whether or not to include the `file_row_number` column. | `BOOL` | `false` |
-| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
+| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | `BOOL` | `false` |
 
 ## Partial Reading
@@ -111,14 +117,32 @@ DuckDB also has support for writing to Parquet files using the `COPY` statement 
 
 ```sql
 -- write a query to a snappy compressed Parquet file
-COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet')
+COPY
+    (SELECT * FROM tbl)
+    TO 'result-snappy.parquet'
+    (FORMAT 'parquet')
+```
+
+```sql
 -- write "tbl" to a zstd compressed Parquet file
-COPY tbl TO 'result-zstd.parquet' (FORMAT 'parquet', CODEC 'zstd')
+COPY tbl
+    TO 'result-zstd.parquet'
+    (FORMAT 'parquet', CODEC 'zstd')
+```
+
+```sql
 -- write a CSV file to an uncompressed Parquet file
-COPY 'test.csv' TO 'result-uncompressed.parquet'
+COPY
+    'test.csv'
+    TO 'result-uncompressed.parquet'
     (FORMAT 'parquet', CODEC 'uncompressed')
+```
+
+```sql
 -- write a query to a Parquet file with ZSTD compression (same as CODEC) and row_group_size
-COPY (FROM generate_series(100_000)) TO 'row-groups-zstd.parquet'
+COPY
+    (FROM generate_series(100_000))
+    TO 'row-groups-zstd.parquet'
     (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100_000);
 ```
 
@@ -138,9 +162,6 @@ DuckDB supports reading and writing [encrypted Parquet files](encryption).
 The support for Parquet files is enabled via extension. The `parquet` extension is bundled with almost all clients. However, if your client does not bundle the `parquet` extension, the extension must be installed and loaded separately.
 
 ```sql
--- run once
 INSTALL parquet;
--- run before usage
 LOAD parquet;
 ```
-

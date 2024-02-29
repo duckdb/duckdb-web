@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Types
+title: Types
 ---
 
 DuckDB is a strongly typed database system. As such, every column has a single type specified. This type is constant
@@ -10,8 +10,6 @@ values.
 DuckDB also supports columns of composite types. For example, it is possible to define an array of integers (`INT[]`). It is also possible to define types as arbitrary structs (`ROW(i INTEGER, j VARCHAR)`). For that reason, native DuckDB type objects are not mere enums, but a class that can potentially be nested.
 
 Types in the C API are modeled using an enum (`duckdb_type`) and a complex class (`duckdb_logical_type`). For most primitive types, e.g., integers or varchars, the enum is sufficient. For more complex types, such as lists, structs or decimals, the logical type must be used.
-
-
 
 ```c
 typedef enum DUCKDB_TYPE {
@@ -62,7 +60,7 @@ The `duckdb_value_is_null` function can be used to check if a specific value is 
 
 The exception to the auto-cast rule is the `duckdb_value_varchar_internal` function. This function does not auto-cast and only works for `VARCHAR` columns. The reason this function exists is that the result does not need to be freed.
 
-> Note that `duckdb_value_varchar` and `duckdb_value_blob` require the result to be de-allocated using `duckdb_free`.
+> `duckdb_value_varchar` and `duckdb_value_blob` require the result to be de-allocated using `duckdb_free`.
 
 ### `duckdb_result_get_chunk`
 

@@ -35,7 +35,7 @@ The `[OPTIONS]` part encodes [arguments for the CLI client](arguments). Common o
 
 * `-csv`: sets the output mode to CSV
 * `-json`: sets the output mode to JSON
-* `-readonly`: open the database in read-only mode (see [concurrency in DuckDB](/faq#how-does-duckdb-handle-concurrency))
+* `-readonly`: open the database in read-only mode (see [concurrency in DuckDB](../../connect/concurrency#handling-concurrency))
 
 For a full list of options, see the [command line arguments page](arguments).
 
@@ -210,7 +210,7 @@ This outputs:
 
 ```text
 -- Loading resources from prompt.sql
-v<version> <git hash>
+v⟨version⟩ ⟨git hash⟩
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.

@@ -45,7 +45,8 @@ The interval class represents a period of time using three distinct components: 
 The division into components makes the interval class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
 
 ```sql
-SELECT DATE '2000-01-01' + INTERVAL (i) MONTH FROM range(12) t(i);
+SELECT DATE '2000-01-01' + INTERVAL (i) MONTH
+FROM range(12) t(i);
 ```
 
 ## Difference between Dates

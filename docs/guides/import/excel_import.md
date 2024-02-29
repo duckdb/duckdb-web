@@ -65,7 +65,7 @@ SELECT *
 FROM st_read(
     'test_excel.xlsx',
     layer = 'Sheet1',
-    open_options=['HEADERS=FORCE']
+    open_options = ['HEADERS=FORCE']
 );
 ```
 
@@ -83,7 +83,7 @@ SELECT *
 FROM st_read(
     'test_excel.xlsx',
     layer = 'Sheet1',
-    open_options=['HEADERS=FORCE', 'FIELD_TYPES=AUTO']
+    open_options = ['HEADERS=FORCE', 'FIELD_TYPES=AUTO']
 );
 ```
 
@@ -94,7 +94,7 @@ SELECT *
 FROM st_read(
     'test_excel.xlsx',
     layer = 'Sheet1',
-    open_options=['FIELD_TYPES=STRING']
+    open_options = ['FIELD_TYPES=STRING']
 );
 ```
 

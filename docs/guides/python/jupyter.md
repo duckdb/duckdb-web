@@ -24,7 +24,7 @@ Four additional libraries improve the DuckDB experience in Jupyter notebooks.
 4. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
     * Used by SQLAlchemy to connect to DuckDB (optional)
 
-```python
+```bash
 # Run these pip install commands from the command line if Jupyter Notebook is not yet installed.
 # Otherwise, see Google Collab link above for an in-notebook example
 pip install duckdb
@@ -78,12 +78,16 @@ Set configurations on jupysql to directly output data to Pandas and to simplify 
 ```
 
 Connect jupysql to DuckDB using a SQLAlchemy-style connection string.
-Either connect to a new in-memory DuckDB, the default connection or a file backed db.
+Either connect to a new in-memory DuckDB, the default connection or a file backed database.
 
 ```python
 %sql duckdb:///:default:
-# %sql duckdb:///:memory:
-# %sql duckdb:///path/to/file.db
+```
+```python
+%sql duckdb:///:memory:
+```
+```python
+%sql duckdb:///path/to/file.db
 ```
 
 > The `%sql` command and `duckdb.sql` share the same [default connection](../../api/python/dbapi) if you provide `duckdb:///:default:` as the SQLAlchemy connection string.

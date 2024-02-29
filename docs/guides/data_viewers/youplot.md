@@ -35,12 +35,12 @@ By combining the [`COPY...TO`](../../sql/statements/copy#copy-to) function with 
     duckdb -s "SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10"
     ```
 
-3. Finally, wrap the `SELECT` in the `COPY...TO` function with an output location of `/dev/stdout`.
+3. Finally, wrap the `SELECT` in the `COPY ... TO` function with an output location of `/dev/stdout`.
 
     The syntax looks like this:
 
     ```sql
-    COPY (<YOUR_SELECT_QUERY>) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)
+    COPY (⟨query⟩) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)
     ```
 
     The full DuckDB command below outputs the query in CSV format with a header:

@@ -44,15 +44,15 @@ dbname=postgresscanner
 host=localhost port=5432 dbname=mydb connect_timeout=10
 ```
 
-|   Name   |             Description              |    Default     |
-|----------|--------------------------------------|----------------|
-| host     | Name of host to connect to           | localhost      |
-| hostaddr | Host IP address                      | localhost      |
-| port     | Port Number                          | 5432           |
-| user     | Postgres User Name                   | [OS user name] |
-| password | Postgres Password                    |                |
-| dbname   | Database Name                        | [user]         |
-| passfile | Name of file passwords are stored in | ~/.pgpass      |
+|    Name    |             Description              |     Default      |
+|------------|--------------------------------------|------------------|
+| `dbname`   | Database name                        | [user]           |
+| `host`     | Name of host to connect to           | `localhost`      |
+| `hostaddr` | Host IP address                      | `localhost`      |
+| `passfile` | Name of file passwords are stored in | `~/.pgpass`      |
+| `password` | Postgres password                    | (empty)          |
+| `port`     | Port number                          | `5432`           |
+| `user`     | Postgres user name                   | current user     |
 
 An example URI is `postgresql://username@hostname/dbname`.
 
@@ -124,6 +124,7 @@ ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
 CREATE TABLE postgres_db.tbl(id INTEGER, name VARCHAR);
 INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```
+
 Many operations on Postgres tables are supported. All these operations directly modify the Postgres database, and the result of subsequent operations can then be read using Postgres.
 Note that if modifications are not desired, `ATTACH` can be run with the `READ_ONLY` property which prevents making modifications to the underlying database. For example:
 
@@ -169,19 +170,23 @@ COPY postgres_db.tbl FROM 'data.parquet';
 ### `UPDATE`
 
 ```sql
-UPDATE postgres_db.tbl SET name='Woohoo' WHERE id=42;
+UPDATE postgres_db.tbl
+SET name = 'Woohoo'
+WHERE id = 42;
 ```
 
 ### `DELETE`
 
 ```sql
-DELETE FROM postgres_db.tbl WHERE id=42;
+DELETE FROM postgres_db.tbl
+WHERE id = 42;
 ```
 
 ### `ALTER TABLE`
 
 ```sql
-ALTER TABLE postgres_db.tbl ADD COLUMN k INTEGER;
+ALTER TABLE postgres_db.tbl
+ADD COLUMN k INTEGER;
 ```
 
 ### `DROP TABLE`
@@ -200,7 +205,7 @@ CREATE VIEW postgres_db.v1 AS SELECT 42;
 
 ```sql
 CREATE SCHEMA postgres_db.s1;
-CREATE TABLE postgres_db.s1.integers(i int);
+CREATE TABLE postgres_db.s1.integers(i INT);
 INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
 ```
@@ -273,15 +278,15 @@ SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
 
 The extension exposes the following configuration parameters.
 
-|              name               |                                description                                 | default |
-|---------------------------------|----------------------------------------------------------------------------|---------|
-| pg_debug_show_queries           | DEBUG SETTING: print all queries sent to Postgres to stdout                | false   |
-| pg_connection_cache             | Whether or not to use the connection cache                                 | true    |
-| pg_experimental_filter_pushdown | Whether or not to use filter pushdown (currently experimental)             | false   |
-| pg_array_as_varchar             | Read Postgres arrays as varchar - enables reading mixed dimensional arrays | false   |
-| pg_connection_limit             | The maximum amount of concurrent Postgres connections                      | 64      |
-| pg_pages_per_task               | The amount of pages per task                                               | 1000    |
-| pg_use_binary_copy              | Whether or not to use BINARY copy to read data                             | true    |
+|               Name                |                                Description                                 |  Default  |
+|-----------------------------------|----------------------------------------------------------------------------|-----------|
+| `pg_debug_show_queries`           | DEBUG SETTING: print all queries sent to Postgres to stdout                | `false`   |
+| `pg_connection_cache`             | Whether or not to use the connection cache                                 | `true`    |
+| `pg_experimental_filter_pushdown` | Whether or not to use filter pushdown (currently experimental)             | `false`   |
+| `pg_array_as_varchar`             | Read Postgres arrays as varchar - enables reading mixed dimensional arrays | `false`   |
+| `pg_connection_limit`             | The maximum amount of concurrent Postgres connections                      | `64`      |
+| `pg_pages_per_task`               | The amount of pages per task                                               | `1000`    |
+| `pg_use_binary_copy`              | Whether or not to use BINARY copy to read data                             | `true`    |
 
 ## Schema Cache
 

@@ -75,7 +75,8 @@ This is particularly useful when a prior operation creates a struct of unknown s
 
 ```sql
 -- All keys within a struct can be returned as separate columns using *
-SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} AS a);
+SELECT a.*
+FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
 ```
 
 <div class="narrow_table"></div>
@@ -91,14 +92,16 @@ Referring to structs with dot notation can be ambiguous with referring to schema
 #### No Dots
 
 ```sql
-SELECT part1 FROM tbl
+SELECT part1
+FROM tbl;
 ```
 1. part1 is a column
 
 #### One Dot
 
 ```sql
-SELECT part1.part2 FROM tbl
+SELECT part1.part2
+FROM tbl;
 ```
 1. part1 is a table, part2 is a column
 2. part1 is a column, part2 is a property of that column
@@ -106,7 +109,8 @@ SELECT part1.part2 FROM tbl
 #### Two (or More) Dots
 
 ```sql
-SELECT part1.part2.part3 FROM tbl
+SELECT part1.part2.part3
+FROM tbl;
 ```
 1. part1 is a schema, part2 is a table, part3 is a column
 2. part1 is a table, part2 is a column, part3 is a property of that column

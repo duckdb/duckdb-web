@@ -25,25 +25,34 @@ http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json
 Extension binaries must be built for each platform. We distribute pre-built binaries for several platforms (see below).
 For platforms where packages for certain extensions are not available, users can build them from source and [install the resulting binaries manually](#installing-extensions-from-an-explicit-path).
 
-All official extensions are distributed for the following platforms:
+All official extensions are distributed for the following platforms.
 
-* `linux_amd64`
-* `linux_amd64_gcc4`
-* `linux_arm64`
-* `osx_amd64`
-* `osx_arm64`
-* `windows_amd64`
+<div class="narrow_table"></div>
 
-Only core extensions are distributed for the following platforms:
+| Platform name      | Description                              |
+|--------------------|------------------------------------------|
+| `linux_amd64`      | Linux AMD64 (Node.js packages, etc.)     |
+| `linux_amd64_gcc4` | Linux AMD64 (Python packages, CLI, etc.) |
+| `linux_arm64`      | Linux ARM64 (e.g., AWS Graviton)         |
+| `osx_amd64`        | macOS (Intel CPUs)                       |
+| `osx_arm64`        | macOS (Apple Silicon: M1, M2, M3 CPUs)   |
+| `windows_amd64`    | Windows on Intel and AMD CPUs (x86_64)   |
+
+> For some Linux ARM distributions (e.g., Python), two different binaries are distributed.
+> These target either the `linux_arm64` or `linux_arm64_gcc4` platforms.
+> Note that extension binaries are distributed for the first, but not the second.
+> Effectively that means that on these platforms your GLIBC version needs to be 2.28 or higher to use the distributed extension binaries.
+
+Some extensions are distributed for the following platforms:
 
 * `windows_amd64_rtools`
 * `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions](../api/wasm/extensions))
 
-We currently do not distribute binaries for extensions on the `linux_arm64_gcc4` platform.
+For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_gcc4`, `windows_amd64_mingw`).
 
 ## Using a Custom Extension Repository
 
-To load extensions from a custom extension repository, set the following configuration option;
+To load extensions from a custom extension repository, set the following configuration option.
 
 ### Local Files
 
@@ -73,7 +82,9 @@ With at the first level the DuckDB version, at the second the DuckDB platform, a
 ```sql
 INSTALL icu;
 ```
-for example will look for either `icu.duckdb_extension.gz` (first) or `icu.duckdb_extension` (second) in the repository structure, and install it to the `extension_directory` (that defaults to `~/.duckdb/extensions`), if file is compressed, decompression will be handled at this step.
+
+The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` the folder's file structure.
+If it finds either of the extension binaries, it will install the extension to the location specified by the [`extension_directory` option](overview#changing-the-extension-directory) (which defaults to `~/.duckdb/extensions`). If the file is compressed, it will be decompressed at this step.
 
 ### Remote File over http
 
@@ -135,11 +146,11 @@ It is also possible to specify remote paths.
 When DuckDB installs an extension, it is copied to a local directory to be cached, avoiding any network traffic.
 Any subsequent calls to `INSTALL extension_name` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
 
- by default in `~/.duckdb/extensions` but configurable via `SET extension_directory = path/to/existing/directory;`.
-
 ```sql
 FORCE INSTALL extension_name;
 ```
+
+For more details, see the [Versioning of Extensions](versioning_of_extensions) page.
 
 ## Loading Extension from a Path
 
@@ -157,7 +168,7 @@ Using remote paths for compressed files is currently not possible.
 
 ## Building and Installing Extensions
 
-For building and installing extensions from source, see the [building guide](https://duckdb.org/dev/building#building-and-installing-extensions-from-source).
+For building and installing extensions from source, see the [building guide](/dev/building#building-and-installing-extensions-from-source).
 
 ## Statically Linking Extensions
 

@@ -46,12 +46,11 @@ A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/devel
 
 A DSN (_Data Source Name_) is a string that identifies a database.  It can be a file path, URL, or a database name.  For example:  `C:\Users\me\duckdb.db` and `DuckDB` are both valid DSNs. More information on DSNs can be found on the ["Choosing a Data Source or Driver" page of the SQL Server documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
 
-
 ### Error Handling and Diagnostics
 
 All functions in ODBC return a code which represents the success or failure of the function.  This allows for easy error handling, as the application can simply check the return code of each function call to determine if it was successful.  When unsuccessful, the application can then use the [`SQLGetDiagRec`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetdiagrec-function?view=sql-server-ver16) function to retrieve the error information. The following table defines the [return codes](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/return-codes-odbc?view=sql-server-ver16):
 
-| Return Code | Description |
+| Return code | Description |
 |----------|---------------------|
 | `SQL_SUCCESS`           | The function completed successfully.                                                                                                          |
 | `SQL_SUCCESS_WITH_INFO` | The function completed successfully, but additional information is available, including a warning                                             |
@@ -138,6 +137,8 @@ LDLIBS=-L/path/to/duckdb_odbc/libduckdb_odbc.dylib
 
 ### 2. Define the ODBC Handles and Connect to the Database
 
+#### 2.a. Connecting with SQLConnect
+
 Then set up the ODBC handles, allocate them, and connect to the database.  First the environment handle is allocated, then the environment is set to ODBC version 3, then the connection handle is allocated, and finally the connection is made to the database.  The following code snippet shows how to do this:
 
 ```cpp
@@ -152,6 +153,29 @@ SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
 
 std::string dsn = "DSN=duckdbmemory";
 SQLConnect(dbc, (SQLCHAR*)dsn.c_str(), SQL_NTS, NULL, 0, NULL, 0);
+
+std::cout << "Connected!" << std::endl;
+```
+
+#### 2.b. Connecting with SQLDriverConnect
+
+Alternatively, you can connect to the ODBC driver using  [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
+`SQLDriverConnect` accepts a connection string in which you can configure the database using any of the available [DuckDB configuration options](../../sql/configuration).
+
+```cpp
+SQLHANDLE env;
+SQLHANDLE dbc;
+
+SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
+
+SQLSetEnvAttr(env, SQL_ATTR_ODBC_VERSION, (void*)SQL_OV_ODBC3, 0);
+
+SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
+
+SQLCHAR str[1024];
+SQLSMALLINT strl;
+std::string dsn = "DSN=DuckDB;allow_unsigned_extensions=true;access_mode=READ_ONLY"
+SQLDriverConnect(dbc, nullptr, (SQLCHAR*)dsn.c_str(), SQL_NTS, str, sizeof(str), &strl, SQL_DRIVER_COMPLETE)
 
 std::cout << "Connected!" << std::endl;
 ```

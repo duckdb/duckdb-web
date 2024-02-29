@@ -30,7 +30,7 @@ SELECT array_value({'a': 1, 'b': 2}, {'a': 3, 'b': 4});
 
 ## Defining an Array Field
 
-Arrays can be created using the `<TYPE_NAME>[<LENGTH>]` syntax. For example, to create an array field for 3 integers, run:
+Arrays can be created using the `⟨TYPE_NAME⟩[⟨LENGTH⟩]` syntax. For example, to create an array field for 3 integers, run:
 
 ```sql
 CREATE TABLE array_table (id INT, arr INT[3]);

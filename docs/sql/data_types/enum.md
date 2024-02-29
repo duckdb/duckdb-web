@@ -75,20 +75,24 @@ CREATE TABLE person (
 Inserts tuples in the `person` table:
 
 ```sql
-INSERT INTO person VALUES ('Pedro', 'happy'), ('Mark', NULL), ('Pagliacci', 'sad'), ('Mr. Mackey', 'ok');
+INSERT INTO person
+VALUES ('Pedro', 'happy'), ('Mark', NULL), ('Pagliacci', 'sad'), ('Mr. Mackey', 'ok');
 ```
 
 The following query will fail since the mood type does not have a 'quackity-quack' value.
 
 ```sql
-INSERT INTO person VALUES ('Hannes', 'quackity-quack');
+INSERT INTO person
+VALUES ('Hannes', 'quackity-quack');
 ```
 
 The string 'sad' is cast to the type mood, returning a numerical reference value.
 This makes the comparison a numerical comparison instead of a string comparison.
 
 ```sql
-SELECT * FROM person WHERE current_mood = 'sad';
+SELECT *
+FROM person
+WHERE current_mood = 'sad';
 ```
 
 ```text
@@ -122,7 +126,8 @@ For example:
 
 ```sql
 -- regexp_matches is a function that takes a VARCHAR, hence current_mood is cast to VARCHAR
-SELECT regexp_matches(current_mood, '.*a.*') AS contains_a FROM person;
+SELECT regexp_matches(current_mood, '.*a.*') AS contains_a
+FROM person;
 ```
 
 ```text
@@ -152,13 +157,17 @@ CREATE TABLE person_2 (
 Since the `current_mood` and `future_mood` columns are constructed on different `ENUM` types, DuckDB will cast both `ENUM`s to strings and perform a string comparison:
 
 ```sql
-SELECT * FROM person_2 WHERE current_mood = future_mood;
+SELECT *
+FROM person_2
+WHERE current_mood = future_mood;
 ```
 
 When comparing the `past_mood` column (string), DuckDB will cast the `current_mood` `ENUM` to `VARCHAR` and perform a string comparison:
 
 ```sql
-SELECT * FROM person_2 WHERE current_mood = past_mood;
+SELECT *
+FROM person_2
+WHERE current_mood = past_mood;
 ```
 
 ## Enum Removal
@@ -209,25 +218,3 @@ ORDER BY m;
 │ happy                      │
 └────────────────────────────┘
 ```
-
-<!--
-For example, this will fail since person has a catalog dependency to the `mood` type:
-
-```sql
-DROP TYPE mood;
-```
-
-```sql
-DROP TABLE person;
-DROP TABLE person_2;
-```
--- This successfully removes the mood type.
-DROP TYPE mood;
-```
-
-Another option would be to use cascading `DROP`, which drops the type and its dependents.
-
-```sql
-DROP TYPE mood CASCADE;
-```
--->

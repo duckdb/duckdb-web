@@ -43,7 +43,8 @@ CREATE SECRET secret1 (
 Now, to query using the above secret, simply query any `s3://` prefixed file:
 
 ```sql
-SELECT * FROM 's3://my-bucket/file.parquet'
+SELECT *
+FROM 's3://my-bucket/file.parquet';
 ```
 
 ### `CREDENTIAL_CHAIN` Provider
@@ -125,7 +126,8 @@ CREATE SECRET secret5 (
 Note the addition of the `ACCOUNT_ID` which is used to generate to correct endpoint url for you. Also note that for `R2` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `R2` secrets are only available when using urls starting with `r2://`, for example:
 
 ```sql
-SELECT * FROM read_parquet('r2://some/file/that/uses/r2/secret/file.parquet')
+SELECT *
+FROM read_parquet('r2://some/file/that/uses/r2/secret/file.parquet');
 ```
 
 #### GCS Secrets
@@ -137,14 +139,14 @@ CREATE SECRET secret6 (
     TYPE GCS,
     KEY_ID 'my_key',
     SECRET 'my_secret'
-)
+);
 ```
 
 Note that the above secret, will automatically have the correct Google Cloud Storage endpoint configured. Also note that for `GCS` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `GCS` secrets are only available when using urls starting with `gcs://` or `gs://`, for example:
 
 ```sql
 SELECT *
-FROM read_parquet('gcs://some/file/that/uses/gcs/secret/file.parquet')
+FROM read_parquet('gcs://some/file/that/uses/gcs/secret/file.parquet');
 ```
 
 ## Reading
@@ -152,13 +154,15 @@ FROM read_parquet('gcs://some/file/that/uses/gcs/secret/file.parquet')
 Reading files from S3 is now as simple as:
 
 ```sql
-SELECT * FROM 's3://bucket/file.extension';
+SELECT *
+FROM 's3://bucket/file.extension';
 ```
 
 Multiple files are also possible, for example:
 
 ```sql
-SELECT * FROM read_parquet([
+SELECT *
+FROM read_parquet([
     's3://bucket/file1.parquet',
     's3://bucket/file2.parquet'
 ]);
@@ -169,7 +173,8 @@ SELECT * FROM read_parquet([
 File globbing is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
 
 ```sql
-SELECT * FROM read_parquet('s3://bucket/*.parquet');
+SELECT *
+FROM read_parquet('s3://bucket/*.parquet');
 ```
 
 This query matches all files in the root of the bucket with the [Parquet extension](../parquet).
@@ -183,7 +188,8 @@ SELECT count(*) FROM read_parquet('s3://bucket/folder*/100?/t[0-9].parquet');
 A useful feature when using globs is the `filename` option, which adds a column named `filename` that encodes the file that a particular row originated from:
 
 ```sql
-SELECT * FROM read_parquet('s3://bucket/*.parquet', filename = true);
+SELECT *
+FROM read_parquet('s3://bucket/*.parquet', filename = true);
 ```
 
 could for example result in:
@@ -229,7 +235,7 @@ COPY table TO 's3://my-bucket/partitioned' (
 The naming scheme of the written files looks like this:
 
 ```text
-s3://my-bucket/partitioned/part_col_a=<val>/part_col_b=<val>/data_<thread_number>.parquet
+s3://my-bucket/partitioned/part_col_a=⟨val⟩/part_col_b=⟨val⟩/data_⟨thread_number⟩.parquet
 ```
 
 ### Configuration
@@ -238,7 +244,7 @@ Some additional configuration options exist for the S3 upload, though the defaul
 
 <div class="narrow_table"></div>
 
-| setting | description |  
+| Name | Description |  
 |:---|:---|
 | `s3_uploader_max_parts_per_file` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
 | `s3_uploader_max_filesize` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |

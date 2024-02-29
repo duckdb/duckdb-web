@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Overview
+title: Overview
 redirect_from:
   - /docs/api/c
   - /docs/api/c/

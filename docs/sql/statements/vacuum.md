@@ -14,7 +14,7 @@ The `VACUUM ANALYZE` statement recomputes table statistics if they have become s
 VACUUM;
 -- Rebuild database statistics
 VACUUM ANALYZE;
--- Rebuild statistics for the table & column
+-- Rebuild statistics for the table and column
 VACUUM ANALYZE memory.main.my_table(my_column);
 -- Not supported
 VACUUM FULL; -- error
