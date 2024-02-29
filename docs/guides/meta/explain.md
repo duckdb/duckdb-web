@@ -81,3 +81,7 @@ Below is an example of running `EXPLAIN` on `Q1` of the TPC-H benchmark.
 │            NULL           │
 └───────────────────────────┘    
 ```
+
+## See Also
+
+For more information, see the [Profiling page](/dev/profiling).

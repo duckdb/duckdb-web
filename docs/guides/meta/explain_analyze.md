@@ -105,3 +105,7 @@ Below is an example of running `EXPLAIN ANALYZE` on `Q1` of the TPC-H benchmark.
 │          (0.08s)          │
 └───────────────────────────┘   
 ```
+
+## See Also
+
+For more information, see the [Profiling page](/dev/profiling).
