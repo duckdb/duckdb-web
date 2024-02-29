@@ -85,7 +85,7 @@ if len(stderr) != 0:
     exit(1)
 
 option_split = '## Configuration Reference'
-doc_file = 'docs/sql/configuration.md'
+doc_file = 'docs/configuration/overview.md'
 
 with open(doc_file, 'r') as f:
     text = f.read()
