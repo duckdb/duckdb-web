@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Inspecting Query Plans Using EXPLAIN
+title: "EXPLAIN: Inspect Query Plans"
 ---
 
 In order to view the query plan of a query, prepend `EXPLAIN` to a query.

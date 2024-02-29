@@ -151,16 +151,16 @@
               "url": "describe"
             },
             {
-              "page": "Inspect Query Plan",
+              "page": "EXPLAIN: Inspect Query Plans",
               "url": "explain"
+            },
+            {
+              "page": "EXPLAIN ANALYZE: Profile Queries",
+              "url": "explain_analyze"
             },
             {
               "page": "List Tables",
               "url": "list_tables"
-            },
-            {
-              "page": "Profile Queries",
-              "url": "explain_analyze"
             },
             {
               "page": "Summarize",
