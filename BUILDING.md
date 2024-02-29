@@ -14,6 +14,7 @@
     - [Prerequisites](#prerequisites-1)
     - [Serving the site from Docker](#serving-the-site-from-docker)
   - [With a Dev Container](#with-a-dev-container)
+  - [Generating the search index](#generating-the-search-index)
 
 The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
@@ -115,3 +116,12 @@ scripts/docker-stop.sh
 ## With a Dev Container
 
 If you are using a [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers), click the green Code button to the top right to open a new codespace with this repository initialized.
+
+## Generating the search index
+
+To generate the search index, run:
+
+```bash
+scripts/install-dependencies.sh
+scripts/generate-search-index.sh
+```
