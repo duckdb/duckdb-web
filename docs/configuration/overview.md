@@ -3,6 +3,7 @@ layout: docu
 title: Configuration
 redirect_from:
   - /docs/configuration
+  - /docs/sql/configuration
 ---
 
 DuckDB has a number of configuration options that can be used to change the behavior of the system.

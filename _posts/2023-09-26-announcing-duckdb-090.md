@@ -13,7 +13,7 @@ excerpt: ""
 
 The DuckDB team is happy to announce the latest DuckDB release (0.9.0). This release is named Undulata after the [Yellow-billed duck](https://en.wikipedia.org/wiki/Yellow-billed_duck) native to Africa.
 
-To install the new version, please visit the [installation guide](https://duckdb.org/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.9.0).
+To install the new version, please visit the [installation guide](/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.9.0).
 
 <!--more-->
 
@@ -170,7 +170,7 @@ import duckdb
 duckdb.sql("FROM 'https://raw.githubusercontent.com/duckdb/duckdb/main/data/json/example_n.ndjson'")
 ```
 
-The set of autoloadable extensions is limited to official extensions distributed by DuckDB Labs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options](https://duckdb.org/docs/sql/configuration.html).
+The set of autoloadable extensions is limited to official extensions distributed by DuckDB Labs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options](/docs/sql/configuration).
 
 [**DuckDB-WASM Extensions**](https://github.com/duckdb/duckdb-wasm/pull/1403). This release adds support for loadable extensions to DuckDB-WASM. Previously, any extensions that you wanted to use with the WASM client had to be baked in. With this release, extensions can be loaded dynamically instead. When an extension is loaded, the WASM bundle is downloaded and the functionality of the extension is enabled. Give it a try in our [WASM shell](https://shell.duckdb.org).
 
@@ -186,7 +186,7 @@ CALL load_aws_credentials();
 SELECT * FROM "s3://some-bucket/that/requires/authentication.parquet";
 ```
 
-[See the documentation for more information](https://duckdb.org/docs/extensions/aws).
+[See the documentation for more information](/docs/extensions/aws).
 
 [**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb_iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
@@ -195,7 +195,7 @@ SELECT count(*)
 FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
 ```
 
-[See the documentation for more information](https://duckdb.org/docs/extensions/iceberg).
+[See the documentation for more information](/docs/extensions/iceberg).
 
 [**Experimental Azure Extension**](https://github.com/duckdb/duckdb_azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 
@@ -204,12 +204,12 @@ SET azure_storage_connection_string = '<your_connection_string>';
 SELECT * FROM 'azure://<my_container>/*.csv';
 ```
 
-[See the documentation for more information](https://duckdb.org/docs/extensions/azure).
+[See the documentation for more information](/docs/extensions/azure).
 
 
 #### Clients
 
-[**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API](https://duckdb.org/docs/archive/0.8.1/api/python/relational_api) and executed using DuckDB's query engine.
+[**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API](/docs/archive/0.8.1/api/python/relational_api) and executed using DuckDB's query engine.
 
 ```py
 from duckdb.experimental.spark.sql import SparkSession as session

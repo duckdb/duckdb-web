@@ -15,7 +15,7 @@ Parallelism starts at the level of row groups, therefore, for a query to run on 
 
 ### Too Many Threads
 
-Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`](../configuration/pragmas#threads).
+Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`](../../configuration/pragmas#threads).
 
 ## Larger-Than-Memory Workloads (Out-of-Core Processing)
 
