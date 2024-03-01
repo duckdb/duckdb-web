@@ -30,14 +30,6 @@ For example, have you ever seen a library of high-level SQL helper functions?
 SQL as a language typically is not flexible enough to build reusable functions.
 Today, we are flying towards a more flexible future!
 
-> Warning When making SQL more dynamic, it needs to be done safely.
-> [Little Bobby Tables](https://xkcd.com/327/) is a situation we all want to avoid.
-> Several of the queries below use parameterization to achieve dynamism, which automatically prevents SQL injection attacks.
-> It also keeps the code more interpretable. 
-> However, we do dip our toes into some SQL-building territory.
-> Please sanitize your inputs if they are coming from an end user!
-> Another approach is to connect to DuckDB in read-only mode.
-
 ## Dynamic aggregates macro
 
 In SQL, typically the columns to `SELECT` and `GROUP BY` must be specified individually. 
