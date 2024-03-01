@@ -19,7 +19,6 @@ These queries are useful in their own right, but their component pieces are even
 What is the craziest thing you have built with SQL? 
 We want to hear about it! 
 Tag [DuckDB on X](https://twitter.com/duckdb) (the site formerly known as Twitter) or [LinkedIn](https://www.linkedin.com/company/duckdb/mycompany/), and join the [DuckDB Discord community](https://discord.duckdb.org/).
-Please also post your most helpful queries on [DuckDB Snippets](https://duckdbsnippets.com/) to share with the community!
 
 <!--more-->
 
@@ -295,8 +294,8 @@ However, stay tuned for a way to achieve similar results with a simpler approach
 ## Custom summaries for any dataset
 
 Next we have a truly production-grade example!
-This query powers a portion of the [MotherDuck](https://motherduck.com/) Web UI's [Column Explorer](https://motherduck.com/blog/introducing-column-explorer/) component.
-[Hamilton Ulmer](https://www.linkedin.com/in/hamilton-ulmer-28b97817/) led the creation of this component and is the original author of this query as well!
+This query powers a portion of the MotherDuck Web UI's [Column Explorer](https://motherduck.com/blog/introducing-column-explorer/) component.
+[Hamilton Ulmer](https://www.linkedin.com/in/hamilton-ulmer-28b97817/) led the creation of this component and is the author of this query as well!
 The purpose of the Column Explorer, and this query, is to get a high-level overview of the data in all columns within a dataset as quickly and easily as possible.
 
 DuckDB has a built-in [`SUMMARIZE` keyword](/docs/guides/meta/summarize) that can calculate similar metrics across an entire table. 
