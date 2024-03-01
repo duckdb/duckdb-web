@@ -75,9 +75,13 @@ $(document).ready(function(){
 		if (userSelection.version == "")
 			userSelection.version=".latest";
 
-		if ((userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0) {
+		if ((userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0) {
 			if (userSelection.download_method == "" || userSelection.download_method == undefined)
 				userSelection.download_method = ".package_manager";
+			if (userSelection.platform == "" || userSelection.platform == undefined)
+				userSelection.platform = "." + OSdatid;
+		}
+		else if (userSelection.environment == ".cplusplus") {
 			if (userSelection.platform == "" || userSelection.platform == undefined)
 				userSelection.platform = "." + OSdatid;
 		}
@@ -88,7 +92,9 @@ $(document).ready(function(){
 		var currSelection = userSelection;
 		if (userSelection.platform == ".macos")
 			currSelection.architecture = ""
-		if ((userSelection.environment == ".cplusplus" || userSelection.environment == ".cli") && $('.installer.select ul li.selected').length == 0) {
+		if ((userSelection.environment == ".cli") && $('.installer.select ul li.selected').length == 0) {
+		} else if (userSelection.environment == ".cplusplus") {
+			currSelection.download_method = ""
 		} else if (userSelection.environment == ".odbc") {
 			currSelection.download_method = ".direct"
 		} else if (userSelection.environment == ".java") {
