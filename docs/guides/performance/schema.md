@@ -62,6 +62,8 @@ The results below show that joining on `BIGINT` columns is approx. 1.8× faster 
 | `BIGINT`                 | `BIGINT`                | `70368755640078`                         | 1.2 s      |
 | `BIGINT`                 | `VARCHAR`               | `'70368755640078'`                       | 2.1 s      |
 
+> Bestpractice Avoid representing numeric values as strings, especially if you intend to perform e.g. join operations on them.
+
 ## Constraints
 
 DuckDB allows defining [constraints](../../sql/constraints) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DuckDB does not rely on these indexes for join and aggregation operators (see [indexing](indexing) for more details).
@@ -78,3 +80,5 @@ We illustrate the effect of using primary keys with the [LDBC Comment table at s
 | ------------------------ | -------------: |
 | Load without primary key | 92.168s        |
 | Load with primary key    | 286.765s       |
+
+> Bestpractice For best bulk load performance, avoid defining primary key constraints if possible.

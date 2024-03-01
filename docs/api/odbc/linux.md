@@ -10,13 +10,13 @@ Users can install it from the command line:
 ## Debian Flavors
 
 ```bash
-sudo apt-get install unixodbc
+sudo apt-get install unixodbc odbcinst
 ```
 
 ## Fedora Flavors
 
 ```bash
-sudo yum install unixodbc
+sudo yum install unixODBC
 ```
 
 ## Step 1: Download ODBC Driver
