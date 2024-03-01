@@ -513,7 +513,7 @@ main{
 		margin: 0 auto;
 	}
 	#main_content_wrap{
-		margin-top: 70px;
+		margin-top: 100px;
 	}
 }
 
@@ -732,7 +732,7 @@ body.documentation main .wrap.frequentlyaskedquestions{
 		margin-bottom: 5px;
 		border-radius: 10px;
 		&.open h3::after{
-			transform: rotate(90deg);
+			transform: rotate(180deg);
 		}
 		&:hover{
 			background-color: #f5f5f5;
@@ -846,10 +846,16 @@ body.installation{
 	.yourselection{
 		background-color: $black50;
 		position: relative;
-		max-width: 780px;
 		border: 1px solid $black200;
 		border-radius: 15px;
 		margin-top: 25px;
+		.select.hide {
+			display: none;
+		}
+		.select li.inactive {
+			opacity: 0.4;
+			pointer-events: none;
+		}
 	}
 	.wrap{
 		margin-bottom: 100px;
@@ -861,7 +867,7 @@ body.installation{
 		h3{
 			font-size: 17px!important;
 			font-weight: 600!important;
-			width: 150px;
+			width: 162px;
 			flex-shrink: 0;
 			margin: 0!important;
 			letter-spacing: -0.17px;
@@ -917,7 +923,7 @@ body.installation{
 		h3{
 			font-size: 17px!important;
 			font-weight: 600!important;
-			width: 150px;
+			width: 162px;
 			flex-shrink: 0;
 			margin: 0!important;
 			letter-spacing: -0.17px;
@@ -932,7 +938,7 @@ body.installation{
 			border: 1px solid $black200;
 			font-size: 14px;
 			position: relative;
-			width: calc(100% - 150px);
+			width: calc(100% - 162px);
 			pre{
 				padding: 0;
 				margin: 0;
