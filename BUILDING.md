@@ -66,7 +66,7 @@ We use [a fork of the Rouge syntax highligher](https://github.com/duckdb/rouge/b
 Serve the website (latest only, archives excluded) with:
 
 ```bash
-scripts/serve.sh
+scripts/serve-latest.sh
 ```
 
 The website can be browsed by going to <http://localhost:4000/docs/> in your browser.
@@ -74,7 +74,7 @@ The website can be browsed by going to <http://localhost:4000/docs/> in your bro
 Serve the full website with:
 
 ```sh
-scripts/serve-full.sh
+scripts/serve.sh
 ```
 
 ## Using Docker
