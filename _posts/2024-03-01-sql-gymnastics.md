@@ -453,21 +453,21 @@ We have now split apart the data into multiple columns, so the summary metrics a
 
 We have shown that it is now possible to build reusable SQL macros in a highly flexible way. 
 You can now build a macro that:
-- Operates on any dataset
-- Selects any columns
-- Groups by any columns
-- Aggregates any number of columns with any function.
+* Operates on any dataset
+* Selects any columns
+* Groups by any columns
+* Aggregates any number of columns with any function.
 
 Phew! 
 
 Along the way we have covered some useful tricks to have in your toolbox:
-- Applying a macro to any dataset using a CTE
-- Selecting a dynamic list of columns by combining the `COLUMNS` expression with a lambda and the `list_contains` function
-- Passing in an aggregate function as a string using `list_aggregate`
-- Applying any custom aggregation function within a macro
-- Making list parameters optional using `OR len(list_parameter) = 0`
-- Using the `alias` function with a `COLUMNS` expression to store the original name of all columns
-- Summarizing all columns and then transposing that summary using `UNPIVOT` and `STRUCT.*`
+* Applying a macro to any dataset using a CTE
+* Selecting a dynamic list of columns by combining the `COLUMNS` expression with a lambda and the `list_contains` function
+* Passing in an aggregate function as a string using `list_aggregate`
+* Applying any custom aggregation function within a macro
+* Making list parameters optional using `OR len(list_parameter) = 0`
+* Using the `alias` function with a `COLUMNS` expression to store the original name of all columns
+* Summarizing all columns and then transposing that summary using `UNPIVOT` and `STRUCT.*`
 
 The combination of these friendly SQL features is more powerful than using any one individually.
 We hope that we have inspired you to take your SQL to new limits!
