@@ -4,7 +4,7 @@ $(document).ready(function(){
 		var hash = window.location.hash;
 		if ($(hash).length) {
 			$('html, body').animate({
-				scrollTop: $(hash).offset().top-130
+				scrollTop: $(hash).offset().top-90
 			}, 300, 'swing');
 			if( $('.frequentlyaskedquestions').length ){
 				console.log($('h3'+hash).parent('.qa-wrap'))
@@ -69,58 +69,74 @@ $(document).ready(function(){
 	    }
 	};
 	
+	// Docs Installation Functions 
+	function showAllSections() {
+		$('.yourselection .hide').removeClass('hide');
+		$('.yourselection .select ul li.inactive').removeClass('inactive')
+	}
 	
-	// Installation Selection
-	var userSelection = {version: "", environment: "", pack: "", platform: ""};
+	function hideSections(sections) {
+		if ( sections !== undefined ) {
+			sections.split(',').forEach(section => {
+				const $container = $(`.select[data-select="${section.trim()}"]`);
+				console.log($container)
+				$container.addClass('hide')
+				$container.find('.selected').removeClass('selected');
+			});
+		}
+	}
+	
+	// Docs Installation Selection
+	var userSelection = { version: "", environment: "", pack: "", platform: "", architecture: "", download_method: "" };
 	var classList = "";
 	
-	var evaluation = function(){
-		
-		var versionSelection = $('.yourselection ul.version li.selected').attr('data-id');
-		if(versionSelection){ userSelection.version = versionSelection; }
-		
-		if( $("body.installation .environment.select .onlymobile").is(":visible") ){
-			var environmentSelection = $('body.installation .environmentselect').val();
-		} else {
-			var environmentSelection = $('.yourselection ul.environment li.selected').attr('data-id');
-		}
-		if(environmentSelection){ userSelection.environment = environmentSelection; }
-		
-		var packSelection = $('.yourselection ul.pack li.selected').attr('data-id');
-		if(packSelection){ userSelection.pack = packSelection; }
-		
-		var platfromSelection = $('.yourselection ul.platform li.selected').attr('data-id');
-		if(platfromSelection){ userSelection.platform = platfromSelection; }
-		
-
-		if ( userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc"){
-			$('.installer.select, .platform.select').removeClass('inactive');
-		} else {
-			$('.installer.select, .platform.select').addClass('inactive');
-			$('.installer.select ul li.selected, .platform.select ul li.selected').removeClass('selected');
-			userSelection.pack = "";
-			userSelection.platform = "";
-		}
-
-		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && userSelection.pack == ".source" ) {
-			$('.platform.select').addClass('inactive');
-			$('.platform.select ul li.selected').removeClass('selected');	
-			userSelection.platform = "";
-		}
-		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0){
+	var evaluation = function () {
+		showAllSections();
+	
+		if ((userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0) {
 			$('.installer.select ul li[data-id=".binary"').addClass('selected');
-			$('.platform.select ul li[data-id="'+OSdatid+'"').addClass('selected');
+			$('.platform.select ul li[data-id=".' + OSdatid + '"').addClass('selected');
 			userSelection.pack = ".binary";
-			userSelection.platform = OSdatid;
+			userSelection.platform = "." + OSdatid;
 		}
-		
-		var classList = userSelection.version + userSelection.environment + userSelection.pack + userSelection.platform;
-		var result = $('.possibleresults div'+classList).html();
+	
+		$('.yourselection .select').each(function() {
+			const $self = $(this);
+			const $selfClass = $(this).data('select')
+			const $selectedElm = $self.find('.selected');
+			if ( $selectedElm.length ) {
+				hideSections($selectedElm.data('hide-section'))
+				userSelection[$selfClass] = $selectedElm.data('id')
+	
+				const deactivateTabs = $selectedElm.data('deactivate-tabs');
+				if ( deactivateTabs !== undefined ) {
+					deactivateTabs.split(',').forEach(function(deactivateTab) {
+						const tab = deactivateTab.split(' ')
+						$(`${tab[0]} [data-id="${tab[1]}"]`).addClass('inactive').removeClass('selected')
+					});
+				}
+	
+				const preselectTabs = $selectedElm.data('preselect-tabs');
+				if ( preselectTabs !== undefined ) {
+					preselectTabs.split(',').forEach(function(preselectTab) {
+						const tab = preselectTab.split(' ')
+						$(`${tab[0]} [data-id="${tab[1]}"]`).addClass('selected')
+						userSelection[tab[0].replace('.', '')] = tab[1].replace('.', '')
+						
+						setQueryString();
+					});
+				}
+			}
+		})
+	
+		var classList = userSelection.version + userSelection.environment + userSelection.pack + userSelection.platform + userSelection.architecture + userSelection.download_method;
+	
+		var result = $('.possibleresults div' + classList).html();
 		$('.installation.output .result').html(result);
-
-		var exampleResult = $('.possibleresults .example'+userSelection.environment).html();
+	
+		var exampleResult = $('.possibleresults .example' + userSelection.environment).html();
 		$('.example.output .result').html(exampleResult);
-
+	
 	}
 	
 	$('body.installation .yourselection .select li').click(function(){
@@ -248,7 +264,7 @@ $(document).ready(function(){
         if (target.length) {
           // event.preventDefault();
           $('html, body').animate({
-            scrollTop: target.offset().top-65
+            scrollTop: target.offset().top-90
           }, 1000 );
         }
       }
