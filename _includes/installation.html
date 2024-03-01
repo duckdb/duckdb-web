@@ -10,7 +10,7 @@
 	<div class="version select" data-select="version">
 		<h3>Version</h3>
 		<ul class="version">
-			<li class="selected" data-id=".latest">
+			<li data-id=".latest">
 				<div> {{ site.currentduckdbversion }} <span class="versioninfo">(latest release)</span></div>
 			</li>
 			<li data-id=".main">
@@ -22,7 +22,7 @@
 	<div class="environment select" data-select="environment">
 		<h3>Environment</h3>
 		<ul class="environment">
-			<li data-id=".cli" data-hide-section="" class="selected">Command line</li>
+			<li data-id=".cli" data-hide-section="">Command line</li>
 			<li data-id=".python" data-hide-section="pack,platform,architecture,download_method">Python</li>
 			<li data-id=".r" data-hide-section="pack,platform,architecture,download_method">R</li>
 			<li data-id=".java" data-hide-section="pack,platform,architecture">Java</li>
@@ -38,15 +38,15 @@
 		<h3>Platform</h3>
 		<ul class="platform">
 			<li data-id=".win" data-deactivate-tabs=".architecture .arm64">Windows</li>
-			<li data-id=".macos" class="selected">macOS</li>
-			<li data-id=".linux" data-preselect-tabs=".architecture .x86_64">Linux</li>
+			<li data-id=".macos" data-hide-section="architecture">macOS</li>
+			<li data-id=".linux">Linux</li>
 		</ul>
 	</div>
 	
 	<div class="download_method select" data-select="download_method">
 		<h3>Download method</h3>
 		<ul class="download_method">
-			<li data-id=".package_manager">Package manager</li>
+			<li data-id=".package_manager" data-hide-section="architecture">Package manager</li>
 			<li data-id=".direct">Direct download</li>
 		</ul>
 	</div>
@@ -157,13 +157,22 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip</a>
 	</div>
 
-
-	<div class="latest cli binary macos">
+	<div class="latest cli binary macos package_manager">
 		brew install duckdb
 	</div>
 
 	<div class="latest cli binary macos direct">
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip</a>
+	</div>
+
+	<div class="latest cli binary linux direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a>
+		<br>
+		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip</a>
+	</div>
+
+	<div class="latest cli binary linux arm64 direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip</a>
 	</div>
 
 	<div class="latest cli binary linux x86_64 direct">
@@ -182,7 +191,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a>
 	</div>
 
-	<div class="latest odbc binary linux x86_64 direct">
+	<div class="latest odbc binary linux x86_64">
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip</a>	
 		<br/><br/>
 
