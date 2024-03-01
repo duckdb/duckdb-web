@@ -2,6 +2,7 @@
 layout: post
 title: "SQL Gymnastics: Bending SQL into flexible new shapes"
 author: Alex Monahan
+thumb: "/images/blog/thumbs/240301.png"
 excerpt: "Combining multiple features of DuckDB’s friendly SQL allows for highly flexible queries that can be reused across tables."
 ---
 
@@ -152,7 +153,6 @@ Executing either of those queries will return this result:
 |------|------|-------------------------------------------|-------------------------------------------|
 | 0    | 1    | 2                                         | 0                                         |
 | 1    | 1    | 1                                         | 0                                         |
-
 
 #### Understanding the design
 
