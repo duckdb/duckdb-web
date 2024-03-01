@@ -82,21 +82,32 @@ All of these can be passed in as parameters from the host language that is query
 
 ```sql
 -- We use a table macro (or function) for reusability
-CREATE OR REPLACE MACRO dynamic_aggregates(included_columns, excluded_columns, aggregated_columns, aggregate_function) AS TABLE (
+CREATE OR REPLACE MACRO dynamic_aggregates(
+        included_columns,
+        excluded_columns,
+        aggregated_columns,
+        aggregate_function
+    ) AS TABLE (
     FROM example 
     SELECT 
-        -- Use a COLUMNS expression to only select the columns we include or do not exclude
+        -- Use a COLUMNS expression to only select the columns
+        -- we include or do not exclude
         COLUMNS(c -> (
-            -- If we are not using an input parameter (list is empty), ignore it
-            (list_contains(included_columns, c) OR len(included_columns) = 0)
-            AND 
-            (NOT list_contains(excluded_columns, c) OR len(excluded_columns) = 0)
+            -- If we are not using an input parameter (list is empty),
+            -- ignore it
+            (list_contains(included_columns, c) OR
+             len(included_columns) = 0)
+            AND
+            (NOT list_contains(excluded_columns, c) OR
+             len(excluded_columns) = 0)
             )),
-        -- Use the list_aggregate function to apply an aggregate function of our choice
+        -- Use the list_aggregate function to apply an aggregate
+        -- function of our choice
         list_aggregate(
             -- Convert to a list (to enable the use of list_aggregate)
             list(
-                -- Use a COLUMNS expression to choose which columns to aggregate
+                -- Use a COLUMNS expression to choose which columns
+                -- to aggregate
                 COLUMNS(c -> list_contains(aggregated_columns, c))
             ), aggregate_function
         )
@@ -113,18 +124,26 @@ For illustrative purposes, the 3 queries below show different ways to achieve id
 Select col3 and col4, and take the minimum values of col1 and col2:
 
 ```sql
-FROM dynamic_aggregates(['col3', 'col4'], [], ['col1', 'col2'], 'min');
+FROM dynamic_aggregates(
+    ['col3', 'col4'], [], ['col1', 'col2'], 'min'
+);
 ```
 
 Select all columns except col1 and col2, and take the minimum values of col1 and col2:
+
 ```sql
-FROM dynamic_aggregates([],['col1', 'col2'], ['col1', 'col2'], 'min');
+FROM dynamic_aggregates(
+    [], ['col1', 'col2'], ['col1', 'col2'], 'min'
+);
 ```
 
 If the same column is in both the included and excluded list, it is excluded (exclusions win ties).
 If we include col2, col3, and col4, but we exclude col2, then it is as if we only included col3 and col4:
+
 ```sql
-FROM dynamic_aggregates(['col2', 'col3', 'col4'], ['col2'], ['col1', 'col2'], 'min');
+FROM dynamic_aggregates(
+    ['col2', 'col3', 'col4'], ['col2'], ['col1', 'col2'], 'min'
+);
 ```
 
 Executing either of those queries will return this result:
@@ -166,14 +185,14 @@ It accepts the name of a function (as a string) in its second parameter.
 So, to use this unique property, we use the [`list` aggregate function](/docs/sql/aggregates#general-aggregate-functions) to transform all the values within each group into a list.
 Then we use the `list_aggregate` function to apply the `aggregate_function` we passed into the macro to each list.
 
-Almost done! 
+Almost done!
 Now [`GROUP BY ALL`](/docs/sql/query_syntax/groupby#group-by-all) will automatically choose to group by the columns returned by the first `COLUMNS` expression.
 The [`ORDER BY ALL`](/docs/sql/query_syntax/orderby#order-by-all) expression will order each column in ascending order, moving from left to right.
 
 We made it!
 
-> Extra credit! In the next release of DuckDB, version 0.10.1, we will be able to [apply a dynamic alias](https://github.com/duckdb/duckdb/pull/10774) to the result of a `COLUMNS` expression. 
-> For example, each new aggregate column could be renamed in the pattern `agg_[the original column name]`. 
+> Extra credit! In the next release of DuckDB, version 0.10.1, we will be able to [apply a dynamic alias](https://github.com/duckdb/duckdb/pull/10774) to the result of a `COLUMNS` expression.
+> For example, each new aggregate column could be renamed in the pattern `agg_[the original column name]`.
 > This will unlock the ability to chain together these type of macros, as the naming will be predictable.  
 
 #### Takeaways
@@ -181,29 +200,34 @@ We made it!
 Several of the approaches used within this macro can be applied in a variety of ways in your SQL workflows.
 Using a lambda function in combination with the `COLUMNS` expression can allow you to select any arbitrary list of columns.
 The `OR len(my_list) = 0` trick allows list parameters to be ignored when blank.
-Once you have that arbitrary set of columns, you can even apply a dynamically chosen aggregation function to those columns using `list` and `list_aggregate`. 
+Once you have that arbitrary set of columns, you can even apply a dynamically chosen aggregation function to those columns using `list` and `list_aggregate`.
 
-However, we still had to specify a table at the start. 
-We are also limited to aggregate functions that are available to be used with `list_aggregate`. 
+However, we still had to specify a table at the start.
+We are also limited to aggregate functions that are available to be used with `list_aggregate`.
 Let's relax those two constraints!
 
 ### Creating version 2 of the macro
 
-This approach takes advantage of two key concepts: 
+This approach takes advantage of two key concepts:
 
 * Macros can be used to create temporary aggregate functions
 * A macro can query a [Common Table Expression (CTE) / `WITH` clause](/docs/sql/query_syntax/with) that is in scope during execution
 
 ```sql
 CREATE OR REPLACE MACRO dynamic_aggregates_any_cte_any_func(
-    included_columns, excluded_columns, aggregated_columns /* No more aggregate_function */
+    included_columns,
+    excluded_columns,
+    aggregated_columns
+    /* No more aggregate_function */
 ) AS TABLE (
     FROM any_cte -- No longer a fixed table!
     SELECT 
         COLUMNS(c -> (
-            (list_contains(included_columns, c) OR len(included_columns) = 0)
+            (list_contains(included_columns, c) OR
+            len(included_columns) = 0)
             AND 
-            (NOT list_contains(excluded_columns, c) OR len(excluded_columns) = 0)
+            (NOT list_contains(excluded_columns, c) OR
+            len(excluded_columns) = 0)
             )),
         -- We no longer convert to a list, 
         -- and we refer to the latest definition of any_func 
@@ -222,7 +246,8 @@ Pretty powerful and very reusable!
 
 ```sql
 -- We can define or redefine any_func right before calling the macro 
-CREATE OR REPLACE TEMP FUNCTION any_func(x) AS 100.0 * sum(x) / count(x);
+CREATE OR REPLACE TEMP FUNCTION any_func(x)
+    AS 100.0 * sum(x) / count(x);
 
 -- Any table structure is valid for this CTE!
 WITH any_cte AS (
@@ -254,7 +279,7 @@ Similarly, `any_func` does not exist initially.
 It only needs to be created (or recreated) at some point before the macro is executed.
 Its only requirements are to be an aggregate function that operates on a single column. 
 
-> Note: `FUNCTION` and `MACRO` are synonyms in DuckDB and can be used interchangeably! 
+> `FUNCTION` and `MACRO` are synonyms in DuckDB and can be used interchangeably! 
 
 #### Takeaways from version 2
 
@@ -410,16 +435,17 @@ ON COLUMNS(*)
 | main.struct_pack("name" := first(alias(spotify_tracks.time_signature)), ... | {'name': time_signature, 'type': BIGINT, 'max': 5, 'min': 0, 'approx_unique': 5, 'nulls': 0}                                                                                   |
 | main.struct_pack("name" := first(alias(spotify_tracks.track_genre)), ... | {'name': track_genre, 'type': VARCHAR, 'max': world-music, 'min': acoustic, 'approx_unique': 115, 'nulls': 0}                                                                  |
 
-By unpivoting on `COLUMNS(*)`, we take all columns and pivot them downward into two columns: one for the auto-generated `name` of the column, and one for the `value` that was within that column. 
+By unpivoting on `COLUMNS(*)`, we take all columns and pivot them downward into two columns: one for the auto-generated `name` of the column, and one for the `value` that was within that column.
 
 #### Return the results
 
-The final step is the most gymnastics-like portion of this query. 
+The final step is the most gymnastics-like portion of this query.
 We explode the `value` column's struct format so that each key becomes its own column using the [`STRUCT.*` syntax](/docs/sql/data_types/struct#struct).
-This is another way to make a query less reliant on column names – the split occurs automatically based on the keys in the struct. 
+This is another way to make a query less reliant on column names – the split occurs automatically based on the keys in the struct.
 
 ```sql
-SELECT value.* FROM stacked_metrics
+SELECT value.*
+FROM stacked_metrics
 ```
 
 We have now split apart the data into multiple columns, so the summary metrics are nice and interpretable.
