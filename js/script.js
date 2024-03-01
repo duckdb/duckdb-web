@@ -7,7 +7,7 @@ $(document).ready(function(){
 				scrollTop: $(hash).offset().top-90
 			}, 300, 'swing');
 			if( $('.frequentlyaskedquestions').length ){
-				console.log($('h3'+hash).parent('.qa-wrap'))
+				//console.log($('h3'+hash).parent('.qa-wrap'))
 				$('h3'+hash).parent('.qa-wrap').addClass('open');
 				$('h3'+hash).parent('.qa-wrap').find('.answer').slideToggle(300);
 			}
@@ -48,7 +48,7 @@ $(document).ready(function(){
 		if ( sections !== undefined ) {
 			sections.split(',').forEach(section => {
 				const $container = $(`.select[data-select="${section.trim()}"]`);
-				console.log($container)
+				// console.log($container)
 				$container.addClass('hide')
 				$container.find('.selected').removeClass('selected');
 			});
@@ -150,7 +150,6 @@ $(document).ready(function(){
 		})
 
 		var classList = currSelection.version + currSelection.environment + currSelection.pack + currSelection.platform + currSelection.architecture + currSelection.download_method;
-		console.log(classList);
 
 		var result = $('.possibleresults div' + classList).html();
 		$('.installation.output .result').html(result);
