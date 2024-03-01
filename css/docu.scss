@@ -49,12 +49,12 @@ body.documentation{
       justify-content: space-between;
       max-width: unset;
       margin-left: 252px;
-      padding: 30px 0 0 30px;
+      padding: 0 0 0 30px;
       position: relative;
       #main_content_wrap{
          width: calc(100% - 22%);
          max-width: 1000px;
-         margin-top: 70px;
+         margin-top: 100px;
          padding-bottom: 30px;
          padding-right: 30px;
          img{
@@ -177,11 +177,11 @@ body.documentation{
          font-size: $docuh1;
          font-weight: 700;
          width: 100%;
-         margin-top: 10px;
       }
       .breadcrumbs{
          width: 70%;
          font-size: 14px;
+         margin-bottom: 10px;
          a, span.slash, span:not(.current){
             color: $black400;
          }
@@ -323,7 +323,16 @@ body.documentation{
       line-height: 1;
    }
 }
-
+.wrap.whyduckdb,
+.wrap.media,
+.wrap.frequentlyaskedquestions,
+.wrap.codeofconduct,
+.wrap.documentation,
+.wrap.duckdbinstallation{
+   .breadcrumbs{
+      display: none;
+   }  
+}
 .sidenavigation{
    position: fixed;
    top: 70px;
