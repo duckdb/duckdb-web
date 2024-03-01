@@ -73,7 +73,7 @@ $(document).ready(function(){
 		if (userSelection.environment == "")
 			userSelection.environment=".cli";
 		if (userSelection.version == "")
-			userSelection.version=".latest";
+			userSelection.version=".stable";
 
 		if ((userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0) {
 			if (userSelection.download_method == "" || userSelection.download_method == undefined)
@@ -456,7 +456,7 @@ $(document).ready(function(){
 			var pathname = window.location.pathname.split("/docs");
 		}
 		
-		if( $(this).hasClass('latest') ){
+		if( $(this).hasClass('stable') ){
 			var versionurl = "/docs"+pathname[1]
 		} else {
 			var versionurl = "/docs/archive/"+clickedversion+pathname[1]+"?ver="+clickedversion;
