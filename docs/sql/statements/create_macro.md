@@ -103,6 +103,23 @@ SELECT 40 + 2;
 
 ## Limitations
 
+### Using Named Parameters
+
+Currently, positional macro parameters can only be used positionally, and named parameters can only be used by supplying their name. Therefore, the following will not work:
+
+```sql
+CREATE MACRO test(a, b := 42) AS (a + b);
+SELECT test(32, 52);
+```
+
+```text
+Error: Binder Error: Macro function 'test(a)' requires a single positional argument, but 2 positional arguments were provided.
+LINE 1: SELECT test(32, 52);
+               ^
+```
+
+### Using Subquery Macros
+
 If a `MACRO` is defined as a subquery, it cannot be invoked in a table function. DuckDB will return the following error:
 
 ```text
