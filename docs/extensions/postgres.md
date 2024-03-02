@@ -65,8 +65,10 @@ export PGPASSWORD="secret"
 export PGHOST=localhost
 export PGUSER=owner
 export PGDATABASE=mydatabase
-duckdb
 ```
+
+To connect, start the `duckdb` process and run:
+
 ```sql
 ATTACH '' AS p (TYPE postgres);
 ```
