@@ -145,8 +145,8 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				
 				</div>
 				
-				
-				{% include anchor_headings.html html=content %}
+				{% assign ct = content | toc %}
+				{% include anchor_headings.html html=ct %}
 				
 				{% if page.url contains 'overview' %}
 				<div class="index">

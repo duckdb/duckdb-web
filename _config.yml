@@ -42,6 +42,7 @@ plugins:
   - jekyll-github-metadata
   - jekyll-git-hash
   - jekyll-last-modified-at
+  - jekyll-toc
 excerpt_separator: <!--more-->
 
 last-modified-at:
@@ -61,6 +62,7 @@ defaults:
       path: ""
     values:
       image: /images/sharingduckdb.jpg
+      #toc: true
 
 repository: "duckdb/duckdb-web"
 
@@ -77,5 +79,10 @@ repository: "duckdb/duckdb-web"
 #   - vendor/ruby/
 
 star_count: "14.4k"
+
+toc:
+  min_level: 1
+  max_level: 3
+  ordered_list: true
 
 exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle']
