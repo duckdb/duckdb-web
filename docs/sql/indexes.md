@@ -54,4 +54,4 @@ UPDATE students SET name = 'Student 2', id = 1 WHERE id = 1;
 -- Constraint Error: Duplicate key "id: 1" violates primary key constraint
 ```
 
-Currently this is an expected limitation of the system - although we aim to resolve this in the future.
+Currently, this is an expected limitation of the system - although we aim to resolve this in the future.

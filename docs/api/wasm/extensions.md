@@ -11,7 +11,7 @@ Extensions in DuckDB are binaries to be dynamically loaded via `dlopen`. A crypt
 An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via Emscripten's `dlopen`. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
 This ensures the file remains a valid WebAssembly file.
 
-> Currently we require this custom section to be the last one, but this can be potentially relaxed in the future.
+> Currently, we require this custom section to be the last one, but this can be potentially relaxed in the future.
 
 ## `INSTALL` and `LOAD`
 

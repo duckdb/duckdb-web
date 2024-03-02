@@ -163,7 +163,7 @@ print(res)
 
 ## Python Function Types
 
-Currently two function types are supported, `native` (default) and `arrow`.
+Currently, two function types are supported, `native` (default) and `arrow`.
 
 ### Arrow
 
