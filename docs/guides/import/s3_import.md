@@ -30,6 +30,8 @@ CREATE SECRET (
 );
 ```
 
+> Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your-region⟩.amazonaws.com'`.
+
 Alternatively, use the [`aws` extension](../../extensions/aws) to retrieve the credentials automatically:
 
 ```sql
