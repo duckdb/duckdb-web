@@ -651,7 +651,19 @@ $(document).ready(function(){
 			$('.demo.window .bottombar a.livedemo').attr('href', buttonUrl);
 		}
 	}
-	
+
+	// STARTPAGE INSTALLATION WINDOW
+	var updateInstallation = function(){
+		var exampleSelection = $('#example-select').find(":selected").val();
+		var languageSelection = $('.demo.window ul.lang li.active').attr('data-language');
+		var exampleCode = $('.examples.hero-demo').find('div[data-install='+languageSelection+'][data-install='+exampleSelection+']').html();
+		var buttonTxt = $('.examples.hero-demo').find('div[data-install='+languageSelection+'][data-install='+exampleSelection+']').attr('data-buttontxt');
+		var buttonUrl = $('.examples.hero-demo').find('div[data-install='+languageSelection+'][data-install='+exampleSelection+']').attr('data-buttonurl');
+		//console.log("Example: " + exampleSelection + " Language: " + languageSelection);
+		//console.log("Buttontext: " + buttonTxt);
+		$('.demo.window .content .code').html(exampleCode);
+	}
+
 	if( $('section.welcome').length ){
 		$('.demo.window ul.lang li').click(function(){
 			$('.demo.window ul.lang li.active').removeClass('active');
@@ -664,6 +676,21 @@ $(document).ready(function(){
 		$('#example-select').on('change', function() {
 			updateExample();
 		});
+	}
+
+	if( $('section#quickinstall').length ){
+		$('.install.window.environment ul, li').click(function(){
+			$('.install.window.environment ul, li.active').removeClass('active');
+			$(this).addClass('active');
+			var client = $('.install.window.environment ul, li.active').attr('data-client');
+
+			var installation = $('#quick-installation').find('div[data-install="'+client+' '+OSdatid+'"]').html();
+			if (installation === undefined) {
+				var installation = $('#quick-installation').find('div[data-install='+client+']').html();
+			}
+
+			$('.result').html(installation);
+		})
 	}
 	
 });

@@ -109,12 +109,12 @@ body_class: landing nowrap
 			<div class="window">
 				<div class="topbar environment">
 					<ul>
-						<li data-id="cli" class="active">Command line</li>
-						<li data-id="python">Python</li>
-						<li data-id="r">R</li>
-						<li data-id="java">Java</li>
-						<li data-id="nodejs">Node.js</li>
-						<li data-id="odbc">ODBC</li>
+						<li data-client="cli" class="active">Command line</li>
+						<li data-client="python">Python</li>
+						<li data-client="r">R</li>
+						<li data-client="java">Java</li>
+						<li data-client="nodejs">Node.js</li>
+						<li data-client="odbc">ODBC</li>
 					</ul>
 				</div>
 				<label class="onlymobile">
@@ -129,7 +129,9 @@ body_class: landing nowrap
 				</label>
 				
 				<div class="result content dark">
-					<pre><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a></pre>
+{% highlight bash %}
+brew install duckdb
+{% endhighlight %}
 				</div>
 				
 				<div class="bottombar">
@@ -314,11 +316,11 @@ body_class: landing nowrap
 
 
 
-<div class="quick-installation">
+<div id="quick-installation">
 
 <div data-install="python">
-{% highlight console %}
-pip install duckdb=={{ site.currentduckdbversion }}
+{% highlight bash %}
+pip install duckdb
 {% endhighlight %}
 </div>
 
@@ -336,17 +338,16 @@ install.packages("duckdb")
     <version>{{ site.currentduckdbversion }}</version>
 </dependency>
 {% endhighlight %}<br/>
-<a href="https://search.maven.org/artifact/org.duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/jar">More Options</a>
 </div>
 
 <div data-install="nodejs">
-{% highlight console %}
+{% highlight bash %}
 npm install duckdb
 {% endhighlight %}
 </div>
 
 <div data-install="cli macos">
-{% highlight console %}
+{% highlight bash %}
 brew install duckdb
 {% endhighlight %}
 </div>
@@ -356,7 +357,9 @@ brew install duckdb
 </div>
 
 <div data-install="cli win">
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a>
+{% highlight bash %}
+winget install DuckDB.cli
+{% endhighlight %}
 </div>
 
 <div data-install="odbc macos">
