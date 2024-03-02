@@ -1,4 +1,4 @@
-# Find the largest sepals and petals in the Iris data set
+# Find the largest sepals/petals in the Iris data set
 library(duckdb)
 
 con <- dbConnect(duckdb())
