@@ -162,7 +162,7 @@ The data of virtual generated columns is not stored on disk, instead it is compu
 
 The data of stored generated columns is stored on disk and is computed every time the data of their dependencies change (through an insert/update/drop statement).
 
-Currently only the `VIRTUAL` kind is supported, and it is also the default option if the last field is left blank.
+Currently, only the `VIRTUAL` kind is supported, and it is also the default option if the last field is left blank.
 
 ```sql
 -- The simplest syntax for a generated column
