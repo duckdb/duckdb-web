@@ -38,10 +38,7 @@ All official extensions are distributed for the following platforms.
 | `osx_arm64`        | macOS (Apple Silicon: M1, M2, M3 CPUs)   |
 | `windows_amd64`    | Windows on Intel and AMD CPUs (x86_64)   |
 
-> For some Linux ARM distributions (e.g., Python), two different binaries are distributed.
-> These target either the `linux_arm64` or `linux_arm64_gcc4` platforms.
-> Note that extension binaries are distributed for the first, but not the second.
-> Effectively that means that on these platforms your GLIBC version needs to be 2.28 or higher to use the distributed extension binaries.
+> For some Linux ARM distributions (e.g., Python), two different binaries are distributed. These target either the `linux_arm64` or `linux_arm64_gcc4` platforms. Note that extension binaries are distributed for the first, but not the second. Effectively that means that on these platforms your glibc version needs to be 2.28 or higher to use the distributed extension binaries.
 
 Some extensions are distributed for the following platforms:
 
