@@ -124,8 +124,9 @@ DuckDB does not use *explicit SIMD* instructions because they greatly complicate
 
 <div class="answer" markdown="1">
 
-DuckDB supports persistent storage and stores the database as a single file, which includes all tables, views, indexes, macros, etc. present in the database.
+DuckDB supports [persistent storage](/docs/connect/overview#persistent-database) and stores the database as a single file, which includes all tables, views, indexes, macros, etc. present in the database.
 DuckDB's [storage format](/internals/storage) uses a compressed columnar representation, which is compact but allows for efficient bulk updates.
+DuckDB can also run in [in-memory mode](docs/connect/overview#in-memory-database), where no data is persisted to disk.
 
 </div>
 
