@@ -51,6 +51,8 @@ SELECT ARRAY_AGG(surround_with_backticks(name))::VARCHAR AS name, description, i
     THEN ''
     WHEN name='memory_limit' OR name='max_memory'
 	THEN '80% of RAM'
+    WHEN name='secret_directory'
+    THEN '`' || regexp_replace(value, '/(home|Users)/[a-z][-a-z0-9_]*/', '~/') || '`'
 	WHEN name='threads' OR name='worker_threads'
 	THEN '# Cores'
 	WHEN name='TimeZone'
