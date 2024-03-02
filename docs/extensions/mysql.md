@@ -88,7 +88,7 @@ Below is a brief example of how to create a new table in MySQL and load data int
 
 ```sql
 ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE mysql_scanner);
-CREATE TABLE mysql_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE mysql_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO mysql_db.tbl VALUES (42, 'DuckDB');
 ```
 
@@ -106,7 +106,7 @@ Below is a list of supported operations.
 ### `CREATE TABLE`
 
 ```sql
-CREATE TABLE mysql_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE mysql_db.tbl (id INTEGER, name VARCHAR);
 ```
 
 ### `INSERT INTO`
@@ -174,7 +174,7 @@ CREATE VIEW mysql_db.v1 AS SELECT 42;
 
 ```sql
 CREATE SCHEMA mysql_db.s1;
-CREATE TABLE mysql_db.s1.integers(i INT);
+CREATE TABLE mysql_db.s1.integers (i INT);
 INSERT INTO mysql_db.s1.integers VALUES (42);
 SELECT * FROM mysql_db.s1.integers;
 ```
@@ -193,7 +193,7 @@ DROP SCHEMA mysql_db.s1;
 ### Transactions
 
 ```sql
-CREATE TABLE mysql_db.tmp(i INTEGER);
+CREATE TABLE mysql_db.tmp (i INTEGER);
 BEGIN;
 INSERT INTO mysql_db.tmp VALUES (42);
 SELECT * FROM mysql_db.tmp;

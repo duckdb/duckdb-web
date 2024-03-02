@@ -121,7 +121,7 @@ Below is a brief example of how to create a new table in Postgres and load data 
 
 ```sql
 ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
-CREATE TABLE postgres_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE postgres_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```
 
@@ -137,7 +137,7 @@ Below is a list of supported operations.
 ### `CREATE TABLE`
 
 ```sql
-CREATE TABLE postgres_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE postgres_db.tbl (id INTEGER, name VARCHAR);
 ```
 
 ### `INSERT INTO`
@@ -205,7 +205,7 @@ CREATE VIEW postgres_db.v1 AS SELECT 42;
 
 ```sql
 CREATE SCHEMA postgres_db.s1;
-CREATE TABLE postgres_db.s1.integers(i INT);
+CREATE TABLE postgres_db.s1.integers (i INT);
 INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
 ```
@@ -223,7 +223,7 @@ DROP SCHEMA postgres_db.s1;
 ### Transactions
 
 ```sql
-CREATE TABLE postgres_db.tmp(i INTEGER);
+CREATE TABLE postgres_db.tmp (i INTEGER);
 BEGIN;
 INSERT INTO postgres_db.tmp VALUES (42);
 SELECT * FROM postgres_db.tmp;
