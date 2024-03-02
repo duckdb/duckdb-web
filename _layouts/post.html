@@ -89,7 +89,7 @@
 						</div>
 						<section class="blog recentposts">
 							<div class="wrap">
-								<h1>Recent Posts</h1>
+								<h1>Recent posts</h1>
 								<div class="newstileswrap">
 									{% for post in site.posts limit:3 %}
 										{% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
@@ -108,7 +108,7 @@
 										</div>
 									{% endfor %}
 								</div>
-								<a href="{{ site.url }}{{ site.baseurl }}/news" class="button transparent arrow-right">All Blog Posts <span></span></a>
+								<a href="{{ site.url }}{{ site.baseurl }}/news" class="button transparent arrow-right">All blog posts <span></span></a>
 							</div>
 						</section>
 					{% endif %}
