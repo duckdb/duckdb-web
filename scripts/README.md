@@ -28,7 +28,9 @@ Run the script as follows:
 
 ### Using DuckDB `main`
 
-Build DuckDB and install the in-tree. Go to the DuckDB directory and run:
+Build DuckDB and install the in-tree extensions.
+
+Go to the DuckDB directory and run:
 
 ```bash
 GEN=ninja EXTENSION_CONFIGS=".github/config/in_tree_extensions.cmake" make
@@ -43,3 +45,5 @@ Run the script as follows:
 ```bash
 ./scripts/generate_all_docs.sh <path_to_duckdb_source_directory>
 ```
+
+For a detailed guide on how to disable/enable extensions during build, see [Building and Installing Extensions from Source](https://duckdb.org/dev/building#building-and-installing-extensions-from-source).
