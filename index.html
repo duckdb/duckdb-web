@@ -109,12 +109,12 @@ body_class: landing nowrap
 			<div class="window">
 				<div class="topbar environment">
 					<ul>
-						<li data-id="cli" class="active">Command line</li>
-						<li data-id="python">Python</li>
-						<li data-id="r">R</li>
-						<li data-id="java">Java</li>
-						<li data-id="nodejs">Node.js</li>
-						<li data-id="odbc">ODBC</li>
+						<li data-client="cli" class="active">Command line</li>
+						<li data-client="python">Python</li>
+						<li data-client="r">R</li>
+						<li data-client="java">Java</li>
+						<li data-client="nodejs">Node.js</li>
+						<li data-client="odbc">ODBC</li>
 					</ul>
 				</div>
 				<label class="onlymobile">
@@ -316,7 +316,7 @@ brew install duckdb
 
 
 
-<div class="quick-installation">
+<div id="quick-installation">
 
 <div data-install="python">
 {% highlight bash %}
