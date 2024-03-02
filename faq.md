@@ -120,12 +120,12 @@ DuckDB does not use *explicit SIMD* instructions because they greatly complicate
 
 <div class="qa-wrap" markdown="1">
 
-### Does DuckDB support persistent storage?
+### Can DuckDB save data to disk?
 
 <div class="answer" markdown="1">
 
-DuckDB can persist the database into a single file, which includes all tables, views, indexes, macros, etc. stored in the database.
-DuckDB's [storag format](/internals/storage) uses a compressed columnar representation, which is compact but allows for efficient bulk updates.
+DuckDB supports persistent storage and stores the database as a single file, which includes all tables, views, indexes, macros, etc. present in the database.
+DuckDB's [storage format](/internals/storage) uses a compressed columnar representation, which is compact but allows for efficient bulk updates.
 
 </div>
 
