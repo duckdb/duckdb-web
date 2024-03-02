@@ -665,10 +665,10 @@ $(document).ready(function(){
 	}
 
 	if( $('section.welcome').length ){
-		$('.demo.window ul.lang li').click(function(){
-			$('.demo.window ul.lang li.active').removeClass('active');
+		$('.demo.window .topbar > ul.lang > li').click(function(){
+			$('.demo.window .topbar > ul.lang > li.active').removeClass('active');
 			$(this).addClass('active');
-			var languageChange = $('.demo.window ul.lang li.active').attr('data-language');
+			var languageChange = $(this).attr('data-language');
 			var dropdown = $('.dropdown.hero-demo').find('div[data-language='+languageChange+']').html();
 			$('.demo.window .bottombar #example-select').html(dropdown);
 			updateExample();
@@ -679,10 +679,10 @@ $(document).ready(function(){
 	}
 
 	if( $('section#quickinstall').length ){
-		$('.install.window.environment ul, li').click(function(){
-			$('.install.window.environment ul, li.active').removeClass('active');
+		$('.install > .window > .environment > ul > li').click(function(){
+			$('.install > .window > .environment > ul > li.active').removeClass('active');
 			$(this).addClass('active');
-			var client = $('.install.window.environment ul, li.active').attr('data-client');
+			var client = $(this).attr('data-client');
 
 			var installation = $('#quick-installation').find('div[data-install="'+client+' '+OSdatid+'"]').html();
 			if (installation === undefined) {
