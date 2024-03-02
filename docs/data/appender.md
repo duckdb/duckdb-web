@@ -59,6 +59,11 @@ appender.AppendRow(
 );
 ```
 
+## Commit Frequency
+
+By default, the appender performs a commits every 204,800 rows.
+You can change this by explicitly using [transactions](../sql/statements/transactions) and surrounding your batches of `AppendRow` calls by `BEGIN TRANSACTION` and `COMMIT` statements.
+
 ## Handling Constraint Violations
 
 If the Appender encounters a `PRIMARY KEY` conflict or a `UNIQUE` constraint violation, it fails and returns the following error:
