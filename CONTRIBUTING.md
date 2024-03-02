@@ -97,7 +97,8 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
     │    42 │
     └───────┘
     ```
-    ````    
+    ````
+* To specify placeholders, use the left angle `⟨` and right angle `⟩` characters instead of the artihmetic comparison characters `<` and `>`. For example: `SELECT * FROM ⟨your_table_name⟩`.
 
 ### Python Style
 
