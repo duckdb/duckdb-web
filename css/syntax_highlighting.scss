@@ -11,8 +11,8 @@
 	font-family: $fontMonoItalic;
 }
 
-// keywords
-.highlight :is(.k, .kc, .kd, .kn, .kr, .kt, .kv){
+// keywords and properties
+.highlight :is(.k, .kc, .kd, .kn, .kr, .kt, .kv, .py){
 	color: #0098dd;
 	font-family: $fontMonoBold;
 }
@@ -42,12 +42,6 @@
 // class names
 .highlight :is(.nc, .nv){
 	color: #d52753;
-}
-
-// property names
-.highlight :is(.py){
-	color: #a05a48;
-	font-family: $fontMonoBold;
 }
 
 // punctuation
