@@ -166,7 +166,7 @@ Below is a brief example of how to create a new SQLite database and load data in
 
 ```sql
 ATTACH 'new_sqlite_database.db' AS sqlite_db (TYPE SQLITE);
-CREATE TABLE sqlite_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE sqlite_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
 ```
 
@@ -192,7 +192,7 @@ Below is a list of supported operations.
 ### `CREATE TABLE`
 
 ```sql
-CREATE TABLE sqlite_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE sqlite_db.tbl (id INTEGER, name VARCHAR);
 ```
 
 ### `INSERT INTO`
@@ -255,7 +255,7 @@ CREATE VIEW sqlite_db.v1 AS SELECT 42;
 ### Transactions
 
 ```sql
-CREATE TABLE sqlite_db.tmp(i INTEGER);
+CREATE TABLE sqlite_db.tmp (i INTEGER);
 BEGIN;
 INSERT INTO sqlite_db.tmp VALUES (42);
 SELECT * FROM sqlite_db.tmp;

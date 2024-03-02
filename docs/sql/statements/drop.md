@@ -27,7 +27,7 @@ By default (or if the `RESTRICT` clause is provided), the entry will not be drop
 
 ```sql
 CREATE SCHEMA myschema;
-CREATE TABLE myschema.t1(i INTEGER);
+CREATE TABLE myschema.t1 (i INTEGER);
 -- ERROR: Cannot drop myschema because the table myschema.t1 depends on it.
 DROP SCHEMA myschema;
 -- Cascade drops both myschema and myschema.t1
