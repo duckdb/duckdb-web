@@ -42,6 +42,7 @@ plugins:
   - jekyll-github-metadata
   - jekyll-git-hash
   - jekyll-last-modified-at
+  - jekyll-toc
 excerpt_separator: <!--more-->
 
 last-modified-at:
