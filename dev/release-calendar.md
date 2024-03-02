@@ -17,6 +17,10 @@ The planned dates of upcoming DuckDB releases are shown below.
 
 <div class="narrow_table"></div>
 
+> DuckDB follows [semantic versioning](https://semver.org/spec/v2.0.0.html).
+> Prior to version 0.4.0, all releases (including patch versions) received a codename.
+> Since version 0.4.0, only major and minor versions get a codename.
+
 | Date | Version | Codename | Named after |
 |--|--|--|--|
 | 2024-02-13 | [0.10.0](https://github.com/duckdb/duckdb/releases/tag/v0.10.0) | Fusca | [Velvet scoter _(Melanitta fusca)_](https://en.wikipedia.org/wiki/Velvet_scoter) |
