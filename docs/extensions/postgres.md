@@ -106,10 +106,10 @@ SELECT * FROM uuids;
 
 It might be desirable to create a copy of the Postgres databases in DuckDB to prevent the system from re-reading the tables from Postgres continuously, particularly for large tables.
 
-Data can be copied over from Postgres to DuckDB using standard SQL, for example:
+Data can be copied over from Postgres to DuckDB using standard SQL. For example, if your DuckDB database is called `duckdb_db` and the Postgres database is called `postgres_db`, the following command copies the table `postgres_tbl` Postgres table to the DuckDB table `duckdb_tbl`:
 
 ```sql
-CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
+CREATE TABLE duckdb_db.duckdb_tbl AS FROM postgres_db.postgres_tbl;
 ```
 
 
