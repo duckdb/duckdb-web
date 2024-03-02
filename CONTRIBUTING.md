@@ -61,7 +61,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Do not hard-wrap lines in blocks of text.
 * Format code blocks with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`).
 * To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT HERE \`\`\`.
-* Quoted blocks (lines starting with `>`) are rendered as [a "Note" box](https://duckdb.org/docs/archive/0.8.1/guides/python/filesystems).
+* Quoted blocks (lines starting with `>`) are rendered as [a colored box](https://duckdb.org/docs/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`.
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `).
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
