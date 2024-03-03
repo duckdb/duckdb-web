@@ -14,7 +14,7 @@
 				<div> {{ site.currentduckdbversion }} <span class="versioninfo">(stable release)</span></div>
 			</li>
 			<li data-id=".main">
-				<div>GitHub main <span class="versioninfo">(nightly build)</span></div>
+				<div>Nightly build <span class="versioninfo">(bleeding edge)</span></div>
 			</li>
 		</ul>
 	</div>
@@ -101,7 +101,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="stable java direct">
-		<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/duckdb_jdbc-{{ site.currentduckdbversion }}.jar">duckdb_jdbc-{{ site.currentduckdbversion }}.jar</a>
+		<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/duckdb_jdbc-{{ site.currentduckdbversion }}.jar">https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/duckdb_jdbc-{{ site.currentduckdbversion }}.jar</a>
 	</div>
 
 	<div class="stable js">
@@ -114,10 +114,6 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	
 	<div class="stable go">
 		{% highlight bash %}go get github.com/marcboeker/go-duckdb{% endhighlight %}
-	</div>
-	
-	<div class="stable cplusplus source direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-src.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-src.zip</a>
 	</div>
 
 	<div class="stable cli source">
@@ -164,7 +160,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	<div class="stable cli binary linux package_manager">
 		DuckDB is currently not available via apt/yum.
 		<br>
-		Please use the following binary:
+		Please use one of the following binaries:
 		<br>
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a>
 		<br>
@@ -228,7 +224,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="stable odbc binary macos direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">duckdb_odbc-osx-universal.zip</a>
+		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip</a>
 	</div>
 
 	<div class="stable odbc binary win x86_64 direct">
@@ -247,7 +243,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="main java package_manager">
-		Java dev builds are available in the sonatype snapshots repository, which can be accessed with the following:
+		Nightly Java builds are available in the Sonatype snapshots repository, which can be accessed as follows:
 		{% highlight xml %}
 <dependency>
     <groupId>org.duckdb</groupId>
@@ -271,36 +267,23 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="main java direct">
-		<a href="https://artifacts.duckdb.org/latest/java-jars.zip">java-jars.zip</a>
+		<a href="https://artifacts.duckdb.org/latest/java-jars.zip">https://artifacts.duckdb.org/latest/java-jars.zip</a>
 	</div>
 
 	<div class="main js package_manager">
 {% highlight bash %}npm install duckdb@next{% endhighlight %}
 	</div>
 
-	<div class="main rust source direct">
-		<a href="https://github.com/duckdb/duckdb-rs" target="_blank">https://github.com/duckdb/duckdb-rs</a>
-	</div>
-
-	<div class="main go source direct">
-		<a href="https://github.com/marcboeker/go-duckdb" target="_blank">https://github.com/marcboeker/go-duckdb</a>
-		<br/><br/>
-	</div>
-
-	<div class="main cplusplus source direct">
-		<a href="https://github.com/duckdb/duckdb" target="_blank">https://github.com/duckdb/duckdb</a>
-	</div>
-
 	<div class="main cli cplusplus binary linux odbc x86_64 direct">
-		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip" target="_blank">duckdb-binaries-linux.zip</a>
+		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip</a>
 	</div>
 
 	<div class="main cli cplusplus binary linux odbc arm64 direct">
-		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip" target="_blank">duckdb-binaries-linux-aarch64.zip</a>
+		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip</a>
 	</div>
 
 	<div class="main cli cplusplus odbc binary macos direct">
-		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip" target="_blank">duckdb-binaries-osx.zip</a>
+		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip</a>
 	</div>
 
 	<div class="main cli cplusplus odbc binary linux macos win package_manager">
@@ -308,7 +291,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="main cli cplusplus binary win odbc x86_64 direct">
-		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip" target="_blank">duckdb-binaries-windows.zip</a>
+		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip</a>
 	</div>
 
 	<div class="example python">
