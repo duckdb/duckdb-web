@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: DuckDB with Polars
+redirect_from:
+- docs/archive/0.6.1/guides/python/polars
 selected: DuckDB with Polars
+title: DuckDB with Polars
 ---
 
 [Polars](https://github.com/pola-rs/polars) is a DataFrames library built in Rust with bindings for Python and Node.js. It uses [Apache Arrow's columnar format](https://arrow.apache.org/docs/format/Columnar.html) as its memory model. 
@@ -119,4 +121,4 @@ output = (
 ).to_arrow()
 ```
 
-To learn more about Polars, feel free to explore their [Python API Reference](https://pola-rs.github.io/polars/py-polars/html/reference/index.html)! 
+To learn more about Polars, feel free to explore their [Python API Reference](https://pola-rs.github.io/polars/py-polars/html/reference/index.html)!

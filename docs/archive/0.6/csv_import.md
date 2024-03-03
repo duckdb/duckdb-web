@@ -1,9 +1,12 @@
 ---
 layout: docu
-title: CSV Import/Export
-selected: Documentation/CSV Import
 railroad: statements/copy.js
+redirect_from:
+- docs/archive/0.6.1/csv_import
+selected: Documentation/CSV Import
+title: CSV Import/Export
 ---
+
 `COPY` moves data between DuckDB tables and external Comma Separated Value (CSV) files.
 
 # CSV Import

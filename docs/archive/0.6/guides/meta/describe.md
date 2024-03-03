@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Describe
+redirect_from:
+- docs/archive/0.6.1/guides/meta/describe
 selected: Describe
+title: Describe
 ---
 
 # How to view the schema of the result of a query

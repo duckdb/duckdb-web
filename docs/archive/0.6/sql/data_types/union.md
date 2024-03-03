@@ -1,8 +1,10 @@
 ---
-layout: docu
-title: Union
-selected: Documentation/Data Types/Union
 expanded: Nested
+layout: docu
+redirect_from:
+- docs/archive/0.6.1/sql/data_types/union
+selected: Documentation/Data Types/Union
+title: Union
 ---
 
 ## Union Data Type
@@ -83,4 +85,3 @@ Since `UNION` types are implemented on top of `STRUCT` types internally, they ca
 
 ## Functions
 See [Nested Functions](../../sql/functions/nested#union-functions).
-    

@@ -1,8 +1,10 @@
 ---
-layout: docu
-title: Date Format
-selected: Documentation/Functions/Date Format
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.6.1/sql/functions/dateformat
+selected: Documentation/Functions/Date Format
+title: Date Format
 ---
 
 The `strftime` and `strptime` functions can be used to convert between dates/timestamps and strings. This is often required when parsing CSV files, displaying output to the user or transferring information between programs. Because there are many possible date representations, these functions accept a format string that describes how the date or timestamp should be structured.

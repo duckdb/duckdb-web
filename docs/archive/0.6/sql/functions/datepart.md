@@ -1,8 +1,10 @@
 ---
-layout: docu
-title: Date Parts
-selected: Documentation/Functions/Date Parts
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.6.1/sql/functions/datepart
+selected: Documentation/Functions/Date Parts
+title: Date Parts
 ---
 
 The `date_part` and `date_diff` and `date_trunc` functions can be used to manipulate the fields of temporal types.

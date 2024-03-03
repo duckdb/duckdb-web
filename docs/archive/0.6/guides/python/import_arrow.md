@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Import From Apache Arrow
+redirect_from:
+- docs/archive/0.6.1/guides/python/import_arrow
 selected: Import From Apache Arrow
+title: Import From Apache Arrow
 ---
 
 # How to create a table from Apache Arrow
@@ -23,4 +25,3 @@ con.execute("CREATE TABLE my_table AS SELECT * FROM my_arrow")
 # insert into the table "my_table" from the DataFrame "my_arrow"
 con.execute("INSERT INTO my_table SELECT * FROM my_arrow")
 ```
-

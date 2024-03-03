@@ -1,11 +1,15 @@
 ---
-layout: docu
-title: FROM Clause
-selected: Documentation/SQL/Query Syntax/From
+blurb: The FROM clause can contain a single table, a combination of multiple tables
+  that are joined together, or another SELECT query inside a subquery node.
 expanded: SQL
+layout: docu
 railroad: query_syntax/from.js
-blurb: The FROM clause can contain a single table, a combination of multiple tables that are joined together, or another SELECT query inside a subquery node.
+redirect_from:
+- docs/archive/0.6.1/sql/query_syntax/from
+selected: Documentation/SQL/Query Syntax/From
+title: FROM Clause
 ---
+
 The `FROM` clause specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together, or another `SELECT` query inside a subquery node.
 
 ### Examples

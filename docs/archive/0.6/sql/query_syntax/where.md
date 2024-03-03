@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: WHERE Clause
-selected: Documentation/SQL/Query Syntax/Where
 expanded: SQL
+layout: docu
 railroad: query_syntax/where.js
+redirect_from:
+- docs/archive/0.6.1/sql/query_syntax/where
+selected: Documentation/SQL/Query Syntax/Where
+title: WHERE Clause
 ---
+
 The `WHERE` clause specifies any filters to apply to the data. This allows you to select only a subset of the data in which you are interested. Logically the `WHERE` clause is applied immediately after the `FROM` clause.
 
 ## Examples

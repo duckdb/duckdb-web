@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Date Types
-selected: Documentation/Data Types/Date
-expanded: Data Types
 blurb: A date specifies a combination of year, month and day.
+expanded: Data Types
+layout: docu
+redirect_from:
+- docs/archive/0.6.1/sql/data_types/date
+selected: Documentation/Data Types/Date
+title: Date Types
 ---
+
 | Name   | Aliases | Description                     |
 |:-------|:--------|:--------------------------------|
 | `DATE` |         | calendar date (year, month day) |

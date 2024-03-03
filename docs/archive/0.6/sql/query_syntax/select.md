@@ -1,11 +1,15 @@
 ---
-layout: docu
-title: SELECT Clause
-selected: Documentation/SQL/Query Syntax/Select
+blurb: The SELECT clause specifies the list of columns that will be returned by the
+  query.
 expanded: SQL
+layout: docu
 railroad: query_syntax/select.js
-blurb: The SELECT clause specifies the list of columns that will be returned by the query.
+redirect_from:
+- docs/archive/0.6.1/sql/query_syntax/select
+selected: Documentation/SQL/Query Syntax/Select
+title: SELECT Clause
 ---
+
 The `SELECT` clause specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions.
 
 ### Examples

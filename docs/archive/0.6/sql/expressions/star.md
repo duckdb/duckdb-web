@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Star Expression
-selected: Documentation/Expressions/Star
 expanded: Expressions
+layout: docu
 railroad: expressions/star.js
+redirect_from:
+- docs/archive/0.6.1/sql/expressions/star
+selected: Documentation/Expressions/Star
+title: Star Expression
 ---
 
 <div id="rrdiagram"></div>

@@ -1,8 +1,10 @@
 ---
-layout: docu
-title: Struct
-selected: Documentation/Data Types/Struct
 expanded: Nested
+layout: docu
+redirect_from:
+- docs/archive/0.6.1/sql/data_types/struct
+selected: Documentation/Data Types/Struct
+title: Struct
 ---
 
 ## Struct Data Type

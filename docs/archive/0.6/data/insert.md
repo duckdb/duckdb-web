@@ -1,7 +1,10 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.6.1/data/insert
 title: Insert Statements
 ---
+
 Insert statements are the standard way of loading data into a relational database. When using insert statements, the values are supplied row-by-row. While simple, there is significant overhead involved in parsing and processing individual insert statements. This makes them very inefficient for bulk insertion.
   
 > As a rule-of-thumb, avoid insert statements when inserting more than a few rows (i.e. avoid using insert statements as part of a loop).

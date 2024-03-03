@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Create Macro
-selected: Documentation/SQL/Create Macro
 expanded: SQL
+layout: docu
 railroad: statements/createmacro.js
+redirect_from:
+- docs/archive/0.6.1/sql/statements/create_macro
+selected: Documentation/SQL/Create Macro
+title: Create Macro
 ---
+
 The `CREATE MACRO` statement creates a scalar macro in the catalog.
 
 ### Examples

@@ -1,10 +1,14 @@
 ---
-layout: docu
-title: Enum Types
-selected: Documentation/Data Types/Enum
+blurb: The ENUM type represents a dictionary data structure with all possible unique
+  values of a column.
 expanded: Data Types
-blurb: The ENUM type represents a dictionary data structure with all possible unique values of a column.
+layout: docu
+redirect_from:
+- docs/archive/0.6.1/sql/data_types/enum
+selected: Documentation/Data Types/Enum
+title: Enum Types
 ---
+
 | Name | Description |
 |:---|:---|
 | ENUM | Dictionary Encoding representing all possible string values of a column. |

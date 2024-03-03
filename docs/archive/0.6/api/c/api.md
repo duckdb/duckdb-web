@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: C API - Complete API
+redirect_from:
+- docs/archive/0.6.1/api/c/api
 selected: API Reference
+title: C API - Complete API
 ---
 
 ## **API Reference**
@@ -4795,4 +4797,3 @@ on the task state.
 The task state to clean up
 
 <br>
-

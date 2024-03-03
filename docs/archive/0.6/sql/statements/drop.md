@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Drop Statement
-selected: Documentation/SQL/Drop
 expanded: SQL
+layout: docu
 railroad: statements/drop.js
+redirect_from:
+- docs/archive/0.6.1/sql/statements/drop
+selected: Documentation/SQL/Drop
+title: Drop Statement
 ---
+
 The `DROP` statement removes a catalog entry added previously with the `CREATE` command.
 
 ### Examples
@@ -30,4 +33,3 @@ DROP SCHEMA myschema;
 -- Cascade drops both myschema and myschema.1
 DROP SCHEMA myschema CASCADE;
 ```
-

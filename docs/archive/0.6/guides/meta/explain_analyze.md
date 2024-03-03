@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Profile Queries
+redirect_from:
+- docs/archive/0.6.1/guides/meta/explain_analyze
 selected: Profile Queries
+title: Profile Queries
 ---
 
 In order to profile a query, prepend `EXPLAIN ANALYZE` to a query.

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Summarize
+redirect_from:
+- docs/archive/0.6.1/guides/meta/summarize
 selected: Summarize
+title: Summarize
 ---
 
 # How to quickly get a feel for a dataset using summarize

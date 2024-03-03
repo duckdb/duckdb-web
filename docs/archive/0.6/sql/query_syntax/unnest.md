@@ -1,8 +1,10 @@
 ---
-layout: docu
-title: UNNEST
-selected: Documentation/SQL/Query Syntax/UNNEST
 expanded: SQL
+layout: docu
+redirect_from:
+- docs/archive/0.6.1/sql/query_syntax/unnest
+selected: Documentation/SQL/Query Syntax/UNNEST
+title: UNNEST
 ---
 
 The `UNNEST` function is used to unnest a list by one level. The function can be used as a regular scalar function, but only in the `SELECT` clause. `UNNEST` is a special function in the sense that it changes the cardinality of the result. The result of the `UNNEST` function is one tuple per entry in the list.

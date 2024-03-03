@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Delete Statement
-selected: Documentation/SQL/Delete
 expanded: SQL
+layout: docu
 railroad: statements/delete.js
+redirect_from:
+- docs/archive/0.6.1/sql/statements/delete
+selected: Documentation/SQL/Delete
+title: Delete Statement
 ---
+
 The `DELETE` statement removes rows from the table identified by the table-name.
 
 ### Examples

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: S3 or GCS Parquet Import
+redirect_from:
+- docs/archive/0.6.1/guides/import/s3_import
 selected: S3 or GCS Parquet Import
+title: S3 or GCS Parquet Import
 ---
 
 # How to load a Parquet file directly from S3 or GCS

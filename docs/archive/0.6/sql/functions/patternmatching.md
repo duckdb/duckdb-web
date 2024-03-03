@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Pattern Matching
-selected: Documentation/Functions/Pattern Matching
 expanded: Functions
+layout: docu
 railroad: expressions/like.js
+redirect_from:
+- docs/archive/0.6.1/sql/functions/patternmatching
+selected: Documentation/Functions/Pattern Matching
+title: Pattern Matching
 ---
+
 ## Pattern Matching
 There are four separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), a `GLOB` operator, and POSIX-style regular expressions.
 

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CSV Import
+redirect_from:
+- docs/archive/0.6.1/guides/import/csv_import
 selected: CSV Import
+title: CSV Import
 ---
 
 # How to load a CSV file into a table

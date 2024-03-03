@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: GROUP BY Clause
-selected: Documentation/SQL/Query Syntax/Group By
 expanded: SQL
+layout: docu
 railroad: query_syntax/groupby.js
+redirect_from:
+- docs/archive/0.6.1/sql/query_syntax/groupby
+selected: Documentation/SQL/Query Syntax/Group By
+title: GROUP BY Clause
 ---
+
 The `GROUP BY` clause specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause. If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
 
 When a `GROUP BY` clause is specified, all tuples that have matching data in the grouping columns (i.e. all tuples that belong to the same group) will be combined. The values of the grouping columns themselves are unchanged, and any other columns can be combined using an aggregate function (such as `COUNT`, `SUM`, `AVG`, etc).

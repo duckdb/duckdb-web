@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Execute SQL
+redirect_from:
+- docs/archive/0.6.1/guides/python/execute_sql
 selected: Execute SQL
+title: Execute SQL
 ---
 
 # How to execute SQL queries
@@ -25,4 +27,3 @@ By default, a list of Python objects is returned. Use `df` if you would like the
 ```py
 results = con.execute("SELECT 42").df()
 ```
-

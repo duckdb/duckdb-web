@@ -1,7 +1,11 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.6.1/data/overview
+- docs/archive/0.6.1/data
 title: Importing Data
 ---
+
 The first step to using a database system is to insert data into that system. DuckDB provides several data ingestion methods that allow you to easily and efficiently fill up the database. In this section, we provide an overview of these methods so you can select which one is correct for you.
 
 ### Insert Statements

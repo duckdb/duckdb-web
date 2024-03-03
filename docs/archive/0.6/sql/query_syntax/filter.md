@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: FILTER Clause
-selected: Documentation/SQL/Query Syntax/Filter
 expanded: SQL
+layout: docu
 railroad: query_syntax/filter.js
+redirect_from:
+- docs/archive/0.6.1/sql/query_syntax/filter
+selected: Documentation/SQL/Query Syntax/Filter
+title: FILTER Clause
 ---
+
 The `FILTER` clause may optionally follow an aggregate function in a `SELECT` statement. This will filter the rows of data that are fed into the aggregate function in the same way that a `WHERE` clause filters rows, but localized to the specific aggregate function. `FILTER`s are not currently able to be used when the aggregate function is in a windowing context. 
 
 There are multiple types of situations where this is useful, including when evaluating multiple aggregates with different filters, and when creating a pivoted view of a dataset. `FILTER` provides a cleaner syntax for pivoting data when compared with the more traditional `CASE WHEN` approach discussed below. 

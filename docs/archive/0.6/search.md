@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Search
+redirect_from:
+- docs/archive/0.6.1/search
 selected: Search
+title: Search
 ---
 
 <link rel="stylesheet" href="{{ site.baseurl }}/css/search.css">

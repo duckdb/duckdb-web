@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Create View
-selected: Documentation/SQL/Create View
 expanded: SQL
+layout: docu
 railroad: statements/createview.js
+redirect_from:
+- docs/archive/0.6.1/sql/statements/create_view
+selected: Documentation/SQL/Create View
+title: Create View
 ---
+
 The `CREATE VIEW` statement defines a new view in the catalog.
 
 ### Examples
@@ -25,4 +28,3 @@ CREATE VIEW v1(a) AS SELECT 42;
 `CREATE OR REPLACE VIEW` is similar, but if a view of the same name already exists, it is replaced.
 
 If a schema name is given then the view is created in the specified schema. Otherwise it is created in the current schema. Temporary views exist in a special schema, so a schema name cannot be given when creating a temporary view. The name of the view must be distinct from the name of any other view or table in the same schema.
-

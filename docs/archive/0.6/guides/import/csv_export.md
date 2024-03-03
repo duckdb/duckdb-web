@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CSV Export
+redirect_from:
+- docs/archive/0.6.1/guides/import/csv_export
 selected: CSV Export
+title: CSV Export
 ---
 
 # How to export a table to a CSV file

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Guides
+redirect_from:
+- docs/archive/0.6.1/guides/index
 selected: Guides
+title: Guides
 ---
 
 The guides section contains compact how-to guides that are focused on achieving a single goal. For an in-depth reference see the Documentation section.

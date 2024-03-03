@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: S3 Parquet Export
+redirect_from:
+- docs/archive/0.6.1/guides/import/s3_export
 selected: S3 Parquet Export
+title: S3 Parquet Export
 ---
 
 # How to write a Parquet file directly to S3 or GCS

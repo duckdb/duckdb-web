@@ -1,8 +1,11 @@
 ---
 layout: docu
-title: NodeJS API
+redirect_from:
+- docs/archive/0.6.1/api/nodejs/reference
 selected: Client APIs
+title: NodeJS API
 ---
+
 <a name="module_duckdb"></a>
 
 ## duckdb
@@ -671,4 +674,4 @@ Currently ignored
 ### duckdb~OPEN\_PRIVATECACHE : <code>number</code>
 Currently ignored
 
-**Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
+**Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)

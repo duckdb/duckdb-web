@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: DBeaver SQL IDE
+redirect_from:
+- docs/archive/0.6.1/guides/sql_editors/dbeaver
 selected: DBeaver SQL IDE
+title: DBeaver SQL IDE
 ---
 
 # How to set up DBeaver SQL IDE for DuckDB

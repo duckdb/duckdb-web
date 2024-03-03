@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Create Table
-selected: Documentation/SQL/Create Table
 expanded: SQL
+layout: docu
 railroad: statements/createtable.js
+redirect_from:
+- docs/archive/0.6.1/sql/statements/create_table
+selected: Documentation/SQL/Create Table
+title: Create Table
 ---
+
 The `CREATE TABLE` statement creates a table in the catalog.
 
 ### Examples

@@ -1,8 +1,10 @@
 ---
-layout: docu
-title: Map
-selected: Documentation/Data Types/Map
 expanded: Nested
+layout: docu
+redirect_from:
+- docs/archive/0.6.1/sql/data_types/map
+selected: Documentation/Data Types/Map
+title: Map
 ---
 
 ## Map Data Type

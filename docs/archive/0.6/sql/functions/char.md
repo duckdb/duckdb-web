@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Text Functions
-selected: Documentation/Functions/Text Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.6.1/sql/functions/char
+selected: Documentation/Functions/Text Functions
+title: Text Functions
 ---
+
 This section describes functions and operators for examining and manipulating string values. `␣` denotes a space character.
 
 | Function | Description | Example | Result |

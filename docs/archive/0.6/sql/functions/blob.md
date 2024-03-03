@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Blob Functions
-selected: Documentation/Functions/Blob Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.6.1/sql/functions/blob
+selected: Documentation/Functions/Blob Functions
+title: Blob Functions
 ---
+
 This section describes functions and operators for examining and manipulating blob values.
 
 | Function | Description | Example | Result |
