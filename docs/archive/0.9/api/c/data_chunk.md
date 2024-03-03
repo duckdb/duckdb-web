@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/c/data_chunk
+- docs/archive/0.9.1/api/c/data_chunk
 title: C API - Data Chunks
 ---
 

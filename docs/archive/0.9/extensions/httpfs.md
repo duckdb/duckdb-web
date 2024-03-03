@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/extensions/httpfs
+- docs/archive/0.9.1/extensions/httpfs
 title: httpfs Extension
 ---
 

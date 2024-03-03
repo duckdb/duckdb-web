@@ -3,6 +3,8 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/extensions/overview
 - docs/archive/0.9.2/extensions
+- docs/archive/0.9.1/extensions/overview
+- docs/archive/0.9.1/extensions
 title: Extensions
 ---
 

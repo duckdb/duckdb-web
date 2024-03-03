@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/data/csv/auto_detection
+- docs/archive/0.9.1/data/csv/auto_detection
 title: CSV Auto Detection
 ---
 

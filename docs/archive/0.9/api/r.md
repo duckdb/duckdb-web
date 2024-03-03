@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/r
+- docs/archive/0.9.1/api/r
 title: R API
 ---
 

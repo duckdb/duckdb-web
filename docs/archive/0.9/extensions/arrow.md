@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/extensions/arrow
+- docs/archive/0.9.1/extensions/arrow
 title: Arrow Extension
 ---
 

@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/wasm/extensions
+- docs/archive/0.9.1/api/wasm/extensions
 title: Extensions
 ---
 

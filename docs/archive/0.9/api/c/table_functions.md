@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/c/table_functions
+- docs/archive/0.9.1/api/c/table_functions
 title: C API - Table Functions
 ---
 

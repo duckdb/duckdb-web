@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/java
+- docs/archive/0.9.1/api/java
 title: Java JDBC API
 ---
 

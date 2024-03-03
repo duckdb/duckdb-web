@@ -3,6 +3,7 @@ blurb: A time instance represents the time of a day (hour, minute, second, micro
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/time
+- docs/archive/0.9.1/sql/data_types/time
 title: Time Types
 ---
 

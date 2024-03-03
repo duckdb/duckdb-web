@@ -5,6 +5,7 @@ layout: docu
 railroad: query_syntax/from.js
 redirect_from:
 - docs/archive/0.9.2/sql/query_syntax/from
+- docs/archive/0.9.1/sql/query_syntax/from
 title: FROM & JOIN Clauses
 ---
 

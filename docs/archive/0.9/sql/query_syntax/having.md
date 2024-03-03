@@ -3,6 +3,7 @@ layout: docu
 railroad: query_syntax/groupby.js
 redirect_from:
 - docs/archive/0.9.2/sql/query_syntax/having
+- docs/archive/0.9.1/sql/query_syntax/having
 title: HAVING Clause
 ---
 

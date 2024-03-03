@@ -3,6 +3,7 @@ layout: docu
 railroad: statements/alter.js
 redirect_from:
 - docs/archive/0.9.2/sql/statements/alter_table
+- docs/archive/0.9.1/sql/statements/alter_table
 title: Alter Table
 ---
 

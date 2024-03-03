@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/extensions/working_with_extensions
+- docs/archive/0.9.1/extensions/working_with_extensions
 title: Working with Extensions
 ---
 

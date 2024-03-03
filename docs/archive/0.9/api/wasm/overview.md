@@ -4,6 +4,8 @@ redirect_from:
 - /docs/archive/0.9.2/api/wasm
 - docs/archive/0.9.2/api/wasm/overview
 - docs/archive/0.9.2/api/wasm
+- docs/archive/0.9.1/api/wasm/overview
+- docs/archive/0.9.1/api/wasm
 title: DuckDB Wasm
 ---
 

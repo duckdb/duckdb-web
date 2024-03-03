@@ -4,6 +4,8 @@ redirect_from:
 - /docs/archive/0.9.2/data/csv/multiple_files
 - docs/archive/0.9.2/data/multiple_files/overview
 - docs/archive/0.9.2/data/multiple_files
+- docs/archive/0.9.1/data/multiple_files/overview
+- docs/archive/0.9.1/data/multiple_files
 title: Reading Multiple Files
 ---
 

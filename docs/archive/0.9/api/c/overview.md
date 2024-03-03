@@ -3,6 +3,8 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/c/overview
 - docs/archive/0.9.2/api/c
+- docs/archive/0.9.1/api/c/overview
+- docs/archive/0.9.1/api/c
 title: C API - Overview
 ---
 

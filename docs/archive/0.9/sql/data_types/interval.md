@@ -4,6 +4,7 @@ blurb: An interval specifies a period of time measured in units of a specific da
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/interval
+- docs/archive/0.9.1/sql/data_types/interval
 title: Interval Type
 ---
 

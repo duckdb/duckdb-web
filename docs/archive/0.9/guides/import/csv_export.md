@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/import/csv_export
+- docs/archive/0.9.1/guides/import/csv_export
 title: CSV Export
 ---
 

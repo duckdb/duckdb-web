@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/data_viewers/youplot
+- docs/archive/0.9.1/guides/data_viewers/youplot
 title: CLI Charting - Using DuckDB with CLI Tools
 ---
 

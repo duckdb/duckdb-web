@@ -3,6 +3,7 @@ layout: docu
 railroad: statements/vacuum.js
 redirect_from:
 - docs/archive/0.9.2/sql/statements/vacuum
+- docs/archive/0.9.1/sql/statements/vacuum
 title: Vacuum
 ---
 

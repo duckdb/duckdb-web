@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/map
+- docs/archive/0.9.1/sql/data_types/map
 title: Map
 ---
 

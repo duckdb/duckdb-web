@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/information_schema
+- docs/archive/0.9.1/sql/information_schema
 title: Information Schema
 ---
 

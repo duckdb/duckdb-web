@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/c/prepared
+- docs/archive/0.9.1/api/c/prepared
 title: C API - Prepared Statements
 ---
 

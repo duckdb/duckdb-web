@@ -5,6 +5,7 @@ layout: docu
 railroad: statements/unpivot.js
 redirect_from:
 - docs/archive/0.9.2/sql/statements/unpivot
+- docs/archive/0.9.1/sql/statements/unpivot
 title: Unpivot Statement
 ---
 

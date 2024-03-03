@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/python/polars
+- docs/archive/0.9.1/guides/python/polars
 title: DuckDB with Polars
 ---
 

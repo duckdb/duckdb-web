@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/python/data_ingestion
+- docs/archive/0.9.1/api/python/data_ingestion
 title: Data Ingestion
 ---
 

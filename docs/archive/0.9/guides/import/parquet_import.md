@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/import/parquet_import
+- docs/archive/0.9.1/guides/import/parquet_import
 title: Parquet Import
 ---
 

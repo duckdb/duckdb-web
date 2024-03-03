@@ -3,6 +3,7 @@ blurb: The bitstring type are strings of 1's and 0's.
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/bitstring
+- docs/archive/0.9.1/sql/data_types/bitstring
 title: Bitstring Type
 ---
 

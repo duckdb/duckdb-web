@@ -3,6 +3,7 @@ blurb: A date specifies a combination of year, month and day.
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/date
+- docs/archive/0.9.1/sql/data_types/date
 title: Date Types
 ---
 

@@ -5,6 +5,7 @@ layout: docu
 railroad: statements/pivot.js
 redirect_from:
 - docs/archive/0.9.2/sql/statements/pivot
+- docs/archive/0.9.1/sql/statements/pivot
 title: Pivot Statement
 ---
 

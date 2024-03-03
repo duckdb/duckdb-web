@@ -3,6 +3,7 @@ blurb: A reference list for Time Zones
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/timezones
+- docs/archive/0.9.1/sql/data_types/timezones
 title: Time Zones
 ---
 

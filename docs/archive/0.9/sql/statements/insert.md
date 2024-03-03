@@ -3,6 +3,7 @@ layout: docu
 railroad: statements/insert.js
 redirect_from:
 - docs/archive/0.9.2/sql/statements/insert
+- docs/archive/0.9.1/sql/statements/insert
 title: Insert Statement
 ---
 

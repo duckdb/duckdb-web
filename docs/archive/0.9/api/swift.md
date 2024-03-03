@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/swift
+- docs/archive/0.9.1/api/swift
 title: Swift API
 ---
 

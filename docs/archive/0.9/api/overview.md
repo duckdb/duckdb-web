@@ -3,6 +3,8 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/overview
 - docs/archive/0.9.2/api
+- docs/archive/0.9.1/api/overview
+- docs/archive/0.9.1/api
 title: Client APIs Overview
 ---
 

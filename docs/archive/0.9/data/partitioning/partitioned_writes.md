@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/data/partitioning/partitioned_writes
+- docs/archive/0.9.1/data/partitioning/partitioned_writes
 title: Partitioned Writes
 ---
 

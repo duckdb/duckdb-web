@@ -4,6 +4,7 @@ blurb: The blob (Binary Large OBject) type represents an arbitrary binary object
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/blob
+- docs/archive/0.9.1/sql/data_types/blob
 title: Blob Type
 ---
 

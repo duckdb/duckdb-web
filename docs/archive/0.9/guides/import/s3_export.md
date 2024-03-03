@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/import/s3_export
+- docs/archive/0.9.1/guides/import/s3_export
 title: S3 Parquet Export
 ---
 

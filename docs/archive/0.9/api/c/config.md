@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/c/config
+- docs/archive/0.9.1/api/c/config
 title: C API - Configuration
 ---
 

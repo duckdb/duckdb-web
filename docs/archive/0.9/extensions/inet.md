@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/extensions/inet
+- docs/archive/0.9.1/extensions/inet
 title: inet Extension
 ---
 

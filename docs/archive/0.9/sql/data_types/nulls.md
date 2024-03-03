@@ -3,6 +3,7 @@ blurb: The NULL value represents a missing value.
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/nulls
+- docs/archive/0.9.1/sql/data_types/nulls
 title: NULL Values
 ---
 

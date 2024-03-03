@@ -4,6 +4,7 @@ blurb: A timestamp specifies a combination of a date (year, month, day) and a ti
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/timestamp
+- docs/archive/0.9.1/sql/data_types/timestamp
 title: Timestamp Types
 ---
 

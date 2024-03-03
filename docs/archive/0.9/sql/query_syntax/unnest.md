@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/query_syntax/unnest
+- docs/archive/0.9.1/sql/query_syntax/unnest
 title: UNNEST
 ---
 

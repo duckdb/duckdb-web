@@ -3,6 +3,7 @@ blurb: Numeric types are used to store numbers, and come in different shapes and
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/numeric
+- docs/archive/0.9.1/sql/data_types/numeric
 title: Numeric Types
 ---
 

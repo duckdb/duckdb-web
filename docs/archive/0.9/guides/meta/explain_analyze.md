@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/meta/explain_analyze
+- docs/archive/0.9.1/guides/meta/explain_analyze
 title: Profile Queries
 ---
 

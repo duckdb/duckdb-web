@@ -4,6 +4,7 @@ blurb: The ENUM type represents a dictionary data structure with all possible un
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/enum
+- docs/archive/0.9.1/sql/data_types/enum
 title: Enum Types
 ---
 

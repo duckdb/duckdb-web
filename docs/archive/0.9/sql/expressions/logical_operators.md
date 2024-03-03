@@ -3,6 +3,7 @@ layout: docu
 railroad: expressions/logical.js
 redirect_from:
 - docs/archive/0.9.2/sql/expressions/logical_operators
+- docs/archive/0.9.1/sql/expressions/logical_operators
 title: Logical Operators
 ---
 

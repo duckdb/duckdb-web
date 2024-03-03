@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/functions/utility
+- docs/archive/0.9.1/sql/functions/utility
 title: Utility Functions
 ---
 

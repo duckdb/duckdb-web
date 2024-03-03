@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/python/relational_api_pandas
+- docs/archive/0.9.1/guides/python/relational_api_pandas
 title: Relational API and Pandas
 ---
 
