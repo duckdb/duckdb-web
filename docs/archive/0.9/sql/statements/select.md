@@ -2,6 +2,8 @@
 blurb: The SELECT statement retrieves rows from the database.
 layout: docu
 railroad: statements/select.js
+redirect_from:
+- docs/archive/0.9.2/sql/statements/select
 title: Select Statement
 ---
 

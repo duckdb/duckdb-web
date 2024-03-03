@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.9.2/api/adbc
 title: ADBC API
 ---
 

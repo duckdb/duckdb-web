@@ -1,5 +1,8 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.9.2/api/python/overview
+- docs/archive/0.9.2/api/python
 title: Python API
 ---
 

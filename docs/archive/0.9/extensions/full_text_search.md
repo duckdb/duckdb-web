@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.9.2/extensions/full_text_search
 title: Full Text Search Extension
 ---
 

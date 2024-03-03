@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: query_syntax/setops.js
+redirect_from:
+- docs/archive/0.9.2/sql/query_syntax/setops
 title: Set Operations
 ---
 

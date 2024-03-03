@@ -2,6 +2,8 @@
 blurb: The ENUM type represents a dictionary data structure with all possible unique
   values of a column.
 layout: docu
+redirect_from:
+- docs/archive/0.9.2/sql/data_types/enum
 title: Enum Types
 ---
 

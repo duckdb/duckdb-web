@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.9.2/guides/import/s3_import
 title: S3, GCS, or R2 Parquet Import
 ---
 

@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: statements/createsequence.js
+redirect_from:
+- docs/archive/0.9.2/sql/statements/create_sequence
 title: Create Sequence
 ---
 

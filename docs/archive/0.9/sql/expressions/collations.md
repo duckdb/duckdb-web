@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: expressions/collate.js
+redirect_from:
+- docs/archive/0.9.2/sql/expressions/collations
 title: Collations
 ---
 

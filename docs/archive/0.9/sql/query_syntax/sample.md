@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: query_syntax/sample.js
+redirect_from:
+- docs/archive/0.9.2/sql/query_syntax/sample
 title: SAMPLE Clause
 ---
 

@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.9.2/guides/python/sql_on_pandas
 title: SQL on Pandas
 ---
 

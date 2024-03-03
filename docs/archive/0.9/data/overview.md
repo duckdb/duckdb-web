@@ -1,5 +1,8 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.9.2/data/overview
+- docs/archive/0.9.2/data
 title: Importing Data
 ---
 

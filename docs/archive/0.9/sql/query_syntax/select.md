@@ -3,6 +3,8 @@ blurb: The SELECT clause specifies the list of columns that will be returned by 
   query.
 layout: docu
 railroad: query_syntax/select.js
+redirect_from:
+- docs/archive/0.9.2/sql/query_syntax/select
 title: SELECT Clause
 ---
 

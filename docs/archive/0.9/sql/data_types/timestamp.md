@@ -2,6 +2,8 @@
 blurb: A timestamp specifies a combination of a date (year, month, day) and a time
   (hour, minute, second, microsecond).
 layout: docu
+redirect_from:
+- docs/archive/0.9.2/sql/data_types/timestamp
 title: Timestamp Types
 ---
 
