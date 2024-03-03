@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/odbc/linux
 - docs/archive/0.9.1/api/odbc/linux
+- docs/archive/0.9.0/api/odbc/linux
 title: ODBC API - Linux
 ---
 

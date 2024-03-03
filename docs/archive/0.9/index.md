@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/index
 - docs/archive/0.9.1/index
+- docs/archive/0.9.0/index
 title: Documentation
 ---
 

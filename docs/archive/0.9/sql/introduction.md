@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/introduction
 - docs/archive/0.9.1/sql/introduction
+- docs/archive/0.9.0/sql/introduction
 title: SQL Introduction
 ---
 

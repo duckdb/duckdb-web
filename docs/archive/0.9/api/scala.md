@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/scala
 - docs/archive/0.9.1/api/scala
+- docs/archive/0.9.0/api/scala
 title: Scala JDBC API
 ---
 

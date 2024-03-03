@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/meta/list_tables
 - docs/archive/0.9.1/guides/meta/list_tables
+- docs/archive/0.9.0/guides/meta/list_tables
 title: List Tables
 ---
 

@@ -4,6 +4,7 @@ railroad: expressions/case.js
 redirect_from:
 - docs/archive/0.9.2/sql/expressions/case
 - docs/archive/0.9.1/sql/expressions/case
+- docs/archive/0.9.0/sql/expressions/case
 title: Case Statement
 ---
 

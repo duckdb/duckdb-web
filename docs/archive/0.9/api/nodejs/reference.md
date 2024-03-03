@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/nodejs/reference
 - docs/archive/0.9.1/api/nodejs/reference
+- docs/archive/0.9.0/api/nodejs/reference
 title: NodeJS API
 ---
 

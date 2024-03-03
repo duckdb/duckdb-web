@@ -4,6 +4,7 @@ railroad: statements/export.js
 redirect_from:
 - docs/archive/0.9.2/sql/statements/export
 - docs/archive/0.9.1/sql/statements/export
+- docs/archive/0.9.0/sql/statements/export
 title: Export & Import Database
 ---
 

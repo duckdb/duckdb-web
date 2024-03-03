@@ -4,6 +4,7 @@ railroad: expressions/comparison.js
 redirect_from:
 - docs/archive/0.9.2/sql/expressions/comparison_operators
 - docs/archive/0.9.1/sql/expressions/comparison_operators
+- docs/archive/0.9.0/sql/expressions/comparison_operators
 title: Comparisons
 ---
 

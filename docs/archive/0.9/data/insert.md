@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/data/insert
 - docs/archive/0.9.1/data/insert
+- docs/archive/0.9.0/data/insert
 title: Insert Statements
 ---
 

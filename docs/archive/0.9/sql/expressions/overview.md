@@ -5,6 +5,8 @@ redirect_from:
 - docs/archive/0.9.2/sql/expressions
 - docs/archive/0.9.1/sql/expressions/overview
 - docs/archive/0.9.1/sql/expressions
+- docs/archive/0.9.0/sql/expressions/overview
+- docs/archive/0.9.0/sql/expressions
 title: Expressions
 ---
 

@@ -4,6 +4,7 @@ railroad: expressions/subqueries.js
 redirect_from:
 - docs/archive/0.9.2/sql/expressions/subqueries
 - docs/archive/0.9.1/sql/expressions/subqueries
+- docs/archive/0.9.0/sql/expressions/subqueries
 title: Subqueries
 ---
 

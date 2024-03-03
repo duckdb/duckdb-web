@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/odbc/windows
 - docs/archive/0.9.1/api/odbc/windows
+- docs/archive/0.9.0/api/odbc/windows
 title: ODBC API - Windows
 ---
 

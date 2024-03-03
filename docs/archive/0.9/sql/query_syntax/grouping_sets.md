@@ -4,6 +4,7 @@ railroad: query_syntax/groupby.js
 redirect_from:
 - docs/archive/0.9.2/sql/query_syntax/grouping_sets
 - docs/archive/0.9.1/sql/query_syntax/grouping_sets
+- docs/archive/0.9.0/sql/query_syntax/grouping_sets
 title: GROUPING SETS
 ---
 

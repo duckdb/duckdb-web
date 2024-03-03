@@ -4,6 +4,7 @@ railroad: statements/createmacro.js
 redirect_from:
 - docs/archive/0.9.2/sql/statements/create_macro
 - docs/archive/0.9.1/sql/statements/create_macro
+- docs/archive/0.9.0/sql/statements/create_macro
 title: Create Macro
 ---
 

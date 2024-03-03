@@ -4,6 +4,7 @@ railroad: expressions/collate.js
 redirect_from:
 - docs/archive/0.9.2/sql/expressions/collations
 - docs/archive/0.9.1/sql/expressions/collations
+- docs/archive/0.9.0/sql/expressions/collations
 title: Collations
 ---
 

@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/functions/timestamp
 - docs/archive/0.9.1/sql/functions/timestamp
+- docs/archive/0.9.0/sql/functions/timestamp
 title: Timestamp Functions
 ---
 

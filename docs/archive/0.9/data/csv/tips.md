@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/data/csv/tips
 - docs/archive/0.9.1/data/csv/tips
+- docs/archive/0.9.0/data/csv/tips
 title: CSV Import Tips
 ---
 

@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/python/vaex
 - docs/archive/0.9.1/guides/python/vaex
+- docs/archive/0.9.0/guides/python/vaex
 title: DuckDB with Vaex
 ---
 

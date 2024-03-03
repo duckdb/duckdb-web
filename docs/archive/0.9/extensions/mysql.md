@@ -4,6 +4,7 @@ redirect_from:
 - docs/archive/0.9.2/extensions/mysql_scanner
 - docs/archive/0.9.2/extensions/mysql
 - docs/archive/0.9.1/extensions/mysql
+- docs/archive/0.9.0/extensions/mysql
 title: MySQL Scanner Extension
 ---
 

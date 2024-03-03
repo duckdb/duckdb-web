@@ -5,6 +5,8 @@ redirect_from:
 - docs/archive/0.9.2/api/nodejs
 - docs/archive/0.9.1/api/nodejs/overview
 - docs/archive/0.9.1/api/nodejs
+- docs/archive/0.9.0/api/nodejs/overview
+- docs/archive/0.9.0/api/nodejs
 title: Node.js API
 ---
 

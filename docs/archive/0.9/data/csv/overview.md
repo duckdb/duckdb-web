@@ -6,6 +6,8 @@ redirect_from:
 - docs/archive/0.9.2/data/csv
 - docs/archive/0.9.1/data/csv/overview
 - docs/archive/0.9.1/data/csv
+- docs/archive/0.9.0/data/csv/overview
+- docs/archive/0.9.0/data/csv
 title: CSV Import
 ---
 

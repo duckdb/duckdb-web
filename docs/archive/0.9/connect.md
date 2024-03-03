@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/connect
 - docs/archive/0.9.1/connect
+- docs/archive/0.9.0/connect
 title: Connect
 ---
 

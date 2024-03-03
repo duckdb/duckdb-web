@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/sql_features/full_text_search
 - docs/archive/0.9.1/guides/sql_features/full_text_search
+- docs/archive/0.9.0/guides/sql_features/full_text_search
 title: DuckDB Full Text Search
 ---
 

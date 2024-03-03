@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/c/replacement_scans
 - docs/archive/0.9.1/api/c/replacement_scans
+- docs/archive/0.9.0/api/c/replacement_scans
 title: C API - Replacement Scans
 ---
 

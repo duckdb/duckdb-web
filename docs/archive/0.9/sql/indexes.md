@@ -4,6 +4,7 @@ railroad: statements/indexes.js
 redirect_from:
 - docs/archive/0.9.2/sql/indexes
 - docs/archive/0.9.1/sql/indexes
+- docs/archive/0.9.0/sql/indexes
 title: Indexes
 ---
 

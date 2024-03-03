@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/odbc/macos
 - docs/archive/0.9.1/api/odbc/macos
+- docs/archive/0.9.0/api/odbc/macos
 title: ODBC API - MacOS
 ---
 

@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/meta/describe
 - docs/archive/0.9.1/guides/meta/describe
+- docs/archive/0.9.0/guides/meta/describe
 title: Describe
 ---
 

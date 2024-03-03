@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/import/excel_import
 - docs/archive/0.9.1/guides/import/excel_import
+- docs/archive/0.9.0/guides/import/excel_import
 title: Excel Import
 ---
 

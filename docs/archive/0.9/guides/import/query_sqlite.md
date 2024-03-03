@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/import/query_sqlite
 - docs/archive/0.9.1/guides/import/query_sqlite
+- docs/archive/0.9.0/guides/import/query_sqlite
 title: SQLite Import
 ---
 

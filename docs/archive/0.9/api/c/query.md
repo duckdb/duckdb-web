@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/c/query
 - docs/archive/0.9.1/api/c/query
+- docs/archive/0.9.0/api/c/query
 title: C API - Query
 ---
 

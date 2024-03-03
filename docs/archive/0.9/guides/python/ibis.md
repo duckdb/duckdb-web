@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/python/ibis
 - docs/archive/0.9.1/guides/python/ibis
+- docs/archive/0.9.0/guides/python/ibis
 title: DuckDB with Ibis
 ---
 

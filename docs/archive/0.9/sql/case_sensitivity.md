@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/case_sensitivity
 - docs/archive/0.9.1/sql/case_sensitivity
+- docs/archive/0.9.0/sql/case_sensitivity
 title: Rules for Case Sensitivity
 ---
 

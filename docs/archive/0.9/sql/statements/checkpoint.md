@@ -4,6 +4,7 @@ railroad: statements/checkpoint.js
 redirect_from:
 - docs/archive/0.9.2/sql/statements/checkpoint
 - docs/archive/0.9.1/sql/statements/checkpoint
+- docs/archive/0.9.0/sql/statements/checkpoint
 title: Checkpoint
 ---
 

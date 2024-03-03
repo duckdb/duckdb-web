@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/extensions/tpch
 - docs/archive/0.9.1/extensions/tpch
+- docs/archive/0.9.0/extensions/tpch
 title: TPC-H Extension
 ---
 

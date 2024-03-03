@@ -6,6 +6,8 @@ redirect_from:
 - docs/archive/0.9.2/sql/functions
 - docs/archive/0.9.1/sql/functions/overview
 - docs/archive/0.9.1/sql/functions
+- docs/archive/0.9.0/sql/functions/overview
+- docs/archive/0.9.0/sql/functions
 title: Functions
 ---
 

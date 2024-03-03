@@ -5,6 +5,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/enum
 - docs/archive/0.9.1/sql/data_types/enum
+- docs/archive/0.9.0/sql/data_types/enum
 title: Enum Types
 ---
 

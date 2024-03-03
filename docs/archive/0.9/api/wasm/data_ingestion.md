@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/wasm/data_ingestion
 - docs/archive/0.9.1/api/wasm/data_ingestion
+- docs/archive/0.9.0/api/wasm/data_ingestion
 title: Data Ingestion
 ---
 

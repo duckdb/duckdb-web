@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/wasm/query
 - docs/archive/0.9.1/api/wasm/query
+- docs/archive/0.9.0/api/wasm/query
 title: Query
 ---
 

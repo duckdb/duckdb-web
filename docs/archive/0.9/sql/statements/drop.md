@@ -4,6 +4,7 @@ railroad: statements/drop.js
 redirect_from:
 - docs/archive/0.9.2/sql/statements/drop
 - docs/archive/0.9.1/sql/statements/drop
+- docs/archive/0.9.0/sql/statements/drop
 title: Drop Statement
 ---
 

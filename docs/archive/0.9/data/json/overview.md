@@ -6,6 +6,8 @@ redirect_from:
 - docs/archive/0.9.2/data/json
 - docs/archive/0.9.1/data/json/overview
 - docs/archive/0.9.1/data/json
+- docs/archive/0.9.0/data/json/overview
+- docs/archive/0.9.0/data/json
 title: JSON Loading
 ---
 

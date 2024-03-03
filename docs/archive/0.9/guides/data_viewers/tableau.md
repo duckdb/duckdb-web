@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/data_viewers/tableau
 - docs/archive/0.9.1/guides/data_viewers/tableau
+- docs/archive/0.9.0/guides/data_viewers/tableau
 title: Tableau - A Data Visualisation Tool
 ---
 

@@ -4,6 +4,7 @@ railroad: expressions/star.js
 redirect_from:
 - docs/archive/0.9.2/sql/expressions/star
 - docs/archive/0.9.1/sql/expressions/star
+- docs/archive/0.9.0/sql/expressions/star
 title: Star Expression
 ---
 

@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/python/datafusion
 - docs/archive/0.9.1/guides/python/datafusion
+- docs/archive/0.9.0/guides/python/datafusion
 title: DuckDB with DataFusion
 ---
 

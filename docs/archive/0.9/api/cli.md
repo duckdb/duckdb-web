@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/cli
 - docs/archive/0.9.1/api/cli
+- docs/archive/0.9.0/api/cli
 title: CLI API
 ---
 

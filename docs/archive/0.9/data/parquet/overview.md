@@ -7,6 +7,8 @@ redirect_from:
 - docs/archive/0.9.2/data/parquet
 - docs/archive/0.9.1/data/parquet/overview
 - docs/archive/0.9.1/data/parquet
+- docs/archive/0.9.0/data/parquet/overview
+- docs/archive/0.9.0/data/parquet
 title: Reading and Writing Parquet Files
 ---
 

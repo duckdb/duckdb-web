@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/guides/sql_features/asof_join
 - docs/archive/0.9.1/guides/sql_features/asof_join
+- docs/archive/0.9.0/guides/sql_features/asof_join
 title: DuckDB ASOF Join
 ---
 

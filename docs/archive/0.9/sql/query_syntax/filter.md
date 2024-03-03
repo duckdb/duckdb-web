@@ -4,6 +4,7 @@ railroad: query_syntax/filter.js
 redirect_from:
 - docs/archive/0.9.2/sql/query_syntax/filter
 - docs/archive/0.9.1/sql/query_syntax/filter
+- docs/archive/0.9.0/sql/query_syntax/filter
 title: FILTER Clause
 ---
 

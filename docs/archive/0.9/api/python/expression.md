@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/api/python/expression
 - docs/archive/0.9.1/api/python/expression
+- docs/archive/0.9.0/api/python/expression
 title: Expression API
 ---
 

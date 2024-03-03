@@ -5,6 +5,8 @@ redirect_from:
 - docs/archive/0.9.2/api/odbc
 - docs/archive/0.9.1/api/odbc/overview
 - docs/archive/0.9.1/api/odbc
+- docs/archive/0.9.0/api/odbc/overview
+- docs/archive/0.9.0/api/odbc
 title: ODBC API - Overview
 ---
 

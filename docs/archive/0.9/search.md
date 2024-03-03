@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/search
 - docs/archive/0.9.1/search
+- docs/archive/0.9.0/search
 title: Search
 ---
 

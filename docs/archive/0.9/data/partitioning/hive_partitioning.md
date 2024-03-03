@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/data/partitioning/hive_partitioning
 - docs/archive/0.9.1/data/partitioning/hive_partitioning
+- docs/archive/0.9.0/data/partitioning/hive_partitioning
 title: Hive Partitioning
 ---
 

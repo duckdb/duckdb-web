@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/list
 - docs/archive/0.9.1/sql/data_types/list
+- docs/archive/0.9.0/sql/data_types/list
 title: List
 ---
 

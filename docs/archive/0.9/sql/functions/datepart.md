@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/functions/datepart
 - docs/archive/0.9.1/sql/functions/datepart
+- docs/archive/0.9.0/sql/functions/datepart
 title: Date Parts
 ---
 

@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/extensions/jemalloc
 - docs/archive/0.9.1/extensions/jemalloc
+- docs/archive/0.9.0/extensions/jemalloc
 title: jemalloc Extension
 ---
 

@@ -4,6 +4,7 @@ railroad: statements/samples.js
 redirect_from:
 - docs/archive/0.9.2/sql/samples
 - docs/archive/0.9.1/sql/samples
+- docs/archive/0.9.0/sql/samples
 title: Samples
 ---
 

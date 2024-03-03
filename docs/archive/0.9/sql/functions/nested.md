@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/functions/nested
 - docs/archive/0.9.1/sql/functions/nested
+- docs/archive/0.9.0/sql/functions/nested
 title: Nested Functions
 ---
 
