@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Execute SQL
+title: Executing SQL in Python
 ---
 
-SQL queries can be executed using the `duckdb.sql` command.
+SQL queries can be executed using the `duckdb.sql` function.
 
 ```python
 import duckdb
@@ -32,8 +32,8 @@ By default, a global in-memory connection will be used. Any data stored in files
 After connecting, SQL queries can be executed using the `sql` command.
 
 ```python
-con = duckdb.connect('file.db')
-con.sql('CREATE TABLE integers(i INTEGER)')
-con.sql('INSERT INTO integers VALUES (42)')
-con.sql('SELECT * FROM integers').show()
+con = duckdb.connect("file.db")
+con.sql("CREATE TABLE integers (i INTEGER)")
+con.sql("INSERT INTO integers VALUES (42)")
+con.sql("SELECT * FROM integers").show()
 ```

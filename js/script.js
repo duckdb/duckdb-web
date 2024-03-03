@@ -4,11 +4,12 @@ $(document).ready(function(){
 		var hash = window.location.hash;
 		if ($(hash).length) {
 			$('html, body').animate({
-				scrollTop: $(hash).offset().top-55
+				scrollTop: $(hash).offset().top-90
 			}, 300, 'swing');
 			if( $('.frequentlyaskedquestions').length ){
-				$('h3'+hash).toggleClass('open');
-				$('h3'+hash).next('p').slideToggle();
+				//console.log($('h3'+hash).parent('.qa-wrap'))
+				$('h3'+hash).parent('.qa-wrap').addClass('open');
+				$('h3'+hash).parent('.qa-wrap').find('.answer').slideToggle(300);
 			}
 		}
 	}
@@ -17,34 +18,7 @@ $(document).ready(function(){
 	
 	// Simple detect OS 
     if($('#quickinstall').length != 0 || $('.yourselection').length !=0 ){
-		var OSName="Unknown OS";
-		var OSdatid="Unknown OS";
-		if (navigator.appVersion.indexOf("Win")!=-1) { OSName="Windows"; OSdatid=".win" };
-		if (navigator.appVersion.indexOf("Mac")!=-1) { OSName="macOS"; OSdatid=".macos" };
-		if (navigator.appVersion.indexOf("X11")!=-1) { OSName="UNIX"; OSdatid=".linux" };
-		if (navigator.appVersion.indexOf("Linux")!=-1) { OSName="Linux"; OSdatid=".linux"};
-		$('.systemdetected').html('System detected: '+OSName);
-		$('.ver-cplusplus').not(OSdatid).remove()
-		$('.ver-cli').not(OSdatid).remove()
-		$('.ver-odbc').not(OSdatid).remove()
 	}
-	
-	// Installation instructions on landingpage
-	var landingpageevaluation = function(environment){
-		var result = $('.install .hidden .'+environment).html();
-		$('.install .result').html(result);		
-	}
-	$('.environment ul li').click(function(){
-		var environment = $(this).attr("data-id");
-		$('.environment ul li.active').removeClass('active');
-		$(this).addClass('active');
-		landingpageevaluation(environment);
-	});
-	$('body.landing .environmentselect').on('change', function() {
-		landingpageevaluation(this.value);
-	});
-	var environment = $('.environment ul li.active').attr("data-id");
-	landingpageevaluation(environment);
 	
 	
 	// Get URL Parameter
@@ -61,82 +35,191 @@ $(document).ready(function(){
 	            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
 	        }
 	    }
+	return "undefined";
 	};
 	
-	
-	// Installation Selection
-	var userSelection = {version: ".latest", environment: ".python", pack: "", platform: ""};
-	var classList = "";
-	
-	var evaluation = function(){
-		
-		var versionSelection = $('.yourselection ul.version li.selected').attr('data-id');
-		if(versionSelection){ userSelection.version = versionSelection; }
-		
-		if( $("body.installation .evironment .onlymobile").is(":visible") ){
-			var environmentSelection = $('body.installation .environmentselect').val();
-		} else {
-			var environmentSelection = $('.yourselection ul.environment li.selected').attr('data-id');
-		}
-		if(environmentSelection){ userSelection.environment = environmentSelection; }
-		
-		var packSelection = $('.yourselection ul.pack li.selected').attr('data-id');
-		if(packSelection){ userSelection.pack = packSelection; }
-		
-		var platfromSelection = $('.yourselection ul.platform li.selected').attr('data-id');
-		if(platfromSelection){ userSelection.platform = platfromSelection; }
-		
-
-		if ( userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc"){
-			$('.installer.select, .platform.select').removeClass('inactive');
-		} else {
-			$('.installer.select, .platform.select').addClass('inactive');
-			$('.installer.select ul li.selected, .platform.select ul li.selected').removeClass('selected');
-			userSelection.pack = "";
-			userSelection.platform = "";
-		}
-
-		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && userSelection.pack == ".source" ) {
-			$('.platform.select').addClass('inactive');
-			$('.platform.select ul li.selected').removeClass('selected');	
-			userSelection.platform = "";
-		}
-		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0){
-			$('.installer.select ul li[data-id=".binary"').addClass('selected');
-			$('.platform.select ul li[data-id="'+OSdatid+'"').addClass('selected');
-			userSelection.pack = ".binary";
-			userSelection.platform = OSdatid;
-		}
-		
-		var classList = userSelection.version + userSelection.environment + userSelection.pack + userSelection.platform;
-		var result = $('.possibleresults div'+classList).html();
-		$('.installation.output .result').html(result);
-
-		var exampleResult = $('.possibleresults .example'+userSelection.environment).html();
-		$('.example.output .result').html(exampleResult);
-
+	// Docs Installation Functions 
+	function showAllSections() {
+		$('.yourselection .hide').removeClass('hide');
+		$('.yourselection .select ul li.inactive').removeClass('inactive')
 	}
 	
+	function hideSections(sections) {
+		if ( sections !== undefined ) {
+			sections.split(',').forEach(section => {
+				const $container = $(`.select[data-select="${section.trim()}"]`);
+				// console.log($container)
+				$container.addClass('hide')
+				$container.find('.selected').removeClass('selected');
+			});
+		}
+	}
+	
+	// Docs Installation Selection
+	var userSelection = { version: "", environment: "", pack: "", platform: "", architecture: "", download_method: "" };
+	var classList = "";
+	
+	var OSName="Unknown OS";
+	var OSdatid="Unknown OS";
+	if (navigator.appVersion.indexOf("Win")!=-1) { OSName="Windows"; OSdatid="win" };
+	if (navigator.appVersion.indexOf("Mac")!=-1) { OSName="macOS"; OSdatid="macos" };
+	if (navigator.appVersion.indexOf("X11")!=-1) { OSName="UNIX"; OSdatid="linux" };
+	if (navigator.appVersion.indexOf("Linux")!=-1) { OSName="Linux"; OSdatid="linux"};
+	$('.systemdetected').html('System detected: '+OSName);
+
+	var evaluation = function () {
+		showAllSections();
+	
+		if (userSelection.environment == "")
+			userSelection.environment=".cli";
+		if (userSelection.version == "")
+			userSelection.version=".stable";
+
+		if ((userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0) {
+			if (userSelection.download_method == "" || userSelection.download_method == undefined)
+				userSelection.download_method = ".package_manager";
+			if (userSelection.platform == "" || userSelection.platform == undefined)
+				userSelection.platform = "." + OSdatid;
+		}
+		else if (userSelection.environment == ".cplusplus") {
+			if (userSelection.platform == "" || userSelection.platform == undefined)
+				userSelection.platform = "." + OSdatid;
+		}
+		else if (userSelection.environment == ".java") {
+			if (userSelection.download_method == "" || userSelection.download_method == undefined)
+				userSelection.download_method = ".package_manager";
+		}
+		var currSelection = userSelection;
+		if (userSelection.platform == ".macos")
+			currSelection.architecture = ""
+		if ((userSelection.environment == ".cli") && $('.installer.select ul li.selected').length == 0) {
+		} else if (userSelection.environment == ".cplusplus") {
+			currSelection.download_method = ""
+		} else if (userSelection.environment == ".odbc") {
+			currSelection.download_method = ".direct"
+		} else if (userSelection.environment == ".java") {
+			currSelection.platform = ""
+			currSelection.architecture = ""
+		} else {
+			currSelection.download_method = ""
+			currSelection.platform = ""
+			currSelection.architecture = ""
+		}	
+		
+		if (currSelection.version != "" && currSelection.version != undefined){
+			$('.yourselection ul.version li.selected').removeClass('selected')
+			$('.yourselection ul.version li[data-id="'+currSelection.version+'"]').addClass('selected')
+		}
+		if (currSelection.environment != "" && currSelection.environment != undefined){
+			$('.yourselection ul.environment li.selected').removeClass('selected')
+			$('.yourselection ul.environment li[data-id="'+currSelection.environment+'"]').addClass('selected')
+		}
+		if (currSelection.platform != "" && currSelection.platform != undefined){
+			$('.yourselection ul.platform li.selected').removeClass('selected')
+			$('.yourselection ul.platform li[data-id="'+currSelection.platform+'"]').addClass('selected')
+		}
+		if (currSelection.architecture != "" && currSelection.architecture != undefined){
+			$('.yourselection ul.architecture li.selected').removeClass('selected')
+			$('.yourselection ul.architecture li[data-id="'+currSelection.architecture+'"]').addClass('selected')
+		}
+		if (currSelection.download_method != "" && currSelection.download_method != undefined){
+			$('.yourselection ul.download_method li.selected').removeClass('selected')
+			$('.yourselection ul.download_method li[data-id="'+currSelection.download_method+'"]').addClass('selected')
+		}
+		$('.yourselection .select').each(function() {
+			const $self = $(this);
+			const $selfClass = $(this).data('select')
+			const $selectedElm = $self.find('.selected');
+			if ( $selectedElm.length ) {
+				hideSections($selectedElm.data('hide-section'))
+				currSelection[$selfClass] = $selectedElm.data('id')
+	
+				const deactivateTabs = $selectedElm.data('deactivate-tabs');
+				if ( deactivateTabs !== undefined ) {
+					deactivateTabs.split(',').forEach(function(deactivateTab) {
+						const tab = deactivateTab.split(' ')
+						$(`${tab[0]} [data-id="${tab[1]}"]`).addClass('inactive').removeClass('selected')
+					});
+				}
+	
+				const preselectTabs = $selectedElm.data('preselect-tabs');
+				if ( preselectTabs !== undefined ) {
+					preselectTabs.split(',').forEach(function(preselectTab) {
+						const tab = preselectTab.split(' ')
+						$(`${tab[0]} [data-id="${tab[1]}"]`).addClass('selected')
+						userSelection[tab[0].replace('.', '')] = tab[1].replace('.', '')
+						
+						setQueryString();
+					});
+				}
+			}
+		})
+
+		var classList = currSelection.version + currSelection.environment + currSelection.pack + currSelection.platform + currSelection.architecture + currSelection.download_method;
+
+		var result = $('.possibleresults div' + classList).html();
+		$('.installation.output .result').html(result);
+	
+		var exampleResult = $('.possibleresults .example' + currSelection.environment).html();
+		$('.example.output .result').html(exampleResult);
+	
+	}
+	evaluation();
 	$('body.installation .yourselection .select li').click(function(){
-		$(this).siblings('.selected').removeClass('selected');
-		$(this).addClass('selected');
+		userSelection[this.parentNode.className] = this.getAttribute("data-id");
 		evaluation();
 	});
 	
 	if($('body.installation .yourselection').length != 0){
-		var environment = "."+getUrlParameter('environment');
-		
-		if (environment !== '.undefined'){
-			$('.yourselection ul.environment li.selected').removeClass('selected')
-			$('.yourselection ul.environment li[data-id="'+environment+'"]').addClass('selected')
-			evaluation();
-		}
+		evaluation();
 	}
 	$('body.installation .environmentselect').on('change', function() {
 		evaluation();
 	});
 	if( $('body.installation').length ){
-		evaluation();
+		setTimeout(function() {
+			evaluation();
+		}, 100);
+	}
+	
+	if ($('.yourselection > .select').length) {
+		function setQueryString() {
+			const urlSearchP = new URLSearchParams();
+	
+			$('.yourselection > .select').each(function () {
+				if (!$(this).hasClass('inactive') && $(this).find('.selected').length) {
+					const queryParam = $(this).data('select');
+					const selected = $(this).find('.selected').data('id').replace('.', '');
+					urlSearchP.set(queryParam, selected);
+				}
+			});
+	
+			// Get the current URL and append the new query parameters
+			const currentURL = window.location.href;
+			const newURL = new URL(currentURL);
+			newURL.search = urlSearchP.toString();
+	
+			// Update the URL with the new query parameters
+			window.history.pushState({}, '', newURL.toString());
+		}
+	
+		function handleQueryParameters() {
+			const urlSearchParams = new URLSearchParams(window.location.search);
+			urlSearchParams.forEach(function(value, key) {
+				const parentWrapper = $('[data-select="' + key + '"]');
+				parentWrapper.find('.selected').removeClass('selected');
+				parentWrapper.find('[data-id=".' + value + '"]').addClass('selected')
+			});
+		}
+	
+		if ( window.location.search.length ) {
+			handleQueryParameters();
+		} else {
+			setQueryString();
+		}
+		$(document).on('click', '.yourselection > .select li', setQueryString)
+		window.addEventListener('popstate', handleQueryParameters);
+	
 	}
 	
 
@@ -195,7 +278,7 @@ $(document).ready(function(){
         if (target.length) {
           // event.preventDefault();
           $('html, body').animate({
-            scrollTop: target.offset().top-75
+            scrollTop: target.offset().top-90
           }, 1000 );
         }
       }
@@ -203,11 +286,11 @@ $(document).ready(function(){
     
     
     // FAQs
-    $('.wrap.frequentlyaskedquestions #main_content_wrap h1, .wrap.frequentlyaskedquestions #main_content_wrap h2, .wrap.frequentlyaskedquestions #main_content_wrap h3').click(function(){
-	    $(this).toggleClass('open');
-	    $(this).next('p').slideToggle();
-    });
-    
+	$('.qa-wrap').click(function(){
+		$(this).toggleClass('open');
+		$(this).find('.answer').slideToggle(400);
+	})
+	
     
     // Mobile Menu
     var hamburgers = document.querySelectorAll(".hamburger");
@@ -217,9 +300,9 @@ $(document).ready(function(){
 			    $(this).toggleClass('is-active');
 			    $('div.sidenavigation').toggleClass('slidein');
 				$('body.documentation main .wrap').toggleClass('inactive');
-				if ( $('body').hasClass('documentation') ){
+				/*if ( $('body').hasClass('documentation') ){
 					toggleMobileSearchIcon();
-				}
+				}*/
 			} else {
 				$(this).toggleClass('is-active');
 				$('.landingmenu nav').toggleClass('slidein');
@@ -294,21 +377,17 @@ $(document).ready(function(){
 		})
 	}
 	
-	// Appending "Note" to Blockquote
-	$('body.documentation #main_content_wrap blockquote').each(function() {
-		$(this).prepend("<h4>Note</h4>");
-	});
-	
 	
 	// Appending Content-List of Overview-Pages
-	if (window.location.href.indexOf("/overview") > -1) {
-		pathname = window.location.pathname.replace(/\.html$/, '')
-		const selector = 'li.opened a[href="' + pathname + '"]';
-		clonedUL = $(selector).parent().parent().clone();
+	const pathname = window.location.pathname.replace(/\.html$/, '');
+	if (window.location.href.includes("/overview")) {
+		const selector = `li.opened a[href="${pathname}"]`;
+		const clonedUL = $(selector).parent().parent().clone();
 		clonedUL.find(selector).parent().remove();
 		clonedUL.find('ul').show();
-	    $('#main_content_wrap').append(clonedUL);
+		$('#main_content_wrap .index').append(clonedUL);
 	}
+
 	
 	// Appending Content-List of Documentation
 	if ( $('.wrap.documentation') != 0 ) {
@@ -320,9 +399,10 @@ $(document).ready(function(){
 	$('a').filter(function() {
 		return this.hostname && this.hostname !== location.hostname;
 	}).addClass("externallink").attr('target','_blank');
-	$('.landingmenu .external a.externallink, .mainlinks a.externallink').removeClass('externallink'); // Remove Class from header elements
+	$('.headercontent a.externallink, .mainlinks a.externallink').removeClass('externallink'); // Remove Class from header elements
 	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
 	$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
+	$('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
 	
 	// FOUNDATION PAGE SCRIPTS
 	if($('body').hasClass('foundation') && $('section.form').length){
@@ -376,7 +456,7 @@ $(document).ready(function(){
 			var pathname = window.location.pathname.split("/docs");
 		}
 		
-		if( $(this).hasClass('latest') ){
+		if( $(this).hasClass('stable') ){
 			var versionurl = "/docs"+pathname[1]
 		} else {
 			var versionurl = "/docs/archive/"+clickedversion+pathname[1]+"?ver="+clickedversion;
@@ -384,9 +464,10 @@ $(document).ready(function(){
 	})
 	*/
 	
-	// VERSION FIX ON MOBILE
+
 	$('.headlinebar .version').click(function(){
-		$('.versionsidebar').toggleClass('active');
+		$(this).toggleClass('active');
+		$(this).find('.versionsidebar').slideToggle();
 	})
 	
 	
@@ -419,6 +500,7 @@ $(document).ready(function(){
 	// SEARCH 
 	var base_url = window.location.origin;
 	var resultSelected;
+	/*
 	var toggleMobileSearchIcon = function(){
 		if( $('.hamburger').hasClass('is-active') ){
 			animationduckDBicon.play();
@@ -428,6 +510,7 @@ $(document).ready(function(){
 			animationduckDBicon.setDirection(-1);
 		}
 	}
+	*/
 	var toggleSearch = function(){
 		if( $('body').hasClass('search') ){
 			$('.searchoverlay').removeClass('active');
@@ -504,15 +587,15 @@ $(document).ready(function(){
 		$("#search_results").empty();
 	})
 	if( $('.hamburger').is(':visible') ){
-		$('.duckdbhome a').click(function(e){
+		$('.search_icon').click(function(e){
 			if ( $('.hamburger').hasClass('is-active') ){
-				e.preventDefault();
-				toggleSearch();
 				if( $('body').hasClass('search') ){
+					$('.hamburger').removeClass('is-active');
 					$('body.documentation main .wrap.inactive').removeClass('inactive');
-					$('.sidenavigation').fadeOut();
+					$('.sidenavigation.slidein').removeClass('slidein');
+					$('nav.slidein').removeClass('slidein');
 				} else {
-					$('.sidenavigation').fadeIn();
+					$('.sidenavigation').addClass('slidein')
 					$('body.documentation main .wrap').addClass('inactive');
 				}
 			}
@@ -526,6 +609,88 @@ $(document).ready(function(){
 		}
 	});
 	
+	// ADDING LINES TO CODE FIELDS IF DEFINED
+	var addLineNumbers = function(){
+		if( $('.window .content.haslines').length ){
+			$('.window .content.haslines').each(function(){
+				var height = $(this).find('pre').height()
+				var fontSize = $(this).find('pre').css('font-size');
+				var lineHeight = 17;//Math.floor(parseInt(fontSize.replace('px','')) * 1.2);
+				var lines = Math.ceil(height / lineHeight) + 1
+				var linenumbers = '';
+				for (i = 1; i < lines; i++) {
+					linenumbers += i + '<br>'
+				}
+				$(this).find('.lines').html(linenumbers);
+			})
+		}
+	}
+	addLineNumbers();
 
+	
+	// GENERAL ACCORDION FOLDOUT
+	if( $('.accordion').length ){
+		$('.foldout').click(function(){
+			$(this).toggleClass('active').find('.content').slideToggle();
+		})
+	}
+	
+	// STARTPAGE EXAMPLE CODE WINDOW
+	var updateExample = function(){
+		var exampleSelection = $('#example-select').find(":selected").val();
+		var languageSelection = $('.demo.window ul.lang li.active').attr('data-language');
+		var exampleCode = $('.examples.hero-demo').find('div[data-language='+languageSelection+'][data-example='+exampleSelection+']').html();
+		var buttonTxt = $('.examples.hero-demo').find('div[data-language='+languageSelection+'][data-example='+exampleSelection+']').attr('data-buttontxt');
+		var buttonUrl = $('.examples.hero-demo').find('div[data-language='+languageSelection+'][data-example='+exampleSelection+']').attr('data-buttonurl');
+		//console.log("Example: " + exampleSelection + " Language: " + languageSelection);
+		//console.log("Buttontext: " + buttonTxt);
+		$('.demo.window .content .code').html(exampleCode);
+		addLineNumbers();
+		if( buttonTxt.length ){
+			$('.demo.window .bottombar a.livedemo').text(buttonTxt);
+			$('.demo.window .bottombar a.livedemo').attr('href', buttonUrl);
+		}
+	}
+
+	// STARTPAGE INSTALLATION WINDOW
+	var updateInstallation = function(){
+		var exampleSelection = $('#example-select').find(":selected").val();
+		var languageSelection = $('.demo.window ul.lang li.active').attr('data-language');
+		var exampleCode = $('.examples.hero-demo').find('div[data-install='+languageSelection+'][data-install='+exampleSelection+']').html();
+		var buttonTxt = $('.examples.hero-demo').find('div[data-install='+languageSelection+'][data-install='+exampleSelection+']').attr('data-buttontxt');
+		var buttonUrl = $('.examples.hero-demo').find('div[data-install='+languageSelection+'][data-install='+exampleSelection+']').attr('data-buttonurl');
+		//console.log("Example: " + exampleSelection + " Language: " + languageSelection);
+		//console.log("Buttontext: " + buttonTxt);
+		$('.demo.window .content .code').html(exampleCode);
+	}
+
+	if( $('section.welcome').length ){
+		$('.demo.window .topbar > ul.lang > li').click(function(){
+			$('.demo.window .topbar > ul.lang > li.active').removeClass('active');
+			$(this).addClass('active');
+			var languageChange = $(this).attr('data-language');
+			var dropdown = $('.dropdown.hero-demo').find('div[data-language='+languageChange+']').html();
+			$('.demo.window .bottombar #example-select').html(dropdown);
+			updateExample();
+		})
+		$('#example-select').on('change', function() {
+			updateExample();
+		});
+	}
+
+	if( $('section#quickinstall').length ){
+		$('.install > .window > .environment > ul > li').click(function(){
+			$('.install > .window > .environment > ul > li.active').removeClass('active');
+			$(this).addClass('active');
+			var client = $(this).attr('data-client');
+
+			var installation = $('#quick-installation').find('div[data-install="'+client+' '+OSdatid+'"]').html();
+			if (installation === undefined) {
+				var installation = $('#quick-installation').find('div[data-install='+client+']').html();
+			}
+
+			$('.result').html(installation);
+		})
+	}
 	
 });

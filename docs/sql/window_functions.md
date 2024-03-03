@@ -7,16 +7,17 @@ railroad: expressions/window.js
 ## Examples
 
 ```sql
--- generate a "row_number" column containing incremental identifiers for each row
+-- generate a "row_number" column with containing incremental identifiers for each row
 SELECT row_number() OVER () FROM sales;
 -- generate a "row_number" column, by order of time
 SELECT row_number() OVER (ORDER BY time) FROM sales;
 -- generate a "row_number" column, by order of time partitioned by region
 SELECT row_number() OVER (PARTITION BY region ORDER BY time) FROM sales;
--- compute the difference between the current amount, and the previous amount, by order of time
+-- compute the difference between the current amount, and the previous amount,
+-- by order of time
 SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
 -- compute the percentage of the total amount of sales per region for each row
-SELECT amount / SUM(amount) OVER (PARTITION BY region) FROM sales;
+SELECT amount / sum(amount) OVER (PARTITION BY region) FROM sales;
 ```
 
 ## Syntax
@@ -31,20 +32,20 @@ The table below shows the available general window functions.
 
 | Function | Return Type | Description | Example |
 |:---|:-|:---|:--|
-| `row_number()` | `bigint` | The number of the current row within the partition, counting from 1. | `row_number()` |
-| `rank()` | `bigint` | The rank of the current row *with gaps*; same as `row_number` of its first peer. | `rank()` |
-| `dense_rank()` | `bigint` | The rank of the current row *without gaps*; this function counts peer groups. | `dense_rank()` |
-| `rank_dense()` | `bigint` | Alias for `dense_rank`. | `rank_dense()` |
-| `percent_rank()` | `double` | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. | `percent_rank()` |
-| `cume_dist()` | `double` | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. | `cume_dist()` |
-| `ntile(num_buckets integer)` | `bigint` | An integer ranging from 1 to the argument value, dividing the partition as equally as possible. | `ntile(4)` |
-| `lag(expr any [, offset integer [, default any ]])` | same type as **expr** | Returns `expr` evaluated at the row that is `offset` rows before the current row within the partition; if there is no such row, instead return `default` (which must be of the same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `null`. | `lag(column, 3, 0)` |
-| `lead(expr any [, offset integer [, default any ]])` | same type as **expr** | Returns `expr` evaluated at the row that is `offset` rows after the current row within the partition; if there is no such row, instead return `default` (which must be of the same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `null`. | `lead(column, 3, 0)` |
+| `cume_dist()` | `DOUBLE` | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. | `cume_dist()` |
+| `dense_rank()` | `BIGINT` | The rank of the current row *without gaps*; this function counts peer groups. | `dense_rank()` |
 | `first_value(expr any)` | same type as **expr** | Returns `expr` evaluated at the row that is the first row of the window frame. | `first_value(column)` |
-| `last_value(expr any)` | same type as **expr** | Returns `expr` evaluated at the row that is the last row of the window frame. | `last_value(column)` |
-| `nth_value(expr any, nth integer)` | same type as **expr** | Returns `expr` evaluated at the nth row of the window frame (counting from 1); null if no such row. | `nth_value(column, 2)` |
 | `first(expr any)` | same type as **expr** | Alias for `first_value`. | `first(column)` |
+| `lag(expr any [, offset integer [, default any ]])` | same type as **expr** | Returns `expr` evaluated at the row that is `offset` rows before the current row within the partition; if there is no such row, instead return `default` (which must be of the same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `null`. | `lag(column, 3, 0)` |
+| `last_value(expr any)` | same type as **expr** | Returns `expr` evaluated at the row that is the last row of the window frame. | `last_value(column)` |
 | `last(expr any)` | same type as **expr** | Alias for `last_value`. | `last(column)` |
+| `lead(expr any [, offset integer [, default any ]])` | same type as **expr** | Returns `expr` evaluated at the row that is `offset` rows after the current row within the partition; if there is no such row, instead return `default` (which must be of the same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `null`. | `lead(column, 3, 0)` |
+| `nth_value(expr any, nth integer)` | same type as **expr** | Returns `expr` evaluated at the nth row of the window frame (counting from 1); null if no such row. | `nth_value(column, 2)` |
+| `ntile(num_buckets integer)` | `BIGINT` | An integer ranging from 1 to the argument value, dividing the partition as equally as possible. | `ntile(4)` |
+| `percent_rank()` | `DOUBLE` | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. | `percent_rank()` |
+| `rank_dense()` | `BIGINT` | Alias for `dense_rank`. | `rank_dense()` |
+| `rank()` | `BIGINT` | The rank of the current row *with gaps*; same as `row_number` of its first peer. | `rank()` |
+| `row_number()` | `BIGINT` | The number of the current row within the partition, counting from 1. | `row_number()` |
 
 ## Aggregate Window Functions
 
@@ -91,8 +92,16 @@ Window functions cannot access values outside of the partition containing the ro
 Ordering is also optional, but without it the results are not well-defined.
 Each partition is ordered using the same ordering clause.
 
-Here is a table of power generation data.
+Here is a table of power generation data, available as a CSV file ([`power-plant-generation-history.csv`](/data/power-plant-generation-history.csv)). To load the data, run:
+
+```sql
+CREATE TABLE "Generation History" AS
+    FROM 'power-plant-generation-history.csv';
+```
+
 After partitioning by plant and ordering by date, it will have this layout:
+
+<div class="narrow_table"></div>
 
 | Plant | Date | MWh |
 |:---|:---|---:|
@@ -124,16 +133,21 @@ After partitioning by plant and ordering by date, it will have this layout:
 In what follows,
 we shall use this table (or small sections of it) to illustrate various pieces of window function evaluation.
 
-The simplest window function is `ROW_NUMBER()`.
+The simplest window function is `row_number()`.
 This function just computes the 1-based row number within the partition using the query:
 
 ```sql
-SELECT "Plant", "Date", row_number() OVER (PARTITION BY "Plant" ORDER  BY "Date") AS "Row"
-FROM "History"
+SELECT
+    "Plant",
+    "Date",
+    row_number() OVER (PARTITION BY "Plant" ORDER  BY "Date") AS "Row"
+FROM "Generation History"
 ORDER BY 1, 2;
 ```
 
-The result will be
+The result will be the following:
+
+<div class="narrow_table"></div>
 
 | Plant | Date | Row |
 |:---|:---|---:|
@@ -160,6 +174,7 @@ For a `RANGE` specification, there must  be only one ordering expression,
 and it has to support addition and subtraction (i.e., numbers or `INTERVAL`s).
 The default values for frames are from `UNBOUNDED PRECEDING` to `CURRENT ROW`.
 It is invalid for a frame to start after it ends.
+Using the [`EXCLUDE` clause](#exclude-clause), rows around the current row can be excluded from the frame.
 
 #### `ROW` Framing
 
@@ -167,12 +182,13 @@ Here is a simple `ROW` frame query, using an aggregate function:
 
 ```sql
 SELECT points,
-    SUM(points) OVER (
+    sum(points) OVER (
         ROWS BETWEEN 1 PRECEDING
                  AND 1 FOLLOWING) we
 FROM results;
 ```
-This query computes the `SUM` of each point and the points on either side of it:
+
+This query computes the `sum` of each point and the points on either side of it:
 
 <img src="/images/blog/windowing/moving-sum.jpg" alt="Moving SUM of three values" title="Figure 2: A moving SUM of three values" style="max-width:90%;width:90%;height:auto"/>
 
@@ -187,7 +203,7 @@ To do this, we can use this window query:
 
 ```sql
 SELECT "Plant", "Date",
-    AVG("MWh") OVER (
+    avg("MWh") OVER (
         PARTITION BY "Plant"
         ORDER BY "Date" ASC
         RANGE BETWEEN INTERVAL 3 DAYS PRECEDING
@@ -199,11 +215,13 @@ ORDER BY 1, 2;
 
 This query partitions the data by `Plant` (to keep the different power plants' data separate),
 orders each plant's partition by `Date` (to put the energy measurements next to each other),
-and uses a `RANGE` frame of three days on either side of each day for the `AVG`
+and uses a `RANGE` frame of three days on either side of each day for the `avg`
 (to handle any missing days).
 This is the result:
 
-| Plant | Date | MWh 7-day<br>Moving Average |
+<div class="narrow_table"></div>
+
+| Plant | Date | MWh 7-day Moving Average |
 |:---|:---|---:|
 | Boston | 2019-01-02 | 517450.75 |
 | Boston | 2019-01-03 | 508793.20 |
@@ -215,6 +233,15 @@ This is the result:
 | Worcester | 2019-01-04 | 102249.50 |
 | ... | ... | ... |
 
+#### `EXCLUDE` Clause
+
+The `EXCLUDE` clause allows rows around the current row to be excluded from the frame. It has the following options:
+
+* `EXCLUDE NO OTHERS`: exclude nothing (default)
+* `EXCLUDE CURRENT ROW`: exclude the current row from the window frame
+* `EXCLUDE GROUP`: exclude the current row and all its peers (according to the columns specified by `ORDER BY`) from the window frame
+* `EXCLUDE TIES`: exclude only the current row's peers from the window frame
+
 ### `WINDOW` Clauses
 
 Multiple different `OVER` clauses can be specified in the same `SELECT`, and each will be computed separately.
@@ -223,9 +250,9 @@ The `WINDOW` clause can be used to define a *named* window that can be shared be
 
 ```sql
 SELECT "Plant", "Date",
-    MIN("MWh") OVER seven AS "MWh 7-day Moving Minimum",
-    AVG("MWh") OVER seven AS "MWh 7-day Moving Average",
-    MAX("MWh") OVER seven AS "MWh 7-day Moving Maximum"
+    min("MWh") OVER seven AS "MWh 7-day Moving Minimum",
+    avg("MWh") OVER seven AS "MWh 7-day Moving Average",
+    max("MWh") OVER seven AS "MWh 7-day Moving Maximum"
 FROM "Generation History"
 WINDOW seven AS (
     PARTITION BY "Plant"
@@ -241,12 +268,12 @@ Multiple windows can be defined in the same `WINDOW` clause by comma-separating 
 
 ```sql
 SELECT "Plant", "Date",
-    MIN("MWh") OVER seven AS "MWh 7-day Moving Minimum",
-    AVG("MWh") OVER seven AS "MWh 7-day Moving Average",
-    MAX("MWh") OVER seven AS "MWh 7-day Moving Maximum",
-    MIN("MWh") OVER three AS "MWh 3-day Moving Minimum",
-    AVG("MWh") OVER three AS "MWh 3-day Moving Average",
-    MAX("MWh") OVER three AS "MWh 3-day Moving Maximum"
+    min("MWh") OVER seven AS "MWh 7-day Moving Minimum",
+    avg("MWh") OVER seven AS "MWh 7-day Moving Average",
+    max("MWh") OVER seven AS "MWh 7-day Moving Maximum",
+    min("MWh") OVER three AS "MWh 3-day Moving Minimum",
+    avg("MWh") OVER three AS "MWh 3-day Moving Average",
+    max("MWh") OVER three AS "MWh 3-day Moving Maximum"
 FROM "Generation History"
 WINDOW
     seven AS (
@@ -264,7 +291,12 @@ ORDER BY 1, 2;
 
 The queries above do not use a number of clauses commonly found in select statements, like
 `WHERE`, `GROUP BY`, etc. For more complex queries you can find where `WINDOW` clauses fall in
-the canonical order of a select statement [here](../sql/statements/select).
+the canonical order of the [`SELECT statement`](statements/select).
+
+### Filtering the Results of Window Functions Using `QUALIFY`
+
+Window functions are executed after the [`WHERE`](query_syntax/where) and [`HAVING`](query_syntax/having) clauses have been already evaluated, so it's not possible to use these clauses to filter the results of window functions
+The [`QUALIFY` clause](query_syntax/qualify) avoids the need for a subquery or [`WITH` clause](query_syntax/with) to perform this filtering.
 
 ### Box and Whisker Queries
 
@@ -274,10 +306,10 @@ and we can use the window syntax to write queries that generate the data for mov
 
 ```sql
 SELECT "Plant", "Date",
-    MIN("MWh") OVER seven AS "MWh 7-day Moving Minimum",
-    QUANTILE_CONT("MWh", [0.25, 0.5, 0.75]) OVER seven
+    min("MWh") OVER seven AS "MWh 7-day Moving Minimum",
+    quantile_cont("MWh", [0.25, 0.5, 0.75]) OVER seven
         AS "MWh 7-day Moving IQR",
-    MAX("MWh") OVER seven AS "MWh 7-day Moving Maximum",
+    max("MWh") OVER seven AS "MWh 7-day Moving Maximum",
 FROM "Generation History"
 WINDOW seven AS (
     PARTITION BY "Plant"

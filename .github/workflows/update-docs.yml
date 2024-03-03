@@ -1,10 +1,10 @@
 on:
   schedule:
-    - cron: "0 5 * * 1"  # run once a week on mondays
+    - cron: "0 5 * * 1"  # run every Monday day at 5AM
   workflow_dispatch: {}  # allow running manually from the github ui
 
 env:
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
 
 name: Update docs
 jobs:
@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
           cache: 'pip'
@@ -23,13 +23,13 @@ jobs:
       - run: pip install -r requirements.txt -U
       - run: pip install duckdb --pre -U  # grab the latest duckdb python dev version
       - run: gh repo clone duckdb/duckdb
+      - run: gh repo clone duckdb/duckdb-node
       - name: download latest duckdb cli binary
         run: |
           RUN_ID=$(gh run list --branch main --repo duckdb/duckdb --workflow LinuxRelease -q '.[] | select(.conclusion == "success").databaseId' --json conclusion,databaseId | head -n 1)
           gh run download $RUN_ID --repo duckdb/duckdb --name duckdb-binaries-linux
-          mkdir -p duckdb/build/debug
-          unzip duckdb_cli-linux-amd64.zip -d duckdb/build/debug
-
+          mkdir -p duckdb/build/release
+          unzip duckdb_cli-linux-amd64.zip -d duckdb/build/release
       - name: Update docs
         uses: technote-space/create-pr-action@v2
         with:
@@ -38,10 +38,10 @@ jobs:
 
             # remove things we don't want commited
             rm *.zip
-            rm -rf duckdb
+            rm -rf duckdb duckdb-node
           COMMIT_MESSAGE: "chore: auto update docs"
           COMMIT_NAME: "GitHub Actions"
           COMMIT_EMAIL: "example@example.com"
           PR_BRANCH_NAME: "chore-update-docs-${PR_ID}"
           PR_TITLE: "chore: auto update docs"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}

@@ -1,6 +1,9 @@
 ---
 layout: docu
-title: C API - Overview
+title: Overview
+redirect_from:
+  - /docs/api/c
+  - /docs/api/c/
 ---
 
 DuckDB implements a custom C API modelled somewhat following the SQLite C API. The API is contained in the `duckdb.h` header. Continue to [Startup & Shutdown](connect) to get started, or check out the [Full API overview](api).
@@ -11,4 +14,3 @@ We also provide a SQLite API wrapper which means that if your applications is pr
 
 The DuckDB C API can be installed as part of the `libduckdb` packages. Please see the [installation page](../../installation?environment=cplusplus) for details.
 
-## Pages in This Section

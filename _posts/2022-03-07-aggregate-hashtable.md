@@ -2,11 +2,8 @@
 layout: post  
 title:  "Parallel Grouped Aggregation in DuckDB"
 author: Hannes Mühleisen and Mark Raasveldt
-excerpt_separator: <!--more-->
+excerpt: DuckDB has a fully parallelized aggregate hash table that can efficiently aggregate over millions of groups.
 ---
-
-*TL;DR: DuckDB has a fully parallelized aggregate hash table that can efficiently aggregate over millions of groups.*
-
 
 Grouped aggregations are a core data analysis command. It is particularly important for large-scale data analysis (“OLAP”) because it is useful for  computing statistical summaries of huge tables. DuckDB contains a highly optimized parallel aggregation capability for fast and scalable summarization.
 

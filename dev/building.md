@@ -3,28 +3,29 @@ layout: docu
 title: Building DuckDB from Source
 ---
 
-> DuckDB binaries are available for stable and nightly builds on the [installation page](../docs/installation).
+> DuckDB binaries are available for stable and nightly builds on the [installation page](/docs/installation).
 > You should only build DuckDB under specific circumstances, such as when running on a specific architecture or building an unmerged pull request.
 
-### Prerequisites
+## Prerequisites
 
-DuckDB needs a C++11-compiler and CMake. Additionally, we recommend using the [Ninja build system](https://ninja-build.org/).
+DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
+Additionally, we recommend using the [Ninja build system](https://ninja-build.org/), which automatically parallelizes the build process.
 
-#### Linux Packages
+### Linux Packages
 
 Install the required packages with the package manager of your distribution.
 
 Fedora, CentOS, and Red Hat:
 
 ```bash
-sudo yum install -y git g++ cmake ninja-build
+sudo yum install -y git g++ cmake ninja-build openssl-devel
 ```
 
 Ubuntu and Debian:
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y git g++ cmake ninja-build
+sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
 Alpine Linux:
@@ -33,7 +34,7 @@ Alpine Linux:
 apk add g++ git make cmake ninja
 ```
 
-#### macOS
+### macOS
 
 Install Xcode and [Homebrew](https://brew.sh/). Then, install the required packages with:
 
@@ -41,11 +42,13 @@ Install Xcode and [Homebrew](https://brew.sh/). Then, install the required packa
 brew install cmake ninja
 ```
 
-#### Windows
+### Windows
 
-Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.8.1/.github/workflows/Windows.yml#L158) for a list of packages used to build DuckDB on Windows.
+Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.0/.github/workflows/Windows.yml#L201) for a list of packages used to build DuckDB on Windows.
 
-### Building DuckDB
+The DuckDB Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../docs/api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
+
+## Building DuckDB
 
 To build DuckDB we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
 
@@ -55,37 +58,37 @@ GEN=ninja make
 
 It is not advised to directly call CMake, as the Makefile sets certain variables that are crucial to properly building the package.
 
-#### Build Type
+### Build Type
 
 DuckDB can be built in many different settings, most of these correspond directly to CMake but not all of them.
 
-##### `release`
+#### `release`
 
 This build has been stripped of all the assertions and debug symbols and code, optimized for performance.
 
-##### `debug`
+#### `debug`
 
 This build runs with all the debug information, including symbols, assertions and DEBUG blocks.  
 The special debug defines are not automatically set for this build however.
 
-##### `relassert`
+#### `relassert`
 
 This build does not trigger the `#ifdef DEBUG` code blocks, but still has debug symbols that make it possible to step through the execution with line number information and `D_ASSERT` lines are still checked in this build.
 
-##### `reldebug`
+#### `reldebug`
 
 This build is similar to `relassert` in many ways, only assertions are also stripped in this build.
 
-##### `benchmark`
+#### `benchmark`
 
 This build is a shorthand for `release` with `BUILD_BENCHMARK=1` set.
 
-##### `tidy-check`
+#### `tidy-check`
 
-This creates a build and then runs [clang tidy](https://clang.llvm.org/extra/clang-tidy/) to check for issues or style violations through static analysis.  
+This creates a build and then runs [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/) to check for issues or style violations through static analysis.  
 The CI will also run this check, causing it to fail if this check fails.
 
-##### `format-fix` | `format-changes` | `format-main`
+#### `format-fix` | `format-changes` | `format-main`
 
 This doesn't actually create a build, but uses the following format checkers to check for style issues:
 - [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to fix format issues in the code.  
@@ -93,7 +96,7 @@ This doesn't actually create a build, but uses the following format checkers to 
 
 The CI will also run this check, causing it to fail if this check fails.
 
-#### Package Flags
+### Package Flags
 
 For every package that is maintained by core DuckDB, there exists a flag in the Makefile to enable building the package.  
 These can be enabled by either setting them in the current `env`, through set up files like `bashrc` or `zshrc`, or by setting them before the call to `make`, for example:
@@ -102,96 +105,84 @@ These can be enabled by either setting them in the current `env`, through set up
 BUILD_PYTHON=1 make debug
 ```
 
-##### `BUILD_PYTHON`
+#### `BUILD_PYTHON`
 
 When this flag is set, the [Python](../docs/api/python/overview) package is built.
 
-##### `BUILD_SHELL`
+#### `BUILD_SHELL`
 
 When this flag is set, the [CLI](../docs/api/cli) is built, this is usually enabled by default.
 
-##### `BUILD_BENCHMARK`
+#### `BUILD_BENCHMARK`
 
 When this flag is set, our in-house Benchmark testing suite is built.  
 More information about this can be found [here](https://github.com/duckdb/duckdb/blob/main/benchmark/README.md).
 
-##### `BUILD_JDBC`
+#### `BUILD_JDBC`
 
 When this flag is set, the [Java](../docs/api/java) package is built.
 
-##### `BUILD_ODBC`
+#### `BUILD_ODBC`
 
 When this flag is set, the [ODBC](../docs/api/odbc/overview) package is built.
 
-##### `BUILD_R`
-
-When this flag is set, the [R](../docs/api/r) package is built.
-
-##### `BUILD_NODE`
-
-When this flag is set, the [Node](../docs/api/nodejs/overview) package is built.
-
-#### Extension Flags
+### Extension Flags
 
 For every in-tree extension that is maintained by core DuckDB there exists a flag to enable building and statically linking the extension into the build.
 
-##### `BUILD_AUTOCOMPLETE`
+#### `BUILD_AUTOCOMPLETE`
 
-When this flag is set, the [AutoComplete](https://github.com/duckdb/duckdb/pull/4921) extension is built.
+When this flag is set, the [`autocomplete` extension](/docs/extensions/autocomplete) is built.
 
-##### `BUILD_ICU`
+#### `BUILD_ICU`
 
-When this flag is set, the [ICU](../2022/01/06/time-zones.html) extension is built.
+When this flag is set, the [`icu` extension](/docs/extensions/icu) is built.
 
-##### `BUILD_TPCH`
+#### `BUILD_TPCH`
 
-When this flag is set, the [TPCH](https://www.tpc.org/tpch/) extension is built, this enables TPCH-H data generation and query support using `dbgen`.
+When this flag is set, the [`tpch` extension](/docs/extensions/tpch) is built, this enables TPCH-H data generation and query support using `dbgen`.
 
-##### `BUILD_TPCDS`
+#### `BUILD_TPCDS`
 
-When this flag is set, the [TPCDS](https://www.tpc.org/tpcds/) extension is built, this enables TPC-DS data generation and query support using `dsdgen`.
+When this flag is set, the [`tpcds` extension](/docs/extensions/tpcds) is built, this enables TPC-DS data generation and query support using `dsdgen`.
 
-##### `BUILD_TPCE`
+#### `BUILD_TPCE`
 
 When this flag is set, the [TPCE](https://www.tpc.org/tpce/) extension is built, unlike TPC-H and TPC-DS this does not enable data generation and query support, but does enable tests for TPC-E through our test suite.
 
-##### `BUILD_FTS`
+#### `BUILD_FTS`
 
-When this flag is set, the [Full Text Search](../docs/extensions/full_text_search) extension is built.
+When this flag is set, the [`fts` (full text search) extension](/docs/extensions/full_text_search) is built.
 
-##### `BUILD_VISUALIZER`
+#### `BUILD_HTTPFS`
 
-When this flag is set, the [Visualizer](https://github.com/duckdb/duckdb/pull/1832) extension is built.
+When this flag is set, the [`httpfs` extension](/docs/extensions/httpfs) is built.
 
-##### `BUILD_HTTPFS`
+#### `BUILD_JSON`
 
-When this flag is set, the [HTTP File System](../docs/extensions/httpfs) extension is built.
+When this flag is set, the [`json` extension](/docs/extensions/json) is built.
 
-##### `BUILD_JSON`
+#### `BUILD_INET`
 
-When this flag is set, the [JSON](../docs/extensions/json) extension is built.
+When this flag is set, the [`inet` extension](/docs/extensions/inet) is built.
 
-##### `BUILD_INET`
+#### `BUILD_SQLSMITH`
 
-When this flag is set, the [INET](https://github.com/duckdb/duckdb/pull/4785) extension is built.
+When this flag is set, the [SQLSmith extension](https://github.com/duckdb/duckdb/pull/3410) is built.
 
-##### `BUILD_SQLSMITH`
+### Debug Flags
 
-When this flag is set, the [SQLSmith](https://github.com/duckdb/duckdb/pull/3410) extension is built.
-
-#### Debug Flags
-
-##### `CRASH_ON_ASSERT`
+#### `CRASH_ON_ASSERT`
 
 `D_ASSERT(condition)` is used all throughout the code, these will throw an InternalException in debug builds.  
 With this flag enabled, when the assertion triggers it will instead directly cause a crash.
 
-##### `DISABLE_STRING_INLINE`
+#### `DISABLE_STRING_INLINE`
 
 In our execution format `string_t` has the feature to "inline" strings that are under a certain length (12 bytes), this means they don't require a separate allocation.  
 When this flag is set, we disable this and don't inline small strings.
 
-##### `DISABLE_MEMORY_SAFETY`
+#### `DISABLE_MEMORY_SAFETY`
 
 Our data structures that are used extensively throughout the non-performance-critical code have extra checks to ensure memory safety, these checks include:  
 - Making sure `nullptr` is never dereferenced.  
@@ -199,30 +190,90 @@ Our data structures that are used extensively throughout the non-performance-cri
 
 With this flag enabled we remove these checks, this is mostly done to check that the performance hit of these checks is negligible.
 
-##### `DESTROY_UNPINNED_BLOCKS`
+#### `DESTROY_UNPINNED_BLOCKS`
 
 When previously pinned blocks in the BufferManager are unpinned, with this flag enabled we destroy them instantly to make sure that there aren't situations where this memory is still being used, despite not being pinned.
 
-##### `DEBUG_STACKTRACE`
+#### `DEBUG_STACKTRACE`
 
 When a crash or assertion hit occurs in a test, print a stack trace.  
 This is useful when debugging a crash that is hard to pinpoint with a debugger attached.
 
-#### Miscellaneous Flags
+### Miscellaneous Flags
 
-##### `DISABLE_UNITY`
+#### `DISABLE_UNITY`
 
 To improve compilation time, we use [Unity Build](https://cmake.org/cmake/help/latest/prop_tgt/UNITY_BUILD.html) to combine translation units.  
 This can however hide include bugs, this flag disables using the unity build so these errors can be detected.
 
-##### `DISABLE_SANITIZER`
+#### `DISABLE_SANITIZER`
 
 In some situations, running an executable that has been built with sanitizers enabled is not support / can cause problems. Julia is an example of this.  
 With this flag enabled, the sanitizers are disabled for the build.
 
-### Troubleshooting
+## Building and Installing Extensions from Source
 
-#### Building the R Package on Linux aarch64
+[Extensions](../docs/extensions/overview) can be built from source and installed from the resulting local binary.
+
+### Using Build Flags
+
+Set the corresponding [`BUILD_[EXTENSION_NAME]` extension flag](#extension-flags) when running the build, then use the `INSTALL` command.
+
+For example, to install the [`httpfs` extension](../docs/extensions/httpfs), run the following script:
+
+```bash
+GEN=ninja BUILD_HTTPFS=1 make
+# for release builds
+build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
+# for debug builds
+build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
+```
+
+### Using a CMake Configuration File
+
+Create an extension configuration file named `extension_config.cmake` with e.g. the following content:
+
+```cmake
+duckdb_extension_load(autocomplete)
+duckdb_extension_load(fts)
+duckdb_extension_load(httpfs)
+duckdb_extension_load(inet)
+duckdb_extension_load(icu)
+duckdb_extension_load(json)
+duckdb_extension_load(parquet)
+```
+
+Build DuckDB as follows:
+
+```bash
+GEN=ninja EXTENSION_CONFIGS="extension_config.cmake" make
+```
+
+Then, to install the extensions in one go, run:
+
+```bash
+# for release builds
+cd build/release/extension/
+# for debug builds
+cd build/debug/extension/
+# install extensions
+for EXTENSION in *; do
+    ../duckdb -c "INSTALL '${EXTENSION}/${EXTENSION}.duckdb_extension';"
+done
+```
+
+## Troubleshooting
+
+### Building the R Package is Slow
+
+By default, R compiles packages using a single thread.
+To parallelize the compilation, create or edit the `~/.R/Makevars` file, and add the following content:
+
+```text
+MAKEFLAGS = -j8
+```
+
+### Building the R Package on Linux AArch64
 
 Building the R package on Linux running on an ARM64 architecture (AArch64) may result in the following error message:
 
@@ -233,12 +284,12 @@ Building the R package on Linux running on an ARM64 architecture (AArch64) may r
 To work around this, create or edit the `~/.R/Makevars` file:
 
 ```text
-ALL_CXXFLAGS =  $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
+ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 ```
 
-#### Building the httpfs Extension and Python Package on macOS
+### Building the httpfs Extension and Python Package on macOS
 
-**Problem:** The build fails on macOS when both the `httpfs` extension and the Python package are included:
+**Problem:** The build fails on macOS when both the [`httpfs` extension](/docs/extensions/httpfs) and the Python package are included:
 
 ```bash
 GEN=ninja BUILD_PYTHON=1 BUILD_HTTPFS=1 make
@@ -252,11 +303,35 @@ make: *** [release] Error 1
 ```
 
 **Solution:**
-In general, we recommended using the nightly builds, available under GitHub main (Bleeding Edge) on the [installation page](/docs/installation/).
+In general, we recommended using the nightly builds, available under GitHub main on the [installation page](/docs/installation).
 If you would like to build DuckDB from source, avoid using the `BUILD_PYTHON=1` flag unless you are actively developing the Python library.
-Instead, first build the `httpfs` extension, then build and install the Python package separately using the `setup.py` script:
+Instead, first build the `httpfs` extension (if required), then build and install the Python package separately using pip:
 
 ```bash
 GEN=ninja BUILD_HTTPFS=1 make
-python tools/pythonpkg/setup.py install --user
+```
+
+If the next line complains about pybind11 being missing, or `--use-pep517` not being supported, make sure you're using a modern version of pip and setuptools.
+`python3-pip` on your OS may not be modern, so you may need to run `python3 -m pip install pip -U` first.
+
+```bash
+python3 -m pip install tools/pythonpkg --use-pep517 --user
+```
+
+### Building the httpfs Extension on Linux
+
+**Problem:** When building the [`httpfs` extension](/docs/extensions/httpfs) on Linux, the build may fail with the following error.
+
+```text
+CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
+  Could NOT find OpenSSL, try to set the path to OpenSSL root folder in the
+  system variable OPENSSL_ROOT_DIR (missing: OPENSSL_CRYPTO_LIBRARY
+  OPENSSL_INCLUDE_DIR)
+```
+
+**Solution:** Install the `libssl-dev` library.
+
+```bash
+sudo apt-get install -y libssl-dev
+GEN=ninja BUILD_HTTPFS=1 make
 ```

@@ -8,18 +8,18 @@ blurb: The NULL value represents a missing value.
 
 ```sql
 -- insert a null value into a table
-CREATE TABLE integers(i INTEGER);
+CREATE TABLE integers (i INTEGER);
 INSERT INTO integers VALUES (NULL);
 ```
 
 `NULL` values have special semantics in many parts of the query as well as in many functions:
 
-> Any comparison with a `NULL` value returns `NULL`, including `NULL=NULL`.
+> Any comparison with a `NULL` value returns `NULL`, including `NULL = NULL`.
 
-You can use `IS NOT DISTINCT FROM` to perform an equality comparison where `NULL` values compare equal to each other. Use `IS (NOT) NULL` to check if a value is NULL.
+You can use `IS NOT DISTINCT FROM` to perform an equality comparison where `NULL` values compare equal to each other. Use `IS (NOT) NULL` to check if a value is `NULL`.
 
 ```sql
-SELECT NULL=NULL;
+SELECT NULL = NULL;
 -- returns NULL
 SELECT NULL IS NOT DISTINCT FROM NULL;
 -- returns true
@@ -32,46 +32,47 @@ SELECT NULL IS NULL;
 A function that has input argument as `NULL` **usually** returns `NULL`.
 
 ```sql
-SELECT COS(NULL);
+SELECT cos(NULL);
 -- NULL
 ```
 
-`COALESCE` is an exception to this. `COALESCE` takes any number of arguments, and returns for each row the first argument that is not `NULL`. If all arguments are `NULL`, `COALESCE` also returns `NULL`.
+The `coalesce` function is an exception to this: it takes any number of arguments, and returns for each row the first argument that is not `NULL`. If all arguments are `NULL`, `coalesce` also returns `NULL`.
 
 ```sql
-SELECT COALESCE(NULL, NULL, 1);
+SELECT coalesce(NULL, NULL, 1);
 -- 1
-SELECT COALESCE(10, 20);
+SELECT coalesce(10, 20);
 -- 10
-SELECT COALESCE(NULL, NULL);
+SELECT coalesce(NULL, NULL);
 -- NULL
 ```
 
-`IFNULL` is a two-argument version of `COALESCE`
+The `ifnull` function is a two-argument version of `coalesce`.
+
 ```sql
-SELECT IFNULL(NULL, 'default_string');
+SELECT ifnull(NULL, 'default_string');
 -- default_string
-SELECT IFNULL(1, 'default_string');
+SELECT ifnull(1, 'default_string');
 -- 1
 ```
 
-## NULL and Conjunctions
+## `NULL` and Conjunctions
 
 `NULL` values have special semantics in `AND`/`OR` conjunctions. For the ternary logic truth tables, see the [Boolean Type documentation](../../sql/data_types/boolean).
 
-## NULL and Aggregate Functions
+## `NULL` and Aggregate Functions
 
 `NULL` values are ignored in most aggregate functions. 
 
-Aggregate functions that do not ignore `NULL` values include: `FIRST`, `LAST`, `LIST`, and `ARRAY_AGG`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause](../../sql/query_syntax/filter) can be used.
+Aggregate functions that do not ignore `NULL` values include: `first`, `last`, `list`, and `array_agg`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause](../../sql/query_syntax/filter) can be used.
 
 ```sql
-CREATE TABLE integers(i INTEGER);
+CREATE TABLE integers (i INTEGER);
 INSERT INTO integers VALUES (1), (10), (NULL);
 
-SELECT MIN(i) FROM integers;
+SELECT min(i) FROM integers;
 -- 1
 
-SELECT MAX(i) FROM integers;
+SELECT max(i) FROM integers;
 -- 10
 ```

@@ -154,7 +154,7 @@ def archive_installation_page(version):
             "{{ site.currentduckdbversion }}", version
         )
         # we leave the variable "{{ site.nextjavaversion }}" as is
-        # to allow the "GitHub main (Bleeding Edge)" to move with new versions
+        # to allow the "GitHub main (Nightly Build)" to move with new versions
 
         archived_installation_file.write(
             frontmatter.dumps(current_installation_file_loaded)

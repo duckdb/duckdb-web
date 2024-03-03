@@ -3,7 +3,7 @@ layout: docu
 title: SQL on Apache Arrow
 ---
 
-DuckDB can query multiple different types of Apache Arrow objects. 
+DuckDB can query multiple different types of Apache Arrow objects.
 
 ## Apache Arrow Tables
 
@@ -43,12 +43,12 @@ con = duckdb.connect()
 my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
                                        'j': ["one", "two", "three", "four"]})
 
-# create example parquet files and save in a folder
+# create example Parquet files and save in a folder
 base_path = pathlib.Path(tempfile.gettempdir())
-(base_path / "parquet_folder").mkdir(exist_ok=True)
+(base_path / "parquet_folder").mkdir(exist_ok = True)
 pq.write_to_dataset(my_arrow_table, str(base_path / "parquet_folder"))
 
-# link to parquet files using an Arrow Dataset
+# link to Parquet files using an Arrow Dataset
 my_arrow_dataset = ds.dataset(str(base_path / 'parquet_folder/'))
 
 # query the Apache Arrow Dataset "my_arrow_dataset" and return as an Arrow Table
@@ -74,19 +74,19 @@ con = duckdb.connect()
 my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
                                        'j': ["one", "two", "three", "four"]})
 
-# create example parquet files and save in a folder
+# create example Parquet files and save in a folder
 base_path = pathlib.Path(tempfile.gettempdir())
-(base_path / "parquet_folder").mkdir(exist_ok=True)
+(base_path / "parquet_folder").mkdir(exist_ok = True)
 pq.write_to_dataset(my_arrow_table, str(base_path / "parquet_folder"))
 
-# link to parquet files using an Arrow Dataset
+# link to Parquet files using an Arrow Dataset
 my_arrow_dataset = ds.dataset(str(base_path / 'parquet_folder/'))
 
 # define the filter to be applied while scanning
 # equivalent to "WHERE i = 2"
 scanner_filter = (pc.field("i") == pc.scalar(2))
 
-arrow_scanner = ds.Scanner.from_dataset(my_arrow_dataset, filter=scanner_filter)
+arrow_scanner = ds.Scanner.from_dataset(my_arrow_dataset, filter = scanner_filter)
 
 # query the Apache Arrow scanner "arrow_scanner" and return as an Arrow Table
 results = con.execute("SELECT * FROM arrow_scanner").arrow()
@@ -94,7 +94,8 @@ results = con.execute("SELECT * FROM arrow_scanner").arrow()
 
 ## Apache Arrow RecordBatchReaders
 
-[Arrow RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatchReader.html) are a reader for Arrow's streaming binary format and can also be queried directly as if they were tables. This streaming format is useful when sending Arrow data for tasks like interprocess communication or communicating between language runtimes.  
+[Arrow RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatchReader.html) are a reader for Arrow's streaming binary format and can also be queried directly as if they were tables. This streaming format is useful when sending Arrow data for tasks like interprocess communication or communicating between language runtimes.
+
 ```python
 import duckdb
 import pyarrow as pa

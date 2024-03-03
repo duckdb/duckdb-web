@@ -3,24 +3,66 @@ layout: docu
 title: CSV Auto Detection
 ---
 
-<!-- markdownlint-disable MD036 -->
-
-When using `read_csv_auto`, or reading a CSV file with the `auto_detect` flag set, the system tries to automatically infer how to read the CSV file. This step is necessary because CSV files are not self-describing and come in many different dialects. The auto-detection works roughly as follows:
+When using `read_csv`, the system tries to automatically infer how to read the CSV file using the [CSV sniffer](/2023/10/27/csv-sniffer).
+This step is necessary because CSV files are not self-describing and come in many different dialects. The auto-detection works roughly as follows:
 
 * Detect the dialect of the CSV file (delimiter, quoting rule, escape)
 * Detect the types of each of the columns
 * Detect whether or not the file has a header row
 
-By default the system will try to auto-detect all options. However, options can be individually overridden by the user. This can be useful in case the system makes a mistake. For example, if the delimiter is chosen incorrectly, we can override it by calling the `read_csv_auto` with an explicit delimiter (e.g., `read_csv_auto('file.csv', delim='|')`).
+By default the system will try to auto-detect all options. However, options can be individually overridden by the user. This can be useful in case the system makes a mistake. For example, if the delimiter is chosen incorrectly, we can override it by calling the `read_csv` with an explicit delimiter (e.g., `read_csv('file.csv', delim = '|')`).
 
 The detection works by operating on a sample of the file. The size of the sample can be modified by setting the `sample_size` parameter. The default sample size is `20480` rows. Setting the `sample_size` parameter to `-1` means the entire file is read for sampling. The way sampling is performed depends on the type of file. If we are reading from a regular file on disk, we will jump into the file and try to sample from different locations in the file. If we are reading from a file in which we cannot jump - such as a `.gz` compressed CSV file or `stdin` - samples are taken only from the beginning of the file.
 
+## `sniff_csv` Function
 
-## Dialect Detection
+It is possible to run the CSV sniffer as a separate step using the `sniff_csv(filename)` function, which returns the detected CSV properties as a table with a single row.
+The `sniff_csv` function accepts an optional `sample_size` parameter to configure the number of rows sampled.
+
+```sql
+FROM sniff_csv('my_file.csv');
+FROM sniff_csv('my_file.csv', sample_size = 1000);
+```
+
+| Column name | Description | Example |
+|----|-----|-------|
+| `Delimiter` | delimiter | `,` |
+| `Quote` | quote character | `"` |
+| `Escape` | escape | `\` |
+| `NewLineDelimiter` | new-line delimiter | `\r\n` |
+| `SkipRow` | number of rows skipped | 1 |
+| `HasHeader` | whether the CSV has a header | `true` |
+| `Columns` | column types encoded as a `LIST` of `STRUCT`s | `({'name': 'VARCHAR', 'age': 'BIGINT'})` |
+| `DateFormat` | date Format | `%d/%m/%Y` |
+| `TimestampFormat` | timestamp Format | `%Y-%m-%dT%H:%M:%S.%f` |
+| `UserArguments` | arguments used to invoke `sniff_csv` | `sample_size = 1000` |
+| `Prompt` | prompt ready to be used to read the CSV | `FROM read_csv('my_file.csv', auto_detect=false, delim=',', ...)` |
+
+### Prompt
+
+The `Prompt` column contains a SQL command with the configurations detected by the sniffer.
+
+```sql
+-- use line mode in CLI to get the full command
+.mode line
+SELECT Prompt FROM sniff_csv('my_file.csv');
+```
+
+```text
+Prompt = FROM read_csv('my_file.csv', auto_detect=false, delim=',', quote='"', escape='"', new_line='\n', skip=0, header=true, columns={...});
+```
+
+## Detection Steps
+
+### Dialect Detection
 
 Dialect detection works by attempting to parse the samples using the set of considered values. The detected dialect is the dialect that has (1) a consistent number of columns for each row, and (2) the highest number of columns for each row.
 
 The following dialects are considered for automatic dialect detection.
+
+<div class="narrow_table"></div>
+
+<!-- markdownlint-disable MD056 -->
 
 | Parameters | Considered values     |
 |------------|-----------------------|
@@ -28,6 +70,7 @@ The following dialects are considered for automatic dialect detection.
 | `quote`    | `"` `'` (empty)       |
 | `escape`   | `"` `'` `\` (empty)   |
 
+<!-- markdownlint-enable MD056 -->
 
 Consider the example file [`flights.csv`](/data/flights.csv):
 
@@ -46,11 +89,13 @@ In this file, the dialect detection works as follows:
 
 In this example - the system selects the `|` as the delimiter. All rows are split into the same amount of columns, and there is more than one column per row meaning the delimiter was actually found in the CSV file.
 
-## Type Detection
+### Type Detection
 
-After detecting the dialect, the system will attempt to figure out the types of each of the columns. Note that this step is only performed if we are calling `read_csv_auto`. In case of the `COPY` statement the types of the table that we are copying into will be used instead.
+After detecting the dialect, the system will attempt to figure out the types of each of the columns. Note that this step is only performed if we are calling `read_csv`. In case of the `COPY` statement the types of the table that we are copying into will be used instead.
 
 The type detection works by attempting to convert the values in each column to the candidate types. If the conversion is unsuccessful, the candidate type is removed from the set of candidate types for that column. After all samples have been handled - the remaining candidate type with the highest priority is chosen. The set of considered candidate types in order of priority is given below:
+
+<div class="narrow_table"></div>
 
 |   Types     |
 |-------------|
@@ -76,7 +121,7 @@ In files that do not have a header row, the column names are generated as `colum
 
 Note that headers cannot be detected correctly if all columns are of type `VARCHAR` - as in this case the system cannot distinguish the header row from the other rows in the file. In this case the system assumes the file has no header. This can be overridden using the `header` option.
 
-## Dates and Timestamps
+### Dates and Timestamps
 
 DuckDB supports the [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) format by default for timestamps, dates and times. Unfortunately, not all dates and times are formatted using this standard. For that reason, the CSV reader also supports the `dateformat` and `timestampformat` options. Using this format the user can specify a [format string](../../sql/functions/dateformat) that specifies how the date or timestamp should be read.
 
@@ -85,6 +130,8 @@ As part of the auto-detection, the system tries to figure out if dates and times
 If the ambiguities cannot be resolved by looking at the data the system has a list of preferences for which date format to use. If the system choses incorrectly, the user can specify the `dateformat` and `timestampformat` options manually.
 
 The system considers the following formats for dates (`dateformat`). Higher entries are chosen over lower entries in case of ambiguities (i.e., ISO 8601 is preferred over `MM-DD-YYYY`).
+
+<div class="narrow_table"></div>
 
 | dateformat |
 |------------|
@@ -97,6 +144,8 @@ The system considers the following formats for dates (`dateformat`). Higher entr
 | `%m-%d-%Y` |
 
 The system considers the following formats for timestamps (`timestampformat`). Higher entries are chosen over lower entries in case of ambiguities.
+
+<div class="narrow_table"></div>
 
 |   timestampformat      |
 |------------------------|

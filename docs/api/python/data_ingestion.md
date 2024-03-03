@@ -5,27 +5,27 @@ title: Data Ingestion
 
 ## CSV Files
 
-CSV files can be read using the `read_csv` function, called either from within Python or directly from within SQL. By default, the `read_csv` function attempts to auto-detect the CSV settings by sampling from the provided file. 
+CSV files can be read using the `read_csv` function, called either from within Python or directly from within SQL. By default, the `read_csv` function attempts to auto-detect the CSV settings by sampling from the provided file.
 
 ```python
 import duckdb
 # read from a file using fully auto-detected settings
-duckdb.read_csv('example.csv')
+duckdb.read_csv("example.csv")
 # read multiple CSV files from a folder
-duckdb.read_csv('folder/*.csv')
+duckdb.read_csv("folder/*.csv")
 # specify options on how the CSV is formatted internally
-duckdb.read_csv('example.csv', header=False, sep=',')
+duckdb.read_csv("example.csv", header = False, sep = ",")
 # override types of the first two columns
-duckdb.read_csv('example.csv', dtype=['int', 'varchar'])
+duckdb.read_csv("example.csv", dtype = ["int", "varchar"])
 # use the (experimental) parallel CSV reader
-duckdb.read_csv('example.csv', parallel=True)
+duckdb.read_csv("example.csv", parallel = True)
 # directly read a CSV file from within SQL
 duckdb.sql("SELECT * FROM 'example.csv'")
 # call read_csv from within SQL
-duckdb.sql("SELECT * FROM read_csv_auto('example.csv')")
+duckdb.sql("SELECT * FROM read_csv('example.csv')")
 ```
 
-See the [CSV Loading](../../data/csv) page for more information.
+See the [CSV Import](../../data/csv) page for more information.
 
 ## Parquet Files
 
@@ -34,9 +34,13 @@ Parquet files can be read using the `read_parquet` function, called either from 
 ```python
 import duckdb
 # read from a single Parquet file
-duckdb.read_parquet('example.parquet')
+duckdb.read_parquet("example.parquet")
 # read multiple Parquet files from a folder
-duckdb.read_parquet('folder/*.parquet')
+duckdb.read_parquet("folder/*.parquet")
+# read a Parquet over https
+duckdb.read_parquet("https://some.url/some_file.parquet")
+# read a list of Parquet files
+duckdb.read_parquet(["file1.parquet", "file2.parquet", "file3.parquet"])
 # directly read a Parquet file from within SQL
 duckdb.sql("SELECT * FROM 'example.parquet'")
 # call read_parquet from within SQL
@@ -52,9 +56,9 @@ JSON files can be read using the `read_json` function, called either from within
 ```python
 import duckdb
 # read from a single JSON file
-duckdb.read_json('example.json')
+duckdb.read_json("example.json")
 # read multiple JSON files from a folder
-duckdb.read_json('folder/*.json')
+duckdb.read_json("folder/*.json")
 # directly read a JSON file from within SQL
 duckdb.sql("SELECT * FROM 'example.json'")
 # call read_json from within SQL
@@ -63,13 +67,15 @@ duckdb.sql("SELECT * FROM read_json_auto('example.json')")
 
 ## DataFrames & Arrow Tables
 
-DuckDB is automatically able to query a Pandas DataFrame, Polars DataFrame, or Arrow object that is stored in a Python variable by name. DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/index#python-client) for more examples.
+DuckDB is automatically able to query a Pandas DataFrame, Polars DataFrame, or Arrow object that is stored in a Python variable by name. Accessing these is made possible by [replacement scans](../c/replacement_scans).
+
+DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/index#python-client) for more examples.
 
 ```python
 import duckdb
 import pandas as pd
-test_df = pd.DataFrame.from_dict({"i":[1, 2, 3, 4], "j":["one", "two", "three", "four"]})
-duckdb.sql('SELECT * FROM test_df').fetchall()
+test_df = pd.DataFrame.from_dict({"i": [1, 2, 3, 4], "j": ["one", "two", "three", "four"]})
+duckdb.sql("SELECT * FROM test_df").fetchall()
 # [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
@@ -80,9 +86,9 @@ If your Pandas DataFrame is stored in another location, here is an example of ma
 import duckdb
 import pandas as pd
 my_dictionary = {}
-my_dictionary['test_df'] = pd.DataFrame.from_dict({"i":[1, 2, 3, 4], "j":["one", "two", "three", "four"]})
-duckdb.register('test_df_view', my_dictionary['test_df'])
-duckdb.sql('SELECT * FROM test_df_view').fetchall()
+my_dictionary["test_df"] = pd.DataFrame.from_dict({"i": [1, 2, 3, 4], "j": ["one", "two", "three", "four"]})
+duckdb.register("test_df_view", my_dictionary["test_df"])
+duckdb.sql("SELECT * FROM test_df_view").fetchall()
 # [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
@@ -90,25 +96,143 @@ You can also create a persistent table in DuckDB from the contents of the DataFr
 
 ```python
 # create a new table from the contents of a DataFrame
-con.execute('CREATE TABLE test_df_table AS SELECT * FROM test_df')
+con.execute("CREATE TABLE test_df_table AS SELECT * FROM test_df")
 # insert into an existing table from the contents of a DataFrame
-con.execute('INSERT INTO test_df_table SELECT * FROM test_df')
+con.execute("INSERT INTO test_df_table SELECT * FROM test_df")
 ```
 
-### Pandas DataFrames - 'object' columns
+### Pandas DataFrames – `object` Columns
 
-pandas.DataFrame columns of an `object` dtype require some special care, since this stores values of arbitrary type.
-
+`pandas.DataFrame` columns of an `object` dtype require some special care, since this stores values of arbitrary type.
 To convert these columns to DuckDB, we first go through an analyze phase before converting the values.
-
 In this analyze phase a sample of all the rows of the column are analyzed to determine the target type.
-
 This sample size is by default set to 1000.
-
-If the type picked during the analyze step is wrong, this will result in a "Failed to cast value:" error, in which case you will need to increase the sample size.
-
+If the type picked during the analyze step is incorrect, this will result in a "Failed to cast value:" error, in which case you will need to increase the sample size.
 The sample size can be changed by setting the `pandas_analyze_sample` config option.
+
 ```python
-# example setting the sample size to 100000
-duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
+# example setting the sample size to 100k
+duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample = 100_000")
 ```
+
+## Object Conversion
+
+This is a mapping of Python object types to DuckDB [Logical Types](../../sql/data_types/overview):
+
+* `None` -> `NULL`
+* `bool` -> `BOOLEAN`
+* `datetime.timedelta` -> `INTERVAL`
+* `str` -> `VARCHAR`
+* `bytearray` -> `BLOB`
+* `memoryview` -> `BLOB`
+* `decimal.Decimal` -> `DECIMAL` / `DOUBLE`
+* `uuid.UUID` -> `UUID`
+
+The rest of the conversion rules are as follows.
+
+### `int`
+
+Since integers can be of arbitrary size in Python, there is not a one-to-one conversion possible for ints.
+Intead we perform these casts in order until one succeeds:
+
+* `BIGINT`
+* `INTEGER`
+* `UBIGINT`
+* `UINTEGER`
+* `DOUBLE`
+
+When using the DuckDB Value class, it's possible to set a target type, which will influence the conversion.
+
+### `float`
+
+These casts are tried in order until one succeeds:
+
+* `DOUBLE`
+* `FLOAT`
+
+### `datetime.datetime`
+
+For `datetime` we will check `pandas.isnull` if it's available and return `NULL` if it returns `true`.
+We check against `datetime.datetime.min` and `datetime.datetime.max` to convert to `-inf` and `+inf` respectively.
+
+If the `datetime` has tzinfo, we will use `TIMESTAMPTZ`, otherwise it becomes `TIMESTAMP`.
+
+### `datetime.time`
+
+If the `time` has tzinfo, we will use `TIMETZ`, otherwise it becomes `TIME`.
+
+### `datetime.date`
+
+`date` converts to the `DATE` type.
+We check against `datetime.date.min` and `datetime.date.max` to convert to `-inf` and `+inf` respectively.
+
+### `bytes`
+
+`bytes` converts to `BLOB` by default, when it's used to construct a Value object of type `BITSTRING`, it maps to `BITSTRING` instead.
+
+### `list`
+
+`list` becomes a `LIST` type of the "most permissive" type of its children, for example:
+
+```python
+my_list_value = [
+    12345,
+    "test"
+]
+```
+Will become `VARCHAR[]` because 12345 can convert to `VARCHAR` but `test` can not convert to `INTEGER`.
+```sql
+[12345, test]
+```
+
+### `dict`
+
+The `dict` object can convert to either `STRUCT(...)` or `MAP(..., ...)` depending on its structure.
+If the dict has a structure similar to:
+
+```python
+my_map_dict = {
+    "key": [
+        1, 2, 3
+    ],
+    "value": [
+        "one", "two", "three"
+    ]
+}
+```
+
+Then we'll convert it to a `MAP` of key-value pairs of the two lists zipped together.
+The example above becomes a `MAP(INTEGER, VARCHAR)`:
+
+```sql
+{1=one, 2=two, 3=three}
+```
+
+> The names of the fields matter and the two lists need to have the same size.
+
+Otherwise we'll try to convert it to a `STRUCT`.
+
+```python
+my_struct_dict = {
+    1: "one",
+    "2": 2,
+    "three": [1, 2, 3],
+    False: True
+}
+```
+
+Becomes:
+
+```sql
+{'1': one, '2': 2, 'three': [1, 2, 3], 'False': true}
+```
+
+> Every `key` of the dictionary is converted to string.
+
+### `tuple`
+
+`tuple` converts to `LIST` by default, when it's used to construct a Value object of type `STRUCT` it will convert to `STRUCT` instead.
+
+### `numpy.ndarray` and `numpy.datetime64`
+
+`ndarray` and `datetime64` are converted by calling `tolist()` and converting the result of that.

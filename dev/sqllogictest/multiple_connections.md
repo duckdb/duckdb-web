@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: SQLLogicTest - Multiple Connections
+title: sqllogictest - Multiple Connections
 ---
 
 For tests whose purpose is to verify that the transactional management or versioning of data works correctly, it is generally necessary to use multiple connections. For example, if we want to verify that the creation of tables is correctly transactional, we might want to start a transaction and create a table in `con1`, then fire a query in `con2` that checks that the table is not accessible yet until committed.
@@ -12,7 +12,7 @@ statement ok con1
 BEGIN TRANSACTION
 
 statement ok con1
-CREATE TABLE integers(i INTEGER);
+CREATE TABLE integers (i INTEGER);
 
 statement error con2
 SELECT * FROM integers;

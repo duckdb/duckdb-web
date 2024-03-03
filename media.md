@@ -3,10 +3,14 @@ layout: docu
 title: Media
 ---
 
-* [In-Process Analytical Data Management with DuckDB (PyData Amsterdam 2023)](/pdf/duckdb-pydata-amsterdam-2023.pdf)
+* [State of the Duck at DuckCon #4](https://www.youtube.com/watch?v=cyZfpXxXojEl) (Technical talk, ca. 20min)
+* [Implementing Hardware-Friendly Databases (Developer Voices)](https://www.youtube.com/watch?v=pZV9FvdKmLc) (Podcast, ca. 80min)
+* [Deep Dive into DuckDB (episode of The Geek Narrator)](https://www.youtube.com/watch?v=f9QlkXW4H9A) (Podcast, ca. 60min)
+* [Two Tier Architectures are Anachronistic (guest lecture at the Hasso-Plattner-Institute)](https://www.tele-task.de/lecture/video/10304/) (Technical talk, ca. 60min)
+* [In-Process Analytical Data Management with DuckDB (PyData Amsterdam 2023)](https://www.youtube.com/watch?v=5ddoZR6PYNU) (Technical talk, ca. 25min) – [Slide deck](/pdf/duckdb-pydata-amsterdam-2023.pdf)
 * [DuckDB: Bringing analytical SQL directly to your Python shell (EuroPython 2023)](https://www.youtube.com/watch?v=egN4TwVyJss) (Technical talk, ca. 40min)
 * [DuckCon #3](https://www.youtube.com/watch?v=9p_sQfy8uuk&list=PLzIMXBizEZjhy6QG4Eqoe9k9NgBa-w67Y) (Latest updates and technical talks about projects using DuckDB)
-* [DuckDB keynote (Data + AI Summit 2023)](https://www.youtube.com/watch?v=AKix55rQEUU) (Keynote presentation, ca. 10 min)
+* [DuckDB keynote (Data + AI Summit 2023)](https://www.youtube.com/watch?v=AKix55rQEUU) (Keynote presentation, ca. 10min)
 * [DuckDB – The SQLite for Analytics (CMU Database Group - Quarantine Tech Talks)](https://www.youtube.com/watch?v=PFUZlNQIndo) (Video Presentation, ca. 1h)
 * [DuckDB - An Embeddable Analytical Database (FOSDEM)](https://www.youtube.com/watch?v=nPDomZQ8jI4) (Video Presentation, ca. 15min)
 * [Move Your Database To The Data And Speed Up Your Analytics With DuckDB (Data Engineering Podcast)](https://www.dataengineeringpodcast.com/duckdb-in-process-olap-database-episode-270/) (Podcast, ca. 1:20h)
@@ -17,4 +21,4 @@ title: Media
 * [The Case for In-Process Analytics](/pdf/sigmod2021-muehleisen-inprocess-slides.pdf) (Slides)
 * [1000 days of DuckDB - The Pareto Principle still holds](http://dsdsd.da.cwi.nl/slides/dsdsd-duckdb.pdf) (Slides)
 * [DuckDB - an Embeddable Analytical RDBMS](https://db.in.tum.de/teaching/ss19/moderndbs/duckdb-tum.pdf) (Slides)
-* [DuckDB: Introducing a New Class of Data Management Systems (I/O Magazine, ICT Research Platform Nederland)](https://ict-research.nl/wordpress/wp-content/uploads/2023/04/IO-magazine-NR1-2023.pdf#page=10) (article)
+* [DuckDB: Introducing a New Class of Data Management Systems (I/O Magazine, ICT Research Platform Nederland)](https://ict-research.nl/wordpress/wp-content/uploads/2023/04/IO-magazine-NR1-2023.pdf#page=10) (Article)

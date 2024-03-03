@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: Spatial Extension
+github_repository: https://github.com/duckdb/duckdb_spatial
 ---
 
 The `spatial` extension provides support for geospatial data processing in DuckDB.
@@ -15,11 +16,11 @@ INSTALL spatial;
 LOAD spatial;
 ```
 
-## GEOMETRY type
+## `GEOMETRY` Type
 
-The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar with geospatial data and GIS tooling, this type probably works very different from what you'd expect. 
+The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar with geospatial data and GIS tooling, this type probably works very different from what you'd expect.
 
-In short, while the `GEOMETRY` type is a binary representation of "geometry" data made up out of sets of vertices (pairs of X and Y `double` precision floats), it actually stores one of several geometry subtypes. These are `POINT`, `LINESTRING`, `POLYGON`, as well as their "collection" equivalents, `MULTIPOINT`, `MULTILINESTRING` and `MULTIPOLYGON`. Lastly there is `GEOMETRYCOLLECTION`, which can contain any of the other subtypes, as well as other `GEOMETRYCOLLECTION`s recursively. 
+In short, while the `GEOMETRY` type is a binary representation of "geometry" data made up out of sets of vertices (pairs of X and Y `double` precision floats), it actually stores one of several geometry subtypes. These are `POINT`, `LINESTRING`, `POLYGON`, as well as their "collection" equivalents, `MULTIPOINT`, `MULTILINESTRING` and `MULTIPOLYGON`. Lastly there is `GEOMETRYCOLLECTION`, which can contain any of the other subtypes, as well as other `GEOMETRYCOLLECTION`s recursively.
 
 This may seem strange at first, since DuckDB already have types like `LIST`, `STRUCT` and `UNION` which could be used in a similar way, but the design and behaviour of the `GEOMETRY` type is actually based on the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) geometry model, which is a standard used by many other databases and GIS software.
 
@@ -27,7 +28,7 @@ That said, the spatial extension also includes a couple of experimental non-stan
 
 All of these are implicitly castable to `GEOMETRY` but with a conversion cost, so the `GEOMETRY` type is still the recommended type to use for now if you are planning to work with a lot of different spatial functions.
 
-`GEOMETRY` is not currently capable of storing additional geometry types, Z/M coordinates, or SRID information. These features may be added in the future. 
+`GEOMETRY` is not currently capable of storing additional geometry types, Z/M coordinates, or SRID information. These features may be added in the future.
 
 ## Spatial Scalar Functions
 
@@ -114,7 +115,6 @@ Calculate and access spatial properties of geometries.
 | `INTEGER ST_NPoints(GEOMETRY)`           | 🦆        | 🦆        | 🦆             | 🦆         |  🦆                 |
 | `INTEGER ST_NInteriorRings(GEOMETRY)`    | 🦆        |           |                | 🦆         |                     |
 
-
 ### Spatial Relationships
 
 Compute relationships and spatial predicates between geometries.
@@ -138,27 +138,40 @@ Compute relationships and spatial predicates between geometries.
 
 ## Spatial Aggregate Functions
 
+<div class="narrow_table"></div>
+
 | Aggregate functions                       | Implemented with |
 |-------------------------------------------|------------------|
 | `GEOMETRY ST_Envelope_Agg(GEOMETRY)`      | 🦆               |
-| `GEOMETRY ST_Union_Agg(GEOMETRY)`         | 🧭               | 
+| `GEOMETRY ST_Union_Agg(GEOMETRY)`         | 🧭               |
 | `GEOMETRY ST_Intersection_Agg(GEOMETRY)`  | 🧭               |
-
-
 
 ## Spatial Table Functions
 
-### `ST_Read()` - Read spatial data from files
+### `ST_Read()` - Read Spatial Data from Files
 
 The spatial extension provides a `ST_Read` table function based on the [GDAL](https://github.com/OSGeo/gdal) translator library to read spatial data from a variety of geospatial vector file formats as if they were DuckDB tables. For example to create a new table from a GeoJSON file, you can use the following query:
+
 ```sql
-CREATE TABLE <table> AS SELECT * FROM ST_Read('some/file/path/filename.json');
+CREATE TABLE ⟨table⟩ AS SELECT * FROM ST_Read('some/file/path/filename.json');
 ```
 
-`ST_Read` can take a number of optional arguments, the full signature is: 
+`ST_Read` can take a number of optional arguments, the full signature is:
+
 ```sql
-ST_Read(VARCHAR, sequential_layer_scan : BOOLEAN, spatial_filter : WKB_BLOB, open_options : VARCHAR[], layer : VARCHAR, allowed_drivers : VARCHAR[], sibling_files : VARCHAR[], spatial_filter_box : BOX_2D, keep_wkb : BOOLEAN)
+ST_Read(
+    VARCHAR,
+    sequential_layer_scan : BOOLEAN,
+    spatial_filter : WKB_BLOB,
+    open_options : VARCHAR[],
+    layer : VARCHAR,
+    allowed_drivers : VARCHAR[],
+    sibling_files : VARCHAR[],
+    spatial_filter_box : BOX_2D,
+    keep_wkb : BOOLEAN
+)
 ```
+
 * `sequential_layer_scan` (default: `false`): If set to `true`, the table function will scan through all layers sequentially and return the first layer that matches the given `layer` name. This is required for some drivers to work properly, e.g., the `OSM` driver.
 * `spatial_filter` (default: `NULL`): If set to a WKB blob, the table function will only return rows that intersect with the given WKB geometry. Some drivers may support efficient spatial filtering natively, in which case it will be pushed down. Otherwise the filtering is done by GDAL which may be much slower.
 * `open_options` (default: `[]`): A list of key-value pairs that are passed to the GDAL driver to control the opening of the file. E.g., the `GeoJSON` driver supports a `FLATTEN_NESTED_ATTRIBUTES=YES` option to flatten nested attributes.
@@ -229,7 +242,7 @@ We currently support over 50 different formats. You can generate the following t
 Note that far from all of these drivers have been tested properly, and some may require additional options to be passed to work as expected. 
 If you run into any issues please first [consult the GDAL docs](https://gdal.org/drivers/vector/index.html).
 
-### ST_ReadOsm() - Read compressed OSM data
+### `ST_ReadOsm()` - Read Compressed OSM Data
 
 The spatial extension also provides an experimental `ST_ReadOsm()` table function to read compressed OSM data directly from a `.osm.pbf` file. 
 
@@ -239,7 +252,12 @@ For node entities you can trivially construct `POINT` geometries, but it is also
 Example usage:
 
 ```sql
-SELECT * FROM st_readosm('tmp/data/germany.osm.pbf') WHERE tags['highway'] != [] LIMIT 5;
+SELECT *
+FROM st_readosm('tmp/data/germany.osm.pbf')
+WHERE tags['highway'] != []
+LIMIT 5;
+```
+```text
 ┌──────────────────────┬────────┬──────────────────────┬─────────┬────────────────────┬────────────┬───────────┬────────────────────────┐
 │         kind         │   id   │         tags         │  refs   │        lat         │    lon     │ ref_roles │       ref_types        │
 │ enum('node', 'way'…  │ int64  │ map(varchar, varch…  │ int64[] │       double       │   double   │ varchar[] │ enum('node', 'way', …  │
@@ -252,30 +270,29 @@ SELECT * FROM st_readosm('tmp/data/germany.osm.pbf') WHERE tags['highway'] != []
 └──────────────────────┴────────┴──────────────────────┴─────────┴────────────────────┴────────────┴───────────┴────────────────────────┘
 ```
 
-## Spatial replacement scans
+## Spatial Replacement Scans
 
 The spatial extension also provides "replacement scans" for common geospatial file formats, allowing you to query files of these formats as if they were tables.
 
 ```sql
-SELECT * FROM `./path/to/some/shapefile/dataset.shp`;
+SELECT * FROM './path/to/some/shapefile/dataset.shp';
 ```
 In practice this is just syntax-sugar for calling `ST_Read`, so there is no difference in performance. If you want to pass additional options, you should use the `ST_Read` table function directly.
 
 The following formats are currently recognized by their file extension:
 
-* ESRI ShapeFile, `.shp` 
+* ESRI ShapeFile, `.shp`
 * GeoPackage, `.gpkg`
 * FlatGeoBuf, `.fgb`
 
 Similarly there is a `.osm.pbf` replacement scan for `ST_ReadOsm`.
-
 
 ## Spatial Copy Functions
 
 Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export duckdb tables to different geospatial vector formats.
 For example to export a table to a GeoJSON file, with generated bounding boxes, you can use the following query:
 ```sql
-COPY <table> TO 'some/file/path/filename.geojson'
+COPY ⟨table⟩ TO 'some/file/path/filename.geojson'
 WITH (FORMAT GDAL, DRIVER 'GeoJSON', LAYER_CREATION_OPTIONS 'WRITE_BBOX=YES');
 ```
 
@@ -286,7 +303,6 @@ Available options:
 * `LAYER_CREATION_OPTIONS`: list of options to pass to the GDAL driver. See the GDAL docs for the driver you are using for a list of available options.
 * `SRS`: Set a spatial reference system as metadata to use for the export. This can be a WKT string, an EPSG code or a proj-string, basically anything you would normally be able to pass to GDAL/OGR. This will not perform any reprojection of the input geometry though, it just sets the metadata if the target driver supports it.
 
+## Limitations
 
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_spatial)
+Raster types are not supported and there is currently no plan to add them to the extension.

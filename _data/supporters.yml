@@ -26,7 +26,7 @@ silver:
     
   - name: Relational AI
     url: https://relational.ai
-    logoimg: relational-ai.svg
+    logoimg: relationalai.svg
 
   - name: Rill
     url: https://www.rilldata.com
@@ -55,3 +55,7 @@ silver:
   - name: BoilingData
     url: https://www.boilingdata.com/
     logoimg: boilingdata.svg
+
+  - name: Overture Maps Foundation
+    url: https://overturemaps.org/
+    logoimg: overturemaps.svg

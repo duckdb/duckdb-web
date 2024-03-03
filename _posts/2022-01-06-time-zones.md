@@ -2,10 +2,8 @@
 layout: post  
 title:  "DuckDB Time Zones: Supporting Calendar Extensions"
 author: Richard Wesley
-excerpt_separator: <!--more-->
+excerpt: The DuckDB ICU extension now provides time zone support.
 ---
-
-*TLDR: The DuckDB ICU extension now provides time zone support.*
 
 Time zone support is a common request for temporal analytics, but the rules are complex and somewhat arbitrary. 
 The most well supported library for locale-specific operations is the [International Components for Unicode (ICU)](https://icu.unicode.org).
@@ -141,7 +139,7 @@ DuckDB extensions can define and validate their own settings, and the ICU extens
 ```sql
 -- Load the extension
 -- This is not needed in Python or R, as the extension is already installed
-load icu;
+LOAD icu;
 
 -- Show the current time zone. The default is set to ICU's current time zone.
 SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';

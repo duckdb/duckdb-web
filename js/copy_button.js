@@ -10,7 +10,7 @@ $(document).ready(function() {
         codeBlock.append(copyButton);
     });
     
-    $('#main_content_wrap').on('click', 'button.copy', function() {
+    $('main').on('click', 'button.copy', function() {
         var elem = $(this);
         var code = $(this).parent().find('code').text().trim();
         

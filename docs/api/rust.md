@@ -27,6 +27,13 @@ You can `conn.close()` the `Connection` manually, or just leave it out of scope,
 SQL queries can be sent to DuckDB using the `execute()` method of connections, or we can also prepare the statement and then query on that.
 
 ```rust
+#[derive(Debug)]
+struct Person {
+    id: i32,
+    name: String,
+    data: Option<Vec<u8>>,
+}
+
 conn.execute(
     "INSERT INTO person (name, data) VALUES (?, ?)",
     params![me.name, me.data],
@@ -43,5 +50,17 @@ let person_iter = stmt.query_map([], |row| {
 
 for person in person_iter {
     println!("Found person {:?}", person.unwrap());
+}
+```
+
+## Appender
+
+The Rust client supports the [DuckDB Appender API](../data/appender) for bulk inserts. For example:
+
+```rust
+fn insert_rows(conn: &Connection) -> Result<()> {
+    let mut app = conn.appender("foo")?;
+    app.append_rows([[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]])?;
+    Ok(())
 }
 ```

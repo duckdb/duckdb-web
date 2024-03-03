@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: SQLLogicTest - Result Verification
+title: sqllogictest - Result Verification
 ---
 
 The standard way of verifying results of queries is using the `query` statement, followed by the letter `I` times the number of columns that are expected in the result. After the query, four dashes (`----`) are expected followed by the result values separated by tabs. For example,
@@ -92,7 +92,7 @@ Besides direct result verification, the sqllogic test suite also has the option 
 
 ```sql
 query I
-SELECT g, STRING_AGG(x,',') FROM strings GROUP BY g
+SELECT g, string_agg(x,',') FROM strings GROUP BY g
 ----
 200 values hashing to b8126ea73f21372cdb3f2dc483106a12
 ```

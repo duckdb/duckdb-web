@@ -9,13 +9,13 @@ There are two steps to import data into DuckDB.
 
 First, the data file is imported into a local file system using register functions ([registerEmptyFileBuffer](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerEmptyFileBuffer), [registerFileBuffer](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileBuffer), [registerFileHandle](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileHandle), [registerFileText](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileText), [registerFileURL](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileURL)).
 
-Then, the data file is imported into DuckDB using insert functions ([insertArrowFromIPCStream](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowFromIPCStream), [insertArrowTable](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowTable), [insertCSVFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertCSVFromPath), [insertJSONFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertJSONFromPath)) or directly using FROM SQL query (using extensions like parquet or [httpfs](../../extensions/httpfs)).
+Then, the data file is imported into DuckDB using insert functions ([insertArrowFromIPCStream](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowFromIPCStream), [insertArrowTable](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowTable), [insertCSVFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertCSVFromPath), [insertJSONFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertJSONFromPath)) or directly using FROM SQL query (using extensions like Parquet or [Wasm-flavored httpfs](#httpfs-wasm-flavored)).
 
 [Insert statements](../../data/insert) can also be used to import data.
 
 ## Data Import
 
-### Open & Close connection
+### Open & Close Connection
 
 ```ts
 // Create a new connection
@@ -25,7 +25,6 @@ const c = await db.connect();
 
 // Close the connection to release memory
 await c.close();
-
 ```
 
 ### Apache Arrow
@@ -35,12 +34,19 @@ await c.close();
 // More Example https://arrow.apache.org/docs/js/
 import { tableFromArrays } from 'apache-arrow';
 
+// EOS signal according to Arrorw IPC streaming format
+// See https://arrow.apache.org/docs/format/Columnar.html#ipc-streaming-format
+const EOS = new Uint8Array([255, 255, 255, 255, 0, 0, 0, 0]);
+
 const arrowTable = tableFromArrays({
   id: [1, 2, 3],
   name: ['John', 'Jane', 'Jack'],
   age: [20, 21, 22],
 });
+
 await c.insertArrowTable(arrowTable, { name: 'arrow_table' });
+// Write EOS
+await c.insertArrowTable(EOS, { name: 'arrow_table' });
 
 // ..., from a raw Arrow IPC stream
 const streamResponse = await fetch(`someapi`);
@@ -51,6 +57,10 @@ while (true) {
     if (done) break;
     streamInserts.push(c.insertArrowFromIPCStream(value, { name: 'streamed' }));
 }
+
+// Write EOS
+streamInserts.push(c.insertArrowFromIPCStream(EOS, { name: 'streamed' }));
+
 await Promise.all(streamInserts);
 ```
 
@@ -62,7 +72,7 @@ await Promise.all(streamInserts);
 const csvContent = '1|foo\n2|bar\n';
 await db.registerFileText(`data.csv`, csvContent);
 // ... with typed insert options
-await db.insertCSVFromPath('data.csv', {
+await c.insertCSVFromPath('data.csv', {
     schema: 'main',
     name: 'foo',
     detect: false,
@@ -122,27 +132,29 @@ await db.registerFileBuffer('buffer.parquet', new Uint8Array(await res.arrayBuff
 // ..., by specifying URLs in the SQL text
 await c.query(`
     CREATE TABLE direct AS
-        SELECT * FROM "https://origin/remote.parquet"
+        SELECT * FROM 'https://origin/remote.parquet'
 `);
 // ..., or by executing raw insert statements
-await c.query(`INSERT INTO existing_table
-    VALUES (1, "foo"), (2, "bar")`);
+await c.query(`
+    INSERT INTO existing_table
+    VALUES (1, 'foo'), (2, 'bar')`);
 ```
 
-### httpfs
+### httpfs (Wasm-flavored)
 
 ```ts
 // ..., by specifying URLs in the SQL text
 await c.query(`
     CREATE TABLE direct AS
-        SELECT * FROM "https://origin/remote.parquet"
+        SELECT * FROM 'https://origin/remote.parquet'
 `);
 ```
 
-### Insert statement
+### Insert Statement
 
 ```ts
 // ..., or by executing raw insert statements
-await c.query(`INSERT INTO existing_table
-    VALUES (1, "foo"), (2, "bar")`);
+await c.query(`
+    INSERT INTO existing_table
+    VALUES (1, 'foo'), (2, 'bar')`);
 ```

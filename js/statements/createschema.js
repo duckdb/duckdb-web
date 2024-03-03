@@ -2,11 +2,10 @@ function GenerateCreateSchema(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Sequence([
-				Keyword("CREATE"),
-				Keyword("SCHEMA"),
+				Keyword("CREATE SCHEMA"),
+				GenerateIfNotExists(),
 				Expression("schema-name")
 			]),
-			GenerateIfNotExists()
 		])
 	])
 }

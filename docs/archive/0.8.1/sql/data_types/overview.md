@@ -55,4 +55,3 @@ SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
 -- A list of unions
 SELECT [union_value(num := 2), union_value(str := 'ABC')::UNION(str VARCHAR, num INTEGER)];
 ```
-## Links to Detailed Documentation

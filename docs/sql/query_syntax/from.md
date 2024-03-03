@@ -12,13 +12,16 @@ The `FROM` clause specifies the *source* of the data on which the remainder of t
 ```sql
 -- select all columns from the table called "table_name"
 SELECT * FROM table_name;
--- select all columns from the table called "table_name" using the FROM-first syntax
+-- select all columns from the table using the FROM-first syntax
 FROM table_name SELECT *;
 -- select all columns using the FROM-first syntax and omitting the SELECT clause
 FROM table_name;
--- select all columns from the table called "table_name" in the schema "schema_name
+-- select all columns from the table called "table_name" through an alias "tn"
+SELECT tn.* FROM table_name tn;
+-- select all columns from the table "table_name" in the schema "schema_name"
 SELECT * FROM schema_name.table_name;
--- select the column "i" from the table function "range", where the first column of the range function is renamed to "i"
+-- select the column "i" from the table function "range",
+-- where the first column of the range function is renamed to "i"
 SELECT t.i FROM range(100) AS t(i);
 -- select all columns from the CSV file called "test.csv"
 SELECT * FROM 'test.csv';
@@ -82,15 +85,19 @@ with the join (clearer) or implied by the `WHERE` clause (old-fashioned).
 We use the `l_regions` and the `l_nations` tables from the TPC-H schema:
 
 ```sql
-CREATE TABLE l_regions(r_regionkey INTEGER NOT NULL PRIMARY KEY,
-                       r_name      CHAR(25) NOT NULL,
-                       r_comment   VARCHAR(152));
+CREATE TABLE l_regions (
+    r_regionkey INTEGER NOT NULL PRIMARY KEY,
+    r_name      CHAR(25) NOT NULL,
+    r_comment   VARCHAR(152)
+);
 
-CREATE TABLE l_nations (n_nationkey INTEGER NOT NULL PRIMARY KEY,
-                        n_name      CHAR(25) NOT NULL,
-                        n_regionkey INTEGER NOT NULL,
-                        n_comment   VARCHAR(152),
-                        FOREIGN KEY (n_regionkey) REFERENCES l_regions(r_regionkey));
+CREATE TABLE l_nations (
+    n_nationkey INTEGER NOT NULL PRIMARY KEY,
+    n_name      CHAR(25) NOT NULL,
+    n_regionkey INTEGER NOT NULL,
+    n_comment   VARCHAR(152),
+    FOREIGN KEY (n_regionkey) REFERENCES l_regions(r_regionkey)
+);
 ```
 
 ```sql
@@ -103,9 +110,9 @@ If the column names are the same and are required to be equal,
 then the simpler `USING` syntax can be used:
 
 ```sql
-CREATE TABLE l_regions(regionkey INTEGER NOT NULL PRIMARY KEY,
-                       name      CHAR(25) NOT NULL,
-                       comment   VARCHAR(152));
+CREATE TABLE l_regions (regionkey INTEGER NOT NULL PRIMARY KEY,
+                        name      CHAR(25) NOT NULL,
+                        comment   VARCHAR(152));
 
 CREATE TABLE l_nations (nationkey INTEGER NOT NULL PRIMARY KEY,
                         name      CHAR(25) NOT NULL,
@@ -137,15 +144,17 @@ Semi joins return rows from the left table that have at least one match in the r
 ```sql
 -- return a list of cars that have a valid region.
 SELECT cars.name, cars.manufacturer 
-FROM cars SEMI JOIN region
-ON cars.region = region.id;
+FROM cars
+SEMI JOIN region
+       ON cars.region = region.id;
 ```
 
 ```sql
 -- return a list of cars with no recorded safety data.
 SELECT cars.name, cars.manufacturer
-FROM cars ANTI JOIN safety_data
-ON cars.safety_report_id = safety_data.report_id;
+FROM cars
+ANTI JOIN safety_data
+       ON cars.safety_report_id = safety_data.report_id;
 ```
 
 ### Lateral Joins
@@ -171,7 +180,9 @@ Lateral joins are a generalization of correlated subqueries, as they can return 
 
 ```sql
 SELECT *
-FROM generate_series(0, 1) t(i), LATERAL (SELECT i + 10 UNION ALL SELECT i + 100) t2(j);
+FROM 
+    generate_series(0, 1) t(i),
+    LATERAL (SELECT i + 10 UNION ALL SELECT i + 100) t2(j);
 ```
 ```text
 ┌───────┬───────┐
@@ -192,7 +203,7 @@ It is possible to refer to multiple attributes from the `LATERAL` subquery. Usin
 
 ```sql
 CREATE TABLE t1 AS SELECT * FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
-SELECT * FROM t1, LATERAL (SELECT i + j) t2(k);
+SELECT * FROM t1, LATERAL (SELECT i + j) t2(k) ORDER BY ALL;
 ```
 ```text
 ┌───────┬───────┬───────┐
@@ -214,20 +225,22 @@ the rows may have a natural correspondence based on their physical order.
 In scripting languages, this is easily expressed using a loop:
 
 ```cpp
-for (i=0;i<n;i++) 
+for (i = 0; i < n; i++) {
     f(t1.a[i], t2.b[i])
+}
 ```
 
 It is difficult to express this in standard SQL because 
 relational tables are not ordered, but imported tables (like data frames)
 or disk files (like CSVs or Parquet files) do have a natural ordering.
 
-Connecting them using this ordering is called a _positional join_:
+Connecting them using this ordering is called a _positional join:_
 
 ```sql
 -- treat two data frames as a single table
 SELECT df1.*, df2.*
-FROM df1 POSITIONAL JOIN df2;
+FROM df1
+POSITIONAL JOIN df2;
 ```
 
 Positional joins are always `FULL OUTER` joins.
@@ -236,13 +249,14 @@ Positional joins are always `FULL OUTER` joins.
 
 A common operation when working with temporal or similarly-ordered data
 is to find the nearest (first) event in a reference table (such as prices).
-This is called an _as-of join_:
+This is called an _as-of join:_
 
 ```sql
 -- attach prices to stock trades
 SELECT t.*, p.price
-FROM trades t ASOF JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when;
+FROM trades t
+ASOF JOIN prices p 
+       ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 The `ASOF` join requires at least one inequality condition on the ordering field.
@@ -258,8 +272,9 @@ It can be specified as an `OUTER` join to find unpaired rows
 ```sql
 -- attach prices or NULLs to stock trades
 SELECT *
-FROM trades t ASOF LEFT JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when;
+FROM trades t
+ASOF LEFT JOIN prices p 
+            ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 `ASOF` joins can also specify join conditions on matching column names with the `USING` syntax,
@@ -268,7 +283,8 @@ which will be greater than or equal to (`>=`):
 
 ```sql
 SELECT *
-FROM trades t ASOF JOIN prices p USING (symbol, when);
+FROM trades t
+ASOF JOIN prices p USING (symbol, "when");
 -- Returns symbol, trades.when, price (but NOT prices.when)
 ```
 
@@ -279,7 +295,8 @@ To get the `prices` times in the example, you will need to list the columns expl
 
 ```sql
 SELECT t.symbol, t.when AS trade_when, p.when AS price_when, price
-FROM trades t ASOF LEFT JOIN prices p USING (symbol, when);
+FROM trades t
+ASOF LEFT JOIN prices p USING (symbol, "when");
 ```
 
 ## Syntax

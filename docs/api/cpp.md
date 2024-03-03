@@ -9,7 +9,7 @@ The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please 
 
 ## Basic API Usage
 
-DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`. 
+DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`.
 
 > The standard source distribution of `libduckdb` contains an "amalgamation" of the DuckDB sources, which combine all sources into two files `duckdb.hpp` and `duckdb.cpp`. The `duckdb.hpp` header is much larger in this case. Regardless of whether you are using the amalgamation or not, just include `duckdb.hpp`.
 
@@ -31,7 +31,7 @@ Connections expose the `Query()` method to send a SQL query string to DuckDB fro
 
 ```cpp
 // create a table
-con.Query("CREATE TABLE integers(i INTEGER, j INTEGER)");
+con.Query("CREATE TABLE integers (i INTEGER, j INTEGER)");
 
 // insert three rows into the table
 con.Query("INSERT INTO integers VALUES (3, 4), (5, 6), (7, NULL)");
@@ -47,20 +47,20 @@ The `MaterializedQueryResult` instance contains firstly two fields that indicate
 DuckDB also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
 
 ```cpp
-std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT COUNT(*) FROM a WHERE i=$1");
+std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT count(*) FROM a WHERE i = $1");
 std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ```
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
 
 ### UDF API
 
-The UDF API is exposed in duckdb:Connection through the methods: `CreateScalarFunction()` and `CreateVectorizedFunction()` and variants. 
-These methods created UDFs into the temporary schema (TEMP_SCHEMA) of the owner connection that is the only one allowed to use and change them.
+The UDF API allows the definition of user-defined functions. It is exposed in `duckdb:Connection` through the methods: `CreateScalarFunction()`, `CreateVectorizedFunction()`, and variants.
+These methods created UDFs into the temporary schema (`TEMP_SCHEMA`) of the owner connection that is the only one allowed to use and change them.
 
 #### CreateScalarFunction
 
-The user can code an ordinary scalar function and invoke the `CreateScalarFunction()` to register and afterward use the UDF in a _SELECT_ statement, for instance:
+The user can code an ordinary scalar function and invoke the `CreateScalarFunction()` to register and afterward use the UDF in a `SELECT` statement, for instance:
 
 ```cpp
 bool bigger_than_four(int value) {
@@ -98,7 +98,7 @@ This method automatically discovers from the template typenames the correspondin
 - `double` → `LogicalType::DOUBLE`
 - `string_t` → `LogicalType::VARCHAR`
 
-*In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same LogicalType: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
+In DuckDB some primitive types, e.g., `int32_t`, are mapped to the same `LogicalType`: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
 
 **2.**
 
@@ -120,7 +120,6 @@ con.Query("INSERT INTO dates VALUES ('1992-01-01')");
 con.CreateScalarFunction<int32_t, int32_t>("udf_date", {LogicalType::DATE}, LogicalType::DATE, &udf_date);
 
 con.Query("SELECT udf_date(d) FROM dates")->Print();
-
 ```
 
 - template parameters:

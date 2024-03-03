@@ -13,7 +13,7 @@ For example, here we create a relation from a SQL query:
 
 ```python
 import duckdb
-rel = duckdb.sql('SELECT * FROM range(10000000000) tbl(id)');
+rel = duckdb.sql("SELECT * FROM range(10_000_000_000) tbl(id)")
 rel.show()
 ```
 
@@ -71,8 +71,8 @@ Relation objects can be queried through SQL through so-called **replacement scan
 
 ```python
 import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
-duckdb.sql('SELECT SUM(id) FROM rel').show()
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
+duckdb.sql("SELECT sum(id) FROM rel").show()
 ```
 
 ```text
@@ -94,8 +94,8 @@ Apply an (optionally grouped) aggregate over the relation. The system will autom
 
 ```python
 import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
-rel.aggregate('id % 2 AS g, sum(id), min(id), max(id)')
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
+rel.aggregate("id % 2 AS g, sum(id), min(id), max(id)")
 ```
 
 ```text
@@ -114,8 +114,8 @@ Select all rows in the first relation, that do not occur in the second relation.
 
 ```python
 import duckdb
-r1 = duckdb.sql('SELECT * FROM range(10) tbl(id)');
-r2 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
+r1 = duckdb.sql("SELECT * FROM range(10) tbl(id)")
+r2 = duckdb.sql("SELECT * FROM range(5) tbl(id)")
 r1.except_(r2).show()
 ```
 
@@ -138,8 +138,8 @@ Apply the given condition to the relation, filtering any rows that do not satisf
 
 ```python
 import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
-rel.filter('id > 5').limit(3).show()
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
+rel.filter("id > 5").limit(3).show()
 ```
 
 ```text
@@ -159,8 +159,8 @@ Select the intersection of two relations - returning all rows that occur in both
 
 ```python
 import duckdb
-r1 = duckdb.sql('SELECT * FROM range(10) tbl(id)');
-r2 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
+r1 = duckdb.sql("SELECT * FROM range(10) tbl(id)")
+r2 = duckdb.sql("SELECT * FROM range(5) tbl(id)")
 r1.intersect(r2).show()
 ```
 
@@ -177,15 +177,15 @@ r1.intersect(r2).show()
 └───────┘
 ```
 
-### `join(rel, condition, type = 'inner')`
+### `join(rel, condition, type = "inner")`
 
 Combine two relations, joining them based on the provided condition. 
 
 ```python
 import duckdb
-r1 = duckdb.sql('SELECT * FROM range(5) tbl(id)').set_alias('r1');
-r2 = duckdb.sql('SELECT * FROM range(10, 15) tbl(id)').set_alias('r2');
-r1.join(r2, 'r1.id + 10 = r2.id').show()
+r1 = duckdb.sql("SELECT * FROM range(5) tbl(id)").set_alias("r1")
+r2 = duckdb.sql("SELECT * FROM range(10, 15) tbl(id)").set_alias("r2")
+r1.join(r2, "r1.id + 10 = r2.id").show()
 ```
 
 ```text
@@ -207,7 +207,7 @@ Select the first *n* rows, optionally offset by *offset*.
 
 ```python
 import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.limit(3).show()
 ```
 
@@ -228,8 +228,8 @@ Sort the relation by the given set of expressions.
 
 ```python
 import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
-rel.order('id DESC').limit(3).show()
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
+rel.order("id DESC").limit(3).show()
 ```
 
 ```text
@@ -249,8 +249,8 @@ Apply the given expression to each row in the relation.
 
 ```python
 import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
-rel.project('id + 10 AS id_plus_ten').limit(3).show()
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
+rel.project("id + 10 AS id_plus_ten").limit(3).show()
 ```
 
 ```text
@@ -270,8 +270,8 @@ Combine two relations, returning all rows in `r1` followed by all rows in `r2`. 
 
 ```python
 import duckdb
-r1 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
-r2 = duckdb.sql('SELECT * FROM range(10, 15) tbl(id)');
+r1 = duckdb.sql("SELECT * FROM range(5) tbl(id)")
+r2 = duckdb.sql("SELECT * FROM range(10, 15) tbl(id)")
 r1.union(r2).show()
 ```
 
@@ -300,5 +300,5 @@ The result of relations can be converted to various types of Python structures, 
 
 The result of relations can also be directly written to files using the below methods.
 
-* `write_csv`
-* `write_parquet`
+* [`write_csv`](reference/index#duckdb.DuckDBPyRelation.write_csv)
+* [`write_parquet`](reference/index#duckdb.DuckDBPyRelation.write_parquet)

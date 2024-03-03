@@ -2,16 +2,14 @@
 layout: post
 title:  "Persistent Storage of Adaptive Radix Trees in DuckDB"
 author: Pedro Holanda
-excerpt_separator: <!--more-->
+excerpt: DuckDB uses Adaptive Radix Tree (ART) Indexes to enforce constraints and to speed up query filters. Up to this point, indexes were not persisted, causing issues like loss of indexing information and high reload times for tables with data constraints. We now persist ART Indexes to disk, drastically diminishing database loading times (up to orders of magnitude), and we no longer lose track of existing indexes. This blog post contains a deep dive into the implementation of ART storage, benchmarks, and future work. Finally, to better understand how our indexes are used, I'm asking you to answer the following [survey](https://forms.gle/eSboTEp9qpP7ybz98). It will guide us when defining our future roadmap.
+
 ---
 
 <img src="/images/blog/ART/pedro-art.jpg"
      alt="DuckDB ART"
      width=200
  />
- 
-
-*TLDR: DuckDB uses Adaptive Radix Tree (ART) Indexes to enforce constraints and to speed up query filters. Up to this point, indexes were not persisted, causing issues like loss of indexing information and high reload times for tables with data constraints. We now persist ART Indexes to disk, drastically diminishing database loading times (up to orders of magnitude), and we no longer lose track of existing indexes. This blog post contains a deep dive into the implementation of ART storage, benchmarks, and future work. Finally, to better understand how our indexes are used, I'm asking you to answer the following [survey](https://forms.gle/eSboTEp9qpP7ybz98). It will guide us when defining our future roadmap.*
 
 <!--more-->
 
@@ -160,7 +158,7 @@ CREATE TABLE integers(i INTEGER PRIMARY KEY)
 # Insert unique values into ART
 INSERT INTO integers VALUES (3), (2), (1), (8) , (10)
 # Range queries (if highly selective) will also use the ART index
-SELECT * FROM integers where i >=8
+SELECT * FROM integers WHERE i >=8
 ```
 
 
@@ -176,7 +174,7 @@ CREATE TABLE t2(i INTEGER PRIMARY KEY)
 INSERT INTO t1 VALUES (3), (2), (1), (8) , (10)
 INSERT INTO t2 VALUES (3), (2), (1), (8) , (10)
 # Joins will also use the ART index
-SELECT * FROM t1 INNER JOIN t2 on (t1.i = t2.i)
+SELECT * FROM t1 INNER JOIN t2 ON (t1.i = t2.i)
 ```
 
 4. Indexes over expressions. ART indexes can also be used to quickly look up expressions.
@@ -190,7 +188,7 @@ INSERT INTO integers VALUES (1,1), (2,2), (3,3)
 CREATE INDEX i_index ON integers USING ART((i+j))
 
 # Uses ART index point query
-SELECT i FROM integers  where i+j = 2
+SELECT i FROM integers WHERE i+j = 2
 ```
 
 ### ART Storage
@@ -263,7 +261,7 @@ In the following figure, you can see a visual representation of DuckDB's Swizzla
 To evaluate the benefits and disadvantages of our current storage implementation, we run a benchmark (Available at this [Colab Link](https://colab.research.google.com/drive/1lidiFNswQfxdmYlsufXUT80IFpyluEF3?usp=sharing)), where we create a table containing 50,000,000 integral elements with a primary key constraint on top of them. 
 ```python
 con = duckdb.connect("vault.db") 
-con.execute("CREATE TABLE integers (x integer primary key)")
+con.execute("CREATE TABLE integers (x INTEGER PRIMARY KEY)")
 con.execute("INSERT INTO integers SELECT * FROM range(50000000);")
 ```
 

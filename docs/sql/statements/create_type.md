@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Create Type
+title: CREATE TYPE Statement
 railroad: statements/createtype.js
 ---
 

@@ -3,11 +3,9 @@ layout: docu
 title: Documentation
 ---
 
-Welcome to the DuckDB Documentation! 
+Welcome to the DuckDB Documentation!
 
-You have two options to read the DuckDB Documentation:
-* this online documentation page
-* a PDF of the documentation <a href="{{ site.baseurl }}/duckdb-docs.pdf" class="pill">Documentation (PDF)</a>
+Feel free to grab a <a href="{{ site.baseurl }}/duckdb-docs.pdf">PDF copy</a> of the documentation for offline reference.
 
 
 <h1>Sitemap</h1>

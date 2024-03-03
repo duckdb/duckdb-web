@@ -6,36 +6,38 @@ railroad: statements/constraints.js
 
 In SQL, constraints can be specified for tables. Constraints enforce certain properties over data that is inserted into a table. Constraints can be specified along with the schema of the table as part of the [`CREATE TABLE` statement](statements/create_table). In certain cases, constraints can also be added to a table using the [`ALTER TABLE` statement](statements/alter_table), but this is not currently supported for all constraints.
 
+> Warning Constraints have a strong impact on performance: they slow down loading and updates but speed up certain queries. Please consult the [Performance Guide](../guides/performance/schema#constraints) for details.
+
 ## Syntax
 
 <div id="rrdiagram"></div>
 
-## Check
+## Check Constraint
 
 Check constraints allow you to specify an arbitrary boolean expression. Any columns that *do not* satisfy this expression violate the constraint. For example, we could enforce that the `name` column does not contain spaces using the following `CHECK` constraint.
 
 ```sql
-CREATE TABLE students(name VARCHAR CHECK(NOT CONTAINS(name, ' ')));
+CREATE TABLE students (name VARCHAR CHECK (NOT contains(name, ' ')));
 INSERT INTO students VALUES ('this name contains spaces');
 -- Constraint Error: CHECK constraint failed: students
 ```
 
-## Not Null
+## Not Null Constraint
 
 A not-null constraint specifies that the column cannot contain any `NULL` values. By default, all columns in tables are nullable. Adding `NOT NULL` to a column definition enforces that a column cannot contain `NULL` values.
- 
+
 ```sql
-CREATE TABLE students(name VARCHAR NOT NULL);
+CREATE TABLE students (name VARCHAR NOT NULL);
 INSERT INTO students VALUES (NULL);
 -- Constraint Error: NOT NULL constraint failed: students.name
 ```
 
-## Primary Key/Unique
+## Primary Key and Unique Constraint
 
 Primary key or unique constraints define a column, or set of columns, that are a unique identifier for a row in the table. The constraint enforces that the specified columns are *unique* within a table, i.e., that at most one row contains the given values for the set of columns.
 
 ```sql
-CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR);
+CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
 INSERT INTO students VALUES (1, 'Student 1');
 INSERT INTO students VALUES (1, 'Student 2');
 -- Constraint Error: Duplicate key "id: 1" violates primary key constraint
@@ -46,17 +48,17 @@ In order to enforce this property efficiently, an [ART index is automatically cr
 Primary key constraints and unique constraints are identical except for two points:
 
 * A table can only have one primary key constraint defined, but many unique constraints
-* A primary key constraint also enforces the keys to not be `NULL`. 
+* A primary key constraint also enforces the keys to not be `NULL`.
 
-> Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations)
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations).
 
-## Foreign Key
+## Foreign Keys
 
-Foreign keys define a column, or set of columns, that refer to a primary key or unique constraint from *another* table. The constraint enforces that the key exists in the other table. 
+Foreign keys define a column, or set of columns, that refer to a primary key or unique constraint from *another* table. The constraint enforces that the key exists in the other table.
 
 ```sql
-CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR);
-CREATE TABLE exams(exam_id INTEGER REFERENCES students(id), grade INTEGER);
+CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
+CREATE TABLE exams (exam_id INTEGER REFERENCES students(id), grade INTEGER);
 INSERT INTO students VALUES (1, 'Student 1');
 INSERT INTO exams VALUES (1, 10);
 INSERT INTO exams VALUES (2, 10);
@@ -65,4 +67,4 @@ INSERT INTO exams VALUES (2, 10);
 
 In order to enforce this property efficiently, an [ART index is automatically created](indexes) for every foreign key constraint that is defined in the table.
 
-> Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations)
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations).

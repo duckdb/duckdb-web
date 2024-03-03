@@ -5,15 +5,23 @@
       "slug": "/dev/",
       "mainfolderitems": [
         {
+          "page": "DuckDB Repositories",
+          "url": "/internals/repositories"
+        },
+        {
           "page": "Testing",
           "slug": "sqllogictest",
           "subfolderitems": [
-            {
+              {
               "page": "Overview",
               "url": "/dev/testing"
             },
             {
-              "page": "SQLLogicTest",
+              "page": "Writing Tests",
+              "url": "/dev/writing_tests"
+            },
+            {
+              "page": "sqllogictest",
               "url": "/dev/sqllogictest/intro"
             },
             {
@@ -25,7 +33,7 @@
               "url": "/dev/sqllogictest/result_verification"
             },
             {
-              "page": "Persistent",
+              "page": "Persistent Testing",
               "url": "/dev/sqllogictest/persistent_testing"
             },
             {
@@ -59,12 +67,16 @@
           "url": "/dev/profiling"
         },
         {
-          "page": "Release Dates",
-          "url": "/dev/release-dates"
+          "page": "Release Calendar",
+          "url": "/dev/release-calendar"
         },
         {
           "page": "Building",
           "url": "/dev/building"
+        },
+        {
+          "page": "Benchmark Suite",
+          "url": "/dev/benchmark"
         }
       ]
     },

@@ -8,14 +8,14 @@ Profiling is important to help understand why certain queries exhibit specific p
 For the examples on this page we will use the following example data set:
 
 ```sql
-CREATE TABLE students(sid INTEGER PRIMARY KEY, name VARCHAR);
-CREATE TABLE exams(cid INTEGER, sid INTEGER, grade INTEGER, PRIMARY KEY(cid, sid));
+CREATE TABLE students (sid INTEGER PRIMARY KEY, name VARCHAR);
+CREATE TABLE exams (cid INTEGER, sid INTEGER, grade INTEGER, PRIMARY KEY (cid, sid));
 
 INSERT INTO students VALUES (1, 'Mark'), (2, 'Hannes'), (3, 'Pedro');
 INSERT INTO exams VALUES (1, 1, 8), (1, 2, 8), (1, 3, 7), (2, 1, 9), (2, 2, 10);
 ```
 
-### Explain Statement
+## `EXPLAIN` Statement
 
 The first step to profiling a database engine is figuring out what execution plan the engine is using. The `EXPLAIN` statement allows you to peek into the query plan and see what is going on under the hood.
 
@@ -24,8 +24,8 @@ The `EXPLAIN` statement displays the physical plan, i.e., the query plan that wi
 To demonstrate, see the below example:
 
 ```sql
-CREATE TABLE students(name VARCHAR, sid INT);
-CREATE TABLE exams(eid INT, subject VARCHAR, sid INT);
+CREATE TABLE students (name VARCHAR, sid INT);
+CREATE TABLE exams (eid INT, subject VARCHAR, sid INT);
 INSERT INTO students VALUES ('Mark', 1), ('Joe', 2), ('Matthew', 3);
 INSERT INTO exams VALUES (10, 'Physics', 1), (20, 'Chemistry', 2), (30, 'Literature', 3);
 EXPLAIN SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
@@ -76,14 +76,18 @@ EXPLAIN SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
 
 Note that the query is not actually executed – therefore, we can only see the estimated cardinality (`EC`) for each operator, which is calculated by using the statistics of the base tables and applying heuristics for each operator.
 
-### Run-Time Profiling
+## Run-Time Profiling with the `EXPLAIN ANALYZE` Statement
 
 The query plan helps understand the performance characteristics of the system. However, often it is also necessary to look at the performance numbers of individual operators and the cardinalities that pass through them. For this, you can create a query-profile graph.
 
 To create the query graphs it is first necessary to gather the necessary data by running the query. In order to do that, we must first enable the run-time profiling. This can be done by prefixing the query with `EXPLAIN ANALYZE`:
 
 ```sql
-EXPLAIN ANALYZE SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
+EXPLAIN ANALYZE
+    SELECT name
+    FROM students
+    JOIN exams USING (sid)
+    WHERE name LIKE 'Ma%';
 ```
 
 ```text
@@ -166,11 +170,26 @@ PRAGMA profile_output='/path/to/file.json';
 Now let us run the query that we inspected before:
 
 ```sql
-SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
+SELECT name
+FROM students
+JOIN exams USING (sid)
+WHERE name LIKE 'Ma%';
 ```
 
 After the query is completed, the JSON file containing the profiling output has been written to the specified file. We can then render the query graph using the Python script, provided we have the `duckdb` python module installed. This script will generate a HTML file and open it in your web browser.
 
-```sql
-python scripts/generate_querygraph.py /path/to/file.json
+```bash
+python -m duckdb.query_graph /path/to/file.json
 ```
+
+## Notation in Query Plans
+
+In query plans, the [hash join](https://en.wikipedia.org/wiki/Hash_join) operators adhere to the following convention:
+the _probe side_ of the join is the left operand,
+while the _build side_ is the right operand.
+
+Join operators in the query plan show the join type used:
+
+* Inner joins are denoted as `INNER`.
+* Left outer joins and right outer joins are denoted as `LEFT` and `RIGHT`, respectively.
+* Full outer joins are denoted as `FULL`.

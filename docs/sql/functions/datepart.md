@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Date Parts
+title: Date Part Functions
 ---
 
 The `date_part` and `date_diff` and `date_trunc` functions can be used to manipulate the fields of temporal types.
@@ -15,34 +15,34 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 
 | Specifier | Description | Synonyms | Example |
 |:--|:--|:---|:-|
-| `'century'` | Gregorian century | `'cent'`, `'centuries'`, `'c'` | 21 |
-| `'day'` | Gregorian day | `'days'`, `'d'`, `'dayofmonth'` | 3 |
-| `'decade'` | Gregorian decade | `'dec'`, `'decades'`, `'decs'` | 202 |
-| `'hour'` | Hours | `'hr'`, `'hours'`, `'hrs'`, `'h'` | 11 |
-| `'microseconds'` | Sub-minute microseconds | `'microsecond'`, `'us'`, `'usec'`, `'usecs'`, `'usecond'`, `'useconds'` | 44123456 |
-| `'millennium'` | Gregorian millennium | `'mil'`, `'millenniums'`, `'millenia'`, `'mils'`, `'millenium'` | 3 |
-| `'milliseconds'` | Sub-minute milliseconds | `'millisecond'`, `'ms'`, `'msec'`, `'msecs'`, `'msecond'`, `'mseconds'` | 44123 |
-| `'minute'` | Minutes | `'min'`, `'minutes'`, `'mins'`, `'m'` | 59 |
-| `'month'` | Gregorian month | `'mon'`, `'months'`, `'mons'` | 8 |
-| `'quarter'` | Quarter of the year (1-4) | `'quarters'` | 3 |
-| `'second'` | Seconds | `'sec'`, `'seconds'`, `'secs'`, `'s'` | 44 |
-| `'year'` | Gregorian year | `'yr'`, `'y'`, `'years'`, `'yrs'` | 2021 |
+| `'century'` | Gregorian century | `'cent'`, `'centuries'`, `'c'` | `21` |
+| `'day'` | Gregorian day | `'days'`, `'d'`, `'dayofmonth'` | `3` |
+| `'decade'` | Gregorian decade | `'dec'`, `'decades'`, `'decs'` | `202` |
+| `'hour'` | Hours | `'hr'`, `'hours'`, `'hrs'`, `'h'` | `11` |
+| `'microseconds'` | Sub-minute microseconds | `'microsecond'`, `'us'`, `'usec'`, `'usecs'`, `'usecond'`, `'useconds'` | `44123456` |
+| `'millennium'` | Gregorian millennium | `'mil'`, `'millenniums'`, `'millenia'`, `'mils'`, `'millenium'` | `3` |
+| `'milliseconds'` | Sub-minute milliseconds | `'millisecond'`, `'ms'`, `'msec'`, `'msecs'`, `'msecond'`, `'mseconds'` | `44123` |
+| `'minute'` | Minutes | `'min'`, `'minutes'`, `'mins'`, `'m'` | `59` |
+| `'month'` | Gregorian month | `'mon'`, `'months'`, `'mons'` | `8` |
+| `'quarter'` | Quarter of the year (1-4) | `'quarters'` | `3` |
+| `'second'` | Seconds | `'sec'`, `'seconds'`, `'secs'`, `'s'` | `44` |
+| `'year'` | Gregorian year | `'yr'`, `'y'`, `'years'`, `'yrs'` | `2021` |
 
 ### Usable in Date Part Specifiers Only
 
 | Specifier | Description | Synonyms | Example |
 |:--|:--|:---|:-|
-| `'dayofweek'` | Day of the week (Sunday = 0, Saturday = 6) | `'weekday'`, `'dow'` | 2 |
-| `'dayofyear'` | Day of the year (1-365/366) | `'doy'` | 215 |
-| `'epoch'` | Seconds since 1970-01-01 | | 1627991984 |
-| `'era'` | Gregorian era (CE/AD, BCE/BC) | | 1 |
-| `'isodow'` | ISO day of the week (Monday = 1, Sunday = 7) | | 2 |
-| `'isoyear'` | ISO Year number (Starts on Monday of week containing Jan 4th) | | 2021 |
-| `'timezone'` | Time zone offset in seconds | | 0 |
-| `'timezone_hour'` | Time zone offset hour portion | | 0 |
-| `'timezone_minute'` | Time zone offset minute portion | | 0 |
-| `'week'` | Week number | `'weeks'`, `'w'` | 31 |
-| `'yearweek'` | ISO year and week number in `YYYYWW` format | | 202131 |
+| `'dayofweek'` | Day of the week (Sunday = 0, Saturday = 6) | `'weekday'`, `'dow'` | `2` |
+| `'dayofyear'` | Day of the year (1-365/366) | `'doy'` | `215` |
+| `'epoch'` | Seconds since 1970-01-01 | | `1627991984` |
+| `'era'` | Gregorian era (CE/AD, BCE/BC) | | `1` |
+| `'isodow'` | ISO day of the week (Monday = 1, Sunday = 7) | | `2` |
+| `'isoyear'` | ISO Year number (Starts on Monday of week containing Jan 4th) | | `2021` |
+| `'timezone_hour'` | Time zone offset hour portion | | `0` |
+| `'timezone_minute'` | Time zone offset minute portion | | `0` |
+| `'timezone'` | Time zone offset in seconds | | `0` |
+| `'week'` | Week number | `'weeks'`, `'w'` | `31` |
+| `'yearweek'` | ISO year and week number in `YYYYWW` format | | `202131` |
 
 Note that the time zone parts are all zero unless a time zone plugin such as ICU
 has been installed to support `TIMESTAMP WITH TIME ZONE`.
@@ -71,9 +71,9 @@ There are dedicated extraction functions to get certain subfields:
 | `month(`*`date`*`)` | Month | `month(date '1992-02-15')` | `2` |
 | `quarter(`*`date`*`)` | Quarter | `quarter(date '1992-02-15')` | `1` |
 | `second(`*`date`*`)` | Seconds | `second(timestamp '2021-08-03 11:59:44.123456')` | `44` |
-| `timezone(`*`date`*`)` | Time Zone offset in minutes | `timezone(date '1992-02-15')` | `0` |
 | `timezone_hour(`*`date`*`)` | Time zone offset hour portion | `timezone_hour(date '1992-02-15')` | `0` |
 | `timezone_minute(`*`date`*`)` | Time zone offset minutes portion | `timezone_minute(date '1992-02-15')` | `0` |
+| `timezone(`*`date`*`)` | Time Zone offset in minutes | `timezone(date '1992-02-15')` | `0` |
 | `week(`*`date`*`)` | ISO Week | `week(date '1992-02-15')` | `7` |
 | `weekday(`*`date`*`)` | Numeric weekday synonym (Sunday = 0, Saturday = 6) | `weekday(date '1992-02-15')` | `6` |
 | `weekofyear(`*`date`*`)` | ISO Week (synonym) | `weekofyear(date '1992-02-15')` | `7` |

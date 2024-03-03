@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Parquet Import
+title: Querying Parquet Files
 ---
 
 To run a query directly on a Parquet file, use the `read_parquet` function in the `FROM` clause of a query. 
@@ -11,4 +11,4 @@ SELECT * FROM read_parquet('input.parquet');
 
 The Parquet file will be processed in parallel. Filters will be automatically pushed down into the Parquet scan, and only the relevant columns will be read automatically.
 
-For more information see the blog post ["Querying Parquet with Precision using DuckDB"](/2021/06/25/querying-parquet.html).
+For more information see the blog post ["Querying Parquet with Precision using DuckDB"](/2021/06/25/querying-parquet).

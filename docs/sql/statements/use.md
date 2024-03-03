@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Use
+title: USE Statement
 railroad: statements/use.js
 ---
 
