@@ -3,9 +3,9 @@ function GenerateCreateSchema(options = {}) {
 		AutomaticStack([
 			Sequence([
 				Keyword("CREATE SCHEMA"),
+				GenerateIfNotExists(),
 				Expression("schema-name")
 			]),
-			GenerateIfNotExists()
 		])
 	])
 }
