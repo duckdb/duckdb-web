@@ -341,10 +341,10 @@ These were a few highlights - but there are many more features and improvements 
 
 ### New Features
 
-* [COMMENT ON](https://github.com/duckdb/duckdb/pull/10372)
-* [COPY FROM DATABASE](https://github.com/duckdb/duckdb/pull/9765)
-* [UHUGEINT type](https://github.com/duckdb/duckdb/pull/8635)
-* [Window EXCLUDE](https://github.com/duckdb/duckdb/pull/9220) and [Window DISTINCT](https://github.com/duckdb/duckdb/pull/9754) support
+* [`COMMENT ON`](https://github.com/duckdb/duckdb/pull/10372)
+* [`COPY FROM DATABASE`](https://github.com/duckdb/duckdb/pull/9765)
+* [`UHUGEINT` type](https://github.com/duckdb/duckdb/pull/8635)
+* [Window `EXCLUDE`](https://github.com/duckdb/duckdb/pull/9220) and [Window `DISTINCT`](https://github.com/duckdb/duckdb/pull/9754) support
 * [Parquet encryption support](https://github.com/duckdb/duckdb/pull/9392)
 * [Indexes for Lambda parameters](https://github.com/duckdb/duckdb/pull/8851)
 * [`EXCEPT ALL`/`INTERSECT ALL`](https://github.com/duckdb/duckdb/pull/9636)
