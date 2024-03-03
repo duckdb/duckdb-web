@@ -119,7 +119,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 								{% endfor %}
 							
 								{% if exists == true %}
-									<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>{{ site.currentduckdbversion }} (stable)</a></li>
+									<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>{{ site.currentshortduckdbversion }} (stable)</a></li>
 								{% endif %}
 								<!-- check the archived pages -->
 								{% for item in site.data.versions %}
