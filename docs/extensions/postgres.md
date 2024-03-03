@@ -218,6 +218,7 @@ SELECT * FROM postgres_db.s1.integers;
 ├───────┤
 │    42 │
 └───────┘
+```
 ```sql
 DROP SCHEMA postgres_db.s1;
 ```
