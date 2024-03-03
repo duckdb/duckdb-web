@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Rill Data Developer
+redirect_from:
+- docs/archive/0.7.1/guides/sql_editors/rill
 selected: Rill Data Developer
+title: Rill Data Developer
 ---
 
 ## What is Rill? 

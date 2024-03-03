@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Export To Apache Arrow
+redirect_from:
+- docs/archive/0.7.1/guides/python/export_arrow
 selected: Export To Apache Arrow
+title: Export To Apache Arrow
 ---
 
 # How to export data to Apache Arrow

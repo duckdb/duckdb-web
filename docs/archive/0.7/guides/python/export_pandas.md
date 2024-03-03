@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Export To Pandas
+redirect_from:
+- docs/archive/0.7.1/guides/python/export_pandas
 selected: Export To Pandas
+title: Export To Pandas
 ---
 
 # How to export data to a Pandas DataFrame

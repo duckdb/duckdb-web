@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Numeric Types
-selected: Documentation/Data Types/Numeric
-expanded: Data Types
 blurb: Numeric types are used to store numbers, and come in different shapes and sizes.
+expanded: Data Types
+layout: docu
+redirect_from:
+- docs/archive/0.7.1/sql/data_types/numeric
+selected: Documentation/Data Types/Numeric
+title: Numeric Types
 ---
+
 ## Integer Types
 The types `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT` and `HUGEINT` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
 The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` store whole unsigned numbers. Attempts to store negative numbers or values outside of the allowed range will result in an error

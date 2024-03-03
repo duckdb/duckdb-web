@@ -1,7 +1,10 @@
 ---
 layout: docu
-title: Node.js API
+redirect_from:
+- docs/archive/0.7.1/api/nodejs/overview
+- docs/archive/0.7.1/api/nodejs
 selected: Client APIs
+title: Node.js API
 ---
 
 # DuckDB Node Bindings

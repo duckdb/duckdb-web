@@ -1,8 +1,11 @@
 ---
-layout: docu
-title: ODBC API - Overview
-selected: Overview
 expanded: ODBC
+layout: docu
+redirect_from:
+- docs/archive/0.7.1/api/odbc/overview
+- docs/archive/0.7.1/api/odbc
+selected: Overview
+title: ODBC API - Overview
 ---
 
 # ODBC API
@@ -43,5 +46,3 @@ Users can download them from the [Latest Release of DuckDB](https://github.com/d
     <td>Microsoft Windows 10 or later</td>
   </tr>
 </table>
-
-

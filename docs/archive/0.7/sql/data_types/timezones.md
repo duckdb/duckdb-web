@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Time Zones
-selected: Documentation/Data Types/Timestamp
-expanded: Data Types
 blurb: A reference list for Time Zones.
+expanded: Data Types
+layout: docu
+redirect_from:
+- docs/archive/0.7.1/sql/data_types/timezones
+selected: Documentation/Data Types/Timestamp
+title: Time Zones
 ---
 
 ## Time Zone Reference List

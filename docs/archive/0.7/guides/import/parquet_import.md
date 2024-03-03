@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Parquet Import
+redirect_from:
+- docs/archive/0.7.1/guides/import/parquet_import
 selected: Parquet Import
+title: Parquet Import
 ---
 
 # How to load a Parquet file into a table

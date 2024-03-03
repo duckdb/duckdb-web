@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: HTTP Parquet Import
+redirect_from:
+- docs/archive/0.7.1/guides/import/http_import
 selected: HTTP Parquet Import
+title: HTTP Parquet Import
 ---
 
 # How to load a Parquet file directly from HTTP(s)

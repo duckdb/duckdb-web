@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: DuckDB with Fugue
+redirect_from:
+- docs/archive/0.7.1/guides/python/fugue
 selected: DuckDB with Fugue
+title: DuckDB with Fugue
 ---
 
 [Fugue](https://github.com/fugue-project/fugue/) is a unified interface for distributed computing. Fugue executes Python, Pandas, and SQL code on top of Spark, Dask, and Ray. The focus of this tutorial will be on [FugueSQL](https://fugue-tutorials.readthedocs.io/tutorials/quick_look/ten_minutes_sql.html#), an enhanced SQL interface that allows to define end-to-end workflows in SQL rather than juggling between Python and SQL code.

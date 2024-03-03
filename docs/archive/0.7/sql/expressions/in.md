@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: IN Operator
-selected: Documentation/Expressions/In
 expanded: Expressions
+layout: docu
 railroad: expressions/in.js
+redirect_from:
+- docs/archive/0.7.1/sql/expressions/in
+selected: Documentation/Expressions/In
+title: IN Operator
 ---
 
 <div id="rrdiagram"></div>

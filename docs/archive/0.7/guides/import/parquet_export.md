@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Parquet Export
+redirect_from:
+- docs/archive/0.7.1/guides/import/parquet_export
 selected: Parquet Export
+title: Parquet Export
 ---
 
 # How to export a table to a Parquet file

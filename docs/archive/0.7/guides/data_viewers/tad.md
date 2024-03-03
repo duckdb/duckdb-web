@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Tad - A Tabular Data Viewer
+redirect_from:
+- docs/archive/0.7.1/guides/data_viewers/tad
 selected: Tad - A Tabular Data Viewer
+title: Tad - A Tabular Data Viewer
 ---
 
 # How to use Tad to view tabular data files and DuckDb databases
@@ -58,4 +60,4 @@ You can download pre-built installers for Mac, Linux and Windows from the [Tad g
 # Help / Bug Reports / Feedback
 
 Please send any questions, feedback, bug reports, and feature requests to
-[tad-feedback@tadviewer.com](mailto:tad-feedback@tadviewer.com). 
+[tad-feedback@tadviewer.com](mailto:tad-feedback@tadviewer.com).

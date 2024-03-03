@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Insert Statement
-selected: Documentation/SQL/Insert
 expanded: SQL
+layout: docu
 railroad: statements/insert.js
+redirect_from:
+- docs/archive/0.7.1/sql/statements/insert
+selected: Documentation/SQL/Insert
+title: Insert Statement
 ---
+
 The `INSERT` statement inserts new data into a table.
 
 ### Examples

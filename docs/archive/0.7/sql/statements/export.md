@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Export & Import Database
-selected: Documentation/SQL/Export
 expanded: SQL
+layout: docu
 railroad: statements/export.js
+redirect_from:
+- docs/archive/0.7.1/sql/statements/export
+selected: Documentation/SQL/Export
+title: Export & Import Database
 ---
+
 The `EXPORT DATABASE` command allows you to export the contents of the database to a specific directory. The `IMPORT DATABASE` command allows you to then read the contents again.
 
 ### Examples

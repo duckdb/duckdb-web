@@ -1,11 +1,14 @@
 ---
-layout: docu
-title: Select Statement
-selected: Documentation/SQL/Select
-expanded: SQL
-railroad: statements/select.js
 blurb: The SELECT statement retrieves rows from the database.
+expanded: SQL
+layout: docu
+railroad: statements/select.js
+redirect_from:
+- docs/archive/0.7.1/sql/statements/select
+selected: Documentation/SQL/Select
+title: Select Statement
 ---
+
 The `SELECT` statement retrieves rows from the database.
 
 ### Examples
@@ -118,4 +121,3 @@ In the current storage, these identifiers are contiguous unsigned integers (0, 1
 Below is the full syntax diagram of the `SELECT` statement:
 
 <div id="rrdiagram"></div>
-

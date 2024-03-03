@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Jupyter Notebooks
+redirect_from:
+- docs/archive/0.7.1/guides/python/jupyter
 selected: Jupyter Notebooks
+title: Jupyter Notebooks
 ---
 
 # DuckDB in Jupyter Notebooks

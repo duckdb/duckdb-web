@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Copy
-selected: Documentation/SQL/Copy
 expanded: SQL
+layout: docu
 railroad: statements/copy.js
+redirect_from:
+- docs/archive/0.7.1/sql/statements/copy
+selected: Documentation/SQL/Copy
+title: Copy
 ---
+
 `COPY` moves data between DuckDB tables and external Comma Separated Value (CSV) or Parquet files. The Parquet [extension](/docs/extensions/overview) must be installed in order to operate on Parquet files, although many clients bundle the Parquet extension by default (Ex: Python, the Command Line Interface/CLI etc.). For more Parquet examples, see the [Parquet Files page](/docs/data/parquet).
 
 # CSV or Parquet Import

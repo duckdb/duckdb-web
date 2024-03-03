@@ -1,8 +1,10 @@
 ---
-layout: docu
-title: List
-selected: Documentation/Data Types/List
 expanded: Nested
+layout: docu
+redirect_from:
+- docs/archive/0.7.1/sql/data_types/list
+selected: Documentation/Data Types/List
+title: List
 ---
 
 ## List Data Type

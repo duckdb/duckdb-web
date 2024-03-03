@@ -1,8 +1,11 @@
 ---
 layout: docu
-title: WebAssembly API
+redirect_from:
+- docs/archive/0.7.1/api/wasm
 selected: Client APIs
+title: WebAssembly API
 ---
+
 # Getting Started with DuckDB-Wasm
 
 A great starting point is to read the [DuckDB-Wasm launch blog post](https://duckdb.org/2021/10/29/duckdb-wasm.html)!

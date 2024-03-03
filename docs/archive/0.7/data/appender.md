@@ -1,7 +1,10 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.7.1/data/appender
 title: Appender
 ---
+
 The C++ Appender can be used to load bulk data into a DuckDB database. The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
 
 ```cpp

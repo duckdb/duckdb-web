@@ -1,7 +1,10 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.7.1/data/parquet
 title: Parquet
 ---
+
 Parquet files are compressed columnar files that are efficient to load and process. DuckDB provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
 
 ### Examples

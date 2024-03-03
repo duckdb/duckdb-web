@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Explain
+redirect_from:
+- docs/archive/0.7.1/guides/meta/explain
 selected: Explain
+title: Explain
 ---
 
 # How to view the query plan of a query

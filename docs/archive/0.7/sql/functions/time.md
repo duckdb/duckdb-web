@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Time Functions
-selected: Documentation/Functions/Time Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.7.1/sql/functions/time
+selected: Documentation/Functions/Time Functions
+title: Time Functions
 ---
+
 This section describes functions and operators for examining and manipulating `TIME` values.
 
 ## Time Operators

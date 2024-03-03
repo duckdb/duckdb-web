@@ -1,8 +1,11 @@
 ---
 layout: docu
-title: C API - Startup & Shutdown
+redirect_from:
+- docs/archive/0.7.1/api/c/connect
 selected: Startup
+title: C API - Startup & Shutdown
 ---
+
 To use DuckDB, you must first initialize a `duckdb_database` handle using `duckdb_open()`. `duckdb_open()` takes as parameter the database file to read and write from. The special value `NULL` (`nullptr`) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the process).
 
 With the `duckdb_database` handle, you can create one or many `duckdb_connection` using `duckdb_connect()`. While individual connections are thread-safe, they will be locked during querying. It is therefore recommended that each thread uses its own connection to allow for the best parallel performance.
@@ -174,4 +177,3 @@ Usually used for developing C extensions that must return this for a compatibili
 </span>);
 </code></pre></div></div>
 <br>
-

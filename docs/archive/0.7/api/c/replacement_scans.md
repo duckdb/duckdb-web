@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: C API - Replacement Scans
+redirect_from:
+- docs/archive/0.7.1/api/c/replacement_scans
 selected: Replacement Scans
+title: C API - Replacement Scans
 ---
 
 The replacement scan API can be used to register a callback that is called when a table is read that does not exist in the catalog. For example, when a query such as `SELECT * FROM my_table` is executed and `my_table` does not exist, the replacement scan callback will be called with `my_table` as parameter. The replacement scan can then insert a table function with a specific parameter to replace the read of the table.
@@ -108,4 +110,3 @@ The info object
 The error message
 
 <br>
-

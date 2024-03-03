@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Boolean Type
-selected: Documentation/Data Types/Boolean
-expanded: Data Types
 blurb: The BOOLEAN type represents a statement of truth ("true" or "false").
+expanded: Data Types
+layout: docu
+redirect_from:
+- docs/archive/0.7.1/sql/data_types/boolean
+selected: Documentation/Data Types/Boolean
+title: Boolean Type
 ---
 
 | Name | Aliases | Description |

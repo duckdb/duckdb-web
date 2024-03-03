@@ -1,8 +1,12 @@
 ---
 layout: docu
-title: Extensions
+redirect_from:
+- docs/archive/0.7.1/extensions/overview
+- docs/archive/0.7.1/extensions
 selected: Documentation/Extensions
+title: Extensions
 ---
+
 DuckDB has a number of extensions available for use. Not all of them are included by default in every distribution, but DuckDB has a mechanism that allows for remote installation.
 
 ## Remote installation

@@ -1,8 +1,11 @@
 ---
 layout: docu
-title: Rust API
+redirect_from:
+- docs/archive/0.7.1/api/rust
 selected: Client APIs
+title: Rust API
 ---
+
 ## Installation
 The DuckDB Rust API can be installed from [crate.io](https://crates.io/crates/duckdb). Please see the [docs.rs](http://docs.rs/duckdb) for details.
 
@@ -43,4 +46,3 @@ SQL queries can be sent to DuckDB using the `execute()` method of connections, o
         println!("Found person {:?}", person.unwrap());
     }
 ```
-

@@ -1,10 +1,14 @@
 ---
-layout: docu
-title: Timestamp Type
-selected: Documentation/Data Types/Timestamp
+blurb: A timestamp specifies a combination of a date (year, month, day) and a time
+  (hour, minute, second, millisecond).
 expanded: Data Types
-blurb: A timestamp specifies a combination of a date (year, month, day) and a time (hour, minute, second, millisecond).
+layout: docu
+redirect_from:
+- docs/archive/0.7.1/sql/data_types/timestamp
+selected: Documentation/Data Types/Timestamp
+title: Timestamp Type
 ---
+
 Timestamps represent points in absolute time, usually called *instants*.
 DuckDB represents instants as the number of microseconds (µs) since `1970-01-01 00:00:00+00`.
 

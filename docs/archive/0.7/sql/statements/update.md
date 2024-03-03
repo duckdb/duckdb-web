@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Update Statement
-selected: Documentation/SQL/Update
 expanded: SQL
+layout: docu
 railroad: statements/update.js
+redirect_from:
+- docs/archive/0.7.1/sql/statements/update
+selected: Documentation/SQL/Update
+title: Update Statement
 ---
+
 The `UPDATE` statement modifies the values of rows in a table.
 
 ### Examples

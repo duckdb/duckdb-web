@@ -1,8 +1,10 @@
 ---
 layout: docu
-title: Window Functions
-selected: Documentation/Window Functions
 railroad: expressions/window.js
+redirect_from:
+- docs/archive/0.7.1/sql/window_functions
+selected: Documentation/Window Functions
+title: Window Functions
 ---
 
 ## Examples

@@ -1,9 +1,12 @@
 ---
 layout: docu
-title: Indexes
-selected: Documentation/Indexes
 railroad: statements/indexes.js
+redirect_from:
+- docs/archive/0.7.1/sql/indexes
+selected: Documentation/Indexes
+title: Indexes
 ---
+
 ## Index types
 
 DuckDB currently uses two index types:

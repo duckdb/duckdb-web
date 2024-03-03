@@ -1,8 +1,10 @@
 ---
-layout: docu
-title: Utility Functions
-selected: Documentation/Functions/Utility Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.7.1/sql/functions/utility
+selected: Documentation/Functions/Utility Functions
+title: Utility Functions
 ---
 
 ## Utility Functions

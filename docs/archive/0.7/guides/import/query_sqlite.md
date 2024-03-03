@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: SQLite Import
+redirect_from:
+- docs/archive/0.7.1/guides/import/query_sqlite
 selected: SQLite Import
+title: SQLite Import
 ---
 
 # How to run a query directly on a SQLite file

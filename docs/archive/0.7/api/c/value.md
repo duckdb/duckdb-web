@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: C API - Values
+redirect_from:
+- docs/archive/0.7.1/api/c/value
 selected: Values
+title: C API - Values
 ---
 
 The value class represents a single value of any type.
@@ -141,4 +143,3 @@ The value
 The int64 value, or 0 if no conversion is possible
 
 <br>
-

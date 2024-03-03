@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: C API - Complete API
+redirect_from:
+- docs/archive/0.7.1/api/c/api
 selected: API Reference
+title: C API - Complete API
 ---
 
 ## **API Reference**
@@ -5082,4 +5084,3 @@ Returns true if execution of the current query is finished.
 The connection on which to check
 
 <br>
-

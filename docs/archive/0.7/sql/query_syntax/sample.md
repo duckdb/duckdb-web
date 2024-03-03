@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: SAMPLE Clause
-selected: Documentation/SQL/Query Syntax/Sample
 expanded: SQL
+layout: docu
 railroad: query_syntax/sample.js
+redirect_from:
+- docs/archive/0.7.1/sql/query_syntax/sample
+selected: Documentation/SQL/Query Syntax/Sample
+title: SAMPLE Clause
 ---
 
 `The SAMPLE clause` allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `FROM` clause (i.e. after any joins, but before the where clause or any aggregates). See the [sample](../../sql/samples) page for more information.

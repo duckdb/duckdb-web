@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.7.1/data/csv/multiple_files
 title: Reading Multiple CSV Files
 ---
 

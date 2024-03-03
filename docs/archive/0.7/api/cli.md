@@ -1,8 +1,11 @@
 ---
 layout: docu
-title: CLI API
+redirect_from:
+- docs/archive/0.7.1/api/cli
 selected: CLI
+title: CLI API
 ---
+
 ## Installation
 The DuckDB CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, Mac, and Linux. Please see the [installation page](../installation/index) under the CLI tab, or download the version for your environment from the [DuckDB GitHub releases page](https://github.com/duckdb/duckdb/releases/) (in the "Assets" section).
 

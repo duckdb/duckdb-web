@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Postgres Import
+redirect_from:
+- docs/archive/0.7.1/guides/import/query_postgres
 selected: Postgres Import
+title: Postgres Import
 ---
 
 # How to run a query directly on a running Postgres database

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Julia Package
+redirect_from:
+- docs/archive/0.7.1/api/julia
 selected: Client APIs
+title: Julia Package
 ---
 
 # DuckDB Julia Package

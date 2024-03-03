@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Interval Functions
-selected: Documentation/Functions/Interval Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.7.1/sql/functions/interval
+selected: Documentation/Functions/Interval Functions
+title: Interval Functions
 ---
+
 This section describes functions and operators for examining and manipulating `INTERVAL` values.
 
 ## Interval Operators

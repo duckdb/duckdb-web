@@ -1,8 +1,10 @@
 ---
 layout: docu
-title: Aggregate Functions
-selected: Documentation/Aggregates
 railroad: expressions/aggregate.js
+redirect_from:
+- docs/archive/0.7.1/sql/aggregates
+selected: Documentation/Aggregates
+title: Aggregate Functions
 ---
 
 ## Examples
@@ -112,4 +114,3 @@ as the first argument.
 | `percentile_cont(fractions) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_cont(sort_expression, fractions)` |
 | `percentile_disc(fraction) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_disc(sort_expression, fraction)` |
 | `percentile_disc(fractions) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_disc(sort_expression, fractions)` |
-

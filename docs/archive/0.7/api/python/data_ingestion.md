@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Data Ingestion
+redirect_from:
+- docs/archive/0.7.1/api/python/data_ingestion
 selected: Client APIs
+title: Data Ingestion
 ---
 
 #### CSV Files
