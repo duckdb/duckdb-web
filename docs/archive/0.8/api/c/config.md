@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: C API - Configuration
+redirect_from:
+- docs/archive/0.8.1/api/c/config
 selected: Configure
+title: C API - Configuration
 ---
 
 Configuration options can be provided to change different settings of the database system. Note that many of these
@@ -170,4 +172,3 @@ Destroys the specified configuration option and de-allocates all memory allocate
 The configuration object to destroy.
 
 <br>
-

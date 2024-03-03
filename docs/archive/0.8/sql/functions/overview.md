@@ -1,10 +1,14 @@
 ---
-layout: docu
-title: Functions
-selected: Documentation/Functions
 expanded: Functions
+layout: docu
 railroad: expressions/function.js
+redirect_from:
+- docs/archive/0.8.1/sql/functions/overview
+- docs/archive/0.8.1/sql/functions
+selected: Documentation/Functions
+title: Functions
 ---
+
 Functions are ...
 <div id="rrdiagram"></div>
 
@@ -31,4 +35,3 @@ D select distinct on(function_name) function_name, function_type, return_type, p
 ```
 
 Currently the description and parameter names of functions are still missing.
-

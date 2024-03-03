@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Types API
+redirect_from:
+- docs/archive/0.8.1/api/python/types
 selected: Client APIs
+title: Types API
 ---
 
 The `DuckDBPyType` class represents a type instance of our [data types](../../sql/data_types/overview).

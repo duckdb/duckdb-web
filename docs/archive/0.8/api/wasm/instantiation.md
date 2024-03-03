@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Instantiation
+redirect_from:
+- docs/archive/0.8.1/api/wasm/instantiation
 selected: Client APIs
+title: Instantiation
 ---
 
 DuckDB-Wasm has multiple ways to be instantiated depending on the use case.
@@ -98,5 +100,4 @@ const worker = new Worker(bundle.mainWorker!);
 const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
-```  
-
+```

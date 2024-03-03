@@ -1,6 +1,8 @@
 ---
-title: Filesystems
 layout: docu
+redirect_from:
+- docs/archive/0.8.1/guides/python/filesystems
+title: Filesystems
 ---
 
 > This feature is experimental, and is subject to change

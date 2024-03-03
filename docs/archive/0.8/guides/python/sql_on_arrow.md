@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: SQL on Apache Arrow
+redirect_from:
+- docs/archive/0.8.1/guides/python/sql_on_arrow
 selected: SQL on Apache Arrow
+title: SQL on Apache Arrow
 ---
 
 # How to execute SQL on Apache Arrow

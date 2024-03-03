@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Execute SQL
+redirect_from:
+- docs/archive/0.8.1/guides/python/execute_sql
 selected: Execute SQL
+title: Execute SQL
 ---
 
 # How to execute SQL queries

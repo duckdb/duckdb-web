@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Vacuum
-selected: Documentation/SQL/Vacuum
 expanded: SQL
+layout: docu
 railroad: statements/vacuum.js
+redirect_from:
+- docs/archive/0.8.1/sql/statements/vacuum
+selected: Documentation/SQL/Vacuum
+title: Vacuum
 ---
 
 The `VACUUM` statement is primarily in place for PostgreSQL compatibility.

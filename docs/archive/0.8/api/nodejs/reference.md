@@ -1,8 +1,11 @@
 ---
 layout: docu
-title: NodeJS API
+redirect_from:
+- docs/archive/0.8.1/api/nodejs/reference
 selected: Client APIs
+title: NodeJS API
 ---
+
 ## Modules
 
 <dl>
@@ -743,4 +746,3 @@ Currently ignored
 | reason | <code>string</code> | HTTP response reason |
 | response | <code>string</code> | HTTP response body |
 | headers | <code>object</code> | HTTP headers |
-

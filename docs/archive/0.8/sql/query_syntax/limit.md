@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: LIMIT Clause
-selected: Documentation/SQL/Query Syntax/Limit
 expanded: SQL
+layout: docu
 railroad: query_syntax/orderby.js
+redirect_from:
+- docs/archive/0.8.1/sql/query_syntax/limit
+selected: Documentation/SQL/Query Syntax/Limit
+title: LIMIT Clause
 ---
 
 `LIMIT` is an output modifier. Logically it is applied at the very end of the query. The `LIMIT` clause restricts the amount of rows fetched. The `OFFSET` clause indicates at which position to start reading the values, i.e. the first `OFFSET` values are ignored.

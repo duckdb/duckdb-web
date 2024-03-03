@@ -1,11 +1,15 @@
 ---
-layout: docu
-title: FROM & JOIN Clauses
-selected: Documentation/SQL/Query Syntax/From
+blurb: The FROM clause can contain a single table, a combination of multiple tables
+  that are joined together, or another SELECT query inside a subquery node.
 expanded: SQL
+layout: docu
 railroad: query_syntax/from.js
-blurb: The FROM clause can contain a single table, a combination of multiple tables that are joined together, or another SELECT query inside a subquery node.
+redirect_from:
+- docs/archive/0.8.1/sql/query_syntax/from
+selected: Documentation/SQL/Query Syntax/From
+title: FROM & JOIN Clauses
 ---
+
 The `FROM` clause specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together using `JOIN` clauses, or another `SELECT` query inside a subquery node. DuckDB also has an optional `FROM`-first syntax which enables you to also query without a `SELECT` statement.
 
 ### Examples

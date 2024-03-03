@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: C API - Query
+redirect_from:
+- docs/archive/0.8.1/api/c/query
 selected: Query
+title: C API - Query
 ---
 
 The `duckdb_query` method allows SQL queries to be run in DuckDB from C. This method takes two parameters, a (null-terminated) SQL query string and a `duckdb_result` result pointer. The result pointer may be `NULL` if the application is not interested in the result set or if the query produces no result. After the result is consumed, the `duckdb_destroy_result` method should be used to clean up the result.
@@ -406,4 +408,3 @@ The result object to fetch the error from.
 The error of the result.
 
 <br>
-

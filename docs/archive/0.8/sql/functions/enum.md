@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Enum Functions
-selected: Documentation/Functions/Enum Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.8.1/sql/functions/enum
+selected: Documentation/Functions/Enum Functions
+title: Enum Functions
 ---
+
 This section describes functions and operators for examining and manipulating `ENUM` values.
 The examples assume an enum type created as:
 

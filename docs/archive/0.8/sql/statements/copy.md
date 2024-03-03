@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Copy
-selected: Documentation/SQL/Copy
 expanded: SQL
+layout: docu
 railroad: statements/copy.js
+redirect_from:
+- docs/archive/0.8.1/sql/statements/copy
+selected: Documentation/SQL/Copy
+title: Copy
 ---
 
 # Examples

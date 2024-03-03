@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Tableau - A Data Visualisation Tool
+redirect_from:
+- docs/archive/0.8.1/guides/data_viewers/tableau
 selected: Tableau - A Data Visualisation Tool
+title: Tableau - A Data Visualisation Tool
 ---
 
 # Visualising DuckDB databases with Tableau

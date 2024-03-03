@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Substrait
+redirect_from:
+- docs/archive/0.8.1/extensions/substrait
 selected: Documentation/Substrait
+title: Substrait
 ---
 
 The main goal of this extension is to support both production and consumption of substrait query plans in DuckDB.

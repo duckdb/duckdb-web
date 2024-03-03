@@ -1,8 +1,11 @@
 ---
 layout: docu
-title: Result Conversion
+redirect_from:
+- docs/archive/0.8.1/api/python/result_conversion
 selected: Client APIs
+title: Result Conversion
 ---
+
 DuckDB's Python client provides multiple additional methods that can be used to efficiently retrieve data.
 ### NumPy
 * `fetchnumpy()` fetches the data as a dictionary of NumPy arrays

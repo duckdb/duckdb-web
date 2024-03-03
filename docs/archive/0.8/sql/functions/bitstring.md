@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Bitstring Functions
-selected: Documentation/Functions/Bitstring Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.8.1/sql/functions/bitstring
+selected: Documentation/Functions/Bitstring Functions
+title: Bitstring Functions
 ---
+
 This section describes functions and operators for examining and manipulating bit values.
 Bitstrings must be of equal length when performing the bitwise operands AND, OR and XOR. When bit shifting, the original length of the string is preserved.
 

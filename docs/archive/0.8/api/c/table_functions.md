@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: C API - Table Functions
+redirect_from:
+- docs/archive/0.8.1/api/c/table_functions
 selected: Table Functions
+title: C API - Table Functions
 ---
 
 The table function API can be used to define a table function that can then be called from within DuckDB in the `FROM` clause of a query.
@@ -789,4 +791,3 @@ The info object
 The error message
 
 <br>
-

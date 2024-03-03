@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Import From Pandas
+redirect_from:
+- docs/archive/0.8.1/guides/python/import_pandas
 selected: Import From Pandas
+title: Import From Pandas
 ---
 
 # How to create a table from a Pandas DataFrame

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Multiple Python Threads
+redirect_from:
+- docs/archive/0.8.1/guides/python/multiple_threads
 selected: Multiple Python Threads
+title: Multiple Python Threads
 ---
 
 # Multiple Reader and Writer Threads Example

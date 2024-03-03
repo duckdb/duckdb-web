@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Timestamp Functions
-selected: Documentation/Functions/Timestamp Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.8.1/sql/functions/timestamp
+selected: Documentation/Functions/Timestamp Functions
+title: Timestamp Functions
 ---
+
 This section describes functions and operators for examining and manipulating `TIMESTAMP` values.
 
 ## Timestamp Operators

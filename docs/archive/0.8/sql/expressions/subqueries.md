@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Subqueries
-selected: Documentation/Expressions/Subqueries
 expanded: Expressions
+layout: docu
 railroad: expressions/subqueries.js
+redirect_from:
+- docs/archive/0.8.1/sql/expressions/subqueries
+selected: Documentation/Expressions/Subqueries
+title: Subqueries
 ---
+
 ## Scalar Subquery
 <div id="rrdiagram1"></div>
 

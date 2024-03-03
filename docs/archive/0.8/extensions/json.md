@@ -1,8 +1,11 @@
 ---
 layout: docu
-title: JSON
+redirect_from:
+- docs/archive/0.8.1/extensions/json
 selected: Documentation/JSON
+title: JSON
 ---
+
 The __json__ extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
 
 ## JSON Type

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: JSON Export
+redirect_from:
+- docs/archive/0.8.1/guides/import/json_export
 selected: JSON Export
+title: JSON Export
 ---
 
 # How to export a table to a JSON file

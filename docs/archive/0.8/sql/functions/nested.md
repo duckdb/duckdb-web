@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Nested Functions
-selected: Documentation/Functions/Nested Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.8.1/sql/functions/nested
+selected: Documentation/Functions/Nested Functions
+title: Nested Functions
 ---
+
 This section describes functions and operators for examining and manipulating nested values. There are three nested data types: lists, structs, and maps.
 
 ## List Functions

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Python Function API
+redirect_from:
+- docs/archive/0.8.1/api/python/function
 selected: Client APIs
+title: Python Function API
 ---
 
 You can create a DuckDB function out of a python function so it can be used in SQL queries.

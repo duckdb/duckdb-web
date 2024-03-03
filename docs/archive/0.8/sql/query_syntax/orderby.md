@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: ORDER BY Clause
-selected: Documentation/SQL/Query Syntax/Order By
 expanded: SQL
+layout: docu
 railroad: query_syntax/orderby.js
+redirect_from:
+- docs/archive/0.8.1/sql/query_syntax/orderby
+selected: Documentation/SQL/Query Syntax/Order By
+title: ORDER BY Clause
 ---
 
 `ORDER BY` is an output modifier. Logically it is applied at the very end of the query. The `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order. In addition, every order clause can specify whether `NULL` values should be moved to the beginning or to the end.

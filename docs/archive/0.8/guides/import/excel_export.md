@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Excel Export
+redirect_from:
+- docs/archive/0.8.1/guides/import/excel_export
 selected: Excel Export
+title: Excel Export
 ---
 
 # How to export a table to an Excel file

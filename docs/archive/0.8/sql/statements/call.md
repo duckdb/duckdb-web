@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Call
-selected: Documentation/SQL/Call
 expanded: SQL
+layout: docu
 railroad: statements/call.js
+redirect_from:
+- docs/archive/0.8.1/sql/statements/call
+selected: Documentation/SQL/Call
+title: Call
 ---
 
 The `CALL` statement invokes the given table function and returns the results.

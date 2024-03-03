@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: ODBC API - Linux
+redirect_from:
+- docs/archive/0.8.1/api/odbc/linux
 selected: Linux
+title: ODBC API - Linux
 ---
 
 # Driver Manager: unixODBC

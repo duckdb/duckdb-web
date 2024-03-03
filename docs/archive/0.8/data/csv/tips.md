@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- docs/archive/0.8.1/data/csv/tips
 title: CSV Loading Tips
 ---
 

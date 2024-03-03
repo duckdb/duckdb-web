@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: JSON Import
+redirect_from:
+- docs/archive/0.8.1/guides/import/json_import
 selected: JSON Import
+title: JSON Import
 ---
 
 # How to load a JSON file into a table

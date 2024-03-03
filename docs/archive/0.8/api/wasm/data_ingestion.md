@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Data Ingestion
+redirect_from:
+- docs/archive/0.8.1/api/wasm/data_ingestion
 selected: Client APIs
+title: Data Ingestion
 ---
 
 DuckDB-Wasm has multiple ways to import data, depending on the format of the data.

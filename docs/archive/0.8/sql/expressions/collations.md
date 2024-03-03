@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Collations
-selected: Documentation/Expressions/Collations
 expanded: Expressions
+layout: docu
 railroad: expressions/collate.js
+redirect_from:
+- docs/archive/0.8.1/sql/expressions/collations
+selected: Documentation/Expressions/Collations
+title: Collations
 ---
+
 <div id="rrdiagram"></div>
 
 Collations provide rules for how text should be sorted or compared in the execution engine. Collations are useful for localization, as the rules for how text should be ordered are different for different languages or for different countries. These orderings are often incompatible with one another. For example, in English the letter "y" comes between "x" and "z". However, in Lithuanian the letter "y" comes between the "i" and "j". For that reason, different collations are supported. The user must choose which collation they want to use when performing sorting and comparison operations.

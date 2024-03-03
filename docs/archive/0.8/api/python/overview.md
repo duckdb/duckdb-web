@@ -1,8 +1,12 @@
 ---
 layout: docu
-title: Python API
+redirect_from:
+- docs/archive/0.8.1/api/python/overview
+- docs/archive/0.8.1/api/python
 selected: Client APIs
+title: Python API
 ---
+
 ## Installation
 The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](../../installation?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
 
@@ -102,4 +106,4 @@ con.close()
 
 The connection object and the `duckdb` module can be used interchangeably - they support the same methods. The only difference is that when using the `duckdb` module a global in-memory database is used.
 
-Note that if you are developing a package designed for others to use using duckdb, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database - which can cause hard to debug issues if used from within multiple different packages. 
+Note that if you are developing a package designed for others to use using duckdb, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database - which can cause hard to debug issues if used from within multiple different packages.

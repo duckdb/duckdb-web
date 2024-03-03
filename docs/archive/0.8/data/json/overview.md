@@ -1,8 +1,10 @@
 ---
 layout: docu
-title: JSON Loading
 redirect_from:
-  - /docs/archive/0.8.1/data/json
+- /docs/archive/0.8.1/data/json
+- docs/archive/0.8.1/data/json/overview
+- docs/archive/0.8.1/data/json
+title: JSON Loading
 ---
 
 ### Examples

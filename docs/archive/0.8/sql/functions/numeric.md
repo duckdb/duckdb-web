@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Numeric Functions
-selected: Documentation/Functions/Numeric Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.8.1/sql/functions/numeric
+selected: Documentation/Functions/Numeric Functions
+title: Numeric Functions
 ---
+
 ## Numeric Operators
 The table below shows the available mathematical operators for numeric types.
 

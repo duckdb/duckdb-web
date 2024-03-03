@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: C API - Types
+redirect_from:
+- docs/archive/0.8.1/api/c/types
 selected: Types
+title: C API - Types
 ---
 
 DuckDB is a strongly typed database system. As such, every column has a single type specified. This type is constant
@@ -1353,4 +1355,3 @@ Destroys the logical type and de-allocates all memory allocated for that type.
 The logical type to destroy.
 
 <br>
-

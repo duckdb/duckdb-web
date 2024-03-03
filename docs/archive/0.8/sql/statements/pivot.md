@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Pivot Statement
-selected: Documentation/SQL/Pivot
+blurb: The PIVOT statement allows values within a column to be separated into their
+  own columns.
 expanded: SQL
+layout: docu
 railroad: statements/pivot.js
-blurb: The PIVOT statement allows values within a column to be separated into their own columns.
+redirect_from:
+- docs/archive/0.8.1/sql/statements/pivot
+selected: Documentation/SQL/Pivot
+title: Pivot Statement
 ---
 
 The `PIVOT` statement allows distinct values within a column to be separated into their own columns.

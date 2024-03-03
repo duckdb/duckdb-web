@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Create Macro
-selected: Documentation/SQL/Create Macro
 expanded: SQL
+layout: docu
 railroad: statements/createmacro.js
+redirect_from:
+- docs/archive/0.8.1/sql/statements/create_macro
+selected: Documentation/SQL/Create Macro
+title: Create Macro
 ---
+
 The `CREATE MACRO` statement can create a scalar or table macro (function) in the catalog. 
 A macro may only be a single `SELECT` statement (similar to a `VIEW`), but it has the benefit of accepting parameters.
 For a scalar macro, `CREATE MACRO` is followed by the name of the macro, and optionally parameters within a set of parentheses. The keyword `AS` is next, followed by the text of the macro. By design, a scalar macro may only return a single value.

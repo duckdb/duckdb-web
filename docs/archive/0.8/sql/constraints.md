@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Constraints
-selected: Documentation/SQL/Constraints
 expanded: SQL
+layout: docu
 railroad: statements/constraints.js
+redirect_from:
+- docs/archive/0.8.1/sql/constraints
+selected: Documentation/SQL/Constraints
+title: Constraints
 ---
 
 In SQL, constraints can be specified for tables. Constraints enforce certain properties over data that is inserted into a table. Constraints can be specified along with the schema of the table as part of the [create table statement](statements/create_table). In certain cases, constraints can also be added to a table using the [alter table statement](statements/alter_table), but this is not currently supported for all constraints.

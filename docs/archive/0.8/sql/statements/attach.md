@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Attach/Detach
-selected: Documentation/SQL/Attach
 expanded: SQL
+layout: docu
 railroad: statements/attach.js
+redirect_from:
+- docs/archive/0.8.1/sql/statements/attach
+selected: Documentation/SQL/Attach
+title: Attach/Detach
 ---
 
 The `ATTACH` statement adds a new database file to the catalog that can be read from and written to.

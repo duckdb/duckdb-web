@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Set/Reset
-selected: Documentation/SQL/Set
 expanded: SQL
+layout: docu
 railroad: statements/set.js
+redirect_from:
+- docs/archive/0.8.1/sql/statements/set
+selected: Documentation/SQL/Set
+title: Set/Reset
 ---
 
 The `SET` statement modifies the provided DuckDB configuration option at the specified scope.

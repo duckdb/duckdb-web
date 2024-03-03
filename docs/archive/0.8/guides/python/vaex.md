@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: DuckDB with Vaex
+redirect_from:
+- docs/archive/0.8.1/guides/python/vaex
 selected: DuckDB with Vaex
+title: DuckDB with Vaex
 ---
 
 [Vaex](https://github.com/vaexio/vaex/) is a high performance DataFrame library in Python. Vaex is a hybrid DataFrame, as it supports both [Numpy's](https://numpy.org/doc/stable/) and [Apache Arrow's](https://arrow.apache.org/docs/python/index.html) data structures.

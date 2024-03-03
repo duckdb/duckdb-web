@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Case Statement
-selected: Documentation/Expressions/Case
 expanded: Expressions
+layout: docu
 railroad: expressions/case.js
+redirect_from:
+- docs/archive/0.8.1/sql/expressions/case
+selected: Documentation/Expressions/Case
+title: Case Statement
 ---
+
 <div id="rrdiagram"></div>
 
 The `CASE` statement performs a switch based on a condition. The basic form is identical to the ternary condition used in many programming languages (`CASE WHEN cond THEN a ELSE b END` is equivalent to `cond ? a : b`). With a single condition this can be expressed with `IF(cond, a, b)`.

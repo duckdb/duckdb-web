@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Alter Table
-selected: Documentation/SQL/Alter Table
 expanded: SQL
+layout: docu
 railroad: statements/alter.js
+redirect_from:
+- docs/archive/0.8.1/sql/statements/alter_table
+selected: Documentation/SQL/Alter Table
+title: Alter Table
 ---
 
 The `ALTER TABLE` statement changes the schema of an existing table in the catalog.

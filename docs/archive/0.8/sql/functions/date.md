@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Date Functions
-selected: Documentation/Functions/Date Functions
 expanded: Functions
+layout: docu
+redirect_from:
+- docs/archive/0.8.1/sql/functions/date
+selected: Documentation/Functions/Date Functions
+title: Date Functions
 ---
+
 This section describes functions and operators for examining and manipulating date values.
 
 ## Date Operators

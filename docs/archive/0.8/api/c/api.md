@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: C API - Complete API
+redirect_from:
+- docs/archive/0.8.1/api/c/api
 selected: API Reference
+title: C API - Complete API
 ---
 
 ## **API Reference**
@@ -5241,4 +5243,3 @@ The result object to fetch the data chunk from.
 The resulting data chunk. Returns `NULL` if the result has an error.
 
 <br>
-

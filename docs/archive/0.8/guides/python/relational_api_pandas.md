@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Relational API and Pandas
+redirect_from:
+- docs/archive/0.8.1/guides/python/relational_api_pandas
 selected: Relational API and Pandas
+title: Relational API and Pandas
 ---
 
 # How to use the Relational API to query Pandas

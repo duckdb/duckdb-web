@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Excel Import
+redirect_from:
+- docs/archive/0.8.1/guides/import/excel_import
 selected: Excel Import
+title: Excel Import
 ---
 
 # How to load an Excel file into a table

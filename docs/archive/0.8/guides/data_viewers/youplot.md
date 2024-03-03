@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CLI Charting - Using DuckDB with CLI tools
+redirect_from:
+- docs/archive/0.8.1/guides/data_viewers/youplot
 selected: CLI Charting - Using DuckDB with CLI tools
+title: CLI Charting - Using DuckDB with CLI tools
 ---
 
 # How to use DuckDB with CLI tools
@@ -77,4 +79,3 @@ curl -sL "https://api.github.com/users/dacort/events?per_page=100" \
 ```
 
 ![github-events](/images/guides/youplot/github-events.png)
-

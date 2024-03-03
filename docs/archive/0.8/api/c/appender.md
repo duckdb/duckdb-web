@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: C API - Appender
+redirect_from:
+- docs/archive/0.8.1/api/c/appender
 selected: Appender
+title: C API - Appender
 ---
 
 Appenders are the most efficient way of loading data into DuckDB from within the C interface, and are recommended for
@@ -515,4 +517,3 @@ The data chunk to append.
 The return state.
 
 <br>
-

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Harlequin SQL IDE
+redirect_from:
+- docs/archive/0.8.1/guides/sql_editors/harlequin
 selected: Harlequin SQL IDE
+title: Harlequin SQL IDE
 ---
 
 [Harlequin](https://github.com/tconbeer/harlequin) is an open-source, terminal-based SQL IDE for DuckDB. You can install it using `pip` and run it anywhere you can run the DuckDB CLI.

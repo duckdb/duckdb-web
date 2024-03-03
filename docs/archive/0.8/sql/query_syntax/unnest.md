@@ -1,8 +1,10 @@
 ---
-layout: docu
-title: UNNEST
-selected: Documentation/SQL/Query Syntax/UNNEST
 expanded: SQL
+layout: docu
+redirect_from:
+- docs/archive/0.8.1/sql/query_syntax/unnest
+selected: Documentation/SQL/Query Syntax/UNNEST
+title: UNNEST
 ---
 
 ## Examples

@@ -1,9 +1,12 @@
 ---
-layout: docu
-title: Interval Type
-selected: Documentation/Data Types/Interval
+blurb: An interval specifies a period of time measured in units of a specific date
+  part like years, days, seconds, or others.
 expanded: Data Types
-blurb: An interval specifies a period of time measured in units of a specific date part like years, days, seconds, or others.
+layout: docu
+redirect_from:
+- docs/archive/0.8.1/sql/data_types/interval
+selected: Documentation/Data Types/Interval
+title: Interval Type
 ---
 
 Intervals represent a period of time. This period can be measured in a specific unit or combination of units, for example years, days, or seconds. Intervals are generally used to *modify* timestamps or dates by either adding or substracting them.

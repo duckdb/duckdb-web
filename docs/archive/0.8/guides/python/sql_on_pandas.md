@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: SQL on Pandas
+redirect_from:
+- docs/archive/0.8.1/guides/python/sql_on_pandas
 selected: SQL on Pandas
+title: SQL on Pandas
 ---
 
 # How to execute SQL on a Pandas DataFrame

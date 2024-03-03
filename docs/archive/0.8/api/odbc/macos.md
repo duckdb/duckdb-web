@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: ODBC API - MacOS
+redirect_from:
+- docs/archive/0.8.1/api/odbc/macos
 selected: MacOS
+title: ODBC API - MacOS
 ---
 
 # Driver Manager: unixODBC

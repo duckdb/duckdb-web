@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Parquet Import
+redirect_from:
+- docs/archive/0.8.1/guides/import/query_parquet
 selected: Parquet Import
+title: Parquet Import
 ---
 
 # How to run a query directly on a Parquet file

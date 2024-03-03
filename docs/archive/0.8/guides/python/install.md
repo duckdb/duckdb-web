@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Install the Python Client
+redirect_from:
+- docs/archive/0.8.1/guides/python/install
 selected: Install
+title: Install the Python Client
 ---
 
 # Installing the Python Client

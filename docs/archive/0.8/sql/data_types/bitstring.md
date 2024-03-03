@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Bitstring Type
-selected: Documentation/Data Types/Bit
-expanded: Data Types
 blurb: The bitstring type are strings of 1's and 0's.
+expanded: Data Types
+layout: docu
+redirect_from:
+- docs/archive/0.8.1/sql/data_types/bitstring
+selected: Documentation/Data Types/Bit
+title: Bitstring Type
 ---
 
 | Name | Aliases | Description |

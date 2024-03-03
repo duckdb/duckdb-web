@@ -1,9 +1,11 @@
 ---
-layout: docu
-title: Use
-selected: Documentation/SQL/Use
 expanded: SQL
+layout: docu
 railroad: statements/use.js
+redirect_from:
+- docs/archive/0.8.1/sql/statements/use
+selected: Documentation/SQL/Use
+title: Use
 ---
 
 The `USE` statement selects a database and optional schema to use as the default.

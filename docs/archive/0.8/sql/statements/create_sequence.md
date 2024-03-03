@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Create Sequence
-selected: Documentation/SQL/Create Sequence
 expanded: SQL
+layout: docu
 railroad: statements/createsequence.js
+redirect_from:
+- docs/archive/0.8.1/sql/statements/create_sequence
+selected: Documentation/SQL/Create Sequence
+title: Create Sequence
 ---
+
 The `CREATE SEQUENCE` statement creates a new sequence number generator.
 
 ### Examples

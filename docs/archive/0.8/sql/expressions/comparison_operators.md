@@ -1,10 +1,13 @@
 ---
-layout: docu
-title: Comparisons
-selected: Documentation/Expressions/Comparisons
 expanded: Expressions
+layout: docu
 railroad: expressions/comparison.js
+redirect_from:
+- docs/archive/0.8.1/sql/expressions/comparison_operators
+selected: Documentation/Expressions/Comparisons
+title: Comparisons
 ---
+
 ## Comparison Operators
 <div id="rrdiagram2"></div>
 

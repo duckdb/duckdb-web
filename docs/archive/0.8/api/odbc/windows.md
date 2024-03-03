@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: ODBC API - Windows
+redirect_from:
+- docs/archive/0.8.1/api/odbc/windows
 selected: Windows
+title: ODBC API - Windows
 ---
 
 # Windows ODBC Driver Manager: Odbccp32.dll
