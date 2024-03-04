@@ -1,25 +1,32 @@
 ---
 layout: default
-title: 404
+title: 404 — Page not found
+body_class: notfound
+add_css: page404.css
 ---
 
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
-
-<div class="container">
-  <h1>404</h1>
-
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+<div class="pagehead bg2">
+  <div class="wrap">
+    <h1>404 — Page not found</h1>
+  </div>
 </div>
+
+<section class="quickaccess">
+  <div class="wrap">
+    <h1>Quick access</h1>
+    <div class="quickaccesslinks flexwrap">
+      <a class="guides" href="{{ site.baseurl }}/docs/guides/index/">
+        <div class="icon"></div>
+        <p>Guides</p>
+      </a>
+      <a class="documentation" href="{{ site.baseurl }}/docs/">
+        <div class="icon"></div>
+        <p>Documentation</p>
+      </a>
+      <a class="development" href="{{ site.baseurl }}/foundation">
+        <div class="icon"></div>
+        <p>Development</p>
+      </a>
+    </div>
+  </div>
+</section>
