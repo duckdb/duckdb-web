@@ -37,11 +37,18 @@ USE file;
 
 <div id="rrdiagram1"></div>
 
-`ATTACH` allows DuckDB to operate on multiple database files, and allows for transfer of data between different database files. 
+`ATTACH` allows DuckDB to operate on multiple database files, and allows for transfer of data between different database files.
 
 ## Detach
 
-The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file. It is not possible to detach from the default database: if you would like to do so, issue the [`USE` statement](use) to change the default database to another one.
+The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file.
+
+Note that it is not possible to detach from the default database: if you would like to do so, issue the [`USE` statement](use) to change the default database to another one. For example, if you are connected to a persistent database, you may change to an in-memory database by issuing:
+
+```sql
+ATTACH ':memory:' AS memory_db;
+USE memory_db;
+```
 
 > Warning Closing the connection, e.g., invoking the [`close()` function in Python](../../api/python/dbapi#connection), does not release the locks held on the database files as the file handles are held by the main DuckDB instance (in Python's case, the `duckdb` module).
 
