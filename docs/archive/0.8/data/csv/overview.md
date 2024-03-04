@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/archive/0.8.1/data/csv
 - docs/archive/0.8.1/data/csv/overview
 - docs/archive/0.8.1/data/csv
+- docs/archive/0.8/data/csv
 title: CSV Loading
 ---
 

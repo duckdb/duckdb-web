@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/archive/0.8.1/api/wasm
 - docs/archive/0.8.1/api/wasm/overview
 - docs/archive/0.8.1/api/wasm
+- docs/archive/0.8/api/wasm
 selected: Client APIs
 title: DuckDB Wasm
 ---
