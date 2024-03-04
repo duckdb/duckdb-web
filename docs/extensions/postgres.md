@@ -28,11 +28,16 @@ LOAD postgres;
 To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command:
 
 ```sql
--- connect to the "public" schema of the postgres instance running on localhost
+-- connect to the "public" schema of the postgres instance running on localhost in read-write mode
 ATTACH '' AS postgres_db (TYPE postgres);
--- connect to the Postgres instance with the given parameters
-ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres);
 ```
+
+```sql
+-- connect to the Postgres instance with the given parameters in read-only mode
+ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres, READ_ONLY);
+```
+
+### Configuration
 
 The `ATTACH` command takes as input either a [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
 or a [PostgreSQL URI](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS).
@@ -60,6 +65,8 @@ Postgres connection information can also be specified with [environment variable
 This can be useful in a production environment where the connection information is managed externally
 and passed in to the environment.
 
+### Configuring via Environment Variables
+
 ```bash
 export PGPASSWORD="secret"
 export PGHOST=localhost
@@ -67,7 +74,7 @@ export PGUSER=owner
 export PGDATABASE=mydatabase
 ```
 
-To connect, start the `duckdb` process and run:
+Then, to connect, start the `duckdb` process and run:
 
 ```sql
 ATTACH '' AS p (TYPE postgres);
@@ -111,7 +118,6 @@ Data can be copied over from Postgres to DuckDB using standard SQL, for example:
 ```sql
 CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
 ```
-
 
 ## Writing Data to Postgres
 
