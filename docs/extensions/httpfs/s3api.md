@@ -40,6 +40,8 @@ CREATE SECRET secret1 (
 );
 ```
 
+> Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your-region⟩.amazonaws.com'`.
+
 Now, to query using the above secret, simply query any `s3://` prefixed file:
 
 ```sql
