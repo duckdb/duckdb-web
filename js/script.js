@@ -500,17 +500,7 @@ $(document).ready(function(){
 	// SEARCH 
 	var base_url = window.location.origin;
 	var resultSelected;
-	/*
-	var toggleMobileSearchIcon = function(){
-		if( $('.hamburger').hasClass('is-active') ){
-			animationduckDBicon.play();
-			animationduckDBicon.setDirection(1);
-		} else {
-			animationduckDBicon.play();
-			animationduckDBicon.setDirection(-1);
-		}
-	}
-	*/
+	
 	var toggleSearch = function(){
 		if( $('body').hasClass('search') ){
 			$('.searchoverlay').removeClass('active');
@@ -529,7 +519,7 @@ $(document).ready(function(){
 		}
 		// open search on cmd/ctrl + k
 		if ( e.metaKey && ( e.which === 75 ) || e.ctrlKey && ( e.which === 75 ) ) {
-			if( $('body').hasClass('documentation') ){
+			if( $('body').hasClass('documentation') || $('body').hasClass('landing') ){
 				toggleSearch();
 			}
 		}
