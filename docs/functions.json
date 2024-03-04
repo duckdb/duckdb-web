@@ -3053,7 +3053,7 @@
     "struct": "CurrentTransactionIdFun",
     "type": "scalar_function",
     "category": "generic",
-    "result": 58
+    "result": 46
   },
   {
     "name": "typeof",
@@ -3211,7 +3211,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.10.1-dev595"
+    "result": "v0.10.1-dev784"
   },
   {
     "name": "week",
