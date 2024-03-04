@@ -535,7 +535,7 @@ main{
 		margin: 0 auto;
 	}
 	#main_content_wrap{
-		margin-top: 100px;
+		margin-top: 70px;
 	}
 }
 
@@ -651,20 +651,6 @@ h6{
 	line-height: 1.0;
 	font-size: 14px;
 }
-h1 code{
-	font-size: 28px;
-	font-family: $fontMonoBold!important;
-}
-h2 code{
-	font-size: 25px;
-	font-family: $fontMonoBold!important;
-	font-weight: 600;
-}
-h3 code{
-	font-size: 20px;
-	font-family: $fontMonoBold!important;
-}
-
 
 body.landing label.onlymobile,
 body.installation div.environment.select label.onlymobile{

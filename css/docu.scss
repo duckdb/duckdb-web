@@ -54,7 +54,6 @@ body.documentation{
       #main_content_wrap{
          width: calc(100% - 22%);
          max-width: 1000px;
-         margin-top: 100px;
          padding-bottom: 30px;
          padding-right: 30px;
          img{
@@ -193,7 +192,7 @@ body.documentation{
       justify-content: space-between;
       align-items: center;
       position: relative;
-      //margin-left: -40px;
+      margin-bottom: 20px;
       z-index: 800;
       .title{
          font-size: $docuh1;
