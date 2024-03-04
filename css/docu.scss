@@ -78,6 +78,10 @@ body.documentation{
             background: none;
             display: inline-block;
          }
+         .sidenav ul ul{
+            padding-left: 20px;
+            margin-top: 0;
+         }
          @media only screen and (max-width: 1200px) {
             width: 100%;
             max-width: 100%;
@@ -88,16 +92,26 @@ body.documentation{
          font-weight: 700;
          margin-bottom: 20px;
          margin-top: 50px;
+         line-height: 1;
+         code{
+               font-family: $fontMonoXBold;
+               font-size: 30px;
+           }
       }
       h2{
          font-size: $docuh2;
          font-weight: 700;
          margin-bottom: 20px;
          margin-top: 40px;
+         line-height: 1;
          a:hover{
             color: black;
             text-decoration: underline;
          }
+         code{
+               font-family: $fontMonoXBold;
+               font-size: 27px;
+           }
       }
       h3{
          font-size: $docuh3;
@@ -105,19 +119,29 @@ body.documentation{
          margin-top: 30px;
          font-family: $fontSans;
          font-weight: 700;
+         line-height: 1;
          a:hover{
             color: black;
             text-decoration: underline;
          }
+         code{
+              font-family: $fontMonoXBold;
+              font-size: 23px;
+          }
       }
       h4{
          font-size: $docuh4;
          font-weight: 700;
          margin-bottom: 20px;
          margin-top: 40px;
+         line-height: 1;
          a:hover{
             color: black;
             text-decoration: underline;
+         }
+         code{
+             font-family: $fontMonoXBold;
+             font-size: 19px;
          }
       }
       /** MARGINS IN DOCU SINGLE PAGE **/
@@ -158,8 +182,6 @@ body.documentation{
       background-color: transparent;
       text-decoration: underline;
       transition: color .3s;
-          word-wrap: break-word;
-          word-break: break-word;
       &:hover{
          color: $blue;
       }
@@ -177,6 +199,7 @@ body.documentation{
          font-size: $docuh1;
          font-weight: 700;
          width: 100%;
+         line-height: 1;
       }
       .breadcrumbs{
          width: 70%;
@@ -251,6 +274,9 @@ body.documentation{
        p{
            font-size: 14px;
            margin: .8em 0;
+       }
+       ul:last-of-type{
+           margin-bottom: 0;
        }
        .content{
            padding: 20px;
@@ -538,14 +564,15 @@ ul {
     padding: 0;
     padding-left: 20px;
     ul{
-	    padding-left: 20px;
-	    margin-top: 0;
-    }
+        padding-left: 20px;
+        margin-top: 0;
+        margin-bottom: 0;
+     }
 }
 li {
     line-height: 24px;
 }
-ul + p{
+main_content_wrap + p{
 	margin-top: 3px;
 	margin-bottom: 25px;
 }
@@ -573,22 +600,45 @@ hr {
 table {
     margin-bottom: 20px;
     text-align: left;
-    //width: calc(100vw - 380px);
-    //max-width: 1000px;
     width: 100%;
+    max-width: 100%;
+    display: block;
+    overflow-x: auto;
     font-variant-numeric: tabular-nums;
     font-variant-ligatures: none;
+    &::-webkit-scrollbar {
+      height: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #D9D9D9;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #b5b5b5;
+    }
     &.narrow{
         width: auto;
         td{
-            min-width: 40px;
+           min-width: 40px;
         }
     }
     tr{
         border-bottom: 1px solid #E9E9E9;
     }
     tbody tr:last-child{
-       border-bottom: 0;
+        border-bottom: 0;
+    }
+    a{
+        text-decoration: underline;
+        word-wrap: normal;
+        word-break: normal;
+        &:hover{
+            color: $blue;
+            cursor: pointer;
+        }
+        code{
+            word-wrap: normal;
+            word-break: normal;
+        }
     }
 }
 th {
@@ -679,7 +729,7 @@ body.documentation main .wrap a.pill{
         -webkit-font-variant-ligatures: none;
             font-variant-ligatures: none;
 		em code{
-            padding: .06em 0px;
+            padding: .06em 0px .05em;
 			font-family: $fontMonoItalicBold;
 			font-style: normal;
             -webkit-font-variant-ligatures: none;
