@@ -40,7 +40,10 @@ jobs:
           STAR_COUNT_FORMATTED=$(ruby -e 'printf("%.01fk", ARGV[0].to_i / 1000.0)' ${STAR_COUNT})
           echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
-      - run: pip install -r requirements.txt
+      - name: Install Python requirements
+        run: pip install -r requirements.txt
+      - name: Fetch release calendar
+        run: python scripts/get_calendar.py
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
