@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.8.1/extensions/sqlite_scanner
 - docs/archive/0.8.1/extensions/sqlite
+- docs/archive/0.8/extensions/sqlite_scanner
 selected: Documentation/SQLite Scanner
 title: SQLite Scanner
 ---
