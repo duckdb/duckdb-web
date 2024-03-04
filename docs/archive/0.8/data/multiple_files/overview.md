@@ -1,9 +1,10 @@
 ---
 layout: docu
 redirect_from:
-- /docs/archive/0.8.1/data/csv/multiple_files
+- docs/archive/0.8.1/data/csv/multiple_files
 - docs/archive/0.8.1/data/multiple_files/overview
 - docs/archive/0.8.1/data/multiple_files
+- docs/archive/0.8/data/csv/multiple_files
 title: Reading Multiple Files
 ---
 

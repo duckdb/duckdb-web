@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/archive/0.8.1/data/parquet
 - docs/archive/0.8.1/data/parquet/overview
 - docs/archive/0.8.1/data/parquet
+- docs/archive/0.8/data/parquet
 title: Parquet Loading
 ---
 

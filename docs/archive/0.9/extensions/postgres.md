@@ -5,6 +5,7 @@ redirect_from:
 - docs/archive/0.9.2/extensions/postgres
 - docs/archive/0.9.1/extensions/postgres
 - docs/archive/0.9.0/extensions/postgres
+- docs/archive/0.9/extensions/postgres_scanner
 title: PostgreSQL Scanner Extension
 ---
 
