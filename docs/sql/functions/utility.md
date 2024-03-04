@@ -3,7 +3,7 @@ layout: docu
 title: Utility Functions
 ---
 
-## Utility Functions
+## Scalar Utility Functions
 
 The functions below are difficult to categorize into specific function types and are broadly useful.
 
