@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - docs/archive/0.6.1/extensions/postgres_scanner
 - docs/archive/0.6.1/extensions/postgres
+- docs/archive/0.6/extensions/postgres_scanner
 selected: Documentation/Postgres Scanner
 title: Postgres Scanner
 ---
