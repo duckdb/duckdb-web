@@ -56,6 +56,7 @@ body.documentation{
          max-width: 1000px;
          padding-bottom: 30px;
          padding-right: 30px;
+         padding-top: 30px;
          img{
             width: 100%;
             height: auto;
@@ -353,7 +354,8 @@ body.documentation{
 .wrap.frequentlyaskedquestions,
 .wrap.codeofconduct,
 .wrap.documentation,
-.wrap.duckdbinstallation{
+.wrap.duckdbinstallation,
+.wrap.guides{
    .breadcrumbs{
       display: none;
    }  
