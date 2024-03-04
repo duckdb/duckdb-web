@@ -10,7 +10,6 @@ ics_url = "https://calendar.google.com/calendar/ical/c_rqj60henfnuin5klbati6g9kf
 # Download .ics file
 response = requests.get(ics_url)
 if response.status_code == 200:
-
     cal = Calendar.from_ical(response.content)
     today = datetime.today().date()
 
