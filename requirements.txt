@@ -8,3 +8,4 @@ ripgrepy~=2.0.0
 
 marko # for generating search index
 python-frontmatter
+icalendar

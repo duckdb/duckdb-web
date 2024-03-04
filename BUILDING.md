@@ -125,3 +125,11 @@ To generate the search index, run:
 scripts/install-dependencies.sh
 scripts/generate-search-index.sh
 ```
+
+## Updating the release calendar
+
+To update the release calendar, run:
+
+```bash
+python scripts/get_calendar.py
+```
