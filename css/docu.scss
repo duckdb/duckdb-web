@@ -177,9 +177,8 @@ body.documentation{
       }
    }
    .headlinebar a,
-   main .wrap a{
+   .wrap a{
       color: black;
-      background-color: transparent;
       text-decoration: underline;
       transition: color .3s;
       &:hover{
