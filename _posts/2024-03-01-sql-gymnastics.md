@@ -261,10 +261,10 @@ FROM dynamic_aggregates_any_cte_any_func(
 
 #### Understanding version 2
 
-Instead of querying the very boldly named `example` table, we query the possibly more generically named `my_cte`.
-Note that `my_cte` has a different schema than our prior example – the columns in `my_cte` can be anything!
-When the macro is created, `my_cte` doesn't even exist. 
-When the macro is executed, it searches for a table-like object named `my_cte`, and it was defined in the CTE as the macro was called.
+Instead of querying the very boldly named `example` table, we query the possibly more generically named `any_cte`.
+Note that `any_cte` has a different schema than our prior example – the columns in `any_cte` can be anything!
+When the macro is created, `any_cte` doesn't even exist. 
+When the macro is executed, it searches for a table-like object named `any_cte`, and it was defined in the CTE as the macro was called.
 
 Similarly, `any_func` does not exist initially. 
 It only needs to be created (or recreated) at some point before the macro is executed.
