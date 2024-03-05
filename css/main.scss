@@ -955,10 +955,26 @@ body.installation{
 				word-wrap: break-word;
 				word-break: break-word;
 			}
+			a.externallink{
+				line-height: 1.6;
+			}
 		}
 	}
 	.possibleresults{
 		display: none;
+	}
+	.wrap a.sha512{
+		border-radius: 50px;
+		background-color: $black300;
+		border: 1px solid $black400;
+		text-decoration: none;
+		padding: 0px 7px;
+		transition: background-color .3s, border-color 3s;
+		&:hover{
+			color: black;
+			background-color: darken($black300, 4%);
+			border: 1px solid darken($black400, 4%);
+		}
 	}
 }
 
