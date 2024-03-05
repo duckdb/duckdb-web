@@ -272,9 +272,15 @@ body.documentation{
          margin-top: 20px;
          font-size: 14px;
          position: relative;
+         ul{
+            padding-left: 15px;
+            li{
+               list-style: none;
+            }
+         }
          li{
             line-height: 1;
-            &.current a{
+            &.current > a{
                background: #EFEFEF;
                color: black;
                font-weight: 600;

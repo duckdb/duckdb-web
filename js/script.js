@@ -685,7 +685,7 @@ $(document).ready(function(){
 	
 	/** HIGHLIGHT TOC MENU **/
 	if ($('body').hasClass('documentation')) {
-		var headings = $('#main_content_wrap h2');
+		var headings = $('#main_content_wrap h1, #main_content_wrap h2');
 		var tocEntries = $('.toc-entry');
 	
 		$(window).on('scroll', function() {
@@ -701,14 +701,14 @@ $(document).ready(function(){
 					$('.toc-entry a[href="#' + id + '"]').parent().addClass('current');
 				}
 			});
-
+	
 			if (scrollPos + $(window).height() >= documentHeight - 20) {
 				tocEntries.removeClass('current'); 
 				$('.toc-entry:last').addClass('current'); 
 			}
-
 		});
 	}
+
 
 
 
