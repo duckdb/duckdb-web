@@ -249,8 +249,59 @@ body.documentation{
       background: $black50;
       position: relative;
       width: 22%;
+      padding: 100px 20px 20px 20px;
       @media only screen and (max-width: 1200px) {
          display: none;
+      }
+   }
+   .toc_menu{
+      position: sticky;
+      top: 100px;
+      h5{
+         color: $black400;
+         font-size: 12px;
+         font-style: normal;
+         font-weight: 450;
+         text-transform: uppercase;
+         margin-left: 12px;
+      }
+      ul#toc{
+         list-style: none;
+         padding: 0;
+         margin: 0;
+         margin-top: 20px;
+         font-size: 14px;
+         position: relative;
+         ul{
+            padding-left: 15px;
+            li{
+               list-style: none;
+            }
+         }
+         li{
+            line-height: 1;
+            &.current > a{
+               background: #EFEFEF;
+               color: black;
+               font-weight: 600;
+            }
+         }
+         a{
+            color: $black400;
+            text-decoration: none;
+            padding: 8px 12px;
+            background: $black50;
+            border-radius: 100px;
+            display: inline-block;
+            text-overflow: ellipsis; 
+            overflow: hidden; 
+            white-space: nowrap;
+            max-width: 100%;
+            line-height: 1;
+            &:hover{
+               background: $black100;
+            }
+         }
       }
    }
    blockquote {
