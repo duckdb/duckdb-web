@@ -62,7 +62,7 @@ defaults:
       path: ""
     values:
       image: /images/sharingduckdb.jpg
-      #toc: true
+      toc: true
 
 repository: "duckdb/duckdb-web"
 
@@ -82,7 +82,7 @@ star_count: "14.4k"
 
 toc:
   min_level: 1
-  max_level: 3
-  ordered_list: true
+  max_level: 2
+  ordered_list: false
 
 exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle']

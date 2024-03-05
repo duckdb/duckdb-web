@@ -146,7 +146,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				</div>
 				
 				{% assign ct = content | toc %}
-				{% include anchor_headings.html html=ct %}
+				{% include anchor_headings.html html=content %}
 				
 				{% if page.url contains 'overview' %}
 				<div class="index">
@@ -172,7 +172,16 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				
 			</div>
 			
-			<div id="sidebar"></div>
+			<div id="sidebar">
+				{% assign toc_only = content | toc_only %}
+				{% assign toc_text_only = toc_only | strip_html | remove: ' ' %}
+				{% if toc_text_only.size > 10 %}
+					<div class="toc_menu">
+						<h5>In this article</h5>
+						{{ toc_only }}
+					</div>
+				{% endif %}
+			</div>
 			
 			
 			

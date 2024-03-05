@@ -5,7 +5,7 @@ Jekyll::TableOfContents::Parser.class_eval do
     @entries.each do |entry|
       # NOTE: `entry[:id]` is automatically URL encoded by Nokogiri
       entry[:text].replace(
-        %(<a class="anchor" style="text-decoration: none;" href="##{entry[:id]}">#{entry[:text]}</a>)
+        %(<a class="anchor" href="##{entry[:id]}">#{entry[:text]}</a>)
       )
     end
 
