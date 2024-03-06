@@ -21,6 +21,7 @@ duckdb.execute("CREATE TABLE tbl AS SELECT 42 a")
 con = duckdb.connect(":default:")
 con.sql("SELECT * FROM tbl")
 ```
+
 ```text
 ┌───────┐
 │   a   │
@@ -41,6 +42,7 @@ con = duckdb.connect(database = "my-db.duckdb", read_only = True)
 # to explicitly get the default connection
 con = duckdb.connect(database = ":default:")
 ```
+
 If you want to create a second connection to an existing database, you can use the `cursor()` method. This might be useful for example to allow parallel threads running queries independently. A single connection is thread-safe but is locked for the duration of the queries, effectively serializing database access in this case.
 
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `close()`.  Once the last connection to a database instance is closed, the database instance is closed as well.
@@ -74,7 +76,7 @@ The `description` property of the connection object contains the column names as
 
 ### Prepared Statements
 
-DuckDB also supports [prepared statements](../../sql/query_syntax/prepared_statements) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter.
+DuckDB also supports [prepared statements](../../sql/query_syntax/prepared_statements) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter. Values are converted according to the [conversion rules](conversion#object-conversion-python-object-to-duckdb).
 
 Here are some examples:
 

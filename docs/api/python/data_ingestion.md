@@ -65,9 +65,11 @@ duckdb.sql("SELECT * FROM 'example.json'")
 duckdb.sql("SELECT * FROM read_json_auto('example.json')")
 ```
 
-## DataFrames & Arrow Tables
+## Directly Accessing DataFrames and Arrow Objects
 
-DuckDB is automatically able to query a Pandas DataFrame, Polars DataFrame, or Arrow object that is stored in a Python variable by name. Accessing these is made possible by [replacement scans](../c/replacement_scans).
+DuckDB is automatically able to query certain Python variables by referring to their variable name (as if it was a table).
+These types include the following: Pandas DataFrame, Polars DataFrame, Polars LazyFrame, NumPy arrays, [relations](relational_api), and Arrow objects.
+Accessing these is made possible by [replacement scans](../c/replacement_scans).
 
 DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/index#python-client) for more examples.
 
@@ -115,125 +117,3 @@ The sample size can be changed by setting the `pandas_analyze_sample` config opt
 # example setting the sample size to 100k
 duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample = 100_000")
 ```
-
-## Object Conversion
-
-This is a mapping of Python object types to DuckDB [Logical Types](../../sql/data_types/overview):
-
-* `None` -> `NULL`
-* `bool` -> `BOOLEAN`
-* `datetime.timedelta` -> `INTERVAL`
-* `str` -> `VARCHAR`
-* `bytearray` -> `BLOB`
-* `memoryview` -> `BLOB`
-* `decimal.Decimal` -> `DECIMAL` / `DOUBLE`
-* `uuid.UUID` -> `UUID`
-
-The rest of the conversion rules are as follows.
-
-### `int`
-
-Since integers can be of arbitrary size in Python, there is not a one-to-one conversion possible for ints.
-Intead we perform these casts in order until one succeeds:
-
-* `BIGINT`
-* `INTEGER`
-* `UBIGINT`
-* `UINTEGER`
-* `DOUBLE`
-
-When using the DuckDB Value class, it's possible to set a target type, which will influence the conversion.
-
-### `float`
-
-These casts are tried in order until one succeeds:
-
-* `DOUBLE`
-* `FLOAT`
-
-### `datetime.datetime`
-
-For `datetime` we will check `pandas.isnull` if it's available and return `NULL` if it returns `true`.
-We check against `datetime.datetime.min` and `datetime.datetime.max` to convert to `-inf` and `+inf` respectively.
-
-If the `datetime` has tzinfo, we will use `TIMESTAMPTZ`, otherwise it becomes `TIMESTAMP`.
-
-### `datetime.time`
-
-If the `time` has tzinfo, we will use `TIMETZ`, otherwise it becomes `TIME`.
-
-### `datetime.date`
-
-`date` converts to the `DATE` type.
-We check against `datetime.date.min` and `datetime.date.max` to convert to `-inf` and `+inf` respectively.
-
-### `bytes`
-
-`bytes` converts to `BLOB` by default, when it's used to construct a Value object of type `BITSTRING`, it maps to `BITSTRING` instead.
-
-### `list`
-
-`list` becomes a `LIST` type of the "most permissive" type of its children, for example:
-
-```python
-my_list_value = [
-    12345,
-    "test"
-]
-```
-Will become `VARCHAR[]` because 12345 can convert to `VARCHAR` but `test` can not convert to `INTEGER`.
-```sql
-[12345, test]
-```
-
-### `dict`
-
-The `dict` object can convert to either `STRUCT(...)` or `MAP(..., ...)` depending on its structure.
-If the dict has a structure similar to:
-
-```python
-my_map_dict = {
-    "key": [
-        1, 2, 3
-    ],
-    "value": [
-        "one", "two", "three"
-    ]
-}
-```
-
-Then we'll convert it to a `MAP` of key-value pairs of the two lists zipped together.
-The example above becomes a `MAP(INTEGER, VARCHAR)`:
-
-```sql
-{1=one, 2=two, 3=three}
-```
-
-> The names of the fields matter and the two lists need to have the same size.
-
-Otherwise we'll try to convert it to a `STRUCT`.
-
-```python
-my_struct_dict = {
-    1: "one",
-    "2": 2,
-    "three": [1, 2, 3],
-    False: True
-}
-```
-
-Becomes:
-
-```sql
-{'1': one, '2': 2, 'three': [1, 2, 3], 'False': true}
-```
-
-> Every `key` of the dictionary is converted to string.
-
-### `tuple`
-
-`tuple` converts to `LIST` by default, when it's used to construct a Value object of type `STRUCT` it will convert to `STRUCT` instead.
-
-### `numpy.ndarray` and `numpy.datetime64`
-
-`ndarray` and `datetime64` are converted by calling `tolist()` and converting the result of that.

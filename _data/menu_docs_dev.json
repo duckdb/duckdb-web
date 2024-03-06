@@ -550,8 +550,8 @@
                   "url": "data_ingestion"
                 },
                 {
-                  "page": "Result Conversion",
-                  "url": "result_conversion"
+                  "page": "Conversion between DuckDB and Python",
+                  "url": "conversion"
                 },
                 {
                   "page": "DB API",
