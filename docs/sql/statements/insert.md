@@ -63,15 +63,26 @@ This will insert `5` into `b` and `42` into `a`.
 
 ### `INSERT INTO ... BY NAME`
 
-The names of the column list of the `SELECT` statement are matched against the column names of the table to determine the order that values should be inserted into the table, even if the order of the columns in the table differs from the order of the values in the `SELECT` statement.
+Using the `BY NAME` modifier, the names of the column list of the `SELECT` statement are matched against the column names of the table to determine the order that values should be inserted into the table. This allows inserting even in cases when the order of the columns in the table differs from the order of the values in the `SELECT` statement or certain columns are missing.
+
 For example:
 
 ```sql
 CREATE TABLE tbl (a INTEGER, b INTEGER);
-INSERT INTO tbl BY NAME (SELECT 42 AS b);
+INSERT INTO tbl BY NAME (SELECT 42 AS b, 32 AS a);
+INSERT INTO tbl BY NAME (SELECT 22 AS b);
+SELECT * FROM tbl;
 ```
 
-This will insert `42` into `b` and insert `NULL` (or its default value) into `a`.
+```sql
+┌───────┬───────┐
+│   a   │   b   │
+│ int32 │ int32 │
+├───────┼───────┤
+│    32 │    42 │
+│       │    22 │
+└───────┴───────┘
+```
 
 It's important to note that when using `INSERT INTO ... BY NAME`, the column names specified in the `SELECT` statement must match the column names in the table. If a column name is misspelled or does not exist in the table, an error will occur. Columns that are missing from the `SELECT` statement will be filled with the default value.
 
