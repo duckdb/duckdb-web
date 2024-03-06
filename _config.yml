@@ -45,6 +45,7 @@ plugins:
   - jekyll-toc
 excerpt_separator: <!--more-->
 future: true
+show_drafts: false
 
 last-modified-at:
     date-format: '%Y-%m-%d'
