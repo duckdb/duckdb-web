@@ -28,7 +28,7 @@ This section describes functions and operators for examining and manipulating st
 | `format_bytes(`*`bytes`*`)` | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). | `format_bytes(16384)` | `16.0 KiB` | |
 | `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using the [fmt syntax](#fmt-syntax) | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` | |
 | `from_base64(`*`string`*`)`| Convert a base64 encoded string to a character string. | `from_base64('QQ==')` | `'A'` | |
-| `greatest(`*`x1`*`, `*`x2, `*` ...)` | Selects the largest value | `greatest('bcd', 'abc', 'cde')` | `'cde'` |
+| `greatest(`*`x1`*`, `*`x2, `*` ...)` | Selects the largest value. Note that lowercase characters rank higher. | `greatest('abc', 'bcd', 'cde', 'EFG')` | `'cde'` |
 | `hash(`*`value`*`)` | Returns a `UBIGINT` with the hash of the *value* | `hash('🦆')` | `259...` | |
 | `ilike_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `ilike_escape('A%c', 'a$%C', '$')` | `true` | |
 | `instr(`*`string`*`, `*`search_string`*`)`| Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `instr('test test', 'es')` | 2 | |
