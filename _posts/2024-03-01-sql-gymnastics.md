@@ -2,6 +2,7 @@
 layout: post
 title: "SQL Gymnastics: Bending SQL into flexible new shapes"
 author: Alex Monahan
+avatar: "/images/blog/authors/alex_monahan.jpg"
 thumb: "/images/blog/thumbs/240301.png"
 excerpt: "Combining multiple features of DuckDB’s friendly SQL allows for highly flexible queries that can be reused across tables."
 ---

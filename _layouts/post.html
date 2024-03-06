@@ -77,11 +77,14 @@
 						{% include anchor_headings.html html=content %}
 					{% else %}
 						<div class="singleentry">
+							{% if page.event == true %}<div class="eventdate">{{ page.date | date: "%Y-%m-%d" }}</div>{% endif %}
 							<h1>{{ page.title }}</h1>
+							{% if page.event != true %}
 							<div class="infoline">
-								<div class="icon"></div>
+								<div class="icon">{% if page.avatar %}<img src="{{ page.avatar }}" alt="Author Avatar">{% endif %}</div>
 								<div><span class="author">{{ page.author }}</span><span>{{ page.date | date: "%Y-%m-%d" }}</span></div>
 							</div>
+							{% endif %}
 							{% if page.excerpt != "" %}
 								<div class="excerpt">{{ '_TL;DR: ' | append: page.excerpt | append: '_' | markdownify }}</div>
 							{% endif %}

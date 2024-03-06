@@ -233,6 +233,14 @@ h5 {
 				background-size: contain;
 				background-repeat: no-repeat;
 				margin-right: 10px;
+				border-radius: 200px;
+				overflow: hidden;
+				>img{
+					display: block;
+					object-fit: cover;
+					width: 100%;
+					height: 100%;
+				}
 			}
 			span{
 				display: block;
@@ -297,6 +305,13 @@ h5 {
 					font-family: $fontSans;
 					font-style: normal;
 				}
+			}
+			p > img{
+				max-width: 100%;
+			}
+			.eventdate{
+				font-size: $fontSizeh4;
+				margin-bottom: 10px;
 			}
 		}
 		.post-list{
