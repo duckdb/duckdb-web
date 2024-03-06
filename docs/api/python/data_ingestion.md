@@ -82,6 +82,7 @@ duckdb.sql("SELECT * FROM test_df").fetchall()
 DuckDB also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
 
 If your Pandas DataFrame is stored in another location, here is an example of manually registering it:
+
 ```python
 import duckdb
 import pandas as pd
