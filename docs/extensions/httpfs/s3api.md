@@ -170,6 +170,26 @@ FROM read_parquet([
 ]);
 ```
 
+> Tip If you encounter a Network Error `("Failed to execute 'send' on 'XMLHttpRequest')`, configure the S3 permission CORS header. For example:
+```
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "HEAD"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": [],
+        "MaxAgeSeconds": 3000
+    }
+]
+```
+
 ### Glob
 
 File globbing is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
