@@ -115,5 +115,15 @@ The sample size can be changed by setting the `pandas_analyze_sample` config opt
 
 ```python
 # example setting the sample size to 100k
-duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample = 100_000")
+duckdb.execute("SET GLOBAL pandas_analyze_sample = 100_000")
 ```
+
+### Registering Objects
+
+You can register Python objects as DuckDB tables using the [`DuckDBPyConnection.register()` function](reference/index#duckdb.DuckDBPyConnection.register).
+
+The precedence of objects with the same name is as follows:
+
+* Objects explicitly registered via `DuckDBPyConnection.register()`
+* Native DuckDB tables and views
+* [Replacement scans](../c/replacement_scans)
