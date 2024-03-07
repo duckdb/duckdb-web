@@ -70,7 +70,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat). | `VARCHAR` | (empty) |
 | `decimal_separator` | The decimal separator of numbers. | `VARCHAR` | `.` |
-| `delim` or `sep` | Specifies the string that separates columns within each row (line) of the file. | `VARCHAR` | `,` |
+| `delim` or `sep` | Specifies the character that separates columns within each row (line) of the file. | `VARCHAR` | `,` |
 | `escape` | Specifies the string that should appear before a data character sequence that matches the `quote` value. | `VARCHAR` | `"` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `force_not_null` | Do not match the specified columns' values against the NULL string. In the default case where the `NULL` string is empty, this means that empty values will be read as zero-length strings rather than `NULL`s. | `VARCHAR[]` | `[]` |
