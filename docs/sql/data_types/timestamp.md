@@ -11,7 +11,8 @@ DuckDB represents instants as the number of microseconds (µs) since `1970-01-01
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `TIMESTAMP_NS` | `TIMESTAMP`, `DATETIME`    | timestamp with nanosecond precision (ignores time zone)  |
+| `TIMESTAMP_NS` |                            | timestamp with nanosecond precision (ignores time zone)  |
+| `TIMESTAMP`    | `DATETIME`                 | timestamp with microsecond precision (ignores time zone) |
 | `TIMESTAMP_MS` |                            | timestamp with millisecond precision (ignores time zone) |
 | `TIMESTAMP_S`  |                            | timestamp with second precision (ignores time zone)      |
 | `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE` | timestamp (uses time zone)                               |
@@ -19,14 +20,13 @@ DuckDB represents instants as the number of microseconds (µs) since `1970-01-01
 A timestamp specifies a combination of [`DATE`](date) (year, month, day) and a [`TIME`](time) (hour, minute, second, microsecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]`).
 
 ```sql
-SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456'; -- 1992-09-20 11:30:00.123456
-SELECT TIMESTAMP    '1992-09-20 11:30:00.123456'; -- 1992-09-20 11:30:00.123456
-SELECT DATETIME     '1992-09-20 11:30:00.123456'; -- 1992-09-20 11:30:00.123456
-SELECT TIMESTAMP_MS '1992-09-20 11:30:00.123456'; -- 1992-09-20 11:30:00.123
-SELECT TIMESTAMP_S  '1992-09-20 11:30:00.123456'; -- 1992-09-20 11:30:00
-SELECT TIMESTAMPTZ  '1992-09-20 11:30:00.123456'; -- 1992-09-20 11:30:00.123456+00
-SELECT TIMESTAMP WITH TIME ZONE '1992-09-20 11:30:00.123456';
--- 1992-09-20 11:30:00.123456+00
+SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789'; -- 1992-09-20 11:30:00.123456
+SELECT TIMESTAMP    '1992-09-20 11:30:00.123456789'; -- 1992-09-20 11:30:00.123456
+SELECT DATETIME     '1992-09-20 11:30:00.123456789'; -- 1992-09-20 11:30:00.123456
+SELECT TIMESTAMP_MS '1992-09-20 11:30:00.123456789'; -- 1992-09-20 11:30:00.123
+SELECT TIMESTAMP_S  '1992-09-20 11:30:00.123456789'; -- 1992-09-20 11:30:00
+SELECT TIMESTAMPTZ  '1992-09-20 11:30:00.123456789'; -- 1992-09-20 11:30:00.123456+00
+SELECT TIMESTAMP WITH TIME ZONE '1992-09-20 11:30:00.123456789'; -- 1992-09-20 11:30:00.123456+00
 ```
 
 ## Special Values
