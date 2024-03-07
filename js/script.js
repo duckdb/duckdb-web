@@ -708,7 +708,19 @@ $(document).ready(function(){
 			}
 		});
 	}
-
+	
+	/** HIDE BANNER **/
+	const showbanner = getWithExpiry("homeBanner");
+	if(showbanner == false){
+		$('.banner').css('display', 'none');
+	} else {
+		$('.banner').css('display', 'flex');
+	}
+	$('.banner .close').click(function(){
+		setWithExpiry('homeBanner', false, 172800000); // 900000 = 15 min, 172800000 = 2 days
+		$('.banner').slideUp(300);
+	});
+	// setWithExpiry('homeBanner', '', -1); // deletes content
 
 
 
