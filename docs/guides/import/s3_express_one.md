@@ -29,6 +29,19 @@ CREATE SECRET (
 );
 ```
 
+## Instance Location
+
+For best performance, make sure that the EC2 instance is in the same availability zone as the S3 Express One bucket you are querying. To determine the mapping between zone names and zone IDs, use the `aws ec2 describe-availability-zones` command:
+
+```bash
+aws ec2 describe-availability-zones --output json | \
+    jq -r  '.AvailabilityZones[] | select(.ZoneName == "us-east-1f") | .ZoneId'
+# use1-az5
+aws ec2 describe-availability-zones --output json | \
+    jq -r  '.AvailabilityZones[] | select(.ZoneId == "use1-az5") | .ZoneName'
+# us-east-1f
+```
+
 ## Querying
 
 You can query the S3 Express One bucket as any other S3 bucket:
