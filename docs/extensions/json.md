@@ -38,7 +38,37 @@ FROM read_json('todos.json',
 COPY (SELECT * FROM todos) TO 'todos.json';
 ```
 
-See more examples on the [JSON data page](../data/json/overview#examples).
+See more examples of loading JSON data on the [JSON data page](../data/json/overview#examples).
+
+```sql
+--- Create a table with a column for storing JSON data
+CREATE TABLE example (j JSON);
+```
+
+```sql
+-- Insert JSON data into the table
+INSERT INTO example VALUES
+    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
+```  
+
+```sql
+-- Retrieve the family key's value
+SELECT j.family FROM example;
+-- "anatidae"
+```
+
+```sql
+-- Extract the family key's value with a JSONPath expression
+SELECT j->'$.family' FROM example;
+-- "anatidae"
+```
+
+```sql
+-- Extract the family key's value with a JSONPath expression as a VARCHAR
+SELECT j->>'$.family' FROM example;
+-- anatidae
+```
+
 
 ## JSON Type
 
