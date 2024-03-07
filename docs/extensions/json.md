@@ -48,7 +48,7 @@ CREATE TABLE example (j JSON);
 ```sql
 -- Insert JSON data into the table
 INSERT INTO example VALUES
-  ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
+    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
 ```  
 
 ```sql
