@@ -10,7 +10,7 @@
 body.landing{
 	font-size: $fontSizep;
 	main{
-		margin-top: 52px;
+		margin-top: 70px;
 	}
 	/** GENERAL STYLES **/
 	h1{
@@ -47,6 +47,45 @@ body.landing{
 	}
 	.hidden{
 		display: none;
+	}
+	.banner{
+		position: relative;
+		width: 100%;
+		text-align: center;
+		background-color: $purple;
+		color: white;
+		font-size: $fontSizep;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		padding: 15px 20px;
+		a{
+			color: inherit;
+		}
+		.close{
+			position: absolute;
+			right: 30px;
+			top: calc(50% - 7px);
+			cursor: pointer;
+			background-image: url("data:image/svg+xml,%3Csvg width='13' height='13' viewBox='0 0 13 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.972 11.648 7.736 6.44l5.236-5.208L11.712 0 6.504 5.208 1.296 0 .064 1.232 5.272 6.44.064 11.648l1.232 1.232 5.208-5.208 5.208 5.208 1.26-1.232Z' fill='%23fff'%3E%3C/path%3E%3C/svg%3E");
+			width: 13px;
+			height: 13px;
+			background-size: contain; 
+			background-repeat: no-repeat;
+		}
+		@media only screen and (max-width: 980px) {
+			justify-content: flex-start;
+			text-align: left;
+			padding: 15px 65px 15px 20px;
+		}
+		@media only screen and (max-width: 660px) {
+			font-size: 16px;
+			padding: 15px 65px 15px 15px;
+			.close{
+				right: 25px;
+			}
+		}
 	}
 	.window{
 		border-radius: 15px;
