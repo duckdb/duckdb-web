@@ -31,6 +31,20 @@ FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 
 > The `allow_moved_paths` option ensures that some path resolution is performed, which allows scanning Iceberg tables that are moved.
 
+You can also address specify the current manifest directly in the query, this may be resolved from the catalog prior to the query, in this example the manifest version is a UUID.
+
+```sql
+SELECT count(*)
+FROM iceberg_scan('data/iceberg/lineitem_iceberg/metadata/02701-1e474dc7-4723-4f8d-a8b3-b5f0454eb7ce.metadata.json');
+```
+
+This extension can be paired with the [`httpfs` extension](/docs/extensions/httpfs) to access Iceberg tables in object stores such as S3.
+
+```sql
+SELECT count(*)
+FROM iceberg_scan('s3://bucketname/lineitem_iceberg/metadata/02701-1e474dc7-4723-4f8d-a8b3-b5f0454eb7ce.metadata.json', allow_moved_paths = true);
+```
+
 ### Access Iceberg Metadata
 
 ```sql
