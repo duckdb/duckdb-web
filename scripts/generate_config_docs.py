@@ -61,6 +61,8 @@ SELECT ARRAY_AGG(surround_with_backticks(name))::VARCHAR AS name, description, i
 	THEN 'System (locale) calendar'
 	WHEN lower(value) IN ('null', 'nulls_last', 'asc', 'desc')
 	THEN surround_with_backticks(upper(value))
+    WHEN name='temp_directory'
+    THEN value='`⟨database_name⟩.tmp` or `.tmp` (in in-memory mode)'
     ELSE surround_with_backticks(value) END) AS default_value
 FROM duckdb_settings()
 WHERE name NOT LIKE '%debug%' AND description NOT ILIKE '%debug%'
