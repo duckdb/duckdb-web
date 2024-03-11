@@ -87,6 +87,7 @@ The tables in the PostgreSQL database can be read as if they were normal DuckDB 
 ```sql
 SHOW TABLES;
 ```
+
 ```text
 ┌───────────────────────────────────────┐
 │                 name                  │
@@ -99,6 +100,7 @@ SHOW TABLES;
 ```sql
 SELECT * FROM uuids;
 ```
+
 ```text
 ┌──────────────────────────────────────┐
 │                  u                   │
@@ -159,6 +161,7 @@ INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```sql
 SELECT * FROM postgres_db.tbl;
 ```
+
 ```text
 ┌───────┬─────────┐
 │  id   │  name   │
@@ -170,9 +173,17 @@ SELECT * FROM postgres_db.tbl;
 
 ### `COPY`
 
+You can copy tables back and forth between PostgreSQL and DuckDB:
+
 ```sql
 COPY postgres_db.tbl TO 'data.parquet';
 COPY postgres_db.tbl FROM 'data.parquet';
+```
+
+You may also create a full copy of the database using the [`COPY FROM DATABASE` statement](../sql/statements/copy#copy-from-database--to):
+
+```sql
+COPY FROM DATABASE postgres_db TO my_duckdb_db;
 ```
 
 ### `UPDATE`
