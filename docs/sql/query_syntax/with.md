@@ -78,15 +78,15 @@ SELECT * FROM t AS t1,
 ```sql
 CREATE TABLE tag (id INT, name VARCHAR, subclassof INT);
 INSERT INTO tag VALUES
- (1, 'U2',     5),
- (2, 'Blur',   5),
- (3, 'Oasis',  5),
- (4, '2Pac',   6),
- (5, 'Rock',   7),
- (6, 'Rap',    7),
- (7, 'Music',  9),
- (8, 'Movies', 9),
- (9, 'Art', NULL);
+    (1, 'U2',     5),
+    (2, 'Blur',   5),
+    (3, 'Oasis',  5),
+    (4, '2Pac',   6),
+    (5, 'Rock',   7),
+    (6, 'Rap',    7),
+    (7, 'Music',  9),
+    (8, 'Movies', 9),
+    (9, 'Art', NULL);
 ```
 
 The following query returns the path from the node `Oasis` to the root of the tree (`Art`).
