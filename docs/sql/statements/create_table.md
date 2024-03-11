@@ -151,6 +151,8 @@ CREATE TABLE t6 (
 
 > Foreign keys with cascading deletes (`FOREIGN KEY ... REFERENCES ... ON DELETE CASCADE`) are not supported.
 
+> Inserting into tables with self-referencing foreign keys is currently not supported and will result in the following error: `Constraint Error: Violates foreign key constraint because key "..." does not exist in the referenced table`.
+
 ## Generated Columns
 
 The `[type] [GENERATED ALWAYS] AS (expr) [VIRTUAL|STORED]` syntax will create a generated column. The data in this kind of column is generated from its expression, which can reference other (regular or generated) columns of the table. Since they are produced by calculations, these columns can not be inserted into directly.
