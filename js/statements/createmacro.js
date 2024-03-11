@@ -20,7 +20,7 @@ function GenerateCreateMacro(options = {}) {
 			),
 			ZeroOrMore(Sequence([
 				Expression("param-name"),
-				Keyword("="),
+				Keyword(":="),
 				Expression("default-value")
 				], "skip")
 			),

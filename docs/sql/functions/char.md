@@ -40,7 +40,7 @@ This section describes functions and operators for examining and manipulating st
 | `like_escape(`*`string`*`, ` *`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` | |
 | `lower(`*`string`*`)` | Convert *string* to lower case | `lower('Hello')` | `hello` | `lcase` |
 | `lpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string*  with the character from the left until it has count characters | `lpad('hello', 8, '>')` | `>>>hello` | |
-| `ltrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the left sduide of the *string* | `ltrim('>>>>test<<', '><')` | `test<<` | |
+| `ltrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the left side of the *string* | `ltrim('>>>>test<<', '><')` | `test<<` | |
 | `ltrim(`*`string`*`)`| Removes any spaces from the left side of the *string* | `ltrim('␣␣␣␣test␣␣')` | `test␣␣` | |
 | `md5(`*`value`*`)` | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the *value*  | `md5('123')` | `202c...` | |
 | `nfc_normalize(`*`string`*`)`| Convert string to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. | `nfc_normalize('ardèch')` | `ardèch` | |
@@ -116,7 +116,6 @@ The `format(`*`format`*`, `*`parameters`*`...)` function formats strings, loosel
 SELECT format('Hello world'); -- Hello world
 -- Format a string using {}
 SELECT format('The answer is {}', 42); -- The answer is 42
-// s == "The answer is 42."
 -- Format a string using positional arguments
 SELECT format('I''d rather be {1} than {0}.', 'right', 'happy'); -- I'd rather be happy than right.
 ```

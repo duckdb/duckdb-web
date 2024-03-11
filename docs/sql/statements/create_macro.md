@@ -81,7 +81,7 @@ SELECT add_default(40, 2);
 -- success! default parameters are used by assigning them like so
 SELECT add_default(40, b := 2);
 -- error! default parameters must come after positional parameters
-SELECT add_default(b = 2, 40);
+SELECT add_default(b := 2, 40);
 -- the order of default parameters does not matter
 CREATE MACRO triple_add(a, b := 5, c := 10) AS a + b + c;
 -- success!

@@ -167,7 +167,7 @@ WITH days AS (
 SELECT
     y, q, m,
     GROUPING_ID(y, q, m) AS "grouping_id(y, q, m)",
-    right(GROUPING_ID(y, q, m)::BIT, 3) AS "y_q_m_bits"
+    right(GROUPING_ID(y, q, m)::BIT::VARCHAR, 3) AS "y_q_m_bits"
 FROM days
 GROUP BY GROUPING SETS (
     (y, q, m),

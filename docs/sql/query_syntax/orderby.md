@@ -25,7 +25,7 @@ See examples below.
 By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and null values are placed last. 
 This is identical to the default sort order of PostgreSQL. The default sort order can be changed with the following configuration options.
 
-> Using `ASC NULLS LAST` as default the default sorting order was a breaking change in version 0.8.0. Prior to 0.8.0, DuckDB sorted using `ASC NULLS FIRST`.
+> Using `ASC NULLS LAST` as the default sorting order was a breaking change in version 0.8.0. Prior to 0.8.0, DuckDB sorted using `ASC NULLS FIRST`.
 
 ```sql
 -- change the default null sorting order to either NULLS FIRST and NULLS LAST
