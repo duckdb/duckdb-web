@@ -228,6 +228,7 @@ CREATE TABLE postgres_db.s1.integers (i INT);
 INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
 ```
+
 ```text
 ┌───────┐
 │   i   │
@@ -236,6 +237,7 @@ SELECT * FROM postgres_db.s1.integers;
 │    42 │
 └───────┘
 ```
+
 ```sql
 DROP SCHEMA postgres_db.s1;
 ```
@@ -248,6 +250,7 @@ BEGIN;
 INSERT INTO postgres_db.tmp VALUES (42);
 SELECT * FROM postgres_db.tmp;
 ```
+
 ```text
 ┌───────┐
 │   i   │
@@ -256,10 +259,12 @@ SELECT * FROM postgres_db.tmp;
 │    42 │
 └───────┘
 ```
+
 ```sql
 ROLLBACK;
 SELECT * FROM postgres_db.tmp;
 ```
+
 ```text
 ┌────────┐
 │   i    │
@@ -283,6 +288,7 @@ postgres_query(attached_database::VARCHAR, query::VARCHAR)
 ATTACH 'dbname=postgresscanner' AS s (TYPE POSTGRES);
 SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
 ```
+
 ```text
 ┌──────────────┬───────────┬─────────┐
 │    brand     │   model   │  color  │
