@@ -242,6 +242,12 @@ SELECT * FROM postgres_db.s1.integers;
 DROP SCHEMA postgres_db.s1;
 ```
 
+## `DETACH`
+
+```sql
+DROP SCHEMA postgres_db;
+```
+
 ### Transactions
 
 ```sql
