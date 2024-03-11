@@ -33,3 +33,15 @@ FROM read_parquet([
     'https://domain.tld/file2.parquet'
 ]);
 ```
+
+## Using a Custom Certificate File
+
+> This feature is currently only available in the nightly build. It will be [released](/dev/release-calendar) in version 0.10.1.
+
+To use the `httpfs` extension with a custom certificate file, set the following [configuration options](../../configuration/pragmas) prior to loading the extension:
+
+```sql
+LOAD httpfs;
+SET ca_cert_file = '⟨certificate_file⟩';
+SET enable_server_cert_verification = true;
+```

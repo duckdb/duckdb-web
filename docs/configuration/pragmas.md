@@ -11,6 +11,8 @@ The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGM
 `PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement](../sql/statements/set) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
 
 For DuckDB's built in configuration options, see the [Configuration Reference](overview#configuration-reference).
+DuckDB [extensions](../extensions/overview) may register additional configuration options.
+These are documented in the respective extension's documentation page.
 
 ## List of Supported `PRAGMA` Statements
 
