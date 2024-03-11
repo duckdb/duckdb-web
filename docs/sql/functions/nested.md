@@ -183,8 +183,8 @@ FROM range(DATE '1992-01-01', DATE '1992-03-01', INTERVAL '1' MONTH);
 
 The function `list_slice` can be used to extract a sublist from a list.  The following variants exist:
 * `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
-* `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
-* `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`, `*`step`*`)`
+* `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`, `*`step`*`)`
+* `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
 * `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`, `*`step`*`)`
 * `list[`*`begin`*`:`*`end`*`]`
 * `list[`*`begin`*`:`*`end`*`:`*`step`*`]`

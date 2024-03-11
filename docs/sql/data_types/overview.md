@@ -38,7 +38,7 @@ Implicit and explicit typecasting is possible between numerous types, see the [T
 
 ## Nested / Composite Types
 
-DuckDB supports five nested data types: `ARRAY`, `LIST`, `STRUCT`, `MAP`, and `UNION`. Each supports different use cases and has a different structure. 
+DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `UNION`. Each supports different use cases and has a different structure. 
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
 |:-|:---|:---|:--|:--|
