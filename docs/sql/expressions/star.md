@@ -66,9 +66,9 @@ SELECT min(COLUMNS(*)), count(COLUMNS(*)) FROM numbers;
 
 <div class="narrow_table"></div>
 
-| min(numbers.id) | min(numbers.number) | count(numbers.id) | count(numbers.number) |
-|-----------------|---------------------|-------------------|-----------------------|
-| 1               | 10                  | 3                 | 2                     |
+| id | number | id | number |
+|---:|-------:|---:|-------:|
+| 1  | 10     | 3  | 2      |
 
 The `*` expression in the `COLUMNS` statement can also contain `EXCLUDE` or `REPLACE`, similar to regular star expressions.
 
@@ -78,9 +78,9 @@ SELECT min(COLUMNS(* REPLACE (number + id AS number))), count(COLUMNS(* EXCLUDE 
 
 <div class="narrow_table"></div>
 
-| min(numbers.id) | min(number := (number + id)) | count(numbers.id) |
-|-----------------|------------------------------|-------------------|
-| 1               | 11                           | 3                 |
+| id | min(number := (number + id)) | id |
+|---:|-----------------------------:|---:|
+| 1  | 11                           | 3  |
 
 `COLUMNS` expressions can also be combined, as long as the `COLUMNS` contains the same (star) expression:
 
@@ -90,11 +90,11 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 
 <div class="narrow_table"></div>
 
-| (numbers.id + numbers.id) | (numbers.number + numbers.number) |
-|---------------------------|-----------------------------------|
-| 2                         | 20                                |
-| 4                         | 40                                |
-| 6                         | NULL                              |
+| id | number |
+|---:|-------:|
+| 2  | 20     |
+| 4  | 40     |
+| 6  | NULL   |
 
 
 ## COLUMNS Regular Expression
@@ -143,5 +143,5 @@ SELECT st.* FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS st);
 <div class="narrow_table"></div>
 
 | x | y | z |
-|:---|:---|:---|
+|--:|--:|--:|
 | 1 | 2 | 3 |
