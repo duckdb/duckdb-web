@@ -64,6 +64,16 @@ SELECT e'Hello\nworld' AS msg;
 └──────────────┘
 ```
 
+The following backslash escape sequences are supported:
+
+| Escape sequence | Name | ASCII code |
+|:--|:--|--:|
+| `\b` | backspace | 8 |
+| `\f` | form feed | 12 |
+| `\n` | newline | 10 |
+| `\r` | carriage return |  13 |
+| `\t` | tab | 9 |
+
 ### Dollar-Quoted String Literals
 
 DuckDB supports dollar-quoted string literals, which are surrounded by double-dollar symbols (`$$`):
