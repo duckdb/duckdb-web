@@ -500,7 +500,10 @@ $(document).ready(function(){
 	// SEARCH 
 	var base_url = window.location.origin;
 	var resultSelected;
-	
+	if( OSdatid == "macos" && $('.sidenavigation').length ){
+		$('.opensearch .shortcut.win').hide();
+		$('.opensearch .shortcut.mac').show();
+	}
 	var toggleSearch = function(){
 		if( $('body').hasClass('search') ){
 			$('.searchoverlay').removeClass('active');
@@ -565,6 +568,9 @@ $(document).ready(function(){
 	});
 	
 	$('nav .search_icon').click(function(){
+		toggleSearch();
+	});
+	$('.sidenavigation .opensearch').click(function(){
 		toggleSearch();
 	});
 	$('.searchoverlay').click(function(e){
@@ -685,7 +691,7 @@ $(document).ready(function(){
 	
 	/** HIGHLIGHT TOC MENU **/
 	if ($('body').hasClass('documentation')) {
-		var headings = $('#main_content_wrap h1, #main_content_wrap h2');
+		var headings = $('#main_content_wrap h1, #main_content_wrap h2, #main_content_wrap h3');
 		var tocEntries = $('.toc-entry');
 	
 		$(window).on('scroll', function() {
