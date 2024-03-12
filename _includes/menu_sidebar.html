@@ -48,9 +48,8 @@
 					{% assign base_slash = '/' %}
 				{% endif %}
 				<li class="item-menu
-					{%- if urlContains %} active{% endif -%}
+					{%- if urlContains %} active opened{% endif -%}
 					{%- if item.mainfolderitems[0] %} hasSub{% endif -%}
-					{%- if urlContains %} opened{% endif -%}
 				">
 				{% if item.url %} <a href="{{ base_slash }}{{ site.baseurl }}{{startingUrl}}{{item.slug}}{{ item.url }}">{{ item.page }}</a> {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {% else %} {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {{ item.page }} {% endif %} </li>
 			
