@@ -49,24 +49,20 @@ FROM students
 GROUP BY GROUPING SETS ((course, type), course, type, ());
 ```
 
-```text
-┌────────┬──────────┬──────────────┐
-│ course │   type   │ count_star() │
-├────────┼──────────┼──────────────┤
-│ CS     │ Bachelor │ 2            │
-│ CS     │ PhD      │ 1            │
-│ Math   │ Masters  │ 1            │
-│ CS     │ NULL     │ 2            │
-│ Math   │ NULL     │ 1            │
-│ CS     │ NULL     │ 5            │
-│ Math   │ NULL     │ 2            │
-│ NULL   │ Bachelor │ 2            │
-│ NULL   │ PhD      │ 1            │
-│ NULL   │ Masters  │ 1            │
-│ NULL   │ NULL     │ 3            │
-│ NULL   │ NULL     │ 7            │
-└────────┴──────────┴──────────────┘
-```
+| course |   type   | count_star() |
+|--------|----------|-------------:|
+| Math   | NULL     | 1            |
+| NULL   | NULL     | 7            |
+| CS     | PhD      | 1            |
+| CS     | Bachelor | 2            |
+| Math   | Masters  | 1            |
+| CS     | NULL     | 2            |
+| Math   | NULL     | 2            |
+| CS     | NULL     | 5            |
+| NULL   | NULL     | 3            |
+| NULL   | Masters  | 1            |
+| NULL   | Bachelor | 2            |
+| NULL   | PhD      | 1            |
 
 In the above query, we group across four different sets: `course, type`, `course`, `type` and `()` (the empty group). The result contains `NULL` for a group which is not in the grouping set for the result, i.e., the above query is equivalent to the following UNION statement:
 
@@ -124,33 +120,26 @@ ORDER BY y, q, m;
 
 These are the results:
 
-```text
-┌───────┬───────┬───────┬─────────────┐
-│   y   │   q   │   m   │ grouping_id │
-│ int64 │ int64 │ int64 │    int64    │
-├───────┼───────┼───────┼─────────────┤
-│  2023 │     1 │     1 │           0 │
-│  2023 │     1 │     2 │           0 │
-│  2023 │     1 │     3 │           0 │
-│  2023 │     1 │  NULL │           1 │
-│  2023 │     2 │     4 │           0 │
-│  2023 │     2 │     5 │           0 │
-│  2023 │     2 │     6 │           0 │
-│  2023 │     2 │  NULL │           1 │
-│  2023 │     3 │     7 │           0 │
-│  2023 │     3 │     8 │           0 │
-│  2023 │     3 │     9 │           0 │
-│  2023 │     3 │  NULL │           1 │
-│  2023 │     4 │    10 │           0 │
-│  2023 │     4 │    11 │           0 │
-│  2023 │     4 │    12 │           0 │
-│  2023 │     4 │  NULL │           1 │
-│  2023 │  NULL │  NULL │           3 │
-│  NULL │  NULL │  NULL │           7 │
-├───────┴───────┴───────┴─────────────┤
-│ 18 rows                   4 columns │
-└─────────────────────────────────────┘
-```
+|  y   |  q   |  m   | grouping_id() |
+|-----:|-----:|-----:|--------------:|
+| 2023 | 1    | 1    | 0             |
+| 2023 | 1    | 2    | 0             |
+| 2023 | 1    | 3    | 0             |
+| 2023 | 1    | NULL | 1             |
+| 2023 | 2    | 4    | 0             |
+| 2023 | 2    | 5    | 0             |
+| 2023 | 2    | 6    | 0             |
+| 2023 | 2    | NULL | 1             |
+| 2023 | 3    | 7    | 0             |
+| 2023 | 3    | 8    | 0             |
+| 2023 | 3    | 9    | 0             |
+| 2023 | 3    | NULL | 1             |
+| 2023 | 4    | 10   | 0             |
+| 2023 | 4    | 11   | 0             |
+| 2023 | 4    | 12   | 0             |
+| 2023 | 4    | NULL | 1             |
+| 2023 | NULL | NULL | 3             |
+| NULL | NULL | NULL | 7             |
 
 In this example, the lowest level of grouping is at the month level, defined by the grouping set `(y, q, m)`. Result rows corresponding to that level are simply aggregate rows and the `GROUPING_ID(y, q, m)` function returns `0` for those. The grouping set `(y, q)` results in super-aggregate rows over the month level, leaving a `NULL`-value for the `m` column, and for which `GROUPING_ID(y, q, m)` returns `1`. The grouping set `(y)` results in super-aggregate rows over the quarter level, leaving `NULL`-values for the `m` and `q` column, for which `GROUPING_ID(y, q, m)` returns `3`. Finally, the `()` grouping set results in one super-aggregate row for the entire resultset, leaving `NULL`-values for `y`, `q` and `m` and for which `GROUPING_ID(y, q, m)` returns `7`.
 
@@ -180,33 +169,26 @@ ORDER BY y, q, m;
 
 Which returns these results:
 
-```text
-┌───────┬───────┬───────┬──────────────────────┬────────────┐
-│   y   │   q   │   m   │ grouping_id(y, q, m) │ y_q_m_bits │
-│ int64 │ int64 │ int64 │        int64         │  varchar   │
-├───────┼───────┼───────┼──────────────────────┼────────────┤
-│  2023 │     1 │     1 │                    0 │ 000        │
-│  2023 │     1 │     2 │                    0 │ 000        │
-│  2023 │     1 │     3 │                    0 │ 000        │
-│  2023 │     1 │  NULL │                    1 │ 001        │
-│  2023 │     2 │     4 │                    0 │ 000        │
-│  2023 │     2 │     5 │                    0 │ 000        │
-│  2023 │     2 │     6 │                    0 │ 000        │
-│  2023 │     2 │  NULL │                    1 │ 001        │
-│  2023 │     3 │     7 │                    0 │ 000        │
-│  2023 │     3 │     8 │                    0 │ 000        │
-│  2023 │     3 │     9 │                    0 │ 000        │
-│  2023 │     3 │  NULL │                    1 │ 001        │
-│  2023 │     4 │    10 │                    0 │ 000        │
-│  2023 │     4 │    11 │                    0 │ 000        │
-│  2023 │     4 │    12 │                    0 │ 000        │
-│  2023 │     4 │  NULL │                    1 │ 001        │
-│  2023 │  NULL │  NULL │                    3 │ 011        │
-│  NULL │  NULL │  NULL │                    7 │ 111        │
-├───────┴───────┴───────┴──────────────────────┴────────────┤
-│ 18 rows                                         5 columns │
-└───────────────────────────────────────────────────────────┘
-```
+|  y   |  q   |  m   | grouping_id(y, q, m) | y_q_m_bits |
+|-----:|-----:|-----:|---------------------:|------------|
+| 2023 | 1    | 1    | 0                    | 000        |
+| 2023 | 1    | 2    | 0                    | 000        |
+| 2023 | 1    | 3    | 0                    | 000        |
+| 2023 | 1    | NULL | 1                    | 001        |
+| 2023 | 2    | 4    | 0                    | 000        |
+| 2023 | 2    | 5    | 0                    | 000        |
+| 2023 | 2    | 6    | 0                    | 000        |
+| 2023 | 2    | NULL | 1                    | 001        |
+| 2023 | 3    | 7    | 0                    | 000        |
+| 2023 | 3    | 8    | 0                    | 000        |
+| 2023 | 3    | 9    | 0                    | 000        |
+| 2023 | 3    | NULL | 1                    | 001        |
+| 2023 | 4    | 10   | 0                    | 000        |
+| 2023 | 4    | 11   | 0                    | 000        |
+| 2023 | 4    | 12   | 0                    | 000        |
+| 2023 | 4    | NULL | 1                    | 001        |
+| 2023 | NULL | NULL | 3                    | 011        |
+| NULL | NULL | NULL | 7                    | 111        |
 
 Note that the number of expressions passed to `GROUPING_ID()`, or the order in which they are passed is independent from the actual group definitions appearing in the `GROUPING SETS`-clause (or the groups implied by `ROLLUP` and `CUBE`). As long as the expressions passed to `GROUPING_ID()` are expressions that appear some where in the `GROUPING SETS`-clause, `GROUPING_ID()` will set a bit corresponding to the position of the expression whenever that expression is rolled up to a super-aggregate.
 

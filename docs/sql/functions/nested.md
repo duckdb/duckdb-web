@@ -170,14 +170,10 @@ SELECT *
 FROM range(DATE '1992-01-01', DATE '1992-03-01', INTERVAL '1' MONTH);
 ```
 
-```text
-┌─────────────────────┐
-│        range        │
-├─────────────────────┤
-│ 1992-01-01 00:00:00 │
-│ 1992-02-01 00:00:00 │
-└─────────────────────┘
-```
+|        range        |
+|---------------------|
+| 1992-01-01 00:00:00 |
+| 1992-02-01 00:00:00 |
 
 ## Slicing
 
@@ -414,15 +410,11 @@ The `generate_subscripts(`*`arr`*`, `*`dim`*`)` function generates indexes along
 SELECT generate_subscripts([4, 5, 6], 1) AS i;
 ```
 
-```text
-┌───┐
-│ i │
-├───┤
-│ 1 │
-│ 2 │
-│ 3 │
-└───┘
-```
+| i |
+|--:|
+| 1 |
+| 2 |
+| 3 |
 
 ## Related Functions
 

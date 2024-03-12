@@ -208,15 +208,10 @@ UNPIVOT
         col2;
 ```
 
-```text
-┌─────────┬─────────┐
-│  name   │  value  │
-│ varchar │ varchar │
-├─────────┼─────────┤
-│ col1    │ 84      │
-│ col2    │ woot    │
-└─────────┴─────────┘
-```
+| name | value |
+|------|-------|
+| col1 | 84    |
+| col2 | woot  |
 
 ### Internals
 

@@ -65,14 +65,9 @@ Once the CLI has been opened, enter a SQL statement followed by a semicolon, the
 SELECT 'quack' AS my_column;
 ```
 
-```text
-┌───────────┐
-│ my_column │
-│  varchar  │
-├───────────┤
-│ quack     │
-└───────────┘
-```
+| my_column |
+|-----------|
+| quack     |
 
 The CLI supports all of DuckDB's rich [SQL syntax](../../sql/introduction) including `SELECT`, `CREATE`, and `ALTER` statements.
 
@@ -145,7 +140,7 @@ The output below is returned to the terminal by default. The formatting of the t
 
 ```text
 | generate_series |
-|-----------------|
+|----------------:|
 | 0               |
 | 1               |
 | 2               |
@@ -173,7 +168,7 @@ In this case, no output is returned to the terminal. Instead, the file `series.m
 
 ```text
 | generate_series |
-|-----------------|
+|----------------:|
 | 0               |
 | 1               |
 | 2               |
@@ -259,15 +254,10 @@ First, read a file and pipe it to the `duckdb` CLI executable. As arguments to t
 $ cat test.csv | duckdb :memory: "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
-```text
-┌───────┐
-│ woot  │
-│ int32 │
-├───────┤
-│    42 │
-│    43 │
-└───────┘
-```
+| woot |
+|-----:|
+| 42   |
+| 43   |
 
 To write back to stdout, the copy command can be used with the `/dev/stdout` file location.
 
@@ -292,14 +282,10 @@ To retrieve the home directory's path from the `HOME` environment variable, use:
 ```sql
 SELECT getenv('HOME') AS home;
 ```
-```text
-┌──────────────────┐
-│       home       │
-│     varchar      │
-├──────────────────┤
-│ /Users/user_name │
-└──────────────────┘
-```
+
+|       home       |
+|------------------|
+| /Users/user_name |
 
 The output of the `getenv` function can be used to set [configuration options](../../configuration/overview). For example, to set the `NULL` order based on the environment variable `DEFAULT_NULL_ORDER`, use:
 
@@ -316,4 +302,3 @@ It is only available in the CLI client and is not supported in other DuckDB clie
 
 The DuckDB CLI supports executing [prepared statements](../../sql/query_syntax/prepared_statements) in addition to regular `SELECT` statements.
 To create and execute a prepared statement in the CLI client, use the `PREPARE` clause and the `EXECUTE` statement.
-

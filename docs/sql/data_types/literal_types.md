@@ -25,14 +25,9 @@ For example, we can compare string literals with dates.
 SELECT d > '1992-01-01' AS result FROM (VALUES (DATE '1992-01-01')) t(d);
 ```
 
-```text
-┌─────────┐
-│ result  │
-│ boolean │
-├─────────┤
-│ false   │
-└─────────┘
-```
+| result |
+|:-------|
+| false  |
 
 However, we cannot compare `VARCHAR` values with dates.
 
@@ -54,6 +49,8 @@ SELECT E'Hello\nworld' AS msg;
 -- or
 SELECT e'Hello\nworld' AS msg;
 ```
+
+<!-- This output intentionally uses the duckbox formatter -->
 
 ```text
 ┌──────────────┐
@@ -80,8 +77,10 @@ DuckDB supports dollar-quoted string literals, which are surrounded by double-do
 
 ```sql
 SELECT $$Hello
-world$$ AS msg
+world$$ AS msg;
 ```
+
+<!-- This output intentionally uses the duckbox formatter -->
 
 ```text
 ┌──────────────┐
@@ -96,11 +95,6 @@ world$$ AS msg
 SELECT $$The price is $9.95$$ AS msg;
 ```
 
-```text
-┌────────────────────┐
-│        msg         │
-│      varchar       │
-├────────────────────┤
-│ The price is $9.95 │
-└────────────────────┘
-```
+|        msg         |
+|--------------------|
+| The price is $9.95 |
