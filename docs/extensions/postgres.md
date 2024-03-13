@@ -245,7 +245,7 @@ DROP SCHEMA postgres_db.s1;
 ## `DETACH`
 
 ```sql
-DROP SCHEMA postgres_db;
+DETACH postgres_db;
 ```
 
 ### Transactions
