@@ -45,6 +45,7 @@ df = duckdb.sql("""
 ).pl()
 print(df)
 ```
+
 ```text
 shape: (3, 2)
 ┌─────┬────────┐

@@ -65,6 +65,7 @@ def my_function(x: int) -> str:
 duckdb.create_function("my_func", my_function)
 duckdb.sql("SELECT my_func(42)")
 ```
+
 ```text
 ┌─────────────┐
 │ my_func(42) │

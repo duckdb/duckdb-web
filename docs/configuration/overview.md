@@ -28,33 +28,28 @@ SET default_null_order = 'nulls_last';
 -- return the current value of a specific setting
 SELECT current_setting('threads') AS threads;
 ```
-```text
-┌─────────┐
-│ threads │
-│  int64  │
-├─────────┤
-│      10 │
-└─────────┘
-```
+
+| threads |
+|--------:|
+| 10      |
+
 ```sql
 -- query a specific setting
 SELECT *
 FROM duckdb_settings()
 WHERE name = 'threads';
 ```
-```text
-┌─────────┬─────────┬─────────────────────────────────────────────────┬────────────┐
-│  name   │  value  │                   description                   │ input_type │
-│ varchar │ varchar │                     varchar                     │  varchar   │
-├─────────┼─────────┼─────────────────────────────────────────────────┼────────────┤
-│ threads │ 10      │ The number of total threads used by the system. │ BIGINT     │
-└─────────┴─────────┴─────────────────────────────────────────────────┴────────────┘
-```
+
+|  name   | value |                   description                   | input_type |
+|---------|------:|-------------------------------------------------|------------|
+| threads | 10    | The number of total threads used by the system. | BIGINT     |
+
 ```sql
 -- show a list of all available settings
 SELECT *
 FROM duckdb_settings();
 ```
+
 ```sql
 -- reset the memory limit of the system back to the default
 RESET memory_limit;

@@ -257,18 +257,14 @@ FROM st_readosm('tmp/data/germany.osm.pbf')
 WHERE tags['highway'] != []
 LIMIT 5;
 ```
-```text
-┌──────────────────────┬────────┬──────────────────────┬─────────┬────────────────────┬────────────┬───────────┬────────────────────────┐
-│         kind         │   id   │         tags         │  refs   │        lat         │    lon     │ ref_roles │       ref_types        │
-│ enum('node', 'way'…  │ int64  │ map(varchar, varch…  │ int64[] │       double       │   double   │ varchar[] │ enum('node', 'way', …  │
-├──────────────────────┼────────┼──────────────────────┼─────────┼────────────────────┼────────────┼───────────┼────────────────────────┤
-│ node                 │ 122351 │ {bicycle=yes, butt…  │         │         53.5492951 │   9.977553 │           │                        │
-│ node                 │ 122397 │ {crossing=no, high…  │         │ 53.520990100000006 │ 10.0156924 │           │                        │
-│ node                 │ 122493 │ {TMC:cid_58:tabcd_…  │         │ 53.129614600000004 │  8.1970173 │           │                        │
-│ node                 │ 123566 │ {highway=traffic_s…  │         │ 54.617268200000005 │  8.9718171 │           │                        │
-│ node                 │ 125801 │ {TMC:cid_58:tabcd_…  │         │ 53.070685000000005 │  8.7819939 │           │                        │
-└──────────────────────┴────────┴──────────────────────┴─────────┴────────────────────┴────────────┴───────────┴────────────────────────┘
-```
+
+| kind |   id   |                                                                      tags                                                                                   | refs |        lat         |    lon     | ref_roles | ref_types |
+|------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|------|--------------------|------------|-----------|-----------|
+| node | 122351 | {bicycle=yes, button_operated=yes, crossing=traffic_signals, highway=crossing, tactile_paving=no, traffic_signals:sound=yes, traffic_signals:vibration=yes} | NULL | 53.5492951         | 9.977553   | NULL      | NULL      |
+| node | 122397 | {crossing=no, highway=traffic_signals, traffic_signals=signal, traffic_signals:direction=forward}                                                           | NULL | 53.520990100000006 | 10.0156924 | NULL      | NULL      |
+| node | 122493 | {TMC:cid_58:tabcd_1:Class=Point, TMC:cid_58:tabcd_1:Direction=negative, TMC:cid_58:tabcd_1:LCLversion=9.00, TMC:cid_58:tabcd_1:LocationCode=10744, ...}     | NULL | 53.129614600000004 | 8.1970173  | NULL      | NULL      |
+| node | 123566 | {highway=traffic_signals}                                                                                                                                   | NULL | 54.617268200000005 | 8.9718171  | NULL      | NULL      |
+| node | 125801 | {TMC:cid_58:tabcd_1:Class=Point, TMC:cid_58:tabcd_1:Direction=negative, TMC:cid_58:tabcd_1:LCLversion=10.1, TMC:cid_58:tabcd_1:LocationCode=25041, ...}     | NULL | 53.070685000000005 | 8.7819939  | NULL      | NULL      |
 
 ## Spatial Replacement Scans
 
@@ -277,6 +273,7 @@ The spatial extension also provides "replacement scans" for common geospatial fi
 ```sql
 SELECT * FROM './path/to/some/shapefile/dataset.shp';
 ```
+
 In practice this is just syntax-sugar for calling `ST_Read`, so there is no difference in performance. If you want to pass additional options, you should use the `ST_Read` table function directly.
 
 The following formats are currently recognized by their file extension:
@@ -291,6 +288,7 @@ Similarly there is a `.osm.pbf` replacement scan for `ST_ReadOsm`.
 
 Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export duckdb tables to different geospatial vector formats.
 For example to export a table to a GeoJSON file, with generated bounding boxes, you can use the following query:
+
 ```sql
 COPY ⟨table⟩ TO 'some/file/path/filename.geojson'
 WITH (FORMAT GDAL, DRIVER 'GeoJSON', LAYER_CREATION_OPTIONS 'WRITE_BBOX=YES');
