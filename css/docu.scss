@@ -43,12 +43,12 @@ body.documentation{
       }
    }
    main .wrap{
-      width: calc(100% - 252px);
+      width: calc(100% - 275px);
       min-height: 100vh; 
       display: flex;
       justify-content: space-between;
       max-width: unset;
-      margin-left: 252px;
+      margin-left: 275px;
       padding: 0 0 0 30px;
       position: relative;
       #main_content_wrap{
@@ -422,7 +422,7 @@ body.documentation{
    position: fixed;
    top: 70px;
    background-color: $duckDByellow;
-   width: 252px;
+   width: 275px;
    height: calc(100vh - 70px);
    padding: 15px;
    z-index: 999;
@@ -1068,6 +1068,9 @@ p img {
 body.documentation.installation{
     .pagemeta{
         display: none;
+    }
+    .toc_menu{
+       display: none;
     }
 } 
 

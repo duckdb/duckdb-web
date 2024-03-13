@@ -54,8 +54,9 @@
 			</div>
 		</div>
 	</header>
-
-	<main>
+	
+	{% assign file_extension = page.path | split: "." | last %}
+	<main class="f-{{file_extension}}">
 		
 		{% include searchoverlay.html %}
 
