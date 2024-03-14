@@ -334,4 +334,4 @@ Will perform the following steps:
   * root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv
   * root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv
 
-As you can see because blob do not support the notion of directories the filter can only be performed after the listing whereas the datalake endpoint will list recursively directory by directory. In the example it does not look that different but with more partitions or more files under the partitions that can make a lot of differences.
+As you can see because the Blob endpoint does not support the notion of directories, the filter can only be performed after the listing, whereas the ADLS endpoint will list files recursively. Especially with higher partition/directory counts, the performance difference can be very significant.
