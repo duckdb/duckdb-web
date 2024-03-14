@@ -247,9 +247,9 @@ Where `variable_name` can be one of the following:
 | `azure_proxy_password`| Http proxy password if needed. | `STRING` | - |
 
 
-## Additional information
+## Additional Information
 
-### Difference between ADLS and Blob storage
+### Difference between ADLS and Blob Storage
 
 Even though ADLS implements similar functionality as the Blob storage, there are some important performance benefits to using the ADLS endpoints for globbing, especially when using (complex) glob patterns. 
 
@@ -257,7 +257,7 @@ To demonstrate, lets look at an example of how the a glob is performed internall
 
 Using the following filesystem:
 
-```txt
+```text
 root
 ├── l_receipmonth=1997-10
 │   ├── l_shipmode=AIR
@@ -282,56 +282,56 @@ root
         └── data_0.csv
 ```
 
-The query performed through the blob endpoint
+The following query performed through the blob endpoint
 
 ```sql
 SELECT count(*)
 FROM 'az://root/l_receipmonth=1997-*/l_shipmode=SHIP/*.csv';
 ```
 
-Will perform the following steps:
+will perform the following steps:
 
 * List all the files with the prefix `root/l_receipmonth=1997-`
-  * root/l_receipmonth=1997-10/l_shipmode=SHIP/data_0.csv
-  * root/l_receipmonth=1997-10/l_shipmode=AIR/data_0.csv
-  * root/l_receipmonth=1997-10/l_shipmode=TRUCK/data_0.csv
-  * root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv
-  * root/l_receipmonth=1997-11/l_shipmode=AIR/data_0.csv
-  * root/l_receipmonth=1997-11/l_shipmode=TRUCK/data_0.csv
-  * root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv
-  * root/l_receipmonth=1997-12/l_shipmode=AIR/data_0.csv
-  * root/l_receipmonth=1997-12/l_shipmode=TRUCK/data_0.csv
+    * `root/l_receipmonth=1997-10/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receipmonth=1997-10/l_shipmode=AIR/data_0.csv`
+    * `root/l_receipmonth=1997-10/l_shipmode=TRUCK/data_0.csv`
+    * `root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receipmonth=1997-11/l_shipmode=AIR/data_0.csv`
+    * `root/l_receipmonth=1997-11/l_shipmode=TRUCK/data_0.csv`
+    * `root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receipmonth=1997-12/l_shipmode=AIR/data_0.csv`
+    * `root/l_receipmonth=1997-12/l_shipmode=TRUCK/data_0.csv`
 * Filter the result with the requested pattern `root/l_receipmonth=1997-*/l_shipmode=SHIP/*.csv`
-  * root/l_receipmonth=1997-10/l_shipmode=SHIP/data_0.csv
-  * root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv
-  * root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv
+    * `root/l_receipmonth=1997-10/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv`
 
-The same query performed through the datalake endpoint:
+Meanwhile, the same query performed through the datalake endpoint,
 
 ```sql
 SELECT count(*)
 FROM 'abfss://root/l_receipmonth=1997-*/l_shipmode=SHIP/*.csv';
 ```
 
-Will perform the following steps:
+will perform the following steps:
 
 * List all directories in `root/`
-  * root/l_receipmonth=1997-10
-  * root/l_receipmonth=1997-11
-  * root/l_receipmonth=1997-12
+    * `root/l_receipmonth=1997-10`
+    * `root/l_receipmonth=1997-11`
+    * `root/l_receipmonth=1997-12`
 * Filter and list subdirectories: `root/l_receipmonth=1997-10`, `root/l_receipmonth=1997-11`, `root/l_receipmonth=1997-12`
-  * root/l_receipmonth=1997-10/l_shipmode=SHIP
-  * root/l_receipmonth=1997-10/l_shipmode=AIR
-  * root/l_receipmonth=1997-10/l_shipmode=TRUCK
-  * root/l_receipmonth=1997-11/l_shipmode=SHIP
-  * root/l_receipmonth=1997-11/l_shipmode=AIR
-  * root/l_receipmonth=1997-11/l_shipmode=TRUCK
-  * root/l_receipmonth=1997-12/l_shipmode=SHIP
-  * root/l_receipmonth=1997-12/l_shipmode=AIR
-  * root/l_receipmonth=1997-12/l_shipmode=TRUCK
+    * `root/l_receipmonth=1997-10/l_shipmode=SHIP`
+    * `root/l_receipmonth=1997-10/l_shipmode=AIR`
+    * `root/l_receipmonth=1997-10/l_shipmode=TRUCK`
+    * `root/l_receipmonth=1997-11/l_shipmode=SHIP`
+    * `root/l_receipmonth=1997-11/l_shipmode=AIR`
+    * `root/l_receipmonth=1997-11/l_shipmode=TRUCK`
+    * `root/l_receipmonth=1997-12/l_shipmode=SHIP`
+    * `root/l_receipmonth=1997-12/l_shipmode=AIR`
+    * `root/l_receipmonth=1997-12/l_shipmode=TRUCK`
 * Filter and list subdirectories: `root/l_receipmonth=1997-10/l_shipmode=SHIP`, `root/l_receipmonth=1997-11/l_shipmode=SHIP`, `root/l_receipmonth=1997-12/l_shipmode=SHIP`
-  * root/l_receipmonth=1997-10/l_shipmode=SHIP/data_0.csv
-  * root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv
-  * root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv
+    * `root/l_receipmonth=1997-10/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv`
 
 As you can see because the Blob endpoint does not support the notion of directories, the filter can only be performed after the listing, whereas the ADLS endpoint will list files recursively. Especially with higher partition/directory counts, the performance difference can be very significant.
