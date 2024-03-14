@@ -251,7 +251,7 @@ Where `variable_name` can be one of the following:
 
 ### Why implement the two storage types
 
-Even if the DataLake storage also expose the Blob endpoint adding the support of the DataLake allow users to add some predicate in there paths.
+Even though ADLS implements similar functionality as the Blob storage, there are some important performance benefits to using the ADLS endpoints for globbing, especially when using (complex) glob patterns. 
 
 For example the main difference in behavior for the following use case:
 
