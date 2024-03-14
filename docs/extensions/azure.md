@@ -17,7 +17,7 @@ LOAD azure;
 
 ## Usage
 
-Once the [authentication](#authentication) is set up, you Azure storages can as follows:
+Once the [authentication](#authentication) is set up, you can query Azure storage as follows:
 
 ### For *Azure Blob Storage*
 
