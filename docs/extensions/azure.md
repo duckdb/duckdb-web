@@ -249,7 +249,7 @@ Where `variable_name` can be one of the following:
 
 ## Additional information
 
-### Why implement the two storage types
+### Difference between ADLS and Blob storage
 
 Even though ADLS implements similar functionality as the Blob storage, there are some important performance benefits to using the ADLS endpoints for globbing, especially when using (complex) glob patterns. 
 
