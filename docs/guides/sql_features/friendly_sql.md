@@ -10,7 +10,7 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 ## Clauses
 
 * [`CREATE OR REPLACE TABLE`](../../sql/statements/create_table#create-or-replace)
-* [`CREATE TABLE ... AS` (CTAS)](../../sql/statements/create_table)
+* [`CREATE TABLE ... AS` (CTAS)](../../sql/statements/create_table#create-table--as-ctas)
 * [`DESCRIBE`](../meta/describe)
 * [`FROM`-first syntax](/2023/08/23/even-friendlier-sql#from-first-in-select-statements)
 * [`GROUP BY ALL`](../../sql/query_syntax/groupby#group-by-all)
