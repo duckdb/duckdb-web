@@ -29,6 +29,7 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
     * [with regular expressions](/2023/08/23/even-friendlier-sql#columns-with-regular-expressions)
     * [with `EXCLUDE` and `REPLACE`](/2023/08/23/even-friendlier-sql#columns-with-exclude-and-replace)
     * [with lambda functions](/2023/08/23/even-friendlier-sql#columns-with-lambda-functions)
+* Reusable column aliases, e.g.: `SELECT i + 1 AS j, j + 2 AS k FROM range(0, 3) t(i)`
 
 ## Literals and Identifiers
 
@@ -41,9 +42,16 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 * [`MAP` data type](../../sql/data_types/map)
 * [`UNION` data type](../../sql/data_types/union)
 
+## Data Import
+
+* [Auto-detecting the headers and schema of CSV files](../../data//csv/auto_detection)
+* Directly querying [CSV files](../../data/csv) and [Parquet files](../../data/parquet)
+* Loading from files using the syntax `FROM 'my.csv'`, `FROM 'my.csv.gz'`, `FROM 'my.parquet'`, etc.
+
 ## Functions and Expressions
 
-* Formatters: [`format()` function with the `fmt` syntax](../../sql/functions/char#fmt-syntax) and the [`printf() function`](../../sql/functions/char#printf-syntax)
+* Dot operator for function chaining: `SELECT ('hello').upper()`
+* String formatters: [`format()` function with the `fmt` syntax](../../sql/functions/char#fmt-syntax) and the [`printf() function`](../../sql/functions/char#printf-syntax)
 * [List comprehensions](/2023/08/23/even-friendlier-sql#list-comprehensions)
 * [List slicing](/2022/05/04/friendlier-sql#string-slicing)
 * [String slicing](/2022/05/04/friendlier-sql#string-slicing)
