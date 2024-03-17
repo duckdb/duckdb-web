@@ -1,0 +1,4 @@
+| Function | Description | Example | Result |
+|:--|:--|:---|:--|
+| `glob(`*`search_path`*`)` | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax](patternmatching). | `glob('*')` | (table of filenames) |
+| `repeat_row(`*`varargs`*`, `*`num_rows`*`)` | Returns a table with *`num_rows`* rows, each containing the fields defined in *`varargs`* | `repeat_row(1, 2, 'foo', num_rows = 3)` | 3 rows of `1, 2, 'foo'` |

@@ -1,0 +1,5 @@
+| Function | Aliases | Description | Example | Result |
+|--|--|---|--|-|
+| [`list_transform(`*`list`*`, `*`lambda`*`)`](#transform) | `array_transform`, `apply`, `list_apply`, `array_apply` | Returns a list that is the result of applying the lambda function to each element of the input list.                                       | `list_transform([4, 5, 6], x -> x + 1)`   | `[5, 6, 7]` |
+| [`list_filter(`*`list`*`, `*`lambda`*`)`](#filter)      | `array_filter`, `filter`                                | Constructs a list from those elements of the input list for which the lambda function returns `true`.                                      | `list_filter([4, 5, 6], x -> x > 4)`      | `[5, 6]`    |
+| [`list_reduce(`*`list`*`, `*`lambda`*`)`](#reduce)      | `array_reduce`, `reduce`                                | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. | `list_reduce([4, 5, 6], (x, y) -> x + y)` | `15`        |
