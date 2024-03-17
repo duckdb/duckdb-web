@@ -19,6 +19,8 @@ with open(input_filename) as f:
     content = content.replace(" |", "|")
     content = content.replace("\n|", "\n")
     content = content.replace("|\n", "\n")
+    # drop spaces, which were previously 
+    content = content.replace("(` ", "(`")
     content = re.sub(r"^\|", "", content, re.MULTILINE)
     first_line = content.split("\n")[0]
     with open("adjusted.csv", "w") as of:
@@ -48,12 +50,11 @@ duckdb.sql(f"""
 res = duckdb.sql("""
     SELECT printf(
             '| [%s](#%s) | %s |',
-            function,
-            regexp_replace(lower(replace(function, ',', '-')), '[^-_a-z0-9]', '', 'g'),
-            regexp_replace(trim(description) || '.', '\.\.$', '.'), -- ensure there is exactly one full stop at the end of the description
+            trim(function),
+            regexp_replace(lower(replace(function, ',', '-')), '[^-_a-z0-9]', '', 'g'), -- anchor link
+            regexp_replace(trim(description) || '.', '\.\.$', '.') -- description; ensure that there is exactly one full stop at the end of the description
         ) AS s
-    FROM funs;
-    """)
+    FROM funs;""")
 
 with open(f"{input_filename_without_extension}-reformatted.md", "w") as md:
     for line in res.fetchall():
@@ -64,18 +65,21 @@ with open(f"{input_filename_without_extension}-reformatted.md", "w") as md:
         result_item = ""
         if have_result_column:
             caption = "Result"
-            result = f"\n* **{caption}:** {line[4]}"
+            result_item = f"\n* **{caption}:** {line[3]}"
 
         aliases_item = ""
-        if have_aliases_column:
+        if have_aliases_column and line[-1] is not None:
             # use plural form of 'Alias' if there is a comma (indicating a list of aliases)
-            caption = "Aliases" if ',' in line[-1] else "Alias"
-            aliases = f"\n* **{caption}:** {line[-1]}"
+            if ',' in line[-1]:
+                caption = "Aliases"
+            else:
+                caption = "Alias"
+            aliases_item = f"\n* **{caption}:** {line[-1]}"
 
         md.write(f"""
 ### {line[0]}
 
 * **Description:** {line[1]}
-* **Example:** {line[2]}{result}{aliases}
+* **Example:** {line[2]}{result_item}{aliases_item}
 
 """)
