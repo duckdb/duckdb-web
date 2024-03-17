@@ -151,7 +151,8 @@ await c.query(`
 ```
 
 > Tip If you encounter a Network Error `("Failed to execute 'send' on 'XMLHttpRequest')"` when you try to query files from S3, configure the S3 permission CORS header. For example:
-```
+
+```json
 [
     {
         "AllowedHeaders": [
