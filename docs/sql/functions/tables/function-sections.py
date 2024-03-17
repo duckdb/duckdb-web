@@ -19,7 +19,8 @@ with open(input_filename) as f:
     content = content.replace(" |", "|")
     content = content.replace("\n|", "\n")
     content = content.replace("|\n", "\n")
-    # drop spaces, which were previously 
+    # drop spaces, which were previously inserted to allow for manual line breaks
+    # but they are actually quite ugly
     content = content.replace("(` ", "(`")
     content = re.sub(r"^\|", "", content, re.MULTILINE)
     first_line = content.split("\n")[0]
