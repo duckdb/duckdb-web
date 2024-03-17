@@ -83,6 +83,13 @@ CREATE TABLE flights AS
     FROM 'https://duckdb.org/data/flights.csv';
 ```
 
+The CTAS construct also works with the `OR REPLACE` modifier, yielding `CREATE OR REPLACE TABLE ... AS` (CORTAS) statements:
+
+```sql
+CREATE OR REPLACE TABLE flights AS
+    FROM 'https://duckdb.org/data/flights.csv';
+```
+
 ## Check Constraints
 
 A `CHECK` constraint is an expression that must be satisfied by the values of every row in the table.
