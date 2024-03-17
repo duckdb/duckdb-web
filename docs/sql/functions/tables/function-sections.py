@@ -82,5 +82,4 @@ with open(f"{input_filename_without_extension}-reformatted.md", "w") as md:
 
 * **Description:** {line[1]}
 * **Example:** {line[2]}{result_item}{aliases_item}
-
 """)
