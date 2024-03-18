@@ -139,14 +139,9 @@ WHERE score IS NOT NULL
 ORDER BY score DESC;
 ```
 
-```text
-┌─────────────────────┬──────────────────────────────────────────────────────────────────────┬────────┐
-│ document_identifier │                             text_content                             │ score  │
-│       varchar       │                               varchar                                │ double │
-├─────────────────────┼──────────────────────────────────────────────────────────────────────┼────────┤
-│ doc1                │ The mallard is a dabbling duck that breeds throughout the temperate. │    0.0 │
-└─────────────────────┴──────────────────────────────────────────────────────────────────────┴────────┘
-```
+| document_identifier |                             text_content                             | score |
+|---------------------|----------------------------------------------------------------------|------:|
+| doc1                | The mallard is a dabbling duck that breeds throughout the temperate. | 0.0   |
 
 Search for documents about "small cats". This retrieves "doc2":
 
@@ -163,14 +158,9 @@ WHERE score IS NOT NULL
 ORDER BY score DESC;
 ```
 
-```text
-┌─────────────────────┬────────────────────────────────────────────────────────────┬────────┐
-│ document_identifier │                        text_content                        │ score  │
-│       varchar       │                          varchar                           │ double │
-├─────────────────────┼────────────────────────────────────────────────────────────┼────────┤
-│ doc2                │ The cat is a domestic species of small carnivorous mammal. │    0.0 │
-└─────────────────────┴────────────────────────────────────────────────────────────┴────────┘
-```
+| document_identifier |                        text_content                        | score |
+|---------------------|------------------------------------------------------------|------:|
+| doc2                | The cat is a domestic species of small carnivorous mammal. | 0.0   |
 
 > Warning The FTS index will not update automatically when input table changes.
 > A workaround of this limitation can be recreating the index to refresh.

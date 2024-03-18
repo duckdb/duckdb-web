@@ -14,13 +14,9 @@ WITH cte AS (SELECT 42 AS x)
 SELECT * FROM cte;
 ```
 
-```text
-┌────┐
-│ x  │
-├────┤
-│ 42 │
-└────┘
-```
+| x  |
+|---:|
+| 42 |
 
 ```sql
 -- create two CTEs, where the second CTE references the first CTE
@@ -29,13 +25,9 @@ WITH cte AS (SELECT 42 AS i),
 SELECT * FROM cte2;
 ```
 
-```text
-┌──────┐
-│  x   │
-├──────┤
-│ 4200 │
-└──────┘
-```
+|  x   |
+|-----:|
+| 4200 |
 
 ## Materialized CTEs
 
@@ -78,15 +70,15 @@ SELECT * FROM t AS t1,
 ```sql
 CREATE TABLE tag (id INT, name VARCHAR, subclassof INT);
 INSERT INTO tag VALUES
- (1, 'U2',     5),
- (2, 'Blur',   5),
- (3, 'Oasis',  5),
- (4, '2Pac',   6),
- (5, 'Rock',   7),
- (6, 'Rap',    7),
- (7, 'Music',  9),
- (8, 'Movies', 9),
- (9, 'Art', NULL);
+    (1, 'U2',     5),
+    (2, 'Blur',   5),
+    (3, 'Oasis',  5),
+    (4, '2Pac',   6),
+    (5, 'Rock',   7),
+    (6, 'Rap',    7),
+    (7, 'Music',  9),
+    (8, 'Movies', 9),
+    (9, 'Art', NULL);
 ```
 
 The following query returns the path from the node `Oasis` to the root of the tree (`Art`).
@@ -106,13 +98,9 @@ FROM tag_hierarchy
 WHERE source = 'Oasis';
 ```
 
-```text
-┌───────────────────────────┐
-│           path            │
-├───────────────────────────┤
-│ [Oasis, Rock, Music, Art] │
-└───────────────────────────┘
-```
+|           path            |
+|---------------------------|
+| [Oasis, Rock, Music, Art] |
 
 ### Graph Traversal
 
@@ -161,24 +149,20 @@ FROM paths
 ORDER BY length(path), path;
 ```
 
-```text
-┌───────────┬─────────┬───────────────┐
-│ startNode │ endNode │     path      │
-├───────────┼─────────┼───────────────┤
-│ 1         │ 3       │ [1, 3]        │
-│ 1         │ 5       │ [1, 5]        │
-│ 1         │ 5       │ [1, 3, 5]     │
-│ 1         │ 8       │ [1, 3, 8]     │
-│ 1         │ 10      │ [1, 3, 10]    │
-│ 1         │ 3       │ [1, 5, 3]     │
-│ 1         │ 4       │ [1, 5, 4]     │
-│ 1         │ 8       │ [1, 5, 8]     │
-│ 1         │ 4       │ [1, 3, 5, 4]  │
-│ 1         │ 8       │ [1, 3, 5, 8]  │
-│ 1         │ 8       │ [1, 5, 3, 8]  │
-│ 1         │ 10      │ [1, 5, 3, 10] │
-└───────────┴─────────┴───────────────┘
-```
+| startNode | endNode |     path      |
+|----------:|--------:|---------------|
+| 1         | 3       | [1, 3]        |
+| 1         | 5       | [1, 5]        |
+| 1         | 5       | [1, 3, 5]     |
+| 1         | 8       | [1, 3, 8]     |
+| 1         | 10      | [1, 3, 10]    |
+| 1         | 3       | [1, 5, 3]     |
+| 1         | 4       | [1, 5, 4]     |
+| 1         | 8       | [1, 5, 8]     |
+| 1         | 4       | [1, 3, 5, 4]  |
+| 1         | 8       | [1, 3, 5, 8]  |
+| 1         | 8       | [1, 5, 3, 8]  |
+| 1         | 10      | [1, 5, 3, 10] |
 
 Note that the result of this query is not restricted to shortest paths, e.g., for node 5, the results include paths `[1, 5]` and `[1, 3, 5]`.
 
@@ -213,18 +197,14 @@ FROM paths
 ORDER BY length(path), path;
 ```
 
-```text
-┌───────────┬─────────┬────────────┐
-│ startNode │ endNode │    path    │
-├───────────┼─────────┼────────────┤
-│ 1         │ 3       │ [1, 3]     │
-│ 1         │ 5       │ [1, 5]     │
-│ 1         │ 8       │ [1, 3, 8]  │
-│ 1         │ 10      │ [1, 3, 10] │
-│ 1         │ 4       │ [1, 5, 4]  │
-│ 1         │ 8       │ [1, 5, 8]  │
-└───────────┴─────────┴────────────┘
-```
+| startNode | endNode |    path    |
+|----------:|--------:|------------|
+| 1         | 3       | [1, 3]     |
+| 1         | 5       | [1, 5]     |
+| 1         | 8       | [1, 3, 8]  |
+| 1         | 10      | [1, 3, 10] |
+| 1         | 4       | [1, 5, 4]  |
+| 1         | 8       | [1, 5, 8]  |
 
 #### Enumerate Unweighted Shortest Paths between Two Nodes
 
@@ -262,14 +242,10 @@ WHERE endNode = 8
 ORDER BY length(path), path;
 ```
 
-```text
-┌───────────┬─────────┬───────────┐
-│ startNode │ endNode │   path    │
-├───────────┼─────────┼───────────┤
-│ 1         │ 8       │ [1, 3, 8] │
-│ 1         │ 8       │ [1, 5, 8] │
-└───────────┴─────────┴───────────┘
-```
+| startNode | endNode |   path    |
+|----------:|--------:|-----------|
+| 1         | 8       | [1, 3, 8] |
+| 1         | 8       | [1, 5, 8] |
 
 ## Common Table Expressions
 

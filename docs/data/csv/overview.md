@@ -14,19 +14,21 @@ The following examples use the [`flights.csv`](/data/flights.csv) file.
 SELECT * FROM 'flights.csv';
 -- read_csv with custom options
 SELECT * FROM read_csv('flights.csv',
-  delim = '|',
-  header = true,
-  columns = {
-    'FlightDate': 'DATE',
-    'UniqueCarrier': 'VARCHAR',
-    'OriginCityName': 'VARCHAR',
-    'DestCityName': 'VARCHAR'
-  });
+    delim = '|',
+    header = true,
+    columns = {
+        'FlightDate': 'DATE',
+        'UniqueCarrier': 'VARCHAR',
+        'OriginCityName': 'VARCHAR',
+        'DestCityName': 'VARCHAR'
+    });
 ```
+
 ```bash
 # read a CSV from stdin, auto-infer options
 cat flights.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 ```
+
 ```sql
 -- read a CSV file into a table
 CREATE TABLE ontime (
@@ -37,12 +39,14 @@ CREATE TABLE ontime (
 );
 COPY ontime FROM 'flights.csv';
 ```
+
 ```sql
 -- alternatively, create a table without specifying the schema manually
 CREATE TABLE ontime AS SELECT * FROM 'flights.csv';
 -- we can use the FROM-first syntax to omit 'SELECT *'
 CREATE TABLE ontime AS FROM 'flights.csv';
 ```
+
 ```sql
 -- write the result of a query to a CSV file
 COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER true, DELIMITER '|');
@@ -105,11 +109,11 @@ SELECT * FROM read_csv('flights.csv');
 
 <div class="narrow_table"></div>
 
-|FlightDate|UniqueCarrier| OriginCityName  | DestCityName  |
-|----------|-------------|-----------------|---------------|
-|1988-01-01|AA           |New York, NY     |Los Angeles, CA|
-|1988-01-02|AA           |New York, NY     |Los Angeles, CA|
-|1988-01-03|AA           |New York, NY     |Los Angeles, CA|
+| FlightDate | UniqueCarrier | OriginCityName |  DestCityName   |
+|------------|---------------|----------------|-----------------|
+| 1988-01-01 | AA            | New York, NY   | Los Angeles, CA |
+| 1988-01-02 | AA            | New York, NY   | Los Angeles, CA |
+| 1988-01-03 | AA            | New York, NY   | Los Angeles, CA |
 
 The path can either be a relative path (relative to the current working directory) or an absolute path.
 
@@ -122,12 +126,12 @@ DESCRIBE ontime;
 
 <div class="narrow_table"></div>
 
-|Field         |Type   |Null|Key |Default|Extra|
-|--------------|-------|----|----|-------|-----|
-|FlightDate    |DATE   |YES |NULL|NULL   |NULL |
-|UniqueCarrier |VARCHAR|YES |NULL|NULL   |NULL |
-|OriginCityName|VARCHAR|YES |NULL|NULL   |NULL |
-|DestCityName  |VARCHAR|YES |NULL|NULL   |NULL |
+|  column_name   | column_type | null | key  | default | extra |
+|----------------|-------------|------|------|---------|-------|
+| FlightDate     | DATE        | YES  | NULL | NULL    | NULL  |
+| UniqueCarrier  | VARCHAR     | YES  | NULL | NULL    | NULL  |
+| OriginCityName | VARCHAR     | YES  | NULL | NULL    | NULL  |
+| DestCityName   | VARCHAR     | YES  | NULL | NULL    | NULL  |
 
 ```sql
 SELECT * FROM read_csv('flights.csv', sample_size = 20000);

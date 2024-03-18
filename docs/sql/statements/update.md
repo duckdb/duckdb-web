@@ -119,16 +119,12 @@ WHERE city.country_code = country.code
 SELECT *
 FROM city;
 ```
-```text
-┌──────────┬─────────┬──────────────┐
-│   name   │ revenue │ country_code │
-│ varchar  │  int64  │   varchar    │
-├──────────┼─────────┼──────────────┤
-│ Paris    │     800 │ FR           │
-│ Lyon     │     300 │ FR           │
-│ Brussels │     400 │ BE           │
-└──────────┴─────────┴──────────────┘
-```
+
+|   name   | revenue | country_code |
+|----------|--------:|--------------|
+| Paris    | 800     | FR           |
+| Lyon     | 300     | FR           |
+| Brussels | 400     | BE           |
 
 ## Upsert (Insert or Update)
 

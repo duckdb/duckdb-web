@@ -95,14 +95,9 @@ FROM person
 WHERE current_mood = 'sad';
 ```
 
-```text
-┌───────────┬───────────────────────────────────────┐
-│   name    │             current_mood              │
-│  varchar  │ enum('sad', 'ok', 'happy', 'anxious') │
-├───────────┼───────────────────────────────────────┤
-│ Pagliacci │ sad                                   │
-└───────────┴───────────────────────────────────────┘
-```
+|   name    | current_mood |
+|-----------|--------------|
+| Pagliacci | sad          |
 
 If you are importing data from a file, you can create an Enum for a `VARCHAR` column before importing.
 Given this, the following subquery selects automatically selects only distinct values:
@@ -130,17 +125,12 @@ SELECT regexp_matches(current_mood, '.*a.*') AS contains_a
 FROM person;
 ```
 
-```text
-┌────────────┐
-│ contains_a │
-│  boolean   │
-├────────────┤
-│ true       │
-│ NULL       │
-│ true       │
-│ false      │
-└────────────┘
-```
+| contains_a |
+|:-----------|
+| true       |
+| NULL       |
+| true       |
+| false      |
 
 Create a new mood and table:
 
@@ -194,27 +184,17 @@ CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
 SELECT 'sad'::mood < 'ok'::mood AS comp;
 ```
 
-```text
-┌─────────┐
-│  comp   │
-│ boolean │
-├─────────┤
-│ true    │
-└─────────┘
-```
+| comp |
+|-----:|
+| true |
 
 ```sql
 SELECT unnest(['ok'::mood, 'happy'::mood, 'sad'::mood]) AS m
 ORDER BY m;
 ```
 
-```text
-┌────────────────────────────┐
-│             m              │
-│ enum('sad', 'ok', 'happy') │
-├────────────────────────────┤
-│ sad                        │
-│ ok                         │
-│ happy                      │
-└────────────────────────────┘
-```
+|   m   |
+|-------|
+| sad   |
+| ok    |
+| happy |

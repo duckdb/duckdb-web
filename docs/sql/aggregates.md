@@ -52,14 +52,10 @@ For example:
 CREATE TABLE tbl AS SELECT s FROM range(1, 4) r(s);
 SELECT string_agg(s, ', ' ORDER BY s DESC) AS countdown FROM tbl;
 ```
-```text
-┌───────────┐
-│ countdown │
-│  varchar  │
-├───────────┤
-│ 3, 2, 1   │
-└───────────┘
-```
+
+| countdown |
+|-----------|
+| 3, 2, 1   |
 
 ## General Aggregate Functions
 
@@ -157,4 +153,3 @@ as the first argument.
 | Function | Description | Alias |
 |:--|:---|:--|
 | `grouping()` | For queries with `GROUP BY` and either [`ROLLUP` or `GROUPING SETS`](query_syntax/grouping_sets#identifying-grouping-sets-with-grouping_id): Returns an integer identifying which of the argument expressions where used to group on to create the current supper-aggregate row. | `grouping_id()` |
-

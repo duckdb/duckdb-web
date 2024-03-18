@@ -33,14 +33,9 @@ SELECT *
 FROM (SELECT UNNEST({'a': 42, 'b': {'a': 88, 'b': 99}}, recursive := true));
 ```
 
-```text
-┌───────┬───────┬───────┐
-│   a   │  a_1  │   b   │
-│ int32 │ int32 │ int32 │
-├───────┼───────┼───────┤
-│    42 │    88 │    99 │
-└───────┴───────┴───────┘
-```
+| a  | a_1 | b  |
+|---:|----:|---:|
+| 42 | 88  | 99 |
 
 ## Database Names
 
@@ -85,14 +80,10 @@ For example, the following two queries are equivalent:
 select COS(Pi()) as CosineOfPi;
 SELECT cos(pi()) AS CosineOfPi;
 ```
-```text
-┌────────────┐
-│ CosineOfPi │
-│   double   │
-├────────────┤
-│       -1.0 │
-└────────────┘
-```
+
+| CosineOfPi |
+|-----------:|
+| -1.0       |
 
 ### Case-Sensitivity of Identifiers
 
@@ -104,14 +95,10 @@ For example:
 CREATE TABLE tbl AS SELECT cos(pi()) AS CosineOfPi;
 SELECT cosineofpi FROM tbl;
 ```
-```text
-┌────────────┐
-│ CosineOfPi │
-│   double   │
-├────────────┤
-│       -1.0 │
-└────────────┘
-```
+
+| CosineOfPi |
+|-----------:|
+| -1.0       |
 
 To change this behavior, set the `preserve_identifier_case` [configuration option](../configuration/overview#configuration-reference) to `false`.
 
@@ -122,17 +109,14 @@ In case of a conflict, when the same identifier is spelt with different cases, o
 ```sql
 CREATE TABLE t1 (idfield INT, x INT);
 CREATE TABLE t2 (IdField INT, y INT);
+INSERT INTO t1 VALUES (1, 123);
+INSERT INTO t2 VALUES (1, 456);
 SELECT * FROM t1 NATURAL JOIN t2;
 ```
 
-```text
-┌─────────┬───────┬───────┐
-│ idfield │   x   │   y   │
-│  int32  │ int32 │ int32 │
-├─────────────────────────┤
-│         0 rows          │
-└─────────────────────────┘
-```
+| idfield |  x  |  y  |
+|--------:|----:|----:|
+| 1       | 123 | 456 |
 
 #### Disabling Preserving Cases
 
@@ -143,11 +127,7 @@ SET preserve_identifier_case = false;
 CREATE TABLE tbl AS SELECT cos(pi()) AS CosineOfPi;
 SELECT CosineOfPi FROM tbl;
 ```
-```text
-┌────────────┐
-│ cosineofpi │
-│   double   │
-├────────────┤
-│       -1.0 │
-└────────────┘
-```
+
+| cosineofpi |
+|-----------:|
+| -1.0       |

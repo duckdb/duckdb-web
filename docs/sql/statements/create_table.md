@@ -66,6 +66,30 @@ The `IF NOT EXISTS` syntax will only proceed with the creation of the table if i
 CREATE TABLE IF NOT EXISTS t1 (i INTEGER, j INTEGER);
 ```
 
+## `CREATE TABLE ... AS` (CTAS)
+
+DuckDB supports the `CREATE TABLE ... AS` syntax, also known as CTAS:
+
+```sql
+CREATE TABLE nums AS
+    SELECT i
+    FROM range(0, 3) t(i);
+```
+
+This syntax can be used in combination with the [CSV reader](../../data/csv/overview), the shorthand to read directly from CSV files without specifying a function, the [FROM-first syntax](../query_syntax/from), and the [HTTP(S) support](../../extensions/httpfs/https), yielding concise SQL commands such as the following:
+
+```sql
+CREATE TABLE flights AS
+    FROM 'https://duckdb.org/data/flights.csv';
+```
+
+The CTAS construct also works with the `OR REPLACE` modifier, yielding `CREATE OR REPLACE TABLE ... AS` (CORTAS) statements:
+
+```sql
+CREATE OR REPLACE TABLE flights AS
+    FROM 'https://duckdb.org/data/flights.csv';
+```
+
 ## Check Constraints
 
 A `CHECK` constraint is an expression that must be satisfied by the values of every row in the table.
@@ -150,6 +174,8 @@ CREATE TABLE t6 (
 ```
 
 > Foreign keys with cascading deletes (`FOREIGN KEY ... REFERENCES ... ON DELETE CASCADE`) are not supported.
+
+> Inserting into tables with self-referencing foreign keys is currently not supported and will result in the following error: `Constraint Error: Violates foreign key constraint because key "..." does not exist in the referenced table`.
 
 ## Generated Columns
 

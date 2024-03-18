@@ -56,28 +56,20 @@ If we subtract two timestamps from one another, we obtain an interval describing
 ```sql
 SELECT TIMESTAMP '2000-02-01 12:00:00' - TIMESTAMP '2000-01-01 11:00:00' AS diff;
 ```
-```text
-┌──────────────────┐
-│       diff       │
-│     interval     │
-├──────────────────┤
-│ 31 days 01:00:00 │
-└──────────────────┘
-```
+
+|       diff       |
+|------------------|
+| 31 days 01:00:00 |
 
 The `datediff` function can be used to obtain the difference between two dates for a specific unit.
 
 ```sql
 SELECT datediff('month', TIMESTAMP '2000-01-01 11:00:00', TIMESTAMP '2000-02-01 12:00:00') AS diff;
 ```
-```text
-┌───────┐
-│ diff  │
-│ int64 │
-├───────┤
-│     1 │
-└───────┘
-```
+
+| diff |
+|-----:|
+| 1    |
 
 ## Functions
 
