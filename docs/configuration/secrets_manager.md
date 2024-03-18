@@ -29,7 +29,7 @@ Secrets can be **temporary** or **persistent**. Temporary secrets are used by de
 
 #### Secret Providers
 
-To create a secret, a **Secret Provider** needs to be used. A Secret Provider is a mechanism through which a secret is generated. To illustrate this, for the `S3`, `GCS`, `R2`, and `AZURE` secret types, DuckDB currently supports two providers: `CONFIG` and `CREDENTIAL_CHAIN`. The `CONFIG` provider requires the user to pass all configuration information into the `CREATE SECRET`, whereas the `CREDENTIAL_CHAIN` provider will automatically try to fetch credentials. When no Secret Provider is specified, the `CONFIG` provider is used. For more details on how to create secrets using different providers checkout the respective pages on [httpfs](../extensions/httpfs#configuration-and-authentication-using-secrets) and [azure](../extensions/azure#authentication-with-secret)
+To create a secret, a **Secret Provider** needs to be used. A Secret Provider is a mechanism through which a secret is generated. To illustrate this, for the `S3`, `GCS`, `R2`, and `AZURE` secret types, DuckDB currently supports two providers: `CONFIG` and `CREDENTIAL_CHAIN`. The `CONFIG` provider requires the user to pass all configuration information into the `CREATE SECRET`, whereas the `CREDENTIAL_CHAIN` provider will automatically try to fetch credentials. When no Secret Provider is specified, the `CONFIG` provider is used. For more details on how to create secrets using different providers check out the respective pages on [httpfs](../extensions/httpfs#configuration-and-authentication-using-secrets) and [azure](../extensions/azure#authentication-with-secret).
 
 #### Temporary Secrets
 
