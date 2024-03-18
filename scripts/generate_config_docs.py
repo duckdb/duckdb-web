@@ -5,12 +5,13 @@ import subprocess
 import csv
 import io
 
+
 def run_duckdb_script(cmd):
     res = subprocess.run(
         db_path,
-        input = bytearray(cmd, 'utf8'),
-        stdout = subprocess.PIPE,
-        stderr = subprocess.PIPE,
+        input=bytearray(cmd, 'utf8'),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
     )
     stdout = res.stdout.decode('utf8').strip()
     stderr = res.stderr.decode('utf8').strip()
