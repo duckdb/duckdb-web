@@ -15,7 +15,7 @@ SELECT version();
 
 | version() |
 |-----------|
-| v0.10.0   |
+| v0.10.1   |
 
 Using a `PRAGMA`:
 
@@ -25,7 +25,7 @@ PRAGMA version;
 
 | library_version | source_id  |
 |-----------------|------------|
-| v0.10.0         | 20b1486d11 |
+| v0.10.1         | 4a89d97db8 |
 
 ## Platform
 
