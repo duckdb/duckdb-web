@@ -633,7 +633,8 @@ $(document).ready(function(){
 	
 	// STARTPAGE EXAMPLE CODE WINDOW
 	var updateExample = function(){
-		var exampleSelection = $('#example-select').find(":selected").val();
+		//var exampleSelection = $('#example-select').find(":selected").val();
+		var exampleSelection = $('#example-select ~ ul.select-options li.is-selected').attr('rel');
 		var languageSelection = $('.demo.window ul.lang li.active').attr('data-language');
 		var exampleCode = $('.examples.hero-demo').find('div[data-language='+languageSelection+'][data-example='+exampleSelection+']').html();
 		var buttonTxt = $('.examples.hero-demo').find('div[data-language='+languageSelection+'][data-example='+exampleSelection+']').attr('data-buttontxt');
@@ -666,9 +667,13 @@ $(document).ready(function(){
 			$(this).addClass('active');
 			var languageChange = $(this).attr('data-language');
 			var dropdown = $('.dropdown.hero-demo').find('div[data-language='+languageChange+']').html();
-			$('.demo.window .bottombar #example-select').html(dropdown);
+			$('.demo.window .bottombar #example-select').empty().html(dropdown); // Leere die Select-Box und füge die neuen Optionen ein
+			
+			$('.select-styled, .select-options').remove();
+			generateSelectBoxes(); 
 			updateExample();
-		})
+		});
+
 		$('#example-select').on('change', function() {
 			updateExample();
 		});
@@ -688,6 +693,77 @@ $(document).ready(function(){
 			$('.result').html(installation);
 		})
 	}
+	
+	/** CUSTOM SELECT ON HOME **/
+	var generateSelectBoxes = function(){   
+		$('body.landing select').each(function() {
+			var $this = $(this),
+				numberOfOptions = $(this).children('option').length;
+	
+			$this.addClass('select-hidden');
+			$this.after('<div class="select-styled">' + ($this.children('option:selected').text() || 'Select') + '</div>'); 
+	
+			var $styledSelect = $this.next('div.select-styled');
+			var $list = $('<ul />', {
+				'class': 'select-options'
+			}).insertAfter($styledSelect);
+	
+			for (var i = 0; i < numberOfOptions; i++) {
+				$('<li />', {
+					text: $this.children('option').eq(i).text(),
+					rel: $this.children('option').eq(i).val()
+				}).appendTo($list);
+				if ($this.children('option').eq(i).is(':selected')) {
+					$('li[rel="' + $this.children('option').eq(i).val() + '"]').addClass('is-selected');
+				}
+			}
+	
+			var $listItems = $list.children('li');
+	
+			$styledSelect.click(function(e) {
+				e.stopPropagation();
+				$('div.select-styled.active').not(this).each(function() {
+					$(this).removeClass('active').next('ul.select-options').hide();
+				});
+				$(this).toggleClass('active').next('ul.select-options').slideToggle(200); 
+				if ($(this).hasClass('active')) {
+					$(this).html('<span>Select</span>'); 
+				} else {
+					var selectedText = $this.children('option:selected').text() || 'Select';
+					$(this).html(selectedText); 
+				}
+			});
+	
+			$listItems.click(function(e) {
+				e.stopPropagation();
+				var selectedText = $(this).text();
+				$styledSelect.html(selectedText).removeClass('active');
+				$this.val($(this).attr('rel'));
+				$list.find('li.is-selected').removeClass('is-selected');
+				$(this).addClass('is-selected');
+				$list.hide();
+				updateExample();
+			});
+	
+			$(document).click(function() {
+				$styledSelect.removeClass('active');
+				$list.hide();
+				var selectedText = $this.children('option:selected').text() || 'Select';
+				$styledSelect.html(selectedText); 
+			});
+	
+			$this.change(function() {
+				var selectedText = $(this).children('option:selected').text() || 'Select';
+				$styledSelect.html(selectedText); 
+			});
+		});
+	}
+	
+	generateSelectBoxes();
+
+
+
+
 	
 	/** HIGHLIGHT TOC MENU **/
 	if ($('body').hasClass('documentation')) {
@@ -727,8 +803,6 @@ $(document).ready(function(){
 		$('.banner').slideUp(300);
 	});
 	// setWithExpiry('homeBanner', '', -1); // deletes content
-
-
 
 	
 });
