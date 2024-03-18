@@ -26,7 +26,7 @@ CREATE MACRO one() AS (SELECT 1);
 -- (parameter names get priority over column names: disambiguate using the table name)
 CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a FROM cte);
 -- macros are schema-dependent, and have an alias: FUNCTION
-CREATE FUNCTION main.myavg(x) AS sum(x) / count(x);
+CREATE FUNCTION main.my_avg(x) AS sum(x) / count(x);
 -- create a macro with default constant parameters
 CREATE MACRO add_default(a, b := 5) AS a + b;
 -- create a macro arr_append (with a functionality equivalent to array_append)
@@ -108,13 +108,13 @@ SELECT 40 + 2;
 Currently, positional macro parameters can only be used positionally, and named parameters can only be used by supplying their name. Therefore, the following will not work:
 
 ```sql
-CREATE MACRO test(a, b := 42) AS (a + b);
-SELECT test(32, 52);
+CREATE MACRO my_macro(a, b := 42) AS (a + b);
+SELECT my_macro(32, 52);
 ```
 
 ```text
-Error: Binder Error: Macro function 'test(a)' requires a single positional argument, but 2 positional arguments were provided.
-LINE 1: SELECT test(32, 52);
+Error: Binder Error: Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
+LINE 1: SELECT my_macro(32, 52);
                ^
 ```
 
