@@ -23,10 +23,12 @@ SELECT * FROM read_csv('flights.csv',
         'DestCityName': 'VARCHAR'
     });
 ```
+
 ```bash
 # read a CSV from stdin, auto-infer options
 cat flights.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 ```
+
 ```sql
 -- read a CSV file into a table
 CREATE TABLE ontime (
@@ -37,12 +39,14 @@ CREATE TABLE ontime (
 );
 COPY ontime FROM 'flights.csv';
 ```
+
 ```sql
 -- alternatively, create a table without specifying the schema manually
 CREATE TABLE ontime AS SELECT * FROM 'flights.csv';
 -- we can use the FROM-first syntax to omit 'SELECT *'
 CREATE TABLE ontime AS FROM 'flights.csv';
 ```
+
 ```sql
 -- write the result of a query to a CSV file
 COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER true, DELIMITER '|');
