@@ -93,7 +93,7 @@ CREATE SECRET secret2 (
 Now, if the user queries something from `s3://my-other-bucket/something`, secret `secret2` will be chosen automatically for that request. To see which secret is being used, the `which_secret` scalar function can be used, which takes a path and a secret type as parameters:
 
 ```sql
-SELECT which_secret('s3://my-other-bucket/file.parquet', 'S3');
+SELECT which_secret('s3://my-other-bucket/file.parquet', 's3');
 ```
 
 ### Listing Secrets

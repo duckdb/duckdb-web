@@ -41,7 +41,7 @@ FROM integers;
 -- 10, NULL, NULL
 ```
 
-After the `CASE` but before the `WHEN` an individual expression can also be provided. When this is done, the `CASE` statement is essentially transformed into a switch statement.
+It is also possible to provide an individual expression after the `CASE` but before the `WHEN`. When this is done, the `CASE` statement is effectively transformed into a switch statement.
 
 ```sql
 CREATE OR REPLACE TABLE integers AS SELECT unnest([1, 2, 3]) AS i;

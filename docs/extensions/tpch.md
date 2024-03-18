@@ -46,18 +46,14 @@ To run a query, e.g., query 4, use:
 ```sql
 PRAGMA tpch(4);
 ```
-```text
-┌─────────────────┬─────────────┐
-│ o_orderpriority │ order_count │
-│     varchar     │    int64    │
-├─────────────────┼─────────────┤
-│ 1-URGENT        │       21188 │
-│ 2-HIGH          │       20952 │
-│ 3-MEDIUM        │       20820 │
-│ 4-NOT SPECIFIED │       21112 │
-│ 5-LOW           │       20974 │
-└─────────────────┴─────────────┘
-```
+
+| o_orderpriority | order_count |
+|-----------------|------------:|
+| 1-URGENT        | 10594       |
+| 2-HIGH          | 10476       |
+| 3-MEDIUM        | 10410       |
+| 4-NOT SPECIFIED | 10556       |
+| 5-LOW           | 10487       |
 
 ### Listing Queries
 

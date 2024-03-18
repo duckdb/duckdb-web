@@ -127,24 +127,17 @@ SELECT *
 FROM duckdb_settings()
 WHERE name = 'TimeZone';
 ```
-```text
-┌──────────┬──────────────────┬───────────────────────┬────────────┐
-│   name   │      value       │      description      │ input_type │
-│ varchar  │     varchar      │        varchar        │  varchar   │
-├──────────┼──────────────────┼───────────────────────┼────────────┤
-│ TimeZone │ Europe/Amsterdam │ The current time zone │ VARCHAR    │
-└──────────┴──────────────────┴───────────────────────┴────────────┘
-```
+
+|   name   |      value       |      description      | input_type |
+|----------|------------------|-----------------------|------------|
+| TimeZone | Europe/Amsterdam | The current time zone | VARCHAR    |
+
 ```sql
 SELECT *
 FROM duckdb_settings()
 WHERE name = 'Calendar';
 ```
-```text
-┌──────────┬───────────┬──────────────────────┬────────────┐
-│   name   │   value   │     description      │ input_type │
-│ varchar  │  varchar  │       varchar        │  varchar   │
-├──────────┼───────────┼──────────────────────┼────────────┤
-│ Calendar │ gregorian │ The current calendar │ VARCHAR    │
-└──────────┴───────────┴──────────────────────┴────────────┘
-```
+
+|   name   |   value   |     description      | input_type |
+|----------|-----------|----------------------|------------|
+| Calendar | gregorian | The current calendar | VARCHAR    |

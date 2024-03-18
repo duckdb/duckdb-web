@@ -83,7 +83,7 @@ star_count: "14.4k"
 
 toc:
   min_level: 1
-  max_level: 2
+  max_level: 3
   ordered_list: false
 
 exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle']

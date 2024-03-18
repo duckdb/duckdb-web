@@ -43,12 +43,12 @@ body.documentation{
       }
    }
    main .wrap{
-      width: calc(100% - 252px);
+      width: calc(100% - 275px);
       min-height: 100vh; 
       display: flex;
       justify-content: space-between;
       max-width: unset;
-      margin-left: 252px;
+      margin-left: 275px;
       padding: 0 0 0 30px;
       position: relative;
       #main_content_wrap{
@@ -246,7 +246,8 @@ body.documentation{
       }
    }
    #sidebar{
-      background: $black50;
+      //background: $black50;
+      background: white;
       position: relative;
       width: 22%;
       padding: 100px 20px 20px 20px;
@@ -258,7 +259,7 @@ body.documentation{
       position: sticky;
       top: 100px;
       h5{
-         color: $black400;
+         color: black;
          font-size: 12px;
          font-style: normal;
          font-weight: 450;
@@ -269,28 +270,34 @@ body.documentation{
          list-style: none;
          padding: 0;
          margin: 0;
-         margin-top: 20px;
+         margin-top: 15px;
          font-size: 14px;
          position: relative;
          ul{
-            padding-left: 15px;
+            padding-left: 0px;
+            margin-left: 15px;
+            border-left: 1px solid #D9D9D9;
             li{
                list-style: none;
+            }
+            ul{
+               display: none;
             }
          }
          li{
             line-height: 1;
             &.current > a{
-               background: #EFEFEF;
-               color: black;
-               font-weight: 600;
+               /*background: #EFEFEF;
+               font-weight: 600;*/
+               color: $purple;
             }
          }
          a{
             color: $black400;
             text-decoration: none;
-            padding: 8px 12px;
-            background: $black50;
+            padding: 7px 12px;
+            /*padding: 8px 12px;
+            /*background: $black50;*/
             border-radius: 100px;
             display: inline-block;
             text-overflow: ellipsis; 
@@ -299,7 +306,8 @@ body.documentation{
             max-width: 100%;
             line-height: 1;
             &:hover{
-               background: $black100;
+               /*background: $black100;*/
+               color: black;
             }
          }
       }
@@ -414,10 +422,9 @@ body.documentation{
    position: fixed;
    top: 70px;
    background-color: $duckDByellow;
-   width: 252px;
+   width: 275px;
    height: calc(100vh - 70px);
-   padding: 20px;
-   padding-left: 30px;
+   padding: 15px;
    z-index: 999;
    overflow: auto;
    -webkit-box-sizing: border-box;
@@ -425,6 +432,9 @@ body.documentation{
    a{
       color: black;
       text-decoration: none;
+      &:hover{
+         text-decoration: none;
+      }
    }
    ul{
       padding: 0;
@@ -435,18 +445,44 @@ body.documentation{
       zoom: 1;
    }
    li{
+      margin: 2px 0px;
       line-height: 1.2em;
       cursor: pointer;
-      padding: 5px 0 5px 0;
+      position: relative;
+      display: block;
+      border-radius: 5px;
       &.active{
-         text-decoration: underline;
          &.hasSub {
-            text-decoration: none;
+            background: transparent;
+         }
+      }
+      a{
+         padding: 5px 8px;
+         position: relative;
+         display: block;
+         border-radius: 5px;
+         &:hover{
+            background: rgba(0, 0, 0, 0.06);
          }
       }
    }
    li.active{
-      text-decoration: underline;
+      background: rgba(0, 0, 0, 0.06);
+   }
+   li.hasSub{
+      padding: 5px 8px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      &:hover{
+         background: rgba(0, 0, 0, 0.06);
+      }
    }
    li.hasSub span{
       -webkit-transition: -webkit-transform .3s;
@@ -454,78 +490,110 @@ body.documentation{
       -o-transition: transform .3s;
       transition: transform .3s;
       transition: transform .3s, -webkit-transform .3s;
-      display: inline-block;
-      font-size: 14px;
-      position: absolute;
-      -webkit-transform: translateX(-13px);
-         -ms-transform: translateX(-13px);
-            transform: translateX(-13px);
-   }
-   li.hasSub span.show::before{
-      content: ' \25BA';
-      font-family: "DuckDB-Symbol";
+      display: block;
+      right: 0;
+      width: 11px;
+      height: 11px;
+      background-image: url("data:image/svg+xml,%3Csvg width='7' height='11' viewBox='0 0 7 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 5.5L1 10' stroke='black' stroke-linecap='round'/%3E%3C/svg%3E%0A");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      -webkit-box-ordinal-group: 3;
+          -ms-flex-order: 2;
+              order: 2;
    }
    li.hasSub.opened span.show{
-      -webkit-transform: translateX(-13px) rotate(90deg);
-         -ms-transform: translateX(-13px) rotate(90deg);
-            transform: translateX(-13px) rotate(90deg);
+      -webkit-transform: rotate(90deg);
+         -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
       -webkit-transition: -webkit-transform .3s;
       transition: -webkit-transform .3s;
       -o-transition: transform .3s;
       transition: transform .3s;
       transition: transform .3s, -webkit-transform .3s;
-      position: absolute;
    }
    ul.sidenav{
       overflow: visible;
+      font-size: 15px;
+      > li.active{
+         background: transparent;
+      }
       > ul{
-         padding-left: 20px;
+         padding-left: 8px;
+         margin-left: 8px;
          overflow: hidden;
          &.parentnav{
             display: block;
          }
          ul{
-            padding-left: 20px;
+            padding-left: 8px;
+            margin-left: 8px;
             overflow: hidden;
             display: none;
-            li{
-               font-size: 14px;
-            }
             &.parentnav{
                display: block;
             }
             ul{
-               display: none; // Dritte Navigationsebene ausblenden
-               li{
-                  font-size: 12px;
-                  line-height: 1;
-               }
+               display: none; /*Dritte Navigationsebene ausblenden*/
             }
          }
-         /*
-         > ul:nth-of-type(3){
-            display: block; // SQL ausklappen
-            &.parentnav{
-               display: block;
-            }
-         }
-         */
       }
       ul:nth-of-type(2){
-         display: none; // Benchmarking einklappen
+         display: none; /*Benchmarking einklappen*/
          &.parentnav{
             display: block;
          }
       }
    }
    &::-webkit-scrollbar {
-     width: 5px;
+     width: 3px;
    }
    &::-webkit-scrollbar-track {
      background: #ebde00;
    }
    &::-webkit-scrollbar-thumb {
      background: #d5ca0a;
+   }
+   li.hasSub.opened + ul{
+      border-left: 1px solid rgba(0, 0, 0, 0.10);;
+   }
+   .opensearch{
+      border-radius: 60px;
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      color: rgba(0, 0, 0, 0.20);
+      padding: 10px;
+      padding-left: 40px;
+      background-image: url("data:image/svg+xml,%3Csvg width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.0731 10.1924L13.9998 14.1192' stroke='black' stroke-opacity='0.2' stroke-width='1.5'/%3E%3Ccircle cx='5.92301' cy='6.80338' r='5.17301' stroke='black' stroke-opacity='0.2' stroke-width='1.5'/%3E%3C/svg%3E%0A");
+      background-size: 15px 15px;
+      background-repeat: no-repeat;
+      background-position: 15px 12px;
+      cursor: pointer;
+      position: relative;
+      font-size: 15px;
+      margin-bottom: 15px;
+      margin-top: 5px;
+      -webkit-transition: all .3s;
+      -o-transition: all .3s;
+      transition: all .3s;
+      >.shortcut{
+         font-size: 12px;
+         color: rgba(17, 0, 0, 0.20);
+         display: inline-block;
+         position: absolute;
+         padding: 5px 7px;
+         border-radius: 40px;
+         border: 1px solid rgba(0, 0, 0, 0.10);
+         background: rgba(0, 0, 0, 0.05);
+         right: 7px;
+         top: 6px;
+         &.mac{
+            display: none;
+         }
+      }
+      &:hover{
+         border: 1px solid rgba(0, 0, 0, 0.2);
+         color: rgba(0, 0, 0, 0.35);
+      }
    }
 }
 
@@ -1000,6 +1068,9 @@ p img {
 body.documentation.installation{
     .pagemeta{
         display: none;
+    }
+    .toc_menu{
+       display: none;
     }
 } 
 

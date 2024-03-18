@@ -25,16 +25,11 @@ UNION
 SELECT * FROM range(3) t2(x);
 ```
 
-```text
-┌───────┐
-│   x   │
-│ int64 │
-├───────┤
-│     0 │
-│     2 │
-│     1 │
-└───────┘
-```
+| x |
+|--:|
+| 2 |
+| 1 |
+| 0 |
 
 ### `UNION ALL` (Bag Semantics)
 
@@ -47,18 +42,13 @@ UNION ALL
 SELECT * FROM range(3) t2(x);
 ```
 
-```text
-┌───────┐
-│   x   │
-│ int64 │
-├───────┤
-│     0 │
-│     1 │
-│     0 │
-│     1 │
-│     2 │
-└───────┘
-```
+| x |
+|--:|
+| 0 |
+| 1 |
+| 0 |
+| 1 |
+| 2 |
 
 ### `UNION [ALL] BY NAME`
 
@@ -83,17 +73,12 @@ UNION BY NAME
 SELECT * FROM weather;
 ```
 
-```text
-┌───────────┬─────────┬─────────┬────────────┐
-│   city    │ country │ degrees │    date    │
-│  varchar  │ varchar │  int32  │    date    │
-├───────────┼─────────┼─────────┼────────────┤
-│ Amsterdam │ NULL    │      10 │ 2022-10-14 │
-│ Seattle   │ NULL    │       8 │ 2022-10-12 │
-│ Amsterdam │ NL      │    NULL │ NULL       │
-│ Berlin    │ Germany │    NULL │ NULL       │
-└───────────┴─────────┴─────────┴────────────┘
-```
+|   city    | country | degrees |    date    |
+|-----------|---------|--------:|------------|
+| Seattle   | NULL    | 8       | 2022-10-12 |
+| Amsterdam | NL      | NULL    | NULL       |
+| Berlin    | Germany | NULL    | NULL       |
+| Amsterdam | NULL    | 10      | 2022-10-14 |
 
 `UNION BY NAME` follows set semantics (therefore it performs duplicate elimination), whereas `UNION ALL BY NAME` follows bag semantics.
 
@@ -112,15 +97,10 @@ INTERSECT
 SELECT * FROM range(6) t2(x);
 ```
 
-```text
-┌───────┐
-│   x   │
-│ int64 │
-├───────┤
-│     0 │
-│     1 │
-└───────┘
-```
+| x |
+|--:|
+| 0 |
+| 1 |
 
 ### `INTERSECT ALL` (Bag Semantics)
 
@@ -133,17 +113,12 @@ INTERSECT ALL
 SELECT unnest([5, 6, 6, 7, 7, 9]);
 ```
 
-```text
-┌───────┐
-│   x   │
-│ int32 │
-├───────┤
-│     7 │
-│     6 │
-│     6 │
-│     5 │
-└───────┘
-```
+| x |
+|--:|
+| 5 |
+| 6 |
+| 6 |
+| 7 |
 
 ## `EXCEPT`
 
@@ -160,16 +135,11 @@ EXCEPT
 SELECT * FROM range(2) t2(x);
 ```
 
-```text
-┌───────┐
-│   x   │
-│ int64 │
-├───────┤
-│     4 │
-│     3 │
-│     2 │
-└───────┘
-```
+| x |
+|--:|
+| 2 |
+| 3 |
+| 4 |
 
 ### `EXCEPT ALL` (Bag Semantics)
 
@@ -180,17 +150,12 @@ EXCEPT ALL
 SELECT unnest([5, 6, 6, 7, 7, 9]);
 ```
 
-```text
-┌───────┐
-│   x   │
-│ int32 │
-├───────┤
-│     6 │
-│     6 │
-│     8 │
-│     5 │
-└───────┘
-```
+| x |
+|--:|
+| 5 |
+| 8 |
+| 6 |
+| 6 |
 
 ## Syntax
 

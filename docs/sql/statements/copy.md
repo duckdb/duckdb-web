@@ -134,14 +134,9 @@ COPY FROM DATABASE db1 TO db2;
 SELECT db2.two_x_plus_y(x, y) AS z FROM db2.tbl;
 ```
 
-```text
-┌───────┐
-│   z   │
-│ int32 │
-├───────┤
-│    87 │
-└───────┘
-```
+| z  |
+|---:|
+| 87 |
 
 To only copy the **schema** of `db1` to `db2` but omit copying the data, add `SCHEMA` to the statement:
 
