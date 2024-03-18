@@ -57,7 +57,7 @@ res = duckdb.sql("""
         ) AS s
     FROM funs;""")
 
-with open(f"{input_filename_without_extension}-reformatted.md", "w") as md:
+with open(f"reformatted/{input_filename_without_extension}-reformatted.md", "w") as md:
     for line in res.fetchall():
         md.write(f"{line[0]}\n")
 
