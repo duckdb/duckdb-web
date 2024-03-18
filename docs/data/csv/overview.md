@@ -109,11 +109,11 @@ SELECT * FROM read_csv('flights.csv');
 
 <div class="narrow_table"></div>
 
-|FlightDate|UniqueCarrier| OriginCityName  | DestCityName  |
-|----------|-------------|-----------------|---------------|
-|1988-01-01|AA           |New York, NY     |Los Angeles, CA|
-|1988-01-02|AA           |New York, NY     |Los Angeles, CA|
-|1988-01-03|AA           |New York, NY     |Los Angeles, CA|
+| FlightDate | UniqueCarrier | OriginCityName |  DestCityName   |
+|------------|---------------|----------------|-----------------|
+| 1988-01-01 | AA            | New York, NY   | Los Angeles, CA |
+| 1988-01-02 | AA            | New York, NY   | Los Angeles, CA |
+| 1988-01-03 | AA            | New York, NY   | Los Angeles, CA |
 
 The path can either be a relative path (relative to the current working directory) or an absolute path.
 
@@ -126,12 +126,12 @@ DESCRIBE ontime;
 
 <div class="narrow_table"></div>
 
-|Field         |Type   |Null|Key |Default|Extra|
-|--------------|-------|----|----|-------|-----|
-|FlightDate    |DATE   |YES |NULL|NULL   |NULL |
-|UniqueCarrier |VARCHAR|YES |NULL|NULL   |NULL |
-|OriginCityName|VARCHAR|YES |NULL|NULL   |NULL |
-|DestCityName  |VARCHAR|YES |NULL|NULL   |NULL |
+|  column_name   | column_type | null | key  | default | extra |
+|----------------|-------------|------|------|---------|-------|
+| FlightDate     | DATE        | YES  | NULL | NULL    | NULL  |
+| UniqueCarrier  | VARCHAR     | YES  | NULL | NULL    | NULL  |
+| OriginCityName | VARCHAR     | YES  | NULL | NULL    | NULL  |
+| DestCityName   | VARCHAR     | YES  | NULL | NULL    | NULL  |
 
 ```sql
 SELECT * FROM read_csv('flights.csv', sample_size = 20000);
