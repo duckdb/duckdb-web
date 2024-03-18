@@ -133,9 +133,9 @@ Often the same functionality can be implemented more reliably using the `struct`
 The `AT TIME ZONE` syntax is syntactic sugar for the (two argument) `timezone` function listed above:
 
 ```sql
-timestamp '2001-02-16 20:38:40' AT TIME ZONE 'America/Denver';
+TIMESTAMP '2001-02-16 20:38:40' AT TIME ZONE 'America/Denver';
 -- 2001-02-16 19:38:40-08
-timestamp with time zone '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver';
+TIMESTAMP WITH TIME ZONE '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver';
 -- 2001-02-16 18:38:40
 ```
 
