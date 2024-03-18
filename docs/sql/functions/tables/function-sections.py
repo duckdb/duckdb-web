@@ -57,9 +57,11 @@ res = duckdb.sql("""
         ) AS s
     FROM funs;""")
 
-with open(f"reformatted/{input_filename_without_extension}-reformatted.md", "w") as md:
+with open(f"reformatted/{input_filename_without_extension}-reformatted.md", "w") as out:
+    out.write("| Name | Description |\n")
+    out.write("|:--|:-------|\n")
     for line in res.fetchall():
-        md.write(f"{line[0]}\n")
+        out.write(f"{line[0]}\n")
 
     res = duckdb.sql("""FROM funs""")
     for line in res.fetchall():
@@ -77,7 +79,7 @@ with open(f"reformatted/{input_filename_without_extension}-reformatted.md", "w")
                 caption = "Alias"
             aliases_item = f"\n* **{caption}:** {line[-1]}"
 
-        md.write(f"""
+        out.write(f"""
 ### {line[0]}
 
 * **Description:** {line[1]}

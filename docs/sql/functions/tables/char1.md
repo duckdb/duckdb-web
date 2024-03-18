@@ -62,6 +62,7 @@
 | `rtrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the right side of the *string* | `rtrim('>>>>test<<', '><')` | `>>>>test` | |
 | `rtrim(`*`string`*`)`| Removes any spaces from the right side of the *string* | `rtrim('␣␣␣␣test␣␣')` | `␣␣␣␣test` | |
 | `sha256(`*`value`*`)` | Returns a `VARCHAR` with the SHA-256 hash of the *`value`*| `sha-256('🦆')` | `d7a5...` | |
+| `split_part(` *`string`*`, `*`separator`*`, `*`index`*`)` | Split the *string* along the *separator* and return the data at the (1-based) *index* of the list. If the *index* is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior). | `split_part('a;b;c', ';', 2)` | `b` | |
 | `starts_with(` *`string`*`, `*`search_string`*`)`| Return true if *string* begins with *search_string* | `starts_with('abc', 'a')` | `true` | |
 | `str_split_regex(` *`string`*`, `*`regex`*`)` | Splits the *string* along the *regex* | `str_split_regex( 'hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` | `string_split_regex`, `regexp_split_to_array` |
 | `string_split_regex(` *`string`*`, `*`regex`*`)` | Splits the *string* along the *regex* | `string_split_regex( 'hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` | `str_split_regex`, `regexp_split_to_array` |

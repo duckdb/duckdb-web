@@ -1,29 +1,3 @@
----
-layout: docu
-title: Interval Functions
----
-
-This section describes functions and operators for examining and manipulating `INTERVAL` values.
-
-## Interval Operators
-
-The table below shows the available mathematical operators for `INTERVAL` types.
-
-| Operator | Description | Example | Result |
-|:-|:--|:----|:--|
-| `+` | addition of an `INTERVAL` | `INTERVAL 1 HOUR + INTERVAL 5 HOUR` | `INTERVAL 6 HOUR` |
-| `+` | addition to a `DATE` | `DATE '1992-03-22' + INTERVAL 5 DAY` | `1992-03-27` |
-| `+` | addition to a `TIMESTAMP` | `TIMESTAMP '1992-03-22 01:02:03' + INTERVAL 5 DAY` | `1992-03-27 01:02:03` |
-| `+` | addition to a `TIME` | `TIME '01:02:03' + INTERVAL 5 HOUR` | `06:02:03` |
-| `-` | subtraction of an `INTERVAL` | `INTERVAL 5 HOUR - INTERVAL 1 HOUR` | `INTERVAL 4 HOUR` |
-| `-` | subtraction from a `DATE` | `DATE '1992-03-27' - INTERVAL 5 DAY` | `1992-03-22` |
-| `-` | subtraction from a `TIMESTAMP` | `TIMESTAMP '1992-03-27 01:02:03' - INTERVAL 5 DAY` | `1992-03-22 01:02:03` |
-| `-` | subtraction from a `TIME` | `TIME '06:02:03' - INTERVAL 5 HOUR` | `01:02:03` |
-
-## Interval Functions
-
-The table below shows the available scalar functions for `INTERVAL` types.
-
 | Function | Description | Example | Result |
 |:--|:--|:---|:--|
 | `date_part(`*`part`*`, `*`interval`*`)` | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `date_part('year', INTERVAL '14 months')` | `1` |
@@ -42,5 +16,3 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | `to_seconds(`*`integer`*`)` | Construct a second interval | `to_seconds(5)` | `INTERVAL 5 SECOND` |
 | `to_weeks(`*`integer`*`)` | Construct a week interval | `to_weeks(5)` | `INTERVAL 35 DAY` |
 | `to_years(`*`integer`*`)` | Construct a year interval | `to_years(5)` | `INTERVAL 5 YEAR` |
-
-Only the documented [date parts](../../sql/functions/datepart) are defined for intervals.
