@@ -777,6 +777,11 @@ body.documentation main .wrap.frequentlyaskedquestions{
 section.blog{
 	background-color: #F9F9F9;
 }
+
+section.blog .postpreview:nth-child(4){
+	display: none;
+}
+
 section.blog,
 .post-list .newstiles{
 	.newswrap, .newstileswrap{
@@ -788,9 +793,6 @@ section.blog,
 	}
 	.postpreview{
 		width: calc(33.33% - 15px);
-		&:nth-child(4){
-			display: none;
-		}
 		.postimg{
 			aspect-ratio: 16/9;
 			background-color: $duckDByellow;
