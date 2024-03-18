@@ -138,7 +138,7 @@ jobs:
 
       - run: pip install linkchecker --user
 
-      - name: Link Checker on latest
+      - name: Link Checker on stable
         run: |
           linkchecker https://duckdb.org/ --ignore-url 'https://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
           echo $?
