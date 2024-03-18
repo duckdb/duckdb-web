@@ -39,14 +39,9 @@ SELECT
     'infinity'::DATE AS positive;
 ```
 
-```text
-┌───────────┬────────────┬──────────┐
-│ negative  │   epoch    │ positive │
-│   date    │    date    │   date   │
-├───────────┼────────────┼──────────┤
-│ -infinity │ 1970-01-01 │ infinity │
-└───────────┴────────────┴──────────┘
-```
+| negative  |   epoch    | positive |
+|-----------|------------|----------|
+| -infinity | 1970-01-01 | infinity |
 
 ## Functions
 

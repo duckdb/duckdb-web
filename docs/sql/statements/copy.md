@@ -19,7 +19,9 @@ COPY lineitem FROM 'lineitem.json' (FORMAT JSON, AUTO_DETECT true);
 COPY lineitem FROM "lineitem.csv";
 -- read a CSV file into the lineitem table, omitting quotes
 COPY lineitem FROM lineitem.csv;
+```
 
+```sql
 -- write a table to a CSV file
 COPY lineitem TO 'lineitem.csv' (FORMAT CSV, DELIMITER '|', HEADER);
 -- write a table to a CSV file, using double quotes
@@ -28,7 +30,9 @@ COPY lineitem TO "lineitem.csv";
 COPY lineitem TO lineitem.csv;
 -- write the result of a query to a Parquet file
 COPY (SELECT l_orderkey, l_partkey FROM lineitem) TO 'lineitem.parquet' (COMPRESSION ZSTD);
+```
 
+```sql
 -- copy the entire content of database 'db1' to database 'db2'
 COPY FROM DATABASE db1 TO db2;
 -- copy only the schema (catalog elements) but not any data
@@ -130,14 +134,9 @@ COPY FROM DATABASE db1 TO db2;
 SELECT db2.two_x_plus_y(x, y) AS z FROM db2.tbl;
 ```
 
-```text
-┌───────┐
-│   z   │
-│ int32 │
-├───────┤
-│    87 │
-└───────┘
-```
+| z  |
+|---:|
+| 87 |
 
 To only copy the **schema** of `db1` to `db2` but omit copying the data, add `SCHEMA` to the statement:
 

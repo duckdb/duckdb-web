@@ -13,14 +13,9 @@ The `version()` function returns the version number of DuckDB.
 SELECT version();
 ```
 
-```text
-┌───────────┐
-│ version() │
-│  varchar  │
-├───────────┤
-│ v0.10.0   │
-└───────────┘
-```
+| version() |
+|-----------|
+| v0.10.0   |
 
 Using a `PRAGMA`:
 
@@ -28,14 +23,9 @@ Using a `PRAGMA`:
 PRAGMA version;
 ```
 
-```text
-┌─────────────────┬────────────┐
-│ library_version │ source_id  │
-│     varchar     │  varchar   │
-├─────────────────┼────────────┤
-│ v0.10.0         │ 20b1486d11 │
-└─────────────────┴────────────┘
-```
+| library_version | source_id  |
+|-----------------|------------|
+| v0.10.0         | 20b1486d11 |
 
 ## Platform
 
@@ -49,14 +39,9 @@ PRAGMA platform;
 
 On macOS, running on Apple Silicon architecture, the result is:
 
-```text
-┌───────────┐
-│ platform  │
-│  varchar  │
-├───────────┤
-│ osx_arm64 │
-└───────────┘
-```
+| platform  |
+|-----------|
+| osx_arm64 |
 
 On Windows, running on an AMD64 architecture, the platform is `windows_amd64`.
 On CentOS 7, running on the AMD64 architecture, the platform is `linux_amd64_gcc4`.
@@ -67,7 +52,7 @@ On Ubuntu 22.04, running on the ARM64 architecture, the platform is `linux_arm64
 To get a list of DuckDB extension and their status (e.g., `loaded`, `installed`), use the [`duckdb_extensions()` function](../../extensions/overview#listing-extensions):
 
 ```sql
-SELECT * 
+SELECT *
 FROM duckdb_extensions();
 ```
 

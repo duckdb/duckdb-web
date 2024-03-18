@@ -165,16 +165,12 @@ The `LATERAL` keyword allows subqueries in the `FROM` clause to refer to previou
 SELECT *
 FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
 ```
-```text
-┌───────┬───────┐
-│   i   │   j   │
-│ int64 │ int64 │
-├───────┼───────┤
-│     0 │     1 │
-│     1 │     2 │
-│     2 │     3 │
-└───────┴───────┘
-```
+
+| i | j |
+|--:|--:|
+| 0 | 1 |
+| 2 | 3 |
+| 1 | 2 |
 
 Lateral joins are a generalization of correlated subqueries, as they can return multiple values per input value rather than only a single value.
 
@@ -184,17 +180,13 @@ FROM
     generate_series(0, 1) t(i),
     LATERAL (SELECT i + 10 UNION ALL SELECT i + 100) t2(j);
 ```
-```text
-┌───────┬───────┐
-│   i   │   j   │
-│ int64 │ int64 │
-├───────┼───────┤
-│     0 │    10 │
-│     1 │    11 │
-│     0 │   100 │
-│     1 │   101 │
-└───────┴───────┘
-```
+
+| i |  j  |
+|--:|----:|
+| 0 | 10  |
+| 1 | 11  |
+| 0 | 100 |
+| 1 | 101 |
 
 It may be helpful to think about `LATERAL` as a loop where we iterate through the rows of the first subquery and use it as input to the second (`LATERAL`) subquery.
 In the examples above, we iterate through table `t` and refer to its column `i` from the definition of table `t2`. The rows of `t2` form column `j` in the result.
@@ -205,16 +197,12 @@ It is possible to refer to multiple attributes from the `LATERAL` subquery. Usin
 CREATE TABLE t1 AS SELECT * FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
 SELECT * FROM t1, LATERAL (SELECT i + j) t2(k) ORDER BY ALL;
 ```
-```text
-┌───────┬───────┬───────┐
-│   i   │   j   │   k   │
-│ int64 │ int64 │ int64 │
-├───────┼───────┼───────┤
-│     0 │     1 │     1 │
-│     1 │     2 │     3 │
-│     2 │     3 │     5 │
-└───────┴───────┴───────┘
-```
+
+| i | j | k |
+|--:|--:|--:|
+| 0 | 1 | 1 |
+| 1 | 2 | 3 |
+| 2 | 3 | 5 |
 
 > DuckDB detects when `LATERAL` joins should be used, making the use of the `LATERAL` keyword optional.
 
@@ -226,7 +214,7 @@ In scripting languages, this is easily expressed using a loop:
 
 ```cpp
 for (i = 0; i < n; i++) {
-    f(t1.a[i], t2.b[i])
+    f(t1.a[i], t2.b[i]);
 }
 ```
 

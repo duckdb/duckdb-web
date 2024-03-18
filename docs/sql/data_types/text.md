@@ -35,28 +35,20 @@ Strings in DuckDB are surrounded by single quote (apostrophe) characters (`'`):
 ```sql
 SELECT 'Hello world' AS msg;
 ```
-```text
-┌─────────────┐
-│     msg     │
-│   varchar   │
-├─────────────┤
-│ Hello world │
-└─────────────┘
-```
+
+|     msg     |
+|-------------|
+| Hello world |
 
 To include a single quote character in a string, use `''`:
 
 ```sql
 SELECT 'Hello ''world''' AS msg;
 ```
-```text
-┌───────────────┐
-│      msg      │
-│    varchar    │
-├───────────────┤
-│ Hello 'world' │
-└───────────────┘
-```
+
+|      msg      |
+|---------------|
+| Hello 'world' |
 
 ## Strings with Special Characters
 
@@ -65,6 +57,8 @@ To use special characters in string, use [escape string literals](literal_types#
 ```sql
 SELECT 'Hello' || chr(10) || 'world' AS msg;
 ```
+
+<!-- This output intentionally uses the duckbox formatter -->
 
 ```text
 ┌──────────────┐

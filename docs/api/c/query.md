@@ -54,8 +54,8 @@ Note that the function is generic: we do not need to know about the types of the
 // print the above result to CSV format using `duckdb_value_varchar`
 idx_t row_count = duckdb_row_count(&result);
 idx_t column_count = duckdb_column_count(&result);
-for(idx_t row = 0; row < row_count; row++) {
-    for(idx_t col = 0; col < column_count; col++) {
+for (idx_t row = 0; row < row_count; row++) {
+    for (idx_t col = 0; col < column_count; col++) {
         if (col > 0) printf(",");
         auto str_val = duckdb_value_varchar(&result, col, row);
         printf("%s", str_val);
@@ -76,7 +76,7 @@ int32_t *j_data = (int32_t *) duckdb_column_data(&result, 1);
 bool    *i_mask = duckdb_nullmask_data(&result, 0);
 bool    *j_mask = duckdb_nullmask_data(&result, 1);
 idx_t row_count = duckdb_row_count(&result);
-for(idx_t row = 0; row < row_count; row++) {
+for (idx_t row = 0; row < row_count; row++) {
     if (i_mask[row]) {
         printf("NULL");
     } else {

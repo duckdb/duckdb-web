@@ -31,14 +31,9 @@ To load the AWS credentials, run:
 CALL load_aws_credentials();
 ```
 
-```text
-┌──────────────────────┬──────────────────────────┬──────────────────────┬───────────────┐
-│ loaded_access_key_id │ loaded_secret_access_key │ loaded_session_token │ loaded_region │
-│       varchar        │         varchar          │       varchar        │    varchar    │
-├──────────────────────┼──────────────────────────┼──────────────────────┼───────────────┤
-│ AKIAIOSFODNN7EXAMPLE │ <redacted>               │                      │ eu-west-1     │
-└──────────────────────┴──────────────────────────┴──────────────────────┴───────────────┘
-```
+| loaded_access_key_id | loaded_secret_access_key | loaded_session_token | loaded_region |
+|----------------------|--------------------------|----------------------|---------------|
+| AKIAIOSFODNN7EXAMPLE | <redacted>               | NULL                 | us-east-2     |
 
 The function takes a string parameter to specify a specific profile:
 
@@ -46,14 +41,9 @@ The function takes a string parameter to specify a specific profile:
 CALL load_aws_credentials('minio-testing-2');
 ```
 
-```text
-┌──────────────────────┬──────────────────────────┬──────────────────────┬───────────────┐
-│ loaded_access_key_id │ loaded_secret_access_key │ loaded_session_token │ loaded_region │
-│       varchar        │         varchar          │       varchar        │    varchar    │
-├──────────────────────┼──────────────────────────┼──────────────────────┼───────────────┤
-│ minio_duckdb_user_2  │ <redacted>               │                      │ eu-west-2     │
-└──────────────────────┴──────────────────────────┴──────────────────────┴───────────────┘
-```
+| loaded_access_key_id | loaded_secret_access_key | loaded_session_token | loaded_region |
+|----------------------|--------------------------|----------------------|---------------|
+| minio_duckdb_user_2  | <redacted>               | NULL                 | NULL          |
 
 There are several parameters to tweak the behavior of the call:
 
@@ -61,14 +51,9 @@ There are several parameters to tweak the behavior of the call:
 CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret = false);
 ```
 
-```text
-┌──────────────────────┬──────────────────────────────┬──────────────────────┬───────────────┐
-│ loaded_access_key_id │   loaded_secret_access_key   │ loaded_session_token │ loaded_region │
-│       varchar        │           varchar            │       varchar        │    varchar    │
-├──────────────────────┼──────────────────────────────┼──────────────────────┼───────────────┤
-│ minio_duckdb_user_2  │ minio_duckdb_user_password_2 │                      │               │
-└──────────────────────┴──────────────────────────────┴──────────────────────┴───────────────┘
-```
+| loaded_access_key_id | loaded_secret_access_key     | loaded_session_token | loaded_region |
+|----------------------|------------------------------|----------------------|---------------|
+| minio_duckdb_user_2  | minio_duckdb_user_password_2 | NULL                 | NULL          |
 
 ## Related Extensions
 

@@ -78,7 +78,7 @@ We illustrate the effect of using primary keys with the [LDBC Comment table at s
 
 | Operation                | Execution time |
 | ------------------------ | -------------: |
-| Load without primary key | 92.168s        |
-| Load with primary key    | 286.765s       |
+| Load without primary key | 92.2 s         |
+| Load with primary key    | 286.8 s        |
 
 > Bestpractice For best bulk load performance, avoid defining primary key constraints if possible.

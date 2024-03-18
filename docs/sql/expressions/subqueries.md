@@ -72,14 +72,10 @@ SELECT *
 FROM Person
 WHERE NOT EXISTS (SELECT * FROM interest WHERE interest.PersonId = Person.id);
 ```
-```text
-┌───────┬─────────┐
-│  id   │  name   │
-│ int64 │ varchar │
-├───────┼─────────┤
-│     1 │ Jane    │
-└───────┴─────────┘
-```
+
+| id | name |
+|---:|------|
+| 1  | Jane |
 
 > DuckDB automatically detects when a `NOT EXISTS` query expresses an antijoin operation. There is no need to manually rewrite such queries to use `LEFT OUTER JOIN ... WHERE ... IS NULL`.
 
@@ -132,13 +128,9 @@ Using the name of a subquery in the `SELECT` clause (without referring to a spec
 SELECT t
 FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
 ```
-```text
-┌─────────────────────────────┐
-│              t              │
-│ struct(x bigint, y varchar) │
-├─────────────────────────────┤
-│ {'x': 41, 'y': hello}       │
-│ {'x': 42, 'y': hello}       │
-│ {'x': 43, 'y': hello}       │
-└─────────────────────────────┘
-```
+
+|           t           |
+|-----------------------|
+| {'x': 41, 'y': hello} |
+| {'x': 42, 'y': hello} |
+| {'x': 43, 'y': hello} |

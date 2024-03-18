@@ -204,6 +204,9 @@
 		font-size: 35px;
 		padding: 50px 15px;
 	}
+	main.f-md .pagehead + .wrap{
+		padding: 50px 15px;
+	}
 	body.landing .welcome h1{
 		font-size: 200%;
 	}
@@ -271,6 +274,7 @@
 	}
 	body.documentation main .wrap #main_content_wrap{
 		padding-right: 0;
+		padding-top: 0;
 	}
 	body.documentation .headlinebar .breadcrumbs{
 		width: 100%;
@@ -319,6 +323,9 @@
 				-webkit-transform: translateX(0%);
 				    -ms-transform: translateX(0%);
 				        transform: translateX(0%);
+			}
+			.opensearch{
+				display: none;
 			}
 		}
 		main{

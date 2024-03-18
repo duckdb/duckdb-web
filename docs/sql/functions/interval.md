@@ -29,6 +29,7 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | `date_part(`*`part`*`, `*`interval`*`)` | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `date_part('year', INTERVAL '14 months')` | `1` |
 | `datepart(`*`part`*`, `*`interval`*`)` | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `datepart('year', INTERVAL '14 months')` | `1` |
 | `extract(`*`part`* `from` *`interval`*`)` | Get [subfield](../../sql/functions/datepart) from an interval | `extract('month' FROM INTERVAL '14 months')` | 2 |
+| `epoch(`*`interval`*`)` | Get total number of seconds in interval | `epoch(INTERVAL 5 HOUR)` | `18000.0` |
 | `to_centuries(`*`integer`*`)` | Construct a century interval | `to_centuries(5)` | `INTERVAL 500 YEAR` |
 | `to_days(`*`integer`*`)` | Construct a day interval | `to_days(5)` | `INTERVAL 5 DAY` |
 | `to_decades(`*`integer`*`)` | Construct a decade interval | `to_decades(5)` | `INTERVAL 50 YEAR` |

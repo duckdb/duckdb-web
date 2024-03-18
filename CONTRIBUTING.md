@@ -86,16 +86,11 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * _Do not_ add clauses or expressions purely for aligning lines. For exampe, avoid adding `WHERE 1 = 1` and `WHERE true`.
 * _Do not_ include the DuckDB prompt. For example, avoid the following: `D SELECT 42;`.
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
-* The returned tables should be formatted using the DuckDB CLI's duckbox mode (`.mode duckbox`) and marked with the `text` language tag, e.g.:
-
+* The returned tables should be formatted using the DuckDB CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`).
+* Output printed on the system console (e.g., in Python) and system messages (e.g., errors) should be formatted as code with the `text` language tag. For example:
     ````
     ```text
-    ┌───────┐
-    │   x   │
-    │ int32 │
-    ├───────┤
-    │    42 │
-    └───────┘
+    Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
     ```
     ````
 * To specify placeholders, use the left angle `⟨` and right angle `⟩` characters instead of the artihmetic comparison characters `<` and `>`. For example: `SELECT * FROM ⟨your_table_name⟩`.

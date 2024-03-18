@@ -87,6 +87,7 @@ The tables in the PostgreSQL database can be read as if they were normal DuckDB 
 ```sql
 SHOW TABLES;
 ```
+
 ```text
 ┌───────────────────────────────────────┐
 │                 name                  │
@@ -99,6 +100,7 @@ SHOW TABLES;
 ```sql
 SELECT * FROM uuids;
 ```
+
 ```text
 ┌──────────────────────────────────────┐
 │                  u                   │
@@ -159,6 +161,7 @@ INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```sql
 SELECT * FROM postgres_db.tbl;
 ```
+
 ```text
 ┌───────┬─────────┐
 │  id   │  name   │
@@ -170,9 +173,17 @@ SELECT * FROM postgres_db.tbl;
 
 ### `COPY`
 
+You can copy tables back and forth between PostgreSQL and DuckDB:
+
 ```sql
 COPY postgres_db.tbl TO 'data.parquet';
 COPY postgres_db.tbl FROM 'data.parquet';
+```
+
+You may also create a full copy of the database using the [`COPY FROM DATABASE` statement](../sql/statements/copy#copy-from-database--to):
+
+```sql
+COPY FROM DATABASE postgres_db TO my_duckdb_db;
 ```
 
 ### `UPDATE`
@@ -217,6 +228,7 @@ CREATE TABLE postgres_db.s1.integers (i INT);
 INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
 ```
+
 ```text
 ┌───────┐
 │   i   │
@@ -225,8 +237,15 @@ SELECT * FROM postgres_db.s1.integers;
 │    42 │
 └───────┘
 ```
+
 ```sql
 DROP SCHEMA postgres_db.s1;
+```
+
+## `DETACH`
+
+```sql
+DETACH postgres_db;
 ```
 
 ### Transactions
@@ -237,6 +256,7 @@ BEGIN;
 INSERT INTO postgres_db.tmp VALUES (42);
 SELECT * FROM postgres_db.tmp;
 ```
+
 ```text
 ┌───────┐
 │   i   │
@@ -245,10 +265,12 @@ SELECT * FROM postgres_db.tmp;
 │    42 │
 └───────┘
 ```
+
 ```sql
 ROLLBACK;
 SELECT * FROM postgres_db.tmp;
 ```
+
 ```text
 ┌────────┐
 │   i    │
@@ -272,6 +294,7 @@ postgres_query(attached_database::VARCHAR, query::VARCHAR)
 ATTACH 'dbname=postgresscanner' AS s (TYPE POSTGRES);
 SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
 ```
+
 ```text
 ┌──────────────┬───────────┬─────────┐
 │    brand     │   model   │  color  │

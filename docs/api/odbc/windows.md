@@ -5,7 +5,7 @@ title: ODBC API - Windows
 
 The Microsoft Windows requires an ODBC Driver Manager to manage communication between applications and the ODBC drivers.
 The DM on Windows is provided in a DLL file `odbccp32.dll`, and other files and tools.
-For detailed information checkout out the [Common ODBC Component Files](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/odbc/dn170563(v=vs.85)).
+For detailed information check out the [Common ODBC Component Files](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/odbc/dn170563(v=vs.85)).
 
 
 ## Step 1: Download ODBC Driver
