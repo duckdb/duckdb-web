@@ -14,14 +14,14 @@ The following examples use the [`flights.csv`](/data/flights.csv) file.
 SELECT * FROM 'flights.csv';
 -- read_csv with custom options
 SELECT * FROM read_csv('flights.csv',
-  delim = '|',
-  header = true,
-  columns = {
-    'FlightDate': 'DATE',
-    'UniqueCarrier': 'VARCHAR',
-    'OriginCityName': 'VARCHAR',
-    'DestCityName': 'VARCHAR'
-  });
+    delim = '|',
+    header = true,
+    columns = {
+        'FlightDate': 'DATE',
+        'UniqueCarrier': 'VARCHAR',
+        'OriginCityName': 'VARCHAR',
+        'DestCityName': 'VARCHAR'
+    });
 ```
 ```bash
 # read a CSV from stdin, auto-infer options
