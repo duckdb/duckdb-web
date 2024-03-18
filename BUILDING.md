@@ -69,7 +69,7 @@ Serve the website (latest only, archives excluded) with:
 scripts/serve-latest.sh
 ```
 
-The website can be browsed by going to <http://localhost:4000/docs/> in your browser.
+To browse the website, visit <http://localhost:4000/docs/>.
 
 Serve the full website with:
 
@@ -99,7 +99,7 @@ Serve the website (latest only, archives excluded) with:
 scripts/docker-serve-latest.sh
 ```
 
-The website can be browsed by going to <http://localhost:4000/docs/> in your browser.
+To browse the website, visit <http://localhost:4000/docs/>.
 
 Serve the full website with:
 
