@@ -29,7 +29,7 @@ CREATE TABLE weather (
 
 You can enter this into the shell with the line breaks. The command is not terminated until the semicolon.
 
-White space (i.e., spaces, tabs, and newlines) can be used freely in SQL commands. That means you can type the command aligned differently than above, or even all on one line. Two dash characters (`--`) introduce comments. Whatever follows them is ignored up to the end of the line. SQL is case insensitive about key words and identifiers.
+White space (i.e., spaces, tabs, and newlines) can be used freely in SQL commands. That means you can type the command aligned differently than above, or even all on one line. Two dash characters (`--`) introduce comments. Whatever follows them is ignored up to the end of the line. SQL is case-insensitive about keywords and identifiers. When returning identifiers, [their original cases are preserved](keywords_and_identifiers#rules-for-case-sensitivity).
 
 In the SQL command, we first specify the type of command that we want to perform: `CREATE TABLE`. After that follows the parameters for the command. First, the table name, `weather`, is given. Then the column names and column types follow.
 
