@@ -100,5 +100,5 @@ FROM st_read(
 
 ## See Also
 
-DuckDB can also [export Export files](excel_export).
+DuckDB can also [export Excel files](excel_export).
 For additional details on Excel support, see the [spatial extension page](../../extensions/spatial), the [GDAL XLSX driver page](https://gdal.org/drivers/vector/xlsx.html), and the [GDAL configuration options page](https://gdal.org/user/configoptions.html#configoptions).
