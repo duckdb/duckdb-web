@@ -51,7 +51,7 @@ Additionally, the function `like_escape` has the same functionality as a `LIKE` 
 SELECT 'a%c' LIKE 'a$%c' ESCAPE '$'; -- true
 SELECT 'azc' LIKE 'a$%c' ESCAPE '$'; -- false
 
--- Case insensitive ILIKE with ESCAPE
+-- Case-insensitive ILIKE with ESCAPE
 SELECT 'A%c' ILIKE 'a$%c' ESCAPE '$'; -- true
 ```
 
@@ -108,7 +108,7 @@ SELECT 'best.txt' GLOB '?.txt';            -- false
 SELECT 'best.txt' GLOB '[abc]est.txt';     -- true
 SELECT 'best.txt' GLOB '[a-z]est.txt';     -- true
 
--- The bracket syntax is case sensitive
+-- The bracket syntax is case-sensitive
 SELECT 'Best.txt' GLOB '[a-z]est.txt';     -- false
 SELECT 'Best.txt' GLOB '[a-zA-Z]est.txt';  -- true
 
