@@ -795,12 +795,18 @@ $(document).ready(function(){
 	const showbanner = getWithExpiry("homeBanner");
 	if(showbanner == false){
 		$('.banner').css('display', 'none');
+		if( $('body').hasClass('documentation') ){
+			$('main').removeAttr('class');
+		}
 	} else {
 		$('.banner').css('display', 'flex');
 	}
 	$('.banner .close').click(function(){
 		setWithExpiry('homeBanner', false, 172800000); // 900000 = 15 min, 172800000 = 2 days
 		$('.banner').slideUp(300);
+		if( $('body').hasClass('documentation') ){
+			$('main').removeAttr('class');
+		} 
 	});
 	// setWithExpiry('homeBanner', '', -1); // deletes content
 
