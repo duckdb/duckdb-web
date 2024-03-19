@@ -5,15 +5,7 @@
 {% endif %}
 
 {% if versionviewed contains "stable" %}
-	<main class="outdated">
-	<div class="banner outdated">
-		<div class="content">
-			<span class="icon_outdated"></span>
-			<span>This version of the documentation is outdated.</span>
-			<a href="{{ site.baseurl }}/{{new_url}}">view latest version</a>
-		</div>
-		<div class="close"></div>
-	</div>
+	<main>
 {% elsif page.path contains "latest" %}
 	<main class="latest">
 		<div class="banner">
