@@ -81,6 +81,7 @@ body.documentation{
          .sidenav ul ul{
             padding-left: 20px;
             margin-top: 0;
+            margin-bottom: 8px;
          }
          @media only screen and (max-width: 1200px) {
             width: 100%;
@@ -368,6 +369,60 @@ body.documentation{
            background-color: #11A8FE;
            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='10' fill='white'/%3E%3Cpath d='M5.83301 10.8333L8.33301 13.3333L14.1663 7.5' stroke='%2311A8FE' stroke-width='1.5'/%3E%3C/svg%3E%0A");
        }
+   }
+   .banner.outdated{
+      span.icon_outdated{
+         background-image: url("data:image/svg+xml,%3Csvg width='19' height='22' viewBox='0 0 19 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_3288_3661)'%3E%3Cpath d='M13.6088 1.67337C13.4975 1.56238 13.3467 1.50003 13.1896 1.5H5.81044C5.65327 1.50003 5.50253 1.56238 5.39125 1.67337L0.173375 6.89125C0.0623806 7.00253 3.33913e-05 7.15327 0 7.31044L0 14.6896C3.33913e-05 14.8467 0.0623806 14.9975 0.173375 15.1088L5.39125 20.3266C5.50253 20.4376 5.65327 20.5 5.81044 20.5H13.1896C13.3467 20.5 13.4975 20.4376 13.6088 20.3266L18.8266 15.1088C18.9376 14.9975 19 14.8467 19 14.6896V7.31044C19 7.15327 18.9376 7.00253 18.8266 6.89125L13.6088 1.67337ZM6.35787 7.01713L9.5 10.1604L12.6421 7.01713C12.6973 6.96192 12.7629 6.91813 12.835 6.88825C12.9071 6.85838 12.9844 6.843 13.0625 6.843C13.1406 6.843 13.2179 6.85838 13.29 6.88825C13.3621 6.91813 13.4277 6.96192 13.4829 7.01713C13.5381 7.07233 13.5819 7.13787 13.6117 7.20999C13.6416 7.28212 13.657 7.35943 13.657 7.4375C13.657 7.51557 13.6416 7.59288 13.6117 7.66501C13.5819 7.73713 13.5381 7.80267 13.4829 7.85787L10.3396 11L13.4829 14.1421C13.5381 14.1973 13.5819 14.2629 13.6117 14.335C13.6416 14.4071 13.657 14.4844 13.657 14.5625C13.657 14.6406 13.6416 14.7179 13.6117 14.79C13.5819 14.8621 13.5381 14.9277 13.4829 14.9829C13.4277 15.0381 13.3621 15.0819 13.29 15.1117C13.2179 15.1416 13.1406 15.157 13.0625 15.157C12.9844 15.157 12.9071 15.1416 12.835 15.1117C12.7629 15.0819 12.6973 15.0381 12.6421 14.9829L9.5 11.8396L6.35787 14.9829C6.30267 15.0381 6.23713 15.0819 6.16501 15.1117C6.09288 15.1416 6.01557 15.157 5.9375 15.157C5.85943 15.157 5.78212 15.1416 5.70999 15.1117C5.63787 15.0819 5.57233 15.0381 5.51713 14.9829C5.46192 14.9277 5.41813 14.8621 5.38825 14.79C5.35838 14.7179 5.343 14.6406 5.343 14.5625C5.343 14.4844 5.35838 14.4071 5.38825 14.335C5.41813 14.2629 5.46192 14.1973 5.51713 14.1421L8.66044 11L5.51713 7.85787C5.40563 7.74638 5.343 7.59517 5.343 7.4375C5.343 7.27983 5.40563 7.12862 5.51713 7.01713C5.62862 6.90563 5.77983 6.843 5.9375 6.843C6.09517 6.843 6.24638 6.90563 6.35787 7.01713Z' fill='white'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_3288_3661'%3E%3Crect width='19' height='19' fill='white' transform='translate(0 1.5)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+         width: 19px;
+         height: 22px;
+         display: inline-block;
+         background-size: contain;
+         background-repeat: no-repeat;
+         flex-shrink: 0;
+         @media only screen and (max-width: 660px) {
+            display: none;
+         }
+      }
+      a{
+         font-size: 13px;
+         padding: 4px 9px;
+         border: 1px solid white;
+         border-radius: 50px;
+         white-space: nowrap;
+         transition: all .3s;
+         &:hover{
+            background: white;
+            color: $purple;
+            text-decoration: none;
+         }
+      }
+      .content{
+         display: flex;
+         column-gap: 20px;
+         align-items: center;
+      }
+   }
+   main .banner{
+      top: 70px;
+      position: fixed;
+      .content{
+         padding-right: 35px;
+      }
+   }
+   main.latest,
+   main.outdated{
+      .sidenavigation{
+         padding-top: 65px;
+      }
+      .wrap #main_content_wrap{
+         padding-top: 75px;
+      }
+      #sidebar{
+         padding-top: 150px;
+         .toc_menu{
+            top: 140px;
+         }
+      }
    }
 }
 .versionsidebar{
