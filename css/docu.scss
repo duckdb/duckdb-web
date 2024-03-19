@@ -778,6 +778,26 @@ td {
         min-width: 40px;
     }
 }
+.nostroke_table + table{
+   tr{
+      border: 0;
+      >td:first-child{
+         padding-left: 0;
+      }
+   }
+   th{
+      padding: 2px;
+      padding-bottom: 4px;
+      &:first-child{
+         padding-left: 0;
+      }
+   }
+   td{
+      padding: 2px;
+      padding-right: 15px;
+      border: 0;
+   }
+}
 
 table{
     /* ROUNDED TABLES
