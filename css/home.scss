@@ -247,7 +247,77 @@ body.landing{
 		}
 	}
 	
-	/** NEW CUSTOM SELECT BOX **/
+	/** STYLE SELECT BOX ANYWAYS – SO IT IS COLORED DIRECTLY **/
+	select {
+	  -webkit-appearance: none;
+		 -moz-appearance: none;
+			  appearance: none;
+	  background-color: transparent;
+	  border: none;
+	  padding: 0 2em 0 0;
+	  margin: 0;
+	  width: 100%;
+	  font-family: inherit;
+	  font-size: inherit;
+	  cursor: inherit;
+	  line-height: inherit;
+	  z-index: 1;
+	  font-weight: 500;
+	  &::-ms-expand {
+		display: none;
+	  }
+	  outline: none;
+	}
+	
+	select {
+	  display: -ms-grid;
+	  display: grid;
+		  grid-template-areas: "select";
+	  -webkit-box-align: center;
+		  -ms-flex-align: center;
+			  align-items: center;
+	  position: relative;
+	  
+	  select,
+	  &::after {
+		-ms-grid-row: 1;
+		-ms-grid-column: 1;
+		grid-area: select;
+	  }
+	  
+	  min-width: 15ch;
+	  max-width: 30ch;
+	
+	  border: 1px solid $duckDByellow;
+	  border-radius: 100px;
+	  padding: 10px 14px;
+	
+	  font-size: 14px;
+	  cursor: pointer;
+	  line-height: 1.1;
+	  color: black;
+	
+	  background-color: $duckDByellow;
+	  -webkit-transition: background-color .3s;
+	  -o-transition: background-color .3s;
+	  transition: background-color .3s;
+	  &:hover{
+		  background-color: darken($duckDByellow, 5%);
+	  }
+	  // Custom arrow
+	  &:not(.select--multiple)::after {
+		content: "";
+		-ms-grid-column-align: end;
+			justify-self: end;
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='9.25' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M4.60938 8.18164L10.0637 13.636L15.5181 8.18164' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E%0A");
+	  }
+	}
+	
+	
+	/** NEW CUSTOM SELECT BOX WITH JS**/
 	$select-background: #c1b73d;
 	$select-width: 240px;
 	$select-height: 38px;
@@ -263,28 +333,26 @@ body.landing{
 		display: inline-block;
 		position: relative;
 		color: black;
-		width: $select-width;
-		height: $select-height;
+		min-width: $select-width;
+		//height: $select-height;
 		font-size: 14px;
 		line-height: 1;
 		font-weight: 500;
 	}
 	
 	.select-styled {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
+		position: relative;
+		display: inline-block;
 		background-color: $duckDByellow;
-		padding: 12px 20px;
+		padding: 12px 45px 12px 20px;
 		-webkit-transition: all 0.2s ease-in;
 		-o-transition: all 0.2s ease-in;
 		transition: all 0.2s ease-in;
 		border-radius: 20px;
 		z-index: 710;
+		word-break: keep-all;
 		> span{
-			color: #cdc13c!important;
+			color: #beb343!important;
 		}
 		&:after {
 			content: "";
@@ -314,30 +382,29 @@ body.landing{
 	.select-options {
 		display: none;
 		position: absolute;
-		top: 50%;
-		right: 0;
-		left: 0;
+		top: calc(100% + 4px);
+		//right: 0;
+		//left: 0;
 		z-index: 700;
 		margin: 0;
 		list-style: none;
-		background-color: $select-background;
+		background-color: $duckDByellow;
 		border-radius: 20px;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-		padding: 10px;
-		padding-top: calc(#{$select-height} / 2);
-		-webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
-				filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
+		padding: 8px;
+		//padding-top: calc(#{$select-height} / 2);
+		-webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
+				filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
 		li {
+			word-break: keep-all;
 			margin: 2px 0;
-			padding: 10px 12px;
+			padding: 8px 12px;
 			font-weight: 450;
 			-webkit-transition: all 0.15s ease-in;
 			-o-transition: all 0.15s ease-in;
 			transition: all 0.15s ease-in;
 			&:hover,
 			&.is-selected {
-				background: #d8ce3f;
+				background: #F3E500;
 				border-radius: 50px;
 			}
 			&.is-selected {
