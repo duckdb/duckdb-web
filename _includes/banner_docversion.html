@@ -27,7 +27,9 @@
 			{% continue %}
 		{% else %}
 			{% assign new_url = new_url | append: part %}
-			{% assign new_url = new_url | append: '/' %}
+			{% unless forloop.last %}
+				{% assign new_url = new_url | append: '/' %}
+			{% endunless %}
 		{% endif %}
 	{% endfor %}
 	<main class="outdated">
