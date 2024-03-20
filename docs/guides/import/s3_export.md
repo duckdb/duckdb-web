@@ -50,7 +50,7 @@ CREATE SECRET (
     TYPE GCS,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-)
+);
 ```
 
 After setting up the GCS credentials, you can export using: 
