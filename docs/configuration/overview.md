@@ -40,9 +40,9 @@ FROM duckdb_settings()
 WHERE name = 'threads';
 ```
 
-|  name   | value |                   description                   | input_type |
-|---------|------:|-------------------------------------------------|------------|
-| threads | 10    | The number of total threads used by the system. | BIGINT     |
+|  name   | value |                   description                   | input_type | scope  |
+|---------|-------|-------------------------------------------------|------------|--------|
+| threads | 1     | The number of total threads used by the system. | BIGINT     | GLOBAL |
 
 ```sql
 -- show a list of all available settings
