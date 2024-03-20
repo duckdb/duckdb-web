@@ -286,7 +286,8 @@ Storage Time
 | Reconstruction  | 8.99   |
 | Storage      | 18.97    |
 
-We can see storing the index is 2x more expensive than not storing the index. The reason is that our table consists of one column with 50,000,000 `int32_` values. However, when storing the ART, we also store 50,000,000 `int64_` values for their respective `row_id` in the leaves. This increase in the elements is the main reason for the additional storage cost.
+
+We can see storing the index is 2x more expensive than not storing the index. The reason is that our table consists of one column with 50,000,000 `int32_t` values. However, when storing the ART, we also store 50,000,000 `int64_t` values for their respective `row_ids` in the leaves. This increase in the elements is the main reason for the additional storage cost.
 
 
 #### Load Time
