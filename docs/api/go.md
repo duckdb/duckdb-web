@@ -7,7 +7,7 @@ github_repository: https://github.com/marcboeker/go-duckdb
 The DuckDB Go driver, `go-duckdb`, allows using DuckDB via the `database/sql` interface.
 For examples on how to use this interface, see the [official documentation](https://pkg.go.dev/database/sql) and [tutorial](https://go.dev/doc/tutorial/database-access).
 
-> The Go client is a third-party library, development repository is at https://github.com/marcboeker/go-duckdb 
+> The Go client is a third-party library and its repository is hosted <https://github.com/marcboeker/go-duckdb>.
 
 ## Installation
 
