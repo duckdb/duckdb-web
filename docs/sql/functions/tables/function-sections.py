@@ -84,5 +84,5 @@ with open(f"reformatted/{input_filename_without_extension}-reformatted.md", "w")
 <div class="nostroke_table"></div>
 
 | **Description** | {line[1].strip()} |
-| **Example** | {line[2].strip()} |{result_item.strip()}{aliases_item.strip()}
+| **Example** | {line[2].strip()} |{result_item}{aliases_item}
 """)
