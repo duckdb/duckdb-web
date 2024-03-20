@@ -66,9 +66,8 @@ with open(f"reformatted/{input_filename_without_extension}-reformatted.md", "w")
     res = duckdb.sql("""FROM funs""")
     for line in res.fetchall():
         result_item = ""
-        if have_result_column:
-            caption = "Result"
-            result_item = f"\n| **{caption}** | {line[3]} |"
+        if have_result_column and line[3]:
+            result_item = f"\n| **Result** | {line[3].strip()} |"
 
         aliases_item = ""
         if have_aliases_column and line[-1] is not None:
@@ -77,13 +76,13 @@ with open(f"reformatted/{input_filename_without_extension}-reformatted.md", "w")
                 caption = "Aliases"
             else:
                 caption = "Alias"
-            aliases_item = f"\n| **{caption}** | {line[-1]} |"
+            aliases_item = f"\n| **{caption}** | {line[-1].strip()} |"
 
         out.write(f"""
 ### {line[0]}
 
 <div class="nostroke_table"></div>
 
-| **Description** | {line[1]} |
-| **Example** | {line[2]} |{result_item}{aliases_item}
+| **Description** | {line[1].strip()} |
+| **Example** | {line[2].strip()} |{result_item.strip()}{aliases_item.strip()}
 """)
