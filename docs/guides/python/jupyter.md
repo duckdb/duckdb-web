@@ -101,7 +101,7 @@ Either connect to a new [in-memory DuckDB](../../api/python/dbapi#in-memory-conn
 Single line SQL queries can be run using `%sql` at the start of a line. Query results will be displayed as a Pandas DataFrame.
 
 ```sql
-%sql SELECT 'Off and flying!' AS a_duckdb_column
+%sql SELECT 'Off and flying!' AS a_duckdb_column;
 ```
 
 An entire Jupyter cell can be used as a SQL cell by placing `%%sql` at the start of the cell. Query results will be displayed as a Pandas DataFrame.
@@ -113,14 +113,14 @@ SELECT
     function_name
 FROM duckdb_functions()
 ORDER BY ALL DESC
-LIMIT 5
+LIMIT 5;
 ```
 
 To store the query results in a Python variable, use `<<` as an assignment operator.
 This can be used with both the `%sql` and `%%sql` Jupyter magics.
 
 ```sql
-%sql res << SELECT 'Off and flying!' AS a_duckdb_column
+%sql res << SELECT 'Off and flying!' AS a_duckdb_column;
 ```
 
 If the `%config SqlMagic.autopandas = True` option is set, the variable is a Pandas dataframe, otherwise, it is a `ResultSet` that can be converted to Pandas with the `DataFrame()` function.
@@ -137,7 +137,7 @@ input_df = pd.DataFrame.from_dict({"i": [1, 2, 3],
 The dataframe being queried can be specified just like any other table in the `FROM` clause.
 
 ```sql
-%sql output_df << SELECT sum(i) AS total_i FROM input_df
+%sql output_df << SELECT sum(i) AS total_i FROM input_df;
 ```
 
 ## Visualizing DuckDB Data

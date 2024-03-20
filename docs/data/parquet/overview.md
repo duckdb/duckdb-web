@@ -120,14 +120,14 @@ DuckDB also has support for writing to Parquet files using the `COPY` statement 
 COPY
     (SELECT * FROM tbl)
     TO 'result-snappy.parquet'
-    (FORMAT 'parquet')
+    (FORMAT 'parquet');
 ```
 
 ```sql
 -- write "tbl" to a zstd compressed Parquet file
 COPY tbl
     TO 'result-zstd.parquet'
-    (FORMAT 'parquet', CODEC 'zstd')
+    (FORMAT 'parquet', CODEC 'zstd');
 ```
 
 ```sql
@@ -135,7 +135,7 @@ COPY tbl
 COPY
     'test.csv'
     TO 'result-uncompressed.parquet'
-    (FORMAT 'parquet', CODEC 'uncompressed')
+    (FORMAT 'parquet', CODEC 'uncompressed');
 ```
 
 ```sql
@@ -144,6 +144,21 @@ COPY
     (FROM generate_series(100_000))
     TO 'row-groups-zstd.parquet'
     (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100_000);
+```
+
+> LZ4 compression is currently only available in the nightly and source builds.
+
+```sql
+-- write a CSV file to an LZ4_RAW-compressed Parquet file
+COPY
+    (FROM generate_series(100_000))
+    TO 'result-lz4.parquet'
+    (FORMAT PARQUET, COMPRESSION LZ4);
+-- or
+COPY
+    (FROM generate_series(100_000))
+    TO 'result-lz4.parquet'
+    (FORMAT PARQUET, COMPRESSION LZ4_RAW);
 ```
 
 DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../../sql/statements/export) for more details.

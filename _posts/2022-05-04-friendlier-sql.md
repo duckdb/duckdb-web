@@ -17,7 +17,7 @@ However, SQL is not famous for being user-friendly. DuckDB aims to change that! 
 A traditional SQL `SELECT` query requires that requested columns be explicitly specified, with one notable exception: the `*` wildcard. `SELECT *` allows SQL to return all relevant columns. This adds tremendous flexibility, especially when building queries on top of one another. However, we are often interested in *almost* all columns. In DuckDB, simply specify which columns to `EXCLUDE`:
 
 ```sql
-SELECT * EXCLUDE (jar_jar_binks, midichlorians) FROM star_wars
+SELECT * EXCLUDE (jar_jar_binks, midichlorians) FROM star_wars;
 ```
 
 Now we can save time repeatedly typing all columns, improve code readability, and retain flexibility as additional columns are added to underlying tables.  
@@ -28,7 +28,7 @@ DuckDB's implementation of this concept can even handle exclusions from multiple
 SELECT 
     sw.* EXCLUDE (jar_jar_binks, midichlorians),
     ff.* EXCLUDE cancellation
-FROM star_wars sw, firefly ff
+FROM star_wars sw, firefly ff;
 ```
 
 ### SELECT * REPLACE
@@ -38,7 +38,7 @@ Similarly, we often wish to use all of the columns in a table, aside from a few 
 ```sql
 SELECT 
     * REPLACE (movie_count+3 AS movie_count, show_count*1000 AS show_count)
-FROM star_wars_owned_by_disney
+FROM star_wars_owned_by_disney;
 ```
 This allows views, CTE's, or sub-queries to be built on one another in a highly concise way, while remaining adaptable to new underlying columns. 
 
@@ -54,7 +54,7 @@ SELECT
     cantinas,
     SUM(scum + villainy) AS total_scum_and_villainy
 FROM star_wars_locations
-GROUP BY ALL
+GROUP BY ALL;
 -- GROUP BY systems, planets, cities, cantinas
 ```
 
@@ -67,7 +67,7 @@ SELECT
     * EXCLUDE (cantinas, booths, scum, villainy),
     SUM(scum + villainy) AS total_scum_and_villainy
 FROM star_wars_locations
-GROUP BY ALL
+GROUP BY ALL;
 -- GROUP BY systems, planets, cities
 ```
 
@@ -83,7 +83,7 @@ SELECT
     sum(civility) AS total_civility
 FROM star_wars_universe
 GROUP BY ALL
-ORDER BY ALL
+ORDER BY ALL;
 -- ORDER BY age, total_civility
 ```
 
@@ -105,7 +105,7 @@ GROUP BY
     nope,
     very_speedy
 HAVING
-    total_oops > 0
+    total_oops > 0;
 ```
 
 ### Case Insensitivity While Maintaining Case
@@ -174,7 +174,7 @@ DuckDB provides nested types to allow more flexible data structures than the pur
 ```sql
 SELECT
     ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list,
-    {name: 'Star Destroyer', common_misconceptions: 'Can''t in fact destroy a star'} AS star_destroyer_facts
+    {name: 'Star Destroyer', common_misconceptions: 'Can''t in fact destroy a star'} AS star_destroyer_facts;
 ```
 
 ### List Slicing
@@ -200,7 +200,7 @@ Use convenient dot notation to access the value of a specific key in a DuckDB `S
 SELECT 
     planet.name,
     planet."Amount of sand" 
-FROM (SELECT {name: 'Tatooine', 'Amount of sand': 'High'} AS planet)
+FROM (SELECT {name: 'Tatooine', 'Amount of sand': 'High'} AS planet);
 ```
 
 ### Trailing Commas
@@ -216,6 +216,7 @@ FROM luke_whats_wrong
 GROUP BY
     x_wing,
     proton_torpedoes,
+;
 ```
 
 ### Function Aliases from Other Databases
@@ -226,7 +227,7 @@ For many functions, DuckDB supports multiple names in order to align with other 
 SELECT
     'Use the Force, Luke'[:13] AS sliced_quote_1,
     substr('I am your father', 1, 4) AS sliced_quote_2,
-    substring('Obi-Wan Kenobi, you''re my only hope',17,100) AS sliced_quote_3
+    substring('Obi-Wan Kenobi, you''re my only hope',17,100) AS sliced_quote_3;
 ```
 
 ### Auto-Increment Duplicate Column Names
@@ -243,7 +244,7 @@ FROM (
     FROM squadron_one s1
     JOIN squadron_two s2
         ON 1=1
-    ) theyre_coming_in_too_fast
+    ) theyre_coming_in_too_fast;
 ```  
 
 <div class="narrow_table"></div>

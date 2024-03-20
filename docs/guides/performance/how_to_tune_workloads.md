@@ -31,7 +31,7 @@ If DuckDB is running in in-memory mode, it cannot use disk to offload data if it
 To enable offloading in the absence of a persistent database file, use the [`SET temp_directory` statement](../../configuration/pragmas#temp-directory-for-spilling-data-to-disk):
 
 ```sql
-SET temp_directory = '/path/to/temp_dir.tmp/'
+SET temp_directory = '/path/to/temp_dir.tmp/';
 ```
 
 ### Operators

@@ -376,7 +376,7 @@ WITH state AS (
   SELECT ticker, price, "when",
     LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
   FROM prices
-)
+);
 ```
 
 The state table CTE is created by hash partitioning the table on `ticker`,

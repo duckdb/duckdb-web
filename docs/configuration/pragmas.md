@@ -385,7 +385,7 @@ PRAGMA disable_print_progress_bar;
 By default, DuckDB uses a temporary directory named `⟨database_file_name⟩.tmp` to spill to disk, located in the same directory as the database file. To change this, use:
 
 ```sql
-SET temp_directory = '/path/to/temp_dir.tmp/'
+SET temp_directory = '/path/to/temp_dir.tmp/';
 ```
 
 ### Storage Information

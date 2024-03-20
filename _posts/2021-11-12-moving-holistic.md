@@ -216,7 +216,7 @@ To benchmark the various implementations, we run moving window queries against a
 
 ```sql
 create table rank100 as
-    select b % 100 as a, b from range(10000000) tbl(b)
+    select b % 100 as a, b from range(10000000) tbl(b);
 ```
 
 The results are then re-aggregated down to one row to remove the impact of streaming the results.
@@ -226,7 +226,7 @@ The frames are 100 elements wide, and the test is repeated with a fixed trailing
 select quantile_cont(a, [0.25, 0.5, 0.75]) over (
     order by b asc
     rows between 100 preceding and current row) as iqr
-from rank100
+from rank100;
 ```
 
 and a variable frame that moves pseudo-randomly around the current value:
@@ -235,7 +235,7 @@ and a variable frame that moves pseudo-randomly around the current value:
 select quantile_cont(a, [0.25, 0.5, 0.75]) over (
     order by b asc
     rows between mod(b * 47, 521) preceding and 100 - mod(b * 47, 521) following) as iqr
-from rank100
+from rank100;
 ```
 
 The two examples here are the interquartile range queries;

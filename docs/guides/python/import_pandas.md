@@ -22,6 +22,6 @@ duckdb.sql("INSERT INTO my_table SELECT * FROM my_df")
 
 If the order of columns is different or not all columns are present in the DataFrame, use [`INSERT INTO ... BY NAME`](../../sql/statements/insert#insert-into--by-name):
 
-```sql
+```python
 duckdb.sql("INSERT INTO my_table BY NAME SELECT * FROM my_df")
 ```
