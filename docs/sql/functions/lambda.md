@@ -16,11 +16,39 @@ For example, the following are all valid lambda functions:
 
 ### Scalar Functions That Accept Lambda Functions
 
-| Function | Aliases | Description | Example | Result |
-|--|--|---|--|-|
-| [`list_transform(`*`list`*`, `*`lambda`*`)`](#transform) | `array_transform`, `apply`, `list_apply`, `array_apply` | Returns a list that is the result of applying the lambda function to each element of the input list.                                       | `list_transform([4, 5, 6], x -> x + 1)`   | `[5, 6, 7]` |
-| [`list_filter(`*`list`*`, `*`lambda`*`)`](#filter)      | `array_filter`, `filter`                                | Constructs a list from those elements of the input list for which the lambda function returns `true`.                                      | `list_filter([4, 5, 6], x -> x > 4)`      | `[5, 6]`    |
-| [`list_reduce(`*`list`*`, `*`lambda`*`)`](#reduce)      | `array_reduce`, `reduce`                                | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. | `list_reduce([4, 5, 6], (x, y) -> x + y)` | `15`        |
+
+| Name | Description |
+|:--|:-------|
+| [`list_transform(`*`list`*`, `*`lambda`*`)`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. |
+| [`list_filter(`*`list`*`, `*`lambda`*`)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns `true`. |
+| [`list_reduce(`*`list`*`, `*`lambda`*`)`](#list_reducelist-lambda) | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. |
+
+### `list_transform(`*`list`*`, `*`lambda`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a list that is the result of applying the lambda function to each element of the input list. For more information, see [Transform](#transform). |
+| **Example** | `list_transform([4, 5, 6], x -> x + 1)` |
+| **Result** | `[5, 6, 7]` |
+| **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
+
+### `list_filter(`*`list`*`, `*`lambda`*`)`   
+
+<div class="nostroke_table"></div>
+
+| **Description** | Constructs a list from those elements of the input list for which the lambda function returns `true`. For more information, see [Filter](#filter). |
+| **Example** | `list_filter([4, 5, 6], x -> x > 4)` |
+| **Result** | `[5, 6]` |
+| **Aliases** | `array_filter`, `filter` |
+
+### `list_reduce(`*`list`*`, `*`lambda`*`)`   
+
+<div class="nostroke_table"></div>
+
+| **Description** | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. For more information, see [Reduce](#reduce). |
+| **Example** | `list_reduce([4, 5, 6], (x, y) -> x + y)` |
+| **Result** | `15` |
+| **Aliases** | `array_reduce`, `reduce` |
 
 ### Nesting
 

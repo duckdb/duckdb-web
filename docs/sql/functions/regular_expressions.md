@@ -16,16 +16,80 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 ## Functions
 
-| Function | Description | Example | Result |
-|:---|:---|:---|:--|
-| `regexp_extract_all(`*`string`*`, `*`regex`*`[, `*`group`*` = 0])` | Split the *string* along the *regex* and extract all occurrences of *group* | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` | `[hello, world]` |
-| `regexp_extract(`*`string`*`, `*`pattern `*`, `*`name_list`*`)`; | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list* | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` | `{'y':'2023', 'm':'04', 'd':'15'}` |
-| `regexp_extract(`*`string`*`, `*`pattern `*`[, `*`idx`*`])`; | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx* | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` | `hello` |
-| `regexp_full_match(`*`string`*`, `*`regex`*`)`| Returns `true` if the entire *string* matches the *regex* | `regexp_full_match('anabanana', '(an)*')` | `false` |
-| `regexp_matches(`*`string`*`, `*`pattern`*`)` | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise | `regexp_matches('anabanana', '(an)*')` | `true` |
-| `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | If *string* contains the regexp *pattern*, replaces the matching part with *replacement* | `regexp_replace('hello', '[lo]', '-')` | `he-lo` |
-| `regexp_split_to_array(`*`string`*`, `*`regex`*`)` | Alias of `string_split_regex`. Splits the *string* along the *regex* | `regexp_split_to_array('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` |
-| `regexp_split_to_table(`*`string`*`, `*`regex`*`)` | Splits the *string* along the *regex* and returns a row for each part | `regexp_split_to_array('hello␣world; 42', ';?␣')` | Two rows: `'hello'`, `'world'` |
+| Name | Description |
+|:--|:-------|
+| [`regexp_extract_all(`*`string`*`, `*`regex`*`[, `*`group`*` = 0])`](#regexp_extract_allstring-regex-group0) | Split the *string* along the *regex* and extract all occurrences of *group*. |
+| [`regexp_extract(`*`string`*`, `*`pattern `*`, `*`name_list`*`)`;](#regexp_extractstring-pattern-name_list) | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. |
+| [`regexp_extract(`*`string`*`, `*`pattern `*`[, `*`idx`*`])`;](#regexp_extractstring-pattern-idx) | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. |
+| [`regexp_full_match(`*`string`*`, `*`regex`*`)`](#regexp_full_matchstring-regex) | Returns `true` if the entire *string* matches the *regex*. |
+| [`regexp_matches(`*`string`*`, `*`pattern`*`)`](#regexp_matchesstring-pattern) | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
+| [`regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`;](#regexp_replacestring-pattern-replacement) | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. |
+| [`regexp_split_to_array(`*`string`*`, `*`regex`*`)`](#regexp_split_to_arraystring-regex) | Alias of `string_split_regex`. Splits the *string* along the *regex*. |
+| [`regexp_split_to_table(`*`string`*`, `*`regex`*`)`](#regexp_split_to_tablestring-regex) | Splits the *string* along the *regex* and returns a row for each part. |
+
+### `regexp_extract_all(`*`string`*`, `*`regex`*`[, `*`group`*` = 0])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Split the *string* along the *regex* and extract all occurrences of *group*. |
+| **Example** | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` |
+| **Result** | `[hello, world]` |
+
+### `regexp_extract(`*`string`*`, `*`pattern `*`, `*`name_list`*`)`;
+
+<div class="nostroke_table"></div>
+
+| **Description** | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. |
+| **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
+| **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
+
+### `regexp_extract(`*`string`*`, `*`pattern `*`[, `*`idx`*`])`;
+
+<div class="nostroke_table"></div>
+
+| **Description** | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. |
+| **Example** | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` |
+| **Result** | `hello` |
+
+### `regexp_full_match(`*`string`*`, `*`regex`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns `true` if the entire *string* matches the *regex*. |
+| **Example** | `regexp_full_match('anabanana', '(an)*')` |
+| **Result** | `false` |
+
+### `regexp_matches(`*`string`*`, `*`pattern`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
+| **Example** | `regexp_matches('anabanana', '(an)*')` |
+| **Result** | `true` |
+
+### `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`;
+
+<div class="nostroke_table"></div>
+
+| **Description** | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. |
+| **Example** | `regexp_replace('hello', '[lo]', '-')` |
+| **Result** | `he-lo` |
+
+### `regexp_split_to_array(`*`string`*`, `*`regex`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Alias of `string_split_regex`. Splits the *string* along the *regex*. |
+| **Example** | `regexp_split_to_array('hello␣world; 42', ';?␣')` |
+| **Result** | `['hello', 'world', '42']` |
+
+### `regexp_split_to_table(`*`string`*`, `*`regex`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Splits the *string* along the *regex* and returns a row for each part. |
+| **Example** | `regexp_split_to_array('hello␣world; 42', ';?␣')` |
+| **Result** | Two rows: `'hello'`, `'world'` |
 
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `true` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
 
@@ -40,7 +104,7 @@ SELECT regexp_matches('abc', '^(b|c).*');  -- false
 SELECT regexp_matches('abc', '(?i)A');     -- true
 ```
 
-### Options for Regular Expression Functions
+## Options for Regular Expression Functions
 
 The `regexp_matches` and `regexp_replace` functions also support the following options.
 

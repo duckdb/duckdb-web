@@ -32,12 +32,12 @@ SELECT size, content, filename
 FROM read_blob('test/sql/table_function/files/*');
 ```
 
-| size |                                             content                                              |                filename                 |
-|-----:|--------------------------------------------------------------------------------------------------|-----------------------------------------|
-| 178  |  PK\x03\x04\x0A\x00\x00\x00\x00\x00\xACi=X\x14t\xCE\xC7\x0A\x00\x00\x00\x0A\x00\x00\x00\x09\x00… | test/sql/table_function/files/four.blob |
-| 12   | Hello World!                                                                                     | test/sql/table_function/files/one.txt   |
-| 2    | 42                                                                                               | test/sql/table_function/files/three.txt |
-| 10   | F\xC3\xB6\xC3\xB6 B\xC3\xA4r                                                                     | test/sql/table_function/files/two.txt   |
+| size |                              content                         |                filename                 |
+|-----:|--------------------------------------------------------------|-----------------------------------------|
+| 178  |  PK\x03\x04\x0A\x00\x00\x00\x00\x00\xACi=X\x14t\xCE\xC7\x0A… | test/sql/table_function/files/four.blob |
+| 12   | Hello World!                                                 | test/sql/table_function/files/one.txt   |
+| 2    | 42                                                           | test/sql/table_function/files/three.txt |
+| 10   | F\xC3\xB6\xC3\xB6 B\xC3\xA4r                                 | test/sql/table_function/files/two.txt   |
 
 ## Schema
 
