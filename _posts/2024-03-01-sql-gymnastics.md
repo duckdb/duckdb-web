@@ -390,7 +390,7 @@ SELECT
         min: min(COLUMNS(*))::VARCHAR,
         approx_unique: approx_count_distinct(COLUMNS(*)),
         nulls: count(*) - count(COLUMNS(*)),
-    }
+    };
 ```
 
 | main.struct_pack("name" := first(alias(subset."Unnamed: 0")), ... | main.struct_pack("name" := first(alias(subset.track_id)), ... | ... | main.struct_pack("name" := first(alias(subset.time_signature)), ... | main.struct_pack("name" := first(alias(subset.track_genre)), ... |
@@ -416,7 +416,7 @@ Next, the data is unpivoted to reshape the table from one row and multiple colum
 
 ```sql
 UNPIVOT metrics 
-ON COLUMNS(*)
+ON COLUMNS(*);
 ```
 
 |           name           |                                                                           value                                                                            |
@@ -437,7 +437,7 @@ This is another way to make a query less reliant on column names – the split o
 
 ```sql
 SELECT value.*
-FROM stacked_metrics
+FROM stacked_metrics;
 ```
 
 We have now split apart the data into multiple columns, so the summary metrics are nice and interpretable.

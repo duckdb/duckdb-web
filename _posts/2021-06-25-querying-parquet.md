@@ -50,7 +50,7 @@ Let us dive into the previous query to better understand the power of the Parque
 ```sql
 SELECT COUNT(*)
 FROM 'taxi_2019_04.parquet'
-WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20'
+WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20';
 ```
 
 In this query, we read a single column from our Parquet file (`pickup_at`). Any other columns stored in the Parquet file can be entirely skipped, as we do not need them to answer our query.

@@ -93,7 +93,7 @@ subgroup:nulls
 The `--query` flag will print the query that is run by the benchmark.
 
 ```sql
-SELECT MIN(i + 1) FROM integers
+SELECT min(i + 1) FROM integers;
 ```
 
 The `--profile` flag will output a query tree.

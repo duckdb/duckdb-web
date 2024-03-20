@@ -40,7 +40,7 @@ By combining the [`COPY...TO`](../../sql/statements/copy#copy-to) function with 
     The syntax looks like this:
 
     ```sql
-    COPY (⟨query⟩) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)
+    COPY (⟨query⟩) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER);
     ```
 
     The full DuckDB command below outputs the query in CSV format with a header:

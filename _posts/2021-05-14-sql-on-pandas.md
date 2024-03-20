@@ -88,11 +88,11 @@ orders = duckdb.query(
 For our first query, we will run a set of ungrouped aggregates over the Pandas DataFrame. Here is the SQL query:
 
 ```sql
-SELECT SUM(l_extendedprice),
-       MIN(l_extendedprice),
-       MAX(l_extendedprice),
-       AVG(l_extendedprice)
-FROM lineitem
+SELECT sum(l_extendedprice),
+       min(l_extendedprice),
+       max(l_extendedprice),
+       avg(l_extendedprice)
+FROM lineitem;
 ```
 
 The Pandas code looks similar:
@@ -123,14 +123,14 @@ For our second query, we will run the same set of aggregates, but this time incl
 SELECT
       l_returnflag,
       l_linestatus,
-      SUM(l_extendedprice),
-      MIN(l_extendedprice),
-      MAX(l_extendedprice),
-      AVG(l_extendedprice)
+      sum(l_extendedprice),
+      min(l_extendedprice),
+      max(l_extendedprice),
+      avg(l_extendedprice)
 FROM lineitem
 GROUP BY
         l_returnflag,
-        l_linestatus
+        l_linestatus;
 ```
 
 In Pandas, we use the groupby function before we perform the aggregation.
@@ -159,18 +159,18 @@ This query is already getting more complex, and while Pandas does a decent job, 
 Now suppose that we don't want to perform an aggregate over all of the data, but instead only want to select a subset of the data to aggregate. We can do this by adding a filter clause that removes any tuples we are not interested in. In SQL, we can accomplish this through the `WHERE` clause.
 
 ```sql
-SELECT l_returnflag,
-      l_linestatus,
-      SUM(l_extendedprice),
-      MIN(l_extendedprice),
-      MAX(l_extendedprice),
-      AVG(l_extendedprice)
+SELECT
+  l_returnflag,
+  l_linestatus,
+  sum(l_extendedprice),
+  min(l_extendedprice),
+  max(l_extendedprice),
+  avg(l_extendedprice)
 FROM lineitem
 WHERE
    l_shipdate <= DATE '1998-09-02'
 GROUP BY l_returnflag,
-        l_linestatus
-
+         l_linestatus;
 ```
 
  In Pandas, we can create a filtered variant of the DataFrame by using the selection brackets.
@@ -233,18 +233,19 @@ Due to its holistic query optimizer and efficient query processor, DuckDB perfor
 For the final query, we will join (`merge` in Pandas) the lineitem table with the orders table, and apply a filter that only selects orders which have the status we are interested in. This leads us to the following query in SQL:
 
 ```sql
-SELECT l_returnflag,
-       l_linestatus,
-       sum(l_extendedprice),
-       min(l_extendedprice),
-       max(l_extendedprice),
-       avg(l_extendedprice)
+SELECT
+  l_returnflag,
+  l_linestatus,
+  sum(l_extendedprice),
+  min(l_extendedprice),
+  max(l_extendedprice),
+  avg(l_extendedprice)
 FROM lineitem lineitem
 JOIN orders orders ON (l_orderkey=o_orderkey)
 WHERE l_shipdate <= DATE '1998-09-02'
   AND o_orderstatus='O'
 GROUP BY l_returnflag,
-         l_linestatus
+         l_linestatus;
 ```
 
 For Pandas, we have to add a `merge` step. In a basic approach, we merge lineitem and orders together, then apply the filters, and finally apply the grouping and aggregation. This will give us the following code snippet:
@@ -390,7 +391,7 @@ CREATE VIEW orders_parquet AS SELECT * FROM 'orders.parquet';
 After we have set up this view, we can run the same queries we ran before, but this time against the `lineitem_parquet` table.
 
 ```sql
-SELECT SUM(l_extendedprice), MIN(l_extendedprice), MAX(l_extendedprice), AVG(l_extendedprice) FROM lineitem_parquet
+SELECT sum(l_extendedprice), min(l_extendedprice), max(l_extendedprice), avg(l_extendedprice) FROM lineitem_parquet;
 ```
 
 For Pandas, we will first need to run `read_parquet` to load the data into Pandas. To do this, we use the Parquet reader powered by Apache Arrow. After that, we can run the query as we did before.
@@ -434,7 +435,7 @@ JOIN orders orders ON (l_orderkey=o_orderkey)
 WHERE l_shipdate <= DATE '1998-09-02'
   AND o_orderstatus='O'
 GROUP BY l_returnflag,
-         l_linestatus
+         l_linestatus;
 ```
 
 For Pandas we again create two versions. A naive version, and a manually optimized version. The exact code used can be found [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing).
