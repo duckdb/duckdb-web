@@ -139,15 +139,15 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
 
 ```sql
 CREATE TABLE integers(i INTEGER PRIMARY KEY);
-# Insert unique values into ART
+-- Insert unique values into ART
 INSERT INTO integers VALUES (3), (2);
-# Insert conflicting value in ART will fail
+-- Insert conflicting value in ART will fail
 INSERT INTO integers VALUES (3);
 
 CREATE TABLE fk_integers(j INTEGER, FOREIGN KEY (j) REFERENCES integers(i));
-# This insert works normally
+-- This insert works normally
 INSERT INTO fk_integers VALUES (2), (3);
-# This fails after checking the ART in integers
+-- This fails after checking the ART in integers
 INSERT INTO fk_integers VALUES (4);
 ```
 
@@ -155,9 +155,9 @@ INSERT INTO fk_integers VALUES (4);
 
 ```sql
 CREATE TABLE integers(i INTEGER PRIMARY KEY);
-# Insert unique values into ART
+-- Insert unique values into ART
 INSERT INTO integers VALUES (3), (2), (1), (8) , (10);
-# Range queries (if highly selective) will also use the ART index
+-- Range queries (if highly selective) will also use the ART index
 SELECT * FROM integers WHERE i >= 8;
 ```
 
@@ -165,15 +165,15 @@ SELECT * FROM integers WHERE i >= 8;
 3. Joins. Joins with a small number of matches will also utilize existing ART indexes.
 
 ```sql
-# Optionally you can always force index joins with the following pragma
+-- Optionally you can always force index joins with the following pragma
 PRAGMA force_index_join;
 
 CREATE TABLE t1(i INTEGER PRIMARY KEY);
 CREATE TABLE t2(i INTEGER PRIMARY KEY);
-# Insert unique values into ART
+-- Insert unique values into ART
 INSERT INTO t1 VALUES (3), (2), (1), (8), (10);
 INSERT INTO t2 VALUES (3), (2), (1), (8), (10);
-# Joins will also use the ART index
+-- Joins will also use the ART index
 SELECT * FROM t1 INNER JOIN t2 ON (t1.i = t2.i);
 ```
 
@@ -184,10 +184,10 @@ CREATE TABLE integers(i INTEGER, j INTEGER);
 
 INSERT INTO integers VALUES (1,1), (2,2), (3,3);
 
-# Creates index over i+j expression
+-- Creates index over i+j expression
 CREATE INDEX i_index ON integers USING ART((i+j));
 
-# Uses ART index point query
+-- Uses ART index point query
 SELECT i FROM integers WHERE i+j = 2;
 ```
 
