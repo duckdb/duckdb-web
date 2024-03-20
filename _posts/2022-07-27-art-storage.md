@@ -264,7 +264,7 @@ To evaluate the benefits and disadvantages of our current storage implementation
 ```python
 con = duckdb.connect("vault.db") 
 con.execute("CREATE TABLE integers (x INTEGER PRIMARY KEY)")
-con.execute("INSERT INTO integers SELECT * FROM range(50000000);")
+con.execute("INSERT INTO integers SELECT * FROM range(50000000)")
 ```
 
 We run this benchmark on two different versions of DuckDB, one where the index is not stored (i.e., v0.4.0), which means it is always in memory and fully reconstructed at a database restart, and another one where the index is stored (i.e., bleeding-edge version), using the lazy-loading technique described previously.
@@ -313,7 +313,7 @@ We now measure the cold query time (i.e., the Database has just been restarted, 
 
 ```python
 times = []
-for i in range (0,50000000, 10000):
+for i in range (0, 50000000, 10000):
   cur_time = time.time()
   con.execute("select x from integers where x = " + str(i))
   times.append(time.time() - cur_time)
