@@ -120,14 +120,14 @@ DuckDB also has support for writing to Parquet files using the `COPY` statement 
 COPY
     (SELECT * FROM tbl)
     TO 'result-snappy.parquet'
-    (FORMAT 'parquet')
+    (FORMAT 'parquet');
 ```
 
 ```sql
 -- write "tbl" to a zstd compressed Parquet file
 COPY tbl
     TO 'result-zstd.parquet'
-    (FORMAT 'parquet', CODEC 'zstd')
+    (FORMAT 'parquet', CODEC 'zstd');
 ```
 
 ```sql
@@ -135,7 +135,7 @@ COPY tbl
 COPY
     'test.csv'
     TO 'result-uncompressed.parquet'
-    (FORMAT 'parquet', CODEC 'uncompressed')
+    (FORMAT 'parquet', CODEC 'uncompressed');
 ```
 
 ```sql
