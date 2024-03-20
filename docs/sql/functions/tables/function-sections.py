@@ -63,7 +63,7 @@ with open(f"reformatted/{input_filename_without_extension}-reformatted.md", "w")
     for line in res.fetchall():
         out.write(f"{line[0]}\n")
 
-    res = duckdb.sql("""FROM funs""")
+    res = duckdb.sql("""SELECT * REPLACE (regexp_replace(trim(description) || '.', '\.\.$', '.') AS description) FROM funs""")
     for line in res.fetchall():
         result_item = ""
         if have_result_column and line[3]:
