@@ -31,6 +31,7 @@ con <- dbConnect(duckdb(), dbdir = "my-db.duckdb", read_only = FALSE)
 # to use a database file (shared between processes)
 con <- dbConnect(duckdb(), dbdir = "my-db.duckdb", read_only = TRUE)
 ```
+
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `dbDisconnect(con, shutdown = TRUE)`
 
 ### Querying
@@ -50,7 +51,6 @@ print(res)
 # 1  jeans  20.0     1
 # 2 hammer  42.2     2
 ```
-
 
 DuckDB also supports prepared statements in the R API with the `dbExecute` and `dbGetQuery` methods. Here is an example:
 
@@ -76,6 +76,7 @@ print(res)
 ## Efficient Transfer
 
 To write a R data frame into DuckDB, use the standard DBI function `dbWriteTable()`. This creates a table in DuckDB and populates it with the data frame contents. For example:
+
 ```R
 dbWriteTable(con, "iris_table", iris)
 res <- dbGetQuery(con, "SELECT * FROM iris_table LIMIT 1")
@@ -83,6 +84,7 @@ print(res)
 #   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 # 1          5.1         3.5          1.4         0.2  setosa
 ```
+
 It is also possible to "register" a R data frame as a virtual table, comparable to a SQL `VIEW`. This *does not actually transfer data* into DuckDB yet. Below is an example:
 
 ```R
@@ -136,3 +138,14 @@ tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning = true)") |>
   summarise(delay = mean(dep_time, na.rm = TRUE)) |>
   collect()
 ```
+
+## Memory Limit
+
+You can use the [`memory_limit` configuration option](../configuration/pragmas) to limit the memory use of DuckDB, e.g.:
+
+```sql
+SET memory_limit = '2GB';
+```
+
+Note that this limit is only applied to the memory DuckDB uses and it does not affect the memory use of other R libraries.
+Therefore, the total memory used by the R process may be higher than the configured `memory_limit`.

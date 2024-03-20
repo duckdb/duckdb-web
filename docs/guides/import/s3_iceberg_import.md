@@ -48,11 +48,11 @@ After the extensions are set up and the S3 credentials are correctly configured,
 
 ```sql
 SELECT *
-FROM iceberg_scan('s3://<bucket>/<iceberg-table-folder>/metadata/<id>.metadata.json')
+FROM iceberg_scan('s3://⟨bucket⟩/⟨iceberg-table-folder⟩/metadata/⟨id⟩.metadata.json');
 ```
 
 Note that you need to link directly to the manifest file. Otherwise you'll get an error like this:
 
 ```text
-Error: IO Error: Cannot open file "s3://<bucket>/<iceberg-table-folder>/metadata/version-hint.text": No such file or directory
+Error: IO Error: Cannot open file "s3://⟨bucket⟩/⟨iceberg-table-folder⟩/metadata/version-hint.text": No such file or directory
 ```

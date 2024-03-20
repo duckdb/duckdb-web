@@ -34,7 +34,8 @@ Constant vectors are physically stored as a single constant value.
 Constant vectors are useful when data elements are repeated - for example, when representing the result of a constant expression in a function call, the constant vector allows us to only store the value once.
 
 ```sql
-select lst || 'duckdb' from range(1000) tbl(lst);
+SELECT lst || 'duckdb'
+FROM range(1000) tbl(lst);
 ```
 
 Since `duckdb` is a string literal, the value of the literal is the same for every row. In a flat vector, we would have to duplicate the literal 'duckdb' once for every row. The constant vector allows us to only store the literal once.
@@ -43,7 +44,7 @@ Constant vectors are also emitted by the storage when decompressing from constan
 
 ### Dictionary Vectors
 
-Dictionary vectors are physically stored as a child vector, and a selection vector that contains indices into the child vector.  
+Dictionary vectors are physically stored as a child vector, and a selection vector that contains indexes into the child vector.  
 
 <img src="/images/internals/dictionary.png" alt="Dictionary Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
 

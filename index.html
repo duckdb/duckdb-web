@@ -9,6 +9,13 @@ body_class: landing nowrap
 <div class="dummy">
 </div>
 
+<div class="banner">
+	<div class="content">
+		The <a href="https://forms.gle/mVLT6CpLvpLhkdvT9" target="_blank">2024 DuckDB User Survey</a> is out. Submit your answers to enter the raffle for DuckDB merch!
+	</div>
+	<div class="close"></div>
+</div>
+
 <section class="welcome">
 	<div class="flexwrap wrap">
 		<div class="duckdb">
@@ -98,49 +105,7 @@ body_class: landing nowrap
 	</div>
 </section>
 
-<section id="quickinstall">
-	<div class="flexwrap wrap">
-		<div class="intro">
-			<h1>Installation</h1>
-			<p>DuckDB is seamlessly integrated with major programming languages. It can be installed in less than 20 seconds on most platforms.</p>
-			<a href="/docs/installation/" class="white dark button">More installation options</a>
-		</div>
-		<div class="install">
-			<div class="window">
-				<div class="topbar environment">
-					<ul>
-						<li data-id="cli" class="active">Command line</li>
-						<li data-id="python">Python</li>
-						<li data-id="r">R</li>
-						<li data-id="java">Java</li>
-						<li data-id="nodejs">Node.js</li>
-						<li data-id="odbc">ODBC</li>
-					</ul>
-				</div>
-				<label class="onlymobile">
-					<select name="environment" class="environmentselect onlymobile">
-						<option value="cli">Command Line</option>
-						<option value="python">Python</option>
-						<option value="r">R</option>
-						<option value="java">Java</option>
-						<option value="nodejs">Node.js</option>
-						<option value="odbc">ODBC</option>
-					</select>
-				</label>
-				
-				<div class="result content dark">
-					<pre><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a></pre>
-				</div>
-				
-				<div class="bottombar">
-					<p class="system">
-						<span>Latest release: DuckDB {{ site.currentduckdbversion }} | </span>
-						<span class="systemdetected">System detected: </span>
-					</p>
-				</div>	
-	</div>
-</section>
-
+{% include quick_installation.html %}
 
 <section class="blog">
 	<div class="wrap">
@@ -206,8 +171,8 @@ body_class: landing nowrap
 
 <!-- specific example list for Node.js -->	
 <div data-language="nodejs">
-	<option value="nodejs-sql-query">SQL Query</option>
-	<option value="nodejs-web-service-integration">Web Service Integration</option>
+	<option value="nodejs-sql-query">SQL query</option>
+	<option value="nodejs-web-service-integration">Web service integration</option>
 </div>
 
 </div>
@@ -310,68 +275,5 @@ body_class: landing nowrap
 </div>
 
 </div>
-
-
-
-
-<div class="quick-installation">
-
-<div data-install="python">
-{% highlight console %}
-pip install duckdb=={{ site.currentduckdbversion }}
-{% endhighlight %}
-</div>
-
-<div data-install="r">
-{% highlight r %}
-install.packages("duckdb")
-{% endhighlight %}
-</div>
-
-<div data-install="java">
-{% highlight xml %}
-<dependency>
-    <groupId>org.duckdb</groupId>
-    <artifactId>duckdb_jdbc</artifactId>
-    <version>{{ site.currentduckdbversion }}</version>
-</dependency>
-{% endhighlight %}<br/>
-<a href="https://search.maven.org/artifact/org.duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/jar">More Options</a>
-</div>
-
-<div data-install="nodejs">
-{% highlight console %}
-npm install duckdb
-{% endhighlight %}
-</div>
-
-<div data-install="cli macos">
-{% highlight console %}
-brew install duckdb
-{% endhighlight %}
-</div>
-
-<div data-install="cli linux">
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a>
-</div>
-
-<div data-install="cli win">
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a>
-</div>
-
-<div data-install="odbc macos">
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">duckdb_odbc-osx-universal.zip</a>
-</div>
-
-<div data-install="odbc linux">
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip</a>
-</div>
-
-<div data-install="odbc win">
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a>
-</div>
-
-</div>
-
 	
 </section>

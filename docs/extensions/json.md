@@ -38,7 +38,37 @@ FROM read_json('todos.json',
 COPY (SELECT * FROM todos) TO 'todos.json';
 ```
 
-See more examples on the [JSON data page](../data/json/overview#examples).
+See more examples of loading JSON data on the [JSON data page](../data/json/overview#examples).
+
+```sql
+--- Create a table with a column for storing JSON data
+CREATE TABLE example (j JSON);
+```
+
+```sql
+-- Insert JSON data into the table
+INSERT INTO example VALUES
+    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
+```  
+
+```sql
+-- Retrieve the family key's value
+SELECT j.family FROM example;
+-- "anatidae"
+```
+
+```sql
+-- Extract the family key's value with a JSONPath expression
+SELECT j->'$.family' FROM example;
+-- "anatidae"
+```
+
+```sql
+-- Extract the family key's value with a JSONPath expression as a VARCHAR
+SELECT j->>'$.family' FROM example;
+-- anatidae
+```
+
 
 ## JSON Type
 
@@ -414,7 +444,13 @@ These functions supports the same two location notations as the previous functio
 | `json_extract(`*`json`*`,`*`path`*`)` | `json_extract_path` | `->` | Extract `JSON` from *`json`* at the given *`path`*. If *`path`* is a `LIST`, the result will be a `LIST` of `JSON` |
 | `json_extract_string(`*`json`*`,`*`path`*`)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from *`json`* at the given *`path`*. If *`path`* is a `LIST`, the result will be a `LIST` of `VARCHAR` |
 
-Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
+Note that the equality comparison operator (`=`) has a higher precedence than the `->` JSON extract operator. Therefore, surround the uses of the `->` operator with parentheses when making equality comparisons. For example:
+
+```sql
+SELECT ((JSON '{"field": 42}')->'field') = 42;
+```
+
+> Warning DuckDB's JSON data type uses [0-based indexing](#indexing).
 
 Examples:
 
@@ -654,7 +690,7 @@ SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID 
 
 ## Indexing
 
-Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays](../sql/data_types/array) and [lists](../sql/data_types/list) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
+> Warning Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays](../sql/data_types/array) and [lists](../sql/data_types/list) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
 
 ## GitHub
 

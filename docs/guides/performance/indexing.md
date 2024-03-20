@@ -19,10 +19,10 @@ For an example, let’s repeat the [microbenchmark for timestamps](schema#microb
 
 <div class="narrow_table"></div>
 
-| Column Type | Ordered | Storage Size | Query Time |
+| Column type | Ordered | Storage size | Query time |
 |---|---|---|---|
-| `DATETIME` | yes | 1.3 GB | 0.578 s |
-| `DATETIME` | no | 3.3 GB | 0.904 s |
+| `DATETIME` | yes | 1.3 GB | 0.6 s |
+| `DATETIME` | no | 3.3 GB | 0.9 s |
 
 The results show that simply keeping the column order allows for improved compression, yielding a 2.5x smaller storage size.
 It also allows the computation to be 1.5x faster.
@@ -50,6 +50,7 @@ Regarding query performance, an ART index has the following effects:
 Indexes are serialized to disk and deserialized lazily, i.e., when the database is reopened, operations using the index will only load the required parts of the index. Therefore, having an index will not cause any slowdowns when opening an existing database.
 
 > Bestpractice We recommend following these guidelines:
+>
 > * Only use primary keys, foreign keys, or unique constraints, if these are necessary for enforcing constraints on your data.
 > * Do not define explicit indexes unless you have highly selective queries.
 > * If you define an ART index, do so after bulk loading the data to the table. Adding an index prior to loading, either explicitly or via primary/foreign keys, is [detrimental to load performance](schema#microbenchmark-the-effect-of-primary-keys).
@@ -57,6 +58,6 @@ Indexes are serialized to disk and deserialized lazily, i.e., when the database 
 <!--
 ## Microbenchmark: The Timing of Index Creation
 
-| `CREATE UNIQUE INDEX`    | 123.038s       |
+| `CREATE UNIQUE INDEX`    | 123.0s       |
 The results show that loading the data with a primary key defined adds a significant overhead: in fact, it takes significantly longer than loading the data without a primary key and running `CREATE UNIQUE INDEX` after loading the data.
 -->

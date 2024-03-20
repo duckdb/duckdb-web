@@ -26,3 +26,5 @@ BUILD_PYTHON=1 GEN=ninja make
 cd tools/pythonpkg
 python setup.py install
 ```
+
+For detailed instructions on how to compile DuckDB from source, see the [Building guide](/dev/building).

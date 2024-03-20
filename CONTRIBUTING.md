@@ -61,7 +61,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Do not hard-wrap lines in blocks of text.
 * Format code blocks with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`).
 * To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT HERE \`\`\`.
-* Quoted blocks (lines starting with `>`) are rendered as [a "Note" box](https://duckdb.org/docs/archive/0.8.1/guides/python/filesystems).
+* Quoted blocks (lines starting with `>`) are rendered as [a colored box](https://duckdb.org/docs/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`.
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `).
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
@@ -86,18 +86,14 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * _Do not_ add clauses or expressions purely for aligning lines. For exampe, avoid adding `WHERE 1 = 1` and `WHERE true`.
 * _Do not_ include the DuckDB prompt. For example, avoid the following: `D SELECT 42;`.
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
-* The returned tables should be formatted using the DuckDB CLI's duckbox mode (`.mode duckbox`) and marked with the `text` language tag, e.g.:
-
+* The returned tables should be formatted using the DuckDB CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`).
+* Output printed on the system console (e.g., in Python) and system messages (e.g., errors) should be formatted as code with the `text` language tag. For example:
     ````
     ```text
-    ┌───────┐
-    │   x   │
-    │ int32 │
-    ├───────┤
-    │    42 │
-    └───────┘
+    Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
     ```
-    ````    
+    ````
+* To specify placeholders, use the left angle `⟨` and right angle `⟩` characters instead of the artihmetic comparison characters `<` and `>`. For example: `SELECT * FROM ⟨your_table_name⟩`.
 
 ### Python Style
 

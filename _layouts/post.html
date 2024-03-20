@@ -66,7 +66,7 @@
 		
 			<div class="postwrap">
 				{% if page.layoutpart == "postsoverview" %}
-				<div class="pagehead">
+				<div class="pagehead bg1">
 					<div class="wrap">
 						<h1>Blog</h1>
 					</div>
@@ -77,11 +77,19 @@
 						{% include anchor_headings.html html=content %}
 					{% else %}
 						<div class="singleentry">
+							{% if page.event == true %}<div class="eventdate">{{ page.date | date: "%Y-%m-%d" }}</div>{% endif %}
 							<h1>{{ page.title }}</h1>
+							{% if page.event != true %}
 							<div class="infoline">
-								<div class="icon"></div>
+								<div class="icon">
+									{% assign author = site.data.authors[page.author] %}
+									{% if author %}
+										<img src="{{ author.picture }}" alt="Author Avatar">
+									{% endif %}
+								</div>
 								<div><span class="author">{{ page.author }}</span><span>{{ page.date | date: "%Y-%m-%d" }}</span></div>
 							</div>
+							{% endif %}
 							{% if page.excerpt != "" %}
 								<div class="excerpt">{{ '_TL;DR: ' | append: page.excerpt | append: '_' | markdownify }}</div>
 							{% endif %}
@@ -89,7 +97,7 @@
 						</div>
 						<section class="blog recentposts">
 							<div class="wrap">
-								<h1>Recent Posts</h1>
+								<h1>Recent posts</h1>
 								<div class="newstileswrap">
 									{% for post in site.posts limit:3 %}
 										{% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
@@ -108,7 +116,7 @@
 										</div>
 									{% endfor %}
 								</div>
-								<a href="{{ site.url }}{{ site.baseurl }}/news" class="button transparent arrow-right">All Blog Posts <span></span></a>
+								<a href="{{ site.url }}{{ site.baseurl }}/news" class="button transparent arrow-right">All blog posts <span></span></a>
 							</div>
 						</section>
 					{% endif %}

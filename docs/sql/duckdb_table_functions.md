@@ -181,7 +181,7 @@ The `duckdb_memory()` function provides metadata about DuckDB's buffer manager.
 ## `duckdb_optimizers`
 
 The `duckdb_optimizers()` function provides metadata about the optimization rules (e.g., `expression_rewriter`, `filter_pushdown`) available in the DuckDB instance.
-These can be selectively turned off using [`PRAGMA disabled_optimizers`](pragmas#selectively-disabling-optimizers).
+These can be selectively turned off using [`PRAGMA disabled_optimizers`](../configuration/pragmas#selectively-disabling-optimizers).
 
 <div class="narrow_table"></div>
 
@@ -258,7 +258,7 @@ The `duckdb_settings()` function provides metadata about the settings available 
 | `description` |A description of the setting.| `VARCHAR` |
 | `input_type` |The logical datatype of the setting's value.| `VARCHAR` |
 
-The various settings are described in the [configuration page](configuration).
+The various settings are described in the [configuration page](../configuration/overview).
 
 ## `duckdb_tables`
 

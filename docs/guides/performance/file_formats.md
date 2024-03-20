@@ -24,7 +24,7 @@ When deciding on whether to query these files directly or to first load them to 
 
 **Repeated queries:** If you plan to run multiple queries on the same data set, it is worth loading the data into DuckDB. The queries will always be somewhat faster, which over time amortizes the initial load time.
 
-**High decompression times:** Some Parquet files are compressed using heavyweight compression algorithms such as gzip. In these cases, querying the Parquet files will necessitate an expensive decompression time every time the file is accessed. Meanwhile, lightweight compression methods like snappy, lz4, zstd, are faster to decompress. You may use the [`parquet_metadata` function](../../data/parquet/metadata#parquet-metadata) to find out the compression algorithm used.
+**High decompression times:** Some Parquet files are compressed using heavyweight compression algorithms such as gzip. In these cases, querying the Parquet files will necessitate an expensive decompression time every time the file is accessed. Meanwhile, lightweight compression methods like Snappy, LZ4, and zstd, are faster to decompress. You may use the [`parquet_metadata` function](../../data/parquet/metadata#parquet-metadata) to find out the compression algorithm used.
 
 #### Microbenchmark: Running TPC-H on a DuckDB Database vs. Parquet
 
@@ -42,8 +42,8 @@ We run a simple aggregation query over Parquet files using different row group s
 
 <div class="narrow_table"></div>
 
-| Row Group Size | Execution Time |
-|----------------|----------------|
+| Row group size | Execution time |
+|---------------:|---------------:|
 | 960            | 8.77s          |
 | 1920           | 8.95s          |
 | 3840           | 4.33s          |
@@ -80,7 +80,7 @@ CSV files are often distributed in compressed format such as GZIP archives (`.cs
 <div class="narrow_table"></div>
 
 | Schema | Load Time |
-|---|---|
+|---|--:|
 | Load from GZIP-compressed CSV files (`.csv.gz`) | 107.1s |
 | Decompressing (using parallel `gunzip`) and loading from decompressed CSV files | 121.3s |
 

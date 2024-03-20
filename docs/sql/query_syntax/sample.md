@@ -13,10 +13,14 @@ The `SAMPLE` clause allows you to run the query on a sample from the base table.
 SELECT *
 FROM addresses
 USING SAMPLE 1%;
+```
+```sql
 -- select a sample of 1% of the addresses table using bernoulli sampling
 SELECT *
 FROM addresses
 USING SAMPLE 1% (bernoulli);
+```
+```sql
 -- select a sample of 10 rows from the subquery
 SELECT *
 FROM (SELECT * FROM addresses)

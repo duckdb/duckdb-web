@@ -15,24 +15,88 @@ such as the [ICU extension](../../extensions/icu) that ships with DuckDB.
 In the examples below, the current time zone is presumed to be America/Los_Angeles
 using the Gregorian calendar.
 
-## Built-In Timestamp With Time Zone Functions
+## Built-In Timestamp with Time Zone Functions
 
 The table below shows the available scalar functions for `TIMESTAMPTZ` values.
 Since these functions do not involve binning or display,
 they are always available.
 
-| Function | Description | Example | Result |
-|:--|:--|:---|:--|
-| `current_timestamp` | Current date and time (start of current transaction) | `current_timestamp` | `2022-10-08 12:44:46.122-07` |
-| `get_current_timestamp()` | Current date and time (start of current transaction) | `get_current_timestamp()` | `2022-10-08 12:44:46.122-07` |
-| `greatest(`*`timestamptz`*`, `*`timestamptz`*`)` | The later of two timestamps | `greatest(TIMESTAMPTZ '1992-09-20 20:38:48', TIMESTAMPTZ '1992-03-22 01:02:03.1234')` | `1992-09-20 20:38:48-07` |
-| `isfinite(`*`timestamptz`*`)` | Returns true if the timestamp with time zone is finite, false otherwise | `isfinite(TIMESTAMPTZ '1992-03-07')` | `true` |
-| `isinf(`*`timestamptz`*`)` | Returns true if the timestamp with time zone is infinite, false otherwise | `isinf(TIMESTAMPTZ '-infinity')` | `true` |
-| `least(`*`timestamptz`*`, `*`timestamptz`*`)` | The earlier of two timestamps | `least(TIMESTAMPTZ '1992-09-20 20:38:48', TIMESTAMPTZ '1992-03-22 01:02:03.1234')` | `1992-03-22 01:02:03.1234-08` |
-| `now()` | Current date and time (start of current transaction) | `now()` | `2022-10-08 12:44:46.122-07`|
-| `transaction_timestamp()` | Current date and time (start of current transaction) | `transaction_timestamp()` | `2022-10-08 12:44:46.122-07`|
+| Name | Description |
+|:--|:-------|
+| [`current_timestamp`](#current_timestamp) | Current date and time (start of current transaction). |
+| [`get_current_timestamp()`](#get_current_timestamp) | Current date and time (start of current transaction). |
+| [`greatest(`*`timestamptz`*`, `*`timestamptz`*`)`](#greatesttimestamptz-timestamptz) | The later of two timestamps. |
+| [`isfinite(`*`timestamptz`*`)`](#isfinitetimestamptz) | Returns true if the timestamp with time zone is finite, false otherwise. |
+| [`isinf(`*`timestamptz`*`)`](#isinftimestamptz) | Returns true if the timestamp with time zone is infinite, false otherwise. |
+| [`least(`*`timestamptz`*`, `*`timestamptz`*`)`](#leasttimestamptz-timestamptz) | The earlier of two timestamps. |
+| [`now()`](#now) | Current date and time (start of current transaction). |
+| [`transaction_timestamp()`](#transaction_timestamp) | Current date and time (start of current transaction). |
 
-## Timestamp With Time Zone Strings
+### `current_timestamp`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Current date and time (start of current transaction). |
+| **Example** | `current_timestamp` |
+| **Result** | `2022-10-08 12:44:46.122-07` |
+
+### `get_current_timestamp()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Current date and time (start of current transaction). |
+| **Example** | `get_current_timestamp()` |
+| **Result** | `2022-10-08 12:44:46.122-07` |
+
+### `greatest(`*`timestamptz`*`, `*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The later of two timestamps. |
+| **Example** | `greatest(TIMESTAMPTZ '1992-09-20 20:38:48', TIMESTAMPTZ '1992-03-22 01:02:03.1234')` |
+| **Result** | `1992-09-20 20:38:48-07` |
+
+### `isfinite(`*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns true if the timestamp with time zone is finite, false otherwise. |
+| **Example** | `isfinite(TIMESTAMPTZ '1992-03-07')` |
+| **Result** | `true` |
+
+### `isinf(`*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns true if the timestamp with time zone is infinite, false otherwise. |
+| **Example** | `isinf(TIMESTAMPTZ '-infinity')` |
+| **Result** | `true` |
+
+### `least(`*`timestamptz`*`, `*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The earlier of two timestamps. |
+| **Example** | `least(TIMESTAMPTZ '1992-09-20 20:38:48', TIMESTAMPTZ '1992-03-22 01:02:03.1234')` |
+| **Result** | `1992-03-22 01:02:03.1234-08` |
+
+### `now()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Current date and time (start of current transaction). |
+| **Example** | `now()` |
+| **Result** | `2022-10-08 12:44:46.122-07` |
+
+### `transaction_timestamp()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Current date and time (start of current transaction). |
+| **Example** | `transaction_timestamp()` |
+| **Result** | `2022-10-08 12:44:46.122-07` |
+
+## Timestamp with Time Zone Strings
 
 With no time zone extension loaded, `TIMESTAMPTZ` values will be cast to and from strings
 using offset notation.
@@ -52,7 +116,7 @@ SELECT '2022-10-08 13:13:34 Europe/Amsterdam'::TIMESTAMPTZ::VARCHAR;
 -- 2022-10-08 04:13:34-07 -- the offset will differ based on your local time zone
 ```
 
-## ICU Timestamp With Time Zone Operators
+## ICU Timestamp with Time Zone Operators
 
 The table below shows the available mathematical operators for `TIMESTAMP WITH TIME ZONE` values
 provided by the ICU extension.
@@ -65,37 +129,237 @@ provided by the ICU extension.
 
 Adding to or subtracting from [infinite values](../../sql/data_types/timestamp#special-values) produces the same infinite value.
 
-## ICU Timestamp With Time Zone Functions
+## ICU Timestamp with Time Zone Functions
 
 The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME ZONE` values.
 
-| Function | Description | Example | Result |
-|:---|:---|:---|:---|
-| `age(`*`timestamptz`*`, `*`timestamptz`*`)` | Subtract arguments, resulting in the time difference between the two timestamps | `age(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '1992-09-20')` | `8 years 6 months 20 days` |
-| `age(`*`timestamptz`*`)` | Subtract from current_date | `age(TIMESTAMP '1992-09-20')` | `29 years 1 month 27 days 12:39:00.844` |
-| `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of [partition](../../sql/functions/datepart) boundaries between the timestamps | `date_diff('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` | `2` |
-| `date_part([`*`part`*`, ...], `*`timestamptz`*`)` | Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. | `date_part(['year', 'month', 'day'], TIMESTAMPTZ '1992-09-20 20:38:40-07')` | `{year: 1992, month: 9, day: 20}` |
-| `date_part(`*`part`*`, `*`timestamptz`*`)` | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `date_part('minute', TIMESTAMPTZ '1992-09-20 20:38:40')` | `38` |
-| `date_sub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of complete [partitions](../../sql/functions/datepart) between the timestamps | `date_sub('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` | `1` |
-| `date_trunc(`*`part`*`, `*`timestamptz`*`)` | Truncate to specified [precision](../../sql/functions/datepart) | `date_trunc('hour', TIMESTAMPTZ '1992-09-20 20:38:40')` | `1992-09-20 20:00:00` |
-| `datediff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the timestamps | `datediff('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` | `2` |
-| `datepart([`*`part`*`, ...], `*`timestamptz`*`)` | Alias of date_part. Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. | `datepart(['year', 'month', 'day'], TIMESTAMPTZ '1992-09-20 20:38:40-07')` | `{year: 1992, month: 9, day: 20}` |
-| `datepart(`*`part`*`, `*`timestamptz`*`)` | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `datepart('minute', TIMESTAMPTZ '1992-09-20 20:38:40')` | `38` |
-| `datesub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the timestamps | `datesub('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` | `1` |
-| `datetrunc(`*`part`*`, `*`timestamptz`*`)` | Alias of date_trunc. Truncate to specified [precision](../../sql/functions/datepart) | `datetrunc('hour', TIMESTAMPTZ '1992-09-20 20:38:40')` | `1992-09-20 20:00:00` |
-| `epoch_ms(`*`timestamptz`*`)` | Converts a timestamptz to milliseconds since the epoch | `epoch_ms('2022-11-07 08:43:04.123456+00'::TIMESTAMPTZ);` | `1667810584123` |
-| `epoch_ns(`*`timestamptz`*`)` | Converts a timestamptz to nanoseconds since the epoch | `epoch_ns('2022-11-07 08:43:04.123456+00'::TIMESTAMPTZ);` | `1667810584123456000` |
-| `epoch_us(`*`timestamptz`*`)` | Converts a timestamptz to microseconds since the epoch | `epoch_us('2022-11-07 08:43:04.123456+00'::TIMESTAMPTZ);` | `1667810584123456` |
-| `extract(`*`field`* `from` *`timestamptz`*`)` | Get [subfield](../../sql/functions/datepart) from a timestamp with time zone | `extract('hour' FROM TIMESTAMPTZ '1992-09-20 20:38:48')` | `20` |
-| `last_day(`*`timestamptz`*`)` | The last day of the month. | `last_day(TIMESTAMPTZ '1992-03-22 01:02:03.1234')` | `1992-03-31` |
-| `make_timestamptz(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`, `*`string`*`)` | The timestamp with time zone for the given parts and time zone | `make_timestamptz(1992, 9, 20, 15, 34, 27.123456, 'CET')` | `1992-09-20 06:34:27.123456-07` |
-| `make_timestamptz(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`)` | The timestamp with time zone for the given parts in the current time zone | `make_timestamptz(1992, 9, 20, 13, 34, 27.123456)` | `1992-09-20 13:34:27.123456-07` |
-| `make_timestamptz(`*`microseconds`*`)` | The timestamp with time zone for the given µs since the epoch | `make_timestamptz(1667810584123456)` | `2022-11-07 16:43:04.123456-08` |
-| `strftime(`*`timestamptz`*`, `*`format`*`)` | Converts timestamp with time zone to string according to the [format string](../../sql/functions/dateformat) | `strftime(timestamptz '1992-01-01 20:38:40', '%a, %-d %B %Y - %I:%M:%S %p')` | `Wed, 1 January 1992 - 08:38:40 PM` |
-| `strptime(`*`text`*`, `*`format`*`)` | Converts string to timestamp with time zone according to the [format string](../../sql/functions/dateformat) if `%Z` is specified. | `strptime('Wed, 1 January 1992 - 08:38:40 PST', '%a, %-d %B %Y - %H:%M:%S %Z')` | `1992-01-01 08:38:40-08` |
-| `time_bucket(`*`bucket_width`*`, `*`timestamptz`*`[, `*`offset`*`])` | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. | `time_bucket(INTERVAL '10 minutes', TIMESTAMPTZ '1992-04-20 15:26:00-07', INTERVAL '5 minutes')` | `1992-04-20 15:25:00-07` |
-| `time_bucket(`*`bucket_width`*`, `*`timestamptz`*`[, `*`origin`*`])` | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` timestamptz. `origin` defaults to 2000-01-03 00:00:00+00 for buckets that don't include a month or year interval, and to 2000-01-01 00:00:00+00 for month and year buckets. | `time_bucket(INTERVAL '2 weeks', TIMESTAMPTZ '1992-04-20 15:26:00-07', TIMESTAMPTZ '1992-04-01 00:00:00-07')` | `1992-04-15 00:00:00-07` |
-| `time_bucket(`*`bucket_width`*`, `*`timestamptz`*`[, `*`timezone`*`])` | Truncate `timestamptz` by the specified interval `bucket_width`. Bucket starts and ends are calculated using `timezone`. `timezone` is a varchar and defaults to UTC. | `time_bucket(INTERVAL '2 days', TIMESTAMPTZ '1992-04-20 15:26:00-07', 'Europe/Berlin')` | `1992-04-19 15:00:00-07` |
+| Name | Description |
+|:--|:-------|
+| [`age(`*`timestamptz`*`, `*`timestamptz`*`)`](#agetimestamptz-timestamptz) | Subtract arguments, resulting in the time difference between the two timestamps. |
+| [`age(`*`timestamptz`*`)`](#agetimestamptz) | Subtract from current_date. |
+| [`date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`](#date_diffpart-startdate-enddate) | The number of [partition](../../sql/functions/datepart) boundaries between the timestamps. |
+| [`date_part([`*`part`*`, ...], `*`timestamptz`*`)`](#date_partpart--timestamptz) | Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. |
+| [`date_part(`*`part`*`, `*`timestamptz`*`)`](#date_partpart-timestamptz) | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
+| [`date_sub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`](#date_subpart-startdate-enddate) | The number of complete [partitions](../../sql/functions/datepart) between the timestamps. |
+| [`date_trunc(`*`part`*`, `*`timestamptz`*`)`](#date_truncpart-timestamptz) | Truncate to specified [precision](../../sql/functions/datepart). |
+| [`datediff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`](#datediffpart-startdate-enddate) | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the timestamps. |
+| [`datepart([`*`part`*`, ...], `*`timestamptz`*`)`](#datepartpart--timestamptz) | Alias of date_part. Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. |
+| [`datepart(`*`part`*`, `*`timestamptz`*`)`](#datepartpart-timestamptz) | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
+| [`datesub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`](#datesubpart-startdate-enddate) | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the timestamps. |
+| [`datetrunc(`*`part`*`, `*`timestamptz`*`)`](#datetruncpart-timestamptz) | Alias of date_trunc. Truncate to specified [precision](../../sql/functions/datepart). |
+| [`epoch_ms(`*`timestamptz`*`)`](#epoch_mstimestamptz) | Converts a timestamptz to milliseconds since the epoch. |
+| [`epoch_ns(`*`timestamptz`*`)`](#epoch_nstimestamptz) | Converts a timestamptz to nanoseconds since the epoch. |
+| [`epoch_us(`*`timestamptz`*`)`](#epoch_ustimestamptz) | Converts a timestamptz to microseconds since the epoch. |
+| [`extract(`*`field`* `from` *`timestamptz`*`)`](#extractfieldfromtimestamptz) | Get [subfield](../../sql/functions/datepart) from a `TIMESTAMP WITH TIME ZONE`. |
+| [`last_day(`*`timestamptz`*`)`](#last_daytimestamptz) | The last day of the month. |
+| [`make_timestamptz(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`, `*`string`*`)`](#make_timestamptzbigint-bigint-bigint-bigint-bigint-double-string) | The `TIMESTAMP WITH TIME ZONE` for the given parts and time zone. |
+| [`make_timestamptz(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`)`](#make_timestamptzbigint-bigint-bigint-bigint-bigint-double) | The `TIMESTAMP WITH TIME ZONE` for the given parts in the current time zone. |
+| [`make_timestamptz(`*`microseconds`*`)`](#make_timestamptzmicroseconds) | The `TIMESTAMP WITH TIME ZONE` for the given µs since the epoch. |
+| [`strftime(`*`timestamptz`*`, `*`format`*`)`](#strftimetimestamptz-format) | Converts a `TIMESTAMP WITH TIME ZONE` value to string according to the [format string](../../sql/functions/dateformat). |
+| [`strptime(`*`text`*`, `*`format`*`)`](#strptimetext-format) | Converts string to `TIMESTAMP WITH TIME ZONE` according to the [format string](../../sql/functions/dateformat) if `%Z` is specified. |
+| [`time_bucket(`*`bucket_width`*`, `*`timestamptz`*`[, `*`offset`*`])`](#time_bucketbucket_width-timestamptz-offset) | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
+| [`time_bucket(`*`bucket_width`*`, `*`timestamptz`*`[, `*`origin`*`])`](#time_bucketbucket_width-timestamptz-origin) | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` timestamptz. `origin` defaults to 2000-01-03 00:00:00+00 for buckets that don't include a month or year interval, and to 2000-01-01 00:00:00+00 for month and year buckets. |
+| [`time_bucket(`*`bucket_width`*`, `*`timestamptz`*`[, `*`timezone`*`])`](#time_bucketbucket_width-timestamptz-timezone) | Truncate `timestamptz` by the specified interval `bucket_width`. Bucket starts and ends are calculated using `timezone`. `timezone` is a varchar and defaults to UTC. |
+
+### `age(`*`timestamptz`*`, `*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Subtract arguments, resulting in the time difference between the two timestamps. |
+| **Example** | `age(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '1992-09-20')` |
+| **Result** | `8 years 6 months 20 days` |
+
+### `age(`*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Subtract from current_date. |
+| **Example** | `age(TIMESTAMP '1992-09-20')` |
+| **Result** | `29 years 1 month 27 days 12:39:00.844` |
+
+### `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The number of [partition](../../sql/functions/datepart) boundaries between the timestamps. |
+| **Example** | `date_diff('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` |
+| **Result** | `2` |
+
+### `date_part([`*`part`*`, ...], `*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. |
+| **Example** | `date_part(['year', 'month', 'day'], TIMESTAMPTZ '1992-09-20 20:38:40-07')` |
+| **Result** | `{year: 1992, month: 9, day: 20}` |
+
+### `date_part(`*`part`*`, `*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
+| **Example** | `date_part('minute', TIMESTAMPTZ '1992-09-20 20:38:40')` |
+| **Result** | `38` |
+
+### `date_sub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The number of complete [partitions](../../sql/functions/datepart) between the timestamps. |
+| **Example** | `date_sub('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` |
+| **Result** | `1` |
+
+### `date_trunc(`*`part`*`, `*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Truncate to specified [precision](../../sql/functions/datepart). |
+| **Example** | `date_trunc('hour', TIMESTAMPTZ '1992-09-20 20:38:40')` |
+| **Result** | `1992-09-20 20:00:00` |
+
+### `datediff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the timestamps. |
+| **Example** | `datediff('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` |
+| **Result** | `2` |
+
+### `datepart([`*`part`*`, ...], `*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Alias of date_part. Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. |
+| **Example** | `datepart(['year', 'month', 'day'], TIMESTAMPTZ '1992-09-20 20:38:40-07')` |
+| **Result** | `{year: 1992, month: 9, day: 20}` |
+
+### `datepart(`*`part`*`, `*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
+| **Example** | `datepart('minute', TIMESTAMPTZ '1992-09-20 20:38:40')` |
+| **Result** | `38` |
+
+### `datesub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the timestamps. |
+| **Example** | `datesub('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` |
+| **Result** | `1` |
+
+### `datetrunc(`*`part`*`, `*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Alias of date_trunc. Truncate to specified [precision](../../sql/functions/datepart). |
+| **Example** | `datetrunc('hour', TIMESTAMPTZ '1992-09-20 20:38:40')` |
+| **Result** | `1992-09-20 20:00:00` |
+
+### `epoch_ms(`*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts a timestamptz to milliseconds since the epoch. |
+| **Example** | `epoch_ms('2022-11-07 08:43:04.123456+00'::TIMESTAMPTZ);` |
+| **Result** | `1667810584123` |
+
+### `epoch_ns(`*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts a timestamptz to nanoseconds since the epoch. |
+| **Example** | `epoch_ns('2022-11-07 08:43:04.123456+00'::TIMESTAMPTZ);` |
+| **Result** | `1667810584123456000` |
+
+### `epoch_us(`*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts a timestamptz to microseconds since the epoch. |
+| **Example** | `epoch_us('2022-11-07 08:43:04.123456+00'::TIMESTAMPTZ);` |
+| **Result** | `1667810584123456` |
+
+### `extract(`*`field`* `from` *`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Get [subfield](../../sql/functions/datepart) from a `TIMESTAMP WITH TIME ZONE`. |
+| **Example** | `extract('hour' FROM TIMESTAMPTZ '1992-09-20 20:38:48')` |
+| **Result** | `20` |
+
+### `last_day(`*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The last day of the month. |
+| **Example** | `last_day(TIMESTAMPTZ '1992-03-22 01:02:03.1234')` |
+| **Result** | `1992-03-31` |
+
+### `make_timestamptz(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`, `*`string`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The `TIMESTAMP WITH TIME ZONE` for the given parts and time zone. |
+| **Example** | `make_timestamptz(1992, 9, 20, 15, 34, 27.123456, 'CET')` |
+| **Result** | `1992-09-20 06:34:27.123456-07` |
+
+### `make_timestamptz(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The `TIMESTAMP WITH TIME ZONE` for the given parts in the current time zone. |
+| **Example** | `make_timestamptz(1992, 9, 20, 13, 34, 27.123456)` |
+| **Result** | `1992-09-20 13:34:27.123456-07` |
+
+### `make_timestamptz(`*`microseconds`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The `TIMESTAMP WITH TIME ZONE` for the given µs since the epoch. |
+| **Example** | `make_timestamptz(1667810584123456)` |
+| **Result** | `2022-11-07 16:43:04.123456-08` |
+
+### `strftime(`*`timestamptz`*`, `*`format`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts a `TIMESTAMP WITH TIME ZONE` value to string according to the [format string](../../sql/functions/dateformat). |
+| **Example** | `strftime(timestamptz '1992-01-01 20:38:40', '%a, %-d %B %Y - %I:%M:%S %p')` |
+| **Result** | `Wed, 1 January 1992 - 08:38:40 PM` |
+
+### `strptime(`*`text`*`, `*`format`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts string to `TIMESTAMP WITH TIME ZONE` according to the [format string](../../sql/functions/dateformat) if `%Z` is specified. |
+| **Example** | `strptime('Wed, 1 January 1992 - 08:38:40 PST', '%a, %-d %B %Y - %H:%M:%S %Z')` |
+| **Result** | `1992-01-01 08:38:40-08` |
+
+### `time_bucket(`*`bucket_width`*`, `*`timestamptz`*`[, `*`offset`*`])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
+| **Example** | `time_bucket(INTERVAL '10 minutes', TIMESTAMPTZ '1992-04-20 15:26:00-07', INTERVAL '5 minutes')` |
+| **Result** | `1992-04-20 15:25:00-07` |
+
+### `time_bucket(`*`bucket_width`*`, `*`timestamptz`*`[, `*`origin`*`])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` timestamptz. `origin` defaults to 2000-01-03 00:00:00+00 for buckets that don't include a month or year interval, and to 2000-01-01 00:00:00+00 for month and year buckets. |
+| **Example** | `time_bucket(INTERVAL '2 weeks', TIMESTAMPTZ '1992-04-20 15:26:00-07', TIMESTAMPTZ '1992-04-01 00:00:00-07')` |
+| **Result** | `1992-04-15 00:00:00-07` |
+
+### `time_bucket(`*`bucket_width`*`, `*`timestamptz`*`[, `*`timezone`*`])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Truncate `timestamptz` by the specified interval `bucket_width`. Bucket starts and ends are calculated using `timezone`. `timezone` is a varchar and defaults to UTC. |
+| **Example** | `time_bucket(INTERVAL '2 days', TIMESTAMPTZ '1992-04-20 15:26:00-07', 'Europe/Berlin')` |
+| **Result** | `1992-04-19 15:00:00-07` |
 
 There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart).
 
@@ -103,12 +367,26 @@ There are also dedicated extraction functions to get the [subfields](../../sql/f
 
 The table below shows the available table functions for `TIMESTAMP WITH TIME ZONE` types.
 
-| Function | Description | Example |
-|:--|:---|:---|
-| `generate_series(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)` | Generate a table of timestamps in the closed range (including both the starting timestamp and the ending timestamp), stepping by the interval | `generate_series(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
-| `range(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)` | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp) , stepping by the interval | `range(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
+| Name | Description |
+|:--|:-------|
+| [`generate_series(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)`](#generate_seriestimestamptz-timestamptz-interval) | Generate a table of timestamps in the closed range (including both the starting timestamp and the ending timestamp), stepping by the interval. |
+| [`range(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)`](#rangetimestamptz-timestamptz-interval) | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp) , stepping by the interval. |
 
-Infinite values are not allowed as table function bounds.
+> Infinite values are not allowed as table function bounds.
+
+### `generate_series(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Generate a table of timestamps in the closed range (including both the starting timestamp and the ending timestamp), stepping by the interval. |
+| **Example** | `generate_series(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
+
+### `range(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp) , stepping by the interval. |
+| **Example** | `range(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
 
 ## ICU Timestamp Without Time Zone Functions
 
@@ -119,23 +397,71 @@ A local timestamp is effectively a way of encoding the part values from a time z
 They should be used with caution because the produced values can contain gaps and ambiguities thanks to daylight savings time.
 Often the same functionality can be implemented more reliably using the `struct` variant of the `date_part` function.
 
-| Function | Description | Example | Result |
-|:--|:--|:---|:--|
-| `current_localtime()` | Returns a `TIME` whose GMT bin values correspond to local time in the current time zone. | `current_localtime()` | `08:47:56.497` |
-| `current_localtimestamp()` | Returns a `TIMESTAMP` whose GMT bin values correspond to local date and time in the current time zone. | `current_localtimestamp()` | `2022-12-17 08:47:56.497` |
-| `localtime` | Synonym for the `current_localtime()` function call. | `localtime` | `08:47:56.497` |
-| `localtimestamp` | Synonym for the `current_localtimestamp()` function call. | `localtimestamp` | `2022-12-17 08:47:56.497` |
-| `timezone(`*`text`*`, `*`timestamp`*`)` | Use the [date parts](../../sql/functions/datepart) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a "local" time. | `timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')` | `2001-02-16 19:38:40-08` |
-| `timezone(`*`text`*`, `*`timestamptz`*`)` | Use the [date parts](../../sql/functions/datepart) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a "local" time. | `timezone('America/Denver', TIMESTAMPTZ '2001-02-16 20:38:40-05')` | `2001-02-16 18:38:40` |
+| Name | Description |
+|:--|:-------|
+| [`current_localtime()`](#current_localtime) | Returns a `TIME` whose GMT bin values correspond to local time in the current time zone. |
+| [`current_localtimestamp()`](#current_localtimestamp) | Returns a `TIMESTAMP` whose GMT bin values correspond to local date and time in the current time zone. |
+| [`localtime`](#localtime) | Synonym for the `current_localtime()` function call. |
+| [`localtimestamp`](#localtimestamp) | Synonym for the `current_localtimestamp()` function call. |
+| [`timezone(`*`text`*`, `*`timestamp`*`)`](#timezonetext-timestamp) | Use the [date parts](../../sql/functions/datepart) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a "local" time. |
+| [`timezone(`*`text`*`, `*`timestamptz`*`)`](#timezonetext-timestamptz) | Use the [date parts](../../sql/functions/datepart) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a "local" time. |
 
-### At Time Zone
+### `current_localtime()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `TIME` whose GMT bin values correspond to local time in the current time zone. |
+| **Example** | `current_localtime()` |
+| **Result** | `08:47:56.497` |
+
+### `current_localtimestamp()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `TIMESTAMP` whose GMT bin values correspond to local date and time in the current time zone. |
+| **Example** | `current_localtimestamp()` |
+| **Result** | `2022-12-17 08:47:56.497` |
+
+### `localtime`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Synonym for the `current_localtime()` function call. |
+| **Example** | `localtime` |
+| **Result** | `08:47:56.497` |
+
+### `localtimestamp`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Synonym for the `current_localtimestamp()` function call. |
+| **Example** | `localtimestamp` |
+| **Result** | `2022-12-17 08:47:56.497` |
+
+### `timezone(`*`text`*`, `*`timestamp`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Use the [date parts](../../sql/functions/datepart) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a "local" time. |
+| **Example** | `timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')` |
+| **Result** | `2001-02-16 19:38:40-08` |
+
+### `timezone(`*`text`*`, `*`timestamptz`*`)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Use the [date parts](../../sql/functions/datepart) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a "local" time. |
+| **Example** | `timezone('America/Denver', TIMESTAMPTZ '2001-02-16 20:38:40-05')` |
+| **Result** | `2001-02-16 18:38:40` |
+
+## At Time Zone
 
 The `AT TIME ZONE` syntax is syntactic sugar for the (two argument) `timezone` function listed above:
 
 ```sql
-timestamp '2001-02-16 20:38:40' AT TIME ZONE 'America/Denver';
+TIMESTAMP '2001-02-16 20:38:40' AT TIME ZONE 'America/Denver';
 -- 2001-02-16 19:38:40-08
-timestamp with time zone '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver';
+TIMESTAMP WITH TIME ZONE '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver';
 -- 2001-02-16 18:38:40
 ```
 

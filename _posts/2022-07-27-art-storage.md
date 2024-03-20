@@ -42,11 +42,11 @@ To perform lookups on a Trie, you must match each character of the key to the cu
 
 The main advantage of Tries is that they have O(k) lookups, meaning that in the worst case, the lookup cost will equal the length of the strings.
 
-In reality, Tries can also be used for numeric data types. However, storing them character by character-like strings would be wasteful. Take, for example, the ```UBIGINT``` data type. In reality, ```UBIGINT``` is a ```uint64_t``` which takes 64 bits (i.e., 8 bytes) of space. The maximum value of a ```uint64_t``` is ```18,446,744,073,709,551,615```. Hence if we represented it, like in the example above, we would need 17 levels on the Trie. In practice, Tries are created on a bit fan-out, which tells how many bits are represented per level of the Trie. A ```uint64_t``` Trie with 8-bit fan-out would have a maximum of 8 levels, each representing a byte.
+In reality, Tries can also be used for numeric data types. However, storing them character by character-like strings would be wasteful. Take, for example, the `UBIGINT` data type. In reality, `UBIGINT` is a `uint64_t` which takes 64 bits (i.e., 8 bytes) of space. The maximum value of a `uint64_t` is `18,446,744,073,709,551,615`. Hence if we represented it, like in the example above, we would need 17 levels on the Trie. In practice, Tries are created on a bit fan-out, which tells how many bits are represented per level of the Trie. A `uint64_t` Trie with 8-bit fan-out would have a maximum of 8 levels, each representing a byte.
 
 To have more realistic examples, from this point onwards, all depictions in this post will be with bit representations. In DuckDB, the fan-out is always 8 bits. However, for simplicity, the following examples in this blog post will have a fan-out of 2 bits.
 
-In the example below, we have a Trie that indexes the values 7, 10, and 12. You can also see the binary representation of each value on the table next to them. Each node consists of the bits 0 and 1, with a pointer next to them. This pointer can either be set (represented by ```*```) or null (represented by ```Ø```). Similar to the string Trie we had before, each level of the Trie will represent two bits, with the pointer next to these bits pointing to their children. Finally, the leaves point to the actual data. 
+In the example below, we have a Trie that indexes the values 7, 10, and 12. You can also see the binary representation of each value on the table next to them. Each node consists of the bits 0 and 1, with a pointer next to them. This pointer can either be set (represented by `*`) or null (represented by `Ø`). Similar to the string Trie we had before, each level of the Trie will represent two bits, with the pointer next to these bits pointing to their children. Finally, the leaves point to the actual data. 
 
 <img src="/images/blog/ART/2-bit-trie.png"
      alt="2-bit Trie"
@@ -115,7 +115,7 @@ Below you can see the same nodes as before in a TRIE node of 8 bits. In reality,
      width=500
  />
 
-For the example in the previous section, we could use a ```Node 4``` instead of a ```Node 256``` to store the keys, since we only have 3 keys present. Hence it would look like the following:
+For the example in the previous section, we could use a `Node 4` instead of a `Node 256` to store the keys, since we only have 3 keys present. Hence it would look like the following:
 
 <img src="/images/blog/ART/art-index-example.png"
      alt="Art Index Example"
@@ -137,58 +137,58 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
 
 1. Data Constraints. Primary key, Foreign Keys, and Unique constraints are all maintained by an ART Index. When inserting data in a tuple with a constraint, this will effectively try to perform an insertion in the ART index and fail if the tuple already exists.
 
-```sql 
-CREATE TABLE integers(i INTEGER PRIMARY KEY)
-# Insert unique values into ART
-INSERT INTO integers VALUES (3), (2)
-# Insert conflicting value in ART will fail
-INSERT INTO integers VALUES (3)
+```sql
+CREATE TABLE integers(i INTEGER PRIMARY KEY);
+-- Insert unique values into ART
+INSERT INTO integers VALUES (3), (2);
+-- Insert conflicting value in ART will fail
+INSERT INTO integers VALUES (3);
 
-CREATE TABLE fk_integers(j INTEGER, FOREIGN KEY (j) REFERENCES integers(i))
-# This insert works normally
-INSERT INTO fk_integers VALUES (2), (3)
-# This fails after checking the ART in integers
-INSERT INTO fk_integers VALUES (4)
+CREATE TABLE fk_integers(j INTEGER, FOREIGN KEY (j) REFERENCES integers(i));
+-- This insert works normally
+INSERT INTO fk_integers VALUES (2), (3);
+-- This fails after checking the ART in integers
+INSERT INTO fk_integers VALUES (4);
 ```
 
 2. Range Queries. Highly selective range queries on indexed columns will also use the ART index underneath.
 
 ```sql
-CREATE TABLE integers(i INTEGER PRIMARY KEY)
-# Insert unique values into ART
-INSERT INTO integers VALUES (3), (2), (1), (8) , (10)
-# Range queries (if highly selective) will also use the ART index
-SELECT * FROM integers where i >=8
+CREATE TABLE integers(i INTEGER PRIMARY KEY);
+-- Insert unique values into ART
+INSERT INTO integers VALUES (3), (2), (1), (8) , (10);
+-- Range queries (if highly selective) will also use the ART index
+SELECT * FROM integers WHERE i >= 8;
 ```
 
 
 3. Joins. Joins with a small number of matches will also utilize existing ART indexes.
 
 ```sql
-# Optionally you can always force index joins with the following pragma
+-- Optionally you can always force index joins with the following pragma
 PRAGMA force_index_join;
 
-CREATE TABLE t1(i INTEGER PRIMARY KEY)
-CREATE TABLE t2(i INTEGER PRIMARY KEY)
-# Insert unique values into ART
-INSERT INTO t1 VALUES (3), (2), (1), (8) , (10)
-INSERT INTO t2 VALUES (3), (2), (1), (8) , (10)
-# Joins will also use the ART index
-SELECT * FROM t1 INNER JOIN t2 on (t1.i = t2.i)
+CREATE TABLE t1(i INTEGER PRIMARY KEY);
+CREATE TABLE t2(i INTEGER PRIMARY KEY);
+-- Insert unique values into ART
+INSERT INTO t1 VALUES (3), (2), (1), (8), (10);
+INSERT INTO t2 VALUES (3), (2), (1), (8), (10);
+-- Joins will also use the ART index
+SELECT * FROM t1 INNER JOIN t2 ON (t1.i = t2.i);
 ```
 
 4. Indexes over expressions. ART indexes can also be used to quickly look up expressions.
 
-``` sql 
-CREATE TABLE integers(i INTEGER, j INTEGER)
+```sql
+CREATE TABLE integers(i INTEGER, j INTEGER);
 
-INSERT INTO integers VALUES (1,1), (2,2), (3,3)
+INSERT INTO integers VALUES (1,1), (2,2), (3,3);
 
-# Creates index over i+j expression
-CREATE INDEX i_index ON integers USING ART((i+j))
+-- Creates index over i+j expression
+CREATE INDEX i_index ON integers USING ART((i+j));
 
-# Uses ART index point query
-SELECT i FROM integers  where i+j = 2
+-- Uses ART index point query
+SELECT i FROM integers WHERE i+j = 2;
 ```
 
 ### ART Storage
@@ -208,24 +208,25 @@ The post-order traversal is shown in the figure below. The circles in red repres
      alt="Post Order Traversal Example"
      width=600
  />
- 
- The figure below shows an actual representation of what this would look like in DuckDB's block format. In DuckDB, data is stored in 256kb contiguous blocks, with some blocks reserved for metadata and some for actual data. Each block is represented by an ```id```. To allow for navigation within a block, they are partitioned by byte offsets hence each block contains 256,000 different offsets
+
+The figure below shows an actual representation of what this would look like in DuckDB's block format. In DuckDB, data is stored in 256kb contiguous blocks, with some blocks reserved for metadata and some for actual data. Each block is represented by an `id`. To allow for navigation within a block, they are partitioned by byte offsets hence each block contains 256,000 different offsets
 
 <img src="/images/blog/ART/block-storage.png"
      alt="DuckDB Block Serialization"
      width=800
  />
 
-In this example, we have ```Block 0``` that stored some of our database metadata. In particular, between offsets 100,000 and 100,200 we store information pertinent to one ART index. This will store information on the index (e.g., name, constraints, expression) and the ```<Block,Offset>``` position of its root node.
+In this example, we have `Block 0` that stored some of our database metadata. In particular, between offsets 100,000 and 100,200 we store information pertinent to one ART index. This will store information on the index (e.g., name, constraints, expression) and the `<Block,Offset>` position of its root node.
 
-For example, let's assume we are doing a lookup of the key with ```row_ids``` stored in the Leaf with storage order 1. We would start by loading the Art Root node on ```<Block:2, Offset:220>```, by checking the keys stored in that Node, we would then see we must load the Node 16 at ```<Block:2, Offset:140>```, and then finally our Leaf at ```<Block:0, Offset:0>```. That means that for this lookup, only these 3 nodes were loaded into memory. Subsequent access to these nodes would only require memory access, while access to different nodes (e.g., Leaf storage order 2) would still result in disk access.
+For example, let's assume we are doing a lookup of the key with `row_ids` stored in the Leaf with storage order 1. We would start by loading the Art Root node on `<Block:2, Offset:220>`, by checking the keys stored in that Node, we would then see we must load the Node 16 at `<Block:2, Offset:140>`, and then finally our Leaf at `<Block:0, Offset:0>`. That means that for this lookup, only these 3 nodes were loaded into memory. Subsequent access to these nodes would only require memory access, while access to different nodes (e.g., Leaf storage order 2) would still result in disk access.
 
-One major problem with implementing this (de)serialization process is that now we not only have to keep information about the memory address of pointers but also if they are already in memory and if not, what's the ```<Block,Offset>``` position they are stored.
+One major problem with implementing this (de)serialization process is that now we not only have to keep information about the memory address of pointers but also if they are already in memory and if not, what's the `<Block,Offset>` position they are stored.
 
 If we stored the Block Id and Offset in new variables, it would dramatically increase the ART node sizes, diminishing its effectiveness as a cache-conscious data structure.
 
 Take Node 256 as an example. The cost of holding 256 pointers is 2048 bytes (256 pointers * 8 bytes). Let's say we decide to store the Block Information on a new array like the following: 
-``` cpp
+
+```cpp
 struct BlockPointer { 
 	uint32_t block_id;
 	uint32_t offset;
@@ -259,10 +260,11 @@ In the following figure, you can see a visual representation of DuckDB's Swizzla
 ### Benchmarks
 
 To evaluate the benefits and disadvantages of our current storage implementation, we run a benchmark (Available at this [Colab Link](https://colab.research.google.com/drive/1lidiFNswQfxdmYlsufXUT80IFpyluEF3?usp=sharing)), where we create a table containing 50,000,000 integral elements with a primary key constraint on top of them. 
+
 ```python
 con = duckdb.connect("vault.db") 
-con.execute("CREATE TABLE integers (x integer primary key)")
-con.execute("INSERT INTO integers SELECT * FROM range(50000000);")
+con.execute("CREATE TABLE integers (x INTEGER PRIMARY KEY)")
+con.execute("INSERT INTO integers SELECT * FROM range(50000000)")
 ```
 
 We run this benchmark on two different versions of DuckDB, one where the index is not stored (i.e., v0.4.0), which means it is always in memory and fully reconstructed at a database restart, and another one where the index is stored (i.e., bleeding-edge version), using the lazy-loading technique described previously.
@@ -270,7 +272,8 @@ We run this benchmark on two different versions of DuckDB, one where the index i
 #### Storing Time
 
 We first measure the additional cost of serializing our index.
-```python 
+
+```python
 cur_time = time.time()
 con.close()
 print("Storage time: " + str(time.time() - cur_time))
@@ -283,13 +286,15 @@ Storage Time
 | Reconstruction  | 8.99   |
 | Storage      | 18.97    |
 
-We can see storing the index is 2x more expensive than not storing the index. The reason is that our table consists of one column with 50,000,000 ```int32_t``` values. However, when storing the ART, we also store 50,000,000 ```int64_t``` values for their respective ```row_ids``` in the leaves. This increase in the elements is the main reason for the additional storage cost.
+
+We can see storing the index is 2x more expensive than not storing the index. The reason is that our table consists of one column with 50,000,000 `int32_t` values. However, when storing the ART, we also store 50,000,000 `int64_t` values for their respective `row_ids` in the leaves. This increase in the elements is the main reason for the additional storage cost.
 
 
 #### Load Time
 
 We now measure the loading time of restarting our database.
-``` python
+
+```python
 cur_time = time.time()
 con = duckdb.connect("vault.db") 
 print("Load time: " + str(time.time() - cur_time))
@@ -300,16 +305,16 @@ print("Load time: " + str(time.time() - cur_time))
 | Reconstruction  | 7.75   |
 | Storage      | 0.06    |
 
-Here we can see a two-order magnitude difference in the times of loading the database. This difference is basically due to the complete reconstruction of the ART index during loading. In contrast, in the ```Storage``` version, only the metadata information about the ART index is loaded at this point.
+Here we can see a two-order magnitude difference in the times of loading the database. This difference is basically due to the complete reconstruction of the ART index during loading. In contrast, in the `Storage` version, only the metadata information about the ART index is loaded at this point.
 
 
 #### Query Time (Cold)
 
-We now measure the cold query time (i.e., the Database has just been restarted, which means that in the ```Storage``` version, the index does not exist in memory yet.) of running point queries on our index. We run 5000 point queries, equally spaced on 10000 elements in our distribution. We use this value to always force the point queries to load a large number of unused nodes.
+We now measure the cold query time (i.e., the Database has just been restarted, which means that in the `Storage` version, the index does not exist in memory yet.) of running point queries on our index. We run 5000 point queries, equally spaced on 10000 elements in our distribution. We use this value to always force the point queries to load a large number of unused nodes.
 
 ```python
 times = []
-for i in range (0,50000000, 10000):
+for i in range (0, 50000000, 10000):
   cur_time = time.time()
   con.execute("select x from integers where x = " + str(i))
   times.append(time.time() - cur_time)
@@ -344,10 +349,10 @@ ART index storage has been a long-standing issue in DuckDB, with multiple users 
 3. Bulk Insertion. When performing bulk insertion, a similar problem as bulk-loading would happen. A possible solution would be to create a new ART index with Bulk-Loading and then merge it with the existing Art Index
 4. Vectorized Lookups/Inserts. DuckDB utilized a vectorized execution engine. However, both our ART lookups and inserts still follow a tuple-at-a-time model.
 5. Updatable Index Storage. In our current implementation, ART-Indexes are fully invalidated from disk and stored again. This causes an unnecessary increase in storage time on subsequent storage. Updating nodes directly into disk instead of entirely rewriting the index could drastically decrease future storage costs. In other words, indexes are constantly completely stored at every checkpoint.
-6. Combined Pointer/Row Id Leaves. Our current leaf node format allows for storing values that are repeated over multiple tuples. However, since ART indexes are commonly used to keep unique key constraints (e.g., Primary Keys), and a unique ```row_id``` fits in the same pointer size space, a lot of space can be saved by using the child pointers to point to the actual ```row_id``` instead of creating an actual leaf node that only stores one ```row_id```.
+6. Combined Pointer/Row Id Leaves. Our current leaf node format allows for storing values that are repeated over multiple tuples. However, since ART indexes are commonly used to keep unique key constraints (e.g., Primary Keys), and a unique `row_id` fits in the same pointer size space, a lot of space can be saved by using the child pointers to point to the actual `row_id` instead of creating an actual leaf node that only stores one `row_id`.
 
 ### Road Map
->
+
 > It's tough to make predictions, especially about the future  
 > --  Yogi Berra
 

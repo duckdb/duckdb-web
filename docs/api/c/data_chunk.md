@@ -37,6 +37,7 @@ The primary manner of interfacing with data chunks is by obtaining the internal 
 <span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_set_size"><span class="nf">duckdb_list_vector_set_size</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">size</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_reserve"><span class="nf">duckdb_list_vector_reserve</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">required_capacity</span>);
 <span class="kt">duckdb_vector</span> <a href="#duckdb_struct_vector_get_child"><span class="nf">duckdb_struct_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_vector</span> <a href="#duckdb_array_vector_get_child"><span class="nf">duckdb_array_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
 </code></pre></div></div>
 
 ### Validity Mask Functions
@@ -391,7 +392,7 @@ The null-terminated string
 ### `duckdb_vector_assign_string_element_len`
 
 ---
-Assigns a string element in the vector at the specified location.
+Assigns a string element in the vector at the specified location. You may also use this function to assign BLOBs.
 
 #### Syntax
 
@@ -562,6 +563,35 @@ The vector
 * `index`
 
 The child index
+* `returns`
+
+The child vector
+
+<br>
+
+
+### `duckdb_array_vector_get_child`
+
+---
+Retrieves the child vector of a array vector.
+
+The resulting vector is valid as long as the parent vector is valid.
+The resulting vector has the size of the parent vector multiplied by the array size.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_array_vector_get_child</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `vector`
+
+The vector
 * `returns`
 
 The child vector

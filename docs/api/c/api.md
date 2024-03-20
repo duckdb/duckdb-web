@@ -194,6 +194,7 @@ title: Complete API
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_int64"><span class="nf">duckdb_create_int64</span></a>(<span class="kt">int64_t</span> <span class="nv">val</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_struct_value"><span class="nf">duckdb_create_struct_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_list_value"><span class="nf">duckdb_create_list_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_array_value"><span class="nf">duckdb_create_array_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
 <span class="kt">char</span> *<a href="#duckdb_get_varchar"><span class="nf">duckdb_get_varchar</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">int64_t</span> <a href="#duckdb_get_int64"><span class="nf">duckdb_get_int64</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 </code></pre></div></div>
@@ -203,6 +204,7 @@ title: Complete API
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_logical_type"><span class="nf">duckdb_create_logical_type</span></a>(<span class="nv">duckdb_type</span> <span class="nv">type</span>);
 <span class="kt">char</span> *<a href="#duckdb_logical_type_get_alias"><span class="nf">duckdb_logical_type_get_alias</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_list_type"><span class="nf">duckdb_create_list_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_array_type"><span class="nf">duckdb_create_array_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">array_size</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_map_type"><span class="nf">duckdb_create_map_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">value_type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_union_type"><span class="nf">duckdb_create_union_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_struct_type"><span class="nf">duckdb_create_struct_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
@@ -216,6 +218,8 @@ title: Complete API
 <span class="kt">uint32_t</span> <a href="#duckdb_enum_dictionary_size"><span class="nf">duckdb_enum_dictionary_size</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">char</span> *<a href="#duckdb_enum_dictionary_value"><span class="nf">duckdb_enum_dictionary_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_list_type_child_type"><span class="nf">duckdb_list_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_array_type_child_type"><span class="nf">duckdb_array_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_array_type_array_size"><span class="nf">duckdb_array_type_array_size</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_map_type_key_type"><span class="nf">duckdb_map_type_key_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_map_type_value_type"><span class="nf">duckdb_map_type_value_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_struct_type_child_count"><span class="nf">duckdb_struct_type_child_count</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
@@ -251,6 +255,7 @@ title: Complete API
 <span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_set_size"><span class="nf">duckdb_list_vector_set_size</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">size</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_reserve"><span class="nf">duckdb_list_vector_reserve</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">required_capacity</span>);
 <span class="kt">duckdb_vector</span> <a href="#duckdb_struct_vector_get_child"><span class="nf">duckdb_struct_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_vector</span> <a href="#duckdb_array_vector_get_child"><span class="nf">duckdb_array_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
 </code></pre></div></div>
 
 ### `Validity Mask Functions`
@@ -3618,6 +3623,40 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 <br>
 
 
+### `duckdb_create_array_value`
+
+---
+Creates a array value from a type and an array of values of length `value_count`
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_array_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> *<span class="nv">values</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">value_count
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `type`
+
+The type of the array
+* `values`
+
+The values for the array
+* `value_count`
+
+The number of values in the array
+* `returns`
+
+The value. This must be destroyed with `duckdb_destroy_value`.
+
+<br>
+
+
 ### `duckdb_get_varchar`
 
 ---
@@ -3747,6 +3786,37 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 * `type`
 
 The child type of list type to create.
+* `returns`
+
+The logical type.
+
+<br>
+
+
+### `duckdb_create_array_type`
+
+---
+Creates a array type from its child type.
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_array_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">array_size
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `type`
+
+The child type of array type to create.
+* `array_size`
+
+The number of elements in the array.
 * `returns`
 
 The logical type.
@@ -4126,6 +4196,60 @@ The logical type object
 * `returns`
 
 The child type of the list type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+
+### `duckdb_array_type_child_type`
+
+---
+Retrieves the child type of the given array type.
+
+The result must be freed with `duckdb_destroy_logical_type`.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_array_type_child_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The child type of the array type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+
+### `duckdb_array_type_array_size`
+
+---
+Retrieves the array size of the given array type.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_array_type_array_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The fixed number of elements the values of this array type can store.
 
 <br>
 
@@ -4733,7 +4857,7 @@ The null-terminated string
 ### `duckdb_vector_assign_string_element_len`
 
 ---
-Assigns a string element in the vector at the specified location.
+Assigns a string element in the vector at the specified location. You may also use this function to assign BLOBs.
 
 #### Syntax
 
@@ -4904,6 +5028,35 @@ The vector
 * `index`
 
 The child index
+* `returns`
+
+The child vector
+
+<br>
+
+
+### `duckdb_array_vector_get_child`
+
+---
+Retrieves the child vector of a array vector.
+
+The resulting vector is valid as long as the parent vector is valid.
+The resulting vector has the size of the parent vector multiplied by the array size.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_array_vector_get_child</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `vector`
+
+The vector
 * `returns`
 
 The child vector

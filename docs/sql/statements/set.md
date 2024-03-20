@@ -49,4 +49,4 @@ When not specified, the default scope for the configuration option is used. For 
 
 ## Configuration
 
-See the [Configuration](../configuration) page for the full list of configuration options.
+See the [Configuration](../../configuration/overview) page for the full list of configuration options.

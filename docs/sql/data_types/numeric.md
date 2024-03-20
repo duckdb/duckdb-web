@@ -39,7 +39,7 @@ Internally, decimals are represented as integers depending on their specified wi
 | 10-18 | `INT64` | 8 |
 | 19-38 | `INT128` | 16 |
 
-Performance can be impacted by using too large decimals when not required. In particular decimal values with a width above 19 are very slow, as arithmetic involving the `INT128` type is much more expensive than operations involving the `INT32` or `INT64` types. It is therefore recommended to stick with a width of `18` or below, unless there is a good reason for why this is insufficient.
+Performance can be impacted by using too large decimals when not required. In particular decimal values with a width above 19 are slow, as arithmetic involving the `INT128` type is much more expensive than operations involving the `INT32` or `INT64` types. It is therefore recommended to stick with a width of `18` or below, unless there is a good reason for why this is insufficient.
 
 ## Floating-Point Types
 
@@ -67,6 +67,13 @@ In addition to ordinary numeric values, the floating-point types have several sp
 * `NaN`
 
 These represent the IEEE 754 special values "infinity", "negative infinity", and "not-a-number", respectively. (On a machine whose floating-point arithmetic does not follow IEEE 754, these values will probably not work as expected.) When writing these values as constants in an SQL command, you must put quotes around them, for example: `UPDATE table SET x = '-Infinity'`. On input, these strings are recognized in a case-insensitive manner.
+
+## Universally Unique Identifiers (`UUID`s)
+
+DuckDB supports universally unique identifiers (UUIDs) through the `UUID` type. These use 128 bits and are represented internally as `HUGEINT` values.
+When printed, they are shown with hexadecimal characters, separated by dashes as follows: `⟨8 characters⟩-⟨4 characters⟩-⟨4 characters⟩-⟨4 characters⟩-⟨12 characters⟩` (using 36 characters in total). For example, `4ac7a9e9-607c-4c8a-84f3-843f0191e3fd` is a valid UUID.
+
+To generate a new UUID, use the [`uuid()` utility function](../functions/utility#utility-functions).
 
 ## Functions
 

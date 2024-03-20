@@ -14,31 +14,33 @@ Both can utilize a [`COLUMNS` expression](../expressions/star#columns) to automa
 
 > The [`PIVOT` statement](pivot) is the inverse of the `UNPIVOT` statement.
 
-## Simplified UNPIVOT Syntax
+## Simplified `UNPIVOT` Syntax
 
 The full syntax diagram is below, but the simplified `UNPIVOT` syntax can be summarized using spreadsheet pivot table naming conventions as:
 
 ```sql
-UNPIVOT [dataset]
-ON [column(s)]
+UNPIVOT ⟨dataset⟩
+ON ⟨column(s)⟩
 INTO 
-    NAME [name-column-name]
-    VALUE [value-column-name(s)]
-ORDER BY [column(s)-with-order-direction(s)]
-LIMIT [number-of-rows];
+    NAME ⟨name-column-name⟩
+    VALUE ⟨value-column-name(s)⟩
+ORDER BY ⟨column(s)-with-order-direction(s)⟩
+LIMIT ⟨number-of-rows⟩;
 ```
-
 
 ### Example Data
 
 All examples use the dataset produced by the queries below:
+
 ```sql
-CREATE OR REPLACE TABLE monthly_sales(empid INT, dept TEXT, Jan INT, Feb INT, Mar INT, Apr INT, May INT, Jun INT);
+CREATE OR REPLACE TABLE monthly_sales
+    (empid INT, dept TEXT, Jan INT, Feb INT, Mar INT, Apr INT, May INT, Jun INT);
 INSERT INTO monthly_sales VALUES
     (1, 'electronics', 1, 2, 3, 4, 5, 6),
     (2, 'clothes', 10, 20, 30, 40, 50, 60),
     (3, 'cars', 100, 200, 300, 400, 500, 600);
 ```
+
 ```sql
 FROM monthly_sales;
 ```
@@ -56,7 +58,7 @@ FROM monthly_sales;
     Then show the columns-expr version. 
     Can also show the quarterly example. -->
 
-### UNPIVOT Manually
+### `UNPIVOT` Manually
 
 The most typical `UNPIVOT` transformation is to take already pivoted data and re-stack it into a column each for the name and value.
 In this case, all months will be stacked into a `month` column and a `sales` column.
@@ -92,8 +94,7 @@ INTO
 | 3     | cars        | May   | 500   |
 | 3     | cars        | Jun   | 600   |
 
-
-### UNPIVOT Dynamically Using Columns Expression
+### `UNPIVOT` Dynamically Using Columns Expression
 
 In many cases, the number of columns to unpivot is not easy to predetermine ahead of time.
 In the case of this dataset, the query above would have to change each time a new month is added.
@@ -133,7 +134,7 @@ INTO
 | 3     | cars        | Jun   | 600   |
 
 
-### UNPIVOT into Multiple Value Columns
+### `UNPIVOT` into Multiple Value Columns
 
 The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported. 
 This can be useful when the goal is to reduce the extent to which a dataset is pivoted, but not completely stack all pivoted columns.
@@ -163,14 +164,13 @@ UNPIVOT monthly_sales
 | 3     | cars        | q1      | 100           | 200           | 300           |
 | 3     | cars        | q2      | 400           | 500           | 600           |
 
-
-
 ### Using `UNPIVOT` within a `SELECT` Statement
 
 The `UNPIVOT` statement may be included within a `SELECT` statement as a CTE ([a Common Table Expression, or WITH clause](../query_syntax/with)), or a subquery.
 This allows for an `UNPIVOT` to be used alongside other SQL logic, as well as for multiple `UNPIVOT`s to be used in one query.
 
 No `SELECT` is needed within the CTE, the `UNPIVOT` keyword can be thought of as taking its place.
+
 ```sql
 WITH unpivot_alias AS (
     UNPIVOT monthly_sales
@@ -186,8 +186,7 @@ An `UNPIVOT` may be used in a subquery and must be wrapped in parentheses.
 Note that this behavior is different than the SQL Standard Unpivot, as illustrated in subsequent examples.
 
 ```sql
-SELECT 
-    * 
+SELECT * 
 FROM (
     UNPIVOT monthly_sales
     ON COLUMNS(* EXCLUDE (empid, dept))
@@ -197,6 +196,23 @@ FROM (
 ) unpivot_alias;
 ```
 
+### Expressions within `UNPIVOT` Statements
+
+DuckDB allows expressions within the `UNPIVOT` statements, provided that they only involve a single column. These can be used to perform computations as well as [explicit casts](../data_types/typecasting#explicit-casting). For example:
+
+```sql
+UNPIVOT
+    (SELECT 42 as col1, 'woot' as col2)
+    ON
+        (col1 * 2)::VARCHAR,
+        col2;
+```
+
+| name | value |
+|------|-------|
+| col1 | 84    |
+| col2 | woot  |
+
 ### Internals
 
 Unpivoting is implemented entirely as rewrites into SQL queries.
@@ -204,6 +220,7 @@ Each `UNPIVOT` is implemented as set of `unnest` functions, operating on a list 
 If dynamically unpivoting, the `COLUMNS` expression is evaluated first to calculate the column list.
 
 For example:
+
 ```sql
 UNPIVOT monthly_sales
 ON jan, feb, mar, apr, may, jun
@@ -213,6 +230,7 @@ INTO
 ```
 
 is translated into:
+
 ```sql
 SELECT 
     empid,
@@ -248,15 +266,11 @@ This produces the same result as the initial example:
 | 3     | cars        | may   | 500   |
 | 3     | cars        | jun   | 600   |
 
-
-
-
-### Simplified Unpivot Full Syntax Diagram
+### Simplified `UNPIVOT` Full Syntax Diagram
 
 Below is the full syntax diagram of the `UNPIVOT` statement.
 
 <div id="rrdiagram"></div>
-
 
 ## SQL Standard `UNPIVOT` Syntax
 
@@ -306,7 +320,7 @@ FROM monthly_sales UNPIVOT (
 | 3     | cars        | May   | 500   |
 | 3     | cars        | Jun   | 600   |
 
-### SQL Standard Unpivot Dynamically Using the `COLUMNS` Expression
+### SQL Standard `UNPIVOT` Dynamically Using the `COLUMNS` Expression
 
 The [`COLUMNS` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically. 
 This will continue to work even if additional `month` columns are added to the dataset.

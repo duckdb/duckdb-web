@@ -15,6 +15,3 @@ python3 ./scripts/generate_docs.py $DUCKDB
 python3 ./scripts/generate_python_docs.py
 node ./scripts/generate_nodejs_docs.js $DUCKDB/../duckdb-node
 python3 ./scripts/generate_function_json.py --source $DUCKDB --binary $DUCKDB/build/release/duckdb
-
-# generate search index last, once all the docs are generated
-python3 ./scripts/generate_search.py

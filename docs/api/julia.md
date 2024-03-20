@@ -17,8 +17,7 @@ using Pkg
 Pkg.add("DuckDB")
 ```
 
-Alternatively:
-
+Alternatively, enter the package manager using the `]` key, and issue the following command:
 
 ```julia
 pkg> add DuckDB

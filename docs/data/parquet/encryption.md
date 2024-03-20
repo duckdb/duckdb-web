@@ -47,19 +47,19 @@ DuckDB's Parquet encryption currently has the following limitations.
 
 2. DuckDB encrypts the footer and all columns using the `footer_key`. The Parquet specification allows encryption of individual columns with different keys, e.g.:
 
-    ```sql
-    COPY tbl TO 'tbl.parquet'
-        (ENCRYPTION_CONFIG {
-            footer_key: 'key256',
-            column_keys: {key256: ['col0', 'col1']}
-        });
-    ```
+   ```sql
+   COPY tbl TO 'tbl.parquet'
+       (ENCRYPTION_CONFIG {
+           footer_key: 'key256',
+           column_keys: {key256: ['col0', 'col1']}
+       });
+   ```
 
-    However, this is unsupported at the moment and will cause an error to be thrown (for now):
+   However, this is unsupported at the moment and will cause an error to be thrown (for now):
 
-    ```text
-    Not implemented Error: Parquet encryption_config column_keys not yet implemented
-    ```
+   ```text
+   Not implemented Error: Parquet encryption_config column_keys not yet implemented
+   ```
 
 ## Performance Implications
 

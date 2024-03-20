@@ -54,8 +54,9 @@
 			</div>
 		</div>
 	</header>
-
-	<main>
+	
+	{% assign file_extension = page.path | split: "." | last %}
+	<main class="f-{{file_extension}}">
 		
 		{% include searchoverlay.html %}
 
@@ -64,6 +65,15 @@
 			{% include anchor_headings.html html=content %}
 
 		{% else %}
+		
+		{% if page.pagehead[0] %}
+		<div class="pagehead {{page.pagehead[1]}}">
+			<div class="wrap">
+				<h1>{{page.pagehead[0]}}</h1>
+			</div>
+		</div>
+		{% endif %}
+		
 			<div class="wrap">
 				<div id="main_content_wrap">
 					{% include anchor_headings.html html=content %}

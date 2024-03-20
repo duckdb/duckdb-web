@@ -21,7 +21,8 @@ For the behavior of the `autocomplete` extension, see the [documentation of the 
 ## Example
 
 ```sql
-SELECT * FROM sql_auto_complete('SEL');
+SELECT *
+FROM sql_auto_complete('SEL');
 ```
 
 Returns:

@@ -35,50 +35,31 @@ Strings in DuckDB are surrounded by single quote (apostrophe) characters (`'`):
 ```sql
 SELECT 'Hello world' AS msg;
 ```
-```text
-┌─────────────┐
-│     msg     │
-│   varchar   │
-├─────────────┤
-│ Hello world │
-└─────────────┘
-```
+
+|     msg     |
+|-------------|
+| Hello world |
 
 To include a single quote character in a string, use `''`:
 
 ```sql
 SELECT 'Hello ''world''' AS msg;
 ```
-```text
-┌───────────────┐
-│      msg      │
-│    varchar    │
-├───────────────┤
-│ Hello 'world' │
-└───────────────┘
-```
+
+|      msg      |
+|---------------|
+| Hello 'world' |
 
 ## Strings with Special Characters
 
-To include special characters such as newline, use `E` escape the string. Both the uppercase (`E'...'`) and lowercase variants (`e'...'`) work.
-
-```sql
-SELECT E'Hello\nworld' AS msg;
-```
-```text
-┌──────────────┐
-│     msg      │
-│   varchar    │
-├──────────────┤
-│ Hello\nworld │
-└──────────────┘
-```
-
-Alternatively, you can use concatenation and the [`chr` character function](../../sql/functions/char):
+To use special characters in string, use [escape string literals](literal_types#escape-string-literals) or [dollar-quoted string literals](literal_types#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function](../../sql/functions/char):
 
 ```sql
 SELECT 'Hello' || chr(10) || 'world' AS msg;
 ```
+
+<!-- This output intentionally uses the duckbox formatter -->
+
 ```text
 ┌──────────────┐
 │     msg      │

@@ -15,6 +15,7 @@ This example workflow is also available as a [Google Colab notebook](https://col
 ## Library Installation
 
 Four additional libraries improve the DuckDB experience in Jupyter notebooks.
+
 1. [jupysql](https://github.com/ploomber/jupysql)
     * Convert a Jupyter code cell into a SQL cell
 2. [Pandas](https://github.com/pandas-dev/pandas)
@@ -24,7 +25,7 @@ Four additional libraries improve the DuckDB experience in Jupyter notebooks.
 4. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
     * Used by SQLAlchemy to connect to DuckDB (optional)
 
-```python
+```bash
 # Run these pip install commands from the command line if Jupyter Notebook is not yet installed.
 # Otherwise, see Google Collab link above for an in-notebook example
 pip install duckdb
@@ -71,6 +72,7 @@ import pandas as pd
 ```
 
 Set configurations on jupysql to directly output data to Pandas and to simplify the output that is printed to the notebook.
+
 ```python
 %config SqlMagic.autopandas = True
 %config SqlMagic.feedback = False
@@ -78,23 +80,32 @@ Set configurations on jupysql to directly output data to Pandas and to simplify 
 ```
 
 Connect jupysql to DuckDB using a SQLAlchemy-style connection string.
-Either connect to a new in-memory DuckDB, the default connection or a file backed db.
+Either connect to a new [in-memory DuckDB](../../api/python/dbapi#in-memory-connection), the [default connection](../../api/python/dbapi#default-connection) or a file backed database:
+
+```python
+%sql duckdb:///:memory:
+```
 
 ```python
 %sql duckdb:///:default:
-# %sql duckdb:///:memory:
-# %sql duckdb:///path/to/file.db
+```
+
+```python
+%sql duckdb:///path/to/file.db
 ```
 
 > The `%sql` command and `duckdb.sql` share the same [default connection](../../api/python/dbapi) if you provide `duckdb:///:default:` as the SQLAlchemy connection string.
 
 ## Querying DuckDB
 
-Single line SQL queries can be run using `%sql` at the start of a line. Query results will be displayed as a Pandas DF.
+Single line SQL queries can be run using `%sql` at the start of a line. Query results will be displayed as a Pandas DataFrame.
+
 ```sql
-%sql SELECT 'Off and flying!' AS a_duckdb_column
+%sql SELECT 'Off and flying!' AS a_duckdb_column;
 ```
-An entire Jupyter cell can be used as a SQL cell by placing `%%sql` at the start of the cell. Query results will be displayed as a Pandas DF.
+
+An entire Jupyter cell can be used as a SQL cell by placing `%%sql` at the start of the cell. Query results will be displayed as a Pandas DataFrame.
+
 ```sql
 %%sql
 SELECT
@@ -102,26 +113,31 @@ SELECT
     function_name
 FROM duckdb_functions()
 ORDER BY ALL DESC
-LIMIT 5
+LIMIT 5;
 ```
 
 To store the query results in a Python variable, use `<<` as an assignment operator.
 This can be used with both the `%sql` and `%%sql` Jupyter magics.
+
 ```sql
-%sql res << SELECT 'Off and flying!' AS a_duckdb_column
+%sql res << SELECT 'Off and flying!' AS a_duckdb_column;
 ```
+
 If the `%config SqlMagic.autopandas = True` option is set, the variable is a Pandas dataframe, otherwise, it is a `ResultSet` that can be converted to Pandas with the `DataFrame()` function.
 
 ## Querying Pandas Dataframes
 
 DuckDB is able to find and query any dataframe stored as a variable in the Jupyter notebook.
+
 ```python
 input_df = pd.DataFrame.from_dict({"i": [1, 2, 3],
                                    "j": ["one", "two", "three"]})
 ```
+
 The dataframe being queried can be specified just like any other table in the `FROM` clause.
+
 ```sql
-%sql output_df << SELECT sum(i) AS total_i FROM input_df
+%sql output_df << SELECT sum(i) AS total_i FROM input_df;
 ```
 
 ## Visualizing DuckDB Data

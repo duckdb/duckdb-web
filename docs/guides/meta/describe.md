@@ -28,6 +28,8 @@ In order to view the schema of the result of a query, prepend `DESCRIBE` to a qu
 DESCRIBE SELECT * FROM tbl;
 ```
 
+<div class="narrow_table"></div>
+
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|
 | i           | INTEGER     | YES  | NULL | NULL    | NULL  |
@@ -51,16 +53,23 @@ It is possible to describe remote tables via the [`httpfs` extension](../../exte
 DESCRIBE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
 ```
 
-```text
-┌─────────────────────────────────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
-│               column_name               │ column_type │  null   │   key   │ default │  extra  │
-│                 varchar                 │   varchar   │ varchar │ varchar │ varchar │ varchar │
-├─────────────────────────────────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
-│ season_num                              │ BIGINT      │ YES     │         │         │         │
-│ episode_num                             │ BIGINT      │ YES     │         │         │         │
-│ aired_date                              │ DATE        │ YES     │         │         │         │
-│ ...                                     │ ...         │ ...     │         │         │         │
-├─────────────────────────────────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┤
-│ 18 rows                                                                             6 columns │
-└───────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+|               column_name               | column_type | null | key  | default | extra |
+|-----------------------------------------|-------------|------|------|---------|-------|
+| season_num                              | BIGINT      | YES  | NULL | NULL    | NULL  |
+| episode_num                             | BIGINT      | YES  | NULL | NULL    | NULL  |
+| aired_date                              | DATE        | YES  | NULL | NULL    | NULL  |
+| cnt_kirk_hookups                        | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_downed_redshirts                    | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_aliens_almost_took_over_planet     | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_aliens_almost_took_over_enterprise | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_vulcan_nerve_pinch                  | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_warp_speed_orders                   | BIGINT      | YES  | NULL | NULL    | NULL  |
+| highest_warp_speed_issued               | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_hand_phasers_fired                 | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_ship_phasers_fired                 | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_ship_photon_torpedos_fired         | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_transporter_pax                     | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_damn_it_jim_quote                   | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_im_givin_her_all_shes_got_quote     | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_highly_illogical_quote              | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_enterprise_saved_the_day           | BIGINT      | YES  | NULL | NULL    | NULL  |

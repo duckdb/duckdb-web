@@ -53,25 +53,33 @@ Collations can also be specified per-column when creating a table. When that col
 ```sql
 CREATE TABLE names (name VARCHAR COLLATE NOACCENT);
 INSERT INTO names VALUES ('hännes');
-SELECT name FROM names WHERE name = 'hannes';
+SELECT name
+FROM names
+WHERE name = 'hannes';
 -- hännes
 ```
 
 Be careful here, however, as different collations cannot be combined. This can be problematic when you want to compare columns that have a different collation specified.
 
 ```sql
-SELECT name FROM names WHERE name = 'hannes' COLLATE NOCASE;
+SELECT name
+FROM names
+WHERE name = 'hannes' COLLATE NOCASE;
 -- ERROR: Cannot combine types with different collation!
 
 CREATE TABLE other_names (name VARCHAR COLLATE NOCASE);
 INSERT INTO other_names VALUES ('HÄNNES');
 
-SELECT * FROM names, other_names WHERE names.name = other_names.name;
+SELECT *
+FROM names, other_names
+WHERE names.name = other_names.name;
 -- ERROR: Cannot combine types with different collation!
 
 -- need to manually overwrite the collation!
 
-SELECT * FROM names, other_names WHERE names.name COLLATE NOACCENT.NOCASE = other_names.name COLLATE NOACCENT.NOCASE;
+SELECT *
+FROM names, other_names
+WHERE names.name COLLATE NOACCENT.NOCASE = other_names.name COLLATE NOACCENT.NOCASE;
 -- hännes|HÄNNES
 ```
 

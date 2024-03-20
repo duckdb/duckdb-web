@@ -3,7 +3,7 @@ layout: docu
 title: Python Function API
 ---
 
-You can create a DuckDB user-defined function (UDF) out of a Python function so it can be used in SQL queries.
+You can create a DuckDB user-defined function (UDF) from a Python function so it can be used in SQL queries.
 Similarly to regular [functions](../../sql/functions/overview), they need to have a name, a return type and parameter types.
 
 Here is an example using a Python function that calls a third-party library.
@@ -13,11 +13,11 @@ import duckdb
 from duckdb.typing import *
 from faker import Faker
 
-def random_name():
+def generate_random_name():
     fake = Faker()
     return fake.name()
 
-duckdb.create_function("random_name", random_name, [], VARCHAR)
+duckdb.create_function("random_name", generate_random_name, [], VARCHAR)
 res = duckdb.sql("SELECT random_name()").fetchall()
 print(res)
 # [('Gerald Ashley',)]
@@ -25,23 +25,23 @@ print(res)
 
 ## Creating Functions
 
-To register a Python UDF, simply use the `create_function` method from a DuckDB connection. Here is the syntax:
+To register a Python UDF, use the `create_function` method from a DuckDB connection. Here is the syntax:
 
 ```python
 import duckdb
 con = duckdb.connect()
-con.create_function(name, function, argument_type_list, return_type, type, null_handling)
+con.create_function(name, function, parameters, return_type)
 ```
 
-The `create_function` method requires the following parameters:
+The `create_function` method takes the following parameters:
 
 1. **name**: A string representing the unique name of the UDF within the connection catalog.
 2. **function**: The Python function you wish to register as a UDF.
-3. **return_type**: Scalar functions return one element per row. This parameter specifies the return type of the function.
 3. **parameters**: Scalar functions can operate on one or more columns. This parameter takes a list of column types used as input.
+4. **return_type**: Scalar functions return one element per row. This parameter specifies the return type of the function.
 5. **type** (Optional): DuckDB supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type = 'arrow'` to use PyArrow Tables.
 6. **null_handling** (Optional): By default, null values are automatically handled as Null-In Null-Out. Users can specify a desired behavior for null values by setting `null_handling = 'special'`.
-7. **exception_handling** (Optional): By default, when an exception is thrown from the Python function, it will be re-thrown in Python. Users can disable this behavior, and instead return `null`, by set this parameter to `'return_null'`
+7. **exception_handling** (Optional): By default, when an exception is thrown from the Python function, it will be re-thrown in Python. Users can disable this behavior, and instead return `null`, by setting this parameter to `'return_null'`
 8. **side_effects** (Optional): By default, functions are expected to produce the same result for the same input. If the result of a function is impacted by any type of randomness, `side_effects` must be set to `True`.
 
 To unregister a UDF, you can call the `remove_function` method with the UDF name:
@@ -65,6 +65,7 @@ def my_function(x: int) -> str:
 duckdb.create_function("my_func", my_function)
 duckdb.sql("SELECT my_func(42)")
 ```
+
 ```text
 ┌─────────────┐
 │ my_func(42) │
@@ -74,7 +75,7 @@ duckdb.sql("SELECT my_func(42)")
 └─────────────┘
 ```
 
-If only the parameter list types can be inferred, you'll need to pass in `None` as `argument_type_list`.
+If only the parameter list types can be inferred, you'll need to pass in `None` as `parameters`.
 
 ## Null Handling
 
@@ -163,7 +164,7 @@ print(res)
 
 ## Python Function Types
 
-Currently two function types are supported, `native` (default) and `arrow`.
+Currently, two function types are supported, `native` (default) and `arrow`.
 
 ### Arrow
 

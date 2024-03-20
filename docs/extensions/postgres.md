@@ -28,11 +28,16 @@ LOAD postgres;
 To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command:
 
 ```sql
--- connect to the "public" schema of the postgres instance running on localhost
+-- connect to the "public" schema of the postgres instance running on localhost in read-write mode
 ATTACH '' AS postgres_db (TYPE postgres);
--- connect to the Postgres instance with the given parameters
-ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres);
 ```
+
+```sql
+-- connect to the Postgres instance with the given parameters in read-only mode
+ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres, READ_ONLY);
+```
+
+### Configuration
 
 The `ATTACH` command takes as input either a [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
 or a [PostgreSQL URI](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS).
@@ -60,13 +65,17 @@ Postgres connection information can also be specified with [environment variable
 This can be useful in a production environment where the connection information is managed externally
 and passed in to the environment.
 
+### Configuring via Environment Variables
+
 ```bash
 export PGPASSWORD="secret"
 export PGHOST=localhost
 export PGUSER=owner
 export PGDATABASE=mydatabase
-duckdb
 ```
+
+Then, to connect, start the `duckdb` process and run:
+
 ```sql
 ATTACH '' AS p (TYPE postgres);
 ```
@@ -78,6 +87,7 @@ The tables in the PostgreSQL database can be read as if they were normal DuckDB 
 ```sql
 SHOW TABLES;
 ```
+
 ```text
 ┌───────────────────────────────────────┐
 │                 name                  │
@@ -90,6 +100,7 @@ SHOW TABLES;
 ```sql
 SELECT * FROM uuids;
 ```
+
 ```text
 ┌──────────────────────────────────────┐
 │                  u                   │
@@ -110,7 +121,6 @@ Data can be copied over from Postgres to DuckDB using standard SQL, for example:
 CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
 ```
 
-
 ## Writing Data to Postgres
 
 In addition to reading data from Postgres, the extension allows you to create tables, ingest data into Postgres and make other modifications to a Postgres database using standard SQL queries.
@@ -121,7 +131,7 @@ Below is a brief example of how to create a new table in Postgres and load data 
 
 ```sql
 ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
-CREATE TABLE postgres_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE postgres_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```
 
@@ -137,7 +147,7 @@ Below is a list of supported operations.
 ### `CREATE TABLE`
 
 ```sql
-CREATE TABLE postgres_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE postgres_db.tbl (id INTEGER, name VARCHAR);
 ```
 
 ### `INSERT INTO`
@@ -151,6 +161,7 @@ INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```sql
 SELECT * FROM postgres_db.tbl;
 ```
+
 ```text
 ┌───────┬─────────┐
 │  id   │  name   │
@@ -162,27 +173,39 @@ SELECT * FROM postgres_db.tbl;
 
 ### `COPY`
 
+You can copy tables back and forth between PostgreSQL and DuckDB:
+
 ```sql
 COPY postgres_db.tbl TO 'data.parquet';
 COPY postgres_db.tbl FROM 'data.parquet';
 ```
 
+You may also create a full copy of the database using the [`COPY FROM DATABASE` statement](../sql/statements/copy#copy-from-database--to):
+
+```sql
+COPY FROM DATABASE postgres_db TO my_duckdb_db;
+```
+
 ### `UPDATE`
 
 ```sql
-UPDATE postgres_db.tbl SET name='Woohoo' WHERE id=42;
+UPDATE postgres_db.tbl
+SET name = 'Woohoo'
+WHERE id = 42;
 ```
 
 ### `DELETE`
 
 ```sql
-DELETE FROM postgres_db.tbl WHERE id=42;
+DELETE FROM postgres_db.tbl
+WHERE id = 42;
 ```
 
 ### `ALTER TABLE`
 
 ```sql
-ALTER TABLE postgres_db.tbl ADD COLUMN k INTEGER;
+ALTER TABLE postgres_db.tbl
+ADD COLUMN k INTEGER;
 ```
 
 ### `DROP TABLE`
@@ -201,10 +224,11 @@ CREATE VIEW postgres_db.v1 AS SELECT 42;
 
 ```sql
 CREATE SCHEMA postgres_db.s1;
-CREATE TABLE postgres_db.s1.integers(i int);
+CREATE TABLE postgres_db.s1.integers (i INT);
 INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
 ```
+
 ```text
 ┌───────┐
 │   i   │
@@ -212,18 +236,27 @@ SELECT * FROM postgres_db.s1.integers;
 ├───────┤
 │    42 │
 └───────┘
+```
+
 ```sql
 DROP SCHEMA postgres_db.s1;
+```
+
+## `DETACH`
+
+```sql
+DETACH postgres_db;
 ```
 
 ### Transactions
 
 ```sql
-CREATE TABLE postgres_db.tmp(i INTEGER);
+CREATE TABLE postgres_db.tmp (i INTEGER);
 BEGIN;
 INSERT INTO postgres_db.tmp VALUES (42);
 SELECT * FROM postgres_db.tmp;
 ```
+
 ```text
 ┌───────┐
 │   i   │
@@ -232,10 +265,12 @@ SELECT * FROM postgres_db.tmp;
 │    42 │
 └───────┘
 ```
+
 ```sql
 ROLLBACK;
 SELECT * FROM postgres_db.tmp;
 ```
+
 ```text
 ┌────────┐
 │   i    │
@@ -259,6 +294,7 @@ postgres_query(attached_database::VARCHAR, query::VARCHAR)
 ATTACH 'dbname=postgresscanner' AS s (TYPE POSTGRES);
 SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
 ```
+
 ```text
 ┌──────────────┬───────────┬─────────┐
 │    brand     │   model   │  color  │

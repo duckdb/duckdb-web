@@ -26,7 +26,7 @@ CREATE MACRO one() AS (SELECT 1);
 -- (parameter names get priority over column names: disambiguate using the table name)
 CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a FROM cte);
 -- macros are schema-dependent, and have an alias: FUNCTION
-CREATE FUNCTION main.myavg(x) AS sum(x) / count(x);
+CREATE FUNCTION main.my_avg(x) AS sum(x) / count(x);
 -- create a macro with default constant parameters
 CREATE MACRO add_default(a, b := 5) AS a + b;
 -- create a macro arr_append (with a functionality equivalent to array_append)
@@ -81,7 +81,7 @@ SELECT add_default(40, 2);
 -- success! default parameters are used by assigning them like so
 SELECT add_default(40, b := 2);
 -- error! default parameters must come after positional parameters
-SELECT add_default(b = 2, 40);
+SELECT add_default(b := 2, 40);
 -- the order of default parameters does not matter
 CREATE MACRO triple_add(a, b := 5, c := 10) AS a + b + c;
 -- success!
@@ -102,6 +102,23 @@ SELECT 40 + 2;
 ```
 
 ## Limitations
+
+### Using Named Parameters
+
+Currently, positional macro parameters can only be used positionally, and named parameters can only be used by supplying their name. Therefore, the following will not work:
+
+```sql
+CREATE MACRO my_macro(a, b := 42) AS (a + b);
+SELECT my_macro(32, 52);
+```
+
+```text
+Error: Binder Error: Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
+LINE 1: SELECT my_macro(32, 52);
+               ^
+```
+
+### Using Subquery Macros
 
 If a `MACRO` is defined as a subquery, it cannot be invoked in a table function. DuckDB will return the following error:
 

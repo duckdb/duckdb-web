@@ -19,10 +19,11 @@ description: >- # this means to ignore newlines until "baseurl:"
   DuckDB is an in-process database management system focused on analytical query processing. It is designed to be easy to install and easy to use. DuckDB has no external dependencies. DuckDB has bindings for C/C++, Python and R.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. http://example.com
-# Set current Version of duckDB
-currentduckdbversion: 0.10.0
+# Set current Version of DuckDB
+currentshortduckdbversion: "0.10"
+currentduckdbversion: 0.10.1
+currentsnapshotversion: 0.10.2-dev
 currentjavaversion: 0.10.0
-currentsnapshotversion: 0.10.0-dev
 nextjavaversion: 0.10.1  # for java snapshots
 livereload: true
 highlighter: rouge
@@ -41,7 +42,9 @@ plugins:
   - jekyll-github-metadata
   - jekyll-git-hash
   - jekyll-last-modified-at
+  - jekyll-toc
 excerpt_separator: <!--more-->
+future: true
 
 last-modified-at:
     date-format: '%Y-%m-%d'
@@ -60,6 +63,7 @@ defaults:
       path: ""
     values:
       image: /images/sharingduckdb.jpg
+      toc: true
 
 repository: "duckdb/duckdb-web"
 
@@ -76,5 +80,10 @@ repository: "duckdb/duckdb-web"
 #   - vendor/ruby/
 
 star_count: "14.4k"
+
+toc:
+  min_level: 1
+  max_level: 3
+  ordered_list: false
 
 exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle']

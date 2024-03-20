@@ -9,11 +9,13 @@ The environment where DuckDB is run has an obvious impact on performance. This p
 
 ### CPU and Memory
 
-As a rule of thumb, aggregation-heavy workloads require approx. 5 GB memory per CPU core and join-heavy workloads require approximately 10 GB memory per core for best performance.
-In AWS EC2, the former are available as general-purpose instances (e.g., [M7g](https://aws.amazon.com/ec2/instance-types/m7g/))
-and the latter as memory-optimized instances (e.g., [R7g](https://aws.amazon.com/ec2/instance-types/r7g/)).
+As a rule of thumb, DuckDB requires a **minimum** of 125 MB of memory per thread.
+For example, if you use 8 threads, you need at least 1 GB of memory.
+For ideal performance, aggregation-heavy workloads require approx. 5 GB memory per thread and join-heavy workloads require approximately 10 GB memory per thread.
 
-> Bestpractice Aim for 5-10 GB memory per CPU core.
+> Bestpractice Aim for 5-10 GB memory per thread.
+
+> Tip If you have a limited amount of memory, try to [limit the number of threads](../../configuration/pragmas#threads), e.g., by issuing `SET threads = 4;`.
 
 ### Disk
 

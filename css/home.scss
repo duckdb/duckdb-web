@@ -10,7 +10,7 @@
 body.landing{
 	font-size: $fontSizep;
 	main{
-		margin-top: 52px;
+		margin-top: 70px;
 	}
 	/** GENERAL STYLES **/
 	h1{
@@ -208,8 +208,7 @@ body.landing{
 		}
 	}
 	
-	/** CUSTOM SELECT BOX **/
-	
+	/** STYLE SELECT BOX ANYWAYS – SO IT IS COLORED DIRECTLY **/
 	select {
 	  -webkit-appearance: none;
 		 -moz-appearance: none;
@@ -231,7 +230,7 @@ body.landing{
 	  outline: none;
 	}
 	
-	.select {
+	select {
 	  display: -ms-grid;
 	  display: grid;
 		  grid-template-areas: "select";
@@ -277,6 +276,107 @@ body.landing{
 		background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='9.25' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M4.60938 8.18164L10.0637 13.636L15.5181 8.18164' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E%0A");
 	  }
 	}
+	
+	
+	/** NEW CUSTOM SELECT BOX WITH JS**/
+	$select-background: #c1b73d;
+	$select-width: 240px;
+	$select-height: 38px;
+	
+	.select-hidden {
+		display: none;
+		visibility: hidden;
+		padding-right: 10px;
+	}
+	
+	.select {
+		cursor: pointer;
+		display: inline-block;
+		position: relative;
+		color: black;
+		min-width: $select-width;
+		//height: $select-height;
+		font-size: 14px;
+		line-height: 1;
+		font-weight: 500;
+	}
+	
+	.select-styled {
+		position: relative;
+		display: inline-block;
+		background-color: $duckDByellow;
+		padding: 12px 45px 12px 20px;
+		-webkit-transition: all 0.2s ease-in;
+		-o-transition: all 0.2s ease-in;
+		transition: all 0.2s ease-in;
+		border-radius: 20px;
+		z-index: 710;
+		word-break: keep-all;
+		> span{
+			color: #beb343!important;
+		}
+		&:after {
+			content: "";
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='9.25' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M4.60938 8.18164L10.0637 13.636L15.5181 8.18164' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E%0A");
+			right: 10px;
+			top: 9px;
+			-webkit-transition: all .3s;
+			-o-transition: all .3s;
+			transition: all .3s;
+		}
+		&:hover {
+			//background-color: $select-background;
+		}
+		&:active,
+		&.active {
+			&:after {
+				-webkit-transform: rotate(180deg);
+					-ms-transform: rotate(180deg);
+						transform: rotate(180deg);
+			}
+		}
+	}
+	
+	.select-options {
+		display: none;
+		position: absolute;
+		top: calc(100% + 4px);
+		//right: 0;
+		//left: 0;
+		z-index: 700;
+		margin: 0;
+		list-style: none;
+		background-color: $duckDByellow;
+		border-radius: 20px;
+		padding: 8px;
+		//padding-top: calc(#{$select-height} / 2);
+		-webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
+				filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
+		li {
+			word-break: keep-all;
+			margin: 2px 0;
+			padding: 8px 12px;
+			font-weight: 450;
+			-webkit-transition: all 0.15s ease-in;
+			-o-transition: all 0.15s ease-in;
+			transition: all 0.15s ease-in;
+			&:hover,
+			&.is-selected {
+				background: #F3E500;
+				border-radius: 50px;
+			}
+			&.is-selected {
+				font-weight: 500;
+			}
+			&[rel="hide"] {
+				display: none;
+			}
+		}
+	}
+	
 	
 	/** WELCOME SECTION **/
 	section.welcome{
@@ -372,6 +472,7 @@ body.landing{
 			}
 			.install{
 				width: calc(100% - 450px);
+				tab-size: 4;
 			}
 		}
 	}
@@ -488,6 +589,9 @@ body.landing{
 		section.blog .postpreview:nth-child(4){
 			display: block;
 		}
+		.select{
+			margin-bottom: 10px;
+		}
 	}
 }
 
@@ -518,16 +622,20 @@ body.landing{
 
 @media only screen and (max-width: 660px) {
 	body.landing{
-		.select{
-			width: 100%;
-			max-width: unset;
-			margin-bottom: 10px;
-		}
 		.install .environment{
 			display: block!important;
 		}
 		label.onlymobile{
 			display: none!important;
 		}
+	}
+}
+
+@media only screen and (max-width: 450px) {
+	body.landing{
+		.select{
+			width: 100%;
+			max-width: unset;
+		}	
 	}
 }

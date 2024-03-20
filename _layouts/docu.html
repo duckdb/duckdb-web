@@ -67,8 +67,8 @@ Page URL: <https://duckdb.org{{ page.url }}>
 			</div>
 		</div>
 	</header>
-
-	<main>
+		
+	{% include banner_docversion.html %}
 		
 		{% include searchoverlay.html %}
 
@@ -100,7 +100,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 					{% if page.url contains '/docs/' %}
 					<div class="versionselect">
 						<div class="version">
-							<div>v<span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span><span class="arrow"></div>
+							<div><span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span><span class="arrow"></div>
 							<div class="versionsidebar">
 								<ul>
 								{% assign candidate_pages = "" | split: ','  %}
@@ -119,7 +119,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 								{% endfor %}
 							
 								{% if exists == true %}
-									<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>{{ site.currentduckdbversion }} (stable)</a></li>
+									<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>{{ site.currentshortduckdbversion }} (stable)</a></li>
 								{% endif %}
 								<!-- check the archived pages -->
 								{% for item in site.data.versions %}
@@ -145,12 +145,12 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				
 				</div>
 				
-				
+				{% assign ct = content | toc %}
 				{% include anchor_headings.html html=content %}
 				
 				{% if page.url contains 'overview' %}
 				<div class="index">
-					<h2>Pages in This Section</h2>
+					<h2 id="pages-in-this-section">Pages in This Section</h2>
 				</div>
 				{% endif %}
 				
@@ -172,7 +172,16 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				
 			</div>
 			
-			<div id="sidebar"></div>
+			<div id="sidebar">
+				{% assign toc_only = content | toc_only %}
+				{% assign toc_text_only = toc_only | strip_html | remove: ' ' %}
+				{% if toc_text_only.size > 10 %}
+					<div class="toc_menu">
+						<h5>In this article</h5>
+						{{ toc_only }}
+					</div>
+				{% endif %}
+			</div>
 			
 			
 			

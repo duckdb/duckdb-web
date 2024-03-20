@@ -10,7 +10,7 @@ Feel free to follow along in this [Google Colab notebook](https://colab.research
 
 ## Setup
 
-First, import duckdb and several modules from the Python standard library. 
+First, import DuckDB and several modules from the Python standard library. 
 Note: if using Pandas, add `import pandas` at the top of the script as well (as it must be imported prior to the multi-threading). 
 Then connect to a file-backed DuckDB database and create an example table to store inserted data. 
 This table will track the name of the thread that completed the insert and automatically insert the timestamp when that insert occurred using the [`DEFAULT` expression](../../sql/statements/create_table#syntax).
@@ -78,12 +78,12 @@ threads = []
 for i in range(write_thread_count):
     threads.append(Thread(target = write_from_thread,
                             args = (duckdb_con,),
-                            name = 'write_thread_'+str(i)))
+                            name = 'write_thread_' + str(i)))
 
 for j in range(read_thread_count):
     threads.append(Thread(target = read_from_thread,
                             args = (duckdb_con,),
-                            name = 'read_thread_'+str(j)))
+                            name = 'read_thread_' + str(j)))
 
 # Shuffle the threads to simulate a mix of readers and writers
 random.seed(6) # Set the seed to ensure consistent results when testing

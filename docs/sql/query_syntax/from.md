@@ -144,15 +144,17 @@ Semi joins return rows from the left table that have at least one match in the r
 ```sql
 -- return a list of cars that have a valid region.
 SELECT cars.name, cars.manufacturer 
-FROM cars SEMI JOIN region
-ON cars.region = region.id;
+FROM cars
+SEMI JOIN region
+       ON cars.region = region.id;
 ```
 
 ```sql
 -- return a list of cars with no recorded safety data.
 SELECT cars.name, cars.manufacturer
-FROM cars ANTI JOIN safety_data
-ON cars.safety_report_id = safety_data.report_id;
+FROM cars
+ANTI JOIN safety_data
+       ON cars.safety_report_id = safety_data.report_id;
 ```
 
 ### Lateral Joins
@@ -163,16 +165,12 @@ The `LATERAL` keyword allows subqueries in the `FROM` clause to refer to previou
 SELECT *
 FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
 ```
-```text
-┌───────┬───────┐
-│   i   │   j   │
-│ int64 │ int64 │
-├───────┼───────┤
-│     0 │     1 │
-│     1 │     2 │
-│     2 │     3 │
-└───────┴───────┘
-```
+
+| i | j |
+|--:|--:|
+| 0 | 1 |
+| 2 | 3 |
+| 1 | 2 |
 
 Lateral joins are a generalization of correlated subqueries, as they can return multiple values per input value rather than only a single value.
 
@@ -182,17 +180,13 @@ FROM
     generate_series(0, 1) t(i),
     LATERAL (SELECT i + 10 UNION ALL SELECT i + 100) t2(j);
 ```
-```text
-┌───────┬───────┐
-│   i   │   j   │
-│ int64 │ int64 │
-├───────┼───────┤
-│     0 │    10 │
-│     1 │    11 │
-│     0 │   100 │
-│     1 │   101 │
-└───────┴───────┘
-```
+
+| i |  j  |
+|--:|----:|
+| 0 | 10  |
+| 1 | 11  |
+| 0 | 100 |
+| 1 | 101 |
 
 It may be helpful to think about `LATERAL` as a loop where we iterate through the rows of the first subquery and use it as input to the second (`LATERAL`) subquery.
 In the examples above, we iterate through table `t` and refer to its column `i` from the definition of table `t2`. The rows of `t2` form column `j` in the result.
@@ -201,18 +195,14 @@ It is possible to refer to multiple attributes from the `LATERAL` subquery. Usin
 
 ```sql
 CREATE TABLE t1 AS SELECT * FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
-SELECT * FROM t1, LATERAL (SELECT i + j) t2(k);
+SELECT * FROM t1, LATERAL (SELECT i + j) t2(k) ORDER BY ALL;
 ```
-```text
-┌───────┬───────┬───────┐
-│   i   │   j   │   k   │
-│ int64 │ int64 │ int64 │
-├───────┼───────┼───────┤
-│     0 │     1 │     1 │
-│     1 │     2 │     3 │
-│     2 │     3 │     5 │
-└───────┴───────┴───────┘
-```
+
+| i | j | k |
+|--:|--:|--:|
+| 0 | 1 | 1 |
+| 1 | 2 | 3 |
+| 2 | 3 | 5 |
 
 > DuckDB detects when `LATERAL` joins should be used, making the use of the `LATERAL` keyword optional.
 
@@ -224,7 +214,7 @@ In scripting languages, this is easily expressed using a loop:
 
 ```cpp
 for (i = 0; i < n; i++) {
-    f(t1.a[i], t2.b[i])
+    f(t1.a[i], t2.b[i]);
 }
 ```
 
@@ -237,7 +227,8 @@ Connecting them using this ordering is called a _positional join:_
 ```sql
 -- treat two data frames as a single table
 SELECT df1.*, df2.*
-FROM df1 POSITIONAL JOIN df2;
+FROM df1
+POSITIONAL JOIN df2;
 ```
 
 Positional joins are always `FULL OUTER` joins.
@@ -251,8 +242,9 @@ This is called an _as-of join:_
 ```sql
 -- attach prices to stock trades
 SELECT t.*, p.price
-FROM trades t ASOF JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when;
+FROM trades t
+ASOF JOIN prices p 
+       ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 The `ASOF` join requires at least one inequality condition on the ordering field.
@@ -268,8 +260,9 @@ It can be specified as an `OUTER` join to find unpaired rows
 ```sql
 -- attach prices or NULLs to stock trades
 SELECT *
-FROM trades t ASOF LEFT JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when;
+FROM trades t
+ASOF LEFT JOIN prices p 
+            ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 `ASOF` joins can also specify join conditions on matching column names with the `USING` syntax,
@@ -278,7 +271,8 @@ which will be greater than or equal to (`>=`):
 
 ```sql
 SELECT *
-FROM trades t ASOF JOIN prices p USING (symbol, "when");
+FROM trades t
+ASOF JOIN prices p USING (symbol, "when");
 -- Returns symbol, trades.when, price (but NOT prices.when)
 ```
 
@@ -289,7 +283,8 @@ To get the `prices` times in the example, you will need to list the columns expl
 
 ```sql
 SELECT t.symbol, t.when AS trade_when, p.when AS price_when, price
-FROM trades t ASOF LEFT JOIN prices p USING (symbol, "when");
+FROM trades t
+ASOF LEFT JOIN prices p USING (symbol, "when");
 ```
 
 ## Syntax

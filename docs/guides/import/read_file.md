@@ -15,16 +15,11 @@ SELECT size, parse_path(filename), content
 FROM read_text('test/sql/table_function/files/*.txt');
 ```
 
-```text
-┌───────┬───────────────────────────────────────────────┬──────────────┐
-│ size  │             parse_path(filename)              │   content    │
-│ int64 │                   varchar[]                   │   varchar    │
-├───────┼───────────────────────────────────────────────┼──────────────┤
-│    12 │ [test, sql, table_function, files, one.txt]   │ Hello World! │
-│     2 │ [test, sql, table_function, files, three.txt] │ 42           │
-│    10 │ [test, sql, table_function, files, two.txt]   │ Föö Bär      │
-└───────┴───────────────────────────────────────────────┴──────────────┘
-```
+| size |             parse_path(filename)              |   content    |
+|-----:|-----------------------------------------------|--------------|
+| 12   | [test, sql, table_function, files, one.txt]   | Hello World! |
+| 2    | [test, sql, table_function, files, three.txt] | 42           |
+| 10   | [test, sql, table_function, files, two.txt]   | Föö Bär      |
 
 The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use [`read_blob`](#read_blob) instead.
 
@@ -37,37 +32,31 @@ SELECT size, content, filename
 FROM read_blob('test/sql/table_function/files/*');
 ```
 
-```text
-┌───────┬──────────────────────────────────────────────────────────────────────────────────────────────────┬─────────────────────────────────────────┐
-│ size  │                                             content                                              │                filename                 │
-│ int64 │                                               blob                                               │                 varchar                 │
-├───────┼──────────────────────────────────────────────────────────────────────────────────────────────────┼─────────────────────────────────────────┤
-│   178 │ PK\x03\x04\x0A\x00\x00\x00\x00\x00\xACi=X\x14t\xCE\xC7\x0A\x00\x00\x00\x0A\x00\x00\x00\x09\x00…  │ test/sql/table_function/files/four.blob │
-│    12 │ Hello World!                                                                                     │ test/sql/table_function/files/one.txt   │
-│     2 │ 42                                                                                               │ test/sql/table_function/files/three.txt │
-│    10 │ F\xC3\xB6\xC3\xB6 B\xC3\xA4r                                                                     │ test/sql/table_function/files/two.txt   │
-└───────┴──────────────────────────────────────────────────────────────────────────────────────────────────┴─────────────────────────────────────────┘
-```
+| size |                              content                         |                filename                 |
+|-----:|--------------------------------------------------------------|-----------------------------------------|
+| 178  |  PK\x03\x04\x0A\x00\x00\x00\x00\x00\xACi=X\x14t\xCE\xC7\x0A… | test/sql/table_function/files/four.blob |
+| 12   | Hello World!                                                 | test/sql/table_function/files/one.txt   |
+| 2    | 42                                                           | test/sql/table_function/files/three.txt |
+| 10   | F\xC3\xB6\xC3\xB6 B\xC3\xA4r                                 | test/sql/table_function/files/two.txt   |
 
 ## Schema
 
 The schemas of the tables returned by `read_text` and `read_blob` are identical:
 
-```text
-┌───────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
-│  column_name  │ column_type │  null   │   key   │ default │  extra  │
-│    varchar    │   varchar   │ varchar │ varchar │ varchar │ varchar │
-├───────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
-│ filename      │ VARCHAR     │ YES     │         │         │         │
-│ content       │ VARCHAR     │ YES     │         │         │         │
-│ size          │ BIGINT      │ YES     │         │         │         │
-│ last_modified │ TIMESTAMP   │ YES     │         │         │         │
-└───────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+```sql
+DESCRIBE FROM read_text('README.md');
 ```
+
+|  column_name  | column_type | null | key  | default | extra |
+|---------------|-------------|------|------|---------|-------|
+| filename      | VARCHAR     | YES  | NULL | NULL    | NULL  |
+| content       | VARCHAR     | YES  | NULL | NULL    | NULL  |
+| size          | BIGINT      | YES  | NULL | NULL    | NULL  |
+| last_modified | TIMESTAMP   | YES  | NULL | NULL    | NULL  |
 
 ## Handling Missing Metadata
 
-In cases where the underlying filesystem is unable to provide some of this data due (e.g. because HTTPFS can't always return a valid timestamp), the cell is set to `NULL` instead.
+In cases where the underlying filesystem is unable to provide some of this data due (e.g., because HTTPFS can't always return a valid timestamp), the cell is set to `NULL` instead.
 
 ## Support for Projection Pushdown
 

@@ -17,7 +17,7 @@ ATTACH 'file.db' AS file_db;
 ATTACH 'file.db' (READ_ONLY);
 -- attach a SQLite database for reading and writing (see the sqlite extension for more information)
 ATTACH 'sqlite_file.db' AS sqlite_db (TYPE SQLITE);
--- attach the database "file.db" if inferred database alias "file_db" does not yet exist
+-- attach the database "file.db" if inferred database alias "file" does not yet exist
 ATTACH IF NOT EXISTS 'file.db';
 -- attach the database "file.db" if explicit database alias "file_db" does not yet exist
 ATTACH IF NOT EXISTS 'file.db' AS file_db;
@@ -31,19 +31,28 @@ SHOW DATABASES;
 USE file;
 ```
 
-## Syntax
+## Attach
+
+### Attach Syntax
 
 <div id="rrdiagram1"></div>
 
-`ATTACH` allows DuckDB to operate on multiple database files, and allows for transfer of data between different database files. 
+`ATTACH` allows DuckDB to operate on multiple database files, and allows for transfer of data between different database files.
 
 ## Detach
 
-The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file. It is not possible to detach from the default database: if you would like to do so, issue the [`USE` statement](use) to change the default database to another one.
+The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file.
+
+Note that it is not possible to detach from the default database: if you would like to do so, issue the [`USE` statement](use) to change the default database to another one. For example, if you are connected to a persistent database, you may change to an in-memory database by issuing:
+
+```sql
+ATTACH ':memory:' AS memory_db;
+USE memory_db;
+```
 
 > Warning Closing the connection, e.g., invoking the [`close()` function in Python](../../api/python/dbapi#connection), does not release the locks held on the database files as the file handles are held by the main DuckDB instance (in Python's case, the `duckdb` module).
 
-### Syntax
+### Detach Syntax
 
 <div id="rrdiagram2"></div>
 
@@ -104,7 +113,8 @@ If we create a conflict (i.e., we have both a schema and a catalog with the same
 ```sql
 CREATE SCHEMA new_db;
 CREATE TABLE new_db.tbl (i INTEGER);
--- Error: Binder Error: Ambiguous reference to catalog or schema "new_db" - use a fully qualified path like "memory.new_db"
+-- Error: Binder Error: Ambiguous reference to catalog or schema "new_db" -
+-- use a fully qualified path like "memory.new_db"
 ```
 
 ### Changing the Catalog Search Path
@@ -132,7 +142,8 @@ When running queries on multiple databases, the system opens separate transactio
 While multiple transactions can be active at a time - the system only supports *writing* to a single attached database in a single transaction. If you try to write to multiple attached databases in a single transaction the following error will be thrown:
 
 ```text
-Attempting to write to database "db2" in a transaction that has already modified database "db1" - a single transaction can only write to a single attached database.
+Attempting to write to database "db2" in a transaction that has already modified database "db1" -
+a single transaction can only write to a single attached database.
 ```
 
 The reason for this restriction is that the system does not maintain atomicity for transactions across attached databases. Transactions are only atomic *within* each database file. By restricting the global transaction to write to only a single database file the atomicity guarantees are maintained.

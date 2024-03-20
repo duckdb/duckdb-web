@@ -19,3 +19,9 @@ duckdb.sql("CREATE TABLE my_table AS SELECT * FROM my_df")
 # insert into the table "my_table" from the DataFrame "my_df"
 duckdb.sql("INSERT INTO my_table SELECT * FROM my_df")
 ```
+
+If the order of columns is different or not all columns are present in the DataFrame, use [`INSERT INTO ... BY NAME`](../../sql/statements/insert#insert-into--by-name):
+
+```python
+duckdb.sql("INSERT INTO my_table BY NAME SELECT * FROM my_df")
+```

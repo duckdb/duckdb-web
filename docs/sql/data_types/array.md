@@ -30,7 +30,7 @@ SELECT array_value({'a': 1, 'b': 2}, {'a': 3, 'b': 4});
 
 ## Defining an Array Field
 
-Arrays can be created using the `<TYPE_NAME>[<LENGTH>]` syntax. For example, to create an array field for 3 integers, run:
+Arrays can be created using the `⟨TYPE_NAME⟩[⟨LENGTH⟩]` syntax. For example, to create an array field for 3 integers, run:
 
 ```sql
 CREATE TABLE array_table (id INT, arr INT[3]);
@@ -49,15 +49,10 @@ SELECT id, list_extract(arr, 1) AS element FROM array_table;
 SELECT id, array_extract(arr, 1) AS element FROM array_table;
 ```
 
-```text
-┌───────┬─────────┐
-│  id   │ element │
-│ int32 │  int32  │
-├───────┼─────────┤
-│    10 │       1 │
-│    20 │       4 │
-└───────┴─────────┘
-```
+| id | element |
+|---:|--------:|
+| 10 | 1       |
+| 20 | 4       |
 
 Using the slicing notation returns a `LIST`:
 
@@ -65,15 +60,10 @@ Using the slicing notation returns a `LIST`:
 SELECT id, arr[1:2] AS elements FROM array_table;
 ```
 
-```text
-┌───────┬──────────┐
-│  id   │ elements │
-│ int32 │ int32[]  │
-├───────┼──────────┤
-│    10 │ [1, 2]   │
-│    20 │ [4, 5]   │
-└───────┴──────────┘
-```
+| id | elements |
+|---:|----------|
+| 10 | [1, 2]   |
+| 20 | [4, 5]   |
 
 ## Functions
 

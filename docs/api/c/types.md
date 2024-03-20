@@ -11,7 +11,6 @@ DuckDB also supports columns of composite types. For example, it is possible to 
 
 Types in the C API are modeled using an enum (`duckdb_type`) and a complex class (`duckdb_logical_type`). For most primitive types, e.g., integers or varchars, the enum is sufficient. For more complex types, such as lists, structs or decimals, the logical type must be used.
 
-
 ```c
 typedef enum DUCKDB_TYPE {
   DUCKDB_TYPE_INVALID,
@@ -61,7 +60,7 @@ The `duckdb_value_is_null` function can be used to check if a specific value is 
 
 The exception to the auto-cast rule is the `duckdb_value_varchar_internal` function. This function does not auto-cast and only works for `VARCHAR` columns. The reason this function exists is that the result does not need to be freed.
 
-> Note that `duckdb_value_varchar` and `duckdb_value_blob` require the result to be de-allocated using `duckdb_free`.
+> `duckdb_value_varchar` and `duckdb_value_blob` require the result to be de-allocated using `duckdb_free`.
 
 ### `duckdb_result_get_chunk`
 
@@ -110,6 +109,7 @@ For more information about data chunks, see the [documentation on data chunks](d
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_logical_type"><span class="nf">duckdb_create_logical_type</span></a>(<span class="nv">duckdb_type</span> <span class="nv">type</span>);
 <span class="kt">char</span> *<a href="#duckdb_logical_type_get_alias"><span class="nf">duckdb_logical_type_get_alias</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_list_type"><span class="nf">duckdb_create_list_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_array_type"><span class="nf">duckdb_create_array_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">array_size</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_map_type"><span class="nf">duckdb_create_map_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">value_type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_union_type"><span class="nf">duckdb_create_union_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_struct_type"><span class="nf">duckdb_create_struct_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
@@ -123,6 +123,8 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">uint32_t</span> <a href="#duckdb_enum_dictionary_size"><span class="nf">duckdb_enum_dictionary_size</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">char</span> *<a href="#duckdb_enum_dictionary_value"><span class="nf">duckdb_enum_dictionary_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_list_type_child_type"><span class="nf">duckdb_list_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_array_type_child_type"><span class="nf">duckdb_array_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_array_type_array_size"><span class="nf">duckdb_array_type_array_size</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_map_type_key_type"><span class="nf">duckdb_map_type_key_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_map_type_value_type"><span class="nf">duckdb_map_type_value_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_struct_type_child_count"><span class="nf">duckdb_struct_type_child_count</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
@@ -714,6 +716,37 @@ The logical type.
 <br>
 
 
+### `duckdb_create_array_type`
+
+---
+Creates a array type from its child type.
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_array_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">array_size
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `type`
+
+The child type of array type to create.
+* `array_size`
+
+The number of elements in the array.
+* `returns`
+
+The logical type.
+
+<br>
+
+
 ### `duckdb_create_map_type`
 
 ---
@@ -1086,6 +1119,60 @@ The logical type object
 * `returns`
 
 The child type of the list type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+
+### `duckdb_array_type_child_type`
+
+---
+Retrieves the child type of the given array type.
+
+The result must be freed with `duckdb_destroy_logical_type`.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_array_type_child_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The child type of the array type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+
+### `duckdb_array_type_array_size`
+
+---
+Retrieves the array size of the given array type.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_array_type_array_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The fixed number of elements the values of this array type can store.
 
 <br>
 

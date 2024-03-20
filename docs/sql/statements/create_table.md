@@ -36,7 +36,7 @@ CREATE TABLE t1 AS FROM t2 LIMIT 0;
 
 Temporary tables can be created using the `CREATE TEMP TABLE` or the `CREATE TEMPORARY TABLE` statement (see diagram below).
 Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DuckDB is closed they will be automatically dropped.
-Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](../../sql/configuration) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained.
+Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](../../configuration/overview) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained.
 
 ```sql
 -- create a temporary table from a CSV file (automatically detecting column names and types)
@@ -64,6 +64,30 @@ The `IF NOT EXISTS` syntax will only proceed with the creation of the table if i
 ```sql
 -- create a table with two integer columns (i and j) only if t1 does not exist yet
 CREATE TABLE IF NOT EXISTS t1 (i INTEGER, j INTEGER);
+```
+
+## `CREATE TABLE ... AS` (CTAS)
+
+DuckDB supports the `CREATE TABLE ... AS` syntax, also known as CTAS:
+
+```sql
+CREATE TABLE nums AS
+    SELECT i
+    FROM range(0, 3) t(i);
+```
+
+This syntax can be used in combination with the [CSV reader](../../data/csv/overview), the shorthand to read directly from CSV files without specifying a function, the [FROM-first syntax](../query_syntax/from), and the [HTTP(S) support](../../extensions/httpfs/https), yielding concise SQL commands such as the following:
+
+```sql
+CREATE TABLE flights AS
+    FROM 'https://duckdb.org/data/flights.csv';
+```
+
+The CTAS construct also works with the `OR REPLACE` modifier, yielding `CREATE OR REPLACE TABLE ... AS` (CORTAS) statements:
+
+```sql
+CREATE OR REPLACE TABLE flights AS
+    FROM 'https://duckdb.org/data/flights.csv';
 ```
 
 ## Check Constraints
@@ -151,6 +175,8 @@ CREATE TABLE t6 (
 
 > Foreign keys with cascading deletes (`FOREIGN KEY ... REFERENCES ... ON DELETE CASCADE`) are not supported.
 
+> Inserting into tables with self-referencing foreign keys is currently not supported and will result in the following error: `Constraint Error: Violates foreign key constraint because key "..." does not exist in the referenced table`.
+
 ## Generated Columns
 
 The `[type] [GENERATED ALWAYS] AS (expr) [VIRTUAL|STORED]` syntax will create a generated column. The data in this kind of column is generated from its expression, which can reference other (regular or generated) columns of the table. Since they are produced by calculations, these columns can not be inserted into directly.
@@ -162,7 +188,7 @@ The data of virtual generated columns is not stored on disk, instead it is compu
 
 The data of stored generated columns is stored on disk and is computed every time the data of their dependencies change (through an insert/update/drop statement).
 
-Currently only the `VIRTUAL` kind is supported, and it is also the default option if the last field is left blank.
+Currently, only the `VIRTUAL` kind is supported, and it is also the default option if the last field is left blank.
 
 ```sql
 -- The simplest syntax for a generated column

@@ -18,7 +18,7 @@ Bitstrings can be very large, having the same size restrictions as `BLOB`s.
 
 ```sql
 -- Create a bitstring 
-SELECT '101010'::BIT
+SELECT '101010'::BIT;
 -- Create a bitstring with predefined length.
 -- The resulting bitstring will be left-padded with zeroes.
 -- This returns 000000101011.

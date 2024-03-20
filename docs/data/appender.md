@@ -31,8 +31,8 @@ appender.Append<string>("Hannes");
 appender.EndRow();
 ```
 
-Any values added to the appender are cached prior to being inserted into the database system
-for performance reasons. That means that, while appending, the rows might not be immediately visible in the system. The cache is automatically flushed when the appender goes out of scope or when `appender.Close()` is called. The cache can also be manually flushed using the `appender.Flush()` method. After either `Flush` or `Close` is called, all the data has been written to the database system.
+Any values added to the Appender are cached prior to being inserted into the database system
+for performance reasons. That means that, while appending, the rows might not be immediately visible in the system. The cache is automatically flushed when the Appender goes out of scope or when `appender.Close()` is called. The cache can also be manually flushed using the `appender.Flush()` method. After either `Flush` or `Close` is called, all the data has been written to the database system.
 
 ## Date, Time and Timestamps
 
@@ -59,9 +59,14 @@ appender.AppendRow(
 );
 ```
 
+## Commit Frequency
+
+By default, the appender performs a commits every 204,800 rows.
+You can change this by explicitly using [transactions](../sql/statements/transactions) and surrounding your batches of `AppendRow` calls by `BEGIN TRANSACTION` and `COMMIT` statements.
+
 ## Handling Constraint Violations
 
-If the appender encounters a `PRIMARY KEY` conflict or a `UNIQUE` constraint violation, it fails and returns the following error:
+If the Appender encounters a `PRIMARY KEY` conflict or a `UNIQUE` constraint violation, it fails and returns the following error:
 
 ```text
 Constraint Error: PRIMARY KEY or UNIQUE constraint violated: duplicate key "..."
@@ -71,7 +76,7 @@ In this case, the entire append operation fails and no rows are inserted.
 
 ## Appender Support in Other Clients
 
-The appender is also available in the following client APIs:
+The Appender is also available in the following client APIs:
 
 * [C](../api/c/appender)
 * [Go](../api/go#appender)

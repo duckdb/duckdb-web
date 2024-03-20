@@ -33,8 +33,8 @@ The results of the microbenchmark are as follows:
 
 <div class="narrow_table"></div>
 
-| Column Type | Storage Size | Query Time |
-| ----------- | ------------ | ---------- |
+| Column type | Storage size | Query time |
+| ----------- | -----------: | ---------: |
 | `DATETIME`  | 3.3 GB       | 0.9 s      |
 | `VARCHAR`   | 5.2 GB       | 3.9 s      |
 
@@ -57,10 +57,12 @@ The results below show that joining on `BIGINT` columns is approx. 1.8× faster 
 
 <div class="narrow_table"></div>
 
-| Join Column Payload Type | Join Column Schema Type | Example Value                            | Query Time |
-| ------------------------ | ----------------------- | ---------------------------------------- | ---------- |
+| Join column payload type | Join column schema type | Example value                            | Query time |
+| ------------------------ | ----------------------- | ---------------------------------------- | ---------: |
 | `BIGINT`                 | `BIGINT`                | `70368755640078`                         | 1.2 s      |
 | `BIGINT`                 | `VARCHAR`               | `'70368755640078'`                       | 2.1 s      |
+
+> Bestpractice Avoid representing numeric values as strings, especially if you intend to perform e.g. join operations on them.
 
 ## Constraints
 
@@ -74,7 +76,9 @@ We illustrate the effect of using primary keys with the [LDBC Comment table at s
 
 <div class="narrow_table"></div>
 
-| Operation                | Execution Time |
-| ------------------------ | -------------- |
-| Load without primary key | 92.168s        |
-| Load with primary key    | 286.765s       |
+| Operation                | Execution time |
+| ------------------------ | -------------: |
+| Load without primary key | 92.2 s         |
+| Load with primary key    | 286.8 s        |
+
+> Bestpractice For best bulk load performance, avoid defining primary key constraints if possible.

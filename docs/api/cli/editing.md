@@ -9,6 +9,8 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Moving
 
+<div class="narrow_table"></div>
+
 |      Key      |                                 Action                                 |
 |---------------|------------------------------------------------------------------------|
 | Left          | Move back a character                                                  |
@@ -28,6 +30,8 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## History
 
+<div class="narrow_table"></div>
+
 | Key    | Action                         |
 |--------|--------------------------------|
 | Ctrl+P | Move to previous history entry |
@@ -40,6 +44,8 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | Alt+P  | Search the history             |
 
 ## Changing Text
+
+<div class="narrow_table"></div>
 
 | Key           | Action                                                   |
 |---------------|----------------------------------------------------------|
@@ -62,6 +68,8 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Completing
 
+<div class="narrow_table"></div>
+
 |    Key    |                          Action                        |
 |-----------|--------------------------------------------------------|
 | Tab       | Autocomplete. When autocompleting, cycle to next entry |
@@ -69,6 +77,8 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | ESC+ESC   | When autocompleting, revert autocompletion             |
 
 ## Miscellaneous
+
+<div class="narrow_table"></div>
 
 |  Key   |                           Action                                                   |
 |--------|------------------------------------------------------------------------------------|
@@ -83,7 +93,7 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Using Read-Line
 
-If you prefer, you can use [`rlwrap`](https://github.com/hanslub42/rlwrap) to use read-line directly with the shell:
+If you prefer, you can use [`rlwrap`](https://github.com/hanslub42/rlwrap) to use read-line directly with the shell. Then, use Shift+Enter to insert a newline and Enter to execute the query:
 
 ```bash
 rlwrap --substitute-prompt="D " duckdb -batch

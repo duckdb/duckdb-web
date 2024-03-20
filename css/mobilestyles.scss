@@ -204,6 +204,9 @@
 		font-size: 35px;
 		padding: 50px 15px;
 	}
+	main.f-md .pagehead + .wrap{
+		padding: 50px 15px;
+	}
 	body.landing .welcome h1{
 		font-size: 200%;
 	}
@@ -271,6 +274,7 @@
 	}
 	body.documentation main .wrap #main_content_wrap{
 		padding-right: 0;
+		padding-top: 0;
 	}
 	body.documentation .headlinebar .breadcrumbs{
 		width: 100%;
@@ -320,6 +324,9 @@
 				    -ms-transform: translateX(0%);
 				        transform: translateX(0%);
 			}
+			.opensearch{
+				display: none;
+			}
 		}
 		main{
 			overflow-x: hidden;
@@ -340,19 +347,7 @@
 			width: 108%;
 		}
 		table{
-			width: 100%;
-			overflow-x: auto;
-			display: block;
 			border: 0;
-			&::-webkit-scrollbar {
-			  height: 5px;
-			}
-			&::-webkit-scrollbar-track {
-			  background: #D9D9D9;
-			}
-			&::-webkit-scrollbar-thumb {
-			  background: #b5b5b5;
-			}
 		}
 	}
 	body.landing .stickerbanner{

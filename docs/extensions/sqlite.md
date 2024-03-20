@@ -103,12 +103,12 @@ DuckDB is a strongly typed database system, as such, it requires all columns to 
 
 When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB follows SQLite's [type affinity rules](https://www.sqlite.org/datatype3.html#type_affinity) with a few extensions.
 
-1. If the declared type contains the string "INT" then it is translated into the type `BIGINT`
-2. If the declared type of the column contains any of the strings "CHAR", "CLOB", or "TEXT" then it is translated into `VARCHAR`.
-3. If the declared type for a column contains the string "BLOB" or if no type is specified then it is translated into `BLOB`.
-4. If the declared type for a column contains any of the strings "REAL", "FLOA", "DOUB", "DEC" or "NUM" then it is translated into `DOUBLE`.
-5. If the declared type is "DATE", then it is translated into `DATE`.
-6. If the declared type contains the string "TIME", then it is translated into `TIMESTAMP`.
+1. If the declared type contains the string `INT` then it is translated into the type `BIGINT`
+2. If the declared type of the column contains any of the strings `CHAR`, `CLOB`, or `TEXT` then it is translated into `VARCHAR`.
+3. If the declared type for a column contains the string `BLOB` or if no type is specified then it is translated into `BLOB`.
+4. If the declared type for a column contains any of the strings `REAL`, `FLOA`, `DOUB`, `DEC` or `NUM` then it is translated into `DOUBLE`.
+5. If the declared type is `DATE`, then it is translated into `DATE`.
+6. If the declared type contains the string `TIME`, then it is translated into `TIMESTAMP`.
 7. If none of the above apply, then it is translated into `VARCHAR`.
 
 As DuckDB enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
@@ -132,8 +132,8 @@ SQLite databases can also be opened directly and can be used transparently inste
 
 For example, with the shell:
 
-```sql
-$ duckdb data/db/sakila.db 
+```bash
+duckdb data/db/sakila.db 
 ```
 ```sql
 SHOW tables;
@@ -166,14 +166,14 @@ Below is a brief example of how to create a new SQLite database and load data in
 
 ```sql
 ATTACH 'new_sqlite_database.db' AS sqlite_db (TYPE SQLITE);
-CREATE TABLE sqlite_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE sqlite_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
 ```
 
 The resulting SQLite database can then be read into from SQLite.
 
 ```bash
-$ sqlite3 new_sqlite_database.db 
+sqlite3 new_sqlite_database.db 
 ```
 ```sql
 SQLite version 3.39.5 2022-10-14 20:58:05
@@ -192,7 +192,7 @@ Below is a list of supported operations.
 ### `CREATE TABLE`
 
 ```sql
-CREATE TABLE sqlite_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE sqlite_db.tbl (id INTEGER, name VARCHAR);
 ```
 
 ### `INSERT INTO`
@@ -255,7 +255,7 @@ CREATE VIEW sqlite_db.v1 AS SELECT 42;
 ### Transactions
 
 ```sql
-CREATE TABLE sqlite_db.tmp(i INTEGER);
+CREATE TABLE sqlite_db.tmp (i INTEGER);
 BEGIN;
 INSERT INTO sqlite_db.tmp VALUES (42);
 SELECT * FROM sqlite_db.tmp;

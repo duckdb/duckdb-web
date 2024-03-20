@@ -69,12 +69,6 @@ table td, table th {
 	font-weight: bold;
 	color: #000000;
 }
-  table thead th {
-	font-size: 15px;
-	font-weight: bold;
-	color: #000000;
-	text-align: center;
-}
 code, pre {
     font-family: "JetBrainsMono-Regular","Lucida Console",monospace;
     font-size: 16px;
@@ -239,6 +233,14 @@ h5 {
 				background-size: contain;
 				background-repeat: no-repeat;
 				margin-right: 10px;
+				border-radius: 200px;
+				overflow: hidden;
+				>img{
+					display: block;
+					object-fit: cover;
+					width: 100%;
+					height: 100%;
+				}
 			}
 			span{
 				display: block;
@@ -303,6 +305,13 @@ h5 {
 					font-family: $fontSans;
 					font-style: normal;
 				}
+			}
+			p > img{
+				max-width: 100%;
+			}
+			.eventdate{
+				font-size: $fontSizeh4;
+				margin-bottom: 10px;
 			}
 		}
 		.post-list{

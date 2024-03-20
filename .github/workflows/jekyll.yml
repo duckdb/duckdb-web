@@ -40,6 +40,10 @@ jobs:
           STAR_COUNT_FORMATTED=$(ruby -e 'printf("%.01fk", ARGV[0].to_i / 1000.0)' ${STAR_COUNT})
           echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
+      - name: Install Python requirements
+        run: pip install -r requirements.txt
+      - name: Fetch release calendar
+        run: python scripts/get_calendar.py
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
@@ -134,9 +138,9 @@ jobs:
 
       - run: pip install linkchecker --user
 
-      - name: Link Checker on latest
+      - name: Link Checker on stable
         run: |
-          linkchecker https://duckdb.org/ --ignore-url 'https://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
+          linkchecker https://duckdb.org/ --ignore-url 'https?://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
           echo $?
 
       - run: cat report.html >> ${GITHUB_STEP_SUMMARY}

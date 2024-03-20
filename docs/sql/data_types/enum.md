@@ -75,30 +75,29 @@ CREATE TABLE person (
 Inserts tuples in the `person` table:
 
 ```sql
-INSERT INTO person VALUES ('Pedro', 'happy'), ('Mark', NULL), ('Pagliacci', 'sad'), ('Mr. Mackey', 'ok');
+INSERT INTO person
+VALUES ('Pedro', 'happy'), ('Mark', NULL), ('Pagliacci', 'sad'), ('Mr. Mackey', 'ok');
 ```
 
 The following query will fail since the mood type does not have a 'quackity-quack' value.
 
 ```sql
-INSERT INTO person VALUES ('Hannes', 'quackity-quack');
+INSERT INTO person
+VALUES ('Hannes', 'quackity-quack');
 ```
 
 The string 'sad' is cast to the type mood, returning a numerical reference value.
 This makes the comparison a numerical comparison instead of a string comparison.
 
 ```sql
-SELECT * FROM person WHERE current_mood = 'sad';
+SELECT *
+FROM person
+WHERE current_mood = 'sad';
 ```
 
-```text
-┌───────────┬───────────────────────────────────────┐
-│   name    │             current_mood              │
-│  varchar  │ enum('sad', 'ok', 'happy', 'anxious') │
-├───────────┼───────────────────────────────────────┤
-│ Pagliacci │ sad                                   │
-└───────────┴───────────────────────────────────────┘
-```
+|   name    | current_mood |
+|-----------|--------------|
+| Pagliacci | sad          |
 
 If you are importing data from a file, you can create an Enum for a `VARCHAR` column before importing.
 Given this, the following subquery selects automatically selects only distinct values:
@@ -122,20 +121,16 @@ For example:
 
 ```sql
 -- regexp_matches is a function that takes a VARCHAR, hence current_mood is cast to VARCHAR
-SELECT regexp_matches(current_mood, '.*a.*') AS contains_a FROM person;
+SELECT regexp_matches(current_mood, '.*a.*') AS contains_a
+FROM person;
 ```
 
-```text
-┌────────────┐
-│ contains_a │
-│  boolean   │
-├────────────┤
-│ true       │
-│ NULL       │
-│ true       │
-│ false      │
-└────────────┘
-```
+| contains_a |
+|:-----------|
+| true       |
+| NULL       |
+| true       |
+| false      |
 
 Create a new mood and table:
 
@@ -152,13 +147,17 @@ CREATE TABLE person_2 (
 Since the `current_mood` and `future_mood` columns are constructed on different `ENUM` types, DuckDB will cast both `ENUM`s to strings and perform a string comparison:
 
 ```sql
-SELECT * FROM person_2 WHERE current_mood = future_mood;
+SELECT *
+FROM person_2
+WHERE current_mood = future_mood;
 ```
 
 When comparing the `past_mood` column (string), DuckDB will cast the `current_mood` `ENUM` to `VARCHAR` and perform a string comparison:
 
 ```sql
-SELECT * FROM person_2 WHERE current_mood = past_mood;
+SELECT *
+FROM person_2
+WHERE current_mood = past_mood;
 ```
 
 ## Enum Removal
@@ -185,49 +184,17 @@ CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
 SELECT 'sad'::mood < 'ok'::mood AS comp;
 ```
 
-```text
-┌─────────┐
-│  comp   │
-│ boolean │
-├─────────┤
-│ true    │
-└─────────┘
-```
+| comp |
+|-----:|
+| true |
 
 ```sql
 SELECT unnest(['ok'::mood, 'happy'::mood, 'sad'::mood]) AS m
 ORDER BY m;
 ```
 
-```text
-┌────────────────────────────┐
-│             m              │
-│ enum('sad', 'ok', 'happy') │
-├────────────────────────────┤
-│ sad                        │
-│ ok                         │
-│ happy                      │
-└────────────────────────────┘
-```
-
-<!--
-For example, this will fail since person has a catalog dependency to the `mood` type:
-
-```sql
-DROP TYPE mood;
-```
-
-```sql
-DROP TABLE person;
-DROP TABLE person_2;
-```
--- This successfully removes the mood type.
-DROP TYPE mood;
-```
-
-Another option would be to use cascading `DROP`, which drops the type and its dependents.
-
-```sql
-DROP TYPE mood CASCADE;
-```
--->
+|   m   |
+|-------|
+| sad   |
+| ok    |
+| happy |

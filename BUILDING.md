@@ -14,6 +14,7 @@
     - [Prerequisites](#prerequisites-1)
     - [Serving the site from Docker](#serving-the-site-from-docker)
   - [With a Dev Container](#with-a-dev-container)
+  - [Generating the search index](#generating-the-search-index)
 
 The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
@@ -65,15 +66,15 @@ We use [a fork of the Rouge syntax highligher](https://github.com/duckdb/rouge/b
 Serve the website (latest only, archives excluded) with:
 
 ```bash
-scripts/serve.sh
+scripts/serve-latest.sh
 ```
 
-The website can be browsed by going to <http://localhost:4000/docs/> in your browser.
+To browse the website, visit <http://localhost:4000/docs/>.
 
 Serve the full website with:
 
 ```sh
-scripts/serve-full.sh
+scripts/serve.sh
 ```
 
 ## Using Docker
@@ -98,7 +99,7 @@ Serve the website (latest only, archives excluded) with:
 scripts/docker-serve-latest.sh
 ```
 
-The website can be browsed by going to <http://localhost:4000/docs/> in your browser.
+To browse the website, visit <http://localhost:4000/docs/>.
 
 Serve the full website with:
 
@@ -115,3 +116,20 @@ scripts/docker-stop.sh
 ## With a Dev Container
 
 If you are using a [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers), click the green Code button to the top right to open a new codespace with this repository initialized.
+
+## Generating the search index
+
+To generate the search index, run:
+
+```bash
+scripts/install-dependencies.sh
+scripts/generate-search-index.sh
+```
+
+## Updating the release calendar
+
+To update the release calendar, run:
+
+```bash
+python scripts/get_calendar.py
+```

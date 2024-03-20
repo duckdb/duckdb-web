@@ -8,22 +8,22 @@ blurb: The PIVOT statement allows values within a column to be separated into th
 The `PIVOT` statement allows distinct values within a column to be separated into their own columns.
 The values within those new columns are calculated using an aggregate function on the subset of rows that match each distinct value.
 
-DuckDB implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` syntax that automatically detects the columns to create while pivoting. 
+DuckDB implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` syntax that automatically detects the columns to create while pivoting.
 `PIVOT_WIDER` may also be used in place of the `PIVOT` keyword.
 
 > The [`UNPIVOT` statement](unpivot) is the inverse of the `PIVOT` statement.
 
-## Simplified Pivot Syntax
+## Simplified `PIVOT` Syntax
 
 The full syntax diagram is below, but the simplified `PIVOT` syntax can be summarized using spreadsheet pivot table naming conventions as:
 
 ```sql
-PIVOT [dataset] 
-ON [columns] 
-USING [values] 
-GROUP BY [rows]
-ORDER BY [columns-with-order-directions]
-LIMIT [number-of-rows];
+PIVOT ⟨dataset⟩ 
+ON ⟨columns⟩
+USING ⟨values⟩ 
+GROUP BY ⟨rows⟩
+ORDER BY ⟨columns_with_order_directions⟩
+LIMIT ⟨number_of_rows⟩;
 ```
 
 The `ON`, `USING`, and `GROUP BY` clauses are each optional, but they may not all be omitted.
@@ -74,7 +74,9 @@ This is equivalent to the values parameter in a spreadsheet pivot table.
 If the `USING` clause is not included, it defaults to `count(*)`.
 
 ```sql
-PIVOT Cities ON Year USING sum(Population);
+PIVOT Cities
+ON Year
+USING sum(Population);
 ```
 
 <div class="narrow_table"></div>
@@ -98,14 +100,17 @@ PIVOT Cities ON Year USING first(Population);
 
 ### `PIVOT ON`, `USING`, and `GROUP BY`
 
-By default, the `PIVOT` statement retains all columns not specified in the `ON` or `USING` clauses. 
-To include only certain columns and further aggregate, specify columns in the `GROUP BY` clause. 
+By default, the `PIVOT` statement retains all columns not specified in the `ON` or `USING` clauses.
+To include only certain columns and further aggregate, specify columns in the `GROUP BY` clause.
 This is equivalent to the rows parameter of a spreadsheet pivot table.
 
-In the below example, the Name column is no longer included in the output, and the data is aggregated up to the Country level.
+In the below example, the `Name` column is no longer included in the output, and the data is aggregated up to the `Country` level.
 
 ```sql
-PIVOT Cities ON Year USING sum(Population) GROUP BY Country;
+PIVOT Cities
+ON Year
+USING sum(Population)
+GROUP BY Country;
 ```
 
 <div class="narrow_table"></div>
@@ -122,7 +127,10 @@ To only create a separate column for specific values within a column in the `ON`
 Let's say for example that we wanted to forget about the year 2020 for no particular reason...
 
 ```sql
-PIVOT Cities ON Year IN (2000, 2010) USING sum(Population) GROUP BY Country;
+PIVOT Cities
+ON Year IN (2000, 2010)
+USING sum(Population)
+GROUP BY Country;
 ```
 
 <div class="narrow_table"></div>
@@ -145,7 +153,9 @@ In the below example, all combinations of unique countries and unique cities rec
 Some combinations may not be present in the underlying data, so those columns are populated with `NULL` values.
 
 ```sql
-PIVOT Cities ON Country, Name USING sum(Population);
+PIVOT Cities
+ON Country, Name
+USING sum(Population);
 ```
 
 <div class="narrow_table"></div>
@@ -159,7 +169,7 @@ PIVOT Cities ON Country, Name USING sum(Population);
 To pivot only the combinations of values that are present in the underlying data, use an expression in the `ON` clause.
 Multiple expressions and/or columns may be provided.
 
-Here, Country and Name are concatenated together and the resulting concatenations each receive their own column.
+Here, `Country` and `Name` are concatenated together and the resulting concatenations each receive their own column.
 Any arbitrary non-aggregating expression may be used.
 In this case, concatenating with an underscore is used to imitate the naming convention the `PIVOT` clause uses when multiple `ON` columns are provided (like in the prior example).
 
@@ -184,24 +194,29 @@ This makes the column naming convention much cleaner when multiple expressions a
 In this example, both the `sum` and `max` of the Population column are calculated for each year and are split into separate columns.
 
 ```sql
-PIVOT Cities ON Year USING sum(Population) AS total, max(Population) AS max GROUP BY Country;
+PIVOT Cities
+ON Year
+USING sum(Population) AS total, max(Population) AS max
+GROUP BY Country;
 ```
 
 <div class="narrow_table"></div>
 
 | Country | 2000_total | 2000_max | 2010_total | 2010_max | 2020_total | 2020_max |
 |---------|-----------:|---------:|-----------:|---------:|-----------:|---------:|
-| NL      | 1005       | 1005     | 1065       | 1065     | 1158       | 1158     |
 | US      | 8579       | 8015     | 8783       | 8175     | 9510       | 8772     |
-
+| NL      | 1005       | 1005     | 1065       | 1065     | 1158       | 1158     |
 
 #### Multiple `GROUP BY` Columns
 
-Multiple `GROUP BY` columns may also be provided. 
+Multiple `GROUP BY` columns may also be provided.
 Note that column names must be used rather than column positions (1, 2, etc.), and that expressions are not supported in the `GROUP BY` clause.
 
 ```sql
-PIVOT Cities ON Year USING sum(Population) GROUP BY Country, Name;
+PIVOT Cities
+ON Year
+USING sum(Population)
+GROUP BY Country, Name;
 ```
 
 <div class="narrow_table"></div>
@@ -212,7 +227,6 @@ PIVOT Cities ON Year USING sum(Population) GROUP BY Country, Name;
 | US      | Seattle       | 564  | 608  | 738  |
 | US      | New York City | 8015 | 8175 | 8772 |
 
-
 ### Using `PIVOT` within a `SELECT` Statement
 
 The `PIVOT` statement may be included within a `SELECT` statement as a CTE ([a Common Table Expression, or `WITH` clause](../query_syntax/with)), or a subquery.
@@ -222,22 +236,28 @@ No `SELECT` is needed within the CTE, the `PIVOT` keyword can be thought of as t
 
 ```sql
 WITH pivot_alias AS (
-    PIVOT Cities ON Year USING sum(Population) GROUP BY Country
-) 
+    PIVOT Cities
+    ON Year
+    USING sum(Population)
+    GROUP BY Country
+)
 SELECT * FROM pivot_alias;
 ```
 
-A `PIVOT` may be used in a subquery and must be wrapped in parentheses. 
+A `PIVOT` may be used in a subquery and must be wrapped in parentheses.
 Note that this behavior is different than the SQL Standard Pivot, as illustrated in subsequent examples.
 
 ```sql
 SELECT * 
 FROM (
-    PIVOT Cities ON Year USING sum(Population) GROUP BY Country
+    PIVOT Cities
+    ON Year
+    USING sum(Population)
+    GROUP BY Country
 ) pivot_alias;
 ```
 
-### Multiple Pivots
+### Multiple `PIVOT` Statements
 
 Each `PIVOT` can be treated as if it were a `SELECT` node, so they can be joined together or manipulated in other ways.
 
@@ -272,7 +292,9 @@ After the `IN` clauses have been populated with `ENUM`s, the query is re-written
 For example:
 
 ```sql
-PIVOT Cities ON Year USING sum(Population);
+PIVOT Cities
+ON Year
+USING sum(Population);
 ```
 
 is initially translated into:
@@ -285,7 +307,9 @@ CREATE TEMPORARY TYPE __pivot_enum_0_0 AS ENUM (
     ORDER BY 
         Year
     );
-PIVOT Cities ON Year IN __pivot_enum_0_0 USING sum(Population);
+PIVOT Cities
+ON Year IN __pivot_enum_0_0
+USING sum(Population);
 ```
 
 and finally translated into:
@@ -320,27 +344,25 @@ The `PhysicalPivot` operator converts those lists into column names and values t
 | US      | Seattle       | 564  | 608  | 738  |
 | US      | New York City | 8015 | 8175 | 8772 |
 
-
 ## Simplified `PIVOT` Full Syntax Diagram
 
 Below is the full syntax diagram of the `PIVOT` statement.
 
 <div id="rrdiagram"></div>
 
-
 ## SQL Standard `PIVOT` Syntax
 
 The full syntax diagram is below, but the SQL Standard `PIVOT` syntax can be summarized as:
 
 ```sql
-FROM [dataset] 
+FROM ⟨dataset⟩
 PIVOT (
-    [values]
+    ⟨values⟩
     FOR 
-        [column_1] IN ([in_list])
-        [column_2] IN ([in_list])
+        ⟨column_1⟩ IN (⟨in_list⟩)
+        ⟨column_2⟩ IN (⟨in_list⟩)
         ...
-    GROUP BY [rows]
+    GROUP BY ⟨rows⟩
 );
 ```
 Unlike the simplified syntax, the `IN` clause must be specified for each column to be pivoted.
@@ -356,7 +378,7 @@ This example uses a single value expression, a single column expression, and a s
 FROM Cities 
 PIVOT (
     sum(Population) 
-    FOR 
+    FOR
         Year IN (2000, 2010, 2020) 
     GROUP BY Country
 );
@@ -369,7 +391,7 @@ PIVOT (
 | NL      | 1005 | 1065 | 1158 |
 | US      | 8579 | 8783 | 9510 |
 
-This example is somewhat contrived, but serves as an example of using multiple value expressions and multiple columns in the `FOR` clause. 
+This example is somewhat contrived, but serves as an example of using multiple value expressions and multiple columns in the `FOR` clause.
 
 ```sql
 FROM Cities 
@@ -390,6 +412,6 @@ PIVOT (
 
 ### SQL Standard `PIVOT` Full Syntax Diagram
 
-Below is the full syntax diagram of the SQL Standard version of the `PIVOT` statement. 
+Below is the full syntax diagram of the SQL Standard version of the `PIVOT` statement.
 
 <div id="rrdiagram2"></div>

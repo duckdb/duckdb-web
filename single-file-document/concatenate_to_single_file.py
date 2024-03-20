@@ -178,6 +178,12 @@ def adjust_headers(doc_body, doc_header_label):
     return doc_body_with_new_headers
 
 
+def change_function_table_headers(doc_body):
+    return doc_body.replace("""| **Description** | """, """|   |   |
+|:--|:--------|
+| **Description** |""")
+
+
 def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
     # skip index files
     if doc_file_path.endswith("index"):
@@ -206,6 +212,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         doc_body = replace_html_code_blocks(doc_body)
         doc_body = adjust_links_in_doc_body(doc_body)
         doc_body = adjust_headers(doc_body, doc_header_label)
+        doc_body = change_function_table_headers(doc_body)
         doc_body = change_link(doc_body, doc_file_path)
 
         # write to output

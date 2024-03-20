@@ -819,7 +819,7 @@ body.foundation{
 @media only screen and (max-width: 600px) {
 	body.foundation section.about .teammembers .member{
 		width: 100%;
-		margin-bottom: 15px;
+		margin-bottom: 20px;
 		&:last-of-type{
 			margin-bottom: 0;
 		}
@@ -846,13 +846,18 @@ body.foundation{
 		padding: 25px;
 		row-gap: 40px;
 		li{
-			height: 22px;
+			height: 60px;
 		}
+	}
+	body.foundation section.supporters .supporterboard.gold li{
+		width: 100%;
+		height: 80px;
 	}
 	body.foundation section,
 	.pagehead h1{
 		padding: 50px 15px;
 	}
+	
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {

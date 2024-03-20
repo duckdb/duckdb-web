@@ -10,7 +10,7 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 ## Clauses
 
 * [`CREATE OR REPLACE TABLE`](../../sql/statements/create_table#create-or-replace)
-* [`CREATE TABLE ... AS` (CTAS)](../../sql/statements/create_table)
+* [`CREATE TABLE ... AS` (CTAS)](../../sql/statements/create_table#create-table--as-ctas)
 * [`DESCRIBE`](../meta/describe)
 * [`FROM`-first syntax](/2023/08/23/even-friendlier-sql#from-first-in-select-statements)
 * [`GROUP BY ALL`](../../sql/query_syntax/groupby#group-by-all)
@@ -29,6 +29,7 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
     * [with regular expressions](/2023/08/23/even-friendlier-sql#columns-with-regular-expressions)
     * [with `EXCLUDE` and `REPLACE`](/2023/08/23/even-friendlier-sql#columns-with-exclude-and-replace)
     * [with lambda functions](/2023/08/23/even-friendlier-sql#columns-with-lambda-functions)
+* Reusable column aliases, e.g.: `SELECT i + 1 AS j, j + 2 AS k FROM range(0, 3) t(i)`
 
 ## Literals and Identifiers
 
@@ -41,11 +42,20 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 * [`MAP` data type](../../sql/data_types/map)
 * [`UNION` data type](../../sql/data_types/union)
 
+## Data Import
+
+* [Auto-detecting the headers and schema of CSV files](../../data//csv/auto_detection)
+* Directly querying [CSV files](../../data/csv) and [Parquet files](../../data/parquet)
+* Loading from files using the syntax `FROM 'my.csv'`, `FROM 'my.csv.gz'`, `FROM 'my.parquet'`, etc.
+* Filename expansion (globbing), e.g.: `FROM 'my-data/part-*.parquet'`
+
 ## Functions and Expressions
 
-* Formatters: [`format()` function with the `fmt` syntax](../../sql/functions/char#fmt-syntax) and the [`printf() function`](../../sql/functions/char#printf-syntax)
+* Dot operator for function chaining: `SELECT ('hello').upper()`
+* String formatters: [`format()` function with the `fmt` syntax](../../sql/functions/char#fmt-syntax) and the [`printf() function`](../../sql/functions/char#printf-syntax)
 * [List comprehensions](/2023/08/23/even-friendlier-sql#list-comprehensions)
-* [String slicing](/2022/05/04/friendlier-sql#string-slicing) and [list slicing](/2022/05/04/friendlier-sql#string-slicing)
+* [List slicing](/2022/05/04/friendlier-sql#string-slicing)
+* [String slicing](/2022/05/04/friendlier-sql#string-slicing)
 * [`STRUCT.*` notation](/2022/05/04/friendlier-sql#struct-dot-notation)
 * [Simple `LIST` and `STRUCT` creation](/2022/05/04/friendlier-sql#simple-list-and-struct-creation)
 
@@ -71,3 +81,4 @@ SELECT
 
 * [Friendlier SQL with DuckDB](/2022/05/04/friendlier-sql) blog post
 * [Even Friendlier SQL with DuckDB](/2023/08/23/even-friendlier-sql) blog post
+* [SQL Gymnastics: Bending SQL into flexible new shapes](/2024/03/01/sql-gymnastics) blog post

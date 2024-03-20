@@ -12,9 +12,13 @@
           "page": "Testing",
           "slug": "sqllogictest",
           "subfolderitems": [
-            {
+              {
               "page": "Overview",
               "url": "/dev/testing"
+            },
+            {
+              "page": "Writing Tests",
+              "url": "/dev/writing_tests"
             },
             {
               "page": "sqllogictest",
@@ -29,7 +33,7 @@
               "url": "/dev/sqllogictest/result_verification"
             },
             {
-              "page": "Persistent",
+              "page": "Persistent Testing",
               "url": "/dev/sqllogictest/persistent_testing"
             },
             {

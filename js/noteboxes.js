@@ -2,7 +2,6 @@ $(document).ready(function(){
 	
 	$('#main_content_wrap blockquote, .singleentry blockquote').each(function() {
 		var $blockquote = $(this);
-		console.log($blockquote);
 		var blockquoteText = $blockquote.text().trim();
 		var firstWord = blockquoteText.split(' ')[0];
 	

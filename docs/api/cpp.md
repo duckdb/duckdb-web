@@ -9,7 +9,7 @@ The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please 
 
 ## Basic API Usage
 
-DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`. 
+DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`.
 
 > The standard source distribution of `libduckdb` contains an "amalgamation" of the DuckDB sources, which combine all sources into two files `duckdb.hpp` and `duckdb.cpp`. The `duckdb.hpp` header is much larger in this case. Regardless of whether you are using the amalgamation or not, just include `duckdb.hpp`.
 
@@ -56,11 +56,11 @@ std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ### UDF API
 
 The UDF API allows the definition of user-defined functions. It is exposed in `duckdb:Connection` through the methods: `CreateScalarFunction()`, `CreateVectorizedFunction()`, and variants.
-These methods created UDFs into the temporary schema (TEMP_SCHEMA) of the owner connection that is the only one allowed to use and change them.
+These methods created UDFs into the temporary schema (`TEMP_SCHEMA`) of the owner connection that is the only one allowed to use and change them.
 
 #### CreateScalarFunction
 
-The user can code an ordinary scalar function and invoke the `CreateScalarFunction()` to register and afterward use the UDF in a _SELECT_ statement, for instance:
+The user can code an ordinary scalar function and invoke the `CreateScalarFunction()` to register and afterward use the UDF in a `SELECT` statement, for instance:
 
 ```cpp
 bool bigger_than_four(int value) {
@@ -98,7 +98,7 @@ This method automatically discovers from the template typenames the correspondin
 - `double` → `LogicalType::DOUBLE`
 - `string_t` → `LogicalType::VARCHAR`
 
-*In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same LogicalType: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
+In DuckDB some primitive types, e.g., `int32_t`, are mapped to the same `LogicalType`: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
 
 **2.**
 

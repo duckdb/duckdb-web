@@ -35,27 +35,27 @@ The `[OPTIONS]` part encodes [arguments for the CLI client](arguments). Common o
 
 * `-csv`: sets the output mode to CSV
 * `-json`: sets the output mode to JSON
-* `-readonly`: open the database in read-only mode (see [concurrency in DuckDB](/faq#how-does-duckdb-handle-concurrency))
+* `-readonly`: open the database in read-only mode (see [concurrency in DuckDB](../../connect/concurrency#handling-concurrency))
 
 For a full list of options, see the [command line arguments page](arguments).
 
 ### In-Memory vs. Persistent Database
 
-When no `[FILENAME]` argument is provided, the DuckDB CLI will open a temporary in-memory database.
+When no `[FILENAME]` argument is provided, the DuckDB CLI will open a temporary [in-memory database](../../connect/overview#in-memory-database).
 You will see DuckDB's version number, the information on the connection and a prompt starting with a `D`.
 
 ```bash
 $ duckdb
 ```
 ```text
-v0.10.0 20b1486d11
+v0.10.1 4a89d97db8
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
 D
 ```
 
-To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. Running on a persistent database allows spilling to disk, thus facilitating larger-than-memory workloads (i.e., out-of-core-processing).
+To open or create a [persistent database](../../connect/overview#persistent-database), simply include a path as a command line argument like `duckdb path/to/my_database.duckdb` or `duckdb my_database.db`.
 
 ### Running SQL Statements in the CLI
 
@@ -65,14 +65,9 @@ Once the CLI has been opened, enter a SQL statement followed by a semicolon, the
 SELECT 'quack' AS my_column;
 ```
 
-```text
-┌───────────┐
-│ my_column │
-│  varchar  │
-├───────────┤
-│ quack     │
-└───────────┘
-```
+| my_column |
+|-----------|
+| quack     |
 
 The CLI supports all of DuckDB's rich [SQL syntax](../../sql/introduction) including `SELECT`, `CREATE`, and `ALTER` statements.
 
@@ -145,7 +140,7 @@ The output below is returned to the terminal by default. The formatting of the t
 
 ```text
 | generate_series |
-|-----------------|
+|----------------:|
 | 0               |
 | 1               |
 | 2               |
@@ -173,7 +168,7 @@ In this case, no output is returned to the terminal. Instead, the file `series.m
 
 ```text
 | generate_series |
-|-----------------|
+|----------------:|
 | 0               |
 | 1               |
 | 2               |
@@ -210,7 +205,7 @@ This outputs:
 
 ```text
 -- Loading resources from prompt.sql
-v<version> <git hash>
+v⟨version⟩ ⟨git hash⟩
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
@@ -259,15 +254,10 @@ First, read a file and pipe it to the `duckdb` CLI executable. As arguments to t
 $ cat test.csv | duckdb :memory: "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
-```text
-┌───────┐
-│ woot  │
-│ int32 │
-├───────┤
-│    42 │
-│    43 │
-└───────┘
-```
+| woot |
+|-----:|
+| 42   |
+| 43   |
 
 To write back to stdout, the copy command can be used with the `/dev/stdout` file location.
 
@@ -292,16 +282,12 @@ To retrieve the home directory's path from the `HOME` environment variable, use:
 ```sql
 SELECT getenv('HOME') AS home;
 ```
-```text
-┌──────────────────┐
-│       home       │
-│     varchar      │
-├──────────────────┤
-│ /Users/user_name │
-└──────────────────┘
-```
 
-The output of the `getenv` function can be used to set [configuration options](../../sql/configuration). For example, to set the `NULL` order based on the environment variable `DEFAULT_NULL_ORDER`, use:
+|       home       |
+|------------------|
+| /Users/user_name |
+
+The output of the `getenv` function can be used to set [configuration options](../../configuration/overview). For example, to set the `NULL` order based on the environment variable `DEFAULT_NULL_ORDER`, use:
 
 ```sql
 SET default_null_order = getenv('DEFAULT_NULL_ORDER');
@@ -309,11 +295,10 @@ SET default_null_order = getenv('DEFAULT_NULL_ORDER');
 
 ### Restrictions for Reading Environment Variables
 
-The `getenv` function can only be run when the [`enable_external_access`](../../sql/configuration#configuration-reference) is set to `true` (the default setting).
+The `getenv` function can only be run when the [`enable_external_access`](../../configuration/overview#configuration-reference) is set to `true` (the default setting).
 It is only available in the CLI client and is not supported in other DuckDB clients.
 
 ## Prepared Statements
 
 The DuckDB CLI supports executing [prepared statements](../../sql/query_syntax/prepared_statements) in addition to regular `SELECT` statements.
 To create and execute a prepared statement in the CLI client, use the `PREPARE` clause and the `EXECUTE` statement.
-

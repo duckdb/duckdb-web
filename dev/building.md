@@ -44,7 +44,7 @@ brew install cmake ninja
 
 ### Windows
 
-Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.0/.github/workflows/Windows.yml#L201) for a list of packages used to build DuckDB on Windows.
+Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.1/.github/workflows/Windows.yml#L234) for a list of packages used to build DuckDB on Windows.
 
 The DuckDB Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../docs/api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
 
@@ -57,6 +57,23 @@ GEN=ninja make
 ```
 
 It is not advised to directly call CMake, as the Makefile sets certain variables that are crucial to properly building the package.
+
+### Overriding Git Hash and Version
+
+It is possible to override the Git hash and version when building from source using the `OVERRIDE_GIT_DESCRIBE` environment variable.
+This is useful when building from sources that are not part of a complete Git repository (e.g., an archive file with no information on commit hashes and tags).
+For example:
+
+```bash
+OVERRIDE_GIT_DESCRIBE=v0.10.0-843-g09ea97d0a9 GEN=ninja make
+```
+
+Will result in the following output when running `./build/release/duckdb`:
+
+```text
+v0.10.1-dev843 09ea97d0a9
+...
+```
 
 ### Build Type
 

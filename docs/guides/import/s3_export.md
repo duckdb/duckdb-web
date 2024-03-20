@@ -26,6 +26,8 @@ CREATE SECRET (
 );
 ```
 
+> Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your-region⟩.amazonaws.com'`.
+
 Alternatively, use the [`aws` extension](../../extensions/aws) to retrieve the credentials automatically:
 
 ```sql
@@ -38,7 +40,7 @@ CREATE SECRET (
 After the `httpfs` extension is set up and the S3 credentials are correctly configured, Parquet files can be written to S3 using the following command:
 
 ```sql
-COPY <table_name> TO 's3://bucket/file.parquet';
+COPY ⟨table_name⟩ TO 's3://bucket/file.parquet';
 ```
 
 Similarly, Google Cloud Storage (GCS) is supported through the Interoperability API. You need to create [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and provide the credentials as follows:
@@ -48,11 +50,11 @@ CREATE SECRET (
     TYPE GCS,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-)
+);
 ```
 
 After setting up the GCS credentials, you can export using: 
 
 ```sql
-COPY <table_name> TO 'gs://gcs_bucket/file.parquet';
+COPY ⟨table_name⟩ TO 'gs://gcs_bucket/file.parquet';
 ```

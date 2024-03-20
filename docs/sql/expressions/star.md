@@ -30,7 +30,8 @@ SELECT COLUMNS('number\d+') FROM addresses;
 The `*` expression can be used in a `SELECT` statement to select all columns that are projected in the `FROM` clause.
 
 ```sql
-SELECT * FROM tbl;
+SELECT *
+FROM tbl;
 ```
 
 The `*` expression can be modified using the `EXCLUDE` and `REPLACE`.
@@ -40,7 +41,8 @@ The `*` expression can be modified using the `EXCLUDE` and `REPLACE`.
 `EXCLUDE` allows us to exclude specific columns from the `*` expression.
 
 ```sql
-SELECT * EXCLUDE (col) FROM tbl;
+SELECT * EXCLUDE (col)
+FROM tbl;
 ```
 
 ### `REPLACE` Clause
@@ -48,7 +50,8 @@ SELECT * EXCLUDE (col) FROM tbl;
 `REPLACE` allows us to replace specific columns with different expressions.
 
 ```sql
-SELECT * REPLACE (col / 1000 AS col) FROM tbl;
+SELECT * REPLACE (col / 1000 AS col)
+FROM tbl;
 ```
 
 ## `COLUMNS` Expression
@@ -63,9 +66,9 @@ SELECT min(COLUMNS(*)), count(COLUMNS(*)) FROM numbers;
 
 <div class="narrow_table"></div>
 
-| min(numbers.id) | min(numbers.number) | count(numbers.id) | count(numbers.number) |
-|-----------------|---------------------|-------------------|-----------------------|
-| 1               | 10                  | 3                 | 2                     |
+| id | number | id | number |
+|---:|-------:|---:|-------:|
+| 1  | 10     | 3  | 2      |
 
 The `*` expression in the `COLUMNS` statement can also contain `EXCLUDE` or `REPLACE`, similar to regular star expressions.
 
@@ -75,9 +78,9 @@ SELECT min(COLUMNS(* REPLACE (number + id AS number))), count(COLUMNS(* EXCLUDE 
 
 <div class="narrow_table"></div>
 
-| min(numbers.id) | min(number := (number + id)) | count(numbers.id) |
-|-----------------|------------------------------|-------------------|
-| 1               | 11                           | 3                 |
+| id | min(number := (number + id)) | id |
+|---:|-----------------------------:|---:|
+| 1  | 11                           | 3  |
 
 `COLUMNS` expressions can also be combined, as long as the `COLUMNS` contains the same (star) expression:
 
@@ -87,11 +90,11 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 
 <div class="narrow_table"></div>
 
-| (numbers.id + numbers.id) | (numbers.number + numbers.number) |
-|---------------------------|-----------------------------------|
-| 2                         | 20                                |
-| 4                         | 40                                |
-| 6                         | NULL                              |
+| id | number |
+|---:|-------:|
+| 2  | 20     |
+| 4  | 40     |
+| 6  | NULL   |
 
 
 ## COLUMNS Regular Expression
@@ -140,5 +143,5 @@ SELECT st.* FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS st);
 <div class="narrow_table"></div>
 
 | x | y | z |
-|:---|:---|:---|
+|--:|--:|--:|
 | 1 | 2 | 3 |

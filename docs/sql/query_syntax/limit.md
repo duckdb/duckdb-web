@@ -8,7 +8,6 @@ railroad: query_syntax/orderby.js
 
 Note that while `LIMIT` can be used without an `ORDER BY` clause, the results might not be deterministic without the `ORDER BY` clause. This can still be useful, however, for example when you want to inspect a quick snapshot of the data.
 
-
 ## Examples
 
 ```sql
@@ -16,11 +15,15 @@ Note that while `LIMIT` can be used without an `ORDER BY` clause, the results mi
 SELECT *
 FROM addresses
 LIMIT 5;
+```
+```sql
 -- select the 5 rows from the addresses table, starting at position 5 (i.e., ignoring the first 5 rows)
 SELECT *
 FROM addresses
 LIMIT 5
 OFFSET 5;
+```
+```sql
 -- select the top 5 cities with the highest population
 SELECT city, count(*) AS population
 FROM addresses

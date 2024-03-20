@@ -7,7 +7,7 @@ title: Integration with Polars
 
 ## Installation
 
-```python
+```bash
 pip install duckdb
 pip install -U 'polars[pyarrow]'
 ```
@@ -45,6 +45,7 @@ df = duckdb.sql("""
 ).pl()
 print(df)
 ```
+
 ```text
 shape: (3, 2)
 ┌─────┬────────┐

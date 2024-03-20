@@ -17,7 +17,7 @@ CREATE SECRET (
     TYPE GCS,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-)
+);
 ```
 
 ## Querying
@@ -25,5 +25,6 @@ CREATE SECRET (
 After setting up the GCS credentials, you can query the GCS data using:
 
 ```sql
-SELECT * FROM read_parquet('gs://<gcs_bucket>/<file>');
+SELECT *
+FROM read_parquet('gs://⟨gcs_bucket⟩/⟨file⟩');
 ```

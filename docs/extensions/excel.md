@@ -22,14 +22,10 @@ LOAD excel;
 ```sql
 SELECT excel_text(1234567.897, 'h:mm AM/PM') AS timestamp;
 ```
-```text
-┌───────────┐
-│ timestamp │
-│  varchar  │
-├───────────┤
-│ 9:31 PM   │
-└───────────┘
-```
+
+| timestamp |
+|-----------|
+| 9:31 PM   |
 
 ## Functions
 

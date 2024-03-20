@@ -23,8 +23,8 @@ Similarly to other SQL dialects and programming languages, identifiers in DuckDB
 In some cases, duplicate identifiers can occur, e.g., column names may conflict when unnesting a nested data structure.
 In these cases, DuckDB automatically deduplicates column names by renaming them according to the following rules:
 
-* For a column named `<name>`, the first instance is not renamed.
-* Subsequent instances are renamed to `<name>_<count>`, where `<count>` starts at 1.
+* For a column named `⟨name⟩`, the first instance is not renamed.
+* Subsequent instances are renamed to `⟨name⟩_⟨count⟩`, where `⟨count⟩` starts at 1.
 
 For example:
 
@@ -33,20 +33,15 @@ SELECT *
 FROM (SELECT UNNEST({'a': 42, 'b': {'a': 88, 'b': 99}}, recursive := true));
 ```
 
-```text
-┌───────┬───────┬───────┐
-│   a   │  a_1  │   b   │
-│ int32 │ int32 │ int32 │
-├───────┼───────┼───────┤
-│    42 │    88 │    99 │
-└───────┴───────┴───────┘
-```
+| a  | a_1 | b  |
+|---:|----:|---:|
+| 42 | 88  | 99 |
 
 ## Database Names
 
 Database names are subject to the rules for [identifiers](#identifiers).
 
-Additionally, it is best practive to avoid DuckDB's two internal [database schema names](duckdb_table_functions#duckdb_databases), `system` and `temp`.
+Additionally, it is best practice to avoid DuckDB's two internal [database schema names](duckdb_table_functions#duckdb_databases), `system` and `temp`.
 By default, persistent databases are named after their filename without the extension.
 Therefore, the filenames `system.db` and `temp.db` (as well as `system.duckdb` and `temp.duckdb`) result in the database names `system` and `temp`, respectively.
 If you need to attach to a database that has one of these names, use an alias, e.g.:
@@ -55,25 +50,6 @@ If you need to attach to a database that has one of these names, use an alias, e
 ATTACH 'temp.db' AS temp2;
 USE temp2;
 ```
-
-<!--
-The list of internal schemas can be retrieved as follows:
-
-```sql
-SELECT database_name
-FROM duckdb_databases()
-WHERE internal = true;
-```
-```text
-┌───────────────┐
-│ database_name │
-│    varchar    │
-├───────────────┤
-│ system        │
-│ temp          │
-└───────────────┘
-```
--->
 
 ## Numeric Literals
 
@@ -104,14 +80,10 @@ For example, the following two queries are equivalent:
 select COS(Pi()) as CosineOfPi;
 SELECT cos(pi()) AS CosineOfPi;
 ```
-```text
-┌────────────┐
-│ CosineOfPi │
-│   double   │
-├────────────┤
-│       -1.0 │
-└────────────┘
-```
+
+| CosineOfPi |
+|-----------:|
+| -1.0       |
 
 ### Case-Sensitivity of Identifiers
 
@@ -123,16 +95,12 @@ For example:
 CREATE TABLE tbl AS SELECT cos(pi()) AS CosineOfPi;
 SELECT cosineofpi FROM tbl;
 ```
-```text
-┌────────────┐
-│ CosineOfPi │
-│   double   │
-├────────────┤
-│       -1.0 │
-└────────────┘
-```
 
-To change this behavior, set the `preserve_identifier_case` [configuration option](configuration#configuration-reference) to `false`.
+| CosineOfPi |
+|-----------:|
+| -1.0       |
+
+To change this behavior, set the `preserve_identifier_case` [configuration option](../configuration/overview#configuration-reference) to `false`.
 
 #### Handling Conflicts
 
@@ -141,32 +109,25 @@ In case of a conflict, when the same identifier is spelt with different cases, o
 ```sql
 CREATE TABLE t1 (idfield INT, x INT);
 CREATE TABLE t2 (IdField INT, y INT);
+INSERT INTO t1 VALUES (1, 123);
+INSERT INTO t2 VALUES (1, 456);
 SELECT * FROM t1 NATURAL JOIN t2;
 ```
 
-```text
-┌─────────┬───────┬───────┐
-│ idfield │   x   │   y   │
-│  int32  │ int32 │ int32 │
-├─────────────────────────┤
-│         0 rows          │
-└─────────────────────────┘
-```
+| idfield |  x  |  y  |
+|--------:|----:|----:|
+| 1       | 123 | 456 |
 
 #### Disabling Preserving Cases
 
-With the `preserve_identifier_case` [configuration option](configuration#configuration-reference) set to `false`, all identifiers are turned into lowercase:
+With the `preserve_identifier_case` [configuration option](../configuration/overview#configuration-reference) set to `false`, all identifiers are turned into lowercase:
 
 ```sql
 SET preserve_identifier_case = false;
 CREATE TABLE tbl AS SELECT cos(pi()) AS CosineOfPi;
 SELECT CosineOfPi FROM tbl;
 ```
-```text
-┌────────────┐
-│ cosineofpi │
-│   double   │
-├────────────┤
-│       -1.0 │
-└────────────┘
-```
+
+| cosineofpi |
+|-----------:|
+| -1.0       |
