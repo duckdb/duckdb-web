@@ -68,7 +68,7 @@ with open(f"reformatted/{input_filename_without_extension}-reformatted.md", "w")
         result_item = ""
         if have_result_column:
             caption = "Result"
-            result_item = f"\n* **{caption}:** {line[3]}"
+            result_item = f"\n| **{caption}** | {line[3]} |"
 
         aliases_item = ""
         if have_aliases_column and line[-1] is not None:
@@ -77,11 +77,13 @@ with open(f"reformatted/{input_filename_without_extension}-reformatted.md", "w")
                 caption = "Aliases"
             else:
                 caption = "Alias"
-            aliases_item = f"\n* **{caption}:** {line[-1]}"
+            aliases_item = f"\n| **{caption}** | {line[-1]} |"
 
         out.write(f"""
 ### {line[0]}
 
-* **Description:** {line[1]}
-* **Example:** {line[2]}{result_item}{aliases_item}
+<div class="nostroke_table"></div>
+
+| **Description** | {line[1]} |
+| **Example** | {line[2]} |{result_item}{aliases_item}
 """)
