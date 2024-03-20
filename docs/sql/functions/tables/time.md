@@ -1,6 +1,6 @@
 | Function | Description | Example | Result |
 |:--|:--|:---|:--|
-| `current_time`/`get_current_time()` | Current time (start of current transaction) | | |
+| `current_time`/`get_current_time()` | Current time (start of current transaction) | `get_current_time()` | `10:31:58.578` |
 | `date_diff(`*`part`*`, `*`starttime`*`, `*`endtime`*`)` | The number of [partition](../../sql/functions/datepart) boundaries between the times | `date_diff('hour', TIME '01:02:03', TIME '06:01:03')` | `5` |
 | `date_part(`*`part`*`, `*`time`*`)` | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `date_part('minute', TIME '14:21:13')` | `21` |
 | `date_sub(`*`part`*`, `*`starttime`*`, `*`endtime`*`)` | The number of complete [partitions](../../sql/functions/datepart) between the times | `date_sub('hour', TIME '01:02:03', TIME '06:01:03')` | `4` |
