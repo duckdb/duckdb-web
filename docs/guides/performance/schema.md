@@ -70,7 +70,7 @@ DuckDB allows defining [constraints](../../sql/constraints) such as `UNIQUE`, `P
 
 > Bestpractice Do not define constraints unless your goal is to ensure data integrity.
 
-## Microbenchmark: The Effect of Primary Keys
+### Microbenchmark: The Effect of Primary Keys
 
 We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst). This table has approx. 554 million entries. We first create the schema without a primary key, then load the data. In the second experiment, we create the schema with a primary key, then load the data. In both cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
 
@@ -80,5 +80,7 @@ We illustrate the effect of using primary keys with the [LDBC Comment table at s
 | ------------------------ | -------------: |
 | Load without primary key | 92.2 s         |
 | Load with primary key    | 286.8 s        |
+
+In this case, primary keys will only have a (small) positive effect on highly selective queries such as when filtering on a single identifier. They do not have an effect on join and aggregation operators.
 
 > Bestpractice For best bulk load performance, avoid defining primary key constraints if possible.
