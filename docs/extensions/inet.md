@@ -26,7 +26,12 @@ SELECT '127.0.0.1'::INET AS ipv4, '2001:db8:3c4d::/48'::INET AS ipv6;
 
 ```sql
 CREATE TABLE tbl (id INTEGER, ip INET);
-INSERT INTO tbl VALUES (1, '192.168.0.0/16'), (2, '127.0.0.1'), (3, '8.8.8.8'), (4, 'fe80::/10'), (5, '2001:db8:3c4d:15::1a2f:1a2b');
+INSERT INTO tbl VALUES
+    (1, '192.168.0.0/16'),
+    (2, '127.0.0.1'),
+    (3, '8.8.8.8'),
+    (4, 'fe80::/10'),
+    (5, '2001:db8:3c4d:15::1a2f:1a2b');
 SELECT * FROM tbl;
 ```
 
@@ -44,8 +49,12 @@ SELECT * FROM tbl;
 
 ```sql
 CREATE TABLE tbl (cidr INET);
-INSERT INTO tbl VALUES ('127.0.0.1'::INET + 10), ('fe80::10'::INET - 9), ('127.0.0.1'), ('2001:db8:3c4d:15::1a2f:1a2b');
-SELECT cidr from tbl ORDER BY cidr ASC;
+INSERT INTO tbl VALUES
+    ('127.0.0.1'::INET + 10),
+    ('fe80::10'::INET - 9),
+    ('127.0.0.1'),
+    ('2001:db8:3c4d:15::1a2f:1a2b');
+SELECT cidr FROM tbl ORDER BY cidr ASC;
 ```
 
 |            cidr             |
@@ -61,8 +70,11 @@ The host component of an `INET` value can be extracted using the `HOST()` functi
 
 ```sql
 CREATE TABLE tbl (cidr INET);
-INSERT INTO tbl VALUES ('192.168.0.0/16'), ('127.0.0.1'), ('2001:db8:3c4d:15::1a2f:1a2b/96');
-SELECT cidr, host(cidr) from tbl;
+INSERT INTO tbl VALUES
+    ('192.168.0.0/16'),
+    ('127.0.0.1'),
+    ('2001:db8:3c4d:15::1a2f:1a2b/96');
+SELECT cidr, host(cidr) FROM tbl;
 ```
 
 |              cidr              |         host(cidr)          |
