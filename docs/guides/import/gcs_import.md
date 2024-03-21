@@ -6,7 +6,7 @@ title: GCS Import
 ## Prerequisites
 
 For Google Cloud Storage (GCS), the Interoperability API enables you to have access to it like an S3 connection using the [`httpfs` extension](../../extensions/httpfs).
-This can be installed use the `INSTALL` SQL command. This only needs to be run once.
+This can be installed with the `INSTALL` SQL command. This only needs to be run once.
 
 ## Credentials and Configuration
 
