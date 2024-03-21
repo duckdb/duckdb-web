@@ -150,7 +150,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 | [`epoch_ms(`*`timestamptz`*`)`](#epoch_mstimestamptz) | Converts a timestamptz to milliseconds since the epoch. |
 | [`epoch_ns(`*`timestamptz`*`)`](#epoch_nstimestamptz) | Converts a timestamptz to nanoseconds since the epoch. |
 | [`epoch_us(`*`timestamptz`*`)`](#epoch_ustimestamptz) | Converts a timestamptz to microseconds since the epoch. |
-| [`extract(`*`field`* `from` *`timestamptz`*`)`](#extractfieldfromtimestamptz) | Get [subfield](../../sql/functions/datepart) from a `TIMESTAMP WITH TIME ZONE`. |
+| [`extract(`*`field`* `FROM` *`timestamptz`*`)`](#extractfieldfromtimestamptz) | Get [subfield](../../sql/functions/datepart) from a `TIMESTAMP WITH TIME ZONE`. |
 | [`last_day(`*`timestamptz`*`)`](#last_daytimestamptz) | The last day of the month. |
 | [`make_timestamptz(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`, `*`string`*`)`](#make_timestamptzbigint-bigint-bigint-bigint-bigint-double-string) | The `TIMESTAMP WITH TIME ZONE` for the given parts and time zone. |
 | [`make_timestamptz(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`)`](#make_timestamptzbigint-bigint-bigint-bigint-bigint-double) | The `TIMESTAMP WITH TIME ZONE` for the given parts in the current time zone. |
@@ -281,7 +281,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 | **Example** | `epoch_us('2022-11-07 08:43:04.123456+00'::TIMESTAMPTZ);` |
 | **Result** | `1667810584123456` |
 
-### `extract(`*`field`* `from` *`timestamptz`*`)`
+### `extract(`*`field`* `FROM` *`timestamptz`*`)`
 
 <div class="nostroke_table"></div>
 

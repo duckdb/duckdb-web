@@ -43,7 +43,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`epoch_ns(`*`timestamp`*`)`](#epoch_nstimestamp) | Return the total number of nanoseconds since the epoch. |
 | [`epoch_us(`*`timestamp`*`)`](#epoch_ustimestamp) | Return the total number of microseconds since the epoch. |
 | [`epoch(`*`timestamp`*`)`](#epochtimestamp) | Converts a timestamp to seconds since the epoch. |
-| [`extract(`*`field`* `from` *`timestamp`*`)`](#extractfieldfromtimestamp) | Get [subfield](../../sql/functions/datepart) from a timestamp. |
+| [`extract(`*`field`* `FROM` *`timestamp`*`)`](#extractfieldfromtimestamp) | Get [subfield](../../sql/functions/datepart) from a timestamp. |
 | [`greatest(`*`timestamp`*`, `*`timestamp`*`)`](#greatesttimestamp-timestamp) | The later of two timestamps. |
 | [`isfinite(`*`timestamp`*`)`](#isfinitetimestamp) | Returns true if the timestamp is finite, false otherwise. |
 | [`isinf(`*`timestamp`*`)`](#isinftimestamp) | Returns true if the timestamp is infinite, false otherwise. |
@@ -227,7 +227,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Example** | `epoch('2022-11-07 08:43:04'::TIMESTAMP);` |
 | **Result** | `1667810584` |
 
-### `extract(`*`field`* `from` *`timestamp`*`)`
+### `extract(`*`field`* `FROM` *`timestamp`*`)`
 
 <div class="nostroke_table"></div>
 
