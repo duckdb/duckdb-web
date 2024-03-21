@@ -28,19 +28,19 @@ SELECT DISTINCT city FROM addresses;
 
 ### Syntax
 
-The `SELECT` statement retrieves rows from the database. The canonical order of a select statement is as follows, with less common clauses being indented:
+The `SELECT` statement retrieves rows from the database. The canonical order of a `SELECT` statement is as follows, with less common clauses being indented:
 
 ```sql
-SELECT select_list
-FROM tables
-    USING SAMPLE sample_expr
-WHERE condition
-GROUP BY groups
-HAVING group_filter
-    WINDOW window_expr
-    QUALIFY qualify_filter
-ORDER BY order_expr
-LIMIT n;
+SELECT ⟨select_list⟩
+FROM ⟨tables⟩
+    USING SAMPLE ⟨sample_expression⟩
+WHERE ⟨condition⟩
+GROUP BY ⟨groups⟩
+HAVING ⟨group_filter⟩
+    WINDOW ⟨window_expression⟩
+    QUALIFY ⟨qualify_filter⟩
+ORDER BY ⟨order_expression⟩
+LIMIT ⟨n⟩;
 ```
 
 Optionally, the `SELECT` statement can be prefixed with a [`WITH` clause](../../sql/query_syntax/with).
