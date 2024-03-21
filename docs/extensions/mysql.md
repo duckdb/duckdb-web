@@ -222,8 +222,8 @@ mysql_query(attached_database::VARCHAR, query::VARCHAR)
 For example:
 
 ```sql
-ATTACH 'dbname=mysqlscanner' AS s (TYPE mysql);
-SELECT * FROM mysql_query('s', 'SELECT * FROM cars LIMIT 3');
+ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE mysql);
+SELECT * FROM mysql_query('mysqldb', 'SELECT * FROM cars LIMIT 3');
 ```
 
 > Warning This function is only available on DuckDB v0.10.1, using the latest MySQL extension.
@@ -234,8 +234,8 @@ SELECT * FROM mysql_query('s', 'SELECT * FROM cars LIMIT 3');
 The `mysql_execute` function allows running arbitrary queries within MySQL, including statements that update the schema and content of the database.
 
 ```sql
-ATTACH 'dbname=mysqlscanner' AS s (TYPE mysql);
-CALL mysql_execute('s', 'CREATE TABLE my_table (i INTEGER)');
+ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE mysql);
+CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
 > Warning This function is only available on DuckDB v0.10.1, using the latest MySQL extension.
