@@ -136,6 +136,12 @@ COPY mysql_db.tbl TO 'data.parquet';
 COPY mysql_db.tbl FROM 'data.parquet';
 ```
 
+You may also create a full copy of the database using the [`COPY FROM DATABASE` statement](../sql/statements/copy#copy-from-database--to):
+
+```sql
+COPY FROM DATABASE mysql_db TO my_duckdb_db;
+```
+
 ### `UPDATE`
 
 ```sql
