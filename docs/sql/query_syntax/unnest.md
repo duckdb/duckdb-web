@@ -12,9 +12,11 @@ SELECT unnest([1, 2, 3]);
 SELECT unnest({'a': 42, 'b': 84});
 -- recursive unnest of a list of structs
 SELECT unnest([{'a': 42, 'b': 84}, {'a': 100, 'b': NULL}], recursive := true);
+-- limit depth of recurisve unnest using max_depth
+SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth := 2);
 ```
 
-The `unnest` function is used to unnest lists or structs by one level. The function can be used as a regular scalar function, but only in the `SELECT` clause. Invoking `unnest` with the `recursive` parameter will unnest lists and structs of multiple levels.
+The `unnest` special function is used to unnest lists or structs by one level. The function can be used as a regular scalar function, but only in the `SELECT` clause. Invoking `unnest` with the `recursive` parameter will unnest lists and structs of multiple levels. The depth of unnesting can be limited using the `max_depth` parameter (which assumes `recursive` unnesting by default).
 
 ### Unnesting Lists
 
@@ -60,3 +62,41 @@ SELECT unnest({'a': [1, 2, 3], 'b': 88}, recursive := true);
 ```
 
 Calling `unnest` with the `recursive` setting will fully unnest lists, followed by fully unnesting structs. This can be useful to fully flatten columns that contain lists within lists, or lists of structs. Note that lists *within* structs are not unnested.
+
+### Seeting the Maximum Depth of Unnesting
+
+The `max_depth` parameter allows limiting the maximum depth of recursive unnesting (which is assumed by default and does not have to be specified separately).
+For example, unnestig to `max_depth` of 2 yields the following:
+
+```sql
+SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth := 2) AS x;
+```
+
+|     x     |
+|-----------|
+| [1, 2]    |
+| [3, 4]    |
+| [5, 6]    |
+| [7, 8, 9] |
+| []        |
+| [10, 11]  |
+
+Meanwhile, unnesting to `max_depth` of 3 results in
+
+```sql
+SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth := 3) AS x;
+```
+
+| x  |
+|---:|
+| 1  |
+| 2  |
+| 3  |
+| 4  |
+| 5  |
+| 6  |
+| 7  |
+| 8  |
+| 9  |
+| 10 |
+| 11 |
