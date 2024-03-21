@@ -61,11 +61,11 @@ host=localhost port=5432 dbname=mydb connect_timeout=10
 
 An example URI is `postgresql://username@hostname/dbname`.
 
+### Configuring via Environment Variables
+
 Postgres connection information can also be specified with [environment variables](https://www.postgresql.org/docs/current/libpq-envars.html).
 This can be useful in a production environment where the connection information is managed externally
 and passed in to the environment.
-
-### Configuring via Environment Variables
 
 ```bash
 export PGPASSWORD="secret"
