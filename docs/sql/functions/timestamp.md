@@ -216,7 +216,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 <div class="nostroke_table"></div>
 
 | **Description** | Return the total number of microseconds since the epoch. |
-| **Example** | `epoch_ms(timestamp '2021-08-03 11:59:44.123456')` |
+| **Example** | `epoch_us(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `1627991984123456` |
 
 ### `epoch(`*`timestamp`*`)`
