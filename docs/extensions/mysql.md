@@ -25,7 +25,7 @@ LOAD mysql;
 To make a MySQL database accessible to DuckDB use the `ATTACH` command:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql)
+ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql);
 USE mysqldb;
 ```
 
@@ -59,6 +59,7 @@ SHOW TABLES;
 ```sql
 SELECT * FROM signed_integers;
 ```
+
 ```text
 ┌──────┬────────┬──────────┬─────────────┬──────────────────────┐
 │  t   │   s    │    m     │      i      │          b           │
@@ -220,6 +221,32 @@ SELECT * FROM mysql_db.tmp;
 ```
 
 > The DDL statements are not transactional in MySQL.
+
+## Running SQL Queries in MySQL
+
+### The `mysql_query` Table Function
+
+The `mysql_query` table function allows you to run arbitrary read queries within an attached database. `mysql_query` takes the name of the attached Postgres database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
+
+```sql
+mysql_query(attached_database::VARCHAR, query::VARCHAR)
+```
+
+For example:
+
+```sql
+ATTACH 'dbname=mysqlscanner' AS s (TYPE mysql);
+SELECT * FROM mysql_query('s', 'SELECT * FROM cars LIMIT 3');
+```
+
+### The `mysql_execute` Function
+
+The `mysql_execute` function allows running arbitrary queries within MySQL, including statements that update the schema and content of the database.
+
+```sql
+ATTACH 'dbname=mysqlscanner' AS s (TYPE mysql);
+CALL mysql_execute('s', 'CREATE TABLE my_table (i INTEGER)');
+```
 
 ## Settings
 
