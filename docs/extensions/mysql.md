@@ -29,18 +29,29 @@ ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql);
 USE mysqldb;
 ```
 
-The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below.
+### Configuration
+
+The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below. Connection information can also be specified with [environment variables](https://dev.mysql.com/doc/refman/8.3/en/environment-variables.html). If no option is provided explicitly, the MySQL extension tries to read it from an environment variable.
+
 
 <div class="narrow_table"></div>
 
-|  Setting   |   Default    |
-|------------|--------------|
-| `database` | `NULL`       |
-| `host`     | `localhost`  |
-| `password` |              |
-| `port`     | `0`          |
-| `socket`   | `NULL`       |
-| `user`     | current user |
+|  Setting   |   Default    | Environment variable |
+|------------|--------------|----------------------|
+| `database` | `NULL`       | `MYSQL_DATABASE`     |
+| `host`     | `localhost`  | `MYSQL_HOST`         |
+| `password` |              | `MYSQL_PWD`          |
+| `port`     | `0`          | `MYSQL_TCP_PORT`     |
+| `socket`   | `NULL`       | `MYSQL_UNIX_PORT`    |
+| `user`     | current user | `MYSQL_USER`         |
+
+Then, to connect, start the `duckdb` process and run:
+
+```sql
+ATTACH '' AS p (TYPE postgres);
+```
+
+### Reading MySQL Tables
 
 The tables in the MySQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from MySQL at query time.
 
