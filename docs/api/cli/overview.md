@@ -101,6 +101,9 @@ The `.open` command optionally accepts several options, but the final parameter 
 .open persistent.duckdb
 ```
 
+> Warning `.open` closes the current database.
+> To keep the current database, while adding a new database, use the [`ATTACH` statement](../../sql/statements/attach).
+
 One important option accepted by `.open` is the `--readonly` flag. This disallows any editing of the database. To open in read only mode, the database must already exist. This also means that a new in-memory database can't be opened in read only mode since in-memory databases are created upon connection.
 
 ```text
