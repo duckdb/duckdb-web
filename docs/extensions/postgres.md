@@ -246,8 +246,8 @@ ROLLBACK;
 SELECT * FROM postgres_db.tmp;
 ```
 
-| i  |
-|---:|
+| i |
+|--:|
 
 ## Running SQL Queries in Postgres
 

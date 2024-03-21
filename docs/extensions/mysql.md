@@ -47,29 +47,20 @@ The tables in the MySQL database can be read as if they were normal DuckDB table
 ```sql
 SHOW TABLES;
 ```
-```text
-┌───────────────────────────────────────┐
-│                 name                  │
-│                varchar                │
-├───────────────────────────────────────┤
-│ signed_integers                       │
-└───────────────────────────────────────┘
-```
+
+|      name       |
+|-----------------|
+| signed_integers |
 
 ```sql
 SELECT * FROM signed_integers;
 ```
 
-```text
-┌──────┬────────┬──────────┬─────────────┬──────────────────────┐
-│  t   │   s    │    m     │      i      │          b           │
-│ int8 │ int16  │  int32   │    int32    │        int64         │
-├──────┼────────┼──────────┼─────────────┼──────────────────────┤
-│ -128 │ -32768 │ -8388608 │ -2147483648 │ -9223372036854775808 │
-│  127 │  32767 │  8388607 │  2147483647 │  9223372036854775807 │
-│ NULL │   NULL │     NULL │        NULL │                 NULL │
-└──────┴────────┴──────────┴─────────────┴──────────────────────┘
-```
+|  t   |   s    |    m     |      i      |          b           |
+|-----:|-------:|---------:|------------:|---------------------:|
+| -128 | -32768 | -8388608 | -2147483648 | -9223372036854775808 |
+| 127  | 32767  | 8388607  | 2147483647  | 9223372036854775807  |
+| NULL | NULL   | NULL     | NULL        | NULL                 |
 
 It might be desirable to create a copy of the MySQL databases in DuckDB to prevent the system from re-reading the tables from MySQL continuously, particularly for large tables.
 
@@ -121,14 +112,10 @@ INSERT INTO mysql_db.tbl VALUES (42, 'DuckDB');
 ```sql
 SELECT * FROM mysql_db.tbl;
 ```
-```text
-┌───────┬─────────┐
-│  id   │  name   │
-│ int64 │ varchar │
-├───────┼─────────┤
-│    42 │ DuckDB  │
-└───────┴─────────┘
-```
+
+| id |  name  |
+|---:|--------|
+| 42 | DuckDB |
 
 ### `COPY`
 
@@ -179,14 +166,11 @@ CREATE TABLE mysql_db.s1.integers (i INT);
 INSERT INTO mysql_db.s1.integers VALUES (42);
 SELECT * FROM mysql_db.s1.integers;
 ```
-```text
-┌───────┐
-│   i   │
-│ int32 │
-├───────┤
-│    42 │
-└───────┘
-```
+
+| i  |
+|---:|
+| 42 |
+
 ```sql
 DROP SCHEMA mysql_db.s1;
 ```
@@ -199,26 +183,18 @@ BEGIN;
 INSERT INTO mysql_db.tmp VALUES (42);
 SELECT * FROM mysql_db.tmp;
 ```
-```text
-┌───────┐
-│   i   │
-│ int64 │
-├───────┤
-│    42 │
-└───────┘
-```
+
+| i  |
+|---:|
+| 42 |
+
 ```sql
 ROLLBACK;
 SELECT * FROM mysql_db.tmp;
 ```
-```text
-┌────────┐
-│   i    │
-│ int64  │
-├────────┤
-│ 0 rows │
-└────────┘
-```
+
+| i |
+|--:|
 
 > The DDL statements are not transactional in MySQL.
 
