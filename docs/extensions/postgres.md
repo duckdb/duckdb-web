@@ -88,30 +88,20 @@ The tables in the PostgreSQL database can be read as if they were normal DuckDB 
 SHOW TABLES;
 ```
 
-```text
-┌───────────────────────────────────────┐
-│                 name                  │
-│                varchar                │
-├───────────────────────────────────────┤
-│ uuids                                 │
-└───────────────────────────────────────┘
-```
+| name  |
+|-------|
+| uuids |
 
 ```sql
 SELECT * FROM uuids;
 ```
 
-```text
-┌──────────────────────────────────────┐
-│                  u                   │
-│                 uuid                 │
-├──────────────────────────────────────┤
-│ 6d3d2541-710b-4bde-b3af-4711738636bf │
-│ NULL                                 │
-│ 00000000-0000-0000-0000-000000000001 │
-│ ffffffff-ffff-ffff-ffff-ffffffffffff │
-└──────────────────────────────────────┘
-```
+|                  u                   |
+|--------------------------------------|
+| 6d3d2541-710b-4bde-b3af-4711738636bf |
+| NULL                                 |
+| 00000000-0000-0000-0000-000000000001 |
+| ffffffff-ffff-ffff-ffff-ffffffffffff |
 
 It might be desirable to create a copy of the Postgres databases in DuckDB to prevent the system from re-reading the tables from Postgres continuously, particularly for large tables.
 
@@ -162,14 +152,9 @@ INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 SELECT * FROM postgres_db.tbl;
 ```
 
-```text
-┌───────┬─────────┐
-│  id   │  name   │
-│ int64 │ varchar │
-├───────┼─────────┤
-│    42 │ DuckDB  │
-└───────┴─────────┘
-```
+| id |  name  |
+|---:|--------|
+| 42 | DuckDB |
 
 ### `COPY`
 
@@ -229,14 +214,9 @@ INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
 ```
 
-```text
-┌───────┐
-│   i   │
-│ int32 │
-├───────┤
-│    42 │
-└───────┘
-```
+| i  |
+|---:|
+| 42 |
 
 ```sql
 DROP SCHEMA postgres_db.s1;
@@ -257,28 +237,17 @@ INSERT INTO postgres_db.tmp VALUES (42);
 SELECT * FROM postgres_db.tmp;
 ```
 
-```text
-┌───────┐
-│   i   │
-│ int64 │
-├───────┤
-│    42 │
-└───────┘
-```
+| i  |
+|---:|
+| 42 |
 
 ```sql
 ROLLBACK;
 SELECT * FROM postgres_db.tmp;
 ```
 
-```text
-┌────────┐
-│   i    │
-│ int64  │
-├────────┤
-│ 0 rows │
-└────────┘
-```
+| i  |
+|---:|
 
 ## Running SQL Queries in Postgres
 
@@ -297,16 +266,20 @@ ATTACH 'dbname=postgresscanner' AS s (TYPE postgres);
 SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
 ```
 
-```text
-┌──────────────┬───────────┬─────────┐
-│    brand     │   model   │  color  │
-│   varchar    │  varchar  │ varchar │
-├──────────────┼───────────┼─────────┤
-│ ferari       │ testarosa │ red     │
-│ aston martin │ db2       │ blue    │
-│ bentley      │ mulsanne  │ gray    │
-└──────────────┴───────────┴─────────┘
-```
+<!--
+    CREATE TABLE cars (brand VARCHAR, model VARCHAR, color VARCHAR);
+    INSERT INTO cars VALUES
+      ('Ferrari', 'Testarossa', 'red'),
+      ('Aston Martin', 'DB2', 'blue'),
+      ('Bentley', 'Mulsanne', 'gray')
+    ;
+-->
+
+|    brand     |   model    | color |
+|--------------|------------|-------|
+| Ferrari      | Testarossa | red   |
+| Aston Martin | DB2        | blue  |
+| Bentley      | Mulsanne   | gray  |
 
 ### The `postgres_execute` Function
 
