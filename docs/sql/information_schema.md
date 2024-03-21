@@ -5,7 +5,9 @@ title: Information Schema
 
 The views in the `information_schema` are SQL-standard views that describe the catalog entries of the database. These views can be filtered to obtain information about a specific column or table.
 
-## Database, Catalog and Schema
+## Tables
+
+### `information_schema.schemata`: Database, Catalog and Schema
 
 The top level catalog view is `information_schema.schemata`. It lists the catalogs and the schemas present in the database and has the following layout:
 
@@ -19,7 +21,7 @@ The top level catalog view is `information_schema.schemata`. It lists the catalo
 | `default_character_set_name` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
 | `sql_path` | The file system location of the database. Currently unimplemented. | `VARCHAR` | `NULL` |
 
-## Tables and Views
+### `information_schema.tables`: Tables and Views
 
 The view that describes the catalog information for tables and views is `information_schema.tables`. It lists the tables present in the database and has the following layout:
 
@@ -38,7 +40,7 @@ The view that describes the catalog information for tables and views is `informa
 | `is_typed` | `YES` if the table is a typed table, `NO` if not. | `VARCHAR` | `'NO'` |
 | `commit_action` | Not yet implemented. | `VARCHAR` | `'NO'` |
 
-## Columns
+### `information_schema.columns`: Columns
 
 The view that describes the catalog information for columns is `information_schema.columns`. It lists the column present in the database and has the following layout:
 
@@ -57,6 +59,63 @@ The view that describes the catalog information for columns is `information_sche
 | `numeric_precision` | If data_type identifies a numeric type, this column contains the (declared or implicit) precision of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is null. |`INTEGER`| `18` |
 | `numeric_scale` | If data_type identifies a numeric type, this column contains the (declared or implicit) scale of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is null. |`INTEGER`| `2` |
 | `datetime_precision` | If data_type identifies a date, time, timestamp, or interval type, this column contains the (declared or implicit) fractional seconds precision of the type for this column, that is, the number of decimal digits maintained following the decimal point in the seconds value. No fractional seconds are currently supported in DuckDB. For all other data types, this column is null. |`INTEGER`| `0` |
+
+### `information_schema.character_sets`: Character Sets
+
+| Column | Description | Type | Example |
+|--------|-------------|------|---------|
+| `character_set_catalog`   | | `VARCHAR` | |
+| `character_set_schema`    | | `VARCHAR` | |
+| `character_set_name`      | | `VARCHAR` | |
+| `character_repertoire`    | | `VARCHAR` | |
+| `form_of_use`             | | `VARCHAR` | |
+| `default_collate_catalog` | | `VARCHAR` | |
+| `default_collate_schema`  | | `VARCHAR` | |
+| `default_collate_name`    | | `VARCHAR` | |
+
+### `information_schema.key_column_usage`: Key Column Usage
+
+| Column | Description | Type | Example |
+|--------|-------------|------|---------|
+| `constraint_catalog`            | | `VARCHAR` | |
+| `constraint_schema`             | | `VARCHAR` | |
+| `constraint_name`               | | `VARCHAR` | |
+| `table_catalog`                 | | `VARCHAR` | |
+| `table_schema`                  | | `VARCHAR` | |
+| `table_name`                    | | `VARCHAR` | |
+| `column_name`                   | | `VARCHAR` | |
+| `ordinal_position`              | | `INTEGER` | |
+| `position_in_unique_constraint` | | `INTEGER` | |
+
+### `information_schema.referential_constraints`: Referential Constraints
+
+| Column | Description | Type | Example |
+|--------|-------------|------|---------|
+| `constraint_catalog`        | | `VARCHAR` | |
+| `constraint_schema`         | | `VARCHAR` | |
+| `constraint_name`           | | `VARCHAR` | |
+| `unique_constraint_catalog` | | `VARCHAR` | |
+| `unique_constraint_schema`  | | `VARCHAR` | |
+| `unique_constraint_name`    | | `VARCHAR` | |
+| `match_option`              | | `VARCHAR` | |
+| `update_rule`               | | `VARCHAR` | |
+| `delete_rule`               | | `VARCHAR` | |
+
+### `information_schema.table_constraints`: Table Constraints
+
+| Column | Description | Type | Example |
+|--------|-------------|------|---------|
+| `constraint_catalog` | | `VARCHAR` | |
+| `constraint_schema`  | | `VARCHAR` | |
+| `constraint_name`    | | `VARCHAR` | |
+| `table_catalog`      | | `VARCHAR` | |
+| `table_schema`       | | `VARCHAR` | |
+| `table_name`         | | `VARCHAR` | |
+| `constraint_type`    | | `VARCHAR` | |
+| `is_deferrable`      | | `VARCHAR` | |
+| `initially_deferred` | | `VARCHAR` | |
+| `enforced`           | | `VARCHAR` | |
+| `nulls_distinct`     | | `VARCHAR` | |
 
 ## Catalog Functions
 
