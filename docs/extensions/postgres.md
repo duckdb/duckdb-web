@@ -290,6 +290,9 @@ ATTACH 'dbname=postgresscanner' AS s (TYPE postgres);
 CALL postgres_execute('s', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
+> Warning This function is only available on DuckDB v0.10.1, using the latest Postgres extension.
+> To upgrade your extension, run `FORCE INSTALL postgres;`.
+
 ## Settings
 
 The extension exposes the following configuration parameters.

@@ -215,6 +215,9 @@ ATTACH 'dbname=mysqlscanner' AS s (TYPE mysql);
 SELECT * FROM mysql_query('s', 'SELECT * FROM cars LIMIT 3');
 ```
 
+> Warning This function is only available on DuckDB v0.10.1, using the latest MySQL extension.
+> To upgrade your extension, run `FORCE INSTALL mysql;`.
+
 ### The `mysql_execute` Function
 
 The `mysql_execute` function allows running arbitrary queries within MySQL, including statements that update the schema and content of the database.
@@ -223,6 +226,9 @@ The `mysql_execute` function allows running arbitrary queries within MySQL, incl
 ATTACH 'dbname=mysqlscanner' AS s (TYPE mysql);
 CALL mysql_execute('s', 'CREATE TABLE my_table (i INTEGER)');
 ```
+
+> Warning This function is only available on DuckDB v0.10.1, using the latest MySQL extension.
+> To upgrade your extension, run `FORCE INSTALL mysql;`.
 
 ## Settings
 
