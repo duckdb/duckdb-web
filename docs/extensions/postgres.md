@@ -262,8 +262,8 @@ postgres_query(attached_database::VARCHAR, query::VARCHAR)
 For example:
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS s (TYPE postgres);
-SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
+SELECT * FROM postgres_query('postgres_db', 'SELECT * FROM cars LIMIT 3');
 ```
 
 <!--
@@ -286,8 +286,8 @@ SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
 The `postgres_execute` function allows running arbitrary queries within Postgres, including statements that update the schema and content of the database.
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS s (TYPE postgres);
-CALL postgres_execute('s', 'CREATE TABLE my_table (i INTEGER)');
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
+CALL postgres_execute('postgres_db', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
 > Warning This function is only available on DuckDB v0.10.1, using the latest Postgres extension.
