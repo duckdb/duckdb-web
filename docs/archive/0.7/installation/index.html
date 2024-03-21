@@ -1,6 +1,416 @@
 ---
+body_class: installation
 layout: docu
 title: DuckDB Installation
-body_class: installation
 ---
-{% include installation.html %}
+
+<p>This page contains installation options for DuckDB:</p>
+<ul>
+	<li>Binaries are available for major programming languages and platforms</li>
+	<li>We recommend using the latest stable release, currently {{site.currentduckdbversion }}</li>
+	<li>If there are no pre-packaged binaries for a platform, consider <a href="https://duckdb.org/dev/building">building DuckDB from source</a></li>
+</ul>
+
+<div class="yourselection">
+
+	<div class="version select" data-select="version">
+		<h3>Version</h3>
+		<ul class="version">
+			<li data-id=".stable">
+				<div> 0.7.1 <span class="versioninfo">(stable release)</span></div>
+			</li>
+			<li data-id=".main">
+				<div>Nightly build <span class="versioninfo">(bleeding edge)</span></div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="environment select" data-select="environment">
+		<h3>Environment</h3>
+		<ul class="environment">
+			<li data-id=".cli" data-hide-section="">Command line</li>
+			<li data-id=".python" data-hide-section="pack,platform,architecture,download_method">Python</li>
+			<li data-id=".r" data-hide-section="pack,platform,architecture,download_method">R</li>
+			<li data-id=".java" data-hide-section="pack,platform,architecture">Java</li>
+			<li data-id=".js" data-hide-section="pack,platform,architecture,download_method">Node.js</li>
+			<li data-id=".rust" data-hide-section="pack,platform,architecture,download_method">Rust</li>
+			<li data-id=".go" data-hide-section="pack,platform,architecture,download_method">Go</li>
+			<li data-id=".cplusplus" data-hide-section="download_method">C/C++</li>
+			<li data-id=".odbc" data-hide-section="download_method">ODBC</li>
+		</ul>
+	</div>
+
+	<div class="platform select" data-select="platform">
+		<h3>Platform</h3>
+		<ul class="platform">
+			<li data-id=".win" data-deactivate-tabs=".architecture .arm64">Windows</li>
+			<li data-id=".macos" data-hide-section="architecture">macOS</li>
+			<li data-id=".linux">Linux</li>
+		</ul>
+	</div>
+	
+	<div class="download_method select" data-select="download_method">
+		<h3>Download method</h3>
+		<ul class="download_method">
+			<li data-id=".package_manager" data-hide-section="architecture">Package manager</li>
+			<li data-id=".direct">Direct download</li>
+		</ul>
+	</div>
+
+	<div class="architecture select" data-select="architecture">
+		<h3>Architecture</h3>
+		<ul class="architecture">
+			<li data-id=".x86_64">x86_64</li>
+			<li data-id=".arm64">arm64</li>
+		</ul>
+	</div>
+
+
+	<div class="installation output">
+		<h3>Installation</h3>
+		<div class="result" id="resultselection">
+			This section is intentionally left blank
+		</div>
+	</div>
+
+	<div class="example output">
+		<h3>Usage example</h3>
+		<div class="result">
+{% highlight python %}
+import duckdb
+cursor = duckdb.connect()
+print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
+		</div>
+	</div>
+
+</div>
+
+
+<div class="possibleresults">
+
+	<div class="stable python">
+		{% highlight bash %}pip install duckdb --upgrade{% endhighlight %}
+	</div>
+
+	<div class="stable r">
+		{% highlight r %}install.packages("duckdb"){% endhighlight %}
+	</div>
+
+	<div class="stable java package_manager">
+{% highlight xml -%}
+<dependency>
+    <groupId>org.duckdb</groupId>
+    <artifactId>duckdb_jdbc</artifactId>
+    <version>0.7.1</version>
+</dependency>
+{%- endhighlight %}
+	</div>
+
+	<div class="stable java direct">
+		<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/0.7.1/duckdb_jdbc-0.7.1.jar">https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/0.7.1/duckdb_jdbc-0.7.1.jar</a>
+	</div>
+
+	<div class="stable js">
+		{% highlight bash %}npm install duckdb{% endhighlight %}
+	</div>
+	
+	<div class="stable rust">
+		{% highlight bash %}cargo add duckdb --features bundled{% endhighlight %}
+	</div>
+	
+	<div class="stable go">
+		{% highlight bash %}go get github.com/marcboeker/go-duckdb{% endhighlight %}
+	</div>
+
+	<div class="stable cli source">
+		git clone https://github.com/duckdb/duckdb.git
+		<br/>
+		cd duckdb
+		<br/>
+		git checkout v0.7.1
+		<br/>
+		make -j8
+	</div>
+	<div class="main cli source">
+		git clone https://github.com/duckdb/duckdb.git
+		<br/>
+		cd duckdb
+		<br/>
+		make -j8
+	</div>
+
+	<div class="stable cplusplus binary macos direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/libduckdb-osx-universal.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/libduckdb-osx-universal.zip</a>
+		<!--<a href="https://blobs.duckdb.org/releases/v0.7.1/hashes.sha512" class="sha512" target="_blank">SHA-512</a>-->
+	</div>
+
+	<div class="stable cplusplus binary linux x86_64 direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/libduckdb-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/libduckdb-linux-amd64.zip</a>
+	</div>
+
+	<div class="stable cplusplus binary linux arm64 direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/libduckdb-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/libduckdb-linux-aarch64.zip</a>
+	</div>
+
+	<div class="stable cplusplus binary win x86_64 direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/libduckdb-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/libduckdb-windows-amd64.zip</a>
+	</div>
+
+	<div class="stable cli binary macos package_manager">
+		{% highlight bash %}brew install duckdb{% endhighlight %}
+	</div>
+
+	<div class="stable cli binary macos direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-osx-universal.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-osx-universal.zip</a>
+	</div>
+
+	<div class="stable cli binary linux package_manager">
+		DuckDB is currently not available via apt/yum.
+		<br>
+		Please use one of the following binaries:
+		<br>
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-amd64.zip</a>
+		<br>
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-aarch64.zip</a>
+	</div>
+	<div class="stable cli binary linux arm64 package_manager">
+		DuckDB is currently not available via apt/yum.
+		<br>
+		Please use the following binary:
+		<br>
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-aarch64.zip</a>
+	</div>
+	<div class="stable cli binary linux x86_64 package_manager">
+		DuckDB is currently not available via apt/yum.
+		<br>
+		Please use the following binary:
+		<br>
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-amd64.zip</a>
+	</div>
+
+	<div class="stable cli binary linux direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-amd64.zip</a>
+		<br>
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-aarch64.zip</a>
+	</div>
+
+	<div class="stable cli binary linux arm64 direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-aarch64.zip</a>
+	</div>
+
+	<div class="stable cli binary linux x86_64 direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-amd64.zip</a>
+	</div>
+
+	<div class="stable cli binary linux arm64 direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-linux-aarch64.zip</a>
+	</div>
+
+	<div class="stable cli binary win package_manager">
+		{% highlight bash %}winget install DuckDB.cli{% endhighlight %}
+	</div>
+
+	<div class="stable cli binary win direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_cli-windows-amd64.zip</a>
+	</div>
+
+	<div class="stable odbc binary linux x86_64 direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_odbc-linux-amd64.zip</a>	
+		<br/><br/>
+
+		{% highlight bash %}sudo apt-get install unixodbc unixodbc-dev{% endhighlight %}
+		{% highlight bash %}./unixodbc_setup.sh --help{% endhighlight %}
+	</div>
+
+	<div class="stable odbc binary linux arm64 direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_odbc-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_odbc-linux-aarch64.zip</a>
+		<br/><br/>
+
+		{% highlight bash %}sudo apt-get install unixodbc unixodbc-dev{% endhighlight %}
+		{% highlight bash %}./unixodbc_setup.sh --help{% endhighlight %}
+	</div>
+
+	<div class="stable odbc binary macos direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_odbc-osx-universal.zip">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_odbc-osx-universal.zip</a>
+	</div>
+
+	<div class="stable odbc binary win x86_64 direct">
+		<a href="https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.7.1/duckdb_odbc-windows-amd64.zip</a>
+		<br/><br/>
+
+		{% highlight bash %}./odbc_install.exe{% endhighlight %}
+	</div>
+
+	<div class="main python">
+		{% highlight bash %}pip install duckdb --pre --upgrade{% endhighlight %}
+	</div>
+
+	<div class="main r">
+		{% highlight r %}install.packages('duckdb', repos=c('https://duckdb.r-universe.dev', 'https://cloud.r-project.org')){% endhighlight %}
+	</div>
+
+	<div class="main java package_manager">
+		Nightly Java builds are available in the Sonatype snapshots repository, which can be accessed as follows:
+		{% highlight xml %}
+<dependency>
+    <groupId>org.duckdb</groupId>
+    <artifactId>duckdb_jdbc</artifactId>
+    <version>0.10.1-SNAPSHOT</version>
+</dependency>
+
+...
+
+<repositories>
+    <repository>
+        <id>oss-sonatype</id>
+        <name>oss-sonatype</name>
+        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+		{% endhighlight %}
+	</div>
+
+	<div class="main java direct">
+		<a href="https://artifacts.duckdb.org/latest/java-jars.zip">https://artifacts.duckdb.org/latest/java-jars.zip</a>
+	</div>
+
+	<div class="main js package_manager">
+{% highlight bash %}npm install duckdb@next{% endhighlight %}
+	</div>
+
+	<div class="main cli cplusplus binary linux odbc x86_64 direct">
+		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip</a>
+	</div>
+
+	<div class="main cli cplusplus binary linux odbc arm64 direct">
+		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip</a>
+	</div>
+
+	<div class="main cli cplusplus odbc binary macos direct">
+		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip</a>
+	</div>
+
+	<div class="main cli cplusplus odbc binary linux macos win package_manager">
+		Currently not available
+	</div>
+
+	<div class="main cli cplusplus binary win odbc x86_64 direct">
+		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip</a>
+	</div>
+
+	<div class="example python">
+{% highlight python %}
+import duckdb
+cursor = duckdb.connect()
+print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
+	</div>
+
+	<div class="example r">
+{% highlight R %}
+library("DBI")
+con = dbConnect(duckdb::duckdb(), ":memory:")
+dbWriteTable(con, "iris", iris)
+dbGetQuery(con, 'SELECT "Species", MIN("Sepal.Width") FROM iris GROUP BY "Species"'){% endhighlight %}
+	</div>
+
+	<div class="example java">
+{% highlight java %}
+Class.forName("org.duckdb.DuckDBDriver");
+Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+Statement stmt = conn.createStatement();
+ResultSet rs = stmt.executeQuery("SELECT 42");{% endhighlight %}
+	</div>
+
+	<div class="example js">
+{% highlight javascript %}
+var duckdb = require('duckdb');
+var db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
+db.all('SELECT 42 AS fortytwo', function(err, res) {
+  if (err) {
+    console.warn(err);
+    return;
+  }
+  console.log(res[0].fortytwo)
+});{% endhighlight %}
+	</div>
+
+	<div class="example rust">
+{% highlight rust %}
+use duckdb::{Connection, Result};
+
+#[derive(Debug)]
+struct Person { id: i32, name: String, }
+
+fn main() -> Result<()> {
+    let conn = Connection::open_in_memory()?;
+
+    conn.execute_batch(
+        r"CREATE TABLE person (id BIGINT, name VARCHAR);
+          INSERT INTO person VALUES (42, 'John');
+        ")?;
+    let mut stmt = conn.prepare("SELECT id, name FROM person")?;
+    let person_iter = stmt.query_map([], |row| {
+        Ok(Person {id: row.get(0)?, name: row.get(1)?})
+    })?;
+
+    for person in person_iter {
+        println!("Found person {:?}", person.unwrap());
+    }
+    Ok(())
+}{% endhighlight %}
+	</div>
+
+	<div class="example go">
+{% highlight go %}
+package main
+
+import (
+	"database/sql"
+	"fmt"
+	_ "github.com/marcboeker/go-duckdb"
+)
+
+func main() {
+	db, _ := sql.Open("duckdb", "")
+
+	db.Exec(`CREATE TABLE person (id INTEGER, name VARCHAR)`)
+	db.Exec(`INSERT INTO person VALUES (42, 'John')`)
+
+	var (
+		id   int
+		name string
+	)
+	row := db.QueryRow(`SELECT id, name FROM person`)
+	_ = row.Scan(&id, &name)
+	fmt.Println("id:", id, "name:", name)
+}{% endhighlight %}
+	</div>
+
+	<div class="example cplusplus">
+{% highlight cpp %}
+DuckDB db(nullptr);
+Connection con(db);
+auto result = con.Query("SELECT 42");
+result->Print();{% endhighlight %}
+	</div>
+
+	<div class="example cli">
+{% highlight bash %}
+./duckdb{% endhighlight %}
+	</div>
+
+	<div class="example odbc">
+	</div>
+
+</div>
+
+<!--
+<h1>Embedding</h1>
+<p> As DuckDB is an embedded database, there is no database server to launch or client to connect to a running server. However, the database server can be embedded directly into an application using the C or C++ bindings. The main build process creates the shared library build/release/src/libduckdb.[so|dylib|dll] that can be linked against. A static library is built as well.
+
+For examples on how to embed DuckDB into your application, see the examples folder in the repository.</p>
+
+-->
