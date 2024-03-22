@@ -43,7 +43,7 @@ maintenance burden.
 
 For DuckDB, this historically meant that for each dependency, a very careful consideration was made balancing the
 increased maintenance burden against the necessity of dependency. Including a dependency meant the responsibility of
-maintaining it, so this decision was never taken lightly. This works well in many cases and has the advantage of forcing
+maintaining it, so this decision was never taken lightly. This works well in many cases and has the added benefit of forcing
 developers to critically think about including a dependency and not mindlessly bolt on library after library. However, 
 for some dependencies, this just doesn’t work. Large cloud provider SDKs for example. They tend to be pretty
 massive, very frequently updated, and packed with arguably essential functionality for an increasingly mature analytical
@@ -73,8 +73,8 @@ features. DuckDB’s extensions are distributed as loadable binaries for most ma
 statements:
 
 ```sql
-INSTALL json;
-LOAD json;
+INSTALL spatial;
+LOAD spatial;
 ```
 
 For most core extensions maintained by the DuckDB team, there is even an auto-install and auto-load feature which will detect the required extensions for
