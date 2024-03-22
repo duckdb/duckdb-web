@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "DuckDB ❤️ dependencies?!"
+title:  "Dependency management in DuckDB Extensions"
 author: Sam Ansmink
-excerpt: While core DuckDB still has zero external dependencies, building extensions with dependencies is now very simple, with built-in support for vcpkg, an open source package manager with support for over 2000 C/C++ packages. Interested in building your own? Check out the [extension template](https://github.com/duckdb/extension-template).
+excerpt: While core DuckDB has zero external dependencies, building extensions with dependencies is now very simple, with built-in support for vcpkg, an open source package manager with support for over 2000 C/C++ packages. Interested in building your own? Check out the [extension template](https://github.com/duckdb/extension-template).
 ---
 
 ## Introduction
 Ever since the birth of DuckDB, one of its main pillars has been its strict no-external-dependencies philosophy.
-Paraphrasing [this](https://hannes.muehleisen.org/publications/SIGMOD2019-demo-duckdb.pdf) 2019 SIGMOD paper on DuckDB: 
+Paraphrasing [this 2019 SIGMOD paper](https://hannes.muehleisen.org/publications/SIGMOD2019-demo-duckdb.pdf) on DuckDB: 
 *To achieve the requirement of having practical “embeddability” and portability, the database needs to run in whatever 
 environment the host does. Dependencies on external libraries (e.g. openssh) for either compile- or runtime have been 
 found to be problematic.* 
@@ -28,8 +28,8 @@ is that there are basically three options in handling requirements with potentia
 
 The first two options are pretty straight forward: to avoid depending on some external software, just make it part of
 the codebase. By doing so, the unpredictable nature of depending on somebody else is now eliminated! DuckDB has applied
-both inlining and rewriting to prevent dependencies. For example the [RE2](https://github.com/google/re2) and
-[MbedTLS](https://github.com/Mbed-TLS/mbedtls) libraries are inlined into DuckDB, whereas the S3 support is provided
+both inlining and rewriting to prevent dependencies. For example the [Postgres parser](https://github.com/duckdb/duckdb/tree/main/third_party/libpg_query) and
+[MbedTLS](https://github.com/duckdb/duckdb/tree/main/third_party/mbedtls) libraries are inlined into DuckDB, whereas the S3 support is provided
 using a custom implementation of the AWS S3 protocol. 
 
 Okay great, problem solved, right? Well, not so fast. Most people with some software engineering experience will realize 
@@ -63,7 +63,7 @@ At DuckDB, this realization of the importance of extensions and its relation to 
 design from its early days. Today, many parts of DuckDB can be extended. For example, you can add functions (table,
 scalar, copy, aggregation), filesystems, parsers, optimizer rules, and much more. Many new features that are added to
 DuckDB are added in extensions and are grouped by either functionality, or by set of dependencies. Some examples of
-extensions are the [JSON](/docs/extensions/json.html) extension for JSON support or the
+extensions are the [SQLite](/docs/extensions/sqlite.html) extension for reading/writing to/from SQLite files, or the
 [Spatial](/docs/extensions/spatial.html) extension which offers support for a wide range of geospatial processing
 features. DuckDB’s extensions are distributed as loadable binaries for most major platforms (including
 [DuckDB-Wasm](2023/12/18/duckdb-extensions-in-wasm.html)), allowing loading and installing extension with two simple SQL
@@ -74,7 +74,7 @@ INSTALL json;
 LOAD json;
 ```
 
-For most extensions, DuckDB even has an auto-install and auto-load feature which will detect the required extensions for
+For most core extensions maintained by the DuckDB team, there is even an auto-install and auto-load feature which will detect the required extensions for
 a SQL statement and automatically install and load them. For a detailed description on which extensions are available
 and how to use them, check out the [docs](https://duckdb.org/docs/extensions/overview.html).
 
@@ -88,14 +88,14 @@ configuration for different platforms. With a growing ecosystem of extensions, t
 unmaintainable mess.
 
 Fortunately, much has changed in the C++ landscape over the past few years. Today, good dependency managers do exist.
-One of them is Microsoft’s [vcpkg](https://vcpkg.io/). It has arguably become the _de facto_ standard in C++ dependency
+One of them is Microsoft’s [vcpkg](https://vcpkg.io/). It has become a highly notable player among C++ dependency
 managers, as proven by its 20k+ GitHub stars and native support
 from [CLion](https://blog.jetbrains.com/clion/2023/01/support-for-vcpkg-in-clion/)
 and [Visual Studio](https://devblogs.microsoft.com/cppblog/vcpkg-is-now-included-with-visual-studio/). vcpkg contains
 over 2000 dependencies such
 as [Apache Arrow](https://github.com/microsoft/vcpkg/tree/master/ports/arrow), [yyjson](https://github.com/microsoft/vcpkg/tree/master/ports/yyjson),
 and [various](https://github.com/microsoft/vcpkg/tree/master/ports/azure-core-cpp) [cloud](https://github.com/microsoft/vcpkg/tree/master/ports/aws-sdk-cpp) [provider](https://github.com/googleapis/google-cloud-cpp)
-SDKs.
+SDKs. 
 
 For anyone who has ever used a package manager, using vcpkg will feel quite natural. Dependencies are specified in
 a `vcpkg.json` file, and vcpkg is hooked into the build system. Now when building, vcpkg ensures that the dependencies
