@@ -1,17 +1,17 @@
 ---
 layout: post
-title:  "Dependency management in DuckDB Extensions"
+title: "Dependency management in DuckDB Extensions"
 author: Sam Ansmink
-excerpt: While core DuckDB has zero external dependencies, building extensions with dependencies is now very simple, with built-in support for vcpkg, an open source package manager with support for over 2000 C/C++ packages. Interested in building your own? Check out the [extension template](https://github.com/duckdb/extension-template).
+excerpt: While core DuckDB has zero external dependencies, building extensions with dependencies is now very simple, with built-in support for vcpkg, an open-source package manager with support for over 2000 C/C++ packages. Interested in building your own? Check out the [extension template](https://github.com/duckdb/extension-template).
 ---
 
 ## Introduction
 
 Ever since the birth of DuckDB, one of its main pillars has been its strict no-external-dependencies philosophy.
-Paraphrasing [this 2019 SIGMOD paper](https://hannes.muehleisen.org/publications/SIGMOD2019-demo-duckdb.pdf) on DuckDB: 
-*To achieve the requirement of having practical “embeddability” and portability, the database needs to run in whatever 
-environment the host does. Dependencies on external libraries (e.g. openssh) for either compile- or runtime have been 
-found to be problematic.* 
+Paraphrasing [this 2019 SIGMOD paper](https://hannes.muehleisen.org/publications/SIGMOD2019-demo-duckdb.pdf) on DuckDB:
+*To achieve the requirement of having practical “embeddability” and portability, the database needs to run in whatever
+environment the host does. Dependencies on external libraries (e.g. openssh) for either compile- or runtime have been
+found to be problematic.*
 
 In this blog post, we will cover how DuckDB manages to stay true to this philosophy, without forcing DuckDB developers
 down the path of complete abstinence. Along the way, we will show practical examples of how external dependencies are
@@ -19,9 +19,9 @@ possible, and how you can use this when creating your own DuckDB extension.
 
 ## The difficulties of complete abstinence
 
-Having no external dependencies is conceptually very simple. However, in a real-world system with real-world 
-requirements, it is difficult to achieve. Many features require complex implementations of protocols and algorithms and 
-many high-quality libraries exist that implement them. What this means for DuckDB (and most other systems for that matter) 
+Having no external dependencies is conceptually very simple. However, in a real-world system with real-world
+requirements, it is difficult to achieve. Many features require complex implementations of protocols and algorithms and
+many high-quality libraries exist that implement them. What this means for DuckDB (and most other systems for that matter)
 is that there are basically three options in handling requirements with potential external dependencies:
 
 1. Inlining external code
@@ -32,9 +32,9 @@ The first two options are pretty straight forward: to avoid depending on some ex
 the codebase. By doing so, the unpredictable nature of depending on somebody else is now eliminated! DuckDB has applied
 both inlining and rewriting to prevent dependencies. For example the [Postgres parser](https://github.com/duckdb/duckdb/tree/main/third_party/libpg_query) and
 [MbedTLS](https://github.com/duckdb/duckdb/tree/main/third_party/mbedtls) libraries are inlined into DuckDB, whereas the S3 support is provided
-using a custom implementation of the AWS S3 protocol. 
+using a custom implementation of the AWS S3 protocol.
 
-Okay great, problem solved, right? Well, not so fast. Most people with some software engineering experience will realize 
+Okay great, problem solved, right? Well, not so fast. Most people with some software engineering experience will realize
 that both inlining and rewriting come with serious drawbacks. The
 most fundamental issue is probably related to code maintenance. Every significant piece of software needs some level of
 maintenance. Ranging from fixing bugs to dealing with changing (build) environments or requirements, code will
@@ -44,7 +44,7 @@ maintenance burden.
 For DuckDB, this historically meant that for each dependency, a very careful consideration was made balancing the
 increased maintenance burden against the necessity of dependency. Including a dependency meant the responsibility of
 maintaining it, so this decision was never taken lightly. This works well in many cases and has the added benefit of forcing
-developers to critically think about including a dependency and not mindlessly bolt on library after library. However, 
+developers to critically think about including a dependency and not mindlessly bolt on library after library. However,
 for some dependencies, this just doesn’t work. Large cloud provider SDKs for example. They tend to be pretty
 massive, very frequently updated, and packed with arguably essential functionality for an increasingly mature analytical
 database. This leaves an awkward choice: either not provide these essential features, or break the no-dependency rule.
@@ -52,7 +52,7 @@ database. This leaves an awkward choice: either not provide these essential feat
 ## DuckDB Extensions
 
 This is where extensions come in. Extensions provide an elegant solution to the dilemma of dependencies, by allowing
-fine-grained breakage of the no-dependency rule. Moving dependencies out of DuckDB’s core, into extensions, the core 
+fine-grained breakage of the no-dependency rule. Moving dependencies out of DuckDB’s core, into extensions, the core
 codebase can remain, and does remain, dependency-free.
 This means that DuckDB’s “Practical embeddability and portability” remains unthreatened. On the other hand, DuckDB can
 still provide features that inevitably require depending on some 3rd party library. Furthermore, by moving dependencies
@@ -66,10 +66,10 @@ At DuckDB, this realization of the importance of extensions and its relation to 
 design from its early days. Today, many parts of DuckDB can be extended. For example, you can add functions (table,
 scalar, copy, aggregation), filesystems, parsers, optimizer rules, and much more. Many new features that are added to
 DuckDB are added in extensions and are grouped by either functionality, or by set of dependencies. Some examples of
-extensions are the [SQLite](/docs/extensions/sqlite.html) extension for reading/writing to/from SQLite files, or the
-[Spatial](/docs/extensions/spatial.html) extension which offers support for a wide range of geospatial processing
+extensions are the [SQLite](/docs/extensions/sqlite) extension for reading/writing to/from SQLite files, or the
+[Spatial](/docs/extensions/spatial) extension which offers support for a wide range of geospatial processing
 features. DuckDB’s extensions are distributed as loadable binaries for most major platforms (including
-[DuckDB-Wasm](2023/12/18/duckdb-extensions-in-wasm.html)), allowing loading and installing extension with two simple SQL
+[DuckDB-Wasm](/2023/12/18/duckdb-extensions-in-wasm)), allowing loading and installing extension with two simple SQL
 statements:
 
 ```sql
@@ -79,7 +79,7 @@ LOAD spatial;
 
 For most core extensions maintained by the DuckDB team, there is even an auto-install and auto-load feature which will detect the required extensions for
 a SQL statement and automatically install and load them. For a detailed description on which extensions are available
-and how to use them, check out the [docs](https://duckdb.org/docs/extensions/overview.html).
+and how to use them, check out the [docs](/docs/extensions/overview).
 
 ## Dependency management
 
@@ -114,7 +114,7 @@ one of the DuckDB's extensions and how it uses vcpkg to manage its dependencies.
 
 ### Example: Azure Extension
 
-The [Azure](/docs/extensions/azure.html) extension provides functionality related to [Microsoft Azure](https://azure.microsoft.com/),
+The [Azure](/docs/extensions/azure) extension provides functionality related to [Microsoft Azure](https://azure.microsoft.com/),
 one of the major cloud providers. DuckDB’s Azure extension depends on the Azure C++ SDK to support reading directly from 
 Azure Storage. To do so it adds a custom filesystem and [secret type](/docs/configuration/secrets_manager), which can be 
 used to easily query from authenticated Azure containers:
@@ -217,26 +217,25 @@ target_link_libraries(${LOADABLE_EXTENSION_NAME} Boost::url)
 Then, in `src/url_parser_extension.cpp`, we remove the default example functions and replace them with our
 implementation of the `url_scheme` function:
 
-```c++
+```cpp
 inline void UrlParserScalarFun(DataChunk &args, ExpressionState &state, Vector &result) {
-    auto &name_vector = args.data[0];
-    UnaryExecutor::Execute<string_t, string_t>(
-	    name_vector, result, args.size(),
-	    [&](string_t url) {
-            string url_string = url.GetString();
-            boost::system::result<boost::urls::url_view> parse_result = boost::urls::parse_uri( url_string );
-            if (parse_result.has_error() || !parse_result.value().has_scheme()) {
-               return string_t();
-            }
-            string scheme = parse_result.value().scheme();
-            return StringVector::AddString(result, scheme);
-        });
+  auto &name_vector = args.data[0];
+  UnaryExecutor::Execute<string_t, string_t>(
+    name_vector, result, args.size(),
+    [&](string_t url) {
+          string url_string = url.GetString();
+          boost::system::result<boost::urls::url_view> parse_result = boost::urls::parse_uri( url_string );
+          if (parse_result.has_error() || !parse_result.value().has_scheme()) {
+              return string_t();
+          }
+          string scheme = parse_result.value().scheme();
+          return StringVector::AddString(result, scheme);
+      });
 }
 
-
 static void LoadInternal(DatabaseInstance &instance) {
-    auto url_parser_scalar_function = ScalarFunction("url_scheme", {LogicalType::VARCHAR}, LogicalType::VARCHAR, UrlParserScalarFun);
-    ExtensionUtil::RegisterFunction(instance, url_parser_scalar_function);
+  auto url_parser_scalar_function = ScalarFunction("url_scheme", {LogicalType::VARCHAR}, LogicalType::VARCHAR, UrlParserScalarFun);
+  ExtensionUtil::RegisterFunction(instance, url_parser_scalar_function);
 }
 ```
 
@@ -289,7 +288,7 @@ DuckDB-maintained extension and third-party extensions.
 
 If this blog post sparked your interest in creating your own DuckDB extension, check out
 the [C++ Extension Template](https://github.com/duckdb/extension-template),
-the [DuckDB docs on extensions](https://duckdb.org/docs/extensions/overview.html),
-and [this](https://github.com/mehd-io/duckdb-extension-radar) very handy repository that tracks public DuckDB extensions.
-Additionally, DuckDB has a [discord server](https://discord.com/invite/tcvwpjfnZx) where you can ask for help on
+the [DuckDB docs on extensions](/docs/extensions/overview),
+and the very handy [duckdb-extension-radar repository](https://github.com/mehd-io/duckdb-extension-radar) that tracks public DuckDB extensions.
+Additionally, DuckDB has a [Discord server](https://discord.com/invite/tcvwpjfnZx) where you can ask for help on
 extensions or anything DuckDB-related in general.
