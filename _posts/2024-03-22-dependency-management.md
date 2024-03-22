@@ -6,6 +6,7 @@ excerpt: While core DuckDB has zero external dependencies, building extensions w
 ---
 
 ## Introduction
+
 Ever since the birth of DuckDB, one of its main pillars has been its strict no-external-dependencies philosophy.
 Paraphrasing [this 2019 SIGMOD paper](https://hannes.muehleisen.org/publications/SIGMOD2019-demo-duckdb.pdf) on DuckDB: 
 *To achieve the requirement of having practical “embeddability” and portability, the database needs to run in whatever 
@@ -17,6 +18,7 @@ down the path of complete abstinence. Along the way, we will show practical exam
 possible, and how you can use this when creating your own DuckDB extension.
 
 ## The difficulties of complete abstinence
+
 Having no external dependencies is conceptually very simple. However, in a real-world system with real-world 
 requirements, it is difficult to achieve. Many features require complex implementations of protocols and algorithms and 
 many high-quality libraries exist that implement them. What this means for DuckDB (and most other systems for that matter) 
@@ -48,6 +50,7 @@ massive, very frequently updated, and packed with arguably essential functionali
 database. This leaves an awkward choice: either not provide these essential features, or break the no-dependency rule.
 
 ## DuckDB Extensions
+
 This is where extensions come in. Extensions provide an elegant solution to the dilemma of dependencies, by allowing
 fine-grained breakage of the no-dependency rule. Moving dependencies out of DuckDB’s core, into extensions, the core 
 codebase can remain, and does remain, dependency-free.
@@ -79,6 +82,7 @@ a SQL statement and automatically install and load them. For a detailed descript
 and how to use them, check out the [docs](https://duckdb.org/docs/extensions/overview.html).
 
 ## Dependency management
+
 So far, we’ve seen how DuckDB avoids external dependencies in its core codebase by pushing them out of core into
 extensions. However, we’re not out of the woods yet. As DuckDB is written in C++, the most natural way to write
 extensions is C++. In C++ though, there is no standard tooling like a package manager and the answer to the
@@ -103,11 +107,13 @@ specified in the `vcpkg.json` are built and available. vcpkg supports integratio
 focus on its seamless CMake integration.
 
 ## Using vcpkg with DuckDB
+
 Now that we covered DuckDB extensions and vcpkg, we have shown how DuckDB can manage dependencies, without sacrificing
 portability, maintainability and stability more than necessary. Next, we’ll make things a bit more tangible by looking at 
 one of the DuckDB's extensions and how it uses vcpkg to manage its dependencies.
 
 ### Example: Azure Extension
+
 The [Azure](/docs/extensions/azure.html) extension provides functionality related to [Microsoft Azure](https://azure.microsoft.com/),
 one of the major cloud providers. DuckDB’s Azure extension depends on the Azure C++ SDK to support reading directly from 
 Azure Storage. To do so it adds a custom filesystem and [secret type](/docs/configuration/secrets_manager), which can be 
@@ -150,12 +156,14 @@ ensure `azure-identity-cpp`, `azure-storage-blobs-cpp` and `azure-storage-files-
 available in CMake through `find_package`.
 
 ## Building your own DuckDB extension
+
 Up until this part, we’ve focused on managing dependencies from a point-of-view of the developers of core DuckDB
 contributors. However, all of this applies to anyone who wants to build an extension. DuckDB maintains a [C++ Extension Template](https://github.com/duckdb/extension-template)
 which contains all the necessary build scripts, CI/CD pipeline and vcpkg configuration to build, test and deploy a DuckDB extension in
 minutes. It can automatically build the loadable extension binaries for all available platforms including WASM.
 
 ### Setting up the extension template
+
 To demonstrate how simple this process is, let’s go through all the steps of building a DuckDB extension from scratch, 
 including adding a vcpkg-managed external dependency.
 
@@ -260,7 +268,7 @@ SELECT url_scheme('not:\a/valid_url')
 ```
 
 Now all that’s left to do is confirm everything works as expected with `make test`, and push these changes to the remote
-repository. Then, Github Actions will take over and ensure the extension is built for all of DuckDBs supported
+repository. Then, GitHub Actions will take over and ensure the extension is built for all of DuckDBs supported
 platforms. 
 
 For more details check out the template repository. Also, the example extension we built in this blog is published 
@@ -272,6 +280,7 @@ for the extension is very simple. Of course as author of this extension it could
 yourself in vcpkg and fix them not only for this extension, but for the whole open-source community! 
 
 ## Conclusion
+
 In this blog post, we've explored DuckDB's journey towards managing dependencies in its extension ecosystem while
 upholding its core philosophy of zero external dependencies. By leveraging the power of extensions, DuckDB can maintain
 its portability and embeddability while still providing essential features that require external dependencies. To
