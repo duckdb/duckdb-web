@@ -42,6 +42,20 @@ INSERT INTO students VALUES (1, 'Student 1');
 INSERT INTO students VALUES (1, 'Student 2');
 -- Constraint Error: Duplicate key "id: 1" violates primary key constraint
 ```
+```sql
+CREATE TABLE students (id INTEGER, name VARCHAR, PRIMARY KEY (id, name));
+INSERT INTO students VALUES (1, 'Student 1');
+INSERT INTO students VALUES (1, 'Student 2');
+INSERT INTO students VALUES (1, 'Student 1');
+-- Constraint Error: Duplicate key "id: 1, name: Student 1" violates primary key constraint
+```
+```sql
+CREATE TABLE students (id INTEGER, name VARCHAR, PRIMARY KEY (id, name));
+INSERT INTO students VALUES (1, 'Student 1');
+INSERT INTO students VALUES (1, 'Student 2');
+INSERT INTO students VALUES (1, 'Student 1');
+-- Constraint Error: Duplicate key "id: 1, name: Student 1" violates primary key constraint
+``` 
 
 In order to enforce this property efficiently, an [ART index is automatically created](indexes) for every primary key or unique constraint that is defined in the table.
 
@@ -49,6 +63,17 @@ Primary key constraints and unique constraints are identical except for two poin
 
 * A table can only have one primary key constraint defined, but many unique constraints
 * A primary key constraint also enforces the keys to not be `NULL`.
+
+```sql
+CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR, email VARCHAR UNIQUE);
+INSERT INTO students VALUES (1, 'Student 1', 'student1@uni.com');
+INSERT INTO students values (2, 'Student 2', 'student1@uni.com');
+-- Constraint Error: Duplicate key "email: student1@uni.com" violates unique constraint.
+INSERT INTO students(id, name) VALUES (3, 'Student 3');
+INSERT INTO students(name, email) VALUES ('Student 3', 'student3@uni.com');
+-- Constraint Error: NOT NULL constraint failed: students.id
+```
+
 
 > Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations).
 
