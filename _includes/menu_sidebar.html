@@ -32,17 +32,23 @@
 		{% if site.data[menudocfile].docsmenu %}
 			{% for item in site.data[menudocfile].docsmenu %}
 				{% if item.slug == nil %}
-					{% assign slugParts = item.url | split: "/" %}
+					{% assign slugParts = item.url | prepend: "docs/" | split: "/" %}
 				{% else %}
-					{% assign slugParts = item.slug | split: "/" %}
+					{% assign slugParts = item.slug | prepend: "docs/" | split: "/" %}
 				{% endif %}
 				{% assign urlContains = true %}
+				XX{{ slugParts | jsonify }}
+				YY{{ urlParts | jsonify}}
 				{% for slugPart in slugParts %}
 					{% if urlParts contains slugPart %}
 					{% else %}
 						{% assign urlContains = false %}
 					{% endif %}
 				{% endfor %}
+				{% assign slugPartsLength = slugParts | size == 0 %}
+				{% if slugPartsLength == 0 %}
+					{% assign urlContains = false %}
+				{% endif %}
 				{% assign base_slash = '' %}
 				{% if item.slug != nil and item.url != nil %}
 					{% assign base_slash = '/' %}
