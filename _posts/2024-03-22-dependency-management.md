@@ -175,7 +175,7 @@ git clone https://github.com/Microsoft/vcpkg.git
 export vcpkg_TOOLCHAIN_PATH=`pwd`/vcpkg/scripts/buildsystems/vcpkg.cmake
 ```
 
-Then, you create a GitHub repository based on https://github.com/duckdb/extension-template by clicking “Use this
+Then, you create a GitHub repository based on [the template](https://github.com/duckdb/extension-template) by clicking “Use this
 template”.
 
 Now to clone your newly created extension repo (including its submodules) and initialize the template:
@@ -188,7 +188,7 @@ cd your-extension-repo
 
 Finally, to confirm everything works as expected, run the tests:
 
-```
+```bash
 make test
 ```
 
@@ -251,7 +251,7 @@ SELECT url_scheme('https://github.com/duckdb/duckdb');
 Finally, as we are well-behaved developers, we add some tests by overwriting the default test `test/sql/url_parser.test`
 with:
 
-```
+```sql
 require url_parser
 
 # Confirm the extension works
