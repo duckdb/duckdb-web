@@ -291,5 +291,5 @@ If this blog post sparked your interest in creating your own DuckDB extension, c
 the [C++ Extension Template](https://github.com/duckdb/extension-template),
 the [DuckDB docs on extensions](/docs/extensions/overview),
 and the very handy [duckdb-extension-radar repository](https://github.com/mehd-io/duckdb-extension-radar) that tracks public DuckDB extensions.
-Additionally, DuckDB has a [Discord server](https://discord.com/invite/tcvwpjfnZx) where you can ask for help on
+Additionally, DuckDB has a [Discord server](https://discord.duckdb.org) where you can ask for help on
 extensions or anything DuckDB-related in general.
