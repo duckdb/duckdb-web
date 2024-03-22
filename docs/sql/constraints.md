@@ -49,13 +49,6 @@ INSERT INTO students VALUES (1, 'Student 2');
 INSERT INTO students VALUES (1, 'Student 1');
 -- Constraint Error: Duplicate key "id: 1, name: Student 1" violates primary key constraint
 ```
-```sql
-CREATE TABLE students (id INTEGER, name VARCHAR, PRIMARY KEY (id, name));
-INSERT INTO students VALUES (1, 'Student 1');
-INSERT INTO students VALUES (1, 'Student 2');
-INSERT INTO students VALUES (1, 'Student 1');
--- Constraint Error: Duplicate key "id: 1, name: Student 1" violates primary key constraint
-``` 
 
 In order to enforce this property efficiently, an [ART index is automatically created](indexes) for every primary key or unique constraint that is defined in the table.
 
