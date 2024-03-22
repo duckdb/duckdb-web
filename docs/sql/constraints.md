@@ -62,7 +62,7 @@ CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR, email VARCHAR, UNIQU
 INSERT INTO students VALUES (1, 'Student 1', 'student1@uni.com');
 INSERT INTO students values (2, 'Student 2', 'student1@uni.com');
 Error: Constraint Error: Duplicate key "email: student1@uni.com" violates unique constraint.
-INSERT INTO students(id, name) VALUES ('3', 'Student 3');
+INSERT INTO students(id, name) VALUES (3, 'Student 3');
 INSERT INTO students(name, email) VALUES ('Student 3', 'student3@uni.com');
 Error: Constraint Error: NOT NULL constraint failed: students.id
 ```
