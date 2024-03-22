@@ -264,7 +264,12 @@ repository. Then, Github Actions will take over and ensure the extension is buil
 platforms. 
 
 For more details check out the template repository. Also, the example extension we built in this blog is published 
-[here (TODO!!)](./dead/url/on/purpose).
+[here](https://github.com/samansmink/url-parse-extension). Note that in the demo, the WASM and MingW builds have been 
+[disabled](https://github.com/samansmink/url-parse-extension/blob/935c4273eea174d99d25be156d4bfea8f55abfa6/.github/workflows/MainDistributionPipeline.yml#L21)
+due to [outstanding](https://github.com/microsoft/vcpkg/issues/35408) [issues](https://github.com/microsoft/vcpkg/issues/35549) 
+with the boost-url dependency for building on these platforms. As these issues are fixed upstream, re-enabling their builds
+for the extension is very simple. Of course as author of this extension it could make a lot of sense to fix these compile issues
+yourself in vcpkg and fix them not only for this extension, but for the whole open-source community! 
 
 ## Conclusion
 In this blog post, we've explored DuckDB's journey towards managing dependencies in its extension ecosystem while
