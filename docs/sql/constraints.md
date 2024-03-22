@@ -58,7 +58,7 @@ INSERT INTO students VALUES (1, 'Student 1');
 ```
 The unique constraint prevents duplicates a column or combination of columns, but is allowed to be empty unlike the primary key. 
 ```sql
-CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR, email VARCHAR, UNIQUE(email));
+CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR, email VARCHAR UNIQUE);
 INSERT INTO students VALUES (1, 'Student 1', 'student1@uni.com');
 INSERT INTO students values (2, 'Student 2', 'student1@uni.com');
 -- Constraint Error: Duplicate key "email: student1@uni.com" violates unique constraint.
