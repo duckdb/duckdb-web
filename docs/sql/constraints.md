@@ -43,7 +43,7 @@ INSERT INTO students VALUES (1, 'Student 2');
 -- Constraint Error: Duplicate key "id: 1" violates primary key constraint
 ```
 ```sql
-CREATE TABLE students (id INTEGER, name VARCHAR, primary key (id, name));
+CREATE TABLE students (id INTEGER, name VARCHAR, PRIMARY KEY (id, name));
 INSERT INTO students VALUES (1, 'Student 1');
 INSERT INTO students VALUES (1, 'Student 2');
 INSERT INTO students VALUES (1, 'Student 1');
