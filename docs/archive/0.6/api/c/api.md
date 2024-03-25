@@ -269,7 +269,7 @@ title: C API - Complete API
 </code></pre></div></div>
 ### duckdb_open
 ---
-Creates a new database or opens an existing database file stored at the the given path.
+Creates a new database or opens an existing database file stored at the given path.
 If no path is given a new in-memory database is created instead.
 
 #### Syntax
@@ -295,7 +295,7 @@ The result database object.
 
 ### duckdb_open_ext
 ---
-Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the the given path.
+Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the given path.
 
 #### Syntax
 ---
