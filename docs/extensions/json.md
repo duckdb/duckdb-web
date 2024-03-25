@@ -191,7 +191,7 @@ Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, 
 
 | Name | Description | Type | Default |
 |:--|:------|:-|:-|
-| `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | `BOOL` | `false` |
+| `auto_detect` | Whether to auto-detect the names of the keys and data types of the values automatically | `BOOL` | `false` |
 | `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | `STRUCT` | `(empty)` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | `VARCHAR` | `'iso'` |
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |

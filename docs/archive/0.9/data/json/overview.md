@@ -56,7 +56,7 @@ Below are parameters that can be passed in to the JSON reader.
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | `VARCHAR` | `'auto'` |
 | `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | `STRUCT` | `(empty)` |
 | `records` | Can be one of `['auto', 'true', 'false']` | `VARCHAR` | `'records'` |
-| `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | `BOOL` | `false` |
+| `auto_detect` | Whether to auto-detect the names of the keys and data types of the values automatically | `BOOL` | `false` |
 | `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | `'iso'` |
