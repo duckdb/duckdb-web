@@ -27,7 +27,7 @@ If the endpoint is not SSL-enabled then run:
 SET s3_use_ssl = false;
 ```
 
-Switching between [path-style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#path-style-url-ex) and [vhost-style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#virtual-host-style-url-ex) URLs is possible using:
+Switching between [path-style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access) and [vhost-style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#virtual-hosted-style-access) URLs is possible using:
 
 ```sql
 SET s3_url_style = 'path';
