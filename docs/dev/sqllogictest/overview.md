@@ -12,12 +12,3 @@ Testing is vital to make sure that DuckDB works properly and keeps working prope
 * We use a [fuzzer](https://github.com/duckdb/duckdb-fuzzer), which automatically reports of issues found through fuzzing DuckDB.
 
 ## Pages in This Section
-
-* [Writing Tests](writing_tests)
-* [sqllogictest](sqllogictest/intro)
-* [Debugging](sqllogictest/debugging)
-* [Result Verification](sqllogictest/result_verification)
-* [Persistent Testing](sqllogictest/persistent_testing)
-* [Loops](sqllogictest/loops)
-* [Multiple Connections](sqllogictest/multiple_connections)
-* [Catch](sqllogictest/catch)
