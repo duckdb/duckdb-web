@@ -53,8 +53,8 @@ def reduce_clutter_in_doc(doc_body):
 
 
 def move_headers_down(doc_body):
-    # move headers h2-h4 down by 3 levels (to h5-h7)
-    extra_header_levels = 3*"#"
+    # move headers h2-h4 down by 1 level
+    extra_header_levels = "#"
     return re.sub(r"^##", f"##{extra_header_levels}", doc_body, flags=re.MULTILINE)
 
 
@@ -220,12 +220,11 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         of.write("\n")
 
 
-def add_to_documentation(docs_root, data, of, chapter_title):
+def add_to_documentation(docs_root, data, of):
     # we use the docs/index.md as the baseline for paths
     docs_index_file_path = "index.md"
 
-    of.write(f"# {chapter_title}\n\n")
-    chapter_json = [x for x in data["docsmenu"] if x["page"] == chapter_title][0]
+    chapter_json = [x for x in data["docsmenu"] if x["page"] == "Documentation"][0]
     chapter_slug = chapter_json["slug"]
     main_level_pages = chapter_json["mainfolderitems"]
 
@@ -236,11 +235,11 @@ def add_to_documentation(docs_root, data, of, chapter_title):
 
         if main_url:
             logging.info(f"- {main_url}")
-            concatenate_page_to_output(of, 2, docs_root, f"{chapter_slug}{main_url}")
+            concatenate_page_to_output(of, 1, docs_root, f"{chapter_slug}{main_url}")
 
         if main_slug:
-            # e.g., "## SQL Features {#guides:sql_features}"
-            of.write(f"## {main_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}') }}}\n\n")
+            # e.g., "# SQL Features {#guides:sql_features}"
+            of.write(f"# {main_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}') }}}\n\n")
         else:
             continue
 
@@ -252,10 +251,10 @@ def add_to_documentation(docs_root, data, of, chapter_title):
 
             if subfolder_url:
                 logging.info(f"  - {main_slug}/{subfolder_url}")
-                concatenate_page_to_output(of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
+                concatenate_page_to_output(of, 2, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
 
             if subfolder_slug:
-                of.write(f"### {subfolder_page_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}/{subfolder_slug}') }}}\n\n")
+                of.write(f"## {subfolder_page_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}/{subfolder_slug}') }}}\n\n")
             else:
                 continue
 
@@ -264,7 +263,7 @@ def add_to_documentation(docs_root, data, of, chapter_title):
                 subsubfolder_url = subsubfolder_page.get("url")
 
                 logging.info(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
-                concatenate_page_to_output(of, 4, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
+                concatenate_page_to_output(of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
 
 
 parser = argparse.ArgumentParser()
@@ -296,8 +295,10 @@ with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.m
 
     with open("cover-page.md") as cover_page_file:
         of.write(cover_page_file.read())
+        of.write("\n")
 
-    add_to_documentation(docs_root, data, of, "Documentation")
+    add_to_documentation(docs_root, data, of)
 
     with open("acknowledgments.md") as acknowledgments_file:
         of.write(acknowledgments_file.read())
+        of.write("\n")
