@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: sqllogictest - Loops
+redirect_from:
+  - /dev/sqllogictest/loops
 ---
 
 Loops can be used in sqllogictests when it is required to execute the same query many times but with slight modifications in constant values. For example, suppose we want to fire off 100 queries that check for the presence of the values `0..100` in a table:

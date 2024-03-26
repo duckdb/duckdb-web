@@ -1228,6 +1228,92 @@
               ]
             }
           ]
+        },
+        {
+          "page": "Development",
+          "slug": "dev",
+          "subfolderitems": [
+            {
+              "page": "DuckDB Repositories",
+              "url": "repositories"
+            },
+            {
+              "page": "Testing",
+              "slug": "sqllogictest",
+              "subsubfolderitems": [
+                  {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "sqllogictest Introduction",
+                  "url": "intro"
+                },
+                {
+                  "page": "Writing Tests",
+                  "url": "writing_tests"
+                },
+                {
+                  "page": "Debugging",
+                  "url": "debugging"
+                },
+                {
+                  "page": "Result Verification",
+                  "url": "result_verification"
+                },
+                {
+                  "page": "Persistent Testing",
+                  "url": "persistent_testing"
+                },
+                {
+                  "page": "Loops",
+                  "url": "loops"
+                },
+                {
+                  "page": "Multiple Connections",
+                  "url": "multiple_connections"
+                },
+                {
+                  "page": "Catch",
+                  "url": "catch"
+                }
+              ]
+            },
+            {
+              "page": "Profiling",
+              "url": "profiling"
+            },
+            {
+              "page": "Release Calendar",
+              "url": "release-calendar"
+            },
+            {
+              "page": "Building",
+              "url": "building"
+            },
+            {
+              "page": "Benchmark Suite",
+              "url": "benchmark"
+            }
+          ]
+        },
+        {
+          "page": "Internals",
+          "slug": "internals",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "Storage Versions & Format",
+              "url": "storage"
+            },
+            {
+              "page": "Execution Format",
+              "url": "vector"
+            }
+          ]
         }    
       ]
     }
