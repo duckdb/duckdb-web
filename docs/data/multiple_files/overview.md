@@ -35,7 +35,6 @@ SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 SELECT * FROM read_parquet('dir/**/*.parquet');
 ```
 
-
 ## Multi-File Reads and Globs
 
 DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
@@ -63,7 +62,7 @@ Any file name input to the read_parquet function can either be an exact filename
 | `[abc]`    | matches one character given in the bracket                |
 | `[a-z]`    | matches one character from the range given in the bracket |
 
-Note that the `?` wildcard in globs is not supported for reads over S3 due to HTTP encoding issues. 
+Note that the `?` wildcard in globs is not supported for reads over S3 due to HTTP encoding issues.
 
 Here is an example that reads all the files that end with `.parquet` located in the `test` folder:
 
@@ -99,6 +98,17 @@ SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, f
 | 1988-01-02 | New York, NY   | Los Angeles, CA | NULL          | flights1.csv |
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            | flights2.csv |
 
+Since v0.10.2, it is possible to specify the name of the filename column using the `filename` argument:
+
+```sql
+SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = "my_filename_column");
+```
+
+| FlightDate | UniqueCarrier | OriginCityName |  DestCityName   | my_filename_column |
+|------------|---------------|----------------|-----------------|--------------------|
+| 1988-01-01 | AA            | New York, NY   | Los Angeles, CA | flights1.csv       |
+| 1988-01-02 | AA            | New York, NY   | Los Angeles, CA | flights1.csv       |
+| 1988-01-03 | AA            | New York, NY   | Los Angeles, CA | flights2.csv       |
 
 ## Glob Function to Find Filenames
 
