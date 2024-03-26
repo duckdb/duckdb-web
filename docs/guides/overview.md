@@ -1,9 +1,12 @@
 ---
 layout: docu
 title: Guides
+redirect_from:
+  - /docs/guides
+  - /docs/guides/index
 ---
 
-The guides section contains compact how-to guides that are focused on achieving a single goal. For an in-depth reference see the Documentation section.
+The guides section contains compact how-to guides that are focused on achieving a single goal. For an API references and examples, see the rest of the documentation.
 
 Note that there are many tools using DuckDB, which are not covered in the official guides. To find a list of these tools, check out the [Awesome DuckDB repository](https://github.com/davidgasquez/awesome-duckdb).
 
