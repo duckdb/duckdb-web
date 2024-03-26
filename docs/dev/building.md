@@ -48,7 +48,7 @@ brew install cmake ninja
 
 Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.1/.github/workflows/Windows.yml#L234) for a list of packages used to build DuckDB on Windows.
 
-The DuckDB Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../docs/api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
+The DuckDB Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
 
 ## Building DuckDB
 
@@ -110,8 +110,8 @@ The CI will also run this check, causing it to fail if this check fails.
 #### `format-fix` | `format-changes` | `format-main`
 
 This doesn't actually create a build, but uses the following format checkers to check for style issues:
-- [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to fix format issues in the code.  
-- [cmake-format](https://cmake-format.readthedocs.io/en/latest/) to fix format issues in the CMakeLists.txt files.  
+- [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to fix format issues in the code.
+- [cmake-format](https://cmake-format.readthedocs.io/en/latest/) to fix format issues in the `CMakeLists.txt` files.
 
 The CI will also run this check, causing it to fail if this check fails.
 
@@ -126,11 +126,11 @@ BUILD_PYTHON=1 make debug
 
 #### `BUILD_PYTHON`
 
-When this flag is set, the [Python](../docs/api/python/overview) package is built.
+When this flag is set, the [Python](../api/python/overview) package is built.
 
 #### `BUILD_SHELL`
 
-When this flag is set, the [CLI](../docs/api/cli) is built, this is usually enabled by default.
+When this flag is set, the [CLI](../api/cli) is built, this is usually enabled by default.
 
 #### `BUILD_BENCHMARK`
 
@@ -139,11 +139,11 @@ More information about this can be found [here](https://github.com/duckdb/duckdb
 
 #### `BUILD_JDBC`
 
-When this flag is set, the [Java](../docs/api/java) package is built.
+When this flag is set, the [Java](../api/java) package is built.
 
 #### `BUILD_ODBC`
 
-When this flag is set, the [ODBC](../docs/api/odbc/overview) package is built.
+When this flag is set, the [ODBC](../api/odbc/overview) package is built.
 
 ### Extension Flags
 
@@ -232,13 +232,13 @@ With this flag enabled, the sanitizers are disabled for the build.
 
 ## Building and Installing Extensions from Source
 
-[Extensions](../docs/extensions/overview) can be built from source and installed from the resulting local binary.
+[Extensions](../extensions/overview) can be built from source and installed from the resulting local binary.
 
 ### Using Build Flags
 
 Set the corresponding [`BUILD_[EXTENSION_NAME]` extension flag](#extension-flags) when running the build, then use the `INSTALL` command.
 
-For example, to install the [`httpfs` extension](../docs/extensions/httpfs), run the following script:
+For example, to install the [`httpfs` extension](../extensions/httpfs), run the following script:
 
 ```bash
 GEN=ninja BUILD_HTTPFS=1 make

@@ -36,7 +36,7 @@ $ /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
 
 After this `mydata.db` will be untouched with the old format, `mydata.new.db` will contain the same data but in a format accessible from more recent DuckDB, and folder `tmp` will old the same data in an universal format as different files.
 
-Check [`EXPORT` documentation](../docs/sql/statements/export) for more details on the syntax.
+Check [`EXPORT` documentation](../sql/statements/export) for more details on the syntax.
 
 ## Storage Header
 
@@ -133,4 +133,4 @@ The message implies that the database file was created with a newer DuckDB versi
 There are two potential workarounds:
 
 1. Update your DuckDB version to the latest stable version.
-2. Open the database with the latest version of DuckDB, export it to a standard format (e.g., Parquet), then import it using to any version of DuckDB. See the [`EXPORT/IMPORT DATABASE` statements](../docs/sql/statements/export) for details.
+2. Open the database with the latest version of DuckDB, export it to a standard format (e.g., Parquet), then import it using to any version of DuckDB. See the [`EXPORT/IMPORT DATABASE` statements](../sql/statements/export) for details.
