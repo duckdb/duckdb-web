@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "42.parquet - A Zip Bomb for the Big Data Age"
+title: "42.parquet – A Zip Bomb for the Big Data Age"
 author: Hannes Mühleisen
-excerpt: A 42 kB compressed Parquet file can contain over 4 PB of data.
+excerpt: A 42 kB Parquet file can contain over 4 PB of data.
 ---
 
 [Apache Parquet](https://parquet.apache.org) has become the de-facto standard for tabular data interchange. It is greatly superior to its scary cousin CSV by using a binary, columnar and *compressed* data representation. In addition, Parquet files come with enough metadata so that files can be correctly interpreted without additional information. Most modern data tools and services support reading and writing Parquet files.
