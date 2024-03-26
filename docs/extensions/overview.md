@@ -84,6 +84,8 @@ Extensions are signed with a cryptographic key, which also simplifies distributi
 By default, DuckDB uses its built-in public keys to verify the integrity of extension before loading them.
 All extensions provided by the DuckDB core team are signed.
 
+### Unsigned Extensions
+
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
 To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsigned` flag to it on startup.
 For the Python client, see the [Loading and Installing Extensions section in the Python API documentation](../api/python/overview#loading-and-installing-extensions).
