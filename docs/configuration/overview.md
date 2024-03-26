@@ -24,6 +24,7 @@ SET enable_progress_bar = true;
 -- set the default null order to NULLS LAST
 SET default_null_order = 'nulls_last';
 ```
+
 ```sql
 -- return the current value of a specific setting
 SELECT current_setting('threads') AS threads;
