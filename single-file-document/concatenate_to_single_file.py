@@ -316,7 +316,6 @@ with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.m
         of.write(cover_page_file.read())
 
     add_to_documentation(docs_root, data, of, "Documentation")
-    add_to_documentation(docs_root, data, of, "Guides")
     add_under_the_hood_chapter(docs_root, data, of)
 
     with open("acknowledgments.md") as acknowledgments_file:

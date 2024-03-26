@@ -6,291 +6,7 @@
       "url": "index"
     },
     {
-      "page": "Guides",
-      "open": true,
-      "slug": "guides/",
-      "mainfolderitems": [
-        {
-          "page": "Overview",
-          "url": "index"
-        },
-        {
-          "page": "Data Import & Export",
-          "slug": "import",
-          "subfolderitems": [
-            {
-              "page": "Overview",
-              "url": "overview"
-            },
-            {
-              "page": "CSV Import",
-              "url": "csv_import"
-            },
-            {
-              "page": "CSV Export",
-              "url": "csv_export"
-            },
-            {
-              "page": "Parquet Import",
-              "url": "parquet_import"
-            },
-            {
-              "page": "Parquet Export",
-              "url": "parquet_export"
-            },
-            {
-              "page": "Querying Parquet Files",
-              "url": "query_parquet"
-            },
-            {
-              "page": "HTTP Parquet Import",
-              "url": "http_import"
-            },
-            {
-              "page": "S3 Parquet Import",
-              "url": "s3_import"
-            },
-            {
-              "page": "S3 Parquet Export",
-              "url": "s3_export"
-            },
-            {
-              "page": "S3 Iceberg Import",
-              "url": "s3_iceberg_import"
-            },
-            {
-              "page": "S3 Express One",
-              "url": "s3_express_one"
-            },
-            {
-              "page": "GCS Import",
-              "url": "gcs_import"
-            },
-            {
-              "page": "Cloudflare R2 Import",
-              "url": "cloudflare_r2_import"
-            },
-            {
-              "page": "JSON Import",
-              "url": "json_import"
-            },
-            {
-              "page": "JSON Export",
-              "url": "json_export"
-            },
-            {
-              "page": "Excel Import",
-              "url": "excel_import"
-            },
-            {
-              "page": "Excel Export",
-              "url": "excel_export"
-            },
-            {
-              "page": "MySQL Import",
-              "url": "query_mysql"
-            },
-            {
-              "page": "PostgreSQL Import",
-              "url": "query_postgres"
-            },
-            {
-              "page": "SQLite Import",
-              "url": "query_sqlite"
-            },
-            {
-              "page": "Directly Reading Files",
-              "url": "read_file"
-            }
-          ]
-        },
-        {
-          "page": "Performance",
-          "slug": "performance",
-          "subfolderitems": [
-            {
-              "page": "Overview",
-              "url": "overview"
-            },
-            {
-              "page": "Schema",
-              "url": "schema"
-            },
-            {
-              "page": "Indexing",
-              "url": "indexing"
-            },
-            {
-              "page": "Environment",
-              "url": "environment"
-            },
-            {
-              "page": "File Formats",
-              "url": "file_formats"
-            },
-            {
-              "page": "How to Tune Workloads",
-              "url": "how_to_tune_workloads"
-            },
-            {
-              "page": "My Workload Is Slow",
-              "url": "my_workload_is_slow"
-            },
-            {
-              "page": "Benchmarks",
-              "url": "benchmarks"
-            }
-          ]
-        },
-        {
-          "page": "Meta Queries",
-          "slug": "meta",
-          "subfolderitems": [
-            {
-              "page": "Describe Table",
-              "url": "describe"
-            },
-            {
-              "page": "EXPLAIN: Inspect Query Plans",
-              "url": "explain"
-            },
-            {
-              "page": "EXPLAIN ANALYZE: Profile Queries",
-              "url": "explain_analyze"
-            },
-            {
-              "page": "List Tables",
-              "url": "list_tables"
-            },
-            {
-              "page": "Summarize",
-              "url": "summarize"
-            },
-            {
-              "page": "DuckDB Environment",
-              "url": "duckdb_environment"
-            }
-          ]
-        },
-        {
-          "page": "ODBC",
-          "slug": "odbc",
-          "subfolderitems": [
-            {
-              "page": "ODBC Guide",
-              "url": "general"
-            }
-          ]
-        },
-        {
-          "page": "Python",
-          "slug": "python",
-          "subfolderitems": [
-            {
-              "page": "Installation",
-              "url": "install"
-            },
-            {
-              "page": "Executing SQL",
-              "url": "execute_sql"
-            },
-            {
-              "page": "Jupyter Notebooks",
-              "url": "jupyter"
-            },
-            {
-              "page": "SQL on Pandas",
-              "url": "sql_on_pandas"
-            },
-            {
-              "page": "Import from Pandas",
-              "url": "import_pandas"
-            },
-            {
-              "page": "Export to Pandas",
-              "url": "export_pandas"
-            },
-            {
-              "page": "SQL on Arrow",
-              "url": "sql_on_arrow"
-            },
-            {
-              "page": "Import from Arrow",
-              "url": "import_arrow"
-            },
-            {
-              "page": "Export to Arrow",
-              "url": "export_arrow"
-            },
-            {
-              "page": "Relational API on Pandas",
-              "url": "relational_api_pandas"
-            },
-            {
-              "page": "Multiple Python Threads",
-              "url": "multiple_threads"
-            },
-            {
-              "page": "Integration with Ibis",
-              "url": "ibis"
-            },
-            {
-              "page": "Integration with Polars",
-              "url": "polars"
-            },
-            {
-              "page": "Using fsspec Filesystems",
-              "url": "filesystems"
-            }
-          ]
-        },
-        {
-          "page": "SQL Features",
-          "slug": "sql_features",
-          "subfolderitems": [
-            {
-              "page": "Friendly SQL",
-              "url": "friendly_sql"
-            },
-            {
-              "page": "AsOf Join",
-              "url": "asof_join"
-            },
-            {
-              "page": "Full-Text Search",
-              "url": "full_text_search"
-            }
-          ]
-        },
-        {
-          "page": "SQL Editors",
-          "slug": "sql_editors",
-          "subfolderitems": [
-            {
-              "page": "DBeaver SQL IDE",
-              "url": "dbeaver"
-            }
-          ]
-        },
-        {
-          "page": "Data Viewers",
-          "slug": "data_viewers",
-          "subfolderitems": [
-            {
-              "page": "Tableau",
-              "url": "tableau"
-            },
-            {
-              "page": "CLI Charting with YouPlot",
-              "url": "youplot"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "page": "Documentation",
-      "open": true,
       "slug": "",
       "mainfolderitems": [
         {
@@ -1230,7 +946,289 @@
               "url": "tpch"
             }
           ]
-        }
+        },
+        {
+          "page": "Guides",
+          "slug": "guides",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "Data Import & Export",
+              "slug": "import",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "CSV Import",
+                  "url": "csv_import"
+                },
+                {
+                  "page": "CSV Export",
+                  "url": "csv_export"
+                },
+                {
+                  "page": "Parquet Import",
+                  "url": "parquet_import"
+                },
+                {
+                  "page": "Parquet Export",
+                  "url": "parquet_export"
+                },
+                {
+                  "page": "Querying Parquet Files",
+                  "url": "query_parquet"
+                },
+                {
+                  "page": "HTTP Parquet Import",
+                  "url": "http_import"
+                },
+                {
+                  "page": "S3 Parquet Import",
+                  "url": "s3_import"
+                },
+                {
+                  "page": "S3 Parquet Export",
+                  "url": "s3_export"
+                },
+                {
+                  "page": "S3 Iceberg Import",
+                  "url": "s3_iceberg_import"
+                },
+                {
+                  "page": "S3 Express One",
+                  "url": "s3_express_one"
+                },
+                {
+                  "page": "GCS Import",
+                  "url": "gcs_import"
+                },
+                {
+                  "page": "Cloudflare R2 Import",
+                  "url": "cloudflare_r2_import"
+                },
+                {
+                  "page": "JSON Import",
+                  "url": "json_import"
+                },
+                {
+                  "page": "JSON Export",
+                  "url": "json_export"
+                },
+                {
+                  "page": "Excel Import",
+                  "url": "excel_import"
+                },
+                {
+                  "page": "Excel Export",
+                  "url": "excel_export"
+                },
+                {
+                  "page": "MySQL Import",
+                  "url": "query_mysql"
+                },
+                {
+                  "page": "PostgreSQL Import",
+                  "url": "query_postgres"
+                },
+                {
+                  "page": "SQLite Import",
+                  "url": "query_sqlite"
+                },
+                {
+                  "page": "Directly Reading Files",
+                  "url": "read_file"
+                }
+              ]
+            },
+            {
+              "page": "Performance",
+              "slug": "performance",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Schema",
+                  "url": "schema"
+                },
+                {
+                  "page": "Indexing",
+                  "url": "indexing"
+                },
+                {
+                  "page": "Environment",
+                  "url": "environment"
+                },
+                {
+                  "page": "File Formats",
+                  "url": "file_formats"
+                },
+                {
+                  "page": "How to Tune Workloads",
+                  "url": "how_to_tune_workloads"
+                },
+                {
+                  "page": "My Workload Is Slow",
+                  "url": "my_workload_is_slow"
+                },
+                {
+                  "page": "Benchmarks",
+                  "url": "benchmarks"
+                }
+              ]
+            },
+            {
+              "page": "Meta Queries",
+              "slug": "meta",
+              "subsubfolderitems": [
+                {
+                  "page": "Describe Table",
+                  "url": "describe"
+                },
+                {
+                  "page": "EXPLAIN: Inspect Query Plans",
+                  "url": "explain"
+                },
+                {
+                  "page": "EXPLAIN ANALYZE: Profile Queries",
+                  "url": "explain_analyze"
+                },
+                {
+                  "page": "List Tables",
+                  "url": "list_tables"
+                },
+                {
+                  "page": "Summarize",
+                  "url": "summarize"
+                },
+                {
+                  "page": "DuckDB Environment",
+                  "url": "duckdb_environment"
+                }
+              ]
+            },
+            {
+              "page": "ODBC",
+              "slug": "odbc",
+              "subsubfolderitems": [
+                {
+                  "page": "ODBC Guide",
+                  "url": "general"
+                }
+              ]
+            },
+            {
+              "page": "Python",
+              "slug": "python",
+              "subsubfolderitems": [
+                {
+                  "page": "Installation",
+                  "url": "install"
+                },
+                {
+                  "page": "Executing SQL",
+                  "url": "execute_sql"
+                },
+                {
+                  "page": "Jupyter Notebooks",
+                  "url": "jupyter"
+                },
+                {
+                  "page": "SQL on Pandas",
+                  "url": "sql_on_pandas"
+                },
+                {
+                  "page": "Import from Pandas",
+                  "url": "import_pandas"
+                },
+                {
+                  "page": "Export to Pandas",
+                  "url": "export_pandas"
+                },
+                {
+                  "page": "SQL on Arrow",
+                  "url": "sql_on_arrow"
+                },
+                {
+                  "page": "Import from Arrow",
+                  "url": "import_arrow"
+                },
+                {
+                  "page": "Export to Arrow",
+                  "url": "export_arrow"
+                },
+                {
+                  "page": "Relational API on Pandas",
+                  "url": "relational_api_pandas"
+                },
+                {
+                  "page": "Multiple Python Threads",
+                  "url": "multiple_threads"
+                },
+                {
+                  "page": "Integration with Ibis",
+                  "url": "ibis"
+                },
+                {
+                  "page": "Integration with Polars",
+                  "url": "polars"
+                },
+                {
+                  "page": "Using fsspec Filesystems",
+                  "url": "filesystems"
+                }
+              ]
+            },
+            {
+              "page": "SQL Features",
+              "slug": "sql_features",
+              "subsubfolderitems": [
+                {
+                  "page": "Friendly SQL",
+                  "url": "friendly_sql"
+                },
+                {
+                  "page": "AsOf Join",
+                  "url": "asof_join"
+                },
+                {
+                  "page": "Full-Text Search",
+                  "url": "full_text_search"
+                }
+              ]
+            },
+            {
+              "page": "SQL Editors",
+              "slug": "sql_editors",
+              "subsubfolderitems": [
+                {
+                  "page": "DBeaver SQL IDE",
+                  "url": "dbeaver"
+                }
+              ]
+            },
+            {
+              "page": "Data Viewers",
+              "slug": "data_viewers",
+              "subsubfolderitems": [
+                {
+                  "page": "Tableau",
+                  "url": "tableau"
+                },
+                {
+                  "page": "CLI Charting with YouPlot",
+                  "url": "youplot"
+                }
+              ]
+            }
+          ]
+        }    
       ]
     }
   ]

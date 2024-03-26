@@ -27,16 +27,7 @@
     {% assign offset = offset | plus:2 %}
   {% endif %}
 
-  {% if crumbs[offset] == "guides" %}
-    {% assign offset = offset | plus:1 %}
-    {% assign part = "Guides" %}
-  {% else %}
-    {% assign part = "Documentation" %}
-  {% endif %}
-
-  {% if crumbs.last != "docs" and crumbs.last != "guides" %}
-    <span>{{ part }}</span>
-  {% endif %}
+  <span>Documentation</span>
 
   {% for doc_entry in menudocfile %}
     {% assign crumb = crumbs[offset] %}
@@ -72,4 +63,3 @@
 
   <br/>
 </div>
-
