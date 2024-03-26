@@ -1,4 +1,4 @@
-## Summary
+# Summary
 
 This document contains [DuckDB's official documentation and guides](https://duckdb.org/) in a single-file easy-to-search form.
 If you find any issues, please report them [as a GitHub issue](https://github.com/duckdb/duckdb-web/issues).
