@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Benchmark Suite
+redirect_from:
+  - /dev/benchmark
 ---
 
 DuckDB has an extensive benchmark suite.

@@ -1,6 +1,8 @@
 ---
 layout: docu
-title: sqllogictest
+title: sqllogictest Introduction
+redirect_from:
+  - /dev/sqllogictest/intro
 ---
 
 For testing plain SQL, we use an extended version of the SQL logic test suite, adopted from [SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki). Every test is a single self-contained file located in the `test/sql` directory.

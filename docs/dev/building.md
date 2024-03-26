@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Building DuckDB from Source
+redirect_from:
+  - /dev/building
 ---
 
 > DuckDB binaries are available for stable and nightly builds on the [installation page](/docs/installation).

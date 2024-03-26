@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Storage
+redirect_from:
+   - /internals/storage
 ---
 
 ## Compatibility

@@ -1,6 +1,8 @@
 ---
 layout: docu
-title: Testing
+title: Overview
+redirect_from:
+  - /dev/testing
 ---
 
 ## How is DuckDB Tested?
