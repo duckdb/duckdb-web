@@ -263,27 +263,30 @@ $(document).ready(function(){
     
 	
 	// Same Page Anchor Scroll Navigation
+	var scrollspeed = 1000;
 	$('a[href*="#"]')
-    .not('[href="#"]')
-    .not('[href="#0"]')
-    .click(function(event) {
-      if (
-        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
-        &&
-        location.hostname == this.hostname
-      ) {
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+		.not('[href="#"]')
+		.not('[href="#0"]')
+		.click(function(event) {
+			if ($(this).parent().hasClass('toc-entry')) {
+				scrollspeed = 100;
+			}
+			if (
+				location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') &&
+				location.hostname == this.hostname
+			) {
+				var target = $(this.hash);
+				target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+	
+				if (target.length) {
+					// event.preventDefault();
+					$('html, body').animate({
+						scrollTop: target.offset().top - 90
+					}, scrollspeed);
+				}
+			}
+		});
 
-        if (target.length) {
-          // event.preventDefault();
-          $('html, body').animate({
-            scrollTop: target.offset().top-90
-          }, 1000 );
-        }
-      }
-    });
-    
     
     // FAQs
 	$('.qa-wrap').click(function(){

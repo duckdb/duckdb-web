@@ -135,7 +135,7 @@ h5 {
 			}
 			p, ul li, ol li{
 				font-size: 19px;
-				line-height: 29px;
+				line-height: 1.5;
 				margin-top: 30px;
 				margin-bottom: 30px;
 				font-family: $fontSans;
@@ -144,6 +144,9 @@ h5 {
 				i, em{
 					font-family: $fontSans;
 					font-style: italic;
+				}
+				@media only screen and (max-width: 660px) {
+					font-size: 15px;
 				}
 			}
 			ul li, ol li{
