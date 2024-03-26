@@ -25,50 +25,53 @@ LOAD mysql;
 To make a MySQL database accessible to DuckDB use the `ATTACH` command:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql)
+ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql);
 USE mysqldb;
 ```
 
-The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below.
+### Configuration
+
+The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below. Connection information can also be specified with [environment variables](https://dev.mysql.com/doc/refman/8.3/en/environment-variables.html). If no option is provided explicitly, the MySQL extension tries to read it from an environment variable.
+
 
 <div class="narrow_table"></div>
 
-|  Setting   |   Default    |
-|------------|--------------|
-| `database` | `NULL`       |
-| `host`     | `localhost`  |
-| `password` |              |
-| `port`     | `0`          |
-| `socket`   | `NULL`       |
-| `user`     | current user |
+|  Setting   |   Default    | Environment variable |
+|------------|--------------|----------------------|
+| `database` | `NULL`       | `MYSQL_DATABASE`     |
+| `host`     | `localhost`  | `MYSQL_HOST`         |
+| `password` |              | `MYSQL_PWD`          |
+| `port`     | `0`          | `MYSQL_TCP_PORT`     |
+| `socket`   | `NULL`       | `MYSQL_UNIX_PORT`    |
+| `user`     | current user | `MYSQL_USER`         |
+
+Then, to connect, start the `duckdb` process and run:
+
+```sql
+ATTACH '' AS p (TYPE postgres);
+```
+
+### Reading MySQL Tables
 
 The tables in the MySQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from MySQL at query time.
 
 ```sql
 SHOW TABLES;
 ```
-```text
-┌───────────────────────────────────────┐
-│                 name                  │
-│                varchar                │
-├───────────────────────────────────────┤
-│ signed_integers                       │
-└───────────────────────────────────────┘
-```
+
+|      name       |
+|-----------------|
+| signed_integers |
 
 ```sql
 SELECT * FROM signed_integers;
 ```
-```text
-┌──────┬────────┬──────────┬─────────────┬──────────────────────┐
-│  t   │   s    │    m     │      i      │          b           │
-│ int8 │ int16  │  int32   │    int32    │        int64         │
-├──────┼────────┼──────────┼─────────────┼──────────────────────┤
-│ -128 │ -32768 │ -8388608 │ -2147483648 │ -9223372036854775808 │
-│  127 │  32767 │  8388607 │  2147483647 │  9223372036854775807 │
-│ NULL │   NULL │     NULL │        NULL │                 NULL │
-└──────┴────────┴──────────┴─────────────┴──────────────────────┘
-```
+
+|  t   |   s    |    m     |      i      |          b           |
+|-----:|-------:|---------:|------------:|---------------------:|
+| -128 | -32768 | -8388608 | -2147483648 | -9223372036854775808 |
+| 127  | 32767  | 8388607  | 2147483647  | 9223372036854775807  |
+| NULL | NULL   | NULL     | NULL        | NULL                 |
 
 It might be desirable to create a copy of the MySQL databases in DuckDB to prevent the system from re-reading the tables from MySQL continuously, particularly for large tables.
 
@@ -120,14 +123,10 @@ INSERT INTO mysql_db.tbl VALUES (42, 'DuckDB');
 ```sql
 SELECT * FROM mysql_db.tbl;
 ```
-```text
-┌───────┬─────────┐
-│  id   │  name   │
-│ int64 │ varchar │
-├───────┼─────────┤
-│    42 │ DuckDB  │
-└───────┴─────────┘
-```
+
+| id |  name  |
+|---:|--------|
+| 42 | DuckDB |
 
 ### `COPY`
 
@@ -184,14 +183,11 @@ CREATE TABLE mysql_db.s1.integers (i INT);
 INSERT INTO mysql_db.s1.integers VALUES (42);
 SELECT * FROM mysql_db.s1.integers;
 ```
-```text
-┌───────┐
-│   i   │
-│ int32 │
-├───────┤
-│    42 │
-└───────┘
-```
+
+| i  |
+|---:|
+| 42 |
+
 ```sql
 DROP SCHEMA mysql_db.s1;
 ```
@@ -204,28 +200,52 @@ BEGIN;
 INSERT INTO mysql_db.tmp VALUES (42);
 SELECT * FROM mysql_db.tmp;
 ```
-```text
-┌───────┐
-│   i   │
-│ int64 │
-├───────┤
-│    42 │
-└───────┘
-```
+
+| i  |
+|---:|
+| 42 |
+
 ```sql
 ROLLBACK;
 SELECT * FROM mysql_db.tmp;
 ```
-```text
-┌────────┐
-│   i    │
-│ int64  │
-├────────┤
-│ 0 rows │
-└────────┘
-```
+
+| i |
+|--:|
 
 > The DDL statements are not transactional in MySQL.
+
+## Running SQL Queries in MySQL
+
+### The `mysql_query` Table Function
+
+The `mysql_query` table function allows you to run arbitrary read queries within an attached database. `mysql_query` takes the name of the attached Postgres database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
+
+```sql
+mysql_query(attached_database::VARCHAR, query::VARCHAR)
+```
+
+For example:
+
+```sql
+ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE mysql);
+SELECT * FROM mysql_query('mysqldb', 'SELECT * FROM cars LIMIT 3');
+```
+
+> Warning This function is only available on DuckDB v0.10.1, using the latest MySQL extension.
+> To upgrade your extension, run `FORCE INSTALL mysql;`.
+
+### The `mysql_execute` Function
+
+The `mysql_execute` function allows running arbitrary queries within MySQL, including statements that update the schema and content of the database.
+
+```sql
+ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE mysql);
+CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
+```
+
+> Warning This function is only available on DuckDB v0.10.1, using the latest MySQL extension.
+> To upgrade your extension, run `FORCE INSTALL mysql;`.
 
 ## Settings
 

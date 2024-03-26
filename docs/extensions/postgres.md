@@ -61,11 +61,11 @@ host=localhost port=5432 dbname=mydb connect_timeout=10
 
 An example URI is `postgresql://username@hostname/dbname`.
 
+### Configuring via Environment Variables
+
 Postgres connection information can also be specified with [environment variables](https://www.postgresql.org/docs/current/libpq-envars.html).
 This can be useful in a production environment where the connection information is managed externally
 and passed in to the environment.
-
-### Configuring via Environment Variables
 
 ```bash
 export PGPASSWORD="secret"
@@ -88,30 +88,20 @@ The tables in the PostgreSQL database can be read as if they were normal DuckDB 
 SHOW TABLES;
 ```
 
-```text
-┌───────────────────────────────────────┐
-│                 name                  │
-│                varchar                │
-├───────────────────────────────────────┤
-│ uuids                                 │
-└───────────────────────────────────────┘
-```
+| name  |
+|-------|
+| uuids |
 
 ```sql
 SELECT * FROM uuids;
 ```
 
-```text
-┌──────────────────────────────────────┐
-│                  u                   │
-│                 uuid                 │
-├──────────────────────────────────────┤
-│ 6d3d2541-710b-4bde-b3af-4711738636bf │
-│ NULL                                 │
-│ 00000000-0000-0000-0000-000000000001 │
-│ ffffffff-ffff-ffff-ffff-ffffffffffff │
-└──────────────────────────────────────┘
-```
+|                  u                   |
+|--------------------------------------|
+| 6d3d2541-710b-4bde-b3af-4711738636bf |
+| NULL                                 |
+| 00000000-0000-0000-0000-000000000001 |
+| ffffffff-ffff-ffff-ffff-ffffffffffff |
 
 It might be desirable to create a copy of the Postgres databases in DuckDB to prevent the system from re-reading the tables from Postgres continuously, particularly for large tables.
 
@@ -162,14 +152,9 @@ INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 SELECT * FROM postgres_db.tbl;
 ```
 
-```text
-┌───────┬─────────┐
-│  id   │  name   │
-│ int64 │ varchar │
-├───────┼─────────┤
-│    42 │ DuckDB  │
-└───────┴─────────┘
-```
+| id |  name  |
+|---:|--------|
+| 42 | DuckDB |
 
 ### `COPY`
 
@@ -229,14 +214,9 @@ INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
 ```
 
-```text
-┌───────┐
-│   i   │
-│ int32 │
-├───────┤
-│    42 │
-└───────┘
-```
+| i  |
+|---:|
+| 42 |
 
 ```sql
 DROP SCHEMA postgres_db.s1;
@@ -257,54 +237,61 @@ INSERT INTO postgres_db.tmp VALUES (42);
 SELECT * FROM postgres_db.tmp;
 ```
 
-```text
-┌───────┐
-│   i   │
-│ int64 │
-├───────┤
-│    42 │
-└───────┘
-```
+| i  |
+|---:|
+| 42 |
 
 ```sql
 ROLLBACK;
 SELECT * FROM postgres_db.tmp;
 ```
 
-```text
-┌────────┐
-│   i    │
-│ int64  │
-├────────┤
-│ 0 rows │
-└────────┘
-```
+| i |
+|--:|
 
-## Running SQL Queries in Postgres with `postgres_query`
+## Running SQL Queries in Postgres
 
-The `postgres_query` function allows you to run arbitrary SQL within an attached database. `postgres_query` takes the name of the attached Postgres database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
+### The `postgres_query` Table Function
+
+The `postgres_query` table function allows you to run arbitrary read queries within an attached database. `postgres_query` takes the name of the attached Postgres database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
 
 ```sql
 postgres_query(attached_database::VARCHAR, query::VARCHAR)
 ```
 
-### Example
+For example:
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS s (TYPE POSTGRES);
-SELECT * FROM postgres_query('s', 'SELECT * FROM cars LIMIT 3');
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
+SELECT * FROM postgres_query('postgres_db', 'SELECT * FROM cars LIMIT 3');
 ```
 
-```text
-┌──────────────┬───────────┬─────────┐
-│    brand     │   model   │  color  │
-│   varchar    │  varchar  │ varchar │
-├──────────────┼───────────┼─────────┤
-│ ferari       │ testarosa │ red     │
-│ aston martin │ db2       │ blue    │
-│ bentley      │ mulsanne  │ gray    │
-└──────────────┴───────────┴─────────┘
+<!--
+    CREATE TABLE cars (brand VARCHAR, model VARCHAR, color VARCHAR);
+    INSERT INTO cars VALUES
+      ('Ferrari', 'Testarossa', 'red'),
+      ('Aston Martin', 'DB2', 'blue'),
+      ('Bentley', 'Mulsanne', 'gray')
+    ;
+-->
+
+|    brand     |   model    | color |
+|--------------|------------|-------|
+| Ferrari      | Testarossa | red   |
+| Aston Martin | DB2        | blue  |
+| Bentley      | Mulsanne   | gray  |
+
+### The `postgres_execute` Function
+
+The `postgres_execute` function allows running arbitrary queries within Postgres, including statements that update the schema and content of the database.
+
+```sql
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
+CALL postgres_execute('postgres_db', 'CREATE TABLE my_table (i INTEGER)');
 ```
+
+> Warning This function is only available on DuckDB v0.10.1, using the latest Postgres extension.
+> To upgrade your extension, run `FORCE INSTALL postgres;`.
 
 ## Settings
 

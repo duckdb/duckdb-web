@@ -40,33 +40,29 @@ The tables in the file can be read as if they were normal DuckDB tables, but the
 SHOW TABLES;
 ```
 
-```text
-┌────────────────────────┐
-│          name          │
-├────────────────────────┤
-│ actor                  │
-│ address                │
-│ category               │
-│ city                   │
-│ country                │
-│ customer               │
-│ customer_list          │
-│ film                   │
-│ film_actor             │
-│ film_category          │
-│ film_list              │
-│ film_text              │
-│ inventory              │
-│ language               │
-│ payment                │
-│ rental                 │
-│ sales_by_film_category │
-│ sales_by_store         │
-│ staff                  │
-│ staff_list             │
-│ store                  │
-└────────────────────────┘
-```
+|          name          |
+|------------------------|
+| actor                  |
+| address                |
+| category               |
+| city                   |
+| country                |
+| customer               |
+| customer_list          |
+| film                   |
+| film_actor             |
+| film_category          |
+| film_list              |
+| film_text              |
+| inventory              |
+| language               |
+| payment                |
+| rental                 |
+| sales_by_film_category |
+| sales_by_store         |
+| staff                  |
+| staff_list             |
+| store                  |
 
 You can query the tables using SQL, e.g., using the example queries from [`sakila-examples.sql`](https://github.com/duckdb/sqlite_scanner/blob/main/data/sql/sakila-examples.sql):
 
@@ -130,31 +126,23 @@ When set, this option overrides the type conversion rules described above, and i
 
 SQLite databases can also be opened directly and can be used transparently instead of a DuckDB database file. In any client, when connecting, a path to a SQLite database file can be provided and the SQLite database will be opened instead.
 
-For example, with the shell:
+For example, with the shell, a SQLite database can be opened as follows:
 
 ```bash
-duckdb data/db/sakila.db 
-```
-```sql
-SHOW tables;
-```
-```text
-┌────────────┐
-│    name    │
-│  varchar   │
-├────────────┤
-│ actor      │
-│ address    │
-│ category   │
-│    ·       │
-│ staff_list │
-│ store      │
-├────────────┤
-│  21 rows   │
-│ (5 shown)  │
-└────────────┘
+duckdb sakila.db 
 ```
 
+```sql
+SELECT first_name
+FROM actor
+LIMIT 3;
+```
+
+| first_name |
+|------------|
+| PENELOPE   |
+| NICK       |
+| ED         |
 
 ## Writing Data to SQLite
 
@@ -175,10 +163,12 @@ The resulting SQLite database can then be read into from SQLite.
 ```bash
 sqlite3 new_sqlite_database.db 
 ```
+
 ```sql
 SQLite version 3.39.5 2022-10-14 20:58:05
 sqlite> SELECT * FROM tbl;
 ```
+
 ```text
 id  name  
 --  ------
@@ -206,14 +196,10 @@ INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
 ```sql
 SELECT * FROM sqlite_db.tbl;
 ```
-```text
-┌───────┬─────────┐
-│  id   │  name   │
-│ int64 │ varchar │
-├───────┼─────────┤
-│    42 │ DuckDB  │
-└───────┴─────────┘
-```
+
+| id |  name  |
+|---:|--------|
+| 42 | DuckDB |
 
 ### `COPY`
 
@@ -260,25 +246,17 @@ BEGIN;
 INSERT INTO sqlite_db.tmp VALUES (42);
 SELECT * FROM sqlite_db.tmp;
 ```
-```text
-┌───────┐
-│   i   │
-│ int64 │
-├───────┤
-│    42 │
-└───────┘
-```
+
+| i  |
+|---:|
+| 42 |
+
 ```sql
 ROLLBACK;
 SELECT * FROM sqlite_db.tmp;
 ```
-```text
-┌────────┐
-│   i    │
-│ int64  │
-├────────┤
-│ 0 rows │
-└────────┘
-```
+
+| i |
+|--:|
 
 > Deprecated The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax](../sql/statements/attach).
