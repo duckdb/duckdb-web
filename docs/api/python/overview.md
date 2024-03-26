@@ -94,7 +94,11 @@ duckdb.sql("SELECT 42").write_csv("out.csv")         # Write to a CSV file
 duckdb.sql("COPY (SELECT 42) TO 'out.parquet'")      # Copy to a Parquet file
 ```
 
-## Using an In-Memory Database
+## Connection Options
+
+Applications can open a new DuckDB connection via the `duckdb.connect()` method.
+
+### Using an In-Memory Database
 
 When using DuckDB through `duckdb.sql()`, it operates on an **in-memory** database, i.e., no tables are persisted on disk.
 Invoking the `duckdb.connect()` method without arguments returns a connection, which also uses an in-memory database:
@@ -106,7 +110,7 @@ con = duckdb.connect()
 con.sql("SELECT 42 AS x").show()
 ```
 
-## Persistent Storage
+### Persistent Storage
 
 The `duckdb.connect(`*`dbname`*`)` creates a connection to a **persistent** database.
 Any data written to that connection will be persisted, and can be reloaded by re-connecting to the same file, both from Python and from other DuckDB clients.
@@ -138,13 +142,23 @@ with duckdb.connect("file.db") as con:
     # the context manager closes the connection automatically
 ```
 
-## Connection Object and Module
+### Configuration
+
+The `duckdb.connect()` accepts a `config` dictionary, where [configuration options](../../configuration/overview#configuration-reference) can be specified. For example:
+
+```python
+import duckdb
+
+con = duckdb.connect(config = {'threads': 1})
+```
+
+### Connection Object and Module
 
 The connection object and the `duckdb` module can be used interchangeably – they support the same methods. The only difference is that when using the `duckdb` module a global in-memory database is used.
 
-Note that if you are developing a package designed for others to use, and use DuckDB in the package, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages.
+> If you are developing a package designed for others to use, and use DuckDB in the package, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages.
 
-## Using Connections in Parallel Python Programs
+### Using Connections in Parallel Python Programs
 
 The `DuckDBPyConnection` object is not thread-safe. If you would like to write to the same database from multiple threads, create a cursor for each thread with the [`DuckDBPyConnection.cursor()` method](reference/#duckdb.DuckDBPyConnection.cursor).
 
@@ -160,5 +174,4 @@ con.install_extension("spatial")
 con.load_extension("spatial")
 ```
 
-> To load unsigned extensions, add the `config = {"allow_unsigned_extensions": "true"}` argument to the `duckdb.connect()` method.
-
+To load [unsigned extensions](../../extensions/overview#unsigned-extensions), use the `config = {"allow_unsigned_extensions": "true"}` argument to the `duckdb.connect()` method.
