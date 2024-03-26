@@ -189,7 +189,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `chr(65)` |
 | **Result** | A |
 
-### `concat_ws(`*`separator`*`, `*`string`*`, ...*`)`*
+### `concat_ws(`*`separator`*`, `*`string`*`, ..., `*`)`
 
 <div class="nostroke_table"></div>
 
