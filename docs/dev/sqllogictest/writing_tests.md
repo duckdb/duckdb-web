@@ -13,13 +13,13 @@ The tests can be run by running the `unittest` program located in the `test` fol
 
 ## Philosophy
 
-When testing DuckDB, we aim to route all the tests through SQL. We try to avoid testing components individually because that makes those components more difficult to change later on. As such, almost all of our tests can (and should) be expressed in pure SQL. There are certain exceptions to this, which we will discuss in [Catch Tests](sqllogictest/catch). However, in most cases you should write your tests in plain SQL.
+When testing DuckDB, we aim to route all the tests through SQL. We try to avoid testing components individually because that makes those components more difficult to change later on. As such, almost all of our tests can (and should) be expressed in pure SQL. There are certain exceptions to this, which we will discuss in [Catch Tests](catch). However, in most cases you should write your tests in plain SQL.
 
 ## Frameworks
 
-SQL tests should be written using the [sqllogictest framework](/dev/sqllogictest/intro).
+SQL tests should be written using the [sqllogictest framework](intro).
 
-C++ tests can be written using the [Catch framework](/dev/sqllogictest/catch).
+C++ tests can be written using the [Catch framework](catch).
 
 ## Client Connector Tests
 
@@ -38,6 +38,7 @@ The table has three rows encoding the minimum value, the maximum value, and the 
 ```sql
 FROM test_all_types();
 ```
+
 ```text
 ┌─────────┬─────────┬──────────┬─────────────┬──────────────────────┬──────────────────────┬───┬──────────────────────┬──────────────────────┬──────────────────────┬──────────────────────┬──────────────────────┐
 │  bool   │ tinyint │ smallint │     int     │        bigint        │       hugeint        │ … │        struct        │   struct_of_arrays   │   array_of_structs   │         map          │        union         │
