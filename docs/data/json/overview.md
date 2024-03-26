@@ -21,7 +21,7 @@ FROM read_json('todos.json',
 ```
 
 ```bash
--- read a JSON file from stdin, auto-infer options
+# read a JSON file from stdin, auto-infer options
 cat data/json/todos.json | duckdb -c "SELECT * FROM read_json_auto('/dev/stdin')"
 ```
 
