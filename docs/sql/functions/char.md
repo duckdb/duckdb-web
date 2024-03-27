@@ -219,7 +219,7 @@ This section describes functions and operators for examining and manipulating st
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return true if `string` ends with `search_string. |
+| **Description** | Return true if `string` ends with `search_string`. |
 | **Example** | `ends_with('abc', 'c')` |
 | **Result** | `true` |
 | **Alias** | `suffix` |
