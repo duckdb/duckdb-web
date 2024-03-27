@@ -57,7 +57,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | **Description** | Bracket notation serves as an alias for `list_extract`. |
 | **Example** | `l[3]` |
 | **Result** | `6` |
-| **Alias** |  |
+| **Alias** | `list_extract` |
 
 ### `list[begin:end]`
 
@@ -66,7 +66,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | **Description** | Bracket notation with colon is an alias for `list_slice`. |
 | **Example** | `l[2:3]` |
 | **Result** | `[5, 6]` |
-| **Alias** |  |
+| **Alias** | `list_slice` |
 
 ### `list[begin:end:step]`
 
@@ -75,7 +75,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | **Description** | `list_slice` in bracket notation with an added `step` feature. |
 | **Example** | `l[:-:2]` |
 | **Result** | `[4, 6]` |
-| **Alias** |  |
+| **Alias** | `list_slice` |
 
 ### `array_pop_back(list)`
 
@@ -84,7 +84,6 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | **Description** | Returns the list without the last element. |
 | **Example** | `array_pop_back(l)` |
 | **Result** | `[4, 5]` |
-| **Alias** |  |
 
 ### `array_pop_front(list)`
 
@@ -93,7 +92,6 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | **Description** | Returns the list without the first element. |
 | **Example** | `array_pop_front(l)` |
 | **Result** | `[5, 6]` |
-| **Alias** |  |
 
 ### `flatten(list_of_lists)`
 
@@ -102,7 +100,6 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | **Description** | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](nested#flatten)). |
 | **Example** | `flatten([[1, 2], [3, 4]])` |
 | **Result** | `[1, 2, 3, 4]` |
-| **Alias** |  |
 
 ### `len(list)`
 
@@ -129,7 +126,6 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | **Description** | Returns the first non-null value in the list. |
 | **Example** | `list_any_value([NULL, -3])` |
 | **Result** | `-3` |
-| **Alias** |  |
 
 ### `list_append(list, element)`
 
@@ -165,7 +161,6 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | **Description** | Compute the cosine similarity between two lists. |
 | **Example** | `list_cosine_similarity([1, 2, 3], [1, 2, 5])` |
 | **Result** | `0.9759000729485332` |
-| **Alias** |  |
 
 ### `list_distance(list1, list2)`
 
@@ -174,7 +169,6 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | **Description** | Calculates the Euclidean distance between two points with coordinates given in two inputs lists of equal length. |
 | **Example** | `list_distance([1, 2, 3], [1, 2, 5])` |
 | **Result** | `2.0` |
-| **Alias** |  |
 
 ### `list_distinct(list)`
 
@@ -390,7 +384,6 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | **Description** | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [`unnest` page](../query_syntax/unnest) for more details. |
 | **Example** | `unnest([1, 2, 3])` |
 | **Result** | `1`, `2`, `3` |
-| **Alias** |  |
 
 ## List Operators
 
