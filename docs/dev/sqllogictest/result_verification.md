@@ -15,7 +15,7 @@ SELECT 42, 84 UNION ALL SELECT 10, 20;
 10	20
 ```
 
-For legacy reasons the letters `R` and `T` are also accepted to denote columns.
+For legacy reasons the letters `R` and `T` are also accepted to denote columns. We have deprecated the usage of types in the SQLLogicTest. The DuckDB test runner does not use or need them internally.
 
 ## NULL Values and Empty Strings
 
