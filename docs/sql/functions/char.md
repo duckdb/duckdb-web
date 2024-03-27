@@ -99,9 +99,9 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `true` |
 | **Alias** | `starts_with` |
 
-<div class="nostroke_table"></div>
-
 ### `string || string`
+
+<div class="nostroke_table"></div>
 
 | **Description** | String concatenation. |
 | **Example** | `'Duck' || 'DB'` |
