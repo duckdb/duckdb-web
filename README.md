@@ -1,6 +1,11 @@
 <div align="center">
-  <img src="./images/logo-dl/DuckDB_Logo-stacked.svg" height="120">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="./images/logo-dl/DuckDB_Logo-horizontal.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="./images/logo-dl/DuckDB_Logo-horizontal-dark-mode.svg">
+    <img alt="DuckDB logo" src="logo/DuckDB_Logo-horizontal.svg" height="100">
+  </picture>
 </div>
+<br>
 
 # DuckDB Website
 
