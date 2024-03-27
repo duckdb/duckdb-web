@@ -237,6 +237,8 @@ INSERT INTO postgres_db.tmp VALUES (42);
 SELECT * FROM postgres_db.tmp;
 ```
 
+This returns:
+
 | i  |
 |---:|
 | 42 |
@@ -246,8 +248,7 @@ ROLLBACK;
 SELECT * FROM postgres_db.tmp;
 ```
 
-| i |
-|--:|
+This returns an empty table.
 
 ## Running SQL Queries in Postgres
 
