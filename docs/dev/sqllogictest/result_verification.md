@@ -15,7 +15,9 @@ SELECT 42, 84 UNION ALL SELECT 10, 20;
 10	20
 ```
 
-For legacy reasons the letters `R` and `T` are also accepted to denote columns. We have deprecated the usage of types in the SQLLogicTest. The DuckDB test runner does not use or need them internally. This means we only use I to denote columns.
+For legacy reasons the letters `R` and `T` are also accepted to denote columns.
+
+> Deprecated DuckDB deprecated the usage of types in the SQLLogicTest. The DuckDB test runner does not use or need them internally – therefore, only `I` should be used to denote columns.
 
 ## NULL Values and Empty Strings
 
@@ -44,7 +46,6 @@ Table with name non_existent_table does not exist!
 
 In certain cases result values might be very large or complex, and we might only be interested in whether or not the result *contains* a snippet of text. In that case, we can use the `<REGEX>:` modifier followed by a certain regex. If the result value matches the regex the test is passed. This is primarily used for query plan analysis.
 
-
 ```sql
 query II
 EXPLAIN SELECT tbl.a FROM "data/parquet-testing/arrow/alltypes_plain.parquet" tbl(a) WHERE a=1 OR a=2
@@ -57,7 +58,6 @@ If we instead want the result *not* to contain a snippet of text, we can use the
 ## File
 
 As results can grow quite large, and we might want to re-use results over multiple files, it is also possible to read expected results from files using the `<FILE>` command. The expected result is read from the given file. As convention the file path should be provided as relative to the root of the GitHub repository.
-
 
 ```sql
 query I
