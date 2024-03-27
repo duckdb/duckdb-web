@@ -15,8 +15,7 @@ SELECT 42, 84 UNION ALL SELECT 10, 20;
 10	20
 ```
 
-For legacy reasons the letters `R` and `T` are also accepted to denote columns. We have deprecated the usage of types in the SQLLogicTest. The DuckDB test runner does not use or need them internally.
-This means we only use I to denote columns.
+For legacy reasons the letters `R` and `T` are also accepted to denote columns. We have deprecated the usage of types in the SQLLogicTest. The DuckDB test runner does not use or need them internally.This means we only use I to denote columns.
 ## NULL Values and Empty Strings
 
 Empty lines have special significance for the SQLLogic test runner: they signify an end of the current statement or query. For that reason, empty strings and NULL values have special syntax that must be used in result verification. NULL values should use the string `NULL`, and empty strings should use the string `(empty)`, e.g.:
