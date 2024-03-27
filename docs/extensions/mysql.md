@@ -196,6 +196,8 @@ INSERT INTO mysql_db.tmp VALUES (42);
 SELECT * FROM mysql_db.tmp;
 ```
 
+This returns:
+
 | i  |
 |---:|
 | 42 |
@@ -205,8 +207,7 @@ ROLLBACK;
 SELECT * FROM mysql_db.tmp;
 ```
 
-| i |
-|--:|
+This returns an empty table.
 
 > The DDL statements are not transactional in MySQL.
 
