@@ -28,27 +28,27 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | Name | Description |
 |:--|:-------|
 | [`current_date`](#current_date) | Current date (at start of current transaction). |
-| [`date_add(`*`date`*`, `*`interval`*`)`](#date_adddate-interval) | Add the interval to the date. |
-| [`date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`](#date_diffpart-startdate-enddate) | The number of [partition](../../sql/functions/datepart) boundaries between the dates. |
-| [`date_part(`*`part`*`, `*`date`*`)`](#date_partpart-date) | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
-| [`date_sub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`](#date_subpart-startdate-enddate) | The number of complete [partitions](../../sql/functions/datepart) between the dates. |
-| [`date_trunc(`*`part`*`, `*`date`*`)`](#date_truncpart-date) | Truncate to specified [precision](../../sql/functions/datepart). |
-| [`datediff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`](#datediffpart-startdate-enddate) | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the dates. |
-| [`datepart(`*`part`*`, `*`date`*`)`](#datepartpart-date) | Alias of date_part. Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
-| [`datesub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`](#datesubpart-startdate-enddate) | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the dates. |
-| [`datetrunc(`*`part`*`, `*`date`*`)`](#datetruncpart-date) | Alias of date_trunc. Truncate to specified [precision](../../sql/functions/datepart). |
-| [`dayname(`*`date`*`)`](#daynamedate) | The (English) name of the weekday. |
-| [`extract(`*`part`* `from `*`date`*`)`](#extractpart-from-date) | Get [subfield](../../sql/functions/datepart) from a date. |
-| [`greatest(`*`date`*`, `*`date`*`)`](#greatestdate-date) | The later of two dates. |
-| [`isfinite(`*`date`*`)`](#isfinitedate) | Returns true if the date is finite, false otherwise. |
-| [`isinf(`*`date`*`)`](#isinfdate) | Returns true if the date is infinite, false otherwise. |
-| [`last_day(`*`date`*`)`](#last_daydate) | The last day of the corresponding month in the date. |
-| [`least(`*`date`*`, `*`date`*`)`](#leastdate-date) | The earlier of two dates. |
-| [`make_date(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`)`](#make_datebigint-bigint-bigint) | The date for the given parts. |
-| [`monthname(`*`date`*`)`](#monthnamedate) | The (English) name of the month. |
+| [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date. |
+| [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition](../../sql/functions/datepart) boundaries between the dates. |
+| [`date_part(part, date)`](#date_partpart-date) | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
+| [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The number of complete [partitions](../../sql/functions/datepart) between the dates. |
+| [`date_trunc(part, date)`](#date_truncpart-date) | Truncate to specified [precision](../../sql/functions/datepart). |
+| [`datediff(part, startdate, enddate)`](#datediffpart-startdate-enddate) | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the dates. |
+| [`datepart(part, date)`](#datepartpart-date) | Alias of date_part. Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
+| [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the dates. |
+| [`datetrunc(part, date)`](#datetruncpart-date) | Alias of date_trunc. Truncate to specified [precision](../../sql/functions/datepart). |
+| [`dayname(date)`](#daynamedate) | The (English) name of the weekday. |
+| [`extract(part from date)`](#extractpart-from-date) | Get [subfield](../../sql/functions/datepart) from a date. |
+| [`greatest(date, date)`](#greatestdate-date) | The later of two dates. |
+| [`isfinite(date)`](#isfinitedate) | Returns true if the date is finite, false otherwise. |
+| [`isinf(date)`](#isinfdate) | Returns true if the date is infinite, false otherwise. |
+| [`last_day(date)`](#last_daydate) | The last day of the corresponding month in the date. |
+| [`least(date, date)`](#leastdate-date) | The earlier of two dates. |
+| [`make_date(bigint, bigint, bigint)`](#make_datebigint-bigint-bigint) | The date for the given parts. |
+| [`monthname(date)`](#monthnamedate) | The (English) name of the month. |
 | [`strftime(date, format)`](#strftimedate-format) | Converts a date to a string according to the [format string](../../sql/functions/dateformat). |
-| [`time_bucket(`*`bucket_width`*`, `*`date`*`[, `*`offset`*`])`](#time_bucketbucket_width-date-offset) | Truncate `date` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
-| [`time_bucket(`*`bucket_width`*`, `*`date`*`[, `*`origin`*`])`](#time_bucketbucket_width-date-origin) | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` date. `origin` defaults to 2000-01-03 for buckets that don't include a month or year interval, and to 2000-01-01 for month and year buckets. |
+| [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
+| [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` date. `origin` defaults to 2000-01-03 for buckets that don't include a month or year interval, and to 2000-01-01 for month and year buckets. |
 | [`today()`](#today) | Current date (start of current transaction). |
 
 ### `current_date`
@@ -59,7 +59,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `current_date` |
 | **Result** | `2022-10-08` |
 
-### `date_add(`*`date`*`, `*`interval`*`)`
+### `date_add(date, interval)`
 
 <div class="nostroke_table"></div>
 
@@ -67,7 +67,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `date_add(DATE '1992-09-15', INTERVAL 2 MONTH)` |
 | **Result** | `1992-11-15` |
 
-### `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`
+### `date_diff(part, startdate, enddate)`
 
 <div class="nostroke_table"></div>
 
@@ -75,7 +75,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `date_diff('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `2` |
 
-### `date_part(`*`part`*`, `*`date`*`)`
+### `date_part(part, date)`
 
 <div class="nostroke_table"></div>
 
@@ -83,7 +83,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `date_part('year', DATE '1992-09-20')` |
 | **Result** | `1992` |
 
-### `date_sub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`
+### `date_sub(part, startdate, enddate)`
 
 <div class="nostroke_table"></div>
 
@@ -91,7 +91,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `date_sub('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `1` |
 
-### `date_trunc(`*`part`*`, `*`date`*`)`
+### `date_trunc(part, date)`
 
 <div class="nostroke_table"></div>
 
@@ -99,7 +99,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `date_trunc('month', DATE '1992-03-07')` |
 | **Result** | `1992-03-01` |
 
-### `datediff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`
+### `datediff(part, startdate, enddate)`
 
 <div class="nostroke_table"></div>
 
@@ -107,7 +107,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `datediff('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `2` |
 
-### `datepart(`*`part`*`, `*`date`*`)`
+### `datepart(part, date)`
 
 <div class="nostroke_table"></div>
 
@@ -115,7 +115,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `datepart('year', DATE '1992-09-20')` |
 | **Result** | `1992` |
 
-### `datesub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)`
+### `datesub(part, startdate, enddate)`
 
 <div class="nostroke_table"></div>
 
@@ -123,7 +123,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `datesub('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `1` |
 
-### `datetrunc(`*`part`*`, `*`date`*`)`
+### `datetrunc(part, date)`
 
 <div class="nostroke_table"></div>
 
@@ -131,7 +131,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `datetrunc('month', DATE '1992-03-07')` |
 | **Result** | `1992-03-01` |
 
-### `dayname(`*`date`*`)`
+### `dayname(date)`
 
 <div class="nostroke_table"></div>
 
@@ -139,7 +139,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `dayname(DATE '1992-09-20')` |
 | **Result** | `Sunday` |
 
-### `extract(`*`part`* `from `*`date`*`)`
+### `extract(part from date)`
 
 <div class="nostroke_table"></div>
 
@@ -147,7 +147,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `extract('year' FROM DATE '1992-09-20')` |
 | **Result** | `1992` |
 
-### `greatest(`*`date`*`, `*`date`*`)`
+### `greatest(date, date)`
 
 <div class="nostroke_table"></div>
 
@@ -155,23 +155,23 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `greatest(DATE '1992-09-20', DATE '1992-03-07')` |
 | **Result** | `1992-09-20` |
 
-### `isfinite(`*`date`*`)`
+### `isfinite(date)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns true if the date is finite, false otherwise. |
+| **Description** | Returns `true` if the date is finite, false otherwise. |
 | **Example** | `isfinite(DATE '1992-03-07')` |
 | **Result** | `true` |
 
-### `isinf(`*`date`*`)`
+### `isinf(date)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns true if the date is infinite, false otherwise. |
+| **Description** | Returns `true` if the date is infinite, false otherwise. |
 | **Example** | `isinf(DATE '-infinity')` |
 | **Result** | `true` |
 
-### `last_day(`*`date`*`)`
+### `last_day(date)`
 
 <div class="nostroke_table"></div>
 
@@ -179,7 +179,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `last_day(DATE '1992-09-20')` |
 | **Result** | `1992-09-30` |
 
-### `least(`*`date`*`, `*`date`*`)`
+### `least(date, date)`
 
 <div class="nostroke_table"></div>
 
@@ -187,7 +187,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `least(DATE '1992-09-20', DATE '1992-03-07')` |
 | **Result** | `1992-03-07` |
 
-### `make_date(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`)`
+### `make_date(bigint, bigint, bigint)`
 
 <div class="nostroke_table"></div>
 
@@ -195,7 +195,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `make_date(1992, 9, 20)` |
 | **Result** | `1992-09-20` |
 
-### `monthname(`*`date`*`)`
+### `monthname(date)`
 
 <div class="nostroke_table"></div>
 
@@ -211,7 +211,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `strftime(date '1992-01-01', '%a, %-d %B %Y')` |
 | **Result** | `Wed, 1 January 1992` |
 
-### `time_bucket(`*`bucket_width`*`, `*`date`*`[, `*`offset`*`])`
+### `time_bucket(bucket_width, date[, offset])`
 
 <div class="nostroke_table"></div>
 
@@ -219,11 +219,11 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `time_bucket(INTERVAL '2 months', DATE '1992-04-20', INTERVAL '1 month')` |
 | **Result** | `1992-04-01` |
 
-### `time_bucket(`*`bucket_width`*`, `*`date`*`[, `*`origin`*`])`
+### `time_bucket(bucket_width, date[, origin])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` date. `origin` defaults to 2000-01-03 for buckets that don't include a month or year interval, and to 2000-01-01 for month and year buckets. |
+| **Description** | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` date. `origin` defaults to `2000-01-03` for buckets that don't include a month or year interval, and to `2000-01-01` for month and year buckets. |
 | **Example** | `time_bucket(INTERVAL '2 weeks', DATE '1992-04-20', DATE '1992-04-01')` |
 | **Result** | `1992-04-15` |
 
@@ -238,7 +238,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 ## Date Part Extraction Functions
 
 There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart#part-functions).
-A few examples include extracting the day from a date, or the day of the week from a date. 
+A few examples include extracting the day from a date, or the day of the week from a date.
 
 Functions applied to infinite dates will either return the same infinite dates
 (e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
