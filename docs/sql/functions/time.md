@@ -22,7 +22,7 @@ The table below shows the available scalar functions for `TIME` types.
 
 | Name | Description |
 |:--|:-------|
-| [`current_time`/`get_current_time()`](#current_timeget_current_time) | Current time (start of current transaction). |
+| [`current_time`](#current_time) | Current time (start of current transaction). |
 | [`date_diff(part, starttime, endtime)`](#date_diffpart-starttime-endtime) | The number of [partition](../../sql/functions/datepart) boundaries between the times. |
 | [`date_part(part, time)`](#date_partpart-time) | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
 | [`date_sub(part, starttime, endtime)`](#date_subpart-starttime-endtime) | The number of complete [partitions](../../sql/functions/datepart) between the times. |
@@ -30,17 +30,19 @@ The table below shows the available scalar functions for `TIME` types.
 | [`datepart(part, time)`](#datepartpart-time) | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
 | [`datesub(part, starttime, endtime)`](#datesubpart-starttime-endtime) | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the times. |
 | [`extract(part FROM time)`](#extractpart-from-time) | Get subfield from a time. |
+| [`get_current_time()`](#get_current_time) | Current time (start of current transaction). |
 | [`make_time(bigint, bigint, double)`](#make_timebigint-bigint-double) | The time for the given parts. |
 
 The only [date parts](../../sql/functions/datepart) that are defined for times are `epoch`, `hours`, `minutes`, `seconds`, `milliseconds` and `microseconds`.
 
-### `current_time`/`get_current_time()`
+### `current_time`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current time (start of current transaction). |
-| **Example** | `get_current_time()` |
+| **Description** | Current time (start of current transaction). Note that parentheses should be omitted. |
+| **Example** | `current_time` |
 | **Result** | `10:31:58.578` |
+| **Alias** | `get_current_time()` |
 
 ### `date_diff(part, starttime, endtime)`
 
@@ -97,6 +99,15 @@ The only [date parts](../../sql/functions/datepart) that are defined for times a
 | **Description** | Get subfield from a time. |
 | **Example** | `extract('hour' FROM TIME '14:21:13')` |
 | **Result** | `14` |
+
+### `get_current_time()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Current time (start of current transaction). |
+| **Example** | `get_current_time()` |
+| **Result** | `10:31:58.578` |
+| **Alias** | `current_time` |
 
 ### `make_time(bigint, bigint, double)`
 
