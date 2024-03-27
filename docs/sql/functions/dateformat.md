@@ -13,6 +13,7 @@ The `strftime` and `strptime` functions can be used to convert between dates/tim
 SELECT strftime(DATE '1992-03-02', '%d/%m/%Y');
 -- 02/03/1992
 ```
+
 ```sql
 SELECT strftime(TIMESTAMP '1992-03-02 20:32:45', '%A, %-d %B %Y - %I:%M:%S %p');
 -- Monday, 2 March 1992 - 08:32:45 PM
@@ -26,6 +27,7 @@ SELECT strftime(TIMESTAMP '1992-03-02 20:32:45', '%A, %-d %B %Y - %I:%M:%S %p');
 SELECT strptime('02/03/1992', '%d/%m/%Y');
 -- 1992-03-02 00:00:00
 ```
+
 ```sql
 SELECT strptime('Monday, 2 March 1992 - 08:32:45 PM', '%A, %-d %B %Y - %I:%M:%S %p');
 -- 1992-03-02 20:32:45
@@ -39,6 +41,7 @@ The date formats can also be specified during CSV parsing, either in the [`COPY`
 -- in COPY statement
 COPY dates FROM 'test.csv' (DATEFORMAT '%d/%m/%Y', TIMESTAMPFORMAT '%A, %-d %B %Y - %I:%M:%S %p');
 ```
+
 ```sql
 -- in read_csv function
 SELECT *

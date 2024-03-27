@@ -8,7 +8,7 @@ redirect_from:
 
 ## Connect or Create a Database
 
-To use DuckDB, you must first create a connection to a database. The exact syntax varies between the [client APIs](../api/overview) but it typically involves passing an argument to configure persistence. 
+To use DuckDB, you must first create a connection to a database. The exact syntax varies between the [client APIs](../api/overview) but it typically involves passing an argument to configure persistence.
 
 ## Persistence
 

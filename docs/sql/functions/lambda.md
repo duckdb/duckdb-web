@@ -10,20 +10,19 @@ If the lambda function has only one parameter, then the parentheses can be omitt
 The parameters can have any names.
 For example, the following are all valid lambda functions:
 
-- `param -> param > 1`
-- `s -> contains(concat(s, 'DB'), 'duck')`
-- `(x, y) -> x + y`
+* `param -> param > 1`
+* `s -> contains(concat(s, 'DB'), 'duck')`
+* `(x, y) -> x + y`
 
 ### Scalar Functions That Accept Lambda Functions
 
-
 | Name | Description |
 |:--|:-------|
-| [`list_transform(`*`list`*`, `*`lambda`*`)`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. |
-| [`list_filter(`*`list`*`, `*`lambda`*`)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns `true`. |
-| [`list_reduce(`*`list`*`, `*`lambda`*`)`](#list_reducelist-lambda) | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. |
+| [`list_transform(list, lambda)`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. |
+| [`list_filter(list, lambda)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns `true`. |
+| [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. |
 
-### `list_transform(`*`list`*`, `*`lambda`*`)`
+### `list_transform(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -32,7 +31,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
 
-### `list_filter(`*`list`*`, `*`lambda`*`)`   
+### `list_filter(list, lambda)
 
 <div class="nostroke_table"></div>
 
@@ -41,7 +40,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5, 6]` |
 | **Aliases** | `array_filter`, `filter` |
 
-### `list_reduce(`*`list`*`, `*`lambda`*`)`   
+### `list_reduce(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -55,22 +54,27 @@ For example, the following are all valid lambda functions:
 All scalar functions can be arbitrarily nested.
 
 _Nested lambda functions to get all squares of even list elements:_
+
 ```sql
 SELECT list_transform(
         list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0),
         y -> y * y
     );
 ```
+
 ```text
 [0, 4, 16]
 ```
+
 _Nested lambda function to add each element of the first list to the sum of the second list:_
+
 ```sql
 SELECT list_transform(
         [1, 2, 3],
         x -> list_reduce([4, 5, 6], (a, b) -> a + b) + x
     );
 ```
+
 ```text
 [16, 17, 18]
 ```
@@ -78,16 +82,18 @@ SELECT list_transform(
 ### Scoping
 
 Lambda functions confirm to scoping rules in the following order:
-- inner lambda parameters
-- outer lambda parameters
-- column names
-- macro parameters
+
+* inner lambda parameters
+* outer lambda parameters
+* column names
+* macro parameters
 
 ```sql
 CREATE TABLE tbl (x INT);
 INSERT INTO tbl VALUES (10);
 SELECT apply([1, 2], x -> apply([4], x -> x + tbl.x)[1] + x) FROM tbl;
 ```
+
 ```text
 [15, 16]
 ```
@@ -98,9 +104,11 @@ All lambda functions accept an optional extra parameter that represents the inde
 This is always the last parameter of the lambda function, and is 1-based (i.e., the first element has index 1).
 
 _Get all elements that are larger than their index:_
+
 ```sql
 SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 ```
+
 ```text
 [3, 5]
 ```
@@ -112,11 +120,11 @@ SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 **Description:**  
 `list_transform` returns a list that is the result of applying the lambda function to each element of the input list.
 
-**Aliases:**  
-- `array_transform`
-- `apply`
-- `list_apply`
-- `array_apply`
+**Aliases:**
+* `array_transform`
+* `apply`
+* `list_apply`
+* `array_apply`
 
 **Number of parameters excluding indexes:** 1
 
@@ -154,8 +162,8 @@ Constructs a list from those elements of the input list for which the lambda fun
 DuckDB must be able to cast the lambda function's return type to `BOOL`.
 
 **Aliases:**  
-- `array_filter`
-- `filter`
+* `array_filter`
+* `filter`
 
 **Number of parameters excluding indexes:** 1
 
@@ -163,23 +171,29 @@ DuckDB must be able to cast the lambda function's return type to `BOOL`.
 
 **Examples:**  
 _Filter out negative values:_
+
 ```sql
 SELECT list_filter([5, -6, NULL, 7], x -> x > 0);
 ```
+
 ```text
 [5, 7]
 ```
+
 _Divisible by 2 and 5:_
 ```sql
 SELECT list_filter(list_filter([2, 4, 3, 1, 20, 10, 3, 30], x -> x % 2 == 0), y -> y % 5 == 0);
 ```
+
 ```text
 [20, 10, 30]
 ```
+
 _In combination with `range(...)` to construct lists:_
 ```sql
 SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
 ```
+
 ```text
 [1, 2, 3, 4]
 [2, 3, 4]
@@ -200,8 +214,8 @@ and then repeatedly applying the lambda function to the result of the previous a
 The list must have at least one element.
 
 **Aliases:**  
-- `array_reduce`
-- `reduce`
+* `array_reduce`
+* `reduce`
 
 **Number of parameters excluding indexes:** 2
 
@@ -209,23 +223,31 @@ The list must have at least one element.
 
 **Examples:**  
 _Sum of all list elements:_
+
 ```sql
 SELECT list_reduce([1, 2, 3, 4], (x, y) -> x + y);
 ```
+
 ```text
 10
 ```
+
 _Only add up list elements if they are greater than 2:_
+
 ```sql
 SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (x, y) -> x + y);
 ```
+
 ```text
 7
 ```
+
 _Concat all list elements:_
+
 ```sql
 SELECT list_reduce(['DuckDB', 'is', 'awesome'], (x, y) -> concat(x, ' ', y));
 ```
+
 ```text
 DuckDB is awesome
 ```

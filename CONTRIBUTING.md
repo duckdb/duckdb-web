@@ -67,6 +67,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
 * Narrow tables – that do not span horizontally across the entire page – should be prepended with an empty div that has the `narrow_table` class: `<div class="narrow_table"></div>`.
 * Do not introduce hard line breaks if possible. Therefore, avoid using the `<br/>` HTML tag and avoid [double spaces at the end of a line in Markdown](https://spec.commonmark.org/0.28/#hard-line-breaks).
+* For unordered lists, use `*`. If the list has multiple levels, use **4 spaces** for indentation.
 
 ### Headers
 

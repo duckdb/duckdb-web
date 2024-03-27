@@ -51,34 +51,34 @@ There are dedicated extraction functions to get certain subfields:
 
 | Name | Description |
 |:--|:-------|
-| [`century(`*`date`*`)`](#centurydate) | Century. |
-| [`day(`*`date`*`)`](#daydate) | Day. |
-| [`dayofmonth(`*`date`*`)`](#dayofmonthdate) | Day (synonym). |
-| [`dayofweek(`*`date`*`)`](#dayofweekdate) | Numeric weekday (Sunday = 0, Saturday = 6). |
-| [`dayofyear(`*`date`*`)`](#dayofyeardate) | Day of the year (starts from 1, i.e., January 1 = 1). |
-| [`decade(`*`date`*`)`](#decadedate) | Decade (year / 10). |
-| [`epoch(`*`date`*`)`](#epochdate) | Seconds since 1970-01-01. |
-| [`era(`*`date`*`)`](#eradate) | Calendar era. |
-| [`hour(`*`date`*`)`](#hourdate) | Hours. |
-| [`isodow(`*`date`*`)`](#isodowdate) | Numeric ISO weekday (Monday = 1, Sunday = 7). |
-| [`isoyear(`*`date`*`)`](#isoyeardate) | ISO Year number (Starts on Monday of week containing Jan 4th). |
-| [`microsecond(`*`date`*`)`](#microseconddate) | Sub-minute microseconds. |
-| [`millennium(`*`date`*`)`](#millenniumdate) | Millennium. |
-| [`millisecond(`*`date`*`)`](#milliseconddate) | Sub-minute milliseconds. |
-| [`minute(`*`date`*`)`](#minutedate) | Minutes. |
-| [`month(`*`date`*`)`](#monthdate) | Month. |
-| [`quarter(`*`date`*`)`](#quarterdate) | Quarter. |
-| [`second(`*`date`*`)`](#seconddate) | Seconds. |
-| [`timezone_hour(`*`date`*`)`](#timezone_hourdate) | Time zone offset hour portion. |
-| [`timezone_minute(`*`date`*`)`](#timezone_minutedate) | Time zone offset minutes portion. |
-| [`timezone(`*`date`*`)`](#timezonedate) | Time Zone offset in minutes. |
-| [`week(`*`date`*`)`](#weekdate) | ISO Week. |
-| [`weekday(`*`date`*`)`](#weekdaydate) | Numeric weekday synonym (Sunday = 0, Saturday = 6). |
-| [`weekofyear(`*`date`*`)`](#weekofyeardate) | ISO Week (synonym). |
-| [`year(`*`date`*`)`](#yeardate) | Year. |
-| [`yearweek(`*`date`*`)`](#yearweekdate) | `BIGINT` of combined ISO Year number and 2-digit version of ISO Week number. |
+| [`century(date)`](#centurydate) | Century. |
+| [`day(date)`](#daydate) | Day. |
+| [`dayofmonth(date)`](#dayofmonthdate) | Day (synonym). |
+| [`dayofweek(date)`](#dayofweekdate) | Numeric weekday (Sunday = 0, Saturday = 6). |
+| [`dayofyear(date)`](#dayofyeardate) | Day of the year (starts from 1, i.e., January 1 = 1). |
+| [`decade(date)`](#decadedate) | Decade (year / 10). |
+| [`epoch(date)`](#epochdate) | Seconds since 1970-01-01. |
+| [`era(date)`](#eradate) | Calendar era. |
+| [`hour(date)`](#hourdate) | Hours. |
+| [`isodow(date)`](#isodowdate) | Numeric ISO weekday (Monday = 1, Sunday = 7). |
+| [`isoyear(date)`](#isoyeardate) | ISO Year number (Starts on Monday of week containing Jan 4th). |
+| [`microsecond(date)`](#microseconddate) | Sub-minute microseconds. |
+| [`millennium(date)`](#millenniumdate) | Millennium. |
+| [`millisecond(date)`](#milliseconddate) | Sub-minute milliseconds. |
+| [`minute(date)`](#minutedate) | Minutes. |
+| [`month(date)`](#monthdate) | Month. |
+| [`quarter(date)`](#quarterdate) | Quarter. |
+| [`second(date)`](#seconddate) | Seconds. |
+| [`timezone_hour(date)`](#timezone_hourdate) | Time zone offset hour portion. |
+| [`timezone_minute(date)`](#timezone_minutedate) | Time zone offset minutes portion. |
+| [`timezone(date)`](#timezonedate) | Time Zone offset in minutes. |
+| [`week(date)`](#weekdate) | ISO Week. |
+| [`weekday(date)`](#weekdaydate) | Numeric weekday synonym (Sunday = 0, Saturday = 6). |
+| [`weekofyear(date)`](#weekofyeardate) | ISO Week (synonym). |
+| [`year(date)`](#yeardate) | Year. |
+| [`yearweek(date)`](#yearweekdate) | `BIGINT` of combined ISO Year number and 2-digit version of ISO Week number. |
 
-### `century(`*`date`*`)`
+### `century(date)`
 
 <div class="nostroke_table"></div>
 
@@ -86,7 +86,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `century(date '1992-02-15')` |
 | **Result** | `20` |
 
-### `day(`*`date`*`)`
+### `day(date)`
 
 <div class="nostroke_table"></div>
 
@@ -94,7 +94,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `day(date '1992-02-15')` |
 | **Result** | `15` |
 
-### `dayofmonth(`*`date`*`)`
+### `dayofmonth(date)`
 
 <div class="nostroke_table"></div>
 
@@ -102,7 +102,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `dayofmonth(date '1992-02-15')` |
 | **Result** | `15` |
 
-### `dayofweek(`*`date`*`)`
+### `dayofweek(date)`
 
 <div class="nostroke_table"></div>
 
@@ -110,7 +110,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `dayofweek(date '1992-02-15')` |
 | **Result** | `6` |
 
-### `dayofyear(`*`date`*`)`
+### `dayofyear(date)`
 
 <div class="nostroke_table"></div>
 
@@ -118,7 +118,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `dayofyear(date '1992-02-15')` |
 | **Result** | `46` |
 
-### `decade(`*`date`*`)`
+### `decade(date)`
 
 <div class="nostroke_table"></div>
 
@@ -126,7 +126,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `decade(date '1992-02-15')` |
 | **Result** | `199` |
 
-### `epoch(`*`date`*`)`
+### `epoch(date)`
 
 <div class="nostroke_table"></div>
 
@@ -134,7 +134,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `epoch(date '1992-02-15')` |
 | **Result** | `698112000` |
 
-### `era(`*`date`*`)`
+### `era(date)`
 
 <div class="nostroke_table"></div>
 
@@ -142,7 +142,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `era(date '0044-03-15 (BC)')` |
 | **Result** | `0` |
 
-### `hour(`*`date`*`)`
+### `hour(date)`
 
 <div class="nostroke_table"></div>
 
@@ -150,7 +150,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `hour(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `11` |
 
-### `isodow(`*`date`*`)`
+### `isodow(date)`
 
 <div class="nostroke_table"></div>
 
@@ -158,7 +158,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `isodow(date '1992-02-15')` |
 | **Result** | `6` |
 
-### `isoyear(`*`date`*`)`
+### `isoyear(date)`
 
 <div class="nostroke_table"></div>
 
@@ -166,7 +166,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `isoyear(date '2022-01-01')` |
 | **Result** | `2021` |
 
-### `microsecond(`*`date`*`)`
+### `microsecond(date)`
 
 <div class="nostroke_table"></div>
 
@@ -174,7 +174,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `microsecond(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `44123456` |
 
-### `millennium(`*`date`*`)`
+### `millennium(date)`
 
 <div class="nostroke_table"></div>
 
@@ -182,7 +182,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `millennium(date '1992-02-15')` |
 | **Result** | `2` |
 
-### `millisecond(`*`date`*`)`
+### `millisecond(date)`
 
 <div class="nostroke_table"></div>
 
@@ -190,7 +190,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `millisecond(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `44123` |
 
-### `minute(`*`date`*`)`
+### `minute(date)`
 
 <div class="nostroke_table"></div>
 
@@ -198,7 +198,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `minute(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `59` |
 
-### `month(`*`date`*`)`
+### `month(date)`
 
 <div class="nostroke_table"></div>
 
@@ -206,7 +206,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `month(date '1992-02-15')` |
 | **Result** | `2` |
 
-### `quarter(`*`date`*`)`
+### `quarter(date)`
 
 <div class="nostroke_table"></div>
 
@@ -214,7 +214,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `quarter(date '1992-02-15')` |
 | **Result** | `1` |
 
-### `second(`*`date`*`)`
+### `second(date)`
 
 <div class="nostroke_table"></div>
 
@@ -222,7 +222,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `second(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `44` |
 
-### `timezone_hour(`*`date`*`)`
+### `timezone_hour(date)`
 
 <div class="nostroke_table"></div>
 
@@ -230,7 +230,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `timezone_hour(date '1992-02-15')` |
 | **Result** | `0` |
 
-### `timezone_minute(`*`date`*`)`
+### `timezone_minute(date)`
 
 <div class="nostroke_table"></div>
 
@@ -238,7 +238,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `timezone_minute(date '1992-02-15')` |
 | **Result** | `0` |
 
-### `timezone(`*`date`*`)`
+### `timezone(date)`
 
 <div class="nostroke_table"></div>
 
@@ -246,7 +246,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `timezone(date '1992-02-15')` |
 | **Result** | `0` |
 
-### `week(`*`date`*`)`
+### `week(date)`
 
 <div class="nostroke_table"></div>
 
@@ -254,7 +254,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `week(date '1992-02-15')` |
 | **Result** | `7` |
 
-### `weekday(`*`date`*`)`
+### `weekday(date)`
 
 <div class="nostroke_table"></div>
 
@@ -262,7 +262,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `weekday(date '1992-02-15')` |
 | **Result** | `6` |
 
-### `weekofyear(`*`date`*`)`
+### `weekofyear(date)`
 
 <div class="nostroke_table"></div>
 
@@ -270,7 +270,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `weekofyear(date '1992-02-15')` |
 | **Result** | `7` |
 
-### `year(`*`date`*`)`
+### `year(date)`
 
 <div class="nostroke_table"></div>
 
@@ -278,7 +278,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `year(date '1992-02-15')` |
 | **Result** | `1992` |
 
-### `yearweek(`*`date`*`)`
+### `yearweek(date)`
 
 <div class="nostroke_table"></div>
 

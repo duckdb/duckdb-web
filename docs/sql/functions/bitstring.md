@@ -31,16 +31,16 @@ The table below shows the available scalar functions for `BIT` type.
 
 | Name | Description |
 |:--|:-------|
-| [`bit_count(`*`bitstring`*`)`](#bit_countbitstring) | Returns the number of set bits in the bitstring. |
-| [`bit_length(`*`bitstring`*`)`](#bit_lengthbitstring) | Returns the number of bits in the bitstring. |
-| [`bit_position(`*`substring`*`, `*`bitstring`*`)`](#bit_positionsubstring-bitstring) | Returns first starting index of the specified substring within bits, or zero if it's not present. The first (leftmost) bit is indexed 1. |
-| [`bitstring(`*`bitstring`*`, `*`length`*`)`](#bitstringbitstring-length) | Returns a bitstring of determined length. |
-| [`get_bit(`*`bitstring`*`, `*`index`*`)`](#get_bitbitstring-index) | Extracts the nth bit from bitstring; the first (leftmost) bit is indexed 0. |
-| [`length(`*`bitstring`*`)`](#lengthbitstring) | Alias for `bit_length`. |
-| [`octet_length(`*`bitstring`*`)`](#octet_lengthbitstring) | Returns the number of bytes in the bitstring. |
-| [`set_bit(`*`bitstring`*`, `*`index`*`, `*`new_value`*`)`](#set_bitbitstring-index-new_value) | Sets the nth bit in bitstring to newvalue; the first (leftmost) bit is indexed 0. Returns a new bitstring. |
+| [`bit_count(bitstring)`](#bit_countbitstring) | Returns the number of set bits in the bitstring. |
+| [`bit_length(bitstring)`](#bit_lengthbitstring) | Returns the number of bits in the bitstring. |
+| [`bit_position(substring, bitstring)`](#bit_positionsubstring-bitstring) | Returns first starting index of the specified substring within bits, or zero if it's not present. The first (leftmost) bit is indexed 1. |
+| [`bitstring(bitstring, length)`](#bitstringbitstring-length) | Returns a bitstring of determined length. |
+| [`get_bit(bitstring, index)`](#get_bitbitstring-index) | Extracts the nth bit from bitstring; the first (leftmost) bit is indexed 0. |
+| [`length(bitstring)`](#lengthbitstring) | Alias for `bit_length`. |
+| [`octet_length(bitstring)`](#octet_lengthbitstring) | Returns the number of bytes in the bitstring. |
+| [`set_bit(bitstring, index, new_value)`](#set_bitbitstring-index-new_value) | Sets the nth bit in bitstring to newvalue; the first (leftmost) bit is indexed 0. Returns a new bitstring. |
 
-### `bit_count(`*`bitstring`*`)`
+### `bit_count(bitstring)`
 
 <div class="nostroke_table"></div>
 
@@ -48,7 +48,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `bit_count('1101011'::BIT)` |
 | **Result** | `5` |
 
-### `bit_length(`*`bitstring`*`)`
+### `bit_length(bitstring)`
 
 <div class="nostroke_table"></div>
 
@@ -56,7 +56,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `bit_length('1101011'::BIT)` |
 | **Result** | `7` |
 
-### `bit_position(`*`substring`*`, `*`bitstring`*`)`
+### `bit_position(substring, bitstring)`
 
 <div class="nostroke_table"></div>
 
@@ -64,7 +64,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `bit_position('010'::BIT, '1110101'::BIT)` |
 | **Result** | `4` |
 
-### `bitstring(`*`bitstring`*`, `*`length`*`)`
+### `bitstring(bitstring, length)`
 
 <div class="nostroke_table"></div>
 
@@ -72,7 +72,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `bitstring('1010'::BIT, 7)` |
 | **Result** | `0001010` |
 
-### `get_bit(`*`bitstring`*`, `*`index`*`)`
+### `get_bit(bitstring, index)`
 
 <div class="nostroke_table"></div>
 
@@ -80,7 +80,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `get_bit('0110010'::BIT, 2)` |
 | **Result** | `1` |
 
-### `length(`*`bitstring`*`)`
+### `length(bitstring)`
 
 <div class="nostroke_table"></div>
 
@@ -88,7 +88,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `length('1101011'::BIT)` |
 | **Result** | `7` |
 
-### `octet_length(`*`bitstring`*`)`
+### `octet_length(bitstring)`
 
 <div class="nostroke_table"></div>
 
@@ -96,7 +96,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `octet_length('1101011'::BIT)` |
 | **Result** | `1` |
 
-### `set_bit(`*`bitstring`*`, `*`index`*`, `*`new_value`*`)`
+### `set_bit(bitstring, index, new_value)`
 
 <div class="nostroke_table"></div>
 
@@ -144,7 +144,7 @@ These aggregate functions are available for `BIT` type.
 | **Description** | The `bitstring_agg` function takes any integer type as input and returns a bitstring with bits set for each distinct value. The left-most bit represents the smallest value in the column and the right-most bit the maximum value. If possible, the min and max are retrieved from the column statistics. Otherwise, it is also possible to provide the min and max values. |
 | **Example** | `bitstring_agg(A)` |
 
-> Tip The combination of `bit_count` and `bitstring_agg` could be used as an alternative to `count(DISTINCT ...)`, with possible performance improvements in cases of low cardinality and dense values.
+> Tip The combination of `bit_count` and `bitstring_agg` can be used as an alternative to `count(DISTINCT ...)`, with possible performance improvements in cases of low cardinality and dense values.
 
 ### `bitstring_agg(arg, min, max)`
 
