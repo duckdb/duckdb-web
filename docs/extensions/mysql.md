@@ -45,11 +45,6 @@ The connection string determines the parameters for how to connect to MySQL as a
 | `socket`   | `NULL`       | `MYSQL_UNIX_PORT`    |
 | `user`     | current user | `MYSQL_USER`         |
 
-Then, to connect, start the `duckdb` process and run:
-
-```sql
-ATTACH '' AS p (TYPE postgres);
-```
 
 ### Reading MySQL Tables
 
@@ -219,7 +214,7 @@ SELECT * FROM mysql_db.tmp;
 
 ### The `mysql_query` Table Function
 
-The `mysql_query` table function allows you to run arbitrary read queries within an attached database. `mysql_query` takes the name of the attached Postgres database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
+The `mysql_query` table function allows you to run arbitrary read queries within an attached database. `mysql_query` takes the name of the attached MySQL database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
 
 ```sql
 mysql_query(attached_database::VARCHAR, query::VARCHAR)
