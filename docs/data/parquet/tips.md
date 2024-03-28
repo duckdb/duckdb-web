@@ -50,3 +50,19 @@ COPY
 ```
 
 See the [Performance Guide on file formats](../../guides/performance/file_formats#parquet-file-sizes) for more tips.
+
+### The `ROW_GROUPS_PER_FILE` Option
+
+The `ROW_GROUPS_PER_FILE` parameter creates a new Parquet file if the current one has a specified number of row groups.
+
+```sql
+COPY
+    (FROM generate_series(100_000))
+    TO 'output-directory'
+    (FORMAT PARQUET, ROW_GROUP_SIZE 20_000, ROW_GROUPS_PER_FILE 2);
+```
+
+> If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behaviour of [`FILE_SIZE_BYTES`](../../sql/statements/copy#copy--to-options).
+> However, if `PER_THREAD_OUTPUT` is set, only one thread writes to each file, and it becomes accurate again.
+
+See the [Performance Guide on file formats](../../guides/performance/file_formats#parquet-file-sizes) for more tips.

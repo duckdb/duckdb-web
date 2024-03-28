@@ -175,6 +175,7 @@ The below options are applicable when writing `Parquet` files.
 | `field_ids` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | `STRUCT` | (empty) |
 | `row_group_size_bytes` | The target size of each row group. You can pass either a human-readable string, e.g., '2MB', or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise it is ignored. | `BIGINT` | `row_group_size * 1024` |
 | `row_group_size` | The target size, i.e., number of rows, of each row group. | `BIGINT` | 122880 |
+| `row_groups_per_file` | Create a new Parquet file if the current one has a specified number of row groups. If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behaviour of `file_size_bytes`. However, if `per_thread_output` is set, only one thread writes to each file, and it becomes accurate again. | `BIGINT` |  (empty) |
 
 Some examples of `FIELD_IDS` are:
 
