@@ -529,7 +529,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex` and returns a row for each part. |
-| **Example** | `regexp_split_to_array( 'hello␣world; 42', ';?␣')` |
+| **Example** | `regexp_split_to_table( 'hello␣world; 42', ';?␣')` |
 | **Result** | Two rows: `'hello'`, `'world'` |
 
 ### `repeat(string, count)`
