@@ -134,18 +134,34 @@ Because we need a way to refer to both the **to-be-inserted** tuple and the **ex
 When the `EXCLUDED` qualifier is provided, the reference refers to the **to-be-inserted** tuple, otherwise it refers to the **existing** tuple.
 This special qualifier can be used within the `WHERE` clauses and `SET` expressions of the `ON CONFLICT` clause.
 
+#### Examples
+
 An example using `DO UPDATE` is the following:
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
 INSERT INTO tbl VALUES (1, 42);
 INSERT INTO tbl VALUES (1, 84) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
--- rearranging columns and BY NAME also work:
-INSERT INTO tbl (j, i) VALUES (168, 1) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
-INSERT INTO tbl BY NAME (SELECT 1 AS i, 336 AS j) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+SELECT * FROM tbl;
 ```
 
-These statements finish successfully and leaves the table with a single row `<i: 1, j: 84>`.
+| i | j  |
+|--:|---:|
+| 1 | 84 |
+
+Rearranging columns and using `BY NAME` is also possible:
+
+```sql
+CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
+INSERT INTO tbl VALUES (1, 42);
+INSERT INTO tbl (j, i) VALUES (168, 1) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+INSERT INTO tbl BY NAME (SELECT 1 AS i, 336 AS j) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+SELECT * FROM tbl;
+```
+
+| i |  j  |
+|--:|----:|
+| 1 | 336 |
 
 #### Shorthand
 
@@ -165,6 +181,27 @@ INSERT OR REPLACE INTO tbl VALUES (1, 84);
 INSERT INTO tbl VALUES (1, 84) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
 INSERT INTO tbl (j, i) VALUES (84, 1) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
 INSERT INTO tbl BY NAME (SELECT 84 AS j, 1 AS i) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+```
+
+#### Limitations
+
+When the `ON CONFLICT ... DO UPDATE` clause is used and a conflict occurs, DuckDB internally assigns `NULL` values to the row's columns that are unaffected by the conflict, then re-assigns their values. If the affected columns use a `NOT NULL` constraint, this will trigger a `NOT NULL constraint failed` error. For example:
+
+```sql
+CREATE TABLE t1 (id INT PRIMARY KEY, val1 DOUBLE, val2 DOUBLE NOT NULL);
+CREATE TABLE t2 (id INT PRIMARY KEY, val1 DOUBLE);
+INSERT INTO t1 VALUES (1, 2, 3);
+INSERT INTO t2 VALUES (1, 5);
+
+INSERT INTO t1 BY NAME (SELECT id, val1 FROM t2)
+    ON CONFLICT DO UPDATE
+    SET val1 = EXCLUDED.val1;
+```
+
+This fails with the following error:
+
+```text
+Constraint Error: NOT NULL constraint failed: t1.val2
 ```
 
 ### Defining a Conflict Target
