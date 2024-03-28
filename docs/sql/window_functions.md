@@ -50,7 +50,7 @@ The table below shows the available general window functions.
 
 ## Aggregate Window Functions
 
-All [aggregate functions](aggregates) can be used in a windowing context. Unlike the general-purpose window functions aboce, they always ignore nulls. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a NULL value of `column` will have the same value of `cumulativeColumn` as the row that preceeds them (or the last row where that value was not `NULL`). 
+All [aggregate functions](aggregates) can be used in a windowing context. Unlike the general-purpose window functions aboce, they always ignore nulls. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a NULL value of `column` will have the same value of `cumulativeColumn` as the row that preceeds them. 
 
 ## Evaluation
 
