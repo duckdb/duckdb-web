@@ -36,10 +36,16 @@
 		<div class="banner outdated">
 			<div class="content">
 				<span class="icon_outdated"></span>
-				<span>This version of the documentation is outdated.</span>
-				<a href="{{ site.url }}{{new_url}}">view latest</a>
+				<span>This version of the documentation is outdated.
+				{% assign new_filename = new_url | replace: ".html", ".md" %}
+				{% capture url_exists %}{% file_exists {{ new_filename }} %}{% endcapture %}
+				{% if url_exists == "true" %}
+					<a href="{{ site.url }}{{ new_url }}">view latest</a>
+				{% else %}
+					This page is not available in the latest version of the documentation.
+				{% endif %}
+				</span>
 			</div>
 			<div class="close"></div>
 		</div>
 {% endif %}
-
