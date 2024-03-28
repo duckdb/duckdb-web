@@ -47,6 +47,10 @@ The table below shows the available general window functions.
 | `rank()` | `BIGINT` | The rank of the current row *with gaps*; same as `row_number` of its first peer. | `rank()` |
 | `row_number()` | `BIGINT` | The number of the current row within the partition, counting from 1. | `row_number()` |
 
+### Respecting NULLs
+
+The null-respecting default behavior of all general-purpose window functions that accept `IGNORE NULLS` can optionally be made explicit via `RESPECT NULLS`. 
+
 
 ## Aggregate Window Functions
 
