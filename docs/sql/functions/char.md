@@ -286,7 +286,7 @@ This section describes functions and operators for examining and manipulating st
 
 <div class="nostroke_table"></div>
 
-| **Description** | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered "smaller" than uppercase characters, and [collations](../expressions/collations) are not supported. |
+| **Description** | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered "smaller" than lowercase characters, and [collations](../expressions/collations) are not supported. |
 | **Example** | `least('abc', 'BCD', 'cde', 'EFG')` |
 | **Result** | `'BCD'` |
 
