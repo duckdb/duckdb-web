@@ -146,7 +146,7 @@ You’ll see this in the image below, which illustrates our new implementation.
 
 <p align="center">
     <img src="/images/external_aggregation/OOCHA.svg"
-        alt="TODO"
+        alt="DuckDB's external hash aggregation"
         width=600
         />
 </p>
@@ -188,8 +188,9 @@ If we make more partitions than threads, for example, 32 partitions, the size of
 Aggregations that result in only a few unique groups can easily fit in memory.
 To evaluate our external hash aggregation implementation, we need aggregations that have many unique groups.
 For this purpose, we will use the [H2O.ai database-like ops benchmark](https://duckdblabs.github.io/db-benchmark/), which [we've resurrected](/2023/04/14/h2oai), and [now maintain](/2023/11/03/db-benchmark-update).
-Specifically, we will use the `G1_1e9_2e0_0_0.csv` file, which is 50 GB.
-The source code for this benchmark can be found [here](https://github.com/duckdblabs/db-benchmark).
+Specifically, we will use the `G1_1e9_2e0_0_0.csv.zst` file, which is 50 GB uncompressed.
+The source code for the H2O.ai benchmark can be found [here](https://github.com/duckdblabs/db-benchmark).
+You can download the file yourself from S3 at [s3://duckdb-blobs/data/G1_1e9_2e0_0_0.csv.zst](s3://duckdb-blobs/data/G1_1e9_2e0_0_0.csv.zst).
 
 We use the following queries from the benchmark to load the data:
 ```sql
@@ -198,7 +199,7 @@ CREATE TABLE y (
     id1 VARCHAR, id2 VARCHAR, id3 VARCHAR,
     id4 INT, id5 INT, id6 INT, v1 INT, v2 INT,
     v3 FLOAT);
-COPY y FROM 'G1_1e9_2e0_0_0.csv' (FORMAT CSV, AUTO_DETECT true);
+COPY y FROM 'G1_1e9_2e0_0_0.csv.zst' (FORMAT CSV, AUTO_DETECT true);
 CREATE TYPE id1ENUM AS ENUM (SELECT id1 FROM y);
 CREATE TYPE id2ENUM AS ENUM (SELECT id2 FROM y);
 CREATE TABLE x (
