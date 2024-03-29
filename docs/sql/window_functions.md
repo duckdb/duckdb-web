@@ -47,14 +47,16 @@ The table below shows the available general window functions.
 | `rank()` | `BIGINT` | The rank of the current row *with gaps*; same as `row_number` of its first peer. | `rank()` |
 | `row_number()` | `BIGINT` | The number of the current row within the partition, counting from 1. | `row_number()` |
 
-### Respecting NULLs
-
-The null-respecting default behavior of all general-purpose window functions that accept `IGNORE NULLS` can optionally be made explicit via `RESPECT NULLS`. 
-
-
 ## Aggregate Window Functions
 
-All [aggregate functions](aggregates) can be used in a windowing context. Unlike the general-purpose window functions above, they always ignore nulls. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a NULL value of `column` will have the same value of `cumulativeColumn` as the row that preceeds them. 
+All [aggregate functions](aggregates) can be used in a windowing context, including the optional [`FILTER` clause](query_syntax/filter).
+The `first` and `last` aggregate functions are shadowed by the respective general-purpose window functions, with the minor consequence that the `FILTER` clause is not available for these but `IGNORE NULLS` is. 
+
+## Nulls
+
+All [general-purpose window functions](#general-purpose-window-functions) that accept `IGNORE NULLS` respect nulls by default. This default behavior can optionally be made explicit via `RESPECT NULLS`. 
+
+In contrast, all [aggregate window functions](#aggregate-window-functions) (except for `list` and its aliases, which can be made to ignore nulls via a `FILTER`) ignore nulls and do not accept `RESPECT NULLS`. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a null value of `column` have the same value of `cumulativeColumn` as the row that preceeds them. 
 
 ## Evaluation
 
