@@ -34,7 +34,7 @@ This section describes functions and operators for examining and manipulating st
 | [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with the hash of the `value`. |
 | [`ilike_escape(string, like_specifier, escape_character)`](#ilike_escapestring-like_specifier-escape_character) | Returns true if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`instr(string, search_string)`](#instrstring-search_string) | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| [`least(x1, x2, ...)`](#leastx1-x2-) | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered "smaller" than uppercase characters, and [collations](../expressions/collations) are not supported. |
+| [`least(x1, x2, ...)`](#leastx1-x2-) | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered "smaller" than lowercase characters, and [collations](../expressions/collations) are not supported. |
 | [`left_grapheme(string, count)`](#left_graphemestring-count) | Extract the left-most grapheme clusters. |
 | [`left(string, count)`](#leftstring-count) | Extract the left-most count characters. |
 | [`length_grapheme(string)`](#length_graphemestring) | Number of grapheme clusters in `string`. |
