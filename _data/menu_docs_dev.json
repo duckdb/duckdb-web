@@ -1289,7 +1289,29 @@
             },
             {
               "page": "Building",
-              "url": "building"
+              "slug": "building",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Build Instructions",
+                  "url": "build_instructions"
+                },
+                {
+                  "page": "Build Configuration",
+                  "url": "build_configuration"
+                },
+                {
+                  "page": "Building Extensions",
+                  "url": "building_extensions"
+                },
+                {
+                  "page": "Troubleshooting",
+                  "url": "troubleshooting"
+                }
+              ]
             },
             {
               "page": "Benchmark Suite",
