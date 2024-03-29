@@ -64,7 +64,7 @@ In general, we advise that:
 * If you want to do fast or complicated calculations, the floating point data types may be more appropriate but if you rely on certain behavior in boundary cases (infinity, underflow), you should evaluate the implementation carefully and you should familiarize yourself with common floating point pitfalls. The article ["What Every Computer Scientist Should Know About
 Floating-Point Arithmetic" by David Goldberg](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) and [the floating point series on Bruce Dawson's blog](https://randomascii.wordpress.com/2017/06/19/sometimes-floating-point-math-is-perfect/) provide excellent starting points. 
 
-On most platforms, the `REAL` type has a range of at least 1E-37 to 1E+37 with a precision of at least 6 decimal digits. The `DOUBLE` type typically has a range of around 1E-307 to 1E+308 with a precision of at least 15 digits. Positive numbers outside of these ranges (and negative numbers ourside the mirrored ranges) may cause errors on some systems but will usually be converted to zero or infinity, respectively. 
+On most platforms, the `REAL` type has a range of at least 1E-37 to 1E+37 with a precision of at least 6 decimal digits. The `DOUBLE` type typically has a range of around 1E-307 to 1E+308 with a precision of at least 15 digits. Positive numbers outside of these ranges (and negative numbers ourside the mirrored ranges) may cause errors on some platforms but will usually be converted to zero or infinity, respectively. 
 
 In addition to ordinary numeric values, the floating-point types have several special values:
 
