@@ -60,7 +60,7 @@ For more complex mathematical operations, however, floating-point arithmetic is 
 
 In general, we advise that:
 
-* If you require exact storage of numbers with a known number of decimak digits and exact additions, subtractions, and multiplications (such as for monetary amounts), use the [`DECIMAL` data type](#fixed-point-decimals) or its `NUMERIC` alias instead.
+* If you require exact storage of numbers with a known number of decimal digits and exact additions, subtractions, and multiplications (such as for monetary amounts), use the [`DECIMAL` data type](#fixed-point-decimals) or its `NUMERIC` alias instead.
 * If you want to do fast or complicated calculations, the floating point data types may be more appropriate but if you rely on certain behavior in boundary cases (infinity, underflow), you should evaluate the implementation carefully and you should familiarize yourself with common floating point pitfalls. The article ["What Every Computer Scientist Should Know About
 Floating-Point Arithmetic" by David Goldberg](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) and [the floating point series on Bruce Dawson's blog](https://randomascii.wordpress.com/2017/06/19/sometimes-floating-point-math-is-perfect/) provide excellent starting points. 
 
