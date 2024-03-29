@@ -893,7 +893,7 @@
                 },
                 {
                   "page": "Legacy Authentication Scheme for S3 API",
-                  "url": "s3api-legacy-authentication"
+                  "url": "s3api_legacy_authentication"
                 }
               ]
             },
@@ -1285,7 +1285,7 @@
             },
             {
               "page": "Release Calendar",
-              "url": "release-calendar"
+              "url": "release_calendar"
             },
             {
               "page": "Building",
