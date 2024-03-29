@@ -190,7 +190,7 @@ To evaluate our external hash aggregation implementation, we need aggregations t
 For this purpose, we will use the [H2O.ai database-like ops benchmark](https://duckdblabs.github.io/db-benchmark/), which [we've resurrected](/2023/04/14/h2oai), and [now maintain](/2023/11/03/db-benchmark-update).
 Specifically, we will use the `G1_1e9_2e0_0_0.csv.zst` file, which is 50 GB uncompressed.
 The source code for the H2O.ai benchmark can be found [here](https://github.com/duckdblabs/db-benchmark).
-You can download the file yourself from S3 at [s3://duckdb-blobs/data/G1_1e9_2e0_0_0.csv.zst](s3://duckdb-blobs/data/G1_1e9_2e0_0_0.csv.zst).
+You can download the file yourself from <https://blobs.duckdb.org/data/G1_1e9_2e0_0_0.csv.zst> (18.8 GB compressed).
 
 We use the following queries from the benchmark to load the data:
 ```sql
