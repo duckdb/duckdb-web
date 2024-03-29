@@ -7,7 +7,7 @@ excerpt: "Since the 0.9.0 release, DuckDB’s fully parallel aggregate hash tabl
 
 Most grouped aggregation queries yield just a few output rows.
 For example, “How many flights departed from each European capital in the past ten years?” yields one row per European capital, even if the table containing all the flight information has millions of rows.
-This is not always the case, as “How many orders did each customer place in the past ten years?” yields one row per customer, which could be millions, which significantly increaseses the memory consumption of the query.
+This is not always the case, as “How many orders did each customer place in the past ten years?” yields one row per customer, which could be millions, which significantly increases the memory consumption of the query.
 However, even if the aggregation does not fit in memory, DuckDB can still complete the query.
 
 Not interested in the implementation? [Jump straight to the experiments!](#experiments)
