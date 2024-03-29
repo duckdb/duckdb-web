@@ -6,6 +6,8 @@ redirect_from:
   - /dev/release-dates/
   - /dev/release-calendar
   - /dev/release-calendar/
+  - /dev/docs/dev/release_calendar
+  - /dev/docs/dev/release_calendar/
 ---
 
 ## Planned Releases

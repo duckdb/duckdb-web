@@ -24,8 +24,7 @@ The following table shows which parts of the S3 API are required for each `httpf
 
 The preferred way to configure and authenticate to S3 endpoints is to use [secrets](../../sql/statements/create_secret). Multiple secret providers are available.
 
-> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager](../../sql/statements/create_secret). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API](s3api-legacy-authentication).
-
+> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager](../../sql/statements/create_secret). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API](s3api_legacy_authentication).
 
 ### `CONFIG` Provider
 

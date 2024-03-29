@@ -29,15 +29,15 @@ When this flag is set, the [`autocomplete` extension](../../extensions/autocompl
 
 #### `BUILD_ICU`
 
-When this flag is set, the [`icu` extension](../../docs/extensions/icu) is built.
+When this flag is set, the [`icu` extension](../../extensions/icu) is built.
 
 #### `BUILD_TPCH`
 
-When this flag is set, the [`tpch` extension](../../docs/extensions/tpch) is built, this enables TPCH-H data generation and query support using `dbgen`.
+When this flag is set, the [`tpch` extension](../../extensions/tpch) is built, this enables TPCH-H data generation and query support using `dbgen`.
 
 #### `BUILD_TPCDS`
 
-When this flag is set, the [`tpcds` extension](../../docs/extensions/tpcds) is built, this enables TPC-DS data generation and query support using `dsdgen`.
+When this flag is set, the [`tpcds` extension](../../extensions/tpcds) is built, this enables TPC-DS data generation and query support using `dsdgen`.
 
 #### `BUILD_TPCE`
 
@@ -45,19 +45,19 @@ When this flag is set, the [TPCE](https://www.tpc.org/tpce/) extension is built,
 
 #### `BUILD_FTS`
 
-When this flag is set, the [`fts` (full text search) extension](../../docs/extensions/full_text_search) is built.
+When this flag is set, the [`fts` (full text search) extension](../../extensions/full_text_search) is built.
 
 #### `BUILD_HTTPFS`
 
-When this flag is set, the [`httpfs` extension](../../docs/extensions/httpfs) is built.
+When this flag is set, the [`httpfs` extension](../../extensions/httpfs) is built.
 
 #### `BUILD_JSON`
 
-When this flag is set, the [`json` extension](../../docs/extensions/json) is built.
+When this flag is set, the [`json` extension](../../extensions/json) is built.
 
 #### `BUILD_INET`
 
-When this flag is set, the [`inet` extension](../../docs/extensions/inet) is built.
+When this flag is set, the [`inet` extension](../../extensions/inet) is built.
 
 #### `BUILD_SQLSMITH`
 
