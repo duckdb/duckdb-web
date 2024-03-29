@@ -142,11 +142,11 @@ as the first argument.
 
 | Function | Equivalent |
 |:---|:---|
-| `mode() WITHIN GROUP (ORDER BY sort_expression)` | `mode(sort_expression)` |
-| `percentile_cont(fraction) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_cont(sort_expression, fraction)` |
-| `percentile_cont(fractions) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_cont(sort_expression, fractions)` |
-| `percentile_disc(fraction) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_disc(sort_expression, fraction)` |
-| `percentile_disc(fractions) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_disc(sort_expression, fractions)` |
+| `mode() WITHIN GROUP (ORDER BY column [(ASC|DESC)])` | `mode(column ORDER BY column [(ASC|DESC)])` |
+| `percentile_cont(fraction) WITHIN GROUP (ORDER BY column [(ASC|DESC)])` | `quantile_cont(column, fraction ORDER BY column [(ASC|DESC)])` |
+| `percentile_cont(fractions) WITHIN GROUP (ORDER BY column [(ASC|DESC)])` | `quantile_cont(column, fractions ORDER BY column [(ASC|DESC)])` |
+| `percentile_disc(fraction) WITHIN GROUP (ORDER BY column [(ASC|DESC)])` | `quantile_disc(column, fraction ORDER BY column [(ASC|DESC)])` |
+| `percentile_disc(fractions) WITHIN GROUP (ORDER BY column [(ASC|DESC)])` | `quantile_disc(column, fractions ORDER BY column [(ASC|DESC)])` |
 
 ## Miscellaneous Aggregate Functions
 
