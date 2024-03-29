@@ -41,7 +41,7 @@ The table below shows the available general window functions.
 | `last(expr[, IGNORE NULLS])` | same type as `expr` | Alias for `last_value`. | `last(column)` |
 | `lead(expr[, offset[, default]][, IGNORE NULLS])` | same type as `expr` | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `null`. | `lead(column, 3, 0)` |
 | `nth_value(expr, nth[, IGNORE NULLS])` | same type as `expr` | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); null if no such row. | `nth_value(column, 2)` |
-| `ntile(num_buckets)` | `BIGINT` | An integer ranging from 1 to the argument value, dividing the partition as equally as possible. | `ntile(4)` |
+| `ntile(num_buckets)` | `BIGINT` | An integer ranging from 1 to `num_buckets`, dividing the partition as equally as possible. | `ntile(4)` |
 | `percent_rank()` | `DOUBLE` | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. | `percent_rank()` |
 | `rank_dense()` | `BIGINT` | Alias for `dense_rank`. | `rank_dense()` |
 | `rank()` | `BIGINT` | The rank of the current row *with gaps*; same as `row_number` of its first peer. | `rank()` |
