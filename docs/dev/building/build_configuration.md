@@ -13,12 +13,14 @@ This build has been stripped of all the assertions and debug symbols and code, o
 
 ### `debug`
 
-This build runs with all the debug information, including symbols, assertions and DEBUG blocks.  
-The special debug defines are not automatically set for this build however.
+This build runs with all the debug information, including symbols, assertions and `#ifdef DEBUG` blocks.
+Due to these, binaries of this build are expected to be slow.
+Note: the special debug defines are not automatically set for this build.
 
 ### `relassert`
 
-This build does not trigger the `#ifdef DEBUG` code blocks, but still has debug symbols that make it possible to step through the execution with line number information and `D_ASSERT` lines are still checked in this build.
+This build does not trigger the `#ifdef DEBUG` code blocks but it still has debug symbols that make it possible to step through the execution with line number information and `D_ASSERT` lines are still checked in this build.
+Binaries of this build mode are significantly faster than those of the `debug` mode.
 
 ### `reldebug`
 
