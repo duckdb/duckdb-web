@@ -718,9 +718,9 @@ This section describes functions and operators for examining and manipulating st
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the unicode code of the first character of the `string`. |
-| **Example** | `unicode('ü')` |
-| **Result** | `252` |
+| **Description** | Returns the unicode code of the first character of the `string`. Returns `-1` when `string` was empty, but `NULL` when `string` was `NULL`. |
+| **Example** | `SELECT UNICODE('âbcd') as A, UNICODE('â') as B, UNICODE('') as C, UNICODE(NULL) as D;` |
+| **Result** | `[226, 226, -1, NULL]` |
 
 ### `upper(string)`
 
