@@ -428,8 +428,8 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 | [`row(any, ...)`](#rowany-) | Create an unnamed `STRUCT` (tuple) containing the argument values. |
 | [`struct_extract(struct, 'entry')`](#struct_extractstruct-entry) | Extract the named entry from the `STRUCT`. |
 | [`struct_extract(struct, idx)`](#struct_extractstruct-idx) | Extract the entry from an unnamed `STRUCT` (tuple) using an index (1-based). |
-| [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-nameany-) | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). |
-| [`struct_pack(name := any, ...)`](#struct_packnameany-) | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
+| [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-name--any) | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). |
+| [`struct_pack(name := any, ...)`](#struct_packname--any) | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
 
 ### `struct.entry`*
 
@@ -587,7 +587,7 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 |:--|:-------|
 | [*`union.tag`*](#uniontag) | Dot notation serves as an alias for `union_extract`. |
 | [`union_extract(union, 'tag')`](#union_extractunion-tag) | Extract the value with the named tags from the union. `NULL` if the tag is not currently selected. |
-| [`union_value(tag := any)`](#union_valuetagany) | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. |
+| [`union_value(tag := any)`](#union_valuetag--any) | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. |
 | [`union_tag(union)`](#union_tagunion) | Retrieve the currently selected tag of the union as an [Enum](../../sql/data_types/enum). |
 
 ### `union.tag`*

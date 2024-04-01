@@ -58,8 +58,8 @@ This section describes functions and operators for examining and manipulating st
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide](../../guides/import/read_file#read_text) for more details. |
 | [`regexp_escape(string)`](#regexp_escapestring) | Escapes special patterns to turn `string` into a regular expression similarly to Python's [`re.escape` function](https://docs.python.org/3/library/re.html#re.escape). |
 | [`regexp_extract_all(string, regex[, group = 0])`](#regexp_extract_allstring-regex-group0) | Split the `string` along the `regex` and extract all occurrences of `group`. |
-| [`regexp_extract(string, pattern , name_list)`;](#regexp_extractstring-pattern-name_list) | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list` (see [Pattern Matching](patternmatching#using-regexp_extract)). |
-| [`regexp_extract(string, pattern [, idx])`;](#regexp_extractstring-pattern-idx) | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `idx` (see [Pattern Matching](patternmatching#using-regexp_extract)). |
+| [`regexp_extract(string, pattern , name_list)`](#regexp_extractstring-pattern-name_list) | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list` (see [Pattern Matching](patternmatching#using-regexp_extract)). |
+| [`regexp_extract(string, pattern [, idx])`](#regexp_extractstring-pattern-idx) | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `idx` (see [Pattern Matching](patternmatching#using-regexp_extract)). |
 | [`regexp_full_match(string, regex)`](#regexp_full_matchstring-regex) | Returns `true` if the entire `string` matches the `regex` (see [Pattern Matching](patternmatching)). |
 | [`regexp_matches(string, pattern)`](#regexp_matchesstring-pattern) | Returns `true` if  `string` contains the regexp `pattern`, `false` otherwise (see [Pattern Matching](patternmatching#using-regexp_matches)). |
 | [`regexp_replace(string, pattern, replacement)`](#regexp_replacestring-pattern-replacement) | If `string` contains the regexp `pattern`, replaces the matching part with `replacement` (see [Pattern Matching](patternmatching#using-regexp_replace)). |
@@ -475,7 +475,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `regexp_extract_all( 'hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `[hello, world]` |
 
-### `regexp_extract(string, pattern , name_list)`;
+### `regexp_extract(string, pattern , name_list)`
 
 <div class="nostroke_table"></div>
 
@@ -483,7 +483,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `regexp_extract( '2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
 
-### `regexp_extract(string, pattern [, idx])`;
+### `regexp_extract(string, pattern [, idx])`
 
 <div class="nostroke_table"></div>
 
