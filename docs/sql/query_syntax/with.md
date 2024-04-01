@@ -77,7 +77,7 @@ FibonacciNumbers (RecursionDepth, FibonacciNumber, NextNumber) AS (
     -- Recursive step
     SELECT
         fib.RecursionDepth + 1 AS RecursionDepth,
-        fib.NextNumbe AS FibonacciNumber,
+        fib.NextNumber AS FibonacciNumber,
         fib.FibonacciNumber + fib.NextNumber AS NextNumber
     FROM
         FibonacciNumbers fib
