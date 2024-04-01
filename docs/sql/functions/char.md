@@ -87,7 +87,7 @@ This section describes functions and operators for examining and manipulating st
 | [`to_base64(blob)`](#to_base64blob) | Convert a blob to a base64 encoded string. |
 | [`trim(string, characters)`](#trimstring-characters) | Removes any occurrences of any of the `characters` from either side of the `string`. |
 | [`trim(string)`](#trimstring) | Removes any spaces from either side of the `string`. |
-| [`unicode(string)`](#unicodestring) | Returns the unicode code of the first character of the `string`. |
+| [`unicode(string)`](#unicodestring) | Returns the Unicode code of the first character of the `string`. |
 | [`upper(string)`](#upperstring) | Convert `string` to upper case. |
 
 <!-- markdownlint-enable MD056 -->
@@ -718,8 +718,8 @@ This section describes functions and operators for examining and manipulating st
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the unicode code of the first character of the `string`. Returns `-1` when `string` was empty, but `NULL` when `string` was `NULL`. |
-| **Example** | `SELECT UNICODE('âbcd') as A, UNICODE('â') as B, UNICODE('') as C, UNICODE(NULL) as D;` |
+| **Description** | Returns the Unicode code of the first character of the `string`. Returns `-1` when `string` is empty, and `NULL` when `string` is `NULL`. |
+| **Example** | `[unicode('âbcd'), unicode('â'), unicode(''), unicode(NULL)]` |
 | **Result** | `[226, 226, -1, NULL]` |
 
 ### `upper(string)`
