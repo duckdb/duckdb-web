@@ -108,10 +108,26 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 <div class="narrow_table"></div>
 
 | id | number |
-|----|--------|
+|---:|-------:|
 | 1  | 10     |
 | 2  | 20     |
 | 3  | NULL   |
+
+The matches of capture groups can be used to rename columns selected by a regular expression:
+
+```sql
+SELECT COLUMNS('(\w{2}).*') AS '\1' FROM numbers;
+```
+
+<div class="narrow_table"></div>
+
+| id |  nu  |
+|---:|-----:|
+| 1  | 10   |
+| 2  | 20   |
+| 3  | NULL |
+
+The capture groups are one-indexed; `\0` is the original column name.
 
 ## `COLUMNS` Lambda Function
 
