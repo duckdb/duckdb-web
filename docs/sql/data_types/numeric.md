@@ -56,7 +56,7 @@ Like for fixed-point data types, conversion from literals or casts from other da
 
 Additionally, whereas multiplication, addition, and subtraction of fixed-point decimal data types is exact, these operations are only approximate on floating-point binary data types.
 
-For more complex mathematical operations, however, floating-point arithmetic is used internally and more precise results can be obtained if intermediate steps are _not_ cast to fixed point formats of the same width as in- and outputs. For example, `(10::REAL / 3::REAL)::REAL * 3 = 10` whereas (10::DECIMAL(18, 3) / 3::DECIMAL(18, 3))::DECIMAL(18, 3) * 3 = 9.999`. 
+For more complex mathematical operations, however, floating-point arithmetic is used internally and more precise results can be obtained if intermediate steps are _not_ cast to fixed point formats of the same width as in- and outputs. For example, `(10::REAL / 3::REAL)::REAL * 3 = 10` whereas `(10::DECIMAL(18, 3) / 3::DECIMAL(18, 3))::DECIMAL(18, 3) * 3 = 9.999`. 
 
 In general, we advise that:
 
