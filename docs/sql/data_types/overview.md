@@ -38,7 +38,7 @@ Implicit and explicit typecasting is possible between numerous types, see the [T
 
 ## Nested / Composite Types
 
-DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `UNION`. Each supports different use cases and has a different structure. 
+DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `UNION`. Each supports different use cases and has a different structure.
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
 |:-|:---|:---|:--|:--|
@@ -47,6 +47,26 @@ DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `U
 | [`MAP`](../../sql/data_types/map) | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | `map([1, 2], ['a', 'b'])` | `MAP(INT, VARCHAR)` |
 | [`STRUCT`](../../sql/data_types/struct) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | `{'i': 42, 'j': 'a'}` | `STRUCT(i INT, j VARCHAR)` |
 | [`UNION`](../../sql/data_types/union) | A union of multiple alternative data types, storing one of them in each value at a time. A union also contains a discriminator "tag" value to inspect and access the currently set member type. | Rows may be set to different member types of the union. | `union_value(num := 2)` | `UNION(num INT, text VARCHAR)` |
+
+### Updating Values of Nested Types
+
+When performing _updates_ on values of nested types, DuckDB performs a _delete_ operation followed by an _insert_ operation.
+When used in a table with ART indexes (either via explicit indexes or primary keys/unique constraints), this can lead to [unexpected constraint violations](../indexes#over-eager-unique-constraint-checking).
+For example:
+
+```sql
+CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
+INSERT INTO students VALUES (1, 'Student 1');
+
+UPDATE tbl
+  SET j = [2]
+  WHERE i = 1;
+```
+
+```text
+Constraint Error: Duplicate key "i: 1" violates primary key constraint.
+If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
+```
 
 ## Nesting
 

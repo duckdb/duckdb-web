@@ -3,7 +3,8 @@ layout: docu
 title: Nested Functions
 ---
 
-This section describes functions and operators for examining and manipulating nested values. There are five nested data types: [`ARRAY`](../data_types/array), [`LIST`](../data_types/list), [`MAP`](../data_types/map), [`STRUCT`](../data_types/struct), and [`UNION`](../data_types/union).
+This section describes functions and operators for examining and manipulating nested values. There are five [nested data types](../data_types/overview#nested--composite-types):
+[`ARRAY`](../data_types/array), [`LIST`](../data_types/list), [`MAP`](../data_types/map), [`STRUCT`](../data_types/struct), and [`UNION`](../data_types/union).
 
 ## List Functions
 
