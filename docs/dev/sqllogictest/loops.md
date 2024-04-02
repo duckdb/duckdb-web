@@ -8,7 +8,7 @@ redirect_from:
 Loops can be used in sqllogictests when it is required to execute the same query many times but with slight modifications in constant values. For example, suppose we want to fire off 100 queries that check for the presence of the values `0..100` in a table:
 
 ```sql
-# create the table integers with the values 0..100
+# create the table 'integers' with values 0..100
 statement ok
 CREATE TABLE integers AS SELECT * FROM range(0, 100, 1) t1(i);
 
@@ -17,7 +17,7 @@ loop i 0 100
 
 # execute the query, replacing the value
 query I
-SELECT COUNT(*) FROM integers WHERE i=${i};
+SELECT count(*) FROM integers WHERE i = ${i};
 ----
 1
 
@@ -31,7 +31,7 @@ Similarly, `foreach` can be used to iterate over a set of values.
 foreach partcode millennium century decade year quarter month day hour minute second millisecond microsecond epoch
 
 query III
-SELECT i, DATE_PART('${partcode}', i) AS p, DATE_PART(['${partcode}'], i) AS st
+SELECT i, date_part('${partcode}', i) AS p, date_part(['${partcode}'], i) AS st
 FROM intervals
 WHERE p <> st['${partcode}'];
 ----
@@ -68,4 +68,4 @@ Using these two functions, together with clever use of cross products and other 
 
 An alternative option is to read data from an existing CSV or Parquet file. There are several large CSV files that can be loaded from the directory `test/sql/copy/csv/data/real` using a `COPY INTO` statement or the `read_csv_auto` function.
 
-The TPC-H and TPC-DS extensions can also be used to generate synthetic data, using e.g. `CALL dbgen(sf=1)` or `CALL dsdgen(sf=1)`.
+The TPC-H and TPC-DS extensions can also be used to generate synthetic data, using e.g. `CALL dbgen(sf = 1)` or `CALL dsdgen(sf = 1)`.
