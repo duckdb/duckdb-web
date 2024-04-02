@@ -3,7 +3,7 @@ layout: docu
 title: Parquet Import
 ---
 
-To read data from a Parquet file, use the `read_parquet` function in the `FROM` clause of a query. 
+To read data from a Parquet file, use the `read_parquet` function in the `FROM` clause of a query.
 
 ```sql
 SELECT * FROM read_parquet('input.parquet');
@@ -14,6 +14,7 @@ To create a new table using the result from a query, use `CREATE TABLE AS` from 
 ```sql
 CREATE TABLE new_tbl AS SELECT * FROM read_parquet('input.parquet');
 ```
+
 To load data into an existing table from a query, use `INSERT INTO` from a `SELECT` statement.
 
 ```sql

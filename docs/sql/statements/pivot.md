@@ -18,9 +18,9 @@ DuckDB implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` 
 The full syntax diagram is below, but the simplified `PIVOT` syntax can be summarized using spreadsheet pivot table naming conventions as:
 
 ```sql
-PIVOT ⟨dataset⟩ 
+PIVOT ⟨dataset⟩
 ON ⟨columns⟩
-USING ⟨values⟩ 
+USING ⟨values⟩
 GROUP BY ⟨rows⟩
 ORDER BY ⟨columns_with_order_directions⟩
 LIMIT ⟨number_of_rows⟩;
@@ -146,10 +146,10 @@ Multiple columns can be specified in the `ON` and `GROUP BY` clauses, and multip
 
 #### Multiple `ON` Columns and `ON` Expressions
 
-Multiple columns can be pivoted out into their own columns. 
+Multiple columns can be pivoted out into their own columns.
 DuckDB will find the distinct values in each `ON` clause column and create one new column for all combinations of those values (a cartesian product).
 
-In the below example, all combinations of unique countries and unique cities receive their own column. 
+In the below example, all combinations of unique countries and unique cities receive their own column.
 Some combinations may not be present in the underlying data, so those columns are populated with `NULL` values.
 
 ```sql
@@ -248,7 +248,7 @@ A `PIVOT` may be used in a subquery and must be wrapped in parentheses.
 Note that this behavior is different than the SQL Standard Pivot, as illustrated in subsequent examples.
 
 ```sql
-SELECT * 
+SELECT *
 FROM (
     PIVOT Cities
     ON Year
@@ -284,7 +284,7 @@ Additional pre-processing steps are required if the columns to be created when p
 
 DuckDB, like most SQL engines, requires that all column names and types be known at the start of a query.
 In order to automatically detect the columns that should be created as a result of a `PIVOT` statement, it must be translated into multiple queries.
-[`ENUM` types](../data_types/enum) are used to find the distinct values that should become columns. 
+[`ENUM` types](../data_types/enum) are used to find the distinct values that should become columns.
 Each `ENUM` is then injected into one of the `PIVOT` statement's `IN` clauses.
 
 After the `IN` clauses have been populated with `ENUM`s, the query is re-written again into a set of aggregations into lists.
@@ -301,10 +301,10 @@ is initially translated into:
 
 ```sql
 CREATE TEMPORARY TYPE __pivot_enum_0_0 AS ENUM (
-    SELECT DISTINCT 
-        Year::VARCHAR 
-    FROM Cities 
-    ORDER BY 
+    SELECT DISTINCT
+        Year::VARCHAR
+    FROM Cities
+    ORDER BY
         Year
     );
 PIVOT Cities
@@ -358,7 +358,7 @@ The full syntax diagram is below, but the SQL Standard `PIVOT` syntax can be sum
 FROM ⟨dataset⟩
 PIVOT (
     ⟨values⟩
-    FOR 
+    FOR
         ⟨column_1⟩ IN (⟨in_list⟩)
         ⟨column_2⟩ IN (⟨in_list⟩)
         ...
@@ -375,11 +375,11 @@ Note that no commas separate the expressions in the `FOR` clause, but that `valu
 This example uses a single value expression, a single column expression, and a single row expression:
 
 ```sql
-FROM Cities 
+FROM Cities
 PIVOT (
-    sum(Population) 
+    sum(Population)
     FOR
-        Year IN (2000, 2010, 2020) 
+        Year IN (2000, 2010, 2020)
     GROUP BY Country
 );
 ```
@@ -394,11 +394,11 @@ PIVOT (
 This example is somewhat contrived, but serves as an example of using multiple value expressions and multiple columns in the `FOR` clause.
 
 ```sql
-FROM Cities 
+FROM Cities
 PIVOT (
     sum(Population) AS total,
     count(Population) AS count
-    FOR 
+    FOR
         Year IN (2000, 2010)
         Country in ('NL', 'US')
 );

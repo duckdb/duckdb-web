@@ -5,7 +5,7 @@ railroad: statements/unpivot.js
 blurb: The UNPIVOT statement allows columns to be stacked into rows that indicate the prior column name and value.
 ---
 
-The `UNPIVOT` statement allows multiple columns to be stacked into fewer columns. 
+The `UNPIVOT` statement allows multiple columns to be stacked into fewer columns.
 In the basic case, multiple columns are stacked into two columns: a `NAME` column (which contains the name of the source column) and a `VALUE` column (which contains the value from the source column).
 
 DuckDB implements both the SQL Standard `UNPIVOT` syntax and a simplified `UNPIVOT` syntax.
@@ -21,7 +21,7 @@ The full syntax diagram is below, but the simplified `UNPIVOT` syntax can be sum
 ```sql
 UNPIVOT ⟨dataset⟩
 ON ⟨column(s)⟩
-INTO 
+INTO
     NAME ⟨name-column-name⟩
     VALUE ⟨value-column-name(s)⟩
 ORDER BY ⟨column(s)-with-order-direction(s)⟩
@@ -53,9 +53,9 @@ FROM monthly_sales;
 | 2     | clothes     | 10  | 20  | 30  | 40  | 50  | 60  |
 | 3     | cars        | 100 | 200 | 300 | 400 | 500 | 600 |
 
-<!-- 
-    Easiest is to just unpivot all months into their own name/value pair manually. 
-    Then show the columns-expr version. 
+<!--
+    Easiest is to just unpivot all months into their own name/value pair manually.
+    Then show the columns-expr version.
     Can also show the quarterly example. -->
 
 ### `UNPIVOT` Manually

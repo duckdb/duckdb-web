@@ -149,7 +149,7 @@ SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 
 The `*` expression can also be used to retrieve all keys from a struct as separate columns.
 This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys.
-See the [`STRUCT` data type](../data_types/struct) and [nested functions](../functions/nested) pages for more details on working with structs. 
+See the [`STRUCT` data type](../data_types/struct) and [nested functions](../functions/nested) pages for more details on working with structs.
 
 ```sql
 -- All keys within a struct can be returned as separate columns using *

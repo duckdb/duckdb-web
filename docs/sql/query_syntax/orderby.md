@@ -45,13 +45,13 @@ For more information on collations, see the [Collation page](../../sql/expressio
 
 All examples use this example table:
 ```sql
-CREATE OR REPLACE TABLE addresses AS 
-    SELECT '123 Quack Blvd' AS address, 'DuckTown' AS city, '11111' AS zip 
-    UNION ALL 
-    SELECT '111 Duck Duck Goose Ln', 'DuckTown', '11111' 
-    UNION ALL 
+CREATE OR REPLACE TABLE addresses AS
+    SELECT '123 Quack Blvd' AS address, 'DuckTown' AS city, '11111' AS zip
+    UNION ALL
+    SELECT '111 Duck Duck Goose Ln', 'DuckTown', '11111'
+    UNION ALL
     SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111'
-    UNION ALL 
+    UNION ALL
     SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111-0001';
 ```
 

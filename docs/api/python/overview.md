@@ -49,7 +49,7 @@ duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
 
 ### DataFrames
 
-DuckDB can also directly query Pandas DataFrames, Polars DataFrames and Arrow tables. 
+DuckDB can also directly query Pandas DataFrames, Polars DataFrames and Arrow tables.
 
 ```python
 import duckdb

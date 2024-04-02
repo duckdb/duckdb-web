@@ -855,7 +855,7 @@ Note that this only flattens one level at a time, not all levels of sub-lists.
 
 ```sql
 -- Convert a list of lists into a single list
-SELECT 
+SELECT
     flatten([
         [1, 2],
         [3, 4]
@@ -865,9 +865,9 @@ SELECT
 ```
 
 ```sql
--- If the list has multiple levels of lists, 
+-- If the list has multiple levels of lists,
 -- only the first level of sub-lists is concatenated into a single list
-SELECT 
+SELECT
     flatten([
         [
             [1, 2],
@@ -879,10 +879,10 @@ SELECT
         ]
     ]);
 ----
-[[1, 2], [3, 4], [5, 6], [7, 8]] 
+[[1, 2], [3, 4], [5, 6], [7, 8]]
 ```
 
-In general, the input to the flatten function should be a list of lists (not a single level list). 
+In general, the input to the flatten function should be a list of lists (not a single level list).
 However, the behavior of the flatten function has specific behavior when handling empty lists and `NULL` values.
 
 ```sql
@@ -907,7 +907,7 @@ SELECT flatten([NULL]);
 ```
 
 ```sql
--- If the sub-list in a list of lists only contains NULL, 
+-- If the sub-list in a list of lists only contains NULL,
 -- do not modify the sub-list
 -- (Note the extra set of parentheses vs. the prior example)
 SELECT flatten([[NULL]]);
@@ -918,7 +918,7 @@ SELECT flatten([[NULL]]);
 ```sql
 -- Even if the only contents of each sub-list is NULL,
 -- still concatenate them together
--- Note that no de-duplication occurs when flattening. 
+-- Note that no de-duplication occurs when flattening.
 -- See list_distinct function for de-duplication.
 SELECT flatten([[NULL],[NULL]]);
 ----

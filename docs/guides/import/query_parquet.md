@@ -3,7 +3,7 @@ layout: docu
 title: Querying Parquet Files
 ---
 
-To run a query directly on a Parquet file, use the `read_parquet` function in the `FROM` clause of a query. 
+To run a query directly on a Parquet file, use the `read_parquet` function in the `FROM` clause of a query.
 
 ```sql
 SELECT * FROM read_parquet('input.parquet');

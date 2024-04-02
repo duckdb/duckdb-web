@@ -24,7 +24,7 @@ In short, while the `GEOMETRY` type is a binary representation of "geometry" dat
 
 This may seem strange at first, since DuckDB already have types like `LIST`, `STRUCT` and `UNION` which could be used in a similar way, but the design and behaviour of the `GEOMETRY` type is actually based on the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) geometry model, which is a standard used by many other databases and GIS software.
 
-That said, the spatial extension also includes a couple of experimental non-standard explicit geometry types, such as `POINT_2D`, `LINESTRING_2D`, `POLYGON_2D` and `BOX_2D` that are based on DuckDBs native nested types, such as structs and lists. In theory it should be possible to optimize a lot of operations for these types much better than for the `GEOMETRY` type (which is just a binary blob), but only a couple functions are implemented so far. 
+That said, the spatial extension also includes a couple of experimental non-standard explicit geometry types, such as `POINT_2D`, `LINESTRING_2D`, `POLYGON_2D` and `BOX_2D` that are based on DuckDBs native nested types, such as structs and lists. In theory it should be possible to optimize a lot of operations for these types much better than for the `GEOMETRY` type (which is just a binary blob), but only a couple functions are implemented so far.
 
 All of these are implicitly castable to `GEOMETRY` but with a conversion cost, so the `GEOMETRY` type is still the recommended type to use for now if you are planning to work with a lot of different spatial functions.
 
@@ -44,7 +44,7 @@ The currently implemented spatial functions can roughly be categorized into the 
 
 ### Geometry Conversion
 
-Convert between geometries and other formats. 
+Convert between geometries and other formats.
 
 | Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
 |-----|---|--|--|--|---|
@@ -239,12 +239,12 @@ We currently support over 50 different formats. You can generate the following t
 | AVCBin         | Arc/Info Binary Coverage                            | false      | false    | true     | <https://gdal.org/drivers/vector/avcbin.html>        |
 | AVCE00         | Arc/Info E00 (ASCII) Coverage                       | false      | false    | true     | <https://gdal.org/drivers/vector/avce00.html>        |
 
-Note that far from all of these drivers have been tested properly, and some may require additional options to be passed to work as expected. 
+Note that far from all of these drivers have been tested properly, and some may require additional options to be passed to work as expected.
 If you run into any issues please first [consult the GDAL docs](https://gdal.org/drivers/vector/index.html).
 
 ### `ST_ReadOsm()` - Read Compressed OSM Data
 
-The spatial extension also provides an experimental `ST_ReadOsm()` table function to read compressed OSM data directly from a `.osm.pbf` file. 
+The spatial extension also provides an experimental `ST_ReadOsm()` table function to read compressed OSM data directly from a `.osm.pbf` file.
 
 This will use multithreading and zero-copy protobuf parsing which makes it a lot faster than using the `st_read()` `OSM` driver, but it only outputs the raw OSM data (Nodes, Ways, Relations), without constructing any geometries.
 For node entities you can trivially construct `POINT` geometries, but it is also possible to construct `LINESTRING` AND `POLYGON` by manually joining refs and nodes together in SQL.

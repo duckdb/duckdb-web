@@ -186,7 +186,7 @@ In this case, no output is returned to the terminal. Instead, the file `series.m
 
 Several dot commands can be used to configure the CLI.
 On startup, the CLI reads and executes all commands in the file `~/.duckdbrc`, including dot commands and SQL statements.
-This allows you to store the configuration state of the CLI. 
+This allows you to store the configuration state of the CLI.
 You may also point to a different initialization file using the `-init`.
 
 ### Setting a Custom Prompt
@@ -242,7 +242,7 @@ For details, see the [Extension docs](../../extensions/overview).
 
 ## Reading from stdin and Writing to stdout
 
-When in a Unix environment, it can be useful to pipe data between multiple commands. 
+When in a Unix environment, it can be useful to pipe data between multiple commands.
 DuckDB is able to read data from stdin as well as write to stdout using the file location of stdin (`/dev/stdin`) and stdout (`/dev/stdout`) within SQL commands, as pipes act very similarly to file handles.
 
 This command will create an example CSV:

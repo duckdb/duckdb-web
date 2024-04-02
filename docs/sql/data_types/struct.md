@@ -22,7 +22,7 @@ SELECT {'x': 1, 'y': 2, 'z': 3};
 SELECT {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'};
 -- Struct with a different type for each key
 SELECT {'key1': 'string', 'key2': 1, 'key3': 12.345};
--- Struct using the struct_pack function. 
+-- Struct using the struct_pack function.
 -- Note the lack of single quotes around the keys and the use of the := operator
 SELECT struct_pack(key1 := 'value1', key2 := 42);
 -- Struct of structs with NULL values

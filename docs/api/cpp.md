@@ -217,7 +217,7 @@ void CreateVectorizedFunction(string name, scalar_function_t udf_func, LogicalTy
     - **Args** are the arguments up to 3 for the UDF function.
 - **name** is the name to register the UDF function;
 - **udf_func** is a _vectorized_ UDF function;
-- **varargs** The type of varargs to support, or LogicalTypeId::INVALID (default value) if the function does not accept variable length arguments. 
+- **varargs** The type of varargs to support, or LogicalTypeId::INVALID (default value) if the function does not accept variable length arguments.
 
 This method automatically discovers from the template typenames the corresponding LogicalTypes:
 
