@@ -13,25 +13,85 @@ The `DROP` statement removes a catalog entry added previously with the `CREATE` 
 DROP TABLE tbl;
 -- drop the view with the name "v1"; do not throw an error if the view does not exist
 DROP VIEW IF EXISTS v1;
--- drop type
-DROP TYPE type_name;
+```
+
+```sql
+-- drop function "fn"
+DROP FUNCTION fn;
+-- drop index "idx"
+DROP INDEX idx;
+-- drop schema "sch"
+DROP SCHEMA sch;
+-- drop sequence "seq"
+DROP SEQUENCE seq;
+-- drop macro "mcr"
+DROP MACRO mcr;
+-- drop macro table "mt"
+DROP MACRO TABLE mt;
+-- drop type "typ"
+DROP TYPE typ;
 ```
 
 ## Syntax
 
 <div id="rrdiagram"></div>
 
-The optional `IF EXISTS` clause suppresses the error that would normally result if the table does not exist.
+## Dependencies of Dropped Objects
 
-By default (or if the `RESTRICT` clause is provided), the entry will not be dropped if there are any other objects that depend on it. If the `CASCADE` clause is provided then all the objects that are dependent on the object will be dropped as well.
+DuckDB performs limited dependency tracking for some object types.
+By default or if the `RESTRICT` clause is provided, the entry will not be dropped if there are any other objects that depend on it.
+If the `CASCADE` clause is provided then all the objects that are dependent on the object will be dropped as well.
 
 ```sql
 CREATE SCHEMA myschema;
 CREATE TABLE myschema.t1 (i INTEGER);
--- ERROR: Cannot drop myschema because the table myschema.t1 depends on it.
 DROP SCHEMA myschema;
--- Cascade drops both myschema and myschema.t1
+```
+
+```text
+Dependency Error: Cannot drop entry "myschema" because there are entries that depend on it.
+Use DROP...CASCADE to drop all dependents.
+```
+
+The `CASCADE` modifier drops both myschema and `myschema.t1`:
+
+```sql
+CREATE SCHEMA myschema;
+CREATE TABLE myschema.t1 (i INTEGER);
 DROP SCHEMA myschema CASCADE;
+```
+
+The following dependencies are tracked and thus will raise an error if the user tries to drop the depending object without the `CASCADE` modifier.
+
+| Depending object type | Dependandt object type |
+|--|--|
+| `SCHEMA` | `FUNCTION` |
+| `SCHEMA` | `INDEX` |
+| `SCHEMA` | `MACRO TABLE` |
+| `SCHEMA` | `MACRO` |
+| `SCHEMA` | `SCHEMA` |
+| `SCHEMA` | `SEQUENCE` |
+| `SCHEMA` | `TABLE` |
+| `SCHEMA` | `TYPE` |
+| `SCHEMA` | `VIEW` |
+| `TABLE`  | `INDEX` |
+
+## Limitations
+
+### Dependencies on Views
+
+Currently, dependencies are not tracked for views. For example, if a view is created that references a table and the table is dropped, then the view will be in an invalid state:
+
+```sql
+CREATE TABLE tbl (i INT);
+CREATE VIEW v AS
+    SELECT i FROM tbl;
+DROP TABLE tbl RESTRICT;
+SELECT * FROM v;
+```
+
+```text
+Catalog Error: Table with name tbl does not exist!
 ```
 
 ## Limitations on Reclaiming Disk Space
