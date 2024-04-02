@@ -41,7 +41,7 @@ When this flag is set, the [`tpcds` extension](../../extensions/tpcds) is built,
 
 #### `BUILD_TPCE`
 
-When this flag is set, the [TPCE](https://www.tpc.org/tpce/) extension is built, unlike TPC-H and TPC-DS this does not enable data generation and query support, but does enable tests for TPC-E through our test suite.
+When this flag is set, the [TPCE](https://www.tpc.org/tpce/) extension is built. Unlike TPC-H and TPC-DS this does not enable data generation and query support. Instead, it enables tests for TPC-E through our test suite.
 
 #### `BUILD_FTS`
 
@@ -50,6 +50,10 @@ When this flag is set, the [`fts` (full text search) extension](../../extensions
 #### `BUILD_HTTPFS`
 
 When this flag is set, the [`httpfs` extension](../../extensions/httpfs) is built.
+
+#### `BUILD_JEMALLOC`
+
+When this flag is set, the [`jemalloc` extension](../../extensions/jemalloc) is built.
 
 #### `BUILD_JSON`
 
