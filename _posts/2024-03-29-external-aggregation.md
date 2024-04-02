@@ -337,4 +337,4 @@ In this blog post, we showed some of the tricks DuckDB uses for spilling and loa
 These tricks are implemented in DuckDB's external hash aggregation, released since 0.9.0.
 We took the hash aggregation for a spin on the H2O.ai benchmark, and DuckDB could complete all 50 GB queries on a laptop with only 16 GB of memory.
 
-Interested in reading more? [Read our paper on external aggregation](https://ir.cwi.nl/pub/33316).
+Interested in reading more? [Read our paper on external aggregation](https://hannes.muehleisen.org/publications/icde2024-out-of-core-kuiper-boncz-muehleisen.pdf).
