@@ -239,3 +239,12 @@ The below options are applicable when writing `JSON` files.
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
 | `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
+
+## Limitations
+
+`COPY` does not support copying between tables. To copy between tables, use an [`INSERT statement`](insert):
+
+```sql
+INSERT INTO tbl2
+    FROM tbl1;
+```
