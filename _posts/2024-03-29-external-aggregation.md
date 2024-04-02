@@ -336,3 +336,5 @@ DuckDB is constantly improving its larger-than-memory query processing capabilit
 In this blog post, we showed some of the tricks DuckDB uses for spilling and loading data from storage.
 These tricks are implemented in DuckDB's external hash aggregation, released since 0.9.0.
 We took the hash aggregation for a spin on the H2O.ai benchmark, and DuckDB could complete all 50 GB queries on a laptop with only 16 GB of memory.
+
+Interested in reading more? [Read our paper on external aggregation](https://ir.cwi.nl/pub/33316).
