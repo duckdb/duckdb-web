@@ -35,7 +35,7 @@ SELECT 'abc' LIKE '%c';  -- true
 SELECT 'abc' NOT LIKE '%c'; -- false
 ```
 
-The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale. 
+The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale.
 
 ```sql
 SELECT 'abc' ILIKE '%C'; -- true
@@ -115,7 +115,7 @@ SELECT 'Best.txt' GLOB '[a-zA-Z]est.txt';  -- true
 -- The ! applies to all characters within the brackets
 SELECT 'Best.txt' GLOB '[!a-zA-Z]est.txt'; -- false
 
--- To negate a GLOB operator, negate the entire expression 
+-- To negate a GLOB operator, negate the entire expression
 -- (NOT GLOB is not valid syntax)
 SELECT NOT 'best.txt' GLOB '*.txt';        -- false
 ```

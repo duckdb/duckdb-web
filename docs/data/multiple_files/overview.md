@@ -63,7 +63,7 @@ Any file name input to the `read_parquet` function can either be an exact filena
 | `[abc]`    | matches one character given in the bracket                |
 | `[a-z]`    | matches one character from the range given in the bracket |
 
-Note that the `?` wildcard in globs is not supported for reads over S3 due to HTTP encoding issues. 
+Note that the `?` wildcard in globs is not supported for reads over S3 due to HTTP encoding issues.
 
 Here is an example that reads all the files that end with `.parquet` located in the `test` folder:
 
@@ -102,8 +102,8 @@ SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, f
 
 ## Glob Function to Find Filenames
 
-The glob pattern matching syntax can also be used to search for filenames using the `glob` table function. 
-It accepts one parameter: the path to search (which may include glob patterns). 
+The glob pattern matching syntax can also be used to search for filenames using the `glob` table function.
+It accepts one parameter: the path to search (which may include glob patterns).
 
 ```sql
 -- Search the current directory for all files

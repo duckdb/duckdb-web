@@ -179,7 +179,7 @@ r1.intersect(r2).show()
 
 ### `join(rel, condition, type = "inner")`
 
-Combine two relations, joining them based on the provided condition. 
+Combine two relations, joining them based on the provided condition.
 
 ```python
 import duckdb

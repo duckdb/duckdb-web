@@ -38,7 +38,7 @@ The results of the microbenchmark are as follows:
 | `DATETIME`  | 3.3 GB       | 0.9 s      |
 | `VARCHAR`   | 5.2 GB       | 3.9 s      |
 
-The results show that using the `DATETIME` value yields smaller storage sizes and faster processing. 
+The results show that using the `DATETIME` value yields smaller storage sizes and faster processing.
 
 ### Microbenchmark: Joining on Strings
 

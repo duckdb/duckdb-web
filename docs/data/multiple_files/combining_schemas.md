@@ -10,7 +10,7 @@ title: Combining Schemas
 ```sql
 -- read a set of CSV files combining columns by position
 SELECT * FROM read_csv('flights*.csv');
--- read a set of CSV files combining columns by name 
+-- read a set of CSV files combining columns by name
 SELECT * FROM read_csv('flights*.csv', union_by_name = true);
 ```
 
@@ -72,7 +72,7 @@ FlightDate|UniqueCarrier|OriginCityName|DestCityName
 1988-01-03|AA|New York, NY|Los Angeles, CA
 ```
 
-Reading these when unifying column names **by position** results in an error - as the two files have a different number of columns. When specifying the `union_by_name` option, the columns are correctly unified, and any missing values are set to `NULL`. 
+Reading these when unifying column names **by position** results in an error - as the two files have a different number of columns. When specifying the `union_by_name` option, the columns are correctly unified, and any missing values are set to `NULL`.
 
 ```sql
 SELECT * FROM read_csv(['flights3.csv', 'flights4.csv'], union_by_name = true);

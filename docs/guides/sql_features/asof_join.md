@@ -85,12 +85,12 @@ This attaches the value of the holding at that time to each row:
 | GOOG   | 2001-01-01 00:00:30 | 23.45 |
 | GOOG   | 2001-01-01 00:01:30 | 21.16 |
 
-It essentially executes a function defined by looking up nearby values in the `prices` table. 
+It essentially executes a function defined by looking up nearby values in the `prices` table.
 Note also that missing `ticker` values do not have a match and don't appear in the output.
 
 ## Outer AsOf Joins
 
-Because AsOf produces at most one match from the right hand side, 
+Because AsOf produces at most one match from the right hand side,
 the left side table will not grow as a result of the join,
 but it could shrink if there are missing times on the right.
 To handle this situation, you can use an *outer* AsOf Join:
@@ -124,7 +124,7 @@ when there is no ticker or the time is before the prices begin.
 ## AsOf Joins with the `USING` Keyword
 
 So far we have been explicit about specifying the conditions for AsOf,
-but SQL also has a simplified join condition syntax 
+but SQL also has a simplified join condition syntax
 for the common case where the column names are the same in both tables.
 This syntax uses the `USING` keyword to list the fields that should be compared for equality.
 AsOf also supports this syntax, but with two restrictions:

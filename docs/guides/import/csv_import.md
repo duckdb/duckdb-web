@@ -3,7 +3,7 @@ layout: docu
 title: CSV Import
 ---
 
-To read data from a CSV file, use the `read_csv` function in the `FROM` clause of a query. 
+To read data from a CSV file, use the `read_csv` function in the `FROM` clause of a query.
 
 ```sql
 SELECT * FROM read_csv('input.csv');

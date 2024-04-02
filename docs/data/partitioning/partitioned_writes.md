@@ -34,8 +34,7 @@ orders
 
 The values of the partitions are automatically extracted from the data. Note that it can be very expensive to write many partitions as many files will be created. The ideal partition count depends on how large your data set is.
 
-> Bestpractice Writing data into many small partitions is expensive. It is generally recommended to have at least `100MB` of data per partition. 
-
+> Bestpractice Writing data into many small partitions is expensive. It is generally recommended to have at least `100MB` of data per partition.
 
 ### Overwriting
 

@@ -14,7 +14,7 @@ In order to summarize the contents of a table, use `SUMMARIZE` followed by the t
 SUMMARIZE tbl;
 ```
 
-In order to summarize a query, prepend `SUMMARIZE` to a query. 
+In order to summarize a query, prepend `SUMMARIZE` to a query.
 
 ```sql
 SUMMARIZE SELECT * FROM tbl;

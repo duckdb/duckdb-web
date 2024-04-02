@@ -30,14 +30,14 @@ SET i = 1, j = 2;
 A table can be updated based upon values from another table. This can be done by specifying a table in a `FROM` clause, or using a sub-select statement. Both approaches have the benefit of completing the `UPDATE` operation in bulk for increased performance.
 
 ```sql
-CREATE OR REPLACE TABLE original AS 
-    SELECT 1 AS key, 'original value' AS value 
-    UNION ALL 
+CREATE OR REPLACE TABLE original AS
+    SELECT 1 AS key, 'original value' AS value
+    UNION ALL
     SELECT 2 AS key, 'original value 2' AS value;
 
-CREATE OR REPLACE TABLE new AS 
-    SELECT 1 AS key, 'new value' AS value 
-    UNION ALL 
+CREATE OR REPLACE TABLE new AS
+    SELECT 1 AS key, 'new value' AS value
+    UNION ALL
     SELECT 2 AS key, 'new value 2' AS value;
 
 SELECT *

@@ -62,7 +62,7 @@ SELECT ifnull(1, 'default_string');
 
 ## `NULL` and Aggregate Functions
 
-`NULL` values are ignored in most aggregate functions. 
+`NULL` values are ignored in most aggregate functions.
 
 Aggregate functions that do not ignore `NULL` values include: `first`, `last`, `list`, and `array_agg`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause](../../sql/query_syntax/filter) can be used.
 

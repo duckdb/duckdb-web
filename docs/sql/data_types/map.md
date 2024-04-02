@@ -31,7 +31,8 @@ CREATE TABLE tbl (col MAP(INTEGER, DOUBLE));
 
 ## Retrieving from Maps
 
-`MAP`s use bracket notation for retrieving values. Selecting from a `MAP` returns a `LIST` rather than an individual value, with an empty `LIST` meaning that the key was not found. 
+`MAP`s use bracket notation for retrieving values. Selecting from a `MAP` returns a `LIST` rather than an individual value, with an empty `LIST` meaning that the key was not found.
+
 ```sql
 -- Use bracket notation to retrieve a list containing the value at a key's location. This returns [5]
 -- Note that the expression in bracket notation must match the type of the map's key

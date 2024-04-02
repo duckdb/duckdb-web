@@ -66,8 +66,8 @@ When an unpaired row is returned, the attributes from the other table are set to
 
 ### Cross Product Joins
 
-The simplest type of join is a `CROSS JOIN`. 
-There are no conditions for this type of join, 
+The simplest type of join is a `CROSS JOIN`.
+There are no conditions for this type of join,
 and it just returns all the possible pairs.
 
 ```sql
@@ -77,7 +77,7 @@ SELECT a.*, b.* FROM a CROSS JOIN b;
 
 ### Conditional Joins
 
-Most joins are specified by a predicate that connects 
+Most joins are specified by a predicate that connects
 attributes from one side to attributes from the other side.
 The conditions can be explicitly specified using an `ON` clause
 with the join (clearer) or implied by the `WHERE` clause (old-fashioned).
@@ -131,9 +131,9 @@ The expressions to not have to be equalities - any predicate can be used:
 
 ```sql
 -- return the pairs of jobs where one ran longer but cost less
-SELECT s1.t_id, s2.t_id 
+SELECT s1.t_id, s2.t_id
 FROM west s1, west s2
-WHERE s1.time > s2.time 
+WHERE s1.time > s2.time
   AND s1.cost < s2.cost;
 ```
 
@@ -143,7 +143,7 @@ Semi joins return rows from the left table that have at least one match in the r
 
 ```sql
 -- return a list of cars that have a valid region.
-SELECT cars.name, cars.manufacturer 
+SELECT cars.name, cars.manufacturer
 FROM cars
 SEMI JOIN region
        ON cars.region = region.id;
@@ -176,7 +176,7 @@ Lateral joins are a generalization of correlated subqueries, as they can return 
 
 ```sql
 SELECT *
-FROM 
+FROM
     generate_series(0, 1) t(i),
     LATERAL (SELECT i + 10 UNION ALL SELECT i + 100) t2(j);
 ```
@@ -208,7 +208,7 @@ SELECT * FROM t1, LATERAL (SELECT i + j) t2(k) ORDER BY ALL;
 
 ### Positional Joins
 
-When working with data frames or other embedded tables of the same size, 
+When working with data frames or other embedded tables of the same size,
 the rows may have a natural correspondence based on their physical order.
 In scripting languages, this is easily expressed using a loop:
 
@@ -218,7 +218,7 @@ for (i = 0; i < n; i++) {
 }
 ```
 
-It is difficult to express this in standard SQL because 
+It is difficult to express this in standard SQL because
 relational tables are not ordered, but imported tables (like data frames)
 or disk files (like CSVs or Parquet files) do have a natural ordering.
 
@@ -243,7 +243,7 @@ This is called an _as-of join:_
 -- attach prices to stock trades
 SELECT t.*, p.price
 FROM trades t
-ASOF JOIN prices p 
+ASOF JOIN prices p
        ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
@@ -254,19 +254,19 @@ Any other conditions must be equalities (or `NOT DISTINCT`).
 This means that the left/right order of the tables is significant.
 
 `ASOF` joins each left side row with at most one right side row.
-It can be specified as an `OUTER` join to find unpaired rows 
+It can be specified as an `OUTER` join to find unpaired rows
 (e.g., trades without prices or prices which have no trades.)
 
 ```sql
 -- attach prices or NULLs to stock trades
 SELECT *
 FROM trades t
-ASOF LEFT JOIN prices p 
+ASOF LEFT JOIN prices p
             ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 `ASOF` joins can also specify join conditions on matching column names with the `USING` syntax,
-but the *last* attribute in the list must be the inequality, 
+but the *last* attribute in the list must be the inequality,
 which will be greater than or equal to (`>=`):
 
 ```sql
@@ -276,9 +276,9 @@ ASOF JOIN prices p USING (symbol, "when");
 -- Returns symbol, trades.when, price (but NOT prices.when)
 ```
 
-If you combine `USING` with a `SELECT *` like this, 
-the query will return the left side (probe) column values for the matches, 
-not the right side (build) column values. 
+If you combine `USING` with a `SELECT *` like this,
+the query will return the left side (probe) column values for the matches,
+not the right side (build) column values.
 To get the `prices` times in the example, you will need to list the columns explicitly:
 
 ```sql

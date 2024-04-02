@@ -56,15 +56,15 @@ Like for fixed-point data types, conversion from literals or casts from other da
 
 Additionally, whereas multiplication, addition, and subtraction of fixed-point decimal data types is exact, these operations are only approximate on floating-point binary data types.
 
-For more complex mathematical operations, however, floating-point arithmetic is used internally and more precise results can be obtained if intermediate steps are _not_ cast to fixed point formats of the same width as in- and outputs. For example, `(10::REAL / 3::REAL)::REAL * 3 = 10` whereas `(10::DECIMAL(18, 3) / 3::DECIMAL(18, 3))::DECIMAL(18, 3) * 3 = 9.999`. 
+For more complex mathematical operations, however, floating-point arithmetic is used internally and more precise results can be obtained if intermediate steps are _not_ cast to fixed point formats of the same width as in- and outputs. For example, `(10::REAL / 3::REAL)::REAL * 3 = 10` whereas `(10::DECIMAL(18, 3) / 3::DECIMAL(18, 3))::DECIMAL(18, 3) * 3 = 9.999`.
 
 In general, we advise that:
 
 * If you require exact storage of numbers with a known number of decimal digits and require exact additions, subtractions, and multiplications (such as for monetary amounts), use the [`DECIMAL` data type](#fixed-point-decimals) or its `NUMERIC` alias instead.
 * If you want to do fast or complicated calculations, the floating-point data types may be more appropriate. However, if you use the results for anything important, you should evaluate your implementation carefully for corner cases (ranges, infinities, underflows, invalid operations) that may be handled differently from what you expect and you should familiarize yourself with common floating-point pitfalls. The article ["What Every Computer Scientist Should Know About
-Floating-Point Arithmetic" by David Goldberg](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) and [the floating point series on Bruce Dawson's blog](https://randomascii.wordpress.com/2017/06/19/sometimes-floating-point-math-is-perfect/) provide excellent starting points. 
+Floating-Point Arithmetic" by David Goldberg](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) and [the floating point series on Bruce Dawson's blog](https://randomascii.wordpress.com/2017/06/19/sometimes-floating-point-math-is-perfect/) provide excellent starting points.
 
-On most platforms, the `REAL` type has a range of at least 1E-37 to 1E+37 with a precision of at least 6 decimal digits. The `DOUBLE` type typically has a range of around 1E-307 to 1E+308 with a precision of at least 15 digits. Positive numbers outside of these ranges (and negative numbers ourside the mirrored ranges) may cause errors on some platforms but will usually be converted to zero or infinity, respectively. 
+On most platforms, the `REAL` type has a range of at least 1E-37 to 1E+37 with a precision of at least 6 decimal digits. The `DOUBLE` type typically has a range of around 1E-307 to 1E+308 with a precision of at least 15 digits. Positive numbers outside of these ranges (and negative numbers ourside the mirrored ranges) may cause errors on some platforms but will usually be converted to zero or infinity, respectively.
 
 In addition to ordinary numeric values, the floating-point types have several special values:
 
