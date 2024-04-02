@@ -22,19 +22,20 @@ Both min-max indexes and ART indexes are persisted on disk.
 To create an index, use the [`CREATE INDEX` statement](statements/create_index#create-index).
 To drop an index, use the [`DROP INDEX` statement](statements/create_index#drop-index).
 
-## Index Limitations
+## Limitations of ART Indexes
 
-ART indexes create a secondary copy of the data in a second location - this complicates processing, particularly when combined with transactions. Certain limitations apply when it comes to modifying data that is also stored in secondary indexes.
+ART indexes create a secondary copy of the data in a second location – this complicates processing, particularly when combined with transactions. Certain limitations apply when it comes to modifying data that is also stored in secondary indexes.
 
 > As expected, indexes have a strong effect on performance, slowing down loading and updates, but speeding up certain queries. Please consult the [Performance Guide](../guides/performance/indexing) for details.
 
 ### Updates Become Deletes and Inserts
 
-When an update statement is executed on a column that is present in an index - the statement is transformed into a *delete* of the original row followed by an *insert*. This has certain performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
+When an update statement is executed on a column that is present in an index, the statement is transformed into a *delete* of the original row followed by an *insert*.
+This has certain performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
 
 ### Over-Eager Unique Constraint Checking
 
-Due to the presence of transactions, data can only be removed from the index after (1) the transaction that performed the delete is committed, and (2) no further transactions exist that refer to the old entry still present in the index. As a result of this - transactions that perform *deletions followed by insertions* may trigger unexpected unique constraint violations, as the deleted tuple has not actually been removed from the index yet. For example:
+Due to the presence of transactions, data can only be removed from the index after (1) the transaction that performed the delete is committed, and (2) no further transactions exist that refer to the old entry still present in the index. As a result of this – transactions that perform *deletions followed by insertions* may trigger unexpected unique constraint violations, as the deleted tuple has not actually been removed from the index yet. For example:
 
 ```sql
 CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
@@ -54,4 +55,4 @@ UPDATE students SET name = 'Student 2', id = 1 WHERE id = 1;
 -- Constraint Error: Duplicate key "id: 1" violates primary key constraint
 ```
 
-Currently, this is an expected limitation of the system - although we aim to resolve this in the future.
+Currently, this is an expected limitation of the system – although we aim to resolve this in the future.
