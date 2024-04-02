@@ -61,7 +61,50 @@ SELECT * FROM t AS t1,
 
 `WITH RECURSIVE` allows the definition of CTEs which can refer to themselves. Note that the query must be formulated in a way that ensures termination, otherwise, it may run into an infinite loop.
 
-### Tree Traversal
+### Example: Fibonacci Sequence
+
+`WITH RECURSIVE` can be used to make recursive calculations. For example, here is how `WITH RECURSIVE` could be used to calculate the first ten Fibonacci numbers:
+
+```sql
+WITH RECURSIVE FibonacciNumbers (RecursionDepth, FibonacciNumber, NextNumber) AS (
+    -- Base case
+    SELECT
+        0  AS RecursionDepth,
+        0  AS FibonacciNumber,
+        1  AS NextNumber
+    UNION ALL
+    -- Recursive step
+    SELECT
+        fib.RecursionDepth + 1 AS RecursionDepth,
+        fib.NextNumber AS FibonacciNumber,
+        fib.FibonacciNumber + fib.NextNumber AS NextNumber
+    FROM
+        FibonacciNumbers fib
+    WHERE
+        fib.RecursionDepth + 1 < 10
+)
+-- Query the CTE
+SELECT
+    fn.RecursionDepth AS FibonacciNumberIndex, 
+    fn.FibonacciNumber
+FROM
+    FibonacciNumbers fn;
+```
+
+| FibonacciNumberIndex | FibonacciNumber |
+|---------------------:|----------------:|
+| 0                    | 0               |
+| 1                    | 1               |
+| 2                    | 1               |
+| 3                    | 2               |
+| 4                    | 3               |
+| 5                    | 5               |
+| 6                    | 8               |
+| 7                    | 13              |
+| 8                    | 21              |
+| 9                    | 34              |
+
+### Example: Tree Traversal
 
 `WITH RECURSIVE` can be used to traverse trees. For example, take a hierarchy of tags:
 
