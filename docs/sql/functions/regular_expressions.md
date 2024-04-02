@@ -20,7 +20,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 |:--|:-------|
 | [`regexp_extract_all(string, regex[, group = 0])`](#regexp_extract_allstring-regex-group--0) | Split the *string* along the *regex* and extract all occurrences of *group*. |
 | [`regexp_extract(string, pattern , name_list)`](#regexp_extractstring-pattern-name_list) | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. |
-| [`regexp_extract(string, pattern [, idx])`](#regexp_extractstring-pattern-idx) | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. |
+| [`regexp_extract(string, pattern [, idx])`](#regexp_extractstring-pattern-idx) | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. |
 | [`regexp_full_match(string, regex)`](#regexp_full_matchstring-regex) | Returns `true` if the entire *string* matches the *regex*. |
 | [`regexp_matches(string, pattern)`](#regexp_matchesstring-pattern) | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
 | [`regexp_replace(string, pattern, replacement)`](#regexp_replacestring-pattern-replacement) | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. |
@@ -47,7 +47,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 <div class="nostroke_table"></div>
 
-| **Description** | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. |
+| **Description** | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. |
 | **Example** | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `hello` |
 
