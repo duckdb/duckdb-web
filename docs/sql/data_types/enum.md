@@ -18,10 +18,10 @@ Enum types are created from either a hardcoded set of values or from a select st
 
 ```sql
 -- Create enum using hardcoded values
-CREATE TYPE ${enum_name} AS ENUM ([${value_1}, ${value_2},...]);
+CREATE TYPE ⟨enum_name⟩ AS ENUM ([⟨value_1⟩, ⟨value_2⟩,...]);
 
 -- Create enum using a select statement that returns a single column of varchars
-CREATE TYPE ${enum_name} AS ENUM (${SELECT expression});
+CREATE TYPE ⟨enum_name⟩ AS ENUM (select_expression⟩);
 ```
 
 For example:
@@ -165,7 +165,7 @@ WHERE current_mood = past_mood;
 Enum types are stored in the catalog, and a catalog dependency is added to each table that uses them. It is possible to drop an Enum from the catalog using the following command:
 
 ```sql
-DROP TYPE ${enum_name};
+DROP TYPE ⟨enum_name⟩;
 ```
 
 Currently, it is possible to drop Enums that are used in tables without affecting the tables.
