@@ -90,6 +90,8 @@ CREATE OR REPLACE TABLE flights AS
     FROM 'https://duckdb.org/data/flights.csv';
 ```
 
+Note that it is not possible to create tables using CTAS statements with constraints (primary keys, check constraints, etc.).
+
 ## Check Constraints
 
 A `CHECK` constraint is an expression that must be satisfied by the values of every row in the table.
