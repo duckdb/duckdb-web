@@ -29,11 +29,13 @@ CREATE INDEX i_index ON integers ((j + k));
 
 | Name | Description |
 |:-|:-----|
-|`UNIQUE`|Causes the system to check for duplicate values in the table when the index is created (if data already exist) and each time data is added. Attempts to insert or update data that would result in duplicate entries will generate an error.|
-|`name`|The name of the index to be created.|
-|`table`|The name of the table to be indexed.|
-|`column`|The name of the column to be indexed.|
-|`expression`|An expression based on one or more columns of the table. The expression usually must be written with surrounding parentheses, as shown in the syntax. However, the parentheses can be omitted if the expression has the form of a function call.|
+| `UNIQUE` | Causes the system to check for duplicate values in the table when the index is created (if data already exist) and each time data is added. Attempts to insert or update data that would result in duplicate entries will generate an error. |
+| `name` | The name of the index to be created. |
+| `table` | The name of the table to be indexed. |
+| `column` | The name of the column to be indexed. |
+| `expression` | An expression based on one or more columns of the table. The expression usually must be written with surrounding parentheses, as shown in the syntax. However, the parentheses can be omitted if the expression has the form of a function call. |
+| `index type` | Specified index type. Optional. |
+| `option` | Index option in the form of a boolean true value (e.g., `is_cool`) or a key-value pair (e.g., `my_option = 2`). Optional. |
 
 ### Syntax
 
@@ -56,8 +58,8 @@ DROP INDEX title_idx;
 
 | Name | Description |
 |:---|:---|
-|`IF EXISTS`|Do not throw an error if the index does not exist.|
-|`name`|The name of an index to remove.|
+| `IF EXISTS` | Do not throw an error if the index does not exist. |
+| `name` | The name of an index to remove. |
 
 ### Syntax
 
