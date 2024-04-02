@@ -40,19 +40,31 @@ Due to the presence of transactions, data can only be removed from the index aft
 ```sql
 CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
 INSERT INTO students VALUES (1, 'Student 1');
+
 BEGIN;
 DELETE FROM students WHERE id = 1;
 INSERT INTO students VALUES (1, 'Student 2');
--- Constraint Error: Duplicate key "id: 1" violates primary key constraint
 ```
 
-This, combined with the fact that updates are turned into deletions and insertions within the same transaction, means that updating rows in the presence of unique or primary key constraints can often lead to unexpected unique constraint violations.
+```text
+Constraint Error: Duplicate key "id: 1" violates primary key constraint.
+If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
+```
+
+This, combined with the fact that updates are turned into deletions and insertions within the same transaction, means that updating rows in the presence of unique or primary key constraints can often lead to unexpected unique constraint violations. For example, in the following query, `SET id = 1` causes a `Constraint Error` to occur.
 
 ```sql
 CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
 INSERT INTO students VALUES (1, 'Student 1');
-UPDATE students SET name = 'Student 2', id = 1 WHERE id = 1;
--- Constraint Error: Duplicate key "id: 1" violates primary key constraint
+
+UPDATE students
+SET id = 1, name = 'Student 2'
+WHERE id = 1;
 ```
 
-Currently, this is an expected limitation of the system – although we aim to resolve this in the future.
+```text
+Constraint Error: Duplicate key "id: 1" violates primary key constraint.
+If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
+```
+
+Currently, this is an expected limitation of DuckDB – although we aim to resolve this in the future.
