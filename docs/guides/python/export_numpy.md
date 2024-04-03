@@ -3,7 +3,7 @@ layout: docu
 title: Export to Numpy
 ---
 
-The result of a query can be converted to a Numpy array using the `fetchnumpy()` function.
+The result of a query can be converted to a Numpy array using the `fetchnumpy()` function. For example:
 
 ```python
 import duckdb
@@ -19,7 +19,7 @@ my_arr
        fill_value=1e+20)}
 ```
 
-Then, the array can be processed in using Numpy, e.g.:
+Then, the array can be processed using Numpy functions, e.g.:
 
 ```python
 np.sum(my_arr['x'])
