@@ -85,7 +85,7 @@ ATTACH '' AS p (TYPE postgres);
 The tables in the PostgreSQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from Postgres at query time.
 
 ```sql
-SHOW TABLES;
+SHOW ALL TABLES;
 ```
 
 | name  |
