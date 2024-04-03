@@ -8,8 +8,6 @@ This section describes functions and operators for examining and manipulating ne
 
 ## List Functions
 
-In the descriptions, `l` is the three element list `[4, 5, 6]`.
-
 | Name | Description |
 |:--|:-------|
 | [`list[index]`](#listindex) | Bracket notation serves as an alias for `list_extract`. |
@@ -56,7 +54,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | Bracket notation serves as an alias for `list_extract`. |
-| **Example** | `l[3]` |
+| **Example** | `[4, 5, 6][3]` |
 | **Result** | `6` |
 | **Alias** | `list_extract` |
 
@@ -65,7 +63,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | Bracket notation with colon is an alias for `list_slice`. |
-| **Example** | `l[2:3]` |
+| **Example** | `[4, 5, 6][2:3]` |
 | **Result** | `[5, 6]` |
 | **Alias** | `list_slice` |
 
@@ -74,7 +72,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | `list_slice` in bracket notation with an added `step` feature. |
-| **Example** | `l[:-:2]` |
+| **Example** | `[4, 5, 6][:-:2]` |
 | **Result** | `[4, 6]` |
 | **Alias** | `list_slice` |
 
@@ -194,7 +192,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | Extract the `index`th (1-based) value from the list. |
-| **Example** | `list_extract(l, 3)` |
+| **Example** | `list_extract([4, 5, 6], 3)` |
 | **Result** | `6` |
 | **Aliases** | `list_element`, `array_extract` |
 
@@ -203,7 +201,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions](lambda#filter) page for more details. |
-| **Example** | `list_filter(l, x -> x > 4)` |
+| **Example** | `list_filter([4, 5, 6], x -> x > 4)` |
 | **Result** | `[5, 6]` |
 | **Aliases** | `array_filter`, `filter` |
 
@@ -221,7 +219,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if all elements of sub-list exist in list. |
-| **Example** | `list_has_all(l, [4, 6])` |
+| **Example** | `list_has_all([4, 5, 6], [4, 6])` |
 | **Result** | `true` |
 | **Alias** | `array_has_all` |
 
@@ -266,7 +264,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions](lambda#reduce) page for more details. |
-| **Example** | `list_reduce(l, (x, y) -> x + y)` |
+| **Example** | `list_reduce([4, 5, 6], (x, y) -> x + y)` |
 | **Result** | `15` |
 | **Aliases** | `array_reduce`, `reduce` |
 
@@ -293,8 +291,8 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | Reverses the list. |
-| **Example** | `list_reverse(l)` |
-| **Result** | `[6, 5, 4]` |
+| **Example** | `list_reverse([3, 6, 1, 2])` |
+| **Result** | `[2, 1, 6, 3]` |
 | **Alias** | `array_reverse` |
 
 ### `list_select(value_list, index_list)`
@@ -311,7 +309,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | `list_slice` with added `step` feature. |
-| **Example** | `list_slice(l, 1, 3, 2)` |
+| **Example** | `list_slice([4, 5, 6], 1, 3, 2)` |
 | **Result** | `[4, 6]` |
 | **Alias** | `array_slice` |
 
@@ -320,7 +318,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | Extract a sublist using slice conventions. Negative values are accepted. See [slicing](nested#slicing). |
-| **Example** | `list_slice(l, 2, 3)` |
+| **Example** | `list_slice([4, 5, 6], 2, 3)` |
 | **Result** | `[5, 6]` |
 | **Alias** | `array_slice` |
 
@@ -338,7 +336,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions](lambda#transform) page for more details. |
-| **Example** | `list_transform(l, x -> x + 1)` |
+| **Example** | `list_transform([4, 5, 6], x -> x + 1)` |
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
 
