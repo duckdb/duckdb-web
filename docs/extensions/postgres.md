@@ -165,6 +165,13 @@ COPY postgres_db.tbl TO 'data.parquet';
 COPY postgres_db.tbl FROM 'data.parquet';
 ```
 
+These copies use [Postgres binary wire encoding](https://www.postgresql.org/docs/current/sql-copy.html).
+DuckDB can also write data using this encoding to a file which you can then load into Postgres using a client of your choosing if you would like to do your own connection management:
+
+```sql
+COPY 'data.parquet' TO 'pg.bin' WITH (FORMAT POSTGRES_BINARY);
+```
+
 You may also create a full copy of the database using the [`COPY FROM DATABASE` statement](../sql/statements/copy#copy-from-database--to):
 
 ```sql
