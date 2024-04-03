@@ -10,17 +10,23 @@ The `INSERT` statement inserts new data into a table.
 
 ```sql
 -- insert the values (1), (2), (3) into "tbl"
-INSERT INTO tbl VALUES (1), (2), (3);
+INSERT INTO tbl
+    VALUES (1), (2), (3);
 -- insert the result of a query into a table
-INSERT INTO tbl SELECT * FROM other_tbl;
+INSERT INTO tbl
+    SELECT * FROM other_tbl;
 -- insert values into the "i" column, inserting the default value into other columns
-INSERT INTO tbl (i) VALUES (1), (2), (3);
+INSERT INTO tbl (i)
+    VALUES (1), (2), (3);
 -- explicitly insert the default value into a column
-INSERT INTO tbl (i) VALUES (1), (DEFAULT), (3);
+INSERT INTO tbl (i)
+    VALUES (1), (DEFAULT), (3);
 -- assuming tbl has a primary key/unique constraint, do nothing on conflict
-INSERT OR IGNORE INTO tbl (i) VALUES (1);
+INSERT OR IGNORE INTO tbl (i)
+    VALUES (1);
 -- or update the table with the new values instead
-INSERT OR REPLACE INTO tbl (i) VALUES (1);
+INSERT OR REPLACE INTO tbl (i)
+    VALUES (1);
 ```
 
 ### Syntax
@@ -45,18 +51,24 @@ For example:
 
 ```sql
 CREATE TABLE tbl (a INTEGER, b INTEGER);
-INSERT INTO tbl VALUES (5, 42);
+INSERT INTO tbl
+    VALUES (5, 42);
 -- specifying "BY POSITION" is optional and is equivalent to the default behavior
-INSERT INTO tbl BY POSITION VALUES (5, 42);
+INSERT INTO tbl
+    BY POSITION
+    VALUES (5, 42);
 ```
 
 To use a different order, column names can be provided as part of the target, for example:
 
 ```sql
 CREATE TABLE tbl (a INTEGER, b INTEGER);
-INSERT INTO tbl (b, a) VALUES (5, 42);
+INSERT INTO tbl (b, a)
+    VALUES (5, 42);
 -- adding "BY POSITION" results in the same behavior
-INSERT INTO tbl BY POSITION (b, a) VALUES (5, 42);
+INSERT INTO tbl
+    BY POSITION (b, a)
+    VALUES (5, 42);
 ```
 
 This will insert `5` into `b` and `42` into `a`.
@@ -88,17 +100,30 @@ An example for such a conflict is shown in the following example:
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
-INSERT INTO tbl VALUES (1, 42);
-INSERT INTO tbl VALUES (1, 84);
+INSERT INTO tbl
+    VALUES (1, 42);
+INSERT INTO tbl
+    VALUES (1, 84);
 ```
 
-This raises as an error and leaves the table with a single row `<i: 1, j: 42>`.
+This raises as an error:
 
 ```text
-Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
+Constraint Error: Duplicate key "i: 1" violates primary key constraint.
 ```
 
-There are two supported actions: `DO NOTHING` and `DO UPDATE SET ...`
+The table will contain the row that was first inserted:
+
+```sql
+SELECT * FROM tbl;
+```
+
+| i | j  |
+|--:|---:|
+| 1 | 42 |
+
+These error messages can be avoided by explicitly handling conflicts.
+DuckDB supports two such clauses: [`ON CONFLICT DO NOTHING`](#do-nothing-clause) and [`ON CONFLICT DO UPDATE SET ...`](#do-update-clause-upsert).
 
 ### `DO NOTHING` Clause
 
@@ -107,23 +132,28 @@ For example:
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
-INSERT INTO tbl VALUES (1, 42);
-INSERT INTO tbl VALUES (1, 84) ON CONFLICT DO NOTHING;
+INSERT INTO tbl
+    VALUES (1, 42);
+INSERT INTO tbl
+    VALUES (1, 84)
+    ON CONFLICT DO NOTHING;
 ```
 
 These statements finish successfully and leaves the table with the row `<i: 1, j: 42>`.
 
-#### Shorthand
+#### Shorthand for `DO NOTHING`
 
 The `INSERT OR IGNORE INTO ...` statement is a shorter syntax alternative to `INSERT INTO ... ON CONFLICT DO NOTHING`.
 For example, the following statements are equivalent:
 
 ```sql
-INSERT OR IGNORE INTO tbl VALUES (1, 84);
-INSERT INTO tbl VALUES (1, 84) ON CONFLICT DO NOTHING;
+INSERT OR IGNORE INTO tbl
+    VALUES (1, 84);
+INSERT INTO tbl
+    VALUES (1, 84) ON CONFLICT DO NOTHING;
 ```
 
-### `DO UPDATE` Clause
+### `DO UPDATE` Clause (Upsert)
 
 The `DO UPDATE` clause causes the `INSERT` to turn into an `UPDATE` on the conflicting row(s) instead.
 The `SET` expressions that follow determine how these rows are updated. The expressions can use the special virtual table `EXCLUDED`, which contains the conflicting values for the row.
@@ -134,14 +164,23 @@ Because we need a way to refer to both the **to-be-inserted** tuple and the **ex
 When the `EXCLUDED` qualifier is provided, the reference refers to the **to-be-inserted** tuple, otherwise it refers to the **existing** tuple.
 This special qualifier can be used within the `WHERE` clauses and `SET` expressions of the `ON CONFLICT` clause.
 
+```sql
+CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
+INSERT INTO tbl VALUES (1, 42);
+INSERT INTO tbl VALUES (1, 52), (1, 62) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+```
+
 #### Examples
 
 An example using `DO UPDATE` is the following:
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
-INSERT INTO tbl VALUES (1, 42);
-INSERT INTO tbl VALUES (1, 84) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+INSERT INTO tbl
+    VALUES (1, 42);
+INSERT INTO tbl
+    VALUES (1, 84)
+    ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
 SELECT * FROM tbl;
 ```
 
@@ -153,9 +192,14 @@ Rearranging columns and using `BY NAME` is also possible:
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
-INSERT INTO tbl VALUES (1, 42);
-INSERT INTO tbl (j, i) VALUES (168, 1) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
-INSERT INTO tbl BY NAME (SELECT 1 AS i, 336 AS j) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+INSERT INTO tbl
+    VALUES (1, 42);
+INSERT INTO tbl (j, i)
+    VALUES (168, 1)
+    ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+INSERT INTO tbl
+    BY NAME (SELECT 1 AS i, 336 AS j)
+    ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
 SELECT * FROM tbl;
 ```
 
@@ -171,16 +215,24 @@ For example, given the following input table:
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
-INSERT INTO tbl VALUES (1, 42);
+INSERT INTO tbl
+    VALUES (1, 42);
 ```
 
 These statements are equivalent:
 
 ```sql
-INSERT OR REPLACE INTO tbl VALUES (1, 84);
-INSERT INTO tbl VALUES (1, 84) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
-INSERT INTO tbl (j, i) VALUES (84, 1) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
-INSERT INTO tbl BY NAME (SELECT 84 AS j, 1 AS i) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+INSERT OR REPLACE INTO tbl
+    VALUES (1, 84);
+INSERT INTO tbl
+    VALUES (1, 84)
+    ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+INSERT INTO tbl (j, i)
+    VALUES (84, 1)
+    ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
+INSERT INTO tbl BY NAME
+    (SELECT 84 AS j, 1 AS i)
+    ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
 ```
 
 #### Limitations
@@ -190,8 +242,10 @@ When the `ON CONFLICT ... DO UPDATE` clause is used and a conflict occurs, DuckD
 ```sql
 CREATE TABLE t1 (id INT PRIMARY KEY, val1 DOUBLE, val2 DOUBLE NOT NULL);
 CREATE TABLE t2 (id INT PRIMARY KEY, val1 DOUBLE);
-INSERT INTO t1 VALUES (1, 2, 3);
-INSERT INTO t2 VALUES (1, 5);
+INSERT INTO t1
+    VALUES (1, 2, 3);
+INSERT INTO t2
+    VALUES (1, 5);
 
 INSERT INTO t1 BY NAME (SELECT id, val1 FROM t2)
     ON CONFLICT DO UPDATE
@@ -208,39 +262,83 @@ Constraint Error: NOT NULL constraint failed: t1.val2
 
 A conflict target may be provided as `ON CONFLICT (confict_target)`. This is a group of columns that an index or uniqueness/key constraint is defined on. If the conflict target is omitted, or `PRIMARY KEY` constraint(s) on the table are targeted.
 
-Specifying a conflict target is optional unless using a [`DO UPDATE`](#do-update-clause) and there are multiple unique/primary key constraints on the table.
+Specifying a conflict target is optional unless using a [`DO UPDATE`](#do-update-clause-upsert) and there are multiple unique/primary key constraints on the table.
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT UNIQUE, k INT);
-INSERT INTO tbl VALUES (1, 20, 300);
-INSERT INTO tbl VALUES (1, 40, 700) ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k;
--- tbl will contain <1, 20, 1400>
-INSERT INTO tbl VALUES (1, 20, 900) ON CONFLICT (j) DO UPDATE SET k = 5 * EXCLUDED.k;
--- tbl will contain <1, 20, 4500> 
+INSERT INTO tbl
+    VALUES (1, 20, 300);
+SELECT * FROM tbl;
 ```
+
+| i | j  |  k  |
+|--:|---:|----:|
+| 1 | 20 | 300 |
+
+```sql
+INSERT INTO tbl
+    VALUES (1, 40, 700)
+    ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k;
+```
+
+| i | j  |  k   |
+|--:|---:|-----:|
+| 1 | 20 | 1400 |
+
+```sql
+INSERT INTO tbl
+    VALUES (1, 20, 900)
+    ON CONFLICT (j) DO UPDATE SET k = 5 * EXCLUDED.k;
+```
+
+| i | j  |  k   |
+|--:|---:|-----:|
+| 1 | 20 | 4500 |
 
 When a conflict target is provided, you can further filter this with a `WHERE` clause, that should be met by all conflicts.
 
 ```sql
-INSERT INTO tbl VALUES (1, 40, 700) ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k WHERE k < 100;
+INSERT INTO tbl
+    VALUES (1, 40, 700)
+    ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k WHERE k < 100;
 ```
 
 ### Multiple Tuples Conflicting on the Same Key
 
-Having multiple tuples conflicting on the same key is not supported. For example:
+Currently, DuckDB's `ON CONFLICT DO UPDATE` clauses feature is limited to enforce constraints between existing and newly inserted data.
+In other words, having multiple tuples conflicting on the same key is not supported and if the newly inserted data has duplicate rows, an error message will be thrown.
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
-INSERT INTO tbl VALUES (1, 42);
-INSERT INTO tbl VALUES (1, 84), (1, 168) ON CONFLICT DO NOTHING;
+INSERT INTO tbl
+    VALUES (1, 42);
+INSERT INTO tbl
+    VALUES (1, 84), (1, 168)
+    ON CONFLICT DO UPDATE SET j = j + EXCLUDED.j;
 ```
 
-Running this returns the following message.
+This returns the following message.
 
 ```text
 Error: Invalid Input Error: ON CONFLICT DO UPDATE can not update the same row twice in the same command.
 Ensure that no rows proposed for insertion within the same command have duplicate constrained values
 ```
+
+To work around this, enforce uniqueness using [`DISTINCT ON`](../query_syntax/select#distinct-on-clause). For example:
+
+```sql
+CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
+INSERT INTO tbl
+    VALUES (1, 42);
+INSERT INTO tbl
+    SELECT DISTINCT ON(i) i, j FROM VALUES (1, 84), (1, 168) AS t (i, j)
+    ON CONFLICT DO UPDATE SET j = j + EXCLUDED.j;
+SELECT * FROM tbl;
+```
+
+| i |  j  |
+|--:|----:|
+| 1 | 126 |
 
 ## `RETURNING` Clause
 
@@ -252,7 +350,7 @@ For example:
 
 ```sql
 CREATE TABLE t1 (i INT);
-INSERT INTO t1 
+INSERT INTO t1
     SELECT 42
     RETURNING *;
 ```
@@ -267,8 +365,8 @@ A more complex example that includes an expression in the `RETURNING` clause:
 
 ```sql
 CREATE TABLE t2 (i INT, j INT);
-INSERT INTO t2 
-    SELECT 2 AS i, 3 AS j 
+INSERT INTO t2
+    SELECT 2 AS i, 3 AS j
     RETURNING *, i * j AS i_times_j;
 ```
 
@@ -283,8 +381,8 @@ The next example shows a situation where the `RETURNING` clause is more helpful.
 ```sql
 CREATE TABLE t3 (i INT PRIMARY KEY, j INT);
 CREATE SEQUENCE 't3_key';
-INSERT INTO t3 
-    SELECT nextval('t3_key') AS i, 42 AS j 
+INSERT INTO t3
+    SELECT nextval('t3_key') AS i, 42 AS j
     UNION ALL
     SELECT nextval('t3_key') AS i, 43 AS j
     RETURNING *;
