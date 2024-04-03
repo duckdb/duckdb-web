@@ -16,7 +16,7 @@ Below is a list of currently supported expressions that can be created through t
 
 This expression references a column by name.
 
-```py
+```python
 import duckdb
 import pandas as pd
 
@@ -46,7 +46,7 @@ This expression selects all columns of the input source.
 Optionally it's possible to provide an `exclude` list to filter out columns of the table.
 This `exclude` list can contain either strings or Expressions.
 
-```py
+```python
 import duckdb
 import pandas as pd
 
@@ -66,7 +66,7 @@ print(res)
 
 This expression contains a single value.
 
-```py
+```python
 import duckdb
 import pandas as pd
 
@@ -88,7 +88,7 @@ This expression contains a `CASE WHEN (...) THEN (...) ELSE (...) END` expressio
 By default `ELSE` is `NULL` and it can be set using `.else(value = ...)`.
 Additional `WHEN (...) THEN (...)` blocks can be added with `.when(condition = ..., value = ...)`.
 
-```py
+```python
 import duckdb
 import pandas as pd
 from duckdb import (
@@ -119,7 +119,7 @@ print(res)
 This expression contains a function call.
 It can be constructed by providing the function name and an arbitrary amount of Expressions as arguments.
 
-```py
+```python
 import duckdb
 import pandas as pd
 from duckdb import (
