@@ -120,7 +120,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Return Type** | Same type as `expr` |
-| **Description** | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); null if no such row. |
+| **Description** | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); `NULL` if no such row. |
 | **Aliases** | `nth_value(column, 2)` |
 
 ### `ntile(num_buckets)`
@@ -174,7 +174,7 @@ The `first` and `last` aggregate functions are shadowed by the respective genera
 
 All [general-purpose window functions](#general-purpose-window-functions) that accept `IGNORE NULLS` respect nulls by default. This default behavior can optionally be made explicit via `RESPECT NULLS`.
 
-In contrast, all [aggregate window functions](#aggregate-window-functions) (except for `list` and its aliases, which can be made to ignore nulls via a `FILTER`) ignore nulls and do not accept `RESPECT NULLS`. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a null value of `column` have the same value of `cumulativeColumn` as the row that preceeds them.
+In contrast, all [aggregate window functions](#aggregate-window-functions) (except for `list` and its aliases, which can be made to ignore nulls via a `FILTER`) ignore nulls and do not accept `RESPECT NULLS`. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a `NULL` value of `column` have the same value of `cumulativeColumn` as the row that preceeds them.
 
 ## Evaluation
 
