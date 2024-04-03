@@ -34,13 +34,13 @@ The table below shows the available general window functions.
 |:--|:-------|
 | [`cume_dist()`](#cume_dist) | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. |
 | [`dense_rank()`](#dense_rank) | The rank of the current row *without gaps*; this function counts peer groups. |
-| [`first(expr[, IGNORE NULLS])`](#firstexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
-| [`first_value(expr[, IGNORE NULLS])`](#first_valueexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
-| [`lag(expr[, offset[, default]][, IGNORE NULLS])`](#lagexpr-offset-default-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) before the current row within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
-| [`last(expr[, IGNORE NULLS])`](#lastexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the last row  (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
-| [`last_value(expr[, IGNORE NULLS])`](#last_valueexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the last row  (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
-| [`lead(expr[, offset[, default]][, IGNORE NULLS])`](#leadexpr-offset-default-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
-| [`nth_value(expr, nth[, IGNORE NULLS])`](#nth_valueexpr-nth-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| [`first(expr[ IGNORE NULLS])`](#firstexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| [`first_value(expr[ IGNORE NULLS])`](#first_valueexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| [`lag(expr[, offset[, default]][ IGNORE NULLS])`](#lagexpr-offset-default-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) before the current row within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| [`last(expr[ IGNORE NULLS])`](#lastexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the last row  (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| [`last_value(expr[ IGNORE NULLS])`](#last_valueexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the last row  (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| [`lead(expr[, offset[, default]][ IGNORE NULLS])`](#leadexpr-offset-default-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| [`nth_value(expr, nth[ IGNORE NULLS])`](#nth_valueexpr-nth-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
 | [`ntile(num_buckets)`](#ntilenum_buckets) | An integer ranging from 1 to `num_buckets`, dividing the partition as equally as possible. |
 | [`percent_rank()`](#percent_rank) | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. |
 | [`rank_dense()`](#rank_dense) | The rank of the current row *with gaps*; same as `row_number` of its first peer. |
@@ -63,7 +63,7 @@ The table below shows the available general window functions.
 | **Description** | The rank of the current row *without gaps*; this function counts peer groups. |
 | **Example** | `dense_rank()` |
 
-### `first(expr[, IGNORE NULLS])`
+### `first(expr[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -72,7 +72,7 @@ The table below shows the available general window functions.
 | **Example** | `first(column)` |
 | **Alias** | `first_value(column)` |
 
-### `first_value(expr[, IGNORE NULLS])`
+### `first_value(expr[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -81,7 +81,7 @@ The table below shows the available general window functions.
 | **Example** | `first_value(column)` |
 | **Alias** | `first(column)` |
 
-### `lag(expr[, offset[, default]][, IGNORE NULLS])`
+### `lag(expr[, offset[, default]][ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -89,7 +89,7 @@ The table below shows the available general window functions.
 | **Description** | Returns `expr` evaluated at the row that is `offset` rows (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) before the current row within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
 | **Aliases** | `lag(column, 3, 0)` |
 
-### `last(expr[, IGNORE NULLS])`
+### `last(expr[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -98,7 +98,7 @@ The table below shows the available general window functions.
 | **Example** | `last(column)` |
 | **Alias** | `last_value(column)` |
 
-### `last_value(expr[, IGNORE NULLS])`
+### `last_value(expr[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -107,7 +107,7 @@ The table below shows the available general window functions.
 | **Example** | `last_value(column)` |
 | **Alias** | `last(column)` |
 
-### `lead(expr[, offset[, default]][, IGNORE NULLS])`
+### `lead(expr[, offset[, default]][ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -115,7 +115,7 @@ The table below shows the available general window functions.
 | **Description** | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
 | **Aliases** | `lead(column, 3, 0)` |
 
-### `nth_value(expr, nth[, IGNORE NULLS])`
+### `nth_value(expr, nth[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
