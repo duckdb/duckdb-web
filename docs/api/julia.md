@@ -75,7 +75,7 @@ using DuckDB, DataFrames, Dates
 db = DuckDB.DB()
 # create a table
 DBInterface.execute(db, "CREATE OR REPLACE
-                         TABLE data(id INT PRIMARY KEY, value FLOAT,
+                         TABLE data(id INTEGER PRIMARY KEY, value FLOAT,
                          timestamp TIMESTAMP, date DATE)")
 # create data to insert
 len = 100
@@ -106,7 +106,7 @@ Within a Julia process, tasks are able to concurrently read and write to the dat
 using Dates, DataFrames, DuckDB
 db = DuckDB.DB()
 DBInterface.connect(db)
-DBInterface.execute(db, "CREATE OR REPLACE TABLE data (date TIMESTAMP, id INT)")
+DBInterface.execute(db, "CREATE OR REPLACE TABLE data (date TIMESTAMP, id INTEGER)")
 
 function run_reader(db)
     # create a DuckDB connection specifically for this task

@@ -108,7 +108,7 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 For each table, the [`rowid` pseudocolumn](https://docs.oracle.com/cd/B19306_01/server.102/b14200/pseudocolumns008.htm) returns the row identifiers based on the physical storage.
 
 ```sql
-CREATE TABLE t (id INT, content STRING);
+CREATE TABLE t (id INTEGER, content STRING);
 INSERT INTO t VALUES (42, 'hello'), (43, 'world');
 SELECT rowid, id, content FROM t;
 ```

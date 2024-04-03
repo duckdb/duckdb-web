@@ -62,10 +62,10 @@ DuckDB's SQL dialect allows using the underscore character `_` in numeric litera
 ### Examples
 
 ```sql
-SELECT 100_000_000;      -- 100000000
-SELECT '0xFF_FF'::INT;   -- 65535
-SELECT 1_2.1_2E0_1;      -- 121.2
-SELECT '0b0_1_0_1'::INT; -- 5
+SELECT 100_000_000;          -- 100000000
+SELECT '0xFF_FF'::INTEGER;   -- 65535
+SELECT 1_2.1_2E0_1;          -- 121.2
+SELECT '0b0_1_0_1'::INTEGER; -- 5
 ```
 
 ## Rules for Case-Sensitivity
@@ -107,8 +107,8 @@ To change this behavior, set the `preserve_identifier_case` [configuration optio
 In case of a conflict, when the same identifier is spelt with different cases, one will be selected randomly. For example:
 
 ```sql
-CREATE TABLE t1 (idfield INT, x INT);
-CREATE TABLE t2 (IdField INT, y INT);
+CREATE TABLE t1 (idfield INTEGER, x INTEGER);
+CREATE TABLE t2 (IdField INTEGER, y INTEGER);
 INSERT INTO t1 VALUES (1, 123);
 INSERT INTO t2 VALUES (1, 456);
 SELECT * FROM t1 NATURAL JOIN t2;

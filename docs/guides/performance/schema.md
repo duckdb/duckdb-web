@@ -26,7 +26,7 @@ SELECT avg(extract('day' FROM creationDate)) FROM Comment;
 Second, we use the `VARCHAR` type and use string operations:
 
 ```sql
-SELECT avg(CAST(creationDate[9:10] AS INT)) FROM Comment;
+SELECT avg(CAST(creationDate[9:10] AS INTEGER)) FROM Comment;
 ```
 
 The results of the microbenchmark are as follows:

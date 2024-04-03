@@ -209,7 +209,7 @@ CREATE VIEW postgres_db.v1 AS SELECT 42;
 
 ```sql
 CREATE SCHEMA postgres_db.s1;
-CREATE TABLE postgres_db.s1.integers (i INT);
+CREATE TABLE postgres_db.s1.integers (i INTEGER);
 INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
 ```

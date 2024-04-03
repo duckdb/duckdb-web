@@ -230,7 +230,7 @@ Now that the CSV has been written, a table can be created with the desired schem
 ```sql
 .mode csv
 .output
-CREATE TABLE test_table (col_1 INT, col_2 INT);
+CREATE TABLE test_table (col_1 INTEGER, col_2 INTEGER);
 .import import_example.csv test_table --skip 1
 ```
 

@@ -174,7 +174,7 @@ CREATE VIEW mysql_db.v1 AS SELECT 42;
 
 ```sql
 CREATE SCHEMA mysql_db.s1;
-CREATE TABLE mysql_db.s1.integers (i INT);
+CREATE TABLE mysql_db.s1.integers (i INTEGER);
 INSERT INTO mysql_db.s1.integers VALUES (42);
 SELECT * FROM mysql_db.s1.integers;
 ```

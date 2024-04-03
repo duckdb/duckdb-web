@@ -89,7 +89,7 @@ Lambda functions confirm to scoping rules in the following order:
 * macro parameters
 
 ```sql
-CREATE TABLE tbl (x INT);
+CREATE TABLE tbl (x INTEGER);
 INSERT INTO tbl VALUES (10);
 SELECT apply([1, 2], x -> apply([4], x -> x + tbl.x)[1] + x) FROM tbl;
 ```

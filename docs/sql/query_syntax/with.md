@@ -111,7 +111,7 @@ FROM
 ![Example tree graph](/images/examples/with-recursive-tree-example.png)
 
 ```sql
-CREATE TABLE tag (id INT, name VARCHAR, subclassof INT);
+CREATE TABLE tag (id INTEGER, name VARCHAR, subclassof INTEGER);
 INSERT INTO tag VALUES
     (1, 'U2',     5),
     (2, 'Blur',   5),
@@ -155,7 +155,7 @@ Take the following directed graph from the [LDBC Graphalytics benchmark](https:/
 ![Example simple graph](/images/examples/with-recursive-graph-example.png)
 
 ```sql
-CREATE TABLE edge (node1id INT, node2id INT);
+CREATE TABLE edge (node1id INTEGER, node2id INTEGER);
 INSERT INTO edge
     VALUES
         (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5), (3, 8), (3, 10),

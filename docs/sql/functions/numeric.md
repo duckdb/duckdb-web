@@ -90,8 +90,8 @@ The table below shows the available mathematical functions.
 | [`power(x, y)`](#powerx-y) | Alias of `pow`. computes `x` to the power of `y`. |
 | [`radians(x)`](#radiansx) | Converts degrees to radians. |
 | [`random()`](#random) | Returns a random number between 0 and 1. |
-| [`round_even(v NUMERIC, s INT)`](#round_evenv-numeric-s-int) | Alias of `roundbankers(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
-| [`round(v NUMERIC, s INT)`](#roundv-numeric-s-int) | Round to `s` decimal places. Values `s < 0` are allowed. |
+| [`round_even(v NUMERIC, s INTEGER)`](#round_evenv-numeric-s-integer) | Alias of `roundbankers(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
+| [`round(v NUMERIC, s INTEGER)`](#roundv-numeric-s-integer) | Round to `s` decimal places. Values `s < 0` are allowed. |
 | [`setseed(x)`](#setseedx) | Sets the seed to be used for the random function. |
 | [`sign(x)`](#signx) | Returns the sign of `x` as -1, 0 or 1. |
 | [`signbit(x)`](#signbitx) | Returns whether the signbit is set or not. |
@@ -448,7 +448,7 @@ The table below shows the available mathematical functions.
 | **Example** | `random()` |
 | **Result** | various |
 
-### `round_even(v NUMERIC, s INT)`
+### `round_even(v NUMERIC, s INTEGER)`
 
 <div class="nostroke_table"></div>
 
@@ -456,7 +456,7 @@ The table below shows the available mathematical functions.
 | **Example** | `round_even(24.5, 0)` |
 | **Result** | `24.0` |
 
-### `round(v NUMERIC, s INT)`
+### `round(v NUMERIC, s INTEGER)`
 
 <div class="nostroke_table"></div>
 

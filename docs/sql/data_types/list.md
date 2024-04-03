@@ -25,7 +25,7 @@ SELECT [['duck', 'goose', 'heron'], NULL, ['frog', 'toad'], []];
 -- Create a list with the list_value function
 SELECT list_value(1, 2, 3);
 -- Create a table with an integer list column and a varchar list column
-CREATE TABLE list_table (int_list INT[], varchar_list VARCHAR[]);
+CREATE TABLE list_table (int_list INTEGER[], varchar_list VARCHAR[]);
 ```
 
 ## Retrieving from Lists

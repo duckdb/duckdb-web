@@ -83,7 +83,7 @@ The following dependencies are tracked and thus will raise an error if the user 
 Currently, dependencies are not tracked for views. For example, if a view is created that references a table and the table is dropped, then the view will be in an invalid state:
 
 ```sql
-CREATE TABLE tbl (i INT);
+CREATE TABLE tbl (i INTEGER);
 CREATE VIEW v AS
     SELECT i FROM tbl;
 DROP TABLE tbl RESTRICT;

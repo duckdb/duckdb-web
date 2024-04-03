@@ -21,7 +21,7 @@ SELECT array_value(1, 2, 3);
 -- You can always implicitly cast an array to a list (and use list functions, like list_extract, '[i]')
 SELECT array_value(1, 2, 3)[2];
 -- You can cast from a list to an array, but the dimensions have to match up!
-SELECT [3, 2, 1]::INT[3];
+SELECT [3, 2, 1]::INTEGER[3];
 -- Arrays can be nested
 SELECT array_value(array_value(1, 2), array_value(3, 4), array_value(5, 6));
 -- Arrays can store structs
@@ -33,7 +33,7 @@ SELECT array_value({'a': 1, 'b': 2}, {'a': 3, 'b': 4});
 Arrays can be created using the `⟨TYPE_NAME⟩[⟨LENGTH⟩]` syntax. For example, to create an array field for 3 integers, run:
 
 ```sql
-CREATE TABLE array_table (id INT, arr INT[3]);
+CREATE TABLE array_table (id INTEGER, arr INTEGER[3]);
 INSERT INTO array_table VALUES (10, [1, 2, 3]), (20, [4, 5, 6]);
 ```
 
@@ -83,8 +83,8 @@ In the following, `l1` stands for the 3-element list created by `array_value(1.0
 
 ```sql
 -- create sample data
-CREATE TABLE x (i INT, v FLOAT[3]);
-CREATE TABLE y (i INT, v FLOAT[3]);
+CREATE TABLE x (i INTEGER, v FLOAT[3]);
+CREATE TABLE y (i INTEGER, v FLOAT[3]);
 INSERT INTO x VALUES (1, array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT));
 INSERT INTO y VALUES (1, array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT));
 -- compute cross product
