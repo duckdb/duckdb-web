@@ -113,7 +113,7 @@ INSERT INTO tbl VALUES (1, 84) ON CONFLICT DO NOTHING;
 
 These statements finish successfully and leaves the table with the row `<i: 1, j: 42>`.
 
-#### Shorthand
+#### Shorthand for `DO NOTHING`
 
 The `INSERT OR IGNORE INTO ...` statement is a shorter syntax alternative to `INSERT INTO ... ON CONFLICT DO NOTHING`.
 For example, the following statements are equivalent:
@@ -123,7 +123,7 @@ INSERT OR IGNORE INTO tbl VALUES (1, 84);
 INSERT INTO tbl VALUES (1, 84) ON CONFLICT DO NOTHING;
 ```
 
-### `DO UPDATE` Clause
+### `DO UPDATE` Clause (Upsert)
 
 The `DO UPDATE` clause causes the `INSERT` to turn into an `UPDATE` on the conflicting row(s) instead.
 The `SET` expressions that follow determine how these rows are updated. The expressions can use the special virtual table `EXCLUDED`, which contains the conflicting values for the row.
@@ -208,21 +208,45 @@ Constraint Error: NOT NULL constraint failed: t1.val2
 
 A conflict target may be provided as `ON CONFLICT (confict_target)`. This is a group of columns that an index or uniqueness/key constraint is defined on. If the conflict target is omitted, or `PRIMARY KEY` constraint(s) on the table are targeted.
 
-Specifying a conflict target is optional unless using a [`DO UPDATE`](#do-update-clause) and there are multiple unique/primary key constraints on the table.
+Specifying a conflict target is optional unless using a [`DO UPDATE`](#do-update-clause-upsert) and there are multiple unique/primary key constraints on the table.
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT UNIQUE, k INT);
-INSERT INTO tbl VALUES (1, 20, 300);
-INSERT INTO tbl VALUES (1, 40, 700) ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k;
--- tbl will contain <1, 20, 1400>
-INSERT INTO tbl VALUES (1, 20, 900) ON CONFLICT (j) DO UPDATE SET k = 5 * EXCLUDED.k;
--- tbl will contain <1, 20, 4500> 
+INSERT INTO tbl
+    VALUES (1, 20, 300);
+SELECT * FROM tbl;
 ```
+
+| i | j  |  k  |
+|--:|---:|----:|
+| 1 | 20 | 300 |
+
+```sql
+INSERT INTO tbl
+    VALUES (1, 40, 700)
+    ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k;
+```
+
+| i | j  |  k   |
+|--:|---:|-----:|
+| 1 | 20 | 1400 |
+
+```sql
+INSERT INTO tbl
+    VALUES (1, 20, 900)
+    ON CONFLICT (j) DO UPDATE SET k = 5 * EXCLUDED.k;
+```
+
+| i | j  |  k   |
+|--:|---:|-----:|
+| 1 | 20 | 4500 |
 
 When a conflict target is provided, you can further filter this with a `WHERE` clause, that should be met by all conflicts.
 
 ```sql
-INSERT INTO tbl VALUES (1, 40, 700) ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k WHERE k < 100;
+INSERT INTO tbl
+    VALUES (1, 40, 700)
+    ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k WHERE k < 100;
 ```
 
 ### Multiple Tuples Conflicting on the Same Key
@@ -231,8 +255,11 @@ Having multiple tuples conflicting on the same key is not supported. For example
 
 ```sql
 CREATE TABLE tbl (i INT PRIMARY KEY, j INT);
-INSERT INTO tbl VALUES (1, 42);
-INSERT INTO tbl VALUES (1, 84), (1, 168) ON CONFLICT DO NOTHING;
+INSERT INTO tbl
+    VALUES (1, 42);
+INSERT INTO tbl
+    VALUES (1, 84), (1, 168)
+    ON CONFLICT DO NOTHING;
 ```
 
 Running this returns the following message.
@@ -252,7 +279,7 @@ For example:
 
 ```sql
 CREATE TABLE t1 (i INT);
-INSERT INTO t1 
+INSERT INTO t1
     SELECT 42
     RETURNING *;
 ```
@@ -267,8 +294,8 @@ A more complex example that includes an expression in the `RETURNING` clause:
 
 ```sql
 CREATE TABLE t2 (i INT, j INT);
-INSERT INTO t2 
-    SELECT 2 AS i, 3 AS j 
+INSERT INTO t2
+    SELECT 2 AS i, 3 AS j
     RETURNING *, i * j AS i_times_j;
 ```
 
@@ -283,8 +310,8 @@ The next example shows a situation where the `RETURNING` clause is more helpful.
 ```sql
 CREATE TABLE t3 (i INT PRIMARY KEY, j INT);
 CREATE SEQUENCE 't3_key';
-INSERT INTO t3 
-    SELECT nextval('t3_key') AS i, 42 AS j 
+INSERT INTO t3
+    SELECT nextval('t3_key') AS i, 42 AS j
     UNION ALL
     SELECT nextval('t3_key') AS i, 43 AS j
     RETURNING *;
