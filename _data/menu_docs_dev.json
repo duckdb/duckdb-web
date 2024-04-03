@@ -1152,6 +1152,14 @@
                   "url": "export_pandas"
                 },
                 {
+                  "page": "Import from Numpy",
+                  "url": "import_numpy"
+                },
+                {
+                  "page": "Export to Numpy",
+                  "url": "export_numpy"
+                },
+                {
                   "page": "SQL on Arrow",
                   "url": "sql_on_arrow"
                 },
