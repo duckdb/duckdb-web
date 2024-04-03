@@ -24,7 +24,7 @@ SELECT amount / sum(amount) OVER (PARTITION BY region) FROM sales;
 
 <div id="rrdiagram"></div>
 
-Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause and use the `OVER window-name` syntax.
+Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause and use the `OVER ⟨window-name⟩` syntax.
 
 ## General-Purpose Window Functions
 
