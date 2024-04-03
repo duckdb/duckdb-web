@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: sqllogictest - Loops
+title: Loops
 redirect_from:
   - /dev/sqllogictest/loops
 ---

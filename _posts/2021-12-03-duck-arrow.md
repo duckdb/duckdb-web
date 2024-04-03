@@ -82,6 +82,7 @@ In this section, we will look at some basic examples of the code needed to read 
 ### Setup
 
 First we need to install DuckDB and Arrow. The installation process for both libraries in Python and R is shown below.
+
 ```bash
 # Python Install
 pip install duckdb
@@ -94,10 +95,10 @@ install.packages("duckdb")
 install.packages("arrow")
 ```
 
-To execute the sample-examples in this section, we need to download the following custom parquet files:
- - <https://github.com/duckdb/duckdb-web/blob/main/_posts/data/integers.parquet?raw=true>
- - <https://github.com/cwida/duckdb-data/releases/download/v1.0/lineitemsf1.snappy.parquet>
+To execute the sample-examples in this section, we need to download the following custom Parquet files:
 
+* <https://github.com/duckdb/duckdb-web/blob/main/_posts/data/integers.parquet?raw=true>
+* <https://github.com/cwida/duckdb-data/releases/download/v1.0/lineitemsf1.snappy.parquet>
 
 #### Python
 
@@ -372,6 +373,6 @@ In the table above, we also depict the comparison of peak memory usage between D
 
 In this blog post, we mainly showcased how to execute queries on Arrow datasets with DuckDB. There are additional libraries that can also consume the Arrow format but they have different purposes and capabilities. As always, we are happy to hear if you want to see benchmarks with different tools for a post in the future! Feel free to drop us an [email](mailto:pedro@duckdblabs.com;jon@voltrondata.com) or share your thoughts directly in the Hacker News post.
 
-Last but not least, if you encounter any problems when using our integration, please open an issue in either [DuckDB's - issue tracker](https://github.com/duckdb/duckdb/issues)  or [Arrow's - issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.
+Last but not least, if you encounter any problems when using our integration, please open an issue in either [DuckDB's issue tracker](https://github.com/duckdb/duckdb/issues) or [Arrow's issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.
 
 [^1]: In Arrow 6.0.0, `to_arrow()` currently returns the full table, but will allow full streaming in our upcoming 7.0.0 release.

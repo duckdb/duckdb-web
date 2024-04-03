@@ -72,7 +72,7 @@ FlightDate|UniqueCarrier|OriginCityName|DestCityName
 1988-01-03|AA|New York, NY|Los Angeles, CA
 ```
 
-Reading these when unifying column names **by position** results in an error - as the two files have a different number of columns. When specifying the `union_by_name` option, the columns are correctly unified, and any missing values are set to `NULL`.
+Reading these when unifying column names **by position** results in an error – as the two files have a different number of columns. When specifying the `union_by_name` option, the columns are correctly unified, and any missing values are set to `NULL`.
 
 ```sql
 SELECT * FROM read_csv(['flights3.csv', 'flights4.csv'], union_by_name = true);

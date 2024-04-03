@@ -31,10 +31,10 @@ There have been too many changes to discuss them each in detail, but we would li
 * [Adaptive Lossless Floating-Point Compression (ALP)](#adaptive-lossless-floating-point-compression-alp)
 * [CLI Improvements](#cli-improvements)
 * [Final Thoughts](#final-thoughts)
-    * [New Features](#new-features)
-    * [New Functions](#new-functions)
-    * [Storage Improvements](#storage-improvements)
-    * [Optimizations](#optimizations)
+  * [New Features](#new-features)
+  * [New Functions](#new-functions)
+  * [Storage Improvements](#storage-improvements)
+  * [Optimizations](#optimizations)
 
 Below is a summary of those new features with examples, starting with a change in our SQL dialect that is designed to produce more intuitive results by default.
 
@@ -52,8 +52,9 @@ The `old_implicit_casting` setting can be used to revert this behavior, e.g.:
 
 ```sql
 SET old_implicit_casting = true;
-SELECT substring(42, 1, 1) AS substr;
+SELECT substring(42, 1, 1) AS substr;tw
 ```
+
 ```text
 ┌─────────┐
 │ substr  │
@@ -74,6 +75,7 @@ This aligns DuckDB with Postgres, and makes operations on literals more intuitiv
 SELECT d > '1992-01-01' AS result
 FROM (VALUES (DATE '1992-01-01')) t(d);
 ```
+
 ```text
 ┌─────────┐
 │ result  │
@@ -82,6 +84,7 @@ FROM (VALUES (DATE '1992-01-01')) t(d);
 │ false   │
 └─────────┘
 ```
+
 ```sql
 SELECT d > '1992-01-01'::VARCHAR
 FROM (VALUES (DATE '1992-01-01')) t(d);
@@ -97,18 +100,22 @@ Backward compatibility refers to the ability of a newer DuckDB version to read s
 # write with v0.9
 $ duckdb_092 v092.db
 ```
+
 ```sql
 CREATE TABLE lineitem AS
 FROM lineitem.parquet;
 ```
+
 ```bash
 # read with v0.10
-$ duckdb_0100 v092.db 
+$ duckdb_0100 v092.db
 ```
+
 ```sql
 SELECT l_orderkey, l_partkey, l_comment
 FROM lineitem LIMIT 1;
 ```
+
 ```text
 ┌────────────┬───────────┬─────────────────────────┐
 │ l_orderkey │ l_partkey │        l_comment        │
@@ -128,19 +135,23 @@ Forward compatibility refers to the ability of an older DuckDB version to read s
 # write with v0.10
 $ duckdb_0100 v010.db
 ```
+
 ```sql
 CREATE TABLE lineitem AS
 FROM lineitem.parquet;
 ```
+
 ```bash
 # read with v0.9
 $ duckdb_092 v010.db
 ```
+
 ```sql
 SELECT l_orderkey, l_partkey, l_comment
 FROM lineitem
 LIMIT 1;
 ```
+
 ```text
 ┌────────────┬───────────┬─────────────────────────┐
 │ l_orderkey │ l_partkey │        l_comment        │
@@ -157,7 +168,7 @@ For this release, DuckDB v0.9 is able to read files created by DuckDB v0.10 prov
 * The database file does not contain views
 * The database file does not contain new types (`ARRAY`, `UHUGEINT`)
 * The database file does not contain indexes (`PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`, explicit indexes)
-* The database file does not contain new compression methods (`ALP`). As ALP is automatically used to compress `FLOAT` and `DOUBLE` columns - that means forward compatibility in practice often does not work for `FLOAT` and `DOUBLE` columns unless `ALP` is explicitly disabled through configuration.
+* The database file does not contain new compression methods (`ALP`). As ALP is automatically used to compress `FLOAT` and `DOUBLE` columns – that means forward compatibility in practice often does not work for `FLOAT` and `DOUBLE` columns unless `ALP` is explicitly disabled through configuration.
 
 We expect that as the format stabilizes and matures this will happen less frequently – and we hope to offer better guarantees in allowing DuckDB to read files written by future DuckDB versions.
 
@@ -198,6 +209,7 @@ Fixed-length arrays can be operated on faster than variable-length lists as the 
 SELECT array_cross_product(v, [1, 1, 1]) AS result
 FROM vectors;
 ```
+
 ```text
 ┌───────────────────┐
 │      result       │
@@ -337,7 +349,7 @@ See the [extended CLI docs for more information](/docs/api/cli/overview).
 
 ## Final Thoughts
 
-These were a few highlights - but there are many more features and improvements in this release. Below are a few more highlights. The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0). 
+These were a few highlights – but there are many more features and improvements in this release. Below are a few more highlights. The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
 
 ### New Features
 

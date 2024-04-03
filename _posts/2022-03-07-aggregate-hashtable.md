@@ -12,7 +12,7 @@ Jump [straight to the benchmarks](#experiments)?
 
 ## Introduction
 
-`GROUP BY` changes the result set cardinality - instead of returning the same number of rows of the input (like a normal `SELECT`), `GROUP BY` returns as many rows as there are groups in the data. Consider this (weirdly familiar) example query:
+`GROUP BY` changes the result set cardinality – instead of returning the same number of rows of the input (like a normal `SELECT`), `GROUP BY` returns as many rows as there are groups in the data. Consider this (weirdly familiar) example query:
 
 ```sql
 SELECT

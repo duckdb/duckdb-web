@@ -36,7 +36,7 @@ SELECT "Some Column Name" FROM tbl;
 
 ## `SELECT` List
 
-The `SELECT` clause contains a list of expressions that specify the result of a query. The select list can refer to any columns in the `FROM` clause, and combine them using expressions. As the output of a SQL query is a table - every expression in the `SELECT` clause also has a name. The expressions can be explicitly named using the `AS` clause (e.g., `expr AS name`). If a name is not provided by the user the expressions are named automatically by the system.
+The `SELECT` clause contains a list of expressions that specify the result of a query. The select list can refer to any columns in the `FROM` clause, and combine them using expressions. As the output of a SQL query is a table – every expression in the `SELECT` clause also has a name. The expressions can be explicitly named using the `AS` clause (e.g., `expr AS name`). If a name is not provided by the user the expressions are named automatically by the system.
 
 > Column names are case-insensitive. See the [Rules for Case Sensitivity](../keywords_and_identifiers#rules-for-case-sensitivity) for more details.
 
@@ -61,7 +61,7 @@ SELECT DISTINCT city
 FROM addresses;
 ```
 
-The `DISTINCT` clause can be used to return **only** the unique rows in the result - so that any duplicate rows are filtered out.
+The `DISTINCT` clause can be used to return **only** the unique rows in the result – so that any duplicate rows are filtered out.
 
 > Queries starting with `SELECT DISTINCT` run deduplication, which is an expensive operation. Therefore, only use `DISTINCT` if necessary.
 

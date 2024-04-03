@@ -15,16 +15,15 @@ In this post, we will describe how time works in DuckDB and what time zone funct
 
 <!--more-->
 
-
 ## What is Time?
 
->People assume that time is a strict progression of cause to effect, 
->but actually from a non-linear, non-subjective viewpoint 
->it’s more like a big ball of wibbly wobbly timey wimey stuff. <br/>
+>People assume that time is a strict progression of cause to effect,
+>but actually from a non-linear, non-subjective viewpoint
+>it’s more like a big ball of wibbly wobbly timey wimey stuff.  
 > -- Doctor Who: Blink
 
 Time in databases can be very confusing because the way we talk about time is itself confusing.
-Local time, GMT, UTC, time zones, leap years, proleptic Gregorian calendars - it all looks like a big mess.
+Local time, GMT, UTC, time zones, leap years, proleptic Gregorian calendars – it all looks like a big mess.
 But if you step back, modeling time is actually fairly simple, and can be reduced to two pieces: instants and binning.
 
 ### Instants
@@ -37,17 +36,17 @@ In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00 +00:00`, and t
 In other words, a `TIMESTAMP` column contains instants.
 
 There are three other temporal types in SQL:
-* `DATE` - an integral count of days from a fixed date. In DuckDB, the fixed date is `1970-01-01`, again in UTC.
-* `TIME` - a (positive) count of microseconds up to a single day
-* `INTERVAL` - a set of fields for counting time differences. In DuckDB, intervals count months, days and microseconds. (Months are not completely well-defined, but when present, they represent 30 days.)
+* `DATE` – an integral count of days from a fixed date. In DuckDB, the fixed date is `1970-01-01`, again in UTC.
+* `TIME` – a (positive) count of microseconds up to a single day
+* `INTERVAL` – a set of fields for counting time differences. In DuckDB, intervals count months, days and microseconds. (Months are not completely well-defined, but when present, they represent 30 days.)
 
 None of these other temporal types except `TIME` can have a `WITH TIME ZONE` modifier (and shorter `TZ` suffix),
 but to understand what that modifier means, we first need to talk about *temporal binning*.
 
 ### Temporal Binning
 
-Instants are pretty straightforward - they are just a number - but binning is the part that trips people up.
-Binning is probably a familiar idea if you have worked with continuous data: 
+Instants are pretty straightforward – they are just a number – but binning is the part that trips people up.
+Binning is probably a familiar idea if you have worked with continuous data:
 You break up a set of values into ranges and map each value to the range (or *bin*) that it falls into.
 Temporal binning is just doing this to instants:
 
@@ -56,7 +55,7 @@ Temporal binning is just doing this to instants:
      width=600
      />
 
-Temporal binning systems are often called *calendars*, 
+Temporal binning systems are often called *calendars*,
 but we are going to avoid that term for now because calendars are usually associated with dates,
 and temporal binning also includes rules for time.
 These time rules are called *time zones*, and they also impact where the day boundaries used by the calendar fall.
@@ -66,7 +65,7 @@ For example, here is what the binning for a second time zone looks like at the e
      alt="Two Time Zones at the Epoch"
      width=600
      />
-     
+
 The most confusing thing about temporal binning is that there is more than one way to bin time,
 and it is not always obvious what binning should be used.
 For example, what I mean by "today" is a bin of instants often determined by where I live.
@@ -170,15 +169,15 @@ Note that casting to a string is a binning operation because the text produced c
 
 Because timestamps that require custom binning have a different data type,
 the ICU extension can define additional functions with bindings to `TIMESTAMPTZ`:
-* `+` - Add an `INTERVAL` to a timestamp
-* `-` - Subtract an `INTERVAL` from a timestamp
-* `AGE` - Compute an `INTERVAL` describing the months/days/microseconds between two timestamps (or one timestamp and the current instant).
-* `DATE_DIFF` - Count part boundary crossings between two timestamp
-* `DATE_PART` - Extract a named timestamp part. This includes the part alias functions such as `YEAR`.
-* `DATE_SUB` - Count the number of complete parts between two timestamp
-* `DATE_TRUNC` - Truncate a timestamp to the given precision
-* `LAST_DAY` - Returns the last day of the month
-* `MAKE_TIMESTAMPTZ` - Constructs a `TIMESTAMPTZ` from parts, including an optional final time zone specifier. 
+* `+` – Add an `INTERVAL` to a timestamp
+* `-` – Subtract an `INTERVAL` from a timestamp
+* `AGE` – Compute an `INTERVAL` describing the months/days/microseconds between two timestamps (or one timestamp and the current instant).
+* `DATE_DIFF` – Count part boundary crossings between two timestamp
+* `DATE_PART` – Extract a named timestamp part. This includes the part alias functions such as `YEAR`.
+* `DATE_SUB` – Count the number of complete parts between two timestamp
+* `DATE_TRUNC` – Truncate a timestamp to the given precision
+* `LAST_DAY` – Returns the last day of the month
+* `MAKE_TIMESTAMPTZ` – Constructs a `TIMESTAMPTZ` from parts, including an optional final time zone specifier. 
 
 We have not implemented these functions for `TIMETZ` because this type has limited utility, 
 but it would not be difficult to add in the future.

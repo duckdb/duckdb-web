@@ -256,7 +256,7 @@ Now for some new SQL capabilities beyond the ideas from the prior post!
 
 ## FROM first in SELECT statements
 
-When building a query, the first thing you need to know is where your data is coming `FROM`. Well then why is that the second clause in a `SELECT` statement?? No longer! DuckDB is building SQL as it should have always been - putting the `FROM` clause first! This addresses one of the longest standing complaints about SQL, and the DuckDB team implemented it in 2 days. 
+When building a query, the first thing you need to know is where your data is coming `FROM`. Well then why is that the second clause in a `SELECT` statement?? No longer! DuckDB is building SQL as it should have always been – putting the `FROM` clause first! This addresses one of the longest standing complaints about SQL, and the DuckDB team implemented it in 2 days. 
 
 ```sql
 FROM my_table SELECT my_column;
@@ -444,7 +444,7 @@ Stay tuned for a future post to cover what is happening behind the scenes!
 
 ## List lambda functions
 
-List lambdas allow for operations to be applied to each item in a list. These do not need to be pre-defined - they are created on the fly within the query. 
+List lambdas allow for operations to be applied to each item in a list. These do not need to be pre-defined – they are created on the fly within the query. 
 
 In this example, a lambda function is used in combination with the `list_transform` function to shorten each official ship name. 
 
@@ -476,7 +476,7 @@ SELECT
 
 ## List comprehensions
 
-What if there was a simple syntax to both modify and filter a list? DuckDB takes inspiration from Python’s approach to list comprehensions to dramatically simplify the above examples. List comprehensions are syntactic sugar - these queries are rewritten into lambda expressions behind the scenes!
+What if there was a simple syntax to both modify and filter a list? DuckDB takes inspiration from Python’s approach to list comprehensions to dramatically simplify the above examples. List comprehensions are syntactic sugar – these queries are rewritten into lambda expressions behind the scenes!
 
 Within brackets, first specify the transformation that is desired, then indicate which list should be iterated over, and finally include the filter criteria. 
 

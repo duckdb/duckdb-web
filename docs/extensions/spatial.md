@@ -34,11 +34,11 @@ All of these are implicitly castable to `GEOMETRY` but with a conversion cost, s
 
 The spatial extension implements a large number of scalar functions and overloads. Most of these are implemented using the [GEOS](https://libgeos.org/) library, but we'd like to implement more of them natively in this extension to better utilize DuckDB's vectorized execution and memory management. The following symbols are used to indicate which implementation is used:
 
-🧭 - GEOS - functions that are implemented using the [GEOS](https://libgeos.org/) library
+🧭 – GEOS – functions that are implemented using the [GEOS](https://libgeos.org/) library
 
-🦆 - DuckDB - functions that are implemented natively in this extension that are capable of operating directly on the DuckDB types
+🦆 – DuckDB – functions that are implemented natively in this extension that are capable of operating directly on the DuckDB types
 
-🔄 - `CAST(GEOMETRY)` - functions that are supported by implicitly casting to `GEOMETRY` and then using the `GEOMETRY` implementation
+🔄 – `CAST(GEOMETRY)` – functions that are supported by implicitly casting to `GEOMETRY` and then using the `GEOMETRY` implementation
 
 The currently implemented spatial functions can roughly be categorized into the following groups:
 
@@ -148,7 +148,7 @@ Compute relationships and spatial predicates between geometries.
 
 ## Spatial Table Functions
 
-### `ST_Read()` - Read Spatial Data from Files
+### `ST_Read()` – Read Spatial Data from Files
 
 The spatial extension provides a `ST_Read` table function based on the [GDAL](https://github.com/OSGeo/gdal) translator library to read spatial data from a variety of geospatial vector file formats as if they were DuckDB tables. For example to create a new table from a GeoJSON file, you can use the following query:
 
@@ -193,7 +193,7 @@ We currently support over 50 different formats. You can generate the following t
 | LVBAG          | Kadaster LV BAG Extract 2.0                         | false      | false    | true     | <https://gdal.org/drivers/vector/lvbag.html>         |
 | S57            | IHO S-57 (ENC)                                      | true       | false    | true     | <https://gdal.org/drivers/vector/s57.html>           |
 | DGN            | Microstation DGN                                    | true       | false    | true     | <https://gdal.org/drivers/vector/dgn.html>           |
-| OGR_VRT        | VRT - Virtual Datasource                            | false      | false    | true     | <https://gdal.org/drivers/vector/vrt.html>           |
+| OGR_VRT        | VRT – Virtual Datasource                            | false      | false    | true     | <https://gdal.org/drivers/vector/vrt.html>           |
 | Memory         | Memory                                              | true       | false    | true     |                                                      |
 | CSV            | Comma Separated Value (.csv)                        | true       | false    | true     | <https://gdal.org/drivers/vector/csv.html>           |
 | GML            | Geography Markup Language (GML)                     | true       | false    | true     | <https://gdal.org/drivers/vector/gml.html>           |
@@ -218,7 +218,7 @@ We currently support over 50 different formats. You can generate the following t
 | OSM            | OpenStreetMap XML and PBF                           | false      | false    | true     | <https://gdal.org/drivers/vector/osm.html>           |
 | GPSBabel       | GPSBabel                                            | true       | false    | true     | <https://gdal.org/drivers/vector/gpsbabel.html>      |
 | WFS            | OGC WFS (Web Feature Service)                       | false      | false    | true     | <https://gdal.org/drivers/vector/wfs.html>           |
-| OAPIF          | OGC API - Features                                  | false      | false    | true     | <https://gdal.org/drivers/vector/oapif.html>         |
+| OAPIF          | OGC API – Features                                  | false      | false    | true     | <https://gdal.org/drivers/vector/oapif.html>         |
 | EDIGEO         | French EDIGEO exchange format                       | false      | false    | true     | <https://gdal.org/drivers/vector/edigeo.html>        |
 | SVG            | Scalable Vector Graphics                            | false      | false    | true     | <https://gdal.org/drivers/vector/svg.html>           |
 | ODS            | Open Document/ LibreOffice / OpenOffice Spreadsheet | true       | false    | true     | <https://gdal.org/drivers/vector/ods.html>           |
@@ -242,7 +242,7 @@ We currently support over 50 different formats. You can generate the following t
 Note that far from all of these drivers have been tested properly, and some may require additional options to be passed to work as expected.
 If you run into any issues please first [consult the GDAL docs](https://gdal.org/drivers/vector/index.html).
 
-### `ST_ReadOsm()` - Read Compressed OSM Data
+### `ST_ReadOsm()` – Read Compressed OSM Data
 
 The spatial extension also provides an experimental `ST_ReadOsm()` table function to read compressed OSM data directly from a `.osm.pbf` file.
 

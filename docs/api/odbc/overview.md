@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: ODBC API - Overview
+title: ODBC API Overview
 redirect_from:
   - /docs/api/odbc
   - /docs/api/odbc/

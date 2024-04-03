@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Tableau - A Data Visualization Tool
+title: Tableau – A Data Visualization Tool
 ---
 
 [Tableau](https://www.tableau.com/) is a popular commercial data visualization tool.

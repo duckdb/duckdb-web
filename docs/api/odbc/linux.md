@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: ODBC API - Linux
+title: ODBC API on Linux
 ---
 
 A driver manager is required to manage communication between applications and the ODBC driver.

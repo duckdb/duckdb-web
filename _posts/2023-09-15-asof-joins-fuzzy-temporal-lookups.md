@@ -17,12 +17,12 @@ Then this post is for you!
 
 ## What is an AsOf Join?
 
-Time series data is not always perfectly aligned. 
+Time series data is not always perfectly aligned.
 Clocks may be slightly off, or there may be a delay between cause and effect.
 This can make connecting two sets of ordered data challenging.
 AsOf Joins are a tool for solving this and other similar problems.
 
-One of the problems that AsOf Joins are used to solve is 
+One of the problems that AsOf Joins are used to solve is
 finding the value of a varying property at a specific point in time.
 This use case is so common that it is where the name came from:
 
@@ -410,7 +410,7 @@ Other alternatives combine equi-joins and window functions.
 The equi-join is used to implement the equality matching conditions,
 and the window is used to select the closest inequality.
 We will now look at two different windowing techniques and compare their performance.
-If you wish to skip this section, 
+If you wish to skip this section,
 the bottom line is that while they are sometimes a bit faster,
 the AsOf join has the most consistent behaviour of all the algorithms.
 

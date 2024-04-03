@@ -6,7 +6,7 @@ title: Timestamp with Time Zone Functions
 This section describes functions and operators for examining and manipulating `TIMESTAMP WITH TIME ZONE`
 (or `TIMESTAMPTZ`) values.
 
-Despite the name, these values do not store a time zone - just an instant like `TIMESTAMP`.
+Despite the name, these values do not store a time zone – just an instant like `TIMESTAMP`.
 Instead, they request that the instant be binned and formatted using the current time zone.
 
 Time zone support is not built in but can be provided by an extension,

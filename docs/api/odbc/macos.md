@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: ODBC API - macOS
+title: ODBC API on macOS
 ---
 
 A driver manager is required to manage communication between applications and the ODBC driver.

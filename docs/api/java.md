@@ -168,7 +168,7 @@ try (var allocator = new RootAllocator();
 
 ### Streaming Results
 
-Result streaming is opt-in in the JDBC driver - by setting the `jdbc_stream_results` config to `true` before running a query. The easiest way do that is to pass it in the `Properties` object.
+Result streaming is opt-in in the JDBC driver – by setting the `jdbc_stream_results` config to `true` before running a query. The easiest way do that is to pass it in the `Properties` object.
 
 ```java
 Properties props = new Properties();
