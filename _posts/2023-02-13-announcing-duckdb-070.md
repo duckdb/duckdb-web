@@ -63,15 +63,15 @@ orders
 **Parallel Parquet/CSV Writing.** Parquet and CSV writing are sped up tremendously this release with the [parallel Parquet and CSV writer support](https://github.com/duckdb/duckdb/pull/5756).
 
 | Format  | Old  | New (8T) |
-|---------|------|----------|
-| CSV     | 2.6s | 0.38s    |
+|---------|-----:|---------|
+| CSV     | 2.6s | 0.4s     |
 | Parquet | 7.5s | 1.3s     |
 
 Note that currently the parallel writing is currently limited to non-insertion order preserving - which can be toggled by setting the `preserve_insertion_order` setting to false. In a future release we aim to alleviate this restriction and order parallel insertion order preserving writes as well.
 
 #### Multi-Database Support 
 
-**Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/duckdb/duckdb/pull/5764) to the same DuckDB instance. This easily allows data to be transferred between separate DuckDB database files, and also allows data from separate database files to be combined together in individual queries. Remote DuckDB instances (stored on a network accessible location like Github, for example) may also be attached.
+**Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/duckdb/duckdb/pull/5764) to the same DuckDB instance. This easily allows data to be transferred between separate DuckDB database files, and also allows data from separate database files to be combined together in individual queries. Remote DuckDB instances (stored on a network accessible location like GitHub, for example) may also be attached.
 
 ```sql
 ATTACH 'new_db.db';
@@ -140,11 +140,12 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 
 **Query Building.** This release introduces easier incremental query building using the Python API by allowing relations to be queried. This allows you to decompose long SQL queries into multiple smaller SQL queries, and allows you to easily inspect query intermediates.
 
-```py
+```python
 >>> import duckdb
 >>> lineitem = duckdb.sql('FROM lineitem.parquet')
 >>> lineitem.limit(3).show()
 ```
+
 ```text
 ┌────────────┬───────────┬───────────┬───┬───────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │  l_shipinstruct   │ l_shipmode │      l_comment       │
@@ -157,10 +158,12 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 │ 3 rows                                                                    16 columns (6 shown) │
 └────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
-```py
+
+```python
 >>> lineitem_filtered = duckdb.sql('FROM lineitem WHERE l_orderkey>5000')
 >>> lineitem_filtered.limit(3).show()
 ```
+
 ```text
 ┌────────────┬───────────┬───────────┬───┬────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │ l_shipinstruct │ l_shipmode │      l_comment       │
@@ -173,9 +176,11 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 │ 3 rows                                                                 16 columns (6 shown) │
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
-```py
+
+```python
 >>> duckdb.sql('SELECT MIN(l_orderkey), MAX(l_orderkey) FROM lineitem_filtered').show()
 ```
+
 ```text
 ┌─────────────────┬─────────────────┐
 │ min(l_orderkey) │ max(l_orderkey) │
@@ -185,14 +190,15 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 └─────────────────┴─────────────────┘
 ```
 
-Note that everything is lazily evaluated. The Parquet file is not read from disk until the final query is executed - and queries are optimized in their entirety. Executing the decomposed query will be just as fast as executing the long SQL query all at once.
+Note that everything is lazily evaluated. The Parquet file is not read from disk until the final query is executed – and queries are optimized in their entirety. Executing the decomposed query will be just as fast as executing the long SQL query all at once.
 
 **Python Ingestion APIs.** This release adds several [familiar data ingestion and export APIs](https://github.com/duckdb/duckdb/pull/6015) that follow standard conventions used by other libraries. These functions emit relations as well - which can be directly queried again.
 
-```py
+```python
 >>> lineitem = duckdb.read_csv('lineitem.csv')
 >>> lineitem.limit(3).show()
 ```
+
 ```text
 ┌────────────┬───────────┬───────────┬───┬───────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │  l_shipinstruct   │ l_shipmode │      l_comment       │
@@ -205,9 +211,11 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 │ 3 rows                                                                    16 columns (6 shown) │
 └────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
-```py
+
+```python
 >>> duckdb.sql('select min(l_orderkey) from lineitem').show()
 ```
+
 ```text
 ┌─────────────────┐
 │ min(l_orderkey) │
@@ -219,8 +227,7 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 
 **Polars Integration.** This release adds support for tight integration with the [Polars DataFrame library](https://github.com/pola-rs/polars), similar to our integration with Pandas DataFrames. Results can be converted to Polars DataFrames using the `.pl()` function.
 
-
-```py
+```python
 import duckdb
 duckdb.sql('select 42').pl()
 ```
@@ -238,7 +245,7 @@ shape: (1, 1)
 
 In addition, Polars DataFrames can be directly queried using the SQL interface.
 
-```py
+```python
 import duckdb
 import polars as pl
 df = pl.DataFrame({'a': 42})
@@ -258,7 +265,7 @@ shape: (1, 1)
 
 **fsspec Filesystem Support.** This release adds support for the [fsspec filesystem API](https://github.com/duckdb/duckdb/pull/5829). [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) allows users to define their own filesystem that they can pass to DuckDB. DuckDB will then use this file system to read and write data to and from. This enables support for storage back-ends that may not be natively supported by DuckDB yet, such as FTP.
 
-```py
+```python
 import duckdb
 from fsspec import filesystem
 
@@ -275,4 +282,4 @@ Have a look at the [guide](https://duckdb.org/docs/guides/python/filesystems) fo
 
 #### Final Thoughts
 
-The full release notes can be [found on Github](https://github.com/duckdb/duckdb/releases/tag/v0.7.0). We would like to thank all of the contributors for their hard work on improving DuckDB.
+The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.7.0). We would like to thank all of the contributors for their hard work on improving DuckDB.

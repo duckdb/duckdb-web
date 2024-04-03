@@ -315,19 +315,18 @@ result = merged.groupby(
 
 Both of these optimizations are automatically applied by DuckDB's query optimizer.
 
-
 |           Name           | Time (s) |
-|:--------------------------|----------:|
+|:-------------------------|---------:|
 | DuckDB (1 Thread)        | 1.05     |
 | DuckDB (2 Threads)       | 0.53     |
 | Pandas                   | 15.2     |
-| Pandas (manual pushdown)&nbsp;&nbsp; | 3.78     |
+| Pandas (manual pushdown) | 3.78     |
 
 We see that the basic approach is extremely time consuming compared to the optimized version. This demonstrates the usefulness of the automatic query optimizer. Even after optimizing, the Pandas code is still significantly slower than DuckDB because it stores intermediate results in memory after the individual filters and joins.
 
 ### Takeaway
 
-Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in - and out - of Pandas. DuckDB is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DuckDB uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
+Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in – and out – of Pandas. DuckDB is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DuckDB uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
 
 ## Appendix A: There and back again: Transferring data from Pandas to a SQL engine and back
 
@@ -354,7 +353,6 @@ Transferring query results or tables back from the SQL system into Pandas is ano
 | PostgreSQL to Pandas using temporary CSV file | 1.29     |
 | SQLite to Pandas using read_sql_query         | 5.20     |
 | DuckDB to Pandas                              | 0.04     |
-
 
 ## Appendix B: Comparison to PandaSQL
 
@@ -411,11 +409,11 @@ result = lineitem_pandas_parquet.agg(Sum=('l_extendedprice', 'sum'), Min=('l_ext
 ```
 
 |    Name                       | Time (s) |
-|:-------------------------------|----------:|
+|:------------------------------|---------:|
 | DuckDB (1 Thread)             | 0.16     |
 | DuckDB (2 Threads)            | 0.14     |
 | Pandas                        | 7.87     |
-| Pandas (manual pushdown)&nbsp;&nbsp;      | 0.17     |
+| Pandas (manual pushdown)      | 0.17     |
 
 We can see that the performance difference between doing the pushdown and not doing the pushdown is dramatic. When we perform the pushdown, Pandas has performance in the same ballpark as DuckDB. Without the pushdown, however, it is loading the entire file from disk, including the other 15 columns that are not required to answer the query.
 
@@ -440,11 +438,11 @@ GROUP BY l_returnflag,
 
 For Pandas we again create two versions. A naive version, and a manually optimized version. The exact code used can be found [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing).
 
-|    Name     | Time (s) |
-|:-------------|----------:|
-| DuckDB (1 Thread) | 1.04    |
-| DuckDB (2 Threads) | 0.89    |
-| Pandas      | 20.4    |
-| Pandas (manual pushdown)&nbsp;&nbsp;      | 3.95    |
+|    Name                  | Time (s) |
+|:-------------------------|---------:|
+| DuckDB (1 Thread)        | 1.04     |
+| DuckDB (2 Threads)       | 0.89     |
+| Pandas                   | 20.4     |
+| Pandas (manual pushdown) | 3.95     |
 
 We see that for this more complex query the slight difference in performance between running over a Pandas DataFrame and a Parquet file vanishes, and the DuckDB timings become extremely similar to the timings we saw before. The added Parquet read again increases the necessity of manually performing optimizations on the Pandas code, which is not required at all when running SQL in DuckDB.

@@ -16,11 +16,11 @@ In many situations, the system will add casts by itself. This is called *implici
 
 Consider the function `sin(DOUBLE)`. This function takes as input argument a column of type `DOUBLE`, however, it can be called with an integer as well: `sin(1)`. The integer is converted into a double before being passed to the `sin` function.
 
-Implicit casts can only be added for a number of type combinations, and is generally only possible when the cast cannot fail. For example, an implicit cast can be added from `INT` to `DOUBLE` - but not from `DOUBLE` to `INT`.
+Implicit casts can only be added for a number of type combinations, and is generally only possible when the cast cannot fail. For example, an implicit cast can be added from `INT` to `DOUBLE` – but not from `DOUBLE` to `INT`.
 
 ## Casting Operations Matrix
 
-Values of a particular data type cannot always be cast to any arbitrary target data type. The only exception is the `NULL` value - which can always be converted between types.
+Values of a particular data type cannot always be cast to any arbitrary target data type. The only exception is the `NULL` value – which can always be converted between types.
 The following matrix describes which conversions are supported.
 When implicit casting is allowed, it implies that explicit casting is also possible.
 

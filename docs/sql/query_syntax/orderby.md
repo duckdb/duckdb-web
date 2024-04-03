@@ -17,7 +17,7 @@ Each expression can optionally be followed by an order modifier (`ASC` or `DESC`
 
 The `ALL` keyword indicates that the output should be sorted by every column in order from left to right. 
 The direction of this sort may be modified using either `ORDER BY ALL ASC` or `ORDER BY ALL DESC` and/or `NULLS FIRST` or `NULLS LAST`.
-Note that `ALL` may not be used in combination with other expressions in the `ORDER BY` clause - it must be by itself.
+Note that `ALL` may not be used in combination with other expressions in the `ORDER BY` clause – it must be by itself.
 See examples below.
 
 ## NULL Order Modifier

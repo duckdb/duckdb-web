@@ -80,7 +80,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `force_not_null` | Do not match the specified columns' values against the NULL string. In the default case where the `NULL` string is empty, this means that empty values will be read as zero-length strings rather than `NULL`s. | `VARCHAR[]` | `[]` |
 | `header` | Specifies that the file contains a header line with the names of each column in the file. | `BOOL` | `false` |
 | `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path](../partitioning/hive_partitioning). | `BOOL` | `false` |
-| `ignore_errors` | Option to ignore any parsing errors encountered - and instead ignore rows with errors. | `BOOL` | `false` |
+| `ignore_errors` | Option to ignore any parsing errors encountered – and instead ignore rows with errors. | `BOOL` | `false` |
 | `max_line_size` | The maximum line size in bytes. | `BIGINT` | 2097152 |
 | `names` | The column names as a list, see [example](tips#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
 | `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | `VARCHAR` | (empty) |

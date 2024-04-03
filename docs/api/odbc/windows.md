@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: ODBC API - Windows
+title: ODBC API on Windows
 ---
 
 The Microsoft Windows requires an ODBC Driver Manager to manage communication between applications and the ODBC drivers.

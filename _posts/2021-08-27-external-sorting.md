@@ -1,6 +1,6 @@
 ---
 layout: post  
-title:  "Fastest table sort in the West - Redesigning DuckDB’s sort"
+title:  "Fastest table sort in the West – Redesigning DuckDB’s sort"
 author: Laurens Kuiper  
 excerpt: DuckDB, a free and Open-Source analytical data management system, has a new highly efficient parallel sorting implementation that can sort much more data than fits in main memory.
 ---
@@ -22,12 +22,14 @@ While important, this does not cover how to implement sorting in a database syst
 There is a lot more to sorting tables than just sorting a large array of integers!
 
 Consider the following example query on a snippet of a TPC-DS table:
+
 ```sql
 SELECT c_customer_sk, c_birth_country, c_birth_year
 FROM customer
 ORDER BY c_birth_country DESC,
          c_birth_year    ASC NULLS LAST;
 ```
+
 Which yields:
 
 | c_customer_sk | c_birth_country | c_birth_year |
@@ -47,8 +49,7 @@ It is easy to implement something that can evaluate the example query using any 
 While `std::sort` is excellent algorithmically, it is still a single-threaded approach that is unable to efficiently sort by multiple columns because function call overhead would quickly dominate sorting time.
 Below we will discuss why that is.
 
-To achieve good performance when sorting tables, a custom sorting implementation is needed. We are - of course - not the first to implement relational sorting, so we dove into the literature to look for guidance.
-
+To achieve good performance when sorting tables, a custom sorting implementation is needed. We are – of course – not the first to implement relational sorting, so we dove into the literature to look for guidance.
 
 In 2006 the famous Goetz Graefe wrote a survey on [implementing sorting in database systems](http://wwwlgis.informatik.uni-kl.de/archiv/wwwdvs.informatik.uni-kl.de/courses/DBSREAL/SS2005/Vorlesungsunterlagen/Implementing_Sorting.pdf).
 In this survey, he collected many sorting techniques that are known to the community. This is a great guideline if you are about to start implementing sorting for tables.
@@ -159,7 +160,7 @@ This is especially slow when the final two blocks are merged: One thread has to 
 To fully parallelize this phase, we have implemented [Merge Path](https://arxiv.org/pdf/1406.2628.pdf) by Oded Green et al.
 Merge Path pre-computes *where* the sorted lists will intersect while merging, shown in the image below (taken from the paper).
 
-<img src="/images/blog/sorting/merge_path.png" alt="Merge Path - A Visually Intuitive Approach to Parallel Merging" title="Merge Path by Oded Green, Saher Odeh, Yitzhak Birk" style="max-width:70%"/>
+<img src="/images/blog/sorting/merge_path.png" alt="Merge Path – A Visually Intuitive Approach to Parallel Merging" title="Merge Path by Oded Green, Saher Odeh, Yitzhak Birk" style="max-width:70%"/>
 
 The intersections along the merge path can be efficiently computed using [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm).
 If we know where the intersections are, we can merge partitions of the sorted data independently in parallel.

@@ -33,7 +33,7 @@ Constant vectors are physically stored as a single constant value.
 
 <img src="/images/internals/constant.png" alt="Constant Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
 
-Constant vectors are useful when data elements are repeated - for example, when representing the result of a constant expression in a function call, the constant vector allows us to only store the value once.
+Constant vectors are useful when data elements are repeated – for example, when representing the result of a constant expression in a function call, the constant vector allows us to only store the value once.
 
 ```sql
 SELECT lst || 'duckdb'

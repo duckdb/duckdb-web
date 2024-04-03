@@ -7,7 +7,6 @@ The DuckDB Julia package provides a high-performance front-end for DuckDB. Much 
 
 The package also supports multi-threaded execution. It uses Julia threads/tasks for this purpose. If you wish to run queries in parallel, you must launch Julia with multi-threading support (by e.g., setting the `JULIA_NUM_THREADS` environment variable).
 
-
 ## Installation
 
 Install DuckDB as follows:
@@ -69,7 +68,7 @@ print(results)
 
 ## Appender API
 
-The DuckDB Julia package also supports the Appender api, which is much faster than using prepared statements or individual INSERT INTO statements.  Appends are made in row-wise format. For every column, an append() call should be made, after which the row should be finished by calling flush(). After all rows have been appended, close() should be used to finalize the appender and clean up the resulting memory.
+The DuckDB Julia package also supports the [Appender API](../data/appender), which is much faster than using prepared statements or individual `INSERT INTO` statements. Appends are made in row-wise format. For every column, an `append()` call should be made, after which the row should be finished by calling `flush()`. After all rows have been appended, `close()` should be used to finalize the Appender and clean up the resulting memory.
 
 ```julia
 using DuckDB, DataFrames, Dates
@@ -80,10 +79,12 @@ DBInterface.execute(db, "CREATE OR REPLACE
                          timestamp TIMESTAMP, date DATE)")
 # create data to insert 
 len = 100
-df = DataFrames.DataFrame(id=collect(1:len),
-    value=rand(len),
-    timestamp=Dates.now() + Dates.Second.(1:len),
-    date=Dates.today() + Dates.Day.(1:len))
+df = DataFrames.DataFrame(
+        id = collect(1:len),
+        value = rand(len),
+        timestamp = Dates.now() + Dates.Second.(1:len),
+        date = Dates.today() + Dates.Day.(1:len)
+    )
 # append data by row
 appender = DuckDB.Appender(db, "data")
 for i in eachrow(df)
@@ -99,7 +100,7 @@ DuckDB.close(appender)
 
 ## Concurrency
 
-Within a julia process, tasks are able to concurrently read and write to the database, as long as each task maintains its own connection to the database.  In the example below, a single task is spawned to periodically read the database and many tasks are spawned to write to the database using both INSERT statements as well as the appender api.
+Within a Julia process, tasks are able to concurrently read and write to the database, as long as each task maintains its own connection to the database.  In the example below, a single task is spawned to periodically read the database and many tasks are spawned to write to the database using both [`INSERT` statements](../sql/statements/insert) as well as the [Appender API](../data/appender).
 
 ```julia
 using Dates, DataFrames, DuckDB
@@ -112,8 +113,8 @@ function run_reader(db)
     conn = DBInterface.connect(db)
     while true
         println(DBInterface.execute(conn,
-                "SELECT id, count(date) as count, max(date) as max_date
-                FROM data group by id order by id") |> DataFrames.DataFrame)
+                "SELECT id, count(date) AS count, max(date) AS max_date
+                FROM data GROUP BY id ORDER BY id") |> DataFrames.DataFrame)
         Threads.sleep(1)
     end
     DBInterface.close(conn)
@@ -127,7 +128,7 @@ function run_inserter(db, id)
     for i in 1:1000
         Threads.sleep(0.01)
         DuckDB.execute(conn, "INSERT INTO data VALUES (current_timestamp, ?)"; id);
-    end 
+    end
     DBInterface.close(conn)
 end 
 # spawn many insert tasks

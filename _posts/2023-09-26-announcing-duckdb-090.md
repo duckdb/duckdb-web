@@ -241,7 +241,7 @@ print(res)
 #]
 ```
 
-Note that the API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through Discord or on Github.
+Note that the API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through Discord or on GitHub.
 
 
 #### Final Thoughts

@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: sqllogictest - Persistent Testing
+title: Persistent Testing
 redirect_from:
   - /dev/sqllogictest/persistent_testing
 ---
@@ -32,7 +32,7 @@ NULL
 15
 ```
 
-Note that by default the tests run with `SET wal_autocheckpoint='0KB'` - meaning a checkpoint is triggered after every statement. WAL tests typically run with the following settings to disable this behavior:
+Note that by default the tests run with `SET wal_autocheckpoint='0KB'` – meaning a checkpoint is triggered after every statement. WAL tests typically run with the following settings to disable this behavior:
 
 ```sql
 statement ok

@@ -12,7 +12,7 @@ The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGM
 
 For DuckDB's built in configuration options, see the [Configuration Reference](overview#configuration-reference).
 DuckDB [extensions](../extensions/overview) may register additional configuration options.
-These are documented in the respective extension's documentation page.
+These are documented in the respective extensions' documentation pages.
 
 ## List of Supported `PRAGMA` Statements
 
@@ -411,7 +411,7 @@ This call returns the following information for the given table:
 | `segment_type` | `VARCHAR` ||
 | `start`        | `BIGINT`  | The start row id of this chunk                        |
 | `count`        | `BIGINT`  | The amount of entries in this storage chunk           |
-| `compression`  | `VARCHAR` | Compression type used for this column - see [blog post](/2022/10/28/lightweight-compression) |
+| `compression`  | `VARCHAR` | Compression type used for this column – see [blog post](/2022/10/28/lightweight-compression) |
 | `stats`        | `VARCHAR` ||
 | `has_updates`  | `BOOLEAN` ||
 | `persistent`   | `BOOLEAN` | `false` if temporary table                            |

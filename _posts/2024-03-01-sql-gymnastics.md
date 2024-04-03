@@ -35,7 +35,7 @@ Today, we are flying towards a more flexible future!
 
 In SQL, typically the columns to `SELECT` and `GROUP BY` must be specified individually. 
 However, in many business intelligence workloads, groupings and aggregate functions must be easily user-adjustable.
-Imagine an interactive charting workflow - first I want to plot total company revenue over time.
+Imagine an interactive charting workflow – first I want to plot total company revenue over time.
 Then if I see a dip in revenue in that first plot, I want to adjust the plot to group the revenue by business unit to see which section of the company caused the issue.
 This typically requires templated SQL, using a language that compiles down to SQL (like [Malloy](https://www.malloydata.dev/)), or building a SQL string using another programming language.
 How much we can do with just SQL?

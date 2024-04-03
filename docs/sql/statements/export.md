@@ -33,7 +33,7 @@ For details regarding the writing of Parquet files, see the [Parquet Files page 
 
 ## `EXPORT DATABASE`
 
-The `EXPORT DATABASE` command exports the full contents of the database - including schema information, tables, views and sequences - to a specific directory that can then be loaded again. The created directory will be structured as follows:
+The `EXPORT DATABASE` command exports the full contents of the database – including schema information, tables, views and sequences – to a specific directory that can then be loaded again. The created directory will be structured as follows:
 
 ```text
 target_directory/schema.sql
