@@ -30,7 +30,7 @@ Four additional libraries improve the DuckDB experience in Jupyter notebooks.
 # Otherwise, see Google Collab link above for an in-notebook example
 pip install duckdb
 
-# Install Jupyter Notebook (Note: you can also install JupyterLab: pip install jupyterlab) 
+# Install Jupyter Notebook (Note: you can also install JupyterLab: pip install jupyterlab)
 pip install notebook
 
 # Install supporting libraries

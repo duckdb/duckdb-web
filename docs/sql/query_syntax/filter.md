@@ -14,9 +14,9 @@ Some aggregate functions also do not filter out null values, so using a `FILTER`
 
 ```sql
 -- Compare total row count to:
---   The number of rows where i <= 5 
---   The number of rows where i is odd 
-SELECT 
+--   The number of rows where i <= 5
+--   The number of rows where i is odd
+SELECT
     count(*) AS total_rows,
     count(*) FILTER (i <= 5) AS lte_five,
     count(*) FILTER (i % 2 = 1) AS odds
@@ -31,9 +31,9 @@ FROM generate_series(1, 10) tbl(i);
 
 ```sql
 -- Different aggregate functions may be used, and multiple WHERE expressions are also permitted
---   The sum of i for rows where i <= 5 
---   The median of i where i is odd 
-SELECT 
+--   The sum of i for rows where i <= 5
+--   The median of i where i is odd
+SELECT
     sum(i) FILTER (i <= 5) AS lte_five_sum,
     median(i) FILTER (i % 2 = 1) AS odds_median,
     median(i) FILTER (i % 2 = 1 AND i <= 5) AS odds_lte_five_median
@@ -50,19 +50,19 @@ FROM generate_series(1, 10) tbl(i);
 The `FILTER` clause can also be used to pivot data from rows into columns. This is a static pivot, as columns must be defined prior to runtime in SQL. However, this kind of statement can be dynamically generated in a host programming language to leverage DuckDB's SQL engine for rapid, larger than memory pivoting.
 ```sql
 -- First generate an example dataset
-CREATE TEMP TABLE stacked_data AS 
-    SELECT 
+CREATE TEMP TABLE stacked_data AS
+    SELECT
         i,
-        CASE WHEN i <= rows * 0.25 THEN 2022 
-             WHEN i <= rows * 0.5 THEN 2023 
-             WHEN i <= rows * 0.75 THEN 2024 
+        CASE WHEN i <= rows * 0.25  THEN 2022
+             WHEN i <= rows * 0.5   THEN 2023
+             WHEN i <= rows * 0.75  THEN 2024
              WHEN i <= rows * 0.875 THEN 2025
-             ELSE NULL 
-             END AS year 
+             ELSE NULL
+             END AS year
     FROM (
-        SELECT 
-            i, 
-            count(*) OVER () AS rows 
+        SELECT
+            i,
+            count(*) OVER () AS rows
         FROM generate_series(1, 100_000_000) tbl(i)
     ) tbl;
 ```

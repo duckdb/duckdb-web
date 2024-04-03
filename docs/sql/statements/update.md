@@ -53,12 +53,12 @@ FROM original;
 
 
 ```sql
-UPDATE original 
-    SET value = new.value 
-    FROM new 
+UPDATE original
+    SET value = new.value
+    FROM new
     WHERE original.key = new.key;
 -- OR
-UPDATE original 
+UPDATE original
     SET value = (
         SELECT
             new.value
@@ -82,7 +82,7 @@ FROM original;
 ## Update from Same Table
 
 The only difference between this case and the above is that a different table alias must be specified on both the target table and the source table.
-In this example `as true_original` and `as new` are both required. 
+In this example `as true_original` and `as new` are both required.
 
 ```sql
 UPDATE original as true_original

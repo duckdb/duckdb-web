@@ -32,7 +32,7 @@ SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1');
 To create a new table using the result from a query, use `CREATE TABLE ... AS` from a `SELECT` statement.
 
 ```sql
-CREATE TABLE new_tbl AS 
+CREATE TABLE new_tbl AS
     SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1');
 ```
 

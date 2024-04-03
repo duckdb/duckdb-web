@@ -10,7 +10,7 @@ Users can install it from the command line:
 ## Brew
 
 ```bash
-brew install unixodbc 
+brew install unixodbc
 ```
 
 ## Step 1: Download ODBC Driver

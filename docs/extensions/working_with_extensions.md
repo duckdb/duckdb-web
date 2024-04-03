@@ -8,7 +8,7 @@ title: Working with Extensions
 Downloading an extension directly could be helpful when building a [lambda service](https://aws.amazon.com/pm/lambda/) or container that uses DuckDB.
 DuckDB extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable.
 As a result, a direct URL to the file must be used.
-To directly download an extension file, use the following format:  
+To download an extension file directly, use the following format:
 
 ```text
 http://extensions.duckdb.org/v{duckdb_version}/{platform_name}/{extension_name}.duckdb_extension.gz

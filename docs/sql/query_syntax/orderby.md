@@ -4,25 +4,25 @@ title: ORDER BY Clause
 railroad: query_syntax/orderby.js
 ---
 
-`ORDER BY` is an output modifier. Logically it is applied near the very end of the query (just prior to [`LIMIT`](limit) or [`OFFSET`](limit), if present). 
-The `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order. 
+`ORDER BY` is an output modifier. Logically it is applied near the very end of the query (just prior to [`LIMIT`](limit) or [`OFFSET`](limit), if present).
+The `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order.
 In addition, every order clause can specify whether `NULL` values should be moved to the beginning or to the end.
 
 The `ORDER BY` clause may contain one or more expressions, separated by commas.
-An error will be thrown if no expressions are included, since the `ORDER BY` clause should be removed in that situation. 
+An error will be thrown if no expressions are included, since the `ORDER BY` clause should be removed in that situation.
 The expressions may begin with either an arbitrary scalar expression (which could be a column name), a column position number (Ex: `1`. Note that it is 1-indexed), or the keyword `ALL`.
 Each expression can optionally be followed by an order modifier (`ASC` or `DESC`, default is `ASC`), and/or a `NULL` order modifier (`NULLS FIRST` or `NULLS LAST`, default is `NULLS LAST`).
 
 ## `ORDER BY ALL`
 
-The `ALL` keyword indicates that the output should be sorted by every column in order from left to right. 
+The `ALL` keyword indicates that the output should be sorted by every column in order from left to right.
 The direction of this sort may be modified using either `ORDER BY ALL ASC` or `ORDER BY ALL DESC` and/or `NULLS FIRST` or `NULLS LAST`.
 Note that `ALL` may not be used in combination with other expressions in the `ORDER BY` clause - it must be by itself.
 See examples below.
 
 ## NULL Order Modifier
 
-By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and null values are placed last. 
+By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and null values are placed last.
 This is identical to the default sort order of PostgreSQL. The default sort order can be changed with the following configuration options.
 
 > Using `ASC NULLS LAST` as the default sorting order was a breaking change in version 0.8.0. Prior to 0.8.0, DuckDB sorted using `ASC NULLS FIRST`.

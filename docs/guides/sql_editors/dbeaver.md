@@ -39,7 +39,7 @@ title: DBeaver SQL IDE
 
     <img src="/images/guides/DBeaver_execute_query.png" alt="DBeaver Execute Query" title="DBeaver Execute Query"/>
 
-9. Now you're ready to fly with DuckDB and DBeaver!  
+9. Now you're ready to fly with DuckDB and DBeaver!
 
     <img src="/images/guides/DBeaver_query_results.png" alt="DBeaver Query Results" title="DBeaver Query Results"/>
 

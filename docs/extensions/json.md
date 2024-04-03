@@ -49,7 +49,7 @@ CREATE TABLE example (j JSON);
 -- Insert JSON data into the table
 INSERT INTO example VALUES
     ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
-```  
+```
 
 ```sql
 -- Retrieve the family key's value
@@ -500,7 +500,7 @@ FROM example;
 ```
 
 ```sql
--- The following is faster and more memory efficient 
+-- The following is faster and more memory efficient
 WITH extracted AS (
     SELECT json_extract(j, ['family', 'species']) extracted_list
     FROM example

@@ -7,7 +7,6 @@ The DuckDB Julia package provides a high-performance front-end for DuckDB. Much 
 
 The package also supports multi-threaded execution. It uses Julia threads/tasks for this purpose. If you wish to run queries in parallel, you must launch Julia with multi-threading support (by e.g., setting the `JULIA_NUM_THREADS` environment variable).
 
-
 ## Installation
 
 Install DuckDB as follows:
@@ -78,7 +77,7 @@ db = DuckDB.DB()
 DBInterface.execute(db, "CREATE OR REPLACE
                          TABLE data(id INT PRIMARY KEY, value FLOAT,
                          timestamp TIMESTAMP, date DATE)")
-# create data to insert 
+# create data to insert
 len = 100
 df = DataFrames.DataFrame(id=collect(1:len),
     value=rand(len),
@@ -127,9 +126,9 @@ function run_inserter(db, id)
     for i in 1:1000
         Threads.sleep(0.01)
         DuckDB.execute(conn, "INSERT INTO data VALUES (current_timestamp, ?)"; id);
-    end 
+    end
     DBInterface.close(conn)
-end 
+end
 # spawn many insert tasks
 for i in 1:100
     Threads.@spawn run_inserter(db, 1)
@@ -146,7 +145,7 @@ function run_appender(db, id)
         end
         DuckDB.end_row(appender);
         DuckDB.flush(appender);
-    end 
+    end
     DuckDB.close(appender);
 end
 # spawn many appender tasks

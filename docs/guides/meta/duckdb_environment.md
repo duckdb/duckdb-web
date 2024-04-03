@@ -60,19 +60,19 @@ FROM duckdb_extensions();
 
 DuckDB has the following built-in table functions to obtain metadata about available catalog objects:
 
-* [`duckdb_columns()`](../../sql/duckdb_table_functions#duckdb_columns): columns 
-* [`duckdb_constraints()`](../../sql/duckdb_table_functions#duckdb_constraints): constraints 
+* [`duckdb_columns()`](../../sql/duckdb_table_functions#duckdb_columns): columns
+* [`duckdb_constraints()`](../../sql/duckdb_table_functions#duckdb_constraints): constraints
 * [`duckdb_databases()`](../../sql/duckdb_table_functions#duckdb_databases): lists the databases that are accessible from within the current DuckDB process
 * [`duckdb_dependencies()`](../../sql/duckdb_table_functions#duckdb_dependencies): dependencies between objects
-* [`duckdb_extensions()`](../../sql/duckdb_table_functions#duckdb_extensions): extensions 
-* [`duckdb_functions()`](../../sql/duckdb_table_functions#duckdb_functions): functions 
-* [`duckdb_indexes()`](../../sql/duckdb_table_functions#duckdb_indexes): secondary indexes 
+* [`duckdb_extensions()`](../../sql/duckdb_table_functions#duckdb_extensions): extensions
+* [`duckdb_functions()`](../../sql/duckdb_table_functions#duckdb_functions): functions
+* [`duckdb_indexes()`](../../sql/duckdb_table_functions#duckdb_indexes): secondary indexes
 * [`duckdb_keywords()`](../../sql/duckdb_table_functions#duckdb_keywords): DuckDB's keywords and reserved words
 * [`duckdb_optimizers()`](../../sql/duckdb_table_functions#duckdb_optimizers): the available optimization rules in the DuckDB instance
-* [`duckdb_schemas()`](../../sql/duckdb_table_functions#duckdb_schemas): schemas 
-* [`duckdb_sequences()`](../../sql/duckdb_table_functions#duckdb_sequences): sequences 
-* [`duckdb_settings()`](../../sql/duckdb_table_functions#duckdb_settings): settings  
-* [`duckdb_tables()`](../../sql/duckdb_table_functions#duckdb_tables): base tables 
-* [`duckdb_types()`](../../sql/duckdb_table_functions#duckdb_types): data types 
-* [`duckdb_views()`](../../sql/duckdb_table_functions#duckdb_views): views 
+* [`duckdb_schemas()`](../../sql/duckdb_table_functions#duckdb_schemas): schemas
+* [`duckdb_sequences()`](../../sql/duckdb_table_functions#duckdb_sequences): sequences
+* [`duckdb_settings()`](../../sql/duckdb_table_functions#duckdb_settings): settings
+* [`duckdb_tables()`](../../sql/duckdb_table_functions#duckdb_tables): base tables
+* [`duckdb_types()`](../../sql/duckdb_table_functions#duckdb_types): data types
+* [`duckdb_views()`](../../sql/duckdb_table_functions#duckdb_views): views
 * [`duckdb_temporary_files()`](../../sql/duckdb_table_functions#duckdb_temporary_files): the temporary files DuckDB has written to disk, to offload data from memory

@@ -136,20 +136,20 @@ INTO
 
 ### `UNPIVOT` into Multiple Value Columns
 
-The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported. 
+The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported.
 This can be useful when the goal is to reduce the extent to which a dataset is pivoted, but not completely stack all pivoted columns.
-To demonstrate this, the query below will generate a dataset with a separate column for the number of each month within the quarter (month 1, 2, or 3), and a separate row for each quarter. 
+To demonstrate this, the query below will generate a dataset with a separate column for the number of each month within the quarter (month 1, 2, or 3), and a separate row for each quarter.
 Since there are fewer quarters than months, this does make the dataset longer, but not as long as the above.
 
 
-To accomplish this, multiple sets of columns are included in the `ON` clause. 
+To accomplish this, multiple sets of columns are included in the `ON` clause.
 The `q1` and `q2` aliases are optional.
 The number of columns in each set of columns in the `ON` clause must match the number of columns in the `VALUE` clause.
 ```sql
-UNPIVOT monthly_sales 
-    ON (jan, feb, mar) AS q1, (apr, may, jun) AS q2 
-    INTO 
-        NAME quarter 
+UNPIVOT monthly_sales
+    ON (jan, feb, mar) AS q1, (apr, may, jun) AS q2
+    INTO
+        NAME quarter
         VALUE month_1_sales, month_2_sales, month_3_sales;
 ```
 
@@ -178,7 +178,7 @@ WITH unpivot_alias AS (
     INTO
         NAME month
         VALUE sales
-) 
+)
 SELECT * FROM unpivot_alias;
 ```
 
@@ -186,7 +186,7 @@ An `UNPIVOT` may be used in a subquery and must be wrapped in parentheses.
 Note that this behavior is different than the SQL Standard Unpivot, as illustrated in subsequent examples.
 
 ```sql
-SELECT * 
+SELECT *
 FROM (
     UNPIVOT monthly_sales
     ON COLUMNS(* EXCLUDE (empid, dept))
@@ -232,7 +232,7 @@ INTO
 is translated into:
 
 ```sql
-SELECT 
+SELECT
     empid,
     dept,
     unnest(['jan', 'feb', 'mar', 'apr', 'may', 'jun']) AS month,
@@ -322,7 +322,7 @@ FROM monthly_sales UNPIVOT (
 
 ### SQL Standard `UNPIVOT` Dynamically Using the `COLUMNS` Expression
 
-The [`COLUMNS` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically. 
+The [`COLUMNS` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically.
 This will continue to work even if additional `month` columns are added to the dataset.
 It produces the same result as the query above.
 
@@ -346,7 +346,7 @@ The `q1` and `q2` aliases are optional.
 The number of columns in each set of columns in the `IN` clause must match the number of columns in the `value-column-name` portion.
 
 ```sql
-FROM monthly_sales 
+FROM monthly_sales
 UNPIVOT (
     (month_1_sales, month_2_sales, month_3_sales)
     FOR quarter IN (

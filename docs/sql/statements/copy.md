@@ -212,7 +212,7 @@ COPY
 ```
 
 ```sql
--- Sets the field_id of column 'my_list' to 42, 
+-- Sets the field_id of column 'my_list' to 42,
 -- and column 'element' (default name of list child) to 43
 COPY
     (SELECT [128, 256] AS my_list)
@@ -221,7 +221,7 @@ COPY
 ```
 
 ```sql
--- Sets the field_id of colum 'my_map' to 42, 
+-- Sets the field_id of colum 'my_map' to 42,
 -- and columns 'key' and 'value' (default names of map children) to 43 and 44
 COPY
     (SELECT MAP {'key1' : 128, 'key2': 256} my_map)

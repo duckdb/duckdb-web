@@ -32,7 +32,7 @@ This build is a shorthand for `release` with `BUILD_BENCHMARK=1` set.
 
 ### `tidy-check`
 
-This creates a build and then runs [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/) to check for issues or style violations through static analysis.  
+This creates a build and then runs [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/) to check for issues or style violations through static analysis.
 The CI will also run this check, causing it to fail if this check fails.
 
 ### `format-fix` | `format-changes` | `format-main`
@@ -46,7 +46,7 @@ The CI will also run this check, causing it to fail if this check fails.
 
 ## Package Flags
 
-For every package that is maintained by core DuckDB, there exists a flag in the Makefile to enable building the package.  
+For every package that is maintained by core DuckDB, there exists a flag in the Makefile to enable building the package.
 These can be enabled by either setting them in the current `env`, through set up files like `bashrc` or `zshrc`, or by setting them before the call to `make`, for example:
 
 ```bash
@@ -63,7 +63,7 @@ When this flag is set, the [CLI](../../api/cli) is built, this is usually enable
 
 ### `BUILD_BENCHMARK`
 
-When this flag is set, our in-house Benchmark testing suite is built.  
+When this flag is set, DuckDB's in-house benchmark suite is built.
 More information about this can be found [here](https://github.com/duckdb/duckdb/blob/main/benchmark/README.md).
 
 ### `BUILD_JDBC`
@@ -78,12 +78,12 @@ When this flag is set, the [ODBC](../../api/odbc/overview) package is built.
 
 ### `DISABLE_UNITY`
 
-To improve compilation time, we use [Unity Build](https://cmake.org/cmake/help/latest/prop_tgt/UNITY_BUILD.html) to combine translation units.  
+To improve compilation time, we use [Unity Build](https://cmake.org/cmake/help/latest/prop_tgt/UNITY_BUILD.html) to combine translation units.
 This can however hide include bugs, this flag disables using the unity build so these errors can be detected.
 
 ### `DISABLE_SANITIZER`
 
-In some situations, running an executable that has been built with sanitizers enabled is not support / can cause problems. Julia is an example of this.  
+In some situations, running an executable that has been built with sanitizers enabled is not support / can cause problems. Julia is an example of this.
 With this flag enabled, the sanitizers are disabled for the build.
 
 ## Overriding Git Hash and Version

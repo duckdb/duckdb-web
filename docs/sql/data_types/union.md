@@ -33,7 +33,7 @@ SELECT u FROM tbl1;
 SELECT union_extract(u, 'str') FROM tbl1;
 -- Alternatively, you can use 'dot syntax' like with structs
 SELECT u.str FROM tbl1;
--- returns: 
+-- returns:
 --    NULL
 --    two
 --    three
@@ -53,7 +53,7 @@ However, these casts have been designed with two principles in mind, to avoid am
 
 Thus `UNION` types can't be implicitly cast to any of their member types in general, since the information in the other members not matching the target type would be "lost". If you want to coerce a `UNION` into one of its members, you should use the `union_extract` function explicitly instead.
 
-The only exception to this is when casting a `UNION` to `VARCHAR`, in which case the members will all use their corresponding `VARCHAR` casts. Since everything can be cast to `VARCHAR`, this is "safe" in a sense. 
+The only exception to this is when casting a `UNION` to `VARCHAR`, in which case the members will all use their corresponding `VARCHAR` casts. Since everything can be cast to `VARCHAR`, this is "safe" in a sense.
 
 ### Casting to Unions
 
