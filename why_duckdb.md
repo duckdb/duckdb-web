@@ -69,7 +69,7 @@ DuckDB uses some components from various Open-Source projects and draws inspirat
 * **SQL inequality joins:** DuckDB's inequality join implementation uses the IEJoin algorithm as described in the paper [Lightning Fast and Space Efficient Inequality Joins](https://vldb.org/pvldb/vol8/p2074-khayyat.pdf)
 Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorge-Arnulfo Quiané-Ruiz, Nan Tang and Panos Kalnis.
 * **Compression of floating-point values:** DuckDB supports the multiple algorithms for compressing floating-point values:
-    * [Chimp](http://pages.cs.aueb.gr/~kotidis/Publications/chimp.pdf) by Panagiotis Liakos, Katia Papakonstantinopoulou and Yannis Kotidi
+    * [Chimp](https://vldb.org/pvldb/vol15/p3058-liakos.pdf) by Panagiotis Liakos, Katia Papakonstantinopoulou and Yannis Kotidi
     * [Patas](https://github.com/duckdb/duckdb/pull/5044), an in-house development, and
     * [ALP (adaptive lossless floating-point compression)](https://dl.acm.org/doi/pdf/10.1145/3626717) by Azim Afroozeh, Leonard Kuffo and Peter Boncz, who also [contributed their implementation](https://github.com/duckdb/duckdb/pull/9635).
 * **SQL Parser:** We use the PostgreSQL parser that was [repackaged as a stand-alone library](https://github.com/lfittl/libpg_query). The translation to our own parse tree is inspired by [Peloton](https://pelotondb.io).
