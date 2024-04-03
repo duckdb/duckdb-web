@@ -158,8 +158,12 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Extract a string using slice conventions. Negative values are accepted. |
-| **Example** | `array_slice('DuckDB', 5, NULL)` |
-| **Result** | `DB` |
+| **Example 1** | `array_slice('DuckDB', 3, 4)` |
+| **Result** | `ck` |
+| **Example 2** | `array_slice('DuckDB', 3, NULL)` |
+| **Result** | `NULL` |
+| **Example 3** | `array_slice('DuckDB', 0, -3)` |
+| **Result** | `Duck` |
 
 ### `ascii(string)`
 
