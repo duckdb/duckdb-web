@@ -248,7 +248,7 @@ import org.duckdb.DuckDBConnection;
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
 Statement stmt = conn.createStatement();
 
-stmt.execute("CREATE TABLE test (x INT, y INT, z INT)");
+stmt.execute("CREATE TABLE test (x INTEGER, y INTEGER, z INTEGER)");
 
 stmt.addBatch("INSERT INTO test (x, y, z) VALUES (1, 2, 3);");
 stmt.addBatch("INSERT INTO test (x, y, z) VALUES (4, 5, 6);");

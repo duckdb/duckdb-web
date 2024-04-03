@@ -45,7 +45,7 @@ Sequences can provide an integer primary key for a table. For example:
 
 ```sql
 CREATE SEQUENCE id_sequence START 1;
-CREATE TABLE tbl (id INT DEFAULT nextval('id_sequence'), s VARCHAR);
+CREATE TABLE tbl (id INTEGER DEFAULT nextval('id_sequence'), s VARCHAR);
 INSERT INTO tbl (s) VALUES ('hello'), ('world');
 SELECT * FROM tbl;
 ```
@@ -63,7 +63,7 @@ Sequences can also be added using the [`ALTER TABLE` statement](alter_table). Th
 CREATE TABLE tbl (s VARCHAR);
 INSERT INTO tbl VALUES ('hello'), ('world');
 CREATE SEQUENCE id_sequence START 1;
-ALTER TABLE tbl ADD COLUMN id INT DEFAULT nextval('id_sequence');
+ALTER TABLE tbl ADD COLUMN id INTEGER DEFAULT nextval('id_sequence');
 SELECT * FROM tbl;
 ```
 

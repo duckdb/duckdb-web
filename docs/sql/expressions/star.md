@@ -59,7 +59,7 @@ FROM tbl;
 The `COLUMNS` expression can be used to execute the same expression on multiple columns. Like the `*` expression, it can only be used in the `SELECT` clause.
 
 ```sql
-CREATE TABLE numbers (id INT, number INT);
+CREATE TABLE numbers (id INTEGER, number INTEGER);
 INSERT INTO numbers VALUES (1, 10), (2, 20), (3, NULL);
 SELECT min(COLUMNS(*)), count(COLUMNS(*)) FROM numbers;
 ```

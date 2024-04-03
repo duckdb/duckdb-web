@@ -16,7 +16,7 @@ In many situations, the system will add casts by itself. This is called *implici
 
 Consider the function `sin(DOUBLE)`. This function takes as input argument a column of type `DOUBLE`, however, it can be called with an integer as well: `sin(1)`. The integer is converted into a double before being passed to the `sin` function.
 
-Implicit casts can only be added for a number of type combinations, and is generally only possible when the cast cannot fail. For example, an implicit cast can be added from `INT` to `DOUBLE` – but not from `DOUBLE` to `INT`.
+Implicit casts can only be added for a number of type combinations, and is generally only possible when the cast cannot fail. For example, an implicit cast can be added from `INTEGER` to `DOUBLE` – but not from `DOUBLE` to `INTEGER`.
 
 ## Casting Operations Matrix
 
@@ -51,7 +51,6 @@ SELECT CAST(999 AS TINYINT);
 
 So even though the cast operation from `INTEGER` to `TINYINT` is supported, it is not possible for this particular value. [TRY_CAST](../expressions/cast) can be used to convert the value into `NULL` instead of throwing an error.
 
-
 ### Varchar
 
 The [`VARCHAR`](text) type acts as a univeral target: any arbitrary value of any arbitrary type can always be cast to the `VARCHAR` type. This type is also used for displaying values in the shell.
@@ -69,7 +68,7 @@ SELECT CAST('NotANumber' AS INTEGER);
 In general, casting to `VARCHAR` is a lossless operation and any type can be cast back to the original type after being converted into text.
 
 ```sql
-SELECT CAST(CAST([1, 2, 3] AS VARCHAR) AS INT[]);
+SELECT CAST(CAST([1, 2, 3] AS VARCHAR) AS INTEGER[]);
 ```
 
 ### Literal Types
@@ -78,7 +77,7 @@ Integer literals (such as `42`) and string literals (such as `'string'`) have sp
 
 ### Lists / Arrays
 
-Lists can be explicitly cast to other lists using the same casting rules. The cast is applied to the children of the list. For example, if we convert a `INT[]` list to a `VARCHAR[]` list, the child `INT` elements are individually cast to `VARCHAR` and a new list is constructed.
+Lists can be explicitly cast to other lists using the same casting rules. The cast is applied to the children of the list. For example, if we convert a `INTEGER[]` list to a `VARCHAR[]` list, the child `INTEGER` elements are individually cast to `VARCHAR` and a new list is constructed.
 
 ```sql
 SELECT CAST([1, 2, 3] AS VARCHAR[]);
@@ -86,7 +85,7 @@ SELECT CAST([1, 2, 3] AS VARCHAR[]);
 
 ### Arrays
 
-Arrays follow the same casting rules as lists. In addition, arrays can be implicitly cast to lists of the same type. For example, an `INT[3]` array can be implicitly cast to an `INT[]` list.
+Arrays follow the same casting rules as lists. In addition, arrays can be implicitly cast to lists of the same type. For example, an `INTEGER[3]` array can be implicitly cast to an `INTEGER[]` list.
 
 ### Structs
 

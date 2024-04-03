@@ -26,8 +26,8 @@ The `EXPLAIN` statement displays the physical plan, i.e., the query plan that wi
 To demonstrate, see the below example:
 
 ```sql
-CREATE TABLE students (name VARCHAR, sid INT);
-CREATE TABLE exams (eid INT, subject VARCHAR, sid INT);
+CREATE TABLE students (name VARCHAR, sid INTEGER);
+CREATE TABLE exams (eid INTEGER, subject VARCHAR, sid INTEGER);
 INSERT INTO students VALUES ('Mark', 1), ('Joe', 2), ('Matthew', 3);
 INSERT INTO exams VALUES (10, 'Physics', 1), (20, 'Chemistry', 2), (30, 'Literature', 3);
 EXPLAIN SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
