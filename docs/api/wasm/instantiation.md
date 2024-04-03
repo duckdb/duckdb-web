@@ -106,4 +106,4 @@ const worker = new Worker(bundle.mainWorker!);
 const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
-```  
+```

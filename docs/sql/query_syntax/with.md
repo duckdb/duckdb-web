@@ -85,7 +85,7 @@ WITH RECURSIVE FibonacciNumbers (RecursionDepth, FibonacciNumber, NextNumber) AS
 )
 -- Query the CTE
 SELECT
-    fn.RecursionDepth AS FibonacciNumberIndex, 
+    fn.RecursionDepth AS FibonacciNumberIndex,
     fn.FibonacciNumber
 FROM
     FibonacciNumbers fn;

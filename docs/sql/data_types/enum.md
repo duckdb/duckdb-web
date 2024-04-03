@@ -41,7 +41,7 @@ CREATE TYPE breed AS ENUM ('maltese', 'maltese');
 
 -- Create an enum from a select statement
 -- First create an example table of values
-CREATE TABLE my_inputs AS 
+CREATE TABLE my_inputs AS
     SELECT 'duck'  AS my_varchar UNION ALL
     SELECT 'duck'  AS my_varchar UNION ALL
     SELECT 'goose' AS my_varchar;

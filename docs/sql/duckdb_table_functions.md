@@ -7,7 +7,7 @@ DuckDB offers a collection of table functions that provide metadata about the cu
 
 The resultset returned by a `duckdb_` table function may be used just like an ordinary table or view. For example, you can use a `duckdb_` function call in the `FROM` clause of a `SELECT` statement, and you may refer to the columns of its returned resultset elsewhere in the statement, for example in the `WHERE` clause.
 
-Table functions are still functions, and you should write parenthesis after the function name to call it to obtain its returned resultset: 
+Table functions are still functions, and you should write parenthesis after the function name to call it to obtain its returned resultset:
 
 ```sql
 SELECT * FROM duckdb_settings();

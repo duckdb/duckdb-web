@@ -29,7 +29,7 @@ There are also three special date values that can be used on input:
 | infinity	   | later than all other dates        |
 | -infinity	   | earlier than all other dates      |
 
-The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged; 
+The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged;
 but `epoch` is simply a notational shorthand that will be converted to the date value when read.
 
 ```sql

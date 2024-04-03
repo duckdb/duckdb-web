@@ -5,15 +5,15 @@ redirect_from:
    - /internals/vector
 ---
 
-`Vector` is the container format used to store in-memory data during execution.  
+`Vector` is the container format used to store in-memory data during execution.
 `DataChunk` is a collection of Vectors, used for instance to represent a column list in a PhysicalProjection operator.
 
 ## Data Flow
 
-DuckDB uses a vectorized query execution model.  
-All operators in DuckDB are optimized to work on Vectors of a fixed size.  
+DuckDB uses a vectorized query execution model.
+All operators in DuckDB are optimized to work on Vectors of a fixed size.
 
-This fixed size is commonly referred to in the code as `STANDARD_VECTOR_SIZE`.  
+This fixed size is commonly referred to in the code as `STANDARD_VECTOR_SIZE`.
 The default `STANDARD_VECTOR_SIZE` is 2048 tuples.
 
 ## Vector Format
@@ -46,13 +46,13 @@ Constant vectors are also emitted by the storage when decompressing from constan
 
 ### Dictionary Vectors
 
-Dictionary vectors are physically stored as a child vector, and a selection vector that contains indexes into the child vector.  
+Dictionary vectors are physically stored as a child vector, and a selection vector that contains indexes into the child vector.
 
 <img src="/images/internals/dictionary.png" alt="Dictionary Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
 
-Dictionary vectors are emitted by the storage when decompressing from dictionary 
+Dictionary vectors are emitted by the storage when decompressing from dictionary
 
-Just like constant vectors, dictionary vectors are also emitted by the storage.  
+Just like constant vectors, dictionary vectors are also emitted by the storage.
 When deserializing a dictionary compressed column segment, we store this in a dictionary vector so we can keep the data compressed during query execution.
 
 ### Sequence Vectors
@@ -65,10 +65,10 @@ Sequence vectors are useful for efficiently storing incremental sequences. They 
 
 ### Unified Vector Format
 
-These properties of the different vector formats are great for optimization purposes, for example you can imagine the scenario where all the parameters to a function are constant, we can just compute the result once and emit a constant vector.  
+These properties of the different vector formats are great for optimization purposes, for example you can imagine the scenario where all the parameters to a function are constant, we can just compute the result once and emit a constant vector.
 But writing specialized code for every combination of vector types for every function is unfeasible due to the combinatorial explosion of possibilities.
 
-Instead of doing this, whenever you want to generically use a vector regardless of the type, the UnifiedVectorFormat can be used.  
+Instead of doing this, whenever you want to generically use a vector regardless of the type, the UnifiedVectorFormat can be used.
 This format essentially acts as a generic view over the contents of the Vector. Every type of Vector can convert to this format.
 
 ## Complex Types

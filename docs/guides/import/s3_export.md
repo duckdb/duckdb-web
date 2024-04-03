@@ -53,7 +53,7 @@ CREATE SECRET (
 );
 ```
 
-After setting up the GCS credentials, you can export using: 
+After setting up the GCS credentials, you can export using:
 
 ```sql
 COPY ⟨table_name⟩ TO 'gs://gcs_bucket/file.parquet';

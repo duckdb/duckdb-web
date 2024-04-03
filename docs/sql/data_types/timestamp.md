@@ -43,7 +43,7 @@ There are also three special date values that can be used on input:
 | `infinity`   | `TIMESTAMP`, `TIMESTAMPTZ` | later than all other time stamps               |
 | `-infinity`  | `TIMESTAMP`, `TIMESTAMPTZ` | earlier than all other time stamps             |
 
-The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged; 
+The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged;
 but `epoch` is simply a notational shorthand that will be converted to the time stamp value when read.
 
 ```sql
@@ -84,12 +84,12 @@ Time binning operations for `TIMESTAMPTZ` will then be implemented using the giv
 A list of available time zones can be pulled from the `pg_timezone_names()` table function:
 
 ```sql
-SELECT 
+SELECT
     name,
     abbrev,
-    utc_offset 
-FROM pg_timezone_names() 
-ORDER BY 
+    utc_offset
+FROM pg_timezone_names()
+ORDER BY
     name;
 ```
 

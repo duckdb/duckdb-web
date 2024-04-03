@@ -89,7 +89,7 @@ From connections, you can create prepared statements (and only that) using `con.
 
 ```js
 const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo');
-``` 
+```
 
 To execute this statement, you can call for example `all()` on the `stmt` object:
 
