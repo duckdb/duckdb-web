@@ -172,6 +172,18 @@ DuckDB can also write data using this encoding to a file which you can then load
 COPY 'data.parquet' TO 'pg.bin' WITH (FORMAT POSTGRES_BINARY);
 ```
 
+The file produced will be the equivalent of copying the file to Postgres using DuckDB and then dumping it from Postgres using `psql` or another client:
+
+DuckDB:
+```sql
+COPY postgres_db.tbl FROM 'data.parquet';
+```
+
+Postgres:
+```sql
+\copy tbl TO 'data.bin' WITH (FORMAT BINARY);
+```
+
 You may also create a full copy of the database using the [`COPY FROM DATABASE` statement](../sql/statements/copy#copy-from-database--to):
 
 ```sql
