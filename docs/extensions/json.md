@@ -105,9 +105,9 @@ The following table functions are used to read JSON:
 
 | Function | Description |
 |:---|:---|
-| `read_json_objects(`*`filename`*`)`   | Read a JSON object from `filename`, where `filename` can also be a list of files or a glob pattern |
-| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_json_objects` with parameter `format` set to `'newline_delimited'` |
-| `read_json_objects_auto(`*`filename`*`)` | Alias for `read_json_objects` with parameter `format` set to `'auto'` |
+| `read_json_objects(filename)`   | Read a JSON object from `filename`, where `filename` can also be a list of files or a glob pattern |
+| `read_ndjson_objects(filename)` | Alias for `read_json_objects` with parameter `format` set to `'newline_delimited'` |
+| `read_json_objects_auto(filename)` | Alias for `read_json_objects` with parameter `format` set to `'auto'` |
 
 These functions have the following parameters:
 
@@ -182,10 +182,10 @@ DuckDB also supports reading JSON as a table, using the following functions:
 
 | Function | Description |
 |:----|:-------|
-| `read_json(`*`filename`*`)` | Read JSON from `filename`, where `filename` can also be a list of files, or a glob pattern |
-| `read_json_auto(`*`filename`*`)` | Alias for `read_json` with all auto-detection enabled |
-| `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter `format` set to `'newline_delimited'` |
-| `read_ndjson_auto(`*`filename`*`)` | Alias for `read_json_auto` with parameter `format` set to `'newline_delimited'` |
+| `read_json(filename)` | Read JSON from `filename`, where `filename` can also be a list of files, or a glob pattern |
+| `read_json_auto(filename)` | Alias for `read_json` with all auto-detection enabled |
+| `read_ndjson(filename)` | Alias for `read_json` with parameter `format` set to `'newline_delimited'` |
+| `read_ndjson_auto(filename)` | Alias for `read_json_auto` with parameter `format` set to `'newline_delimited'` |
 
 Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, these functions have additional parameters:
 
@@ -344,19 +344,19 @@ COPY test FROM 'my.json' (AUTO_DETECT true);
 ## JSON Scalar Functions
 
 The following scalar JSON functions can be used to gain information about the stored JSON values.
-With the exception of `json_valid(`*`json`*`)`, all JSON functions produce an error when invalid JSON is supplied.
+With the exception of `json_valid(json)`, all JSON functions produce an error when invalid JSON is supplied.
 
 We support two kinds of notations to describe locations within JSON: [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901) and JSONPath.
 
 | Function | Description |
 |:---|:----|
-| `json_array_length(`*`json `*`[, `*`path`*`])` | Return the number of elements in the JSON array *`json`*, or `0` if it is not a JSON array. If *`path`* is specified, return the number of elements in the JSON array at the given *`path`*. If *`path`* is a `LIST`, the result will be `LIST` of array lengths |
-| `json_contains(`*`json_haystack`*`, `*`json_needle`*`)` | Returns `true` if *`json_needle`* is contained in *`json_haystack`*. Both parameters are of JSON type, but *`json_needle`* can also be a numeric value or a string, however the string must be wrapped in double quotes |
-| `json_keys(`*`json `*`[, `*`path`*`])` | Returns the keys of `json` as a `LIST` of `VARCHAR`, if `json` is a JSON object. If *`path`* is specified, return the keys of the JSON object at the given *`path`*. If *`path`* is a `LIST`, the result will be `LIST` of `LIST` of `VARCHAR` |
-| `json_structure(`*`json`*`)` | Return the structure of *`json`*. Defaults to `JSON` the structure is inconsistent (e.g., incompatible types in an array) |
-| `json_type(`*`json `*`[, `*`path`*`])` | Return the type of the supplied *`json`*, which is one of `OBJECT`, `ARRAY`, `BIGINT`, `UBIGINT`, `VARCHAR`, `BOOLEAN`, `NULL`. If *`path`* is specified, return the type of the element at the given *`path`*. If *`path`* is a `LIST`, the result will be `LIST` of types |
-| `json_valid(`*`json`*`)` | Return whether *`json`* is valid JSON |
-| `json(`*`json`*`)` | Parse and minify *`json`* |
+| `json_array_length(json [, path])` | Return the number of elements in the JSON array `json`, or `0` if it is not a JSON array. If `path` is specified, return the number of elements in the JSON array at the given `path`. If `path` is a `LIST`, the result will be `LIST` of array lengths |
+| `json_contains(json_haystack, json_needle)` | Returns `true` if `json_needle` is contained in `json_haystack`. Both parameters are of JSON type, but `json_needle` can also be a numeric value or a string, however the string must be wrapped in double quotes |
+| `json_keys(json [, path])` | Returns the keys of `json` as a `LIST` of `VARCHAR`, if `json` is a JSON object. If `path` is specified, return the keys of the JSON object at the given `path`. If `path` is a `LIST`, the result will be `LIST` of `LIST` of `VARCHAR` |
+| `json_structure(json)` | Return the structure of `json`. Defaults to `JSON` the structure is inconsistent (e.g., incompatible types in an array) |
+| `json_type(json [, path])` | Return the type of the supplied `json`, which is one of `OBJECT`, `ARRAY`, `BIGINT`, `UBIGINT`, `VARCHAR`, `BOOLEAN`, `NULL`. If `path` is specified, return the type of the element at the given `path`. If `path` is a `LIST`, the result will be `LIST` of types |
+| `json_valid(json)` | Return whether `json` is valid JSON |
+| `json(json)` | Parse and minify `json` |
 
 The JSONPointer syntax separates each field with a `/`.
 For example, to extract the first element of the array with key `"duck"`, you can do:
@@ -441,8 +441,8 @@ These functions supports the same two location notations as the previous functio
 
 | Function | Alias | Operator | Description |
 |:---|:---|:-|
-| `json_extract(`*`json`*`,`*`path`*`)` | `json_extract_path` | `->` | Extract `JSON` from *`json`* at the given *`path`*. If *`path`* is a `LIST`, the result will be a `LIST` of `JSON` |
-| `json_extract_string(`*`json`*`,`*`path`*`)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from *`json`* at the given *`path`*. If *`path`* is a `LIST`, the result will be a `LIST` of `VARCHAR` |
+| `json_extract(json, path)` | `json_extract_path` | `->` | Extract `JSON` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `JSON` |
+| `json_extract_string(json, path)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `VARCHAR` |
 
 Note that the equality comparison operator (`=`) has a higher precedence than the `->` JSON extract operator. Therefore, surround the uses of the `->` operator with parentheses when making equality comparisons. For example:
 
@@ -518,13 +518,13 @@ The following functions are used to create JSON.
 
 | Function | Description |
 |:--|:----|
-| `to_json(`*`any`*`)` | Create `JSON` from a value of *`any`* type. Our `LIST` is converted to a JSON array, and our `STRUCT` and `MAP` are converted to a JSON object |
-| `json_quote(`*`any`*`)` | Alias for `to_json` |
-| `array_to_json(`*`list`*`)` | Alias for `to_json` that only accepts `LIST` |
-| `row_to_json(`*`list`*`)` | Alias for `to_json` that only accepts `STRUCT` |
-| `json_array([`*`any`*`, ...])` | Create a JSON array from *`any`* number of values |
-| `json_object([`*`key`*`,`*`value`*`, ...])` | Create a JSON object from any number of *`key`*, *`value`* pairs |
-| `json_merge_patch(`*`json`*`,`*`json`*`)` | Merge two JSON documents together |
+| `to_json(any)` | Create `JSON` from a value of `any` type. Our `LIST` is converted to a JSON array, and our `STRUCT` and `MAP` are converted to a JSON object |
+| `json_quote(any)` | Alias for `to_json` |
+| `array_to_json(list)` | Alias for `to_json` that only accepts `LIST` |
+| `row_to_json(list)` | Alias for `to_json` that only accepts `STRUCT` |
+| `json_array([any, ...])` | Create a JSON array from `any` number of values |
+| `json_object([key, value, ...])` | Create a JSON object from any number of `key`, `value` pairs |
+| `json_merge_patch(json, json)` | Merge two JSON documents together |
 
 Examples:
 
@@ -553,9 +553,9 @@ There are three JSON aggregate functions.
 
 | Function | Description |
 |:---|:----|
-| `json_group_array(`*`any`*`)` | Return a JSON array with all values of *`any`* in the aggregation |
-| `json_group_object(`*`key`*`, `*`value`*`)` | Return a JSON object with all *`key`*, *`value`* pairs in the aggregation |
-| `json_group_structure(`*`json`*`)` | Return the combined `json_structure` of all *`json`* in the aggregation |
+| `json_group_array(any)` | Return a JSON array with all values of `any` in the aggregation |
+| `json_group_object(key, value)` | Return a JSON object with all `key`, `value` pairs in the aggregation |
+| `json_group_structure(json)` | Return the combined `json_structure` of all `json` in the aggregation |
 
 Examples:
 
@@ -592,13 +592,13 @@ Instead, we can "extract" all values at once, transforming JSON to the nested ty
 
 | Function | Description |
 |:---|:---|
-| `json_transform(`*`json`*`, `*`structure`*`)` | Transform *`json`* according to the specified *`structure`* |
-| `from_json(`*`json`*`, `*`structure`*`)` | Alias for `json_transform` |
-| `json_transform_strict(`*`json`*`, `*`structure`*`)` | Same as `json_transform`, but throws an error when type casting fails |
-| `from_json_strict(`*`json`*`, `*`structure`*`)` | Alias for `json_transform_strict` |
+| `json_transform(json, structure)` | Transform `json` according to the specified `structure` |
+| `from_json(json, structure)` | Alias for `json_transform` |
+| `json_transform_strict(json, structure)` | Same as `json_transform`, but throws an error when type casting fails |
+| `from_json_strict(json, structure)` | Alias for `json_transform_strict` |
 
-The *`structure`* argument is JSON of the same form as returned by `json_structure`.
-The *`structure`* argument can be modified to transform the JSON into the desired structure and types.
+The `structure` argument is JSON of the same form as returned by `json_structure`.
+The `structure` argument can be modified to transform the JSON into the desired structure and types.
 It is possible to extract fewer key/value pairs than are present in the JSON, and it is also possible to extract more: missing keys become `NULL`.
 
 Examples:
@@ -633,10 +633,10 @@ The JSON extension also provides functions to serialize and deserialize `SELECT`
 
 | Function | Type | Description |
 |:------|:-|:---------|
-| `json_deserialize_sql(`*`json`*`)` | Scalar  | Deserialize one or many *`json`* serialized statements back to an equivalent sql string |
-| `json_execute_serialized_sql(`*`varchar`*`)` | Table | Execute *`json`* serialized statements and return the resulting rows. Only one statement at a time is supported for now. |
-| `json_serialize_sql(`*`varchar`*`, skip_empty := `*`boolean`*`, skip_null := `*`boolean`*`, format := `*`boolean`*`)` | Scalar | Serialize a set of `;` separated select statments to an equivalent list of *`json`* serialized statements |
-| `PRAGMA json_execute_serialized_sql(`*`varchar`*`)` | Pragma | Pragma version of the `json_execute_serialized_sql` function. |
+| `json_deserialize_sql(json)` | Scalar  | Deserialize one or many `json` serialized statements back to an equivalent sql string |
+| `json_execute_serialized_sql(varchar)` | Table | Execute `json` serialized statements and return the resulting rows. Only one statement at a time is supported for now. |
+| `json_serialize_sql(varchar, skip_empty := boolean, skip_null := boolean, format := boolean)` | Scalar | Serialize a set of `;` separated select statments to an equivalent list of `json` serialized statements |
+| `PRAGMA json_execute_serialized_sql(varchar)` | Pragma | Pragma version of the `json_execute_serialized_sql` function. |
 
 The `json_serialize_sql(varchar)` function takes three optional parameters, `skip_empty`, `skip_null`, and `format` that can be used to control the output of the serialized statements.
 

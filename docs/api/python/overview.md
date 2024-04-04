@@ -112,8 +112,8 @@ con.sql("SELECT 42 AS x").show()
 
 ### Persistent Storage
 
-The `duckdb.connect(`*`dbname`*`)` creates a connection to a **persistent** database.
-Any data written to that connection will be persisted, and can be reloaded by re-connecting to the same file, both from Python and from other DuckDB clients.
+The `duckdb.connect(dbname)` creates a connection to a **persistent** database.
+Any data written to that connection will be persisted, and can be reloaded by reconnecting to the same file, both from Python and from other DuckDB clients.
 
 ```python
 import duckdb

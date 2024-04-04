@@ -14,9 +14,9 @@ For the behavior of the `autocomplete` extension, see the [documentation of the 
 
 <div class="narrow_table"></div>
 
-| Function                                | Description                                            |
-|:----------------------------------------|:-------------------------------------------------------|
-| `sql_auto_complete(`*`query_string`*`)` | Attempts autocompletion on the given *`query_string`*. |
+| Function                          | Description                                          |
+|:----------------------------------|:-----------------------------------------------------|
+| `sql_auto_complete(query_string)` | Attempts autocompletion on the given `query_string`. |
 
 ## Example
 

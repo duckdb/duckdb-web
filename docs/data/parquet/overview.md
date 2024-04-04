@@ -59,8 +59,8 @@ Parquet files are compressed columnar files that are efficient to load and proce
 
 | Function | Description | Example |
 |:--|:--|:-----|
-| `read_parquet(`*`path(s)`*`, *)` | Read Parquet file(s)     | `SELECT * FROM read_parquet('test.parquet');` |
-| `parquet_scan(`*`path(s)`*`, *)` | Alias for `read_parquet` | `SELECT * FROM parquet_scan('test.parquet');` |
+| `read_parquet(path_or_list_of_paths)` | Read Parquet file(s)     | `SELECT * FROM read_parquet('test.parquet');` |
+| `parquet_scan(path_or_list_of_paths)` | Alias for `read_parquet` | `SELECT * FROM parquet_scan('test.parquet');` |
 
 If your file ends in `.parquet`, the function syntax is optional. The system will automatically infer that you are reading a Parquet file.
 
