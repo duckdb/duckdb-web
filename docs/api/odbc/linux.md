@@ -100,11 +100,15 @@ An example of `.odbc.ini` with DuckDB would be:
 [DuckDB]
 Driver = DuckDB Driver
 Database = :memory:
+access_mode = read_only
+allow_unsigned_extensions = true
 ```
 
 * `[DuckDB]`: between the brackets is a DSN for the DuckDB.
 * `Driver`: it describes the driver's name, and other configurations will be placed at the `.odbcinst.ini`.
 * `Database`: it describes the database name used by DuckDB, and it can also be a file path to a `.db` in the system.
+* `access_mode`: The mode in which to connect to the database.
+* `allow_unsigned_extensions`: Allow the use of [unsigned extensions](../../extensions/overview#unsigned-extensions).
 
 ### The `.odbcinst.ini` File
 
@@ -119,7 +123,7 @@ Trace = yes
 TraceFile = /tmp/odbctrace
 
 [DuckDB Driver]
-Driver = /home/⟨user⟩/duckdb_odbc/libduckdb_odbc.so
+Driver = /path/to/libduckdb_odbc.so
 ```
 
 * `[ODBC]`: it is the DM configuration section.

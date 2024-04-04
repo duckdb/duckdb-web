@@ -26,6 +26,7 @@ wget https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbve
 Run unzip to extract the files to a permanent directory:
 
 ```bash
+mkdir duckdb_odbc
 unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
 ```
 
@@ -49,9 +50,9 @@ Example of `.odbc.ini` with DuckDB:
 ```ini
 [DuckDB]
 Driver = DuckDB Driver
-Database=:memory:
-access_mode=read_only
-allow_unsigned_extensions=true
+Database = :memory:
+access_mode = read_only
+allow_unsigned_extensions = true
 ```
 
 * `[DuckDB]`: between the brackets is a DSN for the DuckDB.
