@@ -29,12 +29,12 @@ To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command:
 
 ```sql
 -- connect to the "public" schema of the postgres instance running on localhost in read-write mode
-ATTACH '' AS postgres_db (TYPE postgres);
+ATTACH '' AS postgres_db (TYPE POSTGRES);
 ```
 
 ```sql
 -- connect to the Postgres instance with the given parameters in read-only mode
-ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres, READ_ONLY);
+ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE POSTGRES, READ_ONLY);
 ```
 
 ### Configuration
@@ -77,7 +77,7 @@ export PGDATABASE=mydatabase
 Then, to connect, start the `duckdb` process and run:
 
 ```sql
-ATTACH '' AS p (TYPE postgres);
+ATTACH '' AS p (TYPE POSTGRES);
 ```
 
 ## Usage
@@ -120,7 +120,7 @@ This allows you to use DuckDB to, for example, export data that is stored in a P
 Below is a brief example of how to create a new table in Postgres and load data into it.
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
 CREATE TABLE postgres_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```
@@ -129,7 +129,7 @@ Many operations on Postgres tables are supported. All these operations directly 
 Note that if modifications are not desired, `ATTACH` can be run with the `READ_ONLY` property which prevents making modifications to the underlying database. For example:
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres, READ_ONLY);
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES, READ_ONLY);
 ```
 
 Below is a list of supported operations.
@@ -282,7 +282,7 @@ postgres_query(attached_database::VARCHAR, query::VARCHAR)
 For example:
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
 SELECT * FROM postgres_query('postgres_db', 'SELECT * FROM cars LIMIT 3');
 ```
 
@@ -306,7 +306,7 @@ SELECT * FROM postgres_query('postgres_db', 'SELECT * FROM cars LIMIT 3');
 The `postgres_execute` function allows running arbitrary queries within Postgres, including statements that update the schema and content of the database.
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
 CALL postgres_execute('postgres_db', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
