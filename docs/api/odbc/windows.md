@@ -9,7 +9,7 @@ For detailed information check out the [Common ODBC Component Files](https://doc
 
 ## Step 1: Download ODBC Driver
 
-DuckDB releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip">Windows Asset</a> that contains the following artifacts:
+DuckDB releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip">Windows Asset (AMD64/x86)</a> that contains the following artifacts:
 
 * `duckdb_odbc.dll`: the DuckDB driver compiled for Windows.
 * `duckdb_odbc_setup.dll`: a setup DLL used by the Windows ODBC Data Source Administrator tool.
@@ -74,6 +74,8 @@ included in DuckDB.
 
 > If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
 > the one passed to `SQLDriverConnect` will take precedence.
+
+See the [ODBC configuration page](configuration) for details.
 
 ### Registry Keys
 

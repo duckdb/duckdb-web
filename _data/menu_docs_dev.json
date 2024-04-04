@@ -364,6 +364,10 @@
                 {
                   "page": "macOS Setup",
                   "url": "macos"
+                },
+                {
+                  "page": "Configuration",
+                  "url": "configuration"
                 }
               ]
             }
