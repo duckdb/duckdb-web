@@ -15,16 +15,17 @@ brew install unixodbc
 
 ## Step 1: Download ODBC Driver
 
-DuckDB releases the ODBC driver as asset. For macOS, download it from the <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC macOS asset</a> that contains the following artifacts:
+DuckDB releases the ODBC driver as asset. For macOS, download it from the <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC macOS asset</a> that contains the `libduckdb_odbc.dylib` artifact, the DuckDB ODBC driver compiled to macOS (with Intel and Apple Silicon support).
 
-`libduckdb_odbc.dylib`: the DuckDB ODBC driver compiled to macOS (with Intel and Apple Silicon support).
+```bash
+wget https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip
+```
 
 ## Step 2: Extracting ODBC Artifacts
 
 Run unzip to extract the files to a permanent directory:
 
 ```bash
-mkdir duckdb_odbc
 unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
 ```
 
