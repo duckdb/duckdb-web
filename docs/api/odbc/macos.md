@@ -57,8 +57,8 @@ allow_unsigned_extensions=true
 * `[DuckDB]`: between the brackets is a DSN for the DuckDB.
 * `Driver`: Describes the driver's name, as well as where to find the configurations in the `.odbcinst.ini`.
 * `Database`: Describes the database name used by DuckDB, can also be a file path to a `.db` in the system.
-* `access_mode`: The mode in which to connect to the database
-* `allow_unsigned_extensions`: Allow the use of unsigned extensions
+* `access_mode`: The mode in which to connect to the database.
+* `allow_unsigned_extensions`: Allow the use of [unsigned extensions](../../extensions/overview#unsigned-extensions).
 
 ### The `.odbcinst.ini` File
 
@@ -73,14 +73,14 @@ Trace = yes
 TraceFile = /tmp/odbctrace
 
 [DuckDB Driver]
-Driver = /User/⟨user⟩/duckdb_odbc/libduckdb_odbc.dylib
+Driver = /path/to/libduckdb_odbc.dylib
 ```
 
 * `[ODBC]`: it is the DM configuration section.
 * `Trace`: it enables the ODBC trace file using the option `yes`.
 * `TraceFile`: the absolute system file path for the ODBC trace file.
 * `[DuckDB Driver]`: the section of the DuckDB installed driver.
-* `Driver`: the absolute system file path of the DuckDB driver.
+* `Driver`: the absolute system file path of the DuckDB driver. Change to match your configuration.
 
 ## Step 4 (Optional): Test the ODBC Driver
 
