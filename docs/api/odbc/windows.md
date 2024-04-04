@@ -75,6 +75,8 @@ included in DuckDB.
 > If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
 > the one passed to `SQLDriverConnect` will take precedence.
 
+See the [ODBC configuration page](configuration) for details.
+
 ### Registry Keys
 
 The ODBC setup on Windows is based on registry keys (see [Registry Entries for ODBC Components

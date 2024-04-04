@@ -90,44 +90,4 @@ The ODBC setup on Linux is based on files, the well-known `.odbc.ini` and `.odbc
 These files can be placed at the system `/etc` directory or at the user home directory `/home/⟨user⟩` (shortcut as `~/`).
 The DM prioritizes the user configuration files and then the system files.
 
-### The `.odbc.ini` File
-
-The `.odbc.ini` contains the DSNs for the drivers, which can have specific knobs.
-
-An example of `.odbc.ini` with DuckDB would be:
-
-```ini
-[DuckDB]
-Driver = DuckDB Driver
-Database = :memory:
-access_mode = read_only
-allow_unsigned_extensions = true
-```
-
-* `[DuckDB]`: between the brackets is a DSN for the DuckDB.
-* `Driver`: it describes the driver's name, and other configurations will be placed at the `.odbcinst.ini`.
-* `Database`: it describes the database name used by DuckDB, and it can also be a file path to a `.db` in the system.
-* `access_mode`: The mode in which to connect to the database.
-* `allow_unsigned_extensions`: Allow the use of [unsigned extensions](../../extensions/overview#unsigned-extensions).
-
-### The `.odbcinst.ini` File
-
-The `.odbcinst.ini` contains general configurations for the ODBC installed drivers in the system.
-A driver section starts with the driver name between brackets, and then it follows specific configuration knobs belonging to that driver.
-
-An example of `.odbcinst.ini` with the DuckDB driver would be:
-
-```ini
-[ODBC]
-Trace = yes
-TraceFile = /tmp/odbctrace
-
-[DuckDB Driver]
-Driver = /path/to/libduckdb_odbc.so
-```
-
-* `[ODBC]`: it is the DM configuration section.
-* `Trace`: it enables the ODBC trace file using the option `yes`.
-* `TraceFile`: the absolute system file path for the ODBC trace file.
-* `[DuckDB Driver]`: the section of the DuckDB installed driver.
-* `Driver`: the absolute system file path of the DuckDB driver.
+See the [ODBC configuration page](configuration) for details.
