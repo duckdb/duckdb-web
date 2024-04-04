@@ -36,7 +36,6 @@ A set of functions that create and destroy a connection to interact with a datab
 | `ConnectionInit` | Finish setting options and initialize the connection. | `(AdbcConnection*, AdbcDatabase*, AdbcError*)` | `AdbcConnectionInit(&adbc_connection, &adbc_database, &adbc_error)` |
 | `ConnectionRelease` | Destroy this connection. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionRelease(&adbc_connection, &adbc_error)` |
 
-
 A set of functions that retrieve metadata about the database. In general, these functions will return Arrow objects, specifically an ArrowArrayStream.
 
 | Function name | Description | Arguments | Example |
@@ -44,7 +43,6 @@ A set of functions that retrieve metadata about the database. In general, these 
 | `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables, and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
 | `ConnectionGetTableSchema` | Get the Arrow schema of a table. | `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` |
 | `ConnectionGetTableTypes` | Get a list of table types in the database. | `(AdbcConnection*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
-
 
 A set of functions with transaction semantics for the connection. By default, all connections start with auto-commit mode on, but this can be turned off via the ConnectionSetOption function.
 
@@ -110,12 +108,14 @@ AdbcDatabaseInit(&adbc_database, &adbc_error);
 ```
 
 After initializing the database, we must create and initialize a connection to it.
+
 ```cpp
 AdbcConnectionNew(&adbc_connection, &adbc_error);
 AdbcConnectionInit(&adbc_connection, &adbc_database, &adbc_error);
 ```
 
 We can now initialize our statement and run queries through our connection. After the `AdbcStatementExecuteQuery` the `arrow_stream` is populated with the result.
+
 ```cpp
 AdbcStatementNew(&adbc_connection, &adbc_statement, &adbc_error);
 AdbcStatementSetSqlQuery(&adbc_statement, "SELECT 42", &adbc_error);
@@ -125,6 +125,7 @@ arrow_stream.release(arrow_stream)
 ```
 
 Besides running queries, we can also ingest data via `arrow_streams`. For this we need to set an option with the table name we want to insert to, bind the stream and then execute the query.
+
 ```cpp
 StatementSetOption(&adbc_statement, ADBC_INGEST_OPTION_TARGET_TABLE, "AnswerToEverything", &adbc_error);
 StatementBindStream(&adbc_statement, &arrow_stream, &adbc_error);
@@ -142,6 +143,7 @@ pip install adbc_driver_manager pyarrow
 > For details on the `adbc_driver_manager` package, see the [`adbc_driver_manager` package documentation](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
 
 As with C++, we need to provide initialization options consisting of the location of the libduckdb shared object and entrypoint function. Notice that the `path` argument for DuckDB is passed in through the `db_kwargs` dictionary.
+
 ```python
 import adbc_driver_duckdb.dbapi
 

@@ -46,8 +46,8 @@ FROM generate_series(1, 10) tbl(i);
 |:---|:---|:---|
 | 15 | 5.0 | 3.0 |
 
-
 The `FILTER` clause can also be used to pivot data from rows into columns. This is a static pivot, as columns must be defined prior to runtime in SQL. However, this kind of statement can be dynamically generated in a host programming language to leverage DuckDB's SQL engine for rapid, larger than memory pivoting.
+
 ```sql
 -- First generate an example dataset
 CREATE TEMP TABLE stacked_data AS

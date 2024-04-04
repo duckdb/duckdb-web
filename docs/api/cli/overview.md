@@ -47,6 +47,7 @@ You will see DuckDB's version number, the information on the connection and a pr
 ```bash
 $ duckdb
 ```
+
 ```text
 v0.10.1 4a89d97db8
 Enter ".help" for usage hints.

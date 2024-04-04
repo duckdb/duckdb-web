@@ -21,6 +21,7 @@ When DuckDB is run in Jupyter notebooks or in the IPython shell, the output of t
 In [1]: import duckdb
    ...: duckdb.sql("EXPLAIN SELECT 42 AS x")
 ```
+
 ```text
 Out[1]:
 ┌───────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -36,6 +37,7 @@ To work around this, `print` the output of the `explain()` function:
 ```python
 In [2]: print(duckdb.sql("SELECT 42 AS x").explain())
 ```
+
 ```text
 Out[2]:
 ┌───────────────────────────┐
@@ -57,6 +59,7 @@ When importing DuckDB on Windows, the Python runtime may return the following er
 ```python
 import duckdb
 ```
+
 ```text
 ImportError: DLL load failed while importing duckdb: The specified module could not be found.
 ```

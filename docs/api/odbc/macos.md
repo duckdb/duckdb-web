@@ -90,6 +90,7 @@ Use the DSN defined in `odbc.ini` as a parameter of `isql`.
 ```bash
 isql DuckDB
 ```
+
 ```text
 +---------------------------------------+
 | Connected!                            |
@@ -101,9 +102,11 @@ isql DuckDB
 |                                       |
 +---------------------------------------+
 ```
+
 ```sql
 SQL> SELECT 42;
 ```
+
 ```text
 +------------+
 | 42         |

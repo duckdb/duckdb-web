@@ -16,6 +16,7 @@ FROM addresses
 GROUP BY city
 HAVING count(*) >= 50;
 ```
+
 ```sql
 -- compute the average income per city per street_name
 -- filtering out cities with an average income bigger than twice the median income

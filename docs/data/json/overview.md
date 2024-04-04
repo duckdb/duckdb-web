@@ -132,6 +132,7 @@ FROM read_json_auto('array.json', format = 'array');
 ### Format: `unstructured`
 
 If the JSON file contains JSON that is not newline-delimited or an array, `unstructured` may be used.
+
 ```json
 {
     "key1":"value1",
@@ -146,6 +147,7 @@ If the JSON file contains JSON that is not newline-delimited or an array, `unstr
     "key2":"value3"
 }
 ```
+
 ```sql
 SELECT *
 FROM read_json_auto('unstructured.json', format = 'unstructured');
@@ -171,6 +173,7 @@ Continuing with the same example file from before:
 {"key1":"value2", "key2": "value2"}
 {"key1":"value3", "key2": "value3"}
 ```
+
 ```sql
 SELECT *
 FROM read_json_auto('records.json', records = true);
@@ -206,6 +209,7 @@ This is especially useful if we have non-object JSON, for example:
 [4, 5, 6]
 [7, 8, 9]
 ```
+
 ```sql
 SELECT *
 FROM read_json_auto('arrays.json', records = false);

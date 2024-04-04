@@ -44,6 +44,7 @@ For more information on collations, see the [Collation page](../../sql/expressio
 ## Examples
 
 All examples use this example table:
+
 ```sql
 CREATE OR REPLACE TABLE addresses AS
     SELECT '123 Quack Blvd' AS address, 'DuckTown' AS city, '11111' AS zip

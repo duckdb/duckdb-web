@@ -26,7 +26,7 @@ The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.
 
 To use DuckDB, you must first create a connection object that represents the database. The connection object takes as parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the R process). If you would like to connect to an existing database in read-only mode, set the `read_only` flag to `TRUE`. Read-only mode is required if multiple R processes want to access the same database file at the same time.
 
-```R
+```r
 library("duckdb")
 # to start an in-memory database
 con <- dbConnect(duckdb())
@@ -44,7 +44,7 @@ Connections are closed implicitly when they go out of scope or if they are expli
 
 DuckDB supports the standard DBI methods to send queries and retrieve result sets. `dbExecute()` is meant for queries where no results are expected like `CREATE TABLE` or `UPDATE` etc. and `dbGetQuery()` is meant to be used for queries that produce results (e.g., `SELECT`). Below an example.
 
-```R
+```r
 # create a table
 dbExecute(con, "CREATE TABLE items (item VARCHAR, value DECIMAL(10, 2), count INTEGER)")
 # insert two items into the table
@@ -60,7 +60,7 @@ print(res)
 
 DuckDB also supports prepared statements in the R API with the `dbExecute` and `dbGetQuery` methods. Here is an example:
 
-```R
+```r
 # prepared statement parameters are given as a list
 dbExecute(con, "INSERT INTO items VALUES (?, ?, ?)", list('laptop', 2000, 1))
 
@@ -83,7 +83,7 @@ print(res)
 
 To write a R data frame into DuckDB, use the standard DBI function `dbWriteTable()`. This creates a table in DuckDB and populates it with the data frame contents. For example:
 
-```R
+```r
 dbWriteTable(con, "iris_table", iris)
 res <- dbGetQuery(con, "SELECT * FROM iris_table LIMIT 1")
 print(res)
@@ -93,7 +93,7 @@ print(res)
 
 It is also possible to "register" a R data frame as a virtual table, comparable to a SQL `VIEW`. This *does not actually transfer data* into DuckDB yet. Below is an example:
 
-```R
+```r
 duckdb_register(con, "iris_view", iris)
 res <- dbGetQuery(con, "SELECT * FROM iris_view LIMIT 1")
 print(res)
@@ -109,7 +109,7 @@ Also refer to [the data import documentation](../data/overview) for more options
 
 DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Here is an example:
 
-```R
+```r
 library("duckdb")
 library("dplyr")
 con <- dbConnect(duckdb())
@@ -123,7 +123,7 @@ tbl(con, "flights") |>
 
 When using dbplyr, CSV and Parquet files can be read using the `dplyr::tbl` function.
 
-```R
+```r
 # Establish a CSV for the sake of this example
 write.csv(mtcars, "mtcars.csv")
 
@@ -134,7 +134,7 @@ tbl(con, "mtcars.csv") |>
   collect()
 ```
 
-```R
+```r
 # Establish a set of Parquet files
 dbExecute(con, "COPY flights TO 'dataset' (FORMAT PARQUET, PARTITION_BY (year, month))")
 
