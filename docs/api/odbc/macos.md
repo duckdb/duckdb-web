@@ -17,7 +17,7 @@ brew install unixodbc
 
 DuckDB releases the ODBC driver as asset. For macOS, download it from the <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC macOS asset</a> that contains the following artifacts:
 
-**libduckdb_odbc.dylib**: the DuckDB ODBC driver compiled to macOS (with Intel and Apple Silicon support).
+`libduckdb_odbc.dylib`: the DuckDB ODBC driver compiled to macOS (with Intel and Apple Silicon support).
 
 ## Step 2: Extracting ODBC Artifacts
 
@@ -54,7 +54,7 @@ allow_unsigned_extensions=true
 ```
 
 * `[DuckDB]`: between the brackets is a DSN for the DuckDB.
-* `Driver`: Describes the driver's name, as well as where to find the configurations in the **.odbcinst.ini**.
+* `Driver`: Describes the driver's name, as well as where to find the configurations in the `.odbcinst.ini`.
 * `Database`: Describes the database name used by DuckDB, can also be a file path to a `.db` in the system.
 * `access_mode`: The mode in which to connect to the database
 * `allow_unsigned_extensions`: Allow the use of unsigned extensions

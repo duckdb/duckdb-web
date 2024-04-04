@@ -7,16 +7,13 @@ The Microsoft Windows requires an ODBC Driver Manager to manage communication be
 The DM on Windows is provided in a DLL file `odbccp32.dll`, and other files and tools.
 For detailed information check out the [Common ODBC Component Files](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/odbc/dn170563(v=vs.85)).
 
-
 ## Step 1: Download ODBC Driver
 
 DuckDB releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip">Windows Asset</a> that contains the following artifacts:
 
-**duckdb_odbc.dll**: the DuckDB driver compiled for Windows.
-
-**duckdb_odbc_setup.dll**: a setup DLL used by the Windows ODBC Data Source Administrator tool.
-
-**odbc_install.exe**: an installation script to aid the configuration on Windows.
+* `duckdb_odbc.dll`: the DuckDB driver compiled for Windows.
+* `duckdb_odbc_setup.dll`: a setup DLL used by the Windows ODBC Data Source Administrator tool.
+* `odbc_install.exe`: an installation script to aid the configuration on Windows.
 
 ## Step 2: Extracting ODBC Artifacts
 

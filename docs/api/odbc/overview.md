@@ -11,7 +11,6 @@ The ODBC API consists of the Driver Manager (DM) and the ODBC drivers.
 
 The DM is part of the system library, e.g., unixODBC, which manages the communications between the user applications and the ODBC drivers.
 Typically, applications are linked against the DM, which uses Data Source Name (DSN) to look up the correct ODBC driver.
-<!--- with dynamically linkage call the ODBC driver. -->
 
 The ODBC driver is a DBMS implementation of the ODBC API, which handles all the internals of that DBMS.
 

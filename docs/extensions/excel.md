@@ -31,8 +31,8 @@ SELECT excel_text(1234567.897, 'h:mm AM/PM') AS timestamp;
 
 | Function | Description | Example | Result |
 |:--|:---|:--|:-|
-| `excel_text(`*`number`*`, `*`format_string`*`)` | Alias for `text`.                                                    | `excel_text(1234567.897, 'h:mm AM/PM')` | `9:31 PM` |
-| `text(`*`number`*`, `*`format_string`*`)`       | Format the given `number` per the rules given in the `format_string` | `text(1234567.897, 'h AM/PM')`          | `9 PM`    |
+| `excel_text(number, format_string)` | Alias for `text`.                                                    | `excel_text(1234567.897, 'h:mm AM/PM')` | `9:31 PM` |
+| `text(number, format_string)`       | Format the given `number` per the rules given in the `format_string` | `text(1234567.897, 'h AM/PM')`          | `9 PM`    |
 
 ## GitHub
 
