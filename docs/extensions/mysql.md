@@ -25,7 +25,7 @@ LOAD mysql;
 To make a MySQL database accessible to DuckDB use the `ATTACH` command:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql);
+ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE MYSQL);
 USE mysqldb;
 ```
 
@@ -85,7 +85,7 @@ This allows you to use DuckDB to, for example, export data that is stored in a M
 Below is a brief example of how to create a new table in MySQL and load data into it.
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE mysql_scanner);
+ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL_SCANNER);
 CREATE TABLE mysql_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO mysql_db.tbl VALUES (42, 'DuckDB');
 ```
@@ -94,7 +94,7 @@ Many operations on MySQL tables are supported. All these operations directly mod
 Note that if modifications are not desired, `ATTACH` can be run with the `READ_ONLY` property which prevents making modifications to the underlying database. For example:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE mysql_scanner, READ_ONLY);
+ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL_SCANNER, READ_ONLY);
 ```
 
 ## Supported Operations
@@ -224,7 +224,7 @@ mysql_query(attached_database::VARCHAR, query::VARCHAR)
 For example:
 
 ```sql
-ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE mysql);
+ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
 SELECT * FROM mysql_query('mysqldb', 'SELECT * FROM cars LIMIT 3');
 ```
 
@@ -236,7 +236,7 @@ SELECT * FROM mysql_query('mysqldb', 'SELECT * FROM cars LIMIT 3');
 The `mysql_execute` function allows running arbitrary queries within MySQL, including statements that update the schema and content of the database.
 
 ```sql
-ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE mysql);
+ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
 CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
