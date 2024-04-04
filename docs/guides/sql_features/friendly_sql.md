@@ -35,7 +35,7 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 
 * [Case-insensitivity while maintaining case of entities in the catalog](../../sql/keywords_and_identifiers#case-sensitivity-of-identifiers)
 * [Deduplicating identifiers](../../sql/keywords_and_identifiers#deduplicating-identifiers)
-* [Underscores as digit separators](../../sql/keywords_and_identifiers#numeric-literals)
+* [Underscores as digit separators in numeric literals](../../sql/keywords_and_identifiers#numeric-literals)
 
 ## Data Types
 
