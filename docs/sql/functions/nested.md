@@ -643,22 +643,27 @@ The default value of `start` is 0 and the default value of `step` is 1.
 SELECT range(5);
 -- [0, 1, 2, 3, 4]
 ```
+
 ```sql
 SELECT range(2, 5);
 -- [2, 3, 4]
 ```
+
 ```sql
 SELECT range(2, 5, 3);
 -- [2]
 ```
+
 ```sql
 SELECT generate_series(5);
 -- [0, 1, 2, 3, 4, 5]
 ```
+
 ```sql
 SELECT generate_series(2, 5);
 -- [2, 3, 4, 5]
 ```
+
 ```sql
 SELECT generate_series(2, 5, 3);
 -- [2, 5]
@@ -679,6 +684,7 @@ FROM range(DATE '1992-01-01', DATE '1992-03-01', INTERVAL '1' MONTH);
 ## Slicing
 
 The function `list_slice` can be used to extract a sublist from a list.  The following variants exist:
+
 * `list_slice(list, begin, end)`
 * `list_slice(list, begin, end, step)`
 * `array_slice(list, begin, end)`

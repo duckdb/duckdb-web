@@ -133,7 +133,6 @@ INTO
 | 3     | cars        | May   | 500   |
 | 3     | cars        | Jun   | 600   |
 
-
 ### `UNPIVOT` into Multiple Value Columns
 
 The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported.
@@ -141,10 +140,10 @@ This can be useful when the goal is to reduce the extent to which a dataset is p
 To demonstrate this, the query below will generate a dataset with a separate column for the number of each month within the quarter (month 1, 2, or 3), and a separate row for each quarter.
 Since there are fewer quarters than months, this does make the dataset longer, but not as long as the above.
 
-
 To accomplish this, multiple sets of columns are included in the `ON` clause.
 The `q1` and `q2` aliases are optional.
 The number of columns in each set of columns in the `ON` clause must match the number of columns in the `VALUE` clause.
+
 ```sql
 UNPIVOT monthly_sales
     ON (jan, feb, mar) AS q1, (apr, may, jun) AS q2

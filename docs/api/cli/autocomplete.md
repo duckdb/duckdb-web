@@ -19,15 +19,19 @@ The shell looks at the position in the SQL statement to determine which of these
 ```sql
 SELECT s -> student_id
 ```
+
 ```sql
 SELECT student_id F -> FROM
 ```
+
 ```sql
 SELECT student_id FROM g -> grades
 ```
+
 ```sql
 SELECT student_id FROM 'd -> data/
 ```
+
 ```sql
 SELECT student_id FROM 'data/ -> data/grades.csv
 ```

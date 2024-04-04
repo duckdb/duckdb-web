@@ -7,6 +7,7 @@ railroad: expressions/case.js
 <div id="rrdiagram"></div>
 
 The `CASE` statement performs a switch based on a condition. The basic form is identical to the ternary condition used in many programming languages (`CASE WHEN cond THEN a ELSE b END` is equivalent to `cond ? a : b`). With a single condition this can be expressed with `IF(cond, a, b)`.
+
 ```sql
 CREATE OR REPLACE TABLE integers AS SELECT unnest([1, 2, 3]) AS i;
 SELECT i, CASE WHEN i > 2 THEN 1 ELSE 0 END AS test

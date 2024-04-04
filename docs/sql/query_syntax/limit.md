@@ -16,6 +16,7 @@ SELECT *
 FROM addresses
 LIMIT 5;
 ```
+
 ```sql
 -- select the 5 rows from the addresses table, starting at position 5 (i.e., ignoring the first 5 rows)
 SELECT *
@@ -23,6 +24,7 @@ FROM addresses
 LIMIT 5
 OFFSET 5;
 ```
+
 ```sql
 -- select the top 5 cities with the highest population
 SELECT city, count(*) AS population

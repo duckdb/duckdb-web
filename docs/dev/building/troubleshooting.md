@@ -33,6 +33,7 @@ ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 ```bash
 GEN=ninja BUILD_PYTHON=1 BUILD_HTTPFS=1 make
 ```
+
 ```text
 ld: library not found for -lcrypto
 clang: error: linker command failed with exit code 1 (use -v to see invocation)

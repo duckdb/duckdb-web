@@ -70,25 +70,27 @@ The following is a step-by-step guide to setting up an application that uses ODB
 
 > To install the driver as well as anything else you will need follow these [instructions](../../api/odbc/overview).
 
-* [What is ODBC?](#what-is-odbc)
-* [General Concepts](#general-concepts)
-  * [Handles](#handles)
-    * [Handle Types](#handle-types)
-  * [Connecting](#connecting)
-    * [Connection String](#connection-string)
-    * [DSN](#dsn)
-  * [Error Handling and Diagnostics](#error-handling-and-diagnostics)
-  * [Buffers and Binding](#buffers-and-binding)
-* [Setting up an Application](#setting-up-an-application)
-  * [1. Include the SQL Header Files](#1-include-the-sql-header-files)
-  * [2. Define the ODBC Handles and Connect to the Database](#2-define-the-odbc-handles-and-connect-to-the-database)
-  * [3. Adding a Query](#3-adding-a-query)
-  * [4. Fetching Results](#4-fetching-results)
-  * [5. Go Wild](#5-go-wild)
-  * [6. Free the Handles and Disconnecting](#6-free-the-handles-and-disconnecting)
-* [Sample Application](#sample-application)
-  * [Sample `.cpp` file](#sample-cpp-file)
-  * [Sample `CMakelists.txt` file](#sample-cmakeliststxt-file)
+- [What is ODBC?](#what-is-odbc)
+- [General Concepts](#general-concepts)
+  - [Handles](#handles)
+    - [Handle Types](#handle-types)
+  - [Connecting](#connecting)
+    - [Connection String](#connection-string)
+    - [DSN](#dsn)
+  - [Error Handling and Diagnostics](#error-handling-and-diagnostics)
+  - [Buffers and Binding](#buffers-and-binding)
+- [Setting up an Application](#setting-up-an-application)
+  - [1. Include the SQL Header Files](#1-include-the-sql-header-files)
+  - [2. Define the ODBC Handles and Connect to the Database](#2-define-the-odbc-handles-and-connect-to-the-database)
+    - [2.a. Connecting with SQLConnect](#2a-connecting-with-sqlconnect)
+    - [2.b. Connecting with SQLDriverConnect](#2b-connecting-with-sqldriverconnect)
+  - [3. Adding a Query](#3-adding-a-query)
+  - [4. Fetching Results](#4-fetching-results)
+  - [5. Go Wild](#5-go-wild)
+  - [6. Free the Handles and Disconnecting](#6-free-the-handles-and-disconnecting)
+- [Sample Application](#sample-application)
+  - [Sample `.cpp` file](#sample-cpp-file)
+  - [Sample `CMakelists.txt` file](#sample-cmakeliststxt-file)
 
 ### 1. Include the SQL Header Files
 
@@ -100,6 +102,7 @@ The first step is to include the SQL header files:
 ```
 
 These files contain the definitions of the ODBC functions, as well as the data types used by ODBC.  In order to be able to use these header files you have to have the `unixodbc` package installed:
+
 ```bash
 brew install unixodbc
 # or
@@ -111,27 +114,31 @@ sudo yum install unixODBC-devel
 Remember to include the header file location in your `CFLAGS`.
 
 For `MAKEFILE`:
-```MAKE
+
+```make
 CFLAGS=-I/usr/local/include
 # or
 CFLAGS=-/opt/homebrew/Cellar/unixodbc/2.3.11/include
 ```
 
 For `CMAKE`:
-```CMAKE
+
+```cmake
 include_directories(/usr/local/include)
 # or
 include_directories(/opt/homebrew/Cellar/unixodbc/2.3.11/include)
 ```
 
-You also have to link the library in your `CMAKE` or `MAKEFILE`:
+You also have to link the library in your `CMAKE` or `MAKEFILE`.
 For `CMAKE`:
-```CMAKE
+
+```cmake
 target_link_libraries(ODBC_application /path/to/duckdb_odbc/libduckdb_odbc.dylib)
 ```
 
 For `MAKEFILE`:
-```MAKE
+
+```make
 LDLIBS=-L/path/to/duckdb_odbc/libduckdb_odbc.dylib
 ```
 
@@ -318,7 +325,7 @@ int main() {
 
 ### Sample `CMakelists.txt` file
 
-```CMAKE
+```cmake
 cmake_minimum_required(VERSION 3.25)
 project(ODBC_Tester_App)
 

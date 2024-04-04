@@ -70,12 +70,14 @@ The `TABLESAMPLE` clause is essentially equivalent to creating a subquery with t
 -- sample 20% of tbl BEFORE the join
 SELECT * FROM tbl TABLESAMPLE reservoir(20%), tbl2 WHERE tbl.i = tbl2.i;
 ```
+
 ```sql
 -- sample 20% of tbl BEFORE the join
 SELECT *
 FROM (SELECT * FROM tbl USING SAMPLE reservoir(20%)) tbl, tbl2
 WHERE tbl.i = tbl2.i;
 ```
+
 ```sql
 -- sample 20% AFTER the join (i.e., sample 20% of the join result)
 SELECT * FROM tbl, tbl2 WHERE tbl.i = tbl2.i USING SAMPLE reservoir(20%);

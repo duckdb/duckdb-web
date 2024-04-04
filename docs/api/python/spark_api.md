@@ -33,6 +33,7 @@ res = df.select(
 
 print(res)
 ```
+
 ```text
 [
     Row(age=34, location='Seattle'),
