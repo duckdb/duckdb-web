@@ -87,10 +87,16 @@ CREATE TABLE x (i INTEGER, v FLOAT[3]);
 CREATE TABLE y (i INTEGER, v FLOAT[3]);
 INSERT INTO x VALUES (1, array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT));
 INSERT INTO y VALUES (1, array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT));
+```
+
+```sql
 -- compute cross product
 SELECT array_cross_product(x.v, y.v)
 FROM x, y
 WHERE x.i = y.i;
+```
+
+```sql
 -- compute cosine similarity
 SELECT array_cosine_similarity(x.v, y.v)
 FROM x, y
