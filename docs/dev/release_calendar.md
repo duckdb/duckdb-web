@@ -27,7 +27,7 @@ The planned dates of upcoming DuckDB releases are shown below.
     {% for release in site.data.upcoming_releases reversed %}
     <tr>
       <td>{{ release.start_date }}</td>
-      <td>{{ release.title | replace: "Release ", "" }}</td>
+      <td style="text-align: right">{{ release.title | replace: "Release ", "" }}</td>
     </tr>
     {% endfor %}
   </tbody>
