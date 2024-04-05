@@ -10,7 +10,7 @@ redirect_from:
   - /dev/docs/dev/release_calendar/
 ---
 
-## Planned Releases
+## Upcoming Releases
 
 The planned dates of upcoming DuckDB releases are shown below.
 **Please note that these dates are tentative** and DuckDB maintainers may decide to push back release dates to ensure the stability and quality of releases.
