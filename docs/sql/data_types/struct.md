@@ -174,10 +174,15 @@ for both `WHERE` and `HAVING` clauses, as well as for creating [`BOOLEAN` values
 The ordering is defined positionally in the same way that words can be ordered in a dictionary.
 `NULL` values compare greater than all other values and are considered equal to each other.
 
-At the top level, `NULL` nested values obey standard SQL `NULL` comparison rules:
-comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` result.
-Comparing nested value _members_, however, uses the internal nested value rules for `NULL`s,
-and a `NULL` nested value member will compare above a non-`NULL` nested value member.
+> Up to DuckDB 0.10.1, nested `NULL` values were compared as follows.
+> At the top level, nested `NULL` values obey standard SQL `NULL` comparison rules:
+> comparing a nested `NULL` value to a nested non-`NULL` value produces a `NULL` result.
+> Comparing nested value _members_, however, uses the internal nested value rules for `NULL`s,
+> and a nested `NULL` value member will compare above a nested non-`NULL` value member.
+> DuckDB 0.10.2 introduced a breaking change in semantics, described below.
+
+Nested `NULL` values are compared following Postgres' semantics,
+i.e., lower nested levels are used for tie-breaking.
 
 ## Functions
 
