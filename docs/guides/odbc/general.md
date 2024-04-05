@@ -25,14 +25,47 @@ title: "ODBC 101: A Duck Themed Guide to ODBC"
 
 A [handle](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/handles?view=sql-server-ver16) is a pointer to a specific ODBC object which is used to interact with the database.  There are several different types of handles, each with a different purpose, these are the environment handle, the connection handle, the statement handle, and the descriptor handle. Handles are allocated using the [`SQLAllocHandle`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlallochandle-function?view=sql-server-ver16) which takes as input the type of handle to allocate, and a pointer to the handle, the driver then creates a new handle of the specified type which it returns to the application.
 
-#### Handle Types
+The DuckDB ODBC driver has the following handle types.
 
-| Handle | Type | Description | Use Case | Additional Information |
-|---|---|-----|-----|-----|
-| [Environment](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/environment-handles?view=sql-server-ver16) | `SQL_HANDLE_ENV` | Manages the environment settings for ODBC operations, and provides a global context in which to access data. | Initializing ODBC, managing driver behavior, resource allocation | Must be [allocated](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/allocating-the-environment-handle?view=sql-server-ver16) once per application upon starting, and freed at the end. |
-| [Connection](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/connection-handles?view=sql-server-ver16) | `SQL_HANDLE_DBC` | Represents a connection to a data source. Used to establish, manage, and terminate connections.  Defines both the driver and the data source to use within the driver. | Establishing a connection to a database, managing the connection state | Multiple connection handles can be [created](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/allocating-a-connection-handle-odbc?view=sql-server-ver16) as needed, allowing simultaneous connections to multiple data sources. *Note:* Allocating a connection handle does not establish a connection, but must be allocated first, and then used once the connection has been established. |
-| [Statement](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/statement-handles?view=sql-server-ver16) | `SQL_HANDLE_STMT` | 	Handles the execution of SQL statements, as well as the returned result sets. | Executing SQL queries, fetching result sets, managing statement options. | To facilitate the execution of concurrent queries, multiple handles can be [allocated](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/allocating-a-statement-handle-odbc?view=sql-server-ver16) per connection. |
-| [Descriptor](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/descriptor-handles?view=sql-server-ver16) | `SQL_HANDLE_DESC` | 	Describes the attributes of a data structure or parameter, and allows the application to specify the structure of data to be bound/retrieved. | Describing table structures, result sets, binding columns to application buffers | Used in situations where data structures need to be explicitly defined, for example during parameter binding or result set fetching.  They are automatically allocated when a statement is allocated, but can also be allocated explicitly. |
+#### Environment
+
+<div class="nostroke_table"></div>
+
+| **Handle name** | [Environment](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/environment-handles?view=sql-server-ver16) |
+| **Type name** | `SQL_HANDLE_ENV` |
+| **Description** | Manages the environment settings for ODBC operations, and provides a global context in which to access data. |
+| **Use case** | Initializing ODBC, managing driver behavior, resource allocation |
+| **Additional information** | Must be [allocated](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/allocating-the-environment-handle?view=sql-server-ver16) once per application upon starting, and freed at the end. |
+
+#### Connection
+
+<div class="nostroke_table"></div>
+
+| **Handle name** | [Connection](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/connection-handles?view=sql-server-ver16) |
+| **Type name** | `SQL_HANDLE_DBC` |
+| **Description** | Represents a connection to a data source. Used to establish, manage, and terminate connections.  Defines both the driver and the data source to use within the driver. |
+| **Use case** | Establishing a connection to a database, managing the connection state |
+| **Additional information** | Multiple connection handles can be [created](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/allocating-a-connection-handle-odbc?view=sql-server-ver16) as needed, allowing simultaneous connections to multiple data sources. *Note:* Allocating a connection handle does not establish a connection, but must be allocated first, and then used once the connection has been established. |
+
+#### Statement
+
+<div class="nostroke_table"></div>
+
+| **Handle name** | [Statement](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/statement-handles?view=sql-server-ver16)
+| **Type name** | `SQL_HANDLE_STMT`
+| **Description** | Handles the execution of SQL statements, as well as the returned result sets.
+| **Use case** | Executing SQL queries, fetching result sets, managing statement options.
+| **Additional information** | To facilitate the execution of concurrent queries, multiple handles can be [allocated](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/allocating-a-statement-handle-odbc?view=sql-server-ver16) per connection.
+
+#### Descriptor
+
+<div class="nostroke_table"></div>
+
+| **Handle name** | [Descriptor](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/descriptor-handles?view=sql-server-ver16)
+| **Type name** | `SQL_HANDLE_DESC`
+| **Description** | Describes the attributes of a data structure or parameter, and allows the application to specify the structure of data to be bound/retrieved.
+| **Use case** | Describing table structures, result sets, binding columns to application buffers
+| **Additional information** | Used in situations where data structures need to be explicitly defined, for example during parameter binding or result set fetching. They are automatically allocated when a statement is allocated, but can also be allocated explicitly.
 
 ### Connecting
 
@@ -73,7 +106,10 @@ The following is a step-by-step guide to setting up an application that uses ODB
 - [What is ODBC?](#what-is-odbc)
 - [General Concepts](#general-concepts)
   - [Handles](#handles)
-    - [Handle Types](#handle-types)
+    - [Environment](#environment)
+    - [Connection](#connection)
+    - [Statement](#statement)
+    - [Descriptor](#descriptor)
   - [Connecting](#connecting)
     - [Connection String](#connection-string)
     - [DSN](#dsn)
