@@ -20,14 +20,14 @@ The planned dates of upcoming DuckDB releases are shown below.
   <thead>
     <tr>
       <th>Date</th>
-      <th>Release</th>
+      <th>Version</th>
     </tr>
   </thead>
   <tbody>
     {% for release in site.data.upcoming_releases reversed %}
     <tr>
       <td>{{ release.start_date }}</td>
-      <td>{{ release.title }}</td>
+      <td>{{ release.title | replace: "Release ", "" }}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -42,7 +42,7 @@ The planned dates of upcoming DuckDB releases are shown below.
 > Since version 0.4.0, only major and minor versions get a codename.
 
 | Date | Version | Codename | Named after |
-|--:|--:|--|--|
+|:--|--:|--|--|
 | 2024-03-18 | [0.10.1](https://github.com/duckdb/duckdb/releases/tag/v0.10.1) | – | – |
 | 2024-02-13 | [0.10.0](https://github.com/duckdb/duckdb/releases/tag/v0.10.0) | Fusca | [Velvet scoter _(Melanitta fusca)_](https://en.wikipedia.org/wiki/Velvet_scoter) |
 | 2023-11-14 | [0.9.2](https://github.com/duckdb/duckdb/releases/tag/v0.9.2)   | – | – |
