@@ -129,6 +129,7 @@ body.documentation{
               font-family: $fontMonoXBold;
               font-size: 23px;
               padding: 2px 5px 2px 5px;
+              font-weight: normal;
           }
       }
       h4{
@@ -260,6 +261,15 @@ body.documentation{
    .toc_menu{
       position: sticky;
       top: 100px;
+      /* MAKE TOC-MENU SCROLLABLE 
+      height: calc(100vh - 100px);
+      overflow: auto;
+      &::-webkit-scrollbar {
+         display: none;
+      }
+      -ms-overflow-style: none; 
+      scrollbar-width: none;
+      */
       h5{
          color: black;
          font-size: 12px;
