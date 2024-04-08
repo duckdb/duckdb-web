@@ -49,7 +49,7 @@ Similarly, Google Cloud Storage (GCS) is supported through the Interoperability 
 CREATE SECRET (
     TYPE GCS,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
-    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
 );
 ```
 

@@ -16,7 +16,7 @@ You need to create [HMAC keys](https://console.cloud.google.com/storage/settings
 CREATE SECRET (
     TYPE GCS,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
-    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
 );
 ```
 
