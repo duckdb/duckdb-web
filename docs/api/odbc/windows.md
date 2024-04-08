@@ -21,7 +21,7 @@ Using the DuckDB ODBC API on Windows requires the following steps:
 
    ```bash
    mkdir duckdb_odbc
-   unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
+   unzip duckdb_odbc-windows-amd64.zip -d duckdb_odbc
    ```
 
 4. The `odbc_install.exe` binary performs the configuration of the DuckDB ODBC Driver on Windows. It depends on the `Odbccp32.dll` that provides functions to configure the ODBC registry entries.
