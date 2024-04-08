@@ -6,29 +6,29 @@ title: ODBC API on Windows
 Using the DuckDB ODBC API on Windows requires the following steps:
 
 1. The Microsoft Windows requires an ODBC Driver Manager to manage communication between applications and the ODBC drivers.
-    The Driver Manager on Windows is provided in a DLL file `odbccp32.dll`, and other files and tools.
-    For detailed information check out the [Common ODBC Component Files](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/odbc/dn170563(v=vs.85)).
+   The Driver Manager on Windows is provided in a DLL file `odbccp32.dll`, and other files and tools.
+   For detailed information check out the [Common ODBC Component Files](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/odbc/dn170563(v=vs.85)).
 
 2. DuckDB releases the ODBC driver as an asset. For Windows, download it from the [Windows ODBC asset (x86_64/AMD64)](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip).
 
 3. The archive contains the following artifacts:
 
-    * `duckdb_odbc.dll`: the DuckDB driver compiled for Windows.
-    * `duckdb_odbc_setup.dll`: a setup DLL used by the Windows ODBC Data Source Administrator tool.
-    * `odbc_install.exe`: an installation script to aid the configuration on Windows.
+   * `duckdb_odbc.dll`: the DuckDB driver compiled for Windows.
+   * `duckdb_odbc_setup.dll`: a setup DLL used by the Windows ODBC Data Source Administrator tool.
+   * `odbc_install.exe`: an installation script to aid the configuration on Windows.
 
-    Decompress the archive to a directory (e.g., `duckdb_odbc`). For example, run:
+   Decompress the archive to a directory (e.g., `duckdb_odbc`). For example, run:
 
-    ```bash
-    mkdir duckdb_odbc
-    unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
-    ```
+   ```bash
+   mkdir duckdb_odbc
+   unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
+   ```
 
 4. The `odbc_install.exe` binary performs the configuration of the DuckDB ODBC Driver on Windows. It depends on the `Odbccp32.dll` that provides functions to configure the ODBC registry entries.
 
-    Inside the permanent directory (e.g., `duckdb_odbc`), double-click on the `odbc_install.exe`.
+   Inside the permanent directory (e.g., `duckdb_odbc`), double-click on the `odbc_install.exe`.
 
-    Windows administrator privileges are required. In case of a non-administrator, a User Account Control prompt will occur.
+   Windows administrator privileges are required. In case of a non-administrator, a User Account Control prompt will occur.
 
 5. `odbc_install.exe` adds a default DSN configuration into the ODBC registries with a default database `:memory:`.
 

@@ -89,15 +89,15 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
 * The returned tables should be formatted using the DuckDB CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`).
 * Output printed on the system console (e.g., in Python) and system messages (e.g., errors) should be formatted as code with the `text` language tag. For example:
-    ````
-    ```text
-    Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
-    ```
-    ````
+   ````
+   ```text
+   Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
+   ```
+   ````
 * To specify placeholders, use the left angle and right angle characters, `⟨` and `⟩`
-    * For example: `SELECT * FROM ⟨your_table_name⟩`.
-    * These characters are known in LaTeX code as `\langle` and `\rangle`.
-    * *Avoid* using artihmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
+   * For example: `SELECT * FROM ⟨your_table_name⟩`.
+   * These characters are known in LaTeX code as `\langle` and `\rangle`.
+   * *Avoid* using artihmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
 
 ### Python Style
 
@@ -121,15 +121,15 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Where applicable, add cross-references to relevant other pages in the documentation.
 * Use descriptive links:
-    * :white_check_mark: ```see [the `COPY` statement](../../sql/statements/copy)```
-    * :x: `see [here](../../sql/statements/copy)`
+   * :white_check_mark: ```see [the `COPY` statement](../../sql/statements/copy)```
+   * :x: `see [here](../../sql/statements/copy)`
 * Use relative URLs without the `.html` extension:
-    * :white_check_mark: `../../sql/statements/copy`
-    * :x: `../../sql/statements/copy.html`
-    * :x: `/docs/sql/statements/copy`
-    * :x: `https://duckdb.org/docs/sql/statements/copy`
+   * :white_check_mark: `../../sql/statements/copy`
+   * :x: `../../sql/statements/copy.html`
+   * :x: `/docs/sql/statements/copy`
+   * :x: `https://duckdb.org/docs/sql/statements/copy`
 * Reference a specific section when possible:
-    * :white_check_mark: `../../sql/statements/copy#copy-from`
+   * :white_check_mark: `../../sql/statements/copy#copy-from`
 * Do **not** link related GitHub issues/discussions. This allows the documentation to be self-contained.
 
 ## Achive and Generated Pages
