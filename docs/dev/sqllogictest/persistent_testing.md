@@ -39,5 +39,5 @@ statement ok
 PRAGMA disable_checkpoint_on_shutdown
 
 statement ok
-PRAGMA wal_autocheckpoint='1TB';
+PRAGMA wal_autocheckpoint = '1TB'
 ```
