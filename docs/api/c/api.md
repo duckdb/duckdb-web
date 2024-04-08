@@ -1043,7 +1043,6 @@ corresponding duckdb_type (as provided by `duckdb_column_type`). For the exact t
 accessed, see the comments in [the types section](types) or the `DUCKDB_TYPE` enum.
 
 For example, for a column of type `DUCKDB_TYPE_INTEGER`, rows can be accessed in the following manner:
-
 ```c
 int32_t *data = (int32_t *) duckdb_column_data(&result, 0);
 printf("Data for row %d: %d\n", row, data[row]);
