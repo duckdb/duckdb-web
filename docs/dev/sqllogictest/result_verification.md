@@ -48,7 +48,7 @@ In certain cases result values might be very large or complex, and we might only
 
 ```sql
 query II
-EXPLAIN SELECT tbl.a FROM "data/parquet-testing/arrow/alltypes_plain.parquet" tbl(a) WHERE a=1 OR a=2
+EXPLAIN SELECT tbl.a FROM "data/parquet-testing/arrow/alltypes_plain.parquet" tbl(a) WHERE a = 1 OR a = 2
 ----
 physical_plan	<REGEX>:.*PARQUET_SCAN.*Filters: a=1 OR a=2.*
 ```
