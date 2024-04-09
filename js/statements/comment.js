@@ -4,12 +4,13 @@ function GenerateCommentOn(options = {}) {
 		AutomaticStack([
 			Keyword("COMMENT ON"),
 			Choice(0, [
-				Keyword("TABLE"),
 				Keyword("COLUMN"),
-				Keyword("VIEW"),
+				Keyword("FUNCTION"),
 				Keyword("INDEX"),
 				Keyword("SEQUENCE"),
+				Keyword("TABLE"),
 				Keyword("TYPE"),
+				Keyword("VIEW"),
 				Sequence([Keyword("MACRO"), Optional(Keyword("TABLE"), "skip")]),
 			]),
 			Expression("entity-name"),
