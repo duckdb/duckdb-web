@@ -412,7 +412,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the top-level directory name from the given path. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_dirname( 'path/to/file.csv', 'system')` |
+| **Example** | `parse_dirname('path/to/file.csv', 'system')` |
 | **Result** | `path` |
 
 ### `parse_dirpath(path, separator)`
@@ -420,7 +420,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the head of the path (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_dirpath( '/path/to/file.csv', 'forward_slash')` |
+| **Example** | `parse_dirpath('/path/to/file.csv', 'forward_slash')` |
 | **Result** | `/path/to` |
 
 ### `parse_filename(path, trim_extension, separator)`
@@ -428,7 +428,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the last component of the path similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. If `trim_extension` is true, the file extension will be removed (defaults to `false`). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_filename( 'path/to/file.csv', true, 'system')` |
+| **Example** | `parse_filename('path/to/file.csv', true, 'system')` |
 | **Result** | `file` |
 
 ### `parse_path(path, separator)`
@@ -436,7 +436,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list of the components (directories and filename) in the path similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_path( '/path/to/file.csv', 'system')` |
+| **Example** | `parse_path('/path/to/file.csv', 'system')` |
 | **Result** | `[/, path, to, file.csv]` |
 
 ### `position(search_string in string)`
@@ -468,7 +468,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Escapes special patterns to turn `string` into a regular expression similarly to Python's [`re.escape` function](https://docs.python.org/3/library/re.html#re.escape). |
-| **Example** | `regexp_escape( 'http://d.org')` |
+| **Example** | `regexp_escape('http://d.org')` |
 | **Result** | `http\:\/\/d\.org` |
 
 ### `regexp_extract_all(string, regex[, group = 0])`
@@ -476,7 +476,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Split the `string` along the `regex` and extract all occurrences of `group`. |
-| **Example** | `regexp_extract_all( 'hello_world', '([a-z ]+)_?', 1)` |
+| **Example** | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `[hello, world]` |
 
 ### `regexp_extract(string, pattern , name_list)`
@@ -484,7 +484,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list` (see [Pattern Matching](patternmatching#using-regexp_extract)). |
-| **Example** | `regexp_extract( '2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
+| **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
 
 ### `regexp_extract(string, pattern [, idx])`
@@ -492,7 +492,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `idx` (see [Pattern Matching](patternmatching#using-regexp_extract)). |
-| **Example** | `regexp_extract( 'hello_world', '([a-z ]+)_?', 1)` |
+| **Example** | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `hello` |
 
 ### `regexp_full_match(string, regex)`
@@ -500,7 +500,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if the entire `string` matches the `regex` (see [Pattern Matching](patternmatching)). |
-| **Example** | `regexp_full_match( 'anabanana', '(an)`')` |
+| **Example** | `regexp_full_match('anabanana', '(an)`')` |
 | **Result** | `false` |
 
 ### `regexp_matches(string, pattern)`
@@ -508,7 +508,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if  `string` contains the regexp `pattern`, `false` otherwise (see [Pattern Matching](patternmatching#using-regexp_matches)). |
-| **Example** | `regexp_matches( 'anabanana', '(an)`')` |
+| **Example** | `regexp_matches('anabanana', '(an)`')` |
 | **Result** | `true` |
 
 ### `regexp_replace(string, pattern, replacement)`
@@ -516,7 +516,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | If `string` contains the regexp `pattern`, replaces the matching part with `replacement` (see [Pattern Matching](patternmatching#using-regexp_replace)). |
-| **Example** | `regexp_replace( 'hello', '[lo]', '-')` |
+| **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
 ### `regexp_split_to_array(string, regex)`
@@ -524,7 +524,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex`. |
-| **Example** | `regexp_split_to_array( 'hello␣world; 42', ';?␣')` |
+| **Example** | `regexp_split_to_array('hello␣world; 42', ';?␣')` |
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `string_split_regex`, `str_split_regex` |
 
@@ -533,7 +533,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex` and returns a row for each part. |
-| **Example** | `regexp_split_to_table( 'hello␣world; 42', ';?␣')` |
+| **Example** | `regexp_split_to_table('hello␣world; 42', ';?␣')` |
 | **Result** | Two rows: `'hello'`, `'world'` |
 
 ### `repeat(string, count)`
@@ -629,7 +629,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex`. |
-| **Example** | `str_split_regex( 'hello␣world; 42', ';?␣')` |
+| **Example** | `str_split_regex('hello␣world; 42', ';?␣')` |
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `string_split_regex`, `regexp_split_to_array` |
 
@@ -638,7 +638,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex`. |
-| **Example** | `string_split_regex( 'hello␣world; 42', ';?␣')` |
+| **Example** | `string_split_regex('hello␣world; 42', ';?␣')` |
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `str_split_regex`, `regexp_split_to_array` |
 
@@ -647,7 +647,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `separator`. |
-| **Example** | `string_split( 'hello␣world', '␣')` |
+| **Example** | `string_split('hello␣world', '␣')` |
 | **Result** | `['hello', 'world']` |
 | **Aliases** | `str_split`, `string_to_array` |
 
@@ -656,7 +656,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Strips accents from `string`. |
-| **Example** | `strip_accents( 'mühleisen')` |
+| **Example** | `strip_accents('mühleisen')` |
 | **Result** | `muhleisen` |
 
 ### `strlen(string)`
