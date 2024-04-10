@@ -12,7 +12,7 @@ This section describes functions and operators for examining and manipulating st
 | Name | Description |
 |:--|:-------|
 | [`string ^@ search_string`](#string--search_string) | Return true if `string` begins with `search_string`. |
-| [`string || string`](#string--string) | String concatenation |
+| [`string || string`](#string--string) | String concatenation. |
 | [`string[index]`](#stringindex) | Extract a single character using a (1-based) index. |
 | [`string[begin:end]`](#stringbeginend) | Extract a string using slice conventions. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
 | [`string LIKE target`](#string-like-target) | Returns true if the `string` matches the like specifier (see [Pattern Matching](../../sql/functions/patternmatching)). |
