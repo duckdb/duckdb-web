@@ -7,7 +7,8 @@ function GenerateCreateView(options = {}) {
 				Keyword("CREATE"),
 				GenerateOrReplace(),
 				GenerateTemporary(),
-				Keyword("VIEW")
+				Keyword("VIEW"),
+				GenerateIfNotExists()
 			]),
 			Sequence([
 				GenerateQualifiedTableName(options, "view-name")
