@@ -64,7 +64,7 @@ A join that is not `OUTER` is `INNER` (only rows that get paired are returned).
 
 When an unpaired row is returned, the attributes from the other table are set to `NULL`.
 
-### Cross Product Joins
+### Cross Product Joins (Cartesian Product)
 
 The simplest type of join is a `CROSS JOIN`.
 There are no conditions for this type of join,
@@ -73,6 +73,8 @@ and it just returns all the possible pairs.
 ```sql
 -- return all pairs of rows
 SELECT a.*, b.* FROM a CROSS JOIN b;
+-- this is equivalent to omitting the JOIN clause
+SELECT a.*, b.* FROM a, b;
 ```
 
 ### Conditional Joins
