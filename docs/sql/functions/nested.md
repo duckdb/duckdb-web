@@ -621,55 +621,91 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 | **Example** | `union_tag(union_value(k := 'foo'))` |
 | **Result** | `'k'` |
 
-
 ## Range Functions
 
-The functions *`range`* and *`generate_series`* create a list of values in the range between `start` and `stop`.
-The `start` parameter is inclusive.
-For the `range` function, the `stop` parameter is exclusive, while for `generate_series`, it is inclusive.
+DuckDB offers two range functions, [`range(start, stop, step)`](#range) and [`generate_series(start, stop, step)`](#generate_series), and their variants with default arguments for `stop` and `step`. The two functions' behavior differens regarding their `stop` argument. This is documented below.
 
-Based on the number of arguments, the following variants exist:
+### `range`
 
-* `range(start, stop, step)`
-* `range(start, stop)`
-* `range(stop)`
-* `generate_series(start, stop, step)`
-* `generate_series(start, stop)`
-* `generate_series(stop)`
-
+The `range` function creates a list of values in the range between `start` and `stop`.
+The `start` parameter is inclusive, while the `stop` parameter is exclusive.
 The default value of `start` is 0 and the default value of `step` is 1.
+
+Based on the number of arguments, the following variants of `range` exist.
+
+#### `range(stop)`
 
 ```sql
 SELECT range(5);
--- [0, 1, 2, 3, 4]
 ```
+
+```text
+[0, 1, 2, 3, 4]
+```
+
+#### `range(start, stop)`
 
 ```sql
 SELECT range(2, 5);
--- [2, 3, 4]
 ```
+
+```text
+[2, 3, 4]
+```
+
+#### `range(start, stop, step)`
 
 ```sql
 SELECT range(2, 5, 3);
--- [2]
 ```
+
+```text
+[2]
+```
+
+### `generate_series`
+
+The `generate_series` function creates a list of values in the range between `start` and `stop`.
+Both the `start` and the `stop` parameters are inclusive.
+The default value of `start` is 0 and the default value of `step` is 1.
+Based on the number of arguments, the following variants of `generate_series` exist.
+
+#### `generate_series(stop)`
 
 ```sql
 SELECT generate_series(5);
--- [0, 1, 2, 3, 4, 5]
 ```
+
+```text
+[0, 1, 2, 3, 4, 5]
+```
+
+#### `generate_series(start, stop)`
 
 ```sql
 SELECT generate_series(2, 5);
--- [2, 3, 4, 5]
 ```
+
+```text
+[2, 3, 4, 5]
+```
+
+#### `generate_series(start, stop, step)`
 
 ```sql
 SELECT generate_series(2, 5, 3);
--- [2, 5]
 ```
 
-Date ranges are also supported:
+```text
+[2, 5]
+```
+
+### Date Ranges
+
+Date ranges are also supported for `TIMESTAMP` and `TIMESTAMP WITH TIME ZONE` values.
+Note that for these types, the `stop` and `step` arguments have to be specified explicitly (a default value is not provided).
+
+#### `range` for Date Ranges
 
 ```sql
 SELECT *
@@ -680,6 +716,19 @@ FROM range(DATE '1992-01-01', DATE '1992-03-01', INTERVAL '1' MONTH);
 |---------------------|
 | 1992-01-01 00:00:00 |
 | 1992-02-01 00:00:00 |
+
+#### `generate_series` for Date Ranges
+
+```sql
+SELECT *
+FROM generate_series(DATE '1992-01-01', DATE '1992-03-01', INTERVAL '1' MONTH);
+```
+
+|   generate_series   |
+|---------------------|
+| 1992-01-01 00:00:00 |
+| 1992-02-01 00:00:00 |
+| 1992-03-01 00:00:00 |
 
 ## Slicing
 
@@ -717,32 +766,50 @@ Examples:
 
 ```sql
 SELECT list_slice([1, 2, 3, 4, 5], 2, 4);
--- [2, 3, 4]
+```
+
+```text
+[2, 3, 4]
 ```
 
 ```sql
 SELECT ([1, 2, 3, 4, 5])[2:4:2];
--- [2, 4]
+```
+
+```text
+[2, 4]
 ```
 
 ```sql
 SELECT([1, 2, 3, 4, 5])[4:2:-2];
--- [4, 2]
+```
+
+```text
+[4, 2]
 ```
 
 ```sql
 SELECT ([1, 2, 3, 4, 5])[:];
--- [1, 2, 3, 4, 5]
+```
+
+```text
+[1, 2, 3, 4, 5]
 ```
 
 ```sql
 SELECT ([1, 2, 3, 4, 5])[:-:2];
--- [1, 3, 5]
+```
+
+```text
+[1, 3, 5]
 ```
 
 ```sql
 SELECT ([1, 2, 3, 4, 5])[:-:-2];
--- [5, 3, 1]
+```
+
+```text
+[5, 3, 1]
 ```
 
 ## List Aggregates
@@ -753,39 +820,60 @@ The function `list_aggregate` allows the execution of arbitrary existing aggrega
 
 ```sql
 SELECT list_aggregate([1, 2, -4, NULL], 'min');
--- -4
+```
+
+```text
+-4
 ```
 
 ```sql
 SELECT list_aggregate([2, 4, 8, 42], 'sum');
--- 56
+```
+
+```text
+56
 ```
 
 ```sql
 SELECT list_aggregate([[1, 2], [NULL], [2, 10, 3]], 'last');
--- [2, 10, 3]
+```
+
+```text
+[2, 10, 3]
 ```
 
 ```sql
 SELECT list_aggregate([2, 4, 8, 42], 'string_agg', '|');
--- 2|4|8|42
+```
+
+```text
+2|4|8|42
 ```
 
 The following is a list of existing rewrites. Rewrites simplify the use of the list aggregate function by only taking the list (column) as their argument. `list_avg`, `list_var_samp`, `list_var_pop`, `list_stddev_pop`, `list_stddev_samp`, `list_sem`, `list_approx_count_distinct`, `list_bit_xor`, `list_bit_or`, `list_bit_and`, `list_bool_and`, `list_bool_or`, `list_count`, `list_entropy`, `list_last`, `list_first`, `list_kurtosis`, `list_kurtosis_pop`, `list_min`, `list_max`, `list_product`, `list_skewness`, `list_sum`, `list_string_agg`, `list_mode`, `list_median`, `list_mad` and `list_histogram`.
 
 ```sql
 SELECT list_min([1, 2, -4, NULL]);
--- -4
+```
+
+```text
+-4
 ```
 
 ```sql
 SELECT list_sum([2, 4, 8, 42]);
--- 56
+```
+
+```text
+56
 ```
 
 ```sql
 SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
--- [2, 10, 3]
+```
+
+```text
+[2, 10, 3]
 ```
 
 ### `array_to_string`
@@ -794,13 +882,19 @@ Concatenates list/array elements using an optional delimiter.
 
 ```sql
 SELECT array_to_string([1, 2, 3], '-') AS str;
--- 1-2-3
+```
+
+```text
+1-2-3
 ```
 
 ```sql
 -- this is equivalent to the following SQL
 SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
--- 1-2-3
+```
+
+```text
+1-2-3
 ```
 
 ## Sorting Lists
@@ -814,21 +908,27 @@ By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., th
 ```sql
 -- default sort order and default NULL sort order
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
-----
+```
+
+```text
 [NULL, NULL, -5, 1, 3, 5]
 ```
 
 ```sql
 -- only providing the sort order
 SELECT list_sort([1, 3, NULL, 2], 'ASC');
-----
+```
+
+```text
 [NULL, 1, 2, 3]
 ```
 
 ```sql
 -- providing the sort order and the NULL sort order
 SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
-----
+```
+
+```text
 [NULL, 3, 2, 1]
 ```
 
@@ -837,14 +937,18 @@ SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 ```sql
 -- default NULL sort order
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
-----
+```
+
+```text
 [NULL, NULL, -5, 1, 3, 5]
 ```
 
 ```sql
 -- providing the NULL sort order
 SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
-----
+```
+
+```text
 [3, 2, 1, NULL]
 ```
 
@@ -865,7 +969,9 @@ SELECT
         [1, 2],
         [3, 4]
     ]);
-----
+```
+
+```text
 [1, 2, 3, 4]
 ```
 
@@ -883,7 +989,9 @@ SELECT
             [7, 8],
         ]
     ]);
-----
+```
+
+```text
 [[1, 2], [3, 4], [5, 6], [7, 8]]
 ```
 
@@ -893,21 +1001,27 @@ However, the behavior of the flatten function has specific behavior when handlin
 ```sql
 -- If the input list is empty, return an empty list
 SELECT flatten([]);
-----
+```
+
+```text
 []
 ```
 
 ```sql
 -- If the entire input to flatten is NULL, return NULL
 SELECT flatten(NULL);
-----
+```
+
+```text
 NULL
 ```
 
 ```sql
 -- If a list whose only entry is NULL is flattened, return an empty list
 SELECT flatten([NULL]);
-----
+```
+
+```text
 []
 ```
 
@@ -916,7 +1030,9 @@ SELECT flatten([NULL]);
 -- do not modify the sub-list
 -- (Note the extra set of parentheses vs. the prior example)
 SELECT flatten([[NULL]]);
-----
+```
+
+```text
 [NULL]
 ```
 
@@ -926,7 +1042,9 @@ SELECT flatten([[NULL]]);
 -- Note that no de-duplication occurs when flattening.
 -- See list_distinct function for de-duplication.
 SELECT flatten([[NULL],[NULL]]);
-----
+```
+
+```text
 [NULL, NULL]
 ```
 
