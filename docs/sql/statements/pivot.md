@@ -147,7 +147,7 @@ Multiple columns can be specified in the `ON` and `GROUP BY` clauses, and multip
 #### Multiple `ON` Columns and `ON` Expressions
 
 Multiple columns can be pivoted out into their own columns.
-DuckDB will find the distinct values in each `ON` clause column and create one new column for all combinations of those values (a cartesian product).
+DuckDB will find the distinct values in each `ON` clause column and create one new column for all combinations of those values (a Cartesian product).
 
 In the below example, all combinations of unique countries and unique cities receive their own column.
 Some combinations may not be present in the underlying data, so those columns are populated with `NULL` values.

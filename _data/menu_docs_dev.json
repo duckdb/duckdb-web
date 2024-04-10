@@ -1238,6 +1238,16 @@
                   "url": "youplot"
                 }
               ]
+            },
+            {
+              "page": "Snippets",
+              "slug": "snippets",
+              "subsubfolderitems": [
+                {
+                  "page": "Create Synthetic Data",
+                  "url": "create_synthetic_data"
+                }
+              ]
             }
           ]
         },
