@@ -8,6 +8,22 @@ railroad: expressions/function.js
 
 <div id="rrdiagram"></div>
 
+### Function Chaining via the Dot Operator
+
+DuckDB supports the dot syntax for function chaining. This allows the function call `fn(arg1, arg2, arg3, ...)` to be rewritten as `arg1.fn(arg2, arg3, ...)`. For example, take the following use of the [`replace` function](char#replacestring-source-target):
+
+```sql
+SELECT replace(goose_name, 'goose', 'duck') AS duck_name
+FROM unnest(['African goose', 'Faroese goose', 'Hungarian goose', 'Pomeranian goose']) breed(goose_name);
+```
+
+This can be rewritten as follows:
+
+```sql
+SELECT goose_name.replace('goose', 'duck') AS duck_name
+FROM unnest(['African goose', 'Faroese goose', 'Hungarian goose', 'Pomeranian goose']) breed(goose_name);
+```
+
 ## Query Functions
 
 The `duckdb_functions()` table function shows the list of functions currently built into the system.
