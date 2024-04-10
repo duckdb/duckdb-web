@@ -1246,10 +1246,6 @@
                 {
                   "page": "Create Synthetic Data",
                   "url": "create_synthetic_data"
-                },
-                {
-                  "page": "CLI Charting with YouPlot",
-                  "url": "youplot"
                 }
               ]
             }
