@@ -59,7 +59,7 @@ EXPLAIN SELECT * FROM embeddings ORDER BY array_distance(vec, [1,2,3]::FLOAT[3])
 │      HNSW_INDEX_SCAN      │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
 │   t1 (HNSW INDEX SCAN :   │
-│           my_idx)         │
+│            idx)           │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
 │            vec            │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
