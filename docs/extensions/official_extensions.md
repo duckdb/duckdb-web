@@ -27,6 +27,7 @@ title: Official Extensions
 | [substrait](substrait) [<span class="github">GitHub</span>](https://github.com/duckdb/substrait)      | Adds support for the Substrait integration                                         |                 |
 | [tpcds](tpcds)                                                                                        | Adds TPC-DS data generation and query support                                      |                 |
 | [tpch](tpch)                                                                                          | Adds TPC-H data generation and query support                                       |                 |
+| [vss](vss) [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_vss)                | Adds support for vector similarity search queries                                   |                 |
 
 ## Default Extensions
 
@@ -46,6 +47,7 @@ We summarize the main distributions in the table below.
 | [parquet](parquet)           | yes | yes | yes | yes | yes | yes |
 | [tpcds](tpcds)               |     |     | yes |     |     |     |
 | [tpch](tpch)                 | yes |     | yes |     |     |     |
+| [vss](vss)                   | yes |     |     |     |     |     |
 
 The [jemalloc](jemalloc) extension's availability is based on the operating system.
 Starting with version 0.10.1, `jemalloc` is a built-in extension on Linux x86_64 (AMD64) distributions, while it will be optionally available on Linux ARM64 distributions and on macOS (via compiling from source).

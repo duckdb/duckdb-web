@@ -948,6 +948,10 @@
             {
               "page": "TPC-H",
               "url": "tpch"
+            },
+            {
+              "page": "VSS",
+              "url": "vss"
             }
           ]
         },
