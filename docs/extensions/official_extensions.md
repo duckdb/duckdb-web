@@ -47,7 +47,6 @@ We summarize the main distributions in the table below.
 | [parquet](parquet)           | yes | yes | yes | yes | yes | yes |
 | [tpcds](tpcds)               |     |     | yes |     |     |     |
 | [tpch](tpch)                 | yes |     | yes |     |     |     |
-| [vss](vss)                   | yes |     |     |     |     |     |
 
 The [jemalloc](jemalloc) extension's availability is based on the operating system.
 Starting with version 0.10.1, `jemalloc` is a built-in extension on Linux x86_64 (AMD64) distributions, while it will be optionally available on Linux ARM64 distributions and on macOS (via compiling from source).
