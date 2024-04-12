@@ -11,9 +11,9 @@ The initial motivation for adding this data type was to provide optimized operat
 
 However, as the hype for __vector embeddings__ and __semantic similarity search__ were growing, we also snuck in a couple of distance metric functions for this new `ARRAY` type: `array_distance`, `array_inner_product` and `array_cosine_distance`. 
 
-This got the community really excited! While we initially went on record saying that we (DuckDB Labs) would not be adding a vector similarity search index to DuckDB as we deemed it to be too far out of scope, we were very interested in supporting custom indexes through extensions in general. Shoot, I've been _personally_ nagging on about wanting to plug-in a spatial index since the inception of DuckDBs [spatial extension]({% link docs/extensions/spatial.md %})! So when one of our client projects evolved into creating a proof-of-concept custom HNSW index extension we we're happy to give it a shot. And... well, one thing led to another.
+This got the community really excited! While we initially went on record saying that we (DuckDB Labs) would not be adding a vector similarity search index to DuckDB as we deemed it to be too far out of scope, we were very interested in supporting custom indexes through extensions in general. Shoot, I've been _personally_ nagging on about wanting to plug-in a spatial index since the inception of DuckDBs [spatial extension]({% link docs/extensions/spatial.md %})! So when one of our client projects evolved into creating a proof-of-concept custom HNSW index extension we said that we would give it a shot. And... well, one thing led to another.
 
-Fast forward to now and we're happy to announce the availability of the `vss` vector similarity search extension for DuckDB! While some may say we're late to the vector search party, we'd like to think DuckDB `vss` emerges right alongside the [plateu of productivity](https://en.wikipedia.org/wiki/Gartner_hype_cycle).
+Fast forward to now and we're happy to announce the availability of the `vss` vector similarity search extension for DuckDB! While some may say we're late to the vector search party, we'd like to think DuckDB `vss` emerges right on time alongside the [plateu of productivity](https://en.wikipedia.org/wiki/Gartner_hype_cycle).
 
 Alright, so what's in `vss`?
 
@@ -38,7 +38,34 @@ ORDER BY array_distance(vec, [1,2,3]::FLOAT[3])
 LIMIT 5;
 ```
 
-...will have their logical plan optimized to instead become a projection over a new `HNSW` index scan operator, removing the limit and sort altogether.
+...will have their logical plan optimized to instead become a projection over a new `HNSW` index scan operator, removing the limit and sort altogether. We can verify this by checking the `EXPLAIN` output!
+
+```sql
+EXPLAIN SELECT * FROM embeddings ORDER BY array_distance(vec, [1,2,3]::FLOAT[3]) LIMIT 3;
+
+┌───────────────────────────┐
+│         PROJECTION        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│             #0            │
+└─────────────┬─────────────┘                             
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│            vec            │
+│array_distance(vec, [1.0, 2│
+│         .0, 3.0])         │
+└─────────────┬─────────────┘                             
+┌─────────────┴─────────────┐
+│      HNSW_INDEX_SCAN      │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│   t1 (HNSW INDEX SCAN :   │
+│           my_idx)         │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│            vec            │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│           EC: 3           │
+└───────────────────────────┘   
+```
 
 You can pass the `HNSW` index creation statement a `metric` parameter to decide what kind of distance metric to use. The supported metrics are `l2sq`, `cosine` and `inner_product`, matching the three built in distance functions: `array_distance`, `array_cosine_distance` and `array_inner_product`.
  The default is `l2sq` (`array_distance`)..
