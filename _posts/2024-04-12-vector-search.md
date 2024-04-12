@@ -7,13 +7,13 @@ excerpt: "DuckDB now supports creation of HNSW indexes to accelerate vector simi
 
 In DuckDB v0.10.0 we introduced the "fixed size list" [`ARRAY` data type]({% link docs/sql/data_types/array.md %}) to complement the existing variable size [`LIST` data type]({% link docs/sql/data_types/list.md %}) in DuckDB. 
 
-The initial motivation for adding this data type was to provide optimized operations for lists that can utilize the positional semantics of their child elements and avoid branching as all lists have the same length. Think e.g. the sort of array manipulations you'd do in NumPy: stacking, shifting, multiplying - you name it. Additionally, we wanted to improve our interoperability with Apache Arrow, as previously arrow fixed size lists would be converted to regular lists when ingested into DuckDB, losing some type information. 
+The initial motivation for adding this data type was to provide optimized operations for lists that can utilize the positional semantics of their child elements and avoid branching as all lists have the same length. Think e.g. the sort of array manipulations you'd do in NumPy: stacking, shifting, multiplying - you name it. Additionally, we wanted to improve our interoperability with Apache Arrow, as previously arrow's fixed-size list types would be converted to regular variable-size lists when ingested into DuckDB, losing some type information.
 
 However, as the hype for __vector embeddings__ and __semantic similarity search__ were growing, we also snuck in a couple of distance metric functions for this new `ARRAY` type: `array_distance`, `array_inner_product` and `array_cosine_distance`. 
 
-This got the community really excited! While we initially went on record saying that we (DuckDB Labs) would not be adding a vector similarity search index to DuckDB as we deemed it to be too far out of scope, we were very interested in supporting custom indexes through extensions in general. Shoot, I've been _personally_ nagging on about wanting to plug-in a spatial index since the inception of DuckDBs [spatial extension]({% link docs/extensions/spatial.md %})! So when one of our client projects evolved into creating a proof-of-concept custom HNSW index extension we said that we would give it a shot. And... well, one thing led to another.
+This got the community really excited! While we (DuckDB Labs) initially went on record saying that we would not be adding a vector similarity search index to DuckDB as we deemed it to be too far out of scope, we were very interested in supporting custom indexes through extensions in general. Shoot, I've been _personally_ nagging on about wanting to plug-in a spatial index since the inception of DuckDBs [spatial extension]({% link docs/extensions/spatial.md %})! So when one of our client projects evolved into creating a proof-of-concept custom HNSW index extension, we said that we'd give it a shot. And... well, one thing led to another.
 
-Fast forward to now and we're happy to announce the availability of the `vss` vector similarity search extension for DuckDB! While some may say we're late to the vector search party, we'd like to think DuckDB `vss` emerges right on time alongside the [plateu of productivity](https://en.wikipedia.org/wiki/Gartner_hype_cycle).
+Fast forward to now and we're happy to announce the availability of the `vss` vector similarity search extension for DuckDB! While some may say we're late to the vector search party, we'd like to think DuckDB `vss` emerges right on time for the [plateu of productivity](https://en.wikipedia.org/wiki/Gartner_hype_cycle).
 
 Alright, so what's in `vss`?
 
@@ -22,14 +22,14 @@ Alright, so what's in `vss`?
 On the surface, `vss` seems like a comparatively small DuckDB extension. It does not provide any new data types, scalar functions or copy functions, but rather a single new index type: `HNSW`. 
 
 ```sql
--- Create a table with a fixed-size list column
+-- Create a table with an array column
 CREATE TABLE embeddings (vec FLOAT[3]);
 
 -- Create an HNSW index on the column
 CREATE INDEX idx ON embeddings USING HNSW (vec);
 ```
 
-This index type can't be used to enforce constraints or uniqueness like the built-in `ART` index, and can't be used to speed up joins or index regular columns either. Instead, the `HNSW` index is only applicable to columns of the fixed-size list type and will only be used to accelerate queries calculating the "distance" between a constant array and the arrays in the indexed column, ordered by the resulting distance and returning the top-n results. That is, queries on the form:
+This index type can't be used to enforce constraints or uniqueness like the built-in `ART` index, and can't be used to speed up joins or index regular columns either. Instead, the `HNSW` index is only applicable to columns of the `ARRAY` type and will only be used to accelerate queries calculating the "distance" between a constant array and the arrays in the indexed column, ordered by the resulting distance and returning the top-n results. That is, queries on the form:
 
 ```sql
 SELECT * 
