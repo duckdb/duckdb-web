@@ -43,6 +43,7 @@ The planned dates of upcoming DuckDB releases are shown below.
 
 | Date | Version | Codename | Named after |
 |:--|--:|--|--|
+| 2024-04-17 | [0.10.2](https://github.com/duckdb/duckdb/releases/tag/v0.10.2) | – | – |
 | 2024-03-18 | [0.10.1](https://github.com/duckdb/duckdb/releases/tag/v0.10.1) | – | – |
 | 2024-02-13 | [0.10.0](https://github.com/duckdb/duckdb/releases/tag/v0.10.0) | Fusca | [Velvet scoter _(Melanitta fusca)_](https://en.wikipedia.org/wiki/Velvet_scoter) |
 | 2023-11-14 | [0.9.2](https://github.com/duckdb/duckdb/releases/tag/v0.9.2)   | – | – |

@@ -228,7 +228,7 @@ ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
 SELECT * FROM mysql_query('mysqldb', 'SELECT * FROM cars LIMIT 3');
 ```
 
-> Warning This function is only available on DuckDB v0.10.1, using the latest MySQL extension.
+> Warning This function is only available on DuckDB v0.10.1+, using the latest MySQL extension.
 > To upgrade your extension, run `FORCE INSTALL mysql;`.
 
 ### The `mysql_execute` Function
@@ -240,7 +240,7 @@ ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
 CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
-> Warning This function is only available on DuckDB v0.10.1, using the latest MySQL extension.
+> Warning This function is only available on DuckDB v0.10.1+, using the latest MySQL extension.
 > To upgrade your extension, run `FORCE INSTALL mysql;`.
 
 ## Settings
