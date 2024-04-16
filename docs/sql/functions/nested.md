@@ -408,13 +408,19 @@ Python-style list comprehension can be used to compute expressions over elements
 ```sql
 SELECT [lower(x) FOR x IN strings]
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
--- [hello, , world]
+```
+
+```text
+[hello, , world]
 ```
 
 ```sql
 SELECT [upper(x) FOR x IN strings IF len(x) > 0]
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
--- [HELLO, WORLD]
+```
+
+```text
+[HELLO, WORLD]
 ```
 
 ## Struct Functions
