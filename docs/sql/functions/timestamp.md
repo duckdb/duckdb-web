@@ -26,6 +26,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`age(timestamp, timestamp)`](#agetimestamp-timestamp) | Subtract arguments, resulting in the time difference between the two timestamps. |
 | [`age(timestamp)`](#agetimestamp) | Subtract from current_date. |
 | [`century(timestamp)`](#centurytimestamp) | Extracts the century of a timestamp. |
+| [`current_timestamp`](#current_timestamp) | Returns the current timestamp (at the start of the transaction). |
 | [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition](../../sql/functions/datepart) boundaries between the timestamps. |
 | [`date_part([part, ...], timestamp)`](#date_partpart--timestamp) | Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. |
 | [`date_part(part, timestamp)`](#date_partpart-timestamp) | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
@@ -90,6 +91,14 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Description** | Extracts the century of a timestamp. |
 | **Example** | `century(TIMESTAMP '1992-03-22')` |
 | **Result** | `20` |
+
+### `current_timestamp`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the current timestamp with time zone (at the start of the transaction). |
+| **Example** | `current_timestamp` |
+| **Result** | `2024-04-16T09:14:36.098Z` |
 
 ### `date_diff(part, startdate, enddate)`
 
