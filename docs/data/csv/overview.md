@@ -86,7 +86,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | `VARCHAR` | (empty) |
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
 | `null_padding` | If this option is enabled, when a row lacks columns, it will pad the remaining columns on the right with null values.| `BOOL` | `false` |
-| `nullstr` | Specifies the string that represents a NULL value. | `VARCHAR` | (empty) |
+| `nullstr` | Specifies the string that represents a `NULL` value or (since v0.10.2) a list of strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
 | `parallel` | Whether or not the parallel CSV reader is used. | `BOOL` | `true` |
 | `quote` | Specifies the quoting string to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `sample_size` | The number of sample rows for [auto detection of parameters](auto_detection). | `BIGINT` | 20480 |
