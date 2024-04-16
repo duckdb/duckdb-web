@@ -15,6 +15,7 @@
     - [Serving the site from Docker](#serving-the-site-from-docker)
   - [With a Dev Container](#with-a-dev-container)
   - [Generating the search index](#generating-the-search-index)
+  - [Updating the release calendar](#updating-the-release-calendar)
 
 The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
@@ -26,7 +27,7 @@ The site is built using [Jekyll](https://jekyllrb.com/) 3.9.x.
 
 #### Ruby
 
-Jekyll 3.9.x requires Ruby v2.7.x+. Note that in some systems, the built-in Ruby distribution is older. On macOS, you can install a new Ruby version via [Homebew](https://brew.sh/):
+Jekyll 3.9.x requires Ruby v2.7.x+. Note that in some systems, the built-in Ruby distribution is older. On macOS, you can install a new Ruby version via [Homebrew](https://brew.sh/):
 
 ```bash
 brew install ruby
