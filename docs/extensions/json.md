@@ -54,21 +54,29 @@ INSERT INTO example VALUES
 ```sql
 -- Retrieve the family key's value
 SELECT j.family FROM example;
--- "anatidae"
+```
+
+```text
+"anatidae"
 ```
 
 ```sql
 -- Extract the family key's value with a JSONPath expression
 SELECT j->'$.family' FROM example;
--- "anatidae"
+```
+
+```text
+"anatidae"
 ```
 
 ```sql
 -- Extract the family key's value with a JSONPath expression as a VARCHAR
 SELECT j->>'$.family' FROM example;
--- anatidae
 ```
 
+```text
+anatidae
+```
 
 ## JSON Type
 
@@ -81,20 +89,29 @@ We also allow any of our types to be casted to JSON, and JSON to be casted back 
 ```sql
 -- Cast JSON to our STRUCT type
 SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
--- {'duck': 42}
+```
+
+```text
+{'duck': 42}
 ```
 
 ```sql
 -- And back:
 SELECT {duck: 42}::JSON;
--- {"duck":42}
+```
+
+```text
+{"duck":42}
 ```
 
 This works for our nested types as shown in the example, but also for non-nested types:
 
 ```sql
 SELECT '2023-05-12'::DATE::JSON;
--- "2023-05-12"
+```
+
+```text
+"2023-05-12"
 ```
 
 The only exception to this behavior is the cast from `VARCHAR` to `JSON`, which does not alter the data, but instead parses and validates the contents of the `VARCHAR` as JSON.
@@ -163,19 +180,28 @@ Example usage:
 
 ```sql
 SELECT * FROM read_json_objects('my_file1.json');
--- {"duck":42,"goose":[1,2,3]}
+```
+
+```text
+{"duck":42,"goose":[1,2,3]}
 ```
 
 ```sql
 SELECT * FROM read_json_objects(['my_file1.json', 'my_file2.json']);
--- {"duck":42,"goose":[1,2,3]}
--- {"duck":43,"goose":[4,5,6],"swan":3.3}
+```
+
+```text
+{"duck":42,"goose":[1,2,3]}
+{"duck":43,"goose":[4,5,6],"swan":3.3}
 ```
 
 ```sql
 SELECT * FROM read_ndjson_objects('*.json.gz');
--- {"duck":42,"goose":[1,2,3]}
--- {"duck":43,"goose":[4,5,6],"swan":3.3}
+```
+
+```text
+{"duck":42,"goose":[1,2,3]}
+{"duck":43,"goose":[4,5,6],"swan":3.3}
 ```
 
 DuckDB also supports reading JSON as a table, using the following functions:
@@ -363,14 +389,20 @@ For example, to extract the first element of the array with key `"duck"`, you ca
 
 ```sql
 SELECT json_extract('{"duck": [1, 2, 3]}', '/duck/0');
--- 1
+```
+
+```text
+1
 ```
 
 The JSONPath syntax separates fields with a `.`, and accesses array elements with `[i]`, and always starts with `$`. Using the same example, we can do the following:
 
 ```sql
 SELECT json_extract('{"duck": [1, 2, 3]}', '$.duck[0]');
--- 1
+```
+
+```text
+1
 ```
 
 Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
@@ -379,14 +411,20 @@ JSONPath is more expressive, and can also access from the back of lists:
 
 ```sql
 SELECT json_extract('{"duck": [1, 2, 3]}', '$.duck[#-1]');
--- 3
+```
+
+```text
+3
 ```
 
 JSONPath also allows escaping syntax tokens, using double quotes:
 
 ```sql
 SELECT json_extract('{"duck.goose": [1, 2, 3]}', '$."duck.goose"[1]');
--- 2
+```
+
+```text
+2
 ```
 
 Examples using the [anatidae biological family](https://en.wikipedia.org/wiki/Anatidae):
@@ -399,39 +437,138 @@ INSERT INTO example VALUES
 
 ```sql
 SELECT json(j) FROM example;
--- {"family":"anatidae","species":["duck","goose","swan",null]}
+```
+
+```text
+{"family":"anatidae","species":["duck","goose","swan",null]}
+```
+
+```sql
 SELECT j.family FROM example;
--- "anatidae"
+```
+
+```text
+"anatidae"
+```
+
+```sql
 SELECT j.species[0] FROM example;
--- "duck"
+```
+
+```text
+"duck"
+```
+
+```sql
 SELECT json_valid(j) FROM example;
--- true
+```
+
+```text
+true
+```
+
+```sql
 SELECT json_valid('{');
--- false
+```
+
+```text
+false
+```
+
+```sql
 SELECT json_array_length('["duck", "goose", "swan", null]');
--- 4
+```
+
+```text
+4
+```
+
+```sql
 SELECT json_array_length(j, 'species') FROM example;
--- 4
+```
+
+```text
+4
+```
+
+```sql
 SELECT json_array_length(j, '/species') FROM example;
--- 4
+```
+
+```text
+4
+```
+
+```sql
 SELECT json_array_length(j, '$.species') FROM example;
--- 4
+```
+
+```text
+4
+```
+
+```sql
 SELECT json_array_length(j, ['$.species']) FROM example;
--- [4]
+```
+
+```text
+[4]
+```
+
+```sql
 SELECT json_type(j) FROM example;
--- OBJECT
+```
+
+```text
+OBJECT
+```
+
+```sql
 SELECT json_keys(j) FROM example;
--- [family, species]
+```
+
+```text
+[family, species]
+```
+
+```sql
 SELECT json_structure(j) FROM example;
--- {"family":"VARCHAR","species":["VARCHAR"]}
+```
+
+```text
+{"family":"VARCHAR","species":["VARCHAR"]}
+```
+
+```sql
 SELECT json_structure('["duck", {"family": "anatidae"}]');
--- ["JSON"]
+```
+
+```text
+["JSON"]
+```
+
+```sql
 SELECT json_contains('{"key": "value"}', '"value"');
--- true
+```
+
+```text
+true
+```
+
+```sql
 SELECT json_contains('{"key": 1}', '1');
--- true
+```
+
+```text
+true
+```
+
+```sql
 SELECT json_contains('{"top_key": {"key": "value"}}', '{"key": "value"}');
--- true
+```
+
+```text
+true
 ```
 
 ## JSON Extraction Functions
@@ -457,34 +594,103 @@ Examples:
 ```sql
 CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
-  (' { "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
+    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
 ```
 
 ```sql
 SELECT json_extract(j, '$.family') FROM example;
--- "anatidae"
+```
+
+```text
+"anatidae"
+```
+
+```sql
 SELECT j->'$.family' FROM example;
--- "anatidae"
+```
+
+```text
+"anatidae"
+```
+
+```sql
 SELECT j->'$.species[0]' FROM example;
--- "duck"
+```
+
+```text
+"duck"
+```
+
+```sql
 SELECT j->'$.species[*]' FROM example;
--- ["duck", "goose", "swan", null]
+```
+
+```text
+["duck", "goose", "swan", null]
+```
+
+```sql
 SELECT j->>'$.species[*]' FROM example;
--- [duck, goose, swan, null]
+```
+
+```text
+[duck, goose, swan, null]
+```
+
+```sql
 SELECT j->'$.species'->0 FROM example;
--- "duck"
+```
+
+```text
+"duck"
+```
+
+```sql
 SELECT j->'species'->['0','1'] FROM example;
--- ["duck", "goose"]
+```
+
+```text
+["duck", "goose"]
+```
+
+```sql
 SELECT json_extract_string(j, '$.family') FROM example;
--- anatidae
+```
+
+```text
+anatidae
+```
+
+```sql
 SELECT j->>'$.family' FROM example;
--- anatidae
+```
+
+```text
+anatidae
+```
+
+```sql
 SELECT j->>'$.species[0]' FROM example;
--- duck
+```
+
+```text
+duck
+```
+
+```sql
 SELECT j->'species'->>0 FROM example;
--- duck
+```
+
+```text
+duck
+```
+
+```sql
 SELECT j->'species'->>['0','1'] FROM example;
--- [duck, goose]
+```
+
+```text
+[duck, goose]
 ```
 
 Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
@@ -530,19 +736,58 @@ Examples:
 
 ```sql
 SELECT to_json('duck');
--- "duck"
+```
+
+```text
+"duck"
+```
+
+```sql
 SELECT to_json([1, 2, 3]);
--- [1,2,3]
+```
+
+```text
+[1,2,3]
+```
+
+```sql
 SELECT to_json({duck : 42});
--- {"duck":42}
+```
+
+```text
+{"duck":42}
+```
+
+```sql
 SELECT to_json(map(['duck'],[42]));
--- {"duck":42}
+```
+
+```text
+{"duck":42}
+```
+
+```sql
 SELECT json_array(42, 'duck', NULL);
--- [42,"duck",null]
+```
+
+```text
+[42,"duck",null]
+```
+
+```sql
 SELECT json_object('duck', 42);
--- {"duck":42}
+```
+
+```text
+{"duck":42}
+```
+
+```sql
 SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
--- {"goose":123,"duck":42}
+```
+
+```text
+{"goose":123,"duck":42}
 ```
 
 ## JSON Aggregate Functions
@@ -566,9 +811,18 @@ INSERT INTO example1 VALUES ('duck', 42), ('goose', 7);
 
 ```sql
 SELECT json_group_array(v) FROM example1;
--- [42, 7]
+```
+
+```text
+[42, 7]
+```
+
+```sql
 SELECT json_group_object(k, v) FROM example1;
--- {"duck":42,"goose":7}
+```
+
+```text
+{"duck":42,"goose":7}
 ```
 
 ```sql
@@ -580,7 +834,10 @@ INSERT INTO example2 VALUES
 
 ```sql
 SELECT json_group_structure(j) FROM example2;
--- {"family":"VARCHAR","species":["VARCHAR"],"coolness":"DOUBLE","hair":"BOOLEAN"}
+```
+
+```text
+{"family":"VARCHAR","species":["VARCHAR"],"coolness":"DOUBLE","hair":"BOOLEAN"}
 ```
 
 ## Transforming JSON
@@ -612,19 +869,28 @@ INSERT INTO example VALUES
 
 ```sql
 SELECT json_transform(j, '{"family": "VARCHAR", "coolness": "DOUBLE"}') FROM example;
--- {'family': anatidae, 'coolness': 42.420000}
--- {'family': canidae, 'coolness': NULL}
+```
+
+```text
+{'family': anatidae, 'coolness': 42.420000}
+{'family': canidae, 'coolness': NULL}
 ```
 
 ```sql
 SELECT json_transform(j, '{"family": "TINYINT", "coolness": "DECIMAL(4, 2)"}') FROM example;
--- {'family': NULL, 'coolness': 42.42}
--- {'family': NULL, 'coolness': NULL}
+```
+
+```text
+{'family': NULL, 'coolness': 42.42}
+{'family': NULL, 'coolness': NULL}
 ```
 
 ```sql
 SELECT json_transform_strict(j, '{"family": "TINYINT", "coolness": "DOUBLE"}') FROM example;
--- Invalid Input Error: Failed to cast value: "anatidae"
+```
+
+```text
+Invalid Input Error: Failed to cast value: "anatidae"
 ```
 
 ## Serializing and Deserializing SQL to JSON and Vice Versa
@@ -649,43 +915,64 @@ Examples:
 ```sql
 -- Simple example
 SELECT json_serialize_sql('SELECT 2');
--- '{"error":false,"statements":[{"node":{"type":"SELECT_NODE","modifiers":[],"cte_map":{"map":[]},"select_list":[{"class":"CONSTANT","type":"VALUE_CONSTANT","alias":"","value":{"type":{"id":"INTEGER","type_info":null},"is_null":false,"value":2}}],"from_table":{"type":"EMPTY","alias":"","sample":null},"where_clause":null,"group_expressions":[],"group_sets":[],"aggregate_handling":"STANDARD_HANDLING","having":null,"sample":null,"qualify":null}}]}'
+```
+
+```text
+'{"error":false,"statements":[{"node":{"type":"SELECT_NODE","modifiers":[],"cte_map":{"map":[]},"select_list":[{"class":"CONSTANT","type":"VALUE_CONSTANT","alias":"","value":{"type":{"id":"INTEGER","type_info":null},"is_null":false,"value":2}}],"from_table":{"type":"EMPTY","alias":"","sample":null},"where_clause":null,"group_expressions":[],"group_sets":[],"aggregate_handling":"STANDARD_HANDLING","having":null,"sample":null,"qualify":null}}]}'
 ```
 
 ```sql
 -- Example with multiple statements and skip options
 SELECT json_serialize_sql('SELECT 1 + 2; SELECT a + b FROM tbl1', skip_empty := true, skip_null := true);
--- '{"error":false,"statements":[{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","function_name":"+","children":[{"class":"CONSTANT","type":"VALUE_CONSTANT","value":{"type":{"id":"INTEGER"},"is_null":false,"value":1}},{"class":"CONSTANT","type":"VALUE_CONSTANT","value":{"type":{"id":"INTEGER"},"is_null":false,"value":2}}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"EMPTY"},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","function_name":"+","children":[{"class":"COLUMN_REF","type":"COLUMN_REF","column_names":["a"]},{"class":"COLUMN_REF","type":"COLUMN_REF","column_names":["b"]}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"BASE_TABLE","table_name":"tbl1"},"aggregate_handling":"STANDARD_HANDLING"}}]}'
+```
+
+```text
+'{"error":false,"statements":[{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","function_name":"+","children":[{"class":"CONSTANT","type":"VALUE_CONSTANT","value":{"type":{"id":"INTEGER"},"is_null":false,"value":1}},{"class":"CONSTANT","type":"VALUE_CONSTANT","value":{"type":{"id":"INTEGER"},"is_null":false,"value":2}}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"EMPTY"},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","function_name":"+","children":[{"class":"COLUMN_REF","type":"COLUMN_REF","column_names":["a"]},{"class":"COLUMN_REF","type":"COLUMN_REF","column_names":["b"]}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"BASE_TABLE","table_name":"tbl1"},"aggregate_handling":"STANDARD_HANDLING"}}]}'
 ```
 
 ```sql
 -- Example with a syntax error
 SELECT json_serialize_sql('TOTALLY NOT VALID SQL');
--- '{"error":true,"error_type":"parser","error_message":"syntax error at or near \"TOTALLY\"\nLINE 1: TOTALLY NOT VALID SQL\n        ^"}'
+```
+
+```text
+'{"error":true,"error_type":"parser","error_message":"syntax error at or near \"TOTALLY\"\nLINE 1: TOTALLY NOT VALID SQL\n        ^"}'
 ```
 
 ```sql
 -- Example with deserialize
 SELECT json_deserialize_sql(json_serialize_sql('SELECT 1 + 2'));
--- 'SELECT (1 + 2)'
+```
+
+```text
+'SELECT (1 + 2)'
 ```
 
 ```sql
 -- Example with deserialize and syntax sugar
 SELECT json_deserialize_sql(json_serialize_sql('FROM x SELECT 1 + 2'));
--- 'SELECT (1 + 2) FROM x'
+```
+
+```text
+'SELECT (1 + 2) FROM x'
 ```
 
 ```sql
 -- Example with execute
 SELECT * FROM json_execute_serialized_sql(json_serialize_sql('SELECT 1 + 2'));
--- 3
+```
+
+```text
+3
 ```
 
 ```sql
 -- Example with error
 SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID SQL'));
--- Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALLY"
+```
+
+```text
+Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALLY"
 ```
 
 ## Indexing
