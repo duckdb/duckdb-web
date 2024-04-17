@@ -104,8 +104,8 @@ for (idx_t row = 0; row < row_count; row++) {
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_query"><span class="nf">duckdb_query</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
 <span class="kt">void</span> <a href="#duckdb_destroy_result"><span class="nf">duckdb_destroy_result</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_column_name"><span class="nf">duckdb_column_name</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
-<span class="nv">duckdb_type</span> <a href="#duckdb_column_type"><span class="nf">duckdb_column_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
-<span class="nv">duckdb_statement_type</span> <a href="#duckdb_result_statement_type"><span class="nf">duckdb_result_statement_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">duckdb_type</span> <a href="#duckdb_column_type"><span class="nf">duckdb_column_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">duckdb_statement_type</span> <a href="#duckdb_result_statement_type"><span class="nf">duckdb_result_statement_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_column_logical_type"><span class="nf">duckdb_column_logical_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_column_count"><span class="nf">duckdb_column_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_row_count"><span class="nf">duckdb_row_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
@@ -220,7 +220,7 @@ Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_column_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_column_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
@@ -250,7 +250,7 @@ Returns the statement type of the statement that was executed
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_statement_type</span> <span class="nv">duckdb_result_statement_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_statement_type</span> <span class="nv">duckdb_result_statement_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>

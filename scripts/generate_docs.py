@@ -128,20 +128,31 @@ duckdb_data_chunk
 duckdb_database
 duckdb_date
 duckdb_date_struct
+duckdb_decimal
 duckdb_function_info
 duckdb_hugeint
 duckdb_init_info
 duckdb_interval
 duckdb_logical_type
+duckdb_pending_state
 duckdb_prepared_statement
+duckdb_query_progress_type
 duckdb_replacement_scan_info
 duckdb_result
+duckdb_result_type
 duckdb_state
+duckdb_statement_type
+duckdb_string
 duckdb_table_function
+duckdb_task_state
 duckdb_time
 duckdb_time_struct
+duckdb_time_tz
+duckdb_time_tz_struct
 duckdb_timestamp
 duckdb_timestamp_struct
+duckdb_type
+duckdb_uhugeint
 duckdb_value
 duckdb_vector
 '''
@@ -332,7 +343,7 @@ for entry in documentation_list:
     if group_name is not current_group_name:
         if current_group_name is not None:
             total_quick_docs += quick_docs_end() + '\n'
-        total_quick_docs += '### `' + group_name + '`\n\n'
+        total_quick_docs += '### ' + group_name + '\n\n'
 
         total_quick_docs += quick_docs_start()
         current_group_name = group_name
