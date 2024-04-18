@@ -26,8 +26,12 @@ sudo yum install unixODBC
 
 1. Download the ODBC Linux Asset corresponding to your architecture:
 
+   <!-- markdownlint-disable MD034 -->
+
    * [x86_64 (AMD64)](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip)
    * [arm64](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-aarch64.zip)
+
+   <!-- markdownlint-enable MD034 -->
 
 2. The package contains the following files:
 
