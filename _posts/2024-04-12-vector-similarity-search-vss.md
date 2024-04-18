@@ -5,11 +5,11 @@ author: Max Gabrielsson
 excerpt: "DuckDB now supports the creation of HNSW indexes to accelerate vector similarity search through the new `vss` extension."
 ---
 
-In DuckDB v0.10.0, we introduced the "fixed-size list" [`ARRAY` data type](/docs/sql/data_types/array) to complement the existing variable-size [`LIST` data type](/docs/sql/data_types/list) in DuckDB.
+In DuckDB v0.10.0, we introduced the "fixed-size list" [`ARRAY` data type](/docs/sql/data_types/array) to complement the existing variable-size [`LIST` data type](/docs/sql/data_types/list).
 
 The initial motivation for adding this data type was to provide optimized operations for lists that can utilize the positional semantics of their child elements and avoid branching as all lists have the same length. Think e.g. the sort of array manipulations you'd do in NumPy: stacking, shifting, multiplying – you name it. Additionally, we wanted to improve our interoperability with Apache Arrow, as previously Arrow's fixed-size list types would be converted to regular variable-size lists when ingested into DuckDB, losing some type information.
 
-However, as the hype for __vector embeddings__ and __semantic similarity search__ were growing, we also snuck in a couple of distance metric functions for this new `ARRAY` type:
+However, as the hype for __vector embeddings__ and __semantic similarity search__ was growing, we also snuck in a couple of distance metric functions for this new `ARRAY` type:
 `array_distance`
 `array_inner_product` and
 `array_cosine_distance`.
