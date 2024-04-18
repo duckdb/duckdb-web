@@ -889,7 +889,7 @@ SELECT json_transform(j, '{"family": "TINYINT", "coolness": "DECIMAL(4, 2)"}') F
 SELECT json_transform_strict(j, '{"family": "TINYINT", "coolness": "DOUBLE"}') FROM example;
 ```
 
-```text
+```console
 Invalid Input Error: Failed to cast value: "anatidae"
 ```
 
@@ -971,7 +971,7 @@ SELECT * FROM json_execute_serialized_sql(json_serialize_sql('SELECT 1 + 2'));
 SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID SQL'));
 ```
 
-```text
+```console
 Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALLY"
 ```
 

@@ -110,7 +110,7 @@ FROM names
 WHERE name = 'hannes' COLLATE NOCASE;
 ```
 
-```text
+```console
 ERROR: Cannot combine types with different collation!
 ```
 
@@ -125,7 +125,7 @@ FROM names, other_names
 WHERE names.name = other_names.name;
 ```
 
-```text
+```console
 ERROR: Cannot combine types with different collation!
 ```
 
