@@ -433,8 +433,8 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 | [`row(any, ...)`](#rowany-) | Create an unnamed `STRUCT` (tuple) containing the argument values. |
 | [`struct_extract(struct, 'entry')`](#struct_extractstruct-entry) | Extract the named entry from the `STRUCT`. |
 | [`struct_extract(struct, idx)`](#struct_extractstruct-idx) | Extract the entry from an unnamed `STRUCT` (tuple) using an index (1-based). |
-| [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-name--any) | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). |
-| [`struct_pack(name := any, ...)`](#struct_packname--any) | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
+| [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-name--any-) | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). |
+| [`struct_pack(name := any, ...)`](#struct_packname--any-) | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
 
 ### `struct.entry`*
 
