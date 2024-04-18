@@ -131,7 +131,7 @@ scripts/generate-search-index.sh
 
 ## Updating the release calendar
 
-To update the release calendar, run:
+The release calendar is updated automatically by [CI](.github/workflows/jekyll.yml). To manually update the release calendar, run:
 
 ```bash
 python scripts/get_calendar.py
