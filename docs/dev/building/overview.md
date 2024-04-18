@@ -1,4 +1,4 @@
----
+GitHub guide 🦮---
 layout: docu
 title: Building DuckDB from Source
 redirect_from:
