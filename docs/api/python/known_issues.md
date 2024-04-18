@@ -60,7 +60,7 @@ When importing DuckDB on Windows, the Python runtime may return the following er
 import duckdb
 ```
 
-```text
+```console
 ImportError: DLL load failed while importing duckdb: The specified module could not be found.
 ```
 

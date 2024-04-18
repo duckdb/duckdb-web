@@ -139,8 +139,10 @@ CREATE TABLE t1 AS (
 
 -- Initializing a struct column with the row function will fail
 CREATE TABLE t2 AS SELECT ROW('a');
--- The following error is thrown:
--- "Error: Invalid Input Error: A table cannot be created from an unnamed struct"
+```
+
+```console
+Invalid Input Error: A table cannot be created from an unnamed struct
 ```
 
 When casting structs, the names of fields have to match. Therefore, the following query will fail:
@@ -151,8 +153,8 @@ FROM
     (SELECT {'x': 42} AS a);
 ```
 
-```text
-Error: Mismatch Type Error: Type STRUCT(x INTEGER) does not match with STRUCT(y INTEGER). Cannot cast STRUCTs with different names
+```console
+Mismatch Type Error: Type STRUCT(x INTEGER) does not match with STRUCT(y INTEGER). Cannot cast STRUCTs - element "x" in source struct was not found in target struct
 ```
 
 A workaround for this would be to use [`struct_pack`](#creating-structs) instead:

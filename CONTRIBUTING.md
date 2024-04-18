@@ -59,8 +59,9 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
 * Do not hard-wrap lines in blocks of text.
-* Format code blocks with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`).
-* To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT HERE \`\`\`.
+* Format code blocks with the appropriate language (e.g., \`\`\`sql CODE\`\`\`).
+* To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT\`\`\`.
+* To display error messages, use \`\`\`console ERROR MESSAGE\`\`\`.
 * Quoted blocks (lines starting with `>`) are rendered as [a colored box](https://duckdb.org/docs/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`.
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `).

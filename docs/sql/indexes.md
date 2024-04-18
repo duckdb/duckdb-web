@@ -46,7 +46,7 @@ DELETE FROM students WHERE id = 1;
 INSERT INTO students VALUES (1, 'Student 2');
 ```
 
-```text
+```console
 Constraint Error: Duplicate key "id: 1" violates primary key constraint.
 If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
 ```
@@ -62,7 +62,7 @@ SET id = 1, name = 'Student 2'
 WHERE id = 1;
 ```
 
-```text
+```console
 Constraint Error: Duplicate key "id: 1" violates primary key constraint.
 If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
 ```

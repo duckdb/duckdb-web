@@ -125,7 +125,7 @@ Using multiple connections can parallelize some operations, although it is typic
 
 When importing or exporting data sets (from/to the Parquet or CSV formats), which are much larger than the available memory, an out of memory error may occur:
 
-```text
+```console
 Error: Out of Memory Error: failed to allocate data of size ... (.../... used)
 ```
 

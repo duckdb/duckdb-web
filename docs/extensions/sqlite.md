@@ -109,7 +109,7 @@ When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB 
 
 As DuckDB enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
 
-```text
+```console
 Error: Mismatch Type Error: Invalid type in column "i": column was declared as integer, found "hello" of type "text" instead.
 ```
 
@@ -120,7 +120,6 @@ SET GLOBAL sqlite_all_varchar = true;
 ```
 
 When set, this option overrides the type conversion rules described above, and instead always converts the SQLite columns into a `VARCHAR` column. Note that this setting must be set *before* `sqlite_attach` is called.
-
 
 ## Opening SQLite Databases Directly
 
