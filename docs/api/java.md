@@ -18,7 +18,7 @@ Refer to the externally hosted [API Reference](https://javadoc.io/doc/org.duckdb
 ### Startup & Shutdown
 
 In JDBC, database connections are created through the standard `java.sql.DriverManager` class.
-The driver should auto-register in the `DriverManager`, if that does not work for some reason, you can enforce registration like so:
+The driver should auto-register in the `DriverManager`, if that does not work for some reason, you can enforce registration using the following statement:
 
 ```java
 Class.forName("org.duckdb.DuckDBDriver");
@@ -36,6 +36,7 @@ Connection conn = DriverManager.getConnection("jdbc:duckdb:");
 To use DuckDB-specific features such as the [Appender](#appender), cast the object to a `DuckDBConnection`:
 
 ```java
+import java.sql.DriverManager;
 import org.duckdb.DuckDBConnection;
 
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
@@ -75,30 +76,41 @@ Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", co
 DuckDB supports the standard JDBC methods to send queries and retrieve result sets. First a `Statement` object has to be created from the `Connection`, this object can then be used to send queries using `execute` and `executeQuery`. `execute()` is meant for queries where no results are expected like `CREATE TABLE` or `UPDATE` etc. and `executeQuery()` is meant to be used for queries that produce results (e.g., `SELECT`). Below two examples. See also the JDBC [`Statement`](https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html) and [`ResultSet`](https://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html) documentations.
 
 ```java
+import org.duckdb.DuckDBConnection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+
 // create a table
 Statement stmt = conn.createStatement();
 stmt.execute("CREATE TABLE items (item VARCHAR, value DECIMAL(10, 2), count INTEGER)");
 // insert two items into the table
 stmt.execute("INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)");
-stmt.close();
-```
 
-```java
 try (ResultSet rs = stmt.executeQuery("SELECT * FROM items")) {
     while (rs.next()) {
         System.out.println(rs.getString(1));
         System.out.println(rs.getInt(3));
     }
 }
-// jeans
-// 1
-// hammer
-// 2
+stmt.close();
+```
+
+```text
+jeans
+1
+hammer
+2
 ```
 
 DuckDB also supports prepared statements as per the JDBC API:
 
 ```java
+import java.sql.PreparedStatement;
+
 try (PreparedStatement p_stmt = conn.prepareStatement("INSERT INTO items VALUES (?, ?, ?);")) {
     p_stmt.setString(1, "chainsaw");
     p_stmt.setDouble(2, 500.0);
@@ -138,20 +150,20 @@ try (var conn = DriverManager.getConnection("jdbc:duckdb:");
 
 #### Arrow Import
 
-The following demonstrates consuming an arrow stream from the java arrow bindings
+The following demonstrates consuming an Arrow stream from the Java Arrow bindings.
 
 ```java
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.ipc.ArrowReader;
 import org.duckdb.DuckDBConnection;
 
-// Arrow stuff
+// Arrow binding
 try (var allocator = new RootAllocator();
      ArrowStreamReader reader = null; // should not be null of course
      var arrow_array_stream = ArrowArrayStream.allocateNew(allocator)) {
     Data.exportArrayStream(allocator, reader, arrow_array_stream);
 
-    // DuckDB stuff
+    // DuckDB setup
     try (var conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:")) {
         conn.registerArrowStream("asdf", arrow_array_stream);
 
@@ -186,6 +198,8 @@ The Appender is flushed when the `close()` method is called.
 Example:
 
 ```java
+import java.sql.DriverManager;
+import java.sql.Statement;
 import org.duckdb.DuckDBConnection;
 
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
@@ -219,6 +233,8 @@ The batch writer supports prepared statements to mitigate the overhead of query 
 #### Batch Writer with Prepared Statements
 
 ```java
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import org.duckdb.DuckDBConnection;
 
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
@@ -243,6 +259,8 @@ stmt.close();
 The batch writer also supports vanilla SQL statements:
 
 ```java
+import java.sql.DriverManager;
+import java.sql.Statement;
 import org.duckdb.DuckDBConnection;
 
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
