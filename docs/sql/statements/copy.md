@@ -90,6 +90,8 @@ COPY lineitem TO 'lineitem.tsv' (DELIMITER '\t', HEADER false);
 COPY lineitem(l_orderkey) TO 'orderkey.tbl' (DELIMITER '|');
 -- Copy the result of a query to the file 'query.csv', including a header with column names
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' (DELIMITER ',');
+-- Add the result of a query to the Parquet file 'aggregate.parquet'
+db.sql("COPY (SELECT 42 AS a, 'hello' AS b UNION SELECT * FROM 'aggregate.parquet') TO 'aggregate.parquet' (FORMAT PARQUET);")
 -- Copy the result of a query to the Parquet file 'query.parquet'
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.parquet' (FORMAT PARQUET);
 -- Copy the result of a query to the newline-delimited JSON file 'query.ndjson'
