@@ -1094,6 +1094,13 @@ body.tmguidelines{
 	}
 }
 
+.wrap.odbc101aduckthemedguidetoodbc #environment + .nostroke_table + table tr > td:first-child,
+.wrap.odbc101aduckthemedguidetoodbc #connection + .nostroke_table + table tr > td:first-child,
+.wrap.odbc101aduckthemedguidetoodbc #statement + .nostroke_table + table tr > td:first-child,
+.wrap.odbc101aduckthemedguidetoodbc #descriptor + .nostroke_table + table tr > td:first-child{
+	white-space: nowrap;
+}
+
 @import url(copy_button.css);
 @import url(search.css?add4c80c);
 @import url(home.css?add4c80c);
