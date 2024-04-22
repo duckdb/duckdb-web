@@ -15,7 +15,7 @@ To connect to a DuckDB database via HTTPS, use the [`ATTACH` statement](../../sq
 
 ```sql
 LOAD httpfs;
-ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db (READONLY);
+ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db (READ_ONLY);
 ```
 
 Then, the database can be queried using:
@@ -35,7 +35,7 @@ To connect to a DuckDB database via the S3 API, [configure the authentication](s
 
 ```sql
 LOAD httpfs;
-ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READONLY);
+ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
 ```
 
 Then, the database can be queried using:
