@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: MySQL Import
+redirect_from:
+  - /docs/guides/import/query_mysql
 ---
 
 To run a query directly on a running MySQL database, the [`mysql` extension](../../extensions/mysql) is required.

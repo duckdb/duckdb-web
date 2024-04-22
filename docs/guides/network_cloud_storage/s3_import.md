@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: S3 Parquet Import
+redirect_from:
+  - /docs/guides/import/s3_import
 ---
 
 ## Prerequisites

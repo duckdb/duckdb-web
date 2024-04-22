@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Querying Parquet Files
+redirect_from:
+  - /docs/guides/import/query_parquet
 ---
 
 To run a query directly on a Parquet file, use the `read_parquet` function in the `FROM` clause of a query.

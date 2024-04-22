@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: S3 Express One
+redirect_from:
+  - /docs/guides/import/s3_express_one
 ---
 
 In late 2023, AWS [announced](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-s3-express-one-zone-storage-class/) the [S3 Express One Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-one-zone.html), a high-speed variant of traditional S3 buckets.

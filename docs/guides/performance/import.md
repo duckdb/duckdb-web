@@ -1,12 +1,14 @@
 ---
 layout: docu
-title: Data Import Overview
+title: Data Import
+redirect_from:
+  - /docs/guides/import/overview
 ---
 
-When importing data from other systems to DuckDB, there are several considerations to take into account.
-This page documents the key approaches recommended to bulk import data to DuckDB.
-
 ## Recommended Import Methods
+
+When importing data from other systems to DuckDB, there are several considerations to take into account.
+We recommend importing using the following order:
 
 1. For systems which are supported by a DuckDB scanner extension, it's preferable to use the scanner. DuckDB currently offers scanners for [MySQL](query_mysql), [PostgreSQL](query_postgres), and [SQLite](query_sqlite).
 2. If there is a bulk export feature in the data source system, export the data to Parquet or CSV format, then load it using DuckDB's [Parquet](parquet_import) or [CSV loader](csv_import).

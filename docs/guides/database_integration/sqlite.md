@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: SQLite Import
+redirect_from:
+  - /docs/guides/import/query_sqlite
 ---
 
 To run a query directly on a SQLite file, the `sqlite` extension is required.
