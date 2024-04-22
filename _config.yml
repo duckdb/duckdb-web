@@ -23,8 +23,8 @@ url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. htt
 currentshortduckdbversion: "0.10"
 currentduckdbversion: 0.10.2
 currentsnapshotversion: 0.10.3-dev
-currentjavaversion: 0.10.1
-nextjavaversion: 0.10.2  # for java snapshots
+currentjavaversion: 0.10.2
+nextjavaversion: 0.10.3  # for java snapshots
 livereload: true
 highlighter: rouge
 incremental: false
