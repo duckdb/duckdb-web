@@ -31,14 +31,15 @@ FROM stations_db.stations;
 
 ## Connecting via S3
 
-To connect to a DuckDB database via the S3 API, [configure the authentication](s3_import#credentials-and-configuration) for your bucket, then use the [`ATTACH` statement](../../sql/statements/attach) as follows:
+To connect to a DuckDB database via the S3 API, [configure the authentication](s3_import#credentials-and-configuration) for your bucket (if required).
+Then, use the [`ATTACH` statement](../../sql/statements/attach) as follows:
 
 ```sql
 LOAD httpfs;
 ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
 ```
 
-Then, the database can be queried using:
+The database can be queried using:
 
 ```sql
 SELECT count(*) AS num_stations
@@ -51,5 +52,5 @@ FROM stations_db.stations;
 
 ## Limitations
 
-* The `httpfs` extension has to be loaded manually.
-* Only read-only connections are allowed, writing the database is not possible.
+* The `httpfs` extension has to be loaded manually, auto-loading is currently not supported.
+* Only read-only connections are allowed, writing the database via the HTTPS protocol or the S3 API is not possible.
