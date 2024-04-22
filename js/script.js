@@ -523,8 +523,13 @@ $(document).ready(function(){
 			$('.searchoverlay').removeClass('active');
 			$('body').removeClass('search');
 		}
-		// open search on cmd/ctrl + k
+		
 		if ( e.metaKey && ( e.which === 75 ) || e.ctrlKey && ( e.which === 75 ) ) {
+			// open search on cmd/ctrl + k
+			var isFirefox = typeof InstallTrigger !== 'undefined';
+			if (isFirefox) {
+				e.preventDefault();
+			}
 			if( $('body').hasClass('documentation') || $('body').hasClass('landing') ){
 				toggleSearch();
 			}
@@ -770,7 +775,7 @@ $(document).ready(function(){
 	
 	/** HIGHLIGHT TOC MENU **/
 	if ($('body').hasClass('documentation')) {
-		var headings = $('#main_content_wrap h1, #main_content_wrap h2, #main_content_wrap h3');
+		var headings = $('#main_content_wrap h1, #main_content_wrap h2');
 		var tocEntries = $('.toc-entry');
 	
 		$(window).on('scroll', function() {
