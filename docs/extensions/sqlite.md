@@ -176,6 +176,14 @@ id  name
 
 Many operations on SQLite tables are supported. All these operations directly modify the SQLite database, and the result of subsequent operations can then be read using SQLite.
 
+## Concurrency
+
+DuckDB can read or modify a SQLite database while DuckDB or SQLite reads or modifies the same database from a different thread or a separate process. More than one thread or process can read the SQLite database at the same time, but only a single thread or process can write to the database at one time. Database locking is handled by SQLite, not DuckDB. Within the same process, SQLite uses mutexes. When accessed from different processes, SQLite uses file system locks. The locking mechanisms also depend on SQLite configuration, like WAL mode. Refer to the [SQLite documentation on locking](https://www.sqlite.org/lockingv3.html) for more information.
+
+> Warning Linking multiple copies of the SQLite library into the same application can lead to application errors. See [sqlite_scanner Issue #82](https://github.com/duckdb/sqlite_scanner/issues/82) more information.
+
+## Supported Operations
+
 Below is a list of supported operations.
 
 ### `CREATE TABLE`
