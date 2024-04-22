@@ -3053,7 +3053,7 @@
     "struct": "CurrentTransactionIdFun",
     "type": "scalar_function",
     "category": "generic",
-    "result": 30
+    "result": "30"
   },
   {
     "name": "typeof",
@@ -3211,7 +3211,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.10.2-dev954"
+    "result": "v0.10.3-dev280"
   },
   {
     "name": "week",
@@ -3247,18 +3247,6 @@
     "type": "scalar_function_set",
     "category": "date",
     "result": 31
-  },
-  {
-    "name": "which_secret",
-    "parameters": [
-      "path",
-      "type"
-    ],
-    "description": "Print out the name of the secret that will be used for reading a path",
-    "example": "which_secret('s3://some/authenticated/path.csv', 's3')",
-    "type": "scalar_function",
-    "category": "secret",
-    "result": ""
   },
   {
     "name": "xor",
