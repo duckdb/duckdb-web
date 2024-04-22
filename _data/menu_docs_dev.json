@@ -1080,6 +1080,10 @@
                 {
                   "page": "Cloudflare R2 Import",
                   "url": "cloudflare_r2_import"
+                },
+                {
+                  "page": "DuckDB over HTTPS/S3",
+                  "url": "duckdb_over_https_or_s3"
                 }
               ]
             },
