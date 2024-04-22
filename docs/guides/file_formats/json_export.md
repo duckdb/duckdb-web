@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: JSON Export
+redirect_from:
+  - /docs/guides/import/json_export
 ---
 
 To export the data from a table to a JSON file, use the `COPY` statement.

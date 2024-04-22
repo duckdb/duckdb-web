@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: GCS Import
+redirect_from:
+  - /docs/guides/import/gcs_import
 ---
 
 ## Prerequisites

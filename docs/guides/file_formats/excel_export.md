@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Excel Export
+redirect_from:
+  - /docs/guides/import/excel_export
 ---
 
 ## Installing the Extension

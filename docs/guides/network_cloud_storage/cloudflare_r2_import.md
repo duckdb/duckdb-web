@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Cloudflare R2 Import
+redirect_from:
+  - /docs/guides/import/cloudflare_r2_import
 ---
 
 ## Prerequisites
