@@ -735,7 +735,13 @@ div.highlight{
     border: 1px solid $black200;
 }
 .language-text div.highlight{
-    border: 1px solid #f9f9f9;
+    border-color: #f9f9f9;
+}
+.language-console div.highlight{
+   border-color: #FFE8E8;
+}
+.language-console pre {
+   background-color: #FFF7F7;
 }
 
 dl,
