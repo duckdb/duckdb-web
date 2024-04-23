@@ -160,11 +160,11 @@ It is also possible to save the query plan to a file, e.g., in JSON format:
 ```sql
 -- All queries performed will be profiled, with output in json format.
 -- By default the result is still printed to stdout.
-PRAGMA enable_profiling='json';
+PRAGMA enable_profiling = 'json';
 -- Instead of writing to stdout, write the profiling output to a specific file on disk.
 -- This has no effect for `EXPLAIN ANALYZE` queries, which will *always* be
 -- returned as query results.
-PRAGMA profile_output='/path/to/file.json';
+PRAGMA profile_output = '/path/to/file.json';
 ```
 
 > This file is overwritten with each query that is issued. If you want to store the profile output for later it should be copied to a different file.

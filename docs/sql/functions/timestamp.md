@@ -29,14 +29,14 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`current_timestamp`](#current_timestamp) | Returns the current timestamp (at the start of the transaction). |
 | [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition](../../sql/functions/datepart) boundaries between the timestamps. |
 | [`date_part([part, ...], timestamp)`](#date_partpart--timestamp) | Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. |
-| [`date_part(part, timestamp)`](#date_partpart-timestamp) | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
+| [`date_part(part, timestamp)`](#date_partpart-timestamp) | Get [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
 | [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The number of complete [partitions](../../sql/functions/datepart) between the timestamps. |
 | [`date_trunc(part, timestamp)`](#date_truncpart-timestamp) | Truncate to specified [precision](../../sql/functions/datepart). |
-| [`datediff(part, startdate, enddate)`](#datediffpart-startdate-enddate) | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the timestamps. |
-| [`datepart([part, ...], timestamp)`](#datepartpart--timestamp) | Alias of date_part. Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. |
-| [`datepart(part, timestamp)`](#datepartpart-timestamp) | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
-| [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the timestamps. |
-| [`datetrunc(part, timestamp)`](#datetruncpart-timestamp) | Alias of date_trunc. Truncate to specified [precision](../../sql/functions/datepart). |
+| [`datediff(part, startdate, enddate)`](#datediffpart-startdate-enddate) | Alias of `date_diff`. The number of [partition](../../sql/functions/datepart) boundaries between the timestamps. |
+| [`datepart([part, ...], timestamp)`](#datepartpart--timestamp) | Alias of `date_part`. Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. |
+| [`datepart(part, timestamp)`](#datepartpart-timestamp) | Alias of `date_part`. Get [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
+| [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | Alias of `date_sub`. The number of complete [partitions](../../sql/functions/datepart) between the timestamps. |
+| [`datetrunc(part, timestamp)`](#datetruncpart-timestamp) | Alias of `date_trunc`. Truncate to specified [precision](../../sql/functions/datepart). |
 | [`dayname(timestamp)`](#daynametimestamp) | The (English) name of the weekday. |
 | [`epoch_ms(ms)`](#epoch_msms) | Converts ms since epoch to a timestamp. |
 | [`epoch_ms(timestamp)`](#epoch_mstimestamp) | Converts a timestamp to milliseconds since the epoch. |
@@ -120,7 +120,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
+| **Description** | Get [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
 | **Example** | `date_part('minute', TIMESTAMP '1992-09-20 20:38:40')` |
 | **Result** | `38` |
 
@@ -144,7 +144,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the timestamps. |
+| **Description** | Alias of `date_diff`. The number of [partition](../../sql/functions/datepart) boundaries between the timestamps. |
 | **Example** | `datediff('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` |
 | **Result** | `2` |
 
@@ -152,7 +152,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of date_part. Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. |
+| **Description** | Alias of `date_part`. Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. |
 | **Example** | `datepart(['year', 'month', 'day'], TIMESTAMP '1992-09-20 20:38:40')` |
 | **Result** | `{year: 1992, month: 9, day: 20}` |
 
@@ -160,7 +160,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*). |
+| **Description** | Alias of `date_part`. Get [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
 | **Example** | `datepart('minute', TIMESTAMP '1992-09-20 20:38:40')` |
 | **Result** | `38` |
 
@@ -168,7 +168,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the timestamps. |
+| **Description** | Alias of `date_sub`. The number of complete [partitions](../../sql/functions/datepart) between the timestamps. |
 | **Example** | `datesub('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` |
 | **Result** | `1` |
 
@@ -176,7 +176,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of date_trunc. Truncate to specified [precision](../../sql/functions/datepart). |
+| **Description** | Alias of `date_trunc`. Truncate to specified [precision](../../sql/functions/datepart). |
 | **Example** | `datetrunc('hour', TIMESTAMP '1992-09-20 20:38:40')` |
 | **Result** | `1992-09-20 20:00:00` |
 

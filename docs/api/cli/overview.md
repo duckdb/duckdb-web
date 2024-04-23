@@ -201,7 +201,7 @@ Note that the duck head is built with Unicode characters and does not work in al
 
 To invoke that file on initialization, use this command:
 
-```text
+```bash
 $ duckdb -init prompt.sql
 ```
 
