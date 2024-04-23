@@ -31,4 +31,3 @@ The `httpfs` extension supports connecting to [S3 API endpoints](s3api).
 ## GitHub
 
 The `httpfs` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/httpfs).
-

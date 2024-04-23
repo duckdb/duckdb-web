@@ -7,7 +7,7 @@ This page documents the files using the ODBC configuration, [`odbc.ini`](#odbcin
 These are either placed in the home directory as dotfiles (`.odbc.ini` and `.odbcinst.ini`, respectively) or in a system directory.
 For platform-specific details, see the pages for [Linux](linux), [macOS](macos), and [Windows](windows).
 
-## `odbc.ini` and `odbc.ini`
+## `odbc.ini` and `.odbc.ini`
 
 The `odbc.ini` file contains the DSNs for the drivers, which can have specific knobs.
 An example of `odbc.ini` with DuckDB:
@@ -28,7 +28,7 @@ The lines correspond to the following parameters:
 * `access_mode`: The mode in which to connect to the database.
 * `allow_unsigned_extensions`: Allow the use of [unsigned extensions](../../extensions/overview#unsigned-extensions).
 
-## `odbcinst.ini` and `odbcinst.ini`
+## `odbcinst.ini` and `.odbcinst.ini`
 
 The `odbcinst.ini` file contains general configurations for the ODBC installed drivers in the system.
 A driver section starts with the driver name between brackets, and then it follows specific configuration knobs belonging to that driver.

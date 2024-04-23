@@ -85,4 +85,3 @@ Since `UNION` types are implemented on top of `STRUCT` types internally, they ca
 ## Functions
 
 See [Nested Functions](../../sql/functions/nested#union-functions).
-

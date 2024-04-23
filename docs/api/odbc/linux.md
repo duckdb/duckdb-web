@@ -83,7 +83,7 @@ sudo yum install unixODBC
 
 4. The ODBC setup on Linux is based on the `.odbc.ini` and `.odbcinst.ini` files.
 
-   These files can be placed to the user home directory `/home/⟨user⟩` (shortcut as `~`) or in the system `/etc` directory.
+   These files can be placed to the user home directory `/home/⟨username⟩` or in the system `/etc` directory.
    The Driver Manager prioritizes the user configuration files over the system files.
 
    For the details of the configuration parameters, see the [ODBC configuration page](configuration).
