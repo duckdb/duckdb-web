@@ -91,16 +91,16 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `quote` | Specifies the quoting string to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `sample_size` | The number of sample rows for [auto detection of parameters](auto_detection). | `BIGINT` | 20480 |
 | `skip` | The number of lines at the top of the file to skip. | `BIGINT` | 0 |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
+| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat). | `VARCHAR` | (empty) |
 | `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here](tips#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
-| `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | `BOOL` | `false` |
+| `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas#union-by-name), rather than by position. | `BOOL` | `false` |
 
 ### `auto_type_candidates` Details
 
 Usage example:
 
 ```sql
-SELECT * FROM read_csv('csv_file.csv', auto_type_candidates=['BIGINT', 'DATE']);
+SELECT * FROM read_csv('csv_file.csv', auto_type_candidates = ['BIGINT', 'DATE']);
 ```
 
 The default value for the `auto_type_candidates` option is `['SQLNULL', 'BOOLEAN', 'BIGINT', 'DOUBLE', 'TIME', 'DATE', 'TIMESTAMP', 'VARCHAR']`.
@@ -144,7 +144,7 @@ DESCRIBE ontime;
 | DestCityName   | VARCHAR     | YES  | NULL | NULL    | NULL  |
 
 ```sql
-SELECT * FROM read_csv('flights.csv', sample_size = 20000);
+SELECT * FROM read_csv('flights.csv', sample_size = 20_000);
 ```
 
 If we set `delim`/`sep`, `quote`, `escape`, or `header` explicitly, we can bypass the automatic detection of this particular parameter:
