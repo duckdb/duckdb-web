@@ -1,14 +1,14 @@
 ---
 layout: docu
-title: GCS Import
+title: Google Cloud Storage Import
 redirect_from:
   - /docs/guides/import/gcs_import
 ---
 
 ## Prerequisites
 
-For Google Cloud Storage (GCS), the Interoperability API enables you to have access to it like an S3 connection using the [`httpfs` extension](../../extensions/httpfs).
-This can be installed with the `INSTALL` SQL command. This only needs to be run once.
+The Google Cloud Storage (GCS) can be used via the [`httpfs` extension](../../extensions/httpfs).
+This can be installed with the `INSTALL httpfs` SQL command. This only needs to be run once.
 
 ## Credentials and Configuration
 
@@ -28,5 +28,13 @@ After setting up the GCS credentials, you can query the GCS data using:
 
 ```sql
 SELECT *
-FROM read_parquet('gs://⟨gcs_bucket⟩/⟨file⟩');
+FROM read_parquet('gs://⟨gcs_bucket⟩/⟨file.parquet⟩');
+```
+
+## Attaching to Database
+
+You can [attach to a database file](duckdb_over_https_or_s3) in read-only mode:
+
+```sql
+ATTACH 'gs://⟨gcs_bucket⟩/⟨file.duckdb⟩' AS ⟨duckdb_database⟩ (READ_ONLY);
 ```
