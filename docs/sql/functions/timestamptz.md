@@ -370,7 +370,7 @@ The table below shows the available table functions for `TIMESTAMP WITH TIME ZON
 | Name | Description |
 |:--|:-------|
 | [`generate_series(timestamptz, timestamptz, interval)`](#generate_seriestimestamptz-timestamptz-interval) | Generate a table of timestamps in the closed range (including both the starting timestamp and the ending timestamp), stepping by the interval. |
-| [`range(timestamptz, timestamptz, interval)`](#rangetimestamptz-timestamptz-interval) | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp) , stepping by the interval. |
+| [`range(timestamptz, timestamptz, interval)`](#rangetimestamptz-timestamptz-interval) | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp), stepping by the interval. |
 
 > Infinite values are not allowed as table function bounds.
 
@@ -385,7 +385,7 @@ The table below shows the available table functions for `TIMESTAMP WITH TIME ZON
 
 <div class="nostroke_table"></div>
 
-| **Description** | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp) , stepping by the interval. |
+| **Description** | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp), stepping by the interval. |
 | **Example** | `range(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
 
 ## ICU Timestamp Without Time Zone Functions
