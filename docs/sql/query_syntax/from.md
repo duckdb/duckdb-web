@@ -300,6 +300,60 @@ FROM trades t
 ASOF LEFT JOIN prices p USING (symbol, "when");
 ```
 
+## `FROM`-First Syntax
+
+DuckDB's SQL supports the `FROM`-first syntax, i.e., it allows putting the `FROM` clause before the `SELECT` clause or completely omitting the `SELECT` clause. We use the following example to demonstrate it:
+
+```sql
+CREATE TABLE tbl AS
+    SELECT * FROM (VALUES ('a'), ('b')) t1(s), range(1, 3) t2(i);
+```
+
+### `FROM`-First Syntax with a `SELECT` Clause
+
+The following statement demonstrates the use of the `FROM`-first syntax:
+
+```sql
+FROM tbl
+SELECT i, s;
+```
+
+This is equivalent to:
+
+```sql
+SELECT i, s
+FROM tbl;
+```
+
+| i | s |
+|--:|---|
+| 1 | a |
+| 2 | a |
+| 1 | b |
+| 2 | b |
+
+### `FROM`-First Syntax without a `SELECT` Clause
+
+The following statement demonstrates the use of the optional `SELECT` clause:
+
+```sql
+FROM tbl;
+```
+
+This is equivalent to:
+
+```sql
+SELECT *
+FROM tbl;
+```
+
+| s | i |
+|---|--:|
+| a | 1 |
+| a | 2 |
+| b | 1 |
+| b | 2 |
+
 ## Syntax
 
 <div id="rrdiagram"></div>
