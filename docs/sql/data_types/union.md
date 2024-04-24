@@ -22,7 +22,7 @@ CREATE TABLE tbl1 (u UNION(num INTEGER, str VARCHAR));
 -- the source union members are a subset of the targets.
 -- Note: only if the cast is unambiguous!
 -- More details in the 'Union casts' section below.
-INSERT INTO tbl1 values (1) , ('two') , (union_value(str := 'three'));
+INSERT INTO tbl1 values (1), ('two'), (union_value(str := 'three'));
 -- Union use the member types varchar cast functions when casting to varchar.
 SELECT u FROM tbl1;
 -- returns:
