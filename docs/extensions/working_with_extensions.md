@@ -65,23 +65,23 @@ folder
     └── osx_arm64
         ├── autocomplete.duckdb_extension
         ├── httpfs.duckdb_extension
-        ├── icu.duckdb_extension.gz
+        ├── icu.duckdb_extension
         ├── inet.duckdb_extension
         ├── json.duckdb_extension
         ├── parquet.duckdb_extension
         ├── tpcds.duckdb_extension
-        ├── tpcds.duckdb_extension.gz
-        └── tpch.duckdb_extension.gz
+        ├── tpcds.duckdb_extension
+        └── tpch.duckdb_extension
 ```
 
-With at the first level the DuckDB version, at the second the DuckDB platform, and then extensions either as `name.duckdb_extension` or gzip-compressed files `name.duckdb_extension.gz`.
+With at the first level the DuckDB version, at the second the DuckDB platform, and then extensions as `name.duckdb_extension`.
 
 ```sql
 INSTALL icu;
 ```
 
 The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` the folder's file structure.
-If it finds either of the extension binaries, it will install the extension to the location specified by the [`extension_directory` option](overview#changing-the-extension-directory) (which defaults to `~/.duckdb/extensions`). If the file is compressed, it will be decompressed at this step.
+If it finds either of the extension binaries, it will install the extension to the location specified by the [`extension_directory` option](overview#changing-the-extension-directory) (which defaults to `~/.duckdb/extensions`).
 
 ### Remote File over http
 
@@ -124,17 +124,15 @@ This will [force install](#force-installing-extensions) the `azure` extension fr
 
 ### Installing Extensions from an Explicit Path
 
-`INSTALL` can be used with the path to either a `.duckdb_extension` file or a `.duckdb_extension.gz` file.
+`INSTALL` can be used with the path to either a `.duckdb_extension` file.
+`.duckdb_extension.gz` files need to be decompressed before issuing `INSTALL name.duckdb_extension;`.
+
 For example, if the file was available into the same directory as where DuckDB is being executed, you can install it as follows:
 
 ```sql
 -- uncompressed file
 INSTALL 'path/to/httpfs.duckdb_extension';
--- gzip-compressed file
-INSTALL 'path/to/httpfs.duckdb_extension.gz';
 ```
-
-These will have the same results.
 
 It is also possible to specify remote paths.
 
