@@ -221,17 +221,28 @@ for (i = 0; i < n; i++) {
 ```
 
 It is difficult to express this in standard SQL because
-relational tables are not ordered, but imported tables (like data frames)
-or disk files (like CSVs or Parquet files) do have a natural ordering.
+relational tables are not ordered, but imported tables such as [data frames](../../api/python/data_ingestion#pandas-dataframes-–-object-columns)
+or disk files (like [CSVs](../../data/csv/overview) or [Parquet files](../../data/parquet/overview)) do have a natural ordering.
 
 Connecting them using this ordering is called a _positional join:_
 
 ```sql
--- treat two data frames as a single table
-SELECT df1.*, df2.*
-FROM df1
-POSITIONAL JOIN df2;
+CREATE TABLE t1 (x INTEGER);
+CREATE TABLE t2 (a VARCHAR);
+
+INSERT INTO t1 VALUES (1), (2), (3);
+INSERT INTO t2 VALUES ('a'), ('b'), ('c');
+
+SELECT *
+FROM t1
+POSITIONAL JOIN t2;
 ```
+
+| x | a |
+|--:|---|
+| 1 | a |
+| 2 | b |
+| 3 | c |
 
 Positional joins are always `FULL OUTER` joins.
 
