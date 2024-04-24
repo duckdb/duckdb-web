@@ -9,7 +9,7 @@ You can establish a read-only connection to a DuckDB instance via HTTPS or the S
 
 This guide requires the [`httpfs` extension](../../extensions/httpfs), which can be installed use the `INSTALL` SQL command. This only needs to be run once.
 
-## Connecting via HTTPS
+## Attaching to a Database over HTTPS
 
 To connect to a DuckDB database via HTTPS, use the [`ATTACH` statement](../../sql/statements/attach) as follows:
 
@@ -29,7 +29,7 @@ FROM stations_db.stations;
 |-------------:|
 | 578          |
 
-## Connecting via S3
+## Attaching to a Database over the S3 API
 
 To connect to a DuckDB database via the S3 API, [configure the authentication](s3_import#credentials-and-configuration) for your bucket (if required).
 Then, use the [`ATTACH` statement](../../sql/statements/attach) as follows:
@@ -49,6 +49,8 @@ FROM stations_db.stations;
 | num_stations |
 |-------------:|
 | 578          |
+
+> Connecting to S3-compatible APIs such as the [Google Cloud Storage (`gs://`)](gcs_import#attaching-to-a-database) is also supported.
 
 ## Limitations
 
