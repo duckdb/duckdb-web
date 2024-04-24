@@ -125,7 +125,7 @@ This will [force install](#force-installing-extensions) the `azure` extension fr
 ### Installing Extensions from an Explicit Path
 
 `INSTALL` can be used with the path to either a `.duckdb_extension` file.
-`.duckdb_extension.gz` files needs to be decompressed before issuing `INSTALL name.duckdb_extension;`.
+`.duckdb_extension.gz` files need to be decompressed before issuing `INSTALL name.duckdb_extension;`.
 
 For example, if the file was available into the same directory as where DuckDB is being executed, you can install it as follows:
 
