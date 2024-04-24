@@ -31,7 +31,7 @@ SELECT *
 FROM read_parquet('gs://⟨gcs_bucket⟩/⟨file.parquet⟩');
 ```
 
-## Attaching to Database
+## Attaching to a Database
 
 You can [attach to a database file](duckdb_over_https_or_s3) in read-only mode:
 
