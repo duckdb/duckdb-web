@@ -22,7 +22,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 | [`regexp_extract(string, pattern, name_list)`](#regexp_extractstring-pattern-name_list) | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. |
 | [`regexp_extract(string, pattern[, idx])`](#regexp_extractstring-pattern-idx) | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. |
 | [`regexp_full_match(string, regex)`](#regexp_full_matchstring-regex) | Returns `true` if the entire *string* matches the *regex*. |
-| [`regexp_matches(string, pattern)`](#regexp_matchesstring-pattern) | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
+| [`regexp_matches(string, pattern [, flags])`](#regexp_matchesstring-pattern) | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
 | [`regexp_replace(string, pattern, replacement)`](#regexp_replacestring-pattern-replacement) | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. |
 | [`regexp_split_to_array(string, regex)`](#regexp_split_to_arraystring-regex) | Alias of `string_split_regex`. Splits the *string* along the *regex*. |
 | [`regexp_split_to_table(string, regex)`](#regexp_split_to_tablestring-regex) | Splits the *string* along the *regex* and returns a row for each part. |
@@ -83,7 +83,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 | **Example** | `regexp_split_to_array('hello␣world; 42', ';?␣')` |
 | **Result** | `['hello', 'world', '42']` |
 
-### `regexp_split_to_table(string, regex)`
+### `regexp_split_to_table(string, regex [, flags])`
 
 <div class="nostroke_table"></div>
 
@@ -102,6 +102,7 @@ SELECT regexp_matches('abc', '.*(b|d).*'); -- true
 SELECT regexp_matches('abc', '(b|c).*');   -- true
 SELECT regexp_matches('abc', '^(b|c).*');  -- false
 SELECT regexp_matches('abc', '(?i)A');     -- true
+SELECT regexp_matches('abc', 'A', 'i');    -- true
 ```
 
 ## Options for Regular Expression Functions
