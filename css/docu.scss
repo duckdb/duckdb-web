@@ -844,6 +844,12 @@ td {
 	line-height: 1.55;
 	vertical-align: top;
 }
+td.icon{
+	img{
+		width: 40px!important;
+		height: auto!important;
+	}
+}
 .narrow_table + table{
 	width: auto;
 	min-width: auto;
