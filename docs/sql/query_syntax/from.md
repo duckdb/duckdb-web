@@ -228,23 +228,23 @@ Connecting them using this ordering is called a _positional join:_
 
 ```sql
 CREATE TABLE t1 (x INTEGER);
-CREATE TABLE t2 (a VARCHAR);
+CREATE TABLE t2 (s VARCHAR);
 
 INSERT INTO t1 VALUES (1), (2), (3);
-INSERT INTO t2 VALUES ('a'), ('b'), ('c');
+INSERT INTO t2 VALUES ('a'), ('b');
 
 SELECT *
 FROM t1
 POSITIONAL JOIN t2;
 ```
 
-| x | a |
-|--:|---|
-| 1 | a |
-| 2 | b |
-| 3 | c |
+| x |  s   |
+|--:|------|
+| 1 | a    |
+| 2 | b    |
+| 3 | NULL |
 
-Positional joins are always `FULL OUTER` joins.
+Positional joins are always `FULL OUTER` joins, i.e., missing values (the last values in the shorter column) are set to `NULL`.
 
 ### As-Of Joins
 
