@@ -67,5 +67,5 @@ ROLLBACK;
 SELECT * FROM person;
 ```
 
-The first transaction (inserting "Ada") was committed but the second (deleting "Ada" and inserting "Bob") was aborted.
+The first transaction (inserting "Ada") was committed but the second (deleting "Ada" and inserting "Bruce") was aborted.
 Therefore, the resulting table will only contain `<'Ada', 52>`.
