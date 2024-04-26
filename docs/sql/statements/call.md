@@ -14,8 +14,10 @@ CALL duckdb_functions();
 -- Invoke the 'pragma_table_info' table function.
 CALL pragma_table_info('pg_am');
 
--- Select only the functions where the name starts with 'ST_'
-SELECT function_name, parameters, parameter_types, return_type from duckdb_functions() WHERE function_name like 'ST_%';
+-- Select only the functions where the name starts with 'ST_'.
+SELECT function_name, parameters, parameter_types, return_type 
+FROM duckdb_functions()
+WHERE function_name LIKE 'ST_%';
 ```
 
 ## Syntax
