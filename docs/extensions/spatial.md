@@ -286,7 +286,7 @@ Similarly there is a `.osm.pbf` replacement scan for `ST_ReadOsm`.
 
 ## Spatial Copy Functions
 
-Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export duckdb tables to different geospatial vector formats.
+Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export DuckDB tables to different geospatial vector formats.
 For example to export a table to a GeoJSON file, with generated bounding boxes, you can use the following query:
 
 ```sql
