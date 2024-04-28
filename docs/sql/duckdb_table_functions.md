@@ -80,7 +80,7 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 ## `duckdb_databases`
 
 The `duckdb_databases()` function lists the databases that are accessible from within the current DuckDB process.
-Apart from the database associated at startup, the list also includes databases that were [attached](statements/attach) later on to the duckdb process
+Apart from the database associated at startup, the list also includes databases that were [attached](statements/attach) later on to the DuckDB process
 
 | Column | Description | Type |
 |:-|:---|:-|
