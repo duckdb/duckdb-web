@@ -18,16 +18,16 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 | Name | Description |
 |:--|:-------|
-| [`regexp_extract_all(string, regex[, group = 0])`](#regexp_extract_allstring-regex-group--0) | Split the *string* along the *regex* and extract all occurrences of *group*. |
-| [`regexp_extract(string, pattern, name_list)`](#regexp_extractstring-pattern-name_list) | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. |
-| [`regexp_extract(string, pattern[, idx])`](#regexp_extractstring-pattern-idx) | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. |
-| [`regexp_full_match(string, regex)`](#regexp_full_matchstring-regex) | Returns `true` if the entire *string* matches the *regex*. |
-| [`regexp_matches(string, pattern)`](#regexp_matchesstring-pattern) | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
-| [`regexp_replace(string, pattern, replacement)`](#regexp_replacestring-pattern-replacement) | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. |
-| [`regexp_split_to_array(string, regex)`](#regexp_split_to_arraystring-regex) | Alias of `string_split_regex`. Splits the *string* along the *regex*. |
-| [`regexp_split_to_table(string, regex)`](#regexp_split_to_tablestring-regex) | Splits the *string* along the *regex* and returns a row for each part. |
+| [`regexp_extract_all(string, regex[, group = 0][, options])`](#regexp_extract_allstring-regex-group--0) | Split the *string* along the *regex* and extract all occurrences of *group*. |
+| [`regexp_extract(string, pattern, name_list[, options])`](#regexp_extractstring-pattern-name_list) | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. |
+| [`regexp_extract(string, pattern[, idx][, options])`](#regexp_extractstring-pattern-idx) | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. |
+| [`regexp_full_match(string, regex[, options])`](#regexp_full_matchstring-regex) | Returns `true` if the entire *string* matches the *regex*. |
+| [`regexp_matches(string, pattern[, options])`](#regexp_matchesstring-pattern) | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
+| [`regexp_replace(string, pattern, replacement[, options])`](#regexp_replacestring-pattern-replacement) | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. |
+| [`regexp_split_to_array(string, regex[, options])`](#regexp_split_to_arraystring-regex) | Alias of `string_split_regex`. Splits the *string* along the *regex*. |
+| [`regexp_split_to_table(string, regex[, options])`](#regexp_split_to_tablestring-regex) | Splits the *string* along the *regex* and returns a row for each part. |
 
-### `regexp_extract_all(string, regex[, group = 0])`
+### `regexp_extract_all(string, regex[, group = 0][, options])`
 
 <div class="nostroke_table"></div>
 
@@ -35,7 +35,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 | **Example** | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `[hello, world]` |
 
-### `regexp_extract(string, pattern, name_list)`
+### `regexp_extract(string, pattern, name_list[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -43,7 +43,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 | **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
 
-### `regexp_extract(string, pattern[, idx])`
+### `regexp_extract(string, pattern[, idx][, options])`
 
 <div class="nostroke_table"></div>
 
@@ -51,7 +51,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 | **Example** | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `hello` |
 
-### `regexp_full_match(string, regex)`
+### `regexp_full_match(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -59,7 +59,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 | **Example** | `regexp_full_match('anabanana', '(an)*')` |
 | **Result** | `false` |
 
-### `regexp_matches(string, pattern)`
+### `regexp_matches(string, pattern[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -67,7 +67,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 | **Example** | `regexp_matches('anabanana', '(an)*')` |
 | **Result** | `true` |
 
-### `regexp_replace(string, pattern, replacement)`
+### `regexp_replace(string, pattern, replacement[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -75,7 +75,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 | **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
-### `regexp_split_to_array(string, regex)`
+### `regexp_split_to_array(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -83,7 +83,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 | **Example** | `regexp_split_to_array('hello␣world; 42', ';?␣')` |
 | **Result** | `['hello', 'world', '42']` |
 
-### `regexp_split_to_table(string, regex)`
+### `regexp_split_to_table(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -102,11 +102,12 @@ SELECT regexp_matches('abc', '.*(b|d).*'); -- true
 SELECT regexp_matches('abc', '(b|c).*');   -- true
 SELECT regexp_matches('abc', '^(b|c).*');  -- false
 SELECT regexp_matches('abc', '(?i)A');     -- true
+SELECT regexp_matches('abc', 'A', 'i');    -- true
 ```
 
 ## Options for Regular Expression Functions
 
-The `regexp_matches` and `regexp_replace` functions also support the following options.
+The regex functions support the following `options`.
 
 <div class="narrow_table"></div>
 
@@ -118,6 +119,8 @@ The `regexp_matches` and `regexp_replace` functions also support the following o
 | `'m'`, `'n'`, `'p'` | newline sensitive matching                          |
 | `'g'`               | global replace, only available for `regexp_replace` |
 | `'s'`               | non-newline sensitive matching                      |
+
+For example:
 
 ```sql
 SELECT regexp_matches('abcd', 'ABC', 'c'); -- false
@@ -170,17 +173,26 @@ If *`ids`* is a `LIST` of strings, then `regexp_extract` will return the corresp
 
 ```sql
 SELECT regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd']);
--- {'y':'2023', 'm':'04', 'd':'15'}
+```
+
+```text
+{'y': 2023, 'm': 04, 'd': 15}
 ```
 
 ```sql
 SELECT regexp_extract('2023-04-15 07:59:56', '^(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', ['y', 'm', 'd']);
--- {'y':'2023', 'm':'04', 'd':'15'}
+```
+
+```text
+{'y': 2023, 'm': 04, 'd': 15}
 ```
 
 ```sql
 SELECT regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 'fix']);
--- error
+```
+
+```console
+Binder Error: Not enough group names in regexp_extract
 ```
 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.
