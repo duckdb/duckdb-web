@@ -173,17 +173,26 @@ If *`ids`* is a `LIST` of strings, then `regexp_extract` will return the corresp
 
 ```sql
 SELECT regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd']);
--- {'y':'2023', 'm':'04', 'd':'15'}
+```
+
+```text
+{'y': 2023, 'm': 04, 'd': 15}
 ```
 
 ```sql
 SELECT regexp_extract('2023-04-15 07:59:56', '^(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', ['y', 'm', 'd']);
--- {'y':'2023', 'm':'04', 'd':'15'}
+```
+
+```text
+{'y': 2023, 'm': 04, 'd': 15}
 ```
 
 ```sql
 SELECT regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 'fix']);
--- error
+```
+
+```console
+Binder Error: Not enough group names in regexp_extract
 ```
 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.
