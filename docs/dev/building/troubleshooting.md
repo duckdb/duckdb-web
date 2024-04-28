@@ -26,6 +26,8 @@ To work around this, create or edit the `~/.R/Makevars` file:
 ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 ```
 
+When making this change, also consider [making the build parallel](#building-the-r-package-is-slow).
+
 ## Building the httpfs Extension and Python Package on macOS
 
 **Problem:** The build fails on macOS when both the [`httpfs` extension](../../extensions/httpfs) and the Python package are included:
