@@ -46,7 +46,7 @@ This section describes functions and operators for examining and manipulating ne
 | [`list_unique(list)`](#list_uniquelist) | Counts the unique elements of a list. |
 | [`list_value(any, ...)`](#list_valueany-) | Create a `LIST` containing the argument values. |
 | [`list_where(value_list, mask_list)`](#list_wherevalue_list-mask_list) | Returns a list with the `BOOLEAN`s in `mask_list` applied as a mask to the `value_list`. |
-| [`list_zip(list1, list2, ...)`](#list_ziplist1-list2-) | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements `list_1`, ..., `list_k`. Elements missing will be replaced with `NULL`. |
+| [`list_zip(list_1, list_2, ...[, truncate])`](#list_ziplist1-list2-) | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements from each list `list_1`, ..., `list_k`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
 | [`unnest(list)`](#unnestlist) | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [`unnest` page](../query_syntax/unnest) for more details. |
 
 ### `list[index]`
@@ -371,9 +371,9 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements `list_1`, ..., `list_k`. Elements missing will be replaced with `NULL`. |
+| **Description** | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements from each list `list_1`, ..., `list_k`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
 | **Example** | `list_zip([1, 2], [3, 4], [5, 6])` |
-| **Result** | `[{'list_1': 1, 'list_2': 3, 'list_3': 5}, {'list_1': 2, 'list_2': 4, 'list_3': 6}]` |
+| **Result** | `[(1, 3, 5), (2, 4, 6)]` |
 | **Alias** | `array_zip` |
 
 ### `unnest(list)`
