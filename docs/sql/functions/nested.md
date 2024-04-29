@@ -392,7 +392,7 @@ The following operators are supported for lists:
 
 | Operator | Description | Example | Result |
 |-|--|---|-|
-| `&&`  | Alias for [`list_intersect`](#list_intersectlist1-list2).                                                               | `[1, 2, 3, 4, 5] && [2, 5, 5, 6]` | `[2, 5]`             |
+| `&&`  | Alias for [`list_has_any`](#list_has_anylist1-list2).                                                                   | `[1, 2, 3, 4, 5] && [2, 5, 5, 6]` | `true`               |
 | `@>`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **right** of the operator is the sublist. | `[1, 2, 3, 4] @> [3, 4, 3]`       | `true`               |
 | `<@`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **left** of the operator is the sublist.  | `[1, 4] <@ [1, 2, 3, 4]`          | `true`               |
 | `||`  | Alias for [`list_concat`](#list_concatlist1-list2).                                                                     | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
