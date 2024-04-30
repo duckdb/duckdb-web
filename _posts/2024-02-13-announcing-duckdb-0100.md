@@ -48,11 +48,26 @@ SELECT substring(42, 1, 1) AS substr;
 -- You might need to add explicit type casts.
 ```
 
-The `old_implicit_casting` setting can be used to revert this behavior, e.g.:
+To use an explicit cast, run:
+
+```sql
+SELECT substring(42::VARCHAR, 1, 1) AS substr;
+```
+
+```text
+┌─────────┐
+│ substr  │
+│ varchar │
+├─────────┤
+│ 4       │
+└─────────┘
+```
+
+Alternatively, the `old_implicit_casting` setting can be used to revert this behavior, e.g.:
 
 ```sql
 SET old_implicit_casting = true;
-SELECT substring(42, 1, 1) AS substr;tw
+SELECT substring(42, 1, 1) AS substr;
 ```
 
 ```text
