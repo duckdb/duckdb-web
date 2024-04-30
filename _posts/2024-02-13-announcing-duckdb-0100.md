@@ -52,7 +52,7 @@ The `old_implicit_casting` setting can be used to revert this behavior, e.g.:
 
 ```sql
 SET old_implicit_casting = true;
-SELECT substring(42, 1, 1) AS substr;tw
+SELECT substring(42, 1, 1) AS substr;
 ```
 
 ```text
