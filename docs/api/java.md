@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: Java JDBC API
+github_repository: https://github.com/duckdb/duckdb-java
 redirect_from:
   - /docs/api/scala
 ---
@@ -47,12 +48,12 @@ When using the `jdbc:duckdb:`  URL alone, an **in-memory database** is created. 
 It is possible to open a DuckDB database file in **read-only** mode. This is for example useful if multiple Java processes want to read the same database file at the same time. To open an existing database file in read-only mode, set the connection property `duckdb.read_only` like so:
 
 ```java
-Properties ro_prop = new Properties();
-ro_prop.setProperty("duckdb.read_only", "true");
-Connection conn_ro = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", ro_prop);
+Properties readOnlyProperty = new Properties();
+readOnlyProperty.setProperty("duckdb.read_only", "true");
+Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", readOnlyProperty);
 ```
 
-Additional connections can be created using the `DriverManager`. A more efficient mechanism is to call the `DuckDBConnection#duplicate()` method like so:
+Additional connections can be created using the `DriverManager`. A more efficient mechanism is to call the `DuckDBConnection#duplicate()` method:
 
 ```java
 Connection conn2 = ((DuckDBConnection) conn).duplicate();
@@ -111,11 +112,11 @@ DuckDB also supports prepared statements as per the JDBC API:
 ```java
 import java.sql.PreparedStatement;
 
-try (PreparedStatement p_stmt = conn.prepareStatement("INSERT INTO items VALUES (?, ?, ?);")) {
-    p_stmt.setString(1, "chainsaw");
-    p_stmt.setDouble(2, 500.0);
-    p_stmt.setInt(3, 42);
-    p_stmt.execute();
+try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO items VALUES (?, ?, ?);")) {
+    stmt.setString(1, "chainsaw");
+    stmt.setDouble(2, 500.0);
+    stmt.setInt(3, 42);
+    stmt.execute();
     // more calls to execute() possible
 }
 ```
@@ -136,15 +137,15 @@ import org.apache.arrow.vector.ipc.ArrowReader;
 import org.duckdb.DuckDBResultSet;
 
 try (var conn = DriverManager.getConnection("jdbc:duckdb:");
-    var p_stmt = conn.prepareStatement("SELECT * FROM generate_series(2000)");
-    var resultset = (DuckDBResultSet) p_stmt.executeQuery();
+    var stmt = conn.prepareStatement("SELECT * FROM generate_series(2000)");
+    var resultset = (DuckDBResultSet) stmt.executeQuery();
     var allocator = new RootAllocator()) {
     try (var reader = (ArrowReader) resultset.arrowExportStream(allocator, 256)) {
         while (reader.loadNextBatch()) {
             System.out.println(reader.getVectorSchemaRoot().getVector("generate_series"));
         }
     }
-    p_stmt.close();
+    stmt.close();
 }
 ```
 
