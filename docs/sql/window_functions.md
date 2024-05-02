@@ -4,6 +4,9 @@ title: Window Functions
 railroad: expressions/window.js
 ---
 
+DuckDB supports [window functions](https://en.wikipedia.org/wiki/Window_function_(SQL)), which can use multiple rows to calculate a value for each row.
+Window functions are [blocking operators](../guides/performance/how_to_tune_workloads#blocking-operators), i.e., they require their entire input to be buffered, making them one of the most memory-intensive operators in SQL.
+
 ## Examples
 
 ```sql

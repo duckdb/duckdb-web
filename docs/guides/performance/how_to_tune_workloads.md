@@ -34,11 +34,11 @@ To enable offloading in the absence of a persistent database file, use the [`SET
 SET temp_directory = '/path/to/temp_dir.tmp/';
 ```
 
-### Operators
+### Blocking Operators
 
 Some operators cannot output a single row until the last row of their input has been seen.
 These are called _blocking operators_ as they require their entire input to be buffered,
-and are the most memory-instensive operators in relational database systems.
+and are the most memory-intensive operators in relational database systems.
 The main blocking operators are the following:
 * _sorting:_ [`ORDER BY`](../../sql/query_syntax/orderby),
 * _grouping:_ [`GROUP BY`](../../sql/query_syntax/groupby),
