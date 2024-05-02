@@ -500,7 +500,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if the entire `string` matches the `regex` (see [Pattern Matching](patternmatching)). |
-| **Example** | `regexp_full_match('anabanana', '(an)`')` |
+| **Example** | `regexp_full_match('anabanana', '(an)')` |
 | **Result** | `false` |
 
 ### `regexp_matches(string, pattern)`
@@ -508,7 +508,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if  `string` contains the regexp `pattern`, `false` otherwise (see [Pattern Matching](patternmatching#using-regexp_matches)). |
-| **Example** | `regexp_matches('anabanana', '(an)`')` |
+| **Example** | `regexp_matches('anabanana', '(an)')` |
 | **Result** | `true` |
 
 ### `regexp_replace(string, pattern, replacement)`
