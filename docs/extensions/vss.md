@@ -100,5 +100,5 @@ To remedy the last point, you can call the `PRAGMA hnsw_compact_index('<index na
 - Only vectors consisting of `FLOAT`s (32-bit, single precision) are supported at the moment.
 - The index itself is not buffer managed and must be able to fit into RAM memory. 
 - The size of the index in memory does not count towards DuckDB's `memory_limit` configuration parameter.
-- `HNSW` indexes can only be created on tables in in-memory databases, unless the `SET hnsw_enable_experimental_persistence = <bool>` configuration option is set to `true`, see [Persistence](#Persistence) for more information.
+- `HNSW` indexes can only be created on tables in in-memory databases, unless the `SET hnsw_enable_experimental_persistence = <bool>` configuration option is set to `true`, see [Persistence](#persistence) for more information.
 
