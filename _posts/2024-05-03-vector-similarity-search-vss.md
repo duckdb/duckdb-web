@@ -109,7 +109,7 @@ WITH (metric = 'ip');
 
 ## Implementation
 
-This `vss` is based on the [usearch](https://github.com/unum-cloud/usearch) library, which provides a flexible C++ implementation of the HNSW index data structure boasting very impressive performance benchmarks. While we currently only use a subset of all the functionality and tuning options provided by usearch, we're excited to explore how we can leverage more of its features in the future. Performance aside, one of the best things about usearch for us is that it aligns so nicely with DuckDB's development ethos. Much like DuckDB itself, usearch is written in portable C++11 with no external dependencies and released under the MIT licensed, making it super smooth to integrate into an extension!
+The `vss` extension is based on the [usearch](https://github.com/unum-cloud/usearch) library, which provides a flexible C++ implementation of the HNSW index data structure boasting very impressive performance benchmarks. While we currently only use a subset of all the functionality and tuning options provided by usearch, we're excited to explore how we can leverage more of its features in the future. So far we're mostly happy that it aligns so nicely with DuckDB's development ethos. Much like DuckDB itself, usearch is written in portable C++11 with no external dependencies and released under a permissive license, making it super smooth to integrate into our extension build and distribution pipeline.
 
 ## Limitations
 
