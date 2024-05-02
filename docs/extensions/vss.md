@@ -6,9 +6,7 @@ github_repository: https://github.com/duckdb/duckdb_vss
 
 The `vss` extension is an experimental extension for DuckDB that adds indexing support to accelerate vector similarity search queries using DuckDB's new fixed-size `ARRAY` type.
 
-This extension is based on the [usearch](https://github.com/unum-cloud/usearch) library and serves as a proof of concept for providing a custom index type, in this case a HNSW index, from within an extension and exposing it to DuckDB.
-
-See the announcement blog post [here]({% link _posts/2024-04-12-vector-search.md %}).
+See the announcement blog post [here](/2024/05/03/vector-similarity-search-vss).
 
 ## Usage
 
@@ -59,11 +57,35 @@ CREATE INDEX my_hnsw_cosine_index ON my_vector_table USING HNSW (vec) WITH (metr
 
 The following table shows the supported distance metrics and their corresponding DuckDB functions
 
-| Description | Metric | Function |
-| --- | --- | --- |
-| Euclidean distance | `l2sq` | `array_distance` |
-| Cosine similarity | `cosine` | `array_cosine_similarity` |
-| Inner product | `ip` | `array_inner_product` |
+| Metric   | Function                  | Description        |
+| -------- | ------------------------- | ------------------ |
+| `l2sq`   | `array_distance`          | Euclidean distance |
+| `cosine` | `array_cosine_similarity` | Cosine similarity  |
+| `ip`     | `array_inner_product`     | Inner product      |
+
+Note that while each `HNSW` index only applies to a single column you can create multiple `HNSW` indexes on the same table each individually indexing a different column. Additionally, you can also create mulitple `HNSW` indexes to the same column, each supporting a different distance metric. 
+
+
+## Index options
+
+Besides the `metric` option, the `HNSW` index creation statement also supports the following options to control the hyperparameters of the index construction and search process:
+
+| Option            | Default | Description                                                                                                                                                                                                                    |
+| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ef_construction` | 128     | The number of candidate vertices to consider during the construction of the index. A higher value will result in a more accurate index, but will also increase the time it takes to build the index.                           |
+| `ef_search`       | 64      | The number of candidate vertices to consider during the search phase of the index. A higher value will result in a more accurate index, but will also increase the time it takes to perform a search.                          |
+| `M`               | 16      | The maximum number of neighbors to keep for each vertex in the graph. A higher value will result in a more accurate index, but will also increase the time it takes to build the index.                                        |
+| `M0`              | 2 * `M` | The base connectivity, or the number of neighbors to keep for each vertex in the zero-th level of the graph. A higher value will result in a more accurate index, but will also increase the time it takes to build the index. |
+
+## Persistence
+
+Due to some known issues related to peristence of custom extension indexes, the `HNSW` index can only be created on tables in in-memory databases by default, unless the `SET hnsw_enable_experimental_persistence = <bool>` configuration option is set to `true`.
+
+The reasoning for locking this feature behind an experimental flag is that "WAL" recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommited changes to a `HNSW`-indexed table, you can end up with __data loss or corruption of the index__. 
+
+If you enable this option and experience an unexpected shutdown, you can try to recover the index by first starting DuckDB separately, loading the `vss` extension and then `ATTACH`:ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, allowing DuckDB's recovery process to proceed without issues. But we still recommend that you do not use this feature in production environments.
+
+With the `hnsw_enable_experimental_persistence` option enabled, the index will be persisted into the DuckDB database file (if you run DuckDB with a disk-backed database file), which means that after a database restart, the index can be loaded back into memory from disk instead of having to be re-created. With that in mind, there are no incremental updates to persistent index storage, so every time DuckDB performs a checkpoint the entire index will be serialized to disk and overwrite itself. Similarly, after a restart of the database, the index will be deserialized back into main memory in its entirety. Although this will be deferred until you first access the table associated with the index. Depending on how large the index is, the deserialization process may take some time, but it should still be faster than simply dropping and re-creating the index. 
 
 ## Inserts, Updates, Deletes and Re-Compaction
 
@@ -75,8 +97,8 @@ To remedy the last point, you can call the `PRAGMA hnsw_compact_index('<index na
 
 ## Limitations 
 
-- Only vectors consisting of `FLOAT`s are supported at the moment.
+- Only vectors consisting of `FLOAT`s (32-bit, single precision) are supported at the moment.
 - The index itself is not buffer managed and must be able to fit into RAM memory. 
-
-With that said, the index will be persisted into the database if you run DuckDB with a disk-backed database file. But there is no incremental updates, so every time DuckDB performs a checkpoint the entire index will be serialized to disk and overwrite its previous blocks. Similarly, the index will be deserialized back into main memory in its entirety after a restart of the database, although this will be deferred until you first access the table associated with the index. Depending on how large the index is, the deserialization process may take some time, but it should be faster than simply dropping and re-creating the index. 
+- The size of the index in memory does not count towards DuckDB's `memory_limit` configuration parameter.
+- `HNSW` indexes can only be created on tables in in-memory databases, unless the `SET hnsw_enable_experimental_persistence = <bool>` configuration option is set to `true`, see [Persistence](#Persistence) for more information.
 
