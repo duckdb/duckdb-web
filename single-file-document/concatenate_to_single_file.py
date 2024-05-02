@@ -52,6 +52,15 @@ def reduce_clutter_in_doc(doc_body):
     return doc_body
 
 
+def replace_box_names(doc_body):
+    doc_body = doc_body.replace("> Bestpractice", "> **Best practice.  **")
+    doc_body = doc_body.replace("> Note",         "> **Note.  **")
+    doc_body = doc_body.replace("> Warning",      "> **Warning.  **")
+    doc_body = doc_body.replace("> Tip",          "> **Tip.  **")
+    doc_body = doc_body.replace("> Deprecated",   "> **Deprecated.  **")
+    return doc_body
+
+
 def move_headers_down(doc_body):
     # move headers h2-h4 down by 1 level
     extra_header_levels = "#"
@@ -212,6 +221,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
 
         # process document body
         doc_body = reduce_clutter_in_doc(doc_body)
+        doc_body = replace_box_names(doc_body)
         doc_body = move_headers_down(doc_body)
         doc_body = replace_html_code_blocks(doc_body)
         doc_body = adjust_links_in_doc_body(doc_body)
