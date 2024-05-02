@@ -179,9 +179,13 @@ def adjust_headers(doc_body, doc_header_label):
 
 
 def change_function_table_headers(doc_body):
-    return doc_body.replace("""| **Description** | """, """|   |   |
+    doc_body = doc_body.replace("""| **Description** | """, """|   |   |
 |:--|:--------|
 | **Description** |""")
+    doc_body = doc_body.replace("""| **Handle name** | """, """|   |   |
+|:--|:--------|
+| **Handle name** |""")
+    return doc_body
 
 
 def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
