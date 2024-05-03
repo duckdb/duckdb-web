@@ -10,7 +10,7 @@ In DuckDB v0.10.0, we introduced the [`ARRAY` data type](/docs/sql/data_types/ar
 The initial motivation for adding this data type was to provide optimized operations for lists that can utilize the positional semantics of their child elements and avoid branching as all lists have the same length. Think e.g. the sort of array manipulations you'd do in NumPy: stacking, shifting, multiplying – you name it. Additionally, we wanted to improve our interoperability with Apache Arrow, as previously Arrow's fixed-size list types would be converted to regular variable-size lists when ingested into DuckDB, losing some type information.
 
 However, as the hype for __vector embeddings__ and __semantic similarity search__ was growing, we also snuck in a couple of distance metric functions for this new `ARRAY` type:
-[`array_distance`](/docs/sql/functions/array#array_distancearray1-array2)
+[`array_distance`](/docs/sql/functions/array#array_distancearray1-array2),
 [`array_inner_product`](/docs/sql/functions/array#array_inner_productarray1-array2) and
 [`array_cosine_similarity`](/docs/sql/functions/array#array_cosine_similarityarray1-array2)
 
