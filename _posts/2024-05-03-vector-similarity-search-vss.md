@@ -118,7 +118,7 @@ The big limitation as of now is that the `HNSW` index can only be created in in-
 
 The reasoning for locking this feature behind an experimental flag is that we still have some known issues related to persistence of custom indexes that we want to address before enabling it by default. In particular, WAL recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommited changes to a `HNSW`-indexed table, you can end up with data loss or corruption of the index. While it is technically possible to recover from a unexpected shutdown manually by first starting DuckDB separately, loading the `vss` extension and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, you should not rely on this for production workloads.
 
-We're actively working on addressing this and other issues related to index persistence, which will hopefully make it into [DuckDB v0.10.3](/docs/dev/release_calendar), but for now we recommend using the `HNSW` index in in-memory databases only.
+We're actively working on addressing this and other issues related to index persistence, which will hopefully make it into [DuckDB v0.10.3](/docs/dev/release_calendar#upcoming-releases), but for now we recommend using the `HNSW` index in in-memory databases only.
 
 ### Other Limitations
 
