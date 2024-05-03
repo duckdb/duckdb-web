@@ -68,16 +68,7 @@ SELECT id, arr[1:2] AS elements FROM array_table;
 ## Functions
 
 All [`LIST` functions](../functions/nested#list-functions) work with the `ARRAY` type. Additionally, several `ARRAY`-native functions are also supported.
-In the following, `l1` stands for the 3-element list created by `array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT)` and `l2` stands for `array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT)`.
-
-| Function | Description | Example | Result |
-|----|-----|-------|---|
-| `array_value(index)`                      | Create an `ARRAY` containing the argument values.                                                                                                                                         | `array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT)` | `[1.0, 2.0, 3.0]`   |
-| `array_cross_product(array1, array2)`     | Compute the cross product of two arrays of size 3. The array elements can not be `NULL`.                                                                                                  | `array_cross_product(l1, l2)`                     | `[-1.0, 2.0, -1.0]` |
-| `array_cosine_similarity(array1, array2)` | Compute the cosine similarity between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. | `array_cosine_similarity(l1, l2)`                 | `0.9925833`         |
-| `array_distance(array1, array2)`          | Compute the distance between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments.          | `array_distance(l1, l2)`                          | `1.7320508`         |
-| `array_inner_product(array1, array2)`     | Compute the inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments.     | `array_inner_product(l1, l2)`                     | `20.0`              |
-| `array_dot_product(array1, array2)`       | Alias for `array_inner_product(array1, array2)`.                                                                                                                                          | `array_dot_product(l1, l2)`                       | `20.0`              |
+See the [`ARRAY` functions](../functions/array#array-native-functions).
 
 ## Examples
 

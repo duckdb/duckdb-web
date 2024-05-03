@@ -27,6 +27,7 @@ title: Official Extensions
 | [substrait](substrait) [<span class="github">GitHub</span>](https://github.com/duckdb/substrait)      | Adds support for the Substrait integration                                         |                 |
 | [tpcds](tpcds)                                                                                        | Adds TPC-DS data generation and query support                                      |                 |
 | [tpch](tpch)                                                                                          | Adds TPC-H data generation and query support                                       |                 |
+| [vss](vss) [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_vss)                 | Adds support for vector similarity search queries                                  |                 |
 
 ## Default Extensions
 

@@ -732,6 +732,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Array Functions",
+                  "url": "array"
+                },
+                {
                   "page": "Bitstring Functions",
                   "url": "bitstring"
                 },
@@ -948,6 +952,10 @@
             {
               "page": "TPC-H",
               "url": "tpch"
+            },
+            {
+              "page": "VSS",
+              "url": "vss"
             }
           ]
         },
