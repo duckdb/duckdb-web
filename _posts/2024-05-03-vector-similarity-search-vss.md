@@ -12,7 +12,7 @@ The initial motivation for adding this data type was to provide optimized operat
 However, as the hype for __vector embeddings__ and __semantic similarity search__ was growing, we also snuck in a couple of distance metric functions for this new `ARRAY` type:
 `array_distance`
 `array_inner_product` and
-`array_cosine_distance`.
+`array_cosine_similarity`.
 
 This got the community really excited! While we (DuckDB Labs) initially went on record saying that we would not be adding a vector similarity search index to DuckDB as we deemed it to be too far out of scope, we were very interested in supporting custom indexes through extensions in general. Shoot, I've been _personally_ nagging on about wanting to plug-in an "R-Tree" index since the inception of DuckDBs [spatial extension](/docs/extensions/spatial)! So when one of our client projects evolved into creating a proof-of-concept custom "HNSW" index extension, we said that we'd give it a shot. And... well, one thing led to another.
 
@@ -29,9 +29,7 @@ On the surface, `vss` seems like a comparatively small DuckDB extension. It does
 CREATE TABLE embeddings (vec FLOAT[3]);
 
 -- Create an HNSW index on the column
-CREATE INDEX idx
-ON embeddings
-USING HNSW (vec);
+CREATE INDEX idx ON embeddings USING HNSW (vec);
 ```
 
 This index type can't be used to enforce constraints or uniqueness like the built-in [`ART` index](/docs/sql/indexes), and can't be used to speed up joins or index regular columns either. Instead, the `HNSW` index is only applicable to columns of the `ARRAY` type containing `FLOAT` elements and will only be used to accelerate queries calculating the "distance" between a constant `FLOAT` `ARRAY` and the `FLOAT` `ARRAY`'s in the indexed column, ordered by the resulting distance and returning the top-n results. That is, queries of the form:
@@ -78,32 +76,23 @@ LIMIT 3;
 └───────────────────────────┘
 ```
 
-You can pass the `HNSW` index creation statement a `metric` parameter to decide what kind of distance metric to use. The supported metrics are `l2sq`, `cosine` and `inner_product`, matching the three built-in distance functions: `array_distance`, `array_cosine_distance` and `array_inner_product`.
+You can pass the `HNSW` index creation statement a `metric` parameter to decide what kind of distance metric to use. The supported metrics are `l2sq`, `cosine` and `inner_product`, matching the three built-in distance functions: `array_distance`, `array_cosine_similarity` and `array_inner_product`.
 The default is `l2sq`, which uses Euclidean distance (`array_distance`):
 
 ```sql
-CREATE INDEX l2sq_idx
-ON embeddings
-USING HNSW (vec)
-WITH (metric = 'l2sq');
+CREATE INDEX l2sq_idx ON embeddings USING HNSW (vec) WITH (metric = 'l2sq');
 ```
 
-To use cosine distance (`array_cosine_distance`):
+To use cosine distance (`array_cosine_similarity`):
 
 ```sql
-CREATE INDEX cos_idx
-ON embeddings
-USING HNSW (vec)
-WITH (metric = 'cosine');
+CREATE INDEX cos_idx ON embeddings USING HNSW (vec) WITH (metric = 'cosine');
 ```
 
 To use inner product (`array_inner_product`):
 
 ```sql
-CREATE INDEX ip_idx
-ON embeddings
-USING HNSW (vec)
-WITH (metric = 'ip');
+CREATE INDEX ip_idx ON embeddings USING HNSW (vec) WITH (metric = 'ip');
 ```
 
 ## Implementation
@@ -124,7 +113,7 @@ We're actively working on addressing this and other issues related to index pers
 
 Like the `ART` the `HNSW` index must be able to fit into RAM in its entirety, and the memory allocated by the `HNSW` at runtime is allocated "outside" of the DuckDB memory management system, meaning that it wont respect DuckDB's `memory_limit` configuration parameter.
 
-Another limitation of the `HNSW` index so far are that it only supports the `FLOAT` (a 32-bit, single-precision floating point) type for the fixed-size list elements and only distance metrics corresponding to the three built in distance functions, `array_distance`, `array_inner_product` and `array_cosine_distance`.
+Another limitation of the `HNSW` index so far are that it only supports the `FLOAT` (a 32-bit, single-precision floating point) type for the fixed-size list elements and only distance metrics corresponding to the three built in distance functions, `array_distance`, `array_inner_product` and `array_cosine_similarity`.
 
 While the `HNSW` index supports insertions and deletes to the base table after the index has been created, deletes are not immediately reflected internally in the index structure, but are instead only marked as deleted, and will only be removed after a certain number of updates have been made. This is a trade-off to maintain the performance of updates, but will lead to the _quality_ of the index deteriorating over time, impacting both speed and accuracy of retrieval. To remedy this you can use the pragma `PRAGMA hnsw_compact_index('<index name>')` to trigger a recompaction, which will be faster than dropping and recreating the index.
 
