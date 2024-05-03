@@ -5,14 +5,14 @@ author: Max Gabrielsson
 excerpt: "This blog post shows a preview of DuckDB's new [`vss` extension](/docs/extensions/vss), which introduces support for HNSW (Hierarchical Navigable Small Worlds) indexes to accelerate vector similarity search."
 ---
 
-In DuckDB v0.10.0, we introduced the "fixed-size list" [`ARRAY` data type](/docs/sql/data_types/array) to complement the existing variable-size [`LIST` data type](/docs/sql/data_types/list).
+In DuckDB v0.10.0, we introduced the [`ARRAY` data type](/docs/sql/data_types/array), which stores fixed-sized lists, to complement the existing variable-size [`LIST` data type](/docs/sql/data_types/list).
 
 The initial motivation for adding this data type was to provide optimized operations for lists that can utilize the positional semantics of their child elements and avoid branching as all lists have the same length. Think e.g. the sort of array manipulations you'd do in NumPy: stacking, shifting, multiplying – you name it. Additionally, we wanted to improve our interoperability with Apache Arrow, as previously Arrow's fixed-size list types would be converted to regular variable-size lists when ingested into DuckDB, losing some type information.
 
 However, as the hype for __vector embeddings__ and __semantic similarity search__ was growing, we also snuck in a couple of distance metric functions for this new `ARRAY` type:
-`array_distance`
-`array_inner_product` and
-`array_cosine_similarity`.
+[`array_distance`](/docs/sql/functions/array#array_distancearray1-array2)
+[`array_inner_product`](/docs/sql/functions/array#array_inner_productarray1-array2) and
+[`array_cosine_similarity`](/docs/sql/functions/array#array_cosine_similarityarray1-array2)
 
 > If you're one of today's [lucky 10000](https://xkcd.com/1053/) and haven't heard of world embeddings or vector search, the short version is that it's a technique used to represent documents, images, entities - _data_ as high-dimensional _vectors_ and then search for _similar_ vectors in a vector space, using some sort of mathematical "distance" expression to measure similarity. This is used in a wide range of applications, from natural language processing to recommendation systems and image recognition, and has recently seen a surge in popularity due to the advent of generative AI and availability of pre-trained models.
 
@@ -82,19 +82,22 @@ You can pass the `HNSW` index creation statement a `metric` parameter to decide 
 The default is `l2sq`, which uses Euclidean distance (`array_distance`):
 
 ```sql
-CREATE INDEX l2sq_idx ON embeddings USING HNSW (vec) WITH (metric = 'l2sq');
+CREATE INDEX l2sq_idx ON embeddings USING HNSW (vec)
+WITH (metric = 'l2sq');
 ```
 
 To use cosine distance (`array_cosine_similarity`):
 
 ```sql
-CREATE INDEX cos_idx ON embeddings USING HNSW (vec) WITH (metric = 'cosine');
+CREATE INDEX cos_idx ON embeddings USING HNSW (vec)
+WITH (metric = 'cosine');
 ```
 
 To use inner product (`array_inner_product`):
 
 ```sql
-CREATE INDEX ip_idx ON embeddings USING HNSW (vec) WITH (metric = 'ip');
+CREATE INDEX ip_idx ON embeddings USING HNSW (vec)
+WITH (metric = 'ip');
 ```
 
 ## Implementation
