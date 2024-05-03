@@ -2,7 +2,7 @@
 layout: post
 title: "Vector Similarity Search in DuckDB"
 author: Max Gabrielsson
-excerpt: "DuckDB now supports the creation of HNSW indexes to accelerate vector similarity search through the new `vss` extension."
+excerpt: "DuckDB now supports the creation of HNSW (Hierarchical Navigable Small Worlds) indexes to accelerate vector similarity search through the new `vss` extension."
 ---
 
 In DuckDB v0.10.0, we introduced the "fixed-size list" [`ARRAY` data type](/docs/sql/data_types/array) to complement the existing variable-size [`LIST` data type](/docs/sql/data_types/list).
@@ -40,7 +40,7 @@ This index type can't be used to enforce constraints or uniqueness like the buil
 ```sql
 SELECT *
 FROM embeddings
-ORDER BY array_distance(vec, [1,2,3]::FLOAT[3])
+ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3])
 LIMIT 3;
 ```
 
@@ -50,7 +50,7 @@ will have their logical plan optimized to become a projection over a new `HNSW` 
 EXPLAIN
 SELECT *
 FROM embeddings
-ORDER BY array_distance(vec, [1,2,3]::FLOAT[3])
+ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3])
 LIMIT 3;
 ```
 
@@ -125,11 +125,11 @@ We're actively working on addressing this and other issues related to index pers
 
 Like the `ART` the `HNSW` index must be able to fit into RAM in its entirety, and the memory allocated by the `HNSW` at runtime is allocated "outside" of the DuckDB memory management system, meaning that it wont respect DuckDB's `memory_limit` configuration parameter.
 
-Another limitation of the `HNSW` index so far are that it only supports the `FLOAT` (a 32-bit, single-precision floating point) type for the fixed-size list elements and only distance metrics corresponding to the three built in distance functions, `array_distance`, `array_inner_product` and `array_cosine_distance`. 
+Another limitation of the `HNSW` index so far are that it only supports the `FLOAT` (a 32-bit, single-precision floating point) type for the fixed-size list elements and only distance metrics corresponding to the three built in distance functions, `array_distance`, `array_inner_product` and `array_cosine_distance`.
 
 While the `HNSW` index supports insertions and deletes to the base table after the index has been created, deletes are not immediately reflected internally in the index structure, but are instead only marked as deleted, and will only be removed after a certain number of updates have been made. This is a trade-off to maintain the performance of updates, but will lead to the _quality_ of the index deteriorating over time, impacting both speed and accuracy of retrieval. To remedy this you can use the pragma `PRAGMA hnsw_compact_index('<index name>')` to trigger a recompaction, which will be faster than dropping and recreating the index.
 
-It is important to know that the `HNSW` index is an _approximate_ index, meaning that the results returned by the index may not be the _exact_ top-n results, but rather a set of results that are _close_ to the top-n results. 
+It is important to know that the `HNSW` index is an _approximate_ index, meaning that the results returned by the index may not be the _exact_ top-n results, but rather a set of results that are _close_ to the top-n results.
 
 Additionally, it is generally recommended to create the index __after__ loading a table with data as the initial index creation step can utilize some degree of parallelism to speed up index creation on larger tables.
 
@@ -137,7 +137,6 @@ Additionally, it is generally recommended to create the index __after__ loading 
 
 The `vss` extension for DuckDB is a new extension that adds support for creating HNSW indexes on fixed-size list columns in DuckDB, accelerating vector similarity search queries. The extension can currently be installed by running `INSTALL vss`. The `vss` extension treads new ground for DuckDB extensions by providing a custom index type and we're excited to refine and expand on this functionality going forward.
 
-While we're still working on addressing some of the limitations above, particularly those related to persistence, we believe that the `vss` extension and the `HNSW` index in their present form are already useful additions to the DuckDB extension ecosystem. We're really excited to see the opportunities this opens up for the community, so make sure to check out the [`vss` extension documentation](/docs/extensions/vss) for more information on how to install and use the extension. 
+While we're still working on addressing some of the limitations above, particularly those related to persistence, we believe that the `vss` extension and the `HNSW` index in their present form are already useful additions to the DuckDB extension ecosystem. We're really excited to see the opportunities this opens up for the community, so make sure to check out the [`vss` extension documentation](/docs/extensions/vss) for more information on how to install and use the extension.
 
 This work was made possible by the sponsorship of a DuckDB Labs customer! If you are interested in similar work for specific capabilities, please reach out to DuckDB Labs. Alternatively, we're happy to welcome contributors! Please reach out to the DuckDB Labs team over on Discord or on the [`vss` extension GitHub repository](https://github.com/duckdb/duckdb_vss) to keep up with the latest developments.
-

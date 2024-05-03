@@ -6,25 +6,26 @@ github_repository: https://github.com/duckdb/duckdb_vss
 
 The `vss` extension is an experimental extension for DuckDB that adds indexing support to accelerate vector similarity search queries using DuckDB's new fixed-size `ARRAY` type.
 
-See the announcement blog post [here](/2024/05/03/vector-similarity-search-vss).
+See the [announcement blog post](/2024/05/03/vector-similarity-search-vss).
 
 ## Usage
 
 To create a new HNSW index on a table with an `ARRAY` column, use the `CREATE INDEX` statement with the `USING HNSW` clause. For example:
+
 ```sql
 CREATE TABLE my_vector_table (vec FLOAT[3]);
-INSERT INTO my_vector_table SELECT array_value(a,b,c) FROM range(1,10) ra(a), range(1,10) rb(b), range(1,10) rc(c);
+INSERT INTO my_vector_table SELECT array_value(a, b, c) FROM range(1, 10) ra(a), range(1, 10) rb(b), range(1, 10) rc(c);
 CREATE INDEX my_hnsw_index ON my_vector_table USING HNSW (vec);
 ```
 
 The index will then be used to accelerate queries that use a `ORDER BY` clause evaluating one of the supported distance metric functions against the indexed columns and a constant vector, followed by a `LIMIT` clause. For example:
 ```sql
-SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1,2,3]::FLOAT[3]) LIMIT 3;
+SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3]) LIMIT 3;
 
 # We can verify that the index is being used by checking the EXPLAIN output 
 # and looking for the HNSW_INDEX_SCAN node in the plan
 
-EXPLAIN SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1,2,3]::FLOAT[3]) LIMIT 3;
+EXPLAIN SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3]) LIMIT 3;
 
 ┌───────────────────────────┐
 │         PROJECTION        │
