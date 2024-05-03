@@ -56,6 +56,7 @@ EXPLAIN SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FL
 ```
 
 By default the HNSW index will be created using the euclidean distance `l2sq` (L2-norm squared) metric, matching DuckDBs `array_distance` function, but other distance metrics can be used by specifying the `metric` option during index creation. For example:
+
 ```sql
 CREATE INDEX my_hnsw_cosine_index ON my_vector_table USING HNSW (vec) WITH (metric = 'cosine');
 ```
@@ -94,12 +95,13 @@ With the `hnsw_enable_experimental_persistence` option enabled, the index will b
 ## Inserts, Updates, Deletes and Re-Compaction
 
 The HNSW index does support inserting, updating and deleting rows from the table after index creation. However, there are two things to keep in mind:  
+
 * It's faster to create the index after the table has been populated with data as the initial bulk load can make better use of parallelism on large tables.
 * Deletes are not immediately reflected in the index, but are instead "marked" as deleted, which can cause the index to grow stale over time and negatively impact query quality and performance.
 
 To remedy the last point, you can call the `PRAGMA hnsw_compact_index('⟨index name⟩')` pragma function to trigger a re-compaction of the index pruning deleted items, or re-create the index after a significant number of updates.
 
-## Limitations =
+## Limitations
 
 * Only vectors consisting of `FLOAT`s (32-bit, single precision) are supported at the moment.
 * The index itself is not buffer managed and must be able to fit into RAM memory.

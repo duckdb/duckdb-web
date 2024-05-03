@@ -24,7 +24,6 @@ Alright, so what's in `vss`?
 
 On the surface, `vss` seems like a comparatively small DuckDB extension. It does not provide any new data types, scalar functions or copy functions, but rather a single new index type: `HNSW` ([Hierarchical Navigable Small Worlds](https://en.wikipedia.org/wiki/Hierarchical_Navigable_Small_World_graphs)), which is a graph-based index structure that is particularly well-suited for high-dimensional vector similarity search.
 
-
 ```sql
 -- Create a table with an array column
 CREATE TABLE embeddings (vec FLOAT[3]);
@@ -117,9 +116,9 @@ The `vss` extension is based on the [`usearch`](https://github.com/unum-cloud/us
 
 The big limitation as of now is that the `HNSW` index can only be created in in-memory databases, unless the `SET hnsw_enable_experimental_persistence = ⟨bool⟩` configuration parameter is set to `true`. If this parameter is not set, any attempt to create an `HNSW` index in a disk-backed database will result in an error message, but if the parameter is set, the index will not only be created in memory, but also persisted to disk as part of the DuckDB database file during checkpointing. After restarting or loading a database file with a persisted `HNSW` index, the index will be lazily loaded back into memory whenever the associated table is first accessed, which is significantly faster than having to re-create the index from scratch.
 
-The reasoning for locking this feature behind an experimental flag is that we still have some known issues related to persistence of custom indexes that we want to address before enabling it by default. In particular, WAL recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommited changes to a `HNSW`-indexed table, you can end up with data loss or corruption of the index. While it is technically possible to recover from a unexpected shutdown manually by first starting DuckDB separately, loading the `vss` extension and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, you should not rely on this for production workloads. 
+The reasoning for locking this feature behind an experimental flag is that we still have some known issues related to persistence of custom indexes that we want to address before enabling it by default. In particular, WAL recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommited changes to a `HNSW`-indexed table, you can end up with data loss or corruption of the index. While it is technically possible to recover from a unexpected shutdown manually by first starting DuckDB separately, loading the `vss` extension and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, you should not rely on this for production workloads.
 
-We're actively working on addressing this and other issues related to index persistence, which will hopefully make it into DuckDB v0.10.3, but for now we recommend using the `HNSW` index in in-memory databases only.
+We're actively working on addressing this and other issues related to index persistence, which will hopefully make it into [DuckDB v0.10.3](/docs/dev/release_calendar), but for now we recommend using the `HNSW` index in in-memory databases only.
 
 ### Other Limitations
 
