@@ -28,9 +28,9 @@ This section describes functions and operators for examining and manipulating st
 | [`contains(string, search_string)`](#containsstring-search_string) | Return true if `search_string` is found within `string`. |
 | [`ends_with(string, search_string)`](#ends_withstring-search_string) | Return true if `string` ends with `search_string`. |
 | [`format_bytes(bytes)`](#format_bytesbytes) | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
-| [`format(format, parameters, ...)`](#formatformat-parameters) | Formats a string using the [fmt syntax](#fmt-syntax). |
+| [`format(format, parameters, ...)`](#formatformat-parameters-) | Formats a string using the [fmt syntax](#fmt-syntax). |
 | [`from_base64(string)`](#from_base64string) | Convert a base64 encoded string to a character string. |
-| [`greatest(x1, x2, ...)`](#greatestx1-x2) | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered "larger" than uppercase characters and [collations](../expressions/collations) are not supported. |
+| [`greatest(x1, x2, ...)`](#greatestx1-x2-) | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered "larger" than uppercase characters and [collations](../expressions/collations) are not supported. |
 | [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with the hash of the `value`. |
 | [`ilike_escape(string, like_specifier, escape_character)`](#ilike_escapestring-like_specifier-escape_character) | Returns true if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`instr(string, search_string)`](#instrstring-search_string) | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
@@ -39,27 +39,27 @@ This section describes functions and operators for examining and manipulating st
 | [`left(string, count)`](#leftstring-count) | Extract the left-most count characters. |
 | [`length_grapheme(string)`](#length_graphemestring) | Number of grapheme clusters in `string`. |
 | [`length(string)`](#lengthstring) | Number of characters in `string`. |
-| [`like_escape(string,  like_specifier, escape_character)`](#like_escapestring-like_specifier-escape_character) | Returns true if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
+| [`like_escape(string, like_specifier, escape_character)`](#like_escapestring-like_specifier-escape_character) | Returns true if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`lower(string)`](#lowerstring) | Convert `string` to lower case. |
 | [`lpad(string, count, character)`](#lpadstring-count-character) | Pads the `string`  with the character from the left until it has count characters. |
 | [`ltrim(string, characters)`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. |
 | [`ltrim(string)`](#ltrimstring) | Removes any spaces from the left side of the `string`. |
 | [`md5(value)`](#md5value) | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the `value`. |
 | [`nfc_normalize(string)`](#nfc_normalizestring) | Convert string to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. |
-| [`not_ilike_escape(string,  like_specifier, escape_character)`](#not_ilike_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
-| [`not_like_escape(string,  like_specifier, escape_character)`](#not_like_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
+| [`not_ilike_escape(string, like_specifier, escape_character)`](#not_ilike_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
+| [`not_like_escape(string, like_specifier, escape_character)`](#not_like_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`ord(string)`](#ordstring) | Return ASCII character code of the leftmost character in a string. |
 | [`parse_dirname(path, separator)`](#parse_dirnamepath-separator) | Returns the top-level directory name from the given path. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | [`parse_dirpath(path, separator)`](#parse_dirpathpath-separator) | Returns the head of the path (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | [`parse_filename(path, trim_extension, separator)`](#parse_filenamepath-trim_extension-separator) | Returns the last component of the path similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. If `trim_extension` is true, the file extension will be removed (defaults to `false`). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | [`parse_path(path, separator)`](#parse_pathpath-separator) | Returns a list of the components (directories and filename) in the path similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| [`position(search_string in string)`](#positionsearch_stringinstring) | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
+| [`position(search_string IN string)`](#positionsearch_string-in-string) | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
 | [`printf(format, parameters...)`](#printfformat-parameters) | Formats a `string` using [printf syntax](#printf-syntax). |
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide](../../guides/import/read_file#read_text) for more details. |
 | [`regexp_escape(string)`](#regexp_escapestring) | Escapes special patterns to turn `string` into a regular expression similarly to Python's [`re.escape` function](https://docs.python.org/3/library/re.html#re.escape). |
-| [`regexp_extract_all(string, regex[, group = 0])`](#regexp_extract_allstring-regex-group0) | Split the `string` along the `regex` and extract all occurrences of `group`. |
-| [`regexp_extract(string, pattern , name_list)`](#regexp_extractstring-pattern-name_list) | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list` (see [Pattern Matching](patternmatching#using-regexp_extract)). |
-| [`regexp_extract(string, pattern [, idx])`](#regexp_extractstring-pattern-idx) | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `idx` (see [Pattern Matching](patternmatching#using-regexp_extract)). |
+| [`regexp_extract_all(string, regex[, group = 0])`](#regexp_extract_allstring-regex-group--0) | Split the `string` along the `regex` and extract all occurrences of `group`. |
+| [`regexp_extract(string, pattern, name_list)`](#regexp_extractstring-pattern--name_list) | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list` (see [Pattern Matching](patternmatching#using-regexp_extract)). |
+| [`regexp_extract(string, pattern[, idx])`](#regexp_extractstring-pattern-idx) | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `idx` (see [Pattern Matching](patternmatching#using-regexp_extract)). |
 | [`regexp_full_match(string, regex)`](#regexp_full_matchstring-regex) | Returns `true` if the entire `string` matches the `regex` (see [Pattern Matching](patternmatching)). |
 | [`regexp_matches(string, pattern)`](#regexp_matchesstring-pattern) | Returns `true` if  `string` contains the regexp `pattern`, `false` otherwise (see [Pattern Matching](patternmatching#using-regexp_matches)). |
 | [`regexp_replace(string, pattern, replacement)`](#regexp_replacestring-pattern-replacement) | If `string` contains the regexp `pattern`, replaces the matching part with `replacement` (see [Pattern Matching](patternmatching#using-regexp_replace)). |
@@ -286,7 +286,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `instr('test test', 'es')` |
 | **Result** | 2 |
 
-### `least(x1, x2,  ... )`
+### `least(x1, x2, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -326,7 +326,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `length('Hello🦆')` |
 | **Result** | `6` |
 
-### `like_escape(string,  like_specifier, escape_character)`
+### `like_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -383,7 +383,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `nfc_normalize('ardèch')` |
 | **Result** | `ardèch` |
 
-### `not_ilike_escape(string,  like_specifier, escape_character)`
+### `not_ilike_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -391,7 +391,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `not_ilike_escape('A%c', 'a$%C', '$')` |
 | **Result** | `false` |
 
-### `not_like_escape(string,  like_specifier, escape_character)`
+### `not_like_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -439,12 +439,12 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `parse_path('/path/to/file.csv', 'system')` |
 | **Result** | `[/, path, to, file.csv]` |
 
-### `position(search_string in string)`
+### `position(search_string IN string)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| **Example** | `position('b' in 'abc')` |
+| **Example** | `position('b' IN 'abc')` |
 | **Result** | `2` |
 
 ### `printf(format, parameters...)`
@@ -479,7 +479,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `[hello, world]` |
 
-### `regexp_extract(string, pattern , name_list)`
+### `regexp_extract(string, pattern, name_list)`
 
 <div class="nostroke_table"></div>
 
@@ -487,7 +487,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
 
-### `regexp_extract(string, pattern [, idx])`
+### `regexp_extract(string, pattern[, idx])`
 
 <div class="nostroke_table"></div>
 
@@ -500,7 +500,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if the entire `string` matches the `regex` (see [Pattern Matching](patternmatching)). |
-| **Example** | `regexp_full_match('anabanana', '(an)`')` |
+| **Example** | `regexp_full_match('anabanana', '(an)')` |
 | **Result** | `false` |
 
 ### `regexp_matches(string, pattern)`
@@ -508,7 +508,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if  `string` contains the regexp `pattern`, `false` otherwise (see [Pattern Matching](patternmatching#using-regexp_matches)). |
-| **Example** | `regexp_matches('anabanana', '(an)`')` |
+| **Example** | `regexp_matches('anabanana', '(an)')` |
 | **Result** | `true` |
 
 ### `regexp_replace(string, pattern, replacement)`

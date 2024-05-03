@@ -31,7 +31,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
 
-### `list_filter(list, lambda)
+### `list_filter(list, lambda)`
 
 <div class="nostroke_table"></div>
 

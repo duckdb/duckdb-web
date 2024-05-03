@@ -46,7 +46,7 @@ This section describes functions and operators for examining and manipulating ne
 | [`list_unique(list)`](#list_uniquelist) | Counts the unique elements of a list. |
 | [`list_value(any, ...)`](#list_valueany-) | Create a `LIST` containing the argument values. |
 | [`list_where(value_list, mask_list)`](#list_wherevalue_list-mask_list) | Returns a list with the `BOOLEAN`s in `mask_list` applied as a mask to the `value_list`. |
-| [`list_zip(list1, list2, ...)`](#list_ziplist1-list2-) | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements `list_1`, ..., `list_k`. Elements missing will be replaced with `NULL`. |
+| [`list_zip(list_1, list_2, ...[, truncate])`](#list_ziplist1-list2-) | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements from each list `list_1`, ..., `list_k`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
 | [`unnest(list)`](#unnestlist) | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [`unnest` page](../query_syntax/unnest) for more details. |
 
 ### `list[index]`
@@ -371,9 +371,9 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements `list_1`, ..., `list_k`. Elements missing will be replaced with `NULL`. |
+| **Description** | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements from each list `list_1`, ..., `list_k`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
 | **Example** | `list_zip([1, 2], [3, 4], [5, 6])` |
-| **Result** | `[{'list_1': 1, 'list_2': 3, 'list_3': 5}, {'list_1': 2, 'list_2': 4, 'list_3': 6}]` |
+| **Result** | `[(1, 3, 5), (2, 4, 6)]` |
 | **Alias** | `array_zip` |
 
 ### `unnest(list)`
@@ -392,7 +392,7 @@ The following operators are supported for lists:
 
 | Operator | Description | Example | Result |
 |-|--|---|-|
-| `&&`  | Alias for [`list_intersect`](#list_intersectlist1-list2).                                                               | `[1, 2, 3, 4, 5] && [2, 5, 5, 6]` | `[2, 5]`             |
+| `&&`  | Alias for [`list_has_any`](#list_has_anylist1-list2).                                                                   | `[1, 2, 3, 4, 5] && [2, 5, 5, 6]` | `true`               |
 | `@>`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **right** of the operator is the sublist. | `[1, 2, 3, 4] @> [3, 4, 3]`       | `true`               |
 | `<@`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **left** of the operator is the sublist.  | `[1, 4] <@ [1, 2, 3, 4]`          | `true`               |
 | `||`  | Alias for [`list_concat`](#list_concatlist1-list2).                                                                     | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
@@ -408,29 +408,35 @@ Python-style list comprehension can be used to compute expressions over elements
 ```sql
 SELECT [lower(x) FOR x IN strings]
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
--- [hello, , world]
+```
+
+```text
+[hello, , world]
 ```
 
 ```sql
 SELECT [upper(x) FOR x IN strings IF len(x) > 0]
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
--- [HELLO, WORLD]
+```
+
+```text
+[HELLO, WORLD]
 ```
 
 ## Struct Functions
 
 | Name | Description |
 |:--|:-------|
-| [*`struct.entry`*](#structentry) | Dot notation that serves as an alias for `struct_extract` from named `STRUCT`s. |
-| [*`struct[entry]`](#structentry) | Bracket notation that serves as an alias for `struct_extract` from named `STRUCT`s. |
-| [*`struct[idx]`](#structidx) | Bracket notation that serves as an alias for `struct_extract` from unnamed `STRUCT`s (tuples), using an index (1-based). |
+| [`struct.entry`](#structentry) | Dot notation that serves as an alias for `struct_extract` from named `STRUCT`s. |
+| [`struct[entry]`](#structentry) | Bracket notation that serves as an alias for `struct_extract` from named `STRUCT`s. |
+| [`struct[idx]`](#structidx) | Bracket notation that serves as an alias for `struct_extract` from unnamed `STRUCT`s (tuples), using an index (1-based). |
 | [`row(any, ...)`](#rowany-) | Create an unnamed `STRUCT` (tuple) containing the argument values. |
 | [`struct_extract(struct, 'entry')`](#struct_extractstruct-entry) | Extract the named entry from the `STRUCT`. |
 | [`struct_extract(struct, idx)`](#struct_extractstruct-idx) | Extract the entry from an unnamed `STRUCT` (tuple) using an index (1-based). |
-| [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-name--any) | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). |
-| [`struct_pack(name := any, ...)`](#struct_packname--any) | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
+| [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-name--any-) | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). |
+| [`struct_pack(name := any, ...)`](#struct_packname--any-) | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
 
-### `struct.entry`*
+### `struct.entry`
 
 <div class="nostroke_table"></div>
 
@@ -584,12 +590,12 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 
 | Name | Description |
 |:--|:-------|
-| [*`union.tag`*](#uniontag) | Dot notation serves as an alias for `union_extract`. |
+| [`union.tag`](#uniontag) | Dot notation serves as an alias for `union_extract`. |
 | [`union_extract(union, 'tag')`](#union_extractunion-tag) | Extract the value with the named tags from the union. `NULL` if the tag is not currently selected. |
 | [`union_value(tag := any)`](#union_valuetag--any) | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. |
 | [`union_tag(union)`](#union_tagunion) | Retrieve the currently selected tag of the union as an [Enum](../../sql/data_types/enum). |
 
-### `union.tag`*
+### `union.tag`
 
 <div class="nostroke_table"></div>
 

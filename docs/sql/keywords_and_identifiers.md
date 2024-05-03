@@ -16,7 +16,7 @@ Similarly to other SQL dialects and programming languages, identifiers in DuckDB
     * They must not start with a number or special character, e.g., `SELECT 123 AS 1col` is invalid.
     * They cannot contain whitespaces (including tabs and newline characters).
 * Identifiers can be quoted using double-quote characters (`"`). Quoted identifiers can use any keyword, whitespace or special character, e.g., `"SELECT"` and `" § 🦆 ¶ "` are valid identifiers.
-* Quotes themselves can be escaped by repeating the quote character, e.g., to create an identifier named `IDENTIFIER "X"`, use `"IDENTIFIER ""X"""`.
+* Double quotes can be escaped by repeating the quote character, e.g., to create an identifier named `IDENTIFIER "X"`, use `"IDENTIFIER ""X"""`.
 
 ### Deduplicating Identifiers
 
@@ -50,6 +50,10 @@ If you need to attach to a database that has one of these names, use an alias, e
 ATTACH 'temp.db' AS temp2;
 USE temp2;
 ```
+
+## String Literals
+
+To escape a single quote (apostrophe) character in a string literal, use `''`. For example, `SELECT '''' AS s` returns `'`.
 
 ## Numeric Literals
 

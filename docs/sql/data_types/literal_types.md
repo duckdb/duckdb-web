@@ -35,9 +35,10 @@ However, we cannot compare `VARCHAR` values with dates.
 SELECT d > '1992-01-01'::VARCHAR FROM (VALUES (DATE '1992-01-01')) t(d);
 ```
 
-```text
--- Binder Error: Cannot compare values of type DATE and type VARCHAR –
--- an explicit cast is required
+```console
+Binder Error: Cannot compare values of type DATE and type VARCHAR - an explicit cast is required
+LINE 1: SELECT d > '1992-01-01'::VARCHAR FROM (VALUES (D...
+                 ^
 ```
 
 ### Escape String Literals

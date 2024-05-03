@@ -174,4 +174,3 @@ To load [unsigned extensions](../../extensions/overview#ensuring-the-integrity-o
 ```js
 db = new duckdb.Database(':memory:', {"allow_unsigned_extensions": "true"});
 ```
-

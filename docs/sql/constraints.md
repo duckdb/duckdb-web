@@ -19,7 +19,10 @@ Check constraints allow you to specify an arbitrary boolean expression. Any colu
 ```sql
 CREATE TABLE students (name VARCHAR CHECK (NOT contains(name, ' ')));
 INSERT INTO students VALUES ('this name contains spaces');
--- Constraint Error: CHECK constraint failed: students
+```
+
+```console
+Constraint Error: CHECK constraint failed: students
 ```
 
 ## Not Null Constraint
@@ -29,7 +32,10 @@ A not-null constraint specifies that the column cannot contain any `NULL` values
 ```sql
 CREATE TABLE students (name VARCHAR NOT NULL);
 INSERT INTO students VALUES (NULL);
--- Constraint Error: NOT NULL constraint failed: students.name
+```
+
+```console
+Constraint Error: NOT NULL constraint failed: students.name
 ```
 
 ## Primary Key and Unique Constraint
@@ -40,7 +46,10 @@ Primary key or unique constraints define a column, or set of columns, that are a
 CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
 INSERT INTO students VALUES (1, 'Student 1');
 INSERT INTO students VALUES (1, 'Student 2');
--- Constraint Error: Duplicate key "id: 1" violates primary key constraint
+```
+
+```console
+Constraint Error: Duplicate key "id: 1" violates primary key constraint
 ```
 
 ```sql
@@ -48,7 +57,10 @@ CREATE TABLE students (id INTEGER, name VARCHAR, PRIMARY KEY (id, name));
 INSERT INTO students VALUES (1, 'Student 1');
 INSERT INTO students VALUES (1, 'Student 2');
 INSERT INTO students VALUES (1, 'Student 1');
--- Constraint Error: Duplicate key "id: 1, name: Student 1" violates primary key constraint
+```
+
+```console
+Constraint Error: Duplicate key "id: 1, name: Student 1" violates primary key constraint
 ```
 
 In order to enforce this property efficiently, an [ART index is automatically created](indexes) for every primary key or unique constraint that is defined in the table.
@@ -62,10 +74,19 @@ Primary key constraints and unique constraints are identical except for two poin
 CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR, email VARCHAR UNIQUE);
 INSERT INTO students VALUES (1, 'Student 1', 'student1@uni.com');
 INSERT INTO students values (2, 'Student 2', 'student1@uni.com');
--- Constraint Error: Duplicate key "email: student1@uni.com" violates unique constraint.
+```
+
+```console
+Constraint Error: Duplicate key "email: student1@uni.com" violates unique constraint.
+```
+
+```sql
 INSERT INTO students(id, name) VALUES (3, 'Student 3');
 INSERT INTO students(name, email) VALUES ('Student 3', 'student3@uni.com');
--- Constraint Error: NOT NULL constraint failed: students.id
+```
+
+```console
+Constraint Error: NOT NULL constraint failed: students.id
 ```
 
 > Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations).
@@ -80,7 +101,10 @@ CREATE TABLE exams (exam_id INTEGER REFERENCES students(id), grade INTEGER);
 INSERT INTO students VALUES (1, 'Student 1');
 INSERT INTO exams VALUES (1, 10);
 INSERT INTO exams VALUES (2, 10);
--- Constraint Error: Violates foreign key constraint because key "id: 2" does not exist in the referenced table
+```
+
+```console
+Constraint Error: Violates foreign key constraint because key "id: 2" does not exist in the referenced table
 ```
 
 In order to enforce this property efficiently, an [ART index is automatically created](indexes) for every foreign key constraint that is defined in the table.

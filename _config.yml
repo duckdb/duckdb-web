@@ -21,10 +21,10 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. http://example.com
 # Set current Version of DuckDB
 currentshortduckdbversion: "0.10"
-currentduckdbversion: 0.10.1
-currentjavaversion: 0.10.1
-currentsnapshotversion: 0.10.2-dev
-nextjavaversion: 0.10.2  # for java snapshots
+currentduckdbversion: 0.10.2
+currentsnapshotversion: 0.10.3-dev
+currentjavaversion: 0.10.2
+nextjavaversion: 0.10.3  # for java snapshots
 livereload: true
 highlighter: rouge
 incremental: false

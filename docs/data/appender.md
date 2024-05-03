@@ -68,7 +68,7 @@ You can change this by explicitly using [transactions](../sql/statements/transac
 
 If the Appender encounters a `PRIMARY KEY` conflict or a `UNIQUE` constraint violation, it fails and returns the following error:
 
-```text
+```console
 Constraint Error: PRIMARY KEY or UNIQUE constraint violated: duplicate key "..."
 ```
 

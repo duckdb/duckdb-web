@@ -108,7 +108,7 @@ INSERT INTO tbl
 
 This raises as an error:
 
-```text
+```console
 Constraint Error: Duplicate key "i: 1" violates primary key constraint.
 ```
 
@@ -254,7 +254,7 @@ INSERT INTO t1 BY NAME (SELECT id, val1 FROM t2)
 
 This fails with the following error:
 
-```text
+```console
 Constraint Error: NOT NULL constraint failed: t1.val2
 ```
 
@@ -319,7 +319,7 @@ INSERT INTO tbl
 
 This returns the following message.
 
-```text
+```console
 Error: Invalid Input Error: ON CONFLICT DO UPDATE can not update the same row twice in the same command.
 Ensure that no rows proposed for insertion within the same command have duplicate constrained values
 ```

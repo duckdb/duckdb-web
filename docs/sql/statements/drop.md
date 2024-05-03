@@ -48,7 +48,7 @@ CREATE TABLE myschema.t1 (i INTEGER);
 DROP SCHEMA myschema;
 ```
 
-```text
+```console
 Dependency Error: Cannot drop entry "myschema" because there are entries that depend on it.
 Use DROP...CASCADE to drop all dependents.
 ```
@@ -90,7 +90,7 @@ DROP TABLE tbl RESTRICT;
 SELECT * FROM v;
 ```
 
-```text
+```console
 Catalog Error: Table with name tbl does not exist!
 ```
 

@@ -3,11 +3,6 @@ layout: docu
 title: "ODBC 101: A Duck Themed Guide to ODBC"
 ---
 
-* [What is ODBC?](#what-is-odbc)
-* [General Concepts](#general-concepts)
-* [Setting up an Application](#setting-up-an-application)
-* [Sample Application](#sample-application)
-
 ## What is ODBC?
 
 [ODBC](https://learn.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc?view=sql-server-ver16) which stands for Open Database Connectivity, is a standard that allows different programs to talk to different databases including, of course, **DuckDB** 🦆.  This makes it easier to build programs that work with many different databases, which saves time as developers don't have to write custom code to connect to each database. Instead, they can use the standardized ODBC interface, which reduces development time and costs, and programs are easier to maintain.  However, ODBC can be slower than other methods of connecting to a database, such as using a native driver, as it adds an extra layer of abstraction between the application and the database.  Furthermore, because DuckDB is column-based and ODBC is row-based, there can be some inefficiencies when using ODBC with DuckDB.
@@ -102,31 +97,6 @@ A buffer is a block of memory used to store data.  Buffers are used to store dat
 The following is a step-by-step guide to setting up an application that uses ODBC to connect to a database, execute a query, and fetch the results in `C++`.
 
 > To install the driver as well as anything else you will need follow these [instructions](../../api/odbc/overview).
-
-- [What is ODBC?](#what-is-odbc)
-- [General Concepts](#general-concepts)
-  - [Handles](#handles)
-    - [Environment](#environment)
-    - [Connection](#connection)
-    - [Statement](#statement)
-    - [Descriptor](#descriptor)
-  - [Connecting](#connecting)
-    - [Connection String](#connection-string)
-    - [DSN](#dsn)
-  - [Error Handling and Diagnostics](#error-handling-and-diagnostics)
-  - [Buffers and Binding](#buffers-and-binding)
-- [Setting up an Application](#setting-up-an-application)
-  - [1. Include the SQL Header Files](#1-include-the-sql-header-files)
-  - [2. Define the ODBC Handles and Connect to the Database](#2-define-the-odbc-handles-and-connect-to-the-database)
-    - [2.a. Connecting with SQLConnect](#2a-connecting-with-sqlconnect)
-    - [2.b. Connecting with SQLDriverConnect](#2b-connecting-with-sqldriverconnect)
-  - [3. Adding a Query](#3-adding-a-query)
-  - [4. Fetching Results](#4-fetching-results)
-  - [5. Go Wild](#5-go-wild)
-  - [6. Free the Handles and Disconnecting](#6-free-the-handles-and-disconnecting)
-- [Sample Application](#sample-application)
-  - [Sample `.cpp` file](#sample-cpp-file)
-  - [Sample `CMakelists.txt` file](#sample-cmakeliststxt-file)
 
 ### 1. Include the SQL Header Files
 

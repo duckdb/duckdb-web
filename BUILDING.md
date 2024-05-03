@@ -15,6 +15,9 @@
     - [Serving the site from Docker](#serving-the-site-from-docker)
   - [With a Dev Container](#with-a-dev-container)
   - [Generating the search index](#generating-the-search-index)
+  - [Updating the release calendar](#updating-the-release-calendar)
+  - [Troubleshooting](#troubleshooting)
+    - [Cannot install dependency](#cannot-install-dependency)
 
 The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
@@ -26,7 +29,7 @@ The site is built using [Jekyll](https://jekyllrb.com/) 3.9.x.
 
 #### Ruby
 
-Jekyll 3.9.x requires Ruby v2.7.x+. Note that in some systems, the built-in Ruby distribution is older. On macOS, you can install a new Ruby version via [Homebew](https://brew.sh/):
+Jekyll 3.9.x requires Ruby v2.7.x+. Note that in some systems, the built-in Ruby distribution is older. On macOS, you can install a new Ruby version via [Homebrew](https://brew.sh/):
 
 ```bash
 brew install ruby
@@ -128,8 +131,24 @@ scripts/generate-search-index.sh
 
 ## Updating the release calendar
 
-To update the release calendar, run:
+The release calendar is updated automatically by [CI](.github/workflows/jekyll.yml). To manually update the release calendar, run:
 
 ```bash
 python scripts/get_calendar.py
+```
+
+## Troubleshooting
+
+### Cannot install dependency
+
+The following error occurs:
+
+```console
+posix-spawn.c:226:27: error: incompatible function pointer types passing 'int (VALUE, VALUE, posix_spawn_file_actions_t *)' (aka 'int (unsigned long, unsigned long,
+```
+
+The workaround is to run the following `bundle` command:
+
+```bash
+bundle config set --global build.posix-spawn "--with-cflags=-Wno-error=incompatible-function-pointer-types"
 ```

@@ -90,7 +90,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 		
 		
 		
-		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " }}{% endif %}">
+		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " | remove: ":" }}{% endif %}">
 			
 			<div id="main_content_wrap">
 				

@@ -16,7 +16,7 @@ MAKEFLAGS = -j8
 
 Building the R package on Linux running on an ARM64 architecture (AArch64) may result in the following error message:
 
-```text
+```console
 /usr/bin/ld: /usr/include/c++/10/bits/basic_string.tcc:206: warning: too many GOT entries for -fpic, please recompile with -fPIC
 ```
 
@@ -26,6 +26,8 @@ To work around this, create or edit the `~/.R/Makevars` file:
 ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 ```
 
+When making this change, also consider [making the build parallel](#building-the-r-package-is-slow).
+
 ## Building the httpfs Extension and Python Package on macOS
 
 **Problem:** The build fails on macOS when both the [`httpfs` extension](../../extensions/httpfs) and the Python package are included:
@@ -34,7 +36,7 @@ ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 GEN=ninja BUILD_PYTHON=1 BUILD_HTTPFS=1 make
 ```
 
-```text
+```console
 ld: library not found for -lcrypto
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 error: command '/usr/bin/clang++' failed with exit code 1
@@ -62,7 +64,7 @@ python3 -m pip install tools/pythonpkg --use-pep517 --user
 
 **Problem:** When building the [`httpfs` extension](/docs/extensions/httpfs) on Linux, the build may fail with the following error.
 
-```text
+```console
 CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
   Could NOT find OpenSSL, try to set the path to OpenSSL root folder in the
   system variable OPENSSL_ROOT_DIR (missing: OPENSSL_CRYPTO_LIBRARY

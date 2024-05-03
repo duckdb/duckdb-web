@@ -86,21 +86,21 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | `VARCHAR` | (empty) |
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
 | `null_padding` | If this option is enabled, when a row lacks columns, it will pad the remaining columns on the right with null values.| `BOOL` | `false` |
-| `nullstr` | Specifies the string that represents a NULL value. | `VARCHAR` | (empty) |
+| `nullstr` | Specifies the string that represents a `NULL` value or (since v0.10.2) a list of strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
 | `parallel` | Whether or not the parallel CSV reader is used. | `BOOL` | `true` |
 | `quote` | Specifies the quoting string to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `sample_size` | The number of sample rows for [auto detection of parameters](auto_detection). | `BIGINT` | 20480 |
 | `skip` | The number of lines at the top of the file to skip. | `BIGINT` | 0 |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
+| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat). | `VARCHAR` | (empty) |
 | `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here](tips#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
-| `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | `BOOL` | `false` |
+| `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas#union-by-name), rather than by position. | `BOOL` | `false` |
 
 ### `auto_type_candidates` Details
 
 Usage example:
 
 ```sql
-SELECT * FROM read_csv('csv_file.csv', auto_type_candidates=['BIGINT', 'DATE']);
+SELECT * FROM read_csv('csv_file.csv', auto_type_candidates = ['BIGINT', 'DATE']);
 ```
 
 The default value for the `auto_type_candidates` option is `['SQLNULL', 'BOOLEAN', 'BIGINT', 'DOUBLE', 'TIME', 'DATE', 'TIMESTAMP', 'VARCHAR']`.
@@ -144,7 +144,7 @@ DESCRIBE ontime;
 | DestCityName   | VARCHAR     | YES  | NULL | NULL    | NULL  |
 
 ```sql
-SELECT * FROM read_csv('flights.csv', sample_size = 20000);
+SELECT * FROM read_csv('flights.csv', sample_size = 20_000);
 ```
 
 If we set `delim`/`sep`, `quote`, `escape`, or `header` explicitly, we can bypass the automatic detection of this particular parameter:
@@ -193,4 +193,3 @@ DuckDB supports reading erroneous CSV files. For details, see the [Reading Fault
 ## Limitations
 
 The CSV reader only supports input files using UTF-8 character encoding. For CSV files using different encodings, use e.g. the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert them to UTF-8.
-

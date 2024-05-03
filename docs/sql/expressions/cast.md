@@ -29,7 +29,10 @@ Not all casts are possible. For example, it is not possible to convert an `INTEG
 
 ```sql
 SELECT CAST('hello' AS INTEGER);
--- Conversion Error: Could not convert string 'hello' to INT32
+```
+
+```console
+Conversion Error: Could not convert string 'hello' to INT32
 ```
 
 The exact behavior of the cast depends on the source and destination types. For example, when casting from `VARCHAR` to any other type, the string will be attempted to be converted.

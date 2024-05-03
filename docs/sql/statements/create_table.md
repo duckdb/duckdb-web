@@ -103,16 +103,28 @@ CREATE TABLE t1 (
 );
 INSERT INTO t1 VALUES (1, 5);
 INSERT INTO t1 VALUES (2, -1);
--- Error: Constraint Error: CHECK constraint failed: t1
+```
+
+```console
+Error: Constraint Error: CHECK constraint failed: t1
+```
+
+```sql
 INSERT INTO t1 VALUES (3, 101);
--- Error: Constraint Error: CHECK constraint failed: t1
+```
+
+```console
+Error: Constraint Error: CHECK constraint failed: t1
 ```
 
 ```sql
 CREATE TABLE t2 (id INTEGER PRIMARY KEY, x INTEGER, y INTEGER CHECK (x < y));
 INSERT INTO t2 VALUES (1, 5, 10);
 INSERT INTO t2 VALUES (2, 5, 3);
--- Error: Constraint Error: CHECK constraint failed: t2
+```
+
+```console
+Error: Constraint Error: CHECK constraint failed: t2
 ```
 
 `CHECK` constraints can also be added as part of the `CONSTRAINTS` clause:
@@ -126,7 +138,10 @@ CREATE TABLE t3 (
 );
 INSERT INTO t3 VALUES (1, 5, 10);
 INSERT INTO t3 VALUES (2, 5, 3);
--- Error: Constraint Error: CHECK constraint failed: t3
+```
+
+```console
+Error: Constraint Error: CHECK constraint failed: t3
 ```
 
 ## Foreign Key Constraints
@@ -145,7 +160,10 @@ CREATE TABLE t2 (
 INSERT INTO t1 VALUES (1, 'a');
 INSERT INTO t2 VALUES (1, 1);
 INSERT INTO t2 VALUES (2, 2);
--- Error: Constraint Error: Violates foreign key constraint because key "id: 2" does not exist in the referenced table
+```
+
+```console
+Error: Constraint Error: Violates foreign key constraint because key "id: 2" does not exist in the referenced table
 ```
 
 Foreign keys can be defined on composite primary keys:
@@ -161,7 +179,10 @@ CREATE TABLE t4 (
 INSERT INTO t3 VALUES (1, 'a');
 INSERT INTO t4 VALUES (1, 1, 'a');
 INSERT INTO t4 VALUES (2, 1, 'b');
--- Error: Constraint Error: Violates foreign key constraint because key "id: 1, j: b" does not exist in the referenced table
+```
+
+```console
+Error: Constraint Error: Violates foreign key constraint because key "id: 1, j: b" does not exist in the referenced table
 ```
 
 Foreign keys can also be defined on unique columns:

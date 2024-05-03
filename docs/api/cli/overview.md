@@ -49,7 +49,7 @@ $ duckdb
 ```
 
 ```text
-v0.10.1 4a89d97db8
+v0.10.2 1601d94f94
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
@@ -201,7 +201,7 @@ Note that the duck head is built with Unicode characters and does not work in al
 
 To invoke that file on initialization, use this command:
 
-```text
+```bash
 $ duckdb -init prompt.sql
 ```
 

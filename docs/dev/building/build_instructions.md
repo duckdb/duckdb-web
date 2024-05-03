@@ -41,7 +41,7 @@ brew install cmake ninja
 
 ### Windows
 
-Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.1/.github/workflows/Windows.yml#L234) for a list of packages used to build DuckDB on Windows.
+Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.2/.github/workflows/Windows.yml#L234) for a list of packages used to build DuckDB on Windows.
 
 The DuckDB Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../../api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
 

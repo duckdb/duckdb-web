@@ -75,7 +75,7 @@ For more information about data chunks, see the [documentation on data chunks](d
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <a href="#duckdb_result_get_chunk"><span class="nf">duckdb_result_get_chunk</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">chunk_index</span>);
 <span class="kt">bool</span> <a href="#duckdb_result_is_streaming"><span class="nf">duckdb_result_is_streaming</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_result_chunk_count"><span class="nf">duckdb_result_chunk_count</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
-<span class="nv">duckdb_result_type</span> <a href="#duckdb_result_return_type"><span class="nf">duckdb_result_return_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">duckdb_result_type</span> <a href="#duckdb_result_return_type"><span class="nf">duckdb_result_return_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 </code></pre></div></div>
 
 ### Date/Time/Timestamp Helpers
@@ -84,8 +84,8 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">duckdb_date</span> <a href="#duckdb_to_date"><span class="nf">duckdb_to_date</span></a>(<span class="kt">duckdb_date_struct</span> <span class="nv">date</span>);
 <span class="kt">bool</span> <a href="#duckdb_is_finite_date"><span class="nf">duckdb_is_finite_date</span></a>(<span class="kt">duckdb_date</span> <span class="nv">date</span>);
 <span class="kt">duckdb_time_struct</span> <a href="#duckdb_from_time"><span class="nf">duckdb_from_time</span></a>(<span class="kt">duckdb_time</span> <span class="nv">time</span>);
-<span class="nv">duckdb_time_tz</span> <a href="#duckdb_create_time_tz"><span class="nf">duckdb_create_time_tz</span></a>(<span class="kt">int64_t</span> <span class="nv">micros</span>, <span class="kt">int32_t</span> <span class="nv">offset</span>);
-<span class="nv">duckdb_time_tz_struct</span> <a href="#duckdb_from_time_tz"><span class="nf">duckdb_from_time_tz</span></a>(<span class="nv">duckdb_time_tz</span> <span class="nv">micros</span>);
+<span class="kt">duckdb_time_tz</span> <a href="#duckdb_create_time_tz"><span class="nf">duckdb_create_time_tz</span></a>(<span class="kt">int64_t</span> <span class="nv">micros</span>, <span class="kt">int32_t</span> <span class="nv">offset</span>);
+<span class="kt">duckdb_time_tz_struct</span> <a href="#duckdb_from_time_tz"><span class="nf">duckdb_from_time_tz</span></a>(<span class="kt">duckdb_time_tz</span> <span class="nv">micros</span>);
 <span class="kt">duckdb_time</span> <a href="#duckdb_to_time"><span class="nf">duckdb_to_time</span></a>(<span class="kt">duckdb_time_struct</span> <span class="nv">time</span>);
 <span class="kt">duckdb_timestamp_struct</span> <a href="#duckdb_from_timestamp"><span class="nf">duckdb_from_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
 <span class="kt">duckdb_timestamp</span> <a href="#duckdb_to_timestamp"><span class="nf">duckdb_to_timestamp</span></a>(<span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts</span>);
@@ -100,13 +100,13 @@ For more information about data chunks, see the [documentation on data chunks](d
 
 ### Decimal Helpers
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
-<span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
+<span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="kt">duckdb_decimal</span> <span class="nv">val</span>);
 </code></pre></div></div>
 
 ### Logical Type Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_logical_type"><span class="nf">duckdb_create_logical_type</span></a>(<span class="nv">duckdb_type</span> <span class="nv">type</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_logical_type"><span class="nf">duckdb_create_logical_type</span></a>(<span class="kt">duckdb_type</span> <span class="nv">type</span>);
 <span class="kt">char</span> *<a href="#duckdb_logical_type_get_alias"><span class="nf">duckdb_logical_type_get_alias</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_list_type"><span class="nf">duckdb_create_list_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_array_type"><span class="nf">duckdb_create_array_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">array_size</span>);
@@ -115,11 +115,11 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_struct_type"><span class="nf">duckdb_create_struct_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_enum_type"><span class="nf">duckdb_create_enum_type</span></a>(<span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_decimal_type"><span class="nf">duckdb_create_decimal_type</span></a>(<span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
-<span class="nv">duckdb_type</span> <a href="#duckdb_get_type_id"><span class="nf">duckdb_get_type_id</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_type</span> <a href="#duckdb_get_type_id"><span class="nf">duckdb_get_type_id</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">uint8_t</span> <a href="#duckdb_decimal_width"><span class="nf">duckdb_decimal_width</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">uint8_t</span> <a href="#duckdb_decimal_scale"><span class="nf">duckdb_decimal_scale</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="nv">duckdb_type</span> <a href="#duckdb_decimal_internal_type"><span class="nf">duckdb_decimal_internal_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="nv">duckdb_type</span> <a href="#duckdb_enum_internal_type"><span class="nf">duckdb_enum_internal_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_type</span> <a href="#duckdb_decimal_internal_type"><span class="nf">duckdb_decimal_internal_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_type</span> <a href="#duckdb_enum_internal_type"><span class="nf">duckdb_enum_internal_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">uint32_t</span> <a href="#duckdb_enum_dictionary_size"><span class="nf">duckdb_enum_dictionary_size</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">char</span> *<a href="#duckdb_enum_dictionary_value"><span class="nf">duckdb_enum_dictionary_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_list_type_child_type"><span class="nf">duckdb_list_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
@@ -236,7 +236,7 @@ Returns the return_type of the given result, or DUCKDB_RETURN_TYPE_INVALID on er
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_result_type</span> <span class="nv">duckdb_result_return_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_result_type</span> <span class="nv">duckdb_result_return_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
@@ -366,7 +366,7 @@ Create a `duckdb_time_tz` object from micros and a timezone offset.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_time_tz</span> <span class="nv">duckdb_create_time_tz</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_tz</span> <span class="nv">duckdb_create_time_tz</span>(<span class="nv">
 </span>  <span class="kt">int64_t</span> <span class="nv">micros</span>,<span class="nv">
 </span>  <span class="kt">int32_t</span> <span class="nv">offset
 </span>);
@@ -398,8 +398,8 @@ Use `duckdb_from_time` to further decompose the micros into hour, minute, second
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_time_tz_struct</span> <span class="nv">duckdb_from_time_tz</span>(<span class="nv">
-</span>  <span class="nv">duckdb_time_tz</span> <span class="nv">micros
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_tz_struct</span> <span class="nv">duckdb_from_time_tz</span>(<span class="nv">
+</span>  <span class="kt">duckdb_time_tz</span> <span class="nv">micros
 </span>);
 </code></pre></div></div>
 
@@ -587,7 +587,7 @@ If the conversion fails because the double value is too big, or the width/scale 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_decimal</span> <span class="nv">duckdb_double_to_decimal</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_decimal</span> <span class="nv">duckdb_double_to_decimal</span>(<span class="nv">
 </span>  <span class="kt">double</span> <span class="nv">val</span>,<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">scale
@@ -616,7 +616,7 @@ Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` colum
 
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_decimal_to_double</span>(<span class="nv">
-</span>  <span class="nv">duckdb_decimal</span> <span class="nv">val
+</span>  <span class="kt">duckdb_decimal</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
@@ -645,7 +645,7 @@ This should not be used with `DUCKDB_TYPE_DECIMAL`.
 
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_logical_type</span>(<span class="nv">
-</span>  <span class="nv">duckdb_type</span> <span class="nv">type
+</span>  <span class="kt">duckdb_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -915,7 +915,7 @@ Retrieves the enum type class of a `duckdb_logical_type`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_get_type_id</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_get_type_id</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
@@ -993,7 +993,7 @@ Retrieves the internal storage type of a decimal type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_decimal_internal_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_decimal_internal_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
@@ -1019,7 +1019,7 @@ Retrieves the internal storage type of an enum type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_enum_internal_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_enum_internal_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>

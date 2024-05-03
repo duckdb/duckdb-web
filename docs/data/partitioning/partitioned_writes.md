@@ -43,12 +43,15 @@ By default the partitioned write will not allow overwriting existing directories
 ### Filename Pattern
 
 By default, files will be named `data_0.parquet` or `data_0.csv`. With the flag `FILENAME_PATTERN` a pattern with `{i}` or `{uuid}` can be defined to create specific filenames:
+
 * `{i}` will be replaced by an index
 * `{uuid}` will be replaced by a 128 bits long UUID
 
 ```sql
 -- write a table to a Hive partitioned data set of .parquet files, with an index in the filename
-COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "orders_{i}");
+COPY orders TO 'orders'
+    (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "orders_{i}");
 -- write a table to a Hive partitioned data set of .parquet files, with unique filenames
-COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "file_{uuid}");
+COPY orders TO 'orders'
+    (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "file_{uuid}");
 ```

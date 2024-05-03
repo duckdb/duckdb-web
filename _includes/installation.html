@@ -84,10 +84,14 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 
 	<div class="stable python">
 		{% highlight bash %}pip install duckdb --upgrade{% endhighlight %}
+		<br/><br/>
+		On Windows, the DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist">Microsoft Visual C++ Redistributable</a>.
 	</div>
 
 	<div class="stable r">
 		{% highlight r %}install.packages("duckdb"){% endhighlight %}
+		<br/><br/>
+		On aarch64, if the DuckDB R package does not successfully compile, you may need to <a href="https://duckdb.org/docs/dev/building/troubleshooting#building-the-r-package-on-linux-aarch64">change your R environment's Make variables</a>.
 	</div>
 
 	<div class="stable java package_manager">
@@ -237,10 +241,14 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 
 	<div class="main python">
 		{% highlight bash %}pip install duckdb --pre --upgrade{% endhighlight %}
+		<br/><br/>
+		On Windows, the DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist">Microsoft Visual C++ Redistributable</a>.
 	</div>
 
 	<div class="main r">
 		{% highlight r %}install.packages('duckdb', repos=c('https://duckdb.r-universe.dev', 'https://cloud.r-project.org')){% endhighlight %}
+		<br/><br/>
+		On aarch64, if the DuckDB R package does not successfully compile, you may need to <a href="https://github.com/duckdb/duckdb/issues/3049">change your R environment's make variables</a>.
 	</div>
 
 	<div class="main java package_manager">

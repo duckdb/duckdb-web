@@ -112,7 +112,7 @@ CREATE MACRO my_macro(a, b := 42) AS (a + b);
 SELECT my_macro(32, 52);
 ```
 
-```text
+```console
 Error: Binder Error: Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
 LINE 1: SELECT my_macro(32, 52);
                ^
@@ -122,6 +122,6 @@ LINE 1: SELECT my_macro(32, 52);
 
 If a `MACRO` is defined as a subquery, it cannot be invoked in a table function. DuckDB will return the following error:
 
-```text
+```console
 Binder Error: Table function cannot contain subqueries
 ```

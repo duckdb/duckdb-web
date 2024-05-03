@@ -113,8 +113,11 @@ If we create a conflict (i.e., we have both a schema and a catalog with the same
 ```sql
 CREATE SCHEMA new_db;
 CREATE TABLE new_db.tbl (i INTEGER);
--- Error: Binder Error: Ambiguous reference to catalog or schema "new_db" -
--- use a fully qualified path like "memory.new_db"
+```
+
+```console
+Error: Binder Error: Ambiguous reference to catalog or schema "new_db" -
+use a fully qualified path like "memory.new_db"
 ```
 
 ### Changing the Catalog Search Path

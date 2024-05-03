@@ -26,8 +26,12 @@ sudo yum install unixODBC
 
 1. Download the ODBC Linux Asset corresponding to your architecture:
 
+   <!-- markdownlint-disable MD034 -->
+
    * [x86_64 (AMD64)](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip)
    * [arm64](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-aarch64.zip)
+
+   <!-- markdownlint-enable MD034 -->
 
 2. The package contains the following files:
 
@@ -79,7 +83,7 @@ sudo yum install unixODBC
 
 4. The ODBC setup on Linux is based on the `.odbc.ini` and `.odbcinst.ini` files.
 
-   These files can be placed to the user home directory `/home/⟨user⟩` (shortcut as `~`) or in the system `/etc` directory.
+   These files can be placed to the user home directory `/home/⟨username⟩` or in the system `/etc` directory.
    The Driver Manager prioritizes the user configuration files over the system files.
 
    For the details of the configuration parameters, see the [ODBC configuration page](configuration).

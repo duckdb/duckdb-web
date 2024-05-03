@@ -63,7 +63,7 @@ UPDATE tbl
   WHERE i = 1;
 ```
 
-```text
+```console
 Constraint Error: Duplicate key "i: 1" violates primary key constraint.
 If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
 ```
@@ -84,4 +84,3 @@ SELECT [union_value(num := 2), union_value(str := 'ABC')::UNION(str VARCHAR, num
 ## Performance Implications
 
 The choice of data types can have a strong effect on performance. Please consult the [Performance Guide](../../guides/performance/schema) for details.
-
