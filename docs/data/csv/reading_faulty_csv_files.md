@@ -67,12 +67,12 @@ The CSV Rejects Table returns the following information:
 
 | Column name | Description | Type |
 |:--|:-----|:-|
-| `file` | File path.| `VARCHAR` |
-| `line` | Line number, from the CSV File, where the error occured.| `INTEGER` |
-| `column` | Column number, from the CSV File, where the error occured.| `INTEGER` |
-| `column_name` | Column name, from the CSV File, where the error occured.| `VARCHAR` |
-| `parsed_value` | The value, where the casting error happened, in a string format.| `VARCHAR` |
-| `recovery_columns` | An optional primary key of the CSV File.| `STRUCT {NAME: VALUE}` |
+| `file` | File path. | `VARCHAR` |
+| `line` | Line number, from the CSV File, where the error occured. | `INTEGER` |
+| `column` | Column number, from the CSV File, where the error occured. | `INTEGER` |
+| `column_name` | Column name, from the CSV File, where the error occured. | `VARCHAR` |
+| `parsed_value` | The value, where the casting error happened, in a string format. | `VARCHAR` |
+| `recovery_columns` | An optional primary key of the CSV File. | `STRUCT {NAME: VALUE}` |
 | `error` | Exact error encountered by the parser. | `VARCHAR` |
 
 ## Parameters
@@ -83,9 +83,9 @@ The parameters listed below are used in the `read_csv` function to configure the
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
-| `rejects_table` | Name of a temporary table where the information of the faulty lines of a CSV file are stored.| `VARCHAR` | (empty) |
-| `rejects_limit` | Upper limit on the number of faulty records from a CSV file that will be recorded in the rejects table. 0 is used when no limit should be applied.| `BIGINT` | 0 |
-| `rejects_recovery_columns` | Column values that serve as a primary key to the CSV file. The are stored in the CSV Rejects Table to help identify the faulty tuples.| `VARCHAR[]` | (empty) |
+| `rejects_table` | Name of a temporary table where the information of the faulty lines of a CSV file are stored. | `VARCHAR` | (empty) |
+| `rejects_limit` | Upper limit on the number of faulty records from a CSV file that will be recorded in the rejects table. 0 is used when no limit should be applied. | `BIGINT` | 0 |
+| `rejects_recovery_columns` | Column values that serve as a primary key to the CSV file. The are stored in the CSV Rejects Table to help identify the faulty tuples. | `VARCHAR[]` | (empty) |
 
 To store the information of the faulty CSV lines in a rejects table, the user must simply provide the rejects table name in the`rejects_table` option. For example:
 
