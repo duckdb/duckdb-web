@@ -4,7 +4,7 @@ title: Substrait Extension
 github_repository: https://github.com/duckdb/substrait
 ---
 
-The main goal of the `substrait` extension is to support both production and consumption of Substrait query plans in DuckDB.
+The main goal of the `substrait` extension is to support both production and consumption of [Substrait](https://substrait.io/) query plans in DuckDB.
 
 This extension is mainly exposed via 3 different APIs – the SQL API, the Python API, and the R API.
 Here we depict how to consume and produce Substrait query plans in each API.
