@@ -85,7 +85,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `names` | The column names as a list, see [example](tips#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
 | `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | `VARCHAR` | (empty) |
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
-| `null_padding` | If this option is enabled, when a row lacks columns, it will pad the remaining columns on the right with null values.| `BOOL` | `false` |
+| `null_padding` | If this option is enabled, when a row lacks columns, it will pad the remaining columns on the right with null values. | `BOOL` | `false` |
 | `nullstr` | Specifies the string that represents a `NULL` value or (since v0.10.2) a list of strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
 | `parallel` | Whether or not the parallel CSV reader is used. | `BOOL` | `true` |
 | `quote` | Specifies the quoting string to be used when a data value is quoted. | `VARCHAR` | `"` |
@@ -172,11 +172,11 @@ SELECT * FROM ontime;
 
 <div class="narrow_table"></div>
 
-|flightdate|uniquecarrier| origincityname  | destcityname  |
-|----------|-------------|-----------------|---------------|
-|1988-01-01|AA           |New York, NY     |Los Angeles, CA|
-|1988-01-02|AA           |New York, NY     |Los Angeles, CA|
-|1988-01-03|AA           |New York, NY     |Los Angeles, CA|
+| flightdate | uniquecarrier | origincityname |  destcityname   |
+|------------|---------------|----------------|-----------------|
+| 1988-01-01 | AA            | New York, NY   | Los Angeles, CA |
+| 1988-01-02 | AA            | New York, NY   | Los Angeles, CA |
+| 1988-01-03 | AA            | New York, NY   | Los Angeles, CA |
 
 If we want to manually specify the CSV format, we can do so using the configuration options of `COPY`.
 

@@ -89,7 +89,7 @@ The table below shows the available general aggregate functions.
 | `product(arg)` | Calculates the product of all tuples in `arg`. | `product(A)` | - |
 | `string_agg(arg, sep)` | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). | `string_agg(S, ',')` | `group_concat(arg, sep)`, `listagg(arg, sep)` |
 | `sum(arg)` | Calculates the sum value for all tuples in `arg`. | `sum(A)` | - |
-| `sum_no_overflow(arg)` | Calculates the sum value for all tuples in `arg` without [overflow](https://en.wikipedia.org/wiki/Integer_overflow) checks. Unlike `sum`, which works on floating-point values, `sum_no_overflow` only accepts `INTEGER` and `DECIMAL` values.| `sum_no_overflow(A)` | - |
+| `sum_no_overflow(arg)` | Calculates the sum value for all tuples in `arg` without [overflow](https://en.wikipedia.org/wiki/Integer_overflow) checks. Unlike `sum`, which works on floating-point values, `sum_no_overflow` only accepts `INTEGER` and `DECIMAL` values. | `sum_no_overflow(A)` | - |
 
 ## Approximate Aggregates
 
@@ -123,7 +123,7 @@ The table below shows the available statistical aggregate functions.
 | `regr_count(y, x)` | Returns the number of non-null number pairs in a group. | `(sum(x*y) - sum(x) * sum(y) / count(*)) / count(*)` | - |
 | `regr_intercept(y, x)` | Returns the intercept of the univariate linear regression line for non-null pairs in a group. | `avg(y) - regr_slope(y, x) * avg(x)` | - |
 | `regr_r2(y, x)` | Returns the coefficient of determination for non-null pairs in a group. | - | - |
-| `regr_slope(y, x)` | Returns the slope of the linear regression line for non-null pairs in a group.| `covar_pop(x, y) / var_pop(x)` | - |
+| `regr_slope(y, x)` | Returns the slope of the linear regression line for non-null pairs in a group. | `covar_pop(x, y) / var_pop(x)` | - |
 | `regr_sxx(y, x)` | -  | `regr_count(y, x) * var_pop(x)` | - |
 | `regr_sxy(y, x)` | Returns the population covariance of input values. | `regr_count(y, x) * covar_pop(y, x)` | - |
 | `regr_syy(y, x)` | - | `regr_count(y, x) * var_pop(y)` | - |
