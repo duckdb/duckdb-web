@@ -36,5 +36,5 @@ COPY (SELECT * FROM tbl) TO 'output.xlsx' WITH (FORMAT GDAL, DRIVER 'xlsx');
 
 ## See Also
 
-DuckDB can also [import Export files](excel_import).
+DuckDB can also [import Excel files](excel_import).
 For additional details, see the [spatial extension page](../../extensions/spatial) and the [GDAL XLSX driver page](https://gdal.org/drivers/vector/xlsx.html).
