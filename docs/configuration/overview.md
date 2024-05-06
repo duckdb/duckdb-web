@@ -133,6 +133,7 @@ Configuration options come with different default [scopes](../sql/statements/set
 
 |                 Name                 |                                                                       Description                                                                       |   Type    |  Default value  |
 |----|--------|--|---|
+| `enable_http_logging`                | Enables HTTP logging                                                                                                                                    | `BOOLEAN` | `false`         |
 | `enable_profiling`                   | Enables profiling, and sets the output format (**JSON**, **QUERY_TREE**, **QUERY_TREE_OPTIMIZER**)                                                      | `VARCHAR` | `NULL`          |
 | `enable_progress_bar_print`          | Controls the printing of the progress bar, when 'enable_progress_bar' is true                                                                           | `BOOLEAN` | `true`          |
 | `enable_progress_bar`                | Enables the progress bar, printing progress to the terminal for long queries                                                                            | `BOOLEAN` | `false`         |
@@ -140,6 +141,7 @@ Configuration options come with different default [scopes](../sql/statements/set
 | `explain_output`                     | Output of EXPLAIN statements (**ALL**, **OPTIMIZED_ONLY**, **PHYSICAL_ONLY**)                                                                           | `VARCHAR` | `physical_only` |
 | `file_search_path`                   | A comma separated list of directories to search for input files                                                                                         | `VARCHAR` |                 |
 | `home_directory`                     | Sets the home directory used by the system                                                                                                              | `VARCHAR` |                 |
+| `http_logging_output`                | The file to which HTTP logging output should be saved, or empty to print to the terminal                                                                | `VARCHAR` |                 |
 | `integer_division`                   | Whether or not the / operator defaults to integer division, or to floating point division                                                               | `BOOLEAN` | `false`         |
 | `log_query_path`                     | Specifies the path to which queries should be logged (default: NULL, queries are not logged)                                                            | `VARCHAR` | `NULL`          |
 | `max_expression_depth`               | The maximum expression depth limit in the parser. WARNING: increasing this setting and using very deep expressions might lead to stack overflow errors. | `UBIGINT` | `1000`          |
