@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Blob Functions
+redirect_from:
+  - docs/test/functions/blob
 ---
 
 This section describes functions and operators for examining and manipulating blob values.

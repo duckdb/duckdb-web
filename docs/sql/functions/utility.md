@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Utility Functions
+redirect_from:
+  - docs/test/functions/utility
 ---
 
 ## Scalar Utility Functions
