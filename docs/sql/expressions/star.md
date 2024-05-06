@@ -96,6 +96,28 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 | 4  | 40     |
 | 6  | NULL   |
 
+`COLUMNS` expressions can also be used in `WHERE` clauses. Here, the generated columns are combined using `AND`.
+
+```sql
+SELECT 
+    *
+FROM (
+    VALUES
+        (0, 0, 0),
+        (1, 2, 3),
+        (5, 5, 5)
+)
+WHERE
+    COLUMNS(*) > 1
+;
+```
+
+<div class="narrow_table"></div>
+
+| col0 | col1 | col2 |
+|------|------|------|
+| 5    | 5    | 5    |
+
 
 ## COLUMNS Regular Expression
 
