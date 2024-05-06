@@ -103,7 +103,7 @@ SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth
 
 ### Keeping track of the index
 
-To keep track of each entry's position within the original list or struct, `unnest` may be combined with `generate_subscripts`:
+To keep track of each entry's position within the original list, `unnest` may be combined with [`generate_subscripts`](../functions/nested#generate_subscripts):
 
 ```sql
 SELECT unnest(l) as x, generate_subscripts(l, 1) AS index FROM (VALUES ([1, 2, 3]), ([4, 5])) tbl(l);
