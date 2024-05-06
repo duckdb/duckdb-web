@@ -2794,6 +2794,18 @@
     "result": "1992-04-15 07:00:00"
   },
   {
+    "struct": "TimeTZSortKeyFun",
+    "name": "timetz_byte_comparable",
+    "parameters": [
+      "time_tz"
+    ],
+    "description": "Converts a TIME WITH TIME ZONE to an integer sort key",
+    "example": "timetz_byte_comparable('18:18:16.21-07:00'::TIME_TZ)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": null
+  },
+  {
     "name": "timezone",
     "parameters": [
       "ts"
@@ -2951,6 +2963,17 @@
     "type": "scalar_function",
     "category": "date",
     "result": "5 months"
+  },
+  {
+    "name": "to_quarters",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a quarter interval",
+    "example": "to_quarters(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "1 year 3 months"
   },
   {
     "name": "to_seconds",
@@ -3211,7 +3234,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.10.3-dev415"
+    "result": "v0.10.3-dev777"
   },
   {
     "name": "week",
