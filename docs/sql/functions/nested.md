@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Nested Functions
+redirect_from:
+  - docs/test/functions/nested
 ---
 
 This section describes functions and operators for examining and manipulating nested values. There are five [nested data types](../data_types/overview#nested--composite-types):

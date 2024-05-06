@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Enum Functions
+redirect_from:
+  - docs/test/functions/enum
 ---
 
 This section describes functions and operators for examining and manipulating `ENUM` values.
