@@ -173,7 +173,7 @@ Firstly, you will need to install vcpkg:
 ```bash
 git clone https://github.com/Microsoft/vcpkg.git
 ./vcpkg/bootstrap-vcpkg.sh
-export vcpkg_TOOLCHAIN_PATH=`pwd`/vcpkg/scripts/buildsystems/vcpkg.cmake
+export VCPKG_TOOLCHAIN_PATH=`pwd`/vcpkg/scripts/buildsystems/vcpkg.cmake
 ```
 
 Then, you create a GitHub repository based on [the template](https://github.com/duckdb/extension-template) by clicking “Use this
