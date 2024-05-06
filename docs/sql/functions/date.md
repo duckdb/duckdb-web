@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Date Functions
+redirect_from:
+  - docs/test/functions/date
 ---
 
 This section describes functions and operators for examining and manipulating date values.

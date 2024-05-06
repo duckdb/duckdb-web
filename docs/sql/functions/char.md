@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Text Functions
+redirect_from:
+  - docs/test/functions/char
 ---
 
 ## Text Functions and Operators

@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Bitstring Functions
+redirect_from:
+  - docs/test/functions/bitstring
 ---
 
 This section describes functions and operators for examining and manipulating bit values.
