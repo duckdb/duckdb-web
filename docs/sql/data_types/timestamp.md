@@ -19,7 +19,7 @@ DuckDB represents instants as the number of microseconds (µs) since `1970-01-01
 
 A timestamp specifies a combination of [`DATE`](date) (year, month, day) and a [`TIME`](time) (hour, minute, second, microsecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]`). Decimal places beyond the targeted sub-second precision are ignored.
 
-> Warning When defining timestamps using a `TIMESTAMP_NS` literal, the decimal places beyond _microseconds_ are ignored. Note that the `TIMESTAMP_NS` type is able to hold nanoseconds when created e.g. via ingestion the ingestion of Parquet files.
+> Warning When defining timestamps using a `TIMESTAMP_NS` literal, the decimal places beyond _microseconds_ are ignored. Note that the `TIMESTAMP_NS` type is able to hold nanoseconds when created e.g. via the ingestion of Parquet files.
 
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789'; -- 1992-09-20 11:30:00.123456
