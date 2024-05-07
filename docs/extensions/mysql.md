@@ -22,7 +22,7 @@ LOAD mysql;
 
 ## Reading Data from MySQL
 
-To make a MySQL database accessible to DuckDB use the `ATTACH` command:
+To make a MySQL database accessible to DuckDB use the `ATTACH` command with the `MYSQL` or the `MYSQL_SCANNER` type:
 
 ```sql
 ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE MYSQL);
@@ -85,7 +85,7 @@ This allows you to use DuckDB to, for example, export data that is stored in a M
 Below is a brief example of how to create a new table in MySQL and load data into it.
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL_SCANNER);
+ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL);
 CREATE TABLE mysql_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO mysql_db.tbl VALUES (42, 'DuckDB');
 ```
@@ -94,7 +94,7 @@ Many operations on MySQL tables are supported. All these operations directly mod
 Note that if modifications are not desired, `ATTACH` can be run with the `READ_ONLY` property which prevents making modifications to the underlying database. For example:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL_SCANNER, READ_ONLY);
+ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL, READ_ONLY);
 ```
 
 ## Supported Operations
