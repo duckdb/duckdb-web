@@ -822,12 +822,21 @@ These functions are used to measure the similarity of two strings using various 
 
 The `format(format, parameters...)` function formats strings, loosely following the syntax of the [{fmt} open-source formatting library](https://fmt.dev/latest/syntax.html).
 
+Format without additional parameters:
+
 ```sql
--- Format without additional parameters
 SELECT format('Hello world'); -- Hello world
--- Format a string using {}
+```
+
+Format a string using {}:
+
+```sql
 SELECT format('The answer is {}', 42); -- The answer is 42
--- Format a string using positional arguments
+```
+
+Format a string using positional arguments:
+
+```sql
 SELECT format('I''d rather be {1} than {0}.', 'right', 'happy'); -- I'd rather be happy than right.
 ```
 
@@ -847,24 +856,53 @@ SELECT format('I''d rather be {1} than {0}.', 'right', 'happy'); -- I'd rather b
 
 #### Formatting Types
 
+Integers:
+
 ```sql
--- Integers
 SELECT format('{} + {} = {}', 3, 5, 3 + 5); -- 3 + 5 = 8
--- Booleans
+```
+
+Booleans:
+
+```sql
 SELECT format('{} != {}', true, false); -- true != false
--- Format datetime values
+```
+
+Format datetime values:
+
+```sql
 SELECT format('{}', DATE '1992-01-01'); -- 1992-01-01
 SELECT format('{}', TIME '12:01:00'); -- 12:01:00
 SELECT format('{}', TIMESTAMP '1992-01-01 12:01:00'); -- 1992-01-01 12:01:00
--- Format BLOB
+```
+
+Format BLOB:
+
+```sql
 SELECT format('{}', BLOB '\x00hello'); -- \x00hello
--- Pad integers with 0s
+```
+
+Pad integers with 0s:
+
+```sql
 SELECT format('{:04d}', 33); -- 0033
--- Create timestamps from integers
+```
+
+Create timestamps from integers:
+
+```sql
 SELECT format('{:02d}:{:02d}:{:02d} {}', 12, 3, 16, 'AM'); -- 12:03:16 AM
--- Convert to hexadecimal
+```
+
+Convert to hexadecimal:
+
+```sql
 SELECT format('{:x}', 123_456_789); -- 75bcd15
--- Convert to binary
+```
+
+Convert to binary:
+
+```sql
 SELECT format('{:b}', 123_456_789); -- 111010110111100110100010101
 ```
 
@@ -883,23 +921,31 @@ SELECT format('{:tX}', 123_456_789); -- 123X456X789
 
 The `printf(format, parameters...)` function formats strings using the [`printf` syntax](https://cplusplus.com/reference/cstdio/printf/).
 
+Format without additional parameters:
+
 ```sql
--- Format without additional parameters
 SELECT printf('Hello world');
--- output: Hello world
+
+```text
+Hello world
 ```
 
+Format a string using arguments in a given order:
+
 ```sql
--- Format a string using arguments in a given order
 SELECT printf('The answer to %s is %d', 'life', 42);
--- output: The answer to life is 42
+
+```text
+The answer to life is 42
 ```
 
+Format a string using positional arguments '%position$formatter', e.g., the second parameter as a string is encoded as '%2$s':
+
 ```sql
--- Format a string using positional arguments '%position$formatter',
--- e.g., the second parameter as a string is encoded as '%2$s'
 SELECT printf('I''d rather be %2$s than %1$s.', 'right', 'happy');
--- output: I'd rather be happy than right.
+
+```text
+I'd rather be happy than right.
 ```
 
 #### Format Specifiers
@@ -922,24 +968,53 @@ SELECT printf('I''d rather be %2$s than %1$s.', 'right', 'happy');
 
 #### Formatting Types
 
+Integers:
+
 ```sql
--- Integers
 SELECT printf('%d + %d = %d', 3, 5, 3 + 5); -- 3 + 5 = 8
--- Booleans
+```
+
+Booleans:
+
+```sql
 SELECT printf('%s != %s', true, false); -- true != false
--- Format datetime values
+```
+
+Format datetime values:
+
+```sql
 SELECT printf('%s', DATE '1992-01-01'); -- 1992-01-01
 SELECT printf('%s', TIME '12:01:00'); -- 12:01:00
 SELECT printf('%s', TIMESTAMP '1992-01-01 12:01:00'); -- 1992-01-01 12:01:00
--- Format BLOB
+```
+
+Format BLOB:
+
+```sql
 SELECT printf('%s', BLOB '\x00hello'); -- \x00hello
--- Pad integers with 0s
+```
+
+Pad integers with 0s:
+
+```sql
 SELECT printf('%04d', 33); -- 0033
--- Create timestamps from integers
+```
+
+Create timestamps from integers:
+
+```sql
 SELECT printf('%02d:%02d:%02d %s', 12, 3, 16, 'AM'); -- 12:03:16 AM
--- Convert to hexadecimal
+```
+
+Convert to hexadecimal:
+
+```sql
 SELECT printf('%x', 123_456_789); -- 75bcd15
--- Convert to binary
+```
+
+Convert to binary:
+
+```sql
 SELECT printf('%b', 123_456_789); -- 111010110111100110100010101
 ```
 

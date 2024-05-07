@@ -35,7 +35,6 @@ USE sakila;
 
 The tables in the file can be read as if they were normal DuckDB tables, but the underlying data is read directly from the SQLite tables in the file at query time.
 
-
 ```sql
 SHOW TABLES;
 ```

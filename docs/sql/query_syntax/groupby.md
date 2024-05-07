@@ -24,15 +24,17 @@ See the [`GROUPING SETS`](../../sql/query_syntax/grouping_sets) page for more in
 
 ## Examples
 
+Count the number of entries in the "addresses" table that belong to each different city:
+
 ```sql
--- count the number of entries in the "addresses" table that belong to each different city
 SELECT city, count(*)
 FROM addresses
 GROUP BY city;
 ```
 
+Compute the average income per city per street_name:
+
 ```sql
--- compute the average income per city per street_name
 SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY city, street_name;
@@ -40,21 +42,23 @@ GROUP BY city, street_name;
 
 ### `GROUP BY ALL` Examples
 
+Group by city and street_name to remove any duplicate values:
+
 ```sql
--- Group by city and street_name to remove any duplicate values
 SELECT city, street_name
 FROM addresses
 GROUP BY ALL;
--- GROUP BY city, street_name
 ```
 
+GROUP BY city, street_name:
+
+Compute the average income per city per street_name. Since income is wrapped in an aggregate function, do not include it in the `GROUP BY`:
+
 ```sql
--- compute the average income per city per street_name
--- Since income is wrapped in an aggregate function, do not include it in the GROUP BY
 SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY ALL;
--- GROUP BY city, street_name
+-- GROUP BY city, street_name:
 ```
 
 ## Syntax

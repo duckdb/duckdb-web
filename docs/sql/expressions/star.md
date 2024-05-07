@@ -6,18 +6,39 @@ railroad: expressions/star.js
 
 ## Examples
 
+Select all columns present in the `FROM` clause:
+
 ```sql
--- select all columns present in the FROM clause
 SELECT * FROM table_name;
--- select all columns from the table called "table_name"
+```
+
+Select all columns from the table called `table_name`:
+
+```sql
 SELECT table_name.* FROM table_name JOIN other_table_name USING (id);
--- select all columns except the city column from the addresses table
+```
+
+Select all columns except the city column from the addresses table:
+
+```sql
 SELECT * EXCLUDE (city) FROM addresses;
--- select all columns from the addresses table, but replace city with lower(city)
+```
+
+Select all columns from the addresses table, but replace city with `lower(city)`:
+
+```sql
 SELECT * REPLACE (lower(city) AS city) FROM addresses;
--- select all columns matching the given expression
+```
+
+Select all columns matching the given expression:
+
+```sql
 SELECT COLUMNS(c -> c LIKE '%num%') FROM addresses;
--- select all columns matching the given regex from the table
+```
+
+Select all columns matching the given regex from the table:
+
+```sql
 SELECT COLUMNS('number\d+') FROM addresses;
 ```
 
@@ -107,8 +128,7 @@ FROM (
     UNION ALL
     SELECT 2 AS x, 3 AS y, 4 AS z
 )
-WHERE COLUMNS(*) > 1;
--- equivalent to: x > 1 AND y > 1 AND z > 1
+WHERE COLUMNS(*) > 1; -- equivalent to: x > 1 AND y > 1 AND z > 1
 ```
 
 <div class="narrow_table"></div>
@@ -171,8 +191,9 @@ The `*` expression can also be used to retrieve all keys from a struct as separa
 This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys.
 See the [`STRUCT` data type](../data_types/struct) and [nested functions](../functions/nested) pages for more details on working with structs.
 
+For example:
+
 ```sql
--- All keys within a struct can be returned as separate columns using *
 SELECT st.* FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS st);
 ```
 

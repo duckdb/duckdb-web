@@ -8,44 +8,95 @@ redirect_from:
 
 ## Examples
 
-```sql
--- read a single Parquet file
-SELECT * FROM 'test.parquet';
--- figure out which columns/types are in a Parquet file
-DESCRIBE SELECT * FROM 'test.parquet';
--- create a table from a Parquet file
-CREATE TABLE test AS SELECT * FROM 'test.parquet';
--- if the file does not end in ".parquet", use the read_parquet function
-SELECT * FROM read_parquet('test.parq');
--- use list parameter to read 3 Parquet files and treat them as a single table
-SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
--- read all files that match the glob pattern
-SELECT * FROM 'test/*.parquet';
--- read all files that match the glob pattern, and include a "filename" column
--- that specifies which file each row came from
-SELECT * FROM read_parquet('test/*.parquet', filename = true);
--- use a list of globs to read all Parquet files from 2 specific folders
-SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
--- read over https
-SELECT * FROM read_parquet('https://some.url/some_file.parquet');
--- query the metadata of a Parquet file
-SELECT * FROM parquet_metadata('test.parquet');
--- query the schema of a Parquet file
-SELECT * FROM parquet_schema('test.parquet');
+Read a single Parquet file:
 
--- write the results of a query to a Parquet file using the default compression (Snappy)
+```sql
+SELECT * FROM 'test.parquet';
+```
+
+Figure out which columns/types are in a Parquet file:
+
+```sql
+DESCRIBE SELECT * FROM 'test.parquet';
+```
+
+Create a table from a Parquet file:
+
+```sql
+CREATE TABLE test AS SELECT * FROM 'test.parquet';
+```
+
+If the file does not end in `.parquet`, use the `read_parquet` function:
+
+```sql
+SELECT * FROM read_parquet('test.parq');
+```
+
+Use list parameter to read three Parquet files and treat them as a single table:
+
+```sql
+SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
+```
+
+Read all files that match the glob pattern:
+
+```sql
+SELECT * FROM 'test/*.parquet';
+```
+
+Read all files that match the glob pattern, and include a `filename` column:
+
+That specifies which file each row came from:
+
+```sql
+SELECT * FROM read_parquet('test/*.parquet', filename = true);
+```
+
+Use a list of globs to read all Parquet files from two specific folders:
+
+```sql
+SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
+```
+
+Read over https:
+
+```sql
+SELECT * FROM read_parquet('https://some.url/some_file.parquet');
+```
+
+Query the metadata of a Parquet file:
+
+```sql
+SELECT * FROM parquet_metadata('test.parquet');
+```
+
+Query the schema of a Parquet file:
+
+```sql
+SELECT * FROM parquet_schema('test.parquet');
+```
+
+Write the results of a query to a Parquet file using the default compression (Snappy):
+
+```sql
 COPY
     (SELECT * FROM tbl)
     TO 'result-snappy.parquet'
     (FORMAT 'parquet');
+```
 
--- write the results from a query to a Parquet file with specific compression and row group size
+Write the results from a query to a Parquet file with specific compression and row group size:
+
+```sql
 COPY
     (FROM generate_series(100_000))
     TO 'test.parquet'
     (FORMAT 'parquet', COMPRESSION 'zstd', ROW_GROUP_SIZE 100_000);
+```
 
--- export the table contents of the entire database as parquet
+Export the table contents of the entire database as parquet:
+
+```sql
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
@@ -62,7 +113,7 @@ Parquet files are compressed columnar files that are efficient to load and proce
 | `read_parquet(path_or_list_of_paths)` | Read Parquet file(s)     | `SELECT * FROM read_parquet('test.parquet');` |
 | `parquet_scan(path_or_list_of_paths)` | Alias for `read_parquet` | `SELECT * FROM parquet_scan('test.parquet');` |
 
-If your file ends in `.parquet`, the function syntax is optional. The system will automatically infer that you are reading a Parquet file.
+If your file ends in `.parquet`, the function syntax is optional. The system will automatically infer that you are reading a Parquet file:
 
 ```sql
 SELECT * FROM 'test.parquet';
@@ -93,78 +144,98 @@ Filter and projection pushdown provide significant performance benefits. See [ou
 
 ## Inserts and Views
 
-You can also insert the data into a table or create a table from the Parquet file directly. This will load the data from the Parquet file and insert it into the database.
+You can also insert the data into a table or create a table from the Parquet file directly. This will load the data from the Parquet file and insert it into the database:
+
+Insert the data from the Parquet file in the table:
 
 ```sql
--- insert the data from the Parquet file in the table
 INSERT INTO people SELECT * FROM read_parquet('test.parquet');
--- create a table directly from a Parquet file
+```
+
+Create a table directly from a Parquet file:
+
+```sql
 CREATE TABLE people AS SELECT * FROM read_parquet('test.parquet');
 ```
 
-If you wish to keep the data stored inside the Parquet file, but want to query the Parquet file directly, you can create a view over the `read_parquet` function. You can then query the Parquet file as if it were a built-in table.
+If you wish to keep the data stored inside the Parquet file, but want to query the Parquet file directly, you can create a view over the `read_parquet` function. You can then query the Parquet file as if it were a built-in table:
+
+Create a view over the Parquet file:
 
 ```sql
--- create a view over the Parquet file
 CREATE VIEW people AS SELECT * FROM read_parquet('test.parquet');
--- query the Parquet file
+```
+
+Query the Parquet file:
+
+```sql
 SELECT * FROM people;
 ```
 
 ## Writing to Parquet Files
 
-DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [`COPY` Statement page](../../sql/statements/copy) for details, including all possible parameters for the `COPY` statement.
+DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [`COPY` Statement page](../../sql/statements/copy) for details, including all possible parameters for the `COPY` statement:
+
+Write a query to a snappy compressed Parquet file:
 
 ```sql
--- write a query to a snappy compressed Parquet file
 COPY
     (SELECT * FROM tbl)
     TO 'result-snappy.parquet'
     (FORMAT 'parquet');
 ```
 
+Write `tbl` to a zstd-compressed Parquet file:
+
 ```sql
--- write "tbl" to a zstd compressed Parquet file
 COPY tbl
     TO 'result-zstd.parquet'
     (FORMAT 'parquet', CODEC 'zstd');
 ```
 
+Write a CSV file to an uncompressed Parquet file:
+
 ```sql
--- write a CSV file to an uncompressed Parquet file
 COPY
     'test.csv'
     TO 'result-uncompressed.parquet'
     (FORMAT 'parquet', CODEC 'uncompressed');
 ```
 
+Write a query to a Parquet file with zstd-compression (same as `CODEC`) and row group size:
+
 ```sql
--- write a query to a Parquet file with ZSTD compression (same as CODEC) and row_group_size
 COPY
     (FROM generate_series(100_000))
     TO 'row-groups-zstd.parquet'
     (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100_000);
 ```
 
-> LZ4 compression is currently only available in the nightly and source builds.
+> LZ4 compression is currently only available in the nightly and source builds:
+
+Write a CSV file to an `LZ4_RAW`-compressed Parquet file:
 
 ```sql
--- write a CSV file to an LZ4_RAW-compressed Parquet file
 COPY
     (FROM generate_series(100_000))
     TO 'result-lz4.parquet'
     (FORMAT PARQUET, COMPRESSION LZ4);
--- or
+```
+
+Or:
+
+```sql
 COPY
     (FROM generate_series(100_000))
     TO 'result-lz4.parquet'
     (FORMAT PARQUET, COMPRESSION LZ4_RAW);
 ```
 
-DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../../sql/statements/export) for more details.
+DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../../sql/statements/export) for more details:
+
+Export the table contents of the entire database as Parquet:
 
 ```sql
--- export the table contents of the entire database as parquet
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
@@ -174,7 +245,7 @@ DuckDB supports reading and writing [encrypted Parquet files](encryption).
 
 ## Installing and Loading the Parquet Extension
 
-The support for Parquet files is enabled via extension. The `parquet` extension is bundled with almost all clients. However, if your client does not bundle the `parquet` extension, the extension must be installed and loaded separately.
+The support for Parquet files is enabled via extension. The `parquet` extension is bundled with almost all clients. However, if your client does not bundle the `parquet` extension, the extension must be installed and loaded separately:
 
 ```sql
 INSTALL parquet;

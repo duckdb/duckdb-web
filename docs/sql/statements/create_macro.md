@@ -15,38 +15,77 @@ For a table macro, the syntax is similar to a scalar macro except `AS` is replac
 
 ### Scalar Macros
 
+Create a macro that adds two expressions (`a` and `b`):
+
 ```sql
--- create a macro that adds two expressions (a and b)
 CREATE MACRO add(a, b) AS a + b;
--- create a macro for a case expression
+```
+
+Create a macro for a case expression:
+
+```sql
 CREATE MACRO ifelse(a, b, c) AS CASE WHEN a THEN b ELSE c END;
--- create a macro that does a subquery
+```
+
+Create a macro that does a subquery:
+
+```sql
 CREATE MACRO one() AS (SELECT 1);
--- create a macro with a common table expression
+```
+
+Create a macro with a common table expression:
+
+```sql
 -- (parameter names get priority over column names: disambiguate using the table name)
 CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a FROM cte);
--- macros are schema-dependent, and have an alias: FUNCTION
+```
+
+Macros are schema-dependent, and have an alias, `FUNCTION`:
+
+```sql
 CREATE FUNCTION main.my_avg(x) AS sum(x) / count(x);
--- create a macro with default constant parameters
+```
+
+Create a macro with default constant parameters:
+
+```sql
 CREATE MACRO add_default(a, b := 5) AS a + b;
--- create a macro arr_append (with a functionality equivalent to array_append)
+```
+
+Create a macro `arr_append` (with a functionality equivalent to `array_append`):
+
+```sql
 CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
 ```
 
 ### Table Macros
 
+Create a table macro without parameters:
+
 ```sql
--- create a table macro without parameters
 CREATE MACRO static_table() AS TABLE SELECT 'Hello' AS column1, 'World' AS column2;
--- create a table macro with parameters (that can be of any type)
+```
+
+Create a table macro with parameters (that can be of any type):
+
+```sql
 CREATE MACRO dynamic_table(col1_value, col2_value) AS TABLE SELECT col1_value AS column1, col2_value AS column2;
--- Create a table macro that returns multiple rows.
--- It will be replaced if it already exists, and it is temporary (will be automatically deleted when the connection ends)
+```
+
+Create a table macro that returns multiple rows:
+
+It will be replaced if it already exists, and it is temporary (will be automatically deleted when the connection ends):
+
+```sql
 CREATE OR REPLACE TEMP MACRO dynamic_table(col1_value, col2_value) AS TABLE
     SELECT col1_value AS column1, col2_value AS column2
     UNION ALL
     SELECT 'Hello' AS col1_value, 456 AS col2_value;
--- pass an argument as a list: SELECT * FROM get_users([1, 5])
+```
+
+Pass an argument as a list: SELECT * FROM get_users([1, 5]):
+
+```sql
 CREATE MACRO get_users(i) AS TABLE SELECT * FROM users WHERE uid IN (SELECT unnest(i));
 ```
 
@@ -57,48 +96,120 @@ CREATE MACRO get_users(i) AS TABLE SELECT * FROM users WHERE uid IN (SELECT unne
 Macros allow you to create shortcuts for combinations of expressions.
 
 ```sql
--- failure! cannot find column "b"
 CREATE MACRO add(a) AS a + b;
--- this works
-CREATE MACRO add(a, b) AS a + b;
--- error! cannot bind +(VARCHAR, INTEGER)
-SELECT add('hello', 3);
--- success!
-SELECT add(1, 2);
--- 3
 ```
 
-Macros can have default parameters.  Unlike some languages, default parameters must be named
-when the macro is invoked.
+```console
+Binder Error: Referenced column "b" not found in FROM clause!
+```
+
+This works:
 
 ```sql
--- b is a default parameter
-CREATE MACRO add_default(a, b := 5) AS a + b;
--- the following will result in 42
-SELECT add_default(37);
--- error! add_default only has one positional parameter
-SELECT add_default(40, 2);
--- success! default parameters are used by assigning them like so
-SELECT add_default(40, b := 2);
--- error! default parameters must come after positional parameters
-SELECT add_default(b := 2, 40);
--- the order of default parameters does not matter
-CREATE MACRO triple_add(a, b := 5, c := 10) AS a + b + c;
--- success!
-SELECT triple_add(40, c := 1, b := 1);
--- 42
+CREATE MACRO add(a, b) AS a + b;
 ```
+
+Usage example:
+
+```sql
+SELECT add(1, 2) AS x;
+```
+
+| x |
+|--:|
+| 3 |
+
+However, this fais:
+
+```sql
+SELECT add('hello', 3);
+```
+
+```console
+Binder Error: Could not choose a best candidate function for the function call "+(STRING_LITERAL, INTEGER_LITERAL)". In order to select one, please add explicit type casts.
+	Candidate functions:
+	+(DATE, INTEGER) -> DATE
+	+(INTEGER, INTEGER) -> INTEGER
+```
+
+Macros can have default parameters.
+Unlike some languages, default parameters must be named
+when the macro is invoked.
+
+`b` is a default parameter:
+
+```sql
+CREATE MACRO add_default(a, b := 5) AS a + b;
+```
+
+The following will result in 42:
+
+```sql
+SELECT add_default(37);
+```
+
+The following will throw an error:
+
+```sql
+SELECT add_default(40, 2);
+```
+
+```console
+Binder Error: Macro function 'add_default(a)' requires a single positional argument, but 2 positional arguments were provided.
+```
+
+Default parameters must used by assigning them like the following:
+
+```sql
+SELECT add_default(40, b := 2) AS x;
+```
+
+| x  |
+|---:|
+| 42 |
+
+However, the following fails:
+
+```sql
+SELECT add_default(b := 2, 40);
+```
+
+```console
+Binder Error: Positional parameters cannot come after parameters with a default value!
+```
+
+The order of default parameters does not matter:
+
+```sql
+CREATE MACRO triple_add(a, b := 5, c := 10) AS a + b + c;
+```
+
+```sql
+SELECT triple_add(40, c := 1, b := 1) AS x;
+```
+
+| x  |
+|---:|
+| 42 |
 
 When macros are used, they are expanded (i.e., replaced with the original expression), and the parameters within the expanded expression are replaced with the supplied arguments. Step by step:
 
+The `add` macro we defined above is used in a query:
+
 ```sql
--- the 'add' macro we defined above is used in a query
-SELECT add(40, 2);
--- internally, add is replaced with its definition of a + b
-SELECT a + b;
--- then, the parameters are replaced by the supplied arguments
-SELECT 40 + 2;
--- 42
+SELECT add(40, 2) AS x;
+```
+
+Internally, add is replaced with its definition of `a + b`:
+
+```sql
+SELECT a + b; AS x
+```
+
+Then, the parameters are replaced by the supplied arguments:
+
+```sql
+SELECT 40 + 2 AS x;
 ```
 
 ## Limitations
@@ -114,8 +225,6 @@ SELECT my_macro(32, 52);
 
 ```console
 Error: Binder Error: Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
-LINE 1: SELECT my_macro(32, 52);
-               ^
 ```
 
 ### Using Subquery Macros

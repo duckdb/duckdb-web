@@ -11,14 +11,39 @@ It follows the [PostgreSQL syntax](https://www.postgresql.org/docs/16/sql-commen
 
 ```sql
 COMMENT ON TABLE test_table IS 'very nice table';
+```
+
+```sql
 COMMENT ON COLUMN test_table.test_table_column IS 'very nice column';
+```
+
+```sql
 COMMENT ON VIEW test_view IS 'very nice view';
+```
+
+```sql
 COMMENT ON INDEX test_index IS 'very nice index';
+```
+
+```sql
 COMMENT ON SEQUENCE test_sequence IS 'very nice sequence';
+```
+
+```sql
 COMMENT ON TYPE test_type IS 'very nice type';
+```
+
+```sql
 COMMENT ON MACRO test_macro IS 'very nice macro';
+```
+
+```sql
 COMMENT ON MACRO TABLE test_table_macro IS 'very nice table macro';
--- to unset a comment, set it to NULL, e.g.:
+```
+
+To unset a comment, set it to `NULL`, e.g.::
+
+```sql
 COMMENT ON TABLE test_table IS NULL;
 ```
 

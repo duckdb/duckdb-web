@@ -72,12 +72,21 @@ If this is an unexpected constraint violation please double check with the known
 
 `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `UNION` types can be arbitrarily nested to any depth, so long as the type rules are observed.
 
+Struct with `LIST`s:
+
 ```sql
--- Struct with lists
 SELECT {'birds': ['duck', 'goose', 'heron'], 'aliens': NULL, 'amphibians': ['frog', 'toad']};
--- Struct with list of maps
+```
+
+Struct with list of `MAP`s:
+
+```sql
 SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
--- A list of unions
+```
+
+A list of `UNION`s:
+
+```sql
 SELECT [union_value(num := 2), union_value(str := 'ABC')::UNION(str VARCHAR, num INTEGER)];
 ```
 

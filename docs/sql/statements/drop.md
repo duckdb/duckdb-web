@@ -8,27 +8,57 @@ The `DROP` statement removes a catalog entry added previously with the `CREATE` 
 
 ## Examples
 
+Delete the table with the name `tbl`:
+
 ```sql
--- delete the table with the name "tbl"
 DROP TABLE tbl;
--- drop the view with the name "v1"; do not throw an error if the view does not exist
+```
+
+Drop the view with the name `v1`; do not throw an error if the view does not exist:
+
+```sql
 DROP VIEW IF EXISTS v1;
 ```
 
+Drop function `fn`:
+
 ```sql
--- drop function "fn"
 DROP FUNCTION fn;
--- drop index "idx"
+```
+
+Drop index `idx`:
+
+```sql
 DROP INDEX idx;
--- drop schema "sch"
+```
+
+Drop schema `sch`:
+
+```sql
 DROP SCHEMA sch;
--- drop sequence "seq"
+```
+
+Drop sequence `seq`:
+
+```sql
 DROP SEQUENCE seq;
--- drop macro "mcr"
+```
+
+Drop macro `mcr`:
+
+```sql
 DROP MACRO mcr;
--- drop macro table "mt"
+```
+
+Drop macro table `mt`:
+
+```sql
 DROP MACRO TABLE mt;
--- drop type "typ"
+```
+
+Drop type `typ`:
+
+```sql
 DROP TYPE typ;
 ```
 
@@ -49,7 +79,7 @@ DROP SCHEMA myschema;
 ```
 
 ```console
-Dependency Error: Cannot drop entry "myschema" because there are entries that depend on it.
+Dependency Error: Cannot drop entry `myschema` because there are entries that depend on it.
 Use DROP...CASCADE to drop all dependents.
 ```
 
@@ -97,7 +127,7 @@ Catalog Error: Table with name tbl does not exist!
 ## Limitations on Reclaiming Disk Space
 
 Running `DROP TABLE` should free the memory used by the table, but not always disk space.
-Even if disk space does not decrease, the free blocks will be marked as "free".
+Even if disk space does not decrease, the free blocks will be marked as `free`.
 For example, if we have a 2 GB file and we drop a 1 GB table, the file might still be 2 GB, but it should have 1 GB of free blocks in it.
 To check this, use the following `PRAGMA` and check the number of `free_blocks` in the output:
 

@@ -191,7 +191,7 @@ SET default_order = 'DESCENDING';
 
 ## Implicit Casting to `VARCHAR`
 
-Prior to version 0.10.0, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an implicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behaviour that performs implicit casting, set the `old_implicit_casting` variable to `true`.
+Prior to version 0.10.0, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an implicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behaviour that performs implicit casting, set the `old_implicit_casting` variable to `true`:
 
 ```sql
 SET old_implicit_casting = true;
@@ -211,7 +211,7 @@ CALL pragma_version();
 ### Platform
 
 `platform` returns an identifier for the platform the current DuckDB executable has been compiled for, e.g., `osx_arm64`.
-The format of this identifier matches the platform name as described [on the extension loading explainer](../extensions/working_with_extensions#platforms).
+The format of this identifier matches the platform name as described [on the extension loading explainer](../extensions/working_with_extensions#platforms):
 
 ```sql
 PRAGMA platform;
@@ -220,7 +220,7 @@ CALL pragma_platform();
 
 ### User Agent
 
-The following statement returns the user agent information, e.g., `duckdb/v0.10.0(osx_arm64)`.
+The following statement returns the user agent information, e.g., `duckdb/v0.10.0(osx_arm64)`:
 
 ```sql
 PRAGMA user_agent;
@@ -228,7 +228,7 @@ PRAGMA user_agent;
 
 ### Metadata Information
 
-The following statement returns information on the metadata store (`block_id`, `total_blocks`, `free_blocks`, and `free_list`).
+The following statement returns information on the metadata store (`block_id`, `total_blocks`, `free_blocks`, and `free_list`):
 
 ```sql
 PRAGMA metadata_info;
@@ -240,7 +240,11 @@ Show progress bar when running queries:
 
 ```sql
 PRAGMA enable_progress_bar;
--- or 
+```
+
+Or:
+
+```sql
 PRAGMA enable_print_progress_bar;
 ```
 
@@ -248,7 +252,11 @@ Don't show a progress bar for running queries:
 
 ```sql
 PRAGMA disable_progress_bar;
--- or
+```
+
+Or:
+
+```sql
 PRAGMA disable_print_progress_bar;
 ```
 
@@ -256,7 +264,7 @@ PRAGMA disable_print_progress_bar;
 
 ### Explain Plan Output
 
-The output of [`EXPLAIN`](../sql/statements/profiling) output can be configured to show only the physical plan. This is the default configuration.
+The output of [`EXPLAIN`](../sql/statements/profiling) output can be configured to show only the physical plan. This is the default configuration:
 
 ```sql
 SET explain_output = 'physical_only';
@@ -282,7 +290,11 @@ To enable profiling:
 
 ```sql
 PRAGMA enable_profiling;
--- or
+```
+
+Or:
+
+```sql
 PRAGMA enable_profile;
 ```
 
@@ -314,7 +326,11 @@ To disable profiling:
 
 ```sql
 PRAGMA disable_profiling;
--- or
+```
+
+Or:
+
+```sql
 PRAGMA disable_profile;
 ```
 
@@ -322,7 +338,7 @@ PRAGMA disable_profile;
 
 By default, profiling information is printed to the console. However, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file.
 
-> Warning The file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run.
+> Warning The file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run:
 
 ```sql
 SET profiling_output = '/path/to/file.json';
@@ -333,7 +349,7 @@ SET profile_output = '/path/to/file.json';
 
 By default, a limited amount of profiling information is provided (`standard`).
 For more details, use the detailed profiling mode by setting `profiling_mode` to `detailed`.
-The output of this mode shows how long it takes to apply certain optimizers on the query tree and how long physical planning takes.
+The output of this mode shows how long it takes to apply certain optimizers on the query tree and how long physical planning takes:
 
 ```sql
 SET profiling_mode = 'detailed';
@@ -434,7 +450,7 @@ PRAGMA disable_object_cache;
 
 ### Force Checkpoint
 
-When [`CHECKPOINT`](../sql/statements/checkpoint) is called when no changes are made, force a checkpoint regardless.
+When [`CHECKPOINT`](../sql/statements/checkpoint) is called when no changes are made, force a checkpoint regardless:
 
 ```sql
 PRAGMA force_checkpoint;

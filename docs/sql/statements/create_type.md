@@ -8,14 +8,27 @@ The `CREATE TYPE` statement defines a new type in the catalog.
 
 ## Examples
 
+Create a simple `ENUM` type:
+
 ```sql
--- create a simple enum type
 CREATE TYPE mood AS ENUM ('happy', 'sad', 'curious');
--- create a simple struct type
+```
+
+Create a simple `STRUCT` type:
+
+```sql
 CREATE TYPE many_things AS STRUCT(k INTEGER, l VARCHAR);
--- create a simple union type
+```
+
+Create a simple `UNION` type:
+
+```sql
 CREATE TYPE one_thing AS UNION(number INTEGER, string VARCHAR);
--- create a type alias
+```
+
+Create a type alias:
+
+```sql
 CREATE TYPE x_index AS INTEGER;
 ```
 

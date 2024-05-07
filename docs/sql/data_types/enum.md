@@ -14,42 +14,64 @@ The `ENUM` type represents a dictionary data structure with all possible unique 
 
 ## Enum Definition
 
-Enum types are created from either a hardcoded set of values or from a select statement that returns a single column of varchars. The set of values in the select statement will be deduplicated, but if the enum is created from a hardcoded set there may not be any duplicates.
+Enum types are created from either a hardcoded set of values or from a select statement that returns a single column of `VARCHAR`s. The set of values in the select statement will be deduplicated, but if the enum is created from a hardcoded set there may not be any duplicates.
+
+Create enum using hardcoded values:
 
 ```sql
--- Create enum using hardcoded values
 CREATE TYPE ⟨enum_name⟩ AS ENUM ([⟨value_1⟩, ⟨value_2⟩,...]);
+```
 
--- Create enum using a select statement that returns a single column of varchars
+Create enum using a `SELECT` statement that returns a single column of `VARCHAR`s:
+
+```sql
 CREATE TYPE ⟨enum_name⟩ AS ENUM (select_expression⟩);
 ```
 
 For example:
 
+Creates new user defined type 'mood' as an enum:
+
 ```sql
--- Creates new user defined type 'mood' as an Enum
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
+```
 
--- This will fail since the mood type already exists
+This will fail since the `mood` type already exists:
+
+```sql
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy', 'anxious');
+```
 
--- This will fail since Enums cannot hold null values
+This will fail since Enums cannot hold `NULL` values:
+
+```sql
 CREATE TYPE breed AS ENUM ('maltese', NULL);
+```
 
--- This will fail since Enum values must be unique
+This will fail since Enum values must be unique:
+
+```sql
 CREATE TYPE breed AS ENUM ('maltese', 'maltese');
+```
 
--- Create an enum from a select statement
--- First create an example table of values
+Create an enum from a select statement. First create an example table of values:
+
+```sql
 CREATE TABLE my_inputs AS
     SELECT 'duck'  AS my_varchar UNION ALL
     SELECT 'duck'  AS my_varchar UNION ALL
     SELECT 'goose' AS my_varchar;
+```
 
--- Create an enum using the unique string values in the my_varchar column
+Create an enum using the unique string values in the `my_varchar` column:
+
+```sql
 CREATE TYPE birds AS ENUM (SELECT my_varchar FROM my_inputs);
+```
 
--- Show the available values in the birds enum using the enum_range function
+Show the available values in the `birds` enum using the enum_range function:
+
+```sql
 SELECT enum_range(NULL::birds) AS my_enum_range;
 ```
 
@@ -119,8 +141,9 @@ DuckDB Enums are automatically cast to `VARCHAR` types whenever necessary. This 
 
 For example:
 
+Regexp_matches is a function that takes a VARCHAR, hence current_mood is cast to VARCHAR:
+
 ```sql
--- regexp_matches is a function that takes a VARCHAR, hence current_mood is cast to VARCHAR
 SELECT regexp_matches(current_mood, '.*a.*') AS contains_a
 FROM person;
 ```

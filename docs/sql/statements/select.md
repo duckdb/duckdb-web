@@ -9,20 +9,45 @@ The `SELECT` statement retrieves rows from the database.
 
 ### Examples
 
+Select all columns from the table `tbl`:
+
 ```sql
--- select all columns from the table "tbl"
 SELECT * FROM tbl;
--- select the rows from tbl
+```
+
+Select the rows from `tbl`:
+
+```sql
 SELECT j FROM tbl WHERE i = 3;
--- perform an aggregate grouped by the column "i"
+```
+
+Perform an aggregate grouped by the column "i":
+
+```sql
 SELECT i, sum(j) FROM tbl GROUP BY i;
--- select only the top 3 rows from the tbl
+```
+
+Select only the top 3 rows from the `tbl`:
+
+```sql
 SELECT * FROM tbl ORDER BY i DESC LIMIT 3;
--- join two tables together using the USING clause
+```
+
+Join two tables together using the `USING` clause:
+
+```sql
 SELECT * FROM t1 JOIN t2 USING (a, b);
--- use column indexes to select the first and third column from the table "tbl"
+```
+
+Use column indexes to select the first and third column from the table `tbl`:
+
+```sql
 SELECT #1, #3 FROM tbl;
--- select all unique cities from the addresses table
+```
+
+Select all unique cities from the addresses table:
+
+```sql
 SELECT DISTINCT city FROM addresses;
 ```
 

@@ -15,28 +15,51 @@ Intervals represent a period of time. This period can be measured in a specific 
 An `INTERVAL` can be constructed by providing an amount together with a unit.
 Intervals can be added or subtracted from `DATE` or `TIMESTAMP` values.
 
+1 year:
+
 ```sql
--- 1 year
 SELECT INTERVAL 1 YEAR;
--- add 1 year to a specific date
+```
+
+Add 1 year to a specific date:
+
+```sql
 SELECT DATE '2000-01-01' + INTERVAL 1 YEAR;
--- subtract 1 year from a specific date
+```
+
+Subtract 1 year from a specific date:
+
+```sql
 SELECT DATE '2000-01-01' - INTERVAL 1 YEAR;
--- construct an interval from a column, instead of a constant
+```
+
+Construct an interval from a column, instead of a constant:
+
+```sql
 SELECT INTERVAL (i) YEAR FROM range(1, 5) t(i);
--- construct an interval with mixed units
+```
+
+Construct an interval with mixed units:
+
+```sql
 SELECT INTERVAL '1 month 1 day';
--- intervals greater than 24 hours/12 months/etc. are supported
+```
+
+Intervals greater than 24 hours/12 months/etc. are supported:
+
+```sql
 SELECT '540:58:47.210'::INTERVAL;
 SELECT INTERVAL '16 MONTHS';
-
--- WARNING:
--- If a decimal value is specified, it will be automatically rounded to an integer
--- To use more precise values, simply use a more granular date part
--- (In this example use 18 MONTHS instead of 1.5 YEARS)
--- The statement below is equivalent to to_years(CAST(1.5 AS INTEGER))
-SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years!
 ```
+
+> Warning  If a decimal value is specified, it will be automatically rounded to an integer.
+> To use more precise values, simply use a more granular date part
+> In this example, use `18 MONTHS` instead of `1.5 YEARS`.
+> The statement below is equivalent to `to_years(CAST(1.5 AS INTEGER))`
+>
+> ```sql
+> SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years!
+> ```
 
 ## Details
 

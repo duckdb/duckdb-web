@@ -8,14 +8,27 @@ The `VALUES` clause is used to specify a fixed number of rows. The `VALUES` clau
 
 ## Examples
 
+Generate two rows and directly return them:
+
 ```sql
--- generate two rows and directly return them
 VALUES ('Amsterdam', 1), ('London', 2);
--- generate two rows as part of a FROM clause, and rename the columns
+```
+
+Generate two rows as part of a FROM clause, and rename the columns:
+
+```sql
 SELECT * FROM (VALUES ('Amsterdam', 1), ('London', 2)) Cities(Name, Id);
--- generate two rows and insert them into a table
+```
+
+Generate two rows and insert them into a table:
+
+```sql
 INSERT INTO Cities VALUES ('Amsterdam', 1), ('London', 2);
--- create a table directly from a VALUES clause
+```
+
+Create a table directly from a VALUES clause:
+
+```sql
 CREATE TABLE Cities AS SELECT * FROM (VALUES ('Amsterdam', 1), ('London', 2)) Cities(Name, Id);
 ```
 

@@ -9,10 +9,15 @@ redirect_from:
 
 The following examples use the [`flights.csv`](/data/flights.csv) file.
 
+Read a CSV file from disk, auto-infer options.
+
 ```sql
--- read a CSV file from disk, auto-infer options
 SELECT * FROM 'flights.csv';
--- read_csv with custom options
+```
+
+Use the `read_csv` function with custom options.
+
+```sql
 SELECT * FROM read_csv('flights.csv',
     delim = '|',
     header = true,
@@ -29,8 +34,9 @@ SELECT * FROM read_csv('flights.csv',
 cat flights.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
+Read a CSV file into a table.
+
 ```sql
--- read a CSV file into a table
 CREATE TABLE ontime (
     FlightDate DATE,
     UniqueCarrier VARCHAR,
@@ -40,17 +46,27 @@ CREATE TABLE ontime (
 COPY ontime FROM 'flights.csv';
 ```
 
+Alternatively, create a table without specifying the schema manually.
+
 ```sql
--- alternatively, create a table without specifying the schema manually
 CREATE TABLE ontime AS SELECT * FROM 'flights.csv';
--- we can use the FROM-first syntax to omit 'SELECT *'
+```
+
+We can use the FROM-first syntax to omit 'SELECT *'.
+
+```sql
 CREATE TABLE ontime AS FROM 'flights.csv';
 ```
 
+Write the result of a query to a CSV file.
+
 ```sql
--- write the result of a query to a CSV file
 COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER true, DELIMITER '|');
--- if we serialize the entire table, we can simply refer to it with its name
+```
+
+If we serialize the entire table, we can simply refer to it with its name.
+
+```sql
 COPY ontime TO 'flights.csv' WITH (HEADER true, DELIMITER '|');
 ```
 

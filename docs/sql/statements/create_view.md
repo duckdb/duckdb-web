@@ -9,11 +9,23 @@ The `CREATE VIEW` statement defines a new view in the catalog.
 ## Examples
 
 ```sql
--- create a simple view
+```
+
+Create a simple view:
+
+```sql
 CREATE VIEW v1 AS SELECT * FROM tbl;
--- create a view or replace it if a view with that name already exists
+```
+
+Create a view or replace it if a view with that name already exists:
+
+```sql
 CREATE OR REPLACE VIEW v1 AS SELECT 42;
--- create a view and replace the column names
+```
+
+Create a view and replace the column names:
+
+```sql
 CREATE VIEW v1(a) AS SELECT 42;
 ```
 

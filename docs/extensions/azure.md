@@ -139,13 +139,14 @@ CREATE SECRET secret1 (
 If you do not use authentication, you still need to specify the storage account name. For example:
 
 ```sql
--- Note that PROVIDER CONFIG is optional as it is the default one
 CREATE SECRET secret2 (
     TYPE AZURE,
     PROVIDER CONFIG,
     ACCOUNT_NAME '⟨storage account name⟩'
 );
 ```
+
+The default `PROVIDER` is `CONFIG`.
 
 #### `CREDENTIAL_CHAIN` Provider
 

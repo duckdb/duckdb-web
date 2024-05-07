@@ -6,8 +6,9 @@ blurb: The NULL value represents a missing value.
 
 `NULL` values are special values that are used to represent missing data in SQL. Columns of any type can contain `NULL` values. Logically, a `NULL` value can be seen as "the value of this field is unknown".
 
+A `NULL` value can be inserted to any field that does not have the `NOT NULL` qualifier:
+
 ```sql
--- insert a null value into a table
 CREATE TABLE integers (i INTEGER);
 INSERT INTO integers VALUES (NULL);
 ```
@@ -40,20 +41,44 @@ The `coalesce` function is an exception to this: it takes any number of argument
 
 ```sql
 SELECT coalesce(NULL, NULL, 1);
--- 1
+```
+
+```text
+1
+```
+
+```sql
 SELECT coalesce(10, 20);
--- 10
+```
+
+```text
+10
+```
+
+```sql
 SELECT coalesce(NULL, NULL);
--- NULL
+```
+
+```text
+NULL
 ```
 
 The `ifnull` function is a two-argument version of `coalesce`.
 
 ```sql
 SELECT ifnull(NULL, 'default_string');
--- default_string
+```
+
+```text
+default_string
+```
+
+```sql
 SELECT ifnull(1, 'default_string');
--- 1
+```
+
+```text
+1
 ```
 
 ## `NULL` and Conjunctions
@@ -69,10 +94,20 @@ Aggregate functions that do not ignore `NULL` values include: `first`, `last`, `
 ```sql
 CREATE TABLE integers (i INTEGER);
 INSERT INTO integers VALUES (1), (10), (NULL);
+```
 
+```sql
 SELECT min(i) FROM integers;
--- 1
+```
 
+```text
+1
+```
+
+```sql
 SELECT max(i) FROM integers;
--- 10
+```
+
+```text
+10
 ```

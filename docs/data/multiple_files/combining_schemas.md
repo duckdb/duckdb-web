@@ -7,10 +7,15 @@ title: Combining Schemas
 
 ## Examples
 
+Read a set of CSV files combining columns by position:
+
 ```sql
--- read a set of CSV files combining columns by position
 SELECT * FROM read_csv('flights*.csv');
--- read a set of CSV files combining columns by name
+```
+
+Read a set of CSV files combining columns by name:
+
+```sql
 SELECT * FROM read_csv('flights*.csv', union_by_name = true);
 ```
 

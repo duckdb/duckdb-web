@@ -25,10 +25,15 @@ In this case too, the parentheses are mandatory.
 
 Example:
 
+The `duckdb_views()` _table function_ returns all views, including those marked internal:
+
 ```sql
--- duckdb_views table function: returns all views, including those marked internal
 SELECT * FROM duckdb_views();
--- duckdb_views view: returns views that are not marked as internal
+```
+
+The `duckdb_views` _view_ returns views that are not marked as internal:
+
+```sql
 SELECT * FROM duckdb_views;
 ```
 

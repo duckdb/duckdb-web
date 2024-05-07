@@ -13,38 +13,65 @@ Under the hood, `UNION` types are implemented on top of `STRUCT` types, and simp
 
 ## Example
 
+Create a table with a `UNION` column:
+
 ```sql
--- Create a table with a union column
 CREATE TABLE tbl1 (u UNION(num INTEGER, str VARCHAR));
-
--- Any type can be implicitly cast to a union containing the type.
--- Any union can also be implicitly cast to another union if
--- the source union members are a subset of the targets.
--- Note: only if the cast is unambiguous!
--- More details in the 'Union casts' section below.
 INSERT INTO tbl1 values (1), ('two'), (union_value(str := 'three'));
--- Union use the member types varchar cast functions when casting to varchar.
-SELECT u FROM tbl1;
--- returns:
---    1
---    two
---    three
--- Select all the 'str' members
-SELECT union_extract(u, 'str') FROM tbl1;
--- Alternatively, you can use 'dot syntax' like with structs
-SELECT u.str FROM tbl1;
--- returns:
---    NULL
---    two
---    three
-
--- Select the currently active tag from the union as an enum.
-SELECT union_tag(u) FROM tbl1;
--- returns:
---    num
---    str
---    str
 ```
+
+Any type can be implicitly cast to a `UNION` containing the type. Any `UNION` can also be implicitly cast to another `UNION` if the source `UNION` members are a subset of the target's (if the cast is unambiguous).
+
+`UNION` uses the member types' `VARCHAR` cast functions when casting to `VARCHAR`:
+
+```sql
+SELECT u FROM tbl1;
+```
+
+|   u   |
+|-------|
+| 1     |
+| two   |
+| three |
+
+Select all the `str` members:
+
+```sql
+SELECT union_extract(u, 'str') AS str
+FROM tbl1;
+```
+
+|  str  |
+|-------|
+| NULL  |
+| two   |
+| three |
+
+Alternatively, you can use 'dot syntax' similarly to [`STRUCT`s](struct).
+
+```sql
+SELECT u.str
+FROM tbl1;
+```
+
+|  str  |
+|-------|
+| NULL  |
+| two   |
+| three |
+
+Select the currently active tag from the `UNION` as an `ENUM`.
+
+```sql
+SELECT union_tag(u) AS t
+FROM tbl1;
+```
+
+|  t  |
+|-----|
+| num |
+| str |
+| str |
 
 ## Union Casts
 

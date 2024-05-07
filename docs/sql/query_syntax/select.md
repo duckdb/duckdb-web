@@ -9,24 +9,57 @@ The `SELECT` clause specifies the list of columns that will be returned by the q
 
 ## Examples
 
+Select all columns from the table called "table_name":
+
 ```sql
--- select all columns from the table called "table_name"
 SELECT * FROM table_name;
--- perform arithmetic on columns in a table, and provide an alias
+```
+
+Perform arithmetic on columns in a table, and provide an alias:
+
+```sql
 SELECT col1 + col2 AS res, sqrt(col1) AS root FROM table_name;
--- select all unique cities from the addresses table
+```
+
+Select all unique cities from the addresses table:
+
+```sql
 SELECT DISTINCT city FROM addresses;
--- return the total number of rows in the addresses table
+```
+
+Return the total number of rows in the addresses table:
+
+```sql
 SELECT count(*) FROM addresses;
--- select all columns except the city column from the addresses table
+```
+
+Select all columns except the city column from the addresses table:
+
+```sql
 SELECT * EXCLUDE (city) FROM addresses;
--- select all columns from the addresses table, but replace city with lower(city)
+```
+
+Select all columns from the addresses table, but replace city with lower(city):
+
+```sql
 SELECT * REPLACE (lower(city) AS city) FROM addresses;
--- select all columns matching the given regex from the table
+```
+
+Select all columns matching the given regex from the table:
+
+```sql
 SELECT COLUMNS('number\d+') FROM addresses;
--- compute a function on all given columns of a table
+```
+
+Compute a function on all given columns of a table:
+
+```sql
 SELECT min(COLUMNS(*)) FROM addresses;
--- to select columns with spaces or special characters, use double quotes
+```
+
+To select columns with spaces or special characters, use double quotes:
+
+```sql
 SELECT "Some Column Name" FROM tbl;
 ```
 
@@ -42,11 +75,16 @@ The `SELECT` clause contains a list of expressions that specify the result of a 
 
 ### Star Expressions
 
+Select all columns from the table called "table_name":
+
 ```sql
--- select all columns from the table called "table_name"
 SELECT *
 FROM table_name;
--- select all columns matching the given regex from the table
+```
+
+Select all columns matching the given regex from the table:
+
+```sql
 SELECT COLUMNS('number\d+')
 FROM addresses;
 ```
@@ -55,8 +93,9 @@ The [star expression](../expressions/star) is a special expression that expands 
 
 ### `DISTINCT` Clause
 
+Select all unique cities from the addresses table:
+
 ```sql
--- select all unique cities from the addresses table
 SELECT DISTINCT city
 FROM addresses;
 ```
@@ -67,8 +106,9 @@ The `DISTINCT` clause can be used to return **only** the unique rows in the resu
 
 ### `DISTINCT ON` Clause
 
+Select only the highest population city for each country:
+
 ```sql
--- select only the highest population city for each country
 SELECT DISTINCT ON(country) city, population
 FROM cities
 ORDER BY population DESC;
@@ -80,11 +120,16 @@ The `DISTINCT ON` clause returns only one row per unique value in the set of exp
 
 ### Aggregates
 
+Return the total number of rows in the addresses table:
+
 ```sql
--- return the total number of rows in the addresses table
 SELECT count(*)
 FROM addresses;
--- return the total number of rows in the addresses table grouped by city
+```
+
+Return the total number of rows in the addresses table grouped by city:
+
+```sql
 SELECT city, count(*)
 FROM addresses
 GROUP BY city;
@@ -94,11 +139,16 @@ GROUP BY city;
 
 ### Window Functions
 
+Generate a "row_number" column containing incremental identifiers for each row:
+
 ```sql
--- generate a "row_number" column containing incremental identifiers for each row
 SELECT row_number() OVER ()
 FROM sales;
--- compute the difference between the current amount, and the previous amount, by order of time
+```
+
+Compute the difference between the current amount, and the previous amount, by order of time:
+
+```sql
 SELECT amount - lag(amount) OVER (ORDER BY time)
 FROM sales;
 ```
@@ -107,10 +157,15 @@ FROM sales;
 
 ### `unnest` Function
 
+Unnest an array by one level:
+
 ```sql
--- unnest an array by one level
 SELECT unnest([1, 2, 3]);
--- unnest a struct by one level
+```
+
+Unnest a struct by one level:
+
+```sql
 SELECT unnest({'a': 42, 'b': 84});
 ```
 

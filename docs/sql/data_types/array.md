@@ -15,16 +15,33 @@ To store variable-length lists, use the [`LIST` type](list). See the [data types
 
 Arrays can be created using the [`array_value(expr, ...)`](../functions/nested#list-functions) function.
 
+Construct with the `array_value` function:
+
 ```sql
--- Construct with the 'array_value' function
 SELECT array_value(1, 2, 3);
--- You can always implicitly cast an array to a list (and use list functions, like list_extract, '[i]')
+```
+
+You can always implicitly cast an array to a list (and use list functions, like `list_extract`, `[i]`):
+
+```sql
 SELECT array_value(1, 2, 3)[2];
--- You can cast from a list to an array, but the dimensions have to match up!
+```
+
+You can cast from a list to an array, but the dimensions have to match up!:
+
+```sql
 SELECT [3, 2, 1]::INTEGER[3];
--- Arrays can be nested
+```
+
+Arrays can be nested:
+
+```sql
 SELECT array_value(array_value(1, 2), array_value(3, 4), array_value(5, 6));
--- Arrays can store structs
+```
+
+Arrays can store structs:
+
+```sql
 SELECT array_value({'a': 1, 'b': 2}, {'a': 3, 'b': 4});
 ```
 
@@ -72,23 +89,26 @@ See the [`ARRAY` functions](../functions/array#array-native-functions).
 
 ## Examples
 
+Create sample data:
+
 ```sql
--- create sample data
 CREATE TABLE x (i INTEGER, v FLOAT[3]);
 CREATE TABLE y (i INTEGER, v FLOAT[3]);
 INSERT INTO x VALUES (1, array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT));
 INSERT INTO y VALUES (1, array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT));
 ```
 
+Compute cross product:
+
 ```sql
--- compute cross product
 SELECT array_cross_product(x.v, y.v)
 FROM x, y
 WHERE x.i = y.i;
 ```
 
+Compute cosine similarity:
+
 ```sql
--- compute cosine similarity
 SELECT array_cosine_similarity(x.v, y.v)
 FROM x, y
 WHERE x.i = y.i;

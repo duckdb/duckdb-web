@@ -8,8 +8,9 @@ The `WITH` clause allows you to specify common table expressions (CTEs). Regular
 
 ## Basic CTE Examples
 
+Create a CTE called "cte" and use it in the main query:
+
 ```sql
--- create a CTE called "cte" and use it in the main query
 WITH cte AS (SELECT 42 AS x)
 SELECT * FROM cte;
 ```
@@ -18,8 +19,9 @@ SELECT * FROM cte;
 |---:|
 | 42 |
 
+Create two CTEs, where the second CTE references the first CTE:
+
 ```sql
--- create two CTEs, where the second CTE references the first CTE
 WITH cte AS (SELECT 42 AS i),
      cte2 AS (SELECT i*100 AS x FROM cte)
 SELECT * FROM cte2;
@@ -83,7 +85,11 @@ WITH RECURSIVE FibonacciNumbers (RecursionDepth, FibonacciNumber, NextNumber) AS
     WHERE
         fib.RecursionDepth + 1 < 10
 )
--- Query the CTE
+```
+
+Query the CTE:
+
+```sql
 SELECT
     fn.RecursionDepth AS FibonacciNumberIndex,
     fn.FibonacciNumber

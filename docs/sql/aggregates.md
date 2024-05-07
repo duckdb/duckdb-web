@@ -6,20 +6,45 @@ railroad: expressions/aggregate.js
 
 ## Examples
 
+Produce a single row containing the sum of the `amount` column:
+
 ```sql
--- produce a single row containing the sum of the "amount" column
 SELECT sum(amount) FROM sales;
--- produce one row per unique region, containing the sum of "amount" for each group
+```
+
+Produce one row per unique region, containing the sum of `amount` for each group:
+
+```sql
 SELECT region, sum(amount) FROM sales GROUP BY region;
--- return only the regions that have a sum of "amount" higher than 100
+```
+
+Return only the regions that have a sum of `amount` higher than 100:
+
+```sql
 SELECT region FROM sales GROUP BY region HAVING sum(amount) > 100;
--- return the number of unique values in the "region" column
+```
+
+Return the number of unique values in the `region` column:
+
+```sql
 SELECT count(DISTINCT region) FROM sales;
--- return two values, the total sum of "amount" and the sum of "amount" minus columns where the region is "north"
+```
+
+Return two values, the total sum of `amount` and the sum of `amount` minus columns where the region is `north`:
+
+```sql
 SELECT sum(amount), sum(amount) FILTER (region != 'north') FROM sales;
--- returns a list of all regions in order of the "amount" column
+```
+
+Returns a list of all regions in order of the `amount` column:
+
+```sql
 SELECT list(region ORDER BY amount DESC) FROM sales;
--- returns the amount of the first sale using the first() aggregate function
+```
+
+Returns the amount of the first sale using the `first()` aggregate function:
+
+```sql
 SELECT first(amount ORDER BY date ASC) FROM sales;
 ```
 
@@ -147,7 +172,6 @@ as the first argument.
 | <code>percentile_cont(fractions) WITHIN GROUP (ORDER BY column [(ASC&#124;DESC)])</code> | <code>quantile_cont(column, fractions ORDER BY column [(ASC&#124;DESC)])</code> |
 | <code>percentile_disc(fraction) WITHIN GROUP (ORDER BY column [(ASC&#124;DESC)])</code> | <code>quantile_disc(column, fraction ORDER BY column [(ASC&#124;DESC)])</code> |
 | <code>percentile_disc(fractions) WITHIN GROUP (ORDER BY column [(ASC&#124;DESC)])</code> | <code>quantile_disc(column, fractions ORDER BY column [(ASC&#124;DESC)])</code> |
-
 
 ## Miscellaneous Aggregate Functions
 

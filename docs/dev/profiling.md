@@ -162,8 +162,7 @@ It is also possible to save the query plan to a file, e.g., in JSON format:
 -- By default the result is still printed to stdout.
 PRAGMA enable_profiling = 'json';
 -- Instead of writing to stdout, write the profiling output to a specific file on disk.
--- This has no effect for `EXPLAIN ANALYZE` queries, which will *always* be
--- returned as query results.
+-- This has no effect for `EXPLAIN ANALYZE` queries, which will *always* be returned as query results.
 PRAGMA profile_output = '/path/to/file.json';
 ```
 

@@ -8,7 +8,7 @@ DuckDB broadly follows the [Parquet Modular Encryption specification](https://gi
 
 ## Reading and Writing Encrypted Files
 
-Using the `PRAGMA add_parquet_key` function, named encryption keys of 128, 192, or 256 bits can be added to a session. These keys are stored in-memory.
+Using the `PRAGMA add_parquet_key` function, named encryption keys of 128, 192, or 256 bits can be added to a session. These keys are stored in-memory:
 
 ```sql
 PRAGMA add_parquet_key('key128', '0123456789112345');

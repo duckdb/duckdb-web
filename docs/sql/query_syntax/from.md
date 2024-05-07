@@ -9,35 +9,87 @@ The `FROM` clause specifies the *source* of the data on which the remainder of t
 
 ## Examples
 
+Select all columns from the table called `table_name`:
+
 ```sql
--- select all columns from the table called "table_name"
 SELECT * FROM table_name;
--- select all columns from the table using the FROM-first syntax
+```
+
+Select all columns from the table using the `FROM`-first syntax:
+
+```sql
 FROM table_name SELECT *;
--- select all columns using the FROM-first syntax and omitting the SELECT clause
+```
+
+Select all columns using the `FROM`-first syntax and omitting the `SELECT` clause:
+
+```sql
 FROM table_name;
--- select all columns from the table called "table_name" through an alias "tn"
+```
+
+Select all columns from the table called `table_name` through an alias `tn`:
+
+```sql
 SELECT tn.* FROM table_name tn;
--- select all columns from the table "table_name" in the schema "schema_name"
+```
+
+Select all columns from the table `table_name` in the schema `schema_name`:
+
+```sql
 SELECT * FROM schema_name.table_name;
--- select the column "i" from the table function "range",
--- where the first column of the range function is renamed to "i"
+```
+
+Select the column `i` from the table function `range`, where the first column of the range function is renamed to `i`:
+
+```sql
 SELECT t.i FROM range(100) AS t(i);
--- select all columns from the CSV file called "test.csv"
+```
+
+Select all columns from the CSV file called `test.csv`:
+
+```sql
 SELECT * FROM 'test.csv';
--- select all columns from a subquery
+```
+
+Select all columns from a subquery:
+
+```sql
 SELECT * FROM (SELECT * FROM table_name);
--- select the entire row of the table as a struct
+```
+
+Select the entire row of the table as a struct:
+
+```sql
 SELECT t FROM t;
--- select the entire row of the subquery as a struct (i.e., a single column)
+```
+
+Select the entire row of the subquery as a struct (i.e., a single column):
+
+```sql
 SELECT t FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
--- join two tables together
+```
+
+Join two tables together:
+
+```sql
 SELECT * FROM table_name JOIN other_table ON (table_name.key = other_table.key);
--- select a 10% sample from a table
+```
+
+Select a 10% sample from a table:
+
+```sql
 SELECT * FROM table_name TABLESAMPLE 10%;
--- select a sample of 10 rows from a table
+```
+
+Select a sample of 10 rows from a table:
+
+```sql
 SELECT * FROM table_name TABLESAMPLE 10 ROWS;
--- use the FROM-first syntax with WHERE clause and aggregation
+```
+
+Use the `FROM`-first syntax with `WHERE` clause and aggregation:
+
+```sql
 FROM range(100) AS t(i) SELECT sum(t.i) WHERE i % 2 = 0;
 ```
 
@@ -70,10 +122,15 @@ The simplest type of join is a `CROSS JOIN`.
 There are no conditions for this type of join,
 and it just returns all the possible pairs.
 
+Return all pairs of rows:
+
 ```sql
--- return all pairs of rows
 SELECT a.*, b.* FROM a CROSS JOIN b;
--- this is equivalent to omitting the JOIN clause
+```
+
+This is equivalent to omitting the `JOIN` clause:
+
+```sql
 SELECT a.*, b.* FROM a, b;
 ```
 
@@ -102,8 +159,9 @@ CREATE TABLE l_nations (
 );
 ```
 
+Return the regions for the nations:
+
 ```sql
--- return the regions for the nations
 SELECT n.*, r.*
 FROM l_nations n JOIN l_regions r ON (n_regionkey = r_regionkey);
 ```
@@ -123,16 +181,18 @@ CREATE TABLE l_nations (nationkey INTEGER NOT NULL PRIMARY KEY,
                         FOREIGN KEY (regionkey) REFERENCES l_regions(regionkey));
 ```
 
+Return the regions for the nations:
+
 ```sql
--- return the regions for the nations
 SELECT n.*, r.*
 FROM l_nations n JOIN l_regions r USING (regionkey);
 ```
 
 The expressions do not have to be equalities – any predicate can be used:
 
+Return the pairs of jobs where one ran longer but cost less:
+
 ```sql
--- return the pairs of jobs where one ran longer but cost less
 SELECT s1.t_id, s2.t_id
 FROM west s1, west s2
 WHERE s1.time > s2.time
@@ -143,16 +203,18 @@ WHERE s1.time > s2.time
 
 Semi joins return rows from the left table that have at least one match in the right table. Anti joins return rows from the left table that have _no_ matches in the right table. When using a semi or anti join the result will never have more rows than the left hand side table. Semi and anti joins provide the same logic as [(NOT) IN](../expressions/in) statements.
 
+Return a list of cars that have a valid region:
+
 ```sql
--- return a list of cars that have a valid region.
 SELECT cars.name, cars.manufacturer
 FROM cars
 SEMI JOIN region
        ON cars.region = region.id;
 ```
 
+Return a list of cars with no recorded safety data:
+
 ```sql
--- return a list of cars with no recorded safety data.
 SELECT cars.name, cars.manufacturer
 FROM cars
 ANTI JOIN safety_data
@@ -252,8 +314,9 @@ A common operation when working with temporal or similarly-ordered data
 is to find the nearest (first) event in a reference table (such as prices).
 This is called an _as-of join:_
 
+Attach prices to stock trades:
+
 ```sql
--- attach prices to stock trades
 SELECT t.*, p.price
 FROM trades t
 ASOF JOIN prices p
@@ -270,8 +333,9 @@ This means that the left/right order of the tables is significant.
 It can be specified as an `OUTER` join to find unpaired rows
 (e.g., trades without prices or prices which have no trades.)
 
+Attach prices or NULLs to stock trades:
+
 ```sql
--- attach prices or NULLs to stock trades
 SELECT *
 FROM trades t
 ASOF LEFT JOIN prices p
@@ -286,8 +350,9 @@ which will be greater than or equal to (`>=`):
 SELECT *
 FROM trades t
 ASOF JOIN prices p USING (symbol, "when");
--- Returns symbol, trades.when, price (but NOT prices.when)
 ```
+
+Returns symbol, trades.when, price (but NOT prices.when):
 
 If you combine `USING` with a `SELECT *` like this,
 the query will return the left side (probe) column values for the matches,

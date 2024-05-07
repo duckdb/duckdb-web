@@ -37,8 +37,6 @@ SELECT d > '1992-01-01'::VARCHAR FROM (VALUES (DATE '1992-01-01')) t(d);
 
 ```console
 Binder Error: Cannot compare values of type DATE and type VARCHAR - an explicit cast is required
-LINE 1: SELECT d > '1992-01-01'::VARCHAR FROM (VALUES (D...
-                 ^
 ```
 
 ### Escape String Literals
@@ -47,7 +45,11 @@ To include special characters such as newline, use `E` escape the string. Both t
 
 ```sql
 SELECT E'Hello\nworld' AS msg;
--- or
+```
+
+Or:
+
+```sql
 SELECT e'Hello\nworld' AS msg;
 ```
 

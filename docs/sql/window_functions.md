@@ -9,17 +9,35 @@ Window functions are [blocking operators](../guides/performance/how_to_tune_work
 
 ## Examples
 
+Generate a `row_number` column with containing incremental identifiers for each row:
+
 ```sql
--- generate a "row_number" column with containing incremental identifiers for each row
 SELECT row_number() OVER () FROM sales;
--- generate a "row_number" column, by order of time
+```
+
+Generate a `row_number` column, by order of time:
+
+```sql
 SELECT row_number() OVER (ORDER BY time) FROM sales;
--- generate a "row_number" column, by order of time partitioned by region
+```
+
+Generate a `row_number` column, by order of time partitioned by region:
+
+```sql
 SELECT row_number() OVER (PARTITION BY region ORDER BY time) FROM sales;
--- compute the difference between the current amount, and the previous amount,
--- by order of time
+```
+
+Compute the difference between the current amount, and the previous amount,:
+
+By order of time:
+
+```sql
 SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
--- compute the percentage of the total amount of sales per region for each row
+```
+
+Compute the percentage of the total amount of sales per region for each row:
+
+```sql
 SELECT amount / sum(amount) OVER (PARTITION BY region) FROM sales;
 ```
 
