@@ -96,30 +96,28 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 | 4  | 40     |
 | 6  | NULL   |
 
-`COLUMNS` expressions can also be used in `WHERE` clauses. Here, the generated columns are combined using `AND`.
+`COLUMNS` expressions can also be used in `WHERE` clauses. The conditions are applied to all columns and are combined using the logical `AND` operator.
 
 ```sql
-SELECT 
-    *
+SELECT *
 FROM (
-    VALUES
-        (0, 0, 0),
-        (1, 2, 3),
-        (5, 5, 5)
+    SELECT 0 AS x, 1 AS y, 2 AS z
+    UNION ALL
+    SELECT 1 AS x, 2 AS y, 3 AS z
+    UNION ALL
+    SELECT 2 AS x, 3 AS y, 4 AS z
 )
-WHERE
-    COLUMNS(*) > 1
-;
+WHERE COLUMNS(*) > 1;
+-- equivalent to: x > 1 AND y > 1 AND z > 1
 ```
 
 <div class="narrow_table"></div>
 
-| col0 | col1 | col2 |
-|------|------|------|
-| 5    | 5    | 5    |
+| x | y | z |
+|--:|--:|--:|
+| 2 | 3 | 4 |
 
-
-## COLUMNS Regular Expression
+## `COLUMNS` Regular Expression
 
 `COLUMNS` supports passing a regex in as a string constant:
 
