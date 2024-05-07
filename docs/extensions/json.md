@@ -979,9 +979,11 @@ Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALL
 
 > Warning Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays](../sql/data_types/array) and [lists](../sql/data_types/list) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
 
-## Equality comparison
+## Equality Comparison
 
-> Warning Equality comparison is currently sometimes based on raw text comparison and sometimes and logical content comparison:
+> Warning Currently, equality comparison of JSON files can differ based on the context. In some cases, it is based on raw text comparison, while in other cases, it uses logical content comparison.
+
+The following query returns true for all fields:
 
 ```sql
 SELECT 
@@ -990,8 +992,13 @@ SELECT
     c[0] = d[0], -- Equality because space was removed from physical content of fields:
     a = c[0], -- Indeed, field is equal to empty list without space...
     b != c[0], -- ... but different from empty list with space.
-FROM (SELECT '[]'::JSON AS A, '[ ]'::JSON AS b, '[[]]'::JSON AS c, '[[ ]]'::JSON AS d)
-;
+FROM (
+    SELECT
+        '[]'::JSON AS a,
+        '[ ]'::JSON AS b,
+        '[[]]'::JSON AS c,
+        '[[ ]]'::JSON AS d
+  );
 ```
 
 | (a != b) | (c != d) | (c[0] = d[0]) | (a = c[0]) | (b != c[0]) |
