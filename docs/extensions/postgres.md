@@ -25,7 +25,7 @@ LOAD postgres;
 
 ## Connecting
 
-To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command:
+To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command with the `POSTGRES` or `POSTGRES_SCANNER` type:
 
 ```sql
 -- connect to the "public" schema of the postgres instance running on localhost in read-write mode
