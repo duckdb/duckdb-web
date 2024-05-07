@@ -85,7 +85,6 @@ The parameters listed below are used in the `read_csv` function to configure the
 |:--|:-----|:-|:-|
 | `rejects_table` | Name of a temporary table where the information of the faulty lines of a CSV file are stored. | `VARCHAR` | (empty) |
 | `rejects_limit` | Upper limit on the number of faulty records from a CSV file that will be recorded in the rejects table. 0 is used when no limit should be applied. | `BIGINT` | 0 |
-| `rejects_recovery_columns` | Column values that serve as a primary key to the CSV file. The are stored in the CSV Rejects Table to help identify the faulty tuples. | `VARCHAR[]` | (empty) |
 
 To store the information of the faulty CSV lines in a rejects table, the user must simply provide the rejects table name in the`rejects_table` option. For example:
 
@@ -112,7 +111,7 @@ Outputs:
 |------------|------|--------|-------------|--------------|------------------------------------------------|
 | faulty.csv |  2   |    1   |     age     |     three    | Could not convert string ' three' to 'INTEGER' |
 
-
+<!--
 Additionally, the `name` column could also be provided as a primary key via the `rejects_recovery_columns` option to provide more information over the faulty lines. For example:
 
 ```sql
@@ -132,3 +131,4 @@ Reading from the `rejects_table` will return:
 |    file    | line | column | column_name | parsed_value |     recovery_columns     |                     error                      |
 |------------|------|--------|-------------|--------------|--------------------------|------------------------------------------------|
 | faulty.csv |  2   |    1   |     age     |     three    | {'name': 'Oogie Boogie'} | Could not convert string ' three' to 'INTEGER' |
+-->
