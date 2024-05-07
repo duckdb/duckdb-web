@@ -96,8 +96,28 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 | 4  | 40     |
 | 6  | NULL   |
 
+`COLUMNS` expressions can also be used in `WHERE` clauses. The conditions are applied to all columns and are combined using the logical `AND` operator.
 
-## COLUMNS Regular Expression
+```sql
+SELECT *
+FROM (
+    SELECT 0 AS x, 1 AS y, 2 AS z
+    UNION ALL
+    SELECT 1 AS x, 2 AS y, 3 AS z
+    UNION ALL
+    SELECT 2 AS x, 3 AS y, 4 AS z
+)
+WHERE COLUMNS(*) > 1;
+-- equivalent to: x > 1 AND y > 1 AND z > 1
+```
+
+<div class="narrow_table"></div>
+
+| x | y | z |
+|--:|--:|--:|
+| 2 | 3 | 4 |
+
+## `COLUMNS` Regular Expression
 
 `COLUMNS` supports passing a regex in as a string constant:
 
