@@ -81,7 +81,7 @@ anatidae
 ## JSON Type
 
 The JSON extension makes use of the `JSON` logical type.
-The `JSON` logical type is interpreted as JSON, i.e., parsed, in JSON functions rather than interpreted as `VARCHAR`, i.e., a regular string.
+The `JSON` logical type is interpreted as JSON, i.e., parsed, in JSON functions rather than interpreted as `VARCHAR`, i.e., a regular string (modulo the equality-comparison caveat at the bottom of this page).
 All JSON creation functions return values of this type.
 
 We also allow any of our types to be casted to JSON, and JSON to be casted back to any of our types, for example:
@@ -978,6 +978,33 @@ Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALL
 ## Indexing
 
 > Warning Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays](../sql/data_types/array) and [lists](../sql/data_types/list) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
+
+## Equality Comparison
+
+> Warning Currently, equality comparison of JSON files can differ based on the context. In some cases, it is based on raw text comparison, while in other cases, it uses logical content comparison.
+
+The following query returns true for all fields:
+
+```sql
+SELECT 
+    a != b, -- Space is part of physical JSON content. Despite equal logical content, values are treated as not equal.
+    c != d, -- Same.
+    c[0] = d[0], -- Equality because space was removed from physical content of fields:
+    a = c[0], -- Indeed, field is equal to empty list without space...
+    b != c[0], -- ... but different from empty list with space.
+FROM (
+    SELECT
+        '[]'::JSON AS a,
+        '[ ]'::JSON AS b,
+        '[[]]'::JSON AS c,
+        '[[ ]]'::JSON AS d
+  );
+```
+
+| (a != b) | (c != d) | (c[0] = d[0]) | (a = c[0]) | (b != c[0]) |
+|----------|----------|---------------|------------|-------------|
+| true     | true     | true          | true       | true        |
+
 
 ## GitHub
 
