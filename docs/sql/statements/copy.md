@@ -42,7 +42,7 @@ Read a CSV file into the `lineitem` table, omitting quotes:
 COPY lineitem FROM lineitem.csv;
 ```
 
-Write a table to a CSV file
+Write a table to a CSV file:
 
 ```sql
 COPY lineitem TO 'lineitem.csv' (FORMAT CSV, DELIMITER '|', HEADER);

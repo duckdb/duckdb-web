@@ -388,10 +388,10 @@ FROM weather;
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
 
-One should be wary of statements of the form
+One should be cautious when issuing statements of the following form:
 
 ```sql
-DELETE FROM tablename;
+DELETE FROM ⟨table_name⟩;
 ```
 
 > Warning Without a qualification, `DELETE` will remove all rows from the given table, leaving it empty. The system will not request confirmation before doing this.
