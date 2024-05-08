@@ -136,8 +136,9 @@ Outputs:
 
 ## Retrieving Faulty CSV Lines
 
-Being able to read faulty CSV files is important, but for many data cleaning operations, it is also necessary to know exactly which lines are corrupted and what errors the parser discovered on them. For scenarios like these, it is possible to use DuckDB's CSV Rejects Table feature. 
+Being able to read faulty CSV files is important, but for many data cleaning operations, it is also necessary to know exactly which lines are corrupted and what errors the parser discovered on them. For scenarios like these, it is possible to use DuckDB's CSV Rejects Table feature.
 By default, this feature creates two temporary tables.
+
 1. `reject_scans`: Stores information regarding the parameters of the CSV Scanner
 2. `reject_errors`: Stores information regarding each CSV faulty line and in which CSV Scanner they happened.
 
@@ -197,8 +198,6 @@ The parameters listed below are used in the `read_csv` function to configure the
 | `rejects_table` | Name of a temporary table where the information of the faulty lines of a CSV file are stored. | `VARCHAR` | reject_errors |
 | `rejects_limit` | Upper limit on the number of faulty records from a CSV file that will be recorded in the rejects table. 0 is used when no limit should be applied. | `BIGINT` | 0 |
 
-
-
 To store the information of the faulty CSV lines in a rejects table, the user must simply set the `store_rejects` option to true. For example:
 
 ```sql
@@ -223,8 +222,6 @@ Outputs:
 |---------|---------|-----------------------------------|-----------|-------|--------|-------------------|-----------|-----------:|--------------------------------------|-------------|------------------|--------------------|
 | 5       | 0       | faulty.csv | ,         | "     | "      | \n                | 0         | false      | {'name': 'VARCHAR','age': 'INTEGER'} |             |                  | store_rejects=true |
 
-
-
 ```sql
 FROM rejects_table;
 ```
@@ -236,5 +233,3 @@ Outputs:
 | scan_id | file_id | line | line_byte_position | byte_position | column_idx | column_name | error_type |      csv_line       |                                   error_message                                    |
 |---------|---------|------|--------------------|---------------|------------|-------------|------------|---------------------|------------------------------------------------------------------------------------|
 | 5       | 0       | 2    | 10                 | 23            | 2          | age         | CAST       | Oogie Boogie, three | Error when converting column "age". Could not convert string " three" to 'INTEGER' |
-
-
