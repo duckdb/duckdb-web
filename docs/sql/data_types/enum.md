@@ -128,7 +128,7 @@ Given this, the following subquery selects automatically selects only distinct v
 CREATE TYPE mood AS ENUM (SELECT mood FROM 'path/to/file.csv');
 ```
 
-Then you can create a table with the enum type and import using any data import statement
+Then you can create a table with the enum type and import using any data import statement:
 
 ```sql
 CREATE TABLE person (name TEXT, current_mood mood);
