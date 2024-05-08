@@ -45,7 +45,6 @@ The connection string determines the parameters for how to connect to MySQL as a
 | `socket`   | `NULL`       | `MYSQL_UNIX_PORT`    |
 | `user`     | current user | `MYSQL_USER`         |
 
-
 ### Reading MySQL Tables
 
 The tables in the MySQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from MySQL at query time.

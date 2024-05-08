@@ -108,7 +108,6 @@ Below is a complete list of the supported parameters that can be used for both t
 | `URL_COMPATIBILITY_MODE`      | Can help when urls contain problematic characters.                                    | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint url                              | `R2`              | `STRING`  | -                                           |
 
-
 ### Platform-Specific Secret Types
 
 #### R2 Secrets

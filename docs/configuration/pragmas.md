@@ -93,7 +93,6 @@ memory_usage VARCHAR,  -- memory used by the database buffer manager
 memory_limit VARCHAR   -- maximum memory allowed for the database
 ```
 
-
 ### Storage Information
 
 To get storage information:

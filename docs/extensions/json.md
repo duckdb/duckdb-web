@@ -1025,7 +1025,6 @@ FROM (
 |----------|----------|---------------|------------|-------------|
 | true     | true     | true          | true       | true        |
 
-
 ## GitHub
 
 The `json` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/json).

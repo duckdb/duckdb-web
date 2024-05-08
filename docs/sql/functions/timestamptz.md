@@ -472,7 +472,6 @@ Functions applied to infinite dates will either return the same infinite dates
 In general, if the function needs to examine the parts of the infinite temporal value,
 the result will be `NULL`.
 
-
 ## Calendars
 
 The ICU extension also supports [non-Gregorian calendars](../../sql/data_types/timestamp#calendars).
