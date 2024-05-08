@@ -18,14 +18,14 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 | Name | Description |
 |:--|:-------|
-| [`regexp_extract_all(string, regex[, group = 0][, options])`](#regexp_extract_allstring-regex-group--0) | Split the *string* along the *regex* and extract all occurrences of *group*. |
-| [`regexp_extract(string, pattern, name_list[, options])`](#regexp_extractstring-pattern-name_list) | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. |
-| [`regexp_extract(string, pattern[, idx][, options])`](#regexp_extractstring-pattern-idx) | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. |
-| [`regexp_full_match(string, regex[, options])`](#regexp_full_matchstring-regex) | Returns `true` if the entire *string* matches the *regex*. |
-| [`regexp_matches(string, pattern[, options])`](#regexp_matchesstring-pattern) | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
-| [`regexp_replace(string, pattern, replacement[, options])`](#regexp_replacestring-pattern-replacement) | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. |
-| [`regexp_split_to_array(string, regex[, options])`](#regexp_split_to_arraystring-regex) | Alias of `string_split_regex`. Splits the *string* along the *regex*. |
-| [`regexp_split_to_table(string, regex[, options])`](#regexp_split_to_tablestring-regex) | Splits the *string* along the *regex* and returns a row for each part. |
+| [`regexp_extract_all(string, regex[, group = 0][, options])`](#regexp_extract_allstring-regex-group--0-options) | Split the *string* along the *regex* and extract all occurrences of *group*. |
+| [`regexp_extract(string, pattern, name_list[, options])`](#regexp_extractstring-pattern-name_list-options) | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. |
+| [`regexp_extract(string, pattern[, idx][, options])`](#regexp_extractstring-pattern-idx-options) | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. |
+| [`regexp_full_match(string, regex[, options])`](#regexp_full_matchstring-regex-options) | Returns `true` if the entire *string* matches the *regex*. |
+| [`regexp_matches(string, pattern[, options])`](#regexp_matchesstring-pattern-options) | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
+| [`regexp_replace(string, pattern, replacement[, options])`](#regexp_replacestring-pattern-replacement-options) | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. |
+| [`regexp_split_to_array(string, regex[, options])`](#regexp_split_to_arraystring-regex-options) | Alias of `string_split_regex`. Splits the *string* along the *regex*. |
+| [`regexp_split_to_table(string, regex[, options])`](#regexp_split_to_tablestring-regex-options) | Splits the *string* along the *regex* and returns a row for each part. |
 
 ### `regexp_extract_all(string, regex[, group = 0][, options])`
 
