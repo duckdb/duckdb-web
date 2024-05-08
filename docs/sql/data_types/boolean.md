@@ -30,7 +30,6 @@ INSERT INTO integers VALUES (5), (15), (NULL);
 Select all entries where `i > 10`:
 
 ```sql
--- 
 SELECT * FROM integers WHERE i > 10;
 ```
 

@@ -23,7 +23,7 @@ Recursive unnest of a list of structs:
 SELECT unnest([{'a': 42, 'b': 84}, {'a': 100, 'b': NULL}], recursive := true);
 ```
 
-Limit depth of recurisve unnest using max_depth:
+Limit depth of recursive unnest using `max_depth`:
 
 ```sql
 SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth := 2);

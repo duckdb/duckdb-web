@@ -14,7 +14,7 @@ Generate two rows and directly return them:
 VALUES ('Amsterdam', 1), ('London', 2);
 ```
 
-Generate two rows as part of a FROM clause, and rename the columns:
+Generate two rows as part of a `FROM` clause, and rename the columns:
 
 ```sql
 SELECT * FROM (VALUES ('Amsterdam', 1), ('London', 2)) Cities(Name, Id);
@@ -26,7 +26,7 @@ Generate two rows and insert them into a table:
 INSERT INTO Cities VALUES ('Amsterdam', 1), ('London', 2);
 ```
 
-Create a table directly from a VALUES clause:
+Create a table directly from a `VALUES` clause:
 
 ```sql
 CREATE TABLE Cities AS SELECT * FROM (VALUES ('Amsterdam', 1), ('London', 2)) Cities(Name, Id);

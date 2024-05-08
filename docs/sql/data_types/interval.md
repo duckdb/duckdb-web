@@ -15,6 +15,8 @@ Intervals represent a period of time. This period can be measured in a specific 
 An `INTERVAL` can be constructed by providing an amount together with a unit.
 Intervals can be added or subtracted from `DATE` or `TIMESTAMP` values.
 
+## Examples
+
 1 year:
 
 ```sql

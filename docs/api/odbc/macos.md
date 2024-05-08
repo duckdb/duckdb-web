@@ -3,7 +3,7 @@ layout: docu
 title: ODBC API on macOS
 ---
 
-1. A driver manager is required to manage communication between applications and the ODBC driver. DuckDB supports `unixODBC`, which is is a complete ODBC driver manager for macOS and Linux. Users can install it from the command line via [Homebrew](https://brew.sh/):
+1. A driver manager is required to manage communication between applications and the ODBC driver. DuckDB supports `unixODBC`, which is a complete ODBC driver manager for macOS and Linux. Users can install it from the command line via [Homebrew](https://brew.sh/):
 
    ```bash
    brew install unixodbc

@@ -9,43 +9,43 @@ The `SELECT` clause specifies the list of columns that will be returned by the q
 
 ## Examples
 
-Select all columns from the table called "table_name":
+Select all columns from the table called `table_name`:
 
 ```sql
 SELECT * FROM table_name;
 ```
 
-Perform arithmetic on columns in a table, and provide an alias:
+Perform arithmetic on the columns in a table, and provide an alias:
 
 ```sql
 SELECT col1 + col2 AS res, sqrt(col1) AS root FROM table_name;
 ```
 
-Select all unique cities from the addresses table:
+Select all unique cities from the `addresses` table:
 
 ```sql
 SELECT DISTINCT city FROM addresses;
 ```
 
-Return the total number of rows in the addresses table:
+Return the total number of rows in the `addresses` table:
 
 ```sql
 SELECT count(*) FROM addresses;
 ```
 
-Select all columns except the city column from the addresses table:
+Select all columns except the city column from the `addresses` table:
 
 ```sql
 SELECT * EXCLUDE (city) FROM addresses;
 ```
 
-Select all columns from the addresses table, but replace city with lower(city):
+Select all columns from the `addresses` table, but replace `city` with `lower(city)`:
 
 ```sql
 SELECT * REPLACE (lower(city) AS city) FROM addresses;
 ```
 
-Select all columns matching the given regex from the table:
+Select all columns matching the given regular expression from the table:
 
 ```sql
 SELECT COLUMNS('number\d+') FROM addresses;
@@ -57,7 +57,7 @@ Compute a function on all given columns of a table:
 SELECT min(COLUMNS(*)) FROM addresses;
 ```
 
-To select columns with spaces or special characters, use double quotes:
+To select columns with spaces or special characters, use double quotes (`"`):
 
 ```sql
 SELECT "Some Column Name" FROM tbl;
@@ -75,14 +75,14 @@ The `SELECT` clause contains a list of expressions that specify the result of a 
 
 ### Star Expressions
 
-Select all columns from the table called "table_name":
+Select all columns from the table called `table_name`:
 
 ```sql
 SELECT *
 FROM table_name;
 ```
 
-Select all columns matching the given regex from the table:
+Select all columns matching the given regular expression from the table:
 
 ```sql
 SELECT COLUMNS('number\d+')

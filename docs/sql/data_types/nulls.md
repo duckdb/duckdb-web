@@ -21,11 +21,26 @@ You can use `IS NOT DISTINCT FROM` to perform an equality comparison where `NULL
 
 ```sql
 SELECT NULL = NULL;
--- returns NULL
+```
+
+```text
+NULL
+```
+
+```sql
 SELECT NULL IS NOT DISTINCT FROM NULL;
--- returns true
+```
+
+```text
+true
+```
+
+```sql
 SELECT NULL IS NULL;
--- returns true
+```
+
+```text
+true
 ```
 
 ## NULL and Functions
@@ -34,7 +49,10 @@ A function that has input argument as `NULL` **usually** returns `NULL`.
 
 ```sql
 SELECT cos(NULL);
--- NULL
+```
+
+```text
+NULL
 ```
 
 The `coalesce` function is an exception to this: it takes any number of arguments, and returns for each row the first argument that is not `NULL`. If all arguments are `NULL`, `coalesce` also returns `NULL`.

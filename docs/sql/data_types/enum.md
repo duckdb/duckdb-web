@@ -8,9 +8,9 @@ blurb: The Enum type represents a dictionary data structure with all possible un
 
 | Name | Description |
 |:--|:-----|
-| `ENUM` | Dictionary Encoding representing all possible string values of a column. |
+| enum | Dictionary Encoding representing all possible string values of a column. |
 
-The `ENUM` type represents a dictionary data structure with all possible unique values of a column. For example, a column storing the days of the week can be an Enum holding all possible days. Enums are particularly interesting for string columns with low cardinality (i.e., fewer distinct values). This is because the column only stores a numerical reference to the string in the Enum dictionary, resulting in immense savings in disk storage and faster query performance.
+The enum type represents a dictionary data structure with all possible unique values of a column. For example, a column storing the days of the week can be an enum holding all possible days. Enums are particularly interesting for string columns with low cardinality (i.e., fewer distinct values). This is because the column only stores a numerical reference to the string in the enum dictionary, resulting in immense savings in disk storage and faster query performance.
 
 ## Enum Definition
 
@@ -42,13 +42,13 @@ This will fail since the `mood` type already exists:
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy', 'anxious');
 ```
 
-This will fail since Enums cannot hold `NULL` values:
+This will fail since enums cannot hold `NULL` values:
 
 ```sql
 CREATE TYPE breed AS ENUM ('maltese', NULL);
 ```
 
-This will fail since Enum values must be unique:
+This will fail since enum values must be unique:
 
 ```sql
 CREATE TYPE breed AS ENUM ('maltese', 'maltese');
@@ -69,7 +69,7 @@ Create an enum using the unique string values in the `my_varchar` column:
 CREATE TYPE birds AS ENUM (SELECT my_varchar FROM my_inputs);
 ```
 
-Show the available values in the `birds` enum using the enum_range function:
+Show the available values in the `birds` enum using the `enum_range` function:
 
 ```sql
 SELECT enum_range(NULL::birds) AS my_enum_range;
@@ -101,14 +101,14 @@ INSERT INTO person
 VALUES ('Pedro', 'happy'), ('Mark', NULL), ('Pagliacci', 'sad'), ('Mr. Mackey', 'ok');
 ```
 
-The following query will fail since the mood type does not have a 'quackity-quack' value.
+The following query will fail since the mood type does not have `quackity-quack` value.
 
 ```sql
 INSERT INTO person
 VALUES ('Hannes', 'quackity-quack');
 ```
 
-The string 'sad' is cast to the type mood, returning a numerical reference value.
+The string `sad` is cast to the type `mood`, returning a numerical reference value.
 This makes the comparison a numerical comparison instead of a string comparison.
 
 ```sql
@@ -121,14 +121,14 @@ WHERE current_mood = 'sad';
 |-----------|--------------|
 | Pagliacci | sad          |
 
-If you are importing data from a file, you can create an Enum for a `VARCHAR` column before importing.
+If you are importing data from a file, you can create an enum for a `VARCHAR` column before importing.
 Given this, the following subquery selects automatically selects only distinct values:
 
 ```sql
 CREATE TYPE mood AS ENUM (SELECT mood FROM 'path/to/file.csv');
 ```
 
-Then you can create a table with the `ENUM` type and import using any data import statement
+Then you can create a table with the enum type and import using any data import statement
 
 ```sql
 CREATE TABLE person (name TEXT, current_mood mood);
@@ -137,7 +137,7 @@ COPY person FROM 'path/to/file.csv';
 
 ## Enums vs. Strings
 
-DuckDB Enums are automatically cast to `VARCHAR` types whenever necessary. This characteristic allows for `ENUM` columns to be used in any `VARCHAR` function. In addition, it also allows for comparisons between different `ENUM` columns, or an `ENUM` and a `VARCHAR` column.
+DuckDB enums are automatically cast to `VARCHAR` types whenever necessary. This characteristic allows for enum columns to be used in any `VARCHAR` function. In addition, it also allows for comparisons between different enum columns, or an enum and a `VARCHAR` column.
 
 For example:
 
@@ -167,7 +167,7 @@ CREATE TABLE person_2 (
 );
 ```
 
-Since the `current_mood` and `future_mood` columns are constructed on different `ENUM` types, DuckDB will cast both `ENUM`s to strings and perform a string comparison:
+Since the `current_mood` and `future_mood` columns are constructed on different enum types, DuckDB will cast both enums to strings and perform a string comparison:
 
 ```sql
 SELECT *
@@ -175,7 +175,7 @@ FROM person_2
 WHERE current_mood = future_mood;
 ```
 
-When comparing the `past_mood` column (string), DuckDB will cast the `current_mood` `ENUM` to `VARCHAR` and perform a string comparison:
+When comparing the `past_mood` column (string), DuckDB will cast the `current_mood` enum to `VARCHAR` and perform a string comparison:
 
 ```sql
 SELECT *
@@ -185,19 +185,19 @@ WHERE current_mood = past_mood;
 
 ## Enum Removal
 
-Enum types are stored in the catalog, and a catalog dependency is added to each table that uses them. It is possible to drop an Enum from the catalog using the following command:
+Enum types are stored in the catalog, and a catalog dependency is added to each table that uses them. It is possible to drop an enum from the catalog using the following command:
 
 ```sql
 DROP TYPE ⟨enum_name⟩;
 ```
 
-Currently, it is possible to drop Enums that are used in tables without affecting the tables.
+Currently, it is possible to drop enums that are used in tables without affecting the tables.
 
-> Warning This behavior of the Enum Removal feature is subject to change. In future releases, it is expected that any dependent columns must be removed before dropping the Enum, or the Enum must be dropped with the additional `CASCADE` parameter.
+> Warning This behavior of the enum removal feature is subject to change. In future releases, it is expected that any dependent columns must be removed before dropping the enum, or the enum must be dropped with the additional `CASCADE` parameter.
 
 ## Comparison of Enums
 
-Enum values are compared according to their order in the Enum's definition. For example:
+Enum values are compared according to their order in the enum's definition. For example:
 
 ```sql
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');

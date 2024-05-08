@@ -54,7 +54,7 @@ SELECT
 
 Create a struct from columns and/or expressions using the row function:
 
-This returns {'': 1, '': 2, '': a}:
+This returns `{'': 1, '': 2, '': a}`:
 
 ```sql
 SELECT row(x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);
@@ -62,7 +62,7 @@ SELECT row(x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);
 
 If using multiple expressions when creating a struct, the row function is optional:
 
-This also returns {'': 1, '': 2, '': a}:
+This also returns `{'': 1, '': 2, '': a}`:
 
 ```sql
 SELECT (x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);

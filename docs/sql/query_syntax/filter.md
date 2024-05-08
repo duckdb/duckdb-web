@@ -82,7 +82,7 @@ SELECT
 FROM stacked_data;
 ```
 
-This syntax produces the same results as the FILTER clauses above:
+This syntax produces the same results as the `FILTER` clauses above:
 
 ```sql
 SELECT
@@ -120,7 +120,7 @@ FROM stacked_data;
 |:---|:---|:---|:---|:---|
 | 1474561 | 25804801 | 50749441 | 76431361 | 87500001 |
 
-This will produce NULL values whenever the first evaluation of the CASE WHEN clause returns a NULL:
+This will produce `NULL` values whenever the first evaluation of the `CASE WHEN` clause returns a `NULL`:
 
 ```sql
 SELECT

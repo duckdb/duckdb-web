@@ -23,7 +23,7 @@ Create two CTEs, where the second CTE references the first CTE:
 
 ```sql
 WITH cte AS (SELECT 42 AS i),
-     cte2 AS (SELECT i*100 AS x FROM cte)
+     cte2 AS (SELECT i * 100 AS x FROM cte)
 SELECT * FROM cte2;
 ```
 
