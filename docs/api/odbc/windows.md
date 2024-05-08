@@ -85,6 +85,7 @@ For example, the DSN registry for DuckDB would look like this:
 The `ODBCINST.INI` contains one entry for each ODBC driver and other keys predefined for [Windows ODBC configuration](https://docs.microsoft.com/en-us/sql/odbc/reference/install/registry-entries-for-odbc-components?view=sql-server-ver15).
 
 ### Updating the ODBC Driver
+
 When a new version of the ODBC driver is released, installing the new version will overwrite the existing one.
 However, the installer doesn't always update the version number in the registry.
 To ensure the correct version is used,
