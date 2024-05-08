@@ -8,34 +8,71 @@ The `CREATE SEQUENCE` statement creates a new sequence number generator.
 
 ### Examples
 
+Generate an ascending sequence starting from 1:
+
 ```sql
--- generate an ascending sequence starting from 1
 CREATE SEQUENCE serial;
--- generate sequence from a given start number
+```
+
+Generate sequence from a given start number:
+
+```sql
 CREATE SEQUENCE serial START 101;
--- generate odd numbers using INCREMENT BY
+```
+
+Generate odd numbers using `INCREMENT BY`:
+
+```sql
 CREATE SEQUENCE serial START WITH 1 INCREMENT BY 2;
--- generate a descending sequqnce starting from 99
+```
+
+Generate a descending sequqnce starting from 99:
+
+```sql
 CREATE SEQUENCE serial START WITH 99 INCREMENT BY -1 MAXVALUE 99;
--- by default, cycles are not allowed and will result in a Serialization Error, e.g.:
--- reached maximum value of sequence "serial" (10)
+```
+
+By default, cycles are not allowed and will result in error, e.g.:
+
+```console
+Sequence Error: nextval: reached maximum value of sequence "serial" (10)
+```
+
+```sql
 CREATE SEQUENCE serial START WITH 1 MAXVALUE 10;
--- CYCLE allows cycling through the same sequence repeatedly
+```
+
+`CYCLE` allows cycling through the same sequence repeatedly:
+
+```sql
 CREATE SEQUENCE serial START WITH 1 MAXVALUE 10 CYCLE;
 ```
 
 ### Creating and Dropping Sequences
 
-Sequences can be created and dropped similarly to other catalogue items:
+Sequences can be created and dropped similarly to other catalogue items.
+
+Overwrite an existing sequence:
 
 ```sql
--- overwrite an existing sequence
 CREATE OR REPLACE SEQUENCE serial;
--- only create sequence if no such sequence exists yet
+```
+
+Only create sequence if no such sequence exists yet:
+
+```sql
 CREATE SEQUENCE IF NOT EXISTS serial;
--- remove sequence
+```
+
+Remove sequence:
+
+```sql
 DROP SEQUENCE serial;
--- remove sequence if exists
+```
+
+Remove sequence if exists:
+
+```sql
 DROP SEQUENCE IF EXISTS serial;
 ```
 

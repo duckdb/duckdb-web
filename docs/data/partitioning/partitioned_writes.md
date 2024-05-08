@@ -5,10 +5,15 @@ title: Partitioned Writes
 
 ## Examples
 
+Write a table to a Hive partitioned data set of Parquet files:
+
 ```sql
--- write a table to a Hive partitioned data set of Parquet files
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
--- write a table to a Hive partitioned data set of CSV files, allowing overwrites
+```
+
+Write a table to a Hive partitioned data set of CSV files, allowing overwrites:
+
+```sql
 COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE 1);
 ```
 
@@ -47,11 +52,16 @@ By default, files will be named `data_0.parquet` or `data_0.csv`. With the flag 
 * `{i}` will be replaced by an index
 * `{uuid}` will be replaced by a 128 bits long UUID
 
+Write a table to a Hive partitioned data set of .parquet files, with an index in the filename:
+
 ```sql
--- write a table to a Hive partitioned data set of .parquet files, with an index in the filename
 COPY orders TO 'orders'
     (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "orders_{i}");
--- write a table to a Hive partitioned data set of .parquet files, with unique filenames
+```
+
+Write a table to a Hive partitioned data set of .parquet files, with unique filenames:
+
+```sql
 COPY orders TO 'orders'
     (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "file_{uuid}");
 ```

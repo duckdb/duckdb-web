@@ -8,22 +8,25 @@ The `WHERE` clause specifies any filters to apply to the data. This allows you t
 
 ## Examples
 
+Select all rows that where the `id` is equal to 3:
+
 ```sql
--- select all rows that have id equal to 3
 SELECT *
 FROM table_name
 WHERE id = 3;
 ```
 
+Select all rows that match the given case-insensitive LIKE expression:
+
 ```sql
--- select all rows that match the given case-insensitive LIKE expression
 SELECT *
 FROM table_name
 WHERE name ILIKE '%mark%';
 ```
 
+Select all rows that match the given composite expression:
+
 ```sql
--- select all rows that match the given composite expression
 SELECT *
 FROM table_name
 WHERE id = 3 OR id = 7;

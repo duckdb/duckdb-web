@@ -48,13 +48,13 @@ The first parameter to the `postgres_scan` function is the [PostgreSQL connectio
 Alternatively, the entire database can be attached using the `ATTACH` command. This allows you to query all tables stored within the PostgreSQL database as if it was a regular database.
 
 ```sql
--- attach the Postgres database using the given connection string
+-- Attach the Postgres database using the given connection string
 ATTACH 'host=localhost port=5432 dbname=mydb' AS test (TYPE postgres);
--- the table "tbl_name" can now be queried as if it is a regular table
+-- The table "tbl_name" can now be queried as if it is a regular table
 SELECT * FROM test.tbl_name;
--- switch the active database to "test"
+-- Switch the active database to "test"
 USE test;
--- list all tables in the file
+-- List all tables in the file
 SHOW TABLES;
 ```
 

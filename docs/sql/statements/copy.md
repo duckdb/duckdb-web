@@ -6,36 +6,75 @@ railroad: statements/copy.js
 
 ## Examples
 
+Read a CSV file into the `lineitem` table, using auto-detected CSV options:
+
 ```sql
--- read a CSV file into the lineitem table, using auto-detected CSV options
 COPY lineitem FROM 'lineitem.csv';
--- read a CSV file into the lineitem table, using manually specified CSV options
+```
+
+Read a CSV file into the `lineitem` table, using manually specified CSV options:
+
+```sql
 COPY lineitem FROM 'lineitem.csv' (DELIMITER '|');
--- read a Parquet file into the lineitem table
+```
+
+Read a Parquet file into the `lineitem` table:
+
+```sql
 COPY lineitem FROM 'lineitem.pq' (FORMAT PARQUET);
--- read a JSON file into the lineitem table, using auto-detected options
+```
+
+Read a JSON file into the `lineitem` table, using auto-detected options:
+
+```sql
 COPY lineitem FROM 'lineitem.json' (FORMAT JSON, AUTO_DETECT true);
--- read a CSV file into the lineitem table, using double quotes
+```
+
+Read a CSV file into the `lineitem` table, using double quotes:
+
+```sql
 COPY lineitem FROM "lineitem.csv";
--- read a CSV file into the lineitem table, omitting quotes
+```
+
+Read a CSV file into the `lineitem` table, omitting quotes:
+
+```sql
 COPY lineitem FROM lineitem.csv;
 ```
 
+Write a table to a CSV file
+
 ```sql
--- write a table to a CSV file
 COPY lineitem TO 'lineitem.csv' (FORMAT CSV, DELIMITER '|', HEADER);
--- write a table to a CSV file, using double quotes
+```
+
+Write a table to a CSV file, using double quotes:
+
+```sql
 COPY lineitem TO "lineitem.csv";
--- write a table to a CSV file, omitting quotes
+```
+
+Write a table to a CSV file, omitting quotes:
+
+```sql
 COPY lineitem TO lineitem.csv;
--- write the result of a query to a Parquet file
+```
+
+Write the result of a query to a Parquet file:
+
+```sql
 COPY (SELECT l_orderkey, l_partkey FROM lineitem) TO 'lineitem.parquet' (COMPRESSION ZSTD);
 ```
 
+Copy the entire content of database `db1` to database `db2`:
+
 ```sql
--- copy the entire content of database 'db1' to database 'db2'
 COPY FROM DATABASE db1 TO db2;
--- copy only the schema (catalog elements) but not any data
+```
+
+Copy only the schema (catalog elements) but not any data:
+
+```sql
 COPY FROM DATABASE db1 TO db2 (SCHEMA);
 ```
 
@@ -49,22 +88,51 @@ COPY FROM DATABASE db1 TO db2 (SCHEMA);
 
 If a list of columns is specified, `COPY` will only copy the data in the specified columns from the file. If there are any columns in the table that are not in the column list, `COPY ... FROM` will insert the default values for those columns
 
+Copy the contents of a comma-separated file `test.csv` without a header into the table `test`:
+
 ```sql
--- Copy the contents of a comma-separated file 'test.csv' without a header into the table 'test'
 COPY test FROM 'test.csv';
--- Copy the contents of a comma-separated file with a header into the 'category' table
+```
+
+Copy the contents of a comma-separated file with a header into the `category` table:
+
+```sql
 COPY category FROM 'categories.csv' (HEADER);
--- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the contents are delimited by a pipe character ('|')
+```
+
+Copy the contents of `lineitem.tbl` into the `lineitem` table, where the contents are delimited by a pipe character (`|`):
+
+```sql
 COPY lineitem FROM 'lineitem.tbl' (DELIMITER '|');
--- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the delimiter, quote character, and presence of a header are automatically detected
+```
+
+Copy the contents of `lineitem.tbl` into the `lineitem` table, where the delimiter, quote character, and presence of a header are automatically detected:
+
+```sql
 COPY lineitem FROM 'lineitem.tbl' (AUTO_DETECT true);
--- Read the contents of a comma-separated file 'names.csv' into the 'name' column of the 'category' table. Any other columns of this table are filled with their default value.
+```
+
+Read the contents of a comma-separated file `names.csv` into the `name` column of the `category` table. Any other columns of this table are filled with their default value:
+
+```sql
 COPY category(name) FROM 'names.csv';
--- Read the contents of a Parquet file 'lineitem.parquet' into the lineitem table
+```
+
+Read the contents of a Parquet file `lineitem.parquet` into the `lineitem` table:
+
+```sql
 COPY lineitem FROM 'lineitem.parquet' (FORMAT PARQUET);
--- Read the contents of a newline-delimited JSON file 'lineitem.ndjson' into the lineitem table
+```
+
+Read the contents of a newline-delimited JSON file `lineitem.ndjson` into the `lineitem` table:
+
+```sql
 COPY lineitem FROM 'lineitem.ndjson' (FORMAT JSON);
--- Read the contents of a JSON file 'lineitem.json' into the lineitem table
+```
+
+Read the contents of a JSON file `lineitem.json` into the `lineitem` table:
+
+```sql
 COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY true);
 ```
 
@@ -78,23 +146,51 @@ COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY true);
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
 
+Copy the contents of the `lineitem` table to a CSV file with a header:
+
 ```sql
--- Copy the contents of the 'lineitem' table to a CSV file with a header
 COPY lineitem TO 'lineitem.csv';
--- Copy the contents of the 'lineitem' table to the file 'lineitem.tbl',
--- where the columns are delimited by a pipe character ('|'), including a header line.
+```
+
+Copy the contents of the `lineitem` table to the file `lineitem.tbl`, where the columns are delimited by a pipe character (`|`), including a header line:
+
+```sql
 COPY lineitem TO 'lineitem.tbl' (DELIMITER '|');
--- Use tab separators to create a TSV file without a header
+```
+
+Use tab separators to create a TSV file without a header:
+
+```sql
 COPY lineitem TO 'lineitem.tsv' (DELIMITER '\t', HEADER false);
--- Copy the l_orderkey column of the 'lineitem' table to the file 'orderkey.tbl'
+```
+
+Copy the l_orderkey column of the `lineitem` table to the file `orderkey.tbl`:
+
+```sql
 COPY lineitem(l_orderkey) TO 'orderkey.tbl' (DELIMITER '|');
--- Copy the result of a query to the file 'query.csv', including a header with column names
+```
+
+Copy the result of a query to the file `query.csv`, including a header with column names:
+
+```sql
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' (DELIMITER ',');
--- Copy the result of a query to the Parquet file 'query.parquet'
+```
+
+Copy the result of a query to the Parquet file `query.parquet`:
+
+```sql
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.parquet' (FORMAT PARQUET);
--- Copy the result of a query to the newline-delimited JSON file 'query.ndjson'
+```
+
+Copy the result of a query to the newline-delimited JSON file `query.ndjson`:
+
+```sql
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.ndjson' (FORMAT JSON);
--- Copy the result of a query to the JSON file 'query.json'
+```
+
+Copy the result of a query to the JSON file `query.json`:
+
+```sql
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY true);
 ```
 
@@ -161,7 +257,7 @@ The below options are applicable when writing `CSV` files.
 | `escape` | The character that should appear before a character that matches the `quote` value. | `VARCHAR` | `"` |
 | `force_quote` | The list of columns to always add quotes to, even if not required. | `VARCHAR[]` | `[]` |
 | `header` | Whether or not to write a header for the CSV file. | `BOOL` | `true` |
-| `nullstr` | The string that is written to represent a NULL value. | `VARCHAR` | (empty) |
+| `nullstr` | The string that is written to represent a `NULL` value. | `VARCHAR` | (empty) |
 | `quote` | The quoting character to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
 
@@ -173,56 +269,59 @@ The below options are applicable when writing `Parquet` files.
 |:--|:-----|:-|:-|
 | `compression` | The compression format to use (`uncompressed`, `snappy`, `gzip` or `zstd`). | `VARCHAR` | `snappy` |
 | `field_ids` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | `STRUCT` | (empty) |
-| `row_group_size_bytes` | The target size of each row group. You can pass either a human-readable string, e.g., '2MB', or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise it is ignored. | `BIGINT` | `row_group_size * 1024` |
+| `row_group_size_bytes` | The target size of each row group. You can pass either a human-readable string, e.g., '2MB', or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored. | `BIGINT` | `row_group_size * 1024` |
 | `row_group_size` | The target size, i.e., number of rows, of each row group. | `BIGINT` | 122880 |
 
 Some examples of `FIELD_IDS` are:
 
+Assign `field_ids` automatically:
+
 ```sql
--- Assign field_ids automatically
 COPY
     (SELECT 128 AS i)
     TO 'my.parquet'
     (FIELD_IDS 'auto');
 ```
 
+Sets the `field_id` of column `i` to 42:
+
 ```sql
--- Sets the field_id of column 'i' to 42
 COPY
     (SELECT 128 AS i)
     TO 'my.parquet'
     (FIELD_IDS {i: 42});
 ```
 
+Sets the `field_id` of column `i` to 42, and column `j` to 43:
+
 ```sql
--- Sets the field_id of column 'i' to 42, and column 'j' to 43
 COPY
     (SELECT 128 AS i, 256 AS j)
     TO 'my.parquet'
     (FIELD_IDS {i: 42, j: 43});
 ```
 
+Sets the `field_id` of column `my_struct` to 43, and column `i` (nested inside `my_struct`) to 43:
+
 ```sql
--- Sets the field_id of column 'my_struct' to 43,
--- and column 'i' (nested inside 'my_struct') to 43
 COPY
     (SELECT {i: 128} AS my_struct)
     TO 'my.parquet'
     (FIELD_IDS {my_struct: {__duckdb_field_id: 42, i: 43}});
 ```
 
+Sets the `field_id` of column `my_list` to 42, and column `element` (default name of list child) to 43:
+
 ```sql
--- Sets the field_id of column 'my_list' to 42,
--- and column 'element' (default name of list child) to 43
 COPY
     (SELECT [128, 256] AS my_list)
     TO 'my.parquet'
     (FIELD_IDS {my_list: {__duckdb_field_id: 42, element: 43}});
 ```
 
+Sets the `field_id` of colum `my_map` to 42, and columns `key` and `value` (default names of map children) to 43 and 44:
+
 ```sql
--- Sets the field_id of colum 'my_map' to 42,
--- and columns 'key' and 'value' (default names of map children) to 43 and 44
 COPY
     (SELECT MAP {'key1' : 128, 'key2': 256} my_map)
     TO 'my.parquet'

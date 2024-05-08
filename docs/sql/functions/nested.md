@@ -896,8 +896,9 @@ SELECT array_to_string([1, 2, 3], '-') AS str;
 1-2-3
 ```
 
+This is equivalent to the following SQL:
+
 ```sql
--- this is equivalent to the following SQL
 SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 ```
 
@@ -907,14 +908,15 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 
 ## Sorting Lists
 
-The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether NULL values should be moved to the beginning or to the end of the list.
+The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether `NULL` values should be moved to the beginning or to the end of the list.
 
-By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and NULL values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [`PRAGMA` statements](../../configuration/pragmas#default-ordering-for-nulls).
+By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and `NULL` values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [`PRAGMA` statements](../../configuration/pragmas#default-ordering-for-nulls).
 
 `list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. `list_sort` takes up to two additional optional parameters. The second parameter provides the sort order and can be either `ASC` or `DESC`. The third parameter provides the `NULL` sort order and can be either `NULLS FIRST` or `NULLS LAST`.
 
+Default sort order and default `NULL` sort order:
+
 ```sql
--- default sort order and default NULL sort order
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ```
 
@@ -922,8 +924,9 @@ SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 [NULL, NULL, -5, 1, 3, 5]
 ```
 
+Only providing the sort order:
+
 ```sql
--- only providing the sort order
 SELECT list_sort([1, 3, NULL, 2], 'ASC');
 ```
 
@@ -931,8 +934,9 @@ SELECT list_sort([1, 3, NULL, 2], 'ASC');
 [NULL, 1, 2, 3]
 ```
 
+Providing the sort order and the `NULL` sort order:
+
 ```sql
--- providing the sort order and the NULL sort order
 SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 ```
 
@@ -942,8 +946,9 @@ SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 
 `list_reverse_sort` has an optional second parameter providing the `NULL` sort order. It can be either `NULLS FIRST` or `NULLS LAST`.
 
+Default `NULL` sort order:
+
 ```sql
--- default NULL sort order
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ```
 
@@ -951,8 +956,9 @@ SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 [NULL, NULL, -5, 1, 3, 5]
 ```
 
+Providing the `NULL` sort order:
+
 ```sql
--- providing the NULL sort order
 SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 ```
 
@@ -970,8 +976,9 @@ For details, see the [lambda functions page](lambda).
 The flatten function is a scalar function that converts a list of lists into a single list by concatenating each sub-list together.
 Note that this only flattens one level at a time, not all levels of sub-lists.
 
+Convert a list of lists into a single list:
+
 ```sql
--- Convert a list of lists into a single list
 SELECT
     flatten([
         [1, 2],
@@ -983,9 +990,9 @@ SELECT
 [1, 2, 3, 4]
 ```
 
+If the list has multiple levels of lists, only the first level of sub-lists is concatenated into a single list:
+
 ```sql
--- If the list has multiple levels of lists,
--- only the first level of sub-lists is concatenated into a single list
 SELECT
     flatten([
         [
@@ -1006,8 +1013,9 @@ SELECT
 In general, the input to the flatten function should be a list of lists (not a single level list).
 However, the behavior of the flatten function has specific behavior when handling empty lists and `NULL` values.
 
+If the input list is empty, return an empty list:
+
 ```sql
--- If the input list is empty, return an empty list
 SELECT flatten([]);
 ```
 
@@ -1015,8 +1023,9 @@ SELECT flatten([]);
 []
 ```
 
+If the entire input to flatten is `NULL`, return `NULL`:
+
 ```sql
--- If the entire input to flatten is NULL, return NULL
 SELECT flatten(NULL);
 ```
 
@@ -1024,8 +1033,9 @@ SELECT flatten(NULL);
 NULL
 ```
 
+If a list whose only entry is `NULL` is flattened, return an empty list:
+
 ```sql
--- If a list whose only entry is NULL is flattened, return an empty list
 SELECT flatten([NULL]);
 ```
 
@@ -1033,9 +1043,9 @@ SELECT flatten([NULL]);
 []
 ```
 
+If the sub-list in a list of lists only contains `NULL`, do not modify the sub-list:
+
 ```sql
--- If the sub-list in a list of lists only contains NULL,
--- do not modify the sub-list
 -- (Note the extra set of parentheses vs. the prior example)
 SELECT flatten([[NULL]]);
 ```
@@ -1044,11 +1054,9 @@ SELECT flatten([[NULL]]);
 [NULL]
 ```
 
+Even if the only contents of each sub-list is `NULL`, still concatenate them together. Note that no de-duplication occurs when flattening. See `list_distinct` function for de-duplication:
+
 ```sql
--- Even if the only contents of each sub-list is NULL,
--- still concatenate them together
--- Note that no de-duplication occurs when flattening.
--- See list_distinct function for de-duplication.
 SELECT flatten([[NULL],[NULL]]);
 ```
 

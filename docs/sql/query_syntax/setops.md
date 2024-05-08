@@ -19,7 +19,6 @@ The `UNION` clause can be used to combine rows from multiple queries. The querie
 The vanilla `UNION` clause follows set semantics, therefore it performs duplicate elimination, i.e., only unique rows will be included in the result.
 
 ```sql
--- the values [0..2)
 SELECT * FROM range(2) t1(x)
 UNION
 SELECT * FROM range(3) t2(x);
@@ -36,7 +35,6 @@ SELECT * FROM range(3) t2(x);
 `UNION ALL` returns all rows of both queries following bag semantics, i.e., *without* duplicate elimination.
 
 ```sql
--- the values [0..2) and [0..3)
 SELECT * FROM range(2) t1(x)
 UNION ALL
 SELECT * FROM range(3) t2(x);
@@ -91,7 +89,6 @@ The `INTERSECT` clause can be used to select all rows that occur in the result o
 Vanilla `INTERSECT` performs duplicate elimination, so only unique rows are returned.
 
 ```sql
--- the values [0..5] (all values that are both in t1 and t2)
 SELECT * FROM range(2) t1(x)
 INTERSECT
 SELECT * FROM range(6) t2(x);
@@ -107,7 +104,6 @@ SELECT * FROM range(6) t2(x);
 `INTERSECT ALL` follows bag semantics, so duplicates are returned.
 
 ```sql
--- INTERSECT ALL uses bag semantics
 SELECT unnest([5, 5, 6, 6, 6, 6, 7, 8]) AS x
 INTERSECT ALL
 SELECT unnest([5, 6, 6, 7, 7, 9]);
@@ -129,7 +125,6 @@ The `EXCEPT` clause can be used to select all rows that **only** occur in the le
 Vanilla `EXCEPT` follows set semantics, therefore, it performs duplicate elimination, so only unique rows are returned.
 
 ```sql
--- the values [2..5)
 SELECT * FROM range(5) t1(x)
 EXCEPT
 SELECT * FROM range(2) t2(x);
@@ -143,8 +138,9 @@ SELECT * FROM range(2) t2(x);
 
 ### `EXCEPT ALL` (Bag Semantics)
 
+`EXCEPT ALL` uses bag semantics:
+
 ```sql
--- EXCEPT ALL uses bag semantics
 SELECT unnest([5, 5, 6, 6, 6, 6, 7, 8]) AS x
 EXCEPT ALL
 SELECT unnest([5, 6, 6, 7, 7, 9]);

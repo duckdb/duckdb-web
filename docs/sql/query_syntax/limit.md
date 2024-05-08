@@ -10,23 +10,26 @@ Note that while `LIMIT` can be used without an `ORDER BY` clause, the results mi
 
 ## Examples
 
+Select the first 5 rows from the addresses table:
+
 ```sql
--- select the first 5 rows from the addresses table
 SELECT *
 FROM addresses
 LIMIT 5;
 ```
 
+Select the 5 rows from the addresses table, starting at position 5 (i.e., ignoring the first 5 rows):
+
 ```sql
--- select the 5 rows from the addresses table, starting at position 5 (i.e., ignoring the first 5 rows)
 SELECT *
 FROM addresses
 LIMIT 5
 OFFSET 5;
 ```
 
+Select the top 5 cities with the highest population:
+
 ```sql
--- select the top 5 cities with the highest population
 SELECT city, count(*) AS population
 FROM addresses
 GROUP BY city

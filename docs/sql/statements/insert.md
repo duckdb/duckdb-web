@@ -8,23 +8,44 @@ The `INSERT` statement inserts new data into a table.
 
 ### Examples
 
+Insert the values 1, 2, 3 into `tbl`:
+
 ```sql
--- insert the values (1), (2), (3) into "tbl"
 INSERT INTO tbl
     VALUES (1), (2), (3);
--- insert the result of a query into a table
+```
+
+Insert the result of a query into a table:
+
+```sql
 INSERT INTO tbl
     SELECT * FROM other_tbl;
--- insert values into the "i" column, inserting the default value into other columns
+```
+
+Insert values into the `i` column, inserting the default value into other columns:
+
+```sql
 INSERT INTO tbl (i)
     VALUES (1), (2), (3);
--- explicitly insert the default value into a column
+```
+
+Explicitly insert the default value into a column:
+
+```sql
 INSERT INTO tbl (i)
     VALUES (1), (DEFAULT), (3);
--- assuming tbl has a primary key/unique constraint, do nothing on conflict
+```
+
+Assuming `tbl` has a primary key/unique constraint, do nothing on conflict:
+
+```sql
 INSERT OR IGNORE INTO tbl (i)
     VALUES (1);
--- or update the table with the new values instead
+```
+
+Or update the table with the new values instead:
+
+```sql
 INSERT OR REPLACE INTO tbl (i)
     VALUES (1);
 ```
@@ -53,7 +74,11 @@ For example:
 CREATE TABLE tbl (a INTEGER, b INTEGER);
 INSERT INTO tbl
     VALUES (5, 42);
--- specifying "BY POSITION" is optional and is equivalent to the default behavior
+```
+
+Specifying "BY POSITION" is optional and is equivalent to the default behavior:
+
+```sql
 INSERT INTO tbl
     BY POSITION
     VALUES (5, 42);
@@ -65,7 +90,11 @@ To use a different order, column names can be provided as part of the target, fo
 CREATE TABLE tbl (a INTEGER, b INTEGER);
 INSERT INTO tbl (b, a)
     VALUES (5, 42);
--- adding "BY POSITION" results in the same behavior
+```
+
+Adding `BY POSITION` results in the same behavior:
+
+```sql
 INSERT INTO tbl
     BY POSITION (b, a)
     VALUES (5, 42);
@@ -161,7 +190,7 @@ Optionally you can provide an additional `WHERE` clause that can exclude certain
 The conflicts that don't meet this condition are ignored instead.
 
 Because we need a way to refer to both the **to-be-inserted** tuple and the **existing** tuple, we introduce the special `EXCLUDED` qualifier.
-When the `EXCLUDED` qualifier is provided, the reference refers to the **to-be-inserted** tuple, otherwise it refers to the **existing** tuple.
+When the `EXCLUDED` qualifier is provided, the reference refers to the **to-be-inserted** tuple, otherwise, it refers to the **existing** tuple.
 This special qualifier can be used within the `WHERE` clauses and `SET` expressions of the `ON CONFLICT` clause.
 
 ```sql

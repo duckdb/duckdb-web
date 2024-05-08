@@ -7,7 +7,7 @@ The `json` extension is a loadable extension that implements SQL functions that 
 
 ## Installing and Loading
 
-The `json` extension is shipped by default in DuckDB builds, otherwise it will be transparently autoloaded on first use.
+The `json` extension is shipped by default in DuckDB builds, otherwise, it will be transparently autoloaded on first use.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -17,13 +17,15 @@ LOAD json;
 
 ## Example Uses
 
+Read a JSON file from disk, auto-infer options:
+
 ```sql
--- read a JSON file from disk, auto-infer options
 SELECT * FROM 'todos.json';
 ```
 
+`read_json` with custom options:
+
 ```sql
--- read_json with custom options
 SELECT *
 FROM read_json('todos.json',
                format = 'array',
@@ -33,26 +35,30 @@ FROM read_json('todos.json',
                           completed: 'BOOLEAN'});
 ```
 
+Write the result of a query to a JSON file:
+
 ```sql
--- write the result of a query to a JSON file
 COPY (SELECT * FROM todos) TO 'todos.json';
 ```
 
-See more examples of loading JSON data on the [JSON data page](../data/json/overview#examples).
+See more examples of loading JSON data on the [JSON data page](../data/json/overview#examples):
+
+Create a table with a column for storing JSON data:
 
 ```sql
---- Create a table with a column for storing JSON data
 CREATE TABLE example (j JSON);
 ```
 
+Insert JSON data into the table:
+
 ```sql
--- Insert JSON data into the table
 INSERT INTO example VALUES
     ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
 ```
 
+Retrieve the family key's value:
+
 ```sql
--- Retrieve the family key's value
 SELECT j.family FROM example;
 ```
 
@@ -60,8 +66,9 @@ SELECT j.family FROM example;
 "anatidae"
 ```
 
+Extract the family key's value with a JSONPath expression:
+
 ```sql
--- Extract the family key's value with a JSONPath expression
 SELECT j->'$.family' FROM example;
 ```
 
@@ -69,8 +76,9 @@ SELECT j->'$.family' FROM example;
 "anatidae"
 ```
 
+Extract the family key's value with a JSONPath expression as a VARCHAR:
+
 ```sql
--- Extract the family key's value with a JSONPath expression as a VARCHAR
 SELECT j->>'$.family' FROM example;
 ```
 
@@ -86,8 +94,9 @@ All JSON creation functions return values of this type.
 
 We also allow any of our types to be casted to JSON, and JSON to be casted back to any of our types, for example:
 
+Cast JSON to our STRUCT type:
+
 ```sql
--- Cast JSON to our STRUCT type
 SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
 ```
 
@@ -95,8 +104,9 @@ SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
 {'duck': 42}
 ```
 
+And back
+
 ```sql
--- And back:
 SELECT {duck: 42}::JSON;
 ```
 
@@ -236,7 +246,7 @@ SELECT * FROM read_json('my_file1.json', columns = {duck: 'INTEGER'});
 |:---|
 | 42 |
 
-DuckDB can convert JSON arrays directly to its internal `LIST` type, and missing keys become `NULL`.
+DuckDB can convert JSON arrays directly to its internal `LIST` type, and missing keys become `NULL`:
 
 ```sql
 SELECT *
@@ -697,16 +707,19 @@ Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
 
 If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
 
+The following will cause the JSON to be parsed twice,:
+
+Resulting in a slower query that uses more memory:
+
 ```sql
--- The following will cause the JSON to be parsed twice,
--- resulting in a slower query that uses more memory
 SELECT json_extract(j, 'family') AS family,
        json_extract(j, 'species') AS species
 FROM example;
 ```
 
+The following is faster and more memory efficient:
+
 ```sql
--- The following is faster and more memory efficient
 WITH extracted AS (
     SELECT json_extract(j, ['family', 'species']) extracted_list
     FROM example
@@ -912,8 +925,9 @@ Note that these functions do not preserve syntactic sugar such as `FROM * SELECT
 
 Examples:
 
+Simple example:
+
 ```sql
--- Simple example
 SELECT json_serialize_sql('SELECT 2');
 ```
 
@@ -921,8 +935,9 @@ SELECT json_serialize_sql('SELECT 2');
 '{"error":false,"statements":[{"node":{"type":"SELECT_NODE","modifiers":[],"cte_map":{"map":[]},"select_list":[{"class":"CONSTANT","type":"VALUE_CONSTANT","alias":"","value":{"type":{"id":"INTEGER","type_info":null},"is_null":false,"value":2}}],"from_table":{"type":"EMPTY","alias":"","sample":null},"where_clause":null,"group_expressions":[],"group_sets":[],"aggregate_handling":"STANDARD_HANDLING","having":null,"sample":null,"qualify":null}}]}'
 ```
 
+Example with multiple statements and skip options:
+
 ```sql
--- Example with multiple statements and skip options
 SELECT json_serialize_sql('SELECT 1 + 2; SELECT a + b FROM tbl1', skip_empty := true, skip_null := true);
 ```
 
@@ -930,8 +945,9 @@ SELECT json_serialize_sql('SELECT 1 + 2; SELECT a + b FROM tbl1', skip_empty := 
 '{"error":false,"statements":[{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","function_name":"+","children":[{"class":"CONSTANT","type":"VALUE_CONSTANT","value":{"type":{"id":"INTEGER"},"is_null":false,"value":1}},{"class":"CONSTANT","type":"VALUE_CONSTANT","value":{"type":{"id":"INTEGER"},"is_null":false,"value":2}}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"EMPTY"},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","function_name":"+","children":[{"class":"COLUMN_REF","type":"COLUMN_REF","column_names":["a"]},{"class":"COLUMN_REF","type":"COLUMN_REF","column_names":["b"]}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"BASE_TABLE","table_name":"tbl1"},"aggregate_handling":"STANDARD_HANDLING"}}]}'
 ```
 
+Example with a syntax error:
+
 ```sql
--- Example with a syntax error
 SELECT json_serialize_sql('TOTALLY NOT VALID SQL');
 ```
 
@@ -939,8 +955,9 @@ SELECT json_serialize_sql('TOTALLY NOT VALID SQL');
 '{"error":true,"error_type":"parser","error_message":"syntax error at or near \"TOTALLY\"\nLINE 1: TOTALLY NOT VALID SQL\n        ^"}'
 ```
 
+Example with deserialize:
+
 ```sql
--- Example with deserialize
 SELECT json_deserialize_sql(json_serialize_sql('SELECT 1 + 2'));
 ```
 
@@ -948,8 +965,9 @@ SELECT json_deserialize_sql(json_serialize_sql('SELECT 1 + 2'));
 'SELECT (1 + 2)'
 ```
 
+Example with deserialize and syntax sugar:
+
 ```sql
--- Example with deserialize and syntax sugar
 SELECT json_deserialize_sql(json_serialize_sql('FROM x SELECT 1 + 2'));
 ```
 
@@ -957,8 +975,9 @@ SELECT json_deserialize_sql(json_serialize_sql('FROM x SELECT 1 + 2'));
 'SELECT (1 + 2) FROM x'
 ```
 
+Example with execute:
+
 ```sql
--- Example with execute
 SELECT * FROM json_execute_serialized_sql(json_serialize_sql('SELECT 1 + 2'));
 ```
 
@@ -966,8 +985,9 @@ SELECT * FROM json_execute_serialized_sql(json_serialize_sql('SELECT 1 + 2'));
 3
 ```
 
+Example with error:
+
 ```sql
--- Example with error
 SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID SQL'));
 ```
 

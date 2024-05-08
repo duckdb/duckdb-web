@@ -27,10 +27,15 @@ This is identical to the default sort order of PostgreSQL. The default sort orde
 
 > Using `ASC NULLS LAST` as the default sorting order was a breaking change in version 0.8.0. Prior to 0.8.0, DuckDB sorted using `ASC NULLS FIRST`.
 
+Change the default null sorting order to either `NULLS FIRST` and `NULLS LAST`:
+
 ```sql
--- change the default null sorting order to either NULLS FIRST and NULLS LAST
 SET default_null_order = 'NULLS FIRST';
--- change the default sorting order to either DESC or ASC
+```
+
+Change the default sorting order to either `DESC` or `ASC`:
+
+```sql
 SET default_order = 'DESC';
 ```
 
@@ -56,29 +61,34 @@ CREATE OR REPLACE TABLE addresses AS
     SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111-0001';
 ```
 
+Select the addresses, ordered by city name using the default null order and default order:
+
 ```sql
--- select the addresses, ordered by city name using the default null order and default order
 SELECT *
 FROM addresses
 ORDER BY city;
 ```
 
+Select the addresses, ordered by city name in descending order with nulls at the end:
+
 ```sql
--- select the addresses, ordered by city name in descending order with nulls at the end
 SELECT *
 FROM addresses
 ORDER BY city DESC NULLS LAST;
 ```
 
+
+Order by city and then by zip code, both using the default orderings:
+
 ```sql
--- order by city and then by zip code, both using the default orderings
 SELECT *
 FROM addresses
 ORDER BY city, zip;
 ```
 
+Order by city using German collation rules:
+
 ```sql
--- order by city using german collation rules
 SELECT *
 FROM addresses
 ORDER BY city COLLATE DE;
@@ -86,8 +96,9 @@ ORDER BY city COLLATE DE;
 
 ### `ORDER BY ALL` Examples
 
+Order from left to right (by address, then by city, then by zip) in ascending order:
+
 ```sql
--- Order from left to right (by address, then by city, then by zip) in ascending order
 SELECT *
 FROM addresses
 ORDER BY ALL;
@@ -102,8 +113,9 @@ ORDER BY ALL;
 | 111 Duck Duck Goose Ln | DuckTown  | 11111      |
 | 123 Quack Blvd         | DuckTown  | 11111      |
 
+Order from left to right (by address, then by city, then by zip) in descending order:
+
 ```sql
--- Order from left to right (by address, then by city, then by zip) in descending order
 SELECT *
 FROM addresses
 ORDER BY ALL DESC;

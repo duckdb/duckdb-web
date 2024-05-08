@@ -8,20 +8,45 @@ The `SET` statement modifies the provided DuckDB configuration option at the spe
 
 ## Examples
 
+Update the `memory_limit` configuration value:
+
 ```sql
--- Update the memory_limit configuration value
 SET memory_limit = '10GB';
--- Configure the system to use 1 thread
+```
+
+Configure the system to use `1` thread:
+
+```sql
 SET threads = 1;
--- Or use the 'TO' keyword
+```
+
+Or use the `TO` keyword:
+
+```sql
 SET threads TO 1;
--- Change configuration option to default value
+```
+
+Change configuration option to default value:
+
+```sql
 RESET threads;
--- Retrieve configuration value
+```
+
+Retrieve configuration value:
+
+```sql
 SELECT current_setting('threads');
--- Set the default catalog search path globally
+```
+
+Set the default catalog search path globally:
+
+```sql
 SET GLOBAL search_path = 'db1,db2'
--- Set the default collation for the session
+```
+
+Set the default collation for the session:
+
+```sql
 SET SESSION default_collation = 'nocase';
 ```
 

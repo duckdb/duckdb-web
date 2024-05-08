@@ -15,12 +15,15 @@ Bitstrings are strings of 1s and 0s. The bit type data is of variable length. A 
 By default bitstrings will not be padded with zeroes.
 Bitstrings can be very large, having the same size restrictions as `BLOB`s.
 
+Create a bitstring:
+
 ```sql
--- Create a bitstring
 SELECT '101010'::BIT;
--- Create a bitstring with predefined length.
--- The resulting bitstring will be left-padded with zeroes.
--- This returns 000000101011.
+```
+
+Create a bitstring with predefined length. The resulting bitstring will be left-padded with zeroes. This returns `000000101011`:
+
+```sql
 SELECT bitstring('0101011', 12);
 ```
 

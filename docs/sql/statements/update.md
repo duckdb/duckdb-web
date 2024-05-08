@@ -8,13 +8,17 @@ The `UPDATE` statement modifies the values of rows in a table.
 
 ## Examples
 
+For every row where `i` is `NULL`, set the value to 0 instead:
+
 ```sql
--- for every row where "i" is NULL, set the value to 0 instead
 UPDATE tbl
 SET i = 0
 WHERE i IS NULL;
+```
 
--- set all values of "i" to 1 and all values of "j" to 2
+Set all values of `i` to 1 and all values of `j` to 2:
+
+```sql
 UPDATE tbl
 SET i = 1, j = 2;
 ```
@@ -57,7 +61,11 @@ UPDATE original
     SET value = new.value
     FROM new
     WHERE original.key = new.key;
--- OR
+```
+
+OR:
+
+```sql
 UPDATE original
     SET value = (
         SELECT
@@ -82,14 +90,14 @@ FROM original;
 ## Update from Same Table
 
 The only difference between this case and the above is that a different table alias must be specified on both the target table and the source table.
-In this example `as true_original` and `as new` are both required.
+In this example `AS true_original` and `AS new` are both required.
 
 ```sql
-UPDATE original as true_original
+UPDATE original AS true_original
     SET value = (
         SELECT
-            new.value || ' a change!' as value
-        FROM original as new
+            new.value || ' a change!' AS value
+        FROM original AS new
         WHERE true_original.key = new.key
     );
 ```

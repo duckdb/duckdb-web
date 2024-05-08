@@ -12,14 +12,27 @@ The `CREATE INDEX` statement constructs an index on the specified column(s) of t
 
 ### Examples
 
+Create a unique index `films_id_idx` on the column id of table `films`:
+
 ```sql
--- Create a unique index 'films_id_idx' on the column id of table films.
 CREATE UNIQUE INDEX films_id_idx ON films (id);
--- Create index 's_idx' that allows for duplicate values on column revenue of table films.
+```
+
+Create index `s_idx` that allows for duplicate values on column `revenue` of table `films`:
+
+```sql
 CREATE INDEX s_idx ON films (revenue);
--- Create compound index 'gy_idx' on genre and year columns.
+```
+
+Create compound index `gy_idx` on `genre` and `year` columns:
+
+```sql
 CREATE INDEX gy_idx ON films (genre, year);
--- Create index 'i_index' on the expression of the sum of columns j and k from table integers.
+```
+
+Create index `i_index` on the expression of the sum of columns `j` and `k` from table `integers`:
+
+```sql
 CREATE INDEX i_index ON integers ((j + k));
 ```
 
@@ -47,8 +60,9 @@ CREATE INDEX i_index ON integers ((j + k));
 
 ### Examples
 
+Remove the index `title_idx`:
+
 ```sql
--- Remove the index title_idx
 DROP INDEX title_idx;
 ```
 

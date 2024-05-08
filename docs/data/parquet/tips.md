@@ -9,7 +9,7 @@ Below is a collection of tips to help when dealing with Parquet files.
 
 ### Use `union_by_name` When Loading Files with Different Schemas
 
-The `union_by_name` option can be used to unify the schema of files that have different or missing columns. For files that do not have certain columns, `NULL` values are filled in.
+The `union_by_name` option can be used to unify the schema of files that have different or missing columns. For files that do not have certain columns, `NULL` values are filled in:
 
 ```sql
 SELECT *
@@ -21,7 +21,7 @@ FROM read_parquet('flights*.parquet', union_by_name = true);
 ### Enabling `PER_THREAD_OUTPUT`
 
 If the final number of Parquet files is not important, writing one file per thread can significantly improve performance.
-Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [Hive partitioning](../partitioning/hive_partitioning) structure are good ways to transparently handle multiple files.
+Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [Hive partitioning](../partitioning/hive_partitioning) structure are good ways to transparently handle multiple files:
 
 ```sql
 COPY
@@ -41,8 +41,9 @@ However there is some overhead associated with reading the metadata in each grou
 A good approach would be to ensure that within each file, the total number of row groups is at least as large as the number of CPU threads used to query that file.
 More row groups beyond the thread count would improve the speed of highly selective queries, but slow down queries that must scan the whole file like aggregations.
 
+To write a query to a Parquet file with a different row group size, run:
+
 ```sql
--- write a query to a Parquet file with a different row_group_size
 COPY
     (FROM generate_series(100_000))
     TO 'row-groups.parquet'

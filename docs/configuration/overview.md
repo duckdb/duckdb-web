@@ -14,19 +14,33 @@ The values of configuration options can be queried via the [`current_setting()` 
 
 ## Examples
 
+Set the memory limit of the system to 10GB.
+
 ```sql
--- set the memory limit of the system to 10GB
 SET memory_limit = '10GB';
--- configure the system to use 1 thread
+```
+
+Configure the system to use 1 thread.
+
+```sql
 SET threads TO 1;
--- enable printing of a progress bar during long-running queries
+```
+
+Enable printing of a progress bar during long-running queries.
+
+```sql
 SET enable_progress_bar = true;
--- set the default null order to NULLS LAST
+```
+
+Set the default null order to NULLS LAST.
+
+```sql
 SET default_null_order = 'nulls_last';
 ```
 
+Return the current value of a specific setting.
+
 ```sql
--- return the current value of a specific setting
 SELECT current_setting('threads') AS threads;
 ```
 
@@ -34,8 +48,9 @@ SELECT current_setting('threads') AS threads;
 |--------:|
 | 10      |
 
+Query a specific setting.
+
 ```sql
--- query a specific setting
 SELECT *
 FROM duckdb_settings()
 WHERE name = 'threads';
@@ -45,14 +60,16 @@ WHERE name = 'threads';
 |---------|-------|-------------------------------------------------|------------|--------|
 | threads | 1     | The number of total threads used by the system. | BIGINT     | GLOBAL |
 
+Show a list of all available settings.
+
 ```sql
--- show a list of all available settings
 SELECT *
 FROM duckdb_settings();
 ```
 
+Reset the memory limit of the system back to the default.
+
 ```sql
--- reset the memory limit of the system back to the default
 RESET memory_limit;
 ```
 

@@ -9,23 +9,26 @@ Note that this syntax is not compatible with [`GROUP BY ALL`](groupby#group-by-a
 
 ## Examples
 
+Compute the average income along the provided four different dimensions:
+
 ```sql
--- compute the average income along the provided four different dimensions
 -- () signifies the empty set (i.e., computing an ungrouped aggregate)
 SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY GROUPING SETS ((city, street_name), (city), (street_name), ());
 ```
 
+Compute the average income along the same dimensions:
+
 ```sql
--- compute the average income along the same dimensions
 SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY CUBE (city, street_name);
 ```
 
+Compute the average income along the dimensions `(city, street_name)`, `(city)` and `()`:
+
 ```sql
--- compute the average income along the dimensions (city, street_name), (city) and ()
 SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY ROLLUP (city, street_name);
@@ -66,23 +69,36 @@ GROUP BY GROUPING SETS ((course, type), course, type, ());
 
 In the above query, we group across four different sets: `course, type`, `course`, `type` and `()` (the empty group). The result contains `NULL` for a group which is not in the grouping set for the result, i.e., the above query is equivalent to the following UNION statement:
 
+Group by course, type:
+
 ```sql
--- group by course, type
 SELECT course, type, count(*)
 FROM students
 GROUP BY course, type
 UNION ALL
--- group by type
+```
+
+Group by type:
+
+```sql
 SELECT NULL AS course, type, count(*)
 FROM students
 GROUP BY type
 UNION ALL
--- group by course
+```
+
+Group by course:
+
+```sql
 SELECT course, NULL AS type, count(*)
 FROM students
 GROUP BY course
 UNION ALL
--- group by nothing
+```
+
+Group by nothing:
+
+```sql
 SELECT NULL AS course, NULL AS type, count(*)
 FROM students;
 ```

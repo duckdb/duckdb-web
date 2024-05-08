@@ -5,14 +5,27 @@ title: Unnesting
 
 ## Examples
 
+Unnest a list, generating 3 rows (1, 2, 3):
+
 ```sql
--- unnest a list, generating 3 rows (1, 2, 3)
 SELECT unnest([1, 2, 3]);
--- unnesting a struct, generating two columns (a, b)
+```
+
+Unnesting a struct, generating two columns (a, b):
+
+```sql
 SELECT unnest({'a': 42, 'b': 84});
--- recursive unnest of a list of structs
+```
+
+Recursive unnest of a list of structs:
+
+```sql
 SELECT unnest([{'a': 42, 'b': 84}, {'a': 100, 'b': NULL}], recursive := true);
--- limit depth of recurisve unnest using max_depth
+```
+
+Limit depth of recursive unnest using `max_depth`:
+
+```sql
 SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth := 2);
 ```
 
@@ -20,18 +33,39 @@ The `unnest` special function is used to unnest lists or structs by one level. T
 
 ### Unnesting Lists
 
+Unnest a list, generating 3 rows (1, 2, 3):
+
 ```sql
--- unnest a list, generating 3 rows (1, 2, 3)
 SELECT unnest([1, 2, 3]);
--- unnest a scalar list, generating 3 rows ((1, 10), (2, 11), (3, NULL))
+```
+
+Unnest a scalar list, generating 3 rows ((1, 10), (2, 11), (3, NULL)):
+
+```sql
 SELECT unnest([1, 2, 3]), unnest([10, 11]);
--- unnest a scalar list, generating 3 rows ((1, 10), (2, 10), (3, 10))
+```
+
+Unnest a scalar list, generating 3 rows ((1, 10), (2, 10), (3, 10)):
+
+```sql
 SELECT unnest([1, 2, 3]), 10;
--- unnest a list column generated from a subquery
+```
+
+Unnest a list column generated from a subquery:
+
+```sql
 SELECT unnest(l) + 10 FROM (VALUES ([1, 2, 3]), ([4, 5])) tbl(l);
--- empty result
+```
+
+Empty result:
+
+```sql
 SELECT unnest([]);
--- empty result
+```
+
+Empty result:
+
+```sql
 SELECT unnest(NULL);
 ```
 
@@ -41,10 +75,15 @@ An empty list and a `NULL` list will both unnest to zero elements.
 
 ### Unnesting Structs
 
+Unnesting a struct, generating two columns (a, b):
+
 ```sql
--- unnesting a struct, generating two columns (a, b)
 SELECT unnest({'a': 42, 'b': 84});
--- unnesting a struct, generating two columns (a, b)
+```
+
+Unnesting a struct, generating two columns (a, b):
+
+```sql
 SELECT unnest({'a': 42, 'b': {'x': 84}});
 ```
 
@@ -52,12 +91,21 @@ SELECT unnest({'a': 42, 'b': {'x': 84}});
 
 ### Recursive Unnest
 
+Unnesting a list of lists recursively, generating 5 rows (1, 2, 3, 4, 5):
+
 ```sql
--- unnesting a list of lists recursively, generating 5 rows (1, 2, 3, 4, 5)
 SELECT unnest([[1, 2, 3], [4, 5]], recursive := true);
--- unnesting a list of structs recursively, generating two rows of two columns (a, b)
+```
+
+Unnesting a list of structs recursively, generating two rows of two columns (a, b):
+
+```sql
 SELECT unnest([{'a': 42, 'b': 84}, {'a': 100, 'b': NULL}], recursive := true);
--- unnesting a struct, generating two columns (a, b)
+```
+
+Unnesting a struct, generating two columns (a, b):
+
+```sql
 SELECT unnest({'a': [1, 2, 3], 'b': 88}, recursive := true);
 ```
 
@@ -81,7 +129,7 @@ SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth
 | []        |
 | [10, 11]  |
 
-Meanwhile, unnesting to `max_depth` of 3 results in
+Meanwhile, unnesting to `max_depth` of 3 results in:
 
 ```sql
 SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth := 3) AS x;

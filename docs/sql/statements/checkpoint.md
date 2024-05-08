@@ -9,12 +9,21 @@ databases this statement will succeed with no effect.
 
 ## Examples
 
+Synchronize data in the default database:
+
 ```sql
--- Synchronize data in the default database
 CHECKPOINT;
--- Synchronize data in the specified database
+```
+
+Synchronize data in the specified database:
+
+```sql
 CHECKPOINT file_db;
--- Abort any in-progress transactions to synchronize the data
+```
+
+Abort any in-progress transactions to synchronize the data:
+
+```sql
 FORCE CHECKPOINT;
 ```
 

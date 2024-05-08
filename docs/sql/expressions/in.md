@@ -12,14 +12,34 @@ The `IN` operator checks containment of the left expression inside the set of ex
 
 ```sql
 SELECT 'Math' IN ('CS', 'Math');
--- true
-SELECT 'English' IN ('CS', 'Math');
--- false
+```
 
+```text
+true
+```
+
+```sql
+SELECT 'English' IN ('CS', 'Math');
+```
+
+```text
+false
+```
+
+```sql
 SELECT 'Math' IN ('CS', 'Math', NULL);
--- true
+```
+
+```text
+true
+```
+
+```sql
 SELECT 'English' IN ('CS', 'Math', NULL);
--- NULL
+```
+
+```text
+NULL
 ```
 
 ## `NOT IN`

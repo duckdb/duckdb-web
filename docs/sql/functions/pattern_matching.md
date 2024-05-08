@@ -35,10 +35,13 @@ SELECT 'abc' LIKE '%c';  -- true
 SELECT 'abc' NOT LIKE '%c'; -- false
 ```
 
-The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale.
+The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale:
 
 ```sql
 SELECT 'abc' ILIKE '%C'; -- true
+```
+
+```sql
 SELECT 'abc' NOT ILIKE '%C'; -- false
 ```
 
@@ -46,12 +49,16 @@ To search within a string for a character that is a wildcard (`%` or `_`), the p
 
 Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs](../../sql/functions/char) for details.
 
+Search for strings with 'a' then a literal percent sign then 'c':
+
 ```sql
--- Search for strings with 'a' then a literal percent sign then 'c'
 SELECT 'a%c' LIKE 'a$%c' ESCAPE '$'; -- true
 SELECT 'azc' LIKE 'a$%c' ESCAPE '$'; -- false
+```
 
--- Case-insensitive ILIKE with ESCAPE
+Case-insensitive ILIKE with ESCAPE:
+
+```sql
 SELECT 'A%c' ILIKE 'a$%c' ESCAPE '$'; -- true
 ```
 
@@ -107,15 +114,24 @@ SELECT 'best.txt' GLOB '????.txt';         -- true
 SELECT 'best.txt' GLOB '?.txt';            -- false
 SELECT 'best.txt' GLOB '[abc]est.txt';     -- true
 SELECT 'best.txt' GLOB '[a-z]est.txt';     -- true
+```
 
--- The bracket syntax is case-sensitive
+The bracket syntax is case-sensitive:
+
+```sql
 SELECT 'Best.txt' GLOB '[a-z]est.txt';     -- false
 SELECT 'Best.txt' GLOB '[a-zA-Z]est.txt';  -- true
+```
 
--- The ! applies to all characters within the brackets
+The `!` applies to all characters within the brackets:
+
+```sql
 SELECT 'Best.txt' GLOB '[!a-zA-Z]est.txt'; -- false
+```
 
--- To negate a GLOB operator, negate the entire expression
+To negate a GLOB operator, negate the entire expression:
+
+```sql
 -- (NOT GLOB is not valid syntax)
 SELECT NOT 'best.txt' GLOB '*.txt';        -- false
 ```
@@ -133,8 +149,9 @@ Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 The glob pattern matching syntax can also be used to search for filenames using the `glob` table function.
 It accepts one parameter: the path to search (which may include glob patterns).
 
+Search the current directory for all files:
+
 ```sql
--- Search the current directory for all files
 SELECT * FROM glob('*');
 ```
 

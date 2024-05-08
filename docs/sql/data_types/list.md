@@ -15,16 +15,33 @@ See the [data types overview](../../sql/data_types/overview) for a comparison be
 
 Lists can be created using the [`list_value(expr, ...)`](../functions/nested#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions. To create a list from a table column, use the [`list`](../aggregates#general-aggregate-functions) aggregate function.
 
+List of integers:
+
 ```sql
--- List of integers
 SELECT [1, 2, 3];
--- List of strings with a NULL value
+```
+
+List of strings with a `NULL` value:
+
+```sql
 SELECT ['duck', 'goose', NULL, 'heron'];
--- List of lists with NULL values
+```
+
+List of lists with `NULL` values:
+
+```sql
 SELECT [['duck', 'goose', 'heron'], NULL, ['frog', 'toad'], []];
--- Create a list with the list_value function
+```
+
+Create a list with the list_value function:
+
+```sql
 SELECT list_value(1, 2, 3);
--- Create a table with an integer list column and a varchar list column
+```
+
+Create a table with an `INTEGER` list column and a `VARCHAR` list column:
+
+```sql
 CREATE TABLE list_table (int_list INTEGER[], varchar_list VARCHAR[]);
 ```
 

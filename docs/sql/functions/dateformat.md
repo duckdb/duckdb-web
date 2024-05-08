@@ -35,15 +35,17 @@ SELECT strptime('Monday, 2 March 1992 - 08:32:45 PM', '%A, %-d %B %Y - %I:%M:%S 
 
 ## CSV Parsing
 
-The date formats can also be specified during CSV parsing, either in the [`COPY` statement](../statements/copy) or in the `read_csv` function. This can be done by either specifying a `DATEFORMAT` or a `TIMESTAMPFORMAT` (or both). `DATEFORMAT` will be used for converting dates, and `TIMESTAMPFORMAT` will be used for converting timestamps. Below are some examples for how to use this:
+The date formats can also be specified during CSV parsing, either in the [`COPY` statement](../statements/copy) or in the `read_csv` function. This can be done by either specifying a `DATEFORMAT` or a `TIMESTAMPFORMAT` (or both). `DATEFORMAT` will be used for converting dates, and `TIMESTAMPFORMAT` will be used for converting timestamps. Below are some examples for how to use this.
+
+In a `COPY` statement:
 
 ```sql
--- in COPY statement
 COPY dates FROM 'test.csv' (DATEFORMAT '%d/%m/%Y', TIMESTAMPFORMAT '%A, %-d %B %Y - %I:%M:%S %p');
 ```
 
+In a `read_csv` function:
+
 ```sql
--- in read_csv function
 SELECT *
 FROM read_csv('test.csv', dateformat = '%m/%d/%Y');
 ```

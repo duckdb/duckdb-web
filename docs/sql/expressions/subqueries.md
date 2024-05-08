@@ -31,15 +31,21 @@ We can run the following query to obtain the minimum grade:
 
 ```sql
 SELECT min(grade) FROM grades;
--- {7}
 ```
+
+| min(grade) |
+|-----------:|
+| 7          |
 
 By using a scalar subquery in the `WHERE` clause, we can figure out for which course this grade was obtained:
 
 ```sql
 SELECT course FROM grades WHERE grade = (SELECT min(grade) FROM grades);
--- {Math}
 ```
+
+| course |
+|--------|
+| Math   |
 
 ## `EXISTS`
 
@@ -51,11 +57,19 @@ For example, we can use it to figure out if there are any grades present for a g
 
 ```sql
 SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math');
--- true
-
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'History');
--- false
 ```
+
+| EXISTS(SELECT * FROM grades WHERE (course = 'Math')) |
+|-----------------------------------------------------:|
+| true                                                 |
+
+```sql
+SELECT EXISTS (SELECT * FROM grades WHERE course = 'History');
+```
+
+| EXISTS(SELECT * FROM grades WHERE (course = 'History')) |
+|--------------------------------------------------------:|
+| false                                                   |
 
 ### `NOT EXISTS`
 
@@ -89,8 +103,11 @@ We can use the `IN` operator in a similar manner as we used the `EXISTS` operato
 
 ```sql
 SELECT 'Math' IN (SELECT course FROM grades);
--- true
 ```
+
+| ('Math' = ANY(SELECT course FROM grades)) |
+|------------------------------------------:|
+| true                                      |
 
 ## Correlated Subqueries
 
@@ -107,8 +124,12 @@ WHERE grade =
     (SELECT min(grade)
      FROM grades
      WHERE grades.course = grades_parent.course);
--- {7, Math}, {8, CS}
 ```
+
+| grade | course |
+|------:|--------|
+| 7     | Math   |
+| 8     | CS     |
 
 The subquery uses a column from the parent query (`grades_parent.course`). Conceptually, we can see the subquery as a function where the correlated column is a parameter to that function:
 

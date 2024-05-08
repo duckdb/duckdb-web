@@ -12,12 +12,21 @@ blurb: The blob (Binary Large OBject) type represents an arbitrary binary object
 
 The blob (**B**inary **L**arge **OB**ject) type represents an arbitrary binary object stored in the database system. The blob type can contain any type of binary data with no restrictions. What the actual bytes represent is opaque to the database system.
 
+Create a `BLOB` value with a single byte (170):
+
 ```sql
--- create a blob value with a single byte (170)
 SELECT '\xAA'::BLOB;
--- create a blob value with three bytes (170, 171, 172)
+```
+
+Create a `BLOB` value with three bytes (170, 171, 172):
+
+```sql
 SELECT '\xAA\xAB\xAC'::BLOB;
--- create a blob value with two bytes (65, 66)
+```
+
+Create a `BLOB` value with two bytes (65, 66):
+
+```sql
 SELECT 'AB'::BLOB;
 ```
 

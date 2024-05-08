@@ -17,8 +17,9 @@ The position of where to specify a `QUALIFY` clause is following the [`WINDOW` c
 
 Each of the following examples produce the same output, located below.
 
+Filter based on a window function defined in the `QUALIFY` clause:
+
 ```sql
--- Filter based on a WINDOW function defined in the QUALIFY clause
 SELECT
     schema_name,
     function_name,
@@ -29,8 +30,9 @@ QUALIFY
     row_number() OVER (PARTITION BY schema_name ORDER BY function_name) < 3;
 ```
 
+Filter based on a window function defined in the `SELECT` clause:
+
 ```sql
--- Filter based on a WINDOW function defined in the SELECT clause
 SELECT
     schema_name,
     function_name,
@@ -40,8 +42,9 @@ QUALIFY
     function_rank < 3;
 ```
 
+Filter based on a window function defined in the `QUALIFY` clause, but using the `WINDOW` clause:
+
 ```sql
--- Filter based on a WINDOW function defined in the QUALIFY clause, but using the WINDOW clause
 SELECT
     schema_name,
     function_name,
@@ -54,8 +57,9 @@ QUALIFY
     row_number() OVER my_window < 3;
 ```
 
+Filter based on a window function defined in the `SELECT` clause, but using the `WINDOW` clause:
+
 ```sql
--- Filter based on a WINDOW function defined in the SELECT clause, but using the WINDOW clause
 SELECT
     schema_name,
     function_name,
@@ -67,8 +71,9 @@ QUALIFY
     function_rank < 3;
 ```
 
+Equivalent query based on a `WITH` clause (without a `QUALIFY` clause):
+
 ```sql
--- Equivalent query based on a WITH clause (without QUALIFY clause)
 WITH ranked_functions AS (
     SELECT
         schema_name,

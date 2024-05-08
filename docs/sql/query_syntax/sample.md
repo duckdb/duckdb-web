@@ -8,22 +8,25 @@ The `SAMPLE` clause allows you to run the query on a sample from the base table.
 
 ## Examples
 
+Select a sample of 1% of the addresses table using default (system) sampling:
+
 ```sql
--- select a sample of 1% of the addresses table using default (system) sampling
 SELECT *
 FROM addresses
 USING SAMPLE 1%;
 ```
 
+Select a sample of 1% of the addresses table using bernoulli sampling:
+
 ```sql
--- select a sample of 1% of the addresses table using bernoulli sampling
 SELECT *
 FROM addresses
 USING SAMPLE 1% (bernoulli);
 ```
 
+Select a sample of 10 rows from the subquery:
+
 ```sql
--- select a sample of 10 rows from the subquery
 SELECT *
 FROM (SELECT * FROM addresses)
 USING SAMPLE 10 ROWS;

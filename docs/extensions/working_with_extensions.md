@@ -130,7 +130,6 @@ This will [force install](#force-installing-extensions) the `azure` extension fr
 For example, if the file was available into the same directory as where DuckDB is being executed, you can install it as follows:
 
 ```sql
--- uncompressed file
 INSTALL 'path/to/httpfs.duckdb_extension';
 ```
 
@@ -153,7 +152,6 @@ For more details, see the [Versioning of Extensions](versioning_of_extensions) p
 For example, if the file was available at the (relative) path `path/to/httpfs.duckdb_extension`, you can load it as follows:
 
 ```sql
--- uncompressed file
 LOAD 'path/to/httpfs.duckdb_extension';
 ```
 
