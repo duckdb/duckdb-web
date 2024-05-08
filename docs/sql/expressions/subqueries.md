@@ -56,20 +56,20 @@ The `EXISTS` operator tests for the existence of any row inside the subquery. It
 For example, we can use it to figure out if there are any grades present for a given course:
 
 ```sql
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math');
+SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math') AS math_grades_present;
 ```
 
-| EXISTS(SELECT * FROM grades WHERE (course = 'Math')) |
-|-----------------------------------------------------:|
-| true                                                 |
+| math_grades_present |
+|--------------------:|
+| true                |
 
 ```sql
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'History');
+SELECT EXISTS (SELECT * FROM grades WHERE course = 'History') AS history_grades_present;
 ```
 
-| EXISTS(SELECT * FROM grades WHERE (course = 'History')) |
-|--------------------------------------------------------:|
-| false                                                   |
+| history_grades_present |
+|-----------------------:|
+| false                  |
 
 ### `NOT EXISTS`
 
@@ -102,12 +102,12 @@ The `IN` operator checks containment of the left expression inside the result de
 We can use the `IN` operator in a similar manner as we used the `EXISTS` operator:
 
 ```sql
-SELECT 'Math' IN (SELECT course FROM grades);
+SELECT 'Math' IN (SELECT course FROM grades) AS math_grades_present;
 ```
 
-| ('Math' = ANY(SELECT course FROM grades)) |
-|------------------------------------------:|
-| true                                      |
+| math_grades_present |
+|--------------------:|
+| true                |
 
 ## Correlated Subqueries
 
