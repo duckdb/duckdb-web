@@ -248,6 +248,9 @@ CREATE VIEW sqlite_db.v1 AS SELECT 42;
 
 ```sql
 CREATE TABLE sqlite_db.tmp (i INTEGER);
+```
+
+```sql
 BEGIN;
 INSERT INTO sqlite_db.tmp VALUES (42);
 SELECT * FROM sqlite_db.tmp;
@@ -264,5 +267,6 @@ SELECT * FROM sqlite_db.tmp;
 
 | i |
 |--:|
+|   |
 
 > Deprecated The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax](../sql/statements/attach).

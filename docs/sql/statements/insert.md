@@ -190,7 +190,7 @@ Optionally you can provide an additional `WHERE` clause that can exclude certain
 The conflicts that don't meet this condition are ignored instead.
 
 Because we need a way to refer to both the **to-be-inserted** tuple and the **existing** tuple, we introduce the special `EXCLUDED` qualifier.
-When the `EXCLUDED` qualifier is provided, the reference refers to the **to-be-inserted** tuple, otherwise it refers to the **existing** tuple.
+When the `EXCLUDED` qualifier is provided, the reference refers to the **to-be-inserted** tuple, otherwise, it refers to the **existing** tuple.
 This special qualifier can be used within the `WHERE` clauses and `SET` expressions of the `ON CONFLICT` clause.
 
 ```sql

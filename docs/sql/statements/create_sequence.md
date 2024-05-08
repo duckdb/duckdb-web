@@ -20,7 +20,7 @@ Generate sequence from a given start number:
 CREATE SEQUENCE serial START 101;
 ```
 
-Generate odd numbers using INCREMENT BY:
+Generate odd numbers using `INCREMENT BY`:
 
 ```sql
 CREATE SEQUENCE serial START WITH 1 INCREMENT BY 2;
@@ -32,15 +32,17 @@ Generate a descending sequqnce starting from 99:
 CREATE SEQUENCE serial START WITH 99 INCREMENT BY -1 MAXVALUE 99;
 ```
 
-By default, cycles are not allowed and will result in a Serialization Error, e.g.::
+By default, cycles are not allowed and will result in error, e.g.:
 
-Reached maximum value of sequence "serial" (10):
+```console
+Sequence Error: nextval: reached maximum value of sequence "serial" (10)
+```
 
 ```sql
 CREATE SEQUENCE serial START WITH 1 MAXVALUE 10;
 ```
 
-CYCLE allows cycling through the same sequence repeatedly:
+`CYCLE` allows cycling through the same sequence repeatedly:
 
 ```sql
 CREATE SEQUENCE serial START WITH 1 MAXVALUE 10 CYCLE;
@@ -48,7 +50,7 @@ CREATE SEQUENCE serial START WITH 1 MAXVALUE 10 CYCLE;
 
 ### Creating and Dropping Sequences
 
-Sequences can be created and dropped similarly to other catalogue items:
+Sequences can be created and dropped similarly to other catalogue items.
 
 Overwrite an existing sequence:
 

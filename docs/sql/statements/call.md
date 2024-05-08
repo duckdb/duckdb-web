@@ -20,7 +20,7 @@ Invoke the 'pragma_table_info' table function:
 CALL pragma_table_info('pg_am');
 ```
 
-Select only the functions where the name starts with 'ST_':
+Select only the functions where the name starts with `ST_`:
 
 ```sql
 SELECT function_name, parameters, parameter_types, return_type 

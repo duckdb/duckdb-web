@@ -237,9 +237,17 @@ CREATE TABLE t6 (
 );
 ```
 
-> Foreign keys with cascading deletes (`FOREIGN KEY ... REFERENCES ... ON DELETE CASCADE`) are not supported.
+### Limitations
 
-> Inserting into tables with self-referencing foreign keys is currently not supported and will result in the following error: `Constraint Error: Violates foreign key constraint because key "..." does not exist in the referenced table`.
+Foreign keys have the following limitations.
+
+Foreign keys with cascading deletes (`FOREIGN KEY ... REFERENCES ... ON DELETE CASCADE`) are not supported.
+
+Inserting into tables with self-referencing foreign keys is currently not supported and will result in the following error:
+
+```console
+Constraint Error: Violates foreign key constraint because key "..." does not exist in the referenced table.
+```
 
 ## Generated Columns
 
@@ -250,13 +258,13 @@ DuckDB can infer the type of the generated column based on the expression's retu
 Generated columns come in two varieties: `VIRTUAL` and `STORED`.
 The data of virtual generated columns is not stored on disk, instead it is computed from the expression every time the column is referenced (through a select statement).
 
-The data of stored generated columns is stored on disk and is computed every time the data of their dependencies change (through an insert/update/drop statement).
+The data of stored generated columns is stored on disk and is computed every time the data of their dependencies change (through an `INSERT` / `UPDATE` / `DROP` statement).
 
 Currently, only the `VIRTUAL` kind is supported, and it is also the default option if the last field is left blank.
 
 The simplest syntax for a generated column:
 
-The type is derived from the expression, and the variant defaults to VIRTUAL:
+The type is derived from the expression, and the variant defaults to `VIRTUAL`:
 
 ```sql
 CREATE TABLE t1 (x FLOAT, two_x AS (2 * x));

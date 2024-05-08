@@ -26,7 +26,7 @@ Attach the database `file.db` in read only mode:
 ATTACH 'file.db' (READ_ONLY);
 ```
 
-Attach a SQLite database for reading and writing (see the sqlite extension for more information):
+Attach a SQLite database for reading and writing (see the [`sqlite` extension](../../extensions/sqlite) for more information):
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite_db (TYPE SQLITE);
@@ -216,7 +216,7 @@ When running queries on multiple databases, the system opens separate transactio
 
 While multiple transactions can be active at a time – the system only supports *writing* to a single attached database in a single transaction. If you try to write to multiple attached databases in a single transaction the following error will be thrown:
 
-```text
+```console
 Attempting to write to database "db2" in a transaction that has already modified database "db1" -
 a single transaction can only write to a single attached database.
 ```

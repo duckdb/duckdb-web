@@ -21,7 +21,7 @@ Struct of integers:
 SELECT {'x': 1, 'y': 2, 'z': 3};
 ```
 
-Struct of strings with a NULL value:
+Struct of strings with a `NULL` value:
 
 ```sql
 SELECT {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'};
@@ -33,24 +33,23 @@ Struct with a different type for each key:
 SELECT {'key1': 'string', 'key2': 1, 'key3': 12.345};
 ```
 
-Struct using the struct_pack function:
-
-Note the lack of single quotes around the keys and the use of the := operator:
+Struct using the `struct_pack` function. Note the lack of single quotes around the keys and the use of the `:=` operator:
 
 ```sql
 SELECT struct_pack(key1 := 'value1', key2 := 42);
 ```
 
-Struct of structs with NULL values:
+Struct of structs with `NULL` values:
 
 ```sql
-SELECT {'birds':
-            {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'},
-        'aliens':
-            NULL,
-        'amphibians':
-            {'yes':'frog', 'maybe': 'salamander', 'huh': 'dragon', 'no':'toad'}
-        };
+SELECT
+    {'birds':
+        {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'},
+    'aliens':
+        NULL,
+    'amphibians':
+        {'yes':'frog', 'maybe': 'salamander', 'huh': 'dragon', 'no':'toad'}
+    };
 ```
 
 Create a struct from columns and/or expressions using the row function:
@@ -81,29 +80,19 @@ SELECT struct_insert({'a': 1, 'b': 2, 'c': 3}, d := 4);
 
 Retrieving a value from a struct can be accomplished using dot notation, bracket notation, or through [struct functions](../functions/nested#struct-functions) like `struct_extract`.
 
-Use dot notation to retrieve the value at a key's location. This returns 1:
-
-The subquery generates a struct column "a", which we then query with a.x:
+Use dot notation to retrieve the value at a key's location. In the following query, the subquery generates a struct column `a`, which we then query with `a.x`.
 
 ```sql
 SELECT a.x FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
 ```
 
-If key contains a space, simply wrap it in double quotes. This returns 1:
-
-Note: Use double quotes not single quotes:
-
-This is because this action is most similar to selecting a column from within the struct:
+If a key contains a space, simply wrap it in double quotes (`"`).
 
 ```sql
 SELECT a."x space" FROM (SELECT {'x space': 1, 'y': 2, 'z': 3} AS a);
 ```
 
-Bracket notation may also be used. This returns 1:
-
-Note: Use single quotes since the goal is to specify a certain string key:
-
-Only constant expressions may be used inside the brackets (no columns):
+Bracket notation may also be used. Note that this uses single quotes (`'`) since the goal is to specify a certain string key and only constant expressions may be used inside the brackets (no expressions):
 
 ```sql
 SELECT a['x space'] FROM (SELECT {'x space': 1, 'y': 2, 'z': 3} AS a);
@@ -115,7 +104,7 @@ The struct_extract function is also equivalent. This returns 1:
 SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3}, 'x space');
 ```
 
-#### `Struct.*`
+#### `STRUCT.*`
 
 Rather than retrieving a single key from a struct, star notation (`*`) can be used to retrieve all keys from a struct as separate columns.
 This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys.
@@ -144,7 +133,7 @@ SELECT part1
 FROM tbl;
 ```
 
-1. part1 is a column
+1. `part1` is a column
 
 #### One Dot
 
@@ -153,8 +142,8 @@ SELECT part1.part2
 FROM tbl;
 ```
 
-1. part1 is a table, part2 is a column
-2. part1 is a column, part2 is a property of that column
+1. `part1` is a table, `part2` is a column
+2. `part1` is a column, `part2` is a property of that column
 
 #### Two (or More) Dots
 
@@ -163,11 +152,11 @@ SELECT part1.part2.part3
 FROM tbl;
 ```
 
-1. part1 is a schema, part2 is a table, part3 is a column
-2. part1 is a table, part2 is a column, part3 is a property of that column
-3. part1 is a column, part2 is a property of that column, part3 is a property of that column
+1. `part1` is a schema, `part2` is a table, `part3` is a column
+2. `part1` is a table, `part2` is a column, `part3` is a property of that column
+3. `part1` is a column, `part2` is a property of that column, `part3` is a property of that column
 
-Any extra parts (e.g., .part4.part5 etc) are always treated as properties
+Any extra parts (e.g., `.part4.part5`, etc.) are always treated as properties
 
 ### Creating Structs with the `row` Function
 
@@ -183,7 +172,7 @@ CREATE TABLE t1 (s STRUCT(v VARCHAR, i INTEGER));
 INSERT INTO t1 VALUES (ROW('a', 42));
 ```
 
-The table will contain a single entry::
+The table will contain a single entry:
 
 ```sql
 -- {'v': a, 'i': 42}

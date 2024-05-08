@@ -257,7 +257,7 @@ The below options are applicable when writing `CSV` files.
 | `escape` | The character that should appear before a character that matches the `quote` value. | `VARCHAR` | `"` |
 | `force_quote` | The list of columns to always add quotes to, even if not required. | `VARCHAR[]` | `[]` |
 | `header` | Whether or not to write a header for the CSV file. | `BOOL` | `true` |
-| `nullstr` | The string that is written to represent a NULL value. | `VARCHAR` | (empty) |
+| `nullstr` | The string that is written to represent a `NULL` value. | `VARCHAR` | (empty) |
 | `quote` | The quoting character to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
 
@@ -269,7 +269,7 @@ The below options are applicable when writing `Parquet` files.
 |:--|:-----|:-|:-|
 | `compression` | The compression format to use (`uncompressed`, `snappy`, `gzip` or `zstd`). | `VARCHAR` | `snappy` |
 | `field_ids` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | `STRUCT` | (empty) |
-| `row_group_size_bytes` | The target size of each row group. You can pass either a human-readable string, e.g., '2MB', or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise it is ignored. | `BIGINT` | `row_group_size * 1024` |
+| `row_group_size_bytes` | The target size of each row group. You can pass either a human-readable string, e.g., '2MB', or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored. | `BIGINT` | `row_group_size * 1024` |
 | `row_group_size` | The target size, i.e., number of rows, of each row group. | `BIGINT` | 122880 |
 
 Some examples of `FIELD_IDS` are:

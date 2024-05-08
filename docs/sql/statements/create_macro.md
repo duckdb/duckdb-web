@@ -63,13 +63,15 @@ CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
 Create a table macro without parameters:
 
 ```sql
-CREATE MACRO static_table() AS TABLE SELECT 'Hello' AS column1, 'World' AS column2;
+CREATE MACRO static_table() AS TABLE 
+    SELECT 'Hello' AS column1, 'World' AS column2;
 ```
 
 Create a table macro with parameters (that can be of any type):
 
 ```sql
-CREATE MACRO dynamic_table(col1_value, col2_value) AS TABLE SELECT col1_value AS column1, col2_value AS column2;
+CREATE MACRO dynamic_table(col1_value, col2_value) AS TABLE
+    SELECT col1_value AS column1, col2_value AS column2;
 ```
 
 Create a table macro that returns multiple rows:
@@ -86,7 +88,8 @@ CREATE OR REPLACE TEMP MACRO dynamic_table(col1_value, col2_value) AS TABLE
 Pass an argument as a list: SELECT * FROM get_users([1, 5]):
 
 ```sql
-CREATE MACRO get_users(i) AS TABLE SELECT * FROM users WHERE uid IN (SELECT unnest(i));
+CREATE MACRO get_users(i) AS TABLE
+    SELECT * FROM users WHERE uid IN (SELECT unnest(i));
 ```
 
 ## Syntax
@@ -119,7 +122,7 @@ SELECT add(1, 2) AS x;
 |--:|
 | 3 |
 
-However, this fais:
+However, this fails:
 
 ```sql
 SELECT add('hello', 3);

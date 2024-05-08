@@ -7,7 +7,7 @@ The `json` extension is a loadable extension that implements SQL functions that 
 
 ## Installing and Loading
 
-The `json` extension is shipped by default in DuckDB builds, otherwise it will be transparently autoloaded on first use.
+The `json` extension is shipped by default in DuckDB builds, otherwise, it will be transparently autoloaded on first use.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -68,7 +68,7 @@ SELECT j.family FROM example;
 
 Extract the family key's value with a JSONPath expression:
 
-````sql
+```sql
 SELECT j->'$.family' FROM example;
 ```
 
@@ -104,7 +104,7 @@ SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
 {'duck': 42}
 ```
 
-And back::
+And back
 
 ```sql
 SELECT {duck: 42}::JSON;

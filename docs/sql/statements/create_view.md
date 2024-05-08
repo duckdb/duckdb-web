@@ -8,9 +8,6 @@ The `CREATE VIEW` statement defines a new view in the catalog.
 
 ## Examples
 
-```sql
-```
-
 Create a simple view:
 
 ```sql
@@ -43,4 +40,4 @@ SELECT sql FROM duckdb_views() WHERE view_name = 'v1';
 
 `CREATE OR REPLACE VIEW` is similar, but if a view of the same name already exists, it is replaced.
 
-If a schema name is given then the view is created in the specified schema. Otherwise it is created in the current schema. Temporary views exist in a special schema, so a schema name cannot be given when creating a temporary view. The name of the view must be distinct from the name of any other view or table in the same schema.
+If a schema name is given then the view is created in the specified schema. Otherwise, it is created in the current schema. Temporary views exist in a special schema, so a schema name cannot be given when creating a temporary view. The name of the view must be distinct from the name of any other view or table in the same schema.

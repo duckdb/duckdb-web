@@ -25,19 +25,28 @@ Four additional libraries improve the DuckDB experience in Jupyter notebooks.
 4. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
     * Used by SQLAlchemy to connect to DuckDB (optional)
 
+Run these pip install commands from the command line if Jupyter Notebook is not yet installed. Otherwise, see Google Colab link above for an in-notebook example:
+
 ```bash
-# Run these pip install commands from the command line if Jupyter Notebook is not yet installed.
-# Otherwise, see Google Collab link above for an in-notebook example
 pip install duckdb
+```
 
-# Install Jupyter Notebook (Note: you can also install JupyterLab: pip install jupyterlab)
+Install Jupyter Notebook
+
+```bash
 pip install notebook
+```
 
-# Install supporting libraries
-pip install jupysql
-pip install pandas
-pip install matplotlib
-pip install duckdb-engine
+Or JupyterLab:
+
+```bash
+pip install jupyterlab
+```
+
+Install supporting libraries:
+
+```bash
+pip install jupysql pandas matplotlib duckdb-engine
 ```
 
 ## Library Import and Configuration
