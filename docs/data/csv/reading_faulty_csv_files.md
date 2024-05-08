@@ -132,6 +132,8 @@ By default, this feature creates two temporary tables.
 1. `reject_scans`: Stores information regarding the parameters of the CSV Scanner
 2. `reject_errors`: Stores information regarding each CSV faulty line and in which CSV Scanner they happened.
 
+Note that any of the errors described in our Structural Error section will be stored in the rejects tables. Also, if a line has multiple errors, multiple entries will be stored for the same line, one for each error.
+
 ### Reject Scans
 
 The CSV Reject Scans Table returns the following information:
