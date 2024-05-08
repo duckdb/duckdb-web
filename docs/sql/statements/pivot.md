@@ -120,7 +120,6 @@ GROUP BY Country;
 | NL      | 1005 | 1065 | 1158 |
 | US      | 8579 | 8783 | 9510 |
 
-
 ### `IN` Filter for `ON` Clause
 
 To only create a separate column for specific values within a column in the `ON` clause, use an optional `IN` expression.

@@ -110,8 +110,8 @@ Example:
 ```sql
 SET azure_http_stats = false;
 SET azure_read_transfer_concurrency = 5;
-SET azure_read_transfer_chunk_size = 1048576;
-SET azure_read_buffer_size = 1048576;
+SET azure_read_transfer_chunk_size = 1_048_576;
+SET azure_read_buffer_size = 1_048_576;
 ```
 
 ## Authentication
@@ -239,14 +239,13 @@ Where `variable_name` can be one of the following:
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
-| `azure_storage_connection_string` | Azure connection string, used for authenticating and configuring azure requests. | `STRING` | - |
+| `azure_storage_connection_string` | Azure connection string, used for authenticating and configuring Azure requests. | `STRING` | - |
 | `azure_account_name` | Azure account name, when set, the extension will attempt to automatically detect credentials (not used if you pass the connection string). | `STRING` | - |
-| `azure_endpoint` | Override the azure endpoint for when the Azure credential providers are used. | `STRING` | `blob.core.windows.net` |
+| `azure_endpoint` | Override the Azure endpoint for when the Azure credential providers are used. | `STRING` | `blob.core.windows.net` |
 | `azure_credential_chain`| Ordered list of Azure credential providers, in string format separated by `;`. For example: `'cli;managed_identity;env'`. See the list of possible values in the [`CREDENTIAL_CHAIN` provider section](#credential_chain-provider). Not used if you pass the connection string. | `STRING` | - |
-| `azure_http_proxy`| Proxy to use when login & performing request to azure. | `STRING` | `HTTP_PROXY` environment variable (if set). |
+| `azure_http_proxy`| Proxy to use when login & performing request to Azure. | `STRING` | `HTTP_PROXY` environment variable (if set). |
 | `azure_proxy_user_name`| Http proxy username if needed. | `STRING` | - |
 | `azure_proxy_password`| Http proxy password if needed. | `STRING` | - |
-
 
 ## Additional Information
 

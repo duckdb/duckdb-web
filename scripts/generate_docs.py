@@ -229,7 +229,7 @@ def add_function(function_prototype, documentation, group):
         for parameter_pair in parameters:
             docs_string += "* `" + parameter_pair[0] + '`\n\n'
             docs_string += parameter_pair[1] + '\n'
-    docs_string += '<br>\n'
+    docs_string += '<br>'
     documentation_list.append(
         [
             docs_string,
