@@ -45,6 +45,7 @@ Build array of pages for menudocfile
     {% endif %}
 {% endfor %}
 
+<!-- TODO: Add items from menu_side.json, Fix sitemap location -->
 
 {% assign nav_pageList = nav_pageList | remove_first: ',' | split: ',' %}
 
@@ -71,25 +72,22 @@ next, lets build a link to it.
     {% assign nav_page_url = norm_page_url %}
   {% endif %}
   {% if nav_page_url == page_url_base %}
-    <div class="section-nav">
-        <div class="left align-right">
-            {% if forloop.first %}
-            <span class="prev disabled">Back</span>
-            {% else %}
-            {% assign previous = forloop.index0 | minus: 1 %}
-            {% assign previous_page = nav_pageList[previous] | prepend: docs_base_url %}
-            <a href="{{ previous_page | relative_url }}" class="prev">Back</a>
-            {% endif %}
-        </div>
-        <div class="right align-left">
-            {% if forloop.last %}
-            <span class="next disabled">Next</span>
-            {% else %}
-            {% assign next = forloop.index0 | plus: 1 %}
-            {% assign next_page = nav_pageList[next] | prepend: docs_base_url %}
-            <a href="{{ next_page | relative_url }}" class="next">Next</a>
-            {% endif %}
-        </div>
+    <div class="section-nav" style="text-align: center;">
+        {% if forloop.first %}
+        <span class="prev disabled">Back</span>
+        {% else %}
+        {% assign previous = forloop.index0 | minus: 1 %}
+        {% assign previous_page = nav_pageList[previous] | prepend: docs_base_url %}
+        <a href="{{ previous_page | relative_url }}" class="prev">Back</a>
+        {% endif %}
+
+        {% if forloop.last %}
+        <span class="next disabled">Next</span>
+        {% else %}
+        {% assign next = forloop.index0 | plus: 1 %}
+        {% assign next_page = nav_pageList[next] | prepend: docs_base_url %}
+        <a href="{{ next_page | relative_url }}" class="next">Next</a>
+        {% endif %}
     </div>
     <div class="clear"></div>
     {% break %}

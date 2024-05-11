@@ -1264,3 +1264,38 @@ body.documentation.installation{
 		font-size: 14px;
 	}
 }
+
+.section-nav {
+
+	a {
+		text-decoration: none;
+		text-align: center;
+		font-size: 21px;
+		font-family: $fontSans;
+		display: inline-block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 200px;
+	 }
+	 .prev:hover {
+		background-color: #ddd;
+		color: black;
+	 }
+	 .next:hover {
+		background-color: #ddd;
+		color: black;
+	 }
+	 .prev {
+		background-color: #11A8FE;
+		color: black;
+	 }
+	 .next {
+		background-color: #11A8FE;
+		color: black;
+	 }
+
+	.disabled {
+	  opacity: .5;
+	  cursor: default;
+	}
+  }
