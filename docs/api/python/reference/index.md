@@ -105,6 +105,13 @@ title: Python Client API
 </dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="duckdb.CoalesceOperator">
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">CoalesceOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.CoalesceOperator" title="Link to this definition">&#182;</a>
+</dt>
+<dd></dd>
+</dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="duckdb.ColumnExpression">
 <span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ColumnExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.ColumnExpression" title="Link to this definition">&#182;</a>
 </dt>

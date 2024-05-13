@@ -74,7 +74,6 @@ The result database object.
 
 <br>
 
-
 ### `duckdb_open_ext`
 
 ---
@@ -114,7 +113,6 @@ Note that the error must be freed using `duckdb_free`.
 
 <br>
 
-
 ### `duckdb_close`
 
 ---
@@ -139,7 +137,6 @@ Still, it is recommended to always correctly close a database object after you a
 The database object to shut down.
 
 <br>
-
 
 ### `duckdb_connect`
 
@@ -172,7 +169,6 @@ The result connection object.
 
 <br>
 
-
 ### `duckdb_interrupt`
 
 ---
@@ -194,7 +190,6 @@ Interrupt running query
 The connection to interrupt
 
 <br>
-
 
 ### `duckdb_query_progress`
 
@@ -221,7 +216,6 @@ The working connection
 
 <br>
 
-
 ### `duckdb_disconnect`
 
 ---
@@ -244,7 +238,6 @@ The connection to close.
 
 <br>
 
-
 ### `duckdb_library_version`
 
 ---
@@ -260,4 +253,3 @@ Usually used for developing C extensions that must return this for a compatibili
 </span>);
 </code></pre></div></div>
 <br>
-

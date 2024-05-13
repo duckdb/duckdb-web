@@ -153,7 +153,6 @@ The query result.
 
 <br>
 
-
 ### `duckdb_destroy_result`
 
 ---
@@ -175,7 +174,6 @@ Closes the result and de-allocates all memory allocated for that connection.
 The result to destroy.
 
 <br>
-
 
 ### `duckdb_column_name`
 
@@ -209,7 +207,6 @@ The column name of the specified column.
 
 <br>
 
-
 ### `duckdb_column_type`
 
 ---
@@ -241,7 +238,6 @@ The column type of the specified column.
 
 <br>
 
-
 ### `duckdb_result_statement_type`
 
 ---
@@ -266,7 +262,6 @@ The result object to fetch the statement type from.
 duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 <br>
-
 
 ### `duckdb_column_logical_type`
 
@@ -301,7 +296,6 @@ The logical column type of the specified column.
 
 <br>
 
-
 ### `duckdb_column_count`
 
 ---
@@ -326,7 +320,6 @@ The result object.
 The number of columns present in the result object.
 
 <br>
-
 
 ### `duckdb_row_count`
 
@@ -353,7 +346,6 @@ The number of rows present in the result object.
 
 <br>
 
-
 ### `duckdb_rows_changed`
 
 ---
@@ -379,7 +371,6 @@ The result object.
 The number of rows changed.
 
 <br>
-
 
 ### `duckdb_column_data`
 
@@ -421,7 +412,6 @@ The column index.
 The column data of the specified column.
 
 <br>
-
 
 ### `duckdb_nullmask_data`
 
@@ -466,7 +456,6 @@ The nullmask of the specified column.
 
 <br>
 
-
 ### `duckdb_result_error`
 
 ---
@@ -493,4 +482,3 @@ The result object to fetch the error from.
 The error of the result.
 
 <br>
-

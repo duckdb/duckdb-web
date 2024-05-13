@@ -42,7 +42,6 @@ The value to destroy.
 
 <br>
 
-
 ### `duckdb_create_varchar`
 
 ---
@@ -67,7 +66,6 @@ The null-terminated string
 The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
-
 
 ### `duckdb_create_varchar_length`
 
@@ -98,7 +96,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-
 ### `duckdb_create_int64`
 
 ---
@@ -123,7 +120,6 @@ The bigint value
 The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
-
 
 ### `duckdb_create_struct_value`
 
@@ -153,7 +149,6 @@ The values for the struct fields
 The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
-
 
 ### `duckdb_create_list_value`
 
@@ -188,7 +183,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-
 ### `duckdb_create_array_value`
 
 ---
@@ -222,7 +216,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-
 ### `duckdb_get_varchar`
 
 ---
@@ -249,7 +242,6 @@ The string value. This must be destroyed with `duckdb_free`.
 
 <br>
 
-
 ### `duckdb_get_int64`
 
 ---
@@ -274,4 +266,3 @@ The value
 The int64 value, or 0 if no conversion is possible
 
 <br>
-

@@ -49,7 +49,6 @@ The delete callback to call on the extra data, if any
 
 <br>
 
-
 ### `duckdb_replacement_scan_set_function_name`
 
 ---
@@ -77,7 +76,6 @@ The function name to substitute.
 
 <br>
 
-
 ### `duckdb_replacement_scan_add_parameter`
 
 ---
@@ -104,7 +102,6 @@ The parameter to add.
 
 <br>
 
-
 ### `duckdb_replacement_scan_set_error`
 
 ---
@@ -130,4 +127,3 @@ The info object
 The error message
 
 <br>
-

@@ -79,7 +79,6 @@ The table function object.
 
 <br>
 
-
 ### `duckdb_destroy_table_function`
 
 ---
@@ -101,7 +100,6 @@ Destroys the given table function object.
 The table function to destroy
 
 <br>
-
 
 ### `duckdb_table_function_set_name`
 
@@ -129,7 +127,6 @@ The name of the table function
 
 <br>
 
-
 ### `duckdb_table_function_add_parameter`
 
 ---
@@ -155,7 +152,6 @@ The table function
 The type of the parameter to add.
 
 <br>
-
 
 ### `duckdb_table_function_add_named_parameter`
 
@@ -187,7 +183,6 @@ The type of the parameter to add.
 
 <br>
 
-
 ### `duckdb_table_function_set_extra_info`
 
 ---
@@ -218,7 +213,6 @@ The callback that will be called to destroy the bind data (if any)
 
 <br>
 
-
 ### `duckdb_table_function_set_bind`
 
 ---
@@ -244,7 +238,6 @@ The table function
 The bind function
 
 <br>
-
 
 ### `duckdb_table_function_set_init`
 
@@ -272,7 +265,6 @@ The init function
 
 <br>
 
-
 ### `duckdb_table_function_set_local_init`
 
 ---
@@ -299,7 +291,6 @@ The init function
 
 <br>
 
-
 ### `duckdb_table_function_set_function`
 
 ---
@@ -325,7 +316,6 @@ The table function
 The function
 
 <br>
-
 
 ### `duckdb_table_function_supports_projection_pushdown`
 
@@ -356,7 +346,6 @@ The table function
 True if the table function supports projection pushdown, false otherwise.
 
 <br>
-
 
 ### `duckdb_register_table_function`
 
@@ -391,7 +380,6 @@ Whether or not the registration was successful.
 
 <br>
 
-
 ### `duckdb_bind_get_extra_info`
 
 ---
@@ -416,7 +404,6 @@ The info object
 The extra info
 
 <br>
-
 
 ### `duckdb_bind_add_result_column`
 
@@ -448,7 +435,6 @@ The logical type of the column
 
 <br>
 
-
 ### `duckdb_bind_get_parameter_count`
 
 ---
@@ -473,7 +459,6 @@ The info object
 The number of parameters
 
 <br>
-
 
 ### `duckdb_bind_get_parameter`
 
@@ -506,7 +491,6 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-
 ### `duckdb_bind_get_named_parameter`
 
 ---
@@ -538,7 +522,6 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-
 ### `duckdb_bind_set_bind_data`
 
 ---
@@ -569,7 +552,6 @@ The callback that will be called to destroy the bind data (if any)
 
 <br>
 
-
 ### `duckdb_bind_set_cardinality`
 
 ---
@@ -597,7 +579,6 @@ Whether or not the cardinality estimate is exact, or an approximation
 
 <br>
 
-
 ### `duckdb_bind_set_error`
 
 ---
@@ -624,7 +605,6 @@ The error message
 
 <br>
 
-
 ### `duckdb_init_get_extra_info`
 
 ---
@@ -649,7 +629,6 @@ The info object
 The extra info
 
 <br>
-
 
 ### `duckdb_init_get_bind_data`
 
@@ -678,7 +657,6 @@ The info object
 The bind data object
 
 <br>
-
 
 ### `duckdb_init_set_init_data`
 
@@ -710,7 +688,6 @@ The callback that will be called to destroy the init data (if any)
 
 <br>
 
-
 ### `duckdb_init_get_column_count`
 
 ---
@@ -737,7 +714,6 @@ The info object
 The number of projected columns.
 
 <br>
-
 
 ### `duckdb_init_get_column_index`
 
@@ -770,7 +746,6 @@ The column index of the projected column.
 
 <br>
 
-
 ### `duckdb_init_set_max_threads`
 
 ---
@@ -796,7 +771,6 @@ The info object
 The maximum amount of threads that can process this table function
 
 <br>
-
 
 ### `duckdb_init_set_error`
 
@@ -824,7 +798,6 @@ The error message
 
 <br>
 
-
 ### `duckdb_function_get_extra_info`
 
 ---
@@ -849,7 +822,6 @@ The info object
 The extra info
 
 <br>
-
 
 ### `duckdb_function_get_bind_data`
 
@@ -879,7 +851,6 @@ The bind data object
 
 <br>
 
-
 ### `duckdb_function_get_init_data`
 
 ---
@@ -904,7 +875,6 @@ The info object
 The init data object
 
 <br>
-
 
 ### `duckdb_function_get_local_init_data`
 
@@ -931,7 +901,6 @@ The init data object
 
 <br>
 
-
 ### `duckdb_function_set_error`
 
 ---
@@ -957,4 +926,3 @@ The info object
 The error message
 
 <br>
-

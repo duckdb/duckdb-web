@@ -98,7 +98,6 @@ The resulting prepared statement object
 
 <br>
 
-
 ### `duckdb_destroy_prepare`
 
 ---
@@ -120,7 +119,6 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 The prepared statement to destroy.
 
 <br>
-
 
 ### `duckdb_prepare_error`
 
@@ -150,7 +148,6 @@ The error message, or `nullptr` if there is none.
 
 <br>
 
-
 ### `duckdb_nparams`
 
 ---
@@ -174,7 +171,6 @@ Returns 0 if the query was not successfully prepared.
 The prepared statement to obtain the number of parameters for.
 
 <br>
-
 
 ### `duckdb_parameter_name`
 
@@ -201,7 +197,6 @@ Returns NULL if the index is out of range for the provided prepared statement.
 The prepared statement for which to get the parameter name from.
 
 <br>
-
 
 ### `duckdb_param_type`
 
@@ -234,7 +229,6 @@ The parameter type
 
 <br>
 
-
 ### `duckdb_clear_bindings`
 
 ---
@@ -248,7 +242,6 @@ Clear the params bind to the prepared statement.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_prepared_statement_type`
 
@@ -274,4 +267,3 @@ The prepared statement.
 duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 <br>
-

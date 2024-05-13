@@ -423,7 +423,6 @@ The result database object.
 
 <br>
 
-
 ### `duckdb_open_ext`
 
 ---
@@ -463,7 +462,6 @@ Note that the error must be freed using `duckdb_free`.
 
 <br>
 
-
 ### `duckdb_close`
 
 ---
@@ -488,7 +486,6 @@ Still, it is recommended to always correctly close a database object after you a
 The database object to shut down.
 
 <br>
-
 
 ### `duckdb_connect`
 
@@ -521,7 +518,6 @@ The result connection object.
 
 <br>
 
-
 ### `duckdb_interrupt`
 
 ---
@@ -543,7 +539,6 @@ Interrupt running query
 The connection to interrupt
 
 <br>
-
 
 ### `duckdb_query_progress`
 
@@ -570,7 +565,6 @@ The working connection
 
 <br>
 
-
 ### `duckdb_disconnect`
 
 ---
@@ -593,7 +587,6 @@ The connection to close.
 
 <br>
 
-
 ### `duckdb_library_version`
 
 ---
@@ -609,7 +602,6 @@ Usually used for developing C extensions that must return this for a compatibili
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_create_config`
 
@@ -640,7 +632,6 @@ The result configuration object.
 
 <br>
 
-
 ### `duckdb_config_count`
 
 ---
@@ -664,7 +655,6 @@ This should not be called in a loop as it internally loops over all the options.
 The amount of config options available.
 
 <br>
-
 
 ### `duckdb_get_config_flag`
 
@@ -701,7 +691,6 @@ A description of the configuration flag.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
-
 
 ### `duckdb_set_config`
 
@@ -741,7 +730,6 @@ The value to set the configuration flag to.
 
 <br>
 
-
 ### `duckdb_destroy_config`
 
 ---
@@ -763,7 +751,6 @@ Destroys the specified configuration object and de-allocates all memory allocate
 The configuration object to destroy.
 
 <br>
-
 
 ### `duckdb_query`
 
@@ -803,7 +790,6 @@ The query result.
 
 <br>
 
-
 ### `duckdb_destroy_result`
 
 ---
@@ -825,7 +811,6 @@ Closes the result and de-allocates all memory allocated for that connection.
 The result to destroy.
 
 <br>
-
 
 ### `duckdb_column_name`
 
@@ -859,7 +844,6 @@ The column name of the specified column.
 
 <br>
 
-
 ### `duckdb_column_type`
 
 ---
@@ -891,7 +875,6 @@ The column type of the specified column.
 
 <br>
 
-
 ### `duckdb_result_statement_type`
 
 ---
@@ -916,7 +899,6 @@ The result object to fetch the statement type from.
 duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 <br>
-
 
 ### `duckdb_column_logical_type`
 
@@ -951,7 +933,6 @@ The logical column type of the specified column.
 
 <br>
 
-
 ### `duckdb_column_count`
 
 ---
@@ -976,7 +957,6 @@ The result object.
 The number of columns present in the result object.
 
 <br>
-
 
 ### `duckdb_row_count`
 
@@ -1003,7 +983,6 @@ The number of rows present in the result object.
 
 <br>
 
-
 ### `duckdb_rows_changed`
 
 ---
@@ -1029,7 +1008,6 @@ The result object.
 The number of rows changed.
 
 <br>
-
 
 ### `duckdb_column_data`
 
@@ -1071,7 +1049,6 @@ The column index.
 The column data of the specified column.
 
 <br>
-
 
 ### `duckdb_nullmask_data`
 
@@ -1116,7 +1093,6 @@ The nullmask of the specified column.
 
 <br>
 
-
 ### `duckdb_result_error`
 
 ---
@@ -1143,7 +1119,6 @@ The result object to fetch the error from.
 The error of the result.
 
 <br>
-
 
 ### `duckdb_result_get_chunk`
 
@@ -1184,7 +1159,6 @@ The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 
 <br>
 
-
 ### `duckdb_result_is_streaming`
 
 ---
@@ -1209,7 +1183,6 @@ The result object to check.
 Whether or not the result object is of the type StreamQueryResult
 
 <br>
-
 
 ### `duckdb_result_chunk_count`
 
@@ -1236,7 +1209,6 @@ Number of data chunks present in the result.
 
 <br>
 
-
 ### `duckdb_result_return_type`
 
 ---
@@ -1262,7 +1234,6 @@ The return_type
 
 <br>
 
-
 ### `duckdb_value_boolean`
 
 ---
@@ -1285,7 +1256,6 @@ The return_type
 The boolean value at the specified location, or false if the value cannot be converted.
 
 <br>
-
 
 ### `duckdb_value_int8`
 
@@ -1310,7 +1280,6 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 
 <br>
 
-
 ### `duckdb_value_int16`
 
 ---
@@ -1333,7 +1302,6 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 The int16_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
-
 
 ### `duckdb_value_int32`
 
@@ -1358,7 +1326,6 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 
 <br>
 
-
 ### `duckdb_value_int64`
 
 ---
@@ -1381,7 +1348,6 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 The int64_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
-
 
 ### `duckdb_value_hugeint`
 
@@ -1406,7 +1372,6 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 
 <br>
 
-
 ### `duckdb_value_uhugeint`
 
 ---
@@ -1429,7 +1394,6 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 The duckdb_uhugeint value at the specified location, or 0 if the value cannot be converted.
 
 <br>
-
 
 ### `duckdb_value_decimal`
 
@@ -1454,7 +1418,6 @@ The duckdb_decimal value at the specified location, or 0 if the value cannot be 
 
 <br>
 
-
 ### `duckdb_value_uint8`
 
 ---
@@ -1477,7 +1440,6 @@ The duckdb_decimal value at the specified location, or 0 if the value cannot be 
 The uint8_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
-
 
 ### `duckdb_value_uint16`
 
@@ -1502,7 +1464,6 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 
 <br>
 
-
 ### `duckdb_value_uint32`
 
 ---
@@ -1525,7 +1486,6 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 The uint32_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
-
 
 ### `duckdb_value_uint64`
 
@@ -1550,7 +1510,6 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 
 <br>
 
-
 ### `duckdb_value_float`
 
 ---
@@ -1573,7 +1532,6 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 The float value at the specified location, or 0 if the value cannot be converted.
 
 <br>
-
 
 ### `duckdb_value_double`
 
@@ -1598,7 +1556,6 @@ The double value at the specified location, or 0 if the value cannot be converte
 
 <br>
 
-
 ### `duckdb_value_date`
 
 ---
@@ -1621,7 +1578,6 @@ The double value at the specified location, or 0 if the value cannot be converte
 The duckdb_date value at the specified location, or 0 if the value cannot be converted.
 
 <br>
-
 
 ### `duckdb_value_time`
 
@@ -1646,7 +1602,6 @@ The duckdb_time value at the specified location, or 0 if the value cannot be con
 
 <br>
 
-
 ### `duckdb_value_timestamp`
 
 ---
@@ -1670,7 +1625,6 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 
 <br>
 
-
 ### `duckdb_value_interval`
 
 ---
@@ -1693,7 +1647,6 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 The duckdb_interval value at the specified location, or 0 if the value cannot be converted.
 
 <br>
-
 
 ### `duckdb_value_varchar`
 
@@ -1722,7 +1675,6 @@ converted. The result must be freed with `duckdb_free`.
 
 <br>
 
-
 ### `duckdb_value_string`
 
 ---
@@ -1746,7 +1698,6 @@ The string value at the specified location.
 * The resulting field "string.data" must be freed with `duckdb_free.`
 
 <br>
-
 
 ### `duckdb_value_varchar_internal`
 
@@ -1778,7 +1729,6 @@ The result must NOT be freed.
 
 <br>
 
-
 ### `duckdb_value_string_internal`
 
 ---
@@ -1809,7 +1759,6 @@ The result must NOT be freed.
 
 <br>
 
-
 ### `duckdb_value_blob`
 
 ---
@@ -1834,7 +1783,6 @@ value cannot be converted. The resulting field "blob.data" must be freed with `d
 
 <br>
 
-
 ### `duckdb_value_is_null`
 
 ---
@@ -1857,7 +1805,6 @@ value cannot be converted. The resulting field "blob.data" must be freed with `d
 Returns true if the value at the specified index is NULL, and false otherwise.
 
 <br>
-
 
 ### `duckdb_malloc`
 
@@ -1885,7 +1832,6 @@ A pointer to the allocated memory region.
 
 <br>
 
-
 ### `duckdb_free`
 
 ---
@@ -1908,7 +1854,6 @@ Free a value returned from `duckdb_malloc`, `duckdb_value_varchar`, `duckdb_valu
 The memory region to de-allocate.
 
 <br>
-
 
 ### `duckdb_vector_size`
 
@@ -1933,7 +1878,6 @@ The vector size.
 
 <br>
 
-
 ### `duckdb_string_is_inlined`
 
 ---
@@ -1948,7 +1892,6 @@ This means that the data of the string does not have a separate allocation.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_from_date`
 
@@ -1975,7 +1918,6 @@ The `duckdb_date_struct` with the decomposed elements.
 
 <br>
 
-
 ### `duckdb_to_date`
 
 ---
@@ -2000,7 +1942,6 @@ The year, month and date stored in a `duckdb_date_struct`.
 The `duckdb_date` element.
 
 <br>
-
 
 ### `duckdb_is_finite_date`
 
@@ -2027,7 +1968,6 @@ True if the date is finite, false if it is ±infinity.
 
 <br>
 
-
 ### `duckdb_from_time`
 
 ---
@@ -2052,7 +1992,6 @@ The time object, as obtained from a `DUCKDB_TYPE_TIME` column.
 The `duckdb_time_struct` with the decomposed elements.
 
 <br>
-
 
 ### `duckdb_create_time_tz`
 
@@ -2082,7 +2021,6 @@ The timezone offset component of the time.
 The `duckdb_time_tz` element.
 
 <br>
-
 
 ### `duckdb_from_time_tz`
 
@@ -2114,7 +2052,6 @@ The timezone offset component of the time.
 
 <br>
 
-
 ### `duckdb_to_time`
 
 ---
@@ -2139,7 +2076,6 @@ The hour, minute, second and microsecond in a `duckdb_time_struct`.
 The `duckdb_time` element.
 
 <br>
-
 
 ### `duckdb_from_timestamp`
 
@@ -2166,7 +2102,6 @@ The `duckdb_timestamp_struct` with the decomposed elements.
 
 <br>
 
-
 ### `duckdb_to_timestamp`
 
 ---
@@ -2191,7 +2126,6 @@ The de-composed elements in a `duckdb_timestamp_struct`.
 The `duckdb_timestamp` element.
 
 <br>
-
 
 ### `duckdb_is_finite_timestamp`
 
@@ -2218,7 +2152,6 @@ True if the timestamp is finite, false if it is ±infinity.
 
 <br>
 
-
 ### `duckdb_hugeint_to_double`
 
 ---
@@ -2243,7 +2176,6 @@ The hugeint value.
 The converted `double` element.
 
 <br>
-
 
 ### `duckdb_double_to_hugeint`
 
@@ -2272,7 +2204,6 @@ The converted `duckdb_hugeint` element.
 
 <br>
 
-
 ### `duckdb_uhugeint_to_double`
 
 ---
@@ -2297,7 +2228,6 @@ The uhugeint value.
 The converted `double` element.
 
 <br>
-
 
 ### `duckdb_double_to_uhugeint`
 
@@ -2325,7 +2255,6 @@ The double value.
 The converted `duckdb_uhugeint` element.
 
 <br>
-
 
 ### `duckdb_double_to_decimal`
 
@@ -2356,7 +2285,6 @@ The converted `duckdb_decimal` element.
 
 <br>
 
-
 ### `duckdb_decimal_to_double`
 
 ---
@@ -2381,7 +2309,6 @@ The decimal value.
 The converted `double` element.
 
 <br>
-
 
 ### `duckdb_prepare`
 
@@ -2421,7 +2348,6 @@ The resulting prepared statement object
 
 <br>
 
-
 ### `duckdb_destroy_prepare`
 
 ---
@@ -2443,7 +2369,6 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 The prepared statement to destroy.
 
 <br>
-
 
 ### `duckdb_prepare_error`
 
@@ -2473,7 +2398,6 @@ The error message, or `nullptr` if there is none.
 
 <br>
 
-
 ### `duckdb_nparams`
 
 ---
@@ -2497,7 +2421,6 @@ Returns 0 if the query was not successfully prepared.
 The prepared statement to obtain the number of parameters for.
 
 <br>
-
 
 ### `duckdb_parameter_name`
 
@@ -2524,7 +2447,6 @@ Returns NULL if the index is out of range for the provided prepared statement.
 The prepared statement for which to get the parameter name from.
 
 <br>
-
 
 ### `duckdb_param_type`
 
@@ -2557,7 +2479,6 @@ The parameter type
 
 <br>
 
-
 ### `duckdb_clear_bindings`
 
 ---
@@ -2571,7 +2492,6 @@ Clear the params bind to the prepared statement.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_prepared_statement_type`
 
@@ -2598,7 +2518,6 @@ duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 <br>
 
-
 ### `duckdb_bind_value`
 
 ---
@@ -2614,7 +2533,6 @@ Binds a value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_parameter_index`
 
@@ -2632,7 +2550,6 @@ Retrieve the index of the parameter for the prepared statement, identified by na
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_boolean`
 
 ---
@@ -2648,7 +2565,6 @@ Binds a bool value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_int8`
 
@@ -2666,7 +2582,6 @@ Binds an int8_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_int16`
 
 ---
@@ -2682,7 +2597,6 @@ Binds an int16_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_int32`
 
@@ -2700,7 +2614,6 @@ Binds an int32_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_int64`
 
 ---
@@ -2716,7 +2629,6 @@ Binds an int64_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_hugeint`
 
@@ -2734,7 +2646,6 @@ Binds a duckdb_hugeint value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_uhugeint`
 
 ---
@@ -2750,7 +2661,6 @@ Binds an duckdb_uhugeint value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_decimal`
 
@@ -2768,7 +2678,6 @@ Binds a duckdb_decimal value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_uint8`
 
 ---
@@ -2784,7 +2693,6 @@ Binds an uint8_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_uint16`
 
@@ -2802,7 +2710,6 @@ Binds an uint16_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_uint32`
 
 ---
@@ -2818,7 +2725,6 @@ Binds an uint32_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_uint64`
 
@@ -2836,7 +2742,6 @@ Binds an uint64_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_float`
 
 ---
@@ -2852,7 +2757,6 @@ Binds a float value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_double`
 
@@ -2870,7 +2774,6 @@ Binds a double value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_date`
 
 ---
@@ -2886,7 +2789,6 @@ Binds a duckdb_date value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_time`
 
@@ -2904,7 +2806,6 @@ Binds a duckdb_time value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_timestamp`
 
 ---
@@ -2920,7 +2821,6 @@ Binds a duckdb_timestamp value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_interval`
 
@@ -2938,7 +2838,6 @@ Binds a duckdb_interval value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_varchar`
 
 ---
@@ -2954,7 +2853,6 @@ Binds a null-terminated varchar value to the prepared statement at the specified
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_bind_varchar_length`
 
@@ -2973,7 +2871,6 @@ Binds a varchar value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_blob`
 
 ---
@@ -2991,7 +2888,6 @@ Binds a blob value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_bind_null`
 
 ---
@@ -3006,7 +2902,6 @@ Binds a NULL value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_execute_prepared`
 
@@ -3042,7 +2937,6 @@ The query result.
 
 <br>
 
-
 ### `duckdb_execute_prepared_streaming`
 
 ---
@@ -3077,7 +2971,6 @@ The query result.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
-
 
 ### `duckdb_extract_statements`
 
@@ -3115,7 +3008,6 @@ The resulting extracted statements object
 The number of extracted statements or 0 on failure.
 
 <br>
-
 
 ### `duckdb_prepare_extracted_statement`
 
@@ -3158,7 +3050,6 @@ The resulting prepared statement object
 
 <br>
 
-
 ### `duckdb_extract_statements_error`
 
 ---
@@ -3185,7 +3076,6 @@ The error of the extracted statements.
 
 <br>
 
-
 ### `duckdb_destroy_extracted`
 
 ---
@@ -3207,7 +3097,6 @@ De-allocates all memory allocated for the extracted statements.
 The extracted statements to destroy.
 
 <br>
-
 
 ### `duckdb_pending_prepared`
 
@@ -3243,7 +3132,6 @@ The pending query result.
 
 <br>
 
-
 ### `duckdb_pending_prepared_streaming`
 
 ---
@@ -3278,7 +3166,6 @@ The pending query result.
 
 <br>
 
-
 ### `duckdb_destroy_pending`
 
 ---
@@ -3300,7 +3187,6 @@ Closes the pending result and de-allocates all memory allocated for the result.
 The pending result to destroy.
 
 <br>
-
 
 ### `duckdb_pending_error`
 
@@ -3328,7 +3214,6 @@ The pending result to fetch the error from.
 The error of the pending result.
 
 <br>
-
 
 ### `duckdb_pending_execute_task`
 
@@ -3361,7 +3246,6 @@ The state of the pending result after the execution.
 
 <br>
 
-
 ### `duckdb_pending_execute_check_state`
 
 ---
@@ -3390,7 +3274,6 @@ The pending result.
 The state of the pending result.
 
 <br>
-
 
 ### `duckdb_execute_pending`
 
@@ -3426,7 +3309,6 @@ The result object.
 
 <br>
 
-
 ### `duckdb_pending_execution_is_finished`
 
 ---
@@ -3453,7 +3335,6 @@ Boolean indicating pending execution should be considered finished.
 
 <br>
 
-
 ### `duckdb_destroy_value`
 
 ---
@@ -3475,7 +3356,6 @@ Destroys the value and de-allocates all memory allocated for that type.
 The value to destroy.
 
 <br>
-
 
 ### `duckdb_create_varchar`
 
@@ -3501,7 +3381,6 @@ The null-terminated string
 The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
-
 
 ### `duckdb_create_varchar_length`
 
@@ -3532,7 +3411,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-
 ### `duckdb_create_int64`
 
 ---
@@ -3557,7 +3435,6 @@ The bigint value
 The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
-
 
 ### `duckdb_create_struct_value`
 
@@ -3587,7 +3464,6 @@ The values for the struct fields
 The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
-
 
 ### `duckdb_create_list_value`
 
@@ -3622,7 +3498,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-
 ### `duckdb_create_array_value`
 
 ---
@@ -3656,7 +3531,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-
 ### `duckdb_get_varchar`
 
 ---
@@ -3683,7 +3557,6 @@ The string value. This must be destroyed with `duckdb_free`.
 
 <br>
 
-
 ### `duckdb_get_int64`
 
 ---
@@ -3708,7 +3581,6 @@ The value
 The int64 value, or 0 if no conversion is possible
 
 <br>
-
 
 ### `duckdb_create_logical_type`
 
@@ -3738,7 +3610,6 @@ The logical type.
 
 <br>
 
-
 ### `duckdb_logical_type_get_alias`
 
 ---
@@ -3765,7 +3636,6 @@ The alias or `NULL`
 
 <br>
 
-
 ### `duckdb_create_list_type`
 
 ---
@@ -3791,7 +3661,6 @@ The child type of list type to create.
 The logical type.
 
 <br>
-
 
 ### `duckdb_create_array_type`
 
@@ -3823,7 +3692,6 @@ The logical type.
 
 <br>
 
-
 ### `duckdb_create_map_type`
 
 ---
@@ -3850,7 +3718,6 @@ The key type and value type of map type to create.
 The logical type.
 
 <br>
-
 
 ### `duckdb_create_union_type`
 
@@ -3882,7 +3749,6 @@ The size of the types array.
 The logical type.
 
 <br>
-
 
 ### `duckdb_create_struct_type`
 
@@ -3918,7 +3784,6 @@ The logical type.
 
 <br>
 
-
 ### `duckdb_create_enum_type`
 
 ---
@@ -3952,7 +3817,6 @@ The logical type.
 
 <br>
 
-
 ### `duckdb_create_decimal_type`
 
 ---
@@ -3983,7 +3847,6 @@ The logical type.
 
 <br>
 
-
 ### `duckdb_get_type_id`
 
 ---
@@ -4008,7 +3871,6 @@ The logical type object
 The type id
 
 <br>
-
 
 ### `duckdb_decimal_width`
 
@@ -4035,7 +3897,6 @@ The width of the decimal type
 
 <br>
 
-
 ### `duckdb_decimal_scale`
 
 ---
@@ -4060,7 +3921,6 @@ The logical type object
 The scale of the decimal type
 
 <br>
-
 
 ### `duckdb_decimal_internal_type`
 
@@ -4087,7 +3947,6 @@ The internal type of the decimal type
 
 <br>
 
-
 ### `duckdb_enum_internal_type`
 
 ---
@@ -4113,7 +3972,6 @@ The internal type of the enum type
 
 <br>
 
-
 ### `duckdb_enum_dictionary_size`
 
 ---
@@ -4138,7 +3996,6 @@ The logical type object
 The dictionary size of the enum type
 
 <br>
-
 
 ### `duckdb_enum_dictionary_value`
 
@@ -4171,7 +4028,6 @@ The string value of the enum type. Must be freed with `duckdb_free`.
 
 <br>
 
-
 ### `duckdb_list_type_child_type`
 
 ---
@@ -4198,7 +4054,6 @@ The logical type object
 The child type of the list type. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
-
 
 ### `duckdb_array_type_child_type`
 
@@ -4227,7 +4082,6 @@ The child type of the array type. Must be destroyed with `duckdb_destroy_logical
 
 <br>
 
-
 ### `duckdb_array_type_array_size`
 
 ---
@@ -4252,7 +4106,6 @@ The logical type object
 The fixed number of elements the values of this array type can store.
 
 <br>
-
 
 ### `duckdb_map_type_key_type`
 
@@ -4281,7 +4134,6 @@ The key type of the map type. Must be destroyed with `duckdb_destroy_logical_typ
 
 <br>
 
-
 ### `duckdb_map_type_value_type`
 
 ---
@@ -4309,7 +4161,6 @@ The value type of the map type. Must be destroyed with `duckdb_destroy_logical_t
 
 <br>
 
-
 ### `duckdb_struct_type_child_count`
 
 ---
@@ -4334,7 +4185,6 @@ The logical type object
 The number of children of a struct type.
 
 <br>
-
 
 ### `duckdb_struct_type_child_name`
 
@@ -4367,7 +4217,6 @@ The name of the struct type. Must be freed with `duckdb_free`.
 
 <br>
 
-
 ### `duckdb_struct_type_child_type`
 
 ---
@@ -4399,7 +4248,6 @@ The child type of the struct type. Must be destroyed with `duckdb_destroy_logica
 
 <br>
 
-
 ### `duckdb_union_type_member_count`
 
 ---
@@ -4424,7 +4272,6 @@ The logical type (union) object
 The number of members of a union type.
 
 <br>
-
 
 ### `duckdb_union_type_member_name`
 
@@ -4457,7 +4304,6 @@ The name of the union member. Must be freed with `duckdb_free`.
 
 <br>
 
-
 ### `duckdb_union_type_member_type`
 
 ---
@@ -4489,7 +4335,6 @@ The child type of the union member. Must be destroyed with `duckdb_destroy_logic
 
 <br>
 
-
 ### `duckdb_destroy_logical_type`
 
 ---
@@ -4511,7 +4356,6 @@ Destroys the logical type and de-allocates all memory allocated for that type.
 The logical type to destroy.
 
 <br>
-
 
 ### `duckdb_create_data_chunk`
 
@@ -4544,7 +4388,6 @@ The data chunk.
 
 <br>
 
-
 ### `duckdb_destroy_data_chunk`
 
 ---
@@ -4567,7 +4410,6 @@ The data chunk to destroy.
 
 <br>
 
-
 ### `duckdb_data_chunk_reset`
 
 ---
@@ -4589,7 +4431,6 @@ Resets a data chunk, clearing the validity masks and setting the cardinality of 
 The data chunk to reset.
 
 <br>
-
 
 ### `duckdb_data_chunk_get_column_count`
 
@@ -4615,7 +4456,6 @@ The data chunk to get the data from
 The number of columns in the data chunk
 
 <br>
-
 
 ### `duckdb_data_chunk_get_vector`
 
@@ -4646,7 +4486,6 @@ The vector
 
 <br>
 
-
 ### `duckdb_data_chunk_get_size`
 
 ---
@@ -4671,7 +4510,6 @@ The data chunk to get the data from
 The number of tuples in the data chunk
 
 <br>
-
 
 ### `duckdb_data_chunk_set_size`
 
@@ -4698,7 +4536,6 @@ The data chunk to set the size in
 The number of tuples in the data chunk
 
 <br>
-
 
 ### `duckdb_vector_get_column_type`
 
@@ -4727,7 +4564,6 @@ The type of the vector
 
 <br>
 
-
 ### `duckdb_vector_get_data`
 
 ---
@@ -4755,7 +4591,6 @@ The vector to get the data from
 The data pointer
 
 <br>
-
 
 ### `duckdb_vector_get_validity`
 
@@ -4796,7 +4631,6 @@ The pointer to the validity mask, or NULL if no validity mask is present
 
 <br>
 
-
 ### `duckdb_vector_ensure_validity_writable`
 
 ---
@@ -4821,7 +4655,6 @@ This allows null values to be written to the vector, regardless of whether a val
 The vector to alter
 
 <br>
-
 
 ### `duckdb_vector_assign_string_element`
 
@@ -4852,7 +4685,6 @@ The row position in the vector to assign the string to
 The null-terminated string
 
 <br>
-
 
 ### `duckdb_vector_assign_string_element_len`
 
@@ -4888,7 +4720,6 @@ The length of the string (in bytes)
 
 <br>
 
-
 ### `duckdb_list_vector_get_child`
 
 ---
@@ -4916,7 +4747,6 @@ The child vector
 
 <br>
 
-
 ### `duckdb_list_vector_get_size`
 
 ---
@@ -4941,7 +4771,6 @@ The vector
 The size of the child list
 
 <br>
-
 
 ### `duckdb_list_vector_set_size`
 
@@ -4972,7 +4801,6 @@ The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 <br>
 
-
 ### `duckdb_list_vector_reserve`
 
 ---
@@ -5001,7 +4829,6 @@ the total capacity to reserve.
 The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 <br>
-
 
 ### `duckdb_struct_vector_get_child`
 
@@ -5034,7 +4861,6 @@ The child vector
 
 <br>
 
-
 ### `duckdb_array_vector_get_child`
 
 ---
@@ -5062,7 +4888,6 @@ The vector
 The child vector
 
 <br>
-
 
 ### `duckdb_validity_row_is_valid`
 
@@ -5092,7 +4917,6 @@ The row index
 true if the row is valid, false otherwise
 
 <br>
-
 
 ### `duckdb_validity_set_row_validity`
 
@@ -5127,7 +4951,6 @@ Whether or not to set the row to valid, or invalid
 
 <br>
 
-
 ### `duckdb_validity_set_row_invalid`
 
 ---
@@ -5155,7 +4978,6 @@ The validity mask
 The row index
 
 <br>
-
 
 ### `duckdb_validity_set_row_valid`
 
@@ -5185,7 +5007,6 @@ The row index
 
 <br>
 
-
 ### `duckdb_create_table_function`
 
 ---
@@ -5210,7 +5031,6 @@ The table function object.
 
 <br>
 
-
 ### `duckdb_destroy_table_function`
 
 ---
@@ -5232,7 +5052,6 @@ Destroys the given table function object.
 The table function to destroy
 
 <br>
-
 
 ### `duckdb_table_function_set_name`
 
@@ -5260,7 +5079,6 @@ The name of the table function
 
 <br>
 
-
 ### `duckdb_table_function_add_parameter`
 
 ---
@@ -5286,7 +5104,6 @@ The table function
 The type of the parameter to add.
 
 <br>
-
 
 ### `duckdb_table_function_add_named_parameter`
 
@@ -5318,7 +5135,6 @@ The type of the parameter to add.
 
 <br>
 
-
 ### `duckdb_table_function_set_extra_info`
 
 ---
@@ -5349,7 +5165,6 @@ The callback that will be called to destroy the bind data (if any)
 
 <br>
 
-
 ### `duckdb_table_function_set_bind`
 
 ---
@@ -5375,7 +5190,6 @@ The table function
 The bind function
 
 <br>
-
 
 ### `duckdb_table_function_set_init`
 
@@ -5403,7 +5217,6 @@ The init function
 
 <br>
 
-
 ### `duckdb_table_function_set_local_init`
 
 ---
@@ -5430,7 +5243,6 @@ The init function
 
 <br>
 
-
 ### `duckdb_table_function_set_function`
 
 ---
@@ -5456,7 +5268,6 @@ The table function
 The function
 
 <br>
-
 
 ### `duckdb_table_function_supports_projection_pushdown`
 
@@ -5487,7 +5298,6 @@ The table function
 True if the table function supports projection pushdown, false otherwise.
 
 <br>
-
 
 ### `duckdb_register_table_function`
 
@@ -5522,7 +5332,6 @@ Whether or not the registration was successful.
 
 <br>
 
-
 ### `duckdb_bind_get_extra_info`
 
 ---
@@ -5547,7 +5356,6 @@ The info object
 The extra info
 
 <br>
-
 
 ### `duckdb_bind_add_result_column`
 
@@ -5579,7 +5387,6 @@ The logical type of the column
 
 <br>
 
-
 ### `duckdb_bind_get_parameter_count`
 
 ---
@@ -5604,7 +5411,6 @@ The info object
 The number of parameters
 
 <br>
-
 
 ### `duckdb_bind_get_parameter`
 
@@ -5637,7 +5443,6 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-
 ### `duckdb_bind_get_named_parameter`
 
 ---
@@ -5669,7 +5474,6 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-
 ### `duckdb_bind_set_bind_data`
 
 ---
@@ -5700,7 +5504,6 @@ The callback that will be called to destroy the bind data (if any)
 
 <br>
 
-
 ### `duckdb_bind_set_cardinality`
 
 ---
@@ -5728,7 +5531,6 @@ Whether or not the cardinality estimate is exact, or an approximation
 
 <br>
 
-
 ### `duckdb_bind_set_error`
 
 ---
@@ -5755,7 +5557,6 @@ The error message
 
 <br>
 
-
 ### `duckdb_init_get_extra_info`
 
 ---
@@ -5780,7 +5581,6 @@ The info object
 The extra info
 
 <br>
-
 
 ### `duckdb_init_get_bind_data`
 
@@ -5809,7 +5609,6 @@ The info object
 The bind data object
 
 <br>
-
 
 ### `duckdb_init_set_init_data`
 
@@ -5841,7 +5640,6 @@ The callback that will be called to destroy the init data (if any)
 
 <br>
 
-
 ### `duckdb_init_get_column_count`
 
 ---
@@ -5868,7 +5666,6 @@ The info object
 The number of projected columns.
 
 <br>
-
 
 ### `duckdb_init_get_column_index`
 
@@ -5901,7 +5698,6 @@ The column index of the projected column.
 
 <br>
 
-
 ### `duckdb_init_set_max_threads`
 
 ---
@@ -5927,7 +5723,6 @@ The info object
 The maximum amount of threads that can process this table function
 
 <br>
-
 
 ### `duckdb_init_set_error`
 
@@ -5955,7 +5750,6 @@ The error message
 
 <br>
 
-
 ### `duckdb_function_get_extra_info`
 
 ---
@@ -5980,7 +5774,6 @@ The info object
 The extra info
 
 <br>
-
 
 ### `duckdb_function_get_bind_data`
 
@@ -6010,7 +5803,6 @@ The bind data object
 
 <br>
 
-
 ### `duckdb_function_get_init_data`
 
 ---
@@ -6035,7 +5827,6 @@ The info object
 The init data object
 
 <br>
-
 
 ### `duckdb_function_get_local_init_data`
 
@@ -6062,7 +5853,6 @@ The init data object
 
 <br>
 
-
 ### `duckdb_function_set_error`
 
 ---
@@ -6088,7 +5878,6 @@ The info object
 The error message
 
 <br>
-
 
 ### `duckdb_add_replacement_scan`
 
@@ -6124,7 +5913,6 @@ The delete callback to call on the extra data, if any
 
 <br>
 
-
 ### `duckdb_replacement_scan_set_function_name`
 
 ---
@@ -6152,7 +5940,6 @@ The function name to substitute.
 
 <br>
 
-
 ### `duckdb_replacement_scan_add_parameter`
 
 ---
@@ -6179,7 +5966,6 @@ The parameter to add.
 
 <br>
 
-
 ### `duckdb_replacement_scan_set_error`
 
 ---
@@ -6205,7 +5991,6 @@ The info object
 The error message
 
 <br>
-
 
 ### `duckdb_appender_create`
 
@@ -6246,7 +6031,6 @@ The resulting appender object.
 
 <br>
 
-
 ### `duckdb_appender_column_count`
 
 ---
@@ -6270,7 +6054,6 @@ Returns the number of columns in the table that belongs to the appender.
 The number of columns in the table.
 
 <br>
-
 
 ### `duckdb_appender_column_type`
 
@@ -6300,7 +6083,6 @@ The duckdb_logical_type of the column.
 
 <br>
 
-
 ### `duckdb_appender_error`
 
 ---
@@ -6328,7 +6110,6 @@ The appender to get the error from.
 The error message, or `nullptr` if there is none.
 
 <br>
-
 
 ### `duckdb_appender_flush`
 
@@ -6359,7 +6140,6 @@ The appender to flush.
 
 <br>
 
-
 ### `duckdb_appender_close`
 
 ---
@@ -6387,7 +6167,6 @@ The appender to flush and close.
 
 <br>
 
-
 ### `duckdb_appender_destroy`
 
 ---
@@ -6414,7 +6193,6 @@ The appender to flush, close and destroy.
 
 <br>
 
-
 ### `duckdb_appender_begin_row`
 
 ---
@@ -6428,7 +6206,6 @@ A nop function, provided for backwards compatibility reasons. Does nothing. Only
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_appender_end_row`
 
@@ -6455,7 +6232,6 @@ The appender.
 
 <br>
 
-
 ### `duckdb_append_bool`
 
 ---
@@ -6470,7 +6246,6 @@ Append a bool value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_int8`
 
@@ -6487,7 +6262,6 @@ Append an int8_t value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_int16`
 
 ---
@@ -6502,7 +6276,6 @@ Append an int16_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_int32`
 
@@ -6519,7 +6292,6 @@ Append an int32_t value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_int64`
 
 ---
@@ -6534,7 +6306,6 @@ Append an int64_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_hugeint`
 
@@ -6551,7 +6322,6 @@ Append a duckdb_hugeint value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_uint8`
 
 ---
@@ -6566,7 +6336,6 @@ Append a uint8_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_uint16`
 
@@ -6583,7 +6352,6 @@ Append a uint16_t value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_uint32`
 
 ---
@@ -6598,7 +6366,6 @@ Append a uint32_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_uint64`
 
@@ -6615,7 +6382,6 @@ Append a uint64_t value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_uhugeint`
 
 ---
@@ -6630,7 +6396,6 @@ Append a duckdb_uhugeint value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_float`
 
@@ -6647,7 +6412,6 @@ Append a float value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_double`
 
 ---
@@ -6662,7 +6426,6 @@ Append a double value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_date`
 
@@ -6679,7 +6442,6 @@ Append a duckdb_date value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_time`
 
 ---
@@ -6694,7 +6456,6 @@ Append a duckdb_time value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_timestamp`
 
@@ -6711,7 +6472,6 @@ Append a duckdb_timestamp value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_interval`
 
 ---
@@ -6727,7 +6487,6 @@ Append a duckdb_interval value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_varchar`
 
 ---
@@ -6742,7 +6501,6 @@ Append a varchar value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_varchar_length`
 
@@ -6760,7 +6518,6 @@ Append a varchar value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_blob`
 
 ---
@@ -6777,7 +6534,6 @@ Append a blob value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_null`
 
 ---
@@ -6791,7 +6547,6 @@ Append a NULL value to the appender (of any type).
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_data_chunk`
 
@@ -6825,7 +6580,6 @@ The data chunk to append.
 The return state.
 
 <br>
-
 
 ### `duckdb_query_arrow`
 
@@ -6865,7 +6619,6 @@ The query result.
 
 <br>
 
-
 ### `duckdb_query_arrow_schema`
 
 ---
@@ -6895,7 +6648,6 @@ The output schema.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
-
 
 ### `duckdb_prepared_arrow_schema`
 
@@ -6927,7 +6679,6 @@ The output schema.
 
 <br>
 
-
 ### `duckdb_result_arrow_array`
 
 ---
@@ -6958,7 +6709,6 @@ The data chunk to convert.
 The output array.
 
 <br>
-
 
 ### `duckdb_query_arrow_array`
 
@@ -6993,7 +6743,6 @@ The output array.
 
 <br>
 
-
 ### `duckdb_arrow_column_count`
 
 ---
@@ -7018,7 +6767,6 @@ The result object.
 The number of columns present in the result object.
 
 <br>
-
 
 ### `duckdb_arrow_row_count`
 
@@ -7045,7 +6793,6 @@ The number of rows present in the result object.
 
 <br>
 
-
 ### `duckdb_arrow_rows_changed`
 
 ---
@@ -7071,7 +6818,6 @@ The result object.
 The number of rows changed.
 
 <br>
-
 
 ### `duckdb_query_arrow_error`
 
@@ -7101,7 +6847,6 @@ The error of the result.
 
 <br>
 
-
 ### `duckdb_destroy_arrow`
 
 ---
@@ -7124,7 +6869,6 @@ The result to destroy.
 
 <br>
 
-
 ### `duckdb_destroy_arrow_stream`
 
 ---
@@ -7146,7 +6890,6 @@ Releases the arrow array stream and de-allocates its memory.
 The arrow array stream to destroy.
 
 <br>
-
 
 ### `duckdb_execute_prepared_arrow`
 
@@ -7177,7 +6920,6 @@ The query result.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
-
 
 ### `duckdb_arrow_scan`
 
@@ -7211,7 +6953,6 @@ Arrow stream wrapper.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
-
 
 ### `duckdb_arrow_array_scan`
 
@@ -7255,7 +6996,6 @@ Output array stream that wraps around the passed schema, for releasing/deleting 
 
 <br>
 
-
 ### `duckdb_execute_tasks`
 
 ---
@@ -7283,7 +7023,6 @@ The database object to execute tasks for
 The maximum amount of tasks to execute
 
 <br>
-
 
 ### `duckdb_create_task_state`
 
@@ -7313,7 +7052,6 @@ The task state that can be used with duckdb_execute_tasks_state.
 
 <br>
 
-
 ### `duckdb_execute_tasks_state`
 
 ---
@@ -7338,7 +7076,6 @@ Multiple threads can share the same duckdb_task_state.
 The task state of the executor
 
 <br>
-
 
 ### `duckdb_execute_n_tasks_state`
 
@@ -7374,7 +7111,6 @@ The amount of tasks that have actually been executed
 
 <br>
 
-
 ### `duckdb_finish_execution`
 
 ---
@@ -7396,7 +7132,6 @@ Finish execution on a specific task.
 The task state to finish execution
 
 <br>
-
 
 ### `duckdb_task_state_is_finished`
 
@@ -7423,7 +7158,6 @@ Whether or not duckdb_finish_execution has been called on the task state
 
 <br>
 
-
 ### `duckdb_destroy_task_state`
 
 ---
@@ -7449,7 +7183,6 @@ The task state to clean up
 
 <br>
 
-
 ### `duckdb_execution_is_finished`
 
 ---
@@ -7471,7 +7204,6 @@ Returns true if the execution of the current query is finished.
 The connection on which to check
 
 <br>
-
 
 ### `duckdb_stream_fetch_chunk`
 
@@ -7507,4 +7239,3 @@ The result object to fetch the data chunk from.
 The resulting data chunk. Returns `NULL` if the result has an error.
 
 <br>
-
