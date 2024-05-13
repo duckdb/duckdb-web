@@ -112,7 +112,6 @@ The resulting appender object.
 
 <br>
 
-
 ### `duckdb_appender_column_count`
 
 ---
@@ -136,7 +135,6 @@ Returns the number of columns in the table that belongs to the appender.
 The number of columns in the table.
 
 <br>
-
 
 ### `duckdb_appender_column_type`
 
@@ -166,7 +164,6 @@ The duckdb_logical_type of the column.
 
 <br>
 
-
 ### `duckdb_appender_error`
 
 ---
@@ -194,7 +191,6 @@ The appender to get the error from.
 The error message, or `nullptr` if there is none.
 
 <br>
-
 
 ### `duckdb_appender_flush`
 
@@ -225,7 +221,6 @@ The appender to flush.
 
 <br>
 
-
 ### `duckdb_appender_close`
 
 ---
@@ -253,7 +248,6 @@ The appender to flush and close.
 
 <br>
 
-
 ### `duckdb_appender_destroy`
 
 ---
@@ -280,7 +274,6 @@ The appender to flush, close and destroy.
 
 <br>
 
-
 ### `duckdb_appender_begin_row`
 
 ---
@@ -294,7 +287,6 @@ A nop function, provided for backwards compatibility reasons. Does nothing. Only
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_appender_end_row`
 
@@ -321,7 +313,6 @@ The appender.
 
 <br>
 
-
 ### `duckdb_append_bool`
 
 ---
@@ -336,7 +327,6 @@ Append a bool value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_int8`
 
@@ -353,7 +343,6 @@ Append an int8_t value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_int16`
 
 ---
@@ -368,7 +357,6 @@ Append an int16_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_int32`
 
@@ -385,7 +373,6 @@ Append an int32_t value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_int64`
 
 ---
@@ -400,7 +387,6 @@ Append an int64_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_hugeint`
 
@@ -417,7 +403,6 @@ Append a duckdb_hugeint value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_uint8`
 
 ---
@@ -432,7 +417,6 @@ Append a uint8_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_uint16`
 
@@ -449,7 +433,6 @@ Append a uint16_t value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_uint32`
 
 ---
@@ -464,7 +447,6 @@ Append a uint32_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_uint64`
 
@@ -481,7 +463,6 @@ Append a uint64_t value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_uhugeint`
 
 ---
@@ -496,7 +477,6 @@ Append a duckdb_uhugeint value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_float`
 
@@ -513,7 +493,6 @@ Append a float value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_double`
 
 ---
@@ -528,7 +507,6 @@ Append a double value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_date`
 
@@ -545,7 +523,6 @@ Append a duckdb_date value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_time`
 
 ---
@@ -560,7 +537,6 @@ Append a duckdb_time value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_timestamp`
 
@@ -577,7 +553,6 @@ Append a duckdb_timestamp value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_interval`
 
 ---
@@ -593,7 +568,6 @@ Append a duckdb_interval value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_varchar`
 
 ---
@@ -608,7 +582,6 @@ Append a varchar value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_varchar_length`
 
@@ -626,7 +599,6 @@ Append a varchar value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_blob`
 
 ---
@@ -643,7 +615,6 @@ Append a blob value to the appender.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_append_null`
 
 ---
@@ -657,7 +628,6 @@ Append a NULL value to the appender (of any type).
 </span>);
 </code></pre></div></div>
 <br>
-
 
 ### `duckdb_append_data_chunk`
 
@@ -691,4 +661,3 @@ The data chunk to append.
 The return state.
 
 <br>
-

@@ -76,7 +76,6 @@ The result configuration object.
 
 <br>
 
-
 ### `duckdb_config_count`
 
 ---
@@ -100,7 +99,6 @@ This should not be called in a loop as it internally loops over all the options.
 The amount of config options available.
 
 <br>
-
 
 ### `duckdb_get_config_flag`
 
@@ -137,7 +135,6 @@ A description of the configuration flag.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
-
 
 ### `duckdb_set_config`
 
@@ -177,7 +174,6 @@ The value to set the configuration flag to.
 
 <br>
 
-
 ### `duckdb_destroy_config`
 
 ---
@@ -199,4 +195,3 @@ Destroys the specified configuration object and de-allocates all memory allocate
 The configuration object to destroy.
 
 <br>
-
