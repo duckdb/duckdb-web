@@ -59,6 +59,10 @@
 	color: #c5a332;
 }
 
+.language-bash code:before {
+  content: '$ ';
+}
+
 // keywords in table headers
 th .k {
 	color: #fff;
