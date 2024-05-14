@@ -75,5 +75,10 @@ CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake
 
 ```bash
 sudo apt-get install -y libssl-dev
+```
+
+Then, build with:
+
+```bash
 GEN=ninja BUILD_HTTPFS=1 make
 ```

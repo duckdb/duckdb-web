@@ -29,8 +29,9 @@ SELECT * FROM read_csv('flights.csv',
     });
 ```
 
+Read a CSV from stdin, auto-infer options:
+
 ```bash
-# read a CSV from stdin, auto-infer options
 cat flights.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 ```
 

@@ -41,8 +41,7 @@ sudo yum install unixODBC
    To extract them, run:
 
    ```bash
-   mkdir duckdb_odbc
-   unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
+   mkdir duckdb_odbc && unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
    ```
 
 3. The `unixodbc_setup.sh` script performs the configuration of the DuckDB ODBC Driver. It is based on the unixODBC package that provides some commands to handle the ODBC setup and test like `odbcinst` and `isql`.

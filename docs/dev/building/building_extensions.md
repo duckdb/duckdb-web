@@ -13,9 +13,17 @@ For example, to install the [`httpfs` extension](../../extensions/httpfs), run t
 
 ```bash
 GEN=ninja BUILD_HTTPFS=1 make
-# for release builds
+```
+
+For release builds:
+
+```bash
 build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
-# for debug builds
+```
+
+For debug builds:
+
+```bash
 build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
 ```
 
