@@ -8,8 +8,10 @@ In addition to a large number of built in connectors,
 it also provides generic database connectivity via ODBC and JDBC connectors.
 
 Tableau has two main versions: Desktop and Online (Server).
+
 * For Desktop, connecting to a DuckDB database is similar to working in an embedded environment like Python.
 * For Online, since DuckDB is in-process, the data needs to be either on the server itself
+
 or in a remote data bucket that is accessible from the server.
 
 ## Database Creation
@@ -85,10 +87,14 @@ On Linux, copy the Taco file to `/opt/tableau/connectors`.
 On Windows, copy the Taco file to `C:\Program Files\Tableau\Connectors`.
 Then issue these commands to disable signature validation:
 
-```sh
-$ tsm configuration set -k native_api.disable_verify_connector_plugin_signature -v true
-$ tsm pending-changes apply
+```bash
+tsm configuration set -k native_api.disable_verify_connector_plugin_signature -v true
 ```
+
+```bash
+tsm pending-changes apply
+```
+
 The last command will restart the server with the new settings.
 
 ### macOS
@@ -96,8 +102,8 @@ The last command will restart the server with the new settings.
 Copy the Taco file to the `/Users/[User]/Documents/My Tableau Repository/Connectors` folder.
 Then launch Tableau Desktop from the Terminal with the command line argument to disable signature validation:
 
-```sh
-$ /Applications/Tableau\ Desktop\ ⟨year⟩.⟨quarter⟩.app/Contents/MacOS/Tableau -DDisableVerifyConnectorPluginSignature=true
+```bash
+/Applications/Tableau\ Desktop\ ⟨year⟩.⟨quarter⟩.app/Contents/MacOS/Tableau -DDisableVerifyConnectorPluginSignature=true
 ```
 
 You can also package this up with AppleScript by using the following script:

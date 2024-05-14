@@ -21,8 +21,7 @@ sudo yum install -y git g++ cmake ninja-build openssl-devel
 Ubuntu and Debian:
 
 ```bash
-sudo apt-get update
-sudo apt-get install -y git g++ cmake ninja-build libssl-dev
+sudo apt-get update && sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
 Alpine Linux:

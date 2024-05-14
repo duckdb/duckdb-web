@@ -20,8 +20,7 @@ title: ODBC API on macOS
 3. The archive contains the `libduckdb_odbc.dylib` artifact. To extract it to a directory, run:
 
    ```bash
-   mkdir duckdb_odbc
-   unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
+   mkdir duckdb_odbc && unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
    ```
 
 4. There are two ways to configure the ODBC driver, either by initializing via the configuration files, or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
