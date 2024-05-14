@@ -59,10 +59,17 @@ build/debug/test/unittest --start-offset-percentage=10 --end-offset-percentage=2
 The set of tests to run can also be loaded from a file containing one test name per line, and loaded using the `-f` command.
 
 ```bash
-$ cat test.list
+cat test.list
+```
+
+```text
 test/sql/join/full_outer/test_full_outer_join_issue_4252.test
 test/sql/join/full_outer/full_outer_join_cache.test
 test/sql/join/full_outer/test_full_outer_join.test
-# run only the tests labeled in the file
-$ build/debug/test/unittest -f test.list
+```
+
+To run only the tests labeled in the file:
+
+```bash
+build/debug/test/unittest -f test.list
 ```
