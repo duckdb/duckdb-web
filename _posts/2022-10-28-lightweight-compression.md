@@ -42,7 +42,7 @@ As an example of this concept, let us consider the following two data sets.
      width="100%"
      />
 
-The constant data set can be compressed by simply storing the value of the pattern and how many times the pattern repeats (e.g. `1x8`). The random noise, on the other hand, has no pattern, and is therefore not compressible.
+The constant data set can be compressed by simply storing the value of the pattern and how many times the pattern repeats (e.g., `1x8`). The random noise, on the other hand, has no pattern, and is therefore not compressible.
 
 ## General Purpose Compression Algorithms
 
@@ -103,7 +103,7 @@ Constant encoding is the most straightforward compression algorithm in DuckDB. C
      width="100%"
      />
 
-When applicable, this encoding technique leads to tremendous space savings. While it might seem like this technique is rarely applicable – in practice it occurs relatively frequently. Columns might be filled with `NULL` values, or have values that rarely change (such as e.g. a `year` column in a stream of sensor data). Because of this compression algorithm, such columns take up almost no space in DuckDB.
+When applicable, this encoding technique leads to tremendous space savings. While it might seem like this technique is rarely applicable – in practice it occurs relatively frequently. Columns might be filled with `NULL` values, or have values that rarely change (such as e.g., a `year` column in a stream of sensor data). Because of this compression algorithm, such columns take up almost no space in DuckDB.
 
 ### Run-Length Encoding (RLE)
 
@@ -139,7 +139,7 @@ Frame of Reference encoding is an extension of bit packing, where we also includ
      width="100%"
      />
 
-While this might not seem particularly useful at a first glance, it is very powerful when storing dates and timestamps. That is because dates and timestamps are stored as Unix Timestamps in DuckDB, i.e. the offset since `1970-01-01` in either days (for dates) or microseconds (for timestamps). When we have a set of date or timestamp values, the absolute numbers might be very high, but the numbers are all very close together. By applying a frame before bit packing, we can often improve our compression ratio tremendously.
+While this might not seem particularly useful at a first glance, it is very powerful when storing dates and timestamps. That is because dates and timestamps are stored as Unix Timestamps in DuckDB, i.e., the offset since `1970-01-01` in either days (for dates) or microseconds (for timestamps). When we have a set of date or timestamp values, the absolute numbers might be very high, but the numbers are all very close together. By applying a frame before bit packing, we can often improve our compression ratio tremendously.
 
 
 ### Dictionary Encoding

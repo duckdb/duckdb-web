@@ -62,4 +62,4 @@ In cases where the underlying filesystem is unable to provide some of this data 
 
 ## Support for Projection Pushdown
 
-The table functions also utilize projection pushdown to avoid computing properties unnecessarily. So you could e.g. use this to glob a directory full of huge files to get the file size in the size column, as long as you omit the content column the data wont be read into DuckDB.
+The table functions also utilize projection pushdown to avoid computing properties unnecessarily. So you could e.g., use this to glob a directory full of huge files to get the file size in the size column, as long as you omit the content column the data wont be read into DuckDB.

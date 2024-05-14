@@ -10,7 +10,7 @@ excerpt: While core DuckDB has zero external dependencies, building extensions w
 Ever since the birth of DuckDB, one of its main pillars has been its strict no-external-dependencies philosophy.
 Paraphrasing [this 2019 SIGMOD paper](https://hannes.muehleisen.org/publications/SIGMOD2019-demo-duckdb.pdf) on DuckDB:
 *To achieve the requirement of having practical “embeddability” and portability, the database needs to run in whatever
-environment the host does. Dependencies on external libraries (e.g. openssh) for either compile- or runtime have been
+environment the host does. Dependencies on external libraries (e.g., openssh) for either compile- or runtime have been
 found to be problematic.*
 
 In this blog post, we will cover how DuckDB manages to stay true to this philosophy without forcing DuckDB developers
