@@ -336,10 +336,10 @@ INSERT INTO tbl
 
 #### Limitations
 
-Currently, DuckDB’s `ON CONFLICT DO UPDATE` feature is limited to enforce constraints between committed and newly inserted (transaction-local) data. 
-In other words, having multiple tuples conflicting on the same key is not supported. 
-If the newly inserted data has duplicate rows, an error message will be thrown, or unexpected behavior can occur. 
-This also includes conflicts ONLY within the newly inserted data.
+Currently, DuckDB’s `ON CONFLICT DO UPDATE` feature is limited to enforce constraints between committed and newly inserted (transaction-local) data.
+In other words, having multiple tuples conflicting on the same key is not supported.
+If the newly inserted data has duplicate rows, an error message will be thrown, or unexpected behavior can occur.
+This also includes conflicts **only** within the newly inserted data.
 
 ```sql
 CREATE TABLE tbl (i INTEGER PRIMARY KEY, j INTEGER);
