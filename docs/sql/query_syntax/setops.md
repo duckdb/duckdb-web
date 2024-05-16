@@ -12,7 +12,7 @@ DuckDB also supports [`UNION [ALL] BY NAME`](#union-all-by-name), which joins co
 
 ## `UNION`
 
-The `UNION` clause can be used to combine rows from multiple queries. The queries are required to have the same number of columns and the same column types.
+The `UNION` clause can be used to combine rows from multiple queries. The queries are required to return the same number of columns. [Implicit casting](https://duckdb.org/docs/sql/data_types/typecasting#implicit-casting) to one of the returned types is performed to combine columns of different types where necessary. If this is not possible, the `UNION` clause throws an error. 
 
 ### Vanilla `UNION` (Set Semantics)
 
