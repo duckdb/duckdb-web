@@ -184,7 +184,7 @@ AsOf can stop searching when it finds the first match because there is at most o
 
 You may be wondering why the Common Table Expression in the `WITH` clause was called *state*.
 This is because the `prices` table is really an example of what in temporal analytics is called an *event table* .
-The rows of an event table contain timestamps and what happened at that time (i.e. events).
+The rows of an event table contain timestamps and what happened at that time (i.e., events).
 The events in the `prices` table are changes to the price of a stock.
 Another common example of an event table is a structured log file:
 Each row of the log records when something "happened" – usually a change to a part of the system.
@@ -211,7 +211,7 @@ and using an `OR` like this in a join condition makes comparisons slow and hard 
 Moreover, if the ordering column is already using `NULL` to indicate missing values,
 this option is not available.
 
-For most state tables, there are suitable choices (e.g. large dates) 
+For most state tables, there are suitable choices (e.g., large dates) 
 but one of the advantages of AsOf is that it can avoid having to design a state table 
 if it is not needed for the analytic task.
 
@@ -383,7 +383,7 @@ The state table CTE is created by hash partitioning the table on `ticker`,
 sorting on `when` and then computing another column that is just `when` shifted down by one.
 The join is then implemented with a hash join on `ticker` and two comparisons on `when`.
 
-If there was no `ticker` column (e.g. the prices were for a single item)
+If there was no `ticker` column (e.g., the prices were for a single item)
 then the join would be implemented using our inequality join operator,
 which would materialise and sort both sides because it doesn't know that the ranges are disjoint.
 
@@ -555,7 +555,7 @@ Another way to use the window operator is to:
 * Filter to pairs where the build time is before the probe time
 * Partition the result on both the equality keys _and_ the probe timestamp
 * Sort the partitions on the build timestamp _descending_
-* Filter out all value except rank 1 (i.e. the largest build time <= the probe time)
+* Filter out all value except rank 1 (i.e., the largest build time <= the probe time)
 
 The query looks like:
 

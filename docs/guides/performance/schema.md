@@ -62,7 +62,7 @@ The results below show that joining on `BIGINT` columns is approx. 1.8× faster 
 | `BIGINT`                 | `BIGINT`                | `70368755640078`                         | 1.2 s      |
 | `BIGINT`                 | `VARCHAR`               | `'70368755640078'`                       | 2.1 s      |
 
-> Bestpractice Avoid representing numeric values as strings, especially if you intend to perform e.g. join operations on them.
+> Bestpractice Avoid representing numeric values as strings, especially if you intend to perform e.g., join operations on them.
 
 ## Constraints
 

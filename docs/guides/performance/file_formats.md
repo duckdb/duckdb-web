@@ -98,7 +98,7 @@ SELECT Prompt FROM sniff_csv('part-0001.csv');
 Prompt = FROM read_csv('file_path.csv', auto_detect=false, delim=',', quote='"', escape='"', new_line='\n', skip=0, header=true, columns={'hello': 'BIGINT', 'world': 'VARCHAR'});
 ```
 
-Then, you can adjust `read_csv` command, by e.g. applying filename expansion (globbing), and run with the rest of the options detected by the sniffer:
+Then, you can adjust `read_csv` command, by e.g., applying filename expansion (globbing), and run with the rest of the options detected by the sniffer:
 
 ```sql
 FROM read_csv('part-*.csv', auto_detect=false, delim=',', quote='"', escape='"', new_line='\n', skip=0, header=true, columns={'hello': 'BIGINT', 'world': 'VARCHAR'});

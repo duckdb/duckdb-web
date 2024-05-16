@@ -329,7 +329,7 @@ This is especially important to do in systems that use Quicksort because Quickso
 <img src="/images/blog/sorting/randints_sortedness.svg" alt="Sorting 100M integers with different sortedness" title="Sortedness Experiment" style="max-width:100%"/>
 
 Not surprisingly, all systems perform better on sorted data, sometimes by a large margin.
-ClickHouse, Pandas, and SQLite likely have some optimization here: e.g. keeping track of sortedness in the catalog, or checking sortedness while scanning the input.
+ClickHouse, Pandas, and SQLite likely have some optimization here: e.g., keeping track of sortedness in the catalog, or checking sortedness while scanning the input.
 DuckDB and HyPer have only a very small difference in performance when the input data is sorted, and do not have such an optimization.
 For DuckDB the slightly improved performance can be explained due to a better memory access pattern during sorting: When the data is already sorted the access pattern is mostly sequential.
 

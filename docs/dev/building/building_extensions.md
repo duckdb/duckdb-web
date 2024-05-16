@@ -107,7 +107,7 @@ This is useful when debugging a crash that is hard to pinpoint with a debugger a
 
 ## Using a CMake Configuration File
 
-To build using a CMake configuration file, create an extension configuration file named `extension_config.cmake` with e.g. the following content:
+To build using a CMake configuration file, create an extension configuration file named `extension_config.cmake` with e.g., the following content:
 
 ```cmake
 duckdb_extension_load(autocomplete)

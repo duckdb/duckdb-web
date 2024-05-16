@@ -19,7 +19,7 @@ The parser is not aware of the catalog or any other aspect of the database. It w
 
 ### ParsedExpression
 
-The ParsedExpression represents an expression within a SQL statement. This can be e.g. a reference to a column, an addition operator or a constant value. The type of the ParsedExpression indicates what it represents, e.g. a comparison is represented as a [`ComparisonExpression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/parser/expression/comparison_expression.hpp).
+The ParsedExpression represents an expression within a SQL statement. This can be e.g., a reference to a column, an addition operator or a constant value. The type of the ParsedExpression indicates what it represents, e.g., a comparison is represented as a [`ComparisonExpression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/parser/expression/comparison_expression.hpp).
 
 ParsedExpressions do **not** have types, except for nodes with explicit types such as `CAST` statements. The types for expressions are resolved in the Binder, not in the Parser.
 
@@ -33,7 +33,7 @@ The QueryNode represents either (1) a `SELECT` statement, or (2) a set operation
 
 ### SQL Statement
 
-The SQLStatement represents a complete SQL statement. The type of the SQL Statement represents what kind of statement it is (e.g. `StatementType::SELECT` represents a `SELECT` statement). A single SQL string can be transformed into multiple SQL statements in case the original query string contains multiple queries.
+The SQLStatement represents a complete SQL statement. The type of the SQL Statement represents what kind of statement it is (e.g., `StatementType::SELECT` represents a `SELECT` statement). A single SQL string can be transformed into multiple SQL statements in case the original query string contains multiple queries.
 
 ## Binder
 
