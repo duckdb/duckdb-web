@@ -77,6 +77,23 @@ comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` r
 Comparing nested value _members_, however, uses the internal nested value rules for `NULL`s,
 and a `NULL` nested value member will compare above a non-`NULL` nested value member.
 
+## Updating Lists
+
+Updates on lists are internally represented as an insert and a delete operation.
+Therefore, updating list values may lead to a duplicate key error on primary/unique keys.
+See the following example:
+
+```sql
+CREATE TABLE tbl (id INTEGER PRIMARY KEY, lst INTEGER[], comment VARCHAR);
+INSERT INTO tbl VALUES (1, [12, 34], 'asd');
+UPDATE tbl SET lst = [56, 78] WHERE id = 1;
+```
+
+```console
+Constraint Error: Duplicate key "id: 1" violates primary key constraint.
+If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
+```
+
 ## Functions
 
 See [Nested Functions](../../sql/functions/nested).
