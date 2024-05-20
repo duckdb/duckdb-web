@@ -50,4 +50,4 @@ group :jekyll_plugins do
     gem "jekyll-last-modified-at"
 end
 
-gem "jekyll-toc", "~> 0.18.0"
+gem "jekyll-toc", "~> 0.19.0"
