@@ -195,11 +195,10 @@ The error message, or `nullptr` if there is none.
 ### `duckdb_appender_flush`
 
 ---
-Flush the appender to the table, forcing the cache of the appender to be cleared and the data to be appended to the
-base table.
-
-This should generally not be used unless you know what you are doing. Instead, call `duckdb_appender_destroy` when you
-are done with the appender.
+Flush the appender to the table, forcing the cache of the appender to be cleared. If flushing the data triggers a
+constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
+It is not possible to append more values. Call duckdb_appender_error to obtain the error message followed by
+duckdb_appender_destroy to destroy the invalidated appender.
 
 #### Syntax
 
@@ -224,9 +223,10 @@ The appender to flush.
 ### `duckdb_appender_close`
 
 ---
-Close the appender, flushing all intermediate state in the appender to the table and closing it for further appends.
-
-This is generally not necessary. Call `duckdb_appender_destroy` instead.
+Closes the appender by flushing all intermediate states and closing it for further appends. If flushing the data
+triggers a constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
+Call duckdb_appender_error to obtain the error message followed by duckdb_appender_destroy to destroy the invalidated
+appender.
 
 #### Syntax
 
@@ -251,8 +251,11 @@ The appender to flush and close.
 ### `duckdb_appender_destroy`
 
 ---
-Close the appender and destroy it. Flushing all intermediate state in the appender to the table, and de-allocating
-all memory associated with the appender.
+Closes the appender by flushing all intermediate states to the table and destroying it. By destroying it, this function
+de-allocates all memory associated with the appender. If flushing the data triggers a constraint violation,
+then all data is invalidated, and this function returns DuckDBError. Due to the destruction of the appender, it is no
+longer possible to obtain the specific error message with duckdb_appender_error. Therefore, call duckdb_appender_close
+before destroying the appender, if you need insights into the specific error.
 
 #### Syntax
 
