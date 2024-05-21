@@ -208,10 +208,10 @@ FROM read_csv(
 );
 ```
 
-You can then query both the `rejects_scans` and `reject_errors` tables, to retrieve information about the rejected tuples. For example:
+You can then query both the `reject_scans` and `reject_errors` tables, to retrieve information about the rejected tuples. For example:
 
 ```sql
-FROM rejects_table;
+FROM reject_scans;
 ```
 
 Outputs:
@@ -223,7 +223,7 @@ Outputs:
 | 5       | 0       | faulty.csv | ,         | "     | "      | \n                | 0         | false      | {'name': 'VARCHAR','age': 'INTEGER'} |             |                  | store_rejects=true |
 
 ```sql
-FROM rejects_table;
+FROM reject_errors;
 ```
 
 Outputs:
