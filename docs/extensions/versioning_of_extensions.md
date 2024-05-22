@@ -3,16 +3,69 @@ layout: docu
 title: Versioning of Extensions
 ---
 
-## Extension Versions
+## Extension Versioning
 
-> An extension can have in-version upgrades.
-> You can run `FORCE INSTALL ⟨extension⟩` to ensure you're on the latest version of the extension.
+Just like DuckDB itself, DuckDB extensions have a version. This version can be used by users to determine which features are available
+in the extension they have installed, and by developers to understand bug reports. DuckDB extensions can be versioned in different ways:
 
-DuckDB extensions currently don't have an internal version. This means that, in general, when staying on a DuckDB version, the version of the extension will be fixed. When a new version of DuckDB is released, this also marks a new release for all extension versions. However, there are two important sidenotes to make here.
+**Extensions whose source lives in DuckDB's main repository** (in-tree extensions) are tagged with the short git hash of the repository. 
+For example, the parquet extension is built into DuckDB version `v0.10.3` (which has commit `70fd6a8a24`):
+```SQL
+SELECT extension_name, extension_version, install_mode FROM duckdb_extensions() WHERE extension_name='parquet';
+```
+<div class="narrow_table"></div>
 
-Firstly, some DuckDB extension's may be updated within a DuckDB release in case of bugs. These are considered "hotfixes" and should not introduce compatibility breaking changes. This means that when running into issues with an extension, it makes sense to double-check that you are on the latest version of an extension by running `FORCE INSTALL ⟨extension⟩`.
+| extension_name    | extension_version | install_mode         |
+|:------------------|:------------------|:---------------------|
+| parquet           | 70fd6a8a24        | STATICALLY_LINKED    |
 
-Secondly, in the (near) future DuckDB aims to untie extension versions from DuckDB versions by adding version tags to extensions, the ability to inspect which versions are installed, and installing specific extension versions. So keep in mind that this is likely to change and in the future extension may introduce compatibility-breaking updates within a DuckDB release.
+
+**Extensions whose source lives in a separate repository** (out-of-tree extensions) have their own version. This version is **either** 
+the short git hash of the separate repository, **or** the git version tag in [Semantic Versioning](https://semver.org/) format.
+For example, in DuckDB version `v0.10.3`, the azure extension could be versioned as follows:
+
+```shell
+SELECT extension_name, extension_version, install_mode FROM duckdb_extensions() WHERE extension_name='azure';
+```
+
+<div class="narrow_table"></div>
+
+| extension_name | extension_version | install_mode   |
+|:---------------|:------------------|:---------------|
+| azure          | 49b63dc        | REPOSITORY     |
+
+## Updating extensions
+DuckDB has a dedicated statement that will automatically update all extensions to their latest version. The output will
+give the user information on which extensions were updated to/from which version. For example:
+
+```SQL
+UPDATE EXTENSIONS
+```
+
+<div class="narrow_table"></div>
+
+| extension_name | repository   | update_result         | previous_version | current_version |
+|:---------------|:-------------|:----------------------|:-----------------|:----------------|
+| httpfs         | core         | NO_UPDATE_AVAILABLE   | 70fd6a8a24       | 70fd6a8a24      |
+| delta          | core         | UPDATED               | d9e5cc1          | 04c61e4         |
+| azure          | core         | NO_UPDATE_AVAILABLE   | 49b63dc          | 49b63dc         |
+| aws            | core_nightly | NO_UPDATE_AVAILABLE   | 42c78d3          | 42c78d3         |
+
+Note that DuckDB will look for updates in the source repository for each extension. So if an extension was installed from 
+core_nightly, it will be updated with the latest nightly build.
+
+The update statement can also be provided with a list of specific extensions to update:
+
+```sql
+UPDATE EXTENSIONS (httpfs, azure);
+```
+
+<div class="narrow_table"></div>
+
+| extension_name | repository   | update_result         | previous_version | current_version |
+|:---------------|:-------------|:----------------------|:-----------------|:----------------|
+| httpfs         | core         | NO_UPDATE_AVAILABLE   | 70fd6a8a24       | 70fd6a8a24      |
+| azure          | core         | NO_UPDATE_AVAILABLE   | 49b63dc          | 49b63dc         |
 
 ## Target DuckDB Version
 
