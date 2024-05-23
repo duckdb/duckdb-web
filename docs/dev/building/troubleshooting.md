@@ -6,11 +6,19 @@ title: Troubleshooting
 ## Building the R Package is Slow
 
 By default, R compiles packages using a single thread.
-To parallelize the compilation, create or edit the `~/.R/Makevars` file, and add the following content:
+To parallelize the compilation, create or edit the `~/.R/Makevars` file, and add a line like the following:
 
 ```text
 MAKEFLAGS = -j8
 ```
+
+The above will parallelize the compilation using 8 threads. In a Linux system, in order to use all of the machine's threads, one can add the following instead:
+
+```text
+MAKEFLAGS = -j$(nproc)
+```
+
+But note that, the more threads that are used, the higher the RAM consumption. If the system runs out of RAM while compiling, then the R session will crash.
 
 ## Building the R Package on Linux AArch64
 
