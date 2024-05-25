@@ -24,8 +24,9 @@ SELECT extension_name, extension_version, install_mode FROM duckdb_extensions() 
 the short git hash of the separate repository, **or** the git version tag in [Semantic Versioning](https://semver.org/) format.
 For example, in DuckDB version `v0.10.3`, the azure extension could be versioned as follows:
 
-```shell
-SELECT extension_name, extension_version, install_mode FROM duckdb_extensions()
+```sql
+SELECT extension_name, extension_version, install_mode
+FROM duckdb_extensions()
 WHERE extension_name = 'azure';
 ```
 
