@@ -160,13 +160,13 @@ All extensions provided by the DuckDB core team are signed.
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
 To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsigned` flag to it on startup:
 
-```shell
+```bash
 duckdb -unsigned
 ```
 
 Now any extension can be loaded, signed or not:
 
-```shell
+```sql
 LOAD './some/local/ext.duckdb_extension'
 ```
 

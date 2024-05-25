@@ -141,7 +141,7 @@ StatementExecuteQuery(&adbc_statement, nullptr, nullptr, &adbc_error);
 
 The first thing to do is to use `pip` and install the ADBC Driver manager. You will also need to install the `pyarrow` to directly access Apache Arrow formatted result sets (such as using `fetch_arrow_table`).
 
-```shell
+```bash
 pip install adbc_driver_manager pyarrow
 ```
 
