@@ -167,7 +167,7 @@ duckdb -unsigned
 Now any extension can be loaded, signed or not:
 
 ```sql
-LOAD './some/local/ext.duckdb_extension'
+LOAD './some/local/ext.duckdb_extension';
 ```
 
 For Client APIs, the `allow_unsigned_extensions` database configuration options needs to be set, see the respective [Client API docs](../api/overview). 
