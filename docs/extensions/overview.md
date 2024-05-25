@@ -79,7 +79,7 @@ users opt-in to the extension explicitly before use due to the way they modify b
 
 To see which extensions can be autoloaded, check the [official extensions list](official_extensions).
 
-### Explicit `INSTALL` & `LOAD`
+### Explicit `INSTALL` and `LOAD`
 
 In DuckDB extensions can also explicitly installed and loaded. Both non-autoloadable and autoloadable extensions can be installed this way. 
 To explicitly install and load an extension, DuckDB has the dedicated SQL statements `LOAD` and `INSTALL`. For example,
@@ -120,11 +120,11 @@ For more details on extension version refer to [Extension Versioning](versioning
 By default, extensions are installed under the user's home directory:
 
 ```text
-~/.duckdb/extensions/{duckdb_version}/{platform_name}/
+~/.duckdb/extensions/⟨duckdb_version⟩/⟨platform_name⟩/
 ```
 
-For stable DuckDB releases, the duckdb_version will be equal to the version tag of that release. For nightly DuckDB builds, it will be equal
-to the short git hash of the build. So for example, the extensions for DuckDB version v0.10.2 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.10.2/osx_arm64/`. 
+For stable DuckDB releases, the `⟨duckdb_version⟩` will be equal to the version tag of that release. For nightly DuckDB builds, it will be equal
+to the short git hash of the build. So for example, the extensions for DuckDB version v0.10.3 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.10.3/osx_arm64/`. 
 An example installation path for a nightly DuckDB build could be `~/.duckdb/extensions/fc2e4b26a6/linux_amd64_gcc4`.
 
 To change the default location where DuckDB stores its extensions, use the `extension_directory` configuration option:
@@ -163,7 +163,9 @@ To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsig
 ```shell
 duckdb -unsigned
 ```
-now any extension can be loaded, signed or not:
+
+Now any extension can be loaded, signed or not:
+
 ```shell
 LOAD './some/local/ext.duckdb_extension'
 ```

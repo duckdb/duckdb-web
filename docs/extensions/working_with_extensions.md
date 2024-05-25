@@ -153,7 +153,7 @@ the `httpfs` extension when an installation over HTTPS or S3 is attempted.
 
 ## Downloading Extensions Directly from S3
 
-Downloading an extension directly could be helpful when building a [lambda service](https://aws.amazon.com/pm/lambda/) or container that uses DuckDB.
+Downloading an extension directly can be helpful when building a [Lambda service](https://aws.amazon.com/pm/lambda/) or container that uses DuckDB.
 DuckDB extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable.
 As a result, a direct URL to the file must be used.
 To download an extension file directly, use the following format:
@@ -187,16 +187,15 @@ It is also possible to specify remote paths.
 ## Force Installing Extensions
 
 When DuckDB installs an extension, it is copied to a local directory to be cached, avoiding any network traffic.
-Any subsequent calls to `INSTALL extension_name` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
+Any subsequent calls to `INSTALL ⟨extension_name⟩` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
 
 ```sql
 FORCE INSTALL extension_name;
 ```
 
 Force installing can also be used to overwrite an extension with an extension with the same name from another repository,
-for example:
 
-First, `spatial` is installed from the core repository:
+For example, first, `spatial` is installed from the core repository:
 
 ```sql
 INSTALL spatial;
