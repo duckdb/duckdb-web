@@ -34,7 +34,7 @@ For platforms outside the ones listed above, we do not officially distribute ext
 
 The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.10.0 of the CLI client on macOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.10.0.
 
-## Extension repositories
+## Extension Repositories
 
 By default, DuckDB extensions are installed from a single repository containing extensions built and signed by the core
 DuckDB team. This ensures the stability and security of the core set of extensions. These extensions live in the default `core` repository
@@ -43,30 +43,46 @@ which points to `http://extensions.duckdb.org`.
 Besides the core repository, DuckDB also supports installing extensions from other repositories. For example, the `core_nightly` repository contains nightly builds for core extensions
 that are built for the latest stable release of DuckDB. This allows users to try out new features in extensions before they are officially published.
 
-### Installing extensions from a repository
-To install extensions from the default repository (defaults to `core`)
+### Installing Extensions from a Repository
+
+To install extensions from the default repository (default repository: `core`):
+
 ```sql
 INSTALL httpfs;
 ```
 
 To explicitly install an extension from the core repository, run either of:
+
 ```sql 
 INSTALL httpfs FROM core;
-INSTALL httpfs FROM 'http://extensions.duckdb.org';        
+```
+
+Or:
+
+```sql
+INSTALL httpfs FROM 'http://extensions.duckdb.org';
 ```
 
 To install an extension from the core nightly repository:
-```SQL
+
+```sql
 INSTALL spatial FROM core_nightly;
+```
+
+Or:
+
+```sql
 INSTALL spatial FROM 'http://nightly-extensions.duckdb.org';
 ```
 
 To install an extensions from a custom repository unknown to DuckDB:
-```SQL
+
+```sql
 INSTALL custom_extension FROM 'https://my-custom-extension-repository';
 ```
 
-alternatively, the `custom_extension_repository` setting can be used to change the default repository used by duckdb:
+Alternatively, the `custom_extension_repository` setting can be used to change the default repository used by DuckDB:
+
 ```sql
 SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
 ```
@@ -82,7 +98,8 @@ While any url or local path can be used as a repository, currently DuckDB contai
 | local_build_debug   | `./build/debug/repository`             | Repository created when building DuckDB from source in debug mode (for development)    |
 | local_build_release | `./build/release/repository`           | Repository created when building DuckDB from source in release mode (for development)  |
 
-### Working with multiple repositories
+### Working with Multiple Repositories
+
 When working with extensions from different repositories, especially mixing `core` and `core_nightly`, it is important to keep track of the origins
 and version of the different extensions. For this reason, DuckDB keeps track of this in the extension installation metadata. For example:
 
@@ -99,10 +116,11 @@ Would output:
 | aws             | 42c78d3            | core_nightly   | REPOSITORY   |
 | ...             | ...                | ...            | ...          |
 
-### Creating a custom repository
+### Creating a Custom Repository
+
 A DuckDB repository is an HTTP, HTTPS, S3, or local file based directory that serves the extensions files in a specific structure.
 This structure is describe [here](#downloading-extensions-directly-from-s3), and is the same
-for local paths and remote servers, so for example:
+for local paths and remote servers, for example:
 
 ```text
 base_repository_path_or_url
@@ -122,15 +140,15 @@ base_repository_path_or_url
 See the [`extension-template` repository](https://github.com/duckdb/extension-template/) for all necessary code and scripts
 to set up a repository.
 
-When installing an extension from a custom repository, DuckDB will search for both a gzipped and non-gzipped version. So for example when running: 
+When installing an extension from a custom repository, DuckDB will search for both a gzipped and non-gzipped version. For example:
 
 ```sql
-INSTALL icu FROM '<custom repository>';
+INSTALL icu FROM '⟨custom repository⟩';
 ```
 
-The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repositories file structure.
+The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.
 
-If the custom repository is served over HTTPS or S3, the `httpfs` extension is required. DuckDB will attempt to [autoload](overview#autoloading-extensions)
+If the custom repository is served over HTTPS or S3, the [`httpfs` extension](httpfs/overview) is required. DuckDB will attempt to [autoload](overview#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.
 
 ## Downloading Extensions Directly from S3
@@ -141,7 +159,7 @@ As a result, a direct URL to the file must be used.
 To download an extension file directly, use the following format:
 
 ```text
-http://extensions.duckdb.org/v{duckdb_version}/{platform_name}/{extension_name}.duckdb_extension.gz
+http://extensions.duckdb.org/v⟨duckdb_version⟩/⟨platform_name⟩/⟨extension_name⟩.duckdb_extension.gz
 ```
 
 For example:
@@ -178,11 +196,14 @@ FORCE INSTALL extension_name;
 Force installing can also be used to overwrite an extension with an extension with the same name from another repository,
 for example:
 
-First spatial is installed from the core repository
+First, `spatial` is installed from the core repository:
+
 ```sql
 INSTALL spatial;
 ```
-then to overwrite this installation with spatial from the core_nightly repository:
+
+Then, to overwrite this installation with the `spatial` extension from the `core_nightly` repository:
+
 ```sql
 FORCE INSTALL spatial FROM core_nightly;
 ```

@@ -25,7 +25,8 @@ the short git hash of the separate repository, **or** the git version tag in [Se
 For example, in DuckDB version `v0.10.3`, the azure extension could be versioned as follows:
 
 ```shell
-SELECT extension_name, extension_version, install_mode FROM duckdb_extensions() WHERE extension_name='azure';
+SELECT extension_name, extension_version, install_mode FROM duckdb_extensions()
+WHERE extension_name = 'azure';
 ```
 
 <div class="narrow_table"></div>
@@ -34,12 +35,15 @@ SELECT extension_name, extension_version, install_mode FROM duckdb_extensions() 
 |:---------------|:------------------|:---------------|
 | azure          | 49b63dc        | REPOSITORY     |
 
-## Updating extensions
+## Updating Extensions
+
+> This feature was introduced in DuckDB 0.10.3.
+
 DuckDB has a dedicated statement that will automatically update all extensions to their latest version. The output will
 give the user information on which extensions were updated to/from which version. For example:
 
 ```SQL
-UPDATE EXTENSIONS
+UPDATE EXTENSIONS;
 ```
 
 <div class="narrow_table"></div>
