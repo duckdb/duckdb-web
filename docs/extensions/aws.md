@@ -19,7 +19,7 @@ LOAD aws;
 
 | Function | Type | Description |
 |---|---|-------|
-| `load_aws_credentials` | `PRAGMA` function | Automatically loads the AWS credentials through the [AWS Default Credentials Provider Chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html) |
+| `load_aws_credentials` | `PRAGMA` function | Loads the AWS credentials through the [AWS Default Credentials Provider Chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html). |
 
 ## Usage
 

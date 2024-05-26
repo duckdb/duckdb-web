@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: jemalloc Extension
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/jemalloc
 ---
 
 The `jemalloc` extension replaces the system's memory allocator with [jemalloc](https://jemalloc.net/).
@@ -33,7 +34,3 @@ GEN=ninja BUILD_JEMALLOC=1 make
 ### Windows
 
 On Windows, this extension is not available.
-
-## GitHub
-
-The `jemalloc` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/jemalloc).

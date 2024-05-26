@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: inet Extension
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/inet
 ---
 
 The `inet` extension defines the `INET` data type for storing [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) Internet addresses. It supports the [CIDR notation](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) for subnet masks (e.g., `198.51.100.0/22`, `2001:db8:3c4d::/48`).
@@ -82,7 +83,3 @@ SELECT cidr, host(cidr) FROM tbl;
 | 192.168.0.0/16                 | 192.168.0.0                 |
 | 127.0.0.1                      | 127.0.0.1                   |
 | 2001:db8:3c4d:15::1a2f:1a2b/96 | 2001:db8:3c4d:15::1a2f:1a2b |
-
-## GitHub
-
-The `inet` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/inet).

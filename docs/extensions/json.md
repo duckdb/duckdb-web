@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: JSON Extension
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/json
 ---
 
 The `json` extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
@@ -1024,7 +1025,3 @@ FROM (
 | (a != b) | (c != d) | (c[0] = d[0]) | (a = c[0]) | (b != c[0]) |
 |----------|----------|---------------|------------|-------------|
 | true     | true     | true          | true       | true        |
-
-## GitHub
-
-The `json` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/json).
