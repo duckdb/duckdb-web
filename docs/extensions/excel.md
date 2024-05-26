@@ -4,9 +4,10 @@ title: Excel Extension
 github_repository: https://github.com/duckdb/duckdb_excel
 ---
 
-This extension, contrary to its name, does not provide support for reading Excel files. It instead provides a function that wraps the number formatting functionality of the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), which formats numbers per Excel's formatting rules.
+The `excel` extension, unlike what it name may suggest, does not provide support for reading Excel files.
+Instead, provides a function that wraps the number formatting functionality of the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), which formats numbers per Excel's formatting rules.
 
-Excel files can be handled through the [`spatial` extension](spatial): see the [Excel Import](../guides/import/excel_import) and [Excel Export](../guides/import/excel_export) pages for instructions.
+Excel files can be currently handled through the [`spatial` extension](spatial): see the [Excel Import](../guides/import/excel_import) and [Excel Export](../guides/import/excel_export) pages for instructions.
 
 ## Installing and Loading
 
@@ -18,19 +19,27 @@ INSTALL excel;
 LOAD excel;
 ```
 
-## Usage
+## Functions
+
+| Function | Description |
+|:--|:---|
+| `excel_text(number, format_string)`| Format the given `number` per the rules given in the `format_string`. |
+| `text(number, format_string)` | Alias for `excel_text`. |
+
+## Examples
 
 ```sql
-SELECT excel_text(1234567.897, 'h:mm AM/PM') AS timestamp;
+SELECT excel_text(1_234_567.897, 'h:mm AM/PM') AS timestamp;
 ```
 
 | timestamp |
 |-----------|
 | 9:31 PM   |
 
-## Functions
+```sql
+SELECT excel_text(1_234_567.897, 'h AM/PM') AS timestamp;
+```
 
-| Function | Description | Example | Result |
-|:--|:---|:--|:-|
-| `excel_text(number, format_string)` | Alias for `text`.                                                    | `excel_text(1234567.897, 'h:mm AM/PM')` | `9:31 PM` |
-| `text(number, format_string)`       | Format the given `number` per the rules given in the `format_string` | `text(1234567.897, 'h AM/PM')`          | `9 PM`    |
+| timestamp |
+|-----------|
+| 9 PM      |
