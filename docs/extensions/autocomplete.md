@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: AutoComplete Extension
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/autocomplete
 ---
 
 The `autocomplete` extension adds supports for autocomplete in the [CLI client](../api/cli).
@@ -51,7 +52,3 @@ Returns:
 | DEALLOCATE  |                0 |
 | UPDATE      |                0 |
 | DROP        |                0 |
-
-## GitHub
-
-The `autocomplete` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/autocomplete).

@@ -160,6 +160,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 						<h5>About this page</h5>
 						<ul>
 							{% if page.github_repository %}<li><a href="{{ page.github_repository }}">Visit the related GitHub repository</a></li>{% endif %}
+							{% if page.github_directory %}<li><a href="{{ page.github_directory }}">Visit the related directory in the main DuckDB GitHub repository</a></li>{% endif %}
 							<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report content issue</a></li>
 							<li><a href="{% github_edit_link %}" title="Go to GitHub">Edit this page on GitHub</a></li>
 						</ul>

@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: TPC-DS Extension
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/tpcds
 ---
 
 The `tpcds` extension implements the data generator and queries for the [TPC-DS benchmark](https://www.tpc.org/tpcds/).
@@ -41,7 +42,3 @@ PRAGMA tpcds(8);
 
 The `tpchds(⟨query_id⟩)` function runs a fixed TPC-DS query with pre-defined bind parameters (a.k.a. substitution parameters).
 It is not possible to change the query parameters using the `tpcds` extension.
-
-## GitHub
-
-The `tpcds` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/tpcds).
