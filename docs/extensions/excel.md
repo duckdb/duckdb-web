@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: Excel Extension
+github_repository: https://github.com/duckdb/duckdb_excel
 ---
 
 This extension, contrary to its name, does not provide support for reading Excel files. It instead provides a function that wraps the number formatting functionality of the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), which formats numbers per Excel's formatting rules.
@@ -33,7 +34,3 @@ SELECT excel_text(1234567.897, 'h:mm AM/PM') AS timestamp;
 |:--|:---|:--|:-|
 | `excel_text(number, format_string)` | Alias for `text`.                                                    | `excel_text(1234567.897, 'h:mm AM/PM')` | `9:31 PM` |
 | `text(number, format_string)`       | Format the given `number` per the rules given in the `format_string` | `text(1234567.897, 'h AM/PM')`          | `9 PM`    |
-
-## GitHub
-
-The `excel` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/excel).
