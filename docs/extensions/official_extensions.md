@@ -5,7 +5,7 @@ title: Official Extensions
 
 ## List of Official Extensions
 
-| Extension name               | GitHub                                                                           | Description                                                                        | Autoloadable  | Aliases                 |
+| Name                         | GitHub                                                                           | Description                                                                        | Autoloadable  | Aliases                 |
 |:-----------------------------|----------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------|:--------------|:------------------------|
 | [arrow](arrow)               | [<span class="github">GitHub</span>](https://github.com/duckdb/arrow)            | A zero-copy data integration between Apache Arrow and DuckDB                       | no            |                         |
 | [autocomplete](autocomplete) |                                                                                  | Adds support for autocomplete in the shell                                         | yes           |                         |
@@ -36,7 +36,7 @@ We summarize the main distributions in the table below.
 
 <div class="narrow_table"></div>
 
-| Extension name | CLI (duckdb.org) | CLI (Homebrew) | Python | R | Java | Node.js |
+| Name | CLI (duckdb.org) | CLI (Homebrew) | Python | R | Java | Node.js |
 |------|------|------|---|---|---|---|---|
 | [autocomplete](autocomplete) | yes | yes |     |     |     |     |
 | [excel](excel)               | yes |     |     |     |     |     |
