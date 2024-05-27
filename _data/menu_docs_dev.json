@@ -1366,6 +1366,10 @@
                   "url": "building_extensions"
                 },
                 {
+                  "page": "Supported Platforms",
+                  "url": "supported_platforms"
+                },
+                {
                   "page": "Troubleshooting",
                   "url": "troubleshooting"
                 }
