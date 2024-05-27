@@ -144,8 +144,7 @@ See the [Working with Extensions page](working_with_extensions#platforms) for de
 ## Developing Extensions
 
 The same API that the official extensions use is available for developing extensions. This allows users to extend the functionality of DuckDB such that it suits their domain the best.
-A template for creating extensions is available in the [`extension-template` repository](https://github.com/duckdb/extension-template/). This template also holds some documentation on 
-how to get started building your own extension.
+A template for creating extensions is available in the [`extension-template` repository](https://github.com/duckdb/extension-template/). This template also holds some documentation on how to get started building your own extension.
 
 ## Extension Signing
 
@@ -155,7 +154,7 @@ All extensions provided by the DuckDB core team are signed.
 
 ### Unsigned Extensions
 
-> Warning only load unsigned extensions from sources you trust. Also, avoid loading them over HTTP. 
+> Warning Only load unsigned extensions from sources you trust. Also, avoid loading them over HTTP.
 
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
 To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsigned` flag to it on startup:
