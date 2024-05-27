@@ -34,6 +34,29 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 
 <div class="qa-wrap" markdown="1">
 
+### How are DuckDB, the DuckDB Foundation, DuckDB Labs, and MotherDuck related?
+
+<div class="answer" markdown="1">
+
+[**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.<br/>
+The [**DuckDB Foundation**](/foundation/) is a non-profit organization that holds the intellectual property of the DuckDB project.
+Its statutes also ensure DuckDB remains open-source under the MIT license in perpetuity.
+Donations to the DuckDB Foundation directly fund DuckDB development.<br/>
+[**DuckDB Labs**](https://duckdblabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
+DuckDB Labs employs the core contributors of the DuckDB project.<br/>
+[**MotherDuck**](https://motherduck.com/) is a venture-backed company creating a hybrid cloud/local platform using DuckDB.
+MotherDuck contracts with DuckDB Labs for development services, and DuckDB Labs owns a portion of MotherDuck.
+[See the partnership announcement for details](https://duckdblabs.com/news/2022/11/15/motherduck-partnership.html).
+To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf) and the [MotherDuck documentation](https://motherduck.com/docs).
+
+</div>
+
+</div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
 ### Where do I find the DuckDB Logo?
 
 <div class="answer" markdown="1">
@@ -169,29 +192,6 @@ Here is a glossay of a few common terms used in DuckDB.<br/>
 – **Replacement scan:** In DuckDB, replacement scans are used when a table name used by a query does not exist in the catalog. These scans can substitute another data source intead of the table. Using replacement scans allows DuckDB to, e.g., seamlessly read [Pandas DataFrames](docs/guides/python/sql_on_pandas) or read input data from remote sources without explicitly invoking the functions that perform this (e.g., [reading Parquet files from https](/docs/guides/import/http_import)). For details, see the [C API - Replacement Scans page](/docs/api/c/replacement_scans).<br/>
 – **Extension:** DuckDB has a flexible extension mechanism that allows for dynamically loading extensions. These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality. For details, see the [Extensions page](/docs/extensions/overview).<br/>
 – **Platform:** The platform is a combination of the operating system (e.g., Linux, macOS, Windows), system architecture (e.g., AMD64, ARM64), and, optionally, the compiler used (e.g., GCC4). Platforms are used to distributed DuckDB binaries and [extension packages](/docs/extensions/working_with_extensions#platforms).
-
-</div>
-
-</div>
-
-<!-- Q&A entry -->
-
-<div class="qa-wrap" markdown="1">
-
-### How are DuckDB, the DuckDB Foundation, DuckDB Labs, and MotherDuck related?
-
-<div class="answer" markdown="1">
-
-[**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.<br/>
-The [**DuckDB Foundation**](/foundation/) is a non-profit organization that holds the intellectual property of the DuckDB project.
-Its statutes also ensure DuckDB remains open-source under the MIT license in perpetuity.
-Donations to the DuckDB Foundation directly fund DuckDB development.<br/>
-[**DuckDB Labs**](https://duckdblabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
-DuckDB Labs employs the core contributors of the DuckDB project.<br/>
-[**MotherDuck**](https://motherduck.com/) is a venture-backed company creating a hybrid cloud/local platform using DuckDB.
-MotherDuck contracts with DuckDB Labs for development services, and DuckDB Labs owns a portion of MotherDuck.
-[See the partnership announcement for details](https://duckdblabs.com/news/2022/11/15/motherduck-partnership.html).
-To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf) and the [MotherDuck documentation](https://motherduck.com/docs).
 
 </div>
 
