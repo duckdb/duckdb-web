@@ -183,6 +183,20 @@ See the [documentation on concurrency](/docs/connect/concurrency#writing-to-duck
 
 <div class="qa-wrap" markdown="1">
 
+### Is there an official DuckDB Docker image available?
+
+<div class="answer" markdown="1">
+There is no official DuckDB Docker image available.
+DuckDB uses an [in-process deployment model](/why_duckdb#simple), where the client application and DuckDB are running in the same process.
+Additionally to the DuckDB clients for Python, R, and other programming languages, DuckDB is also available as a standalone command-line client. This client is available on a [wide range of platforms](/docs/installation/?version=stable&environment=cli) and is portable without containerization, making it unnecessary to containerize the process for most deployments.
+</div>
+
+</div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
 ### Glossary of terms
 
 <div class="answer" markdown="1">
