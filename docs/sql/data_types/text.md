@@ -28,56 +28,14 @@ CREATE TABLE strings (
 
 The `VARCHAR` field allows storage of Unicode characters. Internally, the data is encoded as UTF-8.
 
-## Formatting Strings
+## Text type values
 
-Strings in DuckDB are surrounded by single quote (apostrophe) characters (`'`):
+Values of the text type are character strings, also known as string values or simply strings. At runtime, string values are constructed in one of the following ways:
 
-```sql
-SELECT 'Hello world' AS msg;
-```
-
-|     msg     |
-|-------------|
-| Hello world |
-
-To include a single quote character in a string, use `''`:
-
-```sql
-SELECT 'Hello ''world''' AS msg;
-```
-
-|      msg      |
-|---------------|
-| Hello 'world' |
-
-## Strings with Special Characters
-
-To use special characters in string, use [escape string literals](literal_types#escape-string-literals) or [dollar-quoted string literals](literal_types#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function](../../sql/functions/char):
-
-```sql
-SELECT 'Hello' || chr(10) || 'world' AS msg;
-```
-
-<!-- This output intentionally uses the duckbox formatter -->
-
-```text
-┌──────────────┐
-│     msg      │
-│   varchar    │
-├──────────────┤
-│ Hello\nworld │
-└──────────────┘
-```
-
-## Double Quote Characters
-
-Double quote characters (`"`) are used to denote table and column names. Surrounding their names allows the use of keywords, e.g.:
-
-```sql
-CREATE TABLE "table" ("order" BIGINT);
-```
-
-While DuckDB occasionally accepts both single quote and double quotes for strings (e.g., both `FROM "filename.csv"` and `FROM 'filename.csv'` work), their use is not recommended.
+* referencing columns whose declared or implied type is the text data type
+* [string literals](literal_types#string-literals)
+* [casting](../expressions/cast#explicit-casting) expressions to a text type
+* applying a [string operator](../functions/char#text-functions-and-operators), or invoking a function that returns a text type value 
 
 ## Functions
 
