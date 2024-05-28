@@ -37,6 +37,25 @@ Values of the text type are character strings, also known as string values or si
 * [casting](../expressions/cast#explicit-casting) expressions to a text type
 * applying a [string operator](../functions/char#text-functions-and-operators), or invoking a function that returns a text type value
 
+## Strings with Special Characters
+
+To use special characters in string, use [escape string literals](literal_types#escape-string-literals) or [dollar-quoted string literals](literal_types#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function](../../sql/functions/char):
+
+```sql
+SELECT 'Hello' || chr(10) || 'world' AS msg;
+```
+
+<!-- This output intentionally uses the duckbox formatter -->
+
+```text
+┌──────────────┐
+│     msg      │
+│   varchar    │
+├──────────────┤
+│ Hello\nworld │
+└──────────────┘
+```
+
 ## Functions
 
 See [Character Functions](../../sql/functions/char) and [Pattern Matching](../../sql/functions/patternmatching).
