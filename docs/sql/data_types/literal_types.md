@@ -13,7 +13,7 @@ The `NULL` literal is denoted with the keyword `NULL`. The `NULL` literal can be
 
 ## Integer Literals
 
-Inter literals are denoted as a sequence of one or more digits and which result at runtime in values of an `INTEGER_LITERAL` type. `INTEGER_LITERAL` types can be implicitly converted to any [integer type](numeric#integer-types) in which the value fits. For example, the integer literal `42` can be implicitly converted to a `TINYINT`, but the integer literal `1000` cannot be.
+Integer literals are denoted as a sequence of one or more digits. At runtime, these result in values of the `INTEGER_LITERAL` type. `INTEGER_LITERAL` types can be implicitly converted to any [integer type](numeric#integer-types) in which the value fits. For example, the integer literal `42` can be implicitly converted to a `TINYINT`, but the integer literal `1000` cannot be.
 
 ## Other Numeric Literals
 
@@ -26,13 +26,13 @@ SELECT .50;          -- 0.5
 SELECT 2.;           -- 2.0
 ```
 
-Non-integer numeric literals can also be denoted using E-notation. In E-notation, an integer or decimal literal is followed by and exponential part, which is denoted by `e` or `E`, followed by a literal integer indicating the exponent. 
+Non-integer numeric literals can also be denoted using [_E notation_](https://en.wikipedia.org/wiki/Scientific_notation#E_notation). In E notation, an integer or decimal literal is followed by and exponential part, which is denoted by `e` or `E`, followed by a literal integer indicating the exponent.
 The exponential part indicates that the preceding value should be multiplied by 10 raised to the power of the exponent:
 
 ```sql
 SELECT 1e2;           -- 100
 SELECT 6.02214e23;    -- Avogadro's constant
-SELECT 1e-10          -- 1 ångström 
+SELECT 1e-10;         -- 1 ångström
 ```  
 
 ## Underscores in Numeric Literals
@@ -43,7 +43,7 @@ DuckDB's SQL dialect allows using the underscore character `_` in numeric litera
 * Underscores can not be the first or last character in a literal.
 * Underscores have to have an integer/numeric part on either side of them, i.e., there can not be multiple underscores in a row and not immediately before/after a decimal or exponent.
 
-Examples: 
+Examples:
 
 ```sql
 SELECT 100_000_000;          -- 100000000
@@ -57,34 +57,42 @@ SELECT '0b0_1_0_1'::INTEGER; -- 5
 String literals are delimited using single quotes (`'`, apostrophe) and result in `STRING_LITERAL` values.
 Note that double quotes (`"`) cannot be used as string delimiter character: instead, double quotes are used to delimit [quoted identifiers](../keywords_and_identifiers#identifiers).
 
-### Implicit string literal concatenation
+### Implicit String Literal Concatenation
 
-Consecutive single-quoted string literals sepearated only by whitespace containing at least one newline are implicitly concatenated:
+Consecutive single-quoted string literals sepearated only by whitespace that contains at least one newline are implicitly concatenated:
 
 ```sql
 SELECT 'Hello'
-' '
-'World' as greeting;
+    ' '
+    'World' AS greeting;
 ```
 
 is equivalent to:
 
 ```sql
 SELECT 'Hello'
-||' '
-||'World' as greeting;
+    || ' '
+    || 'World' AS greeting;
 ```
 
-Note that implicit concatenation only works if there is at least one newline between the literals. Adjacent string literals separated by whitspace without a newline results in a syntax error:
+They both return the following result:
+
+|  greeting   |
+|-------------|
+| Hello World |
+
+Note that implicit concatenation only works if there is at least one newline between the literals. Using adjacent string literals separated by whitspace without a newline results in a syntax error:
 
 ```sql
-SELECT 'Hello' ' ' 'World' as greeting;
+SELECT 'Hello' ' ' 'World' AS greeting;
+```
 
+```console
 Parser Error: syntax error at or near "' '"
 LINE 1: SELECT 'Hello' ' ' 'World' as greeting;
 ```
 
-Also note that impliciat concatenation only works with single-quoted string literals, and not with other kinds of string values.
+Also note that implicit concatenation only works with single-quoted string literals, and does not work with other kinds of string values.
 
 ### Implicit string conversion
 
