@@ -288,6 +288,17 @@ The `duckdb_tables()` function provides metadata about the base tables available
 
 The [`information_schema.tables`](information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
 
+## `duckdb_temporary_files`
+
+The `duckdb_temporary_files()` function provides metadata about the temporary files DuckDB has written to disk, to offload data from memory. This function mostly exists for debugging and testing purposes.
+
+<div class="narrow_table"></div>
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `path` | The name of the temporary file | `VARCHAR` |
+| `size` | The size in bytes of the temporary file | `INT64` |
+
 ## `duckdb_types`
 
 The `duckdb_types()` function provides metadata about the data types available in the DuckDB instance.
@@ -323,14 +334,3 @@ The `duckdb_views()` function provides metadata about the views available in the
 | `sql` | The definition of this object, expressed as SQL DDL-statement. | `VARCHAR` |
 
 The [`information_schema.tables`](information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `duckdb_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.
-
-## `duckdb_temporary_files`
-
-The `duckdb_temporary_files()` function provides metadata about the temporary files DuckDB has written to disk, to offload data from memory. This function mostly exists for debugging and testing purposes.
-
-<div class="narrow_table"></div>
-
-| Column | Description | Type |
-|:-|:---|:-|
-| `path` | The name of the temporary file | `VARCHAR` |
-| `size` | The size in bytes of the temporary file | `INT64` |
