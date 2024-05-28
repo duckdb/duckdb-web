@@ -28,14 +28,14 @@ CREATE TABLE strings (
 
 The `VARCHAR` field allows storage of Unicode characters. Internally, the data is encoded as UTF-8.
 
-## Text type values
+## Text Type Values
 
 Values of the text type are character strings, also known as string values or simply strings. At runtime, string values are constructed in one of the following ways:
 
 * referencing columns whose declared or implied type is the text data type
 * [string literals](literal_types#string-literals)
 * [casting](../expressions/cast#explicit-casting) expressions to a text type
-* applying a [string operator](../functions/char#text-functions-and-operators), or invoking a function that returns a text type value 
+* applying a [string operator](../functions/char#text-functions-and-operators), or invoking a function that returns a text type value
 
 ## Functions
 
