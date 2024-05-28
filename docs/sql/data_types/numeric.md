@@ -32,7 +32,7 @@ Internally, decimals are represented as integers depending on their specified wi
 
 <div class="narrow_table"></div>
 
-| Width | Internal | Size (Bytes) |
+| Width | Internal | Size (bytes) |
 |:---|:---|---:|
 | 1-4 | `INT16` | 2 |
 | 5-9 | `INT32` | 4 |

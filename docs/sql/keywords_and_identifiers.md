@@ -51,27 +51,6 @@ ATTACH 'temp.db' AS temp2;
 USE temp2;
 ```
 
-## String Literals
-
-To escape a single quote (apostrophe) character in a string literal, use `''`. For example, `SELECT '''' AS s` returns `'`.
-
-## Numeric Literals
-
-DuckDB's SQL dialect allows using the underscore character `_` in numeric literals as an optional separator. The rules for using underscores are as follows:
-
-* Underscores are allowed in integer, decimal, hexadecimal and binary notation.
-* Underscores can not be the first or last character in a literal.
-* Underscores have to have an integer/numeric part on either side of them, i.e., there can not be multiple underscores in a row and not immediately before/after a decimal or exponent.
-
-### Examples
-
-```sql
-SELECT 100_000_000;          -- 100000000
-SELECT '0xFF_FF'::INTEGER;   -- 65535
-SELECT 1_2.1_2E0_1;          -- 121.2
-SELECT '0b0_1_0_1'::INTEGER; -- 5
-```
-
 ## Rules for Case-Sensitivity
 
 ### Keywords and Function Names
@@ -91,8 +70,10 @@ SELECT cos(pi()) AS CosineOfPi;
 
 ### Case-Sensitivity of Identifiers
 
-Following the convention of the SQL standard, identifiers in DuckDB are case-insensitive.
-However, each character's case (uppercase/lowercase) is maintained as originally specified by the user even if a query uses different cases when referring to the identifier.
+Identifiers in DuckDB are always case-insensitive, similarly to PostgreSQL.
+However, unlike PostgreSQL (and some other major SQL implementation), DuckDB also treats quoted identifiers as case-sensitive.
+
+Despite treating identifiers in a case-insensitive manner, each character's case (uppercase/lowercase) is maintained as originally specified by the user even if a query uses different cases when referring to the identifier.
 For example:
 
 ```sql
