@@ -4,7 +4,7 @@ title: Excel Extension
 github_repository: https://github.com/duckdb/duckdb_excel
 ---
 
-The `excel` extension, unlike what it name may suggest, does not provide support for reading Excel files.
+The `excel` extension, unlike what its name may suggest, does not provide support for reading Excel files.
 Instead, provides a function that wraps the number formatting functionality of the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), which formats numbers per Excel's formatting rules.
 
 Excel files can be currently handled through the [`spatial` extension](spatial): see the [Excel Import](../guides/import/excel_import) and [Excel Export](../guides/import/excel_export) pages for instructions.
