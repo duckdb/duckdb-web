@@ -70,9 +70,10 @@ SELECT cos(pi()) AS CosineOfPi;
 
 ### Case-Sensitivity of Identifiers
 
-Identifiers in DuckDB are always case-insensitive. This is true even for quoted identifiers. In this regard, DuckDB's behavior is different from PostgreSQL and other major SQL implementations. 
+Identifiers in DuckDB are always case-insensitive, similarly to PostgreSQL.
+However, unlike PostgreSQL (and some other major SQL implementation), DuckDB also treats quoted identifiers as case-sensitive.
 
-However, each character's case (uppercase/lowercase) is maintained as originally specified by the user even if a query uses different cases when referring to the identifier.
+Despite treating identifiers in a case-insensitive manner, each character's case (uppercase/lowercase) is maintained as originally specified by the user even if a query uses different cases when referring to the identifier.
 For example:
 
 ```sql
