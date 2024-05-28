@@ -296,8 +296,8 @@ The `duckdb_temporary_files()` function provides metadata about the temporary fi
 
 | Column | Description | Type |
 |:-|:---|:-|
-| `path` | The name of the temporary file | `VARCHAR` |
-| `size` | The size in bytes of the temporary file | `INT64` |
+| `path` | The name of the temporary file. | `VARCHAR` |
+| `size` | The size in bytes of the temporary file. | `BIGINT` |
 
 ## `duckdb_types`
 
