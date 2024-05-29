@@ -8,13 +8,13 @@ title: Troubleshooting
 By default, R compiles packages using a single thread.
 To parallelize the compilation, create or edit the `~/.R/Makevars` file, and add a line like the following:
 
-```text
+```ini
 MAKEFLAGS = -j8
 ```
 
 The above will parallelize the compilation using 8 threads. In a Linux system, in order to use all of the machine's threads, one can add the following instead:
 
-```text
+```ini
 MAKEFLAGS = -j$(nproc)
 ```
 
@@ -25,12 +25,13 @@ But note that, the more threads that are used, the higher the RAM consumption. I
 Building the R package on Linux running on an ARM64 architecture (AArch64) may result in the following error message:
 
 ```console
-/usr/bin/ld: /usr/include/c++/10/bits/basic_string.tcc:206: warning: too many GOT entries for -fpic, please recompile with -fPIC
+/usr/bin/ld: /usr/include/c++/10/bits/basic_string.tcc:206:
+warning: too many GOT entries for -fpic, please recompile with -fPIC
 ```
 
 To work around this, create or edit the `~/.R/Makevars` file:
 
-```text
+```ini
 ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 ```
 
