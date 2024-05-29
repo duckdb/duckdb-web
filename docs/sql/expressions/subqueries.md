@@ -4,7 +4,7 @@ title: Subqueries
 railroad: expressions/subqueries.js
 ---
 
-Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT...FROM`, but in DuckDB other query constructs such as `PIVOT` can also appear as subquery.
+Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT ... FROM`, but in DuckDB other query constructs such as [`PIVOT`](../statements/pivot) can also appear as a subquery.
 
 ## Scalar Subquery
 
@@ -51,12 +51,14 @@ SELECT course FROM grades WHERE grade = (SELECT min(grade) FROM grades);
 
 ## Subquery Comparisons: `ALL`, `ANY` and `SOME`
 
-In the section on [scalar subqueries](#scalar-subquery) a scalar expression was compared directly to a subquery using the equals [comparison operator](comparison_operators#comparison-operators).
+In the section on [scalar subqueries](#scalar-subquery), a scalar expression was compared directly to a subquery using the equality [comparison operator](comparison_operators#comparison-operators) (`=`).
 Such direct comparisons only make sense with scalar subqueries.
 
-Scalar expression can still be compared to single-column subqueries returning multiple rows by specifying a quantifier. Available quantifiers are `ALL`, `ANY` and `SOME`, which is equivalent to `ANY`.
+Scalar expressions can still be compared to single-column subqueries returning multiple rows by specifying a quantifier. Available quantifiers are `ALL`, `ANY` and `SOME`. The quantifiers `ANY` and `SOME` are equivalent.
 
-The `ALL` quantifier specifies that the comparison as a whole evaluates to `true` when the individual comparison results of the expression at the left hand side of the comparison operator with each of the values from the subquery at the right hand side of the comparison operator all evaluate to true:
+### `ALL`
+
+The `ALL` quantifier specifies that the comparison as a whole evaluates to `true` when the individual comparison results of _the expression at the left hand side of the comparison operator_ with each of the values from _the subquery at the right hand side of the comparison operator_ **all** evaluate to `true`:
 
 ```sql
 SELECT 6 <= ALL (SELECT grade FROM grades) AS adequate;
@@ -68,9 +70,9 @@ returns:
 |----------|
 | true     |
 
-because 6 is less than or equal to each of the subquery results 7, 8, and 9.
+because 6 is less than or equal to each of the subquery results 7, 8 and 9.
 
-However, the follpowing query
+However, the following query
 
 ```sql
 SELECT 8 >= ALL (SELECT grade FROM grades) AS excellent;
@@ -82,9 +84,12 @@ returns
 |-----------|
 | false     |
 
-because 8 is not greater than the subquery result 7. And thus, because not all comparisons evaluate `true`, `>= ALL` as a whole evaluates to `false`.
+because 8 is not greater than or equal to the subquery result 7. And thus, because not all comparisons evaluate `true`, `>= ALL` as a whole evaluates to `false`.
 
-The `ANY` quantifier specifies that the comparison as a whole evaluates to `true` when at least one of the individual comparison results evaluates to `true`:
+### `ANY`
+
+The `ANY` quantifier specifies that the comparison as a whole evaluates to `true` when at least one of the individual comparison results evaluates to `true`.
+For example:
 
 ```sql
 SELECT 5 >= ANY (SELECT grade FROM grades) AS fail;
@@ -96,11 +101,11 @@ returns
 |-------|
 | false |
 
-because not even one of the results of the subquery is less than or equal to 5.
+because no result of the subquery is less than or equal to 5.
 
 The quantifier `SOME` maybe used instead of `ANY`: `ANY` and `SOME` are interchangeable.
 
-> In DuckDB, and contrary to most SQL implementations, a comparison of a scalar with a single-column subquery returning multiple values still executes without error. However, the result is unstable, as the final comparison result is based on comparing just one of the values returned by the subquery.
+> In DuckDB, and contrary to most SQL implementations, a comparison of a scalar with a single-column subquery returning multiple values still executes without error. However, the result is unstable, as the final comparison result is based on comparing just one (non-deterministically selected) value returned by the subquery.
 
 ## `EXISTS`
 
