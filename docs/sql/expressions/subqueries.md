@@ -49,9 +49,9 @@ SELECT course FROM grades WHERE grade = (SELECT min(grade) FROM grades);
 |--------|
 | Math   |
 
-## Subquery Comparisons: `ALL`, `ANY`, and `SOME`
+## Subquery Comparisons: `ALL`, `ANY` and `SOME`
 
-In the section on [scalar subqueries](#scalar-subquery) a scalar expression was compared directly to a subquery using the equals [comparison operator](../comparison_operators#comparison-operators). 
+In the section on [scalar subqueries](#scalar-subquery) a scalar expression was compared directly to a subquery using the equals [comparison operator](comparison_operators#comparison-operators).
 Such direct comparisons only make sense with scalar subqueries.
 
 Scalar expression can still be compared to single-column subqueries returning multiple rows by specifying a quantifier. Available quantifiers are `ALL`, `ANY` and `SOME`, which is equivalent to `ANY`.
@@ -70,19 +70,19 @@ returns:
 
 because 6 is less than or equal to each of the subquery results 7, 8, and 9.
 
-But 
+However, the follpowing query
 
 ```sql
 SELECT 8 >= ALL (SELECT grade FROM grades) AS excellent;
 ```
 
-returns 
+returns
 
 | excellent |
 |-----------|
 | false     |
 
-because 8 is not greater than the subquery result 7. And thus, because not all comparisons evaluate true, `>= ALL` as a whole evaluates to `false`.
+because 8 is not greater than the subquery result 7. And thus, because not all comparisons evaluate `true`, `>= ALL` as a whole evaluates to `false`.
 
 The `ANY` quantifier specifies that the comparison as a whole evaluates to `true` when at least one of the individual comparison results evaluates to `true`:
 
@@ -90,17 +90,17 @@ The `ANY` quantifier specifies that the comparison as a whole evaluates to `true
 SELECT 5 >= ANY (SELECT grade FROM grades) AS fail;
 ```
 
-returns 
+returns
 
 | fail  |
 |-------|
 | false |
 
-because not even one of the results of the subquery is less than or equal to 5. 
+because not even one of the results of the subquery is less than or equal to 5.
 
 The quantifier `SOME` maybe used instead of `ANY`: `ANY` and `SOME` are interchangeable.
 
->In DuckDB, and contrary to most SQL implementations, a comparison of a scalar with a single-column subquery returning multiple values still executes without error. However, the result is unstable, as the final comparison result is based on comparing just one of the values returned by the subquery.
+> In DuckDB, and contrary to most SQL implementations, a comparison of a scalar with a single-column subquery returning multiple values still executes without error. However, the result is unstable, as the final comparison result is based on comparing just one of the values returned by the subquery.
 
 ## `EXISTS`
 
@@ -163,8 +163,6 @@ SELECT 'Math' IN (SELECT course FROM grades) AS math_grades_present;
 | math_grades_present |
 |--------------------:|
 | true                |
-
-[Comparison operators](../comparison_operators) 
 
 ## Correlated Subqueries
 
