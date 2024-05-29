@@ -4,6 +4,8 @@ title: Subqueries
 railroad: expressions/subqueries.js
 ---
 
+Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT...FROM`, but in DuckDB other query constructs such as `PIVOT` can also appear as subquery.
+
 ## Scalar Subquery
 
 <div id="rrdiagram1"></div>
@@ -46,6 +48,57 @@ SELECT course FROM grades WHERE grade = (SELECT min(grade) FROM grades);
 | course |
 |--------|
 | Math   |
+
+## Subquery Comparisons: `ALL`, `ANY`, and `SOME`
+
+In the section on [scalar subqueries](#scalar-subquery) a scalar expression was compared directly to a subquery using the equals [comparison operator](../comparison_operators#comparison-operators). 
+Such direct comparisons only make sense with scalar subqueries.
+
+Scalar expression can still be compared to single-column subqueries returning multiple rows by specifying a quantifier. Available quantifiers are `ALL`, `ANY` and `SOME`, which is equivalent to `ANY`.
+
+The `ALL` quantifier specifies that the comparison as a whole evaluates to `true` when the individual comparison results of the expression at the left hand side of the comparison operator with each of the values from the subquery at the right hand side of the comparison operator all evaluate to true:
+
+```sql
+SELECT 6 <= ALL (SELECT grade FROM grades) AS adequate;
+```
+
+returns:
+
+| adequate |
+|----------|
+| true     |
+
+because 6 is less than or equal to each of the subquery results 7, 8, and 9.
+
+But 
+
+```sql
+SELECT 8 >= ALL (SELECT grade FROM grades) AS excellent;
+```
+
+returns 
+
+| excellent |
+|-----------|
+| false     |
+
+because 8 is not greater than the subquery result 7. And thus, because not all comparisons evaluate true, `>= ALL` as a whole evaluates to `false`.
+
+The `ANY` quantifier specifies that the comparison as a whole evaluates to `true` when at least one of the individual comparison results evaluates to `true`:
+
+```sql
+SELECT 5 >= ANY (SELECT grade FROM grades) AS fail;
+```
+
+returns 
+
+| fail  |
+|-------|
+| false |
+
+because not even one of the results of the subquery is less than or equal to 5. 
+
+The quantifier `SOME` maybe used instead of `ANY`: `ANY` and `SOME` are interchangeable.
 
 ## `EXISTS`
 
@@ -108,6 +161,8 @@ SELECT 'Math' IN (SELECT course FROM grades) AS math_grades_present;
 | math_grades_present |
 |--------------------:|
 | true                |
+
+[Comparison operators](../comparison_operators) 
 
 ## Correlated Subqueries
 
