@@ -16,7 +16,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 ## Functions
 
-All functions accepts an optional set of [options](#options-for-regular-expression-functions).
+All functions accept an optional set of [options](#options-for-regular-expression-functions).
 
 | Name | Description |
 |:--|:-------|
