@@ -80,7 +80,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 <div class="nostroke_table"></div>
 
 | **Description** | Alias of `string_split_regex`. Splits the *string* along the *regex*. |
-| **Example** | `regexp_split_to_array('hello␣world; 42', ';?␣')` |
+| **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | `['hello', 'world', '42']` |
 
 ### `regexp_split_to_table(string, regex[, options])`
@@ -88,7 +88,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the *string* along the *regex* and returns a row for each part. |
-| **Example** | `regexp_split_to_array('hello␣world; 42', ';?␣')` |
+| **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | Two rows: `'hello'`, `'world'` |
 
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `true` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
