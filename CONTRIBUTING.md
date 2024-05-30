@@ -112,6 +112,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 ### Spelling
 
 * Use [American English (en-US) spelling](https://en.wikipedia.org/wiki/Oxford_spelling#Language_tag_comparison).
+* Avoid using the Oxford comma.
 
 ## Example Code Snippets
 
