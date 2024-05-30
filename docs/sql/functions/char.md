@@ -925,6 +925,7 @@ Format without additional parameters:
 
 ```sql
 SELECT printf('Hello world');
+```
 
 ```text
 Hello world
@@ -934,15 +935,17 @@ Format a string using arguments in a given order:
 
 ```sql
 SELECT printf('The answer to %s is %d', 'life', 42);
+```
 
 ```text
 The answer to life is 42
 ```
 
-Format a string using positional arguments '%position$formatter', e.g., the second parameter as a string is encoded as '%2$s':
+Format a string using positional arguments `%position$formatter`, e.g., the second parameter as a string is encoded as `%2$s`:
 
 ```sql
 SELECT printf('I''d rather be %2$s than %1$s.', 'right', 'happy');
+```
 
 ```text
 I'd rather be happy than right.
