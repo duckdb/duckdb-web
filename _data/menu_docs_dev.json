@@ -408,6 +408,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "ANALYZE",
+                  "url": "analyze"
+                },
+                {
                   "page": "ALTER TABLE",
                   "url": "alter_table"
                 },
