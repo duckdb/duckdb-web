@@ -7,7 +7,7 @@ redirect_from:
 
 ## Text Functions and Operators
 
-This section describes functions and operators for examining and manipulating string values. The `␣` symbol denotes a space character.
+This section describes functions and operators for examining and manipulating string values.
 
 <!-- markdownlint-disable MD056 -->
 
@@ -365,7 +365,7 @@ This section describes functions and operators for examining and manipulating st
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any spaces from the left side of the `string`. |
+| **Description** | Removes any spaces from the left side of the `string`. In the example, the `␣` symbol denotes a space character. |
 | **Example** | `ltrim('␣␣␣␣test␣␣')` |
 | **Result** | `test␣␣` |
 
@@ -526,7 +526,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex`. |
-| **Example** | `regexp_split_to_array('hello␣world; 42', ';?␣')` |
+| **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `string_split_regex`, `str_split_regex` |
 
@@ -535,7 +535,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex` and returns a row for each part. |
-| **Example** | `regexp_split_to_table('hello␣world; 42', ';?␣')` |
+| **Example** | `regexp_split_to_table('hello world; 42', ';? ')` |
 | **Result** | Two rows: `'hello'`, `'world'` |
 
 ### `repeat(string, count)`
@@ -598,7 +598,7 @@ This section describes functions and operators for examining and manipulating st
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any spaces from the right side of the `string`. |
+| **Description** | Removes any spaces from the right side of the `string`. In the example, the `␣` symbol denotes a space character. |
 | **Example** | `rtrim('␣␣␣␣test␣␣')` |
 | **Result** | `␣␣␣␣test` |
 
@@ -631,7 +631,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex`. |
-| **Example** | `str_split_regex('hello␣world; 42', ';?␣')` |
+| **Example** | `str_split_regex('hello world; 42', ';? ')` |
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `string_split_regex`, `regexp_split_to_array` |
 
@@ -640,7 +640,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex`. |
-| **Example** | `string_split_regex('hello␣world; 42', ';?␣')` |
+| **Example** | `string_split_regex('hello world; 42', ';? ')` |
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `str_split_regex`, `regexp_split_to_array` |
 
@@ -649,7 +649,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `separator`. |
-| **Example** | `string_split('hello␣world', '␣')` |
+| **Example** | `string_split('hello world', ' ')` |
 | **Result** | `['hello', 'world']` |
 | **Aliases** | `str_split`, `string_to_array` |
 
@@ -717,7 +717,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any spaces from either side of the `string`. |
-| **Example** | `trim('␣␣␣␣test␣␣')` |
+| **Example** | `trim('    test  ')` |
 | **Result** | `test` |
 
 ### `unicode(string)`

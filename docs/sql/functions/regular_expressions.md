@@ -81,7 +81,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 <div class="nostroke_table"></div>
 
 | **Description** | Alias of `string_split_regex`. Splits the *string* along the *regex*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
-| **Example** | `regexp_split_to_array('hello␣world; 42', ';?␣')` |
+| **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | `['hello', 'world', '42']` |
 
 ### `regexp_split_to_table(string, regex[, options])`
@@ -89,7 +89,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the *string* along the *regex* and returns a row for each part. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
-| **Example** | `regexp_split_to_array('hello␣world; 42', ';?␣')` |
+| **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | Two rows: `'hello'`, `'world'` |
 
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `true` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
