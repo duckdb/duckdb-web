@@ -29,10 +29,11 @@ Building the R package on Linux running on an ARM64 architecture (AArch64) may r
 warning: too many GOT entries for -fpic, please recompile with -fPIC
 ```
 
-To work around this, create or edit the `~/.R/Makevars` file:
+To work around this, create or edit the `~/.R/Makevars` file. This example also contains the [flag to parallelize the build](#building-the-r-package-is-slow):
 
 ```ini
 ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
+MAKEFLAGS = -j$(nproc)
 ```
 
 When making this change, also consider [making the build parallel](#building-the-r-package-is-slow).

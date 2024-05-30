@@ -84,14 +84,14 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 
 	<div class="stable python">
 		{% highlight bash %}pip install duckdb --upgrade{% endhighlight %}
-		<br/><br/>
-		On Windows, the DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist">Microsoft Visual C++ Redistributable</a>.
+		<br>
+		Note: On Windows, the DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist">Microsoft Visual C++ Redistributable</a>.
 	</div>
 
 	<div class="stable r">
 		{% highlight r %}install.packages("duckdb"){% endhighlight %}
-		<br/><br/>
-		On aarch64, if the DuckDB R package does not successfully compile, you may need to <a href="https://duckdb.org/docs/dev/building/troubleshooting#building-the-r-package-on-linux-aarch64">change your R environment's Make variables</a>.
+		<br>
+		Note: On aarch64, if the DuckDB R package does not successfully compile, you may need to <a href="https://duckdb.org/docs/dev/building/troubleshooting#building-the-r-package-on-linux-aarch64">change your R environment's Make variables</a>.
 	</div>
 
 	<div class="stable java package_manager">
@@ -122,18 +122,18 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 
 	<div class="stable cli source">
 		git clone https://github.com/duckdb/duckdb.git
-		<br/>
+		<br>
 		cd duckdb
-		<br/>
+		<br>
 		git checkout v{{ site.currentduckdbversion }}
-		<br/>
+		<br>
 		make -j8
 	</div>
 	<div class="main cli source">
 		git clone https://github.com/duckdb/duckdb.git
-		<br/>
+		<br>
 		cd duckdb
-		<br/>
+		<br>
 		make -j8
 	</div>
 
@@ -156,6 +156,10 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 
 	<div class="stable cli binary macos package_manager">
 		{% highlight bash %}brew install duckdb{% endhighlight %}
+		<br>
+		Note: DuckDB clients are installed without relying on any other DuckDB clients.<br>
+		For example, the Python library can use a different version than the CLI client.<br>
+		Therefore, they need to be updated separately.
 	</div>
 
 	<div class="stable cli binary macos direct">
@@ -164,7 +168,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 
 	<div class="stable cli binary linux package_manager">
 		DuckDB is currently not available via apt/yum.
-		<br>
+		<br><br>
 		Please use one of the following binaries:
 		<br>
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a>
@@ -206,6 +210,10 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 
 	<div class="stable cli binary win package_manager">
 		{% highlight bash %}winget install DuckDB.cli{% endhighlight %}
+		<br>
+		Note: DuckDB clients are installed without relying on any other DuckDB clients.<br>
+		For example, the Python library can use a different version than the CLI client.<br>
+		Therefore, they need to be updated separately.
 	</div>
 
 	<div class="stable cli binary win direct">
@@ -214,7 +222,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 
 	<div class="stable odbc binary linux x86_64 direct">
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip</a>	
-		<br/><br/>
+		<br><br>
 
 		{% highlight bash %}sudo apt-get install unixodbc unixodbc-dev{% endhighlight %}
 		{% highlight bash %}./unixodbc_setup.sh --help{% endhighlight %}
@@ -222,7 +230,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 
 	<div class="stable odbc binary linux arm64 direct">
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-aarch64.zip</a>
-		<br/><br/>
+		<br><br>
 
 		{% highlight bash %}sudo apt-get install unixodbc unixodbc-dev{% endhighlight %}
 		{% highlight bash %}./unixodbc_setup.sh --help{% endhighlight %}
@@ -234,20 +242,20 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 
 	<div class="stable odbc binary win x86_64 direct">
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a>
-		<br/><br/>
+		<br><br>
 
 		{% highlight bash %}./odbc_install.exe{% endhighlight %}
 	</div>
 
 	<div class="main python">
 		{% highlight bash %}pip install duckdb --pre --upgrade{% endhighlight %}
-		<br/><br/>
-		On Windows, the DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist">Microsoft Visual C++ Redistributable</a>.
+		<br>
+		Note: On Windows, the DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist">Microsoft Visual C++ Redistributable</a>.
 	</div>
 
 	<div class="main r">
 		{% highlight r %}install.packages('duckdb', repos=c('https://duckdb.r-universe.dev', 'https://cloud.r-project.org')){% endhighlight %}
-		<br/><br/>
+		<br><br>
 		On aarch64, if the DuckDB R package does not successfully compile, you may need to <a href="https://github.com/duckdb/duckdb/issues/3049">change your R environment's make variables</a>.
 	</div>
 
@@ -402,10 +410,6 @@ result->Print();{% endhighlight %}
 	<div class="example cli">
 {% highlight bash %}
 ./duckdb
-
-# Note: DuckDB clients are installed without relying on any other DuckDB
-# clients. For example, the Python library can use a different version
-# than the CLI client. Therefore, they need to be updated separately.
 {% endhighlight %}
 	</div>
 
