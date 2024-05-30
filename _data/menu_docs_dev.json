@@ -896,6 +896,10 @@
                   "url": "https"
                 },
                 {
+                  "page": "Hugging Face",
+                  "url": "hugging_face"
+                },
+                {
                   "page": "S3 API Support",
                   "url": "s3api"
                 },

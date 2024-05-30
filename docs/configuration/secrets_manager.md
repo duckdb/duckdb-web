@@ -16,9 +16,10 @@ The **Secrets manager** provides a unified user interface for secrets across all
 Secrets are typed, their type identifies which service they are for. Currently, the following cloud services are available:
 
 * AWS S3 (`S3`), through the [`httpfs` extension](../extensions/httpfs/s3api)
-* Google Cloud Storage (`GCS`), through the [`httpfs` extension](../extensions/httpfs/s3api)
-* Cloudflare R2 (`R2`), through the [`httpfs` extension](../extensions/httpfs/s3api)
 * Azure Blob Storage (`AZURE`), through the [`azure` extension](../extensions/azure)
+* Cloudflare R2 (`R2`), through the [`httpfs` extension](../extensions/httpfs/s3api)
+* Google Cloud Storage (`GCS`), through the [`httpfs` extension](../extensions/httpfs/s3api)
+* Hugging Face (`HUGGINGFACE`), through the [`httpfs` extension](../extensions/httpfs/hugging_face)
 
 For each type, there are one or more "secret providers" that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
