@@ -32,8 +32,6 @@ COPY (SELECT * FROM tbl) TO 'output.xlsx' WITH (FORMAT GDAL, DRIVER 'xlsx');
 > Dates and timestamps are currently not supported by the `xlsx` writer.
 > Cast columns of those types to `VARCHAR` prior to creating the `xlsx` file.
 
-> Warning The output file must not already exist.
-
 ## See Also
 
 DuckDB can also [import Excel files](excel_import).
