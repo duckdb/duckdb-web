@@ -16,6 +16,8 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 ## Functions
 
+All functions accept an optional set of [options](#options-for-regular-expression-functions).
+
 | Name | Description |
 |:--|:-------|
 | [`regexp_extract_all(string, regex[, group = 0][, options])`](#regexp_extract_allstring-regex-group--0-options) | Split the *string* along the *regex* and extract all occurrences of *group*. |
@@ -31,7 +33,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 <div class="nostroke_table"></div>
 
-| **Description** | Split the *string* along the *regex* and extract all occurrences of *group*. |
+| **Description** | Split the *string* along the *regex* and extract all occurrences of *group*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `[hello, world]` |
 
@@ -39,7 +41,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 <div class="nostroke_table"></div>
 
-| **Description** | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. |
+| **Description** | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
 
@@ -47,15 +49,14 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 <div class="nostroke_table"></div>
 
-| **Description** | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. |
-| **Example** | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` |
+| **Description** | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
 | **Result** | `hello` |
 
 ### `regexp_full_match(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if the entire *string* matches the *regex*. |
+| **Description** | Returns `true` if the entire *string* matches the *regex*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_full_match('anabanana', '(an)*')` |
 | **Result** | `false` |
 
@@ -63,7 +64,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
+| **Description** | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_matches('anabanana', '(an)*')` |
 | **Result** | `true` |
 
@@ -71,7 +72,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 <div class="nostroke_table"></div>
 
-| **Description** | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. |
+| **Description** | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
@@ -79,7 +80,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of `string_split_regex`. Splits the *string* along the *regex*. |
+| **Description** | Alias of `string_split_regex`. Splits the *string* along the *regex*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | `['hello', 'world', '42']` |
 
@@ -87,7 +88,7 @@ DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expr
 
 <div class="nostroke_table"></div>
 
-| **Description** | Splits the *string* along the *regex* and returns a row for each part. |
+| **Description** | Splits the *string* along the *regex* and returns a row for each part. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | Two rows: `'hello'`, `'world'` |
 
