@@ -11,12 +11,18 @@ The `strftime` and `strptime` functions can be used to convert between dates/tim
 
 ```sql
 SELECT strftime(DATE '1992-03-02', '%d/%m/%Y');
--- 02/03/1992
+```
+
+```text
+02/03/1992
 ```
 
 ```sql
 SELECT strftime(TIMESTAMP '1992-03-02 20:32:45', '%A, %-d %B %Y - %I:%M:%S %p');
--- Monday, 2 March 1992 - 08:32:45 PM
+```
+
+```text
+Monday, 2 March 1992 - 08:32:45 PM
 ```
 
 ## strptime Examples
@@ -25,12 +31,18 @@ SELECT strftime(TIMESTAMP '1992-03-02 20:32:45', '%A, %-d %B %Y - %I:%M:%S %p');
 
 ```sql
 SELECT strptime('02/03/1992', '%d/%m/%Y');
--- 1992-03-02 00:00:00
+```
+
+```text
+1992-03-02 00:00:00
 ```
 
 ```sql
 SELECT strptime('Monday, 2 March 1992 - 08:32:45 PM', '%A, %-d %B %Y - %I:%M:%S %p');
--- 1992-03-02 20:32:45
+```
+
+```text
+1992-03-02 20:32:45
 ```
 
 ## CSV Parsing

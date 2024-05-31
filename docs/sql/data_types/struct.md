@@ -175,7 +175,7 @@ INSERT INTO t1 VALUES (ROW('a', 42));
 The table will contain a single entry:
 
 ```sql
--- {'v': a, 'i': 42}
+{'v': a, 'i': 42}
 ```
 
 The following produces the same result as above:

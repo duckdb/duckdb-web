@@ -92,6 +92,7 @@ The table below shows the available general aggregate functions.
 | [`arbitrary(arg)`](#arbitraryarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max(arg, val)`](#arg_maxarg-val) | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min(arg, val)`](#arg_minarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`array_agg(arg)`](#array_aggarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`avg(arg)`](#avgarg) | Calculates the average value for all tuples in `arg`. |
 | [`bit_and(arg)`](#bit_andarg) | Returns the bitwise AND of all bits in a given expression. |
 | [`bit_or(arg)`](#bit_orarg) | Returns the bitwise OR of all bits in a given expression. |
@@ -122,7 +123,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the first non-null value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `any_value(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `arbitrary(arg)`
 
@@ -130,7 +131,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arbitrary(A)` |
-| **Result** | `first(A)` |
+| **Alias(es)** | `first(A)` |
 
 ### `arg_max(arg, val)`
 
@@ -138,7 +139,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_max(A, B)` |
-| **Result** | `argMax(arg, val)`, `max_by(arg, val)` |
+| **Alias(es)** | `argMax(arg, val)`, `max_by(arg, val)` |
 
 ### `arg_min(arg, val)`
 
@@ -146,7 +147,15 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_min(A, B)` |
-| **Result** | `argMin(arg, val)`, `min_by(arg, val)` |
+| **Alias(es)** | `argMin(arg, val)`, `min_by(arg, val)` |
+
+### `array_agg(arg)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Example** | `array_agg(A)` |
+| **Alias(es)** | `list` |
 
 ### `avg(arg)`
 
@@ -154,31 +163,31 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the average value for all tuples in `arg`. |
 | **Example** | `avg(A)` |
-| **Result** | `mean` |
+| **Alias(es)** | `mean` |
 
 ### `bit_and(arg)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the bitwise AND of all bits in a given expression. |
+| **Description** | Returns the bitwise `AND` of all bits in a given expression. |
 | **Example** | `bit_and(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `bit_or(arg)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the bitwise OR of all bits in a given expression. |
+| **Description** | Returns the bitwise `OR` of all bits in a given expression. |
 | **Example** | `bit_or(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `bit_xor(arg)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the bitwise XOR of all bits in a given expression. |
+| **Description** | Returns the bitwise `XOR` of all bits in a given expression. |
 | **Example** | `bit_xor(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `bitstring_agg(arg)`
 
@@ -186,7 +195,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a bitstring with bits set for each distinct value. |
 | **Example** | `bitstring_agg(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `bool_and(arg)`
 
@@ -194,7 +203,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns `true` if every input value is `true`, otherwise `false`. |
 | **Example** | `bool_and(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `bool_or(arg)`
 
@@ -202,7 +211,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns `true` if any input value is `true`, otherwise `false`. |
 | **Example** | `bool_or(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `count(arg)`
 
@@ -210,7 +219,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the number of tuples in `arg`. |
 | **Example** | `count(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `favg(arg)`
 
@@ -218,7 +227,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the average using a more accurate floating point summation (Kahan Sum). |
 | **Example** | `favg(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `first(arg)`
 
@@ -226,7 +235,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `first(A)` |
-| **Result** | `arbitrary(A)` |
+| **Alias(es)** | `arbitrary(A)` |
 
 ### `fsum(arg)`
 
@@ -234,7 +243,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
 | **Example** | `fsum(A)` |
-| **Result** | `sumKahan`, `kahan_sum` |
+| **Alias(es)** | `sumKahan`, `kahan_sum` |
 
 ### `geomean(arg)`
 
@@ -242,7 +251,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the geometric mean for all tuples in `arg`. |
 | **Example** | `geomean(A)` |
-| **Result** | `geometric_mean(A)` |
+| **Alias(es)** | `geometric_mean(A)` |
 
 ### `histogram(arg)`
 
@@ -250,7 +259,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a `MAP` of key-value pairs representing buckets and counts. |
 | **Example** | `histogram(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `last(arg)`
 
@@ -258,7 +267,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `last(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `list(arg)`
 
@@ -266,7 +275,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `list(A)` |
-| **Result** | `array_agg` |
+| **Alias(es)** | `array_agg` |
 
 ### `max(arg)`
 
@@ -274,7 +283,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the maximum value present in `arg`. |
 | **Example** | `max(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `max_by(arg, val)`
 
@@ -282,7 +291,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `max_by(A, B)` |
-| **Result** | `argMax(arg, val)`, `arg_max(arg, val)` |
+| **Alias(es)** | `argMax(arg, val)`, `arg_max(arg, val)` |
 
 ### `min(arg)`
 
@@ -290,7 +299,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the minimum value present in `arg`. |
 | **Example** | `min(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `min_by(arg, val)`
 
@@ -298,7 +307,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `min_by(A, B)` |
-| **Result** | `argMin(arg, val)`, `arg_min(arg, val)` |
+| **Alias(es)** | `argMin(arg, val)`, `arg_min(arg, val)` |
 
 ### `product(arg)`
 
@@ -306,7 +315,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the product of all tuples in `arg`. |
 | **Example** | `product(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `string_agg(arg, sep)`
 
@@ -314,7 +323,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `string_agg(S, ',')` |
-| **Result** | `group_concat(arg, sep)`, `listagg(arg, sep)` |
+| **Alias(es)** | `group_concat(arg, sep)`, `listagg(arg, sep)` |
 
 ### `sum(arg)`
 
@@ -322,7 +331,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the sum value for all tuples in `arg`. |
 | **Example** | `sum(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ### `sum_no_overflow(arg)`
 
@@ -330,7 +339,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the sum value for all tuples in `arg` without [overflow](https://en.wikipedia.org/wiki/Integer_overflow) checks. Unlike `sum`, which works on floating-point values, `sum_no_overflow` only accepts `INTEGER` and `DECIMAL` values. |
 | **Example** | `sum_no_overflow(A)` |
-| **Result** | - |
+| **Alias(es)** | - |
 
 ## Approximate Aggregates
 
