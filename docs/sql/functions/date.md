@@ -46,7 +46,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | [`isinf(date)`](#isinfdate) | Returns true if the date is infinite, false otherwise. |
 | [`last_day(date)`](#last_daydate) | The last day of the corresponding month in the date. |
 | [`least(date, date)`](#leastdate-date) | The earlier of two dates. |
-| [`make_date(bigint, bigint, bigint)`](#make_datebigint-bigint-bigint) | The date for the given parts. |
+| [`make_date(year, month, day)`](#make_dateyear-month-day) | The date for the given parts. |
 | [`monthname(date)`](#monthnamedate) | The (English) name of the month. |
 | [`strftime(date, format)`](#strftimedate-format) | Converts a date to a string according to the [format string](../../sql/functions/dateformat). |
 | [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
@@ -189,7 +189,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | **Example** | `least(DATE '1992-09-20', DATE '1992-03-07')` |
 | **Result** | `1992-03-07` |
 
-### `make_date(bigint, bigint, bigint)`
+### `make_date(year, month, day)`
 
 <div class="nostroke_table"></div>
 
