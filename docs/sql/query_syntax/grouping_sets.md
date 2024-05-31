@@ -12,7 +12,7 @@ Note that this syntax is not compatible with [`GROUP BY ALL`](groupby#group-by-a
 Compute the average income along the provided four different dimensions:
 
 ```sql
--- () signifies the empty set (i.e., computing an ungrouped aggregate)
+-- the syntax () denotes the empty set (i.e., computing an ungrouped aggregate)
 SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY GROUPING SETS ((city, street_name), (city), (street_name), ());

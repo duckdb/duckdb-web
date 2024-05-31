@@ -37,28 +37,34 @@ CREATE TABLE t1 (
 );
 ```
 
-Create table as select (CTAS):
+Create table with `CREATE TABLE ... AS SELECT` (CTAS):
 
 ```sql
-CREATE TABLE t1 AS SELECT 42 AS i, 84 AS j;
+CREATE TABLE t1 AS
+    SELECT 42 AS i, 84 AS j;
 ```
 
 Create a table from a CSV file (automatically detecting column names and types):
 
 ```sql
-CREATE TABLE t1 AS SELECT * FROM read_csv('path/file.csv');
+CREATE TABLE t1 AS
+    SELECT *
+    FROM read_csv('path/file.csv');
 ```
 
-We can use the FROM-first syntax to omit `SELECT *`:
+We can use the `FROM`-first syntax to omit `SELECT *`:
 
 ```sql
-CREATE TABLE t1 AS FROM read_csv('path/file.csv');
+CREATE TABLE t1 AS
+    FROM read_csv('path/file.csv');
 ```
 
 Copy the schema of `t2` to `t1`:
 
 ```sql
-CREATE TABLE t1 AS FROM t2 LIMIT 0;
+CREATE TABLE t1 AS
+    FROM t2
+    LIMIT 0;
 ```
 
 ## Temporary Tables
@@ -70,7 +76,9 @@ Temporary tables reside in memory rather than on disk (even when connecting to a
 Create a temporary table from a CSV file (automatically detecting column names and types):
 
 ```sql
-CREATE TEMP TABLE t1 AS SELECT * FROM read_csv('path/file.csv');
+CREATE TEMP TABLE t1 AS
+    SELECT *
+    FROM read_csv('path/file.csv');
 ```
 
 Allow temporary tables to off-load excess memory to disk:
@@ -101,9 +109,9 @@ Create a table with two integer columns (`i` and `j`) only if `t1` does not exis
 CREATE TABLE IF NOT EXISTS t1 (i INTEGER, j INTEGER);
 ```
 
-## `CREATE TABLE ... AS` (CTAS)
+## `CREATE TABLE ... AS SELECT` (CTAS)
 
-DuckDB supports the `CREATE TABLE ... AS` syntax, also known as CTAS:
+DuckDB supports the `CREATE TABLE ... AS SELECT` syntax, also known as "CTAS":
 
 ```sql
 CREATE TABLE nums AS
@@ -111,7 +119,7 @@ CREATE TABLE nums AS
     FROM range(0, 3) t(i);
 ```
 
-This syntax can be used in combination with the [CSV reader](../../data/csv/overview), the shorthand to read directly from CSV files without specifying a function, the [FROM-first syntax](../query_syntax/from), and the [HTTP(S) support](../../extensions/httpfs/https), yielding concise SQL commands such as the following:
+This syntax can be used in combination with the [CSV reader](../../data/csv/overview), the shorthand to read directly from CSV files without specifying a function, the [`FROM`-first syntax](../query_syntax/from), and the [HTTP(S) support](../../extensions/httpfs/https), yielding concise SQL commands such as the following:
 
 ```sql
 CREATE TABLE flights AS

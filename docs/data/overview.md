@@ -17,23 +17,42 @@ For a more detailed description, see the [page on the `INSERT statement`](../dat
 
 ## CSV Loading
 
-Data can be efficiently loaded from CSV files using the `read_csv` function or the `COPY` statement.
+Data can be efficiently loaded from CSV files using several methods. The simplest is to use the CSV file's name:
 
 ```sql
-SELECT * FROM read_csv('test.csv');
+SELECT * FROM 'test.csv';
 ```
 
-You can also load data from **compressed** (e.g., compressed with [gzip](https://www.gzip.org/)) CSV files, for example:
+Alternatively, use the `read_csv` function or the `COPY` statement to pass along options. For example:
 
 ```sql
-SELECT * FROM read_csv('test.csv.gz');
+SELECT * FROM read_csv('test.csv', header = false);
+```
+
+It is also possible to read data directly from **compressed CSV files** (e.g., compressed with [gzip](https://www.gzip.org/)):
+
+```sql
+SELECT * FROM 'test.csv.gz';
+```
+
+DuckDB can create a table from the loaded data using the [`CREATE TABLE ... AS SELECT` statement](../sql/statements/create_table#create-table--as-select-ctas):
+
+```sql
+CREATE TABLE test AS
+    SELECT * FROM 'test.csv';
 ```
 
 For more details, see the [page on CSV loading](../data/csv).
 
 ## Parquet Loading
 
-Parquet files can be efficiently loaded and queried using the `read_parquet` function.
+Parquet files can be efficiently loaded and queried using their filename:
+
+```sql
+SELECT * FROM 'test.parquet';
+```
+
+Alternatively, use the `read_parquet` function or the `COPY` statement. For example:
 
 ```sql
 SELECT * FROM read_parquet('test.parquet');
@@ -43,7 +62,13 @@ For more details, see the [page on Parquet loading](../data/parquet).
 
 ## JSON Loading
 
-JSON files can be efficiently loaded and queried using the `read_json_auto` function.
+JSON files can be efficiently loaded and queried using their filename:
+
+```sql
+SELECT * FROM 'test.json';
+```
+
+Alternatively, use the `read_json_auto` function or the `COPY` statement. For example:
 
 ```sql
 SELECT * FROM read_json_auto('test.json');

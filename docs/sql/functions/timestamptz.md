@@ -105,7 +105,10 @@ For portability, `TIMESTAMPTZ` values will always be displayed using GMT offsets
 
 ```sql
 SELECT '2022-10-08 13:13:34-07'::TIMESTAMPTZ;
--- 2022-10-08 20:13:34+00
+```
+
+```text
+2022-10-08 20:13:34+00
 ```
 
 If a time zone extension such as ICU is loaded, then a time zone can be parsed from a string
@@ -113,7 +116,10 @@ and cast to a representation in the local time zone:
 
 ```sql
 SELECT '2022-10-08 13:13:34 Europe/Amsterdam'::TIMESTAMPTZ::VARCHAR;
--- 2022-10-08 04:13:34-07 -- the offset will differ based on your local time zone
+```
+
+```text
+2022-10-08 04:13:34-07 -- the offset will differ based on your local time zone
 ```
 
 ## ICU Timestamp with Time Zone Operators
@@ -460,9 +466,18 @@ The `AT TIME ZONE` syntax is syntactic sugar for the (two argument) `timezone` f
 
 ```sql
 TIMESTAMP '2001-02-16 20:38:40' AT TIME ZONE 'America/Denver';
--- 2001-02-16 19:38:40-08
+```
+
+```text
+2001-02-16 19:38:40-08
+```
+
+```sql
 TIMESTAMP WITH TIME ZONE '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver';
--- 2001-02-16 18:38:40
+```
+
+```text
+2001-02-16 18:38:40
 ```
 
 ## Infinities
