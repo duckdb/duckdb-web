@@ -1,13 +1,13 @@
-CREATE OR REPLACE TABLE tariffs AS
-    FROM read_csv('distances/tariff-distances-2022-01.csv', header=true, nullstr='XXX');
+CREATE OR REPLACE TABLE distances AS
+    FROM read_csv('https://blobs.duckdb.org/data/tariff-distances-2022-01.csv', nullstr = 'XXX');
 
-CREATE OR REPLACE TABLE tariffs AS
-    UNPIVOT tariffs
+CREATE OR REPLACE TABLE distances AS
+    UNPIVOT distances
     ON COLUMNS (* EXCLUDE Station)
-    INTO NAME OtherStation VALUE Price;
+    INTO NAME other_station VALUE distance;
 
-CREATE OR REPLACE TABLE tariffs AS
-    SELECT Station AS station1, OtherStation AS station2, Price AS price
-    FROM tariffs;
+CREATE OR REPLACE TABLE distances AS
+    SELECT Station AS station1, other_station AS station2, distance
+    FROM distances;
 
-COPY tariffs  TO 'tariffs.parquet'  (FORMAT parquet, COMPRESSION zstd);
+COPY distances TO 'distances.parquet'  (FORMAT parquet, COMPRESSION zstd);
