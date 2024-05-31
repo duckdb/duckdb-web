@@ -8,34 +8,69 @@ The `ALTER TABLE` statement changes the schema of an existing table in the catal
 
 ## Examples
 
+Add a new column with name `k` to the table `integers`, it will be filled with the default value NULL:
+
 ```sql
--- add a new column with name "k" to the table "integers", it will be filled with the default value NULL
 ALTER TABLE integers ADD COLUMN k INTEGER;
--- add a new column with name "l" to the table integers, it will be filled with the default value 10
+```
+
+Add a new column with name `l` to the table integers, it will be filled with the default value 10:
+
+```sql
 ALTER TABLE integers ADD COLUMN l INTEGER DEFAULT 10;
+```
 
--- drop the column "k" from the table integers
+Drop the column `k` from the table integers:
+
+```sql
 ALTER TABLE integers DROP k;
+```
 
--- change the type of the column "i" to the type "VARCHAR" using a standard cast
+Change the type of the column `i` to the type `VARCHAR` using a standard cast:
+
+```sql
 ALTER TABLE integers ALTER i TYPE VARCHAR;
--- change the type of the column "i" to the type "VARCHAR", using the specified expression to convert the data for each row
+```
+
+Change the type of the column `i` to the type `VARCHAR`, using the specified expression to convert the data for each row:
+
+```sql
 ALTER TABLE integers ALTER i SET DATA TYPE VARCHAR USING concat(i, '_', j);
+```
 
--- set the default value of a column
+Set the default value of a column:
+
+```sql
 ALTER TABLE integers ALTER COLUMN i SET DEFAULT 10;
--- drop the default value of a column
+```
+
+Drop the default value of a column:
+
+```sql
 ALTER TABLE integers ALTER COLUMN i DROP DEFAULT;
+```
 
--- make a column not nullable
+Make a column not nullable:
+
+```sql
 ALTER TABLE t ALTER COLUMN x SET NOT NULL;
--- drop the not null constraint
+```
+
+Drop the not null constraint:
+
+```sql
 ALTER TABLE t ALTER COLUMN x DROP NOT NULL;
+```
 
--- rename a table
+Rename a table:
+
+```sql
 ALTER TABLE integers RENAME TO integers_old;
+```
 
--- rename a column of a table
+Rename a column of a table:
+
+```sql
 ALTER TABLE integers RENAME i TO j;
 ```
 
@@ -47,8 +82,9 @@ ALTER TABLE integers RENAME i TO j;
 
 ## `RENAME TABLE`
 
+Rename a table:
+
 ```sql
--- rename a table
 ALTER TABLE integers RENAME TO integers_old;
 ```
 
@@ -56,8 +92,9 @@ The `RENAME TO` clause renames an entire table, changing its name in the schema.
 
 ## `RENAME COLUMN`
 
+Rename a column of a table:
+
 ```sql
--- rename a column of a table
 ALTER TABLE integers RENAME i TO j;
 ALTER TABLE integers RENAME COLUMN j TO k;
 ```
@@ -66,10 +103,15 @@ The `RENAME COLUMN` clause renames a single column within a table. Any constrain
 
 ## `ADD COLUMN`
 
+Add a new column with name `k` to the table `integers`, it will be filled with the default value NULL:
+
 ```sql
--- add a new column with name "k" to the table "integers", it will be filled with the default value NULL
 ALTER TABLE integers ADD COLUMN k INTEGER;
--- add a new column with name "l" to the table integers, it will be filled with the default value 10
+```
+
+Add a new column with name `l` to the table integers, it will be filled with the default value 10:
+
+```sql
 ALTER TABLE integers ADD COLUMN l INTEGER DEFAULT 10;
 ```
 
@@ -77,8 +119,9 @@ The `ADD COLUMN` clause can be used to add a new column of a specified type to a
 
 ## `DROP COLUMN`
 
+Drop the column `k` from the table `integers`:
+
 ```sql
--- drop the column "k" from the table integers
 ALTER TABLE integers DROP k;
 ```
 
@@ -86,10 +129,15 @@ The `DROP COLUMN` clause can be used to remove a column from a table. Note that 
 
 ## `ALTER TYPE`
 
+Change the type of the column `i` to the type `VARCHAR` using a standard cast:
+
 ```sql
--- change the type of the column "i" to the type "VARCHAR" using a standard cast
 ALTER TABLE integers ALTER i TYPE VARCHAR;
--- change the type of the column "i" to the type "VARCHAR", using the specified expression to convert the data for each row
+```
+
+Change the type of the column `i` to the type `VARCHAR`, using the specified expression to convert the data for each row:
+
+```sql
 ALTER TABLE integers ALTER i SET DATA TYPE VARCHAR USING concat(i, '_', j);
 ```
 
@@ -97,16 +145,21 @@ The `SET DATA TYPE` clause changes the type of a column in a table. Any data pre
 
 ## `SET` / `DROP DEFAULT`
 
+Set the default value of a column:
+
 ```sql
--- set the default value of a column
 ALTER TABLE integers ALTER COLUMN i SET DEFAULT 10;
--- drop the default value of a column
+```
+
+Drop the default value of a column:
+
+```sql
 ALTER TABLE integers ALTER COLUMN i DROP DEFAULT;
 ```
 
 The `SET/DROP DEFAULT` clause modifies the `DEFAULT` value of an existing column. Note that this does not modify any existing data in the column. Dropping the default is equivalent to setting the default value to NULL.
 
-> At the moment DuckDB will not allow you to alter a table if there are any dependencies. That means that if you have an index on a column you will first need to drop the index, alter the table, and then recreate the index. Otherwise you will get a "Dependency Error."
+> Warning At the moment DuckDB will not allow you to alter a table if there are any dependencies. That means that if you have an index on a column you will first need to drop the index, alter the table, and then recreate the index. Otherwise, you will get a "Dependency Error."
 
 ## `ADD` / `DROP CONSTRAINT`
 

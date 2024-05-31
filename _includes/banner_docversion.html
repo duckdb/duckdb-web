@@ -1,0 +1,51 @@
+{% if page.url contains '/docs/archive/' %}
+	{% assign versionviewed = urlVersionParts[0] %}
+{% else %}
+	{% assign versionviewed = site.currentduckdbversion | append: " (stable)" %}
+{% endif %}
+
+{% if versionviewed contains "stable" %}
+	<main>
+{% elsif page.path contains "latest" %}
+	<main class="latest">
+		<div class="banner">
+			<div class="content">
+				The page is for the github main (nightly) version of DuckDB, the features shown in the documentation may not yet be available in the stable version.
+			</div>
+			<div class="close"></div>
+		</div>
+{% else %}
+	{% assign url_parts = page.url | split: '/' %}
+	{% assign new_url = '' %}
+	{% assign skip_next = false %}
+	{% for part in url_parts %}
+		{% if part == 'archive' %}
+			{% assign skip_next = true %}
+			{% continue %}
+		{% elsif skip_next %}
+			{% assign skip_next = false %}
+			{% continue %}
+		{% else %}
+			{% assign new_url = new_url | append: part %}
+			{% unless forloop.last %}
+				{% assign new_url = new_url | append: '/' %}
+			{% endunless %}
+		{% endif %}
+	{% endfor %}
+	<main class="outdated">
+		<div class="banner outdated">
+			<div class="content">
+				<span class="icon_outdated"></span>
+				<span>This version of the documentation is outdated.
+				{% assign new_filename = new_url | replace: ".html", ".md" %}
+				{% capture url_exists %}{% file_exists {{ new_filename }} %}{% endcapture %}
+				{% if url_exists == "true" %}
+					<a href="{{ site.url }}{{ new_url }}">view latest</a>
+				{% else %}
+					This page is not available in the latest version of the documentation.
+				{% endif %}
+				</span>
+			</div>
+			<div class="close"></div>
+		</div>
+{% endif %}

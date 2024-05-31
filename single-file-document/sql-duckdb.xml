@@ -245,7 +245,6 @@
       <item>ENUM</item>
       <item>EQUALS</item>
       <item>ESCAPE</item>
-      <item>ESCEPTION</item>
       <item>EVENT</item>
       <item>EVERY</item>
       <item>EXCEPT</item>
@@ -728,6 +727,7 @@
       <item>LZO</item>
       <item>BROTLI</item>
       <item>LZ4</item>
+      <item>LZ4_RAW</item>
       <item>ZSTD</item>
       <item>FIELD_IDS</item>
       <item>ROW_GROUP_SIZE</item>

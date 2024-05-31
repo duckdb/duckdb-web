@@ -4,6 +4,8 @@ title: Subqueries
 railroad: expressions/subqueries.js
 ---
 
+Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT ... FROM`, but in DuckDB other query constructs such as [`PIVOT`](../statements/pivot) can also appear as a subquery.
+
 ## Scalar Subquery
 
 <div id="rrdiagram1"></div>
@@ -31,15 +33,79 @@ We can run the following query to obtain the minimum grade:
 
 ```sql
 SELECT min(grade) FROM grades;
--- {7}
 ```
+
+| min(grade) |
+|-----------:|
+| 7          |
 
 By using a scalar subquery in the `WHERE` clause, we can figure out for which course this grade was obtained:
 
 ```sql
 SELECT course FROM grades WHERE grade = (SELECT min(grade) FROM grades);
--- {Math}
 ```
+
+| course |
+|--------|
+| Math   |
+
+## Subquery Comparisons: `ALL`, `ANY` and `SOME`
+
+In the section on [scalar subqueries](#scalar-subquery), a scalar expression was compared directly to a subquery using the equality [comparison operator](comparison_operators#comparison-operators) (`=`).
+Such direct comparisons only make sense with scalar subqueries.
+
+Scalar expressions can still be compared to single-column subqueries returning multiple rows by specifying a quantifier. Available quantifiers are `ALL`, `ANY` and `SOME`. The quantifiers `ANY` and `SOME` are equivalent.
+
+### `ALL`
+
+The `ALL` quantifier specifies that the comparison as a whole evaluates to `true` when the individual comparison results of _the expression at the left hand side of the comparison operator_ with each of the values from _the subquery at the right hand side of the comparison operator_ **all** evaluate to `true`:
+
+```sql
+SELECT 6 <= ALL (SELECT grade FROM grades) AS adequate;
+```
+
+returns:
+
+| adequate |
+|----------|
+| true     |
+
+because 6 is less than or equal to each of the subquery results 7, 8 and 9.
+
+However, the following query
+
+```sql
+SELECT 8 >= ALL (SELECT grade FROM grades) AS excellent;
+```
+
+returns
+
+| excellent |
+|-----------|
+| false     |
+
+because 8 is not greater than or equal to the subquery result 7. And thus, because not all comparisons evaluate `true`, `>= ALL` as a whole evaluates to `false`.
+
+### `ANY`
+
+The `ANY` quantifier specifies that the comparison as a whole evaluates to `true` when at least one of the individual comparison results evaluates to `true`.
+For example:
+
+```sql
+SELECT 5 >= ANY (SELECT grade FROM grades) AS fail;
+```
+
+returns
+
+| fail  |
+|-------|
+| false |
+
+because no result of the subquery is less than or equal to 5.
+
+The quantifier `SOME` maybe used instead of `ANY`: `ANY` and `SOME` are interchangeable.
+
+> In DuckDB, and contrary to most SQL implementations, a comparison of a scalar with a single-column subquery returning multiple values still executes without error. However, the result is unstable, as the final comparison result is based on comparing just one (non-deterministically selected) value returned by the subquery.
 
 ## `EXISTS`
 
@@ -50,12 +116,20 @@ The `EXISTS` operator tests for the existence of any row inside the subquery. It
 For example, we can use it to figure out if there are any grades present for a given course:
 
 ```sql
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math');
--- true
-
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'History');
--- false
+SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math') AS math_grades_present;
 ```
+
+| math_grades_present |
+|--------------------:|
+| true                |
+
+```sql
+SELECT EXISTS (SELECT * FROM grades WHERE course = 'History') AS history_grades_present;
+```
+
+| history_grades_present |
+|-----------------------:|
+| false                  |
 
 ### `NOT EXISTS`
 
@@ -72,14 +146,10 @@ SELECT *
 FROM Person
 WHERE NOT EXISTS (SELECT * FROM interest WHERE interest.PersonId = Person.id);
 ```
-```text
-┌───────┬─────────┐
-│  id   │  name   │
-│ int64 │ varchar │
-├───────┼─────────┤
-│     1 │ Jane    │
-└───────┴─────────┘
-```
+
+| id | name |
+|---:|------|
+| 1  | Jane |
 
 > DuckDB automatically detects when a `NOT EXISTS` query expresses an antijoin operation. There is no need to manually rewrite such queries to use `LEFT OUTER JOIN ... WHERE ... IS NULL`.
 
@@ -92,9 +162,12 @@ The `IN` operator checks containment of the left expression inside the result de
 We can use the `IN` operator in a similar manner as we used the `EXISTS` operator:
 
 ```sql
-SELECT 'Math' IN (SELECT course FROM grades);
--- true
+SELECT 'Math' IN (SELECT course FROM grades) AS math_grades_present;
 ```
+
+| math_grades_present |
+|--------------------:|
+| true                |
 
 ## Correlated Subqueries
 
@@ -107,17 +180,23 @@ For example, suppose that we want to find the minimum grade for every course. We
 ```sql
 SELECT *
 FROM grades grades_parent
-WHERE grade=
+WHERE grade =
     (SELECT min(grade)
      FROM grades
      WHERE grades.course = grades_parent.course);
--- {7, Math}, {8, CS}
 ```
+
+| grade | course |
+|------:|--------|
+| 7     | Math   |
+| 8     | CS     |
 
 The subquery uses a column from the parent query (`grades_parent.course`). Conceptually, we can see the subquery as a function where the correlated column is a parameter to that function:
 
 ```sql
-SELECT min(grade) FROM grades WHERE course = ?;
+SELECT min(grade)
+FROM grades
+WHERE course = ?;
 ```
 
 Now when we execute this function for each of the rows, we can see that for `Math` this will return `7`, and for `CS` it will return `8`. We then compare it against the grade for that actual row. As a result, the row `(Math, 9)` will be filtered out, as `9 <> 7`.
@@ -127,15 +206,12 @@ Now when we execute this function for each of the rows, we can see that for `Mat
 Using the name of a subquery in the `SELECT` clause (without referring to a specific column) turns each row of the subquery into a struct whose fields correspond to the columns of the subquery. For example:
 
 ```sql
-SELECT t FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
+SELECT t
+FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
 ```
-```text
-┌─────────────────────────────┐
-│              t              │
-│ struct(x bigint, y varchar) │
-├─────────────────────────────┤
-│ {'x': 41, 'y': hello}       │
-│ {'x': 42, 'y': hello}       │
-│ {'x': 43, 'y': hello}       │
-└─────────────────────────────┘
-```
+
+|           t           |
+|-----------------------|
+| {'x': 41, 'y': hello} |
+| {'x': 42, 'y': hello} |
+| {'x': 43, 'y': hello} |

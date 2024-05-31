@@ -3,7 +3,7 @@ layout: docu
 title: Relational API
 ---
 
-The Relational API is an alternative API that can be used to incrementally construct queries. The API is centered around `DuckDBPyRelation` nodes. The relations can be seen as symbolic representations of SQL queries. They do not hold any data - and nothing is executed - until a method that triggers execution is called.
+The Relational API is an alternative API that can be used to incrementally construct queries. The API is centered around `DuckDBPyRelation` nodes. The relations can be seen as symbolic representations of SQL queries. They do not hold any data – and nothing is executed – until a method that triggers execution is called.
 
 ## Constructing Relations
 
@@ -13,7 +13,7 @@ For example, here we create a relation from a SQL query:
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(10000000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(10_000_000_000) tbl(id)")
 rel.show()
 ```
 
@@ -51,7 +51,7 @@ rel.show()
 └────────────────────────┘
 ```
 
-Note how we are constructing a relation that computes an immense amount of data (`10B` rows, or `74GB` of data). The relation is constructed instantly - and we can even print the relation instantly.
+Note how we are constructing a relation that computes an immense amount of data (`10B` rows, or `74GB` of data). The relation is constructed instantly – and we can even print the relation instantly.
 
 When printing a relation using `show` or displaying it in the terminal, the first `10K` rows are fetched. If there are more than `10K` rows, the output window will show `>9999 rows` (as the amount of rows in the relation is unknown).
 
@@ -67,11 +67,11 @@ Outside of SQL queries, the following methods are provided to construct relation
 
 ## SQL Queries
 
-Relation objects can be queried through SQL through so-called **replacement scans**. If you have a relation object stored in a variable, you can refer to that variable as if it was a SQL table (in the `FROM` clause). This allows you to incrementally build queries using relation objects.
+Relation objects can be queried through SQL through [replacement scans](../../api/c/replacement_scans). If you have a relation object stored in a variable, you can refer to that variable as if it was a SQL table (in the `FROM` clause). This allows you to incrementally build queries using relation objects.
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 duckdb.sql("SELECT sum(id) FROM rel").show()
 ```
 
@@ -86,7 +86,7 @@ duckdb.sql("SELECT sum(id) FROM rel").show()
 
 ## Operations
 
-There are a number of operations that can be performed on relations. These are all short-hand for running the SQL queries - and will return relations again themselves.
+There are a number of operations that can be performed on relations. These are all short-hand for running the SQL queries – and will return relations again themselves.
 
 ### `aggregate(expr, groups = {})`
 
@@ -94,7 +94,7 @@ Apply an (optionally grouped) aggregate over the relation. The system will autom
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.aggregate("id % 2 AS g, sum(id), min(id), max(id)")
 ```
 
@@ -138,7 +138,7 @@ Apply the given condition to the relation, filtering any rows that do not satisf
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.filter("id > 5").limit(3).show()
 ```
 
@@ -155,7 +155,7 @@ rel.filter("id > 5").limit(3).show()
 
 ### `intersect(rel)`
 
-Select the intersection of two relations - returning all rows that occur in both relations. The relations must have the same number of columns.
+Select the intersection of two relations – returning all rows that occur in both relations. The relations must have the same number of columns.
 
 ```python
 import duckdb
@@ -179,7 +179,7 @@ r1.intersect(r2).show()
 
 ### `join(rel, condition, type = "inner")`
 
-Combine two relations, joining them based on the provided condition. 
+Combine two relations, joining them based on the provided condition.
 
 ```python
 import duckdb
@@ -207,7 +207,7 @@ Select the first *n* rows, optionally offset by *offset*.
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.limit(3).show()
 ```
 
@@ -228,7 +228,7 @@ Sort the relation by the given set of expressions.
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.order("id DESC").limit(3).show()
 ```
 
@@ -249,7 +249,7 @@ Apply the given expression to each row in the relation.
 
 ```python
 import duckdb
-rel = duckdb.sql("SELECT * FROM range(1000000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.project("id + 10 AS id_plus_ten").limit(3).show()
 ```
 

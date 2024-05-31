@@ -2,7 +2,7 @@
 layout: post
 title:  "Lightweight Compression in DuckDB"
 author: Mark Raasveldt
-excerpt_separator: <!--more-->
+excerpt: DuckDB supports efficient lightweight compression that is automatically used to keep data size down without incurring high costs for compression and decompression.
 ---
 
 <img src="/images/compression/matroshka-duck.png"
@@ -10,18 +10,16 @@ excerpt_separator: <!--more-->
      width=200px
      />
 
-_TL;DR: DuckDB supports efficient lightweight compression that is automatically used to keep data size down without incurring high costs for compression and decompression._
-
 When working with large amounts of data, compression is critical for reducing storage size and egress costs. Compression algorithms typically reduce data set size by **75-95%**, depending on how compressible the data is. Compression not only reduces the storage footprint of a data set, but also often **improves performance** as less data has to be read from disk or over a network connection.
 
 <!--more-->
 
-Column store formats, such as DuckDB's native file format or [Parquet](/2021/06/25/querying-parquet.html), benefit especially from compression. That is because data within an individual column is generally very similar, which can be exploited effectively by compression algorithms. Storing data in row-wise format results in interleaving of data of different columns, leading to lower compression rates.
+Column store formats, such as DuckDB's native file format or [Parquet](/2021/06/25/querying-parquet), benefit especially from compression. That is because data within an individual column is generally very similar, which can be exploited effectively by compression algorithms. Storing data in row-wise format results in interleaving of data of different columns, leading to lower compression rates.
 
 DuckDB added support for compression [at the end of last year](https://github.com/duckdb/duckdb/pull/2099). As shown in the table below, the compression ratio of DuckDB has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DuckDB works, and the design choices and various trade-offs that we have made while implementing compression for DuckDB's storage format.
 
 |        Version         |  Taxi  | On Time | Lineitem |     Notes      |      Date      |
-|------------------------|-------:|--------:|---------:|----------------|----------------|
+|:-----------------------|-------:|--------:|---------:|:---------------|:---------------|
 | DuckDB v0.2.8          | 15.3GB | 1.73GB  | 0.85GB   | Uncompressed   | July 2021      |
 | DuckDB v0.2.9          | 11.2GB | 1.25GB  | 0.79GB   | RLE + Constant | September 2021 |
 | DuckDB v0.3.2          | 10.8GB | 0.98GB  | 0.56GB   | Bitpacking     | February 2022  |
@@ -37,14 +35,14 @@ DuckDB added support for compression [at the end of last year](https://github.co
 
 At its core, compression algorithms try to find patterns in a data set in order to store it more cleverly. **Compressibility** of a data set is therefore dependent on whether or not such patterns can be found, and whether they exist in the first place. Data that follows a fixed pattern can be compressed significantly. Data that does not have any patterns, such as random noise, cannot be compressed. Formally, the compressibility of a dataset is known as its [entropy](https://en.wikipedia.org/wiki/Entropy_(information_theory)).
 
-As an example of this concept, let us consider the following two data sets. 
+As an example of this concept, let us consider the following two data sets.
 
 <img src="/images/compression/exampledata.png"
      alt="Example data set with predictable and noisy data"
      width="100%"
      />
 
-The constant data set can be compressed by simply storing the value of the pattern and how many times the pattern repeats (e.g. `1x8`). The random noise, on the other hand, has no pattern, and is therefore not compressible.
+The constant data set can be compressed by simply storing the value of the pattern and how many times the pattern repeats (e.g., `1x8`). The random noise, on the other hand, has no pattern, and is therefore not compressible.
 
 ## General Purpose Compression Algorithms
 
@@ -80,7 +78,7 @@ On the flip side, these algorithms are ineffective if the specific patterns they
 
 Because of the advantages described above, DuckDB uses only specialized lightweight compression algorithms. As each of these algorithms work optimally on different patterns in the data, DuckDB's compression framework must first decide on which algorithm to use to store the data of each column.
 
-DuckDB's storage splits tables into *Row Groups*. These are groups of `120K` rows, stored in columnar chunks called *Column Segments*. This storage layout is similar to [Parquet](/2021/06/25/querying-parquet.html) - but with an important difference: columns are split into blocks of a fixed-size. This design decision was made because DuckDB's storage format supports in-place ACID modifications to the storage format, including deleting and updating rows, and adding and dropping columns. By partitioning data into fixed size blocks the blocks can be easily reused after they are no longer required and fragmentation is avoided.
+DuckDB's storage splits tables into *Row Groups*. These are groups of `120K` rows, stored in columnar chunks called *Column Segments*. This storage layout is similar to [Parquet](/2021/06/25/querying-parquet) – but with an important difference: columns are split into blocks of a fixed-size. This design decision was made because DuckDB's storage format supports in-place ACID modifications to the storage format, including deleting and updating rows, and adding and dropping columns. By partitioning data into fixed size blocks the blocks can be easily reused after they are no longer required and fragmentation is avoided.
 
 <img src="/images/compression/storageformat.png"
      alt="Visualization of the storage format of DuckDB"
@@ -105,7 +103,7 @@ Constant encoding is the most straightforward compression algorithm in DuckDB. C
      width="100%"
      />
 
-When applicable, this encoding technique leads to tremendous space savings. While it might seem like this technique is rarely applicable - in practice it occurs relatively frequently. Columns might be filled with `NULL` values, or have values that rarely change (such as e.g. a `year` column in a stream of sensor data). Because of this compression algorithm, such columns take up almost no space in DuckDB.
+When applicable, this encoding technique leads to tremendous space savings. While it might seem like this technique is rarely applicable – in practice it occurs relatively frequently. Columns might be filled with `NULL` values, or have values that rarely change (such as e.g., a `year` column in a stream of sensor data). Because of this compression algorithm, such columns take up almost no space in DuckDB.
 
 ### Run-Length Encoding (RLE)
 
@@ -130,7 +128,7 @@ Bit Packing is a compression technique that takes advantage of the fact that int
 
 For bit packing compression, we keep track of the maximum value for every `1024` values. The maximum value determines the bit packing width, which is the number of bits necessary to store that value. For example, when storing a set of values with a maximum value of `32`, the bit packing width is `5` bits, down from the `32` bits per value that would be required to store uncompressed four-byte integers.
 
-Bit packing is very powerful in practice. It is also convenient to users - as due to this technique there are no storage size differences between using the various integer types. A `BIGINT` column will be stored in the exact same amount of space as an `INTEGER` column. That relieves the user from having to worry about which integer type to choose. 
+Bit packing is very powerful in practice. It is also convenient to users – as due to this technique there are no storage size differences between using the various integer types. A `BIGINT` column will be stored in the exact same amount of space as an `INTEGER` column. That relieves the user from having to worry about which integer type to choose.
 
 ### Frame of Reference
 
@@ -141,7 +139,7 @@ Frame of Reference encoding is an extension of bit packing, where we also includ
      width="100%"
      />
 
-While this might not seem particularly useful at a first glance, it is very powerful when storing dates and timestamps. That is because dates and timestamps are stored as Unix Timestamps in DuckDB, i.e. the offset since `1970-01-01` in either days (for dates) or microseconds (for timestamps). When we have a set of date or timestamp values, the absolute numbers might be very high, but the numbers are all very close together. By applying a frame before bit packing, we can often improve our compression ratio tremendously.
+While this might not seem particularly useful at a first glance, it is very powerful when storing dates and timestamps. That is because dates and timestamps are stored as Unix Timestamps in DuckDB, i.e., the offset since `1970-01-01` in either days (for dates) or microseconds (for timestamps). When we have a set of date or timestamp values, the absolute numbers might be very high, but the numbers are all very close together. By applying a frame before bit packing, we can often improve our compression ratio tremendously.
 
 
 ### Dictionary Encoding
@@ -184,7 +182,7 @@ ORDER BY row_group_id;
 ```
 
 | row_group_id |    column_name     | column_id | segment_type | count | compression  |
-|--------------|--------------------|-----------|--------------|-------|--------------|
+|--------------|:-------------------|-----------|:-------------|-------|:-------------|
 | 4            | extra              | 13        | FLOAT        | 65536 | Chimp        |
 | 20           | tip_amount         | 15        | FLOAT        | 65536 | Chimp        |
 | 26           | pickup_latitude    | 6         | VALIDITY     | 65536 | Constant     |

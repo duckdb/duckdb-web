@@ -3,11 +3,8 @@
 layout: post
 title:  "Efficient SQL on Pandas with DuckDB"
 author: Mark Raasveldt and Hannes Mühleisen
-excerpt_separator: <!--more-->
-
+excerpt: DuckDB, a free and open source analytical data management system, can efficiently run SQL queries directly on Pandas DataFrames.
 ---
-
-_TL;DR: DuckDB, a free and open source analytical data management system, can efficiently run SQL queries directly on Pandas DataFrames._
 
 Recently, an article was published [advocating for using SQL for Data Analysis](https://hakibenita.com/sql-for-data-analysis). Here at team DuckDB, we are huge fans of [SQL](https://en.wikipedia.org/wiki/SQL). It is a versatile and flexible language that allows the user to efficiently perform a wide variety of data transformations, without having to care about how the data is physically represented or how to do these data transformations in the most optimal way.
 
@@ -15,7 +12,7 @@ Recently, an article was published [advocating for using SQL for Data Analysis](
 
 While you can very effectively perform aggregations and data transformations in an external database system such as Postgres if your data is stored there, at some point you will need to convert that data back into [Pandas](https://pandas.pydata.org) and [NumPy](https://numpy.org). These libraries serve as the standard for data exchange between the vast ecosystem of Data Science libraries in Python<sup>1</sup> such as [scikit-learn](https://scikit-learn.org/stable/) or [TensorFlow](https://www.tensorflow.org).
 
-If you are reading from a file (e.g. a CSV or Parquet file) often your data will never be loaded into an external database system at all, and will instead be directly loaded into a Pandas DataFrame.
+If you are reading from a file (e.g., a CSV or Parquet file) often your data will never be loaded into an external database system at all, and will instead be directly loaded into a Pandas DataFrame.
 
 [1] [Apache Arrow](https://arrow.apache.org) is gaining significant traction in this domain as well, and DuckDB also quacks Arrow.
 
@@ -91,11 +88,11 @@ orders = duckdb.query(
 For our first query, we will run a set of ungrouped aggregates over the Pandas DataFrame. Here is the SQL query:
 
 ```sql
-SELECT SUM(l_extendedprice),
-       MIN(l_extendedprice),
-       MAX(l_extendedprice),
-       AVG(l_extendedprice)
-FROM lineitem
+SELECT sum(l_extendedprice),
+       min(l_extendedprice),
+       max(l_extendedprice),
+       avg(l_extendedprice)
+FROM lineitem;
 ```
 
 The Pandas code looks similar:
@@ -126,14 +123,14 @@ For our second query, we will run the same set of aggregates, but this time incl
 SELECT
       l_returnflag,
       l_linestatus,
-      SUM(l_extendedprice),
-      MIN(l_extendedprice),
-      MAX(l_extendedprice),
-      AVG(l_extendedprice)
+      sum(l_extendedprice),
+      min(l_extendedprice),
+      max(l_extendedprice),
+      avg(l_extendedprice)
 FROM lineitem
 GROUP BY
         l_returnflag,
-        l_linestatus
+        l_linestatus;
 ```
 
 In Pandas, we use the groupby function before we perform the aggregation.
@@ -162,18 +159,18 @@ This query is already getting more complex, and while Pandas does a decent job, 
 Now suppose that we don't want to perform an aggregate over all of the data, but instead only want to select a subset of the data to aggregate. We can do this by adding a filter clause that removes any tuples we are not interested in. In SQL, we can accomplish this through the `WHERE` clause.
 
 ```sql
-SELECT l_returnflag,
-      l_linestatus,
-      SUM(l_extendedprice),
-      MIN(l_extendedprice),
-      MAX(l_extendedprice),
-      AVG(l_extendedprice)
+SELECT
+  l_returnflag,
+  l_linestatus,
+  sum(l_extendedprice),
+  min(l_extendedprice),
+  max(l_extendedprice),
+  avg(l_extendedprice)
 FROM lineitem
 WHERE
    l_shipdate <= DATE '1998-09-02'
 GROUP BY l_returnflag,
-        l_linestatus
-
+         l_linestatus;
 ```
 
  In Pandas, we can create a filtered variant of the DataFrame by using the selection brackets.
@@ -236,18 +233,19 @@ Due to its holistic query optimizer and efficient query processor, DuckDB perfor
 For the final query, we will join (`merge` in Pandas) the lineitem table with the orders table, and apply a filter that only selects orders which have the status we are interested in. This leads us to the following query in SQL:
 
 ```sql
-SELECT l_returnflag,
-       l_linestatus,
-       sum(l_extendedprice),
-       min(l_extendedprice),
-       max(l_extendedprice),
-       avg(l_extendedprice)
+SELECT
+  l_returnflag,
+  l_linestatus,
+  sum(l_extendedprice),
+  min(l_extendedprice),
+  max(l_extendedprice),
+  avg(l_extendedprice)
 FROM lineitem lineitem
 JOIN orders orders ON (l_orderkey=o_orderkey)
 WHERE l_shipdate <= DATE '1998-09-02'
   AND o_orderstatus='O'
 GROUP BY l_returnflag,
-         l_linestatus
+         l_linestatus;
 ```
 
 For Pandas, we have to add a `merge` step. In a basic approach, we merge lineitem and orders together, then apply the filters, and finally apply the grouping and aggregation. This will give us the following code snippet:
@@ -317,19 +315,18 @@ result = merged.groupby(
 
 Both of these optimizations are automatically applied by DuckDB's query optimizer.
 
-
 |           Name           | Time (s) |
-|:--------------------------|----------:|
+|:-------------------------|---------:|
 | DuckDB (1 Thread)        | 1.05     |
 | DuckDB (2 Threads)       | 0.53     |
 | Pandas                   | 15.2     |
-| Pandas (manual pushdown)&nbsp;&nbsp; | 3.78     |
+| Pandas (manual pushdown) | 3.78     |
 
 We see that the basic approach is extremely time consuming compared to the optimized version. This demonstrates the usefulness of the automatic query optimizer. Even after optimizing, the Pandas code is still significantly slower than DuckDB because it stores intermediate results in memory after the individual filters and joins.
 
 ### Takeaway
 
-Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in - and out - of Pandas. DuckDB is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DuckDB uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
+Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in – and out – of Pandas. DuckDB is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DuckDB uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
 
 ## Appendix A: There and back again: Transferring data from Pandas to a SQL engine and back
 
@@ -356,7 +353,6 @@ Transferring query results or tables back from the SQL system into Pandas is ano
 | PostgreSQL to Pandas using temporary CSV file | 1.29     |
 | SQLite to Pandas using read_sql_query         | 5.20     |
 | DuckDB to Pandas                              | 0.04     |
-
 
 ## Appendix B: Comparison to PandaSQL
 
@@ -393,7 +389,7 @@ CREATE VIEW orders_parquet AS SELECT * FROM 'orders.parquet';
 After we have set up this view, we can run the same queries we ran before, but this time against the `lineitem_parquet` table.
 
 ```sql
-SELECT SUM(l_extendedprice), MIN(l_extendedprice), MAX(l_extendedprice), AVG(l_extendedprice) FROM lineitem_parquet
+SELECT sum(l_extendedprice), min(l_extendedprice), max(l_extendedprice), avg(l_extendedprice) FROM lineitem_parquet;
 ```
 
 For Pandas, we will first need to run `read_parquet` to load the data into Pandas. To do this, we use the Parquet reader powered by Apache Arrow. After that, we can run the query as we did before.
@@ -413,11 +409,11 @@ result = lineitem_pandas_parquet.agg(Sum=('l_extendedprice', 'sum'), Min=('l_ext
 ```
 
 |    Name                       | Time (s) |
-|:-------------------------------|----------:|
+|:------------------------------|---------:|
 | DuckDB (1 Thread)             | 0.16     |
 | DuckDB (2 Threads)            | 0.14     |
 | Pandas                        | 7.87     |
-| Pandas (manual pushdown)&nbsp;&nbsp;      | 0.17     |
+| Pandas (manual pushdown)      | 0.17     |
 
 We can see that the performance difference between doing the pushdown and not doing the pushdown is dramatic. When we perform the pushdown, Pandas has performance in the same ballpark as DuckDB. Without the pushdown, however, it is loading the entire file from disk, including the other 15 columns that are not required to answer the query.
 
@@ -437,16 +433,16 @@ JOIN orders orders ON (l_orderkey=o_orderkey)
 WHERE l_shipdate <= DATE '1998-09-02'
   AND o_orderstatus='O'
 GROUP BY l_returnflag,
-         l_linestatus
+         l_linestatus;
 ```
 
 For Pandas we again create two versions. A naive version, and a manually optimized version. The exact code used can be found [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing).
 
-|    Name     | Time (s) |
-|:-------------|----------:|
-| DuckDB (1 Thread) | 1.04    |
-| DuckDB (2 Threads) | 0.89    |
-| Pandas      | 20.4    |
-| Pandas (manual pushdown)&nbsp;&nbsp;      | 3.95    |
+|    Name                  | Time (s) |
+|:-------------------------|---------:|
+| DuckDB (1 Thread)        | 1.04     |
+| DuckDB (2 Threads)       | 0.89     |
+| Pandas                   | 20.4     |
+| Pandas (manual pushdown) | 3.95     |
 
 We see that for this more complex query the slight difference in performance between running over a Pandas DataFrame and a Parquet file vanishes, and the DuckDB timings become extremely similar to the timings we saw before. The added Parquet read again increases the necessity of manually performing optimizations on the Pandas code, which is not required at all when running SQL in DuckDB.

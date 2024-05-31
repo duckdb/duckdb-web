@@ -5,62 +5,48 @@ blurb: In DuckDB, strings can be stored in the VARCHAR field.
 ---
 
 In DuckDB, strings can be stored in the `VARCHAR` field.
+The field allows storage of Unicode characters. Internally, the data is encoded as UTF-8.
 
 <div class="narrow_table"></div>
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `VARCHAR` | `CHAR`, `BPCHAR`, `TEXT`, `STRING` | variable-length character string |
-| `VARCHAR(n)` |  | variable-length character string with maximum length n |
+| `VARCHAR` | `CHAR`, `BPCHAR`, `STRING`, `TEXT` | Variable-length character string |
+| `VARCHAR(n)` | `STRING(n)`, `TEXT(n)` | Variable-length character string. The maximum length _n_ has no effect and is only provided for compatibility. |
 
-It is possible to supply a number along with the type by initializing a type as `VARCHAR(n)`,  where `n` is a positive integer. **Note that specifying this length is not required and has no effect on the system. Specifying this length will not improve performance or reduce storage space of the strings in the database.** This variant is supported for compatibility reasons with other systems that do require a length to be specified for strings.
+## Specifying a Length Limit
+
+Specifying the length for the `VARCHAR`, `STRING`, and `TEXT` types is not required and has no effect on the system. Specifying the length will not improve performance or reduce storage space of the strings in the database. These variants variant is supported for compatibility reasons with other systems that do require a length to be specified for strings.
 
 If you wish to restrict the number of characters in a `VARCHAR` column for data integrity reasons the `CHECK` constraint should be used, for example:
 
-
 ```sql
 CREATE TABLE strings (
-    val VARCHAR CHECK (length(val) <= 10) -- val has a maximum length of 10 characters
+    val VARCHAR CHECK (length(val) <= 10) -- val has a maximum length of 10
 );
 ```
 
 The `VARCHAR` field allows storage of Unicode characters. Internally, the data is encoded as UTF-8.
 
-## Formatting Strings
+## Text Type Values
 
-Strings in DuckDB are surrounded by single quote (apostrophe) characters (`'`):
+Values of the text type are character strings, also known as string values or simply strings. At runtime, string values are constructed in one of the following ways:
 
-```sql
-SELECT 'Hello world' AS msg;
-```
-```text
-┌─────────────┐
-│     msg     │
-│   varchar   │
-├─────────────┤
-│ Hello world │
-└─────────────┘
-```
+* referencing columns whose declared or implied type is the text data type
+* [string literals](literal_types#string-literals)
+* [casting](../expressions/cast#explicit-casting) expressions to a text type
+* applying a [string operator](../functions/char#text-functions-and-operators), or invoking a function that returns a text type value
 
-To include a single quote character in a string, use `''`:
+## Strings with Special Characters
 
-```sql
-SELECT 'Hello ''world''' AS msg;
-```
-```text
-┌───────────────┐
-│      msg      │
-│    varchar    │
-├───────────────┤
-│ Hello 'world' │
-└───────────────┘
-```
-
-To include special characters such as newline, use the [`chr` character function](../../sql/functions/char):
+To use special characters in string, use [escape string literals](literal_types#escape-string-literals) or [dollar-quoted string literals](literal_types#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function](../../sql/functions/char):
 
 ```sql
 SELECT 'Hello' || chr(10) || 'world' AS msg;
 ```
+
+<!-- This output intentionally uses the duckbox formatter -->
+
 ```text
 ┌──────────────┐
 │     msg      │
@@ -69,16 +55,6 @@ SELECT 'Hello' || chr(10) || 'world' AS msg;
 │ Hello\nworld │
 └──────────────┘
 ```
-
-## Double Quote Characters
-
-Double quote characters (`"`) are used to denote table and column names. Surrounding their names allows the use of keywords, e.g.:
-
-```sql
-CREATE TABLE "table" ("order" BIGINT);
-```
-
-While DuckDB occasionally accepts both single quote and double quotes for strings (e.g., both `FROM "filename.csv"` and `FROM 'filename.csv'` work), their use is not recommended.
 
 ## Functions
 

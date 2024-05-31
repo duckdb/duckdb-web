@@ -2,7 +2,7 @@
 layout: post
 title:  "Announcing DuckDB 0.6.0"
 author: Mark Raasveldt
-excerpt_separator: <!--more-->
+excerpt: ""
 ---
 
 <img src="/images/blog/white-headed-duck.jpeg"
@@ -28,7 +28,7 @@ As we are working towards stabilizing the storage format and moving towards vers
 
 This version introduces [optimistic writing to disk](https://github.com/duckdb/duckdb/pull/4996). When loading large data sets in a single transaction, data is compressed and streamed to the database file, even before the `COMMIT` has occurred. When the transaction is committed, the data will already have been written to disk, and no further writing has to happen. On a rollback, any optimistically written data is reclaimed by the system. 
 
-**Parallel data loading**. In addition to optimistically writing data to disk, this release includes support for parallel data loading into individual tables. This greatly improves performance of data loading on machines that have multiple cores (i.e. all modern machines).
+**Parallel data loading**. In addition to optimistically writing data to disk, this release includes support for parallel data loading into individual tables. This greatly improves performance of data loading on machines that have multiple cores (i.e., all modern machines).
 
 Below is a benchmark comparing loading time of 150 million rows of the Taxi dataset from a Parquet file on an M1 Max with 10 cores:
 
@@ -37,9 +37,9 @@ Below is a benchmark comparing loading time of 150 million rows of the Taxi data
 | v0.5.1  | 91.4s     |
 | v0.6.0  | 17.2s     |
 
-DuckDB supports two modes - the [`order-preserving`](https://github.com/duckdb/duckdb/pull/5082) and the [`non-order-preserving`](https://github.com/duckdb/duckdb/pull/5033) parallel data load.
+DuckDB supports two modes – the [`order-preserving`](https://github.com/duckdb/duckdb/pull/5082) and the [`non-order-preserving`](https://github.com/duckdb/duckdb/pull/5033) parallel data load.
 
-The order-preserving load preserves the insertion order so that e.g. the first line in your CSV file is the first line in the DuckDB table. The non-order-preserving load does not offer such guarantees - and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order=false` statement.
+The order-preserving load preserves the insertion order so that e.g., the first line in your CSV file is the first line in the DuckDB table. The non-order-preserving load does not offer such guarantees – and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order=false` statement.
 
 #### Compression Improvements
 
@@ -70,7 +70,7 @@ The compression ratio of a dataset containing temperatures of cities stored as d
 DuckDB aims to have very high performance for a wide variety of workloads. As such, we are always working to improve performance for various workloads. This release is no different.
 
 
-**Parallel CSV Loading (Experimental)**. In this release we are launching [a new experimental parallel CSV reader](https://github.com/duckdb/duckdb/pull/5194). This greatly improves the ingestion speed of large CSV files into the system. While we have done our best to make the parallel CSV reader robust - CSV parsing is a minefield as there is such a wide variety of different files out there - so we have marked the reader as experimental for now.
+**Parallel CSV Loading (Experimental)**. In this release we are launching [a new experimental parallel CSV reader](https://github.com/duckdb/duckdb/pull/5194). This greatly improves the ingestion speed of large CSV files into the system. While we have done our best to make the parallel CSV reader robust – CSV parsing is a minefield as there is such a wide variety of different files out there – so we have marked the reader as experimental for now.
 
 The parallel CSV reader can be enabled by setting the `experimental_parallel_csv` flag to true. We aim to make the parallel CSV reader the default reader in future DuckDB versions.
 
@@ -94,11 +94,11 @@ The timings of creating an index on a single column with 16 million values is sh
 | v0.5.1  | 5.92s     |
 | v0.6.0  | 1.38s     |
 
-**Parallel COUNT(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g. `COUNT(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DuckDB can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
+**Parallel COUNT(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g., `COUNT(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DuckDB can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
 
 #### SQL Syntax Improvements
 
-SQL is the primary way of interfacing with DuckDB - and DuckDB [tries to have an easy to use SQL dialect](https://duckdb.org/2022/05/04/friendlier-sql.html). This release contains further improvements to the SQL dialect.
+SQL is the primary way of interfacing with DuckDB – and DuckDB [tries to have an easy to use SQL dialect](https://duckdb.org/2022/05/04/friendlier-sql.html). This release contains further improvements to the SQL dialect.
 
 **UNION Type**. This release introduces the [UNION type](https://github.com/duckdb/duckdb/pull/4966), which allows sum types to be stored and queried in DuckDB. For example:
 
@@ -107,6 +107,7 @@ CREATE TABLE messages(u UNION(num INT, error VARCHAR));
 INSERT INTO messages VALUES (42);
 INSERT INTO messages VALUES ('oh my globs');
 ```
+
 ```text
 SELECT * FROM messages;
 ┌─────────────┐
@@ -117,7 +118,7 @@ SELECT * FROM messages;
 └─────────────┘
 ```
 
-Sum types are strongly typed - but they allow a single value in a table to be represented as one of various types. The [union page](https://duckdb.org/docs/sql/data_types/union) in the documentation contains more information on how to use this new composite type.
+Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page](https://duckdb.org/docs/sql/data_types/union) in the documentation contains more information on how to use this new composite type.
 
 **FROM-first**. Starting with this release, DuckDB supports starting queries with the [FROM clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
 
@@ -199,7 +200,7 @@ This release further improves on that by greatly optimizing the [out-of-core has
 |2|7.69|3.28|
 |1|17.73|4.35|
 
-**jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/duckdb/duckdb/pull/4971) with the Linux version of DuckDB by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on MacOS or Windows, and as such we continue using the standard allocators there (at least for now).
+**jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/duckdb/duckdb/pull/4971) with the Linux version of DuckDB by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on macOS or Windows, and as such we continue using the standard allocators there (at least for now).
 
 #### Shell Improvements
 

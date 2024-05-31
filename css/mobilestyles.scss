@@ -1,13 +1,6 @@
 ---
 ---
 
-@media only screen and (max-width: 1300px) {
-	body.installation .select ul.environment{
-		li{
-			flex: auto;
-		}
-	}
-}
 
 @media only screen and (max-width: 1200px) {
 	main .wrap,
@@ -22,35 +15,12 @@
 	}
 }
 
-@media only screen and (max-width: 1100px) {
-	.searchoverlay > div form input,
-	.autocomplete{
-		width: 100%;
-	}
-}
-
 @media only screen and (max-width: 980px) {
-	.singleentry table{
-		margin: 0px;
-	}
-	body.installation{
-		.evironment .onlymobile{
-			display: block;
-		}
-		ul.environment{
-			display: none;
-		}
-	}
-}
-
-@media only screen and (max-width: 980px) {
-	.newswrap .postwrap .postcontent{
-		max-width: 550px;
-	}
 	.newswrap .postwrap{
 		position: relative;
 	}
-	.singleentry div.highlight{
+	.singleentry div.highlight,
+	body.installation .output .result{
 		width: 100%;
 	}
 	footer .sitefooter .footercontent{
@@ -58,8 +28,24 @@
 		justify-content: space-between;
 		column-gap: 40px;
 	}
-	body.documentation .headlinebar{
-		font-size: 130%;
+	.singleentry table{
+		margin: 0px;
+	}
+	body.installation .select,
+	body.installation .output{
+		flex-wrap: wrap;
+	}
+	body.installation .select h3,
+	body.installation .output h3{
+		width: 100%;
+		padding: 0;
+		padding-bottom: 15px;
+	}
+	body.installation .output .result{
+		overflow: auto;
+	}
+	body.installation .select ul{
+		gap: 8px;
 	}
 }
 
@@ -102,11 +88,6 @@
 		position: relative;
 		margin-top: 20px;
 	}
-	.newswrap .postwrap{
-		width: 100%;
-		padding: 15px;
-		box-sizing: border-box;
-	}
 	.newswrap .sidebar{
 		display: none;
 	}
@@ -146,10 +127,10 @@
 
 @media only screen and (max-width: 660px) {
 	.hamburger{
-		display: block;
+		display: flex;
 	}
 	nav.mobile .hamburger{
-		display: block!important;
+		display: flex!important;
 	}
 	.notonmobile{
 		display: none;
@@ -175,33 +156,33 @@
 	}
 	header .headerline .headercontent .landingmenu nav:not(.mobile){
 		display: block;
-		width: 75%;
-		background: #fff100;
 		position: fixed;
+		height: 100%;
+		width: 75%;
 		right: 0;
-		top: 53px;
-		margin-right: 0px;
-		padding-top: 15px;
-		padding-bottom: 15px;
-		pointer-events: none;
-		transition: all .5s;
+		top: 70px;
+		border-radius: 0px 0px 15px 15px;
+		border: 1px solid #393939;
+		border-top: 0;
+		background: rgba(9, 9, 9, 0.85);
+		backdrop-filter: blur(5px);
 		right: -100%;
-		height: calc(100vh - 53px);
-		> div{
-			margin-left: 20px;
-		}
+		pointer-events: none;
+		transition: all .3s;
 		&.slidein{
 			pointer-events: all;
 			right: 0%;
 		}
-	}
-	header .headerline .headercontent .landingmenu nav:not(.mobile){
 		div{
-			line-height: 40px;
+			line-height: 20px;
 		}
 		a{
-			color: black;
+			color: rgb(255, 255, 255);
+			line-height: 3;
 		}
+	}
+	header .headerline .headercontent .landingmenu nav > div{
+		margin-left: 20px;
 	}
 	header .headerline .headercontent .landingmenu nav .hasSub + ul{
 		position: relative;
@@ -213,6 +194,21 @@
 	body.landing .welcome .mainlinks ul, body.landing .benefits .mainlinks ul{
 		max-width: 80%;
 		display: block;
+	}
+	header .headerline .headercontent .landingmenu{
+		display: flex;
+		align-items: center;
+		position: relative;
+	}
+	header .headerline .headercontent .landingmenu nav .hasSub a::after{
+		display: none;
+	}
+	.pagehead h1{
+		font-size: 35px;
+		padding: 50px 15px;
+	}
+	main.f-md .pagehead + .wrap{
+		padding: 50px 15px;
 	}
 	body.landing .welcome h1{
 		font-size: 200%;
@@ -260,7 +256,7 @@
 		width: 100%;
 		max-width: 100%;
 	}
-	body.landing .newsblog .newswrap{
+	body.landing .newsblog .newstileswrap{
 		flex-wrap: wrap;
 		.postpreview{
 			width: 100%;
@@ -270,27 +266,43 @@
 	.newswrap .headlinebar{
 		padding-left: 15px;
 	}
-	.newswrap .postwrap .post-list ul li{
-		align-items: flex-start;
-	}
-	.newswrap .postwrap .post-list ul li div.date{
-		margin-right: 15px;
-		font-size: 10px;
-		width: 75px;
-	}
 	main.inactive{
-		opacity: .4;
+		//opacity: .4;
 	}
 	body.documentation header .headerline .headercontent .landingmenu nav.mobile > div:last-of-type{
 		display: block;
 	}
 	body.documentation header .headerline .headercontent .landingmenu nav.mobile{
-		display: block;
-		div{
-			color: white;
-			font-size: 22px;
-			font-family: "DuckDB-Symbol";
+		display: flex;
+	}
+	body.documentation main .wrap #main_content_wrap{
+		padding-right: 0;
+		padding-top: 0;
+	}
+	body.documentation .headlinebar .breadcrumbs{
+		width: 100%;
+		order: 2;
+	}
+	body.documentation .headlinebar .versionselect{
+		width: 100%;
+		height: 42px;
+	}
+	body.documentation .headlinebar div.version{
+		position: absolute;
+		order: 1;
+		top: 0;
+		right: unset; 
+		left: 0;
+		> div:first-child{
+			position: relative; 
 		}
+		span.arrow{
+			top: 5px;
+		}
+	}
+	body.documentation .headlinebar .title{
+		order: 3;
+		margin-top: 5px;
 	}
 	body.documentation{
 		header .headerline .headercontent .landingmenu nav{
@@ -315,6 +327,9 @@
 				    -ms-transform: translateX(0%);
 				        transform: translateX(0%);
 			}
+			.opensearch{
+				display: none;
+			}
 		}
 		main{
 			overflow-x: hidden;
@@ -328,12 +343,6 @@
 				opacity: .4;
 			}
 		}
-		.headlinebar{
-			left: 0px;
-			width: 100%;
-			padding-left: 15px;
-			font-size: 130%;
-		}
 		div.highlight{
 			width: 100%;
 		}
@@ -341,19 +350,7 @@
 			width: 108%;
 		}
 		table{
-			width: 100%;
-			overflow-x: scroll;
-			display: block;
 			border: 0;
-			&::-webkit-scrollbar {
-			  height: 5px;
-			}
-			&::-webkit-scrollbar-track {
-			  background: #D9D9D9;
-			}
-			&::-webkit-scrollbar-thumb {
-			  background: #b5b5b5;
-			}
 		}
 	}
 	body.landing .stickerbanner{
@@ -370,43 +367,11 @@
 	
 	.newswrap{
 		display: block;
-		.sidebar{
-			width: 100%;
-			/*
-			position: fixed;
-			right: 0;
-			width: 75%;
-			-webkit-transform: translateX(100%);
-			    -ms-transform: translateX(100%);
-			        transform: translateX(100%);
-			-webkit-transition: -webkit-transform .5s;
-			transition: -webkit-transform .5s;
-			-o-transition: transform .5s;
-			transition: transform .5s;
-			transition: transform .5s, -webkit-transform .5s;
-			padding-top: 14px;
-			&.slidein{
-				-webkit-transform: translateX(0%);
-				    -ms-transform: translateX(0%);
-				        transform: translateX(0%);
-			}
-			*/
-		}
 	}
-	.newswrap .postwrap .infoline span:first-child{
-		margin-right: 30px;
-	}
-	.newswrap .sidebar .newsarchive{
-		margin-top: 0px;
-	}
-	.newswrap .sidebar .latestnews{
-		display: none;
-	}
-	body.documentation .headlinebar > div.version{
-		padding-right: 15px;
-	}
-	.versionsidebar{
-		width: 115px;
+	body.documentation .headlinebar{
+		position: relative;
+		width: 100%;
+		margin-left: 0;
 	}
 	footer .sitefooter .footercontent{
 		column-gap: 0;
@@ -422,14 +387,21 @@
 	.searchoverlay{
 		z-index: 1000;
 	}
-	.searchoverlay > div{
-		left: 0;
-		width: 100%;
-		padding: 25px 15px 15px 15px;
-	}
 	.searchoverlay > div form input{
 		background: white;
 		padding-left: 10px;
+	}
+	body.landing footer .sitefooter .footercontent .footernavigation,
+	.sitefooter .footercontent .footernavigation{
+		column-gap: 30px;
+		row-gap: 40px;
+		flex-wrap: wrap;
+		>div{
+			width: calc(50% - 15px);
+		}
+		a{
+			line-height: 1.5;
+		}
 	}
 }
 
@@ -465,10 +437,6 @@
 	body.landing .welcome .mainlinks ul{
 		margin-top: 60px;
 	}
-	.newswrap .postwrap .postcontent p, .newswrap .postwrap .postcontent ul li, .newswrap .postwrap .postcontent ol li{
-		font-size: 17px;
-		line-height: 27.5px;
-	}
 	.newswrap .postwrap .singleentry h1{
 		font-size: 30px; 
 		line-height: 34px; 
@@ -486,5 +454,14 @@
 	body.installation .output .result a{
 		word-break: break-all;
 		word-break: break-word;
+	}
+	.pagemeta{
+		flex-wrap: wrap;
+		>div{
+			width: 100%;
+		}
+		>div:first-child{
+			margin-bottom: 0.8em;
+		}
 	}
 }

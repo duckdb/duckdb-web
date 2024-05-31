@@ -1,138 +1,88 @@
 ---
 layout: docu
-title: ODBC API - Linux
+title: ODBC API on Linux
 ---
+
+
+## Driver Manager
 
 A driver manager is required to manage communication between applications and the ODBC driver.
 We tested and support `unixODBC` that is a complete ODBC driver manager for Linux.
 Users can install it from the command line:
 
-## Debian SO Flavors
+On Debian-based distributions (Ubuntu, Mint, etc.), run:
 
 ```bash
-sudo apt get install unixodbc
+sudo apt-get install unixodbc odbcinst
 ```
 
-## Fedora SO Flavors
+On Fedora-based distributions (Amazon Linux, RHEL, CentOS, etc.), run:
 
 ```bash
-sudo yum install unixodbc
-# or
-sudo dnf install unixodbc
+sudo yum install unixODBC
 ```
 
-## Step 1: Download ODBC Driver
+## Setting Up the Driver
 
-DuckDB releases the ODBC driver as asset. For linux, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip">ODBC Linux Asset</a> that contains the following artifacts:
+1. Download the ODBC Linux Asset corresponding to your architecture:
 
-**libduckdb_odbc.so**: the DuckDB driver compiled to Ubuntu 16.04.
+   <!-- markdownlint-disable MD034 -->
 
-**unixodbc_setup.sh**: a setup script to aid the configuration on Linux.
+   * [x86_64 (AMD64)](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip)
+   * [arm64](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-aarch64.zip)
 
-## Step 2: Extracting ODBC Artifacts
+   <!-- markdownlint-enable MD034 -->
 
-Run unzip to extract the files to a permanent directory:
+2. The package contains the following files:
 
-```bash
-mkdir duckdb_odbc
-unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
-```
+   * `libduckdb_odbc.so`: the DuckDB driver.
+   * `unixodbc_setup.sh`: a setup script to aid the configuration on Linux.
 
-## Step 3: Configuring with unixODBC
+   To extract them, run:
 
-The `unixodbc_setup.sh` script aids the configuration of the DuckDB ODBC Driver.
-It is based on the unixODBC package that provides some commands to handle the ODBC setup and test like `odbcinst` and `isql`.
+   ```bash
+   mkdir duckdb_odbc && unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
+   ```
 
-In a terminal window, change to the `duckdb_odbc` permanent directory, and run the following commands with level options `-u` or `-s` either to configure DuckDB ODBC.
+3. The `unixodbc_setup.sh` script performs the configuration of the DuckDB ODBC Driver. It is based on the unixODBC package that provides some commands to handle the ODBC setup and test like `odbcinst` and `isql`.
 
-### User-Level ODBC Setup (**-u**)
+   Run the following commands with either option `-u` or `-s` to configure DuckDB ODBC.
 
-The `-u` option based on the user home directory to setup the ODBC init files.
+   The `-u` option based on the user home directory to setup the ODBC init files.
 
-```bash
-unixodbc_setup.sh -u
-```
+   ```bash
+   ./unixodbc_setup.sh -u
+   ```
 
-P.S.: The default configuration consists of a database `:memory:`.
+   The `-s` option changes the system level files that will be visible for all users, because of that it requires root privileges.
 
-### System-Level ODBC setup (**-s**)
+   ```bash
+   sudo ./unixodbc_setup.sh -s
+   ```
 
-The **-s** changes the system level files that will be visible for all users, because of that it requires root privileges.
+   The option `--help` shows the usage of `unixodbc_setup.sh` prints the help.
 
-```bash
-sudo unixodbc_setup.sh -s
-```
-P.S.: The default configuration consists of a database `:memory:`.
+   ```bash
+   ./unixodbc_setup.sh --help
+   ```
 
+   ```text
+   Usage: ./unixodbc_setup.sh <level> [options]
 
-### Show Usage (**--help**)
+   Example: ./unixodbc_setup.sh -u -db ~/database_path -D ~/driver_path/libduckdb_odbc.so
 
-The option `--help` shows the usage of `unixodbc_setup.sh` that provides alternative options for a customer configuration, like `-db` and `-D`.
+   Level:
+   -s: System-level, using 'sudo' to configure DuckDB ODBC at the system-level, changing the files: /etc/odbc[inst].ini
+   -u: User-level, configuring the DuckDB ODBC at the user-level, changing the files: ~/.odbc[inst].ini.
 
-```bash
-unixodbc_setup.sh --help
+   Options:
+   -db database_path>: the DuckDB database file path, the default is ':memory:' if not provided.
+   -D driver_path: the driver file path (i.e., the path for libduckdb_odbc.so), the default is using the base script directory
+   ```
 
-Usage: ./unixodbc_setup.sh <level> [options]
+4. The ODBC setup on Linux is based on the `.odbc.ini` and `.odbcinst.ini` files.
 
-Example: ./unixodbc_setup.sh -u -db ~/database_path -D ~/driver_path/libduckdb_odbc.so
+   These files can be placed to the user home directory `/home/⟨username⟩` or in the system `/etc` directory.
+   The Driver Manager prioritizes the user configuration files over the system files.
 
-Level:
--s: System-level, using 'sudo' to configure DuckDB ODBC at the system-level, changing the files: /etc/odbc[inst].ini
--u: User-level, configuring the DuckDB ODBC at the user-level, changing the files: ~/.odbc[inst].ini.
-
-Options:
--db database_path>: the DuckDB database file path, the default is ':memory:' if not provided.
--D driver_path: the driver file path (i.e., the path for libduckdb_odbc.so), the default is using the base script directory
-```
-
-## Step 4 (Optional): Configure the ODBC Driver
-
-The ODBC setup on Linux is based on files, the well-known `.odbc.ini` and `.odbcinst.ini`.
-These files can be placed at the system `/etc` directory or at the user home directory `/home/<user>` (shortcut as `~/`).
-The DM prioritizes the user configuration files and then the system files.
-
-### The `.odbc.ini` File
-
-The `.odbc.ini` contains the DSNs for the drivers, which can have specific knobs.
-
-An example of `.odbc.ini` with DuckDB would be:
-
-```ini
-[DuckDB]
-Driver = DuckDB Driver
-Database = :memory:
-```
-
-**[DuckDB]**: between the brackets is a DSN for the DuckDB.
-
-**Driver**: it describes the driver's name, and other configurations will be placed at the **.odbcinst.ini**.
-
-**Database**: it describes the database name used by DuckDB, and it can also be a file path to a `.db` in the system.
-
-### The `.odbcinst.ini` File
-
-The `.odbcinst.ini` contains general configurations for the ODBC installed drivers in the system.
-A driver section starts with the driver name between brackets, and then it follows specific configuration knobs belonging to that driver.
-
-An example of `.odbcinst.ini` with the DuckDB driver would be:
-
-```ini
-[ODBC]
-Trace = yes
-TraceFile = /tmp/odbctrace
-
-[DuckDB Driver]
-Driver = /home/<user>/duckdb_odbc/libduckdb_odbc.so
-```
-
-
-**[ODBC]**: it is the DM configuration section.
-
-**Trace**: it enables the ODBC trace file using the option `yes`.
-
-**TraceFile**: the absolute system file path for the ODBC trace file.
-
-
-**[DuckDB Driver]**: the section of the DuckDB installed driver.
-
-**Driver**: the absolute system file path of the DuckDB driver.
+   For the details of the configuration parameters, see the [ODBC configuration page](configuration).

@@ -1,31 +1,30 @@
 <nav>
 	<div class="search_icon"></div>
-	{% assign archive_url_slug = '/docs/archive/' | append: site.currentduckdbversion %}
+	{% assign archive_url_slug = '/docs' %}
 	{% if site.data.secondarymenu.toc2[0] %}
 		{% for item in site.data.secondarymenu.toc2 %}
 			{% if item.mainfolderitems[0] %}
 			{% for mainentry in item.mainfolderitems %}
-			{% if mainentry.subfolderitems[0] %} <div> {% endif %}
-				{% if mainentry.subfolderitems[0] %} <div class="hasSub"> {% endif %}
+			{% if mainentry.subfolderitems[0] %}<div>{% endif %}
+				{% if mainentry.subfolderitems[0] %}<div class="hasSub" >{% endif %}
 					{% if mainentry.url %}
 						{% assign myurl = mainentry.url | slice: 0, 5 %}
 						{% if myurl == 'https' or myurl == 'http:' %}
-						<div class="external"><a href="{{ mainentry.url }}" target="_blank" >{{ mainentry.page }}</a>{% if mainentry.page == 'GitHub' and site.star_count %} <span class="starcount">{{ site.star_count }}</span> {% endif %} </div>
+						<div class="external"><a href="{{ mainentry.url }}" target="_blank" class="{{ mainentry.page | downcase }}">{{ mainentry.page }} {% if mainentry.page == 'GitHub' and site.star_count %} <span class="starcount">{{ site.star_count }}</span>{% endif %}</a></div>
 						{% else %}
-						<div><a href="{{ site.baseurl }}{{ mainentry.url | replace: '/docs', archive_url_slug }}">{{ mainentry.page }}</a>
-				</div>
+						<div><a href="{{ site.baseurl }}{{ mainentry.url | replace: '/docs', archive_url_slug }}">{{ mainentry.page }}</a></div>
 						{% endif %}
-					{% else %} <a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>{% endif %}
-			   {% if mainentry.subfolderitems[0] %} </div> {% endif %}
+					{% else %}<a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>{% endif %}
+			    {% if mainentry.subfolderitems[0] %}</div>{% endif %}
 		
 				{% if mainentry.subfolderitems[0] %}
 					<ul>
 						{% for entry in mainentry.subfolderitems %}
-						<li>&nbsp;{% if entry.url %} <a href="{{ site.baseurl }}{{ entry.url | replace: '/docs', archive_url_slug }}">{{ entry.page }}</a> {% else %} {{ entry.page }} {% endif %}  </li>
+						<li>{% if entry.url %}<a href="{{ site.baseurl }}{{ entry.url | replace: '/docs', archive_url_slug }}">{{ entry.page }}</a> {% else %} {{ entry.page }} {% endif %}</li>
 						{% if entry.subsubfolderitems[0] %}
 						<ul>
 							{% for subentry in entry.subsubfolderitems %}
-							<li>&nbsp;&nbsp;{% if subentry.url %}<a href="{{ site.baseurl }}{{ subentry.url | replace: '/docs', archive_url_slug }}">{{ subentry.page }}</a> {% else %} {{ subentry.page }} {% endif %} </li>
+							<li>{% if subentry.url %}<a href="{{ site.baseurl }}{{ subentry.url | replace: '/docs', archive_url_slug }}">{{ subentry.page }}</a> {% else %} {{ subentry.page }} {% endif %}</li>
 							{% endfor %}
 						</ul>
 						{% endif %}
@@ -38,4 +37,5 @@
 			{% endif %}
 		{% endfor %}
 	{% endif %}
+	<div class="onlymobile external"><a href="https://duckdblabs.com/#support" target="_blank">Support</a></div>
 </nav>

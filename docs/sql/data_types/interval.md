@@ -15,28 +15,53 @@ Intervals represent a period of time. This period can be measured in a specific 
 An `INTERVAL` can be constructed by providing an amount together with a unit.
 Intervals can be added or subtracted from `DATE` or `TIMESTAMP` values.
 
+## Examples
+
+1 year:
+
 ```sql
--- 1 year
 SELECT INTERVAL 1 YEAR;
--- add 1 year to a specific date
+```
+
+Add 1 year to a specific date:
+
+```sql
 SELECT DATE '2000-01-01' + INTERVAL 1 YEAR;
--- subtract 1 year from a specific date
+```
+
+Subtract 1 year from a specific date:
+
+```sql
 SELECT DATE '2000-01-01' - INTERVAL 1 YEAR;
--- construct an interval from a column, instead of a constant
+```
+
+Construct an interval from a column, instead of a constant:
+
+```sql
 SELECT INTERVAL (i) YEAR FROM range(1, 5) t(i);
--- construct an interval with mixed units
+```
+
+Construct an interval with mixed units:
+
+```sql
 SELECT INTERVAL '1 month 1 day';
--- intervals greater than 24 hours/12 months/etc. are supported
+```
+
+Intervals greater than 24 hours/12 months/etc. are supported:
+
+```sql
 SELECT '540:58:47.210'::INTERVAL;
 SELECT INTERVAL '16 MONTHS';
-
--- WARNING:
--- If a decimal value is specified, it will be automatically rounded to an integer
--- To use more precise values, simply use a more granular date part 
--- (In this example use 18 MONTHS instead of 1.5 YEARS)
--- The statement below is equivalent to to_years(CAST(1.5 AS INTEGER))
-SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years!
 ```
+
+> Warning  If a decimal value is specified, it will be automatically rounded to an integer.
+> To use more precise values, simply use a more granular date part
+> In this example, use `18 MONTHS` instead of `1.5 YEARS`.
+> The statement below is equivalent to `to_years(CAST(1.5 AS INTEGER))`
+>
+> ```sql
+> SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years!
+> ```
 
 ## Details
 
@@ -45,7 +70,8 @@ The interval class represents a period of time using three distinct components: 
 The division into components makes the interval class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
 
 ```sql
-SELECT DATE '2000-01-01' + INTERVAL (i) MONTH FROM range(12) t(i);
+SELECT DATE '2000-01-01' + INTERVAL (i) MONTH
+FROM range(12) t(i);
 ```
 
 ## Difference between Dates
@@ -55,28 +81,20 @@ If we subtract two timestamps from one another, we obtain an interval describing
 ```sql
 SELECT TIMESTAMP '2000-02-01 12:00:00' - TIMESTAMP '2000-01-01 11:00:00' AS diff;
 ```
-```text
-┌──────────────────┐
-│       diff       │
-│     interval     │
-├──────────────────┤
-│ 31 days 01:00:00 │
-└──────────────────┘
-```
+
+|       diff       |
+|------------------|
+| 31 days 01:00:00 |
 
 The `datediff` function can be used to obtain the difference between two dates for a specific unit.
 
 ```sql
 SELECT datediff('month', TIMESTAMP '2000-01-01 11:00:00', TIMESTAMP '2000-02-01 12:00:00') AS diff;
 ```
-```text
-┌───────┐
-│ diff  │
-│ int64 │
-├───────┤
-│     1 │
-└───────┘
-```
+
+| diff |
+|-----:|
+| 1    |
 
 ## Functions
 

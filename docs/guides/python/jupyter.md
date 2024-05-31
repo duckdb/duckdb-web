@@ -3,10 +3,10 @@ layout: docu
 title: Jupyter Notebooks
 ---
 
-DuckDB's Python client can be used directly in Jupyter notebooks with no additional configuration if desired. 
-However, additional libraries can be used to simplify SQL query development. 
+DuckDB's Python client can be used directly in Jupyter notebooks with no additional configuration if desired.
+However, additional libraries can be used to simplify SQL query development.
 This guide will describe how to utilize those additional libraries.
-See other guides in the Python section for how to use DuckDB and Python together.  
+See other guides in the Python section for how to use DuckDB and Python together.
 
 In this example, we use the [JupySQL](https://github.com/ploomber/jupysql) package.
 
@@ -14,7 +14,8 @@ This example workflow is also available as a [Google Colab notebook](https://col
 
 ## Library Installation
 
-Four additional libraries improve the DuckDB experience in Jupyter notebooks. 
+Four additional libraries improve the DuckDB experience in Jupyter notebooks.
+
 1. [jupysql](https://github.com/ploomber/jupysql)
     * Convert a Jupyter code cell into a SQL cell
 2. [Pandas](https://github.com/pandas-dev/pandas)
@@ -24,19 +25,28 @@ Four additional libraries improve the DuckDB experience in Jupyter notebooks.
 4. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
     * Used by SQLAlchemy to connect to DuckDB (optional)
 
-```python
-# Run these pip install commands from the command line if Jupyter Notebook is not yet installed.
-# Otherwise, see Google Collab link above for an in-notebook example
+Run these pip install commands from the command line if Jupyter Notebook is not yet installed. Otherwise, see Google Colab link above for an in-notebook example:
+
+```bash
 pip install duckdb
+```
 
-# Install Jupyter Notebook (Note: you can also install JupyterLab: pip install jupyterlab) 
+Install Jupyter Notebook
+
+```bash
 pip install notebook
+```
 
-# Install supporting libraries
-pip install jupysql
-pip install pandas
-pip install matplotlib
-pip install duckdb-engine
+Or JupyterLab:
+
+```bash
+pip install jupyterlab
+```
+
+Install supporting libraries:
+
+```bash
+pip install jupysql pandas matplotlib duckdb-engine
 ```
 
 ## Library Import and Configuration
@@ -71,6 +81,7 @@ import pandas as pd
 ```
 
 Set configurations on jupysql to directly output data to Pandas and to simplify the output that is printed to the notebook.
+
 ```python
 %config SqlMagic.autopandas = True
 %config SqlMagic.feedback = False
@@ -78,23 +89,32 @@ Set configurations on jupysql to directly output data to Pandas and to simplify 
 ```
 
 Connect jupysql to DuckDB using a SQLAlchemy-style connection string.
-Either connect to a new in-memory DuckDB, the default connection or a file backed db.
+Either connect to a new [in-memory DuckDB](../../api/python/dbapi#in-memory-connection), the [default connection](../../api/python/dbapi#default-connection) or a file backed database:
+
+```python
+%sql duckdb:///:memory:
+```
 
 ```python
 %sql duckdb:///:default:
-# %sql duckdb:///:memory:
-# %sql duckdb:///path/to/file.db
+```
+
+```python
+%sql duckdb:///path/to/file.db
 ```
 
 > The `%sql` command and `duckdb.sql` share the same [default connection](../../api/python/dbapi) if you provide `duckdb:///:default:` as the SQLAlchemy connection string.
 
 ## Querying DuckDB
 
-Single line SQL queries can be run using `%sql` at the start of a line. Query results will be displayed as a Pandas DF.
+Single line SQL queries can be run using `%sql` at the start of a line. Query results will be displayed as a Pandas DataFrame.
+
 ```sql
-%sql SELECT 'Off and flying!' AS a_duckdb_column
+%sql SELECT 'Off and flying!' AS a_duckdb_column;
 ```
-An entire Jupyter cell can be used as a SQL cell by placing `%%sql` at the start of the cell. Query results will be displayed as a Pandas DF.
+
+An entire Jupyter cell can be used as a SQL cell by placing `%%sql` at the start of the cell. Query results will be displayed as a Pandas DataFrame.
+
 ```sql
 %%sql
 SELECT
@@ -102,26 +122,31 @@ SELECT
     function_name
 FROM duckdb_functions()
 ORDER BY ALL DESC
-LIMIT 5
+LIMIT 5;
 ```
 
 To store the query results in a Python variable, use `<<` as an assignment operator.
 This can be used with both the `%sql` and `%%sql` Jupyter magics.
+
 ```sql
-%sql res << SELECT 'Off and flying!' AS a_duckdb_column
+%sql res << SELECT 'Off and flying!' AS a_duckdb_column;
 ```
+
 If the `%config SqlMagic.autopandas = True` option is set, the variable is a Pandas dataframe, otherwise, it is a `ResultSet` that can be converted to Pandas with the `DataFrame()` function.
 
 ## Querying Pandas Dataframes
 
 DuckDB is able to find and query any dataframe stored as a variable in the Jupyter notebook.
+
 ```python
 input_df = pd.DataFrame.from_dict({"i": [1, 2, 3],
                                    "j": ["one", "two", "three"]})
 ```
+
 The dataframe being queried can be specified just like any other table in the `FROM` clause.
+
 ```sql
-%sql output_df << SELECT sum(i) AS total_i FROM input_df
+%sql output_df << SELECT sum(i) AS total_i FROM input_df;
 ```
 
 ## Visualizing DuckDB Data
@@ -129,9 +154,9 @@ The dataframe being queried can be specified just like any other table in the `F
 The most common way to plot datasets in Python is to load them using Pandas and then use matplotlib or seaborn for plotting.
 This approach requires loading all data into memory which is highly inefficient.
 The plotting module in JupySQL runs computations in the SQL engine.
-This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, efficiently plotting massive datasets. 
+This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, efficiently plotting massive datasets.
 
-### Install and Load DuckDB httpfs extension
+### Install and Load DuckDB httpfs Extension
 
 DuckDB's [httpfs extension](../../extensions/httpfs) allows Parquet and CSV files to be queried remotely over http.
 These examples query a Parquet file that contains historical taxi data from NYC.
@@ -157,23 +182,23 @@ In this case, the name of the table is the URL of the remotely stored Parquet fi
 ![Boxplot of the trip_distance column](/images/trip-distance-boxplot.png)
 
 
-Now, create a query that filters by the 90th percentile. 
-Note the use of the `--save`, and `--no-execute` functions. 
+Now, create a query that filters by the 90th percentile.
+Note the use of the `--save`, and `--no-execute` functions.
 This tells JupySQL to store the query, but skips execution. It will be referenced in the next plotting call.
 
 
 ```python
-%%sql --save short-trips --no-execute
+%%sql --save short_trips --no-execute
 SELECT *
 FROM 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet'
 WHERE trip_distance < 6.3
 ```
 
-To create a histogram, call `%sqlplot histogram` and pass the name of the table, the column to plot, and the number of bins. 
+To create a histogram, call `%sqlplot histogram` and pass the name of the table, the column to plot, and the number of bins.
 This uses `--with short-trips` so JupySQL uses the query defined previously and therefore only plots a subset of the data.
 
 ```python
-%sqlplot histogram --table short-trips --column trip_distance --bins 10 --with short-trips
+%sqlplot histogram --table short_trips --column trip_distance --bins 10 --with short_trips
 ```
 
 

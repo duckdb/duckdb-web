@@ -1,10 +1,10 @@
 ---
 layout: docu
-title: C API - Configuration
+title: Configuration
 ---
 
 Configuration options can be provided to change different settings of the database system. Note that many of these
-settings can be changed later on using [PRAGMA statements](../../sql/pragmas) as well. The configuration object
+settings can be changed later on using [`PRAGMA` statements](../../configuration/pragmas) as well. The configuration object
 should be created, filled with values and passed to `duckdb_open_ext`.
 
 ## Example
@@ -52,6 +52,7 @@ duckdb_close(&db);
 ---
 Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
 through `duckdb_open_ext`.
+The duckdb_config must be destroyed using 'duckdb_destroy_config'
 
 This will always succeed unless there is a malloc failure.
 
@@ -74,7 +75,6 @@ The result configuration object.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
-
 
 ### `duckdb_config_count`
 
@@ -99,7 +99,6 @@ This should not be called in a loop as it internally loops over all the options.
 The amount of config options available.
 
 <br>
-
 
 ### `duckdb_get_config_flag`
 
@@ -136,7 +135,6 @@ A description of the configuration flag.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
-
 
 ### `duckdb_set_config`
 
@@ -176,11 +174,10 @@ The value to set the configuration flag to.
 
 <br>
 
-
 ### `duckdb_destroy_config`
 
 ---
-Destroys the specified configuration option and de-allocates all memory allocated for the object.
+Destroys the specified configuration object and de-allocates all memory allocated for the object.
 
 #### Syntax
 
@@ -198,4 +195,3 @@ Destroys the specified configuration option and de-allocates all memory allocate
 The configuration object to destroy.
 
 <br>
-

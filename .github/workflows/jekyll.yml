@@ -33,13 +33,20 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
       - name: Get star count
+        env:
+          GH_TOKEN: ${{ secrets.GH_STAR_COUNT_TOKEN }}
         run: |
-          STAR_COUNT=$(curl -s https://api.github.com/repos/duckdb/duckdb | jq ".stargazers_count")
+          STAR_COUNT=$(gh api repos/duckdb/duckdb | jq ".stargazers_count")
           STAR_COUNT_FORMATTED=$(ruby -e 'printf("%.01fk", ARGV[0].to_i / 1000.0)' ${STAR_COUNT})
+          echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
+      - name: Install Python requirements
+        run: pip install -r requirements.txt
+      - name: Fetch release calendar
+        run: python scripts/get_calendar.py
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
         if: github.repository == 'duckdb/duckdb-web'
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
@@ -131,9 +138,9 @@ jobs:
 
       - run: pip install linkchecker --user
 
-      - name: Link Checker on latest
+      - name: Link Checker on stable
         run: |
-          linkchecker https://duckdb.org/ --ignore-url 'https://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
+          linkchecker https://duckdb.org/ --ignore-url 'https?://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
           echo $?
 
       - run: cat report.html >> ${GITHUB_STEP_SUMMARY}

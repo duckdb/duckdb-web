@@ -9,7 +9,7 @@ This can improve readability and is useful for preventing [SQL injections](https
 ## Syntax
 
 There are three syntaxes for denoting parameters in prepared statements:
-auto-incremented (`?`), 
+auto-incremented (`?`),
 positional (`$1`),
 and named (`$param`).
 Note that not all clients support all of these syntaxes, e.g., the [JDBC client](../../api/java) only supports auto-incremented parameters in prepared statements.
@@ -33,11 +33,11 @@ i.e., the position of the parameters in the query corresponds to their position 
 For example:
 
 ```sql
-PREPARE query_person AS 
-SELECT *
-FROM person
-WHERE starts_with(name, ?)
-  AND age >= ?;
+PREPARE query_person AS
+    SELECT *
+    FROM person
+    WHERE starts_with(name, ?)
+      AND age >= ?;
 ```
 
 Using the CLI client, the statement is executed as follows.
@@ -52,11 +52,11 @@ Prepared statements can use positional parameters, where parameters are denoted 
 For example:
 
 ```sql
-PREPARE query_person AS 
-SELECT *
-FROM person
-WHERE starts_with(name, $2)
-  AND age >= $1;
+PREPARE query_person AS
+    SELECT *
+    FROM person
+    WHERE starts_with(name, $2)
+      AND age >= $1;
 ```
 
 Using the CLI client, the statement is executed as follows.
@@ -72,15 +72,29 @@ DuckDB also supports names parameters where parameters are denoted with `$parame
 For example:
 
 ```sql
-PREPARE query_person AS 
-SELECT *
-FROM person
-WHERE starts_with(name, $name_start_letter)
-  AND age >= $minimum_age;
+PREPARE query_person AS
+    SELECT *
+    FROM person
+    WHERE starts_with(name, $name_start_letter)
+      AND age >= $minimum_age;
 ```
 
 Using the CLI client, the statement is executed as follows.
 
 ```sql
 EXECUTE query_person(name_start_letter := 'B', minimum_age := 40);
+```
+
+## Dropping Prepared Statements: `DEALLOCATE`
+
+To drop a prepared statement, use the `DEALLOCATE` statement:
+
+```sql
+DEALLOCATE query_person;
+```
+
+Alternatively, use:
+
+```sql
+DEALLOCATE PREPARE query_person;
 ```

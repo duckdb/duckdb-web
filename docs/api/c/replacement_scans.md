@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Replacement Scans
+title: Replacement Scans
 ---
 
 The replacement scan API can be used to register a callback that is called when a table is read that does not exist in the catalog. For example, when a query such as `SELECT * FROM my_table` is executed and `my_table` does not exist, the replacement scan callback will be called with `my_table` as parameter. The replacement scan can then insert a table function with a specific parameter to replace the read of the table.
@@ -18,7 +18,7 @@ The replacement scan API can be used to register a callback that is called when 
 ### `duckdb_add_replacement_scan`
 
 ---
-Add a replacement scan definition to the specified database
+Add a replacement scan definition to the specified database.
 
 #### Syntax
 
@@ -49,11 +49,10 @@ The delete callback to call on the extra data, if any
 
 <br>
 
-
 ### `duckdb_replacement_scan_set_function_name`
 
 ---
-Sets the replacement function name to use. If this function is called in the replacement callback,
+Sets the replacement function name. If this function is called in the replacement callback,
 the replacement scan is performed. If it is not called, the replacement callback is not performed.
 
 #### Syntax
@@ -76,7 +75,6 @@ The info object
 The function name to substitute.
 
 <br>
-
 
 ### `duckdb_replacement_scan_add_parameter`
 
@@ -104,7 +102,6 @@ The parameter to add.
 
 <br>
 
-
 ### `duckdb_replacement_scan_set_error`
 
 ---
@@ -130,4 +127,3 @@ The info object
 The error message
 
 <br>
-

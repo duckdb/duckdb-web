@@ -1,13 +1,9 @@
 ---
-
 layout: post
 title:  "Querying Parquet with Precision using DuckDB"
 author: Hannes Mühleisen and Mark Raasveldt
-excerpt_separator: <!--more-->
-
+excerpt: DuckDB, a free and open source analytical data management system, can run SQL queries directly on Parquet files and automatically take advantage of the advanced features of the Parquet format.
 ---
-
-_TL;DR: DuckDB, a free and open source analytical data management system, can run SQL queries directly on Parquet files and automatically take advantage of the advanced features of the Parquet format._
 
 Apache Parquet is the most common "Big Data" storage format for analytics. In Parquet files, data is stored in a columnar-compressed binary format. Each Parquet file stores a single table. The table is partitioned into row groups, which each contain a subset of the rows of the table. Within a row group, the table data is stored in a columnar fashion.
 
@@ -54,7 +50,7 @@ Let us dive into the previous query to better understand the power of the Parque
 ```sql
 SELECT COUNT(*)
 FROM 'taxi_2019_04.parquet'
-WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20'
+WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20';
 ```
 
 In this query, we read a single column from our Parquet file (`pickup_at`). Any other columns stored in the Parquet file can be entirely skipped, as we do not need them to answer our query.

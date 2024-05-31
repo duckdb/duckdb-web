@@ -10,7 +10,7 @@ DuckDB supports profiling queries via the `EXPLAIN` and `EXPLAIN ANALYZE` statem
 To see the query plan of a query without executing it, run:
 
 ```sql
-EXPLAIN <query>;
+EXPLAIN ⟨query⟩;
 ```
 
 The output of `EXPLAIN` contains the estimated cardinalities for each operator.
@@ -20,7 +20,7 @@ The output of `EXPLAIN` contains the estimated cardinalities for each operator.
 To profile a query, run:
 
 ```sql
-EXPLAIN ANALYZE <query>;
+EXPLAIN ANALYZE ⟨query⟩;
 ```
 
 The `EXPLAIN ANALYZE` statement runs the query, and shows the actual cardinalities for each operator,

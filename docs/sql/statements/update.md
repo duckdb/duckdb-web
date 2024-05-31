@@ -8,11 +8,19 @@ The `UPDATE` statement modifies the values of rows in a table.
 
 ## Examples
 
+For every row where `i` is `NULL`, set the value to 0 instead:
+
 ```sql
--- for every row where "i" is NULL, set the value to 0 instead
-UPDATE tbl SET i = 0 WHERE i IS NULL;
--- set all values of "i" to 1 and all values of "j" to 2
-UPDATE tbl SET i = 1, j = 2;
+UPDATE tbl
+SET i = 0
+WHERE i IS NULL;
+```
+
+Set all values of `i` to 1 and all values of `j` to 2:
+
+```sql
+UPDATE tbl
+SET i = 1, j = 2;
 ```
 
 ## Syntax
@@ -26,16 +34,18 @@ UPDATE tbl SET i = 1, j = 2;
 A table can be updated based upon values from another table. This can be done by specifying a table in a `FROM` clause, or using a sub-select statement. Both approaches have the benefit of completing the `UPDATE` operation in bulk for increased performance.
 
 ```sql
-CREATE OR REPLACE TABLE original AS 
-    SELECT 1 AS key, 'original value' AS value 
-    UNION ALL 
+CREATE OR REPLACE TABLE original AS
+    SELECT 1 AS key, 'original value' AS value
+    UNION ALL
     SELECT 2 AS key, 'original value 2' AS value;
-CREATE OR REPLACE TABLE new AS 
-    SELECT 1 AS key, 'new value' AS value 
-    UNION ALL 
+
+CREATE OR REPLACE TABLE new AS
+    SELECT 1 AS key, 'new value' AS value
+    UNION ALL
     SELECT 2 AS key, 'new value 2' AS value;
 
-SELECT * FROM original;
+SELECT *
+FROM original;
 ```
 
 <div class="narrow_table"></div>
@@ -47,12 +57,16 @@ SELECT * FROM original;
 
 
 ```sql
-UPDATE original 
-    SET value = new.value 
-    FROM new 
+UPDATE original
+    SET value = new.value
+    FROM new
     WHERE original.key = new.key;
--- OR
-UPDATE original 
+```
+
+OR:
+
+```sql
+UPDATE original
     SET value = (
         SELECT
             new.value
@@ -62,7 +76,8 @@ UPDATE original
 ```
 
 ```sql
-SELECT * FROM original;
+SELECT *
+FROM original;
 ```
 
 <div class="narrow_table"></div>
@@ -75,14 +90,14 @@ SELECT * FROM original;
 ## Update from Same Table
 
 The only difference between this case and the above is that a different table alias must be specified on both the target table and the source table.
-In this example `as true_original` and `as new` are both required. 
+In this example `AS true_original` and `AS new` are both required.
 
 ```sql
-UPDATE original as true_original
+UPDATE original AS true_original
     SET value = (
         SELECT
-            new.value || ' a change!' as value
-        FROM original as new
+            new.value || ' a change!' AS value
+        FROM original AS new
         WHERE true_original.key = new.key
     );
 ```
@@ -109,18 +124,15 @@ WHERE city.country_code = country.code
 ```
 
 ```sql
-SELECT * FROM city;
+SELECT *
+FROM city;
 ```
-```text
-┌──────────┬─────────┬──────────────┐
-│   name   │ revenue │ country_code │
-│ varchar  │  int64  │   varchar    │
-├──────────┼─────────┼──────────────┤
-│ Paris    │     800 │ FR           │
-│ Lyon     │     300 │ FR           │
-│ Brussels │     400 │ BE           │
-└──────────┴─────────┴──────────────┘
-```
+
+|   name   | revenue | country_code |
+|----------|--------:|--------------|
+| Paris    | 800     | FR           |
+| Lyon     | 300     | FR           |
+| Brussels | 400     | BE           |
 
 ## Upsert (Insert or Update)
 

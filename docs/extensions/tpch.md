@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: TPC-H Extension
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/tpch
 ---
 
 The `tpch` extension implements the data generator and queries for the [TPC-H benchmark](https://www.tpc.org/tpch/).
@@ -46,18 +47,14 @@ To run a query, e.g., query 4, use:
 ```sql
 PRAGMA tpch(4);
 ```
-```text
-┌─────────────────┬─────────────┐
-│ o_orderpriority │ order_count │
-│     varchar     │    int64    │
-├─────────────────┼─────────────┤
-│ 1-URGENT        │       21188 │
-│ 2-HIGH          │       20952 │
-│ 3-MEDIUM        │       20820 │
-│ 4-NOT SPECIFIED │       21112 │
-│ 5-LOW           │       20974 │
-└─────────────────┴─────────────┘
-```
+
+| o_orderpriority | order_count |
+|-----------------|------------:|
+| 1-URGENT        | 10594       |
+| 2-HIGH          | 10476       |
+| 3-MEDIUM        | 10410       |
+| 4-NOT SPECIFIED | 10556       |
+| 5-LOW           | 10487       |
 
 ### Listing Queries
 
@@ -108,8 +105,4 @@ CALL dbgen(sf = 300, children = 10, step = 9);
 ## Limitations
 
 * The data generator function `dbgen` is single-threaded and does not support concurrency. Running multiple steps to parallelize over different partitions is also not supported at the moment.
-* The `tpch({query_id})` function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters). It is not possible to change the query parameters using the `tpch` extension.
-
-## GitHub
-
-The `tpch` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/tpch).
+* The `tpch(⟨query_id⟩)` function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters). It is not possible to change the query parameters using the `tpch` extension.

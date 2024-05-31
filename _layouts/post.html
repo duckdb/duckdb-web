@@ -6,7 +6,7 @@
 	{% if page.title == "DuckDB" %}
     <title>{{ page.title }}</title>
 	{% else %}
-    <title>{{ page.title }} - DuckDB</title>
+    <title>{{ page.title }} – DuckDB</title>
 	{% endif %}
 	
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css?{{ site.data['hash'] }}">
@@ -14,9 +14,6 @@
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css?{{ site.data['hash'] }}">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/blog.css?{{ site.data['hash'] }}">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
-	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-	<link rel="stylesheet" href="/css/railroad.css?{{ site.data['hash'] }}">
-	{% endif %}
 	
 	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon/favicon-32x32.png">
@@ -28,8 +25,15 @@
 	<meta name="msapplication-TileColor" content="#000000">
 	<meta name="msapplication-config" content="{{ site.baseurl }}/images/favicon/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
-	{% seo title=false %}
+	{% if page.url == "/news" or page.url == "/news/" %}
+		{% comment %}
+		<!-- skip description tags for the main blog page -->
+		{% endcomment %}
+	{% else %}
+		{% seo title=false %}
+	{% endif %}
 
 </head>
 <body {% if page.body_class %} class="{{ page.body_class }}" {% endif %}>
@@ -38,9 +42,8 @@
 		<div class="headerline">
 			<div class="headercontent">
 				<div class="duckdbhome">
-					<!--<a href="{{ site.url }}{{ site.baseurl }}/">&#xe900;</a>-->
 					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/logo-dl/DuckDB_Logo.png" alt="DuckDB Logo for Download" class="downloadlogo"></a>
-					<div id="duckdbanimation" style="width: 109px; margin-top: 2px;"></div>
+					<div id="duckdb_logo"></div>
 				</div>
 				<div class="landingmenu">
 					
@@ -52,6 +55,7 @@
 						</div>
 					</div>
 				</div>
+				<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
 			</div>
 		</div>
 	</header>
@@ -61,23 +65,66 @@
 		<div class="newswrap">
 		
 			<div class="postwrap">
-				<div class="headlinebar">Blog</div>
+				{% if page.layoutpart == "postsoverview" %}
+				<div class="pagehead bg1">
+					<div class="wrap">
+						<h1>Blog</h1>
+					</div>
+				</div>
+				{% endif %}
 				<div class="postcontent">
 					{% if page.layoutpart == "postsoverview" %}
 						{% include anchor_headings.html html=content %}
 					{% else %}
 						<div class="singleentry">
-							<div class="infoline"><span>{{ page.date | date: "%Y-%m-%d" }}</span><span>{{ page.author }}</span></div>
+							{% if page.event == true %}<div class="eventdate">{{ page.date | date: "%Y-%m-%d" }}</div>{% endif %}
 							<h1>{{ page.title }}</h1>
+							{% if page.author %}
+							<div class="infoline">
+								<div class="icon">
+									{% assign author = site.data.authors[page.author] %}
+									{% if author %}
+										<img src="{{ author.picture }}" alt="Author Avatar">
+									{% endif %}
+								</div>
+								<div><span class="author">{{ page.author }}</span>{% if page.event != true %}<span>{{ page.date | date: "%Y-%m-%d" }}</span>{% endif %}</div>
+							</div>
+							{% endif %}
+							{% if page.excerpt != "" %}
+								<div class="excerpt">{{ '_TL;DR: ' | append: page.excerpt | append: '_' | markdownify }}</div>
+							{% endif %}
 							{% include anchor_headings.html html=content %}
-							<a href="/news/" class="backtoarchive">back to news archive <span></span></a>
 						</div>
+						<section class="blog recentposts">
+							<div class="wrap">
+								<h1>Recent posts</h1>
+								<div class="newstileswrap">
+									{% for post in site.posts limit:3 %}
+										{% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
+										{% capture month %}{{post.date | date: "%B"}}{% endcapture %}
+										{% assign random_number = forloop.index | modulo: 5 %}
+										<div class="postpreview" data-year="{{year}}" data-month="{{month}}">
+											{% if post.thumb %}
+											<div class="postimg custom" style="background-image: url('{{ post.thumb }}');">
+											{% else %}
+											<div class="postimg bg_{{ random_number }}">
+											{% endif %}
+												<a href="{{ post.url }}" class="blocklink"></a>
+											</div>
+											<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
+											<h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+										</div>
+									{% endfor %}
+								</div>
+								<a href="{{ site.url }}{{ site.baseurl }}/news" class="button transparent arrow-right">All blog posts <span></span></a>
+							</div>
+						</section>
 					{% endif %}
 				</div>
 			</div>
 			
+			{% comment %}
 			<div class="sidebar">
-				
 				<div class="newsarchive">
 					<h1><a href="/news/">Archive</a></h1>
 					{% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
@@ -87,9 +134,7 @@
 					{% endfor %}
 					</ul>
 				</div>
-				
 				<div class="latestnews">
-				
 					<h1><a href="/news/">Latest</a></h1>
 					<ul>
 					  {% for post in site.posts limit:5 %}
@@ -99,9 +144,8 @@
 					  {% endfor %}
 					</ul>
 				</div>
-				
 			</div>
-			
+			{% endcomment %}
 			
 		</div>
 		
@@ -113,11 +157,9 @@
 	
 	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
 	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
-	<script src="{{ site.baseurl }}/js/script.js"></script>
-	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-	<script src="/js/railroad.js"></script>
-	<script src="/js/{{ page.railroad }}"></script>
-	{% endif %}
+	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/copy_button.js"></script>
+	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}"></script>
 
 </body>
 </html>

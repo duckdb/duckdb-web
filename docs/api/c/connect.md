@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Startup & Shutdown
+title: Startup & Shutdown
 ---
 
 To use DuckDB, you must first initialize a `duckdb_database` handle using `duckdb_open()`. `duckdb_open()` takes as parameter the database file to read and write from. The special value `NULL` (`nullptr`) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the process).
@@ -38,7 +38,7 @@ duckdb_close(&db);
 <span class="kt">void</span> <a href="#duckdb_close"><span class="nf">duckdb_close</span></a>(<span class="kt">duckdb_database</span> *<span class="nv">database</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_connect"><span class="nf">duckdb_connect</span></a>(<span class="kt">duckdb_database</span> <span class="nv">database</span>, <span class="kt">duckdb_connection</span> *<span class="nv">out_connection</span>);
 <span class="kt">void</span> <a href="#duckdb_interrupt"><span class="nf">duckdb_interrupt</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
-<span class="nv">duckdb_query_progress_type</span> <a href="#duckdb_query_progress"><span class="nf">duckdb_query_progress</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
+<span class="kt">duckdb_query_progress_type</span> <a href="#duckdb_query_progress"><span class="nf">duckdb_query_progress</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
 <span class="kt">void</span> <a href="#duckdb_disconnect"><span class="nf">duckdb_disconnect</span></a>(<span class="kt">duckdb_connection</span> *<span class="nv">connection</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_library_version"><span class="nf">duckdb_library_version</span></a>();
 </code></pre></div></div>
@@ -48,7 +48,7 @@ duckdb_close(&db);
 ---
 Creates a new database or opens an existing database file stored at the given path.
 If no path is given a new in-memory database is created instead.
-The instantiated database should be closed with 'duckdb_close'
+The instantiated database should be closed with 'duckdb_close'.
 
 #### Syntax
 
@@ -74,11 +74,11 @@ The result database object.
 
 <br>
 
-
 ### `duckdb_open_ext`
 
 ---
 Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the given path.
+The instantiated database should be closed with 'duckdb_close'.
 
 #### Syntax
 
@@ -113,14 +113,13 @@ Note that the error must be freed using `duckdb_free`.
 
 <br>
 
-
 ### `duckdb_close`
 
 ---
 Closes the specified database and de-allocates all memory allocated for that database.
-This should be called after you are done with any database allocated through `duckdb_open`.
+This should be called after you are done with any database allocated through `duckdb_open` or `duckdb_open_ext`.
 Note that failing to call `duckdb_close` (in case of e.g., a program crash) will not cause data corruption.
-Still it is recommended to always correctly close a database object after you are done with it.
+Still, it is recommended to always correctly close a database object after you are done with it.
 
 #### Syntax
 
@@ -139,13 +138,12 @@ The database object to shut down.
 
 <br>
 
-
 ### `duckdb_connect`
 
 ---
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
-The instantiated connection should be closed using 'duckdb_disconnect'
+The instantiated connection should be closed using 'duckdb_disconnect'.
 
 #### Syntax
 
@@ -171,7 +169,6 @@ The result connection object.
 
 <br>
 
-
 ### `duckdb_interrupt`
 
 ---
@@ -190,10 +187,9 @@ Interrupt running query
 ---
 * `connection`
 
-The connection to interruot
+The connection to interrupt
 
 <br>
-
 
 ### `duckdb_query_progress`
 
@@ -203,7 +199,7 @@ Get progress of the running query
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_query_progress_type</span> <span class="nv">duckdb_query_progress</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_query_progress_type</span> <span class="nv">duckdb_query_progress</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> <span class="nv">connection
 </span>);
 </code></pre></div></div>
@@ -219,7 +215,6 @@ The working connection
 -1 if no progress or a percentage of the progress
 
 <br>
-
 
 ### `duckdb_disconnect`
 
@@ -243,7 +238,6 @@ The connection to close.
 
 <br>
 
-
 ### `duckdb_library_version`
 
 ---
@@ -259,4 +253,3 @@ Usually used for developing C extensions that must return this for a compatibili
 </span>);
 </code></pre></div></div>
 <br>
-

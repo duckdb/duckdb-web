@@ -9,38 +9,63 @@ The `SELECT` statement retrieves rows from the database.
 
 ### Examples
 
+Select all columns from the table `tbl`:
+
 ```sql
--- select all columns from the table "tbl"
 SELECT * FROM tbl;
--- select the rows from tbl
+```
+
+Select the rows from `tbl`:
+
+```sql
 SELECT j FROM tbl WHERE i = 3;
--- perform an aggregate grouped by the column "i"
+```
+
+Perform an aggregate grouped by the column "i":
+
+```sql
 SELECT i, sum(j) FROM tbl GROUP BY i;
--- select only the top 3 rows from the tbl
+```
+
+Select only the top 3 rows from the `tbl`:
+
+```sql
 SELECT * FROM tbl ORDER BY i DESC LIMIT 3;
--- join two tables together using the USING clause
-SELECT * FROM t1 JOIN t2 USING(a, b);
--- use column indexes to select the first and third column from the table "tbl"
+```
+
+Join two tables together using the `USING` clause:
+
+```sql
+SELECT * FROM t1 JOIN t2 USING (a, b);
+```
+
+Use column indexes to select the first and third column from the table `tbl`:
+
+```sql
 SELECT #1, #3 FROM tbl;
--- select all unique cities from the addresses table
+```
+
+Select all unique cities from the addresses table:
+
+```sql
 SELECT DISTINCT city FROM addresses;
 ```
 
 ### Syntax
 
-The `SELECT` statement retrieves rows from the database. The canonical order of a select statement is as follows, with less common clauses being indented:
+The `SELECT` statement retrieves rows from the database. The canonical order of a `SELECT` statement is as follows, with less common clauses being indented:
 
 ```sql
-SELECT select_list
-FROM tables
-    USING SAMPLE sample_expr
-WHERE condition
-GROUP BY groups
-HAVING group_filter
-    WINDOW window_expr
-    QUALIFY qualify_filter
-ORDER BY order_expr
-LIMIT n;
+SELECT ⟨select_list⟩
+FROM ⟨tables⟩
+    USING SAMPLE ⟨sample_expression⟩
+WHERE ⟨condition⟩
+GROUP BY ⟨groups⟩
+HAVING ⟨group_filter⟩
+    WINDOW ⟨window_expression⟩
+    QUALIFY ⟨qualify_filter⟩
+ORDER BY ⟨order_expression⟩
+LIMIT ⟨n⟩;
 ```
 
 Optionally, the `SELECT` statement can be prefixed with a [`WITH` clause](../../sql/query_syntax/with).
@@ -53,7 +78,7 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 
 [The `SELECT` clause](../../sql/query_syntax/select) specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions. The `DISTINCT` keyword ensures that only unique tuples are returned.
 
-> Column names are case-insensitive. See the [Rules for Case Sensitivity](../case_sensitivity) for more details.
+> Column names are case-insensitive. See the [Rules for Case Sensitivity](../keywords_and_identifiers#rules-for-case-sensitivity) for more details.
 
 ## `FROM` Clause
 
@@ -65,7 +90,7 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 
 <div id="rrdiagram10"></div>
 
-[The `SAMPLE` clause](../../sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `from` clause (i.e., after any joins, but before the where clause or any aggregates). See the [sample](../../sql/samples) page for more information.
+[The `SAMPLE` clause](../../sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the where clause or any aggregates). See the [sample](../../sql/samples) page for more information.
 
 ## `WHERE` Clause
 
@@ -108,25 +133,21 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 For each table, the [`rowid` pseudocolumn](https://docs.oracle.com/cd/B19306_01/server.102/b14200/pseudocolumns008.htm) returns the row identifiers based on the physical storage.
 
 ```sql
-CREATE TABLE t (id INT, content STRING);
+CREATE TABLE t (id INTEGER, content STRING);
 INSERT INTO t VALUES (42, 'hello'), (43, 'world');
 SELECT rowid, id, content FROM t;
 ```
-```text
-┌───────┬────┬─────────┐
-│ rowid │ id │ content │
-├───────┼────┼─────────┤
-│ 0     │ 42 │ hello   │
-│ 1     │ 43 │ world   │
-└───────┴────┴─────────┘
-```
+
+| rowid | id | content |
+|------:|---:|---------|
+| 0     | 42 | hello   |
+| 1     | 43 | world   |
 
 In the current storage, these identifiers are contiguous unsigned integers (0, 1, ...) if no rows were deleted. Deletions introduce gaps in the rowids which may be reclaimed later. Therefore, it is strongly recommended *not to use rowids as identifiers*.
 
-> The `rowid` values are stable within a transaction.
+> Tip The `rowid` values are stable within a transaction.
 
 > If there is a user-defined column named `rowid`, it shadows the `rowid` pseudocolumn.
-
 
 ## Common Table Expressions
 
@@ -137,4 +158,3 @@ In the current storage, these identifiers are contiguous unsigned integers (0, 1
 Below is the full syntax diagram of the `SELECT` statement:
 
 <div id="rrdiagram"></div>
-

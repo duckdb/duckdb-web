@@ -12,7 +12,8 @@ AsOf joins are a tool for solving this and other similar problems.
 
 One of the problems that AsOf joins are used to solve is
 finding the value of a varying property at a specific point in time.
-This use case is so common that it is where the name came from:  
+This use case is so common that it is where the name came from:
+
 _Give me the value of the property **as of this time**_.
 
 More generally, however, AsOf joins embody some common temporal analytic semantics,
@@ -67,9 +68,10 @@ the most recent price before the holding's timestamp by using an AsOf Join:
 
 ```sql
 SELECT h.ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p
-  ON h.ticker = p.ticker
- AND h.when >= p.when;
+FROM holdings h
+ASOF JOIN prices p
+       ON h.ticker = p.ticker
+      AND h.when >= p.when;
 ```
 
 This attaches the value of the holding at that time to each row:
@@ -83,21 +85,22 @@ This attaches the value of the holding at that time to each row:
 | GOOG   | 2001-01-01 00:00:30 | 23.45 |
 | GOOG   | 2001-01-01 00:01:30 | 21.16 |
 
-It essentially executes a function defined by looking up nearby values in the `prices` table. 
+It essentially executes a function defined by looking up nearby values in the `prices` table.
 Note also that missing `ticker` values do not have a match and don't appear in the output.
 
 ## Outer AsOf Joins
 
-Because AsOf produces at most one match from the right hand side, 
+Because AsOf produces at most one match from the right hand side,
 the left side table will not grow as a result of the join,
 but it could shrink if there are missing times on the right.
 To handle this situation, you can use an *outer* AsOf Join:
 
 ```sql
 SELECT h.ticker, h.when, price * shares AS value
-FROM holdings h ASOF LEFT JOIN prices p
-  ON h.ticker = p.ticker
- AND h.when >= p.when
+FROM holdings h
+ASOF LEFT JOIN prices p
+            ON h.ticker = p.ticker
+           AND h.when >= p.when
 ORDER BY ALL;
 ```
 
@@ -121,7 +124,7 @@ when there is no ticker or the time is before the prices begin.
 ## AsOf Joins with the `USING` Keyword
 
 So far we have been explicit about specifying the conditions for AsOf,
-but SQL also has a simplified join condition syntax 
+but SQL also has a simplified join condition syntax
 for the common case where the column names are the same in both tables.
 This syntax uses the `USING` keyword to list the fields that should be compared for equality.
 AsOf also supports this syntax, but with two restrictions:
@@ -133,7 +136,8 @@ Our first query can then be written as:
 
 ```sql
 SELECT ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p USING(ticker, when);
+FROM holdings h
+ASOF JOIN prices p USING (ticker, when);
 ```
 
 Be aware that if you don't explicitly list the columns in the `SELECT`,

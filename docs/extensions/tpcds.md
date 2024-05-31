@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: TPC-DS Extension
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/tpcds
 ---
 
 The `tpcds` extension implements the data generator and queries for the [TPC-DS benchmark](https://www.tpc.org/tpcds/).
@@ -28,24 +29,16 @@ To run a query, e.g., query 8, use:
 ```sql
 PRAGMA tpcds(8);
 ```
-```text
-┌──────────────┬────────────────────┐
-│ s_store_name │ sum(ss_net_profit) │
-│   varchar    │   decimal(38,2)    │
-├──────────────┼────────────────────┤
-│ able         │       -10354620.18 │
-│ ation        │       -10576395.52 │
-│ bar          │       -10625236.01 │
-│ ese          │       -10076698.16 │
-│ ought        │       -10994052.78 │
-└──────────────┴────────────────────┘
-```
+
+| s_store_name | sum(ss_net_profit) |
+|--------------|-------------------:|
+| able         | -10354620.18       |
+| ation        | -10576395.52       |
+| bar          | -10625236.01       |
+| ese          | -10076698.16       |
+| ought        | -10994052.78       |
 
 ## Limitations
 
-The `tpchds({query_id})` function runs a fixed TPC-DS query with pre-defined bind parameters (a.k.a. substitution parameters).
+The `tpchds(⟨query_id⟩)` function runs a fixed TPC-DS query with pre-defined bind parameters (a.k.a. substitution parameters).
 It is not possible to change the query parameters using the `tpcds` extension.
-
-## GitHub
-
-The `tpcds` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/tpcds).

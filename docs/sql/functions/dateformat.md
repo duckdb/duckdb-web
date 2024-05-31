@@ -12,6 +12,9 @@ The `strftime` and `strptime` functions can be used to convert between dates/tim
 ```sql
 SELECT strftime(DATE '1992-03-02', '%d/%m/%Y');
 -- 02/03/1992
+```
+
+```sql
 SELECT strftime(TIMESTAMP '1992-03-02 20:32:45', '%A, %-d %B %Y - %I:%M:%S %p');
 -- Monday, 2 March 1992 - 08:32:45 PM
 ```
@@ -23,20 +26,28 @@ SELECT strftime(TIMESTAMP '1992-03-02 20:32:45', '%A, %-d %B %Y - %I:%M:%S %p');
 ```sql
 SELECT strptime('02/03/1992', '%d/%m/%Y');
 -- 1992-03-02 00:00:00
+```
+
+```sql
 SELECT strptime('Monday, 2 March 1992 - 08:32:45 PM', '%A, %-d %B %Y - %I:%M:%S %p');
 -- 1992-03-02 20:32:45
 ```
 
 ## CSV Parsing
 
-The date formats can also be specified during CSV parsing, either in the [`COPY` statement](../statements/copy) or in the `read_csv` function. This can be done by either specifying a `DATEFORMAT` or a `TIMESTAMPFORMAT` (or both). `DATEFORMAT` will be used for converting dates, and `TIMESTAMPFORMAT` will be used for converting timestamps. Below are some examples for how to use this:
+The date formats can also be specified during CSV parsing, either in the [`COPY` statement](../statements/copy) or in the `read_csv` function. This can be done by either specifying a `DATEFORMAT` or a `TIMESTAMPFORMAT` (or both). `DATEFORMAT` will be used for converting dates, and `TIMESTAMPFORMAT` will be used for converting timestamps. Below are some examples for how to use this.
+
+In a `COPY` statement:
 
 ```sql
--- in COPY statement
 COPY dates FROM 'test.csv' (DATEFORMAT '%d/%m/%Y', TIMESTAMPFORMAT '%A, %-d %B %Y - %I:%M:%S %p');
+```
 
--- in read_csv function
-SELECT * FROM read_csv('test.csv', dateformat = '%m/%d/%Y');
+In a `read_csv` function:
+
+```sql
+SELECT *
+FROM read_csv('test.csv', dateformat = '%m/%d/%Y');
 ```
 
 ## Format Specifiers
@@ -83,4 +94,4 @@ Below is a full list of all available format specifiers.
 | `%Y` | Year with century as a decimal number. | 2013, 2019 etc. |
 | `%z` | [Time offset from UTC](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC) in the form ±HH:MM, ±HHMM, or ±HH. | -0700 |
 | `%Z` | Time zone name. | Europe/Amsterdam  |
-| `%%` | A literal '%' character. | % |
+| `%%` | A literal `%` character. | % |

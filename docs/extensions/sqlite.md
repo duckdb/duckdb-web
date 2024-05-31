@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: SQLite Extension
+github_repository: https://github.com/duckdb/sqlite_scanner
 redirect_from:
   - docs/extensions/sqlite_scanner
 ---
@@ -23,9 +24,9 @@ LOAD sqlite;
 
 ## Usage
 
-To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write.
+To make a SQLite file accessible to DuckDB, use the `ATTACH` statement with the `SQLITE` or `SQLITE_SCANNER` type. Attached SQLite databases support both read and write operations.
 
-For example with the [`sakila.db` file](https://github.com/duckdb/sqlite_scanner/blob/main/data/db/sakila.db):
+For example, to attach to the [`sakila.db` file](https://github.com/duckdb/sqlite_scanner/raw/main/data/db/sakila.db), run:
 
 ```sql
 ATTACH 'sakila.db' (TYPE SQLITE);
@@ -34,38 +35,33 @@ USE sakila;
 
 The tables in the file can be read as if they were normal DuckDB tables, but the underlying data is read directly from the SQLite tables in the file at query time.
 
-
 ```sql
 SHOW TABLES;
 ```
 
-```text
-┌────────────────────────┐
-│          name          │
-├────────────────────────┤
-│ actor                  │
-│ address                │
-│ category               │
-│ city                   │
-│ country                │
-│ customer               │
-│ customer_list          │
-│ film                   │
-│ film_actor             │
-│ film_category          │
-│ film_list              │
-│ film_text              │
-│ inventory              │
-│ language               │
-│ payment                │
-│ rental                 │
-│ sales_by_film_category │
-│ sales_by_store         │
-│ staff                  │
-│ staff_list             │
-│ store                  │
-└────────────────────────┘
-```
+|          name          |
+|------------------------|
+| actor                  |
+| address                |
+| category               |
+| city                   |
+| country                |
+| customer               |
+| customer_list          |
+| film                   |
+| film_actor             |
+| film_category          |
+| film_list              |
+| film_text              |
+| inventory              |
+| language               |
+| payment                |
+| rental                 |
+| sales_by_film_category |
+| sales_by_store         |
+| staff                  |
+| staff_list             |
+| store                  |
 
 You can query the tables using SQL, e.g., using the example queries from [`sakila-examples.sql`](https://github.com/duckdb/sqlite_scanner/blob/main/data/sql/sakila-examples.sql):
 
@@ -102,17 +98,17 @@ DuckDB is a strongly typed database system, as such, it requires all columns to 
 
 When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB follows SQLite's [type affinity rules](https://www.sqlite.org/datatype3.html#type_affinity) with a few extensions.
 
-1. If the declared type contains the string "INT" then it is translated into the type `BIGINT`
-2. If the declared type of the column contains any of the strings "CHAR", "CLOB", or "TEXT" then it is translated into `VARCHAR`.
-3. If the declared type for a column contains the string "BLOB" or if no type is specified then it is translated into `BLOB`.
-4. If the declared type for a column contains any of the strings "REAL", "FLOA", "DOUB", "DEC" or "NUM" then it is translated into `DOUBLE`.
-5. If the declared type is "DATE", then it is translated into `DATE`.
-6. If the declared type contains the string "TIME", then it is translated into `TIMESTAMP`.
+1. If the declared type contains the string `INT` then it is translated into the type `BIGINT`
+2. If the declared type of the column contains any of the strings `CHAR`, `CLOB`, or `TEXT` then it is translated into `VARCHAR`.
+3. If the declared type for a column contains the string `BLOB` or if no type is specified then it is translated into `BLOB`.
+4. If the declared type for a column contains any of the strings `REAL`, `FLOA`, `DOUB`, `DEC` or `NUM` then it is translated into `DOUBLE`.
+5. If the declared type is `DATE`, then it is translated into `DATE`.
+6. If the declared type contains the string `TIME`, then it is translated into `TIMESTAMP`.
 7. If none of the above apply, then it is translated into `VARCHAR`.
 
 As DuckDB enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
 
-```text
+```console
 Error: Mismatch Type Error: Invalid type in column "i": column was declared as integer, found "hello" of type "text" instead.
 ```
 
@@ -124,32 +120,27 @@ SET GLOBAL sqlite_all_varchar = true;
 
 When set, this option overrides the type conversion rules described above, and instead always converts the SQLite columns into a `VARCHAR` column. Note that this setting must be set *before* `sqlite_attach` is called.
 
-
 ## Opening SQLite Databases Directly
 
 SQLite databases can also be opened directly and can be used transparently instead of a DuckDB database file. In any client, when connecting, a path to a SQLite database file can be provided and the SQLite database will be opened instead.
 
-For example, with the shell:
+For example, with the shell, a SQLite database can be opened as follows:
 
-```sql
-$ > duckdb data/db/sakila.db 
-D SHOW tables;
-┌────────────┐
-│    name    │
-│  varchar   │
-├────────────┤
-│ actor      │
-│ address    │
-│ category   │
-│    ·       │
-│ staff_list │
-│ store      │
-├────────────┤
-│  21 rows   │
-│ (5 shown)  │
-└────────────┘
+```bash
+duckdb sakila.db
 ```
 
+```sql
+SELECT first_name
+FROM actor
+LIMIT 3;
+```
+
+| first_name |
+|------------|
+| PENELOPE   |
+| NICK       |
+| ED         |
 
 ## Writing Data to SQLite
 
@@ -161,16 +152,22 @@ Below is a brief example of how to create a new SQLite database and load data in
 
 ```sql
 ATTACH 'new_sqlite_database.db' AS sqlite_db (TYPE SQLITE);
-CREATE TABLE sqlite_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE sqlite_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
 ```
 
 The resulting SQLite database can then be read into from SQLite.
 
+```bash
+sqlite3 new_sqlite_database.db
+```
+
 ```sql
-$r > sqlite3 new_sqlite_database.db 
 SQLite version 3.39.5 2022-10-14 20:58:05
 sqlite> SELECT * FROM tbl;
+```
+
+```text
 id  name  
 --  ------
 42  DuckDB
@@ -178,64 +175,70 @@ id  name
 
 Many operations on SQLite tables are supported. All these operations directly modify the SQLite database, and the result of subsequent operations can then be read using SQLite.
 
+## Concurrency
+
+DuckDB can read or modify a SQLite database while DuckDB or SQLite reads or modifies the same database from a different thread or a separate process. More than one thread or process can read the SQLite database at the same time, but only a single thread or process can write to the database at one time. Database locking is handled by the SQLite library, not DuckDB. Within the same process, SQLite uses mutexes. When accessed from different processes, SQLite uses file system locks. The locking mechanisms also depend on SQLite configuration, like WAL mode. Refer to the [SQLite documentation on locking](https://www.sqlite.org/lockingv3.html) for more information.
+
+> Warning Linking multiple copies of the SQLite library into the same application can lead to application errors. See [sqlite_scanner Issue #82](https://github.com/duckdb/sqlite_scanner/issues/82) for more information.
+
+## Supported Operations
+
 Below is a list of supported operations.
 
-### CREATE TABLE
+### `CREATE TABLE`
 
 ```sql
-CREATE TABLE sqlite_db.tbl(id INTEGER, name VARCHAR);
+CREATE TABLE sqlite_db.tbl (id INTEGER, name VARCHAR);
 ```
 
-### INSERT INTO
+### `INSERT INTO`
 
 ```sql
 INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
 ```
 
-### SELECT
+### `SELECT`
 
 ```sql
 SELECT * FROM sqlite_db.tbl;
-┌───────┬─────────┐
-│  id   │  name   │
-│ int64 │ varchar │
-├───────┼─────────┤
-│    42 │ DuckDB  │
-└───────┴─────────┘
 ```
 
-### COPY
+| id |  name  |
+|---:|--------|
+| 42 | DuckDB |
+
+### `COPY`
 
 ```sql
 COPY sqlite_db.tbl TO 'data.parquet';
 COPY sqlite_db.tbl FROM 'data.parquet';
 ```
 
-### UPDATE
+### `UPDATE`
 
 ```sql
 UPDATE sqlite_db.tbl SET name = 'Woohoo' WHERE id = 42;
 ```
 
-### DELETE
+### `DELETE`
 
 ```sql
 DELETE FROM sqlite_db.tbl WHERE id = 42;
 ```
 
-### ALTER TABLE
+### `ALTER TABLE`
 
 ```sql
 ALTER TABLE sqlite_db.tbl ADD COLUMN k INTEGER;
 ```
 
-### DROP TABLE
+### `DROP TABLE`
 
 ```sql
 DROP TABLE sqlite_db.tbl;
 ```
 
-### CREATE VIEW
+### `CREATE VIEW`
 
 ```sql
 CREATE VIEW sqlite_db.v1 AS SELECT 42;
@@ -244,28 +247,26 @@ CREATE VIEW sqlite_db.v1 AS SELECT 42;
 ### Transactions
 
 ```sql
-CREATE TABLE sqlite_db.tmp(i INTEGER);
+CREATE TABLE sqlite_db.tmp (i INTEGER);
+```
+
+```sql
 BEGIN;
 INSERT INTO sqlite_db.tmp VALUES (42);
 SELECT * FROM sqlite_db.tmp;
-┌───────┐
-│   i   │
-│ int64 │
-├───────┤
-│    42 │
-└───────┘
-ROLLBACK;
-SELECT * FROM sqlite_db.tmp;
-┌────────┐
-│   i    │
-│ int64  │
-├────────┤
-│ 0 rows │
-└────────┘
 ```
 
-> The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax](../sql/statements/attach).
+| i  |
+|---:|
+| 42 |
 
-## GitHub Repository
+```sql
+ROLLBACK;
+SELECT * FROM sqlite_db.tmp;
+```
 
-[<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner)
+| i |
+|--:|
+|   |
+
+> Deprecated The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax](../sql/statements/attach).

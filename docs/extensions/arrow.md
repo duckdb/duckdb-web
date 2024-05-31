@@ -1,9 +1,10 @@
 ---
 layout: docu
 title: Arrow Extension
+github_repository: https://github.com/duckdb/arrow
 ---
 
-The `arrow` extension implements provides features for using [Apache Arrow](https://arrow.apache.org/), a cross-language development platform for in-memory analytics.
+The `arrow` extension implements features for using [Apache Arrow](https://arrow.apache.org/), a cross-language development platform for in-memory analytics.
 
 ## Installing and Loading
 
@@ -17,11 +18,9 @@ LOAD arrow;
 
 ## Functions
 
+<div class="narrow_table"></div>
+
 | Function | Type | Description |
 |--|----|-------|
-| `to_arrow_ipc` | Table in-out-function | Serializes a table into a stream of blobs containing Arrow IPC buffers  
-| `scan_arrow_ipc` | Table function | Scan a list of pointers pointing to Arrow IPC buffers
-
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/duckdb/arrow)
+| `to_arrow_ipc` | Table in-out-function | Serializes a table into a stream of blobs containing Arrow IPC buffers |
+| `scan_arrow_ipc` | Table function | Scan a list of pointers pointing to Arrow IPC buffers |

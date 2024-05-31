@@ -1,12 +1,13 @@
 ---
 layout: docu
 title: Go
+github_repository: https://github.com/marcboeker/go-duckdb
 ---
 
 The DuckDB Go driver, `go-duckdb`, allows using DuckDB via the `database/sql` interface.
 For examples on how to use this interface, see the [official documentation](https://pkg.go.dev/database/sql) and [tutorial](https://go.dev/doc/tutorial/database-access).
 
-> The Go client is provided as a third-party library.
+> The Go client is a third-party library and its repository is hosted <https://github.com/marcboeker/go-duckdb>.
 
 ## Installation
 
@@ -25,6 +26,40 @@ import (
 	"database/sql"
 	_ "github.com/marcboeker/go-duckdb"
 )
+```
+
+## Appender
+
+The DuckDB Go client supports the [DuckDB Appender API](../data/appender) for bulk inserts. You can obtain a new Appender by supplying a DuckDB connection to `NewAppenderFromConn()`. For example:
+
+```go
+connector, err := duckdb.NewConnector("test.db", nil)
+if err != nil {
+  ...
+}
+conn, err := connector.Connect(context.Background())
+if err != nil {
+  ...
+}
+defer conn.Close()
+
+// Retrieve appender from connection (note that you have to create the table 'test' beforehand).
+appender, err := NewAppenderFromConn(conn, "", "test")
+if err != nil {
+  ...
+}
+defer appender.Close()
+
+err = appender.AppendRow(...)
+if err != nil {
+  ...
+}
+
+// Optional, if you want to access the appended rows immediately.
+err = appender.Flush()
+if err != nil {
+  ...
+}
 ```
 
 ## Examples
@@ -80,7 +115,3 @@ func main() {
 ### More Examples
 
 For more examples, see the [examples in the `duckdb-go` repository](https://github.com/marcboeker/go-duckdb/tree/master/examples).
-
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/marcboeker/go-duckdb)

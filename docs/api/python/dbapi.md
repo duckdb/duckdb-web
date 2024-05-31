@@ -8,11 +8,23 @@ The standard DuckDB Python API provides a SQL interface compliant with the [DB-A
 ## Connection
 
 To use the module, you must first create a `DuckDBPyConnection` object that represents the database.
-The connection object takes as a parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Python process). If you would like to connect to an existing database in read-only mode, you can set the `read_only` flag to `True`. Read-only mode is required if multiple Python processes want to access the same database file at the same time.
+
+The connection object takes as a parameter the database file to read and write from.
+
+## File-Based Connection
+
+If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else).
+
+## In-Memory Connection
+
+The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Python process). If you would like to connect to an existing database in read-only mode, you can set the `read_only` flag to `True`. Read-only mode is required if multiple Python processes want to access the same database file at the same time.
 
 By default we create an **in-memory-database** that lives inside the `duckdb` module.
-Every method of `DuckDBPyConnection` is also available on the `duckdb` module, this connection is what's used by these methods. 
-You can also get a reference to this connection by providing the special value `:default:` to `connect`.
+
+### Default Connection
+
+Every method of `DuckDBPyConnection` is also available on the `duckdb` module, this connection is what's used by these methods.
+You can also get a reference to this connection by providing the special value `:default:` to `connect` or by using `duckdb.default_connection`.
 
 ```python
 import duckdb
@@ -20,12 +32,17 @@ import duckdb
 duckdb.execute("CREATE TABLE tbl AS SELECT 42 a")
 con = duckdb.connect(":default:")
 con.sql("SELECT * FROM tbl")
-# ┌───────┐
-# │   a   │
-# │ int32 │
-# ├───────┤
-# │    42 │
-# └───────┘
+# or
+duckdb.default_connection.sql("SELECT * FROM tbl")
+```
+
+```text
+┌───────┐
+│   a   │
+│ int32 │
+├───────┤
+│    42 │
+└───────┘
 ```
 
 ```python
@@ -39,6 +56,7 @@ con = duckdb.connect(database = "my-db.duckdb", read_only = True)
 # to explicitly get the default connection
 con = duckdb.connect(database = ":default:")
 ```
+
 If you want to create a second connection to an existing database, you can use the `cursor()` method. This might be useful for example to allow parallel threads running queries independently. A single connection is thread-safe but is locked for the duration of the queries, effectively serializing database access in this case.
 
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `close()`.  Once the last connection to a database instance is closed, the database instance is closed as well.
@@ -72,7 +90,7 @@ The `description` property of the connection object contains the column names as
 
 ### Prepared Statements
 
-DuckDB also supports [prepared statements](../../sql/query_syntax/prepared_statements) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter.
+DuckDB also supports [prepared statements](../../sql/query_syntax/prepared_statements) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter. Values are converted according to the [conversion rules](conversion#object-conversion-python-object-to-duckdb).
 
 Here are some examples:
 
@@ -94,13 +112,14 @@ print(con.fetchall())
 # [('duck', 'duck', 'goose')]
 ```
 
-> Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page](data_ingestion) for better options.
+> Warning Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page](data_ingestion) for better options.
 
 ## Named Parameters
 
-Besides the standard unnamed parameters, like `$1`, `$2` etc, it's also possible to supply named parameters, like `$my_parameter`.  
-When using named parameters, you have to provide a dictionary mapping of `str` to value in the `parameters` argument  
-An example use:
+Besides the standard unnamed parameters, like `$1`, `$2` etc, it's also possible to supply named parameters, like `$my_parameter`.
+When using named parameters, you have to provide a dictionary mapping of `str` to value in the `parameters` argument.
+An example use is the following:
+
 ```python
 import duckdb
 

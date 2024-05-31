@@ -7,7 +7,7 @@ DuckDB has two types of indexes: zonemaps and ART indexes.
 
 ## Zonemaps
 
-DuckDB automatically creates [zonemaps](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as min-max indexes) for the columns of all [general-purpose data types](../../sql/data_types/overview#general-purpose-data-types). These indexes are used for predicate pushdown into scan operators and computing aggregations. This means that if a filter criterion (like `where column1 = 123`) is in use, DuckDB can skip any row group whose min-max range does not contain that filter value (e.g., a block with a min-max range of 1000 to 2000 will be omitted when comparing for `= 123` or `< 400`). 
+DuckDB automatically creates [zonemaps](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as min-max indexes) for the columns of all [general-purpose data types](../../sql/data_types/overview#general-purpose-data-types). These indexes are used for predicate pushdown into scan operators and computing aggregations. This means that if a filter criterion (like `WHERE column1 = 123`) is in use, DuckDB can skip any row group whose min-max range does not contain that filter value (e.g., a block with a min-max range of 1000 to 2000 will be omitted when comparing for `= 123` or `< 400`).
 
 ### The Effect of Ordering on Zonemaps
 
@@ -15,14 +15,14 @@ The more ordered the data within a column, the more useful the zonemap indexes w
 
 ### Microbenchmark: The Effect of Ordering
 
-For an example, let’s repeat the [microbenchmark for timestamps](#microbenchmark-using-timestamps) with a timestamp column that sorted using an ascending order vs. an unordered one.
+For an example, let’s repeat the [microbenchmark for timestamps](schema#microbenchmark-using-timestamps) with a timestamp column that sorted using an ascending order vs. an unordered one.
 
 <div class="narrow_table"></div>
 
-| Column Type | Ordered | Storage Size | Query Time |
+| Column type | Ordered | Storage size | Query time |
 |---|---|---|---|
-| `DATETIME` | yes | 1.3 GB | 0.578 s |
-| `DATETIME` | no | 3.3 GB | 0.904 s |
+| `DATETIME` | yes | 1.3 GB | 0.6 s |
+| `DATETIME` | no | 3.3 GB | 0.9 s |
 
 The results show that simply keeping the column order allows for improved compression, yielding a 2.5x smaller storage size.
 It also allows the computation to be 1.5x faster.
@@ -49,14 +49,15 @@ Regarding query performance, an ART index has the following effects:
 
 Indexes are serialized to disk and deserialized lazily, i.e., when the database is reopened, operations using the index will only load the required parts of the index. Therefore, having an index will not cause any slowdowns when opening an existing database.
 
-_**Best Practices:**_
-* Only use primary keys, foreign keys, or unique constraints, if these are necessary for enforcing constraints on your data.
-* Do not define explicit indexes unless you have highly selective queries.
-* If you define an ART index, do so after bulk loading the data to the table.
+> Bestpractice We recommend following these guidelines:
+>
+> * Only use primary keys, foreign keys, or unique constraints, if these are necessary for enforcing constraints on your data.
+> * Do not define explicit indexes unless you have highly selective queries.
+> * If you define an ART index, do so after bulk loading the data to the table. Adding an index prior to loading, either explicitly or via primary/foreign keys, is [detrimental to load performance](schema#microbenchmark-the-effect-of-primary-keys).
 
 <!--
 ## Microbenchmark: The Timing of Index Creation
 
-| `CREATE UNIQUE INDEX`    | 123.038s       |
+| `CREATE UNIQUE INDEX`    | 123.0s       |
 The results show that loading the data with a primary key defined adds a significant overhead: in fact, it takes significantly longer than loading the data without a primary key and running `CREATE UNIQUE INDEX` after loading the data.
 -->

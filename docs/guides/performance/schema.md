@@ -9,9 +9,9 @@ It is important to use the correct type for encoding columns (e.g., `BIGINT`, `D
 
 When loading CSV files, you may leverage the CSV reader's [auto-detection mechanism](../../data/csv/auto_detection) to get the correct types for CSV inputs.
 
-If you run in a memory-constrained environment, using smaller data types (e.g. `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DuckDB’s [bitpacking compression](/2022/10/28/lightweight-compression.html#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing.
+If you run in a memory-constrained environment, using smaller data types (e.g., `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DuckDB’s [bitpacking compression](/2022/10/28/lightweight-compression#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing.
 
-_**Best Practice:**_ Use the most restrictive types possible when creating columns. Avoid using strings for encoding more specific data items.
+> Bestpractice Use the most restrictive types possible when creating columns. Avoid using strings for encoding more specific data items.
 
 ### Microbenchmark: Using Timestamps
 
@@ -26,19 +26,19 @@ SELECT avg(extract('day' FROM creationDate)) FROM Comment;
 Second, we use the `VARCHAR` type and use string operations:
 
 ```sql
-SELECT avg(CAST(creationDate[9:10] AS INT)) FROM Comment;
+SELECT avg(CAST(creationDate[9:10] AS INTEGER)) FROM Comment;
 ```
 
 The results of the microbenchmark are as follows:
 
 <div class="narrow_table"></div>
 
-| Column Type | Storage Size | Query Time |
-| ----------- | ------------ | ---------- |
+| Column type | Storage size | Query time |
+| ----------- | -----------: | ---------: |
 | `DATETIME`  | 3.3 GB       | 0.9 s      |
 | `VARCHAR`   | 5.2 GB       | 3.9 s      |
 
-The results show that using the `DATETIME` value yields smaller storage sizes and faster processing. 
+The results show that using the `DATETIME` value yields smaller storage sizes and faster processing.
 
 ### Microbenchmark: Joining on Strings
 
@@ -57,24 +57,30 @@ The results below show that joining on `BIGINT` columns is approx. 1.8× faster 
 
 <div class="narrow_table"></div>
 
-| Join Column Payload Type | Join Column Schema Type | Example Value                            | Query Time |
-| ------------------------ | ----------------------- | ---------------------------------------- | ---------- |
+| Join column payload type | Join column schema type | Example value                            | Query time |
+| ------------------------ | ----------------------- | ---------------------------------------- | ---------: |
 | `BIGINT`                 | `BIGINT`                | `70368755640078`                         | 1.2 s      |
 | `BIGINT`                 | `VARCHAR`               | `'70368755640078'`                       | 2.1 s      |
+
+> Bestpractice Avoid representing numeric values as strings, especially if you intend to perform e.g., join operations on them.
 
 ## Constraints
 
 DuckDB allows defining [constraints](../../sql/constraints) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DuckDB does not rely on these indexes for join and aggregation operators (see [indexing](indexing) for more details).
 
-_**Best Practice:**_ Do not define constraints unless your goal is to ensure data integrity.
+> Bestpractice Do not define constraints unless your goal is to ensure data integrity.
 
-## Microbenchmark: The Effect of Primary Keys
+### Microbenchmark: The Effect of Primary Keys
 
 We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst). This table has approx. 554 million entries. We first create the schema without a primary key, then load the data. In the second experiment, we create the schema with a primary key, then load the data. In both cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
 
 <div class="narrow_table"></div>
 
-| Operation                | Execution Time |
-| ------------------------ | -------------- |
-| Load without primary key | 92.168s        |
-| Load with primary key    | 286.765s       |
+| Operation                | Execution time |
+| ------------------------ | -------------: |
+| Load without primary key | 92.2 s         |
+| Load with primary key    | 286.8 s        |
+
+In this case, primary keys will only have a (small) positive effect on highly selective queries such as when filtering on a single identifier. They do not have an effect on join and aggregation operators.
+
+> Bestpractice For best bulk load performance, avoid defining primary key constraints if possible.

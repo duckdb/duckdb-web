@@ -4,18 +4,40 @@ title: Window Functions
 railroad: expressions/window.js
 ---
 
+DuckDB supports [window functions](https://en.wikipedia.org/wiki/Window_function_(SQL)), which can use multiple rows to calculate a value for each row.
+Window functions are [blocking operators](../guides/performance/how_to_tune_workloads#blocking-operators), i.e., they require their entire input to be buffered, making them one of the most memory-intensive operators in SQL.
+
 ## Examples
 
+Generate a `row_number` column with containing incremental identifiers for each row:
+
 ```sql
--- generate a "row_number" column containing incremental identifiers for each row
 SELECT row_number() OVER () FROM sales;
--- generate a "row_number" column, by order of time
+```
+
+Generate a `row_number` column, by order of time:
+
+```sql
 SELECT row_number() OVER (ORDER BY time) FROM sales;
--- generate a "row_number" column, by order of time partitioned by region
+```
+
+Generate a `row_number` column, by order of time partitioned by region:
+
+```sql
 SELECT row_number() OVER (PARTITION BY region ORDER BY time) FROM sales;
--- compute the difference between the current amount, and the previous amount, by order of time
+```
+
+Compute the difference between the current amount, and the previous amount,:
+
+By order of time:
+
+```sql
 SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
--- compute the percentage of the total amount of sales per region for each row
+```
+
+Compute the percentage of the total amount of sales per region for each row:
+
+```sql
 SELECT amount / sum(amount) OVER (PARTITION BY region) FROM sales;
 ```
 
@@ -23,48 +45,157 @@ SELECT amount / sum(amount) OVER (PARTITION BY region) FROM sales;
 
 <div id="rrdiagram"></div>
 
-Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause and use the `OVER window-name` syntax.
+Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause and use the `OVER ⟨window-name⟩` syntax.
 
 ## General-Purpose Window Functions
 
 The table below shows the available general window functions.
 
-| Function | Return Type | Description | Example |
-|:---|:-|:---|:--|
-| `row_number()` | `bigint` | The number of the current row within the partition, counting from 1. | `row_number()` |
-| `rank()` | `bigint` | The rank of the current row *with gaps*; same as `row_number` of its first peer. | `rank()` |
-| `dense_rank()` | `bigint` | The rank of the current row *without gaps*; this function counts peer groups. | `dense_rank()` |
-| `rank_dense()` | `bigint` | Alias for `dense_rank`. | `rank_dense()` |
-| `percent_rank()` | `double` | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. | `percent_rank()` |
-| `cume_dist()` | `double` | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. | `cume_dist()` |
-| `ntile(num_buckets integer)` | `bigint` | An integer ranging from 1 to the argument value, dividing the partition as equally as possible. | `ntile(4)` |
-| `lag(expr any [, offset integer [, default any ]])` | same type as **expr** | Returns `expr` evaluated at the row that is `offset` rows before the current row within the partition; if there is no such row, instead return `default` (which must be of the same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `null`. | `lag(column, 3, 0)` |
-| `lead(expr any [, offset integer [, default any ]])` | same type as **expr** | Returns `expr` evaluated at the row that is `offset` rows after the current row within the partition; if there is no such row, instead return `default` (which must be of the same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `null`. | `lead(column, 3, 0)` |
-| `first_value(expr any)` | same type as **expr** | Returns `expr` evaluated at the row that is the first row of the window frame. | `first_value(column)` |
-| `last_value(expr any)` | same type as **expr** | Returns `expr` evaluated at the row that is the last row of the window frame. | `last_value(column)` |
-| `nth_value(expr any, nth integer)` | same type as **expr** | Returns `expr` evaluated at the nth row of the window frame (counting from 1); null if no such row. | `nth_value(column, 2)` |
-| `first(expr any)` | same type as **expr** | Alias for `first_value`. | `first(column)` |
-| `last(expr any)` | same type as **expr** | Alias for `last_value`. | `last(column)` |
+| Name | Description |
+|:--|:-------|
+| [`cume_dist()`](#cume_dist) | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. |
+| [`dense_rank()`](#dense_rank) | The rank of the current row *without gaps;* this function counts peer groups. |
+| [`first(expr[ IGNORE NULLS])`](#firstexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| [`first_value(expr[ IGNORE NULLS])`](#first_valueexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| [`lag(expr[, offset[, default]][ IGNORE NULLS])`](#lagexpr-offset-default-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) before the current row within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| [`last(expr[ IGNORE NULLS])`](#lastexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the last row  (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| [`last_value(expr[ IGNORE NULLS])`](#last_valueexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the last row  (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| [`lead(expr[, offset[, default]][ IGNORE NULLS])`](#leadexpr-offset-default-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| [`nth_value(expr, nth[ IGNORE NULLS])`](#nth_valueexpr-nth-ignore-nulls) | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); `NULL` if no such row. |
+| [`ntile(num_buckets)`](#ntilenum_buckets) | An integer ranging from 1 to `num_buckets`, dividing the partition as equally as possible. |
+| [`percent_rank()`](#percent_rank) | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. |
+| [`rank_dense()`](#rank_dense) | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
+| [`rank()`](#rank) | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
+| [`row_number()`](#row_number) | The number of the current row within the partition, counting from 1. |
+
+### `cume_dist()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. |
+| **Return Type** | `DOUBLE` |
+| **Example** | `cume_dist()` |
+
+### `dense_rank()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The rank of the current row *without gaps*; this function counts peer groups. |
+| **Return Type** | `BIGINT` |
+| **Example** | `dense_rank()` |
+
+### `first(expr[ IGNORE NULLS])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| **Return Type** | Same type as `expr` |
+| **Example** | `first(column)` |
+| **Alias** | `first_value(column)` |
+
+### `first_value(expr[ IGNORE NULLS])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| **Return Type** | Same type as `expr` |
+| **Example** | `first_value(column)` |
+| **Alias** | `first(column)` |
+
+### `lag(expr[, offset[, default]][ IGNORE NULLS])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns `expr` evaluated at the row that is `offset` rows (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) before the current row within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| **Return Type** | Same type as `expr` |
+| **Aliases** | `lag(column, 3, 0)` |
+
+### `last(expr[ IGNORE NULLS])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns `expr` evaluated at the row that is the last row  (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| **Return Type** | Same type as `expr` |
+| **Example** | `last(column)` |
+| **Alias** | `last_value(column)` |
+
+### `last_value(expr[ IGNORE NULLS])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns `expr` evaluated at the row that is the last row  (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| **Return Type** | Same type as `expr` |
+| **Example** | `last_value(column)` |
+| **Alias** | `last(column)` |
+
+### `lead(expr[, offset[, default]][ IGNORE NULLS])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| **Return Type** | Same type as `expr` |
+| **Aliases** | `lead(column, 3, 0)` |
+
+### `nth_value(expr, nth[ IGNORE NULLS])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); `NULL` if no such row. |
+| **Return Type** | Same type as `expr` |
+| **Aliases** | `nth_value(column, 2)` |
+
+### `ntile(num_buckets)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | An integer ranging from 1 to `num_buckets`, dividing the partition as equally as possible. |
+| **Return Type** | `BIGINT` |
+| **Example** | `ntile(4)` |
+
+### `percent_rank()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. |
+| **Return Type** | `DOUBLE` |
+| **Example** | `percent_rank()` |
+
+### `rank_dense()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The rank of the current row *with gaps*; same as `row_number` of its first peer. |
+| **Return Type** | `BIGINT` |
+| **Example** | `rank_dense()` |
+| **Alias** | `rank()` |
+
+### `rank()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The rank of the current row *with gaps*; same as `row_number` of its first peer. |
+| **Return Type** | `BIGINT` |
+| **Example** | `rank()` |
+| **Alias** | `rank_dense()` |
+
+### `row_number()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The number of the current row within the partition, counting from 1. |
+| **Return Type** | `BIGINT` |
+| **Example** | `row_number()` |
 
 ## Aggregate Window Functions
 
-All [aggregate functions](aggregates) can be used in a windowing context.
+All [aggregate functions](aggregates) can be used in a windowing context, including the optional [`FILTER` clause](query_syntax/filter).
+The `first` and `last` aggregate functions are shadowed by the respective general-purpose window functions, with the minor consequence that the `FILTER` clause is not available for these but `IGNORE NULLS` is.
 
-## Ignoring NULLs
+## Nulls
 
-The following functions support the `IGNORE NULLS` specification:
+All [general-purpose window functions](#general-purpose-window-functions) that accept `IGNORE NULLS` respect nulls by default. This default behavior can optionally be made explicit via `RESPECT NULLS`.
 
-| Function | Description | Example |
-|:---|:-|:---|:--|
-| `lag(expr any [, offset integer [, default any ]])` | Skips `NULL` values when counting. | `lag(column, 3 IGNORE NULLS)` |
-| `lead(expr any [, offset integer [, default any ]])` | Skips `NULL` values when counting. | `lead(column, 3 IGNORE NULLS)` |
-| `first_value(expr any)` | Skips leading `NULL`s | `first_value(column IGNORE NULLS)` |
-| `last_value(expr any)` | Skips trailing `NULL`s | `last_value(column IGNORE NULLS)` |
-| `nth_value(expr any, nth integer)` | Skips `NULL` values when counting. | `nth_value(column, 2 IGNORE NULLS)` |
-
-Note that there is no comma separating the arguments from the `IGNORE NULLS` specification.
-
-The inverse of `IGNORE NULLS` is `RESPECT NULLS`, which is the default for all functions.
+In contrast, all [aggregate window functions](#aggregate-window-functions) (except for `list` and its aliases, which can be made to ignore nulls via a `FILTER`) ignore nulls and do not accept `RESPECT NULLS`. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a `NULL` value of `column` have the same value of `cumulativeColumn` as the row that preceeds them.
 
 ## Evaluation
 
@@ -94,7 +225,8 @@ Each partition is ordered using the same ordering clause.
 Here is a table of power generation data, available as a CSV file ([`power-plant-generation-history.csv`](/data/power-plant-generation-history.csv)). To load the data, run:
 
 ```sql
-CREATE TABLE "Generation History" AS FROM 'power-plant-generation-history.csv';
+CREATE TABLE "Generation History" AS
+    FROM 'power-plant-generation-history.csv';
 ```
 
 After partitioning by plant and ordering by date, it will have this layout:
@@ -135,7 +267,10 @@ The simplest window function is `row_number()`.
 This function just computes the 1-based row number within the partition using the query:
 
 ```sql
-SELECT "Plant", "Date", row_number() OVER (PARTITION BY "Plant" ORDER  BY "Date") AS "Row"
+SELECT
+    "Plant",
+    "Date",
+    row_number() OVER (PARTITION BY "Plant" ORDER  BY "Date") AS "Row"
 FROM "Generation History"
 ORDER BY 1, 2;
 ```
@@ -169,6 +304,7 @@ For a `RANGE` specification, there must  be only one ordering expression,
 and it has to support addition and subtraction (i.e., numbers or `INTERVAL`s).
 The default values for frames are from `UNBOUNDED PRECEDING` to `CURRENT ROW`.
 It is invalid for a frame to start after it ends.
+Using the [`EXCLUDE` clause](#exclude-clause), rows around the current row can be excluded from the frame.
 
 #### `ROW` Framing
 
@@ -181,6 +317,7 @@ SELECT points,
                  AND 1 FOLLOWING) we
 FROM results;
 ```
+
 This query computes the `sum` of each point and the points on either side of it:
 
 <img src="/images/blog/windowing/moving-sum.jpg" alt="Moving SUM of three values" title="Figure 2: A moving SUM of three values" style="max-width:90%;width:90%;height:auto"/>
@@ -214,7 +351,7 @@ This is the result:
 
 <div class="narrow_table"></div>
 
-| Plant | Date | MWh 7-day<br>Moving Average |
+| Plant | Date | MWh 7-day Moving Average |
 |:---|:---|---:|
 | Boston | 2019-01-02 | 517450.75 |
 | Boston | 2019-01-03 | 508793.20 |
@@ -225,6 +362,15 @@ This is the result:
 | Worcester | 2019-01-03 | 102713.00 |
 | Worcester | 2019-01-04 | 102249.50 |
 | ... | ... | ... |
+
+#### `EXCLUDE` Clause
+
+The `EXCLUDE` clause allows rows around the current row to be excluded from the frame. It has the following options:
+
+* `EXCLUDE NO OTHERS`: exclude nothing (default)
+* `EXCLUDE CURRENT ROW`: exclude the current row from the window frame
+* `EXCLUDE GROUP`: exclude the current row and all its peers (according to the columns specified by `ORDER BY`) from the window frame
+* `EXCLUDE TIES`: exclude only the current row's peers from the window frame
 
 ### `WINDOW` Clauses
 

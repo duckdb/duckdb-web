@@ -8,34 +8,28 @@ The `WITH` clause allows you to specify common table expressions (CTEs). Regular
 
 ## Basic CTE Examples
 
+Create a CTE called "cte" and use it in the main query:
+
 ```sql
--- create a CTE called "cte" and use it in the main query
 WITH cte AS (SELECT 42 AS x)
 SELECT * FROM cte;
 ```
 
-```text
-┌────┐
-│ x  │
-├────┤
-│ 42 │
-└────┘
-```
+| x  |
+|---:|
+| 42 |
+
+Create two CTEs, where the second CTE references the first CTE:
 
 ```sql
--- create two CTEs, where the second CTE references the first CTE
 WITH cte AS (SELECT 42 AS i),
-     cte2 AS (SELECT i*100 AS x FROM cte)
+     cte2 AS (SELECT i * 100 AS x FROM cte)
 SELECT * FROM cte2;
 ```
 
-```text
-┌──────┐
-│  x   │
-├──────┤
-│ 4200 │
-└──────┘
-```
+|  x   |
+|-----:|
+| 4200 |
 
 ## Materialized CTEs
 
@@ -69,24 +63,71 @@ SELECT * FROM t AS t1,
 
 `WITH RECURSIVE` allows the definition of CTEs which can refer to themselves. Note that the query must be formulated in a way that ensures termination, otherwise, it may run into an infinite loop.
 
-### Tree Traversal
+### Example: Fibonacci Sequence
+
+`WITH RECURSIVE` can be used to make recursive calculations. For example, here is how `WITH RECURSIVE` could be used to calculate the first ten Fibonacci numbers:
+
+```sql
+WITH RECURSIVE FibonacciNumbers (RecursionDepth, FibonacciNumber, NextNumber) AS (
+    -- Base case
+    SELECT
+        0  AS RecursionDepth,
+        0  AS FibonacciNumber,
+        1  AS NextNumber
+    UNION ALL
+    -- Recursive step
+    SELECT
+        fib.RecursionDepth + 1 AS RecursionDepth,
+        fib.NextNumber AS FibonacciNumber,
+        fib.FibonacciNumber + fib.NextNumber AS NextNumber
+    FROM
+        FibonacciNumbers fib
+    WHERE
+        fib.RecursionDepth + 1 < 10
+)
+```
+
+Query the CTE:
+
+```sql
+SELECT
+    fn.RecursionDepth AS FibonacciNumberIndex,
+    fn.FibonacciNumber
+FROM
+    FibonacciNumbers fn;
+```
+
+| FibonacciNumberIndex | FibonacciNumber |
+|---------------------:|----------------:|
+| 0                    | 0               |
+| 1                    | 1               |
+| 2                    | 1               |
+| 3                    | 2               |
+| 4                    | 3               |
+| 5                    | 5               |
+| 6                    | 8               |
+| 7                    | 13              |
+| 8                    | 21              |
+| 9                    | 34              |
+
+### Example: Tree Traversal
 
 `WITH RECURSIVE` can be used to traverse trees. For example, take a hierarchy of tags:
 
-![](/images/examples/with-recursive-tree-example.png)
+![Example tree graph](/images/examples/with-recursive-tree-example.png)
 
 ```sql
-CREATE TABLE tag (id INT, name VARCHAR, subclassof INT);
+CREATE TABLE tag (id INTEGER, name VARCHAR, subclassof INTEGER);
 INSERT INTO tag VALUES
- (1, 'U2',     5),
- (2, 'Blur',   5),
- (3, 'Oasis',  5),
- (4, '2Pac',   6),
- (5, 'Rock',   7),
- (6, 'Rap',    7),
- (7, 'Music',  9),
- (8, 'Movies', 9),
- (9, 'Art', NULL);
+    (1, 'U2',     5),
+    (2, 'Blur',   5),
+    (3, 'Oasis',  5),
+    (4, '2Pac',   6),
+    (5, 'Rock',   7),
+    (6, 'Rap',    7),
+    (7, 'Music',  9),
+    (8, 'Movies', 9),
+    (9, 'Art', NULL);
 ```
 
 The following query returns the path from the node `Oasis` to the root of the tree (`Art`).
@@ -106,13 +147,9 @@ FROM tag_hierarchy
 WHERE source = 'Oasis';
 ```
 
-```text
-┌───────────────────────────┐
-│           path            │
-├───────────────────────────┤
-│ [Oasis, Rock, Music, Art] │
-└───────────────────────────┘
-```
+|           path            |
+|---------------------------|
+| [Oasis, Rock, Music, Art] |
 
 ### Graph Traversal
 
@@ -121,12 +158,14 @@ One way to achieve this is to store the path of a traversal in a [list](../../sq
 
 Take the following directed graph from the [LDBC Graphalytics benchmark](https://arxiv.org/pdf/2011.15028.pdf):
 
-![](/images/examples/with-recursive-graph-example.png)
+![Example simple graph](/images/examples/with-recursive-graph-example.png)
 
 ```sql
-CREATE TABLE edge (node1id INT, node2id INT);
-INSERT INTO edge VALUES (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5),
-  (3, 8), (3, 10), (5, 3), (5, 4), (5, 8), (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
+CREATE TABLE edge (node1id INTEGER, node2id INTEGER);
+INSERT INTO edge
+    VALUES
+        (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5), (3, 8), (3, 10),
+        (5, 3), (5, 4), (5, 8), (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
 ```
 
 Note that the graph contains directed cycles, e.g., between nodes 1, 2, and 5.
@@ -159,24 +198,20 @@ FROM paths
 ORDER BY length(path), path;
 ```
 
-```text
-┌───────────┬─────────┬───────────────┐
-│ startNode │ endNode │     path      │
-├───────────┼─────────┼───────────────┤
-│ 1         │ 3       │ [1, 3]        │
-│ 1         │ 5       │ [1, 5]        │
-│ 1         │ 5       │ [1, 3, 5]     │
-│ 1         │ 8       │ [1, 3, 8]     │
-│ 1         │ 10      │ [1, 3, 10]    │
-│ 1         │ 3       │ [1, 5, 3]     │
-│ 1         │ 4       │ [1, 5, 4]     │
-│ 1         │ 8       │ [1, 5, 8]     │
-│ 1         │ 4       │ [1, 3, 5, 4]  │
-│ 1         │ 8       │ [1, 3, 5, 8]  │
-│ 1         │ 8       │ [1, 5, 3, 8]  │
-│ 1         │ 10      │ [1, 5, 3, 10] │
-└───────────┴─────────┴───────────────┘
-```
+| startNode | endNode |     path      |
+|----------:|--------:|---------------|
+| 1         | 3       | [1, 3]        |
+| 1         | 5       | [1, 5]        |
+| 1         | 5       | [1, 3, 5]     |
+| 1         | 8       | [1, 3, 8]     |
+| 1         | 10      | [1, 3, 10]    |
+| 1         | 3       | [1, 5, 3]     |
+| 1         | 4       | [1, 5, 4]     |
+| 1         | 8       | [1, 5, 8]     |
+| 1         | 4       | [1, 3, 5, 4]  |
+| 1         | 8       | [1, 3, 5, 8]  |
+| 1         | 8       | [1, 5, 3, 8]  |
+| 1         | 10      | [1, 5, 3, 10] |
 
 Note that the result of this query is not restricted to shortest paths, e.g., for node 5, the results include paths `[1, 5]` and `[1, 3, 5]`.
 
@@ -211,18 +246,14 @@ FROM paths
 ORDER BY length(path), path;
 ```
 
-```text
-┌───────────┬─────────┬────────────┐
-│ startNode │ endNode │    path    │
-├───────────┼─────────┼────────────┤
-│ 1         │ 3       │ [1, 3]     │
-│ 1         │ 5       │ [1, 5]     │
-│ 1         │ 8       │ [1, 3, 8]  │
-│ 1         │ 10      │ [1, 3, 10] │
-│ 1         │ 4       │ [1, 5, 4]  │
-│ 1         │ 8       │ [1, 5, 8]  │
-└───────────┴─────────┴────────────┘
-```
+| startNode | endNode |    path    |
+|----------:|--------:|------------|
+| 1         | 3       | [1, 3]     |
+| 1         | 5       | [1, 5]     |
+| 1         | 8       | [1, 3, 8]  |
+| 1         | 10      | [1, 3, 10] |
+| 1         | 4       | [1, 5, 4]  |
+| 1         | 8       | [1, 5, 8]  |
 
 #### Enumerate Unweighted Shortest Paths between Two Nodes
 
@@ -260,14 +291,10 @@ WHERE endNode = 8
 ORDER BY length(path), path;
 ```
 
-```text
-┌───────────┬─────────┬───────────┐
-│ startNode │ endNode │   path    │
-├───────────┼─────────┼───────────┤
-│ 1         │ 8       │ [1, 3, 8] │
-│ 1         │ 8       │ [1, 5, 8] │
-└───────────┴─────────┴───────────┘
-```
+| startNode | endNode |   path    |
+|----------:|--------:|-----------|
+| 1         | 8       | [1, 3, 8] |
+| 1         | 8       | [1, 5, 8] |
 
 ## Common Table Expressions
 

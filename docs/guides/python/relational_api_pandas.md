@@ -19,7 +19,7 @@ input_df = pandas.DataFrame.from_dict({'i': [1, 2, 3, 4],
 rel = con.from_df(input_df)
 
 # chain together relational operators (this is a lazy operation, so the operations are not yet executed)
-# equivalent to: SELECT i, j, i*2 AS two_i FROM input_df ORDER BY i DESC LIMIT 2
+# equivalent to: SELECT i, j, i*2 AS two_i FROM input_df WHERE i >= 2 ORDER BY i DESC LIMIT 2
 transformed_rel = rel.filter('i >= 2').project('i, j, i*2 as two_i').order('i desc').limit(2)
 
 # trigger execution by requesting .df() of the relation
@@ -29,4 +29,4 @@ output_df = transformed_rel.df()
 
 Relational operators can also be used to group rows, aggregate, find distinct combinations of values, join, union, and more. They are also able to directly insert results into a DuckDB table or write to a CSV.
 
-Please see [these additional examples](https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py) and [the available relational methods on the DuckDBPyRelation class](../../api/python/reference/#duckdb.DuckDBPyRelation).
+Please see [these additional examples](https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py) and [the available relational methods on the `DuckDBPyRelation` class](../../api/python/reference/#duckdb.DuckDBPyRelation).

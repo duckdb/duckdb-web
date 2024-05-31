@@ -52,9 +52,18 @@ def reduce_clutter_in_doc(doc_body):
     return doc_body
 
 
+def replace_box_names(doc_body):
+    doc_body = doc_body.replace("> Bestpractice", "> **Best practice.  **")
+    doc_body = doc_body.replace("> Note",         "> **Note.  **")
+    doc_body = doc_body.replace("> Warning",      "> **Warning.  **")
+    doc_body = doc_body.replace("> Tip",          "> **Tip.  **")
+    doc_body = doc_body.replace("> Deprecated",   "> **Deprecated.  **")
+    return doc_body
+
+
 def move_headers_down(doc_body):
-    # move headers h2-h4 down by 3 levels (to h5-h7)
-    extra_header_levels = 3*"#"
+    # move headers h2-h4 down by 1 level
+    extra_header_levels = "#"
     return re.sub(r"^##", f"##{extra_header_levels}", doc_body, flags=re.MULTILINE)
 
 
@@ -178,6 +187,16 @@ def adjust_headers(doc_body, doc_header_label):
     return doc_body_with_new_headers
 
 
+def change_function_table_headers(doc_body):
+    doc_body = doc_body.replace("""| **Description** | """, """|   |   |
+|:--|:--------|
+| **Description** |""")
+    doc_body = doc_body.replace("""| **Handle name** | """, """|   |   |
+|:--|:--------|
+| **Handle name** |""")
+    return doc_body
+
+
 def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
     # skip index files
     if doc_file_path.endswith("index"):
@@ -202,10 +221,12 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
 
         # process document body
         doc_body = reduce_clutter_in_doc(doc_body)
+        doc_body = replace_box_names(doc_body)
         doc_body = move_headers_down(doc_body)
         doc_body = replace_html_code_blocks(doc_body)
         doc_body = adjust_links_in_doc_body(doc_body)
         doc_body = adjust_headers(doc_body, doc_header_label)
+        doc_body = change_function_table_headers(doc_body)
         doc_body = change_link(doc_body, doc_file_path)
 
         # write to output
@@ -213,12 +234,11 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         of.write("\n")
 
 
-def add_to_documentation(docs_root, data, of, chapter_title):
+def add_to_documentation(docs_root, data, of):
     # we use the docs/index.md as the baseline for paths
     docs_index_file_path = "index.md"
 
-    of.write(f"# {chapter_title}\n\n")
-    chapter_json = [x for x in data["docsmenu"] if x["page"] == chapter_title][0]
+    chapter_json = [x for x in data["docsmenu"] if x["page"] == "Documentation"][0]
     chapter_slug = chapter_json["slug"]
     main_level_pages = chapter_json["mainfolderitems"]
 
@@ -229,11 +249,11 @@ def add_to_documentation(docs_root, data, of, chapter_title):
 
         if main_url:
             logging.info(f"- {main_url}")
-            concatenate_page_to_output(of, 2, docs_root, f"{chapter_slug}{main_url}")
+            concatenate_page_to_output(of, 1, docs_root, f"{chapter_slug}{main_url}")
 
         if main_slug:
-            # e.g., "## SQL Features {#guides:sql_features}"
-            of.write(f"## {main_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}') }}}\n\n")
+            # e.g., "# SQL Features {#guides:sql_features}"
+            of.write(f"# {main_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}') }}}\n\n")
         else:
             continue
 
@@ -245,10 +265,10 @@ def add_to_documentation(docs_root, data, of, chapter_title):
 
             if subfolder_url:
                 logging.info(f"  - {main_slug}/{subfolder_url}")
-                concatenate_page_to_output(of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
+                concatenate_page_to_output(of, 2, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
 
             if subfolder_slug:
-                of.write(f"### {subfolder_page_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}/{subfolder_slug}') }}}\n\n")
+                of.write(f"## {subfolder_page_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}/{subfolder_slug}') }}}\n\n")
             else:
                 continue
 
@@ -257,26 +277,8 @@ def add_to_documentation(docs_root, data, of, chapter_title):
                 subsubfolder_url = subsubfolder_page.get("url")
 
                 logging.info(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
-                concatenate_page_to_output(of, 4, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
+                concatenate_page_to_output(of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
 
-
-def add_under_the_hood_chapter(docs_root, data, of):
-    of.write(f"# Under the Hood\n\n")
-    of.write(f"## Internals\n\n")
-    concatenate_page_to_output(of, 3, docs_root, "../internals/overview")
-    concatenate_page_to_output(of, 3, docs_root, "../internals/storage")
-    concatenate_page_to_output(of, 3, docs_root, "../internals/vector")
-    of.write(f"## Developer Guides\n\n")
-    concatenate_page_to_output(of, 3, docs_root, "../dev/building")
-    concatenate_page_to_output(of, 3, docs_root, "../dev/profiling")
-    concatenate_page_to_output(of, 3, docs_root, "../dev/testing")
-    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/intro")
-    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/debugging")
-    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/result_verification")
-    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/persistent_testing")
-    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/loops")
-    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/multiple_connections")
-    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/catch")
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--verbose', action='store_true')
@@ -307,10 +309,10 @@ with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.m
 
     with open("cover-page.md") as cover_page_file:
         of.write(cover_page_file.read())
+        of.write("\n")
 
-    add_to_documentation(docs_root, data, of, "Documentation")
-    add_to_documentation(docs_root, data, of, "Guides")
-    add_under_the_hood_chapter(docs_root, data, of)
+    add_to_documentation(docs_root, data, of)
 
     with open("acknowledgments.md") as acknowledgments_file:
         of.write(acknowledgments_file.read())
+        of.write("\n")

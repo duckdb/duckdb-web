@@ -3,7 +3,8 @@ layout: docu
 title: Summarize
 ---
 
-The `SUMMARIZE` command can be used to easily compute a number of aggregates over a table or a query. The `SUMMARIZE` command launches a query that computes a number of aggregates over all columns, including `min`, `max`, `avg`, `std` and `approx_unique`.
+The `SUMMARIZE` command can be used to easily compute a number of aggregates over a table or a query.
+The `SUMMARIZE` command launches a query that computes a number of aggregates over all columns (`min`, `max`, `approx_unique`, `avg`, `std`, `q25`, `q50`, `q75`, `count`), and return these along the column name, column type, and the percentage of `NULL` values in the column.
 
 ## Usage
 
@@ -13,7 +14,7 @@ In order to summarize the contents of a table, use `SUMMARIZE` followed by the t
 SUMMARIZE tbl;
 ```
 
-In order to summarize a query, prepend `SUMMARIZE` to a query. 
+In order to summarize a query, prepend `SUMMARIZE` to a query.
 
 ```sql
 SUMMARIZE SELECT * FROM tbl;
@@ -51,3 +52,19 @@ SUMMARIZE lineitem;
 | l_shipinstruct  | VARCHAR       | COLLECT COD | TAKE BACK RETURN    | 4             | NULL                | NULL                 | NULL    | NULL    | NULL    | 6001215 | 0.0%            |
 | l_shipmode      | VARCHAR       | AIR         | TRUCK               | 7             | NULL                | NULL                 | NULL    | NULL    | NULL    | 6001215 | 0.0%            |
 | l_comment       | VARCHAR       |  Tiresias   | zzle? furiously iro | 3558599       | NULL                | NULL                 | NULL    | NULL    | NULL    | 6001215 | 0.0%            |
+
+## Using `SUMMARIZE` in a Subquery
+
+`SUMMARIZE` can be used a subquery. This allows creating a table from the summary, for example:
+
+```sql
+CREATE TABLE tbl_summary AS SELECT * FROM (SUMMARIZE tbl);
+```
+
+## Summarizing Remote Tables
+
+It is possible to summarize remote tables via the [`httpfs` extension](../../extensions/httpfs) using the `SUMMARIZE TABLE` statement. For example:
+
+```sql
+SUMMARIZE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
+```

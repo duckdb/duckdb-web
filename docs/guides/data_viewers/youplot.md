@@ -25,29 +25,29 @@ By combining the [`COPY...TO`](../../sql/statements/copy#copy-to) function with 
 
 1. As an example, this is how to read all data from `input.json`:
 
-    ```bash
-    duckdb -s "SELECT * FROM read_json_auto('input.json')"
-    ```
+   ```bash
+   duckdb -s "SELECT * FROM read_json_auto('input.json')"
+   ```
 
 2. To prepare the data for YouPlot, write a simple aggregate:
 
-    ```bash
-    duckdb -s "SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10"
-    ```
+   ```bash
+   duckdb -s "SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10"
+   ```
 
-3. Finally, wrap the `SELECT` in the `COPY...TO` function with an output location of `/dev/stdout`.
+3. Finally, wrap the `SELECT` in the `COPY ... TO` function with an output location of `/dev/stdout`.
 
-    The syntax looks like this:
+   The syntax looks like this:
 
-    ```sql
-    COPY (<YOUR_SELECT_QUERY>) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)
-    ```
+   ```sql
+   COPY (⟨query⟩) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER);
+   ```
 
-    The full DuckDB command below outputs the query in CSV format with a header:
+   The full DuckDB command below outputs the query in CSV format with a header:
 
-    ```bash
-    duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
-    ```
+   ```bash
+   duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
+   ```
 
 ## Connecting DuckDB to YouPlot
 
@@ -68,9 +68,7 @@ Maybe you're piping some data through `jq`. Maybe you're downloading a JSON file
 Let's combine this with a quick `curl` from GitHub to see what a certain user has been up to lately.
 
 ```bash
-curl -sL "https://api.github.com/users/dacort/events?per_page=100" \
-    | duckdb -s "COPY (SELECT type, count(*) AS event_count FROM read_json_auto('/dev/stdin') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" \
-    | uplot bar -d, -H -t "GitHub Events for @dacort"
+curl -sL "https://api.github.com/users/dacort/events?per_page=100" | duckdb -s "COPY (SELECT type, count(*) AS event_count FROM read_json_auto('/dev/stdin') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" | uplot bar -d, -H -t "GitHub Events for @dacort"
 ```
 
 ![github-events](/images/guides/youplot/github-events.png)

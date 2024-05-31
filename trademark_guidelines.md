@@ -2,6 +2,9 @@
 layout: default
 body_class: tmguidelines
 title: DUCKDB™ Trademark use guidelines
+pagehead:
+  - "Trademark Use"
+  - "bg2"
 ---
 
 # DUCKDB™ Trademark Use Guidelines

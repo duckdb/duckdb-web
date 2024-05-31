@@ -26,7 +26,7 @@ import pyarrow as pa
 
 my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
                                        'j': ["one", "two", "three", "four"]})
-                                       
+
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow RecordBatchReader
 chunk_size = 1_000_000
 results = duckdb.sql("SELECT * FROM my_arrow_table").fetch_record_batch(chunk_size)
@@ -43,8 +43,9 @@ while True:
 
 ## Export from Relational API
 
-Arrow objects can also be exported from the Relational API. A relation can be converted to an Arrow table using the `arrow` or `to_arrow_table` functions, or a record batch using `record_batch`.  
-A result can be exported to an Arrow table with `arrow` or the alias `fetch_arrow_table`, or to a RecordBatchReader using `fetch_arrow_reader`. 
+Arrow objects can also be exported from the Relational API. A relation can be converted to an Arrow table using the `arrow` or `to_arrow_table` functions, or a record batch using `record_batch`.
+A result can be exported to an Arrow table with `arrow` or the alias `fetch_arrow_table`, or to a RecordBatchReader using `fetch_arrow_reader`.
+
 ```python
 import duckdb
 

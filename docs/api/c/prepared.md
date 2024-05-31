@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Prepared Statements
+title: Prepared Statements
 ---
 
 A prepared statement is a parameterized query. The query is prepared with question marks (`?`) or dollar symbols (`$1`) indicating the parameters of the query. Values can then be bound to these parameters, after which the prepared statement can be executed using those parameters. A single query can be prepared once and executed many times.
@@ -44,7 +44,7 @@ After calling `duckdb_prepare`, the prepared statement parameters can be inspect
 
 It is not required that the `duckdb_bind` family of functions matches the prepared statement parameter type exactly. The values will be auto-cast to the required value as required. For example, calling `duckdb_bind_int8` on a parameter type of `DUCKDB_TYPE_INTEGER` will work as expected.
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. Instead it is recommended to use the [Appender](appender).
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. Instead it is recommended to use the [Appender](appender).
 
 ## API Reference
 
@@ -55,38 +55,9 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_prepare_error"><span class="nf">duckdb_prepare_error</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_nparams"><span class="nf">duckdb_nparams</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_parameter_name"><span class="nf">duckdb_parameter_name</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="nv">duckdb_type</span> <a href="#duckdb_param_type"><span class="nf">duckdb_param_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
+<span class="kt">duckdb_type</span> <a href="#duckdb_param_type"><span class="nf">duckdb_param_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_clear_bindings"><span class="nf">duckdb_clear_bindings</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
-<span class="nv">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_value"><span class="nf">duckdb_bind_value</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_value</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_parameter_index"><span class="nf">duckdb_bind_parameter_index</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> *<span class="nv">param_idx_out</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_boolean"><span class="nf">duckdb_bind_boolean</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">bool</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int8"><span class="nf">duckdb_bind_int8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int8_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int16"><span class="nf">duckdb_bind_int16</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int16_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int32"><span class="nf">duckdb_bind_int32</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int32_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int64"><span class="nf">duckdb_bind_int64</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int64_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_hugeint"><span class="nf">duckdb_bind_hugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uhugeint"><span class="nf">duckdb_bind_uhugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="nv">duckdb_uhugeint</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_decimal"><span class="nf">duckdb_bind_decimal</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="nv">duckdb_decimal</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint8"><span class="nf">duckdb_bind_uint8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint8_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint16"><span class="nf">duckdb_bind_uint16</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint16_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint32"><span class="nf">duckdb_bind_uint32</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint32_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint64"><span class="nf">duckdb_bind_uint64</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint64_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_float"><span class="nf">duckdb_bind_float</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">float</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_double"><span class="nf">duckdb_bind_double</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">double</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_date"><span class="nf">duckdb_bind_date</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_date</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_time"><span class="nf">duckdb_bind_time</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_time</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_timestamp"><span class="nf">duckdb_bind_timestamp</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_timestamp</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_interval"><span class="nf">duckdb_bind_interval</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_interval</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar"><span class="nf">duckdb_bind_varchar</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar_length"><span class="nf">duckdb_bind_varchar_length</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_blob"><span class="nf">duckdb_bind_blob</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_null"><span class="nf">duckdb_bind_null</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared"><span class="nf">duckdb_execute_prepared</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_streaming"><span class="nf">duckdb_execute_prepared_streaming</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_arrow"><span class="nf">duckdb_execute_prepared_arrow</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_arrow</span> *<span class="nv">out_result</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_arrow_scan"><span class="nf">duckdb_arrow_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_arrow_array_scan"><span class="nf">duckdb_arrow_array_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>, <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>, <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream</span>);
+<span class="kt">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
 </code></pre></div></div>
 
 ### `duckdb_prepare`
@@ -127,7 +98,6 @@ The resulting prepared statement object
 
 <br>
 
-
 ### `duckdb_destroy_prepare`
 
 ---
@@ -149,7 +119,6 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 The prepared statement to destroy.
 
 <br>
-
 
 ### `duckdb_prepare_error`
 
@@ -179,7 +148,6 @@ The error message, or `nullptr` if there is none.
 
 <br>
 
-
 ### `duckdb_nparams`
 
 ---
@@ -203,7 +171,6 @@ Returns 0 if the query was not successfully prepared.
 The prepared statement to obtain the number of parameters for.
 
 <br>
-
 
 ### `duckdb_parameter_name`
 
@@ -231,7 +198,6 @@ The prepared statement for which to get the parameter name from.
 
 <br>
 
-
 ### `duckdb_param_type`
 
 ---
@@ -242,7 +208,7 @@ Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the stat
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_param_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_param_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx
 </span>);
@@ -263,7 +229,6 @@ The parameter type
 
 <br>
 
-
 ### `duckdb_clear_bindings`
 
 ---
@@ -278,7 +243,6 @@ Clear the params bind to the prepared statement.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_prepared_statement_type`
 
 ---
@@ -287,7 +251,7 @@ Returns the statement type of the statement to be executed
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_statement_type</span> <span class="nv">duckdb_prepared_statement_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_statement_type</span> <span class="nv">duckdb_prepared_statement_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">statement
 </span>);
 </code></pre></div></div>
@@ -303,586 +267,3 @@ The prepared statement.
 duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 <br>
-
-
-### `duckdb_bind_value`
-
----
-Binds a value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_value</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_value</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_parameter_index`
-
----
-Retrieve the index of the parameter for the prepared statement, identified by name
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_parameter_index</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> *<span class="nv">param_idx_out</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_boolean`
-
----
-Binds a bool value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_boolean</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">bool</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_int8`
-
----
-Binds an int8_t value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">int8_t</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_int16`
-
----
-Binds an int16_t value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">int16_t</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_int32`
-
----
-Binds an int32_t value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">int32_t</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_int64`
-
----
-Binds an int64_t value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">int64_t</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_hugeint`
-
----
-Binds a duckdb_hugeint value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_hugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_hugeint</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_uhugeint`
-
----
-Binds an duckdb_uhugeint value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uhugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="nv">duckdb_uhugeint</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_decimal`
-
----
-Binds a duckdb_decimal value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_decimal</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="nv">duckdb_decimal</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_uint8`
-
----
-Binds an uint8_t value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">uint8_t</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_uint16`
-
----
-Binds an uint16_t value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">uint16_t</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_uint32`
-
----
-Binds an uint32_t value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">uint32_t</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_uint64`
-
----
-Binds an uint64_t value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">uint64_t</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_float`
-
----
-Binds a float value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_float</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">float</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_double`
-
----
-Binds a double value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_double</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">double</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_date`
-
----
-Binds a duckdb_date value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_date</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_date</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_time`
-
----
-Binds a duckdb_time value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_time</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_time</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_timestamp`
-
----
-Binds a duckdb_timestamp value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_timestamp</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_interval`
-
----
-Binds a duckdb_interval value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_interval</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_interval</span> <span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_varchar`
-
----
-Binds a null-terminated varchar value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_varchar</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_varchar_length`
-
----
-Binds a varchar value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_varchar_length</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">length
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_blob`
-
----
-Binds a blob value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_blob</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">length
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_bind_null`
-
----
-Binds a NULL value to the prepared statement at the specified index.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_null</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx
-</span>);
-</code></pre></div></div>
-<br>
-
-
-### `duckdb_execute_prepared`
-
----
-Executes the prepared statement with the given bound parameters, and returns a materialized query result.
-
-This method can be called multiple times for each prepared statement, and the parameters can be modified
-between calls to this function.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `prepared_statement`
-
-The prepared statement to execute.
-* `out_result`
-
-The query result.
-* `returns`
-
-`DuckDBSuccess` on success or `DuckDBError` on failure.
-
-<br>
-
-
-### `duckdb_execute_prepared_streaming`
-
----
-Executes the prepared statement with the given bound parameters, and returns an optionally-streaming query result.
-To determine if the resulting query was in fact streamed, use `duckdb_result_is_streaming`
-
-This method can be called multiple times for each prepared statement, and the parameters can be modified
-between calls to this function.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared_streaming</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `prepared_statement`
-
-The prepared statement to execute.
-* `out_result`
-
-The query result.
-* `returns`
-
-`DuckDBSuccess` on success or `DuckDBError` on failure.
-
-<br>
-
-
-### `duckdb_execute_prepared_arrow`
-
----
-Executes the prepared statement with the given bound parameters, and returns an arrow query result.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared_arrow</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> *<span class="nv">out_result
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `prepared_statement`
-
-The prepared statement to execute.
-* `out_result`
-
-The query result.
-* `returns`
-
-`DuckDBSuccess` on success or `DuckDBError` on failure.
-
-<br>
-
-
-### `duckdb_arrow_scan`
-
----
-Scans the Arrow stream and creates a view with the given name.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_arrow_scan</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
-</span>  <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `connection`
-
-The connection on which to execute the scan.
-* `table_name`
-
-Name of the temporary view to create.
-* `arrow`
-
-Arrow stream wrapper.
-* `returns`
-
-`DuckDBSuccess` on success or `DuckDBError` on failure.
-
-<br>
-
-
-### `duckdb_arrow_array_scan`
-
----
-Scans the Arrow array and creates a view with the given name.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_arrow_array_scan</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>,<span class="nv">
-</span>  <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `connection`
-
-The connection on which to execute the scan.
-* `table_name`
-
-Name of the temporary view to create.
-* `arrow_schema`
-
-Arrow schema wrapper.
-* `arrow_array`
-
-Arrow array wrapper.
-* `out_stream`
-
-Output array stream that wraps around the passed schema, for releasing/deleting once done.
-* `returns`
-
-`DuckDBSuccess` on success or `DuckDBError` on failure.
-
-<br>
-

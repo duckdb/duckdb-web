@@ -3,17 +3,14 @@
 layout: post
 title:  "Testing out DuckDB's Full Text Search Extension"
 author: Laurens Kuiper
-excerpt_separator: <!--more-->
-
+excerpt: DuckDB now has full-text search functionality, similar to the FTS5 extension in SQLite. The main difference is that our FTS extension is fully formulated in SQL. We tested it out on TREC disks 4 and 5.
 ---
-
-_TL;DR: DuckDB now has full-text search functionality, similar to the FTS5 extension in SQLite. The main difference is that our FTS extension is fully formulated in SQL. We tested it out on TREC disks 4 and 5._
 
 Searching through textual data stored in a database can be cumbersome, as SQL does not provide a good way of formulating questions such as "Give me all the documents about __Mallard Ducks__": string patterns with `LIKE` will only get you so far. Despite SQL's shortcomings here, storing textual data in a database is commonplace. Consider the table `products (id INT, name VARCHAR, description VARCHAR`) - it would be useful to search through the `name` and `description` columns for a website that sells these products.
 
 <!--more-->
 
-We expect a search engine to return us results within milliseconds. For a long time databases were unsuitable for this task, because they could not search large inverted indices at this speed: transactional database systems are not made for this use case. However, analytical database systems, can keep up with state-of-the art information retrieval systems. The company [Spinque](https://www.spinque.com/) is a good example of this. At Spinque, MonetDB is used as a computation engine for customized search engines.
+We expect a search engine to return us results within milliseconds. For a long time databases were unsuitable for this task, because they could not search large inverted indexes at this speed: transactional database systems are not made for this use case. However, analytical database systems, can keep up with state-of-the art information retrieval systems. The company [Spinque](https://www.spinque.com/) is a good example of this. At Spinque, MonetDB is used as a computation engine for customized search engines.
 
 DuckDB's FTS implementation follows the paper "[Old Dogs Are Great at New Tricks](https://www.duckdb.org/pdf/SIGIR2014-column-stores-ir-prototyping.pdf)". A keen observation there is that advances made to the database system, such as parallelization, will speed up your search engine "for free"!
 

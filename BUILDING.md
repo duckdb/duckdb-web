@@ -14,6 +14,10 @@
     - [Prerequisites](#prerequisites-1)
     - [Serving the site from Docker](#serving-the-site-from-docker)
   - [With a Dev Container](#with-a-dev-container)
+  - [Generating the search index](#generating-the-search-index)
+  - [Updating the release calendar](#updating-the-release-calendar)
+  - [Troubleshooting](#troubleshooting)
+    - [Cannot install dependency](#cannot-install-dependency)
 
 The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
@@ -25,7 +29,7 @@ The site is built using [Jekyll](https://jekyllrb.com/) 3.9.x.
 
 #### Ruby
 
-Jekyll 3.9.x requires Ruby v2.7.x+. Note that in some systems, the built-in Ruby distribution is older. On MacOS, you can install a new Ruby version via [Homebew](https://brew.sh/):
+Jekyll 3.9.x requires Ruby v2.7.x+. Note that in some systems, the built-in Ruby distribution is older. On macOS, you can install a new Ruby version via [Homebrew](https://brew.sh/):
 
 ```bash
 brew install ruby
@@ -65,15 +69,15 @@ We use [a fork of the Rouge syntax highligher](https://github.com/duckdb/rouge/b
 Serve the website (latest only, archives excluded) with:
 
 ```bash
-scripts/serve.sh
+scripts/serve-latest.sh
 ```
 
-The website can be browsed by going to <http://localhost:4000/docs/> in your browser.
+To browse the website, visit <http://localhost:4000/docs/>.
 
 Serve the full website with:
 
 ```sh
-scripts/serve-full.sh
+scripts/serve.sh
 ```
 
 ## Using Docker
@@ -95,15 +99,15 @@ scripts/docker-build.sh
 Serve the website (latest only, archives excluded) with:
 
 ```sh
-scripts/docker-serve.sh
+scripts/docker-serve-latest.sh
 ```
 
-The website can be browsed by going to <http://localhost:4000/docs/> in your browser.
+To browse the website, visit <http://localhost:4000/docs/>.
 
 Serve the full website with:
 
 ```sh
-scripts/docker-serve-full.sh
+scripts/docker-serve.sh
 ```
 
 To stop the container, run:
@@ -115,3 +119,36 @@ scripts/docker-stop.sh
 ## With a Dev Container
 
 If you are using a [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers), click the green Code button to the top right to open a new codespace with this repository initialized.
+
+## Generating the search index
+
+To generate the search index, run:
+
+```bash
+scripts/install-dependencies.sh
+scripts/generate-search-index.sh
+```
+
+## Updating the release calendar
+
+The release calendar is updated automatically by [CI](.github/workflows/jekyll.yml). To manually update the release calendar, run:
+
+```bash
+python scripts/get_calendar.py
+```
+
+## Troubleshooting
+
+### Cannot install dependency
+
+The following error occurs:
+
+```console
+posix-spawn.c:226:27: error: incompatible function pointer types passing 'int (VALUE, VALUE, posix_spawn_file_actions_t *)' (aka 'int (unsigned long, unsigned long,
+```
+
+The workaround is to run the following `bundle` command:
+
+```bash
+bundle config set --global build.posix-spawn "--with-cflags=-Wno-error=incompatible-function-pointer-types"
+```

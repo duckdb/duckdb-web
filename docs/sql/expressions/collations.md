@@ -16,25 +16,60 @@ In the stand-alone installation of DuckDB three collations are included: `NOCASE
 
 ```sql
 SELECT 'hello' = 'hElLO';
--- false
-SELECT 'hello' COLLATE NOCASE = 'hElLO';
--- true
+```
 
+```text
+false
+```
+
+```sql
+SELECT 'hello' COLLATE NOCASE = 'hElLO';
+```
+
+```text
+true
+```
+
+```sql
 SELECT 'hello' = 'hëllo';
--- false
+```
+
+```text
+false
+```
+
+```sql
 SELECT 'hello' COLLATE NOACCENT = 'hëllo';
--- true
+```
+
+```text
+true
 ```
 
 Collations can be combined by chaining them using the dot operator. Note, however, that not all collations can be combined together. In general, the `NOCASE` collation can be combined with any other collator, but most other collations cannot be combined.
 
 ```sql
 SELECT 'hello' COLLATE NOCASE = 'hElLÖ';
--- false
+```
+
+```text
+false
+```
+
+```sql
 SELECT 'hello' COLLATE NOACCENT = 'hElLÖ';
--- false
+```
+
+```text
+false
+```
+
+```sql
 SELECT 'hello' COLLATE NOCASE.NOACCENT = 'hElLÖ';
--- true
+```
+
+```text
+true
 ```
 
 ## Default Collations
@@ -43,9 +78,11 @@ The collations we have seen so far have all been specified *per expression*. It 
 
 ```sql
 SET default_collation = NOCASE;
-
 SELECT 'hello' = 'HeLlo';
--- true
+```
+
+```text
+true
 ```
 
 Collations can also be specified per-column when creating a table. When that column is then used in a comparison, the per-column collation is used to perform that comparison.
@@ -53,27 +90,56 @@ Collations can also be specified per-column when creating a table. When that col
 ```sql
 CREATE TABLE names (name VARCHAR COLLATE NOACCENT);
 INSERT INTO names VALUES ('hännes');
-SELECT name FROM names WHERE name = 'hannes';
--- hännes
+```
+
+```sql
+SELECT name
+FROM names
+WHERE name = 'hannes';
+```
+
+```text
+hännes
 ```
 
 Be careful here, however, as different collations cannot be combined. This can be problematic when you want to compare columns that have a different collation specified.
 
 ```sql
-SELECT name FROM names WHERE name = 'hannes' COLLATE NOCASE;
--- ERROR: Cannot combine types with different collation!
+SELECT name
+FROM names
+WHERE name = 'hannes' COLLATE NOCASE;
+```
 
+```console
+ERROR: Cannot combine types with different collation!
+```
+
+```sql
 CREATE TABLE other_names (name VARCHAR COLLATE NOCASE);
 INSERT INTO other_names VALUES ('HÄNNES');
-
-SELECT * FROM names, other_names WHERE names.name = other_names.name;
--- ERROR: Cannot combine types with different collation!
-
--- need to manually overwrite the collation!
-
-SELECT * FROM names, other_names WHERE names.name COLLATE NOACCENT.NOCASE = other_names.name COLLATE NOACCENT.NOCASE;
--- hännes|HÄNNES
 ```
+
+```sql
+SELECT names.name AS name, other_names.name AS other_name
+FROM names, other_names
+WHERE names.name = other_names.name;
+```
+
+```console
+ERROR: Cannot combine types with different collation!
+```
+
+We need to manually overwrite the collation:
+
+```sql
+SELECT names.name AS name, other_names.name AS other_name
+FROM names, other_names
+WHERE names.name COLLATE NOACCENT.NOCASE = other_names.name COLLATE NOACCENT.NOCASE;
+```
+
+|  name  | other_name |
+|--------|------------|
+| hännes | HÄNNES     |
 
 ## ICU Collations
 
@@ -91,7 +157,10 @@ Loading this extension will add a number of language and region specific collati
 ```sql
 PRAGMA collations;
 SELECT * FROM pragma_collations();
--- [af, am, ar, as, az, be, bg, bn, bo, bs, bs, ca, ceb, chr, cs, cy, da, de, de_AT, dsb, dz, ee, el, en, en_US, en_US, eo, es, et, fa, fa_AF, fi, fil, fo, fr, fr_CA, ga, gl, gu, ha, haw, he, he_IL, hi, hr, hsb, hu, hy, id, id_ID, ig, is, it, ja, ka, kk, kl, km, kn, ko, kok, ku, ky, lb, lkt, ln, lo, lt, lv, mk, ml, mn, mr, ms, mt, my, nb, nb_NO, ne, nl, nn, om, or, pa, pa, pa_IN, pl, ps, pt, ro, ru, se, si, sk, sl, smn, sq, sr, sr, sr_BA, sr_ME, sr_RS, sr, sr_BA, sr_RS, sv, sw, ta, te, th, tk, to, tr, ug, uk, ur, uz, vi, wae, wo, xh, yi, yo, zh, zh, zh_CN, zh_SG, zh, zh_HK, zh_MO, zh_TW, zu]
+```
+
+```text
+[af, am, ar, as, az, be, bg, bn, bo, bs, bs, ca, ceb, chr, cs, cy, da, de, de_AT, dsb, dz, ee, el, en, en_US, en_US, eo, es, et, fa, fa_AF, fi, fil, fo, fr, fr_CA, ga, gl, gu, ha, haw, he, he_IL, hi, hr, hsb, hu, hy, id, id_ID, ig, is, it, ja, ka, kk, kl, km, kn, ko, kok, ku, ky, lb, lkt, ln, lo, lt, lv, mk, ml, mn, mr, ms, mt, my, nb, nb_NO, ne, nl, nn, om, or, pa, pa, pa_IN, pl, ps, pt, ro, ru, se, si, sk, sl, smn, sq, sr, sr, sr_BA, sr_ME, sr_RS, sr, sr_BA, sr_RS, sv, sw, ta, te, th, tk, to, tr, ug, uk, ur, uz, vi, wae, wo, xh, yi, yo, zh, zh, zh_CN, zh_SG, zh, zh_HK, zh_MO, zh_TW, zu]
 ```
 
 These collations can then be used as the other collations would be used before. They can also be combined with the `NOCASE` collation. For example, to use the German collation rules you could use the following code snippet:
@@ -100,5 +169,8 @@ These collations can then be used as the other collations would be used before. 
 CREATE TABLE strings (s VARCHAR COLLATE DE);
 INSERT INTO strings VALUES ('Gabel'), ('Göbel'), ('Goethe'), ('Goldmann'), ('Göthe'), ('Götz');
 SELECT * FROM strings ORDER BY s;
--- "Gabel", "Göbel", "Goethe", "Goldmann", "Göthe", "Götz"
+```
+
+```text
+"Gabel", "Göbel", "Goethe", "Goldmann", "Göthe", "Götz"
 ```

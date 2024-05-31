@@ -13,34 +13,67 @@ To construct a `MAP`, use the bracket syntax preceded by the `MAP` keyword.
 
 ## Creating Maps
 
+A map with `VARCHAR` keys and `INTEGER` values. This returns `{key1=10, key2=20, key3=30}`:
+
 ```sql
--- A map with varchar keys and integer values. This returns {key1=1, key2=5}
-SELECT MAP {'key1': 1, 'key2': 5};
--- Alternatively use the map_from_entries function. This returns {key1=1, key2=5}
-SELECT map_from_entries([(key1, 1), (key2, 5)]);
--- A map with integer keys and numeric values. This returns {1=42.001, 5=-32.100} 
+SELECT MAP {'key1': 10, 'key2': 20, 'key3': 30};
+```
+
+Alternatively use the map_from_entries function. This returns `{key1=10, key2=20, key3=30}`:
+
+```sql
+SELECT map_from_entries([('key1', 10), ('key2', 20), ('key3', 30)]);
+```
+
+A map can be also created using two lists: keys and values. This returns `{key1=10, key2=20, key3=30}`:
+
+```sql
+SELECT MAP(['key1', 'key2', 'key3'], [10, 20, 30]);
+```
+
+A map can also use INTEGER keys and NUMERIC values. This returns `{1=42.001, 5=-32.100}`:
+
+```sql
 SELECT MAP {1: 42.001, 5: -32.1};
--- Keys and/or values can also be nested types.
--- This returns {[a, b]=[1.1, 2.2], [c, d]=[3.3, 4.4]}
+```
+
+Keys and/or values can also be nested types. This returns `{[a, b]=[1.1, 2.2], [c, d]=[3.3, 4.4]}`:
+
+```sql
 SELECT MAP {['a', 'b']: [1.1, 2.2], ['c', 'd']: [3.3, 4.4]};
--- Create a table with a map column that has integer keys and double values
-CREATE TABLE map_table (map_col MAP(INT, DOUBLE));
+```
+
+Create a table with a map column that has INTEGER keys and DOUBLE values:
+
+```sql
+CREATE TABLE tbl (col MAP(INTEGER, DOUBLE));
 ```
 
 ## Retrieving from Maps
 
-`MAP`s use bracket notation for retrieving values. Selecting from a `MAP` returns a `LIST` rather than an individual value, with an empty `LIST` meaning that the key was not found. 
+`MAP`s use bracket notation for retrieving values. Selecting from a `MAP` returns a `LIST` rather than an individual value, with an empty `LIST` meaning that the key was not found.
+
+Use bracket notation to retrieve a list containing the value at a key's location. This returns `[5]`. Note that the expression in bracket notation must match the type of the map's key:
+
 ```sql
--- Use bracket notation to retrieve a list containing the value at a key's location. This returns [5]
--- Note that the expression in bracket notation must match the type of the map's key
 SELECT MAP {'key1': 5, 'key2': 43}['key1'];
--- To retrieve the underlying value, use list selection syntax to grab the first element.
--- This returns 5
+```
+
+To retrieve the underlying value, use list selection syntax to grab the first element. This returns `5`:
+
+```sql
 SELECT MAP {'key1': 5, 'key2': 43}['key1'][1];
--- If the element is not in the map, an empty list will be returned. Returns []
--- Note that the expression in bracket notation must match the type of the map's key else an error is returned
+```
+
+If the element is not in the map, an empty list will be returned. This returns `[]`. Note that the expression in bracket notation must match the type of the map's key else an error is returned:
+
+```sql
 SELECT MAP {'key1': 5, 'key2': 43}['key3'];
--- The element_at function can also be used to retrieve a map value. This returns [5]
+```
+
+The element_at function can also be used to retrieve a map value. This returns `[5]`:
+
+```sql
 SELECT element_at(MAP {'key1': 5, 'key2': 43}, 'key1');
 ```
 
@@ -55,7 +88,7 @@ The ordering is defined positionally in the same way that words can be ordered i
 
 At the top level, `NULL` nested values obey standard SQL `NULL` comparison rules:
 comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` result.
-Comparing nested value _members_ , however, uses the internal nested value rules for `NULL`s,
+Comparing nested value _members_, however, uses the internal nested value rules for `NULL`s,
 and a `NULL` nested value member will compare above a non-`NULL` nested value member.
 
 ## Functions

@@ -52,3 +52,15 @@ for person in person_iter {
     println!("Found person {:?}", person.unwrap());
 }
 ```
+
+## Appender
+
+The Rust client supports the [DuckDB Appender API](../data/appender) for bulk inserts. For example:
+
+```rust
+fn insert_rows(conn: &Connection) -> Result<()> {
+    let mut app = conn.appender("foo")?;
+    app.append_rows([[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]])?;
+    Ok(())
+}
+```

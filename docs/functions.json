@@ -163,7 +163,7 @@
       "arg",
       "val"
     ],
-    "description": "Finds the row with the maximum val. Calculates the arg expression at that row.",
+    "description": "Finds the row with the maximum val. Calculates the non-NULL arg expression at that row.",
     "example": "arg_max(A,B)",
     "type": "aggregate_function_set",
     "aliases": [
@@ -174,18 +174,42 @@
     "result": null
   },
   {
+    "name": "arg_max_null",
+    "parameters": [
+      "arg",
+      "val"
+    ],
+    "description": "Finds the row with the maximum val. Calculates the arg expression at that row.",
+    "example": "arg_max_null(A,B)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
     "name": "arg_min",
     "parameters": [
       "arg",
       "val"
     ],
-    "description": "Finds the row with the minimum val. Calculates the arg expression at that row.",
+    "description": "Finds the row with the minimum val. Calculates the non-NULL arg expression at that row.",
     "example": "arg_min(A,B)",
     "type": "aggregate_function_set",
     "aliases": [
       "argmin",
       "min_by"
     ],
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "arg_min_null",
+    "parameters": [
+      "arg",
+      "val"
+    ],
+    "description": "Finds the row with the minimum val. Calculates the arg expression at that row.",
+    "example": "arg_min_null(A,B)",
+    "type": "aggregate_function_set",
     "category": "distributive",
     "result": null
   },
@@ -556,6 +580,17 @@
     "example": "(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / (COUNT(*) - 1)",
     "type": "aggregate_function",
     "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "create_sort_key",
+    "parameters": [
+      "parameters..."
+    ],
+    "description": "Constructs a binary-comparable sort key based on a set of input parameters and sort qualifiers",
+    "example": "create_sort_key('A', 'DESC')",
+    "type": "scalar_function",
+    "category": "blob",
     "result": null
   },
   {
@@ -2728,7 +2763,7 @@
     "parameters": [
       "arg"
     ],
-    "description": "Calculates the sum value for all tuples in arg without overflow checks.",
+    "description": "Internal only. Calculates the sum value for all tuples in arg without overflow checks.",
     "example": "sum_no_overflow(A)",
     "type": "aggregate_function_set",
     "category": "distributive",
@@ -2757,6 +2792,18 @@
     "type": "scalar_function_set",
     "category": "date",
     "result": "1992-04-15 07:00:00"
+  },
+  {
+    "struct": "TimeTZSortKeyFun",
+    "name": "timetz_byte_comparable",
+    "parameters": [
+      "time_tz"
+    ],
+    "description": "Converts a TIME WITH TIME ZONE to an integer sort key",
+    "example": "timetz_byte_comparable('18:18:16.21-07:00'::TIME_TZ)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": null
   },
   {
     "name": "timezone",
@@ -2918,6 +2965,17 @@
     "result": "5 months"
   },
   {
+    "name": "to_quarters",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a quarter interval",
+    "example": "to_quarters(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "1 year 3 months"
+  },
+  {
     "name": "to_seconds",
     "parameters": [
       "double"
@@ -3018,7 +3076,7 @@
     "struct": "CurrentTransactionIdFun",
     "type": "scalar_function",
     "category": "generic",
-    "result": 56
+    "result": "30"
   },
   {
     "name": "typeof",
@@ -3109,6 +3167,18 @@
     "result": "hello"
   },
   {
+    "name": "unpivot_list",
+    "parameters": [
+      "any",
+      "..."
+    ],
+    "description": "Identical to list_value, but generated as part of unpivot for better error messages",
+    "example": "unpivot_list(4, 5, 6)",
+    "type": "scalar_function",
+    "category": "list",
+    "result": "[4, 5, 6]"
+  },
+  {
     "name": "uuid",
     "description": "Returns a random UUID similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687",
     "example": "uuid()",
@@ -3164,7 +3234,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.9.3-dev3077"
+    "result": "v0.10.4-dev59"
   },
   {
     "name": "week",
@@ -3200,18 +3270,6 @@
     "type": "scalar_function_set",
     "category": "date",
     "result": 31
-  },
-  {
-    "name": "which_secret",
-    "parameters": [
-      "path",
-      "type"
-    ],
-    "description": "Print out the name of the secret that will be used for reading a path",
-    "example": "which_secret('s3://some/authenticated/path.csv', 's3')",
-    "type": "scalar_function",
-    "category": "secret",
-    "result": ""
   },
   {
     "name": "xor",

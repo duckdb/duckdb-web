@@ -6,17 +6,14 @@
 	{% if page.title == "DuckDB" %}
     <title>{{ page.title }}</title>
 	{% elsif page.title == "An in-process SQL OLAP database management system" %}
-	<title>DuckDB - An in-process SQL OLAP database management system</title>
+	<title>DuckDB – An in-process SQL OLAP database management system</title>
 	{% else %}
-    <title>{{ page.title }} - DuckDB</title>
+    <title>{{ page.title }} – DuckDB</title>
 	{% endif %}
 
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css?{{ site.data['hash'] }}">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css?{{ site.data['hash'] }}">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
-	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-	<link rel="stylesheet" href="/css/railroad.css?{{ site.data['hash'] }}">
-	{% endif %}
 	{% if page.add_css %}
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/{{ page.add_css }}?{{ site.data['hash'] }}">
 	{% endif %}
@@ -30,6 +27,7 @@
 	<meta name="msapplication-TileColor" content="#000000">
 	<meta name="msapplication-config" content="{{ site.baseurl }}/images/favicon/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
 	{% seo title=false %}
 </head>
@@ -39,32 +37,43 @@
 		<div class="headerline">
 			<div class="headercontent">
 				<div class="duckdbhome">
-					<!--<a href="{{ site.url }}{{ site.baseurl }}/">&#xe900;</a>-->
 					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/logo-dl/DuckDB_Logo.png" alt="DuckDB Logo for Download" class="downloadlogo"></a>
-					<div id="duckdbanimation" style="width: 109px; margin-top: 2px;"></div>
+					<div id="duckdb_logo"></div>
 				</div>
 				<div class="landingmenu">
-
+					
 					{% include menu_secondary.html %}
-
+					
 					<div class="hamburger hamburger--squeeze">
 						<div class="hamburger-box">
 							<div class="hamburger-inner"></div>
 						</div>
 					</div>
-
 				</div>
+				<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
 			</div>
 		</div>
 	</header>
-
-	<main>
+	
+	{% assign file_extension = page.path | split: "." | last %}
+	<main class="f-{{file_extension}}">
+		
+		{% include searchoverlay.html %}
 
 		{% if page.body_class contains "nowrap" %}
 
 			{% include anchor_headings.html html=content %}
 
 		{% else %}
+		
+		{% if page.pagehead[0] %}
+		<div class="pagehead {{page.pagehead[1]}}">
+			<div class="wrap">
+				<h1>{{page.pagehead[0]}}</h1>
+			</div>
+		</div>
+		{% endif %}
+		
 			<div class="wrap">
 				<div id="main_content_wrap">
 					{% include anchor_headings.html html=content %}
@@ -84,14 +93,13 @@
 	</main>
 
 	{% include footer.html %}
-
+	
+	<script src="{{ site.baseurl }}/js/minisearch.js"></script>
+	<script src="{{ site.baseurl }}/js/search.js"></script>
 	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
 	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
-	<script src="{{ site.baseurl }}/js/script.js"></script>
-	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-	<script src="/js/railroad.js"></script>
-	<script src="/js/{{ page.railroad }}"></script>
-	{% endif %}
+	<script src="{{ site.baseurl }}/js/copy_button.js"></script>
+	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}"></script>
 
 </body>
 </html>

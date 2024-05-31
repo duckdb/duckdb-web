@@ -2,7 +2,7 @@
 layout: post
 title:  "Announcing DuckDB 0.8.0"
 author: Mark Raasveldt and Hannes Mühleisen
-excerpt_separator: <!--more-->
+excerpt: ""
 ---
 
 <img src="/images/blog/mottled_duck.jpg"
@@ -18,18 +18,18 @@ To install the new version, please visit the [installation guide](https://duckdb
 
 #### What's new in 0.8.0
 
-There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features! 
+There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
+
 * New pivot and unpivot statements
 * Improvements to parallel data import/export
 * Time series joins
 * Recursive globbing
 * Lazy-loading of storage metadata for faster startup times
 * User-defined functions for Python
-* Arrow Database Connectivity (ADBC) support 
+* Arrow Database Connectivity (ADBC) support
 * New Swift integration
 
 Below is a summary of those new features with examples, starting with two breaking changes in our SQL dialect that are designed to produce more intuitive results by default.
-
 
 #### Breaking SQL Changes
 
@@ -82,7 +82,7 @@ PIVOT sales ON year USING SUM(amount);
 The [documentation contains more examples](/docs/sql/statements/pivot.html).
 
 
-[**ASOF Joins for Time Series**](https://github.com/duckdb/duckdb/pull/6719). When joining time series data with background fact tables, the timestamps often do not exactly match. In this case it is often desirable to join rows so that the timestamp is joined with the *nearest timestamp*. The ASOF join can be used for this purpose - it performs a fuzzy join to find the closest join partner for each row instead of requiring an exact match.
+[**ASOF Joins for Time Series**](https://github.com/duckdb/duckdb/pull/6719). When joining time series data with background fact tables, the timestamps often do not exactly match. In this case it is often desirable to join rows so that the timestamp is joined with the *nearest timestamp*. The ASOF join can be used for this purpose – it performs a fuzzy join to find the closest join partner for each row instead of requiring an exact match.
 
 
 ```sql
@@ -143,7 +143,7 @@ FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 
 #### Storage Improvements
 
-[**Lazy-Loading Table Metadata**](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indices and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120x SF1) with ~770 million rows and 16 columns:
+[**Lazy-Loading Table Metadata**](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indexes and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120x SF1) with ~770 million rows and 16 columns:
 
 |         Query          | v0.6.1 | v0.7.1 | v0.8.0  | Parquet |
 |------------------------|--------|--------|-------|---------|
@@ -179,4 +179,4 @@ See the [documentation](/docs/api/python/function) for more information.
 
 #### Final Thoughts
 
-The full release notes can be [found on Github](https://github.com/duckdb/duckdb/releases/tag/v0.8.0). We would like to thank all of the contributors for their hard work on improving DuckDB.
+The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.8.0). We would like to thank all of the contributors for their hard work on improving DuckDB.

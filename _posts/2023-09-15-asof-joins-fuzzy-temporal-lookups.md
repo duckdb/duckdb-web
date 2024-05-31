@@ -2,9 +2,9 @@
 layout: post
 title: "DuckDB's AsOf Joins: Fuzzy Temporal Lookups"
 author: Richard Wesley
+thumb: "/images/blog/thumbs/230915.png"
+excerpt: DuckDB supports AsOf Joins – a way to match nearby values. They are especially useful for searching event tables for temporal analytics.
 ---
-
-_TL;DR: DuckDB supports AsOf Joins – a way to match nearby values. They are especially useful for searching event tables for temporal analytics._
 
 Do you have time series data that you want to join,
 but the timestamps don't quite match?
@@ -17,12 +17,12 @@ Then this post is for you!
 
 ## What is an AsOf Join?
 
-Time series data is not always perfectly aligned. 
+Time series data is not always perfectly aligned.
 Clocks may be slightly off, or there may be a delay between cause and effect.
 This can make connecting two sets of ordered data challenging.
 AsOf Joins are a tool for solving this and other similar problems.
 
-One of the problems that AsOf Joins are used to solve is 
+One of the problems that AsOf Joins are used to solve is
 finding the value of a varying property at a specific point in time.
 This use case is so common that it is where the name came from:
 
@@ -184,7 +184,7 @@ AsOf can stop searching when it finds the first match because there is at most o
 
 You may be wondering why the Common Table Expression in the `WITH` clause was called *state*.
 This is because the `prices` table is really an example of what in temporal analytics is called an *event table* .
-The rows of an event table contain timestamps and what happened at that time (i.e. events).
+The rows of an event table contain timestamps and what happened at that time (i.e., events).
 The events in the `prices` table are changes to the price of a stock.
 Another common example of an event table is a structured log file:
 Each row of the log records when something "happened" – usually a change to a part of the system.
@@ -211,7 +211,7 @@ and using an `OR` like this in a join condition makes comparisons slow and hard 
 Moreover, if the ordering column is already using `NULL` to indicate missing values,
 this option is not available.
 
-For most state tables, there are suitable choices (e.g. large dates) 
+For most state tables, there are suitable choices (e.g., large dates) 
 but one of the advantages of AsOf is that it can avoid having to design a state table 
 if it is not needed for the analytic task.
 
@@ -376,14 +376,14 @@ WITH state AS (
   SELECT ticker, price, "when",
     LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
   FROM prices
-)
+);
 ```
 
 The state table CTE is created by hash partitioning the table on `ticker`,
 sorting on `when` and then computing another column that is just `when` shifted down by one.
 The join is then implemented with a hash join on `ticker` and two comparisons on `when`.
 
-If there was no `ticker` column (e.g. the prices were for a single item)
+If there was no `ticker` column (e.g., the prices were for a single item)
 then the join would be implemented using our inequality join operator,
 which would materialise and sort both sides because it doesn't know that the ranges are disjoint.
 
@@ -410,7 +410,7 @@ Other alternatives combine equi-joins and window functions.
 The equi-join is used to implement the equality matching conditions,
 and the window is used to select the closest inequality.
 We will now look at two different windowing techniques and compare their performance.
-If you wish to skip this section, 
+If you wish to skip this section,
 the bottom line is that while they are sometimes a bit faster,
 the AsOf join has the most consistent behaviour of all the algorithms.
 
@@ -555,7 +555,7 @@ Another way to use the window operator is to:
 * Filter to pairs where the build time is before the probe time
 * Partition the result on both the equality keys _and_ the probe timestamp
 * Sort the partitions on the build timestamp _descending_
-* Filter out all value except rank 1 (i.e. the largest build time <= the probe time)
+* Filter out all value except rank 1 (i.e., the largest build time <= the probe time)
 
 The query looks like:
 

@@ -1,13 +1,9 @@
 ---
-
 layout: post  
-title:  "Fastest table sort in the West - Redesigning DuckDB’s sort"
+title:  "Fastest table sort in the West – Redesigning DuckDB’s sort"
 author: Laurens Kuiper  
-excerpt_separator: <!--more-->
-
+excerpt: DuckDB, a free and Open-Source analytical data management system, has a new highly efficient parallel sorting implementation that can sort much more data than fits in main memory.
 ---
-
-_TL;DR: DuckDB, a free and Open-Source analytical data management system, has a new highly efficient parallel sorting implementation that can sort much more data than fits in main memory._
 
 Database systems use sorting for many purposes, the most obvious purpose being when a user adds an `ORDER BY` clause to their query.
 Sorting is also used within operators, such as window functions.
@@ -26,12 +22,14 @@ While important, this does not cover how to implement sorting in a database syst
 There is a lot more to sorting tables than just sorting a large array of integers!
 
 Consider the following example query on a snippet of a TPC-DS table:
+
 ```sql
 SELECT c_customer_sk, c_birth_country, c_birth_year
 FROM customer
 ORDER BY c_birth_country DESC,
          c_birth_year    ASC NULLS LAST;
 ```
+
 Which yields:
 
 | c_customer_sk | c_birth_country | c_birth_year |
@@ -51,8 +49,7 @@ It is easy to implement something that can evaluate the example query using any 
 While `std::sort` is excellent algorithmically, it is still a single-threaded approach that is unable to efficiently sort by multiple columns because function call overhead would quickly dominate sorting time.
 Below we will discuss why that is.
 
-To achieve good performance when sorting tables, a custom sorting implementation is needed. We are - of course - not the first to implement relational sorting, so we dove into the literature to look for guidance.
-
+To achieve good performance when sorting tables, a custom sorting implementation is needed. We are – of course – not the first to implement relational sorting, so we dove into the literature to look for guidance.
 
 In 2006 the famous Goetz Graefe wrote a survey on [implementing sorting in database systems](http://wwwlgis.informatik.uni-kl.de/archiv/wwwdvs.informatik.uni-kl.de/courses/DBSREAL/SS2005/Vorlesungsunterlagen/Implementing_Sorting.pdf).
 In this survey, he collected many sorting techniques that are known to the community. This is a great guideline if you are about to start implementing sorting for tables.
@@ -163,7 +160,7 @@ This is especially slow when the final two blocks are merged: One thread has to 
 To fully parallelize this phase, we have implemented [Merge Path](https://arxiv.org/pdf/1406.2628.pdf) by Oded Green et al.
 Merge Path pre-computes *where* the sorted lists will intersect while merging, shown in the image below (taken from the paper).
 
-<img src="/images/blog/sorting/merge_path.png" alt="Merge Path - A Visually Intuitive Approach to Parallel Merging" title="Merge Path by Oded Green, Saher Odeh, Yitzhak Birk" style="max-width:70%"/>
+<img src="/images/blog/sorting/merge_path.png" alt="Merge Path – A Visually Intuitive Approach to Parallel Merging" title="Merge Path by Oded Green, Saher Odeh, Yitzhak Birk" style="max-width:70%"/>
 
 The intersections along the merge path can be efficiently computed using [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm).
 If we know where the intersections are, we can merge partitions of the sorted data independently in parallel.
@@ -264,7 +261,7 @@ We have set the memory limit to 12GB, and `max_bytes_before_external_sort` to 10
 
 HyPer is [Tableau's data engine](https://www.tableau.com/products/new-features/hyper), created by the [database group at the University of Munich](http://db.in.tum.de).
 It does not run natively (yet) on ARM-based processors like the M1.
-We will use [Rosetta 2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2), MacOS's x86 emulator to run it.
+We will use [Rosetta 2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2), macOS's x86 emulator to run it.
 Emulation causes some overhead, so we have included an experiment on an x86 machine in [the appendix](#x86).
 
 Benchmarking sorting in database systems is not straightforward.
@@ -332,7 +329,7 @@ This is especially important to do in systems that use Quicksort because Quickso
 <img src="/images/blog/sorting/randints_sortedness.svg" alt="Sorting 100M integers with different sortedness" title="Sortedness Experiment" style="max-width:100%"/>
 
 Not surprisingly, all systems perform better on sorted data, sometimes by a large margin.
-ClickHouse, Pandas, and SQLite likely have some optimization here: e.g. keeping track of sortedness in the catalog, or checking sortedness while scanning the input.
+ClickHouse, Pandas, and SQLite likely have some optimization here: e.g., keeping track of sortedness in the catalog, or checking sortedness while scanning the input.
 DuckDB and HyPer have only a very small difference in performance when the input data is sorted, and do not have such an optimization.
 For DuckDB the slightly improved performance can be explained due to a better memory access pattern during sorting: When the data is already sorted the access pattern is mostly sequential.
 
@@ -385,7 +382,7 @@ This allows the operating system to move data between memory and disk.
 While useful, it is no substitute for a proper external sort, as it creates random access to disk, which is very slow.
 
 Pandas performs surprisingly well on SF100, despite the data not fitting in memory.
-Pandas can only do this because MacOS dynamically increases swap size.
+Pandas can only do this because macOS dynamically increases swap size.
 Most operating systems do not do this and would fail to load the data at all.
 Using swap usually slows down processing significantly, but the SSD is so fast that there is no visible performance drop!
 
@@ -453,7 +450,7 @@ Modern CPUs try to predict whether the _if_, or the _else_ branch will be predic
 If this is hard to predict, it can slow down the code.
 Take a look at the example of pseudo-code with branches below.
 
-```c++
+```cpp
 // continue until merged
 while (l_ptr && r_ptr) {
   // check which side is smaller
@@ -474,7 +471,7 @@ while (l_ptr && r_ptr) {
 We are merging the data from the left and right blocks into a result block, one entry at a time, by advancing pointers.
 This code can be made _branchless_ by using the comparison boolean as a 0 or 1, shown in the pseudo-code below.
 
-```c++
+```cpp
 // continue until merged
 while (l_ptr && r_ptr) {
   // store comparison result in a bool

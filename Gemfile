@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "jekyll", "3.9.4"
+gem "jekyll", "3.9.5"
 gem "github-pages-health-check", "1.18.2"
 gem "jekyll-avatar", "0.8.0"
 gem "jekyll-coffeescript", "1.1.1"
@@ -46,3 +46,8 @@ gem "sass", "3.7.4"
 
 gem "webrick", "~> 1.8"
 gem 'word_wrap', '~> 1.0'
+group :jekyll_plugins do
+    gem "jekyll-last-modified-at"
+end
+
+gem "jekyll-toc", "~> 0.19.0"

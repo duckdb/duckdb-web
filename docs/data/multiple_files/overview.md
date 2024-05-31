@@ -5,36 +5,66 @@ redirect_from:
   - /docs/data/csv/multiple_files
 ---
 
-DuckDB can read multiple files of different types (CSV, Parquet, JSON files) at the same time using either the glob syntax, or by providing a list of files to read. See the [combining schemas](combining_schemas) page for tips on reading files with different schemas.
+DuckDB can read multiple files of different types (CSV, Parquet, JSON files) at the same time using either the glob syntax, or by providing a list of files to read.
+See the [combining schemas](combining_schemas) page for tips on reading files with different schemas.
 
 ## CSV
 
+Read all files with a name ending in `.csv` in the folder `dir`.
+
 ```sql
--- read all files with a name ending in ".csv" in the folder "dir"
 SELECT * FROM 'dir/*.csv';
--- read all files with a name ending in ".csv", two directories deep
+```
+
+Read all files with a name ending in `.csv`, two directories deep.
+
+```sql
 SELECT * FROM '*/*/*.csv';
--- read all files with a name ending in ".csv", at any depth in the folder "dir"
+```
+
+Read all files with a name ending in `.csv`, at any depth in the folder `dir`.
+
+```sql
 SELECT * FROM 'dir/**/*.csv';
--- read the CSV files 'flights1.csv' and 'flights2.csv'
+```
+
+Read the CSV files `flights1.csv` and `flights2.csv`.
+
+```sql
 SELECT * FROM read_csv(['flights1.csv', 'flights2.csv']);
--- read the CSV files 'flights1.csv' and 'flights2.csv', unifying schemas by name and outputting a `filename` column
+```
+
+Read the CSV files `flights1.csv` and `flights2.csv`, unifying schemas by name and outputting a `filename` column.
+
+```sql
 SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = true);
 ```
 
 ## Parquet
 
+Read all files that match the glob pattern.
+
 ```sql
--- read all files that match the glob pattern
 SELECT * FROM 'test/*.parquet';
--- read 3 Parquet files and treat them as a single table
-SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
--- Read all Parquet files from 2 specific folders
-SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
--- read all Parquet files that match the glob pattern at any depth
-SELECT * FROM read_parquet('dir/**/*.parquet');
 ```
 
+Read 3 Parquet files and treat them as a single table.
+
+```sql
+SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
+```
+
+Read all Parquet files from two specific folders.
+
+```sql
+SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
+```
+
+Read all Parquet files that match the glob pattern at any depth.
+
+```sql
+SELECT * FROM read_parquet('dir/**/*.parquet');
+```
 
 ## Multi-File Reads and Globs
 
@@ -42,16 +72,17 @@ DuckDB can also read a series of Parquet files and treat them as if they were a 
 
 ### List Parameter
 
-The read_parquet function can accept a list of filenames as the input parameter.
+The `read_parquet` function can accept a list of filenames as the input parameter.
+
+Read three Parquet files and treat them as a single table.
 
 ```sql
--- read 3 Parquet files and treat them as a single table
 SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
 
 ### Glob Syntax
 
-Any file name input to the read_parquet function can either be an exact filename, or use a glob syntax to read multiple files that match a pattern.
+Any file name input to the `read_parquet` function can either be an exact filename, or use a glob syntax to read multiple files that match a pattern.
 
 <div class="narrow_table"></div>
 
@@ -63,12 +94,13 @@ Any file name input to the read_parquet function can either be an exact filename
 | `[abc]`    | matches one character given in the bracket                |
 | `[a-z]`    | matches one character from the range given in the bracket |
 
-Note that the `?` wildcard in globs is not supported for reads over S3 due to HTTP encoding issues. 
+Note that the `?` wildcard in globs is not supported for reads over S3 due to HTTP encoding issues.
 
 Here is an example that reads all the files that end with `.parquet` located in the `test` folder:
 
+Read all files that match the glob pattern.
+
 ```sql
--- read all files that match the glob pattern
 SELECT * FROM read_parquet('test/*.parquet');
 ```
 
@@ -76,8 +108,9 @@ SELECT * FROM read_parquet('test/*.parquet');
 
 The glob syntax and the list input parameter can be combined to scan files that meet one of multiple patterns.
 
+Read all Parquet files from 2 specific folders.
+
 ```sql
--- Read all Parquet files from 2 specific folders
 SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 ```
 
@@ -99,14 +132,26 @@ SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, f
 | 1988-01-02 | New York, NY   | Los Angeles, CA | NULL          | flights1.csv |
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            | flights2.csv |
 
+Since v0.10.2, it is possible to specify the name of the filename column using the `filename` argument:
+
+```sql
+SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = "my_filename_column");
+```
+
+| FlightDate | UniqueCarrier | OriginCityName |  DestCityName   | my_filename_column |
+|------------|---------------|----------------|-----------------|--------------------|
+| 1988-01-01 | AA            | New York, NY   | Los Angeles, CA | flights1.csv       |
+| 1988-01-02 | AA            | New York, NY   | Los Angeles, CA | flights1.csv       |
+| 1988-01-03 | AA            | New York, NY   | Los Angeles, CA | flights2.csv       |
 
 ## Glob Function to Find Filenames
 
-The glob pattern matching syntax can also be used to search for filenames using the `glob` table function. 
-It accepts one parameter: the path to search (which may include glob patterns). 
+The glob pattern matching syntax can also be used to search for filenames using the `glob` table function.
+It accepts one parameter: the path to search (which may include glob patterns).
+
+Search the current directory for all files.
 
 ```sql
--- Search the current directory for all files
 SELECT * FROM glob('*');
 ```
 
@@ -121,5 +166,3 @@ SELECT * FROM glob('*');
 | test2.csv     |
 | test2.parquet |
 | todos.json    |
-
-## Pages in This Section

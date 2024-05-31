@@ -9,24 +9,57 @@ The `SELECT` clause specifies the list of columns that will be returned by the q
 
 ## Examples
 
+Select all columns from the table called `table_name`:
+
 ```sql
--- select all columns from the table called "table_name"
 SELECT * FROM table_name;
--- perform arithmetic on columns in a table, and provide an alias
+```
+
+Perform arithmetic on the columns in a table, and provide an alias:
+
+```sql
 SELECT col1 + col2 AS res, sqrt(col1) AS root FROM table_name;
--- select all unique cities from the addresses table
+```
+
+Select all unique cities from the `addresses` table:
+
+```sql
 SELECT DISTINCT city FROM addresses;
--- return the total number of rows in the addresses table
+```
+
+Return the total number of rows in the `addresses` table:
+
+```sql
 SELECT count(*) FROM addresses;
--- select all columns except the city column from the addresses table
+```
+
+Select all columns except the city column from the `addresses` table:
+
+```sql
 SELECT * EXCLUDE (city) FROM addresses;
--- select all columns from the addresses table, but replace city with lower(city)
+```
+
+Select all columns from the `addresses` table, but replace `city` with `lower(city)`:
+
+```sql
 SELECT * REPLACE (lower(city) AS city) FROM addresses;
--- select all columns matching the given regex from the table
+```
+
+Select all columns matching the given regular expression from the table:
+
+```sql
 SELECT COLUMNS('number\d+') FROM addresses;
--- compute a function on all given columns of a table
+```
+
+Compute a function on all given columns of a table:
+
+```sql
 SELECT min(COLUMNS(*)) FROM addresses;
--- to select columns with spaces or special characters, use double quotes
+```
+
+To select columns with spaces or special characters, use double quotes (`"`):
+
+```sql
 SELECT "Some Column Name" FROM tbl;
 ```
 
@@ -36,37 +69,49 @@ SELECT "Some Column Name" FROM tbl;
 
 ## `SELECT` List
 
-The `SELECT` clause contains a list of expressions that specify the result of a query. The select list can refer to any columns in the `FROM` clause, and combine them using expressions. As the output of a SQL query is a table - every expression in the `SELECT` clause also has a name. The expressions can be explicitly named using the `AS` clause (e.g., `expr AS name`). If a name is not provided by the user the expressions are named automatically by the system.
+The `SELECT` clause contains a list of expressions that specify the result of a query. The select list can refer to any columns in the `FROM` clause, and combine them using expressions. As the output of a SQL query is a table – every expression in the `SELECT` clause also has a name. The expressions can be explicitly named using the `AS` clause (e.g., `expr AS name`). If a name is not provided by the user the expressions are named automatically by the system.
 
-> Column names are case-insensitive. See the [Rules for Case Sensitivity](../case_sensitivity) for more details.
+> Column names are case-insensitive. See the [Rules for Case Sensitivity](../keywords_and_identifiers#rules-for-case-sensitivity) for more details.
 
 ### Star Expressions
 
+Select all columns from the table called `table_name`:
+
 ```sql
--- select all columns from the table called "table_name"
-SELECT * FROM table_name;
--- select all columns matching the given regex from the table
-SELECT COLUMNS('number\d+') FROM addresses;
+SELECT *
+FROM table_name;
+```
+
+Select all columns matching the given regular expression from the table:
+
+```sql
+SELECT COLUMNS('number\d+')
+FROM addresses;
 ```
 
 The [star expression](../expressions/star) is a special expression that expands to *multiple expressions* based on the contents of the `FROM` clause. In the simplest case, `*` expands to **all** expressions in the `FROM` clause. Columns can also be selected using regular expressions or lambda functions. See the [star expression page](../expressions/star) for more details.
 
 ### `DISTINCT` Clause
 
+Select all unique cities from the addresses table:
+
 ```sql
--- select all unique cities from the addresses table
-SELECT DISTINCT city FROM addresses;
+SELECT DISTINCT city
+FROM addresses;
 ```
 
-The `DISTINCT` clause can be used to return **only** the unique rows in the result - so that any duplicate rows are filtered out.
+The `DISTINCT` clause can be used to return **only** the unique rows in the result – so that any duplicate rows are filtered out.
 
 > Queries starting with `SELECT DISTINCT` run deduplication, which is an expensive operation. Therefore, only use `DISTINCT` if necessary.
 
 ### `DISTINCT ON` Clause
 
+Select only the highest population city for each country:
+
 ```sql
--- select only the highest population city for each country
-SELECT DISTINCT ON(country) city, population FROM cities ORDER BY population DESC;
+SELECT DISTINCT ON(country) city, population
+FROM cities
+ORDER BY population DESC;
 ```
 
 The `DISTINCT ON` clause returns only one row per unique value in the set of expressions as defined in the `ON` clause. If an `ORDER BY` clause is present, the row that is returned is the first row that is encountered *as per the `ORDER BY`* criteria. If an `ORDER BY` clause is not present, the first row that is encountered is not defined and can be any row in the table.
@@ -75,33 +120,53 @@ The `DISTINCT ON` clause returns only one row per unique value in the set of exp
 
 ### Aggregates
 
+Return the total number of rows in the addresses table:
+
 ```sql
--- return the total number of rows in the addresses table
-SELECT count(*) FROM addresses;
--- return the total number of rows in the addresses table grouped by city
-SELECT city, count(*) FROM addresses GROUP BY city;
+SELECT count(*)
+FROM addresses;
+```
+
+Return the total number of rows in the addresses table grouped by city:
+
+```sql
+SELECT city, count(*)
+FROM addresses
+GROUP BY city;
 ```
 
 [Aggregate functions](../aggregates) are special functions that *combine* multiple rows into a single value. When aggregate functions are present in the `SELECT` clause, the query is turned into an aggregate query. In an aggregate query, **all** expressions must either be part of an aggregate function, or part of a group (as specified by the [`GROUP BY clause`](groupby)).
 
 ### Window Functions
 
+Generate a "row_number" column containing incremental identifiers for each row:
+
 ```sql
--- generate a "row_number" column containing incremental identifiers for each row
-SELECT row_number() OVER () FROM sales;
--- compute the difference between the current amount, and the previous amount, by order of time
-SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
+SELECT row_number() OVER ()
+FROM sales;
+```
+
+Compute the difference between the current amount, and the previous amount, by order of time:
+
+```sql
+SELECT amount - lag(amount) OVER (ORDER BY time)
+FROM sales;
 ```
 
 [Window functions](../window_functions) are special functions that allow the computation of values relative to *other rows* in a result. Window functions are marked by the `OVER` clause which contains the *window specification*. The window specification defines the frame or context in which the window function is computed. See the [window functions page](../window_functions) for more information.
 
 ### `unnest` Function
 
+Unnest an array by one level:
+
 ```sql
--- unnest an array by one level
 SELECT unnest([1, 2, 3]);
--- unnest a struct by one level
+```
+
+Unnest a struct by one level:
+
+```sql
 SELECT unnest({'a': 42, 'b': 84});
 ```
 
-The [`unnest`](unnest) function is a special function that can be used together with [arrays](../data_types/array), [lists](../data_types/list), or [structs](../data_types/struct). The unnest function strips one level of nesting from the type. For example, `INT[]` is transformed into `INT`. `STRUCT(a INT, b INT)` is transformed into `a INT, b INT`. The unnest function can be used to transform nested types into regular scalar types, which makes them easier to operate on.
+The [`unnest`](unnest) function is a special function that can be used together with [arrays](../data_types/array), [lists](../data_types/list), or [structs](../data_types/struct). The unnest function strips one level of nesting from the type. For example, `INTEGER[]` is transformed into `INTEGER`. `STRUCT(a INTEGER, b INTEGER)` is transformed into `a INTEGER, b INTEGER`. The unnest function can be used to transform nested types into regular scalar types, which makes them easier to operate on.

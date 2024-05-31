@@ -57,7 +57,7 @@ CREATE TABLE person (name VARCHAR, age BIGINT);
 
 BEGIN TRANSACTION;
 INSERT INTO person VALUES ('Ada', 52);
-COMMIT; 
+COMMIT;
 
 BEGIN TRANSACTION;
 DELETE FROM person WHERE name = 'Ada';
@@ -67,5 +67,5 @@ ROLLBACK;
 SELECT * FROM person;
 ```
 
-The first transaction (inserting "Ada") was committed but the second (deleting "Ada" and inserting "Bob") was aborted.
+The first transaction (inserting "Ada") was committed but the second (deleting "Ada" and inserting "Bruce") was aborted.
 Therefore, the resulting table will only contain `<'Ada', 52>`.

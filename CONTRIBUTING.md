@@ -30,14 +30,14 @@ Contributions to the [DuckDB Documentation](https://duckdb.org/) are welcome. To
 Before submitting a contribution, please check whether your contribution is eligible.
 
 1. Before creating a new page, please [search the existing documentation](https://duckdb.org/docs/search) for similar pages.
-2. In general, guides for third-party tools using DuckDB should not be included in the DuckDB documentation. Rather, these tools and their documentation should be collected in the [`awesome-duckdb` community repository](https://github.com/davidgasquez/awesome-duckdb).
+2. In general, guides for third-party tools using DuckDB should not be included in the DuckDB documentation. Rather, these tools and their documentation should be collected in the [Awesome DuckDB community repository](https://github.com/davidgasquez/awesome-duckdb).
 
 ## Adding a New Page
 
 Thank you for contributing to the DuckDB documentation!
 
 Each new page requires at least 2 edits:
-* The creation of a new Markdown page with the documentation. Please follow the format of another `.md` file in the `docs` folder.
+* Create new Markdown file (using the `snake_case` naming convention). Please follow the format of another `.md` file in the `docs` folder.
 * Add a link to the new page within `_data/menu_docs_dev.json`. This populates the dropdown menus.
 
 The addition of a new guide requires one additional edit:
@@ -45,7 +45,7 @@ The addition of a new guide requires one additional edit:
 
 Before creating a pull request, please perform the following steps:
 * Preview your changes in the browser using the [site build guide](BUILDING.md).
-* Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for MarkdownLint.
+* Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for markdownlint.
 
 When creating a PR, please check the box to "Allow edits from maintainers".
 
@@ -59,13 +59,16 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
 * Do not hard-wrap lines in blocks of text.
-* Format code blocks with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`).
-* To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT HERE \`\`\`.
-* Quoted blocks (lines starting with `>`) are rendered as [a "Note" box](https://duckdb.org/docs/archive/0.8.1/guides/python/filesystems).
+* Format code blocks with the appropriate language (e.g., \`\`\`sql CODE\`\`\`).
+* To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT\`\`\`.
+* To display error messages, use \`\`\`console ERROR MESSAGE\`\`\`.
+* Quoted blocks (lines starting with `>`) are rendered as [a colored box](https://duckdb.org/docs/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`.
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `).
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
-* Narrow tables should be prepended with an empty div that has the `narrow` table class: `<div class="narrow_table"></div>`.
+* Narrow tables – that do not span horizontally across the entire page – should be prepended with an empty div that has the `narrow_table` class: `<div class="narrow_table"></div>`.
+* Do not introduce hard line breaks if possible. Therefore, avoid using the `<br/>` HTML tag and avoid [double spaces at the end of a line in Markdown](https://spec.commonmark.org/0.28/#hard-line-breaks).
+* For unordered lists, use `*`. If the list has multiple levels, use **4 spaces** for indentation.
 
 ### Headers
 
@@ -75,13 +78,32 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 ### SQL Style
 
-* Use SQL uppercase keywords, e.g., `SELECT ... FROM ...`.
-* Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/archive/0.8.1/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
 * Use **4 spaces** for indentation.
+* Use uppercase SQL keywords, e.g., `SELECT 42 AS x, 'hello world' AS y FROM ...;`.
+* Use lowercase function names, e.g., `SELECT cos(pi()), date_part('year', DATE '1992-09-20');`.
+* Use snake case (lowercase with underscore separators) for table and column names, e.g. `SELECT departure_time FROM train_services;`
+* Add spaces around commas and operators, e.g. `SELECT FROM tbl WHERE x > 42;`.
+* Add a semicolon to the end of each SQL statement, e.g., `SELECT 42 AS x;`.
+* Commas should be placed at the end of each line.
+* _Do not_ add clauses or expressions purely for aligning lines. For exampe, avoid adding `WHERE 1 = 1` and `WHERE true`.
+* _Do not_ include the DuckDB prompt. For example, avoid the following: `D SELECT 42;`.
+* Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
+* The returned tables should be formatted using the DuckDB CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`).
+* Output printed on the system console (e.g., in Python) and system messages (e.g., errors) should be formatted as code with the `text` language tag. For example:
+   ````
+   ```text
+   Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
+   ```
+   ````
+* To specify placeholders, use the left angle and right angle characters, `⟨` and `⟩`
+   * For example: `SELECT * FROM ⟨your_table_name⟩`.
+   * These characters are known in LaTeX code as `\langle` and `\rangle`.
+   * *Avoid* using artihmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
 
 ### Python Style
 
 * Use **4 spaces** for indentation.
+* Use double quotes (`"`) by default for strings.
 
 ### Links
 
@@ -90,6 +112,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 ### Spelling
 
 * Use [American English (en-US) spelling](https://en.wikipedia.org/wiki/Oxford_spelling#Language_tag_comparison).
+* Avoid using the Oxford comma.
 
 ## Example Code Snippets
 
@@ -100,15 +123,15 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Where applicable, add cross-references to relevant other pages in the documentation.
 * Use descriptive links:
-    * :white_check_mark: ```see [the `COPY` statement](../../sql/statements/copy)```
-    * :x: `see [here](../../sql/statements/copy)`
+   * :white_check_mark: ```see [the `COPY` statement](../../sql/statements/copy)```
+   * :x: `see [here](../../sql/statements/copy)`
 * Use relative URLs without the `.html` extension:
-    * :white_check_mark: `../../sql/statements/copy`
-    * :x: `../../sql/statements/copy.html`
-    * :x: `/docs/sql/statements/copy`
-    * :x: `https://duckdb.org/docs/sql/statements/copy`
+   * :white_check_mark: `../../sql/statements/copy`
+   * :x: `../../sql/statements/copy.html`
+   * :x: `/docs/sql/statements/copy`
+   * :x: `https://duckdb.org/docs/sql/statements/copy`
 * Reference a specific section when possible:
-    * :white_check_mark: `../../sql/statements/copy#copy-from`
+   * :white_check_mark: `../../sql/statements/copy#copy-from`
 * Do **not** link related GitHub issues/discussions. This allows the documentation to be self-contained.
 
 ## Achive and Generated Pages

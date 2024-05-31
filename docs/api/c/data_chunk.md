@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Data Chunks
+title: Data Chunks
 ---
 
 Data chunks represent a horizontal slice of a table. They hold a number of vectors, that can each hold up to the `VECTOR_SIZE` rows. The vector size can be obtained through the `duckdb_vector_size` function and is configurable, but is usually set to `2048`.
@@ -37,6 +37,7 @@ The primary manner of interfacing with data chunks is by obtaining the internal 
 <span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_set_size"><span class="nf">duckdb_list_vector_set_size</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">size</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_reserve"><span class="nf">duckdb_list_vector_reserve</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">required_capacity</span>);
 <span class="kt">duckdb_vector</span> <a href="#duckdb_struct_vector_get_child"><span class="nf">duckdb_struct_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_vector</span> <a href="#duckdb_array_vector_get_child"><span class="nf">duckdb_array_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
 </code></pre></div></div>
 
 ### Validity Mask Functions
@@ -51,6 +52,8 @@ The primary manner of interfacing with data chunks is by obtaining the internal 
 
 ---
 Creates an empty DataChunk with the specified set of types.
+
+Note that the result must be destroyed with `duckdb_destroy_data_chunk`.
 
 #### Syntax
 
@@ -76,7 +79,6 @@ The data chunk.
 
 <br>
 
-
 ### `duckdb_destroy_data_chunk`
 
 ---
@@ -99,7 +101,6 @@ The data chunk to destroy.
 
 <br>
 
-
 ### `duckdb_data_chunk_reset`
 
 ---
@@ -121,7 +122,6 @@ Resets a data chunk, clearing the validity masks and setting the cardinality of 
 The data chunk to reset.
 
 <br>
-
 
 ### `duckdb_data_chunk_get_column_count`
 
@@ -147,7 +147,6 @@ The data chunk to get the data from
 The number of columns in the data chunk
 
 <br>
-
 
 ### `duckdb_data_chunk_get_vector`
 
@@ -178,7 +177,6 @@ The vector
 
 <br>
 
-
 ### `duckdb_data_chunk_get_size`
 
 ---
@@ -203,7 +201,6 @@ The data chunk to get the data from
 The number of tuples in the data chunk
 
 <br>
-
 
 ### `duckdb_data_chunk_set_size`
 
@@ -230,7 +227,6 @@ The data chunk to set the size in
 The number of tuples in the data chunk
 
 <br>
-
 
 ### `duckdb_vector_get_column_type`
 
@@ -259,7 +255,6 @@ The type of the vector
 
 <br>
 
-
 ### `duckdb_vector_get_data`
 
 ---
@@ -287,7 +282,6 @@ The vector to get the data from
 The data pointer
 
 <br>
-
 
 ### `duckdb_vector_get_validity`
 
@@ -328,7 +322,6 @@ The pointer to the validity mask, or NULL if no validity mask is present
 
 <br>
 
-
 ### `duckdb_vector_ensure_validity_writable`
 
 ---
@@ -353,7 +346,6 @@ This allows null values to be written to the vector, regardless of whether a val
 The vector to alter
 
 <br>
-
 
 ### `duckdb_vector_assign_string_element`
 
@@ -385,11 +377,10 @@ The null-terminated string
 
 <br>
 
-
 ### `duckdb_vector_assign_string_element_len`
 
 ---
-Assigns a string element in the vector at the specified location.
+Assigns a string element in the vector at the specified location. You may also use this function to assign BLOBs.
 
 #### Syntax
 
@@ -420,7 +411,6 @@ The length of the string (in bytes)
 
 <br>
 
-
 ### `duckdb_list_vector_get_child`
 
 ---
@@ -448,11 +438,10 @@ The child vector
 
 <br>
 
-
 ### `duckdb_list_vector_get_size`
 
 ---
-Returns the size of the child vector of the list
+Returns the size of the child vector of the list.
 
 #### Syntax
 
@@ -473,7 +462,6 @@ The vector
 The size of the child list
 
 <br>
-
 
 ### `duckdb_list_vector_set_size`
 
@@ -504,7 +492,6 @@ The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 <br>
 
-
 ### `duckdb_list_vector_reserve`
 
 ---
@@ -533,7 +520,6 @@ the total capacity to reserve.
 The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 <br>
-
 
 ### `duckdb_struct_vector_get_child`
 
@@ -566,6 +552,33 @@ The child vector
 
 <br>
 
+### `duckdb_array_vector_get_child`
+
+---
+Retrieves the child vector of a array vector.
+
+The resulting vector is valid as long as the parent vector is valid.
+The resulting vector has the size of the parent vector multiplied by the array size.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_array_vector_get_child</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `vector`
+
+The vector
+* `returns`
+
+The child vector
+
+<br>
 
 ### `duckdb_validity_row_is_valid`
 
@@ -595,7 +608,6 @@ The row index
 true if the row is valid, false otherwise
 
 <br>
-
 
 ### `duckdb_validity_set_row_validity`
 
@@ -630,7 +642,6 @@ Whether or not to set the row to valid, or invalid
 
 <br>
 
-
 ### `duckdb_validity_set_row_invalid`
 
 ---
@@ -659,7 +670,6 @@ The row index
 
 <br>
 
-
 ### `duckdb_validity_set_row_valid`
 
 ---
@@ -687,4 +697,3 @@ The validity mask
 The row index
 
 <br>
-

@@ -3,7 +3,9 @@ layout: docu
 title: Appender
 ---
 
-The C++ Appender can be used to load bulk data into a DuckDB database. The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
+The Appender can be used to load bulk data into a DuckDB database. It is currently available in the [C, C++, Go, Java, and Rust APIs](#appender-support-in-other-clients). The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
+
+In the [C++ API](../api/cpp), the Appender works as follows:
 
 ```cpp
 DuckDB db;
@@ -29,8 +31,8 @@ appender.Append<string>("Hannes");
 appender.EndRow();
 ```
 
-Any values added to the appender are cached prior to being inserted into the database system
-for performance reasons. That means that, while appending, the rows might not be immediately visible in the system. The cache is automatically flushed when the appender goes out of scope or when `appender.Close()` is called. The cache can also be manually flushed using the `appender.Flush()` method. After either `Flush` or `Close` is called, all the data has been written to the database system.
+Any values added to the Appender are cached prior to being inserted into the database system
+for performance reasons. That means that, while appending, the rows might not be immediately visible in the system. The cache is automatically flushed when the Appender goes out of scope or when `appender.Close()` is called. The cache can also be manually flushed using the `appender.Flush()` method. After either `Flush` or `Close` is called, all the data has been written to the database system.
 
 ## Date, Time and Timestamps
 
@@ -42,12 +44,41 @@ Below is a short example:
 con.Query("CREATE TABLE dates (d DATE, t TIME, ts TIMESTAMP)");
 Appender appender(con, "dates");
 
-// construct the values using the Date/Time/Timestamp types - this is the most efficient
-appender.AppendRow(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0), Timestamp::FromDatetime(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0)));
+// construct the values using the Date/Time/Timestamp types
+// (this is the most efficient approach)
+appender.AppendRow(
+    Date::FromDate(1992, 1, 1),
+    Time::FromTime(1, 1, 1, 0),
+    Timestamp::FromDatetime(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0))
+);
 // construct duckdb::Value objects
-appender.AppendRow(Value::DATE(1992, 1, 1), Value::TIME(1, 1, 1, 0), Value::TIMESTAMP(1992, 1, 1, 1, 1, 1, 0));
+appender.AppendRow(
+    Value::DATE(1992, 1, 1),
+    Value::TIME(1, 1, 1, 0),
+    Value::TIMESTAMP(1992, 1, 1, 1, 1, 1, 0)
+);
 ```
 
-## JDBC Appender
+## Commit Frequency
 
-The appender is available in the [JDBC driver](../api/java#appender).
+By default, the appender performs a commits every 204,800 rows.
+You can change this by explicitly using [transactions](../sql/statements/transactions) and surrounding your batches of `AppendRow` calls by `BEGIN TRANSACTION` and `COMMIT` statements.
+
+## Handling Constraint Violations
+
+If the Appender encounters a `PRIMARY KEY` conflict or a `UNIQUE` constraint violation, it fails and returns the following error:
+
+```console
+Constraint Error: PRIMARY KEY or UNIQUE constraint violated: duplicate key "..."
+```
+
+In this case, the entire append operation fails and no rows are inserted.
+
+## Appender Support in Other Clients
+
+The Appender is also available in the following client APIs:
+
+* [C](../api/c/appender)
+* [Go](../api/go#appender)
+* [JDBC (Java)](../api/java#appender)
+* [Rust](../api/rust#appender)

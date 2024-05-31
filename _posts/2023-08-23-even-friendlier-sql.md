@@ -3,6 +3,7 @@
 layout: post
 title:  "Even Friendlier SQL with DuckDB"
 author: Alex Monahan
+excerpt: DuckDB continues to push the boundaries of SQL syntax to both simplify queries and make more advanced analyses possible. Highlights include dynamic column selection, queries that start with the FROM clause, function chaining, and list comprehensions. We boldly go where no SQL engine has gone before! For more details, see the documentation for [friendly SQL features](/docs/guides/sql_features/friendly_sql).
 ---
 
 <img src="/images/blog/ai_generated_star_trek_rubber_duck.png"
@@ -10,17 +11,15 @@ author: Alex Monahan
      width=200
 />
 
-_TL;DR: DuckDB continues to push the boundaries of SQL syntax to both simplify queries and make more advanced analyses possible. Highlights include dynamic column selection, queries that start with the FROM clause, function chaining, and list comprehensions. We boldly go where no SQL engine has gone before!_
-
-Who says that SQL should stay frozen in time, chained to a 1999 version of the specification? As a comparison, do folks remember what JavaScript felt like before Promises? Those didn’t launch until 2012! It’s clear that innovation at the programming syntax layer can have a profoundly positive impact on an entire language ecosystem. 
+Who says that SQL should stay frozen in time, chained to a 1999 version of the specification? As a comparison, do folks remember what JavaScript felt like before Promises? Those didn’t launch until 2012! It’s clear that innovation at the programming syntax layer can have a profoundly positive impact on an entire language ecosystem.
 
 We believe there are many valid reasons for innovation in the SQL language, among them opportunities to simplify basic queries and also to make more dynamic analyses possible. Many of these features arose from community suggestions! Please let us know your SQL pain points on [Discord](https://discord.duckdb.org/) or [GitHub](https://github.com/duckdb/duckdb/discussions) and join us as we change what it feels like to write SQL!
 
-If you have not had a chance to read the first installment in this series, please take a quick look [here](https://duckdb.org/2022/05/04/friendlier-sql.html). 
+If you have not had a chance to read the first installment in this series, please take a quick look to the prior blog post, [“Friendlier SQL with DuckDB”](/2022/05/04/friendlier-sql).
 
 ## The future is now
 
-The first few enhancements in this list were included in the “Ideas for the Future” section of the prior post. 
+The first few enhancements in this list were included in the “Ideas for the Future” section of the prior post.
 
 ### Reusable column aliases
 
@@ -29,10 +28,13 @@ When working with incremental calculated expressions in a select statement, trad
 #### Old way 1: Repeat yourself
 
 ```sql
-select 
+SELECT 
     'These are the voyages of the starship Enterprise...' AS intro,
-    instr('These are the voyages of the starship Enterprise...', 'starship') AS starship_loc
-    substr('These are the voyages of the starship Enterprise...', instr('These are the voyages of the starship Enterprise...', 'starship') + len('starship') + 1) AS trimmed_intro;
+    instr('These are the voyages of the starship Enterprise...', 'starship')
+        AS starship_loc
+    substr('These are the voyages of the starship Enterprise...',
+    instr('These are the voyages of the starship Enterprise...', 'starship')
+        + len('starship') + 1) AS trimmed_intro;
 ```
 
 #### Old way 2: All the CTEs
@@ -76,12 +78,14 @@ Databases typically prefer strictness in column definitions and flexibility in t
 
 No longer do you need to know all of your column names up front! DuckDB can select and even modify columns based on regular expression pattern matching, `EXCLUDE` or `REPLACE` modifiers, and even lambda functions (see the [section on lambda functions below](#list-lambda-functions) for details!). 
 
-Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension](https://duckdb.org/docs/extensions/httpfs), we can query a csv dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
+Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension](/docs/extensions/httpfs), we can query a csv dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
 ```sql
 INSTALL httpfs;
 LOAD httpfs;
+
 CREATE TABLE trek_facts AS
-    SELECT * FROM 'https://raw.githubusercontent.com/Alex-Monahan/example_datasets/main/Star_Trek-Season_1.csv';
+    SELECT *
+    FROM 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
 
 DESCRIBE trek_facts;
 ```
@@ -203,7 +207,7 @@ FROM trek_facts;
 
 ### COLUMNS() with lambda functions
 
-The most flexible way to query a dynamic set of columns is through a [lambda function](https://duckdb.org/docs/sql/functions/nested#lambda-functions). This allows for any matching criteria to be applied to the names of the columns, not just regular expressions. See more details about lambda functions below. 
+The most flexible way to query a dynamic set of columns is through a [lambda function](/docs/sql/functions/nested#lambda-functions). This allows for any matching criteria to be applied to the names of the columns, not just regular expressions. See more details about lambda functions below. 
 
 For example, if using the `LIKE` syntax is more comfortable, we can select columns matching a `LIKE` pattern rather than with a regular expression.
 
@@ -228,7 +232,7 @@ WHERE
 
 ### Automatic JSON to nested types conversion
 
-The first installment in the series mentioned JSON dot notation references as future work. However, the team has gone even further! Instead of referring to JSON-typed columns using dot notation, JSON can now be [automatically parsed](https://duckdb.org/2023/03/03/json.html) into DuckDB’s native types for significantly faster performance, compression, as well as that friendly dot notation!
+The first installment in the series mentioned JSON dot notation references as future work. However, the team has gone even further! Instead of referring to JSON-typed columns using dot notation, JSON can now be [automatically parsed](/2023/03/03/json) into DuckDB’s native types for significantly faster performance, compression, as well as that friendly dot notation!
 
 First, install and load the `httpfs` and `json` extensions if they don't come bundled with the client you are using. Then query a remote JSON file directly as if it were a table!
 ```sql
@@ -252,7 +256,7 @@ Now for some new SQL capabilities beyond the ideas from the prior post!
 
 ## FROM first in SELECT statements
 
-When building a query, the first thing you need to know is where your data is coming `FROM`. Well then why is that the second clause in a `SELECT` statement?? No longer! DuckDB is building SQL as it should have always been - putting the `FROM` clause first! This addresses one of the longest standing complaints about SQL, and the DuckDB team implemented it in 2 days. 
+When building a query, the first thing you need to know is where your data is coming `FROM`. Well then why is that the second clause in a `SELECT` statement?? No longer! DuckDB is building SQL as it should have always been – putting the `FROM` clause first! This addresses one of the longest standing complaints about SQL, and the DuckDB team implemented it in 2 days. 
 
 ```sql
 FROM my_table SELECT my_column;
@@ -337,7 +341,7 @@ FROM proverbs;
 | Revenge is a dish best served cold           | NULL                    |
 | If winning is not important, why keep score? | You will be assimilated |
 
-This approach has additional benefits. As seen above, not only can tables with different column orders be combined, but so can tables with different numbers of columns entirely. This is helpful as schemas migrate, and is particularly useful for DuckDB’s [multi-file reading capabilities](https://duckdb.org/docs/data/multiple_files/combining_schemas#union-by-name).
+This approach has additional benefits. As seen above, not only can tables with different column orders be combined, but so can tables with different numbers of columns entirely. This is helpful as schemas migrate, and is particularly useful for DuckDB’s [multi-file reading capabilities](/docs/data/multiple_files/combining_schemas#union-by-name).
 
 ## Insert by name
 
@@ -369,8 +373,12 @@ For example, let’s take a look at some procurement forecast data just as the E
 CREATE TABLE purchases (item VARCHAR, year INT, count INT);
 
 INSERT INTO purchases
-    VALUES ('phasers', 2155, 1035), ('phasers', 2156, 25039), ('phasers', 2157, 95000),
-           ('photon torpedoes', 2155, 255), ('photon torpedoes', 2156, 17899), ('photon torpedoes', 2157, 87492);
+    VALUES ('phasers', 2155, 1035),
+           ('phasers', 2156, 25039),
+           ('phasers', 2157, 95000),
+           ('photon torpedoes', 2155, 255),
+           ('photon torpedoes', 2156, 17899),
+           ('photon torpedoes', 2157, 87492);
 
 FROM purchases;
 ```
@@ -430,13 +438,13 @@ UNPIVOT pivoted_purchases
 | photon torpedoes | 2156 | 17899 |
 | photon torpedoes | 2157 | 87492 |
 
-More examples are included as a part of our [DuckDB 0.8.0 announcement post](https://duckdb.org/2023/05/17/announcing-duckdb-080.html#new-sql-features), and the [`PIVOT`](https://duckdb.org/docs/sql/statements/pivot) and [`UNPIVOT`](https://duckdb.org/docs/sql/statements/unpivot) documentation pages highlight more complex queries. 
+More examples are included as a part of our [DuckDB 0.8.0 announcement post](/2023/05/17/announcing-duckdb-080.html#new-sql-features), and the [`PIVOT`](/docs/sql/statements/pivot) and [`UNPIVOT`](/docs/sql/statements/unpivot) documentation pages highlight more complex queries. 
 
 Stay tuned for a future post to cover what is happening behind the scenes! 
 
 ## List lambda functions
 
-List lambdas allow for operations to be applied to each item in a list. These do not need to be pre-defined - they are created on the fly within the query. 
+List lambdas allow for operations to be applied to each item in a list. These do not need to be pre-defined – they are created on the fly within the query. 
 
 In this example, a lambda function is used in combination with the `list_transform` function to shorten each official ship name. 
 
@@ -468,7 +476,7 @@ SELECT
 
 ## List comprehensions
 
-What if there was a simple syntax to both modify and filter a list? DuckDB takes inspiration from Python’s approach to list comprehensions to dramatically simplify the above examples. List comprehensions are syntactic sugar - these queries are rewritten into lambda expressions behind the scenes!
+What if there was a simple syntax to both modify and filter a list? DuckDB takes inspiration from Python’s approach to list comprehensions to dramatically simplify the above examples. List comprehensions are syntactic sugar – these queries are rewritten into lambda expressions behind the scenes!
 
 Within brackets, first specify the transformation that is desired, then indicate which list should be iterated over, and finally include the filter criteria. 
 
@@ -561,8 +569,8 @@ However, if a `UNION` type is used, each individual row retains its original dat
 CREATE TABLE movies (
      movie UNION(num INT, name VARCHAR)
 );
-INSERT INTO movies 
-     VALUES ('The Motion Picture'), (2), (3), (4), (5), (6), ('First Contact');
+INSERT INTO movies VALUES
+     ('The Motion Picture'), (2), (3), (4), (5), (6), ('First Contact');
 
 FROM movies 
 SELECT 
@@ -591,9 +599,9 @@ Several other friendly features are worth mentioning and some are powerful enoug
 
 DuckDB takes a nod from the [`describe` function in Pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html) and implements a `SUMMARIZE` keyword that will calculate a variety of statistics about each column in a dataset for a quick, high-level overview. Simply prepend `SUMMARIZE` to any table or `SELECT` statement. 
 
-Have a look at the [correlated subqueries post](https://duckdb.org/2023/05/26/correlated-subqueries-in-sql.html) to see how to use subqueries that refer to each others’ columns. DuckDB’s advanced optimizer improves correlated subquery performance by orders of magnitude, allowing for queries to be expressed as naturally as possible. What was once an anti-pattern for performance reasons can now be used freely!
+Have a look at the [correlated subqueries post](/2023/05/26/correlated-subqueries-in-sql) to see how to use subqueries that refer to each others’ columns. DuckDB’s advanced optimizer improves correlated subquery performance by orders of magnitude, allowing for queries to be expressed as naturally as possible. What was once an anti-pattern for performance reasons can now be used freely!
 
-DuckDB has added more ways to `JOIN` tables together that make expressing common calculations much easier. Some like `LATERAL`, `ASOF`, `SEMI`, and `ANTI` joins are present in other systems, but have high-performance implementations in DuckDB. DuckDB also adds a new `POSITIONAL` join that combines by the row numbers in each table to match the commonly used Pandas capability of joining on row number indexes. See the [`JOIN` documentation](https://duckdb.org/docs/sql/query_syntax/from.html) for details, and look out for a blog post describing DuckDB’s state of the art `ASOF` joins!
+DuckDB has added more ways to `JOIN` tables together that make expressing common calculations much easier. Some like `LATERAL`, `ASOF`, `SEMI`, and `ANTI` joins are present in other systems, but have high-performance implementations in DuckDB. DuckDB also adds a new `POSITIONAL` join that combines by the row numbers in each table to match the commonly used Pandas capability of joining on row number indexes. See the [`JOIN` documentation](/docs/sql/query_syntax/from) for details, and look out for a blog post describing DuckDB’s state of the art `ASOF` joins!
 
 ## Summary and future work
 
@@ -601,7 +609,7 @@ DuckDB aims to be the easiest database to use. Fundamental architectural decisio
 
 Future work for friendlier SQL includes:
 * Lambda functions with more than 1 argument, like `list_zip`
-* Underscores as digit separators (Ex: 1_000_000 instead of 1000000)
+* Underscores as digit separators (Ex: `1_000_000` instead of `1000000`)
 * Extension user experience, including autoloading
 * Improvements to file globbing
 * Your suggestions!
