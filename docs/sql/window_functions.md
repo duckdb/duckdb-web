@@ -12,33 +12,36 @@ Window functions are [blocking operators](../guides/performance/how_to_tune_work
 Generate a `row_number` column with containing incremental identifiers for each row:
 
 ```sql
-SELECT row_number() OVER () FROM sales;
+SELECT row_number() OVER ()
+FROM sales;
 ```
 
 Generate a `row_number` column, by order of time:
 
 ```sql
-SELECT row_number() OVER (ORDER BY time) FROM sales;
+SELECT row_number() OVER (ORDER BY time)
+FROM sales;
 ```
 
 Generate a `row_number` column, by order of time partitioned by region:
 
 ```sql
-SELECT row_number() OVER (PARTITION BY region ORDER BY time) FROM sales;
+SELECT row_number() OVER (PARTITION BY region ORDER BY time)
+FROM sales;
 ```
 
-Compute the difference between the current amount, and the previous amount,:
-
-By order of time:
+Compute the difference between the current amount, and the previous amount, by order of time:
 
 ```sql
-SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
+SELECT amount - lag(amount) OVER (ORDER BY time)
+FROM sales;
 ```
 
 Compute the percentage of the total amount of sales per region for each row:
 
 ```sql
-SELECT amount / sum(amount) OVER (PARTITION BY region) FROM sales;
+SELECT amount / sum(amount) OVER (PARTITION BY region)
+FROM sales;
 ```
 
 ## Syntax
@@ -80,7 +83,7 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | The rank of the current row *without gaps*; this function counts peer groups. |
+| **Description** | The rank of the current row *without gaps;* this function counts peer groups. |
 | **Return Type** | `BIGINT` |
 | **Example** | `dense_rank()` |
 
@@ -164,7 +167,7 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | The rank of the current row *with gaps*; same as `row_number` of its first peer. |
+| **Description** | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
 | **Return Type** | `BIGINT` |
 | **Example** | `rank_dense()` |
 | **Alias** | `rank()` |
@@ -173,7 +176,7 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | The rank of the current row *with gaps*; same as `row_number` of its first peer. |
+| **Description** | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
 | **Return Type** | `BIGINT` |
 | **Example** | `rank()` |
 | **Alias** | `rank_dense()` |

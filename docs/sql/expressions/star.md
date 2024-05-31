@@ -12,6 +12,12 @@ Select all columns present in the `FROM` clause:
 SELECT * FROM table_name;
 ```
 
+Count the number of rows in a table:
+
+```sql
+SELECT count(*) FROM table_name;
+```
+
 Select all columns from the table called `table_name`:
 
 ```sql
@@ -94,7 +100,10 @@ SELECT min(COLUMNS(*)), count(COLUMNS(*)) FROM numbers;
 The `*` expression in the `COLUMNS` statement can also contain `EXCLUDE` or `REPLACE`, similar to regular star expressions.
 
 ```sql
-SELECT min(COLUMNS(* REPLACE (number + id AS number))), count(COLUMNS(* EXCLUDE (number))) FROM numbers;
+SELECT
+    min(COLUMNS(* REPLACE (number + id AS number))),
+    count(COLUMNS(* EXCLUDE (number)))
+FROM numbers;
 ```
 
 <div class="narrow_table"></div>

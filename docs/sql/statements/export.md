@@ -8,28 +8,28 @@ The `EXPORT DATABASE` command allows you to export the contents of the database 
 
 ## Examples
 
-Export the database to the target directory `target_directory` as CSV files:
+Export the database to the target directory 'target_directory' as CSV files:
 
 ```sql
-EXPORT DATABASE `target_directory`;
+EXPORT DATABASE 'target_directory';
 ```
 
-Export to directory `target_directory`, using the given options for the CSV serialization:
+Export to directory 'target_directory', using the given options for the CSV serialization:
 
 ```sql
-EXPORT DATABASE `target_directory` (FORMAT CSV, DELIMITER '|');
+EXPORT DATABASE 'target_directory' (FORMAT CSV, DELIMITER '|');
 ```
 
-Export to directory `target_directory`, tables serialized as Parquet:
+Export to directory 'target_directory', tables serialized as Parquet:
 
 ```sql
-EXPORT DATABASE `target_directory` (FORMAT PARQUET);
+EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
-Export to directory `target_directory`, tables serialized as Parquet, compressed with ZSTD, with a row_group_size of 100,000:
+Export to directory 'target_directory', tables serialized as Parquet, compressed with ZSTD, with a row_group_size of 100,000:
 
 ```sql
-EXPORT DATABASE `target_directory` (
+EXPORT DATABASE 'target_directory' (
     FORMAT PARQUET,
     COMPRESSION ZSTD,
     ROW_GROUP_SIZE 100_000
