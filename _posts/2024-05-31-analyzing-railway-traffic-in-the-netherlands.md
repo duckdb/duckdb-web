@@ -290,7 +290,10 @@ To do so, we use the `read_csv` function and set the [`nullstr` parameter](/docs
 
 ```sql
 CREATE TABLE distances AS
-    FROM read_csv('https://blobs.duckdb.org/data/tariff-distances-2022-01.csv', nullstr = 'XXX');
+    FROM read_csv(
+        'https://blobs.duckdb.org/data/tariff-distances-2022-01.csv',
+        nullstr = 'XXX'
+    );
 ```
 
 To make the `NULL` values visible in the command line output, we set the [`.nullvalue` dot command](/docs/api/cli/dot_commands) to `NULL`:
@@ -359,17 +362,18 @@ CREATE TABLE distances_long AS
 This results in the following table:
 
 ```sql
+SELECT station, other_station, distance
 FROM distances_long
 LIMIT 5;
 ```
 
-| Station | other_station | price |
-|---------|---------------|------:|
-| AC      | AH            | 82    |
-| AC      | AHP           | 83    |
-| AC      | AHPR          | 85    |
-| AC      | AHZ           | 90    |
-| AC      | AKL           | 71    |
+| Station | other_station | distance |
+|---------|---------------|---------:|
+| AC      | AH            | 82       |
+| AC      | AHP           | 83       |
+| AC      | AHPR          | 85       |
+| AC      | AHZ           | 90       |
+| AC      | AKL           | 71       |
 
 Now we can join the `distances_long` table on the `stations` table along both the start and end stations,
 then filter to stations which are located in the Netherlands.
@@ -403,9 +407,9 @@ The results show that there are pairs of train stations, which are more than 400
 
 In this post, we demonstrated some of DuckDB's key feaures,
 including
-automatic detection of file formats,
+[automatic detection of formats based on filenames](/docs/data/overview),
 [auto-inferencing the schema of CSV files](/2023/10/27/csv-sniffer),
-[several friendly SQL features](/2023/08/23/even-friendlier-sql) (`FROM`-first syntax, `GROUP BY ALL`, `COLUMNS`),
+[several friendly SQL features](/docs/guides/sql_features/friendly_sql) (`FROM`-first syntax, `GROUP BY ALL`, `COLUMNS`),
 [direct Parquet querying](/2021/06/25/querying-parquet),
 [window functions](/2021/10/13/windowing),
 [unpivot](/docs/sql/statements/unpivot),
