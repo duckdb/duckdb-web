@@ -14,7 +14,7 @@ Information about this network, including its schedule, distances and stations, 
 This high-quality data set is maintained by the team behind the [Rijden de Treinen _(Are the trains running?)_ application](https://www.ijdendetreinen.nl/en/about).
 
 In this post, we'll demonstrate some of DuckDB's analytical features on the Dutch railway network data set.
-Unlike most of our other blog posts, this one does introduce a new feature or release: instead, it demonstrates several existing features using a single domain.
+Unlike most of our other blog posts, this one doesn't introduce a new feature or release: instead, it demonstrates several existing features using a single domain.
 Some of the queries explained in this blog post are shown in simplified form on [DuckDB's landing page](/).
 
 ## Loading the Data
@@ -76,7 +76,7 @@ We can see that more than 21&nbsp;million train services ran in the Netherlands 
 Let's ask a simple query first: _What were the busiest railway stations in the Netherlands in the first 6 months of 2023?_
 
 First, let's compute the number of services passing through each station for every month.
-To do so, we extract the month from the service's date, then performs a group-by aggregation with a `count(*)`:
+To do so, we extract the month from the service's date, then perform a group-by aggregation with a `count(*)`:
 
 ```sql
 SELECT
@@ -302,7 +302,7 @@ To make the `NULL` values visible in the command line output, we set the [`.null
 .nullvalue NULL
 ```
 
-Using the [`DESCRIBE` statement](/docs/guides/meta/describe), we can confirm that DuckDB has inferred by column types correctly as `BIGINT`:
+Using the [`DESCRIBE` statement](/docs/guides/meta/describe), we can confirm that DuckDB has inferred the column types correctly as `BIGINT`:
 
 ```sql
 FROM (DESCRIBE distances)
@@ -405,7 +405,7 @@ The results show that there are pairs of train stations, which are more than 400
 
 ## Conclusion
 
-In this post, we demonstrated some of DuckDB's key feaures,
+In this post, we demonstrated some of DuckDB's key features,
 including
 [automatic detection of formats based on filenames](/docs/data/overview),
 [auto-inferencing the schema of CSV files](/2023/10/27/csv-sniffer),
