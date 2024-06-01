@@ -25,8 +25,7 @@ AsOf Joins are a tool for solving this and other similar problems.
 One of the problems that AsOf Joins are used to solve is
 finding the value of a varying property at a specific point in time.
 This use case is so common that it is where the name came from:
-
-> Give me the value of the property *as of this time*
+_Give me the value of the property **as of this time.**_
 
 More generally, however, AsOf joins embody some common temporal analytic semantics,
 which can be cumbersome and slow to implement in standard SQL.
