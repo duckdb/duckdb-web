@@ -71,7 +71,7 @@ CREATE SECRET secret3 (
 );
 ```
 
-The possible values for CHAIN are the following:
+The possible values for `CHAIN` are the following:
 
 * [`config`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_profile_config_file_a_w_s_credentials_provider.html)
 * [`sts`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_s_t_s_assume_role_web_identity_credentials_provider.html)
