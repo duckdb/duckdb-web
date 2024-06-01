@@ -566,7 +566,7 @@
                   "url": "orderby"
                 },
                 {
-                  "page": "LIMIT",
+                  "page": "LIMIT and OFFSET",
                   "url": "limit"
                 },
                 {

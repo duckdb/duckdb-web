@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: LIMIT Clause
+title: LIMIT and OFFSET Clauses
 railroad: query_syntax/orderby.js
 ---
 
