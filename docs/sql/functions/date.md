@@ -35,10 +35,10 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | [`date_part(part, date)`](#date_partpart-date) | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
 | [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The number of complete [partitions](../../sql/functions/datepart) between the dates. |
 | [`date_trunc(part, date)`](#date_truncpart-date) | Truncate to specified [precision](../../sql/functions/datepart). |
-| [`datediff(part, startdate, enddate)`](#datediffpart-startdate-enddate) | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the dates. |
-| [`datepart(part, date)`](#datepartpart-date) | Alias of date_part. Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
-| [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the dates. |
-| [`datetrunc(part, date)`](#datetruncpart-date) | Alias of date_trunc. Truncate to specified [precision](../../sql/functions/datepart). |
+| [`datediff(part, startdate, enddate)`](#datediffpart-startdate-enddate) | The number of [partition](../../sql/functions/datepart) boundaries between the dates. Alias of `date_diff`. |
+| [`datepart(part, date)`](#datepartpart-date) | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). Alias of `date_part`. |
+| [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | The number of complete [partitions](../../sql/functions/datepart) between the dates. Alias of `date_sub`. |
+| [`datetrunc(part, date)`](#datetruncpart-date) | Truncate to specified [precision](../../sql/functions/datepart). Alias of `date_trunc`. |
 | [`dayname(date)`](#daynamedate) | The (English) name of the weekday. |
 | [`extract(part from date)`](#extractpart-from-date) | Get [subfield](../../sql/functions/datepart) from a date. |
 | [`greatest(date, date)`](#greatestdate-date) | The later of two dates. |
@@ -105,33 +105,37 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the dates. |
+| **Description** | The number of [partition](../../sql/functions/datepart) boundaries between the dates. |
 | **Example** | `datediff('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `2` |
+| **Alias** | `date_diff`. |
 
 ### `datepart(part, date)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of date_part. Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
+| **Description** | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
 | **Example** | `datepart('year', DATE '1992-09-20')` |
 | **Result** | `1992` |
+| **Alias** | `date_part`. |
 
 ### `datesub(part, startdate, enddate)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the dates. |
+| **Description** | The number of complete [partitions](../../sql/functions/datepart) between the dates. |
 | **Example** | `datesub('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `1` |
+| **Alias** | `date_sub`. |
 
 ### `datetrunc(part, date)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of date_trunc. Truncate to specified [precision](../../sql/functions/datepart). |
+| **Description** | Truncate to specified [precision](../../sql/functions/datepart). |
 | **Example** | `datetrunc('month', DATE '1992-03-07')` |
 | **Result** | `1992-03-01` |
+| **Alias** | `date_trunc`. |
 
 ### `dayname(date)`
 

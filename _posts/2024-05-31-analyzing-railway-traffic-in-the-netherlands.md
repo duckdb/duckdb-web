@@ -21,7 +21,7 @@ Some of the queries explained in this blog post are shown in simplified form on 
 
 ## Loading the Data
 
-For our initial queries, we'll use the 2023 railway schedule.
+For our initial queries, we'll use the 2023 [railway services dataset](https://www.rijdendetreinen.nl/en/open-data/train-archive).
 To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.duckdb.org/data/nl-railway/services-2023.csv.gz) (330 MB) and load it into DuckDB.
 
 First, start the [DuckDB command line client](/docs/api/cli/overview) on a persistent database:
