@@ -61,7 +61,7 @@ CREATE SECRET secret2 (
 
 Again, to query a file using the above secret, simply query any `s3://` prefixed file.
 
-DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a `;` separated list of providers that will be tried in order. For example:
+DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a semicolon-separated list (`a;b;c`) of providers that will be tried in order. For example:
 
 ```sql
 CREATE SECRET secret3 (
@@ -71,7 +71,7 @@ CREATE SECRET secret3 (
 );
 ```
 
-The possible values for CHAIN are the following:
+The possible values for `CHAIN` are the following:
 
 * [`config`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_profile_config_file_a_w_s_credentials_provider.html)
 * [`sts`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_s_t_s_assume_role_web_identity_credentials_provider.html)
@@ -79,13 +79,12 @@ The possible values for CHAIN are the following:
 * [`env`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_environment_a_w_s_credentials_provider.html)
 * [`instance`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_instance_profile_credentials_provider.html)
 * [`process`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_process_credentials_provider.html)
-* [`task_role`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/namespace_aws_1_1_auth.html#a9515ae0d50cc264d79bd772e9b84bb09)
 
 The `CREDENTIAL_CHAIN` provider also allows overriding the automatically fetched config. For example, to automatically load credentials, and then override the region, run:
 
 ```sql
 CREATE SECRET secret4 (
-    TYPE AZURE,
+    TYPE S3,
     PROVIDER CREDENTIAL_CHAIN,
     CHAIN 'config',
     REGION 'eu-west-1'
