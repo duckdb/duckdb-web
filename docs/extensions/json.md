@@ -915,7 +915,7 @@ The JSON extension also provides functions to serialize and deserialize `SELECT`
 |:------|:-|:---------|
 | `json_deserialize_sql(json)` | Scalar  | Deserialize one or many `json` serialized statements back to an equivalent sql string |
 | `json_execute_serialized_sql(varchar)` | Table | Execute `json` serialized statements and return the resulting rows. Only one statement at a time is supported for now. |
-| `json_serialize_sql(varchar, skip_empty := boolean, skip_null := boolean, format := boolean)` | Scalar | Serialize a set of `;` separated select statments to an equivalent list of `json` serialized statements |
+| `json_serialize_sql(varchar, skip_empty := boolean, skip_null := boolean, format := boolean)` | Scalar | Serialize a set of semicolon-separated (`;`) select statements to an equivalent list of `json` serialized statements |
 | `PRAGMA json_execute_serialized_sql(varchar)` | Pragma | Pragma version of the `json_execute_serialized_sql` function. |
 
 The `json_serialize_sql(varchar)` function takes three optional parameters, `skip_empty`, `skip_null`, and `format` that can be used to control the output of the serialized statements.

@@ -61,7 +61,7 @@ CREATE SECRET secret2 (
 
 Again, to query a file using the above secret, simply query any `s3://` prefixed file.
 
-DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a `;` separated list of providers that will be tried in order. For example:
+DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a semicolon-separated list (`a;b;c`) of providers that will be tried in order. For example:
 
 ```sql
 CREATE SECRET secret3 (
