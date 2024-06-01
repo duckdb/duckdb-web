@@ -517,7 +517,7 @@ The table below shows the available statistical aggregate functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the slope of the linear regression line for non-null pairs in a group. |
-| **Formula** | `covar_pop(x, y) / var_pop(x)` |
+| **Formula** | `covar_pop(x, y) / covar_pop(x, x)` |
 | **Alias(es)** | - |
 
 ### `regr_sxx(y, x)`
