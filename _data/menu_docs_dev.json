@@ -840,6 +840,10 @@
             {
               "page": "Window Functions",
               "url": "window_functions"
+            },
+            {
+              "page": "PostgreSQL Compatibility",
+              "url": "postgresql_compatibility"
             }
           ]
         },
