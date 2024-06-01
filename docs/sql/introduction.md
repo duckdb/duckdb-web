@@ -8,7 +8,7 @@ This tutorial is only intended to give you an introduction and is in no way a co
 This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
 
 > DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.
-> The few exceptions to this are listed on the [PostgreSQL compatibility page](postgresql_compatibility.md)
+> The few exceptions to this are listed on the [PostgreSQL compatibility page](postgresql_compatibility).
 
 In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page](../installation?environment=cli) for information on how to install the CLI.
 
