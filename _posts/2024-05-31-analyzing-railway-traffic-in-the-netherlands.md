@@ -13,7 +13,7 @@ The high density of the country is a key factor in its [extensive railway networ
 which consists of 3,223 km of tracks and 397 stations.
 
 Information about this network's stations and services is available in the form of [open datasets](https://www.rijdendetreinen.nl/en/open-data/).
-These high-quality datasets are maintained by the team behind the [Rijden de Treinen _(Are the trains running?)_ application](https://www.ijdendetreinen.nl/en/about).
+These high-quality datasets are maintained by the team behind the [Rijden de Treinen _(Are the trains running?)_ application](https://www.rijdendetreinen.nl/en/about).
 
 In this post, we'll demonstrate some of DuckDB's analytical capabilities on the Dutch railway network dataset.
 Unlike most of our other blog posts, this one doesn't introduce a new feature or release: instead, it demonstrates several existing features using a single domain.
