@@ -35,33 +35,16 @@
           license="">
   <highlighting>
     <list name="controlFlow">
-      <item>BEGIN</item>
-      <item>CASE</item>
-      <item>ELSE</item>
-      <item>ELSIF</item>
-      <item>END</item>
-      <item>EXCEPTION</item>
-      <item>FOR</item>
-      <item>IF</item>
-      <item>LOOP</item>
-      <item>RETURN</item>
-      <item>THEN</item>
-      <item>WHEN</item>
     </list>
     <list name="operators">
-      <item>AND</item>
-      <item>BETWEEN</item>
-      <item>IN</item>
-      <item>IS</item>
-      <item>LIKE</item>
-      <item>NOT</item>
-      <item>OR</item>
     </list>
     <list name="keywords">
       <item>ABORT</item>
       <item>ABS</item>
       <item>ABSOLUTE</item>
       <item>ACCESS</item>
+      <item>ACCOUNT_ID</item>
+      <item>ACCOUNT_NAME</item>
       <item>ACTION</item>
       <item>ADA</item>
       <item>ADD</item>
@@ -70,7 +53,10 @@
       <item>AGGREGATE</item>
       <item>ALIAS</item>
       <item>ALL</item>
+      <item>ALL_VARCHAR</item>
       <item>ALLOCATE</item>
+      <item>ALLOW_MOVED_PATHS</item>
+      <item>ALLOW_QUOTED_NULLS</item>
       <item>ALSO</item>
       <item>ALTER</item>
       <item>ALWAYS</item>
@@ -93,7 +79,11 @@
       <item>ATTACH</item>
       <item>ATTRIBUTE</item>
       <item>AUTHORIZATION</item>
+      <item>AUTO</item>
+      <item>AUTO_DETECT</item>
+      <item>AUTO_TYPE_CANDIDATES</item>
       <item>AVG</item>
+      <item>AZURE</item>
       <item>BACKWARD</item>
       <item>BEFORE</item>
       <item>BEGIN</item>
@@ -102,11 +92,18 @@
       <item>BINARY</item>
       <item>BIT</item>
       <item>BIT_LENGTH</item>
+      <item>BITSTRING</item>
       <item>BITVAR</item>
+      <item>BLOB</item>
+      <item>BOOL</item>
       <item>BOOLEAN</item>
       <item>BOTH</item>
+      <item>BOX_2D</item>
+      <item>BPCHAR</item>
       <item>BREADTH</item>
+      <item>BROTLI</item>
       <item>BY</item>
+      <item>BYTEA</item>
       <item>C</item>
       <item>CACHE</item>
       <item>CALL</item>
@@ -130,13 +127,18 @@
       <item>CHECK</item>
       <item>CHECKED</item>
       <item>CHECKPOINT</item>
+      <item>CHILDREN</item>
       <item>CLASS</item>
       <item>CLASS_ORIGIN</item>
+      <item>CLIENT_CERTIFICATE_PATH</item>
+      <item>CLIENT_ID</item>
+      <item>CLIENT_SECRET</item>
       <item>CLOB</item>
       <item>CLOSE</item>
       <item>CLUSTER</item>
       <item>COALESCE</item>
       <item>COBOL</item>
+      <item>CODEC</item>
       <item>COLLATE</item>
       <item>COLLATION</item>
       <item>COLLATION_CATALOG</item>
@@ -155,11 +157,13 @@
       <item>COMPRESSION</item>
       <item>CONCURRENTLY</item>
       <item>CONDITION_NUMBER</item>
+      <item>CONFIG</item>
       <item>CONFIGURATION</item>
       <item>CONFLICT</item>
       <item>CONNECT</item>
       <item>CONNECTION</item>
       <item>CONNECTION_NAME</item>
+      <item>CONNECTION_STRING</item>
       <item>CONSTRAINT</item>
       <item>CONSTRAINT_CATALOG</item>
       <item>CONSTRAINT_NAME</item>
@@ -178,6 +182,7 @@
       <item>CREATE</item>
       <item>CREATEDB</item>
       <item>CREATEUSER</item>
+      <item>CREDENTIAL_CHAIN</item>
       <item>CROSS</item>
       <item>CSV</item>
       <item>CUBE</item>
@@ -194,13 +199,18 @@
       <item>DATA</item>
       <item>DATABASE</item>
       <item>DATABASES</item>
+      <item>DATE</item>
+      <item>DATEFORMAT</item>
+      <item>DATETIME</item>
       <item>DATETIME_INTERVAL_CODE</item>
       <item>DATETIME_INTERVAL_PRECISION</item>
       <item>DAY</item>
       <item>DAYS</item>
+      <item>DE</item>
       <item>DEALLOCATE</item>
       <item>DEC</item>
       <item>DECIMAL</item>
+      <item>DECIMAL_SEPARATOR</item>
       <item>DECLARE</item>
       <item>DEFAULT</item>
       <item>DEFAULTS</item>
@@ -209,6 +219,7 @@
       <item>DEFINED</item>
       <item>DEFINER</item>
       <item>DELETE</item>
+      <item>DELIM</item>
       <item>DELIMITER</item>
       <item>DELIMITERS</item>
       <item>DEPENDS</item>
@@ -231,6 +242,7 @@
       <item>DOCUMENT</item>
       <item>DOMAIN</item>
       <item>DOUBLE</item>
+      <item>DRIVER</item>
       <item>DROP</item>
       <item>DYNAMIC</item>
       <item>DYNAMIC_FUNCTION</item>
@@ -240,8 +252,10 @@
       <item>ENABLE</item>
       <item>ENCODING</item>
       <item>ENCRYPTED</item>
+      <item>ENCRYPTION_CONFIG</item>
       <item>END</item>
-      END-<item>EXEC</item>
+      <item>END-EXEC</item>
+      <item>ENDPOINT</item>
       <item>ENUM</item>
       <item>EQUALS</item>
       <item>ESCAPE</item>
@@ -260,20 +274,27 @@
       <item>EXPORT</item>
       <item>EXPORT_STATE</item>
       <item>EXTENSION</item>
+      <item>EXTENSIONS</item>
       <item>EXTERNAL</item>
       <item>EXTRACT</item>
       <item>false</item>
-      <item>FALSE</item>
       <item>FAMILY</item>
       <item>FETCH</item>
+      <item>FIELD_IDS</item>
+      <item>FILENAME</item>
+      <item>FILENAME_PATTERN</item>
       <item>FILTER</item>
       <item>FINAL</item>
       <item>FIRST</item>
       <item>FLOAT</item>
+      <item>FLOAT4</item>
+      <item>FLOAT8</item>
       <item>FOLLOWING</item>
       <item>FOR</item>
       <item>FORCE</item>
+      <item>FORCE_NOT_NULL</item>
       <item>FOREIGN</item>
+      <item>FORMAT</item>
       <item>FORTRAN</item>
       <item>FORWARD</item>
       <item>FOUND</item>
@@ -284,8 +305,13 @@
       <item>FUNCTION</item>
       <item>FUNCTIONS</item>
       <item>G</item>
+      <item>GCS</item>
+      <item>GDAL</item>
       <item>GENERAL</item>
       <item>GENERATED</item>
+      <item>GEOMETRY</item>
+      <item>GEOMETRYCOLLECTION</item>
+      <item>GeometryType</item>
       <item>GET</item>
       <item>GLOB</item>
       <item>GLOBAL</item>
@@ -296,17 +322,26 @@
       <item>GROUP</item>
       <item>GROUPING</item>
       <item>GROUPING_ID</item>
+      <item>GUID</item>
+      <item>GZIP</item>
       <item>HANDLER</item>
       <item>HAVING</item>
       <item>HEADER</item>
       <item>HIERARCHY</item>
+      <item>HIVE_PARTITIONING</item>
+      <item>HIVE_TYPES</item>
+      <item>HNSW</item>
       <item>HOLD</item>
       <item>HOST</item>
       <item>HOUR</item>
       <item>HOURS</item>
+      <item>HTTP_PROXY</item>
+      <item>HUGEINT</item>
+      <item>HUGGINGFACE</item>
       <item>IDENTITY</item>
       <item>IF</item>
       <item>IGNORE</item>
+      <item>IGNORE_ERRORS</item>
       <item>ILIKE</item>
       <item>IMMEDIATE</item>
       <item>IMMUTABLE</item>
@@ -320,6 +355,7 @@
       <item>INDEX</item>
       <item>INDEXES</item>
       <item>INDITCATOR</item>
+      <item>INET</item>
       <item>INFIX</item>
       <item>INHERIT</item>
       <item>INHERITS</item>
@@ -335,7 +371,16 @@
       <item>INSTANTIABLE</item>
       <item>INSTEAD</item>
       <item>INT</item>
+      <item>INT1</item>
+      <item>INT128</item>
+      <item>INT16</item>
+      <item>INT2</item>
+      <item>INT32</item>
+      <item>INT4</item>
+      <item>INT64</item>
+      <item>INT8</item>
       <item>INTEGER</item>
+      <item>INTEGRAL</item>
       <item>INTERSECT</item>
       <item>INTERVAL</item>
       <item>INTO</item>
@@ -347,6 +392,7 @@
       <item>JOIN</item>
       <item>JSON</item>
       <item>KEY</item>
+      <item>KEY_ID</item>
       <item>KEY_MEMBER</item>
       <item>KEY_TYPE</item>
       <item>LABEL</item>
@@ -355,6 +401,8 @@
       <item>LARGE</item>
       <item>LAST</item>
       <item>LATERAL</item>
+      <item>LAYER</item>
+      <item>LAYER_CREATION_OPTIONS</item>
       <item>LEADING</item>
       <item>LEAKPROOF</item>
       <item>LEFT</item>
@@ -363,6 +411,9 @@
       <item>LEVEL</item>
       <item>LIKE</item>
       <item>LIMIT</item>
+      <item>LINESTRING</item>
+      <item>LINESTRING_2D</item>
+      <item>LIST</item>
       <item>LISTEN</item>
       <item>LOAD</item>
       <item>LOCAL</item>
@@ -373,13 +424,19 @@
       <item>LOCK</item>
       <item>LOCKED</item>
       <item>LOGGED</item>
+      <item>LOGICAL</item>
+      <item>LONG</item>
       <item>LOWER</item>
+      <item>LZ4</item>
+      <item>LZ4_RAW</item>
+      <item>LZO</item>
       <item>MACRO</item>
       <item>MAP</item>
       <item>MAPPING</item>
       <item>MATCH</item>
       <item>MATERIALIZED</item>
       <item>MAX</item>
+      <item>MAX_LINE_SIZE</item>
       <item>MAXVALUE</item>
       <item>MESSAGE_LENGTH</item>
       <item>MESSAGE_OCTET_LENGTH</item>
@@ -401,7 +458,12 @@
       <item>MONTHS</item>
       <item>MORE</item>
       <item>MOVE</item>
+      <item>MULTILINESTRING</item>
+      <item>MULTIPOINT</item>
+      <item>MULTIPOLYGON</item>
       <item>MUMPS</item>
+      <item>MYSQL</item>
+      <item>MYSQL_SCANNER</item>
       <item>NAME</item>
       <item>NAMES</item>
       <item>NATIONAL</item>
@@ -409,31 +471,41 @@
       <item>NCHAR</item>
       <item>NCLOB</item>
       <item>NEW</item>
+      <item>NEW_LINE</item>
+      <item>NEWLINE_DELIMITED</item>
       <item>NEXT</item>
       <item>NO</item>
+      <item>NOACCENT</item>
+      <item>NOCASE</item>
       <item>NOCREATEDB</item>
       <item>NOCREATEUSER</item>
       <item>NONE</item>
+      <item>NORMALIZE_NAMES</item>
       <item>NOT</item>
       <item>NOTHING</item>
       <item>NOTIFY</item>
       <item>NOTNULL</item>
       <item>NOWAIT</item>
       <item>NULL</item>
+      <item>NULL_PADDING</item>
       <item>NULLABLE</item>
       <item>NULLIF</item>
       <item>NULLS</item>
+      <item>NULLSTR</item>
       <item>NUMERIC</item>
+      <item>NVARCHAR</item>
       <item>OBJECT</item>
       <item>OCTET_LENGTH</item>
       <item>OF</item>
       <item>OFF</item>
       <item>OFFSET</item>
+      <item>OID</item>
       <item>OIDS</item>
       <item>OLD</item>
       <item>ON</item>
       <item>ONLY</item>
       <item>OPEN</item>
+      <item>OPEN_OPTIONS</item>
       <item>OPERATION</item>
       <item>OPERATOR</item>
       <item>OPTION</item>
@@ -448,6 +520,7 @@
       <item>OVERLAPS</item>
       <item>OVERLAY</item>
       <item>OVERRIDING</item>
+      <item>OVERWRITE_OR_IGNORE</item>
       <item>OWNED</item>
       <item>OWNER</item>
       <item>PAD</item>
@@ -460,24 +533,35 @@
       <item>PARAMETER_SPECIFIC_CATALOG</item>
       <item>PARAMETER_SPECIFIC_NAME</item>
       <item>PARAMETERS</item>
+      <item>PARQUET</item>
       <item>PARSER</item>
       <item>PARTIAL</item>
       <item>PARTITION</item>
+      <item>PARTITION_BY</item>
       <item>PASCAL</item>
       <item>PASSING</item>
       <item>PASSWORD</item>
       <item>PENDANT</item>
+      <item>PER_THREAD_OUTPUT</item>
       <item>PERCENT</item>
+      <item>PERSISTENT</item>
       <item>PIVOT</item>
       <item>PIVOT_LONGER</item>
       <item>PIVOT_WIDER</item>
       <item>PLACING</item>
       <item>PLANS</item>
       <item>PLI</item>
+      <item>POINT</item>
+      <item>POINT_2D</item>
       <item>POLICY</item>
+      <item>POLYGON</item>
+      <item>POLYGON_2D</item>
       <item>POSITION</item>
       <item>POSITIONAL</item>
       <item>POSTFIX</item>
+      <item>POSTGRES</item>
+      <item>POSTGRES_BINARY</item>
+      <item>POSTGRES_SCANNER</item>
       <item>PRAGMA</item>
       <item>PRECEDING</item>
       <item>PRECISION</item>
@@ -492,22 +576,33 @@
       <item>PROCEDURAL</item>
       <item>PROCEDURE</item>
       <item>PROGRAM</item>
+      <item>PROVIDER</item>
+      <item>PROXY_PASSWORD</item>
+      <item>PROXY_USER_NAME</item>
       <item>PUBLIC</item>
       <item>PUBLICATION</item>
       <item>QUALIFY</item>
       <item>QUOTE</item>
+      <item>R2</item>
       <item>RANGE</item>
       <item>READ</item>
+      <item>READ_ONLY</item>
+      <item>READONLY</item>
       <item>READS</item>
       <item>REAL</item>
       <item>REASSIGN</item>
       <item>RECHECK</item>
+      <item>RECORDS</item>
       <item>RECURSIVE</item>
+      <item>REDACT_SECRET</item>
       <item>REF</item>
       <item>REFERENCES</item>
       <item>REFERENCING</item>
       <item>REFRESH</item>
+      <item>REGION</item>
       <item>REINDEX</item>
+      <item>REJECTS_RECOVERY_COLUMNS</item>
+      <item>REJECTS_TABLE</item>
       <item>RELATIVE</item>
       <item>RELEASE</item>
       <item>RENAME</item>
@@ -536,9 +631,12 @@
       <item>ROUTINE_SCHEMA</item>
       <item>ROW</item>
       <item>ROW_COUNT</item>
+      <item>ROW_GROUP_SIZE</item>
       <item>ROWS</item>
       <item>RULE</item>
+      <item>S3</item>
       <item>SAMPLE</item>
+      <item>SAMPLE_SIZE</item>
       <item>SAVE_POINT</item>
       <item>SAVEPOINT</item>
       <item>SCALE</item>
@@ -550,6 +648,7 @@
       <item>SEARCH</item>
       <item>SECOND</item>
       <item>SECONDS</item>
+      <item>SECRET</item>
       <item>SECURITY</item>
       <item>SELECT</item>
       <item>SELF</item>
@@ -560,18 +659,24 @@
       <item>SERIALIZABLE</item>
       <item>SERVER</item>
       <item>SERVER_NAME</item>
+      <item>SERVICE_PRINCIPAL</item>
       <item>SESSION</item>
       <item>SESSION_USER</item>
       <item>SET</item>
+      <item>SET_REGION</item>
       <item>SETOF</item>
       <item>SETS</item>
+      <item>SF</item>
       <item>SHARE</item>
+      <item>SHORT</item>
       <item>SHOW</item>
+      <item>SIGNED</item>
       <item>SIMILAR</item>
       <item>SIMPLE</item>
       <item>SIZE</item>
       <item>SKIP</item>
       <item>SMALLINT</item>
+      <item>SNAPPY</item>
       <item>SNAPSHOT</item>
       <item>SOME</item>
       <item>SOURCE</item>
@@ -583,8 +688,12 @@
       <item>SQLCODE</item>
       <item>SQLERROR</item>
       <item>SQLEXCEPTION</item>
+      <item>SQLITE</item>
+      <item>SQLITE_SCANNER</item>
+      <item>SQLNULL</item>
       <item>SQLSTATE</item>
       <item>SQLWARNINIG</item>
+      <item>SRS</item>
       <item>STABLE</item>
       <item>STANDALONE</item>
       <item>START</item>
@@ -594,9 +703,11 @@
       <item>STATISTICS</item>
       <item>STDIN</item>
       <item>STDOUT</item>
+      <item>STEP</item>
       <item>STORAGE</item>
       <item>STORED</item>
       <item>STRICT</item>
+      <item>STRING</item>
       <item>STRIP</item>
       <item>STRUCT</item>
       <item>STRUCTURE</item>
@@ -619,16 +730,29 @@
       <item>TEMP</item>
       <item>TEMPLATE</item>
       <item>TEMPORARY</item>
+      <item>TENANT_ID</item>
       <item>TERMINATE</item>
       <item>TEXT</item>
       <item>THAN</item>
       <item>THEN</item>
       <item>TIME</item>
+      <item>TIME_TZ</item>
       <item>TIMESTAMP</item>
+      <item>TIMESTAMP_MS</item>
+      <item>TIMESTAMP_NS</item>
+      <item>TIMESTAMP_S</item>
+      <item>TIMESTAMP_SEC</item>
+      <item>TIMESTAMP_TZ</item>
+      <item>TIMESTAMP_US</item>
+      <item>TIMESTAMPFORMAT</item>
+      <item>TIMESTAMPTZ</item>
+      <item>TIMETZ</item>
       <item>TIMEZONE_HOUR</item>
       <item>TIMEZONE_MINUTE</item>
+      <item>TINYINT</item>
       <item>TO</item>
       <item>TOAST</item>
+      <item>TOKEN</item>
       <item>TRAILING</item>
       <item>TRANSACTION</item>
       <item>TRANSACTIONS_COMMITTED</item>
@@ -646,17 +770,24 @@
       <item>TRIGGER_SCHEMA</item>
       <item>TRIM</item>
       <item>true</item>
-      <item>TRUE</item>
       <item>TRUNCATE</item>
       <item>TRUSTED</item>
       <item>TRY_CAST</item>
       <item>TYPE</item>
       <item>TYPES</item>
+      <item>UBIGINT</item>
+      <item>UINT16</item>
+      <item>UINT32</item>
+      <item>UINT64</item>
+      <item>UINT8</item>
+      <item>UINTEGER</item>
       <item>UNBOUNDED</item>
       <item>UNCOMMITTED</item>
+      <item>UNCOMPRESSED</item>
       <item>UNDER</item>
       <item>UNENCRYPTED</item>
       <item>UNION</item>
+      <item>UNION_BY_NAME</item>
       <item>UNIQUE</item>
       <item>UNKNOWN</item>
       <item>UNLISTEN</item>
@@ -664,22 +795,28 @@
       <item>UNNAMED</item>
       <item>UNNEST</item>
       <item>UNPIVOT</item>
+      <item>UNSTRUCTURED</item>
       <item>UNTIL</item>
       <item>UPDATE</item>
       <item>UPPER</item>
       <item>USAGE</item>
       <item>USE</item>
+      <item>USE_TMP_FILE</item>
       <item>USER</item>
       <item>USER_DEFINED_TYPE_CATALOG</item>
       <item>USER_DEFINED_TYPE_NAME</item>
       <item>USER_DEFINED_TYPE_SCHEMA</item>
       <item>USING</item>
+      <item>USMALLINT</item>
+      <item>UTINYINT</item>
+      <item>UUID</item>
       <item>VACUUM</item>
       <item>VALID</item>
       <item>VALIDATE</item>
       <item>VALIDATOR</item>
       <item>VALUE</item>
       <item>VALUES</item>
+      <item>VARBINARY</item>
       <item>VARCHAR</item>
       <item>VARIABLE</item>
       <item>VARIADIC</item>
@@ -698,6 +835,7 @@
       <item>WITH</item>
       <item>WITHIN</item>
       <item>WITHOUT</item>
+      <item>WKB_BLOB</item>
       <item>WORK</item>
       <item>WRAPPER</item>
       <item>WRITE</item>
@@ -717,122 +855,7 @@
       <item>YEARS</item>
       <item>YES</item>
       <item>ZONE</item>
-      <item>AUTO_DETECT</item>
-      <item>FORMAT</item>
-      <item>READ_ONLY</item>
-      <item>PARQUET</item>
-      <item>UNCOMPRESSED</item>
-      <item>SNAPPY</item>
-      <item>GZIP</item>
-      <item>LZO</item>
-      <item>BROTLI</item>
-      <item>LZ4</item>
-      <item>LZ4_RAW</item>
       <item>ZSTD</item>
-      <item>FIELD_IDS</item>
-      <item>ROW_GROUP_SIZE</item>
-      <item>PARTITION_BY</item>
-      <item>OVERWRITE_OR_IGNORE</item>
-      <item>FILENAME_PATTERN</item>
-      <item>USE_TMP_FILE</item>
-      <item>AUTO</item>
-      <item>UNSTRUCTURED</item>
-      <item>NEWLINE_DELIMITED</item>
-      <item>GDAL</item>
-      <item>DRIVER</item>
-      <item>LAYER_CREATION_OPTIONS</item>
-      <item>ALLOW_MOVED_PATHS</item>
-      <item>PER_THREAD_OUTPUT</item>
-      <item>BIGINT</item>
-      <item>BINARY</item>
-      <item>BIT</item>
-      <item>BITSTRING</item>
-      <item>BLOB</item>
-      <item>BOOL</item>
-      <item>BOOLEAN</item>
-      <item>BPCHAR</item>
-      <item>BYTEA</item>
-      <item>CHAR</item>
-      <item>DATE</item>
-      <item>DATETIME</item>
-      <item>DEC</item>
-      <item>DECIMAL</item>
-      <item>DOUBLE</item>
-      <item>ENUM</item>
-      <item>FLOAT</item>
-      <item>FLOAT4</item>
-      <item>FLOAT8</item>
-      <item>GUID</item>
-      <item>HUGEINT</item>
-      <item>INT</item>
-      <item>INT1</item>
-      <item>INT128</item>
-      <item>INT16</item>
-      <item>INT2</item>
-      <item>INT32</item>
-      <item>INT4</item>
-      <item>INT64</item>
-      <item>INT8</item>
-      <item>INTEGER</item>
-      <item>INTEGRAL</item>
-      <item>INTERVAL</item>
-      <item>LIST</item>
-      <item>LOGICAL</item>
-      <item>LONG</item>
-      <item>MAP</item>
-      <item>NULL</item>
-      <item>NUMERIC</item>
-      <item>NVARCHAR</item>
-      <item>OID</item>
-      <item>REAL</item>
-      <item>ROW</item>
-      <item>SHORT</item>
-      <item>SIGNED</item>
-      <item>SMALLINT</item>
-      <item>SQLNULL</item>
-      <item>STRING</item>
-      <item>STRUCT</item>
-      <item>TEXT</item>
-      <item>TIME</item>
-      <item>TIMESTAMP</item>
-      <item>TIMESTAMPTZ</item>
-      <item>TIMESTAMP_MS</item>
-      <item>TIMESTAMP_NS</item>
-      <item>TIMESTAMP_S</item>
-      <item>TIMESTAMP_SEC</item>
-      <item>TIMESTAMP_TZ</item>
-      <item>TIMESTAMP_US</item>
-      <item>TIMETZ</item>
-      <item>TIME_TZ</item>
-      <item>TINYINT</item>
-      <item>UBIGINT</item>
-      <item>UINT16</item>
-      <item>UINT32</item>
-      <item>UINT64</item>
-      <item>UINT8</item>
-      <item>UINTEGER</item>
-      <item>UNION</item>
-      <item>USMALLINT</item>
-      <item>UTINYINT</item>
-      <item>UUID</item>
-      <item>VARBINARY</item>
-      <item>VARCHAR</item>
-      <item>ARRAY</item>
-      <item>GEOMETRY</item>
-      <item>POINT</item>
-      <item>LINESTRING</item>
-      <item>POLYGON</item>
-      <item>MULTIPOINT</item>
-      <item>MULTILINESTRING</item>
-      <item>MULTIPOLYGON</item>
-      <item>GEOMETRYCOLLECTION</item>
-      <item>POINT_2D</item>
-      <item>LINESTRING_2D</item>
-      <item>POLYGON_2D</item>
-      <item>BOX_2D</item>
-      <item>WKB_BLOB</item>
-      <item>GeometryType</item>
-      <item>SQLITE</item>
     </list>
     <list name="functions">
       <item>__internal_compress_integral_ubigint</item>
