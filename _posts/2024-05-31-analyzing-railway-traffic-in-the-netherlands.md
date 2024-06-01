@@ -207,11 +207,9 @@ This query yields the same result as the query above, and completes (depending o
 This speed is possible because DuckDB doesn't need to download the whole Parquet file to evaluate the query:
 while the file size is 309&nbsp;MB, it only uses about 20&nbsp;MB of network traffic, approximately 6% of the total file size.
 
-The reduction in network traffic is possible due to two factors:
-Parquet's columnar layout, which allows the reader to only access the required columns,
-and
-the [zonemaps](/docs/guides/performance/indexing#zonemaps) available in the Parquet file's metadata,
-which allow the filter pushdown optimization (e.g., the reader only fetches [row groups](/docs/internals/storage#row-groups) with dates in the summer months).
+The reduction in network traffic is possible because of [partial reading](/docs/data/parquet/overview#partial-reading) along both the columns and the rows of the data.
+First, Parquet's columnar layout allows the reader to only access the required columns.
+Second, the [zonemaps](/docs/guides/performance/indexing#zonemaps) available in the Parquet file's metadata allow the filter pushdown optimization (e.g., the reader only fetches [row groups](/docs/internals/storage#row-groups) with dates in the summer months).
 Both of these optimizations are implemented via [HTTP range requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests),
 saving considerable traffic and time when running queries on remote Parquet files.
 
