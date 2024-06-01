@@ -476,6 +476,10 @@
                   "url": "delete"
                 },
                 {
+                  "page": "DESCRIBE",
+                  "url": "describe"
+                },
+                {
                   "page": "DROP",
                   "url": "drop"
                 },
@@ -502,6 +506,10 @@
                 {
                   "page": "SET/RESET",
                   "url": "set"
+                },
+                {
+                  "page": "SUMMARIZE",
+                  "url": "summarize"
                 },
                 {
                   "page": "Transaction Management",
