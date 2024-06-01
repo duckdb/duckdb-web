@@ -116,11 +116,14 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 
 [The `QUALIFY` clause](../../sql/query_syntax/qualify) is used to filter the result of [`WINDOW` functions](../../sql/window_functions).
 
-## `ORDER BY` and `LIMIT` Clauses
+## `ORDER BY`, `LIMIT` and `OFFSET` Clauses
 
 <div id="rrdiagram8"></div>
 
-[`ORDER BY`](../../sql/query_syntax/orderby) and [`LIMIT`](../../sql/query_syntax/limit) are output modifiers. Logically they are applied at the very end of the query. The `LIMIT` clause restricts the amount of rows fetched, and the `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order.
+[`ORDER BY`](../../sql/query_syntax/orderby), [`LIMIT` and `OFFSET`](../../sql/query_syntax/limit) are output modifiers.
+Logically they are applied at the very end of the query.
+The `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order.
+The `LIMIT` clause restricts the amount of rows fetched, while the `OFFSET` clause indicates at which position to start reading the values.
 
 ## `VALUES` List
 
