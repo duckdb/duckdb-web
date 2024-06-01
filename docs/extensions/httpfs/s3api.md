@@ -84,7 +84,7 @@ The `CREDENTIAL_CHAIN` provider also allows overriding the automatically fetched
 
 ```sql
 CREATE SECRET secret4 (
-    TYPE AZURE,
+    TYPE S3,
     PROVIDER CREDENTIAL_CHAIN,
     CHAIN 'config',
     REGION 'eu-west-1'
