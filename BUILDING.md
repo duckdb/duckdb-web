@@ -18,6 +18,7 @@
   - [Updating the release calendar](#updating-the-release-calendar)
   - [Troubleshooting](#troubleshooting)
     - [Cannot install dependency](#cannot-install-dependency)
+    - [Jekyll fails](#jekyll-fails)
 
 The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
@@ -151,4 +152,18 @@ The workaround is to run the following `bundle` command:
 
 ```bash
 bundle config set --global build.posix-spawn "--with-cflags=-Wno-error=incompatible-function-pointer-types"
+```
+
+### Jekyll fails
+
+After upgrading Ruby, Jekyll fails with the following error message:
+
+```console
+"/opt/homebrew/opt/ruby/bin/bundle:25:in `load': cannot load such file"
+```
+
+The solution is to run the following command:
+
+```bash
+gem install bundler
 ```
