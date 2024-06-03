@@ -22,7 +22,7 @@ PostgreSQL returns an error:
 ERROR:  UNION types boolean and integer cannot be matched
 ```
 
-DuckDB successfully completes the query and returns:
+DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
 
 | x |
 |--:|
