@@ -171,7 +171,6 @@ await c.query(`
 ]
 ```
 
-
 ### Insert Statement
 
 ```ts

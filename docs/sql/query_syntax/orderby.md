@@ -77,7 +77,6 @@ FROM addresses
 ORDER BY city DESC NULLS LAST;
 ```
 
-
 Order by city and then by zip code, both using the default orderings:
 
 ```sql

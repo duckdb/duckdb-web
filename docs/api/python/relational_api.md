@@ -293,7 +293,6 @@ r1.union(r2).show()
 └───────┘
 ```
 
-
 ## Result Output
 
 The result of relations can be converted to various types of Python structures, see the [result conversion page](result_conversion) for more information.

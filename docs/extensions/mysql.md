@@ -33,7 +33,6 @@ USE mysqldb;
 
 The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below. Connection information can also be specified with [environment variables](https://dev.mysql.com/doc/refman/8.3/en/environment-variables.html). If no option is provided explicitly, the MySQL extension tries to read it from an environment variable.
 
-
 <div class="narrow_table"></div>
 
 |  Setting   |   Default    | Environment variable |

@@ -383,7 +383,6 @@ The table below shows the available statistical aggregate functions.
 | [`var_pop(x)`](#var_popx) | Returns the population variance. |
 | [`var_samp(x)`](#var_sampx) | Returns the sample variance of all input values. |
 
-
 ### `corr(y, x)`
 
 <div class="nostroke_table"></div>

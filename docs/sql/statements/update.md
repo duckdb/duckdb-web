@@ -55,7 +55,6 @@ FROM original;
 | 1   | original value   |
 | 2   | original value 2 |
 
-
 ```sql
 UPDATE original
     SET value = new.value
@@ -63,7 +62,7 @@ UPDATE original
     WHERE original.key = new.key;
 ```
 
-OR:
+Or:
 
 ```sql
 UPDATE original

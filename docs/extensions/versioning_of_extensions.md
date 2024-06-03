@@ -10,15 +10,16 @@ in the extension they have installed, and by developers to understand bug report
 
 **Extensions whose source lives in DuckDB's main repository** (in-tree extensions) are tagged with the short git hash of the repository. 
 For example, the parquet extension is built into DuckDB version `v0.10.3` (which has commit `70fd6a8a24`):
+
 ```sql
 SELECT extension_name, extension_version, install_mode FROM duckdb_extensions() WHERE extension_name='parquet';
 ```
+
 <div class="narrow_table"></div>
 
 | extension_name    | extension_version | install_mode         |
 |:------------------|:------------------|:---------------------|
 | parquet           | 70fd6a8a24        | STATICALLY_LINKED    |
-
 
 **Extensions whose source lives in a separate repository** (out-of-tree extensions) have their own version. This version is **either** 
 the short git hash of the separate repository, **or** the git version tag in [Semantic Versioning](https://semver.org/) format.

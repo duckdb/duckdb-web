@@ -178,14 +178,11 @@ In this case, the name of the table is the URL of the remotely stored Parquet fi
 %sqlplot boxplot --table https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet --column trip_distance
 ```
 
-
 ![Boxplot of the trip_distance column](/images/trip-distance-boxplot.png)
-
 
 Now, create a query that filters by the 90th percentile.
 Note the use of the `--save`, and `--no-execute` functions.
 This tells JupySQL to store the query, but skips execution. It will be referenced in the next plotting call.
-
 
 ```python
 %%sql --save short_trips --no-execute

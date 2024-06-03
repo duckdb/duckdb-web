@@ -19,7 +19,6 @@ To use DuckDB, you must first initialize a `DuckDB` instance using its construct
 
 With the `DuckDB` instance, you can create one or many `Connection` instances using the `Connection()` constructor. While connections should be thread-safe, they will be locked during querying. It is therefore recommended that each thread uses its own connection if you are in a multithreaded environment.
 
-
 ```cpp
 DuckDB db(nullptr);
 Connection con(db);
@@ -203,7 +202,6 @@ There are different vector types to handle in a Vectorized UDF:
 - StringVector;
 - StructVector;
 - SequenceVector.
-
 
 The general API of the `CreateVectorizedFunction()` method is as follows:
 

@@ -168,7 +168,6 @@ For example:
 http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
 ```
 
-
 ## Loading and Installing an Extension from Explicit Paths
 
 ### Installing Extensions from an Explicit Path
