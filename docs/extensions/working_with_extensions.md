@@ -124,7 +124,7 @@ for local paths and remote servers, for example:
 
 ```text
 base_repository_path_or_url
-└── v0.10.3
+└── v1.0.0
     └── osx_arm64
         ├── autocomplete.duckdb_extension
         ├── httpfs.duckdb_extension

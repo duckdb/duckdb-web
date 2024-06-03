@@ -47,6 +47,7 @@ Since version 0.4.0, only major and minor versions get a codename.
 
 | Date | Version | Codename | Named after |
 |:--|--:|--|--|
+| 2024-06-03 | [1.0.0](https://github.com/duckdb/duckdb/releases/tag/v1.0.0) | Nivis | Snow duck _(Anas nivis)_ |
 | 2024-05-22 | [0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) | – | – |
 | 2024-04-17 | [0.10.2](https://github.com/duckdb/duckdb/releases/tag/v0.10.2) | – | – |
 | 2024-03-18 | [0.10.1](https://github.com/duckdb/duckdb/releases/tag/v0.10.1) | – | – |
