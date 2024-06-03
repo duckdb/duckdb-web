@@ -34,7 +34,6 @@ The first parameter to the `postgres_scan` function is the [PostgreSQL connectio
 
 <div class="narrow_table"></div>
 
-
 |    Name    |             Description              |    Default     |
 |------------|--------------------------------------|----------------|
 | `host`     | Name of host to connect to           | `localhost`    |
