@@ -45,7 +45,7 @@ If you wish to connect to a database file,
 you will need to make sure the file was created with a file-compatible version of DuckDB.
 Also, check that there is only one version of the driver installed as there are multiple filenames in use.
 
-Download the [snapshot jar](https://oss.sonatype.org/service/local/repositories/snapshots/content/org/duckdb/duckdb_jdbc/0.9.0-SNAPSHOT/duckdb_jdbc-0.9.0-20230806.020824-235.jar)
+Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentjavaversion }}/duckdb_jdbc-{{ site.currentjavaversion }}.jar).
 
 * macOS: Copy it to `~/Library/Tableau/Drivers/`
 * Windows: Copy it to `C:\Program Files\Tableau\Drivers`
