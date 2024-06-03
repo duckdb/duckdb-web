@@ -159,7 +159,8 @@ bundle config set --global build.posix-spawn "--with-cflags=-Wno-error=incompati
 After upgrading Ruby, Jekyll fails with the following error message:
 
 ```console
-"/opt/homebrew/opt/ruby/bin/bundle:25:in `load': cannot load such file"
+/opt/homebrew/opt/ruby/bin/bundler:25:in `load': cannot load such file -- /opt/homebrew/lib/ruby/gems/3.3.0/gems/bundler-2.5.4/exe/bundler (LoadError)
+	from /opt/homebrew/opt/ruby/bin/bundler:25:in `<main>'
 ```
 
 The solution is to run the following command:
