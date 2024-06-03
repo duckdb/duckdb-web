@@ -124,10 +124,6 @@ The default value for the `auto_type_candidates` option is `['SQLNULL', 'BOOLEAN
 
 ## CSV Functions
 
-> Deprecated DuckDB v0.10.0 introduced breaking changes to the `read_csv` function.
-> Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the [old `read_csv_auto` function](../../../docs/archive/0.9.2/data/csv/overview#read_csv_auto-function).
-> If you would like to use `read_csv` with its old behavior, turn off the auto-detection manually by using `read_csv(..., auto_detect = false)`.
-
 The `read_csv` automatically attempts to figure out the correct configuration of the CSV reader using the [CSV sniffer](/2023/10/27/csv-sniffer). It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`. An example with the [`flights.csv`](/data/flights.csv) file:
 
 ```sql
@@ -171,6 +167,12 @@ SELECT * FROM read_csv('flights.csv', header = true);
 ```
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
+
+## API Changes
+
+> Deprecated DuckDB v0.10.0 introduced breaking changes to the `read_csv` function.
+> Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the [old `read_csv_auto` function](../../../docs/archive/0.9.2/data/csv/overview#read_csv_auto-function).
+> If you would like to use `read_csv` with its old behavior, turn off the auto-detection manually by using `read_csv(..., auto_detect = false)`.
 
 ## Writing Using the `COPY` Statement
 
