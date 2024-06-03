@@ -9,23 +9,23 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 
 ## Clauses
 
-* [`CREATE OR REPLACE TABLE`](../../sql/statements/create_table#create-or-replace)
-* [`CREATE TABLE ... AS SELECT` (CTAS)](../../sql/statements/create_table#create-table--as-select-ctas)
-* [`DESCRIBE`](../meta/describe)
-* [`FROM`-first syntax with an optional `SELECT` clause](../../sql/query_syntax/from#from-first-syntax)
-* [`GROUP BY ALL`](../../sql/query_syntax/groupby#group-by-all)
-* [`INSERT INTO ... BY NAME`](../../sql/statements/insert#insert-into--by-name)
-* [`ORDER BY ALL`](../../sql/query_syntax/orderby#order-by-all)
-* [`PIVOT`](../../sql/statements/pivot) [`UNPIVOT`](../../sql/statements/unpivot)
-* [`SELECT * EXCLUDE`](../../sql/expressions/star#exclude-clause)
-* [`SELECT * REPLACE`](../../sql/expressions/star#replace-clause)
-* [`SUMMARIZE`](../meta/summarize)
-* [`UNION BY NAME`](../../sql/query_syntax/setops#union-all-by-name)
+* [`CREATE OR REPLACE TABLE`](../../sql/statements/create_table#create-or-replace): this clause allows avoiding `DROP TABLE IF EXISTS` statements in scripts.
+* [`CREATE TABLE ... AS SELECT` (CTAS)](../../sql/statements/create_table#create-table--as-select-ctas): this clause allows creating a new table from the output of a table without manually defining a schema.
+* [`DESCRIBE`](../meta/describe): this clause provides a succinct summary of the schema of a table or query.
+* [`FROM`-first syntax with an optional `SELECT` clause](../../sql/query_syntax/from#from-first-syntax): DuckDB allows queries in the form of `FROM tbl` which selects all columns (performing a `SELECT *` statement).
+* [`GROUP BY ALL`](../../sql/query_syntax/groupby#group-by-all): this clause allows omitting the group-by columns by inferring them from the list of attributes in the `SELECT` clause.
+* [`INSERT INTO ... BY NAME`](../../sql/statements/insert#insert-into--by-name): this variant of the `INSERT` statement allows using column names instead of positions.
+* [`ORDER BY ALL`](../../sql/query_syntax/orderby#order-by-all): this clause allows ordering on all columns (e.g., to ensure deterministic results).
+* [`PIVOT`](../../sql/statements/pivot) and [`UNPIVOT`](../../sql/statements/unpivot) allow turning long tables to wide tables and vice versa, respectively.
+* [`SELECT * EXCLUDE`](../../sql/expressions/star#exclude-clause): the `EXCLUDE` option allows excluding specific columns from the `*` expression.
+* [`SELECT * REPLACE`](../../sql/expressions/star#replace-clause): the `EXCLUDE` option allows replacing specific columns with different expressions in a `*` expression.
+* [`SUMMARIZE`](../meta/summarize): this clause returns summary statistics for a table or query.
+* [`UNION BY NAME`](../../sql/query_syntax/setops#union-all-by-name): this clause performing the `UNION` operation along the names of columns (instead of relying on positions).
 
 ## Query Features
 
 * [Column aliases in `WHERE`, `GROUP BY`, and `HAVING`](/2022/05/04/friendlier-sql#column-aliases-in-where--group-by--having)
-* [`COLUMNS()` expression](../../sql/expressions/star#columns-expression)
+* [`COLUMNS()` expression](../../sql/expressions/star#columns-expression) can be used to execute the same expression on multiple columns:
     * [with regular expressions](/2023/08/23/even-friendlier-sql#columns-with-regular-expressions)
     * [with `EXCLUDE` and `REPLACE`](/2023/08/23/even-friendlier-sql#columns-with-exclude-and-replace)
     * [with lambda functions](/2023/08/23/even-friendlier-sql#columns-with-lambda-functions)
