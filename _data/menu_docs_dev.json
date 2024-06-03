@@ -892,6 +892,10 @@
               "url": "azure"
             },
             {
+              "page": "Delta",
+              "url": "delta"
+            },
+            {
               "page": "Excel",
               "url": "excel"
             },
