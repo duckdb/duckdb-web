@@ -143,6 +143,8 @@ For more information about data chunks, see the [documentation on data chunks](d
 ### `duckdb_result_get_chunk`
 
 ---
+**DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
+
 Fetches a data chunk from the duckdb_result. This function should be called repeatedly until the result is exhausted.
 
 The result must be destroyed with `duckdb_destroy_data_chunk`.
@@ -182,6 +184,8 @@ The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 ### `duckdb_result_is_streaming`
 
 ---
+**DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
+
 Checks if the type of the internal result is StreamQueryResult.
 
 #### Syntax
@@ -207,6 +211,8 @@ Whether or not the result object is of the type StreamQueryResult
 ### `duckdb_result_chunk_count`
 
 ---
+**DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
+
 Returns the number of data chunks present in the result.
 
 #### Syntax
