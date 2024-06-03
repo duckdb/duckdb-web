@@ -324,6 +324,8 @@ The number of columns present in the result object.
 ### `duckdb_row_count`
 
 ---
+**DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
+
 Returns the number of rows present in the result object.
 
 #### Syntax
