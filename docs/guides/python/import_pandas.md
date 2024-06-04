@@ -6,7 +6,7 @@ title: Import from Pandas
 [`CREATE TABLE ... AS`](../../sql/statements/create_table#create-table--as-select-ctas) and [`INSERT INTO`](../../sql/statements/insert) can be used to create a table from any query.
 We can then create tables or insert into existing tables by referring to referring to the [Pandas](https://pandas.pydata.org/) DataFrame in the query.
 There is no need to register the DataFrames manually –
-DuckDB can find them in the Python process by name thanks to [replacement scans](/faq#glossary-of-terms).
+DuckDB can find them in the Python process by name thanks to [replacement scans](/docs/guides/glossary).
 
 ```python
 import duckdb

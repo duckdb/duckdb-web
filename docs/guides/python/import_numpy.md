@@ -5,7 +5,7 @@ title: Import from Numpy
 
 It is possible to query Numpy arrays from DuckDB.
 There is no need to register the arrays manually –
-DuckDB can find them in the Python process by name thanks to [replacement scans](/faq#glossary-of-terms).
+DuckDB can find them in the Python process by name thanks to [replacement scans](/docs/guides/glossary).
 For example:
 
 ```python

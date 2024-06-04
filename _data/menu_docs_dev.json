@@ -1308,6 +1308,10 @@
                   "url": "create_synthetic_data"
                 }
               ]
+            },
+            {
+              "page": "Glossary of Terms",
+              "url": "glossary"
             }
           ]
         },
