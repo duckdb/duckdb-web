@@ -57,7 +57,7 @@ To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://
 
 <div class="qa-wrap" markdown="1">
 
-### Where do I find the DuckDB Logo?
+### Where do I find the DuckDB logo?
 
 <div class="answer" markdown="1">
 
