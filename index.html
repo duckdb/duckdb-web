@@ -205,7 +205,7 @@ body_class: landing nowrap
 {% endhighlight %}
 </div>
 
-<div data-language="sql" data-example="sql-spatial-extension" data-buttontxt="Spatial documentation" data-buttonurl="/docs/extensions/spatial">
+<div data-language="sql" data-example="sql-spatial-extension" data-buttontxt="Live demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Spatial-extension-for-geospatial-support%0AINSTALL-spatial~%0ALOAD-spatial~,CREATE-TABLE-stations-AS%0A----FROM-'s3%3A%2F%2Fduckdb%20blobs%2Fstations.parquet'~,%20%20-What-are-the-top%203-closest-Intercity-stations%0A%20%20-using-aerial-distance%3F%0ASELECT%0A----s1.name_long-AS-station1%2C%0A----s2.name_long-AS-station2%2C%0A----ST_Distance(%0A--------ST_Point(s1.geo_lng%2C-s1.geo_lat)%2C%0A--------ST_Point(s2.geo_lng%2C-s2.geo_lat)%0A----)-*-111139-AS-distance%0AFROM-stations-s1%2C-stations-s2%0AWHERE-s1.type-LIKE-'%25Intercity%25'%0A--AND-s2.type-LIKE-'%25Intercity%25'%0A--AND-s1.id-%3C-s2.id%0AORDER-BY-distance-ASC%0ALIMIT-3~">
 {% highlight sql %}
 {% include landing-page/sql/spatial-extension.sql %}
 {% endhighlight %}
