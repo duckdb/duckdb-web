@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /dev/sqllogictest/result_verification
 title: Result Verification
 ---
 
