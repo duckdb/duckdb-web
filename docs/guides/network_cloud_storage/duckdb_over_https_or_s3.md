@@ -54,5 +54,4 @@ FROM stations_db.stations;
 
 ## Limitations
 
-* The `httpfs` extension has to be loaded manually, auto-loading is currently not supported.
 * Only read-only connections are allowed, writing the database via the HTTPS protocol or the S3 API is not possible.
