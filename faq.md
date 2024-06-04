@@ -192,5 +192,3 @@ Additionally to the DuckDB clients for Python, R, and other programming language
 </div>
 
 </div>
-
-</div>
