@@ -12,7 +12,6 @@ title: Release Calendar
 
 DuckDB follows [semantic versioning](https://semver.org/spec/v2.0.0.html).
 Patch versions only ship bugfixes, while minor versions also introduce new features.
-The first major version, v1.0, is expected to be released in summer 2024.
 
 ## Upcoming Releases
 
