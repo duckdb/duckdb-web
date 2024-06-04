@@ -24,8 +24,8 @@ currentshortduckdbversion: "1.0"
 currentduckdbversion: 1.0.0
 currentsnapshotversion: 1.0.1-dev
 # Java
-currentjavaversion: 0.10.3
-nextjavaversion: 0.11.0  # for java snapshots, should always be the next minor version with a patch version of 0
+currentjavaversion: 1.0.0
+nextjavaversion: 1.1.0  # for java snapshots, should always be the next minor version with a patch version of 0
 livereload: true
 highlighter: rouge
 incremental: false
