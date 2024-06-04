@@ -1,5 +1,6 @@
 ---
 layout: docu
+redirect_from:
 - /dev/docs/archive/0.10/dev/release_calendar
 - /dev/docs/archive/0.10/dev/release_calendar/
 title: Release Calendar
