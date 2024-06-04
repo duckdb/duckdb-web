@@ -13,7 +13,7 @@ SELECT
     ST_Distance(
         ST_Point(s1.geo_lng, s1.geo_lat),
         ST_Point(s2.geo_lng, s2.geo_lat)
-    ) * 111139 AS distance
+    ) * 111_139 AS distance
 FROM stations s1, stations s2
 WHERE s1.type LIKE '%Intercity%'
   AND s2.type LIKE '%Intercity%'
