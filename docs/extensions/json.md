@@ -806,6 +806,101 @@ SELECT json_contains('{"top_key": {"key": "value"}}', '{"key": "value"}');
 true
 ```
 
+## JSON Manipulation Function
+
+> Warning DuckDB's JSON data type uses [0-based indexing](#indexing).
+
+To modify an existing JSON array there are the following functions.
+
+| function name         | Description                                       |
+|:----------------------|:--------------------------------------------------|
+| `json_array_insert`   | Inserts an element at a given index in JSON array |
+| `json_array_append`   | Adds an element at the end                        |
+| `json_array_prepend`  | Adds an element to the the front                  |
+| `json_array_remove`   | Removes element(s) at index/in index range        |
+| `json_array_rotate`   | Rotates JSON array by amount $n$                  |
+| `json_array_take`     | Takes the first $n$ elements from JSON array      |
+| `json_array_tail`     | Drops the first element of JSON array             |
+
+
+```sql
+SELECT json_array_insert(arr, '"a"', 2) AS "insert",
+       json_array_append(arr, '"a"')    AS "append",
+       json_array_prepend('"a"', arr)   AS "prepend",
+       json_array_remove(arr, 2)        AS "remove",
+       json_array_rotate(arr, 1)        AS "rotate",
+       json_array_take(arr, 1)          AS "take",
+       json_array_tail(arr)             AS "tail"
+FROM   (VALUES ('[54,64,10]'::JSON)) AS _(arr);
+```
+
+```text
++----------------+----------------+----------------+---------+------------+------+---------+
+|     insert     |     append     |    prepend     | remove  |   rotate   | take |  tail   |
++----------------+----------------+----------------+---------+------------+------+---------+
+| [54,64,"a",10] | [54,64,10,"a"] | ["a",54,64,10] | [54,64] | [64,10,54] | [54] | [64,10] |
++----------------+----------------+----------------+---------+------------+------+---------+
+```
+
+It should be noted that negative indeces index from the back or switch the rotation direction.
+
+```sql
+SELECT json_array_insert(arr, '"a"', -2) AS "insert",
+       json_array_remove(arr, -2)        AS "remove",
+       json_array_rotate(arr, -1)        AS "rotate"
+FROM   (VALUES ('[54,64,10]'::JSON)) AS _(arr);
+```
+
+```text
++----------------+---------+------------+
+|     insert     | remove  |   rotate   |
++----------------+---------+------------+
+| [54,"a",64,10] | [54,10] | [10,54,64] |
++----------------+---------+------------+
+```
+
+`json_array_remove` also takes a positive start and end index to delete a whole range of
+values from an JSON array:
+
+```sql
+SELECT json_array_remove(arr, 2) AS "remove single element",
+       json_array_remove(arr, 1,2) AS "remove multiple elements"
+FROM   (VALUES ('[54,64,10]'::JSON)) AS _(arr);
+```
+
+```text
++-----------------------+--------------------------+
+| remove single element | remove multiple elements |
++-----------------------+--------------------------+
+| [54,64]               | [54]                     |
++-----------------------+--------------------------+
+```
+
+To manipulate the JSON objects the following functions might be helpful.
+
+| function name         | Description                                       |
+|:----------------------|:--------------------------------------------------|
+| `json_obj_add`        | Adds a value by a given key to JSON object        |
+| `json_obj_rename_key` | Renames a key in an JSON object                   |
+| `json_obj_replace`    | Replaces a value by a given key                   |
+
+Whereas the behaviour for the three JSON object functions is like so:
+
+```sql
+SELECT json_obj_add(obj, 'new', 42::INT)     AS "add",
+       json_obj_rename_key(obj, 'b', 'new')  AS "rename key",
+       json_obj_replace(obj, 'a', '"Hello"') AS "replace"
+FROM   (VALUES ('{"a": true, "b": 1337}')) AS _(obj);
+```
+
+```text
++------------------------------+-----------------------+------------------------+
+|             add              |      rename key       |        replace         |
++------------------------------+-----------------------+------------------------+
+| {"a":true,"b":1337,"new":42} | {"a":true,"new":1337} | {"a":"Hello","b":1337} |
++------------------------------+-----------------------+------------------------+
+```
+
 ## JSON Aggregate Functions
 
 There are three JSON aggregate functions.
