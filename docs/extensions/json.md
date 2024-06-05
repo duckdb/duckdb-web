@@ -89,13 +89,11 @@ anatidae
 
 ## JSON Type
 
-The JSON extension makes use of the `JSON` logical type.
+The `json` extension makes use of the `JSON` logical type.
 The `JSON` logical type is interpreted as JSON, i.e., parsed, in JSON functions rather than interpreted as `VARCHAR`, i.e., a regular string (modulo the equality-comparison caveat at the bottom of this page).
 All JSON creation functions return values of this type.
 
-We also allow any of our types to be casted to JSON, and JSON to be casted back to any of our types, for example:
-
-Cast JSON to our STRUCT type:
+We also allow any of DuckDB's types to be casted to JSON, and JSON to be casted back to any of DuckDB's types, for example, to cast `JSON` to DuckDB's `STRUCT` type, run:
 
 ```sql
 SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
@@ -105,7 +103,7 @@ SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
 {'duck': 42}
 ```
 
-And back
+And back:
 
 ```sql
 SELECT {duck: 42}::JSON;
@@ -133,9 +131,9 @@ The following table functions are used to read JSON:
 
 | Function | Description |
 |:---|:---|
-| `read_json_objects(filename)`   | Read a JSON object from `filename`, where `filename` can also be a list of files or a glob pattern |
-| `read_ndjson_objects(filename)` | Alias for `read_json_objects` with parameter `format` set to `'newline_delimited'` |
-| `read_json_objects_auto(filename)` | Alias for `read_json_objects` with parameter `format` set to `'auto'` |
+| `read_json_objects(filename)`   | Read a JSON object from `filename`, where `filename` can also be a list of files or a glob pattern. |
+| `read_ndjson_objects(filename)` | Alias for `read_json_objects` with parameter `format` set to `'newline_delimited'`. |
+| `read_json_objects_auto(filename)` | Alias for `read_json_objects` with parameter `format` set to `'auto'`. |
 
 These functions have the following parameters:
 
@@ -219,10 +217,10 @@ DuckDB also supports reading JSON as a table, using the following functions:
 
 | Function | Description |
 |:----|:-------|
-| `read_json(filename)` | Read JSON from `filename`, where `filename` can also be a list of files, or a glob pattern |
-| `read_json_auto(filename)` | Alias for `read_json` with all auto-detection enabled |
-| `read_ndjson(filename)` | Alias for `read_json` with parameter `format` set to `'newline_delimited'` |
-| `read_ndjson_auto(filename)` | Alias for `read_json_auto` with parameter `format` set to `'newline_delimited'` |
+| `read_json(filename)` | Read JSON from `filename`, where `filename` can also be a list of files, or a glob pattern. |
+| `read_json_auto(filename)` | Alias for `read_json` with all auto-detection enabled. |
+| `read_ndjson(filename)` | Alias for `read_json` with parameter `format` set to `'newline_delimited'`. |
+| `read_ndjson_auto(filename)` | Alias for `read_json_auto` with parameter `format` set to `'newline_delimited'`. |
 
 Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, these functions have additional parameters:
 
@@ -347,7 +345,7 @@ For additional examples reading more complex data, please see the [Shredding Dee
 
 ## JSON Import/Export
 
-When the JSON extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy](../sql/statements/copy) and [Import/Export](../sql/statements/export).
+When the `json` extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy](../sql/statements/copy) and [Import/Export](../sql/statements/export).
 
 By default, `COPY` expects newline-delimited JSON. If you prefer copying data to/from a JSON array, you can specify `ARRAY true`, e.g.,
 
@@ -380,6 +378,235 @@ The format can be detected automatically the format like so:
 COPY test FROM 'my.json' (AUTO_DETECT true);
 ```
 
+## JSON Creation Functions
+
+The following functions are used to create JSON.
+
+<div class="narrow_table"></div>
+
+| Function | Description |
+|:--|:----|
+| `to_json(any)` | Create `JSON` from a value of `any` type. Our `LIST` is converted to a JSON array, and our `STRUCT` and `MAP` are converted to a JSON object. |
+| `json_quote(any)` | Alias for `to_json`. |
+| `array_to_json(list)` | Alias for `to_json` that only accepts `LIST`. |
+| `row_to_json(list)` | Alias for `to_json` that only accepts `STRUCT`. |
+| `json_array([any, ...])` | Create a JSON array from `any` number of values. |
+| `json_object([key, value, ...])` | Create a JSON object from any number of `key`, `value` pairs. |
+| `json_merge_patch(json, json)` | Merge two JSON documents together. |
+
+Examples:
+
+```sql
+SELECT to_json('duck');
+```
+
+```text
+"duck"
+```
+
+```sql
+SELECT to_json([1, 2, 3]);
+```
+
+```text
+[1,2,3]
+```
+
+```sql
+SELECT to_json({duck : 42});
+```
+
+```text
+{"duck":42}
+```
+
+```sql
+SELECT to_json(map(['duck'],[42]));
+```
+
+```text
+{"duck":42}
+```
+
+```sql
+SELECT json_array(42, 'duck', NULL);
+```
+
+```text
+[42,"duck",null]
+```
+
+```sql
+SELECT json_object('duck', 42);
+```
+
+```text
+{"duck":42}
+```
+
+```sql
+SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
+```
+
+```text
+{"goose":123,"duck":42}
+```
+
+
+
+## JSON Extraction Functions
+
+There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the `JSON` logical type.
+These functions supports the same two location notations as the previous functions.
+
+| Function | Alias | Operator | Description |
+|:---|:---|:-|
+| `json_extract(json, path)` | `json_extract_path` | `->` | Extract `JSON` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `JSON` |
+| `json_extract_string(json, path)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `VARCHAR` |
+
+Note that the equality comparison operator (`=`) has a higher precedence than the `->` JSON extract operator. Therefore, surround the uses of the `->` operator with parentheses when making equality comparisons. For example:
+
+```sql
+SELECT ((JSON '{"field": 42}')->'field') = 42;
+```
+
+> Warning DuckDB's JSON data type uses [0-based indexing](#indexing).
+
+Examples:
+
+```sql
+CREATE TABLE example (j JSON);
+INSERT INTO example VALUES
+    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
+```
+
+```sql
+SELECT json_extract(j, '$.family') FROM example;
+```
+
+```text
+"anatidae"
+```
+
+```sql
+SELECT j->'$.family' FROM example;
+```
+
+```text
+"anatidae"
+```
+
+```sql
+SELECT j->'$.species[0]' FROM example;
+```
+
+```text
+"duck"
+```
+
+```sql
+SELECT j->'$.species[*]' FROM example;
+```
+
+```text
+["duck", "goose", "swan", null]
+```
+
+```sql
+SELECT j->>'$.species[*]' FROM example;
+```
+
+```text
+[duck, goose, swan, null]
+```
+
+```sql
+SELECT j->'$.species'->0 FROM example;
+```
+
+```text
+"duck"
+```
+
+```sql
+SELECT j->'species'->['0','1'] FROM example;
+```
+
+```text
+["duck", "goose"]
+```
+
+```sql
+SELECT json_extract_string(j, '$.family') FROM example;
+```
+
+```text
+anatidae
+```
+
+```sql
+SELECT j->>'$.family' FROM example;
+```
+
+```text
+anatidae
+```
+
+```sql
+SELECT j->>'$.species[0]' FROM example;
+```
+
+```text
+duck
+```
+
+```sql
+SELECT j->'species'->>0 FROM example;
+```
+
+```text
+duck
+```
+
+```sql
+SELECT j->'species'->>['0','1'] FROM example;
+```
+
+```text
+[duck, goose]
+```
+
+Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
+
+If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
+
+The following will cause the JSON to be parsed twice,:
+
+Resulting in a slower query that uses more memory:
+
+```sql
+SELECT
+    json_extract(j, 'family') AS family,
+    json_extract(j, 'species') AS species
+FROM example;
+```
+
+|   family   |           species            |
+|------------|------------------------------|
+| "anatidae" | ["duck","goose","swan",null] |
+
+The following produces the same result but is faster and more memory-efficient:
+
+```sql
+WITH extracted AS (
+    SELECT json_extract(j, ['family', 'species']) AS extracted_list
+    FROM example
+)
+SELECT extracted_list[1] AS family,
+       extracted_list[2] AS species
+FROM extracted;
+```
+
 ## JSON Scalar Functions
 
 The following scalar JSON functions can be used to gain information about the stored JSON values.
@@ -389,13 +616,13 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 
 | Function | Description |
 |:---|:----|
-| `json_array_length(json[, path])` | Return the number of elements in the JSON array `json`, or `0` if it is not a JSON array. If `path` is specified, return the number of elements in the JSON array at the given `path`. If `path` is a `LIST`, the result will be `LIST` of array lengths |
-| `json_contains(json_haystack, json_needle)` | Returns `true` if `json_needle` is contained in `json_haystack`. Both parameters are of JSON type, but `json_needle` can also be a numeric value or a string, however the string must be wrapped in double quotes |
-| `json_keys(json[, path])` | Returns the keys of `json` as a `LIST` of `VARCHAR`, if `json` is a JSON object. If `path` is specified, return the keys of the JSON object at the given `path`. If `path` is a `LIST`, the result will be `LIST` of `LIST` of `VARCHAR` |
-| `json_structure(json)` | Return the structure of `json`. Defaults to `JSON` the structure is inconsistent (e.g., incompatible types in an array) |
-| `json_type(json[, path])` | Return the type of the supplied `json`, which is one of `ARRAY`, `BIGINT`, `BOOLEAN`, `DOUBLE`, `OBJECT`, `UBIGINT`, `VARCHAR`, and `NULL`. If `path` is specified, return the type of the element at the given `path`. If `path` is a `LIST`, the result will be `LIST` of types |
-| `json_valid(json)` | Return whether `json` is valid JSON |
-| `json(json)` | Parse and minify `json` |
+| `json_array_length(json[, path])` | Return the number of elements in the JSON array `json`, or `0` if it is not a JSON array. If `path` is specified, return the number of elements in the JSON array at the given `path`. If `path` is a `LIST`, the result will be `LIST` of array lengths. |
+| `json_contains(json_haystack, json_needle)` | Returns `true` if `json_needle` is contained in `json_haystack`. Both parameters are of JSON type, but `json_needle` can also be a numeric value or a string, however the string must be wrapped in double quotes. |
+| `json_keys(json[, path])` | Returns the keys of `json` as a `LIST` of `VARCHAR`, if `json` is a JSON object. If `path` is specified, return the keys of the JSON object at the given `path`. If `path` is a `LIST`, the result will be `LIST` of `LIST` of `VARCHAR`. |
+| `json_structure(json)` | Return the structure of `json`. Defaults to `JSON` the structure is inconsistent (e.g., incompatible types in an array). |
+| `json_type(json[, path])` | Return the type of the supplied `json`, which is one of `ARRAY`, `BIGINT`, `BOOLEAN`, `DOUBLE`, `OBJECT`, `UBIGINT`, `VARCHAR`, and `NULL`. If `path` is specified, return the type of the element at the given `path`. If `path` is a `LIST`, the result will be `LIST` of types. |
+| `json_valid(json)` | Return whether `json` is valid JSON. |
+| `json(json)` | Parse and minify `json`. |
 
 The JSONPointer syntax separates each field with a `/`.
 For example, to extract the first element of the array with key `"duck"`, you can do:
@@ -445,7 +672,7 @@ Examples using the [anatidae biological family](https://en.wikipedia.org/wiki/An
 ```sql
 CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
-  ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
+    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
 ```
 
 ```sql
@@ -584,228 +811,6 @@ SELECT json_contains('{"top_key": {"key": "value"}}', '{"key": "value"}');
 true
 ```
 
-## JSON Extraction Functions
-
-There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the `JSON` logical type.
-These functions supports the same two location notations as the previous functions.
-
-| Function | Alias | Operator | Description |
-|:---|:---|:-|
-| `json_extract(json, path)` | `json_extract_path` | `->` | Extract `JSON` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `JSON` |
-| `json_extract_string(json, path)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `VARCHAR` |
-
-Note that the equality comparison operator (`=`) has a higher precedence than the `->` JSON extract operator. Therefore, surround the uses of the `->` operator with parentheses when making equality comparisons. For example:
-
-```sql
-SELECT ((JSON '{"field": 42}')->'field') = 42;
-```
-
-> Warning DuckDB's JSON data type uses [0-based indexing](#indexing).
-
-Examples:
-
-```sql
-CREATE TABLE example (j JSON);
-INSERT INTO example VALUES
-    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
-```
-
-```sql
-SELECT json_extract(j, '$.family') FROM example;
-```
-
-```text
-"anatidae"
-```
-
-```sql
-SELECT j->'$.family' FROM example;
-```
-
-```text
-"anatidae"
-```
-
-```sql
-SELECT j->'$.species[0]' FROM example;
-```
-
-```text
-"duck"
-```
-
-```sql
-SELECT j->'$.species[*]' FROM example;
-```
-
-```text
-["duck", "goose", "swan", null]
-```
-
-```sql
-SELECT j->>'$.species[*]' FROM example;
-```
-
-```text
-[duck, goose, swan, null]
-```
-
-```sql
-SELECT j->'$.species'->0 FROM example;
-```
-
-```text
-"duck"
-```
-
-```sql
-SELECT j->'species'->['0','1'] FROM example;
-```
-
-```text
-["duck", "goose"]
-```
-
-```sql
-SELECT json_extract_string(j, '$.family') FROM example;
-```
-
-```text
-anatidae
-```
-
-```sql
-SELECT j->>'$.family' FROM example;
-```
-
-```text
-anatidae
-```
-
-```sql
-SELECT j->>'$.species[0]' FROM example;
-```
-
-```text
-duck
-```
-
-```sql
-SELECT j->'species'->>0 FROM example;
-```
-
-```text
-duck
-```
-
-```sql
-SELECT j->'species'->>['0','1'] FROM example;
-```
-
-```text
-[duck, goose]
-```
-
-Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
-
-If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
-
-The following will cause the JSON to be parsed twice,:
-
-Resulting in a slower query that uses more memory:
-
-```sql
-SELECT json_extract(j, 'family') AS family,
-       json_extract(j, 'species') AS species
-FROM example;
-```
-
-The following is faster and more memory efficient:
-
-```sql
-WITH extracted AS (
-    SELECT json_extract(j, ['family', 'species']) extracted_list
-    FROM example
-)
-SELECT extracted_list[1] AS family,
-       extracted_list[2] AS species
-FROM extracted;
-```
-
-## JSON Creation Functions
-
-The following functions are used to create JSON.
-
-<div class="narrow_table"></div>
-
-| Function | Description |
-|:--|:----|
-| `to_json(any)` | Create `JSON` from a value of `any` type. Our `LIST` is converted to a JSON array, and our `STRUCT` and `MAP` are converted to a JSON object |
-| `json_quote(any)` | Alias for `to_json` |
-| `array_to_json(list)` | Alias for `to_json` that only accepts `LIST` |
-| `row_to_json(list)` | Alias for `to_json` that only accepts `STRUCT` |
-| `json_array([any, ...])` | Create a JSON array from `any` number of values |
-| `json_object([key, value, ...])` | Create a JSON object from any number of `key`, `value` pairs |
-| `json_merge_patch(json, json)` | Merge two JSON documents together |
-
-Examples:
-
-```sql
-SELECT to_json('duck');
-```
-
-```text
-"duck"
-```
-
-```sql
-SELECT to_json([1, 2, 3]);
-```
-
-```text
-[1,2,3]
-```
-
-```sql
-SELECT to_json({duck : 42});
-```
-
-```text
-{"duck":42}
-```
-
-```sql
-SELECT to_json(map(['duck'],[42]));
-```
-
-```text
-{"duck":42}
-```
-
-```sql
-SELECT json_array(42, 'duck', NULL);
-```
-
-```text
-[42,"duck",null]
-```
-
-```sql
-SELECT json_object('duck', 42);
-```
-
-```text
-{"duck":42}
-```
-
-```sql
-SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
-```
-
-```text
-{"goose":123,"duck":42}
-```
-
 ## JSON Aggregate Functions
 
 There are three JSON aggregate functions.
@@ -814,9 +819,9 @@ There are three JSON aggregate functions.
 
 | Function | Description |
 |:---|:----|
-| `json_group_array(any)` | Return a JSON array with all values of `any` in the aggregation |
-| `json_group_object(key, value)` | Return a JSON object with all `key`, `value` pairs in the aggregation |
-| `json_group_structure(json)` | Return the combined `json_structure` of all `json` in the aggregation |
+| `json_group_array(any)` | Return a JSON array with all values of `any` in the aggregation. |
+| `json_group_object(key, value)` | Return a JSON object with all `key`, `value` pairs in the aggregation. |
+| `json_group_structure(json)` | Return the combined `json_structure` of all `json` in the aggregation. |
 
 Examples:
 
@@ -865,10 +870,10 @@ Instead, we can "extract" all values at once, transforming JSON to the nested ty
 
 | Function | Description |
 |:---|:---|
-| `json_transform(json, structure)` | Transform `json` according to the specified `structure` |
-| `from_json(json, structure)` | Alias for `json_transform` |
-| `json_transform_strict(json, structure)` | Same as `json_transform`, but throws an error when type casting fails |
-| `from_json_strict(json, structure)` | Alias for `json_transform_strict` |
+| `json_transform(json, structure)` | Transform `json` according to the specified `structure`. |
+| `from_json(json, structure)` | Alias for `json_transform`. |
+| `json_transform_strict(json, structure)` | Same as `json_transform`, but throws an error when type casting fails. |
+| `from_json_strict(json, structure)` | Alias for `json_transform_strict`. |
 
 The `structure` argument is JSON of the same form as returned by `json_structure`.
 The `structure` argument can be modified to transform the JSON into the desired structure and types.
@@ -911,13 +916,13 @@ Invalid Input Error: Failed to cast value: "anatidae"
 
 ## Serializing and Deserializing SQL to JSON and Vice Versa
 
-The JSON extension also provides functions to serialize and deserialize `SELECT` statements between SQL and JSON, as well as executing JSON serialized statements.
+The `json` extension also provides functions to serialize and deserialize `SELECT` statements between SQL and JSON, as well as executing JSON serialized statements.
 
 | Function | Type | Description |
 |:------|:-|:---------|
-| `json_deserialize_sql(json)` | Scalar  | Deserialize one or many `json` serialized statements back to an equivalent sql string |
+| `json_deserialize_sql(json)` | Scalar  | Deserialize one or many `json` serialized statements back to an equivalent SQL string. |
 | `json_execute_serialized_sql(varchar)` | Table | Execute `json` serialized statements and return the resulting rows. Only one statement at a time is supported for now. |
-| `json_serialize_sql(varchar, skip_empty := boolean, skip_null := boolean, format := boolean)` | Scalar | Serialize a set of semicolon-separated (`;`) select statements to an equivalent list of `json` serialized statements |
+| `json_serialize_sql(varchar, skip_empty := boolean, skip_null := boolean, format := boolean)` | Scalar | Serialize a set of semicolon-separated (`;`) select statements to an equivalent list of `json` serialized statements. |
 | `PRAGMA json_execute_serialized_sql(varchar)` | Pragma | Pragma version of the `json_execute_serialized_sql` function. |
 
 The `json_serialize_sql(varchar)` function takes three optional parameters, `skip_empty`, `skip_null`, and `format` that can be used to control the output of the serialized statements.
@@ -1021,7 +1026,7 @@ FROM (
         '[ ]'::JSON AS b,
         '[[]]'::JSON AS c,
         '[[ ]]'::JSON AS d
-  );
+    );
 ```
 
 | (a != b) | (c != d) | (c[0] = d[0]) | (a = c[0]) | (b != c[0]) |
