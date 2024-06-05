@@ -63,13 +63,17 @@ To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://
 
 You can download the DuckDB Logo here: <br/>
 
-- Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked.png) <br/>
-- Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal.png) <br/>
+- Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked.png) / [pdf](/images/logo-dl/DuckDB_Logo-stacked.pdf)
+<br/>
+- Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal.png) / [pdf](/images/logo-dl/DuckDB_Logo-horizontal.pdf)
+<br/>
 
 Inverted variants for dark backgrounds:
 
-- Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.png) <br/>
-- Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.png) <br/>
+- Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.png) / [pdf](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.pdf)
+<br/>
+- Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.png) / [pdf](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.pdf)
+<br/>
 
 The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
 
