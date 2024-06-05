@@ -248,7 +248,7 @@ This section describes functions and operators for examining and manipulating ne
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the index of the element if the list contains the element. |
-| **Example** | `list_contains([1, 2, NULL], 2)` |
+| **Example** | `list_position([1, 2, NULL], 2)` |
 | **Result** | `2` |
 | **Aliases** | `list_indexof`, `array_position`, `array_indexof` |
 
