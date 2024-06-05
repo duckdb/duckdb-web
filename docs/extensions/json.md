@@ -251,8 +251,10 @@ DuckDB can convert JSON arrays directly to its internal `LIST` type, and missing
 
 ```sql
 SELECT *
-FROM read_json(['my_file1.json', 'my_file2.json'],
-               columns = {duck: 'INTEGER', goose: 'INTEGER[]', swan: 'DOUBLE'});
+FROM read_json(
+        ['my_file1.json', 'my_file2.json'],
+        columns = {duck: 'INTEGER', goose: 'INTEGER[]', swan: 'DOUBLE'}
+    );
 ```
 
 <div class="narrow_table"></div>
