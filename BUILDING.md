@@ -163,8 +163,9 @@ After upgrading Ruby, Jekyll fails with the following error message:
 	from /opt/homebrew/opt/ruby/bin/bundler:25:in `<main>'
 ```
 
-The solution is to run the following command:
+The solution is to run the following commands in the repository:
 
 ```bash
 gem install bundler
+bundle install
 ```
