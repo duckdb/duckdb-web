@@ -281,7 +281,7 @@ To make the `NULL` values visible in the command line output, we set the [`.null
 .nullvalue NULL
 ```
 
-Then, using the [`DESCRIBE` statement](/docs/guides/meta/describe), we can confirm that DuckDB has inferred the column x correctly as `BIGINT`:
+Then, using the [`DESCRIBE` statement](/docs/guides/meta/describe), we can confirm that DuckDB has inferred the column correctly as `BIGINT`:
 
 ```sql
 FROM (DESCRIBE distances)
