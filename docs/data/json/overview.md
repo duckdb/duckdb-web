@@ -7,13 +7,13 @@ redirect_from:
 
 ## Examples
 
-Read a JSON file from disk, auto-infer options.
+Read a JSON file from disk, auto-infer options:
 
 ```sql
 SELECT * FROM 'todos.json';
 ```
 
-Use the `read_json` function with custom options.
+Use the `read_json` function with custom options:
 
 ```sql
 SELECT *
@@ -31,20 +31,20 @@ Read a JSON file from stdin, auto-infer options:
 cat data/json/todos.json | duckdb -c "SELECT * FROM read_json_auto('/dev/stdin')"
 ```
 
-Read a JSON file into a table.
+Read a JSON file into a table:
 
 ```sql
 CREATE TABLE todos (userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN);
 COPY todos FROM 'todos.json';
 ```
 
-Alternatively, create a table without specifying the schema manually.
+Alternatively, create a table without specifying the schema manually:
 
 ```sql
 CREATE TABLE todos AS SELECT * FROM 'todos.json';
 ```
 
-Write the result of a query to a JSON file.
+Write the result of a query to a JSON file:
 
 ```sql
 COPY (SELECT * FROM todos) TO 'todos.json';
