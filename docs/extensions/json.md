@@ -378,6 +378,230 @@ The format can be detected automatically the format like so:
 COPY test FROM 'my.json' (AUTO_DETECT true);
 ```
 
+## JSON Creation Functions
+
+The following functions are used to create JSON.
+
+<div class="narrow_table"></div>
+
+| Function | Description |
+|:--|:----|
+| `to_json(any)` | Create `JSON` from a value of `any` type. Our `LIST` is converted to a JSON array, and our `STRUCT` and `MAP` are converted to a JSON object |
+| `json_quote(any)` | Alias for `to_json` |
+| `array_to_json(list)` | Alias for `to_json` that only accepts `LIST` |
+| `row_to_json(list)` | Alias for `to_json` that only accepts `STRUCT` |
+| `json_array([any, ...])` | Create a JSON array from `any` number of values |
+| `json_object([key, value, ...])` | Create a JSON object from any number of `key`, `value` pairs |
+| `json_merge_patch(json, json)` | Merge two JSON documents together |
+
+Examples:
+
+```sql
+SELECT to_json('duck');
+```
+
+```text
+"duck"
+```
+
+```sql
+SELECT to_json([1, 2, 3]);
+```
+
+```text
+[1,2,3]
+```
+
+```sql
+SELECT to_json({duck : 42});
+```
+
+```text
+{"duck":42}
+```
+
+```sql
+SELECT to_json(map(['duck'],[42]));
+```
+
+```text
+{"duck":42}
+```
+
+```sql
+SELECT json_array(42, 'duck', NULL);
+```
+
+```text
+[42,"duck",null]
+```
+
+```sql
+SELECT json_object('duck', 42);
+```
+
+```text
+{"duck":42}
+```
+
+```sql
+SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
+```
+
+```text
+{"goose":123,"duck":42}
+```
+
+
+
+## JSON Extraction Functions
+
+There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the `JSON` logical type.
+These functions supports the same two location notations as the previous functions.
+
+| Function | Alias | Operator | Description |
+|:---|:---|:-|
+| `json_extract(json, path)` | `json_extract_path` | `->` | Extract `JSON` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `JSON` |
+| `json_extract_string(json, path)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `VARCHAR` |
+
+Note that the equality comparison operator (`=`) has a higher precedence than the `->` JSON extract operator. Therefore, surround the uses of the `->` operator with parentheses when making equality comparisons. For example:
+
+```sql
+SELECT ((JSON '{"field": 42}')->'field') = 42;
+```
+
+> Warning DuckDB's JSON data type uses [0-based indexing](#indexing).
+
+Examples:
+
+```sql
+CREATE TABLE example (j JSON);
+INSERT INTO example VALUES
+    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
+```
+
+```sql
+SELECT json_extract(j, '$.family') FROM example;
+```
+
+```text
+"anatidae"
+```
+
+```sql
+SELECT j->'$.family' FROM example;
+```
+
+```text
+"anatidae"
+```
+
+```sql
+SELECT j->'$.species[0]' FROM example;
+```
+
+```text
+"duck"
+```
+
+```sql
+SELECT j->'$.species[*]' FROM example;
+```
+
+```text
+["duck", "goose", "swan", null]
+```
+
+```sql
+SELECT j->>'$.species[*]' FROM example;
+```
+
+```text
+[duck, goose, swan, null]
+```
+
+```sql
+SELECT j->'$.species'->0 FROM example;
+```
+
+```text
+"duck"
+```
+
+```sql
+SELECT j->'species'->['0','1'] FROM example;
+```
+
+```text
+["duck", "goose"]
+```
+
+```sql
+SELECT json_extract_string(j, '$.family') FROM example;
+```
+
+```text
+anatidae
+```
+
+```sql
+SELECT j->>'$.family' FROM example;
+```
+
+```text
+anatidae
+```
+
+```sql
+SELECT j->>'$.species[0]' FROM example;
+```
+
+```text
+duck
+```
+
+```sql
+SELECT j->'species'->>0 FROM example;
+```
+
+```text
+duck
+```
+
+```sql
+SELECT j->'species'->>['0','1'] FROM example;
+```
+
+```text
+[duck, goose]
+```
+
+Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
+
+If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
+
+The following will cause the JSON to be parsed twice,:
+
+Resulting in a slower query that uses more memory:
+
+```sql
+SELECT json_extract(j, 'family') AS family,
+       json_extract(j, 'species') AS species
+FROM example;
+```
+
+The following is faster and more memory efficient:
+
+```sql
+WITH extracted AS (
+    SELECT json_extract(j, ['family', 'species']) extracted_list
+    FROM example
+)
+SELECT extracted_list[1] AS family,
+       extracted_list[2] AS species
+FROM extracted;
+```
+
 ## JSON Scalar Functions
 
 The following scalar JSON functions can be used to gain information about the stored JSON values.
@@ -580,228 +804,6 @@ SELECT json_contains('{"top_key": {"key": "value"}}', '{"key": "value"}');
 
 ```text
 true
-```
-
-## JSON Extraction Functions
-
-There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the `JSON` logical type.
-These functions supports the same two location notations as the previous functions.
-
-| Function | Alias | Operator | Description |
-|:---|:---|:-|
-| `json_extract(json, path)` | `json_extract_path` | `->` | Extract `JSON` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `JSON` |
-| `json_extract_string(json, path)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `VARCHAR` |
-
-Note that the equality comparison operator (`=`) has a higher precedence than the `->` JSON extract operator. Therefore, surround the uses of the `->` operator with parentheses when making equality comparisons. For example:
-
-```sql
-SELECT ((JSON '{"field": 42}')->'field') = 42;
-```
-
-> Warning DuckDB's JSON data type uses [0-based indexing](#indexing).
-
-Examples:
-
-```sql
-CREATE TABLE example (j JSON);
-INSERT INTO example VALUES
-    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
-```
-
-```sql
-SELECT json_extract(j, '$.family') FROM example;
-```
-
-```text
-"anatidae"
-```
-
-```sql
-SELECT j->'$.family' FROM example;
-```
-
-```text
-"anatidae"
-```
-
-```sql
-SELECT j->'$.species[0]' FROM example;
-```
-
-```text
-"duck"
-```
-
-```sql
-SELECT j->'$.species[*]' FROM example;
-```
-
-```text
-["duck", "goose", "swan", null]
-```
-
-```sql
-SELECT j->>'$.species[*]' FROM example;
-```
-
-```text
-[duck, goose, swan, null]
-```
-
-```sql
-SELECT j->'$.species'->0 FROM example;
-```
-
-```text
-"duck"
-```
-
-```sql
-SELECT j->'species'->['0','1'] FROM example;
-```
-
-```text
-["duck", "goose"]
-```
-
-```sql
-SELECT json_extract_string(j, '$.family') FROM example;
-```
-
-```text
-anatidae
-```
-
-```sql
-SELECT j->>'$.family' FROM example;
-```
-
-```text
-anatidae
-```
-
-```sql
-SELECT j->>'$.species[0]' FROM example;
-```
-
-```text
-duck
-```
-
-```sql
-SELECT j->'species'->>0 FROM example;
-```
-
-```text
-duck
-```
-
-```sql
-SELECT j->'species'->>['0','1'] FROM example;
-```
-
-```text
-[duck, goose]
-```
-
-Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
-
-If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
-
-The following will cause the JSON to be parsed twice,:
-
-Resulting in a slower query that uses more memory:
-
-```sql
-SELECT json_extract(j, 'family') AS family,
-       json_extract(j, 'species') AS species
-FROM example;
-```
-
-The following is faster and more memory efficient:
-
-```sql
-WITH extracted AS (
-    SELECT json_extract(j, ['family', 'species']) extracted_list
-    FROM example
-)
-SELECT extracted_list[1] AS family,
-       extracted_list[2] AS species
-FROM extracted;
-```
-
-## JSON Creation Functions
-
-The following functions are used to create JSON.
-
-<div class="narrow_table"></div>
-
-| Function | Description |
-|:--|:----|
-| `to_json(any)` | Create `JSON` from a value of `any` type. Our `LIST` is converted to a JSON array, and our `STRUCT` and `MAP` are converted to a JSON object |
-| `json_quote(any)` | Alias for `to_json` |
-| `array_to_json(list)` | Alias for `to_json` that only accepts `LIST` |
-| `row_to_json(list)` | Alias for `to_json` that only accepts `STRUCT` |
-| `json_array([any, ...])` | Create a JSON array from `any` number of values |
-| `json_object([key, value, ...])` | Create a JSON object from any number of `key`, `value` pairs |
-| `json_merge_patch(json, json)` | Merge two JSON documents together |
-
-Examples:
-
-```sql
-SELECT to_json('duck');
-```
-
-```text
-"duck"
-```
-
-```sql
-SELECT to_json([1, 2, 3]);
-```
-
-```text
-[1,2,3]
-```
-
-```sql
-SELECT to_json({duck : 42});
-```
-
-```text
-{"duck":42}
-```
-
-```sql
-SELECT to_json(map(['duck'],[42]));
-```
-
-```text
-{"duck":42}
-```
-
-```sql
-SELECT json_array(42, 'duck', NULL);
-```
-
-```text
-[42,"duck",null]
-```
-
-```sql
-SELECT json_object('duck', 42);
-```
-
-```text
-{"duck":42}
-```
-
-```sql
-SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
-```
-
-```text
-{"goose":123,"duck":42}
 ```
 
 ## JSON Aggregate Functions
