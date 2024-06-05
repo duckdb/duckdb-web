@@ -810,7 +810,7 @@ true
 
 > Warning DuckDB's JSON data type uses [0-based indexing](#indexing).
 
-To modify an existing JSON array there are the following functions.
+The table below shows the available functions to modify an exising JSON array.
 
 | function name         | Description                                       |
 |:----------------------|:--------------------------------------------------|
@@ -842,7 +842,7 @@ FROM   (VALUES ('[54,64,10]'::JSON)) AS _(arr);
 +----------------+----------------+----------------+---------+------------+------+---------+
 ```
 
-It should be noted that negative indeces index from the back or switch the rotation direction.
+It should be noted that negative indices index from the back or switch the rotation direction.
 
 ```sql
 SELECT json_array_insert(arr, '"a"', -2) AS "insert",
@@ -860,7 +860,7 @@ FROM   (VALUES ('[54,64,10]'::JSON)) AS _(arr);
 ```
 
 `json_array_remove` also takes a positive start and end index to delete a whole range of
-values from an JSON array:
+values from a JSON array:
 
 ```sql
 SELECT json_array_remove(arr, 2) AS "remove single element",
@@ -876,7 +876,7 @@ FROM   (VALUES ('[54,64,10]'::JSON)) AS _(arr);
 +-----------------------+--------------------------+
 ```
 
-To manipulate the JSON objects the following functions might be helpful.
+To manipulate JSON objects, the following functions are available.
 
 | function name         | Description                                       |
 |:----------------------|:--------------------------------------------------|
@@ -884,7 +884,7 @@ To manipulate the JSON objects the following functions might be helpful.
 | `json_obj_rename_key` | Renames a key in an JSON object                   |
 | `json_obj_replace`    | Replaces a value by a given key                   |
 
-Whereas the behaviour for the three JSON object functions is like so:
+The three JSON object manipulation functions behave as such:
 
 ```sql
 SELECT json_obj_add(obj, 'new', 42::INT)     AS "add",
