@@ -16,16 +16,12 @@ This example workflow is also available as a [Google Colab notebook](https://col
 
 Four additional libraries improve the DuckDB experience in Jupyter notebooks.
 
-1. [jupysql](https://github.com/ploomber/jupysql)
-    * Convert a Jupyter code cell into a SQL cell
-2. [Pandas](https://github.com/pandas-dev/pandas)
-    * Clean table visualizations and compatibility with other analysis
-3. [matplotlib](https://github.com/matplotlib/matplotlib)
-    * Plotting with Python
-4. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
-    * Used by SQLAlchemy to connect to DuckDB (optional)
+1. [jupysql](https://github.com/ploomber/jupysql): Convert a Jupyter code cell into a SQL cell
+2. [Pandas](https://github.com/pandas-dev/pandas): Clean table visualizations and compatibility with other analysis
+3. [matplotlib](https://github.com/matplotlib/matplotlib): Plotting with Python
+4. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine): Used by SQLAlchemy to connect to DuckDB (optional)
 
-Run these pip install commands from the command line if Jupyter Notebook is not yet installed. Otherwise, see Google Colab link above for an in-notebook example:
+Run these `pip install` commands from the command line if Jupyter Notebook is not yet installed. Otherwise, see Google Colab link above for an in-notebook example:
 
 ```bash
 pip install duckdb
@@ -91,15 +87,15 @@ Set configurations on jupysql to directly output data to Pandas and to simplify 
 Connect jupysql to DuckDB using a SQLAlchemy-style connection string.
 Either connect to a new [in-memory DuckDB](../../api/python/dbapi#in-memory-connection), the [default connection](../../api/python/dbapi#default-connection) or a file backed database:
 
-```python
+```sql
 %sql duckdb:///:memory:
 ```
 
-```python
+```sql
 %sql duckdb:///:default:
 ```
 
-```python
+```sql
 %sql duckdb:///path/to/file.db
 ```
 
@@ -184,7 +180,7 @@ Now, create a query that filters by the 90th percentile.
 Note the use of the `--save`, and `--no-execute` functions.
 This tells JupySQL to store the query, but skips execution. It will be referenced in the next plotting call.
 
-```python
+```sql
 %%sql --save short_trips --no-execute
 SELECT *
 FROM 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet'
@@ -198,9 +194,7 @@ This uses `--with short-trips` so JupySQL uses the query defined previously and 
 %sqlplot histogram --table short_trips --column trip_distance --bins 10 --with short_trips
 ```
 
-
 ![Histogram of the trip_distance column](/images/trip-distance-histogram.png)
-
 
 ## Summary
 
