@@ -33,16 +33,29 @@ CREATE SECRET (
 
 ## Instance Location
 
-For best performance, make sure that the EC2 instance is in the same availability zone as the S3 Express One bucket you are querying. To determine the mapping between zone names and zone IDs, use the `aws ec2 describe-availability-zones` command:
+For best performance, make sure that the EC2 instance is in the same availability zone as the S3 Express One bucket you are querying. To determine the mapping between zone names and zone IDs, use the `aws ec2 describe-availability-zones` command.
 
-```bash
-aws ec2 describe-availability-zones --output json | \
-    jq -r  '.AvailabilityZones[] | select(.ZoneName == "us-east-1f") | .ZoneId'
-# use1-az5
-aws ec2 describe-availability-zones --output json | \
-    jq -r  '.AvailabilityZones[] | select(.ZoneId == "use1-az5") | .ZoneName'
-# us-east-1f
-```
+* Zone name to zone ID mapping:
+
+  ```bash
+  aws ec2 describe-availability-zones --output json | \
+      jq -r '.AvailabilityZones[] | select(.ZoneName == "us-east-1f") | .ZoneId'
+  ```
+
+  ```text
+  use1-az5
+  ```
+
+* Zone ID to zone name mapping:
+
+  ```bash
+  aws ec2 describe-availability-zones --output json | \
+      jq -r '.AvailabilityZones[] | select(.ZoneId == "use1-az5") | .ZoneName'
+  ```
+
+  ```text
+  us-east-1f
+  ```
 
 ## Querying
 
@@ -64,4 +77,4 @@ We ran two experiments on a `c7gd.12xlarge` instance using the [LDBC SF300 Comme
 | Loading only from Parquet | 4.1 GB | 3.5s |
 | Creating local table from Parquet | 4.1 GB | 5.1s |
 
-The "loading only" variant is running the load as part of an [`EXPLAIN ANALYZE`](../meta/explain_analyze) statement to measure the runtime without account creating a local table, while the "creating local table" variant uses [`CREATE TABLE ... AS`](../../sql/statements/create_table) to create a persistent table on the local disk.
+The "loading only" variant is running the load as part of an [`EXPLAIN ANALYZE`](../meta/explain_analyze) statement to measure the runtime without account creating a local table, while the "creating local table" variant uses [`CREATE TABLE ... AS SELECT`](../../sql/statements/create_table#create-table--as-select-ctas) to create a persistent table on the local disk.
