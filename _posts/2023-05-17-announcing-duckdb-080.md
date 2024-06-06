@@ -155,7 +155,7 @@ FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 
 [**User-Defined Scalar Functions for Python**](https://github.com/duckdb/duckdb/pull/7171). Arbitrary Python functions can now be registered as scalar functions within SQL queries. This will only work when using DuckDB from Python, because it uses the actual Python runtime that DuckDB is running within. While plain Python values can be passed to the function, there is also a vectorized variant that uses PyArrow under the hood for higher efficiency and better parallelism.
 
-```py
+```python
 import duckdb
 
 from duckdb.typing import *

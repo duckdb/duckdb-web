@@ -17,13 +17,13 @@ LOAD spatial;
 
 ## Exporting Excel Sheets
 
-Then use the `COPY` statement. The file will contain one worksheet with the same name as the file, but without the `.xlsx` extension.
+Then use the `COPY` statement. The file will contain one worksheet with the same name as the file, but without the `.xlsx` extension:
 
 ```sql
 COPY tbl TO 'output.xlsx' WITH (FORMAT GDAL, DRIVER 'xlsx');
 ```
 
-The result of a query can also be directly exported to an Excel file.
+The result of a query can also be directly exported to an Excel file:
 
 ```sql
 COPY (SELECT * FROM tbl) TO 'output.xlsx' WITH (FORMAT GDAL, DRIVER 'xlsx');

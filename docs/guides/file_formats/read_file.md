@@ -27,7 +27,7 @@ The file content is first validated to be valid UTF-8. If `read_text` attempts t
 
 ## `read_blob`
 
-The `read_blob` table function reads from the selected source(s) to a `BLOB`.
+The `read_blob` table function reads from the selected source(s) to a `BLOB`:
 
 ```sql
 SELECT size, content, filename

@@ -105,7 +105,7 @@ There are two ways in Python of querying data from Arrow:
 
 1. Through the Relational API
 
-```py
+```python
 # Reads Parquet File to an Arrow Table
 arrow_table = pq.read_table('integers.parquet')
 
@@ -121,7 +121,7 @@ arrow_table_from_duckdb = rel_from_arrow.arrow()
 
 2. By using replacement scans and querying the object directly with SQL:
 
-```py
+```python
 # Reads Parquet File to an Arrow Table
 arrow_table = pq.read_table('integers.parquet')
 
@@ -172,7 +172,7 @@ arrow::copy_files("s3://ursa-labs-taxi-data", "nyc-taxi")
 
 #### Python
 
-```py
+```python
 # Reads dataset partitioning it in year/month folder
 nyc_dataset = ds.dataset('nyc-taxi/', partitioning=["year", "month"])
 
