@@ -30,17 +30,28 @@ And as an added bonus, DuckDB is able to do all of this using parallel processin
 
 As a short teaser, here is a code snippet that allows you to directly run a SQL query on top of a Parquet file.
 
-```py
-# to install: pip install duckdb
-# to download the parquet file:
-# wget https://github.com/cwida/duckdb-data/releases/download/v1.0/taxi_2019_04.parquet
+To install the DuckDB package:
+
+```bash
+pip install duckdb
+```
+
+To download the Parquet file:
+
+```bash
+wget https://blobs.duckdb.org/data/taxi_2019_04.parquet
+```
+
+Then, run the following Python script:
+
+```python
 import duckdb
 
 print(duckdb.query('''
-SELECT COUNT(*)
-FROM 'taxi_2019_04.parquet'
-WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20'
-''').fetchall())
+   SELECT count(*)
+   FROM 'taxi_2019_04.parquet'
+   WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20'
+   ''').fetchall())
 ```
 
 #### Automatic Filter & Projection Pushdown
@@ -48,7 +59,7 @@ WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20'
 Let us dive into the previous query to better understand the power of the Parquet format when combined with DuckDB's query optimizer.
 
 ```sql
-SELECT COUNT(*)
+SELECT count(*)
 FROM 'taxi_2019_04.parquet'
 WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20';
 ```
@@ -157,7 +168,7 @@ Now suppose we want to figure out how many rows are in our data set. We can do t
 ```py
 # DuckDB
 con.execute("""
-   SELECT COUNT(*)
+   SELECT count(*)
    FROM 'alltaxi.parquet'
 """).df()
 
@@ -192,7 +203,7 @@ It is common to use some sort of filtering predicate to only look at the interes
 
 ```py
 con.execute("""
-   SELECT COUNT(*)
+   SELECT count(*)
    FROM 'alltaxi.parquet'
    WHERE pickup_at > '2019-06-30'
 """).df()
@@ -259,7 +270,7 @@ Finally lets look at a more complex aggregation. Say we want to compute the numb
 
 ```py
 con.execute("""
-    SELECT passenger_count, COUNT(*)
+    SELECT passenger_count, count(*)
     FROM 'alltaxi.parquet'
     GROUP BY passenger_count""").df()
 ```
