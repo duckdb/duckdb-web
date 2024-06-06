@@ -227,7 +227,7 @@ SELECT 1 AS col_1, 2 AS col_2 UNION ALL SELECT 10 AS col1, 20 AS col_2;
 
 Now that the CSV has been written, a table can be created with the desired schema and the CSV can be imported. The output is reset to the terminal to avoid continuing to edit the output file specified above. The `--skip N` option is used to ignore the first row of data since it is a header row and the table has already been created with the correct column names.
 
-```sql
+```text
 .mode csv
 .output
 CREATE TABLE test_table (col_1 INTEGER, col_2 INTEGER);
@@ -236,6 +236,6 @@ CREATE TABLE test_table (col_1 INTEGER, col_2 INTEGER);
 
 Note that the `.import` command utilizes the current `.mode` and `.separator` settings when identifying the structure of the data to import. The `--csv` option can be used to override that behavior.
 
-```sql
+```text
 .import import_example.csv test_table --skip 1 --csv
 ```

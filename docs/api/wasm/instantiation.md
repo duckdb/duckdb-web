@@ -3,11 +3,9 @@ layout: docu
 title: Instantiation
 ---
 
-## Instantiation
-
 DuckDB-Wasm has multiple ways to be instantiated depending on the use case.
 
-### `cdn(jsdelivr)`
+## `cdn(jsdelivr)`
 
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
@@ -29,7 +27,7 @@ await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 URL.revokeObjectURL(worker_url);
 ```
 
-### `webpack`
+## `webpack`
 
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
@@ -54,7 +52,7 @@ const db = new duckdb.AsyncDuckDB(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
 
-### `vite`
+## `vite`
 
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';

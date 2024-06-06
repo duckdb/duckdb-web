@@ -9,13 +9,13 @@ redirect_from:
 
 The following examples use the [`flights.csv`](/data/flights.csv) file.
 
-Read a CSV file from disk, auto-infer options.
+Read a CSV file from disk, auto-infer options:
 
 ```sql
 SELECT * FROM 'flights.csv';
 ```
 
-Use the `read_csv` function with custom options.
+Use the `read_csv` function with custom options:
 
 ```sql
 SELECT * FROM read_csv('flights.csv',
@@ -35,7 +35,7 @@ Read a CSV from stdin, auto-infer options:
 cat flights.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
-Read a CSV file into a table.
+Read a CSV file into a table:
 
 ```sql
 CREATE TABLE ontime (
@@ -47,16 +47,18 @@ CREATE TABLE ontime (
 COPY ontime FROM 'flights.csv';
 ```
 
-Alternatively, create a table without specifying the schema manually.
+Alternatively, create a table without specifying the schema manually using a [`CREATE TABLE .. AS SELECT` statement](../../sql/statements/create_table#create-table--as-select-ctas):
 
 ```sql
-CREATE TABLE ontime AS SELECT * FROM 'flights.csv';
+CREATE TABLE ontime AS
+    SELECT * FROM 'flights.csv';
 ```
 
-We can use the FROM-first syntax to omit 'SELECT *'.
+We can use the [`FROM`-first syntax](../../sql/query_syntax/from#from-first-syntax) to omit `SELECT *`.
 
 ```sql
-CREATE TABLE ontime AS FROM 'flights.csv';
+CREATE TABLE ontime AS
+    FROM 'flights.csv';
 ```
 
 Write the result of a query to a CSV file.
@@ -91,7 +93,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat). | `VARCHAR` | (empty) |
 | `decimal_separator` | The decimal separator of numbers. | `VARCHAR` | `.` |
-| `delim` or `sep` | Specifies the character that separates columns within each row (line) of the file. | `VARCHAR` | `,` |
+| `delim` | Specifies the delimiter character that separates columns within each row (line) of the file. Alias for `sep`. | `VARCHAR` | `,` |
 | `escape` | Specifies the string that should appear before a data character sequence that matches the `quote` value. | `VARCHAR` | `"` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `force_not_null` | Do not match the specified columns' values against the NULL string. In the default case where the `NULL` string is empty, this means that empty values will be read as zero-length strings rather than `NULL`s. | `VARCHAR[]` | `[]` |
@@ -107,6 +109,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `parallel` | Whether or not the parallel CSV reader is used. | `BOOL` | `true` |
 | `quote` | Specifies the quoting string to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `sample_size` | The number of sample rows for [auto detection of parameters](auto_detection). | `BIGINT` | 20480 |
+| `sep` | Specifies the delimiter character that separates columns within each row (line) of the file. Alias for `delim`. | `VARCHAR` | `,` |
 | `skip` | The number of lines at the top of the file to skip. | `BIGINT` | 0 |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat). | `VARCHAR` | (empty) |
 | `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here](tips#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
@@ -143,7 +146,8 @@ The path can either be a relative path (relative to the current working director
 We can use `read_csv` to create a persistent table as well:
 
 ```sql
-CREATE TABLE ontime AS SELECT * FROM read_csv('flights.csv');
+CREATE TABLE ontime AS
+    SELECT * FROM read_csv('flights.csv');
 DESCRIBE ontime;
 ```
 
