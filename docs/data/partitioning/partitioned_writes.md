@@ -14,7 +14,7 @@ COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
 Write a table to a Hive partitioned data set of CSV files, allowing overwrites:
 
 ```sql
-COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE 1);
+COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE);
 ```
 
 ## Partitioned Writes

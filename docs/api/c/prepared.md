@@ -3,9 +3,10 @@ layout: docu
 title: Prepared Statements
 ---
 
-A prepared statement is a parameterized query. The query is prepared with question marks (`?`) or dollar symbols (`$1`) indicating the parameters of the query. Values can then be bound to these parameters, after which the prepared statement can be executed using those parameters. A single query can be prepared once and executed many times.
+DuckDB supports [prepared statements](../../sql/query_syntax/prepared_statements). A prepared statement is a parameterized query. The query is prepared with question marks (`?`), parameter positions (`$1`), or parameter names (`$param`), indicating the parameters of the query. Values can then be bound to these parameters, after which the prepared statement can be executed using those parameters. A single query can be prepared once and executed many times.
 
 Prepared statements are useful to:
+
 * Easily supply parameters to functions while avoiding string concatenation/SQL injection attacks.
 * Speeding up queries that will be executed many times with different parameters.
 
