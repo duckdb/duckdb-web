@@ -23,7 +23,7 @@ Use the `st_read` function in the `FROM` clause of a query:
 SELECT * FROM st_read('test_excel.xlsx');
 ```
 
-The `layer` parameter allows specifying the name of the Excel worksheet.
+The `layer` parameter allows specifying the name of the Excel worksheet:
 
 ```sql
 SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1');
@@ -31,7 +31,7 @@ SELECT * FROM st_read('test_excel.xlsx', layer = 'Sheet1');
 
 ### Creating a New Table
 
-To create a new table using the result from a query, use `CREATE TABLE ... AS` from a `SELECT` statement.
+To create a new table using the result from a query, use `CREATE TABLE ... AS` from a `SELECT` statement:
 
 ```sql
 CREATE TABLE new_tbl AS
@@ -40,7 +40,7 @@ CREATE TABLE new_tbl AS
 
 ### Loading to an Existing Table
 
-To load data into an existing table from a query, use `INSERT INTO` from a `SELECT` statement.
+To load data into an existing table from a query, use `INSERT INTO` from a `SELECT` statement:
 
 ```sql
 INSERT INTO tbl

@@ -33,16 +33,15 @@ Moving forward we will update the benchmark when PRs with new performance number
 ### Updated Settings
 
 1. ClickHouse
-	* Storage: Any data this gets spilled to disk also needs to be on the NVMe drive. This has been changed in the new `format_and_mount.sh` script and the `clickhouse/clickhouse-mount-config.xml` file.
+    * Storage: Any data this gets spilled to disk also needs to be on the NVMe drive. This has been changed in the new `format_and_mount.sh` script and the `clickhouse/clickhouse-mount-config.xml` file.
 2. Julia (juliadf & juliads)
-	* Threads: The threads were hardcoded for juliadf/juliads to 20/40 threads. Now the max number of threads are used. No option was given to spill to disk, so this was not changed/researched.
+    * Threads: The threads were hardcoded for juliadf/juliads to 20/40 threads. Now the max number of threads are used. No option was given to spill to disk, so this was not changed/researched.
 3. DuckDB
-	* Storage: The DuckDB database file was specified to run on the NVMe mount.
+    * Storage: The DuckDB database file was specified to run on the NVMe mount.
 4. Spark
-	* Storage: There is an option to spill to disk. I was unsure of how to modify the storage location so that it was on the NVMe drive. Open to a PR with storage location changes and improved results!
+    * Storage: There is an option to spill to disk. I was unsure of how to modify the storage location so that it was on the NVMe drive. Open to a PR with storage location changes and improved results!
 
 Many solutions do not spill to disk, so they did not require any modification to use the instance storage. Other solutions use `parallel::ncores()` or default to a maximum number of cores for parallelism. Solution scripts were run in their current form on [github.com/duckdblabs/db-benchmark](https://github.com/duckdblabs/db-benchmark). Please read the [Updating the Benchmark](https://github.com/duckdblabs/db-benchmark#updating-the-benchmark) section on how to re-run your solution.
-
 
 ### Results
 
