@@ -20,7 +20,7 @@ duckdb_query(con, "CREATE TABLE people (id INTEGER, name VARCHAR)", NULL);
 
 duckdb_appender appender;
 if (duckdb_appender_create(con, NULL, "people", &appender) == DuckDBError) {
-  // handle error
+    // handle error
 }
 // append the first row (1, Mark)
 duckdb_append_int32(appender, 1);
