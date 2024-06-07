@@ -57,10 +57,14 @@ jobs:
           JEKYLL_ENV: production
       - name: Zip _site directory
         run: |
+          # swap names
           mv _site duckdb-docs
+          # create archive
           zip -qq -r duckdb-docs.zip duckdb-docs
+          # swap names back
           mv duckdb-docs _site
-          mv duckdb-docs.zip duckdb-docs
+          # place the zip into the site
+          mv duckdb-docs.zip _site
       - name: Upload site artifacts and zip archive
         uses: actions/upload-artifact@v4
         with:
