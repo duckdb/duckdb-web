@@ -18,6 +18,7 @@ To avoid this, it's recommended to `import numpy.core.multiarray` before startin
 The `DESCRIBE` and `SUMMARIZE` statements return an empty table:
 
 ```python
+%sql
 CREATE OR REPLACE TABLE tbl AS (SELECT 42 AS x);
 DESCRIBE tbl;
 ```
@@ -25,6 +26,7 @@ DESCRIBE tbl;
 To work around this, wrap them into a subquery:
 
 ```python
+%sql
 CREATE OR REPLACE TABLE tbl AS (SELECT 42 AS x);
 FROM (DESCRIBE tbl);
 ```
