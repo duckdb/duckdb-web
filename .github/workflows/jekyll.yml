@@ -42,6 +42,8 @@ jobs:
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
       - name: Install Python requirements
         run: pip install -r requirements.txt
+      - name: Install zip
+        uses: montudor/action-zip@v1
       - name: Fetch release calendar
         run: python scripts/get_calendar.py
       - name: Setup Pages
@@ -54,10 +56,10 @@ jobs:
         env:
           JEKYLL_ENV: production
       - name: Zip _site directory
-        uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r duckdb-docs.zip .
-          working-directory: _site
+        run: |
+          mv _site duckdb-docs
+          zip -qq -r duckdb-docs.zip duckdb-docs
+          mv duckdb-docs _site
       - name: Upload site artifacts and zip archive
         uses: actions/upload-artifact@v4
         with:
