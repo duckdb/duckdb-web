@@ -60,6 +60,7 @@ jobs:
           mv _site duckdb-docs
           zip -qq -r duckdb-docs.zip duckdb-docs
           mv duckdb-docs _site
+          mv duckdb-docs.zip duckdb-docs
       - name: Upload site artifacts and zip archive
         uses: actions/upload-artifact@v4
         with:
