@@ -45,7 +45,7 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-quote`          | Set [output mode](output-formats) to `quote`                                          |
 | `-readonly`       | Open the database read-only                                                           |
 | `-s COMMAND`      | Run `COMMAND` and exit                                                                |
-| `-separator SEP`  | Set output column separator to SEP. Default: `|`                                      |
+| `-separator SEP`  | Set output column separator to `SEP`. Default: `|`                                    |
 | `-stats`          | Print memory stats before each finalize                                               |
 | `-table`          | Set [output mode](output-formats) to `table`                                          |
 | `-unsigned`       | Allow loading of [unsigned extensions](../../extensions/overview#unsigned-extensions) |
