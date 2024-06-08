@@ -92,24 +92,38 @@ The `description` property of the connection object contains the column names as
 
 DuckDB also supports [prepared statements](../../sql/query_syntax/prepared_statements) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter. Values are converted according to the [conversion rules](conversion#object-conversion-python-object-to-duckdb).
 
-Here are some examples:
+Here are some examples. First, insert a row using a [prepared statement](../../sql/query_syntax/prepared_statements):
 
 ```python
-# insert a row using prepared statements
 con.execute("INSERT INTO items VALUES (?, ?, ?)", ["laptop", 2000, 1])
+```
 
-# insert several rows using prepared statements
+Second, insert several rows using a [prepared statement](../../sql/query_syntax/prepared_statements):
+
+```python
 con.executemany("INSERT INTO items VALUES (?, ?, ?)", [["chainsaw", 500, 10], ["iphone", 300, 2]] )
+```
 
-# query the database using a prepared statement
+Query the database using a [prepared statement](../../sql/query_syntax/prepared_statements):
+
+```python
 con.execute("SELECT item FROM items WHERE value > ?", [400])
 print(con.fetchall())
-# [('laptop',), ('chainsaw',)]
+```
 
-# query using $ notation for prepared statement and reused values
+```text
+[('laptop',), ('chainsaw',)]
+```
+
+Query using the `$` notation for a [prepared statement](../../sql/query_syntax/prepared_statements) and reused values:
+
+```python
 con.execute("SELECT $1, $1, $2", ["duck", "goose"])
 print(con.fetchall())
-# [('duck', 'duck', 'goose')]
+```
+
+```text
+[('duck', 'duck', 'goose')]
 ```
 
 > Warning Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page](data_ingestion) for better options.
@@ -136,5 +150,8 @@ res = duckdb.execute("""
     }
 ).fetchall()
 print(res)
-# [(5, 'DuckDB', [42])]
+```
+
+```text
+[(5, 'DuckDB', [42])]
 ```

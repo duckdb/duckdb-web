@@ -20,7 +20,10 @@ def generate_random_name():
 duckdb.create_function("random_name", generate_random_name, [], VARCHAR)
 res = duckdb.sql("SELECT random_name()").fetchall()
 print(res)
-# [('Gerald Ashley',)]
+```
+
+```text
+[('Gerald Ashley',)]
 ```
 
 ## Creating Functions
@@ -63,7 +66,7 @@ def my_function(x: int) -> str:
     return x
 
 duckdb.create_function("my_func", my_function)
-duckdb.sql("SELECT my_func(42)")
+print(duckdb.sql("SELECT my_func(42)"))
 ```
 
 ```text
@@ -92,13 +95,28 @@ def dont_intercept_null(x):
 duckdb.create_function("dont_intercept", dont_intercept_null, [BIGINT], BIGINT)
 res = duckdb.sql("SELECT dont_intercept(NULL)").fetchall()
 print(res)
-# [(None,)]
+```
 
-duckdb.remove_function("dont_intercept")
+```text
+[(None,)]
+```
+
+With `null_handling="special"`:
+
+```python
+import duckdb
+from duckdb.typing import *
+
+def dont_intercept_null(x):
+    return 5
+
 duckdb.create_function("dont_intercept", dont_intercept_null, [BIGINT], BIGINT, null_handling="special")
 res = duckdb.sql("SELECT dont_intercept(NULL)").fetchall()
 print(res)
-# [(5,)]
+```
+
+```text
+[(5,)]
 ```
 
 ## Exception Handling
@@ -122,7 +140,18 @@ except duckdb.InvalidInputException as e:
 duckdb.create_function("doesnt_throw", will_throw, [], BIGINT, exception_handling="return_null")
 res = duckdb.sql("SELECT doesnt_throw()").fetchall()
 print(res)
-# [(None,)]
+```
+
+```console
+Invalid Input Error: Python exception occurred while executing the UDF: ValueError: ERROR
+
+At:
+  ...(5): will_throw
+  ...(9): <module>
+```
+
+```text
+[(None,)]
 ```
 
 ## Side Effects
@@ -148,7 +177,10 @@ con = duckdb.connect()
 con.create_function("my_counter", count, side_effects = False)
 res = con.sql("SELECT my_counter() FROM range(10)").fetchall()
 print(res)
-# [(0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,)]
+```
+
+```text
+[(0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,)]
 ```
 
 Which is obviously not the desired result, when we add `side_effects = True`, the result is as we would expect:
@@ -159,7 +191,10 @@ count.counter = 0
 con.create_function("my_counter", count, side_effects = True)
 res = con.sql("SELECT my_counter() FROM range(10)").fetchall()
 print(res)
-# [(0,), (1,), (2,), (3,), (4,), (5,), (6,), (7,), (8,), (9,)]
+```
+
+```text
+[(0,), (1,), (2,), (3,), (4,), (5,), (6,), (7,), (8,), (9,)]
 ```
 
 ## Python Function Types
@@ -190,5 +225,8 @@ def random_date():
 duckdb.create_function("random_date", random_date, [], DATE, type="native")
 res = duckdb.sql("SELECT random_date()").fetchall()
 print(res)
-# [(datetime.date(2019, 5, 15),)]
+```
+
+```text
+[(datetime.date(2019, 5, 15),)]
 ```
