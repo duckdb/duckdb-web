@@ -67,8 +67,11 @@ duckdb.typing.DuckDBPyType(list[dict[Union[str, int], str])
 ```python
 import duckdb
 
-duckdb.typing.DuckDBPyType(dict[str, int])
-# MAP(VARCHAR, BIGINT)
+print(duckdb.typing.DuckDBPyType(dict[str, int]))
+```
+
+```text
+MAP(VARCHAR, BIGINT)
 ```
 
 #### *`{'a': field_one, 'b': field_two, .., 'n': field_n}`*
@@ -78,8 +81,11 @@ duckdb.typing.DuckDBPyType(dict[str, int])
 ```python
 import duckdb
 
-duckdb.typing.DuckDBPyType({'a': str, 'b': int})
-# STRUCT(a VARCHAR, b BIGINT)
+print(duckdb.typing.DuckDBPyType({'a': str, 'b': int}))
+```
+
+```text
+STRUCT(a VARCHAR, b BIGINT)
 ```
 
 #### *`Union[⟨type_1⟩, ... ⟨type_n⟩]`*
@@ -90,8 +96,11 @@ duckdb.typing.DuckDBPyType({'a': str, 'b': int})
 import duckdb
 from typing import Union
 
-duckdb.typing.DuckDBPyType(Union[int, str, bool, bytearray])
-# UNION(u1 BIGINT, u2 VARCHAR, u3 BOOLEAN, u4 BLOB)
+print(duckdb.typing.DuckDBPyType(Union[int, str, bool, bytearray]))
+```
+
+```text
+UNION(u1 BIGINT, u2 VARCHAR, u3 BOOLEAN, u4 BLOB)
 ```
 
 ### Creation Functions
