@@ -58,19 +58,19 @@ Allowed URI schemes: `abfss`
 
 ```sql
 SELECT count(*)
-FROM 'abfss://⟨my_filesystem/⟨path⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
+FROM 'abfss://⟨my_filesystem⟩/⟨path⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
 ```
 
 Globs are also supported:
 
 ```sql
 SELECT *
-FROM 'abfss://⟨my_filesystem/⟨path⟩/*.csv';
+FROM 'abfss://⟨my_filesystem⟩/⟨path⟩/*.csv';
 ```
 
 ```sql
 SELECT *
-FROM 'abfss://⟨my_filesystem/⟨path⟩/**';
+FROM 'abfss://⟨my_filesystem⟩/⟨path⟩/**';
 ```
 
 Or with a fully qualified path syntax:
