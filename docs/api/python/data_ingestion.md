@@ -135,8 +135,11 @@ DuckDB supports querying multiple types of Apache Arrow objects including [table
 import duckdb
 import pandas as pd
 test_df = pd.DataFrame.from_dict({"i": [1, 2, 3, 4], "j": ["one", "two", "three", "four"]})
-duckdb.sql("SELECT * FROM test_df").fetchall()
-# [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
+print(duckdb.sql("SELECT * FROM test_df").fetchall())
+```
+
+```text
+[(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
 DuckDB also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
@@ -149,7 +152,7 @@ import pandas as pd
 my_dictionary = {}
 my_dictionary["test_df"] = pd.DataFrame.from_dict({"i": [1, 2, 3, 4], "j": ["one", "two", "three", "four"]})
 duckdb.register("test_df_view", my_dictionary["test_df"])
-duckdb.sql("SELECT * FROM test_df_view").fetchall()
+print(duckdb.sql("SELECT * FROM test_df_view").fetchall())
 ```
 
 ```text

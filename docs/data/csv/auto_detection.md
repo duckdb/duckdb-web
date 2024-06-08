@@ -82,6 +82,7 @@ FlightDate|UniqueCarrier|OriginCityName|DestCityName
 ```
 
 In this file, the dialect detection works as follows:
+
 * If we split by a `|` every row is split into `4` columns
 * If we split by a `,` rows 2-4 are split into `3` columns, while the first row is split into `1` column
 * If we split by `;`, every row is split into `1` column
@@ -109,7 +110,7 @@ The type detection works by attempting to convert the values in each column to t
 
 Note everything can be cast to `VARCHAR`. This type has the lowest priority – i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
 
-The detected types can be individually overridden using the `types` option. This option takes either a list of types (e.g., `types = [INTEGER, VARCHAR, DATE]`) which overrides the types of the columns in-order of occurrence in the CSV file. Alternatively, `types` takes a `name -> type` map which overrides options of individual columns (e.g., `types = {'quarter': INTEGER}`).
+The detected types can be individually overridden using the `types` option. This option takes either a list of types (e.g., `types = [INTEGER, VARCHAR, DATE]`) which overrides the types of the columns in-order of occurrence in the CSV file. Alternatively, `types` takes a `name` → `type` map which overrides options of individual columns (e.g., `types = {'quarter': INTEGER}`).
 
 The type detection can be entirely disabled by using the `all_varchar` option. If this is set all columns will remain as `VARCHAR` (as they originally occur in the CSV file).
 

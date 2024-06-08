@@ -11,14 +11,14 @@ This page documents the rules for converting [Python objects to DuckDB](#object-
 
 This is a mapping of Python object types to DuckDB [Logical Types](../../sql/data_types/overview):
 
-* `None` -> `NULL`
-* `bool` -> `BOOLEAN`
-* `datetime.timedelta` -> `INTERVAL`
-* `str` -> `VARCHAR`
-* `bytearray` -> `BLOB`
-* `memoryview` -> `BLOB`
-* `decimal.Decimal` -> `DECIMAL` / `DOUBLE`
-* `uuid.UUID` -> `UUID`
+* `None` → `NULL`
+* `bool` → `BOOLEAN`
+* `datetime.timedelta` → `INTERVAL`
+* `str` → `VARCHAR`
+* `bytearray` → `BLOB`
+* `memoryview` → `BLOB`
+* `decimal.Decimal` → `DECIMAL` / `DOUBLE`
+* `uuid.UUID` → `UUID`
 
 The rest of the conversion rules are as follows.
 
@@ -156,39 +156,57 @@ DuckDB's Python client provides multiple additional methods that can be used to 
 
 * `pl()` fetches the data as a Polars DataFrame
 
-Below are some examples using this functionality. See the Python [guides](../../guides/index#python-client) for more examples.
+### Examples
+
+Below are some examples using this functionality. See the [Python guides](../../guides/index#python-client) for more examples.
+
+Fetch as Pandas DataFrame:
 
 ```python
-# fetch as Pandas DataFrame
 df = con.execute("SELECT * FROM items").fetchdf()
 print(df)
-#        item   value  count
-# 0     jeans    20.0      1
-# 1    hammer    42.2      2
-# 2    laptop  2000.0      1
-# 3  chainsaw   500.0     10
-# 4    iphone   300.0      2
+```
 
-# fetch as dictionary of numpy arrays
+```text
+       item   value  count
+0     jeans    20.0      1
+1    hammer    42.2      2
+2    laptop  2000.0      1
+3  chainsaw   500.0     10
+4    iphone   300.0      2
+```
+
+Fetch as dictionary of NumPy arrays:
+
+```python
 arr = con.execute("SELECT * FROM items").fetchnumpy()
 print(arr)
-# {'item': masked_array(data=['jeans', 'hammer', 'laptop', 'chainsaw', 'iphone'],
-#              mask=[False, False, False, False, False],
-#        fill_value='?',
-#             dtype=object), 'value': masked_array(data=[20.0, 42.2, 2000.0, 500.0, 300.0],
-#              mask=[False, False, False, False, False],
-#        fill_value=1e+20), 'count': masked_array(data=[1, 2, 1, 10, 2],
-#              mask=[False, False, False, False, False],
-#        fill_value=999999,
-#             dtype=int32)}
+```
 
-# fetch as an Arrow table. Converting to Pandas afterwards just for pretty printing
+```text
+{'item': masked_array(data=['jeans', 'hammer', 'laptop', 'chainsaw', 'iphone'],
+             mask=[False, False, False, False, False],
+       fill_value='?',
+            dtype=object), 'value': masked_array(data=[20.0, 42.2, 2000.0, 500.0, 300.0],
+             mask=[False, False, False, False, False],
+       fill_value=1e+20), 'count': masked_array(data=[1, 2, 1, 10, 2],
+             mask=[False, False, False, False, False],
+       fill_value=999999,
+            dtype=int32)}
+```
+
+Fetch as an Arrow table. Converting to Pandas afterwards just for pretty printing:
+
+```python
 tbl = con.execute("SELECT * FROM items").fetch_arrow_table()
 print(tbl.to_pandas())
-#        item    value  count
-# 0     jeans    20.00      1
-# 1    hammer    42.20      2
-# 2    laptop  2000.00      1
-# 3  chainsaw   500.00     10
-# 4    iphone   300.00      2
+```
+
+```text
+       item    value  count
+0     jeans    20.00      1
+1    hammer    42.20      2
+2    laptop  2000.00      1
+3  chainsaw   500.00     10
+4    iphone   300.00      2
 ```
