@@ -64,13 +64,13 @@ CREATE TABLE ontime AS
 Write the result of a query to a CSV file.
 
 ```sql
-COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER true, DELIMITER '|');
+COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER, DELIMITER '|');
 ```
 
 If we serialize the entire table, we can simply refer to it with its name.
 
 ```sql
-COPY ontime TO 'flights.csv' WITH (HEADER true, DELIMITER '|');
+COPY ontime TO 'flights.csv' WITH (HEADER, DELIMITER '|');
 ```
 
 ## CSV Loading

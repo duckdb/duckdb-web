@@ -23,7 +23,7 @@ SELECT * FROM read_csv('flights.csv', names = ['DateOfFlight', 'CarrierName']);
 
 ## Override the Types of Specific Columns
 
-The `types` flag can be used to override types of only certain columns by providing a struct of `name -> type` mappings.
+The `types` flag can be used to override types of only certain columns by providing a struct of `name` → `type` mappings.
 
 ```sql
 SELECT * FROM read_csv('flights.csv', types = {'FlightDate': 'DATE'});
