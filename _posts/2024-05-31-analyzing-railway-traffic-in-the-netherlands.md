@@ -217,7 +217,7 @@ saving considerable traffic and time when running queries on remote Parquet file
 
 Let's answer the following question: _Which two train stations in the Netherlands have the largest distance between them when traveling via rail?_
 For this, we'll use two datasets.
-The first, [`stations-2022-01.csv`](https://opendata.rijdendetreinen.nl/public/stations/stations-2022-01.csv), contains information on the [railway stations](https://www.rijdendetreinen.nl/en/open-data/stations) (station name, country, etc.). We can simply load and query this dataset as follows:
+The first, [`stations-2022-01.csv`](https://blobs.duckdb.org/data/stations-2022-01.csv), contains information on the [railway stations](https://www.rijdendetreinen.nl/en/open-data/stations) (station name, country, etc.). We can simply load and query this dataset as follows:
 
 ```sql
 CREATE TABLE stations AS
@@ -242,7 +242,7 @@ LIMIT 5;
 | 8   | Aachen     | Aachen Hbf            | D       | 50.77    | 6.09      |
 | 818 | Aachen W   | Aachen West           | D       | 50.78    | 6.07      |
 
-The second dataset, [`tariff-distances-2022-01.csv`](https://opendata.rijdendetreinen.nl/public/tariff-distances/tariff-distances-2022-01.csv), contains the [station distances](https://www.rijdendetreinen.nl/en/open-data/station-distances). The distances are defined as the shortest route on the railway network and they are used to calculate the tariffs for ticket.
+The second dataset, [`tariff-distances-2022-01.csv`](https://blobs.duckdb.org/data/tariff-distances-2022-01.csv), contains the [station distances](https://www.rijdendetreinen.nl/en/open-data/station-distances). The distances are defined as the shortest route on the railway network and they are used to calculate the tariffs for ticket.
 Let's peek into this file:
 
 ```bash
