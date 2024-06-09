@@ -22,7 +22,7 @@ Some of the queries explained in this blog post are shown in simplified form on 
 ## Loading the Data
 
 For our initial queries, we'll use the 2023 [railway services dataset](https://www.rijdendetreinen.nl/en/open-data/train-archive).
-To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.duckdb.org/data/nl-railway/services-2023.csv.gz) (330 MB) and load it into DuckDB.
+To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.duckdb.org/nl-railway/services-2023.csv.gz) (330 MB) and load it into DuckDB.
 
 First, start the [DuckDB command line client](/docs/api/cli/overview) on a persistent database:
 
@@ -161,7 +161,7 @@ For example, we can run the following query:
 
 ```sql
 SELECT "Service:Date", "Stop:station name"
-FROM 'https://blobs.duckdb.org/data/services-2023.parquet'
+FROM 'https://blobs.duckdb.org/nl-railway/services-2023.parquet'
 LIMIT 3;
 ```
 
@@ -183,7 +183,7 @@ WITH services_per_month AS (
         month("Service:Date") AS month,
         "Stop:station name" AS station,
         count(*) AS num_services
-    FROM 'https://blobs.duckdb.org/data/services-2023.parquet'
+    FROM 'https://blobs.duckdb.org/nl-railway/services-2023.parquet'
     GROUP BY ALL
 )
 SELECT month, month_name, array_agg(station) AS top3_stations
