@@ -44,7 +44,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.nullvalue STRING`      | Use `STRING` in place of `NULL` values                                                                       |
 | `.once ?OPTIONS? ?FILE?` | Output for the next SQL command only to `FILE`                                                               |
 | `.open ?OPTIONS? ?FILE?` | Close existing database and reopen `FILE`                                                                    |
-| `.output ?FILE?`         | Send output to `FILE` or stdout if `FILE` is omitted                                                         |
+| `.output ?FILE?`         | Send output to `FILE` or `stdout` if `FILE` is omitted                                                       |
 | `.parameter CMD ...`     | Manage SQL parameter bindings                                                                                |
 | `.print STRING...`       | Print literal `STRING`                                                                                       |
 | `.prompt MAIN CONTINUE`  | Replace the standard prompts                                                                                 |
