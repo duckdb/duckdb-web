@@ -196,3 +196,19 @@ Additionally to the DuckDB clients for Python, R, and other programming language
 </div>
 
 </div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
+### Are DuckDB's database files portable between different DuckDB versions and clients?
+
+<div class="answer" markdown="1">
+
+Since version 0.10.0 (released in February 2024), DuckDB is backwards-compatible when reading database files, i.e., newer versions of DuckDB are always able to read database files created with an older version of DuckDB.
+DuckDB also provides partial forwards-compatibility on a best-effort basis. See the [storage page](/docs/internals/storage) for more details.
+Compatibility is also guaranteed between different DuckDB clients (e.g., Python and R): a database file created with one client can be read with other clients.
+
+</div>
+
+</div>
