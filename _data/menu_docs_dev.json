@@ -1312,6 +1312,10 @@
             {
               "page": "Glossary of Terms",
               "url": "glossary"
+            },
+            {
+              "page": "Browse Offline",
+              "url": "offline-copy"
             }
           ]
         },
