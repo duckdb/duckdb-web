@@ -64,9 +64,6 @@ jobs:
           rm -rf scripts single-file-document duckdb-docs/docs/archive
           # create archive
           zip -qq -r duckdb-docs.zip duckdb-docs
-          # restore README and swap names back
-          mv duckdb-docs/README-repository.md duckdb-docs/README.md
-          mv duckdb-docs _site
           # place the zip into the site
           mv duckdb-docs.zip _site
       - name: Upload site artifacts and zip archive
