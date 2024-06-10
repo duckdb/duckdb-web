@@ -60,7 +60,7 @@ jobs:
           # change name of the _site directory and add new README
           mv _site duckdb-docs
           cp duckdb-docs/README.md duckdb-docs/README-repository.md
-          echo "To browse the DuckDB website locally, run `python -m http.server` in this directory and connect to http://localhost:8000/" >> README.md
+          echo "To browse the DuckDB website locally, run `python -m http.server` in this directory and connect to http://localhost:8000/" > duckdb-docs/README.md
           # create archive
           zip -qq -r duckdb-docs.zip duckdb-docs
           # restore README and swap names back
