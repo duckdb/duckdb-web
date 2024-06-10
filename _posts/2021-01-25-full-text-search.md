@@ -19,17 +19,19 @@ Alright, enough about the "why", let's get to the "how".
 ### Preparing the Data
 
 The TREC 2004 Robust Retrieval Track has 250 "topics" (search queries) over TREC disks 4 and 5. The data consist of many text files stored in SGML format, along with a corresponding DTD (document type definition) file. This format is rarely used anymore, but it is similar to XML. We will use OpenSP's command line tool `osx` to convert it to XML. Because there are many files, I wrote a bash script:
-```bash
+
+```text
 #!/bin/bash
 mkdir -p latimes/xml
-for i in $(seq -w 1 9)
-do
-        cat dtds/la.dtd latimes-$i | osx > latimes/xml/latimes-$i.xml
+for i in $(seq -w 1 9); do
+    cat dtds/la.dtd latimes-$i | osx > latimes/xml/latimes-$i.xml
 done
 ```
+
 This sorts the `latimes` files. Repeat for the `fbis`, `cr`, `fr94`, and `ft` files.
 
 To parse the XML I used BeautifulSoup. Each document has a `docno` identifier, and a `text` field. Because the documents do not come from the same source, they differ in what other fields they have. I chose to take all of the fields.
+
 ```python
 import duckdb
 import multiprocessing
@@ -140,13 +142,18 @@ with open('results', 'w+') as f:
 ### Results
 
 Now that we have created our 'results' file, we can compare them to the relevance assessments `qrels` using `trec_eval`.
+
 ```bash
-$ ./trec_eval -m P.30 -m map qrels results
+./trec_eval -m P.30 -m map qrels results
+```
+
+```text
 map                     all 0.2324
 P_30                    all 0.2948
 ```
 
 Not bad! While these results are not as high as the reproducible by [Anserini](https://github.com/castorini/anserini), they are definitely acceptable. The difference in performance can be explained by differences in
+
 1. Which stemmer was used (we used 'porter')
 2. Which stopwords were used (we used the list of 571 English stopwords used in the SMART system)
 3. Pre-processing (removal of accents, punctuation, numbers)
