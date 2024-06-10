@@ -38,15 +38,17 @@ The SQLStatement represents a complete SQL statement. The type of the SQL Statem
 ## Binder
 
 The binder converts all nodes into their **bound** equivalents. In the binder phase:
+
 * The tables and columns are resolved using the catalog
 * Types are resolved
 * Aggregate/window functions are extracted
 
 The following conversions happen:
-* SQLStatement -> [`BoundStatement`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/bound_statement.hpp)
-* QueryNode -> [`BoundQueryNode`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/bound_query_node.hpp)
-* TableRef -> [`BoundTableRef`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/bound_tableref.hpp)
-* ParsedExpression -> [`Expression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/expression.hpp)
+
+* SQLStatement → [`BoundStatement`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/bound_statement.hpp)
+* QueryNode → [`BoundQueryNode`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/bound_query_node.hpp)
+* TableRef → [`BoundTableRef`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/bound_tableref.hpp)
+* ParsedExpression → [`Expression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/expression.hpp)
 
 ## Logical Planner
 

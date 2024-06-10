@@ -18,12 +18,12 @@ The table below shows the mapping of Python Built-in types to DuckDB type.
 
 | Built-in types | DuckDB type |
 |:---------------|:------------|
-| *`bool`*       | `BOOLEAN`   |
-| *`bytearray`*  | `BLOB`      |
-| *`bytes`*      | `BLOB`      |
-| *`float`*      | `DOUBLE`    |
-| *`int`*        | `BIGINT`    |
-| *`str`*        | `VARCHAR`   |
+| `bool`         | `BOOLEAN`   |
+| `bytearray`    | `BLOB`      |
+| `bytes`        | `BLOB`      |
+| `float`        | `DOUBLE`    |
+| `int`          | `BIGINT`    |
+| `str`          | `VARCHAR`   |
 
 ### Numpy DTypes
 
@@ -33,21 +33,21 @@ The table below shows the mapping of Numpy DType to DuckDB type.
 
 | Type        | DuckDB type |
 |:------------|:------------|
-| *`bool`*    | `BOOLEAN`   |
-| *`float32`* | `FLOAT`     |
-| *`float64`* | `DOUBLE`    |
-| *`int16`*   | `SMALLINT`  |
-| *`int32`*   | `INTEGER`   |
-| *`int64`*   | `BIGINT`    |
-| *`int8`*    | `TINYINT`   |
-| *`uint16`*  | `USMALLINT` |
-| *`uint32`*  | `UINTEGER`  |
-| *`uint64`*  | `UBIGINT`   |
-| *`uint8`*   | `UTINYINT`  |
+| `bool`      | `BOOLEAN`   |
+| `float32`   | `FLOAT`     |
+| `float64`   | `DOUBLE`    |
+| `int16`     | `SMALLINT`  |
+| `int32`     | `INTEGER`   |
+| `int64`     | `BIGINT`    |
+| `int8`      | `TINYINT`   |
+| `uint16`    | `USMALLINT` |
+| `uint32`    | `UINTEGER`  |
+| `uint64`    | `UBIGINT`   |
+| `uint8`     | `UTINYINT`  |
 
 ### Nested Types
 
-#### *`list[child_type]`*
+#### `list[child_type]`
 
 `list` type objects map to a `LIST` type of the child type.
 Which can also be arbitrarily nested.
@@ -56,33 +56,42 @@ Which can also be arbitrarily nested.
 import duckdb
 from typing import Union
 
-duckdb.typing.DuckDBPyType(list[dict[Union[str, int], str])
-# MAP(UNION(u1 VARCHAR, u2 BIGINT), VARCHAR)[]
+duckdb.typing.DuckDBPyType(list[dict[Union[str, int], str]])
 ```
 
-#### *`dict[key_type, value_type]`*
+```text
+MAP(UNION(u1 VARCHAR, u2 BIGINT), VARCHAR)[]
+```
+
+#### `dict[key_type, value_type]`
 
 `dict` type objects map to a `MAP` type of the key type and the value type.
 
 ```python
 import duckdb
 
-duckdb.typing.DuckDBPyType(dict[str, int])
-# MAP(VARCHAR, BIGINT)
+print(duckdb.typing.DuckDBPyType(dict[str, int]))
 ```
 
-#### *`{'a': field_one, 'b': field_two, .., 'n': field_n}`*
+```text
+MAP(VARCHAR, BIGINT)
+```
+
+#### `{'a': field_one, 'b': field_two, .., 'n': field_n}`
 
 `dict` objects map to a `STRUCT` composed of the keys and values of the dict.
 
 ```python
 import duckdb
 
-duckdb.typing.DuckDBPyType({'a': str, 'b': int})
-# STRUCT(a VARCHAR, b BIGINT)
+print(duckdb.typing.DuckDBPyType({'a': str, 'b': int}))
 ```
 
-#### *`Union[⟨type_1⟩, ... ⟨type_n⟩]`*
+```text
+STRUCT(a VARCHAR, b BIGINT)
+```
+
+#### `Union[⟨type_1⟩, ... ⟨type_n⟩]`
 
 `typing.Union` objects map to a `UNION` type of the provided types.
 
@@ -90,8 +99,11 @@ duckdb.typing.DuckDBPyType({'a': str, 'b': int})
 import duckdb
 from typing import Union
 
-duckdb.typing.DuckDBPyType(Union[int, str, bool, bytearray])
-# UNION(u1 BIGINT, u2 VARCHAR, u3 BOOLEAN, u4 BLOB)
+print(duckdb.typing.DuckDBPyType(Union[int, str, bool, bytearray]))
+```
+
+```text
+UNION(u1 BIGINT, u2 VARCHAR, u3 BOOLEAN, u4 BLOB)
 ```
 
 ### Creation Functions
@@ -135,32 +147,38 @@ Anywhere a `DuckDBPyType` is accepted, we will also accept one of the type objec
 
 #### `list_type` | `array_type`
 
-Parameters:  
-- `child_type: DuckDBPyType`
+Parameters:
+
+* `child_type: DuckDBPyType`
 
 #### `struct_type` | `row_type`
 
-Parameters:  
-- `fields: Union[list[DuckDBPyType], dict[str, DuckDBPyType]]`
+Parameters:
+
+* `fields: Union[list[DuckDBPyType], dict[str, DuckDBPyType]]`
 
 #### `map_type`
 
-Parameters:  
-- `key_type: DuckDBPyType`
-- `value_type: DuckDBPyType`
+Parameters:
+
+* `key_type: DuckDBPyType`
+* `value_type: DuckDBPyType`
 
 #### `decimal_type`
 
-Parameters:  
-- `width: int`
-- `scale: int`
+Parameters:
+
+* `width: int`
+* `scale: int`
 
 #### `union_type`
 
-Parameters:  
-- `members: Union[list[DuckDBPyType], dict[str, DuckDBPyType]]`
+Parameters:
+
+* `members: Union[list[DuckDBPyType], dict[str, DuckDBPyType]]`
 
 #### `string_type`
 
 Parameters:
-- `collation: Optional[str]`
+
+* `collation: Optional[str]`

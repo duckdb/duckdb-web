@@ -71,7 +71,7 @@ for the following string data, using a frame that includes one element from each
 
 For this example we are using strings so we don't have to worry about interpolating values.
 
-```py
+```python
 data = ('a', 'b', 'c', 'd', 'c', 'b',)
 w = len(data)
 for row in range(w):

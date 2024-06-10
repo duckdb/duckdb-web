@@ -86,12 +86,12 @@ This attaches the value of the holding at that time to each row:
 | GOOG   | 2001-01-01 00:00:30 | 23.45 |
 | GOOG   | 2001-01-01 00:01:30 | 21.16 |
 
-It essentially executes a function defined by looking up nearby values in the `prices` table. 
+It essentially executes a function defined by looking up nearby values in the `prices` table.
 Note also that missing `ticker` values do not have a match and don't appear in the output.
 
 ### Outer AsOf Joins
 
-Because AsOf produces at most one match from the right hand side, 
+Because AsOf produces at most one match from the right hand side,
 the left side table will not grow as a result of the join,
 but it could shrink if there are missing times on the right.
 To handle this situation, you can use an *outer* AsOf Join:
@@ -233,7 +233,7 @@ The build side will just have four integer "timestamps" with alphabetic values:
 | 4 | d |
 
 The probe table will just be the time values plus the midpoints,
-and we can make a table showing what value each probe time matches 
+and we can make a table showing what value each probe time matches
 for greater than or equal to:
 
 <div class="narrow_table"></div>
@@ -293,7 +293,7 @@ One way to interpret this is that the times in the build table are the _end_ of 
 instead of the beginning.
 Also, unlike greater than or equal to,
 the interval is closed at the end instead of the beginning.
-Adding this to what we found for strictly greater than, 
+Adding this to what we found for strictly greater than,
 we can interpret this as meaning that the lookup times are part of the interval
 when non-strict inequalities are used.
 
@@ -339,7 +339,7 @@ and whether the time is include or excluded, we can choose the appropriate AsOf 
 ### Usage
 
 So far we have been explicit about specifying the conditions for AsOf,
-but SQL also has a simplified join condition syntax 
+but SQL also has a simplified join condition syntax
 for the common case where the column names are the same in both tables.
 This syntax uses the `USING` keyword to list the fields that should be compared for equality.
 AsOf also supports this syntax, but with two restrictions:
@@ -358,7 +358,7 @@ Be aware that if you don't explicitly list the columns in the `SELECT`,
 the ordering field value will be the probe value, not the build value.
 For a natural join, this is not an issue because all the conditions are equalities,
 but for AsOf, one side has to be chosen.
-Since AsOf can be viewed as a lookup function, 
+Since AsOf can be viewed as a lookup function,
 it is more natural to return the "function arguments" than the function internals.
 
 ### Under the Hood
@@ -585,13 +585,13 @@ The probe tables have either 1 or 15 timestamps per key:
 
 ```sql
 CREATE OR REPLACE TABLE probe15 AS
-	SELECT k, t
-	FROM range(10000) cs(k), 
-	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 26 DAY) ts(t);
+    SELECT k, t
+    FROM range(10000) cs(k), 
+         range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 26 DAY) ts(t);
 
 CREATE OR REPLACE TABLE probe1 AS
-	SELECT k, '2022-01-01'::TIMESTAMP t
-	FROM range(10000) cs(k);
+    SELECT k, '2022-01-01'::TIMESTAMP t
+    FROM range(10000) cs(k);
 ```
 
 The build tables are much larger and have approximately
@@ -600,21 +600,21 @@ The build tables are much larger and have approximately
 ```sql
 -- 10:1
 CREATE OR REPLACE TABLE build10 AS
-	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
-	FROM range(10000) ks(k), 
-	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 59 HOUR) ts(t);
+    SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
+    FROM range(10000) ks(k), 
+         range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 59 HOUR) ts(t);
 
 -- 100:1
 CREATE OR REPLACE TABLE build100 AS
-	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
-	FROM range(10000) ks(k), 
-	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 350 MINUTE) ts(t);
+    SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
+    FROM range(10000) ks(k), 
+         range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 350 MINUTE) ts(t);
 
 -- 1000:1
 CREATE OR REPLACE TABLE build1000 AS
-	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
-	FROM range(10000) ks(k), 
-	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 35 MINUTE) ts(t);
+    SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
+    FROM range(10000) ks(k), 
+         range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 35 MINUTE) ts(t);
 ```
 
 The AsOf join queries are:
@@ -629,12 +629,12 @@ ORDER BY 1, 2;
 
 -- Rank
 WITH win AS (
-  SELECT p.k, p.t, v,
-      rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC)  AS r
-  FROM probe p INNER JOIN build b
-    ON p.k = b.k
-  AND p.t >= b.t
-  QUALIFY r = 1
+    SELECT p.k, p.t, v,
+        rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC)  AS r
+    FROM probe p INNER JOIN build b
+      ON p.k = b.k
+    AND p.t >= b.t
+    QUALIFY r = 1
 )
 SELECT k, t, v
 FROM win
@@ -648,13 +648,13 @@ The results are shown here:
      width="760"
 />
 
-(Median of 5 except for Rank/15/1000). 
+(Median of 5 except for Rank/15/1000).
 
 * For all ratios with 15 probes, AsOf is the most performant.
-* For small ratios with 15 probes, Rank beats IEJoin (both with windowing), but by 100:1 it is starting to explode. 
+* For small ratios with 15 probes, Rank beats IEJoin (both with windowing), but by 100:1 it is starting to explode.
 * For single element probes, Rank is most effective, but even there, its edge over AsOf is only about 50% at scale.
 
-This shows that AsOf could be possibly be improved upon, but predicting where that happens would be tricky, 
+This shows that AsOf could be possibly be improved upon, but predicting where that happens would be tricky,
 and getting it wrong would have enormous costs.
 
 ## Future Work
@@ -663,7 +663,7 @@ DuckDB can now execute AsOf joins for all inequality types with reasonable perfo
 In some cases, the performance gain is several orders of magnitude over the standard SQL versions –
 even with our fast inequality join operator.
 
-While the current AsOf operator is completely general, 
+While the current AsOf operator is completely general,
 there are a couple of planning optimisations that could be applied here.
 
 * When there are selective equality conditions, it is likely that a hash join with filtering against a materialised state table would be significantly faster. If we can detect this and suitable sentinel values are available, the planner could choose to use a hash join instead of the default AsOf implementation.
@@ -671,8 +671,8 @@ there are a couple of planning optimisations that could be applied here.
 
 Nevertheless, remember that one of the advantages of SQL is that it is a declarative language:  
 You specify *what* you want and leave it up to the database to figure out *how*.
-Now that we have defined the semantics of the AsOf join, 
-you the user can write queries saying this is *what* you want – and we are free to keep improving the *how*!   
+Now that we have defined the semantics of the AsOf join,
+you the user can write queries saying this is *what* you want – and we are free to keep improving the *how*!
 
 ## Happy Joining!
 

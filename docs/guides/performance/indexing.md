@@ -20,9 +20,9 @@ For an example, let’s repeat the [microbenchmark for timestamps](schema#microb
 <div class="narrow_table"></div>
 
 | Column type | Ordered | Storage size | Query time |
-|---|---|---|---|
+|---|---|--:|--:|
 | `DATETIME` | yes | 1.3 GB | 0.6 s |
-| `DATETIME` | no | 3.3 GB | 0.9 s |
+| `DATETIME` | no  | 3.3 GB | 0.9 s |
 
 The results show that simply keeping the column order allows for improved compression, yielding a 2.5x smaller storage size.
 It also allows the computation to be 1.5x faster.

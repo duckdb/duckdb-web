@@ -9,43 +9,53 @@ railroad: expressions/aggregate.js
 Produce a single row containing the sum of the `amount` column:
 
 ```sql
-SELECT sum(amount) FROM sales;
+SELECT sum(amount)
+FROM sales;
 ```
 
 Produce one row per unique region, containing the sum of `amount` for each group:
 
 ```sql
-SELECT region, sum(amount) FROM sales GROUP BY region;
+SELECT region, sum(amount)
+FROM sales
+GROUP BY region;
 ```
 
 Return only the regions that have a sum of `amount` higher than 100:
 
 ```sql
-SELECT region FROM sales GROUP BY region HAVING sum(amount) > 100;
+SELECT region
+FROM sales
+GROUP BY region
+HAVING sum(amount) > 100;
 ```
 
 Return the number of unique values in the `region` column:
 
 ```sql
-SELECT count(DISTINCT region) FROM sales;
+SELECT count(DISTINCT region)
+FROM sales;
 ```
 
-Return two values, the total sum of `amount` and the sum of `amount` minus columns where the region is `north`:
+Return two values, the total sum of `amount` and the sum of `amount` minus columns where the region is `north` using the [`FILTER` clause](query_syntax/filter):
 
 ```sql
-SELECT sum(amount), sum(amount) FILTER (region != 'north') FROM sales;
+SELECT sum(amount), sum(amount) FILTER (region != 'north')
+FROM sales;
 ```
 
 Returns a list of all regions in order of the `amount` column:
 
 ```sql
-SELECT list(region ORDER BY amount DESC) FROM sales;
+SELECT list(region ORDER BY amount DESC)
+FROM sales;
 ```
 
 Returns the amount of the first sale using the `first()` aggregate function:
 
 ```sql
-SELECT first(amount ORDER BY date ASC) FROM sales;
+SELECT first(amount ORDER BY date ASC)
+FROM sales;
 ```
 
 ## Syntax
@@ -74,8 +84,11 @@ These can be made deterministic by ordering the arguments.
 For example:
 
 ```sql
-CREATE TABLE tbl AS SELECT s FROM range(1, 4) r(s);
-SELECT string_agg(s, ', ' ORDER BY s DESC) AS countdown FROM tbl;
+CREATE TABLE tbl AS
+    SELECT s FROM range(1, 4) r(s);
+
+SELECT string_agg(s, ', ' ORDER BY s DESC) AS countdown
+FROM tbl;
 ```
 
 | countdown |

@@ -18,21 +18,22 @@ FROM read_parquet('flights*.parquet', union_by_name = true);
 
 ## Tips for Writing Parquet Files
 
+Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [Hive partitioning](../partitioning/hive_partitioning) structure are good ways to transparently handle multiple files.
+
 ### Enabling `PER_THREAD_OUTPUT`
 
-If the final number of Parquet files is not important, writing one file per thread can significantly improve performance.
-Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [Hive partitioning](../partitioning/hive_partitioning) structure are good ways to transparently handle multiple files:
+If the final number of Parquet files is not important, writing one file per thread can significantly improve performance:
 
 ```sql
 COPY
     (FROM generate_series(10_000_000))
     TO 'test.parquet'
-    (FORMAT PARQUET, PER_THREAD_OUTPUT true);
+    (FORMAT PARQUET, PER_THREAD_OUTPUT);
 ```
 
 ### Selecting a `ROW_GROUP_SIZE`
 
-The `ROW_GROUP_SIZE` parameter specifies the minimum number of rows in a Parquet row group, with a minimum value equal to DuckDB's vector size (currently 2048, but adjustable when compiling DuckDB), and a default of 122,880.
+The `ROW_GROUP_SIZE` parameter specifies the minimum number of rows in a Parquet row group, with a minimum value equal to DuckDB's vector size, 2,048, and a default of 122,880.
 A Parquet row group is a partition of rows, consisting of a column chunk for each column in the dataset.
 
 Compression algorithms are only applied per row group, so the larger the row group size, the more opportunities to compress the data.

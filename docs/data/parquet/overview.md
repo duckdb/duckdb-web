@@ -23,25 +23,29 @@ DESCRIBE SELECT * FROM 'test.parquet';
 Create a table from a Parquet file:
 
 ```sql
-CREATE TABLE test AS SELECT * FROM 'test.parquet';
+CREATE TABLE test AS
+    SELECT * FROM 'test.parquet';
 ```
 
 If the file does not end in `.parquet`, use the `read_parquet` function:
 
 ```sql
-SELECT * FROM read_parquet('test.parq');
+SELECT * 
+FROM read_parquet('test.parq');
 ```
 
 Use list parameter to read three Parquet files and treat them as a single table:
 
 ```sql
-SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
+SELECT *
+FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
 
 Read all files that match the glob pattern:
 
 ```sql
-SELECT * FROM 'test/*.parquet';
+SELECT *
+FROM 'test/*.parquet';
 ```
 
 Read all files that match the glob pattern, and include a `filename` column:
@@ -49,31 +53,36 @@ Read all files that match the glob pattern, and include a `filename` column:
 That specifies which file each row came from:
 
 ```sql
-SELECT * FROM read_parquet('test/*.parquet', filename = true);
+SELECT *
+FROM read_parquet('test/*.parquet', filename = true);
 ```
 
 Use a list of globs to read all Parquet files from two specific folders:
 
 ```sql
-SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
+SELECT *
+FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 ```
 
 Read over https:
 
 ```sql
-SELECT * FROM read_parquet('https://some.url/some_file.parquet');
+SELECT *
+FROM read_parquet('https://some.url/some_file.parquet');
 ```
 
 Query the metadata of a Parquet file:
 
 ```sql
-SELECT * FROM parquet_metadata('test.parquet');
+SELECT *
+FROM parquet_metadata('test.parquet');
 ```
 
 Query the schema of a Parquet file:
 
 ```sql
-SELECT * FROM parquet_schema('test.parquet');
+SELECT *
+FROM parquet_schema('test.parquet');
 ```
 
 Write the results of a query to a Parquet file using the default compression (Snappy):
@@ -149,13 +158,15 @@ You can also insert the data into a table or create a table from the Parquet fil
 Insert the data from the Parquet file in the table:
 
 ```sql
-INSERT INTO people SELECT * FROM read_parquet('test.parquet');
+INSERT INTO people
+    SELECT * FROM read_parquet('test.parquet');
 ```
 
 Create a table directly from a Parquet file:
 
 ```sql
-CREATE TABLE people AS SELECT * FROM read_parquet('test.parquet');
+CREATE TABLE people AS
+    SELECT * FROM read_parquet('test.parquet');
 ```
 
 If you wish to keep the data stored inside the Parquet file, but want to query the Parquet file directly, you can create a view over the `read_parquet` function. You can then query the Parquet file as if it were a built-in table:
@@ -163,7 +174,8 @@ If you wish to keep the data stored inside the Parquet file, but want to query t
 Create a view over the Parquet file:
 
 ```sql
-CREATE VIEW people AS SELECT * FROM read_parquet('test.parquet');
+CREATE VIEW people AS
+    SELECT * FROM read_parquet('test.parquet');
 ```
 
 Query the Parquet file:
@@ -245,9 +257,8 @@ DuckDB supports reading and writing [encrypted Parquet files](encryption).
 
 ## Installing and Loading the Parquet Extension
 
-The support for Parquet files is enabled via extension. The `parquet` extension is bundled with almost all clients. However, if your client does not bundle the `parquet` extension, the extension must be installed and loaded separately:
+The support for Parquet files is enabled via extension. The `parquet` extension is bundled with almost all clients. However, if your client does not bundle the `parquet` extension, the extension must be installed separately:
 
 ```sql
 INSTALL parquet;
-LOAD parquet;
 ```

@@ -100,7 +100,7 @@ def random_date():
 
 We then have to register the Python function in DuckDB using `create_function`. Since our function doesn't require any inputs, we can pass an empty list as the `argument_type_list`. As the function returns a date, we specify `DATE` from `duckdb.typing` as the `return_type`. Note that since our `random_date()` function returns a built-in Python type (`datetime.date`), we don't need to specify the UDF type.
 
-```py
+```python
 # To exemplify the effect of side-effect, let's first run the function without marking it.
 duckdb.create_function('random_date', random_date, [], DATE)
 

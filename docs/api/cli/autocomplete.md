@@ -17,21 +17,41 @@ The shell autocompletes four different groups:
 The shell looks at the position in the SQL statement to determine which of these autocompletions to trigger. For example:
 
 ```sql
-SELECT s -> student_id
+SELECT s
+```
+
+```text
+student_id
 ```
 
 ```sql
-SELECT student_id F -> FROM
+SELECT student_id F
+```
+
+```text
+FROM
 ```
 
 ```sql
-SELECT student_id FROM g -> grades
+SELECT student_id FROM g
+```
+
+```text
+grades
 ```
 
 ```sql
-SELECT student_id FROM 'd -> data/
+SELECT student_id FROM 'd
+```
+
+```text
+'data/
 ```
 
 ```sql
-SELECT student_id FROM 'data/ -> data/grades.csv
+SELECT student_id FROM 'data/
+```
+
+```text
+'data/grades.csv
 ```

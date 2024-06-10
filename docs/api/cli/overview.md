@@ -10,9 +10,9 @@ redirect_from:
 
 The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page](/docs/installation) under the CLI tab for download links.
 
-The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
+The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions with a [few exceptions](../../sql/postgresql_compatibility)).
 
-> DuckDB has a [tldr page](https://github.com/tldr-pages/tldr/blob/main/pages/common/duckdb.md) that summarizes the most common uses of the CLI client.
+> DuckDB has a [tldr page](https://tldr.inbrowser.app/pages/common/duckdb), which summarizes the most common uses of the CLI client.
 > If you have [tldr](https://github.com/tldr-pages/tldr) installed, you can display it by running `tldr duckdb`.
 
 ## Getting Started
@@ -56,7 +56,11 @@ Use ".open FILENAME" to reopen on a persistent database.
 D
 ```
 
-To open or create a [persistent database](../../connect/overview#persistent-database), simply include a path as a command line argument like `duckdb path/to/my_database.duckdb` or `duckdb my_database.db`.
+To open or create a [persistent database](../../connect/overview#persistent-database), simply include a path as a command line argument:
+
+```bash
+duckdb my_database.duckdb
+```
 
 ### Running SQL Statements in the CLI
 
@@ -255,7 +259,7 @@ COPY (SELECT 42 AS woot UNION ALL SELECT 43 AS woot) TO 'test.csv' (HEADER);
 First, read a file and pipe it to the `duckdb` CLI executable. As arguments to the DuckDB CLI, pass in the location of the database to open, in this case, an in-memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
 
 ```bash
-cat test.csv | duckdb :memory: "SELECT * FROM read_csv('/dev/stdin')"
+cat test.csv | duckdb "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
 | woot |
@@ -265,8 +269,9 @@ cat test.csv | duckdb :memory: "SELECT * FROM read_csv('/dev/stdin')"
 
 To write back to stdout, the copy command can be used with the `/dev/stdout` file location.
 
-```sql
-cat test.csv | duckdb :memory: "COPY (SELECT * FROM read_csv('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
+```bash
+cat test.csv | \
+    duckdb "COPY (SELECT * FROM read_csv('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
 ```
 
 ```csv
