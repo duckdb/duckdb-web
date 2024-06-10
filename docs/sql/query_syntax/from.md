@@ -12,13 +12,15 @@ The `FROM` clause specifies the *source* of the data on which the remainder of t
 Select all columns from the table called `table_name`:
 
 ```sql
-SELECT * FROM table_name;
+SELECT *
+FROM table_name;
 ```
 
 Select all columns from the table using the `FROM`-first syntax:
 
 ```sql
-FROM table_name SELECT *;
+FROM table_name
+SELECT *;
 ```
 
 Select all columns using the `FROM`-first syntax and omitting the `SELECT` clause:
@@ -30,67 +32,82 @@ FROM table_name;
 Select all columns from the table called `table_name` through an alias `tn`:
 
 ```sql
-SELECT tn.* FROM table_name tn;
+SELECT tn.*
+FROM table_name tn;
 ```
 
 Select all columns from the table `table_name` in the schema `schema_name`:
 
 ```sql
-SELECT * FROM schema_name.table_name;
+SELECT *
+FROM schema_name.table_name;
 ```
 
 Select the column `i` from the table function `range`, where the first column of the range function is renamed to `i`:
 
 ```sql
-SELECT t.i FROM range(100) AS t(i);
+SELECT t.i
+FROM range(100) AS t(i);
 ```
 
 Select all columns from the CSV file called `test.csv`:
 
 ```sql
-SELECT * FROM 'test.csv';
+SELECT *
+FROM 'test.csv';
 ```
 
 Select all columns from a subquery:
 
 ```sql
-SELECT * FROM (SELECT * FROM table_name);
+SELECT *
+FROM (SELECT * FROM table_name);
 ```
 
 Select the entire row of the table as a struct:
 
 ```sql
-SELECT t FROM t;
+SELECT t
+FROM t;
 ```
 
 Select the entire row of the subquery as a struct (i.e., a single column):
 
 ```sql
-SELECT t FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
+SELECT t
+FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
 ```
 
 Join two tables together:
 
 ```sql
-SELECT * FROM table_name JOIN other_table ON (table_name.key = other_table.key);
+SELECT *
+FROM table_name
+JOIN other_table ON (table_name.key = other_table.key);
 ```
 
 Select a 10% sample from a table:
 
 ```sql
-SELECT * FROM table_name TABLESAMPLE 10%;
+SELECT *
+FROM table_name
+TABLESAMPLE 10%;
 ```
 
 Select a sample of 10 rows from a table:
 
 ```sql
-SELECT * FROM table_name TABLESAMPLE 10 ROWS;
+SELECT *
+FROM table_name
+TABLESAMPLE 10 ROWS;
 ```
 
 Use the `FROM`-first syntax with `WHERE` clause and aggregation:
 
 ```sql
-FROM range(100) AS t(i) SELECT sum(t.i) WHERE i % 2 = 0;
+FROM range(100) AS t(i)
+SELECT sum(t.i)
+WHERE i % 2 = 0;
 ```
 
 ## Joins
@@ -125,13 +142,16 @@ and it just returns all the possible pairs.
 Return all pairs of rows:
 
 ```sql
-SELECT a.*, b.* FROM a CROSS JOIN b;
+SELECT a.*, b.*
+FROM a
+CROSS JOIN b;
 ```
 
 This is equivalent to omitting the `JOIN` clause:
 
 ```sql
-SELECT a.*, b.* FROM a, b;
+SELECT a.*, b.*
+FROM a, b;
 ```
 
 ### Conditional Joins
@@ -163,7 +183,8 @@ Return the regions for the nations:
 
 ```sql
 SELECT n.*, r.*
-FROM l_nations n JOIN l_regions r ON (n_regionkey = r_regionkey);
+FROM l_nations n
+JOIN l_regions r ON (n_regionkey = r_regionkey);
 ```
 
 If the column names are the same and are required to be equal,
@@ -185,7 +206,8 @@ Return the regions for the nations:
 
 ```sql
 SELECT n.*, r.*
-FROM l_nations n JOIN l_regions r USING (regionkey);
+FROM l_nations n
+JOIN l_regions r USING (regionkey);
 ```
 
 The expressions do not have to be equalities – any predicate can be used:
@@ -258,8 +280,13 @@ In the examples above, we iterate through table `t` and refer to its column `i` 
 It is possible to refer to multiple attributes from the `LATERAL` subquery. Using the table from the first example:
 
 ```sql
-CREATE TABLE t1 AS SELECT * FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
-SELECT * FROM t1, LATERAL (SELECT i + j) t2(k) ORDER BY ALL;
+CREATE TABLE t1 AS
+    SELECT *
+    FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
+
+SELECT *
+    FROM t1, LATERAL (SELECT i + j) t2(k)
+    ORDER BY ALL;
 ```
 
 | i | j | k |
@@ -339,7 +366,8 @@ Attach prices or NULLs to stock trades:
 SELECT *
 FROM trades t
 ASOF LEFT JOIN prices p
-            ON t.symbol = p.symbol AND t.when >= p.when;
+            ON t.symbol = p.symbol
+           AND t.when >= p.when;
 ```
 
 `ASOF` joins can also specify join conditions on matching column names with the `USING` syntax,
@@ -371,7 +399,8 @@ DuckDB's SQL supports the `FROM`-first syntax, i.e., it allows putting the `FROM
 
 ```sql
 CREATE TABLE tbl AS
-    SELECT * FROM (VALUES ('a'), ('b')) t1(s), range(1, 3) t2(i);
+    SELECT *
+    FROM (VALUES ('a'), ('b')) t1(s), range(1, 3) t2(i);
 ```
 
 ### `FROM`-First Syntax with a `SELECT` Clause

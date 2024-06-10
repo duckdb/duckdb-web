@@ -4,8 +4,13 @@ title: Command Line Arguments
 ---
 
 The table below summarizes DuckDB's command line options.
-To list all command line options, use the command `duckdb -help`.
-Fot a list of dot commands available in the CLI shell, see the [Dot Commands page](dot_commands).
+To list all command line options, use the command:
+
+```bash
+duckdb -help
+```
+
+For a list of dot commands available in the CLI shell, see the [Dot Commands page](dot_commands).
 
 <div class="narrow_table"></div>
 
@@ -40,7 +45,7 @@ Fot a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-quote`          | Set [output mode](output-formats) to `quote`                                          |
 | `-readonly`       | Open the database read-only                                                           |
 | `-s COMMAND`      | Run `COMMAND` and exit                                                                |
-| `-separator SEP`  | Set output column separator to SEP. Default: `|`                                      |
+| `-separator SEP`  | Set output column separator to `SEP`. Default: `|`                                    |
 | `-stats`          | Print memory stats before each finalize                                               |
 | `-table`          | Set [output mode](output-formats) to `table`                                          |
 | `-unsigned`       | Allow loading of [unsigned extensions](../../extensions/overview#unsigned-extensions) |

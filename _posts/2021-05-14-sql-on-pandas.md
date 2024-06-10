@@ -22,7 +22,7 @@ After your data has been converted into a Pandas DataFrame often additional data
 
 As a short teaser, here is a code snippet that allows you to do exactly that: run arbitrary SQL queries directly on Pandas DataFrames using DuckDB.
 
-```py
+```python
 # to install: pip install duckdb
 import pandas as pd
 import duckdb
@@ -42,7 +42,7 @@ DuckDB can also write query results directly to any of these formats. You can us
 When you run a query in SQL, DuckDB will look for Python variables whose name matches the table names in your query and automatically start reading your Pandas DataFrames. Looking back at the previous example we can see this in action:
 
 
-```py
+```python
 import pandas as pd
 import duckdb
 
@@ -74,7 +74,7 @@ pip install duckdb
 
 To set up the dataset for processing we download two parquet files using `wget`. After that, we load the data into a Pandas DataFrame using the built-in Parquet reader of DuckDB. The system automatically infers that we are reading a parquet file by looking at the `.parquet` extension of the file.
 
-```py
+```python
 lineitem = duckdb.query(
     "SELECT * FROM 'lineitemsf1.snappy.parquet'"
 ).to_df()
@@ -97,7 +97,7 @@ FROM lineitem;
 
 The Pandas code looks similar:
 
-```py
+```python
 lineitem.agg(
   Sum=('l_extendedprice', 'sum'),
   Min=('l_extendedprice', 'min'),
@@ -135,7 +135,7 @@ GROUP BY
 
 In Pandas, we use the groupby function before we perform the aggregation.
 
-```py
+```python
 lineitem.groupby(
   ['l_returnflag', 'l_linestatus']
 ).agg(
@@ -175,7 +175,7 @@ GROUP BY l_returnflag,
 
  In Pandas, we can create a filtered variant of the DataFrame by using the selection brackets.
 
-```py
+```python
 # filter out the rows
 filtered_df = lineitem[
   lineitem['l_shipdate'] < "1998-09-02"]
@@ -194,7 +194,7 @@ In DuckDB, the query optimizer will combine the filter and aggregation into a si
 
 We can manually perform this optimization ("projection pushdown" in database literature). To do this, we first need to select only the columns that are relevant to our query and then subset the lineitem dataframe. We will end up with the following code snippet:
 
-```py
+```python
 # projection pushdown
 pushed_down_df = lineitem[
   ['l_shipdate',
@@ -250,7 +250,7 @@ GROUP BY l_returnflag,
 
 For Pandas, we have to add a `merge` step. In a basic approach, we merge lineitem and orders together, then apply the filters, and finally apply the grouping and aggregation. This will give us the following code snippet:
 
-```py
+```python
 # perform the join
 merged = lineitem.merge(
   orders,
@@ -279,7 +279,7 @@ Now we have missed two performance opportunities:
 
 Applying these two optimizations manually results in the following code snippet:
 
-```py
+```python
 # projection & filter on lineitem table
 lineitem_projected = lineitem[
   ['l_shipdate',
@@ -394,7 +394,7 @@ SELECT sum(l_extendedprice), min(l_extendedprice), max(l_extendedprice), avg(l_e
 
 For Pandas, we will first need to run `read_parquet` to load the data into Pandas. To do this, we use the Parquet reader powered by Apache Arrow. After that, we can run the query as we did before.
 
-```py
+```python
 lineitem_pandas_parquet = pd.read_parquet('lineitemsf1.snappy.parquet')
 result = lineitem_pandas_parquet.agg(Sum=('l_extendedprice', 'sum'), Min=('l_extendedprice', 'min'), Max=('l_extendedprice', 'max'), Avg=('l_extendedprice', 'mean'))
 ```
@@ -403,7 +403,7 @@ However, we now again run into the problem where Pandas will read the Parquet fi
 
 The optimizer in DuckDB will figure this out by itself by looking at the query you are executing.
 
-```py
+```python
 lineitem_pandas_parquet = pd.read_parquet('lineitemsf1.snappy.parquet', columns=['l_extendedprice'])
 result = lineitem_pandas_parquet.agg(Sum=('l_extendedprice', 'sum'), Min=('l_extendedprice', 'min'), Max=('l_extendedprice', 'max'), Avg=('l_extendedprice', 'mean'))
 ```

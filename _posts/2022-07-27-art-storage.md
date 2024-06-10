@@ -228,14 +228,14 @@ Take Node 256 as an example. The cost of holding 256 pointers is 2048 bytes (256
 
 ```cpp
 struct BlockPointer { 
-	uint32_t block_id;
-	uint32_t offset;
+    uint32_t block_id;
+    uint32_t offset;
 }
 
 class Node256 : public Node  {
-	// Pointers to the child nodes
-	Node* children[256];
-	BlockPointer block_info[256];
+    // Pointers to the child nodes
+    Node* children[256];
+    BlockPointer block_info[256];
 }
 ```
 

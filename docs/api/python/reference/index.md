@@ -1933,7 +1933,7 @@ title: Python Client API
 <span class="sig-name descname"><span class="pre">isin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.isin" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Return a IN expression comparing self to the input arguments.</p>
+<p>Return an IN expression comparing self to the input arguments.</p>
 <dl class="simple">
 <dt>Returns:</dt>
 <dd>

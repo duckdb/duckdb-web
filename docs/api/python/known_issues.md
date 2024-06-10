@@ -13,7 +13,44 @@ If this module has not been imported from the main thread, and a different threa
 
 To avoid this, it's recommended to `import numpy.core.multiarray` before starting up threads.
 
-## Running EXPLAIN Renders Newlines in Jupyter and IPython
+## `DESCRIBE` and `SUMMARIZE` Return Empty Tables in Jupyter
+
+The `DESCRIBE` and `SUMMARIZE` statements return an empty table:
+
+```python
+%sql
+CREATE OR REPLACE TABLE tbl AS (SELECT 42 AS x);
+DESCRIBE tbl;
+```
+
+To work around this, wrap them into a subquery:
+
+```python
+%sql
+CREATE OR REPLACE TABLE tbl AS (SELECT 42 AS x);
+FROM (DESCRIBE tbl);
+```
+
+## Protobuf Error for JupySQL in IPython
+
+Loading the JupySQL extension in IPython fails:
+
+```python
+In [1]: %load_ext sql
+```
+
+```console
+ImportError: cannot import name 'builder' from 'google.protobuf.internal' (unknown location)
+```
+
+The solution is to fix the `protobuf` package. This may require uninstalling conflicting packages, e.g.:
+
+```python
+%pip uninstall tensorflow
+%pip install protobuf
+```
+
+## Running `EXPLAIN` Renders Newlines in Jupyter and IPython
 
 When DuckDB is run in Jupyter notebooks or in the IPython shell, the output of the [`EXPLAIN` statement](../../guides/meta/explain) contains hard line breaks (`\n`):
 

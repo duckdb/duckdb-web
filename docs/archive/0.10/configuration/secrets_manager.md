@@ -92,7 +92,7 @@ CREATE SECRET secret2 (
 Now, if the user queries something from `s3://my-other-bucket/something`, secret `secret2` will be chosen automatically for that request. To see which secret is being used, the `which_secret` scalar function can be used, which takes a path and a secret type as parameters:
 
 ```sql
-FROM which_secret('s3://my-other-bucket/file.parquet', 's3');
+SELECT which_secret('s3://my-other-bucket/file.parquet', 's3');
 ```
 
 ### Listing Secrets
@@ -100,7 +100,7 @@ FROM which_secret('s3://my-other-bucket/file.parquet', 's3');
 Secrets can be listed using the built-in table-producing function, e.g., by using the [`duckdb_secrets()` table function](../sql/duckdb_table_functions#duckdb_secrets):
 
 ```sql
-FROM duckdb_secrets();
+SELECT duckdb_secrets();
 ```
 
 Sensitive information will be redacted.

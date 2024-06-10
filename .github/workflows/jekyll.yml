@@ -42,6 +42,8 @@ jobs:
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
       - name: Install Python requirements
         run: pip install -r requirements.txt
+      - name: Install zip
+        uses: montudor/action-zip@v1
       - name: Fetch release calendar
         run: python scripts/get_calendar.py
       - name: Setup Pages
@@ -53,7 +55,21 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-      - name: Upload HTML artifact
+      - name: Zip offline package
+        run: |
+          # create a copy of the _site directory for the offline package
+          cp -r _site duckdb-docs
+          echo "To browse the DuckDB website locally, run `python -m http.server` in this directory and connect to http://localhost:8000/" > duckdb-docs/README.md
+          # cleanup some directories, including the old (archive) pages
+          rm -rf scripts single-file-document duckdb-docs/docs/archive
+          # create archive
+          zip -qq -r duckdb-docs.zip duckdb-docs
+          # restore README and swap names back
+          mv duckdb-docs/README-repository.md duckdb-docs/README.md
+          mv duckdb-docs _site
+          # place the zip into the site
+          mv duckdb-docs.zip _site
+      - name: Upload site artifacts and zip archive
         uses: actions/upload-artifact@v4
         with:
           name: html_artifact

@@ -22,7 +22,7 @@ Some of the queries explained in this blog post are shown in simplified form on 
 ## Loading the Data
 
 For our initial queries, we'll use the 2023 [railway services dataset](https://www.rijdendetreinen.nl/en/open-data/train-archive).
-To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.duckdb.org/data/nl-railway/services-2023.csv.gz) (330 MB) and load it into DuckDB.
+To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.duckdb.org/nl-railway/services-2023.csv.gz) (330 MB) and load it into DuckDB.
 
 First, start the [DuckDB command line client](/docs/api/cli/overview) on a persistent database:
 
@@ -161,7 +161,7 @@ For example, we can run the following query:
 
 ```sql
 SELECT "Service:Date", "Stop:station name"
-FROM 'https://blobs.duckdb.org/data/services-2023.parquet'
+FROM 'https://blobs.duckdb.org/nl-railway/services-2023.parquet'
 LIMIT 3;
 ```
 
@@ -183,7 +183,7 @@ WITH services_per_month AS (
         month("Service:Date") AS month,
         "Stop:station name" AS station,
         count(*) AS num_services
-    FROM 'https://blobs.duckdb.org/data/services-2023.parquet'
+    FROM 'https://blobs.duckdb.org/nl-railway/services-2023.parquet'
     GROUP BY ALL
 )
 SELECT month, month_name, array_agg(station) AS top3_stations
@@ -217,7 +217,7 @@ saving considerable traffic and time when running queries on remote Parquet file
 
 Let's answer the following question: _Which two train stations in the Netherlands have the largest distance between them when traveling via rail?_
 For this, we'll use two datasets.
-The first, [`stations-2022-01.csv`](https://opendata.rijdendetreinen.nl/public/stations/stations-2022-01.csv), contains information on the [railway stations](https://www.rijdendetreinen.nl/en/open-data/stations) (station name, country, etc.). We can simply load and query this dataset as follows:
+The first, [`stations-2022-01.csv`](https://blobs.duckdb.org/data/stations-2022-01.csv), contains information on the [railway stations](https://www.rijdendetreinen.nl/en/open-data/stations) (station name, country, etc.). We can simply load and query this dataset as follows:
 
 ```sql
 CREATE TABLE stations AS
@@ -242,7 +242,7 @@ LIMIT 5;
 | 8   | Aachen     | Aachen Hbf            | D       | 50.77    | 6.09      |
 | 818 | Aachen W   | Aachen West           | D       | 50.78    | 6.07      |
 
-The second dataset, [`tariff-distances-2022-01.csv`](https://opendata.rijdendetreinen.nl/public/tariff-distances/tariff-distances-2022-01.csv), contains the [station distances](https://www.rijdendetreinen.nl/en/open-data/station-distances). The distances are defined as the shortest route on the railway network and they are used to calculate the tariffs for ticket.
+The second dataset, [`tariff-distances-2022-01.csv`](https://blobs.duckdb.org/data/tariff-distances-2022-01.csv), contains the [station distances](https://www.rijdendetreinen.nl/en/open-data/station-distances). The distances are defined as the shortest route on the railway network and they are used to calculate the tariffs for ticket.
 Let's peek into this file:
 
 ```bash

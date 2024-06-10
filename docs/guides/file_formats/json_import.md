@@ -5,25 +5,30 @@ redirect_from:
   - /docs/guides/import/json_import
 ---
 
-To read data from a JSON file, use the `read_json_auto` function in the `FROM` clause of a query.
+To read data from a JSON file, use the `read_json_auto` function in the `FROM` clause of a query:
 
 ```sql
-SELECT * FROM read_json_auto('input.json');
+SELECT *
+FROM read_json_auto('input.json');
 ```
 
-To create a new table using the result from a query, use `CREATE TABLE AS` from a `SELECT` statement.
+To create a new table using the result from a query, use `CREATE TABLE AS` from a `SELECT` statement:
 
 ```sql
-CREATE TABLE new_tbl AS SELECT * FROM read_json_auto('input.json');
+CREATE TABLE new_tbl AS
+    SELECT *
+    FROM read_json_auto('input.json');
 ```
 
-To load data into an existing table from a query, use `INSERT INTO` from a `SELECT` statement.
+To load data into an existing table from a query, use `INSERT INTO` from a `SELECT` statement:
 
 ```sql
-INSERT INTO tbl SELECT * FROM read_json_auto('input.json');
+INSERT INTO tbl
+    SELECT *
+    FROM read_json_auto('input.json');
 ```
 
-Alternatively, the `COPY` statement can also be used to load data from a JSON file into an existing table.
+Alternatively, the `COPY` statement can also be used to load data from a JSON file into an existing table:
 
 ```sql
 COPY tbl FROM 'input.json';

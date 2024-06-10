@@ -17,19 +17,23 @@ VALUES ('Amsterdam', 1), ('London', 2);
 Generate two rows as part of a `FROM` clause, and rename the columns:
 
 ```sql
-SELECT * FROM (VALUES ('Amsterdam', 1), ('London', 2)) Cities(Name, Id);
+SELECT *
+FROM (VALUES ('Amsterdam', 1), ('London', 2)) cities(name, id);
 ```
 
 Generate two rows and insert them into a table:
 
 ```sql
-INSERT INTO Cities VALUES ('Amsterdam', 1), ('London', 2);
+INSERT INTO cities
+VALUES ('Amsterdam', 1), ('London', 2);
 ```
 
 Create a table directly from a `VALUES` clause:
 
 ```sql
-CREATE TABLE Cities AS SELECT * FROM (VALUES ('Amsterdam', 1), ('London', 2)) Cities(Name, Id);
+CREATE TABLE cities AS
+    SELECT *
+    FROM (VALUES ('Amsterdam', 1), ('London', 2)) cities(name, id);
 ```
 
 ## Syntax

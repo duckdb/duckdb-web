@@ -52,23 +52,67 @@ duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
 DuckDB can directly query Pandas DataFrames, Polars DataFrames and Arrow tables.
 Note that these are read-only, i.e., editing these tables via [`INSERT`](../../sql/statements/insert) or [`UPDATE` statements](../../sql/statements/update) is not possible.
 
+#### Pandas
+
+To directly query a Pandas DataFrame, run:
+
 ```python
 import duckdb
-
-# directly query a Pandas DataFrame
 import pandas as pd
+
 pandas_df = pd.DataFrame({"a": [42]})
 duckdb.sql("SELECT * FROM pandas_df")
+```
 
-# directly query a Polars DataFrame
+```text
+┌───────┐
+│   a   │
+│ int64 │
+├───────┤
+│    42 │
+└───────┘
+```
+
+#### Polars
+
+To directly query a Polars DataFrame, run:
+
+```python
+import duckdb
 import polars as pl
+
 polars_df = pl.DataFrame({"a": [42]})
 duckdb.sql("SELECT * FROM polars_df")
+```
 
-# directly query a pyarrow table
+```text
+┌───────┐
+│   a   │
+│ int64 │
+├───────┤
+│    42 │
+└───────┘
+```
+
+#### PyArrow
+
+To directly query a PyArrow table, run:
+
+```python
+import duckdb
 import pyarrow as pa
+
 arrow_table = pa.Table.from_pydict({"a": [42]})
 duckdb.sql("SELECT * FROM arrow_table")
+```
+
+```text
+┌───────┐
+│   a   │
+│ int64 │
+├───────┤
+│    42 │
+└───────┘
 ```
 
 ## Result Conversion

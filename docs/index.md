@@ -3,10 +3,15 @@ layout: docu
 title: Documentation
 ---
 
-Welcome to the DuckDB Documentation!
+Welcome to the DuckDB documentation!
 
-Feel free to grab a <a href="{{ site.baseurl }}/duckdb-docs.pdf">PDF copy</a> of the documentation for offline reference.
+## Offline Copy
 
-<h1>Sitemap</h1>
+You can browse the DuckDB documentation offline:
+
+* As a <a href="/duckdb-docs.pdf">single-file PDF</a> (approx. 4 MB)
+* As a <a href="/duckdb-docs.zip">website packaged in a single ZIP file</a> (approx. 50 MB). To browse the website locally, decompress the package, run `python -m http.server` in the `duckdb-docs` directory, and connect to <http://localhost:8000/>.
+
+## Sitemap
 
 <div id="docusitemaphere"></div>
