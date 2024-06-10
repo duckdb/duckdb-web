@@ -27,7 +27,7 @@ Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [H
 COPY
     (FROM generate_series(10_000_000))
     TO 'test.parquet'
-    (FORMAT PARQUET, PER_THREAD_OUTPUT true);
+    (FORMAT PARQUET, PER_THREAD_OUTPUT);
 ```
 
 ### Selecting a `ROW_GROUP_SIZE`
