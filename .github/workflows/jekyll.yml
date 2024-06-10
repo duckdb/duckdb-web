@@ -59,7 +59,7 @@ jobs:
         run: |
           # create a copy of the _site directory for the offline package
           cp -r _site duckdb-docs
-          echo "To browse the DuckDB website locally, run `python -m http.server` in this directory and connect to http://localhost:8000/" > duckdb-docs/README.md
+          echo "To browse the DuckDB website locally, run \`python -m http.server\` in this directory and connect to http://localhost:8000/" > duckdb-docs/README.md
           # cleanup some directories, including the old (archive) pages
           rm -rf scripts single-file-document duckdb-docs/docs/archive
           # create archive
