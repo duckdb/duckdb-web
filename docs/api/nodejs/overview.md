@@ -51,7 +51,7 @@ db.all('SELECT 42 AS fortytwo', function(err, res) {
 Other available methods are `each`, where the callback is invoked for each row, `run` to execute a single statement without results and `exec`, which can execute several SQL commands at once but also does not return results. All those commands can work with prepared statements, taking the values for the parameters as additional arguments. For example like so:
 
 ```js
-db.all('SELECT ?::INTEGER AS fortytwo, ?::STRING AS hello', 42, 'Hello, World', function(err, res) {
+db.all('SELECT ?::INTEGER AS fortytwo, ?::VARCHAR AS hello', 42, 'Hello, World', function(err, res) {
   if (err) {
     console.warn(err);
     return;
