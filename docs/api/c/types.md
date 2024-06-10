@@ -708,7 +708,7 @@ The logical type.
 ### `duckdb_create_array_type`
 
 ---
-Creates a array type from its child type.
+Creates an array type from its child type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
