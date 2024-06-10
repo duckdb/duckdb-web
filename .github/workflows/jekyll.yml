@@ -57,11 +57,14 @@ jobs:
           JEKYLL_ENV: production
       - name: Zip _site directory
         run: |
-          # swap names
+          # change name of the _site directory and add new README
           mv _site duckdb-docs
+          cp duckdb-docs/README.md duckdb-docs/README-repository.md
+          echo "To browse the DuckDB website locally, run `python -m http.server` in this directory and connect to http://localhost:8000/" >> README.md
           # create archive
           zip -qq -r duckdb-docs.zip duckdb-docs
-          # swap names back
+          # restore README and swap names back
+          mv duckdb-docs/README-repository.md duckdb-docs/README.md
           mv duckdb-docs _site
           # place the zip into the site
           mv duckdb-docs.zip _site
