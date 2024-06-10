@@ -44,8 +44,11 @@ Below is a summary of those new features with examples, starting with a change i
 
 ```sql
 SELECT substring(42, 1, 1) AS substr;
--- No function matches the given name and argument types 'substring(...)'.
--- You might need to add explicit type casts.
+```
+
+```console
+No function matches the given name and argument types 'substring(...)'.
+You might need to add explicit type casts.
 ```
 
 To use an explicit cast, run:
@@ -101,19 +104,23 @@ FROM (VALUES (DATE '1992-01-01')) t(d);
 ```
 
 ```sql
-SELECT d > '1992-01-01'::VARCHAR
+SELECT d > '1992-01-01'::VARCHAR AS result
 FROM (VALUES (DATE '1992-01-01')) t(d);
--- Binder Error: Cannot compare values of type DATE and type VARCHAR –
--- an explicit cast is required
+```
+
+```console
+Binder Error: Cannot compare values of type DATE and type VARCHAR –
+an explicit cast is required
 ```
 
 ## Backward Compatibility
 
 Backward compatibility refers to the ability of a newer DuckDB version to read storage files created by an older DuckDB version. This release is the first release of DuckDB that supports backward compatibility in the storage format. DuckDB v0.10 can read and operate on files created by the previous DuckDB version – DuckDB v0.9. [This is made possible by the implementation of a new serialization framework](https://github.com/duckdb/duckdb/pull/8156).
 
+Write with v0.9:
+
 ```bash
-# write with v0.9
-$ duckdb_092 v092.db
+duckdb_092 v092.db
 ```
 
 ```sql
@@ -121,9 +128,10 @@ CREATE TABLE lineitem AS
 FROM lineitem.parquet;
 ```
 
+Read with v0.10:
+
 ```bash
-# read with v0.10
-$ duckdb_0100 v092.db
+duckdb_0100 v092.db
 ```
 
 ```sql
@@ -146,9 +154,10 @@ For future DuckDB versions, our goal is to ensure that any DuckDB version releas
 
 Forward compatibility refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB v0.9 is **partially** forward compatible with DuckDB v0.10. Certain files created by DuckDB v0.10 can be read by DuckDB v0.9.
 
+Write with v0.10:
+
 ```bash
-# write with v0.10
-$ duckdb_0100 v010.db
+duckdb_0100 v010.db
 ```
 
 ```sql
@@ -156,9 +165,10 @@ CREATE TABLE lineitem AS
 FROM lineitem.parquet;
 ```
 
+Read with v0.9:
+
 ```bash
-# read with v0.9
-$ duckdb_092 v010.db
+duckdb_092 v010.db
 ```
 
 ```sql
