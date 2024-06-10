@@ -84,13 +84,13 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 
 <div id="rrdiagram4"></div>
 
-[The `FROM` clause](../../sql/query_syntax/from) specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together, or another `SELECT` query inside a subquery node.
+The [`FROM` clause](../../sql/query_syntax/from) specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together, or another `SELECT` query inside a subquery node.
 
 ## `SAMPLE` Clause
 
 <div id="rrdiagram10"></div>
 
-[The `SAMPLE` clause](../../sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the where clause or any aggregates). See the [sample](../../sql/samples) page for more information.
+[The `SAMPLE` clause](../../sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The `SAMPLE` clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the where clause or any aggregates). See the [Samples](../../sql/samples) page for more information.
 
 ## `WHERE` Clause
 
@@ -136,7 +136,7 @@ The `LIMIT` clause restricts the amount of rows fetched, while the `OFFSET` clau
 For each table, the [`rowid` pseudocolumn](https://docs.oracle.com/cd/B19306_01/server.102/b14200/pseudocolumns008.htm) returns the row identifiers based on the physical storage.
 
 ```sql
-CREATE TABLE t (id INTEGER, content STRING);
+CREATE TABLE t (id INTEGER, content VARCHAR);
 INSERT INTO t VALUES (42, 'hello'), (43, 'world');
 SELECT rowid, id, content FROM t;
 ```
