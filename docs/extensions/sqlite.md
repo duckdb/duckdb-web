@@ -10,7 +10,7 @@ The SQLite extension allows DuckDB to directly read and write data from a SQLite
 
 ## Installing and Loading
 
-The `sqlite` extension will be transparently [autoloaded](/docs/extensions/overview#autoloading-extensions) on first use from the official extension repository.
+The `sqlite` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql

@@ -8,7 +8,7 @@ Full-Text Search is an extension to DuckDB that allows for search through string
 
 ## Installing and Loading
 
-The `fts` extension will be transparently [autoloaded](/docs/extensions/overview#autoloading-extensions) on first use from the official extension repository.
+The `fts` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql

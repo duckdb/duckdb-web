@@ -10,7 +10,7 @@ The `delta` extension adds support for the [Delta Lake open-source storage forma
 
 ## Installing and Loading
 
-The `delta` extension will be transparently [autoloaded](/docs/extensions/overview#autoloading-extensions) on first use from the official extension repository.
+The `delta` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql
