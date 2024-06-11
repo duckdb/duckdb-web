@@ -11,7 +11,7 @@ Excel files can be currently handled through the [`spatial` extension](spatial):
 
 ## Installing and Loading
 
-The `excel` extension will be transparently autoloaded on first use from the official extension repository.
+The `excel` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql

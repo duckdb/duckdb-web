@@ -8,7 +8,8 @@ The `icu` extension contains an easy-to-use version of the collation/timezone pa
 
 ## Installing and Loading
 
-To install and load the `icu` extension, run:
+The `icu` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL icu;

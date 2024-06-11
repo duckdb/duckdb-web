@@ -8,7 +8,8 @@ The `azure` extension is a loadable extension that adds a filesystem abstraction
 
 ## Installing and Loading
 
-To install and load the `azure` extension, run:
+The `azure` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL azure;

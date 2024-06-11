@@ -8,7 +8,8 @@ The `inet` extension defines the `INET` data type for storing [IPv4](https://en.
 
 ## Installing and Loading
 
-The `inet` extension will typically automatically load on first use, but to explicitly install and load the extension, run:
+The `inet` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL inet;

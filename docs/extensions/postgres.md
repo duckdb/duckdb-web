@@ -11,15 +11,11 @@ The `postgres` extension allows DuckDB to directly read and write data from a ru
 
 ## Installing and Loading
 
-To install the `postgres` extension, run:
+The `postgres` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL postgres;
-```
-
-The extension is loaded automatically upon first use. If you prefer to load it manually, run:
-
-```sql
 LOAD postgres;
 ```
 
