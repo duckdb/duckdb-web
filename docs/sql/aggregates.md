@@ -586,7 +586,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 <div class="nostroke_table"></div>
 
 | **Description** | The population variance, which does not include bias correction. |
-| **Formula** | `(sum(x^2) - sum(x)^2 / count(x)) / count(x)`, `covar_samp(y, x) * (1 - 1 / count(x))` |
+| **Formula** | `(sum(x^2) - sum(x)^2 / count(x)) / count(x)`, `var_samp(y, x) * (1 - 1 / count(x))` |
 | **Alias(es)** | - |
 
 ### `var_samp(x)`
@@ -594,7 +594,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 <div class="nostroke_table"></div>
 
 | **Description** | The sample variance, which includes Bessel's bias correction. |
-| **Formula** | `(sum(x^2) - sum(x)^2 / count(x)) / (count(x) - 1)`, `covar_pop(y, x) / (1 - 1 / count(x))` |
+| **Formula** | `(sum(x^2) - sum(x)^2 / count(x)) / (count(x) - 1)`, `var_pop(y, x) / (1 - 1 / count(x))` |
 | **Alias(es)** | `variance(arg, val)` |
 
 ## Ordered Set Aggregate Functions
