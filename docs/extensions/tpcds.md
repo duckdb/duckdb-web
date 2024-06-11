@@ -8,7 +8,7 @@ The `tpcds` extension implements the data generator and queries for the [TPC-DS 
 
 ## Installing and Loading
 
-The `tpcds` extension will be transparently autoloaded on first use from the official extension repository.
+The `tpcds` extension will be transparentlyg [autoloaded](/docs/extensions/overview#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql

@@ -10,7 +10,8 @@ The `delta` extension adds support for the [Delta Lake open-source storage forma
 
 ## Installing and Loading
 
-The `delta` extension is installed and loaded automatically upon first use. If you prefer to install and load it manually, run:
+The `delta` extension will be transparently [autoloaded](/docs/extensions/overview#autoloading-extensions) on first use from the official extension repository.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL delta;
