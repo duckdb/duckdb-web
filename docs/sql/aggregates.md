@@ -366,41 +366,42 @@ The table below shows the available approximate aggregate functions.
 
 ## Statistical Aggregates
 
-The table below shows the available statistical aggregate functions.
+The table below shows the available statistical aggregate functions. 
+They all ignore `NULL` values (in the case of a single input column `x`), or pairs where either input is `NULL` (in the case of two input columns `y` and `x`).
 
 | Function | Description |
 |:--|:--------|
-| [`corr(y, x)`](#corry-x) | Returns the correlation coefficient for non-null pairs in a group. |
-| [`covar_pop(y, x)`](#covar_popy-x) | Returns the population covariance of input values. |
-| [`covar_samp(y, x)`](#covar_sampy-x) | Returns the sample covariance for non-null pairs in a group. |
-| [`entropy(x)`](#entropyx) | Returns the log-2 entropy of count input-values. |
-| [`kurtosis_pop(x)`](#kurtosis_popx) | Returns the excess kurtosis (Fisher's definition) of all input values. Bias correction is not applied. |
-| [`kurtosis(x)`](#kurtosisx) | Returns the excess kurtosis (Fisher's definition) of all input values, with a bias correction according to the sample size. |
-| [`mad(x)`](#madx) | Returns the median absolute deviation for the values within x. NULL values are ignored. Temporal types return a positive `INTERVAL`. |
-| [`median(x)`](#medianx) | Returns the middle value of the set. NULL values are ignored. For even value counts, quantitative values are averaged and ordinal values return the lower value. |
-| [`mode(x)`](#modex)| Returns the most frequent value for the values within x. NULL values are ignored. |
-| [`quantile_cont(x, pos)`](#quantile_contx-pos) | Returns the interpolated `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `pos * (n_nonnull_values - 1)`th (zero-indexed) element (or an interpolation between the adjacent elements if the index is not an integer). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding interpolated quantiles. |
-| [`quantile_disc(x, pos)`](#quantile_discx-pos) | Returns the discrete `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `floor(pos * (n_nonnull_values - 1))`th (zero-indexed) element. If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. |
-| [`regr_avgx(y, x)`](#regr_avgxy-x) | Returns the average of the independent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. |
-| [`regr_avgy(y, x)`](#regr_avgyy-x) | Returns the average of the dependent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. |
-| [`regr_count(y, x)`](#regr_county-x) | Returns the number of non-null number pairs in a group. |
-| [`regr_intercept(y, x)`](#regr_intercepty-x) | Returns the intercept of the univariate linear regression line for non-null pairs in a group. |
-| [`regr_r2(y, x)`](#regr_r2y-x) | Returns the coefficient of determination for non-null pairs in a group. |
-| [`regr_slope(y, x)`](#regr_slopey-x) | Returns the slope of the linear regression line for non-null pairs in a group. |
-| [`regr_sxx(y, x)`](#regr_sxxy-x) | - |
-| [`regr_sxy(y, x)`](#regr_sxyy-x) | Returns the population covariance of input values. |
-| [`regr_syy(y, x)`](#regr_syyy-x) | - |
-| [`skewness(x)`](#skewnessx) | Returns the skewness of all input values. |
-| [`stddev_pop(x)`](#stddev_popx) | Returns the population standard deviation. |
-| [`stddev_samp(x)`](#stddev_sampx) | Returns the sample standard deviation. |
-| [`var_pop(x)`](#var_popx) | Returns the population variance. |
-| [`var_samp(x)`](#var_sampx) | Returns the sample variance of all input values. |
+| [`corr(y, x)`](#corry-x) | The correlation coefficient. |
+| [`covar_pop(y, x)`](#covar_popy-x) | The population covariance, which does not include bias correction. |
+| [`covar_samp(y, x)`](#covar_sampy-x) | The sample covariance, which includes Bessel's bias correction. |
+| [`entropy(x)`](#entropyx) | The log-2 entropy. |
+| [`kurtosis_pop(x)`](#kurtosis_popx) | The excess kurtosis (Fisher’s definition) without bias correction. |
+| [`kurtosis(x)`](#kurtosisx) | The excess kurtosis (Fisher's definition) with bias correction according to the sample size. |
+| [`mad(x)`](#madx) | The median absolute deviation. Temporal types return a positive `INTERVAL`. |
+| [`median(x)`](#medianx) | The middle value of the set. For even value counts, quantitative values are averaged and ordinal values return the lower value. |
+| [`mode(x)`](#modex)| The most frequent value. |
+| [`quantile_cont(x, pos)`](#quantile_contx-pos) | The interpolated `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `pos * (n_nonnull_values - 1)`th (zero-indexed) element (or an interpolation between the adjacent elements if the index is not an integer). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding interpolated quantiles. |
+| [`quantile_disc(x, pos)`](#quantile_discx-pos) | The discrete `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `floor(pos * (n_nonnull_values - 1))`th (zero-indexed) element. If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. |
+| [`regr_avgx(y, x)`](#regr_avgxy-x) | The average of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| [`regr_avgy(y, x)`](#regr_avgyy-x) | The average of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| [`regr_count(y, x)`](#regr_county-x) | The number of non-`NULL` pairs. |
+| [`regr_intercept(y, x)`](#regr_intercepty-x) | The intercept of the univariate linear regression line, where x is the independent variable and y is the dependent variable. |
+| [`regr_r2(y, x)`](#regr_r2y-x) | The coefficient of determination, where x is the independent variable and y is the dependent variable. |
+| [`regr_slope(y, x)`](#regr_slopey-x) | The slope of the linear regression line, where x is the independent variable and y is the dependent variable. |
+| [`regr_sxx(y, x)`](#regr_sxxy-x) | The sample variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| [`regr_sxy(y, x)`](#regr_sxyy-x) | The sample covariance, which includes Bessel's bias correction. |
+| [`regr_syy(y, x)`](#regr_syyy-x) | The sample variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs , where x is the independent variable and y is the dependent variable. |
+| [`skewness(x)`](#skewnessx) | The skewness. |
+| [`stddev_pop(x)`](#stddev_popx) | The population standard deviation. |
+| [`stddev_samp(x)`](#stddev_sampx) | The sample standard deviation. |
+| [`var_pop(x)`](#var_popx) | The population variance, which does not include bias correction. |
+| [`var_samp(x)`](#var_sampx) | The sample variance, which includes Bessel's bias correction. |
 
 ### `corr(y, x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the correlation coefficient for non-`NULL` pairs in a group.
+| **Description** | The correlation coefficient.
 | **Formula** | `covar_pop(y, x) / (stddev_pop(x) * stddev_pop(y))` |
 | **Alias(es)** | - |
 
@@ -408,23 +409,23 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the population covariance of input values. |
-| **Formula** | `(sum(x*y) - sum(x) * sum(y) / count(*)) / count(*)` |
+| **Description** | The population covariance, which does not include bias correction. |
+| **Formula** | `(sum(x*y) - sum(x) * sum(y) / regr_count(y, x)) / regr_count(y, x)`, `covar_samp(y, x) * (1 - 1 / regr_count(y, x))` |
 | **Alias(es)** | - |
 
 ### `covar_samp(y, x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the sample covariance for non-`NULL` pairs in a group. |
-| **Formula** | `(sum(x*y) - sum(x) * sum(y) / count(*)) / (count(*) - 1)` |
-| **Alias(es)** | - |
+| **Description** | The sample covariance, which includes Bessel's bias correction. |
+| **Formula** | `(sum(x*y) - sum(x) * sum(y) / regr_count(y, x)) / (regr_count(y, x) - 1)`, `covar_pop(y, x) / (1 - 1 / regr_count(y, x))` |
+| **Alias(es)** | `regr_sxy(y, x)` |
 
 ### `entropy(x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the log-2 entropy of count input-values. |
+| **Description** | The log-2 entropy. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -432,7 +433,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the excess kurtosis (Fisher's definition) of all input values. Bias correction is not applied. |
+| **Description** | The excess kurtosis (Fisher’s definition) without bias correction. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -440,7 +441,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the excess kurtosis (Fisher's definition) of all input values, with a bias correction according to the sample size. |
+| **Description** | The excess kurtosis (Fisher's definition) with bias correction according to the sample size. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -448,7 +449,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the median absolute deviation for the values within x. `NULL` values are ignored. Temporal types return a positive `INTERVAL`. |
+| **Description** | The median absolute deviation. Temporal types return a positive `INTERVAL`. |
 | **Formula** | `median(abs(x - median(x)))` |
 | **Alias(es)** | - |
 
@@ -456,7 +457,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the middle value of the set. `NULL` values are ignored. For even value counts, quantitative values are averaged and ordinal values return the lower value. |
+| **Description** | The middle value of the set. For even value counts, quantitative values are averaged and ordinal values return the lower value. |
 | **Formula** | `quantile_cont(x, 0.5)` |
 | **Alias(es)** | - |
 
@@ -464,7 +465,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the most frequent value for the values within x. `NULL` values are ignored. |
+| **Description** | The most frequent value. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -472,7 +473,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the interpolated `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `pos * (n_nonnull_values - 1)`th (zero-indexed) element (or an interpolation between the adjacent elements if the index is not an integer). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding interpolated quantiles. |
+| **Description** | The interpolated `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `pos * (n_nonnull_values - 1)`th (zero-indexed) element (or an interpolation between the adjacent elements if the index is not an integer). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding interpolated quantiles. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -480,7 +481,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the discrete `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `floor(pos * (n_nonnull_values - 1))`th (zero-indexed) element. If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. |
+| **Description** | The discrete `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `floor(pos * (n_nonnull_values - 1))`th (zero-indexed) element. If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. |
 | **Formula** | - |
 | **Alias(es)** | `quantile` |
 
@@ -488,7 +489,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the average of the independent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. |
+| **Description** | The average of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -496,7 +497,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the average of the dependent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. |
+| **Description** | The average of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -504,23 +505,23 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the number of non-null number pairs in a group. |
-| **Formula** | `(sum(x*y) - sum(x) * sum(y) / count(*)) / count(*)` |
+| **Description** | The number of non-`NULL` pairs. |
+| **Formula** | - |
 | **Alias(es)** | - |
 
 ### `regr_intercept(y, x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the intercept of the univariate linear regression line for non-null pairs in a group. |
-| **Formula** | `avg(y) - regr_slope(y, x) * avg(x)` |
+| **Description** | The intercept of the univariate linear regression line, where x is the independent variable and y is the dependent variable. |
+| **Formula** | `regr_avgy(y, x) - regr_slope(y, x) * regr_avgx(y, x)` |
 | **Alias(es)** | - |
 
 ### `regr_r2(y, x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the coefficient of determination for non-null pairs in a group. |
+| **Description** | The coefficient of determination, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -528,39 +529,39 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the slope of the linear regression line for non-null pairs in a group. |
-| **Formula** | `covar_pop(x, y) / var_pop(x)` |
+| **Description** | Returns the slope of the linear regression line, where x is the independent variable and y is the dependent variable. |
+| **Formula** | `regr_sxy(y, x) / regr_sxx(y, x)` |
 | **Alias(es)** | - |
 
 ### `regr_sxx(y, x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | - |
-| **Formula** | `regr_count(y, x) * var_pop(x)` |
+| **Description** | The sample variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| **Formula** | - |
 | **Alias(es)** | - |
 
 ### `regr_sxy(y, x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the population covariance of input values. |
-| **Formula** | `regr_count(y, x) * covar_pop(y, x)` |
+| **Description** | The sample covariance, which includes Bessel's bias correction. |
+| **Formula** | - |
 | **Alias(es)** | - |
 
 ### `regr_syy(y, x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | - |
-| **Formula** | `regr_count(y, x) * var_pop(y)` |
+| **Description** | The sample variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| **Formula** | - |
 | **Alias(es)** | - |
 
 ### `skewness(x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the skewness of all input values. |
+| **Description** | The skewness. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -568,7 +569,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the population standard deviation. |
+| **Description** | The population standard deviation. |
 | **Formula** | `sqrt(var_pop(x))` |
 | **Alias(es)** | - |
 
@@ -576,7 +577,7 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the sample standard deviation. |
+| **Description** | The sample standard deviation. |
 | **Formula** | `sqrt(var_samp(x))`|
 | **Alias(es)** | `stddev(x)`|
 
@@ -584,16 +585,16 @@ The table below shows the available statistical aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the population variance. |
-| **Formula** | - |
+| **Description** | The population variance, which does not include bias correction. |
+| **Formula** | `(sum(x^2) - sum(x)^2 / count(x)) / count(x)`, `covar_samp(y, x) * (1 - 1 / count(x))` |
 | **Alias(es)** | - |
 
 ### `var_samp(x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the sample variance of all input values. |
-| **Formula** | `(sum(x^2) - sum(x)^2 / count(x)) / (count(x) - 1)` |
+| **Description** | The sample variance, which includes Bessel's bias correction. |
+| **Formula** | `(sum(x^2) - sum(x)^2 / count(x)) / (count(x) - 1)`, `covar_pop(y, x) / (1 - 1 / count(x))` |
 | **Alias(es)** | `variance(arg, val)` |
 
 ## Ordered Set Aggregate Functions
