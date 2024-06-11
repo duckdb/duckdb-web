@@ -6,7 +6,7 @@ redirect_from:
   - /docs/sql/pragmas/
 ---
 
-The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
+The `PRAGMA` statement is a SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
 
 `PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement](../sql/statements/set) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
 
