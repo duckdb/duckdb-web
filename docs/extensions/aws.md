@@ -35,11 +35,10 @@ whenever you use DuckDB's S3 Secret functionality.
 
 See the [httpfs extension's S3 capabilities](httpfs/overview#s3) for instructions.
 
-
 ## Legacy Features
 
 Prior to version 0.10.0, DuckDB did not have a [Secrets manager](../../sql/statements/create_secret), to load the credentials automatically, the AWS extension provided
-a special function to load the AWS credentials in the [legacy authentication method](/docs/extensions/httpfs/s3api_legacy_authentication.md). 
+a special function to load the AWS credentials in the [legacy authentication method](/docs/extensions/httpfs/s3api_legacy_authentication).
 
 | Function | Type | Description |
 |---|---|-------|
