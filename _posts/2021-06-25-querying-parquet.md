@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Querying Parquet with Precision using DuckDB"
+title: "Querying Parquet with Precision using DuckDB"
 author: Hannes Mühleisen and Mark Raasveldt
 excerpt: DuckDB, a free and open source analytical data management system, can run SQL queries directly on Parquet files and automatically take advantage of the advanced features of the Parquet format.
 ---

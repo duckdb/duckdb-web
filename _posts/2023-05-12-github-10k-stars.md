@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "10 000 Stars on GitHub"
+title: "10 000 Stars on GitHub"
 author: Mark Raasveldt and Hannes Mühleisen
 excerpt: ""
 ---

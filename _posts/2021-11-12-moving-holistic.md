@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Fast Moving Holistic Aggregates"
+title: "Fast Moving Holistic Aggregates"
 author: Richard Wesley
 excerpt: DuckDB, a free and Open-Source analytical data management system, has a windowing API that can compute complex moving aggregates like interquartile ranges and median absolute deviation much faster than the conventional approaches.
 ---

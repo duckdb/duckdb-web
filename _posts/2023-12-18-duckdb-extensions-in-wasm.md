@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Extensions for DuckDB-Wasm"
+title: "Extensions for DuckDB-Wasm"
 author: Carlo Piovesan
 thumb: "/images/blog/thumbs/231218.png"
 excerpt: DuckDB-Wasm users can now load DuckDB extensions, allowing them to run extensions in the browser.

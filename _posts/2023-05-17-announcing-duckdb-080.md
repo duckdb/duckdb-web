@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Announcing DuckDB 0.8.0"
+title: "Announcing DuckDB 0.8.0"
 author: Mark Raasveldt and Hannes Mühleisen
 excerpt: ""
 ---
