@@ -13,12 +13,12 @@ The table below shows the available mathematical operators for `DATE` types.
 
 | Operator | Description | Example | Result |
 |:-|:--|:---|:--|
-| `+` | addition of days (integers) | `DATE '1992-03-22' + 5` | `1992-03-27` |
-| `+` | addition of an `INTERVAL` | `DATE '1992-03-22' + INTERVAL 5 DAY` | `1992-03-27` |
-| `+` | addition of a variable `INTERVAL` | `SELECT DATE '1992-03-22' + INTERVAL (d.days) DAY FROM (VALUES (5), (11)) AS d(days)` | `1992-03-27` and `1992-04-02` |
-| `-` | subtraction of `DATE`s | `DATE '1992-03-27' - DATE '1992-03-22'` | `5` |
-| `-` | subtraction of an `INTERVAL` | `DATE '1992-03-27' - INTERVAL 5 DAY` | `1992-03-22` |
-| `-` | subtraction of a variable `INTERVAL` | `SELECT DATE '1992-03-27' - INTERVAL (d.days) DAY FROM (VALUES (5), (11)) AS d(days)` | `1992-03-22` and `1992-03-16` |
+| `+` | Addition of days (integers) | `DATE '1992-03-22' + 5` | `1992-03-27` |
+| `+` | Addition of an `INTERVAL` | `DATE '1992-03-22' + INTERVAL 5 DAY` | `1992-03-27` |
+| `+` | Addition of a variable `INTERVAL` | `SELECT DATE '1992-03-22' + INTERVAL (d.days) DAY FROM (VALUES (5), (11)) AS d(days)` | `1992-03-27` and `1992-04-02` |
+| `-` | Subtraction of `DATE`s | `DATE '1992-03-27' - DATE '1992-03-22'` | `5` |
+| `-` | Subtraction of an `INTERVAL` | `DATE '1992-03-27' - INTERVAL 5 DAY` | `1992-03-22` |
+| `-` | Subtraction of a variable `INTERVAL` | `SELECT DATE '1992-03-27' - INTERVAL (d.days) DAY FROM (VALUES (5), (11)) AS d(days)` | `1992-03-22` and `1992-03-16` |
 
 Adding to or subtracting from [infinite values](../../sql/data_types/date#special-values) produces the same infinite value.
 
