@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Lightweight Compression in DuckDB"
+title: "Lightweight Compression in DuckDB"
 author: Mark Raasveldt
 excerpt: DuckDB supports efficient lightweight compression that is automatically used to keep data size down without incurring high costs for compression and decompression.
 ---
