@@ -5,9 +5,9 @@ title: Date Format Functions
 
 The `strftime` and `strptime` functions can be used to convert between dates/timestamps and strings. This is often required when parsing CSV files, displaying output to the user or transferring information between programs. Because there are many possible date representations, these functions accept a format string that describes how the date or timestamp should be structured.
 
-## strftime Examples
+## `strftime` Examples
 
-`strftime(timestamp, format)` converts timestamps or dates to strings according to the specified pattern.
+The [`strftime(timestamp, format)`](timestamp#strftimetimestamp-format) converts timestamps or dates to strings according to the specified pattern.
 
 ```sql
 SELECT strftime(DATE '1992-03-02', '%d/%m/%Y');
@@ -25,9 +25,9 @@ SELECT strftime(TIMESTAMP '1992-03-02 20:32:45', '%A, %-d %B %Y - %I:%M:%S %p');
 Monday, 2 March 1992 - 08:32:45 PM
 ```
 
-## strptime Examples
+## `strptime` Examples
 
-`strptime(string, format)` converts strings to timestamps according to the specified pattern.
+The [`strptime(text, format)` function](timestamp#strptimetext-format) converts strings to timestamps according to the specified pattern.
 
 ```sql
 SELECT strptime('02/03/1992', '%d/%m/%Y');
@@ -43,6 +43,25 @@ SELECT strptime('Monday, 2 March 1992 - 08:32:45 PM', '%A, %-d %B %Y - %I:%M:%S 
 
 ```text
 1992-03-02 20:32:45
+```
+
+The `strptime` function throws an error on failure:
+
+```sql
+SELECT strptime('02/50/1992', '%d/%m/%Y') AS x;
+```
+
+```console
+Invalid Input Error: Could not parse string "02/50/1992" according to format specifier "%d/%m/%Y"
+02/50/1992
+   ^
+Error: Month out of range, expected a value between 1 and 12
+```
+
+To return `NULL` on failure, use the [`try_strptime` function](timestamp#try_strptimetext-format):
+
+```text
+NULL
 ```
 
 ## CSV Parsing
