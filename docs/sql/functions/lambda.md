@@ -144,11 +144,11 @@ SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
 _Transforming strings:_
 
 ```sql
-SELECT list_transform(['duck', 'a', 'b'], s -> concat(s, 'DB'));
+SELECT list_transform(['Duck', 'Goose', 'Sparrow'], s -> concat(s, 'DB'));
 ```
 
 ```text
-[duckDB, aDB, bDB]
+[DuckDB, GooseDB, SparrowDB]
 ```
 
 _Combining lambda functions with other functions:_
