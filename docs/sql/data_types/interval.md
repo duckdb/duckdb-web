@@ -66,7 +66,7 @@ For example,
 SELECT
 datepart('decade', INTERVAL 12 YEARS) -- returns 1
 datepart('second', INTERVAL 1234 MILLISECONDS) -- returns 1 
-``
+```
 
 ## Arithmetic with timestamps, dates, and intervals
 
