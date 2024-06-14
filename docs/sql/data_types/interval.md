@@ -14,8 +14,8 @@ blurb: Intervals represent a period of time measured in months, days, microsecon
 | `INTERVAL` | Period of time |
 
 An `INTERVAL` can be constructed by providing amounts together with units. 
-Units that aren't *months*, *days*, or *milliseconds* are converted to equivalent amounts in the next smaller of these three basis units. 
-Conversely, units aren't ever converted to the next larger basis unit; for example, no amount of days is ever converted to months. 
+Units that aren't *months*, *days*, or *microseconds* are converted to equivalent amounts in the next smaller of these three basis units. 
+Conversely, units aren't ever converted to the next larger basis unit; for example, no amount of days is ever converted to months and no amount of hours (really, microseconds) is converted to days.
 
 ```sql
 SELECT
@@ -27,7 +27,7 @@ SELECT
 ;
 ```
 
-> Warning  If a decimal value is specified, it will be automatically rounded to an integer.
+> Warning  If a decimal value is specified, it is automatically rounded to an integer.
 > ```sql
 > SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years = `to_years(CAST(1.5 AS INTEGER))`
 > ```
