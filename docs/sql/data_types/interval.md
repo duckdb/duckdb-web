@@ -25,11 +25,11 @@ SELECT
   '48:00:00'::INTERVAL, -- HH::MM::SS string supported; stored as (48 * 60 * 60 * 1e6 microseconds)
 ;
 ```
-> Warning Decimal values are rounded to integers.
+> Warning Decimal values can be used in strings but are rounded to integers.
 > ```sql
 > SELECT INTERVAL '1.5' YEARS; -- Returns 24 months; equivalent to `to_years(CAST(1.5 AS INTEGER))`
 > ```
-> For more precision, use a more granular unit; e.g. `18 MONTHS` instead of `1.5 YEARS`.
+> For more precision, use a more granular unit; e.g., `18 MONTHS` instead of `'1.5' YEARS`.
 
 Three basis units are necessary because a month does not correspond to a fixed amount of days (February has fewer days than March) and a day doesn't correspond to a fixed amount of microseconds.
 The division into components makes the `INTERVAL` class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
@@ -96,6 +96,16 @@ SELECT TIMESTAMP '2000-02-06 12:00:00' - TIMESTAMP '2000-01-01 11:00:00' AS diff
 >   datepart('day', TIMESTAMP '2020-01-02 00:00:00' - TIMESTAMP '2020-01-01 01:00:00'), -- 0
 > ;
 > ```
+
+## Equality and comparison
+
+For equality and ordering comparisons only, the month component is converted to 30 days and the day component is converted 24 * 60 * 60 * 1e6 microseconds.
+
+As a result, `INTERVAL`s can compare equal even when they are functionally different. 
+
+For example `INTERVAL 30 DAYS = INTERVAL 1 MONTH` but `DATE '2020-01-01' + INTERVAL 30 DAYS != DATE '2020-01-01' + INTERVAL 1 MONTH`.
+
+Equally, `INTERVAL '30 days 12 hours' > INTERVAL 1 MONTH` but `DATE '2020-01-01' + INTERVAL '30 days 12 hours' < DATE '2020-01-01' + INTERVAL 1 MONTH`.
 
 ## Functions
 
