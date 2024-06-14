@@ -13,7 +13,7 @@ blurb: Intervals represent a period of time measured in months, days, microsecon
 |:---|:---|
 | `INTERVAL` | Period of time |
 
-An `INTERVAL` can be constructed by providing amount together with units. 
+An `INTERVAL` can be constructed by providing amounts together with units. 
 Units that aren't *months*, *days*, or *milliseconds* are converted to equivalent amounts in the next smaller of these three basis units. 
 Conversely, units aren't ever converted to the next larger basis unit; for example, no amount of days is ever converted to months. 
 
