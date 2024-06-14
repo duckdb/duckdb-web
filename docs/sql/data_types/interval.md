@@ -86,15 +86,13 @@ SELECT TIMESTAMP '2000-02-06 12:00:00' - TIMESTAMP '2000-01-01 11:00:00' AS diff
 |------------------|
 | 36 days 01:00:00 |
 
-The `datediff` function can be used to obtain the difference between two dates for a specific unit.
-
-```sql
-SELECT datediff('month', TIMESTAMP '2000-01-01 11:00:00', TIMESTAMP '2000-02-01 12:00:00') AS diff;
-```
-
-| diff |
-|-----:|
-| 1    |
+> Warning Extracting components from the `INTERVAL` difference between two timestamps or dates is not the same as computing the number of partition boundaries between two timestamps or dates for a specific unit using the `datediff` function:
+> ```sql
+> SELECT
+>   datediff('day', TIMESTAMP '2020-01-01 01:00:00', TIMESTAMP '2020-01-02 00:00:00'), -- 1
+>   datepart('day', TIMESTAMP '2020-01-02 00:00:00' - TIMESTAMP '2020-01-01 01:00:00'), -- 0
+> ;
+> ```
 
 ## Functions
 
