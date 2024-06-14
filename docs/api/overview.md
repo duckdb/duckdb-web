@@ -25,5 +25,6 @@ There are also contributed third-party DuckDB wrappers, which currently do not h
 * [C#](https://github.com/Giorgi/DuckDB.NET) by [Giorgi](https://github.com/Giorgi)
 * [Common Lisp](https://github.com/ak-coram/cl-duckdb) by [ak-coram](https://github.com/ak-coram)
 * [Crystal](https://github.com/amauryt/crystal-duckdb) by [amauryt](https://github.com/amauryt)
+* [Elixir](https://github.com/AlexR2D2/duckdbex) by [AlexR2D2](https://github.com/AlexR2D2/duckdbex)
 * [Ruby](https://github.com/suketa/ruby-duckdb) by [suketa](https://github.com/suketa)
 * [Zig](https://github.com/karlseguin/zuckdb.zig) by [karlseguin](https://github.com/karlseguin)
