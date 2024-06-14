@@ -14,25 +14,22 @@ blurb: Intervals represent a period of time measured in months, days, microsecon
 | `INTERVAL` | Period of time |
 
 An `INTERVAL` can be constructed by providing amounts together with units. 
-Units that aren't *months*, *days*, or *microseconds* are converted to equivalent amounts in the next smaller of these three basis units. 
-Conversely, units aren't ever converted to the next larger basis unit; for example, no amount of days is ever converted to months and no amount of hours (really, microseconds) is converted to days.
+Units that aren't *months*, *days*, or *microseconds* are converted to equivalent amounts in the next smaller of these three basis units.
 
 ```sql
 SELECT
-  INTERVAL 1 YEAR, -- single unit using YEAR keyword
-  INTERVAL (random()) YEAR, -- parentheses necessary for variable amounts
-  INTERVAL '1 month 1 day', -- string type necessary for multiple units
-  '16 months'::INTERVAL, -- more than 12 months supported
-  '48:00:00'::INTERVAL, -- HH::MM::SS string supported. More than 24 hours supported and not converted to days.
+  INTERVAL 1 YEAR, -- single unit using YEAR keyword; stored as 12 months
+  INTERVAL (random() * 10) YEAR, -- parentheses necessary for variable amounts; stored as integer number of months
+  INTERVAL '1 month 1 day', -- string type necessary for multiple units; stored as (1 month, 1 day)
+  '16 months'::INTERVAL, -- string cast supported; stored as 16 months
+  '48:00:00'::INTERVAL, -- HH::MM::SS string supported; stored as (48 * 60 * 60 * 1e6 microseconds)
 ;
 ```
-
 > Warning Decimal values are rounded to integers.
 > ```sql
-> SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years = `to_years(CAST(1.5 AS INTEGER))`
+> SELECT INTERVAL '1.5' YEARS; -- Returns 24 months; equivalent to `to_years(CAST(1.5 AS INTEGER))`
 > ```
 > For more precision, use a more granular unit; e.g. `18 MONTHS` instead of `1.5 YEARS`.
-
 
 Three basis units are necessary because a month does not correspond to a fixed amount of days (February has fewer days than March) and a day doesn't correspond to a fixed amount of microseconds.
 The division into components makes the `INTERVAL` class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
@@ -46,14 +43,20 @@ When `INTERVAL`s are deconstructed via the `datepart` function, the *months* com
 
 ```sql
 SELECT
-period = list_reduce(
+  period = list_reduce(
     [INTERVAL (datepart(part, period) || part) for part in ['year', 'month', 'day', 'hour', 'minute', 'microsecond']],
     (i1, i2) -> i1 + i2
-) -- always true
-FROM (VALUES (INTERVAL (random() * 123456789) MILLISECONDS)) _(period)
+  ) -- always true
+FROM (
+  VALUES (
+    INTERVAL (random() * 123456789123) MILLISECONDS
+    + INTERVAL (random() * 12345) DAYS
+    + INTERVAL (random() * 12345) MONTHS
+  )
+) _(period);
 ```
 
-> Warning Note that the *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
+> Warning The *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
 
 Additionally, the rounded below integer amounts of centuries, decades, seconds, milliseconds in an `INTERVAL` can be extracted via the `datepart` function, but these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. 
 
