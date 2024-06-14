@@ -1,10 +1,12 @@
 ---
 layout: docu
 title: Interval Type
-blurb: An interval specifies a period of time measured in units of a specific date part like years, days, seconds, or others.
+blurb: Intervals represent a period of time measured in months, days, milliseconds, or a combination thereof.
 ---
 
-Intervals represent a period of time. This period can be measured in a specific unit or combination of units, for example years, days, or seconds. Intervals are generally used to *modify* timestamps or dates by either adding or subtracting them.
+Intervals represent a period of time and are stored in units of months, days, milliseconds, or a combination thereof. 
+Intervals are generally used to *modify* timestamps or dates by either adding or subtracting them.
+Three base units are necessary because months don't have a unique number of days and days don't have a unique number of milliseconds.
 
 <div class="narrow_table"></div>
 
@@ -12,7 +14,18 @@ Intervals represent a period of time. This period can be measured in a specific 
 |:---|:---|
 | `INTERVAL` | Period of time |
 
-An `INTERVAL` can be constructed by providing an amount together with a unit.
+An `INTERVAL` can be constructed by providing an amount together with a unit. Units that aren't months, days, or milliseconds are converted to equivalent amounts in the next lower unit of these three basis units. 
+
+Conversely, units aren't ever converted upwards, that is, no amount of days is ever converted to months. 
+Accordingly, when `INTERVAL`s are deconstructed into their constituent components via the `datepart` function, multiple components must be added to obtain the original interval. Additionally, the three basis components, are further split into years and months; days, hours, 
+
+Here, rather than returning zeros for all requested units that are not based units, duckdb guarantees that all returned parts add up to the original interval while using the largest units possible. 
+Specifically, the months component is 
+
+Here, non-zero values can be reported for non-base units, but only when exact conversion is possible. For example, 14 months can 
+
+> Warning 
+
 Intervals can be added or subtracted from `DATE` or `TIMESTAMP` values.
 
 ## Examples
