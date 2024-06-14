@@ -1,12 +1,11 @@
 ---
 layout: docu
 title: Interval Type
-blurb: Intervals represent a period of time measured in months, days, milliseconds, or a combination thereof.
+blurb: Intervals represent a period of time measured in months, days, microseconds, or a combination thereof.
 ---
 
-Intervals represent a period of time and are stored in units of months, days, milliseconds, or a combination thereof. 
-Intervals are generally used to *modify* timestamps or dates by either adding or subtracting them.
-Three base units are necessary because months don't have a unique number of days and days don't have a unique number of milliseconds.
+Intervals represent a period of time and are generally used to *modify* timestamps or dates by either adding them to or subtracting them from `DATE` or `TIMESTAMP` values.
+
 
 <div class="narrow_table"></div>
 
@@ -14,19 +13,22 @@ Three base units are necessary because months don't have a unique number of days
 |:---|:---|
 | `INTERVAL` | Period of time |
 
-An `INTERVAL` can be constructed by providing an amount together with a unit. Units that aren't months, days, or milliseconds are converted to equivalent amounts in the next lower unit of these three basis units. 
+An `INTERVAL` can be constructed by providing an amount together with a unit. Units that aren't *months*, *days*, or *milliseconds* are converted to equivalent amounts in the next smaller of these three basis units. 
+Conversely, units aren't ever converted to the next larger basis unit, that is, no amount of days is ever converted to months. 
 
-Conversely, units aren't ever converted upwards, that is, no amount of days is ever converted to months. 
-Accordingly, when `INTERVAL`s are deconstructed into their constituent components via the `datepart` function, multiple components must be added to obtain the original interval. Additionally, the three basis components, are further split into years and months; days, hours, 
+Three base units are necessary because a month does not correspond to a fixed amount of days (February has fewer days than March) and days don't have a fixed amount of microseconds.
+The division into components makes the `INTERVAL` class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
 
-Here, rather than returning zeros for all requested units that are not based units, duckdb guarantees that all returned parts add up to the original interval while using the largest units possible. 
-Specifically, the months component is 
+```sql
+SELECT DATE '2000-01-01' + INTERVAL (i) MONTH
+FROM range(12) t(i);
+```
 
-Here, non-zero values can be reported for non-base units, but only when exact conversion is possible. For example, 14 months can 
+When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component into hours, minutes, and microseconds.
 
-> Warning 
+> Warning Note that the smallest component is split only into hours, minutes, and microseconds, rather than hours, minutes, seconds, and microseconds.
 
-Intervals can be added or subtracted from `DATE` or `TIMESTAMP` values.
+Additionally, 
 
 ## Examples
 
@@ -75,17 +77,6 @@ SELECT INTERVAL '16 MONTHS';
 > ```sql
 > SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years!
 > ```
-
-## Details
-
-The interval class represents a period of time using three distinct components: the *month*, *day* and *microsecond*. These three components are required because there is no direct translation between them. For example, a month does not correspond to a fixed amount of days. That depends on *which month is referenced*. February has fewer days than March.
-
-The division into components makes the interval class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
-
-```sql
-SELECT DATE '2000-01-01' + INTERVAL (i) MONTH
-FROM range(12) t(i);
-```
 
 ## Difference between Dates
 
