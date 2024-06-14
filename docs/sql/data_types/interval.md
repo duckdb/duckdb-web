@@ -27,14 +27,14 @@ SELECT
 ;
 ```
 
-> Warning  If a decimal value is specified, it is automatically rounded to an integer.
+> Warning Decimal values are rounded to integers.
 > ```sql
 > SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years = `to_years(CAST(1.5 AS INTEGER))`
 > ```
 > For more precision, use a more granular unit; e.g. `18 MONTHS` instead of `1.5 YEARS`.
 
 
-Three base units are necessary because a month does not correspond to a fixed amount of days (February has fewer days than March) and a day doesn't correspond to a fixed amount of microseconds.
+Three basis units are necessary because a month does not correspond to a fixed amount of days (February has fewer days than March) and a day doesn't correspond to a fixed amount of microseconds.
 The division into components makes the `INTERVAL` class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
 
 ```sql
@@ -53,9 +53,9 @@ period = list_reduce(
 FROM (VALUES (INTERVAL (random() * 123456789) MILLISECONDS)) _(period)
 ```
 
-> Warning Note that the *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, seconds, and microseconds.
+> Warning Note that the *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
 
-Additionally, the rounded below integer amounts of centuries, decades, seconds, milliseconds in an `INTERVAL` can be extracted via the `datepart` function, but these components not required to reassemble the original interval since they are already captured by the exact amount of years and microseconds, respectively. 
+Additionally, the rounded below integer amounts of centuries, decades, seconds, milliseconds in an `INTERVAL` can be extracted via the `datepart` function, but these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. 
 
 For example, 
 
@@ -86,7 +86,7 @@ SELECT TIMESTAMP '2000-02-06 12:00:00' - TIMESTAMP '2000-01-01 11:00:00' AS diff
 |------------------|
 | 36 days 01:00:00 |
 
-> Warning Extracting components from the `INTERVAL` difference between two timestamps or dates is not the same as computing the number of partition boundaries between two timestamps or dates for a specific unit using the `datediff` function:
+> Warning Components extracted from the `INTERVAL` difference between two `TIMESTAMP`s or `DATE`s are not the same as the number of partition boundaries between them for the corresponding unit, which can be computed  using the `datediff` function:
 > ```sql
 > SELECT
 >   datediff('day', TIMESTAMP '2020-01-01 01:00:00', TIMESTAMP '2020-01-02 00:00:00'), -- 1
