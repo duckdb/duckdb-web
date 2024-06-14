@@ -58,7 +58,7 @@ FROM (
 
 > Warning The *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
 
-Additionally, the rounded below integer amounts of centuries, decades, seconds, milliseconds in an `INTERVAL` can be extracted via the `datepart` function, but these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. 
+Additionally, the rounded below integer amounts of centuries, decades, quarters, seconds, milliseconds in an `INTERVAL` can be extracted via the `datepart` function, but these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. 
 
 For example, 
 
