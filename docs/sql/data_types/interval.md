@@ -4,8 +4,7 @@ title: Interval Type
 blurb: Intervals represent a period of time measured in months, days, microseconds, or a combination thereof.
 ---
 
-`INTERVAL`s represent periods of time and are generally used to *modify* timestamps or dates by either adding them to or subtracting them from `DATE` or `TIMESTAMP` values.
-
+`INTERVAL`s represent periods of time and are generally used to *modify* timestamps or dates by either adding them to or subtracting them from `DATE`, `TIMESTAMP(TZ)`, or `TIME` values.
 
 <div class="narrow_table"></div>
 
@@ -70,26 +69,26 @@ datepart('second', INTERVAL 1234 MILLISECONDS) -- returns 1
 
 ## Arithmetic with timestamps, dates, and intervals
 
-`INTERVAL`s can be added to and subtracted from `TIMESTAMP`s, `TIMESTAMPTZ`s, and `DATE`s using the `+` and `-` operators.
+`INTERVAL`s can be added to and subtracted from `TIMESTAMP(TZ)`s, `DATE`s, and `TIME`s using the `+` and `-` operators.
 
 ```sql
 SELECT
   DATE '2000-01-01' + INTERVAL 1 YEAR,
-  TIMESTAMP '2000-01-01 01:33:30' - INTERVAL '1 month 13 hours'
+  TIMESTAMP '2000-01-01 01:33:30' - INTERVAL '1 month 13 hours',
+  TIME '02:00:00' - INTERVAL '3 days 23 hours', -- wraps; equals TIME '03:00:00'
 ;
 ```
 
 Conversely, subtracting two `TIMESTAMP`s or two `TIMESTAMPTZ`s from one another creates an interval describing the difference between the timestamps with only the *days and microseconds* components. For example:
 
 ```sql
-SELECT TIMESTAMP '2000-02-06 12:00:00' - TIMESTAMP '2000-01-01 11:00:00' AS diff;
+SELECT
+  TIMESTAMP '2000-02-06 12:00:00' - TIMESTAMP '2000-01-01 11:00:00', -- 36 days 1 hour
+  TIMESTAMP '2000-02-01' + (TIMESTAMP '2000-02-01' - TIMESTAMP '2000-01-01'), -- '2000-03-03', NOT '2000-03-01'
+;
 ```
 
-|       diff       |
-|------------------|
-| 36 days 01:00:00 |
-
-> Warning Components extracted from the `INTERVAL` difference between two `TIMESTAMP`s or `DATE`s are not the same as the number of partition boundaries between them for the corresponding unit, which can be computed  using the `datediff` function:
+> Warning Extracting a component of  the `INTERVAL` difference between two `TIMESTAMP`s is not equivalent to computing the number of partition boundaries between the two `TIMESTAMP`s for the corresponding unit, as computed by the `datediff` function:
 > ```sql
 > SELECT
 >   datediff('day', TIMESTAMP '2020-01-01 01:00:00', TIMESTAMP '2020-01-02 00:00:00'), -- 1
