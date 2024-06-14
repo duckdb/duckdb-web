@@ -38,7 +38,7 @@ SELECT DATE '2000-01-01' + INTERVAL (i) MONTH
 FROM range(12) t(i);
 ```
 
-When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component into hours, minutes, and microseconds.
+When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component is split into hours, minutes, and microseconds.
 
 ```sql
 SELECT
@@ -57,7 +57,7 @@ FROM (
 
 > Warning The *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
 
-Additionally, the rounded below integer amounts of centuries, decades, quarters, seconds, milliseconds in an `INTERVAL` can be extracted via the `datepart` function, but these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. 
+Additionally, the amounts of centuries, decades, quarters, seconds, and milliseconds in an `INTERVAL`, rounded down to the nearest integer, can be extracted via the `datepart` function, but these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. 
 
 For example, 
 
