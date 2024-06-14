@@ -13,31 +13,36 @@ See the [combining schemas](combining_schemas) page for tips on reading files wi
 Read all files with a name ending in `.csv` in the folder `dir`.
 
 ```sql
-SELECT * FROM 'dir/*.csv';
+SELECT *
+FROM 'dir/*.csv';
 ```
 
 Read all files with a name ending in `.csv`, two directories deep.
 
 ```sql
-SELECT * FROM '*/*/*.csv';
+SELECT *
+FROM '*/*/*.csv';
 ```
 
 Read all files with a name ending in `.csv`, at any depth in the folder `dir`.
 
 ```sql
-SELECT * FROM 'dir/**/*.csv';
+SELECT *
+FROM 'dir/**/*.csv';
 ```
 
 Read the CSV files `flights1.csv` and `flights2.csv`.
 
 ```sql
-SELECT * FROM read_csv(['flights1.csv', 'flights2.csv']);
+SELECT *
+FROM read_csv(['flights1.csv', 'flights2.csv']);
 ```
 
 Read the CSV files `flights1.csv` and `flights2.csv`, unifying schemas by name and outputting a `filename` column.
 
 ```sql
-SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = true);
+SELECT *
+FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = true);
 ```
 
 ## Parquet
@@ -45,25 +50,29 @@ SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, f
 Read all files that match the glob pattern.
 
 ```sql
-SELECT * FROM 'test/*.parquet';
+SELECT *
+FROM 'test/*.parquet';
 ```
 
 Read 3 Parquet files and treat them as a single table.
 
 ```sql
-SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
+SELECT *
+FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
 
 Read all Parquet files from two specific folders.
 
 ```sql
-SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
+SELECT *
+FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 ```
 
 Read all Parquet files that match the glob pattern at any depth.
 
 ```sql
-SELECT * FROM read_parquet('dir/**/*.parquet');
+SELECT *
+FROM read_parquet('dir/**/*.parquet');
 ```
 
 ## Multi-File Reads and Globs
@@ -77,7 +86,8 @@ The `read_parquet` function can accept a list of filenames as the input paramete
 Read three Parquet files and treat them as a single table.
 
 ```sql
-SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
+SELECT *
+FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
 
 ### Glob Syntax
@@ -101,7 +111,8 @@ Here is an example that reads all the files that end with `.parquet` located in 
 Read all files that match the glob pattern.
 
 ```sql
-SELECT * FROM read_parquet('test/*.parquet');
+SELECT *
+FROM read_parquet('test/*.parquet');
 ```
 
 ### List of Globs
@@ -111,7 +122,8 @@ The glob syntax and the list input parameter can be combined to scan files that 
 Read all Parquet files from 2 specific folders.
 
 ```sql
-SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
+SELECT *
+FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 ```
 
 DuckDB can read multiple CSV files at the same time using either the glob syntax, or by providing a list of files to read.
@@ -121,7 +133,8 @@ DuckDB can read multiple CSV files at the same time using either the glob syntax
 The `filename` argument can be used to add an extra `filename` column to the result that indicates which row came from which file. For example:
 
 ```sql
-SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = true);
+SELECT *
+FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = true);
 ```
 
 <div class="narrow_table"></div>
@@ -135,7 +148,8 @@ SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, f
 Since v0.10.2, it is possible to specify the name of the filename column using the `filename` argument:
 
 ```sql
-SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = "my_filename_column");
+SELECT *
+FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = "my_filename_column");
 ```
 
 | FlightDate | UniqueCarrier | OriginCityName |  DestCityName   | my_filename_column |
@@ -152,14 +166,14 @@ It accepts one parameter: the path to search (which may include glob patterns).
 Search the current directory for all files.
 
 ```sql
-SELECT * FROM glob('*');
+SELECT *
+FROM glob('*');
 ```
 
 <div class="narrow_table"></div>
 
 |     file      |
 |---------------|
-| duckdb.exe    |
 | test.csv      |
 | test.json     |
 | test.parquet  |
