@@ -71,7 +71,7 @@ SELECT
     datepart('second', INTERVAL 1_234 MILLISECONDS), -- returns 1
 ```
 
-## Arithmetic with timestamps, dates, and intervals
+## Arithmetic with Timestamps, Dates and Intervals
 
 `INTERVAL`s can be added to and subtracted from `TIMESTAMP(TZ)`s, `DATE`s, and `TIME`s using the `+` and `-` operators.
 
@@ -100,15 +100,20 @@ SELECT
 > ;
 > ```
 
-## Equality and comparison
+## Equality and Comparison
 
 For equality and ordering comparisons only, the month component is converted to 30 days and the day component is converted 24 * 60 * 60 * 1e6 microseconds.
 
 As a result, `INTERVAL`s can compare equal even when they are functionally different. 
 
-For example `INTERVAL 30 DAYS = INTERVAL 1 MONTH` but `DATE '2020-01-01' + INTERVAL 30 DAYS != DATE '2020-01-01' + INTERVAL 1 MONTH`.
+For example
 
-Equally, `INTERVAL '30 days 12 hours' > INTERVAL 1 MONTH` but `DATE '2020-01-01' + INTERVAL '30 days 12 hours' < DATE '2020-01-01' + INTERVAL 1 MONTH`.
+* `INTERVAL 30 DAYS = INTERVAL 1 MONTH`
+* but `DATE '2020-01-01' + INTERVAL 30 DAYS != DATE '2020-01-01' + INTERVAL 1 MONTH`.
+
+Equally,
+* `INTERVAL '30 days 12 hours' > INTERVAL 1 MONTH`
+* but `DATE '2020-01-01' + INTERVAL '30 days 12 hours' < DATE '2020-01-01' + INTERVAL 1 MONTH`.
 
 ## Functions
 
