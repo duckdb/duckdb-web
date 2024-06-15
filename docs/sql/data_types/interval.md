@@ -17,11 +17,11 @@ Units that aren't *months*, *days*, or *microseconds* are converted to equivalen
 
 ```sql
 SELECT
-  INTERVAL 1 YEAR, -- single unit using YEAR keyword; stored as 12 months
-  INTERVAL (random() * 10) YEAR, -- parentheses necessary for variable amounts; stored as integer number of months
-  INTERVAL '1 month 1 day', -- string type necessary for multiple units; stored as (1 month, 1 day)
-  '16 months'::INTERVAL, -- string cast supported; stored as 16 months
-  '48:00:00'::INTERVAL, -- HH::MM::SS string supported; stored as (48 * 60 * 60 * 1e6 microseconds)
+    INTERVAL 1 YEAR, -- single unit using YEAR keyword; stored as 12 months
+    INTERVAL (random() * 10) YEAR, -- parentheses necessary for variable amounts; stored as integer number of months
+    INTERVAL '1 month 1 day', -- string type necessary for multiple units; stored as (1 month, 1 day)
+    '16 months'::INTERVAL, -- string cast supported; stored as 16 months
+    '48:00:00'::INTERVAL, -- HH::MM::SS string supported; stored as (48 * 60 * 60 * 1e6 microseconds)
 ;
 ```
 > Warning Decimal values can be used in strings but are rounded to integers.
@@ -42,16 +42,18 @@ When `INTERVAL`s are deconstructed via the `datepart` function, the *months* com
 
 ```sql
 SELECT
-  period = list_reduce(
-    [INTERVAL (datepart(part, period) || part) for part in ['year', 'month', 'day', 'hour', 'minute', 'microsecond']],
-    (i1, i2) -> i1 + i2
-  ) -- always true
+    period = list_reduce(
+        [INTERVAL (datepart(part, period) || part) FOR part IN
+             ['year', 'month', 'day', 'hour', 'minute', 'microsecond']
+        ],
+        (i1, i2) -> i1 + i2
+    ) -- always true
 FROM (
-  VALUES (
-    INTERVAL (random() * 123456789123) MILLISECONDS
-    + INTERVAL (random() * 12345) DAYS
-    + INTERVAL (random() * 12345) MONTHS
-  )
+    VALUES (
+        INTERVAL (random() * 123_456_789_123) MILLISECONDS
+        + INTERVAL (random() * 12_345) DAYS
+        + INTERVAL (random() * 12_345) MONTHS
+    )
 ) _(period);
 ```
 
@@ -73,9 +75,9 @@ datepart('second', INTERVAL 1234 MILLISECONDS) -- returns 1
 
 ```sql
 SELECT
-  DATE '2000-01-01' + INTERVAL 1 YEAR,
-  TIMESTAMP '2000-01-01 01:33:30' - INTERVAL '1 month 13 hours',
-  TIME '02:00:00' - INTERVAL '3 days 23 hours', -- wraps; equals TIME '03:00:00'
+    DATE '2000-01-01' + INTERVAL 1 YEAR,
+    TIMESTAMP '2000-01-01 01:33:30' - INTERVAL '1 month 13 hours',
+    TIME '02:00:00' - INTERVAL '3 days 23 hours', -- wraps; equals TIME '03:00:00'
 ;
 ```
 
@@ -83,16 +85,16 @@ Conversely, subtracting two `TIMESTAMP`s or two `TIMESTAMPTZ`s from one another 
 
 ```sql
 SELECT
-  TIMESTAMP '2000-02-06 12:00:00' - TIMESTAMP '2000-01-01 11:00:00', -- 36 days 1 hour
-  TIMESTAMP '2000-02-01' + (TIMESTAMP '2000-02-01' - TIMESTAMP '2000-01-01'), -- '2000-03-03', NOT '2000-03-01'
+    TIMESTAMP '2000-02-06 12:00:00' - TIMESTAMP '2000-01-01 11:00:00', -- 36 days 1 hour
+    TIMESTAMP '2000-02-01' + (TIMESTAMP '2000-02-01' - TIMESTAMP '2000-01-01'), -- '2000-03-03', NOT '2000-03-01'
 ;
 ```
 
-> Warning Extracting a component of  the `INTERVAL` difference between two `TIMESTAMP`s is not equivalent to computing the number of partition boundaries between the two `TIMESTAMP`s for the corresponding unit, as computed by the `datediff` function:
+> Warning Extracting a component of the `INTERVAL` difference between two `TIMESTAMP`s is not equivalent to computing the number of partition boundaries between the two `TIMESTAMP`s for the corresponding unit, as computed by the `datediff` function:
 > ```sql
 > SELECT
->   datediff('day', TIMESTAMP '2020-01-01 01:00:00', TIMESTAMP '2020-01-02 00:00:00'), -- 1
->   datepart('day', TIMESTAMP '2020-01-02 00:00:00' - TIMESTAMP '2020-01-01 01:00:00'), -- 0
+>     datediff('day', TIMESTAMP '2020-01-01 01:00:00', TIMESTAMP '2020-01-02 00:00:00'), -- 1
+>     datepart('day', TIMESTAMP '2020-01-02 00:00:00' - TIMESTAMP '2020-01-01 01:00:00'), -- 0
 > ;
 > ```
 
