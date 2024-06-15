@@ -40,7 +40,7 @@ SELECT DATE '2000-01-01' + INTERVAL (i) MONTH
 FROM range(12) t(i);
 ```
 
-When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component is split into hours, minutes, and microseconds. The *days* component is not split into additional units. To demonstrate this, the following query generates an interval called `period` by adding random amounts of the three basis units. It then extracts the aforementioned six parts from `period`, adds them back together, and confirms that the result is always equal to the original `period`.
+When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component is split into hours, minutes, and microseconds. The *days* component is not split into additional units. To demonstrate this, the following query generates an interval called `period` by summing random amounts of the three basis units. It then extracts the aforementioned six parts from `period`, adds them back together, and confirms that the result is always equal to the original `period`.
 
 ```sql
 SELECT
@@ -61,7 +61,7 @@ FROM (
 
 > Warning The *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
 
-Additionally, the amounts of centuries, decades, quarters, seconds, and milliseconds in an `INTERVAL`, rounded down to the nearest integer, can be extracted via the `datepart` function, but these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. In fact, if the previous query additionally extracted and included decades or seconds from the interval, the sum of extracted parts would generally be larger than the original `INTERVAL`, since this would double count the months or microseconds components, respectively.
+Additionally, the amounts of centuries, decades, quarters, seconds, and milliseconds in an `INTERVAL`, rounded down to the nearest integer, can be extracted via the `datepart` function. However, these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. In fact, if the previous query additionally extracted decades or seconds, then the sum of extracted parts would generally be larger than the original `period` since this would double count the months or microseconds components, respectively.
 
 For example:
 
