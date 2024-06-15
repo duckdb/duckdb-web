@@ -61,7 +61,7 @@ FROM (
 
 > Warning The *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
 
-Additionally, the amounts of centuries, decades, quarters, seconds, and milliseconds in an `INTERVAL`, rounded down to the nearest integer, can be extracted via the `datepart` function. However, these components are not required to reassemble the original `INTERVAL`. In fact, if the previous query additionally extracted decades or seconds, then the sum of extracted parts would generally be larger than the original `period` since this would double count the months and microseconds components, respectively.
+Additionally, the amounts of centuries, decades, quarters (the only unit that's one based), seconds, and milliseconds in an `INTERVAL`, rounded down to the nearest integer, can be extracted via the `datepart` function. However, these components are not required to reassemble the original `INTERVAL`. In fact, if the previous query additionally extracted decades or seconds, then the sum of extracted parts would generally be larger than the original `period` since this would double count the months and microseconds components, respectively.
 
 For example:
 
