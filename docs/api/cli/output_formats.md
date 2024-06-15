@@ -16,7 +16,7 @@ The `markdown` mode is particularly useful for building documentation and the `l
 | `box`        | Tables using unicode box-drawing characters  |
 | `csv`        | Comma-separated values                       |
 | `column`     | Output in columns.  (See .width)             |
-| `duckbox`    | Tables with extensive features               |
+| `duckbox`    | Tables with extensive features (default)     |
 | `html`       | HTML `<table>` code                          |
 | `insert`     | SQL insert statements for TABLE              |
 | `json`       | Results in a JSON array                      |
@@ -30,6 +30,16 @@ The `markdown` mode is particularly useful for building documentation and the `l
 | `tabs`       | Tab-separated values                         |
 | `tcl`        | TCL list elements                            |
 | `trash`      | No output                                    |
+
+Use `.mode` directly to query the appearance currently in use.
+
+```sql
+.mode
+```
+
+```text
+current output mode: duckbox
+```
 
 ```sql
 .mode markdown
