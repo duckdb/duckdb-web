@@ -60,7 +60,11 @@
 }
 
 .language-bash code:before {
-  content: '$ ';
+	content: '$ ';
+}
+
+.language-plsql code:before {
+	content: 'D ';
 }
 
 // keywords in table headers
