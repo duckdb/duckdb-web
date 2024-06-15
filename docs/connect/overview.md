@@ -18,7 +18,7 @@ DuckDB can operate in both persistent mode, where the data is saved to disk, and
 
 To create or open a persistent database, set the path of the database file, e.g., `my_database.duckdb`, when creating the connection.
 This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed.
-The file may have an arbitrary extension, but `.db` or `.duckdb` are two common choices.
+The file may have an arbitrary extension, but `.db` or `.duckdb` are two common choices with `.ddb` also used sometimes.
 
 > Tip Running on a persistent database allows spilling to disk, thus facilitating larger-than-memory workloads (i.e., out-of-core-processing).
 
