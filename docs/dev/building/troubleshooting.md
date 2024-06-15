@@ -55,7 +55,7 @@ make: *** [release] Error 1
 ```
 
 **Solution:**
-In general, we recommended using the nightly builds, available under GitHub main on the [installation page](/docs/installation).
+In general, we recommended using the nightly builds, available under GitHub main on the [installation page](/docs/installation/index).
 If you would like to build DuckDB from source, avoid using the `BUILD_PYTHON=1` flag unless you are actively developing the Python library.
 Instead, first build the `httpfs` extension (if required), then build and install the Python package separately using pip:
 

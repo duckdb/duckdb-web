@@ -14,44 +14,44 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 
 ## Data Import and Export
 
-* [Data import overview](import/overview)
+* [Data import overview](file_formats/overview)
 
 ### CSV Files
 
-* [How to load a CSV file into a table](import/csv_import)
-* [How to export a table to a CSV file](import/csv_export)
+* [How to load a CSV file into a table](file_formats/csv_import)
+* [How to export a table to a CSV file](impofile_formatsrt/csv_export)
 
 ### Parquet Files
 
-* [How to load a Parquet file into a table](import/parquet_import)
-* [How to export a table to a Parquet file](import/parquet_export)
-* [How to run a query directly on a Parquet file](import/query_parquet)
+* [How to load a Parquet file into a table](file_formats/parquet_import)
+* [How to export a table to a Parquet file](impofile_formatst/parquet_export)
+* [How to run a query directly on a Parquet file](file_formats/query_parquet)
 
 ### HTTP(S), S3 and GCP
 
-* [How to load a Parquet file directly from HTTP(S)](import/http_import)
-* [How to load a Parquet file directly from S3](import/s3_import)
-* [How to export a Parquet file to S3](import/s3_export)
-* [How to load a Parquet file from S3 Express One](import/s3_express_one)
-* [How to load a Parquet file directly from GCS](import/gcs_import)
-* [How to load a Parquet file directly from Cloudflare R2](import/cloudflare_r2_import)
-* [How to load an Iceberg table directly from S3](import/s3_iceberg_import)
+* [How to load a Parquet file directly from HTTP(S)](network_cloud_storage/http_import)
+* [How to load a Parquet file directly from S3](network_cloud_storage/s3_import)
+* [How to export a Parquet file to S3](network_cloud_storage/s3_export)
+* [How to load a Parquet file from S3 Express One](network_cloud_storage/s3_express_one)
+* [How to load a Parquet file directly from GCS](network_cloud_storage/gcs_import)
+* [How to load a Parquet file directly from Cloudflare R2](network_cloud_storage/cloudflare_r2_import)
+* [How to load an Iceberg table directly from S3](network_cloud_storage/s3_iceberg_import)
 
 ### JSON Files
 
-* [How to load a JSON file into a table](import/json_import)
-* [How to export a table to a JSON file](import/json_export)
+* [How to load a JSON file into a table](file_formats/json_import)
+* [How to export a table to a JSON file](file_formats/json_export)
 
 ### Excel Files with the Spatial Extension
 
-* [How to load an Excel file into a table](import/excel_import)
-* [How to export a table to an Excel file](import/excel_export)
+* [How to load an Excel file into a table](file_formats/excel_import)
+* [How to export a table to an Excel file](file_formats/excel_export)
 
 ### Querying Other Database Systems
 
-* [How to directly query a PostgreSQL database](import/query_postgres)
-* [How to directly query a SQLite database](import/query_sqlite)
-* [How to directly query a MySQL database](import/query_mysql)
+* [How to directly query a PostgreSQL database](database_integration/query_postgres)
+* [How to directly query a SQLite database](database_integration/query_sqlite)
+* [How to directly query a MySQL database](database_integration/query_mysql)
 
 ### Directly Reading Files
 
