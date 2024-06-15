@@ -39,7 +39,7 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 <div class="answer" markdown="1">
 
 [**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.<br/>
-The [**DuckDB Foundation**](/foundation/) is a non-profit organization that holds the intellectual property of the DuckDB project.
+The [**DuckDB Foundation**]({% link foundation/index.html %}) is a non-profit organization that holds the intellectual property of the DuckDB project.
 Its statutes also ensure DuckDB remains open-source under the MIT license in perpetuity.
 Donations to the DuckDB Foundation directly fund DuckDB development.<br/>
 [**DuckDB Labs**](https://duckdblabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
@@ -89,7 +89,7 @@ The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.
 
 <div class="answer" markdown="1">
 
-Please consult the [trademark guidelines for DuckDB™](/trademark_guidelines).
+Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidelines.md %}).
 
 </div>
 
@@ -122,7 +122,7 @@ Before opening a pull request, please consult our [Contributor Guide](https://gi
 
 We welcome experiments comparing DuckDB's performance to other systems.
 To ensure fair comparison, we have two recommendations.
-First, try to use the [latest DuckDB version available as a nightly build](https://duckdb.org/docs/installation/), which often has significant performance improvements compared to the last stable release.
+First, try to use the [latest DuckDB version available as a nightly build]({% link docs/installation/index.html %}), which often has significant performance improvements compared to the last stable release.
 Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
 
 </div>
@@ -151,9 +151,9 @@ DuckDB does not use *explicit SIMD* (single instruction, multiple data) instruct
 
 <div class="answer" markdown="1">
 
-DuckDB supports [persistent storage](/docs/connect/overview#persistent-database) and stores the database as a single file, which includes all tables, views, indexes, macros, etc. present in the database.
-DuckDB's [storage format](/internals/storage) uses a compressed columnar representation, which is compact but allows for efficient bulk updates.
-DuckDB can also run in [in-memory mode](docs/connect/overview#in-memory-database), where no data is persisted to disk.
+DuckDB supports [persistent storage]({% link docs/connect/overview.md %}#persistent-database) and stores the database as a single file, which includes all tables, views, indexes, macros, etc. present in the database.
+DuckDB's [storage format]({% link docs/internals/storage.md %}) uses a compressed columnar representation, which is compact but allows for efficient bulk updates.
+DuckDB can also run in [in-memory mode]({% link docs/connect/overview.md %}#in-memory-database), where no data is persisted to disk.
 
 </div>
 
@@ -166,7 +166,7 @@ DuckDB can also run in [in-memory mode](docs/connect/overview#in-memory-database
 ### How does DuckDB handle concurrency?
 
 <div class="answer" markdown="1">
-See the documentation on [concurrency](/docs/connect/concurrency#handling-concurrency).
+See the documentation on [concurrency]({% link docs/connect/concurrency.md %}#handling-concurrency).
 </div>
 
 </div>
@@ -178,7 +178,7 @@ See the documentation on [concurrency](/docs/connect/concurrency#handling-concur
 ### How can multiple processes write to DuckDB?
 
 <div class="answer" markdown="1">
-See the [documentation on concurrency](/docs/connect/concurrency#writing-to-duckdb-from-multiple-processes).
+See the [documentation on concurrency]({% link docs/connect/concurrency.md %}#writing-to-duckdb-from-multiple-processes).
 </div>
 
 </div>
@@ -191,8 +191,8 @@ See the [documentation on concurrency](/docs/connect/concurrency#writing-to-duck
 
 <div class="answer" markdown="1">
 There is no official DuckDB Docker image available.
-DuckDB uses an [in-process deployment model](/why_duckdb#simple), where the client application and DuckDB are running in the same process.
-Additionally to the DuckDB clients for Python, R, and other programming languages, DuckDB is also available as a standalone command-line client. This client is available on a [wide range of platforms](/docs/installation/?version=stable&environment=cli) and is portable without containerization, making it unnecessary to containerize the process for most deployments.
+DuckDB uses an [in-process deployment model]({% link why_duckdb.md %}#simple), where the client application and DuckDB are running in the same process.
+Additionally to the DuckDB clients for Python, R, and other programming languages, DuckDB is also available as a standalone command-line client. This client is available on a [wide range of platforms]({% link docs/installation/index.html %}?version=stable&environment=cli) and is portable without containerization, making it unnecessary to containerize the process for most deployments.
 </div>
 
 </div>
@@ -206,7 +206,7 @@ Additionally to the DuckDB clients for Python, R, and other programming language
 <div class="answer" markdown="1">
 
 Since version 0.10.0 (released in February 2024), DuckDB is backwards-compatible when reading database files, i.e., newer versions of DuckDB are always able to read database files created with an older version of DuckDB.
-DuckDB also provides partial forwards-compatibility on a best-effort basis. See the [storage page](/docs/internals/storage) for more details.
+DuckDB also provides partial forwards-compatibility on a best-effort basis. See the [storage page]({% link docs/internals/storage.md %}) for more details.
 Compatibility is also guaranteed between different DuckDB clients (e.g., Python and R): a database file created with one client can be read with other clients.
 
 </div>
