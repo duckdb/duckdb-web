@@ -8,7 +8,7 @@ The `tpch` extension implements the data generator and queries for the [TPC-H be
 
 ## Installing and Loading
 
-The `tpch` extension is shipped by default in some DuckDB builds, otherwise it will be transparently [autoloaded](overview#autoloading-extensions) on first use.
+The `tpch` extension is shipped by default in some DuckDB builds, otherwise it will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use.
 If you would like to install and load it manually, run:
 
 ```sql

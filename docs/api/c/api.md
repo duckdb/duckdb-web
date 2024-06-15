@@ -1021,7 +1021,7 @@ Returns the data of a specific column of a result in columnar format.
 
 The function returns a dense array which contains the result data. The exact type stored in the array depends on the
 corresponding duckdb_type (as provided by `duckdb_column_type`). For the exact type by which the data should be
-accessed, see the comments in [the types section](types) or the `DUCKDB_TYPE` enum.
+accessed, see the comments in [the types section]({% link docs/api/c/types.md %}) or the `DUCKDB_TYPE` enum.
 
 For example, for a column of type `DUCKDB_TYPE_INTEGER`, rows can be accessed in the following manner:
 ```c

@@ -7,7 +7,7 @@ redirect_from:
 
 ## Installing the Extension
 
-To read data from an Excel file, install and load the [spatial extension](../../extensions/spatial).
+To read data from an Excel file, install and load the [spatial extension]({% link docs/extensions/spatial.md %}).
 This is only needed once per DuckDB connection.
 
 ```sql
@@ -102,5 +102,5 @@ FROM st_read(
 
 ## See Also
 
-DuckDB can also [export Excel files](excel_export).
-For additional details on Excel support, see the [spatial extension page](../../extensions/spatial), the [GDAL XLSX driver page](https://gdal.org/drivers/vector/xlsx.html), and the [GDAL configuration options page](https://gdal.org/user/configoptions.html#configoptions).
+DuckDB can also [export Excel files]({% link docs/guides/file_formats/excel_export.md %}).
+For additional details on Excel support, see the [spatial extension page]({% link docs/extensions/spatial.md %}), the [GDAL XLSX driver page](https://gdal.org/drivers/vector/xlsx.html), and the [GDAL configuration options page](https://gdal.org/user/configoptions.html#configoptions).

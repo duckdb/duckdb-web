@@ -4,7 +4,7 @@ title: Subqueries
 railroad: expressions/subqueries.js
 ---
 
-Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT ... FROM`, but in DuckDB other query constructs such as [`PIVOT`](../statements/pivot) can also appear as a subquery.
+Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT ... FROM`, but in DuckDB other query constructs such as [`PIVOT`]({% link docs/sql/statements/pivot.md %}) can also appear as a subquery.
 
 ## Scalar Subquery
 
@@ -51,7 +51,7 @@ SELECT course FROM grades WHERE grade = (SELECT min(grade) FROM grades);
 
 ## Subquery Comparisons: `ALL`, `ANY` and `SOME`
 
-In the section on [scalar subqueries](#scalar-subquery), a scalar expression was compared directly to a subquery using the equality [comparison operator](comparison_operators#comparison-operators) (`=`).
+In the section on [scalar subqueries](#scalar-subquery), a scalar expression was compared directly to a subquery using the equality [comparison operator]({% link docs/sql/expressions/comparison_operators.md %}#comparison-operators) (`=`).
 Such direct comparisons only make sense with scalar subqueries.
 
 Scalar expressions can still be compared to single-column subqueries returning multiple rows by specifying a quantifier. Available quantifiers are `ALL`, `ANY` and `SOME`. The quantifiers `ANY` and `SOME` are equivalent.

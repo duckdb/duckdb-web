@@ -65,4 +65,4 @@ Below is the truth table for the `OR` conjunction (i.e., `x OR y`).
 
 ## Expressions
 
-See [Logical Operators](../expressions/logical_operators) and [Comparison Operators](../expressions/comparison_operators).
+See [Logical Operators]({% link docs/sql/expressions/logical_operators.md %}) and [Comparison Operators]({% link docs/sql/expressions/comparison_operators.md %}).

@@ -4,9 +4,9 @@ title: Constraints
 railroad: statements/constraints.js
 ---
 
-In SQL, constraints can be specified for tables. Constraints enforce certain properties over data that is inserted into a table. Constraints can be specified along with the schema of the table as part of the [`CREATE TABLE` statement](statements/create_table). In certain cases, constraints can also be added to a table using the [`ALTER TABLE` statement](statements/alter_table), but this is not currently supported for all constraints.
+In SQL, constraints can be specified for tables. Constraints enforce certain properties over data that is inserted into a table. Constraints can be specified along with the schema of the table as part of the [`CREATE TABLE` statement]({% link docs/sql/statements/create_table.md %}). In certain cases, constraints can also be added to a table using the [`ALTER TABLE` statement]({% link docs/sql/statements/alter_table.md %}), but this is not currently supported for all constraints.
 
-> Warning Constraints have a strong impact on performance: they slow down loading and updates but speed up certain queries. Please consult the [Performance Guide](../guides/performance/schema#constraints) for details.
+> Warning Constraints have a strong impact on performance: they slow down loading and updates but speed up certain queries. Please consult the [Performance Guide]({% link docs/guides/performance/schema.md %}#constraints) for details.
 
 ## Syntax
 
@@ -63,7 +63,7 @@ INSERT INTO students VALUES (1, 'Student 1');
 Constraint Error: Duplicate key "id: 1, name: Student 1" violates primary key constraint
 ```
 
-In order to enforce this property efficiently, an [ART index is automatically created](indexes) for every primary key or unique constraint that is defined in the table.
+In order to enforce this property efficiently, an [ART index is automatically created]({% link docs/sql/indexes.md %}) for every primary key or unique constraint that is defined in the table.
 
 Primary key constraints and unique constraints are identical except for two points:
 
@@ -89,7 +89,7 @@ INSERT INTO students(name, email) VALUES ('Student 3', 'student3@uni.com');
 Constraint Error: NOT NULL constraint failed: students.id
 ```
 
-> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations).
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details]({% link docs/sql/indexes.md %}#index-limitations).
 
 ## Foreign Keys
 
@@ -107,6 +107,6 @@ INSERT INTO exams VALUES (2, 10);
 Constraint Error: Violates foreign key constraint because key "id: 2" does not exist in the referenced table
 ```
 
-In order to enforce this property efficiently, an [ART index is automatically created](indexes) for every foreign key constraint that is defined in the table.
+In order to enforce this property efficiently, an [ART index is automatically created]({% link docs/sql/indexes.md %}) for every foreign key constraint that is defined in the table.
 
-> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details](indexes#index-limitations).
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details]({% link docs/sql/indexes.md %}#index-limitations).

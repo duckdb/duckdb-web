@@ -29,4 +29,4 @@ SELECT bitstring('0101011', 12);
 
 ## Functions
 
-See [Bitstring Functions](../functions/bitstring).
+See [Bitstring Functions]({% link docs/sql/functions/bitstring.md %}).

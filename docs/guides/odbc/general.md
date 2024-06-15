@@ -96,7 +96,7 @@ A buffer is a block of memory used to store data.  Buffers are used to store dat
 
 The following is a step-by-step guide to setting up an application that uses ODBC to connect to a database, execute a query, and fetch the results in `C++`.
 
-> To install the driver as well as anything else you will need follow these [instructions](../../api/odbc/overview).
+> To install the driver as well as anything else you will need follow these [instructions]({% link docs/api/odbc/overview.md %}).
 
 ### 1. Include the SQL Header Files
 
@@ -183,7 +183,7 @@ std::cout << "Connected!" << std::endl;
 #### 2.b. Connecting with SQLDriverConnect
 
 Alternatively, you can connect to the ODBC driver using  [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
-`SQLDriverConnect` accepts a connection string in which you can configure the database using any of the available [DuckDB configuration options](../../configuration/overview).
+`SQLDriverConnect` accepts a connection string in which you can configure the database using any of the available [DuckDB configuration options]({% link docs/configuration/overview.md %}).
 
 ```cpp
 SQLHANDLE env;

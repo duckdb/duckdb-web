@@ -39,7 +39,7 @@ SELECT count(*)
 FROM iceberg_scan('data/iceberg/lineitem_iceberg/metadata/02701-1e474dc7-4723-4f8d-a8b3-b5f0454eb7ce.metadata.json');
 ```
 
-This extension can be paired with the [`httpfs` extension](httpfs) to access Iceberg tables in object stores such as S3.
+This extension can be paired with the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) to access Iceberg tables in object stores such as S3.
 
 ```sql
 SELECT count(*)

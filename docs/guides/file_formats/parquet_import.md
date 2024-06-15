@@ -17,7 +17,7 @@ Alternatively, you can omit the `read_parquet` function and let DuckDB infer it 
 SELECT * FROM 'input.parquet';
 ```
 
-To create a new table using the result from a query, use [`CREATE TABLE ... AS SELECT` statement](../../sql/statements/create_table#create-table--as-select-ctas):
+To create a new table using the result from a query, use [`CREATE TABLE ... AS SELECT` statement]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas):
 
 ```sql
 CREATE TABLE new_tbl AS
@@ -37,4 +37,4 @@ Alternatively, the `COPY` statement can also be used to load data from a Parquet
 COPY tbl FROM 'input.parquet' (FORMAT PARQUET);
 ```
 
-For additional options, see the [Parquet loading reference](../../data/parquet).
+For additional options, see the [Parquet loading reference]({% link docs/data/parquet/overview.md %}).

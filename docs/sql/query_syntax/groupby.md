@@ -8,19 +8,19 @@ The `GROUP BY` clause specifies which grouping columns should be used to perform
 If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
 
 When a `GROUP BY` clause is specified, all tuples that have matching data in the grouping columns (i.e., all tuples that belong to the same group) will be combined.
-The values of the grouping columns themselves are unchanged, and any other columns can be combined using an [aggregate function](../../sql/aggregates) (such as `count`, `sum`, `avg`, etc).
+The values of the grouping columns themselves are unchanged, and any other columns can be combined using an [aggregate function]({% link docs/sql/aggregates.md %}) (such as `count`, `sum`, `avg`, etc).
 
 ## `GROUP BY ALL`
 
 Use `GROUP BY ALL` to `GROUP BY` all columns in the `SELECT` statement that are not wrapped in aggregate functions.
 This simplifies the syntax by allowing the columns list to be maintained in a single location, and prevents bugs by keeping the `SELECT` granularity aligned to the `GROUP BY` granularity (Ex: Prevents any duplication).
-See examples below and additional examples in the [Friendlier SQL with DuckDB blog post](/2022/05/04/friendlier-sql.html#group-by-all).
+See examples below and additional examples in the [Friendlier SQL with DuckDB blog post]({% link _posts/2022-05-04-friendlier-sql.md %}#group-by-all).
 
 ## Multiple Dimensions
 
 Normally, the `GROUP BY` clause groups along a single dimension.
-Using the [`GROUPING SETS`, `CUBE` or `ROLLUP` clauses](../../sql/query_syntax/grouping_sets) it is possible to group along multiple dimensions.
-See the [`GROUPING SETS`](../../sql/query_syntax/grouping_sets) page for more information.
+Using the [`GROUPING SETS`, `CUBE` or `ROLLUP` clauses]({% link docs/sql/query_syntax/grouping_sets.md %}) it is possible to group along multiple dimensions.
+See the [`GROUPING SETS`]({% link docs/sql/query_syntax/grouping_sets.md %}) page for more information.
 
 ## Examples
 

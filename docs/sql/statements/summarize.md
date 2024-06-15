@@ -19,4 +19,4 @@ SUMMARIZE SELECT * FROM tbl;
 
 ## See Also
 
-For more examples, see the [guide on `SUMMARIZE`](../../guides/meta/summarize).
+For more examples, see the [guide on `SUMMARIZE`]({% link docs/guides/meta/summarize.md %}).

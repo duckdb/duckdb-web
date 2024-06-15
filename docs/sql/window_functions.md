@@ -5,7 +5,7 @@ railroad: expressions/window.js
 ---
 
 DuckDB supports [window functions](https://en.wikipedia.org/wiki/Window_function_(SQL)), which can use multiple rows to calculate a value for each row.
-Window functions are [blocking operators](../guides/performance/how_to_tune_workloads#blocking-operators), i.e., they require their entire input to be buffered, making them one of the most memory-intensive operators in SQL.
+Window functions are [blocking operators]({% link docs/guides/performance/how_to_tune_workloads.md %}#blocking-operators), i.e., they require their entire input to be buffered, making them one of the most memory-intensive operators in SQL.
 
 ## Examples
 
@@ -191,7 +191,7 @@ The table below shows the available general window functions.
 
 ## Aggregate Window Functions
 
-All [aggregate functions](aggregates) can be used in a windowing context, including the optional [`FILTER` clause](query_syntax/filter).
+All [aggregate functions]({% link docs/sql/aggregates.md %}) can be used in a windowing context, including the optional [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}).
 The `first` and `last` aggregate functions are shadowed by the respective general-purpose window functions, with the minor consequence that the `FILTER` clause is not available for these but `IGNORE NULLS` is.
 
 ## Nulls
@@ -424,12 +424,12 @@ ORDER BY 1, 2;
 
 The queries above do not use a number of clauses commonly found in select statements, like
 `WHERE`, `GROUP BY`, etc. For more complex queries you can find where `WINDOW` clauses fall in
-the canonical order of the [`SELECT statement`](statements/select).
+the canonical order of the [`SELECT statement`]({% link docs/sql/statements/select.md %}).
 
 ### Filtering the Results of Window Functions Using `QUALIFY`
 
-Window functions are executed after the [`WHERE`](query_syntax/where) and [`HAVING`](query_syntax/having) clauses have been already evaluated, so it's not possible to use these clauses to filter the results of window functions
-The [`QUALIFY` clause](query_syntax/qualify) avoids the need for a subquery or [`WITH` clause](query_syntax/with) to perform this filtering.
+Window functions are executed after the [`WHERE`]({% link docs/sql/query_syntax/where.md %}) and [`HAVING`]({% link docs/sql/query_syntax/having.md %}) clauses have been already evaluated, so it's not possible to use these clauses to filter the results of window functions
+The [`QUALIFY` clause]({% link docs/sql/query_syntax/qualify.md %}) avoids the need for a subquery or [`WITH` clause]({% link docs/sql/query_syntax/with.md %}) to perform this filtering.
 
 ### Box and Whisker Queries
 

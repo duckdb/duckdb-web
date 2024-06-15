@@ -4,11 +4,11 @@ title: AWS Extension
 github_repository: https://github.com/duckdb/duckdb_aws
 ---
 
-The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities](httpfs#s3-api), using the AWS SDK.
+The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities]({% link docs/extensions/httpfs/overview.md %}#s3-api), using the AWS SDK.
 
 ## Installing and Loading
 
-The `aws` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
+The `aws` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -31,12 +31,12 @@ LOAD httpfs;
 ## Usage
 
 In most cases, you will not need to explicitly interact with the `aws` extension. It will automatically be invoked
-whenever you use DuckDB's [S3 Secret functionality](../sql/statements/create_secret). See the [httpfs extension's S3 capabilities](httpfs/overview#s3) for instructions.
+whenever you use DuckDB's [S3 Secret functionality]({% link docs/sql/statements/create_secret.md %}). See the [httpfs extension's S3 capabilities]({% link docs/extensions/httpfs/overview.md %}#s3) for instructions.
 
 ## Legacy Features
 
-Prior to version 0.10.0, DuckDB did not have a [Secrets manager](../sql/statements/create_secret), to load the credentials automatically, the AWS extension provided
-a special function to load the AWS credentials in the [legacy authentication method](httpfs/s3api_legacy_authentication).
+Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/sql/statements/create_secret.md %}), to load the credentials automatically, the AWS extension provided
+a special function to load the AWS credentials in the [legacy authentication method]({% link docs/extensions/httpfs/s3api_legacy_authentication.md %}).
 
 | Function | Type | Description |
 |---|---|-------|

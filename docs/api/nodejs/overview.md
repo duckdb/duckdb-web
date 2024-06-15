@@ -20,7 +20,7 @@ const duckdb = require('duckdb');
 const db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
 ```
 
-All options as described on [Database configuration](../../configuration/overview#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
+All options as described on [Database configuration]({% link docs/configuration/overview.md %}#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
 
 ```js
 const db = new duckdb.Database(':memory:', {
@@ -137,7 +137,7 @@ const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo', function(err, stmt) {
 
 ## Inserting Data via Arrow
 
-[Apache Arrow](../../guides/python/sql_on_arrow) can be used to insert data into DuckDB without making a copy:
+[Apache Arrow]({% link docs/guides/python/sql_on_arrow.md %}) can be used to insert data into DuckDB without making a copy:
 
 ```js
 const arrow = require('apache-arrow');
@@ -169,7 +169,7 @@ db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
 
 ## Loading Unsigned Extensions
 
-To load [unsigned extensions](../../extensions/overview#ensuring-the-integrity-of-extensions), instantiate the database as follows:
+To load [unsigned extensions]({% link docs/extensions/overview.md %}#ensuring-the-integrity-of-extensions), instantiate the database as follows:
 
 ```js
 db = new duckdb.Database(':memory:', {"allow_unsigned_extensions": "true"});

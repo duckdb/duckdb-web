@@ -26,7 +26,7 @@ All official extensions are distributed for the following platforms.
 Some extensions are distributed for the following platforms:
 
 * `windows_amd64_rtools`
-* `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions](../api/wasm/extensions))
+* `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/api/wasm/extensions.md %}))
 
 For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_gcc4`, `windows_amd64_mingw`).
 
@@ -148,7 +148,7 @@ INSTALL icu FROM '⟨custom repository⟩';
 
 The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.
 
-If the custom repository is served over HTTPS or S3, the [`httpfs` extension](httpfs/overview) is required. DuckDB will attempt to [autoload](overview#autoloading-extensions)
+If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/extensions/overview.md %}#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.
 
 ## Downloading Extensions Directly from S3
@@ -221,7 +221,7 @@ Using remote paths for compressed files is currently not possible.
 
 ## Building and Installing Extensions
 
-For building and installing extensions from source, see the [building guide](/dev/building#building-and-installing-extensions-from-source).
+For building and installing extensions from source, see the [building guide]({% link docs/dev/building/build_instructions.md %}#building-and-installing-extensions-from-source).
 
 ## Statically Linking Extensions
 

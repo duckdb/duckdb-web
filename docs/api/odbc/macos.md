@@ -26,12 +26,12 @@ title: ODBC API on macOS
 4. There are two ways to configure the ODBC driver, either by initializing via the configuration files, or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
    A combination of the two is also possible.
 
-   Furthermore, the ODBC driver supports all the [configuration options](../../configuration/overview) included in DuckDB.
+   Furthermore, the ODBC driver supports all the [configuration options]({% link docs/configuration/overview.md %}) included in DuckDB.
 
    > If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
    > the one passed to `SQLDriverConnect` will take precedence.
 
-   For the details of the configuration parameters, see the [ODBC configuration page](configuration).
+   For the details of the configuration parameters, see the [ODBC configuration page]({% link docs/api/odbc/configuration.md %}).
 
 5. After the configuration, to validate the installation, it is possible to use an ODBC client. unixODBC uses a command line tool called `isql`.
 

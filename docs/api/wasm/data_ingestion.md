@@ -11,7 +11,7 @@ First, the data file is imported into a local file system using register functio
 
 Then, the data file is imported into DuckDB using insert functions ([insertArrowFromIPCStream](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowFromIPCStream), [insertArrowTable](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowTable), [insertCSVFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertCSVFromPath), [insertJSONFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertJSONFromPath)) or directly using FROM SQL query (using extensions like Parquet or [Wasm-flavored httpfs](#httpfs-wasm-flavored)).
 
-[Insert statements](../../data/insert) can also be used to import data.
+[Insert statements]({% link docs/data/insert.md %}) can also be used to import data.
 
 ## Data Import
 

@@ -4,10 +4,10 @@ title: Regular Expressions
 railroad: expressions/like.js
 ---
 
-DuckDB offers [pattern matching operators](pattern_matching)
-([`LIKE`](pattern_matching#like),
-[`SIMILAR TO`](pattern_matching#similar-to),
-[`GLOB`](pattern_matching#glob)),
+DuckDB offers [pattern matching operators]({% link docs/sql/functions/pattern_matching.md %})
+([`LIKE`]({% link docs/sql/functions/pattern_matching.md %}#like),
+[`SIMILAR TO`]({% link docs/sql/functions/pattern_matching.md %}#similar-to),
+[`GLOB`]({% link docs/sql/functions/pattern_matching.md %}#glob)),
 as well as support for regular expressions via functions.
 
 ## Regular Expression Syntax

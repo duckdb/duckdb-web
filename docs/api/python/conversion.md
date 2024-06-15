@@ -9,7 +9,7 @@ This page documents the rules for converting [Python objects to DuckDB](#object-
 
 ## Object Conversion: Python Object to DuckDB
 
-This is a mapping of Python object types to DuckDB [Logical Types](../../sql/data_types/overview):
+This is a mapping of Python object types to DuckDB [Logical Types]({% link docs/sql/data_types/overview.md %}):
 
 * `None` → `NULL`
 * `bool` → `BOOLEAN`
@@ -158,7 +158,7 @@ DuckDB's Python client provides multiple additional methods that can be used to 
 
 ### Examples
 
-Below are some examples using this functionality. See the [Python guides](../../guides/index#python-client) for more examples.
+Below are some examples using this functionality. See the [Python guides]({% link docs/guides/overview.md %}#python-client) for more examples.
 
 Fetch as Pandas DataFrame:
 

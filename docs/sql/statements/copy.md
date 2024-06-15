@@ -207,7 +207,7 @@ The below options are applicable to all formats written with `COPY`.
 | `file_size_bytes` | If this parameter is set, the `COPY` process creates a directory which will contain the exported files. If a file exceeds the set limit (specified as bytes such as `1000` or in human-readable format such as `1k`), the process creates a new file in the directory. This parameter works in combination with `per_thread_output`. Note that the size is used as an approximation, and files can be occasionally slightly over the limit. | `VARCHAR` or `BIGINT` | (empty) |
 | `format` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Available options are `CSV`, `PARQUET` and `JSON`. | `VARCHAR` | auto |
 | `overwrite_or_ignore` | Whether or not to allow overwriting a directory if one already exists. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
-| `partition_by` | The columns to partition by using a Hive partitioning scheme, see the [partitioned writes section](../../data/partitioning/partitioned_writes). | `VARCHAR[]` | (empty) |
+| `partition_by` | The columns to partition by using a Hive partitioning scheme, see the [partitioned writes section]({% link docs/data/partitioning/partitioned_writes.md %}). | `VARCHAR[]` | (empty) |
 | `per_thread_output` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
 | `use_tmp_file` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | `BOOL` | `auto` |
 
@@ -252,14 +252,14 @@ The below options are applicable when writing `CSV` files.
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
-| `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
+| `dateformat` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
 | `delim` or `sep` | The character that is written to separate columns within each row. | `VARCHAR` | `,` |
 | `escape` | The character that should appear before a character that matches the `quote` value. | `VARCHAR` | `"` |
 | `force_quote` | The list of columns to always add quotes to, even if not required. | `VARCHAR[]` | `[]` |
 | `header` | Whether or not to write a header for the CSV file. | `BOOL` | `true` |
 | `nullstr` | The string that is written to represent a `NULL` value. | `VARCHAR` | (empty) |
 | `quote` | The quoting character to be used when a data value is quoted. | `VARCHAR` | `"` |
-| `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
+| `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
 
 ### Parquet Options
 
@@ -336,12 +336,12 @@ The below options are applicable when writing `JSON` files.
 |:--|:-----|:-|:-|
 | `array` | Whether to write a JSON array. If `true`, a JSON array of records is written, if `false`, newline-delimited JSON is written | `BOOL` | `false` |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
-| `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
-| `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | `VARCHAR` | (empty) |
+| `dateformat` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
+| `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
 
 ## Limitations
 
-`COPY` does not support copying between tables. To copy between tables, use an [`INSERT statement`](insert):
+`COPY` does not support copying between tables. To copy between tables, use an [`INSERT statement`]({% link docs/sql/statements/insert.md %}):
 
 ```sql
 INSERT INTO tbl2

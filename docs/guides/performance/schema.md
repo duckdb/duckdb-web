@@ -7,9 +7,9 @@ title: Schema
 
 It is important to use the correct type for encoding columns (e.g., `BIGINT`, `DATE`, `DATETIME`). While it is always possible to use string types (`VARCHAR`, etc.) to encode more specific values, this is not recommended. Strings use more space and are slower to process in operations such as filtering, join, and aggregation.
 
-When loading CSV files, you may leverage the CSV reader's [auto-detection mechanism](../../data/csv/auto_detection) to get the correct types for CSV inputs.
+When loading CSV files, you may leverage the CSV reader's [auto-detection mechanism]({% link docs/data/csv/auto_detection.md %}) to get the correct types for CSV inputs.
 
-If you run in a memory-constrained environment, using smaller data types (e.g., `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DuckDB’s [bitpacking compression](/2022/10/28/lightweight-compression#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing.
+If you run in a memory-constrained environment, using smaller data types (e.g., `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DuckDB’s [bitpacking compression]({% link _posts/2022-10-28-lightweight-compression.md %}#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing.
 
 > Bestpractice Use the most restrictive types possible when creating columns. Avoid using strings for encoding more specific data items.
 
@@ -17,7 +17,7 @@ If you run in a memory-constrained environment, using smaller data types (e.g., 
 
 We illustrate the difference in aggregation speed using the [`creationDate` column of the LDBC Comment table on scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet). This table has approx. 554 million unordered timestamp values. We run a simple aggregation query that returns the average day-of-the month from the timestamps in two configurations.
 
-First, we use a `DATETIME` to encode the values and run the query using the [`extract` datetime function](../../sql/functions/timestamp):
+First, we use a `DATETIME` to encode the values and run the query using the [`extract` datetime function]({% link docs/sql/functions/timestamp.md %}):
 
 ```sql
 SELECT avg(extract('day' FROM creationDate)) FROM Comment;
@@ -66,7 +66,7 @@ The results below show that joining on `BIGINT` columns is approx. 1.8× faster 
 
 ## Constraints
 
-DuckDB allows defining [constraints](../../sql/constraints) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DuckDB does not rely on these indexes for join and aggregation operators (see [indexing](indexing) for more details).
+DuckDB allows defining [constraints]({% link docs/sql/constraints.md %}) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DuckDB does not rely on these indexes for join and aggregation operators (see [indexing]({% link docs/guides/performance/indexing.md %}) for more details).
 
 > Bestpractice Do not define constraints unless your goal is to ensure data integrity.
 

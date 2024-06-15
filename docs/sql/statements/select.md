@@ -68,7 +68,7 @@ ORDER BY ⟨order_expression⟩
 LIMIT ⟨n⟩;
 ```
 
-Optionally, the `SELECT` statement can be prefixed with a [`WITH` clause](../../sql/query_syntax/with).
+Optionally, the `SELECT` statement can be prefixed with a [`WITH` clause]({% link docs/sql/query_syntax/with.md %}).
 
 As the `SELECT` statement is so complex, we have split up the syntax diagrams into several parts. The full syntax diagram can be found at the bottom of the page.
 
@@ -76,51 +76,51 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 
 <div id="rrdiagram3"></div>
 
-[The `SELECT` clause](../../sql/query_syntax/select) specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions. The `DISTINCT` keyword ensures that only unique tuples are returned.
+[The `SELECT` clause]({% link docs/sql/query_syntax/select.md %}) specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions. The `DISTINCT` keyword ensures that only unique tuples are returned.
 
-> Column names are case-insensitive. See the [Rules for Case Sensitivity](../keywords_and_identifiers#rules-for-case-sensitivity) for more details.
+> Column names are case-insensitive. See the [Rules for Case Sensitivity]({% link docs/sql/keywords_and_identifiers.md %}#rules-for-case-sensitivity) for more details.
 
 ## `FROM` Clause
 
 <div id="rrdiagram4"></div>
 
-The [`FROM` clause](../../sql/query_syntax/from) specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together, or another `SELECT` query inside a subquery node.
+The [`FROM` clause]({% link docs/sql/query_syntax/from.md %}) specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together, or another `SELECT` query inside a subquery node.
 
 ## `SAMPLE` Clause
 
 <div id="rrdiagram10"></div>
 
-[The `SAMPLE` clause](../../sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The `SAMPLE` clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the where clause or any aggregates). See the [Samples](../../sql/samples) page for more information.
+[The `SAMPLE` clause]({% link docs/sql/query_syntax/sample.md %}) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The `SAMPLE` clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the where clause or any aggregates). See the [Samples]({% link docs/sql/samples.md %}) page for more information.
 
 ## `WHERE` Clause
 
 <div id="rrdiagram5"></div>
 
-[The `WHERE` clause](../../sql/query_syntax/where) specifies any filters to apply to the data. This allows you to select only a subset of the data in which you are interested. Logically the `WHERE` clause is applied immediately after the `FROM` clause.
+[The `WHERE` clause]({% link docs/sql/query_syntax/where.md %}) specifies any filters to apply to the data. This allows you to select only a subset of the data in which you are interested. Logically the `WHERE` clause is applied immediately after the `FROM` clause.
 
 ## `GROUP BY` and `HAVING` Clauses
 
 <div id="rrdiagram6"></div>
 
-[The `GROUP BY` clause](../../sql/query_syntax/groupby) specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause. If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
+[The `GROUP BY` clause]({% link docs/sql/query_syntax/groupby.md %}) specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause. If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
 
 ## `WINDOW` Clause
 
 <div id="rrdiagram7"></div>
 
-[The `WINDOW` clause](../../sql/query_syntax/window) allows you to specify named windows that can be used within window functions. These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
+[The `WINDOW` clause]({% link docs/sql/query_syntax/window.md %}) allows you to specify named windows that can be used within window functions. These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
 
 ## `QUALIFY` Clause
 
 <div id="rrdiagram11"></div>
 
-[The `QUALIFY` clause](../../sql/query_syntax/qualify) is used to filter the result of [`WINDOW` functions](../../sql/window_functions).
+[The `QUALIFY` clause]({% link docs/sql/query_syntax/qualify.md %}) is used to filter the result of [`WINDOW` functions]({% link docs/sql/window_functions.md %}).
 
 ## `ORDER BY`, `LIMIT` and `OFFSET` Clauses
 
 <div id="rrdiagram8"></div>
 
-[`ORDER BY`](../../sql/query_syntax/orderby), [`LIMIT` and `OFFSET`](../../sql/query_syntax/limit) are output modifiers.
+[`ORDER BY`]({% link docs/sql/query_syntax/orderby.md %}), [`LIMIT` and `OFFSET`]({% link docs/sql/query_syntax/limit.md %}) are output modifiers.
 Logically they are applied at the very end of the query.
 The `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order.
 The `LIMIT` clause restricts the amount of rows fetched, while the `OFFSET` clause indicates at which position to start reading the values.
@@ -129,7 +129,7 @@ The `LIMIT` clause restricts the amount of rows fetched, while the `OFFSET` clau
 
 <div id="rrdiagram9"></div>
 
-[A `VALUES` list](../../sql/query_syntax/values) is a set of values that is supplied instead of a `SELECT` statement.
+[A `VALUES` list]({% link docs/sql/query_syntax/values.md %}) is a set of values that is supplied instead of a `SELECT` statement.
 
 ## Row IDs
 

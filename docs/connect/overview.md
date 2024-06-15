@@ -8,7 +8,7 @@ redirect_from:
 
 ## Connect or Create a Database
 
-To use DuckDB, you must first create a connection to a database. The exact syntax varies between the [client APIs](../api/overview) but it typically involves passing an argument to configure persistence.
+To use DuckDB, you must first create a connection to a database. The exact syntax varies between the [client APIs]({% link docs/api/overview.md %}) but it typically involves passing an argument to configure persistence.
 
 ## Persistence
 
@@ -22,9 +22,9 @@ The file may have an arbitrary extension, but `.db` or `.duckdb` are two common 
 
 > Tip Running on a persistent database allows spilling to disk, thus facilitating larger-than-memory workloads (i.e., out-of-core-processing).
 
-Starting with v0.10, DuckDB's storage format is [backwards-compatible](/internals/storage#backward-compatibility), i.e., DuckDB is able to read database files produced by an older versions of DuckDB.
+Starting with v0.10, DuckDB's storage format is [backwards-compatible]({% link docs/internals/storage.md %}#backward-compatibility), i.e., DuckDB is able to read database files produced by an older versions of DuckDB.
 For example, DuckDB v0.10 can read and operate on files created by the previous DuckDB version, v0.9.
-For more details on DuckDB's storage format, see the [storage page](/internals/storage).
+For more details on DuckDB's storage format, see the [storage page]({% link docs/internals/storage.md %}).
 
 ### In-Memory Database
 

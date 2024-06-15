@@ -44,4 +44,4 @@ SELECT
 
 ## Functions
 
-See [Date Functions](../../sql/functions/date).
+See [Date Functions]({% link docs/sql/functions/date.md %}).

@@ -15,7 +15,7 @@ By default only the final physical plan is shown. In order to see the unoptimize
 SET explain_output = 'all';
 ```
 
-Below is an example of running `EXPLAIN` on [`Q13`](https://github.com/duckdb/duckdb/blob/main/extension/tpch/dbgen/queries/q13.sql) of the [TPC-H benchmark](../../extensions/tpch) on the scale factor 1 data set.
+Below is an example of running `EXPLAIN` on [`Q13`](https://github.com/duckdb/duckdb/blob/main/extension/tpch/dbgen/queries/q13.sql) of the [TPC-H benchmark]({% link docs/extensions/tpch.md %}) on the scale factor 1 data set.
 
 ```sql
 EXPLAIN
@@ -112,4 +112,4 @@ EXPLAIN
 
 ## See Also
 
-For more information, see the [Profiling page](/dev/profiling).
+For more information, see the [Profiling page]({% link docs/dev/profiling.md %}).

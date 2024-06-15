@@ -23,4 +23,4 @@ The `SHOW` statement is an alias for `DESCRIBE`.
 
 ## See Also
 
-For more examples, see the [guide on `DESCRIBE`](../../guides/meta/describe).
+For more examples, see the [guide on `DESCRIBE`]({% link docs/guides/meta/describe.md %}).

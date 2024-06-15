@@ -8,7 +8,7 @@ The `azure` extension is a loadable extension that adds a filesystem abstraction
 
 ## Installing and Loading
 
-The `azure` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
+The `azure` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -88,11 +88,11 @@ FROM 'abfss://⟨my_storage_account⟩.dfs.core.windows.net/⟨my_filesystem⟩/
 
 ## Configuration
 
-Use the following [configuration options](../configuration/overview) how the extension reads remote files:
+Use the following [configuration options]({% link docs/configuration/overview.md %}) how the extension reads remote files:
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
-| `azure_http_stats` | Include http info from Azure Storage in the [`EXPLAIN ANALYZE` statement](/dev/profiling). | `BOOLEAN` | `false` |
+| `azure_http_stats` | Include http info from Azure Storage in the [`EXPLAIN ANALYZE` statement]({% link docs/dev/profiling.md %}). | `BOOLEAN` | `false` |
 | `azure_read_transfer_concurrency` | Maximum number of threads the Azure client can use for a single parallel read. If `azure_read_transfer_chunk_size` is less than `azure_read_buffer_size` then setting this > 1 will allow the Azure client to do concurrent requests to fill the buffer. | `BIGINT` | `5` |
 | `azure_read_transfer_chunk_size` | Maximum size in bytes that the Azure client will read in a single request. It is recommended that this is a factor of `azure_read_buffer_size`. | `BIGINT` | `1024*1024` |
 | `azure_read_buffer_size` | Size of the read buffer. It is recommended that this is evenly divisible by `azure_read_transfer_chunk_size`. | `UBIGINT` | `1024*1024` |
@@ -121,9 +121,9 @@ The Azure extension has two ways to configure the authentication. The preferred 
 
 ### Authentication with Secret
 
-Multiple [Secret Providers](../configuration/secrets_manager#secret-providers) are available for the Azure extension:
+Multiple [Secret Providers]({% link docs/configuration/secrets_manager.md %}#secret-providers) are available for the Azure extension:
 
-> * If you need to define different secrets for different storage accounts you can use [the `SCOPE` configuration](../configuration/secrets_manager#creating-multiple-secrets-for-the-same-service-type).
+> * If you need to define different secrets for different storage accounts you can use [the `SCOPE` configuration]({% link docs/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type).
 > * If you use fully qualified path then the `ACCOUNT_NAME` attribute is optional.
 
 #### `CONFIG` Provider

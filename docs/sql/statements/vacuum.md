@@ -35,7 +35,7 @@ VACUUM FULL; -- error
 
 ## Reclaiming Space
 
-To reclaim space after deleting rows, use the [`CHECKPOINT` statement](checkpoint).
+To reclaim space after deleting rows, use the [`CHECKPOINT` statement]({% link docs/sql/statements/checkpoint.md %}).
 
 ## Syntax
 

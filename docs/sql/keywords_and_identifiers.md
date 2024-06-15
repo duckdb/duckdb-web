@@ -12,7 +12,7 @@ redirect_from:
 Similarly to other SQL dialects and programming languages, identifiers in DuckDB's SQL are subject to several rules.
 
 * Unquoted identifiers need to conform to a number of rules:
-    * They must not be a reserved keyword (see [`duckdb_keywords()`](duckdb_table_functions#duckdb_keywords)), e.g., `SELECT 123 AS SELECT` will fail.
+    * They must not be a reserved keyword (see [`duckdb_keywords()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_keywords)), e.g., `SELECT 123 AS SELECT` will fail.
     * They must not start with a number or special character, e.g., `SELECT 123 AS 1col` is invalid.
     * They cannot contain whitespaces (including tabs and newline characters).
 * Identifiers can be quoted using double-quote characters (`"`). Quoted identifiers can use any keyword, whitespace or special character, e.g., `"SELECT"` and `" § 🦆 ¶ "` are valid identifiers.
@@ -41,7 +41,7 @@ FROM (SELECT UNNEST({'a': 42, 'b': {'a': 88, 'b': 99}}, recursive := true));
 
 Database names are subject to the rules for [identifiers](#identifiers).
 
-Additionally, it is best practice to avoid DuckDB's two internal [database schema names](duckdb_table_functions#duckdb_databases), `system` and `temp`.
+Additionally, it is best practice to avoid DuckDB's two internal [database schema names]({% link docs/sql/duckdb_table_functions.md %}#duckdb_databases), `system` and `temp`.
 By default, persistent databases are named after their filename without the extension.
 Therefore, the filenames `system.db` and `temp.db` (as well as `system.duckdb` and `temp.duckdb`) result in the database names `system` and `temp`, respectively.
 If you need to attach to a database that has one of these names, use an alias, e.g.:
@@ -85,7 +85,7 @@ SELECT cosineofpi FROM tbl;
 |-----------:|
 | -1.0       |
 
-To change this behavior, set the `preserve_identifier_case` [configuration option](../configuration/overview#configuration-reference) to `false`.
+To change this behavior, set the `preserve_identifier_case` [configuration option]({% link docs/configuration/overview.md %}#configuration-reference) to `false`.
 
 #### Handling Conflicts
 
@@ -105,7 +105,7 @@ SELECT * FROM t1 NATURAL JOIN t2;
 
 #### Disabling Preserving Cases
 
-With the `preserve_identifier_case` [configuration option](../configuration/overview#configuration-reference) set to `false`, all identifiers are turned into lowercase:
+With the `preserve_identifier_case` [configuration option]({% link docs/configuration/overview.md %}#configuration-reference) set to `false`, all identifiers are turned into lowercase:
 
 ```sql
 SET preserve_identifier_case = false;

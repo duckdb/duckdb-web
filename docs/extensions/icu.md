@@ -8,7 +8,7 @@ The `icu` extension contains an easy-to-use version of the collation/timezone pa
 
 ## Installing and Loading
 
-The `icu` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
+The `icu` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -20,5 +20,5 @@ LOAD icu;
 
 The `icu` extension introduces the following features:
 
-* [region-dependent collations](../sql/expressions/collations)
-* [time zones](../sql/data_types/timezones), used for [timestamp data types](../sql/data_types/timestamp) and [timestamp functions](../sql/functions/timestamptz)
+* [region-dependent collations]({% link docs/sql/expressions/collations.md %})
+* [time zones]({% link docs/sql/data_types/timezones.md %}), used for [timestamp data types]({% link docs/sql/data_types/timestamp.md %}) and [timestamp functions]({% link docs/sql/functions/timestamptz.md %})

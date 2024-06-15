@@ -48,4 +48,4 @@ SELECT TIMETZ '1992-09-20 11:30:00.123456+05:30';
 ```
 
 > Warning The `TIME` type should only be used in rare cases, where the date part of the timestamp can be disregarded.
-> Most applications should use the [`TIMESTAMP` types](timestamp) to represent their timestamps.
+> Most applications should use the [`TIMESTAMP` types]({% link docs/sql/data_types/timestamp.md %}) to represent their timestamps.

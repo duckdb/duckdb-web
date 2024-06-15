@@ -47,7 +47,7 @@ SELECT 'abc' NOT ILIKE '%C'; -- false
 
 To search within a string for a character that is a wildcard (`%` or `_`), the pattern must use an `ESCAPE` clause and an escape character to indicate the wildcard should be treated as a literal character instead of a wildcard. See an example below.
 
-Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs](../../sql/functions/char) for details.
+Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs]({% link docs/sql/functions/char.md %}) for details.
 
 Search for strings with 'a' then a literal percent sign then 'c':
 
@@ -77,7 +77,7 @@ There are also alternative characters that can be used as keywords in place of `
 
 <div id="rrdiagram2"></div>
 
-The `SIMILAR TO` operator returns true or false depending on whether its pattern matches the given string. It is similar to `LIKE`, except that it interprets the pattern using a [regular expression](regular_expressions). Like `LIKE`, the `SIMILAR TO` operator succeeds only if its pattern matches the entire string; this is unlike common regular expression behavior where the pattern can match any part of the string.
+The `SIMILAR TO` operator returns true or false depending on whether its pattern matches the given string. It is similar to `LIKE`, except that it interprets the pattern using a [regular expression]({% link docs/sql/functions/regular_expressions.md %}). Like `LIKE`, the `SIMILAR TO` operator succeeds only if its pattern matches the entire string; this is unlike common regular expression behavior where the pattern can match any part of the string.
 
 A regular expression is a character sequence that is an abbreviated definition of a set of strings (a regular set). A string is said to match a regular expression if it is a member of the regular set described by the regular expression. As with `LIKE`, pattern characters match string characters exactly unless they are special characters in the regular expression language — but regular expressions use different special characters than `LIKE` does.
 
@@ -169,4 +169,4 @@ SELECT * FROM glob('*');
 
 ## Regular Expressions
 
-DuckDB's regex support is documented on the [Regular Expressions page](regular_expressions).
+DuckDB's regex support is documented on the [Regular Expressions page]({% link docs/sql/functions/regular_expressions.md %}).

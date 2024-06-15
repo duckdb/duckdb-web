@@ -34,4 +34,4 @@ Blobs are typically used to store non-textual objects that the database does not
 
 ## Functions
 
-See [Blob Functions](../functions/blob).
+See [Blob Functions]({% link docs/sql/functions/blob.md %}).

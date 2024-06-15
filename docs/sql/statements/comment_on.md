@@ -65,7 +65,7 @@ COMMENT ON TABLE test_table IS NULL;
 
 ## Reading Comments
 
-Comments can be read by querying the `comment` column of the respective [metadata functions](../duckdb_table_functions):
+Comments can be read by querying the `comment` column of the respective [metadata functions]({% link docs/sql/duckdb_table_functions.md %}):
 
 List comments on `TABLE`s:
 

@@ -38,4 +38,4 @@ The `USING` clause allows deleting based on the content of other tables or subqu
 
 ## Limitations on Reclaiming Memory and Disk Space
 
-Running `DELETE` does not mean space is reclaimed. In general, rows are only marked as deleted. DuckDB reclaims space upon [performing a `CHECKPOINT`](checkpoint). [`VACUUM`](vacuum) currently does not reclaim space.
+Running `DELETE` does not mean space is reclaimed. In general, rows are only marked as deleted. DuckDB reclaims space upon [performing a `CHECKPOINT`]({% link docs/sql/statements/checkpoint.md %}). [`VACUUM`]({% link docs/sql/statements/vacuum.md %}) currently does not reclaim space.

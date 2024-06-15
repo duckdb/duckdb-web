@@ -5,7 +5,7 @@ railroad: query_syntax/groupby.js
 ---
 
 `GROUPING SETS`, `ROLLUP` and `CUBE` can be used in the `GROUP BY` clause to perform a grouping over multiple dimensions within the same query.
-Note that this syntax is not compatible with [`GROUP BY ALL`](groupby#group-by-all).
+Note that this syntax is not compatible with [`GROUP BY ALL`]({% link docs/sql/query_syntax/groupby.md %}#group-by-all).
 
 ## Examples
 

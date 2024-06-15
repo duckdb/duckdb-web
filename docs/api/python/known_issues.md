@@ -52,7 +52,7 @@ The solution is to fix the `protobuf` package. This may require uninstalling con
 
 ## Running `EXPLAIN` Renders Newlines in Jupyter and IPython
 
-When DuckDB is run in Jupyter notebooks or in the IPython shell, the output of the [`EXPLAIN` statement](../../guides/meta/explain) contains hard line breaks (`\n`):
+When DuckDB is run in Jupyter notebooks or in the IPython shell, the output of the [`EXPLAIN` statement]({% link docs/guides/meta/explain.md %}) contains hard line breaks (`\n`):
 
 ```python
 In [1]: import duckdb
@@ -87,7 +87,7 @@ Out[2]:
 └───────────────────────────┘
 ```
 
-Please also check out the [Jupyter guide](../../guides/python/jupyter) for tips on using Jupyter with JupySQL.
+Please also check out the [Jupyter guide]({% link docs/guides/python/jupyter.md %}) for tips on using Jupyter with JupySQL.
 
 ## Error When Importing the DuckDB Python Package on Windows
 

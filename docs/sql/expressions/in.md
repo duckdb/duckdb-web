@@ -48,4 +48,4 @@ NULL
 
 ## Use with Subqueries
 
-The `IN` operator can also be used with a subquery that returns a single column. See the [subqueries page for more information](../../sql/expressions/subqueries).
+The `IN` operator can also be used with a subquery that returns a single column. See the [subqueries page for more information]({% link docs/sql/expressions/subqueries.md %}).

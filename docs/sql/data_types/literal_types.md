@@ -13,7 +13,7 @@ The `NULL` literal is denoted with the keyword `NULL`. The `NULL` literal can be
 
 ## Integer Literals
 
-Integer literals are denoted as a sequence of one or more digits. At runtime, these result in values of the `INTEGER_LITERAL` type. `INTEGER_LITERAL` types can be implicitly converted to any [integer type](numeric#integer-types) in which the value fits. For example, the integer literal `42` can be implicitly converted to a `TINYINT`, but the integer literal `1000` cannot be.
+Integer literals are denoted as a sequence of one or more digits. At runtime, these result in values of the `INTEGER_LITERAL` type. `INTEGER_LITERAL` types can be implicitly converted to any [integer type]({% link docs/sql/data_types/numeric.md %}#integer-types) in which the value fits. For example, the integer literal `42` can be implicitly converted to a `TINYINT`, but the integer literal `1000` cannot be.
 
 ## Other Numeric Literals
 
@@ -55,7 +55,7 @@ SELECT '0b0_1_0_1'::INTEGER; -- 5
 ## String Literals
 
 String literals are delimited using single quotes (`'`, apostrophe) and result in `STRING_LITERAL` values.
-Note that double quotes (`"`) cannot be used as string delimiter character: instead, double quotes are used to delimit [quoted identifiers](../keywords_and_identifiers#identifiers).
+Note that double quotes (`"`) cannot be used as string delimiter character: instead, double quotes are used to delimit [quoted identifiers]({% link docs/sql/keywords_and_identifiers.md %}#identifiers).
 
 ### Implicit String Literal Concatenation
 

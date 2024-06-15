@@ -5,7 +5,7 @@ redirect_from:
   - /docs/guides/import/query_mysql
 ---
 
-To run a query directly on a running MySQL database, the [`mysql` extension](../../extensions/mysql) is required.
+To run a query directly on a running MySQL database, the [`mysql` extension]({% link docs/extensions/mysql.md %}) is required.
 
 ## Installation and Loading
 
@@ -50,4 +50,4 @@ CREATE TABLE tbl (id INTEGER, name VARCHAR);
 INSERT INTO tbl VALUES (42, 'DuckDB');
 ```
 
-For a list of supported operations, see the [MySQL extension documentation](../../extensions/mysql#supported-operations).
+For a list of supported operations, see the [MySQL extension documentation]({% link docs/extensions/mysql.md %}#supported-operations).

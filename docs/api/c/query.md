@@ -40,7 +40,7 @@ duckdb_destroy_result(&result);
 Values can be extracted using either the `duckdb_column_data`/`duckdb_nullmask_data` functions, or using the `duckdb_value` convenience functions. The `duckdb_column_data`/`duckdb_nullmask_data` functions directly hand you
 a pointer to the result arrays in columnar format, and can therefore be very fast. The `duckdb_value` functions perform bounds- and type-checking, and will automatically cast values to the desired type. This makes them more convenient and easier to use, at the expense of being slower.
 
-See the [Types](types) page for more information.
+See the [Types]({% link docs/api/c/types.md %}) page for more information.
 
 > For optimal performance, use `duckdb_column_data` and `duckdb_nullmask_data` to extract data from the query result.
 > The `duckdb_value` functions perform internal type-checking, bounds-checking and casting which makes them slower.
@@ -382,7 +382,7 @@ Returns the data of a specific column of a result in columnar format.
 
 The function returns a dense array which contains the result data. The exact type stored in the array depends on the
 corresponding duckdb_type (as provided by `duckdb_column_type`). For the exact type by which the data should be
-accessed, see the comments in [the types section](types) or the `DUCKDB_TYPE` enum.
+accessed, see the comments in [the types section]({% link docs/api/c/types.md %}) or the `DUCKDB_TYPE` enum.
 
 For example, for a column of type `DUCKDB_TYPE_INTEGER`, rows can be accessed in the following manner:
 ```c

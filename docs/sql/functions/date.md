@@ -20,27 +20,27 @@ The table below shows the available mathematical operators for `DATE` types.
 | `-` | Subtraction of an `INTERVAL` | `DATE '1992-03-27' - INTERVAL 5 DAY` | `1992-03-22` |
 | `-` | Subtraction of a variable `INTERVAL` | `SELECT DATE '1992-03-27' - INTERVAL (d.days) DAY FROM (VALUES (5), (11)) AS d(days)` | `1992-03-22` and `1992-03-16` |
 
-Adding to or subtracting from [infinite values](../../sql/data_types/date#special-values) produces the same infinite value.
+Adding to or subtracting from [infinite values]({% link docs/sql/data_types/date.md %}#special-values) produces the same infinite value.
 
 ## Date Functions
 
 The table below shows the available functions for `DATE` types.
-Dates can also be manipulated with the [timestamp functions](../../sql/functions/timestamp) through type promotion.
+Dates can also be manipulated with the [timestamp functions]({% link docs/sql/functions/timestamp.md %}) through type promotion.
 
 | Name | Description |
 |:--|:-------|
 | [`current_date`](#current_date) | Current date (at start of current transaction). |
 | [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date. |
-| [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition](../../sql/functions/datepart) boundaries between the dates. |
-| [`date_part(part, date)`](#date_partpart-date) | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
-| [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The number of complete [partitions](../../sql/functions/datepart) between the dates. |
-| [`date_trunc(part, date)`](#date_truncpart-date) | Truncate to specified [precision](../../sql/functions/datepart). |
-| [`datediff(part, startdate, enddate)`](#datediffpart-startdate-enddate) | The number of [partition](../../sql/functions/datepart) boundaries between the dates. Alias of `date_diff`. |
-| [`datepart(part, date)`](#datepartpart-date) | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). Alias of `date_part`. |
-| [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | The number of complete [partitions](../../sql/functions/datepart) between the dates. Alias of `date_sub`. |
-| [`datetrunc(part, date)`](#datetruncpart-date) | Truncate to specified [precision](../../sql/functions/datepart). Alias of `date_trunc`. |
+| [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition]({% link docs/sql/functions/datepart.md %}) boundaries between the dates. |
+| [`date_part(part, date)`](#date_partpart-date) | Get the [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). |
+| [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The number of complete [partitions]({% link docs/sql/functions/datepart.md %}) between the dates. |
+| [`date_trunc(part, date)`](#date_truncpart-date) | Truncate to specified [precision]({% link docs/sql/functions/datepart.md %}). |
+| [`datediff(part, startdate, enddate)`](#datediffpart-startdate-enddate) | The number of [partition]({% link docs/sql/functions/datepart.md %}) boundaries between the dates. Alias of `date_diff`. |
+| [`datepart(part, date)`](#datepartpart-date) | Get the [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). Alias of `date_part`. |
+| [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | The number of complete [partitions]({% link docs/sql/functions/datepart.md %}) between the dates. Alias of `date_sub`. |
+| [`datetrunc(part, date)`](#datetruncpart-date) | Truncate to specified [precision]({% link docs/sql/functions/datepart.md %}). Alias of `date_trunc`. |
 | [`dayname(date)`](#daynamedate) | The (English) name of the weekday. |
-| [`extract(part from date)`](#extractpart-from-date) | Get [subfield](../../sql/functions/datepart) from a date. |
+| [`extract(part from date)`](#extractpart-from-date) | Get [subfield]({% link docs/sql/functions/datepart.md %}) from a date. |
 | [`greatest(date, date)`](#greatestdate-date) | The later of two dates. |
 | [`isfinite(date)`](#isfinitedate) | Returns true if the date is finite, false otherwise. |
 | [`isinf(date)`](#isinfdate) | Returns true if the date is infinite, false otherwise. |
@@ -48,7 +48,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | [`least(date, date)`](#leastdate-date) | The earlier of two dates. |
 | [`make_date(year, month, day)`](#make_dateyear-month-day) | The date for the given parts. |
 | [`monthname(date)`](#monthnamedate) | The (English) name of the month. |
-| [`strftime(date, format)`](#strftimedate-format) | Converts a date to a string according to the [format string](../../sql/functions/dateformat). |
+| [`strftime(date, format)`](#strftimedate-format) | Converts a date to a string according to the [format string]({% link docs/sql/functions/dateformat.md %}). |
 | [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
 | [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` date. `origin` defaults to 2000-01-03 for buckets that don't include a month or year interval, and to 2000-01-01 for month and year buckets. |
 | [`today()`](#today) | Current date (start of current transaction). |
@@ -73,7 +73,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | The number of [partition](../../sql/functions/datepart) boundaries between the dates. |
+| **Description** | The number of [partition]({% link docs/sql/functions/datepart.md %}) boundaries between the dates. |
 | **Example** | `date_diff('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `2` |
 
@@ -81,7 +81,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
+| **Description** | Get the [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | **Example** | `date_part('year', DATE '1992-09-20')` |
 | **Result** | `1992` |
 
@@ -89,7 +89,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | The number of complete [partitions](../../sql/functions/datepart) between the dates. |
+| **Description** | The number of complete [partitions]({% link docs/sql/functions/datepart.md %}) between the dates. |
 | **Example** | `date_sub('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `1` |
 
@@ -97,7 +97,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Truncate to specified [precision](../../sql/functions/datepart). |
+| **Description** | Truncate to specified [precision]({% link docs/sql/functions/datepart.md %}). |
 | **Example** | `date_trunc('month', DATE '1992-03-07')` |
 | **Result** | `1992-03-01` |
 
@@ -105,7 +105,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | The number of [partition](../../sql/functions/datepart) boundaries between the dates. |
+| **Description** | The number of [partition]({% link docs/sql/functions/datepart.md %}) boundaries between the dates. |
 | **Example** | `datediff('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `2` |
 | **Alias** | `date_diff`. |
@@ -114,7 +114,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`). |
+| **Description** | Get the [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | **Example** | `datepart('year', DATE '1992-09-20')` |
 | **Result** | `1992` |
 | **Alias** | `date_part`. |
@@ -123,7 +123,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | The number of complete [partitions](../../sql/functions/datepart) between the dates. |
+| **Description** | The number of complete [partitions]({% link docs/sql/functions/datepart.md %}) between the dates. |
 | **Example** | `datesub('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `1` |
 | **Alias** | `date_sub`. |
@@ -132,7 +132,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Truncate to specified [precision](../../sql/functions/datepart). |
+| **Description** | Truncate to specified [precision]({% link docs/sql/functions/datepart.md %}). |
 | **Example** | `datetrunc('month', DATE '1992-03-07')` |
 | **Result** | `1992-03-01` |
 | **Alias** | `date_trunc`. |
@@ -149,7 +149,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Get [subfield](../../sql/functions/datepart) from a date. |
+| **Description** | Get [subfield]({% link docs/sql/functions/datepart.md %}) from a date. |
 | **Example** | `extract('year' FROM DATE '1992-09-20')` |
 | **Result** | `1992` |
 
@@ -213,7 +213,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts a date to a string according to the [format string](../../sql/functions/dateformat). |
+| **Description** | Converts a date to a string according to the [format string]({% link docs/sql/functions/dateformat.md %}). |
 | **Example** | `strftime(date '1992-01-01', '%a, %-d %B %Y')` |
 | **Result** | `Wed, 1 January 1992` |
 
@@ -243,7 +243,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 ## Date Part Extraction Functions
 
-There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart#part-functions).
+There are also dedicated extraction functions to get the [subfields]({% link docs/sql/functions/datepart.md %}#part-functions).
 A few examples include extracting the day from a date, or the day of the week from a date.
 
 Functions applied to infinite dates will either return the same infinite dates

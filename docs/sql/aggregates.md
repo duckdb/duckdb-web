@@ -37,7 +37,7 @@ SELECT count(DISTINCT region)
 FROM sales;
 ```
 
-Return two values, the total sum of `amount` and the sum of `amount` minus columns where the region is `north` using the [`FILTER` clause](query_syntax/filter):
+Return two values, the total sum of `amount` and the sum of `amount` minus columns where the region is `north` using the [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}):
 
 ```sql
 SELECT sum(amount), sum(amount) FILTER (region != 'north')
@@ -616,4 +616,4 @@ as the first argument.
 
 | Function | Description | Alias |
 |:--|:---|:--|
-| `grouping()` | For queries with `GROUP BY` and either [`ROLLUP` or `GROUPING SETS`](query_syntax/grouping_sets#identifying-grouping-sets-with-grouping_id): Returns an integer identifying which of the argument expressions where used to group on to create the current supper-aggregate row. | `grouping_id()` |
+| `grouping()` | For queries with `GROUP BY` and either [`ROLLUP` or `GROUPING SETS`]({% link docs/sql/query_syntax/grouping_sets.md %}#identifying-grouping-sets-with-grouping_id): Returns an integer identifying which of the argument expressions where used to group on to create the current supper-aggregate row. | `grouping_id()` |

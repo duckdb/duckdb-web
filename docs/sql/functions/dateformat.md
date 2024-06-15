@@ -7,7 +7,7 @@ The `strftime` and `strptime` functions can be used to convert between dates/tim
 
 ## `strftime` Examples
 
-The [`strftime(timestamp, format)`](timestamp#strftimetimestamp-format) converts timestamps or dates to strings according to the specified pattern.
+The [`strftime(timestamp, format)`]({% link docs/sql/functions/timestamp.md %}#strftimetimestamp-format) converts timestamps or dates to strings according to the specified pattern.
 
 ```sql
 SELECT strftime(DATE '1992-03-02', '%d/%m/%Y');
@@ -27,7 +27,7 @@ Monday, 2 March 1992 - 08:32:45 PM
 
 ## `strptime` Examples
 
-The [`strptime(text, format)` function](timestamp#strptimetext-format) converts strings to timestamps according to the specified pattern.
+The [`strptime(text, format)` function]({% link docs/sql/functions/timestamp.md %}#strptimetext-format) converts strings to timestamps according to the specified pattern.
 
 ```sql
 SELECT strptime('02/03/1992', '%d/%m/%Y');
@@ -58,7 +58,7 @@ Invalid Input Error: Could not parse string "02/50/1992" according to format spe
 Error: Month out of range, expected a value between 1 and 12
 ```
 
-To return `NULL` on failure, use the [`try_strptime` function](timestamp#try_strptimetext-format):
+To return `NULL` on failure, use the [`try_strptime` function]({% link docs/sql/functions/timestamp.md %}#try_strptimetext-format):
 
 ```text
 NULL
@@ -66,7 +66,7 @@ NULL
 
 ## CSV Parsing
 
-The date formats can also be specified during CSV parsing, either in the [`COPY` statement](../statements/copy) or in the `read_csv` function. This can be done by either specifying a `DATEFORMAT` or a `TIMESTAMPFORMAT` (or both). `DATEFORMAT` will be used for converting dates, and `TIMESTAMPFORMAT` will be used for converting timestamps. Below are some examples for how to use this.
+The date formats can also be specified during CSV parsing, either in the [`COPY` statement]({% link docs/sql/statements/copy.md %}) or in the `read_csv` function. This can be done by either specifying a `DATEFORMAT` or a `TIMESTAMPFORMAT` (or both). `DATEFORMAT` will be used for converting dates, and `TIMESTAMPFORMAT` will be used for converting timestamps. Below are some examples for how to use this.
 
 In a `COPY` statement:
 

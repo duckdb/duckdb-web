@@ -26,7 +26,7 @@ Create a view and replace the column names:
 CREATE VIEW v1(a) AS SELECT 42;
 ```
 
-The SQL query behind an existing view can be read using the [`duckdb_views()` function](../../sql/duckdb_table_functions#duckdb_views) like this:
+The SQL query behind an existing view can be read using the [`duckdb_views()` function]({% link docs/sql/duckdb_table_functions.md %}#duckdb_views) like this:
 
 ```sql
 SELECT sql FROM duckdb_views() WHERE view_name = 'v1';

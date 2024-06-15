@@ -22,7 +22,7 @@ SUMMARIZE SELECT * FROM tbl;
 
 ## Example
 
-Below is an example of `SUMMARIZE` on the `lineitem` table of TPC-H `SF1` table, generated using the [`tpch` extension](../../extensions/tpch).
+Below is an example of `SUMMARIZE` on the `lineitem` table of TPC-H `SF1` table, generated using the [`tpch` extension]({% link docs/extensions/tpch.md %}).
 
 ```sql
 INSTALL tpch;
@@ -63,7 +63,7 @@ CREATE TABLE tbl_summary AS SELECT * FROM (SUMMARIZE tbl);
 
 ## Summarizing Remote Tables
 
-It is possible to summarize remote tables via the [`httpfs` extension](../../extensions/httpfs) using the `SUMMARIZE TABLE` statement. For example:
+It is possible to summarize remote tables via the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) using the `SUMMARIZE TABLE` statement. For example:
 
 ```sql
 SUMMARIZE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';

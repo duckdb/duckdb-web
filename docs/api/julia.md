@@ -68,7 +68,7 @@ print(results)
 
 ## Appender API
 
-The DuckDB Julia package also supports the [Appender API](../data/appender), which is much faster than using prepared statements or individual `INSERT INTO` statements. Appends are made in row-wise format. For every column, an `append()` call should be made, after which the row should be finished by calling `flush()`. After all rows have been appended, `close()` should be used to finalize the Appender and clean up the resulting memory.
+The DuckDB Julia package also supports the [Appender API]({% link docs/data/appender.md %}), which is much faster than using prepared statements or individual `INSERT INTO` statements. Appends are made in row-wise format. For every column, an `append()` call should be made, after which the row should be finished by calling `flush()`. After all rows have been appended, `close()` should be used to finalize the Appender and clean up the resulting memory.
 
 ```julia
 using DuckDB, DataFrames, Dates
@@ -99,7 +99,7 @@ DuckDB.close(appender)
 
 ## Concurrency
 
-Within a Julia process, tasks are able to concurrently read and write to the database, as long as each task maintains its own connection to the database.  In the example below, a single task is spawned to periodically read the database and many tasks are spawned to write to the database using both [`INSERT` statements](../sql/statements/insert) as well as the [Appender API](../data/appender).
+Within a Julia process, tasks are able to concurrently read and write to the database, as long as each task maintains its own connection to the database.  In the example below, a single task is spawned to periodically read the database and many tasks are spawned to write to the database using both [`INSERT` statements]({% link docs/sql/statements/insert.md %}) as well as the [Appender API]({% link docs/data/appender.md %}).
 
 ```julia
 using Dates, DataFrames, DuckDB

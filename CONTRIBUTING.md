@@ -41,7 +41,7 @@ Each new page requires at least 2 edits:
 * Add a link to the new page within `_data/menu_docs_dev.json`. This populates the dropdown menus.
 
 The addition of a new guide requires one additional edit:
-* Add a link to the new page within the Guides landing page: `docs/guides/index.md`
+* Add a link to the new page within the Guides landing page: `docs/guides/overview.md`
 
 Before creating a pull request, please perform the following steps:
 * Preview your changes in the browser using the [site build guide](BUILDING.md).

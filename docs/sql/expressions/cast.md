@@ -7,11 +7,11 @@ railroad: expressions/cast.js
 <div id="rrdiagram"></div>
 
 Casting refers to the operation of converting a value in a particular data type to the corresponding value in another data type.
-Casting can occur either implicitly or explicitly. The syntax described here performs an explicit cast. More information on casting can be found on the [typecasting page](../data_types/typecasting).
+Casting can occur either implicitly or explicitly. The syntax described here performs an explicit cast. More information on casting can be found on the [typecasting page]({% link docs/sql/data_types/typecasting.md %}).
 
 ## Explicit Casting
 
-The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`, where `TYPENAME` is a name (or alias) of one of [DuckDB's data types](../data_types/overview). DuckDB also supports the shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
+The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`, where `TYPENAME` is a name (or alias) of one of [DuckDB's data types]({% link docs/sql/data_types/overview.md %}). DuckDB also supports the shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
 
 ```sql
 SELECT CAST(i AS VARCHAR) AS i FROM generate_series(1, 3) tbl(i);

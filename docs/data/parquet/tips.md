@@ -18,7 +18,7 @@ FROM read_parquet('flights*.parquet', union_by_name = true);
 
 ## Tips for Writing Parquet Files
 
-Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [Hive partitioning](../partitioning/hive_partitioning) structure are good ways to transparently handle multiple files.
+Using a [glob pattern]({% link docs/data/multiple_files/overview.md %}#glob-syntax) upon read or a [Hive partitioning]({% link docs/data/partitioning/hive_partitioning.md %}) structure are good ways to transparently handle multiple files.
 
 ### Enabling `PER_THREAD_OUTPUT`
 
@@ -51,4 +51,4 @@ COPY
     (FORMAT PARQUET, ROW_GROUP_SIZE 100_000);
 ```
 
-See the [Performance Guide on file formats](../../guides/performance/file_formats#parquet-file-sizes) for more tips.
+See the [Performance Guide on file formats]({% link docs/guides/performance/file_formats.md %}#parquet-file-sizes) for more tips.

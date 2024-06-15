@@ -3,7 +3,7 @@ layout: docu
 title: Prepared Statements
 ---
 
-DuckDB supports [prepared statements](../../sql/query_syntax/prepared_statements). A prepared statement is a parameterized query. The query is prepared with question marks (`?`), parameter positions (`$1`), or parameter names (`$param`), indicating the parameters of the query. Values can then be bound to these parameters, after which the prepared statement can be executed using those parameters. A single query can be prepared once and executed many times.
+DuckDB supports [prepared statements]({% link docs/sql/query_syntax/prepared_statements.md %}). A prepared statement is a parameterized query. The query is prepared with question marks (`?`), parameter positions (`$1`), or parameter names (`$param`), indicating the parameters of the query. Values can then be bound to these parameters, after which the prepared statement can be executed using those parameters. A single query can be prepared once and executed many times.
 
 Prepared statements are useful to:
 
@@ -45,7 +45,7 @@ After calling `duckdb_prepare`, the prepared statement parameters can be inspect
 
 It is not required that the `duckdb_bind` family of functions matches the prepared statement parameter type exactly. The values will be auto-cast to the required value as required. For example, calling `duckdb_bind_int8` on a parameter type of `DUCKDB_TYPE_INTEGER` will work as expected.
 
-> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. Instead it is recommended to use the [Appender](appender).
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. Instead it is recommended to use the [Appender]({% link docs/api/c/appender.md %}).
 
 ## API Reference
 

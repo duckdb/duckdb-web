@@ -5,7 +5,7 @@ title: C++ API
 
 ## Installation
 
-The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
+The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link docs/installation/index.html %}?environment=cplusplus) for details.
 
 ## Basic API Usage
 
@@ -52,7 +52,7 @@ std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT count(*) FROM a
 std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ```
 
-> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation]({% link docs/data/overview.md %}) for better options.
 
 ### UDF API
 

@@ -22,9 +22,9 @@ The following table shows which parts of the S3 API are required for each `httpf
 
 ## Configuration and Authentication
 
-The preferred way to configure and authenticate to S3 endpoints is to use [secrets](../../sql/statements/create_secret). Multiple secret providers are available.
+The preferred way to configure and authenticate to S3 endpoints is to use [secrets]({% link docs/sql/statements/create_secret.md %}). Multiple secret providers are available.
 
-> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager](../../sql/statements/create_secret). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API](s3api_legacy_authentication).
+> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/sql/statements/create_secret.md %}). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API]({% link docs/extensions/httpfs/s3api_legacy_authentication.md %}).
 
 ### `CONFIG` Provider
 
@@ -176,7 +176,7 @@ SELECT *
 FROM read_parquet('s3://bucket/*.parquet');
 ```
 
-This query matches all files in the root of the bucket with the [Parquet extension](../parquet).
+This query matches all files in the root of the bucket with the [Parquet extension]({% link docs/data/parquet/overview.md %}).
 
 Several features for matching are supported, such as `*` to match any number of any character, `?` for any single character or `[0-9]` for a single character in a range of characters:
 
@@ -202,7 +202,7 @@ could for example result in:
 
 ### Hive Partitioning
 
-DuckDB also offers support for the [Hive partitioning scheme](../../data/partitioning/hive_partitioning), which is available when using HTTP(S) and S3 endpoints.
+DuckDB also offers support for the [Hive partitioning scheme]({% link docs/data/partitioning/hive_partitioning.md %}), which is available when using HTTP(S) and S3 endpoints.
 
 ## Writing
 

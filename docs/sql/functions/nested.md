@@ -5,8 +5,8 @@ redirect_from:
   - docs/test/functions/nested
 ---
 
-This section describes functions and operators for examining and manipulating nested values. There are five [nested data types](../data_types/overview#nested--composite-types):
-[`ARRAY`](../data_types/array), [`LIST`](../data_types/list), [`MAP`](../data_types/map), [`STRUCT`](../data_types/struct), and [`UNION`](../data_types/union).
+This section describes functions and operators for examining and manipulating nested values. There are five [nested data types]({% link docs/sql/data_types/overview.md %}#nested--composite-types):
+[`ARRAY`]({% link docs/sql/data_types/array.md %}), [`LIST`]({% link docs/sql/data_types/list.md %}), [`MAP`]({% link docs/sql/data_types/map.md %}), [`STRUCT`]({% link docs/sql/data_types/struct.md %}), and [`UNION`]({% link docs/sql/data_types/union.md %}).
 
 ## List Functions
 
@@ -17,9 +17,9 @@ This section describes functions and operators for examining and manipulating ne
 | [`list[begin:end:step]`](#listbeginendstep) | `list_slice` in bracket notation with an added `step` feature. |
 | [`array_pop_back(list)`](#array_pop_backlist) | Returns the list without the last element. |
 | [`array_pop_front(list)`](#array_pop_frontlist) | Returns the list without the first element. |
-| [`flatten(list_of_lists)`](#flattenlist_of_lists) | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](nested#flatten)). |
+| [`flatten(list_of_lists)`](#flattenlist_of_lists) | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples]({% link docs/sql/functions/nested.md %}#flatten)). |
 | [`len(list)`](#lenlist) | Return the length of the list. |
-| [`list_aggregate(list, name)`](#list_aggregatelist-name) | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates](nested#list-aggregates) section for more details. |
+| [`list_aggregate(list, name)`](#list_aggregatelist-name) | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/nested.md %}#list-aggregates) section for more details. |
 | [`list_any_value(list)`](#list_any_valuelist) | Returns the first non-null value in the list. |
 | [`list_append(list, element)`](#list_appendlist-element) | Appends `element` to `list`. |
 | [`list_concat(list1, list2)`](#list_concatlist1-list2) | Concatenates two lists. |
@@ -29,27 +29,27 @@ This section describes functions and operators for examining and manipulating ne
 | [`list_distinct(list)`](#list_distinctlist) | Removes all duplicates and `NULL` values from a list. Does not preserve the original order. |
 | [`list_dot_product(list1, list2)`](#list_dot_productlist1-list2) | Computes the dot product of two same-sized lists of numbers. |
 | [`list_extract(list, index)`](#list_extractlist-index) | Extract the `index`th (1-based) value from the list. |
-| [`list_filter(list, lambda)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions](lambda#filter) page for more details. |
+| [`list_filter(list, lambda)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#filter) page for more details. |
 | [`list_grade_up(list)`](#list_grade_uplist) | Works like sort, but the results are the indexes that correspond to the position in the original `list` instead of the actual values. |
 | [`list_has_all(list, sub-list)`](#list_has_alllist-sub-list) | Returns true if all elements of sub-list exist in list. |
 | [`list_has_any(list1, list2)`](#list_has_anylist1-list2) | Returns true if any elements exist is both lists. |
 | [`list_intersect(list1, list2)`](#list_intersectlist1-list2) | Returns a list of all the elements that exist in both `l1` and `l2`, without duplicates. |
 | [`list_position(list, element)`](#list_positionlist-element) | Returns the index of the element if the list contains the element. |
 | [`list_prepend(element, list)`](#list_prependelement-list) | Prepends `element` to `list`. |
-| [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions](lambda#reduce) page for more details. |
+| [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. |
 | [`list_resize(list, size[, value])`](#list_resizelist-size-value) | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set. |
-| [`list_reverse_sort(list)`](#list_reverse_sortlist) | Sorts the elements of the list in reverse order. See the [Sorting Lists](nested#sorting-lists) section for more details about the `NULL` sorting order. |
+| [`list_reverse_sort(list)`](#list_reverse_sortlist) | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
 | [`list_reverse(list)`](#list_reverselist) | Reverses the list. |
 | [`list_select(value_list, index_list)`](#list_selectvalue_list-index_list) | Returns a list based on the elements selected by the `index_list`. |
 | [`list_slice(list, begin, end, step)`](#list_slicelist-begin-end-step) | `list_slice` with added `step` feature. |
-| [`list_slice(list, begin, end)`](#list_slicelist-begin-end) | Extract a sublist using slice conventions. Negative values are accepted. See [slicing](nested#slicing). |
-| [`list_sort(list)`](#list_sortlist) | Sorts the elements of the list. See the [Sorting Lists](nested#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
-| [`list_transform(list, lambda)`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions](lambda#transform) page for more details. |
+| [`list_slice(list, begin, end)`](#list_slicelist-begin-end) | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/nested.md %}#slicing). |
+| [`list_sort(list)`](#list_sortlist) | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
+| [`list_transform(list, lambda)`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#transform) page for more details. |
 | [`list_unique(list)`](#list_uniquelist) | Counts the unique elements of a list. |
 | [`list_value(any, ...)`](#list_valueany-) | Create a `LIST` containing the argument values. |
 | [`list_where(value_list, mask_list)`](#list_wherevalue_list-mask_list) | Returns a list with the `BOOLEAN`s in `mask_list` applied as a mask to the `value_list`. |
 | [`list_zip(list_1, list_2, ...[, truncate])`](#list_ziplist1-list2-) | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements from each list `list_1`, ..., `list_k`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
-| [`unnest(list)`](#unnestlist) | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [`unnest` page](../query_syntax/unnest) for more details. |
+| [`unnest(list)`](#unnestlist) | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [`unnest` page]({% link docs/sql/query_syntax/unnest.md %}) for more details. |
 
 ### `list[index]`
 
@@ -98,7 +98,7 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](nested#flatten)). |
+| **Description** | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples]({% link docs/sql/functions/nested.md %}#flatten)). |
 | **Example** | `flatten([[1, 2], [3, 4]])` |
 | **Result** | `[1, 2, 3, 4]` |
 
@@ -115,7 +115,7 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates](nested#list-aggregates) section for more details. |
+| **Description** | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/nested.md %}#list-aggregates) section for more details. |
 | **Example** | `list_aggregate([1, 2, NULL], 'min')` |
 | **Result** | `1` |
 | **Aliases** | `list_aggr`, `aggregate`, `array_aggregate`, `array_aggr` |
@@ -202,7 +202,7 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions](lambda#filter) page for more details. |
+| **Description** | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#filter) page for more details. |
 | **Example** | `list_filter([4, 5, 6], x -> x > 4)` |
 | **Result** | `[5, 6]` |
 | **Aliases** | `array_filter`, `filter` |
@@ -265,7 +265,7 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions](lambda#reduce) page for more details. |
+| **Description** | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. |
 | **Example** | `list_reduce([4, 5, 6], (x, y) -> x + y)` |
 | **Result** | `15` |
 | **Aliases** | `array_reduce`, `reduce` |
@@ -283,7 +283,7 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Sorts the elements of the list in reverse order. See the [Sorting Lists](nested#sorting-lists) section for more details about the `NULL` sorting order. |
+| **Description** | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
 | **Example** | `list_reverse_sort([3, 6, 1, 2])` |
 | **Result** | `[6, 3, 2, 1]` |
 | **Alias** | `array_reverse_sort` |
@@ -319,7 +319,7 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extract a sublist using slice conventions. Negative values are accepted. See [slicing](nested#slicing). |
+| **Description** | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/nested.md %}#slicing). |
 | **Example** | `list_slice([4, 5, 6], 2, 3)` |
 | **Result** | `[5, 6]` |
 | **Alias** | `array_slice` |
@@ -328,7 +328,7 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Sorts the elements of the list. See the [Sorting Lists](nested#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
+| **Description** | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
 | **Example** | `list_sort([3, 6, 1, 2])` |
 | **Result** | `[1, 2, 3, 6]` |
 | **Alias** | `array_sort` |
@@ -337,7 +337,7 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a list that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions](lambda#transform) page for more details. |
+| **Description** | Returns a list that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#transform) page for more details. |
 | **Example** | `list_transform([4, 5, 6], x -> x + 1)` |
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
@@ -382,7 +382,7 @@ This section describes functions and operators for examining and manipulating ne
 
 <div class="nostroke_table"></div>
 
-| **Description** | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [`unnest` page](../query_syntax/unnest) for more details. |
+| **Description** | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [`unnest` page]({% link docs/sql/query_syntax/unnest.md %}) for more details. |
 | **Example** | `unnest([1, 2, 3])` |
 | **Result** | `1`, `2`, `3` |
 
@@ -595,7 +595,7 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 | [`union.tag`](#uniontag) | Dot notation serves as an alias for `union_extract`. |
 | [`union_extract(union, 'tag')`](#union_extractunion-tag) | Extract the value with the named tags from the union. `NULL` if the tag is not currently selected. |
 | [`union_value(tag := any)`](#union_valuetag--any) | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. |
-| [`union_tag(union)`](#union_tagunion) | Retrieve the currently selected tag of the union as an [Enum](../../sql/data_types/enum). |
+| [`union_tag(union)`](#union_tagunion) | Retrieve the currently selected tag of the union as an [Enum]({% link docs/sql/data_types/enum.md %}). |
 
 ### `union.tag`
 
@@ -625,7 +625,7 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 
 <div class="nostroke_table"></div>
 
-| **Description** | Retrieve the currently selected tag of the union as an [Enum](../../sql/data_types/enum). |
+| **Description** | Retrieve the currently selected tag of the union as an [Enum]({% link docs/sql/data_types/enum.md %}). |
 | **Example** | `union_tag(union_value(k := 'foo'))` |
 | **Result** | `'k'` |
 
@@ -910,7 +910,7 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 
 The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether `NULL` values should be moved to the beginning or to the end of the list.
 
-By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and `NULL` values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [`PRAGMA` statements](../../configuration/pragmas#default-ordering-for-nulls).
+By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and `NULL` values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [`PRAGMA` statements]({% link docs/configuration/pragmas.md %}#default-ordering-for-nulls).
 
 `list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. `list_sort` takes up to two additional optional parameters. The second parameter provides the sort order and can be either `ASC` or `DESC`. The third parameter provides the `NULL` sort order and can be either `NULLS FIRST` or `NULLS LAST`.
 
@@ -969,7 +969,7 @@ SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 ## Lambda Functions
 
 DuckDB supports lambda functions in the form `(parameter1, parameter2, ...) -> expression`.
-For details, see the [lambda functions page](lambda).
+For details, see the [lambda functions page]({% link docs/sql/functions/lambda.md %}).
 
 ## Flatten
 
@@ -1080,5 +1080,5 @@ SELECT generate_subscripts([4, 5, 6], 1) AS i;
 
 ## Related Functions
 
-There are also [aggregate functions](../aggregates) `list` and `histogram` that produces lists and lists of structs.
-The [`unnest`](../query_syntax/unnest) function is used to unnest a list by one level.
+There are also [aggregate functions]({% link docs/sql/aggregates.md %}) `list` and `histogram` that produces lists and lists of structs.
+The [`unnest`]({% link docs/sql/query_syntax/unnest.md %}) function is used to unnest a list by one level.
