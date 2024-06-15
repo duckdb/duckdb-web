@@ -108,14 +108,14 @@ Subtracting two `DATE`s from one another does not create an `INTERVAL` but rathe
 
 For equality and ordering comparisons only, the months component is converted to 30 days and the days component is converted to 24 * 60 * 60 * 1e6 microseconds.
 
-As a result, `INTERVAL`s can compare equal even when they are functionally different. 
+As a result, `INTERVAL`s can compare equal even when they are functionally different, and the ordering of `INTERVAL`s is not always preserved when they are added to dates or timestamps.
 
 For example:
 
 * `INTERVAL 30 DAYS = INTERVAL 1 MONTH`
 * but `DATE '2020-01-01' + INTERVAL 30 DAYS != DATE '2020-01-01' + INTERVAL 1 MONTH`.
 
-For the same reasons, the ordering of `INTERVAL`s is not always preserved when they are added to dates or timestamps. For example:
+and
 
 * `INTERVAL '30 days 12 hours' > INTERVAL 1 MONTH`
 * but `DATE '2020-01-01' + INTERVAL '30 days 12 hours' < DATE '2020-01-01' + INTERVAL 1 MONTH`.
