@@ -61,14 +61,14 @@ FROM (
 
 > Warning The *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
 
-Additionally, the amounts of centuries, decades, quarters, seconds, and milliseconds in an `INTERVAL`, rounded down to the nearest integer, can be extracted via the `datepart` function. However, these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. In fact, if the previous query additionally extracted decades or seconds, then the sum of extracted parts would generally be larger than the original `period` since this would double count the months or microseconds components, respectively.
+Additionally, the amounts of centuries, decades, quarters, seconds, and milliseconds in an `INTERVAL`, rounded down to the nearest integer, can be extracted via the `datepart` function. However, these components are not required to reassemble the original `INTERVAL`. In fact, if the previous query additionally extracted decades or seconds, then the sum of extracted parts would generally be larger than the original `period` since this would double count the months and microseconds components, respectively.
 
 For example:
 
 ```sql
 SELECT
     datepart('decade', INTERVAL 12 YEARS), -- returns 1
-    datepart('year', INTERVAL 12 YEARS), -- returns 2
+    datepart('year', INTERVAL 12 YEARS), -- returns 12
     datepart('second', INTERVAL 1_234 MILLISECONDS), -- returns 1
     datepart('microsecond', INTERVAL 1_234 MILLISECONDS), -- returns 1_234_000
 ```
