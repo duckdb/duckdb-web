@@ -123,7 +123,7 @@ This call returns the following information for the given table:
 | `block_id`     | `BIGINT`  | empty unless persistent                               |
 | `block_offset` | `BIGINT`  | empty unless persistent                               |
 
-See [Storage](/internals/storage) for more information.
+See [Storage](/docs/internals/storage) for more information.
 
 ### Show Databases
 
@@ -146,7 +146,7 @@ SET max_memory = '1GB';
 
 > Warning The specified memory limit is only applied to the buffer manager.
 > For most queries, the buffer manager handles the majority of the data processed.
-> However, certain in-memory data structures such as [vectors](/internals/vector) and query results are allocated outside of the buffer manager.
+> However, certain in-memory data structures such as [vectors](/docs/internals/vector) and query results are allocated outside of the buffer manager.
 > Additionally, [aggregate functions](../sql/aggregates) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
 > Therefore, the actual memory consumption can be higher than the specified memory limit.
 
