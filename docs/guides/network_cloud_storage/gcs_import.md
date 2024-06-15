@@ -7,7 +7,7 @@ redirect_from:
 
 ## Prerequisites
 
-The Google Cloud Storage (GCS) can be used via the [`httpfs` extension](../../extensions/httpfs).
+The Google Cloud Storage (GCS) can be used via the [`httpfs` extension](../../extensions/httpfs/overview).
 This can be installed with the `INSTALL httpfs` SQL command. This only needs to be run once.
 
 ## Credentials and Configuration

@@ -58,4 +58,4 @@ SELECT 'Hello' || chr(10) || 'world' AS msg;
 
 ## Functions
 
-See [Character Functions](../../sql/functions/char) and [Pattern Matching](../../sql/functions/patternmatching).
+See [Character Functions](../../sql/functions/char) and [Pattern Matching](../../sql/functions/pattern_matching).

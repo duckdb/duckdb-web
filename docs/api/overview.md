@@ -18,7 +18,7 @@ There are various client APIs for DuckDB:
 * [ADBC API](adbc)
 * [ODBC API](odbc/overview)
 
-Additionally, there is a standalone [Command Line Interface (CLI)](cli) client.
+Additionally, there is a standalone [Command Line Interface (CLI)](cli/overview) client.
 
 There are also contributed third-party DuckDB wrappers, which currently do not have an official documentation page:
 

@@ -343,7 +343,7 @@ GROUP BY city
 HAVING max(temp_lo) < 40;
 ```
 
-More information about the `LIKE` operator can be found in the [pattern matching page](../sql/functions/patternmatching).
+More information about the `LIKE` operator can be found in the [pattern matching page](../sql/functions/pattern_matching).
 
 It is important to understand the interaction between aggregates and SQL's `WHERE` and `HAVING` clauses. The fundamental difference between `WHERE` and `HAVING` is this: `WHERE` selects input rows before groups and aggregates are computed (thus, it controls which rows go into the aggregate computation), whereas `HAVING` selects group rows after groups and aggregates are computed. Thus, the `WHERE` clause must not contain aggregate functions; it makes no sense to try to use an aggregate to determine which rows will be inputs to the aggregates. On the other hand, the `HAVING` clause always contains aggregate functions.
 

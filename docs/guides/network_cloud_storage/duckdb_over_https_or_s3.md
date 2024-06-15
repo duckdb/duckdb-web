@@ -7,7 +7,7 @@ You can establish a read-only connection to a DuckDB instance via HTTPS or the S
 
 ## Prerequisites
 
-This guide requires the [`httpfs` extension](../../extensions/httpfs), which can be installed using the `INSTALL httpfs` SQL command. This only needs to be run once.
+This guide requires the [`httpfs` extension](../../extensions/httpfs/overview), which can be installed using the `INSTALL httpfs` SQL command. This only needs to be run once.
 
 ## Attaching to a Database over HTTPS
 

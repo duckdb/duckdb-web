@@ -24,7 +24,7 @@ Writing to DuckDB from multiple processes is not supported automatically and is 
 
 If multiple processes must write to the same file, several design patterns are possible, but would need to be implemented in application logic. For example, each process could acquire a cross-process mutex lock, then open the database in read/write mode and close it when the query is complete. Instead of using a mutex lock, each process could instead retry the connection if another process is already connected to the database (being sure to close the connection upon query completion). Another alternative would be to do multi-process transactions on a MySQL, PostgreSQL, or SQLite database, and use DuckDB's [MySQL](../extensions/mysql), [PostgreSQL](../extensions/postgres), or [SQLite](../extensions/sqlite) extensions to execute analytical queries on that data periodically.
 
-Additional options include writing data to Parquet files and using DuckDB's ability to [read multiple Parquet files](../data/parquet), taking a similar approach with [CSV files](../data/csv), or creating a web server to receive requests and manage reads and writes to DuckDB.
+Additional options include writing data to Parquet files and using DuckDB's ability to [read multiple Parquet files](../data/parquet/overview), taking a similar approach with [CSV files](../data/csv/overview), or creating a web server to receive requests and manage reads and writes to DuckDB.
 
 ## Optimistic Concurrency Control
 

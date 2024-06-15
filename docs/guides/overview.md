@@ -55,8 +55,8 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 
 ### Directly Reading Files
 
-* [How to directly read a binary file](import/read_file#read_blob)
-* [How to directly read a text file](import/read_file#read_text)
+* [How to directly read a binary file](file_formats/read_file#read_blob)
+* [How to directly read a text file](file_formats/read_file#read_text)
 
 ## Performance
 

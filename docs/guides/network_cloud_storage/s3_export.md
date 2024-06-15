@@ -5,7 +5,7 @@ redirect_from:
   - /docs/guides/import/s3_export
 ---
 
-To write a Parquet file to S3, the [`httpfs` extension](../../extensions/httpfs) is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.
+To write a Parquet file to S3, the [`httpfs` extension](../../extensions/httpfs/overview) is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL httpfs;

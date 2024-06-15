@@ -59,7 +59,7 @@ When this flag is set, the [Python](../../api/python/overview) package is built.
 
 ### `BUILD_SHELL`
 
-When this flag is set, the [CLI](../../api/cli) is built, this is usually enabled by default.
+When this flag is set, the [CLI](../../api/cli/overview) is built, this is usually enabled by default.
 
 ### `BUILD_BENCHMARK`
 

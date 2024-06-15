@@ -40,7 +40,7 @@ When making this change, also consider [making the build parallel](#building-the
 
 ## Building the httpfs Extension and Python Package on macOS
 
-**Problem:** The build fails on macOS when both the [`httpfs` extension](../../extensions/httpfs) and the Python package are included:
+**Problem:** The build fails on macOS when both the [`httpfs` extension](../../extensions/httpfs/overview) and the Python package are included:
 
 ```bash
 GEN=ninja BUILD_PYTHON=1 BUILD_HTTPFS=1 make
@@ -72,7 +72,7 @@ python3 -m pip install tools/pythonpkg --use-pep517 --user
 
 ## Building the httpfs Extension on Linux
 
-**Problem:** When building the [`httpfs` extension](/docs/extensions/httpfs) on Linux, the build may fail with the following error.
+**Problem:** When building the [`httpfs` extension](/docs/extensions/httpfs/overview) on Linux, the build may fail with the following error.
 
 ```console
 CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:230 (message):

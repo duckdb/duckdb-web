@@ -4,7 +4,7 @@ title: AutoComplete Extension
 github_directory: https://github.com/duckdb/duckdb/tree/main/extension/autocomplete
 ---
 
-The `autocomplete` extension adds supports for autocomplete in the [CLI client](../api/cli).
+The `autocomplete` extension adds supports for autocomplete in the [CLI client](../api/cli/overview).
 The extension is shipped by default with the CLI client.
 
 ## Behavior

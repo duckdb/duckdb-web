@@ -8,7 +8,7 @@ redirect_from:
 ## Prerequisites
 
 For Cloudflare R2, the [S3 Compatibility API](https://developers.cloudflare.com/r2/api/s3/api/) allows you to use DuckDB's S3 support to read and write from R2 buckets.
-This requires the [`httpfs` extension](../../extensions/httpfs), which can be installed use the `INSTALL` SQL command. This only needs to be run once.
+This requires the [`httpfs` extension](../../extensions/httpfs/overview), which can be installed use the `INSTALL` SQL command. This only needs to be run once.
 
 ## Credentials and Configuration
 

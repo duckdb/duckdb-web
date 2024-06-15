@@ -44,7 +44,7 @@ We summarize the main distributions in the table below.
 | [httpfs](httpfs)             |     |     | yes |     |     |     |
 | [icu](icu)                   | yes | yes | yes |     | yes | yes |
 | [json](json)                 | yes | yes | yes |     | yes | yes |
-| [parquet](parquet)           | yes | yes | yes | yes | yes | yes |
+| [parquet](../data/parquet/overview)           | yes | yes | yes | yes | yes | yes |
 | [tpcds](tpcds)               |     |     | yes |     |     |     |
 | [tpch](tpch)                 | yes |     | yes |     |     |     |
 

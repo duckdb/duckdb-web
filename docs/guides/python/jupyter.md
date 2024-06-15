@@ -154,10 +154,10 @@ This delegates memory management to the engine and ensures that intermediate com
 
 ### Install and Load DuckDB httpfs Extension
 
-DuckDB's [httpfs extension](../../extensions/httpfs) allows Parquet and CSV files to be queried remotely over http.
+DuckDB's [httpfs extension](../../extensions/httpfs/overview) allows Parquet and CSV files to be queried remotely over http.
 These examples query a Parquet file that contains historical taxi data from NYC.
 Using the Parquet format allows DuckDB to only pull the rows and columns into memory that are needed rather than downloading the entire file.
-DuckDB can be used to process local [Parquet files](../../data/parquet) as well, which may be desirable if querying the entire Parquet file, or running multiple queries that require large subsets of the file.
+DuckDB can be used to process local [Parquet files](../../data/parquet/overview) as well, which may be desirable if querying the entire Parquet file, or running multiple queries that require large subsets of the file.
 
 ```sql
 %%sql

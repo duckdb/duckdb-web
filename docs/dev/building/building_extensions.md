@@ -9,7 +9,7 @@ title: Building Extensions
 
 To build using extension flags, set the corresponding [`BUILD_[EXTENSION_NAME]` extension flag](#extension-flags) when running the build, then use the `INSTALL` command.
 
-For example, to install the [`httpfs` extension](../../extensions/httpfs), run the following script:
+For example, to install the [`httpfs` extension](../../extensions/httpfs/overview), run the following script:
 
 ```bash
 GEN=ninja BUILD_HTTPFS=1 make
@@ -57,7 +57,7 @@ When this flag is set, the [`fts` (full text search) extension](../../extensions
 
 #### `BUILD_HTTPFS`
 
-When this flag is set, the [`httpfs` extension](../../extensions/httpfs) is built.
+When this flag is set, the [`httpfs` extension](../../extensions/httpfs/overview) is built.
 
 #### `BUILD_JEMALLOC`
 
@@ -112,7 +112,7 @@ To build using a CMake configuration file, create an extension configuration fil
 ```cmake
 duckdb_extension_load(autocomplete)
 duckdb_extension_load(fts)
-duckdb_extension_load(httpfs)
+duckdb_extension_load(httpfs/overview)
 duckdb_extension_load(inet)
 duckdb_extension_load(icu)
 duckdb_extension_load(json)

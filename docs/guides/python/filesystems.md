@@ -3,7 +3,7 @@ title: Using fsspec Filesystems
 layout: docu
 ---
 
-DuckDB support for [`fsspec`](https://filesystem-spec.readthedocs.io) filesystems allows querying data in filesystems that DuckDB's [`httpfs` extension](../../extensions/httpfs) does not support. `fsspec` has a large number of [inbuilt filesystems](https://filesystem-spec.readthedocs.io/en/latest/api.html#built-in-implementations), and there are also many [external implementations](https://filesystem-spec.readthedocs.io/en/latest/api.html#other-known-implementations). This capability is only available in DuckDB's Python client because `fsspec` is a Python library, while the `httpfs` extension is available in many DuckDB clients.
+DuckDB support for [`fsspec`](https://filesystem-spec.readthedocs.io) filesystems allows querying data in filesystems that DuckDB's [`httpfs` extension](../../extensions/httpfs/overview) does not support. `fsspec` has a large number of [inbuilt filesystems](https://filesystem-spec.readthedocs.io/en/latest/api.html#built-in-implementations), and there are also many [external implementations](https://filesystem-spec.readthedocs.io/en/latest/api.html#other-known-implementations). This capability is only available in DuckDB's Python client because `fsspec` is a Python library, while the `httpfs` extension is available in many DuckDB clients.
 
 ## Example
 

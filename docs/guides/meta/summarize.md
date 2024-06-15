@@ -63,7 +63,7 @@ CREATE TABLE tbl_summary AS SELECT * FROM (SUMMARIZE tbl);
 
 ## Summarizing Remote Tables
 
-It is possible to summarize remote tables via the [`httpfs` extension](../../extensions/httpfs) using the `SUMMARIZE TABLE` statement. For example:
+It is possible to summarize remote tables via the [`httpfs` extension](../../extensions/httpfs/overview) using the `SUMMARIZE TABLE` statement. For example:
 
 ```sql
 SUMMARIZE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';

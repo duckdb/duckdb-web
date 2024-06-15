@@ -157,7 +157,7 @@ All extensions provided by the DuckDB core team are signed.
 > Warning Only load unsigned extensions from sources you trust. Also, avoid loading them over HTTP.
 
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
-To load unsigned extensions using the [CLI client](../api/cli), pass the `-unsigned` flag to it on startup:
+To load unsigned extensions using the [CLI client](../api/cli/overview), pass the `-unsigned` flag to it on startup:
 
 ```bash
 duckdb -unsigned

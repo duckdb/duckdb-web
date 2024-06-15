@@ -158,7 +158,7 @@ DuckDB's Python client provides multiple additional methods that can be used to 
 
 ### Examples
 
-Below are some examples using this functionality. See the [Python guides](../../guides/index#python-client) for more examples.
+Below are some examples using this functionality. See the [Python guides](../../guides/overview#python-client) for more examples.
 
 Fetch as Pandas DataFrame:
 

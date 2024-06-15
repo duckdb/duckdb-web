@@ -42,7 +42,7 @@ CREATE TABLE test AS
     SELECT * FROM 'test.csv';
 ```
 
-For more details, see the [page on CSV loading](../data/csv).
+For more details, see the [page on CSV loading](../data/csv/overview).
 
 ## Parquet Loading
 
@@ -58,7 +58,7 @@ Alternatively, use the `read_parquet` function or the `COPY` statement. For exam
 SELECT * FROM read_parquet('test.parquet');
 ```
 
-For more details, see the [page on Parquet loading](../data/parquet).
+For more details, see the [page on Parquet loading](../data/parquet/overview).
 
 ## JSON Loading
 
