@@ -18,7 +18,7 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 * [`ORDER BY ALL`]({% link docs/sql/query_syntax/orderby.md %}#order-by-all): this clause allows ordering on all columns (e.g., to ensure deterministic results).
 * [`PIVOT`]({% link docs/sql/statements/pivot.md %}) and [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) allow turning long tables to wide tables and vice versa, respectively.
 * [`SELECT * EXCLUDE`]({% link docs/sql/expressions/star.md %}#exclude-clause): the `EXCLUDE` option allows excluding specific columns from the `*` expression.
-* [`SELECT * REPLACE`]({% link docs/sql/expressions/star.md %}#replace-clause): the `EXCLUDE` option allows replacing specific columns with different expressions in a `*` expression.
+* [`SELECT * REPLACE`]({% link docs/sql/expressions/star.md %}#replace-clause): the `REPLACE` option allows replacing specific columns with different expressions in a `*` expression.
 * [`SUMMARIZE`]({% link docs/guides/meta/summarize.md %}): this clause returns summary statistics for a table or query.
 * [`UNION BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name): this clause performing the `UNION` operation along the names of columns (instead of relying on positions).
 
