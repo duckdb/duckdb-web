@@ -3,7 +3,7 @@
 layout: post
 title: "Even Friendlier SQL with DuckDB"
 author: Alex Monahan
-excerpt: DuckDB continues to push the boundaries of SQL syntax to both simplify queries and make more advanced analyses possible. Highlights include dynamic column selection, queries that start with the FROM clause, function chaining, and list comprehensions. We boldly go where no SQL engine has gone before! For more details, see the documentation for [friendly SQL features](/guides/sql_features/friendly_sql).
+excerpt: DuckDB continues to push the boundaries of SQL syntax to both simplify queries and make more advanced analyses possible. Highlights include dynamic column selection, queries that start with the FROM clause, function chaining, and list comprehensions. We boldly go where no SQL engine has gone before! For more details, see the documentation for [friendly SQL features](/docs/guides/sql_features/friendly_sql).
 ---
 
 <img src="/images/blog/ai_generated_star_trek_rubber_duck.png"
