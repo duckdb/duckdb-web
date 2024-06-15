@@ -106,7 +106,7 @@ Subtracting two `DATE`s from one another does not create an `INTERVAL` but rathe
 
 ## Equality and Comparison
 
-For equality and ordering comparisons only, the months component is converted to 30 days and the days component is converted to 24 * 60 * 60 * 1e6 microseconds.
+For equality and ordering comparisons only, the total number of microseconds in an `INTERVAL` is computed by converting the days basis unit to `24 * 60 * 60 * 1e6` microseconds and the months basis unit to 30 days, or `30 * 24 * 60 * 60 * 1e6` microseconds.
 
 As a result, `INTERVAL`s can compare equal even when they are functionally different, and the ordering of `INTERVAL`s is not always preserved when they are added to dates or timestamps.
 
