@@ -5,7 +5,7 @@ author: Richard Wesley
 excerpt: DuckDB, a free and Open-Source analytical data management system, has a windowing API that can compute complex moving aggregates like interquartile ranges and median absolute deviation much faster than the conventional approaches.
 ---
 
-In a [previous post](/2021/10/13/windowing.html),
+In a [previous post]({% post_url 2021-10-13-windowing %}),
 we described the DuckDB windowing architecture and mentioned the support for
 some advanced moving aggregates.
 In this post, we will compare the performance various possible moving implementations of these functions
@@ -59,7 +59,7 @@ In particular, here are the statistical holistic aggregates that DuckDB currentl
 Where things get really interesting is when we try to compute moving versions of these aggregates.
 For example, computing a moving `AVG` is fairly straightforward:
 You can subtract values that have left the frame and add in the new ones,
-or use the segment tree approach from the [previous post on windowing](/2021/10/13/windowing.html).
+or use the segment tree approach from the [previous post on windowing]({% post_url 2021-10-13-windowing %}).
 
 ### Python Example
 
@@ -94,7 +94,7 @@ Fortunately, there are much faster approaches for all of them.
 
 ## Moving Holistic Aggregation
 
-In the [previous post on windowing](/2021/10/13/windowing.html),
+In the [previous post on windowing]({% post_url 2021-10-13-windowing %}),
 we explained the component operations used to implement a generic aggregate function
 (initialize, update, finalize, combine and window).
 In the rest of this post, we will dig into how they can be implemented for these complex aggregates.

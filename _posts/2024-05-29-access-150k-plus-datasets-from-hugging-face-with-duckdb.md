@@ -23,7 +23,7 @@ A typical repository looks like this:
 
 ## Read using hf:// paths
 
-You often need to read files in various formats (such as CSV, JSONL, and Parquet) when working with data. As of version v0.10.3, DuckDB has native support for `hf://` paths as part of the [`httpfs` extension](/docs/extensions/httpfs), allowing easy access to all these formats.
+You often need to read files in various formats (such as CSV, JSONL, and Parquet) when working with data. As of version v0.10.3, DuckDB has native support for `hf://` paths as part of the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}), allowing easy access to all these formats.
 
 Now, it is possible to query them using the URL pattern below:
 
@@ -71,7 +71,7 @@ Each of these commands reads the data from the specified file format and display
 
 ## Creating a local table
 
-To avoid accessing the remote endpoint for every query, you can save the data in a DuckDB table by running a [`CREATE TABLE ... AS` command](/docs/sql/statements/create_table#create-table--as-select-ctas). For example:
+To avoid accessing the remote endpoint for every query, you can save the data in a DuckDB table by running a [`CREATE TABLE ... AS` command]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas). For example:
 
 ```sql
 CREATE TABLE data AS
@@ -112,7 +112,7 @@ FROM 'hf://datasets/cais/mmlu/astronomy/test-00000-of-00001.parquet';
 |------:|
 | 152   |
 
-To query all files under a specific format, you can use a [glob pattern](/docs/data/multiple_files/overview#multi-file-reads-and-globs). Here’s how you can count the rows in all files that match the pattern `*.parquet`:
+To query all files under a specific format, you can use a [glob pattern]({% link docs/data/multiple_files/overview.md %}#multi-file-reads-and-globs). Here’s how you can count the rows in all files that match the pattern `*.parquet`:
 
 ```sql
 SELECT count(*) AS count
@@ -181,7 +181,7 @@ The previous query will read all parquet files under the `~parquet` revision. Th
 
 Configure your Hugging Face Token in the DuckDB Secrets Manager to access private or gated datasets.
 First, visit [Hugging Face Settings – Tokens](https://huggingface.co/settings/tokens) to obtain your access token.
-Second, set it in your DuckDB session using DuckDB’s [Secrets Manager](/docs/configuration/secrets_manager). DuckDB supports two providers for managing secrets:
+Second, set it in your DuckDB session using DuckDB’s [Secrets Manager]({% link docs/configuration/secrets_manager.md %}). DuckDB supports two providers for managing secrets:
 
 * `CONFIG`: The user must pass all configuration information into the `CREATE SECRET` statement. To create a secret using the `CONFIG` provider, use the following command:
 

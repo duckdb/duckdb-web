@@ -11,7 +11,7 @@ excerpt: "The DuckDB team is happy to announce the latest DuckDB release (0.10.0
      width="200px"
      />
 
-To install the new version, please visit the [installation guide](/docs/installation). The full release notes can be found [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
+To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
 
 <!--more-->
 
@@ -244,11 +244,11 @@ FROM vectors;
 └───────────────────┘
 ```
 
-See the [Array Type page](/docs/sql/data_types/array) in the documentation for more information.
+See the [Array Type page]({% link docs/sql/data_types/array.md %}) in the documentation for more information.
 
 ## Multi-Database Support
 
-DuckDB can now attach MySQL, Postgres, and SQLite databases in addition to databases stored in its own format. This allows data to be read into DuckDB and moved between these systems in a convenient manner, as attached databases are fully functional, appear just as regular tables, and can be updated in a safe, transactional manner. More information about multi-database support can be found in our [recent blog post](/2024/01/26/multi-database-support-in-duckdb).
+DuckDB can now attach MySQL, Postgres, and SQLite databases in addition to databases stored in its own format. This allows data to be read into DuckDB and moved between these systems in a convenient manner, as attached databases are fully functional, appear just as regular tables, and can be updated in a safe, transactional manner. More information about multi-database support can be found in our [recent blog post]({% post_url 2024-01-26-multi-database-support-in-duckdb %}).
 
 ```sql
 ATTACH 'sqlite:sakila.db' AS sqlite;
@@ -311,7 +311,7 @@ CREATE PERSISTENT SECRET my_persistent_secret (
 
 As mentioned, this will write the secret (unencrypted, so beware) to the `~/.duckdb/stored_secrets` directory.
 
-See the [Create Secret page](/docs/sql/statements/create_secret) in the documentation for more information.
+See the [Create Secret page]({% link docs/sql/statements/create_secret.md %}) in the documentation for more information.
 
 ## Temporary Memory Manager
 
@@ -363,14 +363,14 @@ As a user, you don't have to do anything to make use of the new ALP compression 
 
 ## CLI Improvements
 
-The command-line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved](/docs/api/cli/syntax_highlighting) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended](/docs/api/cli/editing).
+The command-line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/api/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/api/cli/editing.md %}).
 
 <img src="/images/syntax_highlighting_screenshot.png"
      alt="Image showing syntax highlighting in the shell"
      width="700px"
      />
 
-See the [extended CLI docs for more information](/docs/api/cli/overview).
+See the [extended CLI docs for more information]({% link docs/api/cli/overview.md %}).
 
 ## Final Thoughts
 

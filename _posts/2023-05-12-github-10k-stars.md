@@ -9,7 +9,7 @@ Today, DuckDB reached 10 000 stars on [GitHub](https://github.com/duckdb/duckdb)
 
 From those brave souls who were early adopters of DuckDB back in 2019 to the many today, we are happy you're part of our community. Thank you for your feedback, feature requests and for your enthusiasm in adopting new features and integrations. Thank you for helping each other on our [Discord server](http://discord.duckdb.org/) or in [GitHub discussions](https://github.com/duckdb/duckdb/discussions). Thank you for spreading the word, too.
 
-We also would like to extend special thanks to the [DuckDB foundation supporters](https://duckdb.org/foundation/), who through their generous donations keep DuckDB independent.
+We also would like to extend special thanks to the [DuckDB foundation supporters]({% link foundation/index.html %}), who through their generous donations keep DuckDB independent.
 
 For us, the maintainers of DuckDB, the past few years have also been quite eventful: We spun off from the [research group where DuckDB originated](https://www.cwi.nl/en/groups/database-architectures/) to a [successful company](https://duckdblabs.com/) with close to 20 employees and many excellent partnerships.
 

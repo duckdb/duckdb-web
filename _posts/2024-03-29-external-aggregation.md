@@ -16,7 +16,7 @@ Not interested in the implementation? [Jump straight to the experiments!](#exper
 
 ## Introduction
 
-Around two years ago, we published our first blog post on DuckDB’s hash aggregation, titled [“Parallel Grouped Aggregation in DuckDB”](/2022/03/07/aggregate-hashtable).
+Around two years ago, we published our first blog post on DuckDB’s hash aggregation, titled [“Parallel Grouped Aggregation in DuckDB”]({% post_url 2022-03-07-aggregate-hashtable %}).
 So why are we writing another blog post now?
 
 Unlike most database systems, which are servers, DuckDB is used in all kinds of environments, which may not have much memory.
@@ -35,9 +35,9 @@ If we load it back whenever needed, we can still complete the query.
 We must be careful to use storage sparingly because despite modern SSDs being fast, they are still much slower than memory.
 
 In a nutshell, that’s what this post is about.
-Since the [0.9.0 release](/2023/09/26/announcing-duckdb-090), DuckDB’s hash aggregation can process more unique groups than fit in memory by offloading data to storage.
+Since the [0.9.0 release]({% post_url 2023-09-26-announcing-duckdb-090 %}), DuckDB’s hash aggregation can process more unique groups than fit in memory by offloading data to storage.
 In this post, we’ll explain how this works.
-If you want to know what hash aggregation is, how hash collisions are resolved, or how DuckDB’s hash table is structured, check out [our first blog post on hash aggregation](/2022/03/07/aggregate-hashtable).
+If you want to know what hash aggregation is, how hash collisions are resolved, or how DuckDB’s hash table is structured, check out [our first blog post on hash aggregation]({% post_url 2022-03-07-aggregate-hashtable %}).
 
 ## Memory Management
 
@@ -136,7 +136,7 @@ The first big challenge is to perform the aggregation in parallel.
 DuckDB uses [Morsel-Driven Parallelism](https://db.in.tum.de/~leis/papers/morsels.pdf) parallelize query execution, which essentially means that query operators, such as aggregation, must be parallelism-aware.
 This differs from [plan-driven parallelism](https://dl.acm.org/doi/pdf/10.1145/93605.98720), keeping operators unaware of parallelism.
 
-To briefly summarize [our first blog post on aggregation](/2022/03/07/aggregate-hashtable): In DuckDB, all active threads have their own thread-local hash table, which they sink input data into.
+To briefly summarize [our first blog post on aggregation]({% post_url 2022-03-07-aggregate-hashtable %}): In DuckDB, all active threads have their own thread-local hash table, which they sink input data into.
 This will keep threads busy until all input data has been read.
 Multiple threads will likely have the _exact same group_ in their hash table.
 Therefore, the thread-local hash tables must be combined to complete the grouped aggregation.
@@ -155,7 +155,7 @@ We call the first phase _Thread-Local Pre-Aggregation_.
 The input data are _morsels_, chunks of around 100,000 rows.
 These are assigned to active threads, which sink them into their thread-local hash table until all input data has been read.
 We use _linear probing_ to resolve collisions and _salt_ to reduce the overhead of dealing with said collisions.
-This is explained in [our first blog post on aggregation](/2022/03/07/aggregate-hashtable), so I won’t repeat it here.
+This is explained in [our first blog post on aggregation]({% post_url 2022-03-07-aggregate-hashtable %}), so I won’t repeat it here.
 
 Now that we’ve explained what _hasn’t_ changed, we can talk about what _has_ changed.
 The first difference compared to last time is the way that we partition.
@@ -187,7 +187,7 @@ If we make more partitions than threads, for example, 32 partitions, the size of
 
 Aggregations that result in only a few unique groups can easily fit in memory.
 To evaluate our external hash aggregation implementation, we need aggregations that have many unique groups.
-For this purpose, we will use the [H2O.ai database-like ops benchmark](https://duckdblabs.github.io/db-benchmark/), which [we've resurrected](/2023/04/14/h2oai), and [now maintain](/2023/11/03/db-benchmark-update).
+For this purpose, we will use the [H2O.ai database-like ops benchmark](https://duckdblabs.github.io/db-benchmark/), which [we've resurrected]({% post_url 2023-04-14-h2oai %}), and [now maintain]({% post_url 2023-11-03-db-benchmark-update %}).
 Specifically, we will use the `G1_1e9_2e0_0_0.csv.zst` file, which is 50 GB uncompressed.
 The source code for the H2O.ai benchmark can be found [here](https://github.com/duckdblabs/db-benchmark).
 You can download the file yourself from <https://blobs.duckdb.org/data/G1_1e9_2e0_0_0.csv.zst> (18.8 GB compressed).

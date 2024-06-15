@@ -81,7 +81,7 @@ This is the end of my preparation script, so I closed the database connection.
 
 ### Building the Search Engine
 
-We can now build the inverted index and the retrieval model using a `PRAGMA` statement. The extension is [documented here](/docs/extensions/full_text_search). We create an index table on table `documents` or `main.documents` that we created with our script. The column that identifies our documents is called `docno`, and we wish to create an inverted index on the fields supplied. I supplied all fields by using the '\*' shortcut.
+We can now build the inverted index and the retrieval model using a `PRAGMA` statement. The extension is [documented here]({% link docs/extensions/full_text_search.md %}). We create an index table on table `documents` or `main.documents` that we created with our script. The column that identifies our documents is called `docno`, and we wish to create an inverted index on the fields supplied. I supplied all fields by using the '\*' shortcut.
 ```python
 con = duckdb.connect(database='db/trec04_05.db', read_only=False)
 con.execute("PRAGMA create_fts_index('documents', 'docno', '*', stopwords='english')")
