@@ -37,9 +37,9 @@ For best performance, make sure that the EC2 instance is in the same availabilit
 
 * Zone name to zone ID mapping:
 
-  ```bash
-  aws ec2 describe-availability-zones --output json | \
-      jq -r '.AvailabilityZones[] | select(.ZoneName == "us-east-1f") | .ZoneId'
+  ```batch
+  aws ec2 describe-availability-zones --output json \
+      | jq -r '.AvailabilityZones[] | select(.ZoneName == "us-east-1f") | .ZoneId'
   ```
 
   ```text
@@ -48,9 +48,9 @@ For best performance, make sure that the EC2 instance is in the same availabilit
 
 * Zone ID to zone name mapping:
 
-  ```bash
-  aws ec2 describe-availability-zones --output json | \
-      jq -r '.AvailabilityZones[] | select(.ZoneId == "use1-az5") | .ZoneName'
+  ```batch
+  aws ec2 describe-availability-zones --output json \
+      | jq -r '.AvailabilityZones[] | select(.ZoneId == "use1-az5") | .ZoneName'
   ```
 
   ```text

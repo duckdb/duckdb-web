@@ -8,8 +8,7 @@ title: Integration with Polars
 ## Installation
 
 ```bash
-pip install duckdb
-pip install -U 'polars[pyarrow]'
+pip install -U duckdb 'polars[pyarrow]'
 ```
 
 ## Polars to DuckDB
