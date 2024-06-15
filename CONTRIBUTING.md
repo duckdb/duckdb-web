@@ -107,7 +107,8 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 ### Links
 
-* Please avoid using the term "here" for links (e.g., "for more details, click [here](https://example.org/)" should be avoided). For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
+* Use Jekyll's [link tags](https://jekyllrb.com/docs/liquid/tags/#link) to link to pages. For example, to link to the Example section on the `SELECT` statement's page, use `{% docs/sql/statements/select.md %}#examples`. Note that the paths must contain the correct extension (most often `.md`) and they must be relative to the repository root.
+* Avoid using the term "here" for links (e.g., "for more details, click [here](https://example.org/)" should be avoided). For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
 
 ### Spelling
 
