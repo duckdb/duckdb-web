@@ -8,7 +8,7 @@ dir = os.path.dirname(filename)
 with open(filename, "r") as f:
     s = f.read()
     
-    for m in re.finditer(r"\]\(([.0-9a-zA-Z].*?)(#.*?)?\)", s):
+    for m in re.finditer(r"\]\(([.0-9a-zA-Z].*?)([#?].*?)?\)", s):
         link_path = m.group(1)
 
         if link_path.startswith("http://") or link_path.startswith("https://"):
