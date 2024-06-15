@@ -4,7 +4,7 @@ title: Hugging Face Support
 ---
 
 The `httpfs` extension introduces support for the `hf://` protocol to access data sets hosted in [Hugging Face](https://huggingface.co/) repositories.
-See the [announcement blog post](/2024/05/29/access-150k-plus-datasets-from-hugging-face-with-duckdb) for details.
+See the [announcement blog post]({% link _posts/2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb.md %}) for details.
 
 ## Usage
 
@@ -54,7 +54,7 @@ Each of these commands reads the data from the specified file format and display
 
 ## Creating a local table
 
-To avoid accessing the remote endpoint for every query, you can save the data in a DuckDB table by running a [`CREATE TABLE ... AS` command](/docs/sql/statements/create_table#create-table--as-select-ctas). For example:
+To avoid accessing the remote endpoint for every query, you can save the data in a DuckDB table by running a [`CREATE TABLE ... AS` command]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas). For example:
 
 ```sql
 CREATE TABLE data AS
@@ -71,7 +71,7 @@ FROM data;
 
 ## Multiple files
 
-To query all files under a specific directory, you can use a [glob pattern](/docs/data/multiple_files/overview#multi-file-reads-and-globs). For example:
+To query all files under a specific directory, you can use a [glob pattern]({% link docs/data/multiple_files/overview.md %}#multi-file-reads-and-globs). For example:
 
 ```sql
 SELECT count(*) AS count
@@ -125,7 +125,7 @@ The previous query will read all parquet files under the `~parquet` revision. Th
 
 Configure your Hugging Face Token in the DuckDB Secrets Manager to access private or gated datasets.
 First, visit [Hugging Face Settings – Tokens](https://huggingface.co/settings/tokens) to obtain your access token.
-Second, set it in your DuckDB session using DuckDB’s [Secrets Manager](/docs/configuration/secrets_manager). DuckDB supports two providers for managing secrets:
+Second, set it in your DuckDB session using DuckDB’s [Secrets Manager]({% link docs/configuration/secrets_manager.md %}). DuckDB supports two providers for managing secrets:
 
 ### `CONFIG`
 

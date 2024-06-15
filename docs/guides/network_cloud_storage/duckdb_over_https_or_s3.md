@@ -7,11 +7,11 @@ You can establish a read-only connection to a DuckDB instance via HTTPS or the S
 
 ## Prerequisites
 
-This guide requires the [`httpfs` extension](../../extensions/httpfs/overview), which can be installed using the `INSTALL httpfs` SQL command. This only needs to be run once.
+This guide requires the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}), which can be installed using the `INSTALL httpfs` SQL command. This only needs to be run once.
 
 ## Attaching to a Database over HTTPS
 
-To connect to a DuckDB database via HTTPS, use the [`ATTACH` statement](../../sql/statements/attach) as follows:
+To connect to a DuckDB database via HTTPS, use the [`ATTACH` statement]({% link docs/sql/statements/attach.md %}) as follows:
 
 ```sql
 LOAD httpfs;
@@ -31,8 +31,8 @@ FROM stations_db.stations;
 
 ## Attaching to a Database over the S3 API
 
-To connect to a DuckDB database via the S3 API, [configure the authentication](s3_import#credentials-and-configuration) for your bucket (if required).
-Then, use the [`ATTACH` statement](../../sql/statements/attach) as follows:
+To connect to a DuckDB database via the S3 API, [configure the authentication]({% link docs/guides/network_cloud_storage/s3_import.md %}#credentials-and-configuration) for your bucket (if required).
+Then, use the [`ATTACH` statement]({% link docs/sql/statements/attach.md %}) as follows:
 
 ```sql
 LOAD httpfs;
@@ -50,7 +50,7 @@ FROM stations_db.stations;
 |-------------:|
 | 578          |
 
-> Connecting to S3-compatible APIs such as the [Google Cloud Storage (`gs://`)](gcs_import#attaching-to-a-database) is also supported.
+> Connecting to S3-compatible APIs such as the [Google Cloud Storage (`gs://`)]({% link docs/guides/network_cloud_storage/gcs_import.md %}#attaching-to-a-database) is also supported.
 
 ## Limitations
 

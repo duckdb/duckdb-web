@@ -34,4 +34,4 @@ Alternatively, the `COPY` statement can also be used to load data from a JSON fi
 COPY tbl FROM 'input.json';
 ```
 
-For additional options, see the [JSON Loading reference](../../data/json/overview) and the [`COPY` statement documentation](../../sql/statements/copy).
+For additional options, see the [JSON Loading reference]({% link docs/data/json/overview.md %}) and the [`COPY` statement documentation]({% link docs/sql/statements/copy.md %}).

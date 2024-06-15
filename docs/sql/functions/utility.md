@@ -31,8 +31,8 @@ The functions below are difficult to categorize into specific function types and
 | [`nextval('sequence_name')`](#nextvalsequence_name) | Return the following value of the sequence. |
 | [`nullif(a, b)`](#nullifa-b) | Return null if a = b, else return a. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. |
 | [`pg_typeof(expression)`](#pg_typeofexpression) | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility. |
-| [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide](../../guides/file_formats/read_file#read_blob) for more details. |
-| [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide](../../guides/file_formats/read_file#read_text) for more details. |
+| [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/guides/file_formats/read_file.md %}#read_blob) for more details. |
+| [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/guides/file_formats/read_file.md %}#read_text) for more details. |
 | [`sha256(value)`](#sha256value) | Returns a `VARCHAR` with the SHA-256 hash of the `value`. |
 | [`stats(expression)`](#statsexpression) | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression. |
 | [`txid_current()`](#txid_current) | Returns the current transaction's identifier, a `BIGINT` value. It will assign a new one if the current transaction does not have one already. |
@@ -203,7 +203,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide](../../guides/file_formats/read_file#read_blob) for more details. |
+| **Description** | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/guides/file_formats/read_file.md %}#read_blob) for more details. |
 | **Example** | `read_blob('hello.bin')` |
 | **Result** | `hello\x0A` |
 
@@ -211,7 +211,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide](../../guides/file_formats/read_file#read_text) for more details. |
+| **Description** | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/guides/file_formats/read_file.md %}#read_text) for more details. |
 | **Example** | `read_text('hello.txt')` |
 | **Result** | `hello\n` |
 
@@ -271,14 +271,14 @@ A table function is used in place of a table in a `FROM` clause.
 
 | Name | Description |
 |:--|:-------|
-| [`glob(search_path)`](#globsearch_path) | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax](pattern_matching). |
+| [`glob(search_path)`](#globsearch_path) | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax]({% link docs/sql/functions/pattern_matching.md %}). |
 | [`repeat_row(varargs, num_rows)`](#repeat_rowvarargs-num_rows) | Returns a table with `num_rows` rows, each containing the fields defined in `varargs`. |
 
 ### `glob(search_path)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax](pattern_matching). |
+| **Description** | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax]({% link docs/sql/functions/pattern_matching.md %}). |
 | **Example** | `glob('*')` |
 | **Result** | (table of filenames) |
 

@@ -38,9 +38,9 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.keywordcode ?CODE?`    | Sets the syntax highlighting terminal code used for keywords                                                 |
 | `.lint OPTIONS`          | Report potential schema issues.                                                                              |
 | `.log FILE|off`          | Turn logging on or off.  `FILE` can be `stderr`/`stdout`                                                     |
-| `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode](output_formats)                         |
-| `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode](output_formats)  |
-| `.mode MODE ?TABLE?`     | Set [output mode](output_formats)                                                                            |
+| `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %})                         |
+| `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %})  |
+| `.mode MODE ?TABLE?`     | Set [output mode]({% link docs/api/cli/output_formats.md %})                                                                            |
 | `.nullvalue STRING`      | Use `STRING` in place of `NULL` values                                                                       |
 | `.once ?OPTIONS? ?FILE?` | Output for the next SQL command only to `FILE`                                                               |
 | `.open ?OPTIONS? ?FILE?` | Close existing database and reopen `FILE`                                                                    |
@@ -57,7 +57,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.shell CMD ARGS...`     | Run `CMD ARGS...` in a system shell                                                                          |
 | `.show`                  | Show the current values for various settings                                                                 |
 | `.system CMD ARGS...`    | Run `CMD ARGS...` in a system shell                                                                          |
-| `.tables ?TABLE?`        | List names of tables [matching LIKE pattern](../../sql/functions/pattern_matching) `TABLE`                   |
+| `.tables ?TABLE?`        | List names of tables [matching LIKE pattern]({% link docs/sql/functions/pattern_matching.md %}) `TABLE`                   |
 | `.testcase NAME`         | Begin redirecting output to `NAME`                                                                           |
 | `.timer on|off`          | Turn SQL timer on or off                                                                                     |
 | `.width NUM1 NUM2 ...`   | Set minimum column widths for columnar output                                                                |
@@ -106,7 +106,7 @@ The terminal will then display:
 | back to the terminal |
 ```
 
-A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet](../../sql/statements/copy#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
+A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet]({% link docs/sql/statements/copy.md %}#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
 
 ```sql
 .mode csv
@@ -137,8 +137,8 @@ The results then open in the default text file editor of the system, for example
 
 ## Querying the Database Schema
 
-All DuckDB clients support [querying the database schema with SQL](../../sql/information_schema), but the CLI has additional [dot commands](dot_commands) that can make it easier to understand the contents of a database.
-The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern](../../sql/functions/pattern_matching#like).
+All DuckDB clients support [querying the database schema with SQL]({% link docs/sql/information_schema.md %}), but the CLI has additional [dot commands]({% link docs/api/cli/dot_commands.md %}) that can make it easier to understand the contents of a database.
+The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern]({% link docs/sql/functions/pattern_matching.md %}#like).
 
 ```sql
 CREATE TABLE swimmers AS SELECT 'duck' AS animal;
@@ -213,9 +213,9 @@ To configure the color used to highlight keywords:
 ## Importing Data from CSV
 
 > Deprecated This feature is only included for compatibility reasons and may be removed in the future.
-> Use the [`read_csv` function or the `COPY` statement](../../data/csv/overview) to load CSV files.
+> Use the [`read_csv` function or the `COPY` statement]({% link docs/data/csv/overview.md %}) to load CSV files.
 
-DuckDB supports [SQL syntax to directly query or import CSV files](../../data/csv/overview), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the CSV file, and the second is the name of the DuckDB table to create. Since DuckDB requires stricter typing than SQLite (upon which the DuckDB CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv` examples in the import docs](../../data/csv/overview).
+DuckDB supports [SQL syntax to directly query or import CSV files]({% link docs/data/csv/overview.md %}), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the CSV file, and the second is the name of the DuckDB table to create. Since DuckDB requires stricter typing than SQLite (upon which the DuckDB CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv` examples in the import docs]({% link docs/data/csv/overview.md %}).
 
 In this example, a CSV file is generated by changing to CSV mode and setting an output file location:
 

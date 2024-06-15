@@ -13,7 +13,7 @@ Insert statements are the standard way of loading data into a database system. T
 INSERT INTO people VALUES (1, 'Mark');
 ```
 
-For a more detailed description, see the [page on the `INSERT statement`](../data/insert).
+For a more detailed description, see the [page on the `INSERT statement`]({% link docs/data/insert.md %}).
 
 ## CSV Loading
 
@@ -35,14 +35,14 @@ It is also possible to read data directly from **compressed CSV files** (e.g., c
 SELECT * FROM 'test.csv.gz';
 ```
 
-DuckDB can create a table from the loaded data using the [`CREATE TABLE ... AS SELECT` statement](../sql/statements/create_table#create-table--as-select-ctas):
+DuckDB can create a table from the loaded data using the [`CREATE TABLE ... AS SELECT` statement]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas):
 
 ```sql
 CREATE TABLE test AS
     SELECT * FROM 'test.csv';
 ```
 
-For more details, see the [page on CSV loading](../data/csv/overview).
+For more details, see the [page on CSV loading]({% link docs/data/csv/overview.md %}).
 
 ## Parquet Loading
 
@@ -58,7 +58,7 @@ Alternatively, use the `read_parquet` function or the `COPY` statement. For exam
 SELECT * FROM read_parquet('test.parquet');
 ```
 
-For more details, see the [page on Parquet loading](../data/parquet/overview).
+For more details, see the [page on Parquet loading]({% link docs/data/parquet/overview.md %}).
 
 ## JSON Loading
 
@@ -74,9 +74,9 @@ Alternatively, use the `read_json_auto` function or the `COPY` statement. For ex
 SELECT * FROM read_json_auto('test.json');
 ```
 
-For more details, see the [page on JSON loading](../data/json/overview).
+For more details, see the [page on JSON loading]({% link docs/data/json/overview.md %}).
 
 ## Appender
 
-In several APIs (C, C++, Go, Java, and Rust), the [Appender](appender) can be used as an alternative for bulk data loading.
+In several APIs (C, C++, Go, Java, and Rust), the [Appender]({% link docs/data/appender.md %}) can be used as an alternative for bulk data loading.
 This class can be used to efficiently add rows to the database system without using SQL statements.

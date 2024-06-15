@@ -8,7 +8,7 @@ redirect_from:
 
 ## Installation
 
-The DuckDB Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page](/docs/installation/index?environment=java) for details.
+The DuckDB Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page]({% link docs/installation/index.html %}?environment=java) for details.
 
 ## Basic API Usage
 
@@ -64,7 +64,7 @@ Multiple connections are allowed, but mixing read-write and read-only connection
 ### Configuring Connections
 
 Configuration options can be provided to change different settings of the database system. Note that many of these
-settings can be changed later on using [`PRAGMA` statements](../configuration/pragmas) as well.
+settings can be changed later on using [`PRAGMA` statements]({% link docs/configuration/pragmas.md %}) as well.
 
 ```java
 Properties connectionProperties = new Properties();
@@ -121,7 +121,7 @@ try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO items VALUES (?
 }
 ```
 
-> Warning Do *not* use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
+> Warning Do *not* use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation]({% link docs/data/overview.md %}) for better options.
 
 ### Arrow Methods
 
@@ -192,7 +192,7 @@ Connection conn = DriverManager.getConnection("jdbc:duckdb:", props);
 
 ### Appender
 
-The [Appender](../data/appender) is available in the DuckDB JDBC driver via the `org.duckdb.DuckDBAppender` class.
+The [Appender]({% link docs/data/appender.md %}) is available in the DuckDB JDBC driver via the `org.duckdb.DuckDBAppender` class.
 The constructor of the class requires the schema name and the table name it is applied to.
 The Appender is flushed when the `close()` method is called.
 

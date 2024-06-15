@@ -29,4 +29,4 @@ output_df = transformed_rel.df()
 
 Relational operators can also be used to group rows, aggregate, find distinct combinations of values, join, union, and more. They are also able to directly insert results into a DuckDB table or write to a CSV.
 
-Please see [these additional examples](https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py) and [the available relational methods on the `DuckDBPyRelation` class](../../api/python/reference/index#duckdb.DuckDBPyRelation).
+Please see [these additional examples](https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py) and [the available relational methods on the `DuckDBPyRelation` class]({% link docs/api/python/reference/index.md %}#duckdb.DuckDBPyRelation).

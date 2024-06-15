@@ -30,7 +30,7 @@ import (
 
 ## Appender
 
-The DuckDB Go client supports the [DuckDB Appender API](../data/appender) for bulk inserts. You can obtain a new Appender by supplying a DuckDB connection to `NewAppenderFromConn()`. For example:
+The DuckDB Go client supports the [DuckDB Appender API]({% link docs/data/appender.md %}) for bulk inserts. You can obtain a new Appender by supplying a DuckDB connection to `NewAppenderFromConn()`. For example:
 
 ```go
 connector, err := duckdb.NewConnector("test.db", nil)

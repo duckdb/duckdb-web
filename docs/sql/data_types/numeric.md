@@ -79,8 +79,8 @@ These represent the IEEE 754 special values "infinity", "negative infinity", and
 DuckDB supports universally unique identifiers (UUIDs) through the `UUID` type. These use 128 bits and are represented internally as `HUGEINT` values.
 When printed, they are shown with hexadecimal characters, separated by dashes as follows: `⟨8 characters⟩-⟨4 characters⟩-⟨4 characters⟩-⟨4 characters⟩-⟨12 characters⟩` (using 36 characters in total). For example, `4ac7a9e9-607c-4c8a-84f3-843f0191e3fd` is a valid UUID.
 
-To generate a new UUID, use the [`uuid()` utility function](../functions/utility#utility-functions).
+To generate a new UUID, use the [`uuid()` utility function]({% link docs/sql/functions/utility.md %}#utility-functions).
 
 ## Functions
 
-See [Numeric Functions and Operators](../../sql/functions/numeric).
+See [Numeric Functions and Operators]({% link docs/sql/functions/numeric.md %}).

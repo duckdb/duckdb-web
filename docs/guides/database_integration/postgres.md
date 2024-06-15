@@ -5,7 +5,7 @@ redirect_from:
   - /docs/guides/import/query_postgres
 ---
 
-To run a query directly on a running PostgreSQL database, the [`postgres` extension](../../extensions/postgres) is required.
+To run a query directly on a running PostgreSQL database, the [`postgres` extension]({% link docs/extensions/postgres.md %}) is required.
 
 ## Installation and Loading
 
@@ -57,4 +57,4 @@ USE test;
 SHOW TABLES;
 ```
 
-For more information see the [PostgreSQL extension documentation](../../extensions/postgres).
+For more information see the [PostgreSQL extension documentation]({% link docs/extensions/postgres.md %}).

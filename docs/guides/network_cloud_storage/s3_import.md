@@ -7,7 +7,7 @@ redirect_from:
 
 ## Prerequisites
 
-To load a Parquet file from S3, the [`httpfs` extension](../../extensions/httpfs/overview) is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.
+To load a Parquet file from S3, the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL httpfs;
@@ -34,7 +34,7 @@ CREATE SECRET (
 
 > Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your-region⟩.amazonaws.com'`.
 
-Alternatively, use the [`aws` extension](../../extensions/aws) to retrieve the credentials automatically:
+Alternatively, use the [`aws` extension]({% link docs/extensions/aws.md %}) to retrieve the credentials automatically:
 
 ```sql
 CREATE SECRET (
@@ -53,5 +53,5 @@ SELECT * FROM read_parquet('s3://⟨bucket⟩/⟨file⟩');
 
 ## Google Cloud Storage (GCS) and Cloudflare R2
 
-DuckDB can also handle [Google Cloud Storage (GCS)](gcs_import) and [Cloudflare R2](cloudflare_r2_import) via the S3 API.
+DuckDB can also handle [Google Cloud Storage (GCS)]({% link docs/guides/network_cloud_storage/gcs_import.md %}) and [Cloudflare R2]({% link docs/guides/network_cloud_storage/cloudflare_r2_import.md %}) via the S3 API.
 See the relevant guides for details.

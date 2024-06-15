@@ -4,7 +4,7 @@ title: ORDER BY Clause
 railroad: query_syntax/orderby.js
 ---
 
-`ORDER BY` is an output modifier. Logically it is applied near the very end of the query (just prior to [`LIMIT`](limit) or [`OFFSET`](limit), if present).
+`ORDER BY` is an output modifier. Logically it is applied near the very end of the query (just prior to [`LIMIT`]({% link docs/sql/query_syntax/limit.md %}) or [`OFFSET`]({% link docs/sql/query_syntax/limit.md %}), if present).
 The `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order.
 In addition, every order clause can specify whether `NULL` values should be moved to the beginning or to the end.
 
@@ -44,7 +44,7 @@ SET default_order = 'DESC';
 Text is sorted using the binary comparison collation by default, which means values are sorted on their binary UTF-8 values.
 While this works well for ASCII text (e.g., for English language data), the sorting order can be incorrect for other languages.
 For this purpose, DuckDB provides collations.
-For more information on collations, see the [Collation page](../../sql/expressions/collations).
+For more information on collations, see the [Collation page]({% link docs/sql/expressions/collations.md %}).
 
 ## Examples
 

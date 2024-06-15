@@ -135,4 +135,4 @@ FROM city;
 
 ## Upsert (Insert or Update)
 
-See the [Insert documentation](insert#on-conflict-clause) for details.
+See the [Insert documentation]({% link docs/sql/statements/insert.md %}#on-conflict-clause) for details.

@@ -11,7 +11,7 @@ The values within those new columns are calculated using an aggregate function o
 DuckDB implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` syntax that automatically detects the columns to create while pivoting.
 `PIVOT_WIDER` may also be used in place of the `PIVOT` keyword.
 
-> The [`UNPIVOT` statement](unpivot) is the inverse of the `PIVOT` statement.
+> The [`UNPIVOT` statement]({% link docs/sql/statements/unpivot.md %}) is the inverse of the `PIVOT` statement.
 
 ## Simplified `PIVOT` Syntax
 
@@ -230,7 +230,7 @@ GROUP BY Country, Name;
 
 ### Using `PIVOT` within a `SELECT` Statement
 
-The `PIVOT` statement may be included within a `SELECT` statement as a CTE ([a Common Table Expression, or `WITH` clause](../query_syntax/with)), or a subquery.
+The `PIVOT` statement may be included within a `SELECT` statement as a CTE ([a Common Table Expression, or `WITH` clause]({% link docs/sql/query_syntax/with.md %})), or a subquery.
 This allows for a `PIVOT` to be used alongside other SQL logic, as well as for multiple `PIVOT`s to be used in one query.
 
 No `SELECT` is needed within the CTE, the `PIVOT` keyword can be thought of as taking its place.
@@ -285,7 +285,7 @@ Additional pre-processing steps are required if the columns to be created when p
 
 DuckDB, like most SQL engines, requires that all column names and types be known at the start of a query.
 In order to automatically detect the columns that should be created as a result of a `PIVOT` statement, it must be translated into multiple queries.
-[`ENUM` types](../data_types/enum) are used to find the distinct values that should become columns.
+[`ENUM` types]({% link docs/sql/data_types/enum.md %}) are used to find the distinct values that should become columns.
 Each `ENUM` is then injected into one of the `PIVOT` statement's `IN` clauses.
 
 After the `IN` clauses have been populated with `ENUM`s, the query is re-written again into a set of aggregations into lists.

@@ -20,4 +20,4 @@ The DM maps user application calls of ODBC functions to the correct ODBC driver 
 
 DuckDB supports the ODBC version 3.0 according to the [Core Interface Conformance](https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/core-interface-conformance?view=sql-server-ver15).
 
-The ODBC driver is available for all operating systems. Visit the [installation page](/docs/installation/index) for direct links.
+The ODBC driver is available for all operating systems. Visit the [installation page]({% link docs/installation/index.html %}) for direct links.

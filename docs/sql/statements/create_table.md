@@ -71,7 +71,7 @@ CREATE TABLE t1 AS
 
 Temporary tables can be created using the `CREATE TEMP TABLE` or the `CREATE TEMPORARY TABLE` statement (see diagram below).
 Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DuckDB is closed they will be automatically dropped.
-Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](../../configuration/overview) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained.
+Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration]({% link docs/configuration/overview.md %}) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained.
 
 Create a temporary table from a CSV file (automatically detecting column names and types):
 
@@ -119,7 +119,7 @@ CREATE TABLE nums AS
     FROM range(0, 3) t(i);
 ```
 
-This syntax can be used in combination with the [CSV reader](../../data/csv/overview), the shorthand to read directly from CSV files without specifying a function, the [`FROM`-first syntax](../query_syntax/from), and the [HTTP(S) support](../../extensions/httpfs/https), yielding concise SQL commands such as the following:
+This syntax can be used in combination with the [CSV reader]({% link docs/data/csv/overview.md %}), the shorthand to read directly from CSV files without specifying a function, the [`FROM`-first syntax]({% link docs/sql/query_syntax/from.md %}), and the [HTTP(S) support]({% link docs/extensions/httpfs/https.md %}), yielding concise SQL commands such as the following:
 
 ```sql
 CREATE TABLE flights AS

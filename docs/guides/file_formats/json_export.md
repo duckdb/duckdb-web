@@ -17,4 +17,4 @@ The result of queries can also be directly exported to a JSON file:
 COPY (SELECT * FROM tbl) TO 'output.json';
 ```
 
-For additional options, see the [`COPY` statement documentation](../../sql/statements/copy).
+For additional options, see the [`COPY` statement documentation]({% link docs/sql/statements/copy.md %}).

@@ -33,13 +33,13 @@ The `VARCHAR` field allows storage of Unicode characters. Internally, the data i
 Values of the text type are character strings, also known as string values or simply strings. At runtime, string values are constructed in one of the following ways:
 
 * referencing columns whose declared or implied type is the text data type
-* [string literals](literal_types#string-literals)
-* [casting](../expressions/cast#explicit-casting) expressions to a text type
-* applying a [string operator](../functions/char#text-functions-and-operators), or invoking a function that returns a text type value
+* [string literals]({% link docs/sql/data_types/literal_types.md %}#string-literals)
+* [casting]({% link docs/sql/expressions/cast.md %}#explicit-casting) expressions to a text type
+* applying a [string operator]({% link docs/sql/functions/char.md %}#text-functions-and-operators), or invoking a function that returns a text type value
 
 ## Strings with Special Characters
 
-To use special characters in string, use [escape string literals](literal_types#escape-string-literals) or [dollar-quoted string literals](literal_types#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function](../../sql/functions/char):
+To use special characters in string, use [escape string literals]({% link docs/sql/data_types/literal_types.md %}#escape-string-literals) or [dollar-quoted string literals]({% link docs/sql/data_types/literal_types.md %}#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function]({% link docs/sql/functions/char.md %}):
 
 ```sql
 SELECT 'Hello' || chr(10) || 'world' AS msg;
@@ -58,4 +58,4 @@ SELECT 'Hello' || chr(10) || 'world' AS msg;
 
 ## Functions
 
-See [Character Functions](../../sql/functions/char) and [Pattern Matching](../../sql/functions/pattern_matching).
+See [Character Functions]({% link docs/sql/functions/char.md %}) and [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %}).

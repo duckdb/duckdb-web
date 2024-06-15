@@ -8,7 +8,7 @@ Like other SQL engines, DuckDB supports both implicit and explicit typecasting.
 
 ## Explicit Casting
 
-Explicit typecasting is performed by using a `CAST` expression. For example, `CAST(col AS VARCHAR)` or `col::VARCHAR` explicitly cast the column `col` to `VARCHAR`. See the [cast page](../expressions/cast) for more information.
+Explicit typecasting is performed by using a `CAST` expression. For example, `CAST(col AS VARCHAR)` or `col::VARCHAR` explicitly cast the column `col` to `VARCHAR`. See the [cast page]({% link docs/sql/expressions/cast.md %}) for more information.
 
 ## Implicit Casting
 
@@ -29,8 +29,8 @@ When implicit casting is allowed, it implies that explicit casting is also possi
 Even though a casting operation is supported based on the source and target data type, it does not necessarily mean the cast operation will succeed at runtime.
 
 > Deprecated Prior to version 0.10.0, DuckDB allowed any type to be implicitly cast to `VARCHAR` during function binding.
-> Version 0.10.0 introduced a [breaking change which no longer allows implicit casts to `VARCHAR`](/2024/02/13/announcing-duckdb-0100#breaking-sql-changes).
-> The [`old_implicit_casting` configuration option](../../configuration/pragmas#implicit-casting-to-varchar) setting can be used to revert to the old behavior.
+> Version 0.10.0 introduced a [breaking change which no longer allows implicit casts to `VARCHAR`]({% link _posts/2024-02-13-announcing-duckdb-0100.md %}#breaking-sql-changes).
+> The [`old_implicit_casting` configuration option]({% link docs/configuration/pragmas.md %}#implicit-casting-to-varchar) setting can be used to revert to the old behavior.
 > However, please note that this flag will be deprecated in the future.
 
 ### Lossy Casts
@@ -53,11 +53,11 @@ SELECT CAST(999 AS TINYINT);
 Conversion Error: Type INT32 with value 999 can't be cast because the value is out of range for the destination type INT8
 ```
 
-So even though the cast operation from `INTEGER` to `TINYINT` is supported, it is not possible for this particular value. [TRY_CAST](../expressions/cast) can be used to convert the value into `NULL` instead of throwing an error.
+So even though the cast operation from `INTEGER` to `TINYINT` is supported, it is not possible for this particular value. [TRY_CAST]({% link docs/sql/expressions/cast.md %}) can be used to convert the value into `NULL` instead of throwing an error.
 
 ### Varchar
 
-The [`VARCHAR`](text) type acts as a univeral target: any arbitrary value of any arbitrary type can always be cast to the `VARCHAR` type. This type is also used for displaying values in the shell.
+The [`VARCHAR`]({% link docs/sql/data_types/text.md %}) type acts as a univeral target: any arbitrary value of any arbitrary type can always be cast to the `VARCHAR` type. This type is also used for displaying values in the shell.
 
 ```sql
 SELECT CAST(42.5 AS VARCHAR);
@@ -77,7 +77,7 @@ SELECT CAST(CAST([1, 2, 3] AS VARCHAR) AS INTEGER[]);
 
 ### Literal Types
 
-Integer literals (such as `42`) and string literals (such as `'string'`) have special implicit casting rules. See the [literal types page](literal_types) for more information.
+Integer literals (such as `42`) and string literals (such as `'string'`) have special implicit casting rules. See the [literal types page]({% link docs/sql/data_types/literal_types.md %}) for more information.
 
 ### Lists / Arrays
 
@@ -107,4 +107,4 @@ SELECT CAST({'a': 42, 'b': 84} AS STRUCT(b VARCHAR, a VARCHAR));
 
 ### Unions
 
-Union casting rules can be found on the [`UNION type page`](union#casting-to-unions).
+Union casting rules can be found on the [`UNION type page`]({% link docs/sql/data_types/union.md %}#casting-to-unions).

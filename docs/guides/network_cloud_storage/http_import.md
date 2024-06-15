@@ -5,7 +5,7 @@ redirect_from:
   - /docs/guides/import/http_import
 ---
 
-To load a Parquet file over HTTP(S), the [`httpfs` extension](../../extensions/httpfs/overview) is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.
+To load a Parquet file over HTTP(S), the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL httpfs;
@@ -35,7 +35,7 @@ The function `read_parquet` can be omitted if the URL ends with `.parquet`:
 SELECT * FROM read_parquet('https://duckdb.org/data/holdings.parquet');
 ```
 
-Moreover, the `read_parquet` function itself can also be omitted thanks to DuckDB's [replacement scan mechanism](../../api/c/replacement_scans):
+Moreover, the `read_parquet` function itself can also be omitted thanks to DuckDB's [replacement scan mechanism]({% link docs/api/c/replacement_scans.md %}):
 
 ```sql
 SELECT * FROM 'https://duckdb.org/data/holdings.parquet';

@@ -10,7 +10,7 @@ The SQLite extension allows DuckDB to directly read and write data from a SQLite
 
 ## Installing and Loading
 
-The `sqlite` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
+The `sqlite` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -265,4 +265,4 @@ SELECT * FROM sqlite_db.tmp;
 |--:|
 |   |
 
-> Deprecated The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax](../sql/statements/attach).
+> Deprecated The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax]({% link docs/sql/statements/attach.md %}).

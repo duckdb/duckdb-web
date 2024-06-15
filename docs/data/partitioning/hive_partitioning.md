@@ -89,4 +89,4 @@ FROM read_parquet(
 
 ### Writing Partitioned Files
 
-See the [Partitioned Writes](partitioned_writes) section.
+See the [Partitioned Writes]({% link docs/data/partitioning/partitioned_writes.md %}) section.

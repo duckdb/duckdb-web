@@ -51,7 +51,7 @@ Call `read_csv` from within SQL:
 duckdb.sql("SELECT * FROM read_csv('example.csv')")
 ```
 
-See the [CSV Import](../../data/csv/overview) page for more information.
+See the [CSV Import]({% link docs/data/csv/overview.md %}) page for more information.
 
 ## Parquet Files
 
@@ -69,7 +69,7 @@ Read multiple Parquet files from a folder:
 duckdb.read_parquet("folder/*.parquet")
 ```
 
-Read a Parquet file over [https](../../extensions/httpfs/overview):
+Read a Parquet file over [https]({% link docs/extensions/httpfs/overview.md %}):
 
 ```python
 duckdb.read_parquet("https://some.url/some_file.parquet")
@@ -93,7 +93,7 @@ Call `read_parquet` from within SQL:
 duckdb.sql("SELECT * FROM read_parquet('example.parquet')")
 ```
 
-See the [Parquet Loading](../../data/parquet/overview) page for more information.
+See the [Parquet Loading]({% link docs/data/parquet/overview.md %}) page for more information.
 
 ## JSON Files
 
@@ -126,10 +126,10 @@ duckdb.sql("SELECT * FROM read_json_auto('example.json')")
 ## Directly Accessing DataFrames and Arrow Objects
 
 DuckDB is automatically able to query certain Python variables by referring to their variable name (as if it was a table).
-These types include the following: Pandas DataFrame, Polars DataFrame, Polars LazyFrame, NumPy arrays, [relations](relational_api), and Arrow objects.
-Accessing these is made possible by [replacement scans](../c/replacement_scans).
+These types include the following: Pandas DataFrame, Polars DataFrame, Polars LazyFrame, NumPy arrays, [relations]({% link docs/api/python/relational_api.md %}), and Arrow objects.
+Accessing these is made possible by [replacement scans]({% link docs/api/c/replacement_scans.md %}).
 
-DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/overview#python-client) for more examples.
+DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides]({% link docs/guides/overview.md %}#python-client) for more examples.
 
 ```python
 import duckdb
@@ -184,10 +184,10 @@ duckdb.execute("SET GLOBAL pandas_analyze_sample = 100_000")
 
 ### Registering Objects
 
-You can register Python objects as DuckDB tables using the [`DuckDBPyConnection.register()` function](reference/index#duckdb.DuckDBPyConnection.register).
+You can register Python objects as DuckDB tables using the [`DuckDBPyConnection.register()` function]({% link docs/api/python/reference/index.md %}#duckdb.DuckDBPyConnection.register).
 
 The precedence of objects with the same name is as follows:
 
 * Objects explicitly registered via `DuckDBPyConnection.register()`
 * Native DuckDB tables and views
-* [Replacement scans](../c/replacement_scans)
+* [Replacement scans]({% link docs/api/c/replacement_scans.md %})

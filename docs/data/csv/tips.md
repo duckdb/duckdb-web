@@ -31,7 +31,7 @@ SELECT * FROM read_csv('flights.csv', types = {'FlightDate': 'DATE'});
 
 ## Use `COPY` When Loading Data into a Table
 
-The [`COPY` statement](../../sql/statements/copy) copies data directly into a table. The CSV reader uses the schema of the table instead of auto-detecting types from the file. This speeds up the auto-detection, and prevents mistakes from being made during auto-detection.
+The [`COPY` statement]({% link docs/sql/statements/copy.md %}) copies data directly into a table. The CSV reader uses the schema of the table instead of auto-detecting types from the file. This speeds up the auto-detection, and prevents mistakes from being made during auto-detection.
 
 ```sql
 COPY tbl FROM 'test.csv';

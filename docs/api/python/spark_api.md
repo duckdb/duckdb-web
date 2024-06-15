@@ -4,7 +4,7 @@ title: Spark API
 ---
 
 The DuckDB Spark API implements the [PySpark API](https://spark.apache.org/docs/3.5.0/api/python/reference/index.html), allowing you to use the familiar Spark API to interact with DuckDB.
-All statements are translated to DuckDB's internal plans using our [relational API](relational_api) and executed using DuckDB's query engine.
+All statements are translated to DuckDB's internal plans using our [relational API]({% link docs/api/python/relational_api.md %}) and executed using DuckDB's query engine.
 
 > Warning The DuckDB Spark API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through [Discord](https://discord.duckdb.org) or on [GitHub](https://github.com/duckdb/duckdb/issues).
 

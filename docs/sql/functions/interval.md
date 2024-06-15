@@ -3,7 +3,7 @@ layout: docu
 title: Interval Functions
 ---
 
-This section describes functions and operators for examining and manipulating [`INTERVAL`](../../sql/data_types/interval) values.
+This section describes functions and operators for examining and manipulating [`INTERVAL`]({% link docs/sql/data_types/interval.md %}) values.
 
 ## Interval Operators
 
@@ -26,7 +26,7 @@ The table below shows the available scalar functions for `INTERVAL` types.
 
 | Name | Description |
 |:--|:-------|
-| [`date_part(part, interval)`](#date_partpart-interval) | Extract [datepart component](../../sql/functions/datepart) (equivalent to `extract`). See [`INTERVAL`](../../sql/data_types/interval) for the sometimes surprising rules governing this extraction. |
+| [`date_part(part, interval)`](#date_partpart-interval) | Extract [datepart component]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). See [`INTERVAL`]({% link docs/sql/data_types/interval.md %}) for the sometimes surprising rules governing this extraction. |
 | [`datepart(part, interval)`](#datepartpart-interval) | Alias of `date_part`. |
 | [`extract(part FROM interval)`](#extractpart-from-interval) | Alias of `date_part`. |
 | [`epoch(interval)`](#epochinterval) | Get total number of seconds, as double precision floating point number, in interval. |
@@ -43,13 +43,13 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | [`to_weeks(integer)`](#to_weeksinteger) | Construct a week interval. |
 | [`to_years(integer)`](#to_yearsinteger) | Construct a year interval. |
 
-> Only the documented [date part components](../../sql/functions/datepart) are defined for intervals.
+> Only the documented [date part components]({% link docs/sql/functions/datepart.md %}) are defined for intervals.
 
 ### `date_part(part, interval)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extract [datepart component](../../sql/functions/datepart) (equivalent to `extract`). See [`INTERVAL`](../../sql/data_types/interval) for the sometimes surprising rules governing this extraction. |
+| **Description** | Extract [datepart component]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). See [`INTERVAL`]({% link docs/sql/data_types/interval.md %}) for the sometimes surprising rules governing this extraction. |
 | **Example** | `date_part('year', INTERVAL '14 months')` |
 | **Result** | `1` |
 

@@ -8,7 +8,7 @@ github_repository: https://github.com/duckdb/duckdb-r
 
 ### `duckdb`: R API
 
-The DuckDB R API can be installed using `install.packages("duckdb")`. Please see the [installation page](/docs/installation/index?environment=r) for details.
+The DuckDB R API can be installed using `install.packages("duckdb")`. Please see the [installation page]({% link docs/installation/index.html %}?environment=r) for details.
 
 ### `duckplyr`: dplyr API
 
@@ -103,7 +103,7 @@ print(res)
 
 > DuckDB keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `duckdb_unregister()` method.
 
-Also refer to [the data import documentation](../data/overview) for more options of efficiently importing data.
+Also refer to [the data import documentation]({% link docs/data/overview.md %}) for more options of efficiently importing data.
 
 ## dbplyr
 
@@ -147,7 +147,7 @@ tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning = true)") |>
 
 ## Memory Limit
 
-You can use the [`memory_limit` configuration option](../configuration/pragmas) to limit the memory use of DuckDB, e.g.:
+You can use the [`memory_limit` configuration option]({% link docs/configuration/pragmas.md %}) to limit the memory use of DuckDB, e.g.:
 
 ```sql
 SET memory_limit = '2GB';

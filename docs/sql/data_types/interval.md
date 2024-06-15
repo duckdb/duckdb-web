@@ -122,6 +122,6 @@ and
 
 ## Functions
 
-See the [Date Part Functions page](../../sql/functions/datepart) for a list of available date parts for use with an `INTERVAL`.
+See the [Date Part Functions page]({% link docs/sql/functions/datepart.md %}) for a list of available date parts for use with an `INTERVAL`.
 
-See the [Interval Operators page](../../sql/functions/interval) for functions that operate on intervals.
+See the [Interval Operators page]({% link docs/sql/functions/interval.md %}) for functions that operate on intervals.

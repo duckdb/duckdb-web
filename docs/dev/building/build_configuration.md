@@ -55,11 +55,11 @@ BUILD_PYTHON=1 make debug
 
 ### `BUILD_PYTHON`
 
-When this flag is set, the [Python](../../api/python/overview) package is built.
+When this flag is set, the [Python]({% link docs/api/python/overview.md %}) package is built.
 
 ### `BUILD_SHELL`
 
-When this flag is set, the [CLI](../../api/cli/overview) is built, this is usually enabled by default.
+When this flag is set, the [CLI]({% link docs/api/cli/overview.md %}) is built, this is usually enabled by default.
 
 ### `BUILD_BENCHMARK`
 
@@ -68,11 +68,11 @@ More information about this can be found [here](https://github.com/duckdb/duckdb
 
 ### `BUILD_JDBC`
 
-When this flag is set, the [Java](../../api/java) package is built.
+When this flag is set, the [Java]({% link docs/api/java.md %}) package is built.
 
 ### `BUILD_ODBC`
 
-When this flag is set, the [ODBC](../../api/odbc/overview) package is built.
+When this flag is set, the [ODBC]({% link docs/api/odbc/overview.md %}) package is built.
 
 ## Miscellaneous Flags
 

@@ -7,7 +7,7 @@ DuckDB has two types of indexes: zonemaps and ART indexes.
 
 ## Zonemaps
 
-DuckDB automatically creates [zonemaps](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as min-max indexes) for the columns of all [general-purpose data types](../../sql/data_types/overview#general-purpose-data-types). These indexes are used for predicate pushdown into scan operators and computing aggregations. This means that if a filter criterion (like `WHERE column1 = 123`) is in use, DuckDB can skip any row group whose min-max range does not contain that filter value (e.g., a block with a min-max range of 1000 to 2000 will be omitted when comparing for `= 123` or `< 400`).
+DuckDB automatically creates [zonemaps](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as min-max indexes) for the columns of all [general-purpose data types]({% link docs/sql/data_types/overview.md %}#general-purpose-data-types). These indexes are used for predicate pushdown into scan operators and computing aggregations. This means that if a filter criterion (like `WHERE column1 = 123`) is in use, DuckDB can skip any row group whose min-max range does not contain that filter value (e.g., a block with a min-max range of 1000 to 2000 will be omitted when comparing for `= 123` or `< 400`).
 
 ### The Effect of Ordering on Zonemaps
 
@@ -15,7 +15,7 @@ The more ordered the data within a column, the more useful the zonemap indexes w
 
 ### Microbenchmark: The Effect of Ordering
 
-For an example, let’s repeat the [microbenchmark for timestamps](schema#microbenchmark-using-timestamps) with a timestamp column that sorted using an ascending order vs. an unordered one.
+For an example, let’s repeat the [microbenchmark for timestamps]({% link docs/guides/performance/schema.md %}#microbenchmark-using-timestamps) with a timestamp column that sorted using an ascending order vs. an unordered one.
 
 <div class="narrow_table"></div>
 
@@ -34,8 +34,8 @@ Another practical way to exploit ordering is to use the `INTEGER` type with auto
 ## ART Indexes
 
 DuckDB allows defining [Adaptive Radix Tree (ART) indexes](https://db.in.tum.de/~leis/papers/ART.pdf) in two ways.
-First, such an index is created implicitly for columns with `PRIMARY KEY`, `FOREIGN KEY`, and `UNIQUE` [constraints](schema#constraints).
-Second, explicitly running a the [`CREATE INDEX`](../../sql/indexes) statement creates an ART index on the target column(s).
+First, such an index is created implicitly for columns with `PRIMARY KEY`, `FOREIGN KEY`, and `UNIQUE` [constraints]({% link docs/guides/performance/schema.md %}#constraints).
+Second, explicitly running a the [`CREATE INDEX`]({% link docs/sql/indexes.md %}) statement creates an ART index on the target column(s).
 
 The tradeoffs of having an ART index on a column are as follows:
 
@@ -44,7 +44,7 @@ The tradeoffs of having an ART index on a column are as follows:
 
 Regarding query performance, an ART index has the following effects:
 
-1. It speeds up point queries and other highly selective queries using the indexed column(s), where the filtering condition returns approx. 0.1% of all rows or fewer. When in doubt, use [`EXPLAIN`](../meta/explain) to verify that your query plan uses the index scan.
+1. It speeds up point queries and other highly selective queries using the indexed column(s), where the filtering condition returns approx. 0.1% of all rows or fewer. When in doubt, use [`EXPLAIN`]({% link docs/guides/meta/explain.md %}) to verify that your query plan uses the index scan.
 2. An ART index has no effect on the performance of join, aggregation, and sorting queries.
 
 Indexes are serialized to disk and deserialized lazily, i.e., when the database is reopened, operations using the index will only load the required parts of the index. Therefore, having an index will not cause any slowdowns when opening an existing database.
@@ -53,7 +53,7 @@ Indexes are serialized to disk and deserialized lazily, i.e., when the database 
 >
 > * Only use primary keys, foreign keys, or unique constraints, if these are necessary for enforcing constraints on your data.
 > * Do not define explicit indexes unless you have highly selective queries.
-> * If you define an ART index, do so after bulk loading the data to the table. Adding an index prior to loading, either explicitly or via primary/foreign keys, is [detrimental to load performance](schema#microbenchmark-the-effect-of-primary-keys).
+> * If you define an ART index, do so after bulk loading the data to the table. Adding an index prior to loading, either explicitly or via primary/foreign keys, is [detrimental to load performance]({% link docs/guides/performance/schema.md %}#microbenchmark-the-effect-of-primary-keys).
 
 <!--
 ## Microbenchmark: The Timing of Index Creation

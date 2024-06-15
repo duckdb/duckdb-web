@@ -8,10 +8,10 @@ redirect_from:
 
 The `PRAGMA` statement is a SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
 
-`PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement](../sql/statements/set) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
+`PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement]({% link docs/sql/statements/set.md %}) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
 
-For DuckDB's built in configuration options, see the [Configuration Reference](overview#configuration-reference).
-DuckDB [extensions](../extensions/overview) may register additional configuration options.
+For DuckDB's built in configuration options, see the [Configuration Reference]({% link docs/configuration/overview.md %}#configuration-reference).
+DuckDB [extensions]({% link docs/extensions/overview.md %}) may register additional configuration options.
 These are documented in the respective extensions' documentation pages.
 
 This page contains the supported `PRAGMA` settings.
@@ -32,7 +32,7 @@ List all tables:
 PRAGMA show_tables;
 ```
 
-List all tables, with extra information, similarly to [`DESCRIBE`](../guides/meta/describe):
+List all tables, with extra information, similarly to [`DESCRIBE`]({% link docs/guides/meta/describe.md %}):
 
 ```sql
 PRAGMA show_tables_expanded;
@@ -116,18 +116,18 @@ This call returns the following information for the given table:
 | `segment_type` | `VARCHAR` ||
 | `start`        | `BIGINT`  | The start row id of this chunk                        |
 | `count`        | `BIGINT`  | The amount of entries in this storage chunk           |
-| `compression`  | `VARCHAR` | Compression type used for this column – see [blog post](/2022/10/28/lightweight-compression) |
+| `compression`  | `VARCHAR` | Compression type used for this column – see [blog post]({% link _posts/2022-10-28-lightweight-compression.md %}) |
 | `stats`        | `VARCHAR` ||
 | `has_updates`  | `BOOLEAN` ||
 | `persistent`   | `BOOLEAN` | `false` if temporary table                            |
 | `block_id`     | `BIGINT`  | empty unless persistent                               |
 | `block_offset` | `BIGINT`  | empty unless persistent                               |
 
-See [Storage](/docs/internals/storage) for more information.
+See [Storage]({% link docs/internals/storage.md %}) for more information.
 
 ### Show Databases
 
-The following statement is equivalent to the [`SHOW DATABASES` statement](../sql/statements/attach):
+The following statement is equivalent to the [`SHOW DATABASES` statement]({% link docs/sql/statements/attach.md %}):
 
 ```sql
 PRAGMA show_databases;
@@ -146,8 +146,8 @@ SET max_memory = '1GB';
 
 > Warning The specified memory limit is only applied to the buffer manager.
 > For most queries, the buffer manager handles the majority of the data processed.
-> However, certain in-memory data structures such as [vectors](/docs/internals/vector) and query results are allocated outside of the buffer manager.
-> Additionally, [aggregate functions](../sql/aggregates) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
+> However, certain in-memory data structures such as [vectors]({% link docs/internals/vector.md %}) and query results are allocated outside of the buffer manager.
+> Additionally, [aggregate functions]({% link docs/sql/aggregates.md %}) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
 > Therefore, the actual memory consumption can be higher than the specified memory limit.
 
 ### Threads
@@ -210,7 +210,7 @@ CALL pragma_version();
 ### Platform
 
 `platform` returns an identifier for the platform the current DuckDB executable has been compiled for, e.g., `osx_arm64`.
-The format of this identifier matches the platform name as described [on the extension loading explainer](../extensions/working_with_extensions#platforms):
+The format of this identifier matches the platform name as described [on the extension loading explainer]({% link docs/extensions/working_with_extensions.md %}#platforms):
 
 ```sql
 PRAGMA platform;
@@ -263,7 +263,7 @@ PRAGMA disable_print_progress_bar;
 
 ### Explain Plan Output
 
-The output of [`EXPLAIN`](../sql/statements/profiling) output can be configured to show only the physical plan. This is the default configuration:
+The output of [`EXPLAIN`]({% link docs/sql/statements/profiling.md %}) output can be configured to show only the physical plan. This is the default configuration:
 
 ```sql
 SET explain_output = 'physical_only';
@@ -379,7 +379,7 @@ For example, to disable `filter_pushdown` and `statistics_propagation`, run:
 SET disabled_optimizers = 'filter_pushdown,statistics_propagation';
 ```
 
-The available optimizations can be queried using the [`duckdb_optimizers()` table function](../sql/duckdb_table_functions#duckdb_optimizers).
+The available optimizations can be queried using the [`duckdb_optimizers()` table function]({% link docs/sql/duckdb_table_functions.md %}#duckdb_optimizers).
 
 > Warning The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
 
@@ -399,7 +399,7 @@ SET log_query_path = '';
 
 ## Full-Text Search Indexes
 
-The `create_fts_index` and `drop_fts_index` options are only available when the [`fts` extension](../extensions/full_text_search) is loaded. Their usage is documented on the [Full-Text Search extension page](../extensions/full_text_search).
+The `create_fts_index` and `drop_fts_index` options are only available when the [`fts` extension]({% link docs/extensions/full_text_search.md %}) is loaded. Their usage is documented on the [Full-Text Search extension page]({% link docs/extensions/full_text_search.md %}).
 
 ## Verification
 
@@ -449,7 +449,7 @@ PRAGMA disable_object_cache;
 
 ### Force Checkpoint
 
-When [`CHECKPOINT`](../sql/statements/checkpoint) is called when no changes are made, force a checkpoint regardless:
+When [`CHECKPOINT`]({% link docs/sql/statements/checkpoint.md %}) is called when no changes are made, force a checkpoint regardless:
 
 ```sql
 PRAGMA force_checkpoint;

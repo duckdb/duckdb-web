@@ -15,7 +15,7 @@ This section describes functions and operators for examining and manipulating bl
 | [`decode(blob)`](#decodeblob) | Converts `BLOB` to `VARCHAR`. Fails if blob is not valid UTF-8. |
 | [`encode(string)`](#encodestring) | Converts `VARCHAR` to `BLOB`. Converts UTF-8 characters into literal encoding. |
 | [`octet_length(blob)`](#octet_lengthblob) | Number of bytes in `BLOB`. |
-| [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide](../../guides/file_formats/read_file#read_blob) for more details. |
+| [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/guides/file_formats/read_file.md %}#read_blob) for more details. |
 
 <!-- markdownlint-enable MD056 -->
 
@@ -55,6 +55,6 @@ This section describes functions and operators for examining and manipulating bl
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide](../../guides/file_formats/read_file#read_blob) for more details. |
+| **Description** | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/guides/file_formats/read_file.md %}#read_blob) for more details. |
 | **Example** | `read_blob('hello.bin')` |
 | **Result** | `hello\x0A` |

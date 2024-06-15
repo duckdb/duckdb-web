@@ -71,7 +71,7 @@ SELECT "Some Column Name" FROM tbl;
 
 The `SELECT` clause contains a list of expressions that specify the result of a query. The select list can refer to any columns in the `FROM` clause, and combine them using expressions. As the output of a SQL query is a table – every expression in the `SELECT` clause also has a name. The expressions can be explicitly named using the `AS` clause (e.g., `expr AS name`). If a name is not provided by the user the expressions are named automatically by the system.
 
-> Column names are case-insensitive. See the [Rules for Case Sensitivity](../keywords_and_identifiers#rules-for-case-sensitivity) for more details.
+> Column names are case-insensitive. See the [Rules for Case Sensitivity]({% link docs/sql/keywords_and_identifiers.md %}#rules-for-case-sensitivity) for more details.
 
 ### Star Expressions
 
@@ -89,7 +89,7 @@ SELECT COLUMNS('number\d+')
 FROM addresses;
 ```
 
-The [star expression](../expressions/star) is a special expression that expands to *multiple expressions* based on the contents of the `FROM` clause. In the simplest case, `*` expands to **all** expressions in the `FROM` clause. Columns can also be selected using regular expressions or lambda functions. See the [star expression page](../expressions/star) for more details.
+The [star expression]({% link docs/sql/expressions/star.md %}) is a special expression that expands to *multiple expressions* based on the contents of the `FROM` clause. In the simplest case, `*` expands to **all** expressions in the `FROM` clause. Columns can also be selected using regular expressions or lambda functions. See the [star expression page]({% link docs/sql/expressions/star.md %}) for more details.
 
 ### `DISTINCT` Clause
 
@@ -135,7 +135,7 @@ FROM addresses
 GROUP BY city;
 ```
 
-[Aggregate functions](../aggregates) are special functions that *combine* multiple rows into a single value. When aggregate functions are present in the `SELECT` clause, the query is turned into an aggregate query. In an aggregate query, **all** expressions must either be part of an aggregate function, or part of a group (as specified by the [`GROUP BY clause`](groupby)).
+[Aggregate functions]({% link docs/sql/aggregates.md %}) are special functions that *combine* multiple rows into a single value. When aggregate functions are present in the `SELECT` clause, the query is turned into an aggregate query. In an aggregate query, **all** expressions must either be part of an aggregate function, or part of a group (as specified by the [`GROUP BY clause`]({% link docs/sql/query_syntax/groupby.md %})).
 
 ### Window Functions
 
@@ -153,7 +153,7 @@ SELECT amount - lag(amount) OVER (ORDER BY time)
 FROM sales;
 ```
 
-[Window functions](../window_functions) are special functions that allow the computation of values relative to *other rows* in a result. Window functions are marked by the `OVER` clause which contains the *window specification*. The window specification defines the frame or context in which the window function is computed. See the [window functions page](../window_functions) for more information.
+[Window functions]({% link docs/sql/window_functions.md %}) are special functions that allow the computation of values relative to *other rows* in a result. Window functions are marked by the `OVER` clause which contains the *window specification*. The window specification defines the frame or context in which the window function is computed. See the [window functions page]({% link docs/sql/window_functions.md %}) for more information.
 
 ### `unnest` Function
 
@@ -169,4 +169,4 @@ Unnest a struct by one level:
 SELECT unnest({'a': 42, 'b': 84});
 ```
 
-The [`unnest`](unnest) function is a special function that can be used together with [arrays](../data_types/array), [lists](../data_types/list), or [structs](../data_types/struct). The unnest function strips one level of nesting from the type. For example, `INTEGER[]` is transformed into `INTEGER`. `STRUCT(a INTEGER, b INTEGER)` is transformed into `a INTEGER, b INTEGER`. The unnest function can be used to transform nested types into regular scalar types, which makes them easier to operate on.
+The [`unnest`]({% link docs/sql/query_syntax/unnest.md %}) function is a special function that can be used together with [arrays]({% link docs/sql/data_types/array.md %}), [lists]({% link docs/sql/data_types/list.md %}), or [structs]({% link docs/sql/data_types/struct.md %}). The unnest function strips one level of nesting from the type. For example, `INTEGER[]` is transformed into `INTEGER`. `STRUCT(a INTEGER, b INTEGER)` is transformed into `a INTEGER, b INTEGER`. The unnest function can be used to transform nested types into regular scalar types, which makes them easier to operate on.

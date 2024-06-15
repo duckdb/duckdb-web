@@ -26,7 +26,7 @@ Attach the database `file.db` in read only mode:
 ATTACH 'file.db' (READ_ONLY);
 ```
 
-Attach a SQLite database for reading and writing (see the [`sqlite` extension](../../extensions/sqlite) for more information):
+Attach a SQLite database for reading and writing (see the [`sqlite` extension]({% link docs/extensions/sqlite.md %}) for more information):
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite_db (TYPE SQLITE);
@@ -80,14 +80,14 @@ USE file;
 
 The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file.
 
-Note that it is not possible to detach from the default database: if you would like to do so, issue the [`USE` statement](use) to change the default database to another one. For example, if you are connected to a persistent database, you may change to an in-memory database by issuing:
+Note that it is not possible to detach from the default database: if you would like to do so, issue the [`USE` statement]({% link docs/sql/statements/use.md %}) to change the default database to another one. For example, if you are connected to a persistent database, you may change to an in-memory database by issuing:
 
 ```sql
 ATTACH ':memory:' AS memory_db;
 USE memory_db;
 ```
 
-> Warning Closing the connection, e.g., invoking the [`close()` function in Python](../../api/python/dbapi#connection), does not release the locks held on the database files as the file handles are held by the main DuckDB instance (in Python's case, the `duckdb` module).
+> Warning Closing the connection, e.g., invoking the [`close()` function in Python]({% link docs/api/python/dbapi.md %}#connection), does not release the locks held on the database files as the file handles are held by the main DuckDB instance (in Python's case, the `duckdb` module).
 
 ### Detach Syntax
 
@@ -123,7 +123,7 @@ SELECT new_db.my_schema.my_table.col FROM new_db.my_schema.my_table;
 
 Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the *catalog search path*. The default catalog search path includes the system catalog, the temporary catalog and the initially attached database together with the `main` schema.
 
-Also note the rules on [identifiers and database names in particular](../keywords_and_identifiers#database-names).
+Also note the rules on [identifiers and database names in particular]({% link docs/sql/keywords_and_identifiers.md %}#database-names).
 
 ### Default Database and Schema
 

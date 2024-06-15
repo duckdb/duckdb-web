@@ -7,7 +7,7 @@ redirect_from:
 
 ## Installing the Extension
 
-To export the data from a table to an Excel file, install and load the [spatial extension](../../extensions/spatial).
+To export the data from a table to an Excel file, install and load the [spatial extension]({% link docs/extensions/spatial.md %}).
 This is only needed once per DuckDB connection.
 
 ```sql
@@ -34,5 +34,5 @@ COPY (SELECT * FROM tbl) TO 'output.xlsx' WITH (FORMAT GDAL, DRIVER 'xlsx');
 
 ## See Also
 
-DuckDB can also [import Excel files](excel_import).
-For additional details, see the [spatial extension page](../../extensions/spatial) and the [GDAL XLSX driver page](https://gdal.org/drivers/vector/xlsx.html).
+DuckDB can also [import Excel files]({% link docs/guides/file_formats/excel_import.md %}).
+For additional details, see the [spatial extension page]({% link docs/extensions/spatial.md %}) and the [GDAL XLSX driver page](https://gdal.org/drivers/vector/xlsx.html).

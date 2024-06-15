@@ -31,7 +31,7 @@ FORCE CHECKPOINT;
 
 <div id="rrdiagram1"></div>
 
-Checkpoint operations happen automatically based on the WAL size (see [Configuration](../../configuration/overview)). This
+Checkpoint operations happen automatically based on the WAL size (see [Configuration]({% link docs/configuration/overview.md %})). This
 statement is for manual checkpoint actions.
 
 ## Behavior
@@ -39,7 +39,7 @@ statement is for manual checkpoint actions.
 The default `CHECKPOINT` command will fail if there are any running transactions. Including `FORCE` will abort any
 transactions and execute the checkpoint operation.
 
-Also see the related [`PRAGMA` option](../../configuration/pragmas#force-checkpoint) for further behavior modification.
+Also see the related [`PRAGMA` option]({% link docs/configuration/pragmas.md %}#force-checkpoint) for further behavior modification.
 
 ### Reclaiming Space
 
@@ -47,4 +47,4 @@ When performing a checkpoint (automatic or otherwise), the space occupied by del
 
 When running in in-memory mode, checkpointing has no effect, hence it does not reclaim space after deletes in in-memory databases.
 
-> Warning The [`VACUUM` statement](vacuum) does _not_ trigger vacuuming deletes and hence does not reclaim space.
+> Warning The [`VACUUM` statement]({% link docs/sql/statements/vacuum.md %}) does _not_ trigger vacuuming deletes and hence does not reclaim space.

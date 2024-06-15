@@ -8,7 +8,7 @@ The `json` extension is a loadable extension that implements SQL functions that 
 
 ## Installing and Loading
 
-The `json` extension is shipped by default in DuckDB builds, otherwise, it will be transparently [autoloaded](overview#autoloading-extensions) on first use.
+The `json` extension is shipped by default in DuckDB builds, otherwise, it will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -42,7 +42,7 @@ Write the result of a query to a JSON file:
 COPY (SELECT * FROM todos) TO 'todos.json';
 ```
 
-See more examples of loading JSON data on the [JSON data page](../data/json/overview#examples):
+See more examples of loading JSON data on the [JSON data page]({% link docs/data/json/overview.md %}#examples):
 
 Create a table with a column for storing JSON data:
 
@@ -142,7 +142,7 @@ These functions have the following parameters:
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | `VARCHAR` | `'auto'` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']`. | `VARCHAR` | `'array'` |
-| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path](../data/partitioning/hive_partitioning). | `BOOL` | `false` |
+| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/data/partitioning/hive_partitioning.md %}). | `BOOL` | `false` |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`). | `BOOL` | `false` |
 | `maximum_sample_files` | The maximum number of JSON files sampled for auto-detection. | `BIGINT` | `32` |
 | `maximum_object_size` | The maximum size of a JSON object (in bytes). | `UINTEGER` | `16777216` |
@@ -228,12 +228,12 @@ Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, 
 |:--|:------|:-|:-|
 | `auto_detect` | Whether to auto-detect the names of the keys and data types of the values automatically | `BOOL` | `false` |
 | `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | `STRUCT` | `(empty)` |
-| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | `VARCHAR` | `'iso'` |
+| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | `'iso'` |
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |
 | `records` | Can be one of `['auto', 'true', 'false']` | `VARCHAR` | `'records'` |
 | `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) | `VARCHAR` | `'iso'`|
-| `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../data/multiple_files/combining_schemas) | `BOOL` | `false` |
+| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | `'iso'`|
+| `union_by_name` | Whether the schema's of multiple JSON files should be [unified]({% link docs/data/multiple_files/combining_schemas.md %}) | `BOOL` | `false` |
 
 Example usage:
 
@@ -341,11 +341,11 @@ You can read the same file with `records` set to `'false'`, to get a single colu
 | {'duck': 42, 'goose': [1,2,3]} |
 | {'duck': 43, 'goose': [4,5,6]} |
 
-For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post](/2023/03/03/json).
+For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post]({% link _posts/2023-03-03-json.md %}).
 
 ## JSON Import/Export
 
-When the `json` extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy](../sql/statements/copy) and [Import/Export](../sql/statements/export).
+When the `json` extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy]({% link docs/sql/statements/copy.md %}) and [Import/Export]({% link docs/sql/statements/export.md %}).
 
 By default, `COPY` expects newline-delimited JSON. If you prefer copying data to/from a JSON array, you can specify `ARRAY true`, e.g.,
 
@@ -1005,7 +1005,7 @@ Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALL
 
 ## Indexing
 
-> Warning Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays](../sql/data_types/array) and [lists](../sql/data_types/list) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
+> Warning Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays]({% link docs/sql/data_types/array.md %}) and [lists]({% link docs/sql/data_types/list.md %}) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
 
 ## Equality Comparison
 

@@ -10,7 +10,7 @@ The `delta` extension adds support for the [Delta Lake open-source storage forma
 
 ## Installing and Loading
 
-The `delta` extension will be transparently [autoloaded](overview#autoloading-extensions) on first use from the official extension repository.
+The `delta` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -34,7 +34,7 @@ SELECT *
 FROM delta_scan('s3://some/delta/table');
 ```
 
-For authenticating to S3 buckets, DuckDB [Secrets](../configuration/secrets_manager) are supported:
+For authenticating to S3 buckets, DuckDB [Secrets]({% link docs/configuration/secrets_manager.md %}) are supported:
 
 ```sql
 CREATE SECRET (
@@ -70,4 +70,4 @@ The `delta` extension currently only supports the following platforms:
 * Linux AMD64 (x86_64): `linux_amd64` and `linux_amd64_gcc4`
 * macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
 
-Support for the [other DuckDB platforms](working_with_extensions#platforms) is work-in-progress.
+Support for the [other DuckDB platforms]({% link docs/extensions/working_with_extensions.md %}#platforms) is work-in-progress.

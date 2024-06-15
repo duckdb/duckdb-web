@@ -36,9 +36,9 @@ FROM read_parquet([
 
 ## Using a Custom Certificate File
 
-> This feature is currently only available in the nightly build. It will be [released](/docs/dev/release_calendar) in version 0.10.1.
+> This feature is currently only available in the nightly build. It will be [released]({% link docs/dev/release_calendar.md %}) in version 0.10.1.
 
-To use the `httpfs` extension with a custom certificate file, set the following [configuration options](../../configuration/pragmas) prior to loading the extension:
+To use the `httpfs` extension with a custom certificate file, set the following [configuration options]({% link docs/configuration/pragmas.md %}) prior to loading the extension:
 
 ```sql
 LOAD httpfs;

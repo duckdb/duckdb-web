@@ -3,7 +3,7 @@ layout: docu
 title: Types API
 ---
 
-The `DuckDBPyType` class represents a type instance of our [data types](../../sql/data_types/overview).
+The `DuckDBPyType` class represents a type instance of our [data types]({% link docs/sql/data_types/overview.md %}).
 
 ## Converting from Other Types
 

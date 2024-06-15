@@ -3,17 +3,17 @@ layout: docu
 title: Array Type
 ---
 
-An `ARRAY` column stores fixed-sized arrays. All fields in the column must have the same length and the same underlying type. Arrays are typically used to store arrays of numbers, but can contain any uniform data type, including `ARRAY`, [`LIST`](list) and [`STRUCT`](struct) types.
+An `ARRAY` column stores fixed-sized arrays. All fields in the column must have the same length and the same underlying type. Arrays are typically used to store arrays of numbers, but can contain any uniform data type, including `ARRAY`, [`LIST`]({% link docs/sql/data_types/list.md %}) and [`STRUCT`]({% link docs/sql/data_types/struct.md %}) types.
 
 Arrays can be used to store vectors such as [word embeddings](https://en.wikipedia.org/wiki/Word_embedding) or image embeddings.
 
-To store variable-length lists, use the [`LIST` type](list). See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
+To store variable-length lists, use the [`LIST` type]({% link docs/sql/data_types/list.md %}). See the [data types overview]({% link docs/sql/data_types/overview.md %}) for a comparison between nested data types.
 
 > The `ARRAY` type in PostgreSQL allows variable-length fields. DuckDB's `ARRAY` type is fixed-length.
 
 ## Creating Arrays
 
-Arrays can be created using the [`array_value(expr, ...)`](../functions/nested#list-functions) function.
+Arrays can be created using the [`array_value(expr, ...)`]({% link docs/sql/functions/nested.md %}#list-functions) function.
 
 Construct with the `array_value` function:
 
@@ -56,7 +56,7 @@ INSERT INTO array_table VALUES (10, [1, 2, 3]), (20, [4, 5, 6]);
 
 ## Retrieving Values from Arrays
 
-Retrieving one or more values from an array can be accomplished using brackets and slicing notation, or through [list functions](../functions/nested#list-functions) like `list_extract` and `array_extract`. Using the example in [Defining an Array Field](#defining-an-array-field).
+Retrieving one or more values from an array can be accomplished using brackets and slicing notation, or through [list functions]({% link docs/sql/functions/nested.md %}#list-functions) like `list_extract` and `array_extract`. Using the example in [Defining an Array Field](#defining-an-array-field).
 
 The following queries for extracting the second element of an array are equivalent:
 
@@ -84,8 +84,8 @@ SELECT id, arr[1:2] AS elements FROM array_table;
 
 ## Functions
 
-All [`LIST` functions](../functions/nested#list-functions) work with the `ARRAY` type. Additionally, several `ARRAY`-native functions are also supported.
-See the [`ARRAY` functions](../functions/array#array-native-functions).
+All [`LIST` functions]({% link docs/sql/functions/nested.md %}#list-functions) work with the `ARRAY` type. Additionally, several `ARRAY`-native functions are also supported.
+See the [`ARRAY` functions]({% link docs/sql/functions/array.md %}#array-native-functions).
 
 ## Examples
 
@@ -120,4 +120,4 @@ The ordering of `ARRAY` instances is defined using a lexicographical order. `NUL
 
 ## See Also
 
-For more functions, see [List Functions](../../sql/functions/nested#list-functions).
+For more functions, see [List Functions]({% link docs/sql/functions/nested.md %}#list-functions).

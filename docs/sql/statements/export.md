@@ -48,7 +48,7 @@ Alternatively, use a `PRAGMA`:
 PRAGMA import_database('source_directory');
 ```
 
-For details regarding the writing of Parquet files, see the [Parquet Files page in the Data Import section](../../data/parquet/overview#writing-to-parquet-files) and the [`COPY` Statement page](copy).
+For details regarding the writing of Parquet files, see the [Parquet Files page in the Data Import section]({% link docs/data/parquet/overview.md %}#writing-to-parquet-files) and the [`COPY` Statement page]({% link docs/sql/statements/copy.md %}).
 
 ## `EXPORT DATABASE`
 

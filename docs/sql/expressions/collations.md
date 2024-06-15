@@ -143,7 +143,7 @@ WHERE names.name COLLATE NOACCENT.NOCASE = other_names.name COLLATE NOACCENT.NOC
 
 ## ICU Collations
 
-The collations we have seen so far are not region-dependent, and do not follow any specific regional rules. If you wish to follow the rules of a specific region or language, you will need to use one of the ICU collations. For that, you need to [load the ICU extension](../../extensions/icu#installing-and-loading).
+The collations we have seen so far are not region-dependent, and do not follow any specific regional rules. If you wish to follow the rules of a specific region or language, you will need to use one of the ICU collations. For that, you need to [load the ICU extension]({% link docs/extensions/icu.md %}#installing-and-loading).
 
 If you are using the C++ API, you may find the extension in the `extension/icu` folder of the DuckDB project. Using the C++ API, the extension can be loaded as follows:
 

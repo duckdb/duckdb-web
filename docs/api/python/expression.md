@@ -3,7 +3,7 @@ layout: docu
 title: Expression API
 ---
 
-The `Expression` class represents an instance of an [expression](../../sql/expressions/overview).
+The `Expression` class represents an instance of an [expression]({% link docs/sql/expressions/overview.md %}).
 
 ## Why Would I Use the Expression API?
 
@@ -155,8 +155,8 @@ The Expression class also contains many operations that can be applied to any Ex
 |--------------------------------|----------------------------------------------------------------------------------------------------------------|
 | `.alias(name: str)`            | Applies an alias to the expression.                                                                            |
 | `.cast(type: DuckDBPyType)`    | Applies a cast to the provided type on the expression.                                                         |
-| `.isin(*exprs: Expression)`    | Creates an [`IN` expression](../../sql/expressions/in#in) against the provided expressions as the list.        |
-| `.isnotin(*exprs: Expression)` | Creates a [`NOT IN` expression](../../sql/expressions/in#not-in) against the provided expressions as the list. |
+| `.isin(*exprs: Expression)`    | Creates an [`IN` expression]({% link docs/sql/expressions/in.md %}#in) against the provided expressions as the list.        |
+| `.isnotin(*exprs: Expression)` | Creates a [`NOT IN` expression]({% link docs/sql/expressions/in.md %}#not-in) against the provided expressions as the list. |
 | `.isnotnull()`                 | Checks whether the expression is not `NULL`.                                                                   |
 | `.isnull()`                    | Checks whether the expression is `NULL`.                                                                       |
 

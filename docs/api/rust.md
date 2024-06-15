@@ -55,7 +55,7 @@ for person in person_iter {
 
 ## Appender
 
-The Rust client supports the [DuckDB Appender API](../data/appender) for bulk inserts. For example:
+The Rust client supports the [DuckDB Appender API]({% link docs/data/appender.md %}) for bulk inserts. For example:
 
 ```rust
 fn insert_rows(conn: &Connection) -> Result<()> {

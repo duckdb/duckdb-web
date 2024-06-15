@@ -7,7 +7,7 @@ title: Map Type
 
 `MAP`s must have a single type for all keys, and a single type for all values. Keys and values can be any type, and the type of the keys does not need to match the type of the values (Ex: a `MAP` of `VARCHAR` to `INT` is valid). `MAP`s may not have duplicate keys. `MAP`s return an empty list if a key is not found rather than throwing an error as structs do.
 
-In contrast, `STRUCT`s must have string keys, but each key may have a value of a different type. See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
+In contrast, `STRUCT`s must have string keys, but each key may have a value of a different type. See the [data types overview]({% link docs/sql/data_types/overview.md %}) for a comparison between nested data types.
 
 To construct a `MAP`, use the bracket syntax preceded by the `MAP` keyword.
 
@@ -79,9 +79,9 @@ SELECT element_at(MAP {'key1': 5, 'key2': 43}, 'key1');
 
 ## Comparison Operators
 
-Nested types can be compared using all the [comparison operators](../expressions/comparison_operators).
-These comparisons can be used in [logical expressions](../expressions/logical_operators)
-for both `WHERE` and `HAVING` clauses, as well as for creating [Boolean values](boolean).
+Nested types can be compared using all the [comparison operators]({% link docs/sql/expressions/comparison_operators.md %}).
+These comparisons can be used in [logical expressions]({% link docs/sql/expressions/logical_operators.md %})
+for both `WHERE` and `HAVING` clauses, as well as for creating [Boolean values]({% link docs/sql/data_types/boolean.md %}).
 
 The ordering is defined positionally in the same way that words can be ordered in a dictionary.
 `NULL` values compare greater than all other values and are considered equal to each other.
@@ -93,4 +93,4 @@ and a `NULL` nested value member will compare above a non-`NULL` nested value me
 
 ## Functions
 
-See [Nested Functions](../../sql/functions/nested).
+See [Nested Functions]({% link docs/sql/functions/nested.md %}).

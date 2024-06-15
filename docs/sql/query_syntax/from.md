@@ -223,7 +223,7 @@ WHERE s1.time > s2.time
 
 ### Semi and Anti Joins
 
-Semi joins return rows from the left table that have at least one match in the right table. Anti joins return rows from the left table that have _no_ matches in the right table. When using a semi or anti join the result will never have more rows than the left hand side table. Semi and anti joins provide the same logic as [(NOT) IN](../expressions/in) statements.
+Semi joins return rows from the left table that have at least one match in the right table. Anti joins return rows from the left table that have _no_ matches in the right table. When using a semi or anti join the result will never have more rows than the left hand side table. Semi and anti joins provide the same logic as [(NOT) IN]({% link docs/sql/expressions/in.md %}) statements.
 
 Return a list of cars that have a valid region:
 
@@ -310,8 +310,8 @@ for (i = 0; i < n; i++) {
 ```
 
 It is difficult to express this in standard SQL because
-relational tables are not ordered, but imported tables such as [data frames](../../api/python/data_ingestion#pandas-dataframes-–-object-columns)
-or disk files (like [CSVs](../../data/csv/overview) or [Parquet files](../../data/parquet/overview)) do have a natural ordering.
+relational tables are not ordered, but imported tables such as [data frames]({% link docs/api/python/data_ingestion.md %}#pandas-dataframes-–-object-columns)
+or disk files (like [CSVs]({% link docs/data/csv/overview.md %}) or [Parquet files]({% link docs/data/parquet/overview.md %})) do have a natural ordering.
 
 Connecting them using this ordering is called a _positional join:_
 

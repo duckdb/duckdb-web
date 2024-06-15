@@ -17,7 +17,7 @@ DuckDB represents instants as the number of microseconds (µs) since `1970-01-01
 | `TIMESTAMP_S`  |                            | timestamp with second precision (ignores time zone)      |
 | `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE` | timestamp (uses time zone)                               |
 
-A timestamp specifies a combination of [`DATE`](date) (year, month, day) and a [`TIME`](time) (hour, minute, second, microsecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]`). Decimal places beyond the targeted sub-second precision are ignored.
+A timestamp specifies a combination of [`DATE`]({% link docs/sql/data_types/date.md %}) (year, month, day) and a [`TIME`]({% link docs/sql/data_types/time.md %}) (hour, minute, second, microsecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]`). Decimal places beyond the targeted sub-second precision are ignored.
 
 > Warning When defining timestamps using a `TIMESTAMP_NS` literal, the decimal places beyond _microseconds_ are ignored. Note that the `TIMESTAMP_NS` type is able to hold nanoseconds when created e.g., via the ingestion of Parquet files.
 
@@ -104,12 +104,12 @@ SELECT '-infinity'::TIMESTAMP, 'epoch'::TIMESTAMP, 'infinity'::TIMESTAMP;
 
 ## Functions
 
-See [Timestamp Functions](../../sql/functions/timestamp).
+See [Timestamp Functions]({% link docs/sql/functions/timestamp.md %}).
 
 ## Time Zones
 
 The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitable extension.
-The built-in [ICU extension](../../extensions/icu) implements all the binning and arithmetic functions using the
+The built-in [ICU extension]({% link docs/extensions/icu.md %}) implements all the binning and arithmetic functions using the
 [International Components for Unicode](https://icu.unicode.org) time zone and calendar functions.
 
 To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled with several DuckDB clients (including Python, R, JDBC, and ODBC), so this step can be skipped in those cases. In other cases you might first need to install and load the ICU extension.
@@ -139,11 +139,11 @@ ORDER BY
     name;
 ```
 
-You can also find a reference table of [available time zones](../../sql/data_types/timezones).
+You can also find a reference table of [available time zones]({% link docs/sql/data_types/timezones.md %}).
 
 ## Calendars
 
-The [ICU extension](../../extensions/icu) also supports non-Gregorian calendars using the `SET Calendar` command.
+The [ICU extension]({% link docs/extensions/icu.md %}) also supports non-Gregorian calendars using the `SET Calendar` command.
 Note that the `INSTALL` and `LOAD` steps are only required if the DuckDB client does not bundle the ICU extension.
 
 ```sql

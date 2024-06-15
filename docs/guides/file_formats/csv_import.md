@@ -17,14 +17,14 @@ Alternatively, you can omit the `read_csv` function and let DuckDB infer it from
 SELECT * FROM 'input.csv';
 ```
 
-To create a new table using the result from a query, use [`CREATE TABLE ... AS SELECT` statement](../../sql/statements/create_table#create-table--as-select-ctas):
+To create a new table using the result from a query, use [`CREATE TABLE ... AS SELECT` statement]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas):
 
 ```sql
 CREATE TABLE new_tbl AS
     SELECT * FROM read_csv('input.csv');
 ```
 
-We can use DuckDB's [optional `FROM`-first syntax](../../sql/query_syntax/from) to omit `SELECT *`:
+We can use DuckDB's [optional `FROM`-first syntax]({% link docs/sql/query_syntax/from.md %}) to omit `SELECT *`:
 
 ```sql
 CREATE TABLE new_tbl AS
@@ -44,4 +44,4 @@ Alternatively, the `COPY` statement can also be used to load data from a CSV fil
 COPY tbl FROM 'input.csv';
 ```
 
-For additional options, see the [CSV import reference](../../data/csv/overview) and the [`COPY` statement documentation](../../sql/statements/copy).
+For additional options, see the [CSV import reference]({% link docs/data/csv/overview.md %}) and the [`COPY` statement documentation]({% link docs/sql/statements/copy.md %}).
