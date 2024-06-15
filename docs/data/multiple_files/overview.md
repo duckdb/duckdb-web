@@ -10,35 +10,35 @@ See the [combining schemas](combining_schemas) page for tips on reading files wi
 
 ## CSV
 
-Read all files with a name ending in `.csv` in the folder `dir`.
+Read all files with a name ending in `.csv` in the folder `dir`:
 
 ```sql
 SELECT *
 FROM 'dir/*.csv';
 ```
 
-Read all files with a name ending in `.csv`, two directories deep.
+Read all files with a name ending in `.csv`, two directories deep:
 
 ```sql
 SELECT *
 FROM '*/*/*.csv';
 ```
 
-Read all files with a name ending in `.csv`, at any depth in the folder `dir`.
+Read all files with a name ending in `.csv`, at any depth in the folder `dir`:
 
 ```sql
 SELECT *
 FROM 'dir/**/*.csv';
 ```
 
-Read the CSV files `flights1.csv` and `flights2.csv`.
+Read the CSV files `flights1.csv` and `flights2.csv`:
 
 ```sql
 SELECT *
 FROM read_csv(['flights1.csv', 'flights2.csv']);
 ```
 
-Read the CSV files `flights1.csv` and `flights2.csv`, unifying schemas by name and outputting a `filename` column.
+Read the CSV files `flights1.csv` and `flights2.csv`, unifying schemas by name and outputting a `filename` column:
 
 ```sql
 SELECT *
@@ -47,28 +47,28 @@ FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename =
 
 ## Parquet
 
-Read all files that match the glob pattern.
+Read all files that match the glob pattern:
 
 ```sql
 SELECT *
 FROM 'test/*.parquet';
 ```
 
-Read 3 Parquet files and treat them as a single table.
+Read three Parquet files and treat them as a single table:
 
 ```sql
 SELECT *
 FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
 
-Read all Parquet files from two specific folders.
+Read all Parquet files from two specific folders:
 
 ```sql
 SELECT *
 FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 ```
 
-Read all Parquet files that match the glob pattern at any depth.
+Read all Parquet files that match the glob pattern at any depth:
 
 ```sql
 SELECT *
@@ -83,7 +83,7 @@ DuckDB can also read a series of Parquet files and treat them as if they were a 
 
 The `read_parquet` function can accept a list of filenames as the input parameter.
 
-Read three Parquet files and treat them as a single table.
+Read three Parquet files and treat them as a single table:
 
 ```sql
 SELECT *
@@ -108,7 +108,7 @@ Note that the `?` wildcard in globs is not supported for reads over S3 due to HT
 
 Here is an example that reads all the files that end with `.parquet` located in the `test` folder:
 
-Read all files that match the glob pattern.
+Read all files that match the glob pattern:
 
 ```sql
 SELECT *
