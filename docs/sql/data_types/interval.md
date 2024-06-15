@@ -1,10 +1,10 @@
 ---
 layout: docu
 title: Interval Type
-blurb: An interval specifies a period of time measured in units of a specific date part like years, days, seconds, or others.
+blurb: Intervals represent a period of time measured in months, days, microseconds, or a combination thereof.
 ---
 
-Intervals represent a period of time. This period can be measured in a specific unit or combination of units, for example years, days, or seconds. Intervals are generally used to *modify* timestamps or dates by either adding or subtracting them.
+`INTERVAL`s represent periods of time and are generally used to *modify* timestamps or dates by either adding them to or subtracting them from `DATE`, `TIMESTAMP(TZ)`, or `TIME` values.
 
 <div class="narrow_table"></div>
 
@@ -12,89 +12,108 @@ Intervals represent a period of time. This period can be measured in a specific 
 |:---|:---|
 | `INTERVAL` | Period of time |
 
-An `INTERVAL` can be constructed by providing an amount together with a unit.
-Intervals can be added or subtracted from `DATE` or `TIMESTAMP` values.
-
-## Examples
-
-1 year:
+An `INTERVAL` can be constructed by providing amounts together with units. 
+Units that aren't *months*, *days*, or *microseconds* are converted to equivalent amounts in the next smaller of these three basis units.
 
 ```sql
-SELECT INTERVAL 1 YEAR;
+SELECT
+    INTERVAL 1 YEAR, -- single unit using YEAR keyword; stored as 12 months
+    INTERVAL (random() * 10) YEAR, -- parentheses necessary for variable amounts;
+                                   -- stored as integer number of months
+    INTERVAL '1 month 1 day', -- string type necessary for multiple units; stored as (1 month, 1 day)
+    '16 months'::INTERVAL, -- string cast supported; stored as 16 months
+    '48:00:00'::INTERVAL, -- HH::MM::SS string supported; stored as (48 * 60 * 60 * 1e6 microseconds)
+;
 ```
-
-Add 1 year to a specific date:
-
-```sql
-SELECT DATE '2000-01-01' + INTERVAL 1 YEAR;
-```
-
-Subtract 1 year from a specific date:
-
-```sql
-SELECT DATE '2000-01-01' - INTERVAL 1 YEAR;
-```
-
-Construct an interval from a column, instead of a constant:
-
-```sql
-SELECT INTERVAL (i) YEAR FROM range(1, 5) t(i);
-```
-
-Construct an interval with mixed units:
-
-```sql
-SELECT INTERVAL '1 month 1 day';
-```
-
-Intervals greater than 24 hours/12 months/etc. are supported:
-
-```sql
-SELECT '540:58:47.210'::INTERVAL;
-SELECT INTERVAL '16 MONTHS';
-```
-
-> Warning  If a decimal value is specified, it will be automatically rounded to an integer.
-> To use more precise values, simply use a more granular date part
-> In this example, use `18 MONTHS` instead of `1.5 YEARS`.
-> The statement below is equivalent to `to_years(CAST(1.5 AS INTEGER))`
->
+> Warning Decimal values can be used in strings but are rounded to integers.
 > ```sql
-> SELECT INTERVAL '1.5' YEARS; -- WARNING! This returns 2 years!
+> SELECT INTERVAL '1.5' YEARS;
+> -- Returns 24 months; equivalent to `to_years(CAST(1.5 AS INTEGER))
 > ```
+> For more precision, use a more granular unit; e.g., `18 MONTHS` instead of `'1.5' YEARS`.
 
-## Details
-
-The interval class represents a period of time using three distinct components: the *month*, *day* and *microsecond*. These three components are required because there is no direct translation between them. For example, a month does not correspond to a fixed amount of days. That depends on *which month is referenced*. February has fewer days than March.
-
-The division into components makes the interval class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
+Three basis units are necessary because a month does not correspond to a fixed amount of days (February has fewer days than March) and a day doesn't correspond to a fixed amount of microseconds.
+The division into components makes the `INTERVAL` class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
 
 ```sql
 SELECT DATE '2000-01-01' + INTERVAL (i) MONTH
 FROM range(12) t(i);
 ```
 
-## Difference between Dates
-
-If we subtract two timestamps from one another, we obtain an interval describing the difference between the timestamps with the *days and microseconds* components. For example:
+When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component is split into hours, minutes, and microseconds. The *days* component is not split into additional units. To demonstrate this, the following query performs extracts date parts from an interval called `period`, deconstructs them to larger or equivalent-sized units, and adds them together to obtain the original `period` value. As the deconstruction implemented by the query follows the rules described above, it always returns true.
 
 ```sql
-SELECT TIMESTAMP '2000-02-01 12:00:00' - TIMESTAMP '2000-01-01 11:00:00' AS diff;
+SELECT
+    period = list_reduce(
+        [INTERVAL (datepart(part, period) || part) FOR part IN
+             ['year', 'month', 'day', 'hour', 'minute', 'microsecond']
+        ],
+        (i1, i2) -> i1 + i2
+    ) -- always true
+FROM (
+    VALUES (
+        INTERVAL (random() * 123_456_789_123) MILLISECONDS
+        + INTERVAL (random() * 12_345) DAYS
+        + INTERVAL (random() * 12_345) MONTHS
+    )
+) _(period);
 ```
 
-|       diff       |
-|------------------|
-| 31 days 01:00:00 |
+> Warning The *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
 
-The `datediff` function can be used to obtain the difference between two dates for a specific unit.
+Additionally, the amounts of centuries, decades, quarters, seconds, and milliseconds in an `INTERVAL`, rounded down to the nearest integer, can be extracted via the `datepart` function, but these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. 
+
+For example:
 
 ```sql
-SELECT datediff('month', TIMESTAMP '2000-01-01 11:00:00', TIMESTAMP '2000-02-01 12:00:00') AS diff;
+SELECT
+    datepart('decade', INTERVAL 12 YEARS), -- returns 1
+    datepart('second', INTERVAL 1_234 MILLISECONDS), -- returns 1
 ```
 
-| diff |
-|-----:|
-| 1    |
+## Arithmetic with Timestamps, Dates and Intervals
+
+`INTERVAL`s can be added to and subtracted from `TIMESTAMP(TZ)`s, `DATE`s, and `TIME`s using the `+` and `-` operators.
+
+```sql
+SELECT
+    DATE '2000-01-01' + INTERVAL 1 YEAR,
+    TIMESTAMP '2000-01-01 01:33:30' - INTERVAL '1 month 13 hours',
+    TIME '02:00:00' - INTERVAL '3 days 23 hours', -- wraps; equals TIME '03:00:00'
+;
+```
+
+Conversely, subtracting two `TIMESTAMP`s or two `TIMESTAMPTZ`s from one another creates an interval describing the difference between the timestamps with only the *days and microseconds* components. For example:
+
+```sql
+SELECT
+    TIMESTAMP '2000-02-06 12:00:00' - TIMESTAMP '2000-01-01 11:00:00', -- 36 days 1 hour
+    TIMESTAMP '2000-02-01' + (TIMESTAMP '2000-02-01' - TIMESTAMP '2000-01-01'), -- '2000-03-03', NOT '2000-03-01'
+;
+```
+
+> Warning Extracting a component of the `INTERVAL` difference between two `TIMESTAMP`s is not equivalent to computing the number of partition boundaries between the two `TIMESTAMP`s for the corresponding unit, as computed by the `datediff` function:
+> ```sql
+> SELECT
+>     datediff('day', TIMESTAMP '2020-01-01 01:00:00', TIMESTAMP '2020-01-02 00:00:00'), -- 1
+>     datepart('day', TIMESTAMP '2020-01-02 00:00:00' - TIMESTAMP '2020-01-01 01:00:00'), -- 0
+> ;
+> ```
+
+## Equality and Comparison
+
+For equality and ordering comparisons only, the month component is converted to 30 days and the day component is converted 24 * 60 * 60 * 1e6 microseconds.
+
+As a result, `INTERVAL`s can compare equal even when they are functionally different. 
+
+For example
+
+* `INTERVAL 30 DAYS = INTERVAL 1 MONTH`
+* but `DATE '2020-01-01' + INTERVAL 30 DAYS != DATE '2020-01-01' + INTERVAL 1 MONTH`.
+
+Equally,
+* `INTERVAL '30 days 12 hours' > INTERVAL 1 MONTH`
+* but `DATE '2020-01-01' + INTERVAL '30 days 12 hours' < DATE '2020-01-01' + INTERVAL 1 MONTH`.
 
 ## Functions
 
