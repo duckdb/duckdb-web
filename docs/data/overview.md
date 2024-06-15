@@ -74,7 +74,7 @@ Alternatively, use the `read_json_auto` function or the `COPY` statement. For ex
 SELECT * FROM read_json_auto('test.json');
 ```
 
-For more details, see the [page on JSON loading](../data/json).
+For more details, see the [page on JSON loading](../data/json/overview).
 
 ## Appender
 

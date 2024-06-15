@@ -13,14 +13,14 @@ title: Official Extensions
 | [azure](azure)               | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_azure)     | Adds a filesystem abstraction for Azure blob storage to DuckDB                     | yes           |                         |
 | [excel](excel)               | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_excel)     | Adds support for Excel-like format strings                                         | yes           |                         |
 | [fts](full_text_search)      |                                                                                  | Adds support for Full-Text Search Indexes                                          | yes           |                         |
-| [httpfs](httpfs)             |                                                                                  | Adds support for reading and writing files over an HTTP(S) or S3 connection        | yes           | http, https, s3         |
+| [httpfs](httpfs/overview)             |                                                                                  | Adds support for reading and writing files over an HTTP(S) or S3 connection        | yes           | http, https, s3         |
 | [iceberg](iceberg)           | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_iceberg)   | Adds support for Apache Iceberg                                                    | no            |                         |
 | [icu](icu)                   |                                                                                  | Adds support for time zones and collations using the ICU library                   | yes           |                         |
 | [inet](inet)                 |                                                                                  | Adds support for IP-related data types and functions                               | yes           |                         |
 | [jemalloc](jemalloc)         |                                                                                  | Overwrites system allocator with jemalloc                                          | no            |                         |
 | [json](json)                 |                                                                                  | Adds support for JSON operations                                                   | yes           |                         |
 | [mysql](mysql)               | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_mysql)     | Adds support for reading from and writing to a MySQL database                      | no            |                         |
-| [parquet](parquet)           |                                                                                  | Adds support for reading and writing Parquet files                                 | (built-in)    |                         |
+| [parquet](../data/parquet/overview)           |                                                                                  | Adds support for reading and writing Parquet files                                 | (built-in)    |                         |
 | [postgres](postgres)         | [<span class="github">GitHub</span>](https://github.com/duckdb/postgres_scanner) | Adds support for reading from and writing to a Postgres database                   | yes           | postgres_scanner        |
 | [spatial](spatial)           | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_spatial)   | Geospatial extension that adds support for working with spatial data and functions | no            |                         |
 | [sqlite](sqlite)             | [<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner)   | Adds support for reading from and writing to SQLite database files                 | yes           | sqlite_scanner, sqlite3 |
@@ -41,7 +41,7 @@ We summarize the main distributions in the table below.
 | [autocomplete](autocomplete) | yes | yes |     |     |     |     |
 | [excel](excel)               | yes |     |     |     |     |     |
 | [fts](full_text_search)      | yes |     | yes |     |     |     |
-| [httpfs](httpfs)             |     |     | yes |     |     |     |
+| [httpfs](httpfs/overview)             |     |     | yes |     |     |     |
 | [icu](icu)                   | yes | yes | yes |     | yes | yes |
 | [json](json)                 | yes | yes | yes |     | yes | yes |
 | [parquet](../data/parquet/overview)           | yes | yes | yes | yes | yes | yes |

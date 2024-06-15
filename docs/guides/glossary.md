@@ -13,7 +13,7 @@ The DBMS runs in the client application's process instead of running as a separa
 
 ### Replacement Scan
 
-In DuckDB, replacement scans are used when a table name used by a query does not exist in the catalog. These scans can substitute another data source intead of the table. Using replacement scans allows DuckDB to, e.g., seamlessly read [Pandas DataFrames](../guides/python/sql_on_pandas) or read input data from remote sources without explicitly invoking the functions that perform this (e.g., [reading Parquet files from https](../guides/import/http_import)). For details, see the [C API - Replacement Scans page](../api/c/replacement_scans).
+In DuckDB, replacement scans are used when a table name used by a query does not exist in the catalog. These scans can substitute another data source intead of the table. Using replacement scans allows DuckDB to, e.g., seamlessly read [Pandas DataFrames](../guides/python/sql_on_pandas) or read input data from remote sources without explicitly invoking the functions that perform this (e.g., [reading Parquet files from https](../guides/network_cloud_storage/http_import)). For details, see the [C API - Replacement Scans page](../api/c/replacement_scans).
 
 ### Extension
 
