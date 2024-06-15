@@ -175,7 +175,7 @@ Multiple files can be read at once by providing a glob or a list of files. Refer
 ## API Changes
 
 > Deprecated DuckDB v0.10.0 introduced breaking changes to the `read_csv` function.
-> Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the [old `read_csv_auto` function](../../../docs/archive/0.9.2/data/csv/overview#read_csv_auto-function).
+> Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the old `read_csv_auto` function.
 > If you would like to use `read_csv` with its old behavior, turn off the auto-detection manually by using `read_csv(..., auto_detect = false)`.
 
 ## Writing Using the `COPY` Statement
