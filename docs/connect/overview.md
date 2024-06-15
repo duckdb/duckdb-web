@@ -22,9 +22,9 @@ The file may have an arbitrary extension, but `.db` or `.duckdb` are two common 
 
 > Tip Running on a persistent database allows spilling to disk, thus facilitating larger-than-memory workloads (i.e., out-of-core-processing).
 
-Starting with v0.10, DuckDB's storage format is [backwards-compatible](/internals/storage#backward-compatibility), i.e., DuckDB is able to read database files produced by an older versions of DuckDB.
+Starting with v0.10, DuckDB's storage format is [backwards-compatible](/docs/internals/storage#backward-compatibility), i.e., DuckDB is able to read database files produced by an older versions of DuckDB.
 For example, DuckDB v0.10 can read and operate on files created by the previous DuckDB version, v0.9.
-For more details on DuckDB's storage format, see the [storage page](/internals/storage).
+For more details on DuckDB's storage format, see the [storage page](/docs/internals/storage).
 
 ### In-Memory Database
 

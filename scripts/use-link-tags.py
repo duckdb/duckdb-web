@@ -25,7 +25,7 @@ with open(filename, "r") as f:
     for m in re.finditer(r"\]\(/([^2].*?)([#?].*?)?\)", s):
         link_path = m.group(1)
 
-        if link_path.startswith("data"):
+        if link_path.startswith("data") or link_path.startswith("images"):
             continue
 
         if link_path == "docs/installation/index":

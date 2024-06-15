@@ -14,7 +14,7 @@ The values of the grouping columns themselves are unchanged, and any other colum
 
 Use `GROUP BY ALL` to `GROUP BY` all columns in the `SELECT` statement that are not wrapped in aggregate functions.
 This simplifies the syntax by allowing the columns list to be maintained in a single location, and prevents bugs by keeping the `SELECT` granularity aligned to the `GROUP BY` granularity (Ex: Prevents any duplication).
-See examples below and additional examples in the [Friendlier SQL with DuckDB blog post](/2022/05/04/friendlier-sql.html#group-by-all).
+See examples below and additional examples in the [Friendlier SQL with DuckDB blog post](/2022/05/04/friendlier-sql#group-by-all).
 
 ## Multiple Dimensions
 
