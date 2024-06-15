@@ -43,4 +43,4 @@ USE test;
 SHOW TABLES;
 ```
 
-For more information see the [SQLite extension documentation](../../extensions/sqlite_scanner).
+For more information see the [SQLite extension documentation](../../extensions/sqlite).

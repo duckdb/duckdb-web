@@ -295,7 +295,7 @@ r1.union(r2).show()
 
 ## Result Output
 
-The result of relations can be converted to various types of Python structures, see the [result conversion page](result_conversion) for more information.
+The result of relations can be converted to various types of Python structures, see the [result conversion page](conversion) for more information.
 
 The result of relations can also be directly written to files using the below methods.
 

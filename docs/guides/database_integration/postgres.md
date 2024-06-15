@@ -5,7 +5,7 @@ redirect_from:
   - /docs/guides/import/query_postgres
 ---
 
-To run a query directly on a running PostgreSQL database, the [`postgres` extension](../../extensions/postgres_scanner) is required.
+To run a query directly on a running PostgreSQL database, the [`postgres` extension](../../extensions/postgres) is required.
 
 ## Installation and Loading
 

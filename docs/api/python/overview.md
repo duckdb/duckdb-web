@@ -117,7 +117,7 @@ duckdb.sql("SELECT * FROM arrow_table")
 
 ## Result Conversion
 
-DuckDB supports converting query results efficiently to a variety of formats. See the [result conversion page](result_conversion) for more information.
+DuckDB supports converting query results efficiently to a variety of formats. See the [result conversion page](conversion) for more information.
 
 ```python
 import duckdb
@@ -205,7 +205,7 @@ The connection object and the `duckdb` module can be used interchangeably – th
 
 ### Using Connections in Parallel Python Programs
 
-The `DuckDBPyConnection` object is not thread-safe. If you would like to write to the same database from multiple threads, create a cursor for each thread with the [`DuckDBPyConnection.cursor()` method](reference/#duckdb.DuckDBPyConnection.cursor).
+The `DuckDBPyConnection` object is not thread-safe. If you would like to write to the same database from multiple threads, create a cursor for each thread with the [`DuckDBPyConnection.cursor()` method](reference/index#duckdb.DuckDBPyConnection.cursor).
 
 ## Loading and Installing Extensions
 

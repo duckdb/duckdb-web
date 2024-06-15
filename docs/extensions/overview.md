@@ -70,7 +70,7 @@ SELECT *
 FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv';
 ```
 
-DuckDB will automatically install and load the [`httpfs`](httpfs) extension. No explicit `INSTALL` or `LOAD` 
+DuckDB will automatically install and load the [`httpfs`](httpfs/overview) extension. No explicit `INSTALL` or `LOAD` 
 statements are required.
 
 Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes 

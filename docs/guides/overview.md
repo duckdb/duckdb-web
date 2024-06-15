@@ -19,12 +19,12 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 ### CSV Files
 
 * [How to load a CSV file into a table](file_formats/csv_import)
-* [How to export a table to a CSV file](impofile_formatsrt/csv_export)
+* [How to export a table to a CSV file](file_formats/csv_export)
 
 ### Parquet Files
 
 * [How to load a Parquet file into a table](file_formats/parquet_import)
-* [How to export a table to a Parquet file](impofile_formatst/parquet_export)
+* [How to export a table to a Parquet file](file_formats/parquet_export)
 * [How to run a query directly on a Parquet file](file_formats/query_parquet)
 
 ### HTTP(S), S3 and GCP
@@ -49,9 +49,9 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 
 ### Querying Other Database Systems
 
-* [How to directly query a PostgreSQL database](database_integration/query_postgres)
-* [How to directly query a SQLite database](database_integration/query_sqlite)
-* [How to directly query a MySQL database](database_integration/query_mysql)
+* [How to directly query a MySQL database](database_integration/mysql)
+* [How to directly query a PostgreSQL database](database_integration/postgres)
+* [How to directly query a SQLite database](database_integration/sqlite)
 
 ### Directly Reading Files
 
