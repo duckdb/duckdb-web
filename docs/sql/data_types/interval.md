@@ -40,7 +40,7 @@ SELECT DATE '2000-01-01' + INTERVAL (i) MONTH
 FROM range(12) t(i);
 ```
 
-When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component is split into hours, minutes, and microseconds. The *days* component is not split into additional units. To demonstrate this, the following query generates an interval called `period` by summing random amounts of the three basis units. It then extracts the aforementioned six parts from `period`, adds them back together, and confirms that the result is always equal to the original `period`.
+When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component is split into hours, minutes, and microseconds. The *days* component is not split into additional units. To demonstrate this, the following query generates an `INTERVAL` called `period` by summing random amounts of the three basis units. It then extracts the aforementioned six parts from `period`, adds them back together, and confirms that the result is always equal to the original `period`.
 
 ```sql
 SELECT
@@ -106,16 +106,17 @@ Subtracting two `DATE`s from one another does not create an `INTERVAL` but rathe
 
 ## Equality and Comparison
 
-For equality and ordering comparisons only, the month component is converted to 30 days and the day component is converted to 24 * 60 * 60 * 1e6 microseconds.
+For equality and ordering comparisons only, the months component is converted to 30 days and the days component is converted to 24 * 60 * 60 * 1e6 microseconds.
 
 As a result, `INTERVAL`s can compare equal even when they are functionally different. 
 
-For example
+For example:
 
 * `INTERVAL 30 DAYS = INTERVAL 1 MONTH`
 * but `DATE '2020-01-01' + INTERVAL 30 DAYS != DATE '2020-01-01' + INTERVAL 1 MONTH`.
 
-Equally,
+For the same reasons, the ordering of `INTERVAL`s is not always preserved when they are added to dates or timestamps. For example:
+
 * `INTERVAL '30 days 12 hours' > INTERVAL 1 MONTH`
 * but `DATE '2020-01-01' + INTERVAL '30 days 12 hours' < DATE '2020-01-01' + INTERVAL 1 MONTH`.
 
