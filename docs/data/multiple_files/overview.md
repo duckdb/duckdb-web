@@ -145,19 +145,6 @@ FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename =
 | 1988-01-02 | New York, NY   | Los Angeles, CA | NULL          | flights1.csv |
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            | flights2.csv |
 
-Since v0.10.2, it is possible to specify the name of the filename column using the `filename` argument:
-
-```sql
-SELECT *
-FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = "my_filename_column");
-```
-
-| FlightDate | UniqueCarrier | OriginCityName |  DestCityName   | my_filename_column |
-|------------|---------------|----------------|-----------------|--------------------|
-| 1988-01-01 | AA            | New York, NY   | Los Angeles, CA | flights1.csv       |
-| 1988-01-02 | AA            | New York, NY   | Los Angeles, CA | flights1.csv       |
-| 1988-01-03 | AA            | New York, NY   | Los Angeles, CA | flights2.csv       |
-
 ## Glob Function to Find Filenames
 
 The glob pattern matching syntax can also be used to search for filenames using the `glob` table function.
