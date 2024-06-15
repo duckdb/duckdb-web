@@ -12,7 +12,7 @@ excerpt: ""
 
 The DuckDB team is happy to announce the latest DuckDB version (0.6.0) has been released. This release of DuckDB is named "Oxyura" after the [White-headed duck (Oxyura leucocephala)](https://en.wikipedia.org/wiki/White-headed_duck) which is an endangered species native to Eurasia.
 
-To install the new version, please visit the [installation guide](https://duckdb.org/docs/installation/index). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.6.0).
+To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.6.0).
 
 <!--more-->
 
@@ -22,7 +22,7 @@ The new release contains many improvements to the storage system, general perfor
 
 #### Storage Improvements
 
-As we are working towards stabilizing the storage format and moving towards version 1.0, we have been actively working on improving our storage format, including many [compression improvements](https://duckdb.org/2022/10/28/lightweight-compression.html). 
+As we are working towards stabilizing the storage format and moving towards version 1.0, we have been actively working on improving our storage format, including many [compression improvements]({% post_url 2022-10-28-lightweight-compression %}). 
 
 **Optimistic writing to disk.** In previous DuckDB versions, the data of a single transaction was first loaded into memory, and would only be written to disk on a commit. While this works fine when data is loaded in batches that fit in memory, it does not work well when loading a lot of data in a single transaction, such as when ingesting one very large file into the system.
 
@@ -98,7 +98,7 @@ The timings of creating an index on a single column with 16 million values is sh
 
 #### SQL Syntax Improvements
 
-SQL is the primary way of interfacing with DuckDB – and DuckDB [tries to have an easy to use SQL dialect](https://duckdb.org/2022/05/04/friendlier-sql.html). This release contains further improvements to the SQL dialect.
+SQL is the primary way of interfacing with DuckDB – and DuckDB [tries to have an easy to use SQL dialect]({% post_url 2022-05-04-friendlier-sql %}). This release contains further improvements to the SQL dialect.
 
 **UNION Type**. This release introduces the [UNION type](https://github.com/duckdb/duckdb/pull/4966), which allows sum types to be stored and queried in DuckDB. For example:
 
@@ -118,7 +118,7 @@ SELECT * FROM messages;
 └─────────────┘
 ```
 
-Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page](https://duckdb.org/docs/sql/data_types/union) in the documentation contains more information on how to use this new composite type.
+Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page]({% link docs/sql/data_types/union.md %}) in the documentation contains more information on how to use this new composite type.
 
 **FROM-first**. Starting with this release, DuckDB supports starting queries with the [FROM clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
 
@@ -151,7 +151,7 @@ SELECT MIN(COLUMNS(*)), COUNT(*) from obs;
 └─────────────┴───────────────┴───────────────┴──────────────┘
 ```
 
-The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax](https://duckdb.org/docs/sql/query_syntax/select). In addition, the `COLUMNS` expression can take a regular expression as parameter:
+The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax]({% link docs/sql/query_syntax/select.md %}). In addition, the `COLUMNS` expression can take a regular expression as parameter:
 
 ```sql
 SELECT COLUMNS('val[0-9]+') from obs;
@@ -183,7 +183,7 @@ Nested types and structures are very efficiently implemented in DuckDB, and are 
 
 #### Memory Management Improvements
 
-When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques, and has support for an [efficient out-of-core sort](https://duckdb.org/2021/08/27/external-sorting.html), [out-of-core window functions](https://duckdb.org/2021/10/13/windowing.html) and [an out-of-core hash join](https://github.com/duckdb/duckdb/pull/4189).
+When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques, and has support for an [efficient out-of-core sort]({% post_url 2021-08-27-external-sorting %}), [out-of-core window functions]({% post_url 2021-10-13-windowing %}) and [an out-of-core hash join](https://github.com/duckdb/duckdb/pull/4189).
 
 This release further improves on that by greatly optimizing the [out-of-core hash join](https://github.com/duckdb/duckdb/pull/4970), resulting in a much more graceful degradation in performance as the data exceeds the memory limit.
 

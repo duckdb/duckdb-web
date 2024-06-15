@@ -66,10 +66,10 @@ At DuckDB, this realization of the importance of extensions and its relation to 
 design since its early days. Today, many parts of DuckDB can be extended. For example, you can add functions (table,
 scalar, copy, aggregation), filesystems, parsers, optimizer rules, and much more. Many new features that are added to
 DuckDB are added in extensions and are grouped by either functionality or by set of dependencies. Some examples of
-extensions are the [SQLite](/docs/extensions/sqlite) extension for reading/writing to/from SQLite files or the
-[Spatial](/docs/extensions/spatial) extension which offers support for a wide range of geospatial processing
+extensions are the [SQLite]({% link docs/extensions/sqlite.md %}) extension for reading/writing to/from SQLite files or the
+[Spatial]({% link docs/extensions/spatial.md %}) extension which offers support for a wide range of geospatial processing
 features. DuckDB's extensions are distributed as loadable binaries for most major platforms (including
-[DuckDB-Wasm](/2023/12/18/duckdb-extensions-in-wasm)), allowing loading and installing extensions with two simple SQL
+[DuckDB-Wasm]({% post_url 2023-12-18-duckdb-extensions-in-wasm %})), allowing loading and installing extensions with two simple SQL
 statements:
 
 ```sql
@@ -79,7 +79,7 @@ LOAD spatial;
 
 For most core extensions maintained by the DuckDB team, there is even an auto-install and auto-load feature which will detect the required extensions for
 a SQL statement and automatically install and load them. For a detailed description of which extensions are available
-and how to use them, check out the [docs](/docs/extensions/overview).
+and how to use them, check out the [docs]({% link docs/extensions/overview.md %}).
 
 ## Dependency management
 
@@ -114,9 +114,9 @@ one of DuckDB's extensions and how it uses vcpkg to manage its dependencies.
 
 ### Example: Azure extension
 
-The [Azure](/docs/extensions/azure) extension provides functionality related to [Microsoft Azure](https://azure.microsoft.com/),
+The [Azure]({% link docs/extensions/azure.md %}) extension provides functionality related to [Microsoft Azure](https://azure.microsoft.com/),
 one of the major cloud providers. DuckDB's Azure extension depends on the Azure C++ SDK to support reading directly from
-Azure Storage. To do so it adds a custom filesystem and [secret type](/docs/configuration/secrets_manager), which can be
+Azure Storage. To do so it adds a custom filesystem and [secret type]({% link docs/configuration/secrets_manager.md %}), which can be
 used to easily query from authenticated Azure containers:
 
 ```sql
@@ -289,7 +289,7 @@ DuckDB-maintained extension and third-party extensions.
 
 If this blog post sparked your interest in creating your own DuckDB extension, check out
 the [C++ Extension Template](https://github.com/duckdb/extension-template),
-the [DuckDB docs on extensions](/docs/extensions/overview),
+the [DuckDB docs on extensions]({% link docs/extensions/overview.md %}),
 and the very handy [duckdb-extension-radar repository](https://github.com/mehd-io/duckdb-extension-radar) that tracks public DuckDB extensions.
 Additionally, DuckDB has a [Discord server](https://discord.duckdb.org) where you can ask for help on
 extensions or anything DuckDB-related in general.

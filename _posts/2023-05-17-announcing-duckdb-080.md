@@ -12,7 +12,7 @@ excerpt: ""
 
 The DuckDB team is happy to announce the latest DuckDB release (0.8.0). This release is named “Fulvigula” after the [Mottled Duck](https://en.wikipedia.org/wiki/Mottled_duck) (Anas Fulvigula) native to the Gulf of Mexico.
 
-To install the new version, please visit the [installation guide](https://duckdb.org/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
+To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
 
 <!--more-->
 
@@ -79,7 +79,7 @@ PIVOT sales ON year USING SUM(amount);
 |------|------|
 | 84   | 100  |
 
-The [documentation contains more examples](/docs/sql/statements/pivot.html).
+The [documentation contains more examples]({% link docs/sql/statements/pivot.md %}).
 
 
 [**ASOF Joins for Time Series**](https://github.com/duckdb/duckdb/pull/6719). When joining time series data with background fact tables, the timestamps often do not exactly match. In this case it is often desirable to join rows so that the timestamp is joined with the *nearest timestamp*. The ASOF join can be used for this purpose – it performs a fuzzy join to find the closest join partner for each row instead of requiring an exact match.
@@ -100,7 +100,7 @@ FROM a ASOF JOIN b ON a.ts >= b.ts;
 | 2023-05-15 11:31:00 | 2023-05-15 11:30:00 |
 
 
-Please [refer to the documentation](/docs/guides/sql_features/asof_join.html) for a more in-depth explanation.
+Please [refer to the documentation]({% link docs/guides/sql_features/asof_join.md %}) for a more in-depth explanation.
 
 
 
@@ -138,7 +138,7 @@ COPY lineitem TO 'lineitem.json';
 FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 ```
 
-[The documentation has been updated](/docs/data/multiple_files/overview) with various examples of this syntax.
+[The documentation has been updated]({% link docs/data/multiple_files/overview.md %}) with various examples of this syntax.
 
 
 #### Storage Improvements
@@ -171,11 +171,11 @@ print(res)
 # [(datetime.date(2019, 5, 15),)]
 ```
 
-See the [documentation](/docs/api/python/function) for more information.
+See the [documentation]({% link docs/api/python/function.md %}) for more information.
 
 [**Arrow Database Connectivity Support (ADBC)**](https://github.com/duckdb/duckdb/pull/7086). ADBC is a database API standard for database access libraries that uses Apache Arrow to transfer query result sets and to ingest data. Using Arrow for this is particularly beneficial for columnar data management systems which traditionally suffered a performance hit by emulating row-based APIs such as JDBC/ODBC. From this release, DuckDB natively supports ADBC. We’re happy to be one of the first systems to offer native support, and DuckDB’s in-process design fits nicely with ADBC.
 
-[**Swift Integration**](https://duckdb.org/2023/04/21/swift.html). DuckDB has gained another official language integration: Swift. Swift is a language developed by Apple that most notably is used to create Apps for Apple devices, but also increasingly used for server-side development. The DuckDB Swift API allows developers on all swift platforms to harness DuckDB using a native Swift interface with support for Swift features like strong typing and concurrency.
+[**Swift Integration**]({% post_url 2023-04-21-swift %}). DuckDB has gained another official language integration: Swift. Swift is a language developed by Apple that most notably is used to create Apps for Apple devices, but also increasingly used for server-side development. The DuckDB Swift API allows developers on all swift platforms to harness DuckDB using a native Swift interface with support for Swift features like strong typing and concurrency.
 
 #### Final Thoughts
 

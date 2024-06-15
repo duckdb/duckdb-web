@@ -31,7 +31,7 @@ To help answer such questions, SQL introduced *analytic* (or *window*) functions
 ### Window Functions
 
 Windowing works by breaking a relation up into independent *partitions*, *ordering* those partitions,
-and then defining [various functions](/docs/sql/window_functions) that can be computed for each row
+and then defining [various functions]({% link docs/sql/window_functions.md %}) that can be computed for each row
 using the nearby values.
 These functions include all the aggregate functions (such as `SUM` and `AVG`)
 as well as some window-specific functions (such as `RANK()` and `NTH_VALUE(<expression>, <N>)`).
@@ -230,7 +230,7 @@ The chunks still need to be sorted on all the fields because there may be hash c
 but each partition can now be 1024 times smaller, which reduces the runtime significantly.
 Moreover, the partitions can easily be extracted and processed in parallel.
 
-Sorting in DuckDB recently got a [big performance boost](/2021/08/27/external-sorting),
+Sorting in DuckDB recently got a [big performance boost]({% post_url 2021-08-27-external-sorting %}),
 along with the ability to work on partitions that were larger than memory.
 This functionality has been also added to the `Window` operator,
 resulting in a 33% improvement in the last-in-group example:
@@ -243,7 +243,7 @@ and share the data layout between those functions.
 
 ### Aggregation
 
-Most of the [general-purpose window functions](/docs/sql/window_functions) are straightforward to compute,
+Most of the [general-purpose window functions]({% link docs/sql/window_functions.md %}) are straightforward to compute,
 but windowed aggregate functions can be expensive because they need to look at multiple values for each row.
 They often need to look at the same value multiple times, or repeatedly look at a large number of values,
 so over the years several approaches have been taken to improve performance.

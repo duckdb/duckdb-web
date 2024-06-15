@@ -12,7 +12,7 @@ excerpt: "Combining multiple features of DuckDB’s [friendly SQL](/docs/guides/
      width="300"
      />
 
-DuckDB's [especially](/2022/05/04/friendlier-sql) [friendly](/2023/08/23/even-friendlier-sql) [SQL dialect](/docs/guides/sql_features/friendly_sql) simplifies common query operations.
+DuckDB's [especially]({% post_url 2022-05-04-friendlier-sql %}) [friendly]({% post_url 2023-08-23-even-friendlier-sql %}) [SQL dialect]({% link docs/guides/sql_features/friendly_sql.md %}) simplifies common query operations.
 However, these features also unlock new and flexible ways to write advanced SQL! 
 In this post we will combine multiple friendly features to both move closer to real-world use cases and stretch your imagination.
 These queries are useful in their own right, but their component pieces are even more valuable to have in your toolbox.
@@ -148,14 +148,14 @@ Executing either of those queries will return this result:
 
 #### Understanding the design
 
-The first step of our flexible [table macro](/docs/sql/statements/create_macro#table-macros) is to choose a specific table using DuckDB's [`FROM`-first syntax](/2023/08/23/even-friendlier-sql#from-first-in-select-statements).
+The first step of our flexible [table macro]({% link docs/sql/statements/create_macro.md %}#table-macros) is to choose a specific table using DuckDB's [`FROM`-first syntax]({% post_url 2023-08-23-even-friendlier-sql %}#from-first-in-select-statements).
 Well that's not very dynamic! 
 If we wanted to, we could work around this by creating a copy of this macro for each table we want to expose to our application.
 However, we will show another approach in our next example, and completely solve the issue in a follow up blog post with an in-development DuckDB feature.
 Stay tuned!
 
 Then we `SELECT` our grouping columns based on the list parameters that were passed in.
-The [`COLUMNS` expression](/docs/sql/expressions/star#columns-expression) will execute a [lambda function](/docs/sql/functions/lambda) to decide which columns meet the criteria to be selected.
+The [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns-expression) will execute a [lambda function]({% link docs/sql/functions/lambda.md %}) to decide which columns meet the criteria to be selected.
 
 The first portion of the lambda function checks if a column name was passed in within the `included_columns` list. 
 However, if we choose not to use an inclusion rule (by passing in a blank `included_columns` list), we want to ignore that parameter.
@@ -172,14 +172,14 @@ The `COLUMNS` expression will acquire the columns that are in our `aggregated_co
 Then, we do a little bit of gymnastics (it had to happen sometime...).
 
 If we were to apply a typical aggregation function (like `sum` or `min`), it would need to be specified statically in our macro.
-To pass it in dynamically as a string (potentially all the way from the application code calling this SQL statement), we take advantage of a unique property of the [`list_aggregate` function](/docs/sql/functions/nested#list-aggregates).
+To pass it in dynamically as a string (potentially all the way from the application code calling this SQL statement), we take advantage of a unique property of the [`list_aggregate` function]({% link docs/sql/functions/nested.md %}#list-aggregates).
 It accepts the name of a function (as a string) in its second parameter.
-So, to use this unique property, we use the [`list` aggregate function](/docs/sql/aggregates#general-aggregate-functions) to transform all the values within each group into a list.
+So, to use this unique property, we use the [`list` aggregate function]({% link docs/sql/aggregates.md %}#general-aggregate-functions) to transform all the values within each group into a list.
 Then we use the `list_aggregate` function to apply the `aggregate_function` we passed into the macro to each list.
 
 Almost done!
-Now [`GROUP BY ALL`](/docs/sql/query_syntax/groupby#group-by-all) will automatically choose to group by the columns returned by the first `COLUMNS` expression.
-The [`ORDER BY ALL`](/docs/sql/query_syntax/orderby#order-by-all) expression will order each column in ascending order, moving from left to right.
+Now [`GROUP BY ALL`]({% link docs/sql/query_syntax/groupby.md %}#group-by-all) will automatically choose to group by the columns returned by the first `COLUMNS` expression.
+The [`ORDER BY ALL`]({% link docs/sql/query_syntax/orderby.md %}#order-by-all) expression will order each column in ascending order, moving from left to right.
 
 We made it!
 
@@ -203,7 +203,7 @@ Let's relax those two constraints!
 This approach takes advantage of two key concepts:
 
 * Macros can be used to create temporary aggregate functions
-* A macro can query a [Common Table Expression (CTE) / `WITH` clause](/docs/sql/query_syntax/with) that is in scope during execution
+* A macro can query a [Common Table Expression (CTE) / `WITH` clause]({% link docs/sql/query_syntax/with.md %}) that is in scope during execution
 
 ```sql
 CREATE OR REPLACE MACRO dynamic_aggregates_any_cte_any_func(
@@ -291,12 +291,12 @@ This query powers a portion of the MotherDuck Web UI's [Column Explorer](https:/
 [Hamilton Ulmer](https://www.linkedin.com/in/hamilton-ulmer-28b97817/) led the creation of this component and is the author of this query as well!
 The purpose of the Column Explorer, and this query, is to get a high-level overview of the data in all columns within a dataset as quickly and easily as possible.
 
-DuckDB has a built-in [`SUMMARIZE` keyword](/docs/guides/meta/summarize) that can calculate similar metrics across an entire table. 
+DuckDB has a built-in [`SUMMARIZE` keyword]({% link docs/guides/meta/summarize.md %}) that can calculate similar metrics across an entire table. 
 However, for larger datasets, `SUMMARIZE` can take a couple of seconds to load. 
 This query provides a custom summarization capability that can be tailored to the properties of your data that you are most interested in. 
 
 Traditionally, databases required that every column be referred to explicitly, and work best when data is arranged in separate columns.
-This query takes advantage of DuckDB's ability to apply functions to all columns at once, its ability to [`UNPIVOT`](/docs/sql/statements/unpivot) (or stack) columns, and its [`STRUCT`](/docs/sql/data_types/struct) data type to store key/value pairs.
+This query takes advantage of DuckDB's ability to apply functions to all columns at once, its ability to [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) (or stack) columns, and its [`STRUCT`]({% link docs/sql/data_types/struct.md %}) data type to store key/value pairs.
 The result is a clean, pivoted summary of all the rows and columns in a table.
 
 Let's take a look at the entire function, then break it down piece by piece. 
@@ -432,7 +432,7 @@ By unpivoting on `COLUMNS(*)`, we take all columns and pivot them downward into 
 #### Return the results
 
 The final step is the most gymnastics-like portion of this query.
-We explode the `value` column's struct format so that each key becomes its own column using the [`STRUCT.*` syntax](/docs/sql/data_types/struct#struct).
+We explode the `value` column's struct format so that each key becomes its own column using the [`STRUCT.*` syntax]({% link docs/sql/data_types/struct.md %}#struct).
 This is another way to make a query less reliant on column names – the split occurs automatically based on the keys in the struct.
 
 ```sql
