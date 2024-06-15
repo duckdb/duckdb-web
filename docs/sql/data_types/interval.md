@@ -18,7 +18,8 @@ Units that aren't *months*, *days*, or *microseconds* are converted to equivalen
 ```sql
 SELECT
     INTERVAL 1 YEAR, -- single unit using YEAR keyword; stored as 12 months
-    INTERVAL (random() * 10) YEAR, -- parentheses necessary for variable amounts; stored as integer number of months
+    INTERVAL (random() * 10) YEAR, -- parentheses necessary for variable amounts;
+                                   -- stored as integer number of months
     INTERVAL '1 month 1 day', -- string type necessary for multiple units; stored as (1 month, 1 day)
     '16 months'::INTERVAL, -- string cast supported; stored as 16 months
     '48:00:00'::INTERVAL, -- HH::MM::SS string supported; stored as (48 * 60 * 60 * 1e6 microseconds)
@@ -26,7 +27,8 @@ SELECT
 ```
 > Warning Decimal values can be used in strings but are rounded to integers.
 > ```sql
-> SELECT INTERVAL '1.5' YEARS; -- Returns 24 months; equivalent to `to_years(CAST(1.5 AS INTEGER))`
+> SELECT INTERVAL '1.5' YEARS;
+> -- Returns 24 months; equivalent to `to_years(CAST(1.5 AS INTEGER))
 > ```
 > For more precision, use a more granular unit; e.g., `18 MONTHS` instead of `'1.5' YEARS`.
 
@@ -61,12 +63,12 @@ FROM (
 
 Additionally, the amounts of centuries, decades, quarters, seconds, and milliseconds in an `INTERVAL`, rounded down to the nearest integer, can be extracted via the `datepart` function, but these components are not required to reassemble the original `INTERVAL` since they are already captured by the exact amount of years and microseconds, respectively. 
 
-For example, 
+For example:
 
 ```sql
 SELECT
-datepart('decade', INTERVAL 12 YEARS) -- returns 1
-datepart('second', INTERVAL 1234 MILLISECONDS) -- returns 1 
+    datepart('decade', INTERVAL 12 YEARS), -- returns 1
+    datepart('second', INTERVAL 1_234 MILLISECONDS), -- returns 1
 ```
 
 ## Arithmetic with timestamps, dates, and intervals
