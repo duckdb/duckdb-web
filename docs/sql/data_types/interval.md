@@ -38,7 +38,7 @@ SELECT DATE '2000-01-01' + INTERVAL (i) MONTH
 FROM range(12) t(i);
 ```
 
-When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component is split into hours, minutes, and microseconds.
+When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component is split into hours, minutes, and microseconds. The *days* component is not split into additional units. To demonstrate this, the following query performs extracts date parts from an interval called `period`, deconstructs them to larger or equivalent-sized units, and adds them together to obtain the original `period` value. As the deconstruction implemented by the query follows the rules described above, it always returns true.
 
 ```sql
 SELECT
