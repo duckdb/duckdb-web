@@ -149,4 +149,4 @@ EXPLAIN ANALYZE
 
 ## See Also
 
-For more information, see the [Profiling page](/dev/profiling).
+For more information, see the [Profiling page](/docs/dev/profiling).
