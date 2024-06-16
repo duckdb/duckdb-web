@@ -114,6 +114,11 @@ def copy_file(source_path, target_path, version):
                     ]
                     doc["redirect_from"] = redirect_from_field_to_archive
 
+                doc.content = doc.content.replace(
+                    f"{{% link docs/",
+                    f"{{% link docs/archive/{version}/",
+                )
+
                 of.write(frontmatter.dumps(doc))
         else:
             shutil.copy(source_path, target_path)
@@ -148,7 +153,7 @@ def archive_installation_page(version):
     with open(f"_includes/installation.html") as main_installation_file, open(
         f"docs/archive/{version}/installation/index.html", "w"
     ) as archived_installation_file:
-        installation_page = main_installation_file.read()
+        installation_page = "\n" + main_installation_file.read()
         installation_page = installation_page.replace(" (Latest Release)", "")
         installation_page = installation_page.replace(
             "{{ site.currentduckdbversion }}", version
