@@ -114,6 +114,11 @@ def copy_file(source_path, target_path, version):
                     ]
                     doc["redirect_from"] = redirect_from_field_to_archive
 
+                doc.content = doc.content.replace(
+                    f"{{% link docs/",
+                    f"{{% link docs/archive/{version}/",
+                )
+
                 of.write(frontmatter.dumps(doc))
         else:
             shutil.copy(source_path, target_path)
