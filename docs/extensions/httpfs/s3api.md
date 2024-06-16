@@ -157,6 +157,12 @@ SELECT *
 FROM 's3://bucket/file.extension';
 ```
 
+### Partial Reading
+
+The `httpfs` extension supports [partial reading]({% link docs/extensions/httpfs/https.md %}#partial-reading) from S3 buckets.
+
+### Reading Multiple Files
+
 Multiple files are also possible, for example:
 
 ```sql
