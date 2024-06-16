@@ -23,10 +23,16 @@ Data can be efficiently loaded from CSV files using several methods. The simples
 SELECT * FROM 'test.csv';
 ```
 
-Alternatively, use the `read_csv` function or the `COPY` statement to pass along options. For example:
+Alternatively, use the [`read_csv` function]({% link docs/data/csv/overview.md %}) to pass along options:
 
 ```sql
 SELECT * FROM read_csv('test.csv', header = false);
+```
+
+Or use the [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy--from):
+
+```sql
+COPY tbl FROM 'test.csv' (HEADER false);
 ```
 
 It is also possible to read data directly from **compressed CSV files** (e.g., compressed with [gzip](https://www.gzip.org/)):
@@ -52,10 +58,16 @@ Parquet files can be efficiently loaded and queried using their filename:
 SELECT * FROM 'test.parquet';
 ```
 
-Alternatively, use the `read_parquet` function or the `COPY` statement. For example:
+Alternatively, use the [`read_parquet` function]({% link docs/data/parquet/overview.md %}):
 
 ```sql
 SELECT * FROM read_parquet('test.parquet');
+```
+
+Or use the [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy--from):
+
+```sql
+COPY tbl FROM 'test.parquet';
 ```
 
 For more details, see the [page on Parquet loading]({% link docs/data/parquet/overview.md %}).
@@ -68,10 +80,16 @@ JSON files can be efficiently loaded and queried using their filename:
 SELECT * FROM 'test.json';
 ```
 
-Alternatively, use the `read_json_auto` function or the `COPY` statement. For example:
+Alternatively, use the [`read_json_auto` function]({% link docs/data/json/overview.md %}):
 
 ```sql
 SELECT * FROM read_json_auto('test.json');
+```
+
+Or use the [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy--from):
+
+```sql
+COPY tbl FROM 'test.json';
 ```
 
 For more details, see the [page on JSON loading]({% link docs/data/json/overview.md %}).
