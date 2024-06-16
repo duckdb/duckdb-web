@@ -10,19 +10,24 @@ SELECT *
 FROM 'https://domain.tld/file.extension';
 ```
 
-For CSV files, files will be downloaded entirely in most cases, due to the row-based nature of the format. For Parquet files, DuckDB can use a combination of the Parquet metadata and HTTP range requests to only download the parts of the file that are actually required by the query. For example, the following query will only read the Parquet metadata and the data for the `column_a` column:
+## Partial Reading
+
+For CSV files, files will be downloaded entirely in most cases, due to the row-based nature of the format.
+For Parquet files, DuckDB supports [partial reading]({% link docs/data/parquet/overview.md %}#partial-reading), i.e., it can use a combination of the Parquet metadata and [HTTP range requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests) to only download the parts of the file that are actually required by the query. For example, the following query will only read the Parquet metadata and the data for the `column_a` column:
 
 ```sql
 SELECT column_a
 FROM 'https://domain.tld/file.parquet';
 ```
 
-In some cases even, no actual data needs to be read at all as they only require reading the metadata:
+In some cases, no actual data needs to be read at all as they only require reading the metadata:
 
 ```sql
 SELECT count(*)
 FROM 'https://domain.tld/file.parquet';
 ```
+
+## Scanning Multiple Files
 
 Scanning multiple files over HTTP(S) is also supported:
 
