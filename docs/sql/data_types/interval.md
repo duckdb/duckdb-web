@@ -28,7 +28,7 @@ SELECT
 > Warning Decimal values can be used in strings but are rounded to integers.
 > ```sql
 > SELECT INTERVAL '1.5' YEARS;
-> -- Returns 24 months; equivalent to `to_years(CAST(1.5 AS INTEGER))
+> -- Returns 12 months; equivalent to `to_years(CAST(trunc(1.5) AS INTEGER))`
 > ```
 > For more precision, use a more granular unit; e.g., `18 MONTHS` instead of `'1.5' YEARS`.
 
