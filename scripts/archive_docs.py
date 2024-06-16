@@ -153,7 +153,7 @@ def archive_installation_page(version):
     with open(f"_includes/installation.html") as main_installation_file, open(
         f"docs/archive/{version}/installation/index.html", "w"
     ) as archived_installation_file:
-        installation_page = main_installation_file.read()
+        installation_page = "\n" + main_installation_file.read()
         installation_page = installation_page.replace(" (Latest Release)", "")
         installation_page = installation_page.replace(
             "{{ site.currentduckdbversion }}", version
