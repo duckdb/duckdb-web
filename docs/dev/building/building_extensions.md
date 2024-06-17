@@ -79,17 +79,17 @@ When this flag is set, the [SQLSmith extension](https://github.com/duckdb/duckdb
 
 #### `CRASH_ON_ASSERT`
 
-`D_ASSERT(condition)` is used all throughout the code, these will throw an InternalException in debug builds.  
+`D_ASSERT(condition)` is used all throughout the code, these will throw an InternalException in debug builds.
 With this flag enabled, when the assertion triggers it will instead directly cause a crash.
 
 #### `DISABLE_STRING_INLINE`
 
-In our execution format `string_t` has the feature to "inline" strings that are under a certain length (12 bytes), this means they don't require a separate allocation.  
+In our execution format `string_t` has the feature to "inline" strings that are under a certain length (12 bytes), this means they don't require a separate allocation.
 When this flag is set, we disable this and don't inline small strings.
 
 #### `DISABLE_MEMORY_SAFETY`
 
-Our data structures that are used extensively throughout the non-performance-critical code have extra checks to ensure memory safety, these checks include:  
+Our data structures that are used extensively throughout the non-performance-critical code have extra checks to ensure memory safety, these checks include:
 
 * Making sure `nullptr` is never dereferenced.
 * Making sure index out of bounds accesses don't trigger a crash.
@@ -102,7 +102,7 @@ When previously pinned blocks in the BufferManager are unpinned, with this flag 
 
 #### `DEBUG_STACKTRACE`
 
-When a crash or assertion hit occurs in a test, print a stack trace.  
+When a crash or assertion hit occurs in a test, print a stack trace.
 This is useful when debugging a crash that is hard to pinpoint with a debugger attached.
 
 ## Using a CMake Configuration File

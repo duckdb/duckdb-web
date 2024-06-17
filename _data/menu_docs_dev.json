@@ -384,7 +384,7 @@
             {
               "page": "Pragmas",
               "url": "pragmas"
-            },          
+            },
             {
               "page": "Secrets Manager",
               "url": "secrets_manager"
@@ -1430,7 +1430,7 @@
               "url": "vector"
             }
           ]
-        }    
+        }
       ]
     }
   ]

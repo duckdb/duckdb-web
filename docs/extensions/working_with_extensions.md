@@ -53,7 +53,7 @@ INSTALL httpfs;
 
 To explicitly install an extension from the core repository, run either of:
 
-```sql 
+```sql
 INSTALL httpfs FROM core;
 ```
 

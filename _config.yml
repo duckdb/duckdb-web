@@ -48,13 +48,13 @@ excerpt_separator: <!--more-->
 future: true
 
 last-modified-at:
-    date-format: '%Y-%m-%d'
+  date-format: '%Y-%m-%d'
 
 twitter:
   username: DuckDB
   card: summary
-  
-github: 
+
+github:
   source:
     branch: main
   repository_url: "https://github.com/duckdb/duckdb-web"

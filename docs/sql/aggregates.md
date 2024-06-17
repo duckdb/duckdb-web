@@ -366,7 +366,7 @@ The table below shows the available approximate aggregate functions.
 
 ## Statistical Aggregates
 
-The table below shows the available statistical aggregate functions. 
+The table below shows the available statistical aggregate functions.
 They all ignore `NULL` values (in the case of a single input column `x`), or pairs where either input is `NULL` (in the case of two input columns `y` and `x`).
 
 | Function | Description |

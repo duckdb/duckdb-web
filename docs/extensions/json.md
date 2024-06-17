@@ -1014,7 +1014,7 @@ Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALL
 The following query returns true for all fields:
 
 ```sql
-SELECT 
+SELECT
     a != b, -- Space is part of physical JSON content. Despite equal logical content, values are treated as not equal.
     c != d, -- Same.
     c[0] = d[0], -- Equality because space was removed from physical content of fields:
