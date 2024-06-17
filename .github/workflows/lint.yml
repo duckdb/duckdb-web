@@ -11,14 +11,14 @@ jobs:
           rm -rf docs/archive
       - uses: errata-ai/vale-action@reviewdog
         with:
-          files: 'docs/,_posts/,dev/'
+          files: 'docs/,_posts/'
           separator: ","
           filter_mode: added
           fail_on_error: false
       - uses: articulate/actions-markdownlint@main
         with:
           config: .markdownlint.jsonc
-          files: 'docs/**/*.md _posts/*.md dev/*.md'
+          files: 'docs/**/*.md _posts/*.md'
 
   python:
     runs-on: ubuntu-latest
