@@ -6,7 +6,7 @@ GIT
     rouge (3.3823.1)
 
 GIT
-  remote: https://github.com/jekyll/minima
+  remote: https://github.com/jekyll/minima.git
   revision: 1d5286cf9a1aae34078420d183d560dd673d98b5
   branch: master
   specs:
