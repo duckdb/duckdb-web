@@ -56,6 +56,9 @@ The duckdb_config must be destroyed using 'duckdb_destroy_config'
 
 This will always succeed unless there is a malloc failure.
 
+Note that `duckdb_destroy_config` should always be called on the resulting config, even if the function returns
+`DuckDBError`.
+
 #### Syntax
 
 ---
