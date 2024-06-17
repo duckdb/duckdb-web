@@ -10,7 +10,6 @@
     - [Headers](#headers)
     - [SQL Style](#sql-style)
     - [Python Style](#python-style)
-    - [Links](#links)
     - [Spelling](#spelling)
   - [Example Code Snippets](#example-code-snippets)
   - [Cross-References](#cross-references)
@@ -105,11 +104,6 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Use **4 spaces** for indentation.
 * Use double quotes (`"`) by default for strings.
 
-### Links
-
-* Use Jekyll's [link tags](https://jekyllrb.com/docs/liquid/tags/#link) to link to pages. For example, to link to the Example section on the `SELECT` statement's page, use `{% docs/sql/statements/select.md %}#examples`. Note that the paths must contain the correct extension (most often `.md`) and they must be relative to the repository root.
-* Avoid using the term "here" for links (e.g., "for more details, click [here](https://example.org/)" should be avoided). For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
-
 ### Spelling
 
 * Use [American English (en-US) spelling](https://en.wikipedia.org/wiki/Oxford_spelling#Language_tag_comparison).
@@ -123,17 +117,20 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 ## Cross-References
 
 * Where applicable, add cross-references to relevant other pages in the documentation.
-* Use descriptive links:
-   * :white_check_mark: ```see [the `COPY` statement](../../sql/statements/copy)```
-   * :x: `see [here](../../sql/statements/copy)`
-* Use relative URLs without the `.html` extension:
-   * :white_check_mark: `../../sql/statements/copy`
-   * :x: `../../sql/statements/copy.html`
-   * :x: `/docs/sql/statements/copy`
-   * :x: `https://duckdb.org/docs/sql/statements/copy`
+* Use Jekyll's [link tags](https://jekyllrb.com/docs/liquid/tags/#link) to link to pages.
+  * For example, to link to the Example section on the `SELECT` statement's page, use `{% link docs/sql/statements/select.md %}#examples`. 
+  * Link tags ensure that the documentation is only compiled and deployed if links point to existing pages.
+  * Note that the paths must contain the correct extension (most often `.md`) and they must be relative to the repository root.
+   * :white_check_mark: ```see [the `SELECT` statement](../../sql/statements/select)```
+   * :x: ```see [the `SELECT` statement]({% link docs/sql/statements/select.md %})```
+* Avoid using the term "here" for links. For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
+   * :x: `see [here]({% link docs/sql/statements/copy.md %}#copy-from)`
+   * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
 * Reference a specific section when possible:
-   * :white_check_mark: `../../sql/statements/copy#copy-from`
-* Do **not** link related GitHub issues/discussions. This allows the documentation to be self-contained.
+   * :x: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %})```
+   * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
+* In most cases, linking related GitHub issues/discussions is discouraged. This allows the documentation to be self-contained.
+
 
 ## Archive and Generated Pages
 
