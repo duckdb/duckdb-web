@@ -5,6 +5,16 @@ GIT
   specs:
     rouge (3.3823.1)
 
+GIT
+  remote: https://github.com/jekyll/minima
+  revision: 1d5286cf9a1aae34078420d183d560dd673d98b5
+  branch: master
+  specs:
+    minima (3.0.0.dev)
+      jekyll (>= 3.5, < 5.0)
+      jekyll-feed (~> 0.9)
+      jekyll-seo-tag (~> 2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -176,10 +186,6 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.4.0)
-    minima (2.5.1)
-      jekyll (>= 3.5, < 5.0)
-      jekyll-feed (~> 0.9)
-      jekyll-seo-tag (~> 2.1)
     net-http (0.4.1)
       uri
     nokogiri (1.16.5-aarch64-linux)
@@ -302,7 +308,7 @@ DEPENDENCIES
   kramdown (= 2.4.0)
   kramdown-parser-gfm (= 1.1.0)
   liquid (= 4.0.4)
-  minima (= 2.5.1)
+  minima!
   rouge!
   safe_yaml (= 1.0.5)
   sass (= 3.7.4)
