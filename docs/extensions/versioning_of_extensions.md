@@ -60,7 +60,7 @@ UPDATE EXTENSIONS;
 | aws            | core_nightly | NO_UPDATE_AVAILABLE   | 42c78d3          | 42c78d3         |
 
 Note that DuckDB will look for updates in the source repository for each extension. So if an extension was installed from
-core_nightly, it will be updated with the latest nightly build.
+`core_nightly`, it will be updated with the latest nightly build.
 
 The update statement can also be provided with a list of specific extensions to update:
 

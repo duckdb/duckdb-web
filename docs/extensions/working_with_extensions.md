@@ -91,12 +91,12 @@ While any url or local path can be used as a repository, currently DuckDB contai
 
 <div class="narrow_table"></div>
 
-| alias               | Url                                    | Description                                                                            |
-|:--------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
-| core                | `http://extensions.duckdb.org`         | DuckDB core extensions                                                                 |
-| core_nightly        | `http://nightly-extensions.duckdb.org` | Nightly builds for `core`                                                              |
-| local_build_debug   | `./build/debug/repository`             | Repository created when building DuckDB from source in debug mode (for development)    |
-| local_build_release | `./build/release/repository`           | Repository created when building DuckDB from source in release mode (for development)  |
+| Alias                 | Url                                    | Description                                                                            |
+|:----------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
+| `core`                | `http://extensions.duckdb.org`         | DuckDB core extensions                                                                 |
+| `core_nightly`        | `http://nightly-extensions.duckdb.org` | Nightly builds for `core`                                                              |
+| `local_build_debug`   | `./build/debug/repository`             | Repository created when building DuckDB from source in debug mode (for development)    |
+| `local_build_release` | `./build/release/repository`           | Repository created when building DuckDB from source in release mode (for development)  |
 
 ### Working with Multiple Repositories
 
@@ -108,6 +108,7 @@ INSTALL httpfs FROM core;
 INSTALL aws FROM core_nightly;
 SELECT extensions_name, extensions_version, installed_from, install_mode FROM duckdb_extensions();
 ```
+
 Would output:
 
 | extensions_name | extensions_version | installed_from | install_mode |
