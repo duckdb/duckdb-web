@@ -23,7 +23,7 @@ CALL pragma_table_info('pg_am');
 Select only the functions where the name starts with `ST_`:
 
 ```sql
-SELECT function_name, parameters, parameter_types, return_type 
+SELECT function_name, parameters, parameter_types, return_type
 FROM duckdb_functions()
 WHERE function_name LIKE 'ST_%';
 ```

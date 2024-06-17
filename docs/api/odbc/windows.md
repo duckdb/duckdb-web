@@ -89,4 +89,4 @@ When a new version of the ODBC driver is released, installing the new version wi
 However, the installer doesn't always update the version number in the registry.
 To ensure the correct version is used,
 check that `HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\DuckDB Driver` has the most recent version,
-and `HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\DuckDB\Driver` has the correct path to the new driver. 
+and `HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\DuckDB\Driver` has the correct path to the new driver.

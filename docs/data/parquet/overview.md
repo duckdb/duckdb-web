@@ -30,7 +30,7 @@ CREATE TABLE test AS
 If the file does not end in `.parquet`, use the `read_parquet` function:
 
 ```sql
-SELECT * 
+SELECT *
 FROM read_parquet('test.parq');
 ```
 
