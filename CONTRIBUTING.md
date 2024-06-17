@@ -36,13 +36,16 @@ Before submitting a contribution, please check whether your contribution is elig
 Thank you for contributing to the DuckDB documentation!
 
 Each new page requires at least 2 edits:
+
 * Create new Markdown file (using the `snake_case` naming convention). Please follow the format of another `.md` file in the `docs` folder.
 * Add a link to the new page within `_data/menu_docs_dev.json`. This populates the dropdown menus.
 
 The addition of a new guide requires one additional edit:
+
 * Add a link to the new page within the Guides landing page: `docs/guides/overview.md`
 
 Before creating a pull request, please perform the following steps:
+
 * Preview your changes in the browser using the [site build guide](BUILDING.md).
 * Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for markdownlint.
 
@@ -95,9 +98,9 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
    ```
    ````
 * To specify placeholders, use the left angle and right angle characters, `⟨` and `⟩`
-   * For example: `SELECT * FROM ⟨your_table_name⟩`.
-   * These characters are known in LaTeX code as `\langle` and `\rangle`.
-   * *Avoid* using artihmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
+     * For example: `SELECT * FROM ⟨your_table_name⟩`.
+     * These characters are known in LaTeX code as `\langle` and `\rangle`.
+     * *Avoid* using artihmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
 
 ### Python Style
 
@@ -118,19 +121,18 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Where applicable, add cross-references to relevant other pages in the documentation.
 * Use Jekyll's [link tags](https://jekyllrb.com/docs/liquid/tags/#link) to link to pages.
-  * For example, to link to the Example section on the `SELECT` statement's page, use `{% link docs/sql/statements/select.md %}#examples`. 
-  * Link tags ensure that the documentation is only compiled and deployed if links point to existing pages.
-  * Note that the paths must contain the correct extension (most often `.md`) and they must be relative to the repository root.
-   * :white_check_mark: ```see [the `SELECT` statement](../../sql/statements/select)```
-   * :x: ```see [the `SELECT` statement]({% link docs/sql/statements/select.md %})```
+    * For example, to link to the Example section on the `SELECT` statement's page, use `{% link docs/sql/statements/select.md %}#examples`.
+    * Link tags ensure that the documentation is only compiled and deployed if links point to existing pages.
+    * Note that the paths must contain the correct extension (most often `.md`) and they must be relative to the repository root.
+    * :white_check_mark: ```see [the `SELECT` statement](../../sql/statements/select)```
+    * :x: ```see [the `SELECT` statement]({% link docs/sql/statements/select.md %})```
 * Avoid using the term "here" for links. For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
-   * :x: `see [here]({% link docs/sql/statements/copy.md %}#copy-from)`
-   * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
+    * :x: `see [here]({% link docs/sql/statements/copy.md %}#copy-from)`
+    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
 * Reference a specific section when possible:
-   * :x: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %})```
-   * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
+    * :x: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %})```
+    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
 * In most cases, linking related GitHub issues/discussions is discouraged. This allows the documentation to be self-contained.
-
 
 ## Archive and Generated Pages
 
