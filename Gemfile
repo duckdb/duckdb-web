@@ -36,7 +36,7 @@ gem "jekyll-titles-from-headings", "0.5.3"
 gem "kramdown-parser-gfm", "1.1.0"
 gem "kramdown", "2.4.0"
 gem "liquid", "4.0.4"
-gem "minima", git: "https://github.com/jekyll/minima", branch: "master"
+gem "minima", git: "https://github.com/jekyll/minima.git", branch: "master"
 gem "rouge", git: "https://github.com/duckdb/rouge.git", branch: "duckdb"
 
 gem "safe_yaml", "1.0.5"
