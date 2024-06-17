@@ -10,13 +10,13 @@ if len(sys.argv) < 3:
         textwrap.dedent(
             """Expected usage: python3 scripts/redirect.py from_directory to_directory
 
-       For example, to add a redirect from version '0.6.1' to '0.6',
-       first move the directory manually from 'docs/archive/0.6.1' to 'docs/archive/0.6'.
+            For example, to add a redirect from version '0.6.1' to '0.6',
+            first move the directory manually from 'docs/archive/0.6.1' to 'docs/archive/0.6'.
 
-       Then, run:
+            Then, run:
 
-       python3 scripts/redirect.py docs/archive/0.6.1 docs/archive/0.6"
-    """
+            python3 scripts/redirect.py docs/archive/0.6.1 docs/archive/0.6"
+            """
         )
     )
     exit(1)
