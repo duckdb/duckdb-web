@@ -20,20 +20,20 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 | Name | Description |
 |:--|:-------|
-| [`regexp_extract_all(string, regex[, group = 0][, options])`](#regexp_extract_allstring-regex-group--0-options) | Split the *string* along the *regex* and extract all occurrences of *group*. |
-| [`regexp_extract(string, pattern, name_list[, options])`](#regexp_extractstring-pattern-name_list-options) | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. |
-| [`regexp_extract(string, pattern[, idx][, options])`](#regexp_extractstring-pattern-idx-options) | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. |
-| [`regexp_full_match(string, regex[, options])`](#regexp_full_matchstring-regex-options) | Returns `true` if the entire *string* matches the *regex*. |
-| [`regexp_matches(string, pattern[, options])`](#regexp_matchesstring-pattern-options) | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. |
-| [`regexp_replace(string, pattern, replacement[, options])`](#regexp_replacestring-pattern-replacement-options) | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. |
-| [`regexp_split_to_array(string, regex[, options])`](#regexp_split_to_arraystring-regex-options) | Alias of `string_split_regex`. Splits the *string* along the *regex*. |
-| [`regexp_split_to_table(string, regex[, options])`](#regexp_split_to_tablestring-regex-options) | Splits the *string* along the *regex* and returns a row for each part. |
+| [`regexp_extract_all(string, regex[, group = 0][, options])`](#regexp_extract_allstring-regex-group--0-options) | Split the `string` along the `regex` and extract all occurrences of `group`. |
+| [`regexp_extract(string, pattern, name_list[, options])`](#regexp_extractstring-pattern-name_list-options) | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list`. |
+| [`regexp_extract(string, pattern[, idx][, options])`](#regexp_extractstring-pattern-idx-options) | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `idx`. The `idx` must be a constant value. |
+| [`regexp_full_match(string, regex[, options])`](#regexp_full_matchstring-regex-options) | Returns `true` if the entire `string` matches the `regex`. |
+| [`regexp_matches(string, pattern[, options])`](#regexp_matchesstring-pattern-options) | Returns `true` if  `string` contains the regexp `pattern`, `false` otherwise. |
+| [`regexp_replace(string, pattern, replacement[, options])`](#regexp_replacestring-pattern-replacement-options) | If `string` contains the regexp `pattern`, replaces the matching part with `replacement`. |
+| [`regexp_split_to_array(string, regex[, options])`](#regexp_split_to_arraystring-regex-options) | Alias of `string_split_regex`. Splits the `string` along the `regex`. |
+| [`regexp_split_to_table(string, regex[, options])`](#regexp_split_to_tablestring-regex-options) | Splits the `string` along the `regex` and returns a row for each part. |
 
 ### `regexp_extract_all(string, regex[, group = 0][, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Split the *string* along the *regex* and extract all occurrences of *group*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
+| **Description** | Split the `string` along the `regex` and extract all occurrences of `group`. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `[hello, world]` |
 
@@ -41,7 +41,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 <div class="nostroke_table"></div>
 
-| **Description** | If *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
+| **Description** | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list`. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
 
@@ -49,14 +49,14 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 <div class="nostroke_table"></div>
 
-| **Description** | If *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*. The *idx* must be a constant value. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
+| **Description** | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `idx`. The `idx` must be a constant value. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Result** | `hello` |
 
 ### `regexp_full_match(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if the entire *string* matches the *regex*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
+| **Description** | Returns `true` if the entire `string` matches the `regex`. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_full_match('anabanana', '(an)*')` |
 | **Result** | `false` |
 
@@ -64,7 +64,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if  *string* contains the regexp *pattern*, `false` otherwise. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
+| **Description** | Returns `true` if  `string` contains the regexp `pattern`, `false` otherwise. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_matches('anabanana', '(an)*')` |
 | **Result** | `true` |
 
@@ -72,7 +72,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 <div class="nostroke_table"></div>
 
-| **Description** | If *string* contains the regexp *pattern*, replaces the matching part with *replacement*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
+| **Description** | If `string` contains the regexp `pattern`, replaces the matching part with `replacement`. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
@@ -80,7 +80,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of `string_split_regex`. Splits the *string* along the *regex*. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
+| **Description** | Alias of `string_split_regex`. Splits the `string` along the `regex`. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | `['hello', 'world', '42']` |
 
@@ -88,9 +88,9 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 <div class="nostroke_table"></div>
 
-| **Description** | Splits the *string* along the *regex* and returns a row for each part. A set of optional [`*options*`](#options-for-regular-expression-functions) can be set. |
-| **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
-| **Result** | Two rows: `'hello'`, `'world'` |
+| **Description** | Splits the `string` along the `regex` and returns a row for each part. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
+| **Example** | `regexp_split_to_table('hello world; 42', ';? ')` |
+| **Result** | Three rows: `'hello'`, `'world', '42'` |
 
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `true` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
 
