@@ -149,7 +149,8 @@ A query can be "qualified" by adding a `WHERE` clause that specifies which rows 
 ```sql
 SELECT *
 FROM weather
-WHERE city = 'San Francisco' AND prcp > 0.0;
+WHERE city = 'San Francisco'
+  AND prcp > 0.0;
 ```
 
 Result:
