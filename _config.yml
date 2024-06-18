@@ -34,6 +34,7 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  smart_quotes: ["apos", "apos", "quot", "quot"]
 theme: minima
 plugins:
   - jekyll-feed
