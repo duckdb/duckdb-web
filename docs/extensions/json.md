@@ -255,7 +255,7 @@ FROM read_json(
     );
 ```
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | duck | goose | swan |
 |:---|:---|:---|

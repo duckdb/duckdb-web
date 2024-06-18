@@ -858,6 +858,11 @@ td.icon{
 		min-width: 40px;
 	}
 }
+.monospace_table + table{
+	td{
+		font-family: $fontMono;
+	}
+}
 .nostroke_table + table{
 	tr{
 		border: 0;
