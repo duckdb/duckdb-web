@@ -6,6 +6,8 @@ github_repository: https://github.com/duckdb/duckdb_delta
 
 The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension offers **read support** for delta tables, both local and remote.
 
+For implementation details, see the [announcement blog post]({% post_url 2024-06-10-delta %}).
+
 > Warning The `delta` extension is currently experimental and is [only supported on given platforms](#supported-duckdb-versions-and-platforms).
 
 ## Installing and Loading
