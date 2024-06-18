@@ -258,6 +258,8 @@ WHERE tags['highway'] != []
 LIMIT 5;
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | kind |   id   |                                                                      tags                                                                                   | refs |        lat         |    lon     | ref_roles | ref_types |
 |------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|------|--------------------|------------|-----------|-----------|
 | node | 122351 | {bicycle=yes, button_operated=yes, crossing=traffic_signals, highway=crossing, tactile_paving=no, traffic_signals:sound=yes, traffic_signals:vibration=yes} | NULL | 53.5492951         | 9.977553   | NULL      | NULL      |
