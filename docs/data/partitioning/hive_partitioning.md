@@ -55,7 +55,8 @@ Filters on the partition keys are automatically pushed down into the files. This
 ```sql
 SELECT *
 FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = true)
-WHERE year = 2022 AND month = 11;
+WHERE year = 2022
+  AND month = 11;
 ```
 
 When executing this query, only the following files will be read:

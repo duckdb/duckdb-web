@@ -39,7 +39,8 @@ SELECT DISTINCT ON(function_name)
     parameter_types,
     description
 FROM duckdb_functions()
-WHERE function_type = 'scalar' AND function_name LIKE 'b%'
+WHERE function_type = 'scalar'
+  AND function_name LIKE 'b%'
 ORDER BY function_name;
 ```
 
