@@ -1,0 +1,3086 @@
+{
+  "data": [
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=CSV Import\u003cbr\u003ebenchmark=000 Placeholder for charting\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "CSV Import",
+      "line": {
+        "color": "#4C78A8"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "CSV Import",
+      "orientation": "v",
+      "showlegend": true,
+      "stackgroup": "1",
+      "x": [
+        "0.2.7",
+        "0.2.8",
+        "0.2.9",
+        "0.3.0",
+        "0.3.1",
+        "0.3.2",
+        "0.3.4",
+        "0.4.0",
+        "0.5.1",
+        "0.6.1",
+        "0.7.1",
+        "0.8.1",
+        "0.9.0",
+        "0.9.1",
+        "0.9.2",
+        "0.10.0",
+        "0.10.1",
+        "0.10.2",
+        "0.10.3",
+        "1.0.0",
+        "1.0.1-dev1125"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=CSV Import\u003cbr\u003ebenchmark=002 Create table from csv\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "CSV Import",
+      "line": {
+        "color": "#4C78A8"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "CSV Import",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.041694710069186146,
+        0.05491248721873968,
+        0.04095819157381985,
+        0.05324864981621119,
+        0.04111361273221209,
+        0.05282393599756268,
+        0.05492247164464989,
+        0.05514782404819873,
+        0.05827345121011575,
+        0.052002316825012,
+        0.18102583057104857,
+        0.1885828974819165,
+        0.20337330661957095,
+        0.2169535770763937,
+        0.19500041992266132,
+        0.16260022308102456,
+        0.1561797273393359,
+        0.15403480725737517,
+        0.1510728959147001,
+        0.13732855687065282,
+        0.13990707172420633
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=CSV Import\u003cbr\u003ebenchmark=011 Create tables from csvs joins\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "CSV Import",
+      "line": {
+        "color": "#4C78A8"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "CSV Import",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.09778641787847783,
+        0.1253932522767654,
+        0.09394253910326764,
+        0.12506813827312427,
+        0.09345046592886548,
+        0.12167708473782193,
+        0.11110161721171218,
+        0.11429081288966231,
+        0.11469861387483876,
+        0.13204462975793432,
+        0.3893610938822881,
+        0.39153397814093416,
+        0.41808384923775904,
+        0.44934269867348714,
+        0.40564826443125784,
+        0.3082349301405896,
+        0.30064931749098706,
+        0.28952183370854895,
+        0.28348788046199164,
+        0.258062245626054,
+        0.2660174186217059
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=CSV Import\u003cbr\u003ebenchmark=301 Create tables from csvs windowing\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "CSV Import",
+      "line": {
+        "color": "#4C78A8"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "CSV Import",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0113675153867259,
+        0.013170451172787881,
+        0.011210181742351387,
+        0.012748855417841138,
+        0.010884154109927805,
+        0.01371119225546461,
+        0.02067290964664148,
+        0.0215117458062879,
+        0.021604021816942653,
+        0.018410137495704585,
+        0.07357454467566558,
+        0.07136141730424948,
+        0.07090206638222202,
+        0.0730659601377248,
+        0.06564531636072868,
+        0.06770177065910411,
+        0.06321884301865507,
+        0.06258126251145667,
+        0.058572401520241325,
+        0.05490689461114335,
+        0.05785417545503322
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Scan other formats\u003cbr\u003ebenchmark=000 Placeholder for charting\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Scan other formats",
+      "line": {
+        "color": "#F58518"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Scan other formats",
+      "orientation": "v",
+      "showlegend": true,
+      "stackgroup": "1",
+      "x": [
+        "0.2.7",
+        "0.2.8",
+        "0.2.9",
+        "0.3.0",
+        "0.3.1",
+        "0.3.2",
+        "0.3.4",
+        "0.4.0",
+        "0.5.1",
+        "0.6.1",
+        "0.7.1",
+        "0.8.1",
+        "0.9.0",
+        "0.9.1",
+        "0.9.2",
+        "0.10.0",
+        "0.10.1",
+        "0.10.2",
+        "0.10.3",
+        "1.0.0",
+        "1.0.1-dev1125"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Scan other formats\u003cbr\u003ebenchmark=006 Scan and aggregate over Pandas df\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Scan other formats",
+      "line": {
+        "color": "#F58518"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Scan other formats",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.00011234711321803162,
+        0.00010469970949881457,
+        0.00011673408469714262,
+        0.00011832536553334894,
+        0.0003441217802317034,
+        0.00034324339321101124,
+        0.0003384160311105828,
+        0.00035981075815393656
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Scan other formats\u003cbr\u003ebenchmark=008 Scan and aggregate over Parquet file\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Scan other formats",
+      "line": {
+        "color": "#F58518"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Scan other formats",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0003075661177250164,
+        0.0003552838707521923,
+        0.0003149933115352373,
+        0.00037889272638872676,
+        0.00035009150678549824,
+        0.00036970756142532034,
+        0.0004180044238854756,
+        0.0003142548404359855,
+        0.0003574737067649653,
+        0.00043041834146193063,
+        0.00033974088189830373,
+        0.00031970265607305336,
+        0.00033625904263802266,
+        0.0003433285924301894,
+        0.00036459917037031373,
+        0.0003236808581628949,
+        0.00043371769438785713,
+        0.0027214941228646383,
+        0.0027256243871673427,
+        0.002935066405774976,
+        0.0029772791446489354
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Scan other formats\u003cbr\u003ebenchmark=010 Scan and aggregate over Arrow df\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Scan other formats",
+      "line": {
+        "color": "#F58518"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Scan other formats",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0001110161600876133,
+        0.00012799714125673217,
+        0.0001479173495195776,
+        0.00012126581893575908,
+        0.00012984997610585405,
+        0.00012014777626108306,
+        0.00011938501258085309,
+        0.00010973998205488159,
+        0.00013261404551681452,
+        0.0001393903616682821,
+        0.00010670951179366655,
+        0.00010908425755930796,
+        0.00011040177969616656
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Analysis - Group By\u003cbr\u003ebenchmark=000 Placeholder for charting\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Analysis - Group By",
+      "line": {
+        "color": "#E45756"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Analysis - Group By",
+      "orientation": "v",
+      "showlegend": true,
+      "stackgroup": "1",
+      "x": [
+        "0.2.7",
+        "0.2.8",
+        "0.2.9",
+        "0.3.0",
+        "0.3.1",
+        "0.3.2",
+        "0.3.4",
+        "0.4.0",
+        "0.5.1",
+        "0.6.1",
+        "0.7.1",
+        "0.8.1",
+        "0.9.0",
+        "0.9.1",
+        "0.9.2",
+        "0.10.0",
+        "0.10.1",
+        "0.10.2",
+        "0.10.3",
+        "1.0.0",
+        "1.0.1-dev1125"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Analysis - Group By\u003cbr\u003ebenchmark=003 Convert to Enums\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Analysis - Group By",
+      "line": {
+        "color": "#E45756"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Analysis - Group By",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.02595102516816434,
+        0.029640577673790636,
+        0.02569946898250172,
+        0.029070365048108386,
+        0.025821386876206373,
+        0.02946958067900414,
+        0.03445461704513697,
+        0.03458264823104406,
+        0.03395824446349829,
+        0.03447599591776707,
+        0.023384083568740412,
+        0.02500237603192925
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Analysis - Group By\u003cbr\u003ebenchmark=004 Group by queries\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Analysis - Group By",
+      "line": {
+        "color": "#E45756"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Analysis - Group By",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.035914698732435496,
+        0.0429642236716914,
+        0.03535111036069211,
+        0.043023169210318915,
+        0.03530300818925233,
+        0.04214867279751235,
+        0.03655855554322832,
+        0.037144476563377896,
+        0.03723552752137189,
+        0.03779751121048285,
+        0.046932717517826045,
+        0.0487507083972783,
+        0.1540288582320711,
+        0.20902259079030475,
+        0.2615105013277376,
+        0.23349836235732857,
+        0.23978575747193745,
+        0.6557722267996611,
+        0.6539258288710881,
+        0.7127800379352003,
+        0.892085925081654
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Analysis - Join\u003cbr\u003ebenchmark=000 Placeholder for charting\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Analysis - Join",
+      "line": {
+        "color": "#72B7B2"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Analysis - Join",
+      "orientation": "v",
+      "showlegend": true,
+      "stackgroup": "1",
+      "x": [
+        "0.2.7",
+        "0.2.8",
+        "0.2.9",
+        "0.3.0",
+        "0.3.1",
+        "0.3.2",
+        "0.3.4",
+        "0.4.0",
+        "0.5.1",
+        "0.6.1",
+        "0.7.1",
+        "0.8.1",
+        "0.9.0",
+        "0.9.1",
+        "0.9.2",
+        "0.10.0",
+        "0.10.1",
+        "0.10.2",
+        "0.10.3",
+        "1.0.0",
+        "1.0.1-dev1125"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Analysis - Join\u003cbr\u003ebenchmark=012 Convert to Enums for joins\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Analysis - Join",
+      "line": {
+        "color": "#72B7B2"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Analysis - Join",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.062185391256516294,
+        0.07255235357586487,
+        0.06304839835890684,
+        0.0718681684822799,
+        0.06417566509005507,
+        0.06736374027271425,
+        0.09345674103535036,
+        0.09389736281552136,
+        0.09340912182494367,
+        0.09240324865316522,
+        0.051452039035697554,
+        0.06232594710730628
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Analysis - Join\u003cbr\u003ebenchmark=013 Join queries\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Analysis - Join",
+      "line": {
+        "color": "#72B7B2"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Analysis - Join",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0945998427334874,
+        0.10461595557081185,
+        0.09396912739138771,
+        0.11003835208776482,
+        0.09742389055575583,
+        0.09909387894486392,
+        0.12637850936879083,
+        0.12544666360342596,
+        0.12535625131840433,
+        0.1300137356926665,
+        0.1004519300991812,
+        0.17358969128084253,
+        1.0766436107383959,
+        1.1820571642362037,
+        1.069687715887594,
+        0.7368258899470106,
+        0.6863115533201001,
+        0.7215097097084434,
+        0.7116190294516236,
+        0.6489044509208164,
+        0.6871109298319056
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=000 Placeholder for charting\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": true,
+      "stackgroup": "1",
+      "x": [
+        "0.2.7",
+        "0.2.8",
+        "0.2.9",
+        "0.3.0",
+        "0.3.1",
+        "0.3.2",
+        "0.3.4",
+        "0.4.0",
+        "0.5.1",
+        "0.6.1",
+        "0.7.1",
+        "0.8.1",
+        "0.9.0",
+        "0.9.1",
+        "0.9.2",
+        "0.10.0",
+        "0.10.1",
+        "0.10.2",
+        "0.10.3",
+        "1.0.0",
+        "1.0.1-dev1125"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=302 Basic window\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.009198956054205034,
+        0.009642776221263019,
+        0.009323854577503796,
+        0.009556730264866396,
+        0.009216825116069213,
+        0.009189166290117477,
+        0.009484556890413626,
+        0.00984738354911936,
+        0.009804018722920475,
+        0.04025188793939535,
+        0.20016174664278477,
+        0.19993036489074809,
+        0.16026846017570046,
+        0.17699919173193604,
+        0.15679882072535375,
+        0.17129709356341102,
+        0.168336868365268,
+        0.16335796353997215,
+        0.16141008128191375,
+        0.14777744574368182,
+        0.5174713170734421
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=303 Sorted window\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.02514060697762133,
+        0.02481810620748665,
+        0.024602323416512046,
+        0.023988501432942604,
+        0.024701162891257844,
+        0.025784073267658667,
+        0.024869461482515884,
+        0.024982820796334907,
+        0.025267792682442947,
+        0.06938776680786064,
+        0.06930223908345738,
+        0.06105041384998783,
+        0.048128343629840704,
+        0.060540550681398915,
+        0.0548355862511147,
+        0.059974914842181405,
+        0.05532260945928631,
+        0.054853862885257586,
+        0.05881164352805889,
+        0.4293594499075764,
+        0.5012390481075327
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=304 Window quantiles entire dataset\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.02189313736914997,
+        0.023471078454076012,
+        0.021804680140522587,
+        0.02310453030045643,
+        0.021926436249142606,
+        0.02184501207304143,
+        0.024685295076728765,
+        0.024704048598759763,
+        0.024973809621142564,
+        0.14552643301213344
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=305 Window partition by\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.02559899075127518,
+        0.026331628390061715,
+        0.024798987712786946,
+        0.02610324309283288,
+        0.025266361989581126,
+        0.025751166105531218,
+        0.028628294326441962,
+        0.028741637815046624,
+        0.02908238847412647,
+        0.03301752378913585,
+        0.1671302042534404,
+        0.2867165430580378,
+        0.19305497571123015,
+        0.18582970060672924,
+        0.34152468946680314,
+        0.3304626513278283,
+        0.32806647439618714,
+        1.6105293108400212,
+        1.5338170948751726,
+        1.8669740316426058,
+        2.9869751363080055
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=306 Window partition by order by\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.010597898717136484,
+        0.010404447406655281,
+        0.010055197760426184,
+        0.010517886985263318,
+        0.010994003583783673,
+        0.010090173091277426,
+        0.012288326831203242,
+        0.013199315634855413,
+        0.011744314367106368,
+        0.012448172684649957,
+        0.04430489970355316,
+        0.044406147968715684,
+        0.04978835857141674,
+        0.08590291265836102,
+        0.16572652182184966,
+        0.1810397481760198,
+        0.19057753270964972,
+        0.6147483754456146,
+        0.572838271909097,
+        0.7672086115713035,
+        0.8853432995572467
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=307 Window lead and lag\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.02808005550803818,
+        0.028087407283896002,
+        0.02903455028011874,
+        0.028470494743359383,
+        0.028539243447871086,
+        0.02913578274926399,
+        0.029300673751301718,
+        0.030007849670404627,
+        0.029470628121365524,
+        0.08718195817906416,
+        0.08310251874395759,
+        0.07263392739076072,
+        0.05225521368667671,
+        0.06178821950176605,
+        0.05758414919971425,
+        0.06752800232465059,
+        0.06280363186199378,
+        0.057502853990354895,
+        0.06085592114108971,
+        0.4516202230488962,
+        0.503188398782027
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=308 Window moving averages\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.04136994641010938,
+        0.04055609020622416,
+        0.039831610962091035,
+        0.04155531360517465,
+        0.04148571454354305,
+        0.04034343768363729,
+        0.040623629624893805,
+        0.04203218566792167,
+        0.0416817036403803,
+        0.2906604705646384,
+        0.2833668324003481,
+        0.27124856581048234,
+        0.15933250598599713,
+        0.17549740949380846,
+        0.16150482211358683,
+        0.17674671216542254,
+        0.16822718312911353,
+        0.16082407263912546,
+        0.16474510663651912,
+        0.5461743529264173,
+        1.0248120780269105
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=309 Window rolling sum\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.03850608985094232,
+        0.03595482747737032,
+        0.03827406332358906,
+        0.03683251982444722,
+        0.03858744952907383,
+        0.03680857396764709,
+        0.03126492745697335,
+        0.031168861774510486,
+        0.03149682501758396,
+        0.3100112886169094,
+        0.3168568850774712,
+        0.307715379400261,
+        0.23513970042113222,
+        0.25868972126635953,
+        0.2407687371345093,
+        0.26173855207641983,
+        0.2519406417988657,
+        0.24345137994597985,
+        0.24603587795708162,
+        0.617592097688948,
+        1.0545624589544198
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=310 Window range between\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.08041724815847083,
+        0.0743909410893259,
+        0.07583169137146788,
+        0.0741748638967967,
+        0.08091922181506958,
+        0.07577428724381097,
+        0.07094615870114096,
+        0.0743018476111446,
+        0.07842096322507715,
+        1.0166569231042266,
+        0.9933620814553515,
+        0.9729687457198481,
+        0.7405480418114139,
+        0.876129304176474,
+        0.8114216853484969,
+        0.852779102217688,
+        0.8345367560596282,
+        0.8115313401605294,
+        0.8111124415536033,
+        1.1871096305000046
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=311 Window quantiles partition by\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.016241978406810742,
+        0.01632317390563672,
+        0.016009082047395713,
+        0.015661765559201214,
+        0.015579568867350534,
+        0.016220743099829862,
+        0.018420479624027864,
+        0.01909638223225151,
+        0.019207822957745563,
+        0.026311467299836203,
+        2.4083545780853224,
+        2.063838719811208,
+        0.31169055829018366,
+        0.3193371651429991,
+        0.3575429068092966,
+        0.3795023073898834
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=312 Window lead and lag partition by\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.01332143671614373,
+        0.013697481429408092,
+        0.013449166201044227,
+        0.013491576025159255,
+        0.012931675103678382,
+        0.013251122308081011,
+        0.01603095850916358,
+        0.01567464789729957,
+        0.015573565037751064,
+        0.016880850917255923,
+        0.06376633364308845,
+        0.06537024375970772,
+        0.05378399417942342,
+        0.08759576293544773,
+        0.1648717314805411,
+        0.1825747052326321,
+        0.18806720324719173,
+        0.634743117200868,
+        0.5763324241209908,
+        0.7907611713707983,
+        1.0377278707171553
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=313 Window moving averages partition by\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.01841087839022204,
+        0.018877712507466927,
+        0.019033901334771536,
+        0.018724972671881664,
+        0.018825295103575838,
+        0.018807224109632526,
+        0.020138398647421216,
+        0.02049725440349088,
+        0.020448807931434606,
+        0.041664815157884644,
+        0.25314911252540057,
+        0.2539191525340897,
+        0.06327684570149228,
+        0.09577735647825929,
+        0.16854265090511492,
+        0.1903930573034017,
+        0.19746543683117784,
+        0.7222394226898452,
+        0.6819257205266457,
+        0.8797558380484879,
+        1.5269067303648034
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=314 Window rolling sum partition by\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.016004822845548695,
+        0.01613136129324011,
+        0.016440123295010822,
+        0.016471855245144797,
+        0.016183580356384154,
+        0.01615727315561495,
+        0.015449018114522772,
+        0.015663733958996617,
+        0.016123438933711095,
+        0.03445574238726459,
+        0.21687118569352232,
+        0.22178738701720957,
+        0.056821196960254415,
+        0.091745073964575,
+        0.16769705425453638,
+        0.18573967157221052,
+        0.1941698199990387,
+        0.7054349228285928,
+        0.6772559074340255,
+        0.8703773409893195,
+        1.2320070694045082
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=315 Window range between partition by\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.024632423938816036,
+        0.024622283771768567,
+        0.02316451846380648,
+        0.024943494991272172,
+        0.024982537314763686,
+        0.0244597516902817,
+        0.027060716041891215,
+        0.027759788341438812,
+        0.027615485447648427,
+        0.047279566841004414,
+        0.28881991946902125,
+        0.2832554378949937,
+        0.062163417478435956,
+        0.09491075807400357,
+        0.16893361573028118,
+        0.18898116660729086,
+        0.19690254800984885,
+        0.763640464771338,
+        0.726602763385634,
+        0.9579822112483588
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Window Functions\u003cbr\u003ebenchmark=316 Window quantiles partition by rows between\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Window Functions",
+      "line": {
+        "color": "#54A24B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Window Functions",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.03361569086863164,
+        0.032921296292390226,
+        0.03314817428169449,
+        0.03273985500613074,
+        0.03323130410646729,
+        0.03354165131592798,
+        0.029033574576784953,
+        0.028622829488479978,
+        0.0298278013534317,
+        0.2838778355391701,
+        1.1099555762572832,
+        0.16449765032023572,
+        0.09812037394357388,
+        0.13429156454766156,
+        0.19374639938074717,
+        0.21117316304340025
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Export\u003cbr\u003ebenchmark=000 Placeholder for charting\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Export",
+      "line": {
+        "color": "#EECA3B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Export",
+      "orientation": "v",
+      "showlegend": true,
+      "stackgroup": "1",
+      "x": [
+        "0.2.7",
+        "0.2.8",
+        "0.2.9",
+        "0.3.0",
+        "0.3.1",
+        "0.3.2",
+        "0.3.4",
+        "0.4.0",
+        "0.5.1",
+        "0.6.1",
+        "0.7.1",
+        "0.8.1",
+        "0.9.0",
+        "0.9.1",
+        "0.9.2",
+        "0.10.0",
+        "0.10.1",
+        "0.10.2",
+        "0.10.3",
+        "1.0.0",
+        "1.0.1-dev1125"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Export\u003cbr\u003ebenchmark=005 Export group by results to Pandas\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Export",
+      "line": {
+        "color": "#EECA3B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Export",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.035877248886889236,
+        0.036486378519048485,
+        0.038550802652597055,
+        0.03856212165216676,
+        0.03835277210303416,
+        0.03932702284567806,
+        0.04107399737243222,
+        0.046030256869938634
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Export\u003cbr\u003ebenchmark=007 Export group by results to Parquet\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Export",
+      "line": {
+        "color": "#EECA3B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Export",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1",
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.01356253278511892,
+        0.015073110893762478,
+        0.043042586982607246,
+        0.015349077677822743,
+        0.04255886557997744,
+        0.015058452365075253,
+        0.04265668555466946,
+        0.04210300984061052,
+        0.0449424278590727,
+        0.042069341111913815,
+        0.11797594554707151,
+        0.11339706294226845,
+        0.12953487207625833,
+        0.09133987885505619,
+        0.09102070663566211,
+        0.094022850141927,
+        0.055869186425740174,
+        0.05736258281824647,
+        0.05495945920121423,
+        0.054296577620702835,
+        0.05503622997578791
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Export\u003cbr\u003ebenchmark=009 Export group by results to Arrow\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Export",
+      "line": {
+        "color": "#EECA3B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Export",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.010516501315430223,
+        0.01117625026253074,
+        0.010526512515735408,
+        0.011381223760166296,
+        0.010657498783149281,
+        0.011227791702818773,
+        0.008939841284571447,
+        0.009106356414985181,
+        0.008980255934496051,
+        0.008927674322101762,
+        0.008787953032415178,
+        0.008450382511588087,
+        0.011249235044220861
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Export\u003cbr\u003ebenchmark=014 Export join results to Pandas\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Export",
+      "line": {
+        "color": "#EECA3B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Export",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.4.0",
+        "0.3.4",
+        "0.3.2",
+        "0.3.1",
+        "0.3.0",
+        "0.2.9",
+        "0.2.8",
+        "0.2.7"
+      ],
+      "xaxis": "x",
+      "y": [
+        1.1195532832007866,
+        0.9909444878983086,
+        1.1678740975909379,
+        0.8181060599794544,
+        0.8418642210879719,
+        0.8542073668140292,
+        0.8891987187682472,
+        0.981420537025938
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Export\u003cbr\u003ebenchmark=015 Export join results to Arrow\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Export",
+      "line": {
+        "color": "#EECA3B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Export",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.2",
+        "0.10.3",
+        "0.10.1",
+        "1.0.0",
+        "0.10.0",
+        "1.0.1-dev1125",
+        "0.9.2",
+        "0.9.1",
+        "0.9.0",
+        "0.8.1",
+        "0.7.1",
+        "0.6.1",
+        "0.5.1"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0639287452835945,
+        0.06544257161979218,
+        0.06583354613862875,
+        0.06728592690261559,
+        0.06913514364649986,
+        0.06690322751129123,
+        0.055783684278620245,
+        0.05409564311500536,
+        0.05535550079619961,
+        0.05507930650277647,
+        0.05293093138514821,
+        0.05322418085138429,
+        0.10669432893056412
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
+      "fillpattern": {
+        "shape": ""
+      },
+      "hovertemplate": "Benchmark Type=Export\u003cbr\u003ebenchmark=016 Export join results to Parquet\u003cbr\u003eDuckDB Version=%{x}\u003cbr\u003eTime Relative to Latest Version=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "Export",
+      "line": {
+        "color": "#EECA3B"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "Export",
+      "orientation": "v",
+      "showlegend": false,
+      "stackgroup": "1",
+      "x": [
+        "0.10.3",
+        "1.0.0",
+        "1.0.1-dev1125"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.08080303641568357,
+        0.08333566328478677,
+        0.08287314924683084
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    }
+  ],
+  "layout": {
+    "template": {
+      "data": {
+        "barpolar": [
+          {
+            "marker": {
+              "line": {
+                "color": "white",
+                "width": 0.5
+              },
+              "pattern": {
+                "fillmode": "overlay",
+                "size": 10,
+                "solidity": 0.2
+              }
+            },
+            "type": "barpolar"
+          }
+        ],
+        "bar": [
+          {
+            "error_x": {
+              "color": "#2a3f5f"
+            },
+            "error_y": {
+              "color": "#2a3f5f"
+            },
+            "marker": {
+              "line": {
+                "color": "white",
+                "width": 0.5
+              },
+              "pattern": {
+                "fillmode": "overlay",
+                "size": 10,
+                "solidity": 0.2
+              }
+            },
+            "type": "bar"
+          }
+        ],
+        "carpet": [
+          {
+            "aaxis": {
+              "endlinecolor": "#2a3f5f",
+              "gridcolor": "#C8D4E3",
+              "linecolor": "#C8D4E3",
+              "minorgridcolor": "#C8D4E3",
+              "startlinecolor": "#2a3f5f"
+            },
+            "baxis": {
+              "endlinecolor": "#2a3f5f",
+              "gridcolor": "#C8D4E3",
+              "linecolor": "#C8D4E3",
+              "minorgridcolor": "#C8D4E3",
+              "startlinecolor": "#2a3f5f"
+            },
+            "type": "carpet"
+          }
+        ],
+        "choropleth": [
+          {
+            "colorbar": {
+              "outlinewidth": 0,
+              "ticks": ""
+            },
+            "type": "choropleth"
+          }
+        ],
+        "contourcarpet": [
+          {
+            "colorbar": {
+              "outlinewidth": 0,
+              "ticks": ""
+            },
+            "type": "contourcarpet"
+          }
+        ],
+        "contour": [
+          {
+            "colorbar": {
+              "outlinewidth": 0,
+              "ticks": ""
+            },
+            "colorscale": [
+              [
+                0.0,
+                "#0d0887"
+              ],
+              [
+                0.1111111111111111,
+                "#46039f"
+              ],
+              [
+                0.2222222222222222,
+                "#7201a8"
+              ],
+              [
+                0.3333333333333333,
+                "#9c179e"
+              ],
+              [
+                0.4444444444444444,
+                "#bd3786"
+              ],
+              [
+                0.5555555555555556,
+                "#d8576b"
+              ],
+              [
+                0.6666666666666666,
+                "#ed7953"
+              ],
+              [
+                0.7777777777777778,
+                "#fb9f3a"
+              ],
+              [
+                0.8888888888888888,
+                "#fdca26"
+              ],
+              [
+                1.0,
+                "#f0f921"
+              ]
+            ],
+            "type": "contour"
+          }
+        ],
+        "heatmapgl": [
+          {
+            "colorbar": {
+              "outlinewidth": 0,
+              "ticks": ""
+            },
+            "colorscale": [
+              [
+                0.0,
+                "#0d0887"
+              ],
+              [
+                0.1111111111111111,
+                "#46039f"
+              ],
+              [
+                0.2222222222222222,
+                "#7201a8"
+              ],
+              [
+                0.3333333333333333,
+                "#9c179e"
+              ],
+              [
+                0.4444444444444444,
+                "#bd3786"
+              ],
+              [
+                0.5555555555555556,
+                "#d8576b"
+              ],
+              [
+                0.6666666666666666,
+                "#ed7953"
+              ],
+              [
+                0.7777777777777778,
+                "#fb9f3a"
+              ],
+              [
+                0.8888888888888888,
+                "#fdca26"
+              ],
+              [
+                1.0,
+                "#f0f921"
+              ]
+            ],
+            "type": "heatmapgl"
+          }
+        ],
+        "heatmap": [
+          {
+            "colorbar": {
+              "outlinewidth": 0,
+              "ticks": ""
+            },
+            "colorscale": [
+              [
+                0.0,
+                "#0d0887"
+              ],
+              [
+                0.1111111111111111,
+                "#46039f"
+              ],
+              [
+                0.2222222222222222,
+                "#7201a8"
+              ],
+              [
+                0.3333333333333333,
+                "#9c179e"
+              ],
+              [
+                0.4444444444444444,
+                "#bd3786"
+              ],
+              [
+                0.5555555555555556,
+                "#d8576b"
+              ],
+              [
+                0.6666666666666666,
+                "#ed7953"
+              ],
+              [
+                0.7777777777777778,
+                "#fb9f3a"
+              ],
+              [
+                0.8888888888888888,
+                "#fdca26"
+              ],
+              [
+                1.0,
+                "#f0f921"
+              ]
+            ],
+            "type": "heatmap"
+          }
+        ],
+        "histogram2dcontour": [
+          {
+            "colorbar": {
+              "outlinewidth": 0,
+              "ticks": ""
+            },
+            "colorscale": [
+              [
+                0.0,
+                "#0d0887"
+              ],
+              [
+                0.1111111111111111,
+                "#46039f"
+              ],
+              [
+                0.2222222222222222,
+                "#7201a8"
+              ],
+              [
+                0.3333333333333333,
+                "#9c179e"
+              ],
+              [
+                0.4444444444444444,
+                "#bd3786"
+              ],
+              [
+                0.5555555555555556,
+                "#d8576b"
+              ],
+              [
+                0.6666666666666666,
+                "#ed7953"
+              ],
+              [
+                0.7777777777777778,
+                "#fb9f3a"
+              ],
+              [
+                0.8888888888888888,
+                "#fdca26"
+              ],
+              [
+                1.0,
+                "#f0f921"
+              ]
+            ],
+            "type": "histogram2dcontour"
+          }
+        ],
+        "histogram2d": [
+          {
+            "colorbar": {
+              "outlinewidth": 0,
+              "ticks": ""
+            },
+            "colorscale": [
+              [
+                0.0,
+                "#0d0887"
+              ],
+              [
+                0.1111111111111111,
+                "#46039f"
+              ],
+              [
+                0.2222222222222222,
+                "#7201a8"
+              ],
+              [
+                0.3333333333333333,
+                "#9c179e"
+              ],
+              [
+                0.4444444444444444,
+                "#bd3786"
+              ],
+              [
+                0.5555555555555556,
+                "#d8576b"
+              ],
+              [
+                0.6666666666666666,
+                "#ed7953"
+              ],
+              [
+                0.7777777777777778,
+                "#fb9f3a"
+              ],
+              [
+                0.8888888888888888,
+                "#fdca26"
+              ],
+              [
+                1.0,
+                "#f0f921"
+              ]
+            ],
+            "type": "histogram2d"
+          }
+        ],
+        "histogram": [
+          {
+            "marker": {
+              "pattern": {
+                "fillmode": "overlay",
+                "size": 10,
+                "solidity": 0.2
+              }
+            },
+            "type": "histogram"
+          }
+        ],
+        "mesh3d": [
+          {
+            "colorbar": {
+              "outlinewidth": 0,
+              "ticks": ""
+            },
+            "type": "mesh3d"
+          }
+        ],
+        "parcoords": [
+          {
+            "line": {
+              "colorbar": {
+                "outlinewidth": 0,
+                "ticks": ""
+              }
+            },
+            "type": "parcoords"
+          }
+        ],
+        "pie": [
+          {
+            "automargin": true,
+            "type": "pie"
+          }
+        ],
+        "scatter3d": [
+          {
+            "line": {
+              "colorbar": {
+                "outlinewidth": 0,
+                "ticks": ""
+              }
+            },
+            "marker": {
+              "colorbar": {
+                "outlinewidth": 0,
+                "ticks": ""
+              }
+            },
+            "type": "scatter3d"
+          }
+        ],
+        "scattercarpet": [
+          {
+            "marker": {
+              "colorbar": {
+                "outlinewidth": 0,
+                "ticks": ""
+              }
+            },
+            "type": "scattercarpet"
+          }
+        ],
+        "scattergeo": [
+          {
+            "marker": {
+              "colorbar": {
+                "outlinewidth": 0,
+                "ticks": ""
+              }
+            },
+            "type": "scattergeo"
+          }
+        ],
+        "scattergl": [
+          {
+            "marker": {
+              "colorbar": {
+                "outlinewidth": 0,
+                "ticks": ""
+              }
+            },
+            "type": "scattergl"
+          }
+        ],
+        "scattermapbox": [
+          {
+            "marker": {
+              "colorbar": {
+                "outlinewidth": 0,
+                "ticks": ""
+              }
+            },
+            "type": "scattermapbox"
+          }
+        ],
+        "scatterpolargl": [
+          {
+            "marker": {
+              "colorbar": {
+                "outlinewidth": 0,
+                "ticks": ""
+              }
+            },
+            "type": "scatterpolargl"
+          }
+        ],
+        "scatterpolar": [
+          {
+            "marker": {
+              "colorbar": {
+                "outlinewidth": 0,
+                "ticks": ""
+              }
+            },
+            "type": "scatterpolar"
+          }
+        ],
+        "scatter": [
+          {
+            "fillpattern": {
+              "fillmode": "overlay",
+              "size": 10,
+              "solidity": 0.2
+            },
+            "type": "scatter"
+          }
+        ],
+        "scatterternary": [
+          {
+            "marker": {
+              "colorbar": {
+                "outlinewidth": 0,
+                "ticks": ""
+              }
+            },
+            "type": "scatterternary"
+          }
+        ],
+        "surface": [
+          {
+            "colorbar": {
+              "outlinewidth": 0,
+              "ticks": ""
+            },
+            "colorscale": [
+              [
+                0.0,
+                "#0d0887"
+              ],
+              [
+                0.1111111111111111,
+                "#46039f"
+              ],
+              [
+                0.2222222222222222,
+                "#7201a8"
+              ],
+              [
+                0.3333333333333333,
+                "#9c179e"
+              ],
+              [
+                0.4444444444444444,
+                "#bd3786"
+              ],
+              [
+                0.5555555555555556,
+                "#d8576b"
+              ],
+              [
+                0.6666666666666666,
+                "#ed7953"
+              ],
+              [
+                0.7777777777777778,
+                "#fb9f3a"
+              ],
+              [
+                0.8888888888888888,
+                "#fdca26"
+              ],
+              [
+                1.0,
+                "#f0f921"
+              ]
+            ],
+            "type": "surface"
+          }
+        ],
+        "table": [
+          {
+            "cells": {
+              "fill": {
+                "color": "#EBF0F8"
+              },
+              "line": {
+                "color": "white"
+              }
+            },
+            "header": {
+              "fill": {
+                "color": "#C8D4E3"
+              },
+              "line": {
+                "color": "white"
+              }
+            },
+            "type": "table"
+          }
+        ]
+      },
+      "layout": {
+        "annotationdefaults": {
+          "arrowcolor": "#2a3f5f",
+          "arrowhead": 0,
+          "arrowwidth": 1
+        },
+        "autotypenumbers": "strict",
+        "coloraxis": {
+          "colorbar": {
+            "outlinewidth": 0,
+            "ticks": ""
+          }
+        },
+        "colorscale": {
+          "diverging": [
+            [
+              0,
+              "#8e0152"
+            ],
+            [
+              0.1,
+              "#c51b7d"
+            ],
+            [
+              0.2,
+              "#de77ae"
+            ],
+            [
+              0.3,
+              "#f1b6da"
+            ],
+            [
+              0.4,
+              "#fde0ef"
+            ],
+            [
+              0.5,
+              "#f7f7f7"
+            ],
+            [
+              0.6,
+              "#e6f5d0"
+            ],
+            [
+              0.7,
+              "#b8e186"
+            ],
+            [
+              0.8,
+              "#7fbc41"
+            ],
+            [
+              0.9,
+              "#4d9221"
+            ],
+            [
+              1,
+              "#276419"
+            ]
+          ],
+          "sequential": [
+            [
+              0.0,
+              "#0d0887"
+            ],
+            [
+              0.1111111111111111,
+              "#46039f"
+            ],
+            [
+              0.2222222222222222,
+              "#7201a8"
+            ],
+            [
+              0.3333333333333333,
+              "#9c179e"
+            ],
+            [
+              0.4444444444444444,
+              "#bd3786"
+            ],
+            [
+              0.5555555555555556,
+              "#d8576b"
+            ],
+            [
+              0.6666666666666666,
+              "#ed7953"
+            ],
+            [
+              0.7777777777777778,
+              "#fb9f3a"
+            ],
+            [
+              0.8888888888888888,
+              "#fdca26"
+            ],
+            [
+              1.0,
+              "#f0f921"
+            ]
+          ],
+          "sequentialminus": [
+            [
+              0.0,
+              "#0d0887"
+            ],
+            [
+              0.1111111111111111,
+              "#46039f"
+            ],
+            [
+              0.2222222222222222,
+              "#7201a8"
+            ],
+            [
+              0.3333333333333333,
+              "#9c179e"
+            ],
+            [
+              0.4444444444444444,
+              "#bd3786"
+            ],
+            [
+              0.5555555555555556,
+              "#d8576b"
+            ],
+            [
+              0.6666666666666666,
+              "#ed7953"
+            ],
+            [
+              0.7777777777777778,
+              "#fb9f3a"
+            ],
+            [
+              0.8888888888888888,
+              "#fdca26"
+            ],
+            [
+              1.0,
+              "#f0f921"
+            ]
+          ]
+        },
+        "colorway": [
+          "#636efa",
+          "#EF553B",
+          "#00cc96",
+          "#ab63fa",
+          "#FFA15A",
+          "#19d3f3",
+          "#FF6692",
+          "#B6E880",
+          "#FF97FF",
+          "#FECB52"
+        ],
+        "font": {
+          "color": "#2a3f5f"
+        },
+        "geo": {
+          "bgcolor": "white",
+          "lakecolor": "white",
+          "landcolor": "white",
+          "showlakes": true,
+          "showland": true,
+          "subunitcolor": "#C8D4E3"
+        },
+        "hoverlabel": {
+          "align": "left"
+        },
+        "hovermode": "closest",
+        "mapbox": {
+          "style": "light"
+        },
+        "paper_bgcolor": "white",
+        "plot_bgcolor": "white",
+        "polar": {
+          "angularaxis": {
+            "gridcolor": "#EBF0F8",
+            "linecolor": "#EBF0F8",
+            "ticks": ""
+          },
+          "bgcolor": "white",
+          "radialaxis": {
+            "gridcolor": "#EBF0F8",
+            "linecolor": "#EBF0F8",
+            "ticks": ""
+          }
+        },
+        "scene": {
+          "xaxis": {
+            "backgroundcolor": "white",
+            "gridcolor": "#DFE8F3",
+            "gridwidth": 2,
+            "linecolor": "#EBF0F8",
+            "showbackground": true,
+            "ticks": "",
+            "zerolinecolor": "#EBF0F8"
+          },
+          "yaxis": {
+            "backgroundcolor": "white",
+            "gridcolor": "#DFE8F3",
+            "gridwidth": 2,
+            "linecolor": "#EBF0F8",
+            "showbackground": true,
+            "ticks": "",
+            "zerolinecolor": "#EBF0F8"
+          },
+          "zaxis": {
+            "backgroundcolor": "white",
+            "gridcolor": "#DFE8F3",
+            "gridwidth": 2,
+            "linecolor": "#EBF0F8",
+            "showbackground": true,
+            "ticks": "",
+            "zerolinecolor": "#EBF0F8"
+          }
+        },
+        "shapedefaults": {
+          "line": {
+            "color": "#2a3f5f"
+          }
+        },
+        "ternary": {
+          "aaxis": {
+            "gridcolor": "#DFE8F3",
+            "linecolor": "#A2B1C6",
+            "ticks": ""
+          },
+          "baxis": {
+            "gridcolor": "#DFE8F3",
+            "linecolor": "#A2B1C6",
+            "ticks": ""
+          },
+          "bgcolor": "white",
+          "caxis": {
+            "gridcolor": "#DFE8F3",
+            "linecolor": "#A2B1C6",
+            "ticks": ""
+          }
+        },
+        "title": {
+          "x": 0.05
+        },
+        "xaxis": {
+          "automargin": true,
+          "gridcolor": "#EBF0F8",
+          "linecolor": "#EBF0F8",
+          "ticks": "",
+          "title": {
+            "standoff": 15
+          },
+          "zerolinecolor": "#EBF0F8",
+          "zerolinewidth": 2
+        },
+        "yaxis": {
+          "automargin": true,
+          "gridcolor": "#EBF0F8",
+          "linecolor": "#EBF0F8",
+          "ticks": "",
+          "title": {
+            "standoff": 15
+          },
+          "zerolinecolor": "#EBF0F8",
+          "zerolinewidth": 2
+        }
+      }
+    },
+    "xaxis": {
+      "anchor": "y",
+      "domain": [
+        0.0,
+        1.0
+      ],
+      "title": {
+        "text": "DuckDB Version"
+      }
+    },
+    "yaxis": {
+      "anchor": "x",
+      "domain": [
+        0.0,
+        1.0
+      ],
+      "title": {
+        "text": "Time Relative to Latest Version"
+      }
+    },
+    "legend": {
+      "title": {
+        "text": "Benchmark Type"
+      },
+      "tracegroupgap": 0
+    },
+    "margin": {
+      "t": 60
+    }
+  }
+}
