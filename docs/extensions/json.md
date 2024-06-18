@@ -241,6 +241,8 @@ Example usage:
 SELECT * FROM read_json('my_file1.json', columns = {duck: 'INTEGER'});
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | duck |
 |:---|
 | 42 |
@@ -269,7 +271,7 @@ SELECT goose, duck FROM read_json_auto('*.json.gz');
 SELECT goose, duck FROM '*.json.gz'; -- equivalent
 ```
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | goose | duck |
 |:---|:---|
@@ -307,7 +309,7 @@ Can be queried exactly the same as a JSON file that contains `'unstructured'` JS
 
 Both can be read as the table:
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | duck | goose |
 |:---|:---|
@@ -325,7 +327,7 @@ The `records` parameter specifies whether the JSON contains records that should 
 
 Results in two columns:
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | duck | goose |
 |:---|:---|
@@ -334,7 +336,7 @@ Results in two columns:
 
 You can read the same file with `records` set to `'false'`, to get a single column, which is a `STRUCT` containing the data:
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | json |
 |:---|
@@ -591,6 +593,8 @@ SELECT
 FROM example;
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 |   family   |           species            |
 |------------|------------------------------|
 | "anatidae" | ["duck","goose","swan",null] |
@@ -602,8 +606,9 @@ WITH extracted AS (
     SELECT json_extract(j, ['family', 'species']) AS extracted_list
     FROM example
 )
-SELECT extracted_list[1] AS family,
-       extracted_list[2] AS species
+SELECT
+    extracted_list[1] AS family,
+    extracted_list[2] AS species
 FROM extracted;
 ```
 
@@ -1028,6 +1033,8 @@ FROM (
         '[[ ]]'::JSON AS d
     );
 ```
+
+<div class="narrow_table monospace_table"></div>
 
 | (a != b) | (c != d) | (c[0] = d[0]) | (a = c[0]) | (b != c[0]) |
 |----------|----------|---------------|------------|-------------|
