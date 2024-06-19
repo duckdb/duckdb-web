@@ -13,16 +13,24 @@
 	padding-right: 25px;
 	cursor: pointer;
 	font-size: 14px;
+	-webkit-transition: background-color .3s;
+	-o-transition: background-color .3s;
 	transition: background-color .3s;
 	span::after{
 		content: "→";
 		font-family: "DuckDB-Symbol";
 		margin-left: 4px;
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
 		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
 		position: absolute;
 	}
 	&:hover span::after{
-		transform: translateX(3px);
+		-webkit-transform: translateX(3px);
+			-ms-transform: translateX(3px);
+				transform: translateX(3px);
 	}
 }
 
@@ -31,32 +39,46 @@
 	//color: darken($duckDBgrey,20);
 	text-decoration: underline;
 	font-size: 14px;
+	-webkit-transition: color .3s;
+	-o-transition: color .3s;
 	transition: color .3s;
 	span::after{
 		content: "→";
 		font-family: "DuckDB-Symbol";
 		margin-left: 6px;
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
 		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
 		position: absolute;
 		text-decoration: none;
 		line-height: 1.5;
 	}
 	&:hover span::after{
-		transform: translateX(3px);
+		-webkit-transform: translateX(3px);
+			-ms-transform: translateX(3px);
+				transform: translateX(3px);
 	}
 }
 
 img{
 	margin: 0 auto;
 	border:none;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
+	-webkit-box-pack: center;
+		-ms-flex-pack: center;
+			justify-content: center;
 }
 table {
 	min-width: 100%;
 	max-width: 100%;
 	width: 100%;
-	justify-content: center;
+	-webkit-box-pack: center;
+		-ms-flex-pack: center;
+			justify-content: center;
 	text-align: center;
 	margin: 6px 0;
 	font-variant-numeric: tabular-nums;
@@ -70,12 +92,14 @@ table td, table th {
 	color: #000000;
 }
 code, pre {
-    font-family: "JetBrainsMono-Regular","Lucida Console",monospace;
-    font-size: 16px;
+	font-family: "JetBrainsMono-Regular","Lucida Console",monospace;
+	font-size: 16px;
 }
 h4 {
-	margin-block-start:0em;
-	margin-block-end:0em;
+	-webkit-margin-before:0em;
+			margin-block-start:0em;
+	-webkit-margin-after:0em;
+			margin-block-end:0em;
 	font-size: 110%;
 	font-weight: bold;
 }
@@ -103,6 +127,13 @@ h5 {
 	font-size: 100%;
 	font-weight: bold;
 }
+
+h1, h2, h3, h4, h5{
+	code, pre{
+		font-size: inherit;
+	}
+}
+
 .newswrap{
 	min-height: calc(100vh - 111px);
 	margin-top: 70px;
@@ -111,9 +142,14 @@ h5 {
 		max-width: $maxContentWidth;
 	}
 	.newstiles{
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
+		-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+		-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
+				justify-content: space-between;
 		row-gap: 50px;
 		&::after {
 			content: "";
@@ -227,8 +263,12 @@ h5 {
 			}
 		}
 		.infoline{
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
-			align-items: center;
+			-webkit-box-align: center;
+				-ms-flex-align: center;
+					align-items: center;
 			.icon{
 				width: 45px;
 				height: 45px;
@@ -240,7 +280,8 @@ h5 {
 				overflow: hidden;
 				>img{
 					display: block;
-					object-fit: cover;
+					-o-object-fit: cover;
+					   object-fit: cover;
 					width: 100%;
 					height: 100%;
 				}
@@ -257,15 +298,15 @@ h5 {
 		.postpreview{
 			margin: 0 auto;
 			margin-top: 80px;
-		        padding-bottom: 60px;
-		        border-bottom: 1px solid rgba(230, 230, 230, 1);
+				padding-bottom: 60px;
+				border-bottom: 1px solid rgba(230, 230, 230, 1);
 			h2{
 				a{
 					color: black;
 					text-decoration: none;
 				}
 			}
-		 	
+			 
 		}
 		*/
 		a.backtoarchive,
@@ -399,7 +440,8 @@ h5 {
 			}
 			ul li{
 				margin: 4px 0px;
-				font-feature-settings: 'tnum' on;
+				-webkit-font-feature-settings: 'tnum' on;
+						font-feature-settings: 'tnum' on;
 			}
 		}
 	}
@@ -453,21 +495,21 @@ footer{
 		h2 {
 			font-size: 25px;
 			line-height: 28px;
-    			margin-top: 35px;
-    			margin-bottom: 20px;
+				margin-top: 35px;
+				margin-bottom: 20px;
 		}
 		ul li{
 			font-size: 15px;
 			line-height: 23px;
 		}
 		ul li ul {
-   			 margin-top: 0px;
+				margin-top: 0px;
 			}
 	}
 
 	code, pre{
 		font-size: 14px;
-    		line-height: 1.5em;
+			line-height: 1.5em;
 	}
 	
 	.newswrap .postwrap .post-list h1,
