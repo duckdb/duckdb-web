@@ -20,8 +20,6 @@ GEM
   specs:
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    autoprefixer-rails (9.8.6.5)
-      execjs
     bigdecimal (3.1.8)
     coffee-script (2.4.1)
       coffee-script-source
@@ -96,8 +94,6 @@ GEM
       safe_yaml (~> 1.0)
       terminal-table (>= 1.8, < 4.0)
       webrick (~> 1.7)
-    jekyll-autoprefixer (1.0.2)
-      autoprefixer-rails (~> 9.3)
     jekyll-avatar (0.8.0)
       jekyll (>= 3.0, < 5.0)
     jekyll-coffeescript (1.1.1)
@@ -276,7 +272,6 @@ PLATFORMS
 DEPENDENCIES
   github-pages-health-check (= 1.18.2)
   jekyll (= 4.3.3)
-  jekyll-autoprefixer (~> 1.0)
   jekyll-avatar (= 0.8.0)
   jekyll-coffeescript (= 1.1.1)
   jekyll-default-layout (= 0.1.5)
