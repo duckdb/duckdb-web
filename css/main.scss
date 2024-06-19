@@ -74,16 +74,24 @@
 	padding-right: 25px;
 	cursor: pointer;
 	font-size: 14px;
+	-webkit-transition: background-color .3s;
+	-o-transition: background-color .3s;
 	transition: background-color .3s;
 	span::after{
 		content: "→";
 		font-family: "DuckDB-Symbol";
 		margin-left: 4px;
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
 		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
 		position: absolute;
 	}
 	&:hover span::after{
-		transform: translateX(3px);
+		-webkit-transform: translateX(3px);
+			-ms-transform: translateX(3px);
+				transform: translateX(3px);
 	}
 }
 
@@ -91,18 +99,26 @@
 	color: darken($duckDBgrey,20);
 	text-decoration: underline;
 	font-size: 14px;
+	-webkit-transition: color .3s;
+	-o-transition: color .3s;
 	transition: color .3s;
 	span::after{
 		content: "→";
 		font-family: "DuckDB-Symbol";
 		margin-left: 6px;
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
 		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
 		position: absolute;
 		text-decoration: none;
 		line-height: 1.5;
 	}
 	&:hover span::after{
-		transform: translateX(3px);
+		-webkit-transform: translateX(3px);
+			-ms-transform: translateX(3px);
+				transform: translateX(3px);
 	}
 }
 
@@ -134,6 +150,8 @@ a, a:active, a:focus, button, button:active, button:focus {
 p a{
 	color: black;
 	text-decoration: underline;
+	-webkit-transition: color .3s;
+	-o-transition: color .3s;
 	transition: color .3s;
 	&:hover{
 		color: $blue;
@@ -254,9 +272,14 @@ img.downloadlogo{
 }
 
 .flexwrap{
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+	-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+			justify-content: space-between;
 }
 
 main.f-md{
@@ -313,7 +336,9 @@ header .headerline{
 		height: 100%;
 		margin: 0 auto;
 		color: white;
-		align-items: center;
+		-webkit-box-align: center;
+			-ms-flex-align: center;
+				align-items: center;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -342,7 +367,9 @@ header .headerline{
 				display: -ms-flexbox;
 				display: flex;
 				height: 100%;
-				align-items: center;
+				-webkit-box-align: center;
+					-ms-flex-align: center;
+						align-items: center;
 				> div{
 					margin-left: 35px;
 					position: relative;
@@ -368,7 +395,8 @@ header .headerline{
 					border-top: 0;
 					padding: 15px 10px;
 					background: rgba(9, 9, 9, 0.85);
-					backdrop-filter: blur(5px);
+					-webkit-backdrop-filter: blur(5px);
+							backdrop-filter: blur(5px);
 					position: absolute;
 					top: 65px;
 					left: -15px;
@@ -377,8 +405,13 @@ header .headerline{
 					transition: all .3s ease;
 					opacity: 0;
 					visibility: hidden;
+					display: -webkit-box;
+					display: -ms-flexbox;
 					display: flex;
-					flex-direction: column;
+					-webkit-box-orient: vertical;
+					-webkit-box-direction: normal;
+						-ms-flex-direction: column;
+							flex-direction: column;
 					margin: 0;
 					li{	
 						a{
@@ -390,6 +423,8 @@ header .headerline{
 							display: block;
 							font-size: 14px;
 							white-space: nowrap;
+							-webkit-transition: all .2s;
+							-o-transition: all .2s;
 							transition: all .2s;
 							margin-top: -3px;
 							margin-bottom: -3px;
@@ -458,6 +493,8 @@ header .headerline{
 					color: #A5A5A5;
 					margin-left: 25px;
 					position: relative;
+					-webkit-transition: color .3s;
+					-o-transition: color .3s;
 					transition: color .3s;
 					&::before{
 						content: " ";
@@ -468,6 +505,8 @@ header .headerline{
 						position: absolute;
 						left: -22px;
 						top: 1px;
+						-webkit-transition: all 350ms cubic-bezier(.47,1.64,.41,.8);
+						-o-transition: all 350ms cubic-bezier(.47,1.64,.41,.8);
 						transition: all 350ms cubic-bezier(.47,1.64,.41,.8);
 					}
 				}
@@ -501,9 +540,15 @@ body.documentation header .headerline .headercontent .landingmenu nav .search_ic
 	background-color: $purple;
 	color: white;
 	font-size: $fontSize16;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	-webkit-box-align: center;
+		-ms-flex-align: center;
+			align-items: center;
+	-webkit-box-pack: center;
+		-ms-flex-pack: center;
+			justify-content: center;
 	overflow: hidden;
 	padding: 15px 20px;
 	z-index: 1000;
@@ -522,7 +567,9 @@ body.documentation header .headerline .headercontent .landingmenu nav .search_ic
 		background-repeat: no-repeat;
 	}
 	@media only screen and (max-width: 980px) {
-		justify-content: flex-start;
+		-webkit-box-pack: start;
+			-ms-flex-pack: start;
+				justify-content: flex-start;
 		text-align: left;
 		padding: 15px 65px 15px 20px;
 	}
@@ -543,8 +590,12 @@ body.documentation header .headerline .headercontent .landingmenu nav .search_ic
 	border-radius: 100px;
 	width: 41px;
 	height: 41px;
-	align-items: center; 
-	justify-content: center; 
+	-webkit-box-align: center;
+		-ms-flex-align: center;
+			align-items: center; 
+	-webkit-box-pack: center; 
+		-ms-flex-pack: center; 
+			justify-content: center; 
 }
 
 .hamburger-inner, .hamburger-inner:after, .hamburger-inner:before{
@@ -607,13 +658,22 @@ footer{
 			display: -webkit-box;
 			display: -ms-flexbox;
 			display: flex;
-			justify-content: space-between;
-			column-gap: 80px;
+			-webkit-box-pack: justify;
+				-ms-flex-pack: justify;
+					justify-content: space-between;
+			-webkit-column-gap: 80px;
+			   -moz-column-gap: 80px;
+					column-gap: 80px;
 			font-size: 14px;
-			flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+				flex-wrap: wrap;
 			.footernavigation{
+				display: -webkit-box;
+				display: -ms-flexbox;
 				display: flex;
-				column-gap: 50px;
+				-webkit-column-gap: 50px;
+				   -moz-column-gap: 50px;
+						column-gap: 50px;
 				a{
 					line-height: 2;
 				}
@@ -780,7 +840,11 @@ body.documentation main .wrap.frequentlyaskedquestions{
 			position: absolute;
 			right: 0px;
 			top: -5px;
+			-webkit-transition: -webkit-transform .3s;
+			transition: -webkit-transform .3s;
+			-o-transition: transform .3s;
 			transition: transform .3s;
+			transition: transform .3s, -webkit-transform .3s;
 			cursor: pointer;
 		}
 		a:hover{
@@ -790,11 +854,15 @@ body.documentation main .wrap.frequentlyaskedquestions{
 	.qa-wrap{
 		padding: 20px;
 		background-color: #F9F9F9;
+		-webkit-transition: background-color .3s;
+		-o-transition: background-color .3s;
 		transition: background-color .3s;
 		margin-bottom: 5px;
 		border-radius: 10px;
 		&.open h3::after{
-			transform: rotate(180deg);
+			-webkit-transform: rotate(180deg);
+				-ms-transform: rotate(180deg);
+					transform: rotate(180deg);
 		}
 		&:hover{
 			background-color: #f5f5f5;
@@ -828,9 +896,14 @@ section.blog,
 	.newswrap, .newstileswrap{
 		margin-top: 70px;
 		margin-bottom: 70px;
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
+		-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+		-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
+				justify-content: space-between;
 	}
 	.postpreview{
 		width: calc(33.33% - 15px);
@@ -925,6 +998,8 @@ body.installation{
 		margin-bottom: 100px;
 	}
 	.select{
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
 		border-bottom: 1px solid $black200;
 		padding: 25px 20px;
@@ -932,7 +1007,8 @@ body.installation{
 			font-size: 17px!important;
 			font-weight: 600!important;
 			width: 162px;
-			flex-shrink: 0;
+			-ms-flex-negative: 0;
+				flex-shrink: 0;
 			margin: 0!important;
 			letter-spacing: -0.17px;
 			padding-top: 8px;
@@ -944,10 +1020,13 @@ body.installation{
 			display: -webkit-box;
 			display: -ms-flexbox;
 			display: flex;
-			flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+				flex-wrap: wrap;
 			pointer-events: all;
 			gap: 5px;
-			align-items: center;
+			-webkit-box-align: center;
+				-ms-flex-align: center;
+					align-items: center;
 			li{
 				line-height: 1;
 				display: block;
@@ -958,8 +1037,13 @@ body.installation{
 				font-weight: 500;
 				font-size: 14px;
 				cursor: pointer;
+				-webkit-transition: background-color .2s;
+				-o-transition: background-color .2s;
 				transition: background-color .2s;
-				user-select: none;
+				-webkit-user-select: none;
+				   -moz-user-select: none;
+					-ms-user-select: none;
+						user-select: none;
 				span.versioninfo{
 					color: darken($duckDBlightgrey,40);
 				}
@@ -981,6 +1065,8 @@ body.installation{
 		}
 	}
 	.output{
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
 		padding: 25px 20px;
 		position: relative;
@@ -988,7 +1074,8 @@ body.installation{
 			font-size: 17px!important;
 			font-weight: 600!important;
 			width: 162px;
-			flex-shrink: 0;
+			-ms-flex-negative: 0;
+				flex-shrink: 0;
 			margin: 0!important;
 			letter-spacing: -0.17px;
 			padding-top: 8px;
@@ -1025,6 +1112,8 @@ body.installation{
 		border: 1px solid $black400;
 		text-decoration: none;
 		padding: 0px 7px;
+		-webkit-transition: background-color .3s, border-color 3s;
+		-o-transition: background-color .3s, border-color 3s;
 		transition: background-color .3s, border-color 3s;
 		&:hover{
 			color: black;
@@ -1042,6 +1131,8 @@ div.bodywrapper{
 		font-weight: normal;
 		a.headerlink{
 			opacity: 0;
+			-webkit-transition: opacity .3s;
+			-o-transition: opacity .3s;
 			transition: opacity .3s;
 			padding-left: 4px;
 		}

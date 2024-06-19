@@ -1,11 +1,13 @@
 ---
 ---
 
+
+
 /** DUCKDB HOME CSS **/
 
 @import 'variables';
 @import 'mixins';
-//@import url(variables.css);
+
 
 body.landing{
 	font-size: $fontSizep;
@@ -208,7 +210,7 @@ body.landing{
 		}
 	}
 	
-	/** STYLE SELECT BOX ANYWAYS – SO IT IS COLORED DIRECTLY **/
+	/** STYLE SELECT BOX ANYWAYS – SO IT IS COLORED DIRECTLY **/
 	select {
 	  -webkit-appearance: none;
 		 -moz-appearance: none;
@@ -233,7 +235,7 @@ body.landing{
 	select {
 	  display: -ms-grid;
 	  display: grid;
-		  grid-template-areas: "select";
+			  grid-template-areas: "select";
 	  -webkit-box-align: center;
 		  -ms-flex-align: center;
 			  align-items: center;
@@ -472,7 +474,9 @@ body.landing{
 			}
 			.install{
 				width: calc(100% - 450px);
-				tab-size: 4;
+				-moz-tab-size: 4;
+				  -o-tab-size: 4;
+					 tab-size: 4;
 			}
 		}
 	}
@@ -497,8 +501,8 @@ body.landing{
 		.window .topbar{
 			position: relative;
 			&::after{
-				background: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
 				background: -o-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+				background: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
 				background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
 				width: 25px;
 				position: absolute;
@@ -512,8 +516,8 @@ body.landing{
 				z-index: 10;
 			}
 			&::before{
-				background: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 				background: -o-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+				background: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 				background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
 				width: 25px;
 				position: absolute;
