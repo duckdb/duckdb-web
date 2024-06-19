@@ -317,3 +317,4 @@ environment.pickle
 .ruby-version
 
 duckdb-web-venv/
+Gemfile.lock
