@@ -253,12 +253,12 @@ so over the years several approaches have been taken to improve performance.
 Before explaining how DuckDB implements windowed aggregation,
 we need to take a short detour through how ordinary aggregates are implemented.
 Aggregate "functions" are implemented using three required operations and one optional operation:
-* *Initialize* - Creates a state that will be updated.
+* *Initialize* – Creates a state that will be updated.
 For `SUM`, this is the running total, starting at `NULL` (because a `SUM` of zero items is `NULL`, not zero.)
-* *Update* - Updates the state with a new value. For `SUM`, this adds the value to the state.
-* *Finalize* - Produces the final aggregate value from the state.
+* *Update* – Updates the state with a new value. For `SUM`, this adds the value to the state.
+* *Finalize* – Produces the final aggregate value from the state.
 For `SUM`, this just copies the running total.
-* *Combine* - Combines two states into a single state.
+* *Combine* – Combines two states into a single state.
 Combine is optional, but when present it allows the aggregate to be computed in parallel.
 For `SUM`, this produces a new state with the sum of the two input values.
 

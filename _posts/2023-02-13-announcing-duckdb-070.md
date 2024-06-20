@@ -67,7 +67,7 @@ orders
 | CSV     | 2.6s | 0.4s     |
 | Parquet | 7.5s | 1.3s     |
 
-Note that currently the parallel writing is currently limited to non-insertion order preserving - which can be toggled by setting the `preserve_insertion_order` setting to false. In a future release we aim to alleviate this restriction and order parallel insertion order preserving writes as well.
+Note that currently the parallel writing is currently limited to non-insertion order preserving – which can be toggled by setting the `preserve_insertion_order` setting to false. In a future release we aim to alleviate this restriction and order parallel insertion order preserving writes as well.
 
 #### Multi-Database Support 
 
@@ -82,7 +82,7 @@ DETACH new_db;
 
 See the [documentation for more information]({% link docs/sql/statements/attach.md %}).
 
-**SQLite Storage Back-end.** In addition to adding support for attaching DuckDB databases - this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
+**SQLite Storage Back-end.** In addition to adding support for attaching DuckDB databases – this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
@@ -91,7 +91,7 @@ INSERT INTO sqlite.tbl VALUES (1), (2), (3);
 SELECT * FROM sqlite.tbl;
 ```
 
-Using this, SQLite database files can be attached, queried and modified as if they are native DuckDB database files. This allows data to be quickly transferred between SQLite and DuckDB - and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
+Using this, SQLite database files can be attached, queried and modified as if they are native DuckDB database files. This allows data to be quickly transferred between SQLite and DuckDB – and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
 
 #### New SQL Features
 
@@ -120,9 +120,9 @@ See the [documentation for more information]({% link docs/sql/statements/insert.
 
 **Lateral Joins.** Support for [lateral joins](https://github.com/duckdb/duckdb/pull/5393) is added in this release. Lateral joins are a more flexible variant of correlated subqueries that make working with nested data easier, as they allow [easier unnesting](https://github.com/duckdb/duckdb/pull/5485) of nested data.  
 
-**Positional Joins.** While SQL formally models unordered sets, in practice the order of datasets does frequently have a meaning. DuckDB offers guarantees around maintaining the order of rows when loading data into tables or when exporting data back out to a file - as well as when executing queries such as `LIMIT` without a corresponding `ORDER BY` clause.
+**Positional Joins.** While SQL formally models unordered sets, in practice the order of datasets does frequently have a meaning. DuckDB offers guarantees around maintaining the order of rows when loading data into tables or when exporting data back out to a file – as well as when executing queries such as `LIMIT` without a corresponding `ORDER BY` clause.
 
-To improve support for this use case - this release [introduces the `POSITIONAL JOIN`](https://github.com/duckdb/duckdb/pull/5867). Rather than joining on the values of rows - this new join type joins rows based on their position in the table.
+To improve support for this use case – this release [introduces the `POSITIONAL JOIN`](https://github.com/duckdb/duckdb/pull/5867). Rather than joining on the values of rows – this new join type joins rows based on their position in the table.
 
 ```sql
 CREATE TABLE t1 AS FROM (VALUES (1), (2), (3)) t(i);
@@ -192,7 +192,7 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 
 Note that everything is lazily evaluated. The Parquet file is not read from disk until the final query is executed – and queries are optimized in their entirety. Executing the decomposed query will be just as fast as executing the long SQL query all at once.
 
-**Python Ingestion APIs.** This release adds several [familiar data ingestion and export APIs](https://github.com/duckdb/duckdb/pull/6015) that follow standard conventions used by other libraries. These functions emit relations as well - which can be directly queried again.
+**Python Ingestion APIs.** This release adds several [familiar data ingestion and export APIs](https://github.com/duckdb/duckdb/pull/6015) that follow standard conventions used by other libraries. These functions emit relations as well – which can be directly queried again.
 
 ```python
 >>> lineitem = duckdb.read_csv('lineitem.csv')
