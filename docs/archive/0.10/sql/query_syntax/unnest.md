@@ -111,7 +111,7 @@ SELECT unnest({'a': [1, 2, 3], 'b': 88}, recursive := true);
 
 Calling `unnest` with the `recursive` setting will fully unnest lists, followed by fully unnesting structs. This can be useful to fully flatten columns that contain lists within lists, or lists of structs. Note that lists *within* structs are not unnested.
 
-### Seeting the Maximum Depth of Unnesting
+### Setting the Maximum Depth of Unnesting
 
 The `max_depth` parameter allows limiting the maximum depth of recursive unnesting (which is assumed by default and does not have to be specified separately).
 For example, unnestig to `max_depth` of 2 yields the following:
