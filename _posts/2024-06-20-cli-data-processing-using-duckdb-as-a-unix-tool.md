@@ -16,18 +16,17 @@ Let's get started!
 - [Table of Contents](#table-of-contents)
 - [The Unix Philosophy](#the-unix-philosophy)
 - [Portability and Usability](#portability-and-usability)
-- [Command Line Data Processing with Unix Tools and DuckDB](#command-line-data-processing-with-unix-tools-and-duckdb)
+- [Data Processing with Unix Tools and DuckDB](#data-processing-with-unix-tools-and-duckdb)
   - [Datasets](#datasets)
   - [Projecting Columns](#projecting-columns)
   - [Sorting Files](#sorting-files)
-  - [Intersecting Two Columns](#intersecting-two-columns)
+  - [Intersecting Columns](#intersecting-columns)
   - [Pasting Rows Together](#pasting-rows-together)
   - [Filtering](#filtering)
   - [Joining Files](#joining-files)
   - [Replacing Strings](#replacing-strings)
   - [Reading JSON](#reading-json)
 - [Performance](#performance)
-- [Tradeoffs](#tradeoffs)
 - [Summary](#summary)
 
 ## The Unix Philosophy
@@ -65,7 +64,7 @@ Another attractive feature of DuckDB is that it offers an interactive shell, whi
 
 <hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
 
-## Command Line Data Processing with Unix Tools and DuckDB
+## Data Processing with Unix Tools and DuckDB
 
 In the following, we give examples for implementing simple data processing tasks using the CLI tools provided in most Unix shells and using DuckDB SQL queries.
 We use DuckDB v1.0.0 and run it in [in-memory mode]({% link docs/connect/overview.md %}#in-memory-database).
@@ -270,7 +269,7 @@ COPY (
 
 <hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
 
-### Intersecting Two Columns
+### Intersecting Columns
 
 A common task is to calculate the intersection of two columns, i.e., to find entities that are present in both.
 Let's find the cities that are both in the top-10 most populous cities and have their own airports.
@@ -309,7 +308,7 @@ The DuckDB solution reads the CSV files, projects the `city` fields and applies 
 COPY (
     SELECT city FROM 'pop.csv'
     INTERSECT ALL
-    SELECT city FROM 'cities-airports.csv';
+    SELECT city FROM 'cities-airports.csv'
   ) TO '/dev/stdout/';
 ```
 
@@ -346,9 +345,9 @@ Nijmegen,Gelderland,179073,57.63
 
 #### DuckDB: `POSITIONAL JOIN`
 
-In DuckDB, we use a [`POSITIONAL JOIN`]({% link docs/sql/query_syntax/from.md %}#positional-joins).
-This join type is one of DuckDB's [SQL extensions]({% link docs/guides/sql_features/friendly_sql.md %}) and it provides a concise syntax to combine tables row-by-row based on their position in the table.
-We use the [`EXCLUDE` clause]({% link docs/sql/expressions/star.md %}#exclude-clause) to remove the duplicate `city` column:
+In DuckDB, we can use a [`POSITIONAL JOIN`]({% link docs/sql/query_syntax/from.md %}#positional-joins).
+This join type is one of DuckDB's [SQL extensions]({% link docs/guides/sql_features/friendly_sql.md %}) and it provides a concise syntax to combine tables row-by-row based on each row's position in the table.
+Joining the two tables together using `POSITIONAL JOIN` results in two `city` columns – we use the [`EXCLUDE` clause]({% link docs/sql/expressions/star.md %}#exclude-clause) to remove the duplicate column:
 
 ```plsql
 COPY (
@@ -362,7 +361,8 @@ COPY (
 
 ### Filtering
 
-Filtering is another very common operation. We'll use [`cities-airports.csv` file](/data/cli/cities-airports.csv), which looks like this:
+Filtering is another very common operation. For this, we'll use [`cities-airports.csv` file](/data/cli/cities-airports.csv).
+For each airport, this file contains its `IATA` code and the main cities that it serves:
 
 ```csv
 city,IATA
@@ -376,18 +376,18 @@ Let's try to formulate two queries:
 
 1. Find all cities whose name ends in `dam`.
 
-2. Find all airports where the IATA code is equivalent to the first three letters of the city's name, but the city's name does _not_ end in `dam`.
+2. Find all airports whose IATA code is equivalent to the first three letters of a served city's name, but the city's name does _not_ end in `dam`.
 
 #### Unix Shell: `grep`
 
-In the Unix shell, we use `grep` and the regular expression `^[^,]*dam,` to answer the first question:
+To answer the first question in the Unix shell, we use `grep` and the regular expression `^[^,]*dam,`:
 
 ```bash
 grep "^[^,]*dam," cities-airports.csv
 ```
 
 In this expression, `^` denotes the start of the line, `[^,]*` searches for a string that does not contain the comma character (the separator).
-The string `dam,` ensures that the end of the string in the first field is `dam`.
+The expression `dam,` ensures that the end of the string in the first field is `dam`.
 The output is:
 
 ```csv
@@ -396,16 +396,19 @@ Rotterdam,RTM
 ```
 
 Let's try to answer the second question. For this, we need to match the first three characters in the `city` field to the `IATA` field but we need to do so in a case-insensitive manner.
-We also need to use a negative condition to exclude the lines where the city's name ends in `dam`. Both of these requirements are difficult to achieve with a single `grep` or `egrep` command as they lack support for both case-insensitive matching _among different groups_ (`grep -i` is not sufficient to achieve this) and for [negative lookbehinds](https://www.regular-expressions.info/lookaround.html).
+We also need to use a negative condition to exclude the lines where the city's name ends in `dam`.
+Both of these requirements are difficult to achieve with a single `grep` or `egrep` command as they lack support for two features.
+First, they do not support case-insensitive matching _using a backreference_ (`grep -i` alone is not sufficient to ensure this).
+Second, they do not support [negative lookbehinds](https://www.regular-expressions.info/lookaround.html).
 Therefore, we use [`pcregrep`](https://man7.org/linux/man-pages/man1/pcregrep.1.html), and formulate our question as follows:
 
 ```bash
 pcregrep -i '^([a-z]{3}).*?(?<!dam),\1$' cities-airports.csv
 ```
 
-Here, we call `pcregrep` with the case-insensitive flag (`-i`).
-We capture the first three letters with `([a-z]{3})` (e.g., `Ams`) and will later match it to the end of the line with a backreference `\1$`.
-We use a non-greedy `.*?` to seek to the end of the first field, then apply a negative lookbehind `(?<!dam)` to ensure that the field did not end in `dam`.
+Here, we call `pcregrep` with the case-insensitive flag (`-i`), which in `pcregrep` also affects backreferences such as `\1`.
+We capture the first three letters with `([a-z]{3})` (e.g., `Ams`) and match it to the second field with the backreference: `,\1$`.
+We use a non-greedy `.*?` to seek to the end of the first field, then apply a negative lookbehind with the `(?<!dam)` expression to ensure that the field does not end in `dam`.
 The result is a single line:
 
 ```csv
@@ -414,7 +417,8 @@ Eindhoven,EIN
 
 #### DuckDB: `WHERE ... LIKE`
 
-To answer the first question in DuckDB, we can use [`LIKE` for pattern matching on regular expressions]({% link docs/sql/functions/pattern_matching.md %}).
+Let's answer the questions now in DuckDB.
+To answer the first question, we can use [`LIKE` for pattern matching]({% link docs/sql/functions/pattern_matching.md %}).
 The header should not be part of the output, so we disable it with `HEADER false`.
 The complete query looks like follows:
 
@@ -425,7 +429,7 @@ COPY (
   ) TO '/dev/stdout/' (HEADER false);
 ```
 
-For the second question, we use [string slicing]({% link docs/sql/functions/char.md %}#stringbeginend) and `NOT LIKE` to for the negative condition:
+For the second question, we use [string slicing]({% link docs/sql/functions/char.md %}#stringbeginend) to extract the first three characters, [`upper`]({% link docs/sql/functions/char.md %}#upperstring) to ensure case-insensitivity, and `NOT LIKE` for the negative condition:
 
 ```plsql
 COPY (
@@ -451,7 +455,7 @@ This is achieved by joining the `cities-airports.csv` and the `airport-names.csv
 
 Unix tools support joining files via the [`join` command](https://man7.org/linux/man-pages/man1/join.1.html), which joins lines of two _sorted_ inputs on a common field.
 To make this work, we sort the files based on their `IATA` fields, then perform the join on the first file's 2nd column (`-1 2`) and the second file's 1st column (`-2 1`).
-We have to omit the header for the `join` command to work, so we do so and restore it later with an `echo` command.
+We have to omit the header for the `join` command to work, so we do just that and construct a new header with an `echo` command:
 
 ```bash
 echo "IATA,city,airport name"; \
@@ -477,7 +481,7 @@ RTM,The Hague,Rotterdam The Hague Airport
 
 #### DuckDB
 
-In DuckDB, we load the CSV files and use the [`NATURAL JOIN` clause]({% link docs/sql/query_syntax/from.md %}#natural-joins), which joins on column(s) with the same name.
+In DuckDB, we load the CSV files and connect them using the [`NATURAL JOIN` clause]({% link docs/sql/query_syntax/from.md %}#natural-joins), which joins on column(s) with the same name.
 To ensure that the result matches with that of the Unix solution, we use the [`ORDER BY ALL` clause]({% link docs/sql/query_syntax/orderby.md %}#order-by-all), which sorts the result on all columns, starting from the first one, and stepping through them for tie-breaking to the last column.
 
 ```plsql
@@ -504,7 +508,7 @@ And while we're at it, also fetch the data set via HTTPS this time, using the UR
 #### Unix Shell: `curl` and `sed`
 
 In Unix, remote data sets are typically fetched via [`curl`](https://man7.org/linux/man-pages/man1/curl.1.html).
-This is piped into the subsequent processing steps, in this case, a bunch of [`sed`](https://man7.org/linux/man-pages/man1/sed.1.html) commands.
+The output of `curl` is piped into the subsequent processing steps, in this case, a bunch of [`sed`](https://man7.org/linux/man-pages/man1/sed.1.html) commands.
 
 ```bash
 curl -s https://duckdb.org/data/cli/pop.csv \
@@ -546,10 +550,10 @@ COPY (
 
 Note that the `FROM` clause now has an HTTPS URL instead of a simple CSV file.
 The presence of the `https://` prefix triggers DuckDB to load the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) and use it to fetch the JSON document.
-We use the [`replace` function]({% link docs/sql/functions/char.md %}#replacestring-source-target) to substitute the space with underscores,
+We use the [`replace` function]({% link docs/sql/functions/char.md %}#replacestring-source-target) to substitute the spaces with underscores,
 and the [`regexp_replace` function]({% link docs/sql/functions/char.md %}#regexp_replacestring-pattern-replacement) for the replacement using a regular expression.
-(We could have also used string formatting function such as [`format`]({% link docs/sql/functions/char.md %}#fmt-syntax) and [`printf`]({% link docs/sql/functions/char.md %}#printf-syntax)).
-Finally, we serialize the file with the semicolon as separator, specified via the `COPY` statement's `DELIMITER ';'` option.
+(We could have also used string formatting functions such as [`format`]({% link docs/sql/functions/char.md %}#fmt-syntax) and [`printf`]({% link docs/sql/functions/char.md %}#printf-syntax)).
+To change the separator to a semicolon, we serialize the file using the `COPY` statement with the `DELIMITER ';'` option.
 
 <hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
 
@@ -569,6 +573,7 @@ curl -s https://api.github.com/repos/duckdb/duckdb \
 #### DuckDB: `read_json`
 
 In DuckDB, we use the [`read_json` function]({% link docs/data/json/overview.md %}), invoking it with the remote HTTPS endpoint's URL.
+The schema of the JSON file is detected automatically, so we can simply use `SELECT` to return the required field.
 
 ```plsql
 SELECT stargazers_count
@@ -583,13 +588,13 @@ Both of these commands return the current number of stars of the repository.
 
 ## Performance
 
-At this point, you might be wondering about the performance of the solutions.
+At this point, you might be wondering about the performance of the DuckDB solutions.
 After all, all of our prior examples have only consisted of a few lines, so benchmarking them against each other will not result in any measurable performance differences.
 So, let's switch to the Dutch railway services dataset that we used in a [previous blog post]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}) and formulate a different problem.
 
 We'll use the [2023 railway services file (`services-2023.csv.gz`)](https://blobs.duckdb.org/nl-railway/services-2023.csv.gz) and count the number of Intercity services that operated in that year.
 
-In Unix, we can use the [`gzcat`](https://www.unix.com/man-page/osf1/1/gzcat/) command to decompress the CSV file into a pipeline. Then, we can use `grep` or `pcregrep` (which is more performant), and end it with the [`wc`](https://man7.org/linux/man-pages/man1/wc.1.html) comman to count the number of lines (`-l`).
+In Unix, we can use the [`gzcat`](https://www.unix.com/man-page/osf1/1/gzcat/) command to decompress the `csv.gz` file into a pipeline. Then, we can use `grep` or `pcregrep` (which is more performant), and top it off with the [`wc`](https://man7.org/linux/man-pages/man1/wc.1.html) command to count the number of lines (`-l`).
 In DuckDB, the built-in CSV reader also supports [compressed CSV files]({% link docs/data/csv/overview.md %}#parameters), so we can use that without any extra configuration.
 
 ```batch
@@ -609,8 +614,8 @@ duckdb -c "SELECT count(*) FROM 'services-2023.csv' WHERE \"Service:Type\" = 'In
 
 To reduce the noise in the measurements, we used the [`hyperfine`](https://github.com/sharkdp/hyperfine) benchmarking tool and took the mean execution time of 10 runs.
 The experiments were carried out on a MacBook Pro with a 12-core M2 Pro CPU and 32 GB RAM, running macOS Sonoma 14.5.
-To reproduce them, run the [`grep-vs-duckdb-microbenchmark.sh`](https://duckdb.org/microbenchmarks/grep-vs-duckdb-microbenchmark.sh).
-The following table shows the runtimes of the scripts on both compressed and uncompressed inputs:
+To reproduce them, run the [`grep-vs-duckdb-microbenchmark.sh` script](https://duckdb.org/microbenchmarks/grep-vs-duckdb-microbenchmark.sh).
+The following table shows the runtimes of the solutions on both compressed and uncompressed inputs:
 
 | Tool | Runtime (compressed) | Runtime (uncompressed) |
 |---|--:|--:|
@@ -619,38 +624,24 @@ The following table shows the runtimes of the scripts on both compressed and unc
 | DuckDB 1.0.0 | 4.2 s | 1.2 s |
 
 The results show that on compressed input, `grep` was the slowest, while DuckDB is slightly edged out by `gzcat`+`pcregrep`, which ran in 3.1 seconds compared to DuckDB's 4.2 seconds.
-On uncompressed input, DuckDB can utilize all CPU cores from the get-go (instead of starting with a single-threaded decompression), allowing it to outperform both `grep` and `pcregrep` by a significant margin, making it 2.5× faster than `pcregrep` and more than 15× faster than `grep`.
+On uncompressed input, DuckDB can utilize all CPU cores from the get-go (instead of starting with a single-threaded decompression step), allowing it to outperform both `grep` and `pcregrep` by a significant margin: 2.5× faster than `pcregrep` and more than 15× faster than `grep`.
 
-As a generalization, as queries get more complex, there are opportunities for optimization and larger intermediate dataset may be produced. While both can be tackled within a shell script (by manually implementing optimizations and writing the intermediate datasets to disk), these will likely be less efficient than what a DBMS can come up with. Shell scripts implementing complex pipelines can be very brittle and need to be rethought even for small changes.
-
-```bash
-time pcregrep '^[^,]*,[^,]*,Intercity,' services-2023.csv | wc -l
-```
-
-## Tradeoffs
-
-In the examples and experiments above, we illustrated how Unix tools and DuckDB SQL queries fare in solving simple data processing problems in the command line.
-While we obviously like DuckDB a lot and prefer to use it in many cases, we also believe Unix tools have their place:
-on most systems, they are already pre-installed and a well-chosen toolchain of Unix commands _can_ be
-[fast](https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html).
-[efficient](https://pesin.space/posts/2019-07-02/),
-and portable (thanks to [POSIX-compliance](https://en.wikipedia.org/wiki/POSIX#POSIX-oriented_operating_systems)).
-Additionally, they be very concise for certain problem.
-However, to reap their benefits, you will need to learn the syntax and quirks of each tool such as `grep` variants, [`awk`](https://man7.org/linux/man-pages/man1/awk.1p.html)
-as well as advanced ones such as [`xargs`](https://man7.org/linux/man-pages/man1/xargs.1.html) and [`parallel`](https://www.gnu.org/software/parallel/).
-
-As a side note, if you are interested in performing many dataframe-like operations in the shell, check out the [Nushell project](https://github.com/nushell/nushell), which has first-class support for passing dataframes between applications.
-This project is not related to DuckDB but it is well-suited to solve the problems discussed in this blog post.
+While this example is quite simple, as queries get more complex, there are more opportunities for optimization and larger intermediate dataset may be produced. While both of these can be tackled within a shell script (by manually implementing optimizations and writing the intermediate datasets to disk), these will likely be less efficient than what a DBMS can come up with. Shell scripts implementing complex pipelines can also be very brittle and need to be rethought even for small changes, making the performance advantage of using a database even more significant for more complex problems.
 
 <hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
 
 ## Summary
 
-In this post, we used DuckDB as a standalone CLI application, and explored its abilities to complement or substitute existing command line (`sort`, `grep`, `comm`, `join`, etc.).
-Hopefully, these examples demonstrated the conciseness and readability of DuckDB's SQL syntax.
-Along the way, we touched on many of DuckDB's friendly and interesting features such as
-the [`FROM`-first syntax]({% link docs/sql/query_syntax/from.md %}#from-first-syntax),
-the [`ORDER BY ALL` clause]({% link docs/sql/query_syntax/orderby.md %}#order-by-all),
-and [support for JSON]({% link docs/extensions/json.md %}).
+In this post, we used DuckDB as a standalone CLI application, and explored its abilities to complement or substitute existing command line tools (`sort`, `grep`, `comm`, `join`, etc.).
+While we obviously like DuckDB a lot and prefer to use it in many cases, we also believe Unix tools have their place:
+on most systems, they are already pre-installed and a well-chosen toolchain of Unix commands _can_ be
+[fast](https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html),
+[efficient](https://pesin.space/posts/2019-07-02/),
+and portable (thanks to [POSIX-compliance](https://en.wikipedia.org/wiki/POSIX#POSIX-oriented_operating_systems)).
+Additionally, they can be very concise for certain problems.
+However, to reap their benefits, you will need to learn the syntax and quirks of each tool such as `grep` variants, [`awk`](https://man7.org/linux/man-pages/man1/awk.1p.html)
+as well as advanced ones such as [`xargs`](https://man7.org/linux/man-pages/man1/xargs.1.html) and [`parallel`](https://www.gnu.org/software/parallel/).
 
 If you have a favorite CLI use case for DuckDB, let us know on social media or submit it to [DuckDB snippets](https://duckdbsnippets.com/)!
+
+PS: If you are interested in performing many dataframe-like operations in the shell, check out the [Nushell project](https://github.com/nushell/nushell), which has first-class support for passing dataframes between applications. This project is not related to DuckDB but it is well-suited to solve the problems discussed in this blog post.
