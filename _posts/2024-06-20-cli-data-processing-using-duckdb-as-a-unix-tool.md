@@ -59,7 +59,10 @@ shown
 While Unix CLI tools are fast, robust, and available on all major platforms, they often have cumbersome syntax that's difficult to remember.
 To make matters worse, these tools often come with slight differences between systems – think of the [differences between GNU `sed` and macOS's `sed`](https://unix.stackexchange.com/a/131940/315847) or the differences between regex syntax among programs, which is aptly captured by Donald Knuth's quip [_“I define Unix as 30 definitions of regular expressions living under one roof.”_](https://en.wikiquote.org/wiki/Donald_Knuth#Quotes)
 
-DuckDB uses the same SQL syntax on all platforms. With [version 1.0.0 released recently]({% post_url 2024-06-03-announcing-duckdb-100 %}), DuckDB's syntax – based on the proven and widely used PostgeSQL dialect – is now in a stable state.
+While there are shells specialized specifically for dataframe processing, such as the [Nushell project](https://github.com/nushell/nushell), older Unix shells (e.g., the Bourne shell `sh` and Bash) are still the most wide-spread, especially on servers.
+
+At the same time, we have DuckDB, an extremely portable database system which uses the same SQL syntax on all platforms.
+With [version 1.0.0 released recently]({% post_url 2024-06-03-announcing-duckdb-100 %}), DuckDB's syntax – based on the proven and widely used PostgeSQL dialect – is now in a stable state.
 Another attractive feature of DuckDB is that it offers an interactive shell, which aids quick debugging. Moreover, DuckDB is available in [several host languages]({% link docs/api/overview.md %}) as well as in the browser [via WebAssembly](https://shell.duckdb.org/), so if you ever decide to use your SQL scripts outside of the shell, DuckDB SQL scripts can be ported to a wide variety of environments without any changes.
 
 <hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
@@ -641,7 +644,6 @@ and portable (thanks to [POSIX-compliance](https://en.wikipedia.org/wiki/POSIX#P
 Additionally, they can be very concise for certain problems.
 However, to reap their benefits, you will need to learn the syntax and quirks of each tool such as `grep` variants, [`awk`](https://man7.org/linux/man-pages/man1/awk.1p.html)
 as well as advanced ones such as [`xargs`](https://man7.org/linux/man-pages/man1/xargs.1.html) and [`parallel`](https://www.gnu.org/software/parallel/).
+In the meantime, DuckDB's SQL is easy-to-learn (you likely know quite a bit of it already) and DuckDB handles most of the optimization for you.
 
-If you have a favorite CLI use case for DuckDB, let us know on social media or submit it to [DuckDB snippets](https://duckdbsnippets.com/)!
-
-PS: If you are interested in performing many dataframe-like operations in the shell, check out the [Nushell project](https://github.com/nushell/nushell), which has first-class support for passing dataframes between applications. This project is not related to DuckDB but it is well-suited to solve the problems discussed in this blog post.
+If you have a favorite CLI use case for DuckDB, let us know on social media or submit it to [DuckDB snippets](https://duckdbsnippets.com/). Happy hacking!
