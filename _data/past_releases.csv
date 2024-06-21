@@ -1,0 +1,41 @@
+release_date,version_number,codename,duck_species_primary,duck_species_secondary,wikipage,blog_post
+2024-06-03,1.0.0,Nivis,Anas nivis,Snow duck,,https://duckdb.org/2024/06/03/announcing-duckdb-100
+2024-05-22,0.10.3,,,,,
+2024-04-17,0.10.2,,,,,
+2024-03-18,0.10.1,,,,,
+2024-02-13,0.10.0,Fusca,Melanitta fusca,Velvet scoter,https://en.wikipedia.org/wiki/Velvetscoter,https://duckdb.org/2024/02/13/announcing-duckdb-0100
+2023-11-14,0.9.2,,,,,
+2023-10-11,0.9.1,,,,,
+2023-09-26,0.9.0,Undulata,Anas undulata,Yellow-billed duck,https://en.wikipedia.org/wiki/Yellow-billedduck,https://duckdb.org/2023/09/26/announcing-duckdb-090
+2023-06-13,0.8.1,,,,,
+2023-05-17,0.8.0,Fulvigula,Anas fulvigula,Mottled duck,https://en.wikipedia.org/wiki/Mottledduck,https://duckdb.org/2023/05/17/announcing-duckdb-080
+2023-02-27,0.7.1,,,,,
+2023-02-13,0.7.0,Labradorius,Camptorhynchus labradorius,Labrador duck,https://en.wikipedia.org/wiki/Labradorduck,https://duckdb.org/2023/02/13/announcing-duckdb-070
+2022-12-06,0.6.1,,,,,
+2022-11-14,0.6.0,Oxyura,Oxyura leucocephala,White-headed duck,https://en.wikipedia.org/wiki/White-headedduck,https://duckdb.org/2022/11/14/announcing-duckdb-060
+2022-09-19,0.5.1,,,,,
+2022-09-05,0.5.0,Pulchellus,Nettapus pulchellus,Green pygmy goose,https://en.wikipedia.org/wiki/Greenpygmygoose,
+2022-06-20,0.4.0,Ferruginea,Oxyura ferruginea,Andean duck,https://en.wikipedia.org/wiki/Andeanduck,
+2022-04-11,0.3.3,Sansaniensis,Chenoanas sansaniensis,,https://species.wikimedia.org/wiki/Chenoanassansaniensis,
+2022-02-07,0.3.2,Gibberifrons,Anas gibberifrons,Sunda teal,https://en.wikipedia.org/wiki/Sundateal,
+2021-11-16,0.3.1,Spectabilis,Somateria spectabilis,King eider,https://en.wikipedia.org/wiki/Kingeider,
+2021-10-06,0.3.0,Gracilis,Anas gracilis,Grey teal,https://en.wikipedia.org/wiki/Greyteal,
+2021-09-06,0.2.9,Platyrhynchos,Anas platyrhynchos,Mallard,https://en.wikipedia.org/wiki/Mallard,
+2021-08-02,0.2.8,Ceruttii,Histrionicus ceruttii,,https://en.wikipedia.org/wiki/Harlequinduck#Taxonomy,
+2021-06-14,0.2.7,Mollissima,Somateria mollissima,Common eider,https://en.wikipedia.org/wiki/Commoneider,
+2021-05-08,0.2.6,Jamaicensis,Oxyura jamaicensis,Blue-billed ruddy duck,https://en.wikipedia.org/wiki/Ruddyduck,
+2021-03-10,0.2.5,Falcata,Mareca falcata,Falcated duck,https://en.wikipedia.org/wiki/Falcatedduck,
+2021-02-02,0.2.4,Jubata,Chenonetta jubata,Australian wood duck,https://en.wikipedia.org/wiki/Australianwoodduck,
+2020-12-03,0.2.3,Serrator,Mergus serrator,Red-breasted merganser,https://en.wikipedia.org/wiki/Red-breastedmerganser,
+2020-11-01,0.2.2,Clypeata,Spatula clypeata,Northern shoveler,https://en.wikipedia.org/wiki/Northernshoveler,
+2020-08-29,0.2.1,,,,,
+2020-07-23,0.2.0,,,,,
+2020-06-19,0.1.9,,,,,
+2020-05-29,0.1.8,,,,,
+2020-05-04,0.1.7,,,,,
+2020-04-05,0.1.6,,,,,
+2020-03-02,0.1.5,,,,,
+2020-02-03,0.1.3,,,,,
+2020-01-06,0.1.2,,,,,
+2019-09-24,0.1.1,,,,,
+2019-06-27,0.1.0,,,,,

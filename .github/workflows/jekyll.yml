@@ -55,6 +55,9 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+      - name: Publish past releases CSV file
+        run: |
+          cp _data/past_releases.csv data/duckdb-releases.csv
       - name: Zip offline package
         run: |
           # create a copy of the _site directory for the offline package
