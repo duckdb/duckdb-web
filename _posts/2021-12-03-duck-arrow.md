@@ -63,7 +63,7 @@ import duckdb
 import pyarrow as pa
 import pyarrow.dataset as ds
 
-# Open dataset using year,month folder partition
+# Open dataset using year, month folder partition
 nyc = ds.dataset('nyc-taxi/', partitioning=["year", "month"])
 
 # We transform the nyc dataset into a DuckDB relation
@@ -71,7 +71,7 @@ nyc = duckdb.arrow(nyc)
 
 # Run same query again
 nyc.filter("year > 2014 & passenger_count > 0 & trip_distance > 0.25 & fare_amount > 0")
-    .aggregate("SELECT AVG(fare_amount), AVG(tip_amount), AVG(tip_amount / fare_amount) as tip_pct","passenger_count").arrow()
+    .aggregate("SELECT avg(fare_amount), avg(tip_amount), avg(tip_amount / fare_amount) AS tip_pct", "passenger_count").arrow()
 ```
 
 ## DuckDB and Arrow: The Basics
@@ -113,7 +113,7 @@ arrow_table = pq.read_table('integers.parquet')
 rel_from_arrow = duckdb.arrow(arrow_table)
 
 # we can run a SQL query on this and print the result
-print(rel_from_arrow.query('arrow_table', 'SELECT SUM(data) FROM arrow_table WHERE data > 50').fetchone())
+print(rel_from_arrow.query('arrow_table', 'SELECT sum(data) FROM arrow_table WHERE data > 50').fetchone())
 
 # Transforms DuckDB Relation -> Arrow Table
 arrow_table_from_duckdb = rel_from_arrow.arrow()
@@ -129,7 +129,7 @@ arrow_table = pq.read_table('integers.parquet')
 con = duckdb.connect()
 
 # we can run a SQL query on this and print the result
-print(con.execute('SELECT SUM(data) FROM arrow_table WHERE data > 50').fetchone())
+print(con.execute('SELECT sum(data) FROM arrow_table WHERE data > 50').fetchone())
 
 # Transforms Query Result from DuckDB to Arrow Table
 # We can directly read the arrow object through DuckDB's replacement scans.
@@ -141,6 +141,7 @@ It is possible to transform both DuckDB Relations and Query Results back to Arro
 #### R
 
 In R, you can interact with Arrow data in DuckDB by registering the table as a view (an alternative is to use dplyr as shown above).
+
 ```r
 library(duckdb)
 library(arrow)
@@ -156,7 +157,7 @@ con <- dbConnect(duckdb::duckdb())
 arrow::to_duckdb(arrow_table, table_name = "arrow_table", con = con)
 
 # we can run a SQL query on this and print the result
-print(dbGetQuery(con, "SELECT SUM(data) FROM arrow_table WHERE data > 50"))
+print(dbGetQuery(con, "SELECT sum(data) FROM arrow_table WHERE data > 50"))
 
 # Transforms Query Result from DuckDB to Arrow Table
 result <- dbSendQuery(con, "SELECT * FROM arrow_table")
@@ -360,9 +361,9 @@ new_table = pa.Table.from_pandas(res)
 ```
 
 |    Name     | Time (s) | Peak Memory Usage (GBs) |
-|-------------|----------|-------------------------|
-| DuckDB  | 0.05    | 0.3                       |
-| Pandas      | 146.91    | 248                  |
+|-------------|---------:|------------------------:|
+| DuckDB      | 0.05     | 0.3                     |
+| Pandas      | 146.91   | 248                     |
 
 The difference in times between DuckDB and Pandas is a combination of all the integration benefits we explored in this article. In DuckDB the filter pushdown is applied to perform partition elimination (i.e., we skip reading the Parquet files where the year is <= 2014). The filter pushdown is also used to eliminate unrelated row_groups (i.e., row groups where the total amount is always <= 100). Due to our projection pushdown, Arrow only has to read the columns of interest from the Parquet files, which allows it to read only 4 out of 20 columns. On the other hand, Pandas is not capable of automatically pushing down any of these optimizations, which means that the full dataset must be read. **This results in the 4 orders of magnitude difference in query execution time.**
 

@@ -13,21 +13,21 @@ Let's get started!
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [The Unix Philosophy](#the-unix-philosophy)
-- [Portability and Usability](#portability-and-usability)
-- [Data Processing with Unix Tools and DuckDB](#data-processing-with-unix-tools-and-duckdb)
-  - [Datasets](#datasets)
-  - [Projecting Columns](#projecting-columns)
-  - [Sorting Files](#sorting-files)
-  - [Intersecting Columns](#intersecting-columns)
-  - [Pasting Rows Together](#pasting-rows-together)
-  - [Filtering](#filtering)
-  - [Joining Files](#joining-files)
-  - [Replacing Strings](#replacing-strings)
-  - [Reading JSON](#reading-json)
-- [Performance](#performance)
-- [Summary](#summary)
+* [Table of Contents](#table-of-contents)
+* [The Unix Philosophy](#the-unix-philosophy)
+* [Portability and Usability](#portability-and-usability)
+* [Data Processing with Unix Tools and DuckDB](#data-processing-with-unix-tools-and-duckdb)
+  * [Datasets](#datasets)
+  * [Projecting Columns](#projecting-columns)
+  * [Sorting Files](#sorting-files)
+  * [Intersecting Columns](#intersecting-columns)
+  * [Pasting Rows Together](#pasting-rows-together)
+  * [Filtering](#filtering)
+  * [Joining Files](#joining-files)
+  * [Replacing Strings](#replacing-strings)
+  * [Reading JSON](#reading-json)
+* [Performance](#performance)
+* [Summary](#summary)
 
 ## The Unix Philosophy
 

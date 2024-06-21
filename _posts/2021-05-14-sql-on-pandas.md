@@ -28,7 +28,7 @@ import pandas as pd
 import duckdb
 
 mydf = pd.DataFrame({'a' : [1, 2, 3]})
-print(duckdb.query("SELECT SUM(a) FROM mydf").to_df())
+print(duckdb.query("SELECT sum(a) FROM mydf").to_df())
 ```
 
 In the rest of the article, we will go more in-depth into how this works and how fast it is.
@@ -47,7 +47,7 @@ import pandas as pd
 import duckdb
 
 mydf = pd.DataFrame({'a' : [1, 2, 3]})
-print(duckdb.query("SELECT SUM(a) FROM mydf").to_df())
+print(duckdb.query("SELECT sum(a) FROM mydf").to_df())
 ```
 
 The SQL table name `mydf` is interpreted as the local Python variable `mydf` that happens to be a Pandas DataFrame, which DuckDB can read and query directly. The column names and types are also extracted automatically from the DataFrame.
