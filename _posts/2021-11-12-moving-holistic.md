@@ -215,27 +215,27 @@ and in the benchmarks it comes in between 15 and 55 times faster than the other 
 To benchmark the various implementations, we run moving window queries against a 10M table of integers:
 
 ```sql
-create table rank100 as
-    select b % 100 as a, b from range(10000000) tbl(b);
+CREATE TABLE rank100 AS
+    SELECT b % 100 AS a, b FROM range(10000000) tbl(b);
 ```
 
 The results are then re-aggregated down to one row to remove the impact of streaming the results.
 The frames are 100 elements wide, and the test is repeated with a fixed trailing frame:
 
 ```sql
-select quantile_cont(a, [0.25, 0.5, 0.75]) over (
-    order by b asc
-    rows between 100 preceding and current row) as iqr
-from rank100;
+SELECT quantile_cont(a, [0.25, 0.5, 0.75]) OVER (
+    ORDER BY b ASC
+    ROWS BETWEEN 100 PRECEDING AND CURRENT ROW) AS iqr
+FROM rank100;
 ```
 
 and a variable frame that moves pseudo-randomly around the current value:
 
 ```sql
-select quantile_cont(a, [0.25, 0.5, 0.75]) over (
-    order by b asc
-    rows between mod(b * 47, 521) preceding and 100 - mod(b * 47, 521) following) as iqr
-from rank100;
+SELECT quantile_cont(a, [0.25, 0.5, 0.75]) OVER (
+    ORDER BY b ASC
+    ROWS BETWEEN mod(b * 47, 521) PRECEDING AND 100 - mod(b * 47, 521) FOLLOWING) AS iqr
+FROM rank100;
 ```
 
 The two examples here are the interquartile range queries;
@@ -268,5 +268,3 @@ DuckDB is a free and open-source database management system (MIT licensed).
 It aims to be the SQLite for Analytics,
 and provides a fast and efficient database system with zero external dependencies.
 It is available not just for Python, but also for C/C++, R, Java, and more.
-
-[Discuss this post on Hacker News](https://news.ycombinator.com/newest)

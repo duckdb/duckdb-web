@@ -65,7 +65,6 @@ If we have columnar storage, this comparator has to jump between columns, [causi
 2. Entirely sort the data by the first clause, then sort by the second clause, but only where the first clause was equal, and so on.
 This approach is especially inefficient when there are many duplicate values, as it requires multiple passes over the data.
 
-
 #### Binary String Comparison
 
 The binary string comparison technique improves sorting performance by simplifying the comparator. It encodes *all* columns in the `ORDER BY` clause into a single binary sequence that, when compared using `memcmp` will yield the correct overall sorting order. Encoding the data is not free, but since we are using the comparator so much during sorting, it will pay off.
@@ -78,6 +77,7 @@ Let us take another look at 3 rows of the example:
 | GERMANY         | 1924         |
 
 On [little-endian](https://en.wikipedia.org/wiki/Endianness) hardware, the bytes that represent these values look like this in memory, assuming 32-bit integer representation for the year:
+
 ```sql
 c_birth_country
 -- NETHERLANDS
