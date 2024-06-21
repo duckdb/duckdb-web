@@ -163,8 +163,9 @@ relying on `*`, like so:
 ```sql
 SELECT h.ticker, h.when AS holdings_when, p.when AS prices_when, h.shares, p.price
 FROM holdings h
-ASOF JOIN prices p ON h.ticker = p.ticker AND h.when >= p.when;
+ASOF JOIN prices p USING (ticker, "when");
 ```
+
 This ensures that you get the complete information from both tables, avoiding any potential confusion caused by the default behavior of 
 the `USING` keyword.
 
