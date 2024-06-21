@@ -140,12 +140,33 @@ FROM holdings h
 ASOF JOIN prices p USING (ticker, when);
 ```
 
-Be aware that if you don't explicitly list the columns in the `SELECT`,
-the ordering field value will be the probe value, not the build value.
-For a natural join, this is not an issue because all the conditions are equalities,
-but for AsOf, one side has to be chosen.
-Since AsOf can be viewed as a lookup function,
-it is more natural to return the "function arguments" than the function internals.
+### Clarification on Column Selection with `USING` in ASOF Joins
+
+When you use the `USING` keyword in a join, the columns specified in the `USING` clause are merged in the result set. This means that if you run:
+
+```sql
+SELECT *
+FROM holdings h
+ASOF JOIN prices p USING (ticker, when);
+```
+
+You will get back only the columns `h.ticker, h.when, h.shares, p.price`. The columns `ticker` and `when` will appear only once, with `ticker`
+and `when` coming from the left table (holdings).
+
+This behavior is fine for the `ticker` column because the value is the same in both tables. However, for the `when` column, the values might 
+differ between the two tables due to the `>=` condition used in the ASOF join. The ASOF join is designed to match each row in the left 
+table (holdings) with the nearest preceding row in the right table (prices) based on the `when` column.
+
+If you want to retrieve the `when` column from both tables to see both timestamps, you need to list the columns explicitly rather than 
+using `*`, like so:
+
+```sql
+SELECT h.ticker, h.when AS holdings_when, p.when AS prices_when, h.shares, p.price
+FROM holdings h
+ASOF JOIN prices p ON h.ticker = p.ticker AND h.when >= p.when;
+```
+This ensures that you get the complete information from both tables, avoiding any potential confusion caused by the default behavior of 
+the `USING` keyword.
 
 ## See Also
 
