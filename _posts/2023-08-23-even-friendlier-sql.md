@@ -141,7 +141,7 @@ The `COLUMNS` expression can also be wrapped by other functions to apply those f
 
 ```sql
 SELECT
-    MAX(COLUMNS('.*warp.*'))
+    max(COLUMNS('.*warp.*'))
 FROM trek_facts;
 ```
 
@@ -177,11 +177,11 @@ WHERE
 
 ### COLUMNS() with EXCLUDE and REPLACE
 
-Individual columns can also be either excluded or replaced prior to applying calculations on them. For example, since our dataset only includes season 1, we do not need to find the `MAX` of that column. It would be highly illogical. 
+Individual columns can also be either excluded or replaced prior to applying calculations on them. For example, since our dataset only includes season 1, we do not need to find the `max` of that column. It would be highly illogical. 
 
 ```sql
 SELECT
-    MAX(COLUMNS(* EXCLUDE season_num))
+    max(COLUMNS(* EXCLUDE season_num))
 FROM trek_facts;
 ```
 
@@ -195,7 +195,7 @@ The `REPLACE` syntax is also useful when applied to a dynamic set of columns. In
 
 ```sql
 SELECT
-    MAX(COLUMNS(* REPLACE aired_date::timestamp AS aired_date))
+    max(COLUMNS(* REPLACE aired_date::timestamp AS aired_date))
 FROM trek_facts;
 ```
 
@@ -286,7 +286,7 @@ DuckDB enables the same interpretability improvement for every scalar function! 
 ```sql
 SELECT 
      ('Make it so')
-          .UPPER()
+          .upper()
           .string_split(' ')
           .list_aggr('string_agg','.')
           .concat('.') AS im_not_messing_around_number_one;
@@ -305,7 +305,7 @@ SELECT
      concat(
           list_aggr(
                string_split(
-                    UPPER('Make it stop'),
+                    upper('Make it stop'),
                ' '),
           'string_agg','.'),
      '.') AS oof;
@@ -400,7 +400,7 @@ It is easier to compare our phaser needs to our photon torpedo needs if each yea
 CREATE TABLE pivoted_purchases AS
      PIVOT purchases 
           ON year 
-          USING SUM(count) 
+          USING sum(count) 
           GROUP BY item;
 
 FROM pivoted_purchases;

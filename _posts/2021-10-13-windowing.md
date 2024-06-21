@@ -183,7 +183,7 @@ It is tempting to use the `rank()` window function with a reverse sort for this 
 SELECT "Plant", "MWh"
 FROM (
     SELECT "Plant", "MWh",
-        RANK() OVER (
+        rank() OVER (
             PARTITION BY "Plant"
             ORDER BY "Date" DESC) AS r
     FROM table) t

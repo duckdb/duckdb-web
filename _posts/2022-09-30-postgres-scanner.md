@@ -165,7 +165,7 @@ The Postgres Scanner can also be used to combine live Postgres data with pre-cac
 ```sql
 INSERT INTO my_table_duckdb_cache
 SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'my_table') 
-WHERE incrementing_id_column > (SELECT MAX(incrementing_id_column) FROM my_table_duckdb_cache);
+WHERE incrementing_id_column > (SELECT max(incrementing_id_column) FROM my_table_duckdb_cache);
 
 SELECT * FROM my_table_duckdb_cache;
 ```
