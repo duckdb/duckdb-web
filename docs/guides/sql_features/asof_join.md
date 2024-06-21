@@ -154,11 +154,11 @@ You will get back only the columns `h.ticker, h.when, h.shares, p.price`. The co
 and `when` coming from the left table (holdings).
 
 This behavior is fine for the `ticker` column because the value is the same in both tables. However, for the `when` column, the values might 
-differ between the two tables due to the `>=` condition used in the ASOF join. The ASOF join is designed to match each row in the left 
-table (holdings) with the nearest preceding row in the right table (prices) based on the `when` column.
+differ between the two tables due to the `>=` condition used in the AsOf join. The AsOf join is designed to match each row in the left 
+table (`holdings`) with the nearest preceding row in the right table (`prices`) based on the `when` column.
 
 If you want to retrieve the `when` column from both tables to see both timestamps, you need to list the columns explicitly rather than 
-using `*`, like so:
+relying on `*`, like so:
 
 ```sql
 SELECT h.ticker, h.when AS holdings_when, p.when AS prices_when, h.shares, p.price
