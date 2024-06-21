@@ -178,7 +178,7 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 ```
 
 ```python
->>> duckdb.sql('SELECT MIN(l_orderkey), MAX(l_orderkey) FROM lineitem_filtered').show()
+>>> duckdb.sql('SELECT min(l_orderkey), max(l_orderkey) FROM lineitem_filtered').show()
 ```
 
 ```text

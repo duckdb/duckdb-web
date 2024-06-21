@@ -210,7 +210,7 @@ Below is a benchmark comparing the loading time of 11 million rows of the NYC Ta
 | v0.9.2   | 2.6s       |
 | v0.10.0  | 1.15s      |
 
-Furthermore, many optimizations have been done that make running queries over CSV files directly significantly faster as well. Below is a benchmark comparing the execution time of a `SELECT COUNT(*)` query directly over the NYC Taxi CSV file.
+Furthermore, many optimizations have been done that make running queries over CSV files directly significantly faster as well. Below is a benchmark comparing the execution time of a `SELECT count(*)` query directly over the NYC Taxi CSV file.
 
 <div class="narrow_table"></div>
 
@@ -404,6 +404,6 @@ These were a few highlights – but there are many more features and improvement
 
 * [Parallel streaming query result](https://github.com/duckdb/duckdb/pull/10245)
 * [Struct filter pushdown](https://github.com/duckdb/duckdb/pull/10314)
-* [`FIRST(x ORDER BY y)` optimizations](https://github.com/duckdb/duckdb/pull/10347)
+* [`first(x ORDER BY y)` optimizations](https://github.com/duckdb/duckdb/pull/10347)
 
 We would like to thank all of the contributors for their hard work on improving DuckDB.

@@ -33,13 +33,13 @@ This version introduces [optimistic writing to disk](https://github.com/duckdb/d
 Below is a benchmark comparing loading time of 150 million rows of the Taxi dataset from a Parquet file on an M1 Max with 10 cores:
 
 | Version | Load Time |
-|---------|-----------|
-| v0.5.1  | 91.4s     |
-| v0.6.0  | 17.2s     |
+|---------|----------:|
+| v0.5.1  | 91.4 s    |
+| v0.6.0  | 17.2 s    |
 
 DuckDB supports two modes – the [`order-preserving`](https://github.com/duckdb/duckdb/pull/5082) and the [`non-order-preserving`](https://github.com/duckdb/duckdb/pull/5033) parallel data load.
 
-The order-preserving load preserves the insertion order so that e.g., the first line in your CSV file is the first line in the DuckDB table. The non-order-preserving load does not offer such guarantees – and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order=false` statement.
+The order-preserving load preserves the insertion order so that e.g., the first line in your CSV file is the first line in the DuckDB table. The non-order-preserving load does not offer such guarantees – and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order = false` statement.
 
 #### Compression Improvements
 
@@ -47,11 +47,11 @@ The order-preserving load preserves the insertion order so that e.g., the first 
 
 The compression ratio improvements of the TPC-H SF1 dataset are shown below:
 
-|    Compression    | Size  |
-|-------------------|-------|
-| Uncompressed      | 761MB |
-| Dictionary        | 510MB |
-| FSST + Dictionary | 251MB |
+|    Compression    | Size   |
+|-------------------|-------:|
+| Uncompressed      | 761 MB |
+| Dictionary        | 510 MB |
+| FSST + Dictionary | 251 MB |
 
 **Chimp**. The [Chimp compression algorithm](https://github.com/duckdb/duckdb/pull/4878) is included, which is the state-of-the-art in lightweight floating point compression. Chimp is an improved version of Gorillas, that achieves both a better compression ratio as well as faster decompression speed.
 
@@ -59,11 +59,11 @@ The compression ratio improvements of the TPC-H SF1 dataset are shown below:
 
 The compression ratio of a dataset containing temperatures of cities stored as double (8-byte floating point numbers) is shown below:
 
-|    Compression    | Size  |
-|-------------------|------:|
-| Uncompressed      | 25.4MB |
-| Chimp        | 9.7MB |
-| Patas | 10.2MB |
+|    Compression    | Size    |
+|-------------------|--------:|
+| Uncompressed      | 25.4 MB |
+| Chimp             |  9.7 MB |
+| Patas             | 10.2 MB |
 
 #### Performance Improvements
 
@@ -75,13 +75,13 @@ DuckDB aims to have very high performance for a wide variety of workloads. As su
 The parallel CSV reader can be enabled by setting the `experimental_parallel_csv` flag to true. We aim to make the parallel CSV reader the default reader in future DuckDB versions.
 
 ```sql
-SET experimental_parallel_csv=true;
+SET experimental_parallel_csv = true;
 ```
 
-Below is the load time of a 720MB CSV file containing the `lineitem` table from the `TPC-H` benchmark, 
+Below is the load time of a 720 MB CSV file containing the `lineitem` table from the `TPC-H` benchmark, 
 
 |     Variant     | Load Time |
-|-----------------|-----------|
+|-----------------|----------:|
 | Single Threaded | 3.5s      |
 | Parallel        | 0.6s      |
 
@@ -90,11 +90,11 @@ Below is the load time of a 720MB CSV file containing the `lineitem` table from 
 The timings of creating an index on a single column with 16 million values is shown below.
 
 | Version | Create Index Time |
-|---------|-----------|
-| v0.5.1  | 5.92s     |
-| v0.6.0  | 1.38s     |
+|---------|------------------:|
+| v0.5.1  |        5.92 s     |
+| v0.6.0  |        1.38 s     |
 
-**Parallel COUNT(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g., `COUNT(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DuckDB can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
+**Parallel count(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g., `count(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DuckDB can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
 
 #### SQL Syntax Improvements
 
@@ -106,10 +106,10 @@ SQL is the primary way of interfacing with DuckDB – and DuckDB [tries to have 
 CREATE TABLE messages(u UNION(num INT, error VARCHAR));
 INSERT INTO messages VALUES (42);
 INSERT INTO messages VALUES ('oh my globs');
+SELECT * FROM messages;
 ```
 
 ```text
-SELECT * FROM messages;
 ┌─────────────┐
 │      u      │
 ├─────────────┤
@@ -120,7 +120,7 @@ SELECT * FROM messages;
 
 Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page]({% link docs/sql/data_types/union.md %}) in the documentation contains more information on how to use this new composite type.
 
-**FROM-first**. Starting with this release, DuckDB supports starting queries with the [FROM clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
+**FROM-first**. Starting with this release, DuckDB supports starting queries with the [`FROM` clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
 
 ```sql
 -- SELECT clause is optional, SELECT * is implied (if not included)
@@ -141,7 +141,7 @@ INSERT INTO tbl2 FROM tbl1;
 ```sql
 CREATE TABLE obs(id INT, val1 INT, val2 INT);
 INSERT INTO obs VALUES (1, 10, 100), (2, 20, NULL), (3, NULL, 300);
-SELECT MIN(COLUMNS(*)), COUNT(*) from obs;
+SELECT min(COLUMNS(*)), count(*) from obs;
 ```
 ```text
 ┌─────────────┬───────────────┬───────────────┬──────────────┐
@@ -188,7 +188,7 @@ When working with large data sets, memory management is always a potential pain 
 This release further improves on that by greatly optimizing the [out-of-core hash join](https://github.com/duckdb/duckdb/pull/4970), resulting in a much more graceful degradation in performance as the data exceeds the memory limit.
 
 | Memory limit (GB) | Old time (s) | New time (s) |
-|:-|:-|:-|
+|--:|--:|--:|
 |10|1.97|1.96|
 |9|1.97|1.97|
 |8|2.23|2.22|
@@ -212,9 +212,10 @@ The DuckDB shell also offers several improvements over the SQLite shell, such as
 
 The number of rows that are rendered can be changed by using the `.maxrows X` setting, and you can switch back to the old rendering using the `.mode box` command.
 
-```sql
-D SELECT * FROM '~/Data/nyctaxi/nyc-taxi/2014/04/data.parquet';
+```plsql
+SELECT * FROM '~/Data/nyctaxi/nyc-taxi/2014/04/data.parquet';
 ```
+
 ```text
 ┌───────────┬─────────────────────┬─────────────────────┬───┬────────────┬──────────────┬──────────────┐
 │ vendor_id │      pickup_at      │     dropoff_at      │ … │ tip_amount │ tolls_amount │ total_amount │
@@ -268,9 +269,9 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 
 **Progress Bars**. DuckDB has [supported progress bars in queries for a while now](https://github.com/duckdb/duckdb/pull/1432), but they have always been opt-in. In this release we have [prettied up the progress bar](https://github.com/duckdb/duckdb/pull/5187) and enabled it by default in the shell. The progress bar will pop up when a query is run that takes more than 2 seconds, and display an estimated time-to-completion for the query.
 
-```sql
-D copy lineitem to 'lineitem-big.parquet';
- 32% ▕███████████████████▏                                        ▏ 
+```plsql
+COPY lineitem TO 'lineitem-big.parquet';
+   32% ▕███████████████████▏                                        ▏ 
 ```
 
 In the future we aim to enable the progress bar by default in other clients. For now, this can be done manually by running the following SQL queries:
