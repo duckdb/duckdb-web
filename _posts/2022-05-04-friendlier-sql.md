@@ -53,7 +53,7 @@ SELECT
     planets,
     cities,
     cantinas,
-    SUM(scum + villainy) AS total_scum_and_villainy
+    sum(scum + villainy) AS total_scum_and_villainy
 FROM star_wars_locations
 GROUP BY ALL;
 -- GROUP BY systems, planets, cities, cantinas
@@ -66,7 +66,7 @@ Not only does this dramatically simplify many queries, it also makes the above `
 ```sql
 SELECT
     * EXCLUDE (cantinas, booths, scum, villainy),
-    SUM(scum + villainy) AS total_scum_and_villainy
+    sum(scum + villainy) AS total_scum_and_villainy
 FROM star_wars_locations
 GROUP BY ALL;
 -- GROUP BY systems, planets, cities
@@ -98,7 +98,7 @@ In many SQL dialects, it is not possible to use an alias defined in a `SELECT` c
 SELECT
     only_imperial_storm_troopers_are_so_precise AS nope,
     turns_out_a_parsec_is_a_distance AS very_speedy,
-    SUM(mistakes) AS total_oops
+    sum(mistakes) AS total_oops
 FROM oops
 WHERE
     nope = 1

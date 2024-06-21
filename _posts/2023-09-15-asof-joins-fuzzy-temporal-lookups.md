@@ -129,9 +129,9 @@ These can both be fairly expensive operations, but the query would look like thi
 
 ```sql
 WITH state AS (
-  SELECT ticker, price, "when",
-    LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
-  FROM prices
+    SELECT ticker, price, "when",
+      LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+    FROM prices
 )
 SELECT h.ticker, h.when, price * shares AS value
 FROM holdings h INNER JOIN state s
@@ -372,9 +372,9 @@ Remember that we used this query to convert the event table to a state table:
 
 ```sql
 WITH state AS (
-  SELECT ticker, price, "when",
-    LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
-  FROM prices
+    SELECT ticker, price, "when",
+      LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+    FROM prices
 );
 ```
 
@@ -423,13 +423,13 @@ and the timestamps have been shifted to be halfway between the originals:
 
 ```sql
 CREATE OR REPLACE TABLE build AS (
-  SELECT k, '2001-01-01 00:00:00'::TIMESTAMP + INTERVAL (v) MINUTE AS t, v
-  FROM range(0,100000) vals(v), range(0,50) keys(k)
+    SELECT k, '2001-01-01 00:00:00'::TIMESTAMP + INTERVAL (v) MINUTE AS t, v
+    FROM range(0, 100_000) vals(v), range(0,50) keys(k)
 );
 
 CREATE OR REPLACE TABLE probe AS (
-  SELECT k * 2 AS k, t - INTERVAL (30) SECOND AS t
-  FROM build
+    SELECT k * 2 AS k, t - INTERVAL (30) SECOND AS t
+    FROM build
 );
 ```
 
@@ -461,7 +461,7 @@ and the probe table looks like this (with only even values for k):
 The benchmark just does the join and sums up the `v` column:
 
 ```sql
-SELECT SUM(v)
+SELECT sum(v)
 FROM probe ASOF JOIN build USING(k, t);
 ```
 
@@ -471,13 +471,13 @@ but we can create the state table in a CTE again and use an inner join:
 ```sql
 -- Hash Join implementation
 WITH state AS (
-  SELECT k, 
-    t AS begin, 
-    v, 
-    LEAD(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
-  FROM build
+    SELECT k, 
+      t AS begin, 
+      v, 
+      LEAD(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
+    FROM build
 )
-SELECT SUM(v)
+SELECT sum(v)
 FROM probe p INNER JOIN state s 
   ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
 ```
@@ -502,17 +502,17 @@ The second benchmark tests the case where the probe side is about 10x smaller th
 
 ```sql
 CREATE OR REPLACE TABLE probe AS
-  SELECT k, 
-    '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
-  FROM range(0, 100000) tbl(k);
+    SELECT k, 
+      '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
+    FROM range(0, 100_000) tbl(k);
 
 CREATE OR REPLACE TABLE build AS
-  SELECT r % 100000 AS k, 
-    '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
-    (random() * 100000)::INTEGER AS v
-  FROM range(0, 1000000) tbl(r);
+    SELECT r % 100_000 AS k, 
+      '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
+      (random() * 100_000)::INTEGER AS v
+    FROM range(0, 1_000_000) tbl(r);
 
-SELECT SUM(v)
+SELECT sum(v)
 FROM probe p
 ASOF JOIN build b
   ON p.k = b.k
@@ -526,18 +526,18 @@ WITH state AS (
     LEAD(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
   FROM build
 )
-SELECT SUM(v)
+SELECT sum(v)
 FROM probe p INNER JOIN state s
   ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
 ```
 
 <div class="narrow_table"></div>
 
-| Algorithm | Median of 5 |
-| :-------- | ----------: |
-| State Join | 0.065 | 
-| AsOf | 0.077 |
-| IEJoin | 49.508 |
+| Algorithm  | Median of 5 |
+| :--------- | ----------: |
+| State Join |       0.065 |
+| AsOf       |       0.077 |
+| IEJoin     |      49.508 |
 
 Now the runtime improvement of AsOf over IEJoin is huge (~500x)
 because it can leverage the partitioning to eliminate almost all of the equality mismatches.
@@ -560,12 +560,12 @@ The query looks like:
 
 ```sql
 WITH win AS (
-  SELECT p.k, p.t, v,
-      rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC) AS r
-  FROM probe p INNER JOIN build b
-    ON p.k = b.k
-  AND p.t >= b.t
-  QUALIFY r = 1
+    SELECT p.k, p.t, v,
+        rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC) AS r
+    FROM probe p INNER JOIN build b
+      ON p.k = b.k
+    AND p.t >= b.t
+    QUALIFY r = 1
 ) 
 SELECT k, t, v
 FROM win;
@@ -586,12 +586,12 @@ The probe tables have either 1 or 15 timestamps per key:
 ```sql
 CREATE OR REPLACE TABLE probe15 AS
     SELECT k, t
-    FROM range(10000) cs(k), 
+    FROM range(10_000) cs(k), 
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 26 DAY) ts(t);
 
 CREATE OR REPLACE TABLE probe1 AS
     SELECT k, '2022-01-01'::TIMESTAMP t
-    FROM range(10000) cs(k);
+    FROM range(10_000) cs(k);
 ```
 
 The build tables are much larger and have approximately
@@ -601,19 +601,19 @@ The build tables are much larger and have approximately
 -- 10:1
 CREATE OR REPLACE TABLE build10 AS
     SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
-    FROM range(10000) ks(k), 
+    FROM range(10_000) ks(k), 
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 59 HOUR) ts(t);
 
 -- 100:1
 CREATE OR REPLACE TABLE build100 AS
     SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
-    FROM range(10000) ks(k), 
+    FROM range(10_000) ks(k), 
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 350 MINUTE) ts(t);
 
 -- 1000:1
 CREATE OR REPLACE TABLE build1000 AS
     SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
-    FROM range(10000) ks(k), 
+    FROM range(10_000) ks(k), 
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 35 MINUTE) ts(t);
 ```
 
