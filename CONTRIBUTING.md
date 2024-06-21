@@ -1,20 +1,20 @@
 # Contributing
 
-- [Contributing](#contributing)
-  - [Code of Conduct](#code-of-conduct)
-  - [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
-  - [Eligibility](#eligibility)
-  - [Adding a New Page](#adding-a-new-page)
-  - [Style Guide](#style-guide)
-    - [Formatting](#formatting)
-    - [Headers](#headers)
-    - [SQL Style](#sql-style)
-    - [Python Style](#python-style)
-    - [Spelling](#spelling)
-  - [Example Code Snippets](#example-code-snippets)
-  - [Cross-References](#cross-references)
-  - [Archive and Generated Pages](#archive-and-generated-pages)
-  - [Notice](#notice)
+* [Contributing](#contributing)
+  * [Code of Conduct](#code-of-conduct)
+  * [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
+  * [Eligibility](#eligibility)
+  * [Adding a New Page](#adding-a-new-page)
+  * [Style Guide](#style-guide)
+    * [Formatting](#formatting)
+    * [Headers](#headers)
+    * [SQL Style](#sql-style)
+    * [Python Style](#python-style)
+    * [Spelling](#spelling)
+  * [Example Code Snippets](#example-code-snippets)
+  * [Cross-References](#cross-references)
+  * [Archive and Generated Pages](#archive-and-generated-pages)
+  * [Notice](#notice)
 
 ## Code of Conduct
 
@@ -73,6 +73,10 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Narrow tables – that do not span horizontally across the entire page – should be prepended with an empty div that has the `narrow_table` class: `<div class="narrow_table"></div>`.
 * Do not introduce hard line breaks if possible. Therefore, avoid using the `<br/>` HTML tag and avoid [double spaces at the end of a line in Markdown](https://spec.commonmark.org/0.28/#hard-line-breaks).
 * For unordered lists, use `*`. If the list has multiple levels, use **4 spaces** for indentation.
+
+> [!TIP]
+> In VS Code, you can configure the [Markdown All in One extension](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) to use asterisk as the default marker when generating a table of content for a page using the following setting in `settings.json`:
+> `"markdown.extension.toc.unorderedList.marker": "*"`
 
 ### Headers
 
