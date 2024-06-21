@@ -39,7 +39,7 @@ The last few weeks since the release were quite eventful:
         <br/>
     </div>
 
-4. We sponsored the [Hack4Her event](https://networkinstitute.org/2024/06/18/hack4her-2024-a-celebration-of-women-in-tech-and-innovation/), a female-focused student hackathon in the Netherlands. During the DuckDB Challenge of the event, teams built a community-driven app providing safe walking routes in Amsterdam using DuckDB's data processing capabilities.
+4. [DuckDB Labs](https://duckdblabs.com) sponsored the [Hack4Her event](https://networkinstitute.org/2024/06/18/hack4her-2024-a-celebration-of-women-in-tech-and-innovation/), a female-focused student hackathon in the Netherlands. During the DuckDB Challenge of the event, teams built a community-driven app providing safe walking routes in Amsterdam using DuckDB and its [geospatial library]({% link docs/extensions/spatial.md %}).
 
     <div align="center">
         <img src="/images/blog/hack4her-duckdb-amsterdam.jpg" alt="Hack4Her Event" width="700"/>
