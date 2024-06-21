@@ -137,7 +137,7 @@ Our first query can then be written as:
 ```sql
 SELECT ticker, h.when, price * shares AS value
 FROM holdings h
-ASOF JOIN prices p USING (ticker, when);
+ASOF JOIN prices p USING (ticker, "when");
 ```
 
 ### Clarification on Column Selection with `USING` in ASOF Joins
@@ -147,7 +147,7 @@ When you use the `USING` keyword in a join, the columns specified in the `USING`
 ```sql
 SELECT *
 FROM holdings h
-ASOF JOIN prices p USING (ticker, when);
+ASOF JOIN prices p USING (ticker, "when");
 ```
 
 You will get back only the columns `h.ticker, h.when, h.shares, p.price`. The columns `ticker` and `when` will appear only once, with `ticker`
