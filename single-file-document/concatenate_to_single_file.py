@@ -5,7 +5,6 @@ import yaml
 import textwrap
 from datetime import datetime, timezone
 import argparse
-import pathlib
 import frontmatter
 import logging
 
@@ -201,7 +200,10 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
     # skip index files
     if doc_file_path.endswith("index"):
         return
-    
+
+    if doc_file_path.endswith("release_calendar"):
+        return
+
     # determine the full path
     doc_file_full_path = f"{docs_root}/{doc_file_path}.md"
     if not os.path.exists(doc_file_full_path):
