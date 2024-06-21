@@ -44,6 +44,7 @@ In the following, we list DuckDB's past releases, including their codename (wher
 Prior to version 0.4.0, all releases, including patch versions, received a codename.
 Since version 0.4.0, only major and minor versions get a codename.
 
+<!-- markdownlint-disable MD055 MD056 -->
 | Date | Version | Codename | Named after | Logo |
 |:--|--:|--|--|--|
 {% for row in site.data.past_releases %}
@@ -51,3 +52,4 @@ Since version 0.4.0, only major and minor versions get a codename.
     {%- capture logo_exists %}{% file_exists {{ logo_filename }} %}{% endcapture -%}
     | {{ row.release_date }} | [{{ row.version_number }}](https://github.com/duckdb/duckdb/releases/tag/v{{ row.version_number }}) | {% if row.blog_post %}[{{ row.codename }}]({{ row.blog_post }}){% else %}{{ row.codename | default: "–" }}{% endif %} | {{ row.duck_species_primary | default: "–" }} {% if row.duck_species_secondary != nil %}_({{ row.duck_species_secondary }})_{% endif %} | {% if logo_exists == "true" %}![Logo of version {{ row.version_number }}](/{{ logo_filename }}){% endif %} |
 {% endfor %}
+<!-- markdownlint-enable MD055 MD056 -->
