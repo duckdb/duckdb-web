@@ -825,30 +825,4 @@ $(document).ready(function(){
 	});
 	// setWithExpiry('homeBanner', '', -1); // deletes content
 	
-	
-	/** ADD ICONS TO RELEASE CALENDAR */
-	$('.releasecalendar #past-releases ~ table tbody tr').each(function() {
-		var $currentRow = $(this);
-		var versionNumber = $currentRow.find('td:nth-child(2)').text().trim();
-		var iconFileName = versionNumber + '.svg';
-		var imagePath = '../../../images/release-icons/' + iconFileName;
-		// Check if image exits
-		$.ajax({
-			url: imagePath,
-			type: 'HEAD',
-			success: function() {
-				// If Icon-Image available use it!
-				var $img = $('<img>').attr('src', imagePath).attr('alt', 'Release-Icon');
-				var $iconCell = $('<td>').addClass('icon').append($img);
-				$currentRow.append($iconCell);
-			},
-			error: function() {
-				// No Icon-Image available
-			}
-		});
-	});
-
-
-	
-	
 });
