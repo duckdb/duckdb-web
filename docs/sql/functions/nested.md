@@ -83,7 +83,7 @@ This section describes functions and operators for examining and manipulating ne
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the list without the last element. |
-| **Example** | `array_pop_back(l)` |
+| **Example** | `array_pop_back([4, 5, 6])` |
 | **Result** | `[4, 5]` |
 
 ### `array_pop_front(list)`
@@ -91,7 +91,7 @@ This section describes functions and operators for examining and manipulating ne
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the list without the first element. |
-| **Example** | `array_pop_front(l)` |
+| **Example** | `array_pop_front([4, 5, 6])` |
 | **Result** | `[5, 6]` |
 
 ### `flatten(list_of_lists)`
