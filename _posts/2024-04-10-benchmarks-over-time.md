@@ -289,9 +289,12 @@ Inserting the results was taking the majority of the time!
 
 Enums were also used in place of strings for categorical columns in version 0.6.1. 
 This means that DuckDB was able to use integers rather than strings when operating on those columns, further boosting performance.
+We use an area chart to display the results for this reason - the time spend converting to enums should be accounted for in the results. 
+That conversion pays significant dividends during the course of the benchmark.
 
-Despite the performance plateau, aggregations have received significant attention in the most recent versions to enable larger than memory aggregations.
-You can see that this was achieved without reducing performance for the smaller-than-memory case.
+Despite what appears at first glance to be a performance plateau, zooming in to 2023 and 2024 reveals a ~20% improvement.
+In addition, aggregations have received significant attention in the most recent versions to enable larger than memory aggregations.
+You can see that this was achieved while continuing to improve performance for the smaller-than-memory case.
 
 
 ### Join
