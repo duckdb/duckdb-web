@@ -267,7 +267,7 @@ FROM read_json(
 DuckDB can automatically detect the types like so:
 
 ```sql
-SELECT goose, duck FROM read_json_auto('*.json.gz');
+SELECT goose, duck FROM read_json('*.json.gz');
 SELECT goose, duck FROM '*.json.gz'; -- equivalent
 ```
 

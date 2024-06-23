@@ -20,15 +20,15 @@ SELECT *
 FROM read_json('todos.json',
                format = 'array',
                columns = {userId: 'UBIGINT',
-                         id: 'UBIGINT',
-                         title: 'VARCHAR',
-                         completed: 'BOOLEAN'});
+                          id: 'UBIGINT',
+                          title: 'VARCHAR',
+                          completed: 'BOOLEAN'});
 ```
 
 Read a JSON file from stdin, auto-infer options:
 
 ```bash
-cat data/json/todos.json | duckdb -c "SELECT * FROM read_json_auto('/dev/stdin')"
+cat data/json/todos.json | duckdb -c "SELECT * FROM read_json('/dev/stdin')"
 ```
 
 Read a JSON file into a table:
@@ -80,8 +80,6 @@ Below are parameters that can be passed in to the JSON reader.
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | `'iso'`|
 | `union_by_name` | Whether the schema's of multiple JSON files should be [unified]({% link docs/data/multiple_files/combining_schemas.md %}). | `BOOL` | `false` |
 
-When using `read_json_auto`, every parameter that supports auto-detection is enabled.
-
 ## Examples of Format Settings
 
 The JSON extension can attempt to determine the format of a JSON file when setting `format` to `auto`.
@@ -110,7 +108,7 @@ We use the example file [`records.json`](/data/records.json) with the following 
 
 ```sql
 SELECT *
-FROM read_json_auto('records.json', format = 'newline_delimited');
+FROM read_json('records.json', format = 'newline_delimited');
 ```
 
 <div class="narrow_table monospace_table"></div>
@@ -136,7 +134,7 @@ To demonstrate its use, we use the example file [`records-in-array.json`](/data/
 
 ```sql
 SELECT *
-FROM read_json_auto('records-in-array.json', format = 'array');
+FROM read_json('records-in-array.json', format = 'array');
 ```
 
 <div class="narrow_table monospace_table"></div>
@@ -169,7 +167,7 @@ To demonstrate its use, we use the example file [`unstructured.json`](/data/unst
 
 ```sql
 SELECT *
-FROM read_json_auto('unstructured.json', format = 'unstructured');
+FROM read_json('unstructured.json', format = 'unstructured');
 ```
 
 <div class="narrow_table monospace_table"></div>
@@ -195,7 +193,7 @@ Continuing with the same example file, [`records.json`](/data/records.json):
 
 ```sql
 SELECT *
-FROM read_json_auto('records.json', records = true);
+FROM read_json('records.json', records = true);
 ```
 
 <div class="narrow_table monospace_table"></div>
@@ -210,7 +208,7 @@ When `records = false`, the JSON extension will not unpack the top-level objects
 
 ```sql
 SELECT *
-FROM read_json_auto('records.json', records = false);
+FROM read_json('records.json', records = false);
 ```
 
 <div class="narrow_table monospace_table"></div>
@@ -231,7 +229,7 @@ This is especially useful if we have non-object JSON, for example, [`arrays.json
 
 ```sql
 SELECT *
-FROM read_json_auto('arrays.json', records = false);
+FROM read_json('arrays.json', records = false);
 ```
 
 <div class="narrow_table monospace_table"></div>
@@ -246,13 +244,13 @@ FROM read_json_auto('arrays.json', records = false);
 
 The contents of tables or the result of queries can be written directly to a JSON file using the `COPY` statement. See the [COPY documentation]({% link docs/sql/statements/copy.md %}#copy-to) for more information.
 
-## `read_json_auto` Function
+## `read_json` Function
 
-The `read_json_auto` is the simplest method of loading JSON files: it automatically attempts to figure out the correct configuration of the JSON reader. It also automatically deduces types of columns.
+The `read_json` is the simplest method of loading JSON files: it automatically attempts to figure out the correct configuration of the JSON reader. It also automatically deduces types of columns.
 
 ```sql
 SELECT *
-FROM read_json_auto('todos.json')
+FROM read_json('todos.json')
 LIMIT 5;
 ```
 
@@ -268,12 +266,12 @@ LIMIT 5;
 
 The path can either be a relative path (relative to the current working directory) or an absolute path.
 
-We can use `read_json_auto` to create a persistent table as well:
+We can use `read_json` to create a persistent table as well:
 
 ```sql
 CREATE TABLE todos AS
     SELECT *
-    FROM read_json_auto('todos.json');
+    FROM read_json('todos.json');
 DESCRIBE todos;
 ```
 
@@ -290,7 +288,7 @@ If we specify the columns, we can bypass the automatic detection. Note that not 
 
 ```sql
 SELECT *
-FROM read_json_auto('todos.json',
+FROM read_json('todos.json',
                     columns = {userId: 'UBIGINT',
                                completed: 'BOOLEAN'});
 ```
