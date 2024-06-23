@@ -99,16 +99,16 @@ def adjust_links_in_doc_body(doc_body):
     # replace relative installation page links,
     # while keeping the optional '?environment=...' query strings
     doc_body = re.sub(
-            r"\[installation page\]\([./]*installation((\?)[a-zA-Z0-9=]+)?\)",
-            r"[installation page](https://duckdb.org/docs/installation/\1)",
+            r"\[installation page\]\((.*)?\)",
+            r"[installation page](https://duckdb.org/docs/installation/)",
             doc_body
         )
 
     # replace link to the Python guides index page
     # with a link to the Python guides section
     doc_body = doc_body.replace(
-        "](../../guides/index#python-client)",
-        "](../../guides/python)"
+        "]({% link docs/guides/overview.md %}#python-client)",
+        "]({% link docs/python/overview.md %}#)"
     )
 
     # replace "`, `" (with its typical surroundings) with "`,` " to allow line breaking
@@ -137,13 +137,21 @@ def change_link(doc_body, doc_file_path):
     # match links but do not match image definitions (which start with a '!' character) within the link
     matches = re.findall(r"([^!]\[[^]!]*\])\(([^)]*)\)", doc_body)
     for match in matches:
-        original_link = match[1]
+        link_item = match[1]
+
         if original_link.startswith("http://") or original_link.startswith("https://"):
             continue
         if original_link.startswith("/"):
             full_url_link = f"https://duckdb.org{original_link}"
             doc_body = doc_body.replace(f"]({original_link})", f"]({full_url_link})")
             continue
+
+        if link_item.startwith("{% link"):
+            ...
+        if link_item.startwith("{% post"):
+            ...
+
+        # need to adjust the linked_path_to_label function
 
         link_parts = original_link.split("#")
 
