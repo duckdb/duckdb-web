@@ -96,7 +96,7 @@ Scale over time
 
 
  --> 
-## Benchmark design
+# Benchmark design
 
 ### Summary
 * H2O.ai, plus import/export and window function tests
@@ -137,9 +137,12 @@ We also added an entire series of Window function benchmarks.
 Window functions are a critical workload in real world data analysis scenarios, and can stress test a system in other ways.
 DuckDB has implemented state of the art algorithms to quickly process even the most complex window functions.
 We use the largest table from the join benchmark as the raw data for these new tests to help with comparability to the rest of the benchmark. 
+
 Window function benchmarks are much less common than more traditional joins and aggregations, and we were unable to find a suitable suite off the shelf. 
 These queries were designed to showcase the variety of uses for window functions, but there are certainly more that could be added.
 We are open to your suggestions for queries to add, and hope these queries could prove useful for other systems!
+
+Since the window functions benchmark is new, the window functions from each of the queries included are shown in the appendix at the end of the post.
 
 ### Workload size
 We test only the middle 5GB dataset size for the workloads mentioned thus far, primarily because some import and export operations to external formats like Pandas must fit in memory (and we used a Macbook Pro M1 with only 16GB of RAM). 
@@ -151,7 +154,7 @@ We also ran only the group by and join related operations (avoiding in-memory im
 Older versions of DuckDB could not handle the 50GB dataset when joining or aggregating, but modern versions can handle both, even on a memory-constrained 16GB RAM laptop.
 
 ### Computing resources
-All tests use a 16GB Macbook Pro M1 with 16GB of RAM.
+All tests use a Macbook Pro M1 with 16GB of RAM.
 In 2024, this is far from state of the art! 
 If you have more powerful hardware, you will see both improved performance and scalability.
 
@@ -159,7 +162,7 @@ If you have more powerful hardware, you will see both improved performance and s
 Version 0.2.7 was the first version to include a Python client compiled for arm64, so it was the first version that could easily run on the benchmarking compute resources. 
 Version 1.0.0 is the latest available at the time of publication, although we also provide a sneak preview of an in-development feature branch.
 
-## Overall Benchmark Results
+# Overall Benchmark Results
 The latest DuckDB can complete one run of the full benchmark suite in under 35 seconds, while version 0.2.7 requires nearly 500 seconds for the same task. 
 **That is 14 times faster, in only 3 years!**
 
@@ -209,7 +212,7 @@ CSV parsing has seen significant gains, import and export have improved signific
 What was the slight regression from December 2022 to June 2023? 
 Window functions received additional capabilities and experienced a slight performance degradation in the process.
 However, from version 0.9.0 onward we see substantial performance improvement across the board for window functions. 
-If window functions are filtered out of the chart, we see more consistent gains. 
+If window functions are filtered out of the chart, we see a smoother trend. 
 
 You may also notice that starting with version 0.9 in September 2023, the performance appears to plateau. 
 What is happening here? 
@@ -247,14 +250,36 @@ If you remember the version that you last tested, you can compare how much faste
             });
 </script>
 
-## Results by Workload
+# Results by Workload
 
-### CSV Parsing
+### CSV Reader
+
+<div id="perf_over_time_csv_reader_area" style="width:100%;height:400px;"></div>
+<script>
+    fetch('{{ site.baseurl }}/data/perf_over_time_csv_reader_area.json')
+        .then(res => res.json())
+        .then(parsed_json => {
+            let perf_over_time_csv_reader_area = document.getElementById('perf_over_time_csv_reader_area');
+            Plotly.plot( perf_over_time_csv_reader_area, parsed_json.data, parsed_json.layout );
+            });
+</script>
+
 DuckDB has invested substantially in building a [fast and robust CSV parser](https://duckdb.org/2023/10/27/csv-sniffer.html).
 This is often the first task in a data analysis workload, and it tends to be under valued and under-benchmarked. 
 DuckDB has improved csv reader performance by nearly 3x, while adding the ability to handle many more csv file formats automatically.
 
 ### Group By
+
+<div id="perf_over_time_group_by_area" style="width:100%;height:400px;"></div>
+<script>
+    fetch('{{ site.baseurl }}/data/perf_over_time_group_by_area.json')
+        .then(res => res.json())
+        .then(parsed_json => {
+            let perf_over_time_group_by_area = document.getElementById('perf_over_time_group_by_area');
+            Plotly.plot( perf_over_time_group_by_area, parsed_json.data, parsed_json.layout );
+            });
+</script>
+
 Group by or aggregation operations are a critical OLAP workload, and have therefore received substantial focus in DuckDB, improving over 12x in the last 3 years.
 In version 0.3.1, multithreaded aggregation was enabled by default, providing a significant speedup.
 
@@ -270,6 +295,17 @@ You can see that this was achieved without reducing performance for the smaller-
 
 
 ### Join
+
+<div id="perf_over_time_join_area" style="width:100%;height:400px;"></div>
+<script>
+    fetch('{{ site.baseurl }}/data/perf_over_time_join_area.json')
+        .then(res => res.json())
+        .then(parsed_json => {
+            let perf_over_time_join_area = document.getElementById('perf_over_time_join_area');
+            Plotly.plot( perf_over_time_join_area, parsed_json.data, parsed_json.layout );
+            });
+</script>
+
 Join operations are another area of focus for analytical databases, and DuckDB in particular.
 Join speeds have improved by 4x in the last 3 years! 
 
@@ -280,9 +316,31 @@ In recent versions, they have also been upgraded to support larger than memory c
 This focus has also benefitted the smaller-than-memory case and has led to the improvements in 0.10. 
 
 ### Window Functions
+
+<div id="perf_over_time_window_area" style="width:100%;height:500px;"></div>
+<script>
+    fetch('{{ site.baseurl }}/data/perf_over_time_window_area.json')
+        .then(res => res.json())
+        .then(parsed_json => {
+            let perf_over_time_window_area = document.getElementById('perf_over_time_window_area');
+            Plotly.plot( perf_over_time_window_area, parsed_json.data, parsed_json.layout );
+            });
+</script>
+
 <!-- TODO: Research why things got faster at various points -->
 
 ### Export
+
+<div id="perf_over_time_export_area" style="width:100%;height:400px;"></div>
+<script>
+    fetch('{{ site.baseurl }}/data/perf_over_time_export_area.json')
+        .then(res => res.json())
+        .then(parsed_json => {
+            let perf_over_time_export_area = document.getElementById('perf_over_time_export_area');
+            Plotly.plot( perf_over_time_export_area, parsed_json.data, parsed_json.layout );
+            });
+</script>
+
 Often DuckDB is not the final step in a workflow, so export performance has an impact. 
 Until recently, the DuckDB format was not backward compatible, so the recommended long term persistence format was Parquet.
 Parquet is also critical to interoperability with many other systems, especially data lakes. 
@@ -294,8 +352,21 @@ DuckDB's underlying data types share many similarities with Arrow, so data trans
 Exports to parquet have also improved dramatically in version 0.10.2. 
 <!-- TODO: Why are parquet exports better in 0.10.2? -->
 
+#### Exporting Apache Arrow vs. Pandas
+<!-- TODO -->
 
 ### Scan Other Formats
+
+<div id="perf_over_time_scan_other_formats_area" style="width:100%;height:400px;"></div>
+<script>
+    fetch('{{ site.baseurl }}/data/perf_over_time_scan_other_formats_area.json')
+        .then(res => res.json())
+        .then(parsed_json => {
+            let perf_over_time_scan_other_formats_area = document.getElementById('perf_over_time_scan_other_formats_area');
+            Plotly.plot( perf_over_time_scan_other_formats_area, parsed_json.data, parsed_json.layout );
+            });
+</script>
+
 In some use cases, DuckDB does not need to store the raw data, but instead should simply read and analyze it. 
 This allows DuckDB to fit seamlessly into other workflows. 
 This benchmark measures how fast DuckDB can scan and aggregate various data formats. 
@@ -303,8 +374,11 @@ To enable comparisons over time, we switch from Pandas to Arrow at version 0.5.1
 DuckDB is nearly 7x faster in this situation, and the absolute time required is very short. 
 DuckDB is a great fit for this type of work!
 
+#### Scanning Apache Arrow vs. Pandas
 
-## Scale tests
+
+
+# Scale tests
 
 ### 50GB Group By
 
@@ -312,3 +386,89 @@ DuckDB is a great fit for this type of work!
 
 
 <!-- TODO: Fix the hover text of the DuckDB version for the export data points -->
+
+<!-- TODO: Include the queries used in the window functions benchmark -->
+
+# Appendix
+
+### Window Functions Benchmark
+
+Each benchmark follows the format below, but with different sets of window functions in the `< window function(s) >` placeholder.
+The table in use is the largest table from the H2O.ai join benchmark, and in this case the 5GB scale was used.
+
+```sql
+DROP TABLE IF EXISTS windowing_results;
+
+CREATE TABLE windowing_results AS
+    SELECT 
+        id1,
+        id2,
+        id3,
+        v2,
+        < window function(s) >
+    FROM join_benchmark_largest_table;
+```
+
+The various window functions that replace the placeholder are below and are labelled to match the result graphs. 
+These were selected to showcase the variety of use cases for window functions, as well as the variety of algorithms required to support the full range of the syntax.
+The DuckDB documentation contains a [full railroad diagram of the available syntax](https://duckdb.org/docs/sql/window_functions#syntax).
+If there are common use cases for window functions that are not well covered in this benchmark, please let us know!
+
+```sql
+/* 302 Basic Window */ 
+sum(v2) over () as window_basic
+
+/* 303 Sorted Window */
+first(v2) over (order by id3) as first_order_by,
+row_number() over (order by id3) as row_number_order_by
+
+/* 304 Window Quantiles Entire Dataset */
+quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) over () as quantile_entire_dataset
+
+/* 305 Window Partition By */
+sum(v2) over (partition by id1) as sum_by_id1,
+sum(v2) over (partition by id2) as sum_by_id2,
+sum(v2) over (partition by id3) as sum_by_id3
+
+/* 306 Window Partition By Order By */
+first(v2) over (partition by id2 order by id3) as first_by_id2_ordered_by_id3
+
+/* 307 Window Lead and Lag */
+first(v2) over (order by id3 rows between 1 preceding and 1 preceding) as my_lag,
+first(v2) over (order by id3 rows between 1 following and 1 following) as my_lead
+
+/* 308 Window Moving Averages */
+avg(v2) over (order by id3 rows between 100 preceding and current row) as my_moving_average,
+avg(v2) over (order by id3 rows between id1 preceding and current row) as my_dynamic_moving_average
+
+/* 309 Window Rolling Sum */
+sum(v2) over (order by id3 rows between unbounded preceding and current row) as my_rolling_sum
+
+/* 310 Window Range Between */
+sum(v2) over (order by v2 range between 3 preceding and current row) as my_range_between,
+sum(v2) over (order by v2 range between id1 preceding and current row) as my_dynamic_range_between
+
+/* 311 Window Quantiles Partition By */
+quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) over (partition by id2) as my_quantiles_by_id2
+
+/* 312 Window Quantiles Partition By Rows Between */
+first(v2) over (partition by id2 order by id3 rows between 1 preceding and 1 preceding) as my_lag_by_id2,
+first(v2) over (partition by id2 order by id3 rows between 1 following and 1 following) as my_lead_by_id2
+
+/* 313 Window Moving Averages Partition By */
+avg(v2) over (partition by id2 order by id3 rows between 100 preceding and current row) as my_moving_average_by_id2,
+avg(v2) over (partition by id2 order by id3 rows between id1 preceding and current row) as my_dynamic_moving_average_by_id2
+
+/* 314 Window Rolling Sum Partition By */
+sum(v2) over (partition by id2 order by id3 rows between unbounded preceding and current row) as my_rolling_sum_by_id2
+
+/* 315 Window Range Between Partition By */
+sum(v2) over (partition by id2 order by v2 range between 3 preceding and current row) as my_range_between_by_id2,
+sum(v2) over (partition by id2 order by v2 range between id1 preceding and current row) as my_dynamic_range_between_by_id2
+
+/* 316 Window Quantiles Partition By Rows Between */
+quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) over (partition by id2 order by id3 rows between 100 preceding and current row) as my_quantiles_by_id2_rows_between
+```
+
+
+<!-- 2 hours on 6/21 -->
