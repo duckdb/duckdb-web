@@ -18,7 +18,8 @@ SELECT * FROM 'flights.csv';
 Use the `read_csv` function with custom options:
 
 ```sql
-SELECT * FROM read_csv('flights.csv',
+SELECT *
+FROM read_csv('flights.csv',
     delim = '|',
     header = true,
     columns = {
