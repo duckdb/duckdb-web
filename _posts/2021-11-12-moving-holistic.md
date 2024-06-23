@@ -241,7 +241,7 @@ FROM rank100;
 The two examples here are the interquartile range queries;
 the other queries use the single argument aggregates `median`, `mad` and `mode`.
 
-As a final step, we ran the same query with `COUNT(*)`,
+As a final step, we ran the same query with `count(*)`,
 which has the same overhead as the other benchmarks, but is trivial to compute
 (it just returns the frame size).
 That overhead was subtracted from the run times to give the algorithm timings:

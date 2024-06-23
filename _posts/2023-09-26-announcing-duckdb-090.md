@@ -59,7 +59,7 @@ In this release, support for disk-spilling techniques is further extended throug
 The performance of our hash aggregate has also improved in general, especially when there are many groups. For example, we compute the number of unique rows in a data set with 30 million rows and 15 columns by using the following query:
 
 ```sql
-SELECT COUNT(*) FROM (SELECT DISTINCT * FROM tbl);
+SELECT count(*) FROM (SELECT DISTINCT * FROM tbl);
 ```
 If we keep all the data in memory, the query should use around 6GB. However, we can still complete the query if less memory is available. In the table below, we can see how the runtime is affected by lowering the memory limit:
 
@@ -121,7 +121,7 @@ By reducing the size of query intermediates, we can prevent/reduce spilling data
 
 ```sql
 SELECT
-    SUM(driver_pay) OVER (
+    sum(driver_pay) OVER (
         ORDER BY dropoff_datetime ASC
         RANGE BETWEEN
         INTERVAL 3 DAYS PRECEDING AND

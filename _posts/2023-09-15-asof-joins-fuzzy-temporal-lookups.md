@@ -130,7 +130,7 @@ These can both be fairly expensive operations, but the query would look like thi
 ```sql
 WITH state AS (
     SELECT ticker, price, "when",
-      LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+        lead("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
     FROM prices
 )
 SELECT h.ticker, h.when, price * shares AS value
@@ -373,7 +373,7 @@ Remember that we used this query to convert the event table to a state table:
 ```sql
 WITH state AS (
     SELECT ticker, price, "when",
-      LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+      lead("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
     FROM prices
 );
 ```
@@ -474,7 +474,7 @@ WITH state AS (
     SELECT k, 
       t AS begin, 
       v, 
-      LEAD(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
+      lead(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
     FROM build
 )
 SELECT sum(v)
@@ -523,7 +523,7 @@ WITH state AS (
   SELECT k, 
     t AS begin, 
     v, 
-    LEAD(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
+    lead(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
   FROM build
 )
 SELECT sum(v)
