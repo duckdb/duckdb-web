@@ -7,6 +7,17 @@ excerpt: "In the last 3 years, DuckDB has become 3 - 25x faster and can analyze 
 <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
 <script src="{{ site.baseurl }}/js/plotly-1.58.5.min.js"></script>
 
+<div id="overall_results_by_time_header" style="width:100%;height:400px;"></div>
+<script>
+    fetch('{{ site.baseurl }}/data/perf_over_time_overall_results_by_time.json')
+        .then(res => res.json())
+        .then(parsed_json => {
+            let overall_results_by_time_header = document.getElementById('overall_results_by_time_header');
+            parsed_json.layout = {...parsed_json.layout, "title": "Benchmark results over time"};
+            Plotly.plot( overall_results_by_time_header, parsed_json.data, parsed_json.layout );
+            });
+</script>
+
 A big part of DuckDB's focus is on the developer experience of working with data.
 However, performance is an important consideration when investigating data management systems. 
 Fairly comparing data processing systems using benchmarks is [very difficult](https://mytherin.github.io/papers/2018-dbtest.pdf). 
@@ -48,9 +59,10 @@ The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]
 (When writing these queries, it felt like going back in time!)
 
 
-## Benchmark Design
+## Benchmark Design Summary
 
-### Summary
+This post measures DuckDB's performance over time using the H2O.ai benchmark, plus some new benchmarks added for importing, exporting, and using window functions.
+Please see our previous [blog](https://duckdb.org/2023/04/14/h2oai.html) [posts](https://duckdb.org/2023/11/03/db-benchmark-update.html) for details on why we believe the H2O.ai benchmark is a good approach! The full details of the benchmark design are in the appendix.
 
 * H2O.ai, plus import/export and window function tests
 * Python instead of R
@@ -60,97 +72,7 @@ The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]
 * DuckDB Versions 0.2.7 through 1.0.0
     * Nearly 3 years, from 2021-06-14 to 2024-06-03
 * Default settings
-
-
-### H2O.ai as the Foundation
-
-This post measures DuckDB's performance over time on the H2O.ai benchmark for both joins and group by queries.
-Please see our previous [blog](https://duckdb.org/2023/04/14/h2oai.html) [posts](https://duckdb.org/2023/11/03/db-benchmark-update.html) for details on why we believe the H2O.ai benchmark is a good approach!
-
-The result of each H2O.ai query is written to a table in a persistent DuckDB file.
-This does require additional work when compared with an in-memory workflow (especially the burden on the SSD rather than RAM), but improves scalability and is a common approach for larger analyses.
-
-As in the current H2O.ai benchmark, categorical-type columns (`VARCHAR` columns with low cardinality) were converted to the `ENUM` type as a part of the benchmark.
-The time for converting into `ENUM` columns was included in the benchmark time, and resulted in a lower total amount of time (so the upfront conversion was worthwhile).
-However, the `ENUM` data type was not fully operational in DuckDB until version 0.6.1, so earlier versions skip this step.
-
-### Python Client
-
-To measure interoperability with other dataframe formats, we have used Python rather than R (used by H2O.ai) for this analysis.
-We do continue to use R for the data generation step for consistency with the benchmark.
-Python is DuckDB's most popular client, so this is also the most representative of real world performance.
-
-### Export and Replacement Scans
-
-However, we now extend this benchmark in several important ways. 
-In addition to considering raw query performance, we measure import and export performance with several formats: Pandas, Apache Arrow, and Apache Parquet.
-The results of both the join and group by benchmarks are exported to each format.
-
-When exporting to dataframes, we measured the performance in both cases.
-However, when summarizing the total performance, we chose the best performing format at the time.
-This likely mirrors the behavior of performance-sensitive users (as they would likely not write to both formats!).
-In version 0.5.1, DuckDB's performance when writing to and reading from the Apache Arrow format surpassed Pandas. 
-As a result, versions 0.2.7 to 0.4.0 use Pandas, and 0.5.1 onward uses Arrow. 
-
-On the import side, replacement scans allow DuckDB to read those same formats without a prior import step.
-In the replacement scan benchmark, the data that is scanned is the output of the final H20.ai group by benchmark query.
-At the 5GB scale it is a 10 million row dataset.
-Only one column is read, and a single aggregate is calculated. 
-This focuses the benchmark on the speed of scanning the data rather than DuckDB's aggregation algorithms or speed of outputting results.
-The query used follows the format:
-
-```sql
-SELECT 
-    sum(v3) AS v3 
-FROM ⟨dataframe or Parquet file⟩
-```
-
-### Window Functions
-
-We also added an entire series of window function benchmarks. 
-Window functions are a critical workload in real world data analysis scenarios, and can stress test a system in other ways.
-DuckDB has implemented state of the art algorithms to quickly process even the most complex window functions.
-We use the largest table from the join benchmark as the raw data for these new tests to help with comparability to the rest of the benchmark. 
-
-Window function benchmarks are much less common than more traditional joins and aggregations, and we were unable to find a suitable suite off the shelf. 
-These queries were designed to showcase the variety of uses for window functions, but there are certainly more that could be added.
-We are open to your suggestions for queries to add, and hope these queries could prove useful for other systems!
-
-Since the window functions benchmark is new, the window functions from each of the queries included are shown in the appendix at the end of the post.
-
-### Workload Size
-
-We test only the middle 5GB dataset size for the workloads mentioned thus far, primarily because some import and export operations to external formats like Pandas must fit in memory (and we used a MacBook Pro M1 with only 16GB of RAM). 
-Additionally, running the tests for 3 year's of DuckDB versions was time-intensive even at that scale, due to the performance of older versions.
-
-### Scale Tests
-
-However, using only 5GB of data does not answer our second key question: “What scale of data can it handle?”!
-We also ran only the group by and join related operations (avoiding in-memory imports and exports) at the 5GB and the 50GB scale. 
-Older versions of DuckDB could not handle the 50GB dataset when joining or aggregating, but modern versions can handle both, even on a memory-constrained 16GB RAM laptop.
-Instead of measuring performance, we measure the size of the benchmark that was able to complete on a given version.
-
-### Summary Metrics
-
-With the exception of the scale tests, each benchmark was run 3 times and the median time was used for reporting results.
-The scale tests were run once and produced a binary metric, success or failure, at each data size tested. 
-As older versions would not fail gracefully, the scale metrics were accumulated across multiple partial runs.
-
-### Computing Resources
-
-All tests use a Macbook Pro M1 with 16GB of RAM.
-In 2024, this is far from state of the art! 
-If you have more powerful hardware, you will see both improved performance and scalability.
-
-### DuckDB Versions
-
-Version 0.2.7 was the first version to include a Python client compiled for ARM64, so it was the first version that could easily run on the benchmarking compute resources. 
-Version 1.0.0 is the latest available at the time of publication, although we also provide a sneak preview of an in-development feature branch.
-
-### Default Settings
-
-All versions were run with the default settings. 
-As a result, improvements from a new feature only appear in these results once that feature became the default and was therefore ready for production workloads. 
+* Pandas pre-version 0.5.1, Apache Arrow 0.5.1+
 
 
 ## Overall Benchmark Results
@@ -466,6 +388,98 @@ If you have made it this far, welcome to the flock! 🦆
 
 
 ## Appendix
+
+### Benchmark Design
+
+#### H2O.ai as the Foundation
+
+This post measures DuckDB's performance over time on the H2O.ai benchmark for both joins and group by queries.
+
+The result of each H2O.ai query is written to a table in a persistent DuckDB file.
+This does require additional work when compared with an in-memory workflow (especially the burden on the SSD rather than RAM), but improves scalability and is a common approach for larger analyses.
+
+As in the current H2O.ai benchmark, categorical-type columns (`VARCHAR` columns with low cardinality) were converted to the `ENUM` type as a part of the benchmark.
+The time for converting into `ENUM` columns was included in the benchmark time, and resulted in a lower total amount of time (so the upfront conversion was worthwhile).
+However, the `ENUM` data type was not fully operational in DuckDB until version 0.6.1, so earlier versions skip this step.
+
+#### Python Client
+
+To measure interoperability with other dataframe formats, we have used Python rather than R (used by H2O.ai) for this analysis.
+We do continue to use R for the data generation step for consistency with the benchmark.
+Python is DuckDB's most popular client, so this is also the most representative of real world performance.
+
+#### Export and Replacement Scans
+
+However, we now extend this benchmark in several important ways. 
+In addition to considering raw query performance, we measure import and export performance with several formats: Pandas, Apache Arrow, and Apache Parquet.
+The results of both the join and group by benchmarks are exported to each format.
+
+When exporting to dataframes, we measured the performance in both cases.
+However, when summarizing the total performance, we chose the best performing format at the time.
+This likely mirrors the behavior of performance-sensitive users (as they would likely not write to both formats!).
+In version 0.5.1, DuckDB's performance when writing to and reading from the Apache Arrow format surpassed Pandas. 
+As a result, versions 0.2.7 to 0.4.0 use Pandas, and 0.5.1 onward uses Arrow. 
+
+On the import side, replacement scans allow DuckDB to read those same formats without a prior import step.
+In the replacement scan benchmark, the data that is scanned is the output of the final H20.ai group by benchmark query.
+At the 5GB scale it is a 10 million row dataset.
+Only one column is read, and a single aggregate is calculated. 
+This focuses the benchmark on the speed of scanning the data rather than DuckDB's aggregation algorithms or speed of outputting results.
+The query used follows the format:
+
+```sql
+SELECT 
+    sum(v3) AS v3 
+FROM ⟨dataframe or Parquet file⟩
+```
+
+#### Window Functions
+
+We also added an entire series of window function benchmarks. 
+Window functions are a critical workload in real world data analysis scenarios, and can stress test a system in other ways.
+DuckDB has implemented state of the art algorithms to quickly process even the most complex window functions.
+We use the largest table from the join benchmark as the raw data for these new tests to help with comparability to the rest of the benchmark. 
+
+Window function benchmarks are much less common than more traditional joins and aggregations, and we were unable to find a suitable suite off the shelf. 
+These queries were designed to showcase the variety of uses for window functions, but there are certainly more that could be added.
+We are open to your suggestions for queries to add, and hope these queries could prove useful for other systems!
+
+Since the window functions benchmark is new, the window functions from each of the queries included are shown in the appendix at the end of the post.
+
+#### Workload Size
+
+We test only the middle 5GB dataset size for the workloads mentioned thus far, primarily because some import and export operations to external formats like Pandas must fit in memory (and we used a MacBook Pro M1 with only 16GB of RAM). 
+Additionally, running the tests for 3 year's of DuckDB versions was time-intensive even at that scale, due to the performance of older versions.
+
+#### Scale Tests
+
+However, using only 5GB of data does not answer our second key question: “What scale of data can it handle?”!
+We also ran only the group by and join related operations (avoiding in-memory imports and exports) at the 5GB and the 50GB scale. 
+Older versions of DuckDB could not handle the 50GB dataset when joining or aggregating, but modern versions can handle both, even on a memory-constrained 16GB RAM laptop.
+Instead of measuring performance, we measure the size of the benchmark that was able to complete on a given version.
+
+#### Summary Metrics
+
+With the exception of the scale tests, each benchmark was run 3 times and the median time was used for reporting results.
+The scale tests were run once and produced a binary metric, success or failure, at each data size tested. 
+As older versions would not fail gracefully, the scale metrics were accumulated across multiple partial runs.
+
+#### Computing Resources
+
+All tests use a Macbook Pro M1 with 16GB of RAM.
+In 2024, this is far from state of the art! 
+If you have more powerful hardware, you will see both improved performance and scalability.
+
+#### DuckDB Versions
+
+Version 0.2.7 was the first version to include a Python client compiled for ARM64, so it was the first version that could easily run on the benchmarking compute resources. 
+Version 1.0.0 is the latest available at the time of publication, although we also provide a sneak preview of an in-development feature branch.
+
+#### Default Settings
+
+All versions were run with the default settings. 
+As a result, improvements from a new feature only appear in these results once that feature became the default and was therefore ready for production workloads. 
+
 
 ### Window Functions Benchmark
 
