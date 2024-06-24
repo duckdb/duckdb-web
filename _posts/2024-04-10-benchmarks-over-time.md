@@ -17,6 +17,7 @@ Instead, this post focuses on benchmarking *our own* performance over time.
 This approach avoids many comparison pitfalls, and also provides several valuable data points to consider when selecting a system.
 
 #### How fast is it improving? 
+
 When you select a data processing system, it is important to think about the future. 
 The best way to predict the future is to look at the past!
 Learning a new tool is an investment, in addition to the time spent integrating it into your workflows.
@@ -27,15 +28,18 @@ If the system is improving rapidly, then the system can scale as your data scale
 Plus, if you haven't experimented with a tool in a while, you can see how much faster it has become since you last checked!
 
 #### What is it especially good at?
+
 The choice of benchmark is an indicator of what types of workloads a tool is useful for. 
 The higher the variety of analyses in the benchmark, the more broadly useful the tool can be.
 
 #### What scale of data can it handle?
+
 Many benchmarks are deliberately smaller than typical workloads. 
 This allows the benchmark to complete in a reasonable amount of time when run with many configurations. 
 However, an important question to answer when selecting a system is whether the size of your data can be handled within the size of your compute resources.
 
 ### Limitations of benchmarking over time
+
 There are some limitations when looking at the performance of a system over time.
 If a feature is brand new, there is no prior performance to compare to!
 As a result, this post focuses on fundamental workloads rather than DuckDB's ever-increasing set of integrations with different lakehouse data formats, cloud services, and more.
@@ -44,9 +48,10 @@ The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]
 (When writing these queries, it felt like going back in time!)
 
 
-# Benchmark design
+## Benchmark design
 
 ### Summary
+
 * H2O.ai, plus import/export and window function tests
 * Python instead of R
 * 5GB scale for everything, plus 50GB scale for group bys and joins
@@ -58,6 +63,7 @@ The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]
 
 
 ### H2O.ai as the Foundation
+
 This post measures DuckDB's performance over time on the H2O.ai benchmark for both joins and group by queries.
 Please see our previous [blog](https://duckdb.org/2023/04/14/h2oai.html) [posts](https://duckdb.org/2023/11/03/db-benchmark-update.html) for details on why we believe the H2O.ai benchmark is a good approach!
 
@@ -69,11 +75,13 @@ The time for converting into `ENUM` columns was included in the benchmark time, 
 However, the `ENUM` data type was not fully operational in DuckDB until version 0.6.1, so earlier versions skip this step.
 
 ### Python Client
+
 To measure interoperability with other dataframe formats, we have used Python rather than R (used by H2O.ai) for this analysis.
 We do continue to use R for the data generation step for consistency with the benchmark.
 Python is DuckDB's most popular client, so this is also the most representative of real world performance.
 
 ### Export and Replacement Scans
+
 However, we now extend this benchmark in several important ways. 
 In addition to considering raw query performance, we measure import and export performance with several formats: Pandas, Apache Arrow, and Apache Parquet.
 The results of both the join and group by benchmarks are exported to each format.
@@ -98,6 +106,7 @@ FROM <dataframe or parquet file>
 ```
 
 ### Window Functions
+
 We also added an entire series of Window function benchmarks. 
 Window functions are a critical workload in real world data analysis scenarios, and can stress test a system in other ways.
 DuckDB has implemented state of the art algorithms to quickly process even the most complex window functions.
@@ -110,40 +119,48 @@ We are open to your suggestions for queries to add, and hope these queries could
 Since the window functions benchmark is new, the window functions from each of the queries included are shown in the appendix at the end of the post.
 
 ### Workload Size
+
 We test only the middle 5GB dataset size for the workloads mentioned thus far, primarily because some import and export operations to external formats like Pandas must fit in memory (and we used a Macbook Pro M1 with only 16GB of RAM). 
 Additionally, running the tests for 3 year's of DuckDB versions was time-intensive even at that scale, due to the performance of older versions.
 
 ### Scale Tests
+
 However, using only 5GB of data does not answer our second key question: "What scale of data can it handle?"!
 We also ran only the group by and join related operations (avoiding in-memory imports and exports) at the 5GB and the 50GB scale. 
 Older versions of DuckDB could not handle the 50GB dataset when joining or aggregating, but modern versions can handle both, even on a memory-constrained 16GB RAM laptop.
 Instead of measuring performance, we measure the size of the benchmark that was able to complete on a given version.
 
 ### Summary Metrics
+
 With the exception of the scale tests, each benchmark was run 3 times and the median time was used for reporting results.
 The scale tests were run once and produced a binary metric, success or failure, at each data size tested. 
 As older versions would not fail gracefully, the scale metrics were accumulated across multiple partial runs.
 
 ### Computing Resources
+
 All tests use a Macbook Pro M1 with 16GB of RAM.
 In 2024, this is far from state of the art! 
 If you have more powerful hardware, you will see both improved performance and scalability.
 
 ### DuckDB Versions
+
 Version 0.2.7 was the first version to include a Python client compiled for ARM64, so it was the first version that could easily run on the benchmarking compute resources. 
 Version 1.0.0 is the latest available at the time of publication, although we also provide a sneak preview of an in-development feature branch.
 
 ### Default Settings
+
 All versions were run with the default settings. 
 The only small exception to this was specifying a temporary directory to enable intermediate calculations to spill to disk.
 As a result, improvements from a new feature only appear in these results once that feature became the default and was therefore ready for production workloads. 
 
 
-# Overall Benchmark Results
+## Overall Benchmark Results
+
 The latest DuckDB can complete one run of the full benchmark suite in under 35 seconds, while version 0.2.7 requires nearly 500 seconds for the same task. 
 **That is 14 times faster, in only 3 years!**
 
 ### Performance Over Time
+
 <div id="overall_results_by_time" style="width:100%;height:400px;"></div>
 <script>
     fetch('{{ site.baseurl }}/data/perf_over_time_overall_results_by_time.json')
@@ -201,6 +218,7 @@ The pre-0.9 trend is a better indicator for the future now that those two major 
 
 
 ### Performance by Version
+
 We can also recreate the overall plot by version rather than by time.
 This demonstrates that DuckDB has been doing more frequent releases recently. 
 
@@ -228,7 +246,7 @@ If you remember the version that you last tested, you can compare how much faste
             });
 </script>
 
-# Results by Workload
+## Results by Workload
 
 ### CSV Reader
 
@@ -402,7 +420,7 @@ As a result, while Arrow is clearly preferable for exports, DuckDB will happily 
 However, in this case, the in-memory nature of both Arrow and Pandas allow them to perform 2-3x faster than Parquet. 
 In absolute terms, the time required to complete this operation is a very small fraction of the benchmark, so other operations should be the deciding factor.
 
-# Scale tests
+## Scale tests
 
 Analyzing larger than memory data is a superpower for DuckDB, allowing it to be used for substantially larger data analysis tasks than were previously possible.
 
@@ -430,7 +448,7 @@ As a result, by version 0.10.0 DuckDB was able to handle calculations on data th
 All operators are supported, including sorting, aggregating, joining, and windowing. 
 Future work can further test the boundaries of what is possible with DuckDB's out-of-core support, including window functions and even larger data sizes. 
 
-# Conclusion
+## Conclusion
 
 In summary, not only is DuckDB's feature set growing substantially with each release, DuckDB is getting faster very fast! 
 Overall, performance has improved by **14 times in only 3 years!**
@@ -447,7 +465,7 @@ If you have made it this far, welcome to the flock! 🦆
 [Join us on Discord](https://discord.duckdb.org/), we value your feedback!
 
 
-# Appendix
+## Appendix
 
 ### Window Functions Benchmark
 
