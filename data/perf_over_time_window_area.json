@@ -38,7 +38,7 @@
         "2024-04-17T00:00:00",
         "2024-05-22T00:00:00",
         "2024-06-03T00:00:00",
-        "2024-06-21T08:46:50.326409"
+        "2024-06-23T13:41:52.936439"
       ],
       "xaxis": "x",
       "y": [
@@ -86,7 +86,7 @@
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2021-06-14T00:00:00",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
@@ -153,7 +153,7 @@
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2021-06-14T00:00:00",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
@@ -205,8 +205,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=304 Window quantiles entire dataset\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "304 Window quantiles entire dataset",
+      "hovertemplate": "benchmark=304 quantiles entire dataset\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "304 quantiles entire dataset",
       "line": {
         "color": "#72B7B2"
       },
@@ -214,12 +214,12 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "304 Window quantiles entire dataset",
+      "name": "304 quantiles entire dataset",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
         "2024-04-17T00:00:00",
@@ -250,8 +250,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=305 Window partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "305 Window partition by",
+      "hovertemplate": "benchmark=305 partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "305 partition by",
       "line": {
         "color": "#54A24B"
       },
@@ -259,13 +259,13 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "305 Window partition by",
+      "name": "305 partition by",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2021-06-14T00:00:00",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
@@ -317,8 +317,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=306 Window partition by order by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "306 Window partition by order by",
+      "hovertemplate": "benchmark=306 partition by order by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "306 partition by order by",
       "line": {
         "color": "#EECA3B"
       },
@@ -326,13 +326,13 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "306 Window partition by order by",
+      "name": "306 partition by order by",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2021-06-14T00:00:00",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
@@ -384,8 +384,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=307 Window lead and lag\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "307 Window lead and lag",
+      "hovertemplate": "benchmark=307 lead and lag\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "307 lead and lag",
       "line": {
         "color": "#B279A2"
       },
@@ -393,13 +393,13 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "307 Window lead and lag",
+      "name": "307 lead and lag",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2021-06-14T00:00:00",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
@@ -451,8 +451,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=308 Window moving averages\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "308 Window moving averages",
+      "hovertemplate": "benchmark=308 moving averages\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "308 moving averages",
       "line": {
         "color": "#FF9DA6"
       },
@@ -460,13 +460,13 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "308 Window moving averages",
+      "name": "308 moving averages",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2021-06-14T00:00:00",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
@@ -518,8 +518,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=309 Window rolling sum\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "309 Window rolling sum",
+      "hovertemplate": "benchmark=309 rolling sum\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "309 rolling sum",
       "line": {
         "color": "#9D755D"
       },
@@ -527,13 +527,13 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "309 Window rolling sum",
+      "name": "309 rolling sum",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2021-06-14T00:00:00",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
@@ -585,8 +585,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=310 Window range between\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "310 Window range between",
+      "hovertemplate": "benchmark=310 range between\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "310 range between",
       "line": {
         "color": "#BAB0AC"
       },
@@ -594,13 +594,13 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "310 Window range between",
+      "name": "310 range between",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
         "2024-04-17T00:00:00",
@@ -650,8 +650,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=311 Window quantiles partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "311 Window quantiles partition by",
+      "hovertemplate": "benchmark=311 quantiles partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "311 quantiles partition by",
       "line": {
         "color": "#4C78A8"
       },
@@ -659,12 +659,12 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "311 Window quantiles partition by",
+      "name": "311 quantiles partition by",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
         "2024-04-17T00:00:00",
@@ -707,8 +707,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=312 Window lead and lag partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "312 Window lead and lag partition by",
+      "hovertemplate": "benchmark=312 lead and lag partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "312 lead and lag partition by",
       "line": {
         "color": "#F58518"
       },
@@ -716,13 +716,13 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "312 Window lead and lag partition by",
+      "name": "312 lead and lag partition by",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2021-06-14T00:00:00",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
@@ -774,8 +774,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=313 Window moving averages partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "313 Window moving averages partition by",
+      "hovertemplate": "benchmark=313 moving averages partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "313 moving averages partition by",
       "line": {
         "color": "#E45756"
       },
@@ -783,13 +783,13 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "313 Window moving averages partition by",
+      "name": "313 moving averages partition by",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2021-06-14T00:00:00",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
@@ -841,8 +841,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=314 Window rolling sum partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "314 Window rolling sum partition by",
+      "hovertemplate": "benchmark=314 rolling sum partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "314 rolling sum partition by",
       "line": {
         "color": "#72B7B2"
       },
@@ -850,13 +850,13 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "314 Window rolling sum partition by",
+      "name": "314 rolling sum partition by",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2021-06-14T00:00:00",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
@@ -908,8 +908,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=315 Window range between partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "315 Window range between partition by",
+      "hovertemplate": "benchmark=315 range between partition by\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "315 range between partition by",
       "line": {
         "color": "#54A24B"
       },
@@ -917,13 +917,13 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "315 Window range between partition by",
+      "name": "315 range between partition by",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
         "2021-08-02T00:00:00",
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
         "2024-04-17T00:00:00",
@@ -973,8 +973,8 @@
       "fillpattern": {
         "shape": ""
       },
-      "hovertemplate": "benchmark=316 Window quantiles partition by rows between\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
-      "legendgroup": "316 Window quantiles partition by rows between",
+      "hovertemplate": "benchmark=316 quantiles partition by rows between\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime Relative to Latest Version by Type=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "316 quantiles partition by rows between",
       "line": {
         "color": "#EECA3B"
       },
@@ -982,12 +982,12 @@
         "symbol": "circle"
       },
       "mode": "lines",
-      "name": "316 Window quantiles partition by rows between",
+      "name": "316 quantiles partition by rows between",
       "orientation": "v",
       "showlegend": true,
       "stackgroup": "1",
       "x": [
-        "2024-06-21T08:46:50.326409",
+        "2024-06-23T13:41:52.936439",
         "2024-06-03T00:00:00",
         "2024-05-22T00:00:00",
         "2024-04-17T00:00:00",
