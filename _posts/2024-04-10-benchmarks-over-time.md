@@ -213,7 +213,8 @@ Over the last year, DuckDB has still improved over 3x!
 More recently, the DuckDB Labs team focused on scalability by developing algorithms that support larger-than-memory calculations. 
 We will see the fruits of those labors in the scale section later on!
 In addition, DuckDB focused exclusively on bug fixes in versions 0.10.1, 0.10.2, and 0.10.3 in preparation for an especially robust DuckDB 1.0. 
-The pre-0.9 trend is a better indicator for the future now that those two major milestones were accomplished!
+Now that those two major milestones (larger than memory calculations and DuckDB 1.0) have been accomplished, performance improvements will resume!
+It is worth noting that the boost from moving to multi-threading will only occur once, but there are still many opportunities moving forward.
 
 
 ### Performance by Version
