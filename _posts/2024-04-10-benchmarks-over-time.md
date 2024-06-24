@@ -77,7 +77,7 @@ Please see our previous [blog](https://duckdb.org/2023/04/14/h2oai.html) [posts]
 
 ## Overall Benchmark Results
 
-The latest DuckDB can complete one run of the full benchmark suite in under 35 seconds, while version 0.2.7 requires nearly 500 seconds for the same task. 
+The latest DuckDB can complete one run of the full benchmark suite in under 35 seconds, while version 0.2.7 required nearly 500 seconds for the same task in June 2021. 
 **That is 14 times faster, in only 3 years!**
 
 ### Performance Over Time
@@ -114,9 +114,9 @@ Due to the variety of uses for window functions, and their relative algorithmic 
 This plot normalizes performance to the latest version of DuckDB to show relative improvements over time. 
 If you look at the point in time when you most recently measured DuckDB performance, that number will show you how many times faster DuckDB is now!
 
-A portion of the overall improvement is DuckDB's addition of multi-threading, which became the default in version 0.3.1. 
+A portion of the overall improvement is DuckDB's addition of multi-threading, which became the default in November 2021 with version 0.3.1. 
 DuckDB also moved to a push-based execution model in that version for additional gains.
-Parallel data loading boosted performance in 0.6.1, as did improvements to the core `JOIN` algorithm. 
+Parallel data loading boosted performance in December 2022 with version 0.6.1, as did improvements to the core `JOIN` algorithm. 
 We will explore other improvements in detail later in the post.
 
 However, we see that all aspects of the system have seen improvements, not just raw query performance!
@@ -125,7 +125,7 @@ CSV parsing has seen significant gains, import and export have improved signific
 
 What was the slight regression from December 2022 to June 2023? 
 Window functions received additional capabilities and experienced a slight performance degradation in the process.
-However, from version 0.9.0 onward we see substantial performance improvement across the board for window functions. 
+However, from June 2023 onward we see substantial performance improvement across the board for window functions. 
 If window functions are filtered out of the chart, we see a smoother trend. 
 
 You may also notice that starting with version 0.9 in September 2023, the performance appears to plateau. 
@@ -143,6 +143,7 @@ It is worth noting that the boost from moving to multi-threading will only occur
 
 We can also recreate the overall plot by version rather than by time.
 This demonstrates that DuckDB has been doing more frequent releases recently. 
+See [DuckDB's release calendar](https://duckdb.org/docs/dev/release_calendar) for the full version history.
 
 <div id="overall_results_by_version" style="width:100%;height:400px;"></div>
 <script>
@@ -200,9 +201,9 @@ DuckDB has **improved CSV reader performance by nearly 3x**, while adding the ab
 
 Group by or aggregation operations are critical steps in OLAP workloads, and have therefore received substantial focus in DuckDB, **improving over 12x in the last 3 years**.
 
-In version 0.3.1, multithreaded aggregation was enabled by default, providing a significant speedup.
+In November 2021, version 0.3.1 enabled multithreaded aggregation by default, providing a significant speedup.
 
-In 0.6.1, data loads into tables were parallelized.
+In December 2022, data loads into tables were parallelized with the release of version 0.6.1.
 This is another example of improving the entire data workflow, as this group by benchmark actually stressed the insertion performance substantially. 
 Inserting the results was taking the majority of the time!
 
@@ -229,11 +230,11 @@ You can see that this was achieved while continuing to improve performance for t
 Join operations are another area of focus for analytical databases, and DuckDB in particular.
 Join speeds have **improved by 4x in the last 3 years**! 
 
-Version 0.6.1 introduced improvements to the out-of-core hash join that actually improved the smaller-than-memory case as well.
+Version 0.6.1 in December 2022 introduced improvements to the out-of-core hash join that actually improved the smaller-than-memory case as well.
 Parallel data loading from 0.6.1 also helps in this benchmark as well, as some results are the same size as the input table. 
 
 In recent versions, joins have also been upgraded to support larger-than-memory capabilities. 
-This focus has also benefitted the smaller-than-memory case and has led to the improvements in 0.10. 
+This focus has also benefitted the smaller-than-memory case and has led to the improvements in 0.10, launched in February 2024. 
 
 ### Window Functions
 
@@ -276,10 +277,10 @@ Until recently, the DuckDB format was not backward compatible, so the recommende
 Parquet is also critical to interoperability with many other systems, especially data lakes. 
 DuckDB works well as a workflow engine, so exporting to other in-memory formats is quite common as well.
 
-In version 0.5.1 we see significant improvements driven by switching from Pandas to Apache Arrow as the recommended in-memory export format.
+In the September 2022 release (version 0.5.1) we see significant improvements driven by switching from Pandas to Apache Arrow as the recommended in-memory export format.
 DuckDB's underlying data types share many similarities with Arrow, so data transfer is quite quick.
 
-Parquet export performance has improved by 4–5x over the course of the benchmark, with dramatic improvements in versions 0.8.1 and 0.10.2. 
+Parquet export performance has improved by 4–5x over the course of the benchmark, with dramatic improvements in versions 0.8.1 (June 2023) and 0.10.2 (April 2024). 
 Version 0.8.1 added [parallel parquet writing](https://github.com/duckdb/duckdb/pull/7375) while continuing to preserve insertion order.
 
 The change driving the improvement in 0.10.2 was more subtle.
@@ -361,7 +362,7 @@ The details of the algorithm, along with some benchmarks, are available in [this
 This allows for DuckDB to aggregate one billion rows of data (50GB in size) on a MacBook Pro with only 16GB of RAM, even when the number of unique groups in the group by is large. 
 This represents at least a 10x improvement in aggregate processing scale over the course of the 3 years of the benchmark.
 
-DuckDB's hash join operator has supported larger-than-memory joins since version 0.6.1. 
+DuckDB's hash join operator has supported larger-than-memory joins since version 0.6.1 in December 2022. 
 However, the scale of this benchmark (coupled with the limited RAM of the benchmarking hardware), meant that this benchmark could still not complete successfully.
 In version 0.10.0, launched in February 2024, [DuckDB's memory management received a significant upgrade](https://github.com/duckdb/duckdb/pull/10147) to handle multiple concurrent operators all requiring significant memory. 
 The [0.10.0 release blog post](https://duckdb.org/2024/02/13/announcing-duckdb-0100.html#temporary-memory-manager) shares additional details about this feature. 
@@ -400,7 +401,7 @@ This does require additional work when compared with an in-memory workflow (espe
 
 As in the current H2O.ai benchmark, categorical-type columns (`VARCHAR` columns with low cardinality) were converted to the `ENUM` type as a part of the benchmark.
 The time for converting into `ENUM` columns was included in the benchmark time, and resulted in a lower total amount of time (so the upfront conversion was worthwhile).
-However, the `ENUM` data type was not fully operational in DuckDB until version 0.6.1, so earlier versions skip this step.
+However, the `ENUM` data type was not fully operational in DuckDB until version 0.6.1 (December 2022), so earlier versions skip this step.
 
 #### Python Client
 
@@ -417,7 +418,7 @@ The results of both the join and group by benchmarks are exported to each format
 When exporting to dataframes, we measured the performance in both cases.
 However, when summarizing the total performance, we chose the best performing format at the time.
 This likely mirrors the behavior of performance-sensitive users (as they would likely not write to both formats!).
-In version 0.5.1, DuckDB's performance when writing to and reading from the Apache Arrow format surpassed Pandas. 
+In version 0.5.1, released September 2022, DuckDB's performance when writing to and reading from the Apache Arrow format surpassed Pandas. 
 As a result, versions 0.2.7 to 0.4.0 use Pandas, and 0.5.1 onward uses Arrow. 
 
 On the import side, replacement scans allow DuckDB to read those same formats without a prior import step.
@@ -449,7 +450,7 @@ Since the window functions benchmark is new, the window functions from each of t
 #### Workload Size
 
 We test only the middle 5GB dataset size for the workloads mentioned thus far, primarily because some import and export operations to external formats like Pandas must fit in memory (and we used a MacBook Pro M1 with only 16GB of RAM). 
-Additionally, running the tests for 3 year's of DuckDB versions was time-intensive even at that scale, due to the performance of older versions.
+Additionally, running the tests for 21 DuckDB versions was time-intensive even at that scale, due to the performance of older versions.
 
 #### Scale Tests
 
@@ -472,8 +473,8 @@ If you have more powerful hardware, you will see both improved performance and s
 
 #### DuckDB Versions
 
-Version 0.2.7 was the first version to include a Python client compiled for ARM64, so it was the first version that could easily run on the benchmarking compute resources. 
-Version 1.0.0 is the latest available at the time of publication, although we also provide a sneak preview of an in-development feature branch.
+Version 0.2.7, published in June 2021, was the first version to include a Python client compiled for ARM64, so it was the first version that could easily run on the benchmarking compute resources. 
+Version 1.0.0 is the latest available at the time of publication (June 2024), although we also provide a sneak preview of an in-development feature branch.
 
 #### Default Settings
 
