@@ -49,3 +49,5 @@ Since version 0.4.0, only major and minor versions get a codename.
 {% endfor %}
 
 <!-- markdownlint-enable MD055 MD056 -->
+
+You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.csv) and analyze it using DuckDB's [CSV reader]({% link docs/data/csv/overview.md %}).
