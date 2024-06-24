@@ -92,3 +92,5 @@ SELECT * FROM read_csv(['flights3.csv', 'flights4.csv'], union_by_name = true);
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            |
 
 This is equivalent to the SQL construct [`UNION ALL BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name).
+
+> Using the `union_by_name` option increases memory consumption.
