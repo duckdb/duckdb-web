@@ -56,7 +56,7 @@ The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]
 * Python instead of R
 * 5GB scale for everything, plus 50GB scale for group bys and joins
 * Median of 3 runs
-* Using a Macbook Pro M1 with 16GB RAM
+* Using a MacBook Pro M1 with 16GB RAM
 * DuckDB Versions 0.2.7 through 1.0.0
     * Nearly 3 years, from 2021-06-14 to 2024-06-03
 * Default settings, except temp directory is set
@@ -101,7 +101,7 @@ The query used follows the format:
 
 ```sql
 SELECT 
-    sum(v3) as v3 
+    sum(v3) AS v3 
 FROM ⟨dataframe or Parquet file⟩
 ```
 
@@ -120,7 +120,7 @@ Since the window functions benchmark is new, the window functions from each of t
 
 ### Workload Size
 
-We test only the middle 5GB dataset size for the workloads mentioned thus far, primarily because some import and export operations to external formats like Pandas must fit in memory (and we used a Macbook Pro M1 with only 16GB of RAM). 
+We test only the middle 5GB dataset size for the workloads mentioned thus far, primarily because some import and export operations to external formats like Pandas must fit in memory (and we used a MacBook Pro M1 with only 16GB of RAM). 
 Additionally, running the tests for 3 year's of DuckDB versions was time-intensive even at that scale, due to the performance of older versions.
 
 ### Scale Tests
@@ -357,13 +357,13 @@ DuckDB works well as a workflow engine, so exporting to other in-memory formats 
 In version 0.5.1 we see significant improvements driven by switching from Pandas to Apache Arrow as the recommended in-memory export format.
 DuckDB's underlying data types share many similarities with Arrow, so data transfer is quite quick.
 
-Parquet export performance has improved by 4-5x over the course of the benchmark, with dramatic improvements in versions 0.8.1 and 0.10.2. 
+Parquet export performance has improved by 4–5x over the course of the benchmark, with dramatic improvements in versions 0.8.1 and 0.10.2. 
 Version 0.8.1 added [parallel parquet writing](https://github.com/duckdb/duckdb/pull/7375) while continuing to preserve insertion order.
 
 The change driving the improvement in 0.10.2 was more subtle.
-When exporting strings with high cardinality, DuckDB decides whether or not to do dictionary compression depending on if it reduces file size. 
+When exporting strings with high-cardinality, DuckDB decides whether or not to do dictionary compression depending on if it reduces file size. 
 In 0.10.2 onward, the [compression ratio is tested after a sample of the values are inserted into the dictionary](https://github.com/duckdb/duckdb/pull/11461), rather than after all values are added.
-This prevents substantial unnecessary processing for high cardinality columns where dictionary compression is unhelpful.
+This prevents substantial unnecessary processing for high-cardinality columns where dictionary compression is unhelpful.
 
 #### Exporting Apache Arrow vs. Pandas vs. Parquet
 
@@ -417,7 +417,7 @@ DuckDB is a great fit for this type of work!
 
 When scanning data, Apache Arrow and Pandas are more comparable in performance. 
 As a result, while Arrow is clearly preferable for exports, DuckDB will happily read Pandas with similar speed. 
-However, in this case, the in-memory nature of both Arrow and Pandas allow them to perform 2-3x faster than Parquet. 
+However, in this case, the in-memory nature of both Arrow and Pandas allow them to perform 2–3x faster than Parquet. 
 In absolute terms, the time required to complete this operation is a very small fraction of the benchmark, so other operations should be the deciding factor.
 
 ## Scale tests
@@ -436,7 +436,7 @@ Analyzing larger-than-memory data is a superpower for DuckDB, allowing it to be 
 
 In version 0.9.0, launched in September 2023, [DuckDB's hash aggregate was enhanced to handle out-of-core (larger than memory) intermediates](https://github.com/duckdb/duckdb/pull/7931).
 The details of the algorithm, along with some benchmarks, are available in [this blog post](https://duckdb.org/2024/03/29/external-aggregation.html). 
-This allows for DuckDB to aggregate 1 Billion rows of data (50GB in size) on a Macbook Pro with only 16GB of RAM, even when the number of unique groups in the group by is large. 
+This allows for DuckDB to aggregate one billion rows of data (50GB in size) on a MacBook Pro with only 16GB of RAM, even when the number of unique groups in the group by is large. 
 This represents at least a 10x improvement in aggregate processing scale over the course of the 3 years of the benchmark.
 
 DuckDB's hash join operator has supported larger-than-memory joins since version 0.6.1. 
@@ -481,67 +481,69 @@ CREATE TABLE windowing_results AS
         id2,
         id3,
         v2,
-        <window function(s)>
+        ⟨window function(s)⟩
     FROM join_benchmark_largest_table;
 ```
 
 The various window functions that replace the placeholder are below and are labelled to match the result graphs. 
 These were selected to showcase the variety of use cases for window functions, as well as the variety of algorithms required to support the full range of the syntax.
 The DuckDB documentation contains a [full railroad diagram of the available syntax](https://duckdb.org/docs/sql/window_functions#syntax).
-If there are common use cases for window functions that are not well covered in this benchmark, please let us know!
+If there are common use cases for window functions that are not well-covered in this benchmark, please let us know!
 
 ```sql
 /* 302 Basic Window */ 
-sum(v2) over () as window_basic
+sum(v2) OVER () AS window_basic
 
 /* 303 Sorted Window */
-first(v2) over (order by id3) as first_order_by,
-row_number() over (order by id3) as row_number_order_by
+first(v2) OVER (ORDER BY id3) AS first_order_by,
+row_number() OVER (ORDER BY id3) AS row_number_order_by
 
 /* 304 Quantiles Entire Dataset */
-quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) over () as quantile_entire_dataset
+quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) OVER () AS quantile_entire_dataset
 
-/* 305 Partition By */
-sum(v2) over (partition by id1) as sum_by_id1,
-sum(v2) over (partition by id2) as sum_by_id2,
-sum(v2) over (partition by id3) as sum_by_id3
+/* 305 PARTITION BY */
+sum(v2) OVER (PARTITION BY id1) AS sum_by_id1,
+sum(v2) OVER (PARTITION BY id2) AS sum_by_id2,
+sum(v2) OVER (PARTITION BY id3) AS sum_by_id3
 
-/* 306 Partition By Order By */
-first(v2) over (partition by id2 order by id3) as first_by_id2_ordered_by_id3
+/* 306 PARTITION BY ORDER BY */
+first(v2) OVER (PARTITION BY id2 ORDER BY id3) AS first_by_id2_ordered_by_id3
 
 /* 307 Lead and Lag */
-first(v2) over (order by id3 rows between 1 preceding and 1 preceding) as my_lag,
-first(v2) over (order by id3 rows between 1 following and 1 following) as my_lead
+first(v2) OVER (ORDER BY id3 ROWS BETWEEN 1 PRECEDING AND 1 PRECEDING) AS my_lag,
+first(v2) OVER (ORDER BY id3 ROWS BETWEEN 1 FOLLOWING AND 1 FOLLOWING) AS my_lead
 
 /* 308 Moving Averages */
-avg(v2) over (order by id3 rows between 100 preceding and current row) as my_moving_average,
-avg(v2) over (order by id3 rows between id1 preceding and current row) as my_dynamic_moving_average
+avg(v2) OVER (ORDER BY id3 ROWS BETWEEN 100 PRECEDING AND CURRENT ROW) AS my_moving_average,
+avg(v2) OVER (ORDER BY id3 ROWS BETWEEN id1 PRECEDING AND CURRENT ROW) AS my_dynamic_moving_average
 
 /* 309 Rolling Sum */
-sum(v2) over (order by id3 rows between unbounded preceding and current row) as my_rolling_sum
+sum(v2) OVER (ORDER BY id3 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS my_rolling_sum
 
-/* 310 Range Between */
-sum(v2) over (order by v2 range between 3 preceding and current row) as my_range_between,
-sum(v2) over (order by v2 range between id1 preceding and current row) as my_dynamic_range_between
+/* 310 RANGE BETWEEN */
+sum(v2) OVER (ORDER BY v2 RANGE BETWEEN 3 PRECEDING AND CURRENT ROW) AS my_range_between,
+sum(v2) OVER (ORDER BY v2 RANGE BETWEEN id1 PRECEDING AND CURRENT ROW) AS my_dynamic_range_between
 
-/* 311 Quantiles Partition By */
-quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) over (partition by id2) as my_quantiles_by_id2
+/* 311 Quantiles PARTITION BY */
+quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) OVER (PARTITION BY id2) AS my_quantiles_by_id2
 
-/* 312 Quantiles Partition By Rows Between */
-first(v2) over (partition by id2 order by id3 rows between 1 preceding and 1 preceding) as my_lag_by_id2,
-first(v2) over (partition by id2 order by id3 rows between 1 following and 1 following) as my_lead_by_id2
+/* 312 Quantiles PARTITION BY ROWS BETWEEN */
+first(v2) OVER (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN 1 PRECEDING AND 1 PRECEDING) AS my_lag_by_id2,
+first(v2) OVER (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN 1 FOLLOWING AND 1 FOLLOWING) AS my_lead_by_id2
 
-/* 313 Moving Averages Partition By */
-avg(v2) over (partition by id2 order by id3 rows between 100 preceding and current row) as my_moving_average_by_id2,
-avg(v2) over (partition by id2 order by id3 rows between id1 preceding and current row) as my_dynamic_moving_average_by_id2
+/* 313 Moving Averages PARTITION BY */
+avg(v2) OVER (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN 100 PRECEDING AND CURRENT ROW) AS my_moving_average_by_id2,
+avg(v2) OVER (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN id1 PRECEDING AND CURRENT ROW) AS my_dynamic_moving_average_by_id2
 
-/* 314 Rolling Sum Partition By */
-sum(v2) over (partition by id2 order by id3 rows between unbounded preceding and current row) as my_rolling_sum_by_id2
+/* 314 Rolling Sum PARTITION BY */
+sum(v2) OVER (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS my_rolling_sum_by_id2
 
-/* 315 Range Between Partition By */
-sum(v2) over (partition by id2 order by v2 range between 3 preceding and current row) as my_range_between_by_id2,
-sum(v2) over (partition by id2 order by v2 range between id1 preceding and current row) as my_dynamic_range_between_by_id2
+/* 315 RANGE BETWEEN PARTITION BY */
+sum(v2) OVER (PARTITION BY id2 ORDER BY v2 RANGE BETWEEN 3 PRECEDING AND CURRENT ROW) AS my_range_between_by_id2,
+sum(v2) OVER (PARTITION BY id2 ORDER BY v2 RANGE BETWEEN id1 PRECEDING AND CURRENT ROW) AS my_dynamic_range_between_by_id2
 
-/* 316 Quantiles Partition By Rows Between */
-quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) over (partition by id2 order by id3 rows between 100 preceding and current row) as my_quantiles_by_id2_rows_between
+/* 316 Quantiles PARTITION BY ROWS BETWEEN */
+quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) OVER
+    (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN 100 PRECEDING AND CURRENT ROW)
+    AS my_quantiles_by_id2_rows_between
 ```
