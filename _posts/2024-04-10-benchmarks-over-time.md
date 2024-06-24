@@ -59,7 +59,7 @@ The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]
 * Using a MacBook Pro M1 with 16GB RAM
 * DuckDB Versions 0.2.7 through 1.0.0
     * Nearly 3 years, from 2021-06-14 to 2024-06-03
-* Default settings, except temp directory is set
+* Default settings
 
 
 ### H2O.ai as the Foundation
@@ -150,7 +150,6 @@ Version 1.0.0 is the latest available at the time of publication, although we al
 ### Default Settings
 
 All versions were run with the default settings. 
-The only small exception to this was specifying a temporary directory to enable intermediate calculations to spill to disk.
 As a result, improvements from a new feature only appear in these results once that feature became the default and was therefore ready for production workloads. 
 
 
