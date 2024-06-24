@@ -137,11 +137,11 @@
   {
     "name": "approx_count_distinct",
     "parameters": [
-      "x"
+      "any"
     ],
     "description": "Computes the approximate count of distinct elements using HyperLogLog.",
     "example": "approx_count_distinct(A)",
-    "type": "aggregate_function_set",
+    "type": "aggregate_function",
     "category": "distributive",
     "result": null
   },
@@ -464,6 +464,18 @@
     "example": "bool_or(A)",
     "type": "aggregate_function",
     "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "can_cast_implicitly",
+    "parameters": [
+      "source_type",
+      "target_type"
+    ],
+    "description": "Whether or not we can implicitly cast from the source type to the other type",
+    "example": "can_implicitly_cast(NULL::INTEGER, NULL::BIGINT)",
+    "type": "scalar_function",
+    "category": "generic",
     "result": null
   },
   {
@@ -942,6 +954,20 @@
     "result": 1627991984123456
   },
   {
+    "name": "equi_width_bins",
+    "parameters": [
+      "min",
+      "max",
+      "bin_count",
+      "nice_rounding"
+    ],
+    "description": "Generates bin_count equi-width bins between the min and max. If enabled nice_rounding makes the numbers more readable/less jagged",
+    "example": "equi_width_bins(0, 10, 2, true)",
+    "type": "scalar_function_set",
+    "category": "generic",
+    "result": "[5, 10]"
+  },
+  {
     "name": "era",
     "parameters": [
       "ts"
@@ -1204,8 +1230,21 @@
     "example": "histogram(A)",
     "type": "aggregate_function_set",
     "extra_functions": [
-      "static AggregateFunction GetHistogramUnorderedMap(LogicalType &type);"
+      "static AggregateFunction GetHistogramUnorderedMap(LogicalType &type);",
+      "static AggregateFunction BinnedHistogramFunction();"
     ],
+    "category": "nested",
+    "result": null
+  },
+  {
+    "name": "histogram_exact",
+    "parameters": [
+      "arg",
+      "bins"
+    ],
+    "description": "Returns a LIST of STRUCTs with the fields bucket and count matching the buckets exactly.",
+    "example": "histogram_exact(A, [0, 1, 2])",
+    "type": "aggregate_function",
     "category": "nested",
     "result": null
   },
@@ -1248,6 +1287,17 @@
     ],
     "category": "string",
     "result": 2
+  },
+  {
+    "name": "is_histogram_other_bin",
+    "parameters": [
+      "val"
+    ],
+    "description": "Whether or not the provided value is the histogram \"other\" bin (used for values not belonging to any provided bin)",
+    "example": "is_histogram_other_bin(v)",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": null
   },
   {
     "name": "isfinite",
@@ -2082,6 +2132,18 @@
     "type": "scalar_function_set",
     "category": "date",
     "result": "September"
+  },
+  {
+    "struct": "NanosecondsFun",
+    "name": "nanosecond",
+    "parameters": [
+      "tsns"
+    ],
+    "description": "Extract the nanosecond component from a date or timestamp",
+    "example": "nanosecond(timestamp_ns '2021-08-03 11:59:44.123456789') => 44123456789",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": null
   },
   {
     "name": "nextafter",
@@ -3234,7 +3296,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v1.0.1-dev167"
+    "result": "v1.0.1-dev1813"
   },
   {
     "name": "week",
