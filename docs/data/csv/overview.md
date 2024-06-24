@@ -114,7 +114,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `skip` | The number of lines at the top of the file to skip. | `BIGINT` | 0 |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here]({% link docs/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
-| `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name), rather than by position. | `BOOL` | `false` |
+| `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name), rather than by position. Note that using this option increases memory consumption. | `BOOL` | `false` |
 
 ### `auto_type_candidates` Details
 
