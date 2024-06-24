@@ -38,7 +38,7 @@ Many benchmarks are deliberately smaller than typical workloads.
 This allows the benchmark to complete in a reasonable amount of time when run with many configurations. 
 However, an important question to answer when selecting a system is whether the size of your data can be handled within the size of your compute resources.
 
-### Limitations of benchmarking over time
+### Limitations of Benchmarking over Time
 
 There are some limitations when looking at the performance of a system over time.
 If a feature is brand new, there is no prior performance to compare to!
@@ -48,7 +48,7 @@ The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]
 (When writing these queries, it felt like going back in time!)
 
 
-## Benchmark design
+## Benchmark Design
 
 ### Summary
 
@@ -95,19 +95,19 @@ As a result, versions 0.2.7 to 0.4.0 use Pandas, and 0.5.1 onward uses Arrow.
 On the import side, replacement scans allow DuckDB to read those same formats without a prior import step.
 In the replacement scan benchmark, the data that is scanned is the output of the final H20.ai group by benchmark query.
 At the 5GB scale it is a 10 million row dataset.
-Only 1 column is read, and a single aggregate is calculated. 
+Only one column is read, and a single aggregate is calculated. 
 This focuses the benchmark on the speed of scanning the data rather than DuckDB's aggregation algorithms or speed of outputting results.
 The query used follows the format:
 
 ```sql
 SELECT 
     sum(v3) as v3 
-FROM <dataframe or parquet file>
+FROM ⟨dataframe or Parquet file⟩
 ```
 
 ### Window Functions
 
-We also added an entire series of Window function benchmarks. 
+We also added an entire series of window function benchmarks. 
 Window functions are a critical workload in real world data analysis scenarios, and can stress test a system in other ways.
 DuckDB has implemented state of the art algorithms to quickly process even the most complex window functions.
 We use the largest table from the join benchmark as the raw data for these new tests to help with comparability to the rest of the benchmark. 
@@ -125,7 +125,7 @@ Additionally, running the tests for 3 year's of DuckDB versions was time-intensi
 
 ### Scale Tests
 
-However, using only 5GB of data does not answer our second key question: "What scale of data can it handle?"!
+However, using only 5GB of data does not answer our second key question: “What scale of data can it handle?”!
 We also ran only the group by and join related operations (avoiding in-memory imports and exports) at the 5GB and the 50GB scale. 
 Older versions of DuckDB could not handle the 50GB dataset when joining or aggregating, but modern versions can handle both, even on a memory-constrained 16GB RAM laptop.
 Instead of measuring performance, we measure the size of the benchmark that was able to complete on a given version.
@@ -200,7 +200,7 @@ We will explore other improvements in detail later in the post.
 
 However, we see that all aspects of the system have seen improvements, not just raw query performance!
 DuckDB focuses on the entire data analysis workflow, not just aggregate or join performance.
-CSV parsing has seen significant gains, import and export have improved significantly, and Window functions have improved the most of all.
+CSV parsing has seen significant gains, import and export have improved significantly, and window functions have improved the most of all.
 
 What was the slight regression from December 2022 to June 2023? 
 Window functions received additional capabilities and experienced a slight performance degradation in the process.
@@ -211,7 +211,7 @@ You may also notice that starting with version 0.9 in September 2023, the perfor
 What is happening here? 
 First, don't forget to zoom in! 
 Over the last year, DuckDB has still improved over 3x!
-More recently, the DuckDB Labs team focused on scalability by developing algorithms that support larger than memory calculations. 
+More recently, the DuckDB Labs team focused on scalability by developing algorithms that support larger-than-memory calculations. 
 We will see the fruits of those labors in the scale section later on!
 In addition, DuckDB focused exclusively on bug fixes in versions 0.10.1, 0.10.2, and 0.10.3 in preparation for an especially robust DuckDB 1.0. 
 The pre-0.9 trend is a better indicator for the future now that those two major milestones were accomplished!
@@ -262,7 +262,7 @@ If you remember the version that you last tested, you can compare how much faste
 
 DuckDB has invested substantially in building a [fast and robust CSV parser](https://duckdb.org/2023/10/27/csv-sniffer.html).
 This is often the first task in a data analysis workload, and it tends to be under valued and under-benchmarked. 
-DuckDB has **improved csv reader performance by nearly 3x**, while adding the ability to handle many more csv file formats automatically.
+DuckDB has **improved CSV reader performance by nearly 3x**, while adding the ability to handle many more CSV dialects automatically.
 
 ### Group By
 
@@ -276,7 +276,7 @@ DuckDB has **improved csv reader performance by nearly 3x**, while adding the ab
             });
 </script>
 
-Group by or aggregation operations are a critical OLAP workload, and have therefore received substantial focus in DuckDB, **improving over 12x in the last 3 years**.
+Group by or aggregation operations are critical steps in OLAP workloads, and have therefore received substantial focus in DuckDB, **improving over 12x in the last 3 years**.
 
 In version 0.3.1, multithreaded aggregation was enabled by default, providing a significant speedup.
 
@@ -288,7 +288,7 @@ Enums were also used in place of strings for categorical columns in version 0.6.
 This means that DuckDB was able to use integers rather than strings when operating on those columns, further boosting performance.
 
 Despite what appears at first glance to be a performance plateau, zooming in to 2023 and 2024 reveals a ~20% improvement.
-In addition, aggregations have received significant attention in the most recent versions to enable larger than memory aggregations.
+In addition, aggregations have received significant attention in the most recent versions to enable larger-than-memory aggregations.
 You can see that this was achieved while continuing to improve performance for the smaller-than-memory case.
 
 
@@ -307,10 +307,10 @@ You can see that this was achieved while continuing to improve performance for t
 Join operations are another area of focus for analytical databases, and DuckDB in particular.
 Join speeds have **improved by 4x in the last 3 years**! 
 
-Version 0.6.1 introduced improvements to the out of core hash join that actually improved the smaller-than-memory case as well.
+Version 0.6.1 introduced improvements to the out-of-core hash join that actually improved the smaller-than-memory case as well.
 Parallel data loading from 0.6.1 also helps in this benchmark as well, as some results are the same size as the input table. 
 
-In recent versions, joins have also been upgraded to support larger than memory capabilities. 
+In recent versions, joins have also been upgraded to support larger-than-memory capabilities. 
 This focus has also benefitted the smaller-than-memory case and has led to the improvements in 0.10. 
 
 ### Window Functions
@@ -333,7 +333,7 @@ Aggregate computation was vectorized (with special focus on the [segment tree da
 Work stealing enabled multi-threaded processing and sorting was adapted to run in parallel.
 Care was also taken to pre-allocate memory in larger batches. 
 
-DuckDB's window functions are also capable of processing larger than memory datasets. 
+DuckDB's window functions are also capable of processing larger-than-memory datasets. 
 We leave benchmarking that feature for future work!
 
 ### Export
@@ -352,7 +352,7 @@ Often DuckDB is not the final step in a workflow, so export performance has an i
 Exports are **10x faster now!**
 Until recently, the DuckDB format was not backward compatible, so the recommended long term persistence format was Parquet.
 Parquet is also critical to interoperability with many other systems, especially data lakes. 
-DuckDB works well as a workflow engine, so exporting to other in memory formats is quite common as well.
+DuckDB works well as a workflow engine, so exporting to other in-memory formats is quite common as well.
 
 In version 0.5.1 we see significant improvements driven by switching from Pandas to Apache Arrow as the recommended in-memory export format.
 DuckDB's underlying data types share many similarities with Arrow, so data transfer is quite quick.
@@ -378,7 +378,7 @@ This prevents substantial unnecessary processing for high cardinality columns wh
 </script>
 
 Pandas export performance has improved substantially over the course of the benchmark.
-However, Apache Arrow has proven to be the more efficient data format, so Arrow is now the preferred in memory export format.
+However, Apache Arrow has proven to be the more efficient data format, so Arrow is now the preferred in-memory export format.
 Interestingly, DuckDB's Parquet export is now so efficient that it is faster to write a persistent Parquet file than it is to write to an in-memory Pandas dataframe!
 It is even competitive with Apache Arrow. 
 
@@ -422,7 +422,7 @@ In absolute terms, the time required to complete this operation is a very small 
 
 ## Scale tests
 
-Analyzing larger than memory data is a superpower for DuckDB, allowing it to be used for substantially larger data analysis tasks than were previously possible.
+Analyzing larger-than-memory data is a superpower for DuckDB, allowing it to be used for substantially larger data analysis tasks than were previously possible.
 
 <div id="perf_over_time_scale_by_time" style="width:100%;height:400px;"></div>
 <script>
@@ -439,7 +439,7 @@ The details of the algorithm, along with some benchmarks, are available in [this
 This allows for DuckDB to aggregate 1 Billion rows of data (50GB in size) on a Macbook Pro with only 16GB of RAM, even when the number of unique groups in the group by is large. 
 This represents at least a 10x improvement in aggregate processing scale over the course of the 3 years of the benchmark.
 
-DuckDB's hash join operator has supported larger than memory joins since version 0.6.1. 
+DuckDB's hash join operator has supported larger-than-memory joins since version 0.6.1. 
 However, the scale of this benchmark (coupled with the limited RAM of the benchmarking hardware), meant that this benchmark could still not complete successfully.
 In version 0.10.0, launched in February 2024, [DuckDB's memory management received a significant upgrade](https://github.com/duckdb/duckdb/pull/10147) to handle multiple concurrent operators all requiring significant memory. 
 The [0.10.0 release blog post](https://duckdb.org/2024/02/13/announcing-duckdb-0100.html#temporary-memory-manager) shares additional details about this feature. 
@@ -469,7 +469,7 @@ If you have made it this far, welcome to the flock! 🦆
 
 ### Window Functions Benchmark
 
-Each benchmark query follows the format below, but with different sets of window functions in the `<window function(s)>` placeholder.
+Each benchmark query follows the format below, but with different sets of window functions in the `⟨window function(s)⟩` placeholder.
 The table in use is the largest table from the H2O.ai join benchmark, and in this case the 5GB scale was used.
 
 ```sql
