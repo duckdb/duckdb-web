@@ -1,10 +1,74 @@
 {
   "data": [
     {
+      "hovertemplate": "benchmark=000 Placeholder for charting\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime (seconds)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
+      "legendgroup": "000 Placeholder for charting",
+      "line": {
+        "color": "#4C78A8",
+        "dash": "solid"
+      },
+      "marker": {
+        "symbol": "circle"
+      },
+      "mode": "lines",
+      "name": "000 Placeholder for charting",
+      "orientation": "v",
+      "showlegend": true,
+      "x": [
+        "2021-06-14T00:00:00",
+        "2021-08-02T00:00:00",
+        "2021-09-06T00:00:00",
+        "2021-10-06T00:00:00",
+        "2021-11-16T00:00:00",
+        "2022-02-07T00:00:00",
+        "2022-04-25T00:00:00",
+        "2022-06-20T00:00:00",
+        "2022-09-19T00:00:00",
+        "2022-12-06T00:00:00",
+        "2023-02-27T00:00:00",
+        "2023-06-13T00:00:00",
+        "2023-09-26T00:00:00",
+        "2023-10-11T00:00:00",
+        "2023-11-14T00:00:00",
+        "2024-02-13T00:00:00",
+        "2024-03-18T00:00:00",
+        "2024-04-17T00:00:00",
+        "2024-05-22T00:00:00",
+        "2024-06-03T00:00:00",
+        "2024-06-24T07:11:41.112049"
+      ],
+      "xaxis": "x",
+      "y": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaxis": "y",
+      "type": "scatter"
+    },
+    {
       "hovertemplate": "benchmark=006 Scan and aggregate over Pandas df\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime (seconds)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
       "legendgroup": "006 Scan and aggregate over Pandas df",
       "line": {
-        "color": "#4C78A8",
+        "color": "#F58518",
         "dash": "solid"
       },
       "marker": {
@@ -35,7 +99,7 @@
         "2024-04-17T00:00:00",
         "2024-05-22T00:00:00",
         "2024-06-03T00:00:00",
-        "2024-06-23T13:41:52.936439"
+        "2024-06-24T07:11:41.112049"
       ],
       "xaxis": "x",
       "y": [
@@ -68,7 +132,7 @@
       "hovertemplate": "benchmark=008 Scan and aggregate over Parquet file\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime (seconds)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
       "legendgroup": "008 Scan and aggregate over Parquet file",
       "line": {
-        "color": "#F58518",
+        "color": "#E45756",
         "dash": "solid"
       },
       "marker": {
@@ -99,7 +163,7 @@
         "2024-04-17T00:00:00",
         "2024-05-22T00:00:00",
         "2024-06-03T00:00:00",
-        "2024-06-23T13:41:52.936439"
+        "2024-06-24T07:11:41.112049"
       ],
       "xaxis": "x",
       "y": [
@@ -132,7 +196,7 @@
       "hovertemplate": "benchmark=010 Scan and aggregate over Arrow df\u003cbr\u003eRelease Date=%{x}\u003cbr\u003eTime (seconds)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e",
       "legendgroup": "010 Scan and aggregate over Arrow df",
       "line": {
-        "color": "#E45756",
+        "color": "#72B7B2",
         "dash": "solid"
       },
       "marker": {
@@ -159,7 +223,7 @@
         "2024-04-17T00:00:00",
         "2024-05-22T00:00:00",
         "2024-06-03T00:00:00",
-        "2024-06-23T13:41:52.936439"
+        "2024-06-24T07:11:41.112049"
       ],
       "xaxis": "x",
       "y": [
