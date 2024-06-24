@@ -38,7 +38,7 @@ duckdb_close(&db);
 <span class="kt">void</span> <a href="#duckdb_close"><span class="nf">duckdb_close</span></a>(<span class="kt">duckdb_database</span> *<span class="nv">database</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_connect"><span class="nf">duckdb_connect</span></a>(<span class="kt">duckdb_database</span> <span class="nv">database</span>, <span class="kt">duckdb_connection</span> *<span class="nv">out_connection</span>);
 <span class="kt">void</span> <a href="#duckdb_interrupt"><span class="nf">duckdb_interrupt</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
-<span class="nv">duckdb_query_progress_type</span> <a href="#duckdb_query_progress"><span class="nf">duckdb_query_progress</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
+<span class="kt">duckdb_query_progress_type</span> <a href="#duckdb_query_progress"><span class="nf">duckdb_query_progress</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
 <span class="kt">void</span> <a href="#duckdb_disconnect"><span class="nf">duckdb_disconnect</span></a>(<span class="kt">duckdb_connection</span> *<span class="nv">connection</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_library_version"><span class="nf">duckdb_library_version</span></a>();
 </code></pre></div></div>
@@ -73,7 +73,6 @@ The result database object.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
-
 
 ### `duckdb_open_ext`
 
@@ -114,7 +113,6 @@ Note that the error must be freed using `duckdb_free`.
 
 <br>
 
-
 ### `duckdb_close`
 
 ---
@@ -139,7 +137,6 @@ Still, it is recommended to always correctly close a database object after you a
 The database object to shut down.
 
 <br>
-
 
 ### `duckdb_connect`
 
@@ -172,7 +169,6 @@ The result connection object.
 
 <br>
 
-
 ### `duckdb_interrupt`
 
 ---
@@ -195,7 +191,6 @@ The connection to interrupt
 
 <br>
 
-
 ### `duckdb_query_progress`
 
 ---
@@ -204,7 +199,7 @@ Get progress of the running query
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_query_progress_type</span> <span class="nv">duckdb_query_progress</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_query_progress_type</span> <span class="nv">duckdb_query_progress</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> <span class="nv">connection
 </span>);
 </code></pre></div></div>
@@ -220,7 +215,6 @@ The working connection
 -1 if no progress or a percentage of the progress
 
 <br>
-
 
 ### `duckdb_disconnect`
 
@@ -244,7 +238,6 @@ The connection to close.
 
 <br>
 
-
 ### `duckdb_library_version`
 
 ---
@@ -260,4 +253,3 @@ Usually used for developing C extensions that must return this for a compatibili
 </span>);
 </code></pre></div></div>
 <br>
-

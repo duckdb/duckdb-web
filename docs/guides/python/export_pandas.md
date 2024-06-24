@@ -20,4 +20,4 @@ results
 
 ## See Also
 
-DuckDB also supports [importing from Pandas](import_pandas).
+DuckDB also supports [importing from Pandas]({% link docs/guides/python/import_pandas.md %}).

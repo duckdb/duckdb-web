@@ -8,7 +8,8 @@ The `azure` extension is a loadable extension that adds a filesystem abstraction
 
 ## Installing and Loading
 
-To install and load the `azure` extension, run:
+The `azure` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL azure;
@@ -19,7 +20,7 @@ LOAD azure;
 
 Once the [authentication](#authentication) is set up, you can query Azure storage as follows:
 
-### For *Azure Blob Storage*
+### For Azure Blob Storage
 
 Allowed URI schemes: `az` or `azure`
 
@@ -52,25 +53,25 @@ SELECT *
 FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/*.csv';
 ```
 
-### For *Azure Data Lake Storage (ADLS)*
+### For Azure Data Lake Storage (ADLS)
 
 Allowed URI schemes: `abfss`
 
 ```sql
 SELECT count(*)
-FROM 'abfss://⟨my_filesystem/⟨path⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
+FROM 'abfss://⟨my_filesystem⟩/⟨path⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
 ```
 
 Globs are also supported:
 
 ```sql
 SELECT *
-FROM 'abfss://⟨my_filesystem/⟨path⟩/*.csv';
+FROM 'abfss://⟨my_filesystem⟩/⟨path⟩/*.csv';
 ```
 
 ```sql
 SELECT *
-FROM 'abfss://⟨my_filesystem/⟨path⟩/**';
+FROM 'abfss://⟨my_filesystem⟩/⟨path⟩/**';
 ```
 
 Or with a fully qualified path syntax:
@@ -87,11 +88,11 @@ FROM 'abfss://⟨my_storage_account⟩.dfs.core.windows.net/⟨my_filesystem⟩/
 
 ## Configuration
 
-Use the following [configuration options](../configuration/overview) how the extension reads remote files:
+Use the following [configuration options]({% link docs/configuration/overview.md %}) how the extension reads remote files:
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
-| `azure_http_stats` | Include http info from Azure Storage in the [`EXPLAIN ANALYZE` statement](/dev/profiling). | `BOOLEAN` | `false` |
+| `azure_http_stats` | Include http info from Azure Storage in the [`EXPLAIN ANALYZE` statement]({% link docs/dev/profiling.md %}). | `BOOLEAN` | `false` |
 | `azure_read_transfer_concurrency` | Maximum number of threads the Azure client can use for a single parallel read. If `azure_read_transfer_chunk_size` is less than `azure_read_buffer_size` then setting this > 1 will allow the Azure client to do concurrent requests to fill the buffer. | `BIGINT` | `5` |
 | `azure_read_transfer_chunk_size` | Maximum size in bytes that the Azure client will read in a single request. It is recommended that this is a factor of `azure_read_buffer_size`. | `BIGINT` | `1024*1024` |
 | `azure_read_buffer_size` | Size of the read buffer. It is recommended that this is evenly divisible by `azure_read_transfer_chunk_size`. | `UBIGINT` | `1024*1024` |
@@ -110,8 +111,8 @@ Example:
 ```sql
 SET azure_http_stats = false;
 SET azure_read_transfer_concurrency = 5;
-SET azure_read_transfer_chunk_size = 1048576;
-SET azure_read_buffer_size = 1048576;
+SET azure_read_transfer_chunk_size = 1_048_576;
+SET azure_read_buffer_size = 1_048_576;
 ```
 
 ## Authentication
@@ -120,9 +121,9 @@ The Azure extension has two ways to configure the authentication. The preferred 
 
 ### Authentication with Secret
 
-Multiple [Secret Providers](../configuration/secrets_manager#secret-providers) are available for the Azure extension:
+Multiple [Secret Providers]({% link docs/configuration/secrets_manager.md %}#secret-providers) are available for the Azure extension:
 
-> * If you need to define different secrets for different storage accounts you can use [the `SCOPE` configuration](../configuration/secrets_manager#creating-multiple-secrets-for-the-same-service-type).
+> * If you need to define different secrets for different storage accounts you can use [the `SCOPE` configuration]({% link docs/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type).
 > * If you use fully qualified path then the `ACCOUNT_NAME` attribute is optional.
 
 #### `CONFIG` Provider
@@ -139,13 +140,14 @@ CREATE SECRET secret1 (
 If you do not use authentication, you still need to specify the storage account name. For example:
 
 ```sql
--- Note that PROVIDER CONFIG is optional as it is the default one
 CREATE SECRET secret2 (
     TYPE AZURE,
     PROVIDER CONFIG,
     ACCOUNT_NAME '⟨storage account name⟩'
 );
 ```
+
+The default `PROVIDER` is `CONFIG`.
 
 #### `CREDENTIAL_CHAIN` Provider
 
@@ -161,7 +163,7 @@ CREATE SECRET secret3 (
 );
 ```
 
-DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a `;` separated list of providers that will be tried in order. For example:
+DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a semicolon-separated list (`a;b;c`) of providers that will be tried in order. For example:
 
 ```sql
 CREATE SECRET secret4 (
@@ -238,14 +240,13 @@ Where `variable_name` can be one of the following:
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
-| `azure_storage_connection_string` | Azure connection string, used for authenticating and configuring azure requests. | `STRING` | - |
+| `azure_storage_connection_string` | Azure connection string, used for authenticating and configuring Azure requests. | `STRING` | - |
 | `azure_account_name` | Azure account name, when set, the extension will attempt to automatically detect credentials (not used if you pass the connection string). | `STRING` | - |
-| `azure_endpoint` | Override the azure endpoint for when the Azure credential providers are used. | `STRING` | `blob.core.windows.net` |
+| `azure_endpoint` | Override the Azure endpoint for when the Azure credential providers are used. | `STRING` | `blob.core.windows.net` |
 | `azure_credential_chain`| Ordered list of Azure credential providers, in string format separated by `;`. For example: `'cli;managed_identity;env'`. See the list of possible values in the [`CREDENTIAL_CHAIN` provider section](#credential_chain-provider). Not used if you pass the connection string. | `STRING` | - |
-| `azure_http_proxy`| Proxy to use when login & performing request to azure. | `STRING` | `HTTP_PROXY` environment variable (if set). |
+| `azure_http_proxy`| Proxy to use when login & performing request to Azure. | `STRING` | `HTTP_PROXY` environment variable (if set). |
 | `azure_proxy_user_name`| Http proxy username if needed. | `STRING` | - |
 | `azure_proxy_password`| Http proxy password if needed. | `STRING` | - |
-
 
 ## Additional Information
 

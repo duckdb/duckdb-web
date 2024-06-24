@@ -384,7 +384,7 @@
             {
               "page": "Pragmas",
               "url": "pragmas"
-            },          
+            },
             {
               "page": "Secrets Manager",
               "url": "secrets_manager"
@@ -406,6 +406,10 @@
                 {
                   "page": "Overview",
                   "url": "overview"
+                },
+                {
+                  "page": "ANALYZE",
+                  "url": "analyze"
                 },
                 {
                   "page": "ALTER TABLE",
@@ -472,6 +476,10 @@
                   "url": "delete"
                 },
                 {
+                  "page": "DESCRIBE",
+                  "url": "describe"
+                },
+                {
                   "page": "DROP",
                   "url": "drop"
                 },
@@ -498,6 +506,10 @@
                 {
                   "page": "SET/RESET",
                   "url": "set"
+                },
+                {
+                  "page": "SUMMARIZE",
+                  "url": "summarize"
                 },
                 {
                   "page": "Transaction Management",
@@ -554,7 +566,7 @@
                   "url": "orderby"
                 },
                 {
-                  "page": "LIMIT",
+                  "page": "LIMIT and OFFSET",
                   "url": "limit"
                 },
                 {
@@ -732,6 +744,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Array Functions",
+                  "url": "array"
+                },
+                {
                   "page": "Bitstring Functions",
                   "url": "bitstring"
                 },
@@ -832,6 +848,10 @@
             {
               "page": "Window Functions",
               "url": "window_functions"
+            },
+            {
+              "page": "PostgreSQL Compatibility",
+              "url": "postgresql_compatibility"
             }
           ]
         },
@@ -872,6 +892,10 @@
               "url": "azure"
             },
             {
+              "page": "Delta",
+              "url": "delta"
+            },
+            {
               "page": "Excel",
               "url": "excel"
             },
@@ -890,6 +914,10 @@
                 {
                   "page": "HTTP(S) Support",
                   "url": "https"
+                },
+                {
+                  "page": "Hugging Face",
+                  "url": "hugging_face"
                 },
                 {
                   "page": "S3 API Support",
@@ -948,6 +976,10 @@
             {
               "page": "TPC-H",
               "url": "tpch"
+            },
+            {
+              "page": "VSS",
+              "url": "vss"
             }
           ]
         },
@@ -960,8 +992,44 @@
               "url": "overview"
             },
             {
-              "page": "Data Import & Export",
-              "slug": "import",
+              "page": "Data Viewers",
+              "slug": "data_viewers",
+              "subsubfolderitems": [
+                {
+                  "page": "Tableau",
+                  "url": "tableau"
+                },
+                {
+                  "page": "CLI Charting with YouPlot",
+                  "url": "youplot"
+                }
+              ]
+            },
+            {
+              "page": "Database Integration",
+              "slug": "database_integration",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "MySQL Import",
+                  "url": "mysql"
+                },
+                {
+                  "page": "PostgreSQL Import",
+                  "url": "postgres"
+                },
+                {
+                  "page": "SQLite Import",
+                  "url": "sqlite"
+                }
+              ]
+            },
+            {
+              "page": "File Formats",
+              "slug": "file_formats",
               "subsubfolderitems": [
                 {
                   "page": "Overview",
@@ -976,6 +1044,26 @@
                   "url": "csv_export"
                 },
                 {
+                  "page": "Directly Reading Files",
+                  "url": "read_file"
+                },
+                {
+                  "page": "Excel Import",
+                  "url": "excel_import"
+                },
+                {
+                  "page": "Excel Export",
+                  "url": "excel_export"
+                },
+                {
+                  "page": "JSON Import",
+                  "url": "json_import"
+                },
+                {
+                  "page": "JSON Export",
+                  "url": "json_export"
+                },
+                {
                   "page": "Parquet Import",
                   "url": "parquet_import"
                 },
@@ -986,6 +1074,16 @@
                 {
                   "page": "Querying Parquet Files",
                   "url": "query_parquet"
+                }
+              ]
+            },
+            {
+              "page": "Network & Cloud Storage",
+              "slug": "network_cloud_storage",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
                 },
                 {
                   "page": "HTTP Parquet Import",
@@ -1016,74 +1114,8 @@
                   "url": "cloudflare_r2_import"
                 },
                 {
-                  "page": "JSON Import",
-                  "url": "json_import"
-                },
-                {
-                  "page": "JSON Export",
-                  "url": "json_export"
-                },
-                {
-                  "page": "Excel Import",
-                  "url": "excel_import"
-                },
-                {
-                  "page": "Excel Export",
-                  "url": "excel_export"
-                },
-                {
-                  "page": "MySQL Import",
-                  "url": "query_mysql"
-                },
-                {
-                  "page": "PostgreSQL Import",
-                  "url": "query_postgres"
-                },
-                {
-                  "page": "SQLite Import",
-                  "url": "query_sqlite"
-                },
-                {
-                  "page": "Directly Reading Files",
-                  "url": "read_file"
-                }
-              ]
-            },
-            {
-              "page": "Performance",
-              "slug": "performance",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Schema",
-                  "url": "schema"
-                },
-                {
-                  "page": "Indexing",
-                  "url": "indexing"
-                },
-                {
-                  "page": "Environment",
-                  "url": "environment"
-                },
-                {
-                  "page": "File Formats",
-                  "url": "file_formats"
-                },
-                {
-                  "page": "How to Tune Workloads",
-                  "url": "how_to_tune_workloads"
-                },
-                {
-                  "page": "My Workload Is Slow",
-                  "url": "my_workload_is_slow"
-                },
-                {
-                  "page": "Benchmarks",
-                  "url": "benchmarks"
+                  "page": "DuckDB over HTTPS/S3",
+                  "url": "duckdb_over_https_or_s3"
                 }
               ]
             },
@@ -1124,6 +1156,48 @@
                 {
                   "page": "ODBC Guide",
                   "url": "general"
+                }
+              ]
+            },
+            {
+              "page": "Performance",
+              "slug": "performance",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Import",
+                  "url": "import"
+                },
+                {
+                  "page": "Schema",
+                  "url": "schema"
+                },
+                {
+                  "page": "Indexing",
+                  "url": "indexing"
+                },
+                {
+                  "page": "Environment",
+                  "url": "environment"
+                },
+                {
+                  "page": "File Formats",
+                  "url": "file_formats"
+                },
+                {
+                  "page": "How to Tune Workloads",
+                  "url": "how_to_tune_workloads"
+                },
+                {
+                  "page": "My Workload Is Slow",
+                  "url": "my_workload_is_slow"
+                },
+                {
+                  "page": "Benchmarks",
+                  "url": "benchmarks"
                 }
               ]
             },
@@ -1198,6 +1272,16 @@
               ]
             },
             {
+              "page": "SQL Editors",
+              "slug": "sql_editors",
+              "subsubfolderitems": [
+                {
+                  "page": "DBeaver SQL IDE",
+                  "url": "dbeaver"
+                }
+              ]
+            },
+            {
               "page": "SQL Features",
               "slug": "sql_features",
               "subsubfolderitems": [
@@ -1216,30 +1300,6 @@
               ]
             },
             {
-              "page": "SQL Editors",
-              "slug": "sql_editors",
-              "subsubfolderitems": [
-                {
-                  "page": "DBeaver SQL IDE",
-                  "url": "dbeaver"
-                }
-              ]
-            },
-            {
-              "page": "Data Viewers",
-              "slug": "data_viewers",
-              "subsubfolderitems": [
-                {
-                  "page": "Tableau",
-                  "url": "tableau"
-                },
-                {
-                  "page": "CLI Charting with YouPlot",
-                  "url": "youplot"
-                }
-              ]
-            },
-            {
               "page": "Snippets",
               "slug": "snippets",
               "subsubfolderitems": [
@@ -1248,6 +1308,14 @@
                   "url": "create_synthetic_data"
                 }
               ]
+            },
+            {
+              "page": "Glossary of Terms",
+              "url": "glossary"
+            },
+            {
+              "page": "Browse Offline",
+              "url": "offline-copy"
             }
           ]
         },
@@ -1330,6 +1398,10 @@
                   "url": "building_extensions"
                 },
                 {
+                  "page": "Supported Platforms",
+                  "url": "supported_platforms"
+                },
+                {
                   "page": "Troubleshooting",
                   "url": "troubleshooting"
                 }
@@ -1358,7 +1430,7 @@
               "url": "vector"
             }
           ]
-        }    
+        }
       ]
     }
   ]

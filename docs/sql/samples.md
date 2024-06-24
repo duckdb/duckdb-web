@@ -8,20 +8,45 @@ Samples are used to randomly select a subset of a dataset.
 
 ### Examples
 
+Select a sample of 5 rows from `tbl` using reservoir sampling:
+
 ```sql
--- select a sample of 5 rows from "tbl" using reservoir sampling
 SELECT * FROM tbl USING SAMPLE 5;
--- select a sample of 10% of the table using system sampling (cluster sampling)
+```
+
+Select a sample of 10% of the table using system sampling (cluster sampling):
+
+```sql
 SELECT * FROM tbl USING SAMPLE 10%;
--- select a sample of 10% of the table using bernoulli sampling
+```
+
+Select a sample of 10% of the table using bernoulli sampling:
+
+```sql
 SELECT * FROM tbl USING SAMPLE 10 PERCENT (bernoulli);
--- select a sample of 50 rows of the table using reservoir sampling with a fixed seed (100)
+```
+
+Select a sample of 50 rows of the table using reservoir sampling with a fixed seed (100):
+
+```sql
 SELECT * FROM tbl USING SAMPLE reservoir(50 ROWS) REPEATABLE (100);
--- select a sample of 20% of the table using system sampling with a fixed seed (377)
+```
+
+Select a sample of 20% of the table using system sampling with a fixed seed (377):
+
+```sql
 SELECT * FROM tbl USING SAMPLE 10% (system, 377);
--- select a sample of 10% of "tbl" BEFORE the join with tbl2
+```
+
+Select a sample of 10% of `tbl` **before** the join with `tbl2`:
+
+```sql
 SELECT * FROM tbl TABLESAMPLE reservoir(20%), tbl2 WHERE tbl.i = tbl2.i;
--- select a sample of 10% of "tbl" AFTER the join with tbl2
+```
+
+Select a sample of 10% of `tbl` **after** the join with `tbl2`:
+
+```sql
 SELECT * FROM tbl, tbl2 WHERE tbl.i = tbl2.i USING SAMPLE reservoir(20%);
 ```
 
@@ -66,19 +91,22 @@ The `TABLESAMPLE` and `USING SAMPLE` clauses are identical in terms of syntax an
 
 The `TABLESAMPLE` clause is essentially equivalent to creating a subquery with the `USING SAMPLE` clause, i.e., the following two queries are identical:
 
+Sample 20% of `tbl` **before** the join:
+
 ```sql
--- sample 20% of tbl BEFORE the join
 SELECT * FROM tbl TABLESAMPLE reservoir(20%), tbl2 WHERE tbl.i = tbl2.i;
 ```
 
+Sample 20% of `tbl` **before** the join:
+
 ```sql
--- sample 20% of tbl BEFORE the join
 SELECT *
 FROM (SELECT * FROM tbl USING SAMPLE reservoir(20%)) tbl, tbl2
 WHERE tbl.i = tbl2.i;
 ```
 
+Sample 20% **after** the join (i.e., sample 20% of the join result):
+
 ```sql
--- sample 20% AFTER the join (i.e., sample 20% of the join result)
 SELECT * FROM tbl, tbl2 WHERE tbl.i = tbl2.i USING SAMPLE reservoir(20%);
 ```

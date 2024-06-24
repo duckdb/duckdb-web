@@ -13,7 +13,7 @@ The query plan will be pretty-printed to the screen using timings for every oper
 
 Note that the **cumulative** wall-clock time that is spent on every operator is shown. When multiple threads are processing the query in parallel, the total processing time of the query may be lower than the sum of all the times spent on the individual operators.
 
-Below is an example of running `EXPLAIN ANALYZE` on [`Q13`](https://github.com/duckdb/duckdb/blob/main/extension/tpch/dbgen/queries/q13.sql) of the [TPC-H benchmark](../../extensions/tpch) on the scale factor 1 data set.
+Below is an example of running `EXPLAIN ANALYZE` on [`Q13`](https://github.com/duckdb/duckdb/blob/main/extension/tpch/dbgen/queries/q13.sql) of the [TPC-H benchmark]({% link docs/extensions/tpch.md %}) on the scale factor 1 data set.
 
 ```sql
 EXPLAIN ANALYZE
@@ -21,16 +21,15 @@ EXPLAIN ANALYZE
         c_count,
         count(*) AS custdist
     FROM (
-        SELECT
-            c_custkey,
-            count(o_orderkey)
-        FROM
-            customer
-        LEFT OUTER JOIN orders ON c_custkey = o_custkey
-        AND o_comment NOT LIKE '%special%requests%'
-    GROUP BY
-        c_custkey) AS c_orders (c_custkey,
-            c_count)
+            SELECT
+                c_custkey,
+                count(o_orderkey)
+            FROM
+                customer
+            LEFT OUTER JOIN orders ON c_custkey = o_custkey
+            AND o_comment NOT LIKE '%special%requests%'
+            GROUP BY c_custkey
+        ) AS c_orders (c_custkey, c_count)
     GROUP BY
         c_count
     ORDER BY
@@ -150,4 +149,4 @@ EXPLAIN ANALYZE
 
 ## See Also
 
-For more information, see the [Profiling page](/dev/profiling).
+For more information, see the [Profiling page]({% link docs/dev/profiling.md %}).

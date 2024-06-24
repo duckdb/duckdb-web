@@ -6,18 +6,45 @@ railroad: expressions/star.js
 
 ## Examples
 
+Select all columns present in the `FROM` clause:
+
 ```sql
--- select all columns present in the FROM clause
 SELECT * FROM table_name;
--- select all columns from the table called "table_name"
+```
+
+Count the number of rows in a table:
+
+```sql
+SELECT count(*) FROM table_name;
+```
+
+Select all columns from the table called `table_name`:
+
+```sql
 SELECT table_name.* FROM table_name JOIN other_table_name USING (id);
--- select all columns except the city column from the addresses table
+```
+
+Select all columns except the city column from the addresses table:
+
+```sql
 SELECT * EXCLUDE (city) FROM addresses;
--- select all columns from the addresses table, but replace city with lower(city)
+```
+
+Select all columns from the addresses table, but replace city with `lower(city)`:
+
+```sql
 SELECT * REPLACE (lower(city) AS city) FROM addresses;
--- select all columns matching the given expression
+```
+
+Select all columns matching the given expression:
+
+```sql
 SELECT COLUMNS(c -> c LIKE '%num%') FROM addresses;
--- select all columns matching the given regex from the table
+```
+
+Select all columns matching the given regex from the table:
+
+```sql
 SELECT COLUMNS('number\d+') FROM addresses;
 ```
 
@@ -73,7 +100,10 @@ SELECT min(COLUMNS(*)), count(COLUMNS(*)) FROM numbers;
 The `*` expression in the `COLUMNS` statement can also contain `EXCLUDE` or `REPLACE`, similar to regular star expressions.
 
 ```sql
-SELECT min(COLUMNS(* REPLACE (number + id AS number))), count(COLUMNS(* EXCLUDE (number))) FROM numbers;
+SELECT
+    min(COLUMNS(* REPLACE (number + id AS number))),
+    count(COLUMNS(* EXCLUDE (number)))
+FROM numbers;
 ```
 
 <div class="narrow_table"></div>
@@ -96,8 +126,27 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 | 4  | 40     |
 | 6  | NULL   |
 
+`COLUMNS` expressions can also be used in `WHERE` clauses. The conditions are applied to all columns and are combined using the logical `AND` operator.
 
-## COLUMNS Regular Expression
+```sql
+SELECT *
+FROM (
+    SELECT 0 AS x, 1 AS y, 2 AS z
+    UNION ALL
+    SELECT 1 AS x, 2 AS y, 3 AS z
+    UNION ALL
+    SELECT 2 AS x, 3 AS y, 4 AS z
+)
+WHERE COLUMNS(*) > 1; -- equivalent to: x > 1 AND y > 1 AND z > 1
+```
+
+<div class="narrow_table"></div>
+
+| x | y | z |
+|--:|--:|--:|
+| 2 | 3 | 4 |
+
+## `COLUMNS` Regular Expression
 
 `COLUMNS` supports passing a regex in as a string constant:
 
@@ -149,10 +198,11 @@ SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 
 The `*` expression can also be used to retrieve all keys from a struct as separate columns.
 This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys.
-See the [`STRUCT` data type](../data_types/struct) and [nested functions](../functions/nested) pages for more details on working with structs.
+See the [`STRUCT` data type]({% link docs/sql/data_types/struct.md %}) and [nested functions]({% link docs/sql/functions/nested.md %}) pages for more details on working with structs.
+
+For example:
 
 ```sql
--- All keys within a struct can be returned as separate columns using *
 SELECT st.* FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS st);
 ```
 

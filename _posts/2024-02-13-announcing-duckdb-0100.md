@@ -11,7 +11,7 @@ excerpt: "The DuckDB team is happy to announce the latest DuckDB release (0.10.0
      width="200px"
      />
 
-To install the new version, please visit the [installation guide](/docs/installation). The full release notes can be found [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
+To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
 
 <!--more-->
 
@@ -44,15 +44,33 @@ Below is a summary of those new features with examples, starting with a change i
 
 ```sql
 SELECT substring(42, 1, 1) AS substr;
--- No function matches the given name and argument types 'substring(...)'.
--- You might need to add explicit type casts.
 ```
 
-The `old_implicit_casting` setting can be used to revert this behavior, e.g.:
+```console
+No function matches the given name and argument types 'substring(...)'.
+You might need to add explicit type casts.
+```
+
+To use an explicit cast, run:
+
+```sql
+SELECT substring(42::VARCHAR, 1, 1) AS substr;
+```
+
+```text
+┌─────────┐
+│ substr  │
+│ varchar │
+├─────────┤
+│ 4       │
+└─────────┘
+```
+
+Alternatively, the `old_implicit_casting` setting can be used to revert this behavior, e.g.:
 
 ```sql
 SET old_implicit_casting = true;
-SELECT substring(42, 1, 1) AS substr;tw
+SELECT substring(42, 1, 1) AS substr;
 ```
 
 ```text
@@ -86,19 +104,23 @@ FROM (VALUES (DATE '1992-01-01')) t(d);
 ```
 
 ```sql
-SELECT d > '1992-01-01'::VARCHAR
+SELECT d > '1992-01-01'::VARCHAR AS result
 FROM (VALUES (DATE '1992-01-01')) t(d);
--- Binder Error: Cannot compare values of type DATE and type VARCHAR –
--- an explicit cast is required
+```
+
+```console
+Binder Error: Cannot compare values of type DATE and type VARCHAR –
+an explicit cast is required
 ```
 
 ## Backward Compatibility
 
 Backward compatibility refers to the ability of a newer DuckDB version to read storage files created by an older DuckDB version. This release is the first release of DuckDB that supports backward compatibility in the storage format. DuckDB v0.10 can read and operate on files created by the previous DuckDB version – DuckDB v0.9. [This is made possible by the implementation of a new serialization framework](https://github.com/duckdb/duckdb/pull/8156).
 
+Write with v0.9:
+
 ```bash
-# write with v0.9
-$ duckdb_092 v092.db
+duckdb_092 v092.db
 ```
 
 ```sql
@@ -106,9 +128,10 @@ CREATE TABLE lineitem AS
 FROM lineitem.parquet;
 ```
 
+Read with v0.10:
+
 ```bash
-# read with v0.10
-$ duckdb_0100 v092.db
+duckdb_0100 v092.db
 ```
 
 ```sql
@@ -131,9 +154,10 @@ For future DuckDB versions, our goal is to ensure that any DuckDB version releas
 
 Forward compatibility refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB v0.9 is **partially** forward compatible with DuckDB v0.10. Certain files created by DuckDB v0.10 can be read by DuckDB v0.9.
 
+Write with v0.10:
+
 ```bash
-# write with v0.10
-$ duckdb_0100 v010.db
+duckdb_0100 v010.db
 ```
 
 ```sql
@@ -141,9 +165,10 @@ CREATE TABLE lineitem AS
 FROM lineitem.parquet;
 ```
 
+Read with v0.9:
+
 ```bash
-# read with v0.9
-$ duckdb_092 v010.db
+duckdb_092 v010.db
 ```
 
 ```sql
@@ -185,7 +210,7 @@ Below is a benchmark comparing the loading time of 11 million rows of the NYC Ta
 | v0.9.2   | 2.6s       |
 | v0.10.0  | 1.15s      |
 
-Furthermore, many optimizations have been done that make running queries over CSV files directly significantly faster as well. Below is a benchmark comparing the execution time of a `SELECT COUNT(*)` query directly over the NYC Taxi CSV file.
+Furthermore, many optimizations have been done that make running queries over CSV files directly significantly faster as well. Below is a benchmark comparing the execution time of a `SELECT count(*)` query directly over the NYC Taxi CSV file.
 
 <div class="narrow_table"></div>
 
@@ -219,11 +244,11 @@ FROM vectors;
 └───────────────────┘
 ```
 
-See the [Array Type page](/docs/sql/data_types/array) in the documentation for more information.
+See the [Array Type page]({% link docs/sql/data_types/array.md %}) in the documentation for more information.
 
 ## Multi-Database Support
 
-DuckDB can now attach MySQL, Postgres, and SQLite databases in addition to databases stored in its own format. This allows data to be read into DuckDB and moved between these systems in a convenient manner, as attached databases are fully functional, appear just as regular tables, and can be updated in a safe, transactional manner. More information about multi-database support can be found in our [recent blog post](/2024/01/26/multi-database-support-in-duckdb).
+DuckDB can now attach MySQL, Postgres, and SQLite databases in addition to databases stored in its own format. This allows data to be read into DuckDB and moved between these systems in a convenient manner, as attached databases are fully functional, appear just as regular tables, and can be updated in a safe, transactional manner. More information about multi-database support can be found in our [recent blog post]({% post_url 2024-01-26-multi-database-support-in-duckdb %}).
 
 ```sql
 ATTACH 'sqlite:sakila.db' AS sqlite;
@@ -286,7 +311,7 @@ CREATE PERSISTENT SECRET my_persistent_secret (
 
 As mentioned, this will write the secret (unencrypted, so beware) to the `~/.duckdb/stored_secrets` directory.
 
-See the [Create Secret page](/docs/sql/statements/create_secret) in the documentation for more information.
+See the [Create Secret page]({% link docs/sql/statements/create_secret.md %}) in the documentation for more information.
 
 ## Temporary Memory Manager
 
@@ -338,14 +363,14 @@ As a user, you don't have to do anything to make use of the new ALP compression 
 
 ## CLI Improvements
 
-The command-line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved](/docs/api/cli/syntax_highlighting) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended](/docs/api/cli/editing).
+The command-line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/api/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/api/cli/editing.md %}).
 
 <img src="/images/syntax_highlighting_screenshot.png"
      alt="Image showing syntax highlighting in the shell"
      width="700px"
      />
 
-See the [extended CLI docs for more information](/docs/api/cli/overview).
+See the [extended CLI docs for more information]({% link docs/api/cli/overview.md %}).
 
 ## Final Thoughts
 
@@ -379,6 +404,6 @@ These were a few highlights – but there are many more features and improvement
 
 * [Parallel streaming query result](https://github.com/duckdb/duckdb/pull/10245)
 * [Struct filter pushdown](https://github.com/duckdb/duckdb/pull/10314)
-* [`FIRST(x ORDER BY y)` optimizations](https://github.com/duckdb/duckdb/pull/10347)
+* [`first(x ORDER BY y)` optimizations](https://github.com/duckdb/duckdb/pull/10347)
 
 We would like to thank all of the contributors for their hard work on improving DuckDB.

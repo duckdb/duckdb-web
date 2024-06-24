@@ -1,13 +1,14 @@
 ---
 layout: docu
 title: Full-Text Search Extension
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/fts
 ---
 
 Full-Text Search is an extension to DuckDB that allows for search through strings, similar to [SQLite's FTS5 extension](https://www.sqlite.org/fts5.html).
 
 ## Installing and Loading
 
-The `fts` extension will be transparently autoloaded on first use from the official extension repository.
+The `fts` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -33,15 +34,15 @@ create_fts_index(input_table, input_id, *input_values, stemmer = 'porter',
 
 | Name | Type | Description |
 |:--|:--|:----------|
-|`input_table`|`VARCHAR`|Qualified name of specified table, e.g., `'table_name'` or `'main.table_name'`|
-|`input_id`|`VARCHAR`|Column name of document identifier, e.g., `'document_identifier'`|
-|`input_values…`|`VARCHAR`|Column names of the text fields to be indexed (vararg), e.g., `'text_field_1'`, `'text_field_2'`, ..., `'text_field_N'`, or `'\*'` for all columns in input_table of type `VARCHAR`|
-|`stemmer`|`VARCHAR`|The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used. Defaults to `'porter'`|
-|`stopwords`|`VARCHAR`|Qualified name of table containing a single `VARCHAR` column containing the desired stopwords, or `'none'` if no stopwords are to be used. Defaults to `'english'` for a pre-defined list of 571 English stopwords|
-|`ignore`|`VARCHAR`|Regular expression of patterns to be ignored. Defaults to `'(\\.|[^a-z])+'`, ignoring all escaped and non-alphabetic lowercase characters|
-|`strip_accents`|`BOOLEAN`|Whether to remove accents (e.g., convert `á` to `a`). Defaults to `1`|
-|`lower`|`BOOLEAN`|Whether to convert all text to lowercase. Defaults to `1`|
-|`overwrite`|`BOOLEAN`|Whether to overwrite an existing index on a table. Defaults to `0`|
+| `input_table` | `VARCHAR` | Qualified name of specified table, e.g., `'table_name'` or `'main.table_name'` |
+| `input_id` | `VARCHAR` | Column name of document identifier, e.g., `'document_identifier'` |
+| `input_values…` | `VARCHAR` | Column names of the text fields to be indexed (vararg), e.g., `'text_field_1'`, `'text_field_2'`, ..., `'text_field_N'`, or `'\*'` for all columns in input_table of type `VARCHAR` |
+| `stemmer` | `VARCHAR` | The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used. Defaults to `'porter'` |
+| `stopwords` | `VARCHAR` | Qualified name of table containing a single `VARCHAR` column containing the desired stopwords, or `'none'` if no stopwords are to be used. Defaults to `'english'` for a pre-defined list of 571 English stopwords |
+| `ignore` | `VARCHAR` | Regular expression of patterns to be ignored. Defaults to `'(\\.|[^a-z])+'`, ignoring all escaped and non-alphabetic lowercase characters |
+| `strip_accents` | `BOOLEAN` | Whether to remove accents (e.g., convert `á` to `a`). Defaults to `1` |
+| `lower` | `BOOLEAN` | Whether to convert all text to lowercase. Defaults to `1` |
+| `overwrite` | `BOOLEAN` | Whether to overwrite an existing index on a table. Defaults to `0` |
 
 <!-- markdownlint-enable MD056 -->
 
@@ -59,24 +60,24 @@ Drops a FTS index for the specified table.
 
 | Name | Type | Description |
 |:--|:--|:-----------|
-|`input_table`|`VARCHAR`|Qualified name of input table, e.g., `'table_name'` or `'main.table_name'`|
+| `input_table` | `VARCHAR` | Qualified name of input table, e.g., `'table_name'` or `'main.table_name'` |
 
 ### `match_bm25` Function
 
 ```python
-match_bm25(input_id, query_string, fields := NULL, k := 1.2, b:= 0.75, conjunctive := 0)
+match_bm25(input_id, query_string, fields := NULL, k := 1.2, b := 0.75, conjunctive := 0)
 ```
 
 When an index is built, this retrieval macro is created that can be used to search the index.
 
 | Name | Type | Description |
 |:--|:--|:----------|
-|`input_id`|`VARCHAR`|Column name of document identifier, e.g., `'document_identifier'`|
-|`query_string`|`VARCHAR`|The string to search the index for|
-|`fields`|`VARCHAR`|Comma-separarated list of fields to search in, e.g., `'text_field_2, text_field_N'`. Defaults to `NULL` to search all indexed fields|
-|`k`|`DOUBLE`|Parameter _k<sub>1</sub>_ in the Okapi BM25 retrieval model. Defaults to `1.2`|
-|`b`|`DOUBLE`|Parameter _b_ in the Okapi BM25 retrieval model. Defaults to `0.75`|
-|`conjunctive`|`BOOLEAN`|Whether to make the query conjunctive i.e., all terms in the query string must be present in order for a document to be retrieved|
+| `input_id` | `VARCHAR` | Column name of document identifier, e.g., `'document_identifier'` |
+| `query_string` | `VARCHAR` | The string to search the index for |
+| `fields` | `VARCHAR` | Comma-separarated list of fields to search in, e.g., `'text_field_2, text_field_N'`. Defaults to `NULL` to search all indexed fields |
+| `k` | `DOUBLE` | Parameter _k<sub>1</sub>_ in the Okapi BM25 retrieval model. Defaults to `1.2` |
+| `b` | `DOUBLE` | Parameter _b_ in the Okapi BM25 retrieval model. Defaults to `0.75` |
+| `conjunctive` | `BOOLEAN` | Whether to make the query conjunctive i.e., all terms in the query string must be present in order for a document to be retrieved |
 
 ### `stem` Function
 
@@ -88,8 +89,8 @@ Reduces words to their base. Used internally by the extension.
 
 | Name | Type | Description |
 |:--|:--|:----------|
-|`input_string`|`VARCHAR`|The column or constant to be stemmed|
-|`stemmer`|`VARCHAR`|The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used.|
+| `input_string` | `VARCHAR` | The column or constant to be stemmed. |
+| `stemmer` | `VARCHAR` | The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used. |
 
 ## Example Usage
 
@@ -164,7 +165,3 @@ ORDER BY score DESC;
 
 > Warning The FTS index will not update automatically when input table changes.
 > A workaround of this limitation can be recreating the index to refresh.
-
-## GitHub
-
-The `fts` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/fts).

@@ -3,9 +3,14 @@ layout: docu
 title: SQL Introduction
 ---
 
-Here we provide an overview of how to perform simple operations in SQL. This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL. This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
+Here we provide an overview of how to perform simple operations in SQL.
+This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL.
+This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
 
-In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page](../installation?environment=cli) for information on how to install the CLI.
+> DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.
+> The few exceptions to this are listed on the [PostgreSQL compatibility page]({% link docs/sql/postgresql_compatibility.md %}).
+
+In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page]({% link docs/installation/index.html %}?environment=cli) for information on how to install the CLI.
 
 ## Concepts
 
@@ -29,7 +34,7 @@ CREATE TABLE weather (
 
 You can enter this into the shell with the line breaks. The command is not terminated until the semicolon.
 
-White space (i.e., spaces, tabs, and newlines) can be used freely in SQL commands. That means you can type the command aligned differently than above, or even all on one line. Two dash characters (`--`) introduce comments. Whatever follows them is ignored up to the end of the line. SQL is case-insensitive about keywords and identifiers. When returning identifiers, [their original cases are preserved](keywords_and_identifiers#rules-for-case-sensitivity).
+White space (i.e., spaces, tabs, and newlines) can be used freely in SQL commands. That means you can type the command aligned differently than above, or even all on one line. Two dash characters (`--`) introduce comments. Whatever follows them is ignored up to the end of the line. SQL is case-insensitive about keywords and identifiers. When returning identifiers, [their original cases are preserved]({% link docs/sql/keywords_and_identifiers.md %}#rules-for-case-sensitivity).
 
 In the SQL command, we first specify the type of command that we want to perform: `CREATE TABLE`. After that follows the parameters for the command. First, the table name, `weather`, is given. Then the column names and column types follow.
 
@@ -96,7 +101,7 @@ COPY weather
 FROM 'weather.csv';
 ```
 
-Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section](../data/overview) for more information.
+Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section]({% link docs/data/overview.md %}) for more information.
 
 ## Querying a Table
 
@@ -144,7 +149,8 @@ A query can be "qualified" by adding a `WHERE` clause that specifies which rows 
 ```sql
 SELECT *
 FROM weather
-WHERE city = 'San Francisco' AND prcp > 0.0;
+WHERE city = 'San Francisco'
+  AND prcp > 0.0;
 ```
 
 Result:
@@ -338,7 +344,7 @@ GROUP BY city
 HAVING max(temp_lo) < 40;
 ```
 
-More information about the `LIKE` operator can be found in the [pattern matching page](../sql/functions/patternmatching).
+More information about the `LIKE` operator can be found in the [pattern matching page]({% link docs/sql/functions/pattern_matching.md %}).
 
 It is important to understand the interaction between aggregates and SQL's `WHERE` and `HAVING` clauses. The fundamental difference between `WHERE` and `HAVING` is this: `WHERE` selects input rows before groups and aggregates are computed (thus, it controls which rows go into the aggregate computation), whereas `HAVING` selects group rows after groups and aggregates are computed. Thus, the `WHERE` clause must not contain aggregate functions; it makes no sense to try to use an aggregate to determine which rows will be inputs to the aggregates. On the other hand, the `HAVING` clause always contains aggregate functions.
 
@@ -388,10 +394,10 @@ FROM weather;
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
 
-One should be wary of statements of the form
+One should be cautious when issuing statements of the following form:
 
 ```sql
-DELETE FROM tablename;
+DELETE FROM ⟨table_name⟩;
 ```
 
 > Warning Without a qualification, `DELETE` will remove all rows from the given table, leaving it empty. The system will not request confirmation before doing this.

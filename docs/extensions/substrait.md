@@ -4,7 +4,7 @@ title: Substrait Extension
 github_repository: https://github.com/duckdb/substrait
 ---
 
-The main goal of the `substrait` extension is to support both production and consumption of Substrait query plans in DuckDB.
+The main goal of the `substrait` extension is to support both production and consumption of [Substrait](https://substrait.io/) query plans in DuckDB.
 
 This extension is mainly exposed via 3 different APIs – the SQL API, the Python API, and the R API.
 Here we depict how to consume and produce Substrait query plans in each API.
@@ -32,7 +32,7 @@ To generate a Substrait BLOB the `get_substrait(sql)` function must be called wi
 
 ```sql
 CREATE TABLE crossfit (exercise TEXT, difficulty_level INTEGER);
-INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , ('Push Jerk', 7), ('Bar Muscle Up', 10);
+INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5), ('Push Jerk', 7), ('Bar Muscle Up', 10);
 ```
 
 ```sql
@@ -86,7 +86,7 @@ To generate a Substrait BLOB the `get_substrait(sql)` function must be called, f
 
 ```python
 con.execute(query = "CREATE TABLE crossfit (exercise TEXT, difficulty_level INTEGER)")
-con.execute(query = "INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , ('Push Jerk', 7), ('Bar Muscle Up', 10)")
+con.execute(query = "INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5), ('Push Jerk', 7), ('Bar Muscle Up', 10)")
 
 proto_bytes = con.get_substrait(query="SELECT count(exercise) AS exercise FROM crossfit WHERE difficulty_level <= 5").fetchone()[0]
 ```
@@ -124,7 +124,7 @@ To generate a Substrait BLOB the `duckdb_get_substrait(con, sql)` function must 
 
 ```r
 dbExecute(con, "CREATE TABLE crossfit (exercise TEXT, difficulty_level INTEGER)")
-dbExecute(con, "INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , ('Push Jerk', 7), ('Bar Muscle Up', 10)")
+dbExecute(con, "INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5), ('Push Jerk', 7), ('Bar Muscle Up', 10)")
 
 proto_bytes <- duckdb::duckdb_get_substrait(con, "SELECT * FROM crossfit LIMIT 5")
 ```

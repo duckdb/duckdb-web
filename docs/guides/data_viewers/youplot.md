@@ -21,7 +21,7 @@ Run `uplot --help` to ensure you've installed it successfully!
 
 ## Piping DuckDB Queries to stdout
 
-By combining the [`COPY...TO`](../../sql/statements/copy#copy-to) function with a CSV output file, data can be read from any format supported by DuckDB and piped to YouPlot. There are three important steps to doing this.
+By combining the [`COPY...TO`]({% link docs/sql/statements/copy.md %}#copy-to) function with a CSV output file, data can be read from any format supported by DuckDB and piped to YouPlot. There are three important steps to doing this.
 
 1. As an example, this is how to read all data from `input.json`:
 
@@ -54,7 +54,8 @@ By combining the [`COPY...TO`](../../sql/statements/copy#copy-to) function with 
 Finally, the data can now be piped to YouPlot! Let's assume we have an `input.json` file with dates and number of purchases made by somebody on that date. Using the query above, we'll pipe the data to the `uplot` command to draw a plot of the Top 10 Purchase Dates
 
 ```bash
-duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" | uplot bar -d, -H -t "Top 10 Purchase Dates"
+duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" \
+     | uplot bar -d, -H -t "Top 10 Purchase Dates"
 ```
 
 This tells `uplot` to draw a bar plot, use a comma-seperated delimiter (`-d,`), that the data has a header (`-H`), and give the plot a title (`-t`).
@@ -69,8 +70,8 @@ Let's combine this with a quick `curl` from GitHub to see what a certain user ha
 
 ```bash
 curl -sL "https://api.github.com/users/dacort/events?per_page=100" \
-   | duckdb -s "COPY (SELECT type, count(*) AS event_count FROM read_json_auto('/dev/stdin') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" \
-   | uplot bar -d, -H -t "GitHub Events for @dacort"
+     | duckdb -s "COPY (SELECT type, count(*) AS event_count FROM read_json_auto('/dev/stdin') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" \
+     | uplot bar -d, -H -t "GitHub Events for @dacort"
 ```
 
 ![github-events](/images/guides/youplot/github-events.png)

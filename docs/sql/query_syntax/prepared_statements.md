@@ -12,7 +12,7 @@ There are three syntaxes for denoting parameters in prepared statements:
 auto-incremented (`?`),
 positional (`$1`),
 and named (`$param`).
-Note that not all clients support all of these syntaxes, e.g., the [JDBC client](../../api/java) only supports auto-incremented parameters in prepared statements.
+Note that not all clients support all of these syntaxes, e.g., the [JDBC client]({% link docs/api/java.md %}) only supports auto-incremented parameters in prepared statements.
 
 ### Example Data Set
 
@@ -83,4 +83,18 @@ Using the CLI client, the statement is executed as follows.
 
 ```sql
 EXECUTE query_person(name_start_letter := 'B', minimum_age := 40);
+```
+
+## Dropping Prepared Statements: `DEALLOCATE`
+
+To drop a prepared statement, use the `DEALLOCATE` statement:
+
+```sql
+DEALLOCATE query_person;
+```
+
+Alternatively, use:
+
+```sql
+DEALLOCATE PREPARE query_person;
 ```

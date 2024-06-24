@@ -8,14 +8,17 @@ The `FILTER` clause may optionally follow an aggregate function in a `SELECT` st
 
 There are multiple types of situations where this is useful, including when evaluating multiple aggregates with different filters, and when creating a pivoted view of a dataset. `FILTER` provides a cleaner syntax for pivoting data when compared with the more traditional `CASE WHEN` approach discussed below.
 
-Some aggregate functions also do not filter out null values, so using a `FILTER` clause will return valid results when at times the `CASE WHEN` approach will not. This occurs with the functions `first` and `last`, which are desirable in a non-aggregating pivot operation where the goal is to simply re-orient the data into columns rather than re-aggregate it. `FILTER` also improves null handling when using the `LIST` and `ARRAY_AGG` functions, as the `CASE WHEN` approach will include null values in the list result, while the `FILTER` clause will remove them.
+Some aggregate functions also do not filter out null values, so using a `FILTER` clause will return valid results when at times the `CASE WHEN` approach will not. This occurs with the functions `first` and `last`, which are desirable in a non-aggregating pivot operation where the goal is to simply re-orient the data into columns rather than re-aggregate it. `FILTER` also improves null handling when using the `list` and `array_agg` functions, as the `CASE WHEN` approach will include null values in the list result, while the `FILTER` clause will remove them.
 
 ## Examples
 
+Return the following:
+
+* The total number of rows.
+* The number of rows where `i <= 5`
+* The number of rows where `i` is odd
+
 ```sql
--- Compare total row count to:
---   The number of rows where i <= 5
---   The number of rows where i is odd
 SELECT
     count(*) AS total_rows,
     count(*) FILTER (i <= 5) AS lte_five,
@@ -29,10 +32,9 @@ FROM generate_series(1, 10) tbl(i);
 |:---|:---|:---|
 | 10 | 5 | 5 |
 
+Different aggregate functions may be used, and multiple `WHERE` expressions are also permitted:
+
 ```sql
--- Different aggregate functions may be used, and multiple WHERE expressions are also permitted
---   The sum of i for rows where i <= 5
---   The median of i where i is odd
 SELECT
     sum(i) FILTER (i <= 5) AS lte_five_sum,
     median(i) FILTER (i % 2 = 1) AS odds_median,
@@ -48,8 +50,9 @@ FROM generate_series(1, 10) tbl(i);
 
 The `FILTER` clause can also be used to pivot data from rows into columns. This is a static pivot, as columns must be defined prior to runtime in SQL. However, this kind of statement can be dynamically generated in a host programming language to leverage DuckDB's SQL engine for rapid, larger than memory pivoting.
 
+First generate an example dataset:
+
 ```sql
--- First generate an example dataset
 CREATE TEMP TABLE stacked_data AS
     SELECT
         i,
@@ -67,8 +70,9 @@ CREATE TEMP TABLE stacked_data AS
     ) tbl;
 ```
 
+"Pivot" the data out by year (move each year out to a separate column):
+
 ```sql
--- "Pivot" the data out by year (move each year out to a separate column)
 SELECT
     count(i) FILTER (year = 2022) AS "2022",
     count(i) FILTER (year = 2023) AS "2023",
@@ -78,8 +82,9 @@ SELECT
 FROM stacked_data;
 ```
 
+This syntax produces the same results as the `FILTER` clauses above:
+
 ```sql
--- This syntax produces the same results as the FILTER clauses above
 SELECT
     count(CASE WHEN year = 2022 THEN i END) AS "2022",
     count(CASE WHEN year = 2023 THEN i END) AS "2023",
@@ -97,8 +102,9 @@ FROM stacked_data;
 
 However, the `CASE WHEN` approach will not work as expected when using an aggregate function that does not ignore `NULL` values. The `first` function falls into this category, so `FILTER` is preferred in this case.
 
+"Pivot" the data out by year (move each year out to a separate column):
+
 ```sql
--- "Pivot" the data out by year (move each year out to a separate column)
 SELECT
     first(i) FILTER (year = 2022) AS "2022",
     first(i) FILTER (year = 2023) AS "2023",
@@ -114,8 +120,9 @@ FROM stacked_data;
 |:---|:---|:---|:---|:---|
 | 1474561 | 25804801 | 50749441 | 76431361 | 87500001 |
 
+This will produce `NULL` values whenever the first evaluation of the `CASE WHEN` clause returns a `NULL`:
+
 ```sql
--- This will produce NULL values whenever the first evaluation of the CASE WHEN clause returns a NULL
 SELECT
     first(CASE WHEN year = 2022 THEN i END) AS "2022",
     first(CASE WHEN year = 2023 THEN i END) AS "2023",

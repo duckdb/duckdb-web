@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "DuckDB-Wasm: Efficient Analytical SQL in the Browser"
+title: "DuckDB-Wasm: Efficient Analytical SQL in the Browser"
 author: André Kohn and Dominik Moritz
 excerpt: "[DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it in your browser at [shell.duckdb.org](https://shell.duckdb.org) or on [Observable](https://observablehq.com/@cmudig/duckdb)."
 ---

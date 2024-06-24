@@ -15,7 +15,10 @@ By default this will create a relation object. The result can be converted to va
 ```python
 results = duckdb.sql("SELECT 42").fetchall()
 print(results)
-# [(42,)]
+```
+
+```text
+[(42,)]
 ```
 
 Several other result objects exist. For example, you can use `df` to convert the result to a Pandas DataFrame.
@@ -23,8 +26,11 @@ Several other result objects exist. For example, you can use `df` to convert the
 ```python
 results = duckdb.sql("SELECT 42").df()
 print(results)
-#    42
-# 0  42
+```
+
+```text
+    42
+ 0  42
 ```
 
 By default, a global in-memory connection will be used. Any data stored in files will be lost after shutting down the program. A connection to a persistent database can be created using the `connect` function.

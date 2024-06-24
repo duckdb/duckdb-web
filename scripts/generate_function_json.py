@@ -55,9 +55,11 @@ def main():
                         else []
                     ),
                     'category': category,
-                    'result': get_result(function['example'])
-                    if function.get('example')
-                    else None,
+                    'result': (
+                        get_result(function['example'])
+                        if function.get('example')
+                        else None
+                    ),
                 }
                 for function in json.load(fh)
             ]

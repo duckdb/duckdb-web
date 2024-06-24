@@ -12,17 +12,16 @@ Additionally, we recommend using the [Ninja build system](https://ninja-build.or
 
 Install the required packages with the package manager of your distribution.
 
+Ubuntu and Debian:
+
+```bash
+sudo apt-get update && sudo apt-get install -y git g++ cmake ninja-build libssl-dev
+```
+
 Fedora, CentOS, and Red Hat:
 
 ```bash
 sudo yum install -y git g++ cmake ninja-build openssl-devel
-```
-
-Ubuntu and Debian:
-
-```bash
-sudo apt-get update
-sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
 Alpine Linux:
@@ -41,9 +40,9 @@ brew install cmake ninja
 
 ### Windows
 
-Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.1/.github/workflows/Windows.yml#L234) for a list of packages used to build DuckDB on Windows.
+Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.2/.github/workflows/Windows.yml#L234) for a list of packages used to build DuckDB on Windows.
 
-The DuckDB Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../../api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
+On Windows, the DuckDB Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run]({% link docs/api/python/known_issues.md %}#error-when-importing-the-duckdb-python-package-on-windows).
 
 ## Building DuckDB
 

@@ -15,7 +15,7 @@ For ideal performance, aggregation-heavy workloads require approx. 5 GB memory p
 
 > Bestpractice Aim for 5-10 GB memory per thread.
 
-> Tip If you have a limited amount of memory, try to [limit the number of threads](../../configuration/pragmas#threads), e.g., by issuing `SET threads = 4;`.
+> Tip If you have a limited amount of memory, try to [limit the number of threads]({% link docs/configuration/pragmas.md %}#threads), e.g., by issuing `SET threads = 4;`.
 
 ### Disk
 

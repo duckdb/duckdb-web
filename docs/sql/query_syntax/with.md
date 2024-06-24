@@ -8,8 +8,9 @@ The `WITH` clause allows you to specify common table expressions (CTEs). Regular
 
 ## Basic CTE Examples
 
+Create a CTE called "cte" and use it in the main query:
+
 ```sql
--- create a CTE called "cte" and use it in the main query
 WITH cte AS (SELECT 42 AS x)
 SELECT * FROM cte;
 ```
@@ -18,10 +19,12 @@ SELECT * FROM cte;
 |---:|
 | 42 |
 
+Create two CTEs, where the second CTE references the first CTE:
+
 ```sql
--- create two CTEs, where the second CTE references the first CTE
-WITH cte AS (SELECT 42 AS i),
-     cte2 AS (SELECT i*100 AS x FROM cte)
+WITH
+    cte AS (SELECT 42 AS i),
+    cte2 AS (SELECT i * 100 AS x FROM cte)
 SELECT * FROM cte2;
 ```
 
@@ -67,23 +70,22 @@ SELECT * FROM t AS t1,
 
 ```sql
 WITH RECURSIVE FibonacciNumbers (RecursionDepth, FibonacciNumber, NextNumber) AS (
-    -- Base case
-    SELECT
-        0  AS RecursionDepth,
-        0  AS FibonacciNumber,
-        1  AS NextNumber
-    UNION ALL
-    -- Recursive step
-    SELECT
-        fib.RecursionDepth + 1 AS RecursionDepth,
-        fib.NextNumber AS FibonacciNumber,
-        fib.FibonacciNumber + fib.NextNumber AS NextNumber
-    FROM
-        FibonacciNumbers fib
-    WHERE
-        fib.RecursionDepth + 1 < 10
-)
--- Query the CTE
+        -- Base case
+        SELECT
+            0 AS RecursionDepth,
+            0 AS FibonacciNumber,
+            1 AS NextNumber
+        UNION ALL
+        -- Recursive step
+        SELECT
+            fib.RecursionDepth + 1 AS RecursionDepth,
+            fib.NextNumber AS FibonacciNumber,
+            fib.FibonacciNumber + fib.NextNumber AS NextNumber
+        FROM
+            FibonacciNumbers fib
+        WHERE
+            fib.RecursionDepth + 1 < 10
+    )
 SELECT
     fn.RecursionDepth AS FibonacciNumberIndex,
     fn.FibonacciNumber
@@ -128,14 +130,14 @@ The following query returns the path from the node `Oasis` to the root of the tr
 
 ```sql
 WITH RECURSIVE tag_hierarchy(id, source, path) AS (
-    SELECT id, name, [name] AS path
-    FROM tag
-    WHERE subclassof IS NULL
-UNION ALL
-    SELECT tag.id, tag.name, list_prepend(tag.name, tag_hierarchy.path)
-    FROM tag, tag_hierarchy
-    WHERE tag.subclassof = tag_hierarchy.id
-)
+        SELECT id, name, [name] AS path
+        FROM tag
+        WHERE subclassof IS NULL
+    UNION ALL
+        SELECT tag.id, tag.name, list_prepend(tag.name, tag_hierarchy.path)
+        FROM tag, tag_hierarchy
+        WHERE tag.subclassof = tag_hierarchy.id
+    )
 SELECT path
 FROM tag_hierarchy
 WHERE source = 'Oasis';
@@ -148,7 +150,7 @@ WHERE source = 'Oasis';
 ### Graph Traversal
 
 The `WITH RECURSIVE` clause can be used to express graph traversal on arbitrary graphs. However, if the graph has cycles, the query must perform cycle detection to prevent infinite loops.
-One way to achieve this is to store the path of a traversal in a [list](../../sql/data_types/list) and, before extending the path with a new edge, check whether its endpoint has been visited before (see the example later).
+One way to achieve this is to store the path of a traversal in a [list]({% link docs/sql/data_types/list.md %}) and, before extending the path with a new edge, check whether its endpoint has been visited before (see the example later).
 
 Take the following directed graph from the [LDBC Graphalytics benchmark](https://arxiv.org/pdf/2011.15028.pdf):
 
@@ -170,23 +172,23 @@ The following query returns **all paths** starting in node 1:
 
 ```sql
 WITH RECURSIVE paths(startNode, endNode, path) AS (
-    SELECT -- define the path as the first edge of the traversal
-        node1id AS startNode,
-        node2id AS endNode,
-        [node1id, node2id] AS path
-    FROM edge
-    WHERE startNode = 1
-    UNION ALL
-    SELECT -- concatenate new edge to the path
-        paths.startNode AS startNode,
-        node2id AS endNode,
-        array_append(path, node2id) AS path
-    FROM paths
-    JOIN edge ON paths.endNode = node1id
-    -- Prevent adding a repeated node to the path.
-    -- This ensures that no cycles occur.
-    WHERE node2id != ALL(paths.path)
-)
+        SELECT -- define the path as the first edge of the traversal
+            node1id AS startNode,
+            node2id AS endNode,
+            [node1id, node2id] AS path
+        FROM edge
+        WHERE startNode = 1
+        UNION ALL
+        SELECT -- concatenate new edge to the path
+            paths.startNode AS startNode,
+            node2id AS endNode,
+            array_append(path, node2id) AS path
+        FROM paths
+        JOIN edge ON paths.endNode = node1id
+        -- Prevent adding a repeated node to the path.
+        -- This ensures that no cycles occur.
+        WHERE node2id != ALL(paths.path)
+    )
 SELECT startNode, endNode, path
 FROM paths
 ORDER BY length(path), path;
@@ -215,26 +217,27 @@ In most cases, enumerating all paths is not practical or feasible. Instead, only
 
 ```sql
 WITH RECURSIVE paths(startNode, endNode, path) AS (
-   SELECT -- define the path as the first edge of the traversal
-        node1id AS startNode,
-        node2id AS endNode,
-        [node1id, node2id] AS path
-     FROM edge
-     WHERE startNode = 1
-   UNION ALL
-   SELECT -- concatenate new edge to the path
-        paths.startNode AS startNode,
-        node2id AS endNode,
-        array_append(path, node2id) AS path
-     FROM paths
-     JOIN edge ON paths.endNode = node1id
-    -- Prevent adding a node that was visited previously by any path.
-    -- This ensures that (1) no cycles occur and (2) only nodes that
-    -- were not visited by previous (shorter) paths are added to a path.
-    WHERE NOT EXISTS (SELECT 1
-                      FROM paths previous_paths
-                      WHERE list_contains(previous_paths.path, node2id))
-)
+        SELECT -- define the path as the first edge of the traversal
+            node1id AS startNode,
+            node2id AS endNode,
+            [node1id, node2id] AS path
+        FROM edge
+        WHERE startNode = 1
+        UNION ALL
+        SELECT -- concatenate new edge to the path
+            paths.startNode AS startNode,
+            node2id AS endNode,
+            array_append(path, node2id) AS path
+        FROM paths
+        JOIN edge ON paths.endNode = node1id
+        -- Prevent adding a node that was visited previously by any path.
+        -- This ensures that (1) no cycles occur and (2) only nodes that
+        -- were not visited by previous (shorter) paths are added to a path.
+        WHERE NOT EXISTS (
+                FROM paths previous_paths
+                WHERE list_contains(previous_paths.path, node2id)
+            )
+    )
 SELECT startNode, endNode, path
 FROM paths
 ORDER BY length(path), path;
@@ -251,7 +254,7 @@ ORDER BY length(path), path;
 
 #### Enumerate Unweighted Shortest Paths between Two Nodes
 
-`WITH RECURSIVE` can also be used to find **all (unweighted) shortest paths between two nodes**. To ensure that the recursive query is stopped as soon as we reach the end node, we use a [window function](../../sql/window_functions) which checks whether the end node is among the newly added nodes.
+`WITH RECURSIVE` can also be used to find **all (unweighted) shortest paths between two nodes**. To ensure that the recursive query is stopped as soon as we reach the end node, we use a [window function]({% link docs/sql/window_functions.md %}) which checks whether the end node is among the newly added nodes.
 
 The following query returns all unweighted shortest paths between nodes 1 (start node) and 8 (end node):
 
@@ -274,9 +277,9 @@ WITH RECURSIVE paths(startNode, endNode, path, endReached) AS (
                            AND UNBOUNDED FOLLOWING) AS endReached
      FROM paths
      JOIN edge ON paths.endNode = node1id
-    WHERE NOT EXISTS (SELECT 1
-                      FROM paths previous_paths
-                      WHERE list_contains(previous_paths.path, node2id))
+    WHERE NOT EXISTS (
+        FROM paths previous_paths
+        WHERE list_contains(previous_paths.path, node2id))
       AND paths.endReached = 0
 )
 SELECT startNode, endNode, path

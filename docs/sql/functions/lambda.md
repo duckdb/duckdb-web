@@ -31,7 +31,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
 
-### `list_filter(list, lambda)
+### `list_filter(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -144,11 +144,11 @@ SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
 _Transforming strings:_
 
 ```sql
-SELECT list_transform(['duck', 'a', 'b'], s -> concat(s, 'DB'));
+SELECT list_transform(['Duck', 'Goose', 'Sparrow'], s -> concat(s, 'DB'));
 ```
 
 ```text
-[duckDB, aDB, bDB]
+[DuckDB, GooseDB, SparrowDB]
 ```
 
 _Combining lambda functions with other functions:_

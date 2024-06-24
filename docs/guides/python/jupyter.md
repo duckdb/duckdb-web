@@ -16,28 +16,33 @@ This example workflow is also available as a [Google Colab notebook](https://col
 
 Four additional libraries improve the DuckDB experience in Jupyter notebooks.
 
-1. [jupysql](https://github.com/ploomber/jupysql)
-    * Convert a Jupyter code cell into a SQL cell
-2. [Pandas](https://github.com/pandas-dev/pandas)
-    * Clean table visualizations and compatibility with other analysis
-3. [matplotlib](https://github.com/matplotlib/matplotlib)
-    * Plotting with Python
-4. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
-    * Used by SQLAlchemy to connect to DuckDB (optional)
+1. [jupysql](https://github.com/ploomber/jupysql): Convert a Jupyter code cell into a SQL cell
+2. [Pandas](https://github.com/pandas-dev/pandas): Clean table visualizations and compatibility with other analysis
+3. [matplotlib](https://github.com/matplotlib/matplotlib): Plotting with Python
+4. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine): Used by SQLAlchemy to connect to DuckDB (optional)
+
+Run these `pip install` commands from the command line if Jupyter Notebook is not yet installed. Otherwise, see Google Colab link above for an in-notebook example:
 
 ```bash
-# Run these pip install commands from the command line if Jupyter Notebook is not yet installed.
-# Otherwise, see Google Collab link above for an in-notebook example
 pip install duckdb
+```
 
-# Install Jupyter Notebook (Note: you can also install JupyterLab: pip install jupyterlab)
+Install Jupyter Notebook
+
+```bash
 pip install notebook
+```
 
-# Install supporting libraries
-pip install jupysql
-pip install pandas
-pip install matplotlib
-pip install duckdb-engine
+Or JupyterLab:
+
+```bash
+pip install jupyterlab
+```
+
+Install supporting libraries:
+
+```bash
+pip install jupysql pandas matplotlib duckdb-engine
 ```
 
 ## Library Import and Configuration
@@ -80,21 +85,21 @@ Set configurations on jupysql to directly output data to Pandas and to simplify 
 ```
 
 Connect jupysql to DuckDB using a SQLAlchemy-style connection string.
-Either connect to a new [in-memory DuckDB](../../api/python/dbapi#in-memory-connection), the [default connection](../../api/python/dbapi#default-connection) or a file backed database:
+Either connect to a new [in-memory DuckDB]({% link docs/api/python/dbapi.md %}#in-memory-connection), the [default connection]({% link docs/api/python/dbapi.md %}#default-connection) or a file backed database:
 
-```python
+```sql
 %sql duckdb:///:memory:
 ```
 
-```python
+```sql
 %sql duckdb:///:default:
 ```
 
-```python
+```sql
 %sql duckdb:///path/to/file.db
 ```
 
-> The `%sql` command and `duckdb.sql` share the same [default connection](../../api/python/dbapi) if you provide `duckdb:///:default:` as the SQLAlchemy connection string.
+> The `%sql` command and `duckdb.sql` share the same [default connection]({% link docs/api/python/dbapi.md %}) if you provide `duckdb:///:default:` as the SQLAlchemy connection string.
 
 ## Querying DuckDB
 
@@ -149,10 +154,10 @@ This delegates memory management to the engine and ensures that intermediate com
 
 ### Install and Load DuckDB httpfs Extension
 
-DuckDB's [httpfs extension](../../extensions/httpfs) allows Parquet and CSV files to be queried remotely over http.
+DuckDB's [httpfs extension]({% link docs/extensions/httpfs/overview.md %}) allows Parquet and CSV files to be queried remotely over http.
 These examples query a Parquet file that contains historical taxi data from NYC.
 Using the Parquet format allows DuckDB to only pull the rows and columns into memory that are needed rather than downloading the entire file.
-DuckDB can be used to process local [Parquet files](../../data/parquet) as well, which may be desirable if querying the entire Parquet file, or running multiple queries that require large subsets of the file.
+DuckDB can be used to process local [Parquet files]({% link docs/data/parquet/overview.md %}) as well, which may be desirable if querying the entire Parquet file, or running multiple queries that require large subsets of the file.
 
 ```sql
 %%sql
@@ -169,16 +174,13 @@ In this case, the name of the table is the URL of the remotely stored Parquet fi
 %sqlplot boxplot --table https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet --column trip_distance
 ```
 
-
 ![Boxplot of the trip_distance column](/images/trip-distance-boxplot.png)
-
 
 Now, create a query that filters by the 90th percentile.
 Note the use of the `--save`, and `--no-execute` functions.
 This tells JupySQL to store the query, but skips execution. It will be referenced in the next plotting call.
 
-
-```python
+```sql
 %%sql --save short_trips --no-execute
 SELECT *
 FROM 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet'
@@ -192,9 +194,7 @@ This uses `--with short-trips` so JupySQL uses the query defined previously and 
 %sqlplot histogram --table short_trips --column trip_distance --bins 10 --with short_trips
 ```
 
-
 ![Histogram of the trip_distance column](/images/trip-distance-histogram.png)
-
 
 ## Summary
 

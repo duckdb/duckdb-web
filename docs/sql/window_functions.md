@@ -4,20 +4,44 @@ title: Window Functions
 railroad: expressions/window.js
 ---
 
+DuckDB supports [window functions](https://en.wikipedia.org/wiki/Window_function_(SQL)), which can use multiple rows to calculate a value for each row.
+Window functions are [blocking operators]({% link docs/guides/performance/how_to_tune_workloads.md %}#blocking-operators), i.e., they require their entire input to be buffered, making them one of the most memory-intensive operators in SQL.
+
 ## Examples
 
+Generate a `row_number` column with containing incremental identifiers for each row:
+
 ```sql
--- generate a "row_number" column with containing incremental identifiers for each row
-SELECT row_number() OVER () FROM sales;
--- generate a "row_number" column, by order of time
-SELECT row_number() OVER (ORDER BY time) FROM sales;
--- generate a "row_number" column, by order of time partitioned by region
-SELECT row_number() OVER (PARTITION BY region ORDER BY time) FROM sales;
--- compute the difference between the current amount, and the previous amount,
--- by order of time
-SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
--- compute the percentage of the total amount of sales per region for each row
-SELECT amount / sum(amount) OVER (PARTITION BY region) FROM sales;
+SELECT row_number() OVER ()
+FROM sales;
+```
+
+Generate a `row_number` column, by order of time:
+
+```sql
+SELECT row_number() OVER (ORDER BY time)
+FROM sales;
+```
+
+Generate a `row_number` column, by order of time partitioned by region:
+
+```sql
+SELECT row_number() OVER (PARTITION BY region ORDER BY time)
+FROM sales;
+```
+
+Compute the difference between the current amount, and the previous amount, by order of time:
+
+```sql
+SELECT amount - lag(amount) OVER (ORDER BY time)
+FROM sales;
+```
+
+Compute the percentage of the total amount of sales per region for each row:
+
+```sql
+SELECT amount / sum(amount) OVER (PARTITION BY region)
+FROM sales;
 ```
 
 ## Syntax
@@ -51,24 +75,24 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | `DOUBLE` |
 | **Description** | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. |
+| **Return Type** | `DOUBLE` |
 | **Example** | `cume_dist()` |
 
 ### `dense_rank()`
 
 <div class="nostroke_table"></div>
 
+| **Description** | The rank of the current row *without gaps;* this function counts peer groups. |
 | **Return Type** | `BIGINT` |
-| **Description** | The rank of the current row *without gaps*; this function counts peer groups. |
 | **Example** | `dense_rank()` |
 
 ### `first(expr[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | Same type as `expr` |
 | **Description** | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| **Return Type** | Same type as `expr` |
 | **Example** | `first(column)` |
 | **Alias** | `first_value(column)` |
 
@@ -76,8 +100,8 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | Same type as `expr` |
 | **Description** | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| **Return Type** | Same type as `expr` |
 | **Example** | `first_value(column)` |
 | **Alias** | `first(column)` |
 
@@ -85,16 +109,16 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | Same type as `expr` |
 | **Description** | Returns `expr` evaluated at the row that is `offset` rows (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) before the current row within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| **Return Type** | Same type as `expr` |
 | **Aliases** | `lag(column, 3, 0)` |
 
 ### `last(expr[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | Same type as `expr` |
 | **Description** | Returns `expr` evaluated at the row that is the last row  (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| **Return Type** | Same type as `expr` |
 | **Example** | `last(column)` |
 | **Alias** | `last_value(column)` |
 
@@ -102,8 +126,8 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | Same type as `expr` |
 | **Description** | Returns `expr` evaluated at the row that is the last row  (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| **Return Type** | Same type as `expr` |
 | **Example** | `last_value(column)` |
 | **Alias** | `last(column)` |
 
@@ -111,40 +135,40 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | Same type as `expr` |
 | **Description** | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| **Return Type** | Same type as `expr` |
 | **Aliases** | `lead(column, 3, 0)` |
 
 ### `nth_value(expr, nth[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | Same type as `expr` |
 | **Description** | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); `NULL` if no such row. |
+| **Return Type** | Same type as `expr` |
 | **Aliases** | `nth_value(column, 2)` |
 
 ### `ntile(num_buckets)`
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | `BIGINT` |
 | **Description** | An integer ranging from 1 to `num_buckets`, dividing the partition as equally as possible. |
+| **Return Type** | `BIGINT` |
 | **Example** | `ntile(4)` |
 
 ### `percent_rank()`
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | `DOUBLE` |
 | **Description** | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. |
+| **Return Type** | `DOUBLE` |
 | **Example** | `percent_rank()` |
 
 ### `rank_dense()`
 
 <div class="nostroke_table"></div>
 
+| **Description** | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
 | **Return Type** | `BIGINT` |
-| **Description** | The rank of the current row *with gaps*; same as `row_number` of its first peer. |
 | **Example** | `rank_dense()` |
 | **Alias** | `rank()` |
 
@@ -152,8 +176,8 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
+| **Description** | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
 | **Return Type** | `BIGINT` |
-| **Description** | The rank of the current row *with gaps*; same as `row_number` of its first peer. |
 | **Example** | `rank()` |
 | **Alias** | `rank_dense()` |
 
@@ -161,13 +185,13 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Return Type** | `BIGINT` |
 | **Description** | The number of the current row within the partition, counting from 1. |
+| **Return Type** | `BIGINT` |
 | **Example** | `row_number()` |
 
 ## Aggregate Window Functions
 
-All [aggregate functions](aggregates) can be used in a windowing context, including the optional [`FILTER` clause](query_syntax/filter).
+All [aggregate functions]({% link docs/sql/aggregates.md %}) can be used in a windowing context, including the optional [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}).
 The `first` and `last` aggregate functions are shadowed by the respective general-purpose window functions, with the minor consequence that the `FILTER` clause is not available for these but `IGNORE NULLS` is.
 
 ## Nulls
@@ -400,12 +424,12 @@ ORDER BY 1, 2;
 
 The queries above do not use a number of clauses commonly found in select statements, like
 `WHERE`, `GROUP BY`, etc. For more complex queries you can find where `WINDOW` clauses fall in
-the canonical order of the [`SELECT statement`](statements/select).
+the canonical order of the [`SELECT statement`]({% link docs/sql/statements/select.md %}).
 
 ### Filtering the Results of Window Functions Using `QUALIFY`
 
-Window functions are executed after the [`WHERE`](query_syntax/where) and [`HAVING`](query_syntax/having) clauses have been already evaluated, so it's not possible to use these clauses to filter the results of window functions
-The [`QUALIFY` clause](query_syntax/qualify) avoids the need for a subquery or [`WITH` clause](query_syntax/with) to perform this filtering.
+Window functions are executed after the [`WHERE`]({% link docs/sql/query_syntax/where.md %}) and [`HAVING`]({% link docs/sql/query_syntax/having.md %}) clauses have been already evaluated, so it's not possible to use these clauses to filter the results of window functions
+The [`QUALIFY` clause]({% link docs/sql/query_syntax/qualify.md %}) avoids the need for a subquery or [`WITH` clause]({% link docs/sql/query_syntax/with.md %}) to perform this filtering.
 
 ### Box and Whisker Queries
 

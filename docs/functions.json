@@ -2763,7 +2763,7 @@
     "parameters": [
       "arg"
     ],
-    "description": "Calculates the sum value for all tuples in arg without overflow checks.",
+    "description": "Internal only. Calculates the sum value for all tuples in arg without overflow checks.",
     "example": "sum_no_overflow(A)",
     "type": "aggregate_function_set",
     "category": "distributive",
@@ -2792,6 +2792,18 @@
     "type": "scalar_function_set",
     "category": "date",
     "result": "1992-04-15 07:00:00"
+  },
+  {
+    "struct": "TimeTZSortKeyFun",
+    "name": "timetz_byte_comparable",
+    "parameters": [
+      "time_tz"
+    ],
+    "description": "Converts a TIME WITH TIME ZONE to an integer sort key",
+    "example": "timetz_byte_comparable('18:18:16.21-07:00'::TIME_TZ)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": null
   },
   {
     "name": "timezone",
@@ -2953,6 +2965,17 @@
     "result": "5 months"
   },
   {
+    "name": "to_quarters",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a quarter interval",
+    "example": "to_quarters(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "1 year 3 months"
+  },
+  {
     "name": "to_seconds",
     "parameters": [
       "double"
@@ -3053,7 +3076,7 @@
     "struct": "CurrentTransactionIdFun",
     "type": "scalar_function",
     "category": "generic",
-    "result": 46
+    "result": "30"
   },
   {
     "name": "typeof",
@@ -3211,7 +3234,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.10.2-dev478"
+    "result": "v1.0.1-dev167"
   },
   {
     "name": "week",
@@ -3247,18 +3270,6 @@
     "type": "scalar_function_set",
     "category": "date",
     "result": 31
-  },
-  {
-    "name": "which_secret",
-    "parameters": [
-      "path",
-      "type"
-    ],
-    "description": "Print out the name of the secret that will be used for reading a path",
-    "example": "which_secret('s3://some/authenticated/path.csv', 's3')",
-    "type": "scalar_function",
-    "category": "secret",
-    "result": ""
   },
   {
     "name": "xor",

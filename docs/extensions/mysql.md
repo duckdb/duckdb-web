@@ -22,7 +22,7 @@ LOAD mysql;
 
 ## Reading Data from MySQL
 
-To make a MySQL database accessible to DuckDB use the `ATTACH` command:
+To make a MySQL database accessible to DuckDB use the `ATTACH` command with the `MYSQL` or the `MYSQL_SCANNER` type:
 
 ```sql
 ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE MYSQL);
@@ -32,7 +32,6 @@ USE mysqldb;
 ### Configuration
 
 The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below. Connection information can also be specified with [environment variables](https://dev.mysql.com/doc/refman/8.3/en/environment-variables.html). If no option is provided explicitly, the MySQL extension tries to read it from an environment variable.
-
 
 <div class="narrow_table"></div>
 
@@ -44,7 +43,6 @@ The connection string determines the parameters for how to connect to MySQL as a
 | `port`     | `0`          | `MYSQL_TCP_PORT`     |
 | `socket`   | `NULL`       | `MYSQL_UNIX_PORT`    |
 | `user`     | current user | `MYSQL_USER`         |
-
 
 ### Reading MySQL Tables
 
@@ -85,7 +83,7 @@ This allows you to use DuckDB to, for example, export data that is stored in a M
 Below is a brief example of how to create a new table in MySQL and load data into it.
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL_SCANNER);
+ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL);
 CREATE TABLE mysql_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO mysql_db.tbl VALUES (42, 'DuckDB');
 ```
@@ -94,7 +92,7 @@ Many operations on MySQL tables are supported. All these operations directly mod
 Note that if modifications are not desired, `ATTACH` can be run with the `READ_ONLY` property which prevents making modifications to the underlying database. For example:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL_SCANNER, READ_ONLY);
+ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL, READ_ONLY);
 ```
 
 ## Supported Operations
@@ -130,7 +128,7 @@ COPY mysql_db.tbl TO 'data.parquet';
 COPY mysql_db.tbl FROM 'data.parquet';
 ```
 
-You may also create a full copy of the database using the [`COPY FROM DATABASE` statement](../sql/statements/copy#copy-from-database--to):
+You may also create a full copy of the database using the [`COPY FROM DATABASE` statement]({% link docs/sql/statements/copy.md %}#copy-from-database--to):
 
 ```sql
 COPY FROM DATABASE mysql_db TO my_duckdb_db;
@@ -228,7 +226,7 @@ ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
 SELECT * FROM mysql_query('mysqldb', 'SELECT * FROM cars LIMIT 3');
 ```
 
-> Warning This function is only available on DuckDB v0.10.1, using the latest MySQL extension.
+> Warning This function is only available on DuckDB v0.10.1+, using the latest MySQL extension.
 > To upgrade your extension, run `FORCE INSTALL mysql;`.
 
 ### The `mysql_execute` Function
@@ -240,7 +238,7 @@ ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
 CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
-> Warning This function is only available on DuckDB v0.10.1, using the latest MySQL extension.
+> Warning This function is only available on DuckDB v0.10.1+, using the latest MySQL extension.
 > To upgrade your extension, run `FORCE INSTALL mysql;`.
 
 ## Settings

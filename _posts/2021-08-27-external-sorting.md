@@ -1,6 +1,6 @@
 ---
 layout: post  
-title:  "Fastest table sort in the West – Redesigning DuckDB’s sort"
+title: "Fastest Table Sort in the West – Redesigning DuckDB’s Sort"
 author: Laurens Kuiper  
 excerpt: DuckDB, a free and Open-Source analytical data management system, has a new highly efficient parallel sorting implementation that can sort much more data than fits in main memory.
 ---
@@ -65,7 +65,6 @@ If we have columnar storage, this comparator has to jump between columns, [causi
 2. Entirely sort the data by the first clause, then sort by the second clause, but only where the first clause was equal, and so on.
 This approach is especially inefficient when there are many duplicate values, as it requires multiple passes over the data.
 
-
 #### Binary String Comparison
 
 The binary string comparison technique improves sorting performance by simplifying the comparator. It encodes *all* columns in the `ORDER BY` clause into a single binary sequence that, when compared using `memcmp` will yield the correct overall sorting order. Encoding the data is not free, but since we are using the comparator so much during sorting, it will pay off.
@@ -78,6 +77,7 @@ Let us take another look at 3 rows of the example:
 | GERMANY         | 1924         |
 
 On [little-endian](https://en.wikipedia.org/wiki/Endianness) hardware, the bytes that represent these values look like this in memory, assuming 32-bit integer representation for the year:
+
 ```sql
 c_birth_country
 -- NETHERLANDS
@@ -329,7 +329,7 @@ This is especially important to do in systems that use Quicksort because Quickso
 <img src="/images/blog/sorting/randints_sortedness.svg" alt="Sorting 100M integers with different sortedness" title="Sortedness Experiment" style="max-width:100%"/>
 
 Not surprisingly, all systems perform better on sorted data, sometimes by a large margin.
-ClickHouse, Pandas, and SQLite likely have some optimization here: e.g. keeping track of sortedness in the catalog, or checking sortedness while scanning the input.
+ClickHouse, Pandas, and SQLite likely have some optimization here: e.g., keeping track of sortedness in the catalog, or checking sortedness while scanning the input.
 DuckDB and HyPer have only a very small difference in performance when the input data is sorted, and do not have such an optimization.
 For DuckDB the slightly improved performance can be explained due to a better memory access pattern during sorting: When the data is already sorted the access pattern is mostly sequential.
 

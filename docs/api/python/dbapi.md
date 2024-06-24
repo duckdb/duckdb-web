@@ -90,33 +90,47 @@ The `description` property of the connection object contains the column names as
 
 ### Prepared Statements
 
-DuckDB also supports [prepared statements](../../sql/query_syntax/prepared_statements) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter. Values are converted according to the [conversion rules](conversion#object-conversion-python-object-to-duckdb).
+DuckDB also supports [prepared statements]({% link docs/sql/query_syntax/prepared_statements.md %}) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter. Values are converted according to the [conversion rules]({% link docs/api/python/conversion.md %}#object-conversion-python-object-to-duckdb).
 
-Here are some examples:
+Here are some examples. First, insert a row using a [prepared statement]({% link docs/sql/query_syntax/prepared_statements.md %}):
 
 ```python
-# insert a row using prepared statements
 con.execute("INSERT INTO items VALUES (?, ?, ?)", ["laptop", 2000, 1])
-
-# insert several rows using prepared statements
-con.executemany("INSERT INTO items VALUES (?, ?, ?)", [["chainsaw", 500, 10], ["iphone", 300, 2]] )
-
-# query the database using a prepared statement
-con.execute("SELECT item FROM items WHERE value > ?", [400])
-print(con.fetchall())
-# [('laptop',), ('chainsaw',)]
-
-# query using $ notation for prepared statement and reused values
-con.execute("SELECT $1, $1, $2", ["duck", "goose"])
-print(con.fetchall())
-# [('duck', 'duck', 'goose')]
 ```
 
-> Warning Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page](data_ingestion) for better options.
+Second, insert several rows using a [prepared statement]({% link docs/sql/query_syntax/prepared_statements.md %}):
+
+```python
+con.executemany("INSERT INTO items VALUES (?, ?, ?)", [["chainsaw", 500, 10], ["iphone", 300, 2]] )
+```
+
+Query the database using a [prepared statement]({% link docs/sql/query_syntax/prepared_statements.md %}):
+
+```python
+con.execute("SELECT item FROM items WHERE value > ?", [400])
+print(con.fetchall())
+```
+
+```text
+[('laptop',), ('chainsaw',)]
+```
+
+Query using the `$` notation for a [prepared statement]({% link docs/sql/query_syntax/prepared_statements.md %}) and reused values:
+
+```python
+con.execute("SELECT $1, $1, $2", ["duck", "goose"])
+print(con.fetchall())
+```
+
+```text
+[('duck', 'duck', 'goose')]
+```
+
+> Warning Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page]({% link docs/api/python/data_ingestion.md %}) for better options.
 
 ## Named Parameters
 
-Besides the standard unnamed parameters, like `$1`, `$2` etc, it's also possible to supply named parameters, like `$my_parameter`.
+Besides the standard unnamed parameters, like `$1`, `$2` etc., it's also possible to supply named parameters, like `$my_parameter`.
 When using named parameters, you have to provide a dictionary mapping of `str` to value in the `parameters` argument.
 An example use is the following:
 
@@ -136,5 +150,8 @@ res = duckdb.execute("""
     }
 ).fetchall()
 print(res)
-# [(5, 'DuckDB', [42])]
+```
+
+```text
+[(5, 'DuckDB', [42])]
 ```

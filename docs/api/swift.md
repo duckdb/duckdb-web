@@ -4,7 +4,7 @@ title: Swift API
 github_repository: https://github.com/duckdb/duckdb-swift
 ---
 
-DuckDB offers a Swift API. See the [announcement post](/2023/04/21/swift) for details.
+DuckDB offers a Swift API. See the [announcement post]({% link _posts/2023-04-21-swift.md %}) for details.
 
 ## Instantiating DuckDB
 
@@ -31,7 +31,7 @@ DuckDB supports multiple connections per database.
 
 ## Application Example
 
-The rest of the page is based on the example of our [announcement post](/2023/04/21/swift), which uses raw data from [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu) loaded directly into DuckDB.
+The rest of the page is based on the example of our [announcement post]({% link _posts/2023-04-21-swift.md %}), which uses raw data from [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu) loaded directly into DuckDB.
 
 ### Creating an Application-Specific Type
 
@@ -148,4 +148,4 @@ extension ExoplanetStore {
 
 ### Complete Project
 
-For the complete example project, clone [the DuckDB Swift repo](https://github.com/duckdb/duckdb-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/duckdb/duckdb-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).
+For the complete example project, clone the [DuckDB Swift repository](https://github.com/duckdb/duckdb-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/duckdb/duckdb-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).

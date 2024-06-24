@@ -31,4 +31,4 @@ np.sum(my_arr['x'])
 
 ## See Also
 
-DuckDB also supports [importing from Numpy](import_numpy).
+DuckDB also supports [importing from Numpy]({% link docs/guides/python/import_numpy.md %}).

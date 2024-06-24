@@ -9,7 +9,7 @@ Using the DuckDB ODBC API on Windows requires the following steps:
    The Driver Manager on Windows is provided in a DLL file `odbccp32.dll`, and other files and tools.
    For detailed information check out the [Common ODBC Component Files](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/odbc/dn170563(v=vs.85)).
 
-2. DuckDB releases the ODBC driver as an asset. For Windows, download it from the [Windows ODBC asset (x86_64/AMD64)](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip).
+2. <!-- markdownlint-disable MD034 --> DuckDB releases the ODBC driver as an asset. For Windows, download it from the [Windows ODBC asset (x86_64/AMD64)](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip). <!-- markdownlint-enable MD034 -->
 
 3. The archive contains the following artifacts:
 
@@ -20,8 +20,7 @@ Using the DuckDB ODBC API on Windows requires the following steps:
    Decompress the archive to a directory (e.g., `duckdb_odbc`). For example, run:
 
    ```bash
-   mkdir duckdb_odbc
-   unzip duckdb_odbc-windows-amd64.zip -d duckdb_odbc
+   mkdir duckdb_odbc && unzip duckdb_odbc-windows-amd64.zip -d duckdb_odbc
    ```
 
 4. The `odbc_install.exe` binary performs the configuration of the DuckDB ODBC Driver on Windows. It depends on the `Odbccp32.dll` that provides functions to configure the ODBC registry entries.
@@ -60,13 +59,13 @@ There are two ways to configure the ODBC driver, either by altering the registry
 or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
 A combination of the two is also possible.
 
-Furthermore, the ODBC driver supports all the [configuration options](../../configuration/overview)
+Furthermore, the ODBC driver supports all the [configuration options]({% link docs/configuration/overview.md %})
 included in DuckDB.
 
 > If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
 > the one passed to `SQLDriverConnect` will take precedence.
 
-For the details of the configuration parameters, see the [ODBC configuration page](configuration).
+For the details of the configuration parameters, see the [ODBC configuration page]({% link docs/api/odbc/configuration.md %}).
 
 ### Registry Keys
 
@@ -83,3 +82,11 @@ For example, the DSN registry for DuckDB would look like this:
 ![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`](/images/blog/odbc/odbc_ini-registry-entry.png)
 
 The `ODBCINST.INI` contains one entry for each ODBC driver and other keys predefined for [Windows ODBC configuration](https://docs.microsoft.com/en-us/sql/odbc/reference/install/registry-entries-for-odbc-components?view=sql-server-ver15).
+
+### Updating the ODBC Driver
+
+When a new version of the ODBC driver is released, installing the new version will overwrite the existing one.
+However, the installer doesn't always update the version number in the registry.
+To ensure the correct version is used,
+check that `HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\DuckDB Driver` has the most recent version,
+and `HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\DuckDB\Driver` has the correct path to the new driver.

@@ -5,7 +5,7 @@ title: C++ API
 
 ## Installation
 
-The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
+The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link docs/installation/index.html %}?environment=cplusplus) for details.
 
 ## Basic API Usage
 
@@ -18,7 +18,6 @@ DuckDB implements a custom C++ API. This is built around the abstractions of a d
 To use DuckDB, you must first initialize a `DuckDB` instance using its constructor. `DuckDB()` takes as parameter the database file to read and write from. The special value `nullptr` can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the process). The second parameter to the `DuckDB` constructor is an optional `DBConfig` object. In `DBConfig`, you can set various database parameters, for example the read/write mode or memory limits. The `DuckDB` constructor may throw exceptions, for example if the database file is not usable.
 
 With the `DuckDB` instance, you can create one or many `Connection` instances using the `Connection()` constructor. While connections should be thread-safe, they will be locked during querying. It is therefore recommended that each thread uses its own connection if you are in a multithreaded environment.
-
 
 ```cpp
 DuckDB db(nullptr);
@@ -36,9 +35,11 @@ con.Query("CREATE TABLE integers (i INTEGER, j INTEGER)");
 // insert three rows into the table
 con.Query("INSERT INTO integers VALUES (3, 4), (5, 6), (7, NULL)");
 
-MaterializedQueryResult result = con.Query("SELECT * FROM integers");
-if (!result->success) {
-    cerr << result->error;
+auto result = con.Query("SELECT * FROM integers");
+if (result->HasError()) {
+    cerr << result->GetError() << endl;
+} else {
+    cout << result->ToString() << endl;
 }
 ```
 
@@ -51,7 +52,7 @@ std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT count(*) FROM a
 std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ```
 
-> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation]({% link docs/data/overview.md %}) for better options.
 
 ### UDF API
 
@@ -201,7 +202,6 @@ There are different vector types to handle in a Vectorized UDF:
 - StringVector;
 - StructVector;
 - SequenceVector.
-
 
 The general API of the `CreateVectorizedFunction()` method is as follows:
 

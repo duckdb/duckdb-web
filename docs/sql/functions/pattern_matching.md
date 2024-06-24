@@ -35,23 +35,30 @@ SELECT 'abc' LIKE '%c';  -- true
 SELECT 'abc' NOT LIKE '%c'; -- false
 ```
 
-The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale.
+The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale:
 
 ```sql
 SELECT 'abc' ILIKE '%C'; -- true
+```
+
+```sql
 SELECT 'abc' NOT ILIKE '%C'; -- false
 ```
 
 To search within a string for a character that is a wildcard (`%` or `_`), the pattern must use an `ESCAPE` clause and an escape character to indicate the wildcard should be treated as a literal character instead of a wildcard. See an example below.
 
-Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs](../../sql/functions/char) for details.
+Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs]({% link docs/sql/functions/char.md %}) for details.
+
+Search for strings with 'a' then a literal percent sign then 'c':
 
 ```sql
--- Search for strings with 'a' then a literal percent sign then 'c'
 SELECT 'a%c' LIKE 'a$%c' ESCAPE '$'; -- true
 SELECT 'azc' LIKE 'a$%c' ESCAPE '$'; -- false
+```
 
--- Case-insensitive ILIKE with ESCAPE
+Case-insensitive ILIKE with ESCAPE:
+
+```sql
 SELECT 'A%c' ILIKE 'a$%c' ESCAPE '$'; -- true
 ```
 
@@ -70,7 +77,7 @@ There are also alternative characters that can be used as keywords in place of `
 
 <div id="rrdiagram2"></div>
 
-The `SIMILAR TO` operator returns true or false depending on whether its pattern matches the given string. It is similar to `LIKE`, except that it interprets the pattern using a [regular expression](regular_expressions). Like `LIKE`, the `SIMILAR TO` operator succeeds only if its pattern matches the entire string; this is unlike common regular expression behavior where the pattern can match any part of the string.
+The `SIMILAR TO` operator returns true or false depending on whether its pattern matches the given string. It is similar to `LIKE`, except that it interprets the pattern using a [regular expression]({% link docs/sql/functions/regular_expressions.md %}). Like `LIKE`, the `SIMILAR TO` operator succeeds only if its pattern matches the entire string; this is unlike common regular expression behavior where the pattern can match any part of the string.
 
 A regular expression is a character sequence that is an abbreviated definition of a set of strings (a regular set). A string is said to match a regular expression if it is a member of the regular set described by the regular expression. As with `LIKE`, pattern characters match string characters exactly unless they are special characters in the regular expression language — but regular expressions use different special characters than `LIKE` does.
 
@@ -107,15 +114,24 @@ SELECT 'best.txt' GLOB '????.txt';         -- true
 SELECT 'best.txt' GLOB '?.txt';            -- false
 SELECT 'best.txt' GLOB '[abc]est.txt';     -- true
 SELECT 'best.txt' GLOB '[a-z]est.txt';     -- true
+```
 
--- The bracket syntax is case-sensitive
+The bracket syntax is case-sensitive:
+
+```sql
 SELECT 'Best.txt' GLOB '[a-z]est.txt';     -- false
 SELECT 'Best.txt' GLOB '[a-zA-Z]est.txt';  -- true
+```
 
--- The ! applies to all characters within the brackets
+The `!` applies to all characters within the brackets:
+
+```sql
 SELECT 'Best.txt' GLOB '[!a-zA-Z]est.txt'; -- false
+```
 
--- To negate a GLOB operator, negate the entire expression
+To negate a GLOB operator, negate the entire expression:
+
+```sql
 -- (NOT GLOB is not valid syntax)
 SELECT NOT 'best.txt' GLOB '*.txt';        -- false
 ```
@@ -133,8 +149,9 @@ Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 The glob pattern matching syntax can also be used to search for filenames using the `glob` table function.
 It accepts one parameter: the path to search (which may include glob patterns).
 
+Search the current directory for all files:
+
 ```sql
--- Search the current directory for all files
 SELECT * FROM glob('*');
 ```
 
@@ -152,4 +169,4 @@ SELECT * FROM glob('*');
 
 ## Regular Expressions
 
-DuckDB's regex support is documented on the [Regular Expressions page](regular_expressions).
+DuckDB's regex support is documented on the [Regular Expressions page]({% link docs/sql/functions/regular_expressions.md %}).

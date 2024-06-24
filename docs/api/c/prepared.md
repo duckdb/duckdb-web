@@ -3,9 +3,10 @@ layout: docu
 title: Prepared Statements
 ---
 
-A prepared statement is a parameterized query. The query is prepared with question marks (`?`) or dollar symbols (`$1`) indicating the parameters of the query. Values can then be bound to these parameters, after which the prepared statement can be executed using those parameters. A single query can be prepared once and executed many times.
+DuckDB supports [prepared statements]({% link docs/sql/query_syntax/prepared_statements.md %}). A prepared statement is a parameterized query. The query is prepared with question marks (`?`), parameter positions (`$1`), or parameter names (`$param`), indicating the parameters of the query. Values can then be bound to these parameters, after which the prepared statement can be executed using those parameters. A single query can be prepared once and executed many times.
 
 Prepared statements are useful to:
+
 * Easily supply parameters to functions while avoiding string concatenation/SQL injection attacks.
 * Speeding up queries that will be executed many times with different parameters.
 
@@ -44,7 +45,7 @@ After calling `duckdb_prepare`, the prepared statement parameters can be inspect
 
 It is not required that the `duckdb_bind` family of functions matches the prepared statement parameter type exactly. The values will be auto-cast to the required value as required. For example, calling `duckdb_bind_int8` on a parameter type of `DUCKDB_TYPE_INTEGER` will work as expected.
 
-> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. Instead it is recommended to use the [Appender](appender).
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. Instead it is recommended to use the [Appender]({% link docs/api/c/appender.md %}).
 
 ## API Reference
 
@@ -55,9 +56,9 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_prepare_error"><span class="nf">duckdb_prepare_error</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_nparams"><span class="nf">duckdb_nparams</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_parameter_name"><span class="nf">duckdb_parameter_name</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="nv">duckdb_type</span> <a href="#duckdb_param_type"><span class="nf">duckdb_param_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
+<span class="kt">duckdb_type</span> <a href="#duckdb_param_type"><span class="nf">duckdb_param_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_clear_bindings"><span class="nf">duckdb_clear_bindings</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
-<span class="nv">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
+<span class="kt">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
 </code></pre></div></div>
 
 ### `duckdb_prepare`
@@ -98,7 +99,6 @@ The resulting prepared statement object
 
 <br>
 
-
 ### `duckdb_destroy_prepare`
 
 ---
@@ -120,7 +120,6 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 The prepared statement to destroy.
 
 <br>
-
 
 ### `duckdb_prepare_error`
 
@@ -150,7 +149,6 @@ The error message, or `nullptr` if there is none.
 
 <br>
 
-
 ### `duckdb_nparams`
 
 ---
@@ -174,7 +172,6 @@ Returns 0 if the query was not successfully prepared.
 The prepared statement to obtain the number of parameters for.
 
 <br>
-
 
 ### `duckdb_parameter_name`
 
@@ -202,7 +199,6 @@ The prepared statement for which to get the parameter name from.
 
 <br>
 
-
 ### `duckdb_param_type`
 
 ---
@@ -213,7 +209,7 @@ Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the stat
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_type</span> <span class="nv">duckdb_param_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_param_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx
 </span>);
@@ -234,7 +230,6 @@ The parameter type
 
 <br>
 
-
 ### `duckdb_clear_bindings`
 
 ---
@@ -249,7 +244,6 @@ Clear the params bind to the prepared statement.
 </code></pre></div></div>
 <br>
 
-
 ### `duckdb_prepared_statement_type`
 
 ---
@@ -258,7 +252,7 @@ Returns the statement type of the statement to be executed
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_statement_type</span> <span class="nv">duckdb_prepared_statement_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_statement_type</span> <span class="nv">duckdb_prepared_statement_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">statement
 </span>);
 </code></pre></div></div>
@@ -274,4 +268,3 @@ The prepared statement.
 duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 <br>
-

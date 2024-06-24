@@ -8,11 +8,11 @@ redirect_from:
 
 ## Installation
 
-The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page](/docs/installation) under the CLI tab for download links.
+The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page]({% link docs/installation/index.html %}) under the CLI tab for download links.
 
-The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
+The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions with a [few exceptions]({% link docs/sql/postgresql_compatibility.md %})).
 
-> DuckDB has a [tldr page](https://github.com/tldr-pages/tldr/blob/main/pages/common/duckdb.md) that summarizes the most common uses of the CLI client.
+> DuckDB has a [tldr page](https://tldr.inbrowser.app/pages/common/duckdb), which summarizes the most common uses of the CLI client.
 > If you have [tldr](https://github.com/tldr-pages/tldr) installed, you can display it by running `tldr duckdb`.
 
 ## Getting Started
@@ -26,37 +26,41 @@ If in a PowerShell or POSIX shell environment, use the command `./duckdb` instea
 The typical usage of the `duckdb` command is the following:
 
 ```bash
-$ duckdb [OPTIONS] [FILENAME]
+duckdb [OPTIONS] [FILENAME]
 ```
 
 ### Options
 
-The `[OPTIONS]` part encodes [arguments for the CLI client](arguments). Common options include:
+The `[OPTIONS]` part encodes [arguments for the CLI client]({% link docs/api/cli/arguments.md %}). Common options include:
 
 * `-csv`: sets the output mode to CSV
 * `-json`: sets the output mode to JSON
-* `-readonly`: open the database in read-only mode (see [concurrency in DuckDB](../../connect/concurrency#handling-concurrency))
+* `-readonly`: open the database in read-only mode (see [concurrency in DuckDB]({% link docs/connect/concurrency.md %}#handling-concurrency))
 
-For a full list of options, see the [command line arguments page](arguments).
+For a full list of options, see the [command line arguments page]({% link docs/api/cli/arguments.md %}).
 
 ### In-Memory vs. Persistent Database
 
-When no `[FILENAME]` argument is provided, the DuckDB CLI will open a temporary [in-memory database](../../connect/overview#in-memory-database).
+When no `[FILENAME]` argument is provided, the DuckDB CLI will open a temporary [in-memory database]({% link docs/connect/overview.md %}#in-memory-database).
 You will see DuckDB's version number, the information on the connection and a prompt starting with a `D`.
 
 ```bash
-$ duckdb
+duckdb
 ```
 
 ```text
-v0.10.1 4a89d97db8
+v1.0.0 1f98600c2c
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
 D
 ```
 
-To open or create a [persistent database](../../connect/overview#persistent-database), simply include a path as a command line argument like `duckdb path/to/my_database.duckdb` or `duckdb my_database.db`.
+To open or create a [persistent database]({% link docs/connect/overview.md %}#persistent-database), simply include a path as a command line argument:
+
+```bash
+duckdb my_database.duckdb
+```
 
 ### Running SQL Statements in the CLI
 
@@ -70,23 +74,23 @@ SELECT 'quack' AS my_column;
 |-----------|
 | quack     |
 
-The CLI supports all of DuckDB's rich [SQL syntax](../../sql/introduction) including `SELECT`, `CREATE`, and `ALTER` statements.
+The CLI supports all of DuckDB's rich [SQL syntax]({% link docs/sql/introduction.md %}) including `SELECT`, `CREATE`, and `ALTER` statements.
 
 ### Editor Features
 
-The CLI supports [autocompletion](autocomplete), and has sophisticated [editor features](editing) and [syntax highlighting](syntax_highlighting) on certain platforms.
+The CLI supports [autocompletion]({% link docs/api/cli/autocomplete.md %}), and has sophisticated [editor features]({% link docs/api/cli/editing.md %}) and [syntax highlighting]({% link docs/api/cli/syntax_highlighting.md %}) on certain platforms.
 
 ### Exiting the CLI
 
-To exit the CLI, press `Ctrl`-`D` if your platform supports it. Otherwise press `Ctrl`-`C` or use the `.exit` command. If used a persistent database, DuckDB will automatically checkpoint (save the latest edits to disk) and close. This will remove the `.wal` file (the Write-Ahead-Log) and consolidate all of your data into the single-file database.
+To exit the CLI, press `Ctrl`+`D` if your platform supports it. Otherwise, press `Ctrl`+`C` or use the `.exit` command. If used a persistent database, DuckDB will automatically checkpoint (save the latest edits to disk) and close. This will remove the `.wal` file (the Write-Ahead-Log) and consolidate all of your data into the single-file database.
 
 ### Dot Commands
 
-In addition to SQL syntax, special [dot commands](dot_commands) may be entered into the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line.
+In addition to SQL syntax, special [dot commands]({% link docs/api/cli/dot_commands.md %}) may be entered into the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line.
 
 Frequently-used configurations can be stored in the file `~/.duckdbrc`, which will be loaded when starting the CLI client. See the [Configuring the CLI](#configuring-the-cli) section below for further information on these options.
 
-Below, we summarize a few important dot commands. To see all available commands, see the [dot commands page](dot_commands) or use the `.help` command.
+Below, we summarize a few important dot commands. To see all available commands, see the [dot commands page]({% link docs/api/cli/dot_commands.md %}) or use the `.help` command.
 
 #### Opening Database Files
 
@@ -103,7 +107,7 @@ The `.open` command optionally accepts several options, but the final parameter 
 ```
 
 > Warning `.open` closes the current database.
-> To keep the current database, while adding a new database, use the [`ATTACH` statement](../../sql/statements/attach).
+> To keep the current database, while adding a new database, use the [`ATTACH` statement]({% link docs/sql/statements/attach.md %}).
 
 One important option accepted by `.open` is the `--readonly` flag. This disallows any editing of the database. To open in read only mode, the database must already exist. This also means that a new in-memory database can't be opened in read only mode since in-memory databases are created upon connection.
 
@@ -113,13 +117,13 @@ One important option accepted by `.open` is the `--readonly` flag. This disallow
 
 #### Output Formats
 
-The `.mode` [dot command](dot_commands#mode) may be used to change the appearance of the tables returned in the terminal output.
+The `.mode` [dot command]({% link docs/api/cli/dot_commands.md %}#mode) may be used to change the appearance of the tables returned in the terminal output.
 These include the default `duckbox` mode, `csv` and `json` mode for ingestion by other tools, `markdown` and `latex` for documents, and `insert` mode for generating SQL statements.
 
 #### Writing Results to a File
 
 By default, the DuckDB CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands.
-For details, see the documentation for the [output dot command](dot_commands#output-writing-results-to-a-file).
+For details, see the documentation for the [output dot command]({% link docs/api/cli/dot_commands.md %}#output-writing-results-to-a-file).
 
 #### Reading SQL from a File
 
@@ -201,8 +205,8 @@ Note that the duck head is built with Unicode characters and does not work in al
 
 To invoke that file on initialization, use this command:
 
-```text
-$ duckdb -init prompt.sql
+```bash
+duckdb -init prompt.sql
 ```
 
 This outputs:
@@ -221,13 +225,13 @@ Use ".open FILENAME" to reopen on a persistent database.
 To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
 
 ```bash
-$ duckdb < select_example.sql
+duckdb < select_example.sql
 ```
 
 To execute a command with SQL text passed in directly from the command line, call `duckdb` with two arguments: the database location (or `:memory:`), and a string with the SQL statement to execute.
 
 ```bash
-$ duckdb :memory: "SELECT 42 AS the_answer"
+duckdb :memory: "SELECT 42 AS the_answer"
 ```
 
 ## Loading Extensions
@@ -239,7 +243,7 @@ INSTALL fts;
 LOAD fts;
 ```
 
-For details, see the [Extension docs](../../extensions/overview).
+For details, see the [Extension docs]({% link docs/extensions/overview.md %}).
 
 ## Reading from stdin and Writing to stdout
 
@@ -255,7 +259,7 @@ COPY (SELECT 42 AS woot UNION ALL SELECT 43 AS woot) TO 'test.csv' (HEADER);
 First, read a file and pipe it to the `duckdb` CLI executable. As arguments to the DuckDB CLI, pass in the location of the database to open, in this case, an in-memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
 
 ```bash
-$ cat test.csv | duckdb :memory: "SELECT * FROM read_csv('/dev/stdin')"
+cat test.csv | duckdb "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
 | woot |
@@ -265,8 +269,9 @@ $ cat test.csv | duckdb :memory: "SELECT * FROM read_csv('/dev/stdin')"
 
 To write back to stdout, the copy command can be used with the `/dev/stdout` file location.
 
-```sql
-$ cat test.csv | duckdb :memory: "COPY (SELECT * FROM read_csv('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
+```bash
+cat test.csv | \
+    duckdb "COPY (SELECT * FROM read_csv('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
 ```
 
 ```csv
@@ -291,7 +296,7 @@ SELECT getenv('HOME') AS home;
 |------------------|
 | /Users/user_name |
 
-The output of the `getenv` function can be used to set [configuration options](../../configuration/overview). For example, to set the `NULL` order based on the environment variable `DEFAULT_NULL_ORDER`, use:
+The output of the `getenv` function can be used to set [configuration options]({% link docs/configuration/overview.md %}). For example, to set the `NULL` order based on the environment variable `DEFAULT_NULL_ORDER`, use:
 
 ```sql
 SET default_null_order = getenv('DEFAULT_NULL_ORDER');
@@ -299,10 +304,10 @@ SET default_null_order = getenv('DEFAULT_NULL_ORDER');
 
 ### Restrictions for Reading Environment Variables
 
-The `getenv` function can only be run when the [`enable_external_access`](../../configuration/overview#configuration-reference) is set to `true` (the default setting).
+The `getenv` function can only be run when the [`enable_external_access`]({% link docs/configuration/overview.md %}#configuration-reference) is set to `true` (the default setting).
 It is only available in the CLI client and is not supported in other DuckDB clients.
 
 ## Prepared Statements
 
-The DuckDB CLI supports executing [prepared statements](../../sql/query_syntax/prepared_statements) in addition to regular `SELECT` statements.
+The DuckDB CLI supports executing [prepared statements]({% link docs/sql/query_syntax/prepared_statements.md %}) in addition to regular `SELECT` statements.
 To create and execute a prepared statement in the CLI client, use the `PREPARE` clause and the `EXECUTE` statement.

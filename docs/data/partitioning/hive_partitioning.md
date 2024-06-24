@@ -5,10 +5,15 @@ title: Hive Partitioning
 
 ## Examples
 
+Read data from a Hive partitioned data set:
+
 ```sql
--- read data from a Hive partitioned data set
 SELECT * FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = true);
--- write a table to a Hive partitioned data set
+```
+
+Write a table to a Hive partitioned data set:
+
+```sql
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
 ```
 
@@ -50,7 +55,8 @@ Filters on the partition keys are automatically pushed down into the files. This
 ```sql
 SELECT *
 FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = true)
-WHERE year = 2022 AND month = 11;
+WHERE year = 2022
+  AND month = 11;
 ```
 
 When executing this query, only the following files will be read:
@@ -84,4 +90,4 @@ FROM read_parquet(
 
 ### Writing Partitioned Files
 
-See the [Partitioned Writes](partitioned_writes) section.
+See the [Partitioned Writes]({% link docs/data/partitioning/partitioned_writes.md %}) section.

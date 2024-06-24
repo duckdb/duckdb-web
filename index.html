@@ -9,11 +9,21 @@ body_class: landing nowrap
 <div class="dummy">
 </div>
 
+<div class="banner">
+	<div class="content">
+		We are holding our user community conference, <a href="https://duckdb.org/2024/08/15/duckcon5">DuckCon #5</a>, in Seattle on August 15.
+	</div>
+	<div class="close"></div>
+</div>
+
 <section class="welcome">
 	<div class="flexwrap wrap">
 		<div class="duckdb">
 			<h1>DuckDB is a fast <nobr>in-process</nobr> analytical database</h1>
-			<p>DuckDB supports a feature-rich SQL dialect complemented with deep integrations into client APIs</p>
+			<p>DuckDB supports a feature-rich SQL dialect complemented with deep integrations into client APIs.
+			<br/>
+			DuckDB v1.0.0 was released in June 2024</a>.
+			</p>
 			<a class="button transparent arrow-down dark" href="#quickinstall">Installation</a>
 			<a class="button yellow" href="/docs/">Documentation</a>
 		</div>
@@ -192,7 +202,7 @@ body_class: landing nowrap
 {% endhighlight %}
 </div>
 
-<div data-language="sql" data-example="sql-join-query" data-buttontxt="Live demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,CREATE-TABLE-stations-AS%0A----FROM-'s3%3A%2F%2Fduckdb%20blobs%2Fstations.parquet'~,CREATE-TABLE-tariffs-AS%0A----FROM-'s3%3A%2F%2Fduckdb%20blobs%2Ftariffs.parquet'~,%20%20-Find-the-top%205-most-expensive-domestice-train-routes%0ASELECT-s1.name_short%2C-s2.name_short%2C-tariffs.price%0AFROM-tariffs%0AJOIN-stations-s1-ON-tariffs.station1-%3D-s1.code%0AJOIN-stations-s2-ON-tariffs.station2-%3D-s2.code%0AWHERE-s1.country-%3D-s2.country%0A--AND-s1.code-%3C-s2.code%0AORDER-BY-price-DESC%0ALIMIT-5~">
+<div data-language="sql" data-example="sql-join-query" data-buttontxt="Live demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,CREATE-TABLE-stations-AS%0A----FROM-'s3%3A%2F%2Fduckdb%20blobs%2Fstations.parquet'~%0ACREATE-TABLE-distances-AS%0A----FROM-'s3%3A%2F%2Fduckdb%20blobs%2Fdistances.parquet'~%0A%0A%20%20-Find-the-top%203-longest-domestic-train-routes%0ASELECT-s1.name_short%2C-s2.name_short%2C-distances.distance%0AFROM-distances%0AJOIN-stations-s1-ON-distances.station1-%3D-s1.code%0AJOIN-stations-s2-ON-distances.station2-%3D-s2.code%0AWHERE-s1.country-%3D-s2.country%0A--AND-s1.code-%3C-s2.code%0AORDER-BY-distance-DESC%0ALIMIT-3~%0A">
 {% highlight sql %}
 {% include landing-page/sql/join.sql %}
 {% endhighlight %}

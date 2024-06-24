@@ -3,11 +3,12 @@ layout: docu
 title: Documentation
 ---
 
-Welcome to the DuckDB Documentation!
+Welcome to the DuckDB documentation!
 
-Feel free to grab a <a href="{{ site.baseurl }}/duckdb-docs.pdf">PDF copy</a> of the documentation for offline reference.
+## Offline Copy
 
+You can [browse the DuckDB documentation offline](/docs/guides/offline-copy).
 
-<h1>Sitemap</h1>
+## Sitemap
 
 <div id="docusitemaphere"></div>

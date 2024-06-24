@@ -10,23 +10,19 @@ The SQLite extension allows DuckDB to directly read and write data from a SQLite
 
 ## Installing and Loading
 
-To install the `sqlite` extension, run:
+The `sqlite` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL sqlite;
-```
-
-The extension is loaded automatically upon first use. If you prefer to load it manually, run:
-
-```sql
 LOAD sqlite;
 ```
 
 ## Usage
 
-To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write.
+To make a SQLite file accessible to DuckDB, use the `ATTACH` statement with the `SQLITE` or `SQLITE_SCANNER` type. Attached SQLite databases support both read and write operations.
 
-For example with the [`sakila.db` file](https://github.com/duckdb/sqlite_scanner/blob/main/data/db/sakila.db):
+For example, to attach to the [`sakila.db` file](https://github.com/duckdb/sqlite_scanner/raw/main/data/db/sakila.db), run:
 
 ```sql
 ATTACH 'sakila.db' (TYPE SQLITE);
@@ -34,7 +30,6 @@ USE sakila;
 ```
 
 The tables in the file can be read as if they were normal DuckDB tables, but the underlying data is read directly from the SQLite tables in the file at query time.
-
 
 ```sql
 SHOW TABLES;
@@ -109,7 +104,7 @@ When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB 
 
 As DuckDB enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
 
-```text
+```console
 Error: Mismatch Type Error: Invalid type in column "i": column was declared as integer, found "hello" of type "text" instead.
 ```
 
@@ -120,7 +115,6 @@ SET GLOBAL sqlite_all_varchar = true;
 ```
 
 When set, this option overrides the type conversion rules described above, and instead always converts the SQLite columns into a `VARCHAR` column. Note that this setting must be set *before* `sqlite_attach` is called.
-
 
 ## Opening SQLite Databases Directly
 
@@ -176,6 +170,14 @@ id  name
 ```
 
 Many operations on SQLite tables are supported. All these operations directly modify the SQLite database, and the result of subsequent operations can then be read using SQLite.
+
+## Concurrency
+
+DuckDB can read or modify a SQLite database while DuckDB or SQLite reads or modifies the same database from a different thread or a separate process. More than one thread or process can read the SQLite database at the same time, but only a single thread or process can write to the database at one time. Database locking is handled by the SQLite library, not DuckDB. Within the same process, SQLite uses mutexes. When accessed from different processes, SQLite uses file system locks. The locking mechanisms also depend on SQLite configuration, like WAL mode. Refer to the [SQLite documentation on locking](https://www.sqlite.org/lockingv3.html) for more information.
+
+> Warning Linking multiple copies of the SQLite library into the same application can lead to application errors. See [sqlite_scanner Issue #82](https://github.com/duckdb/sqlite_scanner/issues/82) for more information.
+
+## Supported Operations
 
 Below is a list of supported operations.
 
@@ -242,6 +244,9 @@ CREATE VIEW sqlite_db.v1 AS SELECT 42;
 
 ```sql
 CREATE TABLE sqlite_db.tmp (i INTEGER);
+```
+
+```sql
 BEGIN;
 INSERT INTO sqlite_db.tmp VALUES (42);
 SELECT * FROM sqlite_db.tmp;
@@ -258,5 +263,6 @@ SELECT * FROM sqlite_db.tmp;
 
 | i |
 |--:|
+|   |
 
-> Deprecated The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax](../sql/statements/attach).
+> Deprecated The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax]({% link docs/sql/statements/attach.md %}).

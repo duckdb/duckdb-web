@@ -21,48 +21,53 @@ You can also skip certain queries from executing by placing `mode skip` in the f
 ## Triggering Which Tests to Run
 
 When running the unittest program, by default all the fast tests are run. A specific test can be run by adding the name of the test as an argument. For the sqllogictests, this is the relative path to the test file.
+To run only a single test:
 
 ```bash
-# run only a single test
 build/debug/test/unittest test/sql/projection/test_simple_projection.test
 ```
 
 All tests in a given directory can be executed by providing the directory as a parameter with square brackets.
+To run all tests in the "projection" directory:
 
 ```bash
-# run all tests in the "projection" directory
 build/debug/test/unittest "[projection]"
 ```
 
-
 All tests, including the slow tests, can be run by running the tests with an asterisk.
+To run all tests, including the slow tests:
 
 ```bash
-# run all tests, including the slow tests
 build/debug/test/unittest "*"
 ```
 
-We can run a subset of the tests using the `--start-offset` and `--end-offset` parameters:
+We can run a subset of the tests using the `--start-offset` and `--end-offset` parameters.
+To run the tests 200..250:
 
 ```bash
-# run tests the tests 200..250
 build/debug/test/unittest --start-offset=200 --end-offset=250
 ```
 
-These are also available in percentages:
+These are also available in percentages. To run tests 10% - 20%:
 
 ```bash
-# run tests 10% - 20%
 build/debug/test/unittest --start-offset-percentage=10 --end-offset-percentage=20
 ```
 
 The set of tests to run can also be loaded from a file containing one test name per line, and loaded using the `-f` command.
 
 ```bash
-$ cat test.list
+cat test.list
+```
+
+```text
 test/sql/join/full_outer/test_full_outer_join_issue_4252.test
 test/sql/join/full_outer/full_outer_join_cache.test
 test/sql/join/full_outer/test_full_outer_join.test
-# run only the tests labeled in the file
-$ build/debug/test/unittest -f test.list
+```
+
+To run only the tests labeled in the file:
+
+```bash
+build/debug/test/unittest -f test.list
 ```

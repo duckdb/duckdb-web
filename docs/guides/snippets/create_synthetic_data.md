@@ -5,13 +5,13 @@ title: Create Synthetic Data
 
 DuckDB allows you to quickly generate synthetic data sets. To do so, you may use:
 
-* [range functions](../../sql/functions/nested#range-functions)
+* [range functions]({% link docs/sql/functions/nested.md %}#range-functions)
 * hash functions, e.g.,
-  [`hash`](../../sql/functions/utility#hashvalue),
-  [`md5`](../../sql/functions/utility#md5string),
-  [`sha256`](../../sql/functions/utility#sha256value)
-* the [Faker Python package](https://faker.readthedocs.io/) via the [Python function API](../../api/python/function)
-* using [cross products (Cartesian products)](../../sql/query_syntax/from#cross-product-joins-cartesian-product)
+  [`hash`]({% link docs/sql/functions/utility.md %}#hashvalue),
+  [`md5`]({% link docs/sql/functions/utility.md %}#md5string),
+  [`sha256`]({% link docs/sql/functions/utility.md %}#sha256value)
+* the [Faker Python package](https://faker.readthedocs.io/) via the [Python function API]({% link docs/api/python/function.md %})
+* using [cross products (Cartesian products)]({% link docs/sql/query_syntax/from.md %}#cross-product-joins-cartesian-product)
 
 For example:
 

@@ -7,10 +7,15 @@ title: Combining Schemas
 
 ## Examples
 
+Read a set of CSV files combining columns by position:
+
 ```sql
--- read a set of CSV files combining columns by position
 SELECT * FROM read_csv('flights*.csv');
--- read a set of CSV files combining columns by name
+```
+
+Read a set of CSV files combining columns by name:
+
+```sql
 SELECT * FROM read_csv('flights*.csv', union_by_name = true);
 ```
 
@@ -51,7 +56,7 @@ Reading the two files at the same time will produce the following result set:
 | 1988-01-02 | AA            | New York, NY   | Los Angeles, CA |
 | 1988-01-03 | AA            | New York, NY   | Los Angeles, CA |
 
-This is equivalent to the SQL construct [`UNION ALL`](../../sql/query_syntax/setops#union-all).
+This is equivalent to the SQL construct [`UNION ALL`]({% link docs/sql/query_syntax/setops.md %}#union-all).
 
 ## Union by Name
 
@@ -86,5 +91,4 @@ SELECT * FROM read_csv(['flights3.csv', 'flights4.csv'], union_by_name = true);
 | 1988-01-02 | New York, NY   | Los Angeles, CA | NULL          |
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            |
 
-
-This is equivalent to the SQL construct [`UNION ALL BY NAME`](../../sql/query_syntax/setops#union-all-by-name).
+This is equivalent to the SQL construct [`UNION ALL BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name).

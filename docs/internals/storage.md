@@ -15,7 +15,7 @@ For future DuckDB versions, our goal is to ensure that any DuckDB version releas
 
 ### Forward Compatibility
 
-_Forward compatibility_ refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB v0.9 is [**partially** forward compatible with DuckDB v0.10](/2024/02/13/announcing-duckdb-0100#forward-compatibility). Certain files created by DuckDB v0.10 can be read by DuckDB v0.9.
+_Forward compatibility_ refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB v0.9 is [**partially** forward compatible with DuckDB v0.10]({% link _posts/2024-02-13-announcing-duckdb-0100.md %}#forward-compatibility). Certain files created by DuckDB v0.10 can be read by DuckDB v0.9.
 
 Forward compatibility is provided on a **best effort** basis. While stability of the storage format is important – there are still many improvements and innovations that we want to make to the storage format in the future. As such, forward compatibility may be (partially) broken on occasion.
 
@@ -27,23 +27,25 @@ To move your database(s) to newer format you only need the older and the newer D
 Open your database file with the older DuckDB and run the SQL statement `EXPORT DATABASE 'tmp'`. This allows you to save the whole state of the current database in use inside folder `tmp`.
 The content of the `tmp` folder will be overridden, so choose an empty/non yet existing location. Then, start the newer DuckDB and execute `IMPORT DATABASE 'tmp'` (pointing to the previously populated folder) to load the database, which can be then saved to the file you pointed DuckDB to.
 
-A bash two-liner (to be adapted with the file names and executable locations) is:
+A bash one-liner (to be adapted with the file names and executable locations) is:
 
 ```bash
-$ /older/version/duckdb mydata.db -c "EXPORT DATABASE 'tmp'"
-$ /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
+/older/version/duckdb mydata.db -c "EXPORT DATABASE 'tmp'" && /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
 ```
 
 After this `mydata.db` will be untouched with the old format, `mydata.new.db` will contain the same data but in a format accessible from more recent DuckDB, and folder `tmp` will old the same data in an universal format as different files.
 
-Check [`EXPORT` documentation](../sql/statements/export) for more details on the syntax.
+Check [`EXPORT` documentation]({% link docs/sql/statements/export.md %}) for more details on the syntax.
 
 ## Storage Header
 
 DuckDB files start with a `uint64_t` which contains a checksum for the main header, followed by four magic bytes (`DUCK`), followed by the storage version number in a `uint64_t`.
 
 ```bash
-$ hexdump -n 20 -C mydata.db
+hexdump -n 20 -C mydata.db
+```
+
+```text
 00000000  01 d0 e2 63 9c 13 39 3e  44 55 43 4b 2b 00 00 00  |...c..9>DUCK+...|
 00000010  00 00 00 00                                       |....|
 00000014
@@ -69,7 +71,7 @@ To see the commits that changed each storage version, see the [commit log](https
 
 | Storage version | DuckDB version(s)               |
 |----------------:|---------------------------------|
-| 64              | v0.9.x, v0.10.x                 |
+| 64              | v0.9.x, v0.10.x, v1.0.x         |
 | 51              | v0.8.0, v0.8.1                  |
 | 43              | v0.7.0, v0.7.1                  |
 | 39              | v0.6.0, v0.6.1                  |
@@ -90,22 +92,22 @@ To see the commits that changed each storage version, see the [commit log](https
 
 ## Compression
 
-DuckDB uses [lightweight compression](/2022/10/28/lightweight-compression).
+DuckDB uses [lightweight compression]({% link _posts/2022-10-28-lightweight-compression.md %}).
 Note that compression is only applied to persistent databases and is **not applied to in-memory instances**.
 
 ### Compression Algorithms
 
 The compression algorithms supported by DuckDB include the following:
 
-* [Constant Encoding](/2022/10/28/lightweight-compression#constant-encoding)
-* [Run-Length Encoding (RLE)](/2022/10/28/lightweight-compression#run-length-encoding-rle)
-* [Bit Packing](/2022/10/28/lightweight-compression#bit-packing)
-* [Frame of Reference (FOR)](/2022/10/28/lightweight-compression#frame-of-reference)
-* [Dictionary Encoding](/2022/10/28/lightweight-compression#dictionary-encoding)
-* [Fast Static Symbol Table (FSST)](/2022/10/28/lightweight-compression#fsst) – [VLDB 2020 paper](https://www.vldb.org/pvldb/vol13/p2649-boncz.pdf)
-* [Adaptive Lossless Floating-Point Compression (ALP)](/2024/02/13/announcing-duckdb-0100#adaptive-lossless-floating-point-compression-alp) – [SIGMOD 2024 paper](https://ir.cwi.nl/pub/33334/33334.pdf)
-* [Chimp](/2022/10/28/lightweight-compression#chimp--patas) – [VLDB 2022 paper](https://www.vldb.org/pvldb/vol15/p3058-liakos.pdf)
-* [Patas](/2022/11/14/announcing-duckdb-060#compression-improvements)
+* [Constant Encoding]({% link _posts/2022-10-28-lightweight-compression.md %}#constant-encoding)
+* [Run-Length Encoding (RLE)]({% link _posts/2022-10-28-lightweight-compression.md %}#run-length-encoding-rle)
+* [Bit Packing]({% link _posts/2022-10-28-lightweight-compression.md %}#bit-packing)
+* [Frame of Reference (FOR)]({% link _posts/2022-10-28-lightweight-compression.md %}#frame-of-reference)
+* [Dictionary Encoding]({% link _posts/2022-10-28-lightweight-compression.md %}#dictionary-encoding)
+* [Fast Static Symbol Table (FSST)]({% link _posts/2022-10-28-lightweight-compression.md %}#fsst) – [VLDB 2020 paper](https://www.vldb.org/pvldb/vol13/p2649-boncz.pdf)
+* [Adaptive Lossless Floating-Point Compression (ALP)]({% link _posts/2024-02-13-announcing-duckdb-0100.md %}#adaptive-lossless-floating-point-compression-alp) – [SIGMOD 2024 paper](https://ir.cwi.nl/pub/33334/33334.pdf)
+* [Chimp]({% link _posts/2022-10-28-lightweight-compression.md %}#chimp--patas) – [VLDB 2022 paper](https://www.vldb.org/pvldb/vol15/p3058-liakos.pdf)
+* [Patas]({% link _posts/2022-11-14-announcing-duckdb-060.md %}#compression-improvements)
 
 ## Disk Usage
 
@@ -116,7 +118,7 @@ As a rough approximation, loading 100 GB of uncompressed CSV files into a DuckDB
 
 DuckDB's storage format stores the data in _row groups,_ i.e., horizontal partitions of the data.
 This concept is equivalent to [Parquet's row groups](https://parquet.apache.org/docs/concepts/).
-Several features in DuckDB, including [parallelism](/docs/guides/performance/how_to_tune_workloads) and [compression](/2022/10/28/lightweight-compression) are based on row groups.
+Several features in DuckDB, including [parallelism]({% link docs/guides/performance/how_to_tune_workloads.md %}) and [compression]({% link _posts/2022-10-28-lightweight-compression.md %}) are based on row groups.
 
 ## Troubleshooting
 
@@ -124,7 +126,7 @@ Several features in DuckDB, including [parallelism](/docs/guides/performance/how
 
 When opening a database file that has been written by a different DuckDB version from the one you are using, the following error message may occur:
 
-```text
+```console
 Error: unable to open database "...": Serialization Error: Failed to deserialize: ...
 ```
 
@@ -133,4 +135,4 @@ The message implies that the database file was created with a newer DuckDB versi
 There are two potential workarounds:
 
 1. Update your DuckDB version to the latest stable version.
-2. Open the database with the latest version of DuckDB, export it to a standard format (e.g., Parquet), then import it using to any version of DuckDB. See the [`EXPORT/IMPORT DATABASE` statements](../sql/statements/export) for details.
+2. Open the database with the latest version of DuckDB, export it to a standard format (e.g., Parquet), then import it using to any version of DuckDB. See the [`EXPORT/IMPORT DATABASE` statements]({% link docs/sql/statements/export.md %}) for details.

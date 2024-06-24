@@ -42,18 +42,18 @@ if __name__ == '__main__':
 
         duckdb.sql(
             '''
-                CREATE OR REPLACE TABLE SO AS 
+                CREATE OR REPLACE TABLE SO AS
                 SELECT * FROM read_ndjson_auto('./so.json')
                 ORDER BY creation_date DESC
-                Limit 30
-        '''
+                LIMIT 30
+            '''
         )
 
         new_duckdb_questions = duckdb.sql(
             '''
             SELECT title, link, owner.profile_image,
                 TO_TIMESTAMP(creation_date::BIGINT) create_time,
-            FROM SO 
+            FROM SO
             WHERE create_time > NOW() - INTERVAL 1 DAY
             LIMIT 5
         '''

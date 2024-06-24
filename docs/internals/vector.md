@@ -6,7 +6,7 @@ redirect_from:
 ---
 
 `Vector` is the container format used to store in-memory data during execution.
-`DataChunk` is a collection of Vectors, used for instance to represent a column list in a PhysicalProjection operator.
+`DataChunk` is a collection of Vectors, used for instance to represent a column list in a `PhysicalProjection` operator.
 
 ## Data Flow
 
@@ -138,4 +138,4 @@ Internally map vectors are stored as a `LIST[STRUCT(key KEY_TYPE, value VALUE_TY
 ### Union Vectors
 
 Internally `UNION` utilizes the same structure as a `STRUCT`.
-The first "child" is always occupied by the Tag Vector of the UNION, which records for each row which of the UNION's types apply to that row.
+The first "child" is always occupied by the Tag Vector of the `UNION`, which records for each row which of the `UNION`'s types apply to that row.

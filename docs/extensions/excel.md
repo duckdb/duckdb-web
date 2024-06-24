@@ -1,15 +1,17 @@
 ---
 layout: docu
 title: Excel Extension
+github_repository: https://github.com/duckdb/duckdb_excel
 ---
 
-This extension, contrary to its name, does not provide support for reading Excel files. It instead provides a function that wraps the number formatting functionality of the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), which formats numbers per Excel's formatting rules.
+The `excel` extension, unlike what its name may suggest, does not provide support for reading Excel files.
+Instead, provides a function that wraps the number formatting functionality of the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), which formats numbers per Excel's formatting rules.
 
-Excel files can be handled through the [`spatial` extension](spatial): see the [Excel Import](../guides/import/excel_import) and [Excel Export](../guides/import/excel_export) pages for instructions.
+Excel files can be currently handled through the [`spatial` extension]({% link docs/extensions/spatial.md %}): see the [Excel Import]({% link docs/guides/file_formats/excel_import.md %}) and [Excel Export]({% link docs/guides/file_formats/excel_export.md %}) pages for instructions.
 
 ## Installing and Loading
 
-The `excel` extension will be transparently autoloaded on first use from the official extension repository.
+The `excel` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -17,23 +19,27 @@ INSTALL excel;
 LOAD excel;
 ```
 
-## Usage
+## Functions
+
+| Function | Description |
+|:--|:---|
+| `excel_text(number, format_string)`| Format the given `number` per the rules given in the `format_string`. |
+| `text(number, format_string)` | Alias for `excel_text`. |
+
+## Examples
 
 ```sql
-SELECT excel_text(1234567.897, 'h:mm AM/PM') AS timestamp;
+SELECT excel_text(1_234_567.897, 'h:mm AM/PM') AS timestamp;
 ```
 
 | timestamp |
 |-----------|
 | 9:31 PM   |
 
-## Functions
+```sql
+SELECT excel_text(1_234_567.897, 'h AM/PM') AS timestamp;
+```
 
-| Function | Description | Example | Result |
-|:--|:---|:--|:-|
-| `excel_text(number, format_string)` | Alias for `text`.                                                    | `excel_text(1234567.897, 'h:mm AM/PM')` | `9:31 PM` |
-| `text(number, format_string)`       | Format the given `number` per the rules given in the `format_string` | `text(1234567.897, 'h AM/PM')`          | `9 PM`    |
-
-## GitHub
-
-The `excel` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/excel).
+| timestamp |
+|-----------|
+| 9 PM      |

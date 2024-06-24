@@ -8,8 +8,10 @@ In addition to a large number of built in connectors,
 it also provides generic database connectivity via ODBC and JDBC connectors.
 
 Tableau has two main versions: Desktop and Online (Server).
+
 * For Desktop, connecting to a DuckDB database is similar to working in an embedded environment like Python.
 * For Online, since DuckDB is in-process, the data needs to be either on the server itself
+
 or in a remote data bucket that is accessible from the server.
 
 ## Database Creation
@@ -43,7 +45,9 @@ If you wish to connect to a database file,
 you will need to make sure the file was created with a file-compatible version of DuckDB.
 Also, check that there is only one version of the driver installed as there are multiple filenames in use.
 
-Download the [snapshot jar](https://oss.sonatype.org/service/local/repositories/snapshots/content/org/duckdb/duckdb_jdbc/0.9.0-SNAPSHOT/duckdb_jdbc-0.9.0-20230806.020824-235.jar)
+<!-- markdownlint-disable MD034 -->
+Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentjavaversion }}/duckdb_jdbc-{{ site.currentjavaversion }}.jar).
+<!-- markdownlint-enable MD034 -->
 
 * macOS: Copy it to `~/Library/Tableau/Drivers/`
 * Windows: Copy it to `C:\Program Files\Tableau\Drivers`
@@ -85,10 +89,14 @@ On Linux, copy the Taco file to `/opt/tableau/connectors`.
 On Windows, copy the Taco file to `C:\Program Files\Tableau\Connectors`.
 Then issue these commands to disable signature validation:
 
-```sh
-$ tsm configuration set -k native_api.disable_verify_connector_plugin_signature -v true
-$ tsm pending-changes apply
+```bash
+tsm configuration set -k native_api.disable_verify_connector_plugin_signature -v true
 ```
+
+```bash
+tsm pending-changes apply
+```
+
 The last command will restart the server with the new settings.
 
 ### macOS
@@ -96,8 +104,8 @@ The last command will restart the server with the new settings.
 Copy the Taco file to the `/Users/[User]/Documents/My Tableau Repository/Connectors` folder.
 Then launch Tableau Desktop from the Terminal with the command line argument to disable signature validation:
 
-```sh
-$ /Applications/Tableau\ Desktop\ ⟨year⟩.⟨quarter⟩.app/Contents/MacOS/Tableau -DDisableVerifyConnectorPluginSignature=true
+```bash
+/Applications/Tableau\ Desktop\ ⟨year⟩.⟨quarter⟩.app/Contents/MacOS/Tableau -DDisableVerifyConnectorPluginSignature=true
 ```
 
 You can also package this up with AppleScript by using the following script:

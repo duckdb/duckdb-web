@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: httpfs Extension for HTTP and S3 Support
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/httpfs
 redirect_from:
   - /docs/extensions/httpfs
   - /docs/extensions/httpfs/
@@ -22,13 +23,8 @@ LOAD httpfs;
 
 ## HTTP(S)
 
-The `httpfs` extension supports connecting to [HTTP(S) endpoints](https).
+The `httpfs` extension supports connecting to [HTTP(S) endpoints]({% link docs/extensions/httpfs/https.md %}).
 
 ## S3 API
 
-The `httpfs` extension supports connecting to [S3 API endpoints](s3api).
-
-## GitHub
-
-The `httpfs` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/httpfs).
-
+The `httpfs` extension supports connecting to [S3 API endpoints]({% link docs/extensions/httpfs/s3api.md %}).

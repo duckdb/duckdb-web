@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Numeric Functions
+redirect_from:
+  - docs/test/functions/math
 ---
 
 ## Numeric Operators

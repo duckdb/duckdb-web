@@ -32,8 +32,8 @@ SHOW ALL TABLES;
 | memory   | main   | tbl        | [i]          | [INTEGER]    | false     |
 | memory   | s1     | tbl        | [v]          | [VARCHAR]    | false     |
 
-To view the schema of an individual table, use the [`DESCRIBE` command](describe).
+To view the schema of an individual table, use the [`DESCRIBE` command]({% link docs/guides/meta/describe.md %}).
 
 ## See Also
 
-The SQL-standard [`information_schema`](../../sql/information_schema) views are also defined. Moreover, DuckDB defines `sqlite_master` and many [PostgreSQL system catalog tables](https://www.postgresql.org/docs/16/catalogs.html) for compatibility with SQLite and PostgreSQL respectively.
+The SQL-standard [`information_schema`]({% link docs/sql/information_schema.md %}) views are also defined. Moreover, DuckDB defines `sqlite_master` and many [PostgreSQL system catalog tables](https://www.postgresql.org/docs/16/catalogs.html) for compatibility with SQLite and PostgreSQL respectively.

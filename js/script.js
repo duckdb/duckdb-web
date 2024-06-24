@@ -289,11 +289,18 @@ $(document).ready(function(){
 
     
     // FAQs
-	$('.qa-wrap').click(function(){
+	$('.qa-wrap').click(function(event) {
+		if ($(event.target).is('a') && !$(event.target).parent().is('h3')) {
+			return;
+		}
 		$(this).toggleClass('open');
 		$(this).find('.answer').slideToggle(400);
-	})
-	
+	});
+	$('.qa-wrap .answer a').click(function(event) {
+		event.stopPropagation();
+	});
+
+
     
     // Mobile Menu
     var hamburgers = document.querySelectorAll(".hamburger");
@@ -523,8 +530,13 @@ $(document).ready(function(){
 			$('.searchoverlay').removeClass('active');
 			$('body').removeClass('search');
 		}
-		// open search on cmd/ctrl + k
+		
 		if ( e.metaKey && ( e.which === 75 ) || e.ctrlKey && ( e.which === 75 ) ) {
+			// open search on cmd/ctrl + k
+			var isFirefox = typeof InstallTrigger !== 'undefined';
+			if (isFirefox) {
+				e.preventDefault();
+			}
 			if( $('body').hasClass('documentation') || $('body').hasClass('landing') ){
 				toggleSearch();
 			}
@@ -614,7 +626,7 @@ $(document).ready(function(){
 			$('.window .content.haslines').each(function(){
 				var height = $(this).find('pre').height()
 				var fontSize = $(this).find('pre').css('font-size');
-				var lineHeight = 17;//Math.floor(parseInt(fontSize.replace('px','')) * 1.2);
+				var lineHeight = 18;//Math.floor(parseInt(fontSize.replace('px','')) * 1.2);
 				var lines = Math.ceil(height / lineHeight) + 1
 				var linenumbers = '';
 				for (i = 1; i < lines; i++) {
@@ -770,7 +782,7 @@ $(document).ready(function(){
 	
 	/** HIGHLIGHT TOC MENU **/
 	if ($('body').hasClass('documentation')) {
-		var headings = $('#main_content_wrap h1, #main_content_wrap h2, #main_content_wrap h3');
+		var headings = $('#main_content_wrap h1, #main_content_wrap h2');
 		var tocEntries = $('.toc-entry');
 	
 		$(window).on('scroll', function() {
@@ -812,6 +824,5 @@ $(document).ready(function(){
 		} 
 	});
 	// setWithExpiry('homeBanner', '', -1); // deletes content
-
 	
 });

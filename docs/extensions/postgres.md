@@ -7,33 +7,31 @@ redirect_from:
   - docs/extensions/postgresql
 ---
 
-The `postgres` extension allows DuckDB to directly read and write data from a running Postgres database instance. The data can be queried directly from the underlying Postgres database. Data can be loaded from Postgres tables into DuckDB tables, or vice versa.See the [official announcement](/2022/09/30/postgres-scanner) for implementation details and background.
+The `postgres` extension allows DuckDB to directly read and write data from a running Postgres database instance. The data can be queried directly from the underlying Postgres database. Data can be loaded from Postgres tables into DuckDB tables, or vice versa. See the [official announcement]({% link _posts/2022-09-30-postgres-scanner.md %}) for implementation details and background.
 
 ## Installing and Loading
 
-To install the `postgres` extension, run:
+The `postgres` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL postgres;
-```
-
-The extension is loaded automatically upon first use. If you prefer to load it manually, run:
-
-```sql
 LOAD postgres;
 ```
 
 ## Connecting
 
-To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command:
+To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command with the `POSTGRES` or `POSTGRES_SCANNER` type.
+
+To connect to the "public" schema of the postgres instance running on localhost in read-write mode, run:
 
 ```sql
--- connect to the "public" schema of the postgres instance running on localhost in read-write mode
 ATTACH '' AS postgres_db (TYPE POSTGRES);
 ```
 
+To connect to the Postgres instance with the given parameters in read-only mode, run:
+
 ```sql
--- connect to the Postgres instance with the given parameters in read-only mode
 ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE POSTGRES, READ_ONLY);
 ```
 
@@ -184,7 +182,7 @@ Postgres:
 \copy tbl TO 'data.bin' WITH (FORMAT BINARY);
 ```
 
-You may also create a full copy of the database using the [`COPY FROM DATABASE` statement](../sql/statements/copy#copy-from-database--to):
+You may also create a full copy of the database using the [`COPY FROM DATABASE` statement]({% link docs/sql/statements/copy.md %}#copy-from-database--to):
 
 ```sql
 COPY FROM DATABASE postgres_db TO my_duckdb_db;
@@ -310,7 +308,7 @@ ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
 CALL postgres_execute('postgres_db', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
-> Warning This function is only available on DuckDB v0.10.1, using the latest Postgres extension.
+> Warning This function is only available on DuckDB v0.10.1+, using the latest Postgres extension.
 > To upgrade your extension, run `FORCE INSTALL postgres;`.
 
 ## Settings

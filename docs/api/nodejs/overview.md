@@ -20,7 +20,7 @@ const duckdb = require('duckdb');
 const db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
 ```
 
-All options as described on [Database configuration](../../configuration/overview#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
+All options as described on [Database configuration]({% link docs/configuration/overview.md %}#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
 
 ```js
 const db = new duckdb.Database(':memory:', {
@@ -51,7 +51,7 @@ db.all('SELECT 42 AS fortytwo', function(err, res) {
 Other available methods are `each`, where the callback is invoked for each row, `run` to execute a single statement without results and `exec`, which can execute several SQL commands at once but also does not return results. All those commands can work with prepared statements, taking the values for the parameters as additional arguments. For example like so:
 
 ```js
-db.all('SELECT ?::INTEGER AS fortytwo, ?::STRING AS hello', 42, 'Hello, World', function(err, res) {
+db.all('SELECT ?::INTEGER AS fortytwo, ?::VARCHAR AS hello', 42, 'Hello, World', function(err, res) {
   if (err) {
     console.warn(err);
     return;
@@ -137,7 +137,7 @@ const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo', function(err, stmt) {
 
 ## Inserting Data via Arrow
 
-[Apache Arrow](../../guides/python/sql_on_arrow) can be used to insert data into DuckDB without making a copy:
+[Apache Arrow]({% link docs/guides/python/sql_on_arrow.md %}) can be used to insert data into DuckDB without making a copy:
 
 ```js
 const arrow = require('apache-arrow');
@@ -169,9 +169,8 @@ db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
 
 ## Loading Unsigned Extensions
 
-To load [unsigned extensions](../../extensions/overview#ensuring-the-integrity-of-extensions), instantiate the database as follows:
+To load [unsigned extensions]({% link docs/extensions/overview.md %}#ensuring-the-integrity-of-extensions), instantiate the database as follows:
 
 ```js
 db = new duckdb.Database(':memory:', {"allow_unsigned_extensions": "true"});
 ```
-

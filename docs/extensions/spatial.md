@@ -5,7 +5,7 @@ github_repository: https://github.com/duckdb/duckdb_spatial
 ---
 
 The `spatial` extension provides support for geospatial data processing in DuckDB.
-For an overview of the extension, see our [blog post](/2023/04/28/spatial).
+For an overview of the extension, see our [blog post]({% link _posts/2023-04-28-spatial.md %}).
 
 ## Installing and Loading
 
@@ -258,6 +258,8 @@ WHERE tags['highway'] != []
 LIMIT 5;
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | kind |   id   |                                                                      tags                                                                                   | refs |        lat         |    lon     | ref_roles | ref_types |
 |------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|------|--------------------|------------|-----------|-----------|
 | node | 122351 | {bicycle=yes, button_operated=yes, crossing=traffic_signals, highway=crossing, tactile_paving=no, traffic_signals:sound=yes, traffic_signals:vibration=yes} | NULL | 53.5492951         | 9.977553   | NULL      | NULL      |
@@ -286,7 +288,7 @@ Similarly there is a `.osm.pbf` replacement scan for `ST_ReadOsm`.
 
 ## Spatial Copy Functions
 
-Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export duckdb tables to different geospatial vector formats.
+Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export DuckDB tables to different geospatial vector formats.
 For example to export a table to a GeoJSON file, with generated bounding boxes, you can use the following query:
 
 ```sql

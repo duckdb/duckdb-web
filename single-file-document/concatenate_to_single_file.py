@@ -5,7 +5,6 @@ import yaml
 import textwrap
 from datetime import datetime, timezone
 import argparse
-import pathlib
 import frontmatter
 import logging
 
@@ -49,6 +48,15 @@ def reduce_clutter_in_doc(doc_body):
 
     # drop lines containing "---", pandoc interprets these as h2 headers
     doc_body = re.sub(r"^---$", "", doc_body, flags=re.MULTILINE)
+    return doc_body
+
+
+def replace_box_names(doc_body):
+    doc_body = doc_body.replace("> Bestpractice", "> **Best practice.  **")
+    doc_body = doc_body.replace("> Note",         "> **Note.  **")
+    doc_body = doc_body.replace("> Warning",      "> **Warning.  **")
+    doc_body = doc_body.replace("> Tip",          "> **Tip.  **")
+    doc_body = doc_body.replace("> Deprecated",   "> **Deprecated.  **")
     return doc_body
 
 
@@ -179,16 +187,23 @@ def adjust_headers(doc_body, doc_header_label):
 
 
 def change_function_table_headers(doc_body):
-    return doc_body.replace("""| **Description** | """, """|   |   |
+    doc_body = doc_body.replace("""| **Description** | """, """|   |   |
 |:--|:--------|
 | **Description** |""")
+    doc_body = doc_body.replace("""| **Handle name** | """, """|   |   |
+|:--|:--------|
+| **Handle name** |""")
+    return doc_body
 
 
 def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
     # skip index files
     if doc_file_path.endswith("index"):
         return
-    
+
+    if doc_file_path.endswith("release_calendar"):
+        return
+
     # determine the full path
     doc_file_full_path = f"{docs_root}/{doc_file_path}.md"
     if not os.path.exists(doc_file_full_path):
@@ -208,6 +223,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
 
         # process document body
         doc_body = reduce_clutter_in_doc(doc_body)
+        doc_body = replace_box_names(doc_body)
         doc_body = move_headers_down(doc_body)
         doc_body = replace_html_code_blocks(doc_body)
         doc_body = adjust_links_in_doc_body(doc_body)
