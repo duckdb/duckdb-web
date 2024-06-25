@@ -8,13 +8,22 @@ title: Hive Partitioning
 Read data from a Hive partitioned data set:
 
 ```sql
-SELECT * FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = true);
+SELECT *
+FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = true);
 ```
 
 Write a table to a Hive partitioned data set:
 
 ```sql
-COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
+COPY orders
+TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
+```
+
+Note that the `PARTITION_BY` options cannot use expressions. You can produce columns on the fly using the following syntax:
+
+```sql
+COPY (SELECT *, year(timestamp) AS year, month(timestamp) AS month FROM services)
+TO 'test' (PARTITION_BY (year, month));
 ```
 
 ## Hive Partitioning
