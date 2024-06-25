@@ -7,7 +7,7 @@ redirect_from:
 
 ## Text Functions and Operators
 
-This section describes functions and operators for examining and manipulating string values.
+This section describes functions and operators for examining and manipulating [`STRING` values]({% link docs/sql/data_types/text.md %}).
 
 <!-- markdownlint-disable MD056 -->
 

@@ -16,7 +16,7 @@ The `TIME` and `TIMETZ` types specify the hour, minute, second, microsecond of a
 Instances can be created using the type names as a keyword, where the data must be formatted according to the ISO 8601 format (`hh:mm:ss[.zzzzzz][+-TT[:tt]]`).
 
 ```sql
-SELECT TIME   '1992-09-20 11:30:00.123456';
+SELECT TIME '1992-09-20 11:30:00.123456';
 ```
 
 ```text

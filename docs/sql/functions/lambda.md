@@ -4,7 +4,8 @@ title: Lambda Functions
 ---
 
 Lambda functions enable the use of more complex and flexible expressions in queries.
-DuckDB supports several scalar functions that accept lambda functions as parameters
+DuckDB supports several scalar functions that operate on [`LIST`s]({% link docs/sql/data_types/list.md %}) and
+accept lambda functions as parameters
 in the form `(parameter1, parameter2, ...) -> expression`.
 If the lambda function has only one parameter, then the parentheses can be omitted.
 The parameters can have any names.

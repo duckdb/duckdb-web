@@ -3,7 +3,7 @@ layout: docu
 title: Timestamp Functions
 ---
 
-This section describes functions and operators for examining and manipulating `TIMESTAMP` values.
+This section describes functions and operators for examining and manipulating [`TIMESTAMP` values]({% link docs/sql/data_types/timestamp.md %}).
 
 ## Timestamp Operators
 

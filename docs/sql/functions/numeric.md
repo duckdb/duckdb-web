@@ -7,7 +7,7 @@ redirect_from:
 
 ## Numeric Operators
 
-The table below shows the available mathematical operators for numeric types.
+The table below shows the available mathematical operators for [numeric types]({% link docs/sql/data_types/numeric.md %}).
 
 <div class="narrow_table"></div>
 

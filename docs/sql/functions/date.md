@@ -5,7 +5,7 @@ redirect_from:
   - docs/test/functions/date
 ---
 
-This section describes functions and operators for examining and manipulating date values.
+This section describes functions and operators for examining and manipulating [`DATE`]({% link docs/sql/data_types/date.md %}) values.
 
 ## Date Operators
 
