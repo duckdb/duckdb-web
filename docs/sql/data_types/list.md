@@ -53,18 +53,18 @@ Retrieving one or more values from a list can be accomplished using brackets and
 > This is only needed in our basic examples here, not when working with a list column.
 > For example, this can't be parsed: `SELECT ['a', 'b', 'c'][1]`.
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
-| Example                                    | Result       |
-|:-------------------------------------------|:-------------|
-| `SELECT (['a', 'b', 'c'])[3]`              | `'c'`        |
-| `SELECT (['a', 'b', 'c'])[-1]`             | `'c'`        |
-| `SELECT (['a', 'b', 'c'])[2 + 1]`          | `'c'`        |
-| `SELECT list_extract(['a', 'b', 'c'], 3)`  | `'c'`        |
-| `SELECT (['a', 'b', 'c'])[1:2]`            | `['a', 'b']` |
-| `SELECT (['a', 'b', 'c'])[:2]`             | `['a', 'b']` |
-| `SELECT (['a', 'b', 'c'])[-2:]`            | `['b', 'c']` |
-| `SELECT list_slice(['a', 'b', 'c'], 2, 3)` | `['b', 'c']` |
+| Example                                  | Result     |
+|:-----------------------------------------|:-----------|
+| SELECT (['a', 'b', 'c'])[3]              | 'c'        |
+| SELECT (['a', 'b', 'c'])[-1]             | 'c'        |
+| SELECT (['a', 'b', 'c'])[2 + 1]          | 'c'        |
+| SELECT list_extract(['a', 'b', 'c'], 3)  | 'c'        |
+| SELECT (['a', 'b', 'c'])[1:2]            | ['a', 'b'] |
+| SELECT (['a', 'b', 'c'])[:2]             | ['a', 'b'] |
+| SELECT (['a', 'b', 'c'])[-2:]            | ['b', 'c'] |
+| SELECT list_slice(['a', 'b', 'c'], 2, 3) | ['b', 'c'] |
 
 ## Ordering
 

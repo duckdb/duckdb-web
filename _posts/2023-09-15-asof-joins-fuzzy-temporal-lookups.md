@@ -600,19 +600,19 @@ The build tables are much larger and have approximately
 ```sql
 -- 10:1
 CREATE OR REPLACE TABLE build10 AS
-    SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
+    SELECT k, t, (random() * 1000)::DECIMAL(7, 2) AS v
     FROM range(10_000) ks(k), 
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 59 HOUR) ts(t);
 
 -- 100:1
 CREATE OR REPLACE TABLE build100 AS
-    SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
+    SELECT k, t, (random() * 1000)::DECIMAL(7, 2) AS v
     FROM range(10_000) ks(k), 
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 350 MINUTE) ts(t);
 
 -- 1000:1
 CREATE OR REPLACE TABLE build1000 AS
-    SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
+    SELECT k, t, (random() * 1000)::DECIMAL(7, 2) AS v
     FROM range(10_000) ks(k), 
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 35 MINUTE) ts(t);
 ```
