@@ -114,7 +114,7 @@ SELECT
 FROM stacked_data;
 ```
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 |   2022   |   2023   |   2024   |   2025   |  NULLs   |
 |:---|:---|:---|:---|:---|
