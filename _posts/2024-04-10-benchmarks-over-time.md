@@ -29,13 +29,8 @@ This approach avoids many comparison pitfalls, and also provides several valuabl
 
 #### How fast is it improving? 
 
-When you select a data processing system, it is important to think about the future. 
-The best way to predict the future is to look at the past!
-Learning a new tool is an investment, in addition to the time spent integrating it into your workflows.
-If a tool improves quickly over time, a simple version update can speed up your analysis.
-
-When choosing an analytical engine, you also want to consider the situation where your data sizes could grow substantially.
-If the system is improving rapidly, then the system can scale as your data scales, with lower chances for a migration in the future.
+Learning a new tool is an investment.
+Picking a vibrant, rapidly improving database ensures your choice pays dividends for years to come. 
 Plus, if you haven't experimented with a tool in a while, you can see how much faster it has become since you last checked!
 
 #### What is it especially good at?
@@ -49,7 +44,7 @@ Many benchmarks are deliberately smaller than typical workloads.
 This allows the benchmark to complete in a reasonable amount of time when run with many configurations. 
 However, an important question to answer when selecting a system is whether the size of your data can be handled within the size of your compute resources.
 
-### Limitations of Benchmarking over Time
+#### Limitations of Benchmarking over Time
 
 There are some limitations when looking at the performance of a system over time.
 If a feature is brand new, there is no prior performance to compare to!
@@ -300,8 +295,11 @@ This prevents substantial unnecessary processing for high-cardinality columns wh
             });
 </script>
 
+This plot shows the performance of all three export formats over the entire time horizon (rather than picking the winner between Pandas and Arrow).
+It allows us to see at what point Apache Arrow passes Pandas in performance.
+
 Pandas export performance has improved substantially over the course of the benchmark.
-However, Apache Arrow has proven to be the more efficient data format, so Arrow is now the preferred in-memory export format.
+However, Apache Arrow has proven to be the more efficient data format, so Arrow is now preferred for in-memory exports.
 Interestingly, DuckDB's Parquet export is now so efficient that it is faster to write a persistent Parquet file than it is to write to an in-memory Pandas dataframe!
 It is even competitive with Apache Arrow. 
 
@@ -337,6 +335,8 @@ DuckDB is a great fit for this type of work!
             Plotly.plot( perf_over_time_scan_other_formats_arrow_pandas_parquet, parsed_json.data, parsed_json.layout );
             });
 </script>
+
+Once again, we examine all three formats over the entire time horizon.
 
 When scanning data, Apache Arrow and Pandas are more comparable in performance. 
 As a result, while Arrow is clearly preferable for exports, DuckDB will happily read Pandas with similar speed. 
