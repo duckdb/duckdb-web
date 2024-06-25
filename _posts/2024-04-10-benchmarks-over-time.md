@@ -53,7 +53,7 @@ The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]
 
 ## Benchmark Design Summary
 
-This post measures DuckDB's performance over time using the H2O.ai benchmark, plus some new benchmarks added for importing, exporting, and using window functions.
+This post measures DuckDB's performance over time using the [H2O.ai benchmark](https://duckdblabs.github.io/db-benchmark/), plus some new benchmarks added for importing, exporting, and using window functions.
 Please see our previous [blog](https://duckdb.org/2023/04/14/h2oai.html) [posts](https://duckdb.org/2023/11/03/db-benchmark-update.html) for details on why we believe the H2O.ai benchmark is a good approach! The full details of the benchmark design are in the appendix.
 
 * H2O.ai, plus import/export and window function tests
@@ -400,11 +400,11 @@ However, the `ENUM` data type was not fully operational in DuckDB until version 
 
 To measure interoperability with other dataframe formats, we have used Python rather than R (used by H2O.ai) for this analysis.
 We do continue to use R for the data generation step for consistency with the benchmark.
-Python is DuckDB's most popular client, so this is also the most representative of real world performance.
+Python is DuckDB's most popular client, great for data science, and also the author's favorite language for this type of work.
 
 #### Export and Replacement Scans
 
-However, we now extend this benchmark in several important ways.
+We now extend this benchmark in several important ways.
 In addition to considering raw query performance, we measure import and export performance with several formats: Pandas, Apache Arrow, and Apache Parquet.
 The results of both the join and group by benchmarks are exported to each format.
 
@@ -447,7 +447,7 @@ Additionally, running the tests for 21 DuckDB versions was time-intensive even a
 
 #### Scale Tests
 
-However, using only 5GB of data does not answer our second key question: “What scale of data can it handle?”!
+Using only 5GB of data does not answer our second key question: “What scale of data can it handle?”!
 We also ran only the group by and join related operations (avoiding in-memory imports and exports) at the 5GB and the 50GB scale.
 Older versions of DuckDB could not handle the 50GB dataset when joining or aggregating, but modern versions can handle both, even on a memory-constrained 16GB RAM laptop.
 Instead of measuring performance, we measure the size of the benchmark that was able to complete on a given version.
