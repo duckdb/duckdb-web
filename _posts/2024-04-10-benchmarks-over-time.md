@@ -25,27 +25,24 @@ Fairly comparing data processing systems using benchmarks is [very difficult](ht
 Whoever creates the benchmark is likely to know one system better than the rest, influencing benchmark selection, how much time is spent tuning parameters, and more.
 
 Instead, this post focuses on benchmarking *our own* performance over time.
-(Of course, we encourage you to conduct your own benchmarks and welcome your feedback on our [Discord server](https://discord.duckdb.org/) or in [GitHub discussions](https://github.com/duckdb/duckdb/discussions)!).
+<!-- (Of course, we encourage you to conduct your own benchmarks and welcome your feedback on our [Discord server](https://discord.duckdb.org/) or in [GitHub discussions](https://github.com/duckdb/duckdb/discussions)!). -->
 This approach avoids many comparison pitfalls, and also provides several valuable data points to consider when selecting a system.
 
-#### How fast is it improving?
+* **How fast is it improving?**
+    Learning a new tool is an investment.
+    Picking a vibrant, rapidly improving database ensures your choice pays dividends for years to come.
+    Plus, if you haven't experimented with a tool in a while, you can see how much faster it has become since you last checked!
 
-Learning a new tool is an investment.
-Picking a vibrant, rapidly improving database ensures your choice pays dividends for years to come.
-Plus, if you haven't experimented with a tool in a while, you can see how much faster it has become since you last checked!
+* **What is it especially good at?**
+    The choice of benchmark is an indicator of what types of workloads a tool is useful for.
+    The higher the variety of analyses in the benchmark, the more broadly useful the tool can be.
 
-#### What is it especially good at?
+* **What scale of data can it handle?**
+    Many benchmarks are deliberately smaller than typical workloads.
+    This allows the benchmark to complete in a reasonable amount of time when run with many configurations.
+    However, an important question to answer when selecting a system is whether the size of your data can be handled within the size of your compute resources.
 
-The choice of benchmark is an indicator of what types of workloads a tool is useful for.
-The higher the variety of analyses in the benchmark, the more broadly useful the tool can be.
-
-#### What scale of data can it handle?
-
-Many benchmarks are deliberately smaller than typical workloads.
-This allows the benchmark to complete in a reasonable amount of time when run with many configurations.
-However, an important question to answer when selecting a system is whether the size of your data can be handled within the size of your compute resources.
-
-#### Limitations of Benchmarking over Time
+<!-- #### Limitations of Benchmarking over Time -->
 
 There are some limitations when looking at the performance of a system over time.
 If a feature is brand new, there is no prior performance to compare to!
