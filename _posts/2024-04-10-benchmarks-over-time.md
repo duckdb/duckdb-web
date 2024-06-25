@@ -25,7 +25,7 @@ Fairly comparing data processing systems using benchmarks is [very difficult](ht
 Whoever creates the benchmark is likely to know one system better than the rest, influencing benchmark selection, how much time is spent tuning parameters, and more.
 
 Instead, this post focuses on benchmarking *our own* performance over time.
-(Of course, we encourage you to conduct your own benchmarks and welcome your feedback on our [Discord server](https://discord.duckdb.org/) or in [GitHub discussions](https://github.com/duckdb/duckdb/discussions)!)
+(Of course, we encourage you to conduct your own benchmarks and welcome your feedback on our [Discord server](https://discord.duckdb.org/) or in [GitHub discussions](https://github.com/duckdb/duckdb/discussions)!).
 This approach avoids many comparison pitfalls, and also provides several valuable data points to consider when selecting a system.
 
 #### How fast is it improving?
