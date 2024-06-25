@@ -9,18 +9,23 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 
 ## Clauses
 
-* [`CREATE OR REPLACE TABLE`]({% link docs/sql/statements/create_table.md %}#create-or-replace): this clause allows avoiding `DROP TABLE IF EXISTS` statements in scripts.
-* [`CREATE TABLE ... AS SELECT` (CTAS)]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas): this clause allows creating a new table from the output of a table without manually defining a schema.
-* [`DESCRIBE`]({% link docs/guides/meta/describe.md %}): this clause provides a succinct summary of the schema of a table or query.
-* [`FROM`-first syntax with an optional `SELECT` clause]({% link docs/sql/query_syntax/from.md %}#from-first-syntax): DuckDB allows queries in the form of `FROM tbl` which selects all columns (performing a `SELECT *` statement).
-* [`GROUP BY ALL`]({% link docs/sql/query_syntax/groupby.md %}#group-by-all): this clause allows omitting the group-by columns by inferring them from the list of attributes in the `SELECT` clause.
-* [`INSERT INTO ... BY NAME`]({% link docs/sql/statements/insert.md %}#insert-into--by-name): this variant of the `INSERT` statement allows using column names instead of positions.
-* [`ORDER BY ALL`]({% link docs/sql/query_syntax/orderby.md %}#order-by-all): this clause allows ordering on all columns (e.g., to ensure deterministic results).
-* [`PIVOT`]({% link docs/sql/statements/pivot.md %}) and [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) allow turning long tables to wide tables and vice versa, respectively.
-* [`SELECT * EXCLUDE`]({% link docs/sql/expressions/star.md %}#exclude-clause): the `EXCLUDE` option allows excluding specific columns from the `*` expression.
-* [`SELECT * REPLACE`]({% link docs/sql/expressions/star.md %}#replace-clause): the `REPLACE` option allows replacing specific columns with different expressions in a `*` expression.
-* [`SUMMARIZE`]({% link docs/guides/meta/summarize.md %}): this clause returns summary statistics for a table or query.
-* [`UNION BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name): this clause performing the `UNION` operation along the names of columns (instead of relying on positions).
+* Creating tables and inserting data:
+    * [`CREATE OR REPLACE TABLE`]({% link docs/sql/statements/create_table.md %}#create-or-replace): this clause allows avoiding `DROP TABLE IF EXISTS` statements in scripts.
+    * [`CREATE TABLE ... AS SELECT` (CTAS)]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas): this clause allows creating a new table from the output of a table without manually defining a schema.
+    * [`INSERT INTO ... BY NAME`]({% link docs/sql/statements/insert.md %}#insert-into--by-name): this variant of the `INSERT` statement allows using column names instead of positions.
+* Describing tables and computing statistics:
+    * [`DESCRIBE`]({% link docs/guides/meta/describe.md %}): this clause provides a succinct summary of the schema of a table or query.
+    * [`SUMMARIZE`]({% link docs/guides/meta/summarize.md %}): this clause returns summary statistics for a table or query.
+* Making SQL clauses more compact:
+    * [`FROM`-first syntax with an optional `SELECT` clause]({% link docs/sql/query_syntax/from.md %}#from-first-syntax): DuckDB allows queries in the form of `FROM tbl` which selects all columns (performing a `SELECT *` statement).
+    * [`GROUP BY ALL`]({% link docs/sql/query_syntax/groupby.md %}#group-by-all): this clause allows omitting the group-by columns by inferring them from the list of attributes in the `SELECT` clause.
+    * [`ORDER BY ALL`]({% link docs/sql/query_syntax/orderby.md %}#order-by-all): this clause allows ordering on all columns (e.g., to ensure deterministic results).
+    * [`SELECT * EXCLUDE`]({% link docs/sql/expressions/star.md %}#exclude-clause): the `EXCLUDE` option allows excluding specific columns from the `*` expression.
+    * [`SELECT * REPLACE`]({% link docs/sql/expressions/star.md %}#replace-clause): the `REPLACE` option allows replacing specific columns with different expressions in a `*` expression.
+    * [`UNION BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name): this clause performing the `UNION` operation along the names of columns (instead of relying on positions).
+* Transforming tables:
+    * [`PIVOT`]({% link docs/sql/statements/pivot.md %}) to turn long tables to wide tables.
+    * [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) to turn wide tables to long tables.
 
 ## Query Features
 
@@ -30,6 +35,9 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
     * [with `EXCLUDE` and `REPLACE`]({% link _posts/2023-08-23-even-friendlier-sql.md %}#columns-with-exclude-and-replace)
     * [with lambda functions]({% link _posts/2023-08-23-even-friendlier-sql.md %}#columns-with-lambda-functions)
 * Reusable column aliases, e.g.: `SELECT i + 1 AS j, j + 2 AS k FROM range(0, 3) t(i)`
+* Advanced aggregation features for analytical (OLAP) queries:
+    * [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %})
+    * [`GROUPING SETS`, `GROUP BY CUBE`, `GROUP BY ROLLUP` clauses]({% link docs/sql/query_syntax/grouping_sets.md %})
 
 ## Literals and Identifiers
 
