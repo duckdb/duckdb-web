@@ -10,7 +10,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 Note that there are many tools using DuckDB, which are not covered in the official guides. To find a list of these tools, check out the [Awesome DuckDB repository](https://github.com/davidgasquez/awesome-duckdb).
 
-> Tip For a short introductory tutorial, check out the [Analyzing Railway Traffic in the Netherlands]({% link _posts/2024-05-31-analyzing-railway-traffic-in-the-netherlands.md %}) tutorial.
+> Tip For a short introductory tutorial, check out the [Analyzing Railway Traffic in the Netherlands]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}) tutorial.
 
 ## Data Import and Export
 
