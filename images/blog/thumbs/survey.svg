@@ -2,16 +2,16 @@
 <g clip-path="url(#clip0_3660_2381)">
 <rect width="367" height="206" fill="#FF6900"/>
 <g filter="url(#filter0_d_3660_2381)">
-<path d="M112.5 177V243H389V73H355C343.954 73 335 81.9543 335 93V137C335 148.046 326.046 157 315 157L132.5 157C121.454 157 112.5 165.954 112.5 177Z" fill="#E35400"/>
+<path d="M112.5 184V250H389V80H355C343.954 80 335 88.9543 335 100V144C335 155.046 326.046 164 315 164L132.5 164C121.454 164 112.5 172.954 112.5 184Z" fill="#E35400"/>
 </g>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M-31 40H42C53.0457 40 62 31.0457 62 20V-11H209L209 2.49998C209 13.5457 200.046 22.5 189 22.5H153.091C142.045 22.5 133.091 31.4543 133.091 42.5V55.5C133.091 66.5457 124.136 75.5 113.091 75.5H58.8366C47.7909 75.5 38.8366 84.4543 38.8366 95.5L38.8366 216H-31V40Z" fill="#E35400"/>
-<rect x="132" y="85.5" width="35" height="35" rx="5.5" stroke="#E35400" stroke-width="3"/>
-<path d="M141 106.185L145.605 111.068C146.051 111.541 146.824 111.469 147.175 110.92L158 94" stroke="#E35400" stroke-width="3" stroke-linecap="round"/>
-<rect x="200" y="85.5" width="35" height="35" rx="17.5" stroke="#E35400" stroke-width="3"/>
-<rect x="209" y="94" width="18" height="18" rx="9" fill="#E35400"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M-31 25H63C74.0457 25 83 16.0457 83 5V-11H209L209 2.49998C209 13.5457 200.046 22.5 189 22.5H151.591C141.373 22.5 133.091 30.7827 133.091 41C133.091 51.2173 124.808 59.5 114.591 59.5H58.8366C47.7909 59.5 38.8366 68.4543 38.8366 79.5L38.8366 216H-31V25Z" fill="#E35400"/>
+<rect x="110.5" y="71" width="64" height="64" rx="7" fill="black"/>
+<path d="M128.184 108.363L136.541 117.225C136.987 117.699 137.76 117.626 138.111 117.078L156.816 87.8418" stroke="#FF6900" stroke-width="5" stroke-linecap="round"/>
+<rect x="189.5" y="69.5" width="67" height="67" rx="33.5" fill="black"/>
+<rect x="207.524" y="87.5239" width="31" height="31" rx="15.5" fill="#FF6900"/>
 </g>
 <defs>
-<filter id="filter0_d_3660_2381" x="112.5" y="73" width="278.5" height="172" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_d_3660_2381" x="112.5" y="80" width="278.5" height="172" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feOffset dx="1" dy="1"/>
