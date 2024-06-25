@@ -24,6 +24,7 @@ The functions below are difficult to categorize into specific function types and
 | [`error(message)`](#errormessage) | Throws the given error `message`. |
 | [`force_checkpoint(database)`](#force_checkpointdatabase) | Synchronize WAL with file for (optional) database interrupting transactions. |
 | [`gen_random_uuid()`](#gen_random_uuid) | Alias of `uuid`. Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
+| [`getenv(var)`](#getenvvar) | Returns the value of the environment variable `var`. Only available in the [command line client]({% docs/api/cli/overview.md %}). |
 | [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with the hash of the `value`. |
 | [`icu_sort_key(string, collator)`](#icu_sort_keystring-collator) | Surrogate key used to sort special characters according to the specific locale. Collator parameter is optional. Valid only when ICU extension is installed. |
 | [`ifnull(expr, other)`](#ifnullexpr-other) | A two-argument version of coalesce. |
@@ -142,6 +143,12 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Alias of `uuid`. Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | **Example** | `gen_random_uuid()` |
 | **Result** | various |
+
+### `getenv(var)`
+
+| **Description** | Returns the value of the environment variable `var`. Only available in the [command line client]({% docs/api/cli/overview.md %}). |
+| **Example** | `getenv('HOME')` |
+| **Result** | `/path/to/user/home` |
 
 ### `hash(value)`
 
