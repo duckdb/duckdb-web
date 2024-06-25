@@ -137,7 +137,7 @@ def change_link(doc_body, doc_file_path):
     # match links but do not match image definitions (which start with a '!' character) within the link
     matches = re.findall(r"([^!]\[[^]!]*\])\(([^)]*)\)", doc_body)
     for match in matches:
-        link_item = match[1]
+        original_link = match[1]
 
         if original_link.startswith("http://") or original_link.startswith("https://"):
             continue
@@ -146,10 +146,20 @@ def change_link(doc_body, doc_file_path):
             doc_body = doc_body.replace(f"]({original_link})", f"]({full_url_link})")
             continue
 
-        if link_item.startwith("{% link"):
+        if original_link.startswith("{% link"):
+            print(original_link)
+            new_link = "??"
+
             ...
-        if link_item.startwith("{% post"):
-            ...
+
+            #print(f"{original_link} --> {new_link}")
+
+        if original_link.startswith("{% post_url "):
+            new_link = re.sub(
+                r"{% post_url (20[0-9][0-9])-([0-9][0-9])-([0-9][0-9])-(.*?) %}",
+                r"https://duckdb.org/\1/\2/\3/\4",
+                original_link
+            )
 
         # need to adjust the linked_path_to_label function
 
