@@ -5,16 +5,16 @@ redirect_from:
   - docs/test/functions/blob
 ---
 
-This section describes functions and operators for examining and manipulating blob values.
+This section describes functions and operators for examining and manipulating [`BLOB` values]({% link docs/sql/data_types/blob.md %}).
 
 <!-- markdownlint-disable MD056 -->
 
 | Name | Description |
 |:--|:-------|
-| [`blob || blob`](#blob--blob) | Blob concatenation. |
-| [`decode(blob)`](#decodeblob) | Converts `BLOB` to `VARCHAR`. Fails if blob is not valid UTF-8. |
-| [`encode(string)`](#encodestring) | Converts `VARCHAR` to `BLOB`. Converts UTF-8 characters into literal encoding. |
-| [`octet_length(blob)`](#octet_lengthblob) | Number of bytes in `BLOB`. |
+| [`blob || blob`](#blob--blob) | `BLOB` concatenation. |
+| [`decode(blob)`](#decodeblob) | Converts `blob` to `VARCHAR`. Fails if `blob` is not valid UTF-8. |
+| [`encode(string)`](#encodestring) | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding. |
+| [`octet_length(blob)`](#octet_lengthblob) | Number of bytes in `blob`. |
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/guides/file_formats/read_file.md %}#read_blob) for more details. |
 
 <!-- markdownlint-enable MD056 -->
@@ -31,7 +31,7 @@ This section describes functions and operators for examining and manipulating bl
 
 <div class="nostroke_table"></div>
 
-| **Description** | Convert `BLOB` to `VARCHAR`. Fails if blob is not valid UTF-8. |
+| **Description** | Convert `blob` to `VARCHAR`. Fails if `blob` is not valid UTF-8. |
 | **Example** | `decode('\xC3\xBC'::BLOB)` |
 | **Result** | `ü` |
 
@@ -39,7 +39,7 @@ This section describes functions and operators for examining and manipulating bl
 
 <div class="nostroke_table"></div>
 
-| **Description** | Convert `VARCHAR` to `BLOB`. Converts UTF-8 characters into literal encoding. |
+| **Description** | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding. |
 | **Example** | `encode('my_string_with_ü')` |
 | **Result** | `my_string_with_\xC3\xBC` |
 
@@ -47,7 +47,7 @@ This section describes functions and operators for examining and manipulating bl
 
 <div class="nostroke_table"></div>
 
-| **Description** | Number of bytes in `VARCHAR`. |
+| **Description** | Number of bytes in `blob`. |
 | **Example** | `octet_length('\xAA\xBB'::BLOB)` |
 | **Result** | `2` |
 

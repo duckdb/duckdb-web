@@ -3,7 +3,7 @@ layout: docu
 title: Date Part Functions
 ---
 
-The `date_part` and `date_diff` and `date_trunc` functions can be used to manipulate the fields of temporal types.
+The `date_part` and `date_diff` and `date_trunc` functions can be used to manipulate the fields of temporal types such as [`DATE`]({% link docs/sql/data_types/date.md %}) and [`TIMESTAMP`]({% link docs/sql/data_types/timestamp.md %}).
 The fields are specified as strings that contain the part name of the field.
 
 Below is a full list of all available date part specifiers.
