@@ -3,7 +3,7 @@ layout: post
 title: "Benchmarking Ourselves over Time at DuckDB"
 author: Alex Monahan
 thumb: "/images/blog/thumbs/240628.svg"
-excerpt: "In the last 3 years, DuckDB has become 3-25x faster and can analyze ~10x larger datasets."
+excerpt: "In the last 3 years, DuckDB has become 3-25x faster and can analyze ~10x larger datasets all on the same hardware."
 ---
 <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
 <script src="{{ site.baseurl }}/js/plotly-1.58.5.min.js"></script>
@@ -364,6 +364,16 @@ The [0.10.0 release blog post](https://duckdb.org/2024/02/13/announcing-duckdb-0
 As a result, by version 0.10.0 DuckDB was able to handle calculations on data that is significantly larger than memory, even if the intermediate calculations are large in size.
 All operators are supported, including sorting, aggregating, joining, and windowing.
 Future work can further test the boundaries of what is possible with DuckDB's out-of-core support, including window functions and even larger data sizes.
+
+### Hardware Capabilities over Time
+
+DuckDB's performance on the same hardware has improved dramatically, and at the same time, the capabilities of hardware are increasing rapidly as well. 
+
+![ram-prices](/images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-memory.png){: width="360" }![ssd-prices](/images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-SSDs.png){: width="360" }
+
+The price of RAM has declined by 2.2x and the price of SSD storage has decreased by 2.7x from 2021 to 2023 alone. 
+Thanks to the combination of DuckDB enhancements and hardware prices, the scale of analysis possible on a single node has increased by substantially more than an order of magnitude in just 3 years!
+
 
 ## Conclusion
 
