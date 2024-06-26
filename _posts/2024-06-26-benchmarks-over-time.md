@@ -48,13 +48,13 @@ There are some limitations when looking at the performance of a system over time
 If a feature is brand new, there is no prior performance to compare to!
 As a result, this post focuses on fundamental workloads rather than DuckDB's ever-increasing set of integrations with different lakehouse data formats, cloud services, and more.
 
-The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL](https://duckdb.org/docs/guides/sql_features/friendly_sql) additions, as those have also been added more recently.
+The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]({% link docs/guides/sql_features/friendly_sql.md %}) additions, as those have also been added more recently.
 (When writing these queries, it felt like going back in time!)
 
 ## Benchmark Design Summary
 
 This post measures DuckDB's performance over time using the [H2O.ai benchmark](https://duckdblabs.github.io/db-benchmark/), plus some new benchmarks added for importing, exporting, and using window functions.
-Please see our previous [blog](https://duckdb.org/2023/04/14/h2oai.html) [posts](https://duckdb.org/2023/11/03/db-benchmark-update.html) for details on why we believe the H2O.ai benchmark is a good approach! The full details of the benchmark design are in the appendix.
+Please see our previous [blog]({% post_url 2023-04-14-h2oai %}) [posts]({% post_url 2023-11-03-db-benchmark-update %}) for details on why we believe the H2O.ai benchmark is a good approach! The full details of the benchmark design are in the appendix.
 
 * H2O.ai, plus import/export and window function tests
 * Python instead of R
@@ -133,7 +133,7 @@ It is worth noting that the boost from moving to multi-threading will only occur
 
 We can also recreate the overall plot by version rather than by time.
 This demonstrates that DuckDB has been doing more frequent releases recently.
-See [DuckDB's release calendar](https://duckdb.org/docs/dev/release_calendar) for the full version history.
+See [DuckDB's release calendar]({% link docs/dev/release_calendar.md %}) for the full version history.
 
 <div id="overall_results_by_version" style="width:100%;height:400px;"></div>
 <script>
@@ -173,7 +173,7 @@ If you remember the version that you last tested, you can compare how much faste
             });
 </script>
 
-DuckDB has invested substantially in building a [fast and robust CSV parser](https://duckdb.org/2023/10/27/csv-sniffer.html).
+DuckDB has invested substantially in building a [fast and robust CSV parser]({% post_url 2023-10-27-csv-sniffer %}).
 This is often the first task in a data analysis workload, and it tends to be undervalued and underbenchmarked.
 DuckDB has **improved CSV reader performance by nearly 3x**, while adding the ability to handle many more CSV dialects automatically.
 
@@ -352,14 +352,14 @@ Analyzing larger-than-memory data is a superpower for DuckDB, allowing it to be 
 </script>
 
 In version 0.9.0, launched in September 2023, [DuckDB's hash aggregate was enhanced to handle out-of-core (larger than memory) intermediates](https://github.com/duckdb/duckdb/pull/7931).
-The details of the algorithm, along with some benchmarks, are available in [this blog post](https://duckdb.org/2024/03/29/external-aggregation.html).
+The details of the algorithm, along with some benchmarks, are available in [this blog post]({% post_url 2024-03-29-external-aggregation %}).
 This allows for DuckDB to aggregate one billion rows of data (50GB in size) on a MacBook Pro with only 16GB of RAM, even when the number of unique groups in the group by is large.
 This represents at least a 10x improvement in aggregate processing scale over the course of the 3 years of the benchmark.
 
 DuckDB's hash join operator has supported larger-than-memory joins since version 0.6.1 in December 2022.
 However, the scale of this benchmark (coupled with the limited RAM of the benchmarking hardware), meant that this benchmark could still not complete successfully.
 In version 0.10.0, launched in February 2024, [DuckDB's memory management received a significant upgrade](https://github.com/duckdb/duckdb/pull/10147) to handle multiple concurrent operators all requiring significant memory.
-The [0.10.0 release blog post](https://duckdb.org/2024/02/13/announcing-duckdb-0100.html#temporary-memory-manager) shares additional details about this feature.
+The [0.10.0 release blog post]({% post_url 2024-02-13-announcing-duckdb-0100 %}#temporary-memory-manager) shares additional details about this feature.
 
 As a result, by version 0.10.0 DuckDB was able to handle calculations on data that is significantly larger than memory, even if the intermediate calculations are large in size.
 All operators are supported, including sorting, aggregating, joining, and windowing.
@@ -514,7 +514,7 @@ CREATE TABLE windowing_results AS
 
 The various window functions that replace the placeholder are below and are labelled to match the result graphs.
 These were selected to showcase the variety of use cases for window functions, as well as the variety of algorithms required to support the full range of the syntax.
-The DuckDB documentation contains a [full railroad diagram of the available syntax](https://duckdb.org/docs/sql/window_functions#syntax).
+The DuckDB documentation contains a [full railroad diagram of the available syntax]({% link docs/sql/window_functions.md %}#syntax).
 If there are common use cases for window functions that are not well-covered in this benchmark, please let us know!
 
 ```sql
