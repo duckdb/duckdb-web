@@ -10,21 +10,9 @@ import logging
 
 
 # Function to convert a path (a link from in a Markdown document) to a label.
-# The conversion includes resolving the leading "../" navigation steps with the actual path, removing the ".md"
-# extension from the filename and replacing slash characters ("/") with colons (":") for the label.
-#
-# For example, for the inputs:
-# - doc_file_path="docs/sql/query_syntax/select.md"
-# - link_path="../expressions/star"
-#
-# the function will compute:
-# - resolved_path="docs/sql/expressions/star.md"
-#
-# which will turn into the LaTeX label:
-# - label="docs:sql:expressions:star"
 def linked_path_to_label(link_path):
     # ensure that the path is relative
-    if link_path.startswith('/'):
+    if link_path.startswith("/"):
         link_path = link_path[1:]
 
     # for links pointing within the same document - [example](#section_header) -
@@ -34,7 +22,7 @@ def linked_path_to_label(link_path):
 
     # cleanup extension, use colons (as labels cannot use slashes)
     label = link_path.replace("/", ":")
-    return label
+    return f"#{label}"
 
 
 def reduce_clutter_in_doc(doc_body):
@@ -169,17 +157,20 @@ def change_link(doc_body, doc_file_path):
                 original_link
             )
 
-        # we split links of the form a#b to along the #, leave links without # as they are
-        link_parts = new_link.split("#")
-        link_path = link_parts[0]
-        link_to_label = linked_path_to_label(link_path)
-        # if there was an anchor target in the link (#some-item),
-        # we append it using double colons as separator (::some-item)
-        if len(link_parts) > 1:
-            link_to_label = link_to_label + "::" + link_parts[1]
+        if new_link.startswith("https://"):
+           new_link_replacement = new_link
+        else:
+            # we split links of the form a#b to along the #, leave links without # as they are
+            link_parts = new_link.split("#")
+            link_path = link_parts[0]
+            new_link_replacement = linked_path_to_label(link_path)
+            # if there was an anchor target in the link (#some-item),
+            # we append it using double colons as separator (::some-item)
+            if len(link_parts) > 1:
+                new_link_replacement = new_link_replacement + "::" + link_parts[1]
 
         old_link = f"{match[0]}({original_link})"
-        new_link_anchor = f"{match[0]}(#{link_to_label})"
+        new_link_anchor = f"{match[0]}({new_link_replacement})"
 
         doc_body = doc_body.replace(old_link, new_link_anchor)
     return doc_body
@@ -305,7 +296,7 @@ def add_to_documentation(docs_root, data, of):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--verbose', action='store_true')
+parser.add_argument("--verbose", action="store_true")
 args = parser.parse_args()
 verbose = args.verbose
 
