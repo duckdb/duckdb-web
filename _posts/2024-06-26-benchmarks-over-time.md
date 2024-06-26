@@ -526,7 +526,8 @@ first(v2) OVER (ORDER BY id3) AS first_order_by,
 row_number() OVER (ORDER BY id3) AS row_number_order_by
 
 /* 304 Quantiles Entire Dataset */
-quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) OVER () AS quantile_entire_dataset
+quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) OVER ()
+    AS quantile_entire_dataset
 
 /* 305 PARTITION BY */
 sum(v2) OVER (PARTITION BY id1) AS sum_by_id1,
@@ -534,40 +535,71 @@ sum(v2) OVER (PARTITION BY id2) AS sum_by_id2,
 sum(v2) OVER (PARTITION BY id3) AS sum_by_id3
 
 /* 306 PARTITION BY ORDER BY */
-first(v2) OVER (PARTITION BY id2 ORDER BY id3) AS first_by_id2_ordered_by_id3
+first(v2) OVER
+    (PARTITION BY id2 ORDER BY id3) AS first_by_id2_ordered_by_id3
 
 /* 307 Lead and Lag */
-first(v2) OVER (ORDER BY id3 ROWS BETWEEN 1 PRECEDING AND 1 PRECEDING) AS my_lag,
-first(v2) OVER (ORDER BY id3 ROWS BETWEEN 1 FOLLOWING AND 1 FOLLOWING) AS my_lead
+first(v2) OVER
+    (ORDER BY id3 ROWS BETWEEN 1 PRECEDING AND 1 PRECEDING)
+    AS my_lag,
+first(v2) OVER
+    (ORDER BY id3 ROWS BETWEEN 1 FOLLOWING AND 1 FOLLOWING)
+    AS my_lead
 
 /* 308 Moving Averages */
-avg(v2) OVER (ORDER BY id3 ROWS BETWEEN 100 PRECEDING AND CURRENT ROW) AS my_moving_average,
-avg(v2) OVER (ORDER BY id3 ROWS BETWEEN id1 PRECEDING AND CURRENT ROW) AS my_dynamic_moving_average
+avg(v2) OVER
+    (ORDER BY id3 ROWS BETWEEN 100 PRECEDING AND CURRENT ROW)
+    AS my_moving_average,
+avg(v2) OVER
+    (ORDER BY id3 ROWS BETWEEN id1 PRECEDING AND CURRENT ROW)
+    AS my_dynamic_moving_average
 
 /* 309 Rolling Sum */
-sum(v2) OVER (ORDER BY id3 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS my_rolling_sum
+sum(v2) OVER
+    (ORDER BY id3 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+    AS my_rolling_sum
 
 /* 310 RANGE BETWEEN */
-sum(v2) OVER (ORDER BY v2 RANGE BETWEEN 3 PRECEDING AND CURRENT ROW) AS my_range_between,
-sum(v2) OVER (ORDER BY v2 RANGE BETWEEN id1 PRECEDING AND CURRENT ROW) AS my_dynamic_range_between
+sum(v2) OVER
+    (ORDER BY v2 RANGE BETWEEN 3 PRECEDING AND CURRENT ROW)
+    AS my_range_between,
+sum(v2) OVER
+    (ORDER BY v2 RANGE BETWEEN id1 PRECEDING AND CURRENT ROW)
+    AS my_dynamic_range_between
 
 /* 311 Quantiles PARTITION BY */
-quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) OVER (PARTITION BY id2) AS my_quantiles_by_id2
+quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1])
+    OVER (PARTITION BY id2)
+    AS my_quantiles_by_id2
 
 /* 312 Quantiles PARTITION BY ROWS BETWEEN */
-first(v2) OVER (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN 1 PRECEDING AND 1 PRECEDING) AS my_lag_by_id2,
-first(v2) OVER (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN 1 FOLLOWING AND 1 FOLLOWING) AS my_lead_by_id2
+first(v2) OVER
+    (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN 1 PRECEDING AND 1 PRECEDING)
+    AS my_lag_by_id2,
+first(v2) OVER
+    (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN 1 FOLLOWING AND 1 FOLLOWING)
+    AS my_lead_by_id2
 
 /* 313 Moving Averages PARTITION BY */
-avg(v2) OVER (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN 100 PRECEDING AND CURRENT ROW) AS my_moving_average_by_id2,
-avg(v2) OVER (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN id1 PRECEDING AND CURRENT ROW) AS my_dynamic_moving_average_by_id2
+avg(v2) OVER
+    (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN 100 PRECEDING AND CURRENT ROW)
+    AS my_moving_average_by_id2,
+avg(v2) OVER
+    (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN id1 PRECEDING AND CURRENT ROW)
+    AS my_dynamic_moving_average_by_id2
 
 /* 314 Rolling Sum PARTITION BY */
-sum(v2) OVER (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS my_rolling_sum_by_id2
+sum(v2) OVER
+    (PARTITION BY id2 ORDER BY id3 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+    AS my_rolling_sum_by_id2
 
 /* 315 RANGE BETWEEN PARTITION BY */
-sum(v2) OVER (PARTITION BY id2 ORDER BY v2 RANGE BETWEEN 3 PRECEDING AND CURRENT ROW) AS my_range_between_by_id2,
-sum(v2) OVER (PARTITION BY id2 ORDER BY v2 RANGE BETWEEN id1 PRECEDING AND CURRENT ROW) AS my_dynamic_range_between_by_id2
+sum(v2) OVER
+    (PARTITION BY id2 ORDER BY v2 RANGE BETWEEN 3 PRECEDING AND CURRENT ROW)
+    AS my_range_between_by_id2,
+sum(v2) OVER
+    (PARTITION BY id2 ORDER BY v2 RANGE BETWEEN id1 PRECEDING AND CURRENT ROW)
+    AS my_dynamic_range_between_by_id2
 
 /* 316 Quantiles PARTITION BY ROWS BETWEEN */
 quantile_cont(v2, [0, 0.25, 0.50, 0.75, 1]) OVER
