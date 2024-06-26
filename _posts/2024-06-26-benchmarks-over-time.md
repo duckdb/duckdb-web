@@ -367,21 +367,27 @@ Future work can further test the boundaries of what is possible with DuckDB's ou
 
 ### Hardware Capabilities over Time
 
-DuckDB's performance on the same hardware has improved dramatically, and at the same time, the capabilities of hardware are increasing rapidly as well. 
+DuckDB's performance on the same hardware has improved dramatically, and at the same time, the capabilities of hardware are increasing rapidly as well.
 
 ![ram-prices](/images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-memory.png){: width="360" }![ssd-prices](/images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-SSDs.png){: width="360" }
 
 Source: [Our World in Data](https://ourworldindata.org/grapher/historical-cost-of-computer-memory-and-storage?yScale=linear&time=2021..latest&facet=metric&uniformYAxis=0)
 
-The price of RAM has declined by 2.2x and the price of SSD storage has decreased by 2.7x from 2021 to 2023 alone. 
+The price of RAM has declined by 2.2x and the price of SSD storage has decreased by 2.7x from 2021 to 2023 alone.
 Thanks to the combination of DuckDB enhancements and hardware prices, the scale of analysis possible on a single node has increased by substantially more than an order of magnitude in just 3 years!
 
 ## Analyzing the Results Yourself
 
-A DuckDB 1.0 database containing the results of these benchmarks is available here: ``. 
-Any DuckDB client with the `httpfs` extension can read that file, or you can use the DuckDB Wasm web shell to query the file directly from your browser (with the query pre-populated even!)!
+A DuckDB 1.0 database containing the results of these benchmarks is available at <https://blobs.duckdb.org/data/duckdb_performance_over_time.duckdb>.
+Any DuckDB client with the `httpfs` extension can read that file, or you can use the DuckDB Wasm web shell to query the file directly from your browser (with the query pre-populated even!):
 
-The file contains 2 tables: `benchmark_results` and `scale_benchmark_results`. 
+```sql
+LOAD httpfs;
+ATTACH 'https://blobs.duckdb.org/data/duckdb_performance_over_time.duckdb' AS performance_results;
+USE performance_results;
+```
+
+The file contains two tables: `benchmark_results` and `scale_benchmark_results`.
 Please let us know if you uncover any interesting findings!
 
 ## Conclusion
