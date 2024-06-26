@@ -41,7 +41,10 @@ Below is a summary of those new features with examples, starting with a change i
 ```sql
 CREATE TABLE structs(s STRUCT(i INT));
 INSERT INTO structs VALUES ({'k': 42});
--- Mismatch Type Error: Type STRUCT(k INTEGER) does not match with STRUCT(i INTEGER). Cannot cast STRUCTs with different names
+```
+
+```console
+Mismatch Type Error: Type STRUCT(k INTEGER) does not match with STRUCT(i INTEGER). Cannot cast STRUCTs with different names
 ```
 
 Unnamed structs constructed using the `ROW` function can still be inserted into struct fields.
@@ -98,6 +101,7 @@ In this release, we add support for compression of strings and integer types rig
 The `id` column uses a 32-bit integer. From our statistics we know that the minimum value is 300, and the maximum value is 304. We can subtract 300 and cast to an 8-bit integer instead, reducing the width from 4 bytes down to 1.
 
 The `name` column uses our internal string type, which is 16 bytes wide. However, our statistics tell us that the longest string here is only 7 bytes. We can fit this into a 64-bit integer like so:
+
 ```text
 alice   -> alice005
 bob     -> bob00003
@@ -107,6 +111,7 @@ trent   -> trent005
 ```
 
 This reduces the width from 16 bytes down to 8. To support sorting of compressed strings, we flip the bytes on big-endian machines so that our comparison operators are still correct:
+
 ```text
 alice005 -> 500ecila
 bob00003 -> 30000bob

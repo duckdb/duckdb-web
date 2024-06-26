@@ -24,9 +24,11 @@ However, some database queries, like aggregations with many unique groups, requi
 The laptop I am writing this on has 16 GB of RAM.
 What if a query needs 20 GB?
 If this happens:
-```text
+
+```console
 Out of Memory Error: could not allocate block of size X (Y/Z used)
 ```
+
 The query is aborted.
 Sadly, we can’t [download more RAM](https://knowyourmeme.com/memes/download-more-ram).
 But luckily, this laptop also has a fast SSD with 1 TB of storage.
