@@ -133,7 +133,7 @@ Regardless of expertise, and despite DuckDB's best efforts to understand our int
 SELECT * FROM star_trek;
 ```
 
-```text
+```console
 Error: Catalog Error: Table with name star_trek does not exist!
 Did you mean "star_wars"?
 LINE 1: SELECT * FROM star_trek;
@@ -148,7 +148,7 @@ DuckDB's suggestions are even context specific. Here, we receive a suggestion to
 SELECT long_ago FROM star_wars;
 ```
 
-```text
+```console
 Error: Binder Error: Referenced column "long_ago" not found in FROM clause!
 Candidate bindings: "star_wars.long_long_ago"
 LINE 1: SELECT long_ago FROM star_wars;
