@@ -22,23 +22,18 @@ import logging
 #
 # which will turn into the LaTeX label:
 # - label="docs:sql:expressions:star"
-def linked_path_to_label(doc_file_path, link_relative_path):
+def linked_path_to_label(link_path):
     # ensure that the path is relative
-    if link_relative_path.startswith('/'):
-        link_relative_path = link_relative_path[1:]
+    if link_path.startswith('/'):
+        link_path = link_path[1:]
 
     # for links pointing within the same document - [example](#section_header) -
     # we set the document's filename to the link path
-    if link_relative_path == "":
-        link_relative_path = doc_file_path.split("/")[-1]
+    if link_path == "":
+        link_path = link_path.split("/")[-1]
 
-    # find the containing directory
-    doc_dir_path = f"{doc_file_path}/.."
-    # compose the full path and get the relative path
-    link_full_path = f"{doc_dir_path}/{link_relative_path}"
-    resolved_path = os.path.relpath(link_full_path)
     # cleanup extension, use colons (as labels cannot use slashes)
-    label = re.sub(r"\.md$", "", str(resolved_path)).replace("/", ":")
+    label = link_path.replace("/", ":")
     return label
 
 
@@ -82,7 +77,7 @@ def replace_html_code_blocks(doc_body):
 
 def doc_path_to_page_header_header_label(doc_file_full_path):
     return doc_file_full_path \
-        .replace("../docs/", "") \
+        .replace("../docs/", "docs/") \
         .replace(".md", "") \
         .replace("../", "") \
         .replace("/", ":")
@@ -96,19 +91,18 @@ def adjust_links_in_doc_body(doc_body):
             doc_body
         )
 
-    # replace relative installation page links,
-    # while keeping the optional '?environment=...' query strings
+    # replace relative installation page links
     doc_body = re.sub(
-            r"\[installation page\]\([./]*installation((\?)[a-zA-Z0-9=]+)?\)",
-            r"[installation page](https://duckdb.org/docs/installation/\1)",
+            r"\[installation page\]\((.*)?\)",
+            r"[installation page](https://duckdb.org/docs/installation/)",
             doc_body
         )
 
     # replace link to the Python guides index page
     # with a link to the Python guides section
     doc_body = doc_body.replace(
-        "](../../guides/index#python-client)",
-        "](../../guides/python)"
+        "]({% link docs/guides/overview.md %}#python-client)",
+        "]({% link docs/python/overview.md %}#)"
     )
 
     # replace "`, `" (with its typical surroundings) with "`,` " to allow line breaking
@@ -138,6 +132,7 @@ def change_link(doc_body, doc_file_path):
     matches = re.findall(r"([^!]\[[^]!]*\])\(([^)]*)\)", doc_body)
     for match in matches:
         original_link = match[1]
+
         if original_link.startswith("http://") or original_link.startswith("https://"):
             continue
         if original_link.startswith("/"):
@@ -145,21 +140,48 @@ def change_link(doc_body, doc_file_path):
             doc_body = doc_body.replace(f"]({original_link})", f"]({full_url_link})")
             continue
 
-        link_parts = original_link.split("#")
+        # default: the link is unchanged
+        new_link = original_link
 
-        # we step up one level to navigate from the Markdown file to the directory,
-        # then we concatenate the rest of the path
+        # {% link ... %} tags
+        if original_link.startswith("{% link"):
+            new_link = original_link
+
+            # links to other pages (drop the .md extension)
+            new_link = re.sub(
+                r"{% link (.*?)\.md %}(#.*?)?",
+                r"\1\2",
+                new_link
+            )
+
+            # other links, e.g., PDFs
+            new_link = re.sub(
+                r"{% link (.*?) %}",
+                r"https://duckdb.org/\1",
+                new_link
+            )
+
+        # {% post_url ... %} tags
+        if original_link.startswith("{% post_url "):
+            new_link = re.sub(
+                r"{% post_url (20[0-9][0-9])-([0-9][0-9])-([0-9][0-9])-(.*?) %}",
+                r"https://duckdb.org/\1/\2/\3/\4",
+                original_link
+            )
+
+        # we split links of the form a#b to along the #, leave links without # as they are
+        link_parts = new_link.split("#")
         link_path = link_parts[0]
-
-        link_to_label = linked_path_to_label(doc_file_path, link_path)
+        link_to_label = linked_path_to_label(link_path)
         # if there was an anchor target in the link (#some-item),
         # we append it using double colons as separator (::some-item)
         if len(link_parts) > 1:
             link_to_label = link_to_label + "::" + link_parts[1]
 
         old_link = f"{match[0]}({original_link})"
-        new_link = f"{match[0]}(#{link_to_label})"
-        doc_body = doc_body.replace(old_link, new_link)
+        new_link_anchor = f"{match[0]}(#{link_to_label})"
+
+        doc_body = doc_body.replace(old_link, new_link_anchor)
     return doc_body
 
 
@@ -255,7 +277,7 @@ def add_to_documentation(docs_root, data, of):
 
         if main_slug:
             # e.g., "# SQL Features {#guides:sql_features}"
-            of.write(f"# {main_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}') }}}\n\n")
+            of.write(f"# {main_title} {{#{ linked_path_to_label(f'{chapter_slug}/{main_slug}') }}}\n\n")
         else:
             continue
 
@@ -270,7 +292,7 @@ def add_to_documentation(docs_root, data, of):
                 concatenate_page_to_output(of, 2, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
 
             if subfolder_slug:
-                of.write(f"## {subfolder_page_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}/{subfolder_slug}') }}}\n\n")
+                of.write(f"## {subfolder_page_title} {{#{ linked_path_to_label(f'{chapter_slug}/{main_slug}/{subfolder_slug}') }}}\n\n")
             else:
                 continue
 

@@ -29,11 +29,11 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 
 ## Query Features
 
-* [Column aliases in `WHERE`, `GROUP BY`, and `HAVING`]({% link _posts/2022-05-04-friendlier-sql.md %}#column-aliases-in-where--group-by--having)
+* [Column aliases in `WHERE`, `GROUP BY`, and `HAVING`]({% post_url 2022-05-04-friendlier-sql %}#column-aliases-in-where--group-by--having)
 * [`COLUMNS()` expression]({% link docs/sql/expressions/star.md %}#columns-expression) can be used to execute the same expression on multiple columns:
-    * [with regular expressions]({% link _posts/2023-08-23-even-friendlier-sql.md %}#columns-with-regular-expressions)
-    * [with `EXCLUDE` and `REPLACE`]({% link _posts/2023-08-23-even-friendlier-sql.md %}#columns-with-exclude-and-replace)
-    * [with lambda functions]({% link _posts/2023-08-23-even-friendlier-sql.md %}#columns-with-lambda-functions)
+    * [with regular expressions]({% post_url 2023-08-23-even-friendlier-sql %}#columns-with-regular-expressions)
+    * [with `EXCLUDE` and `REPLACE`]({% post_url 2023-08-23-even-friendlier-sql %}#columns-with-exclude-and-replace)
+    * [with lambda functions]({% post_url 2023-08-23-even-friendlier-sql %}#columns-with-lambda-functions)
 * Reusable column aliases, e.g.: `SELECT i + 1 AS j, j + 2 AS k FROM range(0, 3) t(i)`
 * Advanced aggregation features for analytical (OLAP) queries:
     * [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %})
@@ -61,11 +61,11 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 
 * [Dot operator for function chaining]({% link docs/sql/functions/overview.md %}#function-chaining-via-the-dot-operator): `SELECT ('hello').upper()`
 * String formatters: [`format()` function with the `fmt` syntax]({% link docs/sql/functions/char.md %}#fmt-syntax) and the [`printf() function`]({% link docs/sql/functions/char.md %}#printf-syntax)
-* [List comprehensions]({% link _posts/2023-08-23-even-friendlier-sql.md %}#list-comprehensions)
-* [List slicing]({% link _posts/2022-05-04-friendlier-sql.md %}#string-slicing)
-* [String slicing]({% link _posts/2022-05-04-friendlier-sql.md %}#string-slicing)
-* [`STRUCT.*` notation]({% link _posts/2022-05-04-friendlier-sql.md %}#struct-dot-notation)
-* [Simple `LIST` and `STRUCT` creation]({% link _posts/2022-05-04-friendlier-sql.md %}#simple-list-and-struct-creation)
+* [List comprehensions]({% post_url 2023-08-23-even-friendlier-sql %}#list-comprehensions)
+* [List slicing]({% post_url 2022-05-04-friendlier-sql %}#string-slicing)
+* [String slicing]({% post_url 2022-05-04-friendlier-sql %}#string-slicing)
+* [`STRUCT.*` notation]({% post_url 2022-05-04-friendlier-sql %}#struct-dot-notation)
+* [Simple `LIST` and `STRUCT` creation]({% post_url 2022-05-04-friendlier-sql %}#simple-list-and-struct-creation)
 
 ## Join Types
 
@@ -87,6 +87,6 @@ SELECT
 
 ## See Also
 
-* [Friendlier SQL with DuckDB]({% link _posts/2022-05-04-friendlier-sql.md %}) blog post
-* [Even Friendlier SQL with DuckDB]({% link _posts/2023-08-23-even-friendlier-sql.md %}) blog post
-* [SQL Gymnastics: Bending SQL into flexible new shapes]({% link _posts/2024-03-01-sql-gymnastics.md %}) blog post
+* [Friendlier SQL with DuckDB]({% post_url 2022-05-04-friendlier-sql %}) blog post
+* [Even Friendlier SQL with DuckDB]({% post_url 2023-08-23-even-friendlier-sql %}) blog post
+* [SQL Gymnastics: Bending SQL into flexible new shapes]({% post_url 2024-03-01-sql-gymnastics %}) blog post

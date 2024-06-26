@@ -4,7 +4,7 @@ title: Hugging Face Support
 ---
 
 The `httpfs` extension introduces support for the `hf://` protocol to access data sets hosted in [Hugging Face](https://huggingface.co/) repositories.
-See the [announcement blog post]({% link _posts/2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb.md %}) for details.
+See the [announcement blog post]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) for details.
 
 ## Usage
 

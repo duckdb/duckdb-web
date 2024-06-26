@@ -78,7 +78,7 @@ COPY ontime TO 'flights.csv' WITH (HEADER, DELIMITER '|');
 
 CSV loading, i.e., importing CSV files to the database, is a very common, and yet surprisingly tricky, task. While CSVs seem simple on the surface, there are a lot of inconsistencies found within CSV files that can make loading them a challenge. CSV files come in many different varieties, are often corrupt, and do not have a schema. The CSV reader needs to cope with all of these different situations.
 
-The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file using the [CSV sniffer]({% link _posts/2023-10-27-csv-sniffer.md %}). This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page]({% link docs/data/csv/auto_detection.md %}) for more information.
+The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}). This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page]({% link docs/data/csv/auto_detection.md %}) for more information.
 
 ## Parameters
 
@@ -128,7 +128,7 @@ The default value for the `auto_type_candidates` option is `['SQLNULL', 'BOOLEAN
 
 ## CSV Functions
 
-The `read_csv` automatically attempts to figure out the correct configuration of the CSV reader using the [CSV sniffer]({% link _posts/2023-10-27-csv-sniffer.md %}). It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`. An example with the [`flights.csv`](/data/flights.csv) file:
+The `read_csv` automatically attempts to figure out the correct configuration of the CSV reader using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}). It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`. An example with the [`flights.csv`](/data/flights.csv) file:
 
 ```sql
 SELECT * FROM read_csv('flights.csv');

@@ -3,7 +3,7 @@ layout: docu
 title: CSV Auto Detection
 ---
 
-When using `read_csv`, the system tries to automatically infer how to read the CSV file using the [CSV sniffer]({% link _posts/2023-10-27-csv-sniffer.md %}).
+When using `read_csv`, the system tries to automatically infer how to read the CSV file using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}).
 This step is necessary because CSV files are not self-describing and come in many different dialects. The auto-detection works roughly as follows:
 
 * Detect the dialect of the CSV file (delimiter, quoting rule, escape)

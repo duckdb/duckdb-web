@@ -7,7 +7,7 @@ redirect_from:
   - docs/extensions/postgresql
 ---
 
-The `postgres` extension allows DuckDB to directly read and write data from a running Postgres database instance. The data can be queried directly from the underlying Postgres database. Data can be loaded from Postgres tables into DuckDB tables, or vice versa. See the [official announcement]({% link _posts/2022-09-30-postgres-scanner.md %}) for implementation details and background.
+The `postgres` extension allows DuckDB to directly read and write data from a running Postgres database instance. The data can be queried directly from the underlying Postgres database. Data can be loaded from Postgres tables into DuckDB tables, or vice versa. See the [official announcement]({% post_url 2022-09-30-postgres-scanner %}) for implementation details and background.
 
 ## Installing and Loading
 
