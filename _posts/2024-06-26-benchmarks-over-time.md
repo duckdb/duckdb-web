@@ -378,14 +378,14 @@ Thanks to the combination of DuckDB enhancements and hardware prices, the scale 
 
 ## Analyzing the Results Yourself
 
-A DuckDB 1.0 database containing the results of these benchmarks is available at <https://blobs.duckdb.org/data/duckdb_performance_over_time.duckdb>.
+A DuckDB 1.0 database containing the results of these benchmarks is available at <https://blobs.duckdb.org/data/duckdb_perf_over_time.duckdb>.
 Any DuckDB client with the `httpfs` extension can read that file.
 
-You can even use the DuckDB Wasm web shell to **[query the file directly from your browser](https://shell.duckdb.org/#queries=v0,ATTACH-'https://blobs.duckdb.org/data/duckdb_perf_over_time.duckdb'-AS-performance_results~,USE-performance_results~,FROM-benchmark_results-SELECT-%22DuckDB-Version%22%2C-benchmark%2C-%22Time-(seconds)%22-ORDER-BY-version_rank%2C-benchmark-DESC-LIMIT-5~,FROM-scale_benchmark_results-SELECT-duckdb_version-AS-%22DuckDB-Version%22%2C-benchmark%2C-row_count%2C-time-AS-%22Time-(seconds)%22-ORDER-BY-version_rank%2C-row_count%2C-benchmark-DESC-LIMIT-5~)** (with the queries pre-populated and automatically executed!):
+You can even use the DuckDB Wasm web shell to **[query the file directly from your browser](https://shell.duckdb.org/#queries=v0,ATTACH-'https%3A%2F%2Fblobs.duckdb.org%2Fdata%2Fduckdb_perf_over_time.duckdb'-AS-performance_results~,FROM-performance_results.benchmark_results-SELECT-%22DuckDB-Version%22%2C-sum(%22Time-(seconds)%22)%3A%3ADECIMAL(15%2C2)-as-sum_time-GROUP-BY-%22DuckDB-Version%22-ORDER-BY-any_value(%22Release-Date%22)~)** (with the queries pre-populated and automatically executed!):
 
 ```sql
 LOAD httpfs;
-ATTACH 'https://blobs.duckdb.org/data/duckdb_performance_over_time.duckdb' AS performance_results;
+ATTACH 'https://blobs.duckdb.org/data/duckdb_perf_over_time.duckdb' AS performance_results;
 USE performance_results;
 ```
 
