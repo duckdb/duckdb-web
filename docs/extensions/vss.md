@@ -78,8 +78,8 @@ Note that while each `HNSW` index only applies to a single column you can create
 
 Besides the `metric` option, the `HNSW` index creation statement also supports the following options to control the hyperparameters of the index construction and search process:
 
-| Option            | Default | Description                                                                                                                                                                                                                    |
-| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Option | Default | Description |
+|-------|--:|----------------------------|
 | `ef_construction` | 128     | The number of candidate vertices to consider during the construction of the index. A higher value will result in a more accurate index, but will also increase the time it takes to build the index.                           |
 | `ef_search`       | 64      | The number of candidate vertices to consider during the search phase of the index. A higher value will result in a more accurate index, but will also increase the time it takes to perform a search.                          |
 | `M`               | 16      | The maximum number of neighbors to keep for each vertex in the graph. A higher value will result in a more accurate index, but will also increase the time it takes to build the index.                                        |
