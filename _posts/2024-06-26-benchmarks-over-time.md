@@ -379,7 +379,9 @@ Thanks to the combination of DuckDB enhancements and hardware prices, the scale 
 ## Analyzing the Results Yourself
 
 A DuckDB 1.0 database containing the results of these benchmarks is available at <https://blobs.duckdb.org/data/duckdb_performance_over_time.duckdb>.
-Any DuckDB client with the `httpfs` extension can read that file, or you can use the DuckDB Wasm web shell to query the file directly from your browser (with the query pre-populated even!):
+Any DuckDB client with the `httpfs` extension can read that file.
+
+You can even use the DuckDB Wasm web shell to **[query the file directly from your browser](https://shell.duckdb.org/#queries=v0,ATTACH-'https://blobs.duckdb.org/data/duckdb_performance_over_time.duckdb'-AS-performance_results~,USE-performance_results~,FROM-benchmark_results-SELECT-"DuckDB-Version"%2C-benchmark%2C-"Time-(seconds)"-ORDER-BY-version_rank%2C-benchmark-DESC-LIMIT-5~,FROM-scale_benchmark_results-SELECT-duckdb_version-AS-"DuckDB-Version"%2C-benchmark%2C-row_count%2C-time-AS-"Time-(seconds)"-ORDER-BY-version_rank%2C-row_count%2C-benchmark-DESC-LIMIT-5~)** (with the queries pre-populated and automatically executed!):
 
 ```sql
 LOAD httpfs;
