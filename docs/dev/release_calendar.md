@@ -34,8 +34,8 @@ The planned dates of upcoming DuckDB releases are shown below.
 
 <div class="narrow_table"></div>
 
-In the following, we list DuckDB's past releases, including their codename (where applicable).
-Prior to version 0.4.0, all releases, including patch versions, received a codename.
+In the following, we list DuckDB's past releases along with their codename where applicable.
+Between versions 0.2.2 and 0.3.3, all releases (including patch versions) received a codename.
 Since version 0.4.0, only major and minor versions get a codename.
 
 <!-- markdownlint-disable MD055 MD056 -->
