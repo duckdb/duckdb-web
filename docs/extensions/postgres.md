@@ -86,6 +86,8 @@ The tables in the PostgreSQL database can be read as if they were normal DuckDB 
 SHOW ALL TABLES;
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | name  |
 |-------|
 | uuids |
@@ -93,6 +95,8 @@ SHOW ALL TABLES;
 ```sql
 SELECT * FROM uuids;
 ```
+
+<div class="narrow_table monospace_table"></div>
 
 |                  u                   |
 |--------------------------------------|
@@ -173,11 +177,13 @@ COPY 'data.parquet' TO 'pg.bin' WITH (FORMAT POSTGRES_BINARY);
 The file produced will be the equivalent of copying the file to Postgres using DuckDB and then dumping it from Postgres using `psql` or another client:
 
 DuckDB:
+
 ```sql
 COPY postgres_db.tbl FROM 'data.parquet';
 ```
 
-Postgres:
+PostgreSQL:
+
 ```sql
 \copy tbl TO 'data.bin' WITH (FORMAT BINARY);
 ```

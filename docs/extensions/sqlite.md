@@ -35,6 +35,8 @@ The tables in the file can be read as if they were normal DuckDB tables, but the
 SHOW TABLES;
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 |          name          |
 |------------------------|
 | actor                  |
