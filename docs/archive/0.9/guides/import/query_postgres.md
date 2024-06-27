@@ -7,7 +7,7 @@ redirect_from:
 title: PostgreSQL Import
 ---
 
-To run a query directly on a running PostgreSQL database, the [`postgres` extension](../../extensions/postgres_scanner) is required.  This can be installed use the `INSTALL` SQL command. This only needs to be run once.
+To run a query directly on a running PostgreSQL database, the [`postgres` extension](../../extensions/postgres_scanner) is required.  This can be installed using the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL postgres;

@@ -8,7 +8,7 @@ title: Postgres Import
 
 # How to run a query directly on a running Postgres database
 
-To run a query directly on a running Postgres database, the `postgres` extension is required.  This can be installed use the `INSTALL` SQL command. This only needs to be run once.
+To run a query directly on a running Postgres database, the `postgres` extension is required.  This can be installed using the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL postgres;
