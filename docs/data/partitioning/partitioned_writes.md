@@ -17,6 +17,12 @@ Write a table to a Hive partitioned data set of CSV files, allowing overwrites:
 COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE);
 ```
 
+Write a table to a Hive partitioned data set of GZIP-compressed CSV files, setting explicit data files' extension:
+
+```sql
+COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), COMPRESSION gzip, FILE_EXTENSION 'csv.gz');
+```
+
 ## Partitioned Writes
 
 When the `partition_by` clause is specified for the [`COPY` statement]({% link docs/sql/statements/copy.md %}), the files are written in a [Hive partitioned]({% link docs/data/partitioning/hive_partitioning.md %}) folder hierarchy. The target is the name of the root directory (in the example above: `orders`). The files are written in-order in the file hierarchy. Currently, one file is written per thread to each directory.
