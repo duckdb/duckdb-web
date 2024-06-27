@@ -8,7 +8,7 @@ redirect_from:
 
 ## Prerequisites
 
-To load an Iceberg file from S3, both the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) and [`iceberg`]({% link docs/extensions/iceberg.md %}) extensions are required. They can be installed use the `INSTALL` SQL command. The extensions only need to be installed once.
+To load an Iceberg file from S3, both the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) and [`iceberg`]({% link docs/extensions/iceberg.md %}) extensions are required. They can be installed using the `INSTALL` SQL command. The extensions only need to be installed once.
 
 ```sql
 INSTALL httpfs;
