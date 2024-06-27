@@ -26,7 +26,7 @@ SELECT
 FROM generate_series(1, 10) tbl(i);
 ```
 
-<div class="narrow_table monospace_table></div>
+<div class="narrow_table monospace_table"></div>
 
 | total_rows | lte_five | odds |
 |:---|:---|:---|
