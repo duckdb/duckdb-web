@@ -212,3 +212,25 @@ Compatibility is also guaranteed between different DuckDB clients (e.g., Python 
 </div>
 
 </div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
+### Is DuckDB intended for data science or data engineering workloads?
+
+<div class="answer" markdown="1">
+
+DuckDB was designed with both data science and data engineering workloads in mind.
+
+For data science users, who often run queries in an interactive fashion, DuckDB offers several mechanisms for quickly exploring data sets.
+For example, CSV files can be loaded by [auto-inferring their schema]({% link docs/data/csv/auto_detection.md %}) using `CREATE TABLE tbl AS FROM 'input.csv'`.
+Moreover, there numerous SQL shorthands known as [“friendly SQL”]({% link docs/guides/sql_features/friendly_sql.md %}) for more concise expressions, e.g., the [`GROUP BY ALL` clause]({% link docs/sql/query_syntax/groupby#group-by-all %}).
+
+For data engineering use cases, DuckDB allows full control over the loading process, so it is possible to define the precise schema using a `CREATE TABLE tbl ⟨schema⟩` statement and populate it using a [`COPY` statement]({% link docs/sql/statements/copy.md %}) that specifies the CSV's dialect (delimiter, quotes, etc.).
+Most friendly SQL extensions are simple to rewrite to SQL queries that are fully compatible with PostgreSQL.
+For example, the `GROUP BY ALL` clause can be replaced with a `GROUP BY` clause and an explicit list of columns.
+
+</div>
+
+</div>
