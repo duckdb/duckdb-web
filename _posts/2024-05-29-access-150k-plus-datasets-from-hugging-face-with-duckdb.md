@@ -185,21 +185,21 @@ Second, set it in your DuckDB session using DuckDB’s [Secrets Manager]({% link
 
 * `CONFIG`: The user must pass all configuration information into the `CREATE SECRET` statement. To create a secret using the `CONFIG` provider, use the following command:
 
-   ```sql
-   CREATE SECRET hf_token (
-      TYPE HUGGINGFACE,
-      TOKEN 'your_hf_token'
-   );
-   ```
+  ```sql
+  CREATE SECRET hf_token (
+     TYPE HUGGINGFACE,
+     TOKEN 'your_hf_token'
+  );
+  ```
 
 * `CREDENTIAL_CHAIN`: Automatically tries to fetch credentials. For the Hugging Face token, it will try to get it from `~/.cache/huggingface/token`. To create a secret using the `CREDENTIAL_CHAIN` provider, use the following command:
 
-   ```sql
-   CREATE SECRET hf_token (
-      TYPE HUGGINGFACE,
-      PROVIDER CREDENTIAL_CHAIN
-   );
-   ```
+  ```sql
+  CREATE SECRET hf_token (
+     TYPE HUGGINGFACE,
+     PROVIDER CREDENTIAL_CHAIN
+  );
+  ```
 
 ## Conclusion
 
