@@ -33,7 +33,7 @@ A bash one-liner (to be adapted with the file names and executable locations) is
 /older/version/duckdb mydata.db -c "EXPORT DATABASE 'tmp'" && /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
 ```
 
-After this `mydata.db` will be untouched with the old format, `mydata.new.db` will contain the same data but in a format accessible from more recent DuckDB, and folder `tmp` will old the same data in an universal format as different files.
+After this, `mydata.db` will remain in the old format, `mydata.new.db` will contain the same data but in a format accessible by the more recent DuckDB version, and the folder `tmp` will hold the same data in a universal format as different files.
 
 Check [`EXPORT` documentation]({% link docs/sql/statements/export.md %}) for more details on the syntax.
 
