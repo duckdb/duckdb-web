@@ -424,7 +424,7 @@ and the timestamps have been shifted to be halfway between the originals:
 ```sql
 CREATE OR REPLACE TABLE build AS (
     SELECT k, '2001-01-01 00:00:00'::TIMESTAMP + INTERVAL (v) MINUTE AS t, v
-    FROM range(0, 100_000) vals(v), range(0,50) keys(k)
+    FROM range(0, 100_000) vals(v), range(0, 50) keys(k)
 );
 
 CREATE OR REPLACE TABLE probe AS (

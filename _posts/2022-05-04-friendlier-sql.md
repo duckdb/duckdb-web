@@ -230,7 +230,7 @@ For many functions, DuckDB supports multiple names in order to align with other 
 SELECT
     'Use the Force, Luke'[:13] AS sliced_quote_1,
     substr('I am your father', 1, 4) AS sliced_quote_2,
-    substring('Obi-Wan Kenobi, you''re my only hope',17,100) AS sliced_quote_3;
+    substring('Obi-Wan Kenobi, you''re my only hope', 17, 100) AS sliced_quote_3;
 ```
 
 ### Auto-Increment Duplicate Column Names
@@ -246,7 +246,7 @@ FROM (
         s2.tie_fighter
     FROM squadron_one s1
     JOIN squadron_two s2
-        ON 1=1
+      ON 1 = 1
     ) theyre_coming_in_too_fast;
 ```  
 
@@ -264,18 +264,18 @@ DuckDB believes in using specific data types for performance, but attempts to au
 CREATE TABLE sith_count_int AS SELECT 2::INT AS sith_count;
 CREATE TABLE sith_count_varchar AS SELECT 2::VARCHAR AS sith_count;
 
-SELECT 
+SELECT
     * 
 FROM sith_count_int s_int 
 JOIN sith_count_varchar s_char 
-    ON s_int.sith_count = s_char.sith_count;
+  ON s_int.sith_count = s_char.sith_count;
 ```
 
 <div class="narrow_table"></div>
 
 | sith_count | sith_count |
 |:---|:---|
-| 2          | 2          |
+| 2  | 2  |
 
 ### Other Friendly Features
 
