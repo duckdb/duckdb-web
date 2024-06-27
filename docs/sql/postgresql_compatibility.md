@@ -6,6 +6,34 @@ title: PostgreSQL Compatibility
 DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.
 The few exceptions to this are listed on this page.
 
+## Floating-Point Arithmetic
+
+DuckDB and PostgreSQL handle floating-point arithmetic differently for division by zero. Neither system confirm the [IEEE Standard for Floating-Point Arithmetic (IEEE 754)](https://en.wikipedia.org/wiki/IEEE_754).
+On operations involving infinity values, DuckDB and PostgreSQL align with each other but again they both deviate from IEEE 754.
+To show the differences, run the following SQL queries:
+
+```sql
+SELECT 1.0 / 0.0 AS x;
+SELECT 0.0 / 0.0 AS x;
+SELECT -1.0 / 0.0 AS x;
+SELECT 'Infinity'::FLOAT / 'Infinity'::FLOAT AS x;
+SELECT 1.0 / 'Infinity'::FLOAT AS x;
+SELECT 'Infinity'::FLOAT - 'Infinity'::FLOAT AS x;
+SELECT 'Infinity'::FLOAT - 1.0 AS x;
+```
+
+<div class="narrow_table monospace_table"></div>
+
+| Expression              |   DuckDB | PostgreSQL |  IEEE 754 |
+| :---------------------- | -------: | ---------: | --------: |
+| 1.0 / 0.0               |     NULL |      error |  Infinity |
+| 0.0 / 0.0               |     NULL |      error |       Nan |
+| -1.0 / 0.0              |     NULL |      error | -Infinity |
+| 'Infinity' / 'Infinity' |      NaN |        NaN |       NaN |
+| 1.0 / 'Infinity'        |      0.0 |        0.0 |       0.0 |
+| 'Infinity' - 'Infinity' |      NaN |        NaN |       NaN |
+| 'Infinity' - 1.0        | Infinity |   Infinity |  Infinity |
+
 ## Division on Integers
 
 When computing division on integers, PostgreSQL performs integer divison, while DuckDB performs float division:
@@ -25,9 +53,9 @@ PostgreSQL returns:
 
 DuckDB returns:
 
-|  x  |
-|----:|
-| 0.5 |
+|    x |
+| ---: |
+|  0.5 |
 
 To perform integer division in DuckDB, use the `//` operator:
 
@@ -35,9 +63,9 @@ To perform integer division in DuckDB, use the `//` operator:
 SELECT 1 // 2 AS x;
 ```
 
-| x |
-|--:|
-| 0 |
+|    x |
+| ---: |
+|    0 |
 
 ## `UNION` of Boolean and Integer Values
 
@@ -57,10 +85,10 @@ ERROR:  UNION types boolean and integer cannot be matched
 
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
 
-| x |
-|--:|
-| 1 |
-| 2 |
+|    x |
+| ---: |
+|    1 |
+|    2 |
 
 ## Case Sensitivity for Quoted Identifiers
 
@@ -103,11 +131,10 @@ SELECT table_name FROM duckdb_tables();
 
 <div class="narrow_table monospace_table"></div>
 
-|  table_name   |
-|---------------|
+| table_name    |
+| ------------- |
 | MyTaBLe       |
 | PreservedCase |
-
 
 PostgreSQL's behavior of lowercasing identifiers is accessible using the [`preserve_identifier_case` option]({% link docs/configuration/overview.md %}#local-configuration-options):
 
@@ -120,7 +147,7 @@ SELECT table_name FROM duckdb_tables();
 <div class="narrow_table monospace_table"></div>
 
 | table_name |
-|------------|
+| ---------- |
 | mytable    |
 
 However, the case insensitive matching in the system for identifiers cannot be turned off.
