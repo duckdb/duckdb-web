@@ -132,7 +132,6 @@ SELECT 'Best.txt' GLOB '[!a-zA-Z]est.txt'; -- false
 To negate a GLOB operator, negate the entire expression:
 
 ```sql
--- (NOT GLOB is not valid syntax)
 SELECT NOT 'best.txt' GLOB '*.txt';        -- false
 ```
 
