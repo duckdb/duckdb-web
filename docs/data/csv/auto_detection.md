@@ -120,7 +120,7 @@ Header detection works by checking if the candidate header row deviates from the
 
 In files that do not have a header row, the column names are generated as `column0`, `column1`, etc.
 
-Note that headers cannot be detected correctly if all columns are of type `VARCHAR` – as in this case the system cannot distinguish the header row from the other rows in the file. In this case the system assumes the file has no header. This can be overridden using the `header` option.
+Note that headers cannot be detected correctly if all columns are of type `VARCHAR` – as in this case the system cannot distinguish the header row from the other rows in the file. In this case, the system assumes the file has a header. This can be overridden by setting the `header` option to `false`.
 
 ### Dates and Timestamps
 
