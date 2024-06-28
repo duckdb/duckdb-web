@@ -8,4 +8,7 @@ selected: Documentation
 title: Sitemap
 ---
 
+Welcome to the documentation of DuckDB version 0.7!
+To see the changes in this release, see the [announcement blog post]({% post_url 2023-02-13-announcing-duckdb-070 %}).
+
 <div id="docusitemaphere"></div>
