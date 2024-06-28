@@ -216,4 +216,8 @@ DuckDB supports reading erroneous CSV files. For details, see the [Reading Fault
 
 ## Limitations
 
-The CSV reader only supports input files using UTF-8 character encoding. For CSV files using different encodings, use e.g., the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert them to UTF-8.
+The CSV reader only supports input files using UTF-8 character encoding. For CSV files using different encodings, use e.g., the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert them to UTF-8. For example:
+
+```bash
+iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
+```
