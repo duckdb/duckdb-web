@@ -7,6 +7,8 @@ railroad: expressions/window.js
 DuckDB supports [window functions](https://en.wikipedia.org/wiki/Window_function_(SQL)), which can use multiple rows to calculate a value for each row.
 Window functions are [blocking operators]({% link docs/guides/performance/how_to_tune_workloads.md %}#blocking-operators), i.e., they require their entire input to be buffered, making them one of the most memory-intensive operators in SQL.
 
+Window function are available in SQL since [SQL:2003](https://en.wikipedia.org/wiki/SQL:2003) and are supported by major SQL database systems.
+
 ## Examples
 
 Generate a `row_number` column with containing incremental identifiers for each row:
