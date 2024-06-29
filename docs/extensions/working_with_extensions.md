@@ -106,7 +106,7 @@ and version of the different extensions. For this reason, DuckDB keeps track of 
 ```sql
 INSTALL httpfs FROM core;
 INSTALL aws FROM core_nightly;
-SELECT extensions_name, extensions_version, installed_from, install_mode FROM duckdb_extensions();
+SELECT extension_name, extension_version, installed_from, install_mode FROM duckdb_extensions();
 ```
 
 Would output:
