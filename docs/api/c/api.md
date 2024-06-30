@@ -5110,7 +5110,7 @@ The scalar function object.
 ### `duckdb_destroy_scalar_function`
 
 ---
-Destroys the given table function object.
+Destroys the given scalar function object.
 
 #### Syntax
 
@@ -5123,9 +5123,9 @@ Destroys the given table function object.
 #### Parameters
 
 ---
-* `table_function`
+* `scalar_function`
 
-The table function to destroy
+The scalar function to destroy
 
 <br>
 
@@ -5146,7 +5146,7 @@ Sets the name of the given scalar function.
 #### Parameters
 
 ---
-* `table_function`
+* `scalar_function`
 
 The scalar function
 * `name`
@@ -5227,7 +5227,7 @@ Assigns extra information to the scalar function that can be fetched during bind
 ---
 * `scalar_function`
 
-The table function
+The scalar function
 * `extra_info`
 
 The extra information
@@ -5240,7 +5240,7 @@ The callback that will be called to destroy the bind data (if any)
 ### `duckdb_scalar_function_set_function`
 
 ---
-Sets the main function of the table function.
+Sets the main function of the scalar function.
 
 #### Syntax
 
@@ -5254,9 +5254,9 @@ Sets the main function of the table function.
 #### Parameters
 
 ---
-* `table_function`
+* `scalar_function`
 
-The table function
+The scalar function
 * `function`
 
 The function
