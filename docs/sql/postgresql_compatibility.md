@@ -9,7 +9,7 @@ The few exceptions to this are listed on this page.
 ## Floating-Point Arithmetic
 
 DuckDB and PostgreSQL handle floating-point arithmetic differently for division by zero. Neither system confirm the [IEEE Standard for Floating-Point Arithmetic (IEEE 754)](https://en.wikipedia.org/wiki/IEEE_754).
-On operations involving infinity values, DuckDB and PostgreSQL align with each other but again they both deviate from IEEE 754.
+On operations involving infinity values, DuckDB and PostgreSQL align with each other and conform to IEEE 754.
 To show the differences, run the following SQL queries:
 
 ```sql
