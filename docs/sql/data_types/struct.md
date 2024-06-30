@@ -9,6 +9,8 @@ Conceptually, a `STRUCT` column contains an ordered list of columns called "entr
 
 `STRUCT`s are similar to PostgreSQL's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a `STRUCT`, but does not have a `ROW` data type. See an example below and the [nested functions docs]({% link docs/sql/functions/nested.md %}#struct-functions) for details.
 
+`STRUCT`s have a fixed schema. It is not possible to change the schema of a `STRUCT` using `UPDATE` operations.
+
 See the [data types overview]({% link docs/sql/data_types/overview.md %}) for a comparison between nested data types.
 
 ### Creating Structs

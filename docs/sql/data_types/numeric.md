@@ -82,6 +82,26 @@ SET x = '-Infinity';
 
 On input, these strings are recognized in a case-insensitive manner.
 
+### Floating-Point Arithmetic
+
+DuckDB and PostgreSQL handle division by zero on floating-point values differently from the [IEEE Standard for Floating-Point Arithmetic (IEEE 754)](https://en.wikipedia.org/wiki/IEEE_754). To show the differences, run the following SQL queries:
+
+```sql
+SELECT 1.0 / 0.0 AS x;
+SELECT 0.0 / 0.0 AS x;
+SELECT -1.0 / 0.0 AS x;
+```
+
+<div class="narrow_table monospace_table"></div>
+
+| Expression | DuckDB |  IEEE 754 |
+| :--------- | -----: | --------: |
+| 1.0 / 0.0  |   NULL |  Infinity |
+| 0.0 / 0.0  |   NULL |       Nan |
+| -1.0 / 0.0 |   NULL | -Infinity |
+
+To see the differences between DuckDB and PostgreSQL, see the [PostgreSQL Compatibility page]({% link docs/sql/postgresql_compatibility.md %}).
+
 ## Universally Unique Identifiers (`UUID`s)
 
 DuckDB supports universally unique identifiers (UUIDs) through the `UUID` type. These use 128 bits and are represented internally as `HUGEINT` values.
