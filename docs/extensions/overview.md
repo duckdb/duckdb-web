@@ -56,23 +56,9 @@ To make an extension that is not built-in available in DuckDB, two steps need to
 directory for the installed extension, then load it to make its features available. This means that every time DuckDB is restarted, all
 extensions that are used need to be (re)loaded
 
+    > Once loaded, an extension cannot be reinstalled. It is not possible to unload an extension.
+
 There are 2 main methods of making DuckDB perform the **installation** and **loading** steps for an installable extension: **explicitly** and through **autoloading**.
-
-### Autoloading Extensions
-
-For many of DuckDB's core extensions, explicitly loading and installing extensions is not necessary. DuckDB contains an autoloading mechanism
-which can install and load the core extensions as soon as they are used in a query. For example, when running:
-
-```sql
-SELECT *
-FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv';
-```
-
-DuckDB will automatically install and load the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) extension. No explicit `INSTALL` or `LOAD` statements are required.
-
-Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes to the running DuckDB instance, making autoloading technically not (yet) possible. For others, it is prefered to have users opt-in to the extension explicitly before use due to the way they modify behaviour in DuckDB.
-
-To see which extensions can be autoloaded, check the [official extensions list]({% link docs/extensions/official_extensions.md %}).
 
 ### Explicit `INSTALL` and `LOAD`
 
@@ -89,6 +75,22 @@ With these statements, DuckDB will ensure the spatial extension is installed (ig
 to `LOAD` the spatial extension (again ignoring the statement if it is already loaded).
 
 After installing/loading an extension, the [`duckdb_extensions` function](#listing-extensions) can be used to get more information.
+
+### Autoloading Extensions
+
+For many of DuckDB's core extensions, explicitly loading and installing extensions is not necessary. DuckDB contains an autoloading mechanism
+which can install and load the core extensions as soon as they are used in a query. For example, when running:
+
+```sql
+SELECT *
+FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv';
+```
+
+DuckDB will automatically install and load the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) extension. No explicit `INSTALL` or `LOAD` statements are required.
+
+Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes to the running DuckDB instance, making autoloading technically not (yet) possible. For others, it is prefered to have users opt-in to the extension explicitly before use due to the way they modify behaviour in DuckDB.
+
+To see which extensions can be autoloaded, check the [official extensions list]({% link docs/extensions/official_extensions.md %}).
 
 ### Installing Extensions through Client APIs
 
