@@ -14,7 +14,7 @@ Attach the database `file.db` with the alias inferred from the name (`file`):
 ATTACH 'file.db';
 ```
 
-Attach the database `file.db` with an explicit alias (`file.db`):
+Attach the database `file.db` with an explicit alias (`file_db`):
 
 ```sql
 ATTACH 'file.db' AS file_db;
@@ -38,7 +38,7 @@ Attach the database `file.db` if inferred database alias `file` does not yet exi
 ATTACH IF NOT EXISTS 'file.db';
 ```
 
-Attach the database `file.db` if explicit database alias `file.db` does not yet exist:
+Attach the database `file.db` if explicit database alias `file_db` does not yet exist:
 
 ```sql
 ATTACH IF NOT EXISTS 'file.db' AS file_db;
