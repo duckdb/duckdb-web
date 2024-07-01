@@ -856,6 +856,10 @@
           ]
         },
         {
+          "page": "Data Sources",
+          "url": "data_sources"
+        },
+        {
           "page": "Extensions",
           "slug": "extensions",
           "subfolderitems": [
