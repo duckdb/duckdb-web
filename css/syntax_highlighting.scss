@@ -12,9 +12,13 @@
 }
 
 // keywords and properties
-.highlight :is(.k, .kc, .kd, .kn, .kr, .kt, .kv, .py){
+.highlight :is(.k, .kc, .kd, .kn, .kr, .kt, .kv){
 	color: #0098dd;
 	font-family: $fontMonoBold;
+}
+
+.highlight :is(.py) {
+	color: #a05a48;
 }
 
 // numbers
