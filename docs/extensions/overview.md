@@ -58,7 +58,7 @@ extensions that are used need to be (re)loaded
 
     > Once loaded, an extension cannot be reinstalled. It is not possible to unload an extension.
 
-There are 2 main methods of making DuckDB perform the **installation** and **loading** steps for an installable extension: **explicitly** and through **autoloading**.
+There are two main methods of making DuckDB perform the **installation** and **loading** steps for an installable extension: **explicitly** and through **autoloading**.
 
 ### Explicit `INSTALL` and `LOAD`
 
