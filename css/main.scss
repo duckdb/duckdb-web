@@ -1197,7 +1197,7 @@ body.tmguidelines{
 @import url(home.css?add4c80c);
 
 @media print {
-	header {
+	header, footer {
 		display: none !important;
 	}
 }
