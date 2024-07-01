@@ -528,3 +528,9 @@ footer{
 		row-gap: 50px;
 	}
 }
+
+@media print {
+	section.recentposts {
+		display: none !important;
+	}
+}
