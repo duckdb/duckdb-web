@@ -1195,3 +1195,9 @@ body.tmguidelines{
 @import url(copy_button.css);
 @import url(search.css?add4c80c);
 @import url(home.css?add4c80c);
+
+@media print {
+	header {
+		display: none !important;
+	}
+}
