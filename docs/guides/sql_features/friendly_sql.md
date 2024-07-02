@@ -38,6 +38,7 @@ DuckDB offers several advanced SQL features as well syntactic sugar to make SQL 
 * Advanced aggregation features for analytical (OLAP) queries:
     * [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %})
     * [`GROUPING SETS`, `GROUP BY CUBE`, `GROUP BY ROLLUP` clauses]({% link docs/sql/query_syntax/grouping_sets.md %})
+* [`count()` shorthand]({% link docs/sql/aggregates.md %}) for `count(*)`
 
 ## Literals and Identifiers
 
