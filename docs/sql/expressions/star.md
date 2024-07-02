@@ -18,6 +18,12 @@ Count the number of rows in a table:
 SELECT count(*) FROM table_name;
 ```
 
+DuckDB offers a shorthand for `count(*)` expressions where the `*` may be omitted:
+
+```sql
+SELECT count() FROM table_name;
+```
+
 Select all columns from the table called `table_name`:
 
 ```sql
