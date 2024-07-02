@@ -50,4 +50,4 @@ Since version 0.4.0, only major and minor versions get a codename.
 
 <!-- markdownlint-enable MD055 MD056 -->
 
-You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.csv) and analyze it using DuckDB's [CSV reader]({% link docs/data/csv/overview.md %}).
+You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.csv) and analyze it using DuckDB's [CSV reader]({% link docs/data/csv/overview.md %}). This also [works in the online DuckDB shell](https://shell.duckdb.org/#queries=v0,SELECT-release_date%2C-version_number%2C-codename%2C-duck_species_primary%2C-duck_species_secondary%0AFROM-'https%3A%2F%2Fduckdb.org%2Fdata%2Fduckdb%20releases.csv'~).
