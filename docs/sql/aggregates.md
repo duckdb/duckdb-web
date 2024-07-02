@@ -230,7 +230,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the number of tuples in `arg`. |
+| **Description** | Calculates the number of tuples in `arg`. If no `arg` is provided, the expression is evaluated as `count(*)`. |
 | **Example** | `count(A)` |
 | **Alias(es)** | - |
 
