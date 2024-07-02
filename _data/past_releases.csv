@@ -16,6 +16,7 @@ release_date,version_number,codename,duck_species_primary,duck_species_secondary
 2022-09-19,0.5.1,,,,,
 2022-09-05,0.5.0,Pulchellus,Nettapus pulchellus,Green pygmy goose,https://en.wikipedia.org/wiki/Green_pygmy_goose,
 2022-06-20,0.4.0,Ferruginea,Oxyura ferruginea,Andean duck,https://en.wikipedia.org/wiki/Andean_duck,
+2022-04-25,0.3.4,,,,,
 2022-04-11,0.3.3,Sansaniensis,Chenoanas sansaniensis,,https://species.wikimedia.org/wiki/Chenoanas_sansaniensis,
 2022-02-07,0.3.2,Gibberifrons,Anas gibberifrons,Sunda teal,https://en.wikipedia.org/wiki/Sunda_teal,
 2021-11-16,0.3.1,Spectabilis,Somateria spectabilis,King eider,https://en.wikipedia.org/wiki/King_eider,
