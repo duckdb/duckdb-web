@@ -69,7 +69,8 @@ The `delta` extension requires DuckDB version 0.10.3 or newer.
 
 The `delta` extension currently only supports the following platforms:
 
-* Linux AMD64 (x86_64): `linux_amd64` and `linux_amd64_gcc4`
+* Linux AMD64 (x86_64 and ARM64): `linux_amd64`, `linux_amd64_gcc4`, and `linux_arm64`
 * macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
+* Windows AMD64: `windows_amd64`
 
 Support for the [other DuckDB platforms]({% link docs/extensions/working_with_extensions.md %}#platforms) is work-in-progress.
