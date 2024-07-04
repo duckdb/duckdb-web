@@ -15,7 +15,7 @@ repo:
   github: pdet/Scrooge-McDuck
   ref: 9520aeba138a6bb43f766ed4f78accac026bfae0
 
-extension_star_count: 111
+extension_star_count: 113
 ---
 
 ### Installing and Loading
