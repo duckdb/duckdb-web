@@ -4,7 +4,7 @@ title: Configuration
 ---
 
 Configuration options can be provided to change different settings of the database system. Note that many of these
-settings can be changed later on using [`PRAGMA` statements]({% link docs/configuration/pragmas.md %}) as well. The configuration object
+settings can be changed later on using [`PRAGMA` statements](../../configuration/pragmas) as well. The configuration object
 should be created, filled with values and passed to `duckdb_open_ext`.
 
 ## Example
@@ -55,9 +55,6 @@ through `duckdb_open_ext`.
 The duckdb_config must be destroyed using 'duckdb_destroy_config'
 
 This will always succeed unless there is a malloc failure.
-
-Note that `duckdb_destroy_config` should always be called on the resulting config, even if the function returns
-`DuckDBError`.
 
 #### Syntax
 

@@ -186,7 +186,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 ### `duckdb_create_array_value`
 
 ---
-Creates an array value from a type and an array of values of length `value_count`
+Creates a array value from a type and an array of values of length `value_count`
 
 #### Syntax
 
