@@ -49,3 +49,6 @@ LOAD {{ page.extension.name }};
 | sqlite_all_varchar | Load all SQLite columns as VARCHAR columns | BOOLEAN    | GLOBAL |
 
 
+
+---
+

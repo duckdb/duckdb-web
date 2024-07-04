@@ -43,3 +43,6 @@ LOAD {{ page.extension.name }};
 | ignore_sigpipe | Ignore SIGPIPE | BOOLEAN    | GLOBAL |
 
 
+
+---
+

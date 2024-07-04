@@ -64,4 +64,5 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
+---
 

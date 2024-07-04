@@ -55,3 +55,6 @@ LOAD {{ page.extension.name }};
 | eth_node_url | URL of Ethereum node to be queried | VARCHAR    | GLOBAL |
 
 
+
+---
+
