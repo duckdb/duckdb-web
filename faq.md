@@ -222,6 +222,7 @@ Compatibility is also guaranteed between different DuckDB clients (e.g., Python 
 <div class="answer" markdown="1">
 
 DuckDB was designed with both data science and data engineering workloads in mind.
+Therefore, you can use DuckDB's SQL syntax to be highly flexible, or very precise, depending on your needs.
 
 For data science users, who often run queries in an interactive fashion, DuckDB offers several mechanisms for quickly exploring data sets.
 For example, CSV files can be loaded by [auto-inferring their schema]({% link docs/data/csv/auto_detection.md %}) using `CREATE TABLE tbl AS FROM 'input.csv'`.
