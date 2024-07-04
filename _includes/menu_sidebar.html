@@ -16,18 +16,8 @@
 		{% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
 	{% endif %}
 
-	{% if versionviewed contains 'stable' %}
 		{%- assign menudocfile = "menu_docs_dev" -%}
-	{% else %}
-		{%- assign menudocfile = "menu_docs_" | append: versionviewed | replace: ".", "" -%}
-	{% endif %}
 	
-	<div class="opensearch">
-		<span>Search</span>
-		<span class="mac shortcut">cmd+k</span>
-		<span class="win shortcut">ctrl+k</span>
-	</div>
-
 	<ul class="sidenav">
 		{% if site.data[menudocfile].docsmenu %}
 			{% for item in site.data[menudocfile].docsmenu %}
@@ -51,7 +41,7 @@
 					{%- if urlContains %} active opened{% endif -%}
 					{%- if item.mainfolderitems[0] %} hasSub{% endif -%}
 				">
-				{% if item.url %} <a href="{{ base_slash }}{{ site.baseurl }}{{startingUrl}}{{item.slug}}{{ item.url }}">{{ item.page }}</a> {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {% else %} {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {{ item.page }} {% endif %} </li>
+				{% if item.url %} <a href="{{ item.url }}">{{ item.page }}</a> {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {% else %} {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {{ item.page }} {% endif %} </li>
 			
 				{% if item.mainfolderitems[0] %}
 					<ul style="display: {% if urlContains %}block;{% else %}none{% endif %}">
@@ -63,7 +53,7 @@
 								{%- if mainentry.subfolderitems[0] %} hasSub{% endif -%}
 								{%- if mainentry.open or urlParts contains mainentry.url or urlParts contains mainentry.slug %} opened{% endif -%}
 							">
-							{% if mainentry.url %} <a href="{{ site.baseurl }}/{{startingUrl}}{{item.slug}}{{ mainentry.url }}">{{ mainentry.page }}</a> {% if mainentry.subfolderitems[0] %} <span class="show"></span> {% endif %} {% else %} {{ mainentry.page }} {% if mainentry.subfolderitems[0] %} <span class="show"></span> {% endif %} {% endif %} </li>
+							{% if mainentry.url %} <a href="{{ mainentry.url }}">{{ mainentry.page }}</a> {% if mainentry.subfolderitems[0] %} <span class="show"></span> {% endif %} {% else %} {{ mainentry.page }} {% if mainentry.subfolderitems[0] %} <span class="show"></span> {% endif %} {% endif %} </li>
 						{% if mainentry.subfolderitems[0] %}
 						<ul style="display:{% if mainentry.open or urlParts contains mainentry.url or urlParts contains mainentry.slug %}block{% else %}none{% endif %};">
 							{% for entry in mainentry.subfolderitems %}
@@ -73,7 +63,7 @@
 									{%- if entry.subsubfolderitems[0] %} hasSub{% endif -%}
 									{%- if entry.open or urlParts contains entry.url or urlParts contains entry.slug %} opened{% endif -%}
 								">
-								{% if entry.url %} <a href="{{ site.baseurl }}/{{startingUrl}}{{item.slug}}{{mainentry.slug}}/{{ entry.url }}">{{ entry.page }}</a> {% if entry.subsubfolderitems[0] %} <span class="show"></span> {% endif %} {% else %} {{ entry.page }} {% if entry.subsubfolderitems[0] %} <span class="show"></span> {% endif %} {% endif %}
+								{% if entry.url %} <a href="{{ entry.url }}">{{ entry.page }}</a> {% if entry.subsubfolderitems[0] %} <span class="show"></span> {% endif %} {% else %} {{ entry.page }} {% if entry.subsubfolderitems[0] %} <span class="show"></span> {% endif %} {% endif %}
 							</li>
 							{% endif %}
 							{% if entry.subsubfolderitems[0] %}
@@ -84,7 +74,7 @@
 									{%- if urlParts[3] == entry.slug and urlParts[4] == subentry.url %} active{% endif -%}
 									{%- if subentry.open or urlParts contains subentry.url or urlParts contains subentry.slug %} opened{% endif -%}
 								">
-									{% if subentry.url %} <a href="{{ site.baseurl }}/{{startingUrl}}{{item.slug}}{{mainentry.slug}}/{{ entry.slug }}/{{ subentry.url }}"> {{ subentry.page }} </a> {% else %} {{ subentry.page }} {% endif %}
+									{% if subentry.url %} <a href="{{ subentry.url }}"> {{ subentry.page }} </a> {% else %} {{ subentry.page }} {% endif %}
 								</li>
 								{% endif %}
 								{% endfor %}

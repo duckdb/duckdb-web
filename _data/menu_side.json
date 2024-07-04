@@ -1,28 +1,12 @@
 {
   "sidemenu": [
     {
-      "page": "Sitemap",
-      "url": "/docs"
-    },
-    {
       "page": "Why DuckDB",
-      "url": "/why_duckdb"
-    },
-    {
-      "page": "Media",
-      "url": "/media"
-    },
-    {
-      "page": "FAQ",
-      "url": "/faq"
+      "url": "https://duckdb.org/why_duckdb"
     },
     {
       "page": "Code of Conduct",
-      "url": "/code_of_conduct"
-    },
-    {
-      "page": "Live Demo",
-      "url": "https://shell.duckdb.org"
+      "url": "https://duckdb.org/code_of_conduct"
     }
   ]
 }

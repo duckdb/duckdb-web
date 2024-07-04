@@ -5,49 +5,15 @@
       "mainfolderitems": [
         {
           "page": "Documentation",
-          "url": "/docs/",
-          "subfolderitems": [
-            {
-              "page": "Installation",
-              "url": "/docs/installation/"
-            },
-            {
-              "page": "How-to guides",
-              "url": "/docs/guides/index"
-            },
-            {
-              "page": "Data import",
-              "url": "/docs/data/overview"
-            },
-            {
-              "page": "Client APIs",
-              "url": "/docs/api/overview"
-            },
-            {
-              "page": "SQL",
-              "url": "/docs/sql/introduction"
-            },
-            {
-              "page": "Why DuckDB",
-              "url": "/why_duckdb"
-            },
-            {
-              "page": "Media",
-              "url": "/media"
-            },
-            {
-              "page": "FAQ",
-              "url": "/faq"
-            }
-          ]
+          "url": "https://duckdb.org/docs/"
+        },
+        {
+          "page": "Contribute",
+          "url": "https://github.com/duckdb/community-extensions/"
         },
         {
           "page": "Blog",
-          "url": "/news/"
-        },
-        {
-          "page": "GitHub",
-          "url": "https://github.com/duckdb/duckdb"
+          "url": "https://duckdb.org/news/"
         }
       ]
     }
