@@ -82,7 +82,7 @@ The CLI supports [autocompletion]({% link docs/api/cli/autocomplete.md %}), and 
 
 ### Exiting the CLI
 
-To exit the CLI, press `Ctrl`+`D` if your platform supports it. Otherwise, press `Ctrl`+`C` or use the `.exit` command. If used a persistent database, DuckDB will automatically checkpoint (save the latest edits to disk) and close. This will remove the `.wal` file (the Write-Ahead-Log) and consolidate all of your data into the single-file database.
+To exit the CLI, press `Ctrl`+`D` if your platform supports it. Otherwise, press `Ctrl`+`C` or use the `.exit` command. If used a persistent database, DuckDB will automatically checkpoint (save the latest edits to disk) and close. This will remove the `.wal` file (the [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging)) and consolidate all of your data into the single-file database.
 
 ### Dot Commands
 
