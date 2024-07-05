@@ -81,7 +81,7 @@ SET max_temp_directory_size = '4GB';
 ## Extensions
 
 DuckDB has a powerful extension mechanism, which have the same privileges as the user running DuckDB's (parent) process.
-This introduces security considerations. Therefore, we recommend reviewing the configuration options for [securing extensions]({% link docs/guides/using_duckdb/securing_extensions.md %}).
+This introduces security considerations. Therefore, we recommend reviewing the configuration options for [securing extensions]({% link docs/operations_manual/securing_duckdb/securing_extensions.md %}).
 
 ## Generic Solutions
 

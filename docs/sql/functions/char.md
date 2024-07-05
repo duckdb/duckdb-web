@@ -820,7 +820,7 @@ These functions are used to measure the similarity of two strings using various 
 
 ### `fmt` Syntax
 
-The `format(format, parameters...)` function formats strings, loosely following the syntax of the [{fmt} open-source formatting library](https://fmt.dev/latest/syntax.html).
+The `format(format, parameters...)` function formats strings, loosely following the syntax of the [{fmt} open-source formatting library](https://fmt.dev/latest/syntax/).
 
 Format without additional parameters:
 

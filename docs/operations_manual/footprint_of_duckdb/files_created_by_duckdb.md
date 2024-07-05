@@ -28,4 +28,4 @@ DuckDB creates the following files and directories in the working directory (for
 | `⟨database_filename⟩.wal` | [Write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) file. | `weather.wal` | Yes |
 
 If you are working in a Git repository and would like to disable tracking these files by Git,
-see the instructions on using [`.gitignore` for DuckDB]({% link docs/guides/using_duckdb/gitignore_for_duckdb.md %}).
+see the instructions on using [`.gitignore` for DuckDB]({% link docs/operations_manual/footprint_of_duckdb/gitignore_for_duckdb.md %}).

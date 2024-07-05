@@ -1310,34 +1310,46 @@
               ]
             },
             {
-              "page": "Using DuckDB",
-              "slug": "using_duckdb",
-              "subsubfolderitems": [
-                {
-                  "page": "Files Created by DuckDB",
-                  "url": "files_created_by_duckdb"
-                },
-                {
-                  "page": "Gitignore for DuckDB",
-                  "url": "gitignore_for_duckdb"
-                },
-                {
-                  "page": "Securing DuckDB",
-                  "url": "securing_duckdb"
-                },
-                {
-                  "page": "Securing Extensions",
-                  "url": "securing_extensions"
-                }
-              ]
-            },
-            {
               "page": "Glossary of Terms",
               "url": "glossary"
             },
             {
               "page": "Browse Offline",
               "url": "offline-copy"
+            }
+          ]
+        },
+        {
+          "page": "Operations Manual",
+          "slug": "operations_manual",
+          "subfolderitems": [
+            {
+              "page": "DuckDB's Footprint",
+              "slug": "footprint_of_duckdb",
+              "subsubfolderitems": [
+                {
+                "page": "Files Created by DuckDB",
+                "url": "files_created_by_duckdb"
+                },
+                {
+                  "page": "Gitignore for DuckDB",
+                  "url": "gitignore_for_duckdb"
+                }
+              ]
+            },
+            {
+              "page": "Securing DuckDB",
+              "slug": "securing_duckdb",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Securing Extensions",
+                  "url": "securing_extensions"
+                }
+              ]
             }
           ]
         },
@@ -1353,7 +1365,7 @@
               "page": "Testing",
               "slug": "sqllogictest",
               "subsubfolderitems": [
-                  {
+                {
                   "page": "Overview",
                   "url": "overview"
                 },
