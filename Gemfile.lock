@@ -1,12 +1,5 @@
 GIT
-  remote: https://github.com/duckdb/rouge.git
-  revision: da879736b75efef4eb3c753eda6a61efeecc4d2e
-  branch: duckdb
-  specs:
-    rouge (3.3823.1)
-
-GIT
-  remote: https://github.com/jekyll/minima.git
+  remote: https://github.com/duckdb/minima.git
   revision: 1d5286cf9a1aae34078420d183d560dd673d98b5
   branch: master
   specs:
@@ -14,6 +7,13 @@ GIT
       jekyll (>= 3.5, < 5.0)
       jekyll-feed (~> 0.9)
       jekyll-seo-tag (~> 2.1)
+
+GIT
+  remote: https://github.com/duckdb/rouge.git
+  revision: da879736b75efef4eb3c753eda6a61efeecc4d2e
+  branch: duckdb
+  specs:
+    rouge (3.3823.1)
 
 GEM
   remote: https://rubygems.org/
