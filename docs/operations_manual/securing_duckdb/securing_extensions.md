@@ -26,7 +26,7 @@ DuckDB offers the following security levels for extensions.
 | core and community | Extensions can only be installed from the `core` and `community` repositories. | This is the default security level. |
 | any extension incl. unsigned | Any extensions can be installed. | `SET allow_unsigned_extensions = true` |
 
-Security-related configuration settings [lock themselves]({% link docs/guides/using_duckdb/securing_duckdb.md %}#locking-configurations), i.e., it is only possible to restrict capabilities in the current process.
+Security-related configuration settings [lock themselves]({% link docs/operations_manual/securing_duckdb/overview.md %}#locking-configurations), i.e., it is only possible to restrict capabilities in the current process.
 
 For example, attempting the following configuration changes will result in an error:
 
