@@ -8,6 +8,14 @@ title: Building Instructions
 DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
 Additionally, we recommend using the [Ninja build system](https://ninja-build.org/), which automatically parallelizes the build process.
 
+Clone the DuckDB repository.
+
+```bash
+git clone https://github.com/duckdb/duckdb
+```
+
+We recommend creating a full clone of the repository. Note that the directory uses approximately 1.2 GB of disk space.
+
 ### Linux Packages
 
 Install the required packages with the package manager of your distribution.
