@@ -12,14 +12,14 @@ All official extensions are distributed for the following platforms.
 
 <div class="narrow_table"></div>
 
-| Platform name      | Description                              |
-|--------------------|------------------------------------------|
-| `linux_amd64`      | Linux AMD64 (Node.js packages, etc.)     |
-| `linux_amd64_gcc4` | Linux AMD64 (Python packages, CLI, etc.) |
-| `linux_arm64`      | Linux ARM64 (e.g., AWS Graviton)         |
-| `osx_amd64`        | macOS (Intel CPUs)                       |
-| `osx_arm64`        | macOS (Apple Silicon: M1, M2, M3 CPUs)   |
-| `windows_amd64`    | Windows on Intel and AMD CPUs (x86_64)   |
+| Platform name      | Operating system | Architecture    | CPU types                       | Used by                      |
+|--------------------|------------------|-----------------|---------------------------------|------------------------------|
+| `linux_amd64`      | Linux            | x86_64  (AMD64) |                                 | Node.js packages, etc.       |
+| `linux_amd64_gcc4` | Linux            | x86_64  (AMD64) |                                 | Python packages, CLI, etc.   |
+| `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc.  | all packages                 |
+| `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                           | all packages                 |
+| `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.      | all packages                 |
+| `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.                | all packages                 |
 
 > For some Linux ARM distributions (e.g., Python), two different binaries are distributed. These target either the `linux_arm64` or `linux_arm64_gcc4` platforms. Note that extension binaries are distributed for the first, but not the second. Effectively that means that on these platforms your glibc version needs to be 2.28 or higher to use the distributed extension binaries.
 
