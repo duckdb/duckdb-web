@@ -1320,6 +1320,14 @@
                 {
                   "page": "Gitignore for DuckDB",
                   "url": "gitignore_for_duckdb"
+                },
+                {
+                  "page": "Securing DuckDB",
+                  "url": "securing_duckdb"
+                },
+                {
+                  "page": "Securing Extensions",
+                  "url": "securing_extensions"
                 }
               ]
             },
