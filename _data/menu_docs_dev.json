@@ -160,6 +160,10 @@
                   "url": "data_chunk"
                 },
                 {
+                  "page": "Vectors",
+                  "url": "vector"
+                },
+                {
                   "page": "Values",
                   "url": "value"
                 },
