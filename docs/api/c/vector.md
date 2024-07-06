@@ -19,34 +19,34 @@ For primitive types, the underlying array can be obtained using the `duckdb_vect
 
 |       duckdb_type        |    NativeType    |
 |--------------------------|------------------|
-| DUCKDB_TYPE_BOOLEAN      | bool             |
-| DUCKDB_TYPE_TINYINT      | int8_t           |
-| DUCKDB_TYPE_SMALLINT     | int16_t          |
-| DUCKDB_TYPE_INTEGER      | int32_t          |
-| DUCKDB_TYPE_BIGINT       | int64_t          |
-| DUCKDB_TYPE_UTINYINT     | uint8_t          |
-| DUCKDB_TYPE_USMALLINT    | uint16_t         |
-| DUCKDB_TYPE_UINTEGER     | uint32_t         |
-| DUCKDB_TYPE_UBIGINT      | uint64_t         |
-| DUCKDB_TYPE_FLOAT        | float            |
-| DUCKDB_TYPE_DOUBLE       | double           |
-| DUCKDB_TYPE_TIMESTAMP    | duckdb_timestamp |
-| DUCKDB_TYPE_DATE         | duckdb_date      |
-| DUCKDB_TYPE_TIME         | duckdb_time      |
-| DUCKDB_TYPE_INTERVAL     | duckdb_interval  |
-| DUCKDB_TYPE_HUGEINT      | duckdb_hugeint   |
-| DUCKDB_TYPE_UHUGEINT     | duckdb_uhugeint  |
-| DUCKDB_TYPE_VARCHAR      | duckdb_string_t  |
-| DUCKDB_TYPE_BLOB         | duckdb_string_t  |
-| DUCKDB_TYPE_TIMESTAMP_S  | duckdb_timestamp |
-| DUCKDB_TYPE_TIMESTAMP_MS | duckdb_timestamp |
-| DUCKDB_TYPE_TIMESTAMP_NS | duckdb_timestamp |
-| DUCKDB_TYPE_UUID         | duckdb_hugeint   |
-| DUCKDB_TYPE_TIME_TZ      | duckdb_time_tz   |
-| DUCKDB_TYPE_TIMESTAMP_TZ | duckdb_timestamp |
+| `DUCKDB_TYPE_BOOLEAN`      | `bool`             |
+| `DUCKDB_TYPE_TINYINT`      | `int8_t`           |
+| `DUCKDB_TYPE_SMALLINT`     | `int16_t`          |
+| `DUCKDB_TYPE_INTEGER`      | `int32_t`          |
+| `DUCKDB_TYPE_BIGINT`       | `int64_t`          |
+| `DUCKDB_TYPE_UTINYINT`     | `uint8_t`          |
+| `DUCKDB_TYPE_USMALLINT`    | `uint16_t`         |
+| `DUCKDB_TYPE_UINTEGER`     | `uint32_t`         |
+| `DUCKDB_TYPE_UBIGINT`      | `uint64_t`         |
+| `DUCKDB_TYPE_FLOAT`        | `float`            |
+| `DUCKDB_TYPE_DOUBLE`       | `double`           |
+| `DUCKDB_TYPE_TIMESTAMP`    | `duckdb_timestamp` |
+| `DUCKDB_TYPE_DATE`         | `duckdb_date`      |
+| `DUCKDB_TYPE_TIME`         | `duckdb_time`      |
+| `DUCKDB_TYPE_INTERVAL`     | `duckdb_interval`  |
+| `DUCKDB_TYPE_HUGEINT`      | `duckdb_hugeint`   |
+| `DUCKDB_TYPE_UHUGEINT`     | `duckdb_uhugeint`  |
+| `DUCKDB_TYPE_VARCHAR`      | `duckdb_string_t`  |
+| `DUCKDB_TYPE_BLOB`         | `duckdb_string_t`  |
+| `DUCKDB_TYPE_TIMESTAMP_S`  | `duckdb_timestamp` |
+| `DUCKDB_TYPE_TIMESTAMP_MS` | `duckdb_timestamp` |
+| `DUCKDB_TYPE_TIMESTAMP_NS` | `duckdb_timestamp` |
+| `DUCKDB_TYPE_UUID`         | `duckdb_hugeint`   |
+| `DUCKDB_TYPE_TIME_TZ`      | `duckdb_time_tz`   |
+| `DUCKDB_TYPE_TIMESTAMP_TZ` | `duckdb_timestamp` |
 
 ### Null Values
-Any value in a vector can be `NULL`. When a value is `NULL`, the values contained within the primary array is undefined (and can be uninitialized). The validity mask is a bitmask consisting of `uint64_t` elements. For every `64` values in the vector, one `uint64_t` element exists (rounded up). The validity mask has its bit set to 1 if the value is valid, or set to 0 if the value is invalid (i.e .`NULL`).
+Any value in a vector can be `NULL`. When a value is `NULL`, the values contained within the primary array at that index is undefined (and can be uninitialized). The validity mask is a bitmask consisting of `uint64_t` elements. For every `64` values in the vector, one `uint64_t` element exists (rounded up). The validity mask has its bit set to 1 if the value is valid, or set to 0 if the value is invalid (i.e .`NULL`).
 
 The bits of the bitmask can be read directly, or the slower helper method `duckdb_validity_row_is_valid` can be used to check whether or not a value is `NULL`.
 
@@ -56,7 +56,7 @@ The `duckdb_vector_get_validity` returns a pointer to the validity mask. Note th
 ### Strings
 String values are stored as a `duckdb_string_t`. This is a special struct that stores the string inline (if it is short, i.e. `<= 12 bytes`) or a pointer to the string data if it is longer than `12` bytes.
 
-```cpp
+```c
 typedef struct {
 	union {
 		struct {
@@ -80,10 +80,10 @@ Decimals are stored as integer values internally. The exact native type depends 
 
 | Width |   NativeType   |
 |-------|----------------|
-| <=4   | int16_t        |
-| <=9   | int32_t        |
-| <=18  | int64_t        |
-| <=38  | duckdb_hugeint |
+| `<=4`   | `int16_t`        |
+| `<=9`   | `int32_t`        |
+| `<=18`  | `int64_t`        |
+| `<=38`  | `duckdb_hugeint` |
 
 The `duckdb_decimal_internal_type` can be used to obtain the internal type of the decimal.
 
@@ -95,9 +95,9 @@ Enums are stored as unsigned integer values internally. The exact native type de
 
 | Dictionary Size | NativeType |
 |-----------------|------------|
-| <=255           | uint8_t    |
-| <=65535         | uint16_t   |
-| <=4294967295    | uint32_t   |
+| `<=255`           | `uint8_t`    |
+| `<=65535`         | `uint16_t`   |
+| `<=4294967295`    | `uint32_t`   |
 
 The `duckdb_enum_internal_type` can be used to obtain the internal type of the enum.
 
@@ -113,7 +113,7 @@ Lists are nested types that contain a single child type, repeated `x` times per 
 
 The `duckdb_vector_get_data` must be used to get the offsets and lengths of the lists stored as `duckdb_list_entry`, that can then be applied to the child vector.
 
-```cpp
+```c
 typedef struct {
 	uint64_t offset;
 	uint64_t length;
@@ -134,7 +134,7 @@ Below are several full end-to-end examples of how to interact with vectors.
 
 ### Example: Reading an int64 vector with `NULL` values
 
-```cpp
+```c
 duckdb_database db;
 duckdb_connection con;
 duckdb_open(nullptr, &db);
@@ -175,7 +175,7 @@ duckdb_close(&db);
 
 ### Example: Reading a string vector
 
-```cpp
+```c
 duckdb_database db;
 duckdb_connection con;
 duckdb_open(nullptr, &db);
@@ -224,7 +224,7 @@ duckdb_close(&db);
 
 ### Example: Reading a struct vector
 
-```cpp
+```c
 duckdb_database db;
 duckdb_connection con;
 duckdb_open(nullptr, &db);
@@ -288,7 +288,7 @@ duckdb_close(&db);
 
 ### Example: Reading a list vector
 
-```cpp
+```c
 duckdb_database db;
 duckdb_connection con;
 duckdb_open(nullptr, &db);
