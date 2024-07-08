@@ -864,6 +864,19 @@ td.icon{
 		font-family: $fontMono;
 	}
 }
+.extension_functions_table + table{
+	td:nth-child(1),
+	td:nth-child(5) {
+		font-family: $fontMono;
+	}
+}
+.extension_settings_table + table{
+	td:nth-child(1),
+	td:nth-child(3),
+	td:nth-child(4), {
+		font-family: $fontMono;
+	}
+}
 .nostroke_table + table{
 	tr{
 		border: 0;

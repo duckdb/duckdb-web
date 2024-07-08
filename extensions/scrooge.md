@@ -62,6 +62,8 @@ LOAD {{ page.extension.name }};
 
 ### Added Functions
 
+<div class="extension_functions_table"></div>
+
 |   function_name    | function_type | description | comment | example |
 |--------------------|---------------|-------------|---------|---------|
 | first_s            | aggregate     |             |         |         |
@@ -74,6 +76,8 @@ LOAD {{ page.extension.name }};
 | yahoo_finance      | table         |             |         |         |
 
 ### Added Settings
+
+<div class="extension_settings_table"></div>
 
 |     name     |            description             | input_type | scope  |
 |--------------|------------------------------------|------------|--------|
