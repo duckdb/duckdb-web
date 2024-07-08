@@ -32,12 +32,16 @@
           "url": "/extensions/prql.html"
         },
         {
+          "page": "quack",
+          "url": "/extensions/quack.html"
+        },
+        {
           "page": "scrooge",
           "url": "/extensions/scrooge.html"
         },
         {
-          "page": "quack",
-          "url": "/extensions/quack.html"
+          "page": "shellfs",
+          "url": "/extensions/shellfs.html"
         }
 	]
     },
