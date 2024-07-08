@@ -37,7 +37,6 @@ Note that the result must be destroyed with `duckdb_destroy_data_chunk`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_create_data_chunk</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">column_count
@@ -46,7 +45,6 @@ Note that the result must be destroyed with `duckdb_destroy_data_chunk`.
 
 #### Parameters
 
----
 * `types`
 
 An array of types of the data chunk.
@@ -66,7 +64,6 @@ Destroys the data chunk and de-allocates all memory allocated for that chunk.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_data_chunk</span>(<span class="nv">
 </span>  <span class="kt">duckdb_data_chunk</span> *<span class="nv">chunk
 </span>);
@@ -74,7 +71,6 @@ Destroys the data chunk and de-allocates all memory allocated for that chunk.
 
 #### Parameters
 
----
 * `chunk`
 
 The data chunk to destroy.
@@ -88,7 +84,6 @@ Resets a data chunk, clearing the validity masks and setting the cardinality of 
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_data_chunk_reset</span>(<span class="nv">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
 </span>);
@@ -96,7 +91,6 @@ Resets a data chunk, clearing the validity masks and setting the cardinality of 
 
 #### Parameters
 
----
 * `chunk`
 
 The data chunk to reset.
@@ -110,7 +104,6 @@ Retrieves the number of columns in a data chunk.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_data_chunk_get_column_count</span>(<span class="nv">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
 </span>);
@@ -118,7 +111,6 @@ Retrieves the number of columns in a data chunk.
 
 #### Parameters
 
----
 * `chunk`
 
 The data chunk to get the data from
@@ -138,7 +130,6 @@ It does NOT need to be destroyed.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_data_chunk_get_vector</span>(<span class="nv">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col_idx
@@ -147,7 +138,6 @@ It does NOT need to be destroyed.
 
 #### Parameters
 
----
 * `chunk`
 
 The data chunk to get the data from
@@ -164,7 +154,6 @@ Retrieves the current number of tuples in a data chunk.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_data_chunk_get_size</span>(<span class="nv">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
 </span>);
@@ -172,7 +161,6 @@ Retrieves the current number of tuples in a data chunk.
 
 #### Parameters
 
----
 * `chunk`
 
 The data chunk to get the data from
@@ -189,7 +177,6 @@ Sets the current number of tuples in a data chunk.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_data_chunk_set_size</span>(<span class="nv">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">size
@@ -198,7 +185,6 @@ Sets the current number of tuples in a data chunk.
 
 #### Parameters
 
----
 * `chunk`
 
 The data chunk to set the size in

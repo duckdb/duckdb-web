@@ -143,7 +143,7 @@ For more information about data chunks, see the [documentation on data chunks]({
 ### `duckdb_result_get_chunk`
 
 ---
-**DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
+> Deprecated This method is scheduled for removal in a future release.
 
 Fetches a data chunk from the duckdb_result. This function should be called repeatedly until the result is exhausted.
 
@@ -165,7 +165,9 @@ Use `duckdb_result_chunk_count` to figure out how many chunks there are in the r
 </span>);
 </code></pre></div></div>
 
-#### Parameters* `result`
+#### Parameters
+
+* `result`
 
 The result object to fetch the data chunk from.
 * `chunk_index`
@@ -180,7 +182,7 @@ The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 ### `duckdb_result_is_streaming`
 
 ---
-**DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
+> Deprecated This method is scheduled for removal in a future release.
 
 Checks if the type of the internal result is StreamQueryResult.
 
@@ -205,7 +207,7 @@ Whether or not the result object is of the type StreamQueryResult
 ### `duckdb_result_chunk_count`
 
 ---
-**DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
+> Deprecated This method is scheduled for removal in a future release.
 
 Returns the number of data chunks present in the result.
 
@@ -331,7 +333,9 @@ Decompose a `duckdb_time` object into hour, minute, second and microsecond (stor
 </span>);
 </code></pre></div></div>
 
-#### Parameters* `time`
+#### Parameters
+
+* `time`
 
 The time object, as obtained from a `DUCKDB_TYPE_TIME` column.
 * `returns`

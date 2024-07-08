@@ -72,7 +72,6 @@ If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason 
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_prepare</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
@@ -82,7 +81,6 @@ If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason 
 
 #### Parameters
 
----
 * `connection`
 
 The connection object
@@ -105,7 +103,6 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_prepare</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> *<span class="nv">prepared_statement
 </span>);
@@ -113,7 +110,6 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 
 #### Parameters
 
----
 * `prepared_statement`
 
 The prepared statement to destroy.
@@ -130,7 +126,6 @@ The error message should not be freed. It will be de-allocated when `duckdb_dest
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_prepare_error</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
 </span>);
@@ -138,7 +133,6 @@ The error message should not be freed. It will be de-allocated when `duckdb_dest
 
 #### Parameters
 
----
 * `prepared_statement`
 
 The prepared statement to obtain the error from.
@@ -157,7 +151,6 @@ Returns 0 if the query was not successfully prepared.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_nparams</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
 </span>);
@@ -165,7 +158,6 @@ Returns 0 if the query was not successfully prepared.
 
 #### Parameters
 
----
 * `prepared_statement`
 
 The prepared statement to obtain the number of parameters for.
@@ -182,7 +174,6 @@ Returns NULL if the index is out of range for the provided prepared statement.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_parameter_name</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
@@ -191,7 +182,6 @@ Returns NULL if the index is out of range for the provided prepared statement.
 
 #### Parameters
 
----
 * `prepared_statement`
 
 The prepared statement for which to get the parameter name from.
@@ -207,7 +197,6 @@ Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the stat
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_param_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx
@@ -216,7 +205,6 @@ Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the stat
 
 #### Parameters
 
----
 * `prepared_statement`
 
 The prepared statement.
@@ -236,7 +224,6 @@ Clear the params bind to the prepared statement.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_clear_bindings</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
 </span>);
@@ -250,7 +237,6 @@ Returns the statement type of the statement to be executed
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_statement_type</span> <span class="nv">duckdb_prepared_statement_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">statement
 </span>);
@@ -258,7 +244,6 @@ Returns the statement type of the statement to be executed
 
 #### Parameters
 
----
 * `statement`
 
 The prepared statement.

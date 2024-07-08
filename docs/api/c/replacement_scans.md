@@ -22,7 +22,6 @@ Add a replacement scan definition to the specified database.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_add_replacement_scan</span>(<span class="nv">
 </span>  <span class="kt">duckdb_database</span> <span class="nv">db</span>,<span class="nv">
 </span>  <span class="nv">duckdb_replacement_callback_t</span> <span class="nv">replacement</span>,<span class="nv">
@@ -33,7 +32,6 @@ Add a replacement scan definition to the specified database.
 
 #### Parameters
 
----
 * `db`
 
 The database object to add the replacement scan to
@@ -57,7 +55,6 @@ the replacement scan is performed. If it is not called, the replacement callback
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_set_function_name</span>(<span class="nv">
 </span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">function_name
@@ -66,7 +63,6 @@ the replacement scan is performed. If it is not called, the replacement callback
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -83,7 +79,6 @@ Adds a parameter to the replacement scan function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_add_parameter</span>(<span class="nv">
 </span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">duckdb_value</span> <span class="nv">parameter
@@ -92,7 +87,6 @@ Adds a parameter to the replacement scan function.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -109,7 +103,6 @@ Report that an error has occurred while executing the replacement scan.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_set_error</span>(<span class="nv">
 </span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
@@ -118,7 +111,6 @@ Report that an error has occurred while executing the replacement scan.
 
 #### Parameters
 
----
 * `info`
 
 The info object
