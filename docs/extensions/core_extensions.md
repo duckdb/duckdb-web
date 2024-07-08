@@ -1,9 +1,11 @@
 ---
 layout: docu
-title: Official Extensions
+title: Core Extensions
+redirect_from:
+  - docs/extensions/official_extensions 
 ---
 
-## List of Official Extensions
+## List of Core Extensions
 
 | Name                         | GitHub                                                                           | Description                                                                        | Autoloadable  | Aliases                 |
 |:-----------------------------|----------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------|:--------------|:------------------------|
