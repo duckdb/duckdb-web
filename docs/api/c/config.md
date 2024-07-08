@@ -58,7 +58,6 @@ This will always succeed unless there is a malloc failure.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_create_config</span>(<span class="nv">
 </span>  <span class="kt">duckdb_config</span> *<span class="nv">out_config
 </span>);
@@ -66,7 +65,6 @@ This will always succeed unless there is a malloc failure.
 
 #### Parameters
 
----
 * `out_config`
 
 The result configuration object.
@@ -85,7 +83,6 @@ This should not be called in a loop as it internally loops over all the options.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">size_t</span> <span class="nv">duckdb_config_count</span>(<span class="nv">
 </span>  <span class="nv">
 </span>);
@@ -93,7 +90,6 @@ This should not be called in a loop as it internally loops over all the options.
 
 #### Parameters
 
----
 * `returns`
 
 The amount of config options available.
@@ -110,7 +106,6 @@ The result name or description MUST NOT be freed.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_get_config_flag</span>(<span class="nv">
 </span>  <span class="kt">size_t</span> <span class="nv">index</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_name</span>,<span class="nv">
@@ -120,7 +115,6 @@ The result name or description MUST NOT be freed.
 
 #### Parameters
 
----
 * `index`
 
 The index of the configuration option (between 0 and `duckdb_config_count`)
@@ -148,7 +142,6 @@ This can fail if either the name is invalid, or if the value provided for the op
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_set_config</span>(<span class="nv">
 </span>  <span class="kt">duckdb_config</span> <span class="nv">config</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>,<span class="nv">
@@ -158,7 +151,6 @@ This can fail if either the name is invalid, or if the value provided for the op
 
 #### Parameters
 
----
 * `duckdb_config`
 
 The configuration object to set the option on.
@@ -181,7 +173,6 @@ Destroys the specified configuration object and de-allocates all memory allocate
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_config</span>(<span class="nv">
 </span>  <span class="kt">duckdb_config</span> *<span class="nv">config
 </span>);
@@ -189,7 +180,6 @@ Destroys the specified configuration object and de-allocates all memory allocate
 
 #### Parameters
 
----
 * `config`
 
 The configuration object to destroy.

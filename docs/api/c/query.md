@@ -162,7 +162,6 @@ query fails, otherwise the error stored within the result will not be freed corr
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
@@ -172,7 +171,6 @@ query fails, otherwise the error stored within the result will not be freed corr
 
 #### Parameters
 
----
 * `connection`
 
 The connection to perform the query in.
@@ -195,7 +193,6 @@ Closes the result and de-allocates all memory allocated for that connection.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_result</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
@@ -203,7 +200,6 @@ Closes the result and de-allocates all memory allocated for that connection.
 
 #### Parameters
 
----
 * `result`
 
 The result to destroy.
@@ -220,7 +216,6 @@ Returns `NULL` if the column is out of range.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_column_name</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
@@ -229,7 +224,6 @@ Returns `NULL` if the column is out of range.
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the column name from.
@@ -251,7 +245,6 @@ Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_column_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
@@ -260,7 +253,6 @@ Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the column type from.
@@ -280,7 +272,6 @@ Returns the statement type of the statement that was executed
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_statement_type</span> <span class="nv">duckdb_result_statement_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
@@ -288,7 +279,6 @@ Returns the statement type of the statement that was executed
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the statement type from.
@@ -309,7 +299,6 @@ Returns `NULL` if the column is out of range.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_column_logical_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
@@ -318,7 +307,6 @@ Returns `NULL` if the column is out of range.
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the column type from.
@@ -338,7 +326,6 @@ Returns the number of columns present in a the result object.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_column_count</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
@@ -346,7 +333,6 @@ Returns the number of columns present in a the result object.
 
 #### Parameters
 
----
 * `result`
 
 The result object.
@@ -365,7 +351,6 @@ Returns the number of rows present in the result object.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_row_count</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
@@ -373,7 +358,6 @@ Returns the number of rows present in the result object.
 
 #### Parameters
 
----
 * `result`
 
 The result object.
@@ -391,7 +375,6 @@ queries. For other queries the rows_changed will be 0.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_rows_changed</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
@@ -399,7 +382,6 @@ queries. For other queries the rows_changed will be 0.
 
 #### Parameters
 
----
 * `result`
 
 The result object.
@@ -428,7 +410,6 @@ printf("Data for row %d: %d\n", row, data[row]);
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_column_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
@@ -437,7 +418,6 @@ printf("Data for row %d: %d\n", row, data[row]);
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the column data from.
@@ -471,7 +451,6 @@ printf("Data for row %d: %d\n", row, data[row]);
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> *<span class="nv">duckdb_nullmask_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
@@ -480,7 +459,6 @@ printf("Data for row %d: %d\n", row, data[row]);
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the nullmask from.
@@ -502,7 +480,6 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_result_error</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
@@ -510,7 +487,6 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the error from.

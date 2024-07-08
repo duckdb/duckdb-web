@@ -17,33 +17,35 @@ Vectors themselves do not have sizes. Instead, the parent data chunk has a size 
 
 For primitive types, the underlying array can be obtained using the `duckdb_vector_get_data` method. The array can then be accessed using the correct native type. Below is a table that contains a mapping of the `duckdb_type` to the native type of the array.
 
+<div class="narrow_table monospace_table"></div>
+
 |       duckdb_type        |    NativeType    |
 |--------------------------|------------------|
-| `DUCKDB_TYPE_BOOLEAN`      | `bool`             |
-| `DUCKDB_TYPE_TINYINT`      | `int8_t`           |
-| `DUCKDB_TYPE_SMALLINT`     | `int16_t`          |
-| `DUCKDB_TYPE_INTEGER`      | `int32_t`          |
-| `DUCKDB_TYPE_BIGINT`       | `int64_t`          |
-| `DUCKDB_TYPE_UTINYINT`     | `uint8_t`          |
-| `DUCKDB_TYPE_USMALLINT`    | `uint16_t`         |
-| `DUCKDB_TYPE_UINTEGER`     | `uint32_t`         |
-| `DUCKDB_TYPE_UBIGINT`      | `uint64_t`         |
-| `DUCKDB_TYPE_FLOAT`        | `float`            |
-| `DUCKDB_TYPE_DOUBLE`       | `double`           |
-| `DUCKDB_TYPE_TIMESTAMP`    | `duckdb_timestamp` |
-| `DUCKDB_TYPE_DATE`         | `duckdb_date`      |
-| `DUCKDB_TYPE_TIME`         | `duckdb_time`      |
-| `DUCKDB_TYPE_INTERVAL`     | `duckdb_interval`  |
-| `DUCKDB_TYPE_HUGEINT`      | `duckdb_hugeint`   |
-| `DUCKDB_TYPE_UHUGEINT`     | `duckdb_uhugeint`  |
-| `DUCKDB_TYPE_VARCHAR`      | `duckdb_string_t`  |
-| `DUCKDB_TYPE_BLOB`         | `duckdb_string_t`  |
-| `DUCKDB_TYPE_TIMESTAMP_S`  | `duckdb_timestamp` |
-| `DUCKDB_TYPE_TIMESTAMP_MS` | `duckdb_timestamp` |
-| `DUCKDB_TYPE_TIMESTAMP_NS` | `duckdb_timestamp` |
-| `DUCKDB_TYPE_UUID`         | `duckdb_hugeint`   |
-| `DUCKDB_TYPE_TIME_TZ`      | `duckdb_time_tz`   |
-| `DUCKDB_TYPE_TIMESTAMP_TZ` | `duckdb_timestamp` |
+| DUCKDB_TYPE_BOOLEAN      | bool             |
+| DUCKDB_TYPE_TINYINT      | int8_t           |
+| DUCKDB_TYPE_SMALLINT     | int16_t          |
+| DUCKDB_TYPE_INTEGER      | int32_t          |
+| DUCKDB_TYPE_BIGINT       | int64_t          |
+| DUCKDB_TYPE_UTINYINT     | uint8_t          |
+| DUCKDB_TYPE_USMALLINT    | uint16_t         |
+| DUCKDB_TYPE_UINTEGER     | uint32_t         |
+| DUCKDB_TYPE_UBIGINT      | uint64_t         |
+| DUCKDB_TYPE_FLOAT        | float            |
+| DUCKDB_TYPE_DOUBLE       | double           |
+| DUCKDB_TYPE_TIMESTAMP    | duckdb_timestamp |
+| DUCKDB_TYPE_DATE         | duckdb_date      |
+| DUCKDB_TYPE_TIME         | duckdb_time      |
+| DUCKDB_TYPE_INTERVAL     | duckdb_interval  |
+| DUCKDB_TYPE_HUGEINT      | duckdb_hugeint   |
+| DUCKDB_TYPE_UHUGEINT     | duckdb_uhugeint  |
+| DUCKDB_TYPE_VARCHAR      | duckdb_string_t  |
+| DUCKDB_TYPE_BLOB         | duckdb_string_t  |
+| DUCKDB_TYPE_TIMESTAMP_S  | duckdb_timestamp |
+| DUCKDB_TYPE_TIMESTAMP_MS | duckdb_timestamp |
+| DUCKDB_TYPE_TIMESTAMP_NS | duckdb_timestamp |
+| DUCKDB_TYPE_UUID         | duckdb_hugeint   |
+| DUCKDB_TYPE_TIME_TZ      | duckdb_time_tz   |
+| DUCKDB_TYPE_TIMESTAMP_TZ | duckdb_timestamp |
 
 ### Null Values
 Any value in a vector can be `NULL`. When a value is `NULL`, the values contained within the primary array at that index is undefined (and can be uninitialized). The validity mask is a bitmask consisting of `uint64_t` elements. For every `64` values in the vector, one `uint64_t` element exists (rounded up). The validity mask has its bit set to 1 if the value is valid, or set to 0 if the value is invalid (i.e .`NULL`).
@@ -78,12 +80,14 @@ The length can either be accessed directly, or the `duckdb_string_is_inlined` ca
 
 Decimals are stored as integer values internally. The exact native type depends on the `width` of the decimal type, as shown in the following table:
 
+<div class="narrow_table monospace_table"></div>
+
 | Width |   NativeType   |
 |-------|----------------|
-| `<=4`   | `int16_t`        |
-| `<=9`   | `int32_t`        |
-| `<=18`  | `int64_t`        |
-| `<=38`  | `duckdb_hugeint` |
+| <= 4  | int16_t        |
+| <= 9  | int32_t        |
+| <= 18 | int64_t        |
+| <= 38 | duckdb_hugeint |
 
 The `duckdb_decimal_internal_type` can be used to obtain the internal type of the decimal.
 
@@ -93,22 +97,26 @@ Decimals are stored as integer values multiplied by `10^scale`. The scale of a d
 
 Enums are stored as unsigned integer values internally. The exact native type depends on the size of the enum dictionary, as shown in the following table:
 
+<div class="narrow_table monospace_table"></div>
+
 | Dictionary Size | NativeType |
 |-----------------|------------|
-| `<=255`           | `uint8_t`    |
-| `<=65535`         | `uint16_t`   |
-| `<=4294967295`    | `uint32_t`   |
+| <= 255          | uint8_t    |
+| <= 65535        | uint16_t   |
+| <= 4294967295   | uint32_t   |
 
 The `duckdb_enum_internal_type` can be used to obtain the internal type of the enum.
 
 In order to obtain the actual string value of the enum, the `duckdb_enum_dictionary_value` function must be used to obtain the enum value that corresponds to the given dictionary entry. Note that the enum dictionary is the same for the entire column - and so only needs to be constructed once.
 
 ### Structs
+
 Structs are nested types that contain any number of child types. Think of them like a `struct` in C. The way to access struct data using vectors is to access the child vectors recursively using the `duckdb_struct_vector_get_child` method.
 
 The struct vector itself does not have any data (i.e. you should not use `duckdb_vector_get_data` method on the struct). **However**, the struct vector itself **does** have a validity mask. The reason for this is that the child elements of a struct can be `NULL`, but the struct **itself** can also be `NULL`.
 
 ### Lists
+
 Lists are nested types that contain a single child type, repeated `x` times per row. Think of them like a variable-length array in C. The way to access list data using vectors is to access the child vector using the `duckdb_list_vector_get_child` method.
 
 The `duckdb_vector_get_data` must be used to get the offsets and lengths of the lists stored as `duckdb_list_entry`, that can then be applied to the child vector.
@@ -123,16 +131,16 @@ typedef struct {
 Note that both list entries itself **and** any children stored in the lists can also be `NULL`. This must be checked using the validity mask again.
 
 ### Arrays
+
 Arrays are nested types that contain a single child type, repeated exactly `array_size` times per row. Think of them like a fixed-size array in C. Arrays work exactly the same as lists, **except** the length and offset of each entry is fixed. The fixed array size can be obtained by using `duckdb_array_type_array_size`. The data for entry `n` then resides at `offset = n * array_size`, and always has `length = array_size`.
 
 Note that much like lists, arrays can still be `NULL`, which must be checked using the validity mask.
-
 
 ## Examples
 
 Below are several full end-to-end examples of how to interact with vectors.
 
-### Example: Reading an int64 vector with `NULL` values
+### Example: Reading an int64 Vector with `NULL` Values
 
 ```c
 duckdb_database db;
@@ -144,7 +152,7 @@ duckdb_result res;
 duckdb_query(con, "SELECT CASE WHEN i%2=0 THEN NULL ELSE i END res_col FROM range(10) t(i)", &res);
 
 // iterate until result is exhausted
-while(true) {
+while (true) {
 	duckdb_data_chunk result = duckdb_fetch_chunk(res);
 	if (!result) {
 		// result is exhausted
@@ -158,7 +166,7 @@ while(true) {
 	int64_t *vector_data = (int64_t *) duckdb_vector_get_data(res_col);
 	uint64_t *vector_validity = duckdb_vector_get_validity(res_col);
 	// iterate over the rows
-	for(idx_t row = 0; row < row_count; row++) {
+	for (idx_t row = 0; row < row_count; row++) {
 		if (duckdb_validity_row_is_valid(vector_validity, row)) {
 			printf("%lld\n", vector_data[row]);
 		} else {
@@ -173,7 +181,7 @@ duckdb_disconnect(&con);
 duckdb_close(&db);
 ```
 
-### Example: Reading a string vector
+### Example: Reading a String Vector
 
 ```c
 duckdb_database db;
@@ -185,7 +193,7 @@ duckdb_result res;
 duckdb_query(con, "SELECT CASE WHEN i%2=0 THEN CONCAT('short_', i) ELSE CONCAT('longstringprefix', i) END FROM range(10) t(i)", &res);
 
 // iterate until result is exhausted
-while(true) {
+while (true) {
 	duckdb_data_chunk result = duckdb_fetch_chunk(res);
 	if (!result) {
 		// result is exhausted
@@ -199,7 +207,7 @@ while(true) {
 	duckdb_string_t *vector_data = (duckdb_string_t *) duckdb_vector_get_data(res_col);
 	uint64_t *vector_validity = duckdb_vector_get_validity(res_col);
 	// iterate over the rows
-	for(idx_t row = 0; row < row_count; row++) {
+	for (idx_t row = 0; row < row_count; row++) {
 		if (duckdb_validity_row_is_valid(vector_validity, row)) {
 			duckdb_string_t str = vector_data[row];
 			if (duckdb_string_is_inlined(str)) {
@@ -221,8 +229,7 @@ duckdb_disconnect(&con);
 duckdb_close(&db);
 ```
 
-
-### Example: Reading a struct vector
+### Example: Reading a Struct Vector
 
 ```c
 duckdb_database db;
@@ -234,7 +241,7 @@ duckdb_result res;
 duckdb_query(con, "SELECT CASE WHEN i%5=0 THEN NULL ELSE {'col1': i, 'col2': CASE WHEN i%2=0 THEN NULL ELSE 100 + i * 42 END} END FROM range(10) t(i)", &res);
 
 // iterate until result is exhausted
-while(true) {
+while (true) {
 	duckdb_data_chunk result = duckdb_fetch_chunk(res);
 	if (!result) {
 		// result is exhausted
@@ -255,7 +262,7 @@ while(true) {
 	uint64_t *col2_validity = duckdb_vector_get_validity(col2_vector);
 
 	// iterate over the rows
-	for(idx_t row = 0; row < row_count; row++) {
+	for (idx_t row = 0; row < row_count; row++) {
 		if (!duckdb_validity_row_is_valid(struct_validity, row)) {
 			// entire struct is NULL
 			printf("NULL\n");
@@ -286,7 +293,7 @@ duckdb_disconnect(&con);
 duckdb_close(&db);
 ```
 
-### Example: Reading a list vector
+### Example: Reading a List Vector
 
 ```c
 duckdb_database db;
@@ -295,10 +302,10 @@ duckdb_open(nullptr, &db);
 duckdb_connect(db, &con);
 
 duckdb_result res;
-duckdb_query(con, "SELECT CASE WHEN i%5=0 THEN NULL WHEN i%2=0 THEN [i, i + 1] ELSE [i * 42, NULL, i * 84] END FROM range(10) t(i)", &res);
+duckdb_query(con, "SELECT CASE WHEN i % 5 = 0 THEN NULL WHEN i % 2 = 0 THEN [i, i + 1] ELSE [i * 42, NULL, i * 84] END FROM range(10) t(i)", &res);
 
 // iterate until result is exhausted
-while(true) {
+while (true) {
 	duckdb_data_chunk result = duckdb_fetch_chunk(res);
 	if (!result) {
 		// result is exhausted
@@ -316,7 +323,7 @@ while(true) {
 	uint64_t *child_validity = duckdb_vector_get_validity(list_child);
 
 	// iterate over the rows
-	for(idx_t row = 0; row < row_count; row++) {
+	for (idx_t row = 0; row < row_count; row++) {
 		if (!duckdb_validity_row_is_valid(list_validity, row)) {
 			// entire list is NULL
 			printf("NULL\n");
@@ -325,7 +332,7 @@ while(true) {
 		// read the list offsets for this row
 		duckdb_list_entry list = list_data[row];
 		printf("[");
-		for(idx_t child_idx = list.offset; child_idx < list.offset + list.length; child_idx++) {
+		for (idx_t child_idx = list.offset; child_idx < list.offset + list.length; child_idx++) {
 			if (child_idx > list.offset) {
 				printf(", ");
 			}
@@ -381,7 +388,6 @@ The result must be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_vector_get_column_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
@@ -389,7 +395,6 @@ The result must be destroyed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `vector`
 
 The vector get the data from
@@ -409,7 +414,6 @@ How to read or write values depends on the type of the vector.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_vector_get_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
@@ -417,7 +421,6 @@ How to read or write values depends on the type of the vector.
 
 #### Parameters
 
----
 * `vector`
 
 The vector to get the data from
@@ -448,7 +451,6 @@ Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> *<span class="nv">duckdb_vector_get_validity</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
@@ -456,7 +458,6 @@ Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 
 #### Parameters
 
----
 * `vector`
 
 The vector to get the data from
@@ -476,7 +477,6 @@ This allows null values to be written to the vector, regardless of whether a val
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_ensure_validity_writable</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
@@ -484,7 +484,6 @@ This allows null values to be written to the vector, regardless of whether a val
 
 #### Parameters
 
----
 * `vector`
 
 The vector to alter
@@ -498,7 +497,6 @@ Assigns a string element in the vector at the specified location.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_assign_string_element</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index</span>,<span class="nv">
@@ -508,7 +506,6 @@ Assigns a string element in the vector at the specified location.
 
 #### Parameters
 
----
 * `vector`
 
 The vector to alter
@@ -528,7 +525,6 @@ Assigns a string element in the vector at the specified location. You may also u
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_assign_string_element_len</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index</span>,<span class="nv">
@@ -539,7 +535,6 @@ Assigns a string element in the vector at the specified location. You may also u
 
 #### Parameters
 
----
 * `vector`
 
 The vector to alter
@@ -564,7 +559,6 @@ The resulting vector is valid as long as the parent vector is valid.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_list_vector_get_child</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
@@ -572,7 +566,6 @@ The resulting vector is valid as long as the parent vector is valid.
 
 #### Parameters
 
----
 * `vector`
 
 The vector
@@ -589,7 +582,6 @@ Returns the size of the child vector of the list.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_list_vector_get_size</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
@@ -597,7 +589,6 @@ Returns the size of the child vector of the list.
 
 #### Parameters
 
----
 * `vector`
 
 The vector
@@ -614,7 +605,6 @@ Sets the total size of the underlying child-vector of a list vector.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_list_vector_set_size</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">size
@@ -623,7 +613,6 @@ Sets the total size of the underlying child-vector of a list vector.
 
 #### Parameters
 
----
 * `vector`
 
 The list vector.
@@ -643,7 +632,6 @@ Sets the total capacity of the underlying child-vector of a list.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_list_vector_reserve</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">required_capacity
@@ -652,7 +640,6 @@ Sets the total capacity of the underlying child-vector of a list.
 
 #### Parameters
 
----
 * `vector`
 
 The list vector.
@@ -674,7 +661,6 @@ The resulting vector is valid as long as the parent vector is valid.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_struct_vector_get_child</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
@@ -683,7 +669,6 @@ The resulting vector is valid as long as the parent vector is valid.
 
 #### Parameters
 
----
 * `vector`
 
 The vector
@@ -706,7 +691,6 @@ The resulting vector has the size of the parent vector multiplied by the array s
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_array_vector_get_child</span>(<span class="nv">
 </span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
 </span>);
@@ -714,7 +698,6 @@ The resulting vector has the size of the parent vector multiplied by the array s
 
 #### Parameters
 
----
 * `vector`
 
 The vector
@@ -731,7 +714,6 @@ Returns whether or not a row is valid (i.e., not NULL) in the given validity mas
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_validity_row_is_valid</span>(<span class="nv">
 </span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
@@ -740,7 +722,6 @@ Returns whether or not a row is valid (i.e., not NULL) in the given validity mas
 
 #### Parameters
 
----
 * `validity`
 
 The validity mask, as obtained through `duckdb_vector_get_validity`
@@ -763,7 +744,6 @@ to ensure that there is a validity mask to write to.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_validity_set_row_validity</span>(<span class="nv">
 </span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row</span>,<span class="nv">
@@ -773,7 +753,6 @@ to ensure that there is a validity mask to write to.
 
 #### Parameters
 
----
 * `validity`
 
 The validity mask, as obtained through `duckdb_vector_get_validity`.
@@ -795,7 +774,6 @@ Equivalent to `duckdb_validity_set_row_validity` with valid set to false.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_validity_set_row_invalid</span>(<span class="nv">
 </span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
@@ -804,7 +782,6 @@ Equivalent to `duckdb_validity_set_row_validity` with valid set to false.
 
 #### Parameters
 
----
 * `validity`
 
 The validity mask
@@ -823,7 +800,6 @@ Equivalent to `duckdb_validity_set_row_validity` with valid set to true.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_validity_set_row_valid</span>(<span class="nv">
 </span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
@@ -832,7 +808,6 @@ Equivalent to `duckdb_validity_set_row_validity` with valid set to true.
 
 #### Parameters
 
----
 * `validity`
 
 The validity mask

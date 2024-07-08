@@ -64,7 +64,6 @@ The return value should be destroyed with `duckdb_destroy_table_function`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_table_function</span> <span class="nv">duckdb_create_table_function</span>(<span class="nv">
 </span>  <span class="nv">
 </span>);
@@ -72,7 +71,6 @@ The return value should be destroyed with `duckdb_destroy_table_function`.
 
 #### Parameters
 
----
 * `returns`
 
 The table function object.
@@ -86,7 +84,6 @@ Destroys the given table function object.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_table_function</span>(<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> *<span class="nv">table_function
 </span>);
@@ -94,7 +91,6 @@ Destroys the given table function object.
 
 #### Parameters
 
----
 * `table_function`
 
 The table function to destroy
@@ -108,7 +104,6 @@ Sets the name of the given table function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_name</span>(<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
@@ -117,7 +112,6 @@ Sets the name of the given table function.
 
 #### Parameters
 
----
 * `table_function`
 
 The table function
@@ -134,7 +128,6 @@ Adds a parameter to the table function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_add_parameter</span>(<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
@@ -143,7 +136,6 @@ Adds a parameter to the table function.
 
 #### Parameters
 
----
 * `table_function`
 
 The table function
@@ -160,7 +152,6 @@ Adds a named parameter to the table function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_add_named_parameter</span>(<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>,<span class="nv">
@@ -170,7 +161,6 @@ Adds a named parameter to the table function.
 
 #### Parameters
 
----
 * `table_function`
 
 The table function
@@ -190,7 +180,6 @@ Assigns extra information to the table function that can be fetched during bindi
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_extra_info</span>(<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="kt">void</span> *<span class="nv">extra_info</span>,<span class="nv">
@@ -200,7 +189,6 @@ Assigns extra information to the table function that can be fetched during bindi
 
 #### Parameters
 
----
 * `table_function`
 
 The table function
@@ -220,7 +208,6 @@ Sets the bind function of the table function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_bind</span>(<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="nv">duckdb_table_function_bind_t</span> <span class="nv">bind
@@ -229,7 +216,6 @@ Sets the bind function of the table function.
 
 #### Parameters
 
----
 * `table_function`
 
 The table function
@@ -246,7 +232,6 @@ Sets the init function of the table function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_init</span>(<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="nv">duckdb_table_function_init_t</span> <span class="nv">init
@@ -255,7 +240,6 @@ Sets the init function of the table function.
 
 #### Parameters
 
----
 * `table_function`
 
 The table function
@@ -272,7 +256,6 @@ Sets the thread-local init function of the table function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_local_init</span>(<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="nv">duckdb_table_function_init_t</span> <span class="nv">init
@@ -281,7 +264,6 @@ Sets the thread-local init function of the table function.
 
 #### Parameters
 
----
 * `table_function`
 
 The table function
@@ -298,7 +280,6 @@ Sets the main function of the table function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_function</span>(<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="nv">duckdb_table_function_t</span> <span class="nv">function
@@ -307,7 +288,6 @@ Sets the main function of the table function.
 
 #### Parameters
 
----
 * `table_function`
 
 The table function
@@ -328,7 +308,6 @@ If this is set to false (the default), the system will expect all columns to be 
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_supports_projection_pushdown</span>(<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="kt">bool</span> <span class="nv">pushdown
@@ -337,7 +316,6 @@ If this is set to false (the default), the system will expect all columns to be 
 
 #### Parameters
 
----
 * `table_function`
 
 The table function
@@ -358,7 +336,6 @@ If the function is incomplete or a function with this name already exists DuckDB
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_register_table_function</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> <span class="nv">con</span>,<span class="nv">
 </span>  <span class="kt">duckdb_table_function</span> <span class="nv">function
@@ -367,7 +344,6 @@ If the function is incomplete or a function with this name already exists DuckDB
 
 #### Parameters
 
----
 * `con`
 
 The connection to register it in.
@@ -387,7 +363,6 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_bind_get_extra_info</span>(<span class="nv">
 </span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info
 </span>);
@@ -395,7 +370,6 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -412,7 +386,6 @@ Adds a result column to the output of the table function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_add_result_column</span>(<span class="nv">
 </span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>,<span class="nv">
@@ -422,7 +395,6 @@ Adds a result column to the output of the table function.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -442,7 +414,6 @@ Retrieves the number of regular (non-named) parameters to the function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_bind_get_parameter_count</span>(<span class="nv">
 </span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info
 </span>);
@@ -450,7 +421,6 @@ Retrieves the number of regular (non-named) parameters to the function.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -469,7 +439,6 @@ The result must be destroyed with `duckdb_destroy_value`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_bind_get_parameter</span>(<span class="nv">
 </span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
@@ -478,7 +447,6 @@ The result must be destroyed with `duckdb_destroy_value`.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -500,7 +468,6 @@ The result must be destroyed with `duckdb_destroy_value`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_bind_get_named_parameter</span>(<span class="nv">
 </span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
@@ -509,7 +476,6 @@ The result must be destroyed with `duckdb_destroy_value`.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -529,7 +495,6 @@ Sets the user-provided bind data in the bind object. This object can be retrieve
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_set_bind_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">void</span> *<span class="nv">bind_data</span>,<span class="nv">
@@ -539,7 +504,6 @@ Sets the user-provided bind data in the bind object. This object can be retrieve
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -559,7 +523,6 @@ Sets the cardinality estimate for the table function, used for optimization.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_set_cardinality</span>(<span class="nv">
 </span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">cardinality</span>,<span class="nv">
@@ -569,7 +532,6 @@ Sets the cardinality estimate for the table function, used for optimization.
 
 #### Parameters
 
----
 * `info`
 
 The bind data object.
@@ -586,7 +548,6 @@ Report that an error has occurred while calling bind.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_set_error</span>(<span class="nv">
 </span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
@@ -595,7 +556,6 @@ Report that an error has occurred while calling bind.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -612,7 +572,6 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_init_get_extra_info</span>(<span class="nv">
 </span>  <span class="kt">duckdb_init_info</span> <span class="nv">info
 </span>);
@@ -620,7 +579,6 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -640,7 +598,6 @@ For tracking state, use the init data instead.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_init_get_bind_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_init_info</span> <span class="nv">info
 </span>);
@@ -648,7 +605,6 @@ For tracking state, use the init data instead.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -665,7 +621,6 @@ Sets the user-provided init data in the init object. This object can be retrieve
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_init_set_init_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">void</span> *<span class="nv">init_data</span>,<span class="nv">
@@ -675,7 +630,6 @@ Sets the user-provided init data in the init object. This object can be retrieve
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -697,7 +651,6 @@ This function must be used if projection pushdown is enabled to figure out which
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_init_get_column_count</span>(<span class="nv">
 </span>  <span class="kt">duckdb_init_info</span> <span class="nv">info
 </span>);
@@ -705,7 +658,6 @@ This function must be used if projection pushdown is enabled to figure out which
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -724,7 +676,6 @@ This function must be used if projection pushdown is enabled to figure out which
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_init_get_column_index</span>(<span class="nv">
 </span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">column_index
@@ -733,7 +684,6 @@ This function must be used if projection pushdown is enabled to figure out which
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -753,7 +703,6 @@ Sets how many threads can process this table function in parallel (default: 1)
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_init_set_max_threads</span>(<span class="nv">
 </span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">max_threads
@@ -762,7 +711,6 @@ Sets how many threads can process this table function in parallel (default: 1)
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -779,7 +727,6 @@ Report that an error has occurred while calling init.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_init_set_error</span>(<span class="nv">
 </span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
@@ -788,7 +735,6 @@ Report that an error has occurred while calling init.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -805,7 +751,6 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_extra_info</span>(<span class="nv">
 </span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
 </span>);
@@ -813,7 +758,6 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -833,7 +777,6 @@ For tracking state, use the init data instead.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_bind_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
 </span>);
@@ -841,7 +784,6 @@ For tracking state, use the init data instead.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -858,7 +800,6 @@ Gets the init data set by `duckdb_init_set_init_data` during the init.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_init_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
 </span>);
@@ -866,7 +807,6 @@ Gets the init data set by `duckdb_init_set_init_data` during the init.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -883,7 +823,6 @@ Gets the thread-local init data set by `duckdb_init_set_init_data` during the lo
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_local_init_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
 </span>);
@@ -891,7 +830,6 @@ Gets the thread-local init data set by `duckdb_init_set_init_data` during the lo
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -908,7 +846,6 @@ Report that an error has occurred while executing the function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_function_set_error</span>(<span class="nv">
 </span>  <span class="kt">duckdb_function_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
@@ -917,7 +854,6 @@ Report that an error has occurred while executing the function.
 
 #### Parameters
 
----
 * `info`
 
 The info object

@@ -52,7 +52,6 @@ The instantiated database should be closed with 'duckdb_close'.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_open</span>(<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>,<span class="nv">
 </span>  <span class="kt">duckdb_database</span> *<span class="nv">out_database
@@ -61,7 +60,6 @@ The instantiated database should be closed with 'duckdb_close'.
 
 #### Parameters
 
----
 * `path`
 
 Path to the database file on disk, or `nullptr` or `:memory:` to open an in-memory database.
@@ -82,7 +80,6 @@ The instantiated database should be closed with 'duckdb_close'.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_open_ext</span>(<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>,<span class="nv">
 </span>  <span class="kt">duckdb_database</span> *<span class="nv">out_database</span>,<span class="nv">
@@ -93,7 +90,6 @@ The instantiated database should be closed with 'duckdb_close'.
 
 #### Parameters
 
----
 * `path`
 
 Path to the database file on disk, or `nullptr` or `:memory:` to open an in-memory database.
@@ -123,7 +119,6 @@ Still, it is recommended to always correctly close a database object after you a
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_close</span>(<span class="nv">
 </span>  <span class="kt">duckdb_database</span> *<span class="nv">database
 </span>);
@@ -131,7 +126,6 @@ Still, it is recommended to always correctly close a database object after you a
 
 #### Parameters
 
----
 * `database`
 
 The database object to shut down.
@@ -147,7 +141,6 @@ The instantiated connection should be closed using 'duckdb_disconnect'.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_connect</span>(<span class="nv">
 </span>  <span class="kt">duckdb_database</span> <span class="nv">database</span>,<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> *<span class="nv">out_connection
@@ -156,7 +149,6 @@ The instantiated connection should be closed using 'duckdb_disconnect'.
 
 #### Parameters
 
----
 * `database`
 
 The database file to connect to.
@@ -176,7 +168,6 @@ Interrupt running query
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_interrupt</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> <span class="nv">connection
 </span>);
@@ -184,7 +175,6 @@ Interrupt running query
 
 #### Parameters
 
----
 * `connection`
 
 The connection to interrupt
@@ -198,7 +188,6 @@ Get progress of the running query
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_query_progress_type</span> <span class="nv">duckdb_query_progress</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> <span class="nv">connection
 </span>);
@@ -206,7 +195,6 @@ Get progress of the running query
 
 #### Parameters
 
----
 * `connection`
 
 The working connection
@@ -223,7 +211,6 @@ Closes the specified connection and de-allocates all memory allocated for that c
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_disconnect</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> *<span class="nv">connection
 </span>);
@@ -231,7 +218,6 @@ Closes the specified connection and de-allocates all memory allocated for that c
 
 #### Parameters
 
----
 * `connection`
 
 The connection to close.
@@ -247,7 +233,6 @@ Usually used for developing C extensions that must return this for a compatibili
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_library_version</span>(<span class="nv">
 </span>  <span class="nv">
 </span>);
