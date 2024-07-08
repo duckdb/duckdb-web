@@ -3,7 +3,7 @@ layout: docu
 title: Gitignore for DuckDB
 ---
 
-If you work in a Git repository, you may want to configure your [Gitignore](https://git-scm.com/docs/gitignore) to disable tracking [files created by DuckDB]({% link docs/operations_manual/files_created_by_duckdb.md %}).
+If you work in a Git repository, you may want to configure your [Gitignore](https://git-scm.com/docs/gitignore) to disable tracking [files created by DuckDB]({% link docs/operations_manual/footprint_of_duckdb/files_created_by_duckdb.md %}).
 These potentially include the DuckDB database, write ahead log, temporary files.
 
 ## Sample Gitignore Files
