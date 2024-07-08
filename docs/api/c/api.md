@@ -153,6 +153,7 @@ title: Complete API
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_date"><span class="nf">duckdb_bind_date</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_date</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_time"><span class="nf">duckdb_bind_time</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_time</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_timestamp"><span class="nf">duckdb_bind_timestamp</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_timestamp</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_timestamp_tz"><span class="nf">duckdb_bind_timestamp_tz</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_timestamp</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_interval"><span class="nf">duckdb_bind_interval</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_interval</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar"><span class="nf">duckdb_bind_varchar</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar_length"><span class="nf">duckdb_bind_varchar_length</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
@@ -266,6 +267,21 @@ title: Complete API
 <span class="kt">void</span> <a href="#duckdb_validity_set_row_valid"><span class="nf">duckdb_validity_set_row_valid</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 </code></pre></div></div>
 
+### Scalar Functions
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_scalar_function</span> <a href="#duckdb_create_scalar_function"><span class="nf">duckdb_create_scalar_function</span></a>();
+<span class="kt">void</span> <a href="#duckdb_destroy_scalar_function"><span class="nf">duckdb_destroy_scalar_function</span></a>(<span class="nv">duckdb_scalar_function</span> *<span class="nv">scalar_function</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_set_name"><span class="nf">duckdb_scalar_function_set_name</span></a>(<span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_set_varargs"><span class="nf">duckdb_scalar_function_set_varargs</span></a>(<span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_add_parameter"><span class="nf">duckdb_scalar_function_add_parameter</span></a>(<span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_set_return_type"><span class="nf">duckdb_scalar_function_set_return_type</span></a>(<span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_set_extra_info"><span class="nf">duckdb_scalar_function_set_extra_info</span></a>(<span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="kt">void</span> *<span class="nv">extra_info</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_set_function"><span class="nf">duckdb_scalar_function_set_function</span></a>(<span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="nv">duckdb_scalar_function_t</span> <span class="nv">function</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_register_scalar_function"><span class="nf">duckdb_register_scalar_function</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">con</span>, <span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>);
+<span class="kt">void</span> *<a href="#duckdb_scalar_function_get_extra_info"><span class="nf">duckdb_scalar_function_get_extra_info</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_set_error"><span class="nf">duckdb_scalar_function_set_error</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
+</code></pre></div></div>
+
 ### Table Functions
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_table_function</span> <a href="#duckdb_create_table_function"><span class="nf">duckdb_create_table_function</span></a>();
@@ -333,6 +349,7 @@ title: Complete API
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_destroy"><span class="nf">duckdb_appender_destroy</span></a>(<span class="kt">duckdb_appender</span> *<span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_begin_row"><span class="nf">duckdb_appender_begin_row</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_end_row"><span class="nf">duckdb_appender_end_row</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_default"><span class="nf">duckdb_append_default</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_bool"><span class="nf">duckdb_append_bool</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">bool</span> <span class="nv">value</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_int8"><span class="nf">duckdb_append_int8</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int8_t</span> <span class="nv">value</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_int16"><span class="nf">duckdb_append_int16</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int16_t</span> <span class="nv">value</span>);
@@ -355,6 +372,14 @@ title: Complete API
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_blob"><span class="nf">duckdb_append_blob</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_null"><span class="nf">duckdb_append_null</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_data_chunk"><span class="nf">duckdb_append_data_chunk</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
+</code></pre></div></div>
+
+### TableDescription
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_table_description_create"><span class="nf">duckdb_table_description_create</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="nv">duckdb_table_description</span> *<span class="nv">out</span>);
+<span class="kt">void</span> <a href="#duckdb_table_description_destroy"><span class="nf">duckdb_table_description_destroy</span></a>(<span class="nv">duckdb_table_description</span> *<span class="nv">table_description</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_table_description_error"><span class="nf">duckdb_table_description_error</span></a>(<span class="nv">duckdb_table_description</span> <span class="nv">table</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_column_has_default"><span class="nf">duckdb_column_has_default</span></a>(<span class="nv">duckdb_table_description</span> <span class="nv">table_description</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">bool</span> *<span class="nv">out</span>);
 </code></pre></div></div>
 
 ### Arrow Interface
@@ -612,6 +637,9 @@ through `duckdb_open_ext`.
 The duckdb_config must be destroyed using 'duckdb_destroy_config'
 
 This will always succeed unless there is a malloc failure.
+
+Note that `duckdb_destroy_config` should always be called on the resulting config, even if the function returns
+`DuckDBError`.
 
 #### Syntax
 
@@ -2853,6 +2881,22 @@ Binds a duckdb_timestamp value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+### `duckdb_bind_timestamp_tz`
+
+---
+Binds a duckdb_timestamp value to the prepared statement at the specified index.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_timestamp_tz</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
+</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">val
+</span>);
+</code></pre></div></div>
+<br>
+
 ### `duckdb_bind_interval`
 
 ---
@@ -3536,7 +3580,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 ### `duckdb_create_array_value`
 
 ---
-Creates a array value from a type and an array of values of length `value_count`
+Creates an array value from a type and an array of values of length `value_count`
 
 #### Syntax
 
@@ -3700,7 +3744,7 @@ The logical type.
 ### `duckdb_create_array_type`
 
 ---
-Creates a array type from its child type.
+Creates an array type from its child type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
@@ -5042,6 +5086,297 @@ The row index
 
 <br>
 
+### `duckdb_create_scalar_function`
+
+---
+Creates a new empty scalar function.
+
+The return value should be destroyed with `duckdb_destroy_scalar_function`.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_scalar_function</span> <span class="nv">duckdb_create_scalar_function</span>(<span class="nv">
+</span>  <span class="nv">
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `returns`
+
+The scalar function object.
+
+<br>
+
+### `duckdb_destroy_scalar_function`
+
+---
+Destroys the given scalar function object.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_scalar_function</span>(<span class="nv">
+</span>  <span class="nv">duckdb_scalar_function</span> *<span class="nv">scalar_function
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `scalar_function`
+
+The scalar function to destroy
+
+<br>
+
+### `duckdb_scalar_function_set_name`
+
+---
+Sets the name of the given scalar function.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_set_name</span>(<span class="nv">
+</span>  <span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `scalar_function`
+
+The scalar function
+* `name`
+
+The name of the scalar function
+
+<br>
+
+### `duckdb_scalar_function_set_varargs`
+
+---
+Sets the parameters of the given scalar function to varargs. Does not require adding parameters with
+duckdb_scalar_function_add_parameter.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_set_varargs</span>(<span class="nv">
+</span>  <span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `scalar_function`
+
+The scalar function
+* `type`
+
+The type of the arguments
+
+<br>
+
+### `duckdb_scalar_function_add_parameter`
+
+---
+Adds a parameter to the scalar function.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_add_parameter</span>(<span class="nv">
+</span>  <span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `scalar_function`
+
+The scalar function
+* `type`
+
+The type of the parameter to add.
+
+<br>
+
+### `duckdb_scalar_function_set_return_type`
+
+---
+Sets the return type of the scalar function.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_set_return_type</span>(<span class="nv">
+</span>  <span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `scalar_function`
+
+The scalar function
+* `type`
+
+The return type to set
+
+<br>
+
+### `duckdb_scalar_function_set_extra_info`
+
+---
+Assigns extra information to the scalar function that can be fetched during binding, etc.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_set_extra_info</span>(<span class="nv">
+</span>  <span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>,<span class="nv">
+</span>  <span class="kt">void</span> *<span class="nv">extra_info</span>,<span class="nv">
+</span>  <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `scalar_function`
+
+The scalar function
+* `extra_info`
+
+The extra information
+* `destroy`
+
+The callback that will be called to destroy the bind data (if any)
+
+<br>
+
+### `duckdb_scalar_function_set_function`
+
+---
+Sets the main function of the scalar function.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_set_function</span>(<span class="nv">
+</span>  <span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function</span>,<span class="nv">
+</span>  <span class="nv">duckdb_scalar_function_t</span> <span class="nv">function
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `scalar_function`
+
+The scalar function
+* `function`
+
+The function
+
+<br>
+
+### `duckdb_register_scalar_function`
+
+---
+Register the scalar function object within the given connection.
+
+The function requires at least a name, a function and a return type.
+
+If the function is incomplete or a function with this name already exists DuckDBError is returned.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_register_scalar_function</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">con</span>,<span class="nv">
+</span>  <span class="nv">duckdb_scalar_function</span> <span class="nv">scalar_function
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `con`
+
+The connection to register it in.
+* `function`
+
+The function pointer
+* `returns`
+
+Whether or not the registration was successful.
+
+<br>
+
+### `duckdb_scalar_function_get_extra_info`
+
+---
+Retrieves the extra info of the function as set in `duckdb_scalar_function_set_extra_info`.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_scalar_function_get_extra_info</span>(<span class="nv">
+</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `info`
+
+The info object
+* `returns`
+
+The extra info
+
+<br>
+
+### `duckdb_scalar_function_set_error`
+
+---
+Report that an error has occurred while executing the scalar function.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_set_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `info`
+
+The info object
+* `error`
+
+The error message
+
+<br>
+
 ### `duckdb_create_table_function`
 
 ---
@@ -6270,6 +6605,20 @@ The appender.
 
 <br>
 
+### `duckdb_append_default`
+
+---
+Append a DEFAULT value (NULL if DEFAULT not available for column) to the appender.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_default</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+</span>);
+</code></pre></div></div>
+<br>
+
 ### `duckdb_append_bool`
 
 ---
@@ -6616,6 +6965,127 @@ The data chunk to append.
 * `returns`
 
 The return state.
+
+<br>
+
+### `duckdb_table_description_create`
+
+---
+Creates a table description object.
+Note that `duckdb_table_description_destroy` should always be called on the resulting table_description, even if the
+function returns `DuckDBError`.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_table_description_create</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>,<span class="nv">
+</span>  <span class="nv">duckdb_table_description</span> *<span class="nv">out
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `connection`
+
+The connection context.
+* `schema`
+
+The schema of the table, or `nullptr` for the default schema.
+* `table`
+
+The table name.
+* `out`
+
+The resulting table description object.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+### `duckdb_table_description_destroy`
+
+---
+Destroy the TableDescription object.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_description_destroy</span>(<span class="nv">
+</span>  <span class="nv">duckdb_table_description</span> *<span class="nv">table_description
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `table`
+
+The table_description to destroy.
+
+<br>
+
+### `duckdb_table_description_error`
+
+---
+Returns the error message associated with the given table_description.
+If the table_description has no error message, this returns `nullptr` instead.
+The error message should not be freed. It will be de-allocated when `duckdb_table_description_destroy` is called.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_table_description_error</span>(<span class="nv">
+</span>  <span class="nv">duckdb_table_description</span> <span class="nv">table
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `table_description`
+
+The table_description to get the error from.
+* `returns`
+
+The error message, or `nullptr` if there is none.
+
+<br>
+
+### `duckdb_column_has_default`
+
+---
+Check if the column at 'index' index of the table has a DEFAULT expression.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_column_has_default</span>(<span class="nv">
+</span>  <span class="nv">duckdb_table_description</span> <span class="nv">table_description</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index</span>,<span class="nv">
+</span>  <span class="kt">bool</span> *<span class="nv">out
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `table`
+
+The table_description to query.
+* `index`
+
+The index of the column to query.
+* `out`
+
+The out-parameter used to store the result.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
 

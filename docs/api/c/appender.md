@@ -49,6 +49,7 @@ duckdb_appender_destroy(&appender);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_destroy"><span class="nf">duckdb_appender_destroy</span></a>(<span class="kt">duckdb_appender</span> *<span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_begin_row"><span class="nf">duckdb_appender_begin_row</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_end_row"><span class="nf">duckdb_appender_end_row</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_default"><span class="nf">duckdb_append_default</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_bool"><span class="nf">duckdb_append_bool</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">bool</span> <span class="nv">value</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_int8"><span class="nf">duckdb_append_int8</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int8_t</span> <span class="nv">value</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_int16"><span class="nf">duckdb_append_int16</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int16_t</span> <span class="nv">value</span>);
@@ -314,6 +315,20 @@ The appender.
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
+<br>
+
+### `duckdb_append_default`
+
+---
+Append a DEFAULT value (NULL if DEFAULT not available for column) to the appender.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_default</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+</span>);
+</code></pre></div></div>
 <br>
 
 ### `duckdb_append_bool`

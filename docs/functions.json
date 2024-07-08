@@ -158,6 +158,18 @@
     "result": null
   },
   {
+    "name": "approx_top_k",
+    "parameters": [
+      "val",
+      "k"
+    ],
+    "description": "Finds the k approximately most occurring values in the data set",
+    "example": "approx_top_k(x, 5)",
+    "type": "aggregate_function",
+    "category": "holistic",
+    "result": null
+  },
+  {
     "name": "arg_max",
     "parameters": [
       "arg",
@@ -3296,7 +3308,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v1.0.1-dev2074"
+    "result": "v1.0.1-dev2164"
   },
   {
     "name": "week",
