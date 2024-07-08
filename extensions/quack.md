@@ -1,6 +1,10 @@
 ---
 layout: community_extension
 title: quack
+excerpt: |
+  DuckDB Community Extensions
+  Provides a hello world example demo
+
 extension:
   name: quack
   description: Provides a hello world example demo
@@ -22,6 +26,7 @@ docs:
     The quack extension is based on DuckDB's [Extension Template](https://duckdb/extension_template/), and it's a great starting point to get started building more advanced extensions.
 
 extension_star_count: 1
+
 ---
 
 ### Installing and Loading
@@ -41,7 +46,7 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
-### Added functions
+### Added Functions
 
 |     function_name     | function_type | description | comment | example |
 |-----------------------|---------------|-------------|---------|---------|

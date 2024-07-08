@@ -1,6 +1,10 @@
 ---
 layout: community_extension
 title: prql
+excerpt: |
+  DuckDB Community Extensions
+  Support for PRQL, the Pipelined Relational Query Language
+
 extension:
   name: prql
   description: Support for PRQL, the Pipelined Relational Query Language
@@ -44,7 +48,8 @@ docs:
   extended_description: |
     The PRQL extension adds support for the [Pipelined Relational Query Language](https://prql-lang.org).
 
-extension_star_count: 224
+extension_star_count: 232
+
 ---
 
 ### Installing and Loading
@@ -63,6 +68,8 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+
 
 ---
 
