@@ -1332,6 +1332,10 @@
           "slug": "operations_manual",
           "subfolderitems": [
             {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
               "page": "DuckDB's Footprint",
               "slug": "footprint_of_duckdb",
               "subsubfolderitems": [
