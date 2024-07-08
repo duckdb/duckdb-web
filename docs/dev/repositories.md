@@ -33,4 +33,5 @@ Several components of DuckDB are maintained in separate repositories.
 
 ## Extensions
 
-Extension repositories are linked in the [Official Extensions]({% link docs/extensions/official_extensions.md %}) page.
+* Core extension repositories are linked in the [Official Extensions page]({% link docs/extensions/core_extensions.md %})
+* Community extensions are built in the [Community Extensions repository](https://github.com/duckdb/community-extensions)

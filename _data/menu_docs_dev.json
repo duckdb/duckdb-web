@@ -868,8 +868,12 @@
               "url": "overview"
             },
             {
-              "page": "Official Extensions",
-              "url": "official_extensions"
+              "page": "Core Extensions",
+              "url": "core_extensions"
+            },
+            {
+              "page": "Community Extensions",
+              "url": "community_extensions"
             },
             {
               "page": "Working with Extensions",
