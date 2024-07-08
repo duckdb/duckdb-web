@@ -112,7 +112,7 @@ This prints the following result:
 
 ### `duckdb_value`
 
-> DEPRECATION NOTICE: The `duckdb_value` functions are deprecated and are scheduled for removal in a future release.
+> Deprecated The `duckdb_value` functions are deprecated and are scheduled for removal in a future release.
 
 Below is an example that prints the above result to CSV format using the `duckdb_value_varchar` function.
 Note that the function is generic: we do not need to know about the types of the individual result columns.
