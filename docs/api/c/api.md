@@ -1066,9 +1066,9 @@ by `duckdb_column_data` are undefined.
 int32_t *data = (int32_t *) duckdb_column_data(&result, 0);
 bool *nullmask = duckdb_nullmask_data(&result, 0);
 if (nullmask[row]) {
-printf("Data for row %d: NULL\n", row);
+  printf("Data for row %d: NULL\n", row);
 } else {
-printf("Data for row %d: %d\n", row, data[row]);
+  printf("Data for row %d: %d\n", row, data[row]);
 }
 ```
 

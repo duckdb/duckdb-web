@@ -58,10 +58,10 @@ duckdb_connect(db, &con);
 duckdb_result res;
 duckdb_query(con, "CREATE TABLE integers (i INTEGER, j INTEGER);", NULL);
 duckdb_query(con, "INSERT INTO integers VALUES (3, 4), (5, 6), (7, NULL);", NULL);
-duckdb_query(con, "SELECT * FROM integers", &res);
+duckdb_query(con, "SELECT * FROM integers;", &res);
 
 // iterate until result is exhausted
-while(true) {
+while (true) {
     duckdb_data_chunk result = duckdb_fetch_chunk(res);
     if (!result) {
         // result is exhausted
@@ -80,7 +80,7 @@ while(true) {
     uint64_t *col2_validity = duckdb_vector_get_validity(col2);
 
     // iterate over the rows
-    for(idx_t row = 0; row < row_count; row++) {
+    for (idx_t row = 0; row < row_count; row++) {
         if (duckdb_validity_row_is_valid(col1_validity, row)) {
             printf("%d", col1_data[row]);
         } else {
