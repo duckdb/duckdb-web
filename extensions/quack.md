@@ -48,6 +48,8 @@ LOAD {{ page.extension.name }};
 
 ### Added Functions
 
+<div class="extension_functions_table"></div>
+
 |     function_name     | function_type | description | comment | example |
 |-----------------------|---------------|-------------|---------|---------|
 | quack                 | scalar        |             |         |         |

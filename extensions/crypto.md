@@ -49,6 +49,8 @@ LOAD {{ page.extension.name }};
 
 ### Added Functions
 
+<div class="extension_functions_table"></div>
+
 | function_name | function_type |              description               | comment |                             example                             |
 |---------------|---------------|----------------------------------------|---------|-----------------------------------------------------------------|
 | crypto_hash   | scalar        | Calculate the value of a hash function |         | select crypto_hash('md5', 'test');                              |

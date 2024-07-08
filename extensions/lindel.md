@@ -50,6 +50,8 @@ LOAD {{ page.extension.name }};
 
 ### Added Functions
 
+<div class="extension_functions_table"></div>
+
 | function_name  | function_type |                           description                           | comment |                           example                           |
 |----------------|---------------|-----------------------------------------------------------------|---------|-------------------------------------------------------------|
 | hilbert_encode | scalar        | Encode an array of values using the Hilbert space filling curve |         | select hilbert_encode([43, 3]::integer[2]);                 |

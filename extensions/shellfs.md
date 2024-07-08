@@ -52,6 +52,8 @@ LOAD {{ page.extension.name }};
 
 ### Added Settings
 
+<div class="extension_settings_table"></div>
+
 |      name      |  description   | input_type | scope  |
 |----------------|----------------|------------|--------|
 | ignore_sigpipe | Ignore SIGPIPE | BOOLEAN    | GLOBAL |
