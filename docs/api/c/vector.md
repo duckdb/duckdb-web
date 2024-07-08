@@ -3,7 +3,7 @@ layout: docu
 title: Vectors
 ---
 
-Vectors represent a horizontal slice of a column. They hold a number of values of a specific type, similar to an array. Vectors are the core data representation used in DuckDB. Vectors are typically stored within [data chunks](data_chunk).
+Vectors represent a horizontal slice of a column. They hold a number of values of a specific type, similar to an array. Vectors are the core data representation used in DuckDB. Vectors are typically stored within [data chunks]({% link docs/api/c/data_chunk.md %}).
 
 The vector and data chunk interfaces are the most efficient way of interacting with DuckDB, allowing for the highest performance. However, the interfaces are also difficult to use and care must be taken when using them.
 
