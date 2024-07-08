@@ -12,7 +12,7 @@ DuckDB has a flexible extension mechanism that allows for dynamically loading ex
 These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
 
 > Extensions are loadable on all clients (e.g., Python and R).
-> Extensions distributed via the official repository are built and tested on macOS (AMD64 and ARM64), Windows (AMD64) and Linux (AMD64 and ARM64).
+> Extensions distributed via the official repository are built and tested on macOS, Windows and Linux. All operating systems are supported for both the AMD64 and the ARM64 architectures.
 
 ## Listing Extensions
 
