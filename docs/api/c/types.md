@@ -159,17 +159,13 @@ Use `duckdb_result_chunk_count` to figure out how many chunks there are in the r
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_result_get_chunk</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> <span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">chunk_index
 </span>);
 </code></pre></div></div>
 
-#### Parameters
-
----
-* `result`
+#### Parameters* `result`
 
 The result object to fetch the data chunk from.
 * `chunk_index`
@@ -190,7 +186,6 @@ Checks if the type of the internal result is StreamQueryResult.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_result_is_streaming</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
@@ -198,7 +193,6 @@ Checks if the type of the internal result is StreamQueryResult.
 
 #### Parameters
 
----
 * `result`
 
 The result object to check.
@@ -217,7 +211,6 @@ Returns the number of data chunks present in the result.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_result_chunk_count</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
@@ -225,7 +218,6 @@ Returns the number of data chunks present in the result.
 
 #### Parameters
 
----
 * `result`
 
 The result object
@@ -242,7 +234,6 @@ Returns the return_type of the given result, or DUCKDB_RETURN_TYPE_INVALID on er
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_result_type</span> <span class="nv">duckdb_result_return_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
@@ -250,7 +241,6 @@ Returns the return_type of the given result, or DUCKDB_RETURN_TYPE_INVALID on er
 
 #### Parameters
 
----
 * `result`
 
 The result object
@@ -267,7 +257,6 @@ Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_da
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <span class="nv">duckdb_from_date</span>(<span class="nv">
 </span>  <span class="kt">duckdb_date</span> <span class="nv">date
 </span>);
@@ -275,7 +264,6 @@ Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_da
 
 #### Parameters
 
----
 * `date`
 
 The date object, as obtained from a `DUCKDB_TYPE_DATE` column.
@@ -292,7 +280,6 @@ Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="nv">duckdb_to_date</span>(<span class="nv">
 </span>  <span class="kt">duckdb_date_struct</span> <span class="nv">date
 </span>);
@@ -300,7 +287,6 @@ Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
 
 #### Parameters
 
----
 * `date`
 
 The year, month and date stored in a `duckdb_date_struct`.
@@ -317,7 +303,6 @@ Test a `duckdb_date` to see if it is a finite value.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_date</span>(<span class="nv">
 </span>  <span class="kt">duckdb_date</span> <span class="nv">date
 </span>);
@@ -325,7 +310,6 @@ Test a `duckdb_date` to see if it is a finite value.
 
 #### Parameters
 
----
 * `date`
 
 The date object, as obtained from a `DUCKDB_TYPE_DATE` column.
@@ -342,16 +326,12 @@ Decompose a `duckdb_time` object into hour, minute, second and microsecond (stor
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_struct</span> <span class="nv">duckdb_from_time</span>(<span class="nv">
 </span>  <span class="kt">duckdb_time</span> <span class="nv">time
 </span>);
 </code></pre></div></div>
 
-#### Parameters
-
----
-* `time`
+#### Parameters* `time`
 
 The time object, as obtained from a `DUCKDB_TYPE_TIME` column.
 * `returns`
@@ -367,7 +347,6 @@ Create a `duckdb_time_tz` object from micros and a timezone offset.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_tz</span> <span class="nv">duckdb_create_time_tz</span>(<span class="nv">
 </span>  <span class="kt">int64_t</span> <span class="nv">micros</span>,<span class="nv">
 </span>  <span class="kt">int32_t</span> <span class="nv">offset
@@ -376,7 +355,6 @@ Create a `duckdb_time_tz` object from micros and a timezone offset.
 
 #### Parameters
 
----
 * `micros`
 
 The microsecond component of the time.
@@ -398,7 +376,6 @@ Use `duckdb_from_time` to further decompose the micros into hour, minute, second
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_tz_struct</span> <span class="nv">duckdb_from_time_tz</span>(<span class="nv">
 </span>  <span class="kt">duckdb_time_tz</span> <span class="nv">micros
 </span>);
@@ -406,7 +383,6 @@ Use `duckdb_from_time` to further decompose the micros into hour, minute, second
 
 #### Parameters
 
----
 * `micros`
 
 The time object, as obtained from a `DUCKDB_TYPE_TIME_TZ` column.
@@ -426,7 +402,6 @@ Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_ti
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="nv">duckdb_to_time</span>(<span class="nv">
 </span>  <span class="kt">duckdb_time_struct</span> <span class="nv">time
 </span>);
@@ -434,7 +409,6 @@ Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_ti
 
 #### Parameters
 
----
 * `time`
 
 The hour, minute, second and microsecond in a `duckdb_time_struct`.
@@ -451,7 +425,6 @@ Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp_struct</span> <span class="nv">duckdb_from_timestamp</span>(<span class="nv">
 </span>  <span class="kt">duckdb_timestamp</span> <span class="nv">ts
 </span>);
@@ -459,7 +432,6 @@ Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
 
 #### Parameters
 
----
 * `ts`
 
 The ts object, as obtained from a `DUCKDB_TYPE_TIMESTAMP` column.
@@ -476,7 +448,6 @@ Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="nv">duckdb_to_timestamp</span>(<span class="nv">
 </span>  <span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts
 </span>);
@@ -484,7 +455,6 @@ Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
 
 #### Parameters
 
----
 * `ts`
 
 The de-composed elements in a `duckdb_timestamp_struct`.
@@ -501,7 +471,6 @@ Test a `duckdb_timestamp` to see if it is a finite value.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_timestamp</span>(<span class="nv">
 </span>  <span class="kt">duckdb_timestamp</span> <span class="nv">ts
 </span>);
@@ -509,7 +478,6 @@ Test a `duckdb_timestamp` to see if it is a finite value.
 
 #### Parameters
 
----
 * `ts`
 
 The timestamp object, as obtained from a `DUCKDB_TYPE_TIMESTAMP` column.
@@ -526,7 +494,6 @@ Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` colum
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_hugeint_to_double</span>(<span class="nv">
 </span>  <span class="kt">duckdb_hugeint</span> <span class="nv">val
 </span>);
@@ -534,7 +501,6 @@ Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` colum
 
 #### Parameters
 
----
 * `val`
 
 The hugeint value.
@@ -553,7 +519,6 @@ If the conversion fails because the double value is too big the result will be 0
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="nv">duckdb_double_to_hugeint</span>(<span class="nv">
 </span>  <span class="kt">double</span> <span class="nv">val
 </span>);
@@ -561,7 +526,6 @@ If the conversion fails because the double value is too big the result will be 0
 
 #### Parameters
 
----
 * `val`
 
 The double value.
@@ -580,7 +544,6 @@ If the conversion fails because the double value is too big, or the width/scale 
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_decimal</span> <span class="nv">duckdb_double_to_decimal</span>(<span class="nv">
 </span>  <span class="kt">double</span> <span class="nv">val</span>,<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
@@ -590,7 +553,6 @@ If the conversion fails because the double value is too big, or the width/scale 
 
 #### Parameters
 
----
 * `val`
 
 The double value.
@@ -607,7 +569,6 @@ Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` colum
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_decimal_to_double</span>(<span class="nv">
 </span>  <span class="kt">duckdb_decimal</span> <span class="nv">val
 </span>);
@@ -615,7 +576,6 @@ Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` colum
 
 #### Parameters
 
----
 * `val`
 
 The decimal value.
@@ -635,7 +595,6 @@ This should not be used with `DUCKDB_TYPE_DECIMAL`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_logical_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_type</span> <span class="nv">type
 </span>);
@@ -643,7 +602,6 @@ This should not be used with `DUCKDB_TYPE_DECIMAL`.
 
 #### Parameters
 
----
 * `type`
 
 The primitive type to create.
@@ -661,7 +619,6 @@ The result must be destroyed with `duckdb_free`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_logical_type_get_alias</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -669,7 +626,6 @@ The result must be destroyed with `duckdb_free`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type to return the alias of
@@ -687,7 +643,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_list_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -695,7 +650,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `type`
 
 The child type of list type to create.
@@ -713,7 +667,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_array_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">array_size
@@ -722,7 +675,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `type`
 
 The child type of array type to create.
@@ -743,7 +695,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_map_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">key_type</span>,<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">value_type
@@ -752,7 +703,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `type`
 
 The key type and value type of map type to create.
@@ -770,7 +720,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_union_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
@@ -780,7 +729,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `types`
 
 The array of types that the union should consist of.
@@ -801,7 +749,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_struct_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
@@ -811,7 +758,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `member_types`
 
 The array of types that the struct should consist of.
@@ -835,7 +781,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_enum_type</span>(<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">member_count
@@ -844,7 +789,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `enum_name`
 
 The name of the enum.
@@ -868,7 +812,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_decimal_type</span>(<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">scale
@@ -877,7 +820,6 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `width`
 
 The width of the decimal type
@@ -897,7 +839,6 @@ Retrieves the enum type class of a `duckdb_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_get_type_id</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -905,7 +846,6 @@ Retrieves the enum type class of a `duckdb_logical_type`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -922,7 +862,6 @@ Retrieves the width of a decimal type.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_decimal_width</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -930,7 +869,6 @@ Retrieves the width of a decimal type.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -947,7 +885,6 @@ Retrieves the scale of a decimal type.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_decimal_scale</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -955,7 +892,6 @@ Retrieves the scale of a decimal type.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -972,7 +908,6 @@ Retrieves the internal storage type of a decimal type.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_decimal_internal_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -980,7 +915,6 @@ Retrieves the internal storage type of a decimal type.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -997,7 +931,6 @@ Retrieves the internal storage type of an enum type.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_enum_internal_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -1005,7 +938,6 @@ Retrieves the internal storage type of an enum type.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1022,7 +954,6 @@ Retrieves the dictionary size of the enum type.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nv">duckdb_enum_dictionary_size</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -1030,7 +961,6 @@ Retrieves the dictionary size of the enum type.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1049,7 +979,6 @@ The result must be freed with `duckdb_free`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_enum_dictionary_value</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
@@ -1058,7 +987,6 @@ The result must be freed with `duckdb_free`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1080,7 +1008,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_list_type_child_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -1088,7 +1015,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1107,7 +1033,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_array_type_child_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -1115,7 +1040,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1132,7 +1056,6 @@ Retrieves the array size of the given array type.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_array_type_array_size</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -1140,7 +1063,6 @@ Retrieves the array size of the given array type.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1159,7 +1081,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_map_type_key_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -1167,7 +1088,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1186,7 +1106,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_map_type_value_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -1194,7 +1113,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1211,7 +1129,6 @@ Returns the number of children of a struct type.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_struct_type_child_count</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -1219,7 +1136,6 @@ Returns the number of children of a struct type.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1238,7 +1154,6 @@ The result must be freed with `duckdb_free`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_struct_type_child_name</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
@@ -1247,7 +1162,6 @@ The result must be freed with `duckdb_free`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1269,7 +1183,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_struct_type_child_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
@@ -1278,7 +1191,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1298,7 +1210,6 @@ Returns the number of members that the union type has.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_union_type_member_count</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
@@ -1306,7 +1217,6 @@ Returns the number of members that the union type has.
 
 #### Parameters
 
----
 * `type`
 
 The logical type (union) object
@@ -1325,7 +1235,6 @@ The result must be freed with `duckdb_free`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_union_type_member_name</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
@@ -1334,7 +1243,6 @@ The result must be freed with `duckdb_free`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1356,7 +1264,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_union_type_member_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
@@ -1365,7 +1272,6 @@ The result must be freed with `duckdb_destroy_logical_type`.
 
 #### Parameters
 
----
 * `type`
 
 The logical type object
@@ -1385,7 +1291,6 @@ Destroys the logical type and de-allocates all memory allocated for that type.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_logical_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">type
 </span>);
@@ -1393,7 +1298,6 @@ Destroys the logical type and de-allocates all memory allocated for that type.
 
 #### Parameters
 
----
 * `type`
 
 The logical type to destroy.

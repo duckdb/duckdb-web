@@ -261,6 +261,11 @@ h1, h2, h3, h4, h5{
 					font-weight: 500;
 				}
 			}
+			hr {
+				height: 0.2px;
+				margin: 50px 0 50px 0;
+				border: 1px solid rgb(229, 229, 229);
+			}
 		}
 		.infoline{
 			display: -webkit-box;
