@@ -22,7 +22,7 @@ repo:
 
 docs:
   hello_world: |
-    SELECT * from read_csv('seq 1 100 | grep 2 |');
+    SELECT * FROM read_csv('seq 1 100 | grep 2 |');
   extended_description: |
     The `shellfs` extension for DuckDB enables the use of Unix pipes for input and output.
     By appending a pipe character `|` to a filename, DuckDB will treat it as a series of commands
