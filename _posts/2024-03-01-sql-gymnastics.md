@@ -12,7 +12,7 @@ excerpt: "Combining multiple features of DuckDB’s [friendly SQL](/docs/guides/
      width="300"
      />
 
-DuckDB's [especially]({% post_url 2022-05-04-friendlier-sql %}) [friendly]({% post_url 2023-08-23-even-friendlier-sql %}) [SQL dialect]({% link docs/guides/sql_features/friendly_sql.md %}) simplifies common query operations.
+DuckDB's [especially]({% post_url 2022-05-04-friendlier-sql %}) [friendly]({% post_url 2023-08-23-even-friendlier-sql %}) [SQL dialect]({% link docs/sql/dialect/friendly_sql.md %}) simplifies common query operations.
 However, these features also unlock new and flexible ways to write advanced SQL! 
 In this post we will combine multiple friendly features to both move closer to real-world use cases and stretch your imagination.
 These queries are useful in their own right, but their component pieces are even more valuable to have in your toolbox.

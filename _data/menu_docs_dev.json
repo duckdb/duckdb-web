@@ -860,6 +860,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Friendly SQL",
+                  "url": "friendly_sql"
+                },
+                {
                   "page": "Keywords and Identifiers",
                   "url": "keywords_and_identifiers"
                 },
@@ -1313,10 +1317,6 @@
               "page": "SQL Features",
               "slug": "sql_features",
               "subsubfolderitems": [
-                {
-                  "page": "Friendly SQL",
-                  "url": "friendly_sql"
-                },
                 {
                   "page": "AsOf Join",
                   "url": "asof_join"
