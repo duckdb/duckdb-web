@@ -78,7 +78,7 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 
 The [`SELECT` clause]({% link docs/sql/query_syntax/select.md %}) specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions. The `DISTINCT` keyword ensures that only unique tuples are returned.
 
-> Column names are case-insensitive. See the [Rules for Case Sensitivity]({% link docs/sql/keywords_and_identifiers.md %}#rules-for-case-sensitivity) for more details.
+> Column names are case-insensitive. See the [Rules for Case Sensitivity]({% link docs/sql/dialect/keywords_and_identifiers.md %}#rules-for-case-sensitivity) for more details.
 
 ## `FROM` Clause
 
@@ -114,7 +114,7 @@ The [`FROM` clause]({% link docs/sql/query_syntax/from.md %}) specifies the *sou
 
 <div id="rrdiagram11"></div>
 
-[The `QUALIFY` clause]({% link docs/sql/query_syntax/qualify.md %}) is used to filter the result of [`WINDOW` functions]({% link docs/sql/window_functions.md %}).
+[The `QUALIFY` clause]({% link docs/sql/query_syntax/qualify.md %}) is used to filter the result of [`WINDOW` functions]({% link docs/sql/functions/window_functions.md %}).
 
 ## `ORDER BY`, `LIMIT` and `OFFSET` Clauses
 

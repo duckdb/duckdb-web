@@ -147,7 +147,7 @@ SET max_memory = '1GB';
 > Warning The specified memory limit is only applied to the buffer manager.
 > For most queries, the buffer manager handles the majority of the data processed.
 > However, certain in-memory data structures such as [vectors]({% link docs/internals/vector.md %}) and query results are allocated outside of the buffer manager.
-> Additionally, [aggregate functions]({% link docs/sql/aggregates.md %}) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
+> Additionally, [aggregate functions]({% link docs/sql/functions/aggregates.md %}) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
 > Therefore, the actual memory consumption can be higher than the specified memory limit.
 
 ### Threads

@@ -748,6 +748,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Aggregate Functions",
+                  "url": "aggregates"
+                },
+                {
                   "page": "Array Functions",
                   "url": "array"
                 },
@@ -818,12 +822,12 @@
                 {
                   "page": "Utility Functions",
                   "url": "utility"
+                },
+                {
+                  "page": "Window Functions",
+                  "url": "window_functions"
                 }
               ]
-            },
-            {
-              "page": "Aggregate Functions",
-              "url": "aggregates"
             },
             {
               "page": "Constraints",
@@ -834,28 +838,44 @@
               "url": "indexes"
             },
             {
-              "page": "Information Schema",
-              "url": "information_schema"
+              "page": "Meta Queries",
+              "slug": "meta",
+              "subsubfolderitems": [
+                {
+                  "page": "Information Schema",
+                  "url": "information_schema"
+                },
+                {
+                  "page": "Metadata Functions",
+                  "url": "duckdb_table_functions"
+                }
+              ]
             },
             {
-              "page": "Metadata Functions",
-              "url": "duckdb_table_functions"
-            },
-            {
-              "page": "Keywords and Identifiers",
-              "url": "keywords_and_identifiers"
+              "page": "DuckDB's SQL Dialect",
+              "slug": "dialect",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Keywords and Identifiers",
+                  "url": "keywords_and_identifiers"
+                },
+                {
+                  "page": "Order Preservation",
+                  "url": "order_preservation"
+                },
+                {
+                  "page": "PostgreSQL Compatibility",
+                  "url": "postgresql_compatibility"
+                }
+              ]
             },
             {
               "page": "Samples",
               "url": "samples"
-            },
-            {
-              "page": "Window Functions",
-              "url": "window_functions"
-            },
-            {
-              "page": "PostgreSQL Compatibility",
-              "url": "postgresql_compatibility"
             }
           ]
         },

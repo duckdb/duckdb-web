@@ -254,7 +254,7 @@ ORDER BY length(path), path;
 
 #### Enumerate Unweighted Shortest Paths between Two Nodes
 
-`WITH RECURSIVE` can also be used to find **all (unweighted) shortest paths between two nodes**. To ensure that the recursive query is stopped as soon as we reach the end node, we use a [window function]({% link docs/sql/window_functions.md %}) which checks whether the end node is among the newly added nodes.
+`WITH RECURSIVE` can also be used to find **all (unweighted) shortest paths between two nodes**. To ensure that the recursive query is stopped as soon as we reach the end node, we use a [window function]({% link docs/sql/functions/window_functions.md %}) which checks whether the end node is among the newly added nodes.
 
 The following query returns all unweighted shortest paths between nodes 1 (start node) and 8 (end node):
 
