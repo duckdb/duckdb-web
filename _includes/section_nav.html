@@ -1,0 +1,133 @@
+{% if versionviewed contains 'stable' %}
+  {%- assign menudocfile = "menu_docs_dev" -%}
+{% else %}
+  {%- assign menudocfile = "menu_docs_" | append: versionviewed | replace: ".", "" -%}
+{% endif %}
+{% assign menudocfile = site.data[menudocfile].docsmenu %}
+
+
+<!-- Add items from menudocfile. -->
+{% assign docs_base_url = "/docs/" %}
+{% assign nav_pageList = '' %}
+{% for doc_entry in menudocfile %}
+    {% if doc_entry.url %}
+        {% assign slug_str = doc_entry.slug %}
+        {% assign entry = ',' | append: docs_base_url | append: slug_str | append: doc_entry.url %}
+        {% assign nav_pageList = nav_pageList | append: entry %}
+    {%endif %}
+    {% if doc_entry.mainfolderitems %}
+      {% for main_entry in doc_entry.mainfolderitems %}
+        {% if main_entry.url %}
+            {% assign slug_str = main_entry.slug %}
+            {% assign entry = ',' | append: docs_base_url | append: slug_str | append: '/' | append: main_entry.url %}
+            {% assign nav_pageList = nav_pageList | append: entry %}
+        {%endif %}
+        {% if main_entry.subfolderitems %}
+            {% for sub_entry in main_entry.subfolderitems %}
+                {% if sub_entry.url %}
+                    {% assign slug_str = main_entry.slug | append: '/' | append: sub_entry.slug %}
+                    {% assign entry = ',' | append: docs_base_url | append: slug_str | append: sub_entry.url  %}
+                    {% assign nav_pageList = nav_pageList | append: entry %}
+                {%endif %}
+                {% if sub_entry.subsubfolderitems %}
+                    {% for subsub_entry in sub_entry.subsubfolderitems %}
+                        {% assign slug_str = main_entry.slug | append: '/' | append: sub_entry.slug | append: '/' | append:subsub_entry.slug %}
+                        {% assign entry = ',' | append: docs_base_url | append: slug_str  | append: subsub_entry.url %}
+                        {% assign nav_pageList = nav_pageList | append: entry %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+{% endfor %}
+
+<!-- Add items from menu_side.json. -->
+{% for side_entry in site.data["menu_side"].sidemenu %}
+    {% if side_entry.page != "Live Demo" %}
+        {% assign entry = ',' | append: side_entry.url %}
+        {% assign nav_pageList = nav_pageList | append: entry %}
+    {% endif %}
+{% endfor %}
+
+
+{% assign nav_pageList = nav_pageList | remove_first: ',' | split: ',' %}
+
+
+{% assign page_url_parts = page.url | split: "?" %}
+{% assign page_url_base = page_url_parts[0] | remove: ".html" %}
+
+<!-- Remove trailing /, if any-->
+{% assign pos = page_url_base | size | minus: 1 %}
+{% assign last_char = page_url_base | slice: pos, 1 %}
+{% if last_char == "/" %}
+  {% assign page_url_base = page_url_base | slice: 0, pos %}
+{% endif %}
+
+<!--
+Debug print:<br><br>
+
+Current Page:<br>
+{{page.url}}<br>
+
+Normalized Current Page:<br>
+{{page_url_base}}<br>
+
+<br>
+Nav Pages:<br>
+{% for nav_page in nav_pageList %}
+    {{nav_page}}<br>
+{% endfor %}
+-->
+
+
+<!--
+Lets find where we are in the ordered
+document list by comparing url strings. Then if there's something previous or
+next, lets build a link to it.
+-->
+{% for nav_page in nav_pageList %}
+  {% assign nav_page_url = nav_page %}
+  {% assign nav_page_parts = nav_page_url | split: "/" %}
+  <!-- If page.url ends in /index this is dropped. Account for this in name match -->
+  {% if nav_page_parts[-1] == "index"%}
+    {% assign norm_page_url = "" %}
+    {% assign cnt = nav_page_parts.size | minus: 1 %}
+    {% for part in nav_page_parts limit:cnt %}
+      {% assign norm_page_url = norm_page_url | append: part | append: "/" %}
+    {% endfor %}
+    {% assign nav_page_url = norm_page_url %}
+  {% endif %}
+
+  <!-- Remove trailing /, if any-->
+  {% assign pos = nav_page_url | size | minus: 1 %}
+  {% assign last_char = nav_page_url | slice: pos, 1 %}
+  {% if last_char == "/" %}
+  {% assign nav_page_url = nav_page_url | slice: 0, pos %}
+  {% endif %}
+  
+
+  {% if nav_page_url == page_url_base %}
+    <div class="section-nav" style="text-align: center;">
+        {% if forloop.first %}
+        <span class="prev disabled">Back</span>
+        {% else %}
+        {% assign previous = forloop.index0 | minus: 1 %}
+        {% assign previous_page = nav_pageList[previous] %}
+        <a href="{{ previous_page | relative_url }}" class="prev">Back</a>
+        {% endif %}
+
+        {% if forloop.last %}
+        <span class="next disabled">Next</span>
+        {% else %}
+        {% assign next = forloop.index0 | plus: 1 %}
+        {% assign next_page = nav_pageList[next] %}
+        <a href="{{ next_page | relative_url }}" class="next">Next</a>
+        {% endif %}
+    </div>
+    <div class="clear"></div>
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+
