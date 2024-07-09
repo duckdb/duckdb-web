@@ -390,7 +390,7 @@ including
 [remote querying]({% link docs/extensions/httpfs/overview.md %}),
 [window functions]({% post_url 2021-10-13-windowing %}),
 [unpivot]({% link docs/sql/statements/unpivot.md %}),
-[several friendly SQL features]({% link docs/guides/sql_features/friendly_sql.md %}) (such as `FROM`-first, `GROUP BY ALL`, and `COLUMNS(*)`),
+[several friendly SQL features]({% link docs/sql/dialect/friendly_sql.md %}) (such as `FROM`-first, `GROUP BY ALL`, and `COLUMNS(*)`),
 and so on.
 The combination of these allows for formulating queries using different file formats (CSV, Parquet), data sources (local, HTTPS, S3), and SQL features.
 This helps users answer queries quickly and efficiently.
