@@ -29,7 +29,7 @@ docs:
     to execute and capture the output. Conversely, if you prefix a filename with `|`, DuckDB will
     treat it as an output pipe.
 
-extension_star_count:  34
+extension_star_count:  35
 
 ---
 

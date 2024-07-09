@@ -20,6 +20,10 @@
           "url": "/extensions/crypto.html"
         },
         {
+          "page": "evalexpr_rhai",
+          "url": "/extensions/evalexpr_rhai.html"
+        },
+        {
           "page": "h3",
           "url": "/extensions/h3.html"
         },
@@ -42,6 +46,10 @@
         {
           "page": "shellfs",
           "url": "/extensions/shellfs.html"
+        },
+        {
+          "page": "ulid",
+          "url": "/extensions/ulid.html"
         }
 	]
     },

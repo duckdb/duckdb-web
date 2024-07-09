@@ -26,7 +26,7 @@ docs:
   extended_description: |
     This extension, `crypto`, adds cryptographic hash functions and
     the ability to calculate a HMAC to DuckDB's SQL engine.
-extension_star_count: 3
+extension_star_count: 4
 
 ---
 
