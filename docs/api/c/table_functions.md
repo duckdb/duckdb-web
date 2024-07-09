@@ -57,7 +57,6 @@ The table function API can be used to define a table function that can then be c
 
 ### `duckdb_create_table_function`
 
----
 Creates a new empty table function.
 
 The return value should be destroyed with `duckdb_destroy_table_function`.
@@ -79,7 +78,6 @@ The table function object.
 
 ### `duckdb_destroy_table_function`
 
----
 Destroys the given table function object.
 
 #### Syntax
@@ -99,7 +97,6 @@ The table function to destroy
 
 ### `duckdb_table_function_set_name`
 
----
 Sets the name of the given table function.
 
 #### Syntax
@@ -123,7 +120,6 @@ The name of the table function
 
 ### `duckdb_table_function_add_parameter`
 
----
 Adds a parameter to the table function.
 
 #### Syntax
@@ -147,7 +143,6 @@ The type of the parameter to add.
 
 ### `duckdb_table_function_add_named_parameter`
 
----
 Adds a named parameter to the table function.
 
 #### Syntax
@@ -175,7 +170,6 @@ The type of the parameter to add.
 
 ### `duckdb_table_function_set_extra_info`
 
----
 Assigns extra information to the table function that can be fetched during binding, etc.
 
 #### Syntax
@@ -203,7 +197,6 @@ The callback that will be called to destroy the bind data (if any)
 
 ### `duckdb_table_function_set_bind`
 
----
 Sets the bind function of the table function.
 
 #### Syntax
@@ -227,7 +220,6 @@ The bind function
 
 ### `duckdb_table_function_set_init`
 
----
 Sets the init function of the table function.
 
 #### Syntax
@@ -251,7 +243,6 @@ The init function
 
 ### `duckdb_table_function_set_local_init`
 
----
 Sets the thread-local init function of the table function.
 
 #### Syntax
@@ -275,7 +266,6 @@ The init function
 
 ### `duckdb_table_function_set_function`
 
----
 Sets the main function of the table function.
 
 #### Syntax
@@ -299,7 +289,6 @@ The function
 
 ### `duckdb_table_function_supports_projection_pushdown`
 
----
 Sets whether or not the given table function supports projection pushdown.
 
 If this is set to true, the system will provide a list of all required columns in the `init` stage through
@@ -327,7 +316,6 @@ True if the table function supports projection pushdown, false otherwise.
 
 ### `duckdb_register_table_function`
 
----
 Register the table function object within the given connection.
 
 The function requires at least a name, a bind function, an init function and a main function.
@@ -358,7 +346,6 @@ Whether or not the registration was successful.
 
 ### `duckdb_bind_get_extra_info`
 
----
 Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
@@ -381,7 +368,6 @@ The extra info
 
 ### `duckdb_bind_add_result_column`
 
----
 Adds a result column to the output of the table function.
 
 #### Syntax
@@ -409,7 +395,6 @@ The logical type of the column
 
 ### `duckdb_bind_get_parameter_count`
 
----
 Retrieves the number of regular (non-named) parameters to the function.
 
 #### Syntax
@@ -432,7 +417,6 @@ The number of parameters
 
 ### `duckdb_bind_get_parameter`
 
----
 Retrieves the parameter at the given index.
 
 The result must be destroyed with `duckdb_destroy_value`.
@@ -461,7 +445,6 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_bind_get_named_parameter`
 
----
 Retrieves a named parameter with the given name.
 
 The result must be destroyed with `duckdb_destroy_value`.
@@ -490,7 +473,6 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_bind_set_bind_data`
 
----
 Sets the user-provided bind data in the bind object. This object can be retrieved again during execution.
 
 #### Syntax
@@ -518,7 +500,6 @@ The callback that will be called to destroy the bind data (if any)
 
 ### `duckdb_bind_set_cardinality`
 
----
 Sets the cardinality estimate for the table function, used for optimization.
 
 #### Syntax
@@ -543,7 +524,6 @@ Whether or not the cardinality estimate is exact, or an approximation
 
 ### `duckdb_bind_set_error`
 
----
 Report that an error has occurred while calling bind.
 
 #### Syntax
@@ -567,7 +547,6 @@ The error message
 
 ### `duckdb_init_get_extra_info`
 
----
 Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
@@ -590,7 +569,6 @@ The extra info
 
 ### `duckdb_init_get_bind_data`
 
----
 Gets the bind data set by `duckdb_bind_set_bind_data` during the bind.
 
 Note that the bind data should be considered as read-only.
@@ -616,7 +594,6 @@ The bind data object
 
 ### `duckdb_init_set_init_data`
 
----
 Sets the user-provided init data in the init object. This object can be retrieved again during execution.
 
 #### Syntax
@@ -644,7 +621,6 @@ The callback that will be called to destroy the init data (if any)
 
 ### `duckdb_init_get_column_count`
 
----
 Returns the number of projected columns.
 
 This function must be used if projection pushdown is enabled to figure out which columns to emit.
@@ -669,7 +645,6 @@ The number of projected columns.
 
 ### `duckdb_init_get_column_index`
 
----
 Returns the column index of the projected column at the specified position.
 
 This function must be used if projection pushdown is enabled to figure out which columns to emit.
@@ -698,7 +673,6 @@ The column index of the projected column.
 
 ### `duckdb_init_set_max_threads`
 
----
 Sets how many threads can process this table function in parallel (default: 1)
 
 #### Syntax
@@ -722,7 +696,6 @@ The maximum amount of threads that can process this table function
 
 ### `duckdb_init_set_error`
 
----
 Report that an error has occurred while calling init.
 
 #### Syntax
@@ -746,7 +719,6 @@ The error message
 
 ### `duckdb_function_get_extra_info`
 
----
 Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
@@ -769,7 +741,6 @@ The extra info
 
 ### `duckdb_function_get_bind_data`
 
----
 Gets the bind data set by `duckdb_bind_set_bind_data` during the bind.
 
 Note that the bind data should be considered as read-only.
@@ -795,7 +766,6 @@ The bind data object
 
 ### `duckdb_function_get_init_data`
 
----
 Gets the init data set by `duckdb_init_set_init_data` during the init.
 
 #### Syntax
@@ -818,7 +788,6 @@ The init data object
 
 ### `duckdb_function_get_local_init_data`
 
----
 Gets the thread-local init data set by `duckdb_init_set_init_data` during the local_init.
 
 #### Syntax
@@ -841,7 +810,6 @@ The init data object
 
 ### `duckdb_function_set_error`
 
----
 Report that an error has occurred while executing the function.
 
 #### Syntax

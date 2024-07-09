@@ -75,7 +75,6 @@ duckdb_appender_destroy(&appender);
 
 ### `duckdb_appender_create`
 
----
 Creates an appender object.
 
 Note that the object must be destroyed with `duckdb_appender_destroy`.
@@ -112,7 +111,6 @@ The resulting appender object.
 
 ### `duckdb_appender_column_count`
 
----
 Returns the number of columns in the table that belongs to the appender.
 
 * appender The appender to get the column count from.
@@ -134,7 +132,6 @@ The number of columns in the table.
 
 ### `duckdb_appender_column_type`
 
----
 Returns the type of the column at the specified index.
 
 Note: The resulting type should be destroyed with `duckdb_destroy_logical_type`.
@@ -160,7 +157,6 @@ The duckdb_logical_type of the column.
 
 ### `duckdb_appender_error`
 
----
 Returns the error message associated with the given appender.
 If the appender has no error message, this returns `nullptr` instead.
 
@@ -186,7 +182,6 @@ The error message, or `nullptr` if there is none.
 
 ### `duckdb_appender_flush`
 
----
 Flush the appender to the table, forcing the cache of the appender to be cleared. If flushing the data triggers a
 constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
 It is not possible to append more values. Call duckdb_appender_error to obtain the error message followed by
@@ -212,7 +207,6 @@ The appender to flush.
 
 ### `duckdb_appender_close`
 
----
 Closes the appender by flushing all intermediate states and closing it for further appends. If flushing the data
 triggers a constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
 Call duckdb_appender_error to obtain the error message followed by duckdb_appender_destroy to destroy the invalidated
@@ -238,7 +232,6 @@ The appender to flush and close.
 
 ### `duckdb_appender_destroy`
 
----
 Closes the appender by flushing all intermediate states to the table and destroying it. By destroying it, this function
 de-allocates all memory associated with the appender. If flushing the data triggers a constraint violation,
 then all data is invalidated, and this function returns DuckDBError. Due to the destruction of the appender, it is no
@@ -265,7 +258,6 @@ The appender to flush, close and destroy.
 
 ### `duckdb_appender_begin_row`
 
----
 A nop function, provided for backwards compatibility reasons. Does nothing. Only `duckdb_appender_end_row` is required.
 
 #### Syntax
@@ -278,7 +270,6 @@ A nop function, provided for backwards compatibility reasons. Does nothing. Only
 
 ### `duckdb_appender_end_row`
 
----
 Finish the current row of appends. After end_row is called, the next row can be appended.
 
 #### Syntax
@@ -301,7 +292,6 @@ The appender.
 
 ### `duckdb_append_bool`
 
----
 Append a bool value to the appender.
 
 #### Syntax
@@ -315,7 +305,6 @@ Append a bool value to the appender.
 
 ### `duckdb_append_int8`
 
----
 Append an int8_t value to the appender.
 
 #### Syntax
@@ -329,7 +318,6 @@ Append an int8_t value to the appender.
 
 ### `duckdb_append_int16`
 
----
 Append an int16_t value to the appender.
 
 #### Syntax
@@ -343,7 +331,6 @@ Append an int16_t value to the appender.
 
 ### `duckdb_append_int32`
 
----
 Append an int32_t value to the appender.
 
 #### Syntax
@@ -357,7 +344,6 @@ Append an int32_t value to the appender.
 
 ### `duckdb_append_int64`
 
----
 Append an int64_t value to the appender.
 
 #### Syntax
@@ -371,7 +357,6 @@ Append an int64_t value to the appender.
 
 ### `duckdb_append_hugeint`
 
----
 Append a duckdb_hugeint value to the appender.
 
 #### Syntax
@@ -385,7 +370,6 @@ Append a duckdb_hugeint value to the appender.
 
 ### `duckdb_append_uint8`
 
----
 Append a uint8_t value to the appender.
 
 #### Syntax
@@ -399,7 +383,6 @@ Append a uint8_t value to the appender.
 
 ### `duckdb_append_uint16`
 
----
 Append a uint16_t value to the appender.
 
 #### Syntax
@@ -413,7 +396,6 @@ Append a uint16_t value to the appender.
 
 ### `duckdb_append_uint32`
 
----
 Append a uint32_t value to the appender.
 
 #### Syntax
@@ -427,7 +409,6 @@ Append a uint32_t value to the appender.
 
 ### `duckdb_append_uint64`
 
----
 Append a uint64_t value to the appender.
 
 #### Syntax
@@ -441,7 +422,6 @@ Append a uint64_t value to the appender.
 
 ### `duckdb_append_uhugeint`
 
----
 Append a duckdb_uhugeint value to the appender.
 
 #### Syntax
@@ -455,7 +435,6 @@ Append a duckdb_uhugeint value to the appender.
 
 ### `duckdb_append_float`
 
----
 Append a float value to the appender.
 
 #### Syntax
@@ -469,7 +448,6 @@ Append a float value to the appender.
 
 ### `duckdb_append_double`
 
----
 Append a double value to the appender.
 
 #### Syntax
@@ -483,7 +461,6 @@ Append a double value to the appender.
 
 ### `duckdb_append_date`
 
----
 Append a duckdb_date value to the appender.
 
 #### Syntax
@@ -497,7 +474,6 @@ Append a duckdb_date value to the appender.
 
 ### `duckdb_append_time`
 
----
 Append a duckdb_time value to the appender.
 
 #### Syntax
@@ -511,7 +487,6 @@ Append a duckdb_time value to the appender.
 
 ### `duckdb_append_timestamp`
 
----
 Append a duckdb_timestamp value to the appender.
 
 #### Syntax
@@ -525,7 +500,6 @@ Append a duckdb_timestamp value to the appender.
 
 ### `duckdb_append_interval`
 
----
 Append a duckdb_interval value to the appender.
 
 #### Syntax
@@ -539,7 +513,6 @@ Append a duckdb_interval value to the appender.
 
 ### `duckdb_append_varchar`
 
----
 Append a varchar value to the appender.
 
 #### Syntax
@@ -553,7 +526,6 @@ Append a varchar value to the appender.
 
 ### `duckdb_append_varchar_length`
 
----
 Append a varchar value to the appender.
 
 #### Syntax
@@ -568,7 +540,6 @@ Append a varchar value to the appender.
 
 ### `duckdb_append_blob`
 
----
 Append a blob value to the appender.
 
 #### Syntax
@@ -583,7 +554,6 @@ Append a blob value to the appender.
 
 ### `duckdb_append_null`
 
----
 Append a NULL value to the appender (of any type).
 
 #### Syntax
@@ -596,7 +566,6 @@ Append a NULL value to the appender (of any type).
 
 ### `duckdb_append_data_chunk`
 
----
 Appends a pre-filled data chunk to the specified appender.
 
 The types of the data chunk must exactly match the types of the table, no casting is performed.

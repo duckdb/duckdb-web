@@ -395,7 +395,6 @@ title: Complete API
 
 ### `duckdb_open`
 
----
 Creates a new database or opens an existing database file stored at the given path.
 If no path is given a new in-memory database is created instead.
 The instantiated database should be closed with 'duckdb_close'.
@@ -424,7 +423,6 @@ The result database object.
 
 ### `duckdb_open_ext`
 
----
 Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the given path.
 The instantiated database should be closed with 'duckdb_close'.
 
@@ -461,7 +459,6 @@ Note that the error must be freed using `duckdb_free`.
 
 ### `duckdb_close`
 
----
 Closes the specified database and de-allocates all memory allocated for that database.
 This should be called after you are done with any database allocated through `duckdb_open` or `duckdb_open_ext`.
 Note that failing to call `duckdb_close` (in case of e.g., a program crash) will not cause data corruption.
@@ -484,7 +481,6 @@ The database object to shut down.
 
 ### `duckdb_connect`
 
----
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
 The instantiated connection should be closed using 'duckdb_disconnect'.
@@ -513,7 +509,6 @@ The result connection object.
 
 ### `duckdb_interrupt`
 
----
 Interrupt running query
 
 #### Syntax
@@ -533,7 +528,6 @@ The connection to interrupt
 
 ### `duckdb_query_progress`
 
----
 Get progress of the running query
 
 #### Syntax
@@ -556,7 +550,6 @@ The working connection
 
 ### `duckdb_disconnect`
 
----
 Closes the specified connection and de-allocates all memory allocated for that connection.
 
 #### Syntax
@@ -576,7 +569,6 @@ The connection to close.
 
 ### `duckdb_library_version`
 
----
 Returns the version of the linked DuckDB, with a version postfix for dev versions
 
 Usually used for developing C extensions that must return this for a compatibility check.
@@ -591,7 +583,6 @@ Usually used for developing C extensions that must return this for a compatibili
 
 ### `duckdb_create_config`
 
----
 Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
 through `duckdb_open_ext`.
 The duckdb_config must be destroyed using 'duckdb_destroy_config'
@@ -618,7 +609,6 @@ The result configuration object.
 
 ### `duckdb_config_count`
 
----
 This returns the total amount of configuration options available for usage with `duckdb_get_config_flag`.
 
 This should not be called in a loop as it internally loops over all the options.
@@ -640,7 +630,6 @@ The amount of config options available.
 
 ### `duckdb_get_config_flag`
 
----
 Obtains a human-readable name and description of a specific configuration option. This can be used to e.g.
 display configuration options. This will succeed unless `index` is out of range (i.e., `>= duckdb_config_count`).
 
@@ -674,7 +663,6 @@ A description of the configuration flag.
 
 ### `duckdb_set_config`
 
----
 Sets the specified option for the specified configuration. The configuration option is indicated by name.
 To obtain a list of config options, see `duckdb_get_config_flag`.
 
@@ -710,7 +698,6 @@ The value to set the configuration flag to.
 
 ### `duckdb_destroy_config`
 
----
 Destroys the specified configuration object and de-allocates all memory allocated for the object.
 
 #### Syntax
@@ -730,7 +717,6 @@ The configuration object to destroy.
 
 ### `duckdb_query`
 
----
 Executes a SQL query within a connection and stores the full (materialized) result in the out_result pointer.
 If the query fails to execute, DuckDBError is returned and the error message can be retrieved by calling
 `duckdb_result_error`.
@@ -766,7 +752,6 @@ The query result.
 
 ### `duckdb_destroy_result`
 
----
 Closes the result and de-allocates all memory allocated for that connection.
 
 #### Syntax
@@ -786,7 +771,6 @@ The result to destroy.
 
 ### `duckdb_column_name`
 
----
 Returns the column name of the specified column. The result should not need to be freed; the column names will
 automatically be destroyed when the result is destroyed.
 
@@ -816,7 +800,6 @@ The column name of the specified column.
 
 ### `duckdb_column_type`
 
----
 Returns the column type of the specified column.
 
 Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
@@ -845,7 +828,6 @@ The column type of the specified column.
 
 ### `duckdb_result_statement_type`
 
----
 Returns the statement type of the statement that was executed
 
 #### Syntax
@@ -868,7 +850,6 @@ duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 ### `duckdb_column_logical_type`
 
----
 Returns the logical column type of the specified column.
 
 The return type of this call should be destroyed with `duckdb_destroy_logical_type`.
@@ -899,7 +880,6 @@ The logical column type of the specified column.
 
 ### `duckdb_column_count`
 
----
 Returns the number of columns present in a the result object.
 
 #### Syntax
@@ -922,7 +902,6 @@ The number of columns present in the result object.
 
 ### `duckdb_row_count`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Returns the number of rows present in the result object.
@@ -947,7 +926,6 @@ The number of rows present in the result object.
 
 ### `duckdb_rows_changed`
 
----
 Returns the number of rows changed by the query stored in the result. This is relevant only for INSERT/UPDATE/DELETE
 queries. For other queries the rows_changed will be 0.
 
@@ -971,7 +949,6 @@ The number of rows changed.
 
 ### `duckdb_column_data`
 
----
 > Deprecated This method is deprecated. Prefer using `duckdb_result_get_chunk` instead.
 
 Returns the data of a specific column of a result in columnar format.
@@ -1009,7 +986,6 @@ The column data of the specified column.
 
 ### `duckdb_nullmask_data`
 
----
 > Deprecated This method is deprecated. Prefer using `duckdb_result_get_chunk` instead.
 
 Returns the nullmask of a specific column of a result in columnar format. The nullmask indicates for every row
@@ -1050,7 +1026,6 @@ The nullmask of the specified column.
 
 ### `duckdb_result_error`
 
----
 Returns the error message contained within the result. The error is only set if `duckdb_query` returns `DuckDBError`.
 
 The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_result` is called.
@@ -1075,7 +1050,6 @@ The error of the result.
 
 ### `duckdb_result_get_chunk`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Fetches a data chunk from the duckdb_result. This function should be called repeatedly until the result is exhausted.
@@ -1114,7 +1088,6 @@ The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 
 ### `duckdb_result_is_streaming`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Checks if the type of the internal result is StreamQueryResult.
@@ -1139,7 +1112,6 @@ Whether or not the result object is of the type StreamQueryResult
 
 ### `duckdb_result_chunk_count`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Returns the number of data chunks present in the result.
@@ -1164,7 +1136,6 @@ Number of data chunks present in the result.
 
 ### `duckdb_result_return_type`
 
----
 Returns the return_type of the given result, or DUCKDB_RETURN_TYPE_INVALID on error
 
 #### Syntax
@@ -1187,7 +1158,6 @@ The return_type
 
 ### `duckdb_value_boolean`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1209,7 +1179,6 @@ The boolean value at the specified location, or false if the value cannot be con
 
 ### `duckdb_value_int8`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1231,7 +1200,6 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 
 ### `duckdb_value_int16`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1253,7 +1221,6 @@ The int16_t value at the specified location, or 0 if the value cannot be convert
 
 ### `duckdb_value_int32`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1275,7 +1242,6 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 
 ### `duckdb_value_int64`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1297,7 +1263,6 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 
 ### `duckdb_value_hugeint`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1319,7 +1284,6 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 
 ### `duckdb_value_uhugeint`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1341,7 +1305,6 @@ The duckdb_uhugeint value at the specified location, or 0 if the value cannot be
 
 ### `duckdb_value_decimal`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1363,7 +1326,6 @@ The duckdb_decimal value at the specified location, or 0 if the value cannot be 
 
 ### `duckdb_value_uint8`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1385,7 +1347,6 @@ The uint8_t value at the specified location, or 0 if the value cannot be convert
 
 ### `duckdb_value_uint16`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1407,7 +1368,6 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 
 ### `duckdb_value_uint32`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1429,7 +1389,6 @@ The uint32_t value at the specified location, or 0 if the value cannot be conver
 
 ### `duckdb_value_uint64`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1451,7 +1410,6 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 
 ### `duckdb_value_float`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1473,7 +1431,6 @@ The float value at the specified location, or 0 if the value cannot be converted
 
 ### `duckdb_value_double`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1495,7 +1452,6 @@ The double value at the specified location, or 0 if the value cannot be converte
 
 ### `duckdb_value_date`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1517,7 +1473,6 @@ The duckdb_date value at the specified location, or 0 if the value cannot be con
 
 ### `duckdb_value_time`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1539,7 +1494,6 @@ The duckdb_time value at the specified location, or 0 if the value cannot be con
 
 ### `duckdb_value_timestamp`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1561,7 +1515,6 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 
 ### `duckdb_value_interval`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1583,7 +1536,6 @@ The duckdb_interval value at the specified location, or 0 if the value cannot be
 
 ### `duckdb_value_varchar`
 
----
 
 #### Syntax
 
@@ -1608,7 +1560,6 @@ converted. The result must be freed with `duckdb_free`.
 
 ### `duckdb_value_string`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1632,7 +1583,6 @@ The string value at the specified location. Attempts to cast the result value to
 
 ### `duckdb_value_varchar_internal`
 
----
 
 #### Syntax
 
@@ -1660,7 +1610,6 @@ The result must NOT be freed.
 
 ### `duckdb_value_string_internal`
 
----
 
 #### Syntax
 
@@ -1688,7 +1637,6 @@ The result must NOT be freed.
 
 ### `duckdb_value_blob`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1711,7 +1659,6 @@ value cannot be converted. The resulting field "blob.data" must be freed with `d
 
 ### `duckdb_value_is_null`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 #### Syntax
@@ -1733,7 +1680,6 @@ Returns true if the value at the specified index is NULL, and false otherwise.
 
 ### `duckdb_malloc`
 
----
 Allocate `size` bytes of memory using the duckdb internal malloc function. Any memory allocated in this manner
 should be freed using `duckdb_free`.
 
@@ -1757,7 +1703,6 @@ A pointer to the allocated memory region.
 
 ### `duckdb_free`
 
----
 Free a value returned from `duckdb_malloc`, `duckdb_value_varchar`, `duckdb_value_blob`, or
 `duckdb_value_string`.
 
@@ -1778,7 +1723,6 @@ The memory region to de-allocate.
 
 ### `duckdb_vector_size`
 
----
 The internal vector size used by DuckDB.
 This is the amount of tuples that will fit into a data chunk created by `duckdb_create_data_chunk`.
 
@@ -1799,7 +1743,6 @@ The vector size.
 
 ### `duckdb_string_is_inlined`
 
----
 Whether or not the duckdb_string_t value is inlined.
 This means that the data of the string does not have a separate allocation.
 
@@ -1813,7 +1756,6 @@ This means that the data of the string does not have a separate allocation.
 
 ### `duckdb_from_date`
 
----
 Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_date_struct`).
 
 #### Syntax
@@ -1836,7 +1778,6 @@ The `duckdb_date_struct` with the decomposed elements.
 
 ### `duckdb_to_date`
 
----
 Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
 
 #### Syntax
@@ -1859,7 +1800,6 @@ The `duckdb_date` element.
 
 ### `duckdb_is_finite_date`
 
----
 Test a `duckdb_date` to see if it is a finite value.
 
 #### Syntax
@@ -1882,7 +1822,6 @@ True if the date is finite, false if it is ±infinity.
 
 ### `duckdb_from_time`
 
----
 Decompose a `duckdb_time` object into hour, minute, second and microsecond (stored as `duckdb_time_struct`).
 
 #### Syntax
@@ -1905,7 +1844,6 @@ The `duckdb_time_struct` with the decomposed elements.
 
 ### `duckdb_create_time_tz`
 
----
 Create a `duckdb_time_tz` object from micros and a timezone offset.
 
 #### Syntax
@@ -1932,7 +1870,6 @@ The `duckdb_time_tz` element.
 
 ### `duckdb_from_time_tz`
 
----
 Decompose a TIME_TZ objects into micros and a timezone offset.
 
 Use `duckdb_from_time` to further decompose the micros into hour, minute, second and microsecond.
@@ -1960,7 +1897,6 @@ The timezone offset component of the time.
 
 ### `duckdb_to_time`
 
----
 Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_time_struct`).
 
 #### Syntax
@@ -1983,7 +1919,6 @@ The `duckdb_time` element.
 
 ### `duckdb_from_timestamp`
 
----
 Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
 
 #### Syntax
@@ -2006,7 +1941,6 @@ The `duckdb_timestamp_struct` with the decomposed elements.
 
 ### `duckdb_to_timestamp`
 
----
 Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
 
 #### Syntax
@@ -2029,7 +1963,6 @@ The `duckdb_timestamp` element.
 
 ### `duckdb_is_finite_timestamp`
 
----
 Test a `duckdb_timestamp` to see if it is a finite value.
 
 #### Syntax
@@ -2052,7 +1985,6 @@ True if the timestamp is finite, false if it is ±infinity.
 
 ### `duckdb_hugeint_to_double`
 
----
 Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` column) into a double.
 
 #### Syntax
@@ -2075,7 +2007,6 @@ The converted `double` element.
 
 ### `duckdb_double_to_hugeint`
 
----
 Converts a double value to a duckdb_hugeint object.
 
 If the conversion fails because the double value is too big the result will be 0.
@@ -2100,7 +2031,6 @@ The converted `duckdb_hugeint` element.
 
 ### `duckdb_uhugeint_to_double`
 
----
 Converts a duckdb_uhugeint object (as obtained from a `DUCKDB_TYPE_UHUGEINT` column) into a double.
 
 #### Syntax
@@ -2123,7 +2053,6 @@ The converted `double` element.
 
 ### `duckdb_double_to_uhugeint`
 
----
 Converts a double value to a duckdb_uhugeint object.
 
 If the conversion fails because the double value is too big the result will be 0.
@@ -2148,7 +2077,6 @@ The converted `duckdb_uhugeint` element.
 
 ### `duckdb_double_to_decimal`
 
----
 Converts a double value to a duckdb_decimal object.
 
 If the conversion fails because the double value is too big, or the width/scale are invalid the result will be 0.
@@ -2175,7 +2103,6 @@ The converted `duckdb_decimal` element.
 
 ### `duckdb_decimal_to_double`
 
----
 Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` column) into a double.
 
 #### Syntax
@@ -2198,7 +2125,6 @@ The converted `double` element.
 
 ### `duckdb_prepare`
 
----
 Create a prepared statement object from a query.
 
 Note that after calling `duckdb_prepare`, the prepared statement should always be destroyed using
@@ -2234,7 +2160,6 @@ The resulting prepared statement object
 
 ### `duckdb_destroy_prepare`
 
----
 Closes the prepared statement and de-allocates all memory allocated for the statement.
 
 #### Syntax
@@ -2254,7 +2179,6 @@ The prepared statement to destroy.
 
 ### `duckdb_prepare_error`
 
----
 Returns the error message associated with the given prepared statement.
 If the prepared statement has no error message, this returns `nullptr` instead.
 
@@ -2280,7 +2204,6 @@ The error message, or `nullptr` if there is none.
 
 ### `duckdb_nparams`
 
----
 Returns the number of parameters that can be provided to the given prepared statement.
 
 Returns 0 if the query was not successfully prepared.
@@ -2302,7 +2225,6 @@ The prepared statement to obtain the number of parameters for.
 
 ### `duckdb_parameter_name`
 
----
 Returns the name used to identify the parameter
 The returned string should be freed using `duckdb_free`.
 
@@ -2326,7 +2248,6 @@ The prepared statement for which to get the parameter name from.
 
 ### `duckdb_param_type`
 
----
 Returns the parameter type for the parameter at the given index.
 
 Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the statement was not successfully prepared.
@@ -2355,7 +2276,6 @@ The parameter type
 
 ### `duckdb_clear_bindings`
 
----
 Clear the params bind to the prepared statement.
 
 #### Syntax
@@ -2368,7 +2288,6 @@ Clear the params bind to the prepared statement.
 
 ### `duckdb_prepared_statement_type`
 
----
 Returns the statement type of the statement to be executed
 
 #### Syntax
@@ -2391,7 +2310,6 @@ duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 ### `duckdb_bind_value`
 
----
 Binds a value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2406,7 +2324,6 @@ Binds a value to the prepared statement at the specified index.
 
 ### `duckdb_bind_parameter_index`
 
----
 Retrieve the index of the parameter for the prepared statement, identified by name
 
 #### Syntax
@@ -2421,7 +2338,6 @@ Retrieve the index of the parameter for the prepared statement, identified by na
 
 ### `duckdb_bind_boolean`
 
----
 Binds a bool value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2436,7 +2352,6 @@ Binds a bool value to the prepared statement at the specified index.
 
 ### `duckdb_bind_int8`
 
----
 Binds an int8_t value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2451,7 +2366,6 @@ Binds an int8_t value to the prepared statement at the specified index.
 
 ### `duckdb_bind_int16`
 
----
 Binds an int16_t value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2466,7 +2380,6 @@ Binds an int16_t value to the prepared statement at the specified index.
 
 ### `duckdb_bind_int32`
 
----
 Binds an int32_t value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2481,7 +2394,6 @@ Binds an int32_t value to the prepared statement at the specified index.
 
 ### `duckdb_bind_int64`
 
----
 Binds an int64_t value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2496,7 +2408,6 @@ Binds an int64_t value to the prepared statement at the specified index.
 
 ### `duckdb_bind_hugeint`
 
----
 Binds a duckdb_hugeint value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2511,7 +2422,6 @@ Binds a duckdb_hugeint value to the prepared statement at the specified index.
 
 ### `duckdb_bind_uhugeint`
 
----
 Binds an duckdb_uhugeint value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2526,7 +2436,6 @@ Binds an duckdb_uhugeint value to the prepared statement at the specified index.
 
 ### `duckdb_bind_decimal`
 
----
 Binds a duckdb_decimal value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2541,7 +2450,6 @@ Binds a duckdb_decimal value to the prepared statement at the specified index.
 
 ### `duckdb_bind_uint8`
 
----
 Binds an uint8_t value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2556,7 +2464,6 @@ Binds an uint8_t value to the prepared statement at the specified index.
 
 ### `duckdb_bind_uint16`
 
----
 Binds an uint16_t value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2571,7 +2478,6 @@ Binds an uint16_t value to the prepared statement at the specified index.
 
 ### `duckdb_bind_uint32`
 
----
 Binds an uint32_t value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2586,7 +2492,6 @@ Binds an uint32_t value to the prepared statement at the specified index.
 
 ### `duckdb_bind_uint64`
 
----
 Binds an uint64_t value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2601,7 +2506,6 @@ Binds an uint64_t value to the prepared statement at the specified index.
 
 ### `duckdb_bind_float`
 
----
 Binds a float value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2616,7 +2520,6 @@ Binds a float value to the prepared statement at the specified index.
 
 ### `duckdb_bind_double`
 
----
 Binds a double value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2631,7 +2534,6 @@ Binds a double value to the prepared statement at the specified index.
 
 ### `duckdb_bind_date`
 
----
 Binds a duckdb_date value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2646,7 +2548,6 @@ Binds a duckdb_date value to the prepared statement at the specified index.
 
 ### `duckdb_bind_time`
 
----
 Binds a duckdb_time value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2661,7 +2562,6 @@ Binds a duckdb_time value to the prepared statement at the specified index.
 
 ### `duckdb_bind_timestamp`
 
----
 Binds a duckdb_timestamp value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2676,7 +2576,6 @@ Binds a duckdb_timestamp value to the prepared statement at the specified index.
 
 ### `duckdb_bind_interval`
 
----
 Binds a duckdb_interval value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2691,7 +2590,6 @@ Binds a duckdb_interval value to the prepared statement at the specified index.
 
 ### `duckdb_bind_varchar`
 
----
 Binds a null-terminated varchar value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2706,7 +2604,6 @@ Binds a null-terminated varchar value to the prepared statement at the specified
 
 ### `duckdb_bind_varchar_length`
 
----
 Binds a varchar value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2722,7 +2619,6 @@ Binds a varchar value to the prepared statement at the specified index.
 
 ### `duckdb_bind_blob`
 
----
 Binds a blob value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2738,7 +2634,6 @@ Binds a blob value to the prepared statement at the specified index.
 
 ### `duckdb_bind_null`
 
----
 Binds a NULL value to the prepared statement at the specified index.
 
 #### Syntax
@@ -2752,7 +2647,6 @@ Binds a NULL value to the prepared statement at the specified index.
 
 ### `duckdb_execute_prepared`
 
----
 Executes the prepared statement with the given bound parameters, and returns a materialized query result.
 
 This method can be called multiple times for each prepared statement, and the parameters can be modified
@@ -2784,7 +2678,6 @@ The query result.
 
 ### `duckdb_execute_prepared_streaming`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Executes the prepared statement with the given bound parameters, and returns an optionally-streaming query result.
@@ -2819,7 +2712,6 @@ The query result.
 
 ### `duckdb_extract_statements`
 
----
 Extract all statements from a query.
 Note that after calling `duckdb_extract_statements`, the extracted statements should always be destroyed using
 `duckdb_destroy_extracted`, even if no statements were extracted.
@@ -2854,7 +2746,6 @@ The number of extracted statements or 0 on failure.
 
 ### `duckdb_prepare_extracted_statement`
 
----
 Prepare an extracted statement.
 Note that after calling `duckdb_prepare_extracted_statement`, the prepared statement should always be destroyed using
 `duckdb_destroy_prepare`, even if the prepare fails.
@@ -2893,7 +2784,6 @@ The resulting prepared statement object
 
 ### `duckdb_extract_statements_error`
 
----
 Returns the error message contained within the extracted statements.
 The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_extracted` is called.
 
@@ -2917,7 +2807,6 @@ The error of the extracted statements.
 
 ### `duckdb_destroy_extracted`
 
----
 De-allocates all memory allocated for the extracted statements.
 
 #### Syntax
@@ -2937,7 +2826,6 @@ The extracted statements to destroy.
 
 ### `duckdb_pending_prepared`
 
----
 Executes the prepared statement with the given bound parameters, and returns a pending result.
 The pending result represents an intermediate structure for a query that is not yet fully executed.
 The pending result can be used to incrementally execute a query, returning control to the client between tasks.
@@ -2969,7 +2857,6 @@ The pending query result.
 
 ### `duckdb_pending_prepared_streaming`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Executes the prepared statement with the given bound parameters, and returns a pending result.
@@ -3003,7 +2890,6 @@ The pending query result.
 
 ### `duckdb_destroy_pending`
 
----
 Closes the pending result and de-allocates all memory allocated for the result.
 
 #### Syntax
@@ -3023,7 +2909,6 @@ The pending result to destroy.
 
 ### `duckdb_pending_error`
 
----
 Returns the error message contained within the pending result.
 
 The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_pending` is called.
@@ -3048,7 +2933,6 @@ The error of the pending result.
 
 ### `duckdb_pending_execute_task`
 
----
 Executes a single task within the query, returning whether or not the query is ready.
 
 If this returns DUCKDB_PENDING_RESULT_READY, the duckdb_execute_pending function can be called to obtain the result.
@@ -3077,7 +2961,6 @@ The state of the pending result after the execution.
 
 ### `duckdb_pending_execute_check_state`
 
----
 If this returns DUCKDB_PENDING_RESULT_READY, the duckdb_execute_pending function can be called to obtain the result.
 If this returns DUCKDB_PENDING_RESULT_NOT_READY, the duckdb_pending_execute_check_state function should be called again.
 If this returns DUCKDB_PENDING_ERROR, an error occurred during execution.
@@ -3104,7 +2987,6 @@ The state of the pending result.
 
 ### `duckdb_execute_pending`
 
----
 Fully execute a pending query result, returning the final query result.
 
 If duckdb_pending_execute_task has been called until DUCKDB_PENDING_RESULT_READY was returned, this will return fast.
@@ -3136,7 +3018,6 @@ The result object.
 
 ### `duckdb_pending_execution_is_finished`
 
----
 Returns whether a duckdb_pending_state is finished executing. For example if `pending_state` is
 DUCKDB_PENDING_RESULT_READY, this function will return true.
 
@@ -3160,7 +3041,6 @@ Boolean indicating pending execution should be considered finished.
 
 ### `duckdb_destroy_value`
 
----
 Destroys the value and de-allocates all memory allocated for that type.
 
 #### Syntax
@@ -3180,7 +3060,6 @@ The value to destroy.
 
 ### `duckdb_create_varchar`
 
----
 Creates a value from a null-terminated string
 
 #### Syntax
@@ -3203,7 +3082,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_varchar_length`
 
----
 Creates a value from a string
 
 #### Syntax
@@ -3230,7 +3108,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_int64`
 
----
 Creates a value from an int64
 
 #### Syntax
@@ -3253,7 +3130,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_struct_value`
 
----
 Creates a struct value from a type and an array of values
 
 #### Syntax
@@ -3280,7 +3156,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_list_value`
 
----
 Creates a list value from a type and an array of values of length `value_count`
 
 #### Syntax
@@ -3311,7 +3186,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_array_value`
 
----
 Creates a array value from a type and an array of values of length `value_count`
 
 #### Syntax
@@ -3342,7 +3216,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_get_varchar`
 
----
 Obtains a string representation of the given value.
 The result must be destroyed with `duckdb_free`.
 
@@ -3366,7 +3239,6 @@ The string value. This must be destroyed with `duckdb_free`.
 
 ### `duckdb_get_int64`
 
----
 Obtains an int64 of the given value.
 
 #### Syntax
@@ -3389,7 +3261,6 @@ The int64 value, or 0 if no conversion is possible
 
 ### `duckdb_create_logical_type`
 
----
 Creates a `duckdb_logical_type` from a standard primitive type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -3415,7 +3286,6 @@ The logical type.
 
 ### `duckdb_logical_type_get_alias`
 
----
 Returns the alias of a duckdb_logical_type, if one is set, else `NULL`.
 The result must be destroyed with `duckdb_free`.
 
@@ -3439,7 +3309,6 @@ The alias or `NULL`
 
 ### `duckdb_create_list_type`
 
----
 Creates a list type from its child type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -3463,7 +3332,6 @@ The logical type.
 
 ### `duckdb_create_array_type`
 
----
 Creates a array type from its child type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -3491,7 +3359,6 @@ The logical type.
 
 ### `duckdb_create_map_type`
 
----
 Creates a map type from its key type and value type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -3516,7 +3383,6 @@ The logical type.
 
 ### `duckdb_create_union_type`
 
----
 Creates a UNION type from the passed types array.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -3545,7 +3411,6 @@ The logical type.
 
 ### `duckdb_create_struct_type`
 
----
 Creates a STRUCT type from the passed member name and type arrays.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -3577,7 +3442,6 @@ The logical type.
 
 ### `duckdb_create_enum_type`
 
----
 Creates an ENUM type from the passed member name array.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -3608,7 +3472,6 @@ The logical type.
 
 ### `duckdb_create_decimal_type`
 
----
 Creates a `duckdb_logical_type` of type decimal with the specified width and scale.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -3636,7 +3499,6 @@ The logical type.
 
 ### `duckdb_get_type_id`
 
----
 Retrieves the enum type class of a `duckdb_logical_type`.
 
 #### Syntax
@@ -3659,7 +3521,6 @@ The type id
 
 ### `duckdb_decimal_width`
 
----
 Retrieves the width of a decimal type.
 
 #### Syntax
@@ -3682,7 +3543,6 @@ The width of the decimal type
 
 ### `duckdb_decimal_scale`
 
----
 Retrieves the scale of a decimal type.
 
 #### Syntax
@@ -3705,7 +3565,6 @@ The scale of the decimal type
 
 ### `duckdb_decimal_internal_type`
 
----
 Retrieves the internal storage type of a decimal type.
 
 #### Syntax
@@ -3728,7 +3587,6 @@ The internal type of the decimal type
 
 ### `duckdb_enum_internal_type`
 
----
 Retrieves the internal storage type of an enum type.
 
 #### Syntax
@@ -3751,7 +3609,6 @@ The internal type of the enum type
 
 ### `duckdb_enum_dictionary_size`
 
----
 Retrieves the dictionary size of the enum type.
 
 #### Syntax
@@ -3774,7 +3631,6 @@ The dictionary size of the enum type
 
 ### `duckdb_enum_dictionary_value`
 
----
 Retrieves the dictionary value at the specified position from the enum.
 
 The result must be freed with `duckdb_free`.
@@ -3803,7 +3659,6 @@ The string value of the enum type. Must be freed with `duckdb_free`.
 
 ### `duckdb_list_type_child_type`
 
----
 Retrieves the child type of the given list type.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -3828,7 +3683,6 @@ The child type of the list type. Must be destroyed with `duckdb_destroy_logical_
 
 ### `duckdb_array_type_child_type`
 
----
 Retrieves the child type of the given array type.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -3853,7 +3707,6 @@ The child type of the array type. Must be destroyed with `duckdb_destroy_logical
 
 ### `duckdb_array_type_array_size`
 
----
 Retrieves the array size of the given array type.
 
 #### Syntax
@@ -3876,7 +3729,6 @@ The fixed number of elements the values of this array type can store.
 
 ### `duckdb_map_type_key_type`
 
----
 Retrieves the key type of the given map type.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -3901,7 +3753,6 @@ The key type of the map type. Must be destroyed with `duckdb_destroy_logical_typ
 
 ### `duckdb_map_type_value_type`
 
----
 Retrieves the value type of the given map type.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -3926,7 +3777,6 @@ The value type of the map type. Must be destroyed with `duckdb_destroy_logical_t
 
 ### `duckdb_struct_type_child_count`
 
----
 Returns the number of children of a struct type.
 
 #### Syntax
@@ -3949,7 +3799,6 @@ The number of children of a struct type.
 
 ### `duckdb_struct_type_child_name`
 
----
 Retrieves the name of the struct child.
 
 The result must be freed with `duckdb_free`.
@@ -3978,7 +3827,6 @@ The name of the struct type. Must be freed with `duckdb_free`.
 
 ### `duckdb_struct_type_child_type`
 
----
 Retrieves the child type of the given struct type at the specified index.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -4007,7 +3855,6 @@ The child type of the struct type. Must be destroyed with `duckdb_destroy_logica
 
 ### `duckdb_union_type_member_count`
 
----
 Returns the number of members that the union type has.
 
 #### Syntax
@@ -4030,7 +3877,6 @@ The number of members of a union type.
 
 ### `duckdb_union_type_member_name`
 
----
 Retrieves the name of the union member.
 
 The result must be freed with `duckdb_free`.
@@ -4059,7 +3905,6 @@ The name of the union member. Must be freed with `duckdb_free`.
 
 ### `duckdb_union_type_member_type`
 
----
 Retrieves the child type of the given union member at the specified index.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -4088,7 +3933,6 @@ The child type of the union member. Must be destroyed with `duckdb_destroy_logic
 
 ### `duckdb_destroy_logical_type`
 
----
 Destroys the logical type and de-allocates all memory allocated for that type.
 
 #### Syntax
@@ -4108,7 +3952,6 @@ The logical type to destroy.
 
 ### `duckdb_create_data_chunk`
 
----
 Creates an empty DataChunk with the specified set of types.
 
 Note that the result must be destroyed with `duckdb_destroy_data_chunk`.
@@ -4137,7 +3980,6 @@ The data chunk.
 
 ### `duckdb_destroy_data_chunk`
 
----
 Destroys the data chunk and de-allocates all memory allocated for that chunk.
 
 #### Syntax
@@ -4157,7 +3999,6 @@ The data chunk to destroy.
 
 ### `duckdb_data_chunk_reset`
 
----
 Resets a data chunk, clearing the validity masks and setting the cardinality of the data chunk to 0.
 
 #### Syntax
@@ -4177,7 +4018,6 @@ The data chunk to reset.
 
 ### `duckdb_data_chunk_get_column_count`
 
----
 Retrieves the number of columns in a data chunk.
 
 #### Syntax
@@ -4200,7 +4040,6 @@ The number of columns in the data chunk
 
 ### `duckdb_data_chunk_get_vector`
 
----
 Retrieves the vector at the specified column index in the data chunk.
 
 The pointer to the vector is valid for as long as the chunk is alive.
@@ -4227,7 +4066,6 @@ The vector
 
 ### `duckdb_data_chunk_get_size`
 
----
 Retrieves the current number of tuples in a data chunk.
 
 #### Syntax
@@ -4250,7 +4088,6 @@ The number of tuples in the data chunk
 
 ### `duckdb_data_chunk_set_size`
 
----
 Sets the current number of tuples in a data chunk.
 
 #### Syntax
@@ -4274,7 +4111,6 @@ The number of tuples in the data chunk
 
 ### `duckdb_vector_get_column_type`
 
----
 Retrieves the column type of the specified vector.
 
 The result must be destroyed with `duckdb_destroy_logical_type`.
@@ -4299,7 +4135,6 @@ The type of the vector
 
 ### `duckdb_vector_get_data`
 
----
 Retrieves the data pointer of the vector.
 
 The data pointer can be used to read or write values from the vector.
@@ -4325,7 +4160,6 @@ The data pointer
 
 ### `duckdb_vector_get_validity`
 
----
 Retrieves the validity mask pointer of the specified vector.
 
 If all values are valid, this function MIGHT return NULL!
@@ -4362,7 +4196,6 @@ The pointer to the validity mask, or NULL if no validity mask is present
 
 ### `duckdb_vector_ensure_validity_writable`
 
----
 Ensures the validity mask is writable by allocating it.
 
 After this function is called, `duckdb_vector_get_validity` will ALWAYS return non-NULL.
@@ -4385,7 +4218,6 @@ The vector to alter
 
 ### `duckdb_vector_assign_string_element`
 
----
 Assigns a string element in the vector at the specified location.
 
 #### Syntax
@@ -4413,7 +4245,6 @@ The null-terminated string
 
 ### `duckdb_vector_assign_string_element_len`
 
----
 Assigns a string element in the vector at the specified location. You may also use this function to assign BLOBs.
 
 #### Syntax
@@ -4445,7 +4276,6 @@ The length of the string (in bytes)
 
 ### `duckdb_list_vector_get_child`
 
----
 Retrieves the child vector of a list vector.
 
 The resulting vector is valid as long as the parent vector is valid.
@@ -4470,7 +4300,6 @@ The child vector
 
 ### `duckdb_list_vector_get_size`
 
----
 Returns the size of the child vector of the list.
 
 #### Syntax
@@ -4493,7 +4322,6 @@ The size of the child list
 
 ### `duckdb_list_vector_set_size`
 
----
 Sets the total size of the underlying child-vector of a list vector.
 
 #### Syntax
@@ -4520,7 +4348,6 @@ The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 ### `duckdb_list_vector_reserve`
 
----
 Sets the total capacity of the underlying child-vector of a list.
 
 #### Syntax
@@ -4547,7 +4374,6 @@ The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 ### `duckdb_struct_vector_get_child`
 
----
 Retrieves the child vector of a struct vector.
 
 The resulting vector is valid as long as the parent vector is valid.
@@ -4576,7 +4402,6 @@ The child vector
 
 ### `duckdb_array_vector_get_child`
 
----
 Retrieves the child vector of a array vector.
 
 The resulting vector is valid as long as the parent vector is valid.
@@ -4602,7 +4427,6 @@ The child vector
 
 ### `duckdb_validity_row_is_valid`
 
----
 Returns whether or not a row is valid (i.e., not NULL) in the given validity mask.
 
 #### Syntax
@@ -4629,7 +4453,6 @@ true if the row is valid, false otherwise
 
 ### `duckdb_validity_set_row_validity`
 
----
 In a validity mask, sets a specific row to either valid or invalid.
 
 Note that `duckdb_vector_ensure_validity_writable` should be called before calling `duckdb_vector_get_validity`,
@@ -4660,7 +4483,6 @@ Whether or not to set the row to valid, or invalid
 
 ### `duckdb_validity_set_row_invalid`
 
----
 In a validity mask, sets a specific row to invalid.
 
 Equivalent to `duckdb_validity_set_row_validity` with valid set to false.
@@ -4686,7 +4508,6 @@ The row index
 
 ### `duckdb_validity_set_row_valid`
 
----
 In a validity mask, sets a specific row to valid.
 
 Equivalent to `duckdb_validity_set_row_validity` with valid set to true.
@@ -4712,7 +4533,6 @@ The row index
 
 ### `duckdb_create_table_function`
 
----
 Creates a new empty table function.
 
 The return value should be destroyed with `duckdb_destroy_table_function`.
@@ -4734,7 +4554,6 @@ The table function object.
 
 ### `duckdb_destroy_table_function`
 
----
 Destroys the given table function object.
 
 #### Syntax
@@ -4754,7 +4573,6 @@ The table function to destroy
 
 ### `duckdb_table_function_set_name`
 
----
 Sets the name of the given table function.
 
 #### Syntax
@@ -4778,7 +4596,6 @@ The name of the table function
 
 ### `duckdb_table_function_add_parameter`
 
----
 Adds a parameter to the table function.
 
 #### Syntax
@@ -4802,7 +4619,6 @@ The type of the parameter to add.
 
 ### `duckdb_table_function_add_named_parameter`
 
----
 Adds a named parameter to the table function.
 
 #### Syntax
@@ -4830,7 +4646,6 @@ The type of the parameter to add.
 
 ### `duckdb_table_function_set_extra_info`
 
----
 Assigns extra information to the table function that can be fetched during binding, etc.
 
 #### Syntax
@@ -4858,7 +4673,6 @@ The callback that will be called to destroy the bind data (if any)
 
 ### `duckdb_table_function_set_bind`
 
----
 Sets the bind function of the table function.
 
 #### Syntax
@@ -4882,7 +4696,6 @@ The bind function
 
 ### `duckdb_table_function_set_init`
 
----
 Sets the init function of the table function.
 
 #### Syntax
@@ -4906,7 +4719,6 @@ The init function
 
 ### `duckdb_table_function_set_local_init`
 
----
 Sets the thread-local init function of the table function.
 
 #### Syntax
@@ -4930,7 +4742,6 @@ The init function
 
 ### `duckdb_table_function_set_function`
 
----
 Sets the main function of the table function.
 
 #### Syntax
@@ -4954,7 +4765,6 @@ The function
 
 ### `duckdb_table_function_supports_projection_pushdown`
 
----
 Sets whether or not the given table function supports projection pushdown.
 
 If this is set to true, the system will provide a list of all required columns in the `init` stage through
@@ -4982,7 +4792,6 @@ True if the table function supports projection pushdown, false otherwise.
 
 ### `duckdb_register_table_function`
 
----
 Register the table function object within the given connection.
 
 The function requires at least a name, a bind function, an init function and a main function.
@@ -5013,7 +4822,6 @@ Whether or not the registration was successful.
 
 ### `duckdb_bind_get_extra_info`
 
----
 Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
@@ -5036,7 +4844,6 @@ The extra info
 
 ### `duckdb_bind_add_result_column`
 
----
 Adds a result column to the output of the table function.
 
 #### Syntax
@@ -5064,7 +4871,6 @@ The logical type of the column
 
 ### `duckdb_bind_get_parameter_count`
 
----
 Retrieves the number of regular (non-named) parameters to the function.
 
 #### Syntax
@@ -5087,7 +4893,6 @@ The number of parameters
 
 ### `duckdb_bind_get_parameter`
 
----
 Retrieves the parameter at the given index.
 
 The result must be destroyed with `duckdb_destroy_value`.
@@ -5116,7 +4921,6 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_bind_get_named_parameter`
 
----
 Retrieves a named parameter with the given name.
 
 The result must be destroyed with `duckdb_destroy_value`.
@@ -5145,7 +4949,6 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_bind_set_bind_data`
 
----
 Sets the user-provided bind data in the bind object. This object can be retrieved again during execution.
 
 #### Syntax
@@ -5173,7 +4976,6 @@ The callback that will be called to destroy the bind data (if any)
 
 ### `duckdb_bind_set_cardinality`
 
----
 Sets the cardinality estimate for the table function, used for optimization.
 
 #### Syntax
@@ -5198,7 +5000,6 @@ Whether or not the cardinality estimate is exact, or an approximation
 
 ### `duckdb_bind_set_error`
 
----
 Report that an error has occurred while calling bind.
 
 #### Syntax
@@ -5222,7 +5023,6 @@ The error message
 
 ### `duckdb_init_get_extra_info`
 
----
 Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
@@ -5245,7 +5045,6 @@ The extra info
 
 ### `duckdb_init_get_bind_data`
 
----
 Gets the bind data set by `duckdb_bind_set_bind_data` during the bind.
 
 Note that the bind data should be considered as read-only.
@@ -5271,7 +5070,6 @@ The bind data object
 
 ### `duckdb_init_set_init_data`
 
----
 Sets the user-provided init data in the init object. This object can be retrieved again during execution.
 
 #### Syntax
@@ -5299,7 +5097,6 @@ The callback that will be called to destroy the init data (if any)
 
 ### `duckdb_init_get_column_count`
 
----
 Returns the number of projected columns.
 
 This function must be used if projection pushdown is enabled to figure out which columns to emit.
@@ -5324,7 +5121,6 @@ The number of projected columns.
 
 ### `duckdb_init_get_column_index`
 
----
 Returns the column index of the projected column at the specified position.
 
 This function must be used if projection pushdown is enabled to figure out which columns to emit.
@@ -5353,7 +5149,6 @@ The column index of the projected column.
 
 ### `duckdb_init_set_max_threads`
 
----
 Sets how many threads can process this table function in parallel (default: 1)
 
 #### Syntax
@@ -5377,7 +5172,6 @@ The maximum amount of threads that can process this table function
 
 ### `duckdb_init_set_error`
 
----
 Report that an error has occurred while calling init.
 
 #### Syntax
@@ -5401,7 +5195,6 @@ The error message
 
 ### `duckdb_function_get_extra_info`
 
----
 Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
 
 #### Syntax
@@ -5424,7 +5217,6 @@ The extra info
 
 ### `duckdb_function_get_bind_data`
 
----
 Gets the bind data set by `duckdb_bind_set_bind_data` during the bind.
 
 Note that the bind data should be considered as read-only.
@@ -5450,7 +5242,6 @@ The bind data object
 
 ### `duckdb_function_get_init_data`
 
----
 Gets the init data set by `duckdb_init_set_init_data` during the init.
 
 #### Syntax
@@ -5473,7 +5264,6 @@ The init data object
 
 ### `duckdb_function_get_local_init_data`
 
----
 Gets the thread-local init data set by `duckdb_init_set_init_data` during the local_init.
 
 #### Syntax
@@ -5496,7 +5286,6 @@ The init data object
 
 ### `duckdb_function_set_error`
 
----
 Report that an error has occurred while executing the function.
 
 #### Syntax
@@ -5520,7 +5309,6 @@ The error message
 
 ### `duckdb_add_replacement_scan`
 
----
 Add a replacement scan definition to the specified database.
 
 #### Syntax
@@ -5552,7 +5340,6 @@ The delete callback to call on the extra data, if any
 
 ### `duckdb_replacement_scan_set_function_name`
 
----
 Sets the replacement function name. If this function is called in the replacement callback,
 the replacement scan is performed. If it is not called, the replacement callback is not performed.
 
@@ -5577,7 +5364,6 @@ The function name to substitute.
 
 ### `duckdb_replacement_scan_add_parameter`
 
----
 Adds a parameter to the replacement scan function.
 
 #### Syntax
@@ -5601,7 +5387,6 @@ The parameter to add.
 
 ### `duckdb_replacement_scan_set_error`
 
----
 Report that an error has occurred while executing the replacement scan.
 
 #### Syntax
@@ -5625,7 +5410,6 @@ The error message
 
 ### `duckdb_appender_create`
 
----
 Creates an appender object.
 
 Note that the object must be destroyed with `duckdb_appender_destroy`.
@@ -5662,7 +5446,6 @@ The resulting appender object.
 
 ### `duckdb_appender_column_count`
 
----
 Returns the number of columns in the table that belongs to the appender.
 
 * appender The appender to get the column count from.
@@ -5684,7 +5467,6 @@ The number of columns in the table.
 
 ### `duckdb_appender_column_type`
 
----
 Returns the type of the column at the specified index.
 
 Note: The resulting type should be destroyed with `duckdb_destroy_logical_type`.
@@ -5710,7 +5492,6 @@ The duckdb_logical_type of the column.
 
 ### `duckdb_appender_error`
 
----
 Returns the error message associated with the given appender.
 If the appender has no error message, this returns `nullptr` instead.
 
@@ -5736,7 +5517,6 @@ The error message, or `nullptr` if there is none.
 
 ### `duckdb_appender_flush`
 
----
 Flush the appender to the table, forcing the cache of the appender to be cleared. If flushing the data triggers a
 constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
 It is not possible to append more values. Call duckdb_appender_error to obtain the error message followed by
@@ -5762,7 +5542,6 @@ The appender to flush.
 
 ### `duckdb_appender_close`
 
----
 Closes the appender by flushing all intermediate states and closing it for further appends. If flushing the data
 triggers a constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
 Call duckdb_appender_error to obtain the error message followed by duckdb_appender_destroy to destroy the invalidated
@@ -5788,7 +5567,6 @@ The appender to flush and close.
 
 ### `duckdb_appender_destroy`
 
----
 Closes the appender by flushing all intermediate states to the table and destroying it. By destroying it, this function
 de-allocates all memory associated with the appender. If flushing the data triggers a constraint violation,
 then all data is invalidated, and this function returns DuckDBError. Due to the destruction of the appender, it is no
@@ -5815,7 +5593,6 @@ The appender to flush, close and destroy.
 
 ### `duckdb_appender_begin_row`
 
----
 A nop function, provided for backwards compatibility reasons. Does nothing. Only `duckdb_appender_end_row` is required.
 
 #### Syntax
@@ -5828,7 +5605,6 @@ A nop function, provided for backwards compatibility reasons. Does nothing. Only
 
 ### `duckdb_appender_end_row`
 
----
 Finish the current row of appends. After end_row is called, the next row can be appended.
 
 #### Syntax
@@ -5851,7 +5627,6 @@ The appender.
 
 ### `duckdb_append_bool`
 
----
 Append a bool value to the appender.
 
 #### Syntax
@@ -5865,7 +5640,6 @@ Append a bool value to the appender.
 
 ### `duckdb_append_int8`
 
----
 Append an int8_t value to the appender.
 
 #### Syntax
@@ -5879,7 +5653,6 @@ Append an int8_t value to the appender.
 
 ### `duckdb_append_int16`
 
----
 Append an int16_t value to the appender.
 
 #### Syntax
@@ -5893,7 +5666,6 @@ Append an int16_t value to the appender.
 
 ### `duckdb_append_int32`
 
----
 Append an int32_t value to the appender.
 
 #### Syntax
@@ -5907,7 +5679,6 @@ Append an int32_t value to the appender.
 
 ### `duckdb_append_int64`
 
----
 Append an int64_t value to the appender.
 
 #### Syntax
@@ -5921,7 +5692,6 @@ Append an int64_t value to the appender.
 
 ### `duckdb_append_hugeint`
 
----
 Append a duckdb_hugeint value to the appender.
 
 #### Syntax
@@ -5935,7 +5705,6 @@ Append a duckdb_hugeint value to the appender.
 
 ### `duckdb_append_uint8`
 
----
 Append a uint8_t value to the appender.
 
 #### Syntax
@@ -5949,7 +5718,6 @@ Append a uint8_t value to the appender.
 
 ### `duckdb_append_uint16`
 
----
 Append a uint16_t value to the appender.
 
 #### Syntax
@@ -5963,7 +5731,6 @@ Append a uint16_t value to the appender.
 
 ### `duckdb_append_uint32`
 
----
 Append a uint32_t value to the appender.
 
 #### Syntax
@@ -5977,7 +5744,6 @@ Append a uint32_t value to the appender.
 
 ### `duckdb_append_uint64`
 
----
 Append a uint64_t value to the appender.
 
 #### Syntax
@@ -5991,7 +5757,6 @@ Append a uint64_t value to the appender.
 
 ### `duckdb_append_uhugeint`
 
----
 Append a duckdb_uhugeint value to the appender.
 
 #### Syntax
@@ -6005,7 +5770,6 @@ Append a duckdb_uhugeint value to the appender.
 
 ### `duckdb_append_float`
 
----
 Append a float value to the appender.
 
 #### Syntax
@@ -6019,7 +5783,6 @@ Append a float value to the appender.
 
 ### `duckdb_append_double`
 
----
 Append a double value to the appender.
 
 #### Syntax
@@ -6033,7 +5796,6 @@ Append a double value to the appender.
 
 ### `duckdb_append_date`
 
----
 Append a duckdb_date value to the appender.
 
 #### Syntax
@@ -6047,7 +5809,6 @@ Append a duckdb_date value to the appender.
 
 ### `duckdb_append_time`
 
----
 Append a duckdb_time value to the appender.
 
 #### Syntax
@@ -6061,7 +5822,6 @@ Append a duckdb_time value to the appender.
 
 ### `duckdb_append_timestamp`
 
----
 Append a duckdb_timestamp value to the appender.
 
 #### Syntax
@@ -6075,7 +5835,6 @@ Append a duckdb_timestamp value to the appender.
 
 ### `duckdb_append_interval`
 
----
 Append a duckdb_interval value to the appender.
 
 #### Syntax
@@ -6089,7 +5848,6 @@ Append a duckdb_interval value to the appender.
 
 ### `duckdb_append_varchar`
 
----
 Append a varchar value to the appender.
 
 #### Syntax
@@ -6103,7 +5861,6 @@ Append a varchar value to the appender.
 
 ### `duckdb_append_varchar_length`
 
----
 Append a varchar value to the appender.
 
 #### Syntax
@@ -6118,7 +5875,6 @@ Append a varchar value to the appender.
 
 ### `duckdb_append_blob`
 
----
 Append a blob value to the appender.
 
 #### Syntax
@@ -6133,7 +5889,6 @@ Append a blob value to the appender.
 
 ### `duckdb_append_null`
 
----
 Append a NULL value to the appender (of any type).
 
 #### Syntax
@@ -6146,7 +5901,6 @@ Append a NULL value to the appender (of any type).
 
 ### `duckdb_append_data_chunk`
 
----
 Appends a pre-filled data chunk to the specified appender.
 
 The types of the data chunk must exactly match the types of the table, no casting is performed.
@@ -6177,7 +5931,6 @@ The return state.
 
 ### `duckdb_query_arrow`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Executes a SQL query within a connection and stores the full (materialized) result in an arrow structure.
@@ -6215,7 +5968,6 @@ The query result.
 
 ### `duckdb_query_arrow_schema`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Fetch the internal arrow schema from the arrow result. Remember to call release on the respective
@@ -6245,7 +5997,6 @@ The output schema.
 
 ### `duckdb_prepared_arrow_schema`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Fetch the internal arrow schema from the prepared statement. Remember to call release on the respective
@@ -6275,7 +6026,6 @@ The output schema.
 
 ### `duckdb_result_arrow_array`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Convert a data chunk into an arrow struct array. Remember to call release on the respective
@@ -6306,7 +6056,6 @@ The output array.
 
 ### `duckdb_query_arrow_array`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Fetch an internal arrow struct array from the arrow result. Remember to call release on the respective
@@ -6339,7 +6088,6 @@ The output array.
 
 ### `duckdb_arrow_column_count`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Returns the number of columns present in the arrow result object.
@@ -6364,7 +6112,6 @@ The number of columns present in the result object.
 
 ### `duckdb_arrow_row_count`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Returns the number of rows present in the arrow result object.
@@ -6389,7 +6136,6 @@ The number of rows present in the result object.
 
 ### `duckdb_arrow_rows_changed`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Returns the number of rows changed by the query stored in the arrow result. This is relevant only for
@@ -6415,7 +6161,6 @@ The number of rows changed.
 
 ### `duckdb_query_arrow_error`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Returns the error message contained within the result. The error is only set if `duckdb_query_arrow` returns
@@ -6443,7 +6188,6 @@ The error of the result.
 
 ### `duckdb_destroy_arrow`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Closes the result and de-allocates all memory allocated for the arrow result.
@@ -6465,7 +6209,6 @@ The result to destroy.
 
 ### `duckdb_destroy_arrow_stream`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Releases the arrow array stream and de-allocates its memory.
@@ -6487,7 +6230,6 @@ The arrow array stream to destroy.
 
 ### `duckdb_execute_prepared_arrow`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Executes the prepared statement with the given bound parameters, and returns an arrow query result.
@@ -6517,7 +6259,6 @@ The query result.
 
 ### `duckdb_arrow_scan`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Scans the Arrow stream and creates a view with the given name.
@@ -6550,7 +6291,6 @@ Arrow stream wrapper.
 
 ### `duckdb_arrow_array_scan`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Scans the Arrow array and creates a view with the given name.
@@ -6592,7 +6332,6 @@ Output array stream that wraps around the passed schema, for releasing/deleting 
 
 ### `duckdb_execute_tasks`
 
----
 Execute DuckDB tasks on this thread.
 
 Will return after `max_tasks` have been executed, or if there are no more tasks present.
@@ -6618,7 +6357,6 @@ The maximum amount of tasks to execute
 
 ### `duckdb_create_task_state`
 
----
 Creates a task state that can be used with duckdb_execute_tasks_state to execute tasks until
 `duckdb_finish_execution` is called on the state.
 
@@ -6644,7 +6382,6 @@ The task state that can be used with duckdb_execute_tasks_state.
 
 ### `duckdb_execute_tasks_state`
 
----
 Execute DuckDB tasks on this thread.
 
 The thread will keep on executing tasks forever, until duckdb_finish_execution is called on the state.
@@ -6667,7 +6404,6 @@ The task state of the executor
 
 ### `duckdb_execute_n_tasks_state`
 
----
 Execute DuckDB tasks on this thread.
 
 The thread will keep on executing tasks until either duckdb_finish_execution is called on the state,
@@ -6699,7 +6435,6 @@ The amount of tasks that have actually been executed
 
 ### `duckdb_finish_execution`
 
----
 Finish execution on a specific task.
 
 #### Syntax
@@ -6719,7 +6454,6 @@ The task state to finish execution
 
 ### `duckdb_task_state_is_finished`
 
----
 Check if the provided duckdb_task_state has finished execution
 
 #### Syntax
@@ -6742,7 +6476,6 @@ Whether or not duckdb_finish_execution has been called on the task state
 
 ### `duckdb_destroy_task_state`
 
----
 Destroys the task state returned from duckdb_create_task_state.
 
 Note that this should not be called while there is an active duckdb_execute_tasks_state running
@@ -6765,7 +6498,6 @@ The task state to clean up
 
 ### `duckdb_execution_is_finished`
 
----
 Returns true if the execution of the current query is finished.
 
 #### Syntax
@@ -6785,7 +6517,6 @@ The connection on which to check
 
 ### `duckdb_stream_fetch_chunk`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Fetches a data chunk from the (streaming) duckdb_result. This function should be called repeatedly until the result is
@@ -6820,7 +6551,6 @@ The resulting data chunk. Returns `NULL` if the result has an error.
 
 ### `duckdb_fetch_chunk`
 
----
 Fetches a data chunk from a duckdb_result. This function should be called repeatedly until the result is exhausted.
 
 The result must be destroyed with `duckdb_destroy_data_chunk`.

@@ -152,7 +152,6 @@ for (idx_t row = 0; row < row_count; row++) {
 
 ### `duckdb_query`
 
----
 Executes a SQL query within a connection and stores the full (materialized) result in the out_result pointer.
 If the query fails to execute, DuckDBError is returned and the error message can be retrieved by calling
 `duckdb_result_error`.
@@ -188,7 +187,6 @@ The query result.
 
 ### `duckdb_destroy_result`
 
----
 Closes the result and de-allocates all memory allocated for that connection.
 
 #### Syntax
@@ -208,7 +206,6 @@ The result to destroy.
 
 ### `duckdb_column_name`
 
----
 Returns the column name of the specified column. The result should not need to be freed; the column names will
 automatically be destroyed when the result is destroyed.
 
@@ -238,7 +235,6 @@ The column name of the specified column.
 
 ### `duckdb_column_type`
 
----
 Returns the column type of the specified column.
 
 Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
@@ -267,7 +263,6 @@ The column type of the specified column.
 
 ### `duckdb_result_statement_type`
 
----
 Returns the statement type of the statement that was executed
 
 #### Syntax
@@ -290,7 +285,6 @@ duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 ### `duckdb_column_logical_type`
 
----
 Returns the logical column type of the specified column.
 
 The return type of this call should be destroyed with `duckdb_destroy_logical_type`.
@@ -321,7 +315,6 @@ The logical column type of the specified column.
 
 ### `duckdb_column_count`
 
----
 Returns the number of columns present in a the result object.
 
 #### Syntax
@@ -344,7 +337,6 @@ The number of columns present in the result object.
 
 ### `duckdb_row_count`
 
----
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
 
 Returns the number of rows present in the result object.
@@ -369,7 +361,6 @@ The number of rows present in the result object.
 
 ### `duckdb_rows_changed`
 
----
 Returns the number of rows changed by the query stored in the result. This is relevant only for INSERT/UPDATE/DELETE
 queries. For other queries the rows_changed will be 0.
 
@@ -393,7 +384,6 @@ The number of rows changed.
 
 ### `duckdb_column_data`
 
----
 **DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
 
 Returns the data of a specific column of a result in columnar format.
@@ -432,7 +422,6 @@ The column data of the specified column.
 
 ### `duckdb_nullmask_data`
 
----
 **DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
 
 Returns the nullmask of a specific column of a result in columnar format. The nullmask indicates for every row
@@ -473,7 +462,6 @@ The nullmask of the specified column.
 
 ### `duckdb_result_error`
 
----
 Returns the error message contained within the result. The error is only set if `duckdb_query` returns `DuckDBError`.
 
 The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_result` is called.

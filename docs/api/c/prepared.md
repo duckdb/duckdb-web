@@ -62,7 +62,6 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 
 ### `duckdb_prepare`
 
----
 Create a prepared statement object from a query.
 
 Note that after calling `duckdb_prepare`, the prepared statement should always be destroyed using
@@ -98,7 +97,6 @@ The resulting prepared statement object
 
 ### `duckdb_destroy_prepare`
 
----
 Closes the prepared statement and de-allocates all memory allocated for the statement.
 
 #### Syntax
@@ -118,7 +116,6 @@ The prepared statement to destroy.
 
 ### `duckdb_prepare_error`
 
----
 Returns the error message associated with the given prepared statement.
 If the prepared statement has no error message, this returns `nullptr` instead.
 
@@ -144,7 +141,6 @@ The error message, or `nullptr` if there is none.
 
 ### `duckdb_nparams`
 
----
 Returns the number of parameters that can be provided to the given prepared statement.
 
 Returns 0 if the query was not successfully prepared.
@@ -166,7 +162,6 @@ The prepared statement to obtain the number of parameters for.
 
 ### `duckdb_parameter_name`
 
----
 Returns the name used to identify the parameter
 The returned string should be freed using `duckdb_free`.
 
@@ -190,7 +185,6 @@ The prepared statement for which to get the parameter name from.
 
 ### `duckdb_param_type`
 
----
 Returns the parameter type for the parameter at the given index.
 
 Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the statement was not successfully prepared.
@@ -219,7 +213,6 @@ The parameter type
 
 ### `duckdb_clear_bindings`
 
----
 Clear the params bind to the prepared statement.
 
 #### Syntax
@@ -232,7 +225,6 @@ Clear the params bind to the prepared statement.
 
 ### `duckdb_prepared_statement_type`
 
----
 Returns the statement type of the statement to be executed
 
 #### Syntax
