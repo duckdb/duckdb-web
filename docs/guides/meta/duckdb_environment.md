@@ -60,19 +60,19 @@ FROM duckdb_extensions();
 
 DuckDB has the following built-in table functions to obtain metadata about available catalog objects:
 
-* [`duckdb_columns()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_columns): columns
-* [`duckdb_constraints()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_constraints): constraints
-* [`duckdb_databases()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_databases): lists the databases that are accessible from within the current DuckDB process
-* [`duckdb_dependencies()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_dependencies): dependencies between objects
-* [`duckdb_extensions()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_extensions): extensions
-* [`duckdb_functions()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_functions): functions
-* [`duckdb_indexes()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_indexes): secondary indexes
-* [`duckdb_keywords()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_keywords): DuckDB's keywords and reserved words
-* [`duckdb_optimizers()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_optimizers): the available optimization rules in the DuckDB instance
-* [`duckdb_schemas()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_schemas): schemas
-* [`duckdb_sequences()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_sequences): sequences
-* [`duckdb_settings()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_settings): settings
-* [`duckdb_tables()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_tables): base tables
-* [`duckdb_types()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_types): data types
-* [`duckdb_views()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_views): views
-* [`duckdb_temporary_files()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_temporary_files): the temporary files DuckDB has written to disk, to offload data from memory
+* [`duckdb_columns()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_columns): columns
+* [`duckdb_constraints()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_constraints): constraints
+* [`duckdb_databases()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_databases): lists the databases that are accessible from within the current DuckDB process
+* [`duckdb_dependencies()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_dependencies): dependencies between objects
+* [`duckdb_extensions()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_extensions): extensions
+* [`duckdb_functions()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_functions): functions
+* [`duckdb_indexes()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_indexes): secondary indexes
+* [`duckdb_keywords()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_keywords): DuckDB's keywords and reserved words
+* [`duckdb_optimizers()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers): the available optimization rules in the DuckDB instance
+* [`duckdb_schemas()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_schemas): schemas
+* [`duckdb_sequences()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_sequences): sequences
+* [`duckdb_settings()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_settings): settings
+* [`duckdb_tables()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_tables): base tables
+* [`duckdb_types()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_types): data types
+* [`duckdb_views()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_views): views
+* [`duckdb_temporary_files()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_temporary_files): the temporary files DuckDB has written to disk, to offload data from memory

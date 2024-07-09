@@ -37,7 +37,7 @@ CREATE TYPE x_index AS INTEGER;
 <div id="rrdiagram"></div>
 
 The `CREATE TYPE` clause defines a new data type available to this DuckDB instance.
-These new types can then be inspected in the [`duckdb_types` table]({% link docs/sql/duckdb_table_functions.md %}#duckdb_types).
+These new types can then be inspected in the [`duckdb_types` table]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_types).
 
 ## Limitations
 

@@ -379,7 +379,7 @@ For example, to disable `filter_pushdown` and `statistics_propagation`, run:
 SET disabled_optimizers = 'filter_pushdown,statistics_propagation';
 ```
 
-The available optimizations can be queried using the [`duckdb_optimizers()` table function]({% link docs/sql/duckdb_table_functions.md %}#duckdb_optimizers).
+The available optimizations can be queried using the [`duckdb_optimizers()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers).
 
 > Warning The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
 
