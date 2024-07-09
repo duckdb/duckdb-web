@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: DuckDB_% Metadata Functions
+redirect_from:
+  - docs/sql/duckdb_table_functions
 ---
 
 DuckDB offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`.
@@ -61,7 +63,7 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `numeric_precision_radix` | The number-base of the units in the `numeric_precision` column. For integral and approximate numeric types, this is `2`, indicating the precision is expressed as a number of bits. For the `decimal` type this is `10`, indicating the precision is expressed as a number of decimal positions. | `INTEGER` |
 | `numeric_scale` | Applicable to `decimal` type. Indicates the maximum number of fractional digits (i.e., the number of digits that may appear after the decimal separator). | `INTEGER` |
 
-The [`information_schema.columns`]({% link docs/sql/information_schema.md %}#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
+The [`information_schema.columns`]({% link docs/sql/meta/information_schema.md %}#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
 
 ## `duckdb_constraints`
 
@@ -207,7 +209,7 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 | `internal` | `true` if this is an internal (built-in) schema, `false` if this is a user-defined schema. | `BOOLEAN` |
 | `sql` | Always `NULL`| `VARCHAR` |
 
-The [`information_schema.schemata`]({% link docs/sql/information_schema.md %}) system view provides a more standardized way to obtain metadata about database schemas.
+The [`information_schema.schemata`]({% link docs/sql/meta/information_schema.md %}) system view provides a more standardized way to obtain metadata about database schemas.
 
 ## `duckdb_secrets`
 
@@ -286,7 +288,7 @@ The `duckdb_tables()` function provides metadata about the base tables available
 | `check_constraint_count` | The number of check constraints active on columns within the table. | `BIGINT` |
 | `sql` | The definition of this object, expressed as SQL [`CREATE TABLE`-statement]({% link docs/sql/statements/create_table.md %}). | `VARCHAR` |
 
-The [`information_schema.tables`]({% link docs/sql/information_schema.md %}#tables-and-views) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
+The [`information_schema.tables`]({% link docs/sql/meta/information_schema.md %}#tables-and-views) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
 
 ## `duckdb_temporary_files`
 
@@ -333,4 +335,4 @@ The `duckdb_views()` function provides metadata about the views available in the
 | `column_count` | The number of columns defined by this view object. | `BIGINT` |
 | `sql` | The definition of this object, expressed as SQL DDL-statement. | `VARCHAR` |
 
-The [`information_schema.tables`]({% link docs/sql/information_schema.md %}#tables-and-views) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `duckdb_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.
+The [`information_schema.tables`]({% link docs/sql/meta/information_schema.md %}#tables-and-views) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `duckdb_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.

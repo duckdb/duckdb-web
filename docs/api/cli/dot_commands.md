@@ -137,7 +137,7 @@ The results then open in the default text file editor of the system, for example
 
 ## Querying the Database Schema
 
-All DuckDB clients support [querying the database schema with SQL]({% link docs/sql/information_schema.md %}), but the CLI has additional [dot commands]({% link docs/api/cli/dot_commands.md %}) that can make it easier to understand the contents of a database.
+All DuckDB clients support [querying the database schema with SQL]({% link docs/sql/meta/information_schema.md %}), but the CLI has additional [dot commands]({% link docs/api/cli/dot_commands.md %}) that can make it easier to understand the contents of a database.
 The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern]({% link docs/sql/functions/pattern_matching.md %}#like).
 
 ```sql

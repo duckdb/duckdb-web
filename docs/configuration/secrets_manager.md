@@ -97,7 +97,7 @@ FROM which_secret('s3://my-other-bucket/file.parquet', 's3');
 
 ### Listing Secrets
 
-Secrets can be listed using the built-in table-producing function, e.g., by using the [`duckdb_secrets()` table function]({% link docs/sql/duckdb_table_functions.md %}#duckdb_secrets):
+Secrets can be listed using the built-in table-producing function, e.g., by using the [`duckdb_secrets()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_secrets):
 
 ```sql
 FROM duckdb_secrets();
