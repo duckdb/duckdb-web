@@ -22,7 +22,6 @@ The value class represents a single value of any type.
 
 ### `duckdb_destroy_value`
 
----
 Destroys the value and de-allocates all memory allocated for that type.
 
 #### Syntax
@@ -42,7 +41,6 @@ The value to destroy.
 
 ### `duckdb_create_varchar`
 
----
 Creates a value from a null-terminated string
 
 #### Syntax
@@ -65,7 +63,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_varchar_length`
 
----
 Creates a value from a string
 
 #### Syntax
@@ -92,7 +89,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_int64`
 
----
 Creates a value from an int64
 
 #### Syntax
@@ -115,7 +111,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_struct_value`
 
----
 Creates a struct value from a type and an array of values
 
 #### Syntax
@@ -142,7 +137,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_list_value`
 
----
 Creates a list value from a type and an array of values of length `value_count`
 
 #### Syntax
@@ -173,7 +167,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_array_value`
 
----
 Creates a array value from a type and an array of values of length `value_count`
 
 #### Syntax
@@ -204,7 +197,6 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_get_varchar`
 
----
 Obtains a string representation of the given value.
 The result must be destroyed with `duckdb_free`.
 
@@ -228,7 +220,6 @@ The string value. This must be destroyed with `duckdb_free`.
 
 ### `duckdb_get_int64`
 
----
 Obtains an int64 of the given value.
 
 #### Syntax

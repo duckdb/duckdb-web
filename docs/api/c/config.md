@@ -49,7 +49,6 @@ duckdb_close(&db);
 
 ### `duckdb_create_config`
 
----
 Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
 through `duckdb_open_ext`.
 The duckdb_config must be destroyed using 'duckdb_destroy_config'
@@ -76,7 +75,6 @@ The result configuration object.
 
 ### `duckdb_config_count`
 
----
 This returns the total amount of configuration options available for usage with `duckdb_get_config_flag`.
 
 This should not be called in a loop as it internally loops over all the options.
@@ -98,7 +96,6 @@ The amount of config options available.
 
 ### `duckdb_get_config_flag`
 
----
 Obtains a human-readable name and description of a specific configuration option. This can be used to e.g.
 display configuration options. This will succeed unless `index` is out of range (i.e., `>= duckdb_config_count`).
 
@@ -132,7 +129,6 @@ A description of the configuration flag.
 
 ### `duckdb_set_config`
 
----
 Sets the specified option for the specified configuration. The configuration option is indicated by name.
 To obtain a list of config options, see `duckdb_get_config_flag`.
 
@@ -168,7 +164,6 @@ The value to set the configuration flag to.
 
 ### `duckdb_destroy_config`
 
----
 Destroys the specified configuration object and de-allocates all memory allocated for the object.
 
 #### Syntax

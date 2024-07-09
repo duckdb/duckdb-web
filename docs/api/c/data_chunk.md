@@ -30,7 +30,6 @@ The primary manner of interfacing with data chunks is by obtaining the internal 
 
 ### `duckdb_create_data_chunk`
 
----
 Creates an empty DataChunk with the specified set of types.
 
 Note that the result must be destroyed with `duckdb_destroy_data_chunk`.
@@ -59,7 +58,6 @@ The data chunk.
 
 ### `duckdb_destroy_data_chunk`
 
----
 Destroys the data chunk and de-allocates all memory allocated for that chunk.
 
 #### Syntax
@@ -79,7 +77,6 @@ The data chunk to destroy.
 
 ### `duckdb_data_chunk_reset`
 
----
 Resets a data chunk, clearing the validity masks and setting the cardinality of the data chunk to 0.
 
 #### Syntax
@@ -99,7 +96,6 @@ The data chunk to reset.
 
 ### `duckdb_data_chunk_get_column_count`
 
----
 Retrieves the number of columns in a data chunk.
 
 #### Syntax
@@ -122,7 +118,6 @@ The number of columns in the data chunk
 
 ### `duckdb_data_chunk_get_vector`
 
----
 Retrieves the vector at the specified column index in the data chunk.
 
 The pointer to the vector is valid for as long as the chunk is alive.
@@ -149,7 +144,6 @@ The vector
 
 ### `duckdb_data_chunk_get_size`
 
----
 Retrieves the current number of tuples in a data chunk.
 
 #### Syntax
@@ -172,7 +166,6 @@ The number of tuples in the data chunk
 
 ### `duckdb_data_chunk_set_size`
 
----
 Sets the current number of tuples in a data chunk.
 
 #### Syntax

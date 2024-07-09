@@ -45,7 +45,6 @@ duckdb_close(&db);
 
 ### `duckdb_open`
 
----
 Creates a new database or opens an existing database file stored at the given path.
 If no path is given a new in-memory database is created instead.
 The instantiated database should be closed with 'duckdb_close'.
@@ -74,7 +73,6 @@ The result database object.
 
 ### `duckdb_open_ext`
 
----
 Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the given path.
 The instantiated database should be closed with 'duckdb_close'.
 
@@ -111,7 +109,6 @@ Note that the error must be freed using `duckdb_free`.
 
 ### `duckdb_close`
 
----
 Closes the specified database and de-allocates all memory allocated for that database.
 This should be called after you are done with any database allocated through `duckdb_open` or `duckdb_open_ext`.
 Note that failing to call `duckdb_close` (in case of e.g., a program crash) will not cause data corruption.
@@ -134,7 +131,6 @@ The database object to shut down.
 
 ### `duckdb_connect`
 
----
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
 The instantiated connection should be closed using 'duckdb_disconnect'.
@@ -163,7 +159,6 @@ The result connection object.
 
 ### `duckdb_interrupt`
 
----
 Interrupt running query
 
 #### Syntax
@@ -183,7 +178,6 @@ The connection to interrupt
 
 ### `duckdb_query_progress`
 
----
 Get progress of the running query
 
 #### Syntax
@@ -206,7 +200,6 @@ The working connection
 
 ### `duckdb_disconnect`
 
----
 Closes the specified connection and de-allocates all memory allocated for that connection.
 
 #### Syntax
@@ -226,7 +219,6 @@ The connection to close.
 
 ### `duckdb_library_version`
 
----
 Returns the version of the linked DuckDB, with a version postfix for dev versions
 
 Usually used for developing C extensions that must return this for a compatibility check.

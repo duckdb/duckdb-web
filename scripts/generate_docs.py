@@ -208,7 +208,6 @@ def add_function(function_prototype, documentation, group):
     docs_str = '\n'.join(documentation) + '\n'
     (docs_str, parameters) = extract_parameters(docs_str)
     docs_string = '\n'
-    docs_string += '---\n'
     docs_string += f'### `{function_name}`\n\n'
     docs_string += (
         docs_str.replace('e.g. ', 'e.g., ').replace('i.e. ', 'i.e., ').strip() + '\n'

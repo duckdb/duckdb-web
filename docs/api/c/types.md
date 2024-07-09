@@ -142,7 +142,6 @@ For more information about data chunks, see the [documentation on data chunks]({
 
 ### `duckdb_result_get_chunk`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Fetches a data chunk from the duckdb_result. This function should be called repeatedly until the result is exhausted.
@@ -181,7 +180,6 @@ The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 
 ### `duckdb_result_is_streaming`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Checks if the type of the internal result is StreamQueryResult.
@@ -206,7 +204,6 @@ Whether or not the result object is of the type StreamQueryResult
 
 ### `duckdb_result_chunk_count`
 
----
 > Deprecated This method is scheduled for removal in a future release.
 
 Returns the number of data chunks present in the result.
@@ -231,7 +228,6 @@ Number of data chunks present in the result.
 
 ### `duckdb_result_return_type`
 
----
 Returns the return_type of the given result, or DUCKDB_RETURN_TYPE_INVALID on error
 
 #### Syntax
@@ -254,7 +250,6 @@ The return_type
 
 ### `duckdb_from_date`
 
----
 Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_date_struct`).
 
 #### Syntax
@@ -277,7 +272,6 @@ The `duckdb_date_struct` with the decomposed elements.
 
 ### `duckdb_to_date`
 
----
 Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
 
 #### Syntax
@@ -300,7 +294,6 @@ The `duckdb_date` element.
 
 ### `duckdb_is_finite_date`
 
----
 Test a `duckdb_date` to see if it is a finite value.
 
 #### Syntax
@@ -323,7 +316,6 @@ True if the date is finite, false if it is ±infinity.
 
 ### `duckdb_from_time`
 
----
 Decompose a `duckdb_time` object into hour, minute, second and microsecond (stored as `duckdb_time_struct`).
 
 #### Syntax
@@ -346,7 +338,6 @@ The `duckdb_time_struct` with the decomposed elements.
 
 ### `duckdb_create_time_tz`
 
----
 Create a `duckdb_time_tz` object from micros and a timezone offset.
 
 #### Syntax
@@ -373,7 +364,6 @@ The `duckdb_time_tz` element.
 
 ### `duckdb_from_time_tz`
 
----
 Decompose a TIME_TZ objects into micros and a timezone offset.
 
 Use `duckdb_from_time` to further decompose the micros into hour, minute, second and microsecond.
@@ -401,7 +391,6 @@ The timezone offset component of the time.
 
 ### `duckdb_to_time`
 
----
 Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_time_struct`).
 
 #### Syntax
@@ -424,7 +413,6 @@ The `duckdb_time` element.
 
 ### `duckdb_from_timestamp`
 
----
 Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
 
 #### Syntax
@@ -447,7 +435,6 @@ The `duckdb_timestamp_struct` with the decomposed elements.
 
 ### `duckdb_to_timestamp`
 
----
 Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
 
 #### Syntax
@@ -470,7 +457,6 @@ The `duckdb_timestamp` element.
 
 ### `duckdb_is_finite_timestamp`
 
----
 Test a `duckdb_timestamp` to see if it is a finite value.
 
 #### Syntax
@@ -493,7 +479,6 @@ True if the timestamp is finite, false if it is ±infinity.
 
 ### `duckdb_hugeint_to_double`
 
----
 Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` column) into a double.
 
 #### Syntax
@@ -516,7 +501,6 @@ The converted `double` element.
 
 ### `duckdb_double_to_hugeint`
 
----
 Converts a double value to a duckdb_hugeint object.
 
 If the conversion fails because the double value is too big the result will be 0.
@@ -541,7 +525,6 @@ The converted `duckdb_hugeint` element.
 
 ### `duckdb_double_to_decimal`
 
----
 Converts a double value to a duckdb_decimal object.
 
 If the conversion fails because the double value is too big, or the width/scale are invalid the result will be 0.
@@ -568,7 +551,6 @@ The converted `duckdb_decimal` element.
 
 ### `duckdb_decimal_to_double`
 
----
 Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` column) into a double.
 
 #### Syntax
@@ -591,7 +573,6 @@ The converted `double` element.
 
 ### `duckdb_create_logical_type`
 
----
 Creates a `duckdb_logical_type` from a standard primitive type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -617,7 +598,6 @@ The logical type.
 
 ### `duckdb_logical_type_get_alias`
 
----
 Returns the alias of a duckdb_logical_type, if one is set, else `NULL`.
 The result must be destroyed with `duckdb_free`.
 
@@ -641,7 +621,6 @@ The alias or `NULL`
 
 ### `duckdb_create_list_type`
 
----
 Creates a list type from its child type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -665,7 +644,6 @@ The logical type.
 
 ### `duckdb_create_array_type`
 
----
 Creates a array type from its child type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -693,7 +671,6 @@ The logical type.
 
 ### `duckdb_create_map_type`
 
----
 Creates a map type from its key type and value type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -718,7 +695,6 @@ The logical type.
 
 ### `duckdb_create_union_type`
 
----
 Creates a UNION type from the passed types array.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -747,7 +723,6 @@ The logical type.
 
 ### `duckdb_create_struct_type`
 
----
 Creates a STRUCT type from the passed member name and type arrays.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -779,7 +754,6 @@ The logical type.
 
 ### `duckdb_create_enum_type`
 
----
 Creates an ENUM type from the passed member name array.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -810,7 +784,6 @@ The logical type.
 
 ### `duckdb_create_decimal_type`
 
----
 Creates a `duckdb_logical_type` of type decimal with the specified width and scale.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
@@ -838,7 +811,6 @@ The logical type.
 
 ### `duckdb_get_type_id`
 
----
 Retrieves the enum type class of a `duckdb_logical_type`.
 
 #### Syntax
@@ -861,7 +833,6 @@ The type id
 
 ### `duckdb_decimal_width`
 
----
 Retrieves the width of a decimal type.
 
 #### Syntax
@@ -884,7 +855,6 @@ The width of the decimal type
 
 ### `duckdb_decimal_scale`
 
----
 Retrieves the scale of a decimal type.
 
 #### Syntax
@@ -907,7 +877,6 @@ The scale of the decimal type
 
 ### `duckdb_decimal_internal_type`
 
----
 Retrieves the internal storage type of a decimal type.
 
 #### Syntax
@@ -930,7 +899,6 @@ The internal type of the decimal type
 
 ### `duckdb_enum_internal_type`
 
----
 Retrieves the internal storage type of an enum type.
 
 #### Syntax
@@ -953,7 +921,6 @@ The internal type of the enum type
 
 ### `duckdb_enum_dictionary_size`
 
----
 Retrieves the dictionary size of the enum type.
 
 #### Syntax
@@ -976,7 +943,6 @@ The dictionary size of the enum type
 
 ### `duckdb_enum_dictionary_value`
 
----
 Retrieves the dictionary value at the specified position from the enum.
 
 The result must be freed with `duckdb_free`.
@@ -1005,7 +971,6 @@ The string value of the enum type. Must be freed with `duckdb_free`.
 
 ### `duckdb_list_type_child_type`
 
----
 Retrieves the child type of the given list type.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -1030,7 +995,6 @@ The child type of the list type. Must be destroyed with `duckdb_destroy_logical_
 
 ### `duckdb_array_type_child_type`
 
----
 Retrieves the child type of the given array type.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -1055,7 +1019,6 @@ The child type of the array type. Must be destroyed with `duckdb_destroy_logical
 
 ### `duckdb_array_type_array_size`
 
----
 Retrieves the array size of the given array type.
 
 #### Syntax
@@ -1078,7 +1041,6 @@ The fixed number of elements the values of this array type can store.
 
 ### `duckdb_map_type_key_type`
 
----
 Retrieves the key type of the given map type.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -1103,7 +1065,6 @@ The key type of the map type. Must be destroyed with `duckdb_destroy_logical_typ
 
 ### `duckdb_map_type_value_type`
 
----
 Retrieves the value type of the given map type.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -1128,7 +1089,6 @@ The value type of the map type. Must be destroyed with `duckdb_destroy_logical_t
 
 ### `duckdb_struct_type_child_count`
 
----
 Returns the number of children of a struct type.
 
 #### Syntax
@@ -1151,7 +1111,6 @@ The number of children of a struct type.
 
 ### `duckdb_struct_type_child_name`
 
----
 Retrieves the name of the struct child.
 
 The result must be freed with `duckdb_free`.
@@ -1180,7 +1139,6 @@ The name of the struct type. Must be freed with `duckdb_free`.
 
 ### `duckdb_struct_type_child_type`
 
----
 Retrieves the child type of the given struct type at the specified index.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -1209,7 +1167,6 @@ The child type of the struct type. Must be destroyed with `duckdb_destroy_logica
 
 ### `duckdb_union_type_member_count`
 
----
 Returns the number of members that the union type has.
 
 #### Syntax
@@ -1232,7 +1189,6 @@ The number of members of a union type.
 
 ### `duckdb_union_type_member_name`
 
----
 Retrieves the name of the union member.
 
 The result must be freed with `duckdb_free`.
@@ -1261,7 +1217,6 @@ The name of the union member. Must be freed with `duckdb_free`.
 
 ### `duckdb_union_type_member_type`
 
----
 Retrieves the child type of the given union member at the specified index.
 
 The result must be freed with `duckdb_destroy_logical_type`.
@@ -1290,7 +1245,6 @@ The child type of the union member. Must be destroyed with `duckdb_destroy_logic
 
 ### `duckdb_destroy_logical_type`
 
----
 Destroys the logical type and de-allocates all memory allocated for that type.
 
 #### Syntax

@@ -381,7 +381,6 @@ duckdb_close(&db);
 
 ### `duckdb_vector_get_column_type`
 
----
 Retrieves the column type of the specified vector.
 
 The result must be destroyed with `duckdb_destroy_logical_type`.
@@ -406,7 +405,6 @@ The type of the vector
 
 ### `duckdb_vector_get_data`
 
----
 Retrieves the data pointer of the vector.
 
 The data pointer can be used to read or write values from the vector.
@@ -432,7 +430,6 @@ The data pointer
 
 ### `duckdb_vector_get_validity`
 
----
 Retrieves the validity mask pointer of the specified vector.
 
 If all values are valid, this function MIGHT return NULL!
@@ -469,7 +466,6 @@ The pointer to the validity mask, or NULL if no validity mask is present
 
 ### `duckdb_vector_ensure_validity_writable`
 
----
 Ensures the validity mask is writable by allocating it.
 
 After this function is called, `duckdb_vector_get_validity` will ALWAYS return non-NULL.
@@ -492,7 +488,6 @@ The vector to alter
 
 ### `duckdb_vector_assign_string_element`
 
----
 Assigns a string element in the vector at the specified location.
 
 #### Syntax
@@ -520,7 +515,6 @@ The null-terminated string
 
 ### `duckdb_vector_assign_string_element_len`
 
----
 Assigns a string element in the vector at the specified location. You may also use this function to assign BLOBs.
 
 #### Syntax
@@ -552,7 +546,6 @@ The length of the string (in bytes)
 
 ### `duckdb_list_vector_get_child`
 
----
 Retrieves the child vector of a list vector.
 
 The resulting vector is valid as long as the parent vector is valid.
@@ -577,7 +570,6 @@ The child vector
 
 ### `duckdb_list_vector_get_size`
 
----
 Returns the size of the child vector of the list.
 
 #### Syntax
@@ -600,7 +592,6 @@ The size of the child list
 
 ### `duckdb_list_vector_set_size`
 
----
 Sets the total size of the underlying child-vector of a list vector.
 
 #### Syntax
@@ -627,7 +618,6 @@ The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 ### `duckdb_list_vector_reserve`
 
----
 Sets the total capacity of the underlying child-vector of a list.
 
 #### Syntax
@@ -654,7 +644,6 @@ The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 ### `duckdb_struct_vector_get_child`
 
----
 Retrieves the child vector of a struct vector.
 
 The resulting vector is valid as long as the parent vector is valid.
@@ -683,7 +672,6 @@ The child vector
 
 ### `duckdb_array_vector_get_child`
 
----
 Retrieves the child vector of a array vector.
 
 The resulting vector is valid as long as the parent vector is valid.
@@ -709,7 +697,6 @@ The child vector
 
 ### `duckdb_validity_row_is_valid`
 
----
 Returns whether or not a row is valid (i.e., not NULL) in the given validity mask.
 
 #### Syntax
@@ -736,7 +723,6 @@ true if the row is valid, false otherwise
 
 ### `duckdb_validity_set_row_validity`
 
----
 In a validity mask, sets a specific row to either valid or invalid.
 
 Note that `duckdb_vector_ensure_validity_writable` should be called before calling `duckdb_vector_get_validity`,
@@ -767,7 +753,6 @@ Whether or not to set the row to valid, or invalid
 
 ### `duckdb_validity_set_row_invalid`
 
----
 In a validity mask, sets a specific row to invalid.
 
 Equivalent to `duckdb_validity_set_row_validity` with valid set to false.
@@ -793,7 +778,6 @@ The row index
 
 ### `duckdb_validity_set_row_valid`
 
----
 In a validity mask, sets a specific row to valid.
 
 Equivalent to `duckdb_validity_set_row_validity` with valid set to true.
