@@ -123,7 +123,7 @@ SELECT new_db.my_schema.my_table.col FROM new_db.my_schema.my_table;
 
 Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the *catalog search path*. The default catalog search path includes the system catalog, the temporary catalog and the initially attached database together with the `main` schema.
 
-Also note the rules on [identifiers and database names in particular]({% link docs/sql/keywords_and_identifiers.md %}#database-names).
+Also note the rules on [identifiers and database names in particular]({% link docs/sql/dialect/keywords_and_identifiers.md %}#database-names).
 
 ### Default Database and Schema
 

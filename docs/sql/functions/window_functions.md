@@ -2,6 +2,8 @@
 layout: docu
 title: Window Functions
 railroad: expressions/window.js
+redirect_from:
+  - docs/sql/window_functions
 ---
 
 DuckDB supports [window functions](https://en.wikipedia.org/wiki/Window_function_(SQL)), which can use multiple rows to calculate a value for each row.
@@ -171,7 +173,7 @@ The table below shows the available general window functions.
 
 ## Aggregate Window Functions
 
-All [aggregate functions]({% link docs/sql/aggregates.md %}) can be used in a windowing context, including the optional [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}).
+All [aggregate functions]({% link docs/sql/functions/aggregates.md %}) can be used in a windowing context, including the optional [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}).
 The `first` and `last` aggregate functions are shadowed by the respective general-purpose window functions, with the minor consequence that the `FILTER` clause is not available for these but `IGNORE NULLS` is.
 
 ## Nulls

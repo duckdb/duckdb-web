@@ -522,7 +522,7 @@ CREATE TABLE windowing_results AS
 
 The various window functions that replace the placeholder are below and are labelled to match the result graphs.
 These were selected to showcase the variety of use cases for window functions, as well as the variety of algorithms required to support the full range of the syntax.
-The DuckDB documentation contains a [full railroad diagram of the available syntax]({% link docs/sql/window_functions.md %}#syntax).
+The DuckDB documentation contains a [full railroad diagram of the available syntax]({% link docs/sql/functions/window_functions.md %}#syntax).
 If there are common use cases for window functions that are not well-covered in this benchmark, please let us know!
 
 ```sql

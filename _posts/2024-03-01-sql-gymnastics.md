@@ -174,7 +174,7 @@ Then, we do a little bit of gymnastics (it had to happen sometime...).
 If we were to apply a typical aggregation function (like `sum` or `min`), it would need to be specified statically in our macro.
 To pass it in dynamically as a string (potentially all the way from the application code calling this SQL statement), we take advantage of a unique property of the [`list_aggregate` function]({% link docs/sql/functions/nested.md %}#list-aggregates).
 It accepts the name of a function (as a string) in its second parameter.
-So, to use this unique property, we use the [`list` aggregate function]({% link docs/sql/aggregates.md %}#general-aggregate-functions) to transform all the values within each group into a list.
+So, to use this unique property, we use the [`list` aggregate function]({% link docs/sql/functions/aggregates.md %}#general-aggregate-functions) to transform all the values within each group into a list.
 Then we use the `list_aggregate` function to apply the `aggregate_function` we passed into the macro to each list.
 
 Almost done!

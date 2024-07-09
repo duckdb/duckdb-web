@@ -8,7 +8,7 @@ This tutorial is only intended to give you an introduction and is in no way a co
 This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
 
 > DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.
-> The few exceptions to this are listed on the [PostgreSQL compatibility page]({% link docs/sql/postgresql_compatibility.md %}).
+> The few exceptions to this are listed on the [PostgreSQL compatibility page]({% link docs/sql/dialect/postgresql_compatibility.md %}).
 
 In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page]({% link docs/installation/index.html %}?environment=cli) for information on how to install the CLI.
 
@@ -34,7 +34,7 @@ CREATE TABLE weather (
 
 You can enter this into the shell with the line breaks. The command is not terminated until the semicolon.
 
-White space (i.e., spaces, tabs, and newlines) can be used freely in SQL commands. That means you can type the command aligned differently than above, or even all on one line. Two dash characters (`--`) introduce comments. Whatever follows them is ignored up to the end of the line. SQL is case-insensitive about keywords and identifiers. When returning identifiers, [their original cases are preserved]({% link docs/sql/keywords_and_identifiers.md %}#rules-for-case-sensitivity).
+White space (i.e., spaces, tabs, and newlines) can be used freely in SQL commands. That means you can type the command aligned differently than above, or even all on one line. Two dash characters (`--`) introduce comments. Whatever follows them is ignored up to the end of the line. SQL is case-insensitive about keywords and identifiers. When returning identifiers, [their original cases are preserved]({% link docs/sql/dialect/keywords_and_identifiers.md %}#rules-for-case-sensitivity).
 
 In the SQL command, we first specify the type of command that we want to perform: `CREATE TABLE`. After that follows the parameters for the command. First, the table name, `weather`, is given. Then the column names and column types follow.
 

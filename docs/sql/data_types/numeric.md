@@ -100,7 +100,7 @@ SELECT -1.0 / 0.0 AS x;
 | 0.0 / 0.0  |   NULL |       Nan |
 | -1.0 / 0.0 |   NULL | -Infinity |
 
-To see the differences between DuckDB and PostgreSQL, see the [PostgreSQL Compatibility page]({% link docs/sql/postgresql_compatibility.md %}).
+To see the differences between DuckDB and PostgreSQL, see the [PostgreSQL Compatibility page]({% link docs/sql/dialect/postgresql_compatibility.md %}).
 
 ## Universally Unique Identifiers (`UUID`s)
 

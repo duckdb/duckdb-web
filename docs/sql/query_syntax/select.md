@@ -71,7 +71,7 @@ SELECT "Some Column Name" FROM tbl;
 
 The `SELECT` clause contains a list of expressions that specify the result of a query. The select list can refer to any columns in the `FROM` clause, and combine them using expressions. As the output of a SQL query is a table – every expression in the `SELECT` clause also has a name. The expressions can be explicitly named using the `AS` clause (e.g., `expr AS name`). If a name is not provided by the user the expressions are named automatically by the system.
 
-> Column names are case-insensitive. See the [Rules for Case Sensitivity]({% link docs/sql/keywords_and_identifiers.md %}#rules-for-case-sensitivity) for more details.
+> Column names are case-insensitive. See the [Rules for Case Sensitivity]({% link docs/sql/dialect/keywords_and_identifiers.md %}#rules-for-case-sensitivity) for more details.
 
 ### Star Expressions
 
@@ -135,7 +135,7 @@ FROM addresses
 GROUP BY city;
 ```
 
-[Aggregate functions]({% link docs/sql/aggregates.md %}) are special functions that *combine* multiple rows into a single value. When aggregate functions are present in the `SELECT` clause, the query is turned into an aggregate query. In an aggregate query, **all** expressions must either be part of an aggregate function, or part of a group (as specified by the [`GROUP BY clause`]({% link docs/sql/query_syntax/groupby.md %})).
+[Aggregate functions]({% link docs/sql/functions/aggregates.md %}) are special functions that *combine* multiple rows into a single value. When aggregate functions are present in the `SELECT` clause, the query is turned into an aggregate query. In an aggregate query, **all** expressions must either be part of an aggregate function, or part of a group (as specified by the [`GROUP BY clause`]({% link docs/sql/query_syntax/groupby.md %})).
 
 ### Window Functions
 
@@ -153,7 +153,7 @@ SELECT amount - lag(amount) OVER (ORDER BY time)
 FROM sales;
 ```
 
-[Window functions]({% link docs/sql/window_functions.md %}) are special functions that allow the computation of values relative to *other rows* in a result. Window functions are marked by the `OVER` clause which contains the *window specification*. The window specification defines the frame or context in which the window function is computed. See the [window functions page]({% link docs/sql/window_functions.md %}) for more information.
+[Window functions]({% link docs/sql/functions/window_functions.md %}) are special functions that allow the computation of values relative to *other rows* in a result. Window functions are marked by the `OVER` clause which contains the *window specification*. The window specification defines the frame or context in which the window function is computed. See the [window functions page]({% link docs/sql/functions/window_functions.md %}) for more information.
 
 ### `unnest` Function
 

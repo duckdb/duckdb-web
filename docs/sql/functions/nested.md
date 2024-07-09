@@ -1080,5 +1080,5 @@ SELECT generate_subscripts([4, 5, 6], 1) AS i;
 
 ## Related Functions
 
-There are also [aggregate functions]({% link docs/sql/aggregates.md %}) `list` and `histogram` that produces lists and lists of structs.
+There are also [aggregate functions]({% link docs/sql/functions/aggregates.md %}) `list` and `histogram` that produces lists and lists of structs.
 The [`unnest`]({% link docs/sql/query_syntax/unnest.md %}) function is used to unnest a list by one level.

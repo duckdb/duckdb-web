@@ -5,11 +5,11 @@ railroad: query_syntax/qualify.js
 blurb: The QUALIFY clause is used to filter the results of WINDOW functions.
 ---
 
-The `QUALIFY` clause is used to filter the results of [`WINDOW` functions]({% link docs/sql/window_functions.md %}). This filtering of results is similar to how a [`HAVING` clause]({% link docs/sql/query_syntax/having.md %}) filters the results of aggregate functions applied based on the [`GROUP BY` clause]({% link docs/sql/query_syntax/groupby.md %}).
+The `QUALIFY` clause is used to filter the results of [`WINDOW` functions]({% link docs/sql/functions/window_functions.md %}). This filtering of results is similar to how a [`HAVING` clause]({% link docs/sql/query_syntax/having.md %}) filters the results of aggregate functions applied based on the [`GROUP BY` clause]({% link docs/sql/query_syntax/groupby.md %}).
 
 The `QUALIFY` clause avoids the need for a subquery or [`WITH` clause]({% link docs/sql/query_syntax/with.md %}) to perform this filtering (much like `HAVING` avoids a subquery). An example using a `WITH` clause instead of `QUALIFY` is included below the `QUALIFY` examples.
 
-Note that this is filtering based on [`WINDOW` functions]({% link docs/sql/window_functions.md %}), not necessarily based on the [`WINDOW` clause]({% link docs/sql/query_syntax/window.md %}). The `WINDOW` clause is optional and can be used to simplify the creation of multiple `WINDOW` function expressions.
+Note that this is filtering based on [`WINDOW` functions]({% link docs/sql/functions/window_functions.md %}), not necessarily based on the [`WINDOW` clause]({% link docs/sql/query_syntax/window.md %}). The `WINDOW` clause is optional and can be used to simplify the creation of multiple `WINDOW` function expressions.
 
 The position of where to specify a `QUALIFY` clause is following the [`WINDOW` clause]({% link docs/sql/query_syntax/window.md %}) in a `SELECT` statement (`WINDOW` does not need to be specified), and before the [`ORDER BY`]({% link docs/sql/query_syntax/orderby.md %}).
 
