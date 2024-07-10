@@ -9,6 +9,7 @@ excerpt: ""
 Memory is an important resource when processing large amounts of data. Memory is a fast caching layer that can provide immense speed-ups to query processing. However, memory is finite and expensive, and when working with large data sets there is generally not enough memory available to keep all necessary data structures cached. Managing memory effectively is critical for a high-performance query engine – as memory must be utilized in order to provide that high performance, but we must be careful so that we do not use excessive memory which can cause out-of-memory errors or can cause the ominous [OOM killer](https://en.wikipedia.org/wiki/Out_of_memory#Recovery) to zap the process out of existence.
 
 DuckDB is built to effectively utilize available memory while avoiding running out of memory:
+
 * The streaming execution engine allows small chunks of data to flow through the system without requiring entire data sets to be materialized in memory.
 * Data from intermediates can be spilled to disk temporarily in order to free up space in memory, allowing computation of complex queries that would otherwise exceed the available memory.
 * The buffer manager caches as many pages as possible from any attached databases without exceeding the pre-defined memory limits.
@@ -51,12 +52,11 @@ In the previous example, streaming execution enabled larger-than-memory processi
 
 Streaming execution is not sufficient if the intermediates required to process a query are larger than memory. For example, suppose we group by the source IP in the previous example:
 
-
 ```sql
 SELECT IPNetworkID,
        count(*)
 FROM 'hits.csv'
-GROUP BY ALL;
+GROUP BY IPNetworkID;
 ```
 
 Since there are many more unique source IPs, the hash table we need to maintain is significantly larger. If the size of the aggregate hash table exceeds memory, the streaming execution engine is not sufficient to prevent out-of-memory issues.
