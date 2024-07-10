@@ -47,6 +47,17 @@ SELECT *
 FROM delta_scan('s3://some/delta/table/with/auth');
 ```
 
+To scan public buckets on S3, you may need to pass the correct region by creating a secret containing the region of your public S3 bucket:
+
+```sql
+CREATE SECRET (
+    TYPE S3,
+    REGION 'my-region'
+);
+SELECT *
+FROM delta_scan('s3://some/public/table/in/my-region');
+```
+
 ## Features
 
 While the `delta` extension is still experimental, many (scanning) features and optimizations are already supported:
