@@ -85,8 +85,8 @@ Configuration options come with different default [scopes]({% link docs/sql/stat
 
 ### Global Configuration Options
 
-|                     Name                     |                                                                                                  Description                                                                                                  |   Type    |                    Default value                    |
-|----|--------|--|---|
+| Name                                         | Description                                                                                                                                                                                                   |   Type    |                    Default value                    |
+|----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--|---|
 | `Calendar`                                   | The current calendar                                                                                                                                                                                          | `VARCHAR` | System (locale) calendar                            |
 | `TimeZone`                                   | The current time zone                                                                                                                                                                                         | `VARCHAR` | System (locale) timezone                            |
 | `access_mode`                                | Access mode of the database (**AUTOMATIC**, **READ_ONLY** or **READ_WRITE**)                                                                                                                                  | `VARCHAR` | `automatic`                                         |
@@ -155,6 +155,7 @@ Configuration options come with different default [scopes]({% link docs/sql/stat
 | `temp_directory`                             | Set the directory to which to write temp files                                                                                                                                                                | `VARCHAR` | `⟨database_name⟩.tmp` or `.tmp` (in in-memory mode) |
 | `threads`, `worker_threads`                  | The number of total threads used by the system.                                                                                                                                                               | `BIGINT`  | # CPU cores                                         |
 | `username`, `user`                           | The username to use. Ignored for legacy compatibility.                                                                                                                                                        | `VARCHAR` | `NULL`                                              |
+| `default_block_size`                         | The default block size when creating new database files via `ATTACH`.                                                                                                                                         | `UBIGINT` | `16384`                                             |
 
 ### Local Configuration Options
 

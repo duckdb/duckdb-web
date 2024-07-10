@@ -26,6 +26,12 @@ Attach the database `file.db` in read only mode:
 ATTACH 'file.db' (READ_ONLY);
 ```
 
+Attach the database `file.db` with a block size of 16KB:
+
+```sql
+ATTACH 'file.db' (BLOCK SIZE 16384);
+```
+
 Attach a SQLite database for reading and writing (see the [`sqlite` extension]({% link docs/extensions/sqlite.md %}) for more information):
 
 ```sql
@@ -92,6 +98,16 @@ USE memory_db;
 ### Detach Syntax
 
 <div id="rrdiagram2"></div>
+
+## Options
+
+<div class="narrow_table"></div>
+
+| Name                        | Description                                                                                                                 | Type      | Default value |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------|-----------|---------------|
+| `access_mode`               | Access mode of the database (**AUTOMATIC**, **READ_ONLY**, or **READ_WRITE**)                                               | `VARCHAR` | `automatic`   |
+| `type`                      | The file type (**DUCKDB** or **SQLITE**), or deduced from the input string literal (MySQL, PostgreSQL).                     | `VARCHAR` | `DUCKDB`      |
+| `block_size`                | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`      |
 
 ## Name Qualification
 
