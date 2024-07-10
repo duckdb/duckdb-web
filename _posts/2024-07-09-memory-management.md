@@ -24,7 +24,7 @@ DuckDB uses a streaming execution engine to process queries. Data sources, such 
 SELECT UserAgent,
        count(*)
 FROM 'hits.csv'
-GROUP BY ALL;
+GROUP BY UserAgent;
 ```
 
 Instead of reading the entire CSV file at once, DuckDB reads data from the CSV file in pieces, and computes the aggregation incrementally using the data read from those pieces. This happens continuously until the entire CSV file is read, at which point the entire aggregation result is computed. 
