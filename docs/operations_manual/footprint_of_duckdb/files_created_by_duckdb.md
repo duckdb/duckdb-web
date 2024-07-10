@@ -20,12 +20,12 @@ DuckDB creates the following global files and directories in the user's home dir
 
 DuckDB creates the following files and directories in the working directory (for in-memory connections) or relative to the database file (for pesistent connections):
 
-| Name | Description | Example | Deleted upon exit |
-|-------|-------------------|---|--|
-| `⟨database_filename⟩` | Database file. Only created in on-disk mode. The file can have any extension with typical extensions being `.duckdb`, `.db`, and `.ddb`. | `weather.duckdb` |  No |
-| `.tmp/` | Temporary directory. Only created in in-memory mode. | `.tmp/` | Yes |
-| `⟨database_filename⟩.tmp/` | Temporary directory. Only created in on-disk mode. | `weather.tmp/` | Yes |
-| `⟨database_filename⟩.wal` | [Write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) file. | `weather.wal` | Yes |
+| Name | Description | Example |
+|-------|-------------------|---|
+| `⟨database_filename⟩` | Database file. Only created in on-disk mode. The file can have any extension with typical extensions being `.duckdb`, `.db`, and `.ddb`. | `weather.duckdb` |
+| `.tmp/` | Temporary directory. Only created in in-memory mode. | `.tmp/` |
+| `⟨database_filename⟩.tmp/` | Temporary directory. Only created in on-disk mode. | `weather.tmp/` |
+| `⟨database_filename⟩.wal` | [Write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) file. If DuckDB exits normally, the WAL file is deleted upon exit. If DuckDB crashes, the WAL file is required to recover data. | `weather.wal` |
 
 If you are working in a Git repository and would like to disable tracking these files by Git,
 see the instructions on using [`.gitignore` for DuckDB]({% link docs/operations_manual/footprint_of_duckdb/gitignore_for_duckdb.md %}).
