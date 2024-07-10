@@ -11,7 +11,7 @@ extension:
   version: 1.0.0
   language: C++
   build: cmake
-  license: Apache-2.0
+  license: MIT
   excluded_platforms: "windows_amd64_rtools;windows_amd64"
   maintainers:
     - rustyconover
@@ -22,10 +22,49 @@ repo:
 
 docs:
   hello_world: |
-    SELECT * from read_csv('seq 1 100 | grep 2 |');
+    -- Calculate the MD5 hash value of 'abcdef'
+    SELECT crypto_hash('md5', 'abcdef');
+    ┌──────────────────────────────────┐
+    │   crypto_hash('md5', 'abcdef')   │
+    │             varchar              │
+    ├──────────────────────────────────┤
+    │ e80b5017098950fc58aad83c8c14978e │
+    └──────────────────────────────────┘
+
+    -- Calculate a HMAC
+    SELECT crypto_hmac('sha2-256', 'secret key', 'secret message');
+    ┌──────────────────────────────────────────────────────────────────┐
+    │     crypto_hmac('sha2-256', 'secret key', 'secret message')      │
+    │                             varchar                              │
+    ├──────────────────────────────────────────────────────────────────┤
+    │ 2df792e08cefdc0ea9900c67c93cbe66b98231b829a5dccd3857a03baac35963 │
+    └──────────────────────────────────────────────────────────────────┘
   extended_description: |
-    This extension, `crypto`, adds cryptographic hash functions and
-    the ability to calculate a HMAC to DuckDB's SQL engine.
+    `crypto` provides two functions:
+
+    - `crypto_hash` applies cryptographically secure hash functions
+    and returns the result as a hex encoded value.
+
+    - `crypto_hmac` calculates the HMAC using a secret key and a
+    specific hash function.
+
+    The supported hash functions are:
+      - `blake2b-512`
+      - `keccak224`
+      - `keccak256`
+      - `keccak384`
+      - `keccak512`
+      - `md4`
+      - `md5`
+      - `sha1`
+      - `sha2-224`
+      - `sha2-256`
+      - `sha2-384`
+      - `sha2-512`
+      - `sha3-224`
+      - `sha3-256`
+      - `sha3-384`
+      - `sha3-512`
 extension_star_count: 4
 
 ---
@@ -51,10 +90,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |              description               | comment |                             example                             |
-|---------------|---------------|----------------------------------------|---------|-----------------------------------------------------------------|
-| crypto_hash   | scalar        | Calculate the value of a hash function |         | select crypto_hash('md5', 'test');                              |
-| crypto_hmac   | scalar        | Calculate a HMAC value                 |         | select crypto_hmac('sha2-256', 'secret key', 'secret message'); |
+| function_name | function_type |                                                   description                                                    | comment |                             example                             |
+|---------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------|
+| crypto_hash   | scalar        | Apply a cryptographic hash function specified as the first argument to the data supplied as the second argument. |         | SELECT crypto_hash('md5', 'test');                              |
+| crypto_hmac   | scalar        | Calculate a HMAC value                                                                                           |         | SELECT crypto_hmac('sha2-256', 'secret key', 'secret message'); |
 
 
 

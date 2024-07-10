@@ -16,6 +16,10 @@
       "page": "Community Extensions",
       "mainfolderitems": [
         {
+          "page": "chsql",
+          "url": "/extensions/chsql.html"
+        },
+        {
           "page": "crypto",
           "url": "/extensions/crypto.html"
         },
