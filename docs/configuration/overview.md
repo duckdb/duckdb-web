@@ -155,7 +155,7 @@ Configuration options come with different default [scopes]({% link docs/sql/stat
 | `temp_directory`                             | Set the directory to which to write temp files                                                                                                                                                                | `VARCHAR` | `⟨database_name⟩.tmp` or `.tmp` (in in-memory mode) |
 | `threads`, `worker_threads`                  | The number of total threads used by the system.                                                                                                                                                               | `BIGINT`  | # CPU cores                                         |
 | `username`, `user`                           | The username to use. Ignored for legacy compatibility.                                                                                                                                                        | `VARCHAR` | `NULL`                                              |
-| `default_block_size`                         | The default block size when creating new database files via `ATTACH`.                                                                                                                                         | `UBIGINT` | `16384`                                             |
+| `default_block_size`                         | The default block size when creating new database files via `ATTACH`.                                                                                                                                         | `UBIGINT` | `262144`                                             |
 
 ### Local Configuration Options
 
