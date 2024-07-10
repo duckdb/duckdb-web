@@ -3,11 +3,11 @@ layout: community_extension
 title: scrooge
 excerpt: |
   DuckDB Community Extensions
-  Provides functionality for financial data-analysis. Including data scanners for the Ethereum Blockchain and Yahoo Finance.
+  Provides functionality for financial data-analysis, including data scanners for the Ethereum Blockchain and Yahoo Finance
 
 extension:
   name: scrooge
-  description: Provides functionality for financial data-analysis. Including data scanners for the Ethereum Blockchain and Yahoo Finance.
+  description: Provides functionality for financial data-analysis, including data scanners for the Ethereum Blockchain and Yahoo Finance
   version: 0.0.1
   language: C++
   excluded_platforms: "windows_amd64_rtools"

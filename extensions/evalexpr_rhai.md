@@ -3,11 +3,11 @@ layout: community_extension
 title: evalexpr_rhai
 excerpt: |
   DuckDB Community Extensions
-  Evaluate the Rhai scripting language in DuckDB.
+  Evaluate the Rhai scripting language in DuckDB
 
 extension:
   name: evalexpr_rhai
-  description: Evaluate the Rhai scripting language in DuckDB.
+  description: Evaluate the Rhai scripting language in DuckDB
   version: 1.0.0
   language: C++
   build: cmake
