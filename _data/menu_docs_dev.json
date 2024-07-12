@@ -24,6 +24,10 @@
           "url": "/extensions/crypto.html"
         },
         {
+          "page": "duckpgq",
+          "url": "/extensions/duckpgq.html"
+        },
+        {
           "page": "evalexpr_rhai",
           "url": "/extensions/evalexpr_rhai.html"
         },
