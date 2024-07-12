@@ -1,6 +1,7 @@
 name, repo, ref, description
-chsql,lmangani/duckdb-extension-clickhouse-sql,21c240ec0cbef00d5928083f5fc936ec42542911,"Clickhouse SQL Macros for DuckDB"
+chsql,lmangani/duckdb-extension-clickhouse-sql,17c249ba08a9b88338e77c7f2d6e5dd2040b4590,"ClickHouse SQL Macros for DuckDB"
 crypto,rustyconover/duckdb-crypto-extension,b6ccda3451d4fac8a2c0ae5ab2bca5216f22424c,"Cryptographic hash functions and HMAC"
+duckpgq,cwida/duckpgq-extension,6c06589fb8fe3293bf3b31f5d8e89177504edf5f,"Extension that adds support for SQL/PGQ and graph algorithms"
 evalexpr_rhai,rustyconover/duckdb-evalexpr-rhai-extension,4acdf799b1b72d43af4c50659a2c859814140b33,"Evaluate the Rhai scripting language in DuckDB"
 h3,isaacbrodsky/h3-duckdb,3c8a5358e42ab8d11e0253c70f7cc7d37781b2ef,"Hierarchical hexagonal indexing for geospatial data"
 lindel,rustyconover/duckdb-lindel-extension,76f5bc78e8bfd1a7953c8cc4c284209b65626216,"Linearization/Delinearization, Z-Order, Hilbert and Morton Curves"
