@@ -3,12 +3,12 @@ layout: community_extension
 title: chsql
 excerpt: |
   DuckDB Community Extensions
-  Clickhouse SQL Macros for DuckDB
+  ClickHouse SQL Macros for DuckDB
 
 extension:
   name: chsql
-  description: Clickhouse SQL Macros for DuckDB
-  version: 1.0.0
+  description: ClickHouse SQL Macros for DuckDB
+  version: 1.0.1
   language: SQL & C++
   build: cmake
   license: MIT
@@ -17,13 +17,13 @@ extension:
 
 repo:
   github: lmangani/duckdb-extension-clickhouse-sql
-  ref: 21c240ec0cbef00d5928083f5fc936ec42542911
+  ref: 17c249ba08a9b88338e77c7f2d6e5dd2040b4590
 
 docs:
   hello_world: |
     SELECT toString('world') as hello, toInt8OrZero('world') as zero;
   extended_description: |
-    This extension provides a growing number of Clickhouse SQL Macros for DuckDB. 
+    This extension provides a growing number of ClickHouse SQL Macros for DuckDB. 
 
 extension_star_count: 5
 
