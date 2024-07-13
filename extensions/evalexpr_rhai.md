@@ -11,6 +11,7 @@ extension:
   version: 1.0.0
   language: C++
   build: cmake
+  requires_toolchains: "rust"
   license: Apache-2.0
   maintainers:
     - rustyconover

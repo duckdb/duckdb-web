@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: chsql
   description: ClickHouse SQL Macros for DuckDB
-  version: 1.0.1
+  version: 1.0.2
   language: SQL & C++
   build: cmake
   license: MIT
@@ -17,15 +17,16 @@ extension:
 
 repo:
   github: lmangani/duckdb-extension-clickhouse-sql
-  ref: 17c249ba08a9b88338e77c7f2d6e5dd2040b4590
+  ref: 3a81f48b9ea4262eaaa5c40076ad4e6202065472
 
 docs:
   hello_world: |
     SELECT toString('world') as hello, toInt8OrZero('world') as zero;
   extended_description: |
     This extension provides a growing number of ClickHouse SQL Macros for DuckDB. 
+    For a list of supported functions, please refer to [latest release notes](https://github.com/lmangani/duckdb-extension-clickhouse-sql/releases).
 
-extension_star_count: 5
+extension_star_count: 6
 
 ---
 
@@ -52,17 +53,44 @@ LOAD {{ page.extension.name }};
 
 |     function_name     | function_type | description | comment | example |
 |-----------------------|---------------|-------------|---------|---------|
+| IPv4NumToString       | macro         |             |         |         |
+| IPv4StringToNum       | macro         |             |         |         |
 | arrayExists           | macro         |             |         |         |
+| arrayJoin             | macro         |             |         |         |
 | arrayMap              | macro         |             |         |         |
+| bitCount              | macro         |             |         |         |
 | chsql                 | scalar        |             |         |         |
 | chsql_openssl_version | scalar        |             |         |         |
+| domain                | macro         |             |         |         |
+| empty                 | macro         |             |         |         |
+| extractAllGroups      | macro         |             |         |         |
+| formatDateTime        | macro         |             |         |         |
+| generateUUIDv4        | macro         |             |         |         |
+| ifNull                | macro         |             |         |         |
 | intDiv                | macro         |             |         |         |
+| intDivOZero           | macro         |             |         |         |
+| intDivOrNull          | macro         |             |         |         |
+| leftPad               | macro         |             |         |         |
+| lengthUTF8            | macro         |             |         |         |
 | match                 | macro         |             |         |         |
-| times_two             | macro         |             |         |         |
-| times_two_table       | table_macro   |             |         |         |
+| minus                 | macro         |             |         |         |
+| modulo                | macro         |             |         |         |
+| moduloOrZero          | macro         |             |         |         |
+| notEmpty              | macro         |             |         |         |
+| numbers               | table_macro   |             |         |         |
+| parseURL              | macro         |             |         |         |
+| path                  | macro         |             |         |         |
+| plus                  | macro         |             |         |         |
+| protocol              | macro         |             |         |         |
+| rightPad              | macro         |             |         |         |
+| splitByChar           | macro         |             |         |         |
+| tableMultiply         | table_macro   |             |         |         |
+| toDayOfMonth          | macro         |             |         |         |
+| toFixedString         | macro         |             |         |         |
 | toFloat               | macro         |             |         |         |
 | toFloatOrNull         | macro         |             |         |         |
 | toFloatOrZero         | macro         |             |         |         |
+| toHour                | macro         |             |         |         |
 | toInt128              | macro         |             |         |         |
 | toInt128OrNull        | macro         |             |         |         |
 | toInt128OrZero        | macro         |             |         |         |
@@ -81,6 +109,9 @@ LOAD {{ page.extension.name }};
 | toInt8                | macro         |             |         |         |
 | toInt8OrNull          | macro         |             |         |         |
 | toInt8OrZero          | macro         |             |         |         |
+| toMinute              | macro         |             |         |         |
+| toMonth               | macro         |             |         |         |
+| toSecond              | macro         |             |         |         |
 | toString              | macro         |             |         |         |
 | toUInt16              | macro         |             |         |         |
 | toUInt16OrNull        | macro         |             |         |         |
@@ -94,6 +125,22 @@ LOAD {{ page.extension.name }};
 | toUInt8               | macro         |             |         |         |
 | toUInt8OrNull         | macro         |             |         |         |
 | toUInt8OrZero         | macro         |             |         |         |
+| toYYYYMM              | macro         |             |         |         |
+| toYYYYMMDD            | macro         |             |         |         |
+| toYYYYMMDDhhmmss      | macro         |             |         |         |
+| toYear                | macro         |             |         |         |
+| topLevelDomain        | macro         |             |         |         |
+| tupleConcat           | macro         |             |         |         |
+| tupleDivide           | macro         |             |         |         |
+| tupleDivideByNumber   | macro         |             |         |         |
+| tupleIntDiv           | macro         |             |         |         |
+| tupleIntDivByNumber   | macro         |             |         |         |
+| tupleMinus            | macro         |             |         |         |
+| tupleModulo           | macro         |             |         |         |
+| tupleModuloByNumber   | macro         |             |         |         |
+| tupleMultiply         | macro         |             |         |         |
+| tupleMultiplyByNumber | macro         |             |         |         |
+| tuplePlus             | macro         |             |         |         |
 
 
 
