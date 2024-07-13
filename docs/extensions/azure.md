@@ -250,6 +250,22 @@ Where `variable_name` can be one of the following:
 
 ## Additional Information
 
+### Logging
+
+The Azure extension relies on the Azure SDK to connect to Azure Blob storage and supports printing the SDK logs to the console.
+To control the log level, set the [`AZURE_LOG_LEVEL`](https://github.com/Azure/azure-sdk-for-cpp/blob/main/sdk/core/azure-core/README.md#sdk-log-messages) environment variable.
+
+For instance, verbose logs can be enabled as follows in Python:
+```python
+import os
+import duckdb
+
+os.environ["AZURE_LOG_LEVEL"] = "verbose"
+
+duckdb.sql("CREATE SECRET myaccount (TYPE AZURE, PROVIDER CREDENTIAL_CHAIN, SCOPE 'az://myaccount.blob.core.windows.net/')")
+duckdb.sql("SELECT count(*) FROM 'az://myaccount.blob.core.windows.net/path/to/blob.parquet'")
+```
+
 ### Difference between ADLS and Blob Storage
 
 Even though ADLS implements similar functionality as the Blob storage, there are some important performance benefits to using the ADLS endpoints for globbing, especially when using (complex) glob patterns.
