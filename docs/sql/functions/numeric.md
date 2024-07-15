@@ -486,7 +486,7 @@ The table below shows the available mathematical functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns whether the signbit is set or not. |
-| **Example** | `signbit(-0.0)` |
+| **Example** | `signbit(-1.0)` |
 | **Result** | `true` |
 
 ### `sin(x)`

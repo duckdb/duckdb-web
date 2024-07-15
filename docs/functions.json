@@ -2634,7 +2634,7 @@
       "x"
     ],
     "description": "Returns whether the signbit is set or not",
-    "example": "signbit(-0.0)",
+    "example": "signbit(-1.0)",
     "type": "scalar_function_set",
     "struct": "SignBitFun",
     "category": "math",
