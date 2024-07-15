@@ -26,7 +26,7 @@ docs:
     This extension provides a growing number of ClickHouse SQL Macros for DuckDB. 
     For a list of supported functions, please refer to [latest release notes](https://github.com/lmangani/duckdb-extension-clickhouse-sql/releases).
 
-extension_star_count: 6
+extension_star_count: 7
 
 ---
 

@@ -150,7 +150,7 @@ repo:
   github: rustyconover/duckdb-evalexpr-rhai-extension
   ref: 4acdf799b1b72d43af4c50659a2c859814140b33
 
-extension_star_count: 1
+extension_star_count: 2
 
 ---
 

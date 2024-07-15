@@ -28,7 +28,7 @@ docs:
     delinearization of numeric arrays in DuckDB. It allows you to order
     multi-dimensional data using space-filling curves.
 
-extension_star_count: 7
+extension_star_count: 9
 
 ---
 
