@@ -1,5 +1,5 @@
 name, repo, ref, description
-chsql,lmangani/duckdb-extension-clickhouse-sql,17c249ba08a9b88338e77c7f2d6e5dd2040b4590,"ClickHouse SQL Macros for DuckDB"
+chsql,lmangani/duckdb-extension-clickhouse-sql,3a81f48b9ea4262eaaa5c40076ad4e6202065472,"ClickHouse SQL Macros for DuckDB"
 crypto,rustyconover/duckdb-crypto-extension,b6ccda3451d4fac8a2c0ae5ab2bca5216f22424c,"Cryptographic hash functions and HMAC"
 duckpgq,cwida/duckpgq-extension,6c06589fb8fe3293bf3b31f5d8e89177504edf5f,"Extension that adds support for SQL/PGQ and graph algorithms"
 evalexpr_rhai,rustyconover/duckdb-evalexpr-rhai-extension,4acdf799b1b72d43af4c50659a2c859814140b33,"Evaluate the Rhai scripting language in DuckDB"
