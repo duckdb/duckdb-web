@@ -4,12 +4,8 @@
       "title": "Main",
       "mainfolderitems": [
         {
-          "page": "Documentation",
+          "page": "DuckDB Documentation",
           "url": "https://duckdb.org/docs/"
-        },
-        {
-          "page": "Contribute",
-          "url": "https://github.com/duckdb/community-extensions/"
         },
         {
           "page": "Blog",

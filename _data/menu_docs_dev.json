@@ -1,69 +1,24 @@
 {
   "docsmenu": [
     {
-      "page": "Install DuckDB",
-      "url": "https://duckdb.org/docs/installation"
+      "page": "Overview",
+      "url": "/index.html"
     },
     {
-      "page": "DuckDB Extensions",
-      "url": "https://duckdb.org/docs/extensions/overview"
+      "page": "Documentation",
+      "url": "/documentation.html"
+    },
+    {
+      "page": "Development",
+      "url": "/development.html"
+    },
+    {
+      "page": "FAQ",
+      "url": "/faq.html"
     },
     {
       "page": "Core Extensions",
-      "url": "https://duckdb.org/docs/extensions/official_extensions"
-    },
-    {
-      "page": "Community Extensions",
-      "mainfolderitems": [
-        {
-          "page": "chsql",
-          "url": "/extensions/chsql.html"
-        },
-        {
-          "page": "crypto",
-          "url": "/extensions/crypto.html"
-        },
-        {
-          "page": "duckpgq",
-          "url": "/extensions/duckpgq.html"
-        },
-        {
-          "page": "evalexpr_rhai",
-          "url": "/extensions/evalexpr_rhai.html"
-        },
-        {
-          "page": "h3",
-          "url": "/extensions/h3.html"
-        },
-        {
-          "page": "lindel",
-          "url": "/extensions/lindel.html"
-        },
-        {
-          "page": "prql",
-          "url": "/extensions/prql.html"
-        },
-        {
-          "page": "quack",
-          "url": "/extensions/quack.html"
-        },
-        {
-          "page": "scrooge",
-          "url": "/extensions/scrooge.html"
-        },
-        {
-          "page": "shellfs",
-          "url": "/extensions/shellfs.html"
-        },
-        {
-          "page": "ulid",
-          "url": "/extensions/ulid.html"
-        }
-	]
-    },
-    {
-      "page": "Submit an Extension",
-      "url": "https://github.com/duckdb/community-extensions/"
+      "url": "/core_extensions.html"
     }
   ]
 }

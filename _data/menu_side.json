@@ -1,12 +1,4 @@
 {
   "sidemenu": [
-    {
-      "page": "Why DuckDB",
-      "url": "https://duckdb.org/why_duckdb"
-    },
-    {
-      "page": "Code of Conduct",
-      "url": "https://duckdb.org/code_of_conduct"
-    }
   ]
 }
