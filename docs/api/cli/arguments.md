@@ -28,7 +28,7 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-c COMMAND`      | Run `COMMAND` and exit                                                                |
 | `-csv`            | Set [output mode]({% link docs/api/cli/output_formats.md %}) to `csv`                                            |
 | `-echo`           | Print commands before execution                                                       |
-| `-init FILENAME`  | Run the script in `FILENAME` upon startup (instead of `~./duckdbrc`)                  |
+| `-init FILENAME`  | Run the script in `FILENAME` upon startup (instead of `~/.duckdbrc`)                  |
 | `-header`         | Turn headers on                                                                       |
 | `-help`           | Show this message                                                                     |
 | `-html`           | Set [output mode]({% link docs/api/cli/output_formats.md %}) to HTML                                             |
