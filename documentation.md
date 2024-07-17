@@ -5,7 +5,7 @@ title: Documentation
 
 ## Submit a Community Extension
 
-Extensions code are hosted as Github repositories.
+Extensions are hosted as Github repositories.
 
 Users are encouraged to check the relevant extension repository for giving feedback, look at the implementation, and report issues.
 
