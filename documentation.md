@@ -48,8 +48,6 @@ For example, this is the page for [quack]({% link extensions/quack.md %}).
 
 Documentation pages are generated from the fields provided in the YAML descriptor file that is part of the [Community Extensions Repository](https://github.com/duckdb/community-extensions) and from the auto-detected changes that a given extensions introduces in DuckDB.
 
-#### Autodetected changes
-
 Process is roughly as follow:
 
 ```sql
