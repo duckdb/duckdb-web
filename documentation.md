@@ -1,22 +1,66 @@
 ---
 layout: community_extension_doc
-title: Community Extension Documentation
+title: Documentation
 ---
 
-Community extensions are documented using automatically generated docs that are generated from the information provided in the [Community Extensions Repository](https://github.com/duckdb/community-extensions).
-All the available community extensions are listed below, clicking on any of them will take you to their respective documentation page. 
+## Submit a Community Extension
 
-|                          Name                           |                                               GitHub                                               |                                                        Description                                                        |
-|---------------------------------------------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| [chsql]({% link extensions/chsql.md %})                 | [<span class=github>GitHub</span>](https://github.com/lmangani/duckdb-extension-clickhouse-sql)    | ClickHouse SQL Macros for DuckDB                                                                                          |
-| [crypto]({% link extensions/crypto.md %})               | [<span class=github>GitHub</span>](https://github.com/rustyconover/duckdb-crypto-extension)        | Cryptographic hash functions and HMAC                                                                                     |
-| [duckpgq]({% link extensions/duckpgq.md %})             | [<span class=github>GitHub</span>](https://github.com/cwida/duckpgq-extension)                     | Extension that adds support for SQL/PGQ and graph algorithms                                                              |
-| [evalexpr_rhai]({% link extensions/evalexpr_rhai.md %}) | [<span class=github>GitHub</span>](https://github.com/rustyconover/duckdb-evalexpr-rhai-extension) | Evaluate the Rhai scripting language in DuckDB                                                                            |
-| [h3]({% link extensions/h3.md %})                       | [<span class=github>GitHub</span>](https://github.com/isaacbrodsky/h3-duckdb)                      | Hierarchical hexagonal indexing for geospatial data                                                                       |
-| [lindel]({% link extensions/lindel.md %})               | [<span class=github>GitHub</span>](https://github.com/rustyconover/duckdb-lindel-extension)        | Linearization/Delinearization, Z-Order, Hilbert and Morton Curves                                                         |
-| [prql]({% link extensions/prql.md %})                   | [<span class=github>GitHub</span>](https://github.com/ywelsch/duckdb-prql)                         | Support for PRQL, the Pipelined Relational Query Language                                                                 |
-| [quack]({% link extensions/quack.md %})                 | [<span class=github>GitHub</span>](https://github.com/hannes/quack)                                | Provides a hello world example demo                                                                                       |
-| [scrooge]({% link extensions/scrooge.md %})             | [<span class=github>GitHub</span>](https://github.com/pdet/Scrooge-McDuck)                         | Provides functionality for financial data-analysis, including data scanners for the Ethereum Blockchain and Yahoo Finance |
-| [shellfs]({% link extensions/shellfs.md %})             | [<span class=github>GitHub</span>](https://github.com/rustyconover/duckdb-shellfs-extension)       | Allow shell commands to be used for input and output                                                                      |
-| [ulid]({% link extensions/ulid.md %})                   | [<span class=github>GitHub</span>](https://github.com/Maxxen/duckdb_ulid)                          | ULID data type for DuckDB                                                                                                 |
+Extensions are hosted as Github repositories.
 
+Users are encouraged to check the relevant extension repository for giving feedback, look at the implementation, and report issues.
+
+Repositories needs to be Public, Open Source, and hosted on GitHub.
+
+Submitting a Community Extension is a matter of opening a PR to the [Community Extensions Repository](https://github.com/duckdb/community-extensions) adding a single `descriptor.yml` file in the folder `extensions/$name_of_extension`.
+
+### YAML descriptor
+
+Structure of the YAML descritor is as follow:
+
+| field | description |
+|--|--|
+| extension.name | Name of the extension. Extension names are case-insensitive, so only lowercase letters, numbers and `-` or `_` are allowed |
+| extension.description |Short description of the extension | 
+| extension.version | Semantic versioning of the extension |
+| extension.language | `C++`, `Rust & C++`, `C++ & SQL`, or whatever combination of languages the extension code relies on |
+| extension.build | Build system the extensin uses, at the moment only `cmake` is supported |
+| extension.licence | Licence that applies to the extension |
+| extension.maintainers | A list of maintainers for the extension |
+| extension.excluded_platforms | Optional, allows to specify whether certain platforms are not supported |
+| extension.requires_toolchains | Optional, allows to specify whether additional build-time dependecies are required |
+| repo.github | Organization name '/' Repository name  of the GitHub-hosted public repository |
+| repo.ref | Git ref for the extension |
+
+These fields are used to build, test and deploy the extension, and might also be reflected in the documentation.
+
+Extensions maintainers are encouraged to provide two optional fields in the descriptor, to be only used in the autogenerated documentation:
+
+| field | description |
+|--|--|
+| docs.hello_world | An `Hello, World!`, a self contained example of an extension capabilities |
+| docs.extended_description | Extra context on the extension, relevant links, or a tour of the extension capabilities |
+
+### Hosted Extension Documentation Page 
+
+Each Community Extension has a documentation page at: `https://community-extension.duckdb.org/extensions/$extension_name.html`.
+
+For example, this is the page for [quack]({% link extensions/quack.md %}).
+
+Documentation pages are generated from the fields provided in the YAML descriptor file that is part of the [Community Extensions Repository](https://github.com/duckdb/community-extensions) and from the auto-detected changes that a given extensions introduces in DuckDB.
+
+Process is roughly as follow:
+
+```sql
+CREATE TABLE functions_pre AS SELECT ... FROM duckdb_functions();
+LOAD extension_name;
+CREATE TABLE functions_post AS SELECT ... FROM duckdb_functions();
+SELECT * FROM functions_pre EXCEPT (FROM functions_post) ORDER BY ...;
+```
+
+This works well for detecting new functions, functions overload, new settings, and new types.
+
+Detection of other changes to the system (e.g., whether an additional Parser or Optimizer callback has been register) are viable, but not yet implemented. Those are recommended to be provided as part of the `docs.extended_description` field.
+
+### List of extensions
+
+All the available community extensions are listed at [List of Community Extensions]({% link list_of_extensions.md %}) page.

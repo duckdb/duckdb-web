@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: community_extension_doc
 title: Frequently Asked Questions
 ---
 
