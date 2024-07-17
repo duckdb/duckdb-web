@@ -61,7 +61,7 @@ SELECT * FROM functions_pre EXCEPT (FROM functions_post) ORDER BY ...;
 
 This works well for detecting new functions, functions overload, new settings, and new types.
 
-Detection of other changes to the system (e.g., whether an additional Parser or Optimizer callback has been register) are viable, but not yet implemented. Those are reccomended to be provided as part of the `docs.extended_description` field.
+Detection of other changes to the system (e.g., whether an additional Parser or Optimizer callback has been register) are viable, but not yet implemented. Those are recommended to be provided as part of the `docs.extended_description` field.
 
 ### List of extensions
 
