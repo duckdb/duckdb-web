@@ -169,3 +169,12 @@ The solution is to run the following commands in the repository:
 gem install bundler
 bundle install
 ```
+
+If this workaround is not sufficient, you likely have to upgrade your Bundler version.
+To do so, run:
+
+```bash
+rm Gemfile.lock
+bundle install
+```
+
