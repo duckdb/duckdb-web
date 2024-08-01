@@ -96,17 +96,17 @@ After detecting the dialect, the system will attempt to figure out the types of 
 
 The type detection works by attempting to convert the values in each column to the candidate types. If the conversion is unsuccessful, the candidate type is removed from the set of candidate types for that column. After all samples have been handled – the remaining candidate type with the highest priority is chosen. The set of considered candidate types in order of priority is given below:
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
-|   Types     |
-|-------------|
-| `BOOLEAN`   |
-| `BIGINT`    |
-| `DOUBLE`    |
-| `TIME`      |
-| `DATE`      |
-| `TIMESTAMP` |
-| `VARCHAR`   |
+|   Types   |
+|-----------|
+| BOOLEAN   |
+| BIGINT    |
+| DOUBLE    |
+| TIME      |
+| DATE      |
+| TIMESTAMP |
+| VARCHAR   |
 
 Note everything can be cast to `VARCHAR`. This type has the lowest priority – i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
 
@@ -132,29 +132,29 @@ If the ambiguities cannot be resolved by looking at the data the system has a li
 
 The system considers the following formats for dates (`dateformat`). Higher entries are chosen over lower entries in case of ambiguities (i.e., ISO 8601 is preferred over `MM-DD-YYYY`).
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | dateformat |
 |------------|
-| `ISO 8601` |
-| `%y-%m-%d` |
-| `%Y-%m-%d` |
-| `%d-%m-%y` |
-| `%d-%m-%Y` |
-| `%m-%d-%y` |
-| `%m-%d-%Y` |
+| ISO 8601   |
+| %y-%m-%d   |
+| %Y-%m-%d   |
+| %d-%m-%y   |
+| %d-%m-%Y   |
+| %m-%d-%y   |
+| %m-%d-%Y   |
 
 The system considers the following formats for timestamps (`timestampformat`). Higher entries are chosen over lower entries in case of ambiguities.
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
-|   timestampformat      |
-|------------------------|
-| `ISO 8601`             |
-| `%y-%m-%d %H:%M:%S`    |
-| `%Y-%m-%d %H:%M:%S`    |
-| `%d-%m-%y %H:%M:%S`    |
-| `%d-%m-%Y %H:%M:%S`    |
-| `%m-%d-%y %I:%M:%S %p` |
-| `%m-%d-%Y %I:%M:%S %p` |
-| `%Y-%m-%d %H:%M:%S.%f` |
+|   timestampformat    |
+|----------------------|
+| ISO 8601             |
+| %y-%m-%d %H:%M:%S    |
+| %Y-%m-%d %H:%M:%S    |
+| %d-%m-%y %H:%M:%S    |
+| %d-%m-%Y %H:%M:%S    |
+| %m-%d-%y %I:%M:%S %p |
+| %m-%d-%Y %I:%M:%S %p |
+| %Y-%m-%d %H:%M:%S.%f |
