@@ -16,6 +16,7 @@
   * [Troubleshooting](#troubleshooting)
     * [Cannot install dependency](#cannot-install-dependency)
     * [Jekyll fails](#jekyll-fails)
+    * [Bundle update fails](#bundle-update-fails)
 
 The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
@@ -175,3 +176,28 @@ rm Gemfile.lock
 bundle install
 ```
 
+### Bundle update fails
+
+Bundle update fails with the following error message:
+
+```bash
+bundle update
+```
+
+```console
+Git error: command `git fetch --force --quiet
+/opt/homebrew/lib/ruby/gems/3.3.0/cache/bundler/git/minima-4abf4ea566b1c7c640342d1bbff5586f3c10dd05 --depth 1
+1d5286cf9a1aae34078420d183d560dd673d98b5` in directory /opt/homebrew/lib/ruby/gems/3.3.0/bundler/gems/minima-1d5286cf9a1a has failed.
+fatal: '/opt/homebrew/lib/ruby/gems/3.3.0/cache/bundler/git/minima-4abf4ea566b1c7c640342d1bbff5586f3c10dd05' does not appear to be a git
+repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+```
+
+To resolve this, clean the Jekyll gem cache:
+
+```bash
+rm -rf /opt/homebrew/lib/ruby/gems/3.3.0/cache/
+```
