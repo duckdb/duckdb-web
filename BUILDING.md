@@ -2,23 +2,20 @@
 
 ## Table of contents
 
-- [Building the DuckDB documentation](#building-the-duckdb-documentation)
-  - [Table of contents](#table-of-contents)
-  - [Using a local Jekyll installation](#using-a-local-jekyll-installation)
-    - [Prerequisites](#prerequisites)
-      - [Ruby](#ruby)
-      - [Jekyll](#jekyll)
-      - [Syntax highlighter](#syntax-highlighter)
-    - [Serving the site using a local Jekyll installation](#serving-the-site-using-a-local-jekyll-installation)
-  - [Using Docker](#using-docker)
-    - [Prerequisites](#prerequisites-1)
-    - [Serving the site from Docker](#serving-the-site-from-docker)
-  - [With a Dev Container](#with-a-dev-container)
-  - [Generating the search index](#generating-the-search-index)
-  - [Updating the release calendar](#updating-the-release-calendar)
-  - [Troubleshooting](#troubleshooting)
-    - [Cannot install dependency](#cannot-install-dependency)
-    - [Jekyll fails](#jekyll-fails)
+* [Building the DuckDB documentation](#building-the-duckdb-documentation)
+  * [Table of contents](#table-of-contents)
+  * [Using a local Jekyll installation](#using-a-local-jekyll-installation)
+    * [Prerequisites](#prerequisites)
+    * [Serving the site using a local Jekyll installation](#serving-the-site-using-a-local-jekyll-installation)
+  * [Using Docker](#using-docker)
+    * [Prerequisites](#prerequisites-1)
+    * [Serving the site from Docker](#serving-the-site-from-docker)
+  * [With a Dev Container](#with-a-dev-container)
+  * [Generating the search index](#generating-the-search-index)
+  * [Updating the release calendar](#updating-the-release-calendar)
+  * [Troubleshooting](#troubleshooting)
+    * [Cannot install dependency](#cannot-install-dependency)
+    * [Jekyll fails](#jekyll-fails)
 
 The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
@@ -67,17 +64,17 @@ We use [a fork of the Rouge syntax highligher](https://github.com/duckdb/rouge/b
 
 ### Serving the site using a local Jekyll installation
 
-Serve the website (latest only, archives excluded) with:
+To save time on building, it is usually enough to test the website for the latest stable version and exclude the archives. To serve this website, run:
 
 ```bash
 scripts/serve-latest.sh
 ```
 
-To browse the website, visit <http://localhost:4000/docs/>.
+Visit <http://localhost:4000/docs/> to browse the website.
 
-Serve the full website with:
+To serve the full website with old versions included, run:
 
-```sh
+```bash
 scripts/serve.sh
 ```
 
@@ -93,13 +90,13 @@ For portability, we provide a [Docker image](Dockerfile).
 
 First, build the image using:
 
-```sh
+```bash
 scripts/docker-build.sh
 ```
 
 Serve the website (latest only, archives excluded) with:
 
-```sh
+```bash
 scripts/docker-serve-latest.sh
 ```
 
@@ -107,13 +104,13 @@ To browse the website, visit <http://localhost:4000/docs/>.
 
 Serve the full website with:
 
-```sh
+```bash
 scripts/docker-serve.sh
 ```
 
 To stop the container, run:
 
-```sh
+```bash
 scripts/docker-stop.sh
 ```
 
