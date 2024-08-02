@@ -3,7 +3,9 @@ import sys
 import re
 
 if len(sys.argv) < 2:
-    print("Expected usage: python3 scripts/generate_c_api_docs.py /path/to/duckdb/folder")
+    print(
+        "Expected usage: python3 scripts/generate_c_api_docs.py /path/to/duckdb/folder"
+    )
     exit(1)
 
 base_path = sys.argv[1]
