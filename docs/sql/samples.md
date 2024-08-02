@@ -35,16 +35,16 @@ SELECT * FROM tbl USING SAMPLE reservoir(50 ROWS) REPEATABLE (100);
 Select a sample of 20% of the table using system sampling with a fixed seed (377):
 
 ```sql
-SELECT * FROM tbl USING SAMPLE 10% (system, 377);
+SELECT * FROM tbl USING SAMPLE 20% (system, 377);
 ```
 
-Select a sample of 10% of `tbl` **before** the join with `tbl2`:
+Select a sample of 20% of `tbl` **before** the join with `tbl2`:
 
 ```sql
 SELECT * FROM tbl TABLESAMPLE reservoir(20%), tbl2 WHERE tbl.i = tbl2.i;
 ```
 
-Select a sample of 10% of `tbl` **after** the join with `tbl2`:
+Select a sample of 20% of `tbl` **after** the join with `tbl2`:
 
 ```sql
 SELECT * FROM tbl, tbl2 WHERE tbl.i = tbl2.i USING SAMPLE reservoir(20%);
