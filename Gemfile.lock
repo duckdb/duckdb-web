@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/duckdb/minima.git
-  revision: 1d5286cf9a1aae34078420d183d560dd673d98b5
+  revision: 9fa223a00f42c557bf58ae028a925bd6ed061bd3
   branch: master
   specs:
     minima (3.0.0.dev)
