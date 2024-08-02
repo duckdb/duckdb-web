@@ -319,8 +319,8 @@ h1, h2, h3, h4, h5{
 			-webkit-transition: color .3s;
 			-o-transition: color .3s;
 			transition: color .3s;
-			@include textlink();
 			font-size: 100%;
+			@include textlink();
 			span::after{
 				line-height: 1.2;
 			}

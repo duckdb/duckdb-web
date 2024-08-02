@@ -277,11 +277,11 @@ body.foundation{
 				display: -ms-flexbox;
 				display: flex;
 				-webkit-box-pack: justify;
-					-ms-flex-pack: justify;
-						justify-content: space-between;
+				   -ms-flex-pack: justify;
+				justify-content: space-between;
 				-webkit-box-align: center;
-					-ms-flex-align: center;
-						align-items: center;
+				   -ms-flex-align: center;
+				      align-items: center;
 				margin-top: 30px;
 				&:nth-child(1), &:nth-child(2), &:nth-child(3){
 					margin-top: 0;

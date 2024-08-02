@@ -226,27 +226,15 @@ body.landing{
 	  line-height: inherit;
 	  z-index: 1;
 	  font-weight: 500;
-	  &::-ms-expand {
-		display: none;
-	  }
 	  outline: none;
-	}
-	
-	select {
+
 	  display: -ms-grid;
 	  display: grid;
-			  grid-template-areas: "select";
+	  grid-template-areas: "select";
 	  -webkit-box-align: center;
-		  -ms-flex-align: center;
-			  align-items: center;
+		 -ms-flex-align: center;
+			align-items: center;
 	  position: relative;
-	  
-	  select,
-	  &::after {
-		-ms-grid-row: 1;
-		-ms-grid-column: 1;
-		grid-area: select;
-	  }
 	  
 	  min-width: 15ch;
 	  max-width: 30ch;
@@ -264,6 +252,18 @@ body.landing{
 	  -webkit-transition: background-color .3s;
 	  -o-transition: background-color .3s;
 	  transition: background-color .3s;
+
+	  &::-ms-expand {
+		display: none;
+	  }
+
+	  select,
+	  &::after {
+		-ms-grid-row: 1;
+		-ms-grid-column: 1;
+		grid-area: select;
+	  }
+
 	  &:hover{
 		  background-color: darken($duckDByellow, 5%);
 	  }
