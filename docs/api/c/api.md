@@ -4170,9 +4170,11 @@ The bit is set to 1 if the value is valid (i.e., not NULL) or 0 if the value is 
 
 Validity of a specific value can be obtained like this:
 
+```c
 idx_t entry_idx = row_idx / 64;
 idx_t idx_in_entry = row_idx % 64;
 bool is_valid = validity_mask[entry_idx] & (1 << idx_in_entry);
+```
 
 Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 
