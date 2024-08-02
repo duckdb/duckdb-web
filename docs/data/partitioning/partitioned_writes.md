@@ -20,7 +20,7 @@ COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IG
 Write a table to a Hive partitioned data set of GZIP-compressed CSV files, setting explicit data files' extension:
 
 ```sql
-COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), COMPRESSION gzip, FILE_EXTENSION 'csv.gz');
+COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), COMPRESSION GZIP, FILE_EXTENSION 'csv.gz');
 ```
 
 ## Partitioned Writes
