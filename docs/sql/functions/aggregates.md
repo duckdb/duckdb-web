@@ -388,7 +388,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | [`regr_avgy(y, x)`](#regr_avgyy-x) | The average of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | [`regr_count(y, x)`](#regr_county-x) | The number of non-`NULL` pairs. |
 | [`regr_intercept(y, x)`](#regr_intercepty-x) | The intercept of the univariate linear regression line, where x is the independent variable and y is the dependent variable. |
-| [`regr_r2(y, x)`](#regr_r2y-x) | The coefficient of determination, where x is the independent variable and y is the dependent variable. |
+| [`regr_r2(y, x)`](#regr_r2y-x) | The squared Pearson correlation coefficient between y and x. Also: The coefficient of determination in a linear regression, where x is the independent variable and y is the dependent variable. |
 | [`regr_slope(y, x)`](#regr_slopey-x) | The slope of the linear regression line, where x is the independent variable and y is the dependent variable. |
 | [`regr_sxx(y, x)`](#regr_sxxy-x) | The sample variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | [`regr_sxy(y, x)`](#regr_sxyy-x) | The sample covariance, which includes Bessel's bias correction. |
@@ -523,7 +523,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The coefficient of determination, where x is the independent variable and y is the dependent variable. |
+| **Description** | The squared Pearson correlation coefficient between y and x. Also: The coefficient of determination in a linear regression, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
