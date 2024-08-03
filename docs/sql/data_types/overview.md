@@ -20,7 +20,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `HUGEINT` | | signed sixteen-byte integer|
 | `INTEGER` | `INT4`, `INT`, `SIGNED` | signed four-byte integer |
 | `INTERVAL` |  | date / time delta |
-| `REAL` | `FLOAT4`, `FLOAT` | single precision floating-point number (4 bytes)|
+| `FLOAT` | `FLOAT4`, `REAL` | single precision floating-point number (4 bytes)|
 | `SMALLINT` | `INT2`, `SHORT` | signed two-byte integer|
 | `TIME` | | time of day (no time zone) |
 | `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ` | combination of time and date that uses the current time zone |
