@@ -118,6 +118,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 
 ### `auto_type_candidates` Details
 
+The `auto_type_candidates` option lets you specify the data types that should be considered by the CSV reader for [column data type detection]({% link docs/data/csv/auto_detection.md %}#type-detection).
 Usage example:
 
 ```sql
