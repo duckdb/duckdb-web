@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: generic
 title: Frequently Asked Questions
 ---
 
