@@ -300,8 +300,8 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: >-
-    install.packages('duckdb', repos=c('https://duckdb.r-universe.dev',
-    'https://cloud.r-project.org'))
+    install.packages("duckdb", repos=c("https://duckdb.r-universe.dev",
+    "https://cloud.r-project.org"))
   link: ''
   note: >-
     On aarch64, if the DuckDB R package does not successfully compile, you
