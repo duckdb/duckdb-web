@@ -77,16 +77,6 @@
 - variant: stable
   environment: Command line
   platform: Linux
-  download_method: Package manager
-  architecture: universal
-  has_sha_512_hash: 'no'
-  installation_code: n/a
-  link: ''
-  note: ''
-  usage_example: ''
-- variant: stable
-  environment: Command line
-  platform: Linux
   download_method: Direct download
   architecture: x86_64
   has_sha_512_hash: 'yes'
@@ -157,26 +147,6 @@
   note: ''
   usage_example: ''
 - variant: stable
-  environment: Java/Android
-  platform: Android
-  download_method: Package manager
-  architecture: arm64
-  has_sha_512_hash: etc.
-  installation_code: n/a but will be provided in the coming weeks
-  link: ''
-  note: ''
-  usage_example: ''
-- variant: stable
-  environment: Java/Android
-  platform: Android
-  download_method: Direct download
-  architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
-  link: n/a but will be provided in the coming weeks
-  note: ''
-  usage_example: ''
-- variant: stable
   environment: Node.js
   platform: all
   download_method: Package manager
@@ -215,16 +185,6 @@
   installation_code: ''
   link: >-
     https://github.com/duckdb/duckdb/releases/download/v1.0.0/libduckdb-windows-amd64.zipp
-  note: ''
-  usage_example: ''
-- variant: stable
-  environment: C/C++
-  platform: Windows
-  download_method: Direct download
-  architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
-  link: n/a
   note: ''
   usage_example: ''
 - variant: stable
@@ -273,16 +233,6 @@
   usage_example: ''
 - variant: stable
   environment: ODBC
-  platform: Windows
-  download_method: Direct download
-  architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
-  link: n/a
-  note: ''
-  usage_example: ''
-- variant: stable
-  environment: ODBC
   platform: macOS
   download_method: Direct download
   architecture: universal
@@ -317,22 +267,6 @@
 - variant: nightly
   environment: Command line
   platform: Windows
-  download_method: Package manager
-  architecture: x86_64
-  has_sha_512_hash: ''
-  installation_code: n/a
-  link: ''
-  note: >-
-    DuckDB clients are installed without relying on any other DuckDB clients.
-
-    For example, the Python library can use a different version than the CLI
-    client.
-
-    Therefore, they need to be updated separately.
-  usage_example: duckdb
-- variant: nightly
-  environment: Command line
-  platform: Windows
   download_method: Direct download
   architecture: x86_64
   has_sha_512_hash: ''
@@ -348,38 +282,6 @@
   usage_example: ./duckdb
 - variant: nightly
   environment: Command line
-  platform: Windows
-  download_method: Direct download
-  architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
-  link: n/a but will be provided in the coming weeks
-  note: >-
-    DuckDB clients are installed without relying on any other DuckDB clients.
-
-    For example, the Python library can use a different version than the CLI
-    client.
-
-    Therefore, they need to be updated separately.
-  usage_example: ./duckdb
-- variant: nightly
-  environment: Command line
-  platform: macOS
-  download_method: Package manager
-  architecture: universal
-  has_sha_512_hash: ''
-  installation_code: n/a
-  link: ''
-  note: >-
-    DuckDB clients are installed without relying on any other DuckDB clients.
-
-    For example, the Python library can use a different version than the CLI
-    client.
-
-    Therefore, they need to be updated separately.
-  usage_example: duckdb
-- variant: nightly
-  environment: Command line
   platform: macOS
   download_method: Direct download
   architecture: universal
@@ -388,16 +290,6 @@
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
   note: ''
   usage_example: ./duckdb
-- variant: nightly
-  environment: Command line
-  platform: Linux
-  download_method: Package manager
-  architecture: universal
-  has_sha_512_hash: ''
-  installation_code: n/a
-  link: ''
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: Command line
   platform: Linux
@@ -498,26 +390,6 @@
   note: ''
   usage_example: ''
 - variant: nightly
-  environment: Rust
-  platform: all
-  download_method: Package manager
-  architecture: universal
-  has_sha_512_hash: ''
-  installation_code: ''
-  link: n/a
-  note: ''
-  usage_example: ''
-- variant: nightly
-  environment: Go
-  platform: all
-  download_method: Package manager
-  architecture: universal
-  has_sha_512_hash: ''
-  installation_code: ''
-  link: n/a
-  note: ''
-  usage_example: ''
-- variant: nightly
   environment: C/C++
   platform: Windows
   download_method: Direct download
@@ -525,16 +397,6 @@
   has_sha_512_hash: ''
   installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
-  note: ''
-  usage_example: ''
-- variant: nightly
-  environment: C/C++
-  platform: Windows
-  download_method: Direct download
-  architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
-  link: n/a
   note: ''
   usage_example: ''
 - variant: nightly
@@ -575,16 +437,6 @@
   has_sha_512_hash: ''
   installation_code: ''
   link: '??'
-  note: ''
-  usage_example: ''
-- variant: nightly
-  environment: ODBC
-  platform: Windows
-  download_method: Direct download
-  architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
-  link: n/a
   note: ''
   usage_example: ''
 - variant: nightly
