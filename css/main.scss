@@ -1083,7 +1083,6 @@ body.installation{
 		.result{
 			font-family: $fontMono;
 			background-color: #f5f5f5;
-			min-height: 100px;
 			padding: 12px 12px 14px 14px;
 			border-radius: 10px;
 			border: 1px solid $black200;
@@ -1102,6 +1101,10 @@ body.installation{
 				line-height: 1.6;
 			}
 		}
+	}
+	.note.output .result{
+		font-family: $fontSans;
+		color: #747474;
 	}
 	.possibleresults{
 		display: none;
