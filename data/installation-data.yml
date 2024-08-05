@@ -32,22 +32,6 @@
   usage_example: ./duckdb
 - variant: stable
   environment: Command line
-  platform: Windows
-  download_method: Direct download
-  architecture: arm64
-  has_sha_512_hash: 'yes'
-  installation_code: ''
-  link: Not yet available – will be provided in the coming weeks
-  note: >-
-    DuckDB clients are installed without relying on any other DuckDB clients.
-
-    For example, the Python library can use a different version than the CLI
-    client.
-
-    Therefore, they need to be updated separately.
-  usage_example: ./duckdb
-- variant: stable
-  environment: Command line
   platform: macOS
   download_method: Package manager
   architecture: universal
