@@ -94,7 +94,7 @@ In this example – the system selects the `|` as the delimiter. All rows are sp
 
 After detecting the dialect, the system will attempt to figure out the types of each of the columns. Note that this step is only performed if we are calling `read_csv`. In case of the `COPY` statement the types of the table that we are copying into will be used instead.
 
-The type detection works by attempting to convert the values in each column to the candidate types. If the conversion is unsuccessful, the candidate type is removed from the set of candidate types for that column. After all samples have been handled – the remaining candidate type with the highest priority is chosen. The set of considered candidate types in order of priority is given below:
+The type detection works by attempting to convert the values in each column to the candidate types. If the conversion is unsuccessful, the candidate type is removed from the set of candidate types for that column. After all samples have been handled – the remaining candidate type with the highest priority is chosen. The default set of candidate types is given below, in order of priority:
 
 <div class="narrow_table monospace_table"></div>
 
@@ -108,13 +108,36 @@ The type detection works by attempting to convert the values in each column to t
 | TIMESTAMP |
 | VARCHAR   |
 
-The set of candidate types that should be considered by the CSV reader can be explicitly specified using the [`auto_type_candidates`]({% link docs/data/csv/overview.md %}#auto_type_candidates-details) option. 
-
 Note everything can be cast to `VARCHAR`. This type has the lowest priority – i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
 
-The detected types can be individually overridden using the `types` option. This option takes either a list of types (e.g., `types = [INTEGER, VARCHAR, DATE]`) which overrides the types of the columns in-order of occurrence in the CSV file. Alternatively, `types` takes a `name` → `type` map which overrides options of individual columns (e.g., `types = {'quarter': INTEGER}`).
+The set of candidate types that should be considered by the CSV reader can be explicitly specified using the [`auto_type_candidates`]({% link docs/data/csv/overview.md %}#auto_type_candidates-details) option. 
 
-The type detection can be entirely disabled by using the `all_varchar` option. If this is set all columns will remain as `VARCHAR` (as they originally occur in the CSV file).
+In addition to the default set of candidate types, other types that may be specified using the `auto_type_candidates` options are:
+
+<div class="narrow_table monospace_table"></div>
+
+|   Types   |
+|-----------|
+| DECIMAL   |
+| FLOAT     |
+| INTEGER   |
+| SMALLINT  |
+| TINYINT   |
+
+Even though the set of data types that can be automatically detected may appear quite limited, the CSV reader can configured to read arbitrarily complex types by using the `types`-option described in the next section.
+
+Type detection can be entirely disabled by using the `all_varchar` option. If this is set all columns will remain as `VARCHAR` (as they originally occur in the CSV file).
+
+#### Overriding Type Detection
+
+The detected types can be individually overridden using the `types` option. This option takes either of two options:
+
+* A list of type definitions (e.g., `types = ['INTEGER', 'VARCHAR', 'DATE']`). This overrides the types of the columns in-order of occurrence in the CSV file.
+* Alternatively, `types` takes a `name` → `type` map which overrides options of individual columns (e.g., `types = {'quarter': 'INTEGER'}`).
+
+The set of column types that may be specified using the `types` option is not as limited as the types available for the `auto_type_candidates` option: any valid type definition is acceptable to the `types`-option. (To get a valid type definition, use the [`typeof()`]({% link docs/sql/functions/utility.md %}#typeofexpression) function, or use the `column_type` column  of the [`DESCRIBE`]({% link docs/guides/meta/describe.md %}) result.)  
+
+The `sniff_csv()` function's `Column` field returns a struct with column names and types that can be used as a basis for overriding types.
 
 ## Header Detection
 
