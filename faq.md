@@ -99,7 +99,7 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 <div class="qa-wrap" markdown="1">
 
-### How can I expand the DuckDB website?
+### How can I contribute to the DuckDB documentation?
 
 <div class="answer" markdown="1">
 
@@ -179,6 +179,20 @@ See the documentation on [concurrency]({% link docs/connect/concurrency.md %}#ha
 
 <div class="answer" markdown="1">
 See the [documentation on concurrency]({% link docs/connect/concurrency.md %}#writing-to-duckdb-from-multiple-processes).
+</div>
+
+</div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
+### When is the next version going to be released?
+
+<div class="answer" markdown="1">
+
+Please check the [release calendar]({% link docs/dev/release_calendar.md %}) for the planned release date of the next stable version of DuckDB.
+
 </div>
 
 </div>
