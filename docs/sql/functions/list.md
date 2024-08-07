@@ -44,7 +44,7 @@ title: List Functions
 | [`list_zip(list_1, list_2, ...[, truncate])`](#list_ziplist1-list2-) | Zips _k_ `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of _k_ elements from each list `list_1`, ..., `list_k`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
 | [`unnest(list)`](#unnestlist) | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [`unnest` page]({% link docs/sql/query_syntax/unnest.md %}) for more details. |
 
-### `list[index]`
+#### `list[index]`
 
 <div class="nostroke_table"></div>
 
@@ -53,7 +53,7 @@ title: List Functions
 | **Result** | `6` |
 | **Alias** | `list_extract` |
 
-### `list[begin:end]`
+#### `list[begin:end]`
 
 <div class="nostroke_table"></div>
 
@@ -62,7 +62,7 @@ title: List Functions
 | **Result** | `[5, 6]` |
 | **Alias** | `list_slice` |
 
-### `list[begin:end:step]`
+#### `list[begin:end:step]`
 
 <div class="nostroke_table"></div>
 
@@ -71,7 +71,7 @@ title: List Functions
 | **Result** | `[4, 6]` |
 | **Alias** | `list_slice` |
 
-### `array_pop_back(list)`
+#### `array_pop_back(list)`
 
 <div class="nostroke_table"></div>
 
@@ -79,7 +79,7 @@ title: List Functions
 | **Example** | `array_pop_back([4, 5, 6])` |
 | **Result** | `[4, 5]` |
 
-### `array_pop_front(list)`
+#### `array_pop_front(list)`
 
 <div class="nostroke_table"></div>
 
@@ -87,7 +87,7 @@ title: List Functions
 | **Example** | `array_pop_front([4, 5, 6])` |
 | **Result** | `[5, 6]` |
 
-### `flatten(list_of_lists)`
+#### `flatten(list_of_lists)`
 
 <div class="nostroke_table"></div>
 
@@ -95,7 +95,7 @@ title: List Functions
 | **Example** | `flatten([[1, 2], [3, 4]])` |
 | **Result** | `[1, 2, 3, 4]` |
 
-### `len(list)`
+#### `len(list)`
 
 <div class="nostroke_table"></div>
 
@@ -104,7 +104,7 @@ title: List Functions
 | **Result** | `3` |
 | **Alias** | `array_length` |
 
-### `list_aggregate(list, name)`
+#### `list_aggregate(list, name)`
 
 <div class="nostroke_table"></div>
 
@@ -113,7 +113,7 @@ title: List Functions
 | **Result** | `1` |
 | **Aliases** | `list_aggr`, `aggregate`, `array_aggregate`, `array_aggr` |
 
-### `list_any_value(list)`
+#### `list_any_value(list)`
 
 <div class="nostroke_table"></div>
 
@@ -121,7 +121,7 @@ title: List Functions
 | **Example** | `list_any_value([NULL, -3])` |
 | **Result** | `-3` |
 
-### `list_append(list, element)`
+#### `list_append(list, element)`
 
 <div class="nostroke_table"></div>
 
@@ -130,7 +130,7 @@ title: List Functions
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `array_append`, `array_push_back` |
 
-### `list_concat(list1, list2)`
+#### `list_concat(list1, list2)`
 
 <div class="nostroke_table"></div>
 
@@ -139,7 +139,7 @@ title: List Functions
 | **Result** | `[2, 3, 4, 5, 6]` |
 | **Aliases** | `list_cat`, `array_concat`, `array_cat` |
 
-### `list_contains(list, element)`
+#### `list_contains(list, element)`
 
 <div class="nostroke_table"></div>
 
@@ -148,7 +148,7 @@ title: List Functions
 | **Result** | `true` |
 | **Aliases** | `list_has`, `array_contains`, `array_has` |
 
-### `list_cosine_similarity(list1, list2)`
+#### `list_cosine_similarity(list1, list2)`
 
 <div class="nostroke_table"></div>
 
@@ -156,7 +156,7 @@ title: List Functions
 | **Example** | `list_cosine_similarity([1, 2, 3], [1, 2, 5])` |
 | **Result** | `0.9759000729485332` |
 
-### `list_distance(list1, list2)`
+#### `list_distance(list1, list2)`
 
 <div class="nostroke_table"></div>
 
@@ -164,7 +164,7 @@ title: List Functions
 | **Example** | `list_distance([1, 2, 3], [1, 2, 5])` |
 | **Result** | `2.0` |
 
-### `list_distinct(list)`
+#### `list_distinct(list)`
 
 <div class="nostroke_table"></div>
 
@@ -173,7 +173,7 @@ title: List Functions
 | **Result** | `[1, 5, -3]` |
 | **Alias** | `array_distinct` |
 
-### `list_dot_product(list1, list2)`
+#### `list_dot_product(list1, list2)`
 
 <div class="nostroke_table"></div>
 
@@ -182,7 +182,7 @@ title: List Functions
 | **Result** | `20.0` |
 | **Alias** | `list_inner_product` |
 
-### `list_extract(list, index)`
+#### `list_extract(list, index)`
 
 <div class="nostroke_table"></div>
 
@@ -191,7 +191,7 @@ title: List Functions
 | **Result** | `6` |
 | **Aliases** | `list_element`, `array_extract` |
 
-### `list_filter(list, lambda)`
+#### `list_filter(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -200,7 +200,7 @@ title: List Functions
 | **Result** | `[5, 6]` |
 | **Aliases** | `array_filter`, `filter` |
 
-### `list_grade_up(list)`
+#### `list_grade_up(list)`
 
 <div class="nostroke_table"></div>
 
@@ -209,7 +209,7 @@ title: List Functions
 | **Result** | `[2, 4, 1, 3]` |
 | **Alias** | `array_grade_up` |
 
-### `list_has_all(list, sub-list)`
+#### `list_has_all(list, sub-list)`
 
 <div class="nostroke_table"></div>
 
@@ -218,7 +218,7 @@ title: List Functions
 | **Result** | `true` |
 | **Alias** | `array_has_all` |
 
-### `list_has_any(list1, list2)`
+#### `list_has_any(list1, list2)`
 
 <div class="nostroke_table"></div>
 
@@ -227,7 +227,7 @@ title: List Functions
 | **Result** | `true` |
 | **Alias** | `array_has_any` |
 
-### `list_intersect(list1, list2)`
+#### `list_intersect(list1, list2)`
 
 <div class="nostroke_table"></div>
 
@@ -236,7 +236,7 @@ title: List Functions
 | **Result** | `[2, 3]` |
 | **Alias** | `array_intersect` |
 
-### `list_position(list, element)`
+#### `list_position(list, element)`
 
 <div class="nostroke_table"></div>
 
@@ -245,7 +245,7 @@ title: List Functions
 | **Result** | `2` |
 | **Aliases** | `list_indexof`, `array_position`, `array_indexof` |
 
-### `list_prepend(element, list)`
+#### `list_prepend(element, list)`
 
 <div class="nostroke_table"></div>
 
@@ -254,7 +254,7 @@ title: List Functions
 | **Result** | `[3, 4, 5, 6]` |
 | **Aliases** | `array_prepend`, `array_push_front` |
 
-### `list_reduce(list, lambda)`
+#### `list_reduce(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -263,7 +263,7 @@ title: List Functions
 | **Result** | `15` |
 | **Aliases** | `array_reduce`, `reduce` |
 
-### `list_resize(list, size[, value])`
+#### `list_resize(list, size[, value])`
 
 <div class="nostroke_table"></div>
 
@@ -272,7 +272,7 @@ title: List Functions
 | **Result** | `[1, 2, 3, 0, 0]` |
 | **Alias** | `array_resize` |
 
-### `list_reverse_sort(list)`
+#### `list_reverse_sort(list)`
 
 <div class="nostroke_table"></div>
 
@@ -281,7 +281,7 @@ title: List Functions
 | **Result** | `[6, 3, 2, 1]` |
 | **Alias** | `array_reverse_sort` |
 
-### `list_reverse(list)`
+#### `list_reverse(list)`
 
 <div class="nostroke_table"></div>
 
@@ -290,7 +290,7 @@ title: List Functions
 | **Result** | `[2, 1, 6, 3]` |
 | **Alias** | `array_reverse` |
 
-### `list_select(value_list, index_list)`
+#### `list_select(value_list, index_list)`
 
 <div class="nostroke_table"></div>
 
@@ -299,7 +299,7 @@ title: List Functions
 | **Result** | `[10, 40]` |
 | **Alias** | `array_select` |
 
-### `list_slice(list, begin, end, step)`
+#### `list_slice(list, begin, end, step)`
 
 <div class="nostroke_table"></div>
 
@@ -308,7 +308,7 @@ title: List Functions
 | **Result** | `[4, 6]` |
 | **Alias** | `array_slice` |
 
-### `list_slice(list, begin, end)`
+#### `list_slice(list, begin, end)`
 
 <div class="nostroke_table"></div>
 
@@ -317,7 +317,7 @@ title: List Functions
 | **Result** | `[5, 6]` |
 | **Alias** | `array_slice` |
 
-### `list_sort(list)`
+#### `list_sort(list)`
 
 <div class="nostroke_table"></div>
 
@@ -326,7 +326,7 @@ title: List Functions
 | **Result** | `[1, 2, 3, 6]` |
 | **Alias** | `array_sort` |
 
-### `list_transform(list, lambda)`
+#### `list_transform(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -335,7 +335,7 @@ title: List Functions
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
 
-### `list_unique(list)`
+#### `list_unique(list)`
 
 <div class="nostroke_table"></div>
 
@@ -344,7 +344,7 @@ title: List Functions
 | **Result** | `3` |
 | **Alias** | `array_unique` |
 
-### `list_value(any, ...)`
+#### `list_value(any, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -353,7 +353,7 @@ title: List Functions
 | **Result** | `[4, 5, 6]` |
 | **Alias** | `list_pack` |
 
-### `list_where(value_list, mask_list)`
+#### `list_where(value_list, mask_list)`
 
 <div class="nostroke_table"></div>
 
@@ -362,7 +362,7 @@ title: List Functions
 | **Result** | `[10, 40]` |
 | **Alias** | `array_where` |
 
-### `list_zip(list1, list2, ...)`
+#### `list_zip(list1, list2, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -371,7 +371,7 @@ title: List Functions
 | **Result** | `[(1, 3, 5), (2, 4, 6)]` |
 | **Alias** | `array_zip` |
 
-### `unnest(list)`
+#### `unnest(list)`
 
 <div class="nostroke_table"></div>
 
@@ -422,7 +422,7 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 
 DuckDB offers two range functions, [`range(start, stop, step)`](#range) and [`generate_series(start, stop, step)`](#generate_series), and their variants with default arguments for `stop` and `step`. The two functions' behavior differens regarding their `stop` argument. This is documented below.
 
-### `range`
+#### `range`
 
 The `range` function creates a list of values in the range between `start` and `stop`.
 The `start` parameter is inclusive, while the `stop` parameter is exclusive.
@@ -430,7 +430,7 @@ The default value of `start` is 0 and the default value of `step` is 1.
 
 Based on the number of arguments, the following variants of `range` exist.
 
-#### `range(stop)`
+##### `range(stop)`
 
 ```sql
 SELECT range(5);
@@ -440,7 +440,7 @@ SELECT range(5);
 [0, 1, 2, 3, 4]
 ```
 
-#### `range(start, stop)`
+##### `range(start, stop)`
 
 ```sql
 SELECT range(2, 5);
@@ -450,7 +450,7 @@ SELECT range(2, 5);
 [2, 3, 4]
 ```
 
-#### `range(start, stop, step)`
+##### `range(start, stop, step)`
 
 ```sql
 SELECT range(2, 5, 3);
@@ -460,14 +460,14 @@ SELECT range(2, 5, 3);
 [2]
 ```
 
-### `generate_series`
+#### `generate_series`
 
 The `generate_series` function creates a list of values in the range between `start` and `stop`.
 Both the `start` and the `stop` parameters are inclusive.
 The default value of `start` is 0 and the default value of `step` is 1.
 Based on the number of arguments, the following variants of `generate_series` exist.
 
-#### `generate_series(stop)`
+##### `generate_series(stop)`
 
 ```sql
 SELECT generate_series(5);
@@ -477,7 +477,7 @@ SELECT generate_series(5);
 [0, 1, 2, 3, 4, 5]
 ```
 
-#### `generate_series(start, stop)`
+##### `generate_series(start, stop)`
 
 ```sql
 SELECT generate_series(2, 5);
@@ -487,7 +487,7 @@ SELECT generate_series(2, 5);
 [2, 3, 4, 5]
 ```
 
-#### `generate_series(start, stop, step)`
+##### `generate_series(start, stop, step)`
 
 ```sql
 SELECT generate_series(2, 5, 3);
@@ -497,7 +497,7 @@ SELECT generate_series(2, 5, 3);
 [2, 5]
 ```
 
-### `generate_subscripts(arr, dim)`
+#### `generate_subscripts(arr, dim)`
 
 The `generate_subscripts(arr, dim)` function generates indexes along the `dim`th dimension of array `arr`.
 
@@ -689,7 +689,7 @@ SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
 [2, 10, 3]
 ```
 
-### `array_to_string`
+#### `array_to_string`
 
 Concatenates list/array elements using an optional delimiter.
 

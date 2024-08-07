@@ -41,7 +41,7 @@ The functions below are difficult to categorize into specific function types and
 | [`uuid()`](#uuid) | Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`version()`](#version) | Return the currently active version of DuckDB in this format. |
 
-### `alias(column)`
+#### `alias(column)`
 
 <div class="nostroke_table"></div>
 
@@ -49,7 +49,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `alias(column1)` |
 | **Result** | `column1` |
 
-### `checkpoint(database)`
+#### `checkpoint(database)`
 
 <div class="nostroke_table"></div>
 
@@ -57,7 +57,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `checkpoint(my_db)` |
 | **Result** | success boolean |
 
-### `coalesce(expr, ...)`
+#### `coalesce(expr, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -65,7 +65,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `coalesce(NULL, NULL, 'default_string')` |
 | **Result** | `default_string` |
 
-### `constant_or_null(arg1, arg2)`
+#### `constant_or_null(arg1, arg2)`
 
 <div class="nostroke_table"></div>
 
@@ -73,7 +73,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `constant_or_null(42, NULL)` |
 | **Result** | `NULL` |
 
-### `count_if(x)`
+#### `count_if(x)`
 
 <div class="nostroke_table"></div>
 
@@ -81,7 +81,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `count_if(42)` |
 | **Result** | 1 |
 
-### `current_catalog()`
+#### `current_catalog()`
 
 <div class="nostroke_table"></div>
 
@@ -89,7 +89,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `current_catalog()` |
 | **Result** | `memory` |
 
-### `current_schema()`
+#### `current_schema()`
 
 <div class="nostroke_table"></div>
 
@@ -97,7 +97,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `current_schema()` |
 | **Result** | `main` |
 
-### `current_schemas(boolean)`
+#### `current_schemas(boolean)`
 
 <div class="nostroke_table"></div>
 
@@ -105,7 +105,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `current_schemas(true)` |
 | **Result** | `['temp', 'main', 'pg_catalog']` |
 
-### `current_setting('setting_name')`
+#### `current_setting('setting_name')`
 
 <div class="nostroke_table"></div>
 
@@ -113,7 +113,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `current_setting('access_mode')` |
 | **Result** | `automatic` |
 
-### `currval('sequence_name')`
+#### `currval('sequence_name')`
 
 <div class="nostroke_table"></div>
 
@@ -121,14 +121,14 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `currval('my_sequence_name')` |
 | **Result** | `1` |
 
-### `error(message)`
+#### `error(message)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Throws the given error `message`. |
 | **Example** | `error('access_mode')` |
 
-### `force_checkpoint(database)`
+#### `force_checkpoint(database)`
 
 <div class="nostroke_table"></div>
 
@@ -136,7 +136,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `force_checkpoint(my_db)` |
 | **Result** | success boolean |
 
-### `gen_random_uuid()`
+#### `gen_random_uuid()`
 
 <div class="nostroke_table"></div>
 
@@ -144,13 +144,13 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `gen_random_uuid()` |
 | **Result** | various |
 
-### `getenv(var)`
+#### `getenv(var)`
 
 | **Description** | Returns the value of the environment variable `var`. Only available in the [command line client]({% link docs/api/cli/overview.md %}). |
 | **Example** | `getenv('HOME')` |
 | **Result** | `/path/to/user/home` |
 
-### `hash(value)`
+#### `hash(value)`
 
 <div class="nostroke_table"></div>
 
@@ -158,7 +158,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `hash('🦆')` |
 | **Result** | `2595805878642663834` |
 
-### `icu_sort_key(string, collator)`
+#### `icu_sort_key(string, collator)`
 
 <div class="nostroke_table"></div>
 
@@ -166,7 +166,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `icu_sort_key('ö', 'DE')` |
 | **Result** | `460145960106` |
 
-### `ifnull(expr, other)`
+#### `ifnull(expr, other)`
 
 <div class="nostroke_table"></div>
 
@@ -174,7 +174,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `ifnull(NULL, 'default_string')` |
 | **Result** | `default_string` |
 
-### `md5(string)`
+#### `md5(string)`
 
 <div class="nostroke_table"></div>
 
@@ -182,7 +182,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `md5('123')` |
 | **Result** | `202cb962ac59075b964b07152d234b70` |
 
-### `nextval('sequence_name')`
+#### `nextval('sequence_name')`
 
 <div class="nostroke_table"></div>
 
@@ -190,7 +190,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `nextval('my_sequence_name')` |
 | **Result** | `2` |
 
-### `nullif(a, b)`
+#### `nullif(a, b)`
 
 <div class="nostroke_table"></div>
 
@@ -198,7 +198,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `nullif(1+1, 2)` |
 | **Result** | `NULL` |
 
-### `pg_typeof(expression)`
+#### `pg_typeof(expression)`
 
 <div class="nostroke_table"></div>
 
@@ -206,7 +206,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `pg_typeof('abc')` |
 | **Result** | `varchar` |
 
-### `read_blob(source)`
+#### `read_blob(source)`
 
 <div class="nostroke_table"></div>
 
@@ -214,7 +214,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `read_blob('hello.bin')` |
 | **Result** | `hello\x0A` |
 
-### `read_text(source)`
+#### `read_text(source)`
 
 <div class="nostroke_table"></div>
 
@@ -222,7 +222,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `read_text('hello.txt')` |
 | **Result** | `hello\n` |
 
-### `sha256(value)`
+#### `sha256(value)`
 
 <div class="nostroke_table"></div>
 
@@ -230,7 +230,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `sha256('🦆')` |
 | **Result** | `d7a5c5e0d1d94c32218539e7e47d4ba9c3c7b77d61332fb60d633dde89e473fb` |
 
-### `stats(expression)`
+#### `stats(expression)`
 
 <div class="nostroke_table"></div>
 
@@ -238,7 +238,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `stats(5)` |
 | **Result** | `'[Min: 5, Max: 5][Has Null: false]'` |
 
-### `txid_current()`
+#### `txid_current()`
 
 <div class="nostroke_table"></div>
 
@@ -246,7 +246,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `txid_current()` |
 | **Result** | various |
 
-### `typeof(expression)`
+#### `typeof(expression)`
 
 <div class="nostroke_table"></div>
 
@@ -254,7 +254,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `typeof('abc')` |
 | **Result** | `VARCHAR` |
 
-### `uuid()`
+#### `uuid()`
 
 <div class="nostroke_table"></div>
 
@@ -262,7 +262,7 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `uuid()` |
 | **Result** | various |
 
-### `version()`
+#### `version()`
 
 <div class="nostroke_table"></div>
 
@@ -281,7 +281,7 @@ A table function is used in place of a table in a `FROM` clause.
 | [`glob(search_path)`](#globsearch_path) | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax]({% link docs/sql/functions/pattern_matching.md %}). |
 | [`repeat_row(varargs, num_rows)`](#repeat_rowvarargs-num_rows) | Returns a table with `num_rows` rows, each containing the fields defined in `varargs`. |
 
-### `glob(search_path)`
+#### `glob(search_path)`
 
 <div class="nostroke_table"></div>
 
@@ -289,7 +289,7 @@ A table function is used in place of a table in a `FROM` clause.
 | **Example** | `glob('*')` |
 | **Result** | (table of filenames) |
 
-### `repeat_row(varargs, num_rows)`
+#### `repeat_row(varargs, num_rows)`
 
 <div class="nostroke_table"></div>
 
