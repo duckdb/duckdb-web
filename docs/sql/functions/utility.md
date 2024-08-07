@@ -30,7 +30,7 @@ The functions below are difficult to categorize into specific function types and
 | [`ifnull(expr, other)`](#ifnullexpr-other) | A two-argument version of coalesce. |
 | [`md5(string)`](#md5string) | Return an MD5 hash of the `string`. |
 | [`nextval('sequence_name')`](#nextvalsequence_name) | Return the following value of the sequence. |
-| [`nullif(a, b)`](#nullifa-b) | Return null if a = b, else return a. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. |
+| [`nullif(a, b)`](#nullifa-b) | Return `NULL` if `a = b`, else return `a`. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. |
 | [`pg_typeof(expression)`](#pg_typeofexpression) | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility. |
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/guides/file_formats/read_file.md %}#read_blob) for more details. |
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/guides/file_formats/read_file.md %}#read_text) for more details. |
