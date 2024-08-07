@@ -59,8 +59,8 @@ CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
 INSERT INTO students VALUES (1, 'Student 1');
 
 UPDATE tbl
-  SET j = [2]
-  WHERE i = 1;
+    SET j = [2]
+    WHERE i = 1;
 ```
 
 ```console
@@ -81,7 +81,7 @@ SELECT {'birds': ['duck', 'goose', 'heron'], 'aliens': NULL, 'amphibians': ['fro
 Struct with list of `MAP`s:
 
 ```sql
-SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
+SELECT {'test': [MAP([1, 5], [42.1, 45]), MAP([1, 5], [42.1, 45])]};
 ```
 
 A list of `UNION`s:

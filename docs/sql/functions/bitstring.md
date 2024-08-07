@@ -18,12 +18,12 @@ The table below shows the available mathematical operators for `BIT` type.
 
 | Operator | Description | Example | Result |
 |:---|:---|:---|:---|
-| `&` | Bitwise AND | `'10101'::BIT & '10001'::BIT` | `10001` |
-| `|` | Bitwise OR | `'1011'::BIT | '0001'::BIT` | `1011` |
-| `xor` | Bitwise XOR | `xor('101'::BIT, '001'::BIT)` | `100` |
-| `~` | Bitwise NOT | `~('101'::BIT)` | `010` |
-| `<<` | Bitwise shift left | `'1001011'::BIT << 3` | `1011000` |
-| `>>` | Bitwise shift right | `'1001011'::BIT >> 3` | `0001001` |
+| `&` | Bitwise AND | `'10101'::BITSTRING & '10001'::BITSTRING` | `10001` |
+| `|` | Bitwise OR | `'1011'::BITSTRING | '0001'::BITSTRING` | `1011` |
+| `xor` | Bitwise XOR | `xor('101'::BITSTRING, '001'::BITSTRING)` | `100` |
+| `~` | Bitwise NOT | `~('101'::BITSTRING)` | `010` |
+| `<<` | Bitwise shift left | `'1001011'::BITSTRING << 3` | `1011000` |
+| `>>` | Bitwise shift right | `'1001011'::BITSTRING >> 3` | `0001001` |
 
 <!-- markdownlint-enable MD056 -->
 
@@ -47,7 +47,7 @@ The table below shows the available scalar functions for `BIT` type.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the number of set bits in the bitstring. |
-| **Example** | `bit_count('1101011'::BIT)` |
+| **Example** | `bit_count('1101011'::BITSTRING)` |
 | **Result** | `5` |
 
 #### `bit_length(bitstring)`
@@ -55,7 +55,7 @@ The table below shows the available scalar functions for `BIT` type.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the number of bits in the bitstring. |
-| **Example** | `bit_length('1101011'::BIT)` |
+| **Example** | `bit_length('1101011'::BITSTRING)` |
 | **Result** | `7` |
 
 #### `bit_position(substring, bitstring)`
@@ -63,7 +63,7 @@ The table below shows the available scalar functions for `BIT` type.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns first starting index of the specified substring within bits, or zero if it's not present. The first (leftmost) bit is indexed 1 |
-| **Example** | `bit_position('010'::BIT, '1110101'::BIT)` |
+| **Example** | `bit_position('010'::BITSTRING, '1110101'::BITSTRING)` |
 | **Result** | `4` |
 
 #### `bitstring(bitstring, length)`
@@ -71,7 +71,7 @@ The table below shows the available scalar functions for `BIT` type.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a bitstring of determined length. |
-| **Example** | `bitstring('1010'::BIT, 7)` |
+| **Example** | `bitstring('1010'::BITSTRING, 7)` |
 | **Result** | `0001010` |
 
 #### `get_bit(bitstring, index)`
@@ -79,7 +79,7 @@ The table below shows the available scalar functions for `BIT` type.
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts the nth bit from bitstring; the first (leftmost) bit is indexed 0. |
-| **Example** | `get_bit('0110010'::BIT, 2)` |
+| **Example** | `get_bit('0110010'::BITSTRING, 2)` |
 | **Result** | `1` |
 
 #### `length(bitstring)`
@@ -87,7 +87,7 @@ The table below shows the available scalar functions for `BIT` type.
 <div class="nostroke_table"></div>
 
 | **Description** | Alias for `bit_length`. |
-| **Example** | `length('1101011'::BIT)` |
+| **Example** | `length('1101011'::BITSTRING)` |
 | **Result** | `7` |
 
 #### `octet_length(bitstring)`
@@ -95,7 +95,7 @@ The table below shows the available scalar functions for `BIT` type.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the number of bytes in the bitstring. |
-| **Example** | `octet_length('1101011'::BIT)` |
+| **Example** | `octet_length('1101011'::BITSTRING)` |
 | **Result** | `1` |
 
 #### `set_bit(bitstring, index, new_value)`
@@ -103,7 +103,7 @@ The table below shows the available scalar functions for `BIT` type.
 <div class="nostroke_table"></div>
 
 | **Description** | Sets the nth bit in bitstring to newvalue; the first (leftmost) bit is indexed 0. Returns a new bitstring. |
-| **Example** | `set_bit('0110010'::BIT, 2, 0)` |
+| **Example** | `set_bit('0110010'::BITSTRING, 2, 0)` |
 | **Result** | `0100010` |
 
 ## Bitstring Aggregate Functions
