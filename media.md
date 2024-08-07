@@ -14,7 +14,7 @@ title: Media
 * [In-Process Analytical Data Management with DuckDB (PyData Amsterdam 2023)](https://www.youtube.com/watch?v=5ddoZR6PYNU), 25 minutes – [Slide deck]({% link pdf/duckdb-pydata-amsterdam-2023.pdf %})
 * [DuckDB keynote segment (Data + AI Summit 2023)](https://www.youtube.com/watch?v=AKix55rQEUU), 10 minutes
 * [DuckDB: Bringing analytical SQL directly to your Python shell (EuroPython 2023)](https://www.youtube.com/watch?v=egN4TwVyJss), 40 minutes
-* [DuckDB - An Embeddable Analytical Database (FOSDEM)](https://www.youtue.com/watch?v=nPDomZQ8jI4), 15 minutes
+* [DuckDB - An Embeddable Analytical Database (FOSDEM)](https://www.youtube.com/watch?v=nPDomZQ8jI4), 15 minutes
 
 ## Talks on Internals
 
