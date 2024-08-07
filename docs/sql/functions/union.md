@@ -10,7 +10,7 @@ layout: docu
 | [`union_value(tag := any)`](#union_valuetag--any) | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. |
 | [`union_tag(union)`](#union_tagunion) | Retrieve the currently selected tag of the union as an [Enum]({% link docs/sql/data_types/enum.md %}). |
 
-### `union.tag`
+#### `union.tag`
 
 <div class="nostroke_table"></div>
 
@@ -18,7 +18,7 @@ layout: docu
 | **Example** | `(union_value(k := 'hello')).k` |
 | **Result** | `string` |
 
-### `union_extract(union, 'tag')`
+#### `union_extract(union, 'tag')`
 
 <div class="nostroke_table"></div>
 
@@ -26,7 +26,7 @@ layout: docu
 | **Example** | `union_extract(s, 'k')` |
 | **Result** | `hello` |
 
-### `union_value(tag := any)`
+#### `union_value(tag := any)`
 
 <div class="nostroke_table"></div>
 
@@ -34,7 +34,7 @@ layout: docu
 | **Example** | `union_value(k := 'hello')` |
 | **Result** | `'hello'::UNION(k VARCHAR)` |
 
-### `union_tag(union)`
+#### `union_tag(union)`
 
 <div class="nostroke_table"></div>
 

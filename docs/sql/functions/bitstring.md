@@ -42,7 +42,7 @@ The table below shows the available scalar functions for `BIT` type.
 | [`octet_length(bitstring)`](#octet_lengthbitstring) | Returns the number of bytes in the bitstring. |
 | [`set_bit(bitstring, index, new_value)`](#set_bitbitstring-index-new_value) | Sets the nth bit in bitstring to newvalue; the first (leftmost) bit is indexed 0. Returns a new bitstring. |
 
-### `bit_count(bitstring)`
+#### `bit_count(bitstring)`
 
 <div class="nostroke_table"></div>
 
@@ -50,7 +50,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `bit_count('1101011'::BIT)` |
 | **Result** | `5` |
 
-### `bit_length(bitstring)`
+#### `bit_length(bitstring)`
 
 <div class="nostroke_table"></div>
 
@@ -58,7 +58,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `bit_length('1101011'::BIT)` |
 | **Result** | `7` |
 
-### `bit_position(substring, bitstring)`
+#### `bit_position(substring, bitstring)`
 
 <div class="nostroke_table"></div>
 
@@ -66,7 +66,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `bit_position('010'::BIT, '1110101'::BIT)` |
 | **Result** | `4` |
 
-### `bitstring(bitstring, length)`
+#### `bitstring(bitstring, length)`
 
 <div class="nostroke_table"></div>
 
@@ -74,7 +74,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `bitstring('1010'::BIT, 7)` |
 | **Result** | `0001010` |
 
-### `get_bit(bitstring, index)`
+#### `get_bit(bitstring, index)`
 
 <div class="nostroke_table"></div>
 
@@ -82,7 +82,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `get_bit('0110010'::BIT, 2)` |
 | **Result** | `1` |
 
-### `length(bitstring)`
+#### `length(bitstring)`
 
 <div class="nostroke_table"></div>
 
@@ -90,7 +90,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `length('1101011'::BIT)` |
 | **Result** | `7` |
 
-### `octet_length(bitstring)`
+#### `octet_length(bitstring)`
 
 <div class="nostroke_table"></div>
 
@@ -98,7 +98,7 @@ The table below shows the available scalar functions for `BIT` type.
 | **Example** | `octet_length('1101011'::BIT)` |
 | **Result** | `1` |
 
-### `set_bit(bitstring, index, new_value)`
+#### `set_bit(bitstring, index, new_value)`
 
 <div class="nostroke_table"></div>
 
@@ -118,28 +118,28 @@ These aggregate functions are available for `BIT` type.
 | [`bitstring_agg(arg)`](#bitstring_aggarg) | Returns a bitstring with bits set for each distinct position defined in `arg`. |
 | [`bitstring_agg(arg, min, max)`](#bitstring_aggarg-min-max) | Returns a bitstring with bits set for each distinct position defined in `arg`. All positions must be within the range [`min`, `max`] or an "Out of Range Error" will be thrown. |
 
-### `bit_and(arg)`
+#### `bit_and(arg)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the bitwise AND operation performed on all bitstrings in a given expression. |
 | **Example** | `bit_and(A)` |
 
-### `bit_or(arg)`
+#### `bit_or(arg)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the bitwise OR operation performed on all bitstrings in a given expression. |
 | **Example** | `bit_or(A)` |
 
-### `bit_xor(arg)`
+#### `bit_xor(arg)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the bitwise XOR operation performed on all bitstrings in a given expression. |
 | **Example** | `bit_xor(A)` |
 
-### `bitstring_agg(arg)`
+#### `bitstring_agg(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -148,7 +148,7 @@ These aggregate functions are available for `BIT` type.
 
 > Tip The combination of `bit_count` and `bitstring_agg` can be used as an alternative to `count(DISTINCT ...)`, with possible performance improvements in cases of low cardinality and dense values.
 
-### `bitstring_agg(arg, min, max)`
+#### `bitstring_agg(arg, min, max)`
 
 <div class="nostroke_table"></div>
 

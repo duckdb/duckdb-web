@@ -23,7 +23,7 @@ For example, the following are all valid lambda functions:
 | [`list_filter(list, lambda)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns `true`. |
 | [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. |
 
-### `list_transform(list, lambda)`
+#### `list_transform(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -32,7 +32,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
 
-### `list_filter(list, lambda)`
+#### `list_filter(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -41,7 +41,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5, 6]` |
 | **Aliases** | `array_filter`, `filter` |
 
-### `list_reduce(list, lambda)`
+#### `list_reduce(list, lambda)`
 
 <div class="nostroke_table"></div>
 

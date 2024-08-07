@@ -14,7 +14,7 @@ title: Struct Functions
 | [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-name--any-) | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). |
 | [`struct_pack(name := any, ...)`](#struct_packname--any-) | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
 
-### `struct.entry`
+#### `struct.entry`
 
 <div class="nostroke_table"></div>
 
@@ -22,7 +22,7 @@ title: Struct Functions
 | **Example** | `({'i': 3, 's': 'string'}).i` |
 | **Result** | `3` |
 
-### `struct[entry]`
+#### `struct[entry]`
 
 <div class="nostroke_table"></div>
 
@@ -30,7 +30,7 @@ title: Struct Functions
 | **Example** | `({'i': 3, 's': 'string'})['i']` |
 | **Result** | `3` |
 
-### `struct[idx]`
+#### `struct[idx]`
 
 <div class="nostroke_table"></div>
 
@@ -38,7 +38,7 @@ title: Struct Functions
 | **Example** | `(row(42, 84))[1]` |
 | **Result** | `42` |
 
-### `row(any, ...)`
+#### `row(any, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -46,7 +46,7 @@ title: Struct Functions
 | **Example** | `row(i, i % 4, i / 4)` |
 | **Result** | `(10, 2, 2.5)` |
 
-### `struct_extract(struct, 'entry')`
+#### `struct_extract(struct, 'entry')`
 
 <div class="nostroke_table"></div>
 
@@ -54,7 +54,7 @@ title: Struct Functions
 | **Example** | `struct_extract({'i': 3, 'v2': 3, 'v3': 0}, 'i')` |
 | **Result** | `3` |
 
-### `struct_extract(struct, idx)`
+#### `struct_extract(struct, idx)`
 
 <div class="nostroke_table"></div>
 
@@ -62,7 +62,7 @@ title: Struct Functions
 | **Example** | `struct_extract(row(42, 84), 1)` |
 | **Result** | `42` |
 
-### `struct_insert(struct, name := any, ...)`
+#### `struct_insert(struct, name := any, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -70,7 +70,7 @@ title: Struct Functions
 | **Example** | `struct_insert({'a': 1}, b := 2)` |
 | **Result** | `{'a': 1, 'b': 2}` |
 
-### `struct_pack(name := any, ...)`
+#### `struct_pack(name := any, ...)`
 
 <div class="nostroke_table"></div>
 

@@ -15,7 +15,7 @@ title: Map Functions
 | [`map()`](#map) | Returns an empty map. |
 | [`map[entry]`](#mapentry) | Alias for `element_at`. |
 
-### `cardinality(map)`
+#### `cardinality(map)`
 
 <div class="nostroke_table"></div>
 
@@ -23,7 +23,7 @@ title: Map Functions
 | **Example** | `cardinality(map([4, 2], ['a', 'b']))` |
 | **Result** | `2` |
 
-### `element_at(map, key)`
+#### `element_at(map, key)`
 
 <div class="nostroke_table"></div>
 
@@ -31,7 +31,7 @@ title: Map Functions
 | **Example** | `element_at(map([100, 5], [42, 43]), 100)` |
 | **Result** | `[42]` |
 
-### `map_entries(map)`
+#### `map_entries(map)`
 
 <div class="nostroke_table"></div>
 
@@ -39,7 +39,7 @@ title: Map Functions
 | **Example** | `map_entries(map([100, 5], [42, 43]))` |
 | **Result** | `[{'key': 100, 'value': 42}, {'key': 5, 'value': 43}]` |
 
-### `map_extract(map, key)`
+#### `map_extract(map, key)`
 
 <div class="nostroke_table"></div>
 
@@ -47,7 +47,7 @@ title: Map Functions
 | **Example** | `map_extract(map([100, 5], [42, 43]), 100)` |
 | **Result** | `[42]` |
 
-### `map_from_entries(STRUCT(k, v)[])`
+#### `map_from_entries(STRUCT(k, v)[])`
 
 <div class="nostroke_table"></div>
 
@@ -55,7 +55,7 @@ title: Map Functions
 | **Example** | `map_from_entries([{k: 5, v: 'val1'}, {k: 3, v: 'val2'}])` |
 | **Result** | `{5=val1, 3=val2}` |
 
-### `map_keys(map)`
+#### `map_keys(map)`
 
 <div class="nostroke_table"></div>
 
@@ -63,7 +63,7 @@ title: Map Functions
 | **Example** | `map_keys(map([100, 5], [42,43]))` |
 | **Result** | `[100, 5]` |
 
-### `map_values(map)`
+#### `map_values(map)`
 
 <div class="nostroke_table"></div>
 
@@ -71,7 +71,7 @@ title: Map Functions
 | **Example** | `map_values(map([100, 5], [42, 43]))` |
 | **Result** | `[42, 43]` |
 
-### `map()`
+#### `map()`
 
 <div class="nostroke_table"></div>
 
@@ -79,7 +79,7 @@ title: Map Functions
 | **Example** | `map()` |
 | **Result** | `{}` |
 
-### `map[entry]`
+#### `map[entry]`
 
 <div class="nostroke_table"></div>
 
