@@ -29,6 +29,7 @@ title: Media
 
 ## Podcast Episodes
 
+* [DuckDB with Hannes Mühleisen (Software Engineering Daily)](https://softwareengineeringdaily.com/2024/08/08/duckdb-with-hannes-muhleisen/), 50 minutes
 * [Implementing Hardware-Friendly Databases (Developer Voices)](https://www.youtube.com/watch?v=pZV9FvdKmLc), 80 minutes
 * [Deep Dive into DuckDB (episode of The Geek Narrator)](https://www.youtube.com/watch?v=f9QlkXW4H9A), 1 hour
 * [Move Your Database To The Data and Speed Up Your Analytics With DuckDB (Data Engineering Podcast)](https://www.dataengineeringpodcast.com/duckdb-in-process-olap-database-episode-270/), 80 minutes
