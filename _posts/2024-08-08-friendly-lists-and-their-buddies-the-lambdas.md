@@ -179,7 +179,7 @@ Both queries were run in the CLI with DuckDB v1.0.0 on a MacBook Pro 2021 with a
 | 0.522 s    | 0.027 s |
 
 As we can see, the native query is more than 10x faster. Amazing!
-Looking at the execution plan using `EXPLAIN ANALYZE`, we can see that DuckDB spends most of its time in the `HASH_GROUP_BY` and `UNNEST` operators.
+If we look at the execution plan using `EXPLAIN ANALYZE` (not shown in this blog post), we can see that DuckDB spends most of its time in the `HASH_GROUP_BY` and `UNNEST` operators.
 In comparison, these operators no longer exist in the list-native query plan.
 
 ## Lists and lambdas in the community
