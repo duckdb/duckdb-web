@@ -210,6 +210,7 @@ The below options are applicable to all formats written with `COPY`.
 | `partition_by` | The columns to partition by using a Hive partitioning scheme, see the [partitioned writes section]({% link docs/data/partitioning/partitioned_writes.md %}). | `VARCHAR[]` | (empty) |
 | `per_thread_output` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
 | `use_tmp_file` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | `BOOL` | `auto` |
+| `write_partition_columns` | Whether or not to write partition columns into files. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
 
 ### Syntax
 
