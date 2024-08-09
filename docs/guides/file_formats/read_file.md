@@ -10,20 +10,20 @@ These functions accept a filename, a list of filenames or a glob pattern, and ou
 
 ## `read_text`
 
-The `read_text` table function reads from the selected source(s) to a `VARCHAR`.
+The `read_text` table function reads from the selected source(s) to a `VARCHAR`. Each file results in a single row with the `content` field holding the entire content of the respective file.
 
 ```sql
 SELECT size, parse_path(filename), content
 FROM read_text('test/sql/table_function/files/*.txt');
 ```
 
-| size |             parse_path(filename)              |   content    |
-|-----:|-----------------------------------------------|--------------|
-| 12   | [test, sql, table_function, files, one.txt]   | Hello World! |
-| 2    | [test, sql, table_function, files, three.txt] | 42           |
-| 10   | [test, sql, table_function, files, two.txt]   | Föö Bär      |
+| size |             parse_path(filename)              |      content     |
+|-----:|-----------------------------------------------|------------------|
+| 12   | [test, sql, table_function, files, one.txt]   | Hello World!     |
+| 2    | [test, sql, table_function, files, three.txt] | 42               |
+| 10   | [test, sql, table_function, files, two.txt]   | Foo Bar\nFöö Bär |
 
-The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use [`read_blob`](#read_blob) instead.
+The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8, an error is thrown suggesting to use [`read_blob`](#read_blob) instead.
 
 ## `read_blob`
 
