@@ -222,7 +222,7 @@ SELECT era('2019-05-01 00:00:00+10'::TIMESTAMPTZ), era('2019-05-01 00:00:00+09':
 ### Caveats
 
 ICU has some differences in behaviour and representation from the DuckDB implementation. These are hopefully minor issues that should only be of concern to serious time nerds.
-* ICU represents instants as millisecond counts using a `double`. This makes it lose accuracy far from the epoch (e.g., around the first millenium)
+* ICU represents instants as millisecond counts using a `double`. This makes it lose accuracy far from the epoch (e.g., around the first millennium)
 * ICU uses the Julian calendar for dates before the Gregorian change on `1582-10-15` instead of the proleptic Gregorian calendar. This means that dates prior to the changeover will differ, although ICU will give the date as actually written at the time.
 * ICU computes ages by using part increments instead of using the length of the earlier month like DuckDB and Postgres.
 

@@ -168,5 +168,5 @@ When expressions are provided to `DuckDBPyRelation.order()`, the following order
 |--------------------------------|----------------------------------------------------------------------------------------------------------------|
 | `.asc()`                       | Indicates that this expression should be sorted in ascending order.                                            |
 | `.desc()`                      | Indicates that this expression should be sorted in descending order.                                           |
-| `.nulls_first()`               | Indicates that the nulls in this expression should preceed the non-null values.                                |
+| `.nulls_first()`               | Indicates that the nulls in this expression should precede the non-null values.                                |
 | `.nulls_last()`                | Indicates that the nulls in this expression should come after the non-null values.                             |

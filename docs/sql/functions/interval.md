@@ -35,7 +35,7 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | [`to_decades(integer)`](#to_decadesinteger) | Construct a decade interval. |
 | [`to_hours(integer)`](#to_hoursinteger) | Construct a hour interval. |
 | [`to_microseconds(integer)`](#to_microsecondsinteger) | Construct a microsecond interval. |
-| [`to_millennia(integer)`](#to_millenniainteger) | Construct a millenium interval. |
+| [`to_millennia(integer)`](#to_millenniainteger) | Construct a millennium interval. |
 | [`to_milliseconds(integer)`](#to_millisecondsinteger) | Construct a millisecond interval. |
 | [`to_minutes(integer)`](#to_minutesinteger) | Construct a minute interval. |
 | [`to_months(integer)`](#to_monthsinteger) | Construct a month interval. |
@@ -121,7 +121,7 @@ The table below shows the available scalar functions for `INTERVAL` types.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Construct a millenium interval. |
+| **Description** | Construct a millennium interval. |
 | **Example** | `to_millennia(5)` |
 | **Result** | `INTERVAL 5000 YEAR` |
 

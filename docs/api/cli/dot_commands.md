@@ -62,7 +62,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.timer on|off`          | Turn SQL timer on or off                                                                                     |
 | `.width NUM1 NUM2 ...`   | Set minimum column widths for columnar output                                                                |
 
-## Using the `.help` Commmand
+## Using the `.help` Command
 
 The `.help` text may be filtered by passing in a text string as the second argument.
 

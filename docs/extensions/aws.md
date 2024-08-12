@@ -18,7 +18,7 @@ LOAD aws;
 
 ## Related Extensions
 
-`aws` depends on `httpfs` extension capablities, and both will be autoloaded on the first call to `load_aws_credentials`.
+`aws` depends on `httpfs` extension capabilities, and both will be autoloaded on the first call to `load_aws_credentials`.
 If autoinstall or autoload are disabled, you can always explicitly install and load them as follows:
 
 ```sql
