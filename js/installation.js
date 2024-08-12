@@ -19,7 +19,6 @@ $(document).ready(function(){
 		if ( sections !== undefined ) {
 			sections.split(',').forEach(section => {
 				const $container = $(`.select[data-select="${section.trim()}"]`);
-				// console.log($container)
 				$container.addClass('hide')
 				$container.find('.selected').removeClass('selected');
 			});
@@ -76,11 +75,14 @@ $(document).ready(function(){
 		}
 
 		var configurables = [];
+		var configurablesMinusArchitecture = [];
 		for( var i in installationData ) {
 			if ( installationData[i].variant == variant && installationData[i].environment == environment ) {
 				configurables.push( installationData[i] );
 			}
 		}
+
+		configurablesMinusArchitecture = configurables;
 		
 		var sectionsToHide = [];
 
@@ -114,6 +116,10 @@ $(document).ready(function(){
 			configurables = configurables.filter( function ( item ) {
 				return item.platform.toLowerCase() == platform.toLowerCase();
 			} );
+
+			configurablesMinusArchitecture = configurablesMinusArchitecture.filter( function ( item ) {
+				return item.platform.toLowerCase() == platform.toLowerCase();
+			});
 		}
 		
 
@@ -123,6 +129,9 @@ $(document).ready(function(){
 		for ( var i in configurables ) {
 			if ( configurables[i].architecture != 'universal' ) {
 				hasArchitectures = true;
+				$( '.architecture .info' ).hide();
+			} else {
+				$( '.architecture .info' ).show();
 			}
 		}
 
@@ -142,20 +151,46 @@ $(document).ready(function(){
 			return item.download_method.toLowerCase();
 		});
 
+		// Get possible architectures
+		var architectures = configurables.map( function ( item ) {
+			return item.architecture.toLowerCase();
+		});
+
 		// Get unique download_methods
-		if ( new Set(download_methods).size == 1 ) {
+		// new Set(download_methods).size == 1 || 
+		if ( download_methods.length == 0 ) {
 			hideSections( 'download_method' );
 		}
+
+		if ( configurables.length == 0 && architecture != '' && $( '.architecture .selected' ).length > 0 ) {
+			$( '.architecture .selected' ).siblings( 'li' ).first().trigger( 'click' );
+			return;
+		}
+
+		$( '.download_method li' ).addClass( 'disabled-choice' );
+
+		// Add disabled-choice to all applicable download_methods
+		$( '.download_method li' ).each( function() {
+			if ( download_methods.includes( $( this ).text().toLowerCase() ) ) {
+				$(this).removeClass( 'disabled-choice' );
+			}
+		} );
+
+		$( '.download_method li.disabled-choice' ).removeClass( 'selected' );
 
 		// Check if download method is visible, but no option is yet chosen
 		if ( $( '.yourselection .download_method.select:not(.hide)').length > 0 && $( '.yourselection .download_method .selected' ).length == 0 ) {
 			// select first one and return
-			$( '.yourselection .download_method li:first-child' ).click();
+			$( '.yourselection .download_method li:not(.disabled-choice)' ).first().click();
 			return;
 		}
 
 		if ( $( '.yourselection .download_method.select:not(.hide)').length ) {
 			configurables = configurables.filter( function ( item ) {
+				return item.download_method.toLowerCase() == download_method.toLowerCase();
+			});
+
+			configurablesMinusArchitecture = configurablesMinusArchitecture.filter( function ( item ) {
 				return item.download_method.toLowerCase() == download_method.toLowerCase();
 			});
 		}
@@ -165,6 +200,22 @@ $(document).ready(function(){
 			// select first one and return
 			$( '.yourselection .architecture li:first-child' ).click();
 			return;
+		}
+
+		// Make only possible archictures selectable
+		if ( $( '.architecture.hide' ).length == 0 ) {
+
+			
+			$( 'ul.architecture li' ).addClass( 'disabled-choice' );
+
+			for ( var i in configurablesMinusArchitecture ) {
+				$( 'ul.architecture li' ).each( function() {
+					if ( $( this ).text().toLowerCase() == configurablesMinusArchitecture[i].architecture.toLowerCase() ) {
+						$(this).removeClass( 'disabled-choice' );
+					}
+				} );
+			}
+			
 		}
 
 		// Load in the Installation Instructions
