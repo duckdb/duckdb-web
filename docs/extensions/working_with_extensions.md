@@ -216,7 +216,7 @@ For example, if the file was available at the (relative) path `path/to/httpfs.du
 LOAD 'path/to/httpfs.duckdb_extension';
 ```
 
-This will skip any currently installed file in the specifed path.
+This will skip any currently installed file in the specified path.
 
 Using remote paths for compressed files is currently not possible.
 

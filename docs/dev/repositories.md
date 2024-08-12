@@ -28,7 +28,7 @@ Several components of DuckDB are maintained in separate repositories.
 
 * [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb): dbt
 * [`duckdb_mysql`](https://github.com/duckdb/duckdb_mysql): MySQL connector
-* [`postgres_scanner`](https://github.com/duckdb/postgres_scanner): PostgresSQL connector
+* [`postgres_scanner`](https://github.com/duckdb/postgres_scanner): PostgreSQL connector
 * [`sqlite_scanner`](https://github.com/duckdb/sqlite_scanner): SQLite connector
 
 ## Extensions

@@ -25,7 +25,7 @@ The rest of the conversion rules are as follows.
 ### `int`
 
 Since integers can be of arbitrary size in Python, there is not a one-to-one conversion possible for ints.
-Intead we perform these casts in order until one succeeds:
+Instead we perform these casts in order until one succeeds:
 
 * `BIGINT`
 * `INTEGER`

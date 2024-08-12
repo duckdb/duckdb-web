@@ -38,7 +38,7 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 
 ## Division on Integers
 
-When computing division on integers, PostgreSQL performs integer divison, while DuckDB performs float division:
+When computing division on integers, PostgreSQL performs integer division, while DuckDB performs float division:
 
 ```sql
 SELECT 1 / 2 AS x;
