@@ -239,7 +239,7 @@
   environment: Command line
   platform: Windows
   download_method: Direct download
-  architecture: x86_64
+  architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
@@ -362,7 +362,7 @@
   environment: C/C++
   platform: Windows
   download_method: Direct download
-  architecture: x86_64
+  architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
