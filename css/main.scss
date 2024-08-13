@@ -989,6 +989,9 @@ body.installation{
 		.select.hide {
 			opacity: 0.4;
 			pointer-events: none;
+			ul li{
+				cursor: auto;
+			}
 		}
 		.select li.inactive {
 			opacity: 0.4;
