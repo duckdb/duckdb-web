@@ -34,13 +34,13 @@ $(document).ready(function(){
 	if (navigator.appVersion.indexOf("X11")!=-1) { OSName="UNIX"; OSdatid="linux" };
 	if (navigator.appVersion.indexOf("Linux")!=-1) { OSName="Linux"; OSdatid="linux"};
 	$('.systemdetected').html('System detected: '+OSName);
-
+	
 	function replaceHtmlEntities( markup ) {
 		return markup.replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
 	}
 	
 	function simpleCodeHighlight( markup ) {
-
+	
 		markup = markup.replace( 'winget install', '<span class="nb">winget install</span>' );
 		markup = markup.replace( 'pip install', '<span class="nb">pip install</span>' );
 		markup = markup.replace( 'npm install duckdb', '<span class="nb">npm install duckdb</span>' );
@@ -52,28 +52,28 @@ $(document).ready(function(){
 		markup = markup.replace( '--pre', '<span class="nt">--pre</span>' );
 		markup = markup.replace(/install\.packages\("(.*?)"\)/g, '<span class="n">install.packages</span><span class="p">(</span><span class="s2">"$1"</span><span class="p">)</span>' );
 		markup = markup.replace( /(&lt;\/?.*?&gt;)/g, '<span class="nt">$1</span>' );
-
+	
 		return markup;
 	}
-
+	
 	var evaluation = function () {
 		showAllSections();
 	
 		if ( installationData.length == 0 ) {
 			return;
 		}
-
+	
 		// Check the selected items
 		var variant = $( '.yourselection .version .selected' ).attr( 'data-id' ).replace(/^\./, '' );
 		var environment = $( '.yourselection .environment .selected' ).text();
 		var platform = $( '.yourselection .platform .selected' ).text();
 		var download_method = $( '.yourselection .download_method .selected' ).text();
 		var architecture = $( '.yourselection .architecture .selected' ).text();
-
+	
 		if ( variant != 'stable' ) {
 			variant = 'nightly';
 		}
-
+	
 		var configurables = [];
 		var configurablesMinusArchitecture = [];
 		for( var i in installationData ) {
@@ -81,17 +81,32 @@ $(document).ready(function(){
 				configurables.push( installationData[i] );
 			}
 		}
-
+	
+		// Disable any language that is not applicable in configurables
+		$( '.environment li' ).addClass( 'disabled-choice' );
+		for ( var i in installationData ) {
+			$( '.environment li' ).each( function() {
+				if ( installationData[i].variant == variant && $( this ).text().toLowerCase() == installationData[i].environment.toLowerCase() ) {
+					$( this ).removeClass( 'disabled-choice' );
+				}
+			});
+		}
+	
+		if ( $( '.environment .disabled-choice.selected' ).length > 0 ) {
+			$( '.environment .selected' ).removeClass( 'selected' ).siblings( 'li:not(.disabled-choice)' ).first().trigger( 'click' );
+			return;
+		}
+	
 		configurablesMinusArchitecture = configurables;
 		
 		var sectionsToHide = [];
-
+	
 		if ( configurables.length == 1 ) {
 			sectionsToHide.push( 'download_method' );
 			sectionsToHide.push( 'architecture' );
 			sectionsToHide.push( 'platform' );
 		}
-
+	
 		// Check if we have multiple options of platform across different configurables
 		if ( configurables.length > 1 ) {
 			var hasPlatforms = false;
@@ -100,29 +115,29 @@ $(document).ready(function(){
 					hasPlatforms = true;
 				}
 			}
-
+	
 			if ( ! hasPlatforms ) {
 				hideSections( 'platform' );
 			}
 		}
-
+	
 		if ( hasPlatforms ) {
 			if ( $( '.yourselection .platform .selected' ).length == 0 ) {
 				// select first one and return
 				$( '.yourselection .platform li:first-child' ).click();
 				return;
 			}
-
+	
 			configurables = configurables.filter( function ( item ) {
 				return item.platform.toLowerCase() == platform.toLowerCase();
 			} );
-
+	
 			configurablesMinusArchitecture = configurablesMinusArchitecture.filter( function ( item ) {
 				return item.platform.toLowerCase() == platform.toLowerCase();
 			});
 		}
 		
-
+	
 		
 		// Check if we have multiple options for architecture
 		var hasArchitectures = false;
@@ -134,7 +149,7 @@ $(document).ready(function(){
 				$( '.architecture .info' ).show();
 			}
 		}
-
+	
 		if ( ! hasArchitectures ) {
 			sectionsToHide.push( 'architecture' );
 		} else {
@@ -142,72 +157,72 @@ $(document).ready(function(){
 				return item.architecture.toLowerCase() == architecture.toLowerCase();
 			} );
 		}
-
+	
 		
 		hideSections( sectionsToHide.join(',') );
-
+	
 		// Check if we have multiple download_method across different configurables
 		var download_methods = configurables.map( function ( item ) {
 			return item.download_method.toLowerCase();
 		});
-
+	
 		// Get possible architectures
 		var architectures = configurables.map( function ( item ) {
 			return item.architecture.toLowerCase();
 		});
-
+	
 		// Get unique download_methods
 		// new Set(download_methods).size == 1 || 
 		if ( download_methods.length == 0 ) {
 			hideSections( 'download_method' );
 		}
-
+	
 		if ( configurables.length == 0 && architecture != '' && $( '.architecture .selected' ).length > 0 ) {
 			$( '.architecture .selected' ).siblings( 'li' ).first().trigger( 'click' );
 			return;
 		}
-
+	
 		$( '.download_method li' ).addClass( 'disabled-choice' );
-
+	
 		// Add disabled-choice to all applicable download_methods
 		$( '.download_method li' ).each( function() {
 			if ( download_methods.includes( $( this ).text().toLowerCase() ) ) {
 				$(this).removeClass( 'disabled-choice' );
 			}
 		} );
-
+	
 		$( '.download_method li.disabled-choice' ).removeClass( 'selected' );
-
+	
 		// Check if download method is visible, but no option is yet chosen
 		if ( $( '.yourselection .download_method.select:not(.hide)').length > 0 && $( '.yourselection .download_method .selected' ).length == 0 ) {
 			// select first one and return
 			$( '.yourselection .download_method li:not(.disabled-choice)' ).first().click();
 			return;
 		}
-
+	
 		if ( $( '.yourselection .download_method.select:not(.hide)').length ) {
 			configurables = configurables.filter( function ( item ) {
 				return item.download_method.toLowerCase() == download_method.toLowerCase();
 			});
-
+	
 			configurablesMinusArchitecture = configurablesMinusArchitecture.filter( function ( item ) {
 				return item.download_method.toLowerCase() == download_method.toLowerCase();
 			});
 		}
-
+	
 		// Check if Architecture is visible, but no option is chosen
 		if ( $( '.yourselection .architecture.select:not(.hide)').length > 0 && $( '.yourselection .architecture .selected' ).length == 0 ) {
 			// select first one and return
 			$( '.yourselection .architecture li:first-child' ).click();
 			return;
 		}
-
+	
 		// Make only possible archictures selectable
 		if ( $( '.architecture.hide' ).length == 0 ) {
-
+	
 			
 			$( 'ul.architecture li' ).addClass( 'disabled-choice' );
-
+	
 			for ( var i in configurablesMinusArchitecture ) {
 				$( 'ul.architecture li' ).each( function() {
 					if ( $( this ).text().toLowerCase() == configurablesMinusArchitecture[i].architecture.toLowerCase() ) {
@@ -217,14 +232,14 @@ $(document).ready(function(){
 			}
 			
 		}
-
+	
 		// If platform.select has .hide class, then show .info in it, otherwise hide .info
 		if ( $( '.yourselection .platform.select.hide').length > 0 ) {
 			$( '.yourselection .platform .info' ).show();
 		} else {
 			$( '.yourselection .platform .info' ).hide();
 		}
-
+	
 		// Load in the Installation Instructions
 		if ( configurables[0].installation_code ) {
 			$( '.installation.output' ).show()
@@ -232,21 +247,21 @@ $(document).ready(function(){
 		} else {
 			$( '.installation.output' ).hide()
 		}
-
+	
 		if ( configurables[0].usage_example ) {
 			$( '.example.output' ).show();
 			$( '.example code' ).html( configurables[0].usage_example );
 		} else {
 			$( '.example.output' ).hide();
 		}
-
+	
 		if ( configurables[0].link ) {
 			$( '.link.output' ).show()
 			$( '.link.output .result' ).html( '<a href="' + configurables[0].link + '">' + configurables[0].link + '</a>' );
 		} else {
 			$( '.link.output' ).hide();
 		}
-
+	
 		if ( configurables[0].note ) {
 			$( '.note.output' ).show()
 			$( '.note.output .result' ).html( configurables[0].note );
@@ -254,7 +269,7 @@ $(document).ready(function(){
 			$( '.note.output' ).hide();
 		}
 	}
-
+	
 	evaluation();
 	$('body.installation .yourselection .select li').click(function(){
 		$( this ).addClass( 'selected' ).siblings( '.selected' ).removeClass( 'selected' );
