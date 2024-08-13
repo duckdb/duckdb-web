@@ -33,6 +33,16 @@
 	body.installation .output .result{
 		width: 100%;
 	}
+	body.installation .output,
+	body.installation .select{
+		padding: 15px 10px;
+	}
+	body.installation .yourselection > .select:first-child{
+		padding-top: 20px;
+	}
+	body.installation .select .info{
+		margin-left: 0;
+	}
 	footer .sitefooter .footercontent{
 		flex-wrap: wrap;
 		justify-content: space-between;
