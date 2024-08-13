@@ -20,6 +20,13 @@ $(document).ready(function(){
     if($('#quickinstall').length != 0 || $('.yourselection').length !=0 ){
 	}
 	
+	var OSName="Unknown OS";
+	var OSdatid="Unknown OS";
+	if (navigator.appVersion.indexOf("Win")!=-1) { OSName="Windows"; OSdatid="win" };
+	if (navigator.appVersion.indexOf("Mac")!=-1) { OSName="macOS"; OSdatid="macos" };
+	if (navigator.appVersion.indexOf("X11")!=-1) { OSName="UNIX"; OSdatid="linux" };
+	if (navigator.appVersion.indexOf("Linux")!=-1) { OSName="Linux"; OSdatid="linux"};
+	$('.systemdetected').html('System detected: '+OSName);
 	
 	// Get URL Parameter
 	var getUrlParameter = function getUrlParameter(sParam) {
@@ -39,6 +46,7 @@ $(document).ready(function(){
 	};
 	
 	// Docs Installation Functions 
+	/*
 	function showAllSections() {
 		$('.yourselection .hide').removeClass('hide');
 		$('.yourselection .select ul li.inactive').removeClass('inactive')
@@ -59,13 +67,6 @@ $(document).ready(function(){
 	var userSelection = { version: "", environment: "", pack: "", platform: "", architecture: "", download_method: "" };
 	var classList = "";
 	
-	var OSName="Unknown OS";
-	var OSdatid="Unknown OS";
-	if (navigator.appVersion.indexOf("Win")!=-1) { OSName="Windows"; OSdatid="win" };
-	if (navigator.appVersion.indexOf("Mac")!=-1) { OSName="macOS"; OSdatid="macos" };
-	if (navigator.appVersion.indexOf("X11")!=-1) { OSName="UNIX"; OSdatid="linux" };
-	if (navigator.appVersion.indexOf("Linux")!=-1) { OSName="Linux"; OSdatid="linux"};
-	$('.systemdetected').html('System detected: '+OSName);
 
 	var evaluation = function () {
 		showAllSections();
@@ -221,7 +222,7 @@ $(document).ready(function(){
 		window.addEventListener('popstate', handleQueryParameters);
 	
 	}
-	
+	*/
 
 	if($('.archivedposts').length != 0){ // If Archive Page
 		var year = getUrlParameter('year');

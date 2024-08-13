@@ -198,6 +198,11 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}"></script>
 	<script src="{{ site.baseurl }}/js/copy_button.js?{{ site.data['hash'] }}"></script>
 	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}"></script>
+	{% if page.body_class == "installation" %}
+		<script src="{{ site.baseurl }}/js/js-yaml.min.js"></script>
+		<script src="{{ site.baseurl }}/js/installation.js?{{ site.data['hash'] }}"></script>
+		
+	{% endif %}
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
 		{% assign startingUrlParts = startingUrl | split: "/"  %}
 		{% if startingUrlParts[1] == "archive" %}

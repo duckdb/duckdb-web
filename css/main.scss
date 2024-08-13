@@ -148,7 +148,7 @@ a, a:active, a:focus, button, button:active, button:focus {
 }
 
 p a{
-	color: black;
+	color: inherit;
 	text-decoration: underline;
 	-webkit-transition: color .3s;
 	-o-transition: color .3s;
@@ -987,7 +987,11 @@ body.installation{
 		border-radius: 15px;
 		margin-top: 25px;
 		.select.hide {
-			display: none;
+			opacity: 0.4;
+			pointer-events: none;
+			ul li{
+				cursor: auto;
+			}
 		}
 		.select li.inactive {
 			opacity: 0.4;
@@ -1001,8 +1005,15 @@ body.installation{
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
+		flex-wrap: wrap;
 		border-bottom: 1px solid $black200;
 		padding: 25px 20px;
+		.info{
+			width: 100%;
+			font-size: 14px;
+			margin-left: 162px;
+			margin-top: 8px;
+		}
 		h3{
 			font-size: 17px!important;
 			font-weight: 600!important;
@@ -1027,6 +1038,11 @@ body.installation{
 			-webkit-box-align: center;
 				-ms-flex-align: center;
 					align-items: center;
+			.disabled-choice {
+				opacity: 0.4;
+				pointer-events: none;
+				cursor: default;
+			}
 			li{
 				line-height: 1;
 				display: block;
@@ -1055,6 +1071,11 @@ body.installation{
 				 color: white;
 				}
 			}
+			.disabled-choice{
+				opacity: 0.4;
+				pointer-events: none;
+				cursor: default;
+			}
 		}
 		&.inactive{
 			opacity: .4;
@@ -1063,6 +1084,9 @@ body.installation{
 		&.inactive ul{
 			pointer-events: none;
 		}
+	}
+	.select.hide .disabled-choice {
+		opacity: 1;
 	}
 	.output{
 		display: -webkit-box;
@@ -1083,7 +1107,6 @@ body.installation{
 		.result{
 			font-family: $fontMono;
 			background-color: #f5f5f5;
-			min-height: 100px;
 			padding: 12px 12px 14px 14px;
 			border-radius: 10px;
 			border: 1px solid $black200;
@@ -1100,6 +1123,19 @@ body.installation{
 			}
 			a.externallink{
 				line-height: 1.6;
+			}
+		}
+	}
+	.note.output{
+		padding-top: 0px;
+		.result{
+			font-family: $fontSans;
+			color: #000000;
+			padding: 0;
+			border: 0;
+			background: transparent;
+			&::before{
+				content: "Note: ";
 			}
 		}
 	}

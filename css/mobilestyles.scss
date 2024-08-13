@@ -1,6 +1,16 @@
 ---
 ---
 
+@media only screen and (min-width: 1680px) {
+	body.documentation main .wrap{
+		width: calc(100% - 350px);
+		margin-left: 350px;
+	}
+	.sidenavigation{
+		width: 350px;
+	}
+}
+
 
 @media only screen and (max-width: 1200px) {
 	main .wrap,

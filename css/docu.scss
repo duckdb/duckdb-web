@@ -881,6 +881,35 @@ td.icon{
 		padding: 2px;
 		padding-right: 15px;
 		border: 0;
+		padding-bottom: 6px;
+	}
+}
+
+.nostroke_table_groups_of_two + table{
+	tr{
+		border: 0;
+	  >td:first-child{
+			padding-left: 0;
+		}
+	}
+	th{
+		padding: 2px;
+		padding-bottom: 4px;
+	  &:first-child{
+			padding-left: 0;
+		}
+	}
+	td{
+		padding: 2px;
+		padding-right: 15px;
+		border: 0;
+		padding-bottom: 6px;
+	}
+	tr:first-child td{
+		padding-bottom: 16px;
+	}
+	tr:nth-child(2n+3) td{
+		padding-bottom: 16px;
 	}
 }
 
