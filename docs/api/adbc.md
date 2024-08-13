@@ -171,7 +171,7 @@ with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
 
 ### Go
 
-Make sure to download the `libduckdb` library first (i.e the `.so` on Linux, `.dylib` on Mac or `.dll` on Windows) from the [releases page](https://github.com/duckdb/duckdb/releases), and put it on your `LD_LIBRARY_PATH` before you run the code (but if you don't, the error will explain your options regarding the location of this file.)
+Make sure to download the `libduckdb` library first (i.e., the `.so` on Linux, `.dylib` on Mac or `.dll` on Windows) from the [releases page](https://github.com/duckdb/duckdb/releases), and put it on your `LD_LIBRARY_PATH` before you run the code (but if you don't, the error will explain your options regarding the location of this file.)
 
 The following example uses an in-memory DuckDB database to modify in-memory Arrow RecordBatches via SQL queries:
 
