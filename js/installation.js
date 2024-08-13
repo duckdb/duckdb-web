@@ -218,6 +218,13 @@ $(document).ready(function(){
 			
 		}
 
+		// If platform.select has .hide class, then show .info in it, otherwise hide .info
+		if ( $( '.yourselection .platform.select.hide').length > 0 ) {
+			$( '.yourselection .platform .info' ).show();
+		} else {
+			$( '.yourselection .platform .info' ).hide();
+		}
+
 		// Load in the Installation Instructions
 		if ( configurables[0].installation_code ) {
 			$( '.installation.output' ).show()
