@@ -8,9 +8,9 @@ The standard DuckDB Python API provides a SQL interface compliant with the [DB-A
 ## Connection
 
 To use the module, you must first create a `DuckDBPyConnection` object that represents a connection to a database.
-This is done through the [`duckdb.connect`](/docs/api/python/reference/#duckdb.connect) method.
+This is done through the [`duckdb.connect`]({% link docs/api/python/reference/index.md %}#duckdb.connect) method.
 
-The 'config' keyword argument can be used to provide a `dict` that contains key->value pairs referencing [settings]({% link docs/api/c/config.md %}) understood by DuckDB.
+The 'config' keyword argument can be used to provide a `dict` that contains key->value pairs referencing [settings]({% link docs/configuration/overview.md %}#configuration-reference) understood by DuckDB.
 
 ### In-Memory Connection
 
@@ -18,16 +18,16 @@ The special value `:memory:` can be used to create an **in-memory database**. No
 
 #### Named in-memory Connections
 
-The special value `:memory:` can also be postfixed with a name, for example: `:memory:conn3`.
-When a name is provided, subsequent `duckdb.connect` calls will use the same database instance. Using `:memory:` without a name will always create a new and separate database instance.
+The special value `:memory:` can also be postfixed with a name, for example: `:memory:conn3`.<br>
+When a name is provided, subsequent `duckdb.connect` calls will create a new connection to the same database, sharing the catalogs (views, tables, macros etc..).<br><br>
+Using `:memory:` without a name will always create a new and separate database instance.
 
 ### Default Connection
 
-By default we create an (unnamed) **in-memory-database** that lives inside the `duckdb` module.
+By default we create an (unnamed) **in-memory-database** that lives inside the `duckdb` module.<br>
 Every method of `DuckDBPyConnection` is also available on the `duckdb` module, this connection is what's used by these methods.
 
-The special value `:default:` can be used to create a connection to the same database instance as this default connection.
-Or you can use `duckdb.default_connection` to use the existing connection directly.
+The special value `:default:` can be used to get this default connection.
 
 ### File-Based Connection
 
