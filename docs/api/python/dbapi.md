@@ -8,7 +8,7 @@ The standard DuckDB Python API provides a SQL interface compliant with the [DB-A
 ## Connection
 
 To use the module, you must first create a `DuckDBPyConnection` object that represents a connection to a database.
-This is done through the [`duckdb.connect`]({% link docs/api/python/reference/#duckdb.connect %}) method.
+This is done through the [`duckdb.connect`](/docs/api/python/reference/#duckdb.connect) method.
 
 The 'config' keyword argument can be used to provide a `dict` that contains key->value pairs referencing [settings]({% link docs/api/c/config.md %}) understood by DuckDB.
 
