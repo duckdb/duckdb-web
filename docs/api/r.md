@@ -12,7 +12,7 @@ The DuckDB R API can be installed using `install.packages("duckdb")`. Please see
 
 ### `duckplyr`: dplyr API
 
-DuckDB offers a [dplyr](https://dplyr.tidyverse.org/)-compatible API via the `duckplyr` package. It can be installed using `install.packages("duckplyr")`. For details, see the [`duckplyr` documentation](https://duckdblabs.github.io/duckplyr/).
+DuckDB offers a [dplyr](https://dplyr.tidyverse.org/)-compatible API via the `duckplyr` package. It can be installed using `install.packages("duckplyr")`. For details, see the [`duckplyr` documentation](https://tidyverse.github.io/duckplyr/).
 
 ## Reference Manual
 
