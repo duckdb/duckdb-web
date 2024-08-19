@@ -5,6 +5,8 @@ redirect_from:
   - docs/test/functions/math
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 ## Numeric Operators
 
 The table below shows the available mathematical operators for [numeric types]({% link docs/sql/data_types/numeric.md %}).

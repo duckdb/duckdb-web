@@ -15,7 +15,7 @@ For example, the following are all valid lambda functions:
 * `s -> contains(concat(s, 'DB'), 'duck')`
 * `(x, y) -> x + y`
 
-### Scalar Functions That Accept Lambda Functions
+## Scalar Functions That Accept Lambda Functions
 
 | Name | Description |
 |:--|:-------|
@@ -23,7 +23,7 @@ For example, the following are all valid lambda functions:
 | [`list_filter(list, lambda)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns `true`. |
 | [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. |
 
-#### `list_transform(list, lambda)`
+### `list_transform(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -32,7 +32,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
 
-#### `list_filter(list, lambda)`
+### `list_filter(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -41,7 +41,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5, 6]` |
 | **Aliases** | `array_filter`, `filter` |
 
-#### `list_reduce(list, lambda)`
+### `list_reduce(list, lambda)`
 
 <div class="nostroke_table"></div>
 
@@ -50,7 +50,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `15` |
 | **Aliases** | `array_reduce`, `reduce` |
 
-### Nesting
+## Nesting
 
 All scalar functions can be arbitrarily nested.
 
@@ -80,7 +80,7 @@ SELECT list_transform(
 [16, 17, 18]
 ```
 
-### Scoping
+## Scoping
 
 Lambda functions confirm to scoping rules in the following order:
 
@@ -99,7 +99,7 @@ SELECT apply([1, 2], x -> apply([4], x -> x + tbl.x)[1] + x) FROM tbl;
 [15, 16]
 ```
 
-### Indexes as Parameters
+## Indexes as Parameters
 
 All lambda functions accept an optional extra parameter that represents the index of the current element.
 This is always the last parameter of the lambda function, and is 1-based (i.e., the first element has index 1).

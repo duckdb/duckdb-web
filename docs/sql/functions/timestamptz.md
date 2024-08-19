@@ -3,6 +3,8 @@ layout: docu
 title: Timestamp with Time Zone Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 This section describes functions and operators for examining and manipulating [`TIMESTAMP WITH TIME ZONE`
 (or `TIMESTAMPTZ`) values]({% link docs/sql/data_types/timestamp.md %}).
 

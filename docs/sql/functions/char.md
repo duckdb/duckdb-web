@@ -5,6 +5,8 @@ redirect_from:
   - docs/test/functions/char
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 ## Text Functions and Operators
 
 This section describes functions and operators for examining and manipulating [`STRING` values]({% link docs/sql/data_types/text.md %}).

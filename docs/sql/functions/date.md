@@ -5,6 +5,8 @@ redirect_from:
   - docs/test/functions/date
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 This section describes functions and operators for examining and manipulating [`DATE`]({% link docs/sql/data_types/date.md %}) values.
 
 ## Date Operators

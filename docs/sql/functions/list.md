@@ -3,6 +3,8 @@ layout: docu
 title: List Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 | Name | Description |
 |:--|:-------|
 | [`list[index]`](#listindex) | Bracket notation serves as an alias for `list_extract`. |

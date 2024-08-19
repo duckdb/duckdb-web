@@ -3,6 +3,8 @@ title: Union Functions
 layout: docu
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 | Name | Description |
 |:--|:-------|
 | [`union.tag`](#uniontag) | Dot notation serves as an alias for `union_extract`. |
