@@ -175,6 +175,7 @@ Make sure to download the `libduckdb` library first (i.e., the `.so` on Linux, `
 
 The following example uses an in-memory DuckDB database to modify in-memory Arrow RecordBatches via SQL queries:
 
+{% raw %}
 ```go
 package main
 
@@ -337,6 +338,7 @@ func main() {
 	}
 }
 ```
+{% endraw %}
 
 Running it produces the following output:
 
