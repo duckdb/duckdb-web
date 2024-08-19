@@ -16,6 +16,28 @@ $(document).ready(function(){
 	
 	var windowWidth = $( window ).width();
 	
+	
+	/** DARK MODE SWITCH */
+	var isDark = document.documentElement.classList.contains('darkmode');
+	$('.versionselect .mode').attr('data-mode', isDark ? 'light' : 'dark').find('.name').text(isDark ? 'Light Mode' : 'Dark Mode');
+
+	setTimeout(() => {
+		document.documentElement.classList.remove('disable-transitions');
+	}, 300);
+	
+	$('.versionselect .mode').click(function() {
+		var isDark = $(this).attr('data-mode') === 'dark';
+		$('html').toggleClass('darkmode', isDark);
+		$(this).attr('data-mode', isDark ? 'light' : 'dark').find('.name').text(isDark ? 'Light Mode' : 'Dark Mode');
+		localStorage.setItem('mode', isDark ? 'dark' : 'light');
+		document.documentElement.classList.add('disable-transitions');
+		setTimeout(() => {
+			document.documentElement.classList.remove('disable-transitions');
+		}, 300);
+	});
+
+	
+	
 	// Simple detect OS 
     if($('#quickinstall').length != 0 || $('.yourselection').length !=0 ){
 	}
@@ -45,184 +67,6 @@ $(document).ready(function(){
 	return "undefined";
 	};
 	
-	// Docs Installation Functions 
-	/*
-	function showAllSections() {
-		$('.yourselection .hide').removeClass('hide');
-		$('.yourselection .select ul li.inactive').removeClass('inactive')
-	}
-	
-	function hideSections(sections) {
-		if ( sections !== undefined ) {
-			sections.split(',').forEach(section => {
-				const $container = $(`.select[data-select="${section.trim()}"]`);
-				// console.log($container)
-				$container.addClass('hide')
-				$container.find('.selected').removeClass('selected');
-			});
-		}
-	}
-	
-	// Docs Installation Selection
-	var userSelection = { version: "", environment: "", pack: "", platform: "", architecture: "", download_method: "" };
-	var classList = "";
-	
-
-	var evaluation = function () {
-		showAllSections();
-	
-		if (userSelection.environment == "")
-			userSelection.environment=".cli";
-		if (userSelection.version == "")
-			userSelection.version=".stable";
-
-		if ((userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0) {
-			if (userSelection.download_method == "" || userSelection.download_method == undefined)
-				userSelection.download_method = ".package_manager";
-			if (userSelection.platform == "" || userSelection.platform == undefined)
-				userSelection.platform = "." + OSdatid;
-		}
-		else if (userSelection.environment == ".cplusplus") {
-			if (userSelection.platform == "" || userSelection.platform == undefined)
-				userSelection.platform = "." + OSdatid;
-		}
-		else if (userSelection.environment == ".java") {
-			if (userSelection.download_method == "" || userSelection.download_method == undefined)
-				userSelection.download_method = ".package_manager";
-		}
-		var currSelection = userSelection;
-		if (userSelection.platform == ".macos")
-			currSelection.architecture = ""
-		if ((userSelection.environment == ".cli") && $('.installer.select ul li.selected').length == 0) {
-		} else if (userSelection.environment == ".cplusplus") {
-			currSelection.download_method = ""
-		} else if (userSelection.environment == ".odbc") {
-			currSelection.download_method = ".direct"
-		} else if (userSelection.environment == ".java") {
-			currSelection.platform = ""
-			currSelection.architecture = ""
-		} else {
-			currSelection.download_method = ""
-			currSelection.platform = ""
-			currSelection.architecture = ""
-		}	
-		
-		if (currSelection.version != "" && currSelection.version != undefined){
-			$('.yourselection ul.version li.selected').removeClass('selected')
-			$('.yourselection ul.version li[data-id="'+currSelection.version+'"]').addClass('selected')
-		}
-		if (currSelection.environment != "" && currSelection.environment != undefined){
-			$('.yourselection ul.environment li.selected').removeClass('selected')
-			$('.yourselection ul.environment li[data-id="'+currSelection.environment+'"]').addClass('selected')
-		}
-		if (currSelection.platform != "" && currSelection.platform != undefined){
-			$('.yourselection ul.platform li.selected').removeClass('selected')
-			$('.yourselection ul.platform li[data-id="'+currSelection.platform+'"]').addClass('selected')
-		}
-		if (currSelection.architecture != "" && currSelection.architecture != undefined){
-			$('.yourselection ul.architecture li.selected').removeClass('selected')
-			$('.yourselection ul.architecture li[data-id="'+currSelection.architecture+'"]').addClass('selected')
-		}
-		if (currSelection.download_method != "" && currSelection.download_method != undefined){
-			$('.yourselection ul.download_method li.selected').removeClass('selected')
-			$('.yourselection ul.download_method li[data-id="'+currSelection.download_method+'"]').addClass('selected')
-		}
-		$('.yourselection .select').each(function() {
-			const $self = $(this);
-			const $selfClass = $(this).data('select')
-			const $selectedElm = $self.find('.selected');
-			if ( $selectedElm.length ) {
-				hideSections($selectedElm.data('hide-section'))
-				currSelection[$selfClass] = $selectedElm.data('id')
-	
-				const deactivateTabs = $selectedElm.data('deactivate-tabs');
-				if ( deactivateTabs !== undefined ) {
-					deactivateTabs.split(',').forEach(function(deactivateTab) {
-						const tab = deactivateTab.split(' ')
-						$(`${tab[0]} [data-id="${tab[1]}"]`).addClass('inactive').removeClass('selected')
-					});
-				}
-	
-				const preselectTabs = $selectedElm.data('preselect-tabs');
-				if ( preselectTabs !== undefined ) {
-					preselectTabs.split(',').forEach(function(preselectTab) {
-						const tab = preselectTab.split(' ')
-						$(`${tab[0]} [data-id="${tab[1]}"]`).addClass('selected')
-						userSelection[tab[0].replace('.', '')] = tab[1].replace('.', '')
-						
-						setQueryString();
-					});
-				}
-			}
-		})
-
-		var classList = currSelection.version + currSelection.environment + currSelection.pack + currSelection.platform + currSelection.architecture + currSelection.download_method;
-
-		var result = $('.possibleresults div' + classList).html();
-		$('.installation.output .result').html(result);
-	
-		var exampleResult = $('.possibleresults .example' + currSelection.environment).html();
-		$('.example.output .result').html(exampleResult);
-	
-	}
-	evaluation();
-	$('body.installation .yourselection .select li').click(function(){
-		userSelection[this.parentNode.className] = this.getAttribute("data-id");
-		evaluation();
-	});
-	
-	if($('body.installation .yourselection').length != 0){
-		evaluation();
-	}
-	$('body.installation .environmentselect').on('change', function() {
-		evaluation();
-	});
-	if( $('body.installation').length ){
-		setTimeout(function() {
-			evaluation();
-		}, 100);
-	}
-	
-	if ($('.yourselection > .select').length) {
-		function setQueryString() {
-			const urlSearchP = new URLSearchParams();
-	
-			$('.yourselection > .select').each(function () {
-				if (!$(this).hasClass('inactive') && $(this).find('.selected').length) {
-					const queryParam = $(this).data('select');
-					const selected = $(this).find('.selected').data('id').replace('.', '');
-					urlSearchP.set(queryParam, selected);
-				}
-			});
-	
-			// Get the current URL and append the new query parameters
-			const currentURL = window.location.href;
-			const newURL = new URL(currentURL);
-			newURL.search = urlSearchP.toString();
-	
-			// Update the URL with the new query parameters
-			window.history.pushState({}, '', newURL.toString());
-		}
-	
-		function handleQueryParameters() {
-			const urlSearchParams = new URLSearchParams(window.location.search);
-			urlSearchParams.forEach(function(value, key) {
-				const parentWrapper = $('[data-select="' + key + '"]');
-				parentWrapper.find('.selected').removeClass('selected');
-				parentWrapper.find('[data-id=".' + value + '"]').addClass('selected')
-			});
-		}
-	
-		if ( window.location.search.length ) {
-			handleQueryParameters();
-		} else {
-			setQueryString();
-		}
-		$(document).on('click', '.yourselection > .select li', setQueryString)
-		window.addEventListener('popstate', handleQueryParameters);
-	
-	}
-	*/
 
 	if($('.archivedposts').length != 0){ // If Archive Page
 		var year = getUrlParameter('year');
