@@ -2,7 +2,7 @@
 layout: post
 title: "DuckDB Tricks – Part 1"
 author: "Gabor Szarnyas"
-thumb: "/images/blog/thumbs/240812.svg"
+thumb: "/images/blog/thumbs/240819.svg"
 excerpt: "We use a simple example data set to present a few tricks that are useful when using DuckDB."
 ---
 
@@ -232,4 +232,4 @@ cut -d, -f1 example.csv > tmp.csv && mv tmp.csv example.csv
 
 ## Closing thoughts
 
-That’s it for today. The tricks shown in this post are available on [duckdbsnippets.com](https://duckdbsnippets.com/). If you have a trick that would like to share, please submit it there, or send it to us via social media or [Discord](https://discord.duckdb.org/). Happy hacking!
+That’s it for today. The tricks shown in this post are available on [duckdbsnippets.com](https://duckdbsnippets.com/page/1/most-recent). If you have a trick that would like to share, please submit it there, or send it to us via social media or [Discord](https://discord.duckdb.org/). Happy hacking!
