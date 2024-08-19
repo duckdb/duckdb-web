@@ -3,6 +3,8 @@ layout: docu
 title: Map Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 | Name | Description |
 |:--|:-------|
 | [`cardinality(map)`](#cardinalitymap) | Return the size of the map (or the number of entries in the map). |

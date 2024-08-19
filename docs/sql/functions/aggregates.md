@@ -6,6 +6,8 @@ redirect_from:
   - docs/sql/aggregates
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 ## Examples
 
 Produce a single row containing the sum of the `amount` column:
