@@ -18,13 +18,14 @@ The special value `:memory:` can be used to create an **in-memory database**. No
 
 #### Named in-memory Connections
 
-The special value `:memory:` can also be postfixed with a name, for example: `:memory:conn3`.<br>
-When a name is provided, subsequent `duckdb.connect` calls will create a new connection to the same database, sharing the catalogs (views, tables, macros etc..).<br><br>
+The special value `:memory:` can also be postfixed with a name, for example: `:memory:conn3`.
+When a name is provided, subsequent `duckdb.connect` calls will create a new connection to the same database, sharing the catalogs (views, tables, macros etc..).
+
 Using `:memory:` without a name will always create a new and separate database instance.
 
 ### Default Connection
 
-By default we create an (unnamed) **in-memory-database** that lives inside the `duckdb` module.<br>
+By default we create an (unnamed) **in-memory-database** that lives inside the `duckdb` module.
 Every method of `DuckDBPyConnection` is also available on the `duckdb` module, this connection is what's used by these methods.
 
 The special value `:default:` can be used to get this default connection.
