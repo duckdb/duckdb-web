@@ -4,7 +4,8 @@ title: Lambda Functions
 ---
 
 Lambda functions enable the use of more complex and flexible expressions in queries.
-DuckDB supports several scalar functions that accept lambda functions as parameters
+DuckDB supports several scalar functions that operate on [`LIST`s]({% link docs/sql/data_types/list.md %}) and
+accept lambda functions as parameters
 in the form `(parameter1, parameter2, ...) -> expression`.
 If the lambda function has only one parameter, then the parentheses can be omitted.
 The parameters can have any names.
@@ -14,7 +15,7 @@ For example, the following are all valid lambda functions:
 * `s -> contains(concat(s, 'DB'), 'duck')`
 * `(x, y) -> x + y`
 
-### Scalar Functions That Accept Lambda Functions
+## Scalar Functions That Accept Lambda Functions
 
 | Name | Description |
 |:--|:-------|
@@ -49,7 +50,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `15` |
 | **Aliases** | `array_reduce`, `reduce` |
 
-### Nesting
+## Nesting
 
 All scalar functions can be arbitrarily nested.
 
@@ -79,7 +80,7 @@ SELECT list_transform(
 [16, 17, 18]
 ```
 
-### Scoping
+## Scoping
 
 Lambda functions confirm to scoping rules in the following order:
 
@@ -98,7 +99,7 @@ SELECT apply([1, 2], x -> apply([4], x -> x + tbl.x)[1] + x) FROM tbl;
 [15, 16]
 ```
 
-### Indexes as Parameters
+## Indexes as Parameters
 
 All lambda functions accept an optional extra parameter that represents the index of the current element.
 This is always the last parameter of the lambda function, and is 1-based (i.e., the first element has index 1).

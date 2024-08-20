@@ -12,14 +12,14 @@ All official extensions are distributed for the following platforms.
 
 <div class="narrow_table"></div>
 
-| Platform name      | Description                              |
-|--------------------|------------------------------------------|
-| `linux_amd64`      | Linux AMD64 (Node.js packages, etc.)     |
-| `linux_amd64_gcc4` | Linux AMD64 (Python packages, CLI, etc.) |
-| `linux_arm64`      | Linux ARM64 (e.g., AWS Graviton)         |
-| `osx_amd64`        | macOS (Intel CPUs)                       |
-| `osx_arm64`        | macOS (Apple Silicon: M1, M2, M3 CPUs)   |
-| `windows_amd64`    | Windows on Intel and AMD CPUs (x86_64)   |
+| Platform name      | Operating system | Architecture    | CPU types                       | Used by                      |
+|--------------------|------------------|-----------------|---------------------------------|------------------------------|
+| `linux_amd64`      | Linux            | x86_64  (AMD64) |                                 | Node.js packages, etc.       |
+| `linux_amd64_gcc4` | Linux            | x86_64  (AMD64) |                                 | Python packages, CLI, etc.   |
+| `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc.  | all packages                 |
+| `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                           | all packages                 |
+| `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.      | all packages                 |
+| `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.                | all packages                 |
 
 > For some Linux ARM distributions (e.g., Python), two different binaries are distributed. These target either the `linux_arm64` or `linux_arm64_gcc4` platforms. Note that extension binaries are distributed for the first, but not the second. Effectively that means that on these platforms your glibc version needs to be 2.28 or higher to use the distributed extension binaries.
 
@@ -53,7 +53,7 @@ INSTALL httpfs;
 
 To explicitly install an extension from the core repository, run either of:
 
-```sql 
+```sql
 INSTALL httpfs FROM core;
 ```
 
@@ -91,12 +91,12 @@ While any url or local path can be used as a repository, currently DuckDB contai
 
 <div class="narrow_table"></div>
 
-| alias               | Url                                    | Description                                                                            |
-|:--------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
-| core                | `http://extensions.duckdb.org`         | DuckDB core extensions                                                                 |
-| core_nightly        | `http://nightly-extensions.duckdb.org` | Nightly builds for `core`                                                              |
-| local_build_debug   | `./build/debug/repository`             | Repository created when building DuckDB from source in debug mode (for development)    |
-| local_build_release | `./build/release/repository`           | Repository created when building DuckDB from source in release mode (for development)  |
+| Alias                 | Url                                    | Description                                                                            |
+|:----------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
+| `core`                | `http://extensions.duckdb.org`         | DuckDB core extensions                                                                 |
+| `core_nightly`        | `http://nightly-extensions.duckdb.org` | Nightly builds for `core`                                                              |
+| `local_build_debug`   | `./build/debug/repository`             | Repository created when building DuckDB from source in debug mode (for development)    |
+| `local_build_release` | `./build/release/repository`           | Repository created when building DuckDB from source in release mode (for development)  |
 
 ### Working with Multiple Repositories
 
@@ -106,8 +106,9 @@ and version of the different extensions. For this reason, DuckDB keeps track of 
 ```sql
 INSTALL httpfs FROM core;
 INSTALL aws FROM core_nightly;
-SELECT extensions_name, extensions_version, installed_from, install_mode FROM duckdb_extensions();
+SELECT extension_name, extension_version, installed_from, install_mode FROM duckdb_extensions();
 ```
+
 Would output:
 
 | extensions_name | extensions_version | installed_from | install_mode |
@@ -215,7 +216,7 @@ For example, if the file was available at the (relative) path `path/to/httpfs.du
 LOAD 'path/to/httpfs.duckdb_extension';
 ```
 
-This will skip any currently installed file in the specifed path.
+This will skip any currently installed file in the specified path.
 
 Using remote paths for compressed files is currently not possible.
 

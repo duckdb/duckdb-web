@@ -26,7 +26,7 @@ All of the subqueries can be either *correlated* or *uncorrelated*. An uncorrela
 Uncorrelated scalar subqueries can only return *a single value*. That constant value is then substituted and used in the query. As an example of why this is useful – imagine that we want to select all of the shortest flights in our dataset. We could run the following query to obtain the shortest flight distance:
 
 ```sql
-SELECT MIN(distance)
+SELECT min(distance)
 FROM ontime;
 ```
 
@@ -53,8 +53,8 @@ However – this requires us to hardcode the constant inside the query. By using
 ```sql
 SELECT uniquecarrier, origincityname, destcityname, flightdate
 FROM ontime
-WHERE distance=(
-     SELECT MIN(distance)
+WHERE distance = (
+     SELECT min(distance)
      FROM ontime
 );
 ```
@@ -68,7 +68,7 @@ For example, suppose that we want to find all of the shortest flights *for each 
 
 ```sql
 PREPARE min_distance_per_carrier AS
-SELECT MIN(distance)
+SELECT min(distance)
 FROM ontime
 WHERE uniquecarrier=?;
 ```
@@ -89,7 +89,7 @@ If we want to use this parameterized query as a subquery, we need to use a *corr
 SELECT uniquecarrier, origincityname, destcityname, flightdate, distance
 FROM ontime AS ontime_outer
 WHERE distance=(
-     SELECT MIN(distance)
+     SELECT min(distance)
      FROM ontime
      WHERE uniquecarrier=ontime_outer.uniquecarrier
 );
@@ -107,7 +107,7 @@ In order to make it more clear that the correlated subquery is in essence a *par
 
 ```sql
 CREATE MACRO min_distance_per_carrier(param) AS (
-     SELECT MIN(distance)
+     SELECT min(distance)
      FROM ontime
      WHERE uniquecarrier=param
 );
@@ -172,7 +172,7 @@ WHERE NOT EXISTS (
 SELECT uniquecarrier
 FROM ontime
 GROUP BY uniquecarrier
-HAVING COUNT(*) > 250000;
+HAVING count(*) > 250000;
 ```
 
 We can then use an `IN` clause to obtain all flights performed by those carriers.
@@ -184,7 +184,7 @@ WHERE uniquecarrier IN (
      SELECT uniquecarrier
      FROM ontime
      GROUP BY uniquecarrier
-     HAVING COUNT(*) > 250000
+     HAVING count(*) > 250000
 );
 ```
 
@@ -198,7 +198,7 @@ WHERE uniquecarrier IN (
      FROM ontime
      WHERE ontime.origin=ontime_outer.origin AND ontime.dest=ontime_outer.dest
      GROUP BY uniquecarrier
-     HAVING COUNT(*) > 1000
+     HAVING count(*) > 1000
 );
 ```
 
@@ -212,7 +212,7 @@ WHERE uniquecarrier = ANY (
      FROM ontime
      WHERE ontime.origin=ontime_outer.origin AND ontime.dest=ontime_outer.dest
      GROUP BY uniquecarrier
-     HAVING COUNT(*) > 1000
+     HAVING count(*) > 1000
 );
 ```
 
@@ -230,7 +230,7 @@ If we look at the query plan for the correlated scalar subquery using `EXPLAIN`,
 EXPLAIN SELECT uniquecarrier, origincityname, destcityname, flightdate, distance
 FROM ontime AS ontime_outer
 WHERE distance=(
-     SELECT MIN(distance)
+     SELECT min(distance)
      FROM ontime
      WHERE uniquecarrier=ontime_outer.uniquecarrier
 );
@@ -272,7 +272,7 @@ In this case, it is possible to manually decorrelate the query and generate the 
 SELECT ontime.uniquecarrier, origincityname, destcityname, flightdate, distance
 FROM ontime
 JOIN (
-     SELECT uniquecarrier, MIN(distance) AS min_distance
+     SELECT uniquecarrier, min(distance) AS min_distance
      FROM ontime
      GROUP BY uniquecarrier
 ) AS subquery 
@@ -283,7 +283,7 @@ By performing the de-correlation manually, the performance of SQLite and Postgre
 
 | DuckDB | Postgres | SQLite |
 |--------|----------|--------|
-| 0.06s  | 1.98s    | 2.81s  |
+| 0.06 s | 1.98 s   | 2.81 s |
 
 Note that while it is possible to manually decorrelate certain subqueries by rewriting the SQL, it is not always possible to do so. As described in the [Unnesting Arbitrary Queries paper](https://cs.emis.de/LNI/Proceedings/Proceedings241/383.pdf), special join types that are not present in SQL are necessary to decorrelate arbitrary queries.
 

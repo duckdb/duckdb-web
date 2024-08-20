@@ -41,14 +41,16 @@ endloop
 
 `foreach` also has a number of preset combinations that should be used when required. In this manner, when new combinations are added to the preset, old tests will automatically pick up these new combinations.
 
-|      Preset      |                           Expansion                            |
-|------------------|----------------------------------------------------------------|
-| `<compression>`  | `none uncompressed rle bitpacking dictionary fsst chimp patas` |
-| `<signed>`       | `tinyint smallint integer bigint hugeint`                      |
-| `<unsigned>`     | `utinyint usmallint uinteger ubigint uhugeint`                 |
-| `<integral>`     | `<signed> <unsigned>`                                          |
-| `<numeric>`      | `<integral> float double`                                      |
-| `<alltypes>`     | `<numeric> bool interval varchar json`                         |
+<div class="narrow_table monospace_table"></div>
+
+|     Preset     |                          Expansion                           |
+|----------------|--------------------------------------------------------------|
+| <compression>  | none uncompressed rle bitpacking dictionary fsst chimp patas |
+| <signed>       | tinyint smallint integer bigint hugeint                      |
+| <unsigned>     | utinyint usmallint uinteger ubigint uhugeint                 |
+| <integral>     | <signed> <unsigned>                                          |
+| <numeric>      | <integral> float double                                      |
+| <alltypes>     | <numeric> bool interval varchar json                         |
 
 > Use large loops sparingly. Executing hundreds of thousands of SQL statements will slow down tests unnecessarily. Do not use loops for inserting data.
 
@@ -56,15 +58,19 @@ endloop
 
 Loops should be used sparingly. While it might be tempting to use loops for inserting data using insert statements, this will considerably slow down the test cases. Instead, it is better to generate data using the built-in `range` and `repeat` functions.
 
-```sql
--- Create the table integers with the values [0, 1, .., 98,  99]
-CREATE TABLE integers AS SELECT * FROM range(0, 100, 1) t1(i);
+To create the table `integers` with the values `[0, 1, .., 98,  99]`, run:
 
--- Create the table strings with 100X the value "hello"
+```sql
+CREATE TABLE integers AS SELECT * FROM range(0, 100, 1) t1(i);
+```
+
+To create the table `strings` with 100 times the value `hello`, run:
+
+```sql
 CREATE TABLE strings AS SELECT 'hello' AS s FROM range(0, 100, 1);
 ```
 
-Using these two functions, together with clever use of cross products and other expressions, many different types of datasets can be efficiently generated. The `RANDOM()` function can also be used to generate random data.
+Using these two functions, together with clever use of cross products and other expressions, many different types of datasets can be efficiently generated. The `random()` function can also be used to generate random data.
 
 An alternative option is to read data from an existing CSV or Parquet file. There are several large CSV files that can be loaded from the directory `test/sql/copy/csv/data/real` using a `COPY INTO` statement or the `read_csv_auto` function.
 

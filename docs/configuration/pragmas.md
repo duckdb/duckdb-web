@@ -116,7 +116,7 @@ This call returns the following information for the given table:
 | `segment_type` | `VARCHAR` ||
 | `start`        | `BIGINT`  | The start row id of this chunk                        |
 | `count`        | `BIGINT`  | The amount of entries in this storage chunk           |
-| `compression`  | `VARCHAR` | Compression type used for this column – see [blog post]({% link _posts/2022-10-28-lightweight-compression.md %}) |
+| `compression`  | `VARCHAR` | Compression type used for this column – see [blog post]({% post_url 2022-10-28-lightweight-compression %}) |
 | `stats`        | `VARCHAR` ||
 | `has_updates`  | `BOOLEAN` ||
 | `persistent`   | `BOOLEAN` | `false` if temporary table                            |
@@ -147,7 +147,7 @@ SET max_memory = '1GB';
 > Warning The specified memory limit is only applied to the buffer manager.
 > For most queries, the buffer manager handles the majority of the data processed.
 > However, certain in-memory data structures such as [vectors]({% link docs/internals/vector.md %}) and query results are allocated outside of the buffer manager.
-> Additionally, [aggregate functions]({% link docs/sql/aggregates.md %}) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
+> Additionally, [aggregate functions]({% link docs/sql/functions/aggregates.md %}) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
 > Therefore, the actual memory consumption can be higher than the specified memory limit.
 
 ### Threads
@@ -379,7 +379,7 @@ For example, to disable `filter_pushdown` and `statistics_propagation`, run:
 SET disabled_optimizers = 'filter_pushdown,statistics_propagation';
 ```
 
-The available optimizations can be queried using the [`duckdb_optimizers()` table function]({% link docs/sql/duckdb_table_functions.md %}#duckdb_optimizers).
+The available optimizations can be queried using the [`duckdb_optimizers()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers).
 
 > Warning The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
 

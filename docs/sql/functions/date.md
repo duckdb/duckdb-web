@@ -5,7 +5,9 @@ redirect_from:
   - docs/test/functions/date
 ---
 
-This section describes functions and operators for examining and manipulating date values.
+<!-- markdownlint-disable MD001 -->
+
+This section describes functions and operators for examining and manipulating [`DATE`]({% link docs/sql/data_types/date.md %}) values.
 
 ## Date Operators
 
@@ -53,7 +55,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` date. `origin` defaults to 2000-01-03 for buckets that don't include a month or year interval, and to 2000-01-01 for month and year buckets. |
 | [`today()`](#today) | Current date (start of current transaction). |
 
-### `current_date`
+#### `current_date`
 
 <div class="nostroke_table"></div>
 
@@ -61,7 +63,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `current_date` |
 | **Result** | `2022-10-08` |
 
-### `date_add(date, interval)`
+#### `date_add(date, interval)`
 
 <div class="nostroke_table"></div>
 
@@ -69,7 +71,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `date_add(DATE '1992-09-15', INTERVAL 2 MONTH)` |
 | **Result** | `1992-11-15` |
 
-### `date_diff(part, startdate, enddate)`
+#### `date_diff(part, startdate, enddate)`
 
 <div class="nostroke_table"></div>
 
@@ -77,7 +79,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `date_diff('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `2` |
 
-### `date_part(part, date)`
+#### `date_part(part, date)`
 
 <div class="nostroke_table"></div>
 
@@ -85,7 +87,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `date_part('year', DATE '1992-09-20')` |
 | **Result** | `1992` |
 
-### `date_sub(part, startdate, enddate)`
+#### `date_sub(part, startdate, enddate)`
 
 <div class="nostroke_table"></div>
 
@@ -93,7 +95,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `date_sub('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `1` |
 
-### `date_trunc(part, date)`
+#### `date_trunc(part, date)`
 
 <div class="nostroke_table"></div>
 
@@ -101,7 +103,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `date_trunc('month', DATE '1992-03-07')` |
 | **Result** | `1992-03-01` |
 
-### `datediff(part, startdate, enddate)`
+#### `datediff(part, startdate, enddate)`
 
 <div class="nostroke_table"></div>
 
@@ -110,7 +112,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Result** | `2` |
 | **Alias** | `date_diff`. |
 
-### `datepart(part, date)`
+#### `datepart(part, date)`
 
 <div class="nostroke_table"></div>
 
@@ -119,7 +121,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Result** | `1992` |
 | **Alias** | `date_part`. |
 
-### `datesub(part, startdate, enddate)`
+#### `datesub(part, startdate, enddate)`
 
 <div class="nostroke_table"></div>
 
@@ -128,7 +130,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Result** | `1` |
 | **Alias** | `date_sub`. |
 
-### `datetrunc(part, date)`
+#### `datetrunc(part, date)`
 
 <div class="nostroke_table"></div>
 
@@ -137,7 +139,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Result** | `1992-03-01` |
 | **Alias** | `date_trunc`. |
 
-### `dayname(date)`
+#### `dayname(date)`
 
 <div class="nostroke_table"></div>
 
@@ -145,7 +147,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `dayname(DATE '1992-09-20')` |
 | **Result** | `Sunday` |
 
-### `extract(part from date)`
+#### `extract(part from date)`
 
 <div class="nostroke_table"></div>
 
@@ -153,7 +155,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `extract('year' FROM DATE '1992-09-20')` |
 | **Result** | `1992` |
 
-### `greatest(date, date)`
+#### `greatest(date, date)`
 
 <div class="nostroke_table"></div>
 
@@ -161,7 +163,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `greatest(DATE '1992-09-20', DATE '1992-03-07')` |
 | **Result** | `1992-09-20` |
 
-### `isfinite(date)`
+#### `isfinite(date)`
 
 <div class="nostroke_table"></div>
 
@@ -169,7 +171,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `isfinite(DATE '1992-03-07')` |
 | **Result** | `true` |
 
-### `isinf(date)`
+#### `isinf(date)`
 
 <div class="nostroke_table"></div>
 
@@ -177,7 +179,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `isinf(DATE '-infinity')` |
 | **Result** | `true` |
 
-### `last_day(date)`
+#### `last_day(date)`
 
 <div class="nostroke_table"></div>
 
@@ -185,7 +187,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `last_day(DATE '1992-09-20')` |
 | **Result** | `1992-09-30` |
 
-### `least(date, date)`
+#### `least(date, date)`
 
 <div class="nostroke_table"></div>
 
@@ -193,7 +195,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `least(DATE '1992-09-20', DATE '1992-03-07')` |
 | **Result** | `1992-03-07` |
 
-### `make_date(year, month, day)`
+#### `make_date(year, month, day)`
 
 <div class="nostroke_table"></div>
 
@@ -201,7 +203,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `make_date(1992, 9, 20)` |
 | **Result** | `1992-09-20` |
 
-### `monthname(date)`
+#### `monthname(date)`
 
 <div class="nostroke_table"></div>
 
@@ -209,7 +211,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `monthname(DATE '1992-09-20')` |
 | **Result** | `September` |
 
-### `strftime(date, format)`
+#### `strftime(date, format)`
 
 <div class="nostroke_table"></div>
 
@@ -217,7 +219,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `strftime(date '1992-01-01', '%a, %-d %B %Y')` |
 | **Result** | `Wed, 1 January 1992` |
 
-### `time_bucket(bucket_width, date[, offset])`
+#### `time_bucket(bucket_width, date[, offset])`
 
 <div class="nostroke_table"></div>
 
@@ -225,7 +227,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `time_bucket(INTERVAL '2 months', DATE '1992-04-20', INTERVAL '1 month')` |
 | **Result** | `1992-04-01` |
 
-### `time_bucket(bucket_width, date[, origin])`
+#### `time_bucket(bucket_width, date[, origin])`
 
 <div class="nostroke_table"></div>
 
@@ -233,7 +235,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | **Example** | `time_bucket(INTERVAL '2 weeks', DATE '1992-04-20', DATE '1992-04-01')` |
 | **Result** | `1992-04-15` |
 
-### `today()`
+#### `today()`
 
 <div class="nostroke_table"></div>
 

@@ -3,7 +3,7 @@ layout: docu
 title: Data Ingestion
 ---
 
-This page containes examples for data ingestion to Python using DuckDB. First, import the DuckDB page:
+This page contains examples for data ingestion to Python using DuckDB. First, import the DuckDB page:
 
 ```python
 import duckdb

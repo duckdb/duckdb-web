@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "Fastest table sort in the West – Redesigning DuckDB’s sort"
+title: "Fastest Table Sort in the West – Redesigning DuckDB’s Sort"
 author: Laurens Kuiper  
 excerpt: DuckDB, a free and Open-Source analytical data management system, has a new highly efficient parallel sorting implementation that can sort much more data than fits in main memory.
 ---
@@ -65,7 +65,6 @@ If we have columnar storage, this comparator has to jump between columns, [causi
 2. Entirely sort the data by the first clause, then sort by the second clause, but only where the first clause was equal, and so on.
 This approach is especially inefficient when there are many duplicate values, as it requires multiple passes over the data.
 
-
 #### Binary String Comparison
 
 The binary string comparison technique improves sorting performance by simplifying the comparator. It encodes *all* columns in the `ORDER BY` clause into a single binary sequence that, when compared using `memcmp` will yield the correct overall sorting order. Encoding the data is not free, but since we are using the comparator so much during sorting, it will pay off.
@@ -78,6 +77,7 @@ Let us take another look at 3 rows of the example:
 | GERMANY         | 1924         |
 
 On [little-endian](https://en.wikipedia.org/wiki/Endianness) hardware, the bytes that represent these values look like this in memory, assuming 32-bit integer representation for the year:
+
 ```sql
 c_birth_country
 -- NETHERLANDS
@@ -369,14 +369,17 @@ We see similar trends at SF10 and SF100, but for SF100, at around 12 payload col
 ClickHouse switches to an external sorting strategy, which is much slower than its in-memory strategy.
 Therefore, adding a few payload columns results in a runtime that is orders of magnitude higher.
 At 20 payload columns ClickHouse runs into the following error:
-```text
+
+```console
 DB::Exception: Memory limit (for query) exceeded: would use 11.18 GiB (attempt to allocate chunk of 4204712 bytes), maximum: 11.18 GiB: (while reading column cs_list_price): (while reading from part ./store/523/5230c288-7ed5-45fa-9230-c2887ed595fa/all_73_108_2/ from mark 4778 with max_rows_to_read = 8192): While executing MergeTreeThread.
 ```
 
 HyPer also drops in performance before erroring out with the following message:
-```text
+
+```console
 ERROR:  Cannot allocate 333982248 bytes of memory: The `global memory limit` limit of 12884901888 bytes was exceeded.
 ```
+
 As far as we are aware, HyPer uses [`mmap`](https://man7.org/linux/man-pages/man2/mmap.2.html), which creates a mapping between memory and a file.
 This allows the operating system to move data between memory and disk.
 While useful, it is no substitute for a proper external sort, as it creates random access to disk, which is very slow.
@@ -389,7 +392,8 @@ Using swap usually slows down processing significantly, but the SSD is so fast t
 While Pandas loads the data, swap size grows to an impressive \~40 GB: Both the file and the data frame are fully in memory/swap at the same time, rather than streamed into memory.
 This goes down to \~20 GB of memory/swap when the file is done being read.
 Pandas is able to get quite far into the experiment until it crashes with the following error:
-```text
+
+```console
 UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
 ```
 
@@ -518,7 +522,8 @@ We have set the number of threads that DuckDB and ClickHouse use to 8 because we
 
 Pandas performs comparatively worse than on the MacBook, because it has a single-threaded implementation, and this CPU has a lower single-thread performance.
 Again, Pandas crashes with an error (this machine does not dynamically increase swap):
-```text
+
+```console
 numpy.core._exceptions.MemoryError: Unable to allocate 6.32 GiB for an array with shape (6, 141430723) and data type float64
 ```
 
@@ -528,5 +533,5 @@ An interesting pattern in this plot is that DuckDB and HyPer scale very similarl
 Although DuckDB is faster at sorting, re-ordering the payload seems to cost about the same for both systems.
 Therefore it is likely that HyPer also uses a row layout.
 
-For ClickHouse scales worse with additional payload columns.
+ClickHouse scales worse with additional payload columns.
 ClickHouse does not use a row layout, and therefore has to pay the cost of random access as each column is re-ordered after sorting.

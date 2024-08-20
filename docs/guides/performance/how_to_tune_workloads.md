@@ -42,7 +42,7 @@ and are the most memory-intensive operators in relational database systems.
 The main blocking operators are the following:
 * _sorting:_ [`ORDER BY`]({% link docs/sql/query_syntax/orderby.md %}),
 * _grouping:_ [`GROUP BY`]({% link docs/sql/query_syntax/groupby.md %}),
-* _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`]({% link docs/sql/window_functions.md %}),
+* _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`]({% link docs/sql/functions/window_functions.md %}),
 * _joining:_ [`JOIN`]({% link docs/sql/query_syntax/from.md %}#joins).
 
 DuckDB supports larger-than-memory processing for all of these operators.
@@ -53,8 +53,8 @@ DuckDB strives to always complete workloads even if they are larger-than-memory.
 That said, there are some limitations at the moment:
 
 * If multiple blocking operators appear in the same query, DuckDB may still throw an out-of-memory exception due to the complex interplay of these operators.
-* Some [aggregate functions]({% link docs/sql/aggregates.md %}), such as `list()` and `string_agg()`, do not support offloading to disk.
-* [Aggregate functions that use sorting]({% link docs/sql/aggregates.md %}#order-by-clause-in-aggregate-functions) are holistic, i.e., they need all inputs before the aggregation can start. As DuckDB cannot yet offload some complex intermediate aggregate states to disk, these functions can cause an out-of-memory exception when run on large data sets.
+* Some [aggregate functions]({% link docs/sql/functions/aggregates.md %}), such as `list()` and `string_agg()`, do not support offloading to disk.
+* [Aggregate functions that use sorting]({% link docs/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions) are holistic, i.e., they need all inputs before the aggregation can start. As DuckDB cannot yet offload some complex intermediate aggregate states to disk, these functions can cause an out-of-memory exception when run on large data sets.
 * The `PIVOT` operation [internally uses the `list()` function]({% link docs/sql/statements/pivot.md %}#internals), therefore it is subject to the same limitation.
 
 ## Profiling

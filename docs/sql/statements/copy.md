@@ -319,7 +319,7 @@ COPY
     (FIELD_IDS {my_list: {__duckdb_field_id: 42, element: 43}});
 ```
 
-Sets the `field_id` of colum `my_map` to 42, and columns `key` and `value` (default names of map children) to 43 and 44:
+Sets the `field_id` of column `my_map` to 42, and columns `key` and `value` (default names of map children) to 43 and 44:
 
 ```sql
 COPY
@@ -335,7 +335,7 @@ The below options are applicable when writing `JSON` files.
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `array` | Whether to write a JSON array. If `true`, a JSON array of records is written, if `false`, newline-delimited JSON is written | `BOOL` | `false` |
-| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
+| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.json.gz` will use gzip, `file.json` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `dateformat` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
 | `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
 

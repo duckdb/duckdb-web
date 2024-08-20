@@ -8,11 +8,13 @@ title: Versioning of Extensions
 Just like DuckDB itself, DuckDB extensions have a version. This version can be used by users to determine which features are available
 in the extension they have installed, and by developers to understand bug reports. DuckDB extensions can be versioned in different ways:
 
-**Extensions whose source lives in DuckDB's main repository** (in-tree extensions) are tagged with the short git hash of the repository. 
+**Extensions whose source lives in DuckDB's main repository** (in-tree extensions) are tagged with the short git hash of the repository.
 For example, the parquet extension is built into DuckDB version `v0.10.3` (which has commit `70fd6a8a24`):
 
 ```sql
-SELECT extension_name, extension_version, install_mode FROM duckdb_extensions() WHERE extension_name='parquet';
+SELECT extension_name, extension_version, install_mode
+FROM duckdb_extensions()
+WHERE extension_name='parquet';
 ```
 
 <div class="narrow_table"></div>
@@ -21,7 +23,7 @@ SELECT extension_name, extension_version, install_mode FROM duckdb_extensions() 
 |:------------------|:------------------|:---------------------|
 | parquet           | 70fd6a8a24        | STATICALLY_LINKED    |
 
-**Extensions whose source lives in a separate repository** (out-of-tree extensions) have their own version. This version is **either** 
+**Extensions whose source lives in a separate repository** (out-of-tree extensions) have their own version. This version is **either**
 the short git hash of the separate repository, **or** the git version tag in [Semantic Versioning](https://semver.org/) format.
 For example, in DuckDB version `v0.10.3`, the azure extension could be versioned as follows:
 
@@ -57,8 +59,8 @@ UPDATE EXTENSIONS;
 | azure          | core         | NO_UPDATE_AVAILABLE   | 49b63dc          | 49b63dc         |
 | aws            | core_nightly | NO_UPDATE_AVAILABLE   | 42c78d3          | 42c78d3         |
 
-Note that DuckDB will look for updates in the source repository for each extension. So if an extension was installed from 
-core_nightly, it will be updated with the latest nightly build.
+Note that DuckDB will look for updates in the source repository for each extension. So if an extension was installed from
+`core_nightly`, it will be updated with the latest nightly build.
 
 The update statement can also be provided with a list of specific extensions to update:
 

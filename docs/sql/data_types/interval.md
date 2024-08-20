@@ -12,7 +12,7 @@ blurb: Intervals represent periods of time measured in months, days, microsecond
 |:---|:---|
 | `INTERVAL` | Period of time |
 
-An `INTERVAL` can be constructed by providing amounts together with units. 
+An `INTERVAL` can be constructed by providing amounts together with units.
 Units that aren't *months*, *days*, or *microseconds* are converted to equivalent amounts in the next smaller of these three basis units.
 
 ```sql
@@ -96,7 +96,7 @@ SELECT
 ;
 ```
 
-Subtracting two `DATE`s from one another does not create an `INTERVAL` but rather returns the number of days between the given dates as integer value. 
+Subtracting two `DATE`s from one another does not create an `INTERVAL` but rather returns the number of days between the given dates as integer value.
 
 > Warning Extracting a component of the `INTERVAL` difference between two `TIMESTAMP`s is not equivalent to computing the number of partition boundaries between the two `TIMESTAMP`s for the corresponding unit, as computed by the `datediff` function:
 > ```sql

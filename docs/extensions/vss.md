@@ -35,14 +35,14 @@ EXPLAIN SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FL
 │         PROJECTION        │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
 │             #0            │
-└─────────────┬─────────────┘                             
+└─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
 │         PROJECTION        │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
 │            vec            │
 │array_distance(vec, [1.0, 2│
 │         .0, 3.0])         │
-└─────────────┬─────────────┘                             
+└─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
 │      HNSW_INDEX_SCAN      │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
@@ -52,7 +52,7 @@ EXPLAIN SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FL
 │            vec            │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
 │           EC: 3           │
-└───────────────────────────┘               
+└───────────────────────────┘
 ```
 
 By default the HNSW index will be created using the euclidean distance `l2sq` (L2-norm squared) metric, matching DuckDBs `array_distance` function, but other distance metrics can be used by specifying the `metric` option during index creation. For example:
@@ -72,14 +72,14 @@ The following table shows the supported distance metrics and their corresponding
 | `cosine` | `array_cosine_similarity` | Cosine similarity  |
 | `ip`     | `array_inner_product`     | Inner product      |
 
-Note that while each `HNSW` index only applies to a single column you can create multiple `HNSW` indexes on the same table each individually indexing a different column. Additionally, you can also create mulitple `HNSW` indexes to the same column, each supporting a different distance metric.
+Note that while each `HNSW` index only applies to a single column you can create multiple `HNSW` indexes on the same table each individually indexing a different column. Additionally, you can also create multiple `HNSW` indexes to the same column, each supporting a different distance metric.
 
 ## Index options
 
 Besides the `metric` option, the `HNSW` index creation statement also supports the following options to control the hyperparameters of the index construction and search process:
 
-| Option            | Default | Description                                                                                                                                                                                                                    |
-| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Option | Default | Description |
+|-------|--:|----------------------------|
 | `ef_construction` | 128     | The number of candidate vertices to consider during the construction of the index. A higher value will result in a more accurate index, but will also increase the time it takes to build the index.                           |
 | `ef_search`       | 64      | The number of candidate vertices to consider during the search phase of the index. A higher value will result in a more accurate index, but will also increase the time it takes to perform a search.                          |
 | `M`               | 16      | The maximum number of neighbors to keep for each vertex in the graph. A higher value will result in a more accurate index, but will also increase the time it takes to build the index.                                        |
@@ -91,7 +91,7 @@ Additionally, you can also override the `ef_search` parameter set at index const
 
 Due to some known issues related to peristence of custom extension indexes, the `HNSW` index can only be created on tables in in-memory databases by default, unless the `SET hnsw_enable_experimental_persistence = ⟨bool⟩` configuration option is set to `true`.
 
-The reasoning for locking this feature behind an experimental flag is that "WAL" recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommited changes to a `HNSW`-indexed table, you can end up with __data loss or corruption of the index__.
+The reasoning for locking this feature behind an experimental flag is that "WAL" recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommitted changes to a `HNSW`-indexed table, you can end up with __data loss or corruption of the index__.
 
 If you enable this option and experience an unexpected shutdown, you can try to recover the index by first starting DuckDB separately, loading the `vss` extension and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, allowing DuckDB's recovery process to proceed without issues. But we still recommend that you do not use this feature in production environments.
 
@@ -99,7 +99,7 @@ With the `hnsw_enable_experimental_persistence` option enabled, the index will b
 
 ## Inserts, Updates, Deletes and Re-Compaction
 
-The HNSW index does support inserting, updating and deleting rows from the table after index creation. However, there are two things to keep in mind:  
+The HNSW index does support inserting, updating and deleting rows from the table after index creation. However, there are two things to keep in mind:
 
 * It's faster to create the index after the table has been populated with data as the initial bulk load can make better use of parallelism on large tables.
 * Deletes are not immediately reflected in the index, but are instead "marked" as deleted, which can cause the index to grow stale over time and negatively impact query quality and performance.

@@ -7,7 +7,7 @@ redirect_from:
   - docs/extensions/postgresql
 ---
 
-The `postgres` extension allows DuckDB to directly read and write data from a running Postgres database instance. The data can be queried directly from the underlying Postgres database. Data can be loaded from Postgres tables into DuckDB tables, or vice versa. See the [official announcement]({% link _posts/2022-09-30-postgres-scanner.md %}) for implementation details and background.
+The `postgres` extension allows DuckDB to directly read and write data from a running Postgres database instance. The data can be queried directly from the underlying Postgres database. Data can be loaded from Postgres tables into DuckDB tables, or vice versa. See the [official announcement]({% post_url 2022-09-30-postgres-scanner %}) for implementation details and background.
 
 ## Installing and Loading
 
@@ -47,15 +47,15 @@ dbname=postgresscanner
 host=localhost port=5432 dbname=mydb connect_timeout=10
 ```
 
-|    Name    |             Description              |     Default      |
-|------------|--------------------------------------|------------------|
-| `dbname`   | Database name                        | [user]           |
-| `host`     | Name of host to connect to           | `localhost`      |
-| `hostaddr` | Host IP address                      | `localhost`      |
-| `passfile` | Name of file passwords are stored in | `~/.pgpass`      |
-| `password` | Postgres password                    | (empty)          |
-| `port`     | Port number                          | `5432`           |
-| `user`     | Postgres user name                   | current user     |
+| Name       | Description                          | Default      |
+| ---------- | ------------------------------------ | ------------ |
+| `dbname`   | Database name                        | [user]       |
+| `host`     | Name of host to connect to           | `localhost`  |
+| `hostaddr` | Host IP address                      | `localhost`  |
+| `passfile` | Name of file passwords are stored in | `~/.pgpass`  |
+| `password` | Postgres password                    | (empty)      |
+| `port`     | Port number                          | `5432`       |
+| `user`     | Postgres user name                   | current user |
 
 An example URI is `postgresql://username@hostname/dbname`.
 
@@ -86,16 +86,20 @@ The tables in the PostgreSQL database can be read as if they were normal DuckDB 
 SHOW ALL TABLES;
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | name  |
-|-------|
+| ----- |
 | uuids |
 
 ```sql
 SELECT * FROM uuids;
 ```
 
-|                  u                   |
-|--------------------------------------|
+<div class="narrow_table monospace_table"></div>
+
+| u                                    |
+| ------------------------------------ |
 | 6d3d2541-710b-4bde-b3af-4711738636bf |
 | NULL                                 |
 | 00000000-0000-0000-0000-000000000001 |
@@ -150,9 +154,9 @@ INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 SELECT * FROM postgres_db.tbl;
 ```
 
-| id |  name  |
-|---:|--------|
-| 42 | DuckDB |
+|   id | name   |
+| ---: | ------ |
+|   42 | DuckDB |
 
 ### `COPY`
 
@@ -173,11 +177,13 @@ COPY 'data.parquet' TO 'pg.bin' WITH (FORMAT POSTGRES_BINARY);
 The file produced will be the equivalent of copying the file to Postgres using DuckDB and then dumping it from Postgres using `psql` or another client:
 
 DuckDB:
+
 ```sql
 COPY postgres_db.tbl FROM 'data.parquet';
 ```
 
-Postgres:
+PostgreSQL:
+
 ```sql
 \copy tbl TO 'data.bin' WITH (FORMAT BINARY);
 ```
@@ -231,9 +237,9 @@ INSERT INTO postgres_db.s1.integers VALUES (42);
 SELECT * FROM postgres_db.s1.integers;
 ```
 
-| i  |
-|---:|
-| 42 |
+|    i |
+| ---: |
+|   42 |
 
 ```sql
 DROP SCHEMA postgres_db.s1;
@@ -256,9 +262,9 @@ SELECT * FROM postgres_db.tmp;
 
 This returns:
 
-| i  |
-|---:|
-| 42 |
+|    i |
+| ---: |
+|   42 |
 
 ```sql
 ROLLBACK;
@@ -293,8 +299,8 @@ SELECT * FROM postgres_query('postgres_db', 'SELECT * FROM cars LIMIT 3');
     ;
 -->
 
-|    brand     |   model    | color |
-|--------------|------------|-------|
+| brand        | model      | color |
+| ------------ | ---------- | ----- |
 | Ferrari      | Testarossa | red   |
 | Aston Martin | DB2        | blue  |
 | Bentley      | Mulsanne   | gray  |
@@ -315,15 +321,16 @@ CALL postgres_execute('postgres_db', 'CREATE TABLE my_table (i INTEGER)');
 
 The extension exposes the following configuration parameters.
 
-|               Name                |                                Description                                 |  Default  |
-|-----------------------------------|----------------------------------------------------------------------------|-----------|
-| `pg_debug_show_queries`           | DEBUG SETTING: print all queries sent to Postgres to stdout                | `false`   |
-| `pg_connection_cache`             | Whether or not to use the connection cache                                 | `true`    |
-| `pg_experimental_filter_pushdown` | Whether or not to use filter pushdown (currently experimental)             | `false`   |
-| `pg_array_as_varchar`             | Read Postgres arrays as varchar - enables reading mixed dimensional arrays | `false`   |
-| `pg_connection_limit`             | The maximum amount of concurrent Postgres connections                      | `64`      |
-| `pg_pages_per_task`               | The amount of pages per task                                               | `1000`    |
-| `pg_use_binary_copy`              | Whether or not to use BINARY copy to read data                             | `true`    |
+| Name                              | Description                                                                | Default |
+| --------------------------------- | -------------------------------------------------------------------------- | ------- |
+| `pg_array_as_varchar`             | Read Postgres arrays as varchar - enables reading mixed dimensional arrays | `false` |
+| `pg_connection_cache`             | Whether or not to use the connection cache                                 | `true`  |
+| `pg_connection_limit`             | The maximum amount of concurrent Postgres connections                      | `64`    |
+| `pg_debug_show_queries`           | DEBUG SETTING: print all queries sent to Postgres to stdout                | `false` |
+| `pg_experimental_filter_pushdown` | Whether or not to use filter pushdown (currently experimental)             | `false` |
+| `pg_pages_per_task`               | The amount of pages per task                                               | `1000`  |
+| `pg_use_binary_copy`              | Whether or not to use BINARY copy to read data                             | `true`  |
+| `pg_use_ctid_scan`                | Whether or not to parallelize scanning using table ctids                   | `true`  |
 
 ## Schema Cache
 

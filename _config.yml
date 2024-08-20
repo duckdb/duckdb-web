@@ -34,6 +34,7 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  smart_quotes: ["apos", "apos", "quot", "quot"]
 theme: minima
 plugins:
   - jekyll-feed
@@ -48,13 +49,13 @@ excerpt_separator: <!--more-->
 future: true
 
 last-modified-at:
-    date-format: '%Y-%m-%d'
+  date-format: '%Y-%m-%d'
 
 twitter:
   username: DuckDB
   card: summary
-  
-github: 
+
+github:
   source:
     branch: main
   repository_url: "https://github.com/duckdb/duckdb-web"
@@ -80,11 +81,11 @@ repository: "duckdb/duckdb-web"
 #   - vendor/gems/
 #   - vendor/ruby/
 
-star_count: "14.4k"
+star_count: "20.0k"
 
 toc:
   min_level: 1
-  max_level: 2
+  max_level: 3
   ordered_list: false
 
 exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle']

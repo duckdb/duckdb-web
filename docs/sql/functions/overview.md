@@ -10,7 +10,7 @@ redirect_from:
 
 <div id="rrdiagram"></div>
 
-### Function Chaining via the Dot Operator
+## Function Chaining via the Dot Operator
 
 DuckDB supports the dot syntax for function chaining. This allows the function call `fn(arg1, arg2, arg3, ...)` to be rewritten as `arg1.fn(arg2, arg3, ...)`. For example, take the following use of the [`replace` function]({% link docs/sql/functions/char.md %}#replacestring-source-target):
 
@@ -39,7 +39,8 @@ SELECT DISTINCT ON(function_name)
     parameter_types,
     description
 FROM duckdb_functions()
-WHERE function_type = 'scalar' AND function_name LIKE 'b%'
+WHERE function_type = 'scalar'
+  AND function_name LIKE 'b%'
 ORDER BY function_name;
 ```
 

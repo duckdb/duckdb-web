@@ -18,34 +18,46 @@ Count the number of rows in a table:
 SELECT count(*) FROM table_name;
 ```
 
+DuckDB offers a shorthand for `count(*)` expressions where the `*` may be omitted:
+
+```sql
+SELECT count() FROM table_name;
+```
+
 Select all columns from the table called `table_name`:
 
 ```sql
-SELECT table_name.* FROM table_name JOIN other_table_name USING (id);
+SELECT table_name.*
+FROM table_name
+JOIN other_table_name USING (id);
 ```
 
 Select all columns except the city column from the addresses table:
 
 ```sql
-SELECT * EXCLUDE (city) FROM addresses;
+SELECT * EXCLUDE (city)
+FROM addresses;
 ```
 
 Select all columns from the addresses table, but replace city with `lower(city)`:
 
 ```sql
-SELECT * REPLACE (lower(city) AS city) FROM addresses;
+SELECT * REPLACE (lower(city) AS city)
+FROM addresses;
 ```
 
 Select all columns matching the given expression:
 
 ```sql
-SELECT COLUMNS(c -> c LIKE '%num%') FROM addresses;
+SELECT COLUMNS(c -> c LIKE '%num%')
+FROM addresses;
 ```
 
 Select all columns matching the given regex from the table:
 
 ```sql
-SELECT COLUMNS('number\d+') FROM addresses;
+SELECT COLUMNS('number\d+')
+FROM addresses;
 ```
 
 ## Syntax

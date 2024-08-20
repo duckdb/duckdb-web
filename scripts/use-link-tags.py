@@ -44,7 +44,7 @@ with open(filename, "r") as f:
         link_path = f"{link_path}.md"
         anchor_text = m.group(2) or ""
 
-        s = s.replace(m.group(), f"]({{% link _posts/{link_path} %}}{anchor_text})")
+        s = s.replace(m.group(), f"]({{% post_url {link_path} %}}{anchor_text})")
 
 
 with open(filename, "w") as f:

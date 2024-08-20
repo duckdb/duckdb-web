@@ -30,8 +30,11 @@ body.notfound{
 	
 	section.quickaccess{
 		.flexwrap{
-			justify-content: space-between;
-			flex-wrap: wrap; 
+			-webkit-box-pack: justify;
+				-ms-flex-pack: justify;
+					justify-content: space-between;
+			-ms-flex-wrap: wrap;
+				flex-wrap: wrap; 
 			margin-top: 70px;
 			row-gap: 20px;
 			> a{

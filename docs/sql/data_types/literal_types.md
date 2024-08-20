@@ -5,7 +5,7 @@ title: Literal Types
 
 DuckDB has special literal types for representing `NULL`, integer and string literals in queries. These have their own binding and conversion rules.
 
-> Prior to version 0.10.0, integer and string literals behaved identically to the `INTEGER` and `VARCHAR` types.
+> Prior to DuckDB version 0.10.0, integer and string literals behaved identically to the `INTEGER` and `VARCHAR` types.
 
 ## Null Literals
 
@@ -33,7 +33,7 @@ The exponential part indicates that the preceding value should be multiplied by 
 SELECT 1e2;           -- 100
 SELECT 6.02214e23;    -- Avogadro's constant
 SELECT 1e-10;         -- 1 ångström
-```  
+```
 
 ## Underscores in Numeric Literals
 
@@ -55,11 +55,11 @@ SELECT '0b0_1_0_1'::INTEGER; -- 5
 ## String Literals
 
 String literals are delimited using single quotes (`'`, apostrophe) and result in `STRING_LITERAL` values.
-Note that double quotes (`"`) cannot be used as string delimiter character: instead, double quotes are used to delimit [quoted identifiers]({% link docs/sql/keywords_and_identifiers.md %}#identifiers).
+Note that double quotes (`"`) cannot be used as string delimiter character: instead, double quotes are used to delimit [quoted identifiers]({% link docs/sql/dialect/keywords_and_identifiers.md %}#identifiers).
 
 ### Implicit String Literal Concatenation
 
-Consecutive single-quoted string literals sepearated only by whitespace that contains at least one newline are implicitly concatenated:
+Consecutive single-quoted string literals separated only by whitespace that contains at least one newline are implicitly concatenated:
 
 ```sql
 SELECT 'Hello'
@@ -81,7 +81,7 @@ They both return the following result:
 |-------------|
 | Hello World |
 
-Note that implicit concatenation only works if there is at least one newline between the literals. Using adjacent string literals separated by whitspace without a newline results in a syntax error:
+Note that implicit concatenation only works if there is at least one newline between the literals. Using adjacent string literals separated by whitespace without a newline results in a syntax error:
 
 ```sql
 SELECT 'Hello' ' ' 'World' AS greeting;

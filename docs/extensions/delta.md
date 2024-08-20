@@ -6,6 +6,8 @@ github_repository: https://github.com/duckdb/duckdb_delta
 
 The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension offers **read support** for delta tables, both local and remote.
 
+For implementation details, see the [announcement blog post]({% post_url 2024-06-10-delta %}).
+
 > Warning The `delta` extension is currently experimental and is [only supported on given platforms](#supported-duckdb-versions-and-platforms).
 
 ## Installing and Loading
@@ -45,6 +47,17 @@ SELECT *
 FROM delta_scan('s3://some/delta/table/with/auth');
 ```
 
+To scan public buckets on S3, you may need to pass the correct region by creating a secret containing the region of your public S3 bucket:
+
+```sql
+CREATE SECRET (
+    TYPE S3,
+    REGION 'my-region'
+);
+SELECT *
+FROM delta_scan('s3://some/public/table/in/my-region');
+```
+
 ## Features
 
 While the `delta` extension is still experimental, many (scanning) features and optimizations are already supported:
@@ -67,7 +80,8 @@ The `delta` extension requires DuckDB version 0.10.3 or newer.
 
 The `delta` extension currently only supports the following platforms:
 
-* Linux AMD64 (x86_64): `linux_amd64` and `linux_amd64_gcc4`
+* Linux AMD64 (x86_64 and ARM64): `linux_amd64`, `linux_amd64_gcc4`, and `linux_arm64`
 * macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
+* Windows AMD64: `windows_amd64`
 
 Support for the [other DuckDB platforms]({% link docs/extensions/working_with_extensions.md %}#platforms) is work-in-progress.

@@ -7,7 +7,7 @@ redirect_from:
 
 ## Handling Parquet Files
 
-DuckDB has advanced support for Parquet files, which includes [directly querying Parquet files]({% link _posts/2021-06-25-querying-parquet.md %}).
+DuckDB has advanced support for Parquet files, which includes [directly querying Parquet files]({% post_url 2021-06-25-querying-parquet %}).
 When deciding on whether to query these files directly or to first load them to the database, you need to consider several factors.
 
 ### Reasons for Querying Parquet Files
@@ -86,7 +86,7 @@ CSV files are often distributed in compressed format such as GZIP archives (`.cs
 
 ### Loading Many Small CSV Files
 
-The [CSV reader]({% link docs/data/csv/overview.md %}) runs the [CSV sniffer]({% link _posts/2023-10-27-csv-sniffer.md %}) on all files. For many small files, this may cause an unnecessarily high overhead.
+The [CSV reader]({% link docs/data/csv/overview.md %}) runs the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}) on all files. For many small files, this may cause an unnecessarily high overhead.
 A potential optimization to speed this up is to turn the sniffer off. Assuming that all files have the same CSV dialect and colum names/types, get the sniffer options as follows:
 
 ```sql

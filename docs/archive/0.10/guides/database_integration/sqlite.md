@@ -9,7 +9,7 @@ To run a query directly on a SQLite file, the `sqlite` extension is required.
 
 ## Installation and Loading
 
-The extension can be installed use the `INSTALL` SQL command. This only needs to be run once.
+The extension can be installed using the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL sqlite;

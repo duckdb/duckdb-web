@@ -45,7 +45,7 @@ If you wish to connect to a database file,
 you will need to make sure the file was created with a file-compatible version of DuckDB.
 Also, check that there is only one version of the driver installed as there are multiple filenames in use.
 
-<!-- markdownlint-disable MD034 --> 
+<!-- markdownlint-disable MD034 -->
 Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentjavaversion }}/duckdb_jdbc-{{ site.currentjavaversion }}.jar).
 <!-- markdownlint-enable MD034 -->
 

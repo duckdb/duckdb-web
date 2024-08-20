@@ -50,6 +50,9 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
         if: github.repository == 'duckdb/duckdb-web'
+      - name: Publish past releases CSV file
+        run: |
+          cp _data/past_releases.csv data/duckdb-releases.csv
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"

@@ -16,7 +16,7 @@ FROM table_name
 WHERE id = 3;
 ```
 
-Select all rows that match the given case-insensitive LIKE expression:
+Select all rows that match the given case-insensitive `LIKE` expression:
 
 ```sql
 SELECT *

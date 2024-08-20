@@ -221,3 +221,7 @@ ORDER BY m;
 | sad   |
 | ok    |
 | happy |
+
+## Functions
+
+See [Enum Functions]({% link docs/sql/functions/enum.md %}).

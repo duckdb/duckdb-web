@@ -18,7 +18,8 @@ SELECT * FROM 'flights.csv';
 Use the `read_csv` function with custom options:
 
 ```sql
-SELECT * FROM read_csv('flights.csv',
+SELECT *
+FROM read_csv('flights.csv',
     delim = '|',
     header = true,
     columns = {
@@ -77,7 +78,7 @@ COPY ontime TO 'flights.csv' WITH (HEADER, DELIMITER '|');
 
 CSV loading, i.e., importing CSV files to the database, is a very common, and yet surprisingly tricky, task. While CSVs seem simple on the surface, there are a lot of inconsistencies found within CSV files that can make loading them a challenge. CSV files come in many different varieties, are often corrupt, and do not have a schema. The CSV reader needs to cope with all of these different situations.
 
-The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file using the [CSV sniffer]({% link _posts/2023-10-27-csv-sniffer.md %}). This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page]({% link docs/data/csv/auto_detection.md %}) for more information.
+The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}). This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page]({% link docs/data/csv/auto_detection.md %}) for more information.
 
 ## Parameters
 
@@ -113,10 +114,11 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `skip` | The number of lines at the top of the file to skip. | `BIGINT` | 0 |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here]({% link docs/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
-| `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name), rather than by position. | `BOOL` | `false` |
+| `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name), rather than by position. Note that using this option increases memory consumption. | `BOOL` | `false` |
 
 ### `auto_type_candidates` Details
 
+The `auto_type_candidates` option lets you specify the data types that should be considered by the CSV reader for [column data type detection]({% link docs/data/csv/auto_detection.md %}#type-detection).
 Usage example:
 
 ```sql
@@ -127,7 +129,7 @@ The default value for the `auto_type_candidates` option is `['SQLNULL', 'BOOLEAN
 
 ## CSV Functions
 
-The `read_csv` automatically attempts to figure out the correct configuration of the CSV reader using the [CSV sniffer]({% link _posts/2023-10-27-csv-sniffer.md %}). It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`. An example with the [`flights.csv`](/data/flights.csv) file:
+The `read_csv` automatically attempts to figure out the correct configuration of the CSV reader using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}). It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`. An example with the [`flights.csv`](/data/flights.csv) file:
 
 ```sql
 SELECT * FROM read_csv('flights.csv');
@@ -215,4 +217,14 @@ DuckDB supports reading erroneous CSV files. For details, see the [Reading Fault
 
 ## Limitations
 
-The CSV reader only supports input files using UTF-8 character encoding. For CSV files using different encodings, use e.g., the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert them to UTF-8.
+The CSV reader only supports input files using UTF-8 character encoding. For CSV files using different encodings, use e.g., the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert them to UTF-8. For example:
+
+```bash
+iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
+```
+
+## Order Preservation
+
+The CSV reader respects the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}).
+When `true` (the default), the order of the rows in the resultset returned by the CSV reader is the same as the order of the corresponding lines read from the file(s).
+When `false`, there is no guarantee that the order is preserved.

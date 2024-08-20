@@ -99,7 +99,7 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 <div class="qa-wrap" markdown="1">
 
-### How can I expand the DuckDB website?
+### How can I contribute to the DuckDB documentation?
 
 <div class="answer" markdown="1">
 
@@ -187,6 +187,20 @@ See the [documentation on concurrency]({% link docs/connect/concurrency.md %}#wr
 
 <div class="qa-wrap" markdown="1">
 
+### When is the next version going to be released?
+
+<div class="answer" markdown="1">
+
+Please check the [release calendar]({% link docs/dev/release_calendar.md %}) for the planned release date of the next stable version of DuckDB.
+
+</div>
+
+</div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
 ### Is there an official DuckDB Docker image available?
 
 <div class="answer" markdown="1">
@@ -208,6 +222,29 @@ Additionally to the DuckDB clients for Python, R, and other programming language
 Since version 0.10.0 (released in February 2024), DuckDB is backwards-compatible when reading database files, i.e., newer versions of DuckDB are always able to read database files created with an older version of DuckDB.
 DuckDB also provides partial forwards-compatibility on a best-effort basis. See the [storage page]({% link docs/internals/storage.md %}) for more details.
 Compatibility is also guaranteed between different DuckDB clients (e.g., Python and R): a database file created with one client can be read with other clients.
+
+</div>
+
+</div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
+### Is DuckDB intended for data science or data engineering workloads?
+
+<div class="answer" markdown="1">
+
+DuckDB was designed with both data science and data engineering workloads in mind.
+Therefore, you can use DuckDB's SQL syntax to be highly flexible, or very precise, depending on your needs.
+
+For data science users, who often run queries in an interactive fashion, DuckDB offers several mechanisms for quickly exploring data sets.
+For example, CSV files can be loaded by [auto-inferring their schema]({% link docs/data/csv/auto_detection.md %}) using `CREATE TABLE tbl AS FROM 'input.csv'`.
+Moreover, there numerous SQL shorthands known as [“friendly SQL”]({% link docs/sql/dialect/friendly_sql.md %}) for more concise expressions, e.g., the [`GROUP BY ALL` clause]({% link docs/sql/query_syntax/groupby.md %}#group-by-all).
+
+For data engineering use cases, DuckDB allows full control over the loading process, so it is possible to define the precise schema using a `CREATE TABLE tbl ⟨schema⟩` statement and populate it using a [`COPY` statement]({% link docs/sql/statements/copy.md %}) that specifies the CSV's dialect (delimiter, quotes, etc.).
+Most friendly SQL extensions are simple to rewrite to SQL queries that are fully compatible with PostgreSQL.
+For example, the `GROUP BY ALL` clause can be replaced with a `GROUP BY` clause and an explicit list of columns.
 
 </div>
 

@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: ODBC API on Linux
+github_repository: https://github.com/duckdb/duckdb-odbc
 ---
 
 ## Driver Manager

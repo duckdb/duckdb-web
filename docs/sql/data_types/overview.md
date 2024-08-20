@@ -17,10 +17,10 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `DATE` |   | calendar date (year, month day) |
 | `DECIMAL(prec, scale)` | `NUMERIC(prec, scale)` | fixed-precision number with the given width (precision) and scale, defaults to `prec = 18` and `scale = 3` |
 | `DOUBLE` | `FLOAT8`, | double precision floating-point number (8 bytes) |
+| `FLOAT` | `FLOAT4`, `REAL` | single precision floating-point number (4 bytes)|
 | `HUGEINT` | | signed sixteen-byte integer|
 | `INTEGER` | `INT4`, `INT`, `SIGNED` | signed four-byte integer |
 | `INTERVAL` |  | date / time delta |
-| `REAL` | `FLOAT4`, `FLOAT` | single precision floating-point number (4 bytes)|
 | `SMALLINT` | `INT2`, `SHORT` | signed two-byte integer|
 | `TIME` | | time of day (no time zone) |
 | `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ` | combination of time and date that uses the current time zone |
@@ -59,8 +59,8 @@ CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
 INSERT INTO students VALUES (1, 'Student 1');
 
 UPDATE tbl
-  SET j = [2]
-  WHERE i = 1;
+    SET j = [2]
+    WHERE i = 1;
 ```
 
 ```console
@@ -81,7 +81,7 @@ SELECT {'birds': ['duck', 'goose', 'heron'], 'aliens': NULL, 'amphibians': ['fro
 Struct with list of `MAP`s:
 
 ```sql
-SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
+SELECT {'test': [MAP([1, 5], [42.1, 45]), MAP([1, 5], [42.1, 45])]};
 ```
 
 A list of `UNION`s:

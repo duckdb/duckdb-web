@@ -16,6 +16,8 @@ body.search{
 	height: 100vh;
 	z-index: 9001;
 	background-color: rgba(0, 0, 0, 0.6);
+	-webkit-transition: opacity .4s;
+	-o-transition: opacity .4s;
 	transition: opacity .4s;
 	&.active{
 		opacity: 1;
@@ -28,7 +30,8 @@ body.search{
 		left: calc(50% - 280px);
 		width: 560px;
 		background-color: #F8F8F8;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+				box-sizing: border-box;
 		padding: 25px 30px 5px 30px;
 		/*overflow-y: scroll;*/
 		form{
@@ -44,6 +47,18 @@ body.search{
 				background-color: white;
 				border-radius: 90px;
 				border: 1px solid #E6E6E6;
+				&::-webkit-input-placeholder{
+					color: #BEBEBE;
+				}
+				&::-moz-placeholder{
+					color: #BEBEBE;
+				}
+				&:-ms-input-placeholder{
+					color: #BEBEBE;
+				}
+				&::-ms-input-placeholder{
+					color: #BEBEBE;
+				}
 				&::placeholder{
 					color: #BEBEBE;
 				}
@@ -171,8 +186,11 @@ input[type=submit] {
 	left: 0;
 	right: 0;
 	//display: none!important; /** For now hide the autocomplete list **/
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
 	gap: 5px;
 	padding: 12px;
 	border: 1px solid #E6E6E6;

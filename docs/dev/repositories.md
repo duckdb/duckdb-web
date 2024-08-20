@@ -17,6 +17,8 @@ Several components of DuckDB are maintained in separate repositories.
 
 * [`duckdb-java`](https://github.com/duckdb/duckdb-java): Java (JDBC) client
 * [`duckdb-node`](https://github.com/duckdb/duckdb-node): Node.js client
+* [`duckdb-node-neo`](https://github.com/duckdb/duckdb-node): Node.js client, second iteration (currently experimental)
+* [`duckdb-odbc`](https://github.com/duckdb/duckdb-odbc): ODBC client
 * [`duckdb-r`](https://github.com/duckdb/duckdb-r): R client
 * [`duckdb-rs`](https://github.com/duckdb/duckdb-rs): Rust client
 * [`duckdb-swift`](https://github.com/duckdb/duckdb-swift): Swift client
@@ -26,9 +28,10 @@ Several components of DuckDB are maintained in separate repositories.
 
 * [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb): dbt
 * [`duckdb_mysql`](https://github.com/duckdb/duckdb_mysql): MySQL connector
-* [`postgres_scanner`](https://github.com/duckdb/postgres_scanner): PostgresSQL connector
+* [`postgres_scanner`](https://github.com/duckdb/postgres_scanner): PostgreSQL connector
 * [`sqlite_scanner`](https://github.com/duckdb/sqlite_scanner): SQLite connector
 
 ## Extensions
 
-Extension repositories are linked in the [Official Extensions]({% link docs/extensions/official_extensions.md %}) page.
+* Core extension repositories are linked in the [Official Extensions page]({% link docs/extensions/core_extensions.md %})
+* Community extensions are built in the [Community Extensions repository](https://github.com/duckdb/community-extensions)

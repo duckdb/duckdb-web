@@ -14,7 +14,7 @@ Attach the database `file.db` with the alias inferred from the name (`file`):
 ATTACH 'file.db';
 ```
 
-Attach the database `file.db` with an explicit alias (`file.db`):
+Attach the database `file.db` with an explicit alias (`file_db`):
 
 ```sql
 ATTACH 'file.db' AS file_db;
@@ -38,7 +38,7 @@ Attach the database `file.db` if inferred database alias `file` does not yet exi
 ATTACH IF NOT EXISTS 'file.db';
 ```
 
-Attach the database `file.db` if explicit database alias `file.db` does not yet exist:
+Attach the database `file.db` if explicit database alias `file_db` does not yet exist:
 
 ```sql
 ATTACH IF NOT EXISTS 'file.db' AS file_db;
@@ -123,7 +123,7 @@ SELECT new_db.my_schema.my_table.col FROM new_db.my_schema.my_table;
 
 Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the *catalog search path*. The default catalog search path includes the system catalog, the temporary catalog and the initially attached database together with the `main` schema.
 
-Also note the rules on [identifiers and database names in particular]({% link docs/sql/keywords_and_identifiers.md %}#database-names).
+Also note the rules on [identifiers and database names in particular]({% link docs/sql/dialect/keywords_and_identifiers.md %}#database-names).
 
 ### Default Database and Schema
 

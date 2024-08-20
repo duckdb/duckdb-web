@@ -72,7 +72,7 @@ FROM bigdata ORDER BY col DESC LIMIT 3;
 ```sql
 CREATE TABLE sales(year INT, amount INT);
 INSERT INTO sales VALUES (2021, 42), (2022, 100), (2021, 42);
-PIVOT sales ON year USING SUM(amount);
+PIVOT sales ON year USING sum(amount);
 ```
 
 | 2021 | 2022 |

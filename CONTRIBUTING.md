@@ -1,20 +1,20 @@
 # Contributing
 
-- [Contributing](#contributing)
-  - [Code of Conduct](#code-of-conduct)
-  - [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
-  - [Eligibility](#eligibility)
-  - [Adding a New Page](#adding-a-new-page)
-  - [Style Guide](#style-guide)
-    - [Formatting](#formatting)
-    - [Headers](#headers)
-    - [SQL Style](#sql-style)
-    - [Python Style](#python-style)
-    - [Spelling](#spelling)
-  - [Example Code Snippets](#example-code-snippets)
-  - [Cross-References](#cross-references)
-  - [Archive and Generated Pages](#archive-and-generated-pages)
-  - [Notice](#notice)
+* [Contributing](#contributing)
+  * [Code of Conduct](#code-of-conduct)
+  * [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
+  * [Eligibility](#eligibility)
+  * [Adding a New Page](#adding-a-new-page)
+  * [Style Guide](#style-guide)
+    * [Formatting](#formatting)
+    * [Headers](#headers)
+    * [SQL Style](#sql-style)
+    * [Python Style](#python-style)
+    * [Spelling](#spelling)
+  * [Example Code Snippets](#example-code-snippets)
+  * [Cross-References](#cross-references)
+  * [Archive and Generated Pages](#archive-and-generated-pages)
+  * [Notice](#notice)
 
 ## Code of Conduct
 
@@ -62,6 +62,8 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
 * Do not hard-wrap lines in blocks of text.
 * Format code blocks with the appropriate language (e.g., \`\`\`sql CODE\`\`\`).
+* For a SQL code block to start with DuckDB's `D` prompt, use the `plsql` language tag (e.g., \`\`\`plsql CODE\`\`\`). This uses the same syntax highlighter as SQL, the only difference is the presence of the `D` prompt.
+* Code blocks using the `bash` language tag automatically receive `$` prompt when rendered. To typeset a Bash code block without a prompt, use the `batch` language tag (e.g., \`\`\`batch CODE\`\`\`). This uses the same syntax highlighter as Bash, the only difference is the absence of the prompt.
 * To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT\`\`\`.
 * To display error messages, use \`\`\`console ERROR MESSAGE\`\`\`.
 * Quoted blocks (lines starting with `>`) are rendered as [a colored box](https://duckdb.org/docs/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`.
@@ -70,7 +72,12 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
 * Narrow tables – that do not span horizontally across the entire page – should be prepended with an empty div that has the `narrow_table` class: `<div class="narrow_table"></div>`.
 * Do not introduce hard line breaks if possible. Therefore, avoid using the `<br/>` HTML tag and avoid [double spaces at the end of a line in Markdown](https://spec.commonmark.org/0.28/#hard-line-breaks).
+* Single and double quote characters (`'` and `"`) are not converted to smart quotation marks automatically. To insert these, use `“` `”` and `‘` `’`.
 * For unordered lists, use `*`. If the list has multiple levels, use **4 spaces** for indentation.
+
+> [!TIP]
+> In VS Code, you can configure the [Markdown All in One extension](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) to use asterisk as the default marker when generating a table of content for a page using the following setting in `settings.json`:
+> `"markdown.extension.toc.unorderedList.marker": "*"`
 
 ### Headers
 

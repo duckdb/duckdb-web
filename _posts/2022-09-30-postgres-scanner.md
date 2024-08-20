@@ -108,7 +108,7 @@ Of course a transactional database such as Postgres is expected to run transacti
 
 ### Projection and Selection Push-Down
 
-DuckDB's query optimizer moves selections (filters on rows) and projections (removal of unused columns) as low as possible in the query plan (push down), and even instructs the lowermost scan operators to perform those operations if they support them. For the Postgres scanner, we have implemented both push down variants. Projections are rather straightforward - we can immediately instruct Postgres to only retrieve the columns the query is using. This of course also reduces the number of bytes that need to be transferred, which speeds up queries. For selections, we construct a SQL filter expression from the pushed down filters. For example, if we run a query like `SELECT l_returnflag, l_linestatus FROM lineitem WHERE l_shipdate < '1998-09-02'` through the Postgres scanner, it would run the following queries:
+DuckDB's query optimizer moves selections (filters on rows) and projections (removal of unused columns) as low as possible in the query plan (push down), and even instructs the lowermost scan operators to perform those operations if they support them. For the Postgres scanner, we have implemented both push down variants. Projections are rather straightforward – we can immediately instruct Postgres to only retrieve the columns the query is using. This of course also reduces the number of bytes that need to be transferred, which speeds up queries. For selections, we construct a SQL filter expression from the pushed down filters. For example, if we run a query like `SELECT l_returnflag, l_linestatus FROM lineitem WHERE l_shipdate < '1998-09-02'` through the Postgres scanner, it would run the following queries:
 
 ```sql
 COPY (
@@ -165,7 +165,7 @@ The Postgres Scanner can also be used to combine live Postgres data with pre-cac
 ```sql
 INSERT INTO my_table_duckdb_cache
 SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'my_table') 
-WHERE incrementing_id_column > (SELECT MAX(incrementing_id_column) FROM my_table_duckdb_cache);
+WHERE incrementing_id_column > (SELECT max(incrementing_id_column) FROM my_table_duckdb_cache);
 
 SELECT * FROM my_table_duckdb_cache;
 ```

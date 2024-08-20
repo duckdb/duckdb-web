@@ -221,9 +221,35 @@ WHERE s1.time > s2.time
   AND s1.cost < s2.cost;
 ```
 
+### Natural Joins
+
+Natural joins join two tables based on attributes that share the same name. For example:
+
+```sql
+CREATE TABLE city_airport ("city" VARCHAR, "IATA" VARCHAR);
+CREATE TABLE airport_names ("IATA" VARCHAR, "airport name" VARCHAR);
+INSERT INTO city_airport VALUES ('Amsterdam', 'AMS'), ('Rotterdam', 'RTM');
+INSERT INTO airport_names VALUES ('AMS', 'Amsterdam Airport Schiphol'), ('RTM', 'Rotterdam The Hague Airport');
+```
+
+To join the tables on their shared [`IATA`](https://en.wikipedia.org/wiki/IATA_airport_code) attributes, run:
+
+```sql
+SELECT *
+FROM city_airport
+NATURAL JOIN airport_names;
+```
+
+This produces the following result:
+
+|   city    | ICAO |        airport name         |
+|-----------|------|-----------------------------|
+| Amsterdam | AMS  | Amsterdam Airport Schiphol  |
+| Rotterdam | RTM  | Rotterdam The Hague Airport |
+
 ### Semi and Anti Joins
 
-Semi joins return rows from the left table that have at least one match in the right table. Anti joins return rows from the left table that have _no_ matches in the right table. When using a semi or anti join the result will never have more rows than the left hand side table. Semi and anti joins provide the same logic as [(NOT) IN]({% link docs/sql/expressions/in.md %}) statements.
+Semi joins return rows from the left table that have at least one match in the right table. Anti joins return rows from the left table that have _no_ matches in the right table. When using a semi or anti join the result will never have more rows than the left hand side table. Semi and anti joins provide the same logic as [`(NOT) IN`]({% link docs/sql/expressions/in.md %}) statements.
 
 Return a list of cars that have a valid region:
 

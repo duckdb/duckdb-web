@@ -214,7 +214,7 @@ BEGIN;
 CREATE TABLE postgres.new_table(i INT);
 CREATE TABLE mysql.new_table(i INT);
 ```
-```text
+```console
 Error: Attempting to write to database "mysql" in a transaction that has
 already modified database "postgres" – a single transaction can only write
 to a single attached database.

@@ -289,7 +289,7 @@ Constraint Error: NOT NULL constraint failed: t1.val2
 
 ### Defining a Conflict Target
 
-A conflict target may be provided as `ON CONFLICT (confict_target)`. This is a group of columns that an index or uniqueness/key constraint is defined on. If the conflict target is omitted, or `PRIMARY KEY` constraint(s) on the table are targeted.
+A conflict target may be provided as `ON CONFLICT (conflict_target)`. This is a group of columns that an index or uniqueness/key constraint is defined on. If the conflict target is omitted, or `PRIMARY KEY` constraint(s) on the table are targeted.
 
 Specifying a conflict target is optional unless using a [`DO UPDATE`](#do-update-clause-upsert) and there are multiple unique/primary key constraints on the table.
 

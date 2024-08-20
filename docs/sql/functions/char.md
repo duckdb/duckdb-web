@@ -5,9 +5,11 @@ redirect_from:
   - docs/test/functions/char
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 ## Text Functions and Operators
 
-This section describes functions and operators for examining and manipulating string values.
+This section describes functions and operators for examining and manipulating [`STRING` values]({% link docs/sql/data_types/text.md %}).
 
 <!-- markdownlint-disable MD056 -->
 
@@ -59,9 +61,9 @@ This section describes functions and operators for examining and manipulating st
 | [`printf(format, parameters...)`](#printfformat-parameters) | Formats a `string` using [printf syntax](#printf-syntax). |
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/guides/file_formats/read_file.md %}#read_text) for more details. |
 | [`regexp_escape(string)`](#regexp_escapestring) | Escapes special patterns to turn `string` into a regular expression similarly to Python's [`re.escape` function](https://docs.python.org/3/library/re.html#re.escape). |
-| [`regexp_extract_all(string, regex[, group = 0])`](#regexp_extract_allstring-regex-group--0) | Split the `string` along the `regex` and extract all occurrences of `group`. |
+| [`regexp_extract(string, pattern[, group = 0])`](#regexp_extractstring-pattern-group--0) | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `group` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %}#using-regexp_extract)). |
 | [`regexp_extract(string, pattern, name_list)`](#regexp_extractstring-pattern-name_list) | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %}#using-regexp_extract)). |
-| [`regexp_extract(string, pattern[, idx])`](#regexp_extractstring-pattern-idx) | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `idx` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %}#using-regexp_extract)). |
+| [`regexp_extract_all(string, regex[, group = 0])`](#regexp_extract_allstring-regex-group--0) | Split the `string` along the `regex` and extract all occurrences of `group`. |
 | [`regexp_full_match(string, regex)`](#regexp_full_matchstring-regex) | Returns `true` if the entire `string` matches the `regex` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})). |
 | [`regexp_matches(string, pattern)`](#regexp_matchesstring-pattern) | Returns `true` if  `string` contains the regexp `pattern`, `false` otherwise (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %}#using-regexp_matches)). |
 | [`regexp_replace(string, pattern, replacement)`](#regexp_replacestring-pattern-replacement) | If `string` contains the regexp `pattern`, replaces the matching part with `replacement` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %}#using-regexp_replace)). |
@@ -94,7 +96,7 @@ This section describes functions and operators for examining and manipulating st
 
 <!-- markdownlint-enable MD056 -->
 
-### `string ^@ search_string`
+#### `string ^@ search_string`
 
 <div class="nostroke_table"></div>
 
@@ -103,7 +105,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `true` |
 | **Alias** | `starts_with` |
 
-### `string || string`
+#### `string || string`
 
 <div class="nostroke_table"></div>
 
@@ -112,7 +114,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `DuckDB` |
 | **Alias** | `concat` |
 
-### `string[index]`
+#### `string[index]`
 
 <div class="nostroke_table"></div>
 
@@ -121,7 +123,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `k` |
 | **Alias** | `array_extract` |
 
-### `string[begin:end]`
+#### `string[begin:end]`
 
 <div class="nostroke_table"></div>
 
@@ -130,7 +132,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `Duck` |
 | **Alias** | `array_slice` |
 
-### `string LIKE target`
+#### `string LIKE target`
 
 <div class="nostroke_table"></div>
 
@@ -138,7 +140,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `'hello' LIKE '%lo'` |
 | **Result** | `true` |
 
-### `string SIMILAR TO regex`
+#### `string SIMILAR TO regex`
 
 <div class="nostroke_table"></div>
 
@@ -146,7 +148,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `'hello' SIMILAR TO 'l+'` |
 | **Result** | `false` |
 
-### `array_extract(list, index)`
+#### `array_extract(list, index)`
 
 <div class="nostroke_table"></div>
 
@@ -155,7 +157,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `u` |
 | **Aliases** | `list_element`, `list_extract` |
 
-### `array_slice(list, begin, end)`
+#### `array_slice(list, begin, end)`
 
 <div class="nostroke_table"></div>
 
@@ -167,7 +169,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example 3** | `array_slice('DuckDB', 0, -3)` |
 | **Result** | `Duck` |
 
-### `ascii(string)`
+#### `ascii(string)`
 
 <div class="nostroke_table"></div>
 
@@ -175,7 +177,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `ascii('Ω')` |
 | **Result** | `937` |
 
-### `bar(x, min, max[, width])`
+#### `bar(x, min, max[, width])`
 
 <div class="nostroke_table"></div>
 
@@ -183,7 +185,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `bar(5, 0, 20, 10)` |
 | **Result** | `██▌` |
 
-### `bit_length(string)`
+#### `bit_length(string)`
 
 <div class="nostroke_table"></div>
 
@@ -191,7 +193,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `bit_length('abc')` |
 | **Result** | `24` |
 
-### `chr(x)`
+#### `chr(x)`
 
 <div class="nostroke_table"></div>
 
@@ -199,7 +201,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `chr(65)` |
 | **Result** | A |
 
-### `concat_ws(separator, string, ...)`
+#### `concat_ws(separator, string, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -207,7 +209,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `concat_ws(', ', 'Banana', 'Apple', 'Melon')` |
 | **Result** | `Banana, Apple, Melon` |
 
-### `concat(string, ...)`
+#### `concat(string, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -215,7 +217,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `concat('Hello', ' ', 'World')` |
 | **Result** | `Hello World` |
 
-### `contains(string, search_string)`
+#### `contains(string, search_string)`
 
 <div class="nostroke_table"></div>
 
@@ -223,7 +225,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `contains('abc', 'a')` |
 | **Result** | `true` |
 
-### `ends_with(string, search_string)`
+#### `ends_with(string, search_string)`
 
 <div class="nostroke_table"></div>
 
@@ -232,7 +234,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `true` |
 | **Alias** | `suffix` |
 
-### `format_bytes(bytes)`
+#### `format_bytes(bytes)`
 
 <div class="nostroke_table"></div>
 
@@ -240,7 +242,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `format_bytes(16384)` |
 | **Result** | `16.0 KiB` |
 
-### `format(format, parameters, ...)`
+#### `format(format, parameters, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -248,7 +250,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` |
 | **Result** | `Benchmark "CSV" took 42 seconds` |
 
-### `from_base64(string)`
+#### `from_base64(string)`
 
 <div class="nostroke_table"></div>
 
@@ -256,7 +258,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `from_base64('QQ==')` |
 | **Result** | `'A'` |
 
-### `greatest(x1, x2, ...)`
+#### `greatest(x1, x2, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -264,7 +266,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `greatest('abc', 'bcd', 'cde', 'EFG')` |
 | **Result** | `'cde'` |
 
-### `hash(value)`
+#### `hash(value)`
 
 <div class="nostroke_table"></div>
 
@@ -272,7 +274,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `hash('🦆')` |
 | **Result** | `2595805878642663834` |
 
-### `ilike_escape(string, like_specifier, escape_character)`
+#### `ilike_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -280,7 +282,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `ilike_escape('A%c', 'a$%C', '$')` |
 | **Result** | `true` |
 
-### `instr(string, search_string)`
+#### `instr(string, search_string)`
 
 <div class="nostroke_table"></div>
 
@@ -288,7 +290,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `instr('test test', 'es')` |
 | **Result** | 2 |
 
-### `least(x1, x2, ...)`
+#### `least(x1, x2, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -296,7 +298,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `least('abc', 'BCD', 'cde', 'EFG')` |
 | **Result** | `'BCD'` |
 
-### `left_grapheme(string, count)`
+#### `left_grapheme(string, count)`
 
 <div class="nostroke_table"></div>
 
@@ -304,7 +306,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `left_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)` |
 | **Result** | `🤦🏼‍♂️` |
 
-### `left(string, count)`
+#### `left(string, count)`
 
 <div class="nostroke_table"></div>
 
@@ -312,7 +314,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `left('Hello🦆', 2)` |
 | **Result** | `He` |
 
-### `length_grapheme(string)`
+#### `length_grapheme(string)`
 
 <div class="nostroke_table"></div>
 
@@ -320,7 +322,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `length_grapheme('🤦🏼‍♂️🤦🏽‍♀️')` |
 | **Result** | `2` |
 
-### `length(string)`
+#### `length(string)`
 
 <div class="nostroke_table"></div>
 
@@ -328,7 +330,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `length('Hello🦆')` |
 | **Result** | `6` |
 
-### `like_escape(string, like_specifier, escape_character)`
+#### `like_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -336,7 +338,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `like_escape('a%c', 'a$%c', '$')` |
 | **Result** | `true` |
 
-### `lower(string)`
+#### `lower(string)`
 
 <div class="nostroke_table"></div>
 
@@ -345,7 +347,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `hello` |
 | **Alias** | `lcase` |
 
-### `lpad(string, count, character)`
+#### `lpad(string, count, character)`
 
 <div class="nostroke_table"></div>
 
@@ -353,7 +355,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `lpad('hello', 8, '>')` |
 | **Result** | `>>>hello` |
 
-### `ltrim(string, characters)`
+#### `ltrim(string, characters)`
 
 <div class="nostroke_table"></div>
 
@@ -361,7 +363,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `ltrim('>>>>test<<', '><')` |
 | **Result** | `test<<` |
 
-### `ltrim(string)`
+#### `ltrim(string)`
 
 <div class="nostroke_table"></div>
 
@@ -369,7 +371,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `ltrim('␣␣␣␣test␣␣')` |
 | **Result** | `test␣␣` |
 
-### `md5(value)`
+#### `md5(value)`
 
 <div class="nostroke_table"></div>
 
@@ -377,7 +379,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `md5('123')` |
 | **Result** | `202cb962ac59075b964b07152d234b70` |
 
-### `nfc_normalize(string)`
+#### `nfc_normalize(string)`
 
 <div class="nostroke_table"></div>
 
@@ -385,7 +387,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `nfc_normalize('ardèch')` |
 | **Result** | `ardèch` |
 
-### `not_ilike_escape(string, like_specifier, escape_character)`
+#### `not_ilike_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -393,7 +395,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `not_ilike_escape('A%c', 'a$%C', '$')` |
 | **Result** | `false` |
 
-### `not_like_escape(string, like_specifier, escape_character)`
+#### `not_like_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -401,7 +403,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `not_like_escape('a%c', 'a$%c', '$')` |
 | **Result** | `false` |
 
-### `ord(string)`
+#### `ord(string)`
 
 <div class="nostroke_table"></div>
 
@@ -409,7 +411,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `ord('ü')` |
 | **Result** | `252` |
 
-### `parse_dirname(path, separator)`
+#### `parse_dirname(path, separator)`
 
 <div class="nostroke_table"></div>
 
@@ -417,7 +419,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `parse_dirname('path/to/file.csv', 'system')` |
 | **Result** | `path` |
 
-### `parse_dirpath(path, separator)`
+#### `parse_dirpath(path, separator)`
 
 <div class="nostroke_table"></div>
 
@@ -425,7 +427,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `parse_dirpath('/path/to/file.csv', 'forward_slash')` |
 | **Result** | `/path/to` |
 
-### `parse_filename(path, trim_extension, separator)`
+#### `parse_filename(path, trim_extension, separator)`
 
 <div class="nostroke_table"></div>
 
@@ -433,7 +435,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `parse_filename('path/to/file.csv', true, 'system')` |
 | **Result** | `file` |
 
-### `parse_path(path, separator)`
+#### `parse_path(path, separator)`
 
 <div class="nostroke_table"></div>
 
@@ -441,7 +443,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `parse_path('/path/to/file.csv', 'system')` |
 | **Result** | `[/, path, to, file.csv]` |
 
-### `position(search_string IN string)`
+#### `position(search_string IN string)`
 
 <div class="nostroke_table"></div>
 
@@ -449,7 +451,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `position('b' IN 'abc')` |
 | **Result** | `2` |
 
-### `printf(format, parameters...)`
+#### `printf(format, parameters...)`
 
 <div class="nostroke_table"></div>
 
@@ -457,7 +459,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)` |
 | **Result** | `Benchmark "CSV" took 42 seconds` |
 
-### `read_text(source)`
+#### `read_text(source)`
 
 <div class="nostroke_table"></div>
 
@@ -465,7 +467,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `read_text('hello.txt')` |
 | **Result** | `hello\n` |
 
-### `regexp_escape(string)`
+#### `regexp_escape(string)`
 
 <div class="nostroke_table"></div>
 
@@ -473,15 +475,15 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `regexp_escape('http://d.org')` |
 | **Result** | `http\:\/\/d\.org` |
 
-### `regexp_extract_all(string, regex[, group = 0])`
+#### `regexp_extract(string, pattern[, group = 0])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Split the `string` along the `regex` and extract all occurrences of `group`. |
-| **Example** | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` |
-| **Result** | `[hello, world]` |
+| **Description** | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `group` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %}#using-regexp_extract)). |
+| **Example** | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` |
+| **Result** | `hello` |
 
-### `regexp_extract(string, pattern, name_list)`
+#### `regexp_extract(string, pattern, name_list)`
 
 <div class="nostroke_table"></div>
 
@@ -489,15 +491,15 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
 
-### `regexp_extract(string, pattern[, idx])`
+#### `regexp_extract_all(string, regex[, group = 0])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `idx` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %}#using-regexp_extract)). |
-| **Example** | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` |
-| **Result** | `hello` |
+| **Description** | Split the `string` along the `regex` and extract all occurrences of `group`. |
+| **Example** | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` |
+| **Result** | `[hello, world]` |
 
-### `regexp_full_match(string, regex)`
+#### `regexp_full_match(string, regex)`
 
 <div class="nostroke_table"></div>
 
@@ -505,7 +507,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `regexp_full_match('anabanana', '(an)')` |
 | **Result** | `false` |
 
-### `regexp_matches(string, pattern)`
+#### `regexp_matches(string, pattern)`
 
 <div class="nostroke_table"></div>
 
@@ -513,7 +515,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `regexp_matches('anabanana', '(an)')` |
 | **Result** | `true` |
 
-### `regexp_replace(string, pattern, replacement)`
+#### `regexp_replace(string, pattern, replacement)`
 
 <div class="nostroke_table"></div>
 
@@ -521,7 +523,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
-### `regexp_split_to_array(string, regex)`
+#### `regexp_split_to_array(string, regex)`
 
 <div class="nostroke_table"></div>
 
@@ -530,7 +532,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `string_split_regex`, `str_split_regex` |
 
-### `regexp_split_to_table(string, regex)`
+#### `regexp_split_to_table(string, regex)`
 
 <div class="nostroke_table"></div>
 
@@ -538,7 +540,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `regexp_split_to_table('hello world; 42', ';? ')` |
 | **Result** | Two rows: `'hello'`, `'world'` |
 
-### `repeat(string, count)`
+#### `repeat(string, count)`
 
 <div class="nostroke_table"></div>
 
@@ -546,7 +548,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `repeat('A', 5)` |
 | **Result** | `AAAAA` |
 
-### `replace(string, source, target)`
+#### `replace(string, source, target)`
 
 <div class="nostroke_table"></div>
 
@@ -554,7 +556,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `replace('hello', 'l', '-')` |
 | **Result** | `he--o` |
 
-### `reverse(string)`
+#### `reverse(string)`
 
 <div class="nostroke_table"></div>
 
@@ -562,7 +564,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `reverse('hello')` |
 | **Result** | `olleh` |
 
-### `right_grapheme(string, count)`
+#### `right_grapheme(string, count)`
 
 <div class="nostroke_table"></div>
 
@@ -570,7 +572,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `right_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)` |
 | **Result** | `🤦🏽‍♀️` |
 
-### `right(string, count)`
+#### `right(string, count)`
 
 <div class="nostroke_table"></div>
 
@@ -578,7 +580,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `right('Hello🦆', 3)` |
 | **Result** | `lo🦆` |
 
-### `rpad(string, count, character)`
+#### `rpad(string, count, character)`
 
 <div class="nostroke_table"></div>
 
@@ -586,7 +588,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `rpad('hello', 10, '<')` |
 | **Result** | `hello<<<<<` |
 
-### `rtrim(string, characters)`
+#### `rtrim(string, characters)`
 
 <div class="nostroke_table"></div>
 
@@ -594,7 +596,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `rtrim('>>>>test<<', '><')` |
 | **Result** | `>>>>test` |
 
-### `rtrim(string)`
+#### `rtrim(string)`
 
 <div class="nostroke_table"></div>
 
@@ -602,7 +604,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `rtrim('␣␣␣␣test␣␣')` |
 | **Result** | `␣␣␣␣test` |
 
-### `sha256(value)`
+#### `sha256(value)`
 
 <div class="nostroke_table"></div>
 
@@ -610,7 +612,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `sha256('🦆')` |
 | **Result** | `d7a5c5e0d1d94c32218539e7e47d4ba9c3c7b77d61332fb60d633dde89e473fb` |
 
-### `split_part(string, separator, index)`
+#### `split_part(string, separator, index)`
 
 <div class="nostroke_table"></div>
 
@@ -618,7 +620,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `split_part('a;b;c', ';', 2)` |
 | **Result** | `b` |
 
-### `starts_with(string, search_string)`
+#### `starts_with(string, search_string)`
 
 <div class="nostroke_table"></div>
 
@@ -626,7 +628,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `starts_with('abc', 'a')` |
 | **Result** | `true` |
 
-### `str_split_regex(string, regex)`
+#### `str_split_regex(string, regex)`
 
 <div class="nostroke_table"></div>
 
@@ -635,7 +637,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `string_split_regex`, `regexp_split_to_array` |
 
-### `string_split_regex(string, regex)`
+#### `string_split_regex(string, regex)`
 
 <div class="nostroke_table"></div>
 
@@ -644,7 +646,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `str_split_regex`, `regexp_split_to_array` |
 
-### `string_split(string, separator)`
+#### `string_split(string, separator)`
 
 <div class="nostroke_table"></div>
 
@@ -653,7 +655,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `['hello', 'world']` |
 | **Aliases** | `str_split`, `string_to_array` |
 
-### `strip_accents(string)`
+#### `strip_accents(string)`
 
 <div class="nostroke_table"></div>
 
@@ -661,7 +663,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `strip_accents('mühleisen')` |
 | **Result** | `muhleisen` |
 
-### `strlen(string)`
+#### `strlen(string)`
 
 <div class="nostroke_table"></div>
 
@@ -669,7 +671,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `strlen('🦆')` |
 | **Result** | `4` |
 
-### `strpos(string, search_string)`
+#### `strpos(string, search_string)`
 
 <div class="nostroke_table"></div>
 
@@ -678,7 +680,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | 2 |
 | **Alias** | `instr` |
 
-### `substring(string, start, length)`
+#### `substring(string, start, length)`
 
 <div class="nostroke_table"></div>
 
@@ -687,7 +689,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `el` |
 | **Alias** | `substr` |
 
-### `substring_grapheme(string, start, length)`
+#### `substring_grapheme(string, start, length)`
 
 <div class="nostroke_table"></div>
 
@@ -695,7 +697,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3, 2)` |
 | **Result** | `🤦🏽‍♀️🦆` |
 
-### `to_base64(blob)`
+#### `to_base64(blob)`
 
 <div class="nostroke_table"></div>
 
@@ -704,7 +706,7 @@ This section describes functions and operators for examining and manipulating st
 | **Result** | `QQ==` |
 | **Alias** | `base64` |
 
-### `trim(string, characters)`
+#### `trim(string, characters)`
 
 <div class="nostroke_table"></div>
 
@@ -712,7 +714,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `trim('>>>>test<<', '><')` |
 | **Result** | `test` |
 
-### `trim(string)`
+#### `trim(string)`
 
 <div class="nostroke_table"></div>
 
@@ -720,7 +722,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `trim('    test  ')` |
 | **Result** | `test` |
 
-### `unicode(string)`
+#### `unicode(string)`
 
 <div class="nostroke_table"></div>
 
@@ -728,7 +730,7 @@ This section describes functions and operators for examining and manipulating st
 | **Example** | `[unicode('âbcd'), unicode('â'), unicode(''), unicode(NULL)]` |
 | **Result** | `[226, 226, -1, NULL]` |
 
-### `upper(string)`
+#### `upper(string)`
 
 <div class="nostroke_table"></div>
 
@@ -752,7 +754,7 @@ These functions are used to measure the similarity of two strings using various 
 | [`levenshtein(s1, s2)`](#levenshteins1-s2) | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | [`mismatches(s1, s2)`](#mismatchess1-s2) | Alias for `hamming(s1, s2)`. The number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
 
-### `damerau_levenshtein(s1, s2)`
+#### `damerau_levenshtein(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -760,7 +762,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `damerau_levenshtein('duckdb', 'udckbd')` |
 | **Result** | `2` |
 
-### `editdist3(s1, s2)`
+#### `editdist3(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -768,7 +770,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `editdist3('duck', 'db')` |
 | **Result** | `3` |
 
-### `hamming(s1, s2)`
+#### `hamming(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -776,7 +778,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `hamming('duck', 'luck')` |
 | **Result** | `1` |
 
-### `jaccard(s1, s2)`
+#### `jaccard(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -784,7 +786,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `jaccard('duck', 'luck')` |
 | **Result** | `0.6` |
 
-### `jaro_similarity(s1, s2)`
+#### `jaro_similarity(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -792,7 +794,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `jaro_similarity('duck', 'duckdb')` |
 | **Result** | `0.88` |
 
-### `jaro_winkler_similarity(s1, s2)`
+#### `jaro_winkler_similarity(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -800,7 +802,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `jaro_winkler_similarity('duck', 'duckdb')` |
 | **Result** | `0.93` |
 
-### `levenshtein(s1, s2)`
+#### `levenshtein(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -808,7 +810,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `levenshtein('duck', 'db')` |
 | **Result** | `3` |
 
-### `mismatches(s1, s2)`
+#### `mismatches(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -820,7 +822,7 @@ These functions are used to measure the similarity of two strings using various 
 
 ### `fmt` Syntax
 
-The `format(format, parameters...)` function formats strings, loosely following the syntax of the [{fmt} open-source formatting library](https://fmt.dev/latest/syntax.html).
+The `format(format, parameters...)` function formats strings, loosely following the syntax of the [{fmt} open-source formatting library](https://fmt.dev/latest/syntax/).
 
 Format without additional parameters:
 

@@ -8,7 +8,7 @@ title: S3 Iceberg Import
 
 ## Prerequisites
 
-To load an Iceberg file from S3, both the [`httpfs`](../../extensions/httpfs) and [`iceberg`](../../extensions/iceberg) extensions are required. They can be installed use the `INSTALL` SQL command. The extensions only need to be installed once.
+To load an Iceberg file from S3, both the [`httpfs`](../../extensions/httpfs) and [`iceberg`](../../extensions/iceberg) extensions are required. They can be installed using the `INSTALL` SQL command. The extensions only need to be installed once.
 
 ```sql
 INSTALL httpfs;

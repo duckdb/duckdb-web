@@ -160,6 +160,10 @@
                   "url": "data_chunk"
                 },
                 {
+                  "page": "Vectors",
+                  "url": "vector"
+                },
+                {
                   "page": "Values",
                   "url": "value"
                 },
@@ -384,7 +388,7 @@
             {
               "page": "Pragmas",
               "url": "pragmas"
-            },          
+            },
             {
               "page": "Secrets Manager",
               "url": "secrets_manager"
@@ -744,6 +748,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Aggregate Functions",
+                  "url": "aggregates"
+                },
+                {
                   "page": "Array Functions",
                   "url": "array"
                 },
@@ -780,6 +788,14 @@
                   "url": "lambda"
                 },
                 {
+                  "page": "List Functions",
+                  "url": "list"
+                },
+                {
+                  "page": "Map Functions",
+                  "url": "map"
+                },
+                {
                   "page": "Nested Functions",
                   "url": "nested"
                 },
@@ -794,6 +810,10 @@
                 {
                   "page": "Regular Expressions",
                   "url": "regular_expressions"
+                },
+                {
+                  "page": "Struct Functions",
+                  "url": "struct"
                 },
                 {
                   "page": "Text Functions",
@@ -812,14 +832,18 @@
                   "url": "timestamptz"
                 },
                 {
+                  "page": "Union Functions",
+                  "url": "union"
+                },
+                {
                   "page": "Utility Functions",
                   "url": "utility"
+                },
+                {
+                  "page": "Window Functions",
+                  "url": "window_functions"
                 }
               ]
-            },
-            {
-              "page": "Aggregate Functions",
-              "url": "aggregates"
             },
             {
               "page": "Constraints",
@@ -830,28 +854,48 @@
               "url": "indexes"
             },
             {
-              "page": "Information Schema",
-              "url": "information_schema"
+              "page": "Meta Queries",
+              "slug": "meta",
+              "subsubfolderitems": [
+                {
+                  "page": "Information Schema",
+                  "url": "information_schema"
+                },
+                {
+                  "page": "Metadata Functions",
+                  "url": "duckdb_table_functions"
+                }
+              ]
             },
             {
-              "page": "Metadata Functions",
-              "url": "duckdb_table_functions"
-            },
-            {
-              "page": "Keywords and Identifiers",
-              "url": "keywords_and_identifiers"
+              "page": "DuckDB's SQL Dialect",
+              "slug": "dialect",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Friendly SQL",
+                  "url": "friendly_sql"
+                },
+                {
+                  "page": "Keywords and Identifiers",
+                  "url": "keywords_and_identifiers"
+                },
+                {
+                  "page": "Order Preservation",
+                  "url": "order_preservation"
+                },
+                {
+                  "page": "PostgreSQL Compatibility",
+                  "url": "postgresql_compatibility"
+                }
+              ]
             },
             {
               "page": "Samples",
               "url": "samples"
-            },
-            {
-              "page": "Window Functions",
-              "url": "window_functions"
-            },
-            {
-              "page": "PostgreSQL Compatibility",
-              "url": "postgresql_compatibility"
             }
           ]
         },
@@ -864,8 +908,12 @@
               "url": "overview"
             },
             {
-              "page": "Official Extensions",
-              "url": "official_extensions"
+              "page": "Core Extensions",
+              "url": "core_extensions"
+            },
+            {
+              "page": "Community Extensions",
+              "url": "community_extensions"
             },
             {
               "page": "Working with Extensions",
@@ -1286,10 +1334,6 @@
               "slug": "sql_features",
               "subsubfolderitems": [
                 {
-                  "page": "Friendly SQL",
-                  "url": "friendly_sql"
-                },
-                {
                   "page": "AsOf Join",
                   "url": "asof_join"
                 },
@@ -1320,6 +1364,44 @@
           ]
         },
         {
+          "page": "Operations Manual",
+          "slug": "operations_manual",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "DuckDB's Footprint",
+              "slug": "footprint_of_duckdb",
+              "subsubfolderitems": [
+                {
+                "page": "Files Created by DuckDB",
+                "url": "files_created_by_duckdb"
+                },
+                {
+                  "page": "Gitignore for DuckDB",
+                  "url": "gitignore_for_duckdb"
+                }
+              ]
+            },
+            {
+              "page": "Securing DuckDB",
+              "slug": "securing_duckdb",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Securing Extensions",
+                  "url": "securing_extensions"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "page": "Development",
           "slug": "dev",
           "subfolderitems": [
@@ -1331,7 +1413,7 @@
               "page": "Testing",
               "slug": "sqllogictest",
               "subsubfolderitems": [
-                  {
+                {
                   "page": "Overview",
                   "url": "overview"
                 },
@@ -1430,7 +1512,7 @@
               "url": "vector"
             }
           ]
-        }    
+        }
       ]
     }
   ]

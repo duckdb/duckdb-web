@@ -11,10 +11,15 @@
 	font-family: $fontMonoItalic;
 }
 
-// keywords and properties
-.highlight :is(.k, .kc, .kd, .kn, .kr, .kt, .kv, .py){
+// keywords
+.highlight :is(.k, .kc, .kd, .kn, .kr, .kt, .kv){
 	color: #0098dd;
 	font-family: $fontMonoBold;
+}
+
+// properties
+.highlight :is(.py) {
+	color: #a05a48;
 }
 
 // numbers
@@ -103,6 +108,7 @@ th .k {
 	color: #ce9887;
 }
 
+html.darkmode, 
 .dark{
 	// comments
 	.highlight :is(.c, .ch, .cm, .cp, .cpf, .cs, .c1){
@@ -115,7 +121,12 @@ th .k {
 		color: #10b1fe;
 		font-family: $fontMonoBold;
 	}
-	
+
+	// properties
+	.highlight :is(.py){
+		color: #ce9887;
+	}
+
 	// numbers
 	.highlight :is(.m, .mf, .mh, .mi, .mo, .il){
 		color: #ff78f8;

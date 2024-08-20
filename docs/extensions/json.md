@@ -241,6 +241,8 @@ Example usage:
 SELECT * FROM read_json('my_file1.json', columns = {duck: 'INTEGER'});
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | duck |
 |:---|
 | 42 |
@@ -255,7 +257,7 @@ FROM read_json(
     );
 ```
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | duck | goose | swan |
 |:---|:---|:---|
@@ -265,11 +267,11 @@ FROM read_json(
 DuckDB can automatically detect the types like so:
 
 ```sql
-SELECT goose, duck FROM read_json_auto('*.json.gz');
+SELECT goose, duck FROM read_json('*.json.gz');
 SELECT goose, duck FROM '*.json.gz'; -- equivalent
 ```
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | goose | duck |
 |:---|:---|
@@ -307,7 +309,7 @@ Can be queried exactly the same as a JSON file that contains `'unstructured'` JS
 
 Both can be read as the table:
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | duck | goose |
 |:---|:---|
@@ -325,7 +327,7 @@ The `records` parameter specifies whether the JSON contains records that should 
 
 Results in two columns:
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | duck | goose |
 |:---|:---|
@@ -334,14 +336,14 @@ Results in two columns:
 
 You can read the same file with `records` set to `'false'`, to get a single column, which is a `STRUCT` containing the data:
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | json |
 |:---|
 | {'duck': 42, 'goose': [1,2,3]} |
 | {'duck': 43, 'goose': [4,5,6]} |
 
-For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post]({% link _posts/2023-03-03-json.md %}).
+For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post]({% post_url 2023-03-03-json %}).
 
 ## JSON Import/Export
 
@@ -591,6 +593,8 @@ SELECT
 FROM example;
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 |   family   |           species            |
 |------------|------------------------------|
 | "anatidae" | ["duck","goose","swan",null] |
@@ -602,8 +606,9 @@ WITH extracted AS (
     SELECT json_extract(j, ['family', 'species']) AS extracted_list
     FROM example
 )
-SELECT extracted_list[1] AS family,
-       extracted_list[2] AS species
+SELECT
+    extracted_list[1] AS family,
+    extracted_list[2] AS species
 FROM extracted;
 ```
 
@@ -619,7 +624,7 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 | `json_array_length(json[, path])` | Return the number of elements in the JSON array `json`, or `0` if it is not a JSON array. If `path` is specified, return the number of elements in the JSON array at the given `path`. If `path` is a `LIST`, the result will be `LIST` of array lengths. |
 | `json_contains(json_haystack, json_needle)` | Returns `true` if `json_needle` is contained in `json_haystack`. Both parameters are of JSON type, but `json_needle` can also be a numeric value or a string, however the string must be wrapped in double quotes. |
 | `json_keys(json[, path])` | Returns the keys of `json` as a `LIST` of `VARCHAR`, if `json` is a JSON object. If `path` is specified, return the keys of the JSON object at the given `path`. If `path` is a `LIST`, the result will be `LIST` of `LIST` of `VARCHAR`. |
-| `json_structure(json)` | Return the structure of `json`. Defaults to `JSON` the structure is inconsistent (e.g., incompatible types in an array). |
+| `json_structure(json)` | Return the structure of `json`. Defaults to `JSON` if the structure is inconsistent (e.g., incompatible types in an array). |
 | `json_type(json[, path])` | Return the type of the supplied `json`, which is one of `ARRAY`, `BIGINT`, `BOOLEAN`, `DOUBLE`, `OBJECT`, `UBIGINT`, `VARCHAR`, and `NULL`. If `path` is specified, return the type of the element at the given `path`. If `path` is a `LIST`, the result will be `LIST` of types. |
 | `json_valid(json)` | Return whether `json` is valid JSON. |
 | `json(json)` | Parse and minify `json`. |
@@ -1014,7 +1019,7 @@ Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALL
 The following query returns true for all fields:
 
 ```sql
-SELECT 
+SELECT
     a != b, -- Space is part of physical JSON content. Despite equal logical content, values are treated as not equal.
     c != d, -- Same.
     c[0] = d[0], -- Equality because space was removed from physical content of fields:
@@ -1028,6 +1033,8 @@ FROM (
         '[[ ]]'::JSON AS d
     );
 ```
+
+<div class="narrow_table monospace_table"></div>
 
 | (a != b) | (c != d) | (c[0] = d[0]) | (a = c[0]) | (b != c[0]) |
 |----------|----------|---------------|------------|-------------|
