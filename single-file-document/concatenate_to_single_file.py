@@ -22,7 +22,7 @@ def linked_path_to_label(link_path):
 
     # cleanup extension, use colons (as labels cannot use slashes)
     label = link_path.replace("/", ":")
-    return f"#{label}"
+    return label
 
 
 def reduce_clutter_in_doc(doc_body):
