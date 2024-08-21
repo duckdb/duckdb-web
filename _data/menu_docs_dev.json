@@ -11,7 +11,7 @@
       "mainfolderitems": [
         {
           "page": "Overview",
-          "url": "index"
+          "url": "overview"
         },
         {
           "page": "Connect",
@@ -374,24 +374,6 @@
                   "url": "configuration"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "page": "Configuration",
-          "slug": "configuration",
-          "subfolderitems": [
-            {
-              "page": "Overview",
-              "url": "overview"
-            },
-            {
-              "page": "Pragmas",
-              "url": "pragmas"
-            },
-            {
-              "page": "Secrets Manager",
-              "url": "secrets_manager"
             }
           ]
         },
@@ -896,6 +878,24 @@
             {
               "page": "Samples",
               "url": "samples"
+            }
+          ]
+        },
+        {
+          "page": "Configuration",
+          "slug": "configuration",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "Pragmas",
+              "url": "pragmas"
+            },
+            {
+              "page": "Secrets Manager",
+              "url": "secrets_manager"
             }
           ]
         },
