@@ -2,7 +2,7 @@
   "sidemenu": [
     {
       "page": "Sitemap",
-      "url": "/docs"
+      "url": "/docs/sitemap"
     },
     {
       "page": "Why DuckDB",
