@@ -14,8 +14,8 @@ Welcome to the DuckDB documentation!
     * [WebAssembly]({% link docs/api/wasm/overview.md %})
     * see all [client APIs]({% link docs/api/overview.md %})
 * SQL
-    * [SQL introduction]({% link docs/sql/introduction.md %})
-    * [SQL statements]({% link docs/sql/statements/overview.md %})
+    * [Introduction]({% link docs/sql/introduction.md %})
+    * [Statements]({% link docs/sql/statements/overview.md %})
 * [Guides]({% link docs/guides/overview.md %})
 
 You can also [browse the DuckDB documentation offline]({% link docs/guides/offline-copy.md %}).
