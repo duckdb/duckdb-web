@@ -10,8 +10,8 @@
       "slug": "",
       "mainfolderitems": [
         {
-          "page": "Overview",
-          "url": "overview"
+          "page": "Getting Started",
+          "url": "index"
         },
         {
           "page": "Connect",
