@@ -71,15 +71,14 @@ please use the DuckDB taco connector as described below.
 ## Installing the Tableau DuckDB Connector
 
 While it is possible to use the Tableau-provided PostgreSQL dialect to communicate with the DuckDB JDBC driver,
-we strongly recommend using the [DuckDB "taco" connector](https://github.com/hawkfish/duckdb-taco).
+we strongly recommend using the [DuckDB "taco" connector](https://github.com/MotherDuck-Open-Source/duckdb-tableau-connector).
 This connector has been fully tested against the Tableau dialect generator
-and [is more compatible](https://github.com/hawkfish/duckdb-taco/blob/main/tableau_connectors/duckdb_jdbc/dialect.tdd)
+and [is more compatible](https://github.com/MotherDuck-Open-Source/duckdb-tableau-connector/blob/main/tableau_connectors/duckdb_jdbc/dialect.tdd)
 than the provided PostgreSQL dialect.
 
 The documentation on how to install and use the connector is in its repository,
 but essentially you will need the
-[`duckdb_jdbc.taco`](https://github.com/hawkfish/duckdb-taco/raw/main/packaged-connector/duckdb_jdbc.taco) file.
-The current version of the Taco is not signed, so you will need to launch Tableau with signature validation disabled.
+[`duckdb_jdbc.taco`](https://github.com/MotherDuck-Open-Source/duckdb-tableau-connector/raw/main/packaged-connector/duckdb_jdbc-v1.0.0-signed.taco) file.
 (Despite what the Tableau documentation says, the real security risk is in the JDBC driver code,
 not the small amount of JavaScript in the Taco.)
 
