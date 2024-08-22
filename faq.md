@@ -249,3 +249,20 @@ For example, the `GROUP BY ALL` clause can be replaced with a `GROUP BY` clause 
 </div>
 
 </div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
+### What are typical use cases for DuckDB?
+
+<div class="answer" markdown="1">
+
+DuckDB's use cases roughly split into
+<a href="https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf#page=8">three major categories</a>.
+Namely, DuckDB is used for data science (interactive data analysis by a user), used as a pipeline component (in larger data processing pipelines), and is deployed in creative architectures (e.g., on smartphones and edge devices).
+Additionally, DuckDB's extensive extension ecosystem unlocks use cases such as <a href="{% link docs/extensions/spatial.md %}">geospatial analysis</a> and <a href="{% link docs/extensions/vss.md %}">vector search</a>.
+
+</div>
+
+</div>
