@@ -258,10 +258,17 @@ For example, the `GROUP BY ALL` clause can be replaced with a `GROUP BY` clause 
 
 <div class="answer" markdown="1">
 
-DuckDB's use cases roughly split into
+DuckDB's use cases can be split into roughly
 <a href="https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf#page=8">three major categories</a>.
-Namely, DuckDB is used for data science (interactive data analysis by a user), used as a pipeline component (in larger data processing pipelines), and is deployed in creative architectures (e.g., on smartphones and edge devices).
-Additionally, DuckDB's extensive extension ecosystem unlocks use cases such as <a href="{% link docs/extensions/spatial.md %}">geospatial analysis</a> and <a href="{% link docs/extensions/vss.md %}">vector search</a>.
+Namely, DuckDB can be used
+for interactive data analysis by a user (“data science”) and
+as pipeline component for automated data processing (“data enginereering”).
+DuckDB can also be deployed in novel architectures, where one traditionally couldn't run an analytical database management system but DuckDB is available thanks to its portability.
+These architectures include running DuckDB in browsers (using the <a href="{% link docs/api/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
+Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/extensions/spatial.md %}">geospatial analysis</a> and deep integration with
+<a href="{% link docs/extensions/mysql.md %}">other</a>
+<a href="{% link docs/extensions/postgres.md %}">database</a>
+<a href="{% link docs/extensions/sqlite.md %}">systems</a>.
 
 </div>
 
