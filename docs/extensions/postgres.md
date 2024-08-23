@@ -113,11 +113,11 @@ Data can be copied over from PostgreSQL to DuckDB using standard SQL, for exampl
 CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
 ```
 
-## Writing Data to Postgres
+## Writing Data to PostgreSQL
 
-In addition to reading data from Postgres, the extension allows you to create tables, ingest data into PostgreSQL and make other modifications to a PostgreSQL database using standard SQL queries.
+In addition to reading data from PostgreSQL, the extension allows you to create tables, ingest data into PostgreSQL and make other modifications to a PostgreSQL database using standard SQL queries.
 
-This allows you to use DuckDB to, for example, export data that is stored in a PostgreSQL database to Parquet, or read data from a Parquet file into Postgres.
+This allows you to use DuckDB to, for example, export data that is stored in a PostgreSQL database to Parquet, or read data from a Parquet file into PostgreSQL.
 
 Below is a brief example of how to create a new table in PostgreSQL and load data into it.
 
@@ -127,7 +127,7 @@ CREATE TABLE postgres_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```
 
-Many operations on PostgreSQL tables are supported. All these operations directly modify the PostgreSQL database, and the result of subsequent operations can then be read using Postgres.
+Many operations on PostgreSQL tables are supported. All these operations directly modify the PostgreSQL database, and the result of subsequent operations can then be read using PostgreSQL.
 Note that if modifications are not desired, `ATTACH` can be run with the `READ_ONLY` property which prevents making modifications to the underlying database. For example:
 
 ```sql
@@ -273,7 +273,7 @@ SELECT * FROM postgres_db.tmp;
 
 This returns an empty table.
 
-## Running SQL Queries in Postgres
+## Running SQL Queries in PostgreSQL
 
 ### The `postgres_query` Table Function
 
@@ -307,7 +307,7 @@ SELECT * FROM postgres_query('postgres_db', 'SELECT * FROM cars LIMIT 3');
 
 ### The `postgres_execute` Function
 
-The `postgres_execute` function allows running arbitrary queries within Postgres, including statements that update the schema and content of the database.
+The `postgres_execute` function allows running arbitrary queries within PostgreSQL, including statements that update the schema and content of the database.
 
 ```sql
 ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
