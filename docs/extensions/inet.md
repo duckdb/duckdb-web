@@ -84,3 +84,31 @@ SELECT cidr, host(cidr) FROM tbl;
 | 192.168.0.0/16                 | 192.168.0.0                 |
 | 127.0.0.1                      | 127.0.0.1                   |
 | 2001:db8:3c4d:15::1a2f:1a2b/96 | 2001:db8:3c4d:15::1a2f:1a2b |
+
+## HTML Escape and Unescape Functions
+
+```sql
+SELECT html_escape('&');
+```
+
+```text
+┌──────────────────┐
+│ html_escape('&') │
+│     varchar      │
+├──────────────────┤
+│ &amp;            │
+└──────────────────┘
+```
+
+```sql
+SELECT html_unescape('&amp;');
+```
+
+```text
+┌────────────────────────┐
+│ html_unescape('&amp;') │
+│        varchar         │
+├────────────────────────┤
+│ &                      │
+└────────────────────────┘
+```
