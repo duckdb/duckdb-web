@@ -8,7 +8,13 @@ github_repository: https://github.com/duckdb/duckdb-r
 
 ### `duckdb`: R API
 
-The DuckDB R API can be installed using `install.packages("duckdb")`. Please see the [installation page]({% link docs/installation/index.html %}?environment=r) for details.
+The DuckDB R API can be installed using the following command:
+
+```r
+install.packages("duckdb")
+```
+
+Please see the [installation page]({% link docs/installation/index.html %}?environment=r) for details.
 
 ### `duckplyr`: dplyr API
 
