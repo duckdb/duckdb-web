@@ -7,7 +7,7 @@ redirect_from:
   - docs/extensions/postgresql
 ---
 
-The `postgres` extension allows DuckDB to directly read and write data from a running Postgres database instance. The data can be queried directly from the underlying Postgres database. Data can be loaded from Postgres tables into DuckDB tables, or vice versa. See the [official announcement]({% post_url 2022-09-30-postgres-scanner %}) for implementation details and background.
+The `postgres` extension allows DuckDB to directly read and write data from a running PostgreSQL database instance. The data can be queried directly from the underlying PostgreSQL database. Data can be loaded from PostgreSQL tables into DuckDB tables, or vice versa. See the [official announcement]({% post_url 2022-09-30-postgres-scanner %}) for implementation details and background.
 
 ## Installing and Loading
 
@@ -334,7 +334,7 @@ The extension exposes the following configuration parameters.
 
 ## Schema Cache
 
-To avoid having to continuously fetch schema data from Postgres, DuckDB keeps schema information – such as the names of tables, their columns, etc. – cached. If changes are made to the schema through a different connection to the PostgreSQL instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `pg_clear_cache` can be executed to clear the internal caches.
+To avoid having to continuously fetch schema data from PostgreSQL, DuckDB keeps schema information – such as the names of tables, their columns, etc. – cached. If changes are made to the schema through a different connection to the PostgreSQL instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `pg_clear_cache` can be executed to clear the internal caches.
 
 ```sql
 CALL pg_clear_cache();
