@@ -39,9 +39,6 @@ $(document).ready(function(){
 	
 	
 	// Simple detect OS 
-    if($('#quickinstall').length != 0 || $('.yourselection').length !=0 ){
-	}
-	
 	var OSName="Unknown OS";
 	var OSdatid="Unknown OS";
 	if (navigator.appVersion.indexOf("Win")!=-1) { OSName="Windows"; OSdatid="win" };
@@ -539,19 +536,27 @@ $(document).ready(function(){
 		});
 	}
 
-	if( $('section#quickinstall').length ){
-		$('.install > .window > .environment > ul > li').click(function(){
+	/** QUICK INSTALLATION ON HOME PAGE */
+	if ($('section#quickinstall').length) {
+		function displayInstallation() {
+			var activeClient = $('.install > .window > .environment > ul > li.active').attr('data-client');
+			var installation = $('#quick-installation').find('div[data-install="' + activeClient + ' ' + OSdatid + '"]').html();
+			if (installation === undefined) {
+				installation = $('#quick-installation').find('div[data-install=' + activeClient + ']').html();
+			}
+			$('.result').html(installation);
+		}
+		$('.install > .window > .environment > ul > li').click(function() {
 			$('.install > .window > .environment > ul > li.active').removeClass('active');
 			$(this).addClass('active');
-			var client = $(this).attr('data-client');
-
-			var installation = $('#quick-installation').find('div[data-install="'+client+' '+OSdatid+'"]').html();
-			if (installation === undefined) {
-				var installation = $('#quick-installation').find('div[data-install='+client+']').html();
+			displayInstallation();
+		});
+		setTimeout(function() {
+			if ($('.install > .window > .environment > ul > li.active').length === 0) {
+				$('.install > .window > .environment > ul > li:first').addClass('active');
 			}
-
-			$('.result').html(installation);
-		})
+			displayInstallation();
+		}, 500);
 	}
 	
 	/** CUSTOM SELECT ON HOME **/
