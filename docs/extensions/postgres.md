@@ -23,13 +23,13 @@ LOAD postgres;
 
 To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command with the `POSTGRES` or `POSTGRES_SCANNER` type.
 
-To connect to the "public" schema of the postgres instance running on localhost in read-write mode, run:
+To connect to the `public` schema of the PostgreSQL instance running on localhost in read-write mode, run:
 
 ```sql
 ATTACH '' AS postgres_db (TYPE POSTGRES);
 ```
 
-To connect to the Postgres instance with the given parameters in read-only mode, run:
+To connect to the PostgreSQL instance with the given parameters in read-only mode, run:
 
 ```sql
 ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE POSTGRES, READ_ONLY);
@@ -40,7 +40,7 @@ ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE POSTGRES, READ
 The `ATTACH` command takes as input either a [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
 or a [PostgreSQL URI](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS).
 
-Below are some example connection strings and commonly used parameters. A full list of available parameters can be found [in the Postgres documentation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS).
+Below are some example connection strings and commonly used parameters. A full list of available parameters can be found [in the PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS).
 
 ```text
 dbname=postgresscanner
@@ -53,15 +53,15 @@ host=localhost port=5432 dbname=mydb connect_timeout=10
 | `host`     | Name of host to connect to           | `localhost`  |
 | `hostaddr` | Host IP address                      | `localhost`  |
 | `passfile` | Name of file passwords are stored in | `~/.pgpass`  |
-| `password` | Postgres password                    | (empty)      |
+| `password` | PostgreSQL password                  | (empty)      |
 | `port`     | Port number                          | `5432`       |
-| `user`     | Postgres user name                   | current user |
+| `user`     | PostgreSQL user name                 | current user |
 
 An example URI is `postgresql://username@hostname/dbname`.
 
 ### Configuring via Environment Variables
 
-Postgres connection information can also be specified with [environment variables](https://www.postgresql.org/docs/current/libpq-envars.html).
+PostgreSQL connection information can also be specified with [environment variables](https://www.postgresql.org/docs/current/libpq-envars.html).
 This can be useful in a production environment where the connection information is managed externally
 and passed in to the environment.
 
@@ -80,7 +80,7 @@ ATTACH '' AS p (TYPE POSTGRES);
 
 ## Usage
 
-The tables in the PostgreSQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from Postgres at query time.
+The tables in the PostgreSQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from PostgreSQL at query time.
 
 ```sql
 SHOW ALL TABLES;
@@ -105,9 +105,9 @@ SELECT * FROM uuids;
 | 00000000-0000-0000-0000-000000000001 |
 | ffffffff-ffff-ffff-ffff-ffffffffffff |
 
-It might be desirable to create a copy of the Postgres databases in DuckDB to prevent the system from re-reading the tables from Postgres continuously, particularly for large tables.
+It might be desirable to create a copy of the PostgreSQL databases in DuckDB to prevent the system from re-reading the tables from PostgreSQL continuously, particularly for large tables.
 
-Data can be copied over from Postgres to DuckDB using standard SQL, for example:
+Data can be copied over from PostgreSQL to DuckDB using standard SQL, for example:
 
 ```sql
 CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
@@ -115,11 +115,11 @@ CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
 
 ## Writing Data to Postgres
 
-In addition to reading data from Postgres, the extension allows you to create tables, ingest data into Postgres and make other modifications to a Postgres database using standard SQL queries.
+In addition to reading data from Postgres, the extension allows you to create tables, ingest data into PostgreSQL and make other modifications to a PostgreSQL database using standard SQL queries.
 
-This allows you to use DuckDB to, for example, export data that is stored in a Postgres database to Parquet, or read data from a Parquet file into Postgres.
+This allows you to use DuckDB to, for example, export data that is stored in a PostgreSQL database to Parquet, or read data from a Parquet file into Postgres.
 
-Below is a brief example of how to create a new table in Postgres and load data into it.
+Below is a brief example of how to create a new table in PostgreSQL and load data into it.
 
 ```sql
 ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
@@ -127,7 +127,7 @@ CREATE TABLE postgres_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```
 
-Many operations on Postgres tables are supported. All these operations directly modify the Postgres database, and the result of subsequent operations can then be read using Postgres.
+Many operations on PostgreSQL tables are supported. All these operations directly modify the PostgreSQL database, and the result of subsequent operations can then be read using Postgres.
 Note that if modifications are not desired, `ATTACH` can be run with the `READ_ONLY` property which prevents making modifications to the underlying database. For example:
 
 ```sql
@@ -167,14 +167,14 @@ COPY postgres_db.tbl TO 'data.parquet';
 COPY postgres_db.tbl FROM 'data.parquet';
 ```
 
-These copies use [Postgres binary wire encoding](https://www.postgresql.org/docs/current/sql-copy.html).
-DuckDB can also write data using this encoding to a file which you can then load into Postgres using a client of your choosing if you would like to do your own connection management:
+These copies use [PostgreSQL binary wire encoding](https://www.postgresql.org/docs/current/sql-copy.html).
+DuckDB can also write data using this encoding to a file which you can then load into PostgreSQL using a client of your choosing if you would like to do your own connection management:
 
 ```sql
 COPY 'data.parquet' TO 'pg.bin' WITH (FORMAT POSTGRES_BINARY);
 ```
 
-The file produced will be the equivalent of copying the file to Postgres using DuckDB and then dumping it from Postgres using `psql` or another client:
+The file produced will be the equivalent of copying the file to PostgreSQL using DuckDB and then dumping it from PostgreSQL using `psql` or another client:
 
 DuckDB:
 
@@ -277,7 +277,7 @@ This returns an empty table.
 
 ### The `postgres_query` Table Function
 
-The `postgres_query` table function allows you to run arbitrary read queries within an attached database. `postgres_query` takes the name of the attached Postgres database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
+The `postgres_query` table function allows you to run arbitrary read queries within an attached database. `postgres_query` takes the name of the attached PostgreSQL database to execute the query in, as well as the SQL query to execute. The result of the query is returned. Single-quote strings are escaped by repeating the single quote twice.
 
 ```sql
 postgres_query(attached_database::VARCHAR, query::VARCHAR)
@@ -314,27 +314,27 @@ ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
 CALL postgres_execute('postgres_db', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
-> Warning This function is only available on DuckDB v0.10.1+, using the latest Postgres extension.
+> Warning This function is only available on DuckDB v0.10.1+, using the latest PostgreSQL extension.
 > To upgrade your extension, run `FORCE INSTALL postgres;`.
 
 ## Settings
 
 The extension exposes the following configuration parameters.
 
-| Name                              | Description                                                                | Default |
-| --------------------------------- | -------------------------------------------------------------------------- | ------- |
-| `pg_array_as_varchar`             | Read Postgres arrays as varchar - enables reading mixed dimensional arrays | `false` |
-| `pg_connection_cache`             | Whether or not to use the connection cache                                 | `true`  |
-| `pg_connection_limit`             | The maximum amount of concurrent Postgres connections                      | `64`    |
-| `pg_debug_show_queries`           | DEBUG SETTING: print all queries sent to Postgres to stdout                | `false` |
-| `pg_experimental_filter_pushdown` | Whether or not to use filter pushdown (currently experimental)             | `false` |
-| `pg_pages_per_task`               | The amount of pages per task                                               | `1000`  |
-| `pg_use_binary_copy`              | Whether or not to use BINARY copy to read data                             | `true`  |
-| `pg_use_ctid_scan`                | Whether or not to parallelize scanning using table ctids                   | `true`  |
+| Name                              | Description                                                                  | Default |
+| --------------------------------- | ---------------------------------------------------------------------------- | ------- |
+| `pg_array_as_varchar`             | Read PostgreSQL arrays as varchar - enables reading mixed dimensional arrays | `false` |
+| `pg_connection_cache`             | Whether or not to use the connection cache                                   | `true`  |
+| `pg_connection_limit`             | The maximum amount of concurrent PostgreSQL connections                      | `64`    |
+| `pg_debug_show_queries`           | DEBUG SETTING: print all queries sent to PostgreSQL to stdout                | `false` |
+| `pg_experimental_filter_pushdown` | Whether or not to use filter pushdown (currently experimental)               | `false` |
+| `pg_pages_per_task`               | The amount of pages per task                                                 | `1000`  |
+| `pg_use_binary_copy`              | Whether or not to use BINARY copy to read data                               | `true`  |
+| `pg_use_ctid_scan`                | Whether or not to parallelize scanning using table ctids                     | `true`  |
 
 ## Schema Cache
 
-To avoid having to continuously fetch schema data from Postgres, DuckDB keeps schema information – such as the names of tables, their columns, etc. – cached. If changes are made to the schema through a different connection to the Postgres instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `pg_clear_cache` can be executed to clear the internal caches.
+To avoid having to continuously fetch schema data from Postgres, DuckDB keeps schema information – such as the names of tables, their columns, etc. – cached. If changes are made to the schema through a different connection to the PostgreSQL instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `pg_clear_cache` can be executed to clear the internal caches.
 
 ```sql
 CALL pg_clear_cache();
