@@ -151,7 +151,7 @@ CREATE TABLE walkers AS SELECT 'duck' AS animal;
 fliers    swimmers  walkers
 ```
 
-For example, to filter to only tables that contain an "l", use the `LIKE` pattern `%l%`.
+For example, to filter to only tables that contain an `l`, use the `LIKE` pattern `%l%`.
 
 ```sql
 .tables %l%

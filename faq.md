@@ -249,3 +249,27 @@ For example, the `GROUP BY ALL` clause can be replaced with a `GROUP BY` clause 
 </div>
 
 </div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
+### What are typical use cases for DuckDB?
+
+<div class="answer" markdown="1">
+
+DuckDB's use cases can be split into roughly
+<a href="https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf#page=8">three major categories</a>.
+Namely, DuckDB can be used
+for interactive data analysis by a user (“data science”) and
+as pipeline component for automated data processing (“data enginereering”).
+DuckDB can also be deployed in novel architectures, where one traditionally couldn't run an analytical database management system but DuckDB is available thanks to its portability.
+These architectures include running DuckDB in browsers (using the <a href="{% link docs/api/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
+Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/extensions/spatial.md %}">geospatial analysis</a> and deep integration with
+<a href="{% link docs/extensions/mysql.md %}">other</a>
+<a href="{% link docs/extensions/postgres.md %}">database</a>
+<a href="{% link docs/extensions/sqlite.md %}">systems</a>.
+
+</div>
+
+</div>

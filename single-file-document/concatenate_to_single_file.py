@@ -22,7 +22,7 @@ def linked_path_to_label(link_path):
 
     # cleanup extension, use colons (as labels cannot use slashes)
     label = link_path.replace("/", ":")
-    return f"#{label}"
+    return label
 
 
 def reduce_clutter_in_doc(doc_body):
@@ -163,7 +163,7 @@ def change_link(doc_body, doc_file_path):
             # we split links of the form a#b to along the #, leave links without # as they are
             link_parts = new_link.split("#")
             link_path = link_parts[0]
-            new_link_replacement = linked_path_to_label(link_path)
+            new_link_replacement = f"#{linked_path_to_label(link_path)}"
             # if there was an anchor target in the link (#some-item),
             # we append it using double colons as separator (::some-item)
             if len(link_parts) > 1:

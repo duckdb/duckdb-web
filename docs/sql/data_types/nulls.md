@@ -4,7 +4,7 @@ title: NULL Values
 blurb: The NULL value represents a missing value.
 ---
 
-`NULL` values are special values that are used to represent missing data in SQL. Columns of any type can contain `NULL` values. Logically, a `NULL` value can be seen as "the value of this field is unknown".
+`NULL` values are special values that are used to represent missing data in SQL. Columns of any type can contain `NULL` values. Logically, a `NULL` value can be seen as “the value of this field is unknown”.
 
 A `NULL` value can be inserted to any field that does not have the `NOT NULL` qualifier:
 

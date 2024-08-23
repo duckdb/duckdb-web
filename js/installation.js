@@ -326,5 +326,12 @@ $(document).ready(function(){
 		window.addEventListener('popstate', handleQueryParameters);
 	
 	}
+	
+	setTimeout(function() {
+		// Activate the users system
+		$('.platform li').removeClass('selected');
+		$(`.platform li[data-id=".${OSdatid}"]`).addClass('selected');
+		evaluation();
+	}, 100);
 
 });

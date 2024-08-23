@@ -399,7 +399,7 @@ The table below shows the available table functions for `TIMESTAMP WITH TIME ZON
 ## ICU Timestamp Without Time Zone Functions
 
 The table below shows the ICU provided scalar functions that operate on plain `TIMESTAMP` values.
-These functions assume that the `TIMESTAMP` is a "local timestamp".
+These functions assume that the `TIMESTAMP` is a “local timestamp”.
 
 A local timestamp is effectively a way of encoding the part values from a time zone into a single value.
 They should be used with caution because the produced values can contain gaps and ambiguities thanks to daylight savings time.
@@ -485,7 +485,7 @@ TIMESTAMP WITH TIME ZONE '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver';
 ## Infinities
 
 Functions applied to infinite dates will either return the same infinite dates
-(e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
+(e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what “makes sense”.
 In general, if the function needs to examine the parts of the infinite temporal value,
 the result will be `NULL`.
 
