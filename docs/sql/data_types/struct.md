@@ -236,7 +236,7 @@ The ordering is defined positionally in the same way that words can be ordered i
 > and a nested `NULL` value member will compare above a nested non-`NULL` value member.
 > DuckDB 0.10.2 introduced a breaking change in semantics, described below.
 
-Nested `NULL` values are compared following Postgres' semantics,
+Nested `NULL` values are compared following PostgreSQL's semantics,
 i.e., lower nested levels are used for tie-breaking.
 
 ## Functions
