@@ -43,6 +43,9 @@
 	body.installation .select .info{
 		margin-left: 0;
 	}
+	body.installation .select ul{
+		width: 100%;
+	}
 	footer .sitefooter .footercontent{
 		flex-wrap: wrap;
 		justify-content: space-between;
