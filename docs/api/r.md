@@ -97,7 +97,7 @@ print(res)
 # 1          5.1         3.5          1.4         0.2  setosa
 ```
 
-It is also possible to "register" a R data frame as a virtual table, comparable to a SQL `VIEW`. This *does not actually transfer data* into DuckDB yet. Below is an example:
+It is also possible to “register” a R data frame as a virtual table, comparable to a SQL `VIEW`. This *does not actually transfer data* into DuckDB yet. Below is an example:
 
 ```r
 duckdb_register(con, "iris_view", iris)

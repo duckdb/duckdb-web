@@ -9,7 +9,7 @@ title: DBeaver SQL IDE
 
 1. Install DBeaver using the download links and instructions found at their [download page](https://dbeaver.io/download/).
 
-2. Open DBeaver and create a new connection. Either click on the "New Database Connection" button or go to Database > New Database Connection in the menu bar.
+2. Open DBeaver and create a new connection. Either click on the “New Database Connection” button or go to Database > New Database Connection in the menu bar.
 
     <img src="/images/guides/DBeaver_new_database_connection.png" alt="DBeaver New Database Connection" title="DBeaver New Database Connection"/>
     <img src="/images/guides/DBeaver_new_database_connection_menu.png" alt="DBeaver New Database Connection Menu" title="DBeaver New Database Connection Menu"/>
@@ -26,16 +26,16 @@ title: DBeaver SQL IDE
 
     <img src="/images/guides/DBeaver_connection_settings_test_connection.png" alt="DBeaver Test Connection" title="DBeaver Test Connection"/>
 
-6. Click "Download" to download DuckDB's JDBC driver from Maven. Once download is complete, click "OK", then click "Finish".
-* Note: If you are in a corporate environment or behind a firewall, before clicking download, click the "Download Configuration" link to configure your proxy settings.
+6. Click “Download” to download DuckDB's JDBC driver from Maven. Once download is complete, click “OK”, then click “Finish”.
+* Note: If you are in a corporate environment or behind a firewall, before clicking download, click the “Download Configuration” link to configure your proxy settings.
 
     <img src="/images/guides/DBeaver_download_driver_files.png" alt="DBeaver Download Driver Files" title="DBeaver Download Driver Files"/>
 
-7. You should now see a database connection to your DuckDB database in the left hand "Database Navigator" pane. Expand it to see the tables and views in your database. Right click on that connection and create a new SQL script.
+7. You should now see a database connection to your DuckDB database in the left hand “Database Navigator” pane. Expand it to see the tables and views in your database. Right click on that connection and create a new SQL script.
 
     <img src="/images/guides/DBeaver_new_sql_script.png" alt="DBeaver New SQL Script" title="DBeaver New SQL Script"/>
 
-8. Write some SQL and click the "Execute" button.
+8. Write some SQL and click the “Execute” button.
 
     <img src="/images/guides/DBeaver_execute_query.png" alt="DBeaver Execute Query" title="DBeaver Execute Query"/>
 
@@ -45,7 +45,7 @@ title: DBeaver SQL IDE
 
 ## Alternative Driver Installation
 
-1. If not prompted to install the DuckDB driver when testing your connection, return to the "Connect to a database" dialog and click "Edit Driver Settings".
+1. If not prompted to install the DuckDB driver when testing your connection, return to the “Connect to a database” dialog and click “Edit Driver Settings”.
 
     <img src="/images/guides/DBeaver_edit_driver_settings.png" alt="DBeaver Edit Driver Settings" title="DBeaver Edit Driver Settings"/>
 
@@ -54,12 +54,12 @@ title: DBeaver SQL IDE
     <img src="/images/guides/DBeaver_driver_manager.png" alt="DBeaver Driver Manager" title="DBeaver Driver Manager"/>
     <img src="/images/guides/DBeaver_driver_manager_edit.png" alt="DBeaver Driver Manager Edit" title="DBeaver Driver Manager Edit"/>
 
-3. Go to the "Libraries" tab, then click on the DuckDB driver and click "Download/Update". If you do not see the DuckDB driver, first click on "Reset to Defaults".
+3. Go to the “Libraries” tab, then click on the DuckDB driver and click “Download/Update”. If you do not see the DuckDB driver, first click on “Reset to Defaults”.
 
     <img src="/images/guides/DBeaver_edit_driver_duckdb.png" alt="DBeaver Edit Driver" title="DBeaver Edit Driver"/>
 
-4. Click "Download" to download DuckDB's JDBC driver from Maven. Once download is complete, click "OK", then return to the main DBeaver window and continue with step 7 above.
+4. Click “Download” to download DuckDB's JDBC driver from Maven. Once download is complete, click “OK”, then return to the main DBeaver window and continue with step 7 above.
 
-    * Note: If you are in a corporate environment or behind a firewall, before clicking download, click the "Download Configuration" link to configure your proxy settings.
+    * Note: If you are in a corporate environment or behind a firewall, before clicking download, click the “Download Configuration” link to configure your proxy settings.
 
     <img src="/images/guides/DBeaver_download_driver_files_from_driver_settings.png" alt="DBeaver Download Driver Files 2" title="DBeaver Download Driver Files 2" />

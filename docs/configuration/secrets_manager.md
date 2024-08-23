@@ -19,7 +19,7 @@ Secrets are typed, their type identifies which service they are for. Currently, 
 * Google Cloud Storage (`GCS`), through the [`httpfs` extension]({% link docs/extensions/httpfs/s3api.md %})
 * Hugging Face (`HUGGINGFACE`), through the [`httpfs` extension]({% link docs/extensions/httpfs/hugging_face.md %})
 
-For each type, there are one or more "secret providers" that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
+For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
 ### Creating a Secret
 

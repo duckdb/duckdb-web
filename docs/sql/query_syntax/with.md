@@ -8,7 +8,7 @@ The `WITH` clause allows you to specify common table expressions (CTEs). Regular
 
 ## Basic CTE Examples
 
-Create a CTE called "cte" and use it in the main query:
+Create a CTE called “cte” and use it in the main query:
 
 ```sql
 WITH cte AS (SELECT 42 AS x)
