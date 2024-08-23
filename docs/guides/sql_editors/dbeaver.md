@@ -22,7 +22,7 @@ title: DBeaver SQL IDE
 
     <img src="/images/guides/DBeaver_connection_settings_path.png" alt="DBeaver Set Path" title="DBeaver Set Path"/>
 
-5. Click "Test Connection". This will then prompt you to install the DuckDB JDBC driver. If you are not prompted, see alternative driver installation instructions below.
+5. Click “Test Connection”. This will then prompt you to install the DuckDB JDBC driver. If you are not prompted, see alternative driver installation instructions below.
 
     <img src="/images/guides/DBeaver_connection_settings_test_connection.png" alt="DBeaver Test Connection" title="DBeaver Test Connection"/>
 
