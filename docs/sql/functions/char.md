@@ -34,11 +34,11 @@ This section describes functions and operators for examining and manipulating [`
 | [`format_bytes(bytes)`](#format_bytesbytes) | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`format(format, parameters, ...)`](#formatformat-parameters-) | Formats a string using the [fmt syntax](#fmt-syntax). |
 | [`from_base64(string)`](#from_base64string) | Convert a base64 encoded string to a character string. |
-| [`greatest(x1, x2, ...)`](#greatestx1-x2-) | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered "larger" than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| [`greatest(x1, x2, ...)`](#greatestx1-x2-) | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with the hash of the `value`. |
 | [`ilike_escape(string, like_specifier, escape_character)`](#ilike_escapestring-like_specifier-escape_character) | Returns true if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`instr(string, search_string)`](#instrstring-search_string) | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| [`least(x1, x2, ...)`](#leastx1-x2-) | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered "smaller" than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| [`least(x1, x2, ...)`](#leastx1-x2-) | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | [`left_grapheme(string, count)`](#left_graphemestring-count) | Extract the left-most grapheme clusters. |
 | [`left(string, count)`](#leftstring-count) | Extract the left-most count characters. |
 | [`length_grapheme(string)`](#length_graphemestring) | Number of grapheme clusters in `string`. |
@@ -262,7 +262,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered "larger" than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| **Description** | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | **Example** | `greatest('abc', 'bcd', 'cde', 'EFG')` |
 | **Result** | `'cde'` |
 
@@ -294,7 +294,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered "smaller" than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| **Description** | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | **Example** | `least('abc', 'BCD', 'cde', 'EFG')` |
 | **Result** | `'BCD'` |
 

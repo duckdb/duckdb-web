@@ -24,7 +24,7 @@ See the [`GROUPING SETS`]({% link docs/sql/query_syntax/grouping_sets.md %}) pag
 
 ## Examples
 
-Count the number of entries in the "addresses" table that belong to each different city:
+Count the number of entries in the `addresses` table that belong to each different city:
 
 ```sql
 SELECT city, count(*)
