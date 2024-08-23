@@ -29,7 +29,7 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 | Expression              |   DuckDB | PostgreSQL |  IEEE 754 |
 | :---------------------- | -------: | ---------: | --------: |
 | 1.0 / 0.0               |     NULL |      error |  Infinity |
-| 0.0 / 0.0               |     NULL |      error |       Nan |
+| 0.0 / 0.0               |     NULL |      error |       NaN |
 | -1.0 / 0.0              |     NULL |      error | -Infinity |
 | 'Infinity' / 'Infinity' |      NaN |        NaN |       NaN |
 | 1.0 / 'Infinity'        |      0.0 |        0.0 |       0.0 |
