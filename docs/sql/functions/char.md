@@ -16,7 +16,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`string ^@ search_string`](#string--search_string) | Return true if `string` begins with `search_string`. |
 | [`string || string`](#string--string) | String concatenation. |
 | [`string[index]`](#stringindex) | Extract a single character using a (1-based) index. |
-| [`string[begin:end]`](#stringbeginend) | Extract a string using slice conventions. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
+| [`string[begin:end]`](#stringbeginend) | Extract a string using slice conventions (like in Python). Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
 | [`string LIKE target`](#string-like-target) | Returns true if the `string` matches the like specifier (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})). |
 | [`string SIMILAR TO regex`](#string-similar-to-regex) | Returns `true` if the `string` matches the `regex`; identical to `regexp_full_match` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})). |
 | [`array_extract(list, index)`](#array_extractlist-index) | Extract a single character using a (1-based) index. |
@@ -125,10 +125,20 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extract a string using slice conventions. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
+| **Description** | Extract a string using slice conventions similar to Python. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
 | **Example** | `'DuckDB'[:4]` |
 | **Result** | `Duck` |
 | **Alias** | `array_slice` |
+
+More examples:
+```sql
+SELECT  'abcdefghi'  AS str
+,       str[3]       -- get char at position 3, 'c'
+,       str[3:5]     -- substring from position 3 up to and including position 5, 'cde'
+,       str[6:]      -- substring from position 6 till the end, 'fghi'
+,       str[:3]      -- substring from the start up to and including position 3, 'abc'
+,       str[3:-4]    -- substring from positio 3 up to and including the 4th position from the end, 'cdef' 
+```
 
 ### `string LIKE target`
 
@@ -159,7 +169,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extract a string using slice conventions. Negative values are accepted. |
+| **Description** | Extract a string using slice conventions (like in Python). Negative values are accepted. |
 | **Example 1** | `array_slice('DuckDB', 3, 4)` |
 | **Result** | `ck` |
 | **Example 2** | `array_slice('DuckDB', 3, NULL)` |
