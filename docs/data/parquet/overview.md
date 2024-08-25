@@ -186,7 +186,7 @@ SELECT * FROM people;
 
 ## Writing to Parquet Files
 
-DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [`COPY` Statement page]({% link docs/sql/statements/copy.md %}) for details, including all possible parameters for the `COPY` statement:
+DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [`COPY` Statement page]({% link docs/sql/statements/copy.md %}) for details, including all possible parameters for the `COPY` statement.
 
 Write a query to a snappy compressed Parquet file:
 
@@ -203,6 +203,14 @@ Write `tbl` to a zstd-compressed Parquet file:
 COPY tbl
     TO 'result-zstd.parquet'
     (FORMAT 'parquet', CODEC 'zstd');
+```
+
+Write `tbl` to a zstd-compressed Parquet file with the lowest compression level yielding the fastest compression:
+
+```sql
+COPY tbl
+    TO 'result-zstd.parquet'
+    (FORMAT 'parquet', CODEC 'zstd', COMPRESSION_LEVEL 1);
 ```
 
 Write a CSV file to an uncompressed Parquet file:
