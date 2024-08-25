@@ -6,6 +6,8 @@ redirect_from:
   - docs/sql/window_functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 DuckDB supports [window functions](https://en.wikipedia.org/wiki/Window_function_(SQL)), which can use multiple rows to calculate a value for each row.
 Window functions are [blocking operators]({% link docs/guides/performance/how_to_tune_workloads.md %}#blocking-operators), i.e., they require their entire input to be buffered, making them one of the most memory-intensive operators in SQL.
 
@@ -73,7 +75,7 @@ The table below shows the available general window functions.
 | [`rank()`](#rank) | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
 | [`row_number()`](#row_number) | The number of the current row within the partition, counting from 1. |
 
-### `cume_dist()`
+#### `cume_dist()`
 
 <div class="nostroke_table"></div>
 
@@ -81,7 +83,7 @@ The table below shows the available general window functions.
 | **Return Type** | `DOUBLE` |
 | **Example** | `cume_dist()` |
 
-### `dense_rank()`
+#### `dense_rank()`
 
 <div class="nostroke_table"></div>
 
@@ -89,7 +91,7 @@ The table below shows the available general window functions.
 | **Return Type** | `BIGINT` |
 | **Example** | `dense_rank()` |
 
-### `first_value(expr[ IGNORE NULLS])`
+#### `first_value(expr[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -97,7 +99,7 @@ The table below shows the available general window functions.
 | **Return Type** | Same type as `expr` |
 | **Example** | `first_value(column)` |
 
-### `lag(expr[, offset[, default]][ IGNORE NULLS])`
+#### `lag(expr[, offset[, default]][ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -105,7 +107,7 @@ The table below shows the available general window functions.
 | **Return Type** | Same type as `expr` |
 | **Aliases** | `lag(column, 3, 0)` |
 
-### `last_value(expr[ IGNORE NULLS])`
+#### `last_value(expr[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -113,7 +115,7 @@ The table below shows the available general window functions.
 | **Return Type** | Same type as `expr` |
 | **Example** | `last_value(column)` |
 
-### `lead(expr[, offset[, default]][ IGNORE NULLS])`
+#### `lead(expr[, offset[, default]][ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -121,7 +123,7 @@ The table below shows the available general window functions.
 | **Return Type** | Same type as `expr` |
 | **Aliases** | `lead(column, 3, 0)` |
 
-### `nth_value(expr, nth[ IGNORE NULLS])`
+#### `nth_value(expr, nth[ IGNORE NULLS])`
 
 <div class="nostroke_table"></div>
 
@@ -129,7 +131,7 @@ The table below shows the available general window functions.
 | **Return Type** | Same type as `expr` |
 | **Aliases** | `nth_value(column, 2)` |
 
-### `ntile(num_buckets)`
+#### `ntile(num_buckets)`
 
 <div class="nostroke_table"></div>
 
@@ -137,7 +139,7 @@ The table below shows the available general window functions.
 | **Return Type** | `BIGINT` |
 | **Example** | `ntile(4)` |
 
-### `percent_rank()`
+#### `percent_rank()`
 
 <div class="nostroke_table"></div>
 
@@ -145,7 +147,7 @@ The table below shows the available general window functions.
 | **Return Type** | `DOUBLE` |
 | **Example** | `percent_rank()` |
 
-### `rank_dense()`
+#### `rank_dense()`
 
 <div class="nostroke_table"></div>
 
@@ -154,7 +156,7 @@ The table below shows the available general window functions.
 | **Example** | `rank_dense()` |
 | **Alias** | `rank()` |
 
-### `rank()`
+#### `rank()`
 
 <div class="nostroke_table"></div>
 
@@ -163,7 +165,7 @@ The table below shows the available general window functions.
 | **Example** | `rank()` |
 | **Alias** | `rank_dense()` |
 
-### `row_number()`
+#### `row_number()`
 
 <div class="nostroke_table"></div>
 
@@ -180,7 +182,7 @@ The `first` and `last` aggregate functions are shadowed by the respective genera
 
 All [general-purpose window functions](#general-purpose-window-functions) that accept `IGNORE NULLS` respect nulls by default. This default behavior can optionally be made explicit via `RESPECT NULLS`.
 
-In contrast, all [aggregate window functions](#aggregate-window-functions) (except for `list` and its aliases, which can be made to ignore nulls via a `FILTER`) ignore nulls and do not accept `RESPECT NULLS`. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a `NULL` value of `column` have the same value of `cumulativeColumn` as the row that preceeds them.
+In contrast, all [aggregate window functions](#aggregate-window-functions) (except for `list` and its aliases, which can be made to ignore nulls via a `FILTER`) ignore nulls and do not accept `RESPECT NULLS`. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a `NULL` value of `column` have the same value of `cumulativeColumn` as the row that precedes them.
 
 ## Evaluation
 

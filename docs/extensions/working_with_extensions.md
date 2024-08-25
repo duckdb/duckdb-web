@@ -216,7 +216,7 @@ For example, if the file was available at the (relative) path `path/to/httpfs.du
 LOAD 'path/to/httpfs.duckdb_extension';
 ```
 
-This will skip any currently installed file in the specifed path.
+This will skip any currently installed file in the specified path.
 
 Using remote paths for compressed files is currently not possible.
 
@@ -226,4 +226,4 @@ For building and installing extensions from source, see the [building guide]({% 
 
 ## Statically Linking Extensions
 
-To statically link extensions, follow the [developer documentation's "Using extension config files" section](https://github.com/duckdb/duckdb/blob/main/extension/README.md#using-extension-config-files).
+To statically link extensions, follow the [developer documentation's “Using extension config files” section](https://github.com/duckdb/duckdb/blob/main/extension/README.md#using-extension-config-files).

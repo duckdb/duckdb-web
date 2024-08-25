@@ -27,7 +27,7 @@ CREATE TABLE weather (
     city    VARCHAR,
     temp_lo INTEGER, -- minimum temperature on a day
     temp_hi INTEGER, -- maximum temperature on a day
-    prcp    REAL,
+    prcp    FLOAT,
     date    DATE
 );
 ```
@@ -38,9 +38,9 @@ White space (i.e., spaces, tabs, and newlines) can be used freely in SQL command
 
 In the SQL command, we first specify the type of command that we want to perform: `CREATE TABLE`. After that follows the parameters for the command. First, the table name, `weather`, is given. Then the column names and column types follow.
 
-`city VARCHAR` specifies that the table has a column called `city` that is of type `VARCHAR`. `VARCHAR` specifies a data type that can store text of arbitrary length. The temperature fields are stored in an `INTEGER` type, a type that stores integer numbers (i.e., whole numbers without a decimal point). `REAL`  columns store single precision floating-point numbers (i.e., numbers with a decimal point). `DATE` stores a date (i.e., year, month, day combination). `DATE` only stores the specific day, not a time associated with that day.
+`city VARCHAR` specifies that the table has a column called `city` that is of type `VARCHAR`. `VARCHAR` specifies a data type that can store text of arbitrary length. The temperature fields are stored in an `INTEGER` type, a type that stores integer numbers (i.e., whole numbers without a decimal point). `FLOAT`  columns store single precision floating-point numbers (i.e., numbers with a decimal point). `DATE` stores a date (i.e., year, month, day combination). `DATE` only stores the specific day, not a time associated with that day.
 
-DuckDB supports the standard SQL types `INTEGER`, `SMALLINT`, `REAL`, `DOUBLE`, `DECIMAL`, `CHAR(n)`, `VARCHAR(n)`, `DATE`, `TIME` and `TIMESTAMP`.
+DuckDB supports the standard SQL types `INTEGER`, `SMALLINT`, `FLOAT`, `DOUBLE`, `DECIMAL`, `CHAR(n)`, `VARCHAR(n)`, `DATE`, `TIME` and `TIMESTAMP`.
 
 The second example will store cities and their associated geographical location:
 
@@ -112,7 +112,7 @@ SELECT *
 FROM weather;
 ```
 
-Here `*` is a shorthand for "all columns". So the same result would be had with:
+Here `*` is a shorthand for “all columns”. So the same result would be had with:
 
 ```sql
 SELECT city, temp_lo, temp_hi, prcp, date
@@ -144,7 +144,7 @@ This should give:
 
 Notice how the `AS` clause is used to relabel the output column. (The `AS` clause is optional.)
 
-A query can be "qualified" by adding a `WHERE` clause that specifies which rows are wanted. The `WHERE` clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression is true are returned. The usual Boolean operators (`AND`, `OR`, and `NOT`) are allowed in the qualification. For example, the following retrieves the weather of San Francisco on rainy days:
+A query can be “qualified” by adding a `WHERE` clause that specifies which rows are wanted. The `WHERE` clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression is true are returned. The usual Boolean operators (`AND`, `OR`, and `NOT`) are allowed in the qualification. For example, the following retrieves the weather of San Francisco on rainy days:
 
 ```sql
 SELECT *
@@ -255,7 +255,7 @@ INNER JOIN cities ON weather.city = cities.name;
 
 This syntax is not as commonly used as the one above, but we show it here to help you understand the following topics.
 
-Now we will figure out how we can get the Hayward records back in. What we want the query to do is to scan the `weather` table and for each row to find the matching cities row(s). If no matching row is found we want some "empty values" to be substituted for the `cities` table's columns. This kind of query is called an outer join. (The joins we have seen so far are inner joins.) The command looks like this:
+Now we will figure out how we can get the Hayward records back in. What we want the query to do is to scan the `weather` table and for each row to find the matching cities row(s). If no matching row is found we want some “empty values” to be substituted for the `cities` table's columns. This kind of query is called an outer join. (The joins we have seen so far are inner joins.) The command looks like this:
 
 ```sql
 SELECT *
@@ -334,7 +334,7 @@ HAVING max(temp_lo) < 40;
 |---------|--------------|
 | Hayward | 37           |
 
-which gives us the same results for only the cities that have all `temp_lo` values below 40. Finally, if we only care about cities whose names begin with "S", we can use the `LIKE` operator:
+which gives us the same results for only the cities that have all `temp_lo` values below 40. Finally, if we only care about cities whose names begin with `S`, we can use the `LIKE` operator:
 
 ```sql
 SELECT city, max(temp_lo)

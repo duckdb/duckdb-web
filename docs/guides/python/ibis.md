@@ -528,7 +528,7 @@ penguins.group_by("species").aggregate()
 └───────────┘
 ```
 
-We grouped by the `species` column and handed it an "empty" aggregate command. The result of that is a column of the unique values in the `species` column.
+We grouped by the `species` column and handed it an “empty” aggregate command. The result of that is a column of the unique values in the `species` column.
 
 If we add a second column to the `group_by`, we'll get each unique pairing of the values in those columns.
 

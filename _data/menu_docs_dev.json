@@ -10,7 +10,7 @@
       "slug": "",
       "mainfolderitems": [
         {
-          "page": "Overview",
+          "page": "Getting Started",
           "url": "index"
         },
         {
@@ -374,24 +374,6 @@
                   "url": "configuration"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "page": "Configuration",
-          "slug": "configuration",
-          "subfolderitems": [
-            {
-              "page": "Overview",
-              "url": "overview"
-            },
-            {
-              "page": "Pragmas",
-              "url": "pragmas"
-            },
-            {
-              "page": "Secrets Manager",
-              "url": "secrets_manager"
             }
           ]
         },
@@ -788,6 +770,14 @@
                   "url": "lambda"
                 },
                 {
+                  "page": "List Functions",
+                  "url": "list"
+                },
+                {
+                  "page": "Map Functions",
+                  "url": "map"
+                },
+                {
                   "page": "Nested Functions",
                   "url": "nested"
                 },
@@ -804,6 +794,10 @@
                   "url": "regular_expressions"
                 },
                 {
+                  "page": "Struct Functions",
+                  "url": "struct"
+                },
+                {
                   "page": "Text Functions",
                   "url": "char"
                 },
@@ -818,6 +812,10 @@
                 {
                   "page": "Timestamp with Time Zone Functions",
                   "url": "timestamptz"
+                },
+                {
+                  "page": "Union Functions",
+                  "url": "union"
                 },
                 {
                   "page": "Utility Functions",
@@ -880,6 +878,24 @@
             {
               "page": "Samples",
               "url": "samples"
+            }
+          ]
+        },
+        {
+          "page": "Configuration",
+          "slug": "configuration",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "Pragmas",
+              "url": "pragmas"
+            },
+            {
+              "page": "Secrets Manager",
+              "url": "secrets_manager"
             }
           ]
         },

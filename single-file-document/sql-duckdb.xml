@@ -5,7 +5,7 @@
   <!-- Regular expression matching case-insensitively a single hexadecial digit. -->
   <!ENTITY hexDigit "[0-9a-fA-F]">
 
-  <!-- Regular expression matching all potential names of PostgresSQL built-in
+  <!-- Regular expression matching all potential names of PostgreSQL built-in
   functions and PostGIS functions. -->
   <!ENTITY functionName "[a-zA-Z][a-zA-Z0-9_]*">
 

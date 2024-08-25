@@ -21,7 +21,7 @@ Select the rows from `tbl`:
 SELECT j FROM tbl WHERE i = 3;
 ```
 
-Perform an aggregate grouped by the column "i":
+Perform an aggregate grouped by the column `i`:
 
 ```sql
 SELECT i, sum(j) FROM tbl GROUP BY i;

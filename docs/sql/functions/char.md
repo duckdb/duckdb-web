@@ -5,6 +5,8 @@ redirect_from:
   - docs/test/functions/char
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 ## Text Functions and Operators
 
 This section describes functions and operators for examining and manipulating [`STRING` values]({% link docs/sql/data_types/text.md %}).
@@ -32,11 +34,11 @@ This section describes functions and operators for examining and manipulating [`
 | [`format_bytes(bytes)`](#format_bytesbytes) | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`format(format, parameters, ...)`](#formatformat-parameters-) | Formats a string using the [fmt syntax](#fmt-syntax). |
 | [`from_base64(string)`](#from_base64string) | Convert a base64 encoded string to a character string. |
-| [`greatest(x1, x2, ...)`](#greatestx1-x2-) | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered "larger" than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| [`greatest(x1, x2, ...)`](#greatestx1-x2-) | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with the hash of the `value`. |
 | [`ilike_escape(string, like_specifier, escape_character)`](#ilike_escapestring-like_specifier-escape_character) | Returns true if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`instr(string, search_string)`](#instrstring-search_string) | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| [`least(x1, x2, ...)`](#leastx1-x2-) | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered "smaller" than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| [`least(x1, x2, ...)`](#leastx1-x2-) | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | [`left_grapheme(string, count)`](#left_graphemestring-count) | Extract the left-most grapheme clusters. |
 | [`left(string, count)`](#leftstring-count) | Extract the left-most count characters. |
 | [`length_grapheme(string)`](#length_graphemestring) | Number of grapheme clusters in `string`. |
@@ -94,7 +96,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <!-- markdownlint-enable MD056 -->
 
-### `string ^@ search_string`
+#### `string ^@ search_string`
 
 <div class="nostroke_table"></div>
 
@@ -103,7 +105,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Result** | `true` |
 | **Alias** | `starts_with` |
 
-### `string || string`
+#### `string || string`
 
 <div class="nostroke_table"></div>
 
@@ -112,7 +114,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Result** | `DuckDB` |
 | **Alias** | `concat` |
 
-### `string[index]`
+#### `string[index]`
 
 <div class="nostroke_table"></div>
 
@@ -121,7 +123,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Result** | `k` |
 | **Alias** | `array_extract` |
 
-### `string[begin:end]`
+#### `string[begin:end]`
 
 <div class="nostroke_table"></div>
 
@@ -140,7 +142,7 @@ SELECT  'abcdefghi'  AS str
 ,       str[3:-4]    -- substring from positio 3 up to and including the 4th position from the end, 'cdef' 
 ```
 
-### `string LIKE target`
+#### `string LIKE target`
 
 <div class="nostroke_table"></div>
 
@@ -148,7 +150,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `'hello' LIKE '%lo'` |
 | **Result** | `true` |
 
-### `string SIMILAR TO regex`
+#### `string SIMILAR TO regex`
 
 <div class="nostroke_table"></div>
 
@@ -156,7 +158,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `'hello' SIMILAR TO 'l+'` |
 | **Result** | `false` |
 
-### `array_extract(list, index)`
+#### `array_extract(list, index)`
 
 <div class="nostroke_table"></div>
 
@@ -165,7 +167,7 @@ SELECT  'abcdefghi'  AS str
 | **Result** | `u` |
 | **Aliases** | `list_element`, `list_extract` |
 
-### `array_slice(list, begin, end)`
+#### `array_slice(list, begin, end)`
 
 <div class="nostroke_table"></div>
 
@@ -177,7 +179,7 @@ SELECT  'abcdefghi'  AS str
 | **Example 3** | `array_slice('DuckDB', 0, -3)` |
 | **Result** | `Duck` |
 
-### `ascii(string)`
+#### `ascii(string)`
 
 <div class="nostroke_table"></div>
 
@@ -185,7 +187,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `ascii('Ω')` |
 | **Result** | `937` |
 
-### `bar(x, min, max[, width])`
+#### `bar(x, min, max[, width])`
 
 <div class="nostroke_table"></div>
 
@@ -193,7 +195,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `bar(5, 0, 20, 10)` |
 | **Result** | `██▌` |
 
-### `bit_length(string)`
+#### `bit_length(string)`
 
 <div class="nostroke_table"></div>
 
@@ -201,7 +203,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `bit_length('abc')` |
 | **Result** | `24` |
 
-### `chr(x)`
+#### `chr(x)`
 
 <div class="nostroke_table"></div>
 
@@ -209,7 +211,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `chr(65)` |
 | **Result** | A |
 
-### `concat_ws(separator, string, ...)`
+#### `concat_ws(separator, string, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -217,7 +219,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `concat_ws(', ', 'Banana', 'Apple', 'Melon')` |
 | **Result** | `Banana, Apple, Melon` |
 
-### `concat(string, ...)`
+#### `concat(string, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -225,7 +227,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `concat('Hello', ' ', 'World')` |
 | **Result** | `Hello World` |
 
-### `contains(string, search_string)`
+#### `contains(string, search_string)`
 
 <div class="nostroke_table"></div>
 
@@ -233,7 +235,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `contains('abc', 'a')` |
 | **Result** | `true` |
 
-### `ends_with(string, search_string)`
+#### `ends_with(string, search_string)`
 
 <div class="nostroke_table"></div>
 
@@ -242,7 +244,7 @@ SELECT  'abcdefghi'  AS str
 | **Result** | `true` |
 | **Alias** | `suffix` |
 
-### `format_bytes(bytes)`
+#### `format_bytes(bytes)`
 
 <div class="nostroke_table"></div>
 
@@ -250,7 +252,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `format_bytes(16384)` |
 | **Result** | `16.0 KiB` |
 
-### `format(format, parameters, ...)`
+#### `format(format, parameters, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -258,7 +260,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` |
 | **Result** | `Benchmark "CSV" took 42 seconds` |
 
-### `from_base64(string)`
+#### `from_base64(string)`
 
 <div class="nostroke_table"></div>
 
@@ -266,15 +268,15 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `from_base64('QQ==')` |
 | **Result** | `'A'` |
 
-### `greatest(x1, x2, ...)`
+#### `greatest(x1, x2, ...)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered "larger" than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| **Description** | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | **Example** | `greatest('abc', 'bcd', 'cde', 'EFG')` |
 | **Result** | `'cde'` |
 
-### `hash(value)`
+#### `hash(value)`
 
 <div class="nostroke_table"></div>
 
@@ -282,7 +284,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `hash('🦆')` |
 | **Result** | `2595805878642663834` |
 
-### `ilike_escape(string, like_specifier, escape_character)`
+#### `ilike_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -290,7 +292,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `ilike_escape('A%c', 'a$%C', '$')` |
 | **Result** | `true` |
 
-### `instr(string, search_string)`
+#### `instr(string, search_string)`
 
 <div class="nostroke_table"></div>
 
@@ -298,15 +300,15 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `instr('test test', 'es')` |
 | **Result** | 2 |
 
-### `least(x1, x2, ...)`
+#### `least(x1, x2, ...)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered "smaller" than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| **Description** | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | **Example** | `least('abc', 'BCD', 'cde', 'EFG')` |
 | **Result** | `'BCD'` |
 
-### `left_grapheme(string, count)`
+#### `left_grapheme(string, count)`
 
 <div class="nostroke_table"></div>
 
@@ -314,7 +316,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `left_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)` |
 | **Result** | `🤦🏼‍♂️` |
 
-### `left(string, count)`
+#### `left(string, count)`
 
 <div class="nostroke_table"></div>
 
@@ -322,7 +324,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `left('Hello🦆', 2)` |
 | **Result** | `He` |
 
-### `length_grapheme(string)`
+#### `length_grapheme(string)`
 
 <div class="nostroke_table"></div>
 
@@ -330,7 +332,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `length_grapheme('🤦🏼‍♂️🤦🏽‍♀️')` |
 | **Result** | `2` |
 
-### `length(string)`
+#### `length(string)`
 
 <div class="nostroke_table"></div>
 
@@ -338,7 +340,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `length('Hello🦆')` |
 | **Result** | `6` |
 
-### `like_escape(string, like_specifier, escape_character)`
+#### `like_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -346,7 +348,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `like_escape('a%c', 'a$%c', '$')` |
 | **Result** | `true` |
 
-### `lower(string)`
+#### `lower(string)`
 
 <div class="nostroke_table"></div>
 
@@ -355,7 +357,7 @@ SELECT  'abcdefghi'  AS str
 | **Result** | `hello` |
 | **Alias** | `lcase` |
 
-### `lpad(string, count, character)`
+#### `lpad(string, count, character)`
 
 <div class="nostroke_table"></div>
 
@@ -363,7 +365,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `lpad('hello', 8, '>')` |
 | **Result** | `>>>hello` |
 
-### `ltrim(string, characters)`
+#### `ltrim(string, characters)`
 
 <div class="nostroke_table"></div>
 
@@ -371,7 +373,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `ltrim('>>>>test<<', '><')` |
 | **Result** | `test<<` |
 
-### `ltrim(string)`
+#### `ltrim(string)`
 
 <div class="nostroke_table"></div>
 
@@ -379,7 +381,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `ltrim('␣␣␣␣test␣␣')` |
 | **Result** | `test␣␣` |
 
-### `md5(value)`
+#### `md5(value)`
 
 <div class="nostroke_table"></div>
 
@@ -387,7 +389,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `md5('123')` |
 | **Result** | `202cb962ac59075b964b07152d234b70` |
 
-### `nfc_normalize(string)`
+#### `nfc_normalize(string)`
 
 <div class="nostroke_table"></div>
 
@@ -395,7 +397,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `nfc_normalize('ardèch')` |
 | **Result** | `ardèch` |
 
-### `not_ilike_escape(string, like_specifier, escape_character)`
+#### `not_ilike_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -403,7 +405,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `not_ilike_escape('A%c', 'a$%C', '$')` |
 | **Result** | `false` |
 
-### `not_like_escape(string, like_specifier, escape_character)`
+#### `not_like_escape(string, like_specifier, escape_character)`
 
 <div class="nostroke_table"></div>
 
@@ -411,7 +413,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `not_like_escape('a%c', 'a$%c', '$')` |
 | **Result** | `false` |
 
-### `ord(string)`
+#### `ord(string)`
 
 <div class="nostroke_table"></div>
 
@@ -419,7 +421,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `ord('ü')` |
 | **Result** | `252` |
 
-### `parse_dirname(path, separator)`
+#### `parse_dirname(path, separator)`
 
 <div class="nostroke_table"></div>
 
@@ -427,7 +429,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `parse_dirname('path/to/file.csv', 'system')` |
 | **Result** | `path` |
 
-### `parse_dirpath(path, separator)`
+#### `parse_dirpath(path, separator)`
 
 <div class="nostroke_table"></div>
 
@@ -435,7 +437,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `parse_dirpath('/path/to/file.csv', 'forward_slash')` |
 | **Result** | `/path/to` |
 
-### `parse_filename(path, trim_extension, separator)`
+#### `parse_filename(path, trim_extension, separator)`
 
 <div class="nostroke_table"></div>
 
@@ -443,7 +445,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `parse_filename('path/to/file.csv', true, 'system')` |
 | **Result** | `file` |
 
-### `parse_path(path, separator)`
+#### `parse_path(path, separator)`
 
 <div class="nostroke_table"></div>
 
@@ -451,7 +453,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `parse_path('/path/to/file.csv', 'system')` |
 | **Result** | `[/, path, to, file.csv]` |
 
-### `position(search_string IN string)`
+#### `position(search_string IN string)`
 
 <div class="nostroke_table"></div>
 
@@ -459,7 +461,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `position('b' IN 'abc')` |
 | **Result** | `2` |
 
-### `printf(format, parameters...)`
+#### `printf(format, parameters...)`
 
 <div class="nostroke_table"></div>
 
@@ -467,7 +469,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)` |
 | **Result** | `Benchmark "CSV" took 42 seconds` |
 
-### `read_text(source)`
+#### `read_text(source)`
 
 <div class="nostroke_table"></div>
 
@@ -475,7 +477,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `read_text('hello.txt')` |
 | **Result** | `hello\n` |
 
-### `regexp_escape(string)`
+#### `regexp_escape(string)`
 
 <div class="nostroke_table"></div>
 
@@ -483,7 +485,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `regexp_escape('http://d.org')` |
 | **Result** | `http\:\/\/d\.org` |
 
-### `regexp_extract(string, pattern[, group = 0])`
+#### `regexp_extract(string, pattern[, group = 0])`
 
 <div class="nostroke_table"></div>
 
@@ -491,7 +493,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `hello` |
 
-### `regexp_extract(string, pattern, name_list)`
+#### `regexp_extract(string, pattern, name_list)`
 
 <div class="nostroke_table"></div>
 
@@ -499,7 +501,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
 
-### `regexp_extract_all(string, regex[, group = 0])`
+#### `regexp_extract_all(string, regex[, group = 0])`
 
 <div class="nostroke_table"></div>
 
@@ -507,7 +509,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `[hello, world]` |
 
-### `regexp_full_match(string, regex)`
+#### `regexp_full_match(string, regex)`
 
 <div class="nostroke_table"></div>
 
@@ -515,7 +517,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `regexp_full_match('anabanana', '(an)')` |
 | **Result** | `false` |
 
-### `regexp_matches(string, pattern)`
+#### `regexp_matches(string, pattern)`
 
 <div class="nostroke_table"></div>
 
@@ -523,7 +525,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `regexp_matches('anabanana', '(an)')` |
 | **Result** | `true` |
 
-### `regexp_replace(string, pattern, replacement)`
+#### `regexp_replace(string, pattern, replacement)`
 
 <div class="nostroke_table"></div>
 
@@ -531,7 +533,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
-### `regexp_split_to_array(string, regex)`
+#### `regexp_split_to_array(string, regex)`
 
 <div class="nostroke_table"></div>
 
@@ -540,7 +542,7 @@ SELECT  'abcdefghi'  AS str
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `string_split_regex`, `str_split_regex` |
 
-### `regexp_split_to_table(string, regex)`
+#### `regexp_split_to_table(string, regex)`
 
 <div class="nostroke_table"></div>
 
@@ -548,7 +550,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `regexp_split_to_table('hello world; 42', ';? ')` |
 | **Result** | Two rows: `'hello'`, `'world'` |
 
-### `repeat(string, count)`
+#### `repeat(string, count)`
 
 <div class="nostroke_table"></div>
 
@@ -556,7 +558,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `repeat('A', 5)` |
 | **Result** | `AAAAA` |
 
-### `replace(string, source, target)`
+#### `replace(string, source, target)`
 
 <div class="nostroke_table"></div>
 
@@ -564,7 +566,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `replace('hello', 'l', '-')` |
 | **Result** | `he--o` |
 
-### `reverse(string)`
+#### `reverse(string)`
 
 <div class="nostroke_table"></div>
 
@@ -572,7 +574,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `reverse('hello')` |
 | **Result** | `olleh` |
 
-### `right_grapheme(string, count)`
+#### `right_grapheme(string, count)`
 
 <div class="nostroke_table"></div>
 
@@ -580,7 +582,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `right_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)` |
 | **Result** | `🤦🏽‍♀️` |
 
-### `right(string, count)`
+#### `right(string, count)`
 
 <div class="nostroke_table"></div>
 
@@ -588,7 +590,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `right('Hello🦆', 3)` |
 | **Result** | `lo🦆` |
 
-### `rpad(string, count, character)`
+#### `rpad(string, count, character)`
 
 <div class="nostroke_table"></div>
 
@@ -596,7 +598,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `rpad('hello', 10, '<')` |
 | **Result** | `hello<<<<<` |
 
-### `rtrim(string, characters)`
+#### `rtrim(string, characters)`
 
 <div class="nostroke_table"></div>
 
@@ -604,7 +606,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `rtrim('>>>>test<<', '><')` |
 | **Result** | `>>>>test` |
 
-### `rtrim(string)`
+#### `rtrim(string)`
 
 <div class="nostroke_table"></div>
 
@@ -612,7 +614,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `rtrim('␣␣␣␣test␣␣')` |
 | **Result** | `␣␣␣␣test` |
 
-### `sha256(value)`
+#### `sha256(value)`
 
 <div class="nostroke_table"></div>
 
@@ -620,7 +622,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `sha256('🦆')` |
 | **Result** | `d7a5c5e0d1d94c32218539e7e47d4ba9c3c7b77d61332fb60d633dde89e473fb` |
 
-### `split_part(string, separator, index)`
+#### `split_part(string, separator, index)`
 
 <div class="nostroke_table"></div>
 
@@ -628,7 +630,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `split_part('a;b;c', ';', 2)` |
 | **Result** | `b` |
 
-### `starts_with(string, search_string)`
+#### `starts_with(string, search_string)`
 
 <div class="nostroke_table"></div>
 
@@ -636,7 +638,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `starts_with('abc', 'a')` |
 | **Result** | `true` |
 
-### `str_split_regex(string, regex)`
+#### `str_split_regex(string, regex)`
 
 <div class="nostroke_table"></div>
 
@@ -645,7 +647,7 @@ SELECT  'abcdefghi'  AS str
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `string_split_regex`, `regexp_split_to_array` |
 
-### `string_split_regex(string, regex)`
+#### `string_split_regex(string, regex)`
 
 <div class="nostroke_table"></div>
 
@@ -654,7 +656,7 @@ SELECT  'abcdefghi'  AS str
 | **Result** | `['hello', 'world', '42']` |
 | **Aliases** | `str_split_regex`, `regexp_split_to_array` |
 
-### `string_split(string, separator)`
+#### `string_split(string, separator)`
 
 <div class="nostroke_table"></div>
 
@@ -663,7 +665,7 @@ SELECT  'abcdefghi'  AS str
 | **Result** | `['hello', 'world']` |
 | **Aliases** | `str_split`, `string_to_array` |
 
-### `strip_accents(string)`
+#### `strip_accents(string)`
 
 <div class="nostroke_table"></div>
 
@@ -671,7 +673,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `strip_accents('mühleisen')` |
 | **Result** | `muhleisen` |
 
-### `strlen(string)`
+#### `strlen(string)`
 
 <div class="nostroke_table"></div>
 
@@ -679,7 +681,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `strlen('🦆')` |
 | **Result** | `4` |
 
-### `strpos(string, search_string)`
+#### `strpos(string, search_string)`
 
 <div class="nostroke_table"></div>
 
@@ -688,7 +690,7 @@ SELECT  'abcdefghi'  AS str
 | **Result** | 2 |
 | **Alias** | `instr` |
 
-### `substring(string, start, length)`
+#### `substring(string, start, length)`
 
 <div class="nostroke_table"></div>
 
@@ -697,7 +699,7 @@ SELECT  'abcdefghi'  AS str
 | **Result** | `el` |
 | **Alias** | `substr` |
 
-### `substring_grapheme(string, start, length)`
+#### `substring_grapheme(string, start, length)`
 
 <div class="nostroke_table"></div>
 
@@ -705,7 +707,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3, 2)` |
 | **Result** | `🤦🏽‍♀️🦆` |
 
-### `to_base64(blob)`
+#### `to_base64(blob)`
 
 <div class="nostroke_table"></div>
 
@@ -714,7 +716,7 @@ SELECT  'abcdefghi'  AS str
 | **Result** | `QQ==` |
 | **Alias** | `base64` |
 
-### `trim(string, characters)`
+#### `trim(string, characters)`
 
 <div class="nostroke_table"></div>
 
@@ -722,7 +724,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `trim('>>>>test<<', '><')` |
 | **Result** | `test` |
 
-### `trim(string)`
+#### `trim(string)`
 
 <div class="nostroke_table"></div>
 
@@ -730,7 +732,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `trim('    test  ')` |
 | **Result** | `test` |
 
-### `unicode(string)`
+#### `unicode(string)`
 
 <div class="nostroke_table"></div>
 
@@ -738,7 +740,7 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `[unicode('âbcd'), unicode('â'), unicode(''), unicode(NULL)]` |
 | **Result** | `[226, 226, -1, NULL]` |
 
-### `upper(string)`
+#### `upper(string)`
 
 <div class="nostroke_table"></div>
 
@@ -762,7 +764,7 @@ These functions are used to measure the similarity of two strings using various 
 | [`levenshtein(s1, s2)`](#levenshteins1-s2) | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | [`mismatches(s1, s2)`](#mismatchess1-s2) | Alias for `hamming(s1, s2)`. The number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
 
-### `damerau_levenshtein(s1, s2)`
+#### `damerau_levenshtein(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -770,7 +772,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `damerau_levenshtein('duckdb', 'udckbd')` |
 | **Result** | `2` |
 
-### `editdist3(s1, s2)`
+#### `editdist3(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -778,7 +780,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `editdist3('duck', 'db')` |
 | **Result** | `3` |
 
-### `hamming(s1, s2)`
+#### `hamming(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -786,7 +788,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `hamming('duck', 'luck')` |
 | **Result** | `1` |
 
-### `jaccard(s1, s2)`
+#### `jaccard(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -794,7 +796,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `jaccard('duck', 'luck')` |
 | **Result** | `0.6` |
 
-### `jaro_similarity(s1, s2)`
+#### `jaro_similarity(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -802,7 +804,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `jaro_similarity('duck', 'duckdb')` |
 | **Result** | `0.88` |
 
-### `jaro_winkler_similarity(s1, s2)`
+#### `jaro_winkler_similarity(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -810,7 +812,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `jaro_winkler_similarity('duck', 'duckdb')` |
 | **Result** | `0.93` |
 
-### `levenshtein(s1, s2)`
+#### `levenshtein(s1, s2)`
 
 <div class="nostroke_table"></div>
 
@@ -818,7 +820,7 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `levenshtein('duck', 'db')` |
 | **Result** | `3` |
 
-### `mismatches(s1, s2)`
+#### `mismatches(s1, s2)`
 
 <div class="nostroke_table"></div>
 

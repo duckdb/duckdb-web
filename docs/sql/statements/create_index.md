@@ -47,7 +47,7 @@ CREATE INDEX i_index ON integers ((j + k));
 | `table` | The name of the table to be indexed. |
 | `column` | The name of the column to be indexed. |
 | `expression` | An expression based on one or more columns of the table. The expression usually must be written with surrounding parentheses, as shown in the syntax. However, the parentheses can be omitted if the expression has the form of a function call. |
-| `index type` | Specified index type. Optional. |
+| `index type` | Specified index type, see [Indexes]({% link docs/sql/indexes.md %}). Optional. |
 | `option` | Index option in the form of a boolean true value (e.g., `is_cool`) or a key-value pair (e.g., `my_option = 2`). Optional. |
 
 ### Syntax

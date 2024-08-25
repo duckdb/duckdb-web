@@ -13,7 +13,9 @@
   * [With a Dev Container](#with-a-dev-container)
   * [Generating the search index](#generating-the-search-index)
   * [Updating the release calendar](#updating-the-release-calendar)
+  * [Syntax highlighter](#syntax-highlighter)
   * [Troubleshooting](#troubleshooting)
+    * [Jekyll doesn't work on Windows](#jekyll-doesnt-work-on-windows)
     * [Cannot install dependency](#cannot-install-dependency)
     * [Jekyll fails](#jekyll-fails)
     * [Bundle update fails](#bundle-update-fails)
@@ -24,48 +26,28 @@ The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
 ### Prerequisites
 
-The site is built using [Jekyll](https://jekyllrb.com/) 3.9.x.
+1. The site is built using [Jekyll](https://jekyllrb.com/) 3.9.x, which requires Ruby v2.7.x+. While some operating systems ship Ruby, the built-in Ruby distribution is often an older version.
 
-#### Ruby
+    On macOS, you can install a new Ruby version via [Homebrew](https://brew.sh/) and place it on the path:
 
-Jekyll 3.9.x requires Ruby v2.7.x+. Note that in some systems, the built-in Ruby distribution is older. On macOS, you can install a new Ruby version via [Homebrew](https://brew.sh/):
+    ```bash
+    brew install ruby
+    echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc
+    ```
 
-```bash
-brew install ruby
-```
+    You may also consider using the cross-platform [Ruby Version Manager (RVM)](https://rvm.io/) for installing a custom Ruby version.
 
-Then, place it on the path via:
+2. Install Jekyll and the other required Ruby dependencies using Bundler:
 
-```bash
-echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc
-```
+    ```bash
+    bundle install
+    ```
 
-You may also consider using the cross-platform [Ruby Version Manager (RVM)](https://rvm.io/) for installing a custom Ruby version.
-
-#### Jekyll
-
-Install Jekyll and the other required Ruby dependencies using Bundler:
-
-```bash
-bundle install
-```
-
-If you are on Windows, run these two commands to ensure Jekyll works:
-
-```bash
-gem uninstall eventmachine
-gem install eventmachine --platform ruby
-```
-
-For more details on using Jekyll, consult [GitHub's instructions](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll).
-
-#### Syntax highlighter
-
-We use [a fork of the Rouge syntax highligher](https://github.com/duckdb/rouge/blob/duckdb/lib/rouge/lexers/sql.rb), which is extended with keywords not in standard SQL (e.g., `RETURNING`, `ASOF`). This is automatically installed by Bundler.
+    For more details on setting up Jekyll, consult [GitHub's instructions](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll).
 
 ### Serving the site using a local Jekyll installation
 
-To save time on building, it is usually enough to test the website for the latest stable version and exclude the archives. To serve this website, run:
+To serve this website, run:
 
 ```bash
 scripts/serve-latest.sh
@@ -73,7 +55,7 @@ scripts/serve-latest.sh
 
 Visit <http://localhost:4000/docs/> to browse the website.
 
-To serve the full website with old versions included, run:
+Note that to save time on building, the `serve-latest.sh` script only deploys the latest stable version and exclude the archives. To serve the full website with old versions included, run:
 
 ```bash
 scripts/serve.sh
@@ -136,7 +118,20 @@ The release calendar is updated automatically by [CI](.github/workflows/jekyll.y
 python scripts/get_calendar.py
 ```
 
+## Syntax highlighter
+
+We use [a fork of the Rouge syntax highligher](https://github.com/duckdb/rouge/blob/duckdb/lib/rouge/lexers/sql.rb), which is extended with keywords not in standard SQL (e.g., `RETURNING`, `ASOF`). This is automatically installed by Bundler.
+
 ## Troubleshooting
+
+### Jekyll doesn't work on Windows
+
+If you are on Windows, run these two commands to ensure Jekyll works:
+
+```bash
+gem uninstall eventmachine
+gem install eventmachine --platform ruby
+```
 
 ### Cannot install dependency
 

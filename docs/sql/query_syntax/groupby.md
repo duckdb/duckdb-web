@@ -24,7 +24,7 @@ See the [`GROUPING SETS`]({% link docs/sql/query_syntax/grouping_sets.md %}) pag
 
 ## Examples
 
-Count the number of entries in the "addresses" table that belong to each different city:
+Count the number of entries in the `addresses` table that belong to each different city:
 
 ```sql
 SELECT city, count(*)
@@ -49,8 +49,6 @@ SELECT city, street_name
 FROM addresses
 GROUP BY ALL;
 ```
-
-GROUP BY city, street_name:
 
 Compute the average income per city per street_name. Since income is wrapped in an aggregate function, do not include it in the `GROUP BY`:
 

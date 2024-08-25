@@ -319,7 +319,7 @@ COPY
     (FIELD_IDS {my_list: {__duckdb_field_id: 42, element: 43}});
 ```
 
-Sets the `field_id` of colum `my_map` to 42, and columns `key` and `value` (default names of map children) to 43 and 44:
+Sets the `field_id` of column `my_map` to 42, and columns `key` and `value` (default names of map children) to 43 and 44:
 
 ```sql
 COPY

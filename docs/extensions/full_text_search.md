@@ -123,7 +123,7 @@ PRAGMA create_fts_index(
 );
 ```
 
-Search the `author` field index for documents that are authored by "Muhleisen". This retrieves "doc1":
+Search the `author` field index for documents that are authored by `Muhleisen`. This retrieves `doc1`:
 
 ```sql
 SELECT document_identifier, text_content, score
@@ -144,7 +144,7 @@ ORDER BY score DESC;
 |---------------------|----------------------------------------------------------------------|------:|
 | doc1                | The mallard is a dabbling duck that breeds throughout the temperate. | 0.0   |
 
-Search for documents about "small cats". This retrieves "doc2":
+Search for documents about `small cats`. This retrieves `doc2`:
 
 ```sql
 SELECT document_identifier, text_content, score

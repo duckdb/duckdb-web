@@ -3,6 +3,8 @@ layout: docu
 title: Time Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 This section describes functions and operators for examining and manipulating [`TIME` values]({% link docs/sql/data_types/time.md %}).
 
 ## Time Operators
@@ -35,7 +37,7 @@ The table below shows the available scalar functions for `TIME` types.
 
 The only [date parts]({% link docs/sql/functions/datepart.md %}) that are defined for times are `epoch`, `hours`, `minutes`, `seconds`, `milliseconds` and `microseconds`.
 
-### `current_time`
+#### `current_time`
 
 <div class="nostroke_table"></div>
 
@@ -44,7 +46,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 | **Result** | `10:31:58.578` |
 | **Alias** | `get_current_time()` |
 
-### `date_diff(part, starttime, endtime)`
+#### `date_diff(part, starttime, endtime)`
 
 <div class="nostroke_table"></div>
 
@@ -52,7 +54,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 | **Example** | `date_diff('hour', TIME '01:02:03', TIME '06:01:03')` |
 | **Result** | `5` |
 
-### `date_part(part, time)`
+#### `date_part(part, time)`
 
 <div class="nostroke_table"></div>
 
@@ -60,7 +62,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 | **Example** | `date_part('minute', TIME '14:21:13')` |
 | **Result** | `21` |
 
-### `date_sub(part, starttime, endtime)`
+#### `date_sub(part, starttime, endtime)`
 
 <div class="nostroke_table"></div>
 
@@ -68,7 +70,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 | **Example** | `date_sub('hour', TIME '01:02:03', TIME '06:01:03')` |
 | **Result** | `4` |
 
-### `datediff(part, starttime, endtime)`
+#### `datediff(part, starttime, endtime)`
 
 <div class="nostroke_table"></div>
 
@@ -76,7 +78,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 | **Example** | `datediff('hour', TIME '01:02:03', TIME '06:01:03')` |
 | **Result** | `5` |
 
-### `datepart(part, time)`
+#### `datepart(part, time)`
 
 <div class="nostroke_table"></div>
 
@@ -84,7 +86,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 | **Example** | `datepart('minute', TIME '14:21:13')` |
 | **Result** | `21` |
 
-### `datesub(part, starttime, endtime)`
+#### `datesub(part, starttime, endtime)`
 
 <div class="nostroke_table"></div>
 
@@ -92,7 +94,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 | **Example** | `datesub('hour', TIME '01:02:03', TIME '06:01:03')` |
 | **Result** | `4` |
 
-### `extract(part FROM time)`
+#### `extract(part FROM time)`
 
 <div class="nostroke_table"></div>
 
@@ -100,7 +102,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 | **Example** | `extract('hour' FROM TIME '14:21:13')` |
 | **Result** | `14` |
 
-### `get_current_time()`
+#### `get_current_time()`
 
 <div class="nostroke_table"></div>
 
@@ -109,7 +111,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 | **Result** | `10:31:58.578` |
 | **Alias** | `current_time` |
 
-### `make_time(bigint, bigint, double)`
+#### `make_time(bigint, bigint, double)`
 
 <div class="nostroke_table"></div>
 

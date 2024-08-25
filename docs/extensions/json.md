@@ -630,7 +630,7 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 | `json(json)` | Parse and minify `json`. |
 
 The JSONPointer syntax separates each field with a `/`.
-For example, to extract the first element of the array with key `"duck"`, you can do:
+For example, to extract the first element of the array with key `duck`, you can do:
 
 ```sql
 SELECT json_extract('{"duck": [1, 2, 3]}', '/duck/0');
@@ -869,7 +869,7 @@ SELECT json_group_structure(j) FROM example2;
 ## Transforming JSON
 
 In many cases, it is inefficient to extract values from JSON one-by-one.
-Instead, we can "extract" all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
+Instead, we can “extract” all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
 
 <div class="narrow_table"></div>
 

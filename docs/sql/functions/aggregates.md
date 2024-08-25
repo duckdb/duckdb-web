@@ -6,6 +6,8 @@ redirect_from:
   - docs/sql/aggregates
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 ## Examples
 
 Produce a single row containing the sum of the `amount` column:
@@ -132,7 +134,7 @@ The table below shows the available general aggregate functions.
 | [`sum(arg)`](#sumarg) | Calculates the sum value for all tuples in `arg`. |
 | [`sum_no_overflow(arg)`](#sum_no_overflowarg) | Calculates the sum value for all tuples in `arg` without [overflow](https://en.wikipedia.org/wiki/Integer_overflow) checks. Unlike `sum`, which works on floating-point values, `sum_no_overflow` only accepts `INTEGER` and `DECIMAL` values. |
 
-### `any_value(arg)`
+#### `any_value(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -140,7 +142,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `any_value(A)` |
 | **Alias(es)** | - |
 
-### `arbitrary(arg)`
+#### `arbitrary(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -148,7 +150,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `arbitrary(A)` |
 | **Alias(es)** | `first(A)` |
 
-### `arg_max(arg, val)`
+#### `arg_max(arg, val)`
 
 <div class="nostroke_table"></div>
 
@@ -156,7 +158,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `arg_max(A, B)` |
 | **Alias(es)** | `argMax(arg, val)`, `max_by(arg, val)` |
 
-### `arg_min(arg, val)`
+#### `arg_min(arg, val)`
 
 <div class="nostroke_table"></div>
 
@@ -164,7 +166,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `arg_min(A, B)` |
 | **Alias(es)** | `argMin(arg, val)`, `min_by(arg, val)` |
 
-### `array_agg(arg)`
+#### `array_agg(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -172,7 +174,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `array_agg(A)` |
 | **Alias(es)** | `list` |
 
-### `avg(arg)`
+#### `avg(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -180,7 +182,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `avg(A)` |
 | **Alias(es)** | `mean` |
 
-### `bit_and(arg)`
+#### `bit_and(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -188,7 +190,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `bit_and(A)` |
 | **Alias(es)** | - |
 
-### `bit_or(arg)`
+#### `bit_or(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -196,7 +198,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `bit_or(A)` |
 | **Alias(es)** | - |
 
-### `bit_xor(arg)`
+#### `bit_xor(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -204,7 +206,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `bit_xor(A)` |
 | **Alias(es)** | - |
 
-### `bitstring_agg(arg)`
+#### `bitstring_agg(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -212,7 +214,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `bitstring_agg(A)` |
 | **Alias(es)** | - |
 
-### `bool_and(arg)`
+#### `bool_and(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -220,7 +222,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `bool_and(A)` |
 | **Alias(es)** | - |
 
-### `bool_or(arg)`
+#### `bool_or(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -228,7 +230,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `bool_or(A)` |
 | **Alias(es)** | - |
 
-### `count(arg)`
+#### `count(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -236,7 +238,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `count(A)` |
 | **Alias(es)** | - |
 
-### `favg(arg)`
+#### `favg(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -244,7 +246,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `favg(A)` |
 | **Alias(es)** | - |
 
-### `first(arg)`
+#### `first(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -252,7 +254,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `first(A)` |
 | **Alias(es)** | `arbitrary(A)` |
 
-### `fsum(arg)`
+#### `fsum(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -260,7 +262,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `fsum(A)` |
 | **Alias(es)** | `sumKahan`, `kahan_sum` |
 
-### `geomean(arg)`
+#### `geomean(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -268,7 +270,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `geomean(A)` |
 | **Alias(es)** | `geometric_mean(A)` |
 
-### `histogram(arg)`
+#### `histogram(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -276,7 +278,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `histogram(A)` |
 | **Alias(es)** | - |
 
-### `last(arg)`
+#### `last(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -284,7 +286,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `last(A)` |
 | **Alias(es)** | - |
 
-### `list(arg)`
+#### `list(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -292,7 +294,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `list(A)` |
 | **Alias(es)** | `array_agg` |
 
-### `max(arg)`
+#### `max(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -300,7 +302,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `max(A)` |
 | **Alias(es)** | - |
 
-### `max_by(arg, val)`
+#### `max_by(arg, val)`
 
 <div class="nostroke_table"></div>
 
@@ -308,7 +310,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `max_by(A, B)` |
 | **Alias(es)** | `argMax(arg, val)`, `arg_max(arg, val)` |
 
-### `min(arg)`
+#### `min(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -316,7 +318,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `min(A)` |
 | **Alias(es)** | - |
 
-### `min_by(arg, val)`
+#### `min_by(arg, val)`
 
 <div class="nostroke_table"></div>
 
@@ -324,7 +326,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `min_by(A, B)` |
 | **Alias(es)** | `argMin(arg, val)`, `arg_min(arg, val)` |
 
-### `product(arg)`
+#### `product(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -332,7 +334,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `product(A)` |
 | **Alias(es)** | - |
 
-### `string_agg(arg, sep)`
+#### `string_agg(arg, sep)`
 
 <div class="nostroke_table"></div>
 
@@ -340,7 +342,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `string_agg(S, ',')` |
 | **Alias(es)** | `group_concat(arg, sep)`, `listagg(arg, sep)` |
 
-### `sum(arg)`
+#### `sum(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -348,7 +350,7 @@ The table below shows the available general aggregate functions.
 | **Example** | `sum(A)` |
 | **Alias(es)** | - |
 
-### `sum_no_overflow(arg)`
+#### `sum_no_overflow(arg)`
 
 <div class="nostroke_table"></div>
 
@@ -399,7 +401,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | [`var_pop(x)`](#var_popx) | The population variance, which does not include bias correction. |
 | [`var_samp(x)`](#var_sampx) | The sample variance, which includes Bessel's bias correction. |
 
-### `corr(y, x)`
+#### `corr(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -407,7 +409,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | `covar_pop(y, x) / (stddev_pop(x) * stddev_pop(y))` |
 | **Alias(es)** | - |
 
-### `covar_pop(y, x)`
+#### `covar_pop(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -415,7 +417,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | `(sum(x*y) - sum(x) * sum(y) / regr_count(y, x)) / regr_count(y, x)`, `covar_samp(y, x) * (1 - 1 / regr_count(y, x))` |
 | **Alias(es)** | - |
 
-### `covar_samp(y, x)`
+#### `covar_samp(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -423,7 +425,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | `(sum(x*y) - sum(x) * sum(y) / regr_count(y, x)) / (regr_count(y, x) - 1)`, `covar_pop(y, x) / (1 - 1 / regr_count(y, x))` |
 | **Alias(es)** | `regr_sxy(y, x)` |
 
-### `entropy(x)`
+#### `entropy(x)`
 
 <div class="nostroke_table"></div>
 
@@ -431,7 +433,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `kurtosis_pop(x)`
+#### `kurtosis_pop(x)`
 
 <div class="nostroke_table"></div>
 
@@ -439,7 +441,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `kurtosis(x)`
+#### `kurtosis(x)`
 
 <div class="nostroke_table"></div>
 
@@ -447,7 +449,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `mad(x)`
+#### `mad(x)`
 
 <div class="nostroke_table"></div>
 
@@ -455,7 +457,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | `median(abs(x - median(x)))` |
 | **Alias(es)** | - |
 
-### `median(x)`
+#### `median(x)`
 
 <div class="nostroke_table"></div>
 
@@ -463,7 +465,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | `quantile_cont(x, 0.5)` |
 | **Alias(es)** | - |
 
-### `mode(x)`
+#### `mode(x)`
 
 <div class="nostroke_table"></div>
 
@@ -471,7 +473,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `quantile_cont(x, pos)`
+#### `quantile_cont(x, pos)`
 
 <div class="nostroke_table"></div>
 
@@ -479,7 +481,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `quantile_disc(x, pos)`
+#### `quantile_disc(x, pos)`
 
 <div class="nostroke_table"></div>
 
@@ -487,7 +489,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | `quantile` |
 
-### `regr_avgx(y, x)`
+#### `regr_avgx(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -495,7 +497,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `regr_avgy(y, x)`
+#### `regr_avgy(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -503,7 +505,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `regr_count(y, x)`
+#### `regr_count(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -511,7 +513,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `regr_intercept(y, x)`
+#### `regr_intercept(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -519,7 +521,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | `regr_avgy(y, x) - regr_slope(y, x) * regr_avgx(y, x)` |
 | **Alias(es)** | - |
 
-### `regr_r2(y, x)`
+#### `regr_r2(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -527,7 +529,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `regr_slope(y, x)`
+#### `regr_slope(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -535,7 +537,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | `regr_sxy(y, x) / regr_sxx(y, x)` |
 | **Alias(es)** | - |
 
-### `regr_sxx(y, x)`
+#### `regr_sxx(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -543,7 +545,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `regr_sxy(y, x)`
+#### `regr_sxy(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -551,7 +553,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `regr_syy(y, x)`
+#### `regr_syy(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -559,7 +561,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `skewness(x)`
+#### `skewness(x)`
 
 <div class="nostroke_table"></div>
 
@@ -567,7 +569,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | - |
 | **Alias(es)** | - |
 
-### `stddev_pop(x)`
+#### `stddev_pop(x)`
 
 <div class="nostroke_table"></div>
 
@@ -575,7 +577,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | `sqrt(var_pop(x))` |
 | **Alias(es)** | - |
 
-### `stddev_samp(x)`
+#### `stddev_samp(x)`
 
 <div class="nostroke_table"></div>
 
@@ -583,7 +585,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | `sqrt(var_samp(x))`|
 | **Alias(es)** | `stddev(x)`|
 
-### `var_pop(x)`
+#### `var_pop(x)`
 
 <div class="nostroke_table"></div>
 
@@ -591,7 +593,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | **Formula** | `(sum(x^2) - sum(x)^2 / count(x)) / count(x)`, `var_samp(y, x) * (1 - 1 / count(x))` |
 | **Alias(es)** | - |
 
-### `var_samp(x)`
+#### `var_samp(x)`
 
 <div class="nostroke_table"></div>
 
