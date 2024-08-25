@@ -345,7 +345,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://artifacts.duckdb.org/latest/java-jars.zip'
+  link: 'https://artifacts.duckdb.org/duckdb-java/latest/java-jars.zip'
   note: ''
   usage_example: ''
 - variant: nightly
