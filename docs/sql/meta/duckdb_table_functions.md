@@ -318,6 +318,16 @@ The `duckdb_types()` function provides metadata about the data types available i
 | `type_category` | The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expression. For example, the `NUMERIC` type_category includes integers, decimals, and floating point numbers. | `VARCHAR` |
 | `internal` | Whether this is an internal (built-in) or a user object. | `BOOLEAN` |
 
+## `duckdb_variables`
+
+The `duckdb_variables()` function provides metadata about the variables available in the DuckDB instance.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `name` | The name of the variable, e.g., `x`. | `VARCHAR` |
+| `value` | The value of the variable, e.g. `12`. | `VARCHAR` |
+| `type` | The type of the variable, e.g., `INTEGER`. | `VARCHAR` |
+
 ## `duckdb_views`
 
 The `duckdb_views()` function provides metadata about the views available in the DuckDB instance.
