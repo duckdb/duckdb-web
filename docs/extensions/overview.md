@@ -135,6 +135,8 @@ To change the default location where DuckDB stores its extensions, use the `exte
 SET extension_directory = '/path/to/your/extension/directory';
 ```
 
+Note that setting the value of the `home_directory` configuration option has no effect on the location of the extensions.
+
 ## Binary Compatibility
 
 To avoid binary compatibility issues, the binary extensions distributed by DuckDB are tied both to a specific DuckDB version and a platform. This means that DuckDB can automatically detect binary compatibility between it and a loadable extension. When trying to load an extension that was compiled for a different version or platform, DuckDB will throw an error and refuse to load the extension.
