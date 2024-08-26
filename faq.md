@@ -278,11 +278,11 @@ Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs
 
 <div class="qa-wrap" markdown="1">
 
-### Is there a development roadmap?
+### Is there a development roadmap for DuckDB?
 
 <div class="answer" markdown="1">
 
-We do not maintain a public development roadmap.
+Currently, we do not maintain a public development roadmap.
 We discuss planned developments at DuckCon events (typically held twice a year).
 See the most recent [overview talk at DuckCon #5](https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf).
 
