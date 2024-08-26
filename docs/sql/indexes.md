@@ -38,28 +38,28 @@ This has certain performance implications, particularly for wide tables, as enti
 Due to the presence of transactions, data can only be removed from the index after (1) the transaction that performed the delete is committed, and (2) no further transactions exist that refer to the old entry still present in the index. As a result of this – transactions that perform *deletions followed by insertions* may trigger unexpected unique constraint violations, as the deleted tuple has not actually been removed from the index yet. For example:
 
 ```sql
-CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
-INSERT INTO students VALUES (1, 'Student 1');
+CREATE TABLE students (id INTEGER, name VARCHAR);
+INSERT INTO students VALUES (1, 'John Doe');
+CREATE UNIQUE INDEX students_id ON students (id);
 
-BEGIN;
+BEGIN; -- start transaction
 DELETE FROM students WHERE id = 1;
-INSERT INTO students VALUES (1, 'Student 2');
+INSERT INTO students VALUES (1, 'Jane Doe');
 ```
 
+The last statement fails with the following error:
+
 ```console
-Constraint Error: Duplicate key "id: 1" violates primary key constraint.
-If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
+Constraint Error: Duplicate key "id: 1" violates unique constraint. If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
 ```
 
 This, combined with the fact that updates are turned into deletions and insertions within the same transaction, means that updating rows in the presence of unique or primary key constraints can often lead to unexpected unique constraint violations. For example, in the following query, `SET id = 1` causes a `Constraint Error` to occur.
 
 ```sql
 CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
-INSERT INTO students VALUES (1, 'Student 1');
+INSERT INTO students VALUES (1, 'John Doe');
 
-UPDATE students
-SET id = 1, name = 'Student 2'
-WHERE id = 1;
+UPDATE students SET id = 1 WHERE id = 1;
 ```
 
 ```console
