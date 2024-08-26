@@ -21,3 +21,8 @@ A great starting point is to read the [DuckDB-Wasm launch blog post]({% post_url
 Another great resource is the [GitHub repository](https://github.com/duckdb/duckdb-wasm).
 
 For details, see the full [DuckDB-Wasm API Documentation](https://shell.duckdb.org/docs/modules/index.html).
+
+## Limitations
+
+* By default, the WebAssembly client only uses a single thread.
+* The WebAssembly client has a limited amount of memory available. [WebAssembly limits the amount of available memory to 4 GB](https://v8.dev/blog/4gb-wasm-memory) and browsers may impose even stricter limits.
