@@ -84,6 +84,8 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 | `constraint_column_indexes` | An array of table column indexes referring to the columns that appear in the constraint definition. | `BIGINT[]` |
 | `constraint_column_names` | An array of table column names appearing in the constraint definition. | `VARCHAR[]` |
 
+The [`information_schema.referential_constraints`]({% link docs/sql/meta/information_schema.md %}#referential_constraints-referential-constraints) and [`information_schema.table_constraints`]({% link docs/sql/meta/information_schema.md %}#table_constraints-table-constraints) system views provide a more standardized way to obtain metadata about constraints, but the `duckdb_constraints` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.referential_constraints` and `information_schema.table_constraints` are implemented as a query on top of `duckdb_constraints()`)
+
 ## `duckdb_databases`
 
 The `duckdb_databases()` function lists the databases that are accessible from within the current DuckDB process.
