@@ -494,6 +494,10 @@
                   "url": "set"
                 },
                 {
+                  "page": "SET VARIABLE",
+                  "url": "set_variable"
+                },
+                {
                   "page": "SUMMARIZE",
                   "url": "summarize"
                 },
