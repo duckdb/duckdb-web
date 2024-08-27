@@ -40,7 +40,7 @@ $(document).ready(function(){
 	}
 	
 	function simpleCodeHighlight( markup ) {
-	
+		markup = markup.replace( 'duckdb', '<span class="nb">duckdb</span>' );
 		markup = markup.replace( 'winget install', '<span class="nb">winget install</span>' );
 		markup = markup.replace( 'pip install', '<span class="nb">pip install</span>' );
 		markup = markup.replace( 'npm install duckdb', '<span class="nb">npm install duckdb</span>' );
@@ -250,7 +250,7 @@ $(document).ready(function(){
 	
 		if ( configurables[0].usage_example ) {
 			$( '.example.output' ).show();
-			$( '.example code' ).html( configurables[0].usage_example );
+			$( '.example code' ).html( simpleCodeHighlight( replaceHtmlEntities( configurables[0].usage_example ) ) );
 		} else {
 			$( '.example.output' ).hide();
 		}
