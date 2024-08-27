@@ -39,18 +39,20 @@ By default, CTEs are inlined into the main query. Inlining can result in duplica
 ```sql
 WITH t(x) AS (⟨Q_t⟩)
 SELECT *
-FROM t AS t1,
-     t AS t2,
-     t AS t3;
+FROM
+    t AS t1,
+    t AS t2,
+    t AS t3;
 ```
 
 Inlining duplicates the definition of `t` for each reference which results in the following query:
 
 ```sql
 SELECT *
-FROM (⟨Q_t⟩) AS t1(x),
-     (⟨Q_t⟩) AS t2(x),
-     (⟨Q_t⟩) AS t3(x);
+FROM
+    (⟨Q_t⟩) AS t1(x),
+    (⟨Q_t⟩) AS t2(x),
+    (⟨Q_t⟩) AS t3(x);
 ```
 
 If `⟨Q_t⟩` is expensive, materializing it with the `MATERIALIZED` keyword can improve performance. In this case, `⟨Q_t⟩` is evaluated only once.
@@ -58,9 +60,10 @@ If `⟨Q_t⟩` is expensive, materializing it with the `MATERIALIZED` keyword ca
 ```sql
 WITH t(x) AS MATERIALIZED (⟨Q_t⟩)
 SELECT *
-FROM t AS t1,
-     t AS t2,
-     t AS t3;
+FROM
+    t AS t1,
+    t AS t2,
+    t AS t3;
 ```
 
 ## Recursive CTEs
