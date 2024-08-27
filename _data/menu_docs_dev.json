@@ -406,7 +406,7 @@
                   "url": "alter_view"
                 },
                 {
-                  "page": "ATTACH/DETACH",
+                  "page": "ATTACH / DETACH",
                   "url": "attach"
                 },
                 {
@@ -470,7 +470,7 @@
                   "url": "drop"
                 },
                 {
-                  "page": "EXPORT/IMPORT DATABASE",
+                  "page": "EXPORT / IMPORT DATABASE",
                   "url": "export"
                 },
                 {
@@ -490,7 +490,7 @@
                   "url": "select"
                 },
                 {
-                  "page": "SET/RESET",
+                  "page": "SET / RESET",
                   "url": "set"
                 },
                 {
@@ -1162,7 +1162,7 @@
                   "url": "cloudflare_r2_import"
                 },
                 {
-                  "page": "DuckDB over HTTPS/S3",
+                  "page": "DuckDB over HTTPS / S3",
                   "url": "duckdb_over_https_or_s3"
                 }
               ]
