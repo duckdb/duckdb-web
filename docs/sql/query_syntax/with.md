@@ -4,11 +4,13 @@ title: WITH Clause
 railroad: query_syntax/with.js
 ---
 
-The `WITH` clause allows you to specify common table expressions (CTEs). Regular (non-recursive) common-table-expressions are essentially views that are limited in scope to a particular query. CTEs can reference each-other and can be nested. [Recursive CTEs](#recursive-ctes) can reference themselves.
+The `WITH` clause allows you to specify common table expressions (CTEs).
+Regular (non-recursive) common-table-expressions are essentially views that are limited in scope to a particular query.
+CTEs can reference each-other and can be nested. [Recursive CTEs](#recursive-ctes) can reference themselves.
 
 ## Basic CTE Examples
 
-Create a CTE called “cte” and use it in the main query:
+Create a CTE called `cte` and use it in the main query:
 
 ```sql
 WITH cte AS (SELECT 42 AS x)
@@ -19,12 +21,12 @@ SELECT * FROM cte;
 |---:|
 | 42 |
 
-Create two CTEs, where the second CTE references the first CTE:
+Create two CTEs `cte1` and `cte2`, where the second CTE references the first CTE:
 
 ```sql
 WITH
-    cte AS (SELECT 42 AS i),
-    cte2 AS (SELECT i * 100 AS x FROM cte)
+    cte1 AS (SELECT 42 AS i),
+    cte2 AS (SELECT i * 100 AS x FROM cte1)
 SELECT * FROM cte2;
 ```
 
@@ -32,12 +34,16 @@ SELECT * FROM cte2;
 |-----:|
 | 4200 |
 
-## Materialized CTEs
+## CTE Materialization
 
-By default, CTEs are inlined into the main query. Inlining can result in duplicate work, because the definition is copied for each reference. Take this query for example:
+DuckDB can employ CTE materialization, i.e., inlining CTEs into the main query.
+This is perforemd using heuristics: if the CTE performs a grouped aggregation and is queried more than once, it is materialized.
+Materialization can be explicitly activated by defining the CTE using `AS MATERIALIZED` and disabled by using `AS NOT MATERIALIZED`.
+
+Take the following query for example, which invokes the same CTE three times:
 
 ```sql
-WITH t(x) AS (⟨Q_t⟩)
+WITH t(x) AS (⟨complex_query⟩)
 SELECT *
 FROM
     t AS t1,
@@ -50,15 +56,26 @@ Inlining duplicates the definition of `t` for each reference which results in th
 ```sql
 SELECT *
 FROM
-    (⟨Q_t⟩) AS t1(x),
-    (⟨Q_t⟩) AS t2(x),
-    (⟨Q_t⟩) AS t3(x);
+    (⟨complex_query⟩) AS t1(x),
+    (⟨complex_query⟩) AS t2(x),
+    (⟨complex_query⟩) AS t3(x);
 ```
 
-If `⟨Q_t⟩` is expensive, materializing it with the `MATERIALIZED` keyword can improve performance. In this case, `⟨Q_t⟩` is evaluated only once.
+If `⟨complex_query⟩` is expensive, materializing it with the `MATERIALIZED` keyword can improve performance. In this case, `⟨complex_query⟩` is evaluated only once.
 
 ```sql
-WITH t(x) AS MATERIALIZED (⟨Q_t⟩)
+WITH t(x) AS MATERIALIZED (⟨complex_query⟩)
+SELECT *
+FROM
+    t AS t1,
+    t AS t2,
+    t AS t3;
+```
+
+If one wants to disable materialization, use `NOT MATERIALIZED`:
+
+```sql
+WITH t(x) AS NOT MATERIALIZED (⟨complex_query⟩)
 SELECT *
 FROM
     t AS t1,
