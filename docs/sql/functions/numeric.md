@@ -104,7 +104,7 @@ The table below shows the available mathematical functions.
 | [`subtract(x, y)`](#subtractx-y) | Alias for `x - y`. |
 | [`tan(x)`](#tanx) | Computes the tangent of `x`. |
 | [`trunc(x)`](#truncx) | Truncates the number. |
-| [`xor(x)`](#xorx) | Bitwise XOR. |
+| [`xor(x, y)`](#xorx) | Bitwise XOR. |
 
 #### `@(x)`
 
@@ -531,7 +531,7 @@ The table below shows the available mathematical functions.
 | **Example** | `trunc(17.4)` |
 | **Result** | `17` |
 
-#### `xor(x)`
+#### `xor(x, y)`
 
 <div class="nostroke_table"></div>
 
