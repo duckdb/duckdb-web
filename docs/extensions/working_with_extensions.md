@@ -227,3 +227,12 @@ For building and installing extensions from source, see the [building guide]({% 
 ## Statically Linking Extensions
 
 To statically link extensions, follow the [developer documentation's "Using extension config files" section](https://github.com/duckdb/duckdb/blob/main/extension/README.md#using-extension-config-files).
+
+## In-tree vs Out-of-tree
+Originally, DuckDB extensions lived exclusively in the DuckDB main repository, `github.com/duckdb/duckdb`. These extensions are called in-tree. Later, the concept
+of out-of-tree extensions was added, where extensions where separated into their own repository, which we call out-of-tree.
+
+While from a user's perspective, there are generally no noticeable differences, there are some minor differences related to versioning:
+- in-tree extensions use the version of DuckDB instead of having their own version
+- in-tree extensions do not have dedicated release notes, their changes are reflected in the regular [DuckDB release notes](https://github.com/duckdb/duckdb/releases)
+- core out-of tree extensions tend to live in a repository in `github.com/duckdb/duckdb_<ext_name>` but the name may vary. See the [full list]({% link docs/extensions/core_extensions.md %}) of core extensions for details.
