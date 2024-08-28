@@ -242,7 +242,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
+  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966081/artifacts/1862736429'
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
 
@@ -258,7 +258,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
+  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966032/artifacts/1863098716'
   note: ''
   usage_example: ./duckdb
 - variant: nightly
@@ -365,7 +365,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
+  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966081/artifacts/1862736429'
   note: ''
   usage_example: ''
 - variant: nightly
@@ -375,7 +375,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
+  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966032/artifacts/1863098716'
   note: ''
   usage_example: ''
 - variant: nightly
