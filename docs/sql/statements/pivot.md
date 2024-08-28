@@ -36,15 +36,16 @@ All examples use the dataset produced by the queries below:
 CREATE TABLE Cities (
     Country VARCHAR, Name VARCHAR, Year INTEGER, Population INTEGER
 );
-INSERT INTO Cities VALUES ('NL', 'Amsterdam', 2000, 1005);
-INSERT INTO Cities VALUES ('NL', 'Amsterdam', 2010, 1065);
-INSERT INTO Cities VALUES ('NL', 'Amsterdam', 2020, 1158);
-INSERT INTO Cities VALUES ('US', 'Seattle', 2000, 564);
-INSERT INTO Cities VALUES ('US', 'Seattle', 2010, 608);
-INSERT INTO Cities VALUES ('US', 'Seattle', 2020, 738);
-INSERT INTO Cities VALUES ('US', 'New York City', 2000, 8015);
-INSERT INTO Cities VALUES ('US', 'New York City', 2010, 8175);
-INSERT INTO Cities VALUES ('US', 'New York City', 2020, 8772);
+INSERT INTO Cities VALUES
+    ('NL', 'Amsterdam', 2000, 1005),
+    ('NL', 'Amsterdam', 2010, 1065),
+    ('NL', 'Amsterdam', 2020, 1158),
+    ('US', 'Seattle', 2000, 564),
+    ('US', 'Seattle', 2010, 608),
+    ('US', 'Seattle', 2020, 738),
+    ('US', 'New York City', 2000, 8015),
+    ('US', 'New York City', 2010, 8175),
+    ('US', 'New York City', 2020, 8772);
 ```
 
 ```sql
