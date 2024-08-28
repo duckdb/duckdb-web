@@ -269,6 +269,7 @@ Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs
 <a href="{% link docs/extensions/mysql.md %}">other</a>
 <a href="{% link docs/extensions/postgres.md %}">database</a>
 <a href="{% link docs/extensions/sqlite.md %}">systems</a>.
+And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/05/28/duckdb-doesnt-need-data">doesn't even need data to be a database</a>.
 
 </div>
 
