@@ -9,11 +9,16 @@ excerpt: "The DuckDB team is happy to announce that today we’re releasing Duck
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.1.0).
 
-<img src="/images/blog/paddling-of-ducks.svg"
-     alt="Logos of DuckDB releases"
-     width="800px"
-     />
+> Some packages (R, Java) take a few extra days to release due to the reviews required in the release pipelines.
 
+This is our first minor release since we have released version 1.0.0 three months ago.
 
+## What's New in 1.1.0
 
-_For press inquiries, please reach out to [Gabor Szarnyas](mailto:gabor@duckdblabs.com)._
+There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
+
+...
+
+## Final Thoughts
+
+These were a few highlights – but there are many more features and improvements in this release. Below are a few more highlights. The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.1.0).
