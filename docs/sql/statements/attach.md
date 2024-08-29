@@ -4,7 +4,7 @@ title: ATTACH/DETACH Statement
 railroad: statements/attach.js
 ---
 
-The `ATTACH` statement adds a new database file to the catalog that can be read from and written to.
+DuckDB allows attaching to and detaching from database files.
 
 ## Examples
 
@@ -69,6 +69,9 @@ USE file;
 ```
 
 ## Attach
+
+The `ATTACH` statement adds a new database file to the catalog that can be read from and written to.
+Note that attachment definitions are not persisted between sessions: when a new session is launched, you have to re-attach to all databases.
 
 ### Attach Syntax
 
