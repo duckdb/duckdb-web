@@ -41,7 +41,7 @@ Below is a table of the columns returned by `parquet_metadata`.
 | data_page_offset        | BIGINT          |
 | total_compressed_size   | BIGINT          |
 | total_uncompressed_size | BIGINT          |
-| key_value_metadata      | MAP(BLOB, BLOB)`|
+| key_value_metadata      | MAP(BLOB, BLOB) |
 
 ## Parquet Schema
 

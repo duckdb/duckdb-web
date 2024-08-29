@@ -3,6 +3,8 @@ layout: docu
 title: Struct Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 | Name | Description |
 |:--|:-------|
 | [`struct.entry`](#structentry) | Dot notation that serves as an alias for `struct_extract` from named `STRUCT`s. |

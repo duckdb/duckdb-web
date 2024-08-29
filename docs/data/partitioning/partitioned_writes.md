@@ -62,12 +62,12 @@ Write a table to a Hive partitioned data set of .parquet files, with an index in
 
 ```sql
 COPY orders TO 'orders'
-    (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "orders_{i}");
+    (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'orders_{i}');
 ```
 
 Write a table to a Hive partitioned data set of .parquet files, with unique filenames:
 
 ```sql
 COPY orders TO 'orders'
-    (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "file_{uuid}");
+    (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'file_{uuid}');
 ```

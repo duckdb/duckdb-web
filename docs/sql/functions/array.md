@@ -3,6 +3,8 @@ layout: docu
 title: Array Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 All [`LIST` functions]({% link docs/sql/functions/nested.md %}#list-functions) work with the [`ARRAY` data type]({% link docs/sql/data_types/array.md %}). Additionally, several `ARRAY`-native functions are also supported.
 
 ## Array-Native Functions

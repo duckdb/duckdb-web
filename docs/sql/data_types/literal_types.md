@@ -59,7 +59,7 @@ Note that double quotes (`"`) cannot be used as string delimiter character: inst
 
 ### Implicit String Literal Concatenation
 
-Consecutive single-quoted string literals sepearated only by whitespace that contains at least one newline are implicitly concatenated:
+Consecutive single-quoted string literals separated only by whitespace that contains at least one newline are implicitly concatenated:
 
 ```sql
 SELECT 'Hello'
@@ -81,7 +81,7 @@ They both return the following result:
 |-------------|
 | Hello World |
 
-Note that implicit concatenation only works if there is at least one newline between the literals. Using adjacent string literals separated by whitspace without a newline results in a syntax error:
+Note that implicit concatenation only works if there is at least one newline between the literals. Using adjacent string literals separated by whitespace without a newline results in a syntax error:
 
 ```sql
 SELECT 'Hello' ' ' 'World' AS greeting;

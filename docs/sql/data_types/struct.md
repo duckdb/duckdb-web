@@ -3,7 +3,7 @@ layout: docu
 title: Struct Data Type
 ---
 
-Conceptually, a `STRUCT` column contains an ordered list of columns called "entries". The entries are referenced by name using strings. This document refers to those entry names as keys. Each row in the `STRUCT` column must have the same keys. The names of the struct entries are part of the *schema*. Each row in a `STRUCT` column must have the same layout. The names of the struct entries are case-insensitive.
+Conceptually, a `STRUCT` column contains an ordered list of columns called “entries”. The entries are referenced by name using strings. This document refers to those entry names as keys. Each row in the `STRUCT` column must have the same keys. The names of the struct entries are part of the *schema*. Each row in a `STRUCT` column must have the same layout. The names of the struct entries are case-insensitive.
 
 `STRUCT`s are typically used to nest multiple columns into a single column, and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
 
@@ -236,7 +236,7 @@ The ordering is defined positionally in the same way that words can be ordered i
 > and a nested `NULL` value member will compare above a nested non-`NULL` value member.
 > DuckDB 0.10.2 introduced a breaking change in semantics, described below.
 
-Nested `NULL` values are compared following Postgres' semantics,
+Nested `NULL` values are compared following PostgreSQL's semantics,
 i.e., lower nested levels are used for tie-breaking.
 
 ## Functions

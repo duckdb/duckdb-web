@@ -3,6 +3,8 @@ layout: docu
 title: List Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 | Name | Description |
 |:--|:-------|
 | [`list[index]`](#listindex) | Bracket notation serves as an alias for `list_extract`. |
@@ -420,9 +422,9 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 
 ## Range Functions
 
-DuckDB offers two range functions, [`range(start, stop, step)`](#range) and [`generate_series(start, stop, step)`](#generate_series), and their variants with default arguments for `stop` and `step`. The two functions' behavior differens regarding their `stop` argument. This is documented below.
+DuckDB offers two range functions, [`range(start, stop, step)`](#range) and [`generate_series(start, stop, step)`](#generate_series), and their variants with default arguments for `stop` and `step`. The two functions' behavior is different regarding their `stop` argument. This is documented below.
 
-#### `range`
+### `range`
 
 The `range` function creates a list of values in the range between `start` and `stop`.
 The `start` parameter is inclusive, while the `stop` parameter is exclusive.
@@ -430,7 +432,7 @@ The default value of `start` is 0 and the default value of `step` is 1.
 
 Based on the number of arguments, the following variants of `range` exist.
 
-##### `range(stop)`
+#### `range(stop)`
 
 ```sql
 SELECT range(5);
@@ -440,7 +442,7 @@ SELECT range(5);
 [0, 1, 2, 3, 4]
 ```
 
-##### `range(start, stop)`
+#### `range(start, stop)`
 
 ```sql
 SELECT range(2, 5);
@@ -450,7 +452,7 @@ SELECT range(2, 5);
 [2, 3, 4]
 ```
 
-##### `range(start, stop, step)`
+#### `range(start, stop, step)`
 
 ```sql
 SELECT range(2, 5, 3);
@@ -460,14 +462,14 @@ SELECT range(2, 5, 3);
 [2]
 ```
 
-#### `generate_series`
+### `generate_series`
 
 The `generate_series` function creates a list of values in the range between `start` and `stop`.
 Both the `start` and the `stop` parameters are inclusive.
 The default value of `start` is 0 and the default value of `step` is 1.
 Based on the number of arguments, the following variants of `generate_series` exist.
 
-##### `generate_series(stop)`
+#### `generate_series(stop)`
 
 ```sql
 SELECT generate_series(5);
@@ -477,7 +479,7 @@ SELECT generate_series(5);
 [0, 1, 2, 3, 4, 5]
 ```
 
-##### `generate_series(start, stop)`
+#### `generate_series(start, stop)`
 
 ```sql
 SELECT generate_series(2, 5);
@@ -487,7 +489,7 @@ SELECT generate_series(2, 5);
 [2, 3, 4, 5]
 ```
 
-##### `generate_series(start, stop, step)`
+#### `generate_series(start, stop, step)`
 
 ```sql
 SELECT generate_series(2, 5, 3);

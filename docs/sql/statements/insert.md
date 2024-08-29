@@ -76,7 +76,7 @@ INSERT INTO tbl
     VALUES (5, 42);
 ```
 
-Specifying "BY POSITION" is optional and is equivalent to the default behavior:
+Specifying `BY POSITION` is optional and is equivalent to the default behavior:
 
 ```sql
 INSERT INTO tbl

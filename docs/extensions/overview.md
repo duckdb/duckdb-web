@@ -88,7 +88,7 @@ FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv'
 
 DuckDB will automatically install and load the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) extension. No explicit `INSTALL` or `LOAD` statements are required.
 
-Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes to the running DuckDB instance, making autoloading technically not (yet) possible. For others, it is prefered to have users opt-in to the extension explicitly before use due to the way they modify behaviour in DuckDB.
+Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes to the running DuckDB instance, making autoloading technically not (yet) possible. For others, it is preferred to have users opt-in to the extension explicitly before use due to the way they modify behaviour in DuckDB.
 
 To see which extensions can be autoloaded, check the [core extensions list]({% link docs/extensions/core_extensions.md %}).
 
@@ -134,6 +134,8 @@ To change the default location where DuckDB stores its extensions, use the `exte
 ```sql
 SET extension_directory = '/path/to/your/extension/directory';
 ```
+
+Note that setting the value of the `home_directory` configuration option has no effect on the location of the extensions.
 
 ## Binary Compatibility
 

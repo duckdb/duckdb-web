@@ -6,6 +6,8 @@ redirect_from:
   - docs/sql/window_functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 DuckDB supports [window functions](https://en.wikipedia.org/wiki/Window_function_(SQL)), which can use multiple rows to calculate a value for each row.
 Window functions are [blocking operators]({% link docs/guides/performance/how_to_tune_workloads.md %}#blocking-operators), i.e., they require their entire input to be buffered, making them one of the most memory-intensive operators in SQL.
 
@@ -180,7 +182,7 @@ The `first` and `last` aggregate functions are shadowed by the respective genera
 
 All [general-purpose window functions](#general-purpose-window-functions) that accept `IGNORE NULLS` respect nulls by default. This default behavior can optionally be made explicit via `RESPECT NULLS`.
 
-In contrast, all [aggregate window functions](#aggregate-window-functions) (except for `list` and its aliases, which can be made to ignore nulls via a `FILTER`) ignore nulls and do not accept `RESPECT NULLS`. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a `NULL` value of `column` have the same value of `cumulativeColumn` as the row that preceeds them.
+In contrast, all [aggregate window functions](#aggregate-window-functions) (except for `list` and its aliases, which can be made to ignore nulls via a `FILTER`) ignore nulls and do not accept `RESPECT NULLS`. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a `NULL` value of `column` have the same value of `cumulativeColumn` as the row that precedes them.
 
 ## Evaluation
 

@@ -48,14 +48,15 @@ For primitive types, the underlying array can be obtained using the `duckdb_vect
 | DUCKDB_TYPE_TIMESTAMP_TZ | duckdb_timestamp |
 
 ### Null Values
+
 Any value in a vector can be `NULL`. When a value is `NULL`, the values contained within the primary array at that index is undefined (and can be uninitialized). The validity mask is a bitmask consisting of `uint64_t` elements. For every `64` values in the vector, one `uint64_t` element exists (rounded up). The validity mask has its bit set to 1 if the value is valid, or set to 0 if the value is invalid (i.e .`NULL`).
 
 The bits of the bitmask can be read directly, or the slower helper method `duckdb_validity_row_is_valid` can be used to check whether or not a value is `NULL`.
 
 The `duckdb_vector_get_validity` returns a pointer to the validity mask. Note that if all values in a vector are valid, this function **might** return `nullptr` in which case the validity mask does not need to be checked.
 
-
 ### Strings
+
 String values are stored as a `duckdb_string_t`. This is a special struct that stores the string inline (if it is short, i.e. `<= 12 bytes`) or a pointer to the string data if it is longer than `12` bytes.
 
 ```c

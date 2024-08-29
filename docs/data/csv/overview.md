@@ -224,6 +224,7 @@ iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
 ```
 
 ## Order Preservation
+
 The CSV reader respects the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}).
 When `true` (the default), the order of the rows in the resultset returned by the CSV reader is the same as the order of the corresponding lines read from the file(s).
 When `false`, there is no guarantee that the order is preserved.

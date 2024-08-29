@@ -3,33 +3,26 @@ layout: docu
 title: Media
 ---
 
-## Announcements and Project Updates
-
-* [Announcing DuckDB Support for Delta Lake and the Unity Catalog Extension (Data + AI Summit 2024)](https://www.youtube.com/watch?v=wuP6iEYH11E), 5 minutes
-* [State of the Duck (DuckCon #4)](https://www.youtube.com/watch?v=cyZfpXxXojEl), 20 minutes
-
-## Overview Talks
-
-* [DuckDB: Harnessing in-process analytics for data science and beyond (Øredev 2023)](https://www.youtube.com/watch?v=6teFN7cwx30), 40 minutes – [Slide deck](https://blobs.duckdb.org/slides/oredev-duckdb-231109.pdf)
-* [In-Process Analytical Data Management with DuckDB (PyData Amsterdam 2023)](https://www.youtube.com/watch?v=5ddoZR6PYNU), 25 minutes – [Slide deck]({% link pdf/duckdb-pydata-amsterdam-2023.pdf %})
-* [DuckDB keynote segment (Data + AI Summit 2023)](https://www.youtube.com/watch?v=AKix55rQEUU), 10 minutes
-* [DuckDB: Bringing analytical SQL directly to your Python shell (EuroPython 2023)](https://www.youtube.com/watch?v=egN4TwVyJss), 40 minutes
-* [DuckDB - An Embeddable Analytical Database (FOSDEM)](https://www.youtube.com/watch?v=nPDomZQ8jI4), 15 minutes
-
-## Talks on Internals
-
-* [DuckDB – The SQLite for Analytics (CMU Database Group - Quarantine Tech Talks)](https://www.youtube.com/watch?v=PFUZlNQIndo), 1 hour
-* [DuckDB Testing - Present and Future (DBTest 2022 keynote)](https://www.youtube.com/watch?v=BgC79Zt2fPs), 1 hour
-* [Push-Based Execution in DuckDB (CWI Database Architectures Seminar)](https://www.youtube.com/watch?v=MA0OsvYFGrc), 1 hour
-
-## The Data Management Landscape
-
-* [Two Tier Architectures are Anachronistic (guest lecture at the Hasso-Plattner-Institute)](https://www.tele-task.de/lecture/video/10304/), 1 hour
-* [A Short Summary of the Last Decades of Data Management (GOTO Amsterdam 2024 keynote)](https://www.youtube.com/watch?v=-wCzn9gKoUk), 50 minutes
-
-## Podcast Episodes
-
-* [DuckDB with Hannes Mühleisen (Software Engineering Daily)](https://softwareengineeringdaily.com/2024/08/08/duckdb-with-hannes-muhleisen/), 50 minutes
-* [Implementing Hardware-Friendly Databases (Developer Voices)](https://www.youtube.com/watch?v=pZV9FvdKmLc), 80 minutes
-* [Deep Dive into DuckDB (episode of The Geek Narrator)](https://www.youtube.com/watch?v=f9QlkXW4H9A), 1 hour
-* [Move Your Database To The Data and Speed Up Your Analytics With DuckDB (Data Engineering Podcast)](https://www.dataengineeringpodcast.com/duckdb-in-process-olap-database-episode-270/), 80 minutes
+| Title | Venue | Presenter | Duration |
+|-|-|-|-|-:|
+| _**DuckDB Announcements and Project Updates**_ | | | |
+| [Announcing DuckDB support for Delta Lake and the Unity Catalog extension](https://www.youtube.com/watch?v=wuP6iEYH11E) | Data + AI Summit 2024 | Hannes Mühleisen | 5min |
+| [State of the Duck](https://www.youtube.com/watch?v=cyZfpXxXojEl) ([pdf](https://blobs.duckdb.org/events/duckcon4/duckcon4-mark-raasveldt-hannes-muhleisen-state-of-the-duck.pdf)) | DuckCon #4 (2024) | Hannes Mühleisen and Mark Raasveldt | 20min |
+| _**Overview Talks on DuckDB**_ | | | |
+| [DuckDB: Harnessing in-process analytics for data science and beyond](https://www.youtube.com/watch?v=6teFN7cwx30) ([pdf](https://blobs.duckdb.org/slides/oredev-duckdb-231109.pdf)) | Øredev 2023 | Gábor Szárnyas | 40min |
+| [In-process analytical data management with DuckDB](https://www.youtube.com/watch?v=5ddoZR6PYNU) ([pdf]({% link pdf/duckdb-pydata-amsterdam-2023.pdf %})) | PyData Amsterdam 2023 | Hannes Mühleisen | 25min |
+| [DuckDB keynote segment](https://www.youtube.com/watch?v=AKix55rQEUU) | Data + AI Summit 2023 | Hannes Mühleisen | 10min |
+| [DuckDB: Bringing analytical SQL directly to your Python shell](https://www.youtube.com/watch?v=egN4TwVyJss) | EuroPython 2023 | Pedro Holanda | 40min |
+| [DuckDB - An embeddable analytical database](https://www.youtube.com/watch?v=nPDomZQ8jI4) | FOSDEM 2020 | Hannes Mühleisen | 15min |
+| _**Talks on DuckDB's Internals**_ | | | |
+| [DuckDB – The SQLite for analytics](https://www.youtube.com/watch?v=PFUZlNQIndo) | CMU Database Group – Quarantine Tech Talks (2020) | Mark Raasveldt | 1h |
+| [DuckDB testing - Present and future](https://www.youtube.com/watch?v=BgC79Zt2fPs) | DBTest 2022 | Mark Raasveldt | 1h |
+| [Push-based execution in DuckDB](https://www.youtube.com/watch?v=MA0OsvYFGrc) | CWI Database Architectures Seminar (2021) | Mark Raasveldt | 1h |
+| _**The Data Management Landscape**_ | | | |
+| [Two tier architectures are anachronistic](https://www.tele-task.de/lecture/video/10304/) | Database Research seminar at the Hasso-Plattner-Institute (2023) | Hannes Mühleisen | 1h |
+| [A short summary of the last decades of data management](https://www.youtube.com/watch?v=-wCzn9gKoUk) | GOTO Amsterdam 2024 | Hannes Mühleisen | 50min |
+| _**Podcast Episodes**_ | | | |
+| [DuckDB with Hannes Mühleisen](https://softwareengineeringdaily.com/2024/08/08/duckdb-with-hannes-muhleisen/) | Software Engineering Daily | Hannes Mühleisen | 50min |
+| [Implementing hardware-friendly databases](https://www.youtube.com/watch?v=pZV9FvdKmLc) | Developer Voices | Hannes Mühleisen | 80min |
+| [Deep dive into DuckDB](https://www.youtube.com/watch?v=f9QlkXW4H9A) | The Geek Narrator | Mark Raasveldt | 1h |
+| [Move your database to the data and speed up your analytics with DuckDB](https://www.dataengineeringpodcast.com/duckdb-in-process-olap-database-episode-270/) | Data Engineering Podcast | Hannes Mühleisen | 80min |

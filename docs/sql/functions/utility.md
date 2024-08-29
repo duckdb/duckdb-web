@@ -5,6 +5,8 @@ redirect_from:
   - docs/test/functions/utility
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 ## Scalar Utility Functions
 
 The functions below are difficult to categorize into specific function types and are broadly useful.
