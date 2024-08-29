@@ -268,7 +268,7 @@ The below options are applicable when writing `Parquet` files.
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `COMPRESSION` | The compression format to use (`uncompressed`, `snappy`, `gzip` or `zstd`). | `VARCHAR` | `snappy` |
-  `COMPRESSION_LEVEL` | Compression level, set between 1 (lowest compression, fastest) and 22 (highest compression, slowest). Only supported for zstd compression. | `BIGINT` | `3` |
+| `COMPRESSION_LEVEL` | Compression level, set between 1 (lowest compression, fastest) and 22 (highest compression, slowest). Only supported for zstd compression. | `BIGINT` | `3` |
 | `FIELD_IDS` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | `STRUCT` | (empty) |
 | `ROW_GROUP_SIZE_BYTES` | The target size of each row group. You can pass either a human-readable string, e.g., '2MB', or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored. | `BIGINT` | `row_group_size * 1024` |
 | `ROW_GROUP_SIZE` | The target size, i.e., number of rows, of each row group. | `BIGINT` | 122880 |
