@@ -190,6 +190,24 @@ SET default_order = 'ASCENDING';
 SET default_order = 'DESCENDING';
 ```
 
+## Ordering by Non-Integer Literals
+
+By default, ordering by non-integer literals is not allowed:
+
+```sql
+SELECT 42 ORDER BY 'hello world';
+```
+
+```console
+-- Binder Error: ORDER BY non-integer literal has no effect.
+```
+
+To allow this behavior, use the `order_by_non_integer_literal` option:
+
+```sql
+SET order_by_non_integer_literal = true;
+```
+
 ## Implicit Casting to `VARCHAR`
 
 Prior to version 0.10.0, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an explicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behaviour that performs implicit casting, set the `old_implicit_casting` variable to `true`:
