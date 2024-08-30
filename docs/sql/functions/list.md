@@ -403,22 +403,39 @@ The following operators are supported for lists:
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
 
 ```sql
-SELECT [lower(x) FOR x IN strings]
+SELECT [lower(x) FOR x IN strings] AS strings
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 ```
 
-```text
-[hello, , world]
-```
+<div class="narrow_table monospace_table"></div>
+
+|     strings      |
+|------------------|
+| [hello, , world] |
 
 ```sql
-SELECT [upper(x) FOR x IN strings IF len(x) > 0]
+SELECT [upper(x) FOR x IN strings IF len(x) > 0] AS strings
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 ```
 
-```text
-[HELLO, WORLD]
+<div class="narrow_table monospace_table"></div>
+
+|    strings     |
+|----------------|
+| [HELLO, WORLD] |
+
+List comprehensions can also use the position of the list elements by adding a second variable.
+In the following example, we use `x, i`, where `x` is the value and `i` is the position:
+
+```sql
+SELECT [4, 5, 6] as l, [x FOR x, i IN l IF i != 2] filtered;
 ```
+
+<div class="narrow_table monospace_table"></div>
+
+|     l     | filtered |
+|-----------|----------|
+| [4, 5, 6] | [4, 6]   |
 
 ## Range Functions
 
