@@ -64,21 +64,35 @@ SELECT *
 FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 ```
 
-Read over https:
+Read over HTTPS:
 
 ```sql
 SELECT *
 FROM read_parquet('https://some.url/some_file.parquet');
 ```
 
-Query the metadata of a Parquet file:
+Query the [metadata of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-metadata):
 
 ```sql
 SELECT *
 FROM parquet_metadata('test.parquet');
 ```
 
-Query the schema of a Parquet file:
+Query the [file metadata of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-file-metadata):
+
+```sql
+SELECT *
+FROM parquet_file_metadata('test.parquet');
+```
+
+Query the [key-value metadata of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-key-value-metadata):
+
+```sql
+SELECT *
+FROM parquet_kv_metadata('test.parquet');
+```
+
+Query the [schema of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-schema):
 
 ```sql
 SELECT *
