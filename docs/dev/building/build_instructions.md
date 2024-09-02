@@ -61,3 +61,9 @@ GEN=ninja make
 ```
 
 > Bestpractice It is not advised to directly call CMake, as the Makefile sets certain variables that are crucial to properly building the package.
+
+Ninja parallelizes the build, which can cause out-of-memory issues on systems with limited resources. They also occur on Alpine Linux. In these cases, avoid using Ninja:
+
+```bash
+make
+```
