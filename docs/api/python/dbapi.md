@@ -61,6 +61,7 @@ duckdb.default_connection.sql("SELECT * FROM tbl")
 
 ```python
 import duckdb
+
 # to start an in-memory database
 con = duckdb.connect(database = ":memory:")
 # to use a database file (not shared between processes)

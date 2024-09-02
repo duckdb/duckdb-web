@@ -13,6 +13,7 @@ For example, here we create a relation from a SQL query:
 
 ```python
 import duckdb
+
 rel = duckdb.sql("SELECT * FROM range(10_000_000_000) tbl(id)")
 rel.show()
 ```
@@ -71,6 +72,7 @@ Relation objects can be queried through SQL through [replacement scans]({% link 
 
 ```python
 import duckdb
+
 rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 duckdb.sql("SELECT sum(id) FROM rel").show()
 ```
@@ -94,6 +96,7 @@ Apply an (optionally grouped) aggregate over the relation. The system will autom
 
 ```python
 import duckdb
+
 rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.aggregate("id % 2 AS g, sum(id), min(id), max(id)")
 ```
@@ -114,6 +117,7 @@ Select all rows in the first relation, that do not occur in the second relation.
 
 ```python
 import duckdb
+
 r1 = duckdb.sql("SELECT * FROM range(10) tbl(id)")
 r2 = duckdb.sql("SELECT * FROM range(5) tbl(id)")
 r1.except_(r2).show()
@@ -138,6 +142,7 @@ Apply the given condition to the relation, filtering any rows that do not satisf
 
 ```python
 import duckdb
+
 rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.filter("id > 5").limit(3).show()
 ```
@@ -159,6 +164,7 @@ Select the intersection of two relations – returning all rows that occur in bo
 
 ```python
 import duckdb
+
 r1 = duckdb.sql("SELECT * FROM range(10) tbl(id)")
 r2 = duckdb.sql("SELECT * FROM range(5) tbl(id)")
 r1.intersect(r2).show()
@@ -183,6 +189,7 @@ Combine two relations, joining them based on the provided condition.
 
 ```python
 import duckdb
+
 r1 = duckdb.sql("SELECT * FROM range(5) tbl(id)").set_alias("r1")
 r2 = duckdb.sql("SELECT * FROM range(10, 15) tbl(id)").set_alias("r2")
 r1.join(r2, "r1.id + 10 = r2.id").show()
@@ -207,6 +214,7 @@ Select the first *n* rows, optionally offset by *offset*.
 
 ```python
 import duckdb
+
 rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.limit(3).show()
 ```
@@ -228,6 +236,7 @@ Sort the relation by the given set of expressions.
 
 ```python
 import duckdb
+
 rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.order("id DESC").limit(3).show()
 ```
@@ -249,6 +258,7 @@ Apply the given expression to each row in the relation.
 
 ```python
 import duckdb
+
 rel = duckdb.sql("SELECT * FROM range(1_000_000) tbl(id)")
 rel.project("id + 10 AS id_plus_ten").limit(3).show()
 ```
@@ -270,6 +280,7 @@ Combine two relations, returning all rows in `r1` followed by all rows in `r2`. 
 
 ```python
 import duckdb
+
 r1 = duckdb.sql("SELECT * FROM range(5) tbl(id)")
 r2 = duckdb.sql("SELECT * FROM range(10, 15) tbl(id)")
 r1.union(r2).show()

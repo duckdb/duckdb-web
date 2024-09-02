@@ -133,6 +133,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Alias** | `array_slice` |
 
 More examples:
+
 ```sql
 SELECT  'abcdefghi'  AS str
 ,       str[3]       -- get char at position 3, 'c'

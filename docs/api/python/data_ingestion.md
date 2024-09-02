@@ -134,6 +134,7 @@ DuckDB supports querying multiple types of Apache Arrow objects including [table
 ```python
 import duckdb
 import pandas as pd
+
 test_df = pd.DataFrame.from_dict({"i": [1, 2, 3, 4], "j": ["one", "two", "three", "four"]})
 print(duckdb.sql("SELECT * FROM test_df").fetchall())
 ```
@@ -149,6 +150,7 @@ If your Pandas DataFrame is stored in another location, here is an example of ma
 ```python
 import duckdb
 import pandas as pd
+
 my_dictionary = {}
 my_dictionary["test_df"] = pd.DataFrame.from_dict({"i": [1, 2, 3, 4], "j": ["one", "two", "three", "four"]})
 duckdb.register("test_df_view", my_dictionary["test_df"])
