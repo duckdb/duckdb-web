@@ -197,10 +197,11 @@ DuckDB does not use *explicit SIMD* (single instruction, multiple data) instruct
 <div class="answer" markdown="1">
 
 We welcome experiments comparing DuckDB's performance to other systems.
-To ensure fair comparison, we have three recommendations.
+To ensure fair comparison, we have a few recommendations.
 First, try to use the [latest DuckDB version available as a nightly build]({% link docs/installation/index.html %}), which often has significant performance improvements compared to the last stable release.
 Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
-Third, please study the DuckDB [Performance Guide]({% link docs/guides/performance/overview.md %}), which has best practices for ensuring optimal performance.
+Third, study the DuckDB [Performance Guide]({% link docs/guides/performance/overview.md %}), which has best practices for ensuring optimal performance.
+Finally, please report the DuckDB version (for stable verison, the version number, for nightly builds, the commit hash).
 
 </div>
 
