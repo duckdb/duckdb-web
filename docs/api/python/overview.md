@@ -19,6 +19,7 @@ The most straight-forward manner of running SQL queries using DuckDB is using th
 
 ```python
 import duckdb
+
 duckdb.sql("SELECT 42").show()
 ```
 
@@ -28,6 +29,7 @@ Relations can be referenced in subsequent queries by storing them inside variabl
 
 ```python
 import duckdb
+
 r1 = duckdb.sql("SELECT 42 AS i")
 duckdb.sql("SELECT i * 2 AS k FROM r1").show()
 ```
@@ -38,6 +40,7 @@ DuckDB can ingest data from a wide variety of formats – both on-disk and in-me
 
 ```python
 import duckdb
+
 duckdb.read_csv("example.csv")                # read a CSV file into a Relation
 duckdb.read_parquet("example.parquet")        # read a Parquet file into a Relation
 duckdb.read_json("example.json")              # read a JSON file into a Relation
@@ -121,6 +124,7 @@ DuckDB supports converting query results efficiently to a variety of formats. Se
 
 ```python
 import duckdb
+
 duckdb.sql("SELECT 42").fetchall()   # Python objects
 duckdb.sql("SELECT 42").df()         # Pandas DataFrame
 duckdb.sql("SELECT 42").pl()         # Polars DataFrame
@@ -134,6 +138,7 @@ DuckDB supports writing Relation objects directly to disk in a variety of format
 
 ```python
 import duckdb
+
 duckdb.sql("SELECT 42").write_parquet("out.parquet") # Write to a Parquet file
 duckdb.sql("SELECT 42").write_csv("out.csv")         # Write to a CSV file
 duckdb.sql("COPY (SELECT 42) TO 'out.parquet'")      # Copy to a Parquet file
