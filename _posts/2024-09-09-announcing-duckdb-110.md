@@ -2,7 +2,7 @@
 layout: post
 title: "Announcing DuckDB 1.1.0"
 author: Mark Raasveldt and Hannes Mühleisen
-thumb: "/images/blog/thumbs/240902.svg"
+thumb: "/images/blog/thumbs/240909.svg"
 excerpt: "The DuckDB team is happy to announce that today we’re releasing DuckDB version 1.1.0, codename “Eatoni”."
 ---
 
