@@ -40,6 +40,7 @@ Some operators cannot output a single row until the last row of their input has 
 These are called _blocking operators_ as they require their entire input to be buffered,
 and are the most memory-intensive operators in relational database systems.
 The main blocking operators are the following:
+
 * _sorting:_ [`ORDER BY`]({% link docs/sql/query_syntax/orderby.md %}),
 * _grouping:_ [`GROUP BY`]({% link docs/sql/query_syntax/groupby.md %}),
 * _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`]({% link docs/sql/functions/window_functions.md %}),
@@ -60,10 +61,12 @@ That said, there are some limitations at the moment:
 ## Profiling
 
 If your queries are not performing as well as expected, it’s worth studying their query plans:
+
 * Use [`EXPLAIN`]({% link docs/guides/meta/explain.md %}) to print the physical query plan without running the query.
 * Use [`EXPLAIN ANALYZE`]({% link docs/guides/meta/explain_analyze.md %}) to run and profile the query. This will show the CPU time that each step in the query takes. Note that due to multi-threading, adding up the individual times will be larger than the total query processing time.
 
 Query plans can point to the root of performance issues. A few general directions:
+
 * Avoid nested loop joins in favor of hash joins.
 * A scan that does not include a filter pushdown for a filter condition that is later applied performs unnecessary IO. Try rewriting the query to apply a pushdown.
 * Bad join orders where the cardinality of an operator explodes to billions of tuples should be avoided at all costs.
