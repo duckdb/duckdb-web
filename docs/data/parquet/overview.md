@@ -211,7 +211,6 @@ COPY
     (FORMAT 'parquet');
 ```
 
-
 Write `tbl` to a zstd-compressed Parquet file:
 
 ```sql
