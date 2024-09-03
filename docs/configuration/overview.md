@@ -14,7 +14,7 @@ The values of configuration options can be queried via the [`current_setting()` 
 
 ## Examples
 
-Set the memory limit of the system to 10GB.
+Set the memory limit of the system to 10 GB.
 
 ```sql
 SET memory_limit = '10GB';
