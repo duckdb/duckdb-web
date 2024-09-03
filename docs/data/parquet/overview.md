@@ -211,6 +211,7 @@ COPY
     (FORMAT 'parquet');
 ```
 
+
 Write `tbl` to a zstd-compressed Parquet file:
 
 ```sql
@@ -225,6 +226,19 @@ Write `tbl` to a zstd-compressed Parquet file with the lowest compression level 
 COPY tbl
     TO 'result-zstd.parquet'
     (FORMAT 'parquet', CODEC 'zstd', COMPRESSION_LEVEL 1);
+```
+
+Write to Parquet file with [key-value metadata]({% link docs/data/parquet/metadata.md %}):
+
+```sql
+COPY (
+    SELECT
+        42 AS number,
+        True AS is_even
+) TO 'kv_metadata.parquet' (
+    FORMAT PARQUET,
+    KV_METADATA {number: 'Answer to life, universe, and everything', is_even: 'not odd'}
+);
 ```
 
 Write a CSV file to an uncompressed Parquet file:
