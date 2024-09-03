@@ -227,3 +227,10 @@ For building and installing extensions from source, see the [building guide]({% 
 ## Statically Linking Extensions
 
 To statically link extensions, follow the [developer documentation's “Using extension config files” section](https://github.com/duckdb/duckdb/blob/main/extension/README.md#using-extension-config-files).
+
+## Limitations
+
+DuckDB's extension mechanism has the following limitations:
+
+* Once loaded, an extension cannot be reinstalled.
+* Extensions cannot be unloaded.

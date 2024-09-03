@@ -56,7 +56,7 @@ To make an extension that is not built-in available in DuckDB, two steps need to
 directory for the installed extension, then load it to make its features available. This means that every time DuckDB is restarted, all
 extensions that are used need to be (re)loaded
 
-    > Once loaded, an extension cannot be reinstalled. It is not possible to unload an extension.
+> Extension installation and loading are subject to a few [limitations]({% link docs/extensions/working_with_extensions.md %}#limitations).
 
 There are two main methods of making DuckDB perform the **installation** and **loading** steps for an installable extension: **explicitly** and through **autoloading**.
 
