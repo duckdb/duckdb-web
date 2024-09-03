@@ -1372,6 +1372,10 @@
               "url": "overview"
             },
             {
+              "page": "Limits",
+              "url": "limits"
+            },
+            {
               "page": "DuckDB's Footprint",
               "slug": "footprint_of_duckdb",
               "subsubfolderitems": [

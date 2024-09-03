@@ -52,7 +52,7 @@ rel.show()
 └────────────────────────┘
 ```
 
-Note how we are constructing a relation that computes an immense amount of data (`10B` rows, or `74GB` of data). The relation is constructed instantly – and we can even print the relation instantly.
+Note how we are constructing a relation that computes an immense amount of data (10B rows or 74 GB of data). The relation is constructed instantly – and we can even print the relation instantly.
 
 When printing a relation using `show` or displaying it in the terminal, the first `10K` rows are fetched. If there are more than `10K` rows, the output window will show `>9999 rows` (as the amount of rows in the relation is unknown).
 

@@ -63,7 +63,7 @@ The results show that row group sizes <5,000 have a strongly detrimental effect,
 
 DuckDB can also parallelize across multiple Parquet files. It is advisable to have at least as many total row groups across all files as there are CPU threads. For example, with a machine having 10 threads, both 10 files with 1 row group or 1 file with 10 row groups will achieve full parallelism. It is also beneficial to keep the size of individual Parquet files moderate.
 
-> Bestpractice The ideal range is between 100MB and 10GB per individual Parquet file.
+> Bestpractice The ideal range is between 100 MB and 10 GB per individual Parquet file.
 
 ### Hive Partitioning for Filter Pushdown
 
