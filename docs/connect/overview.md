@@ -14,7 +14,7 @@ To use DuckDB, you must first create a connection to a database. The exact synta
 
 DuckDB can operate in both persistent mode, where the data is saved to disk, and in in-memory mode, where the entire data set is stored in the main memory.
 
-> Tip Both persistent and in-memory database use spilling to disk to facilitate larger-than-memory workloads (i.e., out-of-core-processing).
+> Tip Both persistent and in-memory databases use spilling to disk to facilitate larger-than-memory workloads (i.e., out-of-core-processing).
 
 ### Persistent Database
 
