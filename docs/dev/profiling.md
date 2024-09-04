@@ -133,7 +133,7 @@ These metrics are automatically enabled, and added to the enabled settings, when
 
 ### Optimizers
 
-At the `QUERY_ROOT` level, there are also metrics that measure the time taken by each [optimizer]({% link docs/internal/overview.md %}#optimizer). These metrics are only available when the specific optimizer is enabled. The available optimizations can be queried using the [`duckdb_optimizers() table function`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers).
+At the `QUERY_ROOT` level, there are also metrics that measure the time taken by each [optimizer]({% link docs/internals/overview.md %}#optimizer). These metrics are only available when the specific optimizer is enabled. The available optimizations can be queried using the [`duckdb_optimizers() table function`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers).
 
 Each optimizer has a corresponding metric that follows the template: `OPTIMIZER_<OPTIMIZER_NAME>`. For example, the `OPTIMIZER_JOIN_ORDER` metric corresponds to the `JOIN_ORDER` optimizer.
 
