@@ -361,6 +361,7 @@ SET profiling_mode = 'standard';
 ```
 
 #### Custom Profiling Metrics
+
 By default, all metrics are enabled, but they can be toggled on or off individually. This `PRAGMA` accepts a JSON object with the metric names as keys and a boolean value to enable or disable the metric. The metrics set by this `PRAGMA` will override the default settings.
 
 > Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` formats will always a default set of metrics.

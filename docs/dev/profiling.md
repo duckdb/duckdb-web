@@ -16,6 +16,7 @@ The first step to profiling a database engine is figuring out what execution pla
 The query plan helps understand the performance characteristics of the system. However, often it is also necessary to look at the performance numbers of individual operators and the cardinalities that pass through them. This is where the [`EXPLAIN_ANALYZE`]({% link docs/guides/meta/explain_analyze.md %}) statement comes in, which pretty-prints the query plan and also executes the query, providing the actual run-time performance numbers.
 
 ## Pragmas
+
 DuckDB supports several pragmas that can be used to enable and disable profiling, as well as to control the level of detail in the profiling output. 
 
 > Tip In the following examples, `PRAGMA` can be used interchangeably with `SET`. They can also be reset using `RESET`, followed by the setting name.
@@ -23,6 +24,7 @@ DuckDB supports several pragmas that can be used to enable and disable profiling
 The following pragmas are available:
 
 ### Enable Profiling
+
 ```SQL
 PRAGMA enable_profiling;
 ```
@@ -32,6 +34,7 @@ PRAGMA enable_profile;
 ```
 
 ### Profiling Format
+
 The profiling can be output in several formats. When not specified, the default is `query_tree`, which prints the logical query plan with the timings and cardinalities of each operator in the tree to the screen.
 
 ```SQL
@@ -48,6 +51,7 @@ PRAGMA enable_profiling = 'query_tree';
 ```
 
 ### Disable Profiling
+
 ```SQL
 PRAGMA disable_profiling;
 ```
@@ -57,6 +61,7 @@ PRAGMA disable_profile;
 ```
 
 ### Profiling Mode
+
 The default profiling mode is `standard`, but can also be set to `detailed` which enables additional metrics that show the time taken by each optimizer, the planner, and the physical planner.
 
 ```SQL
@@ -68,6 +73,7 @@ PRAGMA profiling_mode = 'standard';
 ```
 
 ### Profiling Output
+
 By default, the profiling output is printed to the console, but can be directed to a file using the following pragma:
 
 ```SQL
@@ -77,6 +83,7 @@ PRAGMA profiling_output = 'filename';
 > Warning The file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run.
 
 ### Custom Profiling Metrics
+
 By default, all metrics are enabled, but they can be toggled on or off individually. This `PRAGMA` accepts a JSON object with the metric names as keys and a boolean value to enable or disable the metric. The metrics set by this `PRAGMA` will override the default settings.
 
 > Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` formats will always a default set of metrics. 
@@ -125,6 +132,7 @@ As explained above, when the `profiling_mode` is set to `detailed`, an extra set
 These metrics are automatically enabled, and added to the enabled settings, when the `profiling_mode` is set to `detailed`, however, they can also be toggled individually. 
 
 ### Optimizers
+
 At the `QUERY_ROOT` level, there are also metrics that measure the time taken by each [optimizer]({% link docs/internal/overview.md %}#optimizer). These metrics are only available when the specific optimizer is enabled. The available optimizations can be queried using the [`duckdb_optimizers() table function`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers).
 
 Each optimizer has a corresponding metric that follows the template: `OPTIMIZER_<OPTIMIZER_NAME>`. For example, the `OPTIMIZER_JOIN_ORDER` metric corresponds to the `JOIN_ORDER` optimizer.
@@ -134,11 +142,13 @@ Additionally, the following metrics are available to support the optimizer metri
 - `CUMMULATIVE_OPTIMIZER_TIMING` - The cumulative sum of all optimizer metrics, can be used without turning on all optimizer metrics.
 
 ### Planner
+
 The `PLANNER` is responsible for generating the logical plan. Currently, two metrics are measured in the `PLANNER`:
 - `PLANNER` - The time taken to generate the logical plan
 - `PLANNER_BINDING` - The time taken to bind the logical plan
 
 ### Physical Planner
+
 The `PHYSICAL_PLANNER` is responsible for generating the physical plan. The following are the metrics supported in the `PHYSICAL_PLANNER`:
 - `PHYSICAL_PLANNER` - The time taken to generate the physical plan
 - `PHYSICAL_PLANNER_COLUMN_BINDING` - The time taken to bind the columns in the physical plan
@@ -146,6 +156,7 @@ The `PHYSICAL_PLANNER` is responsible for generating the physical plan. The foll
 - `physical_planner_create_plan` - The time taken to create the physical plan
 
 ## Setting Custom Metrics Examples
+
 Using the dataset from the previous example, we can demonstrate how to enable profiling and set the output format to `json`. 
 
 The first example shows how to enable profiling, set the output to a file, and only enable the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics.
@@ -374,6 +385,6 @@ while the _build side_ is the right operand.
 
 Join operators in the query plan show the join type used:
 
-* Inner joins are denoted as `INNER`.
-* Left outer joins and right outer joins are denoted as `LEFT` and `RIGHT`, respectively.
-* Full outer joins are denoted as `FULL`.
+- Inner joins are denoted as `INNER`.
+- Left outer joins and right outer joins are denoted as `LEFT` and `RIGHT`, respectively.
+- Full outer joins are denoted as `FULL`.
