@@ -227,6 +227,20 @@ COPY tbl
     (FORMAT 'parquet', CODEC 'zstd', COMPRESSION_LEVEL 1);
 ```
 
+Write to Parquet file with [key-value metadata]({% link docs/data/parquet/metadata.md %}):
+
+```sql
+COPY (
+    SELECT
+        42 AS number,
+        True AS is_even
+) TO 'kv_metadata.parquet' (
+    FORMAT PARQUET,
+    KV_METADATA {number: 'Answer to life, universe, and everything', is_even: 'not ''odd'''}
+    /* single quotes in values must be escaped */
+);
+```
+
 Write a CSV file to an uncompressed Parquet file:
 
 ```sql
