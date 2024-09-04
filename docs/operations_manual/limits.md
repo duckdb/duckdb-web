@@ -3,7 +3,7 @@ layout: docu
 title: Limits
 ---
 
-This pages contains DuckDB's built-in limit values.
+This page contains DuckDB's built-in limit values.
 
 | Limit | Default value | Configuration option |
 |---|---|---|
