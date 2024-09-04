@@ -301,7 +301,7 @@ PRAGMA enable_profile;
 
 ##### Profiling Format
 
-The format of the resulting profiling information can be specified as either `json`, `query_tree`, or `query_tree_optimizer`. The default format is `query_tree`, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
+The format of the resulting profiling information can be specified as either `json`, `query_tree`, or `query_tree_optimizer`. The default format is `query_tree`, which prints the logical query plan together with the timings and cardinalities of each operator in the tree to the screen.
 
 To return the logical query plan as JSON:
 
@@ -355,6 +355,23 @@ The output of this mode shows how long it takes to apply certain optimizers on t
 ```sql
 SET profiling_mode = 'detailed';
 ```
+
+```sql
+SET profiling_mode = 'standard';
+```
+
+#### Custom Profiling Metrics
+By default, all metrics are enabled, but they can be toggled on or off individually. This `PRAGMA` accepts a JSON object with the metric names as keys and a boolean value to enable or disable the metric. The metrics set by this `PRAGMA` will override the default settings.
+
+> Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` formats will always a default set of metrics.
+
+In the following example the `CPU_TIME` metric is disabled, and the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
+
+```SQL
+SET custom_profiling_settings='{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
+```
+
+The profiling docs contain an overview of the available [metrics]({% link docs/dev/profiling.md %}#metrics).
 
 ## Query Optimization
 
