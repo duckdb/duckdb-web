@@ -58,7 +58,7 @@ DuckDB offers several advanced SQL features as well syntactic sugar to make SQL 
 * [Auto-detecting the headers and schema of CSV files]({% link docs/data/csv/auto_detection.md %})
 * Directly querying [CSV files]({% link docs/data/csv/overview.md %}) and [Parquet files]({% link docs/data/parquet/overview.md %})
 * Loading from files using the syntax `FROM 'my.csv'`, `FROM 'my.csv.gz'`, `FROM 'my.parquet'`, etc.
-* Filename expansion (globbing), e.g.: `FROM 'my-data/part-*.parquet'`
+* [Filename expansion (globbing)]({% link docs/sql/functions/pattern_matching.md %}#globbing), e.g.: `FROM 'my-data/part-*.parquet'`
 
 ## Functions and Expressions
 
