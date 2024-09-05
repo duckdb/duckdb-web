@@ -5,8 +5,8 @@ title: Non-Deterministic Behavior
 
 Several operators in DuckDB exhibit non-deterministic behavior.
 Most notably, SQL uses set semantics, which allows results to be returned in a different order.
-DuckDB exploits this, particularly when performing multi-threaded execution.
-Other factors, such as using different compilers, operating systems, hardware architectures can also cause changes in ordering.
+DuckDB exploits this to improve performance, particularly when performing multi-threaded query execution.
+Other factors, such as using different compilers, operating systems, and hardware architectures, can also cause changes in ordering.
 This page documents the cases where non-determinism is an _expected behavior_.
 If you would like to make your queries determinisic, see the [“Working Around Non-Determinism” section](#working-around-non-determinism).
 
