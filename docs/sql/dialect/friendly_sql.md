@@ -94,6 +94,6 @@ SELECT
 
 ## Related Blog Posts
 
-* [Friendlier SQL with DuckDB]({% post_url 2022-05-04-friendlier-sql %}) blog post
-* [Even Friendlier SQL with DuckDB]({% post_url 2023-08-23-even-friendlier-sql %}) blog post
-* [SQL Gymnastics: Bending SQL into flexible new shapes]({% post_url 2024-03-01-sql-gymnastics %}) blog post
+* [“Friendlier SQL with DuckDB”]({% post_url 2022-05-04-friendlier-sql %}) blog post
+* [“Even Friendlier SQL with DuckDB”]({% post_url 2023-08-23-even-friendlier-sql %}) blog post
+* [“SQL Gymnastics: Bending SQL into Flexible New Shapes”]({% post_url 2024-03-01-sql-gymnastics %}) blog post

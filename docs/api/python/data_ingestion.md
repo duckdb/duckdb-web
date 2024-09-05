@@ -143,7 +143,7 @@ print(duckdb.sql("SELECT * FROM test_df").fetchall())
 [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
-DuckDB also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
+DuckDB also supports “registering” a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
 
 If your Pandas DataFrame is stored in another location, here is an example of manually registering it:
 
