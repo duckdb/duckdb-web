@@ -78,7 +78,7 @@ INSTALL spatial FROM 'http://nightly-extensions.duckdb.org';
 To install an extensions from a custom repository unknown to DuckDB:
 
 ```sql
-INSTALL custom_extension FROM 'https://my-custom-extension-repository';
+INSTALL ⟨custom_extension⟩ FROM 'https://my-custom-extension-repository';
 ```
 
 Alternatively, the `custom_extension_repository` setting can be used to change the default repository used by DuckDB:
@@ -87,11 +87,11 @@ Alternatively, the `custom_extension_repository` setting can be used to change t
 SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
 ```
 
-While any url or local path can be used as a repository, currently DuckDB contains the following predefined repositories:
+While any URL or local path can be used as a repository, DuckDB currently contains the following predefined repositories:
 
-<div class="narrow_table"></div>
+<div class="narrow_tabl"></div>
 
-| Alias                 | Url                                    | Description                                                                            |
+| Alias                 | URL                                    | Description                                                                            |
 |:----------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
 | `core`                | `http://extensions.duckdb.org`         | DuckDB core extensions                                                                 |
 | `core_nightly`        | `http://nightly-extensions.duckdb.org` | Nightly builds for `core`                                                              |
