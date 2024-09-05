@@ -64,14 +64,14 @@ SELECT 'A%c' ILIKE 'a$%c' ESCAPE '$'; -- true
 
 There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance PostgreSQL compatibility.
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | LIKE-style | PostgreSQL-style |
 |:---|:---|
-| `LIKE` | `~~` |
-| `NOT LIKE` | `!~~` |
-| `ILIKE` | `~~*` |
-| `NOT ILIKE` | `!~~*` |
+| LIKE | ~~ |
+| NOT LIKE | !~~ |
+| ILIKE | ~~* |
+| NOT ILIKE | !~~* |
 
 ## `SIMILAR TO`
 
@@ -93,12 +93,12 @@ SELECT 'abc' NOT SIMILAR TO 'abc';   -- false
 
 There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | `SIMILAR TO`-style | POSIX-style |
 |:---|:---|
-| `SIMILAR TO` | `~` |
-| `NOT SIMILAR TO` | `!~` |
+| SIMILAR TO | ~ |
+| NOT SIMILAR TO | !~ |
 
 ## Globbing
 
