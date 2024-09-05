@@ -67,6 +67,12 @@ To disable autoloading known extensions, run:
 SET autoload_known_extensions = true;
 ```
 
+To lock this configuration, use the [`lock_configuration` option]({% link docs/operations_manual/securing_duckdb/overview.md %}#locking-configurations):
+
+```sql
+SET lock_configuration = true;
+```
+
 ## Always Require Signed Extensions
 
 By default, DuckDB requires extensions to be either signed as core extensions (created by the DuckDB developers) or community extensions (created by third-party developers but distributed by the DuckDB developers). The `allow_unsigned_extensions` setting can be enabled on start-up to allow running extensions that are not signed at all. While useful for extension development, enabling this setting will allow DuckDB to load any extensions, which means more care must be taken to ensure malicious extensions are not loaded.
