@@ -411,8 +411,8 @@ Often the same functionality can be implemented more reliably using the `struct`
 | [`current_localtimestamp()`](#current_localtimestamp) | Returns a `TIMESTAMP` whose GMT bin values correspond to local date and time in the current time zone. |
 | [`localtime`](#localtime) | Synonym for the `current_localtime()` function call. |
 | [`localtimestamp`](#localtimestamp) | Synonym for the `current_localtimestamp()` function call. |
-| [`timezone(text, timestamp)`](#timezonetext-timestamp) | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a "local" time. |
-| [`timezone(text, timestamptz)`](#timezonetext-timestamptz) | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a "local" time. |
+| [`timezone(text, timestamp)`](#timezonetext-timestamp) | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a “local” time. |
+| [`timezone(text, timestamptz)`](#timezonetext-timestamptz) | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a “local” time. |
 
 #### `current_localtime()`
 
@@ -450,7 +450,7 @@ Often the same functionality can be implemented more reliably using the `struct`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a "local" time. |
+| **Description** | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a “local” time. |
 | **Example** | `timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')` |
 | **Result** | `2001-02-16 19:38:40-08` |
 
@@ -458,7 +458,7 @@ Often the same functionality can be implemented more reliably using the `struct`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a "local" time. |
+| **Description** | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a “local” time. |
 | **Example** | `timezone('America/Denver', TIMESTAMPTZ '2001-02-16 20:38:40-05')` |
 | **Result** | `2001-02-16 18:38:40` |
 

@@ -26,7 +26,7 @@ LOAD postgres;
 After the `postgres` extension is installed, tables can be queried from PostgreSQL using the `postgres_scan` function:
 
 ```sql
--- scan the table "mytable" from the schema "public" in the database "mydb"
+-- Scan the table "mytable" from the schema "public" in the database "mydb"
 SELECT * FROM postgres_scan('host=localhost port=5432 dbname=mydb', 'public', 'mytable');
 ```
 
