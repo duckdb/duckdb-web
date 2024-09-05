@@ -89,7 +89,7 @@ SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
 
 While any url or local path can be used as a repository, currently DuckDB contains the following predefined repositories:
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | Alias                 | Url                                    | Description                                                                            |
 |:----------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
@@ -109,7 +109,9 @@ INSTALL aws FROM core_nightly;
 SELECT extension_name, extension_version, installed_from, install_mode FROM duckdb_extensions();
 ```
 
-Would output:
+This outputs:
+
+<div class="narrow_table monospace_table"></div>
 
 | extensions_name | extensions_version | installed_from | install_mode |
 |:----------------|:-------------------|:---------------|:-------------|
