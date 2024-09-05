@@ -6,7 +6,7 @@ title: Working with Extensions
 ## Platforms
 
 Extension binaries must be built for each platform. Pre-built binaries are distributed for several platforms (see below).
-For platforms where packages for certain extensions are not available, users can build them from source and [install the resulting binaries manually](#installing-extensions-from-an-explicit-path).
+For platforms where packages for certain extensions are not available, users can build them from source and [install the resulting binaries manually](#installing-an-extension-from-an-explicit-path).
 
 All official extensions are distributed for the following platforms.
 
@@ -152,41 +152,9 @@ The execution of this statement will first look `icu.duckdb_extension.gz`, then 
 If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/extensions/overview.md %}#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.
 
-## Downloading Extensions Directly from S3
+## Force Installing to Upgrade Extensions
 
-Downloading an extension directly can be helpful when building a [Lambda service](https://aws.amazon.com/pm/lambda/) or container that uses DuckDB.
-DuckDB extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable.
-As a result, a direct URL to the file must be used.
-To download an extension file directly, use the following format:
-
-```text
-http://extensions.duckdb.org/v⟨duckdb_version⟩/⟨platform_name⟩/⟨extension_name⟩.duckdb_extension.gz
-```
-
-For example:
-
-```text
-http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
-```
-
-## Loading and Installing an Extension from Explicit Paths
-
-### Installing Extensions from an Explicit Path
-
-`INSTALL` can be used with the path to either a `.duckdb_extension` file.
-`.duckdb_extension.gz` files need to be decompressed before issuing `INSTALL name.duckdb_extension;`.
-
-For example, if the file was available into the same directory as where DuckDB is being executed, you can install it as follows:
-
-```sql
-INSTALL 'path/to/httpfs.duckdb_extension';
-```
-
-It is also possible to specify remote paths.
-
-## Force Installing Extensions
-
-When DuckDB installs an extension, it is copied to a local directory to be cached, avoiding any network traffic.
+When DuckDB installs an extension, it is copied to a local directory to be cached and avoid future network traffic.
 Any subsequent calls to `INSTALL ⟨extension_name⟩` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
 
 ```sql
@@ -207,7 +175,36 @@ Then, to overwrite this installation with the `spatial` extension from the `core
 FORCE INSTALL spatial FROM core_nightly;
 ```
 
-## Loading Extension from a Path
+## Alternative Approaches to Loading and Installing Extensions
+
+### Downloading Extensions Directly from S3
+
+Downloading an extension directly can be helpful when building a [Lambda service](https://aws.amazon.com/pm/lambda/) or container that uses DuckDB.
+DuckDB extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable.
+As a result, a direct URL to the file must be used.
+To download an extension file directly, use the following format:
+
+```text
+http://extensions.duckdb.org/v⟨duckdb_version⟩/⟨platform_name⟩/⟨extension_name⟩.duckdb_extension.gz
+```
+
+For example:
+
+```text
+http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
+```
+
+### Installing an Extension from an Explicit Path
+
+`INSTALL` can be used with the path to a `.duckdb_extension` file:
+
+```sql
+INSTALL 'path/to/httpfs.duckdb_extension';
+```
+
+Note that compressed `.duckdb_extension.gz` files need to be decompressed beforehand. It is also possible to specify remote paths.
+
+### Loading an Extension from an Explicit Path
 
 `LOAD` can be used with the path to a `.duckdb_extension`.
 For example, if the file was available at the (relative) path `path/to/httpfs.duckdb_extension`, you can load it as follows:
@@ -216,15 +213,15 @@ For example, if the file was available at the (relative) path `path/to/httpfs.du
 LOAD 'path/to/httpfs.duckdb_extension';
 ```
 
-This will skip any currently installed file in the specified path.
+This will skip any currently installed extensions and load the specified extension directly.
 
-Using remote paths for compressed files is currently not possible.
+Note that using remote paths for compressed files is currently not possible.
 
-## Building and Installing Extensions
+### Building and Installing Extensions from Source
 
 For building and installing extensions from source, see the [building guide]({% link docs/dev/building/build_instructions.md %}#building-and-installing-extensions-from-source).
 
-## Statically Linking Extensions
+### Statically Linking Extensions
 
 To statically link extensions, follow the [developer documentation's “Using extension config files” section](https://github.com/duckdb/duckdb/blob/main/extension/README.md#using-extension-config-files).
 
