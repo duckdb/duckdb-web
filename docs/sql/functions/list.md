@@ -12,9 +12,9 @@ title: List Functions
 | [`list[begin:end:step]`](#listbeginendstep) | `list_slice` in bracket notation with an added `step` feature. |
 | [`array_pop_back(list)`](#array_pop_backlist) | Returns the list without the last element. |
 | [`array_pop_front(list)`](#array_pop_frontlist) | Returns the list without the first element. |
-| [`flatten(list_of_lists)`](#flattenlist_of_lists) | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples]({% link docs/sql/functions/nested.md %}#flatten)). |
+| [`flatten(list_of_lists)`](#flattenlist_of_lists) | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](#flattening)). |
 | [`len(list)`](#lenlist) | Return the length of the list. |
-| [`list_aggregate(list, name)`](#list_aggregatelist-name) | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/nested.md %}#list-aggregates) section for more details. |
+| [`list_aggregate(list, name)`](#list_aggregatelist-name) | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/list.md %}#list-aggregates) section for more details. |
 | [`list_any_value(list)`](#list_any_valuelist) | Returns the first non-null value in the list. |
 | [`list_append(list, element)`](#list_appendlist-element) | Appends `element` to `list`. |
 | [`list_concat(list1, list2)`](#list_concatlist1-list2) | Concatenates two lists. |
@@ -33,12 +33,12 @@ title: List Functions
 | [`list_prepend(element, list)`](#list_prependelement-list) | Prepends `element` to `list`. |
 | [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. |
 | [`list_resize(list, size[, value])`](#list_resizelist-size-value) | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set. |
-| [`list_reverse_sort(list)`](#list_reverse_sortlist) | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
+| [`list_reverse_sort(list)`](#list_reverse_sortlist) | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
 | [`list_reverse(list)`](#list_reverselist) | Reverses the list. |
 | [`list_select(value_list, index_list)`](#list_selectvalue_list-index_list) | Returns a list based on the elements selected by the `index_list`. |
 | [`list_slice(list, begin, end, step)`](#list_slicelist-begin-end-step) | `list_slice` with added `step` feature. |
-| [`list_slice(list, begin, end)`](#list_slicelist-begin-end) | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/nested.md %}#slicing). |
-| [`list_sort(list)`](#list_sortlist) | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
+| [`list_slice(list, begin, end)`](#list_slicelist-begin-end) | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/list.md %}#slicing). |
+| [`list_sort(list)`](#list_sortlist) | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
 | [`list_transform(list, lambda)`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#transform) page for more details. |
 | [`list_unique(list)`](#list_uniquelist) | Counts the unique elements of a list. |
 | [`list_value(any, ...)`](#list_valueany-) | Create a `LIST` containing the argument values. |
@@ -93,7 +93,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples]({% link docs/sql/functions/nested.md %}#flatten)). |
+| **Description** | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](#flattening)). |
 | **Example** | `flatten([[1, 2], [3, 4]])` |
 | **Result** | `[1, 2, 3, 4]` |
 
@@ -110,7 +110,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/nested.md %}#list-aggregates) section for more details. |
+| **Description** | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/list.md %}#list-aggregates) section for more details. |
 | **Example** | `list_aggregate([1, 2, NULL], 'min')` |
 | **Result** | `1` |
 | **Aliases** | `list_aggr`, `aggregate`, `array_aggregate`, `array_aggr` |
@@ -278,7 +278,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
+| **Description** | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
 | **Example** | `list_reverse_sort([3, 6, 1, 2])` |
 | **Result** | `[6, 3, 2, 1]` |
 | **Alias** | `array_reverse_sort` |
@@ -314,7 +314,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/nested.md %}#slicing). |
+| **Description** | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/list.md %}#slicing). |
 | **Example** | `list_slice([4, 5, 6], 2, 3)` |
 | **Result** | `[5, 6]` |
 | **Alias** | `array_slice` |
@@ -323,7 +323,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
+| **Description** | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
 | **Example** | `list_sort([3, 6, 1, 2])` |
 | **Result** | `[1, 2, 3, 6]` |
 | **Alias** | `array_sort` |

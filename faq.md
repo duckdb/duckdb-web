@@ -3,6 +3,14 @@ layout: docu
 title: Frequently Asked Questions
 ---
 
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+
+<!-- ## Overview
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
 <div class="qa-wrap" markdown="1">
 
 ### Who makes DuckDB?
@@ -16,7 +24,7 @@ DuckDB's initial development took place at the [Database Architectures Group](ht
 
 </div>
 
-<!-- Q&A entry -->
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -30,7 +38,7 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 
 </div>
 
-<!-- Q&A entry -->
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -53,7 +61,7 @@ To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://
 
 </div>
 
-<!-- Q&A entry -->
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -81,7 +89,7 @@ The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.
 
 </div>
 
-<!-- Q&A entry -->
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -95,55 +103,13 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 </div>
 
-<!-- Q&A entry -->
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
 
-<div class="qa-wrap" markdown="1">
+<!-- ## Working with DuckDB
 
-### How can I contribute to the DuckDB documentation?
-
-<div class="answer" markdown="1">
-
-The DuckDB Website is hosted by GitHub Pages, its repository is at [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web).
-When the documentation is browsed from a desktop computer, every page has a "Page Source" button on the top that navigates you to its Markdown source file.
-Pull requests to fix issues or to expand the documentation section on DuckDB's features are very welcome.
-Before opening a pull request, please consult our [Contributor Guide](https://github.com/duckdb/duckdb-web/blob/main/CONTRIBUTING.md).
-
-</div>
-
-</div>
-
-<!-- Q&A entry -->
-
-<div class="qa-wrap" markdown="1">
-
-### I benchmarked DuckDB and its slower than \[some other system\]
-
-<div class="answer" markdown="1">
-
-We welcome experiments comparing DuckDB's performance to other systems.
-To ensure fair comparison, we have two recommendations.
-First, try to use the [latest DuckDB version available as a nightly build]({% link docs/installation/index.html %}), which often has significant performance improvements compared to the last stable release.
-Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
-
-</div>
-
-</div>
-
-<!-- Q&A entry -->
-
-<div class="qa-wrap" markdown="1">
-
-### Does DuckDB use SIMD?
-
-<div class="answer" markdown="1">
-
-DuckDB does not use *explicit SIMD* (single instruction, multiple data) instructions because they greatly complicate portability and compilation. Instead, DuckDB uses *implicit SIMD*, where we go to great lengths to write our C++ code in such a way that the compiler can *auto-generate SIMD instructions* for the specific hardware. As an example why this is a good idea, it took 10 minutes to port DuckDB to the Apple Silicon architecture.
-
-</div>
-
-</div>
-
-<!-- Q&A entry -->
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -159,59 +125,7 @@ DuckDB can also run in [in-memory mode]({% link docs/connect/overview.md %}#in-m
 
 </div>
 
-<!-- Q&A entry -->
-
-<div class="qa-wrap" markdown="1">
-
-### How does DuckDB handle concurrency?
-
-<div class="answer" markdown="1">
-See the documentation on [concurrency]({% link docs/connect/concurrency.md %}#handling-concurrency).
-</div>
-
-</div>
-
-<!-- Q&A entry -->
-
-<div class="qa-wrap" markdown="1">
-
-### How can multiple processes write to DuckDB?
-
-<div class="answer" markdown="1">
-See the [documentation on concurrency]({% link docs/connect/concurrency.md %}#writing-to-duckdb-from-multiple-processes).
-</div>
-
-</div>
-
-<!-- Q&A entry -->
-
-<div class="qa-wrap" markdown="1">
-
-### When is the next version going to be released?
-
-<div class="answer" markdown="1">
-
-Please check the [release calendar]({% link docs/dev/release_calendar.md %}) for the planned release date of the next stable version of DuckDB.
-
-</div>
-
-</div>
-
-<!-- Q&A entry -->
-
-<div class="qa-wrap" markdown="1">
-
-### Is there an official DuckDB Docker image available?
-
-<div class="answer" markdown="1">
-There is no official DuckDB Docker image available.
-DuckDB uses an [in-process deployment model]({% link why_duckdb.md %}#simple), where the client application and DuckDB are running in the same process.
-Additionally to the DuckDB clients for Python, R, and other programming languages, DuckDB is also available as a standalone command-line client. This client is available on a [wide range of platforms]({% link docs/installation/index.html %}?version=stable&environment=cli) and is portable without containerization, making it unnecessary to containerize the process for most deployments.
-</div>
-
-</div>
-
-<!-- Q&A entry -->
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -227,7 +141,79 @@ Compatibility is also guaranteed between different DuckDB clients (e.g., Python 
 
 </div>
 
-<!-- Q&A entry -->
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### How does DuckDB handle concurrency? Can multiple processes write to DuckDB?
+
+<div class="answer" markdown="1">
+See the documentation on [handling concurrency]({% link docs/connect/concurrency.md %}#handling-concurrency)
+and the section on [“Writing to DuckDB from Multiple Processes”]({% link docs/connect/concurrency.md %}#writing-to-duckdb-from-multiple-processes).
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### Is there an official DuckDB Docker image available?
+
+<div class="answer" markdown="1">
+There is no official DuckDB Docker image available.
+DuckDB uses an [in-process deployment model]({% link why_duckdb.md %}#simple), where the client application and DuckDB are running in the same process.
+Additionally to the DuckDB clients for Python, R, and other programming languages, DuckDB is also available as a standalone command-line client. This client is available on a [wide range of platforms]({% link docs/installation/index.html %}?version=stable&environment=cli) and is portable without containerization, making it unnecessary to containerize the process for most deployments.
+</div>
+
+</div>
+
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+
+<!-- ## Performance
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### Does DuckDB use SIMD?
+
+<div class="answer" markdown="1">
+
+DuckDB does not use *explicit SIMD* (single instruction, multiple data) instructions because they greatly complicate portability and compilation. Instead, DuckDB uses *implicit SIMD*, where we go to great lengths to write our C++ code in such a way that the compiler can *auto-generate SIMD instructions* for the specific hardware. As an example why this is a good idea, it took 10 minutes to port DuckDB to the Apple Silicon architecture.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### I would to benchmark DuckDB against another system. How do I proceed?
+
+<div class="answer" markdown="1">
+
+We welcome experiments comparing DuckDB's performance to other systems.
+To ensure fair comparison, we have a few recommendations.
+First, try to use the [latest DuckDB version available as a nightly build]({% link docs/installation/index.html %}), which often has significant performance improvements compared to the last stable release.
+Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
+Third, study the DuckDB [Performance Guide]({% link docs/guides/performance/overview.md %}), which has best practices for ensuring optimal performance.
+Finally, please report the DuckDB version (for stable verison, the version number, for nightly builds, the commit hash).
+
+</div>
+
+</div>
+
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+
+<!-- ## Use Cases for DuckDB
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -250,7 +236,7 @@ For example, the `GROUP BY ALL` clause can be replaced with a `GROUP BY` clause 
 
 </div>
 
-<!-- Q&A entry -->
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -275,7 +261,27 @@ And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/0
 
 </div>
 
-<!-- Q&A entry -->
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+
+<!-- ## Releases and Development
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### When is the next version going to be released?
+
+<div class="answer" markdown="1">
+
+Please check the [release calendar]({% link docs/dev/release_calendar.md %}) for the planned release date of the next stable version of DuckDB.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
 <div class="qa-wrap" markdown="1">
 
@@ -286,6 +292,23 @@ And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/0
 Currently, we do not maintain a public development roadmap.
 We discuss planned developments at DuckCon events (typically held twice a year).
 See the most recent [overview talk at DuckCon #5](https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf).
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### How can I contribute to the DuckDB documentation?
+
+<div class="answer" markdown="1">
+
+The DuckDB Website is hosted by GitHub Pages, its repository is at [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web).
+When the documentation is browsed from a desktop computer, every page has a "Page Source" button on the top that navigates you to its Markdown source file.
+Pull requests to fix issues or to expand the documentation section on DuckDB's features are very welcome.
+Before opening a pull request, please consult our [Contributor Guide](https://github.com/duckdb/duckdb-web/blob/main/CONTRIBUTING.md).
 
 </div>
 

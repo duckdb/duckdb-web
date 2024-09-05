@@ -61,3 +61,27 @@ GEN=ninja make
 ```
 
 > Bestpractice It is not advised to directly call CMake, as the Makefile sets certain variables that are crucial to properly building the package.
+
+For testing, it can be useful to build DuckDB with statically linked core extensions. To do so, run:
+
+```bash
+CORE_EXTENSIONS='autocomplete;icu;parquet;json' GEN=ninja make
+```
+
+This option also accepts out-of-tree extensions:
+
+```bash
+CORE_EXTENSIONS='autocomplete;icu;parquet;json;delta' GEN=ninja make
+```
+
+For more details, see the [“Building Extensions” page]({% link docs/dev/building/building_extensions.md %}).
+
+## Troubleshooting
+
+### The Build Runs Out of Memory
+
+Ninja parallelizes the build, which can cause out-of-memory issues on systems with limited resources. They also occur on Alpine Linux. In these cases, avoid using Ninja:
+
+```bash
+make
+```

@@ -59,3 +59,7 @@ silver:
   - name: Overture Maps Foundation
     url: https://overturemaps.org/
     logoimg: overturemaps.svg
+
+  - name: Crunchy Data
+    url: https://www.crunchydata.com/
+    logoimg: crunchydata.svg

@@ -98,7 +98,7 @@ const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
     },
 };
 // Select a bundle based on browser checks
-const bundle = await duckdb.selectBundle(JSDELIVR_BUNDLES);
+const bundle = await duckdb.selectBundle(MANUAL_BUNDLES);
 // Instantiate the asynchronous version of DuckDB-Wasm
 const worker = new Worker(bundle.mainWorker!);
 const logger = new duckdb.ConsoleLogger();

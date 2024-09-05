@@ -64,21 +64,35 @@ SELECT *
 FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 ```
 
-Read over https:
+Read over HTTPS:
 
 ```sql
 SELECT *
 FROM read_parquet('https://some.url/some_file.parquet');
 ```
 
-Query the metadata of a Parquet file:
+Query the [metadata of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-metadata):
 
 ```sql
 SELECT *
 FROM parquet_metadata('test.parquet');
 ```
 
-Query the schema of a Parquet file:
+Query the [file metadata of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-file-metadata):
+
+```sql
+SELECT *
+FROM parquet_file_metadata('test.parquet');
+```
+
+Query the [key-value metadata of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-key-value-metadata):
+
+```sql
+SELECT *
+FROM parquet_kv_metadata('test.parquet');
+```
+
+Query the [schema of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-schema):
 
 ```sql
 SELECT *
@@ -211,6 +225,22 @@ Write `tbl` to a zstd-compressed Parquet file with the lowest compression level 
 COPY tbl
     TO 'result-zstd.parquet'
     (FORMAT 'parquet', CODEC 'zstd', COMPRESSION_LEVEL 1);
+```
+
+Write to Parquet file with [key-value metadata]({% link docs/data/parquet/metadata.md %}):
+
+```sql
+COPY (
+    SELECT
+        42 AS number,
+        true AS is_even
+) TO 'kv_metadata.parquet' (
+    FORMAT PARQUET,
+    KV_METADATA {
+        number: 'Answer to life, universe, and everything',
+        is_even: 'not ''odd''' -- single quotes in values must be escaped
+    }
+);
 ```
 
 Write a CSV file to an uncompressed Parquet file:

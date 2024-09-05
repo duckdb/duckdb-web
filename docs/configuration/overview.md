@@ -14,7 +14,7 @@ The values of configuration options can be queried via the [`current_setting()` 
 
 ## Examples
 
-Set the memory limit of the system to 10GB.
+Set the memory limit of the system to 10 GB.
 
 ```sql
 SET memory_limit = '10GB';
@@ -129,7 +129,7 @@ Configuration options come with different default [scopes]({% link docs/sql/stat
 | `immediate_transaction_mode`                 | Whether transactions should be started lazily when needed, or immediately when BEGIN TRANSACTION is called                                       | `BOOLEAN` | `false`                                             |
 | `lock_configuration`                         | Whether or not the configuration can be altered                                                                                                  | `BOOLEAN` | `false`                                             |
 | `max_memory`, `memory_limit`                 | The maximum memory of the system (e.g., 1GB)                                                                                                     | `VARCHAR` | 80% of RAM                                          |
-| `max_temp_directory_size`                    | The maximum amount of data stored inside the 'temp_directory' (when set) (e.g., 1GB)                                                             | `VARCHAR` | `0 bytes`                                           |
+| `max_temp_directory_size`                    | The maximum amount of data stored inside the `temp_directory` (e.g., 1GB). No limit is applied when value is zero.                                                              | `VARCHAR` | `0 bytes`                                           |
 | `old_implicit_casting`                       | Allow implicit casting to/from VARCHAR                                                                                                           | `BOOLEAN` | `false`                                             |
 | `password`                                   | The password to use. Ignored for legacy compatibility.                                                                                           | `VARCHAR` | `NULL`                                              |
 | `preserve_insertion_order`                   | Whether or not to preserve insertion order. If set to false the system is allowed to re-order any results that do not contain ORDER BY clauses.  | `BOOLEAN` | `true`                                              |
