@@ -15,67 +15,60 @@ See the [data types overview]({% link docs/sql/data_types/overview.md %}) for a 
 
 ### Creating Structs
 
-Structs can be created using the [`struct_pack(name := expr, ...)`]({% link docs/sql/functions/nested.md %}#struct-functions) function or the equivalent array notation `{'name': expr, ...}` notation. The expressions can be constants or arbitrary expressions.
+Structs can be created using the [`struct_pack(name := expr, ...)`]({% link docs/sql/functions/nested.md %}#struct-functions) function, the equivalent array notation `{'name': expr, ...}`, using a row variable, or using the `row` function.
 
-Struct of integers:
+Create a struct using the `struct_pack` function. Note the lack of single quotes around the keys and the use of the `:=` operator:
 
 ```sql
-SELECT {'x': 1, 'y': 2, 'z': 3};
+SELECT struct_pack(key1 := 'value1', key2 := 42) AS s;
 ```
 
-Struct of strings with a `NULL` value:
+Create a struct using the array notation:
 
 ```sql
-SELECT {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'};
+SELECT {'key1': 'value1', 'key2': 42} AS s;
 ```
 
-Struct with a different type for each key:
+Create a struct using a row variable:
 
 ```sql
-SELECT {'key1': 'string', 'key2': 1, 'key3': 12.345};
+SELECT d AS s FROM (SELECT 'value1' AS key1, 42 AS key2) d;
 ```
 
-Struct using the `struct_pack` function. Note the lack of single quotes around the keys and the use of the `:=` operator:
+Create a struct of integers:
 
 ```sql
-SELECT struct_pack(key1 := 'value1', key2 := 42);
+SELECT {'x': 1, 'y': 2, 'z': 3} AS s;
 ```
 
-Struct of structs with `NULL` values:
+Create a struct of strings with a `NULL` value:
 
 ```sql
-SELECT
-    {'birds':
-        {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'},
-    'aliens':
-        NULL,
-    'amphibians':
-        {'yes':'frog', 'maybe': 'salamander', 'huh': 'dragon', 'no':'toad'}
-    };
+SELECT {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'} AS s;
 ```
 
-Create a struct from columns and/or expressions using the row function:
-
-This returns `{'': 1, '': 2, '': a}`:
+Create a struct with a different type for each key:
 
 ```sql
-SELECT row(x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);
+SELECT {'key1': 'string', 'key2': 1, 'key3': 12.345} AS s;
 ```
 
-If using multiple expressions when creating a struct, the row function is optional:
-
-This also returns `{'': 1, '': 2, '': a}`:
+Create a struct of structs with `NULL` values:
 
 ```sql
-SELECT (x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);
+SELECT {
+        'birds': {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'},
+        'aliens': NULL,
+        'amphibians': {'yes': 'frog', 'maybe': 'salamander', 'huh': 'dragon', 'no': 'toad'}
+    } AS s;
 ```
 
 ### Adding Field(s)/Value(s) to Structs
 
-Add to a Struct of integers:
+Add to a struct of integers:
 
 ```sql
-SELECT struct_insert({'a': 1, 'b': 2, 'c': 3}, d := 4);
+SELECT struct_insert({'a': 1, 'b': 2, 'c': 3}, d := 4) AS s;
 ```
 
 ### Retrieving from Structs
@@ -165,13 +158,12 @@ Any extra parts (e.g., `.part4.part5`, etc.) are always treated as properties
 The `row` function can be used to automatically convert multiple columns to a single struct column.
 When using `row` the keys will be empty strings allowing for easy insertion into a table with a struct column.
 Columns, however, cannot be initialized with the `row` function, and must be explicitly named.
-For example:
-
-Inserting values into a struct column using the row function:
+For example, inserting values into a struct column using the `row` function:
 
 ```sql
 CREATE TABLE t1 (s STRUCT(v VARCHAR, i INTEGER));
-INSERT INTO t1 VALUES (ROW('a', 42));
+INSERT INTO t1 VALUES (row('a', 42));
+SELECT * FROM t1;
 ```
 
 The table will contain a single entry:
@@ -184,14 +176,14 @@ The following produces the same result as above:
 
 ```sql
 CREATE TABLE t1 AS (
-    SELECT ROW('a', 42)::STRUCT(v VARCHAR, i INTEGER)
+    SELECT row('a', 42)::STRUCT(v VARCHAR, i INTEGER)
 );
 ```
 
-Initializing a struct column with the row function will fail:
+Initializing a struct column with the `row` function will fail:
 
 ```sql
-CREATE TABLE t2 AS SELECT ROW('a');
+CREATE TABLE t2 AS SELECT row('a');
 ```
 
 ```console
@@ -210,7 +202,7 @@ FROM
 Mismatch Type Error: Type STRUCT(x INTEGER) does not match with STRUCT(y INTEGER). Cannot cast STRUCTs - element "x" in source struct was not found in target struct
 ```
 
-A workaround for this would be to use [`struct_pack`](#creating-structs) instead:
+A workaround for this is to use [`struct_pack`](#creating-structs) instead:
 
 ```sql
 SELECT struct_pack(y := a.x) AS b
@@ -219,6 +211,20 @@ FROM
 ```
 
 > This behavior was introduced in DuckDB v0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
+
+The `row` function can be used to return unnamed structs. For example:
+
+```sql
+SELECT row(x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y) AS s;
+```
+
+This produces `(1, 2, a)`.
+
+If using multiple expressions when creating a struct, the `row` function is optional. The following query returns the same result as the previous one:
+
+```sql
+SELECT (x, x + 1, y) AS s FROM (SELECT 1 AS x, 'a' AS y);
+```
 
 ## Comparison Operators
 
