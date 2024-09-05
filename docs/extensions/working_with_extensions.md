@@ -89,7 +89,7 @@ SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
 
 While any url or local path can be used as a repository, currently DuckDB contains the following predefined repositories:
 
-<div class="narrow_table monospace_table"></div>
+<div class="narrow_table"></div>
 
 | Alias                 | Url                                    | Description                                                                            |
 |:----------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
