@@ -9,7 +9,7 @@ Profiling is important to help understand why certain queries exhibit specific p
 
 ## `EXPLAIN` Statement
 
-The first step to profiling a database engine is figuring out what execution plan the engine is using. The [`EXPLAIN`]({% link docs/guides/meta/explain.md %}) statement allows you to peek into the query plan and see what is going on under the hood.
+A first step to profiling a duckdb can include examining the plan of a query. The [`EXPLAIN`]({% link docs/guides/meta/explain.md %}) statement allows you to peek into the query plan and see what is going on under the hood.
 
 ## `EXPLAIN ANALYZE` Statement
 
@@ -35,19 +35,30 @@ PRAGMA enable_profile;
 
 ### Profiling Format
 
-The profiling can be output in several formats. When not specified, the default is `query_tree`, which prints the logical query plan with the timings and cardinalities of each operator in the tree to the screen.
+The profiling can be output in several formats. When not specified, the default is `query_tree`, which prints the physical query plan with the timings and cardinalities of each operator in the tree to the screen.
 
+Outputs the physical query plan in JSON format:
 ```SQL
 PRAGMA enable_profiling = 'json';
 ```
 
+Outputs the physical query plan in a tree format with optimizer and planner timing,
+see [profiling mode](#profiling-mode):
 ```sql
-# prints the physical operator tree
 PRAGMA enable_profiling = 'query_tree_optimizer';
 ```
 
+Outputs the physical query plan:
 ```sql
 PRAGMA enable_profiling = 'query_tree';
+```
+
+#### Disabling Output
+
+It is also possible to disable outputting profiling information. This is specifically useful when accessing the profiling through API functions:
+
+```sql
+PRAGMA enable_profiling = 'no_output';
 ```
 
 ### Disable Profiling
@@ -84,9 +95,13 @@ PRAGMA profiling_output = 'filename';
 
 ### Custom Profiling Metrics
 
-By default, all metrics are enabled, but they can be toggled on or off individually. This `PRAGMA` accepts a JSON object with the metric names as keys and a boolean value to enable or disable the metric. The metrics set by this `PRAGMA` will override the default settings.
+By default, all metrics are enabled except those activated by detailed profiling.
+All metrics, including those from detailed profiling,
+can be individually enabled or disabled using the `custom_profiling_settings` `PRAGMA`.
+This `PRAGMA` accepts a JSON object with metric names as keys and boolean values to toggle them on or off.
+Settings specified by this `PRAGMA` will override the default behavior.
 
-> Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` formats will always a default set of metrics. 
+> Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
 
 In the following example the `CPU_TIME` metric is disabled, and the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
 
@@ -115,9 +130,10 @@ Other than `QUERY_NAME` and `OPERATOR_TYPE`, all metrics can be turned on or off
 
 ### Cumulative Metrics
 
-DuckDB also supports several cumulative metrics, which are available in all nodes. In the `QUERY_ROOT` node, these metrics are the sum of the specific metric in all the operators in the query. In the `OPERATOR` nodes, these metrics are the sum of the operator's specific metric as well as those of all its children recursively.
+DuckDB also supports several cumulative metrics, available in all nodes. In the QUERY_ROOT node, these metrics represent the sum of the corresponding metrics across all operators in the query. In the OPERATOR nodes, they represent the sum of the operator's specific metric along with those of all its children recursively.
 
-These metrics can be used without turning on the specific metric.
+These cumulative metrics can be enabled independently, even if the underlying specific metrics are disabled.
+The table below shows the cumulative metrics and the specific metrics they are calculated from.
 
 | Metric                    | Metric Calculated Cumulatively |
 |---------------------------|--------------------------------|
@@ -152,8 +168,8 @@ The `PLANNER` is responsible for generating the logical plan. Currently, two met
 The `PHYSICAL_PLANNER` is responsible for generating the physical plan. The following are the metrics supported in the `PHYSICAL_PLANNER`:
 - `PHYSICAL_PLANNER` - The time taken to generate the physical plan
 - `PHYSICAL_PLANNER_COLUMN_BINDING` - The time taken to bind the columns in the physical plan
-- `physical_planner_resolve_types` - The time taken to resolve the types in the physical plan
-- `physical_planner_create_plan` - The time taken to create the physical plan
+- `PHYSICAL_PLANNER_RESOLVE_TYPES` - The time taken to resolve the types in the physical plan
+- `PHYSICAL_PLANNER_CREATE_PLAN` - The time taken to create the physical plan
 
 ## Setting Custom Metrics Examples
 

@@ -301,24 +301,32 @@ PRAGMA enable_profile;
 
 ##### Profiling Format
 
-The format of the resulting profiling information can be specified as either `json`, `query_tree`, or `query_tree_optimizer`. The default format is `query_tree`, which prints the logical query plan together with the timings and cardinalities of each operator in the tree to the screen.
+The format of the resulting profiling information can be specified as either `json`, `query_tree`, or `query_tree_optimizer`. The default format is `query_tree`, which prints the physical query plan together with the timings and cardinalities of each operator in the tree to the screen.
 
-To return the logical query plan as JSON:
+To return the physical query plan as JSON:
 
 ```sql
 SET enable_profiling = 'json';
 ```
 
-To return the logical query plan:
+To return the physical query plan:
 
 ```sql
 SET enable_profiling = 'query_tree';
 ```
 
-To return the physical query plan:
+To return the physical query plan with optimizer and planner timings, see [profiling mode](#profiling-mode):
 
 ```sql
 SET enable_profiling = 'query_tree_optimizer';
+```
+
+###### Disabling Output
+
+It is also possible to disable outputting profiling information. This is specifically useful when accessing the profiling through API functions:
+    
+```sql
+SET enable_profiling = 'no_output';
 ```
 
 ##### Disable Profiling
@@ -362,9 +370,13 @@ SET profiling_mode = 'standard';
 
 #### Custom Profiling Metrics
 
-By default, all metrics are enabled, but they can be toggled on or off individually. This `PRAGMA` accepts a JSON object with the metric names as keys and a boolean value to enable or disable the metric. The metrics set by this `PRAGMA` will override the default settings.
+By default, all metrics are enabled except those activated by detailed profiling.
+All metrics, including those from detailed profiling,
+can be individually enabled or disabled using the `custom_profiling_settings` `PRAGMA`.
+This `PRAGMA` accepts a JSON object with metric names as keys and boolean values to toggle them on or off.
+Settings specified by this `PRAGMA` will override the default behavior.
 
-> Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` formats will always a default set of metrics.
+> Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
 
 In the following example the `CPU_TIME` metric is disabled, and the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
 
