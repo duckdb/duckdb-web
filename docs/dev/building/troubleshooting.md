@@ -34,14 +34,14 @@ warning: too many GOT entries for -fpic, please recompile with -fPIC
 ```
 
 **Solution:**
-Create or edit the `~/.R/Makevars` file. This example also contains the [flag to parallelize the build](#building-the-r-package-is-slow):
+Create or edit the `~/.R/Makevars` file. This example also contains the [flag to parallelize the build](#r-package-the-build-only-uses-a-single-thread):
 
 ```ini
 ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 MAKEFLAGS = -j$(nproc)
 ```
 
-When making this change, also consider [making the build parallel](#building-the-r-package-is-slow).
+When making this change, also consider [making the build parallel](#r-package-the-build-only-uses-a-single-thread).
 
 ## Python Package: `No module named 'duckdb.duckdb'` Build Error
 

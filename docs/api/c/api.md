@@ -977,6 +977,7 @@ printf("Data for row %d: %d\n", row, data[row]);
 </code></pre></div></div>
 
 #### Parameters
+
 * `result`
 
 The result object to fetch the column data from.
