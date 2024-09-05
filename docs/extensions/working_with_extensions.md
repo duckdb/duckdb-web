@@ -122,7 +122,7 @@ This outputs:
 ### Creating a Custom Repository
 
 A DuckDB repository is an HTTP, HTTPS, S3, or local file based directory that serves the extensions files in a specific structure.
-This structure is describe [here](#downloading-extensions-directly-from-s3), and is the same
+This structure is described in the [“Downloading Extensions Directly from S3” section](#downloading-extensions-directly-from-s3), and is the same
 for local paths and remote servers, for example:
 
 ```text
