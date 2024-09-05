@@ -56,7 +56,7 @@ The reference contains several deprecation notices. These concern methods whose 
 <span class="kt">duckdb_result_type</span> <a href="#duckdb_result_return_type"><span class="nf">duckdb_result_return_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 </code></pre></div></div>
 
-### Safe fetch functions
+### Safe Fetch Functions
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <a href="#duckdb_value_boolean"><span class="nf">duckdb_value_boolean</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 <span class="kt">int8_t</span> <a href="#duckdb_value_int8"><span class="nf">duckdb_value_int8</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
