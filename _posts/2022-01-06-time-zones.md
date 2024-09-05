@@ -36,6 +36,7 @@ In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00 +00:00`, and t
 In other words, a `TIMESTAMP` column contains instants.
 
 There are three other temporal types in SQL:
+
 * `DATE` – an integral count of days from a fixed date. In DuckDB, the fixed date is `1970-01-01`, again in UTC.
 * `TIME` – a (positive) count of microseconds up to a single day
 * `INTERVAL` – a set of fields for counting time differences. In DuckDB, intervals count months, days and microseconds. (Months are not completely well-defined, but when present, they represent 30 days.)
@@ -112,6 +113,7 @@ Thus a `TIMESTAMPTZ` column also stores instants,
 but expresses a "hint" that it should use a specific binning system.
 
 There are a number of operations that can be performed on instants without a binning system:
+
 * Comparing;
 * Sorting;
 * Increment (µs) difference;
@@ -169,6 +171,7 @@ Note that casting to a string is a binning operation because the text produced c
 
 Because timestamps that require custom binning have a different data type,
 the ICU extension can define additional functions with bindings to `TIMESTAMPTZ`:
+
 * `+` – Add an `INTERVAL` to a timestamp
 * `-` – Subtract an `INTERVAL` from a timestamp
 * `AGE` – Compute an `INTERVAL` describing the months/days/microseconds between two timestamps (or one timestamp and the current instant).
@@ -191,7 +194,7 @@ ICU can also perform binning operations for some non-Gregorian calendars.
 We have added support for these calendars via a `Calendar` setting and the `icu_calendar_names` table function:
 
 ```sql
-load icu;
+LOAD icu;
 
 -- Show the current calendar. The default is set to ICU's current locale.
 SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
@@ -221,7 +224,7 @@ SELECT era('2019-05-01 00:00:00+10'::TIMESTAMPTZ), era('2019-05-01 00:00:00+09':
 
 ### Caveats
 
-ICU has some differences in behaviour and representation from the DuckDB implementation. These are hopefully minor issues that should only be of concern to serious time nerds.
+ICU has some differences in behavior and representation from the DuckDB implementation. These are hopefully minor issues that should only be of concern to serious time nerds.
 
 * ICU represents instants as millisecond counts using a `DOUBLE`. This makes it lose accuracy far from the epoch (e.g., around the first millennium)
 * ICU uses the Julian calendar for dates before the Gregorian change on `1582-10-15` instead of the proleptic Gregorian calendar. This means that dates prior to the changeover will differ, although ICU will give the date as actually written at the time.
