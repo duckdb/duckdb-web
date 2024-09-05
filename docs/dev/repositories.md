@@ -22,15 +22,18 @@ Several components of DuckDB are maintained in separate repositories.
 * [`duckdb-r`](https://github.com/duckdb/duckdb-r): R client
 * [`duckdb-rs`](https://github.com/duckdb/duckdb-rs): Rust client
 * [`duckdb-swift`](https://github.com/duckdb/duckdb-swift): Swift client
+* [`duckplyr`](https://github.com/tidyverse/duckplyr): a drop-in replacement for dplyr in R
 * [`go-duckdb`](https://github.com/marcboeker/go-duckdb): Go client
 
 ## Connectors
 
 * [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb): dbt
 * [`duckdb_mysql`](https://github.com/duckdb/duckdb_mysql): MySQL connector
-* [`postgres_scanner`](https://github.com/duckdb/postgres_scanner): PostgresSQL connector
+* [`pg_duckdb`](https://github.com/duckdb/pg_duckdb): official PostgreSQL extension for DuckDB (run DuckDB in PostgreSQL)
+* [`postgres_scanner`](https://github.com/duckdb/postgres_scanner): PostgreSQL connector (connect to PostgreSQL from DuckdB)
 * [`sqlite_scanner`](https://github.com/duckdb/sqlite_scanner): SQLite connector
 
 ## Extensions
 
-Extension repositories are linked in the [Official Extensions]({% link docs/extensions/official_extensions.md %}) page.
+* Core extension repositories are linked in the [Official Extensions page]({% link docs/extensions/core_extensions.md %})
+* Community extensions are built in the [Community Extensions repository](https://github.com/duckdb/community-extensions)

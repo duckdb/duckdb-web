@@ -23,7 +23,7 @@ CREATE TABLE person (name VARCHAR, age BIGINT);
 INSERT INTO person VALUES ('Alice', 37), ('Ana', 35), ('Bob', 41), ('Bea', 25);
 ```
 
-In our example query, we'll look for people whose name starts with a "B" and are at least 40 years old.
+In our example query, we'll look for people whose name starts with a `B` and are at least 40 years old.
 This will return a single row `<'Bob', 41>`.
 
 ### Auto-Incremented Parameters: `?`

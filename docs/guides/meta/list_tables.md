@@ -36,4 +36,4 @@ To view the schema of an individual table, use the [`DESCRIBE` command]({% link 
 
 ## See Also
 
-The SQL-standard [`information_schema`]({% link docs/sql/information_schema.md %}) views are also defined. Moreover, DuckDB defines `sqlite_master` and many [PostgreSQL system catalog tables](https://www.postgresql.org/docs/16/catalogs.html) for compatibility with SQLite and PostgreSQL respectively.
+The SQL-standard [`information_schema`]({% link docs/sql/meta/information_schema.md %}) views are also defined. Moreover, DuckDB defines `sqlite_master` and many [PostgreSQL system catalog tables](https://www.postgresql.org/docs/16/catalogs.html) for compatibility with SQLite and PostgreSQL respectively.

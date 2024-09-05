@@ -20,7 +20,7 @@ COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IG
 Write a table to a Hive partitioned data set of GZIP-compressed CSV files, setting explicit data files' extension:
 
 ```sql
-COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), COMPRESSION gzip, FILE_EXTENSION 'csv.gz');
+COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), COMPRESSION GZIP, FILE_EXTENSION 'csv.gz');
 ```
 
 ## Partitioned Writes
@@ -45,7 +45,7 @@ orders
 
 The values of the partitions are automatically extracted from the data. Note that it can be very expensive to write many partitions as many files will be created. The ideal partition count depends on how large your data set is.
 
-> Bestpractice Writing data into many small partitions is expensive. It is generally recommended to have at least `100MB` of data per partition.
+> Bestpractice Writing data into many small partitions is expensive. It is generally recommended to have at least `100 MB` of data per partition.
 
 ### Overwriting
 
@@ -62,12 +62,12 @@ Write a table to a Hive partitioned data set of .parquet files, with an index in
 
 ```sql
 COPY orders TO 'orders'
-    (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "orders_{i}");
+    (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'orders_{i}');
 ```
 
 Write a table to a Hive partitioned data set of .parquet files, with unique filenames:
 
 ```sql
 COPY orders TO 'orders'
-    (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "file_{uuid}");
+    (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'file_{uuid}');
 ```

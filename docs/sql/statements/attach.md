@@ -4,7 +4,7 @@ title: ATTACH/DETACH Statement
 railroad: statements/attach.js
 ---
 
-The `ATTACH` statement adds a new database file to the catalog that can be read from and written to.
+DuckDB allows attaching to and detaching from database files.
 
 ## Examples
 
@@ -76,6 +76,9 @@ USE file;
 
 ## Attach
 
+The `ATTACH` statement adds a new database file to the catalog that can be read from and written to.
+Note that attachment definitions are not persisted between sessions: when a new session is launched, you have to re-attach to all databases.
+
 ### Attach Syntax
 
 <div id="rrdiagram1"></div>
@@ -139,7 +142,7 @@ SELECT new_db.my_schema.my_table.col FROM new_db.my_schema.my_table;
 
 Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the *catalog search path*. The default catalog search path includes the system catalog, the temporary catalog and the initially attached database together with the `main` schema.
 
-Also note the rules on [identifiers and database names in particular]({% link docs/sql/keywords_and_identifiers.md %}#database-names).
+Also note the rules on [identifiers and database names in particular]({% link docs/sql/dialect/keywords_and_identifiers.md %}#database-names).
 
 ### Default Database and Schema
 

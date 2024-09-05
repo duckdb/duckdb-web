@@ -11,43 +11,59 @@ Samples are used to randomly select a subset of a dataset.
 Select a sample of 5 rows from `tbl` using reservoir sampling:
 
 ```sql
-SELECT * FROM tbl USING SAMPLE 5;
+SELECT *
+FROM tbl
+USING SAMPLE 5;
 ```
 
 Select a sample of 10% of the table using system sampling (cluster sampling):
 
 ```sql
-SELECT * FROM tbl USING SAMPLE 10%;
+SELECT *
+FROM tbl
+USING SAMPLE 10%;
 ```
 
 Select a sample of 10% of the table using bernoulli sampling:
 
 ```sql
-SELECT * FROM tbl USING SAMPLE 10 PERCENT (bernoulli);
+SELECT *
+FROM tbl
+USING SAMPLE 10 PERCENT (bernoulli);
 ```
 
 Select a sample of 50 rows of the table using reservoir sampling with a fixed seed (100):
 
 ```sql
-SELECT * FROM tbl USING SAMPLE reservoir(50 ROWS) REPEATABLE (100);
+SELECT *
+FROM tbl
+USING SAMPLE reservoir(50 ROWS)
+REPEATABLE (100);
 ```
 
 Select a sample of 20% of the table using system sampling with a fixed seed (377):
 
 ```sql
-SELECT * FROM tbl USING SAMPLE 10% (system, 377);
+SELECT *
+FROM tbl
+USING SAMPLE 20% (system, 377);
 ```
 
-Select a sample of 10% of `tbl` **before** the join with `tbl2`:
+Select a sample of 20% of `tbl` **before** the join with `tbl2`:
 
 ```sql
-SELECT * FROM tbl TABLESAMPLE reservoir(20%), tbl2 WHERE tbl.i = tbl2.i;
+SELECT *
+FROM tbl TABLESAMPLE reservoir(20%), tbl2
+WHERE tbl.i = tbl2.i;
 ```
 
-Select a sample of 10% of `tbl` **after** the join with `tbl2`:
+Select a sample of 20% of `tbl` **after** the join with `tbl2`:
 
 ```sql
-SELECT * FROM tbl, tbl2 WHERE tbl.i = tbl2.i USING SAMPLE reservoir(20%);
+SELECT *
+FROM tbl, tbl2
+WHERE tbl.i = tbl2.i
+USING SAMPLE reservoir(20%);
 ```
 
 ### Syntax
@@ -70,7 +86,7 @@ Reservoir sampling is only recommended for small sample sizes, and is not recomm
 
 Reservoir sampling also incurs an additional performance penalty when multi-processing is used, since the reservoir is to be shared amongst the different threads to ensure unbiased sampling. This is not a big problem when the reservoir is very small, but becomes costly when the sample is large.
 
-> Bestpractice Avoid using Reservoir Sample with large sample sizes if possible.
+> Bestpractice Avoid using reservoir sampling with large sample sizes if possible.
 > Reservoir sampling requires the entire sample to be materialized in memory.
 
 ### `bernoulli`
@@ -108,5 +124,8 @@ WHERE tbl.i = tbl2.i;
 Sample 20% **after** the join (i.e., sample 20% of the join result):
 
 ```sql
-SELECT * FROM tbl, tbl2 WHERE tbl.i = tbl2.i USING SAMPLE reservoir(20%);
+SELECT *
+FROM tbl, tbl2
+WHERE tbl.i = tbl2.i
+USING SAMPLE reservoir(20%);
 ```

@@ -261,6 +261,10 @@ h1, h2, h3, h4, h5{
 					font-weight: 500;
 				}
 			}
+			hr {
+				margin: 50px 0 50px 0;
+				border: 0.5px solid rgb(229, 229, 229);
+			}
 		}
 		.infoline{
 			display: -webkit-box;
@@ -315,8 +319,8 @@ h1, h2, h3, h4, h5{
 			-webkit-transition: color .3s;
 			-o-transition: color .3s;
 			transition: color .3s;
-			@include textlink();
 			font-size: 100%;
+			@include textlink();
 			span::after{
 				line-height: 1.2;
 			}

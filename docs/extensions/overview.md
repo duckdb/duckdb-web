@@ -12,7 +12,7 @@ DuckDB has a flexible extension mechanism that allows for dynamically loading ex
 These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
 
 > Extensions are loadable on all clients (e.g., Python and R).
-> Extensions distributed via the official repository are built and tested on macOS (AMD64 and ARM64), Windows (AMD64) and Linux (AMD64 and ARM64).
+> Extensions distributed via the Core and Community repositories are built and tested on macOS (AMD64 and ARM64), Windows (AMD64) and Linux (AMD64 and ARM64).
 
 ## Listing Extensions
 
@@ -32,7 +32,7 @@ FROM duckdb_extensions();
 | ...               | ...       | ...                                                          |
 
 This list will show which extensions are available, which extensions are installed, at which version, where it is installed, and more.
-The list includes most, but not all, available core extensions. For the full list, we maintain a [list of official extensions]({% link docs/extensions/official_extensions.md %}).
+The list includes most, but not all, available core extensions. For the full list, we maintain a [list of core extensions]({% link docs/extensions/core_extensions.md %}).
 
 ## Built-In Extensions
 
@@ -44,7 +44,7 @@ SELECT *
 FROM 'test.json';
 ```
 
-To make the DuckDB distribution lightweight, only a few essential extensions are built-in, varying slightly per distribution. Which extension is built-in on which platform is documented in the [list of official extensions]({% link docs/extensions/official_extensions.md %}#default-extensions).
+To make the DuckDB distribution lightweight, only a few essential extensions are built-in, varying slightly per distribution. Which extension is built-in on which platform is documented in the [list of core extensions]({% link docs/extensions/core_extensions.md %}#default-extensions).
 
 ## Installing More Extensions
 
@@ -56,7 +56,7 @@ To make an extension that is not built-in available in DuckDB, two steps need to
 directory for the installed extension, then load it to make its features available. This means that every time DuckDB is restarted, all
 extensions that are used need to be (re)loaded
 
-    > Once loaded, an extension cannot be reinstalled. It is not possible to unload an extension.
+> Extension installation and loading are subject to a few [limitations]({% link docs/extensions/working_with_extensions.md %}#limitations).
 
 There are two main methods of making DuckDB perform the **installation** and **loading** steps for an installable extension: **explicitly** and through **autoloading**.
 
@@ -88,9 +88,14 @@ FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv'
 
 DuckDB will automatically install and load the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) extension. No explicit `INSTALL` or `LOAD` statements are required.
 
-Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes to the running DuckDB instance, making autoloading technically not (yet) possible. For others, it is prefered to have users opt-in to the extension explicitly before use due to the way they modify behaviour in DuckDB.
+Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes to the running DuckDB instance, making autoloading technically not (yet) possible. For others, it is preferred to have users opt-in to the extension explicitly before use due to the way they modify behaviour in DuckDB.
 
-To see which extensions can be autoloaded, check the [official extensions list]({% link docs/extensions/official_extensions.md %}).
+To see which extensions can be autoloaded, check the [core extensions list]({% link docs/extensions/core_extensions.md %}).
+
+### Community Extensions
+
+DuckDB supports installing third-party [Community Extensions]({% link docs/extensions/community_extensions.md %}).
+These are contributed by community members but they are built, signed, and distributed in a centralized repository.
 
 ### Installing Extensions through Client APIs
 
@@ -130,6 +135,8 @@ To change the default location where DuckDB stores its extensions, use the `exte
 SET extension_directory = '/path/to/your/extension/directory';
 ```
 
+Note that setting the value of the `home_directory` configuration option has no effect on the location of the extensions.
+
 ## Binary Compatibility
 
 To avoid binary compatibility issues, the binary extensions distributed by DuckDB are tied both to a specific DuckDB version and a platform. This means that DuckDB can automatically detect binary compatibility between it and a loadable extension. When trying to load an extension that was compiled for a different version or platform, DuckDB will throw an error and refuse to load the extension.
@@ -138,7 +145,7 @@ See the [Working with Extensions page]({% link docs/extensions/working_with_exte
 
 ## Developing Extensions
 
-The same API that the official extensions use is available for developing extensions. This allows users to extend the functionality of DuckDB such that it suits their domain the best.
+The same API that the core extensions use is available for developing extensions. This allows users to extend the functionality of DuckDB such that it suits their domain the best.
 A template for creating extensions is available in the [`extension-template` repository](https://github.com/duckdb/extension-template/). This template also holds some documentation on how to get started building your own extension.
 
 ## Extension Signing

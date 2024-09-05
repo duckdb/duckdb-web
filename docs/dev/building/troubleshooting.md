@@ -3,25 +3,29 @@ layout: docu
 title: Troubleshooting
 ---
 
-## Building the R Package is Slow
+## R Package: The Build Only Uses a Single Thread
 
-By default, R compiles packages using a single thread.
+**Problem:**
+By default, R compiles packages using a single thread, which causes the build to be slow.
+
+**Solution:**
 To parallelize the compilation, create or edit the `~/.R/Makevars` file, and add a line like the following:
 
 ```ini
 MAKEFLAGS = -j8
 ```
 
-The above will parallelize the compilation using 8 threads. In a Linux system, in order to use all of the machine's threads, one can add the following instead:
+The above will parallelize the compilation using 8 threads. On Linux/macOS, you can add the following to use all of the machine's threads:
 
 ```ini
 MAKEFLAGS = -j$(nproc)
 ```
 
-But note that, the more threads that are used, the higher the RAM consumption. If the system runs out of RAM while compiling, then the R session will crash.
+However, note that, the more threads that are used, the higher the RAM consumption. If the system runs out of RAM while compiling, then the R session will crash.
 
-## Building the R Package on Linux AArch64
+## R Package on Linux AArch64: `too many GOT entries` Build Error
 
+**Problem:**
 Building the R package on Linux running on an ARM64 architecture (AArch64) may result in the following error message:
 
 ```console
@@ -29,7 +33,8 @@ Building the R package on Linux running on an ARM64 architecture (AArch64) may r
 warning: too many GOT entries for -fpic, please recompile with -fPIC
 ```
 
-To work around this, create or edit the `~/.R/Makevars` file. This example also contains the [flag to parallelize the build](#building-the-r-package-is-slow):
+**Solution:**
+Create or edit the `~/.R/Makevars` file. This example also contains the [flag to parallelize the build](#building-the-r-package-is-slow):
 
 ```ini
 ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
@@ -38,9 +43,37 @@ MAKEFLAGS = -j$(nproc)
 
 When making this change, also consider [making the build parallel](#building-the-r-package-is-slow).
 
-## Building the httpfs Extension and Python Package on macOS
+## Python Package: `No module named 'duckdb.duckdb'` Build Error
 
-**Problem:** The build fails on macOS when both the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) and the Python package are included:
+**Problem:**
+Building the Python package succeeds but the package cannot be imported:
+
+```batch
+cd tools/pythonpkg/
+python3 -m pip install .
+python3 -c "import duckdb"
+```
+
+This returns the following error message:
+
+```console
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/duckdb/tools/pythonpkg/duckdb/__init__.py", line 4, in <module>
+    import duckdb.functional as functional
+  File "/duckdb/tools/pythonpkg/duckdb/functional/__init__.py", line 1, in <module>
+    from duckdb.duckdb.functional import (
+ModuleNotFoundError: No module named 'duckdb.duckdb'
+```
+
+**Solution:**
+The problem is caused by Python trying to import from the current working directory.
+To work around this, navigate to a different directory (e.g., `cd ..`) and try running Python import again.
+
+## Python Package on macOS: Building the httpfs Extension Fails
+
+**Problem:**
+The build fails on macOS when both the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) and the Python package are included:
 
 ```bash
 GEN=ninja BUILD_PYTHON=1 BUILD_HTTPFS=1 make
@@ -70,9 +103,10 @@ If the next line complains about pybind11 being missing, or `--use-pep517` not b
 python3 -m pip install tools/pythonpkg --use-pep517 --user
 ```
 
-## Building the httpfs Extension on Linux
+## Linux: Building the httpfs Extension Fails
 
-**Problem:** When building the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) on Linux, the build may fail with the following error.
+**Problem:**
+When building the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) on Linux, the build may fail with the following error.
 
 ```console
 CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
@@ -81,7 +115,8 @@ CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake
   OPENSSL_INCLUDE_DIR)
 ```
 
-**Solution:** Install the `libssl-dev` library.
+**Solution:**
+Install the `libssl-dev` library.
 
 ```bash
 sudo apt-get install -y libssl-dev

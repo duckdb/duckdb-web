@@ -33,7 +33,7 @@ con = DBInterface.connect(DuckDB.DB, ":memory:")
 # create a table
 DBInterface.execute(con, "CREATE TABLE integers (i INTEGER)")
 
-# insert data using a prepared statement
+# insert data by executing a prepared statement
 stmt = DBInterface.prepare(con, "INSERT INTO integers VALUES(?)")
 DBInterface.execute(stmt, [42])
 
@@ -41,6 +41,8 @@ DBInterface.execute(stmt, [42])
 results = DBInterface.execute(con, "SELECT 42 a")
 print(results)
 ```
+
+Some SQL statements, such as PIVOT and IMPORT DATABASE are executed as multiple prepared statements and will error when using `DuckDB.execute()`. Instead they can be run with `DuckDB.query()` instead of `DuckDB.execute()` and will always return a materialized result. 
 
 ## Scanning DataFrames
 
@@ -92,8 +94,7 @@ for i in eachrow(df)
     end
     DuckDB.end_row(appender)
 end
-# flush the appender after all rows
-DuckDB.flush(appender)
+# close the appender after all rows 
 DuckDB.close(appender)
 ```
 
@@ -144,8 +145,7 @@ function run_appender(db, id)
         for j in row
             DuckDB.append(appender, j);
         end
-        DuckDB.end_row(appender);
-        DuckDB.flush(appender);
+        DuckDB.end_row(appender); 
     end
     DuckDB.close(appender);
 end

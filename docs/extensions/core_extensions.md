@@ -1,9 +1,11 @@
 ---
 layout: docu
-title: Official Extensions
+title: Core Extensions
+redirect_from:
+  - docs/extensions/official_extensions 
 ---
 
-## List of Official Extensions
+## List of Core Extensions
 
 | Name                         | GitHub                                                                           | Description                                                                        | Autoloadable  | Aliases                 |
 |:-----------------------------|----------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------|:--------------|:------------------------|
@@ -22,7 +24,7 @@ title: Official Extensions
 | [json]({% link docs/extensions/json.md %})                 |                                                                                  | Adds support for JSON operations                                                   | yes           |                         |
 | [mysql]({% link docs/extensions/mysql.md %})               | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_mysql)     | Adds support for reading from and writing to a MySQL database                      | no            |                         |
 | [parquet]({% link docs/data/parquet/overview.md %})           |                                                                                  | Adds support for reading and writing Parquet files                                 | (built-in)    |                         |
-| [postgres]({% link docs/extensions/postgres.md %})         | [<span class="github">GitHub</span>](https://github.com/duckdb/postgres_scanner) | Adds support for reading from and writing to a Postgres database                   | yes           | postgres_scanner        |
+| [postgres]({% link docs/extensions/postgres.md %})         | [<span class="github">GitHub</span>](https://github.com/duckdb/postgres_scanner) | Adds support for reading from and writing to a PostgreSQL database                 | yes           | postgres_scanner        |
 | [spatial]({% link docs/extensions/spatial.md %})           | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_spatial)   | Geospatial extension that adds support for working with spatial data and functions | no            |                         |
 | [sqlite]({% link docs/extensions/sqlite.md %})             | [<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner)   | Adds support for reading from and writing to SQLite database files                 | yes           | sqlite_scanner, sqlite3 |
 | [substrait]({% link docs/extensions/substrait.md %})       | [<span class="github">GitHub</span>](https://github.com/duckdb/substrait)        | Adds support for the Substrait integration                                         | no            |                         |

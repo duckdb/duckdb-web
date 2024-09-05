@@ -41,6 +41,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %})                         |
 | `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %})  |
 | `.mode MODE ?TABLE?`     | Set [output mode]({% link docs/api/cli/output_formats.md %})                                                                            |
+| `.multiline`             | Set multi-line mode (default)                                                                                |
 | `.nullvalue STRING`      | Use `STRING` in place of `NULL` values                                                                       |
 | `.once ?OPTIONS? ?FILE?` | Output for the next SQL command only to `FILE`                                                               |
 | `.open ?OPTIONS? ?FILE?` | Close existing database and reopen `FILE`                                                                    |
@@ -56,13 +57,14 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.sha3sum ...`           | Compute a SHA3 hash of database content                                                                      |
 | `.shell CMD ARGS...`     | Run `CMD ARGS...` in a system shell                                                                          |
 | `.show`                  | Show the current values for various settings                                                                 |
+| `.singleline`            | Set single-line mode                                                                                         |
 | `.system CMD ARGS...`    | Run `CMD ARGS...` in a system shell                                                                          |
 | `.tables ?TABLE?`        | List names of tables [matching LIKE pattern]({% link docs/sql/functions/pattern_matching.md %}) `TABLE`                   |
 | `.testcase NAME`         | Begin redirecting output to `NAME`                                                                           |
 | `.timer on|off`          | Turn SQL timer on or off                                                                                     |
 | `.width NUM1 NUM2 ...`   | Set minimum column widths for columnar output                                                                |
 
-## Using the `.help` Commmand
+## Using the `.help` Command
 
 The `.help` text may be filtered by passing in a text string as the second argument.
 
@@ -137,7 +139,7 @@ The results then open in the default text file editor of the system, for example
 
 ## Querying the Database Schema
 
-All DuckDB clients support [querying the database schema with SQL]({% link docs/sql/information_schema.md %}), but the CLI has additional [dot commands]({% link docs/api/cli/dot_commands.md %}) that can make it easier to understand the contents of a database.
+All DuckDB clients support [querying the database schema with SQL]({% link docs/sql/meta/information_schema.md %}), but the CLI has additional [dot commands]({% link docs/api/cli/dot_commands.md %}) that can make it easier to understand the contents of a database.
 The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern]({% link docs/sql/functions/pattern_matching.md %}#like).
 
 ```sql
@@ -151,7 +153,7 @@ CREATE TABLE walkers AS SELECT 'duck' AS animal;
 fliers    swimmers  walkers
 ```
 
-For example, to filter to only tables that contain an "l", use the `LIKE` pattern `%l%`.
+For example, to filter to only tables that contain an `l`, use the `LIKE` pattern `%l%`.
 
 ```sql
 .tables %l%

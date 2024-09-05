@@ -176,9 +176,9 @@ The CSV Reject Errors Table returns the following information:
 |:--|:-----|:-|
 | `scan_id` | The internal ID used in DuckDB to represent that scanner, used to join with reject scans tables | `UBIGINT` |
 | `file_id` | The file_id represents a unique file in a scanner, used to join with reject scans tables | `UBIGINT` |
-| `line` | Line number, from the CSV File, where the error occured. | `UBIGINT` |
-| `line_byte_position` | Byte Position of the start of the line, where the error occured. | `UBIGINT` |
-| `byte_position` | Byte Position where the error occured. | `UBIGINT` |
+| `line` | Line number, from the CSV File, where the error occurred. | `UBIGINT` |
+| `line_byte_position` | Byte Position of the start of the line, where the error occurred. | `UBIGINT` |
+| `byte_position` | Byte Position where the error occurred. | `UBIGINT` |
 | `column_idx` | If the error happens in a specific column, the index of the column. | `UBIGINT` |
 | `column_name` | If the error happens in a specific column, the name of the column. | `VARCHAR` |
 | `error_type` | The type of the error that happened. | `ENUM` |

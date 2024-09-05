@@ -19,7 +19,7 @@ Secrets are typed, their type identifies which service they are for. Currently, 
 * Google Cloud Storage (`GCS`), through the [`httpfs` extension]({% link docs/extensions/httpfs/s3api.md %})
 * Hugging Face (`HUGGINGFACE`), through the [`httpfs` extension]({% link docs/extensions/httpfs/hugging_face.md %})
 
-For each type, there are one or more "secret providers" that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
+For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
 ### Creating a Secret
 
@@ -57,7 +57,13 @@ CREATE PERSISTENT SECRET my_persistent_secret (
 );
 ```
 
-This will write the secret (unencrypted) to the `~/.duckdb/stored_secrets` directory.
+By default, this will write the secret (unencrypted) to the `~/.duckdb/stored_secrets` directory. To change the secrets directory, issue:
+
+```sql
+SET secret_directory = 'path/to/my_secrets_dir';
+```
+
+Note that setting the value of the `home_directory` configuration option has no effect on the location of the secrets.
 
 ### Deleting Secrets
 
@@ -97,7 +103,7 @@ FROM which_secret('s3://my-other-bucket/file.parquet', 's3');
 
 ### Listing Secrets
 
-Secrets can be listed using the built-in table-producing function, e.g., by using the [`duckdb_secrets()` table function]({% link docs/sql/duckdb_table_functions.md %}#duckdb_secrets):
+Secrets can be listed using the built-in table-producing function, e.g., by using the [`duckdb_secrets()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_secrets):
 
 ```sql
 FROM duckdb_secrets();

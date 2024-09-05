@@ -3,7 +3,7 @@ layout: docu
 title: Replacement Scans
 ---
 
-The [replacement scan]({% link docs/guides/glossary.md %}#replacement-scan) API can be used to register a callback that is called when a table is read that does not exist in the catalog. For example, when a query such as `SELECT * FROM my_table` is executed and `my_table` does not exist, the replacement scan callback will be called with `my_table` as parameter. The replacement scan can then insert a table function with a specific parameter to replace the read of the table.
+The replacement scan API can be used to register a callback that is called when a table is read that does not exist in the catalog. For example, when a query such as `SELECT * FROM my_table` is executed and `my_table` does not exist, the replacement scan callback will be called with `my_table` as parameter. The replacement scan can then insert a table function with a specific parameter to replace the read of the table.
 
 ## API Reference
 
@@ -17,12 +17,10 @@ The [replacement scan]({% link docs/guides/glossary.md %}#replacement-scan) API 
 
 ### `duckdb_add_replacement_scan`
 
----
 Add a replacement scan definition to the specified database.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_add_replacement_scan</span>(<span class="nv">
 </span>  <span class="kt">duckdb_database</span> <span class="nv">db</span>,<span class="nv">
 </span>  <span class="nv">duckdb_replacement_callback_t</span> <span class="nv">replacement</span>,<span class="nv">
@@ -33,7 +31,6 @@ Add a replacement scan definition to the specified database.
 
 #### Parameters
 
----
 * `db`
 
 The database object to add the replacement scan to
@@ -51,13 +48,11 @@ The delete callback to call on the extra data, if any
 
 ### `duckdb_replacement_scan_set_function_name`
 
----
 Sets the replacement function name. If this function is called in the replacement callback,
 the replacement scan is performed. If it is not called, the replacement callback is not performed.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_set_function_name</span>(<span class="nv">
 </span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">function_name
@@ -66,7 +61,6 @@ the replacement scan is performed. If it is not called, the replacement callback
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -78,12 +72,10 @@ The function name to substitute.
 
 ### `duckdb_replacement_scan_add_parameter`
 
----
 Adds a parameter to the replacement scan function.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_add_parameter</span>(<span class="nv">
 </span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">duckdb_value</span> <span class="nv">parameter
@@ -92,7 +84,6 @@ Adds a parameter to the replacement scan function.
 
 #### Parameters
 
----
 * `info`
 
 The info object
@@ -104,12 +95,10 @@ The parameter to add.
 
 ### `duckdb_replacement_scan_set_error`
 
----
 Report that an error has occurred while executing the replacement scan.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_set_error</span>(<span class="nv">
 </span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
@@ -118,7 +107,6 @@ Report that an error has occurred while executing the replacement scan.
 
 #### Parameters
 
----
 * `info`
 
 The info object

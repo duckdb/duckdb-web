@@ -1,9 +1,11 @@
 ---
 layout: docu
 title: Friendly SQL
+redirect_from:
+  - docs/guides/sql_features/friendly_sql
 ---
 
-DuckDB offers several advanced SQL features as well syntactic sugar to make SQL queries more concise. We call these colloquially as "friendly SQL".
+DuckDB offers several advanced SQL features as well syntactic sugar to make SQL queries more concise. We call these colloquially as “friendly SQL”.
 
 > Several of these features are also supported in other systems while some are (currently) exclusive to DuckDB.
 
@@ -38,13 +40,13 @@ DuckDB offers several advanced SQL features as well syntactic sugar to make SQL 
 * Advanced aggregation features for analytical (OLAP) queries:
     * [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %})
     * [`GROUPING SETS`, `GROUP BY CUBE`, `GROUP BY ROLLUP` clauses]({% link docs/sql/query_syntax/grouping_sets.md %})
-* [`count()` shorthand]({% link docs/sql/aggregates.md %}) for `count(*)`
+* [`count()` shorthand]({% link docs/sql/functions/aggregates.md %}) for `count(*)`
 
 ## Literals and Identifiers
 
-* [Case-insensitivity while maintaining case of entities in the catalog]({% link docs/sql/keywords_and_identifiers.md %}#case-sensitivity-of-identifiers)
-* [Deduplicating identifiers]({% link docs/sql/keywords_and_identifiers.md %}#deduplicating-identifiers)
-* [Underscores as digit separators in numeric literals]({% link docs/sql/keywords_and_identifiers.md %}#numeric-literals)
+* [Case-insensitivity while maintaining case of entities in the catalog]({% link docs/sql/dialect/keywords_and_identifiers.md %}#case-sensitivity-of-identifiers)
+* [Deduplicating identifiers]({% link docs/sql/dialect/keywords_and_identifiers.md %}#deduplicating-identifiers)
+* [Underscores as digit separators in numeric literals]({% link docs/sql/dialect/keywords_and_identifiers.md %}#numeric-literals)
 
 ## Data Types
 
@@ -61,7 +63,9 @@ DuckDB offers several advanced SQL features as well syntactic sugar to make SQL 
 ## Functions and Expressions
 
 * [Dot operator for function chaining]({% link docs/sql/functions/overview.md %}#function-chaining-via-the-dot-operator): `SELECT ('hello').upper()`
-* String formatters: [`format()` function with the `fmt` syntax]({% link docs/sql/functions/char.md %}#fmt-syntax) and the [`printf() function`]({% link docs/sql/functions/char.md %}#printf-syntax)
+* String formatters:
+    the [`format()` function with the `fmt` syntax]({% link docs/sql/functions/char.md %}#fmt-syntax) and
+    the [`printf() function`]({% link docs/sql/functions/char.md %}#printf-syntax)
 * [List comprehensions]({% post_url 2023-08-23-even-friendlier-sql %}#list-comprehensions)
 * [List slicing]({% post_url 2022-05-04-friendlier-sql %}#string-slicing)
 * [String slicing]({% post_url 2022-05-04-friendlier-sql %}#string-slicing)
@@ -76,7 +80,9 @@ DuckDB offers several advanced SQL features as well syntactic sugar to make SQL 
 
 ## Trailing Commas
 
-DuckDB allows [trailing commas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas), both when listing entities (e.g., column and table names) and when constructing [`LIST` items]({% link docs/sql/data_types/list.md %}#creating-lists). For example, the following query works:
+DuckDB allows [trailing commas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas),
+both when listing entities (e.g., column and table names) and when constructing [`LIST` items]({% link docs/sql/data_types/list.md %}#creating-lists).
+For example, the following query works:
 
 ```sql
 SELECT
@@ -86,8 +92,8 @@ SELECT
 ;
 ```
 
-## See Also
+## Related Blog Posts
 
-* [Friendlier SQL with DuckDB]({% post_url 2022-05-04-friendlier-sql %}) blog post
-* [Even Friendlier SQL with DuckDB]({% post_url 2023-08-23-even-friendlier-sql %}) blog post
-* [SQL Gymnastics: Bending SQL into flexible new shapes]({% post_url 2024-03-01-sql-gymnastics %}) blog post
+* [“Friendlier SQL with DuckDB”]({% post_url 2022-05-04-friendlier-sql %}) blog post
+* [“Even Friendlier SQL with DuckDB”]({% post_url 2023-08-23-even-friendlier-sql %}) blog post
+* [“SQL Gymnastics: Bending SQL into Flexible New Shapes”]({% post_url 2024-03-01-sql-gymnastics %}) blog post

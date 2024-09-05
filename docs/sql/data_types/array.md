@@ -56,7 +56,7 @@ INSERT INTO array_table VALUES (10, [1, 2, 3]), (20, [4, 5, 6]);
 
 ## Retrieving Values from Arrays
 
-Retrieving one or more values from an array can be accomplished using brackets and slicing notation, or through [list functions]({% link docs/sql/functions/nested.md %}#list-functions) like `list_extract` and `array_extract`. Using the example in [Defining an Array Field](#defining-an-array-field).
+Retrieving one or more values from an array can be accomplished using brackets and slicing notation, or through [list functions]({% link docs/sql/functions/list.md %}#list-functions) like `list_extract` and `array_extract`. Using the example in [Defining an Array Field](#defining-an-array-field).
 
 The following queries for extracting the second element of an array are equivalent:
 

@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: PostgreSQL Compatibility
+redirect_from:
+  - docs/sql/postgresl_compatibility
 ---
 
 DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.
@@ -27,7 +29,7 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 | Expression              |   DuckDB | PostgreSQL |  IEEE 754 |
 | :---------------------- | -------: | ---------: | --------: |
 | 1.0 / 0.0               |     NULL |      error |  Infinity |
-| 0.0 / 0.0               |     NULL |      error |       Nan |
+| 0.0 / 0.0               |     NULL |      error |       NaN |
 | -1.0 / 0.0              |     NULL |      error | -Infinity |
 | 'Infinity' / 'Infinity' |      NaN |        NaN |       NaN |
 | 1.0 / 'Infinity'        |      0.0 |        0.0 |       0.0 |
@@ -36,7 +38,7 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 
 ## Division on Integers
 
-When computing division on integers, PostgreSQL performs integer divison, while DuckDB performs float division:
+When computing division on integers, PostgreSQL performs integer division, while DuckDB performs float division:
 
 ```sql
 SELECT 1 / 2 AS x;
@@ -117,7 +119,7 @@ ERROR:  relation "preservedcase" does not exist
 Therefore, case-insensitivity in PostgreSQL only works if you never use quoted identifiers with different cases.
 
 For DuckDB, this behavior was problematic when interfacing with other tools (e.g., Parquet, Pandas) that are case-sensitive by default - since all identifiers would be lowercased all the time.
-Therefore, DuckDB achieves case insensitivity by making identifiers fully case insensitive throughout the system but [_preserving their case_]({% link docs/sql/keywords_and_identifiers.md %}#rules-for-case-sensitivity). 
+Therefore, DuckDB achieves case insensitivity by making identifiers fully case insensitive throughout the system but [_preserving their case_]({% link docs/sql/dialect/keywords_and_identifiers.md %}#rules-for-case-sensitivity). 
 
 In DuckDB, the scripts above complete successfully:
 
@@ -151,3 +153,19 @@ SELECT table_name FROM duckdb_tables();
 | mytable    |
 
 However, the case insensitive matching in the system for identifiers cannot be turned off.
+
+## Scalar Subqueries
+
+Subqueries in DuckDB are not required to return a single row. Take the following query for example:
+
+```sql
+SELECT (SELECT 1 UNION SELECT 2) AS b;
+```
+
+PostgreSQL returns an error:
+
+```console
+ERROR:  more than one row returned by a subquery used as an expression
+```
+
+DuckDB non-deterministically returns either `1` or `2`.

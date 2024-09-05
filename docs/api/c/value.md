@@ -22,12 +22,10 @@ The value class represents a single value of any type.
 
 ### `duckdb_destroy_value`
 
----
 Destroys the value and de-allocates all memory allocated for that type.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_value</span>(<span class="nv">
 </span>  <span class="kt">duckdb_value</span> *<span class="nv">value
 </span>);
@@ -35,7 +33,6 @@ Destroys the value and de-allocates all memory allocated for that type.
 
 #### Parameters
 
----
 * `value`
 
 The value to destroy.
@@ -44,12 +41,10 @@ The value to destroy.
 
 ### `duckdb_create_varchar`
 
----
 Creates a value from a null-terminated string
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_varchar</span>(<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text
 </span>);
@@ -57,7 +52,6 @@ Creates a value from a null-terminated string
 
 #### Parameters
 
----
 * `value`
 
 The null-terminated string
@@ -69,12 +63,10 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_varchar_length`
 
----
 Creates a value from a string
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_varchar_length</span>(<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">length
@@ -83,7 +75,6 @@ Creates a value from a string
 
 #### Parameters
 
----
 * `value`
 
 The text
@@ -98,12 +89,10 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_int64`
 
----
 Creates a value from an int64
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_int64</span>(<span class="nv">
 </span>  <span class="kt">int64_t</span> <span class="nv">val
 </span>);
@@ -111,7 +100,6 @@ Creates a value from an int64
 
 #### Parameters
 
----
 * `value`
 
 The bigint value
@@ -123,12 +111,10 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_struct_value`
 
----
 Creates a struct value from a type and an array of values
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_struct_value</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">duckdb_value</span> *<span class="nv">values
@@ -137,7 +123,6 @@ Creates a struct value from a type and an array of values
 
 #### Parameters
 
----
 * `type`
 
 The type of the struct
@@ -152,12 +137,10 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_list_value`
 
----
 Creates a list value from a type and an array of values of length `value_count`
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_list_value</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">duckdb_value</span> *<span class="nv">values</span>,<span class="nv">
@@ -167,7 +150,6 @@ Creates a list value from a type and an array of values of length `value_count`
 
 #### Parameters
 
----
 * `type`
 
 The type of the list
@@ -185,12 +167,10 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_create_array_value`
 
----
-Creates an array value from a type and an array of values of length `value_count`
+Creates a array value from a type and an array of values of length `value_count`
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_array_value</span>(<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">duckdb_value</span> *<span class="nv">values</span>,<span class="nv">
@@ -200,7 +180,6 @@ Creates an array value from a type and an array of values of length `value_count
 
 #### Parameters
 
----
 * `type`
 
 The type of the array
@@ -218,13 +197,11 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 ### `duckdb_get_varchar`
 
----
 Obtains a string representation of the given value.
 The result must be destroyed with `duckdb_free`.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_get_varchar</span>(<span class="nv">
 </span>  <span class="kt">duckdb_value</span> <span class="nv">value
 </span>);
@@ -232,7 +209,6 @@ The result must be destroyed with `duckdb_free`.
 
 #### Parameters
 
----
 * `value`
 
 The value
@@ -244,12 +220,10 @@ The string value. This must be destroyed with `duckdb_free`.
 
 ### `duckdb_get_int64`
 
----
 Obtains an int64 of the given value.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="nv">duckdb_get_int64</span>(<span class="nv">
 </span>  <span class="kt">duckdb_value</span> <span class="nv">value
 </span>);
@@ -257,7 +231,6 @@ Obtains an int64 of the given value.
 
 #### Parameters
 
----
 * `value`
 
 The value

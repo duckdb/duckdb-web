@@ -343,7 +343,7 @@ You can read the same file with `records` set to `'false'`, to get a single colu
 | {'duck': 42, 'goose': [1,2,3]} |
 | {'duck': 43, 'goose': [4,5,6]} |
 
-For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post]({% post_url 2023-03-03-json %}).
+For additional examples reading more complex data, please see the [“Shredding Deeply Nested JSON, One Vector at a Time” blog post]({% post_url 2023-03-03-json %}).
 
 ## JSON Import/Export
 
@@ -624,13 +624,13 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 | `json_array_length(json[, path])` | Return the number of elements in the JSON array `json`, or `0` if it is not a JSON array. If `path` is specified, return the number of elements in the JSON array at the given `path`. If `path` is a `LIST`, the result will be `LIST` of array lengths. |
 | `json_contains(json_haystack, json_needle)` | Returns `true` if `json_needle` is contained in `json_haystack`. Both parameters are of JSON type, but `json_needle` can also be a numeric value or a string, however the string must be wrapped in double quotes. |
 | `json_keys(json[, path])` | Returns the keys of `json` as a `LIST` of `VARCHAR`, if `json` is a JSON object. If `path` is specified, return the keys of the JSON object at the given `path`. If `path` is a `LIST`, the result will be `LIST` of `LIST` of `VARCHAR`. |
-| `json_structure(json)` | Return the structure of `json`. Defaults to `JSON` the structure is inconsistent (e.g., incompatible types in an array). |
+| `json_structure(json)` | Return the structure of `json`. Defaults to `JSON` if the structure is inconsistent (e.g., incompatible types in an array). |
 | `json_type(json[, path])` | Return the type of the supplied `json`, which is one of `ARRAY`, `BIGINT`, `BOOLEAN`, `DOUBLE`, `OBJECT`, `UBIGINT`, `VARCHAR`, and `NULL`. If `path` is specified, return the type of the element at the given `path`. If `path` is a `LIST`, the result will be `LIST` of types. |
 | `json_valid(json)` | Return whether `json` is valid JSON. |
 | `json(json)` | Parse and minify `json`. |
 
 The JSONPointer syntax separates each field with a `/`.
-For example, to extract the first element of the array with key `"duck"`, you can do:
+For example, to extract the first element of the array with key `duck`, you can do:
 
 ```sql
 SELECT json_extract('{"duck": [1, 2, 3]}', '/duck/0');
@@ -869,7 +869,7 @@ SELECT json_group_structure(j) FROM example2;
 ## Transforming JSON
 
 In many cases, it is inefficient to extract values from JSON one-by-one.
-Instead, we can "extract" all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
+Instead, we can “extract” all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
 
 <div class="narrow_table"></div>
 

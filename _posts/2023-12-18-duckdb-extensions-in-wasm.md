@@ -21,7 +21,7 @@ For DuckDB, here is a simple end-to-end example using the [command line interfac
 ```sql
 INSTALL tpch;
 LOAD tpch;
-CALL dbgen(sf=0.1);
+CALL dbgen(sf = 0.1);
 PRAGMA tpch(7);
 ```
 
@@ -29,7 +29,7 @@ This script first installs the [TPC-H extension]({% link docs/extensions/tpch.md
 
 This example demonstrates a case where we install an extension to complement DuckDB with a new feature (the TPC-H data generator), which is not part of the base DuckDB executable. Instead, it is downloaded from the extension repository, then loaded and executed it locally within the framework of DuckDB.
 
-Currently, DuckDB has [several extensions]({% link docs/extensions/official_extensions.md %}). These add support for filesystems, file formats, database and network protocols. Additionally, they implement new functions such as full text search.
+Currently, DuckDB has [several extensions]({% link docs/extensions/core_extensions.md %}). These add support for filesystems, file formats, database and network protocols. Additionally, they implement new functions such as full text search.
 
 ## DuckDB-Wasm
 

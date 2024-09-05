@@ -5,6 +5,7 @@ redirect_from:
   - /docs/sql/case_sensitivity
   - /docs/sql/case_sensitivity/
   - /docs/sql/keywords-and-identifiers
+  - /docs/sql/dialect/keywords-and-identifiers
 ---
 
 ## Identifiers
@@ -12,7 +13,7 @@ redirect_from:
 Similarly to other SQL dialects and programming languages, identifiers in DuckDB's SQL are subject to several rules.
 
 * Unquoted identifiers need to conform to a number of rules:
-    * They must not be a reserved keyword (see [`duckdb_keywords()`]({% link docs/sql/duckdb_table_functions.md %}#duckdb_keywords)), e.g., `SELECT 123 AS SELECT` will fail.
+    * They must not be a reserved keyword (see [`duckdb_keywords()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_keywords)), e.g., `SELECT 123 AS SELECT` will fail.
     * They must not start with a number or special character, e.g., `SELECT 123 AS 1col` is invalid.
     * They cannot contain whitespaces (including tabs and newline characters).
 * Identifiers can be quoted using double-quote characters (`"`). Quoted identifiers can use any keyword, whitespace or special character, e.g., `"SELECT"` and `" § 🦆 ¶ "` are valid identifiers.
@@ -41,7 +42,7 @@ FROM (SELECT UNNEST({'a': 42, 'b': {'a': 88, 'b': 99}}, recursive := true));
 
 Database names are subject to the rules for [identifiers](#identifiers).
 
-Additionally, it is best practice to avoid DuckDB's two internal [database schema names]({% link docs/sql/duckdb_table_functions.md %}#duckdb_databases), `system` and `temp`.
+Additionally, it is best practice to avoid DuckDB's two internal [database schema names]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_databases), `system` and `temp`.
 By default, persistent databases are named after their filename without the extension.
 Therefore, the filenames `system.db` and `temp.db` (as well as `system.duckdb` and `temp.duckdb`) result in the database names `system` and `temp`, respectively.
 If you need to attach to a database that has one of these names, use an alias, e.g.:
@@ -71,7 +72,7 @@ SELECT cos(pi()) AS CosineOfPi;
 ### Case-Sensitivity of Identifiers
 
 Identifiers in DuckDB are always case-insensitive, similarly to PostgreSQL.
-However, unlike PostgreSQL (and some other major SQL implementation), DuckDB also treats quoted identifiers as case-sensitive.
+However, unlike PostgreSQL (and some other major SQL implementations), DuckDB also treats quoted identifiers as case-insensitive.
 
 Despite treating identifiers in a case-insensitive manner, each character's case (uppercase/lowercase) is maintained as originally specified by the user even if a query uses different cases when referring to the identifier.
 For example:

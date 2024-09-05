@@ -3,7 +3,7 @@ layout: docu
 title: Data Ingestion
 ---
 
-This page containes examples for data ingestion to Python using DuckDB. First, import the DuckDB page:
+This page contains examples for data ingestion to Python using DuckDB. First, import the DuckDB page:
 
 ```python
 import duckdb
@@ -134,6 +134,7 @@ DuckDB supports querying multiple types of Apache Arrow objects including [table
 ```python
 import duckdb
 import pandas as pd
+
 test_df = pd.DataFrame.from_dict({"i": [1, 2, 3, 4], "j": ["one", "two", "three", "four"]})
 print(duckdb.sql("SELECT * FROM test_df").fetchall())
 ```
@@ -142,13 +143,14 @@ print(duckdb.sql("SELECT * FROM test_df").fetchall())
 [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
-DuckDB also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
+DuckDB also supports “registering” a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
 
 If your Pandas DataFrame is stored in another location, here is an example of manually registering it:
 
 ```python
 import duckdb
 import pandas as pd
+
 my_dictionary = {}
 my_dictionary["test_df"] = pd.DataFrame.from_dict({"i": [1, 2, 3, 4], "j": ["one", "two", "three", "four"]})
 duckdb.register("test_df_view", my_dictionary["test_df"])

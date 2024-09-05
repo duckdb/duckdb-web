@@ -13,7 +13,7 @@ See the [data types overview]({% link docs/sql/data_types/overview.md %}) for a 
 
 ## Creating Lists
 
-Lists can be created using the [`list_value(expr, ...)`]({% link docs/sql/functions/nested.md %}#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions. To create a list from a table column, use the [`list`]({% link docs/sql/aggregates.md %}#general-aggregate-functions) aggregate function.
+Lists can be created using the [`list_value(expr, ...)`]({% link docs/sql/functions/nested.md %}#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions. To create a list from a table column, use the [`list`]({% link docs/sql/functions/aggregates.md %}#general-aggregate-functions) aggregate function.
 
 List of integers:
 
@@ -70,7 +70,7 @@ Retrieving one or more values from a list can be accomplished using brackets and
 
 The ordering is defined positionally. `NULL` values compare greater than all other values and are considered equal to each other.
 
-## Null Comparisons
+### Null Comparisons
 
 At the top level, `NULL` nested values obey standard SQL `NULL` comparison rules:
 comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` result.

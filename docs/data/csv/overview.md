@@ -118,6 +118,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 
 ### `auto_type_candidates` Details
 
+The `auto_type_candidates` option lets you specify the data types that should be considered by the CSV reader for [column data type detection]({% link docs/data/csv/auto_detection.md %}#type-detection).
 Usage example:
 
 ```sql
@@ -221,3 +222,9 @@ The CSV reader only supports input files using UTF-8 character encoding. For CSV
 ```bash
 iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
 ```
+
+## Order Preservation
+
+The CSV reader respects the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}).
+When `true` (the default), the order of the rows in the resultset returned by the CSV reader is the same as the order of the corresponding lines read from the file(s).
+When `false`, there is no guarantee that the order is preserved.

@@ -5,6 +5,8 @@ redirect_from:
   - docs/test/functions/blob
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 This section describes functions and operators for examining and manipulating [`BLOB` values]({% link docs/sql/data_types/blob.md %}).
 
 <!-- markdownlint-disable MD056 -->
@@ -19,7 +21,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <!-- markdownlint-enable MD056 -->
 
-### `blob || blob`
+#### `blob || blob`
 
 <div class="nostroke_table"></div>
 
@@ -27,7 +29,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `'\xAA'::BLOB || '\xBB'::BLOB` |
 | **Result** | `\xAA\xBB` |
 
-### `decode(blob)`
+#### `decode(blob)`
 
 <div class="nostroke_table"></div>
 
@@ -35,7 +37,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `decode('\xC3\xBC'::BLOB)` |
 | **Result** | `ü` |
 
-### `encode(string)`
+#### `encode(string)`
 
 <div class="nostroke_table"></div>
 
@@ -43,7 +45,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `encode('my_string_with_ü')` |
 | **Result** | `my_string_with_\xC3\xBC` |
 
-### `octet_length(blob)`
+#### `octet_length(blob)`
 
 <div class="nostroke_table"></div>
 
@@ -51,7 +53,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `octet_length('\xAA\xBB'::BLOB)` |
 | **Result** | `2` |
 
-### `read_blob(source)`
+#### `read_blob(source)`
 
 <div class="nostroke_table"></div>
 

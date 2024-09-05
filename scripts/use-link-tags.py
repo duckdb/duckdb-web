@@ -1,6 +1,17 @@
+# This script replaces internal links, e.g., [Parquet](../../data/parquet/overview),
+# with link tags, e.g., [Parquet]({% link docs/data/parquet/overview.md %}).
+#
+# It can be used with xargs as follows:
+#
+# ag --md --ignore-dir=archive/ -l '\]\([.a-zA-Z0-9]' docs/ | xargs -I {} python scripts/use-link-tags.py {}
+
 import re
 import os
 import sys
+
+if len(sys.argv) < 2:
+    print("Usage: use-link-tags.py path/to/file.md")
+    exit(1)
 
 filename = sys.argv[1]
 dir = os.path.dirname(filename)

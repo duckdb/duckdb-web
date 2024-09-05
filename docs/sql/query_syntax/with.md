@@ -4,11 +4,11 @@ title: WITH Clause
 railroad: query_syntax/with.js
 ---
 
-The `WITH` clause allows you to specify common table expressions (CTEs). Regular (non-recursive) common-table-expressions are essentially views that are limited in scope to a particular query. CTEs can reference each-other and can be nested.
+The `WITH` clause allows you to specify common table expressions (CTEs). Regular (non-recursive) common-table-expressions are essentially views that are limited in scope to a particular query. CTEs can reference each-other and can be nested. [Recursive CTEs](#recursive-ctes) can reference themselves.
 
 ## Basic CTE Examples
 
-Create a CTE called "cte" and use it in the main query:
+Create a CTE called “cte” and use it in the main query:
 
 ```sql
 WITH cte AS (SELECT 42 AS x)
@@ -38,26 +38,29 @@ By default, CTEs are inlined into the main query. Inlining can result in duplica
 
 ```sql
 WITH t(x) AS (⟨Q_t⟩)
-SELECT * FROM t AS t1,
-              t AS t2,
-              t AS t3;
+SELECT *
+FROM t AS t1,
+     t AS t2,
+     t AS t3;
 ```
 
 Inlining duplicates the definition of `t` for each reference which results in the following query:
 
 ```sql
-SELECT * FROM (⟨Q_t⟩) AS t1(x),
-              (⟨Q_t⟩) AS t2(x),
-              (⟨Q_t⟩) AS t3(x);
+SELECT *
+FROM (⟨Q_t⟩) AS t1(x),
+     (⟨Q_t⟩) AS t2(x),
+     (⟨Q_t⟩) AS t3(x);
 ```
 
 If `⟨Q_t⟩` is expensive, materializing it with the `MATERIALIZED` keyword can improve performance. In this case, `⟨Q_t⟩` is evaluated only once.
 
 ```sql
 WITH t(x) AS MATERIALIZED (⟨Q_t⟩)
-SELECT * FROM t AS t1,
-              t AS t2,
-              t AS t3;
+SELECT *
+FROM t AS t1,
+     t AS t2,
+     t AS t3;
 ```
 
 ## Recursive CTEs
@@ -110,7 +113,7 @@ FROM
 
 `WITH RECURSIVE` can be used to traverse trees. For example, take a hierarchy of tags:
 
-![Example tree graph](/images/examples/with-recursive-tree-example.png)
+<img alt="Example tree" src="/images/examples/with-recursive-tree-example.svg" style="width: 700px; text-align: center">
 
 ```sql
 CREATE TABLE tag (id INTEGER, name VARCHAR, subclassof INTEGER);
@@ -154,14 +157,14 @@ One way to achieve this is to store the path of a traversal in a [list]({% link 
 
 Take the following directed graph from the [LDBC Graphalytics benchmark](https://arxiv.org/pdf/2011.15028.pdf):
 
-![Example simple graph](/images/examples/with-recursive-graph-example.png)
+<img alt="Example graph" src="/images/examples/with-recursive-graph-example.svg" style="width: 700px; text-align: center">
 
 ```sql
 CREATE TABLE edge (node1id INTEGER, node2id INTEGER);
-INSERT INTO edge
-    VALUES
-        (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5), (3, 8), (3, 10),
-        (5, 3), (5, 4), (5, 8), (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
+INSERT INTO edge VALUES
+    (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1),
+    (3, 5), (3, 8), (3, 10), (5, 3), (5, 4), (5, 8),
+    (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
 ```
 
 Note that the graph contains directed cycles, e.g., between nodes 1, 2, and 5.
@@ -172,14 +175,14 @@ The following query returns **all paths** starting in node 1:
 
 ```sql
 WITH RECURSIVE paths(startNode, endNode, path) AS (
-        SELECT -- define the path as the first edge of the traversal
+        SELECT -- Define the path as the first edge of the traversal
             node1id AS startNode,
             node2id AS endNode,
             [node1id, node2id] AS path
         FROM edge
         WHERE startNode = 1
         UNION ALL
-        SELECT -- concatenate new edge to the path
+        SELECT -- Concatenate new edge to the path
             paths.startNode AS startNode,
             node2id AS endNode,
             array_append(path, node2id) AS path
@@ -187,7 +190,7 @@ WITH RECURSIVE paths(startNode, endNode, path) AS (
         JOIN edge ON paths.endNode = node1id
         -- Prevent adding a repeated node to the path.
         -- This ensures that no cycles occur.
-        WHERE node2id != ALL(paths.path)
+        WHERE list_position(paths.path, node2id) = 0
     )
 SELECT startNode, endNode, path
 FROM paths
@@ -217,14 +220,14 @@ In most cases, enumerating all paths is not practical or feasible. Instead, only
 
 ```sql
 WITH RECURSIVE paths(startNode, endNode, path) AS (
-        SELECT -- define the path as the first edge of the traversal
+        SELECT -- Define the path as the first edge of the traversal
             node1id AS startNode,
             node2id AS endNode,
             [node1id, node2id] AS path
         FROM edge
         WHERE startNode = 1
         UNION ALL
-        SELECT -- concatenate new edge to the path
+        SELECT -- Concatenate new edge to the path
             paths.startNode AS startNode,
             node2id AS endNode,
             array_append(path, node2id) AS path
@@ -236,7 +239,7 @@ WITH RECURSIVE paths(startNode, endNode, path) AS (
         WHERE NOT EXISTS (
                 FROM paths previous_paths
                 WHERE list_contains(previous_paths.path, node2id)
-            )
+              )
     )
 SELECT startNode, endNode, path
 FROM paths
@@ -254,13 +257,13 @@ ORDER BY length(path), path;
 
 #### Enumerate Unweighted Shortest Paths between Two Nodes
 
-`WITH RECURSIVE` can also be used to find **all (unweighted) shortest paths between two nodes**. To ensure that the recursive query is stopped as soon as we reach the end node, we use a [window function]({% link docs/sql/window_functions.md %}) which checks whether the end node is among the newly added nodes.
+`WITH RECURSIVE` can also be used to find **all (unweighted) shortest paths between two nodes**. To ensure that the recursive query is stopped as soon as we reach the end node, we use a [window function]({% link docs/sql/functions/window_functions.md %}) which checks whether the end node is among the newly added nodes.
 
 The following query returns all unweighted shortest paths between nodes 1 (start node) and 8 (end node):
 
 ```sql
 WITH RECURSIVE paths(startNode, endNode, path, endReached) AS (
-   SELECT -- define the path as the first edge of the traversal
+   SELECT -- Define the path as the first edge of the traversal
         node1id AS startNode,
         node2id AS endNode,
         [node1id, node2id] AS path,
@@ -268,7 +271,7 @@ WITH RECURSIVE paths(startNode, endNode, path, endReached) AS (
      FROM edge
      WHERE startNode = 1
    UNION ALL
-   SELECT -- concatenate new edge to the path
+   SELECT -- Concatenate new edge to the path
         paths.startNode AS startNode,
         node2id AS endNode,
         array_append(path, node2id) AS path,
@@ -278,8 +281,9 @@ WITH RECURSIVE paths(startNode, endNode, path, endReached) AS (
      FROM paths
      JOIN edge ON paths.endNode = node1id
     WHERE NOT EXISTS (
-        FROM paths previous_paths
-        WHERE list_contains(previous_paths.path, node2id))
+            FROM paths previous_paths
+            WHERE list_contains(previous_paths.path, node2id)
+          )
       AND paths.endReached = 0
 )
 SELECT startNode, endNode, path
@@ -293,6 +297,6 @@ ORDER BY length(path), path;
 | 1         | 8       | [1, 3, 8] |
 | 1         | 8       | [1, 5, 8] |
 
-## Common Table Expressions
+## Syntax
 
 <div id="rrdiagram"></div>

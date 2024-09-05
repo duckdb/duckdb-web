@@ -94,7 +94,7 @@ CREATE TABLE services_per_month AS
     GROUP BY ALL;
 ```
 
-To answer the question, we can use the [`arg_max(arg, val)` aggregation function]({% link docs/sql/aggregates.md %}#arg_maxarg-val),
+To answer the question, we can use the [`arg_max(arg, val)` aggregation function]({% link docs/sql/functions/aggregates.md %}#arg_maxarg-val),
 which returns the column `arg` in the row with the maximum value `val`.
 We filter on the month and return the results:
 
@@ -123,8 +123,8 @@ Maybe surprisingly, in most months, the busiest railway station is not in Amster
 
 Let's change the question to: _Which are the top-3 busiest stations for each summer month?_
 The `arg_max()` function only helps us find the top-1 value but it is not sufficient for finding top-k results.
-Luckily, DuckDB has extensive support for SQL features, including [window functions]({% link docs/sql/window_functions.md %}) and we can use the [`rank()` function]({% link docs/sql/window_functions.md %}#rank) to find top-k values.
-Addtionally, we use [`make_date`]({% link docs/sql/functions/date.md %}#make_dateyear-month-day) to reconstruct the date, [`strftime`]({% link docs/sql/functions/timestamptz.md %}#strftimetimestamptz-format) to turn it into the month's name and [`array_agg`]({% link docs/sql/aggregates.md %}#array_aggarg):
+Luckily, DuckDB has extensive support for SQL features, including [window functions]({% link docs/sql/functions/window_functions.md %}) and we can use the [`rank()` function]({% link docs/sql/functions/window_functions.md %}#rank) to find top-k values.
+Addtionally, we use [`make_date`]({% link docs/sql/functions/date.md %}#make_dateyear-month-day) to reconstruct the date, [`strftime`]({% link docs/sql/functions/timestamptz.md %}#strftimetimestamptz-format) to turn it into the month's name and [`array_agg`]({% link docs/sql/functions/aggregates.md %}#array_aggarg):
 
 ```sql
 SELECT month, month_name, array_agg(station) AS top3_stations
@@ -390,7 +390,7 @@ including
 [remote querying]({% link docs/extensions/httpfs/overview.md %}),
 [window functions]({% post_url 2021-10-13-windowing %}),
 [unpivot]({% link docs/sql/statements/unpivot.md %}),
-[several friendly SQL features]({% link docs/guides/sql_features/friendly_sql.md %}) (such as `FROM`-first, `GROUP BY ALL`, and `COLUMNS(*)`),
+[several friendly SQL features]({% link docs/sql/dialect/friendly_sql.md %}) (such as `FROM`-first, `GROUP BY ALL`, and `COLUMNS(*)`),
 and so on.
 The combination of these allows for formulating queries using different file formats (CSV, Parquet), data sources (local, HTTPS, S3), and SQL features.
 This helps users answer queries quickly and efficiently.

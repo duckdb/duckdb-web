@@ -74,9 +74,7 @@ CREATE MACRO dynamic_table(col1_value, col2_value) AS TABLE
     SELECT col1_value AS column1, col2_value AS column2;
 ```
 
-Create a table macro that returns multiple rows:
-
-It will be replaced if it already exists, and it is temporary (will be automatically deleted when the connection ends):
+Create a table macro that returns multiple rows. It will be replaced if it already exists, and it is temporary (will be automatically deleted when the connection ends):
 
 ```sql
 CREATE OR REPLACE TEMP MACRO dynamic_table(col1_value, col2_value) AS TABLE
@@ -85,11 +83,20 @@ CREATE OR REPLACE TEMP MACRO dynamic_table(col1_value, col2_value) AS TABLE
     SELECT 'Hello' AS col1_value, 456 AS col2_value;
 ```
 
-Pass an argument as a list: SELECT * FROM get_users([1, 5]):
+Pass an argument as a list:
 
 ```sql
 CREATE MACRO get_users(i) AS TABLE
     SELECT * FROM users WHERE uid IN (SELECT unnest(i));
+```
+
+An example for how to use the `get_users` table macro is the following:
+
+```sql
+CREATE TABLE users AS
+    SELECT *
+    FROM (VALUES (1, 'Ada'), (2, 'Bob'), (3, 'Carl'), (4, 'Dan'), (5, 'Eve')) t(uid, name);
+SELECT * FROM get_users([1, 5]);
 ```
 
 ## Syntax

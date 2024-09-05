@@ -4,6 +4,8 @@ title: Regular Expressions
 railroad: expressions/like.js
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 DuckDB offers [pattern matching operators]({% link docs/sql/functions/pattern_matching.md %})
 ([`LIKE`]({% link docs/sql/functions/pattern_matching.md %}#like),
 [`SIMILAR TO`]({% link docs/sql/functions/pattern_matching.md %}#similar-to),
@@ -29,7 +31,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 | [`regexp_split_to_array(string, regex[, options])`](#regexp_split_to_arraystring-regex-options) | Alias of `string_split_regex`. Splits the `string` along the `regex`. |
 | [`regexp_split_to_table(string, regex[, options])`](#regexp_split_to_tablestring-regex-options) | Splits the `string` along the `regex` and returns a row for each part. |
 
-### `regexp_extract(string, pattern[, group = 0][, options])`
+#### `regexp_extract(string, pattern[, group = 0][, options])`
 
 <div class="nostroke_table"></div>
 
@@ -37,7 +39,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 | **Example** | `regexp_extract('abc', '([a-z])(b)', 1)` |
 | **Result** | `a` |
 
-### `regexp_extract(string, pattern, name_list[, options])`
+#### `regexp_extract(string, pattern, name_list[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -45,7 +47,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 | **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
 
-### `regexp_extract_all(string, regex[, group = 0][, options])`
+#### `regexp_extract_all(string, regex[, group = 0][, options])`
 
 <div class="nostroke_table"></div>
 
@@ -53,7 +55,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 | **Example** | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` |
 | **Result** | `[hello, world]` |
 
-### `regexp_full_match(string, regex[, options])`
+#### `regexp_full_match(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -61,7 +63,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 | **Example** | `regexp_full_match('anabanana', '(an)*')` |
 | **Result** | `false` |
 
-### `regexp_matches(string, pattern[, options])`
+#### `regexp_matches(string, pattern[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -69,7 +71,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 | **Example** | `regexp_matches('anabanana', '(an)*')` |
 | **Result** | `true` |
 
-### `regexp_replace(string, pattern, replacement[, options])`
+#### `regexp_replace(string, pattern, replacement[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -77,7 +79,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 | **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
-### `regexp_split_to_array(string, regex[, options])`
+#### `regexp_split_to_array(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
@@ -85,7 +87,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 | **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | `['hello', 'world', '42']` |
 
-### `regexp_split_to_table(string, regex[, options])`
+#### `regexp_split_to_table(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 

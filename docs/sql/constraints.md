@@ -89,7 +89,7 @@ INSERT INTO students(name, email) VALUES ('Student 3', 'student3@uni.com');
 Constraint Error: NOT NULL constraint failed: students.id
 ```
 
-> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details]({% link docs/sql/indexes.md %}#index-limitations).
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, leading to constraint errors such as `violates primary key constraint` and `violates unique constraint`. See the [indexes section for more details]({% link docs/sql/indexes.md %}#index-limitations).
 
 ## Foreign Keys
 
@@ -109,4 +109,4 @@ Constraint Error: Violates foreign key constraint because key "id: 2" does not e
 
 In order to enforce this property efficiently, an [ART index is automatically created]({% link docs/sql/indexes.md %}) for every foreign key constraint that is defined in the table.
 
-> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, see the [indexes section for more details]({% link docs/sql/indexes.md %}#index-limitations).
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, leading to constraint errors such as `violates primary key constraint` and `violates unique constraint`. See the [indexes section for more details]({% link docs/sql/indexes.md %}#index-limitations).

@@ -48,8 +48,8 @@ This section describes functions and operators for examining and manipulating st
 | [`ltrim(string)`](#ltrimstring) | Removes any spaces from the left side of the `string`. |
 | [`md5(value)`](#md5value) | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the `value`. |
 | [`nfc_normalize(string)`](#nfc_normalizestring) | Convert string to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. |
-| [`not_ilike_escape(string, like_specifier, escape_character)`](#not_ilike_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
-| [`not_like_escape(string, like_specifier, escape_character)`](#not_like_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
+| [`not_ilike_escape(string, like_specifier, escape_character)`](#not_ilike_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
+| [`not_like_escape(string, like_specifier, escape_character)`](#not_like_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`ord(string)`](#ordstring) | Return ASCII character code of the leftmost character in a string. |
 | [`parse_dirname(path, separator)`](#parse_dirnamepath-separator) | Returns the top-level directory name from the given path. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | [`parse_dirpath(path, separator)`](#parse_dirpathpath-separator) | Returns the head of the path (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
@@ -389,7 +389,7 @@ This section describes functions and operators for examining and manipulating st
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
+| **Description** | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | **Example** | `not_ilike_escape('A%c', 'a$%C', '$')` |
 | **Result** | `false` |
 
@@ -397,7 +397,7 @@ This section describes functions and operators for examining and manipulating st
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
+| **Description** | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching](../../sql/functions/patternmatching)) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | **Example** | `not_like_escape('a%c', 'a$%c', '$')` |
 | **Result** | `false` |
 
@@ -820,7 +820,7 @@ These functions are used to measure the similarity of two strings using various 
 
 ### `fmt` Syntax
 
-The `format(format, parameters...)` function formats strings, loosely following the syntax of the [{fmt} open-source formatting library](https://fmt.dev/latest/syntax.html).
+The `format(format, parameters...)` function formats strings, loosely following the syntax of the [{fmt} open-source formatting library](https://fmt.dev/latest/syntax).
 
 Format without additional parameters:
 

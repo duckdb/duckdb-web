@@ -5,7 +5,7 @@ title: Query
 
 The `duckdb_query` method allows SQL queries to be run in DuckDB from C. This method takes two parameters, a (null-terminated) SQL query string and a `duckdb_result` result pointer. The result pointer may be `NULL` if the application is not interested in the result set or if the query produces no result. After the result is consumed, the `duckdb_destroy_result` method should be used to clean up the result.
 
-Elements can be extracted from the `duckdb_result` object using a variety of methods. The `duckdb_column_count` and `duckdb_row_count` methods can be used to extract the number of columns and the number of rows, respectively. `duckdb_column_name` and `duckdb_column_type` can be used to extract the names and types of individual columns.
+Elements can be extracted from the `duckdb_result` object using a variety of methods. The `duckdb_column_count` can be used to extract the number of columns. `duckdb_column_name` and `duckdb_column_type` can be used to extract the names and types of individual columns.
 
 ## Example
 
@@ -37,15 +37,82 @@ duckdb_destroy_result(&result);
 
 ## Value Extraction
 
-Values can be extracted using either the `duckdb_column_data`/`duckdb_nullmask_data` functions, or using the `duckdb_value` convenience functions. The `duckdb_column_data`/`duckdb_nullmask_data` functions directly hand you
-a pointer to the result arrays in columnar format, and can therefore be very fast. The `duckdb_value` functions perform bounds- and type-checking, and will automatically cast values to the desired type. This makes them more convenient and easier to use, at the expense of being slower.
+Values can be extracted using either the `duckdb_fetch_chunk` function, or using the `duckdb_value` convenience functions. The `duckdb_fetch_chunk` function directly hands you data chunks in DuckDB's native array format and can therefore be very fast. The `duckdb_value` functions perform bounds- and type-checking, and will automatically cast values to the desired type. This makes them more convenient and easier to use, at the expense of being slower.
 
 See the [Types]({% link docs/api/c/types.md %}) page for more information.
 
-> For optimal performance, use `duckdb_column_data` and `duckdb_nullmask_data` to extract data from the query result.
+> For optimal performance, use `duckdb_fetch_chunk` to extract data from the query result.
 > The `duckdb_value` functions perform internal type-checking, bounds-checking and casting which makes them slower.
 
+### `duckdb_fetch_chunk`
+
+Below is an end-to-end example that prints the above result to CSV format using the `duckdb_fetch_chunk` function.
+Note that the function is NOT generic: we do need to know exactly what the types of the result columns are.
+
+```c
+duckdb_database db;
+duckdb_connection con;
+duckdb_open(nullptr, &db);
+duckdb_connect(db, &con);
+
+duckdb_result res;
+duckdb_query(con, "CREATE TABLE integers (i INTEGER, j INTEGER);", NULL);
+duckdb_query(con, "INSERT INTO integers VALUES (3, 4), (5, 6), (7, NULL);", NULL);
+duckdb_query(con, "SELECT * FROM integers;", &res);
+
+// iterate until result is exhausted
+while (true) {
+    duckdb_data_chunk result = duckdb_fetch_chunk(res);
+    if (!result) {
+        // result is exhausted
+        break;
+    }
+    // get the number of rows from the data chunk
+    idx_t row_count = duckdb_data_chunk_get_size(result);
+    // get the first column
+    duckdb_vector col1 = duckdb_data_chunk_get_vector(result, 0);
+    int32_t *col1_data = (int32_t *) duckdb_vector_get_data(col1);
+    uint64_t *col1_validity = duckdb_vector_get_validity(col1);
+
+    // get the second column
+    duckdb_vector col2 = duckdb_data_chunk_get_vector(result, 1);
+    int32_t *col2_data = (int32_t *) duckdb_vector_get_data(col2);
+    uint64_t *col2_validity = duckdb_vector_get_validity(col2);
+
+    // iterate over the rows
+    for (idx_t row = 0; row < row_count; row++) {
+        if (duckdb_validity_row_is_valid(col1_validity, row)) {
+            printf("%d", col1_data[row]);
+        } else {
+            printf("NULL");
+        }
+        printf(",");
+        if (duckdb_validity_row_is_valid(col2_validity, row)) {
+            printf("%d", col2_data[row]);
+        } else {
+            printf("NULL");
+        }
+        printf("\n");
+    }
+    duckdb_destroy_data_chunk(&result);
+}
+// clean-up
+duckdb_destroy_result(&res);
+duckdb_disconnect(&con);
+duckdb_close(&db);
+```
+
+This prints the following result:
+
+```csv
+3,4
+5,6
+7,NULL
+```
+
 ### `duckdb_value`
+
+> Deprecated The `duckdb_value` functions are deprecated and are scheduled for removal in a future release.
 
 Below is an example that prints the above result to CSV format using the `duckdb_value_varchar` function.
 Note that the function is generic: we do not need to know about the types of the individual result columns.
@@ -64,37 +131,6 @@ for (idx_t row = 0; row < row_count; row++) {
    printf("\n");
 }
 ```
-
-### `duckdb_column_data`
-
-Below is an example that prints the above result to CSV format using the `duckdb_column_data` function.
-Note that the function is NOT generic: we do need to know exactly what the types of the result columns are.
-
-```c
-int32_t *i_data = (int32_t *) duckdb_column_data(&result, 0);
-int32_t *j_data = (int32_t *) duckdb_column_data(&result, 1);
-bool    *i_mask = duckdb_nullmask_data(&result, 0);
-bool    *j_mask = duckdb_nullmask_data(&result, 1);
-idx_t row_count = duckdb_row_count(&result);
-for (idx_t row = 0; row < row_count; row++) {
-    if (i_mask[row]) {
-        printf("NULL");
-    } else {
-        printf("%d", i_data[row]);
-    }
-    printf(",");
-    if (j_mask[row]) {
-        printf("NULL");
-    } else {
-        printf("%d", j_data[row]);
-    }
-    printf("\n");
-}
-```
-
-> Warning When using `duckdb_column_data`, be careful that the type matches exactly what you expect it to be.
-> As the code directly accesses an internal array, there is no type-checking.
-> Accessing a `DUCKDB_TYPE_INTEGER` column as if it was a `DUCKDB_TYPE_BIGINT` column will provide unpredictable results!
 
 ## API Reference
 
@@ -116,7 +152,6 @@ for (idx_t row = 0; row < row_count; row++) {
 
 ### `duckdb_query`
 
----
 Executes a SQL query within a connection and stores the full (materialized) result in the out_result pointer.
 If the query fails to execute, DuckDBError is returned and the error message can be retrieved by calling
 `duckdb_result_error`.
@@ -126,7 +161,6 @@ query fails, otherwise the error stored within the result will not be freed corr
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
@@ -136,7 +170,6 @@ query fails, otherwise the error stored within the result will not be freed corr
 
 #### Parameters
 
----
 * `connection`
 
 The connection to perform the query in.
@@ -154,12 +187,10 @@ The query result.
 
 ### `duckdb_destroy_result`
 
----
 Closes the result and de-allocates all memory allocated for that connection.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_result</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
@@ -167,7 +198,6 @@ Closes the result and de-allocates all memory allocated for that connection.
 
 #### Parameters
 
----
 * `result`
 
 The result to destroy.
@@ -176,7 +206,6 @@ The result to destroy.
 
 ### `duckdb_column_name`
 
----
 Returns the column name of the specified column. The result should not need to be freed; the column names will
 automatically be destroyed when the result is destroyed.
 
@@ -184,7 +213,6 @@ Returns `NULL` if the column is out of range.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_column_name</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
@@ -193,7 +221,6 @@ Returns `NULL` if the column is out of range.
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the column name from.
@@ -208,14 +235,12 @@ The column name of the specified column.
 
 ### `duckdb_column_type`
 
----
 Returns the column type of the specified column.
 
 Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_column_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
@@ -224,7 +249,6 @@ Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the column type from.
@@ -239,12 +263,10 @@ The column type of the specified column.
 
 ### `duckdb_result_statement_type`
 
----
 Returns the statement type of the statement that was executed
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_statement_type</span> <span class="nv">duckdb_result_statement_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
@@ -252,7 +274,6 @@ Returns the statement type of the statement that was executed
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the statement type from.
@@ -264,7 +285,6 @@ duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 ### `duckdb_column_logical_type`
 
----
 Returns the logical column type of the specified column.
 
 The return type of this call should be destroyed with `duckdb_destroy_logical_type`.
@@ -273,7 +293,6 @@ Returns `NULL` if the column is out of range.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_column_logical_type</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
@@ -282,7 +301,6 @@ Returns `NULL` if the column is out of range.
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the column type from.
@@ -297,12 +315,10 @@ The logical column type of the specified column.
 
 ### `duckdb_column_count`
 
----
 Returns the number of columns present in a the result object.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_column_count</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
@@ -310,7 +326,6 @@ Returns the number of columns present in a the result object.
 
 #### Parameters
 
----
 * `result`
 
 The result object.
@@ -322,14 +337,12 @@ The number of columns present in the result object.
 
 ### `duckdb_row_count`
 
----
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
 
 Returns the number of rows present in the result object.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_row_count</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
@@ -337,7 +350,6 @@ Returns the number of rows present in the result object.
 
 #### Parameters
 
----
 * `result`
 
 The result object.
@@ -349,13 +361,11 @@ The number of rows present in the result object.
 
 ### `duckdb_rows_changed`
 
----
 Returns the number of rows changed by the query stored in the result. This is relevant only for INSERT/UPDATE/DELETE
 queries. For other queries the rows_changed will be 0.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_rows_changed</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
@@ -363,7 +373,6 @@ queries. For other queries the rows_changed will be 0.
 
 #### Parameters
 
----
 * `result`
 
 The result object.
@@ -375,16 +384,16 @@ The number of rows changed.
 
 ### `duckdb_column_data`
 
----
 **DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
 
 Returns the data of a specific column of a result in columnar format.
 
 The function returns a dense array which contains the result data. The exact type stored in the array depends on the
 corresponding duckdb_type (as provided by `duckdb_column_type`). For the exact type by which the data should be
-accessed, see the comments in [the types section](types) or the `DUCKDB_TYPE` enum.
+accessed, see the comments in the [Types section]({% link docs/api/c/types.md %}) or the `DUCKDB_TYPE` enum.
 
 For example, for a column of type `DUCKDB_TYPE_INTEGER`, rows can be accessed in the following manner:
+
 ```c
 int32_t *data = (int32_t *) duckdb_column_data(&result, 0);
 printf("Data for row %d: %d\n", row, data[row]);
@@ -392,7 +401,6 @@ printf("Data for row %d: %d\n", row, data[row]);
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_column_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
@@ -401,7 +409,6 @@ printf("Data for row %d: %d\n", row, data[row]);
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the column data from.
@@ -416,7 +423,6 @@ The column data of the specified column.
 
 ### `duckdb_nullmask_data`
 
----
 **DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
 
 Returns the nullmask of a specific column of a result in columnar format. The nullmask indicates for every row
@@ -435,7 +441,6 @@ printf("Data for row %d: %d\n", row, data[row]);
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> *<span class="nv">duckdb_nullmask_data</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
@@ -444,7 +449,6 @@ printf("Data for row %d: %d\n", row, data[row]);
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the nullmask from.
@@ -459,14 +463,12 @@ The nullmask of the specified column.
 
 ### `duckdb_result_error`
 
----
 Returns the error message contained within the result. The error is only set if `duckdb_query` returns `DuckDBError`.
 
 The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_result` is called.
 
 #### Syntax
 
----
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_result_error</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
@@ -474,7 +476,6 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 
 #### Parameters
 
----
 * `result`
 
 The result object to fetch the error from.

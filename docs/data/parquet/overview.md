@@ -64,21 +64,35 @@ SELECT *
 FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 ```
 
-Read over https:
+Read over HTTPS:
 
 ```sql
 SELECT *
 FROM read_parquet('https://some.url/some_file.parquet');
 ```
 
-Query the metadata of a Parquet file:
+Query the [metadata of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-metadata):
 
 ```sql
 SELECT *
 FROM parquet_metadata('test.parquet');
 ```
 
-Query the schema of a Parquet file:
+Query the [file metadata of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-file-metadata):
+
+```sql
+SELECT *
+FROM parquet_file_metadata('test.parquet');
+```
+
+Query the [key-value metadata of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-key-value-metadata):
+
+```sql
+SELECT *
+FROM parquet_kv_metadata('test.parquet');
+```
+
+Query the [schema of a Parquet file]({% link docs/data/parquet/metadata.md %}#parquet-schema):
 
 ```sql
 SELECT *
@@ -186,7 +200,7 @@ SELECT * FROM people;
 
 ## Writing to Parquet Files
 
-DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [`COPY` Statement page]({% link docs/sql/statements/copy.md %}) for details, including all possible parameters for the `COPY` statement:
+DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [`COPY` Statement page]({% link docs/sql/statements/copy.md %}) for details, including all possible parameters for the `COPY` statement.
 
 Write a query to a snappy compressed Parquet file:
 
@@ -203,6 +217,30 @@ Write `tbl` to a zstd-compressed Parquet file:
 COPY tbl
     TO 'result-zstd.parquet'
     (FORMAT 'parquet', CODEC 'zstd');
+```
+
+Write `tbl` to a zstd-compressed Parquet file with the lowest compression level yielding the fastest compression:
+
+```sql
+COPY tbl
+    TO 'result-zstd.parquet'
+    (FORMAT 'parquet', CODEC 'zstd', COMPRESSION_LEVEL 1);
+```
+
+Write to Parquet file with [key-value metadata]({% link docs/data/parquet/metadata.md %}):
+
+```sql
+COPY (
+    SELECT
+        42 AS number,
+        true AS is_even
+) TO 'kv_metadata.parquet' (
+    FORMAT PARQUET,
+    KV_METADATA {
+        number: 'Answer to life, universe, and everything',
+        is_even: 'not ''odd''' -- single quotes in values must be escaped
+    }
+);
 ```
 
 Write a CSV file to an uncompressed Parquet file:

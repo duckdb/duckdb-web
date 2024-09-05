@@ -12,7 +12,7 @@ excerpt: "Combining multiple features of DuckDB’s [friendly SQL](/docs/guides/
      width="300"
      />
 
-DuckDB's [especially]({% post_url 2022-05-04-friendlier-sql %}) [friendly]({% post_url 2023-08-23-even-friendlier-sql %}) [SQL dialect]({% link docs/guides/sql_features/friendly_sql.md %}) simplifies common query operations.
+DuckDB's [especially]({% post_url 2022-05-04-friendlier-sql %}) [friendly]({% post_url 2023-08-23-even-friendlier-sql %}) [SQL dialect]({% link docs/sql/dialect/friendly_sql.md %}) simplifies common query operations.
 However, these features also unlock new and flexible ways to write advanced SQL! 
 In this post we will combine multiple friendly features to both move closer to real-world use cases and stretch your imagination.
 These queries are useful in their own right, but their component pieces are even more valuable to have in your toolbox.
@@ -174,7 +174,7 @@ Then, we do a little bit of gymnastics (it had to happen sometime...).
 If we were to apply a typical aggregation function (like `sum` or `min`), it would need to be specified statically in our macro.
 To pass it in dynamically as a string (potentially all the way from the application code calling this SQL statement), we take advantage of a unique property of the [`list_aggregate` function]({% link docs/sql/functions/nested.md %}#list-aggregates).
 It accepts the name of a function (as a string) in its second parameter.
-So, to use this unique property, we use the [`list` aggregate function]({% link docs/sql/aggregates.md %}#general-aggregate-functions) to transform all the values within each group into a list.
+So, to use this unique property, we use the [`list` aggregate function]({% link docs/sql/functions/aggregates.md %}#general-aggregate-functions) to transform all the values within each group into a list.
 Then we use the `list_aggregate` function to apply the `aggregate_function` we passed into the macro to each list.
 
 Almost done!

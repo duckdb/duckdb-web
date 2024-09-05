@@ -275,3 +275,30 @@ stmt.addBatch("INSERT INTO test (x, y, z) VALUES (4, 5, 6);");
 stmt.executeBatch();
 stmt.close();
 ```
+
+## Troubleshooting
+
+### Driver Class Not Found
+
+If the Java application is unable to find the DuckDB, it may throw the following error:
+
+```console
+Exception in thread "main" java.sql.SQLException: No suitable driver found for jdbc:duckdb:
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:706)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:252)
+	...
+```
+
+And when trying to load the class manually, it may result in this error:
+
+```console
+Exception in thread "main" java.lang.ClassNotFoundException: org.duckdb.DuckDBDriver
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:375)
+    ...
+```
+
+These errors stem from the DuckDB Maven/Gradle dependency not being detected. To ensure that it is detected, force refresh the Maven configuration in your IDE.

@@ -28,7 +28,7 @@ build/debug/test/unittest test/sql/projection/test_simple_projection.test
 ```
 
 All tests in a given directory can be executed by providing the directory as a parameter with square brackets.
-To run all tests in the "projection" directory:
+To run all tests in the “projection” directory:
 
 ```bash
 build/debug/test/unittest "[projection]"

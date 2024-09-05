@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: DuckDB_% Metadata Functions
+redirect_from:
+  - docs/sql/duckdb_table_functions
 ---
 
 DuckDB offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`.
@@ -55,13 +57,13 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `column_default` | The default value of the column (expressed in SQL)| `VARCHAR` |
 | `is_nullable` | `true` if the column can hold `NULL` values; `false` if the column cannot hold `NULL`-values. | `BOOLEAN` |
 | `data_type` | The name of the column datatype. | `VARCHAR` |
-| `data_type_id` | The internal identifier of the column data type| `BIGINT` |
+| `data_type_id` | The internal identifier of the column data type. | `BIGINT` |
 | `character_maximum_length` | Always `NULL`. DuckDB [text types]({% link docs/sql/data_types/text.md %}) do not enforce a value length restriction based on a length type parameter. | `INTEGER` |
 | `numeric_precision` | The number of units (in the base indicated by `numeric_precision_radix`) used for storing column values. For integral and approximate numeric types, this is the number of bits. For decimal types, this is the number of digits positions. | `INTEGER` |
 | `numeric_precision_radix` | The number-base of the units in the `numeric_precision` column. For integral and approximate numeric types, this is `2`, indicating the precision is expressed as a number of bits. For the `decimal` type this is `10`, indicating the precision is expressed as a number of decimal positions. | `INTEGER` |
 | `numeric_scale` | Applicable to `decimal` type. Indicates the maximum number of fractional digits (i.e., the number of digits that may appear after the decimal separator). | `INTEGER` |
 
-The [`information_schema.columns`]({% link docs/sql/information_schema.md %}#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
+The [`information_schema.columns`]({% link docs/sql/meta/information_schema.md %}#columns-columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
 
 ## `duckdb_constraints`
 
@@ -79,8 +81,10 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 | `constraint_type` | Indicates the type of constraint. Applicable values are `CHECK`, `FOREIGN KEY`, `PRIMARY KEY`, `NOT NULL`, `UNIQUE`. | `VARCHAR` |
 | `constraint_text` | The definition of the constraint expressed as a SQL-phrase. (Not necessarily a complete or syntactically valid DDL-statement.)| `VARCHAR` |
 | `expression` | If constraint is a check constraint, the definition of the condition being checked, otherwise `NULL`. | `VARCHAR` |
-| `constraint_column_indexes` | An array of table column indexes referring to the columns that appear in the constraint definition| `BIGINT[]` |
-| `constraint_column_names` | An array of table column names appearing in the constraint definition| `VARCHAR[]` |
+| `constraint_column_indexes` | An array of table column indexes referring to the columns that appear in the constraint definition. | `BIGINT[]` |
+| `constraint_column_names` | An array of table column names appearing in the constraint definition. | `VARCHAR[]` |
+
+The [`information_schema.referential_constraints`]({% link docs/sql/meta/information_schema.md %}#referential_constraints-referential-constraints) and [`information_schema.table_constraints`]({% link docs/sql/meta/information_schema.md %}#table_constraints-table-constraints) system views provide a more standardized way to obtain metadata about constraints, but the `duckdb_constraints` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.referential_constraints` and `information_schema.table_constraints` are implemented as a query on top of `duckdb_constraints()`)
 
 ## `duckdb_databases`
 
@@ -151,9 +155,9 @@ The `duckdb_indexes()` function provides metadata about secondary indexes availa
 | `database_oid` | Internal identifier of the database containing the index. | `BIGINT` |
 | `schema_name` | The SQL name of the schema that contains the table with the secondary index. | `VARCHAR` |
 | `schema_oid` | Internal identifier of the schema object. | `BIGINT` |
-| `index_name` | The SQL name of this secondary index| `VARCHAR` |
+| `index_name` | The SQL name of this secondary index. | `VARCHAR` |
 | `index_oid` | The object identifier of this index. | `BIGINT` |
-| `table_name` | The name of the table with the index| `VARCHAR` |
+| `table_name` | The name of the table with the index. | `VARCHAR` |
 | `table_oid` | Internal identifier (name) of the table object. | `BIGINT` |
 | `is_unique` | `true` if the index was created with the `UNIQUE` modifier, `false` if it was not. | `BOOLEAN` |
 | `is_primary` | Always `false`| `BOOLEAN` |
@@ -207,7 +211,7 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 | `internal` | `true` if this is an internal (built-in) schema, `false` if this is a user-defined schema. | `BOOLEAN` |
 | `sql` | Always `NULL`| `VARCHAR` |
 
-The [`information_schema.schemata`]({% link docs/sql/information_schema.md %}) system view provides a more standardized way to obtain metadata about database schemas.
+The [`information_schema.schemata`]({% link docs/sql/meta/information_schema.md %}#schemata-database-catalog-and-schema) system view provides a more standardized way to obtain metadata about database schemas.
 
 ## `duckdb_secrets`
 
@@ -281,12 +285,12 @@ The `duckdb_tables()` function provides metadata about the base tables available
 | `temporary` | Whether this is a temporary table. Temporary tables are not persisted and only visible within the current connection. | `BOOLEAN` |
 | `has_primary_key` | `true` if this table object defines a `PRIMARY KEY`. | `BOOLEAN` |
 | `estimated_size` | The estimated number of rows in the table. | `BIGINT` |
-| `column_count` | The number of columns defined by this object| `BIGINT` |
+| `column_count` | The number of columns defined by this object. | `BIGINT` |
 | `index_count` | The number of indexes associated with this table. This number includes all secondary indexes, as well as internal indexes generated to maintain `PRIMARY KEY` and/or `UNIQUE` constraints. | `BIGINT` |
 | `check_constraint_count` | The number of check constraints active on columns within the table. | `BIGINT` |
 | `sql` | The definition of this object, expressed as SQL [`CREATE TABLE`-statement]({% link docs/sql/statements/create_table.md %}). | `VARCHAR` |
 
-The [`information_schema.tables`]({% link docs/sql/information_schema.md %}#tables-and-views) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
+The [`information_schema.tables`]({% link docs/sql/meta/information_schema.md %}#tables-tables-and-views) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
 
 ## `duckdb_temporary_files`
 
@@ -322,7 +326,7 @@ The `duckdb_views()` function provides metadata about the views available in the
 
 | Column | Description | Type |
 |:-|:---|:-|
-| `database_name` | The name of the database that contains this view| `VARCHAR` |
+| `database_name` | The name of the database that contains this view. | `VARCHAR` |
 | `database_oid` | Internal identifier of the database that contains this view. | `BIGINT` |
 | `schema_name` | The SQL name of the schema where the view resides. | `VARCHAR` |
 | `schema_oid` | Internal identifier of the schema object that contains the view. | `BIGINT` |
@@ -333,4 +337,4 @@ The `duckdb_views()` function provides metadata about the views available in the
 | `column_count` | The number of columns defined by this view object. | `BIGINT` |
 | `sql` | The definition of this object, expressed as SQL DDL-statement. | `VARCHAR` |
 
-The [`information_schema.tables`]({% link docs/sql/information_schema.md %}#tables-and-views) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `duckdb_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.
+The [`information_schema.tables`]({% link docs/sql/meta/information_schema.md %}#tables-tables-and-views) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `duckdb_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.
