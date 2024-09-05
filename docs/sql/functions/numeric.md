@@ -93,7 +93,7 @@ The table below shows the available mathematical functions.
 | [`pow(x, y)`](#powx-y) | Computes `x` to the power of `y`. |
 | [`power(x, y)`](#powerx-y) | Alias of `pow`. computes `x` to the power of `y`. |
 | [`radians(x)`](#radiansx) | Converts degrees to radians. |
-| [`random()`](#random) | Returns a random number between 0 and 1. |
+| [`random()`](#random) | Returns a random number `x` in the range `0.0 <= x < 1.0`. |
 | [`round_even(v NUMERIC, s INTEGER)`](#round_evenv-numeric-s-integer) | Alias of `roundbankers(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
 | [`round(v NUMERIC, s INTEGER)`](#roundv-numeric-s-integer) | Round to `s` decimal places. Values `s < 0` are allowed. |
 | [`setseed(x)`](#setseedx) | Sets the seed to be used for the random function. |
@@ -448,7 +448,7 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a random number between 0 and 1. |
+| **Description** | Returns a random number `x` in the range `0.0 <= x < 1.0`. |
 | **Example** | `random()` |
 | **Result** | various |
 
