@@ -210,55 +210,38 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 
 ## Sorting Lists
 
-The function `list_sort` sorts the elements of a list either in ascending or descending order.
-In addition, it allows to provide whether `NULL` values should be moved to the beginning or to the end of the list.
-It has the same sorting behavior as DuckDB's `ORDER BY` clause.
-Therefore, (nested) values compare the same in `list_sort` as in `ORDER BY`.
+The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether NULL values should be moved to the beginning or to the end of the list.
 
-By default, if no modifiers are provided, DuckDB sorts `ASC NULLS FIRST`.
-I.e., the values are sorted in ascending order and `NULL` values are placed first. 
-This is identical to the default sort order of SQLite. 
-The default sort order can be changed using [these](../query_syntax/orderby) PRAGMA statements.
+By default if no modifiers are provided, DuckDB sorts ASC NULLS FIRST, i.e. the values are sorted in ascending order and NULL values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [these](../query_syntax/orderby) PRAGMA statements.
 
-`list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. 
-`list_sort` takes up to two additional optional parameters. 
-The second parameter provides the sort order and can be either `ASC` or `DESC`. 
-The third parameter provides the `NULL` order and can be either `NULLS FIRST` or `NULLS LAST`.
+`list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. `list_sort` takes up to two additional optional parameters. The second parameter provides the sort order and can be either `ASC` or `DESC`. The third parameter provides the NULL sort order and can be either `NULLS FIRST` or `NULLS LAST`.
 
-This query uses the default sort order and the default `NULL` order.
 ```sql
+-- default sort order and default NULL sort order
 SELECT list_sort([1, 3, NULL, 5, NULL, -5])
 ----
 [NULL, NULL, -5, 1, 3, 5]
-```
 
-This query provides the sort order. 
-The `NULL` order uses the configurable default value.
-```sql
+-- only providing the sort order
 SELECT list_sort([1, 3, NULL, 2], 'ASC')
 ----
 [NULL, 1, 2, 3]
-```
 
-This query provides both the sort order and the `NULL` order.
-```sql
+-- providing the sort order and the NULL sort order
 SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST')
 ----
 [NULL, 3, 2, 1]
 ```
 
-`list_reverse_sort` has an optional second parameter providing the `NULL` sort order. 
-It can be either `NULLS FIRST` or `NULLS LAST`.
+`list_reverse_sort` has an optional second parameter providing the NULL sort order. It can be either `NULLS FIRST` or `NULLS LAST`.
 
-This query uses the default `NULL` sort order.
 ```sql
+-- default NULL sort order
 SELECT list_sort([1, 3, NULL, 5, NULL, -5])
 ----
 [NULL, NULL, -5, 1, 3, 5]
-```
 
-This query provides the `NULL` sort order.
-```sql
+-- providing the NULL sort order
 SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST')
 ----
 [3, 2, 1, NULL]
