@@ -168,6 +168,14 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `icu_sort_key('ö', 'DE')` |
 | **Result** | `460145960106` |
 
+#### `if(a, b, c)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Ternary operator; returns b if a, else returns c. Equivalent to `CASE WHEN a THEN b ELSE c END`. |
+| **Example** | `if(2 > 1, 3, 4)` |
+| **Result** | `3` |
+
 #### `ifnull(expr, other)`
 
 <div class="nostroke_table"></div>
