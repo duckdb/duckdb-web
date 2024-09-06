@@ -17,99 +17,21 @@ The query plan helps understand the performance characteristics of the system. H
 
 ## Pragmas
 
-DuckDB supports several pragmas that can be used to enable and disable profiling, as well as to control the level of detail in the profiling output. 
+DuckDB supports several pragmas that can be used to enable and disable profiling, as well as to control the level of detail in the profiling output.
 
-> Tip In the following examples, `PRAGMA` can be used interchangeably with `SET`. They can also be reset using `RESET`, followed by the setting name.
+The following pragmas are available, and can be set using either `PRAGMA` or `SET`.
+They can also be reset using `RESET`, followed by the setting name.
+For more information on the profiling pragmas and their usage,
+see the [Profiling Queries]({% link docs/configuration/pragmas.md %}#profiling_queries)
+section of the pragmas page.
 
-The following pragmas are available:
-
-### Enable Profiling
-
-```SQL
-PRAGMA enable_profiling;
-```
-or
-```sql
-PRAGMA enable_profile;
-```
-
-### Profiling Format
-
-The profiling can be output in several formats. When not specified, the default is `query_tree`, which prints the physical query plan with the timings and cardinalities of each operator in the tree to the screen.
-
-Outputs the physical query plan in JSON format:
-```SQL
-PRAGMA enable_profiling = 'json';
-```
-
-Outputs the physical query plan in a tree format with optimizer and planner timing,
-see [profiling mode](#profiling-mode):
-```sql
-PRAGMA enable_profiling = 'query_tree_optimizer';
-```
-
-Outputs the physical query plan:
-```sql
-PRAGMA enable_profiling = 'query_tree';
-```
-
-#### Disabling Output
-
-It is also possible to disable outputting profiling information. This is specifically useful when accessing the profiling through API functions:
-
-```sql
-PRAGMA enable_profiling = 'no_output';
-```
-
-### Disable Profiling
-
-```SQL
-PRAGMA disable_profiling;
-```
-or
-```sql
-PRAGMA disable_profile;
-```
-
-### Profiling Mode
-
-The default profiling mode is `standard`, but can also be set to `detailed` which enables additional metrics that show the time taken by each optimizer, the planner, and the physical planner.
-
-```SQL
-PRAGMA profiling_mode = 'detailed';
-```
-
-```sql
-PRAGMA profiling_mode = 'standard';
-```
-
-### Profiling Output
-
-By default, the profiling output is printed to the console, but can be directed to a file using the following pragma:
-
-```SQL
-PRAGMA profiling_output = 'filename';
-```
-
-> Warning The file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run.
-
-### Custom Profiling Metrics
-
-By default, all metrics are enabled except those activated by detailed profiling.
-All metrics, including those from detailed profiling,
-can be individually enabled or disabled using the `custom_profiling_settings` `PRAGMA`.
-This `PRAGMA` accepts a JSON object with metric names as keys and boolean values to toggle them on or off.
-Settings specified by this `PRAGMA` will override the default behavior.
-
-> Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
-
-In the following example the `CPU_TIME` metric is disabled, and the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
-
-```SQL
-PRAGMA custom_profiling_settings='{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
-```
-
-For an overview of the available metrics, see the [metrics](#metrics) section below.
+| Setting                                                                                                                                                            | Description                                                        | Default                                                   | Options                                                                                                                |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| [`enable_profiling`]({% link docs/configuration/pragmas.md %}#enable_profiling) , [`enable_profile`]({% link docs/configuration/pragmas.md %}#enable_profiling)    | Turn on profiling                                                  | `query_tree`                                              | `query_tree`, `json`, `query_tree_optimizer`, [`no_output`]({% link docs/configuration/pragmas.md %}#disabling_output) |
+| [`disable_profiling`]({% link docs/configuration/pragmas.md %}#disable_profiling), [`disable_profile`]({% link docs/configuration/pragmas.md %}#disable_profiling) | Turn off profiling                                                 |                                                           |                                                                                                                        |
+| [`profiling_mode`]({% link docs/configuration/pragmas.md %}#profiling_mode)                                                                                        | Toggle additional optimizer, planner, and physical planner metrics | `standard`                                                | `standard`, `detailed`                                                                                                 |
+| [`profiling_output`]({% link docs/configuration/pragmas.md %}#profiling_output)                                                                                    | Set a file to output the profiling to                              | Console                                                   | A path to a file                                                                                                       |
+| [`custom_profiling_settings`]({% link docs/configuration/pragmas.md %}#custom_profiling_metrics)                                                                   | Enable or disable specific metrics.                                | All metrics except those activated by detailed profiling. | A JSON object that matches the following: `{"METRIC_NAME": "boolean", ...}`. See the [metrics](#metrics) section below |
 
 ## Metrics
 
