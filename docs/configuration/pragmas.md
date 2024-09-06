@@ -315,15 +315,17 @@ To return the physical query plan:
 SET enable_profiling = 'query_tree';
 ```
 
-To return the physical query plan with optimizer and planner timings, see [profiling mode](#profiling-mode):
+
+To return the physical query plan with optimizer and planner timings:
 
 ```sql
 SET enable_profiling = 'query_tree_optimizer';
 ```
+For more information on the profiling mode, see [profiling mode](#profiling-mode).
 
 ###### Disabling Output
 
-It is also possible to disable outputting profiling information. This is specifically useful when accessing the profiling through API functions:
+It is also possible to disable outputting profiling information. This is specifically useful when accessing the profiling information:
     
 ```sql
 SET enable_profiling = 'no_output';
@@ -371,10 +373,10 @@ SET profiling_mode = 'standard';
 #### Custom Profiling Metrics
 
 By default, all metrics are enabled except those activated by detailed profiling.
-All metrics, including those from detailed profiling,
+Each metrics, including those from detailed profiling,
 can be individually enabled or disabled using the `custom_profiling_settings` `PRAGMA`.
 This `PRAGMA` accepts a JSON object with metric names as keys and boolean values to toggle them on or off.
-Settings specified by this `PRAGMA` will override the default behavior.
+Settings specified by this `PRAGMA` override the default behavior.
 
 > Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
 
@@ -384,7 +386,7 @@ In the following example the `CPU_TIME` metric is disabled, and the `EXTRA_INFO`
 SET custom_profiling_settings='{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
 ```
 
-The profiling docs contain an overview of the available [metrics]({% link docs/dev/profiling.md %}#metrics).
+The profiling documentation contains an overview of the available [metrics]({% link docs/dev/profiling.md %}#metrics).
 
 ## Query Optimization
 

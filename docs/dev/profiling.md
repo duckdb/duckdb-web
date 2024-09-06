@@ -9,7 +9,7 @@ Profiling is important to help understand why certain queries exhibit specific p
 
 ## `EXPLAIN` Statement
 
-A first step to profiling a duckdb can include examining the plan of a query. The [`EXPLAIN`]({% link docs/guides/meta/explain.md %}) statement allows you to peek into the query plan and see what is going on under the hood.
+A first step to profiling a duckdb can include examining the query plan. The [`EXPLAIN`]({% link docs/guides/meta/explain.md %}) statement allows you to peek into the query plan and see what is going on under the hood.
 
 ## `EXPLAIN ANALYZE` Statement
 
@@ -35,20 +35,20 @@ section of the pragmas page.
 
 ## Metrics
 
-There are two types of nodes in the query tree; the `QUERY_ROOT`, and `OPERATOR` nodes.  The `QUERY_ROOT` refers exclusively to the top level node and the metrics it contains are measured over the entire query. The `OPERATOR` nodes refer to the individual operators in the query plan. Some metrics are only available for `QUERY_ROOT` nodes, while others are only available for `OPERATOR` nodes.  The table below describes each metric, as well as which nodes they are available for.
+There are two types of nodes in the query tree: the `QUERY_ROOT`, and `OPERATOR` nodes.  The `QUERY_ROOT` refers exclusively to the top level node and the metrics it contains are measured over the entire query. The `OPERATOR` nodes refer to the individual operators in the query plan. Some metrics are only available for `QUERY_ROOT` nodes, while others are only available for `OPERATOR` nodes.  The table below describes each metric, as well as which nodes they are available for.
 
 Other than `QUERY_NAME` and `OPERATOR_TYPE`, all metrics can be turned on or off. 
 
-| Metric                  | Return Type | Query | Operator | Description                                                                        |
-|-------------------------|-------------|:-----:|:--------:|------------------------------------------------------------------------------------|
-| `BLOCKED_THREAD_TIME`   | `double`    |   ✅   |          | The total time threads are blocked                                                 |
-| `EXTRA_INFO`            | `string`    |   ✅   |    ✅     | Each operator also has unique metrics, and can be accessed here.                   |
-| `OPERATOR_CARDINALITY`  | `uint64`    |   ✅   |   ✅  ️   | The cardinality of each operator, ie. the number of rows it returns to its parent. |
-| `OPERATOR_ROWS_SCANNED` | `uint64`    |   ✅   |    ✅     | The total rows scanned by each operator                                            |
-| `OPERATOR_TIMING`       | `uint64`    |   ✅   |    ✅     | The time taken by the operator                                                     |
-| `OPERATOR_TYPE`         | `string`    |       |    ✅     | The name of the operator                                                           |
-| `QUERY_NAME`            | `string`    |   ✅   |          | The input query                                                                    |
-| `RESULT_SET_SIZE`       | `uint64`    |   ✅   |    ✅     | The size of the result in bytes                                                    |
+| Metric                  | Return Type | Query | Operator | Description                                                                          |
+|-------------------------|-------------|:-----:|:--------:|--------------------------------------------------------------------------------------|
+| `BLOCKED_THREAD_TIME`   | `double`    |   ✅   |          | The total time threads are blocked                                                   |
+| `EXTRA_INFO`            | `string`    |   ✅   |    ✅     | Each operator also has unique metrics, which can be accessed here.                   |
+| `OPERATOR_CARDINALITY`  | `uint64`    |   ✅   |   ✅  ️   | The cardinality of each operator, i.e., the number of rows it returns to its parent. |
+| `OPERATOR_ROWS_SCANNED` | `uint64`    |   ✅   |    ✅     | The total rows scanned by each operator                                              |
+| `OPERATOR_TIMING`       | `uint64`    |   ✅   |    ✅     | The time taken by each operator                                                      |
+| `OPERATOR_TYPE`         | `string`    |       |    ✅     | The name of each operator                                                            |
+| `QUERY_NAME`            | `string`    |   ✅   |          | The input query                                                                      |
+| `RESULT_SET_SIZE`       | `uint64`    |   ✅   |    ✅     | The size of the result in bytes                                                      |
 
 ### Cumulative Metrics
 
@@ -82,22 +82,23 @@ Additionally, the following metrics are available to support the optimizer metri
 ### Planner
 
 The `PLANNER` is responsible for generating the logical plan. Currently, two metrics are measured in the `PLANNER`:
-- `PLANNER` - The time taken to generate the logical plan
+- `PLANNER` - The time taken to generate the logical plan from the parsed SQL nodes.
 - `PLANNER_BINDING` - The time taken to bind the logical plan
 
 ### Physical Planner
 
-The `PHYSICAL_PLANNER` is responsible for generating the physical plan. The following are the metrics supported in the `PHYSICAL_PLANNER`:
+The `PHYSICAL_PLANNER` is responsible for generating the physical plan from the logical plan.
+The following are the metrics supported in the `PHYSICAL_PLANNER`:
 - `PHYSICAL_PLANNER` - The time taken to generate the physical plan
-- `PHYSICAL_PLANNER_COLUMN_BINDING` - The time taken to bind the columns in the physical plan
-- `PHYSICAL_PLANNER_RESOLVE_TYPES` - The time taken to resolve the types in the physical plan
+- `PHYSICAL_PLANNER_COLUMN_BINDING` - The time taken to bind the columns in the logical plan to physical columns
+- `PHYSICAL_PLANNER_RESOLVE_TYPES` - The time taken to resolve the types in the logical plan to physical types
 - `PHYSICAL_PLANNER_CREATE_PLAN` - The time taken to create the physical plan
 
 ## Setting Custom Metrics Examples
 
-Using the dataset from the previous example, we can demonstrate how to enable profiling and set the output format to `json`. 
+The following examples demonstrate how to enable profiling and set the output format to `json`. 
 
-The first example shows how to enable profiling, set the output to a file, and only enable the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics.
+In the first example, profiling is enabled, the output is set to a file, and only the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
 
 ```sql
 CREATE TABLE students (name VARCHAR, sid INTEGER);
@@ -118,75 +119,33 @@ WHERE name LIKE 'Ma%';
 
 The contents of the outputted file:
 ```json
-{
-  "operator_timing": 0.000372,
-  "operator_cardinality": 0,
-  "extra_info": {},
-  "query_name": "SELECT name\nFROM students\nJOIN exams USING (sid)\nWHERE name LIKE 'Ma%';",
-  "children": [
+"operator_timing": 0.000372,
+"operator_cardinality": 0,
+"extra_info": {},
+"query_name": "SELECT name\nFROM students\nJOIN exams USING (sid)\nWHERE name LIKE 'Ma%';",
+"children": [
     {
-      "operator_timing": 0.000001,
-      "operator_cardinality": 2,
-      "operator_type": "PROJECTION",
-      "extra_info": {
-        "Projections": "name",
-        "Estimated Cardinality": "1"
-      },
-      "children": [
-        {
-          "operator_timing": 0.000031,
-          "operator_cardinality": 2,
-          "operator_type": "HASH_JOIN",
-          "extra_info": {
-            "Join Type": "INNER",
-            "Conditions": "sid = sid",
-            "Build Min": "1",
-            "Build Max": "3",
+        "operator_timing": 0.000001,
+        "operator_cardinality": 2,
+        "operator_type": "PROJECTION",
+        "extra_info": {
+            "Projections": "name",
             "Estimated Cardinality": "1"
-          },
-          "children": [
+        },
+        "children": [
             {
-              "operator_timing": 0.0000049999999999999996,
-              "operator_cardinality": 3,
-              "operator_type": "TABLE_SCAN",
-              "extra_info": {
-                "Text": "exams",
-                "Projections": "sid",
-                "Estimated Cardinality": "3"
-              },
-              "children": []
-            },
-            {
-              "operator_timing": 0.000013000000000000001,
-              "operator_cardinality": 2,
-              "operator_type": "FILTER",
-              "extra_info": {
-                "Expression": "prefix(name, 'Ma')",
-                "Estimated Cardinality": "1"
-              },
-              "children": [
-                {
-                  "operator_timing": 0.000017,
-                  "operator_cardinality": 2,
-                  "operator_type": "TABLE_SCAN",
-                  "extra_info": {
-                    "Text": "students",
-                    "Projections": [
-                      "sid",
-                      "name"
-                    ],
-                    "Filters": "name>='Ma' AND name<'Mb' AND name IS NOT NULL",
+                "operator_timing": 0.000031,
+                "operator_cardinality": 2,
+                "operator_type": "HASH_JOIN",
+                "extra_info": {
+                    "Join Type": "INNER",
+                    "Conditions": "sid = sid",
+                    "Build Min": "1",
+                    "Build Max": "3",
                     "Estimated Cardinality": "1"
-                  },
-                  "children": []
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                },
+                "children": [
+                    ...
 }
 ```
 
@@ -215,25 +174,7 @@ The contents of the outputted file:
     "optimizer_expression_rewriter": 0.000012,
     "optimizer_filter_pullup": 0.000001,
     "optimizer_filter_pushdown": 0.000035,
-    "optimizer_cte_filter_pusher": 0.0,
-    "optimizer_regex_range": 0.0,
-    "optimizer_in_clause": 0.000001,
-    "optimizer_join_order": 0.000061,
-    "optimizer_unnest_rewriter": 0.0,
-    "optimizer_unused_columns": 0.000003,
-    "optimizer_common_subexpressions": 0.000001,
-    "optimizer_common_aggregate": 0.000001,
-    "optimizer_build_side_probe_side": 0.000003,
-    "optimizer_limit_pushdown": 0.000001,
-    "optimizer_top_n": 0.0,
-    "optimizer_duplicate_groups": 0.000002,
-    "optimizer_reorder_filter": 0.000002,
-    "optimizer_extension": 0.0,
-    "optimizer_materialized_cte": 0.0,
-    "optimizer_column_lifetime": 0.000003,
-    "operator_timing": 0.001189,
-    "optimizer_join_filter_pushdown": 0.000006,
-    "optimizer_statistics_propagation": 0.000011,
+    ...
     "operator_cardinality": 0,
     "optimizer_compressed_materialization": 0.0,
     "optimizer_deliminator": 0.0,
@@ -249,60 +190,19 @@ The contents of the outputted file:
                 "Estimated Cardinality": "1"
             },
             "children": [
-                {
-                    "operator_timing": 0.00010100000000000002,
-                    "operator_cardinality": 2,
-                    "operator_type": "HASH_JOIN",
-                    "extra_info": {
-                        "Join Type": "INNER",
-                        "Conditions": "sid = sid",
-                        "Build Min": "1",
-                        "Build Max": "3",
-                        "Estimated Cardinality": "1"
-                    },
-                    "children": [
-                        {
-                            "operator_timing": 0.000035,
-                            "operator_cardinality": 3,
-                            "operator_type": "TABLE_SCAN",
-                            "extra_info": {
-                                "Text": "exams",
-                                "Projections": "sid",
-                                "Estimated Cardinality": "3"
-                            },
-                            "children": []
-                        },
-                        {
-                            "operator_timing": 0.000023,
-                            "operator_cardinality": 2,
-                            "operator_type": "FILTER",
-                            "extra_info": {
-                                "Expression": "prefix(name, 'Ma')",
-                                "Estimated Cardinality": "1"
-                            },
-                            "children": [
-                                {
-                                    "operator_timing": 0.000065,
-                                    "operator_cardinality": 2,
-                                    "operator_type": "TABLE_SCAN",
-                                    "extra_info": {
-                                        "Text": "students",
-                                        "Projections": [
-                                            "sid",
-                                            "name"
-                                        ],
-                                        "Filters": "name>='Ma' AND name<'Mb' AND name IS NOT NULL",
-                                        "Estimated Cardinality": "1"
-                                    },
-                                    "children": []
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+            {
+                "operator_timing": 0.00010100000000000002,
+                "operator_cardinality": 2,
+                "operator_type": "HASH_JOIN",
+                "extra_info": {
+                    "Join Type": "INNER",
+                    "Conditions": "sid = sid",
+                    "Build Min": "1",
+                    "Build Max": "3",
+                    "Estimated Cardinality": "1"
+                },
+                "children": [
+                ...
 }
 ```
 
