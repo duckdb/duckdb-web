@@ -72,7 +72,7 @@ The `LIST` type can be compared using all the [comparison operators]({% link doc
 These comparisons can be used in [logical expressions]({% link docs/sql/expressions/logical_operators.md %})
 such as `WHERE` and `HAVING` clauses, and return [`BOOLEAN` values]({% link docs/sql/data_types/boolean.md %}).
 
-The `LIST` ordering is defined positionally. `min_len = min(len(l1), len(l2))`.
+The `LIST` ordering is defined positionally using the following rules, where `min_len = min(len(l1), len(l2))`.
 
 * **Equality.** `l1` and `l2` are equal, if for each `i` in `[1, min_len]`: `l1[i] = l2[i]`.
 * **Less Than**. For the first index `i` in `[1, min_len]` where `l1[i] != l2[i]`:
@@ -82,25 +82,31 @@ The `LIST` ordering is defined positionally. `min_len = min(len(l1), len(l2))`.
 Lower nesting levels are used for tie-breaking.
 
 Here are some queries returning `true` for the comparison.
+
 ```sql
 SELECT [1, 2] < [1, 3] AS result;
 ```
+
 ```sql
 SELECT [[1], [2, 4, 5]] < [[2]] AS result;
 ```
+
 ```sql
 SELECT [ ] < [1] AS result;
 ```
 
 These queries return `false`.
+
 ```sql
 SELECT [ ] < [ ] AS result;
 ```
+
 ```sql
 SELECT [1, 2] < [1] AS result;
 ```
 
 These queries return `NULL`.
+
 ```sql
 SELECT [1, 2] < [1, NULL, 4] AS result;
 ```
