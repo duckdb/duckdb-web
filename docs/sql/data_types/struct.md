@@ -235,9 +235,10 @@ such as `WHERE` and `HAVING` clauses, and return [`BOOLEAN` values]({% link docs
 For comparisons, the keys of a `STRUCT` have a fixed positional order, from left to right. 
 Comparisons behave the same as row comparisons, therefore, matching keys must be at identical positions.
 
-Specifically, for any `STRUCT` comparison, the following applies.
-- **Equality.** `s1` and `s2` are equal, if all respective values are equal.
-- **Less Than**. For the first index `i` where `s1.value[i] != s2.value[i]`:
+Specifically, for any `STRUCT` comparison, the following rules apply:
+
+* **Equality.** `s1` and `s2` are equal, if all respective values are equal.
+* **Less Than**. For the first index `i` where `s1.value[i] != s2.value[i]`:
 If `s1.value[i] < s2.value[i]`, `s1` is less than `s2`.
 
 `NULL` values are compared following PostgreSQL's semantics.
