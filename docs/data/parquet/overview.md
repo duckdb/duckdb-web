@@ -154,7 +154,7 @@ There are a number of options exposed that can be passed to the `read_parquet` f
 | `encryption_config` | Configuration for [Parquet encryption]({% link docs/data/parquet/encryption.md %}). | `STRUCT` | - |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `file_row_number` | Whether or not to include the `file_row_number` column. | `BOOL` | `false` |
-| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/data/partitioning/hive_partitioning.md %}). | `BOOL` | `false` |
+| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/data/partitioning/hive_partitioning.md %}). | `BOOL` | `true` |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/data/multiple_files/combining_schemas.md %}), rather than by position. | `BOOL` | `false` |
 
 ## Partial Reading

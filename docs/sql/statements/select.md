@@ -51,6 +51,13 @@ Select all unique cities from the addresses table:
 SELECT DISTINCT city FROM addresses;
 ```
 
+Return a `STRUCT` by using a row variable:
+
+```sql
+SELECT d
+FROM (SELECT 1 AS a, 2 AS b) d;
+```
+
 ### Syntax
 
 The `SELECT` statement retrieves rows from the database. The canonical order of a `SELECT` statement is as follows, with less common clauses being indented:

@@ -9,7 +9,7 @@ This page contains a glossary of a few common terms used in DuckDB.
 
 ### In-Process Database Management System
 
-The DBMS runs in the client application's process instead of running as a separate process, which is common in the traditional client–server setup. An alternative term is **embeddable** database management system. In general, the term _"embedded database management system"_ should be avoided, as it can be confused with DBMSs targeting _embedded systems_ (which run on e.g. microcontrollers).
+The DBMS runs in the client application's process instead of running as a separate process, which is common in the traditional client–server setup. An alternative term is **embeddable** database management system. In general, the term _“embedded database management system”_ should be avoided, as it can be confused with DBMSs targeting _embedded systems_ (which run on e.g., microcontrollers).
 
 ### Replacement Scan
 

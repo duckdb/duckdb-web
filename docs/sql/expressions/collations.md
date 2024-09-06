@@ -10,6 +10,8 @@ Collations provide rules for how text should be sorted or compared in the execut
 
 By default, the `BINARY` collation is used. That means that strings are ordered and compared based only on their binary contents. This makes sense for standard ASCII characters (i.e., the letters A-Z and numbers 0-9), but generally does not make much sense for special unicode characters. It is, however, by far the fastest method of performing ordering and comparisons. Hence it is recommended to stick with the `BINARY` collation unless required otherwise.
 
+> Warning Collation support in DuckDB is experimental with [several planned improvements](https://github.com/duckdb/duckdb/issues/604) and a [few known issues](https://github.com/duckdb/duckdb/issues?q=is%3Aissue+is%3Aopen+collation+).
+
 ## Using Collations
 
 In the stand-alone installation of DuckDB three collations are included: `NOCASE`, `NOACCENT` and `NFC`. The `NOCASE` collation compares characters as equal regardless of their casing. The `NOACCENT` collation compares characters as equal regardless of their accents. The `NFC` collation performs NFC-normalized comparisons, see [Unicode normalization](https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization) for more information.

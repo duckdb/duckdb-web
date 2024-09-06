@@ -54,7 +54,7 @@ keywords = [
 
 description_replacement = "description.replace('e.g. ', 'e.g., ')"
 for keyword in keywords:
-    description_replacement += f".replace('{keyword}', '**{keyword}**')"
+    description_replacement += f".replace('{keyword}', '`{keyword}`')"
 
 script = f'''
 .mode markdown
@@ -72,6 +72,8 @@ FROM (
         first(CASE
         WHEN value = ''
         THEN ''
+        WHEN name = 'enable_progress_bar'
+        THEN surround_with_backticks('true')
         WHEN name='memory_limit' OR name='max_memory'
         THEN '80% of RAM'
         WHEN name='secret_directory'
@@ -135,7 +137,7 @@ text += '\n### Local Configuration Options\n\n' + local_configuration_flags + '\
 text = re.sub(
     r'^\|---*\|---*\|---*\|---*\|$', '|----|--------|--|---|', text, flags=re.MULTILINE
 )
-text = text.replace('**QUERY_TREE**_OPTIMIZER', '**QUERY_TREE_OPTIMIZER**')
+text = text.replace('`QUERY_TREE`_OPTIMIZER', '`QUERY_TREE_OPTIMIZER`')
 
 with open(doc_file, 'w+') as f:
     f.write(text)
