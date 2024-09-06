@@ -14,8 +14,8 @@ They can be reset to their original values using the [`RESET` statement]({% link
 The values of configuration options can be queried via the [`current_setting()` scalar function]({% link docs/sql/functions/utility.md %}) or using the [`duckdb_settings()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_settings). For example:
 
 ```sql
-SELECT current_setting('memory_limit') AS memory_limit;
-SELECT value AS memory_limit FROM duckdb_settings() WHERE name = 'memory_limit';
+SELECT current_setting('memory_limit') AS memlimit;
+SELECT value AS memlimit FROM duckdb_settings() WHERE name = 'memory_limit';
 ```
 
 ## Examples
