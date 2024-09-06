@@ -276,6 +276,11 @@ This query returns a `Binder Error` because the keys do not match positionally.
 SELECT {'k1': 2, 'k2': 3} < {'k2': 2, 'k1': 4} AS result;
 ```
 
+```console
+Binder Error: Cannot compare values of type STRUCT(k1 INTEGER, k2 INTEGER)
+and type STRUCT(k2 INTEGER, k1 INTEGER) - an explicit cast is required
+```
+
 > Up to DuckDB 0.10.1, nested `NULL` values were compared as follows.
 > At the top level, nested `NULL` values obey standard SQL `NULL` comparison rules:
 > comparing a nested `NULL` value to a nested non-`NULL` value produces a `NULL` result.
