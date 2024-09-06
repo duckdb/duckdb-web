@@ -73,8 +73,9 @@ These comparisons can be used in [logical expressions]({% link docs/sql/expressi
 such as `WHERE` and `HAVING` clauses, and return [`BOOLEAN` values]({% link docs/sql/data_types/boolean.md %}).
 
 The `LIST` ordering is defined positionally. `min_len = min(len(l1), len(l2))`.
-- **Equality.** `l1` and `l2` are equal, if for each `i` in `[1, min_len]`: `l1[i] = l2[i]`.
-- **Less Than**. For the first index `i` in `[1, min_len]` where `l1[i] != l2[i]`:
+
+* **Equality.** `l1` and `l2` are equal, if for each `i` in `[1, min_len]`: `l1[i] = l2[i]`.
+* **Less Than**. For the first index `i` in `[1, min_len]` where `l1[i] != l2[i]`:
   If `l1[i] < l2[i]`, `l1` is less than `l2`.
 
 `NULL` values are compared following PostgreSQL's semantics.
