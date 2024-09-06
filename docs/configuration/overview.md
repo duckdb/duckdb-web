@@ -10,7 +10,13 @@ DuckDB has a number of configuration options that can be used to change the beha
 
 The configuration options can be set using either the [`SET` statement]({% link docs/sql/statements/set.md %}) or the [`PRAGMA` statement]({% link docs/configuration/pragmas.md %}).
 They can be reset to their original values using the [`RESET` statement]({% link docs/sql/statements/set.md %}#reset).
-The values of configuration options can be queried via the [`current_setting()` scalar function]({% link docs/sql/functions/utility.md %}) or using the [`duckdb_settings()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_settings).
+
+The values of configuration options can be queried via the [`current_setting()` scalar function]({% link docs/sql/functions/utility.md %}) or using the [`duckdb_settings()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_settings). For example:
+
+```sql
+SELECT current_setting('memory_limit') AS memory_limit;
+SELECT value AS memory_limit FROM duckdb_settings() WHERE name = 'memory_limit';
+```
 
 ## Examples
 
