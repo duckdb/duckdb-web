@@ -196,3 +196,23 @@ To resolve this, clean the Jekyll gem cache:
 ```bash
 rm -rf /opt/homebrew/lib/ruby/gems/3.3.0/cache/
 ```
+
+### Bundle install fails
+
+Bundle install fails with the following error message:
+
+```bash
+bundle install
+```
+
+```console
+The running version of Bundler (2.5.11) does not match the version of the specification installed for it (2.5.18). This can be caused by
+reinstalling Ruby without removing previous installation, leaving around an upgraded default version of Bundler. Reinstalling Ruby from
+scratch should fix the problem.
+```
+
+The solution, according to a [Stack Overflow answer](https://stackoverflow.com/a/63761800), is to run:
+
+```bash
+gem update --system
+```

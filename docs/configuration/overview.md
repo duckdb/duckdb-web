@@ -10,7 +10,13 @@ DuckDB has a number of configuration options that can be used to change the beha
 
 The configuration options can be set using either the [`SET` statement]({% link docs/sql/statements/set.md %}) or the [`PRAGMA` statement]({% link docs/configuration/pragmas.md %}).
 They can be reset to their original values using the [`RESET` statement]({% link docs/sql/statements/set.md %}#reset).
-The values of configuration options can be queried via the [`current_setting()` scalar function]({% link docs/sql/functions/utility.md %}) or using the [`duckdb_settings()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_settings).
+
+The values of configuration options can be queried via the [`current_setting()` scalar function]({% link docs/sql/functions/utility.md %}) or using the [`duckdb_settings()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_settings). For example:
+
+```sql
+SELECT current_setting('memory_limit') AS memlimit;
+SELECT value AS memlimit FROM duckdb_settings() WHERE name = 'memory_limit';
+```
 
 ## Examples
 
@@ -157,7 +163,7 @@ Configuration options come with different default [scopes]({% link docs/sql/stat
 | `enable_http_logging`                | Enables HTTP logging                                                                                                                                    | `BOOLEAN` | `false`         |
 | `enable_profiling`                   | Enables profiling, and sets the output format (**JSON**, **QUERY_TREE**, **QUERY_TREE_OPTIMIZER**)                                                      | `VARCHAR` | `NULL`          |
 | `enable_progress_bar_print`          | Controls the printing of the progress bar, when 'enable_progress_bar' is true                                                                           | `BOOLEAN` | `true`          |
-| `enable_progress_bar`                | Enables the progress bar, printing progress to the terminal for long queries                                                                            | `BOOLEAN` | `false`         |
+| `enable_progress_bar`                | Enables the progress bar, printing progress to the terminal for long queries                                                                            | `BOOLEAN` | `true`         |
 | `errors_as_json`                     | Output error messages as structured **JSON** instead of as a raw string                                                                                 | `BOOLEAN` | `false`         |
 | `explain_output`                     | Output of EXPLAIN statements (**ALL**, **OPTIMIZED_ONLY**, **PHYSICAL_ONLY**)                                                                           | `VARCHAR` | `physical_only` |
 | `file_search_path`                   | A comma separated list of directories to search for input files                                                                                         | `VARCHAR` |                 |
