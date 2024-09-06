@@ -66,16 +66,43 @@ Retrieving one or more values from a list can be accomplished using brackets and
 | SELECT (['a', 'b', 'c'])[-2:]            | ['b', 'c'] |
 | SELECT list_slice(['a', 'b', 'c'], 2, 3) | ['b', 'c'] |
 
-## Ordering
+## Comparison and Ordering
 
-The ordering is defined positionally. `NULL` values compare greater than all other values and are considered equal to each other.
+The `LIST` type can be compared using all the [comparison operators]({% link docs/sql/expressions/comparison_operators.md %}).
+These comparisons can be used in [logical expressions]({% link docs/sql/expressions/logical_operators.md %})
+such as `WHERE` and `HAVING` clauses, and return [`BOOLEAN` values]({% link docs/sql/data_types/boolean.md %}).
 
-### Null Comparisons
+The `LIST` ordering is defined positionally. `min_len = min(len(l1), len(l2))`.
+- **Equality.** `l1` and `l2` are equal, if for each `i` in `[1, min_len]`: `l1[i] = l2[i]`.
+- **Less Than**. For the first index `i` in `[1, min_len]` where `l1[i] != l2[i]`:
+  If `l1[i] < l2[i]`, `l1` is less than `l2`.
 
-At the top level, `NULL` nested values obey standard SQL `NULL` comparison rules:
-comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` result.
-Comparing nested value _members_, however, uses the internal nested value rules for `NULL`s,
-and a `NULL` nested value member will compare above a non-`NULL` nested value member.
+`NULL` values are compared following PostgreSQL's semantics.
+Lower nesting levels are used for tie-breaking.
+
+Here are some queries returning `true` for the comparison.
+```sql
+SELECT [1, 2] < [1, 3] AS result;
+```
+```sql
+SELECT [[1], [2, 4, 5]] < [[2]] AS result;
+```
+```sql
+SELECT [ ] < [1] AS result;
+```
+
+These queries return `false`.
+```sql
+SELECT [ ] < [ ] AS result;
+```
+```sql
+SELECT [1, 2] < [1] AS result;
+```
+
+These queries return `NULL`.
+```sql
+SELECT [1, 2] < [1, NULL, 4] AS result;
+```
 
 ## Updating Lists
 
