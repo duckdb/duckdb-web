@@ -221,8 +221,12 @@ def add_function(function_prototype, documentation, group):
     function_name = extract_function_name(function_prototype_str)
     docs_str = '\n'.join(documentation) + '\n'
     (docs_str, parameters) = extract_parameters_and_return_value(docs_str)
-    docs_str = docs_str.replace("**DEPRECATION NOTICE**:", "> Warning Deprecation notice.")
-    docs_str = docs_str.replace("**DEPRECATED**:", "> Deprecated This method has been deprecated.")
+    docs_str = docs_str.replace(
+        "**DEPRECATION NOTICE**:", "> Warning Deprecation notice."
+    )
+    docs_str = docs_str.replace(
+        "**DEPRECATED**:", "> Deprecated This method has been deprecated."
+    )
     function_doc = '\n'
     function_doc += f'#### `{function_name}`\n\n'
     function_doc += (
@@ -343,7 +347,9 @@ for file_name in file_docs.keys():
     quick_docs = file_docs[file_name][0]
     function_doc_for_this_group = file_docs[file_name][1]
 
-    replace_docs_in_file(file_name, group_name, quick_docs + function_doc_for_this_group)
+    replace_docs_in_file(
+        file_name, group_name, quick_docs + function_doc_for_this_group
+    )
 
 current_group_name = None
 total_quick_docs = ''
