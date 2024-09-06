@@ -226,24 +226,67 @@ If using multiple expressions when creating a struct, the `row` function is opti
 SELECT (x, x + 1, y) AS s FROM (SELECT 1 AS x, 'a' AS y);
 ```
 
-## Comparison Operators
+## Comparison and Ordering
 
-Nested types can be compared using all the [comparison operators]({% link docs/sql/expressions/comparison_operators.md %}).
+The `STRUCT` type can be compared using all the [comparison operators]({% link docs/sql/expressions/comparison_operators.md %}).
 These comparisons can be used in [logical expressions]({% link docs/sql/expressions/logical_operators.md %})
-for both `WHERE` and `HAVING` clauses, as well as for creating [`BOOLEAN` values]({% link docs/sql/data_types/boolean.md %}).
+such as `WHERE` and `HAVING` clauses, and return [`BOOLEAN` values]({% link docs/sql/data_types/boolean.md %}).
 
-The ordering is defined positionally in the same way that words can be ordered in a dictionary.
-`NULL` values compare greater than all other values and are considered equal to each other.
+For comparisons, the keys of a `STRUCT` have a fixed positional order, from left to right. 
+Comparisons behave the same as row comparisons, therefore, matching keys must be at identical positions.
+
+Specifically, for any `STRUCT` comparison, the following rules apply:
+
+* **Equality.** `s1` and `s2` are equal, if all respective values are equal.
+* **Less Than**. For the first index `i` where `s1.value[i] != s2.value[i]`:
+If `s1.value[i] < s2.value[i]`, `s1` is less than `s2`.
+
+`NULL` values are compared following PostgreSQL's semantics.
+Lower nesting levels are used for tie-breaking.
+
+Here are some queries returning `true` for the comparison.
+
+```sql
+SELECT {'k1': 2, 'k2': 3} < {'k1': 2, 'k2': 4} AS result;
+```
+
+```sql
+SELECT {'k1': 'hello'} < {'k1': 'world'} AS result;
+```
+
+These queries return `false`.
+
+```sql
+SELECT {'k2': 4, 'k1': 3} < {'k2': 2, 'k1': 4} AS result;
+```
+
+```sql
+SELECT {'k1': [4, 3]} < {'k1': [3, 6, 7]} AS result;
+```
+
+These queries return `NULL`.
+
+```sql
+SELECT {'k1': 2, 'k2': 3} < {'k1': 2, 'k2': NULL} AS result;
+```
+
+This query returns a `Binder Error` because the keys do not match positionally.
+
+```sql
+SELECT {'k1': 2, 'k2': 3} < {'k2': 2, 'k1': 4} AS result;
+```
+
+```console
+Binder Error: Cannot compare values of type STRUCT(k1 INTEGER, k2 INTEGER)
+and type STRUCT(k2 INTEGER, k1 INTEGER) - an explicit cast is required
+```
 
 > Up to DuckDB 0.10.1, nested `NULL` values were compared as follows.
 > At the top level, nested `NULL` values obey standard SQL `NULL` comparison rules:
 > comparing a nested `NULL` value to a nested non-`NULL` value produces a `NULL` result.
-> Comparing nested value _members_, however, uses the internal nested value rules for `NULL`s,
-> and a nested `NULL` value member will compare above a nested non-`NULL` value member.
-> DuckDB 0.10.2 introduced a breaking change in semantics, described below.
-
-Nested `NULL` values are compared following PostgreSQL's semantics,
-i.e., lower nested levels are used for tie-breaking.
+> Comparing nested value _entries_, however, uses the internal nested value rules for `NULL`s,
+> and a nested `NULL` value entry will compare above a nested non-`NULL` value entry.
+> DuckDB 0.10.2 introduced a breaking change in semantics as described above.
 
 ## Functions
 
