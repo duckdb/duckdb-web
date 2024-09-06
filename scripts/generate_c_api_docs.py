@@ -210,13 +210,13 @@ def add_function(function_prototype, documentation, group):
     docs_str = '\n'.join(documentation) + '\n'
     (docs_str, parameters) = extract_parameters(docs_str)
     docs_string = '\n'
-    docs_string += f'### `{function_name}`\n\n'
+    docs_string += f'#### `{function_name}`\n\n'
     docs_string += (
         docs_str.replace('e.g. ', 'e.g., ').replace('i.e. ', 'i.e., ').strip() + '\n'
         if docs_str
         else ''
     )
-    docs_string += '\n#### Syntax\n\n'
+    docs_string += '\n##### Syntax\n\n'
     docs_string += quick_docs_start()
     docs_string += (
         highlight_function_prototype(format_function(function_prototype_str), None)
@@ -224,7 +224,7 @@ def add_function(function_prototype, documentation, group):
     )
     docs_string += quick_docs_end()
     if len(parameters) > 0:
-        docs_string += '\n#### Parameters\n\n'
+        docs_string += '\n##### Parameters\n\n'
         for parameter_pair in parameters:
             docs_string += "* `" + parameter_pair[0] + '`\n\n'
             docs_string += "    " + parameter_pair[1] + '\n'
