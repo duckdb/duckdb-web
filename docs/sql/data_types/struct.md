@@ -245,27 +245,33 @@ If `s1.value[i] < s2.value[i]`, `s1` is less than `s2`.
 Lower nesting levels are used for tie-breaking.
 
 Here are some queries returning `true` for the comparison.
+
 ```sql
 SELECT {'k1': 2, 'k2': 3} < {'k1': 2, 'k2': 4} AS result;
 ```
+
 ```sql
 SELECT {'k1': 'hello'} < {'k1': 'world'} AS result;
 ```
 
 These queries return `false`.
+
 ```sql
 SELECT {'k2': 4, 'k1': 3} < {'k2': 2, 'k1': 4} AS result;
 ```
+
 ```sql
 SELECT {'k1': [4, 3]} < {'k1': [3, 6, 7]} AS result;
 ```
 
 These queries return `NULL`.
+
 ```sql
 SELECT {'k1': 2, 'k2': 3} < {'k1': 2, 'k2': NULL} AS result;
 ```
 
 This query returns a `Binder Error` because the keys do not match positionally.
+
 ```sql
 SELECT {'k1': 2, 'k2': 3} < {'k2': 2, 'k1': 4} AS result;
 ```
