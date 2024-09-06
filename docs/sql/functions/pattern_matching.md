@@ -64,14 +64,14 @@ SELECT 'A%c' ILIKE 'a$%c' ESCAPE '$'; -- true
 
 There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance PostgreSQL compatibility.
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | LIKE-style | PostgreSQL-style |
 |:---|:---|
-| `LIKE` | `~~` |
-| `NOT LIKE` | `!~~` |
-| `ILIKE` | `~~*` |
-| `NOT ILIKE` | `!~~*` |
+| LIKE | ~~ |
+| NOT LIKE | !~~ |
+| ILIKE | ~~* |
+| NOT ILIKE | !~~* |
 
 ## `SIMILAR TO`
 
@@ -93,18 +93,25 @@ SELECT 'abc' NOT SIMILAR TO 'abc';   -- false
 
 There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | `SIMILAR TO`-style | POSIX-style |
 |:---|:---|
-| `SIMILAR TO` | `~` |
-| `NOT SIMILAR TO` | `!~` |
+| SIMILAR TO | ~ |
+| NOT SIMILAR TO | !~ |
 
-## `GLOB`
+## Globbing
+
+DuckDB supports file name expansion, also known as globbing, for discovering files.
+DuckDB's glob syntax uses the question mark (`?`) wildcard to match any single character and the asterisk (`*`) to match zero or more characters.
+In addition, you can use the bracket syntax (`[...]`) to match any single character contained within the brackets, or within the character range specified by the brackets. An exclamation mark (`!`) may be used inside the first bracket to search for a character that is not contained within the brackets.
+To learn more, visit the [“glob (programming)” Wikipedia page](https://en.wikipedia.org/wiki/Glob_(programming)).
+
+### `GLOB`
 
 <div id="rrdiagram3"></div>
 
-The `GLOB` operator returns `true` or `false` if the string matches the `GLOB` pattern. The `GLOB` operator is most commonly used when searching for filenames that follow a specific pattern (for example a specific file extension). Use the question mark (`?`) wildcard to match any single character, and use the asterisk (`*`) to match zero or more characters. In addition, use bracket syntax (`[...]`) to match any single character contained within the brackets, or within the character range specified by the brackets. An exclamation mark (`!`) may be used inside the first bracket to search for a character that is not contained within the brackets. To learn more, visit the [Glob Programming Wikipedia page](https://en.wikipedia.org/wiki/Glob_(programming)).
+The `GLOB` operator returns `true` or `false` if the string matches the `GLOB` pattern. The `GLOB` operator is most commonly used when searching for filenames that follow a specific pattern (for example a specific file extension).
 
 Some examples:
 
@@ -154,7 +161,7 @@ Search the current directory for all files:
 SELECT * FROM glob('*');
 ```
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 |     file      |
 |---------------|
@@ -165,6 +172,38 @@ SELECT * FROM glob('*');
 | test2.csv     |
 | test2.parquet |
 | todos.json    |
+
+### Globbing Semantics
+
+DuckDB's globbing implementation follows the semantics of [Python's `glob`](https://docs.python.org/3/library/glob.html) and not the `glob` used in the shell.
+A notable difference is the behavior of the `**/` construct: `**/⟨filename⟩` will not return a file with `⟨filename⟩` in top-level directory.
+For example, with a `README.md` file present in the directory, the following query finds it:
+
+```sql
+SELECT * FROM glob('README.md');
+```
+
+<div class="narrow_table monospace_table"></div>
+
+|   file    |
+|-----------|
+| README.md |
+
+However, the following query returns an empty result:
+
+```sql
+SELECT * FROM glob('**/README.md');
+```
+
+Meanwhile, the globbing of Bash, Zsh, etc. finds the file using the same syntax:
+
+```bash
+ls **/README.md
+```
+
+```text
+README.md
+```
 
 ## Regular Expressions
 
