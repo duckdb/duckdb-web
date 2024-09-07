@@ -5,7 +5,7 @@ redirect_from:
   - docs/guides/sql_features/friendly_sql
 ---
 
-DuckDB offers several advanced SQL features as well syntactic sugar to make SQL queries more concise. We call these colloquially as "friendly SQL".
+DuckDB offers several advanced SQL features as well syntactic sugar to make SQL queries more concise. We call these colloquially as “friendly SQL”.
 
 > Several of these features are also supported in other systems while some are (currently) exclusive to DuckDB.
 
@@ -58,7 +58,7 @@ DuckDB offers several advanced SQL features as well syntactic sugar to make SQL 
 * [Auto-detecting the headers and schema of CSV files]({% link docs/data/csv/auto_detection.md %})
 * Directly querying [CSV files]({% link docs/data/csv/overview.md %}) and [Parquet files]({% link docs/data/parquet/overview.md %})
 * Loading from files using the syntax `FROM 'my.csv'`, `FROM 'my.csv.gz'`, `FROM 'my.parquet'`, etc.
-* Filename expansion (globbing), e.g.: `FROM 'my-data/part-*.parquet'`
+* [Filename expansion (globbing)]({% link docs/sql/functions/pattern_matching.md %}#globbing), e.g.: `FROM 'my-data/part-*.parquet'`
 
 ## Functions and Expressions
 
@@ -94,6 +94,6 @@ SELECT
 
 ## Related Blog Posts
 
-* [Friendlier SQL with DuckDB]({% post_url 2022-05-04-friendlier-sql %}) blog post
-* [Even Friendlier SQL with DuckDB]({% post_url 2023-08-23-even-friendlier-sql %}) blog post
-* [SQL Gymnastics: Bending SQL into flexible new shapes]({% post_url 2024-03-01-sql-gymnastics %}) blog post
+* [“Friendlier SQL with DuckDB”]({% post_url 2022-05-04-friendlier-sql %}) blog post
+* [“Even Friendlier SQL with DuckDB”]({% post_url 2023-08-23-even-friendlier-sql %}) blog post
+* [“SQL Gymnastics: Bending SQL into Flexible New Shapes”]({% post_url 2024-03-01-sql-gymnastics %}) blog post

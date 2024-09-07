@@ -60,7 +60,7 @@ After the logical planner has created the logical query tree, the optimizers are
 
 * **Expression Rewriter**: Simplifies expressions, performs constant folding
 * **Filter Pushdown**: Pushes filters down into the query plan and duplicates filters over equivalency sets. Also prunes subtrees that are guaranteed to be empty (because of filters that statically evaluate to false).
-* **Join Order Optimizer**: Reorders joins using dynamic programming. Specifically, the `DPcpp` algorithm from the paper [Dynamic Programming Strikes Back](https://15721.courses.cs.cmu.edu/spring2017/papers/14-optimizer1/p539-moerkotte.pdf) is used.
+* **Join Order Optimizer**: Reorders joins using dynamic programming. Specifically, the `DPccp` algorithm from the paper [Dynamic Programming Strikes Back](https://15721.courses.cs.cmu.edu/spring2017/papers/14-optimizer1/p539-moerkotte.pdf) is used.
 * **Common Sub Expressions**: Extracts common subexpressions from projection and filter nodes to prevent unnecessary duplicate execution.
 * **In Clause Rewriter**: Rewrites large static IN clauses to a MARK join or INNER join.
 

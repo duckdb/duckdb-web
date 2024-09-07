@@ -256,6 +256,7 @@ The Azure extension relies on the Azure SDK to connect to Azure Blob storage and
 To control the log level, set the [`AZURE_LOG_LEVEL`](https://github.com/Azure/azure-sdk-for-cpp/blob/main/sdk/core/azure-core/README.md#sdk-log-messages) environment variable.
 
 For instance, verbose logs can be enabled as follows in Python:
+
 ```python
 import os
 import duckdb

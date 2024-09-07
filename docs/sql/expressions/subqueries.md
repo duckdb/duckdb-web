@@ -10,7 +10,7 @@ Subqueries are parenthesized query expressions that appear as part of a larger, 
 
 <div id="rrdiagram1"></div>
 
-Scalar subqueries are subqueries that return a single value. They can be used anywhere where a regular expression can be used. If a scalar subquery returns more than a single value, the first value returned will be used.
+Scalar subqueries are subqueries that return a single value. They can be used anywhere where an expression can be used. If a scalar subquery returns more than a single value, a row is selected randomly. This behavior is [different from PostgreSQL]({% link docs/sql/dialect/postgresql_compatibility.md %}#scalar-subqueries).
 
 Consider the following table:
 

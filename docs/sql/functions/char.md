@@ -18,7 +18,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`string ^@ search_string`](#string--search_string) | Return true if `string` begins with `search_string`. |
 | [`string || string`](#string--string) | String concatenation. |
 | [`string[index]`](#stringindex) | Extract a single character using a (1-based) index. |
-| [`string[begin:end]`](#stringbeginend) | Extract a string using slice conventions. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
+| [`string[begin:end]`](#stringbeginend) | Extract a string using slice conventions (like in Python). Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
 | [`string LIKE target`](#string-like-target) | Returns true if the `string` matches the like specifier (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})). |
 | [`string SIMILAR TO regex`](#string-similar-to-regex) | Returns `true` if the `string` matches the `regex`; identical to `regexp_full_match` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})). |
 | [`array_extract(list, index)`](#array_extractlist-index) | Extract a single character using a (1-based) index. |
@@ -34,11 +34,11 @@ This section describes functions and operators for examining and manipulating [`
 | [`format_bytes(bytes)`](#format_bytesbytes) | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`format(format, parameters, ...)`](#formatformat-parameters-) | Formats a string using the [fmt syntax](#fmt-syntax). |
 | [`from_base64(string)`](#from_base64string) | Convert a base64 encoded string to a character string. |
-| [`greatest(x1, x2, ...)`](#greatestx1-x2-) | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered "larger" than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| [`greatest(x1, x2, ...)`](#greatestx1-x2-) | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with the hash of the `value`. |
 | [`ilike_escape(string, like_specifier, escape_character)`](#ilike_escapestring-like_specifier-escape_character) | Returns true if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`instr(string, search_string)`](#instrstring-search_string) | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| [`least(x1, x2, ...)`](#leastx1-x2-) | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered "smaller" than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| [`least(x1, x2, ...)`](#leastx1-x2-) | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | [`left_grapheme(string, count)`](#left_graphemestring-count) | Extract the left-most grapheme clusters. |
 | [`left(string, count)`](#leftstring-count) | Extract the left-most count characters. |
 | [`length_grapheme(string)`](#length_graphemestring) | Number of grapheme clusters in `string`. |
@@ -127,10 +127,21 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extract a string using slice conventions. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
+| **Description** | Extract a string using slice conventions similar to Python. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
 | **Example** | `'DuckDB'[:4]` |
 | **Result** | `Duck` |
 | **Alias** | `array_slice` |
+
+More examples:
+
+```sql
+SELECT  'abcdefghi'  AS str
+,       str[3]       -- get char at position 3, 'c'
+,       str[3:5]     -- substring from position 3 up to and including position 5, 'cde'
+,       str[6:]      -- substring from position 6 till the end, 'fghi'
+,       str[:3]      -- substring from the start up to and including position 3, 'abc'
+,       str[3:-4]    -- substring from positio 3 up to and including the 4th position from the end, 'cdef' 
+```
 
 #### `string LIKE target`
 
@@ -161,7 +172,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extract a string using slice conventions. Negative values are accepted. |
+| **Description** | Extract a string using slice conventions (like in Python). Negative values are accepted. |
 | **Example 1** | `array_slice('DuckDB', 3, 4)` |
 | **Result** | `ck` |
 | **Example 2** | `array_slice('DuckDB', 3, NULL)` |
@@ -262,7 +273,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered "larger" than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| **Description** | Selects the largest value using lexicographical ordering. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | **Example** | `greatest('abc', 'bcd', 'cde', 'EFG')` |
 | **Result** | `'cde'` |
 
@@ -294,7 +305,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered "smaller" than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
+| **Description** | Selects the smallest value using lexicographical ordering. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/sql/expressions/collations.md %}) are not supported. |
 | **Example** | `least('abc', 'BCD', 'cde', 'EFG')` |
 | **Result** | `'BCD'` |
 

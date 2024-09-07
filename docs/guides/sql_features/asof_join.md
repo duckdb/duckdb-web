@@ -171,4 +171,4 @@ the `USING` keyword.
 
 ## See Also
 
-For implementation details, see the [blog post "DuckDB's AsOf joins: Fuzzy Temporal Lookups"](/2023/09/15/asof-joins-fuzzy-temporal-lookups).
+For implementation details, see the [blog post “DuckDB's AsOf joins: Fuzzy Temporal Lookups”](/2023/09/15/asof-joins-fuzzy-temporal-lookups).

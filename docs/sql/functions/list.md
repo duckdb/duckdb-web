@@ -12,9 +12,9 @@ title: List Functions
 | [`list[begin:end:step]`](#listbeginendstep) | `list_slice` in bracket notation with an added `step` feature. |
 | [`array_pop_back(list)`](#array_pop_backlist) | Returns the list without the last element. |
 | [`array_pop_front(list)`](#array_pop_frontlist) | Returns the list without the first element. |
-| [`flatten(list_of_lists)`](#flattenlist_of_lists) | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples]({% link docs/sql/functions/nested.md %}#flatten)). |
+| [`flatten(list_of_lists)`](#flattenlist_of_lists) | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](#flattening)). |
 | [`len(list)`](#lenlist) | Return the length of the list. |
-| [`list_aggregate(list, name)`](#list_aggregatelist-name) | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/nested.md %}#list-aggregates) section for more details. |
+| [`list_aggregate(list, name)`](#list_aggregatelist-name) | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/list.md %}#list-aggregates) section for more details. |
 | [`list_any_value(list)`](#list_any_valuelist) | Returns the first non-null value in the list. |
 | [`list_append(list, element)`](#list_appendlist-element) | Appends `element` to `list`. |
 | [`list_concat(list1, list2)`](#list_concatlist1-list2) | Concatenates two lists. |
@@ -33,12 +33,12 @@ title: List Functions
 | [`list_prepend(element, list)`](#list_prependelement-list) | Prepends `element` to `list`. |
 | [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. |
 | [`list_resize(list, size[, value])`](#list_resizelist-size-value) | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set. |
-| [`list_reverse_sort(list)`](#list_reverse_sortlist) | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
+| [`list_reverse_sort(list)`](#list_reverse_sortlist) | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
 | [`list_reverse(list)`](#list_reverselist) | Reverses the list. |
 | [`list_select(value_list, index_list)`](#list_selectvalue_list-index_list) | Returns a list based on the elements selected by the `index_list`. |
 | [`list_slice(list, begin, end, step)`](#list_slicelist-begin-end-step) | `list_slice` with added `step` feature. |
-| [`list_slice(list, begin, end)`](#list_slicelist-begin-end) | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/nested.md %}#slicing). |
-| [`list_sort(list)`](#list_sortlist) | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
+| [`list_slice(list, begin, end)`](#list_slicelist-begin-end) | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/list.md %}#slicing). |
+| [`list_sort(list)`](#list_sortlist) | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
 | [`list_transform(list, lambda)`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#transform) page for more details. |
 | [`list_unique(list)`](#list_uniquelist) | Counts the unique elements of a list. |
 | [`list_value(any, ...)`](#list_valueany-) | Create a `LIST` containing the argument values. |
@@ -93,7 +93,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples]({% link docs/sql/functions/nested.md %}#flatten)). |
+| **Description** | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](#flattening)). |
 | **Example** | `flatten([[1, 2], [3, 4]])` |
 | **Result** | `[1, 2, 3, 4]` |
 
@@ -110,7 +110,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/nested.md %}#list-aggregates) section for more details. |
+| **Description** | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/list.md %}#list-aggregates) section for more details. |
 | **Example** | `list_aggregate([1, 2, NULL], 'min')` |
 | **Result** | `1` |
 | **Aliases** | `list_aggr`, `aggregate`, `array_aggregate`, `array_aggr` |
@@ -278,7 +278,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
+| **Description** | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
 | **Example** | `list_reverse_sort([3, 6, 1, 2])` |
 | **Result** | `[6, 3, 2, 1]` |
 | **Alias** | `array_reverse_sort` |
@@ -314,7 +314,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/nested.md %}#slicing). |
+| **Description** | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/list.md %}#slicing). |
 | **Example** | `list_slice([4, 5, 6], 2, 3)` |
 | **Result** | `[5, 6]` |
 | **Alias** | `array_slice` |
@@ -323,7 +323,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
+| **Description** | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
 | **Example** | `list_sort([3, 6, 1, 2])` |
 | **Result** | `[1, 2, 3, 6]` |
 | **Alias** | `array_sort` |
@@ -424,7 +424,7 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 
 DuckDB offers two range functions, [`range(start, stop, step)`](#range) and [`generate_series(start, stop, step)`](#generate_series), and their variants with default arguments for `stop` and `step`. The two functions' behavior is different regarding their `stop` argument. This is documented below.
 
-#### `range`
+### `range`
 
 The `range` function creates a list of values in the range between `start` and `stop`.
 The `start` parameter is inclusive, while the `stop` parameter is exclusive.
@@ -432,7 +432,7 @@ The default value of `start` is 0 and the default value of `step` is 1.
 
 Based on the number of arguments, the following variants of `range` exist.
 
-##### `range(stop)`
+#### `range(stop)`
 
 ```sql
 SELECT range(5);
@@ -442,7 +442,7 @@ SELECT range(5);
 [0, 1, 2, 3, 4]
 ```
 
-##### `range(start, stop)`
+#### `range(start, stop)`
 
 ```sql
 SELECT range(2, 5);
@@ -452,7 +452,7 @@ SELECT range(2, 5);
 [2, 3, 4]
 ```
 
-##### `range(start, stop, step)`
+#### `range(start, stop, step)`
 
 ```sql
 SELECT range(2, 5, 3);
@@ -462,14 +462,14 @@ SELECT range(2, 5, 3);
 [2]
 ```
 
-#### `generate_series`
+### `generate_series`
 
 The `generate_series` function creates a list of values in the range between `start` and `stop`.
 Both the `start` and the `stop` parameters are inclusive.
 The default value of `start` is 0 and the default value of `step` is 1.
 Based on the number of arguments, the following variants of `generate_series` exist.
 
-##### `generate_series(stop)`
+#### `generate_series(stop)`
 
 ```sql
 SELECT generate_series(5);
@@ -479,7 +479,7 @@ SELECT generate_series(5);
 [0, 1, 2, 3, 4, 5]
 ```
 
-##### `generate_series(start, stop)`
+#### `generate_series(start, stop)`
 
 ```sql
 SELECT generate_series(2, 5);
@@ -489,7 +489,7 @@ SELECT generate_series(2, 5);
 [2, 3, 4, 5]
 ```
 
-##### `generate_series(start, stop, step)`
+#### `generate_series(start, stop, step)`
 
 ```sql
 SELECT generate_series(2, 5, 3);
@@ -715,61 +715,71 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 
 ## Sorting Lists
 
-The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether `NULL` values should be moved to the beginning or to the end of the list.
+The function `list_sort` sorts the elements of a list either in ascending or descending order.
+In addition, it allows to provide whether `NULL` values should be moved to the beginning or to the end of the list.
+It has the same sorting behavior as DuckDB's `ORDER BY` clause.
+Therefore, (nested) values compare the same in `list_sort` as in `ORDER BY`.
 
-By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and `NULL` values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [`PRAGMA` statements]({% link docs/configuration/pragmas.md %}#default-ordering-for-nulls).
+By default, if no modifiers are provided, DuckDB sorts `ASC NULLS FIRST`.
+I.e., the values are sorted in ascending order and `NULL` values are placed first.
+This is identical to the default sort order of SQLite.
+The default sort order can be changed using [`PRAGMA` statements.](../query_syntax/orderby).
 
-`list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. `list_sort` takes up to two additional optional parameters. The second parameter provides the sort order and can be either `ASC` or `DESC`. The third parameter provides the `NULL` sort order and can be either `NULLS FIRST` or `NULLS LAST`.
+`list_sort` leaves it open to the user whether they want to use the default sort order or a custom order.
+`list_sort` takes up to two additional optional parameters.
+The second parameter provides the sort order and can be either `ASC` or `DESC`.
+The third parameter provides the `NULL` order and can be either `NULLS FIRST` or `NULLS LAST`.
 
-Default sort order and default `NULL` sort order:
+This query uses the default sort order and the default `NULL` order.
 
 ```sql
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ```
 
-```text
+```sql
 [NULL, NULL, -5, 1, 3, 5]
 ```
 
-Only providing the sort order:
+This query provides the sort order.
+The `NULL` order uses the configurable default value.
 
 ```sql
 SELECT list_sort([1, 3, NULL, 2], 'ASC');
 ```
 
-```text
+```sql
 [NULL, 1, 2, 3]
 ```
 
-Providing the sort order and the `NULL` sort order:
-
+This query provides both the sort order and the `NULL` order.
 ```sql
 SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 ```
 
-```text
+```sql
 [NULL, 3, 2, 1]
 ```
 
-`list_reverse_sort` has an optional second parameter providing the `NULL` sort order. It can be either `NULLS FIRST` or `NULLS LAST`.
+`list_reverse_sort` has an optional second parameter providing the `NULL` sort order. 
+It can be either `NULLS FIRST` or `NULLS LAST`.
 
-Default `NULL` sort order:
+This query uses the default `NULL` sort order.
 
 ```sql
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ```
 
-```text
+```sql
 [NULL, NULL, -5, 1, 3, 5]
 ```
 
-Providing the `NULL` sort order:
+This query provides the `NULL` sort order.
 
 ```sql
 SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 ```
 
-```text
+```sql
 [3, 2, 1, NULL]
 ```
 

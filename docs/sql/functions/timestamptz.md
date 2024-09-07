@@ -399,7 +399,7 @@ The table below shows the available table functions for `TIMESTAMP WITH TIME ZON
 ## ICU Timestamp Without Time Zone Functions
 
 The table below shows the ICU provided scalar functions that operate on plain `TIMESTAMP` values.
-These functions assume that the `TIMESTAMP` is a "local timestamp".
+These functions assume that the `TIMESTAMP` is a “local timestamp”.
 
 A local timestamp is effectively a way of encoding the part values from a time zone into a single value.
 They should be used with caution because the produced values can contain gaps and ambiguities thanks to daylight savings time.
@@ -411,8 +411,8 @@ Often the same functionality can be implemented more reliably using the `struct`
 | [`current_localtimestamp()`](#current_localtimestamp) | Returns a `TIMESTAMP` whose GMT bin values correspond to local date and time in the current time zone. |
 | [`localtime`](#localtime) | Synonym for the `current_localtime()` function call. |
 | [`localtimestamp`](#localtimestamp) | Synonym for the `current_localtimestamp()` function call. |
-| [`timezone(text, timestamp)`](#timezonetext-timestamp) | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a "local" time. |
-| [`timezone(text, timestamptz)`](#timezonetext-timestamptz) | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a "local" time. |
+| [`timezone(text, timestamp)`](#timezonetext-timestamp) | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a “local” time. |
+| [`timezone(text, timestamptz)`](#timezonetext-timestamptz) | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a “local” time. |
 
 #### `current_localtime()`
 
@@ -450,7 +450,7 @@ Often the same functionality can be implemented more reliably using the `struct`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a "local" time. |
+| **Description** | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a “local” time. |
 | **Example** | `timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')` |
 | **Result** | `2001-02-16 19:38:40-08` |
 
@@ -458,7 +458,7 @@ Often the same functionality can be implemented more reliably using the `struct`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a "local" time. |
+| **Description** | Use the [date parts]({% link docs/sql/functions/datepart.md %}) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a “local” time. |
 | **Example** | `timezone('America/Denver', TIMESTAMPTZ '2001-02-16 20:38:40-05')` |
 | **Result** | `2001-02-16 18:38:40` |
 
@@ -485,7 +485,7 @@ TIMESTAMP WITH TIME ZONE '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver';
 ## Infinities
 
 Functions applied to infinite dates will either return the same infinite dates
-(e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
+(e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what “makes sense”.
 In general, if the function needs to examine the parts of the infinite temporal value,
 the result will be `NULL`.
 

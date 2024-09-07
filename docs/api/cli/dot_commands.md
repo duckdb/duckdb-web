@@ -41,6 +41,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %})                         |
 | `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %})  |
 | `.mode MODE ?TABLE?`     | Set [output mode]({% link docs/api/cli/output_formats.md %})                                                                            |
+| `.multiline`             | Set multi-line mode (default)                                                                                |
 | `.nullvalue STRING`      | Use `STRING` in place of `NULL` values                                                                       |
 | `.once ?OPTIONS? ?FILE?` | Output for the next SQL command only to `FILE`                                                               |
 | `.open ?OPTIONS? ?FILE?` | Close existing database and reopen `FILE`                                                                    |
@@ -56,6 +57,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.sha3sum ...`           | Compute a SHA3 hash of database content                                                                      |
 | `.shell CMD ARGS...`     | Run `CMD ARGS...` in a system shell                                                                          |
 | `.show`                  | Show the current values for various settings                                                                 |
+| `.singleline`            | Set single-line mode                                                                                         |
 | `.system CMD ARGS...`    | Run `CMD ARGS...` in a system shell                                                                          |
 | `.tables ?TABLE?`        | List names of tables [matching LIKE pattern]({% link docs/sql/functions/pattern_matching.md %}) `TABLE`                   |
 | `.testcase NAME`         | Begin redirecting output to `NAME`                                                                           |
@@ -151,7 +153,7 @@ CREATE TABLE walkers AS SELECT 'duck' AS animal;
 fliers    swimmers  walkers
 ```
 
-For example, to filter to only tables that contain an "l", use the `LIKE` pattern `%l%`.
+For example, to filter to only tables that contain an `l`, use the `LIKE` pattern `%l%`.
 
 ```sql
 .tables %l%

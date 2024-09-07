@@ -64,7 +64,7 @@ We check against `datetime.date.min` and `datetime.date.max` to convert to `-inf
 
 ### `list`
 
-`list` becomes a `LIST` type of the "most permissive" type of its children, for example:
+`list` becomes a `LIST` type of the “most permissive” type of its children, for example:
 
 ```python
 my_list_value = [

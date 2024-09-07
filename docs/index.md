@@ -3,13 +3,20 @@ layout: docu
 title: Documentation
 ---
 
-Welcome to the documentation of DuckDB version 1.0!
-To see the changes in this release, see the [announcement blog post]({% post_url 2024-06-03-announcing-duckdb-100 %}).
+Welcome to the DuckDB documentation!
 
-## Offline Copy
+* [DuckDB connection overview]({% link docs/connect/overview.md %})
+* Client APIs
+    * [CLI (command line interface)]({% link docs/api/cli/overview.md %})
+    * [Java]({% link docs/api/java.md %})
+    * [Python]({% link docs/api/python/overview.md %})
+    * [R]({% link docs/api/r.md %})
+    * [WebAssembly]({% link docs/api/wasm/overview.md %})
+    * see all [client APIs]({% link docs/api/overview.md %})
+* SQL
+    * [Introduction]({% link docs/sql/introduction.md %})
+    * [Statements]({% link docs/sql/statements/overview.md %})
+* [Guides]({% link docs/guides/overview.md %})
+* [Installation]({% link docs/installation/index.html %})
 
-You can [browse the DuckDB documentation offline](/docs/guides/offline-copy).
-
-## Sitemap
-
-<div id="docusitemaphere"></div>
+You can also [browse the DuckDB documentation offline]({% link docs/guides/offline-copy.md %}).

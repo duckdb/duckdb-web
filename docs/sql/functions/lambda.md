@@ -21,7 +21,7 @@ For example, the following are all valid lambda functions:
 |:--|:-------|
 | [`list_transform(list, lambda)`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. |
 | [`list_filter(list, lambda)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns `true`. |
-| [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. |
+| [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. The list must have at least one element – the use of an initial accumulator value is currently not supported. |
 
 ### `list_transform(list, lambda)`
 
@@ -45,7 +45,7 @@ For example, the following are all valid lambda functions:
 
 <div class="nostroke_table"></div>
 
-| **Description** | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. For more information, see [Reduce](#reduce). |
+| **Description** | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. The list must have at least one element – the use of an initial accumulator value is currently not supported. For more information, see [Reduce](#reduce). |
 | **Example** | `list_reduce([4, 5, 6], (x, y) -> x + y)` |
 | **Result** | `15` |
 | **Aliases** | `array_reduce`, `reduce` |
@@ -118,10 +118,10 @@ SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 
 **Signature:** `list_transform(list, lambda)`
 
-**Description:**  
-`list_transform` returns a list that is the result of applying the lambda function to each element of the input list.
+**Description:** `list_transform` returns a list that is the result of applying the lambda function to each element of the input list.
 
 **Aliases:**
+
 * `array_transform`
 * `apply`
 * `list_apply`
@@ -131,8 +131,9 @@ SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 
 **Return type:** Defined by the return type of the lambda function
 
-**Examples:**  
-_Incrementing each list element by one:_
+### Examples
+
+Incrementing each list element by one:
 
 ```sql
 SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
@@ -142,7 +143,7 @@ SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
 [2, 3, NULL, 4]
 ```
 
-_Transforming strings:_
+Transforming strings:
 
 ```sql
 SELECT list_transform(['Duck', 'Goose', 'Sparrow'], s -> concat(s, 'DB'));
@@ -152,7 +153,7 @@ SELECT list_transform(['Duck', 'Goose', 'Sparrow'], s -> concat(s, 'DB'));
 [DuckDB, GooseDB, SparrowDB]
 ```
 
-_Combining lambda functions with other functions:_
+Combining lambda functions with other functions:
 
 ```sql
 SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
@@ -166,11 +167,12 @@ SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
 
 **Signature:** `list_filter(list, lambda)`
 
-**Description:**  
+**Description:**
 Constructs a list from those elements of the input list for which the lambda function returns `true`.
 DuckDB must be able to cast the lambda function's return type to `BOOL`.
 
-**Aliases:**  
+**Aliases:**
+
 * `array_filter`
 * `filter`
 
@@ -178,8 +180,9 @@ DuckDB must be able to cast the lambda function's return type to `BOOL`.
 
 **Return type:** The same type as the input list
 
-**Examples:**  
-_Filter out negative values:_
+### Examples
+
+Filter out negative values:
 
 ```sql
 SELECT list_filter([5, -6, NULL, 7], x -> x > 0);
@@ -189,7 +192,7 @@ SELECT list_filter([5, -6, NULL, 7], x -> x > 0);
 [5, 7]
 ```
 
-_Divisible by 2 and 5:_
+Divisible by 2 and 5:
 
 ```sql
 SELECT list_filter(list_filter([2, 4, 3, 1, 20, 10, 3, 30], x -> x % 2 == 0), y -> y % 5 == 0);
@@ -199,7 +202,7 @@ SELECT list_filter(list_filter([2, 4, 3, 1, 20, 10, 3, 30], x -> x % 2 == 0), y 
 [20, 10, 30]
 ```
 
-_In combination with `range(...)` to construct lists:_
+In combination with `range(...)` to construct lists:
 
 ```sql
 SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
@@ -217,14 +220,15 @@ SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
 
 **Signature:** `list_reduce(list, lambda)`
 
-**Description:**  
+**Description:**
 The scalar function returns a single value
 that is the result of applying the lambda function to each element of the input list.
 Starting with the first element
 and then repeatedly applying the lambda function to the result of the previous application and the next element of the list.
 The list must have at least one element.
 
-**Aliases:**  
+**Aliases:**
+
 * `array_reduce`
 * `reduce`
 
@@ -232,8 +236,9 @@ The list must have at least one element.
 
 **Return type:** The type of the input list's elements
 
-**Examples:**  
-_Sum of all list elements:_
+### Examples
+
+Sum of all list elements:
 
 ```sql
 SELECT list_reduce([1, 2, 3, 4], (x, y) -> x + y);
@@ -243,7 +248,7 @@ SELECT list_reduce([1, 2, 3, 4], (x, y) -> x + y);
 10
 ```
 
-_Only add up list elements if they are greater than 2:_
+Only add up list elements if they are greater than 2:
 
 ```sql
 SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (x, y) -> x + y);
@@ -253,7 +258,7 @@ SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (x, y) -> x + y);
 7
 ```
 
-_Concat all list elements:_
+Concat all list elements:
 
 ```sql
 SELECT list_reduce(['DuckDB', 'is', 'awesome'], (x, y) -> concat(x, ' ', y));

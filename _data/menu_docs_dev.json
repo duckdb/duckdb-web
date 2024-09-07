@@ -10,7 +10,7 @@
       "slug": "",
       "mainfolderitems": [
         {
-          "page": "Overview",
+          "page": "Getting Started",
           "url": "index"
         },
         {
@@ -374,24 +374,6 @@
                   "url": "configuration"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "page": "Configuration",
-          "slug": "configuration",
-          "subfolderitems": [
-            {
-              "page": "Overview",
-              "url": "overview"
-            },
-            {
-              "page": "Pragmas",
-              "url": "pragmas"
-            },
-            {
-              "page": "Secrets Manager",
-              "url": "secrets_manager"
             }
           ]
         },
@@ -900,6 +882,24 @@
           ]
         },
         {
+          "page": "Configuration",
+          "slug": "configuration",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "Pragmas",
+              "url": "pragmas"
+            },
+            {
+              "page": "Secrets Manager",
+              "url": "secrets_manager"
+            }
+          ]
+        },
+        {
           "page": "Extensions",
           "slug": "extensions",
           "subfolderitems": [
@@ -1370,6 +1370,14 @@
             {
               "page": "Overview",
               "url": "overview"
+            },
+            {
+              "page": "Limits",
+              "url": "limits"
+            },
+            {
+              "page": "Non-Deterministic Behavior",
+              "url": "non-deterministic_behavior"
             },
             {
               "page": "DuckDB's Footprint",
