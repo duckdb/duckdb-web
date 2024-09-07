@@ -306,7 +306,7 @@ See the most recent [overview talk at DuckCon #5](https://blobs.duckdb.org/event
 <div class="answer" markdown="1">
 
 The DuckDB Website is hosted by GitHub Pages, its repository is at [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web).
-When the documentation is browsed from a desktop computer, every page has a "Page Source" button on the top that navigates you to its Markdown source file.
+When the documentation is browsed from a desktop computer, every page has a “Page Source” button on the top that navigates you to its Markdown source file.
 Pull requests to fix issues or to expand the documentation section on DuckDB's features are very welcome.
 Before opening a pull request, please consult our [Contributor Guide](https://github.com/duckdb/duckdb-web/blob/main/CONTRIBUTING.md).
 
