@@ -12,7 +12,7 @@ For the release notes, see the [release page](https://github.com/duckdb/duckdb/r
 > Some packages (R, Java) take a few extra days to release due to the reviews required in the release pipelines.
 
 We are proud to release DuckDB 1.1.0, our first release since we released version 1.0.0 three months ago.
-This release is codenamed “Eatoni” after the [Eaton’s pintail (Anas eatoni)](https://en.wikipedia.org/wiki/Eaton%27s_pintail),
+This release is codenamed “Eatoni” after the [Eaton's pintail (Anas eatoni)](https://en.wikipedia.org/wiki/Eaton%27s_pintail),
 a dabbling duck that occurs only on two very remote island groups in the southern Indian Ocean.
 
 ## What's New in 1.1.0
@@ -157,10 +157,13 @@ This release expands this capability by [allowing the `COLUMNS` expression to be
 This is especially useful when combined with nested functions like `struct_pack` or `list_value`.
 
 ```sql
-CREATE TABLE many_measurements(id INTEGER, m1 INTEGER, m2 INTEGER, m3 INTEGER);
+CREATE TABLE many_measurements(
+    id INTEGER, m1 INTEGER, m2 INTEGER, m3 INTEGER
+);
 INSERT INTO many_measurements VALUES (1, 10, 100, 20);
 
-SELECT id, struct_pack(*COLUMNS('m\d')) AS measurements FROM many_measurements;
+SELECT id, struct_pack(*COLUMNS('m\d')) AS measurements
+FROM many_measurements;
 ```
 
 ```text
@@ -284,7 +287,7 @@ CREATE TABLE a (i integer, PRIMARY KEY (i));
 CREATE TABLE b (i integer, FOREIGN KEY (i) REFERENCES a(i));
 
 INSERT INTO a FROM range(100);
-INSERT INTO b SELECT a.range FROM range(100) a, range(10000) b;
+INSERT INTO b SELECT a.range FROM range(100) a, range(10_000) b;
 ```
 
 On the previous version, this would take ca. 10s on a MacBook to complete. It now takes 0.2s thanks to the new index structure, a ca. 50x improvement!
@@ -293,7 +296,7 @@ On the previous version, this would take ca. 10s on a MacBook to complete. It no
 
 Window functions see a lot of use in DuckDB, which is why we are continuously improving performance of executing Window functions over large datasets.
 
-The [`DISTINCT`](https://github.com/duckdb/duckdb/pull/12311)  and [`FILTER`](https://github.com/duckdb/duckdb/pull/12250) window function modifiers can now be executed in streaming mode. Streaming mode means that the input data for the operator does not need to be completely collected and buffered before the operator can execute. For large intermediate results, this can have a very large performance impact. For example, the following query will now use the streaming window operator:
+The [`DISTINCT`](https://github.com/duckdb/duckdb/pull/12311) and [`FILTER`](https://github.com/duckdb/duckdb/pull/12250) window function modifiers can now be executed in streaming mode. Streaming mode means that the input data for the operator does not need to be completely collected and buffered before the operator can execute. For large intermediate results, this can have a very large performance impact. For example, the following query will now use the streaming window operator:
 
 ```sql
 SELECT
@@ -352,13 +355,13 @@ See also [Richard's talk on the topic](https://www.youtube.com/watch?v=QubE0u8Kq
 
 ### GeoParquet
 
-GeoParquet is an extension format of the ubiquitous Parquet format that standardizes how to encode vector geometries and their metadata in Parquet files. This can be used to store geographic data sets in Parquet files efficiently. When the [`spatial` extension]({% link docs/extensions/spatial.md %}) is installed and loaded, reading from a GeoParquet file through DuckDB's normal Parquet reader will now [automatically convert geometry columns to the GEOMETRY type](https://github.com/duckdb/duckdb/pull/12503), for example:
+GeoParquet is an extension format of the ubiquitous Parquet format that standardizes how to encode vector geometries and their metadata in Parquet files. This can be used to store geographic data sets in Parquet files efficiently. When the [`spatial` extension]({% link docs/extensions/spatial.md %}) is installed and loaded, reading from a GeoParquet file through DuckDB's normal Parquet reader will now [automatically convert geometry columns to the `GEOMETRY` type](https://github.com/duckdb/duckdb/pull/12503), for example:
 
 ```sql
 INSTALL spatial;
 LOAD spatial;
 
-FROM 'https://github.com/opengeospatial/geoparquet/raw/main/examples/example.parquet'
+FROM 'https://blobs.duckdb.org/data/geoparquet-example.parquet'
 SELECT GEOMETRY g
 LIMIT 10;
 ```
