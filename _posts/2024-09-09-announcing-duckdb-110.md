@@ -151,9 +151,10 @@ SELECT * FROM read_csv(getvariable('list_of_files'), filename := true);
 
 ### Unpacked Columns
 
-[**Unpacked `COLUMNS.`**](https://github.com/duckdb/duckdb/pull/11872) The [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns-expression) allows users to write dynamic SQL over a set of columns without needing to explicitly list the columns in the SQL string. Instead, the columns can be selected through either a regex or computed with a [lambda function]({% post_url 2024-08-08-friendly-lists-and-their-buddies-the-lambdas %}).
+The [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns-expression) allows users to write dynamic SQL over a set of columns without needing to explicitly list the columns in the SQL string. Instead, the columns can be selected through either a regex or computed with a [lambda function]({% post_url 2024-08-08-friendly-lists-and-their-buddies-the-lambdas %}).
 
-This release expands this capability by allowing the columns expression to be *unpacked* into a function. This is especially useful when combined with nested functions like `struct_pack` or `list_value`.
+This release expands this capability by [allowing the `COLUMNS` expression to be *unpacked* into a function](https://github.com/duckdb/duckdb/pull/11872).
+This is especially useful when combined with nested functions like `struct_pack` or `list_value`.
 
 ```sql
 CREATE TABLE many_measurements(id INTEGER, measurement1 INTEGER, measurement2 INTEGER, measurement3 INTEGER);
