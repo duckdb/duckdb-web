@@ -59,7 +59,7 @@ The `ieee_floating_point_ops` can be set to `false` to revert this behavior:
 
 ```sql
 SET ieee_floating_point_ops = false;
-SELECT 1/0 AS division_by_zero;
+SELECT 1 / 0 AS division_by_zero;
 ```
 
 ```text
