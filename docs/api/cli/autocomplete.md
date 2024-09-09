@@ -3,7 +3,7 @@ layout: docu
 title: Autocomplete
 ---
 
-The shell offers context-aware autocomplete of SQL queries through the [`autocomplete` extension](../../extensions/autocomplete). autocomplete is triggered by pressing `Tab`.
+The shell offers context-aware autocomplete of SQL queries through the [`autocomplete` extension]({% link docs/extensions/autocomplete.md %}). autocomplete is triggered by pressing `Tab`.
 
 Multiple autocomplete suggestions can be present. You can cycle forwards through the suggestions by repeatedly pressing `Tab`, or `Shift+Tab` to cycle backwards. autocompletion can be reverted by pressing `ESC` twice.
 
@@ -17,17 +17,41 @@ The shell autocompletes four different groups:
 The shell looks at the position in the SQL statement to determine which of these autocompletions to trigger. For example:
 
 ```sql
-SELECT s -> student_id
+SELECT s
 ```
-```sql
-SELECT student_id F -> FROM
+
+```text
+student_id
 ```
+
 ```sql
-SELECT student_id FROM g -> grades
+SELECT student_id F
 ```
-```sql
-SELECT student_id FROM 'd -> data/
+
+```text
+FROM
 ```
+
 ```sql
-SELECT student_id FROM 'data/ -> data/grades.csv
+SELECT student_id FROM g
+```
+
+```text
+grades
+```
+
+```sql
+SELECT student_id FROM 'd
+```
+
+```text
+'data/
+```
+
+```sql
+SELECT student_id FROM 'data/
+```
+
+```text
+'data/grades.csv
 ```

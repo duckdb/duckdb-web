@@ -39,7 +39,7 @@ SELECT count(*)
 FROM iceberg_scan('data/iceberg/lineitem_iceberg/metadata/02701-1e474dc7-4723-4f8d-a8b3-b5f0454eb7ce.metadata.json');
 ```
 
-This extension can be paired with the [`httpfs` extension](/docs/extensions/httpfs) to access Iceberg tables in object stores such as S3.
+This extension can be paired with the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) to access Iceberg tables in object stores such as S3.
 
 ```sql
 SELECT count(*)
@@ -53,6 +53,8 @@ SELECT *
 FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 |                             manifest_path                              | manifest_sequence_number | manifest_content | status  | content  |                                     file_path                                      | file_format | record_count |
 |------------------------------------------------------------------------|--------------------------|------------------|---------|----------|------------------------------------------------------------------------------------|-------------|--------------|
 | lineitem_iceberg/metadata/10eaca8a-1e1c-421e-ad6d-b232e5ee23d3-m1.avro | 2                        | DATA             | ADDED   | EXISTING | lineitem_iceberg/data/00041-414-f3c73457-bbd6-4b92-9c15-17b241171b16-00001.parquet | PARQUET     | 51793        |
@@ -64,6 +66,8 @@ FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true)
 SELECT *
 FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 ```
+
+<div class="narrow_table monospace_table"></div>
 
 | sequence_number |     snapshot_id     |      timestamp_ms       |                                         manifest_list                                          |
 |-----------------|---------------------|-------------------------|------------------------------------------------------------------------------------------------|

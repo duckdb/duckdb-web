@@ -7,19 +7,19 @@ redirect_from:
 
 ## Development and Testing
 
-It is crucial that any new features that get added have correct tests that not only test the "happy path", but also test edge cases and incorrect usage of the feature. In this section, we describe how DuckDB tests are structured and how to make new tests for DuckDB.
+It is crucial that any new features that get added have correct tests that not only test the “happy path”, but also test edge cases and incorrect usage of the feature. In this section, we describe how DuckDB tests are structured and how to make new tests for DuckDB.
 
 The tests can be run by running the `unittest` program located in the `test` folder. For the default compilations this is located in either `build/release/test/unittest` (release) or `build/debug/test/unittest` (debug).
 
 ## Philosophy
 
-When testing DuckDB, we aim to route all the tests through SQL. We try to avoid testing components individually because that makes those components more difficult to change later on. As such, almost all of our tests can (and should) be expressed in pure SQL. There are certain exceptions to this, which we will discuss in [Catch Tests](catch). However, in most cases you should write your tests in plain SQL.
+When testing DuckDB, we aim to route all the tests through SQL. We try to avoid testing components individually because that makes those components more difficult to change later on. As such, almost all of our tests can (and should) be expressed in pure SQL. There are certain exceptions to this, which we will discuss in [Catch Tests]({% link docs/dev/sqllogictest/catch.md %}). However, in most cases you should write your tests in plain SQL.
 
 ## Frameworks
 
-SQL tests should be written using the [sqllogictest framework](intro).
+SQL tests should be written using the [sqllogictest framework]({% link docs/dev/sqllogictest/intro.md %}).
 
-C++ tests can be written using the [Catch framework](catch).
+C++ tests can be written using the [Catch framework]({% link docs/dev/sqllogictest/catch.md %}).
 
 ## Client Connector Tests
 

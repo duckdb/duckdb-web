@@ -3,11 +3,20 @@ layout: docu
 title: Documentation
 ---
 
-Welcome to the DuckDB Documentation!
+Welcome to the DuckDB documentation!
 
-Feel free to grab a <a href="{{ site.baseurl }}/duckdb-docs.pdf">PDF copy</a> of the documentation for offline reference.
+* [DuckDB connection overview]({% link docs/connect/overview.md %})
+* Client APIs
+    * [CLI (command line interface)]({% link docs/api/cli/overview.md %})
+    * [Java]({% link docs/api/java.md %})
+    * [Python]({% link docs/api/python/overview.md %})
+    * [R]({% link docs/api/r.md %})
+    * [WebAssembly]({% link docs/api/wasm/overview.md %})
+    * see all [client APIs]({% link docs/api/overview.md %})
+* SQL
+    * [Introduction]({% link docs/sql/introduction.md %})
+    * [Statements]({% link docs/sql/statements/overview.md %})
+* [Guides]({% link docs/guides/overview.md %})
+* [Installation]({% link docs/installation/index.html %})
 
-
-<h1>Sitemap</h1>
-
-<div id="docusitemaphere"></div>
+You can also [browse the DuckDB documentation offline]({% link docs/guides/offline-copy.md %}).

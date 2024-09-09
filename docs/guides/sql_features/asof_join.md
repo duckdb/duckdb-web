@@ -85,12 +85,12 @@ This attaches the value of the holding at that time to each row:
 | GOOG   | 2001-01-01 00:00:30 | 23.45 |
 | GOOG   | 2001-01-01 00:01:30 | 21.16 |
 
-It essentially executes a function defined by looking up nearby values in the `prices` table. 
+It essentially executes a function defined by looking up nearby values in the `prices` table.
 Note also that missing `ticker` values do not have a match and don't appear in the output.
 
 ## Outer AsOf Joins
 
-Because AsOf produces at most one match from the right hand side, 
+Because AsOf produces at most one match from the right hand side,
 the left side table will not grow as a result of the join,
 but it could shrink if there are missing times on the right.
 To handle this situation, you can use an *outer* AsOf Join:
@@ -124,7 +124,7 @@ when there is no ticker or the time is before the prices begin.
 ## AsOf Joins with the `USING` Keyword
 
 So far we have been explicit about specifying the conditions for AsOf,
-but SQL also has a simplified join condition syntax 
+but SQL also has a simplified join condition syntax
 for the common case where the column names are the same in both tables.
 This syntax uses the `USING` keyword to list the fields that should be compared for equality.
 AsOf also supports this syntax, but with two restrictions:
@@ -137,16 +137,38 @@ Our first query can then be written as:
 ```sql
 SELECT ticker, h.when, price * shares AS value
 FROM holdings h
-ASOF JOIN prices p USING (ticker, when);
+ASOF JOIN prices p USING (ticker, "when");
 ```
 
-Be aware that if you don't explicitly list the columns in the `SELECT`,
-the ordering field value will be the probe value, not the build value.
-For a natural join, this is not an issue because all the conditions are equalities,
-but for AsOf, one side has to be chosen.
-Since AsOf can be viewed as a lookup function,
-it is more natural to return the "function arguments" than the function internals.
+### Clarification on Column Selection with `USING` in ASOF Joins
+
+When you use the `USING` keyword in a join, the columns specified in the `USING` clause are merged in the result set. This means that if you run:
+
+```sql
+SELECT *
+FROM holdings h
+ASOF JOIN prices p USING (ticker, "when");
+```
+
+You will get back only the columns `h.ticker, h.when, h.shares, p.price`. The columns `ticker` and `when` will appear only once, with `ticker`
+and `when` coming from the left table (holdings).
+
+This behavior is fine for the `ticker` column because the value is the same in both tables. However, for the `when` column, the values might 
+differ between the two tables due to the `>=` condition used in the AsOf join. The AsOf join is designed to match each row in the left 
+table (`holdings`) with the nearest preceding row in the right table (`prices`) based on the `when` column.
+
+If you want to retrieve the `when` column from both tables to see both timestamps, you need to list the columns explicitly rather than 
+relying on `*`, like so:
+
+```sql
+SELECT h.ticker, h.when AS holdings_when, p.when AS prices_when, h.shares, p.price
+FROM holdings h
+ASOF JOIN prices p USING (ticker, "when");
+```
+
+This ensures that you get the complete information from both tables, avoiding any potential confusion caused by the default behavior of 
+the `USING` keyword.
 
 ## See Also
 
-For implementation details, see the [blog post "DuckDB's AsOf joins: Fuzzy Temporal Lookups"](/2023/09/15/asof-joins-fuzzy-temporal-lookups).
+For implementation details, see the [blog post “DuckDB's AsOf joins: Fuzzy Temporal Lookups”](/2023/09/15/asof-joins-fuzzy-temporal-lookups).

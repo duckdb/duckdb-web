@@ -1,11 +1,13 @@
 ---
 ---
 
+
+
 /** DUCKDB HOME CSS **/
 
 @import 'variables';
 @import 'mixins';
-//@import url(variables.css);
+
 
 body.landing{
 	font-size: $fontSizep;
@@ -129,7 +131,7 @@ body.landing{
 			padding: 15px 20px;
 			border-top: 1px solid #393939;
 			span{
-				color: #3D3D3D;
+				color: #919191;
 				font-size: 14px;
 			}
 			p{
@@ -208,7 +210,7 @@ body.landing{
 		}
 	}
 	
-	/** STYLE SELECT BOX ANYWAYS – SO IT IS COLORED DIRECTLY **/
+	/** STYLE SELECT BOX ANYWAYS – SO IT IS COLORED DIRECTLY **/
 	select {
 	  -webkit-appearance: none;
 		 -moz-appearance: none;
@@ -224,27 +226,15 @@ body.landing{
 	  line-height: inherit;
 	  z-index: 1;
 	  font-weight: 500;
-	  &::-ms-expand {
-		display: none;
-	  }
 	  outline: none;
-	}
-	
-	select {
+
 	  display: -ms-grid;
 	  display: grid;
-		  grid-template-areas: "select";
+	  grid-template-areas: "select";
 	  -webkit-box-align: center;
-		  -ms-flex-align: center;
-			  align-items: center;
+		 -ms-flex-align: center;
+			align-items: center;
 	  position: relative;
-	  
-	  select,
-	  &::after {
-		-ms-grid-row: 1;
-		-ms-grid-column: 1;
-		grid-area: select;
-	  }
 	  
 	  min-width: 15ch;
 	  max-width: 30ch;
@@ -262,6 +252,18 @@ body.landing{
 	  -webkit-transition: background-color .3s;
 	  -o-transition: background-color .3s;
 	  transition: background-color .3s;
+
+	  &::-ms-expand {
+		display: none;
+	  }
+
+	  select,
+	  &::after {
+		-ms-grid-row: 1;
+		-ms-grid-column: 1;
+		grid-area: select;
+	  }
+
 	  &:hover{
 		  background-color: darken($duckDByellow, 5%);
 	  }
@@ -472,7 +474,9 @@ body.landing{
 			}
 			.install{
 				width: calc(100% - 450px);
-				tab-size: 4;
+				-moz-tab-size: 4;
+				  -o-tab-size: 4;
+					 tab-size: 4;
 			}
 		}
 	}
@@ -487,7 +491,7 @@ body.landing{
 	}
 }
 
-@import url(syntax_highlighting.css);
+@import url(syntax_highlighting.css?123);
 
 @media only screen and (max-width: 1100px) {
 	body.landing{
@@ -497,8 +501,8 @@ body.landing{
 		.window .topbar{
 			position: relative;
 			&::after{
-				background: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
 				background: -o-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+				background: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
 				background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
 				width: 25px;
 				position: absolute;
@@ -512,8 +516,8 @@ body.landing{
 				z-index: 10;
 			}
 			&::before{
-				background: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 				background: -o-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+				background: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 				background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
 				width: 25px;
 				position: absolute;

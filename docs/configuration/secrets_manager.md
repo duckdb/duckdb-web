@@ -5,8 +5,6 @@ title: Secrets Manager
 
 The **Secrets manager** provides a unified user interface for secrets across all backends that use them. Secrets can be scoped, so different storage prefixes can have different secrets, allowing for example to join data across organizations in a single query. Secrets can also be persisted, so that they do not need to be specified every time DuckDB is launched.
 
-> Secrets were introduced with DuckDB version 0.10.
-
 > Warning Persistent secrets are stored in unencrypted binary format on the disk.
 
 ## Secrets
@@ -15,21 +13,22 @@ The **Secrets manager** provides a unified user interface for secrets across all
 
 Secrets are typed, their type identifies which service they are for. Currently, the following cloud services are available:
 
-* AWS S3 (`S3`), through the [`httpfs` extension](../extensions/httpfs/s3api)
-* Google Cloud Storage (`GCS`), through the [`httpfs` extension](../extensions/httpfs/s3api)
-* Cloudflare R2 (`R2`), through the [`httpfs` extension](../extensions/httpfs/s3api)
-* Azure Blob Storage (`AZURE`), through the [`azure` extension](../extensions/azure)
+* AWS S3 (`S3`), through the [`httpfs` extension]({% link docs/extensions/httpfs/s3api.md %})
+* Azure Blob Storage (`AZURE`), through the [`azure` extension]({% link docs/extensions/azure.md %})
+* Cloudflare R2 (`R2`), through the [`httpfs` extension]({% link docs/extensions/httpfs/s3api.md %})
+* Google Cloud Storage (`GCS`), through the [`httpfs` extension]({% link docs/extensions/httpfs/s3api.md %})
+* Hugging Face (`HUGGINGFACE`), through the [`httpfs` extension]({% link docs/extensions/httpfs/hugging_face.md %})
 
-For each type, there are one or more "secret providers" that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
+For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
 ### Creating a Secret
 
-Secrets can be created using the [`CREATE SECRET` SQL statement](../sql/statements/create_secret).
+Secrets can be created using the [`CREATE SECRET` SQL statement]({% link docs/sql/statements/create_secret.md %}).
 Secrets can be **temporary** or **persistent**. Temporary secrets are used by default – and are stored in-memory for the life span of the DuckDB instance similar to how settings worked previously. Persistent secrets are stored in **unencrypted binary format** in the `~/.duckdb/stored_secrets` directory. On startup of DuckDB, persistent secrets are read from this directory and automatically loaded.
 
 #### Secret Providers
 
-To create a secret, a **Secret Provider** needs to be used. A Secret Provider is a mechanism through which a secret is generated. To illustrate this, for the `S3`, `GCS`, `R2`, and `AZURE` secret types, DuckDB currently supports two providers: `CONFIG` and `CREDENTIAL_CHAIN`. The `CONFIG` provider requires the user to pass all configuration information into the `CREATE SECRET`, whereas the `CREDENTIAL_CHAIN` provider will automatically try to fetch credentials. When no Secret Provider is specified, the `CONFIG` provider is used. For more details on how to create secrets using different providers check out the respective pages on [httpfs](../extensions/httpfs#configuration-and-authentication-using-secrets) and [azure](../extensions/azure#authentication-with-secret).
+To create a secret, a **Secret Provider** needs to be used. A Secret Provider is a mechanism through which a secret is generated. To illustrate this, for the `S3`, `GCS`, `R2`, and `AZURE` secret types, DuckDB currently supports two providers: `CONFIG` and `CREDENTIAL_CHAIN`. The `CONFIG` provider requires the user to pass all configuration information into the `CREATE SECRET`, whereas the `CREDENTIAL_CHAIN` provider will automatically try to fetch credentials. When no Secret Provider is specified, the `CONFIG` provider is used. For more details on how to create secrets using different providers check out the respective pages on [httpfs]({% link docs/extensions/httpfs/overview.md %}#configuration-and-authentication-using-secrets) and [azure]({% link docs/extensions/azure.md %}#authentication-with-secret).
 
 #### Temporary Secrets
 
@@ -58,11 +57,17 @@ CREATE PERSISTENT SECRET my_persistent_secret (
 );
 ```
 
-This will write the secret (unencrypted) to the `~/.duckdb/stored_secrets` directory.
+By default, this will write the secret (unencrypted) to the `~/.duckdb/stored_secrets` directory. To change the secrets directory, issue:
+
+```sql
+SET secret_directory = 'path/to/my_secrets_dir';
+```
+
+Note that setting the value of the `home_directory` configuration option has no effect on the location of the secrets.
 
 ### Deleting Secrets
 
-Secrets can be deleted using the [`DROP SECRET` statement](../sql/statements/create_secret#syntax-for-drop-secret), e.g.:
+Secrets can be deleted using the [`DROP SECRET` statement]({% link docs/sql/statements/create_secret.md %}#syntax-for-drop-secret), e.g.:
 
 ```sql
 DROP PERSISTENT SECRET my_persistent_secret;
@@ -93,12 +98,12 @@ CREATE SECRET secret2 (
 Now, if the user queries something from `s3://my-other-bucket/something`, secret `secret2` will be chosen automatically for that request. To see which secret is being used, the `which_secret` scalar function can be used, which takes a path and a secret type as parameters:
 
 ```sql
-SELECT which_secret('s3://my-other-bucket/file.parquet', 's3');
+FROM which_secret('s3://my-other-bucket/file.parquet', 's3');
 ```
 
 ### Listing Secrets
 
-Secrets can be listed using the built-in table-producing function, e.g., by using the [`duckdb_secrets()` table function](../sql/duckdb_table_functions#duckdb_secrets):
+Secrets can be listed using the built-in table-producing function, e.g., by using the [`duckdb_secrets()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_secrets):
 
 ```sql
 FROM duckdb_secrets();

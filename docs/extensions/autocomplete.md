@@ -1,22 +1,23 @@
 ---
 layout: docu
 title: AutoComplete Extension
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/autocomplete
 ---
 
-The `autocomplete` extension adds supports for autocomplete in the [CLI client](../api/cli).
+The `autocomplete` extension adds supports for autocomplete in the [CLI client]({% link docs/api/cli/overview.md %}).
 The extension is shipped by default with the CLI client.
 
 ## Behavior
 
-For the behavior of the `autocomplete` extension, see the [documentation of the CLI client](../api/cli/autocomplete).
+For the behavior of the `autocomplete` extension, see the [documentation of the CLI client]({% link docs/api/cli/autocomplete.md %}).
 
 ## Functions
 
 <div class="narrow_table"></div>
 
-| Function                                | Description                                            |
-|:----------------------------------------|:-------------------------------------------------------|
-| `sql_auto_complete(`*`query_string`*`)` | Attempts autocompletion on the given *`query_string`*. |
+| Function                          | Description                                          |
+|:----------------------------------|:-----------------------------------------------------|
+| `sql_auto_complete(query_string)` | Attempts autocompletion on the given `query_string`. |
 
 ## Example
 
@@ -51,7 +52,3 @@ Returns:
 | DEALLOCATE  |                0 |
 | UPDATE      |                0 |
 | DROP        |                0 |
-
-## GitHub
-
-The `autocomplete` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/autocomplete).

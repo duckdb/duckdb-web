@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Announcing DuckDB 0.9.0"
+title: "Announcing DuckDB 0.9.0"
 author: Mark Raasveldt and Hannes Mühleisen
 thumb: "/images/blog/thumbs/230926.png"
 excerpt: ""
@@ -13,7 +13,7 @@ excerpt: ""
 
 The DuckDB team is happy to announce the latest DuckDB release (0.9.0). This release is named Undulata after the [Yellow-billed duck](https://en.wikipedia.org/wiki/Yellow-billed_duck) native to Africa.
 
-To install the new version, please visit the [installation guide](/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.9.0).
+To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.9.0).
 
 <!--more-->
 
@@ -41,7 +41,10 @@ Below is a summary of those new features with examples, starting with a change i
 ```sql
 CREATE TABLE structs(s STRUCT(i INT));
 INSERT INTO structs VALUES ({'k': 42});
--- Mismatch Type Error: Type STRUCT(k INTEGER) does not match with STRUCT(i INTEGER). Cannot cast STRUCTs with different names
+```
+
+```console
+Mismatch Type Error: Type STRUCT(k INTEGER) does not match with STRUCT(i INTEGER). Cannot cast STRUCTs with different names
 ```
 
 Unnamed structs constructed using the `ROW` function can still be inserted into struct fields.
@@ -59,7 +62,7 @@ In this release, support for disk-spilling techniques is further extended throug
 The performance of our hash aggregate has also improved in general, especially when there are many groups. For example, we compute the number of unique rows in a data set with 30 million rows and 15 columns by using the following query:
 
 ```sql
-SELECT COUNT(*) FROM (SELECT DISTINCT * FROM tbl);
+SELECT count(*) FROM (SELECT DISTINCT * FROM tbl);
 ```
 If we keep all the data in memory, the query should use around 6GB. However, we can still complete the query if less memory is available. In the table below, we can see how the runtime is affected by lowering the memory limit:
 
@@ -78,7 +81,7 @@ If we keep all the data in memory, the query should use around 6GB. However, we 
 | 2.0GB         | OOM      | 4.39s    |
 | 1.0GB         | OOM      | 4.91s    |
 
-**[Compressed Materialization.](https://github.com/duckdb/duckdb/pull/7644)** DuckDB's streaming execution engine has a low memory footprint, but more memory is required for operations such as grouped aggregation. The memory footprint of these operations can be reduced by compression. DuckDB already uses [many compression techniques in its storage format](/2022/10/28/lightweight-compression.html), but many of these techniques are too costly to use during query execution. However, certain lightweight compression techniques are so cheap that the benefit of the reducing memory footprint outweight the cost of (de)compression.
+**[Compressed Materialization.](https://github.com/duckdb/duckdb/pull/7644)** DuckDB's streaming execution engine has a low memory footprint, but more memory is required for operations such as grouped aggregation. The memory footprint of these operations can be reduced by compression. DuckDB already uses [many compression techniques in its storage format]({% post_url 2022-10-28-lightweight-compression %}), but many of these techniques are too costly to use during query execution. However, certain lightweight compression techniques are so cheap that the benefit of the reducing memory footprint outweight the cost of (de)compression.
 
 In this release, we add support for compression of strings and integer types right before data goes into the grouped aggregation and sorting operators. By using statistics, both types are compressed to the smallest possible integer type. For example, if we have the following table:
 
@@ -98,6 +101,7 @@ In this release, we add support for compression of strings and integer types rig
 The `id` column uses a 32-bit integer. From our statistics we know that the minimum value is 300, and the maximum value is 304. We can subtract 300 and cast to an 8-bit integer instead, reducing the width from 4 bytes down to 1.
 
 The `name` column uses our internal string type, which is 16 bytes wide. However, our statistics tell us that the longest string here is only 7 bytes. We can fit this into a 64-bit integer like so:
+
 ```text
 alice   -> alice005
 bob     -> bob00003
@@ -107,6 +111,7 @@ trent   -> trent005
 ```
 
 This reduces the width from 16 bytes down to 8. To support sorting of compressed strings, we flip the bytes on big-endian machines so that our comparison operators are still correct:
+
 ```text
 alice005 -> 500ecila
 bob00003 -> 30000bob
@@ -121,7 +126,7 @@ By reducing the size of query intermediates, we can prevent/reduce spilling data
 
 ```sql
 SELECT
-    SUM(driver_pay) OVER (
+    sum(driver_pay) OVER (
         ORDER BY dropoff_datetime ASC
         RANGE BETWEEN
         INTERVAL 3 DAYS PRECEDING AND
@@ -164,13 +169,13 @@ In addition, due to improvements in the manner in which indexes are stored on di
 
 For example, in Python the following code snippet now works without needing to explicitly load the `httpfs` or `json` extensions.
 
-```py
+```python
 import duckdb
 
 duckdb.sql("FROM 'https://raw.githubusercontent.com/duckdb/duckdb/main/data/json/example_n.ndjson'")
 ```
 
-The set of autoloadable extensions is limited to official extensions distributed by DuckDB Labs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options](/docs/sql/configuration).
+The set of autoloadable extensions is limited to official extensions distributed by DuckDB Labs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options]({% link docs/configuration/overview.md %}).
 
 [**DuckDB-WASM Extensions**](https://github.com/duckdb/duckdb-wasm/pull/1403). This release adds support for loadable extensions to DuckDB-WASM. Previously, any extensions that you wanted to use with the WASM client had to be baked in. With this release, extensions can be loaded dynamically instead. When an extension is loaded, the WASM bundle is downloaded and the functionality of the extension is enabled. Give it a try in our [WASM shell](https://shell.duckdb.org).
 
@@ -186,7 +191,7 @@ CALL load_aws_credentials();
 SELECT * FROM "s3://some-bucket/that/requires/authentication.parquet";
 ```
 
-[See the documentation for more information](/docs/extensions/aws).
+[See the documentation for more information]({% link docs/extensions/aws.md %}).
 
 [**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb_iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
@@ -195,7 +200,7 @@ SELECT count(*)
 FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
 ```
 
-[See the documentation for more information](/docs/extensions/iceberg).
+[See the documentation for more information]({% link docs/extensions/iceberg.md %}).
 
 [**Experimental Azure Extension**](https://github.com/duckdb/duckdb_azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 
@@ -204,14 +209,14 @@ SET azure_storage_connection_string = '<your_connection_string>';
 SELECT * FROM 'azure://<my_container>/*.csv';
 ```
 
-[See the documentation for more information](/docs/extensions/azure).
+[See the documentation for more information]({% link docs/extensions/azure.md %}).
 
 
 #### Clients
 
-[**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API](/docs/archive/0.8.1/api/python/relational_api) and executed using DuckDB's query engine.
+[**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API]({% link docs/api/python/relational_api.md %}) and executed using DuckDB's query engine.
 
-```py
+```python
 from duckdb.experimental.spark.sql import SparkSession as session
 from duckdb.experimental.spark.sql.functions import lit, col
 import pandas as pd
@@ -241,7 +246,7 @@ print(res)
 #]
 ```
 
-Note that the API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through Discord or on Github.
+Note that the API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through Discord or on GitHub.
 
 
 #### Final Thoughts

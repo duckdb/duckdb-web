@@ -1538,10 +1538,7 @@ function GenerateWindowSpec(options) {
 				Keyword("PARTITION BY"),
 				OneOrMore(Expression(), ",")
 			])),
-			Optional(Sequence([
-				Keyword("ORDER BY"),
-				GenerateOrderTerms()
-			])),
+			GenerateOrderBy(),
 			Expandable("frame-spec", options, "frame-spec", GenerateFrameSpec),
 		]),
 		Keyword(")")
@@ -1875,17 +1872,18 @@ function GenerateCommonTableExpression(options) {
 		]), "skip"),
 		Keyword("AS"),
 		Optional(Sequence([Optional(Keyword("NOT")), Keyword("MATERIALIZED")])),
-		Keyword("("),
-		Expression("select-node"),
-		Keyword(")")
+		Choice(0, [
+			Expression("select-node"),
+			Sequence([Keyword("("), Expression("select-node"), Keyword(")")])
+		])
 	]
 }
 
 function GenerateOrderBy(options) {
-	return [
+	return Optional(Sequence([
 		Keyword("ORDER BY"),
 		GenerateOrderTerms()
-	]
+	]))
 }
 
 function GenerateStarOptions(options) {
@@ -2007,7 +2005,7 @@ function GenerateWindowClause(options) {
 
 function GenerateLimitAndOrderBy(options) {
 	return [
-		Sequence(GenerateOrderBy(options)),
+		Sequence([GenerateOrderBy(options)]),
 		Optional(Sequence([
 			Keyword("LIMIT"),
 			Expression(),

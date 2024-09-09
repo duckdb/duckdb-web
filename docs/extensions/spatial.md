@@ -5,7 +5,7 @@ github_repository: https://github.com/duckdb/duckdb_spatial
 ---
 
 The `spatial` extension provides support for geospatial data processing in DuckDB.
-For an overview of the extension, see our [blog post](/2023/04/28/spatial).
+For an overview of the extension, see our [blog post]({% post_url 2023-04-28-spatial %}).
 
 ## Installing and Loading
 
@@ -20,11 +20,11 @@ LOAD spatial;
 
 The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar with geospatial data and GIS tooling, this type probably works very different from what you'd expect.
 
-In short, while the `GEOMETRY` type is a binary representation of "geometry" data made up out of sets of vertices (pairs of X and Y `double` precision floats), it actually stores one of several geometry subtypes. These are `POINT`, `LINESTRING`, `POLYGON`, as well as their "collection" equivalents, `MULTIPOINT`, `MULTILINESTRING` and `MULTIPOLYGON`. Lastly there is `GEOMETRYCOLLECTION`, which can contain any of the other subtypes, as well as other `GEOMETRYCOLLECTION`s recursively.
+In short, while the `GEOMETRY` type is a binary representation of “geometry” data made up out of sets of vertices (pairs of X and Y `double` precision floats), it actually stores one of several geometry subtypes. These are `POINT`, `LINESTRING`, `POLYGON`, as well as their “collection” equivalents, `MULTIPOINT`, `MULTILINESTRING` and `MULTIPOLYGON`. Lastly there is `GEOMETRYCOLLECTION`, which can contain any of the other subtypes, as well as other `GEOMETRYCOLLECTION`s recursively.
 
-This may seem strange at first, since DuckDB already have types like `LIST`, `STRUCT` and `UNION` which could be used in a similar way, but the design and behaviour of the `GEOMETRY` type is actually based on the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) geometry model, which is a standard used by many other databases and GIS software.
+This may seem strange at first, since DuckDB already have types like `LIST`, `STRUCT` and `UNION` which could be used in a similar way, but the design and behavior of the `GEOMETRY` type is actually based on the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) geometry model, which is a standard used by many other databases and GIS software.
 
-That said, the spatial extension also includes a couple of experimental non-standard explicit geometry types, such as `POINT_2D`, `LINESTRING_2D`, `POLYGON_2D` and `BOX_2D` that are based on DuckDBs native nested types, such as structs and lists. In theory it should be possible to optimize a lot of operations for these types much better than for the `GEOMETRY` type (which is just a binary blob), but only a couple functions are implemented so far. 
+That said, the spatial extension also includes a couple of experimental non-standard explicit geometry types, such as `POINT_2D`, `LINESTRING_2D`, `POLYGON_2D` and `BOX_2D` that are based on DuckDBs native nested types, such as structs and lists. In theory it should be possible to optimize a lot of operations for these types much better than for the `GEOMETRY` type (which is just a binary blob), but only a couple functions are implemented so far.
 
 All of these are implicitly castable to `GEOMETRY` but with a conversion cost, so the `GEOMETRY` type is still the recommended type to use for now if you are planning to work with a lot of different spatial functions.
 
@@ -34,17 +34,17 @@ All of these are implicitly castable to `GEOMETRY` but with a conversion cost, s
 
 The spatial extension implements a large number of scalar functions and overloads. Most of these are implemented using the [GEOS](https://libgeos.org/) library, but we'd like to implement more of them natively in this extension to better utilize DuckDB's vectorized execution and memory management. The following symbols are used to indicate which implementation is used:
 
-🧭 - GEOS - functions that are implemented using the [GEOS](https://libgeos.org/) library
+🧭 – GEOS – functions that are implemented using the [GEOS](https://libgeos.org/) library
 
-🦆 - DuckDB - functions that are implemented natively in this extension that are capable of operating directly on the DuckDB types
+🦆 – DuckDB – functions that are implemented natively in this extension that are capable of operating directly on the DuckDB types
 
-🔄 - `CAST(GEOMETRY)` - functions that are supported by implicitly casting to `GEOMETRY` and then using the `GEOMETRY` implementation
+🔄 – `CAST(GEOMETRY)` – functions that are supported by implicitly casting to `GEOMETRY` and then using the `GEOMETRY` implementation
 
 The currently implemented spatial functions can roughly be categorized into the following groups:
 
 ### Geometry Conversion
 
-Convert between geometries and other formats. 
+Convert between geometries and other formats.
 
 | Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
 |-----|---|--|--|--|---|
@@ -148,7 +148,7 @@ Compute relationships and spatial predicates between geometries.
 
 ## Spatial Table Functions
 
-### `ST_Read()` - Read Spatial Data from Files
+### `ST_Read()` – Read Spatial Data from Files
 
 The spatial extension provides a `ST_Read` table function based on the [GDAL](https://github.com/OSGeo/gdal) translator library to read spatial data from a variety of geospatial vector file formats as if they were DuckDB tables. For example to create a new table from a GeoJSON file, you can use the following query:
 
@@ -179,7 +179,7 @@ ST_Read(
 * `allowed_drivers` (default: `[]`): A list of GDAL driver names that are allowed to be used to open the file. If empty, all drivers are allowed.
 * `sibling_files` (default: `[]`): A list of sibling files that are required to open the file. E.g., the `ESRI Shapefile` driver requires a `.shx` file to be present. Although most of the time these can be discovered automatically.
 * `spatial_filter_box` (default: `NULL`): If set to a `BOX_2D`, the table function will only return rows that intersect with the given bounding box. Similar to `spatial_filter`.
-* `keep_wkb` (default: `false`): If set, the table function will return geometries in a `wkb_geometry` column with the type `WKB_BLOB` (which can be cast to `BLOB`) instead of `GEOMETRY`. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesnt support representing in the `GEOMETRY` type yet.
+* `keep_wkb` (default: `false`): If set, the table function will return geometries in a `wkb_geometry` column with the type `WKB_BLOB` (which can be cast to `BLOB`) instead of `GEOMETRY`. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesn't support representing in the `GEOMETRY` type yet.
 
 Note that GDAL is single-threaded, so this table function will not be able to make full use of parallelism. We're planning to implement support for the most common vector formats natively in this extension with additional table functions in the future.
 
@@ -193,7 +193,7 @@ We currently support over 50 different formats. You can generate the following t
 | LVBAG          | Kadaster LV BAG Extract 2.0                         | false      | false    | true     | <https://gdal.org/drivers/vector/lvbag.html>         |
 | S57            | IHO S-57 (ENC)                                      | true       | false    | true     | <https://gdal.org/drivers/vector/s57.html>           |
 | DGN            | Microstation DGN                                    | true       | false    | true     | <https://gdal.org/drivers/vector/dgn.html>           |
-| OGR_VRT        | VRT - Virtual Datasource                            | false      | false    | true     | <https://gdal.org/drivers/vector/vrt.html>           |
+| OGR_VRT        | VRT – Virtual Datasource                            | false      | false    | true     | <https://gdal.org/drivers/vector/vrt.html>           |
 | Memory         | Memory                                              | true       | false    | true     |                                                      |
 | CSV            | Comma Separated Value (.csv)                        | true       | false    | true     | <https://gdal.org/drivers/vector/csv.html>           |
 | GML            | Geography Markup Language (GML)                     | true       | false    | true     | <https://gdal.org/drivers/vector/gml.html>           |
@@ -218,7 +218,7 @@ We currently support over 50 different formats. You can generate the following t
 | OSM            | OpenStreetMap XML and PBF                           | false      | false    | true     | <https://gdal.org/drivers/vector/osm.html>           |
 | GPSBabel       | GPSBabel                                            | true       | false    | true     | <https://gdal.org/drivers/vector/gpsbabel.html>      |
 | WFS            | OGC WFS (Web Feature Service)                       | false      | false    | true     | <https://gdal.org/drivers/vector/wfs.html>           |
-| OAPIF          | OGC API - Features                                  | false      | false    | true     | <https://gdal.org/drivers/vector/oapif.html>         |
+| OAPIF          | OGC API – Features                                  | false      | false    | true     | <https://gdal.org/drivers/vector/oapif.html>         |
 | EDIGEO         | French EDIGEO exchange format                       | false      | false    | true     | <https://gdal.org/drivers/vector/edigeo.html>        |
 | SVG            | Scalable Vector Graphics                            | false      | false    | true     | <https://gdal.org/drivers/vector/svg.html>           |
 | ODS            | Open Document/ LibreOffice / OpenOffice Spreadsheet | true       | false    | true     | <https://gdal.org/drivers/vector/ods.html>           |
@@ -239,12 +239,12 @@ We currently support over 50 different formats. You can generate the following t
 | AVCBin         | Arc/Info Binary Coverage                            | false      | false    | true     | <https://gdal.org/drivers/vector/avcbin.html>        |
 | AVCE00         | Arc/Info E00 (ASCII) Coverage                       | false      | false    | true     | <https://gdal.org/drivers/vector/avce00.html>        |
 
-Note that far from all of these drivers have been tested properly, and some may require additional options to be passed to work as expected. 
+Note that far from all of these drivers have been tested properly, and some may require additional options to be passed to work as expected.
 If you run into any issues please first [consult the GDAL docs](https://gdal.org/drivers/vector/index.html).
 
-### `ST_ReadOsm()` - Read Compressed OSM Data
+### `ST_ReadOsm()` – Read Compressed OSM Data
 
-The spatial extension also provides an experimental `ST_ReadOsm()` table function to read compressed OSM data directly from a `.osm.pbf` file. 
+The spatial extension also provides an experimental `ST_ReadOsm()` table function to read compressed OSM data directly from a `.osm.pbf` file.
 
 This will use multithreading and zero-copy protobuf parsing which makes it a lot faster than using the `st_read()` `OSM` driver, but it only outputs the raw OSM data (Nodes, Ways, Relations), without constructing any geometries.
 For node entities you can trivially construct `POINT` geometries, but it is also possible to construct `LINESTRING` AND `POLYGON` by manually joining refs and nodes together in SQL.
@@ -258,6 +258,8 @@ WHERE tags['highway'] != []
 LIMIT 5;
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | kind |   id   |                                                                      tags                                                                                   | refs |        lat         |    lon     | ref_roles | ref_types |
 |------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|------|--------------------|------------|-----------|-----------|
 | node | 122351 | {bicycle=yes, button_operated=yes, crossing=traffic_signals, highway=crossing, tactile_paving=no, traffic_signals:sound=yes, traffic_signals:vibration=yes} | NULL | 53.5492951         | 9.977553   | NULL      | NULL      |
@@ -268,7 +270,7 @@ LIMIT 5;
 
 ## Spatial Replacement Scans
 
-The spatial extension also provides "replacement scans" for common geospatial file formats, allowing you to query files of these formats as if they were tables.
+The spatial extension also provides “replacement scans” for common geospatial file formats, allowing you to query files of these formats as if they were tables.
 
 ```sql
 SELECT * FROM './path/to/some/shapefile/dataset.shp';
@@ -286,7 +288,7 @@ Similarly there is a `.osm.pbf` replacement scan for `ST_ReadOsm`.
 
 ## Spatial Copy Functions
 
-Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export duckdb tables to different geospatial vector formats.
+Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export DuckDB tables to different geospatial vector formats.
 For example to export a table to a GeoJSON file, with generated bounding boxes, you can use the following query:
 
 ```sql

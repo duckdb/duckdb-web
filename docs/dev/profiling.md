@@ -26,8 +26,8 @@ The `EXPLAIN` statement displays the physical plan, i.e., the query plan that wi
 To demonstrate, see the below example:
 
 ```sql
-CREATE TABLE students (name VARCHAR, sid INT);
-CREATE TABLE exams (eid INT, subject VARCHAR, sid INT);
+CREATE TABLE students (name VARCHAR, sid INTEGER);
+CREATE TABLE exams (eid INTEGER, subject VARCHAR, sid INTEGER);
 INSERT INTO students VALUES ('Mark', 1), ('Joe', 2), ('Matthew', 3);
 INSERT INTO exams VALUES (10, 'Physics', 1), (20, 'Chemistry', 2), (30, 'Literature', 3);
 EXPLAIN SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
@@ -160,11 +160,10 @@ It is also possible to save the query plan to a file, e.g., in JSON format:
 ```sql
 -- All queries performed will be profiled, with output in json format.
 -- By default the result is still printed to stdout.
-PRAGMA enable_profiling='json';
+PRAGMA enable_profiling = 'json';
 -- Instead of writing to stdout, write the profiling output to a specific file on disk.
--- This has no effect for `EXPLAIN ANALYZE` queries, which will *always* be
--- returned as query results.
-PRAGMA profile_output='/path/to/file.json';
+-- This has no effect for `EXPLAIN ANALYZE` queries, which will *always* be returned as query results.
+PRAGMA profile_output = '/path/to/file.json';
 ```
 
 > This file is overwritten with each query that is issued. If you want to store the profile output for later it should be copied to a different file.

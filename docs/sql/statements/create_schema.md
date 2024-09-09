@@ -8,15 +8,28 @@ The `CREATE SCHEMA` statement creates a schema in the catalog. The default schem
 
 ## Examples
 
+Create a schema:
+
 ```sql
--- create a schema
 CREATE SCHEMA s1;
--- create a schema if it does not exist yet
+```
+
+Create a schema if it does not exist yet:
+
+```sql
 CREATE SCHEMA IF NOT EXISTS s2;
--- create table in the schemas
+```
+
+Create table in the schemas:
+
+```sql
 CREATE TABLE s1.t (id INTEGER PRIMARY KEY, other_id INTEGER);
 CREATE TABLE s2.t (id INTEGER PRIMARY KEY, j VARCHAR);
--- compute a join between tables from two schemas
+```
+
+Compute a join between tables from two schemas:
+
+```sql
 SELECT *
 FROM s1.t s1t, s2.t s2t
 WHERE s1t.other_id = s2t.id;

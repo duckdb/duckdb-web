@@ -1,21 +1,20 @@
 # Contributing
 
-- [Contributing](#contributing)
-  - [Code of Conduct](#code-of-conduct)
-  - [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
-  - [Eligibility](#eligibility)
-  - [Adding a New Page](#adding-a-new-page)
-  - [Style Guide](#style-guide)
-    - [Formatting](#formatting)
-    - [Headers](#headers)
-    - [SQL Style](#sql-style)
-    - [Python Style](#python-style)
-    - [Links](#links)
-    - [Spelling](#spelling)
-  - [Example Code Snippets](#example-code-snippets)
-  - [Cross-References](#cross-references)
-  - [Achive and Generated Pages](#achive-and-generated-pages)
-  - [Notice](#notice)
+* [Contributing](#contributing)
+  * [Code of Conduct](#code-of-conduct)
+  * [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
+  * [Eligibility](#eligibility)
+  * [Adding a New Page](#adding-a-new-page)
+  * [Style Guide](#style-guide)
+    * [Formatting](#formatting)
+    * [Headers](#headers)
+    * [SQL Style](#sql-style)
+    * [Python Style](#python-style)
+    * [Spelling](#spelling)
+  * [Example Code Snippets](#example-code-snippets)
+  * [Cross-References](#cross-references)
+  * [Archive and Generated Pages](#archive-and-generated-pages)
+  * [Notice](#notice)
 
 ## Code of Conduct
 
@@ -37,13 +36,16 @@ Before submitting a contribution, please check whether your contribution is elig
 Thank you for contributing to the DuckDB documentation!
 
 Each new page requires at least 2 edits:
+
 * Create new Markdown file (using the `snake_case` naming convention). Please follow the format of another `.md` file in the `docs` folder.
 * Add a link to the new page within `_data/menu_docs_dev.json`. This populates the dropdown menus.
 
 The addition of a new guide requires one additional edit:
-* Add a link to the new page within the Guides landing page: `docs/guides/index.md`
+
+* Add a link to the new page within the Guides landing page: `docs/guides/overview.md`
 
 Before creating a pull request, please perform the following steps:
+
 * Preview your changes in the browser using the [site build guide](BUILDING.md).
 * Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for markdownlint.
 
@@ -59,14 +61,24 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
 * Do not hard-wrap lines in blocks of text.
-* Format code blocks with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`).
-* To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT HERE \`\`\`.
+* Format code blocks with the appropriate language (e.g., \`\`\`sql CODE\`\`\`).
+* For a SQL code block to start with DuckDB's `D` prompt, use the `plsql` language tag (e.g., \`\`\`plsql CODE\`\`\`). This uses the same syntax highlighter as SQL, the only difference is the presence of the `D` prompt.
+* Code blocks using the `bash` language tag automatically receive `$` prompt when rendered. To typeset a Bash code block without a prompt, use the `batch` language tag (e.g., \`\`\`batch CODE\`\`\`). This uses the same syntax highlighter as Bash, the only difference is the absence of the prompt.
+* To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT\`\`\`.
+* To display error messages, use \`\`\`console ERROR MESSAGE\`\`\`.
 * Quoted blocks (lines starting with `>`) are rendered as [a colored box](https://duckdb.org/docs/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`.
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `).
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
 * Narrow tables – that do not span horizontally across the entire page – should be prepended with an empty div that has the `narrow_table` class: `<div class="narrow_table"></div>`.
 * Do not introduce hard line breaks if possible. Therefore, avoid using the `<br/>` HTML tag and avoid [double spaces at the end of a line in Markdown](https://spec.commonmark.org/0.28/#hard-line-breaks).
+* Single and double quote characters (`'` and `"`) are not converted to smart quotation marks automatically. To insert these, use `“` `”` and `‘` `’`.
+* When referencing other articles, put their titles in quotes, e.g., `see the [“Lightweight Compression in DuckDB” blog post]({% post_url 2022-10-28-lightweight-compression %})`.
+* For unordered lists, use `*`. If the list has multiple levels, use **4 spaces** for indentation.
+
+> [!TIP]
+> In VS Code, you can configure the [Markdown All in One extension](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) to use asterisk as the default marker when generating a table of content for a page using the following setting in `settings.json`:
+> `"markdown.extension.toc.unorderedList.marker": "*"`
 
 ### Headers
 
@@ -88,25 +100,25 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
 * The returned tables should be formatted using the DuckDB CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`).
 * Output printed on the system console (e.g., in Python) and system messages (e.g., errors) should be formatted as code with the `text` language tag. For example:
-    ````
-    ```text
-    Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
-    ```
-    ````
-* To specify placeholders, use the left angle `⟨` and right angle `⟩` characters instead of the artihmetic comparison characters `<` and `>`. For example: `SELECT * FROM ⟨your_table_name⟩`.
+   ````
+   ```text
+   Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
+   ```
+   ````
+* To specify placeholders (or template-style code), use the left angle and right angle characters, `⟨` and `⟩`
+     * For example: `SELECT * FROM ⟨your_table_name⟩`.
+     * These characters are known in LaTeX code as `\langle` and `\rangle`.
+     * *Avoid* using artihmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
 
 ### Python Style
 
 * Use **4 spaces** for indentation.
 * Use double quotes (`"`) by default for strings.
 
-### Links
-
-* Please avoid using the term "here" for links (e.g., "for more details, click [here](https://example.org/)" should be avoided). For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
-
 ### Spelling
 
 * Use [American English (en-US) spelling](https://en.wikipedia.org/wiki/Oxford_spelling#Language_tag_comparison).
+* Avoid using the Oxford comma.
 
 ## Example Code Snippets
 
@@ -116,19 +128,21 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 ## Cross-References
 
 * Where applicable, add cross-references to relevant other pages in the documentation.
-* Use descriptive links:
-    * :white_check_mark: ```see [the `COPY` statement](../../sql/statements/copy)```
-    * :x: `see [here](../../sql/statements/copy)`
-* Use relative URLs without the `.html` extension:
-    * :white_check_mark: `../../sql/statements/copy`
-    * :x: `../../sql/statements/copy.html`
-    * :x: `/docs/sql/statements/copy`
-    * :x: `https://duckdb.org/docs/sql/statements/copy`
+* Use Jekyll's [link tags](https://jekyllrb.com/docs/liquid/tags/#link) to link to pages.
+    * For example, to link to the Example section on the `SELECT` statement's page, use `{% link docs/sql/statements/select.md %}#examples`.
+    * Link tags ensure that the documentation is only compiled and deployed if links point to existing pages.
+    * Note that the paths must contain the correct extension (most often `.md`) and they must be relative to the repository root.
+    * :x: ```see [the `SELECT` statement](../../sql/statements/select)```
+    * :white_check_mark: ```see [the `SELECT` statement]({% link docs/sql/statements/select.md %})```
+* Avoid using the term "here" for links. For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
+    * :x: `see [here]({% link docs/sql/statements/copy.md %}#copy-from)`
+    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
 * Reference a specific section when possible:
-    * :white_check_mark: `../../sql/statements/copy#copy-from`
-* Do **not** link related GitHub issues/discussions. This allows the documentation to be self-contained.
+    * :x: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %})```
+    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
+* In most cases, linking related GitHub issues/discussions is discouraged. This allows the documentation to be self-contained.
 
-## Achive and Generated Pages
+## Archive and Generated Pages
 
 * The archive pages (e.g., <https://duckdb.org/docs/archive/0.8.1/>) contain documentation for old versions of DuckDB. In general, we do not accept contributions to these pages – please target the latest version of the page when submitting your contributions.
 * Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Do not edit the generated content, instead, edit the source files (often found in the [`duckdb` repository](https://github.com/duckdb/duckdb)).

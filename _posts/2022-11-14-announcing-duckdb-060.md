@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Announcing DuckDB 0.6.0"
+title: "Announcing DuckDB 0.6.0"
 author: Mark Raasveldt
 excerpt: ""
 ---
@@ -12,7 +12,7 @@ excerpt: ""
 
 The DuckDB team is happy to announce the latest DuckDB version (0.6.0) has been released. This release of DuckDB is named "Oxyura" after the [White-headed duck (Oxyura leucocephala)](https://en.wikipedia.org/wiki/White-headed_duck) which is an endangered species native to Eurasia.
 
-To install the new version, please visit the [installation guide](https://duckdb.org/docs/installation/index). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.6.0).
+To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.6.0).
 
 <!--more-->
 
@@ -22,24 +22,24 @@ The new release contains many improvements to the storage system, general perfor
 
 #### Storage Improvements
 
-As we are working towards stabilizing the storage format and moving towards version 1.0, we have been actively working on improving our storage format, including many [compression improvements](https://duckdb.org/2022/10/28/lightweight-compression.html). 
+As we are working towards stabilizing the storage format and moving towards version 1.0, we have been actively working on improving our storage format, including many [compression improvements]({% post_url 2022-10-28-lightweight-compression %}). 
 
 **Optimistic writing to disk.** In previous DuckDB versions, the data of a single transaction was first loaded into memory, and would only be written to disk on a commit. While this works fine when data is loaded in batches that fit in memory, it does not work well when loading a lot of data in a single transaction, such as when ingesting one very large file into the system.
 
 This version introduces [optimistic writing to disk](https://github.com/duckdb/duckdb/pull/4996). When loading large data sets in a single transaction, data is compressed and streamed to the database file, even before the `COMMIT` has occurred. When the transaction is committed, the data will already have been written to disk, and no further writing has to happen. On a rollback, any optimistically written data is reclaimed by the system. 
 
-**Parallel data loading**. In addition to optimistically writing data to disk, this release includes support for parallel data loading into individual tables. This greatly improves performance of data loading on machines that have multiple cores (i.e. all modern machines).
+**Parallel data loading**. In addition to optimistically writing data to disk, this release includes support for parallel data loading into individual tables. This greatly improves performance of data loading on machines that have multiple cores (i.e., all modern machines).
 
 Below is a benchmark comparing loading time of 150 million rows of the Taxi dataset from a Parquet file on an M1 Max with 10 cores:
 
 | Version | Load Time |
-|---------|-----------|
-| v0.5.1  | 91.4s     |
-| v0.6.0  | 17.2s     |
+|---------|----------:|
+| v0.5.1  | 91.4 s    |
+| v0.6.0  | 17.2 s    |
 
-DuckDB supports two modes - the [`order-preserving`](https://github.com/duckdb/duckdb/pull/5082) and the [`non-order-preserving`](https://github.com/duckdb/duckdb/pull/5033) parallel data load.
+DuckDB supports two modes – the [`order-preserving`](https://github.com/duckdb/duckdb/pull/5082) and the [`non-order-preserving`](https://github.com/duckdb/duckdb/pull/5033) parallel data load.
 
-The order-preserving load preserves the insertion order so that e.g. the first line in your CSV file is the first line in the DuckDB table. The non-order-preserving load does not offer such guarantees - and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order=false` statement.
+The order-preserving load preserves the insertion order so that e.g., the first line in your CSV file is the first line in the DuckDB table. The non-order-preserving load does not offer such guarantees – and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order = false` statement.
 
 #### Compression Improvements
 
@@ -47,11 +47,11 @@ The order-preserving load preserves the insertion order so that e.g. the first l
 
 The compression ratio improvements of the TPC-H SF1 dataset are shown below:
 
-|    Compression    | Size  |
-|-------------------|-------|
-| Uncompressed      | 761MB |
-| Dictionary        | 510MB |
-| FSST + Dictionary | 251MB |
+|    Compression    | Size   |
+|-------------------|-------:|
+| Uncompressed      | 761 MB |
+| Dictionary        | 510 MB |
+| FSST + Dictionary | 251 MB |
 
 **Chimp**. The [Chimp compression algorithm](https://github.com/duckdb/duckdb/pull/4878) is included, which is the state-of-the-art in lightweight floating point compression. Chimp is an improved version of Gorillas, that achieves both a better compression ratio as well as faster decompression speed.
 
@@ -59,29 +59,29 @@ The compression ratio improvements of the TPC-H SF1 dataset are shown below:
 
 The compression ratio of a dataset containing temperatures of cities stored as double (8-byte floating point numbers) is shown below:
 
-|    Compression    | Size  |
-|-------------------|------:|
-| Uncompressed      | 25.4MB |
-| Chimp        | 9.7MB |
-| Patas | 10.2MB |
+|    Compression    | Size    |
+|-------------------|--------:|
+| Uncompressed      | 25.4 MB |
+| Chimp             |  9.7 MB |
+| Patas             | 10.2 MB |
 
 #### Performance Improvements
 
 DuckDB aims to have very high performance for a wide variety of workloads. As such, we are always working to improve performance for various workloads. This release is no different.
 
 
-**Parallel CSV Loading (Experimental)**. In this release we are launching [a new experimental parallel CSV reader](https://github.com/duckdb/duckdb/pull/5194). This greatly improves the ingestion speed of large CSV files into the system. While we have done our best to make the parallel CSV reader robust - CSV parsing is a minefield as there is such a wide variety of different files out there - so we have marked the reader as experimental for now.
+**Parallel CSV Loading (Experimental)**. In this release we are launching [a new experimental parallel CSV reader](https://github.com/duckdb/duckdb/pull/5194). This greatly improves the ingestion speed of large CSV files into the system. While we have done our best to make the parallel CSV reader robust – CSV parsing is a minefield as there is such a wide variety of different files out there – so we have marked the reader as experimental for now.
 
 The parallel CSV reader can be enabled by setting the `experimental_parallel_csv` flag to true. We aim to make the parallel CSV reader the default reader in future DuckDB versions.
 
 ```sql
-SET experimental_parallel_csv=true;
+SET experimental_parallel_csv = true;
 ```
 
-Below is the load time of a 720MB CSV file containing the `lineitem` table from the `TPC-H` benchmark, 
+Below is the load time of a 720 MB CSV file containing the `lineitem` table from the `TPC-H` benchmark, 
 
 |     Variant     | Load Time |
-|-----------------|-----------|
+|-----------------|----------:|
 | Single Threaded | 3.5s      |
 | Parallel        | 0.6s      |
 
@@ -90,15 +90,15 @@ Below is the load time of a 720MB CSV file containing the `lineitem` table from 
 The timings of creating an index on a single column with 16 million values is shown below.
 
 | Version | Create Index Time |
-|---------|-----------|
-| v0.5.1  | 5.92s     |
-| v0.6.0  | 1.38s     |
+|---------|------------------:|
+| v0.5.1  |        5.92 s     |
+| v0.6.0  |        1.38 s     |
 
-**Parallel COUNT(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g. `COUNT(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DuckDB can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
+**Parallel count(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g., `count(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DuckDB can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
 
 #### SQL Syntax Improvements
 
-SQL is the primary way of interfacing with DuckDB - and DuckDB [tries to have an easy to use SQL dialect](https://duckdb.org/2022/05/04/friendlier-sql.html). This release contains further improvements to the SQL dialect.
+SQL is the primary way of interfacing with DuckDB – and DuckDB [tries to have an easy to use SQL dialect]({% post_url 2022-05-04-friendlier-sql %}). This release contains further improvements to the SQL dialect.
 
 **UNION Type**. This release introduces the [UNION type](https://github.com/duckdb/duckdb/pull/4966), which allows sum types to be stored and queried in DuckDB. For example:
 
@@ -106,9 +106,10 @@ SQL is the primary way of interfacing with DuckDB - and DuckDB [tries to have an
 CREATE TABLE messages(u UNION(num INT, error VARCHAR));
 INSERT INTO messages VALUES (42);
 INSERT INTO messages VALUES ('oh my globs');
-```
-```text
 SELECT * FROM messages;
+```
+
+```text
 ┌─────────────┐
 │      u      │
 ├─────────────┤
@@ -117,9 +118,9 @@ SELECT * FROM messages;
 └─────────────┘
 ```
 
-Sum types are strongly typed - but they allow a single value in a table to be represented as one of various types. The [union page](https://duckdb.org/docs/sql/data_types/union) in the documentation contains more information on how to use this new composite type.
+Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page]({% link docs/sql/data_types/union.md %}) in the documentation contains more information on how to use this new composite type.
 
-**FROM-first**. Starting with this release, DuckDB supports starting queries with the [FROM clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
+**FROM-first**. Starting with this release, DuckDB supports starting queries with the [`FROM` clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
 
 ```sql
 -- SELECT clause is optional, SELECT * is implied (if not included)
@@ -135,12 +136,12 @@ FROM tbl SELECT l_orderkey;
 INSERT INTO tbl2 FROM tbl1;
 ```
 
-**COLUMNS Expression**. This release adds support for [the `COLUMNS` expression](https://github.com/duckdb/duckdb/pull/5120), inspired by [the Clickhouse syntax](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression). The `COLUMNS` expression allows you to execute expressions or functions on multiple columns without having to duplicate the full expression.
+**COLUMNS Expression**. This release adds support for [the `COLUMNS` expression](https://github.com/duckdb/duckdb/pull/5120), inspired by [the ClickHouse syntax](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression). The `COLUMNS` expression allows you to execute expressions or functions on multiple columns without having to duplicate the full expression.
 
 ```sql
 CREATE TABLE obs(id INT, val1 INT, val2 INT);
 INSERT INTO obs VALUES (1, 10, 100), (2, 20, NULL), (3, NULL, 300);
-SELECT MIN(COLUMNS(*)), COUNT(*) from obs;
+SELECT min(COLUMNS(*)), count(*) from obs;
 ```
 ```text
 ┌─────────────┬───────────────┬───────────────┬──────────────┐
@@ -150,7 +151,7 @@ SELECT MIN(COLUMNS(*)), COUNT(*) from obs;
 └─────────────┴───────────────┴───────────────┴──────────────┘
 ```
 
-The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax](https://duckdb.org/docs/sql/query_syntax/select). In addition, the `COLUMNS` expression can take a regular expression as parameter:
+The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax]({% link docs/sql/query_syntax/select.md %}). In addition, the `COLUMNS` expression can take a regular expression as parameter:
 
 ```sql
 SELECT COLUMNS('val[0-9]+') from obs;
@@ -182,12 +183,12 @@ Nested types and structures are very efficiently implemented in DuckDB, and are 
 
 #### Memory Management Improvements
 
-When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques, and has support for an [efficient out-of-core sort](https://duckdb.org/2021/08/27/external-sorting.html), [out-of-core window functions](https://duckdb.org/2021/10/13/windowing.html) and [an out-of-core hash join](https://github.com/duckdb/duckdb/pull/4189).
+When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques, and has support for an [efficient out-of-core sort]({% post_url 2021-08-27-external-sorting %}), [out-of-core window functions]({% post_url 2021-10-13-windowing %}) and [an out-of-core hash join](https://github.com/duckdb/duckdb/pull/4189).
 
 This release further improves on that by greatly optimizing the [out-of-core hash join](https://github.com/duckdb/duckdb/pull/4970), resulting in a much more graceful degradation in performance as the data exceeds the memory limit.
 
 | Memory limit (GB) | Old time (s) | New time (s) |
-|:-|:-|:-|
+|--:|--:|--:|
 |10|1.97|1.96|
 |9|1.97|1.97|
 |8|2.23|2.22|
@@ -211,9 +212,10 @@ The DuckDB shell also offers several improvements over the SQLite shell, such as
 
 The number of rows that are rendered can be changed by using the `.maxrows X` setting, and you can switch back to the old rendering using the `.mode box` command.
 
-```sql
-D SELECT * FROM '~/Data/nyctaxi/nyc-taxi/2014/04/data.parquet';
+```plsql
+SELECT * FROM '~/Data/nyctaxi/nyc-taxi/2014/04/data.parquet';
 ```
+
 ```text
 ┌───────────┬─────────────────────┬─────────────────────┬───┬────────────┬──────────────┬──────────────┐
 │ vendor_id │      pickup_at      │     dropoff_at      │ … │ tip_amount │ tolls_amount │ total_amount │
@@ -267,9 +269,9 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 
 **Progress Bars**. DuckDB has [supported progress bars in queries for a while now](https://github.com/duckdb/duckdb/pull/1432), but they have always been opt-in. In this release we have [prettied up the progress bar](https://github.com/duckdb/duckdb/pull/5187) and enabled it by default in the shell. The progress bar will pop up when a query is run that takes more than 2 seconds, and display an estimated time-to-completion for the query.
 
-```sql
-D copy lineitem to 'lineitem-big.parquet';
- 32% ▕███████████████████▏                                        ▏ 
+```plsql
+COPY lineitem TO 'lineitem-big.parquet';
+   32% ▕███████████████████▏                                        ▏ 
 ```
 
 In the future we aim to enable the progress bar by default in other clients. For now, this can be done manually by running the following SQL queries:

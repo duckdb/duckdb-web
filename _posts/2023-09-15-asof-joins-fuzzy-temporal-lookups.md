@@ -17,16 +17,15 @@ Then this post is for you!
 
 ## What is an AsOf Join?
 
-Time series data is not always perfectly aligned. 
+Time series data is not always perfectly aligned.
 Clocks may be slightly off, or there may be a delay between cause and effect.
 This can make connecting two sets of ordered data challenging.
 AsOf Joins are a tool for solving this and other similar problems.
 
-One of the problems that AsOf Joins are used to solve is 
+One of the problems that AsOf Joins are used to solve is
 finding the value of a varying property at a specific point in time.
 This use case is so common that it is where the name came from:
-
-> Give me the value of the property *as of this time*
+_Give me the value of the property **as of this time.**_
 
 More generally, however, AsOf joins embody some common temporal analytic semantics,
 which can be cumbersome and slow to implement in standard SQL.
@@ -87,12 +86,12 @@ This attaches the value of the holding at that time to each row:
 | GOOG   | 2001-01-01 00:00:30 | 23.45 |
 | GOOG   | 2001-01-01 00:01:30 | 21.16 |
 
-It essentially executes a function defined by looking up nearby values in the `prices` table. 
+It essentially executes a function defined by looking up nearby values in the `prices` table.
 Note also that missing `ticker` values do not have a match and don't appear in the output.
 
 ### Outer AsOf Joins
 
-Because AsOf produces at most one match from the right hand side, 
+Because AsOf produces at most one match from the right hand side,
 the left side table will not grow as a result of the join,
 but it could shrink if there are missing times on the right.
 To handle this situation, you can use an *outer* AsOf Join:
@@ -130,9 +129,9 @@ These can both be fairly expensive operations, but the query would look like thi
 
 ```sql
 WITH state AS (
-  SELECT ticker, price, "when",
-    LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
-  FROM prices
+    SELECT ticker, price, "when",
+        lead("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+    FROM prices
 )
 SELECT h.ticker, h.when, price * shares AS value
 FROM holdings h INNER JOIN state s
@@ -184,7 +183,7 @@ AsOf can stop searching when it finds the first match because there is at most o
 
 You may be wondering why the Common Table Expression in the `WITH` clause was called *state*.
 This is because the `prices` table is really an example of what in temporal analytics is called an *event table* .
-The rows of an event table contain timestamps and what happened at that time (i.e. events).
+The rows of an event table contain timestamps and what happened at that time (i.e., events).
 The events in the `prices` table are changes to the price of a stock.
 Another common example of an event table is a structured log file:
 Each row of the log records when something "happened" – usually a change to a part of the system.
@@ -211,7 +210,7 @@ and using an `OR` like this in a join condition makes comparisons slow and hard 
 Moreover, if the ordering column is already using `NULL` to indicate missing values,
 this option is not available.
 
-For most state tables, there are suitable choices (e.g. large dates) 
+For most state tables, there are suitable choices (e.g., large dates) 
 but one of the advantages of AsOf is that it can avoid having to design a state table 
 if it is not needed for the analytic task.
 
@@ -234,7 +233,7 @@ The build side will just have four integer "timestamps" with alphabetic values:
 | 4 | d |
 
 The probe table will just be the time values plus the midpoints,
-and we can make a table showing what value each probe time matches 
+and we can make a table showing what value each probe time matches
 for greater than or equal to:
 
 <div class="narrow_table"></div>
@@ -294,7 +293,7 @@ One way to interpret this is that the times in the build table are the _end_ of 
 instead of the beginning.
 Also, unlike greater than or equal to,
 the interval is closed at the end instead of the beginning.
-Adding this to what we found for strictly greater than, 
+Adding this to what we found for strictly greater than,
 we can interpret this as meaning that the lookup times are part of the interval
 when non-strict inequalities are used.
 
@@ -340,7 +339,7 @@ and whether the time is include or excluded, we can choose the appropriate AsOf 
 ### Usage
 
 So far we have been explicit about specifying the conditions for AsOf,
-but SQL also has a simplified join condition syntax 
+but SQL also has a simplified join condition syntax
 for the common case where the column names are the same in both tables.
 This syntax uses the `USING` keyword to list the fields that should be compared for equality.
 AsOf also supports this syntax, but with two restrictions:
@@ -359,7 +358,7 @@ Be aware that if you don't explicitly list the columns in the `SELECT`,
 the ordering field value will be the probe value, not the build value.
 For a natural join, this is not an issue because all the conditions are equalities,
 but for AsOf, one side has to be chosen.
-Since AsOf can be viewed as a lookup function, 
+Since AsOf can be viewed as a lookup function,
 it is more natural to return the "function arguments" than the function internals.
 
 ### Under the Hood
@@ -373,9 +372,9 @@ Remember that we used this query to convert the event table to a state table:
 
 ```sql
 WITH state AS (
-  SELECT ticker, price, "when",
-    LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
-  FROM prices
+    SELECT ticker, price, "when",
+      lead("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+    FROM prices
 );
 ```
 
@@ -383,7 +382,7 @@ The state table CTE is created by hash partitioning the table on `ticker`,
 sorting on `when` and then computing another column that is just `when` shifted down by one.
 The join is then implemented with a hash join on `ticker` and two comparisons on `when`.
 
-If there was no `ticker` column (e.g. the prices were for a single item)
+If there was no `ticker` column (e.g., the prices were for a single item)
 then the join would be implemented using our inequality join operator,
 which would materialise and sort both sides because it doesn't know that the ranges are disjoint.
 
@@ -410,9 +409,9 @@ Other alternatives combine equi-joins and window functions.
 The equi-join is used to implement the equality matching conditions,
 and the window is used to select the closest inequality.
 We will now look at two different windowing techniques and compare their performance.
-If you wish to skip this section, 
+If you wish to skip this section,
 the bottom line is that while they are sometimes a bit faster,
-the AsOf join has the most consistent behaviour of all the algorithms.
+the AsOf join has the most consistent behavior of all the algorithms.
 
 ### Window as State Table
 
@@ -424,13 +423,13 @@ and the timestamps have been shifted to be halfway between the originals:
 
 ```sql
 CREATE OR REPLACE TABLE build AS (
-  SELECT k, '2001-01-01 00:00:00'::TIMESTAMP + INTERVAL (v) MINUTE AS t, v
-  FROM range(0,100000) vals(v), range(0,50) keys(k)
+    SELECT k, '2001-01-01 00:00:00'::TIMESTAMP + INTERVAL (v) MINUTE AS t, v
+    FROM range(0, 100_000) vals(v), range(0, 50) keys(k)
 );
 
 CREATE OR REPLACE TABLE probe AS (
-  SELECT k * 2 AS k, t - INTERVAL (30) SECOND AS t
-  FROM build
+    SELECT k * 2 AS k, t - INTERVAL (30) SECOND AS t
+    FROM build
 );
 ```
 
@@ -462,7 +461,7 @@ and the probe table looks like this (with only even values for k):
 The benchmark just does the join and sums up the `v` column:
 
 ```sql
-SELECT SUM(v)
+SELECT sum(v)
 FROM probe ASOF JOIN build USING(k, t);
 ```
 
@@ -472,13 +471,13 @@ but we can create the state table in a CTE again and use an inner join:
 ```sql
 -- Hash Join implementation
 WITH state AS (
-  SELECT k, 
-    t AS begin, 
-    v, 
-    LEAD(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
-  FROM build
+    SELECT k, 
+      t AS begin, 
+      v, 
+      lead(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
+    FROM build
 )
-SELECT SUM(v)
+SELECT sum(v)
 FROM probe p INNER JOIN state s 
   ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
 ```
@@ -503,17 +502,17 @@ The second benchmark tests the case where the probe side is about 10x smaller th
 
 ```sql
 CREATE OR REPLACE TABLE probe AS
-  SELECT k, 
-    '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
-  FROM range(0, 100000) tbl(k);
+    SELECT k, 
+      '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
+    FROM range(0, 100_000) tbl(k);
 
 CREATE OR REPLACE TABLE build AS
-  SELECT r % 100000 AS k, 
-    '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
-    (random() * 100000)::INTEGER AS v
-  FROM range(0, 1000000) tbl(r);
+    SELECT r % 100_000 AS k, 
+      '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
+      (random() * 100_000)::INTEGER AS v
+    FROM range(0, 1_000_000) tbl(r);
 
-SELECT SUM(v)
+SELECT sum(v)
 FROM probe p
 ASOF JOIN build b
   ON p.k = b.k
@@ -524,21 +523,21 @@ WITH state AS (
   SELECT k, 
     t AS begin, 
     v, 
-    LEAD(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
+    lead(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
   FROM build
 )
-SELECT SUM(v)
+SELECT sum(v)
 FROM probe p INNER JOIN state s
   ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
 ```
 
 <div class="narrow_table"></div>
 
-| Algorithm | Median of 5 |
-| :-------- | ----------: |
-| State Join | 0.065 | 
-| AsOf | 0.077 |
-| IEJoin | 49.508 |
+| Algorithm  | Median of 5 |
+| :--------- | ----------: |
+| State Join |       0.065 |
+| AsOf       |       0.077 |
+| IEJoin     |      49.508 |
 
 Now the runtime improvement of AsOf over IEJoin is huge (~500x)
 because it can leverage the partitioning to eliminate almost all of the equality mismatches.
@@ -555,18 +554,18 @@ Another way to use the window operator is to:
 * Filter to pairs where the build time is before the probe time
 * Partition the result on both the equality keys _and_ the probe timestamp
 * Sort the partitions on the build timestamp _descending_
-* Filter out all value except rank 1 (i.e. the largest build time <= the probe time)
+* Filter out all value except rank 1 (i.e., the largest build time <= the probe time)
 
 The query looks like:
 
 ```sql
 WITH win AS (
-  SELECT p.k, p.t, v,
-      rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC) AS r
-  FROM probe p INNER JOIN build b
-    ON p.k = b.k
-  AND p.t >= b.t
-  QUALIFY r = 1
+    SELECT p.k, p.t, v,
+        rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC) AS r
+    FROM probe p INNER JOIN build b
+      ON p.k = b.k
+    AND p.t >= b.t
+    QUALIFY r = 1
 ) 
 SELECT k, t, v
 FROM win;
@@ -586,13 +585,13 @@ The probe tables have either 1 or 15 timestamps per key:
 
 ```sql
 CREATE OR REPLACE TABLE probe15 AS
-	SELECT k, t
-	FROM range(10000) cs(k), 
-	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 26 DAY) ts(t);
+    SELECT k, t
+    FROM range(10_000) cs(k), 
+         range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 26 DAY) ts(t);
 
 CREATE OR REPLACE TABLE probe1 AS
-	SELECT k, '2022-01-01'::TIMESTAMP t
-	FROM range(10000) cs(k);
+    SELECT k, '2022-01-01'::TIMESTAMP t
+    FROM range(10_000) cs(k);
 ```
 
 The build tables are much larger and have approximately
@@ -601,21 +600,21 @@ The build tables are much larger and have approximately
 ```sql
 -- 10:1
 CREATE OR REPLACE TABLE build10 AS
-	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
-	FROM range(10000) ks(k), 
-	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 59 HOUR) ts(t);
+    SELECT k, t, (random() * 1000)::DECIMAL(7, 2) AS v
+    FROM range(10_000) ks(k), 
+         range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 59 HOUR) ts(t);
 
 -- 100:1
 CREATE OR REPLACE TABLE build100 AS
-	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
-	FROM range(10000) ks(k), 
-	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 350 MINUTE) ts(t);
+    SELECT k, t, (random() * 1000)::DECIMAL(7, 2) AS v
+    FROM range(10_000) ks(k), 
+         range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 350 MINUTE) ts(t);
 
 -- 1000:1
 CREATE OR REPLACE TABLE build1000 AS
-	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
-	FROM range(10000) ks(k), 
-	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 35 MINUTE) ts(t);
+    SELECT k, t, (random() * 1000)::DECIMAL(7, 2) AS v
+    FROM range(10_000) ks(k), 
+         range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 35 MINUTE) ts(t);
 ```
 
 The AsOf join queries are:
@@ -630,12 +629,12 @@ ORDER BY 1, 2;
 
 -- Rank
 WITH win AS (
-  SELECT p.k, p.t, v,
-      rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC)  AS r
-  FROM probe p INNER JOIN build b
-    ON p.k = b.k
-  AND p.t >= b.t
-  QUALIFY r = 1
+    SELECT p.k, p.t, v,
+        rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC)  AS r
+    FROM probe p INNER JOIN build b
+      ON p.k = b.k
+    AND p.t >= b.t
+    QUALIFY r = 1
 )
 SELECT k, t, v
 FROM win
@@ -649,13 +648,13 @@ The results are shown here:
      width="760"
 />
 
-(Median of 5 except for Rank/15/1000). 
+(Median of 5 except for Rank/15/1000).
 
 * For all ratios with 15 probes, AsOf is the most performant.
-* For small ratios with 15 probes, Rank beats IEJoin (both with windowing), but by 100:1 it is starting to explode. 
+* For small ratios with 15 probes, Rank beats IEJoin (both with windowing), but by 100:1 it is starting to explode.
 * For single element probes, Rank is most effective, but even there, its edge over AsOf is only about 50% at scale.
 
-This shows that AsOf could be possibly be improved upon, but predicting where that happens would be tricky, 
+This shows that AsOf could be possibly be improved upon, but predicting where that happens would be tricky,
 and getting it wrong would have enormous costs.
 
 ## Future Work
@@ -664,7 +663,7 @@ DuckDB can now execute AsOf joins for all inequality types with reasonable perfo
 In some cases, the performance gain is several orders of magnitude over the standard SQL versions –
 even with our fast inequality join operator.
 
-While the current AsOf operator is completely general, 
+While the current AsOf operator is completely general,
 there are a couple of planning optimisations that could be applied here.
 
 * When there are selective equality conditions, it is likely that a hash join with filtering against a materialised state table would be significantly faster. If we can detect this and suitable sentinel values are available, the planner could choose to use a hash join instead of the default AsOf implementation.
@@ -672,8 +671,8 @@ there are a couple of planning optimisations that could be applied here.
 
 Nevertheless, remember that one of the advantages of SQL is that it is a declarative language:  
 You specify *what* you want and leave it up to the database to figure out *how*.
-Now that we have defined the semantics of the AsOf join, 
-you the user can write queries saying this is *what* you want – and we are free to keep improving the *how*!   
+Now that we have defined the semantics of the AsOf join,
+you the user can write queries saying this is *what* you want – and we are free to keep improving the *how*!
 
 ## Happy Joining!
 

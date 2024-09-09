@@ -15,11 +15,11 @@ For ideal performance, aggregation-heavy workloads require approx. 5 GB memory p
 
 > Bestpractice Aim for 5-10 GB memory per thread.
 
-> Tip If you have a limited amount of memory, try to [limit the number of threads](../../configuration/pragmas#threads), e.g., by issuing `SET threads = 4;`.
+> Tip If you have a limited amount of memory, try to [limit the number of threads]({% link docs/configuration/pragmas.md %}#threads), e.g., by issuing `SET threads = 4;`.
 
 ### Disk
 
-DuckDB is capable of operating both as an in-memory and as a disk-based database system. In the latter case, it can spill to disk to process larger-than-memory workloads (a.k.a. out-of-core processing). In these cases, a fast disk is highly beneficial. However, if the workload fits in memory, the disk speed only has a limited effect on performance.
+DuckDB is capable of operating both as an in-memory and as a disk-based database system. In both cases, it can spill to disk to process larger-than-memory workloads (a.k.a. out-of-core processing) for which a fast disk is highly beneficial. However, if the workload fits in memory, the disk speed only has a limited effect on performance.
 
 In general, network-based storage will result in slower DuckDB workloads than using local disks.
 This includes network disks such as [NFS](https://en.wikipedia.org/wiki/Network_File_System),

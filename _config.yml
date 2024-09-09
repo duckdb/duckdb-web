@@ -16,15 +16,17 @@
 title: DuckDB
 email: quack@duckdb.org
 description: >- # this means to ignore newlines until "baseurl:"
-  DuckDB is an in-process database management system focused on analytical query processing. It is designed to be easy to install and easy to use. DuckDB has no external dependencies. DuckDB has bindings for C/C++, Python and R.
+  DuckDB is an in-process SQL database management system focused on analytical query processing. It is designed to be easy to install and easy to use. DuckDB has no external dependencies. DuckDB has bindings for C/C++, Python, R, Java, Node.js, Go and other languages.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. http://example.com
-# Set current Version of DuckDB
-currentshortduckdbversion: "0.10"
-currentduckdbversion: 0.10.1
-currentsnapshotversion: 0.10.2-dev
-currentjavaversion: 0.10.0
-nextjavaversion: 0.10.1  # for java snapshots
+# Set current version of DuckDB
+currentshortduckdbversion: "1.1"
+currentduckdbversion: 1.1.0
+currentduckdbhash: "fa5c2fe15f"
+currentsnapshotversion: 1.1.1-dev
+# Java
+currentjavaversion: 1.0.0
+nextjavaversion: 1.1.0  # for java snapshots, should always be the next minor version with a patch version of 0
 livereload: true
 highlighter: rouge
 incremental: false
@@ -33,6 +35,7 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  smart_quotes: ["apos", "apos", "quot", "quot"]
 theme: minima
 plugins:
   - jekyll-feed
@@ -47,13 +50,13 @@ excerpt_separator: <!--more-->
 future: true
 
 last-modified-at:
-    date-format: '%Y-%m-%d'
+  date-format: '%Y-%m-%d'
 
 twitter:
   username: DuckDB
   card: summary
-  
-github: 
+
+github:
   source:
     branch: main
   repository_url: "https://github.com/duckdb/duckdb-web"
@@ -79,7 +82,7 @@ repository: "duckdb/duckdb-web"
 #   - vendor/gems/
 #   - vendor/ruby/
 
-star_count: "14.4k"
+star_count: "20.0k"
 
 toc:
   min_level: 1

@@ -1,8 +1,8 @@
 ---
 layout: post  
-title:  "Friendlier SQL with DuckDB"
+title: "Friendlier SQL with DuckDB"
 author: Alex Monahan
-excerpt: ""
+excerpt: "DuckDB offers several extensions to the SQL syntax. For a full list of these features, see the [Friendly SQL documentation page](/docs/guides/sql_features/friendly_sql)."
 ---
 
 <img src="/images/blog/duck_chewbacca.png" alt="Chewbacca_the_duck" title="Chewbacca the duck is pretty friendly" width=200/>
@@ -12,7 +12,7 @@ An elegant user experience is a key design goal of DuckDB. This goal guides much
 However, SQL is not famous for being user-friendly. DuckDB aims to change that! DuckDB includes both a Relational API for dataframe-style computation, and a highly Postgres-compatible version of SQL. If you prefer dataframe-style computation, we would love your feedback on [our roadmap](https://github.com/duckdb/duckdb/issues/2000). If you are a SQL fan, read on to see how DuckDB is bringing together both innovation and pragmatism to make it easier to write SQL in DuckDB than anywhere else. Please reach out on [GitHub](https://github.com/duckdb/duckdb/discussions) or [Discord](https://discord.gg/vukK4xp7Rd) and let us know what other features would simplify your SQL workflows. Join us as we teach an old dog new tricks!
 <!--more-->
 
-### SELECT * EXCLUDE 
+### `SELECT * EXCLUDE`
 
 A traditional SQL `SELECT` query requires that requested columns be explicitly specified, with one notable exception: the `*` wildcard. `SELECT *` allows SQL to return all relevant columns. This adds tremendous flexibility, especially when building queries on top of one another. However, we are often interested in *almost* all columns. In DuckDB, simply specify which columns to `EXCLUDE`:
 
@@ -31,7 +31,7 @@ SELECT
 FROM star_wars sw, firefly ff;
 ```
 
-### SELECT * REPLACE
+### `SELECT * REPLACE`
 
 Similarly, we often wish to use all of the columns in a table, aside from a few small adjustments. This would also prevent the use of `*` and require a list of all columns, including those that remain unedited. In DuckDB, easily apply changes to a small number of columns with `REPLACE`:
 
@@ -40,11 +40,12 @@ SELECT
     * REPLACE (movie_count+3 AS movie_count, show_count*1000 AS show_count)
 FROM star_wars_owned_by_disney;
 ```
+
 This allows views, CTE's, or sub-queries to be built on one another in a highly concise way, while remaining adaptable to new underlying columns. 
 
-### GROUP BY ALL
+### `GROUP BY ALL`
 
-A common cause of repetitive and verbose SQL code is the need to specify columns in both the `SELECT` clause and the `GROUP BY` clause. In theory this adds flexibility to SQL, but in practice it rarely adds value. DuckDB now offers the `GROUP BY` we all expected when we first learned SQL - just `GROUP BY ALL` columns in the `SELECT` clause that aren't wrapped in an aggregate function!
+A common cause of repetitive and verbose SQL code is the need to specify columns in both the `SELECT` clause and the `GROUP BY` clause. In theory this adds flexibility to SQL, but in practice it rarely adds value. DuckDB now offers the `GROUP BY` we all expected when we first learned SQL – just `GROUP BY ALL` columns in the `SELECT` clause that aren't wrapped in an aggregate function!
 
 ```sql
 SELECT
@@ -52,7 +53,7 @@ SELECT
     planets,
     cities,
     cantinas,
-    SUM(scum + villainy) AS total_scum_and_villainy
+    sum(scum + villainy) AS total_scum_and_villainy
 FROM star_wars_locations
 GROUP BY ALL;
 -- GROUP BY systems, planets, cities, cantinas
@@ -65,7 +66,7 @@ Not only does this dramatically simplify many queries, it also makes the above `
 ```sql
 SELECT
     * EXCLUDE (cantinas, booths, scum, villainy),
-    SUM(scum + villainy) AS total_scum_and_villainy
+    sum(scum + villainy) AS total_scum_and_villainy
 FROM star_wars_locations
 GROUP BY ALL;
 -- GROUP BY systems, planets, cities
@@ -73,9 +74,9 @@ GROUP BY ALL;
 
 Now that is some concise and flexible SQL! How many of your `GROUP BY` clauses could be re-written this way?
 
-### ORDER BY ALL
+### `ORDER BY ALL`
 
-Another common cause for repetition in SQL is the `ORDER BY` clause. DuckDB and other RDBMSs have previously tackled this issue by allowing queries to specify the numbers of columns to `ORDER BY` (For example, `ORDER BY 1, 2, 3`). However, frequently the goal is to order by all columns in the query from left to right, and maintaining that numeric list when adding or subtracting columns can be error prone. In DuckDB, simply `ORDER BY ALL`: 
+Another common cause for repetition in SQL is the `ORDER BY` clause. DuckDB and other RDBMSs have previously tackled this issue by allowing queries to specify the numbers of columns to `ORDER BY` (For example, `ORDER BY 1, 2, 3`). However, frequently the goal is to order by all columns in the query from left to right, and maintaining that numeric list when adding or subtracting columns can be error prone. In DuckDB, simply `ORDER BY ALL`:
 
 ```sql
 SELECT
@@ -89,7 +90,7 @@ ORDER BY ALL;
 
 This is particularly useful when building summaries, as many other client tools automatically sort results in this manner. DuckDB also supports `ORDER BY ALL DESC` to sort each column in reverse order, and options to specify `NULLS FIRST` or `NULLS LAST`.
 
-### Column Aliases in WHERE / GROUP BY / HAVING
+### Column Aliases in `WHERE` / `GROUP BY` / `HAVING`
 
 In many SQL dialects, it is not possible to use an alias defined in a `SELECT` clause anywhere but in the `ORDER BY` clause of that statement. This commonly leads to verbose CTE's or subqueries in order to utilize those aliases. In DuckDB, a non-aggregate alias in the `SELECT` clause can be immediately used in the `WHERE` and `GROUP BY` clauses, and aggregate aliases can be used in the `HAVING` clause, even at the same query depth. No subquery needed!
 
@@ -97,7 +98,7 @@ In many SQL dialects, it is not possible to use an alias defined in a `SELECT` c
 SELECT
     only_imperial_storm_troopers_are_so_precise AS nope,
     turns_out_a_parsec_is_a_distance AS very_speedy,
-    SUM(mistakes) AS total_oops
+    sum(mistakes) AS total_oops
 FROM oops
 WHERE
     nope = 1
@@ -132,12 +133,13 @@ Regardless of expertise, and despite DuckDB's best efforts to understand our int
 SELECT * FROM star_trek;
 ```
 
-```text
+```console
 Error: Catalog Error: Table with name star_trek does not exist!
 Did you mean "star_wars"?
 LINE 1: SELECT * FROM star_trek;
                       ^
 ```
+
 (Don't worry, ducks and duck-themed databases still love some Trek as well).
 
 DuckDB's suggestions are even context specific. Here, we receive a suggestion to use the most similar column from the table we are querying.
@@ -146,7 +148,7 @@ DuckDB's suggestions are even context specific. Here, we receive a suggestion to
 SELECT long_ago FROM star_wars;
 ```
 
-```text
+```console
 Error: Binder Error: Referenced column "long_ago" not found in FROM clause!
 Candidate bindings: "star_wars.long_long_ago"
 LINE 1: SELECT long_ago FROM star_wars;
@@ -180,6 +182,7 @@ SELECT
 ### List Slicing
 
 Bracket syntax may also be used to slice a `LIST`. Again, note that this is 1-indexed for SQL compatibility.
+
 ```sql
 SELECT 
     starfighter_list[2:2] AS dont_forget_the_b_wing 
@@ -221,18 +224,18 @@ GROUP BY
 
 ### Function Aliases from Other Databases
 
-For many functions, DuckDB supports multiple names in order to align with other database systems. After all, ducks are pretty versatile - they can fly, swim, and walk! Most commonly, DuckDB supports PostgreSQL function names, but many SQLite names are supported, as well as some from other systems. If you are migrating your workloads to DuckDB and a different function name would be helpful, please reach out - they are very easy to add as long as the behavior is the same! See our [functions documentation](https://duckdb.org/docs/sql/functions/overview) for details.
+For many functions, DuckDB supports multiple names in order to align with other database systems. After all, ducks are pretty versatile – they can fly, swim, and walk! Most commonly, DuckDB supports PostgreSQL function names, but many SQLite names are supported, as well as some from other systems. If you are migrating your workloads to DuckDB and a different function name would be helpful, please reach out – they are very easy to add as long as the behavior is the same! See our [functions documentation]({% link docs/sql/functions/overview.md %}) for details.
 
 ```sql
 SELECT
     'Use the Force, Luke'[:13] AS sliced_quote_1,
     substr('I am your father', 1, 4) AS sliced_quote_2,
-    substring('Obi-Wan Kenobi, you''re my only hope',17,100) AS sliced_quote_3;
+    substring('Obi-Wan Kenobi, you''re my only hope', 17, 100) AS sliced_quote_3;
 ```
 
 ### Auto-Increment Duplicate Column Names
 
-As you are building a query that joins similar tables, you'll often encounter duplicate column names. If the query is the final result, DuckDB will simply return the duplicated column names without modifications. However, if the query is used to create a table, or nested in a subquery or Common Table Expression (where duplicate columns are forbidden by other databases!), DuckDB will automatically assign new names to the repeated columns to make query prototyping easier. 
+As you are building a query that joins similar tables, you'll often encounter duplicate column names. If the query is the final result, DuckDB will simply return the duplicated column names without modifications. However, if the query is used to create a table, or nested in a subquery or Common Table Expression (where duplicate columns are forbidden by other databases!), DuckDB will automatically assign new names to the repeated columns to make query prototyping easier.
 
 ```sql
 SELECT
@@ -243,7 +246,7 @@ FROM (
         s2.tie_fighter
     FROM squadron_one s1
     JOIN squadron_two s2
-        ON 1=1
+      ON 1 = 1
     ) theyre_coming_in_too_fast;
 ```  
 
@@ -261,40 +264,39 @@ DuckDB believes in using specific data types for performance, but attempts to au
 CREATE TABLE sith_count_int AS SELECT 2::INT AS sith_count;
 CREATE TABLE sith_count_varchar AS SELECT 2::VARCHAR AS sith_count;
 
-SELECT 
+SELECT
     * 
 FROM sith_count_int s_int 
 JOIN sith_count_varchar s_char 
-    ON s_int.sith_count = s_char.sith_count;
+  ON s_int.sith_count = s_char.sith_count;
 ```
 
 <div class="narrow_table"></div>
 
 | sith_count | sith_count |
 |:---|:---|
-| 2          | 2          |
+| 2  | 2  |
 
 ### Other Friendly Features
 
 There are many other features of DuckDB that make it easier to analyze data with SQL!  
   
-DuckDB [makes working with time easier in many ways](https://duckdb.org/2022/01/06/time-zones.html), including by accepting multiple different syntaxes (from other databases) for the [`INTERVAL` data type](https://duckdb.org/docs/sql/data_types/interval) used to specify a length of time.  
+DuckDB [makes working with time easier in many ways]({% post_url 2022-01-06-time-zones %}), including by accepting multiple different syntaxes (from other databases) for the [`INTERVAL` data type]({% link docs/sql/data_types/interval.md %}) used to specify a length of time.  
   
-DuckDB also implements multiple SQL clauses outside of the traditional core clauses including the [`SAMPLE` clause](https://duckdb.org/docs/sql/query_syntax/sample) for quickly selecting a random subset of your data and the [`QUALIFY` clause](https://duckdb.org/docs/sql/query_syntax/qualify) that allows filtering of the results of window functions (much like a `HAVING` clause does for aggregates).  
+DuckDB also implements multiple SQL clauses outside of the traditional core clauses including the [`SAMPLE` clause]({% link docs/sql/query_syntax/sample.md %}) for quickly selecting a random subset of your data and the [`QUALIFY` clause]({% link docs/sql/query_syntax/qualify.md %}) that allows filtering of the results of window functions (much like a `HAVING` clause does for aggregates).  
   
-The [`DISTINCT ON` clause](https://duckdb.org/docs/sql/statements/select) allows DuckDB to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
-
+The [`DISTINCT ON` clause]({% link docs/sql/statements/select.md %}) allows DuckDB to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
 
 ### Ideas for the Future
 
-In addition to what has already been implemented, several other improvements have been suggested. Let us know if one would be particularly useful - we are flexible with our roadmap! If you would like to contribute, we are very open to PRs and you are welcome to reach out on [GitHub](https://github.com/duckdb/duckdb) or [Discord](https://discord.gg/vukK4xp7Rd) ahead of time to talk through a new feature's design. 
+In addition to what has already been implemented, several other improvements have been suggested. Let us know if one would be particularly useful – we are flexible with our roadmap! If you would like to contribute, we are very open to PRs and you are welcome to reach out on [GitHub](https://github.com/duckdb/duckdb) or [Discord](https://discord.gg/vukK4xp7Rd) ahead of time to talk through a new feature's design. 
 
- - Choose columns via regex 
+ - Choose columns via regex
     - Decide which columns to select with a pattern rather than specifying columns explicitly
-    - Clickhouse supports this with the [`COLUMNS` expression](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression) 
+    - ClickHouse supports this with the [`COLUMNS` expression](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression) 
  - Incremental column aliases
     - Refer to previously defined aliases in subsequent calculated columns rather than re-specifying the calculations
  - Dot operators for JSON types
-    - The JSON extension is brand new ([see our documentation!](https://duckdb.org/docs/extensions/json)) and already implements friendly `->` and `->>` syntax
+    - The JSON extension is brand new ([see our documentation!]({% link docs/extensions/json.md %})) and already implements friendly `->` and `->>` syntax
 
 Thanks for checking out DuckDB! May the Force be with you...

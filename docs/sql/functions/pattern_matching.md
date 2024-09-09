@@ -35,42 +35,49 @@ SELECT 'abc' LIKE '%c';  -- true
 SELECT 'abc' NOT LIKE '%c'; -- false
 ```
 
-The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale. 
+The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale:
 
 ```sql
 SELECT 'abc' ILIKE '%C'; -- true
+```
+
+```sql
 SELECT 'abc' NOT ILIKE '%C'; -- false
 ```
 
 To search within a string for a character that is a wildcard (`%` or `_`), the pattern must use an `ESCAPE` clause and an escape character to indicate the wildcard should be treated as a literal character instead of a wildcard. See an example below.
 
-Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs](../../sql/functions/char) for details.
+Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs]({% link docs/sql/functions/char.md %}) for details.
+
+Search for strings with 'a' then a literal percent sign then 'c':
 
 ```sql
--- Search for strings with 'a' then a literal percent sign then 'c'
 SELECT 'a%c' LIKE 'a$%c' ESCAPE '$'; -- true
 SELECT 'azc' LIKE 'a$%c' ESCAPE '$'; -- false
+```
 
--- Case-insensitive ILIKE with ESCAPE
+Case-insensitive ILIKE with ESCAPE:
+
+```sql
 SELECT 'A%c' ILIKE 'a$%c' ESCAPE '$'; -- true
 ```
 
 There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance PostgreSQL compatibility.
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | LIKE-style | PostgreSQL-style |
 |:---|:---|
-| `LIKE` | `~~` |
-| `NOT LIKE` | `!~~` |
-| `ILIKE` | `~~*` |
-| `NOT ILIKE` | `!~~*` |
+| LIKE | ~~ |
+| NOT LIKE | !~~ |
+| ILIKE | ~~* |
+| NOT ILIKE | !~~* |
 
 ## `SIMILAR TO`
 
 <div id="rrdiagram2"></div>
 
-The `SIMILAR TO` operator returns true or false depending on whether its pattern matches the given string. It is similar to `LIKE`, except that it interprets the pattern using a [regular expression](regular_expressions). Like `LIKE`, the `SIMILAR TO` operator succeeds only if its pattern matches the entire string; this is unlike common regular expression behavior where the pattern can match any part of the string.
+The `SIMILAR TO` operator returns true or false depending on whether its pattern matches the given string. It is similar to `LIKE`, except that it interprets the pattern using a [regular expression]({% link docs/sql/functions/regular_expressions.md %}). Like `LIKE`, the `SIMILAR TO` operator succeeds only if its pattern matches the entire string; this is unlike common regular expression behavior where the pattern can match any part of the string.
 
 A regular expression is a character sequence that is an abbreviated definition of a set of strings (a regular set). A string is said to match a regular expression if it is a member of the regular set described by the regular expression. As with `LIKE`, pattern characters match string characters exactly unless they are special characters in the regular expression language — but regular expressions use different special characters than `LIKE` does.
 
@@ -86,18 +93,25 @@ SELECT 'abc' NOT SIMILAR TO 'abc';   -- false
 
 There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
-| SIMILAR TO-style | POSIX-style |
+| `SIMILAR TO`-style | POSIX-style |
 |:---|:---|
-| `SIMILAR TO` | `~` |
-| `NOT SIMILAR TO` | `!~` |
+| SIMILAR TO | ~ |
+| NOT SIMILAR TO | !~ |
 
-## `GLOB`
+## Globbing
+
+DuckDB supports file name expansion, also known as globbing, for discovering files.
+DuckDB's glob syntax uses the question mark (`?`) wildcard to match any single character and the asterisk (`*`) to match zero or more characters.
+In addition, you can use the bracket syntax (`[...]`) to match any single character contained within the brackets, or within the character range specified by the brackets. An exclamation mark (`!`) may be used inside the first bracket to search for a character that is not contained within the brackets.
+To learn more, visit the [“glob (programming)” Wikipedia page](https://en.wikipedia.org/wiki/Glob_(programming)).
+
+### `GLOB`
 
 <div id="rrdiagram3"></div>
 
-The `GLOB` operator returns `true` or `false` if the string matches the `GLOB` pattern. The `GLOB` operator is most commonly used when searching for filenames that follow a specific pattern (for example a specific file extension). Use the question mark (`?`) wildcard to match any single character, and use the asterisk (`*`) to match zero or more characters. In addition, use bracket syntax (`[ ]`) to match any single character contained within the brackets, or within the character range specified by the brackets. An exclamation mark (`!`) may be used inside the first bracket to search for a character that is not contained within the brackets. To learn more, visit the [Glob Programming Wikipedia page](https://en.wikipedia.org/wiki/Glob_(programming)).
+The `GLOB` operator returns `true` or `false` if the string matches the `GLOB` pattern. The `GLOB` operator is most commonly used when searching for filenames that follow a specific pattern (for example a specific file extension).
 
 Some examples:
 
@@ -107,16 +121,24 @@ SELECT 'best.txt' GLOB '????.txt';         -- true
 SELECT 'best.txt' GLOB '?.txt';            -- false
 SELECT 'best.txt' GLOB '[abc]est.txt';     -- true
 SELECT 'best.txt' GLOB '[a-z]est.txt';     -- true
+```
 
--- The bracket syntax is case-sensitive
+The bracket syntax is case-sensitive:
+
+```sql
 SELECT 'Best.txt' GLOB '[a-z]est.txt';     -- false
 SELECT 'Best.txt' GLOB '[a-zA-Z]est.txt';  -- true
+```
 
--- The ! applies to all characters within the brackets
+The `!` applies to all characters within the brackets:
+
+```sql
 SELECT 'Best.txt' GLOB '[!a-zA-Z]est.txt'; -- false
+```
 
--- To negate a GLOB operator, negate the entire expression 
--- (NOT GLOB is not valid syntax)
+To negate a GLOB operator, negate the entire expression:
+
+```sql
 SELECT NOT 'best.txt' GLOB '*.txt';        -- false
 ```
 
@@ -130,15 +152,16 @@ Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 
 ### Glob Function to Find Filenames
 
-The glob pattern matching syntax can also be used to search for filenames using the `glob` table function. 
-It accepts one parameter: the path to search (which may include glob patterns). 
+The glob pattern matching syntax can also be used to search for filenames using the `glob` table function.
+It accepts one parameter: the path to search (which may include glob patterns).
+
+Search the current directory for all files:
 
 ```sql
--- Search the current directory for all files
 SELECT * FROM glob('*');
 ```
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 |     file      |
 |---------------|
@@ -150,6 +173,38 @@ SELECT * FROM glob('*');
 | test2.parquet |
 | todos.json    |
 
+### Globbing Semantics
+
+DuckDB's globbing implementation follows the semantics of [Python's `glob`](https://docs.python.org/3/library/glob.html) and not the `glob` used in the shell.
+A notable difference is the behavior of the `**/` construct: `**/⟨filename⟩` will not return a file with `⟨filename⟩` in top-level directory.
+For example, with a `README.md` file present in the directory, the following query finds it:
+
+```sql
+SELECT * FROM glob('README.md');
+```
+
+<div class="narrow_table monospace_table"></div>
+
+|   file    |
+|-----------|
+| README.md |
+
+However, the following query returns an empty result:
+
+```sql
+SELECT * FROM glob('**/README.md');
+```
+
+Meanwhile, the globbing of Bash, Zsh, etc. finds the file using the same syntax:
+
+```bash
+ls **/README.md
+```
+
+```text
+README.md
+```
+
 ## Regular Expressions
 
-DuckDB's regex support is documented on the [Regular Expressions page](regular_expressions).
+DuckDB's regex support is documented on the [Regular Expressions page]({% link docs/sql/functions/regular_expressions.md %}).

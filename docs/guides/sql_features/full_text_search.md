@@ -3,7 +3,7 @@ layout: docu
 title: Full-Text Search
 ---
 
-DuckDB supports full-text search via the [`fts` extension](../../extensions/full_text_search).
+DuckDB supports full-text search via the [`fts` extension]({% link docs/extensions/full_text_search.md %}).
 A full-text index allows for a query to quickly search for all occurrences of individual words within longer text strings.
 
 ## Example: Shakespeare Corpus
@@ -71,7 +71,7 @@ Unlike standard indexes, full-text indexes don't auto-update as the underlying d
 
 ## Note on Generating the Corpus Table
 
-For more details, see the ["Generating a Shakespeare corpus for full-text searching from JSON" blog post](https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html)
+For more details, see the [“Generating a Shakespeare corpus for full-text searching from JSON” blog post](https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html)
 * The Columns are: line_id, play_name, line_number, speaker, text_entry.
 * We need a unique key for each row in order for full-text searching to work.
-* The line_id "KL/2.4.132" means King Lear, Act 2, Scene 4, Line 132.
+* The line_id `KL/2.4.132` means King Lear, Act 2, Scene 4, Line 132.

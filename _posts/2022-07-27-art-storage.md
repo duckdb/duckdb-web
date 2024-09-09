@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Persistent Storage of Adaptive Radix Trees in DuckDB"
+title: "Persistent Storage of Adaptive Radix Trees in DuckDB"
 author: Pedro Holanda
 excerpt: DuckDB uses Adaptive Radix Tree (ART) Indexes to enforce constraints and to speed up query filters. Up to this point, indexes were not persisted, causing issues like loss of indexing information and high reload times for tables with data constraints. We now persist ART Indexes to disk, drastically diminishing database loading times (up to orders of magnitude), and we no longer lose track of existing indexes. This blog post contains a deep dive into the implementation of ART storage, benchmarks, and future work. Finally, to better understand how our indexes are used, I'm asking you to answer the following [survey](https://forms.gle/eSboTEp9qpP7ybz98). It will guide us when defining our future roadmap.
 
@@ -137,59 +137,58 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
 
 1. Data Constraints. Primary key, Foreign Keys, and Unique constraints are all maintained by an ART Index. When inserting data in a tuple with a constraint, this will effectively try to perform an insertion in the ART index and fail if the tuple already exists.
 
-```sql
-CREATE TABLE integers(i INTEGER PRIMARY KEY);
--- Insert unique values into ART
-INSERT INTO integers VALUES (3), (2);
--- Insert conflicting value in ART will fail
-INSERT INTO integers VALUES (3);
-
-CREATE TABLE fk_integers(j INTEGER, FOREIGN KEY (j) REFERENCES integers(i));
--- This insert works normally
-INSERT INTO fk_integers VALUES (2), (3);
--- This fails after checking the ART in integers
-INSERT INTO fk_integers VALUES (4);
-```
+    ```sql
+    CREATE TABLE integers(i INTEGER PRIMARY KEY);
+    -- Insert unique values into ART
+    INSERT INTO integers VALUES (3), (2);
+    -- Insert conflicting value in ART will fail
+    INSERT INTO integers VALUES (3);
+    
+    CREATE TABLE fk_integers(j INTEGER, FOREIGN KEY (j) REFERENCES integers(i));
+    -- This insert works normally
+    INSERT INTO fk_integers VALUES (2), (3);
+    -- This fails after checking the ART in integers
+    INSERT INTO fk_integers VALUES (4);
+    ```
 
 2. Range Queries. Highly selective range queries on indexed columns will also use the ART index underneath.
 
-```sql
-CREATE TABLE integers(i INTEGER PRIMARY KEY);
--- Insert unique values into ART
-INSERT INTO integers VALUES (3), (2), (1), (8) , (10);
--- Range queries (if highly selective) will also use the ART index
-SELECT * FROM integers WHERE i >= 8;
-```
-
+    ```sql
+    CREATE TABLE integers(i INTEGER PRIMARY KEY);
+    -- Insert unique values into ART
+    INSERT INTO integers VALUES (3), (2), (1), (8) , (10);
+    -- Range queries (if highly selective) will also use the ART index
+    SELECT * FROM integers WHERE i >= 8;
+    ```
 
 3. Joins. Joins with a small number of matches will also utilize existing ART indexes.
 
-```sql
--- Optionally you can always force index joins with the following pragma
-PRAGMA force_index_join;
+    ```sql
+    -- Optionally you can always force index joins with the following pragma
+    PRAGMA force_index_join;
 
-CREATE TABLE t1(i INTEGER PRIMARY KEY);
-CREATE TABLE t2(i INTEGER PRIMARY KEY);
--- Insert unique values into ART
-INSERT INTO t1 VALUES (3), (2), (1), (8), (10);
-INSERT INTO t2 VALUES (3), (2), (1), (8), (10);
--- Joins will also use the ART index
-SELECT * FROM t1 INNER JOIN t2 ON (t1.i = t2.i);
-```
+    CREATE TABLE t1(i INTEGER PRIMARY KEY);
+    CREATE TABLE t2(i INTEGER PRIMARY KEY);
+    -- Insert unique values into ART
+    INSERT INTO t1 VALUES (3), (2), (1), (8), (10);
+    INSERT INTO t2 VALUES (3), (2), (1), (8), (10);
+    -- Joins will also use the ART index
+    SELECT * FROM t1 INNER JOIN t2 ON (t1.i = t2.i);
+    ```
 
 4. Indexes over expressions. ART indexes can also be used to quickly look up expressions.
 
-```sql
-CREATE TABLE integers(i INTEGER, j INTEGER);
+    ```sql
+    CREATE TABLE integers(i INTEGER, j INTEGER);
 
-INSERT INTO integers VALUES (1,1), (2,2), (3,3);
+    INSERT INTO integers VALUES (1,1), (2,2), (3,3);
 
--- Creates index over i+j expression
-CREATE INDEX i_index ON integers USING ART((i+j));
+    -- Creates index over i+j expression
+    CREATE INDEX i_index ON integers USING ART((i+j));
 
--- Uses ART index point query
-SELECT i FROM integers WHERE i+j = 2;
-```
+    -- Uses ART index point query
+    SELECT i FROM integers WHERE i+j = 2;
+    ```
 
 ### ART Storage
 
@@ -228,14 +227,14 @@ Take Node 256 as an example. The cost of holding 256 pointers is 2048 bytes (256
 
 ```cpp
 struct BlockPointer { 
-	uint32_t block_id;
-	uint32_t offset;
+    uint32_t block_id;
+    uint32_t offset;
 }
 
 class Node256 : public Node  {
-	// Pointers to the child nodes
-	Node* children[256];
-	BlockPointer block_info[256];
+    // Pointers to the child nodes
+    Node* children[256];
+    BlockPointer block_info[256];
 }
 ```
 

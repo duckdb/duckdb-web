@@ -8,7 +8,7 @@ DuckDB broadly follows the [Parquet Modular Encryption specification](https://gi
 
 ## Reading and Writing Encrypted Files
 
-Using the `PRAGMA add_parquet_key` function, named encryption keys of 128, 192, or 256 bits can be added to a session. These keys are stored in-memory.
+Using the `PRAGMA add_parquet_key` function, named encryption keys of 128, 192, or 256 bits can be added to a session. These keys are stored in-memory:
 
 ```sql
 PRAGMA add_parquet_key('key128', '0123456789112345');
@@ -57,12 +57,12 @@ DuckDB's Parquet encryption currently has the following limitations.
 
    However, this is unsupported at the moment and will cause an error to be thrown (for now):
 
-   ```text
+   ```console
    Not implemented Error: Parquet encryption_config column_keys not yet implemented
    ```
 
 ## Performance Implications
 
 Note that encryption has some performance implications.
-Without encryption, reading/writing the `lineitem` table from [`TPC-H`](../../extensions/tpch) at SF1, which is 6M rows and 15 columns, from/to a Parquet file takes 0.26 and 0.99 seconds, respectively.
-With encryption, this takes 0.64  and 2.21 seconds, both approximately 2.5× slower than the unencrypted version.
+Without encryption, reading/writing the `lineitem` table from [`TPC-H`]({% link docs/extensions/tpch.md %}) at SF1, which is 6M rows and 15 columns, from/to a Parquet file takes 0.26 and 0.99 seconds, respectively.
+With encryption, this takes 0.64 and 2.21 seconds, both approximately 2.5× slower than the unencrypted version.

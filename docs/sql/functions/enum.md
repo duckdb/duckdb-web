@@ -1,9 +1,13 @@
 ---
 layout: docu
 title: Enum Functions
+redirect_from:
+  - docs/test/functions/enum
 ---
 
-This section describes functions and operators for examining and manipulating `ENUM` values.
+<!-- markdownlint-disable MD001 -->
+
+This section describes functions and operators for examining and manipulating [`ENUM` values]({% link docs/sql/data_types/enum.md %}).
 The examples assume an enum type created as:
 
 ```sql
@@ -15,13 +19,13 @@ With the exception of `enum_range_boundary`, the result depends only on the type
 
 | Name | Description |
 |:--|:-------|
-| [`enum_code(`*`enum_value`*`)`](#enum_codeenum_value) | Returns the numeric value backing the given enum value. |
-| [`enum_first(`*`enum`*`)`](#enum_firstenum) | Returns the first value of the input enum type. |
-| [`enum_last(`*`enum`*`)`](#enum_lastenum) | Returns the last value of the input enum type. |
-| [`enum_range(`*`enum`*`)`](#enum_rangeenum) | Returns all values of the input enum type as an array. |
-| [`enum_range_boundary(`*`enum`*`, `*`enum`*`)`](#enum_range_boundaryenum-enum) | Returns the range between the two given enum values as an array. |
+| [`enum_code(enum_value)`](#enum_codeenum_value) | Returns the numeric value backing the given enum value. |
+| [`enum_first(enum)`](#enum_firstenum) | Returns the first value of the input enum type. |
+| [`enum_last(enum)`](#enum_lastenum) | Returns the last value of the input enum type. |
+| [`enum_range(enum)`](#enum_rangeenum) | Returns all values of the input enum type as an array. |
+| [`enum_range_boundary(enum, enum)`](#enum_range_boundaryenum-enum) | Returns the range between the two given enum values as an array. |
 
-### `enum_code(`*`enum_value`*`)`
+#### `enum_code(enum_value)`
 
 <div class="nostroke_table"></div>
 
@@ -29,7 +33,7 @@ With the exception of `enum_range_boundary`, the result depends only on the type
 | **Example** | `enum_code('happy'::mood)` |
 | **Result** | `2` |
 
-### `enum_first(`*`enum`*`)`
+#### `enum_first(enum)`
 
 <div class="nostroke_table"></div>
 
@@ -37,7 +41,7 @@ With the exception of `enum_range_boundary`, the result depends only on the type
 | **Example** | `enum_first(NULL::mood)` |
 | **Result** | `sad` |
 
-### `enum_last(`*`enum`*`)`
+#### `enum_last(enum)`
 
 <div class="nostroke_table"></div>
 
@@ -45,7 +49,7 @@ With the exception of `enum_range_boundary`, the result depends only on the type
 | **Example** | `enum_last(NULL::mood)` |
 | **Result** | `anxious` |
 
-### `enum_range(`*`enum`*`)`
+#### `enum_range(enum)`
 
 <div class="nostroke_table"></div>
 
@@ -53,7 +57,7 @@ With the exception of `enum_range_boundary`, the result depends only on the type
 | **Example** | `enum_range(NULL::mood)` |
 | **Result** | `[sad, ok, happy, anxious]` |
 
-### `enum_range_boundary(`*`enum`*`, `*`enum`*`)`
+#### `enum_range_boundary(enum, enum)`
 
 <div class="nostroke_table"></div>
 

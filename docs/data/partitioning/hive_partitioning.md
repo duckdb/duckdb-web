@@ -5,11 +5,25 @@ title: Hive Partitioning
 
 ## Examples
 
+Read data from a Hive partitioned data set:
+
 ```sql
--- read data from a Hive partitioned data set
-SELECT * FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = true);
--- write a table to a Hive partitioned data set
-COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
+SELECT *
+FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = true);
+```
+
+Write a table to a Hive partitioned data set:
+
+```sql
+COPY orders
+TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
+```
+
+Note that the `PARTITION_BY` options cannot use expressions. You can produce columns on the fly using the following syntax:
+
+```sql
+COPY (SELECT *, year(timestamp) AS year, month(timestamp) AS month FROM services)
+TO 'test' (PARTITION_BY (year, month));
 ```
 
 ## Hive Partitioning
@@ -50,7 +64,8 @@ Filters on the partition keys are automatically pushed down into the files. This
 ```sql
 SELECT *
 FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = true)
-WHERE year = 2022 AND month = 11;
+WHERE year = 2022
+  AND month = 11;
 ```
 
 When executing this query, only the following files will be read:
@@ -65,7 +80,11 @@ orders
 
 ### Autodetection
 
-By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `hive_partitioning` flag is enabled automatically. The autodetection will look at the names of the folders and search for a `'key' = 'value'` pattern. This behaviour can be overridden by setting the `hive_partitioning` flag manually.
+By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `hive_partitioning` flag is enabled automatically. The autodetection will look at the names of the folders and search for a `'key' = 'value'` pattern. This behavior can be overridden by using the `hive_partitioning` configuration option:
+
+```sql
+SET hive_partitioning = false;
+```
 
 ### Hive Types
 
@@ -84,4 +103,4 @@ FROM read_parquet(
 
 ### Writing Partitioned Files
 
-See the [Partitioned Writes](partitioned_writes) section.
+See the [Partitioned Writes]({% link docs/data/partitioning/partitioned_writes.md %}) section.

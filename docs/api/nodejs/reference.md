@@ -71,6 +71,7 @@ title: Node.js API
         * [.run(sql, ...params, callback)](#module_duckdb..Database+run) ⇒ <code>void</code>
         * [.scanArrowIpc(sql, ...params, callback)](#module_duckdb..Database+scanArrowIpc) ⇒ <code>void</code>
         * [.each(sql, ...params, callback)](#module_duckdb..Database+each) ⇒ <code>void</code>
+        * [.stream(sql, ...params)](#module_duckdb..Database+stream)
         * [.all(sql, ...params, callback)](#module_duckdb..Database+all) ⇒ <code>void</code>
         * [.arrowIPCAll(sql, ...params, callback)](#module_duckdb..Database+arrowIPCAll) ⇒ <code>void</code>
         * [.arrowIPCStream(sql, ...params, callback)](#module_duckdb..Database+arrowIPCStream) ⇒ <code>void</code>
@@ -475,6 +476,7 @@ Main database interface
     * [.run(sql, ...params, callback)](#module_duckdb..Database+run) ⇒ <code>void</code>
     * [.scanArrowIpc(sql, ...params, callback)](#module_duckdb..Database+scanArrowIpc) ⇒ <code>void</code>
     * [.each(sql, ...params, callback)](#module_duckdb..Database+each) ⇒ <code>void</code>
+    * [.stream(sql, ...params)](#module_duckdb..Database+stream)
     * [.all(sql, ...params, callback)](#module_duckdb..Database+all) ⇒ <code>void</code>
     * [.arrowIPCAll(sql, ...params, callback)](#module_duckdb..Database+arrowIPCAll) ⇒ <code>void</code>
     * [.arrowIPCStream(sql, ...params, callback)](#module_duckdb..Database+arrowIPCStream) ⇒ <code>void</code>
@@ -622,6 +624,17 @@ Convenience method for Connection#scanArrowIpc using a built-in default connecti
 | sql |  | 
 | ...params | <code>\*</code> | 
 | callback |  | 
+
+<a name="module_duckdb..Database+stream"></a>
+
+#### database.stream(sql, ...params)
+
+**Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
+
+| Param | Type |
+| --- | --- |
+| sql |  | 
+| ...params | <code>\*</code> | 
 
 <a name="module_duckdb..Database+all"></a>
 
