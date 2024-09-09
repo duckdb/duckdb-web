@@ -259,9 +259,9 @@ This release adds a feature where DuckDB [automatically decides](https://github.
 
 ### Parallel Streaming Queries
 
-[**Parallel Result Streaming.**](https://github.com/duckdb/duckdb/pull/11494) DuckDB has two different methods for fetching results: *materialized* results, and *streaming* results. Materialized results fetch all of the data that is present in a result at once, and return it. Streaming results instead allow iterating over the data in incremental steps. Streaming results are critical when working with large result sets – as they do not require the entire result set to fit in memory. However, in previous releases, the final streaming phase was limited to a single thread.
+DuckDB has two different methods for fetching results: *materialized* results and *streaming* results. Materialized results fetch all of the data that is present in a result at once, and return it. Streaming results instead allow iterating over the data in incremental steps. Streaming results are critical when working with large result sets as they do not require the entire result set to fit in memory. However, in previous releases, the final streaming phase was limited to a single thread.
 
-Parallelism is critical for obtaining good query performance on modern hardware, and this release adds support for parallel streaming of query results. The system will use all available threads to fill up a query result buffer of a limited size (a few megabytes). When data is consumed from the result buffer, the threads will restart and start filling up the buffer again. The size of the buffer can be configured through the `streaming_buffer_size` parameter.
+Parallelism is critical for obtaining good query performance on modern hardware, and this release adds support for [parallel streaming of query results](https://github.com/duckdb/duckdb/pull/11494). The system will use all available threads to fill up a query result buffer of a limited size (a few megabytes). When data is consumed from the result buffer, the threads will restart and start filling up the buffer again. The size of the buffer can be configured through the `streaming_buffer_size` parameter.
 
 Below is a small benchmark using [`ontime.parquet`](https://blobs.duckdb.org/data/ontime.parquet) to illustrate the performance benefits that can be obtained using the Python streaming result interface:
 
@@ -270,9 +270,9 @@ import duckdb
 duckdb.sql("SELECT * FROM 'ontime.parquet' WHERE flightnum = 6805;").fetchone()
 ```
 
-| v1.0  | v1.1  |
-|------:|------:|
-| 1.17s | 0.12s |
+| v1.0   | v1.1   |
+|-------:|-------:|
+| 1.17 s | 0.12 s |
 
 ### Parallel Union By Name
 
