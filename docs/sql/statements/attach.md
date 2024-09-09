@@ -1,10 +1,10 @@
 ---
 layout: docu
-title: ATTACH/DETACH Statement
+title: ATTACH and DETACH Statement
 railroad: statements/attach.js
 ---
 
-The `ATTACH` statement adds a new database file to the catalog that can be read from and written to.
+DuckDB allows attaching to and detaching from database files.
 
 ## Examples
 
@@ -70,11 +70,31 @@ USE file;
 
 ## Attach
 
+The `ATTACH` statement adds a new database file to the catalog that can be read from and written to.
+Note that attachment definitions are not persisted between sessions: when a new session is launched, you have to re-attach to all databases.
+
 ### Attach Syntax
 
 <div id="rrdiagram1"></div>
 
 `ATTACH` allows DuckDB to operate on multiple database files, and allows for transfer of data between different database files.
+
+`ATTACH` supports HTTP and S3 endpoints. For these, it creates a read-only connection by default.
+Therefore, the following two commands are equivalent:
+
+```sql
+ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db;
+ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db (READ_ONLY);
+```
+
+Similarly, the following two commands connecting to S3 are equivalent:
+
+```sql
+ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db;
+ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
+```
+
+> Prior to DuckDB version, it was necessary to specify the `READ_ONLY` flag for HTTP and S3 endpoints.
 
 ## Detach
 

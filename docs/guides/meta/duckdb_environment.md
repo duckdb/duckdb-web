@@ -10,12 +10,14 @@ DuckDB provides a number of functions and `PRAGMA` options to retrieve informati
 The `version()` function returns the version number of DuckDB.
 
 ```sql
-SELECT version();
+SELECT version() AS version;
 ```
 
-| version() |
+<div class="narrow_table monospace_table"></div>
+
+| version |
 |-----------|
-| v1.0.0    |
+| v{{ site.currentduckdbversion }} |
 
 Using a `PRAGMA`:
 
@@ -23,9 +25,11 @@ Using a `PRAGMA`:
 PRAGMA version;
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | library_version | source_id  |
 |-----------------|------------|
-| v1.0.0          | 1f98600c2c |
+| v{{ site.currentduckdbversion }} | {{ site.currentduckdbhash }} |
 
 ## Platform
 

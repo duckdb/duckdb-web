@@ -80,7 +80,11 @@ orders
 
 ### Autodetection
 
-By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `hive_partitioning` flag is enabled automatically. The autodetection will look at the names of the folders and search for a `'key' = 'value'` pattern. This behaviour can be overridden by setting the `hive_partitioning` flag manually.
+By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `hive_partitioning` flag is enabled automatically. The autodetection will look at the names of the folders and search for a `'key' = 'value'` pattern. This behavior can be overridden by using the `hive_partitioning` configuration option:
+
+```sql
+SET hive_partitioning = false;
+```
 
 ### Hive Types
 

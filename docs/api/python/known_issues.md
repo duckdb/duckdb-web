@@ -50,9 +50,9 @@ The solution is to fix the `protobuf` package. This may require uninstalling con
 %pip install protobuf
 ```
 
-## Running `EXPLAIN` Renders Newlines in Jupyter and IPython
+## Running `EXPLAIN` Renders Newlines
 
-When DuckDB is run in Jupyter notebooks or in the IPython shell, the output of the [`EXPLAIN` statement]({% link docs/guides/meta/explain.md %}) contains hard line breaks (`\n`):
+In Python, the output of the [`EXPLAIN` statement]({% link docs/guides/meta/explain.md %}) contains hard line breaks (`\n`):
 
 ```python
 In [1]: import duckdb

@@ -278,7 +278,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
+  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966081/artifacts/1862736429'
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
 
@@ -294,7 +294,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
+  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966032/artifacts/1863098716'
   note: ''
   usage_example: ./duckdb
 - variant: nightly
@@ -350,16 +350,11 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: >-
-    Nightly Java builds are available in the Sonatype snapshots repository,
-    which can be accessed as follows:
-
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
         <version>1.1.0-SNAPSHOT</version>
     </dependency>
-
-    ...
 
     <repositories>
         <repository>
@@ -372,7 +367,7 @@
         </repository>
     </repositories>
   link: ''
-  note: ''
+  note: 'Nightly Java builds are served through the Sonatype snapshots repository.'
   usage_example: ''
 - variant: nightly
   environment: Java
@@ -381,7 +376,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://artifacts.duckdb.org/latest/java-jars.zip'
+  link: 'https://artifacts.duckdb.org/duckdb-java/latest/java-jars.zip'
   note: ''
   usage_example: ''
 - variant: nightly
@@ -401,7 +396,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
+  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966081/artifacts/1862736429'
   note: ''
   usage_example: ''
 - variant: nightly
@@ -411,7 +406,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
+  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966032/artifacts/1863098716'
   note: ''
   usage_example: ''
 - variant: nightly

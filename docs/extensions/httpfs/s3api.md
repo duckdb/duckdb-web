@@ -3,7 +3,7 @@ layout: docu
 title: S3 API Support
 ---
 
-The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
+The `httpfs` extension supports reading/writing/[globbing](#globbing) files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
 
 ## Platforms
 
@@ -173,9 +173,9 @@ FROM read_parquet([
 ]);
 ```
 
-### Glob
+### Globbing
 
-File globbing is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
+File [globbing]({% link docs/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
 
 ```sql
 SELECT *

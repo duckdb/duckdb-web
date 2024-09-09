@@ -218,4 +218,10 @@ html.darkmode body.documentation{
 	main .wrap.frequentlyaskedquestions h3::after{
 		background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='15' cy='15' r='15' fill='%23343434'/%3E%3Cpath d='M21.5 13L15 20L8.5 13' stroke='white' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
 	}
+
+	div.bodywrapper{
+		dt.sig-object{
+			background-color: #444444;
+		}
+	}
 } 
