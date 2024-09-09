@@ -249,7 +249,7 @@ LIMIT 3;
 This release adds a *very cool* optimization for joins: DuckDB now [automatically creates filters](https://github.com/duckdb/duckdb/pull/12908) for the larger table in the join during execution. Say we are joining two tables `A` and `B`. `A` has 100 rows, and `B` has one million rows. We are joining on a shared key `i`. If there were any filter on `i`, DuckDB would already push that filter into the scan, greatly reducing the cost to complete the query. But we are now filtering on another column from `A`, namely `j`:
 
 ```sql
-CREATE TABLE A AS SELECT range i, range j from range(100);
+CREATE TABLE A AS SELECT range i, range j FROM range(100);
 CREATE TABLE B AS SELECT a.range FROM range(100) a, range(10000) b;
 SELECT count(*) FROM A JOIN B USING (i) WHERE j > 90;
 ```
