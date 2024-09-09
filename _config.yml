@@ -24,6 +24,7 @@ currentshortduckdbversion: "1.1"
 currentduckdbversion: 1.1.0
 currentduckdbhash: "fa5c2fe15f"
 currentsnapshotversion: 1.1.1-dev
+currentduckdbodbcversion: 1.1.0
 # Java
 currentjavaversion: 1.0.0
 nextjavaversion: 1.1.0  # for java snapshots, should always be the next minor version with a patch version of 0

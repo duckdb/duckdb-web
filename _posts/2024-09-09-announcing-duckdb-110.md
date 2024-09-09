@@ -24,18 +24,18 @@ Below is a summary of those new features with examples.
 * [Breaking SQL Changes](#breaking-sql-changes)
 * [Community Extensions](#community-extensions)
 * [Friendly SQL](#friendly-sql)
-	* [Unpacked Columns](#unpacked-columns)
-	* [`query` and `query_table` Functions](#query-and-query_table-functions)
+    * [Unpacked Columns](#unpacked-columns)
+    * [`query` and `query_table` Functions](#query-and-query_table-functions)
 * [Performance](#performance)
-	* [Dynamic Filter Pushdown from Joins](#dynamic-filter-pushdown-from-joins)
-	* [Automatic CTE Materialization](#automatic-cte-materialization)
-	* [Parallel Streaming Queries](#parallel-streaming-queries)
-	* [Parallel Union By Name](#parallel-union-by-name)
-	* [Nested ART Rework (Foreign Key Load Speed-Up)](#nested-art-rework-foreign-key-load-speed-up)
-	* [Window Function Improvements](#window-function-improvements)
+    * [Dynamic Filter Pushdown from Joins](#dynamic-filter-pushdown-from-joins)
+    * [Automatic CTE Materialization](#automatic-cte-materialization)
+    * [Parallel Streaming Queries](#parallel-streaming-queries)
+    * [Parallel Union By Name](#parallel-union-by-name)
+    * [Nested ART Rework (Foreign Key Load Speed-Up)](#nested-art-rework-foreign-key-load-speed-up)
+    * [Window Function Improvements](#window-function-improvements)
 * [Spatial Features](#spatial-features)
-	* [GeoParquet](#geoparquet)
-	* [R-Tree](#r-tree)
+    * [GeoParquet](#geoparquet)
+    * [R-Tree](#r-tree)
 * [Final Thoughts](#final-thoughts)
 
 ## Breaking SQL Changes
@@ -106,14 +106,14 @@ SELECT (SELECT unnest(range(10))) as result;
 
 Recently we introduced [Community Extensions]({% post_url 2024-07-05-community-extensions %}). Community extensions allow anyone to build extensions for DuckDB, that are then built and distributed by us. The [list of community extensions](https://community-extensions.duckdb.org/list_of_extensions.html) has been growing since then.
 
-In this release, we have been working towards making community extensions easier to build and produce. This release includes a new method of registering extensions [using the C API](https://github.com/duckdb/duckdb/pull/12682) in addition to a lot of extensions to the C API allowing [scalar functions](https://github.com/duckdb/duckdb/pull/11786), [aggregate functions](https://github.com/duckdb/duckdb/pull/13229) and [custom types](https://github.com/duckdb/duckdb/pull/13499) to be defined. These changes will enable building extensions against a stable API, that are smaller in size, that will work across different DuckDB versions. In addition, these changes will enable building extensions in other programming languages in the future. 
+In this release, we have been working towards making community extensions easier to build and produce. This release includes a new method of registering extensions [using the C API](https://github.com/duckdb/duckdb/pull/12682) in addition to a lot of extensions to the C API allowing [scalar functions](https://github.com/duckdb/duckdb/pull/11786), [aggregate functions](https://github.com/duckdb/duckdb/pull/13229) and [custom types](https://github.com/duckdb/duckdb/pull/13499) to be defined. These changes will enable building extensions against a stable API, that are smaller in size, that will work across different DuckDB versions. In addition, these changes will enable building extensions in other programming languages in the future.
 
 ## Friendly SQL
 
 [**Histogram.**](https://github.com/duckdb/duckdb/pull/12590) This version introduces the `histogram` function that can be used to compute histograms over columns of a dataset. The histogram function works for columns of any type, and allows for various different binning strategies and a custom amount of bins.
 
 ```sql
-FROM histogram('ontime.parquet', UniqueCarrier, bin_count := 5);
+FROM histogram('https://blobs.duckdb.org/data/ontime.parquet', UniqueCarrier, bin_count := 5);
 ```
 
 ```text
@@ -130,7 +130,7 @@ FROM histogram('ontime.parquet', UniqueCarrier, bin_count := 5);
 └────────────────┴────────┴──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-[**SQL variables.**](https://github.com/duckdb/duckdb/pull/13084) This release introduces support for variables that can be defined in SQL. Variables can hold a single value of any type – including nested types like lists or structs. Variables can be set as literals, or from scalar subqueries. 
+[**SQL variables.**](https://github.com/duckdb/duckdb/pull/13084) This release introduces support for variables that can be defined in SQL. Variables can hold a single value of any type – including nested types like lists or structs. Variables can be set as literals, or from scalar subqueries.
 
 The value stored within variables can be read using `getvariable`. When used in a query, `getvariable` is treated as a literal during query planning and optimization. This allows variables to be used in places where we normally cannot read values from within tables, for example, when specifying which CSV files to read:
 
@@ -151,28 +151,30 @@ SELECT * FROM read_csv(getvariable('list_of_files'), filename := true);
 
 ### Unpacked Columns
 
-[**Unpacked `COLUMNS.`**](https://github.com/duckdb/duckdb/pull/11872) The [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns-expression) allows users to write dynamic SQL over a set of columns without needing to explicitly list the columns in the SQL string. Instead, the columns can be selected through either a regex or computed with a [lambda function]({% post_url 2024-08-08-friendly-lists-and-their-buddies-the-lambdas %}). 
+The [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns-expression) allows users to write dynamic SQL over a set of columns without needing to explicitly list the columns in the SQL string. Instead, the columns can be selected through either a regex or computed with a [lambda function]({% post_url 2024-08-08-friendly-lists-and-their-buddies-the-lambdas %}).
 
-This release expands this capability by allowing the columns expression to be *unpacked* into a function. This is especially useful when combined with nested functions like `struct_pack` or `list_value`.
+This release expands this capability by [allowing the `COLUMNS` expression to be *unpacked* into a function](https://github.com/duckdb/duckdb/pull/11872).
+This is especially useful when combined with nested functions like `struct_pack` or `list_value`.
 
 ```sql
-CREATE TABLE many_measurements(id INTEGER, measurement1 INTEGER, measurement2 INTEGER, measurement3 INTEGER);
+CREATE TABLE many_measurements(id INTEGER, m1 INTEGER, m2 INTEGER, m3 INTEGER);
 INSERT INTO many_measurements VALUES (1, 10, 100, 20);
 
-SELECT id, struct_pack(*COLUMNS('measurement\d')) AS measurements FROM many_measurements;
+SELECT id, struct_pack(*COLUMNS('m\d')) AS measurements FROM many_measurements;
 ```
+
 ```text
-┌───────┬──────────────────────────────────────────────────────────────────────────┐
-│  id   │                               measurements                               │
-│ int32 │ struct(measurement1 integer, measurement2 integer, measurement3 integer) │
-├───────┼──────────────────────────────────────────────────────────────────────────┤
-│     1 │ {'measurement1': 10, 'measurement2': 100, 'measurement3': 20}            │
-└───────┴──────────────────────────────────────────────────────────────────────────┘
-``` 
+┌───────┬────────────────────────────────────────────┐
+│  id   │                measurements                │
+│ int32 │ struct(m1 integer, m2 integer, m3 integer) │
+├───────┼────────────────────────────────────────────┤
+│     1 │ {'m1': 10, 'm2': 100, 'm3': 20}            │
+└───────┴────────────────────────────────────────────┘
+```
 
 ### `query` and `query_table` Functions
 
-[**`query` and `query_table` functions**.](https://github.com/duckdb/duckdb/pull/10586) These functions take a string literal, and convert it into a `SELECT` subquery or a table reference. Note that these functions can only take literal strings. As such, they are not as powerful (or dangerous) as a generic `eval`.
+The [`query` and `query_table` functions](https://github.com/duckdb/duckdb/pull/10586) take a string literal, and convert it into a `SELECT` subquery or a table reference. Note that these functions can only take literal strings. As such, they are not as powerful (or dangerous) as a generic `eval`.
 
 These functions are conceptually simple, but enable powerful and more dynamic SQL. For example, they allow passing in a table name as a prepared statement parameter:
 
@@ -197,13 +199,21 @@ When combined with the `COLUMNS` expression, we can write very generic SQL-only 
 
 ```sql
 CREATE OR REPLACE MACRO my_summarize(table_name) AS TABLE
-SELECT UNNEST([*COLUMNS('alias_.*')]) AS column_name, UNNEST([*COLUMNS('min_.*')]) AS min_value, UNNEST([*COLUMNS('max_.*')]) AS max_value
+SELECT
+    unnest([*COLUMNS('alias_.*')]) AS column_name,
+    unnest([*COLUMNS('min_.*')]) AS min_value,
+    unnest([*COLUMNS('max_.*')]) AS max_value
 FROM (
-	SELECT ANY_VALUE(alias(COLUMNS(*))) AS "alias_\0", MIN(COLUMNS(*))::VARCHAR AS "min_\0", MAX(COLUMNS(*))::VARCHAR AS "max_\0"
-	FROM query_table(table_name::VARCHAR)
+    SELECT
+        any_value(alias(COLUMNS(*))) AS "alias_\0",
+        min(COLUMNS(*))::VARCHAR AS "min_\0",
+        max(COLUMNS(*))::VARCHAR AS "max_\0"
+    FROM query_table(table_name::VARCHAR)
 );
 
-SELECT * FROM my_summarize('ontime.parquet') LIMIT 3;
+SELECT *
+FROM my_summarize('https://blobs.duckdb.org/data/ontime.parquet')
+LIMIT 3;
 ```
 
 ```text
@@ -229,18 +239,18 @@ CREATE TABLE B AS SELECT a.range FROM range(100) a, range(10000) b;
 SELECT count(*) FROM A JOIN B USING (i) WHERE j > 90;
 ```
 
-DuckDB will execute this join by building a hash table on the smaller table A, and then probe said hash table with the contents of B. DuckDB will now observe the values of i during construction of the hash table on A. It will then create a min-max range filter of those values of i and then *automatically* apply that filter to the values of i in B! That way, we early remove (in this case) 90% of data from the large table before even looking at the hash table. In this example, this leads to a roughly 10x improvement in query performance. The optimization can also be observed in the output of `EXPLAIN ANALYZE`. 
+DuckDB will execute this join by building a hash table on the smaller table A, and then probe said hash table with the contents of B. DuckDB will now observe the values of i during construction of the hash table on A. It will then create a min-max range filter of those values of i and then *automatically* apply that filter to the values of i in B! That way, we early remove (in this case) 90% of data from the large table before even looking at the hash table. In this example, this leads to a roughly 10× improvement in query performance. The optimization can also be observed in the output of `EXPLAIN ANALYZE`.
 
 ### Automatic CTE Materialization
 
 Common Table Expressions (CTE) are a convenient way to break up complex queries into manageable pieces without endless nesting of subqueries. Here is a small example for a CTE:
 
 ```sql
-WITH my_cte AS (SELECT range AS i from range (10)) 
+WITH my_cte AS (SELECT range AS i from range (10))
 SELECT i FROM my_cte WHERE i > 5;
 ```
 
-Sometimes, the same CTE is referenced multiple times in the same query. Previously, the CTE would be “copied” wherever it appeared. This creates a potential performance problem: if computing the CTE is computationally expensive, it would be better to cache (“materialize”) its results instead of computing the result multiple times in different places within the same query. However, different filter conditions might apply for different instantiations of the CTE, which could drastically reduce their computation cost. A classical no-win scenario in databases. It was [already possible]({% link docs/sql/query_syntax/with.md %}) to explicitly mark a CTE as materialized using the `MATERIALIZED` keyword, but that required manual intervention. 
+Sometimes, the same CTE is referenced multiple times in the same query. Previously, the CTE would be “copied” wherever it appeared. This creates a potential performance problem: if computing the CTE is computationally expensive, it would be better to cache (“materialize”) its results instead of computing the result multiple times in different places within the same query. However, different filter conditions might apply for different instantiations of the CTE, which could drastically reduce their computation cost. A classical no-win scenario in databases. It was [already possible]({% link docs/sql/query_syntax/with.md %}) to explicitly mark a CTE as materialized using the `MATERIALIZED` keyword, but that required manual intervention.
 
 This release adds a feature where DuckDB [automatically decides](https://github.com/duckdb/duckdb/pull/12290) whether a CTE result should be materialized or not using a heuristic. The heuristic currently is that if the CTE performs aggregation and is queried more than once, it should be materialized. We plan to expand that heuristic in the future.
 
@@ -250,11 +260,11 @@ This release adds a feature where DuckDB [automatically decides](https://github.
 
 Parallelism is critical for obtaining good query performance on modern hardware, and this release adds support for parallel streaming of query results. The system will use all available threads to fill up a query result buffer of a limited size (a few megabytes). When data is consumed from the result buffer, the threads will restart and start filling up the buffer again. The size of the buffer can be configured through the `streaming_buffer_size` parameter.
 
-Below is a small benchmark illustrating the performance benefits that can be obtained using the Python streaming result interface:
+Below is a small benchmark using [`ontime.parquet`](https://blobs.duckdb.org/data/ontime.parquet) to illustrate the performance benefits that can be obtained using the Python streaming result interface:
 
 ```python
 import duckdb
-%timeit duckdb.sql(“SELECT * FROM ontime.parquet WHERE flightnum=6805;”).fetchone()
+duckdb.sql("SELECT * FROM 'ontime.parquet' WHERE flightnum = 6805;").fetchone()
 ```
 
 | v1.0  | v1.1  |
@@ -263,7 +273,7 @@ import duckdb
 
 ### Parallel Union By Name
 
-The `union_by_name` parameter allows combination of – for example – CSV files that have the same columns in them but not in the same order. This release [adds support for parallelism](https://github.com/duckdb/duckdb/pull/12957) when using `union_by_name`. This greatly improves reading performance when using the union by name feature on multiple files. 
+The `union_by_name` parameter allows combination of – for example – CSV files that have the same columns in them but not in the same order. This release [adds support for parallelism](https://github.com/duckdb/duckdb/pull/12957) when using `union_by_name`. This greatly improves reading performance when using the union by name feature on multiple files.
 
 ### Nested ART Rework (Foreign Key Load Speed-Up)
 
@@ -277,11 +287,11 @@ INSERT INTO a FROM range(100);
 INSERT INTO b SELECT a.range FROM range(100) a, range(10000) b;
 ```
 
-On the previous version, this would take ca. 10s on a MacBook to complete. It now takes 0.2s thanks to the new index structure, a ca. 50x improvement! 
+On the previous version, this would take ca. 10s on a MacBook to complete. It now takes 0.2s thanks to the new index structure, a ca. 50x improvement!
 
 ### Window Function Improvements
 
-Window functions see a lot of use in DuckDB, which is why we are continuously improving performance of executing Window functions over large datasets. 
+Window functions see a lot of use in DuckDB, which is why we are continuously improving performance of executing Window functions over large datasets.
 
 The [`DISTINCT`](https://github.com/duckdb/duckdb/pull/12311)  and [`FILTER`](https://github.com/duckdb/duckdb/pull/12250) window function modifiers can now be executed in streaming mode. Streaming mode means that the input data for the operator does not need to be completely collected and buffered before the operator can execute. For large intermediate results, this can have a very large performance impact. For example, the following query will now use the streaming window operator:
 
@@ -312,7 +322,7 @@ Previously, the filter on `i` could not be pushed into the scan on `tbl`. But we
 ││       Physical Plan       ││
 │└───────────────────────────┘│
 └─────────────────────────────┘
-…
+              …
 ┌─────────────┴─────────────┐
 │           WINDOW          │
 │    ────────────────────   │
@@ -323,7 +333,7 @@ Previously, the filter on `i` could not be pushed into the scan on `tbl`. But we
 ┌─────────────┴─────────────┐
 │         SEQ_SCAN          │
 │    ────────────────────   │
-│            tbl           │
+│            tbl            │
 │                           │
 │       Projections: i      │
 │                           │
@@ -334,7 +344,7 @@ Previously, the filter on `i` could not be pushed into the scan on `tbl`. But we
 └───────────────────────────┘
 ```
 
-The blocking (non-streaming) version of the window operator [now processes input data in parallel](https://github.com/duckdb/duckdb/pull/12907). This greatly reduces the footprint of the window operator. 
+The blocking (non-streaming) version of the window operator [now processes input data in parallel](https://github.com/duckdb/duckdb/pull/12907). This greatly reduces the footprint of the window operator.
 
 See also [Richard's talk on the topic](https://www.youtube.com/watch?v=QubE0u8Kq7Y&list=PLzIMXBizEZjhbacz4PWGuCUSxizmLei8Y&index=8) at [DuckCon #5]({% post_url 2024-08-15-duckcon5 %}) in Seattle a few weeks ago.
 
@@ -379,10 +389,10 @@ LOAD spatial;
 -- Create a table with 10_000_000 random points
 CREATE TABLE t1 AS SELECT point::GEOMETRY as geom
 FROM st_generatepoints(
-		{min_x: 0, min_y: 0, max_x: 10000, max_y: 10000}::BOX_2D,
-		10_000_000,
-		1337
-	);
+        {min_x: 0, min_y: 0, max_x: 10000, max_y: 10000}::BOX_2D,
+        10_000_000,
+        1337
+    );
 
 -- Create an index on the table.
 CREATE INDEX my_idx ON t1 USING RTREE (geom);
