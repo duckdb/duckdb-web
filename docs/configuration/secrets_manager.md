@@ -57,7 +57,13 @@ CREATE PERSISTENT SECRET my_persistent_secret (
 );
 ```
 
-This will write the secret (unencrypted) to the `~/.duckdb/stored_secrets` directory.
+By default, this will write the secret (unencrypted) to the `~/.duckdb/stored_secrets` directory. To change the secrets directory, issue:
+
+```sql
+SET secret_directory = 'path/to/my_secrets_dir';
+```
+
+Note that setting the value of the `home_directory` configuration option has no effect on the location of the secrets.
 
 ### Deleting Secrets
 

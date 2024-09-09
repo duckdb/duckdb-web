@@ -73,6 +73,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Narrow tables – that do not span horizontally across the entire page – should be prepended with an empty div that has the `narrow_table` class: `<div class="narrow_table"></div>`.
 * Do not introduce hard line breaks if possible. Therefore, avoid using the `<br/>` HTML tag and avoid [double spaces at the end of a line in Markdown](https://spec.commonmark.org/0.28/#hard-line-breaks).
 * Single and double quote characters (`'` and `"`) are not converted to smart quotation marks automatically. To insert these, use `“` `”` and `‘` `’`.
+* When referencing other articles, put their titles in quotes, e.g., `see the [“Lightweight Compression in DuckDB” blog post]({% post_url 2022-10-28-lightweight-compression %})`.
 * For unordered lists, use `*`. If the list has multiple levels, use **4 spaces** for indentation.
 
 > [!TIP]
@@ -104,7 +105,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
    Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
    ```
    ````
-* To specify placeholders, use the left angle and right angle characters, `⟨` and `⟩`
+* To specify placeholders (or template-style code), use the left angle and right angle characters, `⟨` and `⟩`
      * For example: `SELECT * FROM ⟨your_table_name⟩`.
      * These characters are known in LaTeX code as `\langle` and `\rangle`.
      * *Avoid* using artihmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.

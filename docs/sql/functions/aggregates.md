@@ -603,7 +603,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 ## Ordered Set Aggregate Functions
 
-The table below shows the available "ordered set" aggregate functions.
+The table below shows the available “ordered set” aggregate functions.
 These functions are specified using the `WITHIN GROUP (ORDER BY sort_expression)` syntax,
 and they are converted to an equivalent aggregate function that takes the ordering expression
 as the first argument.

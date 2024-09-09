@@ -40,19 +40,20 @@ $(document).ready(function(){
 	}
 	
 	function simpleCodeHighlight( markup ) {
-	
-		markup = markup.replace( 'winget install', '<span class="nb">winget install</span>' );
+		markup = markup.replace( /("(.*?)")/g, '<span class="s2">$1</span>' );
+		markup = markup.replace( /^install\.packages\((.*)\)$/, '<span class="n">install.packages</span><span class="p">(</span>$1<span class="p">)</span>' );
+		markup = markup.replace( 'brew install', '<span class="nb">brew install</span>' );
+		markup = markup.replace( 'cargo add', '<span class="nb">cargo add</span>' );
+		markup = markup.replace( 'npm install', '<span class="nb">npm install</span>' );
 		markup = markup.replace( 'pip install', '<span class="nb">pip install</span>' );
-		markup = markup.replace( 'npm install duckdb', '<span class="nb">npm install duckdb</span>' );
-		markup = markup.replace( 'brew install duckdb', '<span class="nb">brew install duckdb</span>' );
-		markup = markup.replace( 'cargo add duckdb', '<span class="nb">cargo add duckdb</span>' );
+		markup = markup.replace( 'winget install', '<span class="nb">winget install</span>' );
+		markup = markup.replace( /([^."/])duckdb([^_])([^-])/, '$1<span class="nb">duckdb</span>$2$3' );
+		markup = markup.replace( /^duckdb$/, '<span class="nb">duckdb</span>' );
 		markup = markup.replace( 'go get', '<span class="nb">go get</span>' );
 		markup = markup.replace( '--upgrade', '<span class="nt">--upgrade</span>' );
 		markup = markup.replace( '--features', '<span class="nt">--features</span>' );
 		markup = markup.replace( '--pre', '<span class="nt">--pre</span>' );
-		markup = markup.replace(/install\.packages\("(.*?)"\)/g, '<span class="n">install.packages</span><span class="p">(</span><span class="s2">"$1"</span><span class="p">)</span>' );
 		markup = markup.replace( /(&lt;\/?.*?&gt;)/g, '<span class="nt">$1</span>' );
-	
 		return markup;
 	}
 	
@@ -250,7 +251,7 @@ $(document).ready(function(){
 	
 		if ( configurables[0].usage_example ) {
 			$( '.example.output' ).show();
-			$( '.example code' ).html( configurables[0].usage_example );
+			$( '.example code' ).html( simpleCodeHighlight( replaceHtmlEntities( configurables[0].usage_example ) ) );
 		} else {
 			$( '.example.output' ).hide();
 		}
@@ -326,5 +327,12 @@ $(document).ready(function(){
 		window.addEventListener('popstate', handleQueryParameters);
 	
 	}
+	
+	setTimeout(function() {
+		// Activate the users system
+		$('.platform li').removeClass('selected');
+		$(`.platform li[data-id=".${OSdatid}"]`).addClass('selected');
+		evaluation();
+	}, 100);
 
 });

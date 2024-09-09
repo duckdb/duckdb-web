@@ -94,7 +94,7 @@ DuckDB performs an enforced cast, therefore, it completes the query and returns 
 
 ## Case Sensitivity for Quoted Identifiers
 
-PostgreSQL is case-insensitive. The way PostgreSQL achieves case insensitivity is by lowercasing unquoted identifiers within SQL, whereas quoting preserves case, e.g. the following command creates a table named `mytable` but tries to query for `MyTaBLe` because quotes preserve the case.
+PostgreSQL is case-insensitive. The way PostgreSQL achieves case insensitivity is by lowercasing unquoted identifiers within SQL, whereas quoting preserves case, e.g., the following command creates a table named `mytable` but tries to query for `MyTaBLe` because quotes preserve the case.
 
 ```sql
 CREATE TABLE MyTaBLe(x INT);
@@ -153,19 +153,3 @@ SELECT table_name FROM duckdb_tables();
 | mytable    |
 
 However, the case insensitive matching in the system for identifiers cannot be turned off.
-
-## Scalar Subqueries
-
-Subqueries in DuckDB are not required to return a single row. Take the following query for example:
-
-```sql
-SELECT (SELECT 1 UNION SELECT 2) AS b;
-```
-
-PostgreSQL returns an error:
-
-```console
-ERROR:  more than one row returned by a subquery used as an expression
-```
-
-DuckDB non-deterministically returns either `1` or `2`.

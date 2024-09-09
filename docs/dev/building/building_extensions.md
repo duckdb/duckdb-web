@@ -71,10 +71,6 @@ When this flag is set, the [`json` extension]({% link docs/extensions/json.md %}
 
 When this flag is set, the [`inet` extension]({% link docs/extensions/inet.md %}) is built.
 
-#### `BUILD_SQLSMITH`
-
-When this flag is set, the [SQLSmith extension](https://github.com/duckdb/duckdb/pull/3410) is built.
-
 ### Debug Flags
 
 #### `CRASH_ON_ASSERT`
@@ -84,7 +80,7 @@ With this flag enabled, when the assertion triggers it will instead directly cau
 
 #### `DISABLE_STRING_INLINE`
 
-In our execution format `string_t` has the feature to "inline" strings that are under a certain length (12 bytes), this means they don't require a separate allocation.
+In our execution format `string_t` has the feature to “inline” strings that are under a certain length (12 bytes), this means they don't require a separate allocation.
 When this flag is set, we disable this and don't inline small strings.
 
 #### `DISABLE_MEMORY_SAFETY`

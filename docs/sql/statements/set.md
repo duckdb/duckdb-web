@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: SET/RESET Statements
+title: SET and RESET Statements
 railroad: statements/set.js
 ---
 

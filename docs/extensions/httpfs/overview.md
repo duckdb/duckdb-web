@@ -8,7 +8,7 @@ redirect_from:
 ---
 
 The `httpfs` extension is an autoloadable extension implementing a file system that allows reading remote/writing remote files.
-For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the `httpfs` extension supports reading/writing/globbing files.
+For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the `httpfs` extension supports reading/writing/[globbing]({% link docs/sql/functions/pattern_matching.md %}#globbing) files.
 
 ## Installation and Loading
 

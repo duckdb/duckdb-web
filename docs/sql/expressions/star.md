@@ -95,7 +95,7 @@ FROM tbl;
 
 ## `COLUMNS` Expression
 
-The `COLUMNS` expression can be used to execute the same expression on multiple columns. Like the `*` expression, it can only be used in the `SELECT` clause.
+The `COLUMNS` expression can be used to execute the same expression on multiple columns. For example:
 
 ```sql
 CREATE TABLE numbers (id INTEGER, number INTEGER);

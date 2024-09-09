@@ -10,11 +10,17 @@ DuckDB has a number of configuration options that can be used to change the beha
 
 The configuration options can be set using either the [`SET` statement]({% link docs/sql/statements/set.md %}) or the [`PRAGMA` statement]({% link docs/configuration/pragmas.md %}).
 They can be reset to their original values using the [`RESET` statement]({% link docs/sql/statements/set.md %}#reset).
-The values of configuration options can be queried via the [`current_setting()` scalar function]({% link docs/sql/functions/utility.md %}) or using the [`duckdb_settings()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_settings).
+
+The values of configuration options can be queried via the [`current_setting()` scalar function]({% link docs/sql/functions/utility.md %}) or using the [`duckdb_settings()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_settings). For example:
+
+```sql
+SELECT current_setting('memory_limit') AS memlimit;
+SELECT value AS memlimit FROM duckdb_settings() WHERE name = 'memory_limit';
+```
 
 ## Examples
 
-Set the memory limit of the system to 10GB.
+Set the memory limit of the system to 10 GB.
 
 ```sql
 SET memory_limit = '10GB';
@@ -129,7 +135,7 @@ Configuration options come with different default [scopes]({% link docs/sql/stat
 | `immediate_transaction_mode`                 | Whether transactions should be started lazily when needed, or immediately when BEGIN TRANSACTION is called                                       | `BOOLEAN` | `false`                                             |
 | `lock_configuration`                         | Whether or not the configuration can be altered                                                                                                  | `BOOLEAN` | `false`                                             |
 | `max_memory`, `memory_limit`                 | The maximum memory of the system (e.g., 1GB)                                                                                                     | `VARCHAR` | 80% of RAM                                          |
-| `max_temp_directory_size`                    | The maximum amount of data stored inside the 'temp_directory' (when set) (e.g., 1GB)                                                             | `VARCHAR` | `0 bytes`                                           |
+| `max_temp_directory_size`                    | The maximum amount of data stored inside the `temp_directory` (e.g., 1GB). No limit is applied when value is zero.                                                              | `VARCHAR` | `0 bytes`                                           |
 | `old_implicit_casting`                       | Allow implicit casting to/from VARCHAR                                                                                                           | `BOOLEAN` | `false`                                             |
 | `password`                                   | The password to use. Ignored for legacy compatibility.                                                                                           | `VARCHAR` | `NULL`                                              |
 | `preserve_insertion_order`                   | Whether or not to preserve insertion order. If set to false the system is allowed to re-order any results that do not contain ORDER BY clauses.  | `BOOLEAN` | `true`                                              |
@@ -157,7 +163,7 @@ Configuration options come with different default [scopes]({% link docs/sql/stat
 | `enable_http_logging`                | Enables HTTP logging                                                                                                                                    | `BOOLEAN` | `false`         |
 | `enable_profiling`                   | Enables profiling, and sets the output format (**JSON**, **QUERY_TREE**, **QUERY_TREE_OPTIMIZER**)                                                      | `VARCHAR` | `NULL`          |
 | `enable_progress_bar_print`          | Controls the printing of the progress bar, when 'enable_progress_bar' is true                                                                           | `BOOLEAN` | `true`          |
-| `enable_progress_bar`                | Enables the progress bar, printing progress to the terminal for long queries                                                                            | `BOOLEAN` | `false`         |
+| `enable_progress_bar`                | Enables the progress bar, printing progress to the terminal for long queries                                                                            | `BOOLEAN` | `true`         |
 | `errors_as_json`                     | Output error messages as structured **JSON** instead of as a raw string                                                                                 | `BOOLEAN` | `false`         |
 | `explain_output`                     | Output of EXPLAIN statements (**ALL**, **OPTIMIZED_ONLY**, **PHYSICAL_ONLY**)                                                                           | `VARCHAR` | `physical_only` |
 | `file_search_path`                   | A comma separated list of directories to search for input files                                                                                         | `VARCHAR` |                 |
