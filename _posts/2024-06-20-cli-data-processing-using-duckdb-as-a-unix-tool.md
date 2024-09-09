@@ -597,7 +597,7 @@ So, let's switch to the Dutch railway services dataset that we used in a [previo
 
 We'll use the [2023 railway services file (`services-2023.csv.gz`)](https://blobs.duckdb.org/nl-railway/services-2023.csv.gz) and count the number of Intercity services that operated in that year.
 
-In Unix, we can use the [`gzcat`](https://www.unix.com/man-page/osf1/1/gzcat/) command to decompress the `csv.gz` file into a pipeline. Then, we can use `grep` or `pcregrep` (which is more performant), and top it off with the [`wc`](https://man7.org/linux/man-pages/man1/wc.1.html) command to count the number of lines (`-l`).
+In Unix, we can use the [`gzcat`](https://man7.org/linux/man-pages/man1/zcat.1p.html) command to decompress the `csv.gz` file into a pipeline. Then, we can use `grep` or `pcregrep` (which is more performant), and top it off with the [`wc`](https://man7.org/linux/man-pages/man1/wc.1.html) command to count the number of lines (`-l`).
 In DuckDB, the built-in CSV reader also supports [compressed CSV files]({% link docs/data/csv/overview.md %}#parameters), so we can use that without any extra configuration.
 
 ```batch
