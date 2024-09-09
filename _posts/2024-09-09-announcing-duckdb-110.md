@@ -98,8 +98,8 @@ SELECT ARRAY(SELECT unnest(range(10))) AS subquery_result;
 The `scalar_subquery_error_on_multiple_rows` setting can be set to `false` to revert this behavior.
 
 ```sql
-SET scalar_subquery_error_on_multiple_rows=false;
-SELECT (SELECT unnest(range(10))) as result;
+SET scalar_subquery_error_on_multiple_rows = false;
+SELECT (SELECT unnest(range(10))) AS result;
 ```
 ```text
 ┌────────┐
@@ -402,19 +402,22 @@ INSTALL spatial;
 LOAD spatial;
 
 -- Create a table with 10_000_000 random points
-CREATE TABLE t1 AS SELECT point::GEOMETRY as geom
+CREATE TABLE t1 AS SELECT point::GEOMETRY AS geom
 FROM st_generatepoints(
         {min_x: 0, min_y: 0, max_x: 10_000, max_y: 10_000}::BOX_2D,
         10_000_000,
         1337
     );
 
--- Create an index on the table.
+-- Create an index on the table
 CREATE INDEX my_idx ON t1 USING RTREE (geom);
 
--- Perform a query with a "spatial predicate" on the indexed geometry column
--- Note how the second argument in this case, the ST_MakeEnvelope call is a "constant"
-SELECT count(*) FROM t1 WHERE ST_Within(geom, ST_MakeEnvelope(450, 450, 650, 650));
+-- Perform a query with a "spatial predicate" on the indexed geometry
+-- column. Note how the second argument in this case,
+-- the ST_MakeEnvelope call is a "constant"
+SELECT count(*)
+FROM t1
+WHERE ST_Within(geom, ST_MakeEnvelope(450, 450, 650, 650));
 ```
 
 ```text
