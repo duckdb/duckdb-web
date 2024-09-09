@@ -523,6 +523,17 @@ SELECT * FROM nonexistent_tbl;
 }
 ```
 
+## IEEE Floating-Point Operation Semantics
+
+DuckDB follows IEEE floating-point operation semantics. If you would like to turn this off, run:
+
+```sql
+SET ieee_floating_point_ops = false;
+```
+
+In this case, floating point division by zero (e.g., `1.0 / 0.0`, `0.0 / 0.0` and `-1.0 / 0.0`) will all return `NULL`.
+
+
 ## Query Verification (for Development)
 
 The following `PRAGMA`s are mostly used for development and internal testing.

@@ -26,15 +26,15 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 
 <div class="narrow_table monospace_table"></div>
 
-| Expression              |   DuckDB | PostgreSQL |  IEEE 754 |
-| :---------------------- | -------: | ---------: | --------: |
-| 1.0 / 0.0               |     NULL |      error |  Infinity |
-| 0.0 / 0.0               |     NULL |      error |       NaN |
-| -1.0 / 0.0              |     NULL |      error | -Infinity |
-| 'Infinity' / 'Infinity' |      NaN |        NaN |       NaN |
-| 1.0 / 'Infinity'        |      0.0 |        0.0 |       0.0 |
-| 'Infinity' - 'Infinity' |      NaN |        NaN |       NaN |
-| 'Infinity' - 1.0        | Infinity |   Infinity |  Infinity |
+| Expression              |    DuckDB | PostgreSQL |  IEEE 754 |
+| :---------------------- | --------: | ---------: | --------: |
+| 1.0 / 0.0               |  Infinity |      error |  Infinity |
+| 0.0 / 0.0               |       NaN |      error |       NaN |
+| -1.0 / 0.0              | -Infinity |      error | -Infinity |
+| 'Infinity' / 'Infinity' |       NaN |        NaN |       NaN |
+| 1.0 / 'Infinity'        |       0.0 |        0.0 |       0.0 |
+| 'Infinity' - 'Infinity' |       NaN |        NaN |       NaN |
+| 'Infinity' - 1.0        |  Infinity |   Infinity |  Infinity |
 
 ## Division on Integers
 
