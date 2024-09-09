@@ -250,7 +250,7 @@ This release adds a *very cool* optimization for joins: DuckDB now [automaticall
 
 ```sql
 CREATE TABLE A AS SELECT range i, range j FROM range(100);
-CREATE TABLE B AS SELECT a.range FROM range(100) a, range(10_000) b;
+CREATE TABLE B AS SELECT a.range i FROM range(100) a, range(10_000) b;
 SELECT count(*) FROM A JOIN B USING (i) WHERE j > 90;
 ```
 
