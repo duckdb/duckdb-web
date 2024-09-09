@@ -411,3 +411,5 @@ R-Tree indexes mostly share the same feature-set as DuckDB's built-in ART index.
 ## Final Thoughts
 
 These were a few highlights – but there are many more features and improvements in this release. The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.1.0).
+
+We would like to thank again our amazing community for using DuckDB, building cool projects on DuckDB and improving DuckDB by providing us feedback. Your contributions truly mean a lot!
