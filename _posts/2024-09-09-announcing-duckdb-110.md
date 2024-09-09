@@ -261,7 +261,7 @@ DuckDB will execute this join by building a hash table on the smaller table A, a
 Common Table Expressions (CTE) are a convenient way to break up complex queries into manageable pieces without endless nesting of subqueries. Here is a small example for a CTE:
 
 ```sql
-WITH my_cte AS (SELECT range AS i from range (10))
+WITH my_cte AS (SELECT range AS i FROM range(10))
 SELECT i FROM my_cte WHERE i > 5;
 ```
 
