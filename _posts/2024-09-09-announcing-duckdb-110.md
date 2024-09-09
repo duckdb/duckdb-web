@@ -59,7 +59,7 @@ The `ieee_floating_point_ops` can be set to `false` to revert this behavior:
 
 ```sql
 SET ieee_floating_point_ops = false;
-SELECT 1/0 AS division_by_zero;
+SELECT 1 / 0 AS division_by_zero;
 ```
 
 ```text
@@ -75,9 +75,17 @@ SELECT 1/0 AS division_by_zero;
 
 ```sql
 SELECT (SELECT unnest(range(10)));
--- More than one row returned by a subquery used as an expression - scalar subqueries can only return a single row.
+```
+
+```console
+Invalid Input Error: More than one row returned by a subquery used as
+an expression  - scalar subqueries can only return a single row.
+```
+
+```sql
 SELECT ARRAY(SELECT unnest(range(10))) AS subquery_result;
 ```
+
 ```text
 ┌────────────────────────────────┐
 │        subquery_result         │
@@ -113,7 +121,11 @@ In this release, we have been working towards making community extensions easier
 [**Histogram.**](https://github.com/duckdb/duckdb/pull/12590) This version introduces the `histogram` function that can be used to compute histograms over columns of a dataset. The histogram function works for columns of any type, and allows for various different binning strategies and a custom amount of bins.
 
 ```sql
-FROM histogram('https://blobs.duckdb.org/data/ontime.parquet', UniqueCarrier, bin_count := 5);
+FROM histogram(
+    'https://blobs.duckdb.org/data/ontime.parquet',
+    UniqueCarrier,
+    bin_count := 5
+);
 ```
 
 ```text
