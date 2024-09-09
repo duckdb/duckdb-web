@@ -199,9 +199,15 @@ When combined with the `COLUMNS` expression, we can write very generic SQL-only 
 
 ```sql
 CREATE OR REPLACE MACRO my_summarize(table_name) AS TABLE
-SELECT UNNEST([*COLUMNS('alias_.*')]) AS column_name, UNNEST([*COLUMNS('min_.*')]) AS min_value, UNNEST([*COLUMNS('max_.*')]) AS max_value
+SELECT
+	unnest([*COLUMNS('alias_.*')]) AS column_name,
+	unnest([*COLUMNS('min_.*')]) AS min_value,
+	unnest([*COLUMNS('max_.*')]) AS max_value
 FROM (
-	SELECT ANY_VALUE(alias(COLUMNS(*))) AS "alias_\0", MIN(COLUMNS(*))::VARCHAR AS "min_\0", MAX(COLUMNS(*))::VARCHAR AS "max_\0"
+	SELECT
+		any_value(alias(COLUMNS(*))) AS "alias_\0",
+		min(COLUMNS(*))::VARCHAR AS "min_\0",
+		max(COLUMNS(*))::VARCHAR AS "max_\0"
 	FROM query_table(table_name::VARCHAR)
 );
 
