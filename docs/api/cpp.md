@@ -3,6 +3,10 @@ layout: docu
 title: C++ API
 ---
 
+> Warning DuckDB's C++ API is internal.
+> It is not guaranteed to be stable and can change without notice.
+> If you would like to build an application on DuckDB, we recommend using the [C API]({% link docs/api/c/overview.md %}).
+
 ## Installation
 
 The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link docs/installation/index.html %}?environment=cplusplus) for details.
