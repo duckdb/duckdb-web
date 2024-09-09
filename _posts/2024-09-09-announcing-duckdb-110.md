@@ -113,7 +113,7 @@ In this release, we have been working towards making community extensions easier
 [**Histogram.**](https://github.com/duckdb/duckdb/pull/12590) This version introduces the `histogram` function that can be used to compute histograms over columns of a dataset. The histogram function works for columns of any type, and allows for various different binning strategies and a custom amount of bins.
 
 ```sql
-FROM histogram('ontime.parquet', UniqueCarrier, bin_count := 5);
+FROM histogram('https://blobs.duckdb.org/data/ontime.parquet', UniqueCarrier, bin_count := 5);
 ```
 
 ```text
@@ -157,19 +157,19 @@ This release expands this capability by [allowing the `COLUMNS` expression to be
 This is especially useful when combined with nested functions like `struct_pack` or `list_value`.
 
 ```sql
-CREATE TABLE many_measurements(id INTEGER, measurement1 INTEGER, measurement2 INTEGER, measurement3 INTEGER);
+CREATE TABLE many_measurements(id INTEGER, m1 INTEGER, m2 INTEGER, m3 INTEGER);
 INSERT INTO many_measurements VALUES (1, 10, 100, 20);
 
-SELECT id, struct_pack(*COLUMNS('measurement\d')) AS measurements FROM many_measurements;
+SELECT id, struct_pack(*COLUMNS('m\d')) AS measurements FROM many_measurements;
 ```
 
 ```text
-┌───────┬──────────────────────────────────────────────────────────────────────────┐
-│  id   │                               measurements                               │
-│ int32 │ struct(measurement1 integer, measurement2 integer, measurement3 integer) │
-├───────┼──────────────────────────────────────────────────────────────────────────┤
-│     1 │ {'measurement1': 10, 'measurement2': 100, 'measurement3': 20}            │
-└───────┴──────────────────────────────────────────────────────────────────────────┘
+┌───────┬────────────────────────────────────────────┐
+│  id   │                measurements                │
+│ int32 │ struct(m1 integer, m2 integer, m3 integer) │
+├───────┼────────────────────────────────────────────┤
+│     1 │ {'m1': 10, 'm2': 100, 'm3': 20}            │
+└───────┴────────────────────────────────────────────┘
 ```
 
 ### `query` and `query_table` Functions
@@ -205,7 +205,9 @@ FROM (
 	FROM query_table(table_name::VARCHAR)
 );
 
-SELECT * FROM my_summarize('ontime.parquet') LIMIT 3;
+SELECT *
+FROM my_summarize('https://blobs.duckdb.org/data/ontime.parquet')
+LIMIT 3;
 ```
 
 ```text
@@ -252,11 +254,11 @@ This release adds a feature where DuckDB [automatically decides](https://github.
 
 Parallelism is critical for obtaining good query performance on modern hardware, and this release adds support for parallel streaming of query results. The system will use all available threads to fill up a query result buffer of a limited size (a few megabytes). When data is consumed from the result buffer, the threads will restart and start filling up the buffer again. The size of the buffer can be configured through the `streaming_buffer_size` parameter.
 
-Below is a small benchmark illustrating the performance benefits that can be obtained using the Python streaming result interface:
+Below is a small benchmark using [`ontime.parquet`](https://blobs.duckdb.org/data/ontime.parquet) to illustrate the performance benefits that can be obtained using the Python streaming result interface:
 
 ```python
 import duckdb
-%timeit duckdb.sql(“SELECT * FROM ontime.parquet WHERE flightnum=6805;”).fetchone()
+duckdb.sql("SELECT * FROM 'ontime.parquet' WHERE flightnum = 6805;").fetchone()
 ```
 
 | v1.0  | v1.1  |
