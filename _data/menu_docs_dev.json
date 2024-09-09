@@ -10,7 +10,7 @@
       "slug": "",
       "mainfolderitems": [
         {
-          "page": "Overview",
+          "page": "Getting Started",
           "url": "index"
         },
         {
@@ -378,24 +378,6 @@
           ]
         },
         {
-          "page": "Configuration",
-          "slug": "configuration",
-          "subfolderitems": [
-            {
-              "page": "Overview",
-              "url": "overview"
-            },
-            {
-              "page": "Pragmas",
-              "url": "pragmas"
-            },
-            {
-              "page": "Secrets Manager",
-              "url": "secrets_manager"
-            }
-          ]
-        },
-        {
           "page": "SQL",
           "slug": "sql",
           "subfolderitems": [
@@ -424,7 +406,7 @@
                   "url": "alter_view"
                 },
                 {
-                  "page": "ATTACH/DETACH",
+                  "page": "ATTACH / DETACH",
                   "url": "attach"
                 },
                 {
@@ -488,7 +470,7 @@
                   "url": "drop"
                 },
                 {
-                  "page": "EXPORT/IMPORT DATABASE",
+                  "page": "EXPORT / IMPORT DATABASE",
                   "url": "export"
                 },
                 {
@@ -508,8 +490,12 @@
                   "url": "select"
                 },
                 {
-                  "page": "SET/RESET",
+                  "page": "SET / RESET",
                   "url": "set"
+                },
+                {
+                  "page": "SET VARIABLE",
+                  "url": "set_variable"
                 },
                 {
                   "page": "SUMMARIZE",
@@ -900,6 +886,24 @@
           ]
         },
         {
+          "page": "Configuration",
+          "slug": "configuration",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "Pragmas",
+              "url": "pragmas"
+            },
+            {
+              "page": "Secrets Manager",
+              "url": "secrets_manager"
+            }
+          ]
+        },
+        {
           "page": "Extensions",
           "slug": "extensions",
           "subfolderitems": [
@@ -1162,7 +1166,7 @@
                   "url": "cloudflare_r2_import"
                 },
                 {
-                  "page": "DuckDB over HTTPS/S3",
+                  "page": "DuckDB over HTTPS / S3",
                   "url": "duckdb_over_https_or_s3"
                 }
               ]
@@ -1370,6 +1374,14 @@
             {
               "page": "Overview",
               "url": "overview"
+            },
+            {
+              "page": "Limits",
+              "url": "limits"
+            },
+            {
+              "page": "Non-Deterministic Behavior",
+              "url": "non-deterministic_behavior"
             },
             {
               "page": "DuckDB's Footprint",

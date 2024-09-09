@@ -50,8 +50,6 @@ FROM addresses
 GROUP BY ALL;
 ```
 
-GROUP BY city, street_name:
-
 Compute the average income per city per street_name. Since income is wrapped in an aggregate function, do not include it in the `GROUP BY`:
 
 ```sql

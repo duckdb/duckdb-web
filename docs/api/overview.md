@@ -19,6 +19,7 @@ Client APIs:
 * [Python]({% link docs/api/python/overview.md %})
 * [R]({% link docs/api/r.md %})
 * [Rust]({% link docs/api/rust.md %})
+* [Swift]({% link docs/api/swift.md %})
 * [WebAssembly (Wasm)]({% link docs/api/wasm/overview.md %})
 
 There are also contributed third-party DuckDB wrappers, which currently do not have an official documentation page:

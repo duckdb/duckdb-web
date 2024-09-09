@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS t1 (i INTEGER, j INTEGER);
 
 ## `CREATE TABLE ... AS SELECT` (CTAS)
 
-DuckDB supports the `CREATE TABLE ... AS SELECT` syntax, also known as "CTAS":
+DuckDB supports the `CREATE TABLE ... AS SELECT` syntax, also known as “CTAS”:
 
 ```sql
 CREATE TABLE nums AS

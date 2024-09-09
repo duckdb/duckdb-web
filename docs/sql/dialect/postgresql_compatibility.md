@@ -29,7 +29,7 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 | Expression              |   DuckDB | PostgreSQL |  IEEE 754 |
 | :---------------------- | -------: | ---------: | --------: |
 | 1.0 / 0.0               |     NULL |      error |  Infinity |
-| 0.0 / 0.0               |     NULL |      error |       Nan |
+| 0.0 / 0.0               |     NULL |      error |       NaN |
 | -1.0 / 0.0              |     NULL |      error | -Infinity |
 | 'Infinity' / 'Infinity' |      NaN |        NaN |       NaN |
 | 1.0 / 'Infinity'        |      0.0 |        0.0 |       0.0 |
@@ -38,7 +38,7 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 
 ## Division on Integers
 
-When computing division on integers, PostgreSQL performs integer divison, while DuckDB performs float division:
+When computing division on integers, PostgreSQL performs integer division, while DuckDB performs float division:
 
 ```sql
 SELECT 1 / 2 AS x;
@@ -94,7 +94,7 @@ DuckDB performs an enforced cast, therefore, it completes the query and returns 
 
 ## Case Sensitivity for Quoted Identifiers
 
-PostgreSQL is case-insensitive. The way PostgreSQL achieves case insensitivity is by lowercasing unquoted identifiers within SQL, whereas quoting preserves case, e.g. the following command creates a table named `mytable` but tries to query for `MyTaBLe` because quotes preserve the case.
+PostgreSQL is case-insensitive. The way PostgreSQL achieves case insensitivity is by lowercasing unquoted identifiers within SQL, whereas quoting preserves case, e.g., the following command creates a table named `mytable` but tries to query for `MyTaBLe` because quotes preserve the case.
 
 ```sql
 CREATE TABLE MyTaBLe(x INT);

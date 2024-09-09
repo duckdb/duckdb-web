@@ -5,6 +5,8 @@ redirect_from:
   - docs/test/functions/bitstring
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 This section describes functions and operators for examining and manipulating [`BITSTRING`]({% link docs/sql/data_types/bitstring.md %}) values.
 Bitstrings must be of equal length when performing the bitwise operands AND, OR and XOR. When bit shifting, the original length of the string is preserved.
 
@@ -116,7 +118,7 @@ These aggregate functions are available for `BIT` type.
 | [`bit_or(arg)`](#bit_orarg) | Returns the bitwise OR operation performed on all bitstrings in a given expression. |
 | [`bit_xor(arg)`](#bit_xorarg) | Returns the bitwise XOR operation performed on all bitstrings in a given expression. |
 | [`bitstring_agg(arg)`](#bitstring_aggarg) | Returns a bitstring with bits set for each distinct position defined in `arg`. |
-| [`bitstring_agg(arg, min, max)`](#bitstring_aggarg-min-max) | Returns a bitstring with bits set for each distinct position defined in `arg`. All positions must be within the range [`min`, `max`] or an "Out of Range Error" will be thrown. |
+| [`bitstring_agg(arg, min, max)`](#bitstring_aggarg-min-max) | Returns a bitstring with bits set for each distinct position defined in `arg`. All positions must be within the range [`min`, `max`] or an `Out of Range Error` will be thrown. |
 
 #### `bit_and(arg)`
 
@@ -152,5 +154,5 @@ These aggregate functions are available for `BIT` type.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a bitstring with bits set for each distinct position defined in `arg`. All positions must be within the range [`min`, `max`] or an "Out of Range Error" will be thrown. |
+| **Description** | Returns a bitstring with bits set for each distinct position defined in `arg`. All positions must be within the range [`min`, `max`] or an `Out of Range Error` will be thrown. |
 | **Example** | `bitstring_agg(A, 1, 42)` |

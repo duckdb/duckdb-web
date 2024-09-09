@@ -72,7 +72,7 @@ The following table shows the supported distance metrics and their corresponding
 | `cosine` | `array_cosine_similarity` | Cosine similarity  |
 | `ip`     | `array_inner_product`     | Inner product      |
 
-Note that while each `HNSW` index only applies to a single column you can create multiple `HNSW` indexes on the same table each individually indexing a different column. Additionally, you can also create mulitple `HNSW` indexes to the same column, each supporting a different distance metric.
+Note that while each `HNSW` index only applies to a single column you can create multiple `HNSW` indexes on the same table each individually indexing a different column. Additionally, you can also create multiple `HNSW` indexes to the same column, each supporting a different distance metric.
 
 ## Index options
 
@@ -91,7 +91,7 @@ Additionally, you can also override the `ef_search` parameter set at index const
 
 Due to some known issues related to peristence of custom extension indexes, the `HNSW` index can only be created on tables in in-memory databases by default, unless the `SET hnsw_enable_experimental_persistence = ⟨bool⟩` configuration option is set to `true`.
 
-The reasoning for locking this feature behind an experimental flag is that "WAL" recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommited changes to a `HNSW`-indexed table, you can end up with __data loss or corruption of the index__.
+The reasoning for locking this feature behind an experimental flag is that “WAL” recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommitted changes to a `HNSW`-indexed table, you can end up with __data loss or corruption of the index__.
 
 If you enable this option and experience an unexpected shutdown, you can try to recover the index by first starting DuckDB separately, loading the `vss` extension and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, allowing DuckDB's recovery process to proceed without issues. But we still recommend that you do not use this feature in production environments.
 
@@ -102,7 +102,7 @@ With the `hnsw_enable_experimental_persistence` option enabled, the index will b
 The HNSW index does support inserting, updating and deleting rows from the table after index creation. However, there are two things to keep in mind:
 
 * It's faster to create the index after the table has been populated with data as the initial bulk load can make better use of parallelism on large tables.
-* Deletes are not immediately reflected in the index, but are instead "marked" as deleted, which can cause the index to grow stale over time and negatively impact query quality and performance.
+* Deletes are not immediately reflected in the index, but are instead “marked” as deleted, which can cause the index to grow stale over time and negatively impact query quality and performance.
 
 To remedy the last point, you can call the `PRAGMA hnsw_compact_index('⟨index name⟩')` pragma function to trigger a re-compaction of the index pruning deleted items, or re-create the index after a significant number of updates.
 

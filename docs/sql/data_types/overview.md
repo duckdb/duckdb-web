@@ -21,6 +21,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `HUGEINT` | | signed sixteen-byte integer|
 | `INTEGER` | `INT4`, `INT`, `SIGNED` | signed four-byte integer |
 | `INTERVAL` |  | date / time delta |
+| `JSON` | | JSON object (via the [`json` extension]({% link docs/extensions/json.md %})) |
 | `SMALLINT` | `INT2`, `SHORT` | signed two-byte integer|
 | `TIME` | | time of day (no time zone) |
 | `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ` | combination of time and date that uses the current time zone |
@@ -46,7 +47,7 @@ DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `U
 | [`LIST`]({% link docs/sql/data_types/list.md %}) | An ordered sequence of data values of the same type. | Each row must have the same data type within each instance of the `LIST`, but can have any number of elements. | `[1, 2, 3]` | `INTEGER[]` |
 | [`MAP`]({% link docs/sql/data_types/map.md %}) | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | `map([1, 2], ['a', 'b'])` | `MAP(INTEGER, VARCHAR)` |
 | [`STRUCT`]({% link docs/sql/data_types/struct.md %}) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | `{'i': 42, 'j': 'a'}` | `STRUCT(i INTEGER, j VARCHAR)` |
-| [`UNION`]({% link docs/sql/data_types/union.md %}) | A union of multiple alternative data types, storing one of them in each value at a time. A union also contains a discriminator "tag" value to inspect and access the currently set member type. | Rows may be set to different member types of the union. | `union_value(num := 2)` | `UNION(num INTEGER, text VARCHAR)` |
+| [`UNION`]({% link docs/sql/data_types/union.md %}) | A union of multiple alternative data types, storing one of them in each value at a time. A union also contains a discriminator “tag” value to inspect and access the currently set member type. | Rows may be set to different member types of the union. | `union_value(num := 2)` | `UNION(num INTEGER, text VARCHAR)` |
 
 ### Updating Values of Nested Types
 

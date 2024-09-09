@@ -138,4 +138,4 @@ Internally map vectors are stored as a `LIST[STRUCT(key KEY_TYPE, value VALUE_TY
 ### Union Vectors
 
 Internally `UNION` utilizes the same structure as a `STRUCT`.
-The first "child" is always occupied by the Tag Vector of the `UNION`, which records for each row which of the `UNION`'s types apply to that row.
+The first “child” is always occupied by the Tag Vector of the `UNION`, which records for each row which of the `UNION`'s types apply to that row.

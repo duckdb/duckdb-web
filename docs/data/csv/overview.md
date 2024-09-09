@@ -174,12 +174,6 @@ SELECT * FROM read_csv('flights.csv', header = true);
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section]({% link docs/data/multiple_files/overview.md %}) for more information.
 
-## API Changes
-
-> Deprecated DuckDB v0.10.0 introduced breaking changes to the `read_csv` function.
-> Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the old `read_csv_auto` function.
-> If you would like to use `read_csv` with its old behavior, turn off the auto-detection manually by using `read_csv(..., auto_detect = false)`.
-
 ## Writing Using the `COPY` Statement
 
 The [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy-to) can be used to load data from a CSV file into a table. This statement has the same syntax as the one used in PostgreSQL. To load the data using the `COPY` statement, we must first create a table with the correct schema (which matches the order of the columns in the CSV file and uses types that fit the values in the CSV file). `COPY` detects the CSV's configuration options automatically.
@@ -224,6 +218,7 @@ iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
 ```
 
 ## Order Preservation
+
 The CSV reader respects the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}).
 When `true` (the default), the order of the rows in the resultset returned by the CSV reader is the same as the order of the corresponding lines read from the file(s).
 When `false`, there is no guarantee that the order is preserved.

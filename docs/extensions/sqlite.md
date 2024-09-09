@@ -104,7 +104,7 @@ When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB 
 6. If the declared type contains the string `TIME`, then it is translated into `TIMESTAMP`.
 7. If none of the above apply, then it is translated into `VARCHAR`.
 
-As DuckDB enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
+As DuckDB enforces the corresponding columns to contain only correctly typed values, we cannot load the string “hello” into a column of type `BIGINT`. As such, an error is thrown when reading from the “numbers” table above:
 
 ```console
 Error: Mismatch Type Error: Invalid type in column "i": column was declared as integer, found "hello" of type "text" instead.

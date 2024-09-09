@@ -411,7 +411,7 @@ and the window is used to select the closest inequality.
 We will now look at two different windowing techniques and compare their performance.
 If you wish to skip this section,
 the bottom line is that while they are sometimes a bit faster,
-the AsOf join has the most consistent behaviour of all the algorithms.
+the AsOf join has the most consistent behavior of all the algorithms.
 
 ### Window as State Table
 

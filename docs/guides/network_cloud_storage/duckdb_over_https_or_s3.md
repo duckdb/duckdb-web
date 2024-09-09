@@ -14,9 +14,11 @@ This guide requires the [`httpfs` extension]({% link docs/extensions/httpfs/over
 To connect to a DuckDB database via HTTPS, use the [`ATTACH` statement]({% link docs/sql/statements/attach.md %}) as follows:
 
 ```sql
-LOAD httpfs;
-ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db (READ_ONLY);
+ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db;
 ```
+
+> Since DuckDB version 1.1, the `ATTACH` statement creates a read-only connection to HTTP endpoints.
+> In prior versions, it is necessary to use the `READ_ONLY` flag.
 
 Then, the database can be queried using:
 
@@ -35,9 +37,11 @@ To connect to a DuckDB database via the S3 API, [configure the authentication]({
 Then, use the [`ATTACH` statement]({% link docs/sql/statements/attach.md %}) as follows:
 
 ```sql
-LOAD httpfs;
-ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
+ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db;
 ```
+
+> Since DuckDB version 1.1, the `ATTACH` statement creates a read-only connection to HTTP endpoints.
+> In prior versions, it is necessary to use the `READ_ONLY` flag.
 
 The database can be queried using:
 

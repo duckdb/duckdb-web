@@ -139,7 +139,7 @@ GROUP BY city;
 
 ### Window Functions
 
-Generate a "row_number" column containing incremental identifiers for each row:
+Generate a `row_number` column containing incremental identifiers for each row:
 
 ```sql
 SELECT row_number() OVER ()

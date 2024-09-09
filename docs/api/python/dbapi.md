@@ -7,24 +7,38 @@ The standard DuckDB Python API provides a SQL interface compliant with the [DB-A
 
 ## Connection
 
-To use the module, you must first create a `DuckDBPyConnection` object that represents the database.
+To use the module, you must first create a `DuckDBPyConnection` object that represents a connection to a database.
+This is done through the [`duckdb.connect`]({% link docs/api/python/reference/index.md %}#duckdb.connect) method.
 
-The connection object takes as a parameter the database file to read and write from.
+The 'config' keyword argument can be used to provide a `dict` that contains key->value pairs referencing [settings]({% link docs/configuration/overview.md %}#configuration-reference) understood by DuckDB.
 
-## File-Based Connection
+### In-Memory Connection
 
-If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else).
+The special value `:memory:` can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Python process).
 
-## In-Memory Connection
+#### Named in-memory Connections
 
-The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Python process). If you would like to connect to an existing database in read-only mode, you can set the `read_only` flag to `True`. Read-only mode is required if multiple Python processes want to access the same database file at the same time.
+The special value `:memory:` can also be postfixed with a name, for example: `:memory:conn3`.
+When a name is provided, subsequent `duckdb.connect` calls will create a new connection to the same database, sharing the catalogs (views, tables, macros etc..).
 
-By default we create an **in-memory-database** that lives inside the `duckdb` module.
+Using `:memory:` without a name will always create a new and separate database instance.
 
 ### Default Connection
 
+By default we create an (unnamed) **in-memory-database** that lives inside the `duckdb` module.
 Every method of `DuckDBPyConnection` is also available on the `duckdb` module, this connection is what's used by these methods.
-You can also get a reference to this connection by providing the special value `:default:` to `connect` or by using `duckdb.default_connection`.
+
+The special value `:default:` can be used to get this default connection.
+
+### File-Based Connection
+
+If the `database` is a file path, a connection to a persistent database is established.
+If the file does not exist the file will be created (the extension of the file is irrelevant and can be `.db`, `.duckdb` or anything else).
+
+#### `read_only` Connections
+
+If you would like to connect in read-only mode, you can set the `read_only` flag to `True`. If the file does not exist, it is **not** created when connecting in read-only mode.
+Read-only mode is required if multiple Python processes want to access the same database file at the same time.
 
 ```python
 import duckdb
@@ -47,6 +61,7 @@ duckdb.default_connection.sql("SELECT * FROM tbl")
 
 ```python
 import duckdb
+
 # to start an in-memory database
 con = duckdb.connect(database = ":memory:")
 # to use a database file (not shared between processes)

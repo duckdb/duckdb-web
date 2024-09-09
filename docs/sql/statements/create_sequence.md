@@ -127,7 +127,7 @@ INSERT INTO distributors VALUES (nextval('serial'), 'nothing');
 
 ### Selecting the Current Value
 
-You may also view the current number from the sequence. Note that the `nextval` function must have already been called before calling `currval`, otherwise a Serialization Error ("sequence is not yet defined in this session") will be thrown.
+You may also view the current number from the sequence. Note that the `nextval` function must have already been called before calling `currval`, otherwise a Serialization Error (`sequence is not yet defined in this session`) will be thrown.
 
 ```sql
 CREATE SEQUENCE serial START 1;
