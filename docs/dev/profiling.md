@@ -9,7 +9,7 @@ Profiling is important to help understand why certain queries exhibit specific p
 
 ## `EXPLAIN` Statement
 
-A first step to profiling a duckdb can include examining the query plan. The [`EXPLAIN`]({% link docs/guides/meta/explain.md %}) statement allows you to peek into the query plan and see what is going on under the hood.
+The first step to profiling a query can include examining the query plan. The [`EXPLAIN`]({% link docs/guides/meta/explain.md %}) statement allows you to peek into the query plan and see what is going on under the hood.
 
 ## `EXPLAIN ANALYZE` Statement
 
