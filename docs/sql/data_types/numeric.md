@@ -12,10 +12,10 @@ The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` and `UHUGEINT` store wh
 | Name | Aliases | Min | Max |
 |:--|:--|----:|----:|
 | `TINYINT` | `INT1` | -128 | 127 |
-| `SMALLINT` | `INT2`, `SHORT` | -32768 | 32767 |
-| `INTEGER` | `INT4`, `INT`, `SIGNED` | -2147483648 | 2147483647 |
-| `BIGINT` | `INT8`, `LONG` | -9223372036854775808 | 9223372036854775807 |
-| `HUGEINT` | - | -170141183460469231731687303715884105728 | 170141183460469231731687303715884105727 |
+| `SMALLINT` | `INT2`, `INT16` `SHORT` | -32768 | 32767 |
+| `INTEGER` | `INT4`, `INT32`, `INT`, `SIGNED` | -2147483648 | 2147483647 |
+| `BIGINT` | `INT8`, `INT64` `LONG` | -9223372036854775808 | 9223372036854775807 |
+| `HUGEINT` | `INT128` | -170141183460469231731687303715884105728 | 170141183460469231731687303715884105727 |
 | `UTINYINT` | - | 0 | 255 |
 | `USMALLINT` | -| 0 | 65535 |
 | `UINTEGER` | - | 0 | 4294967295 |
@@ -28,7 +28,7 @@ The type integer is the common choice, as it offers the best balance between ran
 
 The data type `DECIMAL(WIDTH, SCALE)` (also available under the alias `NUMERIC(WIDTH, SCALE)`) represents an exact fixed-point decimal value. When creating a value of type `DECIMAL`, the `WIDTH` and `SCALE` can be specified to define which size of decimal values can be held in the field. The `WIDTH` field determines how many digits can be held, and the `scale` determines the amount of digits after the decimal point. For example, the type `DECIMAL(3, 2)` can fit the value `1.23`, but cannot fit the value `12.3` or the value `1.234`. The default `WIDTH` and `SCALE` is `DECIMAL(18, 3)`, if none are specified.
 
-Internally, decimals are represented as integers depending on their specified width.
+Internally, decimals are represented as integers depending on their specified `WIDTH`.
 
 <div class="narrow_table"></div>
 
@@ -39,7 +39,7 @@ Internally, decimals are represented as integers depending on their specified wi
 | 10-18 | `INT64` | 8 |
 | 19-38 | `INT128` | 16 |
 
-Performance can be impacted by using too large decimals when not required. In particular decimal values with a width above 19 are slow, as arithmetic involving the `INT128` type is much more expensive than operations involving the `INT32` or `INT64` types. It is therefore recommended to stick with a width of `18` or below, unless there is a good reason for why this is insufficient.
+Performance can be impacted by using too large decimals when not required. In particular decimal values with a width above 19 are slow, as arithmetic involving the `INT128` type is much more expensive than operations involving the `INT32` or `INT64` types. It is therefore recommended to stick with a `WIDTH` of `18` or below, unless there is a good reason for why this is insufficient.
 
 ## Floating-Point Types
 
