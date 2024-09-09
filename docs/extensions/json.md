@@ -454,8 +454,6 @@ SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
 {"goose":123,"duck":42}
 ```
 
-
-
 ## JSON Extraction Functions
 
 There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the `JSON` logical type.
@@ -463,8 +461,10 @@ These functions supports the same two location notations as the previous functio
 
 | Function | Alias | Operator | Description |
 |:---|:---|:-|
-| `json_extract(json, path)` | `json_extract_path` | `->` | Extract `JSON` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `JSON` |
-| `json_extract_string(json, path)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `VARCHAR` |
+| `json_exists(json, path)` | | | Returns `true` if the supplied path exists in the `json`, and `false` otherwise. |
+| `json_extract(json, path)` | `json_extract_path` | `->` | Extracts `JSON` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `JSON`. |
+| `json_extract_string(json, path)` | `json_extract_path_text` | `->>` | Extracts `VARCHAR` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `VARCHAR`. |
+| `json_value(json, path)` | | | Extracts `JSON` from `json` at the given `path`. If the `json` at the supplied path is not a scalar value, it will return `NULL`. |
 
 Note that the equality comparison operator (`=`) has a higher precedence than the `->` JSON extract operator. Therefore, surround the uses of the `->` operator with parentheses when making equality comparisons. For example:
 
