@@ -28,6 +28,9 @@ DuckDB offers several advanced SQL features as well syntactic sugar to make SQL 
 * Transforming tables:
     * [`PIVOT`]({% link docs/sql/statements/pivot.md %}) to turn long tables to wide tables.
     * [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) to turn wide tables to long tables.
+* Defining SQL-level variables:
+    * [`SET VARIABLE`]({% link docs/sql/statements/set.md %}#set-variable)
+    * [`RESET VARIABLE`]({% link docs/sql/statements/set.md %}#reset-variable)
 
 ## Query Features
 

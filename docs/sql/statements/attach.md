@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: ATTACH/DETACH Statement
+title: ATTACH and DETACH Statement
 railroad: statements/attach.js
 ---
 
