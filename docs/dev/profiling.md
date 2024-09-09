@@ -22,11 +22,11 @@ DuckDB supports several pragmas that can be used to enable and disable profiling
 The following pragmas are available, and can be set using either `PRAGMA` or `SET`.
 They can also be reset using `RESET`, followed by the setting name.
 For more information on the profiling pragmas and their usage,
-see the [Profiling Queries]({% link docs/configuration/pragmas.md %}#profiling_queries)
+see the [“Profiling Queries”]({% link docs/configuration/pragmas.md %}#profiling_queries)
 section of the pragmas page.
 
-| Setting                                                                                                                                                            | Description                                                        | Default                                                   | Options                                                                                                                |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Setting | Description | Default | Options |
+|---|-------|---|---|
 | [`enable_profiling`]({% link docs/configuration/pragmas.md %}#enable_profiling) , [`enable_profile`]({% link docs/configuration/pragmas.md %}#enable_profiling)    | Turn on profiling                                                  | `query_tree`                                              | `query_tree`, `json`, `query_tree_optimizer`, [`no_output`]({% link docs/configuration/pragmas.md %}#disabling_output) |
 | [`disable_profiling`]({% link docs/configuration/pragmas.md %}#disable_profiling), [`disable_profile`]({% link docs/configuration/pragmas.md %}#disable_profiling) | Turn off profiling                                                 |                                                           |                                                                                                                        |
 | [`profiling_mode`]({% link docs/configuration/pragmas.md %}#profiling_mode)                                                                                        | Toggle additional optimizer, planner, and physical planner metrics | `standard`                                                | `standard`, `detailed`                                                                                                 |
@@ -76,23 +76,23 @@ At the `QUERY_ROOT` level, there are also metrics that measure the time taken by
 Each optimizer has a corresponding metric that follows the template: `OPTIMIZER_<OPTIMIZER_NAME>`. For example, the `OPTIMIZER_JOIN_ORDER` metric corresponds to the `JOIN_ORDER` optimizer.
 
 Additionally, the following metrics are available to support the optimizer metrics:
-- `ALL_OPTIMIZERS` - Turns on all optimizer metrics, and measures the time taken by the optimizer parent node.
-- `CUMMULATIVE_OPTIMIZER_TIMING` - The cumulative sum of all optimizer metrics, can be used without turning on all optimizer metrics.
+* `ALL_OPTIMIZERS` - Turns on all optimizer metrics, and measures the time taken by the optimizer parent node.
+* `CUMMULATIVE_OPTIMIZER_TIMING` - The cumulative sum of all optimizer metrics, can be used without turning on all optimizer metrics.
 
 ### Planner
 
 The `PLANNER` is responsible for generating the logical plan. Currently, two metrics are measured in the `PLANNER`:
-- `PLANNER` - The time taken to generate the logical plan from the parsed SQL nodes.
-- `PLANNER_BINDING` - The time taken to bind the logical plan.
+* `PLANNER` - The time taken to generate the logical plan from the parsed SQL nodes.
+* `PLANNER_BINDING` - The time taken to bind the logical plan.
 
 ### Physical Planner
 
 The `PHYSICAL_PLANNER` is responsible for generating the physical plan from the logical plan.
 The following are the metrics supported in the `PHYSICAL_PLANNER`:
-- `PHYSICAL_PLANNER` - The time taken to generate the physical plan.
-- `PHYSICAL_PLANNER_COLUMN_BINDING` - The time taken to bind the columns in the logical plan to physical columns.
-- `PHYSICAL_PLANNER_RESOLVE_TYPES` - The time taken to resolve the types in the logical plan to physical types.
-- `PHYSICAL_PLANNER_CREATE_PLAN` - The time taken to create the physical plan.
+* `PHYSICAL_PLANNER` - The time taken to generate the physical plan.
+* `PHYSICAL_PLANNER_COLUMN_BINDING` - The time taken to bind the columns in the logical plan to physical columns.
+* `PHYSICAL_PLANNER_RESOLVE_TYPES` - The time taken to resolve the types in the logical plan to physical types.
+* `PHYSICAL_PLANNER_CREATE_PLAN` - The time taken to create the physical plan.
 
 ## Setting Custom Metrics Examples
 
@@ -109,7 +109,7 @@ INSERT INTO exams VALUES (10, 'Physics', 1), (20, 'Chemistry', 2), (30, 'Literat
 PRAGMA enable_profiling = 'json';
 PRAGMA profiling_output = '/path/to/file.json';
 
-PRAGMA custom_profiling_settings='{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
+PRAGMA custom_profiling_settings = '{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
 
 SELECT name
 FROM students
@@ -118,6 +118,7 @@ WHERE name LIKE 'Ma%';
 ```
 
 The contents of the outputted file:
+
 ```json
 "operator_timing": 0.000372,
 "operator_cardinality": 0,
@@ -161,6 +162,7 @@ WHERE name LIKE 'Ma%';
 ```
 
 The contents of the outputted file:
+
 ```json
 {
     "all_optimizers": 0.00014299999999999998,
@@ -223,6 +225,6 @@ while the _build side_ is the right operand.
 
 Join operators in the query plan show the join type used:
 
-- Inner joins are denoted as `INNER`.
-- Left outer joins and right outer joins are denoted as `LEFT` and `RIGHT`, respectively.
-- Full outer joins are denoted as `FULL`.
+* Inner joins are denoted as `INNER`.
+* Left outer joins and right outer joins are denoted as `LEFT` and `RIGHT`, respectively.
+* Full outer joins are denoted as `FULL`.

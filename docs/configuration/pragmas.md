@@ -315,15 +315,15 @@ To return the physical query plan:
 SET enable_profiling = 'query_tree';
 ```
 
-
 To return the physical query plan with optimizer and planner timings:
 
 ```sql
 SET enable_profiling = 'query_tree_optimizer';
 ```
+
 For more information on the profiling mode, see [profiling mode](#profiling-mode).
 
-###### Disabling Output
+##### Disabling Output
 
 Profiling can also be accessed through API calls, in which case any other output should be disabled with the following:
     
@@ -382,8 +382,8 @@ Settings specified by this `PRAGMA` override the default behavior.
 
 In the following example, the `CPU_TIME` metric is disabled, and the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
 
-```SQL
-SET custom_profiling_settings='{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
+```sql
+SET custom_profiling_settings = '{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
 ```
 
 The profiling documentation contains an overview of the available [metrics]({% link docs/dev/profiling.md %}#metrics).
