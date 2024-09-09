@@ -52,7 +52,7 @@ Other than `QUERY_NAME` and `OPERATOR_TYPE`, all metrics can be turned on or off
 
 ### Cumulative Metrics
 
-DuckDB also supports several cumulative metrics, available in all nodes. In the QUERY_ROOT node, these metrics represent the sum of the corresponding metrics across all operators in the query. In the OPERATOR nodes, they represent the sum of the operator's specific metric along with those of all its children recursively.
+DuckDB also supports several cumulative metrics, available in all nodes. In the `QUERY_ROOT` node, these metrics represent the sum of the corresponding metrics across all operators in the query. In the `OPERATOR` nodes, they represent the sum of the operator's specific metric along with those of all its children recursively.
 
 These cumulative metrics can be enabled independently, even if the underlying specific metrics are disabled.
 The table below shows the cumulative metrics and the specific metrics they are calculated from.
