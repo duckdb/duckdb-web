@@ -24,18 +24,18 @@ Below is a summary of those new features with examples.
 * [Breaking SQL Changes](#breaking-sql-changes)
 * [Community Extensions](#community-extensions)
 * [Friendly SQL](#friendly-sql)
-	* [Unpacked Columns](#unpacked-columns)
-	* [`query` and `query_table` Functions](#query-and-query_table-functions)
+    * [Unpacked Columns](#unpacked-columns)
+    * [`query` and `query_table` Functions](#query-and-query_table-functions)
 * [Performance](#performance)
-	* [Dynamic Filter Pushdown from Joins](#dynamic-filter-pushdown-from-joins)
-	* [Automatic CTE Materialization](#automatic-cte-materialization)
-	* [Parallel Streaming Queries](#parallel-streaming-queries)
-	* [Parallel Union By Name](#parallel-union-by-name)
-	* [Nested ART Rework (Foreign Key Load Speed-Up)](#nested-art-rework-foreign-key-load-speed-up)
-	* [Window Function Improvements](#window-function-improvements)
+    * [Dynamic Filter Pushdown from Joins](#dynamic-filter-pushdown-from-joins)
+    * [Automatic CTE Materialization](#automatic-cte-materialization)
+    * [Parallel Streaming Queries](#parallel-streaming-queries)
+    * [Parallel Union By Name](#parallel-union-by-name)
+    * [Nested ART Rework (Foreign Key Load Speed-Up)](#nested-art-rework-foreign-key-load-speed-up)
+    * [Window Function Improvements](#window-function-improvements)
 * [Spatial Features](#spatial-features)
-	* [GeoParquet](#geoparquet)
-	* [R-Tree](#r-tree)
+    * [GeoParquet](#geoparquet)
+    * [R-Tree](#r-tree)
 * [Final Thoughts](#final-thoughts)
 
 ## Breaking SQL Changes
@@ -200,15 +200,15 @@ When combined with the `COLUMNS` expression, we can write very generic SQL-only 
 ```sql
 CREATE OR REPLACE MACRO my_summarize(table_name) AS TABLE
 SELECT
-	unnest([*COLUMNS('alias_.*')]) AS column_name,
-	unnest([*COLUMNS('min_.*')]) AS min_value,
-	unnest([*COLUMNS('max_.*')]) AS max_value
+    unnest([*COLUMNS('alias_.*')]) AS column_name,
+    unnest([*COLUMNS('min_.*')]) AS min_value,
+    unnest([*COLUMNS('max_.*')]) AS max_value
 FROM (
-	SELECT
-		any_value(alias(COLUMNS(*))) AS "alias_\0",
-		min(COLUMNS(*))::VARCHAR AS "min_\0",
-		max(COLUMNS(*))::VARCHAR AS "max_\0"
-	FROM query_table(table_name::VARCHAR)
+    SELECT
+        any_value(alias(COLUMNS(*))) AS "alias_\0",
+        min(COLUMNS(*))::VARCHAR AS "min_\0",
+        max(COLUMNS(*))::VARCHAR AS "max_\0"
+    FROM query_table(table_name::VARCHAR)
 );
 
 SELECT *
@@ -389,10 +389,10 @@ LOAD spatial;
 -- Create a table with 10_000_000 random points
 CREATE TABLE t1 AS SELECT point::GEOMETRY as geom
 FROM st_generatepoints(
-		{min_x: 0, min_y: 0, max_x: 10000, max_y: 10000}::BOX_2D,
-		10_000_000,
-		1337
-	);
+        {min_x: 0, min_y: 0, max_x: 10000, max_y: 10000}::BOX_2D,
+        10_000_000,
+        1337
+    );
 
 -- Create an index on the table.
 CREATE INDEX my_idx ON t1 USING RTREE (geom);
