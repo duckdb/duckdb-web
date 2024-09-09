@@ -88,8 +88,6 @@ EXPLAIN ANALYZE
 └───────────────────────────┘
 ```
 
-## 
-
 ## See Also
 
-For more information, see the [Profiling page]({% link docs/dev/profiling.md %}).
+For more information, see the [”Profiling” page]({% link docs/dev/profiling.md %}).

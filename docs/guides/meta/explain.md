@@ -96,4 +96,4 @@ PRAGMA explain_output = 'all';
 
 ## See Also
 
-For more information, see the [Profiling page]({% link docs/dev/profiling.md %}).
+For more information, see the [”Profiling” page]({% link docs/dev/profiling.md %}).
