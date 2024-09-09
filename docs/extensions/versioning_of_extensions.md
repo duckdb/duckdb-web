@@ -5,39 +5,108 @@ title: Versioning of Extensions
 
 ## Extension Versioning
 
-Just like DuckDB itself, DuckDB extensions have a version. This version can be used by users to determine which features are available
-in the extension they have installed, and by developers to understand bug reports. DuckDB extensions can be versioned in different ways:
+Most software has some sort of version number. Version numbers serve a few important goals:
 
-**Extensions whose source lives in DuckDB's main repository** (in-tree extensions) are tagged with the short git hash of the repository.
-For example, the parquet extension is built into DuckDB version `v0.10.3` (which has commit `70fd6a8a24`):
+* Tie a binary to a specific state of the source code
+* Allow determining the expected feature set
+* Allow determining the state of the APIs
+* Allow efficient processing of bug reports (e.g., bug `#1337` was introduced in version `v3.4.5` )
+* Allow determining chronological order of releases (e.g., version `v1.2.3` is older than `v1.2.4`)
+* Give an indication of expected stability (e.g., `v0.0.1` is likely not very stable, whereas `v13.11.0` probably is stable)
 
-```sql
-SELECT extension_name, extension_version, install_mode
-FROM duckdb_extensions()
-WHERE extension_name='parquet';
+Just like [DuckDB itself]({% link docs/dev/release_calendar.md %}), DuckDB extensions have their own version number. To ensure consistent semantics
+of these version numbers across the various extensions, DuckDB's [Core Extensions]({% link docs/extensions/core_extensions.md %}) use
+a versioning scheme that prescribes how extensions should be versioned. The versioning scheme for Core Extensions is made up of 3 different stability levels: **unstable**, **pre-release**, and **stable**.
+Let's go over each of the 3 levels and describe their format:
+
+### Unstable Extensions
+
+Unstable extensions are extensions that can't (or don't want to) give any guarantees regarding their current stability, 
+or their goals of becoming stable. Unstable extensions are tagged with the **short git hash** of the extension.
+
+For example, at the time of writing this, the version of the `vss` extension is an unstable extension of version `690bfc5`.
+
+What to expect from an extension that has a version number in the **unstable** format?
+
+* The state of the source code of the extension can be found by looking up the hash in the extension repository
+* Functionality may change or be removed completely with every release
+* This extension's API could change with every release
+* This extension may not follow a structured release cycle, new (breaking) versions can be pushed at any time
+
+### Pre-Release Extensions
+
+Pre-release extensions are the next step up from Unstable extensions. They are tagged with version in the **[SemVer](https://semver.org/)** format, more specifically, those in the `v0.y.z` format.
+In semantic versioning, versions starting with `v0` have a special meaning: they indicate that the more strict semantics of regular (`>v1.0.0`) versions do not yet apply. It basically means that an extensions is working
+towards becoming a stable extension, but is not quite there yet.
+
+For example, at the time of writing this, the version of the `delta` extension is a pre-release extension of version `v0.1.0`.
+
+What to expect from an extension that has a version number in the **pre-release** format?
+
+* The extension is compiled from the source code corresponding to the tag.
+* Semantic Versioning semantics apply. See the [Semantic Versioning](https://semver.org/) specification for details.
+* The extension follows a release cycle where new features are tested in nightly builds before being grouped into a release and pushed to the `core` repository.
+* Release notes describing what has been added each release should be available to make it easy to understand the difference between versions.
+
+### Stable Extensions
+
+Stable extensions are the final step of extension stability. This is denoted by using a **stable SemVer** of format `vx.y.z` where `x>0`.
+
+For example, at the time of writing this, the version of the `parquet` extension is a stable extension of version `v1.0.0`.
+
+What to expect from an extension that has a version number in the **stable** format? Essentially the same as pre-release extensions, but now the more 
+strict SemVer semantics apply: the API of the extension should now be stable and will only change in backwards incompatible ways when the major version is bumped.
+See the SemVer specification for details
+
+## Release Cycle of Pre-Release and Stable Core Extensions
+
+In general for extensions the release cycle depends on their stability level. **unstable** extensions are often in 
+sync with DuckDB's release cycle, but may also be quietly updated between DuckDB releases. **pre-release** and **stable** 
+extensions follow their own release cycle. These may or may not coincide with DuckDB releases. To find out more about the release cycle of a specific
+extension, refer to the documentation or GitHub page of the respective extension. Generally, **pre-release** and **stable** extensions will document 
+their releases as GitHub releases, an example of which you can see in the [delta extension](https://github.com/duckdb/duckdb_delta/releases). 
+
+Finally, there is a small exception: All [in-tree]({% link docs/extensions/working_with_extensions.md %}#in-tree-vs-out-of-tree) extensions simply 
+follow DuckDB's release cycle.
+
+## Nightly Builds
+
+Just like DuckDB itself, DuckDB's core extensions have nightly or dev builds that can be used to try out features before they are officially released. This 
+can be useful when your workflow depends on a new feature, or when you need to confirm that your stack is compatible with the upcoming version.
+
+Nightly builds for extensions are slightly complicated due to the fact that currently DuckDB extensions binaries are tightly bound to a single DuckDB version. Because of this tight connection,
+there is a potential risk for a combinatory explosion. Therefore, not all combinations of nightly extension build and nightly DuckDB build are available.
+
+In general, there are 2 ways of using nightly builds: using a nightly DuckDB build and using a stable DuckDB build. Let's go over the differences between the two:
+
+### From Stable DuckDB
+
+In most cases, user's will be interested in a nightly build of a specific extension, but don't necessarily want to switch to using the nightly build of DuckDB itself. This allows using a specific bleeding-edge
+feature while limiting the exposure to unstable code.
+
+To achieve this, Core Extensions tend to regularly push builds to the [`core_nightly` repository]({% link docs/extensions/working_with_extensions.md %}#extension-repositories). Let's look at an example:
+
+First we install a [**stable DuckDB build**]({% link docs/installation/index.html %}).
+
+Then we can install and load a **nightly** extension like this:
+
+```bash
+INSTALL aws FROM core_nightly;
+LOAD aws;
 ```
 
-<div class="narrow_table"></div>
+In this example we are using the latest **nightly** build of the aws extension with the latest **stable** version of DuckDB.
 
-| extension_name    | extension_version | install_mode         |
-|:------------------|:------------------|:---------------------|
-| parquet           | 70fd6a8a24        | STATICALLY_LINKED    |
+### From Nightly DuckDB
 
-**Extensions whose source lives in a separate repository** (out-of-tree extensions) have their own version. This version is **either**
-the short git hash of the separate repository, **or** the git version tag in [Semantic Versioning](https://semver.org/) format.
-For example, in DuckDB version `v0.10.3`, the azure extension could be versioned as follows:
+When DuckDB CI produces a nightly binary of DuckDB itself, the binaries are distributed with a set of extensions that are pinned at a specific version. This extension version will be tested for that specific build of DuckDB, but might not be the latest dev build. Let's look at an example:
+
+First, we install a [**nightly DuckDB build**]({% link docs/installation/index.html %}). Then, we can install and load the `aws` extension as expected:
 
 ```sql
-SELECT extension_name, extension_version, install_mode
-FROM duckdb_extensions()
-WHERE extension_name = 'azure';
+INSTALL aws;
+LOAD aws;
 ```
-
-<div class="narrow_table"></div>
-
-| extension_name | extension_version | install_mode   |
-|:---------------|:------------------|:---------------|
-| azure          | 49b63dc        | REPOSITORY     |
 
 ## Updating Extensions
 
