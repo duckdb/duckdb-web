@@ -301,7 +301,7 @@ PRAGMA enable_profile;
 
 ##### Profiling Format
 
-The format of the resulting profiling information can be specified as either `json`, `query_tree`, or `query_tree_optimizer`. The default format is `query_tree`, which prints the physical query plan together with the timings and cardinalities of each operator in the tree to the screen.
+The format of the resulting profiling information can be specified as either `json`, `query_tree`, or `query_tree_optimizer`. The default format is `query_tree`, which prints the physical query plan as well as the timings and cardinalities of each operator in the tree to the screen.
 
 To return the physical query plan as JSON:
 
@@ -347,7 +347,7 @@ PRAGMA disable_profile;
 
 ##### Profiling Output
 
-By default, profiling information is printed to the console. However, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file.
+By default, profiling information is printed to the console however, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file.
 
 > Warning The file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run:
 
@@ -373,14 +373,14 @@ SET profiling_mode = 'standard';
 #### Custom Profiling Metrics
 
 By default, all metrics are enabled except those activated by detailed profiling.
-Each metrics, including those from detailed profiling,
+Each metric, including those from detailed profiling,
 can be individually enabled or disabled using the `custom_profiling_settings` `PRAGMA`.
 This `PRAGMA` accepts a JSON object with metric names as keys and boolean values to toggle them on or off.
 Settings specified by this `PRAGMA` override the default behavior.
 
 > Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
 
-In the following example the `CPU_TIME` metric is disabled, and the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
+In the following example, the `CPU_TIME` metric is disabled, and the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
 
 ```SQL
 SET custom_profiling_settings='{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
