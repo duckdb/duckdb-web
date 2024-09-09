@@ -75,18 +75,18 @@ Note that the query is not actually executed – therefore, we can only see the 
 ## Additional Explain Settings
 The `EXPLAIN` statement supports additional settings that can be used to control the output. The following settings are available:
 
+The default setting. Only shows the physical plan.
 ```sql
-# Default: Only shows the physical plan.
 PRAGMA explain_output = 'physical_only';
 ```
 
+Shows only the optimized plan.
 ```sql
-# Shows only the optimized plan.
 PRAGMA explain_output = 'optimized_only';
 ```
 
+Shows both the physical and optimized plans.
 ```sql
-# Shows both the physical and optimized plans.
 PRAGMA explain_output = 'all';
 ```
 

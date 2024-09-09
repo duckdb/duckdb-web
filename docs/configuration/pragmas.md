@@ -325,7 +325,7 @@ For more information on the profiling mode, see [profiling mode](#profiling-mode
 
 ###### Disabling Output
 
-It is also possible to disable outputting profiling information. This is specifically useful when accessing the profiling information:
+Profiling can also be accessed through API calls, in which case any other output should be disabled with the following:
     
 ```sql
 SET enable_profiling = 'no_output';
@@ -347,7 +347,7 @@ PRAGMA disable_profile;
 
 ##### Profiling Output
 
-By default, profiling information is printed to the console however, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file.
+By default, profiling information is printed to the console, however, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file.
 
 > Warning The file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run:
 

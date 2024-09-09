@@ -76,23 +76,23 @@ At the `QUERY_ROOT` level, there are also metrics that measure the time taken by
 Each optimizer has a corresponding metric that follows the template: `OPTIMIZER_<OPTIMIZER_NAME>`. For example, the `OPTIMIZER_JOIN_ORDER` metric corresponds to the `JOIN_ORDER` optimizer.
 
 Additionally, the following metrics are available to support the optimizer metrics:
-- `ALL_OPTIMIZERS` - Turns on all optimizer metrics, and measures the time taken by the optimizer parent node
+- `ALL_OPTIMIZERS` - Turns on all optimizer metrics, and measures the time taken by the optimizer parent node.
 - `CUMMULATIVE_OPTIMIZER_TIMING` - The cumulative sum of all optimizer metrics, can be used without turning on all optimizer metrics.
 
 ### Planner
 
 The `PLANNER` is responsible for generating the logical plan. Currently, two metrics are measured in the `PLANNER`:
 - `PLANNER` - The time taken to generate the logical plan from the parsed SQL nodes.
-- `PLANNER_BINDING` - The time taken to bind the logical plan
+- `PLANNER_BINDING` - The time taken to bind the logical plan.
 
 ### Physical Planner
 
 The `PHYSICAL_PLANNER` is responsible for generating the physical plan from the logical plan.
 The following are the metrics supported in the `PHYSICAL_PLANNER`:
-- `PHYSICAL_PLANNER` - The time taken to generate the physical plan
-- `PHYSICAL_PLANNER_COLUMN_BINDING` - The time taken to bind the columns in the logical plan to physical columns
-- `PHYSICAL_PLANNER_RESOLVE_TYPES` - The time taken to resolve the types in the logical plan to physical types
-- `PHYSICAL_PLANNER_CREATE_PLAN` - The time taken to create the physical plan
+- `PHYSICAL_PLANNER` - The time taken to generate the physical plan.
+- `PHYSICAL_PLANNER_COLUMN_BINDING` - The time taken to bind the columns in the logical plan to physical columns.
+- `PHYSICAL_PLANNER_RESOLVE_TYPES` - The time taken to resolve the types in the logical plan to physical types.
+- `PHYSICAL_PLANNER_CREATE_PLAN` - The time taken to create the physical plan.
 
 ## Setting Custom Metrics Examples
 
