@@ -250,7 +250,7 @@ This release adds a *very cool* optimization for joins: DuckDB now [automaticall
 
 ```sql
 CREATE TABLE A AS SELECT range i, range j FROM range(100);
-CREATE TABLE B AS SELECT a.range FROM range(100) a, range(10000) b;
+CREATE TABLE B AS SELECT a.range FROM range(100) a, range(10_000) b;
 SELECT count(*) FROM A JOIN B USING (i) WHERE j > 90;
 ```
 
@@ -404,7 +404,7 @@ LOAD spatial;
 -- Create a table with 10_000_000 random points
 CREATE TABLE t1 AS SELECT point::GEOMETRY as geom
 FROM st_generatepoints(
-        {min_x: 0, min_y: 0, max_x: 10000, max_y: 10000}::BOX_2D,
+        {min_x: 0, min_y: 0, max_x: 10_000, max_y: 10_000}::BOX_2D,
         10_000_000,
         1337
     );
