@@ -161,6 +161,7 @@ INSERT INTO many_measurements VALUES (1, 10, 100, 20);
 
 SELECT id, struct_pack(*COLUMNS('measurement\d')) AS measurements FROM many_measurements;
 ```
+
 ```text
 ┌───────┬──────────────────────────────────────────────────────────────────────────┐
 │  id   │                               measurements                               │
@@ -168,11 +169,11 @@ SELECT id, struct_pack(*COLUMNS('measurement\d')) AS measurements FROM many_meas
 ├───────┼──────────────────────────────────────────────────────────────────────────┤
 │     1 │ {'measurement1': 10, 'measurement2': 100, 'measurement3': 20}            │
 └───────┴──────────────────────────────────────────────────────────────────────────┘
-``` 
+```
 
 ### `query` and `query_table` Functions
 
-[**`query` and `query_table` functions**.](https://github.com/duckdb/duckdb/pull/10586) These functions take a string literal, and convert it into a `SELECT` subquery or a table reference. Note that these functions can only take literal strings. As such, they are not as powerful (or dangerous) as a generic `eval`.
+The [`query` and `query_table` functions](https://github.com/duckdb/duckdb/pull/10586) take a string literal, and convert it into a `SELECT` subquery or a table reference. Note that these functions can only take literal strings. As such, they are not as powerful (or dangerous) as a generic `eval`.
 
 These functions are conceptually simple, but enable powerful and more dynamic SQL. For example, they allow passing in a table name as a prepared statement parameter:
 
@@ -277,11 +278,11 @@ INSERT INTO a FROM range(100);
 INSERT INTO b SELECT a.range FROM range(100) a, range(10000) b;
 ```
 
-On the previous version, this would take ca. 10s on a MacBook to complete. It now takes 0.2s thanks to the new index structure, a ca. 50x improvement! 
+On the previous version, this would take ca. 10s on a MacBook to complete. It now takes 0.2s thanks to the new index structure, a ca. 50x improvement!
 
 ### Window Function Improvements
 
-Window functions see a lot of use in DuckDB, which is why we are continuously improving performance of executing Window functions over large datasets. 
+Window functions see a lot of use in DuckDB, which is why we are continuously improving performance of executing Window functions over large datasets.
 
 The [`DISTINCT`](https://github.com/duckdb/duckdb/pull/12311)  and [`FILTER`](https://github.com/duckdb/duckdb/pull/12250) window function modifiers can now be executed in streaming mode. Streaming mode means that the input data for the operator does not need to be completely collected and buffered before the operator can execute. For large intermediate results, this can have a very large performance impact. For example, the following query will now use the streaming window operator:
 
@@ -312,7 +313,7 @@ Previously, the filter on `i` could not be pushed into the scan on `tbl`. But we
 ││       Physical Plan       ││
 │└───────────────────────────┘│
 └─────────────────────────────┘
-…
+              …
 ┌─────────────┴─────────────┐
 │           WINDOW          │
 │    ────────────────────   │
@@ -323,7 +324,7 @@ Previously, the filter on `i` could not be pushed into the scan on `tbl`. But we
 ┌─────────────┴─────────────┐
 │         SEQ_SCAN          │
 │    ────────────────────   │
-│            tbl           │
+│            tbl            │
 │                           │
 │       Projections: i      │
 │                           │
