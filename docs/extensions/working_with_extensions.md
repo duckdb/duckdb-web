@@ -91,12 +91,13 @@ While any URL or local path can be used as a repository, DuckDB currently contai
 
 <div class="narrow_tabl"></div>
 
-| Alias                 | URL                                    | Description                                                                            |
-|:----------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
-| `core`                | `http://extensions.duckdb.org`         | DuckDB core extensions                                                                 |
-| `core_nightly`        | `http://nightly-extensions.duckdb.org` | Nightly builds for `core`                                                              |
-| `local_build_debug`   | `./build/debug/repository`             | Repository created when building DuckDB from source in debug mode (for development)    |
-| `local_build_release` | `./build/release/repository`           | Repository created when building DuckDB from source in release mode (for development)  |
+| Alias                 | URL                                      | Description                                                                            |
+|:----------------------|:-----------------------------------------|:---------------------------------------------------------------------------------------|
+| `core`                | `http://extensions.duckdb.org`           | DuckDB core extensions                                                                 |
+| `core_nightly`        | `http://nightly-extensions.duckdb.org`   | Nightly builds for `core`                                                              |
+| `community`           | `http://community-extensions.duckdb.org` | DuckDB community extensions                                                            |
+| `local_build_debug`   | `./build/debug/repository`               | Repository created when building DuckDB from source in debug mode (for development)    |
+| `local_build_release` | `./build/release/repository`             | Repository created when building DuckDB from source in release mode (for development)  |
 
 ### Working with Multiple Repositories
 
