@@ -35,6 +35,13 @@ To connect to the PostgreSQL instance with the given parameters in read-only mod
 ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE POSTGRES, READ_ONLY);
 ```
 
+By default, all schemas are attached. When working with large instances, it can be useful to only attach a specific schema. This can be accomplished using the `SCHEMA` command.
+
+```sql
+ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE POSTGRES, SCHEMA 'public');
+```
+
+
 ### Configuration
 
 The `ATTACH` command takes as input either a [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
@@ -58,6 +65,56 @@ host=localhost port=5432 dbname=mydb connect_timeout=10
 | `user`     | PostgreSQL user name                 | current user |
 
 An example URI is `postgresql://username@hostname/dbname`.
+
+### Configuring via Secrets
+
+PostgreSQL connection information can also be specified with [secrets](/docs/configuration/secrets_manager). The following syntax can be used to create a secret.
+
+```sql
+CREATE SECRET (
+	TYPE POSTGRES,
+	HOST '127.0.0.1',
+    PORT 5432,
+	DATABASE postgres,
+    USER 'postgres',
+	PASSWORD ''
+);
+```
+
+The information from the secret will be used when `ATTACH` is called. We can leave the Postgres connection string empty to use all of the information stored in the secret.
+
+```sql
+ATTACH '' AS postgres_db (TYPE POSTGRES);
+```
+
+We can use the Postgres connection string to override individual options. For example, to connect to a different database while still using the same credentials, we can override only the database name in the following manner.
+
+```sql
+ATTACH 'dbname=my_other_db' AS postgres_db (TYPE POSTGRES);
+```
+
+By default, created secrets are temporary. Secrets can be persisted using the [`CREATE PERSISTENT SECRET command`](https://duckdb.org/docs/configuration/secrets_manager.html#persistent-secrets). Persistent secrets can be used across sessions.
+
+#### Managing Multiple Secrets
+
+Named secrets can be used to manage connections to multiple Postgres database instances. Secrets can be given a name upon creation.
+
+```sql
+CREATE SECRET postgres_secret_one (
+	TYPE POSTGRES,
+	HOST '127.0.0.1',
+    PORT 5432,
+	DATABASE postgres,
+    USER 'postgres',
+	PASSWORD ''
+);
+```
+
+The secret can then be explicitly referenced using the `SECRET` parameter in the `ATTACH`.
+
+```sql
+ATTACH '' AS postgres_db_one (TYPE POSTGRES, SECRET postgres_secret_one);
+```
 
 ### Configuring via Environment Variables
 
@@ -330,6 +387,7 @@ The extension exposes the following configuration parameters.
 | `pg_experimental_filter_pushdown` | Whether or not to use filter pushdown (currently experimental)               | `false` |
 | `pg_pages_per_task`               | The amount of pages per task                                                 | `1000`  |
 | `pg_use_binary_copy`              | Whether or not to use BINARY copy to read data                               | `true`  |
+| `pg_null_byte_replacement`        | When writing NULL bytes to Postgres, replace them with the given character   | `NULL`  |
 | `pg_use_ctid_scan`                | Whether or not to parallelize scanning using table ctids                     | `true`  |
 
 ## Schema Cache
