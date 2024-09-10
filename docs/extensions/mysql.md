@@ -80,7 +80,7 @@ We can use the connection string to override individual options. For example, to
 ATTACH 'database=my_other_db' AS mysql_db (TYPE MYSQL);
 ```
 
-By default, created secrets are temporary. Secrets can be persisted using the [`CREATE PERSISTENT SECRET command`](https://duckdb.org/docs/configuration/secrets_manager.html#persistent-secrets). Persistent secrets can be used across sessions.
+By default, created secrets are temporary. Secrets can be persisted using the [`CREATE PERSISTENT SECRET` command]({% link docs/configuration/secrets_manager.md %}#persistent-secrets). Persistent secrets can be used across sessions.
 
 #### Managing Multiple Secrets
 

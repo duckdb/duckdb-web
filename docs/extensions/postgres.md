@@ -47,7 +47,7 @@ ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE POSTGRES, SCHE
 The `ATTACH` command takes as input either a [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
 or a [PostgreSQL URI](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS).
 
-Below are some example connection strings and commonly used parameters. A full list of available parameters can be found [in the PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS).
+Below are some example connection strings and commonly used parameters. A full list of available parameters can be found in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS).
 
 ```text
 dbname=postgresscanner
@@ -93,7 +93,7 @@ We can use the Postgres connection string to override individual options. For ex
 ATTACH 'dbname=my_other_db' AS postgres_db (TYPE POSTGRES);
 ```
 
-By default, created secrets are temporary. Secrets can be persisted using the [`CREATE PERSISTENT SECRET command`](https://duckdb.org/docs/configuration/secrets_manager.html#persistent-secrets). Persistent secrets can be used across sessions.
+By default, created secrets are temporary. Secrets can be persisted using the [`CREATE PERSISTENT SECRET` command]({% link docs/configuration/secrets_manager.md %}#persistent-secrets). Persistent secrets can be used across sessions.
 
 #### Managing Multiple Secrets
 
