@@ -164,7 +164,7 @@ Therefore, the total memory used by the R process may be higher than the configu
 
 ## Troubleshooting
 
-### Warning when Installing on macOS
+### Warning When Installing on macOS
 
 On macOS, installing DuckDB may result in a warning `unable to load shared object '.../R_X11.so'`:
 
