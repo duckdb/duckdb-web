@@ -254,7 +254,7 @@ CREATE TABLE B AS SELECT a.range i FROM range(100) a, range(10_000) b;
 SELECT count(*) FROM A JOIN B USING (i) WHERE j > 90;
 ```
 
-DuckDB will execute this join by building a hash table on the smaller table A, and then probe said hash table with the contents of B. DuckDB will now observe the values of i during construction of the hash table on A. It will then create a min-max range filter of those values of i and then *automatically* apply that filter to the values of i in B! That way, we early remove (in this case) 90% of data from the large table before even looking at the hash table. In this example, this leads to a roughly 10× improvement in query performance. The optimization can also be observed in the output of `EXPLAIN ANALYZE`.
+DuckDB will execute this join by building a hash table on the smaller table `A`, and then probe said hash table with the contents of `B`. DuckDB will now observe the values of `i` during construction of the hash table on `A`. It will then create a min-max range filter of those values of `i` and then *automatically* apply that filter to the values of `i` in `B`! That way, we early remove (in this case) 90% of data from the large table before even looking at the hash table. In this example, this leads to a roughly 10× improvement in query performance. The optimization can also be observed in the output of `EXPLAIN ANALYZE`.
 
 ### Automatic CTE Materialization
 
@@ -292,7 +292,7 @@ The `union_by_name` parameter allows combination of – for example – CSV file
 
 ### Nested ART Rework (Foreign Key Load Speed-Up)
 
-We have [greatly improved](https://github.com/duckdb/duckdb/pull/13373) index insertion and deletion performance for foreign keys. Normally, we directly inline row identifiers into the tree structure. However, this is impossible for indexes that contain a lot of duplicates, as is the case with foreign keys. Instead, we now actually create another index entry for each key that is itself another “recursive” index tree in its own right. That way, we can achieve good insertion and deletion performance inside index entries. The performance results of this change are drastic, consider the following example where a has 100 rows and b has one million rows that all reference a:
+We have [greatly improved](https://github.com/duckdb/duckdb/pull/13373) index insertion and deletion performance for foreign keys. Normally, we directly inline row identifiers into the tree structure. However, this is impossible for indexes that contain a lot of duplicates, as is the case with foreign keys. Instead, we now actually create another index entry for each key that is itself another “recursive” index tree in its own right. That way, we can achieve good insertion and deletion performance inside index entries. The performance results of this change are drastic, consider the following example where `a` has 100 rows and `b` has one million rows that all reference `a`:
 
 ```sql
 CREATE TABLE a (i INTEGER, PRIMARY KEY (i));
@@ -302,7 +302,7 @@ INSERT INTO a FROM range(100);
 INSERT INTO b SELECT a.range FROM range(100) a, range(10_000) b;
 ```
 
-On the previous version, this would take ca. 10s on a MacBook to complete. It now takes 0.2s thanks to the new index structure, a ca. 50x improvement!
+On the previous version, this would take ca. 10 seconds on a MacBook to complete. It now takes 0.2 seconds thanks to the new index structure, a ca. 50× improvement!
 
 ### Window Function Improvements
 
