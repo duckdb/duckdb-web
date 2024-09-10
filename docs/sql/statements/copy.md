@@ -248,7 +248,7 @@ COPY FROM DATABASE db1 TO db2 (SCHEMA);
 
 ### CSV Options
 
-The below options are applicable when writing `CSV` files.
+The below options are applicable when writing CSV files.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
@@ -264,7 +264,7 @@ The below options are applicable when writing `CSV` files.
 
 ### Parquet Options
 
-The below options are applicable when writing `Parquet` files.
+The below options are applicable when writing Parquet files.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
@@ -274,7 +274,8 @@ The below options are applicable when writing `Parquet` files.
 | `ROW_GROUP_SIZE_BYTES` | The target size of each row group. You can pass either a human-readable string, e.g., `2MB`, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored. | `BIGINT` | `row_group_size * 1024` |
 | `ROW_GROUP_SIZE` | The target size, i.e., number of rows, of each row group. | `BIGINT` | 122880 |
 | `ROW_GROUPS_PER_FILE` | Create a new Parquet file if the current one has a specified number of row groups. If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behaviour of `FILE_SIZE_BYTES`. However, if `per_thread_output` is set, only one thread writes to each file, and it becomes accurate again. | `BIGINT` |  (empty) |
-Some examples of `FIELD_IDS` are:
+
+Some examples of `FIELD_IDS` are as follows.
 
 Assign `field_ids` automatically:
 

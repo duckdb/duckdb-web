@@ -295,8 +295,8 @@ The `union_by_name` parameter allows combination of – for example – CSV file
 We have [greatly improved](https://github.com/duckdb/duckdb/pull/13373) index insertion and deletion performance for foreign keys. Normally, we directly inline row identifiers into the tree structure. However, this is impossible for indexes that contain a lot of duplicates, as is the case with foreign keys. Instead, we now actually create another index entry for each key that is itself another “recursive” index tree in its own right. That way, we can achieve good insertion and deletion performance inside index entries. The performance results of this change are drastic, consider the following example where `a` has 100 rows and `b` has one million rows that all reference `a`:
 
 ```sql
-CREATE TABLE a (i integer, PRIMARY KEY (i));
-CREATE TABLE b (i integer, FOREIGN KEY (i) REFERENCES a(i));
+CREATE TABLE a (i INTEGER, PRIMARY KEY (i));
+CREATE TABLE b (i INTEGER, FOREIGN KEY (i) REFERENCES a(i));
 
 INSERT INTO a FROM range(100);
 INSERT INTO b SELECT a.range FROM range(100) a, range(10_000) b;
