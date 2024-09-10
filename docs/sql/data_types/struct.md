@@ -202,6 +202,8 @@ FROM
 Mismatch Type Error: Type STRUCT(x INTEGER) does not match with STRUCT(y INTEGER). Cannot cast STRUCTs - element "x" in source struct was not found in target struct
 ```
 
+> This behavior was introduced in DuckDB v0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
+
 A workaround for this is to use [`struct_pack`](#creating-structs) instead:
 
 ```sql
@@ -209,8 +211,6 @@ SELECT struct_pack(y := a.x) AS b
 FROM
     (SELECT {'x': 42} AS a);
 ```
-
-> This behavior was introduced in DuckDB v0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
 
 The `row` function can be used to return unnamed structs. For example:
 
