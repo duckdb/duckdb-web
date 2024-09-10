@@ -940,7 +940,6 @@ SELECT format('{:,.2f}',  123456.789); -- 123,456.79
 SELECT format('{:t..2f}', 123456.789); -- 123.456,79
 ```
 
-
 ### `printf` Syntax
 
 The `printf(format, parameters...)` function formats strings using the [`printf` syntax](https://cplusplus.com/reference/cstdio/printf/).
