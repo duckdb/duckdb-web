@@ -4,11 +4,11 @@ title: LOAD/INSTALL Statements
 railroad: statements/load_and_install.js
 ---
 
-# INSTALL
+## `INSTALL`
 
-The `INSTALL` statement downloads an extension so it can be loaded into a duckdb session.
+The `INSTALL` statement downloads an extension so it can be loaded into a DuckDB session.
 
-## Examples
+### Examples
 
 Install the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) extension:
 
@@ -22,15 +22,15 @@ Install the h3 [community extension]({% link docs/extensions/community_extension
 INSTALL h3 from community;
 ```
 
-## Syntax
+### Syntax
 
 <div id="rrdiagram2"></div>
 
-# LOAD
+## `LOAD`
 
-The `LOAD` statement loads an installed duckdb extension into the current session.
+The `LOAD` statement loads an installed DuckDB extension into the current session.
 
-## Examples
+### Examples
 
 Load the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) extension:
 
@@ -44,6 +44,6 @@ Load the [`spatial`]({% link docs/extensions/spatial.md %}) extension:
 LOAD spatial;
 ```
 
-## Syntax
+### Syntax
 
 <div id="rrdiagram1"></div>
