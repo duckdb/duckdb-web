@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: LOAD/INSTALL Statements
+title: LOAD / INSTALL Statements
 railroad: statements/load_and_install.js
 ---
 
