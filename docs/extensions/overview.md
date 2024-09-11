@@ -62,7 +62,7 @@ There are two main methods of making DuckDB perform the **installation** and **l
 
 ### Explicit `INSTALL` and `LOAD`
 
-In DuckDB extensions can also explicitly installed and loaded. Both non-autoloadable and autoloadable extensions can be installed this way.
+In DuckDB extensions can also be explicitly installed and loaded. Both non-autoloadable and autoloadable extensions can be installed this way.
 To explicitly install and load an extension, DuckDB has the dedicated SQL statements `LOAD` and `INSTALL`. For example,
 to install and load the [`spatial` extension]({% link docs/extensions/spatial.md %}), run:
 
@@ -71,8 +71,13 @@ INSTALL spatial;
 LOAD spatial;
 ```
 
-With these statements, DuckDB will ensure the spatial extension is installed (ignoring the `INSTALL` statement if it is already), then proceed
+With these statements, DuckDB will ensure the spatial extension is installed (ignoring the `INSTALL` statement if it is already installed), then proceed
 to `LOAD` the spatial extension (again ignoring the statement if it is already loaded).
+
+#### Extension Repository
+
+Optionally a repository can be provided where the extension should be installed from, by appending `FROM <repository>` to the `INSTALL`/`FORCE INSTALL` command.
+This repository can either be an alias, such as [`community`]({% link docs/extensions/community_extensions.md %}), or it can be a direct URL, provided as a single-quoted string.
 
 After installing/loading an extension, the [`duckdb_extensions` function](#listing-extensions) can be used to get more information.
 
