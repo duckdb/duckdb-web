@@ -19,7 +19,7 @@ INSTALL httpfs;
 Install the h3 [community extension]({% link docs/extensions/community_extensions.md %}):
 
 ```sql
-INSTALL h3 from community;
+INSTALL h3 FROM community;
 ```
 
 ### Syntax
