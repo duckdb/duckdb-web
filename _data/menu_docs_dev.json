@@ -520,6 +520,10 @@
                 {
                   "page": "VACUUM",
                   "url": "vacuum"
+                },
+                {
+                  "page": "LOAD / INSTALL",
+                  "url": "load_and_install"
                 }
               ]
             },
