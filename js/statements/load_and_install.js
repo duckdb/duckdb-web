@@ -1,3 +1,12 @@
+function GenerateLoad(options = {}) {
+    return Diagram([
+        AutomaticStack([
+            Keyword("LOAD"),
+            Expression("extension-name")
+        ])
+    ])
+}
+
 function GenerateInstall(options = {}) {
     return Diagram([
         AutomaticStack([
@@ -27,7 +36,10 @@ function GenerateInstall(options = {}) {
 
 function Initialize(options = {}) {
     document.getElementById("rrdiagram1").classList.add("limit-width");
-    document.getElementById("rrdiagram1").innerHTML = GenerateInstall(options).toString();
+    document.getElementById("rrdiagram1").innerHTML = GenerateLoad(options).toString();
+
+    document.getElementById("rrdiagram2").classList.add("limit-width");
+    document.getElementById("rrdiagram2").innerHTML = GenerateInstall(options).toString();
 }
 
 function Refresh(node_name, set_node) {
