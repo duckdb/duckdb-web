@@ -522,7 +522,7 @@
                   "url": "vacuum"
                 },
                 {
-                  "page": "LOAD/INSTALL",
+                  "page": "LOAD / INSTALL",
                   "url": "load_and_install"
                 }
               ]
