@@ -42,7 +42,7 @@ jobs:
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
           # add the update time to the index page of the documentation.
           current_time=$(date +"%Y-%m-%d %H:%M:%S")
-          sed -i "s/Welcome to the DuckDB documentation!/Welcome to the DuckDB documentation! This documentation updated at $current_time./" ./doc/index.md
+          sed -i "s/Welcome to the DuckDB documentation!/Welcome to the DuckDB documentation! This documentation updated at $current_time./" ./docs/index.md
       - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Install zip
