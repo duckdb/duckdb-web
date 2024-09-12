@@ -19,17 +19,17 @@ def process_html_file(file_path):
 
 
 # Replace in search_data.json file only
-def process_search_data_json(file_path):
-    # print("procesing `search_data.json`")
-    with open(file_path, "r", encoding="UTF-8") as file:
-        content = file.read()
+# def process_search_data_json(file_path):
+#     # print("procesing `search_data.json`")
+#     with open(file_path, "r", encoding="UTF-8") as file:
+#         content = file.read()
 
-    # Apply specific replacement for search_data.json
-    content_updated = re.sub(r'"(/docs[^"]*(?<!/)(?<!\.html))"', r'"\1.html"', content)
+#     # Apply specific replacement for search_data.json
+#     content_updated = re.sub(r'"(/docs[^"]*(?<!/)(?<!\.html))"', r'"\1.html"', content)
 
-    # Write the updated content back to the file
-    with open(file_path, "w", encoding="UTF-8") as file:
-        file.write(content_updated)
+#     # Write the updated content back to the file
+#     with open(file_path, "w", encoding="UTF-8") as file:
+#         file.write(content_updated)
 
 
 # Replace "https://duckdb.org" with an empty string in text file
@@ -59,10 +59,10 @@ def process_files(root_dir, file_ext, processing_function):
         for file in files:
             if file.endswith(file_ext):
                 file_path = os.path.join(subdir, file)
-                if file_path == r"./duckdb-docs/data/search_data.json":
-                    process_search_data_json(file_path)
-                else:
-                    processing_function(file_path)
+                # if file_path == r"./duckdb-docs/data/search_data.json":
+                #     process_search_data_json(file_path)
+                # else:
+                processing_function(file_path)
 
 
 # Main function to apply all steps
