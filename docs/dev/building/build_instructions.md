@@ -90,7 +90,7 @@ To build DuckDB, install [MSYS2](https://www.msys2.org/) and open a MINGW64 sess
 Install the required dependencies using Pacman. When prompted with `Enter a selection (default=all)`, select the default option by pressing `Enter`.
 Note that unlike the build process on UNIX-like systems, the Windows build directly calls CMake.
 
-```bash
+```batch
 pacman -Syu git mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja
 git clone https://github.com/duckdb/duckdb
 cd duckdb
