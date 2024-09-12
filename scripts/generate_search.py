@@ -109,7 +109,7 @@ def index_file(fname):
             'title': title,
             'text': text,
             'category': category,
-            'url': '/' + fname.replace('.md', ''),
+            'url': '/' + fname.replace('.md', '.html'),
             'blurb': blurb,
         }
     )
