@@ -78,7 +78,7 @@ jobs:
   build_pdf:
     runs-on: ubuntu-latest
     container:
-      image: docker://pandoc/extra:3.1
+      image: docker://pandoc/extra:3.1.1.0
       options: --entrypoint=sh
     defaults:
       run:
