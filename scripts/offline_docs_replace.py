@@ -2,79 +2,36 @@ import os
 import re
 
 
-# Replace href="(/docs[^"]*[^/])" with href="$1.html" in HTML files
-def process_html_file(file_path):
-    # print("procesing html file:\t",file_path)
-    with open(file_path, "r", encoding="UTF-8") as file:
-        content = file.read()
-
-    # Replace href="(/docs[^"]*[^/])" with href="$1.html"
-    content_updated = re.sub(
-        r'href="(/docs[^"]*(?<!/)(?<!\.html))"', r'href="\1.html"', content
-    )
-
-    # Write the updated content back to the file
-    with open(file_path, "w", encoding="UTF-8") as file:
-        file.write(content_updated)
-
-
-# Replace in search_data.json file only
-# def process_search_data_json(file_path):
-#     # print("procesing `search_data.json`")
-#     with open(file_path, "r", encoding="UTF-8") as file:
-#         content = file.read()
-
-#     # Apply specific replacement for search_data.json
-#     content_updated = re.sub(r'"(/docs[^"]*(?<!/)(?<!\.html))"', r'"\1.html"', content)
-
-#     # Write the updated content back to the file
-#     with open(file_path, "w", encoding="UTF-8") as file:
-#         file.write(content_updated)
-
-
-# Replace "https://duckdb.org" with an empty string in text file
-def replace_duckdb_org(file_path):
-    # print('Replace `"https://duckdb.org` with `"`:\t',file_path)
+# Modify the content of a file: replace "https://duckdb.org" in all files,
+# and if it's an HTML file, also perform HTML-specific replacements
+def modify_file(file_path):
     try:
-        # Attempt to open the file in text mode
+        # Read the file content
         with open(file_path, "r", encoding="utf-8") as file:
             content = file.read()
 
-        # Replace `"https://duckdb.org` with `"`
+        # Replace "https://duckdb.org" with `"` in all files
         content_updated = content.replace('"https://duckdb.org', '"')
 
-        # Write the updated content back to the file
-        with open(file_path, "w", encoding="utf-8") as file:
-            file.write(content_updated)
+        # If the file is an HTML file, perform additional replacements
+        if file_path.endswith(".html"):
+            content_updated = re.sub(
+                r'href="(/docs[^"]*(?<!/)(?<!\.html))"', r'href="\1.html"', content_updated
+            )
+
+        # Write back only if changes were made
+        if content != content_updated:
+            with open(file_path, "w", encoding="utf-8") as file:
+                file.write(content_updated)
 
     except (UnicodeDecodeError, IOError):
-        # If a UnicodeDecodeError occurs, it's likely a binary file, so we skip it
-        # print(f"Skipping binary file: {file_path}")
+        # Skip binary files or files that cannot be read properly
         pass
 
 
-# Recursively find and apply changes to files
-def process_files(root_dir, file_ext, processing_function):
-    for subdir, dirs, files in os.walk(root_dir):
-        for file in files:
-            if file.endswith(file_ext):
-                file_path = os.path.join(subdir, file)
-                # if file_path == r"./duckdb-docs/data/search_data.json":
-                #     process_search_data_json(file_path)
-                # else:
-                processing_function(file_path)
-
-
-# Main function to apply all steps
-def main():
-    root_directory = (
-        r"./duckdb-docs"
-    )
-
-    process_files(root_directory, "", replace_duckdb_org)
-
-    process_files(root_directory, ".html", process_html_file)
-
-
 if __name__ == "__main__":
-    main()
+    root_directory = r"./duckdb-docs"  # Define duckdb-docs directory
+    for subdir, dirs, files in os.walk(root_directory):
+        for file in files:
+            file_path = os.path.join(subdir, file)
+            modify_file(file_path)
