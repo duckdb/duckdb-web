@@ -16,7 +16,9 @@ def modify_file(file_path):
         # If the file is an HTML file, perform additional replacements
         if file_path.endswith(".html"):
             content_updated = re.sub(
-                r'href="(/docs[^"]*(?<!/)(?<!\.html))"', r'href="\1.html"', content_updated
+                r'href="(/docs[^"]*(?<!/)(?<!\.html))"',
+                r'href="\1.html"',
+                content_updated,
             )
 
         # Write back only if changes were made
