@@ -100,7 +100,7 @@ ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db;
 ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
 ```
 
-> Prior to DuckDB version, it was necessary to specify the `READ_ONLY` flag for HTTP and S3 endpoints.
+> Prior to DuckDB version 1.1.0, it was necessary to specify the `READ_ONLY` flag for HTTP and S3 endpoints.
 
 ## Detach
 
