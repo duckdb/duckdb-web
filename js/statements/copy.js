@@ -14,7 +14,6 @@ function GenerateCopyFrom(options = {}) {
 	])
 }
 
-
 function GenerateCopyTo(options = {}) {
 	return Diagram([
 		AutomaticStack([
@@ -38,7 +37,6 @@ function GenerateCopyTo(options = {}) {
 		])
 	])
 }
-
 
 function GenerateCopyFromDatabase(options = {}) {
 	return Diagram([
