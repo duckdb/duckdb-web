@@ -1602,7 +1602,7 @@ function GenerateCopyFromOptions(options) {
 			Keyword("("),
 			OneOrMore(Choice(0, [
 				Sequence([Keyword("FORMAT"), Expression("format-type")]),
-				Sequence([Keyword("<format-specific-option>"), Expression("value")])
+				Sequence([Keyword("⟨format-specific-option⟩"), Expression("value")])
 			]), ",", "skip"),
 			Keyword(")")
 		]), "skip")
@@ -1616,7 +1616,7 @@ function GenerateCopyToOptions(options) {
 			Keyword("("),
 			OneOrMore(Choice(0, [
 				Sequence([Keyword("FORMAT"), Expression("format-type")]),
-				Sequence([Keyword("<format-specific-option>"), Expression("value")]),
+				Sequence([Keyword("⟨format-specific-option⟩"), Expression("value")]),
 				Sequence([Keyword("USE_TMP_FILE"), Choice(0, [Keyword("true"), Keyword("false")])]),
 				Sequence([Keyword("OVERWRITE_OR_IGNORE"), Choice(0, [Keyword("true"), Keyword("false")])]),
 				Sequence([Keyword("OVERWRITE"), Choice(0, [Keyword("true"), Keyword("false")])]),
