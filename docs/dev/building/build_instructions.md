@@ -50,9 +50,9 @@ git clone https://github.com/duckdb/duckdb
 
 We recommend creating a full clone of the repository. Note that the directory uses approximately 1.3 GB of disk space.
 
-### Building DuckdB
+### Building DuckDB
 
-To build DuckDB we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
+To build DuckDB, we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
 
 ```bash
 GEN=ninja make
@@ -71,13 +71,13 @@ build/release/duckdb
 For testing, it can be useful to build DuckDB with statically linked core extensions. To do so, run:
 
 ```bash
-CORE_EXTENSIONS='autocomplete;icu;parquet;json' GEN=ninja make
+CORE_EXTENSIONS='autocomplete;httpfs;icu;parquet;json' GEN=ninja make
 ```
 
 This option also accepts out-of-tree extensions:
 
 ```bash
-CORE_EXTENSIONS='autocomplete;icu;parquet;json;delta' GEN=ninja make
+CORE_EXTENSIONS='autocomplete;httpfs;icu;parquet;json;delta' GEN=ninja make
 ```
 
 For more details, see the [“Building Extensions” page]({% link docs/dev/building/building_extensions.md %}).
@@ -102,6 +102,21 @@ Once the build finishes successfully, you can find the `duckdb.exe` binary in th
 
 ```bash
 ./duckdb.exe
+```
+
+## Raspberry Pi (32-bit)
+
+On 32-bit Raspberry Pi controllers, you need to add the [`-latomic` link flag](https://github.com/duckdb/duckdb/issues/13855#issuecomment-2341539339).
+As extensions are not distributed for this platform, it's recommended to also include them in the build.
+For example:
+
+```batch
+mkdir build
+cd build
+cmake .. \
+    -DBUILD_EXTENSIONS="httpfs;json;parquet" \
+    -DDUCKDB_EXTRA_LINK_FLAGS="-latomic"
+make -j4
 ```
 
 ## Troubleshooting
