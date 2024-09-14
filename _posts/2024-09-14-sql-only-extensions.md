@@ -5,7 +5,6 @@ author: "Alex Monahan"
 excerpt: "Now you can easily create sharable extensions using only SQL MACROs that can apply to any table and any columns. We demonstrate the power of this capability with the pivot_table extension that provides Excel-style pivoting"
 ---
 <!-- 
-1015
 
 The vision
     Shareable helper libraries, built entirely in SQL
@@ -94,6 +93,8 @@ If I can do it, you can do it!
 All that said, just how valuable can a SQL `MACRO` be? 
 Can we do more than make small snippets?
 I'll make the case that you can do quite complex and powerful operations in DuckDB SQL using the `pivot_table` extension as an example.
+The `pivot_table` function allows for Excel-style pivots, including `subtotals`, `grand_totals`, and more.
+It is also very similar to the Pandas `pivot_table` function, but with all the scalability and speed benefits of DuckDB!
 
 So, we now have all 3 ingredients we will need: a central package manager, reusable `MACRO`s, and enough syntactic flexibility to do valuable work.
 
@@ -273,7 +274,7 @@ Any set of tables will first be vertically stacked and then pivoted.
 
 <details markdown='1'>
 <summary markdown='span'>
-    First we will create an example data table. We are a duck product disributor, and we are tracking our fowl finances.
+    First we will create an example data table. We are a duck product distributor, and we are tracking our fowl finances.
 </summary>
 
 ```sql
