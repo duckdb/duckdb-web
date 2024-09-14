@@ -50,9 +50,9 @@ git clone https://github.com/duckdb/duckdb
 
 We recommend creating a full clone of the repository. Note that the directory uses approximately 1.3 GB of disk space.
 
-### Building DuckdB
+### Building DuckDB
 
-To build DuckDB we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
+To build DuckDB, we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
 
 ```bash
 GEN=ninja make
