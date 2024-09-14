@@ -71,13 +71,13 @@ build/release/duckdb
 For testing, it can be useful to build DuckDB with statically linked core extensions. To do so, run:
 
 ```bash
-CORE_EXTENSIONS='autocomplete;icu;parquet;json' GEN=ninja make
+CORE_EXTENSIONS='autocomplete;httpfs;icu;parquet;json' GEN=ninja make
 ```
 
 This option also accepts out-of-tree extensions:
 
 ```bash
-CORE_EXTENSIONS='autocomplete;icu;parquet;json;delta' GEN=ninja make
+CORE_EXTENSIONS='autocomplete;httpfs;icu;parquet;json;delta' GEN=ninja make
 ```
 
 For more details, see the [“Building Extensions” page]({% link docs/dev/building/building_extensions.md %}).
