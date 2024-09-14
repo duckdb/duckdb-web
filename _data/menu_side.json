@@ -23,6 +23,10 @@
     {
       "page": "Live Demo",
       "url": "https://shell.duckdb.org"
+    },
+    {
+      "page": "Duckdb Snippets",
+      "url": "https://duckdbsnippets.com/"
     }
   ]
 }
