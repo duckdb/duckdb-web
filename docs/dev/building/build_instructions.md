@@ -111,6 +111,8 @@ As extensions are not distributed for this platform, it's recommended to also in
 For example:
 
 ```batch
+mkdir build
+cd build
 cmake .. \
     -DBUILD_EXTENSIONS="httpfs;json;parquet" \
     -DDUCKDB_EXTRA_LINK_FLAGS="-latomic"
