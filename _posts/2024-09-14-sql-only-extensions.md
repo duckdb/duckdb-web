@@ -97,132 +97,6 @@ I'll make the case that you can do quite complex and powerful operations in Duck
 
 So, we now have all 3 ingredients we will need: a central package manager, reusable `MACRO`s, and enough syntactic flexibility to do valuable work.
 
-## Capabilities of the `pivot_table` Extension
-
-The `pivot_table` extension supports advanced pivoting functionality that was previously only available in spreadsheets, dataframe libraries, or custom host language functions.
-It uses the Excel pivoting API: `values`, `rows`, `columns`, and `filters`.
-It can handle 0 or more of each of those parameters.
-However, not only that, but it supports `subtotals` and `grand_totals`.
-If multiple `values` are passed in, the `values_axis` parameter allows the user to choose if each value should get its own column or its own row.
-
-> Note The only missing Excel feature I am aware of is columnar subtotals, but not even Pandas supports that!
-> And we are officially open to contributions now... :-)
-
-Why is this a good example of how DuckDB moves beyond traditional SQL?
-The Excel pivoting API requires dramatically different SQL syntax depending on which parameters are in use.
-If no `columns` are pivoted outward, a `GROUP BY` is all that is needed.
-However, once `columns` are involved, a `PIVOT` is required.
-
-This function can operate on one or more `table_names` that are passed in as a parameter.
-Any set of tables will first be vertically stacked and then pivoted.
-
-## Example Using `pivot_table`
-
-<details markdown='1'>
-<summary markdown='span'>
-    First we will create an example data table. We are a duck product disributor.
-</summary>
-
-```sql
-CREATE OR REPLACE TABLE business_metrics (
-    product_line VARCHAR, product VARCHAR, year INTEGER, quarter VARCHAR, revenue integer, cost integer
-);
-INSERT INTO business_metrics VALUES
-    ('Waterfowl watercraft', 'Duck boats', 2022, 'Q1', 100, 100),
-    ('Waterfowl watercraft', 'Duck boats', 2022, 'Q2', 200, 100),
-    ('Waterfowl watercraft', 'Duck boats', 2022, 'Q3', 300, 100),
-    ('Waterfowl watercraft', 'Duck boats', 2022, 'Q4', 400, 100),
-    ('Waterfowl watercraft', 'Duck boats', 2023, 'Q1', 500, 100),
-    ('Waterfowl watercraft', 'Duck boats', 2023, 'Q2', 600, 100),
-    ('Waterfowl watercraft', 'Duck boats', 2023, 'Q3', 700, 100),
-    ('Waterfowl watercraft', 'Duck boats', 2023, 'Q4', 800, 100),
-
-    ('Duck Duds', 'Duck suits', 2022, 'Q1', 10, 10),
-    ('Duck Duds', 'Duck suits', 2022, 'Q2', 20, 10),
-    ('Duck Duds', 'Duck suits', 2022, 'Q3', 30, 10),
-    ('Duck Duds', 'Duck suits', 2022, 'Q4', 40, 10),
-    ('Duck Duds', 'Duck suits', 2023, 'Q1', 50, 10),
-    ('Duck Duds', 'Duck suits', 2023, 'Q2', 60, 10),
-    ('Duck Duds', 'Duck suits', 2023, 'Q3', 70, 10),
-    ('Duck Duds', 'Duck suits', 2023, 'Q4', 80, 10),
-
-    ('Duck Duds', 'Duck neckties', 2022, 'Q1', 1, 1),
-    ('Duck Duds', 'Duck neckties', 2022, 'Q2', 2, 1),
-    ('Duck Duds', 'Duck neckties', 2022, 'Q3', 3, 1),
-    ('Duck Duds', 'Duck neckties', 2022, 'Q4', 4, 1),
-    ('Duck Duds', 'Duck neckties', 2023, 'Q1', 5, 1),
-    ('Duck Duds', 'Duck neckties', 2023, 'Q2', 6, 1),
-    ('Duck Duds', 'Duck neckties', 2023, 'Q3', 7, 1),
-    ('Duck Duds', 'Duck neckties', 2023, 'Q4', 8, 1),
-;
-
-FROM business_metrics;
-```
-</details>
-
-|     product_line     |    product    | year | quarter | revenue | cost |
-|----------------------|---------------|-----:|---------|--------:|-----:|
-| Waterfowl watercraft | Duck boats    | 2022 | Q1      | 100     | 100  |
-| Waterfowl watercraft | Duck boats    | 2022 | Q2      | 200     | 100  |
-| Waterfowl watercraft | Duck boats    | 2022 | Q3      | 300     | 100  |
-| Waterfowl watercraft | Duck boats    | 2022 | Q4      | 400     | 100  |
-| Waterfowl watercraft | Duck boats    | 2023 | Q1      | 500     | 100  |
-| Waterfowl watercraft | Duck boats    | 2023 | Q2      | 600     | 100  |
-| Waterfowl watercraft | Duck boats    | 2023 | Q3      | 700     | 100  |
-| Waterfowl watercraft | Duck boats    | 2023 | Q4      | 800     | 100  |
-| Duck Duds            | Duck suits    | 2022 | Q1      | 10      | 10   |
-| Duck Duds            | Duck suits    | 2022 | Q2      | 20      | 10   |
-| Duck Duds            | Duck suits    | 2022 | Q3      | 30      | 10   |
-| Duck Duds            | Duck suits    | 2022 | Q4      | 40      | 10   |
-| Duck Duds            | Duck suits    | 2023 | Q1      | 50      | 10   |
-| Duck Duds            | Duck suits    | 2023 | Q2      | 60      | 10   |
-| Duck Duds            | Duck suits    | 2023 | Q3      | 70      | 10   |
-| Duck Duds            | Duck suits    | 2023 | Q4      | 80      | 10   |
-| Duck Duds            | Duck neckties | 2022 | Q1      | 1       | 1    |
-| Duck Duds            | Duck neckties | 2022 | Q2      | 2       | 1    |
-| Duck Duds            | Duck neckties | 2022 | Q3      | 3       | 1    |
-| Duck Duds            | Duck neckties | 2022 | Q4      | 4       | 1    |
-| Duck Duds            | Duck neckties | 2023 | Q1      | 5       | 1    |
-| Duck Duds            | Duck neckties | 2023 | Q2      | 6       | 1    |
-| Duck Duds            | Duck neckties | 2023 | Q3      | 7       | 1    |
-| Duck Duds            | Duck neckties | 2023 | Q4      | 8       | 1    |
-
-Now we can build pivot tables like the one below. 
-There is a little bit of boilerplate required, and the details of how this works are explained later in the post.
-
-```sql
-DROP TYPE IF EXISTS columns_parameter_enum;
-
-CREATE TYPE columns_parameter_enum AS ENUM (
-    FROM build_my_enum(['business_metrics'], ['year', 'quarter'], [])
-);
-
-FROM pivot_table(['business_metrics'],          -- table_names
-                 ['sum(revenue)', 'sum(cost)'], -- values
-                 ['product_line', 'product'],   -- rows
-                 ['year', 'quarter'],           -- columns
-                 [],                            -- filters
-                 subtotals:=1,
-                 grand_totals:=1,
-                 values_axis:='rows'
-                 );
-```
-
-|     product_line     |    product    | value_names  | 2022_Q1 | 2022_Q2 | 2022_Q3 | 2022_Q4 | 2023_Q1 | 2023_Q2 | 2023_Q3 | 2023_Q4 |
-|----------------------|---------------|--------------|---------|---------|---------|---------|---------|---------|---------|---------|
-| Duck Duds            | Duck neckties | sum(cost)    | 1       | 1       | 1       | 1       | 1       | 1       | 1       | 1       |
-| Duck Duds            | Duck neckties | sum(revenue) | 1       | 2       | 3       | 4       | 5       | 6       | 7       | 8       |
-| Duck Duds            | Duck suits    | sum(cost)    | 10      | 10      | 10      | 10      | 10      | 10      | 10      | 10      |
-| Duck Duds            | Duck suits    | sum(revenue) | 10      | 20      | 30      | 40      | 50      | 60      | 70      | 80      |
-| Duck Duds            | Subtotal      | sum(cost)    | 11      | 11      | 11      | 11      | 11      | 11      | 11      | 11      |
-| Duck Duds            | Subtotal      | sum(revenue) | 11      | 22      | 33      | 44      | 55      | 66      | 77      | 88      |
-| Waterfowl watercraft | Duck boats    | sum(cost)    | 100     | 100     | 100     | 100     | 100     | 100     | 100     | 100     |
-| Waterfowl watercraft | Duck boats    | sum(revenue) | 100     | 200     | 300     | 400     | 500     | 600     | 700     | 800     |
-| Waterfowl watercraft | Subtotal      | sum(cost)    | 100     | 100     | 100     | 100     | 100     | 100     | 100     | 100     |
-| Waterfowl watercraft | Subtotal      | sum(revenue) | 100     | 200     | 300     | 400     | 500     | 600     | 700     | 800     |
-| Grand Total          | Grand Total   | sum(cost)    | 111     | 111     | 111     | 111     | 111     | 111     | 111     | 111     |
-| Grand Total          | Grand Total   | sum(revenue) | 111     | 222     | 333     | 444     | 555     | 666     | 777     | 888     |
-
 ## Create Your Own SQL Extension
 
 Let's walk through the steps to creating your own SQL-only extension.
@@ -371,7 +245,143 @@ A summary of those steps is:
 
 2. Wait for approval from the maintainers!
 
+And there you have it!
+You have created a shareable DuckDB Community Extension.
+Now let's have a look at the `pivot_table` extension as an example of just how powerful a SQL-only extension can be.
 
+
+## Capabilities of the `pivot_table` Extension
+
+The `pivot_table` extension supports advanced pivoting functionality that was previously only available in spreadsheets, dataframe libraries, or custom host language functions.
+It uses the Excel pivoting API: `values`, `rows`, `columns`, and `filters`.
+It can handle 0 or more of each of those parameters.
+However, not only that, but it supports `subtotals` and `grand_totals`.
+If multiple `values` are passed in, the `values_axis` parameter allows the user to choose if each value should get its own column or its own row.
+
+> Note The only missing Excel feature I am aware of is columnar subtotals, but not even Pandas supports that!
+> And we are officially open to contributions now... :-)
+
+Why is this a good example of how DuckDB moves beyond traditional SQL?
+The Excel pivoting API requires dramatically different SQL syntax depending on which parameters are in use.
+If no `columns` are pivoted outward, a `GROUP BY` is all that is needed.
+However, once `columns` are involved, a `PIVOT` is required.
+
+This function can operate on one or more `table_names` that are passed in as a parameter.
+Any set of tables will first be vertically stacked and then pivoted.
+
+## Example Using `pivot_table`
+
+<details markdown='1'>
+<summary markdown='span'>
+    First we will create an example data table. We are a duck product disributor, and we are tracking our fowl finances.
+</summary>
+
+```sql
+CREATE OR REPLACE TABLE business_metrics (
+    product_line VARCHAR, product VARCHAR, year INTEGER, quarter VARCHAR, revenue integer, cost integer
+);
+INSERT INTO business_metrics VALUES
+    ('Waterfowl watercraft', 'Duck boats', 2022, 'Q1', 100, 100),
+    ('Waterfowl watercraft', 'Duck boats', 2022, 'Q2', 200, 100),
+    ('Waterfowl watercraft', 'Duck boats', 2022, 'Q3', 300, 100),
+    ('Waterfowl watercraft', 'Duck boats', 2022, 'Q4', 400, 100),
+    ('Waterfowl watercraft', 'Duck boats', 2023, 'Q1', 500, 100),
+    ('Waterfowl watercraft', 'Duck boats', 2023, 'Q2', 600, 100),
+    ('Waterfowl watercraft', 'Duck boats', 2023, 'Q3', 700, 100),
+    ('Waterfowl watercraft', 'Duck boats', 2023, 'Q4', 800, 100),
+
+    ('Duck Duds', 'Duck suits', 2022, 'Q1', 10, 10),
+    ('Duck Duds', 'Duck suits', 2022, 'Q2', 20, 10),
+    ('Duck Duds', 'Duck suits', 2022, 'Q3', 30, 10),
+    ('Duck Duds', 'Duck suits', 2022, 'Q4', 40, 10),
+    ('Duck Duds', 'Duck suits', 2023, 'Q1', 50, 10),
+    ('Duck Duds', 'Duck suits', 2023, 'Q2', 60, 10),
+    ('Duck Duds', 'Duck suits', 2023, 'Q3', 70, 10),
+    ('Duck Duds', 'Duck suits', 2023, 'Q4', 80, 10),
+
+    ('Duck Duds', 'Duck neckties', 2022, 'Q1', 1, 1),
+    ('Duck Duds', 'Duck neckties', 2022, 'Q2', 2, 1),
+    ('Duck Duds', 'Duck neckties', 2022, 'Q3', 3, 1),
+    ('Duck Duds', 'Duck neckties', 2022, 'Q4', 4, 1),
+    ('Duck Duds', 'Duck neckties', 2023, 'Q1', 5, 1),
+    ('Duck Duds', 'Duck neckties', 2023, 'Q2', 6, 1),
+    ('Duck Duds', 'Duck neckties', 2023, 'Q3', 7, 1),
+    ('Duck Duds', 'Duck neckties', 2023, 'Q4', 8, 1),
+;
+
+FROM business_metrics;
+```
+</details>
+
+|     product_line     |    product    | year | quarter | revenue | cost |
+|----------------------|---------------|-----:|---------|--------:|-----:|
+| Waterfowl watercraft | Duck boats    | 2022 | Q1      | 100     | 100  |
+| Waterfowl watercraft | Duck boats    | 2022 | Q2      | 200     | 100  |
+| Waterfowl watercraft | Duck boats    | 2022 | Q3      | 300     | 100  |
+| Waterfowl watercraft | Duck boats    | 2022 | Q4      | 400     | 100  |
+| Waterfowl watercraft | Duck boats    | 2023 | Q1      | 500     | 100  |
+| Waterfowl watercraft | Duck boats    | 2023 | Q2      | 600     | 100  |
+| Waterfowl watercraft | Duck boats    | 2023 | Q3      | 700     | 100  |
+| Waterfowl watercraft | Duck boats    | 2023 | Q4      | 800     | 100  |
+| Duck Duds            | Duck suits    | 2022 | Q1      | 10      | 10   |
+| Duck Duds            | Duck suits    | 2022 | Q2      | 20      | 10   |
+| Duck Duds            | Duck suits    | 2022 | Q3      | 30      | 10   |
+| Duck Duds            | Duck suits    | 2022 | Q4      | 40      | 10   |
+| Duck Duds            | Duck suits    | 2023 | Q1      | 50      | 10   |
+| Duck Duds            | Duck suits    | 2023 | Q2      | 60      | 10   |
+| Duck Duds            | Duck suits    | 2023 | Q3      | 70      | 10   |
+| Duck Duds            | Duck suits    | 2023 | Q4      | 80      | 10   |
+| Duck Duds            | Duck neckties | 2022 | Q1      | 1       | 1    |
+| Duck Duds            | Duck neckties | 2022 | Q2      | 2       | 1    |
+| Duck Duds            | Duck neckties | 2022 | Q3      | 3       | 1    |
+| Duck Duds            | Duck neckties | 2022 | Q4      | 4       | 1    |
+| Duck Duds            | Duck neckties | 2023 | Q1      | 5       | 1    |
+| Duck Duds            | Duck neckties | 2023 | Q2      | 6       | 1    |
+| Duck Duds            | Duck neckties | 2023 | Q3      | 7       | 1    |
+| Duck Duds            | Duck neckties | 2023 | Q4      | 8       | 1    |
+
+Next, we install the extension from the community repository:
+
+```sql
+INSTALL pivot_table FROM community;
+LOAD pivot_table;
+```
+
+Now we can build pivot tables like the one below. 
+There is a little bit of boilerplate required, and the details of how this works will be explained shortly.
+
+```sql
+DROP TYPE IF EXISTS columns_parameter_enum;
+
+CREATE TYPE columns_parameter_enum AS ENUM (
+    FROM build_my_enum(['business_metrics'], ['year', 'quarter'], [])
+);
+
+FROM pivot_table(['business_metrics'],          -- table_names
+                 ['sum(revenue)', 'sum(cost)'], -- values
+                 ['product_line', 'product'],   -- rows
+                 ['year', 'quarter'],           -- columns
+                 [],                            -- filters
+                 subtotals:=1,
+                 grand_totals:=1,
+                 values_axis:='rows'
+                 );
+```
+
+|     product_line     |    product    | value_names  | 2022_Q1 | 2022_Q2 | 2022_Q3 | 2022_Q4 | 2023_Q1 | 2023_Q2 | 2023_Q3 | 2023_Q4 |
+|----------------------|---------------|--------------|---------|---------|---------|---------|---------|---------|---------|---------|
+| Duck Duds            | Duck neckties | sum(cost)    | 1       | 1       | 1       | 1       | 1       | 1       | 1       | 1       |
+| Duck Duds            | Duck neckties | sum(revenue) | 1       | 2       | 3       | 4       | 5       | 6       | 7       | 8       |
+| Duck Duds            | Duck suits    | sum(cost)    | 10      | 10      | 10      | 10      | 10      | 10      | 10      | 10      |
+| Duck Duds            | Duck suits    | sum(revenue) | 10      | 20      | 30      | 40      | 50      | 60      | 70      | 80      |
+| Duck Duds            | Subtotal      | sum(cost)    | 11      | 11      | 11      | 11      | 11      | 11      | 11      | 11      |
+| Duck Duds            | Subtotal      | sum(revenue) | 11      | 22      | 33      | 44      | 55      | 66      | 77      | 88      |
+| Waterfowl watercraft | Duck boats    | sum(cost)    | 100     | 100     | 100     | 100     | 100     | 100     | 100     | 100     |
+| Waterfowl watercraft | Duck boats    | sum(revenue) | 100     | 200     | 300     | 400     | 500     | 600     | 700     | 800     |
+| Waterfowl watercraft | Subtotal      | sum(cost)    | 100     | 100     | 100     | 100     | 100     | 100     | 100     | 100     |
+| Waterfowl watercraft | Subtotal      | sum(revenue) | 100     | 200     | 300     | 400     | 500     | 600     | 700     | 800     |
+| Grand Total          | Grand Total   | sum(cost)    | 111     | 111     | 111     | 111     | 111     | 111     | 111     | 111     |
+| Grand Total          | Grand Total   | sum(revenue) | 111     | 222     | 333     | 444     | 555     | 666     | 777     | 888     |
 
 
 <!-- 
