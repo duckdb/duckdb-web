@@ -104,7 +104,11 @@ The following table gives an estimate on the resources required to produce DuckD
 |         1000 |        265 GB | 2h 53 minutes        |                   647 GB |
 |         3000 |        796 GB | 8h 30 minutes        |                  1799 GB |
 
-The numbers shown above were achieved by running the `dbgen` function in a single step, e.g.: `CALL dbgen(sf = 300);`.
+The numbers shown above were achieved by running the `dbgen` function in a single step, for example:
+
+```sql
+CALL dbgen(sf = 300);
+```
 
 If you have a limited amount of memory available, you can run the `dbgen` function in steps.
 For example, you may generate SF300 in 10 steps:
