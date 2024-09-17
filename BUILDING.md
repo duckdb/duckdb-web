@@ -216,3 +216,14 @@ The solution, according to a [Stack Overflow answer](https://stackoverflow.com/a
 ```bash
 gem update --system
 ```
+
+### `ERROR bad URI`
+
+The following error occurs when trying to access the locally built website via HTTPS (`https://localhost:4000/`).
+
+```console
+[2024-09-17 12:15:36] ERROR bad URI `����\x12`�\x17\x03�L\x00\x00\x14�'.
+[2024-09-17 12:15:36] ERROR bad Request-Line ...
+```
+This happens frequently with browsers looking to force an HTTPS connection such as Safari.
+The solution is to use an HTTP connection (`http://localhost:4000`) and optionally try another browser (e.g., Chrome or Firefox).
