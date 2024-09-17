@@ -5,7 +5,7 @@ redirect_from:
   - docs/guides/sql_features/friendly_sql
 ---
 
-DuckDB offers several advanced SQL features as well syntactic sugar to make SQL queries more concise. We call these colloquially as “friendly SQL”.
+DuckDB offers several advanced SQL features and syntactic sugar to make SQL queries more concise. We refer to these colloquially as “friendly SQL”.
 
 > Several of these features are also supported in other systems while some are (currently) exclusive to DuckDB.
 
@@ -28,6 +28,9 @@ DuckDB offers several advanced SQL features as well syntactic sugar to make SQL 
 * Transforming tables:
     * [`PIVOT`]({% link docs/sql/statements/pivot.md %}) to turn long tables to wide tables.
     * [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) to turn wide tables to long tables.
+* Defining SQL-level variables:
+    * [`SET VARIABLE`]({% link docs/sql/statements/set.md %}#set-variable)
+    * [`RESET VARIABLE`]({% link docs/sql/statements/set.md %}#reset-variable)
 
 ## Query Features
 

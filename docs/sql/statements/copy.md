@@ -204,12 +204,18 @@ The below options are applicable to all formats written with `COPY`.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
-| `FILE_SIZE_BYTES` | If this parameter is set, the `COPY` process creates a directory which will contain the exported files. If a file exceeds the set limit (specified as bytes such as `1000` or in human-readable format such as `1k`), the process creates a new file in the directory. This parameter works in combination with `PER_THREAD_OUTPUT`. Note that the size is used as an approximation, and files can be occasionally slightly over the limit. | `VARCHAR` or `BIGINT` | (empty) |
-| `FORMAT` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Available options are `CSV`, `PARQUET` and `JSON`. | `VARCHAR` | auto |
-| `OVERWRITE_OR_IGNORE` | Whether or not to allow overwriting a directory if one already exists. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
-| `PARTITION_BY` | The columns to partition by using a Hive partitioning scheme, see the [partitioned writes section]({% link docs/data/partitioning/partitioned_writes.md %}). | `VARCHAR[]` | (empty) |
-| `PER_THREAD_OUTPUT` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
+| `FORMAT` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Vanilla DuckDB provides `CSV`, `PARQUET` and `JSON` but additional copy functions can be added by [`extensions`]({% link docs/extensions/overview.md %}). | `VARCHAR` | `auto` |
 | `USE_TMP_FILE` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | `BOOL` | `auto` |
+| `OVERWRITE_OR_IGNORE` | Whether or not to allow overwriting files if they already exist. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
+| `OVERWRITE` | When set, all existing files inside targeted directories will be removed (not supported on remote filesystems). Only has an effect when used with `partition_by`. | `BOOL` | `false` |
+| `APPEND` | When set, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
+| `FILENAME_PATTERN` | Set a pattern to use for the filename, can optionally contain `{uuid}` to be filled in with a generated UUID or `{id}` which is replaced by an incrementing index. Only has an effect when used with `partition_by`. | `VARCHAR` | `auto` |
+| `FILE_EXTENSION` | Set the file extension that should be assigned to the generated file(s). | `VARCHAR` | `auto` |
+| `PER_THREAD_OUTPUT` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
+| `FILE_SIZE_BYTES` | If this parameter is set, the `COPY` process creates a directory which will contain the exported files. If a file exceeds the set limit (specified as bytes such as `1000` or in human-readable format such as `1k`), the process creates a new file in the directory. This parameter works in combination with `PER_THREAD_OUTPUT`. Note that the size is used as an approximation, and files can be occasionally slightly over the limit. | `VARCHAR` or `BIGINT` | (empty) |
+| `PARTITION_BY` | The columns to partition by using a Hive partitioning scheme, see the [partitioned writes section]({% link docs/data/partitioning/partitioned_writes.md %}). | `VARCHAR[]` | (empty) |
+| `RETURN_FILES` | Whether or not to include the created filepath(s) (as a `Files VARCHAR[]` column) in the query result. | `BOOL` | `false` |
+| `WRITE_PARTITION_COLUMNS` | Whether or not to write partition columns into files. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
 
 ### Syntax
 
@@ -247,7 +253,7 @@ COPY FROM DATABASE db1 TO db2 (SCHEMA);
 
 ### CSV Options
 
-The below options are applicable when writing `CSV` files.
+The below options are applicable when writing CSV files.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
@@ -263,7 +269,7 @@ The below options are applicable when writing `CSV` files.
 
 ### Parquet Options
 
-The below options are applicable when writing `Parquet` files.
+The below options are applicable when writing Parquet files.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
@@ -272,8 +278,9 @@ The below options are applicable when writing `Parquet` files.
 | `FIELD_IDS` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | `STRUCT` | (empty) |
 | `ROW_GROUP_SIZE_BYTES` | The target size of each row group. You can pass either a human-readable string, e.g., `2MB`, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored. | `BIGINT` | `row_group_size * 1024` |
 | `ROW_GROUP_SIZE` | The target size, i.e., number of rows, of each row group. | `BIGINT` | 122880 |
+| `ROW_GROUPS_PER_FILE` | Create a new Parquet file if the current one has a specified number of row groups. If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behaviour of `FILE_SIZE_BYTES`. However, if `per_thread_output` is set, only one thread writes to each file, and it becomes accurate again. | `BIGINT` |  (empty) |
 
-Some examples of `FIELD_IDS` are:
+Some examples of `FIELD_IDS` are as follows.
 
 Assign `field_ids` automatically:
 

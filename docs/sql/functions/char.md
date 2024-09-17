@@ -921,6 +921,8 @@ SELECT format('{:b}', 123_456_789); -- 111010110111100110100010101
 
 #### Print Numbers with Thousand Separators
 
+Integers:
+
 ```sql
 SELECT format('{:,}',  123_456_789); -- 123,456,789
 SELECT format('{:t.}', 123_456_789); -- 123.456.789
@@ -928,6 +930,14 @@ SELECT format('{:''}', 123_456_789); -- 123'456'789
 SELECT format('{:_}',  123_456_789); -- 123_456_789
 SELECT format('{:t }', 123_456_789); -- 123 456 789
 SELECT format('{:tX}', 123_456_789); -- 123X456X789
+```
+
+Float, double and decimal:
+
+```sql
+SELECT format('{:,f}',    123456.789); -- 123,456.78900
+SELECT format('{:,.2f}',  123456.789); -- 123,456.79
+SELECT format('{:t..2f}', 123456.789); -- 123.456,79
 ```
 
 ### `printf` Syntax
@@ -1036,9 +1046,18 @@ SELECT printf('%b', 123_456_789); -- 111010110111100110100010101
 
 #### Thousand Separators
 
+Integers:
+
 ```sql
 SELECT printf('%,d',  123_456_789); -- 123,456,789
 SELECT printf('%.d',  123_456_789); -- 123.456.789
 SELECT printf('%''d', 123_456_789); -- 123'456'789
 SELECT printf('%_d',  123_456_789); -- 123_456_789
+```
+
+Float, double and decimal:
+
+```sql
+SELECT printf('%,f',   123456.789); -- 123,456.789000
+SELECT printf('%,.2f', 123456.789); -- 123,456.79
 ```

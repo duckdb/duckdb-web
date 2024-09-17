@@ -28,11 +28,11 @@ Some extensions are distributed for the following platforms:
 * `windows_amd64_rtools`
 * `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/api/wasm/extensions.md %}))
 
-For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_gcc4`, `windows_amd64_mingw`).
+For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_android`, `linux_arm64_gcc4`, `windows_amd64_mingw`).
 
 ### Sharing Extensions between Clients
 
-The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.10.0 of the CLI client on macOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.10.0.
+The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platform` or ABI. For example, if an extension is installed with version 0.10.0 of the CLI client on macOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.10.0.
 
 ## Extension Repositories
 
@@ -78,7 +78,7 @@ INSTALL spatial FROM 'http://nightly-extensions.duckdb.org';
 To install an extensions from a custom repository unknown to DuckDB:
 
 ```sql
-INSTALL custom_extension FROM 'https://my-custom-extension-repository';
+INSTALL ⟨custom_extension⟩ FROM 'https://my-custom-extension-repository';
 ```
 
 Alternatively, the `custom_extension_repository` setting can be used to change the default repository used by DuckDB:
@@ -87,16 +87,17 @@ Alternatively, the `custom_extension_repository` setting can be used to change t
 SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
 ```
 
-While any url or local path can be used as a repository, currently DuckDB contains the following predefined repositories:
+While any URL or local path can be used as a repository, DuckDB currently contains the following predefined repositories:
 
-<div class="narrow_table"></div>
+<div class="narrow_tabl"></div>
 
-| Alias                 | Url                                    | Description                                                                            |
-|:----------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
-| `core`                | `http://extensions.duckdb.org`         | DuckDB core extensions                                                                 |
-| `core_nightly`        | `http://nightly-extensions.duckdb.org` | Nightly builds for `core`                                                              |
-| `local_build_debug`   | `./build/debug/repository`             | Repository created when building DuckDB from source in debug mode (for development)    |
-| `local_build_release` | `./build/release/repository`           | Repository created when building DuckDB from source in release mode (for development)  |
+| Alias                 | URL                                      | Description                                                                            |
+|:----------------------|:-----------------------------------------|:---------------------------------------------------------------------------------------|
+| `core`                | `http://extensions.duckdb.org`           | DuckDB core extensions                                                                 |
+| `core_nightly`        | `http://nightly-extensions.duckdb.org`   | Nightly builds for `core`                                                              |
+| `community`           | `http://community-extensions.duckdb.org` | DuckDB community extensions                                                            |
+| `local_build_debug`   | `./build/debug/repository`               | Repository created when building DuckDB from source in debug mode (for development)    |
+| `local_build_release` | `./build/release/repository`             | Repository created when building DuckDB from source in release mode (for development)  |
 
 ### Working with Multiple Repositories
 
@@ -109,7 +110,9 @@ INSTALL aws FROM core_nightly;
 SELECT extension_name, extension_version, installed_from, install_mode FROM duckdb_extensions();
 ```
 
-Would output:
+This outputs:
+
+<div class="narrow_table monospace_table"></div>
 
 | extensions_name | extensions_version | installed_from | install_mode |
 |:----------------|:-------------------|:---------------|:-------------|
@@ -120,7 +123,7 @@ Would output:
 ### Creating a Custom Repository
 
 A DuckDB repository is an HTTP, HTTPS, S3, or local file based directory that serves the extensions files in a specific structure.
-This structure is describe [here](#downloading-extensions-directly-from-s3), and is the same
+This structure is described in the [“Downloading Extensions Directly from S3” section](#downloading-extensions-directly-from-s3), and is the same
 for local paths and remote servers, for example:
 
 ```text
@@ -224,6 +227,17 @@ For building and installing extensions from source, see the [building guide]({% 
 ### Statically Linking Extensions
 
 To statically link extensions, follow the [developer documentation's “Using extension config files” section](https://github.com/duckdb/duckdb/blob/main/extension/README.md#using-extension-config-files).
+
+## In-Tree vs. Out-of-Tree
+
+Originally, DuckDB extensions lived exclusively in the DuckDB main repository, `github.com/duckdb/duckdb`. These extensions are called in-tree. Later, the concept
+of out-of-tree extensions was added, where extensions where separated into their own repository, which we call out-of-tree.
+
+While from a user's perspective, there are generally no noticeable differences, there are some minor differences related to versioning:
+
+* in-tree extensions use the version of DuckDB instead of having their own version
+* in-tree extensions do not have dedicated release notes, their changes are reflected in the regular [DuckDB release notes](https://github.com/duckdb/duckdb/releases)
+* core out-of tree extensions tend to live in a repository in `github.com/duckdb/duckdb_⟨ext_name⟩` but the name may vary. See the [full list]({% link docs/extensions/core_extensions.md %}) of core extensions for details.
 
 ## Limitations
 

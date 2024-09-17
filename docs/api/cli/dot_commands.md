@@ -183,13 +183,13 @@ The CLI's syntax highlighter can be configured using the following commands.
 To turn off the highlighter:
 
 ```text
-.highlight on
+.highlight off
 ```
 
 To turn on the highlighter:
 
 ```text
-.highlight off
+.highlight on
 ```
 
 To configure the color used to highlight constants:

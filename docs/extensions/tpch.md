@@ -91,9 +91,27 @@ The data generator function `dbgen` has the following parameters:
 | `step`      | `UINTEGER` | Defines the partition to be generated, indexed from 0 to `children` - 1. Must be defined when the `children` arguments is defined |
 | `suffix`    | `VARCHAR`  | Append the `suffix` to table names                                                                                                |
 
-## Generating Larger Than Memory Data Sets
+## Resource Usage of the Data Generator
 
-To generate data sets for large scale factors, which yield larger than memory data sets, run the `dbgen` function in steps. For example, you may generate SF300 in 10 steps:
+Generating TPC-H data sets for large scale factors takes a significant amount of time.
+Additionally, when the generation is done in a single step, it requires a large amount of memory.
+The following table gives an estimate on the resources required to produce DuckDB database files containing the generated TPC-H data set using 128 threads.
+
+| Scale factor | Database size | Data generation time | Generator's memory usage |
+| -----------: | ------------: | -------------------: | -----------------------: |
+|          100 |         26 GB | 17 minutes           |                    71 GB |
+|          300 |         78 GB | 51 minutes           |                   211 GB |
+|         1000 |        265 GB | 2h 53 minutes        |                   647 GB |
+|         3000 |        796 GB | 8h 30 minutes        |                  1799 GB |
+
+The numbers shown above were achieved by running the `dbgen` function in a single step, for example:
+
+```sql
+CALL dbgen(sf = 300);
+```
+
+If you have a limited amount of memory available, you can run the `dbgen` function in steps.
+For example, you may generate SF300 in 10 steps:
 
 ```sql
 CALL dbgen(sf = 300, children = 10, step = 0);
@@ -102,7 +120,6 @@ CALL dbgen(sf = 300, children = 10, step = 1);
 CALL dbgen(sf = 300, children = 10, step = 9);
 ```
 
-## Limitations
+## Limitation
 
-* The data generator function `dbgen` is single-threaded and does not support concurrency. Running multiple steps to parallelize over different partitions is also not supported at the moment.
-* The `tpch(⟨query_id⟩)` function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters). It is not possible to change the query parameters using the `tpch` extension.
+The `tpch(⟨query_id⟩)` function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters). It is not possible to change the query parameters using the `tpch` extension. To run the queries with the parameters prescribed by the TPC-H benchmark, use a TPC-H framework implementation.
