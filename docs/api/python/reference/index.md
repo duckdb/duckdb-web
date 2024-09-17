@@ -2374,7 +2374,7 @@ value: The value to use if the condition is met.</p>
 <dd>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>StarExpression(<a href="#id9"><span class="problematic" id="id10">*</span></a>, exclude: list = []) -&gt; duckdb.duckdb.Expression</p></li>
+<li><p>StarExpression(<a href="#id9"><span class="problematic" id="id10">*</span></a>, exclude: object = None) -&gt; duckdb.duckdb.Expression</p></li>
 <li><p>StarExpression() -&gt; duckdb.duckdb.Expression</p></li>
 </ol>
 </dd>
