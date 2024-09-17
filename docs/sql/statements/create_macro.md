@@ -6,6 +6,7 @@ railroad: statements/createmacro.js
 
 The `CREATE MACRO` statement can create a scalar or table macro (function) in the catalog.
 A macro may only be a single `SELECT` statement (similar to a `VIEW`), but it has the benefit of accepting parameters.
+
 For a scalar macro, `CREATE MACRO` is followed by the name of the macro, and optionally parameters within a set of parentheses. The keyword `AS` is next, followed by the text of the macro. By design, a scalar macro may only return a single value.
 For a table macro, the syntax is similar to a scalar macro except `AS` is replaced with `AS TABLE`. A table macro may return a table of arbitrary size and shape.
 
@@ -98,6 +99,28 @@ CREATE TABLE users AS
     FROM (VALUES (1, 'Ada'), (2, 'Bob'), (3, 'Carl'), (4, 'Dan'), (5, 'Eve')) t(uid, name);
 SELECT * FROM get_users([1, 5]);
 ```
+
+## Overloading
+
+It is possible to overload a macro based on the amount of parameters it takes, this works for both scalar and table macros.
+
+By providing overloads we can have both `add_x(a, b)` and `add_x(a, b, c)` with different function bodies.
+
+```sql
+CREATE MACRO add_x
+    (a, b) AS a + b,
+    (a, b, c) AS a + b + c;
+```
+
+```sql
+SELECT
+    add_x(21, 42) AS two_args,
+    add_x(21, 42, 21) AS three_args;
+```
+
+| two_args | three_args |
+|----------|------------|
+|    63    |     84     |
 
 ## Syntax
 
@@ -244,3 +267,7 @@ If a `MACRO` is defined as a subquery, it cannot be invoked in a table function.
 ```console
 Binder Error: Table function cannot contain subqueries
 ```
+
+### Overloads
+
+Overloads for macro functions have to be set at creation, it is not possible to define a macro by the same name twice without first removing the first definition.
