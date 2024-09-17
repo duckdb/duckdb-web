@@ -104,18 +104,18 @@ SELECT * FROM get_users([1, 5]);
 
 It is possible to overload a macro based on the amount of parameters it takes, this works for both scalar and table macros.
 
-By providing overloads we can have both `ADD_X(a, b)` and `ADD_X(a, b, c)` with different function bodies.
+By providing overloads we can have both `add_x(a, b)` and `add_x(a, b, c)` with different function bodies.
 
 ```sql
 CREATE MACRO add_x
-	(a, b) AS a + b,
-	(a, b, c) AS a + b + c;
+    (a, b) AS a + b,
+    (a, b, c) AS a + b + c;
 ```
 
 ```sql
 SELECT
-	add_x(21, 42) AS two_args,
-	add_x(21, 42, 21) AS three_args;
+    add_x(21, 42) AS two_args,
+    add_x(21, 42, 21) AS three_args;
 ```
 
 | two_args | three_args |
