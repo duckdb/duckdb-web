@@ -1015,7 +1015,17 @@
             },
             {
               "page": "Spatial",
-              "url": "spatial"
+              "slug": "spatial",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "R-Tree Indexes",
+                  "url": "r-tree_indexes"
+                }
+              ]
             },
             {
               "page": "SQLite",

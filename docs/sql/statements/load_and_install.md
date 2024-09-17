@@ -38,7 +38,7 @@ Load the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) extension:
 LOAD httpfs;
 ```
 
-Load the [`spatial`]({% link docs/extensions/spatial.md %}) extension:
+Load the [`spatial`]({% link docs/extensions/spatial/overview.md %}) extension:
 
 ```sql
 LOAD spatial;

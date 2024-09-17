@@ -64,7 +64,7 @@ There are two main methods of making DuckDB perform the **installation** and **l
 
 In DuckDB extensions can also be explicitly installed and loaded. Both non-autoloadable and autoloadable extensions can be installed this way.
 To explicitly install and load an extension, DuckDB has the dedicated SQL statements `LOAD` and `INSTALL`. For example,
-to install and load the [`spatial` extension]({% link docs/extensions/spatial.md %}), run:
+to install and load the [`spatial` extension]({% link docs/extensions/spatial/overview.md %}), run:
 
 ```sql
 INSTALL spatial;
