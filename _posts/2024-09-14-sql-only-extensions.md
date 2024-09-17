@@ -381,8 +381,8 @@ FROM pivot_table(['business_metrics'],          -- table_names
                  );
 ```
 
-|     product_line     |    product    | value_names  | 2022_Q1 | 2022_Q2 | 2022_Q3 | 2022_Q4 | 2023_Q1 | 2023_Q2 | 2023_Q3 | 2023_Q4 |
-|----------------------|---------------|--------------|---------|---------|---------|---------|---------|---------|---------|---------|
+|     product_line&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     |    product&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    | value_names  | 2022_Q1 | 2022_Q2 | 2022_Q3 | 2022_Q4 | 2023_Q1 | 2023_Q2 | 2023_Q3 | 2023_Q4 |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | Duck Duds            | Duck neckties | sum(cost)    | 1       | 1       | 1       | 1       | 1       | 1       | 1       | 1       |
 | Duck Duds            | Duck neckties | sum(revenue) | 1       | 2       | 3       | 4       | 5       | 6       | 7       | 8       |
 | Duck Duds            | Duck suits    | sum(cost)    | 10      | 10      | 10      | 10      | 10      | 10      | 10      | 10      |
