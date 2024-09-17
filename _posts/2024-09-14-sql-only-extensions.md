@@ -77,7 +77,10 @@ With version 1.1, DuckDB's world-class friendly SQL dialect makes it possible to
 * To any tables
 * On any columns
 * Using any functions
-The new ability to work on any tables is thanks to the `query` and `query_table` functions!
+
+The new ability to work on any tables is thanks to the [`query` and `query_table` functions]({% post_url 2024-09-09-announcing-duckdb-110 %}#query-and-query_table-functions)!
+The `query` function is a safe way to execute `SELECT` statements defined by SQL strings, while `query_table` is a way to make a `FROM` clause pull from multiple tables at once.
+They are very powerful when used in combination with other friendly SQL features like the `COLUMNS` expression and  `LIST` lambda functions.
 
 ### Community Extensions as a Central Repository
 
@@ -142,15 +145,28 @@ git push
 #### Write Your SQL Macros
 
 It it likely a bit faster to iterate if you test our your macros directly in DuckDB. 
-The example we will use demonstrates how to pull a dynamic set of columns from a dynamic table name.
+After you have written your SQL, we will move it into the extension.
+The example we will use demonstrates how to pull a dynamic set of columns from a dynamic table name (or a view name!).
 
 ```sql
 CREATE OR REPLACE MACRO select_distinct_columns_from_table(table_name, columns_list) AS TABLE (
     SELECT DISTINCT
         COLUMNS(column_name -> list_contains(columns_list, column_name))
     FROM query_table(table_name)
+    ORDER BY ALL
 );
+
+FROM select_distinct_columns_from_table('duckdb_types', ['type_category']);
 ```
+
+| type_category |
+|---------------|
+| BOOLEAN       |
+| COMPOSITE     |
+| DATETIME      |
+| NUMERIC       |
+| STRING        |
+| NULL          |
 
 #### Add SQL Macros
 
@@ -161,6 +177,7 @@ The extension template has an example for each (and code comments too!) inside t
 Let's add a table macro here since it is the more complex one.
 We will copy the example and modify it!
 
+{% raw %}
 ```cpp
 static const DefaultTableMacro <your_extension_name>_table_macros[] = {
 	{DEFAULT_SCHEMA, "times_two_table", {"x", nullptr}, {{"two", "2"}, {nullptr, nullptr}},  R"(SELECT x * two as output_column;)"},
@@ -174,11 +191,13 @@ static const DefaultTableMacro <your_extension_name>_table_macros[] = {
             SELECT DISTINCT
                 COLUMNS(column_name -> list_contains(columns_list, column_name))
             FROM query_table(table_name)
+            ORDER BY ALL
         )"
     },
 	{nullptr, nullptr, {nullptr}, {{nullptr, nullptr}}, nullptr}
 	};
 ```
+{% endraw %}
 
 That's it! 
 All we had to provide were the name of the function, the names of the parameters, and the text of our SQL `MACRO`.
@@ -204,20 +223,13 @@ SET custom_extension_repository='bucket.s3.eu-west-1.amazonaws.com/<your_extensi
 Note that the `/latest` path will allow you to install the latest extension version available for your current version of
 DuckDB. To specify a specific version, you can pass the version instead.
 
-After running these steps, you can install and load your extension using the regular INSTALL/LOAD commands in DuckDB:
+After running these steps, you can install and load your extension using the regular INSTALL/LOAD commands in DuckDB, and then use it:
 ```sql
 INSTALL <your_extension_name>;
 LOAD <your_extension_name>;
 
-SELECT *
-FROM select_distinct_columns_from_table('business_metrics', ['product_line', 'product']);
+FROM select_distinct_columns_from_table('duckdb_types', ['type_category']);
 ```
-
-|     product_line     |    product    |
-|----------------------|---------------|
-| Waterfowl watercraft | Duck boats    |
-| Duck Duds            | Duck neckties |
-| Duck Duds            | Duck suits    |
 
 
 ### Uploading to the Community Extensions Repository
@@ -244,7 +256,7 @@ A summary of those steps is:
      ref: 3c8a5358e42ab8d11e0253c70f7cc7d37781b2ef
    ```
 
-2. Wait for approval from the maintainers!
+2. Wait for approval from the maintainers
 
 And there you have it!
 You have created a shareable DuckDB Community Extension.
@@ -260,7 +272,7 @@ However, not only that, but it supports `subtotals` and `grand_totals`.
 If multiple `values` are passed in, the `values_axis` parameter allows the user to choose if each value should get its own column or its own row.
 
 > Note The only missing Excel feature I am aware of is columnar subtotals, but not even Pandas supports that!
-> And we are officially open to contributions now... :-)
+> And this extension is officially open to contributions now... :-)
 
 Why is this a good example of how DuckDB moves beyond traditional SQL?
 The Excel pivoting API requires dramatically different SQL syntax depending on which parameters are in use.
