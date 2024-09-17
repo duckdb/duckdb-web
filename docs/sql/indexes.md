@@ -20,7 +20,7 @@ An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mai
 
 ### Indexes Defined by Extensions
 
-Starting with version 1.1.0, [DuckDB supports R-trees for spatial indexing]({% post_url 2024-09-09-announcing-duckdb-110 %}#r-tree) via the [`spatial` extension]({% link docs/extensions/spatial/overview.md %}).
+Starting with version 1.1.0, [DuckDB supports R-trees for spatial indexing]({% post_url 2024-09-09-announcing-duckdb-110 %}#r-tree) via the [`spatial` extension]({% link docs/extensions/spatial/r-tree_indexes.md %}).
 
 ## Persistence
 
