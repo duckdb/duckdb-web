@@ -214,7 +214,7 @@ The `DuckDBPyConnection` object is not thread-safe. If you would like to write t
 
 ## Loading and Installing Extensions
 
-DuckDB's Python API provides functions for installing and loading [extensions]({% link docs/extensions/overview.md %}), which perform the equivalent operations to running the `INSTALL` and `LOAD` SQL commands, respectively. An example that installs and loads the [`spatial` extension]({% link docs/extensions/spatial.md %}) looks like follows:
+DuckDB's Python API provides functions for installing and loading [extensions]({% link docs/extensions/overview.md %}), which perform the equivalent operations to running the `INSTALL` and `LOAD` SQL commands, respectively. An example that installs and loads the [`spatial` extension]({% link docs/extensions/spatial/overview.md %}) looks like follows:
 
 ```python
 import duckdb

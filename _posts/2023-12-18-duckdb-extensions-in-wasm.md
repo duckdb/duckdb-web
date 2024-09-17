@@ -69,7 +69,7 @@ In short, your DuckDB instance, which _runs entirely within your browser,_ first
 
 ### Using the Spatial Extension in DuckDB-Wasm
 
-To show the possibilities unlocked by DuckDB-Wasm extensions and test the capabilities of what's possible, what about using the [spatial extension]({% link docs/extensions/spatial.md %}) within DuckDB-Wasm?
+To show the possibilities unlocked by DuckDB-Wasm extensions and test the capabilities of what's possible, what about using the [spatial extension]({% link docs/extensions/spatial/overview.md %}) within DuckDB-Wasm?
 This extension implements geospatial types and functions that allow it to work with geospatial data and relevant workloads.
 
 To install and load the spatial extension in DuckDB-Wasm, run:
@@ -176,7 +176,7 @@ Moreover, compilation to Wasm may not be currently supported for some libraries 
 
 ## Conclusions
 
-In this blog post, we explained how DuckDB-Wasm supports extensions, and demonstrated with multiple extensions: [TPC-H]({% link docs/extensions/tpch.md %}), [Parquet]({% link docs/data/parquet/overview.md %}), and [spatial]({% link docs/extensions/spatial.md %}).
+In this blog post, we explained how DuckDB-Wasm supports extensions, and demonstrated with multiple extensions: [TPC-H]({% link docs/extensions/tpch.md %}), [Parquet]({% link docs/data/parquet/overview.md %}), and [spatial]({% link docs/extensions/spatial/overview.md %}).
 
 Thanks to the portability of DuckDB, the scripts shown in this blog post also work on your smartphone:
 

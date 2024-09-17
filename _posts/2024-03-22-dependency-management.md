@@ -67,7 +67,7 @@ design since its early days. Today, many parts of DuckDB can be extended. For ex
 scalar, copy, aggregation), filesystems, parsers, optimizer rules, and much more. Many new features that are added to
 DuckDB are added in extensions and are grouped by either functionality or by set of dependencies. Some examples of
 extensions are the [SQLite]({% link docs/extensions/sqlite.md %}) extension for reading/writing to/from SQLite files or the
-[Spatial]({% link docs/extensions/spatial.md %}) extension which offers support for a wide range of geospatial processing
+[Spatial]({% link docs/extensions/spatial/overview.md %}) extension which offers support for a wide range of geospatial processing
 features. DuckDB's extensions are distributed as loadable binaries for most major platforms (including
 [DuckDB-Wasm]({% post_url 2023-12-18-duckdb-extensions-in-wasm %})), allowing loading and installing extensions with two simple SQL
 statements:
