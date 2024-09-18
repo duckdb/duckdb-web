@@ -108,7 +108,9 @@ The table below shows the available general aggregate functions.
 | [`any_value(arg)`](#any_valuearg) | Returns the first non-null value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arbitrary(arg)`](#arbitraryarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max(arg, val)`](#arg_maxarg-val) | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_max(arg, val, n)`](#arg_maxarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
 | [`arg_min(arg, val)`](#arg_minarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_min(arg, val, n)`](#arg_minarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending.  |
 | [`array_agg(arg)`](#array_aggarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`avg(arg)`](#avgarg) | Calculates the average value for all tuples in `arg`. |
 | [`bit_and(arg)`](#bit_andarg) | Returns the bitwise AND of all bits in a given expression. |
@@ -126,9 +128,13 @@ The table below shows the available general aggregate functions.
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`max(arg)`](#maxarg) | Returns the maximum value present in `arg`. |
+| [`max(arg, n)`](#maxarg-n) | Returns a `LIST` containing the `arg` values for the "top" `n` rows ordered by `arg` descending.  |
 | [`max_by(arg, val)`](#max_byarg-val) | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`max_by(arg, val, n)`](#max_byarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
 | [`min(arg)`](#minarg) | Returns the minimum value present in `arg`. |
+| [`min(arg, n)`](#minarg-n) | Returns a `LIST` containing the `arg` values for the "bottom" `n` rows ordered by `arg` ascending. |
 | [`min_by(arg, val)`](#min_byarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`min_by(arg, val, n)`](#min_byarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
 | [`product(arg)`](#productarg) | Calculates the product of all tuples in `arg`. |
 | [`string_agg(arg, sep)`](#string_aggarg-sep) | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`sum(arg)`](#sumarg) | Calculates the sum value for all tuples in `arg`. |
@@ -158,6 +164,14 @@ The table below shows the available general aggregate functions.
 | **Example** | `arg_max(A, B)` |
 | **Alias(es)** | `argMax(arg, val)`, `max_by(arg, val)` |
 
+#### `arg_max(arg, val, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
+| **Example** | `arg_max(A, B, 2)` |
+| **Alias(es)** | `argMax(arg, val, n)`, `max_by(arg, val, n)` |
+
 #### `arg_min(arg, val)`
 
 <div class="nostroke_table"></div>
@@ -165,6 +179,14 @@ The table below shows the available general aggregate functions.
 | **Description** | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_min(A, B)` |
 | **Alias(es)** | `argMin(arg, val)`, `min_by(arg, val)` |
+
+#### `arg_min(arg, val, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
+| **Example** | `arg_min(A, B, 2)` |
+| **Alias(es)** | `argMin(arg, val, n)`, `min_by(arg, val, n)` |
 
 #### `array_agg(arg)`
 
@@ -302,6 +324,14 @@ The table below shows the available general aggregate functions.
 | **Example** | `max(A)` |
 | **Alias(es)** | - |
 
+#### `max(arg, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** |  Returns a `LIST` containing the `arg` values for the "top" `n` rows ordered by `arg` descending. |
+| **Example** | `max(A, 2)` |
+| **Alias(es)** | - |
+
 #### `max_by(arg, val)`
 
 <div class="nostroke_table"></div>
@@ -309,6 +339,14 @@ The table below shows the available general aggregate functions.
 | **Description** | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `max_by(A, B)` |
 | **Alias(es)** | `argMax(arg, val)`, `arg_max(arg, val)` |
+
+#### `max_by(arg, val, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
+| **Example** | `max_by_n(A, B, 2)` |
+| **Alias(es)** | `argMax(arg, val, n)`, `arg_max(arg, val, n)` |
 
 #### `min(arg)`
 
@@ -318,6 +356,14 @@ The table below shows the available general aggregate functions.
 | **Example** | `min(A)` |
 | **Alias(es)** | - |
 
+#### `min(arg, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing the `arg` values for the "bottom" `n` rows ordered by `arg` ascending. |
+| **Example** | `min(A, 2)` |
+| **Alias(es)** | - |
+
 #### `min_by(arg, val)`
 
 <div class="nostroke_table"></div>
@@ -325,6 +371,14 @@ The table below shows the available general aggregate functions.
 | **Description** | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `min_by(A, B)` |
 | **Alias(es)** | `argMin(arg, val)`, `arg_min(arg, val)` |
+
+#### `min_by(arg, val, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
+| **Example** | `min_by(A, B, 2)` |
+| **Alias(es)** | `argMin(arg, val, n)`, `arg_min(arg, val, n)` |
 
 #### `product(arg)`
 
