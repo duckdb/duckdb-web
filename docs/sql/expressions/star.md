@@ -206,6 +206,33 @@ SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 | 20     |
 | NULL   |
 
+## `*COLUMNS` Unpacked Columns
+
+`*COLUMNS` is a variation on `COLUMNS` which supports all of the previously mentioned capabilities.
+The difference is in how the expression expands.
+
+`*COLUMNS` will expand in-place, much like the Iterable Unpacking behavior in Python which inspired the `*` syntax, the expression expands into the parent expression.
+An example that shows this difference between `COLUMNS` and `*COLUMNS`:
+
+With `COLUMNS`
+```sql
+SELECT COALESCE(COLUMNS(['a', 'b', 'c'])) as result FROM (SELECT NULL a, 42 b, true c);
+```
+
+| result | result | result |
+| ------ | ------ | ------ |
+|  NULL  |   42   | true   |
+
+With `*COLUMNS`
+```sql
+SELECT COALESCE(*COLUMNS(['a', 'b', 'c'])) as result FROM (SELECT NULL a, 42 b, true c);
+```
+
+| result |
+| ------ |
+|   42   |
+
+
 ## `STRUCT.*`
 
 The `*` expression can also be used to retrieve all keys from a struct as separate columns.
