@@ -151,3 +151,32 @@ SELECT table_name FROM duckdb_tables();
 | mytable    |
 
 However, the case insensitive matching in the system for identifiers cannot be turned off.
+
+## Using Double Equality Sign for Comparison
+
+DuckDB supports both `=` and `==` for quality comparison, while Postgres only supports `=`.
+
+```sql
+SELECT 1 == 1 AS t;
+```
+
+DuckDB returns:
+
+```text
+┌─────────┐
+│    t    │
+│ boolean │
+├─────────┤
+│ true    │
+└─────────┘
+```
+
+Postgres returns:
+
+```console
+postgres=# SELECT 1 == 1 AS t;
+ERROR:  operator does not exist: integer == integer
+LINE 1: SELECT 1 == 1 AS t;
+```
+
+Note that the use of `==` is not encouraged due to its limited portability.
