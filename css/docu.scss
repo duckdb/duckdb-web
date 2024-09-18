@@ -303,15 +303,13 @@ body.documentation{
 	.toc_menu{
 		position: sticky;
 		top: 100px;
-	  /* MAKE TOC-MENU SCROLLABLE 
 		height: calc(100vh - 100px);
 		overflow: auto;
-	  &::-webkit-scrollbar {
+	  	-ms-overflow-style: none; 
+		scrollbar-width: none;
+		&::-webkit-scrollbar {
 			display: none;
 		}
-	  -ms-overflow-style: none; 
-		scrollbar-width: none;
-	  */
 		h5{
 			color: black;
 			font-size: 12px;
