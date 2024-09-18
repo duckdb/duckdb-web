@@ -208,30 +208,45 @@ SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 
 ## `*COLUMNS` Unpacked Columns
 
-`*COLUMNS` is a variation on `COLUMNS` which supports all of the previously mentioned capabilities.
+The `*COLUMNS` clause is a variation of `COLUMNS`, which supports all of the previously mentioned capabilities.
 The difference is in how the expression expands.
 
-`*COLUMNS` will expand in-place, much like the Iterable Unpacking behavior in Python which inspired the `*` syntax, the expression expands into the parent expression.
+`*COLUMNS` will expand in-place, much like the [iterable unpacking behavior in Python](https://peps.python.org/pep-3132/), which inspired the `*` syntax.
+This implies that the expression expands into the parent expression.
 An example that shows this difference between `COLUMNS` and `*COLUMNS`:
 
-With `COLUMNS`
+With `COLUMNS`:
+
 ```sql
-SELECT COALESCE(COLUMNS(['a', 'b', 'c'])) as result FROM (SELECT NULL a, 42 b, true c);
+SELECT coalesce(COLUMNS(['a', 'b', 'c'])) AS result
+FROM (SELECT NULL a, 42 b, true c);
 ```
 
 | result | result | result |
-| ------ | ------ | ------ |
-|  NULL  |   42   | true   |
+|--------|-------:|-------:|
+| NULL   | 42     | true   |
 
-With `*COLUMNS`
+With `*COLUMNS`, the expression expands in its parent expression `coalesce`, resulting in a single result column:
+
 ```sql
-SELECT COALESCE(*COLUMNS(['a', 'b', 'c'])) as result FROM (SELECT NULL a, 42 b, true c);
+SELECT coalesce(*COLUMNS(['a', 'b', 'c'])) AS result
+FROM (SELECT NULL a, 42 b, true c);
 ```
 
 | result |
-| ------ |
-|   42   |
+|-------:|
+| 42     |
 
+`*COLUMNS` also works with the `(*)` argument:
+
+```sql
+SELECT coalesce(*COLUMNS(*)) AS result
+FROM (SELECT NULL a, 42 b, true c);
+```
+
+| result |
+|-------:|
+| 42     |
 
 ## `STRUCT.*`
 
