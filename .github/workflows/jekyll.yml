@@ -40,6 +40,9 @@ jobs:
           STAR_COUNT_FORMATTED=$(ruby -e 'printf("%.01fk", ARGV[0].to_i / 1000.0)' ${STAR_COUNT})
           echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
+          # add the update time to the index page of the documentation.
+          current_time=$(date +"%Y-%m-%d %H:%M:%S")
+          sed -i "s/documentation!/documentation!\nThis documentation updated at \`$current_time\`./" docs/index.md
       - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Install zip
