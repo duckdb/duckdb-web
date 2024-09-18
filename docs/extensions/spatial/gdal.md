@@ -9,7 +9,7 @@ In order to spare users from having to setup and install additional dependencies
 
 ## GDAL Based `COPY` Function
 
-The spatial extension does not only enable _imporintg_ geospatial file formats (through the `ST_Read` function), it also enables _exporing_ DuckDB tables to different geospatial vector formats through a GDAL based `COPY` function.
+The spatial extension does not only enable _importing_ geospatial file formats (through the `ST_Read` function), it also enables _exporting_ DuckDB tables to different geospatial vector formats through a GDAL based `COPY` function.
 
 For example, to export a table to a GeoJSON file, with generated bounding boxes, you can use the following query:
 
