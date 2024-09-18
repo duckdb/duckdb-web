@@ -1022,8 +1022,16 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Function Reference",
+                  "url": "functions"
+                },
+                {
                   "page": "R-Tree Indexes",
                   "url": "r-tree_indexes"
+                },
+                {
+                  "page": "GDAL Integration",
+                  "url": "gdal"
                 }
               ]
             },
