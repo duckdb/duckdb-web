@@ -1910,7 +1910,10 @@ function GenerateStarClause(options) {
 		Choice(0, [
 			Sequence(GenerateStarExpression(options, "-1")),
 			Sequence([
-				Keyword("COLUMNS"),
+				Choice(0,[
+					Keyword("COLUMNS"),
+					Keyword("*COLUMNS")
+				]),
 				Keyword("("),
 				Choice(0, [
 					Sequence(GenerateStarExpression(options, "-2")),
