@@ -475,7 +475,7 @@ If the input geometry is a GeometryCollection, the function will return a multi 
 - if `type` = 3, returns a MultiPolygon containg all the Polygons in the collection
 
 If no `type` parameters is provided, the function will return a multi geometry matching the highest "surface dimension"
-of the contained geometries. E.g. if the collection contains only Points, a MultiPoint will be returned. But if the
+of the contained geometries. E.g., if the collection contains only Points, a MultiPoint will be returned. But if the
 collection contains both Points and LineStrings, a MultiLineString will be returned. Similarly, if the collection
 contains Polygons, a MultiPolygon will be returned. Contained geometries of a lower surface dimension will be ignored.
 
@@ -1949,7 +1949,7 @@ Transforms a geometry between two coordinate systems
 
 The source and target coordinate systems can be specified using any format that the [PROJ library](https://proj.org) supports.
 
-The third optional `always_xy` parameter can be used to force the input and output geometries to be interpreted as having a [easting, northing] coordinate axis order regardless of what the source and target coordinate system definition says. This is particularly useful when transforming to/from the [WGS84/EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (what most people think of when they hear "longitude"/"latitude" or "GPS coordinates"), which is defined as having a [latitude, longitude] axis order even though [longitude, latitude] is commonly used in practice (e.g. in [GeoJSON](https://tools.ietf.org/html/rfc7946)). More details available in the [PROJ documentation](https://proj.org/en/9.3/faq.html#why-is-the-axis-ordering-in-proj-not-consistent).
+The third optional `always_xy` parameter can be used to force the input and output geometries to be interpreted as having a [easting, northing] coordinate axis order regardless of what the source and target coordinate system definition says. This is particularly useful when transforming to/from the [WGS84/EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (what most people think of when they hear "longitude"/"latitude" or "GPS coordinates"), which is defined as having a [latitude, longitude] axis order even though [longitude, latitude] is commonly used in practice (e.g., in [GeoJSON](https://tools.ietf.org/html/rfc7946)). More details available in the [PROJ documentation](https://proj.org/en/9.3/faq.html#why-is-the-axis-ordering-in-proj-not-consistent).
 
 DuckDB spatial vendors its own static copy of the PROJ database of coordinate systems, so if you have your own installation of PROJ on your system the available coordinate systems may differ to what's available in other GIS software.
 
@@ -1972,7 +1972,7 @@ SELECT ST_AsText(
 ----
 POINT (544615.0239773799 6867874.103539125)
 
--- Alternatively, let's say we got our input point from e.g. a GeoJSON file,
+-- Alternatively, let's say we got our input point from e.g., a GeoJSON file,
 -- which uses WGS84 but with [longitude, latitude] axis order. We can use the
 -- `always_xy` parameter to force the input geometry to be interpreted as having
 -- a [northing, easting] axis order instead, even though the source coordinate
