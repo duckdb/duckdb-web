@@ -5,7 +5,7 @@ title: Create Synthetic Data
 
 DuckDB allows you to quickly generate synthetic data sets. To do so, you may use:
 
-* [range functions]({% link docs/sql/functions/nested.md %}#range-functions)
+* [range functions]({% link docs/sql/functions/list.md %}#range-functions)
 * hash functions, e.g.,
   [`hash`]({% link docs/sql/functions/utility.md %}#hashvalue),
   [`md5`]({% link docs/sql/functions/utility.md %}#md5string),
