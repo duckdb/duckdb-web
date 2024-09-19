@@ -19,7 +19,7 @@ title: Spatial Functions
 | [`ST_Buffer`](#st_buffer)                                     | Returns a buffer around the input geometry at the target distance                                                                            |
 | [`ST_Centroid`](#st_centroid)                                 | Calculates the centroid of a geometry                                                                                                        |
 | [`ST_Collect`](#st_collect)                                   | Collects a list of geometries into a collection geometry.                                                                                    |
-| [`ST_CollectionExtract`](#st_collectionextract)               | Extracts a sub-geometry from a collection geometry                                                                                           |
+| [`ST_CollectionExtract`](#st_collectionextract)               | Extracts geometries from a GeometryCollection into a typed multi geometry.                                                                   |
 | [`ST_Contains`](#st_contains)                                 | Returns true if geom1 contains geom2.                                                                                                        |
 | [`ST_ContainsProperly`](#st_containsproperly)                 | Returns true if geom1 "properly contains" geom2                                                                                              |
 | [`ST_ConvexHull`](#st_convexhull)                             | Returns the convex hull enclosing the geometry                                                                                               |
@@ -72,6 +72,7 @@ title: Spatial Functions
 | [`ST_MakeLine`](#st_makeline)                                 | Creates a LINESTRING geometry from a pair or list of input points                                                                            |
 | [`ST_MakePolygon`](#st_makepolygon)                           | Creates a polygon from a shell geometry and an optional set of holes                                                                         |
 | [`ST_MakeValid`](#st_makevalid)                               | Attempts to make an invalid geometry valid without removing any vertices                                                                     |
+| [`ST_Multi`](#st_multi)                                       | Turns a single geometry into a multi geometry.                                                                                               |
 | [`ST_NGeometries`](#st_ngeometries)                           | Returns the number of component geometries in a collection geometry.                                                                         |
 | [`ST_NInteriorRings`](#st_ninteriorrings)                     | Returns the number if interior rings of a polygon                                                                                            |
 | [`ST_NPoints`](#st_npoints)                                   | Returns the number of vertices within a geometry                                                                                             |
@@ -116,7 +117,8 @@ title: Spatial Functions
 
 | Function                                      | Summary                                                                          |
 | --------------------------------------------- | -------------------------------------------------------------------------------- |
-| [`ST_Envelope_Agg`](#st_envelope_agg)         | Computes a minimal-bounding-box polygon 'enveloping' the set of input geometries |
+| [`ST_Envelope_Agg`](#st_envelope_agg)         | Alias for [ST_Extent_Agg](#st_extent_agg).                                       |
+| [`ST_Extent_Agg`](#st_extent_agg)             | Computes the minimal-bounding-box polygon containing the set of input geometries |
 | [`ST_Intersection_Agg`](#st_intersection_agg) | Computes the intersection of a set of geometries                                 |
 | [`ST_Union_Agg`](#st_union_agg)               | Computes the union of a set of input geometries                                  |
 
@@ -127,7 +129,7 @@ title: Spatial Functions
 | [`ST_Drivers`](#st_drivers)     | Returns the list of supported GDAL drivers and file formats                                                      |
 | [`ST_Read`](#st_read)           | Read and import a variety of geospatial file formats using the GDAL library.                                     |
 | [`ST_ReadOSM`](#st_readosm)     | The `ST_ReadOsm()` table function enables reading compressed OpenStreetMap data directly from a `.osm.pbf file.` |
-| [`ST_Read_Meta`](#st_read_meta) | Read and the metadata from a variety of geospatial file formats using the GDAL library.                          |
+| [`ST_Read_Meta`](#st_read_meta) | Read the metadata from a variety of geospatial file formats using the GDAL library.                              |
 
 ----
 
@@ -459,19 +461,34 @@ MULTIPOINT (1 2, 3 4)
 #### Signatures
 
 ```sql
-GEOMETRY ST_CollectionExtract (col0 GEOMETRY)
-GEOMETRY ST_CollectionExtract (col0 GEOMETRY, col1 INTEGER)
+GEOMETRY ST_CollectionExtract (geom GEOMETRY)
+GEOMETRY ST_CollectionExtract (geom GEOMETRY, type INTEGER)
 ```
 
 #### Description
 
-Extracts a sub-geometry from a collection geometry
+Extracts geometries from a GeometryCollection into a typed multi geometry.
+
+If the input geometry is a GeometryCollection, the function will return a multi geometry, determined by the `type` parameter.
+- if `type` = 1, returns a MultiPoint containg all the Points in the collection
+- if `type` = 2, returns a MultiLineString containg all the LineStrings in the collection
+- if `type` = 3, returns a MultiPolygon containg all the Polygons in the collection
+
+If no `type` parameters is provided, the function will return a multi geometry matching the highest "surface dimension"
+of the contained geometries. E.g. if the collection contains only Points, a MultiPoint will be returned. But if the
+collection contains both Points and LineStrings, a MultiLineString will be returned. Similarly, if the collection
+contains Polygons, a MultiPolygon will be returned. Contained geometries of a lower surface dimension will be ignored.
+
+If the input geometry contains nested GeometryCollections, their geometries will be extracted recursively and included
+into the final multi geometry as well.
+
+If the input geometry is not a GeometryCollection, the function will return the input geometry as is.
 
 #### Example
 
 ```sql
 select st_collectionextract('MULTIPOINT(1 2,3 4)'::geometry, 1);
--- POINT(1 2)
+-- MULTIPOINT (1 2, 3 4)
 ```
 
 ----
@@ -719,7 +736,7 @@ DOUBLE ST_Distance_Spheroid (col0 POINT_2D, col1 POINT_2D)
 
 Returns the distance between two geometries in meters using a ellipsoidal model of the earths surface
 
-The input geometry is assumed to be in the [EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (WGS84), with [latitude, longitude] axis order and the distance is returned in meters. This function uses the [GeographicLib](https://geographiclib.sourceforge.io/) library to solve the [inverse geodesic problem](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid#Solution_of_the_direct_and_inverse_problems), calculating the distance between two points using an ellipsoidal model of the earth. This is a highly accurate method for calculating the distance between two arbitrary points taking the curvature of the earths surface into account, but is also the slowest.
+The input geometry is assumed to be in the [EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (WGS84), with [latitude, longitude] axis order and the distance limit is expected to be in meters. This function uses the [GeographicLib](https://geographiclib.sourceforge.io/) library to solve the [inverse geodesic problem](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid#Solution_of_the_direct_and_inverse_problems), calculating the distance between two points using an ellipsoidal model of the earth. This is a highly accurate method for calculating the distance between two arbitrary points taking the curvature of the earths surface into account, but is also the slowest.
 
 #### Example
 
@@ -1430,6 +1447,36 @@ GEOMETRY ST_MakeValid (col0 GEOMETRY)
 #### Description
 
 Attempts to make an invalid geometry valid without removing any vertices
+
+----
+
+### ST_Multi
+
+
+#### Signature
+
+```sql
+GEOMETRY ST_Multi (col0 GEOMETRY)
+```
+
+#### Description
+
+Turns a single geometry into a multi geometry.
+
+If the geometry is already a multi geometry, it is returned as is.
+
+#### Example
+
+```sql
+SELECT ST_Multi(ST_GeomFromText('POINT(1 2)'));
+-- MULTIPOINT (1 2)
+
+SELECT ST_Multi(ST_GeomFromText('LINESTRING(1 1, 2 2)'));
+-- MULTILINESTRING ((1 1, 2 2))
+
+SELECT ST_Multi(ST_GeomFromText('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'));
+-- MULTIPOLYGON (((0 0, 0 1, 1 1, 1 0, 0 0)))
+```
 
 ----
 
@@ -2204,7 +2251,38 @@ GEOMETRY ST_Envelope_Agg (col0 GEOMETRY)
 
 #### Description
 
-Computes a minimal-bounding-box polygon 'enveloping' the set of input geometries
+Alias for [ST_Extent_Agg](#st_extent_agg).
+
+Computes the minimal-bounding-box polygon containing the set of input geometries.
+
+#### Example
+
+```sql
+SELECT ST_Extent_Agg(geom) FROM UNNEST([ST_Point(1,1), ST_Point(5,5)]) AS _(geom);
+-- POLYGON ((1 1, 1 5, 5 5, 5 1, 1 1))
+```
+
+----
+
+### ST_Extent_Agg
+
+
+#### Signature
+
+```sql
+GEOMETRY ST_Extent_Agg (col0 GEOMETRY)
+```
+
+#### Description
+
+Computes the minimal-bounding-box polygon containing the set of input geometries
+
+#### Example
+
+```sql
+SELECT ST_Extent_Agg(geom) FROM UNNEST([ST_Point(1,1), ST_Point(5,5)]) AS _(geom);
+-- POLYGON ((1 1, 1 5, 5 5, 5 1, 1 1))
+```
 
 ----
 
@@ -2374,7 +2452,7 @@ ST_Read_Meta (col0 VARCHAR[])
 
 #### Description
 
-Read and the metadata from a variety of geospatial file formats using the GDAL library.
+Read the metadata from a variety of geospatial file formats using the GDAL library.
 
 The `ST_Read_Meta` table function accompanies the `ST_Read` table function, but instead of reading the contents of a file, this function scans the metadata instead.
 Since the data model of the underlying GDAL library is quite flexible, most of the interesting metadata is within the returned `layers` column, which is a somewhat complex nested structure of DuckDB `STRUCT` and `LIST` types.
