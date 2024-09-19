@@ -137,7 +137,6 @@ title: Spatial Functions
 
 ### ST_Area
 
-
 #### Signatures
 
 ```sql
@@ -168,7 +167,6 @@ SELECT ST_Area('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
 
 ### ST_Area_Spheroid
 
-
 #### Signatures
 
 ```sql
@@ -187,7 +185,6 @@ Returns `0.0` for any geometry that is not a `POLYGON`, `MULTIPOLYGON` or `GEOME
 ----
 
 ### ST_AsGeoJSON
-
 
 #### Signature
 
@@ -225,7 +222,6 @@ SELECT CAST({
 
 ### ST_AsHEXWKB
 
-
 #### Signature
 
 ```sql
@@ -247,7 +243,6 @@ SELECT ST_AsHexWKB('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
 ----
 
 ### ST_AsSVG
-
 
 #### Signature
 
@@ -278,7 +273,6 @@ M 0 0 L 0 -1 1 -1 1 0 Z
 
 ### ST_AsText
 
-
 #### Signatures
 
 ```sql
@@ -305,7 +299,6 @@ POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))
 
 ### ST_AsWKB
 
-
 #### Signature
 
 ```sql
@@ -328,7 +321,6 @@ SELECT ST_AsWKB('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY)::BLOB;
 
 ### ST_Boundary
 
-
 #### Signature
 
 ```sql
@@ -342,7 +334,6 @@ Returns the "boundary" of a geometry
 ----
 
 ### ST_Buffer
-
 
 #### Signatures
 
@@ -374,7 +365,6 @@ This is a planar operation and will not take into account the curvature of the e
 
 ### ST_Centroid
 
-
 #### Signatures
 
 ```sql
@@ -402,7 +392,6 @@ POINT(0.5 0.5)
 
 ### ST_Collect
 
-
 #### Signature
 
 ```sql
@@ -412,10 +401,11 @@ GEOMETRY ST_Collect (col0 GEOMETRY[])
 #### Description
 
 Collects a list of geometries into a collection geometry.
-- If all geometries are `POINT`'s, a `MULTIPOINT` is returned.
-- If all geometries are `LINESTRING`'s, a `MULTILINESTRING` is returned.
-- If all geometries are `POLYGON`'s, a `MULTIPOLYGON` is returned.
-- Otherwise if the input collection contains a mix of geometry types, a `GEOMETRYCOLLECTION` is returned.
+
+* If all geometries are `POINT`'s, a `MULTIPOINT` is returned.
+* If all geometries are `LINESTRING`'s, a `MULTILINESTRING` is returned.
+* If all geometries are `POLYGON`'s, a `MULTIPOLYGON` is returned.
+* Otherwise if the input collection contains a mix of geometry types, a `GEOMETRYCOLLECTION` is returned.
 
 Empty and `NULL` geometries are ignored. If all geometries are empty or `NULL`, a `GEOMETRYCOLLECTION EMPTY` is returned.
 
@@ -457,7 +447,6 @@ MULTIPOINT (1 2, 3 4)
 
 ### ST_CollectionExtract
 
-
 #### Signatures
 
 ```sql
@@ -470,9 +459,9 @@ GEOMETRY ST_CollectionExtract (geom GEOMETRY, type INTEGER)
 Extracts geometries from a GeometryCollection into a typed multi geometry.
 
 If the input geometry is a GeometryCollection, the function will return a multi geometry, determined by the `type` parameter.
-- if `type` = 1, returns a MultiPoint containg all the Points in the collection
-- if `type` = 2, returns a MultiLineString containg all the LineStrings in the collection
-- if `type` = 3, returns a MultiPolygon containg all the Polygons in the collection
+* if `type` = 1, returns a MultiPoint containg all the Points in the collection
+* if `type` = 2, returns a MultiLineString containg all the LineStrings in the collection
+* if `type` = 3, returns a MultiPolygon containg all the Polygons in the collection
 
 If no `type` parameters is provided, the function will return a multi geometry matching the highest "surface dimension"
 of the contained geometries. E.g., if the collection contains only Points, a MultiPoint will be returned. But if the
@@ -494,7 +483,6 @@ SELECT st_collectionextract('MULTIPOINT(1 2,3 4)'::GEOMETRY, 1);
 ----
 
 ### ST_Contains
-
 
 #### Signatures
 
@@ -519,7 +507,6 @@ true
 
 ### ST_ContainsProperly
 
-
 #### Signature
 
 ```sql
@@ -533,7 +520,6 @@ Returns true if geom1 "properly contains" geom2
 ----
 
 ### ST_ConvexHull
-
 
 #### Signature
 
@@ -549,7 +535,6 @@ Returns the convex hull enclosing the geometry
 
 ### ST_CoveredBy
 
-
 #### Signature
 
 ```sql
@@ -563,7 +548,6 @@ Returns true if geom1 is "covered" by geom2
 ----
 
 ### ST_Covers
-
 
 #### Signature
 
@@ -579,7 +563,6 @@ Returns if geom1 "covers" geom2
 
 ### ST_Crosses
 
-
 #### Signature
 
 ```sql
@@ -594,7 +577,6 @@ Returns true if geom1 "crosses" geom2
 
 ### ST_DWithin
 
-
 #### Signature
 
 ```sql
@@ -608,7 +590,6 @@ Returns if two geometries are within a target distance of each-other
 ----
 
 ### ST_DWithin_Spheroid
-
 
 #### Signature
 
@@ -626,7 +607,6 @@ Returns if two POINT_2D's are within a target distance in meters, using an ellip
 
 ### ST_Difference
 
-
 #### Signature
 
 ```sql
@@ -640,7 +620,6 @@ Returns the "difference" between two geometries
 ----
 
 ### ST_Dimension
-
 
 #### Signature
 
@@ -664,7 +643,6 @@ SELECT st_dimension('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
 
 ### ST_Disjoint
 
-
 #### Signature
 
 ```sql
@@ -678,7 +656,6 @@ Returns if two geometries are disjoint
 ----
 
 ### ST_Distance
-
 
 #### Signatures
 
@@ -705,7 +682,6 @@ SELECT st_distance('POINT(0 0)'::GEOMETRY, 'POINT(1 1)'::GEOMETRY);
 
 ### ST_Distance_Sphere
 
-
 #### Signatures
 
 ```sql
@@ -717,14 +693,13 @@ DOUBLE ST_Distance_Sphere (col0 GEOMETRY, col1 GEOMETRY)
 
 Returns the haversine distance between two geometries.
 
-- Only supports POINT geometries.
-- Returns the distance in meters.
-- The input is expected to be in WGS84 (EPSG:4326) coordinates, using a [latitude, longitude] axis order.
+* Only supports POINT geometries.
+* Returns the distance in meters.
+* The input is expected to be in WGS84 (EPSG:4326) coordinates, using a [latitude, longitude] axis order.
 
 ----
 
 ### ST_Distance_Spheroid
-
 
 #### Signature
 
@@ -756,7 +731,6 @@ st_point(52.3130, 4.7725)
 
 ### ST_Dump
 
-
 #### Signature
 
 ```sql
@@ -778,7 +752,6 @@ SELECT st_dump('MULTIPOINT(1 2,3 4)'::GEOMETRY);
 ----
 
 ### ST_EndPoint
-
 
 #### Signatures
 
@@ -802,7 +775,6 @@ SELECT ST_EndPoint('LINESTRING(0 0, 1 1)'::GEOMETRY);
 
 ### ST_Envelope
 
-
 #### Signature
 
 ```sql
@@ -817,7 +789,6 @@ Returns the minimum bounding box for the input geometry as a polygon geometry.
 
 ### ST_Equals
 
-
 #### Signature
 
 ```sql
@@ -831,7 +802,6 @@ Compares two geometries for equality
 ----
 
 ### ST_Extent
-
 
 #### Signatures
 
@@ -848,7 +818,6 @@ Returns the minimal bounding box enclosing the input geometry
 
 ### ST_ExteriorRing
 
-
 #### Signatures
 
 ```sql
@@ -863,7 +832,6 @@ Returns the exterior ring (shell) of a polygon geometry.
 ----
 
 ### ST_FlipCoordinates
-
 
 #### Signatures
 
@@ -883,7 +851,6 @@ Returns a new geometry with the coordinates of the input geometry "flipped" so t
 
 ### ST_Force2D
 
-
 #### Signature
 
 ```sql
@@ -900,7 +867,6 @@ This function will drop any Z and M values from the input geometry, if present. 
 
 ### ST_Force3DM
 
-
 #### Signature
 
 ```sql
@@ -912,15 +878,15 @@ GEOMETRY ST_Force3DM (col0 GEOMETRY, col1 DOUBLE)
 Forces the vertices of a geometry to have X, Y and M components
 
 The following cases apply:
-- If the input geometry has a Z component but no M component, the Z component will be replaced with the new M value.
-- If the input geometry has a M component but no Z component, it will be returned as is.
-- If the input geometry has both a Z component and a M component, the Z component will be removed.
-- Otherwise, if the input geometry has neither a Z or M component, the new M value will be added to the vertices of the input geometry.
+
+* If the input geometry has a Z component but no M component, the Z component will be replaced with the new M value.
+* If the input geometry has a M component but no Z component, it will be returned as is.
+* If the input geometry has both a Z component and a M component, the Z component will be removed.
+* Otherwise, if the input geometry has neither a Z or M component, the new M value will be added to the vertices of the input geometry.
 
 ----
 
 ### ST_Force3DZ
-
 
 #### Signature
 
@@ -933,15 +899,15 @@ GEOMETRY ST_Force3DZ (col0 GEOMETRY, col1 DOUBLE)
 Forces the vertices of a geometry to have X, Y and Z components
 
 The following cases apply:
-- If the input geometry has a M component but no Z component, the M component will be replaced with the new Z value.
-- If the input geometry has a Z component but no M component, it will be returned as is.
-- If the input geometry has both a Z component and a M component, the M component will be removed.
-- Otherwise, if the input geometry has neither a Z or M component, the new Z value will be added to the vertices of the input geometry.
+
+* If the input geometry has a M component but no Z component, the M component will be replaced with the new Z value.
+* If the input geometry has a Z component but no M component, it will be returned as is.
+* If the input geometry has both a Z component and a M component, the M component will be removed.
+* Otherwise, if the input geometry has neither a Z or M component, the new Z value will be added to the vertices of the input geometry.
 
 ----
 
 ### ST_Force4D
-
 
 #### Signature
 
@@ -954,15 +920,15 @@ GEOMETRY ST_Force4D (col0 GEOMETRY, col1 DOUBLE, col2 DOUBLE)
 Forces the vertices of a geometry to have X, Y, Z and M components
 
 The following cases apply:
-- If the input geometry has a Z component but no M component, the new M value will be added to the vertices of the input geometry.
-- If the input geometry has a M component but no Z component, the new Z value will be added to the vertices of the input geometry.
-- If the input geometry has both a Z component and a M component, the geometry will be returned as is.
-- Otherwise, if the input geometry has neither a Z or M component, the new Z and M values will be added to the vertices of the input geometry.
+
+* If the input geometry has a Z component but no M component, the new M value will be added to the vertices of the input geometry.
+* If the input geometry has a M component but no Z component, the new Z value will be added to the vertices of the input geometry.
+* If the input geometry has both a Z component and a M component, the geometry will be returned as is.
+* Otherwise, if the input geometry has neither a Z or M component, the new Z and M values will be added to the vertices of the input geometry.
 
 ----
 
 ### ST_GeomFromGeoJSON
-
 
 #### Signatures
 
@@ -987,7 +953,6 @@ POINT (1 2)
 
 ### ST_GeomFromHEXEWKB
 
-
 #### Signature
 
 ```sql
@@ -1002,7 +967,6 @@ Deserialize a GEOMETRY from a HEXEWKB encoded string
 
 ### ST_GeomFromHEXWKB
 
-
 #### Signature
 
 ```sql
@@ -1016,7 +980,6 @@ Creates a GEOMETRY from a HEXWKB string
 ----
 
 ### ST_GeomFromText
-
 
 #### Signatures
 
@@ -1033,7 +996,6 @@ Deserializes a GEOMETRY from a WKT string, optionally ignoring invalid geometrie
 
 ### ST_GeomFromWKB
 
-
 #### Signatures
 
 ```sql
@@ -1048,7 +1010,6 @@ Deserializes a GEOMETRY from a WKB encoded blob
 ----
 
 ### ST_GeometryType
-
 
 #### Signatures
 
@@ -1067,7 +1028,6 @@ Returns a 'GEOMETRY_TYPE' enum identifying the input geometry type.
 ----
 
 ### ST_HasM
-
 
 #### Signatures
 
@@ -1108,7 +1068,6 @@ true
 
 ### ST_HasZ
 
-
 #### Signatures
 
 ```sql
@@ -1148,7 +1107,6 @@ true
 
 ### ST_Hilbert
 
-
 #### Signatures
 
 ```sql
@@ -1170,7 +1128,6 @@ For the BOX_2D and BOX_2DF variants, the center of the box is used as the point 
 
 ### ST_Intersection
 
-
 #### Signature
 
 ```sql
@@ -1184,7 +1141,6 @@ Returns the "intersection" of geom1 and geom2
 ----
 
 ### ST_Intersects
-
 
 #### Signatures
 
@@ -1201,7 +1157,6 @@ Returns true if two geometries intersects
 
 ### ST_Intersects_Extent
 
-
 #### Signature
 
 ```sql
@@ -1216,7 +1171,6 @@ Returns true if the extent of two geometries intersects
 
 ### ST_IsClosed
 
-
 #### Signature
 
 ```sql
@@ -1230,7 +1184,6 @@ Returns true if a geometry is "closed"
 ----
 
 ### ST_IsEmpty
-
 
 #### Signatures
 
@@ -1248,7 +1201,6 @@ Returns true if the geometry is "empty"
 
 ### ST_IsRing
 
-
 #### Signature
 
 ```sql
@@ -1262,7 +1214,6 @@ Returns true if the input line geometry is a ring (both ST_IsClosed and ST_IsSim
 ----
 
 ### ST_IsSimple
-
 
 #### Signature
 
@@ -1278,7 +1229,6 @@ Returns true if the input geometry is "simple"
 
 ### ST_IsValid
 
-
 #### Signature
 
 ```sql
@@ -1292,7 +1242,6 @@ Returns true if the geometry is topologically "valid"
 ----
 
 ### ST_Length
-
 
 #### Signatures
 
@@ -1308,7 +1257,6 @@ Returns the length of the input line geometry
 ----
 
 ### ST_Length_Spheroid
-
 
 #### Signatures
 
@@ -1329,7 +1277,6 @@ Returns `0.0` for any geometry that is not a `LINESTRING`, `MULTILINESTRING` or 
 
 ### ST_LineMerge
 
-
 #### Signatures
 
 ```sql
@@ -1345,7 +1292,6 @@ GEOMETRY ST_LineMerge (col0 GEOMETRY, col1 BOOLEAN)
 
 ### ST_M
 
-
 #### Signature
 
 ```sql
@@ -1359,7 +1305,6 @@ Returns the M value of a point geometry, or NULL if not a point or empty
 ----
 
 ### ST_MMax
-
 
 #### Signature
 
@@ -1375,7 +1320,6 @@ Returns the maximum M value of a geometry
 
 ### ST_MMin
 
-
 #### Signature
 
 ```sql
@@ -1390,7 +1334,6 @@ Returns the minimum M value of a geometry
 
 ### ST_MakeEnvelope
 
-
 #### Signature
 
 ```sql
@@ -1404,7 +1347,6 @@ Returns a minimal bounding box polygon enclosing the input geometry
 ----
 
 ### ST_MakeLine
-
 
 #### Signatures
 
@@ -1421,7 +1363,6 @@ Creates a LINESTRING geometry from a pair or list of input points
 
 ### ST_MakePolygon
 
-
 #### Signatures
 
 ```sql
@@ -1437,7 +1378,6 @@ Creates a polygon from a shell geometry and an optional set of holes
 
 ### ST_MakeValid
 
-
 #### Signature
 
 ```sql
@@ -1451,7 +1391,6 @@ Attempts to make an invalid geometry valid without removing any vertices
 ----
 
 ### ST_Multi
-
 
 #### Signature
 
@@ -1482,7 +1421,6 @@ SELECT ST_Multi(ST_GeomFromText('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'));
 
 ### ST_NGeometries
 
-
 #### Signature
 
 ```sql
@@ -1498,7 +1436,6 @@ If the input geometry is not a collection, this function returns 0 or 1 dependin
 
 ### ST_NInteriorRings
 
-
 #### Signatures
 
 ```sql
@@ -1513,7 +1450,6 @@ Returns the number if interior rings of a polygon
 ----
 
 ### ST_NPoints
-
 
 #### Signatures
 
@@ -1533,7 +1469,6 @@ Returns the number of vertices within a geometry
 
 ### ST_Normalize
 
-
 #### Signature
 
 ```sql
@@ -1547,7 +1482,6 @@ Returns a "normalized" version of the input geometry.
 ----
 
 ### ST_NumGeometries
-
 
 #### Signature
 
@@ -1564,7 +1498,6 @@ If the input geometry is not a collection, this function returns 0 or 1 dependin
 
 ### ST_NumInteriorRings
 
-
 #### Signatures
 
 ```sql
@@ -1579,7 +1512,6 @@ Returns the number if interior rings of a polygon
 ----
 
 ### ST_NumPoints
-
 
 #### Signatures
 
@@ -1599,7 +1531,6 @@ Returns the number of vertices within a geometry
 
 ### ST_Overlaps
 
-
 #### Signature
 
 ```sql
@@ -1613,7 +1544,6 @@ Returns true if geom1 "overlaps" geom2
 ----
 
 ### ST_Perimeter
-
 
 #### Signatures
 
@@ -1630,7 +1560,6 @@ Returns the length of the perimeter of the geometry
 ----
 
 ### ST_Perimeter_Spheroid
-
 
 #### Signatures
 
@@ -1651,7 +1580,6 @@ Returns `0.0` for any geometry that is not a `POLYGON`, `MULTIPOLYGON` or `GEOME
 
 ### ST_Point
 
-
 #### Signature
 
 ```sql
@@ -1665,7 +1593,6 @@ Creates a GEOMETRY point
 ----
 
 ### ST_Point2D
-
 
 #### Signature
 
@@ -1681,7 +1608,6 @@ Creates a POINT_2D
 
 ### ST_Point3D
 
-
 #### Signature
 
 ```sql
@@ -1696,7 +1622,6 @@ Creates a POINT_3D
 
 ### ST_Point4D
 
-
 #### Signature
 
 ```sql
@@ -1710,7 +1635,6 @@ Creates a POINT_4D
 ----
 
 ### ST_PointN
-
 
 #### Signatures
 
@@ -1727,7 +1651,6 @@ Returns the n'th vertex from the input geometry as a point geometry
 
 ### ST_PointOnSurface
 
-
 #### Signature
 
 ```sql
@@ -1741,7 +1664,6 @@ Returns a point that is guaranteed to be on the surface of the input geometry. S
 ----
 
 ### ST_Points
-
 
 #### Signature
 
@@ -1768,7 +1690,6 @@ MULTIPOINT Z EMPTY
 ----
 
 ### ST_QuadKey
-
 
 #### Signatures
 
@@ -1800,7 +1721,6 @@ SELECT ST_QuadKey(st_point(11.08, 49.45), 10);
 
 ### ST_ReducePrecision
 
-
 #### Signature
 
 ```sql
@@ -1814,7 +1734,6 @@ Returns the geometry with all vertices reduced to the target precision
 ----
 
 ### ST_RemoveRepeatedPoints
-
 
 #### Signatures
 
@@ -1833,7 +1752,6 @@ Returns a new geometry with repeated points removed, optionally within a target 
 
 ### ST_Reverse
 
-
 #### Signature
 
 ```sql
@@ -1847,7 +1765,6 @@ Returns a new version of the input geometry with the order of its vertices rever
 ----
 
 ### ST_ShortestLine
-
 
 #### Signature
 
@@ -1863,7 +1780,6 @@ Returns the line between the two closest points between geom1 and geom2
 
 ### ST_Simplify
 
-
 #### Signature
 
 ```sql
@@ -1878,7 +1794,6 @@ Simplifies the input geometry by collapsing edges smaller than 'distance'
 
 ### ST_SimplifyPreserveTopology
 
-
 #### Signature
 
 ```sql
@@ -1892,7 +1807,6 @@ Returns a simplified geometry but avoids creating invalid topologies
 ----
 
 ### ST_StartPoint
-
 
 #### Signatures
 
@@ -1916,7 +1830,6 @@ SELECT ST_StartPoint('LINESTRING(0 0, 1 1)'::GEOMETRY);
 
 ### ST_Touches
 
-
 #### Signature
 
 ```sql
@@ -1930,7 +1843,6 @@ Returns true if geom1 "touches" geom2
 ----
 
 ### ST_Transform
-
 
 #### Signatures
 
@@ -1995,7 +1907,6 @@ POINT (544615.0239773799 6867874.103539125)
 
 ### ST_Union
 
-
 #### Signature
 
 ```sql
@@ -2023,7 +1934,6 @@ MULTIPOINT (1 2, 3 4)
 
 ### ST_Within
 
-
 #### Signatures
 
 ```sql
@@ -2039,7 +1949,6 @@ Returns true if geom1 is "within" geom2
 
 ### ST_X
 
-
 #### Signatures
 
 ```sql
@@ -2054,7 +1963,6 @@ Returns the X value of a point geometry, or NULL if not a point or empty
 ----
 
 ### ST_XMax
-
 
 #### Signatures
 
@@ -2075,7 +1983,6 @@ Returns the maximum X value of a geometry
 
 ### ST_XMin
 
-
 #### Signatures
 
 ```sql
@@ -2095,7 +2002,6 @@ Returns the minimum X value of a geometry
 
 ### ST_Y
 
-
 #### Signatures
 
 ```sql
@@ -2110,7 +2016,6 @@ Returns the Y value of a point geometry, or NULL if not a point or empty
 ----
 
 ### ST_YMax
-
 
 #### Signatures
 
@@ -2131,7 +2036,6 @@ Returns the maximum Y value of a geometry
 
 ### ST_YMin
 
-
 #### Signatures
 
 ```sql
@@ -2151,7 +2055,6 @@ Returns the minimum Y value of a geometry
 
 ### ST_Z
 
-
 #### Signature
 
 ```sql
@@ -2165,7 +2068,6 @@ Returns the Z value of a point geometry, or NULL if not a point or empty
 ----
 
 ### ST_ZMFlag
-
 
 #### Signatures
 
@@ -2210,7 +2112,6 @@ SELECT ST_ZMFlag(ST_GeomFromText('POINT ZM(1 1 1 1)'));
 
 ### ST_ZMax
 
-
 #### Signature
 
 ```sql
@@ -2224,7 +2125,6 @@ Returns the maximum Z value of a geometry
 ----
 
 ### ST_ZMin
-
 
 #### Signature
 
@@ -2241,7 +2141,6 @@ Returns the minimum Z value of a geometry
 ## Aggregate Functions
 
 ### ST_Envelope_Agg
-
 
 #### Signature
 
@@ -2266,7 +2165,6 @@ SELECT ST_Extent_Agg(geom) FROM UNNEST([ST_Point(1,1), ST_Point(5,5)]) AS _(geom
 
 ### ST_Extent_Agg
 
-
 #### Signature
 
 ```sql
@@ -2288,7 +2186,6 @@ SELECT ST_Extent_Agg(geom) FROM UNNEST([ST_Point(1,1), ST_Point(5,5)]) AS _(geom
 
 ### ST_Intersection_Agg
 
-
 #### Signature
 
 ```sql
@@ -2302,7 +2199,6 @@ Computes the intersection of a set of geometries
 ----
 
 ### ST_Union_Agg
-
 
 #### Signature
 
