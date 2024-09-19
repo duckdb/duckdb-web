@@ -160,7 +160,7 @@ The `POINT_2D` and `LINESTRING_2D` overloads of this function always return `0.0
 #### Example
 
 ```sql
-select ST_Area('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry);
+SELECT ST_Area('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
 	-- 1.0
 ```
 
@@ -205,7 +205,7 @@ This does not return a complete GeoJSON document, only the geometry fragment. To
 #### Example
 
 ```sql
-select ST_AsGeoJSON('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry);
+SELECT ST_AsGeoJSON('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
 ----
 {"type":"Polygon","coordinates":[[[0.0,0.0],[0.0,1.0],[1.0,1.0],[1.0,0.0],[0.0,0.0]]]}
 
@@ -239,7 +239,7 @@ Returns the geometry as a HEXWKB string
 #### Example
 
 ```sql
-SELECT ST_AsHexWKB('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry);
+SELECT ST_AsHexWKB('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
 ----
 01030000000100000005000000000000000000000000000...
 ```
@@ -393,9 +393,9 @@ Calculates the centroid of a geometry
 #### Example
 
 ```sql
-select st_centroid('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry);
+SELECT st_centroid('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
 ----
- POINT(0.5 0.5)
+POINT(0.5 0.5)
 ```
 
 ----
@@ -487,7 +487,7 @@ If the input geometry is not a GeometryCollection, the function will return the 
 #### Example
 
 ```sql
-select st_collectionextract('MULTIPOINT(1 2,3 4)'::geometry, 1);
+SELECT st_collectionextract('MULTIPOINT(1 2,3 4)'::GEOMETRY, 1);
 -- MULTIPOINT (1 2, 3 4)
 ```
 
@@ -510,7 +510,7 @@ Returns true if geom1 contains geom2.
 #### Example
 
 ```sql
-select st_contains('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry, 'POINT(0.5 0.5)'::geometry);
+SELECT st_contains('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY, 'POINT(0.5 0.5)'::GEOMETRY);
 ----
 true
 ```
@@ -655,7 +655,7 @@ Returns the dimension of a geometry.
 #### Example
 
 ```sql
-select st_dimension('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry);
+SELECT st_dimension('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
 ----
 2
 ```
@@ -696,7 +696,7 @@ Returns the distance between two geometries.
 #### Example
 
 ```sql
-select st_distance('POINT(0 0)'::geometry, 'POINT(1 1)'::geometry);
+SELECT st_distance('POINT(0 0)'::GEOMETRY, 'POINT(1 1)'::GEOMETRY);
 ----
 1.4142135623731
 ```
@@ -770,7 +770,7 @@ Dumps a geometry into a list of sub-geometries and their "path" in the original 
 #### Example
 
 ```sql
-select st_dump('MULTIPOINT(1 2,3 4)'::geometry);
+SELECT st_dump('MULTIPOINT(1 2,3 4)'::GEOMETRY);
 ----
 [{'geom': 'POINT(1 2)', 'path': [0]}, {'geom': 'POINT(3 4)', 'path': [1]}]
 ```
@@ -794,7 +794,7 @@ Returns the last point of a line.
 #### Example
 
 ```sql
-select ST_EndPoint('LINESTRING(0 0, 1 1)'::geometry);
+SELECT ST_EndPoint('LINESTRING(0 0, 1 1)'::GEOMETRY);
 -- POINT(1 1)
 ```
 
@@ -1756,11 +1756,11 @@ Collects all the vertices in the geometry into a multipoint
 #### Example
 
 ```sql
-select st_points('LINESTRING(1 1, 2 2)'::geometry);
+SELECT st_points('LINESTRING(1 1, 2 2)'::GEOMETRY);
 ----
 MULTIPOINT (1 1, 2 2)
 
-select st_points('MULTIPOLYGON Z EMPTY'::geometry);
+SELECT st_points('MULTIPOLYGON Z EMPTY'::GEOMETRY);
 ----
 MULTIPOINT Z EMPTY
 ```
@@ -1908,7 +1908,7 @@ Returns the first point of a line geometry
 #### Example
 
 ```sql
-select ST_StartPoint('LINESTRING(0 0, 1 1)'::geometry);
+SELECT ST_StartPoint('LINESTRING(0 0, 1 1)'::GEOMETRY);
 -- POINT(0 0)
 ```
 
@@ -2358,17 +2358,17 @@ The `ST_Read` table function is based on the [GDAL](https://gdal.org/index.html)
 
 Except for the `path` parameter, all parameters are optional.
 
-| Parameter               | Type      | Description                                                                                                                                                                                                                                                                                              |
-| ----------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `path`                  | VARCHAR   | The path to the file to read. Mandatory                                                                                                                                                                                                                                                                  |
-| `sequential_layer_scan` | BOOLEAN   | If set to true, the table function will scan through all layers sequentially and return the first layer that matches the given layer name. This is required for some drivers to work properly, e.g., the OSM driver.                                                                                     |
-| `spatial_filter`        | WKB_BLOB  | If set to a WKB blob, the table function will only return rows that intersect with the given WKB geometry. Some drivers may support efficient spatial filtering natively, in which case it will be pushed down. Otherwise the filtering is done by GDAL which may be much slower.                        |
-| `open_options`          | VARCHAR[] | A list of key-value pairs that are passed to the GDAL driver to control the opening of the file. E.g., the GeoJSON driver supports a FLATTEN_NESTED_ATTRIBUTES=YES option to flatten nested attributes.                                                                                                  |
-| `layer`                 | VARCHAR   | The name of the layer to read from the file. If NULL, the first layer is returned. Can also be a layer index (starting at 0).                                                                                                                                                                            |
-| `allowed_drivers`       | VARCHAR[] | A list of GDAL driver names that are allowed to be used to open the file. If empty, all drivers are allowed.                                                                                                                                                                                             |
-| `sibling_files`         | VARCHAR[] | A list of sibling files that are required to open the file. E.g., the ESRI Shapefile driver requires a .shx file to be present. Although most of the time these can be discovered automatically.                                                                                                         |
-| `spatial_filter_box`    | BOX_2D    | If set to a BOX_2D, the table function will only return rows that intersect with the given bounding box. Similar to spatial_filter.                                                                                                                                                                      |
-| `keep_wkb`              | BOOLEAN   | If set, the table function will return geometries in a wkb_geometry column with the type WKB_BLOB (which can be cast to BLOB) instead of GEOMETRY. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesnt support representing in the GEOMETRY type yet. |
+| Parameter               | Type        | Description                                                                                                                                                                                                                                                                                              |
+| ----------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `path`                  | `VARCHAR`   | The path to the file to read. Mandatory                                                                                                                                                                                                                                                                  |
+| `sequential_layer_scan` | `BOOLEAN`   | If set to true, the table function will scan through all layers sequentially and return the first layer that matches the given layer name. This is required for some drivers to work properly, e.g., the OSM driver.                                                                                     |
+| `spatial_filter`        | `WKB_BLOB`  | If set to a WKB blob, the table function will only return rows that intersect with the given WKB geometry. Some drivers may support efficient spatial filtering natively, in which case it will be pushed down. Otherwise the filtering is done by GDAL which may be much slower.                        |
+| `open_options`          | `VARCHAR[]` | A list of key-value pairs that are passed to the GDAL driver to control the opening of the file. E.g., the GeoJSON driver supports a FLATTEN_NESTED_ATTRIBUTES=YES option to flatten nested attributes.                                                                                                  |
+| `layer`                 | `VARCHAR`   | The name of the layer to read from the file. If NULL, the first layer is returned. Can also be a layer index (starting at 0).                                                                                                                                                                            |
+| `allowed_drivers`       | `VARCHAR[]` | A list of GDAL driver names that are allowed to be used to open the file. If empty, all drivers are allowed.                                                                                                                                                                                             |
+| `sibling_files`         | `VARCHAR[]` | A list of sibling files that are required to open the file. E.g., the ESRI Shapefile driver requires a .shx file to be present. Although most of the time these can be discovered automatically.                                                                                                         |
+| `spatial_filter_box`    | `BOX_2D`    | If set to a BOX_2D, the table function will only return rows that intersect with the given bounding box. Similar to spatial_filter.                                                                                                                                                                      |
+| `keep_wkb`              | `BOOLEAN`   | If set, the table function will return geometries in a wkb_geometry column with the type WKB_BLOB (which can be cast to BLOB) instead of GEOMETRY. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesnt support representing in the GEOMETRY type yet. |
 
 Note that GDAL is single-threaded, so this table function will not be able to make full use of parallelism.
 
@@ -2384,9 +2384,9 @@ The following formats are currently recognized by their file extension:
 
 | Format         | Extension |
 | -------------- | --------- |
-| ESRI ShapeFile | .shp      |
-| GeoPackage     | .gpkg     |
-| FlatGeoBuf     | .fgb      |
+| ESRI ShapeFile | `.shp`    |
+| GeoPackage     | `.gpkg`   |
+| FlatGeoBuf     | `.fgb`    |
 
 #### Example
 
