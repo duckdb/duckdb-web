@@ -57,10 +57,11 @@ As a result, it has historically been missing some of the modern luxuries we tak
 With version 1.1, DuckDB has launched community extensions, bringing the incredible power of a package manager to the SQL language.
 One goal for these extensions is to enable C++ libraries to be accessible through SQL across all of the languages with a DuckDB library.
 For extension builders, compilation and distribution are much easier.
-For the user community, installation is as simple as a single command:
+For the user community, installation is as simple as 2 commands:
 
 ```sql
 INSTALL pivot_table FROM community;
+LOAD pivot_table;
 ```
 
 However, not all of us are C++ developers! 
@@ -72,7 +73,6 @@ What would it take to build these extensions with *just SQL*?
 Traditionally, SQL is highly customized to the schema of the database on which it was written. 
 Can we make it reusable?
 Some techniques for reusability were discussed in the SQL Gymnasics post, but now we can go even further.
-<!-- TODO: add the link -->
 With version 1.1, DuckDB's world-class friendly SQL dialect makes it possible to create MACROs that can be applied:
 * To any tables
 * On any columns
@@ -130,6 +130,7 @@ python3 ./scripts/bootstrap-template.py <extension_name_you_want>
 
 At this point, you can follow the directions in the README to build and test locally if you would like.
 However, even easier, you can simply commit your changes to git and push them to GitHub, and GitHub actions can do the compilation for you!
+GitHub actions will also run tests on your extension to validate it is working properly.
 
 > Note The instructions are not written for a Windows audience, so we recommend GitHub Actions in that case!
 
@@ -202,35 +203,30 @@ static const DefaultTableMacro <your_extension_name>_table_macros[] = {
 That's it! 
 All we had to provide were the name of the function, the names of the parameters, and the text of our SQL `MACRO`.
 
-Now, just add, commit, and push your changes to GitHub like before, and GitHub actions will compile your extension and upload it to AWS S3!
-
 ### Testing the Extension
 
-For testing purposes, we can use any DuckDB client, but this example uses the CLI.
+We also recommend adding some tests for your extension to the `<your_extension_name>.test` file. 
+This uses [sqllogictest](`{% link docs/dev/sqllogictest/intro.md %}`) to test with just SQL!
+Let's add the example from above.
 
-> Note We need to run DuckDB with the -unsigned flag since our extension hasn't been signed yet.
-> It will be signed after we upload it to the community repository
-
-```shell
-duckdb -unsigned
-```
-
-Next, run the SQL command below to point DuckDB's extension loader to the S3 bucket that was automatically created for you.
+> Note In sqllogictest, `query I` indicates that there will be 1 column in the result.
+> We then add `----` and the resultset in tab separated format with no column names.
 
 ```sql
-SET custom_extension_repository='bucket.s3.eu-west-1.amazonaws.com/<your_extension_name>/latest';
-```
-Note that the `/latest` path will allow you to install the latest extension version available for your current version of
-DuckDB. To specify a specific version, you can pass the version instead.
-
-After running these steps, you can install and load your extension using the regular INSTALL/LOAD commands in DuckDB, and then use it:
-```sql
-INSTALL <your_extension_name>;
-LOAD <your_extension_name>;
-
+query I
 FROM select_distinct_columns_from_table('duckdb_types', ['type_category']);
+----
+BOOLEAN
+COMPOSITE
+DATETIME
+NUMERIC
+STRING
+NULL
 ```
 
+Now, just add, commit, and push your changes to GitHub like before, and GitHub actions will compile your extension and test it!
+
+If you would like to do further ad-hoc testing of your extension, you can download the extension from your GitHub actions run's artifacts and then [install it locally using these steps](`{% link docs/extensions/overview.md %}#unsigned-extensions`).
 
 ### Uploading to the Community Extensions Repository
 
