@@ -7,7 +7,7 @@ Conceptually, a `STRUCT` column contains an ordered list of columns called “en
 
 `STRUCT`s are typically used to nest multiple columns into a single column, and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
 
-`STRUCT`s are similar to PostgreSQL's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a `STRUCT`, but does not have a `ROW` data type. See an example below and the [nested functions docs]({% link docs/sql/functions/nested.md %}#struct-functions) for details.
+`STRUCT`s are similar to PostgreSQL's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a `STRUCT`, but does not have a `ROW` data type. See an example below and the [`STRUCT` functions documentation]({% link docs/sql/functions/struct.md %}) for details.
 
 `STRUCT`s have a fixed schema. It is not possible to change the schema of a `STRUCT` using `UPDATE` operations.
 
@@ -15,7 +15,7 @@ See the [data types overview]({% link docs/sql/data_types/overview.md %}) for a 
 
 ### Creating Structs
 
-Structs can be created using the [`struct_pack(name := expr, ...)`]({% link docs/sql/functions/nested.md %}#struct-functions) function, the equivalent array notation `{'name': expr, ...}`, using a row variable, or using the `row` function.
+Structs can be created using the [`struct_pack(name := expr, ...)`]({% link docs/sql/functions/struct.md %}) function, the equivalent array notation `{'name': expr, ...}`, using a row variable, or using the `row` function.
 
 Create a struct using the `struct_pack` function. Note the lack of single quotes around the keys and the use of the `:=` operator:
 
@@ -73,7 +73,7 @@ SELECT struct_insert({'a': 1, 'b': 2, 'c': 3}, d := 4) AS s;
 
 ### Retrieving from Structs
 
-Retrieving a value from a struct can be accomplished using dot notation, bracket notation, or through [struct functions]({% link docs/sql/functions/nested.md %}#struct-functions) like `struct_extract`.
+Retrieving a value from a struct can be accomplished using dot notation, bracket notation, or through [struct functions]({% link docs/sql/functions/struct.md %}) like `struct_extract`.
 
 Use dot notation to retrieve the value at a key's location. In the following query, the subquery generates a struct column `a`, which we then query with `a.x`.
 
@@ -290,4 +290,4 @@ and type STRUCT(k2 INTEGER, k1 INTEGER) - an explicit cast is required
 
 ## Functions
 
-See [Nested Functions]({% link docs/sql/functions/nested.md %}).
+See [Struct Functions]({% link docs/sql/functions/struct.md %}).
