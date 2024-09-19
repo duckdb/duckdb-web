@@ -95,6 +95,7 @@
 							{% endif %}
 							{% include anchor_headings.html html=content %}
 							
+							{% if post.toc != false %}
 							<div class="toc_sidebar">
 								{% assign toc_only = content | toc_only %}
 								{% assign toc_text_only = toc_only | strip_html | remove: ' ' %}
@@ -105,6 +106,7 @@
 									</div>
 								{% endif %}
 							</div>
+							{% endif %}
 							
 						</div>
 						<section class="blog recentposts">
