@@ -99,6 +99,27 @@ I'll make the case that you can do quite complex and powerful operations in Duck
 The `pivot_table` function allows for Excel-style pivots, including `subtotals`, `grand_totals`, and more.
 It is also very similar to the Pandas `pivot_table` function, but with all the scalability and speed benefits of DuckDB!
 
+To achieve this level of flexibility, the `pivot_table` extension uses many friendly and advanced SQL features:
+* The [`query` function]({% post_url 2024-09-09-announcing-duckdb-110 %}#query-and-query_table-functions) to execute a SQL string
+* The [`query_table` function]({% post_url 2024-09-09-announcing-duckdb-110 %}#query-and-query_table-functions) to query a list of tables 
+* The [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns-expression) to select a dynamic list of columns
+* [List lambda functions]({% link docs/sql/functions/lambda.md %}) to build up the SQL statement passed into `query`
+    * [`list_transform`]({% link docs/sql/functions/lambda.md %}#list_transformlist-lambda) for string manipulation like quoting
+    * [`list_reduce`]({% link docs/sql/functions/lambda.md %}#list_reducelist-lambda) to concatenate strings together
+    * [`list_aggregate`]({% link docs/sql/functions/list.md %}#list_aggregatelist-name) to sum multiple columns and identify subtotal and grand total rows
+* Bracket notation for string slicing
+* `UNION ALL BY NAME` to stack data by column name for subtotals and grand totals
+* `SELECT * REPLACE` to dynamically clean up subtotal columns
+* `SELECT * EXCLUDE` to remove internally generated columns from the final result
+* `GROUPING SETS` and `ROLLUP` to generate subtotals and grand totals
+* `UNNEST` to convert lists into separate rows for `values_axis:='rows'`
+* `MACRO`s to modularize the code
+* `ORDER BY ALL` to order the result dynamically
+* `ENUM`s to determine what columns to pivot horizontally
+* And of course the `PIVOT` function for horizontal pivoting!
+
+DuckDB's innovative syntax makes this extension possible! 
+
 So, we now have all 3 ingredients we will need: a central package manager, reusable `MACRO`s, and enough syntactic flexibility to do valuable work.
 
 ## Create Your Own SQL Extension
@@ -206,7 +227,7 @@ All we had to provide were the name of the function, the names of the parameters
 ### Testing the Extension
 
 We also recommend adding some tests for your extension to the `<your_extension_name>.test` file. 
-This uses [sqllogictest](`{% link docs/dev/sqllogictest/intro.md %}`) to test with just SQL!
+This uses [sqllogictest]({% link docs/dev/sqllogictest/intro.md %}) to test with just SQL!
 Let's add the example from above.
 
 > Note In sqllogictest, `query I` indicates that there will be 1 column in the result.
@@ -226,7 +247,7 @@ NULL
 
 Now, just add, commit, and push your changes to GitHub like before, and GitHub actions will compile your extension and test it!
 
-If you would like to do further ad-hoc testing of your extension, you can download the extension from your GitHub actions run's artifacts and then [install it locally using these steps](`{% link docs/extensions/overview.md %}#unsigned-extensions`).
+If you would like to do further ad-hoc testing of your extension, you can download the extension from your GitHub actions run's artifacts and then [install it locally using these steps]({% link docs/extensions/overview.md %}#unsigned-extensions).
 
 ### Uploading to the Community Extensions Repository
 
@@ -234,7 +255,7 @@ Once you are happy with your extension, it's time to share it with the DuckDB co
 Follow the steps in [the Community Extensions post]({% post_url 2024-07-05-community-extensions %}#developer-experience).
 A summary of those steps is:
 
-1. Send a PR with a metadata file `description.yml` contains the description of the extension. For example:
+1. Send a PR with a metadata file `description.yml` that contains the description of the extension. For example:
 
    ```yaml
    extension:
@@ -262,8 +283,7 @@ Now let's have a look at the `pivot_table` extension as an example of just how p
 ## Capabilities of the `pivot_table` Extension
 
 The `pivot_table` extension supports advanced pivoting functionality that was previously only available in spreadsheets, dataframe libraries, or custom host language functions.
-It uses the Excel pivoting API: `values`, `rows`, `columns`, and `filters`.
-It can handle 0 or more of each of those parameters.
+It uses the Excel pivoting API: `values`, `rows`, `columns`, and `filters` - handling 0 or more of each of those parameters.
 However, not only that, but it supports `subtotals` and `grand_totals`.
 If multiple `values` are passed in, the `values_axis` parameter allows the user to choose if each value should get its own column or its own row.
 
@@ -276,7 +296,7 @@ If no `columns` are pivoted outward, a `GROUP BY` is all that is needed.
 However, once `columns` are involved, a `PIVOT` is required.
 
 This function can operate on one or more `table_names` that are passed in as a parameter.
-Any set of tables will first be vertically stacked and then pivoted.
+Any set of tables (or views!) will first be vertically stacked and then pivoted.
 
 ## Example Using `pivot_table`
 
