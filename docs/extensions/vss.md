@@ -26,7 +26,7 @@ SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3]) 
 
 Additionally, the overloaded `min_by(col, arg, n)` can also be accelerated with the `HNSW` index if the `arg` argument is a matching distance metric function. This can be used to do quick one-shot nearest neighbor searches. For example, to get the top 3 rows with the closest vectors to `[1, 2, 3]`:
 ```sql
-SELECT min_by(my_vector_table, array_distance(vec, [1,2,3]::FLOAT[3]), 3) as result FROM my_vector_table;
+SELECT min_by(my_vector_table, array_distance(vec, [1, 2, 3]::FLOAT[3]), 3) as result FROM my_vector_table;
 ---- [{'vec': [1.0, 2.0, 3.0]}, {'vec': [1.0, 2.0, 4.0]}, {'vec': [2.0, 2.0, 3.0]}] 
 ```
 Note how we pass the table name as the first argument to `min_by` to return a struct containing the entire matched row.
@@ -126,13 +126,17 @@ These functions can be used as follows:
 
 ```sql
 CREATE TABLE haystack (id int, vec FLOAT[3]);
-CREATE TABLE needle(search_vec FLOAT[3]);
+CREATE TABLE needle (search_vec FLOAT[3]);
 
-INSERT INTO haystack SELECT row_number() over (), array_value(a,b,c) FROM range(1,10) ra(a), range(1,10) rb(b), range(1,10) rc(c);
+INSERT INTO haystack SELECT row_number() OVER (), array_value(a,b,c)
+FROM range(1, 10) ra(a), range(1, 10) rb(b), range(1, 10) rc(c);
 
-INSERT INTO needle VALUES ([5,5,5]), ([1,1,1]);
+INSERT INTO needle VALUES ([5, 5, 5]), ([1, 1, 1]);
 
 SELECT * FROM vss_join(needle, haystack, search_vec, vec, 3) as res;
+```
+
+```text
 ┌───────┬─────────────────────────────────┬─────────────────────────────────────┐
 │ score │            left_tbl             │              right_tbl              │
 │ float │   struct(search_vec float[3])   │  struct(id integer, vec float[3])   │
@@ -144,10 +148,18 @@ SELECT * FROM vss_join(needle, haystack, search_vec, vec, 3) as res;
 │   1.0 │ {'search_vec': [1.0, 1.0, 1.0]} │ {'id': 10, 'vec': [2.0, 1.0, 1.0]}  │
 │   1.0 │ {'search_vec': [1.0, 1.0, 1.0]} │ {'id': 2, 'vec': [1.0, 2.0, 1.0]}   │
 └───────┴─────────────────────────────────┴─────────────────────────────────────┘
+```
 
--- Alternatively, we can use the vss_match macro as a "lateral join" to get the matches already grouped by the left table.
--- Note that this requires us to specify the left table first, and then the vss_match macro which references the search column from the left table (in this case, `search_vec`).
+```sql
+-- Alternatively, we can use the vss_match macro as a "lateral join" 
+-- to get the matches already grouped by the left table.
+-- Note that this requires us to specify the left table first, and then 
+-- the vss_match macro which references the search column from the left
+-- table (in this case, `search_vec`).
 SELECT * FROM needle, vss_match(haystack, search_vec, vec, 3) as res;
+```
+
+```text
 ┌─────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │   search_vec    │                                                                                       matches                                                                                        │
 │    float[3]     │                                                            struct(score float, "row" struct(id integer, vec float[3]))[]                                                             │

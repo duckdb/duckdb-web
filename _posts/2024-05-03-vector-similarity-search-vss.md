@@ -12,7 +12,7 @@ The initial motivation for adding this data type was to provide optimized operat
 
 However, as the hype for __vector embeddings__ and __semantic similarity search__ was growing, we also snuck in a couple of distance metric functions for this new `ARRAY` type:
 [`array_distance`]({% link docs/sql/functions/array.md %}#array_distancearray1-array2),
-[`array_negatvie_inner_product`]({% link docs/sql/functions/array.md %}#array_negative_inner_productarray1-array2) and
+[`array_negative_inner_product`]({% link docs/sql/functions/array.md %}#array_negative_inner_productarray1-array2) and
 [`array_cosine_distance`]({% link docs/sql/functions/array.md %}#array_cosine_distancearray1-array2)
 
 > If you're one of today's [lucky 10,000](https://xkcd.com/1053/) and haven't heard of word embeddings or vector search, the short version is that it's a technique used to represent documents, images, entities – _data_ as high-dimensional _vectors_ and then search for _similar_ vectors in a vector space, using some sort of mathematical "distance" expression to measure similarity. This is used in a wide range of applications, from natural language processing to recommendation systems and image recognition, and has recently seen a surge in popularity due to the advent of generative AI and availability of pre-trained models.
