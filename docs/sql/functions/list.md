@@ -20,9 +20,11 @@ title: List Functions
 | [`list_concat(list1, list2)`](#list_concatlist1-list2) | Concatenates two lists. |
 | [`list_contains(list, element)`](#list_containslist-element) | Returns true if the list contains the element. |
 | [`list_cosine_similarity(list1, list2)`](#list_cosine_similaritylist1-list2) | Compute the cosine similarity between two lists. |
+| [`list_cosine_distance(list1, list2)`](#list_cosine_distancelist1-list2) | Compute the cosine distance between two lists. Equivalent to `1.0 - list_cosine_similarity`. |
 | [`list_distance(list1, list2)`](#list_distancelist1-list2) | Calculates the Euclidean distance between two points with coordinates given in two inputs lists of equal length. |
 | [`list_distinct(list)`](#list_distinctlist) | Removes all duplicates and `NULL` values from a list. Does not preserve the original order. |
 | [`list_dot_product(list1, list2)`](#list_dot_productlist1-list2) | Computes the dot product of two same-sized lists of numbers. |
+| [`list_negative_dot_product(list1, list2)`](#list_negative_dot_productlist1-list2) | Computes the negative dot product of two same-sized lists of numbers. Equivalent to `- list_dot_product`. |
 | [`list_extract(list, index)`](#list_extractlist-index) | Extract the `index`th (1-based) value from the list. |
 | [`list_filter(list, lambda)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#filter) page for more details. |
 | [`list_grade_up(list)`](#list_grade_uplist) | Works like sort, but the results are the indexes that correspond to the position in the original `list` instead of the actual values. |
@@ -158,6 +160,14 @@ title: List Functions
 | **Example** | `list_cosine_similarity([1, 2, 3], [1, 2, 5])` |
 | **Result** | `0.9759000729485332` |
 
+#### `list_cosine_distance(list1, list2)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Compute the cosine distance between two lists. Equivalent to `1.0 - list_cosine_similarity` |
+| **Example** | `list_cosine_distance([1, 2, 3], [1, 2, 5])` |
+| **Result** | `0.007416606` |
+
 #### `list_distance(list1, list2)`
 
 <div class="nostroke_table"></div>
@@ -183,6 +193,15 @@ title: List Functions
 | **Example** | `list_dot_product([1, 2, 3], [1, 2, 5])` |
 | **Result** | `20.0` |
 | **Alias** | `list_inner_product` |
+
+#### `list_negative_dot_product(list1, list2)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the negative dot product of two same-sized lists of numbers. Equivalent to `- list_dot_product` |
+| **Example** | `list_negative_dot_product([1, 2, 3], [1, 2, 5])` |
+| **Result** | `-20.0` |
+| **Alias** | `list_negative_inner_product` |
 
 #### `list_extract(list, index)`
 
@@ -393,7 +412,7 @@ The following operators are supported for lists:
 | `@>`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **right** of the operator is the sublist. | `[1, 2, 3, 4] @> [3, 4, 3]`       | `true`               |
 | `<@`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **left** of the operator is the sublist.  | `[1, 4] <@ [1, 2, 3, 4]`          | `true`               |
 | `||`  | Alias for [`list_concat`](#list_concatlist1-list2).                                                                     | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
-| `<=>` | Alias for [`list_cosine_similarity`](#list_cosine_similaritylist1-list2).                                               | `[1, 2, 3] <=> [1, 2, 5]`         | `0.9759000729485332` |
+| `<=>` | Alias for [`list_cosine_distance`](#list_cosine_distancelist1-list2).                                               | `[1, 2, 3] <=> [1, 2, 5]`         | `0.007416606` |
 | `<->` | Alias for [`list_distance`](#list_distancelist1-list2).                                                                 | `[1, 2, 3] <-> [1, 2, 5]`         | `2.0`                |
 
 <!-- markdownlint-enable MD056 -->

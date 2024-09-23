@@ -12,8 +12,8 @@ The initial motivation for adding this data type was to provide optimized operat
 
 However, as the hype for __vector embeddings__ and __semantic similarity search__ was growing, we also snuck in a couple of distance metric functions for this new `ARRAY` type:
 [`array_distance`]({% link docs/sql/functions/array.md %}#array_distancearray1-array2),
-[`array_inner_product`]({% link docs/sql/functions/array.md %}#array_inner_productarray1-array2) and
-[`array_cosine_similarity`]({% link docs/sql/functions/array.md %}#array_cosine_similarityarray1-array2)
+[`array_negatvie_inner_product`]({% link docs/sql/functions/array.md %}#array_negative_inner_productarray1-array2) and
+[`array_cosine_distance`]({% link docs/sql/functions/array.md %}#array_cosine_distancearray1-array2)
 
 > If you're one of today's [lucky 10,000](https://xkcd.com/1053/) and haven't heard of word embeddings or vector search, the short version is that it's a technique used to represent documents, images, entities – _data_ as high-dimensional _vectors_ and then search for _similar_ vectors in a vector space, using some sort of mathematical "distance" expression to measure similarity. This is used in a wide range of applications, from natural language processing to recommendation systems and image recognition, and has recently seen a surge in popularity due to the advent of generative AI and availability of pre-trained models.
 
@@ -79,7 +79,7 @@ LIMIT 3;
 └───────────────────────────┘
 ```
 
-You can pass the `HNSW` index creation statement a `metric` parameter to decide what kind of distance metric to use. The supported metrics are `l2sq`, `cosine` and `inner_product`, matching the three built-in distance functions: `array_distance`, `array_cosine_similarity` and `array_inner_product`.
+You can pass the `HNSW` index creation statement a `metric` parameter to decide what kind of distance metric to use. The supported metrics are `l2sq`, `cosine` and `inner_product`, matching the three built-in distance functions: `array_distance`, `array_cosine_distance` and `array_negative_inner_product`.
 The default is `l2sq`, which uses Euclidean distance (`array_distance`):
 
 ```sql
@@ -87,14 +87,14 @@ CREATE INDEX l2sq_idx ON embeddings USING HNSW (vec)
 WITH (metric = 'l2sq');
 ```
 
-To use cosine distance (`array_cosine_similarity`):
+To use cosine distance (`array_cosine_distance`):
 
 ```sql
 CREATE INDEX cos_idx ON embeddings USING HNSW (vec)
 WITH (metric = 'cosine');
 ```
 
-To use inner product (`array_inner_product`):
+To use inner product (`array_negative_inner_product`):
 
 ```sql
 CREATE INDEX ip_idx ON embeddings USING HNSW (vec)
@@ -115,7 +115,7 @@ We're actively working on addressing this and other issues related to index pers
 
 At runtime however, much like the `ART` the `HNSW` index must be able to fit into RAM in its entirety, and the memory allocated by the `HNSW` at runtime is allocated "outside" of the DuckDB memory management system, meaning that it wont respect DuckDB's `memory_limit` configuration parameter.
 
-Another current limitation with the `HNSW` index so far are that it only supports the `FLOAT` (a 32-bit, single-precision floating point) type for the array elements and only distance metrics corresponding to the three built in distance functions, `array_distance`, `array_inner_product` and `array_cosine_similarity`. But this is also something we're looking to expand upon in the near future as it is much less of a technical limitation and more of a "we haven't gotten around to it yet" limitation.
+Another current limitation with the `HNSW` index so far are that it only supports the `FLOAT` (a 32-bit, single-precision floating point) type for the array elements and only distance metrics corresponding to the three built in distance functions, `array_distance`, `array_negative_inner_product` and `array_cosine_distance`. But this is also something we're looking to expand upon in the near future as it is much less of a technical limitation and more of a "we haven't gotten around to it yet" limitation.
 
 ## Conclusion
 
