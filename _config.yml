@@ -22,11 +22,11 @@ url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. htt
 # Set current version of DuckDB
 currentshortduckdbversion: "1.1"
 currentduckdbversion: 1.1.1
-currentduckdbhash: "XXX"
+currentduckdbhash: "af39bd0dcf"
 currentsnapshotversion: 1.1.2-dev
-currentduckdbodbcversion: 1.0.0
+currentduckdbodbcversion: 1.1.0
 # Java
-currentjavaversion: 1.1.1
+currentjavaversion: 1.1.0
 nextjavaversion: 1.2.0  # for java snapshots, should always be the next minor version with a patch version of 0
 livereload: true
 highlighter: rouge
