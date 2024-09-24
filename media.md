@@ -4,7 +4,7 @@ title: Media
 ---
 
 | Title | Venue | Presenter | Duration |
-|-|-|-|-|-:|
+|:--|:--|:--|:--|--:|
 | _**DuckDB Announcements and Project Updates**_ | | | |
 | [DuckDB – Overview and latest developments](https://www.youtube.com/watch?v=xX6qnP2H5wkl) ([pdf](https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf)) | DuckCon #5 (2024) | Hannes Mühleisen and Mark Raasveldt | 30min |
 | [Announcing DuckDB support for Delta Lake and the Unity Catalog extension](https://www.youtube.com/watch?v=wuP6iEYH11E) | Data + AI Summit 2024 | Hannes Mühleisen | 5min |
