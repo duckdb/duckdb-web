@@ -823,7 +823,10 @@ body.installation .environment.select label.onlymobile{
 /** FAQ **/
 
 body.documentation main .wrap.frequentlyaskedquestions{
-	h2, h3{
+	h2{
+		
+	}
+	h3{
 		cursor: pointer;
 		font-size: 18px;
 		position: relative;

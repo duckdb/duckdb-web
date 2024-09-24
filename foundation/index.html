@@ -66,8 +66,9 @@ pagehead:
 	<div class="wrap">
 		<h1>Supporters</h1>
 		<p>Current foundation supporters that have chosen to be publicly named.</p>
+
 		{% if site.data.supporters.gold %}
-		<h3>Gold Supporters</h3>
+		<h3 id="gold-supporters">Gold Supporters</h3>
 		<div class="supporterboard gold">
 			<ul>
 				{% for supporter in site.data.supporters.gold %}
@@ -76,8 +77,9 @@ pagehead:
 			</ul> 
 		</div>
 		{% endif %}
+
 		{% if site.data.supporters.silver %}
-		<h3>Silver Supporters</h3>
+		<h3 id="silver-supporters">Silver Supporters</h3>
 		<div class="supporterboard silver">
 			<ul>
 				{% for supporter in site.data.supporters.silver %}
@@ -86,6 +88,11 @@ pagehead:
 			</ul>
 		</div>
 		{% endif %}
+
+		<h3 id="technical-sponsors">Technical Sponsors</h3>
+		<p>
+			DuckDB's website and extensions are served through <a href="https://www.cloudflare.com/">Cloudflare</a>, graciously supported by their <a href="https://developers.cloudflare.com/sponsorships/">open-source sponsorship program</a>.
+		</p>
 	</div>
 </section>
 

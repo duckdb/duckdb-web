@@ -554,7 +554,6 @@ SELECT 'First Contact';
 <div class="narrow_table"></div>
 
 |       movie        |
-|     varchar        |
 |:---|
 | The Motion Picture |
 | First Contact      |
@@ -583,7 +582,6 @@ SELECT
 <div class="narrow_table"></div>
 
 |       movie        | type |        name        | num |
-| union(num integer, name varchar) | varchar |        varchar        | int32 |
 |:---|:---|:---|:---|
 | The Motion Picture | name | The Motion Picture |     |
 | 2                  | num  |                    | 2   |

@@ -4,12 +4,13 @@ title: Media
 ---
 
 | Title | Venue | Presenter | Duration |
-|-|-|-|-|-:|
+|:---|:---|:---|---:|
 | _**DuckDB Announcements and Project Updates**_ | | | |
 | [DuckDB – Overview and latest developments](https://www.youtube.com/watch?v=xX6qnP2H5wkl) ([pdf](https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf)) | DuckCon #5 (2024) | Hannes Mühleisen and Mark Raasveldt | 30min |
 | [Announcing DuckDB support for Delta Lake and the Unity Catalog extension](https://www.youtube.com/watch?v=wuP6iEYH11E) | Data + AI Summit 2024 | Hannes Mühleisen | 5min |
 | [State of the Duck](https://www.youtube.com/watch?v=cyZfpXxXojEl) ([pdf](https://blobs.duckdb.org/events/duckcon4/duckcon4-mark-raasveldt-hannes-muhleisen-state-of-the-duck.pdf)) | DuckCon #4 (2024) | Hannes Mühleisen and Mark Raasveldt | 20min |
 | _**Overview Talks on DuckDB**_ | | | |
+| [Going beyond two tier data architectures with DuckDB](https://www.youtube.com/watch?v=bi0XhmbkqU8) | Data Engineering for AI/ML | Hannes Mühleisen | 30 min |
 | [DuckDB: Harnessing in-process analytics for data science and beyond](https://www.youtube.com/watch?v=6teFN7cwx30) ([pdf](https://blobs.duckdb.org/slides/oredev-duckdb-231109.pdf)) | Øredev 2023 | Gábor Szárnyas | 40min |
 | [In-process analytical data management with DuckDB](https://www.youtube.com/watch?v=5ddoZR6PYNU) ([pdf]({% link pdf/duckdb-pydata-amsterdam-2023.pdf %})) | PyData Amsterdam 2023 | Hannes Mühleisen | 25min |
 | [DuckDB keynote segment](https://www.youtube.com/watch?v=AKix55rQEUU) | Data + AI Summit 2023 | Hannes Mühleisen | 10min |

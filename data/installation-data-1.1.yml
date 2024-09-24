@@ -13,6 +13,10 @@
     client.
 
     Therefore, they need to be updated separately.
+
+    <br><br>
+
+    If you experience issues while running the DuckDB CLI on Windows, please install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
   usage_example: duckdb
 - variant: stable
   environment: Command line
@@ -29,6 +33,10 @@
     client.
 
     Therefore, they need to be updated separately.
+
+    <br><br>
+
+    If you experience issues while running the DuckDB CLI on Windows, please install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
   usage_example: ./duckdb
 - variant: stable
   environment: Command line
@@ -45,6 +53,10 @@
     client.
 
     Therefore, they need to be updated separately.
+
+    <br><br>
+
+    If you experience issues while running the DuckDB CLI on Windows, please install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
   usage_example: ./duckdb
 - variant: stable
   environment: Command line
@@ -101,8 +113,7 @@
   installation_code: pip install duckdb --upgrade
   link: ''
   note: >-
-    On Windows, the DuckDB Python package requires the Microsoft Visual
-    C++ Redistributable.
+    The DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
   usage_example: ''
 - variant: stable
   environment: R
@@ -278,7 +289,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966081/artifacts/1862736429'
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
 
@@ -294,7 +305,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966032/artifacts/1863098716'
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
   note: ''
   usage_example: ./duckdb
 - variant: nightly
@@ -326,8 +337,7 @@
   installation_code: pip install duckdb --pre --upgrade
   link: ''
   note: >-
-    On Windows, the DuckDB Python package requires the Microsoft Visual
-    C++ Redistributable.
+    The DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
   usage_example: ''
 - variant: nightly
   environment: R
@@ -396,7 +406,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966081/artifacts/1862736429'
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
   note: ''
   usage_example: ''
 - variant: nightly
@@ -406,7 +416,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: 'https://github.com/duckdb/duckdb/actions/runs/10587966032/artifacts/1863098716'
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
   note: ''
   usage_example: ''
 - variant: nightly

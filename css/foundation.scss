@@ -43,13 +43,15 @@ body.foundation{
 		line-height: 1;
 		margin: 0;
 	}
+	a{
+		color: inherit;
+	}
 	section{
 		padding: 105px 15px;
 		div p:last-of-type{
 			margin-bottom: 25px;
 		}
 	}
-	
 	
 	section.purpuse{
 		.flexwrap{
@@ -66,7 +68,6 @@ body.foundation{
 			}
 		}
 	}
-	
 	
 	section.membership{
 		background-color: #161616;

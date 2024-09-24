@@ -6,12 +6,21 @@ railroad: statements/indexes.js
 
 ## Index Types
 
-DuckDB currently uses two index types:
+DuckDB has two built-in index types. Indexes can also be defined via [extensions]({% link docs/extensions/overview.md %}).
 
-* A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as zonemap and block range index) is automatically created for columns of all [general-purpose data types]({% link docs/sql/data_types/overview.md %}).
-* An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Such an index is automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`.
+### Min-Max Index (Zonemap)
+
+A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as zonemap and block range index) is automatically created for columns of all [general-purpose data types]({% link docs/sql/data_types/overview.md %}).
+
+### Adaptive Radix Tree (ART)
+
+An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. ART indexes are automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`.
 
 > Warning ART indexes must currently be able to fit in-memory. Avoid creating ART indexes if the index does not fit in memory.
+
+### Indexes Defined by Extensions
+
+[Starting with version 1.1.0]({% post_url 2024-09-09-announcing-duckdb-110 %}#r-tree), DuckDB supports [R-trees for spatial indexing]({% link docs/extensions/spatial/r-tree_indexes.md %}) via the `spatial` extension.
 
 ## Persistence
 

@@ -103,7 +103,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `ignore_errors` | Option to ignore any parsing errors encountered – and instead ignore rows with errors. | `BOOL` | `false` |
 | `max_line_size` | The maximum line size in bytes. | `BIGINT` | 2097152 |
 | `names` | The column names as a list, see [example]({% link docs/data/csv/tips.md %}#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
-| `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | `VARCHAR` | (empty) |
+| `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. Note that the CSV parser only distinguishes between single-character and double-character line delimiters. Therefore, it does not differentiate between `'\r'` and `'\n'`.| `VARCHAR` | (empty) |
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
 | `null_padding` | If this option is enabled, when a row lacks columns, it will pad the remaining columns on the right with null values. | `BOOL` | `false` |
 | `nullstr` | Specifies the string that represents a `NULL` value or (since v0.10.2) a list of strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |

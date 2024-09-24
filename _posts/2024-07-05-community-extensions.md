@@ -16,7 +16,7 @@ To achieve this, DuckDB has a powerful extension mechanism, which allows users t
 
 ### Using Extensions
 
-Since [version 0.3.2](https://github.com/duckdb/duckdb/releases/tag/v0.3.2), we have already greatly simplified the discovery and installation by hosting them on a centralized extension repository. So, for example, to install the [spatial extension]({% link docs/extensions/spatial.md %}), one can just run the following commands using DuckDB’s SQL interface:
+Since [version 0.3.2](https://github.com/duckdb/duckdb/releases/tag/v0.3.2), we have already greatly simplified the discovery and installation by hosting them on a centralized extension repository. So, for example, to install the [spatial extension]({% link docs/extensions/spatial/overview.md %}), one can just run the following commands using DuckDB’s SQL interface:
 
 ```sql
 INSTALL spatial; -- once

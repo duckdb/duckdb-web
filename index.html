@@ -186,7 +186,7 @@ body_class: landing nowrap
 {% endhighlight %}
 </div>	
 
-<div data-language="sql" data-example="sql-csv-reader" data-buttontxt="Live demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Load-CSV-file%2C-auto%20detecting-column-name-and-types%0ACREATE-TABLE-stations-AS%0A----FROM-'https%3A%2F%2Fblobs.duckdb.org%2Fstations.csv'~,%20%20-Sample-10-stations-using-replacement-sample%0AFROM-stations-USING-SAMPLE-10~,%20%20-Compute-some-property-on-the-stations-table%0ASUMMARIZE-stations~">
+<div data-language="sql" data-example="sql-csv-reader" data-buttontxt="Live demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Load-CSV-file%2C-auto%20detecting-column-name-and-types%0ACREATE-TABLE-stations-AS%0A----FROM-'https%3A%2F%2Fblobs.duckdb.org%2Fnl_stations.csv'~,%20%20-Sample-10-stations-using-replacement-sample%0AFROM-stations-USING-SAMPLE-10~,%20%20-Compute-some-property-on-the-stations-table%0ASUMMARIZE-stations~">
 {% highlight sql %}
 {% include landing-page/sql/csv-loader.sql %}
 {% endhighlight %}

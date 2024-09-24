@@ -195,7 +195,10 @@ SELECT list_filter([5, -6, NULL, 7], x -> x > 0);
 Divisible by 2 and 5:
 
 ```sql
-SELECT list_filter(list_filter([2, 4, 3, 1, 20, 10, 3, 30], x -> x % 2 == 0), y -> y % 5 == 0);
+SELECT list_filter(
+        list_filter([2, 4, 3, 1, 20, 10, 3, 30], x -> x % 2 = 0),
+        y -> y % 5 = 0
+    );
 ```
 
 ```text

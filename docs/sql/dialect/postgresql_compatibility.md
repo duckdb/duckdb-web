@@ -10,9 +10,7 @@ The few exceptions to this are listed on this page.
 
 ## Floating-Point Arithmetic
 
-DuckDB and PostgreSQL handle floating-point arithmetic differently for division by zero. Neither system confirm the [IEEE Standard for Floating-Point Arithmetic (IEEE 754)](https://en.wikipedia.org/wiki/IEEE_754).
-On operations involving infinity values, DuckDB and PostgreSQL align with each other and conform to IEEE 754.
-To show the differences, run the following SQL queries:
+DuckDB and PostgreSQL handle floating-point arithmetic differently for division by zero. DuckDB conforms to the [IEEE Standard for Floating-Point Arithmetic (IEEE 754)](https://en.wikipedia.org/wiki/IEEE_754) for both division by zero and operations involving infinity values. PostgreSQL returns an error for division by zero but aligns with IEEE 754 for handling infinity values. To show the differences, run the following SQL queries:
 
 ```sql
 SELECT 1.0 / 0.0 AS x;
@@ -26,15 +24,15 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 
 <div class="narrow_table monospace_table"></div>
 
-| Expression              |    DuckDB | PostgreSQL |  IEEE 754 |
-| :---------------------- | --------: | ---------: | --------: |
-| 1.0 / 0.0               |  Infinity |      error |  Infinity |
-| 0.0 / 0.0               |       NaN |      error |       NaN |
-| -1.0 / 0.0              | -Infinity |      error | -Infinity |
-| 'Infinity' / 'Infinity' |       NaN |        NaN |       NaN |
-| 1.0 / 'Infinity'        |       0.0 |        0.0 |       0.0 |
-| 'Infinity' - 'Infinity' |       NaN |        NaN |       NaN |
-| 'Infinity' - 1.0        |  Infinity |   Infinity |  Infinity |
+| Expression              | PostgreSQL |    DuckDB |  IEEE 754 |
+| :---------------------- | ---------: | --------: | --------: |
+| 1.0 / 0.0               |      error |  Infinity |  Infinity |
+| 0.0 / 0.0               |      error |       NaN |       NaN |
+| -1.0 / 0.0              |      error | -Infinity | -Infinity |
+| 'Infinity' / 'Infinity' |        NaN |       NaN |       NaN |
+| 1.0 / 'Infinity'        |        0.0 |       0.0 |       0.0 |
+| 'Infinity' - 'Infinity' |        NaN |       NaN |       NaN |
+| 'Infinity' - 1.0        |   Infinity |  Infinity |  Infinity |
 
 ## Division on Integers
 
@@ -153,3 +151,32 @@ SELECT table_name FROM duckdb_tables();
 | mytable    |
 
 However, the case insensitive matching in the system for identifiers cannot be turned off.
+
+## Using Double Equality Sign for Comparison
+
+DuckDB supports both `=` and `==` for quality comparison, while Postgres only supports `=`.
+
+```sql
+SELECT 1 == 1 AS t;
+```
+
+DuckDB returns:
+
+```text
+┌─────────┐
+│    t    │
+│ boolean │
+├─────────┤
+│ true    │
+└─────────┘
+```
+
+Postgres returns:
+
+```console
+postgres=# SELECT 1 == 1 AS t;
+ERROR:  operator does not exist: integer == integer
+LINE 1: SELECT 1 == 1 AS t;
+```
+
+Note that the use of `==` is not encouraged due to its limited portability.
