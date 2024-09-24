@@ -41,8 +41,8 @@ jobs:
           echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
           # add the update time to the index page of the documentation.
-          current_time=$(date +"%Y-%m-%d %H:%M:%S")
-          sed -i "s/documentation!/documentation!\nThis documentation was last updated at \`$current_time\`./" docs/index.md
+          CURRENT_TIME=$(date +"%Y-%m-%d %H:%M:%S")
+          sed -i "s/You can also /This documentation was last updated at ${CURRENT_TIME}.\n\nYou can also /" docs/index.md
       - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Install zip
