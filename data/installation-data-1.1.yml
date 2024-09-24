@@ -13,10 +13,6 @@
     client.
 
     Therefore, they need to be updated separately.
-
-    <br><br>
-
-    If you experience issues while running the DuckDB CLI on Windows, please install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
   usage_example: duckdb
 - variant: stable
   environment: Command line
@@ -33,10 +29,6 @@
     client.
 
     Therefore, they need to be updated separately.
-
-    <br><br>
-
-    If you experience issues while running the DuckDB CLI on Windows, please install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
   usage_example: ./duckdb
 - variant: stable
   environment: Command line
@@ -53,10 +45,6 @@
     client.
 
     Therefore, they need to be updated separately.
-
-    <br><br>
-
-    If you experience issues while running the DuckDB CLI on Windows, please install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
   usage_example: ./duckdb
 - variant: stable
   environment: Command line
