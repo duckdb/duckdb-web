@@ -18,25 +18,7 @@ a dabbling duck that occurs only on two very remote island groups in the souther
 ## What's New in 1.1.0
 
 There have been far too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
-
 Below is a summary of those new features with examples.
-
-* [Breaking SQL Changes](#breaking-sql-changes)
-* [Community Extensions](#community-extensions)
-* [Friendly SQL](#friendly-sql)
-    * [Unpacked Columns](#unpacked-columns)
-    * [`query` and `query_table` Functions](#query-and-query_table-functions)
-* [Performance](#performance)
-    * [Dynamic Filter Pushdown from Joins](#dynamic-filter-pushdown-from-joins)
-    * [Automatic CTE Materialization](#automatic-cte-materialization)
-    * [Parallel Streaming Queries](#parallel-streaming-queries)
-    * [Parallel Union By Name](#parallel-union-by-name)
-    * [Nested ART Rework (Foreign Key Load Speed-Up)](#nested-art-rework-foreign-key-load-speed-up)
-    * [Window Function Improvements](#window-function-improvements)
-* [Spatial Features](#spatial-features)
-    * [GeoParquet](#geoparquet)
-    * [R-Tree](#r-tree)
-* [Final Thoughts](#final-thoughts)
 
 ## Breaking SQL Changes
 
