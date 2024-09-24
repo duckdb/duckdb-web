@@ -1,4 +1,5 @@
 release_date,version_number,codename,duck_species_primary,duck_species_secondary,duck_wikipage,blog_post
+2024-09-24,1.1.1,,,,,
 2024-09-09,1.1.0,Eatoni,Anas eatoni,Eaton's pintail,https://en.wikipedia.org/wiki/Eaton%27s_pintail,https://duckdb.org/2024/09/09/announcing-duckdb-110
 2024-06-03,1.0.0,Nivis,Anas nivis,Snow duck,,https://duckdb.org/2024/06/03/announcing-duckdb-100
 2024-05-22,0.10.3,,,,,
