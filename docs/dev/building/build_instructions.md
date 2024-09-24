@@ -8,7 +8,7 @@ title: Building Instructions
 DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
 Additionally, we recommend using the [Ninja build system](https://ninja-build.org/), which automatically parallelizes the build process.
 
-## UNIX-like Systems
+## UNIX-Like Systems
 
 ### macOS Packages
 
@@ -123,8 +123,10 @@ make -j4
 
 ### The Build Runs Out of Memory
 
-Ninja parallelizes the build, which can cause out-of-memory issues on systems with limited resources. They also occur on Alpine Linux. In these cases, avoid using Ninja:
+Ninja parallelizes the build, which can cause out-of-memory issues on systems with limited resources.
+These issues have also been reported to occur on Alpine Linux, especially on machines with limited resources.
+In these cases, avoid using Ninja by setting the Makefile generator to empty (`GEN=`):
 
 ```bash
-make
+GEN= make
 ```
