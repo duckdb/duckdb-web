@@ -896,6 +896,21 @@ td.icon{
 		height: auto!important;
 	}
 }
+.media_table + table thead {
+	display: none;
+}
+.media_table + table td:nth-child(1) {
+	width: 300px;
+}
+.media_table + table td:nth-child(2) {
+	width: 250px;
+}
+.media_table + table td:nth-child(3) {
+	width: 180px;
+}
+.media_table + table td:nth-child(4) {
+	width: 80px;
+}
 .narrow_table + table{
 	width: auto;
 	min-width: auto;
