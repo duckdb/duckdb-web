@@ -36,7 +36,6 @@
 
 @mixin textlink {
 	color: $duckDBgrey;
-	//color: darken($duckDBgrey,20);
 	text-decoration: underline;
 	font-size: 14px;
 	-webkit-transition: color .3s;
