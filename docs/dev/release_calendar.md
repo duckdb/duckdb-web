@@ -22,11 +22,15 @@ The planned dates of upcoming DuckDB releases are shown below.
 
 <!-- markdownlint-disable MD055 MD056 MD058 -->
 
+{% if site.data.upcoming_releases.size > 0 %}
 | Date | Version |
 |:-----|--------:|
 {%- for release in site.data.upcoming_releases reversed %}
 | {{ release.start_date }} | {{ release.title | replace: "Release ", "" }} |
 {%- endfor %}
+{% else %}
+_There are no upcoming releases announced at the moment. Please check back later._
+{% endif %}
 
 <!-- markdownlint-enable MD055 MD056 MD058 -->
 
