@@ -2,7 +2,7 @@
 layout: post
 title: "Changing Data with Confidence and ACID"
 author: "Mark Raasveldt and Hannes Mühleisen"
-excerpts: "DuckDB offers full transactional support and passes the ACID tests in the TPC-H benchmark."
+excerpt: "DuckDB offers full transactional support and passes the ACID tests in the TPC-H benchmark."
 ---
 
 The great quote “Everything changes and nothing stays the same” from [Heraclitus, according to Socrates, according to Plato](https://latin.stackexchange.com/a/9473) is not very controversial: change is as old as the universe. Yet somehow, when dealing with data, we often consider change as merely an afterthought.
@@ -83,7 +83,8 @@ INSERT INTO customer VALUES (42, 'Wilbur the Duck');
 In the example above, the `customer` table requires the `id` column to be unique for all entries, otherwise multiple customers would be associated with the same orders. We can enforce this constraint by defining a so-called `PRIMARY KEY` on that column. When we insert two entries with the same id, the consistency check fails and we get an error message:
 
 ```console
-Constraint Error: Duplicate key "id: 42" violates primary key constraint. (...)
+Constraint Error: Duplicate key "id: 42" violates primary key
+constraint. (...)
 ```
 
 Having these kind of constraints in place is a great way to make sure data *remains* consistent even after many updates have taken place.
@@ -206,7 +207,8 @@ ROLLBACK;
 **SQL Assertions.** When a (non-syntax) error occurs in a transaction, the transaction is automatically aborted and the changes cannot be committed. We can use this property of transactions to add assertions to our transactions. When one of these assertions is triggered, an error is raised and the transaction cannot be committed. We can use the `error` function to define our own `assert` macro:
 
 ```sql
-CREATE MACRO assert(condition, message) AS CASE WHEN NOT condition THEN error(message) END;
+CREATE MACRO assert(condition, message) AS
+    CASE WHEN NOT condition THEN error(message) END;
 ```
 
 We can then use this `assert` macro to assert that the `people` table is not empty:
@@ -218,7 +220,10 @@ BEGIN TRANSACTION;
 UPDATE people SET age = NULL WHERE age = -99;
 -- oops, we deleted all rows!
 DELETE FROM people WHERE name <> 'non-existent name';
-SELECT assert((SELECT count(*) FROM people) > 0, 'People should not be empty');
+SELECT assert(
+           (SELECT count(*) FROM people) > 0,
+           'People should not be empty'
+       );
 COMMIT;
 ```
 
