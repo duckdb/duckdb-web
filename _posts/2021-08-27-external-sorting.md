@@ -247,7 +247,7 @@ The MacBook has 16GB of memory, and [one of the fastest SSDs found in a laptop](
 
 We will be comparing against the following systems:
 1. [ClickHouse](https://clickhouse.tech), version 21.7.5
-2. [HyPer](https://hyper-db.de), version 2021.2.1.12564
+2. [HyPer](https://dbdb.io/db/hyper), version 2021.2.1.12564
 3. [Pandas](https://pandas.pydata.org), version 1.3.2
 4. [SQLite](https://www.sqlite.org/index.html), version 3.36.0
 
