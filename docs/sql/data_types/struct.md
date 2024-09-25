@@ -202,8 +202,6 @@ FROM
 Mismatch Type Error: Type STRUCT(x INTEGER) does not match with STRUCT(y INTEGER). Cannot cast STRUCTs - element "x" in source struct was not found in target struct
 ```
 
-> This behavior was introduced in DuckDB v0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
-
 A workaround for this is to use [`struct_pack`](#creating-structs) instead:
 
 ```sql
@@ -280,13 +278,6 @@ SELECT {'k1': 2, 'k2': 3} < {'k2': 2, 'k1': 4} AS result;
 Binder Error: Cannot compare values of type STRUCT(k1 INTEGER, k2 INTEGER)
 and type STRUCT(k2 INTEGER, k1 INTEGER) - an explicit cast is required
 ```
-
-> Up to DuckDB 0.10.1, nested `NULL` values were compared as follows.
-> At the top level, nested `NULL` values obey standard SQL `NULL` comparison rules:
-> comparing a nested `NULL` value to a nested non-`NULL` value produces a `NULL` result.
-> Comparing nested value _entries_, however, uses the internal nested value rules for `NULL`s,
-> and a nested `NULL` value entry will compare above a nested non-`NULL` value entry.
-> DuckDB 0.10.2 introduced a breaking change in semantics as described above.
 
 ## Functions
 

@@ -110,8 +110,6 @@ LOAD aws;
 
 ## Updating Extensions
 
-> This feature was introduced in DuckDB 0.10.3.
-
 DuckDB has a dedicated statement that will automatically update all extensions to their latest version. The output will
 give the user information on which extensions were updated to/from which version. For example:
 
