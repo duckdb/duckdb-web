@@ -332,15 +332,19 @@ for group_name in docs_map.keys():
         print("No docs found for " + group_name)
         continue
     if file_name not in file_docs:
-        quick_docs = ""
+        quick_docs = quick_docs_start()
         function_doc_for_this_group = ""
     else:
         quick_docs = file_docs[file_name][0]
         function_doc_for_this_group = file_docs[file_name][1]
+        quick_docs += quick_docs_end()
         quick_docs += '\n### ' + group_name + '\n\n'
+        quick_docs += quick_docs_start()
     for entry in group_docs[group_name]:
         quick_docs += entry[1] + '\n'
         function_doc_for_this_group += entry[0] + '\n'
+    quick_docs += quick_docs_end()
+
     file_docs[file_name] = [quick_docs, function_doc_for_this_group]
 
 for file_name in file_docs.keys():
@@ -359,6 +363,7 @@ for entry in documentation_list:
     if group_name is not current_group_name:
         if current_group_name is not None:
             total_quick_docs += quick_docs_end() + '\n'
+
         total_quick_docs += '### ' + group_name + '\n\n'
 
         total_quick_docs += quick_docs_start()
