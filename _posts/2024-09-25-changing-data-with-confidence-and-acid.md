@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Changing Data with Confidence and ACID"
-author: "Mark Raasveldt and Hannes Mühleisen"
+author: "Hannes Mühleisen and Mark Raasveldt"
 excerpt: "DuckDB offers full transactional support and passes the ACID tests in the TPC-H benchmark."
 ---
 
