@@ -23,7 +23,7 @@ title: Media
 | [In-process analytical data management with DuckDB](https://www.youtube.com/watch?v=5ddoZR6PYNU) ([pdf]({% link pdf/duckdb-pydata-amsterdam-2023.pdf %})) | PyData Amsterdam 2023 | Hannes Mühleisen | 25min |
 | [DuckDB keynote segment](https://www.youtube.com/watch?v=AKix55rQEUU) | Data + AI Summit 2023 | Hannes Mühleisen | 10min |
 | [DuckDB: Bringing analytical SQL directly to your Python shell](https://www.youtube.com/watch?v=egN4TwVyJss) | EuroPython 2023 | Pedro Holanda | 40min |
-| [DuckDB - An embeddable analytical database](https://www.youtube.com/watch?v=nPDomZQ8jI4) | FOSDEM 2020 | Hannes Mühleisen | 15min |
+| [DuckDB – An embeddable analytical database](https://www.youtube.com/watch?v=nPDomZQ8jI4) | FOSDEM 2020 | Hannes Mühleisen | 15min |
 
 ## Talks on DuckDB's Internals
 
@@ -32,7 +32,7 @@ title: Media
 | | | | |
 |:---|:---|:---|---:|
 | [DuckDB – The SQLite for analytics](https://www.youtube.com/watch?v=PFUZlNQIndo) | CMU Database Group – Quarantine Tech Talks (2020) | Mark Raasveldt | 1h |
-| [DuckDB testing - Present and future](https://www.youtube.com/watch?v=BgC79Zt2fPs) | DBTest 2022 | Mark Raasveldt | 1h |
+| [DuckDB testing – Present and future](https://www.youtube.com/watch?v=BgC79Zt2fPs) | DBTest 2022 | Mark Raasveldt | 1h |
 | [Push-based execution in DuckDB](https://www.youtube.com/watch?v=MA0OsvYFGrc) | CWI Database Architectures Seminar (2021) | Mark Raasveldt | 1h |
 
 ## The Data Management Landscape
