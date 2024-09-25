@@ -111,8 +111,6 @@ to the [Client API docs]({% link docs/api/overview.md %})
 
 ## Updating Extensions
 
-> This feature was introduced in DuckDB 0.10.3.
-
 While built-in extensions are tied to a DuckDB release due to their nature of being built into the DuckDB binary, installable extensions
 can and do receive updates. To ensure all currently installed extensions are on the most recent version, call:
 
