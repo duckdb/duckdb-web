@@ -259,7 +259,7 @@ To test *isolation*, one thread will run the transaction, but not commit or roll
 
 Finally, to test *durability*, a number of threads run the ACID transaction and log the results. They are allowed to complete at least 100 transactions each. Then, a failure is caused, in our case we simply killed the process (using `SIGKILL`). Then, the database system is allowed to recover the commited changes from the WAL. The log is checked to ensure that there are no log entries that are not reflected in the `history` table and there are no history entries that don't have log entries, minus very few that might have been lost in flight (i.e., persisted by the database but not yet logged by the benchmark driver). Finally, the consistency is checked again.
 
-*We're happy to report that DuckDB passed all tests.*
+**We're happy to report that DuckDB passed all tests.**
 
 Our scripts to run the benchmark are [available on GitHub](https://github.com/hannes/duckdb-tpch-power-test). We are planning to perform a formal audit of our results in the future. We will update this post when that happens.
 
