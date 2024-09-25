@@ -18,7 +18,7 @@ title: Media
 
 | | | | |
 |:---|:---|:---|---:|
-| [Going beyond two tier data architectures with DuckDB](https://www.youtube.com/watch?v=bi0XhmbkqU8) | Data Engineering for AI/ML | Hannes Mühleisen | 30min |
+| [Going beyond two tier data architectures with DuckDB](https://www.youtube.com/watch?v=bi0XhmbkqU8) ([pdf](https://blobs.duckdb.org/slides/hannes-muhleisen-mlops-data-engineering-for-ai-and-ml.pdf)) | Data Engineering for AI/ML | Hannes Mühleisen | 30min |
 | [DuckDB: Harnessing in-process analytics for data science and beyond](https://www.youtube.com/watch?v=6teFN7cwx30) ([pdf](https://blobs.duckdb.org/slides/oredev-duckdb-231109.pdf)) | Øredev 2023 | Gábor Szárnyas | 40min |
 | [In-process analytical data management with DuckDB](https://www.youtube.com/watch?v=5ddoZR6PYNU) ([pdf]({% link pdf/duckdb-pydata-amsterdam-2023.pdf %})) | PyData Amsterdam 2023 | Hannes Mühleisen | 25min |
 | [DuckDB keynote segment](https://www.youtube.com/watch?v=AKix55rQEUU) | Data + AI Summit 2023 | Hannes Mühleisen | 10min |
