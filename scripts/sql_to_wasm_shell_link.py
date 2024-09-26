@@ -61,7 +61,7 @@ encoded_statements = []
 for statement in statements:
     trimmed = statement.strip()
     no_hyphens = trimmed.replace('-', '%2D')
-    no_spaces = no_hyphens.replace('\n',' ').replace(' ', '-')
+    no_spaces = no_hyphens.replace('\n', ' ').replace(' ', '-')
     encoded = (
         no_spaces.replace(',', '%2C')
         .replace('=', '%3D')
