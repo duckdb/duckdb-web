@@ -1,5 +1,3 @@
-
-
 # Note, this may not handle all special characters
 shell_link_stub = "https://shell.duckdb.org/#queries=v0,"
 # sql = """
