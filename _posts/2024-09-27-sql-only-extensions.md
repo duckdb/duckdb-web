@@ -550,12 +550,16 @@ FROM pivot_table(['business_metrics'],
 
 ## Conclusion
 
-<!-- So, we now have all 3 ingredients we will need: a central package manager, reusable macros, and enough syntactic flexibility to do valuable work. -->
+With DuckDB 1.1, sharing your SQL knowledge with the community has never been easier!
+DuckDB's community extension repository is truly a package manager for the SQL language.
+Macros in DuckDB are now highly reusable (thanks to `query` and `query_table`), and DuckDB's SQL syntax provides plenty of power to accomplish complex tasks.
 
-<!-- 
+Please let us know if the `pivot_table` extension is helpful to you - we are open to both contributions and feature requests!
+Together we can write the ultimate pivoting capability just once and use it everywhere.
 
-TODO: Maybe an example for each case in the pivot_table explanation?
+In the future, we have plans to further simplify the creation of SQL extensions.
+Of course, we would love your feedback!
+[Join us on Discord](https://discord.duckdb.org/) in the `community-extensions` channel. 
 
+Happy analyzing!
 
-
--->
