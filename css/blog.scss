@@ -615,7 +615,7 @@ footer{
 }
 
 @media print {
-	section.recentposts {
+	section.recentposts, div.toc_sidebar {
 		display: none !important;
 	}
 }
