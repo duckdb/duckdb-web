@@ -60,9 +60,15 @@ encoded_statements = []
 
 for statement in statements:
     trimmed = statement.strip()
-    no_hyphens = trimmed.replace('-','%2D')
+    no_hyphens = trimmed.replace('-', '%2D')
     no_spaces = no_hyphens.replace('\n',' ').replace(' ', '-')
-    encoded = no_spaces.replace(',','%2C').replace('=','%3D').replace(':','%3A').replace(r'/','%2F').replace('%2D',' ')
+    encoded = (
+        no_spaces.replace(',','%2C')
+        .replace('=','%3D')
+        .replace(':','%3A')
+        .replace(r'/','%2F')
+        .replace('%2D',' ')
+    )
     encoded_statements.append(encoded)
 
 combined = shell_link_stub + '~,'.join(encoded_statements)
