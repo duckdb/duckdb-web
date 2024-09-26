@@ -29,7 +29,7 @@ What would it take to build these extensions with *just SQL*?
 
 Traditionally, SQL is highly customized to the schema of the database on which it was written. 
 Can we make it reusable?
-Some techniques for reusability were discussed in the SQL Gymnasics post, but now we can go even further.
+Some techniques for reusability were discussed in the [SQL Gymnasics post]({% post_url 2024-03-01-sql-gymnastics %}), but now we can go even further.
 With version 1.1, DuckDB's world-class friendly SQL dialect makes it possible to create macros that can be applied:
 * To any tables
 * On any columns
@@ -369,7 +369,7 @@ FROM pivot_table(['business_metrics'],          -- table_names
 
 ## How the `pivot_table` extension works
 
-The `pivot_table` extension is a collection of multiple scalar and table SQL `MACRO`s.
+The `pivot_table` extension is a collection of multiple scalar and table SQL macros.
 This allows the logic to be modularized. 
 You can see below that the functions are used as building blocks to create more complex functions.
 This is typically difficult to do in SQL, but it is easy in DuckDB!
@@ -422,18 +422,19 @@ The SQL string is constructed using list lambda functions and the building block
 
 At its core, the `pivot_table` function determines the SQL required to generate the desired pivot based on which parameters are in use.
 
-Since this SQL statement is a string at the end of the day, we can use a hierarchy of scalar SQL `MACRO`s rather than a single large `MACRO`. 
+Since this SQL statement is a string at the end of the day, we can use a hierarchy of scalar SQL macros rather than a single large macro. 
 This is a common traditional issue with SQL - it tends to not be very modular or reusable, but we are able to compartmentalize our logic wth DuckDB's syntax.
 
 > Note If a non-optional parameter is not in use, an empty string (`[]`) should be passed in.
 
 * `table_names`: A list of table or view names to aggregate or pivot. Multiple tables are combined with `UNION ALL BY NAME` prior to any other processing.
-* `values`: A list of aggregation metrics in the format `['aggregate_function_1(column_name_1)', 'aggregate_function_2(column_name_2)', ...]`.
+* `values`: A list of aggregation metrics in the format `['agg_fn_1(col_1)', 'agg_fn_2(col_2)', ...]`.
 * `rows`: A list of column names to `SELECT` and `GROUP BY`.
 * `columns`: A list of column names to `PIVOT` horizontally into a separate column per value in the original column. If multiple column names are passed in, only unique combinations of data that appear in the dataset are pivoted. 
-    * Ex: If passing in a `columns` parameter like `['continent', 'country']`, only valid `continent` / `country` pairs will be included (no `Europe_Canada` column would be generated).
-* `filters`: A list of `WHERE` clause expressions to be applied to the raw dataset prior to aggregating in the format `['column_name_1 = 123', 'column_name_2 LIKE ''woot%''', ...]`. 
-    * The `filters` are combined with `AND` so all must evaluate to true for a row to be included.
+    * Ex: If passing in a `columns` parameter like `['continent', 'country']`, only valid `continent` / `country` pairs will be included.
+    * (no `Europe_Canada` column would be generated).
+* `filters`: A list of `WHERE` clause expressions to be applied to the raw dataset prior to aggregating in the format `['col_1 = 123', 'col_2 LIKE ''woot%''', ...]`. 
+    * The `filters` are combined with `AND`.
 * `values_axis` (Optional): If multiple `values` are passed in, determine whether to create a separate row or column for each value. Either `rows` or `columns`, defaulting to `columns`.
 * `subtotals` (Optional): If enabled, calculate the aggregate metric at multiple levels of detail based on the `rows` parameter. Either 0 or 1, defaulting to 0. 
 * `grand_totals` (Optional): If enabled, calculate the aggregate metric across all rows in the raw data in addition to at the granularity defined by `rows`. Either 0 or 1, defaulting to 0.
@@ -445,19 +446,111 @@ As a result, a `GROUP BY` statement is used.
 If `subtotals` are in use, the `ROLLUP` expression is used to calculate the `values` at the different levels of granularity.
 If `grand_totals` are in use, but not `subtotals`, the `GROUPING SETS` expression is used instead of `ROLLUP` to evaluate across all rows.
 
+In this example, we build a summary of the `revenue` and `cost` of each `product_line` and `product`. 
+
+```sql
+FROM pivot_table(['business_metrics'],
+                 ['sum(revenue)', 'sum(cost)'],
+                 ['product_line', 'product'],
+                 [],
+                 [],
+                 subtotals := 1,
+                 grand_totals := 1,
+                 values_axis := 'columns'
+                 );
+```
+
+|     product_line     |    product    | sum(revenue) | sum("cost") |
+|----------------------|---------------|--------------|-------------|
+| Duck Duds            | Duck neckties | 36           | 8           |
+| Duck Duds            | Duck suits    | 360          | 80          |
+| Duck Duds            | Subtotal      | 396          | 88          |
+| Waterfowl watercraft | Duck boats    | 3600         | 800         |
+| Waterfowl watercraft | Subtotal      | 3600         | 800         |
+| Grand Total          | Grand Total   | 3996         | 888         |
+
 #### Pivot horizontally, one column per metric in `values`
 
 Build up a `PIVOT` statement that will pivot out all valid combinations of raw data values within the `columns` parameter. 
 If `subtotals` or `grand_totals` are in use, make multiple copies of the input data, but replace appropriate column names in the `rows` parameter with a string constant.
 Pass all expressions in `values` to the `PIVOT` statement's `USING` clause so they each receive their own column.
 
+We enhance our previous example to pivot out a separate column for each `year` / `value` combination:
+
+```sql
+DROP TYPE IF EXISTS columns_parameter_enum;
+
+CREATE TYPE columns_parameter_enum AS ENUM (
+    FROM build_my_enum(['business_metrics'],
+                       ['year'],
+                       [])
+);
+
+FROM pivot_table(['business_metrics'],
+                 ['sum(revenue)', 'sum(cost)'],
+                 ['product_line', 'product'],
+                 ['year'],
+                 [],
+                 subtotals := 1,
+                 grand_totals := 1,
+                 values_axis := 'columns'
+                 );
+```
+
+|     product_line     |    product    | 2022_sum(revenue) | 2022_sum("cost") | 2023_sum(revenue) | 2023_sum("cost") |
+|----------------------|---------------|-------------------|------------------|-------------------|------------------|
+| Duck Duds            | Duck neckties | 10                | 4                | 26                | 4                |
+| Duck Duds            | Duck suits    | 100               | 40               | 260               | 40               |
+| Duck Duds            | Subtotal      | 110               | 44               | 286               | 44               |
+| Waterfowl watercraft | Duck boats    | 1000              | 400              | 2600              | 400              |
+| Waterfowl watercraft | Subtotal      | 1000              | 400              | 2600              | 400              |
+| Grand Total          | Grand Total   | 1110              | 444              | 2886              | 444              |
+
 #### Pivot horizontally, one row per metric in `values`
 
 Build up a separate `PIVOT` statement for each metric in `values` and combine them with `UNION ALL BY NAME`. 
 If `subtotals` or `grand_totals` are in use, make multiple copies of the input data, but replace appropriate column names in the `rows` parameter with a string constant.
 
+To simplify the appearance slightly, we adjust one parameter in our previous query and set `values_axis := 'rows'`:
 
+```sql
+DROP TYPE IF EXISTS columns_parameter_enum;
 
+CREATE TYPE columns_parameter_enum AS ENUM (
+    FROM build_my_enum(['business_metrics'],
+                       ['year'],
+                       [])
+);
+
+FROM pivot_table(['business_metrics'],
+                 ['sum(revenue)', 'sum(cost)'],
+                 ['product_line', 'product'],
+                 ['year'],
+                 [],
+                 subtotals := 1,
+                 grand_totals := 1,
+                 values_axis := 'rows'
+                 );
+```
+
+|     product_line     |    product    | value_names  | 2022 | 2023 |
+|----------------------|---------------|--------------|------|------|
+| Duck Duds            | Duck neckties | sum(cost)    | 4    | 4    |
+| Duck Duds            | Duck neckties | sum(revenue) | 10   | 26   |
+| Duck Duds            | Duck suits    | sum(cost)    | 40   | 40   |
+| Duck Duds            | Duck suits    | sum(revenue) | 100  | 260  |
+| Duck Duds            | Subtotal      | sum(cost)    | 44   | 44   |
+| Duck Duds            | Subtotal      | sum(revenue) | 110  | 286  |
+| Waterfowl watercraft | Duck boats    | sum(cost)    | 400  | 400  |
+| Waterfowl watercraft | Duck boats    | sum(revenue) | 1000 | 2600 |
+| Waterfowl watercraft | Subtotal      | sum(cost)    | 400  | 400  |
+| Waterfowl watercraft | Subtotal      | sum(revenue) | 1000 | 2600 |
+| Grand Total          | Grand Total   | sum(cost)    | 444  | 444  |
+| Grand Total          | Grand Total   | sum(revenue) | 1110 | 2886 |
+
+## Conclusion
+
+<!-- So, we now have all 3 ingredients we will need: a central package manager, reusable macros, and enough syntactic flexibility to do valuable work. -->
 
 <!-- 
 
