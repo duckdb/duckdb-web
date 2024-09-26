@@ -2,7 +2,7 @@
 layout: post
 title: "Creating a SQL-Only Extension for Excel-Style Pivoting in DuckDB"
 author: "Alex Monahan"
-excerpt: "Easily create sharable extensions using only SQL MACROs that can apply to any table and any columns. We demonstrate the power of this capability with the pivot_table extension that provides Excel-style pivoting."
+excerpt: "Easily create sharable extensions using only SQL macros that can apply to any table and any columns. We demonstrate the power of this capability with the pivot_table extension that provides Excel-style pivoting."
 ---
 
 
@@ -14,7 +14,7 @@ As a result, it has historically been missing some of the modern luxuries we tak
 With version 1.1, DuckDB has launched community extensions, bringing the incredible power of a package manager to the SQL language.
 One goal for these extensions is to enable C++ libraries to be accessible through SQL across all of the languages with a DuckDB library.
 For extension builders, compilation and distribution are much easier.
-For the user community, installation is as simple as 2 commands:
+For the user community, installation is as simple as two commands:
 
 ```sql
 INSTALL pivot_table FROM community;
@@ -30,7 +30,7 @@ What would it take to build these extensions with *just SQL*?
 Traditionally, SQL is highly customized to the schema of the database on which it was written. 
 Can we make it reusable?
 Some techniques for reusability were discussed in the SQL Gymnasics post, but now we can go even further.
-With version 1.1, DuckDB's world-class friendly SQL dialect makes it possible to create MACROs that can be applied:
+With version 1.1, DuckDB's world-class friendly SQL dialect makes it possible to create macros that can be applied:
 * To any tables
 * On any columns
 * Using any functions
@@ -45,7 +45,7 @@ Traditionally, there has been no central repository for SQL functions across dat
 DuckDB's community extensions can be that knowledge base.
 If you are a DuckDB fan and a SQL user, you can share your expertise back to the community with an extension.
 This post will show you how!
-No C++ knowledge is needed - just a little bit of copy/paste and GitHub actions handles all the compilation. 
+No C++ knowledge is needed - just a little bit of copy/paste and GitHub Actions handles all the compilation. 
 If I can do it, you can do it!
 
 ### Powerful SQL
@@ -70,7 +70,7 @@ To achieve this level of flexibility, the `pivot_table` extension uses many frie
 * [`SELECT * REPLACE`]({% link docs/sql/expressions/star.md %}#replace-clause) to dynamically clean up subtotal columns
 * [`SELECT * EXCLUDE`]({% link docs/sql/expressions/star.md %}#exclude-clause) to remove internally generated columns from the final result
 * [`GROUPING SETS` and `ROLLUP`]({% link docs/sql/query_syntax/grouping_sets.md %}) to generate subtotals and grand totals
-* [`UNNEST`]({% link docs/sql/query_syntax/unnest.md %}) to convert lists into separate rows for `values_axis:='rows'`
+* [`UNNEST`]({% link docs/sql/query_syntax/unnest.md %}) to convert lists into separate rows for `values_axis := 'rows'`
 * [`MACRO`s]({% link docs/sql/statements/create_macro.md %}) to modularize the code
 * [`ORDER BY ALL`]({% link docs/sql/query_syntax/orderby.md %}#order-by-all) to order the result dynamically
 * [`ENUM`s]({% link docs/sql/statements/create_type.md %}) to determine what columns to pivot horizontally
@@ -78,7 +78,7 @@ To achieve this level of flexibility, the `pivot_table` extension uses many frie
 
 DuckDB's innovative syntax makes this extension possible! 
 
-So, we now have all 3 ingredients we will need: a central package manager, reusable `MACRO`s, and enough syntactic flexibility to do valuable work.
+So, we now have all 3 ingredients we will need: a central package manager, reusable macros, and enough syntactic flexibility to do valuable work.
 
 ## Create Your Own SQL Extension
 
@@ -99,7 +99,7 @@ Note that `--recurse-submodules` will ensure DuckDB is pulled which is required 
 Next, replace the name of the example extension with the name of your extension in all the right places by running the Python script below.
 
 > Note If you don't have Python installed, head to [python.org](https://python.org) and follow those instructions.
-> This script doesn't require any libraries, so Python is all you need! (No need to set up any environments)
+> This script doesn't require any libraries, so Python is all you need! (No need to set up any environments.)
 
 ```python
 python3 ./scripts/bootstrap-template.py <extension_name_you_want>
@@ -108,8 +108,8 @@ python3 ./scripts/bootstrap-template.py <extension_name_you_want>
 #### Initial Extension Test
 
 At this point, you can follow the directions in the README to build and test locally if you would like.
-However, even easier, you can simply commit your changes to git and push them to GitHub, and GitHub actions can do the compilation for you!
-GitHub actions will also run tests on your extension to validate it is working properly.
+However, even easier, you can simply commit your changes to git and push them to GitHub, and GitHub Actions can do the compilation for you!
+GitHub Actions will also run tests on your extension to validate it is working properly.
 
 > Note The instructions are not written for a Windows audience, so we recommend GitHub Actions in that case!
 
@@ -120,11 +120,9 @@ git push
 ```
 
 
-<!-- Screenshot of GitHub actions and looking at the test results? -->
-
 #### Write Your SQL Macros
 
-It it likely a bit faster to iterate if you test our your macros directly in DuckDB. 
+It it likely a bit faster to iterate if you test your macros directly in DuckDB. 
 After you have written your SQL, we will move it into the extension.
 The example we will use demonstrates how to pull a dynamic set of columns from a dynamic table name (or a view name!).
 
@@ -150,7 +148,7 @@ FROM select_distinct_columns_from_table('duckdb_types', ['type_category']);
 
 #### Add SQL Macros
 
-Technically, this is the C++ part, but we are going to do some copy/paste and use GitHub actions for compiling so it won't feel that way!
+Technically, this is the C++ part, but we are going to do some copy/paste and use GitHub Actions for compiling so it won't feel that way!
 
 DuckDB supports both scalar and table macros, and they have slightly different syntax.
 The extension template has an example for each (and code comments too!) inside the file named `<your_extension_name>.cpp`.
@@ -160,7 +158,7 @@ We will copy the example and modify it!
 {% raw %}
 ```cpp
 static const DefaultTableMacro <your_extension_name>_table_macros[] = {
-	{DEFAULT_SCHEMA, "times_two_table", {"x", nullptr}, {{"two", "2"}, {nullptr, nullptr}},  R"(SELECT x * two as output_column;)"},
+	{DEFAULT_SCHEMA, "times_two_table", {"x", nullptr}, {{"two", "2"}, {nullptr, nullptr}}, R"(SELECT x * two as output_column;)"},
 	{
         DEFAULT_SCHEMA, // Leave the schema as the default
         "select_distinct_columns_from_table", // Function name
@@ -180,7 +178,7 @@ static const DefaultTableMacro <your_extension_name>_table_macros[] = {
 {% endraw %}
 
 That's it! 
-All we had to provide were the name of the function, the names of the parameters, and the text of our SQL `MACRO`.
+All we had to provide were the name of the function, the names of the parameters, and the text of our SQL macro.
 
 ### Testing the Extension
 
@@ -203,9 +201,9 @@ STRING
 NULL
 ```
 
-Now, just add, commit, and push your changes to GitHub like before, and GitHub actions will compile your extension and test it!
+Now, just add, commit, and push your changes to GitHub like before, and GitHub Actions will compile your extension and test it!
 
-If you would like to do further ad-hoc testing of your extension, you can download the extension from your GitHub actions run's artifacts and then [install it locally using these steps]({% link docs/extensions/overview.md %}#unsigned-extensions).
+If you would like to do further ad-hoc testing of your extension, you can download the extension from your GitHub Actions run's artifacts and then [install it locally using these steps]({% link docs/extensions/overview.md %}#unsigned-extensions).
 
 ### Uploading to the Community Extensions Repository
 
@@ -213,7 +211,7 @@ Once you are happy with your extension, it's time to share it with the DuckDB co
 Follow the steps in [the Community Extensions post]({% post_url 2024-07-05-community-extensions %}#developer-experience).
 A summary of those steps is:
 
-1. Send a PR with a metadata file `description.yml` that contains the description of the extension. For example:
+1. Send a PR with a metadata file `description.yml` that contains the description of the extension. For example, the [`h3` Community Extension](https://community-extensions.duckdb.org/extensions/h3.html) uses the following YAML configuration:
 
    ```yaml
    extension:
@@ -348,9 +346,9 @@ FROM pivot_table(['business_metrics'],          -- table_names
                  ['product_line', 'product'],   -- rows
                  ['year', 'quarter'],           -- columns
                  [],                            -- filters
-                 subtotals:=1,
-                 grand_totals:=1,
-                 values_axis:='rows'
+                 subtotals := 1,
+                 grand_totals := 1,
+                 values_axis := 'rows'
                  );
 ```
 
