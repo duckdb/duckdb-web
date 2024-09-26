@@ -2,52 +2,9 @@
 layout: post
 title: "Creating a SQL-Only Extension for Excel-Style Pivoting in DuckDB"
 author: "Alex Monahan"
-excerpt: "Now you can easily create sharable extensions using only SQL MACROs that can apply to any table and any columns. We demonstrate the power of this capability with the pivot_table extension that provides Excel-style pivoting"
+excerpt: "Easily create sharable extensions using only SQL MACROs that can apply to any table and any columns. We demonstrate the power of this capability with the pivot_table extension that provides Excel-style pivoting."
 ---
-<!-- 
 
-The vision
-    Shareable helper libraries, built entirely in SQL
-    Usable across all client languages supported by DuckDB
-    Now with version 1.1, DuckDB supports dynamic table names as well as dynamic column names
-        so any TABLE FUNCTION can be used on any table
-    A powerful way to contribute to the DuckDB community if you are a SQL expert and not a C++ expert
-    Allows for direct parameterization from your host language to ensure safety
-    This can scale up to significant complexity (and therefore significant community value!), as we will demonstrate with the pivot_table extension
-
-Capabilities of the pivot_table extension
-    The pivot_table extension supports advanced pivoting functionality that was previously only available in spreadsheets, dataframe libraries, or custom host language functions.
-    Supports the Excel pivoting API: values, rows, columns, filters
-    It accepts arbitrary combinations of these parameters and can handle as many inputs as desired
-    Plus advanced options like subtotals and grand totals
-    If multiple values are in use, there is an option to create a separate column per value or a separate row per value
-
-    Why was this hard for SQL in the past? The query syntax used to handle groupings and the syntax used to handle pivots is very different, and the Excel API supports both use cases.
-        If no columns parameter is supplied, then a group by should be used. 
-        Otherwise, a PIVOT is required
-
-Operate on any table with query_table
-
-Create SQL dynamically with query 
-    Since this is really just operating on strings, we can modularize this
-    It is also safe since it does not allow DDL statements (CREATE, UPDATE, and DELETE are disallowed)
-
-Do valuable dynamic work thanks to list lambdas
-    One way to operate on user-specified columns
-
-Operate on user-specified columns with the columns expression
-
-How to create your own
-    Extension template
-    Cover the exact C++ syntax so that it isn't intimidating
-
-The pivot_table example
-    Maybe a diagram of the various functions in use and how they call each other?
-        Maybe just a list or table instead, with a quick description
-        Start with the broadest function (root function)
-    
-
--->
 
 
 ## The Power of SQL-Only Extensions
@@ -78,7 +35,7 @@ With version 1.1, DuckDB's world-class friendly SQL dialect makes it possible to
 * On any columns
 * Using any functions
 
-The new ability to work on any tables is thanks to the [`query` and `query_table` functions]({% post_url 2024-09-09-announcing-duckdb-110 %}#query-and-query_table-functions)!
+The new ability to work **on any tables** is thanks to the [`query` and `query_table` functions]({% post_url 2024-09-09-announcing-duckdb-110 %}#query-and-query_table-functions)!
 The `query` function is a safe way to execute `SELECT` statements defined by SQL strings, while `query_table` is a way to make a `FROM` clause pull from multiple tables at once.
 They are very powerful when used in combination with other friendly SQL features like the `COLUMNS` expression and  `LIST` lambda functions.
 
@@ -97,7 +54,8 @@ All that said, just how valuable can a SQL `MACRO` be?
 Can we do more than make small snippets?
 I'll make the case that you can do quite complex and powerful operations in DuckDB SQL using the `pivot_table` extension as an example.
 The `pivot_table` function allows for Excel-style pivots, including `subtotals`, `grand_totals`, and more.
-It is also very similar to the Pandas `pivot_table` function, but with all the scalability and speed benefits of DuckDB!
+It is also very similar to the Pandas `pivot_table` function, but with all the scalability and speed benefits of DuckDB.
+It contains over **250 tests**, so it is intended to be useful beyond just an example!
 
 To achieve this level of flexibility, the `pivot_table` extension uses many friendly and advanced SQL features:
 * The [`query` function]({% post_url 2024-09-09-announcing-duckdb-110 %}#query-and-query_table-functions) to execute a SQL string
@@ -107,16 +65,16 @@ To achieve this level of flexibility, the `pivot_table` extension uses many frie
     * [`list_transform`]({% link docs/sql/functions/lambda.md %}#list_transformlist-lambda) for string manipulation like quoting
     * [`list_reduce`]({% link docs/sql/functions/lambda.md %}#list_reducelist-lambda) to concatenate strings together
     * [`list_aggregate`]({% link docs/sql/functions/list.md %}#list_aggregatelist-name) to sum multiple columns and identify subtotal and grand total rows
-* Bracket notation for string slicing
-* `UNION ALL BY NAME` to stack data by column name for subtotals and grand totals
-* `SELECT * REPLACE` to dynamically clean up subtotal columns
-* `SELECT * EXCLUDE` to remove internally generated columns from the final result
-* `GROUPING SETS` and `ROLLUP` to generate subtotals and grand totals
-* `UNNEST` to convert lists into separate rows for `values_axis:='rows'`
-* `MACRO`s to modularize the code
-* `ORDER BY ALL` to order the result dynamically
-* `ENUM`s to determine what columns to pivot horizontally
-* And of course the `PIVOT` function for horizontal pivoting!
+* [Bracket notation for string slicing]({% link docs/sql/functions/char.md %}#stringbeginend)
+* [`UNION ALL BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name) to stack data by column name for subtotals and grand totals
+* [`SELECT * REPLACE`]({% link docs/sql/expressions/star.md %}#replace-clause) to dynamically clean up subtotal columns
+* [`SELECT * EXCLUDE`]({% link docs/sql/expressions/star.md %}#exclude-clause) to remove internally generated columns from the final result
+* [`GROUPING SETS` and `ROLLUP`]({% link docs/sql/query_syntax/grouping_sets.md %}) to generate subtotals and grand totals
+* [`UNNEST`]({% link docs/sql/query_syntax/unnest.md %}) to convert lists into separate rows for `values_axis:='rows'`
+* [`MACRO`s]({% link docs/sql/statements/create_macro.md %}) to modularize the code
+* [`ORDER BY ALL`]({% link docs/sql/query_syntax/orderby.md %}#order-by-all) to order the result dynamically
+* [`ENUM`s]({% link docs/sql/statements/create_type.md %}) to determine what columns to pivot horizontally
+* And of course the [`PIVOT` function]({% link docs/sql/statements/pivot.md %}) for horizontal pivoting!
 
 DuckDB's innovative syntax makes this extension possible! 
 
@@ -287,9 +245,6 @@ It uses the Excel pivoting API: `values`, `rows`, `columns`, and `filters` - han
 However, not only that, but it supports `subtotals` and `grand_totals`.
 If multiple `values` are passed in, the `values_axis` parameter allows the user to choose if each value should get its own column or its own row.
 
-> Note The only missing Excel feature I am aware of is columnar subtotals, but not even Pandas supports that!
-> And this extension is officially open to contributions now... :-)
-
 Why is this a good example of how DuckDB moves beyond traditional SQL?
 The Excel pivoting API requires dramatically different SQL syntax depending on which parameters are in use.
 If no `columns` are pivoted outward, a `GROUP BY` is all that is needed.
@@ -383,7 +338,9 @@ There is a little bit of boilerplate required, and the details of how this works
 DROP TYPE IF EXISTS columns_parameter_enum;
 
 CREATE TYPE columns_parameter_enum AS ENUM (
-    FROM build_my_enum(['business_metrics'], ['year', 'quarter'], [])
+    FROM build_my_enum(['business_metrics'],    -- table_names
+                       ['year', 'quarter'],     -- columns
+                       [])                      -- filters
 );
 
 FROM pivot_table(['business_metrics'],          -- table_names
@@ -412,25 +369,102 @@ FROM pivot_table(['business_metrics'],          -- table_names
 | Grand Total          | Grand Total   | sum(cost)    | 111     | 111     | 111     | 111     | 111     | 111     | 111     | 111     |
 | Grand Total          | Grand Total   | sum(revenue) | 111     | 222     | 333     | 444     | 555     | 666     | 777     | 888     |
 
+## How the `pivot_table` extension works
+
+The `pivot_table` extension is a collection of multiple scalar and table SQL `MACRO`s.
+This allows the logic to be modularized. 
+You can see below that the functions are used as building blocks to create more complex functions.
+This is typically difficult to do in SQL, but it is easy in DuckDB!
+
+The functions and a brief description of each follows.
+
+### Building block scalar functions
+
+* `nq`: "No quotes" - Escape semicolons in a string to prevent SQL injection
+* `sq`: "Single quotes" - Wrap a string in single quotes and escape embedded single quotes
+* `dq`: "Double quotes" - Wrap in double quotes and escape embedded double quotes
+* `nq_list`: Escape semicolons for each string in a list. Uses `nq`.
+* `sq_list`: Wrap each string in a list in single quotes. Uses `sq`.
+* `dq_list`: Wrap each string in a list in double quotes. Uses `dq`.
+* `nq_concat`: Concatenate a list of strings together with semicolon escaping. Uses `nq_list`.
+* `sq_concat`: Concatenate a list of strings together, wrapping each in single quotes. Uses `sq_list`.
+* `dq_concat`: Concatenate a list of strings together, wrapping each in double quotes. Uses `dq_list`.
+
+### Functions creating during refactoring for modularity
+
+* `totals_list`: Build up a list as a part of enabling `subtotals` and `grand_totals`. 
+* `replace_zzz`: Rename `subtotal` and `grand_total` indicators after sorting so they are more friendly. 
+
+### Core pivoting logic functions
+
+* `build_my_enum`: Determine which new columns to create when pivoting horizontally. Returns a table. See below for details.
+* `pivot_table`: Based on inputs, decide whether to call `no_columns`, `columns_values_axis_columns` or `columns_values_axis_rows`. Execute `query` on the SQL string that is generated. Returns a table. See below for details.
+    * `no_columns`: Build up the SQL string for `query` to execute when no `columns` are pivoted out.
+    * `columns_values_axis_columns`: Build up the SQL string for `query` to execute when pivoting horizontally with each entry in `values` receiving a separate column.
+    * `columns_values_axis_rows`: Build up the SQL string for `query` to execute when pivoting horizontally with each entry in `values` receiving a separate row.
+* `pivot_table_show_sql`: Return the SQL string that would have been executed by `query` for debugging purposes.
+
+### The `build_my_enum` function
+
+The first step in using the `pivot_table` extension's capabilities is to define an `ENUM` (a user-defined type) containing all of the new column names to create when pivoting horizontally called `columns_parameter_enum`.
+DuckDB's automatic `PIVOT` syntax can automatically define this, but in our case, we need 2 explicit steps.
+The reason for this is that automatic pivoting runs 2 statements behind the scenes, but a `MACRO` must only be a single statement.
+If the `columns` parameter is not in use, this step is essentially a no-op, so it can be omitted or included for consistency (recommended).
+
+The `query` and `query_table` functions only support `SELECT` statements (for security reasons), so the dynamic portion of the `ENUM` creation occurs in the function `build_my_enum`. 
+If this type of usage becomes common, features could be added to DuckDB to enable a `CREATE OR REPLACE` syntax for `ENUM` types, or possibly even temporary enums.
+That would reduce this pattern from 3 statements down to 2. 
+Please let us know!
+
+The `build_my_enum` function uses a combination of `query_table` to pull from multiple input tables, and the `query` function so that double quotes (and correct character escaping) can be completed prior to passing in the list of table names.
+It uses a similar pattern to the core `pivot_table` function: build up a SQL query as a string, then call it with `query`. 
+The SQL string is constructed using list lambda functions and the building block functions for quoting.
+
+### The `pivot_table` function
+
+At its core, the `pivot_table` function determines the SQL required to generate the desired pivot based on which parameters are in use.
+
+Since this SQL statement is a string at the end of the day, we can use a hierarchy of scalar SQL `MACRO`s rather than a single large `MACRO`. 
+This is a common traditional issue with SQL - it tends to not be very modular or reusable, but we are able to compartmentalize our logic wth DuckDB's syntax.
+
+> Note If a non-optional parameter is not in use, an empty string (`[]`) should be passed in.
+
+* `table_names`: A list of table or view names to aggregate or pivot. Multiple tables are combined with `UNION ALL BY NAME` prior to any other processing.
+* `values`: A list of aggregation metrics in the format `['aggregate_function_1(column_name_1)', 'aggregate_function_2(column_name_2)', ...]`.
+* `rows`: A list of column names to `SELECT` and `GROUP BY`.
+* `columns`: A list of column names to `PIVOT` horizontally into a separate column per value in the original column. If multiple column names are passed in, only unique combinations of data that appear in the dataset are pivoted. 
+    * Ex: If passing in a `columns` parameter like `['continent', 'country']`, only valid `continent` / `country` pairs will be included (no `Europe_Canada` column would be generated).
+* `filters`: A list of `WHERE` clause expressions to be applied to the raw dataset prior to aggregating in the format `['column_name_1 = 123', 'column_name_2 LIKE ''woot%''', ...]`. 
+    * The `filters` are combined with `AND` so all must evaluate to true for a row to be included.
+* `values_axis` (Optional): If multiple `values` are passed in, determine whether to create a separate row or column for each value. Either `rows` or `columns`, defaulting to `columns`.
+* `subtotals` (Optional): If enabled, calculate the aggregate metric at multiple levels of detail based on the `rows` parameter. Either 0 or 1, defaulting to 0. 
+* `grand_totals` (Optional): If enabled, calculate the aggregate metric across all rows in the raw data in addition to at the granularity defined by `rows`. Either 0 or 1, defaulting to 0.
+
+#### No horizontal pivoting (no `columns` in use)
+
+If not using the `columns` parameter, no columns need to be pivoted horizontally.
+As a result, a `GROUP BY` statement is used. 
+If `subtotals` are in use, the `ROLLUP` expression is used to calculate the `values` at the different levels of granularity.
+If `grand_totals` are in use, but not `subtotals`, the `GROUPING SETS` expression is used instead of `ROLLUP` to evaluate across all rows.
+
+#### Pivot horizontally, one column per metric in `values`
+
+Build up a `PIVOT` statement that will pivot out all valid combinations of raw data values within the `columns` parameter. 
+If `subtotals` or `grand_totals` are in use, make multiple copies of the input data, but replace appropriate column names in the `rows` parameter with a string constant.
+Pass all expressions in `values` to the `PIVOT` statement's `USING` clause so they each receive their own column.
+
+#### Pivot horizontally, one row per metric in `values`
+
+Build up a separate `PIVOT` statement for each metric in `values` and combine them with `UNION ALL BY NAME`. 
+If `subtotals` or `grand_totals` are in use, make multiple copies of the input data, but replace appropriate column names in the `rows` parameter with a string constant.
+
+
+
 
 <!-- 
 
-Operate on any table with query_table
+TODO: Maybe an example for each case in the pivot_table explanation?
 
-Create SQL dynamically with query 
-    Since this is really just operating on strings, we can modularize this
-    It is also safe since it does not allow DDL statements (CREATE, UPDATE, and DELETE are disallowed)
 
-Do valuable dynamic work thanks to list lambdas
-    One way to operate on user-specified columns
 
-Operate on user-specified columns with the columns expression
-
-How to create your own
-    Extension template
-    Cover the exact C++ syntax so that it isn't intimidating
-
-The pivot_table example
-    Maybe a diagram of the various functions in use and how they call each other?
-        Maybe just a list or table instead, with a quick description
-        Start with the broadest function (root function) -->
+-->
