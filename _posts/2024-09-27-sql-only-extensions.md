@@ -12,7 +12,8 @@ excerpt: "Easily create sharable extensions using only SQL macros that can apply
 SQL is not a new language.
 As a result, it has historically been missing some of the modern luxuries we take for granted.
 With version 1.1, DuckDB has launched community extensions, bringing the incredible power of a package manager to the SQL language.
-One goal for these extensions is to enable C++ libraries to be accessible through SQL across all of the languages with a DuckDB library.
+A bold goal of ours is for DuckDB to become a convenient way to wrap any C++ library, much the way that Python does today, but across any language with a DuckDB client.
+
 For extension builders, compilation and distribution are much easier.
 For the user community, installation is as simple as two commands:
 
@@ -21,7 +22,9 @@ INSTALL pivot_table FROM community;
 LOAD pivot_table;
 ```
 
-However, not all of us are C++ developers! 
+The extension can then be used in any query through SQL functions.
+
+However, **not all of us are C++ developers**! 
 Can we, as a SQL community, build up a set of SQL helper functions?
 What would it take to build these extensions with *just SQL*? 
 
@@ -43,6 +46,8 @@ They are very powerful when used in combination with other friendly SQL features
 
 Traditionally, there has been no central repository for SQL functions across databases, let alone across companies!
 DuckDB's community extensions can be that knowledge base.
+DuckDB extensions can be used across all languages with a DuckDB client, including Python, NodeJS, Java, Rust, Go, and even Webassembly (Wasm)!
+
 If you are a DuckDB fan and a SQL user, you can share your expertise back to the community with an extension.
 This post will show you how!
 No C++ knowledge is needed - just a little bit of copy/paste and GitHub Actions handles all the compilation. 
@@ -252,6 +257,8 @@ This function can operate on one or more `table_names` that are passed in as a p
 Any set of tables (or views!) will first be vertically stacked and then pivoted.
 
 ## Example Using `pivot_table`
+
+[Check out a live example using the extension in the DuckDB Wasm shell here](https://shell.duckdb.org/#queries=v0,CREATE-OR-REPLACE-TABLE-business_metrics-(-----product_line-VARCHAR%2C-product-VARCHAR%2C-year-INTEGER%2C-quarter-VARCHAR%2C-revenue-integer%2C-cost-integer-)~,INSERT-INTO-business_metrics-VALUES-----('Waterfowl-watercraft'%2C-'Duck-boats'%2C-2022%2C-'Q1'%2C-100%2C-100)%2C-----('Waterfowl-watercraft'%2C-'Duck-boats'%2C-2022%2C-'Q2'%2C-200%2C-100)%2C-----('Waterfowl-watercraft'%2C-'Duck-boats'%2C-2022%2C-'Q3'%2C-300%2C-100)%2C-----('Waterfowl-watercraft'%2C-'Duck-boats'%2C-2022%2C-'Q4'%2C-400%2C-100)%2C-----('Waterfowl-watercraft'%2C-'Duck-boats'%2C-2023%2C-'Q1'%2C-500%2C-100)%2C-----('Waterfowl-watercraft'%2C-'Duck-boats'%2C-2023%2C-'Q2'%2C-600%2C-100)%2C-----('Waterfowl-watercraft'%2C-'Duck-boats'%2C-2023%2C-'Q3'%2C-700%2C-100)%2C-----('Waterfowl-watercraft'%2C-'Duck-boats'%2C-2023%2C-'Q4'%2C-800%2C-100)%2C------('Duck-Duds'%2C-'Duck-suits'%2C-2022%2C-'Q1'%2C-10%2C-10)%2C-----('Duck-Duds'%2C-'Duck-suits'%2C-2022%2C-'Q2'%2C-20%2C-10)%2C-----('Duck-Duds'%2C-'Duck-suits'%2C-2022%2C-'Q3'%2C-30%2C-10)%2C-----('Duck-Duds'%2C-'Duck-suits'%2C-2022%2C-'Q4'%2C-40%2C-10)%2C-----('Duck-Duds'%2C-'Duck-suits'%2C-2023%2C-'Q1'%2C-50%2C-10)%2C-----('Duck-Duds'%2C-'Duck-suits'%2C-2023%2C-'Q2'%2C-60%2C-10)%2C-----('Duck-Duds'%2C-'Duck-suits'%2C-2023%2C-'Q3'%2C-70%2C-10)%2C-----('Duck-Duds'%2C-'Duck-suits'%2C-2023%2C-'Q4'%2C-80%2C-10)%2C------('Duck-Duds'%2C-'Duck-neckties'%2C-2022%2C-'Q1'%2C-1%2C-1)%2C-----('Duck-Duds'%2C-'Duck-neckties'%2C-2022%2C-'Q2'%2C-2%2C-1)%2C-----('Duck-Duds'%2C-'Duck-neckties'%2C-2022%2C-'Q3'%2C-3%2C-1)%2C-----('Duck-Duds'%2C-'Duck-neckties'%2C-2022%2C-'Q4'%2C-4%2C-1)%2C-----('Duck-Duds'%2C-'Duck-neckties'%2C-2023%2C-'Q1'%2C-5%2C-1)%2C-----('Duck-Duds'%2C-'Duck-neckties'%2C-2023%2C-'Q2'%2C-6%2C-1)%2C-----('Duck-Duds'%2C-'Duck-neckties'%2C-2023%2C-'Q3'%2C-7%2C-1)%2C-----('Duck-Duds'%2C-'Duck-neckties'%2C-2023%2C-'Q4'%2C-8%2C-1)%2C~,FROM-business_metrics~,INSTALL-pivot_table-from-community~,LOAD-'https%3A%2F%2Fcommunity extensions.duckdb.org%2Fv1.1.1%2Fwasm_eh%2Fpivot_table.duckdb_extension.wasm'~,DROP-TYPE-IF-EXISTS-columns_parameter_enum~,CREATE-TYPE-columns_parameter_enum-AS-ENUM-(FROM-build_my_enum(['business_metrics']%2C-['year'%2C-'quarter']%2C-[]))~,FROM-pivot_table(['business_metrics']%2C['sum(revenue)'%2C-'sum(cost)']%2C-['product_line'%2C-'product']%2C-['year'%2C-'quarter']%2C-[]%2C-subtotals-%3A%3D-1%2C-grand_totals-%3A%3D-1%2C-values_axis-%3A%3D-'rows')~)!
 
 <details markdown='1'>
 <summary markdown='span'>
