@@ -88,7 +88,7 @@ Let's walk through the steps to creating your own SQL-only extension.
 
 #### Extension Setup
 
-The first step is to create your own GitHub repo from the [DuckDB Extension Template](https://github.com/duckdb/extension-template) by clicking `Use this template`. 
+The first step is to create your own GitHub repo from the [DuckDB Extension Template for SQL](https://github.com/duckdb/extension-template-sql) by clicking `Use this template`. 
 
 Then clone your new repository onto your local machine using the terminal:
 ```sh
