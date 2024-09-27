@@ -43,7 +43,7 @@ INSERT INTO business_metrics VALUES
 FROM business_metrics;
 
 INSTALL pivot_table from community;
-LOAD 'https://community-extensions.duckdb.org/v1.1.1/wasm_eh/pivot_table.duckdb_extension.wasm';
+LOAD 'pivot_table';
 
 DROP TYPE IF EXISTS columns_parameter_enum;
 
