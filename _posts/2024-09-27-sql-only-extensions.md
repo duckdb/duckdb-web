@@ -271,7 +271,12 @@ Any set of tables (or views!) will first be vertically stacked and then pivoted.
 
 ```sql
 CREATE OR REPLACE TABLE business_metrics (
-    product_line VARCHAR, product VARCHAR, year INTEGER, quarter VARCHAR, revenue integer, cost integer
+    product_line VARCHAR,
+    product VARCHAR,
+    year INTEGER,
+    quarter VARCHAR,
+    revenue INTEGER,
+    cost INTEGER
 );
 
 INSERT INTO business_metrics VALUES
