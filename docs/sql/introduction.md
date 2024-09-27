@@ -122,7 +122,7 @@ FROM weather;
 The output should be:
 
 |     city      | temp_lo | temp_hi | prcp |    date    |
-|---------------|---------|---------|------|------------|
+|---------------|--------:|--------:|-----:|------------|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
 | Hayward       | 37      | 54      | NULL | 1994-11-29 |
@@ -137,7 +137,7 @@ FROM weather;
 This should give:
 
 |     city      | temp_avg |    date    |
-|---------------|----------|------------|
+|---------------|---------:|------------|
 | San Francisco | 48.0     | 1994-11-27 |
 | San Francisco | 50.0     | 1994-11-29 |
 | Hayward       | 45.5     | 1994-11-29 |
@@ -156,7 +156,7 @@ WHERE city = 'San Francisco'
 Result:
 
 |     city      | temp_lo | temp_hi | prcp |    date    |
-|---------------|---------|---------|------|------------|
+|---------------|--------:|--------:|-----:|------------|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 
 You can request that the results of a query be returned in sorted order:
@@ -168,10 +168,10 @@ ORDER BY city;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |
-|---------------|---------|---------|------|------------|
+|---------------|--------:|--------:|-----:|------------|
 | Hayward       | 37      | 54      | NULL | 1994-11-29 |
-| San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
+| San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 
 In this example, the sort order isn't fully specified, and so you might get the San Francisco rows in either order. But you'd always get the results shown above if you do:
 
@@ -214,7 +214,7 @@ WHERE city = name;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |     name      |   lat    |  lon   |
-|---------------|---------|---------|------|------------|---------------|----------|--------|
+|---------------|--------:|--------:|-----:|------------|---------------|---------:|-------:|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 | San Francisco | -194.000 | 53.000 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 | San Francisco | -194.000 | 53.000 |
 
@@ -230,7 +230,7 @@ WHERE city = name;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |  lon   |   lat    |
-|---------------|---------|---------|------|------------|--------|----------|
+|---------------|--------:|--------:|-----:|------------|-------:|---------:|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 | 53.000 | -194.000 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 | 53.000 | -194.000 |
 
@@ -264,7 +264,7 @@ LEFT OUTER JOIN cities ON weather.city = cities.name;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |     name      |   lat    |  lon   |
-|---------------|---------|---------|------|------------|---------------|----------|--------|
+|---------------|--------:|--------:|-----:|------------|---------------|---------:|-------:|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 | San Francisco | -194.000 | 53.000 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 | San Francisco | -194.000 | 53.000 |
 | Hayward       | 37      | 54      | NULL | 1994-11-29 | NULL          | NULL     | NULL   |
@@ -283,7 +283,7 @@ FROM weather;
 ```
 
 | max(temp_lo) |
-|--------------|
+|-------------:|
 | 46           |
 
 If we wanted to know what city (or cities) that reading occurred in, we might try:
@@ -331,7 +331,7 @@ HAVING max(temp_lo) < 40;
 ```
 
 |  city   | max(temp_lo) |
-|---------|--------------|
+|---------|-------------:|
 | Hayward | 37           |
 
 which gives us the same results for only the cities that have all `temp_lo` values below 40. Finally, if we only care about cities whose names begin with `S`, we can use the `LIKE` operator:
@@ -390,9 +390,9 @@ FROM weather;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |
-|---------------|---------|---------|------|------------|
+|---------------|--------:|--------:|-----:|------------|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
-| San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
+| San Francisco | 41      | 55      | 0.0  | 1994-11-29 |
 
 One should be cautious when issuing statements of the following form:
 
