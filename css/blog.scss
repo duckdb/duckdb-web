@@ -270,7 +270,7 @@ h1, h2, h3, h4, h5{
 			
 			.toc_sidebar{
 				background: rgb(255, 255, 255);
-				position: absolute;
+				position: fixed;
 				top: 0px;
 				right: 0;
 				width: 22vw;
@@ -279,10 +279,7 @@ h1, h2, h3, h4, h5{
 				  @media only screen and (max-width: 1280px) {
 					display: none;
 				}
-				
 				.toc_menu{
-					position: fixed;
-					top: 100px;
 					height: calc(100vh - 100px);
 					overflow: auto;
 					-ms-overflow-style: none; 
@@ -569,7 +566,7 @@ footer{
 			font-size: 14px;
 			.author{
 				font-weight: 600;
-				}
+			}
 		}
 		p{
 			font-size: 15px;
@@ -580,21 +577,30 @@ footer{
 		h2 {
 			font-size: 25px;
 			line-height: 28px;
-				margin-top: 35px;
-				margin-bottom: 20px;
+			margin-top: 35px;
+			margin-bottom: 20px;
+		}
+		h3 {
+			font-size: 20px;
+			line-height: 1.2;
+			margin-top: 35px;
+			margin-bottom: 20px;
+		}
+		h2 + h3{
+			margin-top: 0px;
 		}
 		ul li{
 			font-size: 15px;
 			line-height: 23px;
 		}
 		ul li ul {
-				margin-top: 0px;
-			}
+			margin-top: 0px;
+		}
 	}
 
 	code, pre{
 		font-size: 14px;
-			line-height: 1.5em;
+		line-height: 1.5em;
 	}
 	
 	.newswrap .postwrap .post-list h1,
