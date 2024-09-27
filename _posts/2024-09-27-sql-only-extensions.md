@@ -45,7 +45,7 @@ They are very powerful when used in combination with other friendly SQL features
 
 Traditionally, there has been no central repository for SQL functions across databases, let alone across companies!
 DuckDB's community extensions can be that knowledge base.
-DuckDB extensions can be used across all languages with a DuckDB client, including Python, NodeJS, Java, Rust, Go, and even Webassembly (Wasm)!
+DuckDB extensions can be used across all languages with a DuckDB client, including Python, NodeJS, Java, Rust, Go, and even WebAssembly (Wasm)!
 
 If you are a DuckDB fan and a SQL user, you can share your expertise back to the community with an extension.
 This post will show you how!
