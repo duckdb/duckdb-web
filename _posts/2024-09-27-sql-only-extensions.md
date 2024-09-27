@@ -24,7 +24,7 @@ The extension can then be used in any query through SQL functions.
 
 However, **not all of us are C++ developers**!
 Can we, as a SQL community, build up a set of SQL helper functions?
-What would it take to build these extensions with *just SQL*?
+What would it take to build these extensions with *just SQL?*
 
 ### Reusability
 
@@ -49,7 +49,7 @@ DuckDB extensions can be used across all languages with a DuckDB client, includi
 
 If you are a DuckDB fan and a SQL user, you can share your expertise back to the community with an extension.
 This post will show you how!
-No C++ knowledge is needed - just a little bit of copy/paste and GitHub Actions handles all the compilation. 
+No C++ knowledge is needed – just a little bit of copy/paste and GitHub Actions handles all the compilation. 
 If I can do it, you can do it!
 
 ### Powerful SQL
@@ -93,12 +93,12 @@ Let's walk through the steps to creating your own SQL-only extension.
 
 #### Extension Setup
 
-The first step is to create your own GitHub repo from the [DuckDB Extension Template for SQL](https://github.com/duckdb/extension-template-sql) by clicking `Use this template`.
+The first step is to create your own GitHub repo from the [DuckDB Extension Template for SQL](https://github.com/duckdb/extension-template-sql) by clicking _Use this template._
 
 Then clone your new repository onto your local machine using the terminal:
 
 ```batch
-git clone --recurse-submodules https://github.com/<you>/<your-new-extension-repo>.git
+git clone --recurse-submodules https://github.com/⟨you⟩/⟨your-new-extension-repo⟩.git
 ```
 
 Note that `--recurse-submodules` will ensure DuckDB is pulled which is required to build the extension.
@@ -109,7 +109,7 @@ Next, replace the name of the example extension with the name of your extension 
 > This script doesn't require any libraries, so Python is all you need! (No need to set up any environments.)
 
 ```python
-python3 ./scripts/bootstrap-template.py <extension_name_you_want>
+python3 ./scripts/bootstrap-template.py ⟨extension_name_you_want⟩
 ```
 
 #### Initial Extension Test
@@ -157,7 +157,7 @@ FROM select_distinct_columns_from_table('duckdb_types', ['type_category']);
 Technically, this is the C++ part, but we are going to do some copy/paste and use GitHub Actions for compiling so it won't feel that way!
 
 DuckDB supports both scalar and table macros, and they have slightly different syntax.
-The extension template has an example for each (and code comments too!) inside the file named `<your_extension_name>.cpp`.
+The extension template has an example for each (and code comments too!) inside the file named `⟨your_extension_name⟩.cpp`.
 Let's add a table macro here since it is the more complex one.
 We will copy the example and modify it!
 
@@ -188,7 +188,7 @@ All we had to provide were the name of the function, the names of the parameters
 
 ### Testing the Extension
 
-We also recommend adding some tests for your extension to the `<your_extension_name>.test` file.
+We also recommend adding some tests for your extension to the `⟨your_extension_name⟩.test` file.
 This uses [sqllogictest]({% link docs/dev/sqllogictest/intro.md %}) to test with just SQL!
 Let's add the example from above.
 
@@ -244,7 +244,7 @@ Now let's have a look at the `pivot_table` extension as an example of just how p
 ## Capabilities of the `pivot_table` Extension
 
 The `pivot_table` extension supports advanced pivoting functionality that was previously only available in spreadsheets, dataframe libraries, or custom host language functions.
-It uses the Excel pivoting API: `values`, `rows`, `columns`, and `filters` - handling 0 or more of each of those parameters.
+It uses the Excel pivoting API: `values`, `rows`, `columns`, and `filters` – handling 0 or more of each of those parameters.
 However, not only that, but it supports `subtotals` and `grand_totals`.
 If multiple `values` are passed in, the `values_axis` parameter allows the user to choose if each value should get its own column or its own row.
 
@@ -273,6 +273,7 @@ Any set of tables (or views!) will first be vertically stacked and then pivoted.
 CREATE OR REPLACE TABLE business_metrics (
     product_line VARCHAR, product VARCHAR, year INTEGER, quarter VARCHAR, revenue integer, cost integer
 );
+
 INSERT INTO business_metrics VALUES
     ('Waterfowl watercraft', 'Duck boats', 2022, 'Q1', 100, 100),
     ('Waterfowl watercraft', 'Duck boats', 2022, 'Q2', 200, 100),
@@ -378,20 +379,20 @@ FROM pivot_table(['business_metrics'],          -- table_names
 | Grand Total          | Grand Total   | sum(cost)    | 111     | 111     | 111     | 111     | 111     | 111     | 111     | 111     |
 | Grand Total          | Grand Total   | sum(revenue) | 111     | 222     | 333     | 444     | 555     | 666     | 777     | 888     |
 
-## How the `pivot_table` extension works
+## How the `pivot_table` Extension Works
 
 The `pivot_table` extension is a collection of multiple scalar and table SQL macros.
-This allows the logic to be modularized. 
+This allows the logic to be modularized.
 You can see below that the functions are used as building blocks to create more complex functions.
 This is typically difficult to do in SQL, but it is easy in DuckDB!
 
 The functions and a brief description of each follows.
 
-### Building block scalar functions
+### Building Block Scalar Functions
 
-* `nq`: "No quotes" - Escape semicolons in a string to prevent SQL injection
-* `sq`: "Single quotes" - Wrap a string in single quotes and escape embedded single quotes
-* `dq`: "Double quotes" - Wrap in double quotes and escape embedded double quotes
+* `nq`: “No quotes” – Escape semicolons in a string to prevent SQL injection
+* `sq`: “Single quotes” – Wrap a string in single quotes and escape embedded single quotes
+* `dq`: “Double quotes” – Wrap in double quotes and escape embedded double quotes
 * `nq_list`: Escape semicolons for each string in a list. Uses `nq`.
 * `sq_list`: Wrap each string in a list in single quotes. Uses `sq`.
 * `dq_list`: Wrap each string in a list in double quotes. Uses `dq`.
@@ -399,12 +400,12 @@ The functions and a brief description of each follows.
 * `sq_concat`: Concatenate a list of strings together, wrapping each in single quotes. Uses `sq_list`.
 * `dq_concat`: Concatenate a list of strings together, wrapping each in double quotes. Uses `dq_list`.
 
-### Functions creating during refactoring for modularity
+### Functions Creating During Refactoring for Modularity
 
 * `totals_list`: Build up a list as a part of enabling `subtotals` and `grand_totals`.
 * `replace_zzz`: Rename `subtotal` and `grand_total` indicators after sorting so they are more friendly.
 
-### Core pivoting logic functions
+### Core Pivoting Logic Functions
 
 * `build_my_enum`: Determine which new columns to create when pivoting horizontally. Returns a table. See below for details.
 * `pivot_table`: Based on inputs, decide whether to call `no_columns`, `columns_values_axis_columns` or `columns_values_axis_rows`. Execute `query` on the SQL string that is generated. Returns a table. See below for details.
@@ -413,7 +414,7 @@ The functions and a brief description of each follows.
     * `columns_values_axis_rows`: Build up the SQL string for `query` to execute when pivoting horizontally with each entry in `values` receiving a separate row.
 * `pivot_table_show_sql`: Return the SQL string that would have been executed by `query` for debugging purposes.
 
-### The `build_my_enum` function
+### The `build_my_enum` Function
 
 The first step in using the `pivot_table` extension's capabilities is to define an `ENUM` (a user-defined type) containing all of the new column names to create when pivoting horizontally called `columns_parameter_enum`.
 DuckDB's automatic `PIVOT` syntax can automatically define this, but in our case, we need 2 explicit steps.
@@ -429,12 +430,12 @@ The `build_my_enum` function uses a combination of `query_table` to pull from mu
 It uses a similar pattern to the core `pivot_table` function: build up a SQL query as a string, then call it with `query`.
 The SQL string is constructed using list lambda functions and the building block functions for quoting.
 
-### The `pivot_table` function
+### The `pivot_table` Function
 
 At its core, the `pivot_table` function determines the SQL required to generate the desired pivot based on which parameters are in use.
 
 Since this SQL statement is a string at the end of the day, we can use a hierarchy of scalar SQL macros rather than a single large macro.
-This is a common traditional issue with SQL - it tends to not be very modular or reusable, but we are able to compartmentalize our logic wth DuckDB's syntax.
+This is a common traditional issue with SQL – it tends to not be very modular or reusable, but we are able to compartmentalize our logic wth DuckDB's syntax.
 
 > Note If a non-optional parameter is not in use, an empty string (`[]`) should be passed in.
 
@@ -450,7 +451,7 @@ This is a common traditional issue with SQL - it tends to not be very modular or
 * `subtotals` (Optional): If enabled, calculate the aggregate metric at multiple levels of detail based on the `rows` parameter. Either 0 or 1, defaulting to 0.
 * `grand_totals` (Optional): If enabled, calculate the aggregate metric across all rows in the raw data in addition to at the granularity defined by `rows`. Either 0 or 1, defaulting to 0.
 
-#### No horizontal pivoting (no `columns` in use)
+#### No Horizontal Pivoting (No `columns` in Use)
 
 If not using the `columns` parameter, no columns need to be pivoted horizontally.
 As a result, a `GROUP BY` statement is used.
@@ -480,7 +481,7 @@ FROM pivot_table(['business_metrics'],
 | Waterfowl watercraft | Subtotal      | 3600         | 800         |
 | Grand Total          | Grand Total   | 3996         | 888         |
 
-#### Pivot horizontally, one column per metric in `values`
+#### Pivot Horizontally, One Column per Metric in `values`
 
 Build up a `PIVOT` statement that will pivot out all valid combinations of raw data values within the `columns` parameter. 
 If `subtotals` or `grand_totals` are in use, make multiple copies of the input data, but replace appropriate column names in the `rows` parameter with a string constant.
@@ -517,7 +518,7 @@ FROM pivot_table(['business_metrics'],
 | Waterfowl watercraft | Subtotal      | 1000              | 400              | 2600              | 400              |
 | Grand Total          | Grand Total   | 1110              | 444              | 2886              | 444              |
 
-#### Pivot horizontally, one row per metric in `values`
+#### Pivot Horizontally, One Row per Metric in `values`
 
 Build up a separate `PIVOT` statement for each metric in `values` and combine them with `UNION ALL BY NAME`. 
 If `subtotals` or `grand_totals` are in use, make multiple copies of the input data, but replace appropriate column names in the `rows` parameter with a string constant.
@@ -565,7 +566,7 @@ With DuckDB 1.1, sharing your SQL knowledge with the community has never been ea
 DuckDB's community extension repository is truly a package manager for the SQL language.
 Macros in DuckDB are now highly reusable (thanks to `query` and `query_table`), and DuckDB's SQL syntax provides plenty of power to accomplish complex tasks.
 
-Please let us know if the `pivot_table` extension is helpful to you - we are open to both contributions and feature requests!
+Please let us know if the `pivot_table` extension is helpful to you – we are open to both contributions and feature requests!
 Together we can write the ultimate pivoting capability just once and use it everywhere.
 
 In the future, we have plans to further simplify the creation of SQL extensions.
