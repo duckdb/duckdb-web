@@ -436,7 +436,7 @@ At its core, the `pivot_table` function determines the SQL required to generate 
 Since this SQL statement is a string at the end of the day, we can use a hierarchy of scalar SQL macros rather than a single large macro.
 This is a common traditional issue with SQL - it tends to not be very modular or reusable, but we are able to compartmentalize our logic wth DuckDB's syntax.
 
-> Note If a non-optional parameter is not in use, an empty string (`[]`) should be passed in.
+> Note If a non-optional parameter is not in use, an empty list (`[]`) should be passed in.
 
 * `table_names`: A list of table or view names to aggregate or pivot. Multiple tables are combined with `UNION ALL BY NAME` prior to any other processing.
 * `values`: A list of aggregation metrics in the format `['agg_fn_1(col_1)', 'agg_fn_2(col_2)', ...]`.
