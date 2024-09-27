@@ -88,11 +88,18 @@ pagehead:
 			</ul>
 		</div>
 		{% endif %}
-
+		
+		{% if site.data.supporters.technical %}
 		<h3 id="technical-sponsors">Technical Sponsors</h3>
-		<p>
-			DuckDB's website and extensions are served through <a href="https://www.cloudflare.com/">Cloudflare</a>, graciously supported by their <a href="https://developers.cloudflare.com/sponsorships/">open-source sponsorship program</a>.
-		</p>
+		<div class="supporterboard technical">
+			<ul>
+				{% for supporter in site.data.supporters.technical %}
+				<li><a href="{{ supporter.url }}"><img src="{{ '/images/foundation/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></a></li>
+				{% endfor %} 
+			</ul>
+		</div>
+		{% endif %}
+
 	</div>
 </section>
 
