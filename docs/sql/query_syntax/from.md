@@ -274,7 +274,7 @@ Semi joins return rows from the left table that have at least one match in the r
 Anti joins return rows from the left table that have _no_ matches in the right table.
 When using a semi or anti join the result will never have more rows than the left hand side table.
 Semi joins provide the same logic as [`IN`]({% link docs/sql/expressions/in.md %}) statements.
-Anti joins provide the same logic as `NOT IN` statements, except anti joins ignore NULL values from the right table.
+Anti joins provide the same logic as `NOT IN` statements, except anti joins ignore `NULL` values from the right table.
 
 #### Semi Join Example
 
