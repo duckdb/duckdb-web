@@ -1410,12 +1410,16 @@
               "slug": "footprint_of_duckdb",
               "subsubfolderitems": [
                 {
-                "page": "Files Created by DuckDB",
-                "url": "files_created_by_duckdb"
+                  "page": "Files Created by DuckDB",
+                  "url": "files_created_by_duckdb"
                 },
                 {
                   "page": "Gitignore for DuckDB",
                   "url": "gitignore_for_duckdb"
+                },
+                {
+                  "page": "Reclaiming Space",
+                  "url": "reclaiming_space"
                 }
               ]
             },

@@ -180,3 +180,9 @@ LINE 1: SELECT 1 == 1 AS t;
 ```
 
 Note that the use of `==` is not encouraged due to its limited portability.
+
+## Vacuuming tables
+
+In PostgreSQL, the `VACUUM` statement garbage collects tables and analyzes tables.
+In DuckDB, the [`VACUUM` statement]({% link docs/sql/statements/vacuum.md %}) is only used to rebuild statistics.
+For instruction on reclaiming space, refer to the [“Reclaiming space” page]({% link docs/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).
