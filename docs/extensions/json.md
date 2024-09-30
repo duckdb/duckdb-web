@@ -457,7 +457,7 @@ SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
 ## JSON Extraction Functions
 
 There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the `JSON` logical type.
-These functions supports the same two location notations as the previous functions.
+These functions supports the same two location notations as [JSON Scalar functions](#json-scalar-functions).
 
 | Function | Alias | Operator | Description |
 |:---|:---|:-|
