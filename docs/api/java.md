@@ -204,8 +204,9 @@ import java.sql.Statement;
 import org.duckdb.DuckDBConnection;
 
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
-Statement stmt = conn.createStatement();
-stmt.execute("CREATE TABLE tbl (x BIGINT, y FLOAT, s VARCHAR)");
+try (var stmt = conn.createStatement()) {
+    stmt.execute("CREATE TABLE tbl (x BIGINT, y FLOAT, s VARCHAR)"
+);
 
 // using try-with-resources to automatically close the appender at the end of the scope
 try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl")) {
@@ -220,7 +221,6 @@ try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl"))
     appender.append("world");
     appender.endRow();
 }
-stmt.close();
 ```
 
 ### Batch Writer

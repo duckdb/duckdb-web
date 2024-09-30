@@ -8,11 +8,17 @@ github_repository: https://github.com/duckdb/duckdb-r
 
 ### `duckdb`: R API
 
-The DuckDB R API can be installed using `install.packages("duckdb")`. Please see the [installation page]({% link docs/installation/index.html %}?environment=r) for details.
+The DuckDB R API can be installed using the following command:
+
+```r
+install.packages("duckdb")
+```
+
+Please see the [installation page]({% link docs/installation/index.html %}?environment=r) for details.
 
 ### `duckplyr`: dplyr API
 
-DuckDB offers a [dplyr](https://dplyr.tidyverse.org/)-compatible API via the `duckplyr` package. It can be installed using `install.packages("duckplyr")`. For details, see the [`duckplyr` documentation](https://duckdblabs.github.io/duckplyr/).
+DuckDB offers a [dplyr](https://dplyr.tidyverse.org/)-compatible API via the `duckplyr` package. It can be installed using `install.packages("duckplyr")`. For details, see the [`duckplyr` documentation](https://tidyverse.github.io/duckplyr/).
 
 ## Reference Manual
 
@@ -91,7 +97,7 @@ print(res)
 # 1          5.1         3.5          1.4         0.2  setosa
 ```
 
-It is also possible to "register" a R data frame as a virtual table, comparable to a SQL `VIEW`. This *does not actually transfer data* into DuckDB yet. Below is an example:
+It is also possible to “register” a R data frame as a virtual table, comparable to a SQL `VIEW`. This *does not actually transfer data* into DuckDB yet. Below is an example:
 
 ```r
 duckdb_register(con, "iris_view", iris)
@@ -155,3 +161,27 @@ SET memory_limit = '2GB';
 
 Note that this limit is only applied to the memory DuckDB uses and it does not affect the memory use of other R libraries.
 Therefore, the total memory used by the R process may be higher than the configured `memory_limit`.
+
+## Troubleshooting
+
+### Warning When Installing on macOS
+
+On macOS, installing DuckDB may result in a warning `unable to load shared object '.../R_X11.so'`:
+
+```console
+Warning message:
+In doTryCatch(return(expr), name, parentenv, handler) :
+  unable to load shared object '/Library/Frameworks/R.framework/Resources/modules//R_X11.so':
+  dlopen(/Library/Frameworks/R.framework/Resources/modules//R_X11.so, 0x0006): Library not loaded: /opt/X11/lib/libSM.6.dylib
+  Referenced from: <31EADEB5-0A17-3546-9944-9B3747071FE8> /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/modules/R_X11.so
+  Reason: tried: '/opt/X11/lib/libSM.6.dylib' (no such file) ...
+> ')
+```
+
+Note that this is just a warning, so the simplest solution is to ignore it. Alternatively, you can install DuckDB from the [R-universe](https://r-universe.dev/search):
+
+```R
+install.packages("duckdb", repos = c("https://duckdb.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+You may also install the optional [`xquartz` dependency via Homebrew](https://formulae.brew.sh/cask/xquartz).

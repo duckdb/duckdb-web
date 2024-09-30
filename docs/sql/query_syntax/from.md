@@ -83,7 +83,8 @@ Join two tables together:
 ```sql
 SELECT *
 FROM table_name
-JOIN other_table ON (table_name.key = other_table.key);
+JOIN other_table
+  ON table_name.key = other_table.key;
 ```
 
 Select a 10% sample from a table:
@@ -223,13 +224,22 @@ WHERE s1.time > s2.time
 
 ### Natural Joins
 
-Natural joins join two tables based on attributes that share the same name. For example:
+Natural joins join two tables based on attributes that share the same name.
+
+For example, take the following example with cities, airport codes and airport names. Note that both tables are intentionally incomplete, i.e., they do not have a matching pair in the other table.
 
 ```sql
-CREATE TABLE city_airport ("city" VARCHAR, "IATA" VARCHAR);
-CREATE TABLE airport_names ("IATA" VARCHAR, "airport name" VARCHAR);
-INSERT INTO city_airport VALUES ('Amsterdam', 'AMS'), ('Rotterdam', 'RTM');
-INSERT INTO airport_names VALUES ('AMS', 'Amsterdam Airport Schiphol'), ('RTM', 'Rotterdam The Hague Airport');
+CREATE TABLE city_airport (city_name VARCHAR, iata VARCHAR);
+CREATE TABLE airport_names (iata VARCHAR, airport_name VARCHAR);
+INSERT INTO city_airport VALUES
+    ('Amsterdam', 'AMS'),
+    ('Rotterdam', 'RTM'),
+    ('Eindhoven', 'EIN'),
+    ('Groningen', 'GRQ');
+INSERT INTO airport_names VALUES
+    ('AMS', 'Amsterdam Airport Schiphol'),
+    ('RTM', 'Rotterdam The Hague Airport'),
+    ('MST', 'Maastricht Aachen Airport');
 ```
 
 To join the tables on their shared [`IATA`](https://en.wikipedia.org/wiki/IATA_airport_code) attributes, run:
@@ -242,31 +252,76 @@ NATURAL JOIN airport_names;
 
 This produces the following result:
 
-|   city    | ICAO |        airport name         |
+| city_name | iata |        airport_name         |
 |-----------|------|-----------------------------|
 | Amsterdam | AMS  | Amsterdam Airport Schiphol  |
 | Rotterdam | RTM  | Rotterdam The Hague Airport |
 
-### Semi and Anti Joins
+Note that only rows where the same `iata` attribute was present in both tables were included in the result.
 
-Semi joins return rows from the left table that have at least one match in the right table. Anti joins return rows from the left table that have _no_ matches in the right table. When using a semi or anti join the result will never have more rows than the left hand side table. Semi and anti joins provide the same logic as [`(NOT) IN`]({% link docs/sql/expressions/in.md %}) statements.
-
-Return a list of cars that have a valid region:
+We can also express query using the vanilla `JOIN` clause with the `USING` keyword:
 
 ```sql
-SELECT cars.name, cars.manufacturer
-FROM cars
-SEMI JOIN region
-       ON cars.region = region.id;
+SELECT *
+FROM city_airport
+JOIN airport_names
+USING (iata);
 ```
 
-Return a list of cars with no recorded safety data:
+### Semi and Anti Joins
+
+Semi joins return rows from the left table that have at least one match in the right table.
+Anti joins return rows from the left table that have _no_ matches in the right table.
+When using a semi or anti join the result will never have more rows than the left hand side table.
+Semi joins provide the same logic as [`IN`]({% link docs/sql/expressions/in.md %}) statements.
+Anti joins provide the same logic as `NOT IN` statements, except anti joins ignore `NULL` values from the right table.
+
+#### Semi Join Example
+
+Return a list of city–airport code pairs from the `city_airport` table where the airport name **is available** in the `airport_names` table:
 
 ```sql
-SELECT cars.name, cars.manufacturer
-FROM cars
-ANTI JOIN safety_data
-       ON cars.safety_report_id = safety_data.report_id;
+SELECT *
+FROM city_airport
+SEMI JOIN airport_names
+    USING (iata);
+```
+
+| city_name | iata |
+|-----------|------|
+| Amsterdam | AMS  |
+| Rotterdam | RTM  |
+
+This query is equivalent with:
+
+```sql
+SELECT *
+FROM city_airport
+WHERE iata IN (SELECT iata FROM airport_names);
+```
+
+#### Anti Join Example
+
+Return a list of city–airport code pairs from the `city_airport` table where the airport name **is not available** in the `airport_names` table:
+
+```sql
+SELECT *
+FROM city_airport
+ANTI JOIN airport_names
+    USING (iata);
+```
+
+| city_name | iata |
+|-----------|------|
+| Eindhoven | EIN  |
+| Groningen | GRQ  |
+
+This query is equivalent with:
+
+```sql
+SELECT *
+FROM city_airport
+WHERE iata NOT IN (SELECT iata FROM airport_names WHERE iata IS NOT NULL);
 ```
 
 ### Lateral Joins

@@ -3,7 +3,7 @@ layout: docu
 title: Map Type
 ---
 
-`MAP`s are similar to `STRUCT`s in that they are an ordered list of "entries" where a key maps to a value. However, `MAP`s do not need to have the same keys present for each row, and thus are suitable for other use cases. `MAP`s are useful when the schema is unknown beforehand or when the schema varies per row; their flexibility is a key differentiator.
+`MAP`s are similar to `STRUCT`s in that they are an ordered list of “entries” where a key maps to a value. However, `MAP`s do not need to have the same keys present for each row, and thus are suitable for other use cases. `MAP`s are useful when the schema is unknown beforehand or when the schema varies per row; their flexibility is a key differentiator.
 
 `MAP`s must have a single type for all keys, and a single type for all values. Keys and values can be any type, and the type of the keys does not need to match the type of the values (Ex: a `MAP` of `VARCHAR` to `INT` is valid). `MAP`s may not have duplicate keys. `MAP`s return an empty list if a key is not found rather than throwing an error as structs do.
 
@@ -93,4 +93,4 @@ and a `NULL` nested value member will compare above a non-`NULL` nested value me
 
 ## Functions
 
-See [Nested Functions]({% link docs/sql/functions/nested.md %}).
+See [Map Functions]({% link docs/sql/functions/map.md %}).

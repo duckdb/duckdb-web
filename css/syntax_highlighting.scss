@@ -11,18 +11,19 @@
 	font-family: $fontMonoItalic;
 }
 
-// keywords and properties
+// keywords
 .highlight :is(.k, .kc, .kd, .kn, .kr, .kt, .kv){
 	color: #0098dd;
 	font-family: $fontMonoBold;
 }
 
+// properties
 .highlight :is(.py) {
 	color: #a05a48;
 }
 
 // numbers
-.highlight :is(.m, .mf, .mh, .mi, .mo, .il){
+.highlight :is(.m, .mf, .mh, .mi, .mo, .il, .n, .vg){
 	color: #ce33c0;
 }
 
@@ -83,11 +84,6 @@ th .k {
 }
 
 // ??
-.highlight :is(.n, .vg){
-	color: #383a42;
-}
-
-// ??
 .highlight :is(.gh, .gp){
 }
 
@@ -107,6 +103,7 @@ th .k {
 	color: #ce9887;
 }
 
+html.darkmode, 
 .dark{
 	// comments
 	.highlight :is(.c, .ch, .cm, .cp, .cpf, .cs, .c1){
@@ -119,9 +116,14 @@ th .k {
 		color: #10b1fe;
 		font-family: $fontMonoBold;
 	}
-	
+
+	// properties
+	.highlight :is(.py){
+		color: #ce9887;
+	}
+
 	// numbers
-	.highlight :is(.m, .mf, .mh, .mi, .mo, .il){
+	.highlight :is(.m, .mf, .mh, .mi, .mo, .il, .n, .vg){
 		color: #ff78f8;
 	}
 	
@@ -171,11 +173,6 @@ th .k {
 	// background
 	.highlight {
 		background-color :#282c34;
-	}
-	
-	// ??
-	.highlight :is(.n, .vg){
-		color: #ff78f8;
 	}
 	
 	// ??

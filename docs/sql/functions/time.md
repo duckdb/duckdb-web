@@ -3,6 +3,8 @@ layout: docu
 title: Time Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 This section describes functions and operators for examining and manipulating [`TIME` values]({% link docs/sql/data_types/time.md %}).
 
 ## Time Operators

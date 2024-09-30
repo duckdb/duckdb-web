@@ -3,10 +3,15 @@ layout: docu
 title: Map Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 | Name | Description |
 |:--|:-------|
 | [`cardinality(map)`](#cardinalitymap) | Return the size of the map (or the number of entries in the map). |
 | [`element_at(map, key)`](#element_atmap-key) | Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
+| [`map_contains(map, key)`](#map_containsmap-key) | Checks if a map contains a given key. |
+| [`map_contains_entry(map, key, value)`](#map_contains_entrymap-key-value) | Check if a map contains a given key-value pair. |
+| [`map_contains_value(map, value)`](#map_contains_valuemap-value) | Checks if a map contains a given value. |
 | [`map_entries(map)`](#map_entriesmap) | Return a list of struct(k, v) for each key-value pair in the map. |
 | [`map_extract(map, key)`](#map_extractmap-key) | Alias of `element_at`. Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | [`map_from_entries(STRUCT(k, v)[])`](#map_from_entriesstructk-v) | Returns a map created from the entries of the array. |
@@ -30,6 +35,30 @@ title: Map Functions
 | **Description** | Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | **Example** | `element_at(map([100, 5], [42, 43]), 100)` |
 | **Result** | `[42]` |
+
+#### `map_contains(map, key)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Checks if a map contains a given key. |
+| **Example** | `map_contains(MAP {'key1': 10, 'key2': 20, 'key3': 30}, 'key2')` |
+| **Result** | `true` |
+
+#### `map_contains_entry(map, key, value)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Check if a map contains a given key-value pair. |
+| **Example** | `map_contains_entry(MAP {'key1': 10, 'key2': 20, 'key3': 30}, 'key2', 20)` |
+| **Result** | `true` |
+
+#### `map_contains_value(map, value)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Checks if a map contains a given value. |
+| **Example** | `map_contains_value(MAP {'key1': 10, 'key2': 20, 'key3': 30}, 20)` |
+| **Result** | `true` |
 
 #### `map_entries(map)`
 

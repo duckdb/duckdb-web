@@ -5,6 +5,7 @@
 
 /** DUCKDB HOME CSS **/
 
+@use "sass:color";
 @import 'variables';
 @import 'mixins';
 
@@ -265,7 +266,7 @@ body.landing{
 	  }
 
 	  &:hover{
-		  background-color: darken($duckDByellow, 5%);
+		  background-color: color.scale($duckDByellow, $lightness: -5%);
 	  }
 	  // Custom arrow
 	  &:not(.select--multiple)::after {
@@ -491,7 +492,7 @@ body.landing{
 	}
 }
 
-@import url(syntax_highlighting.css);
+@import url(syntax_highlighting.css?123);
 
 @media only screen and (max-width: 1100px) {
 	body.landing{

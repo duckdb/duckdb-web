@@ -70,7 +70,7 @@ CREATE TEMP TABLE stacked_data AS
     ) tbl;
 ```
 
-"Pivot" the data out by year (move each year out to a separate column):
+“Pivot” the data out by year (move each year out to a separate column):
 
 ```sql
 SELECT
@@ -102,7 +102,7 @@ FROM stacked_data;
 
 However, the `CASE WHEN` approach will not work as expected when using an aggregate function that does not ignore `NULL` values. The `first` function falls into this category, so `FILTER` is preferred in this case.
 
-"Pivot" the data out by year (move each year out to a separate column):
+“Pivot” the data out by year (move each year out to a separate column):
 
 ```sql
 SELECT

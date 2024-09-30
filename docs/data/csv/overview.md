@@ -103,7 +103,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `ignore_errors` | Option to ignore any parsing errors encountered – and instead ignore rows with errors. | `BOOL` | `false` |
 | `max_line_size` | The maximum line size in bytes. | `BIGINT` | 2097152 |
 | `names` | The column names as a list, see [example]({% link docs/data/csv/tips.md %}#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
-| `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | `VARCHAR` | (empty) |
+| `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. Note that the CSV parser only distinguishes between single-character and double-character line delimiters. Therefore, it does not differentiate between `'\r'` and `'\n'`.| `VARCHAR` | (empty) |
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
 | `null_padding` | If this option is enabled, when a row lacks columns, it will pad the remaining columns on the right with null values. | `BOOL` | `false` |
 | `nullstr` | Specifies the string that represents a `NULL` value or (since v0.10.2) a list of strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
@@ -174,12 +174,6 @@ SELECT * FROM read_csv('flights.csv', header = true);
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section]({% link docs/data/multiple_files/overview.md %}) for more information.
 
-## API Changes
-
-> Deprecated DuckDB v0.10.0 introduced breaking changes to the `read_csv` function.
-> Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the old `read_csv_auto` function.
-> If you would like to use `read_csv` with its old behavior, turn off the auto-detection manually by using `read_csv(..., auto_detect = false)`.
-
 ## Writing Using the `COPY` Statement
 
 The [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy-to) can be used to load data from a CSV file into a table. This statement has the same syntax as the one used in PostgreSQL. To load the data using the `COPY` statement, we must first create a table with the correct schema (which matches the order of the columns in the CSV file and uses types that fit the values in the CSV file). `COPY` detects the CSV's configuration options automatically.
@@ -224,6 +218,7 @@ iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
 ```
 
 ## Order Preservation
+
 The CSV reader respects the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}).
 When `true` (the default), the order of the rows in the resultset returned by the CSV reader is the same as the order of the corresponding lines read from the file(s).
 When `false`, there is no guarantee that the order is preserved.

@@ -40,6 +40,9 @@ jobs:
           STAR_COUNT_FORMATTED=$(ruby -e 'printf("%.01fk", ARGV[0].to_i / 1000.0)' ${STAR_COUNT})
           echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
+          # add the update time to the index page of the documentation.
+          CURRENT_TIME=$(date +"%Y-%m-%d %H:%M:%S")
+          sed -i "s/You can also /This documentation was last updated at ${CURRENT_TIME}.\n\nYou can also /" docs/index.md
       - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Install zip
@@ -63,6 +66,8 @@ jobs:
           # create a copy of the _site directory for the offline package
           cp -r _site duckdb-docs
           echo "To browse the DuckDB website locally, run \`python -m http.server\` in this directory and connect to http://localhost:8000/" > duckdb-docs/README.md
+          # replace the necessary strings to ensure everything works properly after offline deployment.
+          python scripts/offline_docs_replace.py
           # cleanup some directories, including the old (archive) pages
           rm -rf scripts single-file-document duckdb-docs/docs/archive
           # create archive

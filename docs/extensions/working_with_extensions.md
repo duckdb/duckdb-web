@@ -6,7 +6,7 @@ title: Working with Extensions
 ## Platforms
 
 Extension binaries must be built for each platform. Pre-built binaries are distributed for several platforms (see below).
-For platforms where packages for certain extensions are not available, users can build them from source and [install the resulting binaries manually](#installing-extensions-from-an-explicit-path).
+For platforms where packages for certain extensions are not available, users can build them from source and [install the resulting binaries manually](#installing-an-extension-from-an-explicit-path).
 
 All official extensions are distributed for the following platforms.
 
@@ -28,11 +28,11 @@ Some extensions are distributed for the following platforms:
 * `windows_amd64_rtools`
 * `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/api/wasm/extensions.md %}))
 
-For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_gcc4`, `windows_amd64_mingw`).
+For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_android`, `linux_arm64_gcc4`, `windows_amd64_mingw`).
 
 ### Sharing Extensions between Clients
 
-The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.10.0 of the CLI client on macOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.10.0.
+The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platform` or ABI. For example, if an extension is installed with version 0.10.0 of the CLI client on macOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.10.0.
 
 ## Extension Repositories
 
@@ -78,7 +78,7 @@ INSTALL spatial FROM 'http://nightly-extensions.duckdb.org';
 To install an extensions from a custom repository unknown to DuckDB:
 
 ```sql
-INSTALL custom_extension FROM 'https://my-custom-extension-repository';
+INSTALL ⟨custom_extension⟩ FROM 'https://my-custom-extension-repository';
 ```
 
 Alternatively, the `custom_extension_repository` setting can be used to change the default repository used by DuckDB:
@@ -87,16 +87,17 @@ Alternatively, the `custom_extension_repository` setting can be used to change t
 SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
 ```
 
-While any url or local path can be used as a repository, currently DuckDB contains the following predefined repositories:
+While any URL or local path can be used as a repository, DuckDB currently contains the following predefined repositories:
 
-<div class="narrow_table"></div>
+<div class="narrow_tabl"></div>
 
-| Alias                 | Url                                    | Description                                                                            |
-|:----------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
-| `core`                | `http://extensions.duckdb.org`         | DuckDB core extensions                                                                 |
-| `core_nightly`        | `http://nightly-extensions.duckdb.org` | Nightly builds for `core`                                                              |
-| `local_build_debug`   | `./build/debug/repository`             | Repository created when building DuckDB from source in debug mode (for development)    |
-| `local_build_release` | `./build/release/repository`           | Repository created when building DuckDB from source in release mode (for development)  |
+| Alias                 | URL                                      | Description                                                                            |
+|:----------------------|:-----------------------------------------|:---------------------------------------------------------------------------------------|
+| `core`                | `http://extensions.duckdb.org`           | DuckDB core extensions                                                                 |
+| `core_nightly`        | `http://nightly-extensions.duckdb.org`   | Nightly builds for `core`                                                              |
+| `community`           | `http://community-extensions.duckdb.org` | DuckDB community extensions                                                            |
+| `local_build_debug`   | `./build/debug/repository`               | Repository created when building DuckDB from source in debug mode (for development)    |
+| `local_build_release` | `./build/release/repository`             | Repository created when building DuckDB from source in release mode (for development)  |
 
 ### Working with Multiple Repositories
 
@@ -109,7 +110,9 @@ INSTALL aws FROM core_nightly;
 SELECT extension_name, extension_version, installed_from, install_mode FROM duckdb_extensions();
 ```
 
-Would output:
+This outputs:
+
+<div class="narrow_table monospace_table"></div>
 
 | extensions_name | extensions_version | installed_from | install_mode |
 |:----------------|:-------------------|:---------------|:-------------|
@@ -120,7 +123,7 @@ Would output:
 ### Creating a Custom Repository
 
 A DuckDB repository is an HTTP, HTTPS, S3, or local file based directory that serves the extensions files in a specific structure.
-This structure is describe [here](#downloading-extensions-directly-from-s3), and is the same
+This structure is described in the [“Downloading Extensions Directly from S3” section](#downloading-extensions-directly-from-s3), and is the same
 for local paths and remote servers, for example:
 
 ```text
@@ -152,41 +155,9 @@ The execution of this statement will first look `icu.duckdb_extension.gz`, then 
 If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/extensions/overview.md %}#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.
 
-## Downloading Extensions Directly from S3
+## Force Installing to Upgrade Extensions
 
-Downloading an extension directly can be helpful when building a [Lambda service](https://aws.amazon.com/pm/lambda/) or container that uses DuckDB.
-DuckDB extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable.
-As a result, a direct URL to the file must be used.
-To download an extension file directly, use the following format:
-
-```text
-http://extensions.duckdb.org/v⟨duckdb_version⟩/⟨platform_name⟩/⟨extension_name⟩.duckdb_extension.gz
-```
-
-For example:
-
-```text
-http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
-```
-
-## Loading and Installing an Extension from Explicit Paths
-
-### Installing Extensions from an Explicit Path
-
-`INSTALL` can be used with the path to either a `.duckdb_extension` file.
-`.duckdb_extension.gz` files need to be decompressed before issuing `INSTALL name.duckdb_extension;`.
-
-For example, if the file was available into the same directory as where DuckDB is being executed, you can install it as follows:
-
-```sql
-INSTALL 'path/to/httpfs.duckdb_extension';
-```
-
-It is also possible to specify remote paths.
-
-## Force Installing Extensions
-
-When DuckDB installs an extension, it is copied to a local directory to be cached, avoiding any network traffic.
+When DuckDB installs an extension, it is copied to a local directory to be cached and avoid future network traffic.
 Any subsequent calls to `INSTALL ⟨extension_name⟩` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
 
 ```sql
@@ -207,7 +178,36 @@ Then, to overwrite this installation with the `spatial` extension from the `core
 FORCE INSTALL spatial FROM core_nightly;
 ```
 
-## Loading Extension from a Path
+## Alternative Approaches to Loading and Installing Extensions
+
+### Downloading Extensions Directly from S3
+
+Downloading an extension directly can be helpful when building a [Lambda service](https://aws.amazon.com/pm/lambda/) or container that uses DuckDB.
+DuckDB extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable.
+As a result, a direct URL to the file must be used.
+To download an extension file directly, use the following format:
+
+```text
+http://extensions.duckdb.org/v⟨duckdb_version⟩/⟨platform_name⟩/⟨extension_name⟩.duckdb_extension.gz
+```
+
+For example:
+
+```text
+http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
+```
+
+### Installing an Extension from an Explicit Path
+
+`INSTALL` can be used with the path to a `.duckdb_extension` file:
+
+```sql
+INSTALL 'path/to/httpfs.duckdb_extension';
+```
+
+Note that compressed `.duckdb_extension.gz` files need to be decompressed beforehand. It is also possible to specify remote paths.
+
+### Loading an Extension from an Explicit Path
 
 `LOAD` can be used with the path to a `.duckdb_extension`.
 For example, if the file was available at the (relative) path `path/to/httpfs.duckdb_extension`, you can load it as follows:
@@ -216,14 +216,32 @@ For example, if the file was available at the (relative) path `path/to/httpfs.du
 LOAD 'path/to/httpfs.duckdb_extension';
 ```
 
-This will skip any currently installed file in the specified path.
+This will skip any currently installed extensions and load the specified extension directly.
 
-Using remote paths for compressed files is currently not possible.
+Note that using remote paths for compressed files is currently not possible.
 
-## Building and Installing Extensions
+### Building and Installing Extensions from Source
 
 For building and installing extensions from source, see the [building guide]({% link docs/dev/building/build_instructions.md %}#building-and-installing-extensions-from-source).
 
-## Statically Linking Extensions
+### Statically Linking Extensions
 
-To statically link extensions, follow the [developer documentation's "Using extension config files" section](https://github.com/duckdb/duckdb/blob/main/extension/README.md#using-extension-config-files).
+To statically link extensions, follow the [developer documentation's “Using extension config files” section](https://github.com/duckdb/duckdb/blob/main/extension/README.md#using-extension-config-files).
+
+## In-Tree vs. Out-of-Tree
+
+Originally, DuckDB extensions lived exclusively in the DuckDB main repository, `github.com/duckdb/duckdb`. These extensions are called in-tree. Later, the concept
+of out-of-tree extensions was added, where extensions where separated into their own repository, which we call out-of-tree.
+
+While from a user's perspective, there are generally no noticeable differences, there are some minor differences related to versioning:
+
+* in-tree extensions use the version of DuckDB instead of having their own version
+* in-tree extensions do not have dedicated release notes, their changes are reflected in the regular [DuckDB release notes](https://github.com/duckdb/duckdb/releases)
+* core out-of tree extensions tend to live in a repository in `github.com/duckdb/duckdb_⟨ext_name⟩` but the name may vary. See the [full list]({% link docs/extensions/core_extensions.md %}) of core extensions for details.
+
+## Limitations
+
+DuckDB's extension mechanism has the following limitations:
+
+* Once loaded, an extension cannot be reinstalled.
+* Extensions cannot be unloaded.

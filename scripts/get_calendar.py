@@ -2,10 +2,18 @@ import os
 import requests
 from icalendar import Calendar
 from datetime import datetime, timedelta
+import duckdb
 import json
+import re
 
 # URL of the .ics file
 ics_url = "https://calendar.google.com/calendar/ical/c_rqj60henfnuin5klbati6g9kfg%40group.calendar.google.com/public/basic.ics"
+
+# Get old releases
+old_versions = duckdb.sql(
+    "SELECT version_number FROM '_data/past_releases.csv';"
+).fetchall()
+old_versions = [v[0] for v in old_versions]
 
 # Download .ics file
 response = requests.get(ics_url)
@@ -17,6 +25,16 @@ if response.status_code == 200:
     upcoming_events = []
     for event in cal.walk():
         dtstart = event.get("DTSTART")
+        title = event.get("SUMMARY")
+        if title is None:
+            continue
+
+        version_search = re.search("([0-9]+\\.[0-9]+\\.[0-9])", title)
+        if version_search:
+            upcoming_version = version_search.group(1)
+            if upcoming_version in old_versions:
+                continue
+
         if dtstart is not None and hasattr(dtstart, "dt"):
             dtstart_date = dtstart.dt
             if isinstance(dtstart_date, datetime):
@@ -25,7 +43,7 @@ if response.status_code == 200:
                 end_date = event.get("DTEND")
                 upcoming_events.append(
                     {
-                        "title": event.get("SUMMARY"),
+                        "title": title,
                         "start_date": (
                             dtstart_date.isoformat()
                             if hasattr(dtstart_date, "isoformat")

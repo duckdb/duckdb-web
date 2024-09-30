@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css?{{ site.data['hash'] }}">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css?{{ site.data['hash'] }}">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/darkmode.css?{{ site.data['hash'] }}">
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/railroad.css?{{ site.data['hash'] }}">
 	{% endif %}
@@ -30,6 +31,15 @@
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
 	{% seo title=false %}
+	
+	<script>
+		var userPrefersDark = localStorage.getItem('mode') === 'dark';
+		var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+		if (userPrefersDark || systemPrefersDark) {
+			document.documentElement.classList.add('darkmode');
+			document.documentElement.classList.add('disable-transitions');
+		}
+	</script>
 
 </head>
 
@@ -99,6 +109,9 @@ Page URL: <https://duckdb.org{{ page.url }}>
 
 					{% if page.url contains '/docs/' %}
 					<div class="versionselect">
+						<div class="mode" data-mode="dark">
+							<span class="icon"></span><span class="name">Dark Mode</span>
+						</div>
 						<div class="version">
 							<div><span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span><span class="arrow"></div>
 							<div class="versionsidebar">
@@ -165,9 +178,6 @@ Page URL: <https://duckdb.org{{ page.url }}>
 							<li><a href="{% github_edit_link %}" title="Go to GitHub">Edit this page on GitHub</a></li>
 						</ul>
 					</div>
-					<div>
-						<p>Last modified: {% last_modified_at %}</p>
-					</div>
 				</div>
 				{% endif %}
 				
@@ -198,14 +208,19 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}"></script>
 	<script src="{{ site.baseurl }}/js/copy_button.js?{{ site.data['hash'] }}"></script>
 	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}"></script>
-	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-		{% assign startingUrlParts = startingUrl | split: "/"  %}
-		{% if startingUrlParts[1] == "archive" %}
-			{% capture version_url %}/{{ startingUrlParts[1] }}/{{ startingUrlParts[2] }}{% endcapture %}
-		{% else %}
-			{% assign version_url = "" %}
-		{% endif %}
 
+	{% assign startingUrlParts = startingUrl | split: "/"  %}
+	{% if startingUrlParts[1] == "archive" %}
+		{% capture version_url %}/{{ startingUrlParts[1] }}/{{ startingUrlParts[2] }}{% endcapture %}
+	{% else %}
+		{% assign version_url = "" %}
+	{% endif %}
+
+	{% if page.body_class == "installation" %}
+		<script src="{{ site.baseurl }}/js/js-yaml.min.js"></script>
+		<script src="{{ site.baseurl }}/js{{ version_url }}/installation.js?{{ site.data['hash'] }}"></script>
+	{% endif %}
+	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
 		<script src="{{ site.baseurl }}/js{{ version_url }}/railroad.js"></script>
 		<script src="{{ site.baseurl }}/js{{ version_url }}/{{ page.railroad }}"></script>
 	{% endif %}

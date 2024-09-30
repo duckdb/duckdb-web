@@ -24,6 +24,13 @@ The index will then be used to accelerate queries that use a `ORDER BY` clause e
 SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3]) LIMIT 3;
 ```
 
+Additionally, the overloaded `min_by(col, arg, n)` can also be accelerated with the `HNSW` index if the `arg` argument is a matching distance metric function. This can be used to do quick one-shot nearest neighbor searches. For example, to get the top 3 rows with the closest vectors to `[1, 2, 3]`:
+```sql
+SELECT min_by(my_vector_table, array_distance(vec, [1, 2, 3]::FLOAT[3]), 3) as result FROM my_vector_table;
+---- [{'vec': [1.0, 2.0, 3.0]}, {'vec': [1.0, 2.0, 4.0]}, {'vec': [2.0, 2.0, 3.0]}] 
+```
+Note how we pass the table name as the first argument to `min_by` to return a struct containing the entire matched row.
+
 We can verify that the index is being used by checking the `EXPLAIN` output and looking for the `HNSW_INDEX_SCAN` node in the plan:
 
 ```sql
@@ -69,8 +76,8 @@ The following table shows the supported distance metrics and their corresponding
 | Metric   | Function                  | Description        |
 | -------- | ------------------------- | ------------------ |
 | `l2sq`   | `array_distance`          | Euclidean distance |
-| `cosine` | `array_cosine_similarity` | Cosine similarity  |
-| `ip`     | `array_inner_product`     | Inner product      |
+| `cosine` | `array_cosine_distance` | Cosine similarity distance  |
+| `ip`     | `array_negative_inner_product`     | Negative inner product      |
 
 Note that while each `HNSW` index only applies to a single column you can create multiple `HNSW` indexes on the same table each individually indexing a different column. Additionally, you can also create multiple `HNSW` indexes to the same column, each supporting a different distance metric.
 
@@ -91,7 +98,7 @@ Additionally, you can also override the `ef_search` parameter set at index const
 
 Due to some known issues related to peristence of custom extension indexes, the `HNSW` index can only be created on tables in in-memory databases by default, unless the `SET hnsw_enable_experimental_persistence = ⟨bool⟩` configuration option is set to `true`.
 
-The reasoning for locking this feature behind an experimental flag is that "WAL" recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommitted changes to a `HNSW`-indexed table, you can end up with __data loss or corruption of the index__.
+The reasoning for locking this feature behind an experimental flag is that “WAL” recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommitted changes to a `HNSW`-indexed table, you can end up with __data loss or corruption of the index__.
 
 If you enable this option and experience an unexpected shutdown, you can try to recover the index by first starting DuckDB separately, loading the `vss` extension and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, allowing DuckDB's recovery process to proceed without issues. But we still recommend that you do not use this feature in production environments.
 
@@ -102,9 +109,65 @@ With the `hnsw_enable_experimental_persistence` option enabled, the index will b
 The HNSW index does support inserting, updating and deleting rows from the table after index creation. However, there are two things to keep in mind:
 
 * It's faster to create the index after the table has been populated with data as the initial bulk load can make better use of parallelism on large tables.
-* Deletes are not immediately reflected in the index, but are instead "marked" as deleted, which can cause the index to grow stale over time and negatively impact query quality and performance.
+* Deletes are not immediately reflected in the index, but are instead “marked” as deleted, which can cause the index to grow stale over time and negatively impact query quality and performance.
 
 To remedy the last point, you can call the `PRAGMA hnsw_compact_index('⟨index name⟩')` pragma function to trigger a re-compaction of the index pruning deleted items, or re-create the index after a significant number of updates.
+
+
+## Bonus: Vector Similarity Search Joins
+
+The `vss` extension also provides a couple of table macros to simplify matching multiple vectors against eachother, so called "fuzzy joins". These are: 
+* `vss_join(left_table, right_table, left_col, right_col, k, metric := 'l2sq')`
+* `vss_match(right_table", left_col, right_col, k, metric := 'l2sq')`
+
+These __do not__ currently make use of the `HNSW` index but are provided as convenience utility functions for users who are ok with performing brute-force vector similarity searches without having to write out the join logic themselves. In the future these might become targets for index-based optimizations as well.
+
+These functions can be used as follows:
+
+```sql
+CREATE TABLE haystack (id int, vec FLOAT[3]);
+CREATE TABLE needle (search_vec FLOAT[3]);
+
+INSERT INTO haystack SELECT row_number() OVER (), array_value(a,b,c)
+FROM range(1, 10) ra(a), range(1, 10) rb(b), range(1, 10) rc(c);
+
+INSERT INTO needle VALUES ([5, 5, 5]), ([1, 1, 1]);
+
+SELECT * FROM vss_join(needle, haystack, search_vec, vec, 3) as res;
+```
+
+```text
+┌───────┬─────────────────────────────────┬─────────────────────────────────────┐
+│ score │            left_tbl             │              right_tbl              │
+│ float │   struct(search_vec float[3])   │  struct(id integer, vec float[3])   │
+├───────┼─────────────────────────────────┼─────────────────────────────────────┤
+│   0.0 │ {'search_vec': [5.0, 5.0, 5.0]} │ {'id': 365, 'vec': [5.0, 5.0, 5.0]} │
+│   1.0 │ {'search_vec': [5.0, 5.0, 5.0]} │ {'id': 364, 'vec': [5.0, 4.0, 5.0]} │
+│   1.0 │ {'search_vec': [5.0, 5.0, 5.0]} │ {'id': 356, 'vec': [4.0, 5.0, 5.0]} │
+│   0.0 │ {'search_vec': [1.0, 1.0, 1.0]} │ {'id': 1, 'vec': [1.0, 1.0, 1.0]}   │
+│   1.0 │ {'search_vec': [1.0, 1.0, 1.0]} │ {'id': 10, 'vec': [2.0, 1.0, 1.0]}  │
+│   1.0 │ {'search_vec': [1.0, 1.0, 1.0]} │ {'id': 2, 'vec': [1.0, 2.0, 1.0]}   │
+└───────┴─────────────────────────────────┴─────────────────────────────────────┘
+```
+
+```sql
+-- Alternatively, we can use the vss_match macro as a "lateral join" 
+-- to get the matches already grouped by the left table.
+-- Note that this requires us to specify the left table first, and then 
+-- the vss_match macro which references the search column from the left
+-- table (in this case, `search_vec`).
+SELECT * FROM needle, vss_match(haystack, search_vec, vec, 3) as res;
+```
+
+```text
+┌─────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│   search_vec    │                                                                                       matches                                                                                        │
+│    float[3]     │                                                            struct(score float, "row" struct(id integer, vec float[3]))[]                                                             │
+├─────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ [5.0, 5.0, 5.0] │ [{'score': 0.0, 'row': {'id': 365, 'vec': [5.0, 5.0, 5.0]}}, {'score': 1.0, 'row': {'id': 364, 'vec': [5.0, 4.0, 5.0]}}, {'score': 1.0, 'row': {'id': 356, 'vec': [4.0, 5.0, 5.0]}}] │
+│ [1.0, 1.0, 1.0] │ [{'score': 0.0, 'row': {'id': 1, 'vec': [1.0, 1.0, 1.0]}}, {'score': 1.0, 'row': {'id': 10, 'vec': [2.0, 1.0, 1.0]}}, {'score': 1.0, 'row': {'id': 2, 'vec': [1.0, 2.0, 1.0]}}]      │
+└─────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ## Limitations
 
@@ -112,3 +175,4 @@ To remedy the last point, you can call the `PRAGMA hnsw_compact_index('⟨index 
 * The index itself is not buffer managed and must be able to fit into RAM memory.
 * The size of the index in memory does not count towards DuckDB's `memory_limit` configuration parameter.
 * `HNSW` indexes can only be created on tables in in-memory databases, unless the `SET hnsw_enable_experimental_persistence = ⟨bool⟩` configuration option is set to `true`, see [Persistence](#persistence) for more information.
+* The vector join table macros (`vss_join` and `vss_match`) do not require or make use of the `HNSW` index.

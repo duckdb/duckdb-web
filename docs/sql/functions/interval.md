@@ -3,6 +3,8 @@ layout: docu
 title: Interval Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 This section describes functions and operators for examining and manipulating [`INTERVAL`]({% link docs/sql/data_types/interval.md %}) values.
 
 ## Interval Operators

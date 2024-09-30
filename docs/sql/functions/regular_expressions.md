@@ -4,6 +4,8 @@ title: Regular Expressions
 railroad: expressions/like.js
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 DuckDB offers [pattern matching operators]({% link docs/sql/functions/pattern_matching.md %})
 ([`LIKE`]({% link docs/sql/functions/pattern_matching.md %}#like),
 [`SIMILAR TO`]({% link docs/sql/functions/pattern_matching.md %}#similar-to),

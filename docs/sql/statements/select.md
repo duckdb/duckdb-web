@@ -21,7 +21,7 @@ Select the rows from `tbl`:
 SELECT j FROM tbl WHERE i = 3;
 ```
 
-Perform an aggregate grouped by the column "i":
+Perform an aggregate grouped by the column `i`:
 
 ```sql
 SELECT i, sum(j) FROM tbl GROUP BY i;
@@ -49,6 +49,13 @@ Select all unique cities from the addresses table:
 
 ```sql
 SELECT DISTINCT city FROM addresses;
+```
+
+Return a `STRUCT` by using a row variable:
+
+```sql
+SELECT d
+FROM (SELECT 1 AS a, 2 AS b) d;
 ```
 
 ### Syntax

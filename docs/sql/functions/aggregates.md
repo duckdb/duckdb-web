@@ -6,6 +6,8 @@ redirect_from:
   - docs/sql/aggregates
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 ## Examples
 
 Produce a single row containing the sum of the `amount` column:
@@ -106,7 +108,9 @@ The table below shows the available general aggregate functions.
 | [`any_value(arg)`](#any_valuearg) | Returns the first non-null value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arbitrary(arg)`](#arbitraryarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max(arg, val)`](#arg_maxarg-val) | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_max(arg, val, n)`](#arg_maxarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
 | [`arg_min(arg, val)`](#arg_minarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_min(arg, val, n)`](#arg_minarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending.  |
 | [`array_agg(arg)`](#array_aggarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`avg(arg)`](#avgarg) | Calculates the average value for all tuples in `arg`. |
 | [`bit_and(arg)`](#bit_andarg) | Returns the bitwise AND of all bits in a given expression. |
@@ -124,9 +128,13 @@ The table below shows the available general aggregate functions.
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`max(arg)`](#maxarg) | Returns the maximum value present in `arg`. |
+| [`max(arg, n)`](#maxarg-n) | Returns a `LIST` containing the `arg` values for the "top" `n` rows ordered by `arg` descending.  |
 | [`max_by(arg, val)`](#max_byarg-val) | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`max_by(arg, val, n)`](#max_byarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
 | [`min(arg)`](#minarg) | Returns the minimum value present in `arg`. |
+| [`min(arg, n)`](#minarg-n) | Returns a `LIST` containing the `arg` values for the "bottom" `n` rows ordered by `arg` ascending. |
 | [`min_by(arg, val)`](#min_byarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`min_by(arg, val, n)`](#min_byarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
 | [`product(arg)`](#productarg) | Calculates the product of all tuples in `arg`. |
 | [`string_agg(arg, sep)`](#string_aggarg-sep) | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`sum(arg)`](#sumarg) | Calculates the sum value for all tuples in `arg`. |
@@ -156,6 +164,14 @@ The table below shows the available general aggregate functions.
 | **Example** | `arg_max(A, B)` |
 | **Alias(es)** | `argMax(arg, val)`, `max_by(arg, val)` |
 
+#### `arg_max(arg, val, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
+| **Example** | `arg_max(A, B, 2)` |
+| **Alias(es)** | `argMax(arg, val, n)`, `max_by(arg, val, n)` |
+
 #### `arg_min(arg, val)`
 
 <div class="nostroke_table"></div>
@@ -163,6 +179,14 @@ The table below shows the available general aggregate functions.
 | **Description** | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_min(A, B)` |
 | **Alias(es)** | `argMin(arg, val)`, `min_by(arg, val)` |
+
+#### `arg_min(arg, val, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
+| **Example** | `arg_min(A, B, 2)` |
+| **Alias(es)** | `argMin(arg, val, n)`, `min_by(arg, val, n)` |
 
 #### `array_agg(arg)`
 
@@ -300,6 +324,14 @@ The table below shows the available general aggregate functions.
 | **Example** | `max(A)` |
 | **Alias(es)** | - |
 
+#### `max(arg, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** |  Returns a `LIST` containing the `arg` values for the "top" `n` rows ordered by `arg` descending. |
+| **Example** | `max(A, 2)` |
+| **Alias(es)** | - |
+
 #### `max_by(arg, val)`
 
 <div class="nostroke_table"></div>
@@ -307,6 +339,14 @@ The table below shows the available general aggregate functions.
 | **Description** | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `max_by(A, B)` |
 | **Alias(es)** | `argMax(arg, val)`, `arg_max(arg, val)` |
+
+#### `max_by(arg, val, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
+| **Example** | `max_by_n(A, B, 2)` |
+| **Alias(es)** | `argMax(arg, val, n)`, `arg_max(arg, val, n)` |
 
 #### `min(arg)`
 
@@ -316,6 +356,14 @@ The table below shows the available general aggregate functions.
 | **Example** | `min(A)` |
 | **Alias(es)** | - |
 
+#### `min(arg, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing the `arg` values for the "bottom" `n` rows ordered by `arg` ascending. |
+| **Example** | `min(A, 2)` |
+| **Alias(es)** | - |
+
 #### `min_by(arg, val)`
 
 <div class="nostroke_table"></div>
@@ -323,6 +371,14 @@ The table below shows the available general aggregate functions.
 | **Description** | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `min_by(A, B)` |
 | **Alias(es)** | `argMin(arg, val)`, `arg_min(arg, val)` |
+
+#### `min_by(arg, val, n)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
+| **Example** | `min_by(A, B, 2)` |
+| **Alias(es)** | `argMin(arg, val, n)`, `arg_min(arg, val, n)` |
 
 #### `product(arg)`
 
@@ -383,7 +439,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | [`median(x)`](#medianx) | The middle value of the set. For even value counts, quantitative values are averaged and ordinal values return the lower value. |
 | [`mode(x)`](#modex)| The most frequent value. |
 | [`quantile_cont(x, pos)`](#quantile_contx-pos) | The interpolated `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `pos * (n_nonnull_values - 1)`th (zero-indexed) element (or an interpolation between the adjacent elements if the index is not an integer). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding interpolated quantiles. |
-| [`quantile_disc(x, pos)`](#quantile_discx-pos) | The discrete `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `floor(pos * (n_nonnull_values - 1))`th (zero-indexed) element. If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. |
+| [`quantile_disc(x, pos)`](#quantile_discx-pos) | The discrete `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `greatest(ceil(pos * n_nonnull_values) - 1, 0)`th (zero-indexed) element. If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. |
 | [`regr_avgx(y, x)`](#regr_avgxy-x) | The average of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | [`regr_avgy(y, x)`](#regr_avgyy-x) | The average of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | [`regr_count(y, x)`](#regr_county-x) | The number of non-`NULL` pairs. |
@@ -483,7 +539,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The discrete `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `floor(pos * (n_nonnull_values - 1))`th (zero-indexed) element. If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. |
+| **Description** | The discrete `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `greatest(ceil(pos * n_nonnull_values) - 1, 0)`th (zero-indexed) element. If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. |
 | **Formula** | - |
 | **Alias(es)** | `quantile` |
 
@@ -601,7 +657,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 ## Ordered Set Aggregate Functions
 
-The table below shows the available "ordered set" aggregate functions.
+The table below shows the available “ordered set” aggregate functions.
 These functions are specified using the `WITHIN GROUP (ORDER BY sort_expression)` syntax,
 and they are converted to an equivalent aggregate function that takes the ordering expression
 as the first argument.

@@ -14,7 +14,7 @@ The values of the grouping columns themselves are unchanged, and any other colum
 
 Use `GROUP BY ALL` to `GROUP BY` all columns in the `SELECT` statement that are not wrapped in aggregate functions.
 This simplifies the syntax by allowing the columns list to be maintained in a single location, and prevents bugs by keeping the `SELECT` granularity aligned to the `GROUP BY` granularity (Ex: Prevents any duplication).
-See examples below and additional examples in the [Friendlier SQL with DuckDB blog post]({% post_url 2022-05-04-friendlier-sql %}#group-by-all).
+See examples below and additional examples in the [“Friendlier SQL with DuckDB” blog post]({% post_url 2022-05-04-friendlier-sql %}#group-by-all).
 
 ## Multiple Dimensions
 
@@ -24,7 +24,7 @@ See the [`GROUPING SETS`]({% link docs/sql/query_syntax/grouping_sets.md %}) pag
 
 ## Examples
 
-Count the number of entries in the "addresses" table that belong to each different city:
+Count the number of entries in the `addresses` table that belong to each different city:
 
 ```sql
 SELECT city, count(*)
@@ -49,8 +49,6 @@ SELECT city, street_name
 FROM addresses
 GROUP BY ALL;
 ```
-
-GROUP BY city, street_name:
 
 Compute the average income per city per street_name. Since income is wrapped in an aggregate function, do not include it in the `GROUP BY`:
 

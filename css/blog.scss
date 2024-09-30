@@ -1,6 +1,7 @@
 ---
 ---
 
+@use "sass:color";
 @import 'variables';
 
 @mixin button {
@@ -36,7 +37,6 @@
 
 @mixin textlink {
 	color: $duckDBgrey;
-	//color: darken($duckDBgrey,20);
 	text-decoration: underline;
 	font-size: 14px;
 	-webkit-transition: color .3s;
@@ -248,6 +248,8 @@ h1, h2, h3, h4, h5{
 			.recentposts{
 				background-color: #F9F9F9;
 				padding: 105px 15px;
+				position: relative;
+				z-index: 100;
 				h1{
 					font-size: $fontSizeh1;
 					margin-top: 0;
@@ -265,6 +267,82 @@ h1, h2, h3, h4, h5{
 				margin: 50px 0 50px 0;
 				border: 0.5px solid rgb(229, 229, 229);
 			}
+			
+			.toc_sidebar{
+				background: rgb(255, 255, 255);
+				position: fixed;
+				top: 0px;
+				right: 0;
+				width: 22vw;
+				padding: 100px 20px 20px 20px;
+				z-index: 90;
+				  @media only screen and (max-width: 1280px) {
+					display: none;
+				}
+				.toc_menu{
+					height: calc(100vh - 100px);
+					overflow: auto;
+					-ms-overflow-style: none; 
+					scrollbar-width: none;
+					&::-webkit-scrollbar {
+						display: none;
+					}
+					h5{
+						color: black;
+						font-size: 12px;
+						font-style: normal;
+						font-weight: 450;
+						text-transform: uppercase;
+						margin-left: 12px;
+					}
+					ul li{
+						font-size: 14px;
+					}
+					ul#toc{
+						list-style: none;
+						padding: 0;
+						margin: 0;
+						margin-top: 15px;
+						position: relative;
+						ul{
+							padding-left: 0px;
+							margin-left: 15px;
+							border-left: 1px solid #D9D9D9;
+							li{
+								list-style: none;
+								font-size: 14px;
+							}
+							ul{
+								display: none;
+							}
+						}
+						li{
+							line-height: 1;
+						&.current > a{
+								color: $purple;
+							}
+						}
+						a{
+							color: $black400;
+							text-decoration: none;
+							padding: 7px 12px;
+							border-radius: 100px;
+							display: inline-block;
+							text-overflow: ellipsis; 
+							overflow: hidden; 
+							white-space: nowrap;
+							max-width: 100%;
+							line-height: 1;
+						&:hover{
+								color: black;
+							}
+						}
+					}
+				}
+				
+			}
+
+			
 		}
 		.infoline{
 			display: -webkit-box;
@@ -488,7 +566,7 @@ footer{
 			font-size: 14px;
 			.author{
 				font-weight: 600;
-				}
+			}
 		}
 		p{
 			font-size: 15px;
@@ -499,21 +577,30 @@ footer{
 		h2 {
 			font-size: 25px;
 			line-height: 28px;
-				margin-top: 35px;
-				margin-bottom: 20px;
+			margin-top: 35px;
+			margin-bottom: 20px;
+		}
+		h3 {
+			font-size: 20px;
+			line-height: 1.2;
+			margin-top: 35px;
+			margin-bottom: 20px;
+		}
+		h2 + h3{
+			margin-top: 0px;
 		}
 		ul li{
 			font-size: 15px;
 			line-height: 23px;
 		}
 		ul li ul {
-				margin-top: 0px;
-			}
+			margin-top: 0px;
+		}
 	}
 
 	code, pre{
 		font-size: 14px;
-			line-height: 1.5em;
+		line-height: 1.5em;
 	}
 	
 	.newswrap .postwrap .post-list h1,
@@ -534,7 +621,7 @@ footer{
 }
 
 @media print {
-	section.recentposts {
+	section.recentposts, div.toc_sidebar {
 		display: none !important;
 	}
 }

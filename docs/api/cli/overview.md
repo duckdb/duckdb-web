@@ -49,7 +49,7 @@ duckdb
 ```
 
 ```text
-v1.0.0 1f98600c2c
+v{{ site.currentduckdbversion }} {{ site.currentduckdbhash }}
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.

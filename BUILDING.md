@@ -196,3 +196,34 @@ To resolve this, clean the Jekyll gem cache:
 ```bash
 rm -rf /opt/homebrew/lib/ruby/gems/3.3.0/cache/
 ```
+
+### Bundle install fails
+
+Bundle install fails with the following error message:
+
+```bash
+bundle install
+```
+
+```console
+The running version of Bundler (2.5.11) does not match the version of the specification installed for it (2.5.18). This can be caused by
+reinstalling Ruby without removing previous installation, leaving around an upgraded default version of Bundler. Reinstalling Ruby from
+scratch should fix the problem.
+```
+
+The solution, according to a [Stack Overflow answer](https://stackoverflow.com/a/63761800), is to run:
+
+```bash
+gem update --system
+```
+
+### `ERROR bad URI`
+
+The following error occurs when trying to access the locally built website via HTTPS (`https://localhost:4000/`).
+
+```console
+[2024-09-17 12:15:36] ERROR bad URI `����\x12`�\x17\x03�L\x00\x00\x14�'.
+[2024-09-17 12:15:36] ERROR bad Request-Line ...
+```
+This happens frequently with browsers looking to force an HTTPS connection such as Safari.
+The solution is to use an HTTP connection (`http://localhost:4000`) and optionally try another browser (e.g., Chrome or Firefox).

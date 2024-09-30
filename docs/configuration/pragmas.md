@@ -6,6 +6,8 @@ redirect_from:
   - /docs/sql/pragmas/
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 The `PRAGMA` statement is a SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
 
 `PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement]({% link docs/sql/statements/set.md %}) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
@@ -18,7 +20,7 @@ This page contains the supported `PRAGMA` settings.
 
 ## Metadata
 
-### Schema Information
+#### Schema Information
 
 List all databases:
 
@@ -44,7 +46,7 @@ To list all functions:
 PRAGMA functions;
 ```
 
-### Table Information
+#### Table Information
 
 Get info for a specific table:
 
@@ -70,7 +72,7 @@ To also show table structure, but in a slightly different format (included for c
 PRAGMA show('table_name');
 ```
 
-### Database Size
+#### Database Size
 
 Get the file and memory size of each database:
 
@@ -93,7 +95,7 @@ memory_usage VARCHAR,  -- memory used by the database buffer manager
 memory_limit VARCHAR   -- maximum memory allowed for the database
 ```
 
-### Storage Information
+#### Storage Information
 
 To get storage information:
 
@@ -116,7 +118,7 @@ This call returns the following information for the given table:
 | `segment_type` | `VARCHAR` ||
 | `start`        | `BIGINT`  | The start row id of this chunk                        |
 | `count`        | `BIGINT`  | The amount of entries in this storage chunk           |
-| `compression`  | `VARCHAR` | Compression type used for this column – see [blog post]({% post_url 2022-10-28-lightweight-compression %}) |
+| `compression`  | `VARCHAR` | Compression type used for this column – see the [“Lightweight Compression in DuckDB” blog post]({% post_url 2022-10-28-lightweight-compression %}) |
 | `stats`        | `VARCHAR` ||
 | `has_updates`  | `BOOLEAN` ||
 | `persistent`   | `BOOLEAN` | `false` if temporary table                            |
@@ -125,7 +127,7 @@ This call returns the following information for the given table:
 
 See [Storage]({% link docs/internals/storage.md %}) for more information.
 
-### Show Databases
+#### Show Databases
 
 The following statement is equivalent to the [`SHOW DATABASES` statement]({% link docs/sql/statements/attach.md %}):
 
@@ -135,7 +137,7 @@ PRAGMA show_databases;
 
 ## Resource Management
 
-### Memory Limit
+#### Memory Limit
 
 Set the memory limit for the buffer manager:
 
@@ -150,7 +152,7 @@ SET max_memory = '1GB';
 > Additionally, [aggregate functions]({% link docs/sql/functions/aggregates.md %}) with complex state (e.g., `list`, `mode`, `quantile`, `string_agg`, and `approx` functions) use memory outside of the buffer manager.
 > Therefore, the actual memory consumption can be higher than the specified memory limit.
 
-### Threads
+#### Threads
 
 Set the amount of threads for parallel query execution:
 
@@ -188,9 +190,27 @@ SET default_order = 'ASCENDING';
 SET default_order = 'DESCENDING';
 ```
 
+## Ordering by Non-Integer Literals
+
+By default, ordering by non-integer literals is not allowed:
+
+```sql
+SELECT 42 ORDER BY 'hello world';
+```
+
+```console
+-- Binder Error: ORDER BY non-integer literal has no effect.
+```
+
+To allow this behavior, use the `order_by_non_integer_literal` option:
+
+```sql
+SET order_by_non_integer_literal = true;
+```
+
 ## Implicit Casting to `VARCHAR`
 
-Prior to version 0.10.0, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an explicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behaviour that performs implicit casting, set the `old_implicit_casting` variable to `true`:
+Prior to version 0.10.0, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an explicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behavior that performs implicit casting, set the `old_implicit_casting` variable to `true`:
 
 ```sql
 SET old_implicit_casting = true;
@@ -198,7 +218,7 @@ SET old_implicit_casting = true;
 
 ## Information on DuckDB
 
-### Version
+#### Version
 
 Show DuckDB version:
 
@@ -207,7 +227,7 @@ PRAGMA version;
 CALL pragma_version();
 ```
 
-### Platform
+#### Platform
 
 `platform` returns an identifier for the platform the current DuckDB executable has been compiled for, e.g., `osx_arm64`.
 The format of this identifier matches the platform name as described [on the extension loading explainer]({% link docs/extensions/working_with_extensions.md %}#platforms):
@@ -217,7 +237,7 @@ PRAGMA platform;
 CALL pragma_platform();
 ```
 
-### User Agent
+#### User Agent
 
 The following statement returns the user agent information, e.g., `duckdb/v0.10.0(osx_arm64)`:
 
@@ -225,7 +245,7 @@ The following statement returns the user agent information, e.g., `duckdb/v0.10.
 PRAGMA user_agent;
 ```
 
-### Metadata Information
+#### Metadata Information
 
 The following statement returns information on the metadata store (`block_id`, `total_blocks`, `free_blocks`, and `free_list`):
 
@@ -261,7 +281,7 @@ PRAGMA disable_print_progress_bar;
 
 ## Profiling Queries
 
-### Explain Plan Output
+#### Explain Plan Output
 
 The output of [`EXPLAIN`]({% link docs/sql/statements/profiling.md %}) output can be configured to show only the physical plan. This is the default configuration:
 
@@ -281,9 +301,9 @@ To show all query plans:
 SET explain_output = 'all';
 ```
 
-### Profiling
+#### Profiling
 
-#### Enable Profiling
+##### Enable Profiling
 
 To enable profiling:
 
@@ -297,29 +317,39 @@ Or:
 PRAGMA enable_profile;
 ```
 
-#### Profiling Format
+##### Profiling Format
 
-The format of the resulting profiling information can be specified as either `json`, `query_tree`, or `query_tree_optimizer`. The default format is `query_tree`, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
+The format of the resulting profiling information can be specified as either `json`, `query_tree`, or `query_tree_optimizer`. The default format is `query_tree`, which prints the physical query plan as well as the timings and cardinalities of each operator in the tree to the screen.
 
-To return the logical query plan as JSON:
+To return the physical query plan as JSON:
 
 ```sql
 SET enable_profiling = 'json';
 ```
 
-To return the logical query plan:
+To return the physical query plan:
 
 ```sql
 SET enable_profiling = 'query_tree';
 ```
 
-To return the physical query plan:
+To return the physical query plan with optimizer and planner timings:
 
 ```sql
 SET enable_profiling = 'query_tree_optimizer';
 ```
 
-#### Disable Profiling
+For more information on the profiling mode, see [profiling mode](#profiling-mode).
+
+##### Disabling Output
+
+Profiling can also be accessed through API calls, in which case any other output should be disabled with the following:
+    
+```sql
+SET enable_profiling = 'no_output';
+```
+
+##### Disable Profiling
 
 To disable profiling:
 
@@ -333,9 +363,9 @@ Or:
 PRAGMA disable_profile;
 ```
 
-#### Profiling Output
+##### Profiling Output
 
-By default, profiling information is printed to the console. However, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file.
+By default, profiling information is printed to the console, however, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file.
 
 > Warning The file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run:
 
@@ -344,7 +374,7 @@ SET profiling_output = '/path/to/file.json';
 SET profile_output = '/path/to/file.json';
 ```
 
-#### Profiling Mode
+##### Profiling Mode
 
 By default, a limited amount of profiling information is provided (`standard`).
 For more details, use the detailed profiling mode by setting `profiling_mode` to `detailed`.
@@ -354,9 +384,31 @@ The output of this mode shows how long it takes to apply certain optimizers on t
 SET profiling_mode = 'detailed';
 ```
 
+```sql
+SET profiling_mode = 'standard';
+```
+
+#### Custom Profiling Metrics
+
+By default, all metrics are enabled except those activated by detailed profiling.
+Each metric, including those from detailed profiling,
+can be individually enabled or disabled using the `custom_profiling_settings` `PRAGMA`.
+This `PRAGMA` accepts a JSON object with metric names as keys and boolean values to toggle them on or off.
+Settings specified by this `PRAGMA` override the default behavior.
+
+> Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
+
+In the following example, the `CPU_TIME` metric is disabled, and the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
+
+```sql
+SET custom_profiling_settings = '{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
+```
+
+The profiling documentation contains an overview of the available [metrics]({% link docs/dev/profiling.md %}#metrics).
+
 ## Query Optimization
 
-### Optimizer
+#### Optimizer
 
 To disable the query optimizer:
 
@@ -370,7 +422,7 @@ To enable the query optimizer:
 PRAGMA enable_optimizer;
 ```
 
-### Selectively Disabling Optimizers
+#### Selectively Disabling Optimizers
 
 The `disabled_optimizers` option allows selectively disabling optimization steps.
 For example, to disable `filter_pushdown` and `statistics_propagation`, run:
@@ -403,7 +455,7 @@ The `create_fts_index` and `drop_fts_index` options are only available when the 
 
 ## Verification
 
-### Verification of External Operators
+#### Verification of External Operators
 
 Enable verification of external operators:
 
@@ -417,7 +469,7 @@ Disable verification of external operators:
 PRAGMA disable_verify_external;
 ```
 
-### Verification of Round-Trip Capabilities
+#### Verification of Round-Trip Capabilities
 
 Enable verification of round-trip capabilities for supported logical plans:
 
@@ -447,7 +499,7 @@ PRAGMA disable_object_cache;
 
 ## Checkpointing
 
-### Force Checkpoint
+#### Force Checkpoint
 
 When [`CHECKPOINT`]({% link docs/sql/statements/checkpoint.md %}) is called when no changes are made, force a checkpoint regardless:
 
@@ -455,7 +507,7 @@ When [`CHECKPOINT`]({% link docs/sql/statements/checkpoint.md %}) is called when
 PRAGMA force_checkpoint;
 ```
 
-### Checkpoint on Shutdown
+#### Checkpoint on Shutdown
 
 Run a `CHECKPOINT` on successful shutdown and delete the WAL, to leave only a single database file behind:
 
@@ -503,6 +555,17 @@ SELECT * FROM nonexistent_tbl;
 }
 ```
 
+## IEEE Floating-Point Operation Semantics
+
+DuckDB follows IEEE floating-point operation semantics. If you would like to turn this off, run:
+
+```sql
+SET ieee_floating_point_ops = false;
+```
+
+In this case, floating point division by zero (e.g., `1.0 / 0.0`, `0.0 / 0.0` and `-1.0 / 0.0`) will all return `NULL`.
+
+
 ## Query Verification (for Development)
 
 The following `PRAGMA`s are mostly used for development and internal testing.
@@ -530,3 +593,23 @@ Disable force parallel query processing:
 ```sql
 PRAGMA disable_verify_parallelism;
 ```
+
+## Block Sizes
+
+When persisting a database to disk, DuckDB writes to a dedicated file containing a list of blocks holding the data.
+In the case of a file that only holds very little data, e.g., a small table, the default block size of 256KB might not be ideal.
+Therefore, DuckDB's storage format supports different block sizes.
+
+There are a few constraints on possible block size values.
+
+* Must be a power of two.
+* Must be greater or equal to 16384 (16 KB).
+* Must be lesser or equal to 262144 (256 KB).
+
+You can set the default block size for all new DuckDB files created by an instance like so:
+
+```sql
+SET default_block_size = '16384';
+```
+
+It is also possible to set the block size on a per-file basis, see [`ATTACH`]({% link docs/sql/statements/attach.md %}) for details.

@@ -12,10 +12,10 @@ The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` and `UHUGEINT` store wh
 | Name | Aliases | Min | Max |
 |:--|:--|----:|----:|
 | `TINYINT` | `INT1` | -128 | 127 |
-| `SMALLINT` | `INT2`, `SHORT` | -32768 | 32767 |
-| `INTEGER` | `INT4`, `INT`, `SIGNED` | -2147483648 | 2147483647 |
-| `BIGINT` | `INT8`, `LONG` | -9223372036854775808 | 9223372036854775807 |
-| `HUGEINT` | - | -170141183460469231731687303715884105728 | 170141183460469231731687303715884105727 |
+| `SMALLINT` | `INT2`, `INT16` `SHORT` | -32768 | 32767 |
+| `INTEGER` | `INT4`, `INT32`, `INT`, `SIGNED` | -2147483648 | 2147483647 |
+| `BIGINT` | `INT8`, `INT64` `LONG` | -9223372036854775808 | 9223372036854775807 |
+| `HUGEINT` | `INT128` | -170141183460469231731687303715884105728 | 170141183460469231731687303715884105727 |
 | `UTINYINT` | - | 0 | 255 |
 | `USMALLINT` | -| 0 | 65535 |
 | `UINTEGER` | - | 0 | 4294967295 |
@@ -28,7 +28,7 @@ The type integer is the common choice, as it offers the best balance between ran
 
 The data type `DECIMAL(WIDTH, SCALE)` (also available under the alias `NUMERIC(WIDTH, SCALE)`) represents an exact fixed-point decimal value. When creating a value of type `DECIMAL`, the `WIDTH` and `SCALE` can be specified to define which size of decimal values can be held in the field. The `WIDTH` field determines how many digits can be held, and the `scale` determines the amount of digits after the decimal point. For example, the type `DECIMAL(3, 2)` can fit the value `1.23`, but cannot fit the value `12.3` or the value `1.234`. The default `WIDTH` and `SCALE` is `DECIMAL(18, 3)`, if none are specified.
 
-Internally, decimals are represented as integers depending on their specified width.
+Internally, decimals are represented as integers depending on their specified `WIDTH`.
 
 <div class="narrow_table"></div>
 
@@ -39,7 +39,7 @@ Internally, decimals are represented as integers depending on their specified wi
 | 10-18 | `INT64` | 8 |
 | 19-38 | `INT128` | 16 |
 
-Performance can be impacted by using too large decimals when not required. In particular decimal values with a width above 19 are slow, as arithmetic involving the `INT128` type is much more expensive than operations involving the `INT32` or `INT64` types. It is therefore recommended to stick with a width of `18` or below, unless there is a good reason for why this is insufficient.
+Performance can be impacted by using too large decimals when not required. In particular decimal values with a width above 19 are slow, as arithmetic involving the `INT128` type is much more expensive than operations involving the `INT32` or `INT64` types. It is therefore recommended to stick with a `WIDTH` of `18` or below, unless there is a good reason for why this is insufficient.
 
 ## Floating-Point Types
 
@@ -61,7 +61,7 @@ For more complex mathematical operations, however, floating-point arithmetic is 
 In general, we advise that:
 
 * If you require exact storage of numbers with a known number of decimal digits and require exact additions, subtractions, and multiplications (such as for monetary amounts), use the [`DECIMAL` data type](#fixed-point-decimals) or its `NUMERIC` alias instead.
-* If you want to do fast or complicated calculations, the floating-point data types may be more appropriate. However, if you use the results for anything important, you should evaluate your implementation carefully for corner cases (ranges, infinities, underflows, invalid operations) that may be handled differently from what you expect and you should familiarize yourself with common floating-point pitfalls. The article ["What Every Computer Scientist Should Know About Floating-Point Arithmetic" by David Goldberg](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) and [the floating point series on Bruce Dawson's blog](https://randomascii.wordpress.com/2017/06/19/sometimes-floating-point-math-is-perfect/) provide excellent starting points.
+* If you want to do fast or complicated calculations, the floating-point data types may be more appropriate. However, if you use the results for anything important, you should evaluate your implementation carefully for corner cases (ranges, infinities, underflows, invalid operations) that may be handled differently from what you expect and you should familiarize yourself with common floating-point pitfalls. The article [“What Every Computer Scientist Should Know About Floating-Point Arithmetic” by David Goldberg](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) and [the floating point series on Bruce Dawson's blog](https://randomascii.wordpress.com/2017/06/19/sometimes-floating-point-math-is-perfect/) provide excellent starting points.
 
 On most platforms, the `FLOAT` type has a range of at least 1E-37 to 1E+37 with a precision of at least 6 decimal digits. The `DOUBLE` type typically has a range of around 1E-307 to 1E+308 with a precision of at least 15 digits. Positive numbers outside of these ranges (and negative numbers ourside the mirrored ranges) may cause errors on some platforms but will usually be converted to zero or infinity, respectively.
 
@@ -81,26 +81,6 @@ SET x = '-Infinity';
 ```
 
 On input, these strings are recognized in a case-insensitive manner.
-
-### Floating-Point Arithmetic
-
-DuckDB and PostgreSQL handle division by zero on floating-point values differently from the [IEEE Standard for Floating-Point Arithmetic (IEEE 754)](https://en.wikipedia.org/wiki/IEEE_754). To show the differences, run the following SQL queries:
-
-```sql
-SELECT 1.0 / 0.0 AS x;
-SELECT 0.0 / 0.0 AS x;
-SELECT -1.0 / 0.0 AS x;
-```
-
-<div class="narrow_table monospace_table"></div>
-
-| Expression | DuckDB |  IEEE 754 |
-| :--------- | -----: | --------: |
-| 1.0 / 0.0  |   NULL |  Infinity |
-| 0.0 / 0.0  |   NULL |       Nan |
-| -1.0 / 0.0 |   NULL | -Infinity |
-
-To see the differences between DuckDB and PostgreSQL, see the [PostgreSQL Compatibility page]({% link docs/sql/dialect/postgresql_compatibility.md %}).
 
 ## Universally Unique Identifiers (`UUID`s)
 

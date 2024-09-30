@@ -35,21 +35,95 @@ The connection string determines the parameters for how to connect to MySQL as a
 
 <div class="narrow_table monospace_table"></div>
 
-| Setting  |    Default     | Environment variable |
-|----------|----------------|----------------------|
-| database | NULL           | MYSQL_DATABASE       |
-| host     | localhost      | MYSQL_HOST           |
-| password |                | MYSQL_PWD            |
-| port     | 0              | MYSQL_TCP_PORT       |
-| socket   | NULL           | MYSQL_UNIX_PORT      |
-| user     | ⟨current user⟩ | MYSQL_USER           |
+| Setting     | Default        | Environment variable |
+|-------------|----------------|----------------------|
+| database    | NULL           | MYSQL_DATABASE       |
+| host        | localhost      | MYSQL_HOST           |
+| password    |                | MYSQL_PWD            |
+| port        | 0              | MYSQL_TCP_PORT       |
+| socket      | NULL           | MYSQL_UNIX_PORT      |
+| user        | ⟨current user⟩ | MYSQL_USER           |
+| ssl_mode    | preferred      |                      |
+| ssl_ca      |                |                      |
+| ssl_capath  |                |                      |
+| ssl_cert    |                |                      |
+| ssl_cipher  |                |                      |
+| ssl_crl     |                |                      |
+| ssl_crlpath |                |                      |
+| ssl_key     |                |                      |
+
+
+### Configuring via Secrets
+
+MySQL connection information can also be specified with [secrets](/docs/configuration/secrets_manager). The following syntax can be used to create a secret.
+
+```sql
+CREATE SECRET (
+    TYPE MYSQL,
+    HOST '127.0.0.1',
+    PORT 0,
+    DATABASE mysql,
+    USER 'mysql',
+    PASSWORD ''
+);
+```
+
+The information from the secret will be used when `ATTACH` is called. We can leave the connection string empty to use all of the information stored in the secret.
+
+```sql
+ATTACH '' AS mysql_db (TYPE MYSQL);
+```
+
+We can use the connection string to override individual options. For example, to connect to a different database while still using the same credentials, we can override only the database name in the following manner.
+
+```sql
+ATTACH 'database=my_other_db' AS mysql_db (TYPE MYSQL);
+```
+
+By default, created secrets are temporary. Secrets can be persisted using the [`CREATE PERSISTENT SECRET` command]({% link docs/configuration/secrets_manager.md %}#persistent-secrets). Persistent secrets can be used across sessions.
+
+#### Managing Multiple Secrets
+
+Named secrets can be used to manage connections to multiple MySQL database instances. Secrets can be given a name upon creation.
+
+```sql
+CREATE SECRET mysql_secret_one (
+    TYPE MYSQL,
+    HOST '127.0.0.1',
+    PORT 0,
+    DATABASE mysql,
+    USER 'mysql',
+    PASSWORD ''
+);
+```
+
+The secret can then be explicitly referenced using the `SECRET` parameter in the `ATTACH`.
+
+```sql
+ATTACH '' AS mysql_db_one (TYPE MYSQL, SECRET mysql_secret_one);
+```
+
+### SSL Connections
+
+The [`ssl` connection parameters](https://dev.mysql.com/doc/refman/8.4/en/using-encrypted-connections.html) can be used to make SSL connections. Below is a description of the supported parameters.
+
+| Setting     | Description                                                                                                                                      |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| ssl_mode    | The security state to use for the connection to the server: `disabled, required, verify_ca, verify_identity or preferred` (default: `preferred`) |
+| ssl_ca      | The path name of the Certificate Authority (CA) certificate file.                                                                                |
+| ssl_capath  | The path name of the directory that contains trusted SSL CA certificate files.                                                                   |
+| ssl_cert    | The path name of the client public key certificate file.                                                                                         |
+| ssl_cipher  | The list of permissible ciphers for SSL encryption.                                                                                              |
+| ssl_crl     | The path name of the file containing certificate revocation lists.                                                                               |
+| ssl_crlpath | The path name of the directory that contains files containing certificate revocation lists.                                                      |
+| ssl_key     | The path name of the client private key file.                                                                                                    |
 
 ### Reading MySQL Tables
 
 The tables in the MySQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from MySQL at query time.
 
 ```sql
-SHOW TABLES;
+SHOW ALL TABLES;
 ```
 
 <div class="narrow_table monospace_table"></div>
@@ -230,9 +304,6 @@ ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
 SELECT * FROM mysql_query('mysqldb', 'SELECT * FROM cars LIMIT 3');
 ```
 
-> Warning This function is only available on DuckDB v0.10.1+, using the latest MySQL extension.
-> To upgrade your extension, run `FORCE INSTALL mysql;`.
-
 ### The `mysql_execute` Function
 
 The `mysql_execute` function allows running arbitrary queries within MySQL, including statements that update the schema and content of the database.
@@ -241,9 +312,6 @@ The `mysql_execute` function allows running arbitrary queries within MySQL, incl
 ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
 CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
 ```
-
-> Warning This function is only available on DuckDB v0.10.1+, using the latest MySQL extension.
-> To upgrade your extension, run `FORCE INSTALL mysql;`.
 
 ## Settings
 

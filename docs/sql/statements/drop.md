@@ -93,7 +93,7 @@ DROP SCHEMA myschema CASCADE;
 
 The following dependencies are tracked and thus will raise an error if the user tries to drop the depending object without the `CASCADE` modifier.
 
-| Depending object type | Dependandt object type |
+| Depending object type | Dependant object type |
 |--|--|
 | `SCHEMA` | `FUNCTION` |
 | `SCHEMA` | `INDEX` |
@@ -134,3 +134,5 @@ To check this, use the following `PRAGMA` and check the number of `free_blocks` 
 ```sql
 PRAGMA database_size;
 ```
+
+For instruction on reclaiming space after dropping a table, refer to the [“Reclaiming space” page]({% link docs/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).

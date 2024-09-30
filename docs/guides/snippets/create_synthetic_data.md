@@ -5,7 +5,7 @@ title: Create Synthetic Data
 
 DuckDB allows you to quickly generate synthetic data sets. To do so, you may use:
 
-* [range functions]({% link docs/sql/functions/nested.md %}#range-functions)
+* [range functions]({% link docs/sql/functions/list.md %}#range-functions)
 * hash functions, e.g.,
   [`hash`]({% link docs/sql/functions/utility.md %}#hashvalue),
   [`md5`]({% link docs/sql/functions/utility.md %}#md5string),
@@ -21,13 +21,29 @@ import duckdb
 from duckdb.typing import *
 from faker import Faker
 
+fake = Faker()
+
 def random_date():
-    fake = Faker()
     return fake.date_between()
 
-duckdb.create_function("random_date", random_date, [], DATE, type="native", side_effects=True)
-res = duckdb.sql("""
-                 SELECT hash(i * 10 + j) AS id, random_date() AS creationDate, IF (j % 2, true, false)
+def random_short_text():
+    return fake.text(max_nb_chars=20)
+
+def random_long_text():
+    return fake.text(max_nb_chars=200)
+
+con = duckdb.connect()
+con.create_function("random_date",       random_date,       [], DATE,    type="native", side_effects=True)
+con.create_function("random_short_text", random_short_text, [], VARCHAR, type="native", side_effects=True)
+con.create_function("random_long_text",  random_long_text,  [], VARCHAR, type="native", side_effects=True)
+
+res = con.sql("""
+                 SELECT
+                    hash(i * 10 + j) AS id,
+                    random_date() AS creationDate,
+                    random_short_text() AS short,
+                    random_long_text() AS long,
+                    IF (j % 2, true, false) AS bool
                  FROM generate_series(1, 5) s(i)
                  CROSS JOIN generate_series(1, 2) t(j)
                  """)

@@ -5,7 +5,7 @@ title: SQL Introduction
 
 Here we provide an overview of how to perform simple operations in SQL.
 This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL.
-This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
+This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/current/tutorial-sql-intro.html).
 
 > DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.
 > The few exceptions to this are listed on the [PostgreSQL compatibility page]({% link docs/sql/dialect/postgresql_compatibility.md %}).
@@ -112,7 +112,7 @@ SELECT *
 FROM weather;
 ```
 
-Here `*` is a shorthand for "all columns". So the same result would be had with:
+Here `*` is a shorthand for “all columns”. So the same result would be had with:
 
 ```sql
 SELECT city, temp_lo, temp_hi, prcp, date
@@ -122,7 +122,7 @@ FROM weather;
 The output should be:
 
 |     city      | temp_lo | temp_hi | prcp |    date    |
-|---------------|---------|---------|------|------------|
+|---------------|--------:|--------:|-----:|------------|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
 | Hayward       | 37      | 54      | NULL | 1994-11-29 |
@@ -137,14 +137,14 @@ FROM weather;
 This should give:
 
 |     city      | temp_avg |    date    |
-|---------------|----------|------------|
+|---------------|---------:|------------|
 | San Francisco | 48.0     | 1994-11-27 |
 | San Francisco | 50.0     | 1994-11-29 |
 | Hayward       | 45.5     | 1994-11-29 |
 
 Notice how the `AS` clause is used to relabel the output column. (The `AS` clause is optional.)
 
-A query can be "qualified" by adding a `WHERE` clause that specifies which rows are wanted. The `WHERE` clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression is true are returned. The usual Boolean operators (`AND`, `OR`, and `NOT`) are allowed in the qualification. For example, the following retrieves the weather of San Francisco on rainy days:
+A query can be “qualified” by adding a `WHERE` clause that specifies which rows are wanted. The `WHERE` clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression is true are returned. The usual Boolean operators (`AND`, `OR`, and `NOT`) are allowed in the qualification. For example, the following retrieves the weather of San Francisco on rainy days:
 
 ```sql
 SELECT *
@@ -156,7 +156,7 @@ WHERE city = 'San Francisco'
 Result:
 
 |     city      | temp_lo | temp_hi | prcp |    date    |
-|---------------|---------|---------|------|------------|
+|---------------|--------:|--------:|-----:|------------|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 
 You can request that the results of a query be returned in sorted order:
@@ -168,10 +168,10 @@ ORDER BY city;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |
-|---------------|---------|---------|------|------------|
+|---------------|--------:|--------:|-----:|------------|
 | Hayward       | 37      | 54      | NULL | 1994-11-29 |
-| San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
+| San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 
 In this example, the sort order isn't fully specified, and so you might get the San Francisco rows in either order. But you'd always get the results shown above if you do:
 
@@ -214,7 +214,7 @@ WHERE city = name;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |     name      |   lat    |  lon   |
-|---------------|---------|---------|------|------------|---------------|----------|--------|
+|---------------|--------:|--------:|-----:|------------|---------------|---------:|-------:|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 | San Francisco | -194.000 | 53.000 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 | San Francisco | -194.000 | 53.000 |
 
@@ -230,7 +230,7 @@ WHERE city = name;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |  lon   |   lat    |
-|---------------|---------|---------|------|------------|--------|----------|
+|---------------|--------:|--------:|-----:|------------|-------:|---------:|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 | 53.000 | -194.000 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 | 53.000 | -194.000 |
 
@@ -255,7 +255,7 @@ INNER JOIN cities ON weather.city = cities.name;
 
 This syntax is not as commonly used as the one above, but we show it here to help you understand the following topics.
 
-Now we will figure out how we can get the Hayward records back in. What we want the query to do is to scan the `weather` table and for each row to find the matching cities row(s). If no matching row is found we want some "empty values" to be substituted for the `cities` table's columns. This kind of query is called an outer join. (The joins we have seen so far are inner joins.) The command looks like this:
+Now we will figure out how we can get the Hayward records back in. What we want the query to do is to scan the `weather` table and for each row to find the matching cities row(s). If no matching row is found we want some “empty values” to be substituted for the `cities` table's columns. This kind of query is called an outer join. (The joins we have seen so far are inner joins.) The command looks like this:
 
 ```sql
 SELECT *
@@ -264,7 +264,7 @@ LEFT OUTER JOIN cities ON weather.city = cities.name;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |     name      |   lat    |  lon   |
-|---------------|---------|---------|------|------------|---------------|----------|--------|
+|---------------|--------:|--------:|-----:|------------|---------------|---------:|-------:|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 | San Francisco | -194.000 | 53.000 |
 | San Francisco | 43      | 57      | 0.0  | 1994-11-29 | San Francisco | -194.000 | 53.000 |
 | Hayward       | 37      | 54      | NULL | 1994-11-29 | NULL          | NULL     | NULL   |
@@ -283,7 +283,7 @@ FROM weather;
 ```
 
 | max(temp_lo) |
-|--------------|
+|-------------:|
 | 46           |
 
 If we wanted to know what city (or cities) that reading occurred in, we might try:
@@ -331,10 +331,10 @@ HAVING max(temp_lo) < 40;
 ```
 
 |  city   | max(temp_lo) |
-|---------|--------------|
+|---------|-------------:|
 | Hayward | 37           |
 
-which gives us the same results for only the cities that have all `temp_lo` values below 40. Finally, if we only care about cities whose names begin with "S", we can use the `LIKE` operator:
+which gives us the same results for only the cities that have all `temp_lo` values below 40. Finally, if we only care about cities whose names begin with `S`, we can use the `LIKE` operator:
 
 ```sql
 SELECT city, max(temp_lo)
@@ -368,10 +368,10 @@ FROM weather;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |
-|---------------|---------|---------|------|------------|
+|---------------|--------:|--------:|-----:|------------|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
-| San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
-| Hayward       | 37      | 54      | NULL | 1994-11-29 |
+| San Francisco | 41      | 55      | 0.0  | 1994-11-29 |
+| Hayward       | 35      | 52      | NULL | 1994-11-29 |
 
 ## Deletions
 
@@ -390,9 +390,9 @@ FROM weather;
 ```
 
 |     city      | temp_lo | temp_hi | prcp |    date    |
-|---------------|---------|---------|------|------------|
+|---------------|--------:|--------:|-----:|------------|
 | San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
-| San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
+| San Francisco | 41      | 55      | 0.0  | 1994-11-29 |
 
 One should be cautious when issuing statements of the following form:
 

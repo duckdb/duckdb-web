@@ -25,10 +25,8 @@ This section explains the prerequisites, scope, and known limitations of larger-
 
 ### Spilling to Disk
 
-Larger-than-memory workloads are supported by spilling to disk. If DuckDB is connected to a [persistent database file]({% link docs/api/cli/overview.md %}#in-memory-vs-persistent-database), DuckDB will create a temporary directory named `⟨database_file_name⟩.tmp` when the available memory is no longer sufficient to continue processing.
-
-If DuckDB is running in in-memory mode, it cannot use disk to offload data if it does not fit into main memory.
-To enable offloading in the absence of a persistent database file, use the [`SET temp_directory` statement]({% link docs/configuration/pragmas.md %}#temp-directory-for-spilling-data-to-disk):
+Larger-than-memory workloads are supported by spilling to disk.
+With the default configuration, DuckDB creates the `⟨database_file_name⟩.tmp` temporary directory (in persistent mode) or the `.tmp` directory (in in-memory mode). This directory can be changed using the the [`temp_directory` configuration option]({% link docs/configuration/pragmas.md %}#temp-directory-for-spilling-data-to-disk), e.g.:
 
 ```sql
 SET temp_directory = '/path/to/temp_dir.tmp/';
@@ -40,6 +38,7 @@ Some operators cannot output a single row until the last row of their input has 
 These are called _blocking operators_ as they require their entire input to be buffered,
 and are the most memory-intensive operators in relational database systems.
 The main blocking operators are the following:
+
 * _sorting:_ [`ORDER BY`]({% link docs/sql/query_syntax/orderby.md %}),
 * _grouping:_ [`GROUP BY`]({% link docs/sql/query_syntax/groupby.md %}),
 * _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`]({% link docs/sql/functions/window_functions.md %}),
@@ -60,10 +59,12 @@ That said, there are some limitations at the moment:
 ## Profiling
 
 If your queries are not performing as well as expected, it’s worth studying their query plans:
+
 * Use [`EXPLAIN`]({% link docs/guides/meta/explain.md %}) to print the physical query plan without running the query.
 * Use [`EXPLAIN ANALYZE`]({% link docs/guides/meta/explain_analyze.md %}) to run and profile the query. This will show the CPU time that each step in the query takes. Note that due to multi-threading, adding up the individual times will be larger than the total query processing time.
 
 Query plans can point to the root of performance issues. A few general directions:
+
 * Avoid nested loop joins in favor of hash joins.
 * A scan that does not include a filter pushdown for a filter condition that is later applied performs unnecessary IO. Try rewriting the query to apply a pushdown.
 * Bad join orders where the cardinality of an operator explodes to billions of tuples should be avoided at all costs.

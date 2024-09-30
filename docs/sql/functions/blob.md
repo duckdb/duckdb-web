@@ -5,6 +5,8 @@ redirect_from:
   - docs/test/functions/blob
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 This section describes functions and operators for examining and manipulating [`BLOB` values]({% link docs/sql/data_types/blob.md %}).
 
 <!-- markdownlint-disable MD056 -->

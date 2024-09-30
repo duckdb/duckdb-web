@@ -3,6 +3,8 @@ layout: docu
 title: List Functions
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 | Name | Description |
 |:--|:-------|
 | [`list[index]`](#listindex) | Bracket notation serves as an alias for `list_extract`. |
@@ -10,33 +12,35 @@ title: List Functions
 | [`list[begin:end:step]`](#listbeginendstep) | `list_slice` in bracket notation with an added `step` feature. |
 | [`array_pop_back(list)`](#array_pop_backlist) | Returns the list without the last element. |
 | [`array_pop_front(list)`](#array_pop_frontlist) | Returns the list without the first element. |
-| [`flatten(list_of_lists)`](#flattenlist_of_lists) | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples]({% link docs/sql/functions/nested.md %}#flatten)). |
+| [`flatten(list_of_lists)`](#flattenlist_of_lists) | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](#flattening)). |
 | [`len(list)`](#lenlist) | Return the length of the list. |
-| [`list_aggregate(list, name)`](#list_aggregatelist-name) | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/nested.md %}#list-aggregates) section for more details. |
+| [`list_aggregate(list, name)`](#list_aggregatelist-name) | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/list.md %}#list-aggregates) section for more details. |
 | [`list_any_value(list)`](#list_any_valuelist) | Returns the first non-null value in the list. |
 | [`list_append(list, element)`](#list_appendlist-element) | Appends `element` to `list`. |
 | [`list_concat(list1, list2)`](#list_concatlist1-list2) | Concatenates two lists. |
 | [`list_contains(list, element)`](#list_containslist-element) | Returns true if the list contains the element. |
 | [`list_cosine_similarity(list1, list2)`](#list_cosine_similaritylist1-list2) | Compute the cosine similarity between two lists. |
+| [`list_cosine_distance(list1, list2)`](#list_cosine_distancelist1-list2) | Compute the cosine distance between two lists. Equivalent to `1.0 - list_cosine_similarity`. |
 | [`list_distance(list1, list2)`](#list_distancelist1-list2) | Calculates the Euclidean distance between two points with coordinates given in two inputs lists of equal length. |
 | [`list_distinct(list)`](#list_distinctlist) | Removes all duplicates and `NULL` values from a list. Does not preserve the original order. |
 | [`list_dot_product(list1, list2)`](#list_dot_productlist1-list2) | Computes the dot product of two same-sized lists of numbers. |
+| [`list_negative_dot_product(list1, list2)`](#list_negative_dot_productlist1-list2) | Computes the negative dot product of two same-sized lists of numbers. Equivalent to `- list_dot_product`. |
 | [`list_extract(list, index)`](#list_extractlist-index) | Extract the `index`th (1-based) value from the list. |
 | [`list_filter(list, lambda)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#filter) page for more details. |
 | [`list_grade_up(list)`](#list_grade_uplist) | Works like sort, but the results are the indexes that correspond to the position in the original `list` instead of the actual values. |
 | [`list_has_all(list, sub-list)`](#list_has_alllist-sub-list) | Returns true if all elements of sub-list exist in list. |
 | [`list_has_any(list1, list2)`](#list_has_anylist1-list2) | Returns true if any elements exist is both lists. |
 | [`list_intersect(list1, list2)`](#list_intersectlist1-list2) | Returns a list of all the elements that exist in both `l1` and `l2`, without duplicates. |
-| [`list_position(list, element)`](#list_positionlist-element) | Returns the index of the element if the list contains the element. |
+| [`list_position(list, element)`](#list_positionlist-element) | Returns the index of the element if the list contains the element. If the element is not found, it returns `NULL`. |
 | [`list_prepend(element, list)`](#list_prependelement-list) | Prepends `element` to `list`. |
 | [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. |
 | [`list_resize(list, size[, value])`](#list_resizelist-size-value) | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set. |
-| [`list_reverse_sort(list)`](#list_reverse_sortlist) | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
+| [`list_reverse_sort(list)`](#list_reverse_sortlist) | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
 | [`list_reverse(list)`](#list_reverselist) | Reverses the list. |
 | [`list_select(value_list, index_list)`](#list_selectvalue_list-index_list) | Returns a list based on the elements selected by the `index_list`. |
 | [`list_slice(list, begin, end, step)`](#list_slicelist-begin-end-step) | `list_slice` with added `step` feature. |
-| [`list_slice(list, begin, end)`](#list_slicelist-begin-end) | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/nested.md %}#slicing). |
-| [`list_sort(list)`](#list_sortlist) | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
+| [`list_slice(list, begin, end)`](#list_slicelist-begin-end) | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/list.md %}#slicing). |
+| [`list_sort(list)`](#list_sortlist) | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
 | [`list_transform(list, lambda)`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#transform) page for more details. |
 | [`list_unique(list)`](#list_uniquelist) | Counts the unique elements of a list. |
 | [`list_value(any, ...)`](#list_valueany-) | Create a `LIST` containing the argument values. |
@@ -91,7 +95,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples]({% link docs/sql/functions/nested.md %}#flatten)). |
+| **Description** | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](#flattening)). |
 | **Example** | `flatten([[1, 2], [3, 4]])` |
 | **Result** | `[1, 2, 3, 4]` |
 
@@ -108,7 +112,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/nested.md %}#list-aggregates) section for more details. |
+| **Description** | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/sql/functions/list.md %}#list-aggregates) section for more details. |
 | **Example** | `list_aggregate([1, 2, NULL], 'min')` |
 | **Result** | `1` |
 | **Aliases** | `list_aggr`, `aggregate`, `array_aggregate`, `array_aggr` |
@@ -156,6 +160,14 @@ title: List Functions
 | **Example** | `list_cosine_similarity([1, 2, 3], [1, 2, 5])` |
 | **Result** | `0.9759000729485332` |
 
+#### `list_cosine_distance(list1, list2)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Compute the cosine distance between two lists. Equivalent to `1.0 - list_cosine_similarity` |
+| **Example** | `list_cosine_distance([1, 2, 3], [1, 2, 5])` |
+| **Result** | `0.007416606` |
+
 #### `list_distance(list1, list2)`
 
 <div class="nostroke_table"></div>
@@ -181,6 +193,15 @@ title: List Functions
 | **Example** | `list_dot_product([1, 2, 3], [1, 2, 5])` |
 | **Result** | `20.0` |
 | **Alias** | `list_inner_product` |
+
+#### `list_negative_dot_product(list1, list2)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the negative dot product of two same-sized lists of numbers. Equivalent to `- list_dot_product` |
+| **Example** | `list_negative_dot_product([1, 2, 3], [1, 2, 5])` |
+| **Result** | `-20.0` |
+| **Alias** | `list_negative_inner_product` |
 
 #### `list_extract(list, index)`
 
@@ -240,7 +261,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the index of the element if the list contains the element. |
+| **Description** | Returns the index of the element if the list contains the element. If the element is not found, it returns `NULL`. |
 | **Example** | `list_position([1, 2, NULL], 2)` |
 | **Result** | `2` |
 | **Aliases** | `list_indexof`, `array_position`, `array_indexof` |
@@ -276,7 +297,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
+| **Description** | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
 | **Example** | `list_reverse_sort([3, 6, 1, 2])` |
 | **Result** | `[6, 3, 2, 1]` |
 | **Alias** | `array_reverse_sort` |
@@ -312,7 +333,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/nested.md %}#slicing). |
+| **Description** | Extract a sublist using slice conventions. Negative values are accepted. See [slicing]({% link docs/sql/functions/list.md %}#slicing). |
 | **Example** | `list_slice([4, 5, 6], 2, 3)` |
 | **Result** | `[5, 6]` |
 | **Alias** | `array_slice` |
@@ -321,7 +342,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/nested.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
+| **Description** | Sorts the elements of the list. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the sorting order and the `NULL` sorting order. |
 | **Example** | `list_sort([3, 6, 1, 2])` |
 | **Result** | `[1, 2, 3, 6]` |
 | **Alias** | `array_sort` |
@@ -391,7 +412,7 @@ The following operators are supported for lists:
 | `@>`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **right** of the operator is the sublist. | `[1, 2, 3, 4] @> [3, 4, 3]`       | `true`               |
 | `<@`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **left** of the operator is the sublist.  | `[1, 4] <@ [1, 2, 3, 4]`          | `true`               |
 | `||`  | Alias for [`list_concat`](#list_concatlist1-list2).                                                                     | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
-| `<=>` | Alias for [`list_cosine_similarity`](#list_cosine_similaritylist1-list2).                                               | `[1, 2, 3] <=> [1, 2, 5]`         | `0.9759000729485332` |
+| `<=>` | Alias for [`list_cosine_distance`](#list_cosine_distancelist1-list2).                                               | `[1, 2, 3] <=> [1, 2, 5]`         | `0.007416606` |
 | `<->` | Alias for [`list_distance`](#list_distancelist1-list2).                                                                 | `[1, 2, 3] <-> [1, 2, 5]`         | `2.0`                |
 
 <!-- markdownlint-enable MD056 -->
@@ -401,28 +422,45 @@ The following operators are supported for lists:
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
 
 ```sql
-SELECT [lower(x) FOR x IN strings]
+SELECT [lower(x) FOR x IN strings] AS strings
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 ```
 
-```text
-[hello, , world]
-```
+<div class="narrow_table monospace_table"></div>
+
+|     strings      |
+|------------------|
+| [hello, , world] |
 
 ```sql
-SELECT [upper(x) FOR x IN strings IF len(x) > 0]
+SELECT [upper(x) FOR x IN strings IF len(x) > 0] AS strings
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 ```
 
-```text
-[HELLO, WORLD]
+<div class="narrow_table monospace_table"></div>
+
+|    strings     |
+|----------------|
+| [HELLO, WORLD] |
+
+List comprehensions can also use the position of the list elements by adding a second variable.
+In the following example, we use `x, i`, where `x` is the value and `i` is the position:
+
+```sql
+SELECT [4, 5, 6] as l, [x FOR x, i IN l IF i != 2] filtered;
 ```
+
+<div class="narrow_table monospace_table"></div>
+
+|     l     | filtered |
+|-----------|----------|
+| [4, 5, 6] | [4, 6]   |
 
 ## Range Functions
 
 DuckDB offers two range functions, [`range(start, stop, step)`](#range) and [`generate_series(start, stop, step)`](#generate_series), and their variants with default arguments for `stop` and `step`. The two functions' behavior is different regarding their `stop` argument. This is documented below.
 
-#### `range`
+### `range`
 
 The `range` function creates a list of values in the range between `start` and `stop`.
 The `start` parameter is inclusive, while the `stop` parameter is exclusive.
@@ -430,7 +468,7 @@ The default value of `start` is 0 and the default value of `step` is 1.
 
 Based on the number of arguments, the following variants of `range` exist.
 
-##### `range(stop)`
+#### `range(stop)`
 
 ```sql
 SELECT range(5);
@@ -440,7 +478,7 @@ SELECT range(5);
 [0, 1, 2, 3, 4]
 ```
 
-##### `range(start, stop)`
+#### `range(start, stop)`
 
 ```sql
 SELECT range(2, 5);
@@ -450,7 +488,7 @@ SELECT range(2, 5);
 [2, 3, 4]
 ```
 
-##### `range(start, stop, step)`
+#### `range(start, stop, step)`
 
 ```sql
 SELECT range(2, 5, 3);
@@ -460,14 +498,14 @@ SELECT range(2, 5, 3);
 [2]
 ```
 
-#### `generate_series`
+### `generate_series`
 
 The `generate_series` function creates a list of values in the range between `start` and `stop`.
 Both the `start` and the `stop` parameters are inclusive.
 The default value of `start` is 0 and the default value of `step` is 1.
 Based on the number of arguments, the following variants of `generate_series` exist.
 
-##### `generate_series(stop)`
+#### `generate_series(stop)`
 
 ```sql
 SELECT generate_series(5);
@@ -477,7 +515,7 @@ SELECT generate_series(5);
 [0, 1, 2, 3, 4, 5]
 ```
 
-##### `generate_series(start, stop)`
+#### `generate_series(start, stop)`
 
 ```sql
 SELECT generate_series(2, 5);
@@ -487,7 +525,7 @@ SELECT generate_series(2, 5);
 [2, 3, 4, 5]
 ```
 
-##### `generate_series(start, stop, step)`
+#### `generate_series(start, stop, step)`
 
 ```sql
 SELECT generate_series(2, 5, 3);
@@ -713,61 +751,71 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 
 ## Sorting Lists
 
-The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether `NULL` values should be moved to the beginning or to the end of the list.
+The function `list_sort` sorts the elements of a list either in ascending or descending order.
+In addition, it allows to provide whether `NULL` values should be moved to the beginning or to the end of the list.
+It has the same sorting behavior as DuckDB's `ORDER BY` clause.
+Therefore, (nested) values compare the same in `list_sort` as in `ORDER BY`.
 
-By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and `NULL` values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [`PRAGMA` statements]({% link docs/configuration/pragmas.md %}#default-ordering-for-nulls).
+By default, if no modifiers are provided, DuckDB sorts `ASC NULLS FIRST`.
+I.e., the values are sorted in ascending order and `NULL` values are placed first.
+This is identical to the default sort order of SQLite.
+The default sort order can be changed using [`PRAGMA` statements.](../query_syntax/orderby).
 
-`list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. `list_sort` takes up to two additional optional parameters. The second parameter provides the sort order and can be either `ASC` or `DESC`. The third parameter provides the `NULL` sort order and can be either `NULLS FIRST` or `NULLS LAST`.
+`list_sort` leaves it open to the user whether they want to use the default sort order or a custom order.
+`list_sort` takes up to two additional optional parameters.
+The second parameter provides the sort order and can be either `ASC` or `DESC`.
+The third parameter provides the `NULL` order and can be either `NULLS FIRST` or `NULLS LAST`.
 
-Default sort order and default `NULL` sort order:
+This query uses the default sort order and the default `NULL` order.
 
 ```sql
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ```
 
-```text
+```sql
 [NULL, NULL, -5, 1, 3, 5]
 ```
 
-Only providing the sort order:
+This query provides the sort order.
+The `NULL` order uses the configurable default value.
 
 ```sql
 SELECT list_sort([1, 3, NULL, 2], 'ASC');
 ```
 
-```text
+```sql
 [NULL, 1, 2, 3]
 ```
 
-Providing the sort order and the `NULL` sort order:
-
+This query provides both the sort order and the `NULL` order.
 ```sql
 SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 ```
 
-```text
+```sql
 [NULL, 3, 2, 1]
 ```
 
-`list_reverse_sort` has an optional second parameter providing the `NULL` sort order. It can be either `NULLS FIRST` or `NULLS LAST`.
+`list_reverse_sort` has an optional second parameter providing the `NULL` sort order. 
+It can be either `NULLS FIRST` or `NULLS LAST`.
 
-Default `NULL` sort order:
+This query uses the default `NULL` sort order.
 
 ```sql
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ```
 
-```text
+```sql
 [NULL, NULL, -5, 1, 3, 5]
 ```
 
-Providing the `NULL` sort order:
+This query provides the `NULL` sort order.
 
 ```sql
 SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 ```
 
-```text
+```sql
 [3, 2, 1, NULL]
 ```
 

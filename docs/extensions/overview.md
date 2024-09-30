@@ -12,7 +12,7 @@ DuckDB has a flexible extension mechanism that allows for dynamically loading ex
 These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
 
 > Extensions are loadable on all clients (e.g., Python and R).
-> Extensions distributed via the Core and Community repositories are built and tested on macOS (AMD64 and ARM64), Windows (AMD64) and Linux (AMD64 and ARM64).
+> Extensions distributed via the Core and Community repositories are built and tested on macOS, Windows and Linux. All operating systems are supported for both the AMD64 and the ARM64 architectures.
 
 ## Listing Extensions
 
@@ -56,23 +56,28 @@ To make an extension that is not built-in available in DuckDB, two steps need to
 directory for the installed extension, then load it to make its features available. This means that every time DuckDB is restarted, all
 extensions that are used need to be (re)loaded
 
-    > Once loaded, an extension cannot be reinstalled. It is not possible to unload an extension.
+> Extension installation and loading are subject to a few [limitations]({% link docs/extensions/working_with_extensions.md %}#limitations).
 
 There are two main methods of making DuckDB perform the **installation** and **loading** steps for an installable extension: **explicitly** and through **autoloading**.
 
 ### Explicit `INSTALL` and `LOAD`
 
-In DuckDB extensions can also explicitly installed and loaded. Both non-autoloadable and autoloadable extensions can be installed this way.
+In DuckDB extensions can also be explicitly installed and loaded. Both non-autoloadable and autoloadable extensions can be installed this way.
 To explicitly install and load an extension, DuckDB has the dedicated SQL statements `LOAD` and `INSTALL`. For example,
-to install and load the [`spatial` extension]({% link docs/extensions/spatial.md %}), run:
+to install and load the [`spatial` extension]({% link docs/extensions/spatial/overview.md %}), run:
 
 ```sql
 INSTALL spatial;
 LOAD spatial;
 ```
 
-With these statements, DuckDB will ensure the spatial extension is installed (ignoring the `INSTALL` statement if it is already), then proceed
+With these statements, DuckDB will ensure the spatial extension is installed (ignoring the `INSTALL` statement if it is already installed), then proceed
 to `LOAD` the spatial extension (again ignoring the statement if it is already loaded).
+
+#### Extension Repository
+
+Optionally a repository can be provided where the extension should be installed from, by appending `FROM <repository>` to the `INSTALL`/`FORCE INSTALL` command.
+This repository can either be an alias, such as [`community`]({% link docs/extensions/community_extensions.md %}), or it can be a direct URL, provided as a single-quoted string.
 
 After installing/loading an extension, the [`duckdb_extensions` function](#listing-extensions) can be used to get more information.
 
@@ -88,7 +93,7 @@ FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv'
 
 DuckDB will automatically install and load the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) extension. No explicit `INSTALL` or `LOAD` statements are required.
 
-Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes to the running DuckDB instance, making autoloading technically not (yet) possible. For others, it is preferred to have users opt-in to the extension explicitly before use due to the way they modify behaviour in DuckDB.
+Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes to the running DuckDB instance, making autoloading technically not (yet) possible. For others, it is preferred to have users opt-in to the extension explicitly before use due to the way they modify behavior in DuckDB.
 
 To see which extensions can be autoloaded, check the [core extensions list]({% link docs/extensions/core_extensions.md %}).
 
@@ -105,8 +110,6 @@ which has dedicated `install_extension(name: str)` and `load_extension(name: str
 to the [Client API docs]({% link docs/api/overview.md %})
 
 ## Updating Extensions
-
-> This feature was introduced in DuckDB 0.10.3.
 
 While built-in extensions are tied to a DuckDB release due to their nature of being built into the DuckDB binary, installable extensions
 can and do receive updates. To ensure all currently installed extensions are on the most recent version, call:
@@ -134,6 +137,8 @@ To change the default location where DuckDB stores its extensions, use the `exte
 ```sql
 SET extension_directory = '/path/to/your/extension/directory';
 ```
+
+Note that setting the value of the `home_directory` configuration option has no effect on the location of the extensions.
 
 ## Binary Compatibility
 

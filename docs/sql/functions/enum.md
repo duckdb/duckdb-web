@@ -5,6 +5,8 @@ redirect_from:
   - docs/test/functions/enum
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 This section describes functions and operators for examining and manipulating [`ENUM` values]({% link docs/sql/data_types/enum.md %}).
 The examples assume an enum type created as:
 
