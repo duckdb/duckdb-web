@@ -15,7 +15,7 @@ The [`VACUUM` statement]({% link docs/sql/statements/vacuum.md %}) does _not_ tr
 
 ## Compacting a Database by Copying
 
-To compact the database, you can create a fresh copy of the database using the [`COPY FROM DATABASE` statement]({% link docs/sql/statements/copy.md %}#copy-from-database--to):
+To compact the database, you can create a fresh copy of the database using the [`COPY FROM DATABASE` statement]({% link docs/sql/statements/copy.md %}#copy-from-database--to). In the following example, we first connect to the original database `db1`, then the new (empty) database `db2`. Then, we copy the content of `db1` to `db2`.
 
 ```sql
 ATTACH 'db1.db' AS db1;
