@@ -41,7 +41,6 @@ By default, all schemas are attached. When working with large instances, it can 
 ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE POSTGRES, SCHEMA 'public');
 ```
 
-
 ### Configuration
 
 The `ATTACH` command takes as input either a [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
