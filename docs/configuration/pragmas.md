@@ -216,6 +216,14 @@ Prior to version 0.10.0, DuckDB would automatically allow any type to be implici
 SET old_implicit_casting = true;
 ```
 
+## Python: Scan All Dataframes
+
+Prior to version 1.1.0, DuckDB's [replacement scan mechanism]({% link docs/api/c/replacement_scans.md %}) scanned the global Python namespace. To revert to this old behavior, use th following setting:
+
+```sql
+SET python_scan_all_frames = true;
+```
+
 ## Information on DuckDB
 
 #### Version
