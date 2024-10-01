@@ -44,6 +44,12 @@
 	font-family: $fontMonoBold;
 }
 
+body.documentation .highlight code a{
+	text-decoration-color: #23974a;
+	text-underline-offset: .05em;
+	text-underline-offset: 0.17em;
+}
+
 // class names
 .highlight :is(.nc, .nv){
 	color: #d52753;

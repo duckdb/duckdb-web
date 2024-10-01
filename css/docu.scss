@@ -148,6 +148,21 @@ body.documentation{
 			 font-size: 19px;
 			}
 		}
+		h5{
+			font-size: $docuh5;
+			font-weight: 700;
+			margin-bottom: 20px;
+			margin-top: 40px;
+			line-height: 1;
+			a:hover{
+				color: black;
+				text-decoration: underline;
+			}
+			code{
+			 font-family: $fontMonoXBold;
+			 font-size: 19px;
+			}
+		}
 	  /** MARGINS IN DOCU SINGLE PAGE **/
 		h4 + .highlighter-rouge{
 			margin-top: 5px;
