@@ -100,7 +100,7 @@ cmake --build . --config Release
 
 Once the build finishes successfully, you can find the `duckdb.exe` binary in the repository's directory:
 
-```bash
+```batch
 ./duckdb.exe
 ```
 
