@@ -28,7 +28,7 @@
 }
 
 // foreground
-.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
+.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg){
 	color: #383a42;
 }
 
@@ -90,11 +90,6 @@ th .k {
 }
 
 // ??
-.highlight :is(.n, .vg){
-	color: #383a42;
-}
-
-// ??
 .highlight :is(.gh, .gp){
 }
 
@@ -139,7 +134,7 @@ html.darkmode,
 	}
 	
 	// foreground
-	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
+	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg){
 		color: #abb2bf;
 	}
 	
@@ -187,13 +182,7 @@ html.darkmode,
 	}
 	
 	// ??
-	.highlight :is(.n, .vg){
-		color: #ff78f8;
-	}
-	
-	// ??
 	.highlight :is(.gh, .gp){
-		
 	}
 	
 }
