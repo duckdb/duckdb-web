@@ -735,7 +735,10 @@ pre {
 	-webkit-border-radius: 2px;
 	line-height: 1.4;
 }
-code.language-plaintext{
+.monospace_table + table tbody td {
+	font-family: $fontMono;
+}
+code.language-plaintext {
 	background-color: $black100;
 	font-family: $fontMonoBold;
 	border-radius: 3px;
@@ -931,11 +934,6 @@ td.icon{
 	min-width: auto;
 	td{
 		min-width: 40px;
-	}
-}
-.monospace_table + table{
-	td{
-		font-family: $fontMono;
 	}
 }
 .nostroke_table + table{
