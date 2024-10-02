@@ -43,6 +43,20 @@ The view that describes the catalog information for columns is `information_sche
 | `numeric_scale` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) scale of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is null. |`INTEGER`| `2` |
 | `datetime_precision` | If `data_type` identifies a date, time, timestamp, or interval type, this column contains the (declared or implicit) fractional seconds precision of the type for this column, that is, the number of decimal digits maintained following the decimal point in the seconds value. No fractional seconds are currently supported in DuckDB. For all other data types, this column is null. |`INTEGER`| `0` |
 
+### `constraint_column_usage`: Constraint Column Usage
+
+This view describes all columns in the current database that are used by some constraint. For a check constraint, this view identifies the columns that are used in the check expression. For a not-null constraint, this view identifies the column that the constraint is defined on. For a foreign key constraint, this view identifies the columns that the foreign key references. For a unique or primary key constraint, this view identifies the constrained columns.
+
+| Column | Description | Type | Example |
+|--------|-------------|------|---------|
+| `table_catalog` | Name of the database that contains the table that contains the column that is used by some constraint (always the current database) |`VARCHAR`| `'my_db'` |
+| `table_schema` | Name of the schema that contains the table that contains the column that is used by some constraint |`VARCHAR`| `'main'` |
+| `table_name` | Name of the table that contains the column that is used by some constraint |`VARCHAR`| `'widgets'` |
+| `column_name` | Name of the column that is used by some constraint |`VARCHAR`| `'price'` |
+| `constraint_catalog` | Name of the database that contains the constraint (always the current database) |`VARCHAR`| `'my_db'` |
+| `constraint_schema` | Name of the schema that contains the constraint |`VARCHAR`| `'main'` |
+| `constraint_name` | Name of the constraint |`VARCHAR`| `'exam_id_students_id_fkey'` |
+
 ### `key_column_usage`: Key Column Usage
 
 | Column | Description | Type | Example |

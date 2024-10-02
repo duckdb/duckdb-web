@@ -82,11 +82,11 @@ The DuckDB CSV reader can automatically infer which configuration flags to use b
 
 ## Parameters
 
-Below are parameters that can be passed to the CSV reader. These parameters are accepted by both the [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy-to) and the [`read_csv` function](#csv-functions).
+Below are parameters that can be passed to the CSV reader. These parameters are accepted by the [`read_csv` function](#csv-functions). But not all parameters are accepted by the [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy-to)).
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
-| `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type `VARCHAR`. | `BOOL` | `false` |
+| `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type `VARCHAR`. This option is only supported by the `read_csv` function. | `BOOL` | `false` |
 | `allow_quoted_nulls` | Option to allow the conversion of quoted values to `NULL` values | `BOOL` | `true` |
 | `auto_detect` | Enables [auto detection of CSV parameters]({% link docs/data/csv/auto_detection.md %}). | `BOOL` | `true` |
 | `auto_type_candidates` | This option allows you to specify the types that the sniffer will use when detecting CSV column types. The `VARCHAR` type is always included in the detected types (as a fallback option). See [example](#auto_type_candidates-details). | `TYPE[]` | [default types](#auto_type_candidates-details) |
@@ -94,6 +94,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `decimal_separator` | The decimal separator of numbers. | `VARCHAR` | `.` |
+| `delimiter` | Specifies the delimiter character that separates columns within each row (line) of the file. Alias for `sep`. This option is only available in the `COPY` statement. | `VARCHAR` | `,` |
 | `delim` | Specifies the delimiter character that separates columns within each row (line) of the file. Alias for `sep`. | `VARCHAR` | `,` |
 | `escape` | Specifies the string that should appear before a data character sequence that matches the `quote` value. | `VARCHAR` | `"` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
