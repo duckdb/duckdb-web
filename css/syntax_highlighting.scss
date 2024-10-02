@@ -23,12 +23,12 @@
 }
 
 // numbers
-.highlight :is(.m, .mf, .mh, .mi, .mo, .il, .n, .vg){
+.highlight :is(.m, .mf, .mh, .mi, .mo, .il){
 	color: #ce33c0;
 }
 
 // foreground
-.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
+.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg){
 	color: #383a42;
 }
 
@@ -129,12 +129,12 @@ html.darkmode,
 	}
 
 	// numbers
-	.highlight :is(.m, .mf, .mh, .mi, .mo, .il, .n, .vg){
+	.highlight :is(.m, .mf, .mh, .mi, .mo, .il){
 		color: #ff78f8;
 	}
 	
 	// foreground
-	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
+	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg){
 		color: #abb2bf;
 	}
 	
@@ -183,7 +183,6 @@ html.darkmode,
 	
 	// ??
 	.highlight :is(.gh, .gp){
-		
 	}
 	
 }
