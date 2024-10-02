@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: scrooge
   description: Provides functionality for financial data-analysis, including data scanners for the Ethereum Blockchain and Yahoo Finance
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   excluded_platforms: "windows_amd64_rtools"
   build: cmake
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: pdet/Scrooge-McDuck
-  ref: fc7ef9c9c6aad1406cddd6e98d919a154e5aa1d6
+  ref: c97da6a4bf04352d9f9493df30ef90477bf250e7
 
 docs:
   hello_world: |
@@ -39,7 +39,7 @@ docs:
     More information on the supported scanners and functions can be found on Scrooge's [wiki page](https://github.com/pdet/Scrooge-McDuck/wiki).
     You can also find a ROI example of Ether on the [following blogpost](https://pdet-blog.github.io/2024/06/30/ethereum.html)
 
-extension_star_count: 120
+extension_star_count: 128
 
 ---
 
@@ -64,16 +64,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type | description | comment | example |
-|--------------------|---------------|-------------|---------|---------|
-| first_s            | aggregate     |             |         |         |
-| last_s             | aggregate     |             |         |         |
-| portfolio_frontier | table         |             |         |         |
-| read_eth           | table         |             |         |         |
-| sma                | aggregate     |             |         |         |
-| timebucket         | scalar        |             |         |         |
-| volatility         | aggregate     |             |         |         |
-| yahoo_finance      | table         |             |         |         |
+| function_name | function_type | description | comment | example |
+|---------------|---------------|-------------|---------|---------|
+| first_s       | aggregate     |             |         |         |
+| last_s        | aggregate     |             |         |         |
+| read_eth      | table         |             |         |         |
+| sma           | aggregate     |             |         |         |
+| timebucket    | scalar        |             |         |         |
+| volatility    | aggregate     |             |         |         |
+| yahoo_finance | table         |             |         |         |
 
 ### Added Settings
 

@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ywelsch/duckdb-prql
-  ref: 60854f0f1c90a3e90786ff353b0ac99629e26300
+  ref: 5dedc86da88c35ab219e2e1ba2c54299160484af
 
 docs:
   hello_world: |
@@ -49,7 +49,7 @@ docs:
   extended_description: |
     The PRQL extension adds support for the [Pipelined Relational Query Language](https://prql-lang.org).
 
-extension_star_count: 233
+extension_star_count: 254
 
 ---
 

@@ -11,15 +11,20 @@ extension:
   version: 0.0.1
   language: C++
   build: cmake
-  # Note that quack doesn't actually need any extra toolchains, but they are added since quack is used to test community-extensions CI
-  requires_toolchains: "rust"
   license: MIT
   maintainers:
     - hannes
 
+  # (Optional) param that specifies required extra toolchains
+  requires_toolchains: "rust"
+  # (Optional) param that specifies a precise vcpkg commit to use
+  vcpkg_commit: "a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6"
+  # (Optional) this extension requires additional custom toolchain setup
+  custom_toolchain_script: true
+
 repo:
-  github: hannes/quack
-  ref: 09680a975bcf9e93b5a2f46d3eeb68792d5239c6
+  github: duckdb/extension-template
+  ref: f89d2663d9788dc27f3a77bcdf638ace6357a459
 
 docs:
   hello_world: |
@@ -27,7 +32,7 @@ docs:
   extended_description: |
     The quack extension is based on DuckDB's [Extension Template](https://duckdb/extension_template/), and it's a great starting point to get started building more advanced extensions.
 
-extension_star_count: 1
+extension_star_count: 132
 
 ---
 
