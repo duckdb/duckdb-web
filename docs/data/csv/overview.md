@@ -82,7 +82,7 @@ The DuckDB CSV reader can automatically infer which configuration flags to use b
 
 ## Parameters
 
-Below are parameters that can be passed to the CSV reader. These parameters are accepted by the [`read_csv` function](#csv-functions). But not all parameters are accepted by the [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy-to)).
+Below are parameters that can be passed to the CSV reader. These parameters are accepted by the [`read_csv` function](#csv-functions). But not all parameters are accepted by the [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy-to).
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
