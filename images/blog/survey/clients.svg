@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='504.00pt' height='201.60pt' viewBox='0 0 504.00 201.60'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: none;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1MDQuMDB8MC4wMHwyMDEuNjA='>
+    <rect x='0.00' y='0.00' width='504.00' height='201.60' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwyMDEuNjA=)'>
+<rect x='126.31' y='19.10' width='345.47' height='24.93' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='126.31' y='46.79' width='221.74' height='24.93' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='126.31' y='74.49' width='69.66' height='24.93' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='126.31' y='102.18' width='67.82' height='24.93' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='126.31' y='129.88' width='65.04' height='24.93' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='126.31' y='157.58' width='43.99' height='24.93' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<text x='467.07' y='35.68' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='23.86px' lengthAdjust='spacingAndGlyphs'>73%</text>
+<text x='343.34' y='63.38' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='24.29px' lengthAdjust='spacingAndGlyphs'>47%</text>
+<text x='191.26' y='91.07' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='22.44px' lengthAdjust='spacingAndGlyphs'>15%</text>
+<text x='189.43' y='118.77' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='22.64px' lengthAdjust='spacingAndGlyphs'>14%</text>
+<text x='186.65' y='146.47' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='22.64px' lengthAdjust='spacingAndGlyphs'>14%</text>
+<text x='165.59' y='174.16' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>9%</text>
+<text x='109.04' y='175.11' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='49.49px' lengthAdjust='spacingAndGlyphs'>Node.js</text>
+<text x='109.04' y='147.42' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='30.20px' lengthAdjust='spacingAndGlyphs'>Java</text>
+<text x='109.04' y='119.72' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='90.53px' lengthAdjust='spacingAndGlyphs'>Webassembly</text>
+<text x='109.04' y='92.03' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='9.50px' lengthAdjust='spacingAndGlyphs'>R</text>
+<text x='109.04' y='64.33' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='94.10px' lengthAdjust='spacingAndGlyphs'>Command line</text>
+<text x='109.04' y='36.64' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='44.42px' lengthAdjust='spacingAndGlyphs'>Python</text>
+</g>
+</svg>

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='504.00pt' height='115.20pt' viewBox='0 0 504.00 115.20'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: none;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1MDQuMDB8MC4wMHwxMTUuMjA='>
+    <rect x='0.00' y='0.00' width='504.00' height='115.20' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwxMTUuMjA=)'>
+<rect x='162.16' y='18.94' width='311.33' height='23.99' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #2EAFFF;' />
+<rect x='162.16' y='72.26' width='104.71' height='23.99' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E950C7;' />
+<rect x='162.16' y='45.60' width='208.02' height='23.99' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00C770;' />
+<text x='469.93' y='35.06' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='24.31px' lengthAdjust='spacingAndGlyphs'>87%</text>
+<text x='263.31' y='88.38' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='25.01px' lengthAdjust='spacingAndGlyphs'>29%</text>
+<text x='366.62' y='61.72' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='25.38px' lengthAdjust='spacingAndGlyphs'>58%</text>
+<text x='146.60' y='89.34' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='131.65px' lengthAdjust='spacingAndGlyphs'>Desktop workstation</text>
+<text x='146.60' y='62.68' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='42.00px' lengthAdjust='spacingAndGlyphs'>Server</text>
+<text x='146.60' y='36.02' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='45.53px' lengthAdjust='spacingAndGlyphs'>Laptop</text>
+</g>
+</svg>
