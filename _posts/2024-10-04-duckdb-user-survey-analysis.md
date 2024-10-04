@@ -172,7 +172,7 @@ For reference, the questions in the user survey were phrased as follows:
     * R
     * Rust
     * Webassembly (Wasm)
-Other
+    * Other
 * What environment(s) do you run DuckDB on?
     * Laptop
     * Desktop workstation
