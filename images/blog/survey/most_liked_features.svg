@@ -21,20 +21,20 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHwxODAuMDA=)'>
-<rect x='190.21' y='19.27' width='457.91' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<rect x='190.21' y='48.14' width='344.67' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<rect x='190.21' y='77.01' width='228.95' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<rect x='190.21' y='105.88' width='217.51' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<rect x='190.21' y='134.74' width='171.68' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<text x='641.57' y='36.39' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='24.70px' lengthAdjust='spacingAndGlyphs'>70%</text>
-<text x='528.34' y='65.25' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='24.93px' lengthAdjust='spacingAndGlyphs'>53%</text>
-<text x='412.62' y='94.12' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='24.93px' lengthAdjust='spacingAndGlyphs'>35%</text>
-<text x='401.18' y='122.99' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='24.70px' lengthAdjust='spacingAndGlyphs'>33%</text>
-<text x='355.35' y='151.86' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='25.06px' lengthAdjust='spacingAndGlyphs'>26%</text>
-<text x='165.69' y='152.81' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='150.75px' lengthAdjust='spacingAndGlyphs'>In-memory integrations</text>
-<text x='165.69' y='123.94' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='146.77px' lengthAdjust='spacingAndGlyphs'>Extensive SQL support</text>
-<text x='165.69' y='95.08' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='74.61px' lengthAdjust='spacingAndGlyphs'>Ease of use</text>
-<text x='165.69' y='66.21' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='121.75px' lengthAdjust='spacingAndGlyphs'>File format support</text>
-<text x='165.69' y='37.34' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='117.27px' lengthAdjust='spacingAndGlyphs'>High performance</text>
+<rect x='182.92' y='19.27' width='464.39' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='182.92' y='48.14' width='349.55' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='182.92' y='77.01' width='232.20' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='182.92' y='105.88' width='220.59' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='182.92' y='134.74' width='174.11' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<text x='640.68' y='36.34' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>70%</text>
+<text x='525.84' y='65.20' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>53%</text>
+<text x='408.48' y='94.07' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>35%</text>
+<text x='396.88' y='122.94' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>33%</text>
+<text x='350.40' y='151.81' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>26%</text>
+<text x='158.05' y='152.75' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='143.11px' lengthAdjust='spacingAndGlyphs'>In-memory integrations</text>
+<text x='158.05' y='123.88' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='142.62px' lengthAdjust='spacingAndGlyphs'>Extensive SQL support</text>
+<text x='158.05' y='95.01' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='73.92px' lengthAdjust='spacingAndGlyphs'>Ease of use</text>
+<text x='158.05' y='66.14' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='116.66px' lengthAdjust='spacingAndGlyphs'>File format support</text>
+<text x='158.05' y='37.28' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='111.23px' lengthAdjust='spacingAndGlyphs'>High performance</text>
 </g>
 </svg>
