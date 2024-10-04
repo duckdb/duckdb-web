@@ -131,7 +131,7 @@ We asked users about the features that they'd most like to see in future DuckDB 
 | Support for the Delta Lake format                                       | 22%        |
 | Improved support for Iceberg (including writes)                         | 17%        |
 
-We are happy to report that, since a few months have passed since the survey, some of these requests have already been implemented:
+We are happy to report that, since survey was conducted pre-v1.0.0 and DuckDB is now at version 1.1.1, some of these requests are already a reality:
 
 * Reading Delta Lake is now possible via the [`delta` extension]({% post_url 2024-06-10-delta %}).
 * Vector search is now supported via the [`vss` extension]({% post_url 2024-05-03-vector-similarity-search-vss %}).
