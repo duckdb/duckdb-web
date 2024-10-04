@@ -21,23 +21,23 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHwyMTYuMDA=)'>
-<rect x='127.62' y='79.48' width='215.84' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<rect x='127.62' y='49.46' width='207.84' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<rect x='127.62' y='109.50' width='140.79' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<rect x='127.62' y='19.45' width='83.11' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<rect x='127.62' y='139.52' width='30.80' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<rect x='127.62' y='169.54' width='4.00' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
-<text x='348.97' y='97.11' style='font-size: 11.38px; font-family: "Suisse Intl";' textLength='22.21px' lengthAdjust='spacingAndGlyphs'>31%</text>
-<text x='340.98' y='67.09' style='font-size: 11.38px; font-family: "Suisse Intl";' textLength='25.55px' lengthAdjust='spacingAndGlyphs'>30%</text>
-<text x='273.92' y='127.13' style='font-size: 11.38px; font-family: "Suisse Intl";' textLength='25.58px' lengthAdjust='spacingAndGlyphs'>20%</text>
-<text x='216.24' y='37.08' style='font-size: 11.38px; font-family: "Suisse Intl";' textLength='22.25px' lengthAdjust='spacingAndGlyphs'>12%</text>
-<text x='163.94' y='157.15' style='font-size: 11.38px; font-family: "Suisse Intl";' textLength='18.45px' lengthAdjust='spacingAndGlyphs'>4%</text>
-<text x='137.13' y='187.17' style='font-size: 11.38px; font-family: "Suisse Intl";' textLength='15.54px' lengthAdjust='spacingAndGlyphs'>1%</text>
-<text x='113.84' y='188.12' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='47.98px' lengthAdjust='spacingAndGlyphs'>&gt; 10 TB</text>
-<text x='113.84' y='158.10' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='74.90px' lengthAdjust='spacingAndGlyphs'>1 TB – 10 TB</text>
-<text x='113.84' y='128.09' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='86.90px' lengthAdjust='spacingAndGlyphs'>100 GB – 1 TB</text>
-<text x='113.84' y='98.07' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='98.89px' lengthAdjust='spacingAndGlyphs'>10 GB – 100 GB</text>
-<text x='113.84' y='68.05' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='80.39px' lengthAdjust='spacingAndGlyphs'>1 GB – 10 GB</text>
-<text x='113.84' y='38.03' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='41.47px' lengthAdjust='spacingAndGlyphs'>&lt; 1 GB</text>
+<rect x='131.25' y='79.48' width='213.13' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='131.25' y='49.46' width='205.23' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='131.25' y='109.50' width='139.02' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='131.25' y='19.45' width='82.07' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='131.25' y='139.52' width='30.42' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='131.25' y='169.54' width='3.95' height='27.02' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<text x='349.82' y='97.06' style='font-size: 11.38px; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>31%</text>
+<text x='341.93' y='67.04' style='font-size: 11.38px; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>30%</text>
+<text x='275.72' y='127.08' style='font-size: 11.38px; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>20%</text>
+<text x='218.76' y='37.03' style='font-size: 11.38px; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>12%</text>
+<text x='167.12' y='157.10' style='font-size: 11.38px; font-family: "Arial";' textLength='16.44px' lengthAdjust='spacingAndGlyphs'>4%</text>
+<text x='140.64' y='187.12' style='font-size: 11.38px; font-family: "Arial";' textLength='16.44px' lengthAdjust='spacingAndGlyphs'>1%</text>
+<text x='117.64' y='188.06' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='49.15px' lengthAdjust='spacingAndGlyphs'>&gt; 10 TB</text>
+<text x='117.64' y='158.04' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='81.95px' lengthAdjust='spacingAndGlyphs'>1 TB – 10 TB</text>
+<text x='117.64' y='128.02' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='92.33px' lengthAdjust='spacingAndGlyphs'>100 GB – 1 TB</text>
+<text x='117.64' y='98.00' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='102.70px' lengthAdjust='spacingAndGlyphs'>10 GB – 100 GB</text>
+<text x='117.64' y='67.98' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='87.13px' lengthAdjust='spacingAndGlyphs'>1 GB – 10 GB</text>
+<text x='117.64' y='37.97' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='43.96px' lengthAdjust='spacingAndGlyphs'>&lt; 1 GB</text>
 </g>
 </svg>
