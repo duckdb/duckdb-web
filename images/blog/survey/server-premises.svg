@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='504.00pt' height='180.00pt' viewBox='0 0 504.00 180.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: none;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1MDQuMDB8MC4wMHwxODAuMDA='>
+    <rect x='0.00' y='0.00' width='504.00' height='180.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwxODAuMDA=)'>
+<rect x='214.64' y='48.14' width='261.35' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00C770;' />
+<rect x='214.64' y='19.27' width='261.35' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00C770;' />
+<rect x='214.64' y='77.01' width='134.41' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00C770;' />
+<rect x='214.64' y='105.88' width='106.40' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00C770;' />
+<rect x='214.64' y='134.74' width='39.24' height='25.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00C770;' />
+<text x='466.39' y='65.25' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='23.90px' lengthAdjust='spacingAndGlyphs'>27%</text>
+<text x='466.39' y='36.39' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='23.90px' lengthAdjust='spacingAndGlyphs'>27%</text>
+<text x='339.46' y='94.12' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='22.64px' lengthAdjust='spacingAndGlyphs'>14%</text>
+<text x='311.45' y='122.99' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='19.72px' lengthAdjust='spacingAndGlyphs'>11%</text>
+<text x='244.29' y='151.86' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Suisse Intl";' textLength='18.45px' lengthAdjust='spacingAndGlyphs'>4%</text>
+<text x='201.58' y='152.81' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='51.31px' lengthAdjust='spacingAndGlyphs'>Hetzner</text>
+<text x='201.58' y='123.94' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='186.63px' lengthAdjust='spacingAndGlyphs'>Google Cloud Platform (GCP)</text>
+<text x='201.58' y='95.08' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='101.68px' lengthAdjust='spacingAndGlyphs'>Microsoft Azure</text>
+<text x='201.58' y='66.21' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='184.67px' lengthAdjust='spacingAndGlyphs'>Amazon Web Services (AWS)</text>
+<text x='201.58' y='37.34' text-anchor='end' style='font-size: 14.00px; font-family: "Suisse Intl";' textLength='132.35px' lengthAdjust='spacingAndGlyphs'>On-premises cluster</text>
+</g>
+</svg>
