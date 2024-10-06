@@ -116,7 +116,7 @@ The `EXISTS` operator tests for the existence of any row inside the subquery. It
 For example, we can use it to figure out if there are any grades present for a given course:
 
 ```sql
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math') AS math_grades_present;
+SELECT EXISTS (FROM grades WHERE course = 'Math') AS math_grades_present;
 ```
 
 | math_grades_present |
@@ -124,12 +124,14 @@ SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math') AS math_grades_presen
 | true                |
 
 ```sql
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'History') AS history_grades_present;
+SELECT EXISTS (FROM grades WHERE course = 'History') AS history_grades_present;
 ```
 
 | history_grades_present |
 |-----------------------:|
 | false                  |
+
+> The subqueries in the examples above have made used of the fact that you can omit the `SELECT *` in duckdb, which would be required in other SQL implementations but cannot fulfil any purpose in `EXISTS` and `NOT EXISTS` subqueries.
 
 ### `NOT EXISTS`
 
@@ -144,7 +146,7 @@ INSERT INTO interest VALUES (2, 'Music');
 
 SELECT *
 FROM Person
-WHERE NOT EXISTS (SELECT * FROM interest WHERE interest.PersonId = Person.id);
+WHERE NOT EXISTS (FROM interest WHERE interest.PersonId = Person.id);
 ```
 
 | id | name |
