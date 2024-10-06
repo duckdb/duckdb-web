@@ -10,7 +10,7 @@ Subqueries are parenthesized query expressions that appear as part of a larger, 
 
 <div id="rrdiagram1"></div>
 
-Scalar subqueries are subqueries that return a single value. They can be used anywhere where an expression can be used. If a scalar subquery returns more than a single value, a row is selected randomly. This behavior is [different from PostgreSQL]({% link docs/sql/dialect/postgresql_compatibility.md %}#scalar-subqueries).
+Scalar subqueries are subqueries that return a single value. They can be used anywhere where an expression can be used. If a scalar subquery returns more than a single value, an error is raised (unless `scalar_subquery_error_on_multiple_rows` is set to `true, in which case a row is selected randomly).
 
 Consider the following table:
 
@@ -104,8 +104,6 @@ returns
 because no result of the subquery is less than or equal to 5.
 
 The quantifier `SOME` maybe used instead of `ANY`: `ANY` and `SOME` are interchangeable.
-
-> In DuckDB, and contrary to most SQL implementations, a comparison of a scalar with a single-column subquery returning multiple values still executes without error. However, the result is unstable, as the final comparison result is based on comparing just one (non-deterministically selected) value returned by the subquery.
 
 ## `EXISTS`
 
