@@ -414,7 +414,7 @@ The table below shows the available general aggregate functions.
 
 ### Nulls
 
-All general aggregate functions except for `list` and its `array_agg` alias ignore `NULL`s. 
+All general aggregate functions except for `list` and `first` (and their aliases `array_agg` and `arbitrary`, respectively) ignore `NULL`s. 
 To exclude `NULLs` from `list` you can use a [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}).
 
 All general aggregate functions except `count` return `NULL` on empty groups and groups without non-`NULL` inputs. 
