@@ -112,18 +112,19 @@ The table below shows the available general aggregate functions.
 | [`arg_min(arg, val)`](#arg_minarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min(arg, val, n)`](#arg_minarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending.  |
 | [`array_agg(arg)`](#array_aggarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`avg(arg)`](#avgarg) | Calculates the average value for all tuples in `arg`. |
+| [`avg(arg)`](#avgarg) | Calculates the average of all non-null values in `arg`. |
 | [`bit_and(arg)`](#bit_andarg) | Returns the bitwise AND of all bits in a given expression. |
 | [`bit_or(arg)`](#bit_orarg) | Returns the bitwise OR of all bits in a given expression. |
 | [`bit_xor(arg)`](#bit_xorarg) | Returns the bitwise XOR of all bits in a given expression. |
 | [`bitstring_agg(arg)`](#bitstring_aggarg) | Returns a bitstring with bits set for each distinct value. |
 | [`bool_and(arg)`](#bool_andarg) | Returns `true` if every input value is `true`, otherwise `false`. |
 | [`bool_or(arg)`](#bool_orarg) | Returns `true` if any input value is `true`, otherwise `false`. |
-| [`count(arg)`](#countarg) | Calculates the number of tuples in `arg`. |
+| [`count()`](#countarg) | Calculates the number of rows in a group. |
+| [`count(arg)`](#countarg) | Calculates the number of non-null values in `arg`. |
 | [`favg(arg)`](#favgarg) | Calculates the average using a more accurate floating point summation (Kahan Sum). |
 | [`first(arg)`](#firstarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`fsum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
-| [`geomean(arg)`](#geomeanarg) | Calculates the geometric mean for all tuples in `arg`. |
+| [`geomean(arg)`](#geomeanarg) | Calculates the geometric mean of all non-null values in `arg`. |
 | [`histogram(arg)`](#histogramarg) | Returns a `MAP` of key-value pairs representing buckets and counts. |
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
@@ -135,10 +136,9 @@ The table below shows the available general aggregate functions.
 | [`min(arg, n)`](#minarg-n) | Returns a `LIST` containing the `arg` values for the "bottom" `n` rows ordered by `arg` ascending. |
 | [`min_by(arg, val)`](#min_byarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`min_by(arg, val, n)`](#min_byarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
-| [`product(arg)`](#productarg) | Calculates the product of all tuples in `arg`. |
+| [`product(arg)`](#productarg) | Calculates the product of all non-null values in `arg`. |
 | [`string_agg(arg, sep)`](#string_aggarg-sep) | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`sum(arg)`](#sumarg) | Calculates the sum value for all tuples in `arg`. |
-| [`sum_no_overflow(arg)`](#sum_no_overflowarg) | Calculates the sum value for all tuples in `arg` without [overflow](https://en.wikipedia.org/wiki/Integer_overflow) checks. Unlike `sum`, which works on floating-point values, `sum_no_overflow` only accepts `INTEGER` and `DECIMAL` values. |
+| [`sum(arg)`](#sumarg) | Calculates the sum of all non-null values in `arg`. |
 
 #### `any_value(arg)`
 
@@ -200,7 +200,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the average value for all tuples in `arg`. |
+| **Description** | Calculates the average of all non-null values in `arg`. |
 | **Example** | `avg(A)` |
 | **Alias(es)** | `mean` |
 
@@ -252,11 +252,19 @@ The table below shows the available general aggregate functions.
 | **Example** | `bool_or(A)` |
 | **Alias(es)** | - |
 
+#### `count()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Calculates the number of rows in a group.|
+| **Example** | `count()` |
+| **Alias(es)** | `count(*)` |
+
 #### `count(arg)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the number of tuples in `arg`. If no `arg` is provided, the expression is evaluated as `count(*)`. |
+| **Description** | Calculates the number of non-null values in `arg`. |
 | **Example** | `count(A)` |
 | **Alias(es)** | - |
 
@@ -288,7 +296,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the geometric mean for all tuples in `arg`. |
+| **Description** | Calculates the geometric mean of all non-null values in `arg`. |
 | **Example** | `geomean(A)` |
 | **Alias(es)** | `geometric_mean(A)` |
 
@@ -384,7 +392,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the product of all tuples in `arg`. |
+| **Description** | Calculates the product of all non-null values in `arg`. |
 | **Example** | `product(A)` |
 | **Alias(es)** | - |
 
@@ -400,16 +408,8 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the sum value for all tuples in `arg`. |
+| **Description** | Calculates the sum of all non-null values in `arg`. |
 | **Example** | `sum(A)` |
-| **Alias(es)** | - |
-
-#### `sum_no_overflow(arg)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Calculates the sum value for all tuples in `arg` without [overflow](https://en.wikipedia.org/wiki/Integer_overflow) checks. Unlike `sum`, which works on floating-point values, `sum_no_overflow` only accepts `INTEGER` and `DECIMAL` values. |
-| **Example** | `sum_no_overflow(A)` |
 | **Alias(es)** | - |
 
 ## Approximate Aggregates
