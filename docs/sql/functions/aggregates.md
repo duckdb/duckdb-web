@@ -412,6 +412,14 @@ The table below shows the available general aggregate functions.
 | **Example** | `sum(A)` |
 | **Alias(es)** | - |
 
+### Nulls
+
+All general aggregate functions except for `list` and its `array_agg` alias ignore `NULL`s. 
+To exclude `NULLs` from `list` you can use a [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}).
+
+All general aggregate functions except `count` return `NULL` on empty groups and groups without non-`NULL` inputs. 
+In particular, `list` does *not* return an empty list, `sum` does *not* return zero, and `string_agg` does *not* return an empty string in this case.
+
 ## Approximate Aggregates
 
 The table below shows the available approximate aggregate functions.
