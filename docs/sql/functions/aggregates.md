@@ -116,11 +116,11 @@ The table below shows the available general aggregate functions.
 | [`bit_and(arg)`](#bit_andarg) | Returns the bitwise AND of all bits in a given expression. |
 | [`bit_or(arg)`](#bit_orarg) | Returns the bitwise OR of all bits in a given expression. |
 | [`bit_xor(arg)`](#bit_xorarg) | Returns the bitwise XOR of all bits in a given expression. |
-| [`bitstring_agg(arg)`](#bitstring_aggarg) | Returns a bitstring with bits set for each distinct value. |
+| [`bitstring_agg(arg)`](#bitstring_aggarg) | Returns a bitstring whose length corresponds to the range of the non-null (integer) values, with bits set at the location of each (distinct) value. |
 | [`bool_and(arg)`](#bool_andarg) | Returns `true` if every input value is `true`, otherwise `false`. |
 | [`bool_or(arg)`](#bool_orarg) | Returns `true` if any input value is `true`, otherwise `false`. |
-| [`count()`](#countarg) | Calculates the number of rows in a group. |
-| [`count(arg)`](#countarg) | Calculates the number of non-null values in `arg`. |
+| [`count()`](#countarg) | Returns the number of rows in a group. |
+| [`count(arg)`](#countarg) | Returns the number of non-null values in `arg`. |
 | [`favg(arg)`](#favgarg) | Calculates the average using a more accurate floating point summation (Kahan Sum). |
 | [`first(arg)`](#firstarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`fsum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
@@ -232,7 +232,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a bitstring with bits set for each distinct value. |
+| **Description** | Returns a bitstring whose length corresponds to the range of the non-null (integer) values, with bits set at the location of each (distinct) value. |
 | **Example** | `bitstring_agg(A)` |
 | **Alias(es)** | - |
 
@@ -256,7 +256,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the number of rows in a group.|
+| **Description** | Returns the number of rows in a group.|
 | **Example** | `count()` |
 | **Alias(es)** | `count(*)` |
 
@@ -264,7 +264,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the number of non-null values in `arg`. |
+| **Description** | Returns the number of non-null values in `arg`. |
 | **Example** | `count(A)` |
 | **Alias(es)** | - |
 
