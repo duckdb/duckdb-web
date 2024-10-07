@@ -206,11 +206,53 @@ SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 | 20     |
 | NULL   |
 
+## `*COLUMNS` Unpacked Columns
+
+The `*COLUMNS` clause is a variation of `COLUMNS`, which supports all of the previously mentioned capabilities.
+The difference is in how the expression expands.
+
+`*COLUMNS` will expand in-place, much like the [iterable unpacking behavior in Python](https://peps.python.org/pep-3132/), which inspired the `*` syntax.
+This implies that the expression expands into the parent expression.
+An example that shows this difference between `COLUMNS` and `*COLUMNS`:
+
+With `COLUMNS`:
+
+```sql
+SELECT coalesce(COLUMNS(['a', 'b', 'c'])) AS result
+FROM (SELECT NULL a, 42 b, true c);
+```
+
+| result | result | result |
+|--------|-------:|-------:|
+| NULL   | 42     | true   |
+
+With `*COLUMNS`, the expression expands in its parent expression `coalesce`, resulting in a single result column:
+
+```sql
+SELECT coalesce(*COLUMNS(['a', 'b', 'c'])) AS result
+FROM (SELECT NULL a, 42 b, true c);
+```
+
+| result |
+|-------:|
+| 42     |
+
+`*COLUMNS` also works with the `(*)` argument:
+
+```sql
+SELECT coalesce(*COLUMNS(*)) AS result
+FROM (SELECT NULL a, 42 b, true c);
+```
+
+| result |
+|-------:|
+| 42     |
+
 ## `STRUCT.*`
 
 The `*` expression can also be used to retrieve all keys from a struct as separate columns.
 This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys.
-See the [`STRUCT` data type]({% link docs/sql/data_types/struct.md %}) and [nested functions]({% link docs/sql/functions/nested.md %}) pages for more details on working with structs.
+See the [`STRUCT` data type]({% link docs/sql/data_types/struct.md %}) and [`STRUCT` functions]({% link docs/sql/functions/struct.md %}) pages for more details on working with structs.
 
 For example:
 

@@ -9,7 +9,7 @@ A `UNION` *type* (not to be confused with the SQL [`UNION` operator]({% link doc
 
 Under the hood, `UNION` types are implemented on top of `STRUCT` types, and simply keep the “tag” as the first entry.
 
-`UNION` values can be created with the [`union_value(tag := expr)`]({% link docs/sql/functions/nested.md %}#union-functions) function or by [casting from a member type](#casting-to-unions).
+`UNION` values can be created with the [`union_value(tag := expr)`]({% link docs/sql/functions/union.md %}) function or by [casting from a member type](#casting-to-unions).
 
 ## Example
 
@@ -111,4 +111,4 @@ Since `UNION` types are implemented on top of `STRUCT` types internally, they ca
 
 ## Functions
 
-See [Nested Functions]({% link docs/sql/functions/nested.md %}#union-functions).
+See [Union Functions]({% link docs/sql/functions/union.md %}).

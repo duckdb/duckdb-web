@@ -35,7 +35,8 @@ VACUUM FULL; -- error
 
 ## Reclaiming Space
 
-To reclaim space after deleting rows, use the [`CHECKPOINT` statement]({% link docs/sql/statements/checkpoint.md %}).
+The `VACUUM` statement does not reclaim space.
+For instruction on reclaiming space, refer to the [“Reclaiming space” page]({% link docs/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).
 
 ## Syntax
 

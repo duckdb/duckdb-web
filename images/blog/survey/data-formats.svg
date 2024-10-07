@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='432.00pt' height='216.00pt' viewBox='0 0 432.00 216.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: none;'/>
+<defs>
+  <clipPath id='cpMC4wMHw0MzIuMDB8MC4wMHwyMTYuMDA='>
+    <rect x='0.00' y='0.00' width='432.00' height='216.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHwyMTYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNzIuNDl8NDE3LjA2fDE0Ljk0fDIwMS4wNg=='>
+    <rect x='72.49' y='14.94' width='344.56' height='186.11' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNzIuNDl8NDE3LjA2fDE0Ljk0fDIwMS4wNg==)'>
+<rect x='88.16' y='20.31' width='313.24' height='32.21' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='88.16' y='56.10' width='289.44' height='32.21' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='88.16' y='91.89' width='164.27' height='32.21' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='88.16' y='127.68' width='123.59' height='32.21' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<rect x='88.16' y='163.48' width='44.51' height='32.21' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8C78FF;' />
+<text x='397.45' y='40.49' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>79%</text>
+<text x='373.65' y='76.28' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>73%</text>
+<text x='248.48' y='112.07' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>42%</text>
+<text x='207.80' y='147.86' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Arial";' textLength='22.77px' lengthAdjust='spacingAndGlyphs'>31%</text>
+<text x='128.72' y='183.65' text-anchor='end' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Arial";' textLength='21.93px' lengthAdjust='spacingAndGlyphs'>11%</text>
+</g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHwyMTYuMDA=)'>
+<text x='72.49' y='184.59' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='57.55px' lengthAdjust='spacingAndGlyphs'>NDJSON</text>
+<text x='72.49' y='148.80' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='36.55px' lengthAdjust='spacingAndGlyphs'>Arrow</text>
+<text x='72.49' y='113.01' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='37.33px' lengthAdjust='spacingAndGlyphs'>JSON</text>
+<text x='72.49' y='77.22' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='28.79px' lengthAdjust='spacingAndGlyphs'>CSV</text>
+<text x='72.49' y='41.43' text-anchor='end' style='font-size: 14.00px; font-family: "Arial";' textLength='49.02px' lengthAdjust='spacingAndGlyphs'>Parquet</text>
+</g>
+</svg>

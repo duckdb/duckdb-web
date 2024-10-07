@@ -18,7 +18,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`string ^@ search_string`](#string--search_string) | Return true if `string` begins with `search_string`. |
 | [`string || string`](#string--string) | String concatenation. |
 | [`string[index]`](#stringindex) | Extract a single character using a (1-based) index. |
-| [`string[begin:end]`](#stringbeginend) | Extract a string using slice conventions (like in Python). Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
+| [`string[begin:end]`](#stringbeginend) | Extract a string using slice conventions, see [slicing]({% link docs/sql/functions/list.md %}#slicing). |
 | [`string LIKE target`](#string-like-target) | Returns true if the `string` matches the like specifier (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})). |
 | [`string SIMILAR TO regex`](#string-similar-to-regex) | Returns `true` if the `string` matches the `regex`; identical to `regexp_full_match` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})). |
 | [`array_extract(list, index)`](#array_extractlist-index) | Extract a single character using a (1-based) index. |
@@ -921,6 +921,8 @@ SELECT format('{:b}', 123_456_789); -- 111010110111100110100010101
 
 #### Print Numbers with Thousand Separators
 
+Integers:
+
 ```sql
 SELECT format('{:,}',  123_456_789); -- 123,456,789
 SELECT format('{:t.}', 123_456_789); -- 123.456.789
@@ -928,6 +930,14 @@ SELECT format('{:''}', 123_456_789); -- 123'456'789
 SELECT format('{:_}',  123_456_789); -- 123_456_789
 SELECT format('{:t }', 123_456_789); -- 123 456 789
 SELECT format('{:tX}', 123_456_789); -- 123X456X789
+```
+
+Float, double and decimal:
+
+```sql
+SELECT format('{:,f}',    123456.789); -- 123,456.78900
+SELECT format('{:,.2f}',  123456.789); -- 123,456.79
+SELECT format('{:t..2f}', 123456.789); -- 123.456,79
 ```
 
 ### `printf` Syntax
@@ -1036,9 +1046,18 @@ SELECT printf('%b', 123_456_789); -- 111010110111100110100010101
 
 #### Thousand Separators
 
+Integers:
+
 ```sql
 SELECT printf('%,d',  123_456_789); -- 123,456,789
 SELECT printf('%.d',  123_456_789); -- 123.456.789
 SELECT printf('%''d', 123_456_789); -- 123'456'789
 SELECT printf('%_d',  123_456_789); -- 123_456_789
+```
+
+Float, double and decimal:
+
+```sql
+SELECT printf('%,f',   123456.789); -- 123,456.789000
+SELECT printf('%,.2f', 123456.789); -- 123,456.79
 ```

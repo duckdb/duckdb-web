@@ -1,6 +1,7 @@
 ---
 ---
 
+@use "sass:color";
 @import 'variables';
 
 /** DUCKDB MAIN CSS **/
@@ -96,7 +97,7 @@
 }
 
 @mixin textlink {
-	color: darken($duckDBgrey,20);
+	color: color.scale($duckDBgrey, $lightness: -20%);
 	text-decoration: underline;
 	font-size: 14px;
 	-webkit-transition: color .3s;
@@ -799,7 +800,7 @@ body.installation div.environment.select label.onlymobile{
 
 body.installation{
 	.environmentselect{
-		background-color: darken($duckDBlightgrey,5);
+		background-color: color.scale($duckDBlightgrey, $lightness: -5%);
 		color: black;
 		border: none;
 		border-bottom: 2px solid rgba(0,0,0,0.4);
@@ -823,7 +824,10 @@ body.installation .environment.select label.onlymobile{
 /** FAQ **/
 
 body.documentation main .wrap.frequentlyaskedquestions{
-	h2, h3{
+	h2{
+		
+	}
+	h3{
 		cursor: pointer;
 		font-size: 18px;
 		position: relative;
@@ -1062,10 +1066,10 @@ body.installation{
 					-ms-user-select: none;
 						user-select: none;
 				span.versioninfo{
-					color: darken($duckDBlightgrey,40);
+					color: color.scale($duckDBlightgrey, $lightness: -40%);
 				}
 			&:hover{
-				background-color: darken($duckDBlightgrey,10);
+				background-color: color.scale($duckDBlightgrey, $lightness: -10%);
 				}
 			&.selected{
 				 background-color: black;
@@ -1154,8 +1158,8 @@ body.installation{
 		transition: background-color .3s, border-color 3s;
 		&:hover{
 			color: black;
-			background-color: darken($black300, 4%);
-			border: 1px solid darken($black400, 4%);
+			background-color: color.scale($black300, $lightness: -4%);
+			border: 1px solid color.scale($black400, $lightness: -4%);
 		}
 	}
 }

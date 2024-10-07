@@ -5,7 +5,7 @@ redirect_from:
   - docs/guides/sql_features/friendly_sql
 ---
 
-DuckDB offers several advanced SQL features as well syntactic sugar to make SQL queries more concise. We call these colloquially as “friendly SQL”.
+DuckDB offers several advanced SQL features and syntactic sugar to make SQL queries more concise. We refer to these colloquially as “friendly SQL”.
 
 > Several of these features are also supported in other systems while some are (currently) exclusive to DuckDB.
 
@@ -28,6 +28,9 @@ DuckDB offers several advanced SQL features as well syntactic sugar to make SQL 
 * Transforming tables:
     * [`PIVOT`]({% link docs/sql/statements/pivot.md %}) to turn long tables to wide tables.
     * [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) to turn wide tables to long tables.
+* Defining SQL-level variables:
+    * [`SET VARIABLE`]({% link docs/sql/statements/set.md %}#set-variable)
+    * [`RESET VARIABLE`]({% link docs/sql/statements/set.md %}#reset-variable)
 
 ## Query Features
 
@@ -90,6 +93,70 @@ SELECT
     ['a', 'b', 'c',] AS y,
     'hello world' AS z,
 ;
+```
+
+## "Top-N in Group" Queries
+
+Computing the "top-N rows in a group" ordered by some criteria is a common task in SQL that unfortunately often requires a complex query involving window functions and/or subqueries.
+
+To aid in this, DuckDB provides the aggregate functions [`max(arg, n)`]({% link docs/sql/functions/aggregates.md %}#maxarg-n), [`min(arg, n)`]({% link docs/sql/functions/aggregates.md %}#minarg-n), [`arg_max(arg, val, n)`]({% link docs/sql/functions/aggregates.md %}#arg_maxarg-val-n), [`arg_min(arg, val, n)`]({% link docs/sql/functions/aggregates.md %}#arg_minarg-val-n), [`max_by(arg, val, n)`]({% link docs/sql/functions/aggregates.md %}#max_byarg-val-n) and [`min_by(arg, val, n)`]({% link docs/sql/functions/aggregates.md %}#min_byarg-val-n) to efficiently return the "top" `n` rows in a group based on a specific column in either ascending or descending order.
+
+For example, let's use the following table:
+
+```sql
+SELECT * FROM t1;
+```
+
+```text
+┌─────────┬───────┐
+│   grp   │  val  │
+│ varchar │ int32 │
+├─────────┼───────┤
+│ a       │     2 │
+│ a       │     1 │
+│ b       │     5 │
+│ b       │     4 │
+│ a       │     3 │
+│ b       │     6 │
+└─────────┴───────┘
+```
+
+We want to get a list of the top-3 `val` values in each group `grp`. The conventional way to do this is to use a window function in a subquery:
+
+```sql
+SELECT array_agg(rs.val), rs.grp 
+FROM (
+    SELECT val, grp, row_number() OVER (PARTITION BY grp ORDER BY val DESC) as rid 
+    FROM t1 ORDER BY val DESC
+) AS rs 
+WHERE rid < 4 
+GROUP BY rs.grp;
+```
+
+```text
+┌───────────────────┬─────────┐
+│ array_agg(rs.val) │   grp   │
+│      int32[]      │ varchar │
+├───────────────────┼─────────┤
+│ [3, 2, 1]         │ a       │
+│ [6, 5, 4]         │ b       │
+└───────────────────┴─────────┘
+```
+
+But in DuckDB, we can do this much more concisely (and efficiently!):
+
+```sql
+SELECT max(val, 3) FROM t1 GROUP BY grp;
+```
+
+```text
+┌─────────────┐
+│ max(val, 3) │
+│   int32[]   │
+├─────────────┤
+│ [3, 2, 1]   │
+│ [6, 5, 4]   │
+└─────────────┘
 ```
 
 ## Related Blog Posts

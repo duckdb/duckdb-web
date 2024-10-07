@@ -148,6 +148,21 @@ body.documentation{
 			 font-size: 19px;
 			}
 		}
+		h5{
+			font-size: $docuh5;
+			font-weight: 700;
+			margin-bottom: 20px;
+			margin-top: 40px;
+			line-height: 1;
+			a:hover{
+				color: black;
+				text-decoration: underline;
+			}
+			code{
+			 font-family: $fontMonoXBold;
+			 font-size: 19px;
+			}
+		}
 	  /** MARGINS IN DOCU SINGLE PAGE **/
 		h4 + .highlighter-rouge{
 			margin-top: 5px;
@@ -303,15 +318,13 @@ body.documentation{
 	.toc_menu{
 		position: sticky;
 		top: 100px;
-	  /* MAKE TOC-MENU SCROLLABLE 
 		height: calc(100vh - 100px);
 		overflow: auto;
-	  &::-webkit-scrollbar {
+	  	-ms-overflow-style: none; 
+		scrollbar-width: none;
+		&::-webkit-scrollbar {
 			display: none;
 		}
-	  -ms-overflow-style: none; 
-		scrollbar-width: none;
-	  */
 		h5{
 			color: black;
 			font-size: 12px;
@@ -722,7 +735,10 @@ pre {
 	-webkit-border-radius: 2px;
 	line-height: 1.4;
 }
-code.language-plaintext{
+.monospace_table + table tbody td {
+	font-family: $fontMono;
+}
+code.language-plaintext {
 	background-color: $black100;
 	font-family: $fontMonoBold;
 	border-radius: 3px;
@@ -898,16 +914,26 @@ td.icon{
 		height: auto!important;
 	}
 }
+.media_table + table thead {
+	display: none;
+}
+.media_table + table td:nth-child(1) {
+	width: 300px;
+}
+.media_table + table td:nth-child(2) {
+	width: 250px;
+}
+.media_table + table td:nth-child(3) {
+	width: 180px;
+}
+.media_table + table td:nth-child(4) {
+	width: 80px;
+}
 .narrow_table + table{
 	width: auto;
 	min-width: auto;
 	td{
 		min-width: 40px;
-	}
-}
-.monospace_table + table{
-	td{
-		font-family: $fontMono;
 	}
 }
 .nostroke_table + table{

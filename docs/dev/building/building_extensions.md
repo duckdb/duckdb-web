@@ -67,14 +67,6 @@ When this flag is set, the [`jemalloc` extension]({% link docs/extensions/jemall
 
 When this flag is set, the [`json` extension]({% link docs/extensions/json.md %}) is built.
 
-#### `BUILD_INET`
-
-When this flag is set, the [`inet` extension]({% link docs/extensions/inet.md %}) is built.
-
-#### `BUILD_SQLSMITH`
-
-When this flag is set, the [SQLSmith extension](https://github.com/duckdb/duckdb/pull/3410) is built.
-
 ### Debug Flags
 
 #### `CRASH_ON_ASSERT`

@@ -10,7 +10,7 @@ Subqueries are parenthesized query expressions that appear as part of a larger, 
 
 <div id="rrdiagram1"></div>
 
-Scalar subqueries are subqueries that return a single value. They can be used anywhere where an expression can be used. If a scalar subquery returns more than a single value, a row is selected randomly. This behavior is [different from PostgreSQL]({% link docs/sql/dialect/postgresql_compatibility.md %}#scalar-subqueries).
+Scalar subqueries are subqueries that return a single value. They can be used anywhere where an expression can be used. If a scalar subquery returns more than a single value, an error is raised (unless `scalar_subquery_error_on_multiple_rows` is set to `false`, in which case a row is selected randomly).
 
 Consider the following table:
 
@@ -105,8 +105,6 @@ because no result of the subquery is less than or equal to 5.
 
 The quantifier `SOME` maybe used instead of `ANY`: `ANY` and `SOME` are interchangeable.
 
-> In DuckDB, and contrary to most SQL implementations, a comparison of a scalar with a single-column subquery returning multiple values still executes without error. However, the result is unstable, as the final comparison result is based on comparing just one (non-deterministically selected) value returned by the subquery.
-
 ## `EXISTS`
 
 <div id="rrdiagram2"></div>
@@ -116,7 +114,7 @@ The `EXISTS` operator tests for the existence of any row inside the subquery. It
 For example, we can use it to figure out if there are any grades present for a given course:
 
 ```sql
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math') AS math_grades_present;
+SELECT EXISTS (FROM grades WHERE course = 'Math') AS math_grades_present;
 ```
 
 | math_grades_present |
@@ -124,12 +122,14 @@ SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math') AS math_grades_presen
 | true                |
 
 ```sql
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'History') AS history_grades_present;
+SELECT EXISTS (FROM grades WHERE course = 'History') AS history_grades_present;
 ```
 
 | history_grades_present |
 |-----------------------:|
 | false                  |
+
+> The subqueries in the examples above make use of the fact that you can omit the `SELECT *` in DuckDB thanks to the [`FROM`-first syntax]({% link docs/sql/query_syntax/from.md %}). The `SELECT` clause is required in subqueries by other SQL systems but cannot fulfil any purpose in `EXISTS` and `NOT EXISTS` subqueries.
 
 ### `NOT EXISTS`
 
@@ -144,7 +144,7 @@ INSERT INTO interest VALUES (2, 'Music');
 
 SELECT *
 FROM Person
-WHERE NOT EXISTS (SELECT * FROM interest WHERE interest.PersonId = Person.id);
+WHERE NOT EXISTS (FROM interest WHERE interest.PersonId = Person.id);
 ```
 
 | id | name |

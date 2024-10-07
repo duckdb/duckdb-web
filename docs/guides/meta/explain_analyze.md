@@ -3,150 +3,91 @@ layout: docu
 title: "EXPLAIN ANALYZE: Profile Queries"
 ---
 
-In order to profile a query, prepend `EXPLAIN ANALYZE` to a query.
+Prepending a query with `EXPLAIN ANALYZE` both pretty-prints the query plan,
+and executes it, providing run-time performance numbers for every operator, as well as the estimated cardinality (`EC`) and the actual cardinality.
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM tbl;
 ```
 
-The query plan will be pretty-printed to the screen using timings for every operator.
-
 Note that the **cumulative** wall-clock time that is spent on every operator is shown. When multiple threads are processing the query in parallel, the total processing time of the query may be lower than the sum of all the times spent on the individual operators.
 
-Below is an example of running `EXPLAIN ANALYZE` on [`Q13`](https://github.com/duckdb/duckdb/blob/main/extension/tpch/dbgen/queries/q13.sql) of the [TPC-H benchmark]({% link docs/extensions/tpch.md %}) on the scale factor 1 data set.
+Below is an example of running `EXPLAIN ANALYZE` on a query:
 
 ```sql
+CREATE TABLE students (name VARCHAR, sid INTEGER);
+CREATE TABLE exams (eid INTEGER, subject VARCHAR, sid INTEGER);
+INSERT INTO students VALUES ('Mark', 1), ('Joe', 2), ('Matthew', 3);
+INSERT INTO exams VALUES (10, 'Physics', 1), (20, 'Chemistry', 2), (30, 'Literature', 3);
+
 EXPLAIN ANALYZE
-    SELECT
-        c_count,
-        count(*) AS custdist
-    FROM (
-            SELECT
-                c_custkey,
-                count(o_orderkey)
-            FROM
-                customer
-            LEFT OUTER JOIN orders ON c_custkey = o_custkey
-            AND o_comment NOT LIKE '%special%requests%'
-            GROUP BY c_custkey
-        ) AS c_orders (c_custkey, c_count)
-    GROUP BY
-        c_count
-    ORDER BY
-        custdist DESC,
-        c_count DESC;
+    SELECT name
+    FROM students
+    JOIN exams USING (sid)
+    WHERE name LIKE 'Ma%';
 ```
 
 ```text
 ┌─────────────────────────────────────┐
 │┌───────────────────────────────────┐│
-││        Total Time: 0.0487s        ││
+││        Total Time: 0.0008s        ││
 │└───────────────────────────────────┘│
 └─────────────────────────────────────┘
 ┌───────────────────────────┐
-│      RESULT_COLLECTOR     │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             0             │
-│          (0.00s)          │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
 │      EXPLAIN_ANALYZE      │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
 │             0             │
 │          (0.00s)          │
 └─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
-│          ORDER_BY         │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          ORDERS:          │
-│     count_star() DESC     │
-│   c_orders.c_count DESC   │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             42            │
-│          (0.00s)          │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
-│       HASH_GROUP_BY       │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             #0            │
-│        count_star()       │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             42            │
-│          (0.00s)          │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
 │         PROJECTION        │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          c_count          │
+│            name           │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           150000          │
-│          (0.00s)          │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
-│         PROJECTION        │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│     count(o_orderkey)     │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           150000          │
-│          (0.00s)          │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
-│       HASH_GROUP_BY       │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             #0            │
-│         count(#1)         │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           150000          │
-│          (0.09s)          │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
-│         PROJECTION        │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│         c_custkey         │
-│         o_orderkey        │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          1534302          │
+│             2             │
 │          (0.00s)          │
 └─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
 │         HASH_JOIN         │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           RIGHT           │
-│   o_custkey = c_custkey   │
+│           INNER           │
+│         sid = sid         │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ├──────────────┐
-│         EC: 300000        │              │
+│           EC: 1           │              │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │              │
-│          1534302          │              │
-│          (0.08s)          │              │
+│             2             │              │
+│          (0.00s)          │              │
 └─────────────┬─────────────┘              │
 ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
-│           FILTER          ││         SEQ_SCAN          │
+│         SEQ_SCAN          ││           FILTER          │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│  (o_comment !~~ '%special ││          customer         │
-│        %requests%')       ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││         c_custkey         │
-│         EC: 300000        ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││         EC: 150000        │
-│          1484298          ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          (0.10s)          ││           150000          │
-│                           ││          (0.00s)          │
-└─────────────┬─────────────┘└───────────────────────────┘
+│           exams           ││     prefix(name, 'Ma')    │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│            sid            ││           EC: 1           │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│           EC: 3           ││             2             │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││          (0.00s)          │
+│             3             ││                           │
+│          (0.00s)          ││                           │
+└───────────────────────────┘└─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
 │         SEQ_SCAN          │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           orders          │
+│          students         │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│         o_custkey         │
-│         o_comment         │
-│         o_orderkey        │
+│            sid            │
+│            name           │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│        EC: 1500000        │
+│ Filters: name>=Ma AND name│
+│  <Mb AND name IS NOT NULL │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          1500000          │
-│          (0.01s)          │
+│           EC: 1           │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│             2             │
+│          (0.00s)          │
 └───────────────────────────┘
 ```
 
 ## See Also
 
-For more information, see the [Profiling page]({% link docs/dev/profiling.md %}).
+For more information, see the [”Profiling” page]({% link docs/dev/profiling.md %}).

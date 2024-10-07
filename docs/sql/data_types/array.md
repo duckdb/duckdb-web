@@ -13,7 +13,7 @@ To store variable-length lists, use the [`LIST` type]({% link docs/sql/data_type
 
 ## Creating Arrays
 
-Arrays can be created using the [`array_value(expr, ...)`]({% link docs/sql/functions/nested.md %}#list-functions) function.
+Arrays can be created using the [`array_value(expr, ...)` function]({% link docs/sql/functions/array.md %}#array_valueindex).
 
 Construct with the `array_value` function:
 
@@ -84,7 +84,7 @@ SELECT id, arr[1:2] AS elements FROM array_table;
 
 ## Functions
 
-All [`LIST` functions]({% link docs/sql/functions/nested.md %}#list-functions) work with the `ARRAY` type. Additionally, several `ARRAY`-native functions are also supported.
+All [`LIST` functions]({% link docs/sql/functions/list.md %}) work with the `ARRAY` type. Additionally, several `ARRAY`-native functions are also supported.
 See the [`ARRAY` functions]({% link docs/sql/functions/array.md %}#array-native-functions).
 
 ## Examples
@@ -120,4 +120,4 @@ The ordering of `ARRAY` instances is defined using a lexicographical order. `NUL
 
 ## See Also
 
-For more functions, see [List Functions]({% link docs/sql/functions/nested.md %}#list-functions).
+For more functions, see [List Functions]({% link docs/sql/functions/list.md %}).

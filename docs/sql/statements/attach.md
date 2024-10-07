@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: ATTACH/DETACH Statement
+title: ATTACH and DETACH Statement
 railroad: statements/attach.js
 ---
 
@@ -24,6 +24,12 @@ Attach the database `file.db` in read only mode:
 
 ```sql
 ATTACH 'file.db' (READ_ONLY);
+```
+
+Attach the database `file.db` with a block size of 16KB:
+
+```sql
+ATTACH 'file.db' (BLOCK SIZE 16384);
 ```
 
 Attach a SQLite database for reading and writing (see the [`sqlite` extension]({% link docs/extensions/sqlite.md %}) for more information):
@@ -79,6 +85,23 @@ Note that attachment definitions are not persisted between sessions: when a new 
 
 `ATTACH` allows DuckDB to operate on multiple database files, and allows for transfer of data between different database files.
 
+`ATTACH` supports HTTP and S3 endpoints. For these, it creates a read-only connection by default.
+Therefore, the following two commands are equivalent:
+
+```sql
+ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db;
+ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db (READ_ONLY);
+```
+
+Similarly, the following two commands connecting to S3 are equivalent:
+
+```sql
+ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db;
+ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
+```
+
+> Prior to DuckDB version 1.1.0, it was necessary to specify the `READ_ONLY` flag for HTTP and S3 endpoints.
+
 ## Detach
 
 The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file.
@@ -95,6 +118,16 @@ USE memory_db;
 ### Detach Syntax
 
 <div id="rrdiagram2"></div>
+
+## Options
+
+<div class="narrow_table"></div>
+
+| Name                        | Description                                                                                                                 | Type      | Default value |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------|-----------|---------------|
+| `access_mode`               | Access mode of the database (**AUTOMATIC**, **READ_ONLY**, or **READ_WRITE**)                                               | `VARCHAR` | `automatic`   |
+| `type`                      | The file type (**DUCKDB** or **SQLITE**), or deduced from the input string literal (MySQL, PostgreSQL).                     | `VARCHAR` | `DUCKDB`      |
+| `block_size`                | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`      |
 
 ## Name Qualification
 

@@ -82,11 +82,11 @@ The DuckDB CSV reader can automatically infer which configuration flags to use b
 
 ## Parameters
 
-Below are parameters that can be passed to the CSV reader. These parameters are accepted by both the [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy-to) and the [`read_csv` function](#csv-functions).
+Below are parameters that can be passed to the CSV reader. These parameters are accepted by the [`read_csv` function](#csv-functions). But not all parameters are accepted by the [`COPY` statement]({% link docs/sql/statements/copy.md %}#copy-to).
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
-| `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type `VARCHAR`. | `BOOL` | `false` |
+| `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type `VARCHAR`. This option is only supported by the `read_csv` function. | `BOOL` | `false` |
 | `allow_quoted_nulls` | Option to allow the conversion of quoted values to `NULL` values | `BOOL` | `true` |
 | `auto_detect` | Enables [auto detection of CSV parameters]({% link docs/data/csv/auto_detection.md %}). | `BOOL` | `true` |
 | `auto_type_candidates` | This option allows you to specify the types that the sniffer will use when detecting CSV column types. The `VARCHAR` type is always included in the detected types (as a fallback option). See [example](#auto_type_candidates-details). | `TYPE[]` | [default types](#auto_type_candidates-details) |
@@ -94,6 +94,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `decimal_separator` | The decimal separator of numbers. | `VARCHAR` | `.` |
+| `delimiter` | Specifies the delimiter character that separates columns within each row (line) of the file. Alias for `sep`. This option is only available in the `COPY` statement. | `VARCHAR` | `,` |
 | `delim` | Specifies the delimiter character that separates columns within each row (line) of the file. Alias for `sep`. | `VARCHAR` | `,` |
 | `escape` | Specifies the string that should appear before a data character sequence that matches the `quote` value. | `VARCHAR` | `"` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
@@ -103,7 +104,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `ignore_errors` | Option to ignore any parsing errors encountered – and instead ignore rows with errors. | `BOOL` | `false` |
 | `max_line_size` | The maximum line size in bytes. | `BIGINT` | 2097152 |
 | `names` | The column names as a list, see [example]({% link docs/data/csv/tips.md %}#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
-| `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | `VARCHAR` | (empty) |
+| `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. Note that the CSV parser only distinguishes between single-character and double-character line delimiters. Therefore, it does not differentiate between `'\r'` and `'\n'`.| `VARCHAR` | (empty) |
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
 | `null_padding` | If this option is enabled, when a row lacks columns, it will pad the remaining columns on the right with null values. | `BOOL` | `false` |
 | `nullstr` | Specifies the string that represents a `NULL` value or (since v0.10.2) a list of strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
@@ -173,12 +174,6 @@ SELECT * FROM read_csv('flights.csv', header = true);
 ```
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section]({% link docs/data/multiple_files/overview.md %}) for more information.
-
-## API Changes
-
-> Deprecated DuckDB v0.10.0 introduced breaking changes to the `read_csv` function.
-> Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the old `read_csv_auto` function.
-> If you would like to use `read_csv` with its old behavior, turn off the auto-detection manually by using `read_csv(..., auto_detect = false)`.
 
 ## Writing Using the `COPY` Statement
 

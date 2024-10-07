@@ -26,7 +26,7 @@ Generate odd numbers using `INCREMENT BY`:
 CREATE SEQUENCE serial START WITH 1 INCREMENT BY 2;
 ```
 
-Generate a descending sequqnce starting from 99:
+Generate a descending sequence starting from 99:
 
 ```sql
 CREATE SEQUENCE serial START WITH 99 INCREMENT BY -1 MAXVALUE 99;

@@ -254,8 +254,6 @@ FROM read_json('todos.json')
 LIMIT 5;
 ```
 
-<div class="narrow_table monospace_table"></div>
-
 | userId | id |                              title                              | completed |
 |-------:|---:|-----------------------------------------------------------------|-----------|
 | 1      | 1  | delectus aut autem                                              | false     |
@@ -289,8 +287,8 @@ If we specify the columns, we can bypass the automatic detection. Note that not 
 ```sql
 SELECT *
 FROM read_json('todos.json',
-                    columns = {userId: 'UBIGINT',
-                               completed: 'BOOLEAN'});
+               columns = {userId: 'UBIGINT',
+                          completed: 'BOOLEAN'});
 ```
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section]({% link docs/data/multiple_files/overview.md %}) for more information.
@@ -304,8 +302,6 @@ CREATE TABLE todos (userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN
 COPY todos FROM 'todos.json';
 SELECT * FROM todos LIMIT 5;
 ```
-
-<div class="narrow_table monospace_table"></div>
 
 | userId | id |                              title                              | completed |
 |--------|----|-----------------------------------------------------------------|-----------|

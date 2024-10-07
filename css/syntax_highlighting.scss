@@ -23,12 +23,12 @@
 }
 
 // numbers
-.highlight :is(.m, .mf, .mh, .mi, .mo, .il, .n, .vg){
+.highlight :is(.m, .mf, .mh, .mi, .mo, .il){
 	color: #ce33c0;
 }
 
 // foreground
-.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
+.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg){
 	color: #383a42;
 }
 
@@ -42,6 +42,12 @@
 .highlight :is(.nf, .na, .nt){
 	color: #23974a;
 	font-family: $fontMonoBold;
+}
+
+body.documentation .highlight code a{
+	text-decoration-color: #23974a;
+	text-underline-offset: .05em;
+	text-underline-offset: 0.17em;
 }
 
 // class names
@@ -123,12 +129,12 @@ html.darkmode,
 	}
 
 	// numbers
-	.highlight :is(.m, .mf, .mh, .mi, .mo, .il, .n, .vg){
+	.highlight :is(.m, .mf, .mh, .mi, .mo, .il){
 		color: #ff78f8;
 	}
 	
 	// foreground
-	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
+	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg){
 		color: #abb2bf;
 	}
 	
@@ -177,7 +183,6 @@ html.darkmode,
 	
 	// ??
 	.highlight :is(.gh, .gp){
-		
 	}
 	
 }

@@ -10,7 +10,7 @@ import frontmatter
 # Update _config.yml to specify the new version number
 # Add a new row to /_data/versions.csv with the new version number
 # Run this script. More options below, but as an example:
-# 	run this script in the top level docs directory like: python3 scripts/archive_docs.py 0.3.4
+# 	run this script in the top level docs directory like: python3 scripts/archive_docs.py 1.0
 # When testing, run a clean (non-incremental) serve: jekyll serve
 
 if len(sys.argv) < 2:

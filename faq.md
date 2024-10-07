@@ -7,7 +7,7 @@ title: Frequently Asked Questions
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
 
-<!-- ## Overview
+## Overview
 
 <!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
@@ -107,7 +107,7 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
 
-<!-- ## Working with DuckDB
+## Working with DuckDB
 
 <!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
@@ -172,7 +172,7 @@ Additionally to the DuckDB clients for Python, R, and other programming language
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
 
-<!-- ## Performance
+## Performance
 
 <!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
@@ -211,7 +211,7 @@ Finally, please report the DuckDB version (for stable verison, the version numbe
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
 
-<!-- ## Use Cases for DuckDB
+## Use Cases for DuckDB
 
 <!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
@@ -251,7 +251,7 @@ for interactive data analysis by a user (“data science”) and
 as pipeline component for automated data processing (“data enginereering”).
 DuckDB can also be deployed in novel architectures, where one traditionally couldn't run an analytical database management system but DuckDB is available thanks to its portability.
 These architectures include running DuckDB in browsers (using the <a href="{% link docs/api/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
-Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/extensions/spatial.md %}">geospatial analysis</a> and deep integration with
+Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/extensions/spatial/overview.md %}">geospatial analysis</a> and deep integration with
 <a href="{% link docs/extensions/mysql.md %}">other</a>
 <a href="{% link docs/extensions/postgres.md %}">database</a>
 <a href="{% link docs/extensions/sqlite.md %}">systems</a>.
@@ -265,7 +265,7 @@ And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/0
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
 
-<!-- ## Releases and Development
+## Releases and Development
 
 <!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
@@ -306,7 +306,7 @@ See the most recent [overview talk at DuckCon #5](https://blobs.duckdb.org/event
 <div class="answer" markdown="1">
 
 The DuckDB Website is hosted by GitHub Pages, its repository is at [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web).
-When the documentation is browsed from a desktop computer, every page has a "Page Source" button on the top that navigates you to its Markdown source file.
+When the documentation is browsed from a desktop computer, every page has a “Page Source” button on the top that navigates you to its Markdown source file.
 Pull requests to fix issues or to expand the documentation section on DuckDB's features are very welcome.
 Before opening a pull request, please consult our [Contributor Guide](https://github.com/duckdb/duckdb-web/blob/main/CONTRIBUTING.md).
 

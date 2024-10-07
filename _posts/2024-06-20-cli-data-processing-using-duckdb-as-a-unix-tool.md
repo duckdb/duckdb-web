@@ -11,24 +11,6 @@ We solve several problems requiring operations such as projection and filtering 
 In the process, we will show off some cool features such as DuckDB's [powerful CSV reader]({% link docs/data/csv/overview.md %}) and the [positional join operator](#duckdb-positional-join).
 Let's get started!
 
-## Table of Contents
-
-* [Table of Contents](#table-of-contents)
-* [The Unix Philosophy](#the-unix-philosophy)
-* [Portability and Usability](#portability-and-usability)
-* [Data Processing with Unix Tools and DuckDB](#data-processing-with-unix-tools-and-duckdb)
-  * [Datasets](#datasets)
-  * [Projecting Columns](#projecting-columns)
-  * [Sorting Files](#sorting-files)
-  * [Intersecting Columns](#intersecting-columns)
-  * [Pasting Rows Together](#pasting-rows-together)
-  * [Filtering](#filtering)
-  * [Joining Files](#joining-files)
-  * [Replacing Strings](#replacing-strings)
-  * [Reading JSON](#reading-json)
-* [Performance](#performance)
-* [Summary](#summary)
-
 ## The Unix Philosophy
 
 To set the stage, let's recall the [Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy). This states that programs should:
@@ -597,7 +579,7 @@ So, let's switch to the Dutch railway services dataset that we used in a [previo
 
 We'll use the [2023 railway services file (`services-2023.csv.gz`)](https://blobs.duckdb.org/nl-railway/services-2023.csv.gz) and count the number of Intercity services that operated in that year.
 
-In Unix, we can use the [`gzcat`](https://www.unix.com/man-page/osf1/1/gzcat/) command to decompress the `csv.gz` file into a pipeline. Then, we can use `grep` or `pcregrep` (which is more performant), and top it off with the [`wc`](https://man7.org/linux/man-pages/man1/wc.1.html) command to count the number of lines (`-l`).
+In Unix, we can use the [`gzcat`](https://man7.org/linux/man-pages/man1/zcat.1p.html) command to decompress the `csv.gz` file into a pipeline. Then, we can use `grep` or `pcregrep` (which is more performant), and top it off with the [`wc`](https://man7.org/linux/man-pages/man1/wc.1.html) command to count the number of lines (`-l`).
 In DuckDB, the built-in CSV reader also supports [compressed CSV files]({% link docs/data/csv/overview.md %}#parameters), so we can use that without any extra configuration.
 
 ```batch

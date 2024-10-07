@@ -12,7 +12,7 @@ DuckDB has a flexible extension mechanism that allows for dynamically loading ex
 These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
 
 > Extensions are loadable on all clients (e.g., Python and R).
-> Extensions distributed via the Core and Community repositories are built and tested on macOS (AMD64 and ARM64), Windows (AMD64) and Linux (AMD64 and ARM64).
+> Extensions distributed via the Core and Community repositories are built and tested on macOS, Windows and Linux. All operating systems are supported for both the AMD64 and the ARM64 architectures.
 
 ## Listing Extensions
 
@@ -62,17 +62,22 @@ There are two main methods of making DuckDB perform the **installation** and **l
 
 ### Explicit `INSTALL` and `LOAD`
 
-In DuckDB extensions can also explicitly installed and loaded. Both non-autoloadable and autoloadable extensions can be installed this way.
+In DuckDB extensions can also be explicitly installed and loaded. Both non-autoloadable and autoloadable extensions can be installed this way.
 To explicitly install and load an extension, DuckDB has the dedicated SQL statements `LOAD` and `INSTALL`. For example,
-to install and load the [`spatial` extension]({% link docs/extensions/spatial.md %}), run:
+to install and load the [`spatial` extension]({% link docs/extensions/spatial/overview.md %}), run:
 
 ```sql
 INSTALL spatial;
 LOAD spatial;
 ```
 
-With these statements, DuckDB will ensure the spatial extension is installed (ignoring the `INSTALL` statement if it is already), then proceed
+With these statements, DuckDB will ensure the spatial extension is installed (ignoring the `INSTALL` statement if it is already installed), then proceed
 to `LOAD` the spatial extension (again ignoring the statement if it is already loaded).
+
+#### Extension Repository
+
+Optionally a repository can be provided where the extension should be installed from, by appending `FROM <repository>` to the `INSTALL`/`FORCE INSTALL` command.
+This repository can either be an alias, such as [`community`]({% link docs/extensions/community_extensions.md %}), or it can be a direct URL, provided as a single-quoted string.
 
 After installing/loading an extension, the [`duckdb_extensions` function](#listing-extensions) can be used to get more information.
 
@@ -105,8 +110,6 @@ which has dedicated `install_extension(name: str)` and `load_extension(name: str
 to the [Client API docs]({% link docs/api/overview.md %})
 
 ## Updating Extensions
-
-> This feature was introduced in DuckDB 0.10.3.
 
 While built-in extensions are tied to a DuckDB release due to their nature of being built into the DuckDB binary, installable extensions
 can and do receive updates. To ensure all currently installed extensions are on the most recent version, call:

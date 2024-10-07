@@ -63,3 +63,8 @@ silver:
   - name: Crunchy Data
     url: https://www.crunchydata.com/
     logoimg: crunchydata.svg
+
+technical:
+  - name: Cloudflare
+    url: https://www.cloudflare.com/
+    logoimg: cloudflare.svg

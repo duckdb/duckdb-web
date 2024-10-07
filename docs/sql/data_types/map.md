@@ -93,4 +93,4 @@ and a `NULL` nested value member will compare above a non-`NULL` nested value me
 
 ## Functions
 
-See [Nested Functions]({% link docs/sql/functions/nested.md %}).
+See [Map Functions]({% link docs/sql/functions/map.md %}).

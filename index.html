@@ -6,21 +6,20 @@ description: DuckDB is an in-process SQL OLAP database management system. Simple
 body_class: landing nowrap
 ---
 
+<!--
 <div class="banner">
 	<div class="content">
-		The <a href="https://shop.duckdb.org/">DuckDB webshop</a> is now open with T-shirts, baseball caps and other goodies on offer.
+		
 	</div>
 	<div class="close"></div>
 </div>
+-->
 
 <section class="welcome">
 	<div class="flexwrap wrap">
 		<div class="duckdb">
 			<h1>DuckDB is a fast <nobr>in-process</nobr> analytical database</h1>
-			<p>DuckDB supports a feature-rich SQL dialect complemented with deep integrations into client APIs.
-			<br/>
-			DuckDB v1.0.0 was <a href="https://duckdb.org/2024/06/03/announcing-duckdb-100.html">released in June 2024</a>.
-			</p>
+			<p>DuckDB supports a feature-rich SQL dialect complemented with deep integrations into client APIs.</p>
 			<a class="button transparent arrow-down dark" href="#quickinstall">Installation</a>
 			<a class="button yellow" href="/docs/">Documentation</a>
 		</div>
@@ -187,7 +186,7 @@ body_class: landing nowrap
 {% endhighlight %}
 </div>	
 
-<div data-language="sql" data-example="sql-csv-reader" data-buttontxt="Live demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Load-CSV-file%2C-auto%20detecting-column-name-and-types%0ACREATE-TABLE-stations-AS%0A----FROM-'https%3A%2F%2Fblobs.duckdb.org%2Fstations.csv'~,%20%20-Sample-10-stations-using-replacement-sample%0AFROM-stations-USING-SAMPLE-10~,%20%20-Compute-some-property-on-the-stations-table%0ASUMMARIZE-stations~">
+<div data-language="sql" data-example="sql-csv-reader" data-buttontxt="Live demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Load-CSV-file%2C-auto%20detecting-column-name-and-types%0ACREATE-TABLE-stations-AS%0A----FROM-'https%3A%2F%2Fblobs.duckdb.org%2Fnl_stations.csv'~,%20%20-Sample-10-stations-using-replacement-sample%0AFROM-stations-USING-SAMPLE-10~,%20%20-Compute-some-property-on-the-stations-table%0ASUMMARIZE-stations~">
 {% highlight sql %}
 {% include landing-page/sql/csv-loader.sql %}
 {% endhighlight %}

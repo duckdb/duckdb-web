@@ -20,16 +20,18 @@ title: List Functions
 | [`list_concat(list1, list2)`](#list_concatlist1-list2) | Concatenates two lists. |
 | [`list_contains(list, element)`](#list_containslist-element) | Returns true if the list contains the element. |
 | [`list_cosine_similarity(list1, list2)`](#list_cosine_similaritylist1-list2) | Compute the cosine similarity between two lists. |
+| [`list_cosine_distance(list1, list2)`](#list_cosine_distancelist1-list2) | Compute the cosine distance between two lists. Equivalent to `1.0 - list_cosine_similarity`. |
 | [`list_distance(list1, list2)`](#list_distancelist1-list2) | Calculates the Euclidean distance between two points with coordinates given in two inputs lists of equal length. |
 | [`list_distinct(list)`](#list_distinctlist) | Removes all duplicates and `NULL` values from a list. Does not preserve the original order. |
 | [`list_dot_product(list1, list2)`](#list_dot_productlist1-list2) | Computes the dot product of two same-sized lists of numbers. |
+| [`list_negative_dot_product(list1, list2)`](#list_negative_dot_productlist1-list2) | Computes the negative dot product of two same-sized lists of numbers. Equivalent to `- list_dot_product`. |
 | [`list_extract(list, index)`](#list_extractlist-index) | Extract the `index`th (1-based) value from the list. |
 | [`list_filter(list, lambda)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#filter) page for more details. |
 | [`list_grade_up(list)`](#list_grade_uplist) | Works like sort, but the results are the indexes that correspond to the position in the original `list` instead of the actual values. |
 | [`list_has_all(list, sub-list)`](#list_has_alllist-sub-list) | Returns true if all elements of sub-list exist in list. |
 | [`list_has_any(list1, list2)`](#list_has_anylist1-list2) | Returns true if any elements exist is both lists. |
 | [`list_intersect(list1, list2)`](#list_intersectlist1-list2) | Returns a list of all the elements that exist in both `l1` and `l2`, without duplicates. |
-| [`list_position(list, element)`](#list_positionlist-element) | Returns the index of the element if the list contains the element. |
+| [`list_position(list, element)`](#list_positionlist-element) | Returns the index of the element if the list contains the element. If the element is not found, it returns `NULL`. |
 | [`list_prepend(element, list)`](#list_prependelement-list) | Prepends `element` to `list`. |
 | [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. |
 | [`list_resize(list, size[, value])`](#list_resizelist-size-value) | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set. |
@@ -158,6 +160,14 @@ title: List Functions
 | **Example** | `list_cosine_similarity([1, 2, 3], [1, 2, 5])` |
 | **Result** | `0.9759000729485332` |
 
+#### `list_cosine_distance(list1, list2)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Compute the cosine distance between two lists. Equivalent to `1.0 - list_cosine_similarity` |
+| **Example** | `list_cosine_distance([1, 2, 3], [1, 2, 5])` |
+| **Result** | `0.007416606` |
+
 #### `list_distance(list1, list2)`
 
 <div class="nostroke_table"></div>
@@ -183,6 +193,15 @@ title: List Functions
 | **Example** | `list_dot_product([1, 2, 3], [1, 2, 5])` |
 | **Result** | `20.0` |
 | **Alias** | `list_inner_product` |
+
+#### `list_negative_dot_product(list1, list2)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the negative dot product of two same-sized lists of numbers. Equivalent to `- list_dot_product` |
+| **Example** | `list_negative_dot_product([1, 2, 3], [1, 2, 5])` |
+| **Result** | `-20.0` |
+| **Alias** | `list_negative_inner_product` |
 
 #### `list_extract(list, index)`
 
@@ -242,7 +261,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the index of the element if the list contains the element. |
+| **Description** | Returns the index of the element if the list contains the element. If the element is not found, it returns `NULL`. |
 | **Example** | `list_position([1, 2, NULL], 2)` |
 | **Result** | `2` |
 | **Aliases** | `list_indexof`, `array_position`, `array_indexof` |
@@ -393,7 +412,7 @@ The following operators are supported for lists:
 | `@>`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **right** of the operator is the sublist. | `[1, 2, 3, 4] @> [3, 4, 3]`       | `true`               |
 | `<@`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **left** of the operator is the sublist.  | `[1, 4] <@ [1, 2, 3, 4]`          | `true`               |
 | `||`  | Alias for [`list_concat`](#list_concatlist1-list2).                                                                     | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
-| `<=>` | Alias for [`list_cosine_similarity`](#list_cosine_similaritylist1-list2).                                               | `[1, 2, 3] <=> [1, 2, 5]`         | `0.9759000729485332` |
+| `<=>` | Alias for [`list_cosine_distance`](#list_cosine_distancelist1-list2).                                               | `[1, 2, 3] <=> [1, 2, 5]`         | `0.007416606` |
 | `<->` | Alias for [`list_distance`](#list_distancelist1-list2).                                                                 | `[1, 2, 3] <-> [1, 2, 5]`         | `2.0`                |
 
 <!-- markdownlint-enable MD056 -->
@@ -403,22 +422,39 @@ The following operators are supported for lists:
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
 
 ```sql
-SELECT [lower(x) FOR x IN strings]
+SELECT [lower(x) FOR x IN strings] AS strings
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 ```
 
-```text
-[hello, , world]
-```
+<div class="narrow_table monospace_table"></div>
+
+|     strings      |
+|------------------|
+| [hello, , world] |
 
 ```sql
-SELECT [upper(x) FOR x IN strings IF len(x) > 0]
+SELECT [upper(x) FOR x IN strings IF len(x) > 0] AS strings
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 ```
 
-```text
-[HELLO, WORLD]
+<div class="narrow_table monospace_table"></div>
+
+|    strings     |
+|----------------|
+| [HELLO, WORLD] |
+
+List comprehensions can also use the position of the list elements by adding a second variable.
+In the following example, we use `x, i`, where `x` is the value and `i` is the position:
+
+```sql
+SELECT [4, 5, 6] as l, [x FOR x, i IN l IF i != 2] filtered;
 ```
+
+<div class="narrow_table monospace_table"></div>
+
+|     l     | filtered |
+|-----------|----------|
+| [4, 5, 6] | [4, 6]   |
 
 ## Range Functions
 
