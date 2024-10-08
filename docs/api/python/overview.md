@@ -224,4 +224,20 @@ con.install_extension("spatial")
 con.load_extension("spatial")
 ```
 
+### Community Extensions
+
+To load [community extensions]({% link docs/extensions/community_extensions.md %}), use `repository="community"` argument to the `install_extension` method. 
+
+For example, install and load the `h3` community extension as follows:
+
+```python 
+import duckdb
+
+con = duckdb.connect()
+con.install_extension("h3", respository="community")
+con.load_extension("h3")
+```
+
+### Unsigned Extensions
+
 To load [unsigned extensions]({% link docs/extensions/overview.md %}#unsigned-extensions), use the `config = {"allow_unsigned_extensions": "true"}` argument to the `duckdb.connect()` method.
