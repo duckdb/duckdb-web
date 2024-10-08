@@ -7,7 +7,7 @@ redirect_from:
 
 Several components of DuckDB are maintained in separate repositories.
 
-## Main repositories
+## Main Repositories
 
 * [`duckdb`](https://github.com/duckdb/duckdb): core DuckDB project
 * [`duckdb-wasm`](https://github.com/duckdb/duckdb-wasm): WebAssembly version of DuckDB

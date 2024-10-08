@@ -52,7 +52,7 @@ FROM 'hf://datasets/datasets-examples/doc-formats-parquet-1/data/train-00000-of-
 
 Each of these commands reads the data from the specified file format and displays it in a structured tabular format. Choose the appropriate command based on the file format you are working with.
 
-## Creating a local table
+## Creating a Local Table
 
 To avoid accessing the remote endpoint for every query, you can save the data in a DuckDB table by running a [`CREATE TABLE ... AS` command]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas). For example:
 
@@ -69,7 +69,7 @@ SELECT *
 FROM data;
 ```
 
-## Multiple files
+## Multiple Files
 
 To query all files under a specific directory, you can use a [glob pattern]({% link docs/data/multiple_files/overview.md %}#multi-file-reads-and-globs). For example:
 
@@ -95,7 +95,7 @@ WHERE question LIKE '%planet%';
 |------:|
 | 21    |
 
-## Versioning and revisions
+## Versioning and Revisions
 
 In Hugging Face repositories, dataset versions or revisions are different dataset updates. Each version is a snapshot at a specific time, allowing you to track changes and improvements. In git terms, it can be understood as a branch or specific commit.
 
