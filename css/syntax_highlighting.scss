@@ -19,7 +19,7 @@
 
 // properties
 .highlight :is(.py) {
-	color: #a05a48;
+	color: #976F4D;
 }
 
 // numbers
@@ -106,7 +106,7 @@ th .k {
 }
 
 .landing .highlight :is(.py){
-	color: #ce9887;
+	color: #976F4D;
 }
 
 html.darkmode, 
@@ -125,7 +125,7 @@ html.darkmode,
 
 	// properties
 	.highlight :is(.py){
-		color: #ce9887;
+		color: #BA9678;
 	}
 
 	// numbers
@@ -135,7 +135,7 @@ html.darkmode,
 	
 	// foreground
 	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg){
-		color: #abb2bf;
+		color: $black300;
 	}
 	
 	// type names

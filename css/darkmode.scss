@@ -221,5 +221,10 @@ html.darkmode body.documentation{
 	div.bodywrapper dt.sig-object{
 		background-color: #3d3d3d;
 	}
-	
+	.language-console pre{
+		background-color: #2D1C1C;
+	}
+	.language-console div.highlight{
+		border-color: #462727;
+	}
 } 
