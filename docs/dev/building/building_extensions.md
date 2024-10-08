@@ -5,7 +5,7 @@ title: Building Extensions
 
 [Extensions]({% link docs/extensions/overview.md %}) can be built from source and installed from the resulting local binary.
 
-## Building Extensions using Build Flags
+## Building Extensions Using Build Flags
 
 To build using extension flags, set the corresponding [`BUILD_[EXTENSION_NAME]` extension flag](#extension-flags) when running the build, then use the `INSTALL` command.
 

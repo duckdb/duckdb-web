@@ -94,7 +94,7 @@ LINE 1: SELECT 'Hello' ' ' 'World' as greeting;
 
 Also note that implicit concatenation only works with single-quoted string literals, and does not work with other kinds of string values.
 
-### Implicit string conversion
+### Implicit String Conversion
 
 `STRING_LITERAL` instances can be implicitly converted to _any_ other type.
 
