@@ -38,6 +38,14 @@ PRAGMA tpcds(8);
 | ese          | -10076698.16       |
 | ought        | -10994052.78       |
 
+## Generating the Schema
+
+It's possible to generate the schema of TPC-DS without any data by setting the scale factor to 0:
+
+```sql
+CALL dsdgen(sf = 0);
+```
+
 ## Limitations
 
 The `tpchds(⟨query_id⟩)` function runs a fixed TPC-DS query with pre-defined bind parameters (a.k.a. substitution parameters).
