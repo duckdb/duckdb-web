@@ -22,7 +22,7 @@ download.file("https://blobs.duckdb.org/nzcensus.zip", "nzcensus.zip")
 unzip("nzcensus.zip")
 ```
 
-Let's explore the CSV files that were in the zip and what their sizes are:
+Let's explore the CSV files in the zip and what their sizes are:
 
 ```R
 file.info(Sys.glob("*.csv"))["size"]
