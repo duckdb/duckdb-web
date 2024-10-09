@@ -16,7 +16,7 @@ Normalization and aggregation are undesirable from both a usability and performa
 To streamline the operation on nested data, analytical systems, including DuckDB, provide native functionality on these nested types.
 
 In this blog post, we'll first cover the basics of [lists](#lists) and [lambdas](#lambdas).
-Then, we dive into their [technical details](#zoom-in-list-transformations).
+Then, we dive into their [technical details](#zooming-in-list-transformations).
 Finally, we'll show some [examples](#lists-and-lambdas-in-the-community) from the community.
 Feel free to skip ahead if you're already familiar with lists and lambdas and are just here for our out-of-the-box examples!
 
@@ -74,11 +74,11 @@ Each accepts a `LIST` as its first argument and a lambda function as its second 
 Lambdas were the guest star in our [SQL Gymnastics: Bending SQL into Flexible New Shapes](https://duckdb.org/2024/03/01/sql-gymnastics.html#creating-the-macro!) blog post.
 This time, we want to put them in the spotlight.
 
-## Zoom-in: list transformations
+## Zooming In: List Transformations
 
 To return to our previous example, let's say we want to add `n` to each element of the corresponding list `l`.
 
-### Pure relational solution
+### Pure Relational Solution
 
 Using pure relational operators, i.e., avoiding list-native functions, we would need to perform the following steps:
 
@@ -132,7 +132,7 @@ Recreating these lists requires a full copy of the data and partitioning, which 
 As a consequence, the normalized approach is both cumbersome to write and it is inefficient as it produces a significant (and unnecessary) overhead despite the relative simplicity of the query.
 This is yet another example of how shaping nested data into relational forms or [forcing it through rectangles](https://open.substack.com/pub/lloydtabb/p/data-is-rectangular-and-other-limiting?utm_campaign=post&utm_medium=web) can have a significant negative performance impact.
 
-### Native list functions
+### Native List Functions
 
 With support for native list functions, DuckDB mitigates these drawbacks by operating directly on the `LIST` data structure.
 Since, as we've seen, lists are essentially nested columns, we can reshape these functions into concepts already understood by our execution engine and leverage their full potential.
@@ -182,7 +182,7 @@ As we can see, the native query is more than 10x faster. Amazing!
 If we look at the execution plan using `EXPLAIN ANALYZE` (not shown in this blog post), we can see that DuckDB spends most of its time in the `HASH_GROUP_BY` and `UNNEST` operators.
 In comparison, these operators no longer exist in the list-native query plan.
 
-## Lists and lambdas in the community
+## Lists and Lambdas in the Community
 
 To better present what's possible by combining our `LIST` type and lambda functions, we've scoured the community Discord and GitHub, as well as some far corners of the internet, for exciting use cases.
 

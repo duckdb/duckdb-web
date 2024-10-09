@@ -8,7 +8,7 @@ excerpt: "DuckDB can now read data from [Hugging Face](https://huggingface.co/) 
 
 We are excited to announce that we added support for `hf://` paths in DuckDB, providing access to more than 150,000 datasets for artificial intelligence. We worked with Hugging Face to democratize the access, manipulation, and exploration of datasets used to train and evaluate AI models.
 
-## Dataset repositories
+## Dataset Repositories
 
 [Hugging Face](https://huggingface.co/) is a popular central platform where users can store, share, and collaborate on machine learning models, datasets, and other resources.
 
@@ -21,7 +21,7 @@ A typical repository looks like this:
 
 ![Hugging face repository](/images/blog/hugging-face-example-repository.png)
 
-## Read using hf:// paths
+## Read Using `hf://` Paths
 
 You often need to read files in various formats (such as CSV, JSONL, and Parquet) when working with data. As of version v0.10.3, DuckDB has native support for `hf://` paths as part of the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}), allowing easy access to all these formats.
 
@@ -69,7 +69,7 @@ FROM 'hf://datasets/datasets-examples/doc-formats-parquet-1/data/train-00000-of-
 
 Each of these commands reads the data from the specified file format and displays it in a structured tabular format. Choose the appropriate command based on the file format you are working with.
 
-## Creating a local table
+## Creating a Local Table
 
 To avoid accessing the remote endpoint for every query, you can save the data in a DuckDB table by running a [`CREATE TABLE ... AS` command]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas). For example:
 
@@ -86,7 +86,7 @@ SELECT *
 FROM data;
 ```
 
-## Multiple files
+## Multiple Files
 
 You might need to query multiple files simultaneously when working with large datasets. Let's see a quick sample using the [cais/mmlu](https://huggingface.co/datasets/cais/mmlu) (Measuring Massive Multitask Language Understanding) dataset. This dataset captures a test consisting of multiple-choice questions from various branches of knowledge. It covers 57 tasks, including elementary mathematics, US history, computer science, law, and more. To attain high accuracy on this test, AI models must possess extensive world knowledge and problem-solving ability.
 
@@ -151,7 +151,7 @@ LIMIT 3;
 | On which planet in our solar system can you find the Great Red Spot? |
 | The lithosphere of a planet is the layer that consists of            |
 
-## Versioning and revisions
+## Versioning and Revisions
 
 In Hugging Face repositories, dataset versions or revisions are different dataset updates. Each version is a snapshot at a specific time, allowing you to track changes and improvements. In git terms, it can be understood as a branch or specific commit.
 

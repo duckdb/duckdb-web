@@ -17,7 +17,7 @@ In this blog post, we will cover how DuckDB manages to stay true to this philoso
 down the path of complete abstinence. Along the way, we will show practical examples of how external dependencies are
 possible, and how you can use this when creating your own DuckDB extension.
 
-## The difficulties of complete abstinence
+## The Difficulties of Complete Abstinence
 
 Having no external dependencies is conceptually very simple. However, in a real-world system with real-world
 requirements, it is difficult to achieve. Many features require complex implementations of protocols and algorithms, and
@@ -49,7 +49,7 @@ for some dependencies, this just doesn't work. Take, for example, the SDKs of la
 massive, very frequently updated, and packed with arguably essential functionality for an increasingly mature analytical
 database. This leaves an awkward choice: either not provide these essential features or break the no-dependency rule.
 
-## DuckDB extensions
+## DuckDB Extensions
 
 This is where extensions come in. Extensions provide an elegant solution to the dilemma of dependencies by allowing
 fine-grained breakage of the no-dependency rule. Moving dependencies out of DuckDB's core into extensions, the core
@@ -81,7 +81,7 @@ For most core extensions maintained by the DuckDB team, there is even an auto-in
 a SQL statement and automatically install and load them. For a detailed description of which extensions are available
 and how to use them, check out the [docs]({% link docs/extensions/overview.md %}).
 
-## Dependency management
+## Dependency Management
 
 So far, we've seen how DuckDB avoids external dependencies in its core codebase by moving them out of the core repository into
 extensions. However, we're not out of the woods yet. As DuckDB is written in C++, the most natural way to write
@@ -156,14 +156,14 @@ And that's basically it! Every time the Azure extension is built, vcpkg will be 
 ensure `azure-identity-cpp`, `azure-storage-blobs-cpp` and `azure-storage-files-datalake-cpp` are built using the correct platform-specific flags and
 available in CMake through `find_package`.
 
-## Building your own DuckDB extension
+## Building Your Own DuckDB Extension
 
 Up until this part, we've focused on managing dependencies from a point-of-view of the developers of core DuckDB
 contributors. However, all of this applies to anyone who wants to build an extension. DuckDB maintains a [C++ Extension Template](https://github.com/duckdb/extension-template),
 which contains all the necessary build scripts, CI/CD pipeline and vcpkg configuration to build, test and deploy a DuckDB extension in
 minutes. It can automatically build the loadable extension binaries for all available platforms, including Wasm.
 
-### Setting up the extension template
+### Setting up the Extension Template
 
 To demonstrate how simple this process is, let's go through all the steps of building a DuckDB extension from scratch,
 including adding a vcpkg-managed external dependency.
@@ -193,7 +193,7 @@ Finally, to confirm everything works as expected, run the tests:
 make test
 ```
 
-### Adding functionality
+### Adding Functionality
 
 In its current state, the extension is, of course, a little boring. Therefore, let's add some functionality! To keep
 things simple, we'll add a scalar function that parses a URL and returns the scheme. We'll call the
