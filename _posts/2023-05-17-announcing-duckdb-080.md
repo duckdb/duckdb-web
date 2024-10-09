@@ -16,7 +16,7 @@ To install the new version, please visit the [installation guide]({% link docs/i
 
 <!--more-->
 
-#### What's new in 0.8.0
+## What's New in 0.8.0
 
 There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
 
@@ -31,7 +31,7 @@ There have been too many changes to discuss them each in detail, but we would li
 
 Below is a summary of those new features with examples, starting with two breaking changes in our SQL dialect that are designed to produce more intuitive results by default.
 
-#### Breaking SQL Changes
+## Breaking SQL Changes
 
 This release includes two breaking changes to the SQL dialect: The [division operator uses floating point division by default](https://github.com/duckdb/duckdb/pull/7082), and the [default null sort order is changed from `NULLS FIRST` to `NULLS LAST`](https://github.com/duckdb/duckdb/pull/7174). While DuckDB is stil in Beta, we recognize that many DuckDB queries are already used in production. So, the old behavior can be restored using the following settings:
 
@@ -65,7 +65,7 @@ FROM bigdata ORDER BY col DESC LIMIT 3;
 | NULL   | 42     |
 | 43     | NULL   |
 
-#### New SQL Features
+## New SQL Features
 
 [**Pivot and Unpivot**](https://github.com/duckdb/duckdb/pull/6387). There are many shapes and sizes of data, and we do not always have control over the process in which data is generated. While SQL is well-suited for reshaping datasets, turning columns into rows or rows into columns is tedious in vanilla SQL. With this release, DuckDB introduces the `PIVOT` and `UNPIVOT` statements that allow reshaping data sets so that rows are turned into columns or vice versa. A key advantage of DuckDB's syntax is that the column names to pivot or unpivot can be automatically deduced. Here is a short example:
 
@@ -104,7 +104,7 @@ Please [refer to the documentation]({% link docs/guides/sql_features/asof_join.m
 
 
 
-#### Data Integration Improvements
+## Data Integration Improvements
 
 [**Default Parallel CSV Reader**](https://github.com/duckdb/duckdb/pull/6977). In this release, the parallel CSV reader has been vastly improved and is now the default CSV reader. We would like to thank everyone that has tried out the experimental reader for their valuable feedback and reports. The `experimental_parallel_csv` flag has been deprecated and is no longer required. The parallel CSV reader enables much more efficient reading of large CSV files. 
 
@@ -141,7 +141,7 @@ FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 [The documentation has been updated]({% link docs/data/multiple_files/overview.md %}) with various examples of this syntax.
 
 
-#### Storage Improvements
+## Storage Improvements
 
 [**Lazy-Loading Table Metadata**](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indexes and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120x SF1) with ~770 million rows and 16 columns:
 
@@ -151,7 +151,7 @@ FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 | FROM lineitem LIMIT 1; | 1.62s | 0.32s  | 0.03s | 0.27s   |
 
 
-#### Clients
+## Clients
 
 [**User-Defined Scalar Functions for Python**](https://github.com/duckdb/duckdb/pull/7171). Arbitrary Python functions can now be registered as scalar functions within SQL queries. This will only work when using DuckDB from Python, because it uses the actual Python runtime that DuckDB is running within. While plain Python values can be passed to the function, there is also a vectorized variant that uses PyArrow under the hood for higher efficiency and better parallelism.
 
@@ -177,6 +177,6 @@ See the [documentation]({% link docs/api/python/function.md %}) for more informa
 
 [**Swift Integration**]({% post_url 2023-04-21-swift %}). DuckDB has gained another official language integration: Swift. Swift is a language developed by Apple that most notably is used to create Apps for Apple devices, but also increasingly used for server-side development. The DuckDB Swift API allows developers on all swift platforms to harness DuckDB using a native Swift interface with support for Swift features like strong typing and concurrency.
 
-#### Final Thoughts
+## Final Thoughts
 
 The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.8.0). We would like to thank all of the contributors for their hard work on improving DuckDB.

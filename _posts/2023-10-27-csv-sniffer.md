@@ -26,7 +26,6 @@ DuckDB implements a [multi-hypothesis CSV sniffer](https://hannes.muehleisen.org
 
 In this blog post, I will explain how the current implementation works, discuss its performance, and provide insights into what comes next!
 
-
 ## DuckDB's Automatic Detection
 
 The process of parsing CSV files is depicted in the figure below. It currently consists of five different phases, which will be detailed in the next sections.
@@ -98,7 +97,6 @@ If `null_padding` is set to true, all lines would be accepted, resulting in the 
 ```
 
 If the `ignore_errors` option is set, then the configuration that yields the most columns with the least inconsistent rows will be picked.
-
 
 ### Type Detection
 

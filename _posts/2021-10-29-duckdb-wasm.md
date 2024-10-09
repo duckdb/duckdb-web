@@ -34,7 +34,7 @@ In this blog post, we want to introduce the library and present challenges on ou
 
 *DuckDB-Wasm is not yet stable. You will find rough edges and bugs in this release. Please share your thoughts with us [on GitHub](https://github.com/duckdb/duckdb-wasm/discussions).*
 
-## How to get data in?
+## How to Get Data In?
 
 Let's dive into examples.
 DuckDB-Wasm provides a variety of ways to load your data. First, raw SQL value clauses like `INSERT INTO sometable VALUES (1, 'foo'), (2, 'bar')` are easy to formulate and only depend on plain SQL text. Alternatively, SQL statements like `CREATE TABLE foo AS SELECT * FROM 'somefile.parquet'` consult our integrated web filesystem to resolve `somefile.parquet` locally, remotely or from a buffer. The methods `insertCSVFromPath` and `insertJSONFromPath` further provide convenient ways to import CSV and JSON files using additional typed settings like column types. And finally, the method `insertArrowFromIPCStream` (optionally through `insertArrowTable`, `insertArrowBatches` or `insertArrowVectors`) copies raw IPC stream bytes directly into a WebAssembly stream decoder.
@@ -108,7 +108,7 @@ await c.query(`INSERT INTO existing_table
     VALUES (1, "foo"), (2, "bar")`);
 ```
 
-## How to get data out?
+## How to Get Data Out?
 
 Now that we have the data loaded, DuckDB-Wasm can run queries on two different ways that differ in the result materialization. First, the method `query` runs a query to completion and returns the results as single `arrow.Table`. Second, the method `send` fetches query results lazily through an `arrow.RecordBatchStreamReader`. Both methods are generic and allow for typed results in Typescript:
 
@@ -140,7 +140,7 @@ for await (const batch of await stmt.send(234)) {
 }
 ```
 
-## Looks like Arrow to me
+## Looks like Arrow to Me
 
 DuckDB-Wasm uses [Arrow](https://arrow.apache.org) as data protocol for the data import and all query results. Arrow is a database-friendly columnar format that is organized in chunks of column vectors, called record batches and that support zero-copy reads with only a small overhead. The npm library `apache-arrow` implements the Arrow format in the browser and is already used by other data processing frameworks, like [Arquero](https://github.com/uwdata/arquero). Arrow therefore not only spares us the implementation of the SQL type logic in JavaScript, it also makes us compatible to existing tools.
 

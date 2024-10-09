@@ -44,11 +44,11 @@ One key component of the MDS is the unlimited scalability of compute. How does t
 
 Due to this tradeoff, this approach is more of an “Open Source Analytics Stack in a box” than a traditional MDS. It sacrifices infinite scale for significant simplification and the other benefits above.
 
-## Choosing a problem
+## Choosing a Problem
 
 Given that the NBA season is starting soon, a monte carlo type simulation of the season is both topical and well-suited for analytical SQL. This is a particularly great scenario to test the limits of DuckDB because it only requires simple inputs and easily scales out to massive numbers of records. This entire project is held in a GitHub repo, which you can find [here](https://www.github.com/matsonj/nba-monte-carlo).
 
-## Building the environment
+## Building the Environment
 
 The detailed steps to build the project can be found in the repo, but the high-level steps will be repeated here. As a note, Windows Subsystem for Linux (WSL) was chosen to support Apache Superset, but the other components of this stack can run directly on any operating system. Thankfully, using Linux on Windows has become very straightforward.
 1. Install Ubuntu 20.04 on WSL.
@@ -59,7 +59,7 @@ The detailed steps to build the project can be found in the repo, but the high-l
 1. Create super admin user for Superset in the terminal, then login and configure the database.
 1. Run test queries in superset to check your work.
 
-## Meltano as a wrapper for pipeline plugins
+## Meltano as a Wrapper for Pipeline Plugins
 
 In this example, [Meltano](https://meltano.com/) pulls together multiple bits and pieces to allow the pipeline to be run with a single statement. The first part is the tap (extractor) which is '[tap-spreadsheets-anywhere](https://hub.meltano.com/extractors/tap-spreadsheets-anywhere/)'. This tap allows us to get flat data files from various sources. It should be noted that DuckDB can consume directly from flat files (locally and over the network), or SQLite and PostgreSQL databases. However, this tap was chosen to provide a clear example of getting static data into your database that can easily be configured in the meltano.yml file. Meltano also becomes more beneficial as the complexity of your data sources increases. 
 ```yaml
@@ -102,15 +102,15 @@ Lastly, [Apache Superset](https://superset.apache.org/) is included as a [Meltan
 
 With Superset, the engine needs to be configured to open DuckDB in “read-only” mode. Otherwise, only one query can run at a time (simultaneous queries will cause locks). This also prevents refreshing the Superset dashboard while the pipeline is running. In this case, the pipeline runs in under 8 seconds!
 
-## Wrangling the data
+## Wrangling the Data
 
 The NBA schedule was downloaded from basketball-reference.com, and the Draft Kings win totals from Sept 27th were used for win totals. The schedule and win totals make up the entirety of the data required as inputs for this project. Once converted into CSV format, they were uploaded to the GitHub project, and the meltano.yml file was updated to reference the file locations.
 
-## Loading sources
+## Loading Sources
 
 Once the data is on the web inside of GitHub, Meltano can pull a copy down into DuckDB. With the command `meltano run tap-spreadsheets-anywhere target-duckdb`, the data is loaded into DuckDB, and ready for transformation inside of dbt.
 
-## Building dbt models
+## Building dbt Models
 
 After the sources are loaded, the data is transformed with dbt. First, the source models are created as well as the scenario generator. Then the random numbers for that simulation run are generated – it should be noted that the random numbers are recorded as a table, not a view, in order to allow subsequent re-runs of the downstream models with the graph operators for troubleshooting purposes (i.e. `dbt run -s random_num_gen+`). Once the underlying data is laid out, the simulation begins, first by simulating the regular season, then the play-in games, and lastly the playoffs. Since each round of games has a dependency on the previous round, parallelization is limited in this model, which is reflected in the [dbt DAG](https://matsonj.github.io/nba-monte-carlo/#!/overview/nba_monte_carlo?g_v=1), in this case conveniently hosted on GitHub Pages.
 
@@ -136,8 +136,7 @@ Below is an example Superset dashboard containing several charts based on this d
      width=680
  />
 
-
-## Conclusions
+## Conclusion
 
 The ecosystem around DuckDB has grown such that it integrates well with the Modern Data Stack. The MDS-in-a-box is a viable approach for smaller data projects, and would work especially well for read-heavy analytics. There were a few other learnings from this experiment. Superset dashboards are easy to construct, but they are not scriptable and must be built in the GUI (the paid hosted version, Preset, does support exporting as YAML). Also, while you can do monte carlo analysis in SQL, it may be easier to do in another language. However, this shows how far you can stretch the capabilities of SQL!
 
