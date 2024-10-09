@@ -41,6 +41,7 @@ title: Media
 
 | | | | |
 |:---|:---|:---|---:|
+| [Keynote - Safe Space or Trap? Creating Software like DuckDB in Academic Institutions](https://www.youtube.com/watch?v=PoHfh6O43uE) | PyCon.DE | Hannes Mühleisen | 50min |
 | [Two tier architectures are anachronistic](https://www.tele-task.de/lecture/video/10304/) | Database Research seminar at the Hasso-Plattner-Institute (2023) | Hannes Mühleisen | 1h |
 | [A short summary of the last decades of data management](https://www.youtube.com/watch?v=-wCzn9gKoUk) | GOTO Amsterdam 2024 | Hannes Mühleisen | 50min |
 
