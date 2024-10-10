@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{ page.title }} – DuckDB Community Extensions</title>
+
+	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/communityextensions.css?{{ site.data['hash'] }}">
+
+	<link rel="icon" type="image/png" href="{{ site.baseurl }}/images/favicon_ce/favicon-48x48.png" sizes="48x48" />
+	<link rel="icon" type="image/svg+xml" href="{{ site.baseurl }}/images/favicon_ce/favicon.svg" />
+	<link rel="shortcut icon" href="{{ site.baseurl }}/images/favicon_ce/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon_ce/apple-touch-icon.png" />
+	<link rel="manifest" href="{{ site.baseurl }}/images/favicon_ce/site.webmanifest" />
+	<meta name="theme-color" content="#ffffff">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
+	{% seo title=false %}
+
+</head>
+
+<body class="documentation communityextensions{% if page.body_class %} {{ page.body_class }} {% endif %}">
+
+	<header>
+		<div class="headerline">
+			<div class="headercontent">
+				<a href="/extensions/index.html">
+					<div class="duckdbhome">
+						<img src="https://duckdb.org/images/logo-dl/DuckDB_Logo.png" alt="DuckDB Logo for Download" class="downloadlogo">
+						<div id="duckdb_logo"></div>
+					</div>
+				</a>
+				<div class="landingmenu">
+
+					{% include menu_secondary_ce.html %}
+
+					<nav class="mobile">
+						<div class="search_icon"></div>
+						<div class="hamburger hamburger--squeeze">
+							<div class="hamburger-box">
+								<div class="hamburger-inner"></div>
+							</div>
+						</div>
+					</nav>
+				</div>
+				<a class="button yellow" href="https://duckdb.org/docs/installation/" target="_blank">Install DuckDB</a>
+			</div>
+		</div>
+	</header>
+		
+	<main>
+		
+		{% include searchoverlay.html %}
+
+		{% include menu_sidebar_ce.html %}
+
+		
+		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " | remove: ":" }}{% endif %}">
+			
+			<div id="main_content_wrap">
+				<div class="headlinebar">
+					<div class="breadcrumbs">{% include breadcrumbs.html %}</div>
+
+					<div class="title">{{ page.title }}</div>
+				
+				</div>
+
+				<p>{{ page.extension.description }}</p>
+
+				{% assign ct = content | toc %}
+				{% include anchor_headings.html html=content %}
+				
+				{% if page.url contains 'overview' %}
+				<div class="index">
+					<h2 id="pages-in-this-section">Pages in This Section</h2>
+				</div>
+				{% endif %}
+				
+			</div>
+			
+		</div>
+
+	</main>
+
+
+	<script src="{{ site.baseurl }}/js/minisearch.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/search.js?{{ site.data['hash'] }}"></script>
+
+	<script src="{{ site.baseurl }}/js/lottie.min.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/copy_button.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}"></script>
+
+</body>
+</html>

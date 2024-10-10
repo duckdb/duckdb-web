@@ -1,0 +1,119 @@
+---
+layout: community_extension_doc
+title: duckpgq
+excerpt: |
+  DuckDB Community Extensions
+  Extension that adds support for SQL/PGQ and graph algorithms
+
+extension:
+  name: duckpgq
+  description: Extension that adds support for SQL/PGQ and graph algorithms
+  version: 0.0.1
+  language: C++
+  build: cmake
+  license: MIT
+  maintainers:
+    - Dtenwolde
+
+repo:
+  github: cwida/duckpgq-extension
+  ref: 6c06589fb8fe3293bf3b31f5d8e89177504edf5f
+
+docs:
+  hello_world: |
+    CREATE TABLE Person as select * from 'https://gist.githubusercontent.com/Dtenwolde/2b02aebbed3c9638a06fda8ee0088a36/raw/8c4dc551f7344b12eaff2d1438c9da08649d00ec/person-sf0.003.csv';
+    CREATE TABLE Person_knows_person as select * from 'https://gist.githubusercontent.com/Dtenwolde/81c32c9002d4059c2c3073dbca155275/raw/8b440e810a48dcaa08c07086e493ec0e2ec6b3cb/person_knows_person-sf0.003.csv';
+
+    CREATE PROPERTY GRAPH snb
+      VERTEX TABLES (
+        Person
+      )
+    EDGE TABLES (
+      Person_knows_person 	SOURCE KEY (Person1Id) REFERENCES Person (id)
+                            DESTINATION KEY (Person2Id) REFERENCES Person (id)
+      LABEL Knows
+    );
+
+    FROM GRAPH_TABLE (snb
+      MATCH (a:Person)-[k:knows]->(b:Person)
+      COLUMNS (a.id, b.id)
+    )
+    LIMIT 1;
+
+    FROM GRAPH_TABLE (snb 
+      MATCH p = ANY SHORTEST (a:person)-[k:knows]->{1,3}(b:Person) 
+      COLUMNS (a.id, b.id, path_length(p))
+    ) 
+    LIMIT 1;
+
+    FROM local_clustering_coefficient(snb, person, knows);
+
+    DROP PROPERTY GRAPH snb; 
+
+  extended_description: >
+    The DuckPGQ extension supports the SQL/PGQ syntax as part of the official SQL:2023 standard developed by ISO.
+    
+    
+    It introduces visual graph pattern matching and a more concise syntax for path-finding.
+    For more information, please see the [DuckPGQ documentation](https://www.notion.so/duckpgq/b8ac652667964f958bfada1c3e53f1bb?v=3b47a8d44bdf4e0c8b503bf23f1b76f2).
+    
+
+    *Disclaimer*: As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
+
+
+extension_star_count: 36
+
+---
+
+### Installing and Loading
+```sql
+INSTALL {{ page.extension.name }} FROM community;
+LOAD {{ page.extension.name }};
+```
+
+{% if page.docs.hello_world %}
+### Example
+```sql
+{{ page.docs.hello_world }}```
+{% endif %}
+
+{% if page.docs.extended_description %}
+### About {{ page.extension.name }}
+{{ page.docs.extended_description }}
+{% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|        function_name         | function_type | description | comment | example |
+|------------------------------|---------------|-------------|---------|---------|
+| cheapest_path_length         | scalar        |             |         |         |
+| create_csr_edge              | scalar        |             |         |         |
+| create_csr_vertex            | scalar        |             |         |         |
+| create_property_graph        | table         |             |         |         |
+| csr_get_w_type               | scalar        |             |         |         |
+| delete_csr                   | scalar        |             |         |         |
+| drop_property_graph          | table         |             |         |         |
+| duckpgq                      | scalar        |             |         |         |
+| duckpgq_match                | table         |             |         |         |
+| get_csr_e                    | table         |             |         |         |
+| get_csr_ptr                  | table         |             |         |         |
+| get_csr_v                    | table         |             |         |         |
+| get_csr_w                    | table         |             |         |         |
+| get_pg_ecolnames             | table         |             |         |         |
+| get_pg_etablenames           | table         |             |         |         |
+| get_pg_vcolnames             | table         |             |         |         |
+| get_pg_vtablenames           | table         |             |         |         |
+| iterativelength              | scalar        |             |         |         |
+| iterativelength2             | scalar        |             |         |         |
+| iterativelengthbidirectional | scalar        |             |         |         |
+| local_clustering_coefficient | scalar        |             |         |         |
+| local_clustering_coefficient | table         |             |         |         |
+| reachability                 | scalar        |             |         |         |
+| shortestpath                 | scalar        |             |         |         |
+
+
+
+---
+
