@@ -1,0 +1,28 @@
+{
+  "docsmenu": [
+    {
+      "page": "Overview",
+      "url": "/community_extensions/"
+    },
+    {
+      "page": "Documentation",
+      "url": "/community_extensions/documentation"
+    },
+    {
+      "page": "Development",
+      "url": "/community_extensions/development"
+    },
+    {
+      "page": "FAQ",
+      "url": "/community_extensions/faq"
+    },
+    {
+      "page": "Core Extensions",
+      "url": "/community_extensions/core_extensions"
+    },
+    {
+      "page": "List of Community Extensions",
+      "url": "/community_extensions/list_of_extensions"
+    }
+  ]
+}
