@@ -25,4 +25,4 @@ extension development should be relatively straightforward.
 ## Getting Help
 For extension development related questions, there is a dedicated channel in the [DuckDB Discord server](https://discord.com/invite/tcvwpjfnZx). The Discord server is
 a great place to get help from other extension developers and the core DuckDB team. If you've found a bug or another type of issue with DuckDB, the extension template, or CI toolchain, please do just open an issue in the respective repository describing your issue.
-Of course if you're not sure, you can always first check in the discord channel if it's a real issue or just you [holding it wrong](https://edition.cnn.com/2010/TECH/mobile/06/25/iphone.problems.response/index.html).
+Of course if you're not sure, you can always first check in the Discord channel if it's a real issue or just you [holding it wrong](https://www.wired.com/2010/06/iphone-4-holding-it-wrong/).
