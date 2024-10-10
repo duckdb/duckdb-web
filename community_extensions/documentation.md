@@ -13,7 +13,7 @@ Repositories needs to be Public, Open Source, and hosted on GitHub.
 
 Submitting a Community Extension is a matter of opening a PR to the [Community Extensions Repository](https://github.com/duckdb/community-extensions) adding a single `descriptor.yml` file in the folder `extensions/$name_of_extension`.
 
-### YAML descriptor
+### YAML Descriptor
 
 Structure of the YAML descritor is as follow:
 
@@ -40,7 +40,7 @@ Extensions maintainers are encouraged to provide two optional fields in the desc
 | docs.hello_world | An `Hello, World!`, a self contained example of an extension capabilities |
 | docs.extended_description | Extra context on the extension, relevant links, or a tour of the extension capabilities |
 
-### Hosted Extension Documentation Page 
+### Hosted Extension Documentation Page
 
 Each Community Extension has a documentation page at: `https://community-extension.duckdb.org/extensions/$extension_name.html`.
 
@@ -61,6 +61,6 @@ This works well for detecting new functions, functions overload, new settings, a
 
 Detection of other changes to the system (e.g., whether an additional Parser or Optimizer callback has been register) are viable, but not yet implemented. Those are recommended to be provided as part of the `docs.extended_description` field.
 
-### List of extensions
+### List of Extensions
 
 All the available community extensions are listed at [List of Community Extensions]({% link community_extensions/list_of_extensions.md %}) page.
