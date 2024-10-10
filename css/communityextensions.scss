@@ -17,10 +17,23 @@ $ce_purplelight: #f2f0fe;
 	display: none;
 }
 
+.hamburger-inner, 
+.hamburger-inner:after, 
+.hamburger-inner:before,
+.hamburger.is-active .hamburger-inner, 
+.hamburger.is-active .hamburger-inner:after, 
+.hamburger.is-active .hamburger-inner:before{
+	background-color: $ce_purple;
+}
+
 .button.yellow{
 	background-color: $ce_purple;	
 }
 
 header .headerline .headercontent .landingmenu nav a:hover{
 	color: $ce_purple;
+}
+
+body.documentation.communityextensions header .headerline .headercontent .landingmenu nav .search_icon{
+	display: none;
 }
