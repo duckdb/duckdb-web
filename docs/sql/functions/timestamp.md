@@ -55,14 +55,14 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`make_timestamp(bigint, bigint, bigint, bigint, bigint, double)`](#make_timestampbigint-bigint-bigint-bigint-bigint-double) | The timestamp for the given parts. |
 | [`make_timestamp(microseconds)`](#make_timestampmicroseconds) | The timestamp for the given number of µs since the epoch. |
 | [`monthname(timestamp)`](#monthnametimestamp) | The (English) name of the month. |
-| [`strftime(timestamp, format)`](#strftimetimestamp-format) | Converts timestamp to string according to the [format string]({% link docs/sql/functions/dateformat.md %}). |
+| [`strftime(timestamp, format)`](#strftimetimestamp-format) | Converts timestamp to string according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). |
 | [`strptime(text, format-list)`](#strptimetext-format-list) | Converts the string `text` to timestamp applying the [format strings]({% link docs/sql/functions/dateformat.md %}) in the list until one succeeds. Throws an error on failure. To return `NULL` on failure, use [`try_strptime`](#try_strptimetext-format-list). |
-| [`strptime(text, format)`](#strptimetext-format) | Converts the string `text` to timestamp according to the [format string]({% link docs/sql/functions/dateformat.md %}). Throws an error on failure. To return `NULL` on failure, use [`try_strptime`](#try_strptimetext-format). |
+| [`strptime(text, format)`](#strptimetext-format) | Converts the string `text` to timestamp according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). Throws an error on failure. To return `NULL` on failure, use [`try_strptime`](#try_strptimetext-format). |
 | [`time_bucket(bucket_width, timestamp[, offset])`](#time_bucketbucket_width-timestamp-offset) | Truncate `timestamp` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
 | [`time_bucket(bucket_width, timestamp[, origin])`](#time_bucketbucket_width-timestamp-origin) | Truncate `timestamp` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` timestamp. `origin` defaults to 2000-01-03 00:00:00 for buckets that don't include a month or year interval, and to 2000-01-01 00:00:00 for month and year buckets. |
 | [`to_timestamp(double)`](#to_timestampdouble) | Converts seconds since the epoch to a timestamp with time zone. |
 | [`try_strptime(text, format-list)`](#try_strptimetext-format-list) | Converts the string `text` to timestamp applying the [format strings]({% link docs/sql/functions/dateformat.md %}) in the list until one succeeds. Returns `NULL` on failure. |
-| [`try_strptime(text, format)`](#try_strptimetext-format) | Converts the string `text` to timestamp according to the [format string]({% link docs/sql/functions/dateformat.md %}). Returns `NULL` on failure. |
+| [`try_strptime(text, format)`](#try_strptimetext-format) | Converts the string `text` to timestamp according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). Returns `NULL` on failure. |
 
 There are also dedicated extraction functions to get the [subfields]({% link docs/sql/functions/datepart.md %}).
 
@@ -314,7 +314,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts timestamp to string according to the [format string]({% link docs/sql/functions/dateformat.md %}). |
+| **Description** | Converts timestamp to string according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). |
 | **Example** | `strftime(timestamp '1992-01-01 20:38:40', '%a, %-d %B %Y - %I:%M:%S %p')` |
 | **Result** | `Wed, 1 January 1992 - 08:38:40 PM` |
 
@@ -330,7 +330,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts the string `text` to timestamp according to the [format string]({% link docs/sql/functions/dateformat.md %}). Throws an error on failure. To return `NULL` on failure, use [`try_strptime`](#try_strptimetext-format). |
+| **Description** | Converts the string `text` to timestamp according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). Throws an error on failure. To return `NULL` on failure, use [`try_strptime`](#try_strptimetext-format). |
 | **Example** | `strptime('Wed, 1 January 1992 - 08:38:40 PM', '%a, %-d %B %Y - %I:%M:%S %p')` |
 | **Result** | `1992-01-01 20:38:40` |
 
@@ -370,7 +370,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts the string `text` to timestamp according to the [format string]({% link docs/sql/functions/dateformat.md %}). Returns `NULL` on failure. |
+| **Description** | Converts the string `text` to timestamp according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). Returns `NULL` on failure. |
 | **Example** | `try_strptime('Wed, 1 January 1992 - 08:38:40 PM', '%a, %-d %B %Y - %I:%M:%S %p')` |
 | **Result** | `1992-01-01 20:38:40` |
 

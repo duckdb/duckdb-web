@@ -163,8 +163,8 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 | [`make_timestamptz(bigint, bigint, bigint, bigint, bigint, double, string)`](#make_timestamptzbigint-bigint-bigint-bigint-bigint-double-string) | The `TIMESTAMP WITH TIME ZONE` for the given parts and time zone. |
 | [`make_timestamptz(bigint, bigint, bigint, bigint, bigint, double)`](#make_timestamptzbigint-bigint-bigint-bigint-bigint-double) | The `TIMESTAMP WITH TIME ZONE` for the given parts in the current time zone. |
 | [`make_timestamptz(microseconds)`](#make_timestamptzmicroseconds) | The `TIMESTAMP WITH TIME ZONE` for the given µs since the epoch. |
-| [`strftime(timestamptz, format)`](#strftimetimestamptz-format) | Converts a `TIMESTAMP WITH TIME ZONE` value to string according to the [format string]({% link docs/sql/functions/dateformat.md %}). |
-| [`strptime(text, format)`](#strptimetext-format) | Converts string to `TIMESTAMP WITH TIME ZONE` according to the [format string]({% link docs/sql/functions/dateformat.md %}) if `%Z` is specified. |
+| [`strftime(timestamptz, format)`](#strftimetimestamptz-format) | Converts a `TIMESTAMP WITH TIME ZONE` value to string according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). |
+| [`strptime(text, format)`](#strptimetext-format) | Converts string to `TIMESTAMP WITH TIME ZONE` according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers) if `%Z` is specified. |
 | [`time_bucket(bucket_width, timestamptz[, offset])`](#time_bucketbucket_width-timestamptz-offset) | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
 | [`time_bucket(bucket_width, timestamptz[, origin])`](#time_bucketbucket_width-timestamptz-origin) | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` timestamptz. `origin` defaults to 2000-01-03 00:00:00+00 for buckets that don't include a month or year interval, and to 2000-01-01 00:00:00+00 for month and year buckets. |
 | [`time_bucket(bucket_width, timestamptz[, timezone])`](#time_bucketbucket_width-timestamptz-timezone) | Truncate `timestamptz` by the specified interval `bucket_width`. Bucket starts and ends are calculated using `timezone`. `timezone` is a varchar and defaults to UTC. |
@@ -333,7 +333,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts a `TIMESTAMP WITH TIME ZONE` value to string according to the [format string]({% link docs/sql/functions/dateformat.md %}). |
+| **Description** | Converts a `TIMESTAMP WITH TIME ZONE` value to string according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). |
 | **Example** | `strftime(timestamptz '1992-01-01 20:38:40', '%a, %-d %B %Y - %I:%M:%S %p')` |
 | **Result** | `Wed, 1 January 1992 - 08:38:40 PM` |
 
@@ -341,7 +341,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts string to `TIMESTAMP WITH TIME ZONE` according to the [format string]({% link docs/sql/functions/dateformat.md %}) if `%Z` is specified. |
+| **Description** | Converts string to `TIMESTAMP WITH TIME ZONE` according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers) if `%Z` is specified. |
 | **Example** | `strptime('Wed, 1 January 1992 - 08:38:40 PST', '%a, %-d %B %Y - %H:%M:%S %Z')` |
 | **Result** | `1992-01-01 08:38:40-08` |
 
