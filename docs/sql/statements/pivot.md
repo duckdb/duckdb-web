@@ -98,7 +98,9 @@ In this example, we are pivoting numeric values, but the `first` function works 
 This query produces a result that is identical to the one above:
 
 ```sql
-PIVOT Cities ON Year USING first(Population);
+PIVOT Cities
+ON Year
+USING first(Population);
 ```
 
 ### `PIVOT ON`, `USING`, and `GROUP BY`
