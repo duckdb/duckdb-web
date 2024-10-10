@@ -44,7 +44,7 @@ Extensions maintainers are encouraged to provide two optional fields in the desc
 
 Each Community Extension has a documentation page at: `https://community-extension.duckdb.org/extensions/$extension_name.html`.
 
-For example, this is the page for [quack]({% link extensions/quack.md %}).
+For example, this is the page for [quack]({% link community_extensions/quack.md %}).
 
 Documentation pages are generated from the fields provided in the YAML descriptor file that is part of the [Community Extensions Repository](https://github.com/duckdb/community-extensions) and from the auto-detected changes that a given extensions introduces in DuckDB.
 
@@ -63,4 +63,4 @@ Detection of other changes to the system (e.g., whether an additional Parser or 
 
 ### List of extensions
 
-All the available community extensions are listed at [List of Community Extensions]({% link extensions/list_of_extensions.md %}) page.
+All the available community extensions are listed at [List of Community Extensions]({% link community_extensions/list_of_extensions.md %}) page.

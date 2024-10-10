@@ -2,27 +2,27 @@
   "docsmenu": [
     {
       "page": "Overview",
-      "url": "/extensions/"
+      "url": "/community_extensions/"
     },
     {
       "page": "Documentation",
-      "url": "/extensions/documentation"
+      "url": "/community_extensions/documentation"
     },
     {
       "page": "Development",
-      "url": "/extensions/development"
+      "url": "/community_extensions/development"
     },
     {
       "page": "FAQ",
-      "url": "/extensions/faq"
+      "url": "/community_extensions/faq"
     },
     {
       "page": "Core Extensions",
-      "url": "/extensions/core_extensions"
+      "url": "/community_extensions/core_extensions"
     },
     {
       "page": "List of Community Extensions",
-      "url": "/extensions/list_of_extensions"
+      "url": "/community_extensions/list_of_extensions"
     }
   ]
 }
