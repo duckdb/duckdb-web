@@ -57,7 +57,7 @@ SELECT * FROM schedule_raw;
 └────────────────────┴──────────────┴──────────────────┘
 ```
 
-Ideally, we would like the field to have the type `TIMESTAMP` so we can treat it as a timestamp in the queries later. To achieve this, we can use the table we just loaded and fix the problematic entities by using a regular expression-based search-and-replace, which unifies the format to `hours.minutes` followed by `am` or `pm`. Then, we convert the string to timestamps using [`strptime`]({% link docs/sql/functions/dateformat.md %}#strptime-examples) with the `%p` formatter capturing the `am`/`pm` part of the string.
+Ideally, we would like the `timeslot` column to have the type `TIMESTAMP` so we can treat it as a timestamp in the queries later. To achieve this, we can use the table we just loaded and fix the problematic entities by using a regular expression-based search and replace operation, which unifies the format to `hours.minutes` followed by `am` or `pm`. Then, we convert the string to timestamps using [`strptime`]({% link docs/sql/functions/dateformat.md %}#strptime-examples) with the `%p` format specifier capturing the `am`/`pm` part of the string.
 
 ```sql
 CREATE TABLE schedule_cleaned AS
@@ -87,26 +87,26 @@ Note that we use the [dot operator for function chaining]({% link docs/sql/funct
 
 ## Filling in Missing Values
 
-Next, we would like to derive a schedule that includes the full picture: *every timeslot* for *every location* should have its line in the table. To this end, we would like to fill in the empty slots with a string that says `<empty>`.
+Next, we would like to derive a schedule that includes the full picture: *every timeslot* for *every location* should have its line in the table. For the timeslot-location combinations, where there is no event specified, we would like to explicitly add a string that says `<empty>`.
 
-To achieve this, we create a table `timeslot_location_combinations` containing all possible combinations using a `CROSS JOIN`. Then, we can connect the original table on it using a `LEFT JOIN`. Finally, we replace `NULL` values with the `<empty>` string using the [`coalesce` function]({% link docs/sql/functions/utility.md %}#coalesceexpr-).
+To achieve this, we first create a table `timeslot_location_combinations` containing all possible combinations using a `CROSS JOIN`. Then, we can connect the original table on the combinations using a `LEFT JOIN`. Finally, we replace `NULL` values with the `<empty>` string using the [`coalesce` function]({% link docs/sql/functions/utility.md %}#coalesceexpr-).
 
-> The `CROSS JOIN` clause is equivalent to simply listing the tables in the `FROM` clause without additional filtering (`WHERE`) conditions. By explicitly spelling out `CROSS JOIN`, we can communicate that we intend to compute a Cartesian product – which is an expensive operation on large tables and should be avoided in most cases.
+> The `CROSS JOIN` clause is equivalent to simply listing the tables in the `FROM` clause without specifying join conditions. By explicitly spelling out `CROSS JOIN`, we communicate that we intend to compute a Cartesian product – which is an expensive operation on large tables and should be avoided in most use cases.
 
 ```sql
 CREATE TABLE timeslot_location_combinations AS 
-SELECT timeslot, location
-FROM (SELECT DISTINCT timeslot FROM schedule_cleaned)
-CROSS JOIN (SELECT DISTINCT location FROM schedule_cleaned);
+    SELECT timeslot, location
+    FROM (SELECT DISTINCT timeslot FROM schedule_cleaned)
+    CROSS JOIN (SELECT DISTINCT location FROM schedule_cleaned);
 
 CREATE TABLE schedule_filled AS
-SELECT timeslot, location, coalesce(event, '<empty>') AS event
-FROM timeslot_location_combinations
-LEFT JOIN schedule_cleaned
-    USING (timeslot, location)
-ORDER BY ALL;
+    SELECT timeslot, location, coalesce(event, '<empty>') AS event
+    FROM timeslot_location_combinations
+    LEFT JOIN schedule_cleaned
+        USING (timeslot, location)
+    ORDER BY ALL;
 
-FROM schedule_filled;
+SELECT * FROM schedule_filled;
 ```
 
 ```text
@@ -148,26 +148,25 @@ ORDER BY ALL;
 
 ## Repeated Data Transformation Steps
 
-Data cleaning and transformation usually happens as a sequence of transformations that shape the data into a form that’s best fitted to later analysis. These transformations are often done by defining newer and newer tables using [`CREATE TABLE ... AS SELECT` statements]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas).
+Data cleaning and transformation usually happens as a sequence of transformations that shape the data into a form that’s best fitted to later analysis.
+These transformations are often done by defining newer and newer tables using [`CREATE TABLE … AS SELECT` statements]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas).
 
-For example, in the sections above, we created `schedule_raw`, `schedule_cleaned`, and `schedule_filled`. If, for some reason, we want to skip the cleaning steps for the timestamps, we have to reformulate the queries computing `schedule_filled` to use `schedule_raw` instead of `schedule_cleaned`.
-
-This can be tedious and error-prone: it can also result in a lot of unused temporary data – that we may use accidentally in queries that we forgot to update!
+For example, in the sections above, we created `schedule_raw`, `schedule_cleaned`, and `schedule_filled`. If, for some reason, we want to skip the cleaning steps for the timestamps, we have to reformulate the query computing `schedule_filled` to use `schedule_raw` instead of `schedule_cleaned`. This can be tedious and error-prone, and it results in a lot of unused temporary data – data that may accidentally get picked up by queries that we forgot to update!
 
 In interactive analysis, it’s often better to use the same table name by running [`CREATE OR REPLACE` statements]({% link docs/sql/statements/create_table.md %}#create-or-replace):
 
 ```sql
 CREATE OR REPLACE TABLE ⟨table_name⟩ AS
-    ...
+    …
     FROM ⟨table_name⟩
-    ...;
+    …;
 ```
 
 Using this trick, we can run our analysis as follows:
 
 ```sql
 CREATE OR REPLACE TABLE schedule AS
-    FROM 'https://duckdb.org/data/schedule.csv';
+    SELECT * FROM 'https://duckdb.org/data/schedule.csv';
 
 CREATE OR REPLACE TABLE schedule AS
     SELECT
@@ -190,16 +189,16 @@ CREATE OR REPLACE TABLE schedule AS
         USING (timeslot, location)
     ORDER BY ALL;
 
-FROM schedule;
+SELECT * FROM schedule;
 ```
 
-Using this approach, we can skip (comment out) any step and continue the analysis without adjusting the next one.
+Using this approach, we can skip any step and continue the analysis without adjusting the next one.
 
 What’s more, our script can now be re-run from the beginning without explicitly deleting any tables: the `CREATE OR REPLACE` statements will automatically replace any existing tables.
 
 ## Computing Checksums for Columns
 
-It’s often beneficial to compute a checksum for each column in a table, e.g., to see whether a column's content has changed between two operations.
+It’s often beneficial to compute a checksum for each column in a table, e.g., to see whether a column’s content has changed between two operations.
 We can compute a checksum for the `schedule` table as follows:
 
 ```sql
@@ -207,7 +206,10 @@ SELECT bit_xor(md5_number(COLUMNS(*)::VARCHAR))
 FROM schedule;
 ```
 
-What’s going on here? We first list columns ([`COLUMNS(*)`]({% link docs/sql/expressions/star.md %}#columns-expression)) and cast them to `VARCHAR` values. Then, we compute the numeric MD5 hashes with the [`md5_number` function]({% link docs/sql/functions/utility.md %}#md5_numberstring) and aggregate them using the [`bit_xor` aggregate function]({% link docs/sql/functions/aggregates.md %}#bit_xorarg). This produces a single `HUGEINT` (`INT128`) value per column that can be used to compare the content of tables.
+What’s going on here?
+We first list columns ([`COLUMNS(*)`]({% link docs/sql/expressions/star.md %}#columns-expression)) and cast all of them to `VARCHAR` values.
+Then, we compute the numeric MD5 hashes with the [`md5_number` function]({% link docs/sql/functions/utility.md %}#md5_numberstring) and aggregate them using the [`bit_xor` aggregate function]({% link docs/sql/functions/aggregates.md %}#bit_xorarg).
+This produces a single `HUGEINT` (`INT128`) value per column that can be used to compare the content of tables.
 
 If we run this query in the script above, we get the following results:
 
@@ -248,7 +250,7 @@ CREATE MACRO checksum(table_name) AS TABLE
     FROM query_table(table_name);
 ```
 
-This way, we can simply invoke it on the `schedule` table as follows:
+This way, we can simply invoke it on the `schedule` table as follows (also leveraging DuckDB’s [`FROM`-first syntax]({% link docs/sql/query_syntax/from.md %})):
 
 ```sql
 FROM checksum('schedule');
@@ -265,4 +267,6 @@ FROM checksum('schedule');
 
 ## Closing Thoughts
 
-That’s it for today! We’ll be back soon with more DuckDB tricks and case studies. In the meantime, if you have a trick that would like to share, please share it with the DuckDB team on our social media sites, or submit it to the [DuckDB Snippets site](https://duckdbsnippets.com/) (maintained by our friends at MotherDuck).
+That’s it for today!
+We’ll be back soon with more DuckDB tricks and case studies. =
+In the meantime, if you have a trick that would like to share, please share it with the DuckDB team on our social media sites, or submit it to the [DuckDB Snippets site](https://duckdbsnippets.com/) (maintained by our friends at MotherDuck).
