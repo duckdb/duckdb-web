@@ -11,17 +11,17 @@ excerpt: "We continue our “DuckDB tricks” series, focusing on queries that c
 This post is the latest installment of the [DuckDB Tricks series]({% post_url 2024-08-19-duckdb-tricks-part-1 %}), where we show you nifty SQL tricks in DuckDB.
 Here’s a summary of what we’re going to cover:
 
-| Operation | Snippet |
+| Operation | SQL instructions |
 |-----------|---------|
 | [Fixing timestamps in CSV files](#fixing-timestamps-in-csv-files) | `regexp_replace` and `strptime` |
 | [Filling in missing values](#filling-in-missing-values) | `CROSS JOIN`, `LEFT JOIN` and `coalesce` |
-| [Repeated data transformation steps](#repeated-data-transformation-steps) | `CREATE OR REPLACE TABLE t AS ... FROM t` |
+| [Repeated data transformation steps](#repeated-data-transformation-steps) | `CREATE OR REPLACE TABLE t AS … FROM t …` |
 | [Computing checksums for columns](#computing-checksums-for-columns) | `bit_xor(md5_number(COLUMNS(*)::VARCHAR))` |
-| [Creating a macro for the checksum query](#creating-a-macro-for-the-checksum-query) | `CREATE MACRO checksum(table_name) AS TABLE` |
+| [Creating a macro for the checksum query](#creating-a-macro-for-the-checksum-query) | `CREATE MACRO checksum(tbl) AS TABLE …` |
 
 ## Dataset
 
-As our dataset, we’ll use `schedule.csv`, a hand-written CSV file that encodes a conference schedule. The schedule contains the timeslots, the locations and the events scheduled.
+For our example dataset, we’ll use `schedule.csv`, a hand-written CSV file that encodes a conference schedule. The schedule contains the timeslots, the locations and the events scheduled.
 
 ```csv
 timeslot,location,event
@@ -32,17 +32,16 @@ timeslot,location,event
 2024-10-10 2pm,room Fusca,Deep dive 2
 ```
 
-As usual, the data is messy with an unclear timestamp format, missing values, etc.
-
 ## Fixing Timestamps in CSV Files
 
-If we load the `schedule.csv` file using DuckDB’s CSV reader, the CSV sniffer will detect the first column as a `VARCHAR` field:
+As usual in real use case, the input CSV is messy with irregular timestamps such as `2024-10-10 9am`.
+Therefore, if we load the `schedule.csv` file using DuckDB’s CSV reader, the CSV sniffer will detect the first column as a `VARCHAR` field:
 
 ```sql
 CREATE TABLE schedule_raw AS
-    FROM 'https://duckdb.org/data/schedule.csv';
+    SELECT * FROM 'https://duckdb.org/data/schedule.csv';
 
-FROM schedule_raw;
+SELECT * FROM schedule_raw;
 ```
 
 ```text
