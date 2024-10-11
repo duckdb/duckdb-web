@@ -3,7 +3,7 @@ layout: post
 title: "DuckDB Tricks – Part 2"
 author: "Gabor Szarnyas"
 thumb: "/images/blog/thumbs/duckdb-tricks-2.svg"
-excerpt: "We continue our DuckDB tricks series, focusing on queries that clean, transform and summarize data."
+excerpt: "We continue our “DuckDB tricks” series, focusing on queries that clean, transform and summarize data."
 ---
 
 ## Overview
@@ -14,7 +14,7 @@ Here’s a summary of what we’re going to cover:
 | Operation | Snippet |
 |-----------|---------|
 | [Fixing timestamps in CSV files](#fixing-timestamps-in-csv-files) | `regexp_replace` and `strptime` |
-| [Filling in missing values](#filling-in-missing-values) | `CROSS JOIN`, `RIGHT JOIN` and `coalesce` |
+| [Filling in missing values](#filling-in-missing-values) | `CROSS JOIN`, `LEFT JOIN` and `coalesce` |
 | [Repeated data transformation steps](#repeated-data-transformation-steps) | `CREATE OR REPLACE TABLE t AS ... FROM t` |
 | [Computing checksums for columns](#computing-checksums-for-columns) | `bit_xor(md5_number(COLUMNS(*)::VARCHAR))` |
 | [Creating a macro for the checksum query](#creating-a-macro-for-the-checksum-query) | `CREATE MACRO checksum(table_name) AS TABLE` |
@@ -36,7 +36,7 @@ As usual, the data is messy with an unclear timestamp format, missing values, et
 
 ## Fixing Timestamps in CSV Files
 
-If we load the `schedule.csv` file using DuckDB’s CSV reader, the CSV sniffer will detect the second column as a `VARCHAR` field:
+If we load the `schedule.csv` file using DuckDB’s CSV reader, the CSV sniffer will detect the first column as a `VARCHAR` field:
 
 ```sql
 CREATE TABLE schedule_raw AS
@@ -58,7 +58,7 @@ FROM schedule_raw;
 └────────────────────┴──────────────┴──────────────────┘
 ```
 
-Ideally, we would like the field to have the type `TIMESTAMP` so we can treat it as a timestamp in the queries later. To achieve this, we can use the table we just loaded and fix the problematic entities with a regular expression search-and-replace, then convert the string to timestamps with [`strptime`]({% link docs/sql/functions/dateformat.md %}#strptime-examples).
+Ideally, we would like the field to have the type `TIMESTAMP` so we can treat it as a timestamp in the queries later. To achieve this, we can use the table we just loaded and fix the problematic entities by using a regular expression-based search-and-replace, which unifies the format to `hours.minutes` followed by `am` or `pm`. Then, we convert the string to timestamps using [`strptime`]({% link docs/sql/functions/dateformat.md %}#strptime-examples) with the `%p` formatter capturing the `am`/`pm` part of the string.
 
 ```sql
 CREATE TABLE schedule_cleaned AS
@@ -90,7 +90,7 @@ Note that we use the [dot operator for function chaining]({% link docs/sql/funct
 
 Next, we would like to derive a schedule that includes the full picture: *every timeslot* for *every location* should have its line in the table. To this end, we would like to fill in the empty slots with a string that says `<empty>`.
 
-To achieve this, we create a table `timeslot_location_combinations` containing all possible combinations using a `CROSS JOIN` [^1]. Then, we connect it to the original table using a `RIGHT JOIN`. Finally, we replace `NULL` values with the `<empty>` string using the [`coalesce` function]({% link docs/sql/functions/utility.md %}#coalesceexpr-).
+To achieve this, we create a table `timeslot_location_combinations` containing all possible combinations using a `CROSS JOIN`. Then, we can connect the original table on it using a `LEFT JOIN`. Finally, we replace `NULL` values with the `<empty>` string using the [`coalesce` function]({% link docs/sql/functions/utility.md %}#coalesceexpr-).
 
 > The `CROSS JOIN` clause is equivalent to simply listing the tables in the `FROM` clause without additional filtering (`WHERE`) conditions. By explicitly spelling out `CROSS JOIN`, we can communicate that we intend to compute a Cartesian product – which is an expensive operation on large tables and should be avoided in most cases.
 
@@ -102,9 +102,9 @@ CROSS JOIN (SELECT DISTINCT location FROM schedule_cleaned);
 
 CREATE TABLE schedule_filled AS
 SELECT timeslot, location, coalesce(event, '<empty>') AS event
-FROM schedule_cleaned
-RIGHT JOIN timeslot_location_combinations
-     USING (timeslot, location)
+FROM timeslot_location_combinations
+LEFT JOIN schedule_cleaned
+    USING (timeslot, location)
 ORDER BY ALL;
 
 FROM schedule_filled;
@@ -141,9 +141,9 @@ WITH timeslot_location_combinations AS (
     CROSS JOIN (SELECT DISTINCT location FROM schedule_cleaned)
 )
 SELECT timeslot, location, coalesce(event, '<empty>') AS event
-FROM schedule_cleaned
-RIGHT JOIN timeslot_location_combinations
-     USING (timeslot, location)
+FROM timeslot_location_combinations
+LEFT JOIN schedule_cleaned
+    USING (timeslot, location)
 ORDER BY ALL;
 ```
 
@@ -186,9 +186,9 @@ CREATE OR REPLACE TABLE schedule AS
         CROSS JOIN (SELECT DISTINCT location FROM schedule)
     )
     SELECT timeslot, location, coalesce(event, '<empty>') AS event
-    FROM schedule
-    RIGHT JOIN timeslot_location_combinations
-         USING (timeslot, location)
+    FROM timeslot_location_combinations
+    LEFT JOIN schedule_cleaned
+        USING (timeslot, location)
     ORDER BY ALL;
 
 FROM schedule;
@@ -200,7 +200,7 @@ What’s more, our script can now be re-run from the beginning without explicitl
 
 ## Computing Checksums for Columns
 
-It’s often beneficial to compute a checksum each columns in a table, e.g., to see whether a column's content has changed between two operations.
+It’s often beneficial to compute a checksum for each column in a table, e.g., to see whether a column's content has changed between two operations.
 We can compute a checksum for the `schedule` table as follows:
 
 ```sql
@@ -266,4 +266,4 @@ FROM checksum('schedule');
 
 ## Closing Thoughts
 
-That’s it for today! We’ll be back soon with more DuckDB tricks and case studies. In the meantime, if you have a trick that would like to share, please share it with the DuckDB team on our social media sites, or submit it to the [DuckDB Snippets site](https://duckdbsnippets.com/) (maintained by the MotherDuck team).
+That’s it for today! We’ll be back soon with more DuckDB tricks and case studies. In the meantime, if you have a trick that would like to share, please share it with the DuckDB team on our social media sites, or submit it to the [DuckDB Snippets site](https://duckdbsnippets.com/) (maintained by our friends at MotherDuck).
