@@ -1387,12 +1387,21 @@ function GenerateValues(options) {
 
 function GenerateQualifiedTableName(options, tname = "table-name") {
 	return Sequence([
-		Optional(Sequence([
-			Expression("schema-name"),
-			Keyword(".")
-		]), "skip"),
-		Expression(tname)
-	])
+			Choice(0, [
+			new Skip(),
+			Sequence([
+				Expression("catalog-name"),
+				Keyword("."),
+				Expression("schema-name"),
+				Keyword(".")
+			]),
+			Sequence([
+				Expression("schema-name"),
+				Keyword(".")
+			])
+		]),
+		Expression("type-name")
+	]);
 }
 
 function GenerateTemporary(options) {
