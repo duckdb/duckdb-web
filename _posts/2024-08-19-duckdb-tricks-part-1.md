@@ -2,7 +2,8 @@
 layout: post
 title: "DuckDB Tricks – Part 1"
 author: "Gabor Szarnyas"
-thumb: "/images/blog/thumbs/240819.svg"
+thumb: "/images/blog/thumbs/duckdb-tricks-1.svg"
+image: "/images/blog/thumbs/duckdb-tricks-1.png"
 excerpt: "We use a simple example data set to present a few tricks that are useful when using DuckDB."
 ---
 
