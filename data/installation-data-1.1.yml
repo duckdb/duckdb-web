@@ -21,7 +21,7 @@
   architecture: x86_64
   has_sha_512_hash: 'yes'
   installation_code: ''
-  link: https://github.com/duckdb/duckdb/releases/download/v1.1.1/duckdb_cli-windows-amd64.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.1.2/duckdb_cli-windows-amd64.zip
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
 
@@ -37,7 +37,7 @@
   architecture: arm64
   has_sha_512_hash: 'yes'
   installation_code: ''
-  link: https://github.com/duckdb/duckdb/releases/download/v1.1.1/duckdb_cli-windows-arm64.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.1.2/duckdb_cli-windows-arm64.zip
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
 
@@ -69,7 +69,7 @@
   architecture: universal
   has_sha_512_hash: 'yes'
   installation_code: ''
-  link: https://github.com/duckdb/duckdb/releases/download/v1.1.1/duckdb_cli-osx-universal.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.1.2/duckdb_cli-osx-universal.zip
   note: ''
   usage_example: ./duckdb
 - variant: stable
@@ -79,7 +79,7 @@
   architecture: x86_64
   has_sha_512_hash: 'yes'
   installation_code: ''
-  link: https://github.com/duckdb/duckdb/releases/download/v1.1.1/duckdb_cli-linux-amd64.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.1.2/duckdb_cli-linux-amd64.zip
   note: ''
   usage_example: ./duckdb
 - variant: stable
@@ -89,7 +89,7 @@
   architecture: arm64
   has_sha_512_hash: 'yes'
   installation_code: ''
-  link: https://github.com/duckdb/duckdb/releases/download/v1.1.1/duckdb_cli-linux-aarch64.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.1.2/duckdb_cli-linux-aarch64.zip
   note: ''
   usage_example: ./duckdb
 - variant: stable
@@ -177,7 +177,7 @@
   architecture: x86_64
   has_sha_512_hash: ''
   installation_code: ''
-  link: https://github.com/duckdb/duckdb/releases/download/v1.1.1/libduckdb-windows-amd64.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.1.2/libduckdb-windows-amd64.zip
   note: ''
   usage_example: ''
 - variant: stable
@@ -187,7 +187,7 @@
   architecture: arm64
   has_sha_512_hash: ''
   installation_code: ''
-  link: https://github.com/duckdb/duckdb/releases/download/v1.1.1/libduckdb-windows-arm64.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.1.2/libduckdb-windows-arm64.zip
   note: ''
   usage_example: ''
 - variant: stable
@@ -197,7 +197,7 @@
   architecture: universal
   has_sha_512_hash: ''
   installation_code: ''
-  link: https://github.com/duckdb/duckdb/releases/download/v1.1.1/libduckdb-osx-universal.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.1.2/libduckdb-osx-universal.zip
   note: ''
   usage_example: ''
 - variant: stable
@@ -207,7 +207,7 @@
   architecture: x86_64
   has_sha_512_hash: ''
   installation_code: ''
-  link: https://github.com/duckdb/duckdb/releases/download/v1.1.1/libduckdb-linux-amd64.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.1.2/libduckdb-linux-amd64.zip
   note: ''
   usage_example: ''
 - variant: stable
@@ -217,7 +217,7 @@
   architecture: arm64
   has_sha_512_hash: ''
   installation_code: ''
-  link: https://github.com/duckdb/duckdb/releases/download/v1.1.1/libduckdb-linux-aarch64.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.1.2/libduckdb-linux-aarch64.zip
   note: ''
   usage_example: ''
 - variant: stable
