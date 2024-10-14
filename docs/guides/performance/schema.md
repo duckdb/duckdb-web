@@ -84,3 +84,7 @@ We illustrate the effect of using primary keys with the [LDBC Comment table at s
 In this case, primary keys will only have a (small) positive effect on highly selective queries such as when filtering on a single identifier. They do not have an effect on join and aggregation operators.
 
 > Bestpractice For best bulk load performance, avoid defining primary key constraints if possible.
+
+## Schema Changes
+
+When making changes to the schema, prefer using [`CREATE TABLE ... AS SELECT`](../../sql/statements/create_table#create-table--as-select-ctas) to [`ALTER TABLE`](../../sql/statements/alter_table).
