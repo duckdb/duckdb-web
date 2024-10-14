@@ -30,7 +30,7 @@ For more information, see the [“Profiling”]({% link docs/configuration/pragm
 
 | Setting                                                                                                                                                            | Description                                      | Default                                                   | Options                                                                                                                 |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [`enable_profiling`]({% link docs/configuration/pragmas.md %}#enable_profiling) , [`enable_profile`]({% link docs/configuration/pragmas.md %}#enable_profiling)    | Turn on profiling.                               | `query_tree`                                              | `query_tree`, `json`, `query_tree_optimizer`, `no_output`                                                               |
+| [`enable_profiling`]({% link docs/configuration/pragmas.md %}#enable_profiling), [`enable_profile`]({% link docs/configuration/pragmas.md %}#enable_profiling)     | Turn on profiling.                               | `query_tree`                                              | `query_tree`, `json`, `query_tree_optimizer`, `no_output`                                                               |
 | [`profiling_output`]({% link docs/configuration/pragmas.md %}#profiling_output)                                                                                    | Set a profiling output file.                     | Console                                                   | A filepath.                                                                                                             |
 | [`profiling_mode`]({% link docs/configuration/pragmas.md %}#profiling_mode)                                                                                        | Toggle additional optimizer and planner metrics. | `standard`                                                | `standard`, `detailed`                                                                                                  |
 | [`custom_profiling_settings`]({% link docs/configuration/pragmas.md %}#custom_profiling_metrics)                                                                   | Enable or disable specific metrics.              | All metrics except those activated by detailed profiling. | A JSON object that matches the following: `{"METRIC_NAME": "boolean", ...}`. See the [metrics](#metrics) section below. |
@@ -66,7 +66,7 @@ In the `QUERY_ROOT` node, these metrics represent the sum of the corresponding m
 The `OPERATOR` nodes represent the sum of the operator's specific metric and those of all its children recursively.
 
 These cumulative metrics can be enabled independently, even if the underlying specific metrics are disabled.
-The table below shows the cumulative metrics. 
+The table below shows the cumulative metrics.
 It also depicts the metric based on which DuckDB calculates the cumulative metric.
 
 | Metric                    | Unit     | Metric calculated cumulatively |
@@ -81,27 +81,29 @@ Thus, for some queries, the `LATENCY` in the `QUERY_ROOT` can be greater than th
 
 ## Detailed Profiling
 
-When the `profiling_mode` is set to `detailed`, an extra set of metrics are enabled, which are only available in the `QUERY_ROOT` node. 
+When the `profiling_mode` is set to `detailed`, an extra set of metrics are enabled, which are only available in the `QUERY_ROOT` node.
 These include [`OPTIMIZER`](#optimizer-metrics), [`PLANNER`](#planner-metrics), and [`PHYSICAL_PLANNER`](#physical-planner-metrics) metrics.
 They are measured in seconds and returned as a `double`.
 It is possible to toggle each of these additional metrics individually.
 
 ### Optimizer Metrics
 
-At the `QUERY_ROOT` node, there are metrics that measure the time taken by each [optimizer]({% link docs/internals/overview.md %}#optimizer). 
-These metrics are only available when the specific optimizer is enabled. 
+At the `QUERY_ROOT` node, there are metrics that measure the time taken by each [optimizer]({% link docs/internals/overview.md %}#optimizer).
+These metrics are only available when the specific optimizer is enabled.
 The available optimizations can be queried using the [`duckdb_optimizers() table function`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers).
 
-Each optimizer has a corresponding metric that follows the template: `OPTIMIZER_<OPTIMIZER_NAME>`. 
+Each optimizer has a corresponding metric that follows the template: `OPTIMIZER_⟨OPTIMIZER_NAME⟩`.
 For example, the `OPTIMIZER_JOIN_ORDER` metric corresponds to the `JOIN_ORDER` optimizer.
 
 Additionally, the following metrics are available to support the optimizer metrics:
+
 * `ALL_OPTIMIZERS`: Enables all optimizer metrics and measures the time the optimizer parent node takes.
 * `CUMMULATIVE_OPTIMIZER_TIMING`: The cumulative sum of all optimizer metrics. It is usable without turning on all optimizer metrics.
 
 ### Planner Metrics
 
 The planner is responsible for generating the logical plan. Currently, DuckDB measures two metrics in the planner:
+
 * `PLANNER`: The time to generate the logical plan from the parsed SQL nodes.
 * `PLANNER_BINDING`: The time taken to bind the logical plan.
 
@@ -109,6 +111,7 @@ The planner is responsible for generating the logical plan. Currently, DuckDB me
 
 The physical planner is responsible for generating the physical plan from the logical plan.
 The following are the metrics supported in the physical planner:
+
 * `PHYSICAL_PLANNER`: The time spent generating the physical plan.
 * `PHYSICAL_PLANNER_COLUMN_BINDING`: The time spent binding the columns in the logical plan to physical columns.
 * `PHYSICAL_PLANNER_RESOLVE_TYPES`: The time spent resolving the types in the logical plan to physical types.
