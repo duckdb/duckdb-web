@@ -26,16 +26,7 @@ The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
 ### Prerequisites
 
-1. The site is built using [Jekyll](https://jekyllrb.com/) 3.9.x, which requires Ruby v2.7.x+. While some operating systems ship Ruby, the built-in Ruby distribution is often an older version.
-
-    On macOS, you can install a new Ruby version via [Homebrew](https://brew.sh/) and place it on the path:
-
-    ```bash
-    brew install ruby
-    echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc
-    ```
-
-    You may also consider using the cross-platform [Ruby Version Manager (RVM)](https://rvm.io/) for installing a custom Ruby version.
+1. The site is built using [Jekyll](https://jekyllrb.com/). For instructions on setting up Ruby for Jekyll, please visit the [Installation page of Jekyll](https://jekyllrb.com/docs/installation/macos/).
 
 2. Install Jekyll and the other required Ruby dependencies using Bundler:
 
