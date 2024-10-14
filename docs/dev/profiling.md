@@ -71,8 +71,8 @@ It also depicts the metric based on which DuckDB calculates the cumulative metri
 
 | Metric                    | Unit     | Metric calculated cumulatively |
 |---------------------------|----------|--------------------------------|
-| `CPU_TIME`                | seconds  | OPERATOR_TIMING`               |
-| `CUMULATIVE_CARDINALITY`  | absolute | OPERATOR_CARDINALITY`          |
+| `CPU_TIME`                | seconds  | `OPERATOR_TIMING`              |
+| `CUMULATIVE_CARDINALITY`  | absolute | `OPERATOR_CARDINALITY`         |
 | `CUMULATIVE_ROWS_SCANNED` | absolute | `OPERATOR_ROWS_SCANNED`        |
 
 `CPU_TIME` measures the cumulative operator timings.
