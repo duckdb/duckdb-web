@@ -287,11 +287,11 @@ Or:
 PRAGMA disable_print_progress_bar;
 ```
 
-## Profiling Queries
+## EXPLAIN Output
 
-#### Explain Plan Output
+The output of [`EXPLAIN`]({% link docs/sql/statements/profiling.md %}) can be configured to show only the physical plan.
 
-The output of [`EXPLAIN`]({% link docs/sql/statements/profiling.md %}) output can be configured to show only the physical plan. This is the default configuration:
+The default configuration of `EXPLAIN`:
 
 ```sql
 SET explain_output = 'physical_only';
@@ -309,110 +309,106 @@ To show all query plans:
 SET explain_output = 'all';
 ```
 
-#### Profiling
+## Profiling
 
-##### Enable Profiling
+### Enable Profiling
 
-To enable profiling:
+The following query enables profiling with the default format, `query_tree`.
+Independent of the format, `enable_profiling` is **mandatory** to enable profiling.
 
 ```sql
 PRAGMA enable_profiling;
-```
-
-Or:
-
-```sql
 PRAGMA enable_profile;
 ```
 
 ##### Profiling Format
 
-The format of the resulting profiling information can be specified as either `json`, `query_tree`, or `query_tree_optimizer`. The default format is `query_tree`, which prints the physical query plan as well as the timings and cardinalities of each operator in the tree to the screen.
+The format of `enable_profiling` can be specified as `query_tree`, `json`, `query_tree_optimizer`, or `no_output`.
+Each format prints its output to the configured output, except `no_output`.
 
-To return the physical query plan as JSON:
-
-```sql
-SET enable_profiling = 'json';
-```
-
-To return the physical query plan:
+The default format is `query_tree`.
+It prints the physical query plan and the metrics of each operator in the tree.
 
 ```sql
 SET enable_profiling = 'query_tree';
 ```
 
-To return the physical query plan with optimizer and planner timings:
+Alternatively, `json` returns the physical query plan as JSON:
+
+```sql
+SET enable_profiling = 'json';
+```
+
+To return the physical query plan, including optimizer and planner metrics:
 
 ```sql
 SET enable_profiling = 'query_tree_optimizer';
 ```
 
-For more information on the profiling mode, see [profiling mode](#profiling-mode).
-
-##### Disabling Output
-
-Profiling can also be accessed through API calls, in which case any other output should be disabled with the following:
+Database drivers and other applications can also access profiling information through API calls, in which case users can disable any other output.
+Even though the parameter reads `no_output`, it is essential to note that this **only** affects printing to the configurable output.
+When accessing profiling information through API calls, it is still crucial to enable profiling:
     
 ```sql
 SET enable_profiling = 'no_output';
 ```
 
-##### Disable Profiling
+### Profiling Output
 
-To disable profiling:
+By default, DuckDB prints profiling information to the standard output.
+However, if you prefer to write the profiling information to a file, you can use `PRAGMA` `profiling_output` to specify a filepath.
 
-```sql
-PRAGMA disable_profiling;
-```
-
-Or:
-
-```sql
-PRAGMA disable_profile;
-```
-
-##### Profiling Output
-
-By default, profiling information is printed to the console, however, if you prefer to write the profiling information to a file the `PRAGMA` `profiling_output` can be used to write to a specified file.
-
-> Warning The file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run:
+> Warning The file contents will be overwritten for every newly issued query.
+> Hence, the file will only contain the profiling information of the last run query:
 
 ```sql
 SET profiling_output = '/path/to/file.json';
 SET profile_output = '/path/to/file.json';
 ```
 
-##### Profiling Mode
+### Profiling Mode
 
 By default, a limited amount of profiling information is provided (`standard`).
-For more details, use the detailed profiling mode by setting `profiling_mode` to `detailed`.
-The output of this mode shows how long it takes to apply certain optimizers on the query tree and how long physical planning takes:
-
-```sql
-SET profiling_mode = 'detailed';
-```
 
 ```sql
 SET profiling_mode = 'standard';
 ```
 
-#### Custom Profiling Metrics
+For more details, use the detailed profiling mode by setting `profiling_mode` to `detailed`.
+The output of this mode includes profiling of the planner and optimizer stages.
 
-By default, all metrics are enabled except those activated by detailed profiling.
-Each metric, including those from detailed profiling,
-can be individually enabled or disabled using the `custom_profiling_settings` `PRAGMA`.
+```sql
+SET profiling_mode = 'detailed';
+```
+
+### Custom Metrics
+
+By default, profiling enables all metrics except those activated by detailed profiling.
+
+Using the `custom_profiling_settings` `PRAGMA`, each metric, including those from detailed profiling, can be individually enabled or disabled.
 This `PRAGMA` accepts a JSON object with metric names as keys and boolean values to toggle them on or off.
 Settings specified by this `PRAGMA` override the default behavior.
 
-> Note This only affects the metrics when the `enable_profiling` is set to `json`. The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
+> Note This only affects the metrics when the `enable_profiling` is set to `json` or `no_output`. 
+> The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
 
-In the following example, the `CPU_TIME` metric is disabled, and the `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
+In the following example, the `CPU_TIME` metric is disabled.
+The `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
 
 ```sql
 SET custom_profiling_settings = '{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
 ```
 
 The profiling documentation contains an overview of the available [metrics]({% link docs/dev/profiling.md %}#metrics).
+
+### Disable Profiling
+
+To disable profiling:
+
+```sql
+PRAGMA disable_profiling;
+PRAGMA disable_profile;
+```
 
 ## Query Optimization
 
