@@ -46,17 +46,17 @@ The table below describes each metric and which nodes they are available for.
 
 Other than `QUERY_NAME` and `OPERATOR_TYPE`, it is possible to turn all metrics on or off.
 
-| Metric                  | Return Type |   Unit   | Query | Operator | Description                                                                                                                  |
-|-------------------------|-------------|:--------:|:-----:|:--------:|------------------------------------------------------------------------------------------------------------------------------|
+| Metric                  | Return type |   Unit   | Query | Operator | Description                                                                                                                   |
+|-------------------------|-------------|----------|:-----:|:--------:|-------------------------------------------------------------------------------------------------------------------------------|
 | `BLOCKED_THREAD_TIME`   | `double`    | seconds  |   ✅   |          | The total time threads are blocked.                                                                                          |
-| `EXTRA_INFO`            | `string`    |          |   ✅   |    ✅     | Unique operator metrics.                                                                                                     |
+| `EXTRA_INFO`            | `string`    |          |   ✅   |    ✅    | Unique operator metrics.                                                                                                     |
 | `LATENCY`               | `double`    | seconds  |   ✅   |          | The total elapsed query execution time.                                                                                      |
-| `OPERATOR_CARDINALITY`  | `uint64`    | absolute |       |    ✅     | The cardinality of each operator, i.e., the number of rows it returns to its parent. Operator equivalent of `ROWS_RETURNED`. |
-| `OPERATOR_ROWS_SCANNED` | `uint64`    | absolute |       |    ✅     | The total rows scanned by each operator.                                                                                     |
-| `OPERATOR_TIMING`       | `double`    | seconds  |       |    ✅     | The time taken by each operator. Operator equivalent of `LATENCY`.                                                           |
-| `OPERATOR_TYPE`         | `string`    |          |       |    ✅     | The name of each operator.                                                                                                   |
+| `OPERATOR_CARDINALITY`  | `uint64`    | absolute |        |    ✅    | The cardinality of each operator, i.e., the number of rows it returns to its parent. Operator equivalent of `ROWS_RETURNED`. |
+| `OPERATOR_ROWS_SCANNED` | `uint64`    | absolute |        |    ✅    | The total rows scanned by each operator.                                                                                     |
+| `OPERATOR_TIMING`       | `double`    | seconds  |        |    ✅    | The time taken by each operator. Operator equivalent of `LATENCY`.                                                           |
+| `OPERATOR_TYPE`         | `string`    |          |        |    ✅    | The name of each operator.                                                                                                   |
 | `QUERY_NAME`            | `string`    |          |   ✅   |          | The query string.                                                                                                            |
-| `RESULT_SET_SIZE`       | `uint64`    |  bytes   |   ✅   |    ✅     | The size of the result.                                                                                                      |
+| `RESULT_SET_SIZE`       | `uint64`    |  bytes   |   ✅   |    ✅    | The size of the result.                                                                                                      |
 | `ROWS_RETURNED`         | `uint64`    | absolute |   ✅   |          | The number of rows returned by the query.                                                                                    |
 
 ### Cumulative Metrics
@@ -69,7 +69,7 @@ These cumulative metrics can be enabled independently, even if the underlying sp
 The table below shows the cumulative metrics. 
 It also depicts the metric based on which DuckDB calculates the cumulative metric.
 
-| Metric                    | Unit     | Metric Calculated Cumulatively |
+| Metric                    | Unit     | Metric calculated cumulatively |
 |---------------------------|----------|--------------------------------|
 | `CPU_TIME`                | seconds  | OPERATOR_TIMING`               |
 | `CUMULATIVE_CARDINALITY`  | absolute | OPERATOR_CARDINALITY`          |
