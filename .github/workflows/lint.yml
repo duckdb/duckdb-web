@@ -3,7 +3,7 @@ on: pull_request
 
 jobs:
   markdown:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - name: Remove archive docs
@@ -21,7 +21,7 @@ jobs:
           files: 'docs/**/*.md _posts/*.md'
 
   python:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
     - uses: psf/black@stable
@@ -29,4 +29,3 @@ jobs:
         options: "--check --skip-string-normalization --verbose --diff --color"
         src: "./scripts"
         version: "23.7.0"
-
