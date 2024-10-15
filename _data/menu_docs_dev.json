@@ -1242,6 +1242,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Environment",
+                  "url": "environment"
+                },
+                {
                   "page": "Import",
                   "url": "import"
                 },
@@ -1254,8 +1258,8 @@
                   "url": "indexing"
                 },
                 {
-                  "page": "Environment",
-                  "url": "environment"
+                  "page": "Join Operations",
+                  "url": "join_operations"
                 },
                 {
                   "page": "File Formats",
