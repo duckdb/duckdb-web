@@ -38,7 +38,7 @@ DimenLookupSex8277.csv           74
 DimenLookupYear8277.csv          67
 ```
 
-As we can see, there is one large (~800 MB) `Data` file and a bunch of `Dimen...` dimension files. This is a fairly common data layout, sometimes called a ["star schema"](https://en.wikipedia.org/wiki/Star_schema). From this, it's clear there are some joins in our future. But first lets focus on the main file, `Data8277.csv`. Reading sizeable CSV files is not trivial and can be very frustrating. But enough whinging, as the Kiwis would say.
+As we can see, there is one large (~800 MB) `Data` file and a bunch of `Dimen...` dimension files. This is a fairly common data layout, sometimes called a [“star schema”](https://en.wikipedia.org/wiki/Star_schema). From this, it's clear there are some joins in our future. But first lets focus on the main file, `Data8277.csv`. Reading sizeable CSV files is not trivial and can be very frustrating. But enough whinging, as the Kiwis would say.
 
 To start with, let's just have a quick look what the file looks like:
 
