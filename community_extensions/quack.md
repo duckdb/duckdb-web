@@ -30,7 +30,7 @@ docs:
   hello_world: |
     SELECT quack('world');
   extended_description: |
-    The quack extension is based on DuckDB's [Extension Template](https://duckdb/extension_template/), and it's a great starting point to get started building more advanced extensions.
+    The quack extension is based on DuckDB's [Extension Template](https://github.com/duckdb/extension_template/), and it's a great starting point to get started building more advanced extensions.
 
 extension_star_count: 132
 
