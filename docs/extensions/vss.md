@@ -81,7 +81,7 @@ The following table shows the supported distance metrics and their corresponding
 
 Note that while each `HNSW` index only applies to a single column you can create multiple `HNSW` indexes on the same table each individually indexing a different column. Additionally, you can also create multiple `HNSW` indexes to the same column, each supporting a different distance metric.
 
-## Index options
+## Index Options
 
 Besides the `metric` option, the `HNSW` index creation statement also supports the following options to control the hyperparameters of the index construction and search process:
 

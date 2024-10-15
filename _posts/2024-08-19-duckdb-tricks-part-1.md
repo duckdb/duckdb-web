@@ -2,7 +2,8 @@
 layout: post
 title: "DuckDB Tricks – Part 1"
 author: "Gabor Szarnyas"
-thumb: "/images/blog/thumbs/240819.svg"
+thumb: "/images/blog/thumbs/duckdb-tricks-1.svg"
+image: "/images/blog/thumbs/duckdb-tricks-1.png"
 excerpt: "We use a simple example data set to present a few tricks that are useful when using DuckDB."
 ---
 
@@ -17,7 +18,7 @@ The operations are summarized in the following table:
 | [Specifying types when reading CSVs](#specifying-types-in-the-csv-loader) | `FROM read_csv('example.csv', types = {'x': 'DECIMAL(15, 3)'});` |
 | [Updating CSV files in-place](#updating-csv-files-in-place) | `COPY (SELECT s FROM 'example.csv') TO 'example.csv';` |
 
-## Creating the example data set
+## Creating the Example Data Set
 
 We start by creating a data set that we'll use in the rest of the blog post. To this end, we define a table, populate it with some data and export it to a CSV file.
 
@@ -48,7 +49,7 @@ qux,2.25
 
 Let’s continue with the code snippets and their explanations.
 
-## Pretty-printing floating-point numbers
+## Pretty-Printing Floating-Point Numbers
 
 When printing a floating-point number to the output, the fractional parts can be difficult to read and compare. For example, the following query returns three numbers between 1 and 8 but their printed widths are very different due to their fractional parts.
 
@@ -97,7 +98,7 @@ However, these approaches require us to specify a formatting string that's easy 
 What's worse, the statement above returns string values, which makes subsequent operations (e.g., sorting) more difficult.
 Therefore, unless keeping the full precision of the floating-point numbers is a concern, casting to `DECIMAL` values should be the preferred solution for most use cases.
 
-## Copying the schema of a table
+## Copying the Schema of a Table
 
 To copy the schema from a table without copying its data, we can use `LIMIT 0`.
 
@@ -139,7 +140,7 @@ CREATE TABLE example(s VARCHAR, x DOUBLE);
 
 After editing the table’s name (e.g., `example` to `tbl`), this query can be used to create a new table with the same schema.
 
-## Shuffling data
+## Shuffling Data
 
 Sometimes, we need to introduce some entropy into the ordering of the data by shuffling it.
 To shuffle _non-deterministically_, we can simply sort on a random value provided the [`random()` function]({% link docs/sql/functions/numeric.md %}#random):
@@ -170,7 +171,7 @@ The result of this shuffle operation is deterministic – if we run the script r
 
 Note that the `+ 42` is only necessary to nudge the first row from its position – as `hash(0)` returns `0`, the smallest possible value, using it for ordering leaves the first row in its place.
 
-## Specifying types in the CSV loader
+## Specifying Types in the CSV Loader
 
 DuckDB’s CSV loader auto-detects types from a [short list]({% link docs/data/csv/auto_detection.md %}#type-detection) of `BOOLEAN`, `BIGINT`, `DOUBLE`, `TIME`, `DATE`, `TIMESTAMP` and `VARCHAR`.
 In some cases, it’s desirable to override the detected type of a given column with a type outside of this list.
@@ -199,7 +200,7 @@ FROM example;
 └─────────┴───────────────┘
 ```
 
-## Updating CSV files in-place
+## Updating CSV Files In-Place
 
 In DuckDB, it is possible to read, process and write CSV files in-place. For example, to project the column `s` into the same file, we can simply run:
 
@@ -230,6 +231,6 @@ The solution is to use different file names, then perform a rename operation:
 cut -d, -f1 example.csv > tmp.csv && mv tmp.csv example.csv
 ```
 
-## Closing thoughts
+## Closing Thoughts
 
 That’s it for today. The tricks shown in this post are available on [duckdbsnippets.com](https://duckdbsnippets.com/page/1/most-recent). If you have a trick that would like to share, please submit it there, or send it to us via social media or [Discord](https://discord.duckdb.org/). Happy hacking!

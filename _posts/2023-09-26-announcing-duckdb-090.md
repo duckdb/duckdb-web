@@ -17,7 +17,7 @@ To install the new version, please visit the [installation guide]({% link docs/i
 
 <!--more-->
 
-#### What's new in 0.9.0
+## What's New in 0.9.0
 
 There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features! 
 
@@ -33,8 +33,7 @@ There have been too many changes to discuss them each in detail, but we would li
 
 Below is a summary of those new features with examples, starting with a change in our SQL dialect that is designed to produce more intuitive results by default.
 
-
-#### Breaking SQL Changes
+## Breaking SQL Changes
 
 [**Struct Auto-Casting**](https://github.com/duckdb/duckdb/pull/8942). Previously the names of struct entries were ignored when determining auto-casting rules. As a result, struct field names could be silently renamed. Starting with this release, this will result in an error instead.
 
@@ -53,7 +52,7 @@ Unnamed structs constructed using the `ROW` function can still be inserted into 
 INSERT INTO structs VALUES (ROW(42));
 ```
 
-#### Core System Improvements
+## Core System Improvements
 
 **[Out-Of-Core Hash Aggregates](https://github.com/duckdb/duckdb/pull/7931)** and **[Hash Aggregate Performance Improvements.](https://github.com/duckdb/duckdb/pull/8475)** When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques.
 
@@ -142,7 +141,7 @@ FROM tripdata;
 | v0.8.0 | 33.8 |
 | v0.9.0 | 3.8 |
 
-#### Storage Improvements
+## Storage Improvements
 
 [**Vacuuming of Deleted Row Groups**](https://github.com/duckdb/duckdb/pull/7794). Starting with this release, when deleting data using `DELETE` statements, entire row groups that are deleted will be automatically cleaned up. Support is also added to [truncate the database file on checkpoint](https://github.com/duckdb/duckdb/pull/7824) which allows the database file to be reduced in size after data is deleted. Note that this only occurs if the deleted row groups are located at the end of the file. The system does not yet move around data in order to reduce the size of the file on disk. Instead, free blocks earlier on in the file are re-used to store later data.
 
@@ -163,7 +162,7 @@ INSERT INTO integers FROM range(10000000);
 In addition, due to improvements in the manner in which indexes are stored on disk they can now be written to disk incrementally instead of always requiring a full rewrite. This allows for much quicker checkpointing for tables that have indexes.
 
 
-#### Extensions
+## Extensions
 
 [**Extension Auto-Loading**](https://github.com/duckdb/duckdb/pull/8732). Starting from this release, DuckDB supports automatically installing and loading of trusted extensions. As many workflows rely on core extensions that are not bundled, such as `httpfs`, many users found themselves having to remember to load the required extensions up front. With this change, the extensions will instead be automatically loaded (and optionally installed) when used in a query.
 
@@ -212,7 +211,7 @@ SELECT * FROM 'azure://<my_container>/*.csv';
 [See the documentation for more information]({% link docs/extensions/azure.md %}).
 
 
-#### Clients
+## Clients
 
 [**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API]({% link docs/api/python/relational_api.md %}) and executed using DuckDB's query engine.
 
@@ -249,6 +248,6 @@ print(res)
 Note that the API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through Discord or on GitHub.
 
 
-#### Final Thoughts
+## Final Thoughts
 
 The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.9.0). We would like to thank all of the contributors for their hard work on improving DuckDB.

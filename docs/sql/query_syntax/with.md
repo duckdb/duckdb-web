@@ -210,7 +210,7 @@ WITH RECURSIVE paths(startNode, endNode, path) AS (
         JOIN edge ON paths.endNode = node1id
         -- Prevent adding a repeated node to the path.
         -- This ensures that no cycles occur.
-        WHERE list_position(paths.path, node2id) = 0
+        WHERE list_position(paths.path, node2id) IS NULL
     )
 SELECT startNode, endNode, path
 FROM paths

@@ -48,7 +48,10 @@ This section describes functions and operators for examining and manipulating [`
 | [`lpad(string, count, character)`](#lpadstring-count-character) | Pads the `string`  with the character from the left until it has count characters. |
 | [`ltrim(string, characters)`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. |
 | [`ltrim(string)`](#ltrimstring) | Removes any spaces from the left side of the `string`. |
-| [`md5(value)`](#md5value) | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the `value`. |
+| [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
+| [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `HUGEINT`. |
+| [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
+| [`md5_number_higher(string)`](#md5_number_higherstring) | Returns the higher 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
 | [`nfc_normalize(string)`](#nfc_normalizestring) | Convert string to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. |
 | [`not_ilike_escape(string, like_specifier, escape_character)`](#not_ilike_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`not_like_escape(string, like_specifier, escape_character)`](#not_like_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
@@ -382,13 +385,37 @@ SELECT  'abcdefghi'  AS str
 | **Example** | `ltrim('␣␣␣␣test␣␣')` |
 | **Result** | `test␣␣` |
 
-#### `md5(value)`
+#### `md5(string)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the `value`. |
+| **Description** | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | **Example** | `md5('123')` |
 | **Result** | `202cb962ac59075b964b07152d234b70` |
+
+#### `md5_number(string)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the MD5 hash of the `string` as a `HUGEINT`. |
+| **Example** | `md5_number('123')` |
+| **Result** | `149263671248412135425768892945843956768` |
+
+#### `md5_number_lower(string)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the MD5 hash of the `string` as a `BIGINT`. |
+| **Example** | `md5_number_lower('123')` |
+| **Result** | `8091599832034528150` |
+
+#### `md5_number_higher(string)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the MD5 hash of the `string` as a `BIGINT`. |
+| **Example** | `md5_number_higher('123')` |
+| **Result** | `6559309979213966368` |
 
 #### `nfc_normalize(string)`
 

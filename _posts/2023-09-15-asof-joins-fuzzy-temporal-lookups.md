@@ -15,7 +15,7 @@ Then this post is for you!
 
 <!--more-->
 
-## What is an AsOf Join?
+## What Is an AsOf Join?
 
 Time series data is not always perfectly aligned.
 Clocks may be slightly off, or there may be a delay between cause and effect.
@@ -193,7 +193,6 @@ In order to know whether the fact is still true (or true at a specific time) you
 A table with both the start and end time is called a *state table*.
 Converting event tables to state tables is a common temporal data preparation task,
 and the windowing CTE above shows how to do it in general using SQL.
-
 
 ### Sentinel Values
 

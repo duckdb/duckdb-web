@@ -5,7 +5,7 @@ function GenerateCreateType(options = {}) {
 		AutomaticStack([
 			Sequence([
 				Keyword("CREATE TYPE"),
-				Expression("type-name"),
+				GenerateQualifiedTableName(options, "type-name"),
 				Keyword("AS"),
 			]),
             Choice(0, [

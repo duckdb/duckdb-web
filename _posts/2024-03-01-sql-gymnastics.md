@@ -23,7 +23,7 @@ Tag [DuckDB on X](https://twitter.com/duckdb) (the site formerly known as Twitte
 
 <!--more-->
 
-## Traditional SQL is too rigid to reuse
+## Traditional SQL Is Too Rigid to Reuse
 
 SQL queries are typically crafted specifically for the unique tables within a database.
 This limits reusability. 
@@ -31,7 +31,7 @@ For example, have you ever seen a library of high-level SQL helper functions?
 SQL as a language typically is not flexible enough to build reusable functions.
 Today, we are flying towards a more flexible future!
 
-## Dynamic aggregates macro
+## Dynamic Aggregates Macro
 
 In SQL, typically the columns to `SELECT` and `GROUP BY` must be specified individually. 
 However, in many business intelligence workloads, groupings and aggregate functions must be easily user-adjustable.
@@ -68,7 +68,7 @@ FROM example;
 | 9    | 4    | 1    | 1    |
 | 10   | 0    | 0    | 1    |
 
-### Creating the macro
+### Creating the Macro
 
 The macro below accepts lists of columns to include or exclude, a list of columns to aggregate, and an aggregate function to apply.
 All of these can be passed in as parameters from the host language that is querying the database.
@@ -109,7 +109,7 @@ CREATE OR REPLACE MACRO dynamic_aggregates(
 );
 ```
 
-#### Executing the macro
+#### Executing the Macro
 
 Now we can use that macro for many different aggregation operations.
 For illustrative purposes, the 3 queries below show different ways to achieve identical results.
@@ -146,7 +146,7 @@ Executing either of those queries will return this result:
 | 0    | 1    | 2                                         | 0                                         |
 | 1    | 1    | 1                                         | 0                                         |
 
-#### Understanding the design
+#### Understanding the Design
 
 The first step of our flexible [table macro]({% link docs/sql/statements/create_macro.md %}#table-macros) is to choose a specific table using DuckDB's [`FROM`-first syntax]({% post_url 2023-08-23-even-friendlier-sql %}#from-first-in-select-statements).
 Well that's not very dynamic! 
@@ -198,7 +198,7 @@ However, we still had to specify a table at the start.
 We are also limited to aggregate functions that are available to be used with `list_aggregate`.
 Let's relax those two constraints!
 
-### Creating version 2 of the macro
+### Creating Version 2 of the Macro
 
 This approach takes advantage of two key concepts:
 
@@ -229,7 +229,7 @@ CREATE OR REPLACE MACRO dynamic_aggregates_any_cte_any_func(
 );
 ```
 
-#### Executing version 2
+#### Executing Version 2
 
 When we call this macro, there is additional complexity.
 We no longer execute a single statement, and our logic is no longer completely parameterizable (so some templating or SQL construction will be needed).
@@ -260,7 +260,7 @@ FROM dynamic_aggregates_any_cte_any_func(
 | 0             | 1             | 502.0                | 200.0                      |
 | 1             | 1             | 490.0                | 200.0                      |
 
-#### Understanding version 2
+#### Understanding Version 2
 
 Instead of querying the very boldly named `example` table, we query the possibly more generically named `any_cte`.
 Note that `any_cte` has a different schema than our prior example – the columns in `any_cte` can be anything!
@@ -273,7 +273,7 @@ Its only requirements are to be an aggregate function that operates on a single 
 
 > `FUNCTION` and `MACRO` are synonyms in DuckDB and can be used interchangeably! 
 
-#### Takeaways from version 2
+#### Takeaways from Version 2
 
 A macro can act on any arbitrary table by using a CTE at the time it is called.
 This makes our macro far more reusable – it can work on any table!
@@ -284,7 +284,7 @@ The table is dynamic, the grouping columns are dynamic, the aggregated columns a
 Our daily gymnastics stretches have paid off. 
 However, stay tuned for a way to achieve similar results with a simpler approach in a future post.
 
-## Custom summaries for any dataset
+## Custom Summaries for Any Dataset
 
 Next we have a truly production-grade example!
 This query powers a portion of the MotherDuck Web UI's [Column Explorer](https://motherduck.com/blog/introducing-column-explorer/) component.
@@ -374,7 +374,7 @@ The result contains one row for every column in the raw dataset, and several col
 So how was this query constructed? 
 Let's break down each CTE step by step.
 
-### Step by step breakdown
+### Step by Step Breakdown
 
 #### Metrics CTE
 
@@ -429,7 +429,7 @@ ON COLUMNS(*);
 
 By unpivoting on `COLUMNS(*)`, we take all columns and pivot them downward into two columns: one for the auto-generated `name` of the column, and one for the `value` that was within that column.
 
-#### Return the results
+#### Return the Results
 
 The final step is the most gymnastics-like portion of this query.
 We explode the `value` column's struct format so that each key becomes its own column using the [`STRUCT.*` syntax]({% link docs/sql/data_types/struct.md %}#struct).

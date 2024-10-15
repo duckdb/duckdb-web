@@ -76,6 +76,14 @@ FROM tpch_answers();
 
 This function returns a table with columns `query_nr`, `scale_factor`, and `answer`.
 
+## Generating the Schema
+
+It's possible to generate the schema of TPC-H without any data by setting the scale factor to 0:
+
+```sql
+CALL dbgen(sf = 0);
+```
+
 ## Data Generator Parameters
 
 The data generator function `dbgen` has the following parameters:

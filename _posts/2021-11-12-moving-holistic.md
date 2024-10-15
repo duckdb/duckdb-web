@@ -210,7 +210,7 @@ When the mode becomes ambiguous (orange), we must recan the table.
 This approach is much faster,
 and in the benchmarks it comes in between 15 and 55 times faster than the other two.
 
-## Micro-Benchmarks
+## Microbenchmarks
 
 To benchmark the various implementations, we run moving window queries against a 10M table of integers:
 

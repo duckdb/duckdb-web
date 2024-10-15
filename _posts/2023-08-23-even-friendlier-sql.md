@@ -17,15 +17,15 @@ We believe there are many valid reasons for innovation in the SQL language, amon
 
 If you have not had a chance to read the first installment in this series, please take a quick look to the prior blog post, [“Friendlier SQL with DuckDB”]({% post_url 2022-05-04-friendlier-sql %}).
 
-## The future is now
+## The Future is Now
 
 The first few enhancements in this list were included in the “Ideas for the Future” section of the prior post.
 
-### Reusable column aliases
+### Reusable Column Aliases
 
 When working with incremental calculated expressions in a select statement, traditional SQL dialects force you to either write out the full expression for each column or create a common table expression (CTE) around each step of the calculation. Now, any column alias can be reused by subsequent columns within the same select statement. Not only that, but these aliases can be used in the where and order by clauses as well.
 
-#### Old way 1: Repeat yourself
+#### Old Way 1: Repeat Yourself
 
 ```sql
 SELECT 
@@ -37,7 +37,7 @@ SELECT
         + len('starship') + 1) AS trimmed_intro;
 ```
 
-#### Old way 2: All the CTEs
+#### Old Way 2: All the CTEs
 
 ```sql
 WITH intro_cte AS (
@@ -56,7 +56,7 @@ SELECT
 FROM starship_loc_cte;
 ```
 
-#### New way
+#### New Way
 
 ```sql
 SELECT 
@@ -71,14 +71,14 @@ SELECT
 |:---|:---|:---|
 | These are the voyages of the starship Enterprise... | 30           | Enterprise... |
 
-
-### Dynamic column selection
+### Dynamic Column Selection
 
 Databases typically prefer strictness in column definitions and flexibility in the number of rows. This can help by enforcing data types and recording column level metadata. However, in data science workflows and elsewhere, it is very common to dynamically generate columns (for example during feature engineering).
 
-No longer do you need to know all of your column names up front! DuckDB can select and even modify columns based on regular expression pattern matching, `EXCLUDE` or `REPLACE` modifiers, and even lambda functions (see the [section on lambda functions below](#list-lambda-functions) for details!). 
+No longer do you need to know all of your column names up front! DuckDB can select and even modify columns based on regular expression pattern matching, `EXCLUDE` or `REPLACE` modifiers, and even lambda functions (see the [section on lambda functions below](#list-lambda-functions) for details!).
 
 Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}), we can query a csv dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
+
 ```sql
 INSTALL httpfs;
 LOAD httpfs;
@@ -113,7 +113,7 @@ DESCRIBE trek_facts;
 | cnt_highly_illogical_quote              | BIGINT      | YES  | NULL | NULL    | NULL  |
 | bool_enterprise_saved_the_day           | BIGINT      | YES  | NULL | NULL    | NULL  |
 
-#### COLUMNS() with regular expressions
+#### `COLUMNS()` with Regular Expressions
 
 The `COLUMNS` expression can accept a string parameter that is a regular expression and will return all column names that match the pattern. How did warp change over the first season? Let’s examine any column name that contains the word `warp`.
 
@@ -174,8 +174,7 @@ WHERE
 | 18          | 2                     | 8                         |
 | 29          | 2                     | 8                         |
 
-
-### COLUMNS() with EXCLUDE and REPLACE
+### `COLUMNS()` with `EXCLUDE` and `REPLACE`
 
 Individual columns can also be either excluded or replaced prior to applying calculations on them. For example, since our dataset only includes season 1, we do not need to find the `max` of that column. It would be highly illogical. 
 
@@ -205,7 +204,7 @@ FROM trek_facts;
 |:---|:---|:---|:---|:---|
 | 1                          | 29                          | 1967-04-13 00:00:00                              | ... | 1                                                   |
 
-### COLUMNS() with lambda functions
+### `COLUMNS()` with Lambda Functions
 
 The most flexible way to query a dynamic set of columns is through a [lambda function]({% link docs/sql/functions/nested.md %}#lambda-functions). This allows for any matching criteria to be applied to the names of the columns, not just regular expressions. See more details about lambda functions below. 
 
@@ -229,12 +228,12 @@ WHERE
 | 18          | 2                     | 8                         |
 | 29          | 2                     | 8                         |
 
-
-### Automatic JSON to nested types conversion
+### Automatic JSON to Nested Types Conversion
 
 The first installment in the series mentioned JSON dot notation references as future work. However, the team has gone even further! Instead of referring to JSON-typed columns using dot notation, JSON can now be [automatically parsed]({% post_url 2023-03-03-json %}) into DuckDB’s native types for significantly faster performance, compression, as well as that friendly dot notation!
 
 First, install and load the `httpfs` and `json` extensions if they don't come bundled with the client you are using. Then query a remote JSON file directly as if it were a table!
+
 ```sql
 INSTALL httpfs;
 LOAD httpfs;
@@ -254,7 +253,7 @@ FROM 'https://raw.githubusercontent.com/vlad-saling/star-trek-ipsum/master/src/c
 
 Now for some new SQL capabilities beyond the ideas from the prior post!
 
-## FROM first in SELECT statements
+## `FROM` First in `SELECT` Statements
 
 When building a query, the first thing you need to know is where your data is coming `FROM`. Well then why is that the second clause in a `SELECT` statement?? No longer! DuckDB is building SQL as it should have always been – putting the `FROM` clause first! This addresses one of the longest standing complaints about SQL, and the DuckDB team implemented it in 2 days. 
 
@@ -263,12 +262,14 @@ FROM my_table SELECT my_column;
 ```
 
 Not only that, the `SELECT` statement can be completely removed and DuckDB will assume all columns should be `SELECT`ed. Taking a look at a table is now as simple as:
+
 ```sql
 FROM my_table;
 -- SELECT * FROM my_table
 ```
 
 Other statements like `COPY` are simplified as well.
+
 ```sql
 COPY (FROM trek_facts) TO 'phaser_filled_facts.parquet';
 ```
@@ -277,11 +278,11 @@ This has an additional benefit beyond saving keystrokes and staying in a develop
 
 Note that this syntax is completely optional, so your `SELECT * FROM` keyboard shortcuts are safe, even if they are obsolete... 🙂
 
-## Function chaining
+## Function Chaining
 
-Many SQL blogs advise the use of CTEs instead of subqueries. Among other benefits, they are much more readable. Operations are compartmentalized into discrete chunks and they can be read in order top to bottom instead of forcing the reader to work their way inside out. 
+Many SQL blogs advise the use of CTEs instead of subqueries. Among other benefits, they are much more readable. Operations are compartmentalized into discrete chunks and they can be read in order top to bottom instead of forcing the reader to work their way inside out.
 
-DuckDB enables the same interpretability improvement for every scalar function! Use the dot operator to chain functions together, just like in Python. The prior expression in the chain is used as the first argument to the subsequent function. 
+DuckDB enables the same interpretability improvement for every scalar function! Use the dot operator to chain functions together, just like in Python. The prior expression in the chain is used as the first argument to the subsequent function.
 
 ```sql
 SELECT 
@@ -317,11 +318,12 @@ SELECT
 |:---|
 | MAKE.IT.STOP. |
 
-## Union by name
+## Union by Name
 
-DuckDB aims to blend the best of databases and dataframes. This new syntax is inspired by the [concat function in Pandas](https://pandas.pydata.org/docs/reference/api/pandas.concat.html). Rather than vertically stacking tables based on column position, columns are matched by name and stacked accordingly. Simply replace `UNION` with `UNION BY NAME` or `UNION ALL` with `UNION ALL BY NAME`. 
+DuckDB aims to blend the best of databases and dataframes. This new syntax is inspired by the [concat function in Pandas](https://pandas.pydata.org/docs/reference/api/pandas.concat.html). Rather than vertically stacking tables based on column position, columns are matched by name and stacked accordingly. Simply replace `UNION` with `UNION BY NAME` or `UNION ALL` with `UNION ALL BY NAME`.
 
 For example, we had to add some new alien species proverbs in The Next Generation:
+
 ```sql
 CREATE TABLE proverbs AS
      SELECT 
@@ -343,9 +345,9 @@ FROM proverbs;
 
 This approach has additional benefits. As seen above, not only can tables with different column orders be combined, but so can tables with different numbers of columns entirely. This is helpful as schemas migrate, and is particularly useful for DuckDB’s [multi-file reading capabilities]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name).
 
-## Insert by name
+## Insert by Name
 
-Another common situation where column order is strict in SQL is when inserting data into a table. Either the columns must match the order exactly, or all of the column names must be repeated in two locations within the query. 
+Another common situation where column order is strict in SQL is when inserting data into a table. Either the columns must match the order exactly, or all of the column names must be repeated in two locations within the query.
 
 Instead, add the keywords `BY NAME` after the table name when inserting. Any subset of the columns in the table in any order can be inserted.
 
@@ -364,11 +366,12 @@ SELECT * FROM proverbs;
 | If winning is not important, why keep score? | You will be assimilated |
 | NULL                                         | Resistance is futile    |
 
-## Dynamic PIVOT and UNPIVOT
+## Dynamic `PIVOT` and `UNPIVOT`
 
 Historically, databases are not well-suited for pivoting operations. However, DuckDB’s `PIVOT` and `UNPIVOT` clauses can create or stack dynamic column names for a truly flexible pivoting capability! In addition to that flexibility, DuckDB also provides both the SQL standard syntax and a friendlier shorthand. 
 
 For example, let’s take a look at some procurement forecast data just as the Earth-Romulan war was beginning:
+
 ```sql
 CREATE TABLE purchases (item VARCHAR, year INT, count INT);
 
@@ -413,11 +416,11 @@ FROM pivoted_purchases;
 | phasers          | 1035 | 25039 | 95000 |
 | photon torpedoes | 255  | 17899 | 87492 |
 
-Looks like photon torpedoes went on sale... 
+Looks like photon torpedoes went on sale...
 
-Now imagine the reverse situation. Scotty in engineering has been visually analyzing and manually constructing his purchases forecast. He prefers things pivoted so it’s easier to read. Now you need to fit it back into the database! This war may go on for a bit, so you may need to do this again next year. Let’s write an `UNPIVOT` query to return to the original format that can handle any year. 
+Now imagine the reverse situation. Scotty in engineering has been visually analyzing and manually constructing his purchases forecast. He prefers things pivoted so it’s easier to read. Now you need to fit it back into the database! This war may go on for a bit, so you may need to do this again next year. Let’s write an `UNPIVOT` query to return to the original format that can handle any year.
 
-The `COLUMNS` expression will use all columns except `item`. After stacking, the column containing the column names from `pivoted_purchases` should be renamed to `year`, and the values within those columns represent the `count`. The result is the same dataset as the original. 
+The `COLUMNS` expression will use all columns except `item`. After stacking, the column containing the column names from `pivoted_purchases` should be renamed to `year`, and the values within those columns represent the `count`. The result is the same dataset as the original.
 
 ```sql
 UNPIVOT pivoted_purchases
@@ -438,15 +441,15 @@ UNPIVOT pivoted_purchases
 | photon torpedoes | 2156 | 17899 |
 | photon torpedoes | 2157 | 87492 |
 
-More examples are included as a part of our [DuckDB 0.8.0 announcement post]({% post_url 2023-05-17-announcing-duckdb-080 %}#new-sql-features), and the [`PIVOT`]({% link docs/sql/statements/pivot.md %}) and [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) documentation pages highlight more complex queries. 
+More examples are included as a part of our [DuckDB 0.8.0 announcement post]({% post_url 2023-05-17-announcing-duckdb-080 %}#new-sql-features), and the [`PIVOT`]({% link docs/sql/statements/pivot.md %}) and [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) documentation pages highlight more complex queries.
 
-Stay tuned for a future post to cover what is happening behind the scenes! 
+Stay tuned for a future post to cover what is happening behind the scenes!
 
-## List lambda functions
+## List Lambda Functions
 
-List lambdas allow for operations to be applied to each item in a list. These do not need to be pre-defined – they are created on the fly within the query. 
+List lambdas allow for operations to be applied to each item in a list. These do not need to be pre-defined – they are created on the fly within the query.
 
-In this example, a lambda function is used in combination with the `list_transform` function to shorten each official ship name. 
+In this example, a lambda function is used in combination with the `list_transform` function to shorten each official ship name.
 
 ```sql
 SELECT 
@@ -474,7 +477,7 @@ SELECT
 |:---|
 | [Enterprise NCC-1701] |
 
-## List comprehensions
+## List Comprehensions
 
 What if there was a simple syntax to both modify and filter a list? DuckDB takes inspiration from Python’s approach to list comprehensions to dramatically simplify the above examples. List comprehensions are syntactic sugar – these queries are rewritten into lambda expressions behind the scenes!
 
@@ -493,7 +496,7 @@ SELECT
 |:---|
 | [Enterprise]       |
 
-## Exploding struct.*
+## Exploding Struct.*
 
 A struct in DuckDB is a set of key/value pairs. Behind the scenes, a struct is stored with a separate column for each key. As a result, it is computationally easy to explode a struct into separate columns, and now it is also syntactically simple as well! This is another example of allowing SQL to handle dynamic column names.
 
@@ -512,7 +515,7 @@ SELECT
 |:---|:---|:---|
 | 5               | 15              | 10000          |
 
-## Automatic struct creation
+## Automatic Struct Creation
 
 DuckDB exposes an easy way to convert any table into a single-column struct. Instead of `SELECT`ing column names, `SELECT` the table name itself.
 
@@ -533,7 +536,7 @@ SELECT officers;
 | {'rank': Captain, 'name': Jean-Luc Picard}   |
 | {'rank': Lieutenant Commander, 'name': Data} |
 
-## Union data type
+## Union Data Type
 
 DuckDB utilizes strong typing to provide high performance and enforce data quality. However, DuckDB is also as forgiving as possible using approaches like implicit casting to avoid always having to cast between data types. 
 
@@ -591,7 +594,7 @@ SELECT
 | 6                  | num  |                    | 6   |
 | First Contact      | name | First Contact      |     |
 
-## Additional friendly features
+## Additional Friendly Features
 
 Several other friendly features are worth mentioning and some are powerful enough to warrant their own blog posts. 
 
@@ -601,7 +604,7 @@ Have a look at the [correlated subqueries post]({% post_url 2023-05-26-correlate
 
 DuckDB has added more ways to `JOIN` tables together that make expressing common calculations much easier. Some like `LATERAL`, `ASOF`, `SEMI`, and `ANTI` joins are present in other systems, but have high-performance implementations in DuckDB. DuckDB also adds a new `POSITIONAL` join that combines by the row numbers in each table to match the commonly used Pandas capability of joining on row number indexes. See the [`JOIN` documentation]({% link docs/sql/query_syntax/from.md %}) for details, and look out for a blog post describing DuckDB’s state of the art `ASOF` joins!
 
-## Summary and future work
+## Summary and Future Work
 
 DuckDB aims to be the easiest database to use. Fundamental architectural decisions to be in-process, have zero dependencies, and have strong typing contribute to this goal, but the friendliness of its SQL dialect has a strong impact as well. By extending the industry-standard PostgreSQL dialect, DuckDB aims to provide the simplest way to express the data transformations you need. These changes range from altering the ancient clause order of the `SELECT` statement to begin with `FROM`, allowing a fundamentally new way to use functions with chaining, to advanced nested data type calculations like list comprehensions. Each of these features are available in the 0.8.1 release.
 

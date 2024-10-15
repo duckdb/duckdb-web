@@ -31,7 +31,10 @@ The functions below are difficult to categorize into specific function types and
 | [`icu_sort_key(string, collator)`](#icu_sort_keystring-collator) | Surrogate key used to sort special characters according to the specific locale. Collator parameter is optional. Valid only when ICU extension is installed. |
 | [`if(a, b, c)`](#ifa-b-c) | Ternary conditional operator. |
 | [`ifnull(expr, other)`](#ifnullexpr-other) | A two-argument version of coalesce. |
-| [`md5(string)`](#md5string) | Return an MD5 hash of the `string`. |
+| [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
+| [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `HUGEINT`. |
+| [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
+| [`md5_number_higher(string)`](#md5_number_higherstring) | Returns the higher 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
 | [`nextval('sequence_name')`](#nextvalsequence_name) | Return the following value of the sequence. |
 | [`nullif(a, b)`](#nullifa-b) | Return `NULL` if `a = b`, else return `a`. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. |
 | [`pg_typeof(expression)`](#pg_typeofexpression) | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility. |
@@ -189,9 +192,33 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return an MD5 hash of the `string`. |
+| **Description** | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | **Example** | `md5('123')` |
 | **Result** | `202cb962ac59075b964b07152d234b70` |
+
+#### `md5_number(string)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the MD5 hash of the `string` as a `HUGEINT`. |
+| **Example** | `md5_number('123')` |
+| **Result** | `149263671248412135425768892945843956768` |
+
+#### `md5_number_lower(string)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the MD5 hash of the `string` as a `BIGINT`. |
+| **Example** | `md5_number_lower('123')` |
+| **Result** | `8091599832034528150` |
+
+#### `md5_number_higher(string)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the MD5 hash of the `string` as a `BIGINT`. |
+| **Example** | `md5_number_higher('123')` |
+| **Result** | `6559309979213966368` |
 
 #### `nextval('sequence_name')`
 
