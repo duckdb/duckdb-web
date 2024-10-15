@@ -318,9 +318,21 @@ $(document).ready(function(){
 	
 
 	$('.headlinebar .version').click(function(){
-		$(this).toggleClass('active');
-		$(this).find('.versionsidebar').slideToggle();
-	})
+		var $this = $(this);
+		$this.toggleClass('active');
+		$this.find('.versionsidebar').slideToggle(200);
+		
+		// MAKE IT SAME AS ON START PAGE
+		var selectedVersion = $this.find('.selectedversion');
+		var currentVersion = selectedVersion.attr('data-current');
+	
+		selectedVersion.text($this.hasClass('active') ? 'Select' : currentVersion);
+	
+		$this.find('.versionsidebar li').removeClass('current') 
+			.filter(function() { 
+				return $(this).text().trim() === currentVersion; 
+			}).addClass('current');
+	});
 	
 	
 	

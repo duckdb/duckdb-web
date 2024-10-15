@@ -93,6 +93,7 @@ html.darkmode body{
 	table td{
 		border-bottom: 1px solid #5b5b5b;
 	}
+	.versionsidebar > ul li.current a,
 	.versionsidebar > ul li a:hover{
 		color: #c9c9c9!important; 
 		background-color: #3a3a3a;
@@ -185,7 +186,8 @@ html.darkmode body.documentation{
 	.wrap a:hover{
 		color: #4396D7;
 	}
-	.headlinebar div.version,
+	.headlinebar div.version > div:first-child,
+	.versionsidebar,
 	.headlinebar div.mode{
 		border: 1px solid #373737;
 		color: #828282;

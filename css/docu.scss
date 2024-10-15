@@ -272,21 +272,22 @@ body.documentation{
 			left: 8px;
 		}
 		div.version{
-			font-size: 12px;
-			line-height: 1.3;
-			cursor: pointer;
-			background-color: $black100;
-			border: 1px solid $black300;
-			border-radius: 15px;
-			padding: 2px;
-			white-space: nowrap;
-			min-width: 135px;
-			color: $black500;
 			.selectedversion{
 				color: $black500;
 			}
 		 	>div:first-child{
-				padding: 5px 12px;
+				font-size: 12px;
+				line-height: 1.3;
+				cursor: pointer;
+				background-color: $black100;
+				border: 1px solid $black300;
+				border-radius: 15px;
+				padding: 7px;
+				padding-left: 12px;
+				padding-right: 30px;
+				white-space: nowrap;
+				width: auto;
+				color: $black500;
 			}
 			span.arrow{
 				content: "";
@@ -300,8 +301,12 @@ body.documentation{
 				background-repeat: no-repeat;
 				position: absolute;
 				display: inline-block;
-				right: 6px;
-				top: 6px;
+				right: 7px;
+				top: 7px;
+				transition: transform .3s;
+			}
+			&.active span.arrow{
+				transform: rotate(-180deg);
 			}
 		}
 	}
@@ -315,7 +320,7 @@ body.documentation{
 			display: none;
 		}
 	}
-	.toc_menu{
+	main .toc_menu{
 		position: sticky;
 		top: 100px;
 		height: calc(100vh - 100px);
@@ -494,16 +499,33 @@ body.documentation{
 }
 .versionsidebar{
 	display: none;
+	position: absolute;
+	top: calc(100% + 4px);
+	z-index: 700;
+	margin: 0;
+	list-style: none;
+	background-color: #F5F5F5;
+	border: 1px solid #CFCFCF;
+	border-radius: 15px;
+	padding: 2px;
+	right: 0;
+	/*
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
+	filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
+	*/
    > ul{
 		color: $black500;
 		padding: 0;
 		margin: 0;
-		padding-top: 5px;
 		list-style: none;
 		position: relative;
 		li{
 			font-size: 12px;
 			line-height: 1.3;
+			margin-bottom: 2px;
+			&:last-child{
+				margin-bottom: 0;
+			}
 			a{
 				text-decoration: none!important;
 				cursor: pointer;
@@ -512,12 +534,17 @@ body.documentation{
 				width: 100%;
 				color: $black500!important;
 				transition: background-color .3s;
-			&:hover{
+				white-space: nowrap;
+				&:hover{
 					color: black!important;
-					text-decoration: underline;
 					background-color: $black200;
 					border-radius: 15px;
 				}
+			}
+			&.current a{
+				color: black!important;
+				background-color: $black200;
+				border-radius: 15px;
 			}
 		}
 	}
