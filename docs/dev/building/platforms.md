@@ -36,7 +36,7 @@ For most platforms, DuckDB can often be [built from source](#building-duckdb-fro
 | `windows_amd64_rtools` | Windows 10+ AMD64 (x86_64) for [RTools](https://cran.r-project.org/bin/windows/Rtools/) (deprecated) |
 | `windows_arm64_mingw`  | Windows 10+ AMD64 (x86_64) with MinGW  |
 
-32-bit architectures are officially not supported but it is possible to build DuckDB manually for some of these platforms, e.g., for [Raspberry Pi boards]({% link docs/dev/building/build_instructions.md }#raspberry-pi-32-bit).
+32-bit architectures are officially not supported but it is possible to build DuckDB manually for some of these platforms, e.g., for [Raspberry Pi boards]({% link docs/dev/building/build_instructions.md %}#raspberry-pi-32-bit).
 
 ## Building DuckDB from Source
 
