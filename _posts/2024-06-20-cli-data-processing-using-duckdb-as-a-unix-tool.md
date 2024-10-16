@@ -48,15 +48,11 @@ At the same time, we have DuckDB, an extremely portable database system which us
 With [version 1.0.0 released recently]({% post_url 2024-06-03-announcing-duckdb-100 %}), DuckDB's syntax – based on the proven and widely used PostgeSQL dialect – is now in a stable state.
 Another attractive feature of DuckDB is that it offers an interactive shell, which aids quick debugging. Moreover, DuckDB is available in [several host languages]({% link docs/api/overview.md %}) as well as in the browser [via WebAssembly](https://shell.duckdb.org/), so if you ever decide to use your SQL scripts outside of the shell, DuckDB SQL scripts can be ported to a wide variety of environments without any changes.
 
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
-
 ## Data Processing with Unix Tools and DuckDB
 
 In the following, we give examples for implementing simple data processing tasks using the CLI tools provided in most Unix shells and using DuckDB SQL queries.
 We use DuckDB v1.0.0 and run it in [in-memory mode]({% link docs/connect/overview.md %}#in-memory-database).
 This mode makes sense for the problems we are tackling, as we do not create any tables and the operations are not memory-intensive, so there is no data to persist or to spill on disk.
-
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
 
 ### Datasets
 
@@ -132,11 +128,7 @@ RTM,Rotterdam The Hague Airport
 ```
 </details>
 
-<!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
-
 You can download all input files as a [single zip file](/data/cli/duckdb-cli-data.zip).
-
-<hr/>
 
 ### Projecting Columns
 
@@ -199,8 +191,6 @@ duckdb -c "COPY (SELECT #1, #3 FROM 'pop.csv') TO '/dev/stdout/'"
 
 In the following, we'll omit the code blocks using the standalone `duckdb` command: all solutions can be executed in the `duckdb -c ⟨query⟩` template and yield the same result as the solutions using Unix tools.
 
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
-
 ### Sorting Files
 
 Another common task is to sort files based on given columns.
@@ -253,8 +243,6 @@ COPY (
   ) TO '/dev/stdout/';
 ```
 
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
-
 ### Intersecting Columns
 
 A common task is to calculate the intersection of two columns, i.e., to find entities that are present in both.
@@ -298,8 +286,6 @@ COPY (
   ) TO '/dev/stdout/';
 ```
 
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
-
 ### Pasting Rows Together
 
 Pasting rows together line-by-line is a recurring task.
@@ -342,8 +328,6 @@ COPY (
     POSITIONAL JOIN 'area.csv'
   ) TO '/dev/stdout/';
 ```
-
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
 
 ### Filtering
 
@@ -430,8 +414,6 @@ These queries return exactly the same results as the solutions using `grep` and 
 In both of these queries, we used the [`FROM`-first syntax]({% link docs/sql/query_syntax/from.md %}#from-first-syntax).
 If the `SELECT` clause is omitted, the query is executed as if `SELECT *` was used, i.e., it returns all columns.
 
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
-
 ### Joining Files
 
 Joining tables is an essential task in data processing. Our next example is going to use a join to return city name–airport name combinations.
@@ -478,8 +460,6 @@ COPY (
     ORDER BY ALL
   ) TO '/dev/stdout/';
 ```
-
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
 
 ### Replacing Strings
 
@@ -541,8 +521,6 @@ and the [`regexp_replace` function]({% link docs/sql/functions/char.md %}#regexp
 (We could have also used string formatting functions such as [`format`]({% link docs/sql/functions/char.md %}#fmt-syntax) and [`printf`]({% link docs/sql/functions/char.md %}#printf-syntax)).
 To change the separator to a semicolon, we serialize the file using the `COPY` statement with the `DELIMITER ';'` option.
 
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
-
 ### Reading JSON
 
 As a final exercise, let's query the number of stars given to the [`duckdb/duckdb` repository on GitHub](https://github.com/duckdb/duckdb).
@@ -569,8 +547,6 @@ SELECT stargazers_count
 #### Output
 
 Both of these commands return the current number of stars of the repository.
-
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
 
 ## Performance
 
@@ -613,8 +589,6 @@ The results show that on compressed input, `grep` was the slowest, while DuckDB 
 On uncompressed input, DuckDB can utilize all CPU cores from the get-go (instead of starting with a single-threaded decompression step), allowing it to outperform both `grep` and `pcregrep` by a significant margin: 2.5× faster than `pcregrep` and more than 15× faster than `grep`.
 
 While this example is quite simple, as queries get more complex, there are more opportunities for optimization and larger intermediate dataset may be produced. While both of these can be tackled within a shell script (by manually implementing optimizations and writing the intermediate datasets to disk), these will likely be less efficient than what a DBMS can come up with. Shell scripts implementing complex pipelines can also be very brittle and need to be rethought even for small changes, making the performance advantage of using a database even more significant for more complex problems.
-
-<hr/> <!-- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -->
 
 ## Summary
 
