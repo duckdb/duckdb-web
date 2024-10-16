@@ -9,11 +9,14 @@ DuckDB has a cost-based query optimizer, which uses statistics in the base table
 
 ### Turn off the Join Order Optimizer
 
+To turn off the join order optimizer, set the following [`PRAGMA`s]({% link docs/configuration/pragmas.md %}):
+
 ```sql
-SET disabled_optimizers = 'join_order';
+SET disabled_optimizers = 'join_order,build_side_probe_side';
 ```
 
-Then, DuckDB will perform the joins in the order specified in the query:
+This disables both the join order optimizer and left/right swapping for joins.
+This way, DuckDB builds a left-deep join tree following the order of `JOIN` clauses.
 
 ```sql
 SELECT …
