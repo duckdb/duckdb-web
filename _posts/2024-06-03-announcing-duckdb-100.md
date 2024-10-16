@@ -3,6 +3,7 @@ layout: post
 title: "Announcing DuckDB 1.0.0"
 author: Mark Raasveldt and Hannes Mühleisen
 thumb: "/images/blog/thumbs/240603.svg"
+image: "/images/blog/thumbs/240603.png"
 excerpt: "The DuckDB team is <i>very happy</i> to announce that today we’re releasing DuckDB version 1.0.0, codename “Snow Duck” (anas nivis)."
 ---
 

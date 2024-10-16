@@ -4,6 +4,7 @@ event: true
 title: "DuckDB Amsterdam Meetup #1"
 author: "DuckDB meetup organizers"
 thumb: "/images/blog/thumbs/duckdb-amsterdam-meetup-1.svg"
+image: "/images/blog/thumbs/duckdb-amsterdam-meetup-1.png"
 excerpt: ""
 tags: ["duckdb amsterdam meetup"]
 ---
