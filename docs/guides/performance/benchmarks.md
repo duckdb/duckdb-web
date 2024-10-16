@@ -8,7 +8,7 @@ For several of the recommendations in our performance guide, we use microbenchma
 <!--
 ## Benchmark Environment
 
-The benchmarks in the performance guide executed on a 2022 MacBook Pro with a 12-core M2 Pro CPU, 32GiB RAM and 1TB disk.
+The benchmarks in the performance guide executed on a 2022 MacBook Pro with a 12-core M2 Pro CPU, 32 GiB RAM and 1 TB disk.
 -->
 
 ## Data Sets
