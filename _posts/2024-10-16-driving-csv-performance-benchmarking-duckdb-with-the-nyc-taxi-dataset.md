@@ -199,7 +199,7 @@ We see precise longitude and latitude data points: `-73.993908,40.74138300000000
 
 Since this information is essential to the dataset, producing files as described in the “Billion Taxi Rides in Redshift” blog post is no longer feasible due to the missing detailed location data. However, the internet never forgets. Hence, we located instances of the original dataset distributed by various sources, such as [[1]](https://arrow.apache.org/docs/6.0/r/articles/dataset.html), [[2]](https://catalog.data.gov/dataset/?q=Yellow+Taxi+Trip+Data&sort=views_recent+desc&publisher=data.cityofnewyork.us&organization=city-of-new-york&ext_location=&ext_bbox=&ext_prev_extent=), and [[3]](https://datasets.clickhouse.com/trips_mergetree/partitions/trips_mergetree.tar). Using these sources, we combined the original CSV files with weather information from the [scripts](https://github.com/toddwschneider/nyc-taxi-data) referenced in the “Billion Taxi Rides in Redshift” blog post.
 
-### How Does Our Dataset Differ from the Original One?
+### How Does This Dataset Differ from the Original One?
 
 There are two significant differences between the dataset we distribute and the one from the “Billion Taxi Rides in Redshift” blog post:
 
