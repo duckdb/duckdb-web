@@ -3,6 +3,7 @@ layout: post
 title: "Vector Similarity Search in DuckDB"
 author: Max Gabrielsson
 thumb: "/images/blog/thumbs/240503.svg"
+image: "/images/blog/thumbs/240503.png"
 excerpt: "This blog post shows a preview of DuckDB's new [`vss` extension](/docs/extensions/vss), which introduces support for HNSW (Hierarchical Navigable Small Worlds) indexes to accelerate vector similarity search."
 ---
 

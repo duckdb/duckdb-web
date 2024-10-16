@@ -3,6 +3,7 @@ layout: post
 title: "20 000 Stars on GitHub"
 author: "The DuckDB Team"
 thumb: "/images/blog/thumbs/240622.svg"
+image: "/images/blog/thumbs/240622.png"
 excerpt: ""
 ---
 
