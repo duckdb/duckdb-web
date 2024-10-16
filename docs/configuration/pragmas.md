@@ -437,6 +437,12 @@ SET disabled_optimizers = 'filter_pushdown,statistics_propagation';
 
 The available optimizations can be queried using the [`duckdb_optimizers()` table function]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers).
 
+To re-enable the optimizers, run:
+
+```sql
+SET disabled_optimizers = '';
+```
+
 > Warning The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
 
 ## Logging
