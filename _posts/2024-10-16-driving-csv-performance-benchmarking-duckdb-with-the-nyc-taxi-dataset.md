@@ -161,11 +161,15 @@ We can also see what happens under the hood to verify our conclusion regarding t
 
 In the figure below, you can see a snapshot of CPU and disk utilization for the “Single File – Uncompressed” run. We observe that achieving 100% CPU utilization is challenging, and we frequently experience stalls due to data writes to disk, as we are creating a table from a dataset that does not fit into our memory. Another key point is that CPU utilization is closely tied to disk reads, indicating that our threads often wait for data before processing it. Implementing async IO for the CSV Reader/Writer could significantly improve performance for parallel processing, as a single thread could handle most of our disk I/O without negatively affecting CPU utilization.
 
-<img src="/images/blog/taxi/uncompressed_unset.png" alt="Uncompressed Load Stats" width="1000" />
+<a href="/images/blog/taxi/uncompressed_unset.png" target="_blank">
+<img src="/images/blog/taxi/uncompressed_unset.png" alt="Uncompressed Load Stats" width="100%" />
+</a>
 
-Below, you can see similar snapshot for loading the 65 compressed files. We frequently encounter stalls during data writes; however, CPU utilization is significantly better because we wait less time for the data to load (remember, the data is approximately 8 times smaller than in the uncompressed case). In this scenario, parallelization is also much easier. Like in the uncompressed case, these gaps in CPU utilization could be mitigated by async I/O, with the addition of a decomposed decompression algorithm.
+Below, you can see a similar snapshot for loading the 65 compressed files. We frequently encounter stalls during data writes; however, CPU utilization is significantly better because we wait less time for the data to load (remember, the data is approximately 8 times smaller than in the uncompressed case). In this scenario, parallelization is also much easier. Like in the uncompressed case, these gaps in CPU utilization could be mitigated by async I/O, with the addition of a decomposed decompression algorithm.
 
-<img src="/images/blog/taxi/compressed_unset.png" alt="Compressed Load Stats" width="1000" />
+<a href="/images/blog/taxi/compressed_unset.png" target="_blank">
+<img src="/images/blog/taxi/compressed_unset.png" alt="Compressed Load Stats" width="100%" />
+</a>
 
 ### Query Times
 
@@ -178,11 +182,12 @@ For completeness, we also provide the results of the four queries on a MacBook P
 | Q 03 | 5.21                        | 2.20                    |
 | Q 04 | 11.2                        | 3.12                    |
 
-The main difference between these times is that when DuckDB uses a storage file, the data is [highly compressed]({% post_url 2022-10-28-lightweight-compression %}), resulting in much faster access when querying the dataset directly from disk. In contrast, when we do not use persistent storage, our in-memory database temporarily stores data in an uncompressed `.tmp` file to allow for memory overflow, which increases disk I/O and leads to slower query results. This observation raises a potential area for exploration: determining whether applying compression to temporary data would be beneficial.
+The main difference between these times is that when DuckDB uses a storage file, the data is [highly compressed]({% post_url 2022-10-28-lightweight-compression %}), resulting in [much faster access when querying the dataset]({% link docs/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables).
+In contrast, when we do not use persistent storage, our in-memory database temporarily stores data in an uncompressed `.tmp` file to allow for memory overflow, which increases disk I/O and leads to slower query results. This observation raises a potential area for exploration: determining whether applying compression to temporary data would be beneficial.
 
 ## How This Dataset Was Generated
 
-The original blog post generated the dataset using CSV files distributed by the NYC Taxi and Limousine Commission. Originally, these files included precise latitude and longitude coordinates for pickups and drop-offs. However, starting in mid-2016, these precise coordinates were anonymized using pickup and drop-off geometry objects to address privacy concerns. (There are even stories of broken marriages resulting from checking the actual destinations of taxis). Furthermore, in recent years, the TLC decided to redistribute the data as Parquet files and to fully anonymize these data points, including data prior to mid-2016.
+The original blog post generated the dataset using CSV files distributed by the NYC Taxi and Limousine Commission. Originally, these files included precise latitude and longitude coordinates for pickups and drop-offs. However, starting in mid-2016, these precise coordinates were anonymized using pickup and drop-off geometry objects to address privacy concerns. (There are even stories of broken marriages resulting from checking the actual destinations of taxis.) Furthermore, in recent years, the TLC decided to redistribute the data as Parquet files and to fully anonymize these data points, including data prior to mid-2016.
 
 This is a problem, as the dataset from the “Billion Taxi Rides in Redshift” blog post relies on having this detailed information. Let's take the following snippet of the data:
 
@@ -192,11 +197,7 @@ This is a problem, as the dataset from the “Billion Taxi Rides in Redshift” 
 
 We see precise longitude and latitude data points: `-73.993908,40.741383000000006,-73.989915,40.75273800000001`, along with a PostGIS Geometry hex blob created from this longitude and latitude information: `0101000020E6100000E6CE4C309C7F52C0BA675DA3E55E4440,0101000020E610000078B471C45A7F52C06D3A02B859604440` (generated as `ST_SetSRID(ST_Point(longitude, latitude), 4326)`).
 
-Since this information is essential to the dataset, producing files as described in the “Billion Taxi Rides in Redshift” blog post is no longer feasible due to the missing detailed location data.
-
-However, the internet never forgets. Hence, we located instances of the original dataset distributed by various sources, such as [[1]](https://arrow.apache.org/docs/6.0/r/articles/dataset.html), [[2]](https://catalog.data.gov/dataset/?q=Yellow+Taxi+Trip+Data&sort=views_recent+desc&publisher=data.cityofnewyork.us&organization=city-of-new-york&ext_location=&ext_bbox=&ext_prev_extent=), and [[3]](https://datasets.clickhouse.com/trips_mergetree/partitions/trips_mergetree.tar).
-
-Using these sources, we combined the original CSV files with weather information from the [scripts](https://github.com/toddwschneider/nyc-taxi-data) referenced in the “Billion Taxi Rides in Redshift” blog post.
+Since this information is essential to the dataset, producing files as described in the “Billion Taxi Rides in Redshift” blog post is no longer feasible due to the missing detailed location data. However, the internet never forgets. Hence, we located instances of the original dataset distributed by various sources, such as [[1]](https://arrow.apache.org/docs/6.0/r/articles/dataset.html), [[2]](https://catalog.data.gov/dataset/?q=Yellow+Taxi+Trip+Data&sort=views_recent+desc&publisher=data.cityofnewyork.us&organization=city-of-new-york&ext_location=&ext_bbox=&ext_prev_extent=), and [[3]](https://datasets.clickhouse.com/trips_mergetree/partitions/trips_mergetree.tar). Using these sources, we combined the original CSV files with weather information from the [scripts](https://github.com/toddwschneider/nyc-taxi-data) referenced in the “Billion Taxi Rides in Redshift” blog post.
 
 ### How Does Our Dataset Differ from the Original One?
 
