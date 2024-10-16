@@ -25,7 +25,7 @@ JOIN … -- this join is performed first
 JOIN … -- this join is performed second
 ```
 
-Once the query in question has been executed, turn back the join optimizer with the following command:
+Once the query in question has been executed, turn back the optimizers with the following command:
 
 ```sql
 SET disabled_optimizers = '';
