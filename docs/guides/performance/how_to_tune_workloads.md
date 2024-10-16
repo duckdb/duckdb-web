@@ -155,6 +155,6 @@ PRAGMA tpch(1);
 ```
 
 | Database setup      | Execution time |
-|--------------------:|---------------:|
+|---------------------|---------------:|
 | In-memory database  | 4.80 s         |
 | Persistent database | 0.57 s         |
