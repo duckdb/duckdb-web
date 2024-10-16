@@ -22,23 +22,26 @@ brew install git cmake ninja
 
 Install the required packages with the package manager of your distribution.
 
-Ubuntu and Debian:
+#### Ubuntu and Debian
 
 ```bash
 sudo apt-get update && sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
-Fedora, CentOS, and Red Hat:
+#### Fedora, CentOS, and Red Hat
 
 ```bash
 sudo yum install -y git g++ cmake ninja-build openssl-devel
 ```
 
-Alpine Linux:
+#### Alpine Linux
 
 ```bash
 apk add g++ git make cmake ninja
 ```
+
+Note that Alpine Linux uses the musl libc as its C standard library.
+There are no official binaries distributed for musl libc but DuckDB can be build with it manually following the instructions on this page.
 
 ### Cloning the Repository
 
