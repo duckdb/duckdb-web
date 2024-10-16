@@ -20,8 +20,8 @@ DuckDB officially supports the following platforms:
 
 ## Other Platforms
 
-There are several platforms.
-Support for these varies. For some, DuckDB binaries and extensions are distributed.
+There are several platforms with varying levels of support.
+For some, DuckDB binaries and extensions (or a [subset of extensions]({% link docs/extensions/working_with_extensions.md %}#platforms)) are distributed.
 For most platforms, DuckDB can often be [built from source](#building-duckdb-from-source).
 
 | Platform name          | Description                                                                                          |
@@ -30,7 +30,7 @@ For most platforms, DuckDB can often be [built from source](#building-duckdb-fro
 | `freebsd_arm64`        | FreeBSD ARM64                                                                                        |
 | `linux_arm64_android`  | Android ARM64                                                                                        |
 | `linux_arm64_gcc4`     | Linux AMD64 with GCC 4 (e.g., CentOS 7)                                                              |
-| `wasm_eh`              | WebAssembly                                                                                          |
+| `wasm_eh`              | WebAssembly Exception Handling                                                                       |
 | `wasm_mvp`             | WebAssembly Minimum Viable Product                                                                   |
 | `windows_amd64_mingw`  | Windows 10+ AMD64 (x86_64) with MinGW                                                                |
 | `windows_amd64_rtools` | Windows 10+ AMD64 (x86_64) for [RTools](https://cran.r-project.org/bin/windows/Rtools/) (deprecated) |
