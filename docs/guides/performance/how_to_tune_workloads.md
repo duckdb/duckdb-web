@@ -137,3 +137,24 @@ SET preserve_insertion_order = false;
 ```
 
 This allows the systems to re-order any results that do not contain `ORDER BY` clauses, potentially reducing memory usage.
+
+## Persistent vs. In-Memory Tables
+
+DuckDB supports [lightweight compression techniques]({% post_url 2022-10-28-lightweight-compression %}). Currently, these are only applied on persistent (on-disk) databases.
+
+DuckDB does not compress its in-memory tables. The reason for this is that compression is performed during checkpointing, and in-memory tables are not checkpointed.
+
+In rare cases, this can result in unintuitive performance results where queries are faster on on-disk tables compared to in-memory ones. For example, Q1 of the [TPC-H workload]({% link docs/extensions/tpch.md %}) is faster when running on-disk compared to the in-memory mode:
+
+```sql
+INSTALL tpch;
+LOAD tpch;
+CALL dbgen(sf = 30);
+.timer on
+PRAGMA tpch(1);
+```
+
+| Database setup      | Execution time |
+|--------------------:|---------------:|
+| In-memory database  | 4.80 s         |
+| Persistent database | 0.57 s         |

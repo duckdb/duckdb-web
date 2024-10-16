@@ -44,18 +44,18 @@ We run a simple aggregation query over Parquet files using different row group s
 
 | Row group size | Execution time |
 |---------------:|---------------:|
-| 960            | 8.77s          |
-| 1920           | 8.95s          |
-| 3840           | 4.33s          |
-| 7680           | 2.35s          |
-| 15360          | 1.58s          |
-| 30720          | 1.17s          |
-| 61440          | 0.94s          |
-| 122880         | 0.87s          |
-| 245760         | 0.93s          |
-| 491520         | 0.95s          |
-| 983040         | 0.97s          |
-| 1966080        | 0.88s          |
+| 960            | 8.77 s         |
+| 1920           | 8.95 s         |
+| 3840           | 4.33 s         |
+| 7680           | 2.35 s         |
+| 15360          | 1.58 s         |
+| 30720          | 1.17 s         |
+| 61440          | 0.94 s         |
+| 122880         | 0.87 s         |
+| 245760         | 0.93 s         |
+| 491520         | 0.95 s         |
+| 983040         | 0.97 s         |
+| 1966080        | 0.88 s         |
 
 The results show that row group sizes <5,000 have a strongly detrimental effect, making runtimes more than 5-10x larger than ideally-sized row groups, while row group sizes between 5,000 and 20,000 are still 1.5-2.5x off from best performance. Above row group size of 100,000, the differences are small: the gap is about 10% between the best and the worst runtime.
 
@@ -81,8 +81,8 @@ CSV files are often distributed in compressed format such as GZIP archives (`.cs
 
 | Schema | Load Time |
 |---|--:|
-| Load from GZIP-compressed CSV files (`.csv.gz`) | 107.1s |
-| Decompressing (using parallel `gunzip`) and loading from decompressed CSV files | 121.3s |
+| Load from GZIP-compressed CSV files (`.csv.gz`) | 107.1 s |
+| Decompressing (using parallel `gunzip`) and loading from decompressed CSV files | 121.3 s |
 
 ### Loading Many Small CSV Files
 
