@@ -38,7 +38,7 @@ This repository will serve as the foundation for the experiments conducted in th
 
 To start, you first need to download and prepare the files by executing [`python generate_prepare_data.py`](https://github.com/pdet/taxi-benchmark/blob/0.1/generate_prepare_data.py). This will download all 65 files to the `./data` folder. Additionally, the files will be uncompressed and combined into a single large file.
 
-As a result, the `./data` folder will have 65 gzipped CSV files (i.e., from `trips_xaa.csv.gz` to `trips_xcm.csv.gz`) and a single large uncompressed CSV file containing the full data (i.e., `decompressed.csv`)
+As a result, the `./data` folder will have 65 gzipped CSV files (i.e., from `trips_xaa.csv.gz` to `trips_xcm.csv.gz`) and a single large uncompressed CSV file containing the full data (i.e., `decompressed.csv`).
 
 Our benchmark then run in two different settings:
 
@@ -49,7 +49,7 @@ Once the files have been prepared, you can run the benchmark by running [`python
 
 ### Loading
 
-The loading phase of the benchmark runs six times for each benchmark setting. For the first five runs, we focus on measuring the median loading time. During the sixth run, we collect resource usage data (e.g., CPU usage and disk reads/writes).
+The loading phase of the benchmark runs six times for each benchmark setting. From the first five runs, we take the median loading time. During the sixth run, we collect resource usage data (e.g., CPU usage and disk reads/writes).
 
 Loading is performed using an in-memory DuckDB instance, meaning the data is not persisted to DuckDB storage and only exists while the connection is active. This is important to note because, as the dataset does not fit in memory and is spilled into a temporary space on disk. The decision to not persist the data has a substantial impact on performance: it makes loading the dataset significantly faster, while querying it will somewhat slower as [DuckDB will use an uncompressed representation]({% link docs/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables). We made this choice for the benchmark since our primary focus is on testing the CSV loader rather than the queries.
 
@@ -144,22 +144,22 @@ Note that, by default, DuckDB preserves the insertion order of the data, which n
 SET preserve_insertion_order = false;
 ```
 
-All experiments were run on my Apple M1 Max with 64 GB of RAM, and we compare the loading times for one uncompressed CSV file, and the 65 compressed CSV files.
+All experiments were run on my Apple M1 Max with 64 GB of RAM, and we compare the loading times for a single uncompressed CSV file, and the 65 compressed CSV files.
 
 |             Name             | Time (min) | Avg deviation of CPU usage from 100% |
 |------------------------------|------------:|------------------------------------:|
-| One File – Uncompressed      | 11:52       | 31.57                               |
+| Single File – Uncompressed   | 11:52       | 31.57                               |
 | Multiple Files – Compressed  | 13:52       | 27.13                               |
 
-Unsurprisingly, loading data from multiple compressed files is more CPU-efficient than loading from a single uncompressed file. This is evident from the lower average deviation in CPU usage for multiple compressed files, indicating fewer wasted CPU cycles. There are two main reasons for this: (1) The compressed files are approximately eight times smaller than the uncompressed file, drastically reducing the amount of data that needs to be loaded from disk and, consequently, minimizing CPU stalls while waiting for data to be processed. (2) It is much easier to parallelize the loading of multiple files than a single file, as each thread can handle one file.
+Unsurprisingly, loading data from multiple compressed files is more CPU-efficient than loading from a single uncompressed file. This is evident from the lower average deviation in CPU usage for multiple compressed files, indicating fewer wasted CPU cycles. There are two main reasons for this: (1) The compressed files are approximately eight times smaller than the uncompressed file, drastically reducing the amount of data that needs to be loaded from disk and, consequently, minimizing CPU stalls while waiting for data to be processed. (2) It is much easier to parallelize the loading of multiple files than a single file, as each thread can handle on a single file.
 
-However, execution time is an even more interesting metric, as reading from one uncompressed file is faster—by 2 minutes—than reading from multiple compressed files. The reason for this discrepancy lies in our decompression algorithm, which is not optimally designed. Reading a compressed file involves three tasks: (1) loading data from disk into a compressed buffer, (2) decompressing that data into a decompressed buffer, and (3) processing the decompressed buffer. In our current implementation, tasks 1 and 2 are combined into a single operation, meaning we cannot continue reading until the current buffer is fully decompressed, resulting in idle cycles.
+The difference in CPU efficiency is also reflected in execution times: reading from a single uncompressed file is 2 minutes faster than reading from multiple compressed files. The reason for this lies in our decompression algorithm, which is admittedly not optimally designed. Reading a compressed file involves three tasks: (1) loading data from disk into a compressed buffer, (2) decompressing that data into a decompressed buffer, and (3) processing the decompressed buffer. In our current implementation, tasks 1 and 2 are combined into a single operation, meaning we cannot continue reading until the current buffer is fully decompressed, resulting in idle cycles.
 
 ### Under the Hood
 
 We can also see what happens under the hood to verify our conclusion regarding the loading time.
 
-In the figure below, you can see a snapshot of CPU and disk utilization for the “One File – Uncompressed” run. We observe that achieving 100% CPU utilization is challenging, and we frequently experience stalls due to data writes to disk, as we are creating a table from a dataset that does not fit into our memory. Another key point is that CPU utilization is closely tied to disk reads, indicating that our threads often wait for data before processing it. Implementing async IO for the CSV Reader/Writer could significantly improve performance for parallel processing, as a single thread could handle most of our disk I/O without negatively affecting CPU utilization.
+In the figure below, you can see a snapshot of CPU and disk utilization for the “Single File – Uncompressed” run. We observe that achieving 100% CPU utilization is challenging, and we frequently experience stalls due to data writes to disk, as we are creating a table from a dataset that does not fit into our memory. Another key point is that CPU utilization is closely tied to disk reads, indicating that our threads often wait for data before processing it. Implementing async IO for the CSV Reader/Writer could significantly improve performance for parallel processing, as a single thread could handle most of our disk I/O without negatively affecting CPU utilization.
 
 <img src="/images/blog/taxi/uncompressed_unset.png" alt="Uncompressed Load Stats" width="1000" />
 
@@ -167,7 +167,7 @@ Below, you can see similar snapshot for loading the 65 compressed files. We freq
 
 <img src="/images/blog/taxi/compressed_unset.png" alt="Compressed Load Stats" width="1000" />
 
-### Query Time
+### Query Times
 
 For completeness, we also provide the results of the four queries on a MacBook Pro with an M1 Pro CPU. This comparison demonstrates the time differences between querying a database that does not fit in memory using a purely in-memory connection (i.e., without storage) versus one where the data is first loaded and persisted in the database.
 
