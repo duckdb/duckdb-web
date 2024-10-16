@@ -24,17 +24,17 @@ There are several platforms.
 Support for these varies. For some, DuckDB binaries and extensions are distributed.
 For most platforms, DuckDB can often be [built from source](#building-duckdb-from-source).
 
-| Platform name          | Description                            |
-|------------------------|----------------------------------------|
-| `freebsd_amd64`        | FreeBSD AMD64 (x64_64)                 |
-| `freebsd_arm64`        | FreeBSD ARM64                          |
-| `linux_arm64_android`  | Android ARM64                          |
-| `linux_arm64_gcc4`     | Linux AMD64 with GCC 4 (e.g. CentOS 7) |
-| `wasm_eh`              | WebAssembly                            |
-| `wasm_mvp`             | WebAssembly Minimum Viable Product     |
-| `windows_amd64_mingw`  | Windows 10+ AMD64 (x86_64) with MinGW  |
+| Platform name          | Description                                                                                          |
+|------------------------|------------------------------------------------------------------------------------------------------|
+| `freebsd_amd64`        | FreeBSD AMD64 (x64_64)                                                                               |
+| `freebsd_arm64`        | FreeBSD ARM64                                                                                        |
+| `linux_arm64_android`  | Android ARM64                                                                                        |
+| `linux_arm64_gcc4`     | Linux AMD64 with GCC 4 (e.g., CentOS 7)                                                              |
+| `wasm_eh`              | WebAssembly                                                                                          |
+| `wasm_mvp`             | WebAssembly Minimum Viable Product                                                                   |
+| `windows_amd64_mingw`  | Windows 10+ AMD64 (x86_64) with MinGW                                                                |
 | `windows_amd64_rtools` | Windows 10+ AMD64 (x86_64) for [RTools](https://cran.r-project.org/bin/windows/Rtools/) (deprecated) |
-| `windows_arm64_mingw`  | Windows 10+ AMD64 (x86_64) with MinGW  |
+| `windows_arm64_mingw`  | Windows 10+ AMD64 (x86_64) with MinGW                                                                |
 
 32-bit architectures are officially not supported but it is possible to build DuckDB manually for some of these platforms, e.g., for [Raspberry Pi boards]({% link docs/dev/building/build_instructions.md %}#raspberry-pi-32-bit).
 
