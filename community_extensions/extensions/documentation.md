@@ -19,17 +19,17 @@ Structure of the YAML descritor is as follow:
 
 | field | description |
 |--|--|
-| extension.name | Name of the extension. Extension names are case-insensitive, so only lowercase letters, numbers and `-` or `_` are allowed |
-| extension.description |Short description of the extension | 
-| extension.version | Semantic versioning of the extension |
-| extension.language | `C++`, `Rust & C++`, `C++ & SQL`, or whatever combination of languages the extension code relies on |
-| extension.build | Build system the extensin uses, at the moment only `cmake` is supported |
-| extension.licence | Licence that applies to the extension |
-| extension.maintainers | A list of maintainers for the extension |
-| extension.excluded_platforms | Optional, allows to specify whether certain platforms are not supported |
-| extension.requires_toolchains | Optional, allows to specify whether additional build-time dependecies are required |
-| repo.github | Organization name '/' Repository name  of the GitHub-hosted public repository |
-| repo.ref | Git ref for the extension |
+| `extension.name` | Name of the extension. Extension names are case-insensitive, so only lowercase letters, numbers and `-` or `_` are allowed |
+| `extension.description` | Short description of the extension |
+| `extension.version` | Semantic versioning of the extension |
+| `extension.language` | `C++`, `Rust & C++`, `C++ & SQL`, or whatever combination of languages the extension code relies on |
+| `extension.build` | Build system the extensin uses, at the moment only `cmake` is supported |
+| `extension.licence` | Licence that applies to the extension |
+| `extension.maintainers` | A list of maintainers for the extension |
+| `extension.excluded_platforms` | Optional, allows to specify whether certain platforms are not supported |
+| `extension.requires_toolchains` | Optional, allows to specify whether additional build-time dependecies are required |
+| `repo.github` | Organization name '/' Repository name  of the GitHub-hosted public repository |
+| `repo.ref` | Git ref for the extension |
 
 These fields are used to build, test and deploy the extension, and might also be reflected in the documentation.
 
@@ -37,14 +37,14 @@ Extensions maintainers are encouraged to provide two optional fields in the desc
 
 | field | description |
 |--|--|
-| docs.hello_world | An `Hello, World!`, a self contained example of an extension capabilities |
-| docs.extended_description | Extra context on the extension, relevant links, or a tour of the extension capabilities |
+| `docs.hello_world` | An `Hello, World!`, a self contained example of an extension capabilities |
+| `docs.extended_description` | Extra context on the extension, relevant links, or a tour of the extension capabilities |
 
 ### Hosted Extension Documentation Page
 
 Each Community Extension has a documentation page at: `https://community-extension.duckdb.org/extensions/$extension_name.html`.
 
-For example, this is the page for [quack]({% link community_extensions/quack.md %}).
+For example, this is the page for [quack]({% link community_extensions/extensions/quack.md %}).
 
 Documentation pages are generated from the fields provided in the YAML descriptor file that is part of the [Community Extensions Repository](https://github.com/duckdb/community-extensions) and from the auto-detected changes that a given extensions introduces in DuckDB.
 
@@ -63,4 +63,4 @@ Detection of other changes to the system (e.g., whether an additional Parser or 
 
 ### List of Extensions
 
-All the available community extensions are listed at [List of Community Extensions]({% link community_extensions/list_of_extensions.md %}) page.
+All the available community extensions are listed in the [“List of Community Extensions”]({% link community_extensions/list_of_extensions.md %}) page.
