@@ -1,273 +1,214 @@
 ---
 layout: post
-title: "DuckDB Tricks – Part 2"
-author: "Gabor Szarnyas"
-thumb: "/images/blog/thumbs/duckdb-tricks-2.svg"
-image: "/images/blog/thumbs/duckdb-tricks-2.png"
-excerpt: "We continue our “DuckDB tricks” series, focusing on queries that clean, transform and summarize data."
+title: "Driving CSV Performance: Benchmarking DuckDB with the NYC Taxi Dataset"
+author: "Pedro Holanda"
+thumb: "/images/blog/thumbs/taxi.svg"
+image: "/images/blog/thumbs/taxi.png"
+excerpt: "DuckDB's benchmark suite now includes the NYC Taxi Benchmark. We explain how our CSV reader performs on the Taxi Dataset and provide steps to reproduce the benchmark."
 ---
 
-## Overview
+The [NYC taxi dataset](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) is a collection of many years of taxi rides that occurred in New York City. It is a very influential dataset, used for [database benchmarks](https://tech.marksblogg.com/benchmarks.html), [machine learning](https://www.r-bloggers.com/2018/01/new-york-city-taxi-limousine-commission-tlc-trip-data-analysis-using-sparklyr-and-google-bigquery-2/), [data visualization](https://www.kdnuggets.com/2017/02/data-science-nyc-taxi-trips.html), and more.
 
-This post is the latest installment of the [DuckDB Tricks series]({% post_url 2024-08-19-duckdb-tricks-part-1 %}), where we show you nifty SQL tricks in DuckDB.
-Here’s a summary of what we’re going to cover:
+In 2022, the data provider has decided to distribute the dataset as a series of Parquet files instead of CSV files. Performance-wise, this is a wise choice, as Parquet files are much smaller than CSV files, and their native columnar format allows for fast execution directly on them. However, this change hinders the number of systems that can natively load the files.
 
-| Operation | SQL instructions |
-|-----------|---------|
-| [Fixing timestamps in CSV files](#fixing-timestamps-in-csv-files) | `regexp_replace` and `strptime` |
-| [Filling in missing values](#filling-in-missing-values) | `CROSS JOIN`, `LEFT JOIN` and `coalesce` |
-| [Repeated data transformation steps](#repeated-data-transformation-steps) | `CREATE OR REPLACE TABLE t AS … FROM t …` |
-| [Computing checksums for columns](#computing-checksums-for-columns) | `bit_xor(md5_number(COLUMNS(*)::VARCHAR))` |
-| [Creating a macro for the checksum query](#creating-a-macro-for-the-checksum-query) | `CREATE MACRO checksum(tbl) AS TABLE …` |
+In the [“Billion Taxi Rides in Redshift”](https://tech.marksblogg.com/billion-nyc-taxi-rides-redshift.html) blog post, a new database benchmark is proposed to evaluate the performance of aggregations over the taxi dataset. The dataset is also joined and denormalized with other datasets that contain information about the weather, cab types, and pickup/dropoff locations. It is then stored as multiple compressed, gzipped CSV files, each containing 20 million rows.
 
-## Dataset
+## The Taxi Data Set as CSV Files
 
-For our example dataset, we’ll use `schedule.csv`, a hand-written CSV file that encodes a conference schedule. The schedule contains the timeslots, the locations and the events scheduled.
+Since DuckDB is well-known for its [CSV reader performance](https://x.com/jmduke/status/1820593783005667459), we were intrigued to explore whether the loading process of this benchmark could help us identify new performance bottlenecks in our CSV loader. This curiosity led us on a journey to generate these datasets and analyze their performance in DuckDB. According to the recent study conducted on the AWS RedShift fleet, [CSV files are the most used external source data type in S3](https://assets.amazon.science/24/3b/04b31ef64c83acf98fe3fdca9107/why-tpc-is-not-enough-an-analysis-of-the-amazon-redshift-fleet.pdf), and 99% of them are gzipped. Therefore, the fact that the proposed benchmark also used split gzipped files caught my attention.
+
+In this blog post, we'll guide you through how to run this benchmark in DuckDB and discuss some lessons learned and future ideas for our CSV Reader. The dataset used in this benchmark is [publicly available](https://github.com/pdet/taxi-benchmark/blob/0.1/files.txt). The dataset is partitioned and distributed as a collection of 65 gzipped CSV files, each containing 20 million rows and totaling up to 1.8 GB per file. The total dataset is 111 GB compressed and 518 GB uncompressed. We also provide more details on how we generated this dataset and highlight the differences between the dataset we distribute and the original one described in the [“Billion Taxi Rides in Redshift”](https://tech.marksblogg.com/billion-nyc-taxi-rides-redshift.html) blog post.
+
+## Reproducing the Benchmark
+
+Doing fair benchmarking is a [difficult problem](https://pdet.github.io/assets/papers/benchmarking.pdf), especially when the data, queries, and results used for the benchmark are not easy to access and run. We have made the benchmark discussed in this blog post easy to run by providing scripts available in the [`taxi-benchmark` GitHub repository](https://github.com/pdet/taxi-benchmark).
+
+This repository contains three main Python scripts:
+
+1. `generate_prepare_data.py`: Downloads all necessary files and prepares them for the benchmark.
+2. `benchmark.py`: Runs the benchmark and performs result verification.
+3. `analyse.py`: Analyzes the benchmark results and produces some of the insights discussed in this blog post.
+
+The benchmark is not intended to be flawless – no benchmark is. However, we believe that sharing these scripts is a positive step, and we welcome any contributions to make them cleaner and more efficient.
+
+The repository also includes a README file with detailed instructions on how to use it.
+
+This repository will serve as the foundation for the experiments conducted in this blog post.
+
+### Preparing the Dataset
+
+To start, you first need to download and prepare the files by executing [`python generate_prepare_data.py`](https://github.com/pdet/taxi-benchmark/blob/0.1/generate_prepare_data.py). This will download all 65 files to the `./data` folder. Additionally, the files will be uncompressed and combined into a single large file.
+
+As a result, the `./data` folder will have 65 gzipped CSV files (i.e., from `trips_xaa.csv.gz` to `trips_xcm.csv.gz`) and a single large uncompressed CSV file containing the full data (i.e., `decompressed.csv`)
+
+Our benchmark then run in two different settings:
+
+1. Over 65 compressed files.
+2. Over a single uncompressed file.
+
+Once the files have been prepared, you can run the benchmark by running [`python benchmark.py`](https://github.com/pdet/taxi-benchmark/blob/0.1/benchmark.py).
+
+### Loading
+
+The loading phase of the benchmark runs six times for each benchmark setting. For the first five runs, we focus on measuring the median loading time. During the sixth run, we collect resource usage data (e.g., CPU usage and disk reads/writes).
+
+Loading is performed using a DuckDB in-memory instance, meaning the data is not persisted to DuckDB storage and only exists while the connection is active. This is important to note because, as the dataset does not fit in memory, choosing not to persist the data has a substantial impact on performance. Specifically, loading the dataset should be significantly faster, while querying it will likely be slower. We made this choice for the benchmark since our primary focus is on testing the CSV loader rather than the queries.
+
+Our table schema is defined in [`schema.sql`](https://github.com/pdet/taxi-benchmark/blob/0.1/sql/schema.sql) and is structured as follows:
+
+```sql
+CREATE TABLE trips (
+    trip_id                 BIGINT,
+    vendor_id               VARCHAR,
+    pickup_datetime         TIMESTAMP,
+    dropoff_datetime        TIMESTAMP,
+    store_and_fwd_flag      VARCHAR,
+    rate_code_id            BIGINT,
+    pickup_longitude        DOUBLE,
+    pickup_latitude         DOUBLE,
+    dropoff_longitude       DOUBLE,
+    dropoff_latitude        DOUBLE,
+    passenger_count         BIGINT,
+    trip_distance           DOUBLE,
+    fare_amount             DOUBLE,
+    extra                   DOUBLE,
+    mta_tax                 DOUBLE,
+    tip_amount              DOUBLE,
+    tolls_amount            DOUBLE,
+    ehail_fee               DOUBLE,
+    improvement_surcharge   DOUBLE,
+    total_amount            DOUBLE,
+    payment_type            VARCHAR,
+    trip_type               VARCHAR,
+    pickup                  VARCHAR,
+    dropoff                 VARCHAR,
+    cab_type                VARCHAR,
+    precipitation           BIGINT,
+    snow_depth              BIGINT,
+    snowfall                BIGINT,
+    max_temperature         BIGINT,
+    min_temperature         BIGINT,
+    average_wind_speed      BIGINT,
+    pickup_nyct2010_gid     BIGINT,
+    pickup_ctlabel          VARCHAR,
+    pickup_borocode         BIGINT,
+    pickup_boroname         VARCHAR,
+    pickup_ct2010           VARCHAR,
+    pickup_boroct2010       BIGINT,
+    pickup_cdeligibil       VARCHAR,
+    pickup_ntacode          VARCHAR,
+    pickup_ntaname          VARCHAR,
+    pickup_puma             VARCHAR,
+    dropoff_nyct2010_gid    BIGINT,
+    dropoff_ctlabel         VARCHAR,
+    dropoff_borocode        BIGINT,
+    dropoff_boroname        VARCHAR,
+    dropoff_ct2010          VARCHAR,
+    dropoff_boroct2010      BIGINT,
+    dropoff_cdeligibil      VARCHAR,
+    dropoff_ntacode         VARCHAR,
+    dropoff_ntaname         VARCHAR,
+    dropoff_puma            VARCHAR);
+```
+
+The loader for the 65 files uses the following query:
+
+```sql
+COPY trips FROM 'data/trips_*.csv.gz' (HEADER false);
+```
+
+The loader for the single uncompressed file uses this query:
+
+```sql
+COPY trips FROM 'data/decompressed.csv' (HEADER false);
+```
+
+### Querying
+
+After loading, the benchmark script will run each of the [benchmark queries](https://github.com/pdet/taxi-benchmark/tree/0.1/sql/queries) five times to measure their execution time. It is also important to note that the results of the queries are validated against their corresponding [answers](https://github.com/pdet/taxi-benchmark/tree/0.1/sql/answers). This allows us to verify the correctness of the benchmark. Additionally, the queries are identical to those used in the original [“Billion Taxi Rides”](https://tech.marksblogg.com/benchmarks.html) benchmark.
+
+## Results
+
+### Loading Time
+
+Although we are talking about many rows of a CSV file with 51 columns, DuckDB can ingest them rather fast.
+
+Note that, by default, DuckDB preserves the insertion order of the data, which negatively impacts performance. In the following results, all datasets have been loaded with this option set to `false`.
+
+```sql
+SET preserve_insertion_order = false;
+```
+
+All experiments were run on my Apple M1 Max with 64 GB of RAM, and we compare the loading times for one uncompressed CSV file, and the 65 compressed CSV files.
+
+|             Name             | Time (min) | Avg deviation of CPU usage from 100% |
+|------------------------------|------------:|------------------------------------:|
+| One File – Uncompressed      | 11:52       | 31.57                               |
+| Multiple Files – Compressed  | 13:52       | 27.13                               |
+
+Unsurprisingly, loading data from multiple compressed files is more CPU-efficient than loading from a single uncompressed file. This is evident from the lower average deviation in CPU usage for multiple compressed files, indicating fewer wasted CPU cycles. There are two main reasons for this: (1) The compressed files are approximately eight times smaller than the uncompressed file, drastically reducing the amount of data that needs to be loaded from disk and, consequently, minimizing CPU stalls while waiting for data to be processed. (2) It is much easier to parallelize the loading of multiple files than a single file, as each thread can handle one file.
+
+However, execution time is an even more interesting metric, as reading from one uncompressed file is faster—by 2 minutes—than reading from multiple compressed files. The reason for this discrepancy lies in our decompression algorithm, which is not optimally designed. Reading a compressed file involves three tasks: (1) loading data from disk into a compressed buffer, (2) decompressing that data into a decompressed buffer, and (3) processing the decompressed buffer. In our current implementation, tasks 1 and 2 are combined into a single operation, meaning we cannot continue reading until the current buffer is fully decompressed, resulting in idle cycles.
+
+### Under the Hood
+
+We can also see what happens under the hood to verify our conclusion regarding the loading time.
+
+In the figure below, you can see a snapshot of CPU and disk utilization for the “One File – Uncompressed” run. We observe that achieving 100% CPU utilization is challenging, and we frequently experience stalls due to data writes to disk, as we are creating a table from a dataset that does not fit into our memory. Another key point is that CPU utilization is closely tied to disk reads, indicating that our threads often wait for data before processing it. Implementing async IO for the CSV Reader/Writer could significantly improve performance for parallel processing, as a single thread could handle most of our disk I/O without negatively affecting CPU utilization.
+
+<img src="/images/blog/taxi/uncompressed_unset.png" alt="Uncompressed Load Stats" width="1000" />
+
+Below, you can see similar snapshot for loading the 65 compressed files. We frequently encounter stalls during data writes; however, CPU utilization is significantly better because we wait less time for the data to load (remember, the data is approximately 8 times smaller than in the uncompressed case). In this scenario, parallelization is also much easier. Like in the uncompressed case, these gaps in CPU utilization could be mitigated by async I/O, with the addition of a decomposed decompression algorithm.
+
+<img src="/images/blog/taxi/compressed_unset.png" alt="Compressed Load Stats" width="1000" />
+
+### Query Time
+
+For completeness, we also provide the results of the four queries on a MacBook Pro with an M1 Pro CPU. This comparison demonstrates the time differences between querying a database that does not fit in memory using a purely in-memory connection (i.e., without storage) versus one where the data is first loaded and persisted in the database.
+
+| Name | Time - Without Storage (s)  | Time - With Storage (s) |
+|------|----------------------------:|------------------------:|
+| Q 01 | 2.45                        | 1.45                    |
+| Q 02 | 3.89                        | 0.80                    |
+| Q 03 | 5.21                        | 2.20                    |
+| Q 04 | 11.2                        | 3.12                    |
+
+The main difference between these times is that when DuckDB uses a storage file, the data is [highly compressed]({% post_url 2022-10-28-lightweight-compression %}), resulting in much faster access when querying the dataset directly from disk. In contrast, when we do not use persistent storage, our in-memory database temporarily stores data in an uncompressed `.tmp` file to allow for memory overflow, which increases disk I/O and leads to slower query results. This observation raises a potential area for exploration: determining whether applying compression to temporary data would be beneficial.
+
+## How This Dataset Was Generated
+
+The original blog post generated the dataset using CSV files distributed by the NYC Taxi and Limousine Commission. Originally, these files included precise latitude and longitude coordinates for pickups and drop-offs. However, starting in mid-2016, these precise coordinates were anonymized using pickup and drop-off geometry objects to address privacy concerns. (There are even stories of broken marriages resulting from checking the actual destinations of taxis). Furthermore, in recent years, the TLC decided to redistribute the data as Parquet files and to fully anonymize these data points, including data prior to mid-2016.
+
+This is a problem, as the dataset from the “Billion Taxi Rides in Redshift” blog post relies on having this detailed information. Let's take the following snippet of the data:
 
 ```csv
-timeslot,location,event
-2024-10-10 9am,room Mallard,Keynote
-2024-10-10 10.30am,room Mallard,Customer stories
-2024-10-10 10.30am,room Fusca,Deep dive 1
-2024-10-10 12.30pm,main hall,Lunch
-2024-10-10 2pm,room Fusca,Deep dive 2
+649084905,VTS,2012-08-31 22:00:00,2012-08-31 22:07:00,0,1,-73.993908,40.741383000000006,-73.989915,40.75273800000001,1,1.32,6.1,0.5,0.5,0,0,0,0,7.1,CSH,0,0101000020E6100000E6CE4C309C7F52C0BA675DA3E55E4440,0101000020E610000078B471C45A7F52C06D3A02B859604440,yellow,0.00,0.0,0.0,91,69,4.70,142,54,1,Manhattan,005400,1005400,I,MN13,Hudson Yards-Chelsea-Flatiron-Union Square,3807,132,109,1,Manhattan,010900,1010900,I,MN17,Midtown-Midtown South,3807
 ```
 
-## Fixing Timestamps in CSV Files
+We see precise longitude and latitude data points: `-73.993908,40.741383000000006,-73.989915,40.75273800000001`, along with a PostGIS Geometry hex blob created from this longitude and latitude information: `0101000020E6100000E6CE4C309C7F52C0BA675DA3E55E4440,0101000020E610000078B471C45A7F52C06D3A02B859604440` (generated as `ST_SetSRID(ST_Point(longitude, latitude), 4326)`).
 
-As usual in real use case, the input CSV is messy with irregular timestamps such as `2024-10-10 9am`.
-Therefore, if we load the `schedule.csv` file using DuckDB’s CSV reader, the CSV sniffer will detect the first column as a `VARCHAR` field:
+Since this information is essential to the dataset, producing files as described in the “Billion Taxi Rides in Redshift” blog post is no longer feasible due to the missing detailed location data.
+
+However, the internet never forgets. Hence, we located instances of the original dataset distributed by various sources, such as [[1]](https://arrow.apache.org/docs/6.0/r/articles/dataset.html), [[2]](https://catalog.data.gov/dataset/?q=Yellow+Taxi+Trip+Data&sort=views_recent+desc&publisher=data.cityofnewyork.us&organization=city-of-new-york&ext_location=&ext_bbox=&ext_prev_extent=), and [[3]](https://datasets.clickhouse.com/trips_mergetree/partitions/trips_mergetree.tar).
+
+Using these sources, we combined the original CSV files with weather information from the [scripts](https://github.com/toddwschneider/nyc-taxi-data) referenced in the “Billion Taxi Rides in Redshift” blog post.
+
+### How Does Our Dataset Differ from the Original One?
+
+There are two significant differences between the dataset we distribute and the one from the “Billion Taxi Rides in Redshift” blog post:
+
+1. Our dataset includes data up to the last date that longitude and latitude information was available (June 30, 2016), whereas the original post only included data up to the end of 2015 (understandable, as the post was written in February 2016).
+2. We also included Uber trips, which were excluded from the original post.
+
+If you wish to run the benchmark with a dataset as close to the original as possible, you can generate a new table by filtering out the additional data. For example:
 
 ```sql
-CREATE TABLE schedule_raw AS
-    SELECT * FROM 'https://duckdb.org/data/schedule.csv';
-
-SELECT * FROM schedule_raw;
+CREATE TABLE trips_og AS
+    FROM trips
+    WHERE pickup_datetime < '2016-01-01'
+      AND cab_type != 'uber';
 ```
 
-```text
-┌────────────────────┬──────────────┬──────────────────┐
-│      timeslot      │   location   │      event       │
-│      varchar       │   varchar    │     varchar      │
-├────────────────────┼──────────────┼──────────────────┤
-│ 2024-10-10 9am     │ room Mallard │ Keynote          │
-│ 2024-10-10 10.30am │ room Mallard │ Customer stories │
-│ 2024-10-10 10.30am │ room Fusca   │ Deep dive 1      │
-│ 2024-10-10 12.30pm │ main hall    │ Lunch            │
-│ 2024-10-10 2pm     │ room Fusca   │ Deep dive 2      │
-└────────────────────┴──────────────┴──────────────────┘
-```
+## Conclusion
 
-Ideally, we would like the `timeslot` column to have the type `TIMESTAMP` so we can treat it as a timestamp in the queries later. To achieve this, we can use the table we just loaded and fix the problematic entities by using a regular expression-based search and replace operation, which unifies the format to `hours.minutes` followed by `am` or `pm`. Then, we convert the string to timestamps using [`strptime`]({% link docs/sql/functions/dateformat.md %}#strptime-examples) with the `%p` format specifier capturing the `am`/`pm` part of the string.
-
-```sql
-CREATE TABLE schedule_cleaned AS
-    SELECT
-        timeslot
-            .regexp_replace(' (\d+)(am|pm)$', ' \1.00\2')
-            .strptime('%Y-%m-%d %H.%M%p') AS timeslot,
-        location,
-        event
-    FROM schedule_raw;
-```
-
-Note that we use the [dot operator for function chaining]({% link docs/sql/functions/overview.md %}#function-chaining-via-the-dot-operator) to improve readability. For example, `regexp_replace(string, pattern, replacement)` is formulated as `string.regexp_replace(pattern, replacement)`. The result is the following table:
-
-```text
-┌─────────────────────┬──────────────┬──────────────────┐
-│      timeslot       │   location   │      event       │
-│      timestamp      │   varchar    │     varchar      │
-├─────────────────────┼──────────────┼──────────────────┤
-│ 2024-10-10 09:00:00 │ room Mallard │ Keynote          │
-│ 2024-10-10 10:30:00 │ room Mallard │ Customer stories │
-│ 2024-10-10 10:30:00 │ room Fusca   │ Deep dive 1      │
-│ 2024-10-10 12:30:00 │ main hall    │ Lunch            │
-│ 2024-10-10 14:00:00 │ room Fusca   │ Deep dive 2      │
-└─────────────────────┴──────────────┴──────────────────┘
-```
-
-## Filling in Missing Values
-
-Next, we would like to derive a schedule that includes the full picture: *every timeslot* for *every location* should have its line in the table. For the timeslot-location combinations, where there is no event specified, we would like to explicitly add a string that says `<empty>`.
-
-To achieve this, we first create a table `timeslot_location_combinations` containing all possible combinations using a `CROSS JOIN`. Then, we can connect the original table on the combinations using a `LEFT JOIN`. Finally, we replace `NULL` values with the `<empty>` string using the [`coalesce` function]({% link docs/sql/functions/utility.md %}#coalesceexpr-).
-
-> The `CROSS JOIN` clause is equivalent to simply listing the tables in the `FROM` clause without specifying join conditions. By explicitly spelling out `CROSS JOIN`, we communicate that we intend to compute a Cartesian product – which is an expensive operation on large tables and should be avoided in most use cases.
-
-```sql
-CREATE TABLE timeslot_location_combinations AS 
-    SELECT timeslot, location
-    FROM (SELECT DISTINCT timeslot FROM schedule_cleaned)
-    CROSS JOIN (SELECT DISTINCT location FROM schedule_cleaned);
-
-CREATE TABLE schedule_filled AS
-    SELECT timeslot, location, coalesce(event, '<empty>') AS event
-    FROM timeslot_location_combinations
-    LEFT JOIN schedule_cleaned
-        USING (timeslot, location)
-    ORDER BY ALL;
-
-SELECT * FROM schedule_filled;
-```
-
-```text
-┌─────────────────────┬──────────────┬──────────────────┐
-│      timeslot       │   location   │      event       │
-│      timestamp      │   varchar    │     varchar      │
-├─────────────────────┼──────────────┼──────────────────┤
-│ 2024-10-10 09:00:00 │ main hall    │ <empty>          │
-│ 2024-10-10 09:00:00 │ room Fusca   │ <empty>          │
-│ 2024-10-10 09:00:00 │ room Mallard │ Keynote          │
-│ 2024-10-10 10:30:00 │ main hall    │ <empty>          │
-│ 2024-10-10 10:30:00 │ room Fusca   │ Deep dive 1      │
-│ 2024-10-10 10:30:00 │ room Mallard │ Customer stories │
-│ 2024-10-10 12:30:00 │ main hall    │ Lunch            │
-│ 2024-10-10 12:30:00 │ room Fusca   │ <empty>          │
-│ 2024-10-10 12:30:00 │ room Mallard │ <empty>          │
-│ 2024-10-10 14:00:00 │ main hall    │ <empty>          │
-│ 2024-10-10 14:00:00 │ room Fusca   │ Deep dive 2      │
-│ 2024-10-10 14:00:00 │ room Mallard │ <empty>          │
-├─────────────────────┴──────────────┴──────────────────┤
-│ 12 rows                                     3 columns │
-└───────────────────────────────────────────────────────┘
-```
-
-We can also put everything together in a single query using a [`WITH` clause]({% link docs/sql/query_syntax/with.md %}):
-
-```sql
-WITH timeslot_location_combinations AS (
-    SELECT timeslot, location
-    FROM (SELECT DISTINCT timeslot FROM schedule_cleaned)
-    CROSS JOIN (SELECT DISTINCT location FROM schedule_cleaned)
-)
-SELECT timeslot, location, coalesce(event, '<empty>') AS event
-FROM timeslot_location_combinations
-LEFT JOIN schedule_cleaned
-    USING (timeslot, location)
-ORDER BY ALL;
-```
-
-## Repeated Data Transformation Steps
-
-Data cleaning and transformation usually happens as a sequence of transformations that shape the data into a form that’s best fitted to later analysis.
-These transformations are often done by defining newer and newer tables using [`CREATE TABLE … AS SELECT` statements]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas).
-
-For example, in the sections above, we created `schedule_raw`, `schedule_cleaned`, and `schedule_filled`. If, for some reason, we want to skip the cleaning steps for the timestamps, we have to reformulate the query computing `schedule_filled` to use `schedule_raw` instead of `schedule_cleaned`. This can be tedious and error-prone, and it results in a lot of unused temporary data – data that may accidentally get picked up by queries that we forgot to update!
-
-In interactive analysis, it’s often better to use the same table name by running [`CREATE OR REPLACE` statements]({% link docs/sql/statements/create_table.md %}#create-or-replace):
-
-```sql
-CREATE OR REPLACE TABLE ⟨table_name⟩ AS
-    …
-    FROM ⟨table_name⟩
-    …;
-```
-
-Using this trick, we can run our analysis as follows:
-
-```sql
-CREATE OR REPLACE TABLE schedule AS
-    SELECT * FROM 'https://duckdb.org/data/schedule.csv';
-
-CREATE OR REPLACE TABLE schedule AS
-    SELECT
-        timeslot
-            .regexp_replace(' (\d+)(am|pm)$', ' \1.00\2')
-            .strptime('%Y-%m-%d %H.%M%p') AS timeslot,
-        location,
-        event
-    FROM schedule;
-
-CREATE OR REPLACE TABLE schedule AS
-    WITH timeslot_location_combinations AS (
-        SELECT timeslot, location
-        FROM (SELECT DISTINCT timeslot FROM schedule)
-        CROSS JOIN (SELECT DISTINCT location FROM schedule)
-    )
-    SELECT timeslot, location, coalesce(event, '<empty>') AS event
-    FROM timeslot_location_combinations
-    LEFT JOIN schedule_cleaned
-        USING (timeslot, location)
-    ORDER BY ALL;
-
-SELECT * FROM schedule;
-```
-
-Using this approach, we can skip any step and continue the analysis without adjusting the next one.
-
-What’s more, our script can now be re-run from the beginning without explicitly deleting any tables: the `CREATE OR REPLACE` statements will automatically replace any existing tables.
-
-## Computing Checksums for Columns
-
-It’s often beneficial to compute a checksum for each column in a table, e.g., to see whether a column’s content has changed between two operations.
-We can compute a checksum for the `schedule` table as follows:
-
-```sql
-SELECT bit_xor(md5_number(COLUMNS(*)::VARCHAR))
-FROM schedule;
-```
-
-What’s going on here?
-We first list columns ([`COLUMNS(*)`]({% link docs/sql/expressions/star.md %}#columns-expression)) and cast all of them to `VARCHAR` values.
-Then, we compute the numeric MD5 hashes with the [`md5_number` function]({% link docs/sql/functions/utility.md %}#md5_numberstring) and aggregate them using the [`bit_xor` aggregate function]({% link docs/sql/functions/aggregates.md %}#bit_xorarg).
-This produces a single `HUGEINT` (`INT128`) value per column that can be used to compare the content of tables.
-
-If we run this query in the script above, we get the following results:
-
-```text
-┌──────────────────────────────────────────┬────────────────────────────────────────┬─────────────────────────────────────────┐
-│                 timeslot                 │                location                │                  event                  │
-│                  int128                  │                 int128                 │                 int128                  │
-├──────────────────────────────────────────┼────────────────────────────────────────┼─────────────────────────────────────────┤
-│ -134063647976146309049043791223896883700 │ 85181227364560750048971459330392988815 │ -65014404565339851967879683214612768044 │
-└──────────────────────────────────────────┴────────────────────────────────────────┴─────────────────────────────────────────┘
-```
-
-```text
-┌────────────────────────────────────────┬────────────────────────────────────────┬─────────────────────────────────────────┐
-│                timeslot                │                location                │                  event                  │
-│                 int128                 │                 int128                 │                 int128                  │
-├────────────────────────────────────────┼────────────────────────────────────────┼─────────────────────────────────────────┤
-│ 62901011016747318977469778517845645961 │ 85181227364560750048971459330392988815 │ -65014404565339851967879683214612768044 │
-└────────────────────────────────────────┴────────────────────────────────────────┴─────────────────────────────────────────┘
-```
-
-```text
-┌──────────────────────────────────────────┬──────────┬──────────────────────────────────────────┐
-│                 timeslot                 │ location │                  event                   │
-│                  int128                  │  int128  │                  int128                  │
-├──────────────────────────────────────────┼──────────┼──────────────────────────────────────────┤
-│ -162418013182718436871288818115274808663 │        0 │ -135609337521255080720676586176293337793 │
-└──────────────────────────────────────────┴──────────┴──────────────────────────────────────────┘
-```
-
-## Creating a Macro for the Checksum Query
-
-We can turn the checksum query into a [table macro]({% link docs/sql/statements/create_macro.md %}#table-macros) with the new [`query_table` function]({% post_url 2024-09-09-announcing-duckdb-110 %}#query-and-query_table-functions):
-
-```sql
-CREATE MACRO checksum(table_name) AS TABLE
-    SELECT bit_xor(md5_number(COLUMNS(*)::VARCHAR))
-    FROM query_table(table_name);
-```
-
-This way, we can simply invoke it on the `schedule` table as follows (also leveraging DuckDB’s [`FROM`-first syntax]({% link docs/sql/query_syntax/from.md %})):
-
-```sql
-FROM checksum('schedule');
-```
-
-```text
-┌──────────────────────────────────────────┬────────────────────────────────────────┬─────────────────────────────────────────┐
-│                 timeslot                 │                location                │                  event                  │
-│                  int128                  │                 int128                 │                 int128                  │
-├──────────────────────────────────────────┼────────────────────────────────────────┼─────────────────────────────────────────┤
-│ -134063647976146309049043791223896883700 │ 85181227364560750048971459330392988815 │ -65014404565339851967879683214612768044 │
-└──────────────────────────────────────────┴────────────────────────────────────────┴─────────────────────────────────────────┘
-```
-
-## Closing Thoughts
-
-That’s it for today!
-We’ll be back soon with more DuckDB tricks and case studies. =
-In the meantime, if you have a trick that would like to share, please share it with the DuckDB team on our social media sites, or submit it to the [DuckDB Snippets site](https://duckdbsnippets.com/) (maintained by our friends at MotherDuck).
+In this blog post, we discussed how to run the taxi benchmark on DuckDB, and we've made all scripts available so you can benchmark your preferred system as well. We also demonstrated how this highly relevant benchmark can be used to evaluate our operators and gain insights into areas for further improvement.
