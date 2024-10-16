@@ -28,6 +28,8 @@ if response.status_code == 200:
         title = event.get("SUMMARY")
         if title is None:
             continue
+        else:
+            title = title.replace("DuckDB ", "").replace("Release ", "")
 
         version_search = re.search("([0-9]+\\.[0-9]+\\.[0-9])", title)
         if version_search:

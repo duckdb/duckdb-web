@@ -26,7 +26,7 @@ The planned dates of upcoming DuckDB releases are shown below.
 | Date | Version |
 |:-----|--------:|
 {%- for release in site.data.upcoming_releases reversed %}
-| {{ release.start_date }} | {{ release.title | replace: "Release ", "" }} |
+| {{ release.start_date }} | {{ release.title }} |
 {%- endfor %}
 {% else %}
 _There are no upcoming releases announced at the moment. Please check back later._
