@@ -32,7 +32,6 @@ This repository contains three main Python scripts:
 The benchmark is not intended to be flawless – no benchmark is. However, we believe that sharing these scripts is a positive step, and we welcome any contributions to make them cleaner and more efficient.
 
 The repository also includes a README file with detailed instructions on how to use it.
-
 This repository will serve as the foundation for the experiments conducted in this blog post.
 
 ### Preparing the Dataset
@@ -52,9 +51,14 @@ Once the files have been prepared, you can run the benchmark by running [`python
 
 The loading phase of the benchmark runs six times for each benchmark setting. For the first five runs, we focus on measuring the median loading time. During the sixth run, we collect resource usage data (e.g., CPU usage and disk reads/writes).
 
-Loading is performed using a DuckDB in-memory instance, meaning the data is not persisted to DuckDB storage and only exists while the connection is active. This is important to note because, as the dataset does not fit in memory, choosing not to persist the data has a substantial impact on performance. Specifically, loading the dataset should be significantly faster, while querying it will likely be slower. We made this choice for the benchmark since our primary focus is on testing the CSV loader rather than the queries.
+Loading is performed using an in-memory DuckDB instance, meaning the data is not persisted to DuckDB storage and only exists while the connection is active. This is important to note because, as the dataset does not fit in memory and is spilled into a temporary space on disk. The decision to not persist the data has a substantial impact on performance: it makes loading the dataset significantly faster, while querying it will somewhat slower as [DuckDB will use an uncompressed representation]({% link docs/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables). We made this choice for the benchmark since our primary focus is on testing the CSV loader rather than the queries.
 
-Our table schema is defined in [`schema.sql`](https://github.com/pdet/taxi-benchmark/blob/0.1/sql/schema.sql) and is structured as follows:
+Our table schema is defined in [`schema.sql`](https://github.com/pdet/taxi-benchmark/blob/0.1/sql/schema.sql).
+
+<details markdown='1'>
+<summary markdown='span'>
+[`schema.sql`](https://github.com/pdet/taxi-benchmark/blob/0.1/sql/schema.sql).
+</summary>
 
 ```sql
 CREATE TABLE trips (
@@ -110,6 +114,7 @@ CREATE TABLE trips (
     dropoff_ntaname         VARCHAR,
     dropoff_puma            VARCHAR);
 ```
+</details>
 
 The loader for the 65 files uses the following query:
 
