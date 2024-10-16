@@ -5,7 +5,7 @@ excerpt: |
   List of Community contributed open-source DuckDB extension 
 ---
 
-Welcome to the documentation for the DuckDB Community Extension Repository. This website contains all documentation specific to community extensions. 
+Welcome to the documentation for the DuckDB Community Extension Repository. This website contains all documentation specific to community extensions.
 For documentation on DuckDB itself, check out the [DuckDB docs](https://duckdb.org/docs/).
 
 ## What are Community Extensions
