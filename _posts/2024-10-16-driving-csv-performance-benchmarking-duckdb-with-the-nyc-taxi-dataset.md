@@ -161,14 +161,14 @@ We can also see what happens under the hood to verify our conclusion regarding t
 
 In the figure below, you can see a snapshot of CPU and disk utilization for the “Single File – Uncompressed” run. We observe that achieving 100% CPU utilization is challenging, and we frequently experience stalls due to data writes to disk, as we are creating a table from a dataset that does not fit into our memory. Another key point is that CPU utilization is closely tied to disk reads, indicating that our threads often wait for data before processing it. Implementing async IO for the CSV Reader/Writer could significantly improve performance for parallel processing, as a single thread could handle most of our disk I/O without negatively affecting CPU utilization.
 
-<a href="/images/blog/taxi/uncompressed_unset.png" target="_blank">
-<img src="/images/blog/taxi/uncompressed_unset.png" alt="Uncompressed Load Stats" width="100%" />
+<a href="/images/blog/taxi/utilization_uncompressed_unset.png" target="_blank">
+<img src="/images/blog/taxi/utilization_uncompressed_unset.png" alt="Uncompressed Load Stats" width="100%" />
 </a>
 
 Below, you can see a similar snapshot for loading the 65 compressed files. We frequently encounter stalls during data writes; however, CPU utilization is significantly better because we wait less time for the data to load (remember, the data is approximately 8 times smaller than in the uncompressed case). In this scenario, parallelization is also much easier. Like in the uncompressed case, these gaps in CPU utilization could be mitigated by async I/O, with the addition of a decomposed decompression algorithm.
 
-<a href="/images/blog/taxi/compressed_unset.png" target="_blank">
-<img src="/images/blog/taxi/compressed_unset.png" alt="Compressed Load Stats" width="100%" />
+<a href="/images/blog/taxi/utilization_compressed_unset.png" target="_blank">
+<img src="/images/blog/taxi/utilization_compressed_unset.png" alt="Compressed Load Stats" width="100%" />
 </a>
 
 ### Query Times
