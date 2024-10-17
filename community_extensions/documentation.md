@@ -15,7 +15,7 @@ Submitting a Community Extension is a matter of opening a pull request to the [C
 
 ### YAML Descriptor
 
-Structure of the YAML descritor is as follow:
+The structure of the YAML descriptor is as follow:
 
 | Field | Description |
 |--|--|
@@ -37,7 +37,7 @@ Extensions maintainers are encouraged to provide two optional fields in the desc
 
 | Field | Description |
 |--|--|
-| `docs.hello_world` | An `Hello, World!`, a self contained example of an extension capabilities |
+| `docs.hello_world` | A `Hello, World!`, a self contained example of an extension capabilities |
 | `docs.extended_description` | Extra context on the extension, relevant links, or a tour of the extension capabilities |
 
 ### Hosted Extension Documentation Page
