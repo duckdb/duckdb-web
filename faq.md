@@ -129,6 +129,20 @@ DuckDB can also run in [in-memory mode]({% link docs/connect/overview.md %}#in-m
 
 <div class="qa-wrap" markdown="1">
 
+### Is DuckDB an in-memory database?
+
+<div class="answer" markdown="1">
+
+DuckDB can operate as both a disk-oriented and as an in-memory database system.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### Are DuckDB's database files portable between different DuckDB versions and clients?
 
 <div class="answer" markdown="1">
