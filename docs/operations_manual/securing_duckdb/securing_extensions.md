@@ -58,13 +58,13 @@ By default, DuckDB automatically installs and loads known extensions.
 To disable autoinstalling known extensions, run:
 
 ```sql
-SET autoinstall_known_extensions = true;
+SET autoinstall_known_extensions = false;
 ```
 
 To disable autoloading known extensions, run:
 
 ```sql
-SET autoload_known_extensions = true;
+SET autoload_known_extensions = false;
 ```
 
 To lock this configuration, use the [`lock_configuration` option]({% link docs/operations_manual/securing_duckdb/overview.md %}#locking-configurations):
