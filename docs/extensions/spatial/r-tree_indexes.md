@@ -33,7 +33,7 @@ To create an R-tree index, simply use the `CREATE INDEX` statement with the `USI
 
 ```sql
 -- Create a table with a geometry column
-CREATE TABLE my_tbl (geom GEOMETRY);
+CREATE TABLE my_table (geom GEOMETRY);
 
 -- Create an R-tree index on the geometry column
 CREATE INDEX my_idx ON my_table USING RTREE (geom);
