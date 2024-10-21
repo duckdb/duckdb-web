@@ -1410,6 +1410,10 @@
               "url": "non-deterministic_behavior"
             },
             {
+              "page": "Embedding DuckDB",
+              "url": "embedding_duckdb"
+            },
+            {
               "page": "DuckDB's Footprint",
               "slug": "footprint_of_duckdb",
               "subsubfolderitems": [
