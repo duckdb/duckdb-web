@@ -44,10 +44,10 @@ We summarize the main distributions in the table below.
 | [autocomplete]({% link docs/extensions/autocomplete.md %}) | yes | yes |     |     |     |     |
 | [excel]({% link docs/extensions/excel.md %})               | yes |     |     |     |     |     |
 | [fts]({% link docs/extensions/full_text_search.md %})      | yes |     | yes |     |     |     |
-| [httpfs]({% link docs/extensions/httpfs/overview.md %})             |     |     | yes |     |     |     |
+| [httpfs]({% link docs/extensions/httpfs/overview.md %})    |     |     |     |     |     |     |
 | [icu]({% link docs/extensions/icu.md %})                   | yes | yes | yes |     | yes | yes |
 | [json]({% link docs/extensions/json.md %})                 | yes | yes | yes |     | yes | yes |
-| [parquet]({% link docs/data/parquet/overview.md %})           | yes | yes | yes | yes | yes | yes |
+| [parquet]({% link docs/data/parquet/overview.md %})        | yes | yes | yes | yes | yes | yes |
 | [tpcds]({% link docs/extensions/tpcds.md %})               |     |     | yes |     |     |     |
 | [tpch]({% link docs/extensions/tpch.md %})                 | yes |     | yes |     |     |     |
 
