@@ -4,7 +4,7 @@ title: Delta Extension
 github_repository: https://github.com/duckdb/duckdb_delta
 ---
 
-The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension offers **read support** for delta tables, both local and remote.
+The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension offers **read support** for Delta tables, both local and remote.
 
 For implementation details, see the [announcement blog post]({% post_url 2024-06-10-delta %}).
 
@@ -22,14 +22,16 @@ LOAD delta;
 
 ## Usage
 
-To scan a local delta table, run:
+To scan a local Delta table, run:
 
 ```sql
 SELECT *
 FROM delta_scan('file:///some/path/on/local/machine');
 ```
 
-To scan a delta table in an S3 bucket, run:
+### Reading from an S3 Bucket
+
+To scan a Delta table in an [S3 bucket]({% link docs/extensions/httpfs/s3api.md %}), run:
 
 ```sql
 SELECT *
@@ -56,6 +58,26 @@ CREATE SECRET (
 );
 SELECT *
 FROM delta_scan('s3://some/public/table/in/my-region');
+```
+
+### Reading from Azure Blob Storage
+
+To scan a Delta table in an [Azure Blob Storage bucket]({% link docs/extensions/azure.md %}#azure-blob-storage), run:
+
+```sql
+SELECT *
+FROM delta_scan('az://my-container/my-table');
+```
+
+For authenticating to Azure Blob Storage, DuckDB [Secrets]({% link docs/configuration/secrets_manager.md %}) are supported:
+
+```sql
+CREATE SECRET (
+    TYPE AZURE,
+    PROVIDER CREDENTIAL_CHAIN
+);
+SELECT *
+FROM delta_scan('az://my-container/my-table-with-auth');
 ```
 
 ## Features

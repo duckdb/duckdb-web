@@ -20,7 +20,7 @@ LOAD azure;
 
 Once the [authentication](#authentication) is set up, you can query Azure storage as follows:
 
-### For Azure Blob Storage
+### Azure Blob Storage
 
 Allowed URI schemes: `az` or `azure`
 
@@ -53,7 +53,7 @@ SELECT *
 FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/*.csv';
 ```
 
-### For Azure Data Lake Storage (ADLS)
+### Azure Data Lake Storage (ADLS)
 
 Allowed URI schemes: `abfss`
 
