@@ -36,6 +36,10 @@
               "url": "overview"
             },
             {
+              "page": "Data Sources",
+              "url": "data_sources"
+            },
+            {
               "page": "CSV Files",
               "slug": "csv",
               "subsubfolderitems": [
