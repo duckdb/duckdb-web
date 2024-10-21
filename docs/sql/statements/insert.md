@@ -170,7 +170,7 @@ INSERT INTO tbl
 
 These statements finish successfully and leaves the table with the row `<i: 1, j: 42>`.
 
-#### Shorthand for `DO NOTHING`
+#### `INSERT OR IGNORE INTO`
 
 The `INSERT OR IGNORE INTO ...` statement is a shorter syntax alternative to `INSERT INTO ... ON CONFLICT DO NOTHING`.
 For example, the following statements are equivalent:
@@ -236,7 +236,7 @@ SELECT * FROM tbl;
 |--:|----:|
 | 1 | 336 |
 
-#### Shorthand
+#### `INSERT OR REPLACE INTO`
 
 The `INSERT OR REPLACE INTO ...` statement is a shorter syntax alternative to `INSERT INTO ... DO UPDATE SET c1 = EXCLUDED.c1, c2 = EXCLUDED.c2, ...`.
 That is, it updates every column of the **existing** row to the new values of the **to-be-inserted** row.
