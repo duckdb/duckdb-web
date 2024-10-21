@@ -941,6 +941,9 @@ td.icon{
 		height: auto!important;
 	}
 }
+table thead th {
+	text-align: left !important;
+}
 .media_table + table thead {
 	display: none;
 }
