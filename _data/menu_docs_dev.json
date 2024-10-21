@@ -1370,6 +1370,10 @@
                 {
                   "page": "Full-Text Search",
                   "url": "full_text_search"
+                },
+                {
+                  "page": "query and query_table Functions",
+                  "url": "query_and_query_table_functions"
                 }
               ]
             },
