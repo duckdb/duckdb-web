@@ -189,9 +189,8 @@ SELECT n.*, r.*
 FROM l_nations n JOIN l_regions r USING (regionkey);
 ```
 
-The expressions do not have to be equalities – any predicate can be used:
-
-Return the pairs of jobs where one ran longer but cost less:
+The expressions do not have to be equalities – any predicate can be used.
+For example, to return the pairs of jobs where one ran longer but cost less, run:
 
 ```sql
 SELECT s1.t_id, s2.t_id
