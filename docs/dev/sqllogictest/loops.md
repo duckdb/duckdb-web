@@ -67,7 +67,7 @@ CREATE TABLE integers AS SELECT * FROM range(0, 100, 1) t1(i);
 To create the table `strings` with 100 times the value `hello`, run:
 
 ```sql
-CREATE TABLE strings AS SELECT 'hello' AS s FROM range(0, 100, 1);
+CREATE TABLE strings AS SELECT * FROM repeat('hello', 100) t1(s);
 ```
 
 Using these two functions, together with clever use of cross products and other expressions, many different types of datasets can be efficiently generated. The `random()` function can also be used to generate random data.
