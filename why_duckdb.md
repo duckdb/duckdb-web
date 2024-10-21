@@ -81,5 +81,5 @@ Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorg
 * **Test framework:** DuckDB uses the [Catch2](https://github.com/catchorg/Catch2) unit test framework.
 * **Test cases:** We use the [SQL Logic Tests from SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki) to test DuckDB.
 * **Result validation:** [Manuel Rigger](https://www.manuelrigger.at) used his excellent [SQLancer](https://github.com/sqlancer/sqlancer) tool to verify DuckDB result correctness.
-* **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) to generate random queries for additional testing.
+* **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) via the [`sqlsmith` extension]({% link docs/extensions/sqlsmith.md %}) to generate random queries for additional testing.
 * **JSON parser:** We use [yyjson](https://github.com/ibireme/yyjson), a high performance JSON library written in ANSI C, to parse JSON in DuckDB's [JSON Extension]({% link docs/data/json/overview.md %}).
