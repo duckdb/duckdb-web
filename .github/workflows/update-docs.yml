@@ -36,7 +36,7 @@ jobs:
           EXECUTE_COMMANDS: |
             ./scripts/generate_all_docs.sh duckdb
 
-            # remove things we don't want commited
+            # remove things we don't want committed
             rm *.zip
             rm -rf duckdb duckdb-node
           COMMIT_MESSAGE: "chore: auto update docs"
