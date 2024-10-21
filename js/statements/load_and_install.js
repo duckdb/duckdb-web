@@ -1,8 +1,11 @@
 function GenerateLoad(options = {}) {
     return Diagram([
         AutomaticStack([
-            Keyword("LOAD"),
-            Expression("extension-name")
+            Keyword("LOAD"),            
+            Choice(0, [
+                Expression("extension-name"),
+                Expression("'extension-path'")
+            ]),
         ])
     ])
 }
