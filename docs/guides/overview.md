@@ -113,6 +113,7 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 * [Friendly SQL]({% link docs/sql/dialect/friendly_sql.md %})
 * [As-of join]({% link docs/guides/sql_features/asof_join.md %})
 * [Full-text search]({% link docs/guides/sql_features/full_text_search.md %})
+* [`query` and `query_table` functions]({% link docs/guides/sql_features/query_and_query_table_functions.md %})
 
 ## SQL Editors and IDEs
 

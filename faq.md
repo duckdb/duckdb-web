@@ -134,8 +134,8 @@ DuckDB can also run in [in-memory mode]({% link docs/connect/overview.md %}#in-m
 <div class="answer" markdown="1">
 
 It is a common misconception that DuckDB is an in-memory database.
-While DuckDB _can_ work in-memory, it not an in-memory database:
-DuckDB can make use of available memory for caching, it also fully supports disk-based persistence and [offloading larger-than-memory operations]({% link docs/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing) to disks.
+While DuckDB _can_ work in-memory, it is **not an in-memory database**.
+DuckDB can make use of available memory for caching, it also fully supports disk-based persistence and [offloading larger-than-memory operations]({% link docs/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing) to disk.
 
 </div>
 

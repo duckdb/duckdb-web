@@ -186,3 +186,10 @@ Note that the use of `==` is not encouraged due to its limited portability.
 In PostgreSQL, the `VACUUM` statement garbage collects tables and analyzes tables.
 In DuckDB, the [`VACUUM` statement]({% link docs/sql/statements/vacuum.md %}) is only used to rebuild statistics.
 For instruction on reclaiming space, refer to the [“Reclaiming space” page]({% link docs/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).
+
+## Functions
+
+### `to_date` Function
+
+DuckDB does not support the [`to_date` PostgreSQL date formatting function](https://www.postgresql.org/docs/17/functions-formatting.html).
+Instead, please use the [`strptime` function]({% link docs/sql/functions/dateformat.md %}#strptime-examples).

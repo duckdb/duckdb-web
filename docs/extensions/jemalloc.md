@@ -13,12 +13,18 @@ The availability of the `jemalloc` extension depends on the operating system.
 
 ### Linux
 
-The Linux version of DuckDB ships with the `jemalloc` extension by default.
-
+On Linux, the AMD64 (x86_64) distribution of DuckDB ships with the `jemalloc` extension.
 To disable the `jemalloc` extension, [build DuckDB from source]({% link docs/dev/building/build_instructions.md %}) and set the `SKIP_EXTENSIONS` flag as follows:
 
 ```bash
 GEN=ninja SKIP_EXTENSIONS="jemalloc" make
+```
+
+The ARM64 (AArch64) DuckDB distribution on Linux does not ship with the `jemalloc` extension.
+To include it, build it as follows;
+
+```bash
+GEN=ninja BUILD_JEMALLOC=1 make
 ```
 
 ### macOS
@@ -32,3 +38,11 @@ GEN=ninja BUILD_JEMALLOC=1 make
 ### Windows
 
 On Windows, this extension is not available.
+
+## Configuration Flags
+
+By default, jemalloc's background threads are disabled. To enable them, use the following configuration option:
+
+```sql
+SET allocator_background_threads = true;
+```

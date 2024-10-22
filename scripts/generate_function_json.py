@@ -31,8 +31,13 @@ def get_result(example: str) -> str:
             ],
             stderr=PIPE,
         )
-        rows = json.loads(out.splitlines()[-1])
-        return rows[0]['result']
+        # handle nan separately: json.loads does not accept NaN values
+        lines = out.splitlines()
+        if lines[-1].decode() == '[{"result":nan}]':
+            return 'nan'
+        else:
+            rows = json.loads(lines[-1])
+            return rows[0]['result']
     except CalledProcessError as e:
         print(example.strip(), e.stderr.decode())
         return None

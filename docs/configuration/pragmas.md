@@ -66,12 +66,6 @@ dflt_value VARCHAR, -- default value of the column, or NULL if not specified
 pk BOOLEAN          -- part of the primary key or not
 ```
 
-To also show table structure, but in a slightly different format (included for compatibility):
-
-```sql
-PRAGMA show('table_name');
-```
-
 #### Database Size
 
 Get the file and memory size of each database:

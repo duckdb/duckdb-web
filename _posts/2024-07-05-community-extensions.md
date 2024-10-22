@@ -13,7 +13,7 @@ excerpt: "DuckDB extensions can now be published via the [DuckDB Community Exten
 
 One of the main design goals of DuckDB is *simplicity*, which – to us – implies that the system should be rather nimble, very light on dependencies, and generally small enough to run on constrained platforms like [WebAssembly]({% link docs/api/wasm/overview.md %}). This goal is in direct conflict with very reasonable user requests to support advanced features like spatial data analysis, vector indexes, connectivity to various other databases, support for data formats, etc. Baking all those features into a monolithic binary is certainly possible and the route some systems take. But we want to preserve DuckDB’s simplicity. Also, shipping all possible features would be quite excessive for most users because no use cases require *all* extensions at the same time (the “Microsoft Word paradox”, where even power users only use a few features of the system, but the exact set of features vary between users).
 
-To achieve this, DuckDB has a powerful extension mechanism, which allows users to add new functionalities to DuckDB. This mechanism allows for registering new functions, supporting new file formats and compression methods, handling new network protocols, etc. In fact, many of DuckDB’s popular features are implemented as extensions: the [Parquet reader]({% link docs/data/parquet/overview.md %}), the [JSON reader]({% link docs/extensions/json.md %}), and the [HTTPS/S3 connector]({% link docs/extensions/httpfs/overview.md %}) all use the extension mechanism.
+To achieve this, DuckDB has a powerful extension mechanism, which allows users to add new functionalities to DuckDB. This mechanism allows for registering new functions, supporting new file formats and compression methods, handling new network protocols, etc. In fact, many of DuckDB’s popular features are implemented as extensions: the [Parquet reader]({% link docs/data/parquet/overview.md %}), the [JSON reader]({% link docs/data/json/overview.md %}), and the [HTTPS/S3 connector]({% link docs/extensions/httpfs/overview.md %}) all use the extension mechanism.
 
 ### Using Extensions
 
@@ -61,7 +61,7 @@ HAVING cnt > 10;
 
 On load, the extension’s signature is checked, both to ensure platform and versions are compatible, and to verify that the source of the binary is the community extensions repository. Extensions are built, signed and distributed for Linux, macOS, Windows, and WebAssembly. This allows extensions to be available to any DuckDB client using version 1.0.0 and upcoming versions.
 
-The `h3` extension’s documentation is available at <https://community-extensions.duckdb.org/extensions/h3.html>.
+The `h3` extension’s documentation is available at <https://duckdb.org/community_extensions/extensions/h3>.
 
 ### Developer Experience
 

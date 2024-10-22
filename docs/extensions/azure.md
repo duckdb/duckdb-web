@@ -20,7 +20,7 @@ LOAD azure;
 
 Once the [authentication](#authentication) is set up, you can query Azure storage as follows:
 
-### For Azure Blob Storage
+### Azure Blob Storage
 
 Allowed URI schemes: `az` or `azure`
 
@@ -53,7 +53,7 @@ SELECT *
 FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/*.csv';
 ```
 
-### For Azure Data Lake Storage (ADLS)
+### Azure Data Lake Storage (ADLS)
 
 Allowed URI schemes: `abfss`
 
@@ -123,8 +123,8 @@ The Azure extension has two ways to configure the authentication. The preferred 
 
 Multiple [Secret Providers]({% link docs/configuration/secrets_manager.md %}#secret-providers) are available for the Azure extension:
 
-> * If you need to define different secrets for different storage accounts you can use [the `SCOPE` configuration]({% link docs/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type).
-> * If you use fully qualified path then the `ACCOUNT_NAME` attribute is optional.
+* If you need to define different secrets for different storage accounts, use [the `SCOPE` configuration]({% link docs/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type). Note that the `SCOPE` requires a trailing slash (`SCOPE 'azure://some_container/'`).
+* If you use fully qualified path then the `ACCOUNT_NAME` attribute is optional.
 
 #### `CONFIG` Provider
 

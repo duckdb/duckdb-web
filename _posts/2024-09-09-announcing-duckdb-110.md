@@ -95,7 +95,7 @@ SELECT (SELECT unnest(range(10))) AS result;
 
 ## Community Extensions
 
-Recently we introduced [Community Extensions]({% post_url 2024-07-05-community-extensions %}). Community extensions allow anyone to build extensions for DuckDB, that are then built and distributed by us. The [list of community extensions](https://community-extensions.duckdb.org/list_of_extensions.html) has been growing since then.
+Recently we introduced [Community Extensions]({% post_url 2024-07-05-community-extensions %}). Community extensions allow anyone to build extensions for DuckDB, that are then built and distributed by us. The [list of community extensions](/community_extensions/list_of_extensions) has been growing since then.
 
 In this release, we have been working towards making community extensions easier to build and produce. This release includes a new method of registering extensions [using the C API](https://github.com/duckdb/duckdb/pull/12682) in addition to a lot of extensions to the C API allowing [scalar functions](https://github.com/duckdb/duckdb/pull/11786), [aggregate functions](https://github.com/duckdb/duckdb/pull/13229) and [custom types](https://github.com/duckdb/duckdb/pull/13499) to be defined. These changes will enable building extensions against a stable API, that are smaller in size, that will work across different DuckDB versions. In addition, these changes will enable building extensions in other programming languages in the future.
 

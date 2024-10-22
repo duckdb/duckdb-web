@@ -31,7 +31,7 @@
 			<div class="headercontent">
 				<a href="/community_extensions">
 					<div class="duckdbhome">
-						<img src="https://duckdb.org/images/logo-dl/DuckDB_Logo.png" alt="DuckDB Logo for Download" class="downloadlogo">
+						<img src="/images/logo-dl/DuckDB_Logo.png" alt="DuckDB Logo for Download" class="downloadlogo">
 						<div id="duckdb_logo"></div>
 					</div>
 				</a>
@@ -48,7 +48,7 @@
 						</div>
 					</nav>
 				</div>
-				<a class="button yellow" href="https://duckdb.org/docs/installation/" target="_blank">Install DuckDB</a>
+				<a class="button yellow" href="/docs/installation/" target="_blank">Install DuckDB</a>
 			</div>
 		</div>
 	</header>
@@ -71,6 +71,12 @@
 				</div>
 
 				<p>{{ page.extension.description }}</p>
+
+				<div class="external">
+          <a href="https://github.com/{{ page.repo.github }}" target="_blank" class="button transparent github">Extension repository on GitHub {% if page.extension_star_count %} <span class="starcount">{{ page.extension_star_count }}</span>{% endif %}</a>
+          <a href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank" class="button transparent github">Extension descriptor (YAML)</a>
+          <a href="/community_extensions/download_metrics" target="_blank" class="button transparent github">Weekly downloads 📈 {{ page.extension_download_count }} </a>
+        </div>
 
 				{% assign ct = content | toc %}
 				{% include anchor_headings.html html=content %}

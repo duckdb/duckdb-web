@@ -10,7 +10,7 @@ See the [announcement blog post]({% post_url 2024-05-03-vector-similarity-search
 
 ## Usage
 
-To create a new HNSW index on a table with an `ARRAY` column, use the `CREATE INDEX` statement with the `USING HNSW` clause. For example:
+To create a new HNSW (Hierarchical Navigable Small Worlds) index on a table with an `ARRAY` column, use the `CREATE INDEX` statement with the `USING HNSW` clause. For example:
 
 ```sql
 CREATE TABLE my_vector_table (vec FLOAT[3]);
@@ -25,10 +25,12 @@ SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3]) 
 ```
 
 Additionally, the overloaded `min_by(col, arg, n)` can also be accelerated with the `HNSW` index if the `arg` argument is a matching distance metric function. This can be used to do quick one-shot nearest neighbor searches. For example, to get the top 3 rows with the closest vectors to `[1, 2, 3]`:
+
 ```sql
 SELECT min_by(my_vector_table, array_distance(vec, [1, 2, 3]::FLOAT[3]), 3) as result FROM my_vector_table;
 ---- [{'vec': [1.0, 2.0, 3.0]}, {'vec': [1.0, 2.0, 4.0]}, {'vec': [2.0, 2.0, 3.0]}] 
 ```
+
 Note how we pass the table name as the first argument to `min_by` to return a struct containing the entire matched row.
 
 We can verify that the index is being used by checking the `EXPLAIN` output and looking for the `HNSW_INDEX_SCAN` node in the plan:
@@ -112,7 +114,6 @@ The HNSW index does support inserting, updating and deleting rows from the table
 * Deletes are not immediately reflected in the index, but are instead “marked” as deleted, which can cause the index to grow stale over time and negatively impact query quality and performance.
 
 To remedy the last point, you can call the `PRAGMA hnsw_compact_index('⟨index name⟩')` pragma function to trigger a re-compaction of the index pruning deleted items, or re-create the index after a significant number of updates.
-
 
 ## Bonus: Vector Similarity Search Joins
 

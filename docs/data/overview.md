@@ -3,11 +3,13 @@ layout: docu
 title: Importing Data
 ---
 
-The first step to using a database system is to insert data into that system. DuckDB provides several data ingestion methods that allow you to easily and efficiently fill up the database. In this section, we provide an overview of these methods so you can select which one is best suited for your use case.
+The first step to using a database system is to insert data into that system.
+DuckDB provides can directly connect to [many popular data sources]({% link docs/data/data_sources.md %}) and offers several data ingestion methods that allow you to easily and efficiently fill up the database.
+On this page, we provide an overview of these methods so you can select which one is best suited for your use case.
 
-## Insert Statements
+## `INSERT` Statements
 
-Insert statements are the standard way of loading data into a database system. They are suitable for quick prototyping, but should be avoided for bulk loading as they have significant per-row overhead.
+`INSERT` statements are the standard way of loading data into a database system. They are suitable for quick prototyping, but should be avoided for bulk loading as they have significant per-row overhead.
 
 ```sql
 INSERT INTO people VALUES (1, 'Mark');

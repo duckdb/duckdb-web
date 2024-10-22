@@ -45,12 +45,12 @@ endloop
 
 |     Preset     |                          Expansion                           |
 |----------------|--------------------------------------------------------------|
-| <compression>  | none uncompressed rle bitpacking dictionary fsst chimp patas |
-| <signed>       | tinyint smallint integer bigint hugeint                      |
-| <unsigned>     | utinyint usmallint uinteger ubigint uhugeint                 |
-| <integral>     | <signed> <unsigned>                                          |
-| <numeric>      | <integral> float double                                      |
-| <alltypes>     | <numeric> bool interval varchar json                         |
+| ⟨compression⟩  | none uncompressed rle bitpacking dictionary fsst chimp patas |
+| ⟨signed⟩       | tinyint smallint integer bigint hugeint                      |
+| ⟨unsigned⟩     | utinyint usmallint uinteger ubigint uhugeint                 |
+| ⟨integral⟩     | ⟨signed⟩ ⟨unsigned⟩                                          |
+| ⟨numeric⟩      | ⟨integral⟩ float double                                      |
+| ⟨alltypes⟩     | ⟨numeric⟩ bool interval varchar json                         |
 
 > Use large loops sparingly. Executing hundreds of thousands of SQL statements will slow down tests unnecessarily. Do not use loops for inserting data.
 
@@ -67,7 +67,7 @@ CREATE TABLE integers AS SELECT * FROM range(0, 100, 1) t1(i);
 To create the table `strings` with 100 times the value `hello`, run:
 
 ```sql
-CREATE TABLE strings AS SELECT 'hello' AS s FROM range(0, 100, 1);
+CREATE TABLE strings AS SELECT * FROM repeat('hello', 100) t1(s);
 ```
 
 Using these two functions, together with clever use of cross products and other expressions, many different types of datasets can be efficiently generated. The `random()` function can also be used to generate random data.

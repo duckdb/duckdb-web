@@ -21,7 +21,7 @@ redirect_from:
 | [icu]({% link docs/extensions/icu.md %})                   |                                                                                  | Adds support for time zones and collations using the ICU library                   | yes           |                         |
 | [inet]({% link docs/extensions/inet.md %})                 |  [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_inet)     | Adds support for IP-related data types and functions                               | yes           |                         |
 | [jemalloc]({% link docs/extensions/jemalloc.md %})         |                                                                                  | Overwrites system allocator with jemalloc                                          | no            |                         |
-| [json]({% link docs/extensions/json.md %})                 |                                                                                  | Adds support for JSON operations                                                   | yes           |                         |
+| [json]({% link docs/data/json/overview.md %})                 |                                                                                  | Adds support for JSON operations                                                   | yes           |                         |
 | [mysql]({% link docs/extensions/mysql.md %})               | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_mysql)     | Adds support for reading from and writing to a MySQL database                      | no            |                         |
 | [parquet]({% link docs/data/parquet/overview.md %})           |                                                                                  | Adds support for reading and writing Parquet files                                 | (built-in)    |                         |
 | [postgres]({% link docs/extensions/postgres.md %})         | [<span class="github">GitHub</span>](https://github.com/duckdb/postgres_scanner) | Adds support for reading from and writing to a PostgreSQL database                 | yes           | postgres_scanner        |
@@ -44,10 +44,10 @@ We summarize the main distributions in the table below.
 | [autocomplete]({% link docs/extensions/autocomplete.md %}) | yes | yes |     |     |     |     |
 | [excel]({% link docs/extensions/excel.md %})               | yes |     |     |     |     |     |
 | [fts]({% link docs/extensions/full_text_search.md %})      | yes |     | yes |     |     |     |
-| [httpfs]({% link docs/extensions/httpfs/overview.md %})             |     |     | yes |     |     |     |
+| [httpfs]({% link docs/extensions/httpfs/overview.md %})    |     |     |     |     |     |     |
 | [icu]({% link docs/extensions/icu.md %})                   | yes | yes | yes |     | yes | yes |
-| [json]({% link docs/extensions/json.md %})                 | yes | yes | yes |     | yes | yes |
-| [parquet]({% link docs/data/parquet/overview.md %})           | yes | yes | yes | yes | yes | yes |
+| [json]({% link docs/data/json/overview.md %})                 | yes | yes | yes |     | yes | yes |
+| [parquet]({% link docs/data/parquet/overview.md %})        | yes | yes | yes | yes | yes | yes |
 | [tpcds]({% link docs/extensions/tpcds.md %})               |     |     | yes |     |     |     |
 | [tpch]({% link docs/extensions/tpch.md %})                 | yes |     | yes |     |     |     |
 

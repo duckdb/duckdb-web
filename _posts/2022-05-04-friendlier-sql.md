@@ -297,6 +297,6 @@ In addition to what has already been implemented, several other improvements hav
  - Incremental column aliases
     - Refer to previously defined aliases in subsequent calculated columns rather than re-specifying the calculations
  - Dot operators for JSON types
-    - The JSON extension is brand new ([see our documentation!]({% link docs/extensions/json.md %})) and already implements friendly `->` and `->>` syntax
+    - The JSON extension is brand new ([see our documentation!]({% link docs/data/json/overview.md %})) and already implements friendly `->` and `->>` syntax
 
 Thanks for checking out DuckDB! May the Force be with you...

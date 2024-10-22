@@ -767,13 +767,13 @@ pre {
 }
 code.language-plaintext {
 	background-color: $black100;
-	font-family: $fontMonoBold;
+	font-family: $fontMonoMedium;
 	border-radius: 3px;
 	padding: 0px 2px;
    	border: 1px solid $black200;
 	margin: 0;
 	em{
-		font-family: $fontMonoItalicBold;
+		font-family: $fontMonoItalicMedium;
 	}
 }
 pre {
@@ -941,6 +941,9 @@ td.icon{
 		height: auto!important;
 	}
 }
+table thead th {
+	text-align: left !important;
+}
 .media_table + table thead {
 	display: none;
 }
@@ -1085,7 +1088,7 @@ body.documentation main .wrap a.pill{
 				font-variant-ligatures: none;
 		em code{
 				padding: .06em 0px .05em;
-			font-family: $fontMonoItalicBold;
+			font-family: $fontMonoItalicMedium;
 			font-style: normal;
 			-webkit-font-variant-ligatures: none;
 				font-variant-ligatures: none;

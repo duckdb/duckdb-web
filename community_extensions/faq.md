@@ -3,6 +3,43 @@ layout: community_extension_doc
 title: Frequently Asked Questions
 ---
 
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
+### Are community extensions safe to install?
+
+<div class="answer" markdown="1">
+
+Similarly to other package management systems, DuckDB's Community Extensions repository contain community-contributed code,
+therefore, there are no guarantees regarding the content of extensions.
+The DuckDB Foundation and DuckDB Labs do not vet the code within community extensions and, therefore, cannot guarantee that DuckDB community extensions are safe to use.
+
+For details on securing your DuckDB setup, please refer to the [Securing Extensions page]({% link docs/operations_manual/securing_duckdb/securing_extensions.md %}).
+</div>
+
+</div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
+### How can I secure my DuckDB setup when installing extensions?
+
+<div class="answer" markdown="1">
+
+The loading of community extensions can be explicitly disabled with the following one-way configuration option:
+
+```sql
+SET allow_community_extensions = false;
+```
+
+For details on securing your DuckDB setup, please refer to the [Securing Extensions page]({% link docs/operations_manual/securing_duckdb/securing_extensions.md %}).
+</div>
+
+</div>
+
 <!-- Q&A entry -->
 
 <div class="qa-wrap" markdown="1">
