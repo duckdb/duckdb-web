@@ -29,6 +29,7 @@ docs:
     Additionally, the string representation is lexicographically sortable while preserving the sort order of the timestamps.
 
 extension_star_count: 13
+image: "/images/community_extensions/social_preview/preview_community_extension_ulid.png"
 
 ---
 

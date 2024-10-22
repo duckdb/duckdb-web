@@ -30,6 +30,7 @@ docs:
     Currently not available in Windows and Wasm, due to different but likely solvable compile time problems to be sorted out independently.
 
 extension_star_count: 3 
+image: "/images/community_extensions/social_preview/preview_community_extension_magic.png"
 
 ---
 

@@ -119,6 +119,8 @@ repo:
   ref: 87bb25c92bc2073e5bb085543a649477a964fff0
 
 extension_star_count: 28
+image: "/images/community_extensions/social_preview/preview_community_extension_lindel.png"
+ 
 
 ---
 

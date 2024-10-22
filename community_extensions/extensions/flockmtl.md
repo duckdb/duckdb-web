@@ -52,6 +52,7 @@ docs:
     This extension is experimental and potentially unstable. Do not use it in production.
 
 extension_star_count: 31
+image: "/images/community_extensions/social_preview/preview_community_extension_flockmtl.png"
 
 ---
 

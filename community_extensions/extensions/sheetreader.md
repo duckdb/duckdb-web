@@ -83,6 +83,7 @@ docs:
     ```
 
 extension_star_count: 38
+image: "/images/community_extensions/social_preview/preview_community_extension_scheetreader.png"
 
 ---
 

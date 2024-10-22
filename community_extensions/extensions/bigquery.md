@@ -53,6 +53,7 @@ docs:
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/hafenkran/duckdb-bigquery).
 
 extension_star_count: 47
+image: "/images/community_extensions/social_preview/preview_community_extension_bigquery.png"
 
 ---
 
