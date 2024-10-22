@@ -7,6 +7,8 @@ redirect_from:
 ---
 
 DuckDB supports SQL functions that are useful for reading values from existing JSON and creating new JSON data.
+JSON is supported with the `json` extension which is shipped with most DuckDB distributions and is auto-loaded on first use.
+If you would like to install or load it manually, please consult the [“Installing and Loading” page]({% link docs/data/json/installing_and_loading.md %}).
 
 ## About JSON
 
