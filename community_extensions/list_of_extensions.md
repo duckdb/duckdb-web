@@ -5,6 +5,6 @@ excerpt: |
   This page lists DuckDB's Community Extensions.
 ---
 
-All the available community extensions are listed below, clicking on any of them will take you to their respective documentation page.
+All the available Community Extensions are listed below, clicking on any of them will take you to their respective documentation page.
 
 {% include_relative list_of_community_extensions.md %}
