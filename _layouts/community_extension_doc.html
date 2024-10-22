@@ -71,12 +71,14 @@
 				</div>
 
 				<p>{{ page.extension.description }}</p>
-
+				
+				{% if page.extension_star_count %}
 				<div class="external">
-          <a href="https://github.com/{{ page.repo.github }}" target="_blank" class="button transparent github">Extension repository on GitHub {% if page.extension_star_count %} <span class="starcount">{{ page.extension_star_count }}</span>{% endif %}</a>
-          <a href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank" class="button transparent github">Extension descriptor (YAML)</a>
-          <a href="/community_extensions/download_metrics" target="_blank" class="button transparent github">Weekly downloads 📈 {% if page.extension_download_count %}{{ page.extension_download_count }}{% else %}n/a{% endif %}</a>
-        </div>
+					<a href="https://github.com/{{ page.repo.github }}" target="_blank" class="button transparent github">Extension repository on GitHub {% if page.extension_star_count %} <span class="starcount">{{ page.extension_star_count }}</span>{% endif %}</a>
+					<a href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank" class="button transparent github">Extension descriptor (YAML)</a>
+					<a href="/community_extensions/download_metrics" target="_blank" class="button transparent github">Weekly downloads 📈 {% if page.extension_download_count %}{{ page.extension_download_count }}{% else %}n/a{% endif %}</a>
+				</div>
+				{% endif %}
 
 				{% assign ct = content | toc %}
 				{% include anchor_headings.html html=content %}
