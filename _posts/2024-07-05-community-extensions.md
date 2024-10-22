@@ -61,7 +61,7 @@ HAVING cnt > 10;
 
 On load, the extension’s signature is checked, both to ensure platform and versions are compatible, and to verify that the source of the binary is the community extensions repository. Extensions are built, signed and distributed for Linux, macOS, Windows, and WebAssembly. This allows extensions to be available to any DuckDB client using version 1.0.0 and upcoming versions.
 
-The `h3` extension’s documentation is available at <https://community-extensions.duckdb.org/extensions/h3.html>.
+The `h3` extension’s documentation is available at <https://duckdb.org/community_extensions/extensions/h3>.
 
 ### Developer Experience
 
