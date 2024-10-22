@@ -33,7 +33,7 @@ To efficiently support this workload, it is critical to reduce the amount of CPU
 
 ## Extensible
 
-DuckDB offers a [flexible extension mechanism]({% link docs/extensions/overview.md %}) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format]({% link docs/data/parquet/overview.md %}), [JSON]({% link docs/extensions/json.md %}), [time zones]({% link docs/extensions/icu.md %}), and supports for the [HTTP(S) and S3 protocols]({% link docs/extensions/httpfs/overview.md %}) are implemented as extensions. Extensions also [work in DuckDB Wasm]({% post_url 2021-10-29-duckdb-wasm %}).
+DuckDB offers a [flexible extension mechanism]({% link docs/extensions/overview.md %}) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format]({% link docs/data/parquet/overview.md %}), [JSON]({% link docs/data/json/overview.md %}), [time zones]({% link docs/extensions/icu.md %}), and supports for the [HTTP(S) and S3 protocols]({% link docs/extensions/httpfs/overview.md %}) are implemented as extensions. Extensions also [work in DuckDB Wasm]({% post_url 2021-10-29-duckdb-wasm %}).
 
 ## Free
 
