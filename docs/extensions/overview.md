@@ -37,7 +37,7 @@ The list includes most, but not all, available core extensions. For the full lis
 ## Built-In Extensions
 
 DuckDB's binary distribution comes standard with a few built-in extensions. They are statically linked into the binary and can be used as is.
-For example, to use the built-in [`json` extension]({% link docs/extensions/json.md %}) to read a JSON file:
+For example, to use the built-in [`json` extension]({% link docs/data/json/overview.md %}) to read a JSON file:
 
 ```sql
 SELECT *

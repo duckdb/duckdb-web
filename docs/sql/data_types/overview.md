@@ -21,7 +21,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `HUGEINT` | | signed sixteen-byte integer|
 | `INTEGER` | `INT4`, `INT`, `SIGNED` | signed four-byte integer |
 | `INTERVAL` |  | date / time delta |
-| `JSON` | | JSON object (via the [`json` extension]({% link docs/extensions/json.md %})) |
+| `JSON` | | JSON object (via the [`json` extension]({% link docs/data/json/overview.md %})) |
 | `SMALLINT` | `INT2`, `SHORT` | signed two-byte integer|
 | `TIME` | | time of day (no time zone) |
 | `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ` | combination of time and date that uses the current time zone |

@@ -65,7 +65,7 @@ When this flag is set, the [`jemalloc` extension]({% link docs/extensions/jemall
 
 #### `BUILD_JSON`
 
-When this flag is set, the [`json` extension]({% link docs/extensions/json.md %}) is built.
+When this flag is set, the [`json` extension]({% link docs/data/json/overview.md %}) is built.
 
 ### Debug Flags
 
