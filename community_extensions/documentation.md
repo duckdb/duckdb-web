@@ -5,17 +5,14 @@ title: Documentation
 
 ## Submit a Community Extension
 
-Extensions are hosted as Github repositories.
+Communinity Extensions must be public, open-source, and hosted on GitHub.
+Users of such extensions are encouraged to check the relevant extension repository for giving feedback, to look at the implementation, and to report issues.
 
-Users are encouraged to check the relevant extension repository for giving feedback, look at the implementation, and report issues.
-
-Repositories needs to be public, open-source, and hosted on GitHub.
-
-Submitting a Community Extension is a matter of opening a pull request to the [Community Extensions Repository](https://github.com/duckdb/community-extensions) adding a single `description.yml` file in the folder `extensions/⟨name_of_extension⟩`.
+To submit a Community Extension, please open a pull request to the [Community Extensions Repository](https://github.com/duckdb/community-extensions) with a single `description.yml` file in the folder `extensions/⟨name_of_the_extension⟩`.
 
 ### YAML Descriptor
 
-The structure of the YAML descriptor is as follow:
+The structure of the YAML descriptor is as follows:
 
 | Field | Description |
 |--|--|
@@ -37,16 +34,16 @@ Extensions maintainers are encouraged to provide two optional fields in the desc
 
 | Field | Description |
 |--|--|
-| `docs.hello_world` | A `Hello, World!`, a self contained example of an extension capabilities |
+| `docs.hello_world` | A `Hello, World!` code snippet, i.e., a self contained example of an extension capabilities |
 | `docs.extended_description` | Extra context on the extension, relevant links, or a tour of the extension capabilities |
 
 ### Hosted Extension Documentation Page
 
-Each Community Extension has a documentation page at: `https://duckdb.org/community_extensions/extensions/⟨extension_name⟩`. For example, this is the page for [quack]({% link community_extensions/extensions/quack.md %}).
+Each Community Extension has a documentation page at `https://duckdb.org/community_extensions/extensions/⟨extension_name⟩`. For example, this is the page for [quack]({% link community_extensions/extensions/quack.md %}).
 
-Documentation pages are generated from the fields provided in the YAML descriptor file that is part of the [Community Extensions Repository](https://github.com/duckdb/community-extensions) and from the auto-detected changes that a given extensions introduces in DuckDB.
+Documentation pages are generated from the fields provided in the YAML descriptor file that is part of the [Community Extensions Repository](https://github.com/duckdb/community-extensions) and from the auto-detected changes that a given extension introduces in DuckDB.
 
-Process is roughly as follow:
+The process is roughly as follows:
 
 ```sql
 CREATE TABLE functions_pre AS SELECT ... FROM duckdb_functions();
@@ -57,7 +54,7 @@ SELECT * FROM functions_pre EXCEPT (FROM functions_post) ORDER BY ...;
 
 This works well for detecting new functions, functions overload, new settings, and new types.
 
-Detection of other changes to the system (e.g., whether an additional Parser or Optimizer callback has been register) are viable, but not yet implemented. Those are recommended to be provided as part of the `docs.extended_description` field.
+Detection of other changes to the system (e.g., whether an additional parser or optimizer callback has been registered) are viable, but not yet implemented. Those are recommended to be provided as part of the `docs.extended_description` field.
 
 ### List of Extensions
 

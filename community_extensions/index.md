@@ -5,12 +5,16 @@ excerpt: |
   List of Community contributed open-source DuckDB extension 
 ---
 
-Welcome to the documentation for the DuckDB Community Extension Repository. This website contains all documentation specific to community extensions.
-For documentation on DuckDB itself, check out the [DuckDB docs](https://duckdb.org/docs/).
+Welcome to the documentation for the DuckDB Community Extension Repository.
+This website contains all documentation specific to community extensions.
+For the core DuckDB database, check out the [DuckDB documentation](https://duckdb.org/docs/).
 
 ## What are Community Extensions
 
-Community extensions are [DuckDB extensions]({% link docs/extensions/overview.md %}) that are not maintained by the DuckDB team. This is different from the [core extensions]({% link docs/extensions/core_extensions.md %}), which *are* maintained by the DuckDB team. Community extensions are distributed through the [Community Extension Repository](https://github.com/duckdb/community-extensions), where anyone building an open-source DuckDB extension can make Pull Requests to submit an extension. Note that this makes DuckDB community extensions conceptually very similar to a package manager such as [Homebrew](https://brew.sh/).
+Community extensions are [DuckDB extensions]({% link docs/extensions/overview.md %}) that are not maintained by the DuckDB team.
+They are different from the [core extensions]({% link docs/extensions/core_extensions.md %}), which *are* maintained by the DuckDB team.
+Community extensions are distributed through the [Community Extension Repository](https://github.com/duckdb/community-extensions), where anyone building an open-source DuckDB extension can make Pull Requests to submit an extension.
+Note that this makes DuckDB Community extensions conceptually very similar to a package manager such as [Homebrew](https://brew.sh/).
 
 ## How to Use a Community Extension
 
