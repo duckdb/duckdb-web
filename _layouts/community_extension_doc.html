@@ -74,6 +74,9 @@
 {% if page.extension_star_count %}
 				<div class="external">
 <a href="https://github.com/{{ page.repo.github }}" target="_blank" class="button transparent github">Extension repository on GitHub {% if page.extension_star_count %} <span class="starcount">{{ page.extension_star_count }}</span>{% endif %}</a>
+
+{% if page.extension_download_count %}<span class="downloadcould">{{ page.extension_download_count }} downloads last week</span>{% endif %}
+
 <a href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank" class="button transparent github">Extension descriptor (YAML)</a>
 </div>
 {% endif %}
