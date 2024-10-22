@@ -9,10 +9,10 @@ title: ODBC API on macOS
    brew install unixodbc
    ```
 
-2. <!-- markdownlint-disable MD034 --> DuckDB releases a universal [ODBC driver for macOS](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip) (supporting both Intel and Apple Silicon CPUs). To download it, run:
+2. <!-- markdownlint-disable MD034 --> DuckDB releases a universal [ODBC driver for macOS](https://github.com/duckdb/duckdb/releases/download/v0.10.3/duckdb_odbc-osx-universal.zip) (supporting both Intel and Apple Silicon CPUs). To download it, run:
 
    ```bash
-   wget https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip
+   wget https://github.com/duckdb/duckdb/releases/download/v0.10.3/duckdb_odbc-osx-universal.zip
    ```
 
    <!-- markdownlint-enable MD034 -->
