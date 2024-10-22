@@ -56,6 +56,7 @@ docs:
     This extension implements a growing number of [ClickHouse SQL Macros](https://community-extensions.duckdb.org/extensions/chsql.html#added-functions) and functions for DuckDB. 
 
 extension_star_count: 26
+image: "/images/community_extensions/social_preview/preview_community_extension_chsql.png"
 
 ---
 

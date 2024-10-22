@@ -28,6 +28,7 @@ docs:
     For more information and information regarding usage, limitations and performance, see the [tarfs README](https://github.com/Maxxen/duckdb_tarfs).
 
 extension_star_count: 6
+image: "/images/community_extensions/social_preview/preview_community_extension_tarfs.png"
 
 ---
 

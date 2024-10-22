@@ -64,6 +64,7 @@ repo:
   ref: c8a64d43bafa559f48dd55730813475eb58c4916
 
 extension_star_count: 10
+image: "/images/community_extensions/social_preview/preview_community_extension_crypto.png"
 
 ---
 

@@ -41,6 +41,7 @@ docs:
     You can also find a ROI example of Ether on the [following blogpost](https://pdet-blog.github.io/2024/06/30/ethereum.html)
 
 extension_star_count: 129
+image: "/images/community_extensions/social_preview/preview_community_extension_scrooge.png"
 
 ---
 

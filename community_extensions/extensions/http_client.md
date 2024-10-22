@@ -83,6 +83,7 @@ docs:
     This extension is experimental and potentially unstable. Do not use it in production yet.
 
 extension_star_count: 8
+image: "/images/community_extensions/social_preview/preview_community_extension_http_client.png"
 
 ---
 
