@@ -2,8 +2,8 @@
 layout: post
 title: "What's New in the Vector Similarity Search Extension?"
 author: "Max Gabrielsson"
-thumb: "/images/blog/thumbs/vss-2.svg"
-image: "/images/blog/thumbs/vss-2.png"
+thumb: "/images/blog/thumbs/vss.svg"
+image: "/images/blog/thumbs/vss.png"
 excerpt: "DuckDB is another step closer to becoming a vector database! In this post, we show the new performance optimizations implemented in the vector search extension."
 ---
 
