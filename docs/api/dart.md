@@ -4,32 +4,34 @@ title: Dart API
 github_repository: https://github.com/TigerEyeLabs/duckdb-dart
 ---
 
-DuckDB.dart is the native Dart API for [DuckDB](https://duckdb.org/)`
+DuckDB.dart is the native Dart API for [DuckDB](https://duckdb.org/).
 
 ## Installation
 
 DuckDB.dart can be installed from [pub.dev](https://pub.dev/packages/dart_duckdb). Please see the [API Reference](https://pub.dev/documentation/dart_duckdb/latest/) for details.
 
-### Use this package as a library
+### Use This Package as a Library
 
-#### Depend on it
+#### Depend on It
 
 Run this command:
 
 With Flutter:
 
-`$ flutter pub add dart_duckdb`
-
-This will add a line like this to your package's pubspec.yaml (and run an implicit `flutter pub get`):
-
+```bash
+flutter pub add dart_duckdb
 ```
+
+This will add a line like this to your package's `pubspec.yaml` (and run an implicit `flutter pub get`):
+
+```text
 dependencies:
   dart_duckdb: ^1.0.3
 ```
 
 Alternatively, your editor might support `flutter pub get.` Check the docs for your editor to learn more.
 
-#### Import it
+#### Import It
 
 Now in your Dart code, you can use:
 
@@ -39,7 +41,7 @@ Now in your Dart code, you can use:
 
 Here are some common use cases for DuckDB.Dart:
 
-### Querying an in-memory Database
+### Querying an In-Memory Database
 
 ```dart
 import 'package:dart_duckdb/dart_duckdb.dart';
@@ -64,7 +66,7 @@ void main() {
 }
 ```
 
-### Queries on background Isolates
+### Queries on Background Isolates
 
 ```dart
 import 'package:dart_duckdb/dart_duckdb.dart';
@@ -84,5 +86,4 @@ void backgroundTask(TransferableDatabase transferableDb) {
   // Access database ...
   // fetch is needed to send the data back to the main isolate
 }
-
 ```
