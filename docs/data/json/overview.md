@@ -13,78 +13,13 @@ DuckDB supports SQL functions that are useful for reading values from existing J
 JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 While it is not a very efficient format for tabular data, it is very commonly used, especially as a data interchange format.
 
-## Example Uses
+## Indexing
 
-Read a JSON file from disk, auto-infer options:
-
-```sql
-SELECT * FROM 'todos.json';
-```
-
-`read_json` with custom options:
-
-```sql
-SELECT *
-FROM read_json('todos.json',
-               format = 'array',
-               columns = {userId: 'UBIGINT',
-                          id: 'UBIGINT',
-                          title: 'VARCHAR',
-                          completed: 'BOOLEAN'});
-```
-
-Write the result of a query to a JSON file:
-
-```sql
-COPY (SELECT * FROM todos) TO 'todos.json';
-```
-
-See more examples of loading JSON data on the [JSON data page]({% link docs/data/json/overview.md %}#examples):
-
-Create a table with a column for storing JSON data:
-
-```sql
-CREATE TABLE example (j JSON);
-```
-
-Insert JSON data into the table:
-
-```sql
-INSERT INTO example VALUES
-    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
-```
-
-Retrieve the family key's value:
-
-```sql
-SELECT j.family FROM example;
-```
-
-```text
-"anatidae"
-```
-
-Extract the family key's value with a JSONPath expression:
-
-```sql
-SELECT j->'$.family' FROM example;
-```
-
-```text
-"anatidae"
-```
-
-Extract the family key's value with a JSONPath expression as a VARCHAR:
-
-```sql
-SELECT j->>'$.family' FROM example;
-```
-
-```text
-anatidae
-```
+> Warning Following [PostgreSQL's conventions]({% link docs/sql/dialect/postgresql_compatibility.md %}), DuckDB uses 1-based indexing for its [`ARRAY`]({% link docs/sql/data_types/array.md %}) and [`LIST`]({% link docs/sql/data_types/list.md %}) data types but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-JSON-PROCESSING).
 
 ## Examples
+
+### Loading JSON
 
 Read a JSON file from disk, auto-infer options:
 
@@ -124,169 +59,52 @@ CREATE TABLE todos AS
     SELECT * FROM 'todos.json';
 ```
 
+### Writing JSON
+
 Write the result of a query to a JSON file:
 
 ```sql
 COPY (SELECT * FROM todos) TO 'todos.json';
 ```
 
-## Examples of Format Settings
+### JSON Data Type
 
-The JSON extension can attempt to determine the format of a JSON file when setting `format` to `auto`.
-Here are some example JSON files and the corresponding `format` settings that should be used.
-
-In each of the below cases, the `format` setting was not needed, as DuckDB was able to infer it correctly, but it is included for illustrative purposes.
-A query of this shape would work in each case:
+Create a table with a column for storing JSON data and insert data into it:
 
 ```sql
-SELECT *
-FROM filename.json;
+CREATE TABLE example (j JSON);
+INSERT INTO example VALUES
+    ('{ "family": "anatidae", "species": [ "duck", "goose", "swan", null ] }');
 ```
 
-### Format: `newline_delimited`
+### Retrieving JSON Data
 
-With `format = 'newline_delimited'` newline-delimited JSON can be parsed.
-Each line is a JSON.
-
-We use the example file [`records.json`](/data/records.json) with the following content:
-
-```json
-{"key1":"value1", "key2": "value1"}
-{"key1":"value2", "key2": "value2"}
-{"key1":"value3", "key2": "value3"}
-```
+Retrieve the family key's value:
 
 ```sql
-SELECT *
-FROM read_json('records.json', format = 'newline_delimited');
+SELECT j.family FROM example;
 ```
 
-<div class="narrow_table monospace_table"></div>
-
-|  key1  |  key2  |
-|--------|--------|
-| value1 | value1 |
-| value2 | value2 |
-| value3 | value3 |
-
-### Format: `array`
-
-If the JSON file contains a JSON array of objects (pretty-printed or not), `array_of_objects` may be used.
-To demonstrate its use, we use the example file [`records-in-array.json`](/data/records-in-array.json):
-
-```json
-[
-    {"key1":"value1", "key2": "value1"},
-    {"key1":"value2", "key2": "value2"},
-    {"key1":"value3", "key2": "value3"}
-]
+```text
+"anatidae"
 ```
+
+Extract the family key's value with a [JSONPath](https://goessner.net/articles/JsonPath/) expression:
 
 ```sql
-SELECT *
-FROM read_json('records-in-array.json', format = 'array');
+SELECT j->'$.family' FROM example;
 ```
 
-<div class="narrow_table monospace_table"></div>
-
-|  key1  |  key2  |
-|--------|--------|
-| value1 | value1 |
-| value2 | value2 |
-| value3 | value3 |
-
-### Format: `unstructured`
-
-If the JSON file contains JSON that is not newline-delimited or an array, `unstructured` may be used.
-To demonstrate its use, we use the example file [`unstructured.json`](/data/unstructured.json):
-
-```json
-{
-    "key1":"value1",
-    "key2":"value1"
-}
-{
-    "key1":"value2",
-    "key2":"value2"
-}
-{
-    "key1":"value3",
-    "key2":"value3"
-}
+```text
+"anatidae"
 ```
+
+Extract the family key's value with a [JSONPath](https://goessner.net/articles/JsonPath/) expression as a `VARCHAR`:
 
 ```sql
-SELECT *
-FROM read_json('unstructured.json', format = 'unstructured');
+SELECT j->>'$.family' FROM example;
 ```
 
-<div class="narrow_table monospace_table"></div>
-
-|  key1  |  key2  |
-|--------|--------|
-| value1 | value1 |
-| value2 | value2 |
-| value3 | value3 |
-
-## Examples of Records Settings
-
-The JSON extension can attempt to determine whether a JSON file contains records when setting `records = auto`.
-When `records = true`, the JSON extension expects JSON objects, and will unpack the fields of JSON objects into individual columns.
-
-Continuing with the same example file, [`records.json`](/data/records.json):
-
-```json
-{"key1":"value1", "key2": "value1"}
-{"key1":"value2", "key2": "value2"}
-{"key1":"value3", "key2": "value3"}
+```text
+anatidae
 ```
-
-```sql
-SELECT *
-FROM read_json('records.json', records = true);
-```
-
-<div class="narrow_table monospace_table"></div>
-
-|  key1  |  key2  |
-|--------|--------|
-| value1 | value1 |
-| value2 | value2 |
-| value3 | value3 |
-
-When `records = false`, the JSON extension will not unpack the top-level objects, and create `STRUCT`s instead:
-
-```sql
-SELECT *
-FROM read_json('records.json', records = false);
-```
-
-<div class="narrow_table monospace_table"></div>
-
-|               json               |
-|----------------------------------|
-| {'key1': value1, 'key2': value1} |
-| {'key1': value2, 'key2': value2} |
-| {'key1': value3, 'key2': value3} |
-
-This is especially useful if we have non-object JSON, for example, [`arrays.json`](/data/arrays.json):
-
-```json
-[1, 2, 3]
-[4, 5, 6]
-[7, 8, 9]
-```
-
-```sql
-SELECT *
-FROM read_json('arrays.json', records = false);
-```
-
-<div class="narrow_table monospace_table"></div>
-
-|   json    |
-|-----------|
-| [1, 2, 3] |
-| [4, 5, 6] |
-| [7, 8, 9] |
-

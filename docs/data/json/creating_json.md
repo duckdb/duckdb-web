@@ -1,4 +1,7 @@
-
+---
+layout: docu
+title: Creating JSON
+---
 
 ## JSON Creation Functions
 

@@ -282,11 +282,6 @@ SELECT * FROM todos LIMIT 5;
 For more details, see the [page on the `COPY` statement]({% link docs/sql/statements/copy.md %}).
 
 
-
-## JSON Loading
-
-Below are parameters that can be passed in to the JSON reader.
-
 ## Parameters
 
 | Name | Description | Type | Default |
@@ -308,7 +303,7 @@ Below are parameters that can be passed in to the JSON reader.
 | `union_by_name` | Whether the schema's of multiple JSON files should be [unified]({% link docs/data/multiple_files/combining_schemas.md %}). | `BOOL` | `false` |
 
 
-## `read_json` Function
+## The `read_json` Function
 
 The `read_json` is the simplest method of loading JSON files: it automatically attempts to figure out the correct configuration of the JSON reader. It also automatically deduces types of columns.
 

@@ -3,10 +3,6 @@ layout: docu
 title: Caveats
 ---
 
-## Indexing
-
-> Warning Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays]({% link docs/sql/data_types/array.md %}) and [lists]({% link docs/sql/data_types/list.md %}) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
-
 ## Equality Comparison
 
 > Warning Currently, equality comparison of JSON files can differ based on the context. In some cases, it is based on raw text comparison, while in other cases, it uses logical content comparison.

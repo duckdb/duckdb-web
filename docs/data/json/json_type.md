@@ -5,7 +5,7 @@ redirect_from:
   - /docs/sql/data_types/json
 ---
 
-The `json` extension makes use of the `JSON` logical type.
+DuckDB supports `json` via the `JSON` logical type.
 The `JSON` logical type is interpreted as JSON, i.e., parsed, in JSON functions rather than interpreted as `VARCHAR`, i.e., a regular string (modulo the equality-comparison caveat at the bottom of this page).
 All JSON creation functions return values of this type.
 

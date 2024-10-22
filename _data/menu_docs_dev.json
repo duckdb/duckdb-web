@@ -68,7 +68,44 @@
                 {
                   "page": "Overview",
                   "url": "overview"
+                },
+                {
+                  "page": "Creating JSON",
+                  "url": "creating_json"
+                },
+                {
+                  "page": "Loading JSON",
+                  "url": "loading_json"
+                },
+                {
+                  "page": "Writing JSON",
+                  "url": "writing_json"
+                },
+                {
+                  "page": "JSON Type",
+                  "url": "json_type"
+                },
+                {
+                  "page": "JSON Functions",
+                  "url": "json_functions"
+                },
+                {
+                  "page": "Format Settings",
+                  "url": "format_settings"
+                },
+                {
+                  "page": "Installing and Loading",
+                  "url": "installing_and_loading"
+                },
+                {
+                  "page": "SQL to / from JSON",
+                  "url": "sql_to_and_from_json"
+                },
+                {
+                  "page": "Caveats",
+                  "url": "caveats"
                 }
+
               ]
             },
             {
@@ -1004,10 +1041,6 @@
             {
               "page": "jemalloc",
               "url": "jemalloc"
-            },
-            {
-              "page": "JSON",
-              "url": "json"
             },
             {
               "page": "MySQL",

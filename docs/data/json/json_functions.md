@@ -415,7 +415,7 @@ SELECT json_group_structure(j) FROM example2;
 {"family":"VARCHAR","species":["VARCHAR"],"coolness":"DOUBLE","hair":"BOOLEAN"}
 ```
 
-## Transforming JSON
+## Transforming JSON to Nested Types
 
 In many cases, it is inefficient to extract values from JSON one-by-one.
 Instead, we can “extract” all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
