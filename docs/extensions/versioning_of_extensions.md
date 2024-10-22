@@ -90,7 +90,7 @@ First we install a [**stable DuckDB build**]({% link docs/installation/index.htm
 
 Then we can install and load a **nightly** extension like this:
 
-```bash
+```sql
 INSTALL aws FROM core_nightly;
 LOAD aws;
 ```
