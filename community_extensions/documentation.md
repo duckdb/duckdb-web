@@ -20,7 +20,7 @@ The structure of the YAML descriptor is as follows:
 | `extension.description` | Short description of the extension |
 | `extension.version` | Semantic versioning of the extension |
 | `extension.language` | `C++`, `Rust & C++`, `C++ & SQL`, or whatever combination of languages the extension code relies on |
-| `extension.build` | Build system the extensin uses, at the moment only `cmake` is supported |
+| `extension.build` | Build system the extension uses, at the moment only `cmake` is supported |
 | `extension.licence` | Licence that applies to the extension |
 | `extension.maintainers` | A list of maintainers for the extension |
 | `extension.excluded_platforms` | Optional, allows to specify whether certain platforms are not supported |
