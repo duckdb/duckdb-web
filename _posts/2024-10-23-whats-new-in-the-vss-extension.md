@@ -36,7 +36,27 @@ For completeness we've also added the equivalent distance functions for the dyna
 ## Index Accelerated "Top-K" Aggregates
 
 Another cool thing that's happened in core DuckDB since last time is that DuckDB now has extra overloads for the [`min_by`]({% link docs/sql/functions/aggregates.md %}#min_byarg-val-n) and [`max_by`]({% link docs/sql/functions/aggregates.md %}#max_byarg-val-n) aggregate functions (and their aliases `arg_min` and `arg_max`)
-These new overloads take an optional third `n` argument that specifies the number of top-k (or top-`n`) elements to keep and outputs them into a sorted `LIST` value.
+These new overloads take an optional third `n` argument that specifies the number of top-k (or top-`n`) elements to keep and outputs them into a sorted `LIST` value. Here's an example:
+
+```sql
+-- Create a table with some example data
+CREATE OR REPLACE TABLE vecs AS 
+    SELECT
+        row_number() OVER () AS id, 
+        [a, b, c]::FLOAT[3] AS vec 
+    FROM
+        range(1,4) AS x(a), range(1,4) AS y(b), range(1,4) AS z(c);
+
+-- Find the top 3 rows with the vector closest to [2, 2, 2]
+SELECT
+    arg_min(vecs, array_distance(vec, [2, 2, 2]::FLOAT[3]), 3)
+FROM
+    vecs;
+```
+
+```text
+[{'id': 14, 'vec': [2.0, 2.0, 2.0]}, {'id': 13, 'vec': [2.0, 1.0, 2.0]}, {'id': 11, 'vec': [1.0, 2.0, 2.0]}]
+```
 
 Of course, the VSS extension now includes optimizer rules to use to the HNSW index to accelerate these top-k aggregates when the ordering input is a distance function that references an indexed vector column, similarly to the `SELECT a FROM b ORDER BY array_distance(a.vec, query_vec) LIMIT k` query pattern that we discussed in the previous blog post. These new overloads allow you to express the same query in a more concise and readable way, while still avoiding the need for a full scan and sort of the underlying table (as long as the table has a matching HNSW index).
 
@@ -44,7 +64,7 @@ Of course, the VSS extension now includes optimizer rules to use to the HNSW ind
 
 After running some benchmarking on the initial version of VSS, we realized that even though index-lookups on our HNSW index is really fast (thanks to the [USearch](https://github.com/unum-cloud/usearch) library that it is based on!), using DuckDB to search for individual vectors at a time has a lot of latency compared to other solutions. The reasons for this are many and nuanced, but we want to be clear that our choice of HNSW implementation, USearch, is not the bottleneck here as profiling revelead only about 2% of the runtime is actually spent inside of usearch.
 
-Instead, most of the per-query overhead comes from the fact that DuckDB is just not optimized for _point queries,_ i.e., queries that only really fetch and process a single row. Because DuckDB is based on a vectorized execution an engine, the smallest unit of work is not 1 row but 2,048, and because we expect to crunch through a ton of data, we generally favor spending a lot of time up front to optimize the query plan and pre-allocate large buffers and caches so that everything is as efficient as possible once we start executing. But a lot of this work becomes unneccessary when the actual working set is so small. For example, is it really worthwile to inspect and hash every single element of a constant 768-long query vector to attempt to look for common subexpressions if you know there is only going to be a handful of rows in the result?
+Instead, most of the per-query overhead comes from the fact that DuckDB is just not optimized for _point queries,_ i.e., queries that only really fetch and process a single row. Because DuckDB is based on a vectorized execution engine, the smallest unit of work is not 1 row but 2,048, and because we expect to crunch through a ton of data, we generally favor spending a lot of time up front to optimize the query plan and pre-allocate large buffers and caches so that everything is as efficient as possible once we start executing. But a lot of this work becomes unneccessary when the actual working set is so small. For example, is it really worthwile to inspect and hash every single element of a constant 768-long query vector to attempt to look for common subexpressions if you know there is only going to be a handful of rows in the result?
 
 While we have some ideas on how to improve this scenario in the future, we decided to take another approach for now and instead try focus not on our weaknesses, but on our strengths. That is, crunching through a ton of data! So instead of trying to optimize the “1:N”, i.e., “given this one embedding, give me the closes N embeddings” query, what if we instead focused on the “N:M”, “given all these N embeddings, pair them up with the closest M embeddings each”. What would that look like? Well, that would be a [`LATERAL` join]({% link docs/sql/query_syntax/from.md %}#lateral-joins) of course!
 
