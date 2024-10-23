@@ -225,7 +225,7 @@ We can see that this plan is drastically simplified, but most importantly, the n
 This optimization was just recently added to the VSS extension, so if you've already installed `vss` for DuckDB v1.1.2, run the following command to get the latest version:
 
 ```sql
-FORCE INSTALL vss;
+UPDATE EXTENSIONS (vss);
 ```
 
 ## Conclusion
