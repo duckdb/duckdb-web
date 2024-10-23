@@ -48,3 +48,7 @@ body.documentation.communityextensions header .headerline .headercontent .landin
 .extension_settings_table + table td:nth-child(4) {
   font-family: "JetBrainsMono-Regular", "Lucida Console", monospace;
 }
+
+a.button {
+	text-decoration: none !important;
+}
