@@ -51,6 +51,35 @@ body.landing{
 	.hidden{
 		display: none;
 	}
+	.type{
+		display: inline-block;
+		border: 1px solid #E5D70033;
+		background: #FFF10033;
+		border-radius: 15px;
+		padding: 6px 15px 8px 15px;
+		margin-left: -15px;
+		margin-top: .15em;
+		margin-bottom: .15em;
+		white-space: nowrap;
+		.typecursor{
+			font-weight: 450;
+			margin-left: .1em;
+			transform: translateY(-.025em);
+			-webkit-animation: Typewriter-cursor 1s infinite;
+			animation:Typewriter-cursor 1s infinite;
+			margin-left:1px
+		}
+		@-webkit-keyframes Typewriter-cursor{
+			0%{opacity:0}
+			50%{opacity:1}
+			100%{opacity:0}
+		}
+		@keyframes Typewriter-cursor{
+			0%{opacity:0}
+			50%{opacity:1}
+			100%{opacity:0}
+		}
+	}
 	.window{
 		border-radius: 15px;
 		border: 1px solid #393939;
@@ -493,6 +522,15 @@ body.landing{
 }
 
 @import url(syntax_highlighting.css?123);
+
+@media only screen and (max-width: 1200px) {
+	body.landing{
+		section.welcome .flexwrap .duckdb{
+			margin-left: 15px;
+		}
+	} 
+}
+
 
 @media only screen and (max-width: 1100px) {
 	body.landing{
