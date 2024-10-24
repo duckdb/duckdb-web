@@ -103,6 +103,9 @@ ON Year
 USING first(Population);
 ```
 
+> Note Although the SQL syntax permits [FILTER clauses]({% link docs/sql/query_syntax/filter.md %}) with aggregate functions in `USING`,
+> `PIVOT` currently does not support these, they are silently ignored. 
+
 ### `PIVOT ON`, `USING`, and `GROUP BY`
 
 By default, the `PIVOT` statement retains all columns not specified in the `ON` or `USING` clauses.
