@@ -474,6 +474,26 @@ FROM trades t
 ASOF LEFT JOIN prices p USING (symbol, "when");
 ```
 
+### Self-Joins
+
+DuckDB allows self-joins for all types of joins.
+Note that tables need to be aliased, using the same table name without aliases will result in an error:
+
+```sql
+CREATE TABLE t(x int);
+SELECT * FROM t JOIN t USING(x);
+```
+
+```console
+Binder Error: Duplicate alias "t" in query!
+```
+
+Adding the aliases allows the query to parse successfully:
+
+```sql
+SELECT * FROM t AS t t1 JOIN t t2 USING(x);
+```
+
 ## `FROM`-First Syntax
 
 DuckDB's SQL supports the `FROM`-first syntax, i.e., it allows putting the `FROM` clause before the `SELECT` clause or completely omitting the `SELECT` clause. We use the following example to demonstrate it:
