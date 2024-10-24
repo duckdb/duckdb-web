@@ -30,7 +30,7 @@ UNPIVOT (
     SELECT COLUMNS(* EXCLUDE (_last_update) REPLACE (filename.regexp_extract('/(\d+/\d+)\.json', 1) AS filename))
     FROM read_json([
             'http://community-extensions.duckdb.org/download-stats-weekly/' || strftime(x, '%Y/%W') || '.json'
-            FOR x IN range(TIMESTAMP '2024-10-01', NOW()::TIMESTAMP, INTERVAL 1 WEEK)
+            FOR x IN range(TIMESTAMP '2024-10-01', now()::TIMESTAMP, INTERVAL 1 WEEK)
          ], filename = true
     )
 )
