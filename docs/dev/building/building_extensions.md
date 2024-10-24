@@ -7,65 +7,25 @@ title: Building Extensions
 
 ## Building Extensions Using Build Flags
 
-To build using extension flags, set the corresponding [`BUILD_[EXTENSION_NAME]` extension flag](#extension-flags) when running the build, then use the `INSTALL` command.
+To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be buiold.
 
-For example, to install the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}), run the following script:
+Extension will in most cases by directly linked the resulting DuckDB executable.
 
-```bash
-GEN=ninja BUILD_HTTPFS=1 make
-```
-
-For release builds:
+For example, to build DuckDB with the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}), run the following script:
 
 ```bash
-build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
+GEN=ninja CORE_EXTENSIONS='httpfs' make
 ```
 
-For debug builds:
-
-```bash
-build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
-```
-
-### Extension Flags
-
-For every in-tree extension that is maintained by core DuckDB there exists a flag to enable building and statically linking the extension into the build.
-
-#### `BUILD_AUTOCOMPLETE`
-
-When this flag is set, the [`autocomplete` extension]({% link docs/extensions/autocomplete.md %}) is built.
-
-#### `BUILD_ICU`
-
-When this flag is set, the [`icu` extension]({% link docs/extensions/icu.md %}) is built.
-
-#### `BUILD_TPCH`
-
-When this flag is set, the [`tpch` extension]({% link docs/extensions/tpch.md %}) is built, this enables TPCH-H data generation and query support using `dbgen`.
-
-#### `BUILD_TPCDS`
-
-When this flag is set, the [`tpcds` extension]({% link docs/extensions/tpcds.md %}) is built, this enables TPC-DS data generation and query support using `dsdgen`.
-
-#### `BUILD_TPCE`
-
-When this flag is set, the [TPCE](https://www.tpc.org/tpce/) extension is built. Unlike TPC-H and TPC-DS this does not enable data generation and query support. Instead, it enables tests for TPC-E through our test suite.
-
-#### `BUILD_FTS`
-
-When this flag is set, the [`fts` (full text search) extension]({% link docs/extensions/full_text_search.md %}) is built.
-
-#### `BUILD_HTTPFS`
-
-When this flag is set, the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) is built.
+### Special Extension Flags
 
 #### `BUILD_JEMALLOC`
 
 When this flag is set, the [`jemalloc` extension]({% link docs/extensions/jemalloc.md %}) is built.
 
-#### `BUILD_JSON`
+#### `BUILD_TPCE`
 
-When this flag is set, the [`json` extension]({% link docs/data/json/overview.md %}) is built.
+When this flag is set, the [TPCE](https://www.tpc.org/tpce/) libray is built. Unlike TPC-H and TPC-DS this is not a proper extension and it's not distributed as such. Enablign this allows TPC-E enabled queries through our test suite.
 
 ### Debug Flags
 
