@@ -104,7 +104,6 @@ To build using a CMake configuration file, create an extension configuration fil
 ```cmake
 duckdb_extension_load(autocomplete)
 duckdb_extension_load(fts)
-duckdb_extension_load(httpfs/overview)
 duckdb_extension_load(inet)
 duckdb_extension_load(icu)
 duckdb_extension_load(json)
