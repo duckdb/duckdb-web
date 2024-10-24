@@ -138,12 +138,14 @@ This section describes functions and operators for examining and manipulating [`
 More examples:
 
 ```sql
-SELECT  'abcdefghi'  AS str
-,       str[3]       -- get char at position 3, 'c'
-,       str[3:5]     -- substring from position 3 up to and including position 5, 'cde'
-,       str[6:]      -- substring from position 6 till the end, 'fghi'
-,       str[:3]      -- substring from the start up to and including position 3, 'abc'
-,       str[3:-4]    -- substring from positio 3 up to and including the 4th position from the end, 'cdef' 
+SELECT
+    'abcdefghi' AS str,
+    str[3],    -- get char at position 3, 'c'
+    str[3:5],  -- substring from position 3 up to and including position 5, 'cde'
+    str[6:],   -- substring from position 6 till the end, 'fghi'
+    str[:3],   -- substring from the start up to and including position 3, 'abc'
+    str[3:-4], -- substring from positio 3 up to and including the 4th position from the end, 'cdef'
+;
 ```
 
 #### `string LIKE target`
