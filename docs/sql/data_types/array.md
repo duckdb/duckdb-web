@@ -27,7 +27,7 @@ You can always implicitly cast an array to a list (and use list functions, like 
 SELECT array_value(1, 2, 3)[2];
 ```
 
-You can cast from a list to an array, but the dimensions have to match up!:
+You can cast from a list to an array (the dimensions have to match):
 
 ```sql
 SELECT [3, 2, 1]::INTEGER[3];
