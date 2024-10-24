@@ -76,7 +76,7 @@ To work around this, navigate to a different directory (e.g., `cd ..`) and try r
 The build fails on macOS when both the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) and the Python package are included:
 
 ```bash
-GEN=ninja BUILD_PYTHON=1 BUILD_HTTPFS=1 make
+GEN=ninja BUILD_PYTHON=1 CORE_EXTENSIONS="httpfs" make
 ```
 
 ```console
@@ -93,7 +93,7 @@ If you would like to build DuckDB from source, avoid using the `BUILD_PYTHON=1` 
 Instead, first build the `httpfs` extension (if required), then build and install the Python package separately using pip:
 
 ```bash
-GEN=ninja BUILD_HTTPFS=1 make
+GEN=ninja CORE_EXTENSIONS="httpfs" make
 ```
 
 If the next line complains about pybind11 being missing, or `--use-pep517` not being supported, make sure you're using a modern version of pip and setuptools.
@@ -125,5 +125,5 @@ sudo apt-get install -y libssl-dev
 Then, build with:
 
 ```bash
-GEN=ninja BUILD_HTTPFS=1 make
+GEN=ninja CORE_EXTENSIONS="httpfs" make
 ```
