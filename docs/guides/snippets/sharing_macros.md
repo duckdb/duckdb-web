@@ -36,7 +36,7 @@ We have published this macro on `blobs.duckdb.org`
 
 Let's start a new DuckDB session and try it:
 
-```batch
+```bash
 duckdb
 ```
 
