@@ -243,7 +243,7 @@ If we run this query in the script above, we get the following results:
 
 ## Creating a Macro for the Checksum Query
 
-We can turn the checksum query into a [table macro]({% link docs/sql/statements/create_macro.md %}#table-macros) with the new [`query_table` function]({% docs/guides/sql_features/query_and_query_table_functions.md %}):
+We can turn the checksum query into a [table macro]({% link docs/sql/statements/create_macro.md %}#table-macros) with the new [`query_table` function]({% link docs/guides/sql_features/query_and_query_table_functions.md %}):
 
 ```sql
 CREATE MACRO checksum(table_name) AS TABLE
