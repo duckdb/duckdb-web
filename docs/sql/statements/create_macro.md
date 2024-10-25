@@ -100,6 +100,17 @@ CREATE TABLE users AS
 SELECT * FROM get_users([1, 5]);
 ```
 
+To define macros on arbitrary tables, use the [`query_table` function](docs/guides/sql_features/query_and_query_table_functions). For example, the following macro computes a column-wise checksum on a table:
+
+```sql
+CREATE MACRO checksum(table_name) AS TABLE
+    SELECT bit_xor(md5_number(COLUMNS(*)::VARCHAR))
+    FROM query_table(table_name);
+
+CREATE TABLE tbl AS SELECT unnest([42, 43]) AS x, 100 AS y;
+SELECT * FROM checksum('tbl');
+```
+
 ## Overloading
 
 It is possible to overload a macro based on the amount of parameters it takes, this works for both scalar and table macros.
