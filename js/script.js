@@ -210,6 +210,7 @@ $(document).ready(function(){
 	
 	
 	// Landingpage Animation
+	/*
 	if( $("body.landing").length != 0 ){
 		let duckDBcircled = document.getElementById('duckdbdanimationcircled');	
 	    let animationduckDBcircled = lottie.loadAnimation({
@@ -228,6 +229,29 @@ $(document).ready(function(){
 			animationduckDBcircled.setDirection(-1)
 		})
 	}
+	*/
+	
+	// Landing Page Typewriter Animation
+	if( $('.landing .type').length ){
+		var $typeElement = $('.type');
+		var strings = $typeElement.data('strings').split('|');
+		var typewriter = new Typewriter($typeElement[0], {
+			loop: true, 
+			wrapperClassName: "typewrapper",
+			cursorClassName: "typecursor",
+			cursor: "|"
+			//cursor: "⎪"
+		});
+		
+		strings.forEach(function(str) {
+			typewriter.typeString(str)
+				.pauseFor(2500)
+				.deleteAll();
+		});
+		
+		typewriter.start();
+	}
+	
 	
 	
 	// Appending Content-List of Overview-Pages

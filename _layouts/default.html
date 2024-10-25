@@ -94,6 +94,9 @@
 
 	{% include footer.html %}
 	
+	{% if page.body_class contains "landing" %}
+		<script src="{{ site.baseurl }}/js/typewriter.js"></script>
+	{% endif %}
 	<script src="{{ site.baseurl }}/js/minisearch.js"></script>
 	<script src="{{ site.baseurl }}/js/search.js"></script>
 	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
