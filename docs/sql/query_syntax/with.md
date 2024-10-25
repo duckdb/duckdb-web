@@ -37,7 +37,7 @@ SELECT * FROM cte2;
 ## CTE Materialization
 
 DuckDB can employ CTE materialization, i.e., inlining CTEs into the main query.
-This is perforemd using heuristics: if the CTE performs a grouped aggregation and is queried more than once, it is materialized.
+This is performed using heuristics: if the CTE performs a grouped aggregation and is queried more than once, it is materialized.
 Materialization can be explicitly activated by defining the CTE using `AS MATERIALIZED` and disabled by using `AS NOT MATERIALIZED`.
 
 Take the following query for example, which invokes the same CTE three times:
