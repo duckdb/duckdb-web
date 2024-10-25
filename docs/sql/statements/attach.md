@@ -29,7 +29,7 @@ ATTACH 'file.db' (READ_ONLY);
 Attach the database `file.db` with a block size of 16KB:
 
 ```sql
-ATTACH 'file.db' (BLOCK SIZE 16384);
+ATTACH 'file.db' (BLOCK_SIZE 16384);
 ```
 
 Attach a SQLite database for reading and writing (see the [`sqlite` extension]({% link docs/extensions/sqlite.md %}) for more information):
