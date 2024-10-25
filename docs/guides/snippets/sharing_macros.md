@@ -3,23 +3,38 @@ layout: docu
 title: Sharing Macros
 ---
 
-DuckDB has a powerful [macro mechanism]({% docs/sql/statements/create_macro.md %}).
-For example, we can start create a persistent DuckDB database and define a [`checksum` function over all columns]({% post_url 2024-10-11-duckdb-tricks-part-2 }),
+DuckDB has a powerful [macro mechanism]({% link docs/sql/statements/create_macro.md %}) that allows creating shorthands for common tasks. For example, we can define a macro that pretty-prints a non-negative integer as a short string that contains billions, millions, and thousands (without rounding) as follows:
 
-```batch
-duckdb checksum-macro.duckdb
+```bash
+duckdb pretty_print_integer_macro.duckdb
 ```
 
-```plsql
-CREATE MACRO checksum(table_name) AS TABLE
-    SELECT bit_xor(md5_number(COLUMNS(*)::VARCHAR))
-    FROM query_table(table_name);
+```sql
+CREATE MACRO pretty_print_integer(n) AS
+    CASE
+        WHEN n >= 1_000_000_000 THEN printf('%dB', n // 1_000_000_000)
+        WHEN n >= 1_000_000     THEN printf('%dM', n // 1_000_000)
+        WHEN n >= 1_000         THEN printf('%dk', n // 1_000)
+        ELSE printf('%d', n)
+    END;
+
+SELECT pretty_print_integer(25_500_000) AS x;
+```
+
+```text
+┌─────────┐
+│    x    │
+│ varchar │
+├─────────┤
+│ 25M     │
+└─────────┘
 ```
 
 As one would expect, the macro gets persisted in the database.
 But this also means that we can host it on an HTTPS endpoint and share it with anyone!
+We have published this macro on `blobs.duckdb.org`
 
-Let's start a new DuckDB session:
+Let's start a new DuckDB session and try it:
 
 ```batch
 duckdb
@@ -28,14 +43,18 @@ duckdb
 We can now attach to the remote endpoint and use the macro:
 
 ```sql
-ATTACH 'https://blobs.duckdb.org/data/checksum-macro.duckdb' AS checksum_macro;
-CREATE TABLE tbl AS SELECT unnest([42, 43]) AS x;
-SELECT * FROM checksum_macro.checksum('tbl');
+ATTACH 'https://blobs.duckdb.org/data/pretty_print_integer_macro.duckdb' AS db;
+USE db;
+SELECT pretty_print_integer(42_123) AS x;
 ```
 
-```sql
-CREATE TABLE tbl AS SELECT unnest([42, 43]) AS x;
-ATTACH 'https://blobs.duckdb.org/data/checksum-macro.duckdb' AS checksum_macro;
-USE checksum_macro;
-SELECT * FROM checksum('main.tbl');
+```text
+┌─────────┐
+│    x    │
+│ varchar │
+├─────────┤
+│ 42k     │
+└─────────┘
 ```
+
+> Warning Currently, sharing table macros via attaching is not supported.
