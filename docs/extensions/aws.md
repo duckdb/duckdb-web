@@ -6,6 +6,10 @@ github_repository: https://github.com/duckdb/duckdb_aws
 
 The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities]({% link docs/extensions/httpfs/overview.md %}#s3-api), using the AWS SDK.
 
+> Warning In most cases, you will not need to explicitly interact with the `aws` extension.
+> It will automatically be invoked whenever you use DuckDB's [S3 Secret functionality]({% link docs/sql/statements/create_secret.md %}).
+> See the [`httpfs` extension's S3 capabilities]({% link docs/extensions/httpfs/overview.md %}#s3) for instructions.
+
 ## Installing and Loading
 
 The `aws` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
@@ -19,21 +23,16 @@ LOAD aws;
 ## Related Extensions
 
 `aws` depends on `httpfs` extension capabilities, and both will be autoloaded on the first call to `load_aws_credentials`.
-If autoinstall or autoload are disabled, you can always explicitly install and load them as follows:
+If autoinstall or autoload are disabled, you can always explicitly install and load `httpfs` as follows:
 
 ```sql
-INSTALL aws;
 INSTALL httpfs;
-LOAD aws;
 LOAD httpfs;
 ```
 
-## Usage
-
-In most cases, you will not need to explicitly interact with the `aws` extension. It will automatically be invoked
-whenever you use DuckDB's [S3 Secret functionality]({% link docs/sql/statements/create_secret.md %}). See the [httpfs extension's S3 capabilities]({% link docs/extensions/httpfs/overview.md %}#s3) for instructions.
-
 ## Legacy Features
+
+> Deprecated The `load_aws_credentials` function is deprecated.
 
 Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/sql/statements/create_secret.md %}), to load the credentials automatically, the AWS extension provided
 a special function to load the AWS credentials in the [legacy authentication method]({% link docs/extensions/httpfs/s3api_legacy_authentication.md %}).
@@ -50,9 +49,11 @@ To load the AWS credentials, run:
 CALL load_aws_credentials();
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | loaded_access_key_id | loaded_secret_access_key | loaded_session_token | loaded_region |
 |----------------------|--------------------------|----------------------|---------------|
-| AKIAIOSFODNN7EXAMPLE | <redacted>               | NULL                 | us-east-2     |
+| AKIAIOSFODNN7EXAMPLE | `<redacted>`             | NULL                 | us-east-2     |
 
 The function takes a string parameter to specify a specific profile:
 
@@ -60,15 +61,19 @@ The function takes a string parameter to specify a specific profile:
 CALL load_aws_credentials('minio-testing-2');
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | loaded_access_key_id | loaded_secret_access_key | loaded_session_token | loaded_region |
 |----------------------|--------------------------|----------------------|---------------|
-| minio_duckdb_user_2  | <redacted>               | NULL                 | NULL          |
+| minio_duckdb_user_2  | `<redacted>`             | NULL                 | NULL          |
 
 There are several parameters to tweak the behavior of the call:
 
 ```sql
 CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret = false);
 ```
+
+<div class="narrow_table monospace_table"></div>
 
 | loaded_access_key_id | loaded_secret_access_key     | loaded_session_token | loaded_region |
 |----------------------|------------------------------|----------------------|---------------|

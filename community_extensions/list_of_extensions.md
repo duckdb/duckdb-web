@@ -7,4 +7,4 @@ excerpt: |
 
 All the available Community Extensions are listed below, clicking on any of them will take you to their respective documentation page.
 
-{% include_relative list_of_community_extensions.md %}
+{% include list_of_community_extensions.md %}

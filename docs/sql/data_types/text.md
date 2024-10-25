@@ -11,8 +11,8 @@ The field allows storage of Unicode characters. Internally, the data is encoded 
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `VARCHAR` | `CHAR`, `BPCHAR`, `STRING`, `TEXT` | Variable-length character string |
-| `VARCHAR(n)` | `STRING(n)`, `TEXT(n)` | Variable-length character string. The maximum length _n_ has no effect and is only provided for compatibility. |
+| `VARCHAR` | `CHAR`, `BPCHAR`, `STRING`, `TEXT` | Variable-length character string. |
+| `VARCHAR(n)` | `CHAR(n)`, `BPCHAR(n)`, `STRING(n)`, `TEXT(n)` | Variable-length character string. The maximum length `n` has no effect and is only provided for compatibility. |
 
 ## Specifying a Length Limit
 

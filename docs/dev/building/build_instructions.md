@@ -135,7 +135,7 @@ For example:
 mkdir build
 cd build
 cmake .. \
-    -DBUILD_EXTENSIONS="httpfs;json;parquet" \
+    -DCORE_EXTENSIONS="httpfs;json;parquet" \
     -DDUCKDB_EXTRA_LINK_FLAGS="-latomic"
 make -j4
 ```

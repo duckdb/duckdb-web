@@ -273,8 +273,8 @@ USING (iata);
 Semi joins return rows from the left table that have at least one match in the right table.
 Anti joins return rows from the left table that have _no_ matches in the right table.
 When using a semi or anti join the result will never have more rows than the left hand side table.
-Semi joins provide the same logic as [`IN`]({% link docs/sql/expressions/in.md %}) statements.
-Anti joins provide the same logic as `NOT IN` statements, except anti joins ignore `NULL` values from the right table.
+Semi joins provide the same logic as the [`IN` operator]({% link docs/sql/expressions/in.md %}) statement.
+Anti joins provide the same logic as the `NOT IN` operator, except anti joins ignore `NULL` values from the right table.
 
 #### Semi Join Example
 
@@ -472,6 +472,26 @@ To get the `prices` times in the example, you will need to list the columns expl
 SELECT t.symbol, t.when AS trade_when, p.when AS price_when, price
 FROM trades t
 ASOF LEFT JOIN prices p USING (symbol, "when");
+```
+
+### Self-Joins
+
+DuckDB allows self-joins for all types of joins.
+Note that tables need to be aliased, using the same table name without aliases will result in an error:
+
+```sql
+CREATE TABLE t(x int);
+SELECT * FROM t JOIN t USING(x);
+```
+
+```console
+Binder Error: Duplicate alias "t" in query!
+```
+
+Adding the aliases allows the query to parse successfully:
+
+```sql
+SELECT * FROM t AS t t1 JOIN t t2 USING(x);
 ```
 
 ## `FROM`-First Syntax

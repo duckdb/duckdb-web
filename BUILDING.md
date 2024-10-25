@@ -111,7 +111,20 @@ python scripts/get_calendar.py
 
 ## Syntax highlighter
 
-We use [a fork of the Rouge syntax highligher](https://github.com/duckdb/rouge/blob/duckdb/lib/rouge/lexers/sql.rb), which is extended with keywords not in standard SQL (e.g., `RETURNING`, `ASOF`). This is automatically installed by Bundler.
+We use a [fork of the Rouge syntax highligher](https://github.com/duckdb/rouge/blob/duckdb/lib/rouge/lexers/sql.rb), which is extended with keywords not in standard SQL (e.g., `RETURNING`, `ASOF`). This is automatically installed by Bundler.
+
+To text updates to `rouge` locally, edit the `Gemfile`:
+
+```diff
+-gem "rouge", git: "https://github.com/duckdb/rouge.git", branch: "duckdb"
++gem "rouge", git: "/path/to/your/local/rouge/directory"
+```
+
+Then, run:
+
+```bash
+bundle install
+```
 
 ## Troubleshooting
 
@@ -216,5 +229,6 @@ The following error occurs when trying to access the locally built website via H
 [2024-09-17 12:15:36] ERROR bad URI `����\x12`�\x17\x03�L\x00\x00\x14�'.
 [2024-09-17 12:15:36] ERROR bad Request-Line ...
 ```
+
 This happens frequently with browsers looking to force an HTTPS connection such as Safari.
 The solution is to use an HTTP connection (`http://localhost:4000`) and optionally try another browser (e.g., Chrome or Firefox).
