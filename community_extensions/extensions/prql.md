@@ -50,8 +50,9 @@ docs:
     The PRQL extension adds support for the [Pipelined Relational Query Language](https://prql-lang.org).
 
 extension_star_count: 254
-
-extension_download_count: 142
+extension_star_count_pretty: 254
+extension_download_count: 135
+extension_download_count_pretty: 135
 image: '/images/community_extensions/social_preview/preview_community_extension_prql.png'
 layout: community_extension_doc
 ---

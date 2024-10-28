@@ -95,8 +95,9 @@ repo:
   ref: 3d234c59ce9b3d32b8800c608f818b7f55e39da8
 
 extension_star_count: 13
-
-extension_download_count: 305
+extension_star_count_pretty: 13
+extension_download_count: 310
+extension_download_count_pretty: 310
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---
