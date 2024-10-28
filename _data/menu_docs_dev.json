@@ -285,6 +285,16 @@
               "url": "julia"
             },
             {
+              "page": "Node.js (Neo)",
+              "slug": "node_neo",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                }
+              ]
+            },
+            {
               "page": "Node.js",
               "slug": "nodejs",
               "subsubfolderitems": [
