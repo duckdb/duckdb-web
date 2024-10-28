@@ -68,4 +68,4 @@ See the [Securing Extensions page]({% link docs/archive/1.0/operations_manual/se
 
 ## List of Community Extensions
 
-See the [DuckDB Community Extensions repository site](/community_extensions).
+See the [DuckDB Community Extensions repository site]({% link community_extensions/index.md %}).

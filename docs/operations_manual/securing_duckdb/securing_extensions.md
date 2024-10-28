@@ -12,7 +12,7 @@ DuckDB extensions are checked on every load using the signature of the binaries.
 There are currently three categories of extensions:
 
 * Signed with a `core` key. Only extensions vetted by the core DuckDB team are signed with these keys.
-* Signed with a `community` key. These are open-source extensions distributed via the [DuckDB Community Extensions repository](/community_extensions).
+* Signed with a `community` key. These are open-source extensions distributed via the [DuckDB Community Extensions repository]({% link community_extensions/index.md %}).
 * Unsigned.
 
 ## Overview of Security Levels for Extensions

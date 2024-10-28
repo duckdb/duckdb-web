@@ -219,7 +219,7 @@ Once you are happy with your extension, it's time to share it with the DuckDB co
 Follow the steps in [the Community Extensions post]({% post_url 2024-07-05-community-extensions %}#developer-experience).
 A summary of those steps is:
 
-1. Send a PR with a metadata file `description.yml` that contains the description of the extension. For example, the [`h3` Community Extension](/community_extensions/extensions/h3) uses the following YAML configuration:
+1. Send a PR with a metadata file `description.yml` that contains the description of the extension. For example, the [`h3` Community Extension]({% link community_extensions/extensions/h3.md %}) uses the following YAML configuration:
 
    ```yaml
    extension:
