@@ -14,7 +14,7 @@ The CI/CD chain will automatically build your extension for all supported DuckDB
 To publish an extension in the DuckDB Community Repository, a Pull Request can be opened in the [Community Repository](https://github.com/duckdb/community-extensions). In the PR,
 a descriptor file needs to be specified containing all the relevant information of the extension, such as its source repository and version. Checkout the [already existing community extensions](https://github.com/duckdb/community-extensions/tree/main/extensions) for examples.
 
-The Community Repository builds extensions using DuckDB's [CI toolchain](https://github.com/duckdb/extension-ci-tools), this means that 
+The Community Repository builds extensions using DuckDB's [CI toolchain](https://github.com/duckdb/extension-ci-tools), this means that
 for your extension needs to be buildable with this toolchain. Fortunately, this is the exact same toolchain as is used by the Extension Template, so
 for extensions based on the template, this works out of the box.
 
@@ -27,7 +27,7 @@ With DuckDB's Community Extensions being a [relatively new]({% post_url 2024-07-
 * [extension template](https://github.com/duckdb/extension-template)
 * [Community Extensions Repository](https://github.com/duckdb/community-extensions)
 
-However, because of the batteries-included nature of the extension template and the [large](/community_extensions) [amount]({% link docs/extensions/core_extensions.md %}) or example extensions, extension development should be relatively straightforward.
+However, because of the batteries-included nature of the extension template and the [large]({% link community_extensions/index.md %}) [amount]({% link docs/extensions/core_extensions.md %}) or example extensions, extension development should be relatively straightforward.
 
 ## Getting Help
 
