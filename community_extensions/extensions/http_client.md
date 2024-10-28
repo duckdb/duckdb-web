@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: http_client
   description: DuckDB HTTP Client Extension
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: MIT
@@ -18,72 +18,80 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-httpclient
-  ref: f876fb673770b2108a754dd889b0003602b190b4
+  ref: db0ebb7f8c2688ff7a785b83a387bf782d13afd1
 
 docs:
   hello_world: |
     -- GET Request Example w/ JSON Parsing
-    D WITH __input AS (
-      SELECT
-        http_get(
+    WITH __input AS (
+    SELECT
+      http_get(
           'https://httpbin.org/delay/0'
-       ) AS data
+      ) AS res
     ),
-    __features AS (
+    __response AS (
       SELECT
-        unnest( from_json((data::JSON)->'headers', '{"Host": "VARCHAR"}') )
-        AS features
+        (res->>'status')::INT AS status,
+        (res->>'reason') AS reason,
+        unnest( from_json(((res->>'body')::JSON)->'headers', '{"Host": "VARCHAR"}') ) AS features
       FROM
         __input
     )
     SELECT
-      __features.Host AS host,
+      __response.status,
+      __response.reason,
+      __response.Host AS host,
     FROM
-      __features
+      __response
     ;
-    ┌─────────────┐
-    │    host     │
-    │   varchar   │
-    ├─────────────┤
-    │ httpbin.org │
-    └─────────────┘
+    ┌────────┬─────────┬─────────────┐
+    │ status │ reason  │    host     │
+    │ int32  │ varchar │   varchar   │
+    ├────────┼─────────┼─────────────┤
+    │    200 │ OK      │ httpbin.org │
+    └────────┴─────────┴─────────────┘
 
     -- POST Request Example w/ Headers and Parameters
     WITH __input AS (
-      SELECT
-        http_post(
+    SELECT
+      http_post(
           'https://httpbin.org/delay/0',
           headers => MAP {
             'accept': 'application/json',
           },
-          params => MAP {}
-       ) AS data
+          params => MAP {
+          }
+      ) AS res
     ),
-    __features AS (
+    __response AS (
       SELECT
-        unnest( from_json((data::JSON)->'headers', '{"Host": "VARCHAR"}') )
-        AS features
+        (res->>'status')::INT AS status,
+        (res->>'reason') AS reason,
+        unnest( from_json(((res->>'body')::JSON)->'headers', '{"Host": "VARCHAR"}') ) AS features
       FROM
         __input
     )
     SELECT
-      __features.Host AS host,
+      __response.status,
+      __response.reason,
+      __response.Host AS host,
     FROM
-      __features
+      __response
     ;
-    ┌─────────────┐
-    │    host     │
-    │   varchar   │
-    ├─────────────┤
-    │ httpbin.org │
-    └─────────────┘
+    ┌────────┬─────────┬─────────────┐
+    │ status │ reason  │    host     │
+    │ int32  │ varchar │   varchar   │
+    ├────────┼─────────┼─────────────┤
+    │    200 │ OK      │ httpbin.org │
+    └────────┴─────────┴─────────────┘
 
   extended_description: |
-    This extension is experimental and potentially unstable. Do not use it in production yet.
+    The HTTP Client Extension is experimental, use at your own risk!
 
-extension_star_count: 12
-
-extension_download_count: null
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 56
+extension_download_count_pretty: 56
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---

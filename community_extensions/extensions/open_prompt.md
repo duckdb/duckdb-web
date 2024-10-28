@@ -39,8 +39,9 @@ docs:
     This extension is experimental and potentially unstable. Do not use it in production.
 
 extension_star_count: 4
-
-extension_download_count: null
+extension_star_count_pretty: 4
+extension_download_count: 41
+extension_download_count_pretty: 41
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---
