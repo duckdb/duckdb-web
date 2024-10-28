@@ -7,7 +7,7 @@ title: Community Extensions Download Metrics
 
 We use an estimate provided by Cloudflare for the `INSTALL` events of Community Extensions (as well as regular extensions) that triggered downloads from the `http[s]://community-extensions.duckdb.org` site.
 
-We publish data about the total number of downloads, aggregated across DuckDB versions and platforms at the <https://community-extensions.duckdb.org/downloads-last-week.json> endpoint.
+We publish data about the total number of downloads, aggregated across DuckDB versions and platforms at the [`https://community-extensions.duckdb.org/downloads-last-week.json`](https://community-extensions.duckdb.org/downloads-last-week.json) endpoint.
 
 ## Analyzing Downloads
 
@@ -27,11 +27,12 @@ For example, to return the download counts for the weeks since October 1, 2024:
 
 ```sql
 UNPIVOT (
-    SELECT COLUMNS(* EXCLUDE (_last_update) REPLACE (filename.regexp_extract('/(\d+/\d+)\.json', 1) AS filename))
+    SELECT * EXCLUDE (_last_update) REPLACE (filename.regexp_extract('/(\d+/\d+)\.json', 1) AS filename)
     FROM read_json([
-            'http://community-extensions.duckdb.org/download-stats-weekly/' || strftime(x, '%Y/%W') || '.json'
+            printf('http://community-extensions.duckdb.org/download-stats-weekly/%s.json',
+                strftime(x, '%Y/%W'))
             FOR x IN range(TIMESTAMP '2024-10-01', now()::TIMESTAMP, INTERVAL 1 WEEK)
-         ], filename = true
+        ], filename = true
     )
 )
 ON COLUMNS(* EXCLUDE (filename))
