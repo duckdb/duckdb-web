@@ -12,9 +12,9 @@ Recently, an article was published [advocating for using SQL for Data Analysis](
 
 While you can very effectively perform aggregations and data transformations in an external database system such as Postgres if your data is stored there, at some point you will need to convert that data back into [Pandas](https://pandas.pydata.org) and [NumPy](https://numpy.org). These libraries serve as the standard for data exchange between the vast ecosystem of Data Science libraries in Python<sup>1</sup> such as [scikit-learn](https://scikit-learn.org/stable/) or [TensorFlow](https://www.tensorflow.org).
 
-If you are reading from a file (e.g., a CSV or Parquet file) often your data will never be loaded into an external database system at all, and will instead be directly loaded into a Pandas DataFrame.
+<sup>1</sup>[Apache Arrow](https://arrow.apache.org) is gaining significant traction in this domain as well, and DuckDB also quacks Arrow.
 
-[1] [Apache Arrow](https://arrow.apache.org) is gaining significant traction in this domain as well, and DuckDB also quacks Arrow.
+If you are reading from a file (e.g., a CSV or Parquet file) often your data will never be loaded into an external database system at all, and will instead be directly loaded into a Pandas DataFrame.
 
 ## SQL on Pandas
 
@@ -40,7 +40,6 @@ One of the core goals of DuckDB is that accessing data in common formats should 
 DuckDB can also write query results directly to any of these formats. You can use DuckDB to process a Pandas DataFrame in parallel using SQL, and convert the result back to a Pandas DataFrame again, so you can then use the result in other Data Science libraries.
 
 When you run a query in SQL, DuckDB will look for Python variables whose name matches the table names in your query and automatically start reading your Pandas DataFrames. Looking back at the previous example we can see this in action:
-
 
 ```python
 import pandas as pd
@@ -88,10 +87,11 @@ orders = duckdb.query(
 For our first query, we will run a set of ungrouped aggregates over the Pandas DataFrame. Here is the SQL query:
 
 ```sql
-SELECT sum(l_extendedprice),
-       min(l_extendedprice),
-       max(l_extendedprice),
-       avg(l_extendedprice)
+SELECT
+    sum(l_extendedprice),
+    min(l_extendedprice),
+    max(l_extendedprice),
+    avg(l_extendedprice)
 FROM lineitem;
 ```
 
@@ -106,12 +106,11 @@ lineitem.agg(
 )
 ```
 
-
-|    Name     | Time (s) |
-|:-------------|----------:|
-| DuckDB (1 Thread) | 0.079    |
-| DuckDB (2 Threads) | 0.048    |
-| Pandas      | 0.070    |
+|    Name            | Time (s)  |
+|:-------------------|----------:|
+| DuckDB (1 Thread)  | 0.079     |
+| DuckDB (2 Threads) | 0.048     |
+| Pandas             | 0.070     |
 
 This benchmark involves a very simple query, and Pandas performs very well here. These simple queries are where Pandas excels (ha), as it can directly call into the numpy routines that implement these aggregates, which are highly efficient. Nevertheless, we can see that DuckDB performs similar to Pandas in the single-threaded scenario, and benefits from its multi-threading support when enabled.
 
@@ -121,16 +120,16 @@ For our second query, we will run the same set of aggregates, but this time incl
 
 ```sql
 SELECT
-      l_returnflag,
-      l_linestatus,
-      sum(l_extendedprice),
-      min(l_extendedprice),
-      max(l_extendedprice),
-      avg(l_extendedprice)
+    l_returnflag,
+    l_linestatus,
+    sum(l_extendedprice),
+    min(l_extendedprice),
+    max(l_extendedprice),
+    avg(l_extendedprice)
 FROM lineitem
 GROUP BY
-        l_returnflag,
-        l_linestatus;
+    l_returnflag,
+    l_linestatus;
 ```
 
 In Pandas, we use the groupby function before we perform the aggregation.
@@ -160,17 +159,18 @@ Now suppose that we don't want to perform an aggregate over all of the data, but
 
 ```sql
 SELECT
-  l_returnflag,
-  l_linestatus,
-  sum(l_extendedprice),
-  min(l_extendedprice),
-  max(l_extendedprice),
-  avg(l_extendedprice)
+    l_returnflag,
+    l_linestatus,
+    sum(l_extendedprice),
+    min(l_extendedprice),
+    max(l_extendedprice),
+    avg(l_extendedprice)
 FROM lineitem
 WHERE
-   l_shipdate <= DATE '1998-09-02'
-GROUP BY l_returnflag,
-         l_linestatus;
+    l_shipdate <= DATE '1998-09-02'
+GROUP BY
+    l_returnflag,
+    l_linestatus;
 ```
 
  In Pandas, we can create a filtered variant of the DataFrame by using the selection brackets.
@@ -227,25 +227,25 @@ While the manual projection pushdown significantly speeds up the query in Pandas
 
 Due to its holistic query optimizer and efficient query processor, DuckDB performs significantly better on this query.
 
-
 ### Joins
 
 For the final query, we will join (`merge` in Pandas) the lineitem table with the orders table, and apply a filter that only selects orders which have the status we are interested in. This leads us to the following query in SQL:
 
 ```sql
 SELECT
-  l_returnflag,
-  l_linestatus,
-  sum(l_extendedprice),
-  min(l_extendedprice),
-  max(l_extendedprice),
-  avg(l_extendedprice)
-FROM lineitem lineitem
-JOIN orders orders ON (l_orderkey=o_orderkey)
+    l_returnflag,
+    l_linestatus,
+    sum(l_extendedprice),
+    min(l_extendedprice),
+    max(l_extendedprice),
+    avg(l_extendedprice)
+FROM lineitem
+JOIN orders ON (l_orderkey = o_orderkey)
 WHERE l_shipdate <= DATE '1998-09-02'
   AND o_orderstatus='O'
-GROUP BY l_returnflag,
-         l_linestatus;
+GROUP BY
+    l_returnflag,
+    l_linestatus;
 ```
 
 For Pandas, we have to add a `merge` step. In a basic approach, we merge lineitem and orders together, then apply the filters, and finally apply the grouping and aggregation. This will give us the following code snippet:
@@ -380,8 +380,10 @@ For the benchmark, we will run two queries: the simplest query (the ungrouped ag
 In DuckDB, we can create a view over the Parquet file using the following query. This allows us to run queries over the Parquet file as if it was a regular table. Note that we do not need to worry about projection pushdown at all: we can just do a `SELECT *` and DuckDB's optimizer will take care of only projecting the required columns at query time.
 
 ```sql
-CREATE VIEW lineitem_parquet AS SELECT * FROM 'lineitemsf1.snappy.parquet';
-CREATE VIEW orders_parquet AS SELECT * FROM 'orders.parquet';
+CREATE VIEW lineitem_parquet AS
+    SELECT * FROM 'lineitemsf1.snappy.parquet';
+CREATE VIEW orders_parquet AS
+    SELECT * FROM 'orders.parquet';
 ```
 
 ### Ungrouped Aggregate
@@ -422,18 +424,20 @@ We can see that the performance difference between doing the pushdown and not do
 Now for the final query that we saw in the join section previously. To recap:
 
 ```sql
-SELECT l_returnflag,
-       l_linestatus,
-       sum(l_extendedprice),
-       min(l_extendedprice),
-       max(l_extendedprice),
-       avg(l_extendedprice)
+SELECT
+    l_returnflag,
+    l_linestatus,
+    sum(l_extendedprice),
+    min(l_extendedprice),
+    max(l_extendedprice),
+    avg(l_extendedprice)
 FROM lineitem lineitem
-JOIN orders orders ON (l_orderkey=o_orderkey)
+JOIN orders orders ON (l_orderkey = o_orderkey)
 WHERE l_shipdate <= DATE '1998-09-02'
   AND o_orderstatus='O'
-GROUP BY l_returnflag,
-         l_linestatus;
+GROUP BY
+    l_returnflag,
+    l_linestatus;
 ```
 
 For Pandas we again create two versions. A naive version, and a manually optimized version. The exact code used can be found [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing).
