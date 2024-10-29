@@ -473,9 +473,9 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | [`regr_intercept(y, x)`](#regr_intercepty-x) | The intercept of the univariate linear regression line, where x is the independent variable and y is the dependent variable. |
 | [`regr_r2(y, x)`](#regr_r2y-x) | The squared Pearson correlation coefficient between y and x. Also: The coefficient of determination in a linear regression, where x is the independent variable and y is the dependent variable. |
 | [`regr_slope(y, x)`](#regr_slopey-x) | The slope of the linear regression line, where x is the independent variable and y is the dependent variable. |
-| [`regr_sxx(y, x)`](#regr_sxxy-x) | The sample variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
-| [`regr_sxy(y, x)`](#regr_sxyy-x) | The sample covariance, which includes Bessel's bias correction. |
-| [`regr_syy(y, x)`](#regr_syyy-x) | The sample variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs , where x is the independent variable and y is the dependent variable. |
+| [`regr_sxx(y, x)`](#regr_sxxy-x) | The population variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| [`regr_sxy(y, x)`](#regr_sxyy-x) | The population covariance, which includes Bessel's bias correction. |
+| [`regr_syy(y, x)`](#regr_syyy-x) | The population variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs , where x is the independent variable and y is the dependent variable. |
 | [`skewness(x)`](#skewnessx) | The skewness. |
 | [`stddev_pop(x)`](#stddev_popx) | The population standard deviation. |
 | [`stddev_samp(x)`](#stddev_sampx) | The sample standard deviation. |
@@ -622,7 +622,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The sample variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| **Description** | The population variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -630,7 +630,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The sample covariance, which includes Bessel's bias correction. |
+| **Description** | The population covariance, which includes Bessel's bias correction. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -638,7 +638,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The sample variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| **Description** | The population variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
