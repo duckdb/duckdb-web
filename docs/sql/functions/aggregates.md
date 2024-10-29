@@ -107,10 +107,12 @@ The table below shows the available general aggregate functions.
 |:--|:--------|
 | [`any_value(arg)`](#any_valuearg) | Returns the first non-null value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arbitrary(arg)`](#arbitraryarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`arg_max(arg, val)`](#arg_maxarg-val) | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`arg_max(arg, val, n)`](#arg_maxarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
-| [`arg_min(arg, val)`](#arg_minarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`arg_min(arg, val, n)`](#arg_minarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending.  |
+| [`arg_max(arg, val)`](#arg_maxarg-val) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_max(arg, val, n)`](#arg_maxarg-val-n) | The generalized case of [`arg_max`](#arg_maxarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_max_null(arg, val)`](#arg_max_nullarg-val) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the `arg` expression evaluates to `NULL` are ignored.  This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_min(arg, val)`](#arg_minarg-val) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_min(arg, val, n)`](#arg_minarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending.  This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_min_null(arg, val)`](#arg_min_nullarg-val) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the `arg` expression evaluates to `NULL` are ignored.  This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`array_agg(arg)`](#array_aggarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`avg(arg)`](#avgarg) | Calculates the average of all non-null values in `arg`. |
 | [`bit_and(arg)`](#bit_andarg) | Returns the bitwise AND of all bits in a given expression. |
@@ -160,7 +162,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Description** | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_max(A, B)` |
 | **Alias(es)** | `argMax(arg, val)`, `max_by(arg, val)` |
 
@@ -168,25 +170,41 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
+| **Description** | The generalized case of [`arg_max`](#arg_maxarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_max(A, B, 2)` |
 | **Alias(es)** | `argMax(arg, val, n)`, `max_by(arg, val, n)` |
+
+#### `arg_max_null(arg, val)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the `arg` expression evaluates to `NULL` are ignored.  This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Example** | `arg_max_null(A, B)` |
+| **Alias(es)** | - |
 
 #### `arg_min(arg, val)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Description** | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_min(A, B)` |
-| **Alias(es)** | `argMin(arg, val)`, `min_by(arg, val)` |
+| **Alias(es)** | `argmin(arg, val)`, `min_by(arg, val)` |
 
 #### `arg_min(arg, val, n)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
+| **Description** | The generalized case of [`arg_min`](#arg_minarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_min(A, B, 2)` |
-| **Alias(es)** | `argMin(arg, val, n)`, `min_by(arg, val, n)` |
+| **Alias(es)** | `argmin(arg, val, n)`, `min_by(arg, val, n)` |
+
+#### `arg_min_null(arg, val)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the `arg` expression evaluates to `NULL` are ignored.  This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Example** | `arg_min_null(A, B)` |
+| **Alias(es)** | - |
 
 #### `array_agg(arg)`
 
@@ -412,13 +430,14 @@ The table below shows the available general aggregate functions.
 | **Example** | `sum(A)` |
 | **Alias(es)** | - |
 
-### Nulls
+### Handling `NULL` Values
 
-All general aggregate functions except for `list` and `first` (and their aliases `array_agg` and `arbitrary`, respectively) ignore `NULL`s. 
-To exclude `NULL`s from `list`, you can use a [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}). To ignore `NULL`s from `first`, you can use the `any_value` aggregate. 
+All general aggregate functions except for [`list`](#listarg) and [`first`](#firstarg) (and their aliases [`array_agg`](#array_aggarg) and [`arbitrary`](#arbitraryarg), respectively) ignore `NULL`s.
+To exclude `NULL`s from `list`, you can use a [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}).
+To ignore `NULL`s from `first`, you can use the [`any_value` aggregate](#any_valuearg).
 
-All general aggregate functions except `count` return `NULL` on empty groups and groups without non-`NULL` inputs. 
-In particular, `list` does *not* return an empty list, `sum` does *not* return zero, and `string_agg` does *not* return an empty string in this case.
+All general aggregate functions except [`count`](#countarg) return `NULL` on empty groups and groups without non-`NULL` inputs.
+In particular, [`list`](#listarg) does *not* return an empty list, [`sum`](#sumarg) does *not* return zero, and [`string_agg`](#string_aggarg-sep) does *not* return an empty string in this case.
 
 ## Approximate Aggregates
 
