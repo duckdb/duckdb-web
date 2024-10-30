@@ -45,7 +45,7 @@ You can also pass in additional options when creating an R-tree index using the 
 CREATE INDEX my_idx ON my_table USING RTREE (geom) WITH (max_node_capacity = 16);
 ```
 
-The impact tweaking these options will have on performance is highly dependent on the system setup DuckDB is running on, the spatial distribution of the dataset, and the query patterns of your specific workload. The defaults should be good enough, but you if you want to experiment with different parameters, see the the [full list of options here](#options).
+The impact tweaking these options will have on performance is highly dependent on the system setup DuckDB is running on, the spatial distribution of the dataset, and the query patterns of your specific workload. The defaults should be good enough, but you if you want to experiment with different parameters, see the [full list of options here](#options).
 
 ## Example
 
