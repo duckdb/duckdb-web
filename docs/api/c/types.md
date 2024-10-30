@@ -81,7 +81,6 @@ For more information about data chunks, see the [documentation on data chunks]({
 <span class="kt">idx_t</span> <a href="#duckdb_result_chunk_count"><span class="nf">duckdb_result_chunk_count</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 <span class="kt">duckdb_result_type</span> <a href="#duckdb_result_return_type"><span class="nf">duckdb_result_return_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 </code></pre></div></div>
-</code></pre></div></div>
 
 ### Date Time Timestamp Helpers
 
@@ -96,20 +95,17 @@ For more information about data chunks, see the [documentation on data chunks]({
 <span class="kt">duckdb_timestamp</span> <a href="#duckdb_to_timestamp"><span class="nf">duckdb_to_timestamp</span></a>(<span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts</span>);
 <span class="kt">bool</span> <a href="#duckdb_is_finite_timestamp"><span class="nf">duckdb_is_finite_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
 </code></pre></div></div>
-</code></pre></div></div>
 
 ### Hugeint Helpers
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_hugeint_to_double"><span class="nf">duckdb_hugeint_to_double</span></a>(<span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
 <span class="kt">duckdb_hugeint</span> <a href="#duckdb_double_to_hugeint"><span class="nf">duckdb_double_to_hugeint</span></a>(<span class="kt">double</span> <span class="nv">val</span>);
 </code></pre></div></div>
-</code></pre></div></div>
 
 ### Decimal Helpers
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
 <span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="kt">duckdb_decimal</span> <span class="nv">val</span>);
-</code></pre></div></div>
 </code></pre></div></div>
 
 ### Logical Type Interface

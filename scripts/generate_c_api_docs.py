@@ -337,7 +337,6 @@ for group_name in docs_map.keys():
     else:
         quick_docs = file_docs[file_name][0]
         function_doc_for_this_group = file_docs[file_name][1]
-        quick_docs += quick_docs_end()
         quick_docs += '\n### ' + group_name + '\n\n'
         quick_docs += quick_docs_start()
     for entry in group_docs[group_name]:
