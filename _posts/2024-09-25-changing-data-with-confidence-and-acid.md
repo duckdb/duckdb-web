@@ -2,8 +2,8 @@
 layout: post
 title: "Changing Data with Confidence and ACID"
 author: "Hannes Mühleisen and Mark Raasveldt"
-thumb: "/images/blog/thumbs/240925.svg"
-image: "/images/blog/thumbs/240925.png"
+thumb: "/images/blog/thumbs/acid.svg"
+image: "/images/blog/thumbs/acid.png"
 excerpt: "Transactions are key features in database management systems and are also beneficial for data analysis workloads. DuckDB supports fully ACID transactions, confirmed by the TPC-H benchmark's test suite."
 ---
 
