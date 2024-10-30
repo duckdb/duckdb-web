@@ -60,10 +60,10 @@ docs:
 
     *Disclaimer*: As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 70
-extension_star_count_pretty: 70
-extension_download_count: 443
-extension_download_count_pretty: 443
+extension_star_count: 72
+extension_star_count_pretty: 72
+extension_download_count: 445
+extension_download_count_pretty: 445
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -111,14 +111,14 @@ LOAD {{ page.extension.name }};
 | iterativelength              | scalar        |             |         |         |
 | iterativelength2             | scalar        |             |         |         |
 | iterativelengthbidirectional | scalar        |             |         |         |
-| local_clustering_coefficient | scalar        |             |         |         |
 | local_clustering_coefficient | table         |             |         |         |
-| pagerank                     | table         |             |         |         |
+| local_clustering_coefficient | scalar        |             |         |         |
 | pagerank                     | scalar        |             |         |         |
+| pagerank                     | table         |             |         |         |
 | reachability                 | scalar        |             |         |         |
 | shortestpath                 | scalar        |             |         |         |
-| weakly_connected_component   | table         |             |         |         |
 | weakly_connected_component   | scalar        |             |         |         |
+| weakly_connected_component   | table         |             |         |         |
 
 
 
