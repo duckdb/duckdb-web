@@ -431,8 +431,8 @@ SELECT
     min(l_extendedprice),
     max(l_extendedprice),
     avg(l_extendedprice)
-FROM lineitem lineitem
-JOIN orders orders ON (l_orderkey = o_orderkey)
+FROM lineitem
+JOIN orders ON (l_orderkey = o_orderkey)
 WHERE l_shipdate <= DATE '1998-09-02'
   AND o_orderstatus='O'
 GROUP BY
