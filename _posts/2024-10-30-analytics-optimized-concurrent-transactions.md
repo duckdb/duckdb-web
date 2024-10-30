@@ -4,7 +4,7 @@ title: "Analytics-Optimized Concurrent Transactions"
 author: "Mark Raasveldt and Hannes Mühleisen"
 thumb: "/images/blog/thumbs/acid.svg"
 image: "/images/blog/thumbs/acid.png"
-excerpt: "DuckDB employs unique analytics-optimized optimistic multi-version concurrency control techniques, which allows it perform large-scale in-place updates efficiently."
+excerpt: "DuckDB employs unique analytics-optimized optimistic multi-version concurrency control techniques. These allow DuckDB to perform large-scale in-place updates efficiently."
 ---
 
 > This is the second post on DuckDB's ACID support. If you have not read the first post, [Changing Data with Confidence and ACID]({% post_url 2024-09-25-changing-data-with-confidence-and-acid %}), it may be a good idea to start there.
