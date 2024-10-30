@@ -27,8 +27,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 116
-extension_download_count_pretty: 116
+extension_download_count: 107
+extension_download_count_pretty: 107
 image: '/images/community_extensions/social_preview/preview_community_extension_pivot_table.png'
 layout: community_extension_doc
 ---
@@ -66,8 +66,8 @@ LOAD {{ page.extension.name }};
 | nq                          | macro         |             |         |         |
 | nq_concat                   | macro         |             |         |         |
 | nq_list                     | macro         |             |         |         |
-| pivot_table                 | scalar        |             |         |         |
 | pivot_table                 | table_macro   |             |         |         |
+| pivot_table                 | scalar        |             |         |         |
 | pivot_table_openssl_version | scalar        |             |         |         |
 | pivot_table_show_sql        | table_macro   |             |         |         |
 | replace_zzz                 | macro         |             |         |         |
