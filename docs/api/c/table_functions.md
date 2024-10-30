@@ -22,7 +22,6 @@ The table function API can be used to define a table function that can then be c
 <span class="kt">void</span> <a href="#duckdb_table_function_supports_projection_pushdown"><span class="nf">duckdb_table_function_supports_projection_pushdown</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">bool</span> <span class="nv">pushdown</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_register_table_function"><span class="nf">duckdb_register_table_function</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">con</span>, <span class="kt">duckdb_table_function</span> <span class="nv">function</span>);
 </code></pre></div></div>
-</code></pre></div></div>
 
 ### Table Function Bind
 
@@ -35,7 +34,6 @@ The table function API can be used to define a table function that can then be c
 <span class="kt">void</span> <a href="#duckdb_bind_set_cardinality"><span class="nf">duckdb_bind_set_cardinality</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">cardinality</span>, <span class="kt">bool</span> <span class="nv">is_exact</span>);
 <span class="kt">void</span> <a href="#duckdb_bind_set_error"><span class="nf">duckdb_bind_set_error</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 </code></pre></div></div>
-</code></pre></div></div>
 
 ### Table Function Init
 
@@ -46,7 +44,6 @@ The table function API can be used to define a table function that can then be c
 <span class="kt">idx_t</span> <a href="#duckdb_init_get_column_index"><span class="nf">duckdb_init_get_column_index</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">column_index</span>);
 <span class="kt">void</span> <a href="#duckdb_init_set_max_threads"><span class="nf">duckdb_init_set_max_threads</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">max_threads</span>);
 <span class="kt">void</span> <a href="#duckdb_init_set_error"><span class="nf">duckdb_init_set_error</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
-</code></pre></div></div>
 </code></pre></div></div>
 
 ### Table Function
