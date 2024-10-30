@@ -34,9 +34,9 @@ DuckDB implements MVCC using a technique inspired by the paper [“Fast Serializ
 UPDATE Accounts SET Balance = Balance + 5 WHERE Name = 'Sally';
 ```
 
-<img src="/images/blog/mvcc/rowbasedmvcc.svg"
-     alt="Row-Based MVCC MVCC"
-     width=800
+<img src="/images/blog/mvcc/rowbasedmvcc.png"
+     alt="Row-Based MVCC"
+     width="800"
  />
 
 When reading a row, a transaction will first check if there is version information for that row. If there is none, which is the common case, the transaction can read the original data. If there is version information, the transaction has to compare the transaction number at the transaction's start time with those in the undo buffers and pick the right version to read.
@@ -66,9 +66,9 @@ In order to address these issues - DuckDB instead stores **bulk version informat
 UPDATE Accounts SET Balance = Balance + Balance / 5;
 ```
 
-<img src="/images/blog/mvcc/columnbasedmvcc.svg"
-     alt="Column-Based MVCC MVCC"
-     width=800
+<img src="/images/blog/mvcc/columnbasedmvcc.png"
+     alt="Column-Based MVCC"
+     width="800"
  />
 
 One beautiful aspect of this undo buffer scheme is that it is largely performance-transparent: if no changes are made, there are no extra computational cost associated with providing support for transactions. To the best of our knowledge, DuckDB is the *only transactional data management system that is optimized for bulk changes to data* that are common in analytical use cases. But even with changes present, our transaction scheme is very fast for the kind of transactions that we expect for analytical use cases.
