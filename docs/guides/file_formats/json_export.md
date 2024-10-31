@@ -20,7 +20,7 @@ COPY (SELECT * FROM tbl) TO 'output.json';
 The JSON export writes JSON lines by default. The `ARRAY` option can be used to write a JSON array instead.
 
 ```sql
-COPY tbl TO 'output.json' (ARRAY true);
+COPY tbl TO 'output.json' (ARRAY);
 ```
 
 For additional options, see the [`COPY` statement documentation]({% link docs/sql/statements/copy.md %}).
