@@ -12,7 +12,7 @@ extension:
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_rtools"
+  excluded_platforms: "windows_amd64_rtools;wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - archiewood
 
@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_download_count: 23
+extension_download_count_pretty: 23
 image: '/images/community_extensions/social_preview/preview_community_extension_gsheets.png'
 layout: community_extension_doc
 ---
