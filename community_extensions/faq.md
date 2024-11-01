@@ -50,7 +50,7 @@ For details on securing your DuckDB setup, please refer to the [Securing Extensi
 
 Writing a DuckDB extension as a collection of SQL macro is already done be a few extensions. The [pivot_table]{% link community_extensions/extensions/pivot_table.md %} and [chsql]{% link community_extensions/extensions/chsql.md %} extensions for example follow this pattern.
 
-Currently some C++ wrapper code is required, but this is possibly the simplest way to build a community extension AND the best way to package a set of utlity MACROs to be safely distributed.
+Currently some C++ wrapper code is required, but this is possibly the simplest way to build a community extension *and* the best way to package a set of utility macros to be safely distributed.
 
 </div>
 
