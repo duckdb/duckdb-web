@@ -93,7 +93,7 @@ SELECT * FROM read_ndjson_objects('*.json.gz');
 {"duck":43,"goose":[4,5,6],"swan":3.3}
 ```
 
---
+<!--
 
 add columns for parameters
 
@@ -105,7 +105,7 @@ read_*_objects vs vanilla reads
 
 todo: add `map_inference_threshold` and `field_appearance_threshold`
 
---
+-->
 
 
 DuckDB also supports reading JSON as a table, using the following functions:
