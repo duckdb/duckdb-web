@@ -34,7 +34,7 @@ PIVOT (
             FOR x IN range(TIMESTAMP '2024-10-01', now()::TIMESTAMP, INTERVAL 1 WEEK)
         ])
     )
-    ON COLUMNS(* EXCLUDE _last_update )
+    ON COLUMNS(* EXCLUDE _last_update)
     INTO NAME extension VALUE tot
 )
 ON date_trunc('day',_last_update)
