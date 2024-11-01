@@ -26,16 +26,18 @@ ORDER BY downloads_last_week DESC;
 For example, to return the download counts for the weeks since October 1, 2024:
 
 ```sql
-UNPIVOT (
-    SELECT * EXCLUDE (_last_update) REPLACE (filename.regexp_extract('/(\d+/\d+)\.json', 1) AS filename)
-    FROM read_json([
-            printf('http://community-extensions.duckdb.org/download-stats-weekly/%s.json',
+PIVOT (
+    UNPIVOT (
+        FROM read_json([
+            printf('https://community-extensions.duckdb.org/download-stats-weekly/%s.json',
                 strftime(x, '%Y/%W'))
             FOR x IN range(TIMESTAMP '2024-10-01', now()::TIMESTAMP, INTERVAL 1 WEEK)
-        ], filename = true
+        ])
     )
+    ON COLUMNS(* EXCLUDE _last_update )
+    INTO NAME extension VALUE tot
 )
-ON COLUMNS(* EXCLUDE (filename))
-INTO NAME extension VALUE downloads
-ORDER BY extension, filename;
+ON date_trunc('day',_last_update)
+USING any_value(tot)
+ORDER BY extension;
 ```
