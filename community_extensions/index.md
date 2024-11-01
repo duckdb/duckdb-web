@@ -40,7 +40,7 @@ Community extensions are distributed via the Community Extension endpoint at `ht
 
 Community Extension submissions and build process happens via the [Community Extension repo](https://github.com/duckdb/community-extensions).
 
-Check the [Development page]{% link community_extensions/development %} on how to contribute an extension.
+Check the [Development page]{% link community_extensions/development.md %} on how to contribute an extension.
 
 DuckDB Community extensions are conceptually similar to a package manager such as [Homebrew](https://brew.sh/), where code will reside in your own repository, but build and distribution is centralized.
 
@@ -48,7 +48,7 @@ DuckDB Community extensions are conceptually similar to a package manager such a
 
 DuckDB Community extensions are signed, so that on LOAD a check is performed to prove a given extensions has been built by the Community Extension CI.
 
-For more information on extensions and how to use them, check the [securing extensions]{% link docs/operations_manual/securing_duckdb/securing_extensions %} and [working with extensions]{% link http://localhost:4000/docs/extensions/working_with_extensions %} pages.
+For more information on extensions and how to use them, check the [securing extensions]{% link docs/operations_manual/securing_duckdb/securing_extensions.md %} and [working with extensions]{% link docs/extensions/working_with_extensions.md %} pages.
 
 In particular if you want to forbid `LOAD` of community extensions
 ```sql
