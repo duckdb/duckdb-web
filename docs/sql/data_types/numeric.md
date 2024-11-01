@@ -85,7 +85,7 @@ On input, these strings are recognized in a case-insensitive manner.
 ## Universally Unique Identifiers (`UUID`s)
 
 DuckDB supports universally unique identifiers (UUIDs) through the `UUID` type. These use 128 bits and are represented internally as `HUGEINT` values.
-When printed, they are shown with hexadecimal characters, separated by dashes as follows: `⟨8 characters⟩-⟨4 characters⟩-⟨4 characters⟩-⟨4 characters⟩-⟨12 characters⟩` (using 36 characters in total). For example, `4ac7a9e9-607c-4c8a-84f3-843f0191e3fd` is a valid UUID.
+When printed, they are shown with lowercase hexadecimal characters, separated by dashes as follows: `⟨8 characters⟩-⟨4 characters⟩-⟨4 characters⟩-⟨4 characters⟩-⟨12 characters⟩` (using 36 characters in total including the dashes). For example, `4ac7a9e9-607c-4c8a-84f3-843f0191e3fd` is a valid UUID.
 
 To generate a new UUID, use the [`uuid()` utility function]({% link docs/sql/functions/utility.md %}#utility-functions).
 
