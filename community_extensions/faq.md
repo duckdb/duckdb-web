@@ -44,6 +44,22 @@ For details on securing your DuckDB setup, please refer to the [Securing Extensi
 
 <div class="qa-wrap" markdown="1">
 
+### Can I expose SQL macros as an extension?
+
+<div class="answer" markdown="1">
+
+Writing a DuckDB extension as a collection of SQL macro is already done be a few extensions. [pivot_table]{% link community_extensions/extensions/pivot_table %} or [chsql]{% link community_extensions/extensions/chsql %} for example follow this pattern.
+
+Currently some C++ wrapper code is required, but this is possibly the simplest way to build a community extension AND the best way to package a set of utlity MACROs to be safely distributed.
+
+</div>
+
+</div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
 ### Can I write extensions in Rust?
 
 <div class="answer" markdown="1">
