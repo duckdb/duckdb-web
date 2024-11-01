@@ -8,7 +8,7 @@ excerpt: "We use the duckplyr R library to clean and analyze an Open Data set pu
 ---
 
 <img src="/images/blog/duckplyr/duckplyr-logo.svg"
-     width=400
+     width="400"
      />
 
 Wrangling data by throwing SQL strings at it is not the most ergonomic way to perform interactive data analysis in R. For a while now, we have been working with the dplyr project team at [Posit](https://posit.co/) (formerly RStudio) and Kirill Müller to develop *duckplyr*. [duckplyr](https://duckplyr.tidyverse.org) is a high-performance drop-in replacement for dplyr, powered by DuckDB. You can read more about duckplyr in the [announcement blog post]({% post_url 2024-04-02-duckplyr %}). In this post, we are going to walk through a challenging real-world use case with duckplyr. For those of you wishing to follow along, we have prepared a [Google Colab notebook](https://colab.research.google.com/drive/1PxvkZ4FpMNtP-CpKpz5hvH-xKgaYC3-S) with all the code snippets in this post. Timings reported below are also from Colab.
@@ -267,4 +267,8 @@ print(twenty_till_fourty_non_european_in_auckland_area)
 
 actual computation is triggered. This finishes in the same time as the hand-rolled SQL query above, only that this time we had a much more pleasant experience from using the dplyr syntax. And, thankfully, the result is still exactly the same.
 
-This use case was also presented as part of [my keynote at this year's posit::conf](https://reg.conf.posit.co/flow/posit/positconf24/publiccatalog/page/publiccatalog/session/1712004520570001r6eL). If you're registered, there is a video available after login. Finally, we should note that duckplyr is still being developed. We have taking great care in not breaking anything and will fall back on the existing dplyr implementation if anything cannot be run in DuckDB (yet). But we would love to [hear from you](https://github.com/tidyverse/duckplyr/issues) if anything does not work as expected.
+This use case was also presented as part of [my keynote at this year's posit::conf](https://www.youtube.com/watch?v=GELhdezYmP0):
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GELhdezYmP0?si=suO9fC652ooAZKOq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Finally, we should note that duckplyr is still being developed. We have taking great care in not breaking anything and will fall back on the existing dplyr implementation if anything cannot be run in DuckDB (yet). But we would love to [hear from you](https://github.com/tidyverse/duckplyr/issues) if anything does not work as expected.
