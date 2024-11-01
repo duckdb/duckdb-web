@@ -46,7 +46,7 @@ FROM read_json('todos.json');
 Read a JSON file from disk, auto-infer options:
 
 ```sql
-SELECT * FROM 'https://duckdb.org/data/https://duckdb.org/data/todos.json';
+SELECT * FROM 'https://duckdb.org/data/todos.json';
 ```
 
 Use the `read_json` function with custom options:
