@@ -16,7 +16,7 @@ This section describes functions and operators for examining and manipulating [`
 | Name | Description |
 |:--|:-------|
 | [`string ^@ search_string`](#string--search_string) | Return true if `string` begins with `search_string`. |
-| [`string || string`](#string--string) | String concatenation. |
+| [`string || string`](#string--string) | Concatenate two strings. NULL inputs result in NULL. See also [`concat(string, ...)`](#concatstring-). |
 | [`string[index]`](#stringindex) | Extract a single character using a (1-based) index. |
 | [`string[begin:end]`](#stringbeginend) | Extract a string using slice conventions, see [slicing]({% link docs/sql/functions/list.md %}#slicing). |
 | [`string LIKE target`](#string-like-target) | Returns true if the `string` matches the like specifier (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})). |
@@ -27,8 +27,8 @@ This section describes functions and operators for examining and manipulating [`
 | [`bar(x, min, max[, width])`](#barx-min-max-width) | Draw a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
 | [`bit_length(string)`](#bit_lengthstring) | Number of bits in a string. |
 | [`chr(x)`](#chrx) | Returns a character which is corresponding the ASCII code value or Unicode code point. |
-| [`concat_ws(separator, string, ...)`](#concat_wsseparator-string-) | Concatenate strings together separated by the specified separator. |
-| [`concat(string, ...)`](#concatstring-) | Concatenate many strings together. |
+| [`concat_ws(separator, string, ...)`](#concat_wsseparator-string-) | Concatenate many strings, separated by separator. NULLs inputs are skipped. |
+| [`concat(string, ...)`](#concatstring-) | Concatenate many strings. NULL inputs are treated as the empty string. See also [`string || string`](#string--string). |
 | [`contains(string, search_string)`](#containsstring-search_string) | Return true if `search_string` is found within `string`. |
 | [`ends_with(string, search_string)`](#ends_withstring-search_string) | Return true if `string` ends with `search_string`. |
 | [`format_bytes(bytes)`](#format_bytesbytes) | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
@@ -112,10 +112,9 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | String concatenation. |
+| **Description** | Concatenate two strings. NULL inputs result in NULL. See also [`concat(string, ...)`](#concatstring-). |
 | **Example** | `'Duck' || 'DB'` |
 | **Result** | `DuckDB` |
-| **Alias** | `concat` |
 
 #### `string[index]`
 
@@ -221,16 +220,16 @@ SELECT
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate strings together separated by the specified separator. |
-| **Example** | `concat_ws(', ', 'Banana', 'Apple', 'Melon')` |
+| **Description** | Concatenate many strings, separated by separator. NULLs inputs are skipped. |
+| **Example** | `concat_ws(', ', 'Banana', 'Apple', NULL, 'Melon')` |
 | **Result** | `Banana, Apple, Melon` |
 
 #### `concat(string, ...)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate many strings together. |
-| **Example** | `concat('Hello', ' ', 'World')` |
+| **Description** | Concatenate many strings. NULL inputs are treated as the empty string. See also [`string || string`](#string--string). |
+| **Example** | `concat('Hello', ' ', NULL, 'World')` |
 | **Result** | `Hello World` |
 
 #### `contains(string, search_string)`
