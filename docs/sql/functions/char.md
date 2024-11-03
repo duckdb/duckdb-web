@@ -16,7 +16,7 @@ This section describes functions and operators for examining and manipulating [`
 | Name | Description |
 |:--|:-------|
 | [`string ^@ search_string`](#string--search_string) | Return true if `string` begins with `search_string`. |
-| [`string || string`](#string--string) | Concatenate two strings. NULL inputs result in NULL. See also [`concat(string, ...)`](#concatstring-). |
+| [`string || string`](#string--string) | Concatenate two strings. Any NULL input results in NULL. See also [`concat(string, ...)`](#concatstring-). |
 | [`string[index]`](#stringindex) | Extract a single character using a (1-based) index. |
 | [`string[begin:end]`](#stringbeginend) | Extract a string using slice conventions, see [slicing]({% link docs/sql/functions/list.md %}#slicing). |
 | [`string LIKE target`](#string-like-target) | Returns true if the `string` matches the like specifier (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})). |
