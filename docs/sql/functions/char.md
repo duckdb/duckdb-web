@@ -112,7 +112,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate two strings. NULL inputs result in NULL. See also [`concat(string, ...)`](#concatstring-). |
+| **Description** | Concatenate two strings. Any NULL input results in NULL. See also [`concat(string, ...)`](#concatstring-). |
 | **Example** | `'Duck' || 'DB'` |
 | **Result** | `DuckDB` |
 
