@@ -126,6 +126,11 @@ ALTER TABLE integers DROP k;
 ```
 
 The `DROP COLUMN` clause can be used to remove a column from a table. Note that columns can only be removed if they do not have any indexes that rely on them. This includes any indexes created as part of a `PRIMARY KEY` or `UNIQUE` constraint. Columns that are part of multi-column check constraints cannot be dropped either.
+If you attempt to drop a column with an index on it, DuckDB will return the following error message:
+
+```console
+Dependency Error: Cannot alter entry "..." because there are entries that depend on it.
+```
 
 ## `ALTER TYPE`
 
