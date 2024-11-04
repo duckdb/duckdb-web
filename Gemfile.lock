@@ -252,7 +252,7 @@ GEM
       ethon (>= 0.9.0)
     unicode-display_width (2.6.0)
     uri (0.13.1)
-    webrick (1.8.2)
+    webrick (1.9.0)
     word_wrap (1.0.0)
 
 PLATFORMS
@@ -316,7 +316,7 @@ DEPENDENCIES
   rouge!
   safe_yaml (= 1.0.5)
   sass (= 3.7.4)
-  webrick (~> 1.8)
+  webrick (~> 1.9)
   word_wrap (~> 1.0)
 
 BUNDLED WITH
