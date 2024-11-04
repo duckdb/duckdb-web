@@ -27,8 +27,8 @@ This section describes functions and operators for examining and manipulating [`
 | [`bar(x, min, max[, width])`](#barx-min-max-width) | Draw a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
 | [`bit_length(string)`](#bit_lengthstring) | Number of bits in a string. |
 | [`chr(x)`](#chrx) | Returns a character which is corresponding the ASCII code value or Unicode code point. |
-| [`concat_ws(separator, string, ...)`](#concat_wsseparator-string-) | Concatenate many strings, separated by separator. NULLs inputs are skipped. |
-| [`concat(string, ...)`](#concatstring-) | Concatenate many strings. NULL inputs are treated as the empty string. See also [`string || string`](#string--string). |
+| [`concat_ws(separator, string, ...)`](#concat_wsseparator-string-) | Concatenate many strings, separated by `separator`. NULL inputs are treated as empty strings. |
+| [`concat(string, ...)`](#concatstring-) | Concatenate many strings. NULL inputs are treated as empty strings. See also [`string || string`](#string--string). |
 | [`contains(string, search_string)`](#containsstring-search_string) | Return true if `search_string` is found within `string`. |
 | [`ends_with(string, search_string)`](#ends_withstring-search_string) | Return true if `string` ends with `search_string`. |
 | [`format_bytes(bytes)`](#format_bytesbytes) | Converts bytes to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
@@ -220,7 +220,7 @@ SELECT
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate many strings, separated by separator. NULLs inputs are skipped. |
+| **Description** | Concatenate many strings, separated by `separator`. NULL inputs are treated as empty strings. |
 | **Example** | `concat_ws(', ', 'Banana', 'Apple', NULL, 'Melon')` |
 | **Result** | `Banana, Apple, Melon` |
 
@@ -228,7 +228,7 @@ SELECT
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate many strings. NULL inputs are treated as the empty string. See also [`string || string`](#string--string). |
+| **Description** | Concatenate many strings. NULL inputs are treated as empty strings. See also [`string || string`](#string--string). |
 | **Example** | `concat('Hello', ' ', NULL, 'World')` |
 | **Result** | `Hello World` |
 
