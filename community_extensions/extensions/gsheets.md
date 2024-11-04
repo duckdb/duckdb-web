@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: gsheets
   description: Read and write Google Sheets using SQL
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: MIT
@@ -18,15 +18,19 @@ extension:
 
 repo:
   github: evidence-dev/duckdb_gsheets
-  ref: 7f7c6e2f85edd9ad9c2f16f2075818627fca8405
+  ref: 01bdf2872b78af1b9234792766392840fc4a91b7
 
 docs:
   hello_world: |
     -- Authenticate with Google Account in the browser (easiest)
-    CREATE SECRET (TYPE gsheet, PROVIDER oauth);
+    CREATE SECRET (TYPE gsheet);
     
     -- OR create a secret with your Google API access token (boring, see extension docs)
-    CREATE SECRET (TYPE gsheet, TOKEN '<your_token>');
+    CREATE SECRET (
+      TYPE gsheet, 
+      PROVIDER access_token, 
+      TOKEN '<your_token>'
+    );
     
     -- Read a spreadsheet by full URL
     FROM read_gsheet('https://docs.google.com/spreadsheets/d/11QdEasMWbETbFVxry-SsD8jVcdYIT1zBQszcF84MdE8/edit');
@@ -59,10 +63,10 @@ docs:
     The DuckDB GSheets Extension allows reading and writing of data in Google Sheets from DuckDB.
     For detailed setup and usage instructions, visit the docs at [duckdb-gsheets.com](https://duckdb-gsheets.com).
 
-extension_star_count: 21
-extension_star_count_pretty: 21
-extension_download_count: 23
-extension_download_count_pretty: 23
+extension_star_count: 23
+extension_star_count_pretty: 23
+extension_download_count: 37
+extension_download_count_pretty: 37
 image: '/images/community_extensions/social_preview/preview_community_extension_gsheets.png'
 layout: community_extension_doc
 ---

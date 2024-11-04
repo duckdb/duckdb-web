@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: bigquery
   description: Integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets
-  version: 1.0.0
+  version: 0.1.0
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: hafenkran/duckdb-bigquery
-  ref: 656055570493d26de86c4ab3a81f0c1b718835d2
+  ref: e5cd4a9ac32ce3380559bc63869c442c14e1fb75
 
 docs:
   hello_world: |
@@ -51,10 +51,10 @@ docs:
     The DuckDB BigQuery Extension integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/hafenkran/duckdb-bigquery).
 
-extension_star_count: 55
-extension_star_count_pretty: 55
-extension_download_count: 215
-extension_download_count_pretty: 215
+extension_star_count: 56
+extension_star_count_pretty: 56
+extension_download_count: 222
+extension_download_count_pretty: 222
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
@@ -80,22 +80,25 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type | description | comment | example |
-|----------------------|---------------|-------------|---------|---------|
-| bigquery_attach      | table         |             |         |         |
-| bigquery_clear_cache | table         |             |         |         |
-| bigquery_execute     | table         |             |         |         |
-| bigquery_scan        | table         |             |         |         |
+|    function_name     | function_type |                                       description                                        | comment |                                                         example                                                         |
+|----------------------|---------------|------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------|
+| bigquery_attach      | table         | Attach to a BigQuery project.                                                            |         | ATTACH 'project=my_gcp_project' as bq (TYPE bigquery);                                                                  |
+| bigquery_scan        | table         | Scan a single table directly from BigQuery.                                              |         | SELECT * FROM bigquery_scan('my_gcp_project.quacking_dataset.duck_tbl');                                                |
+| bigquery_query       | table         | Run a custom GoogleSQL query in BigQuery and read the results.                           |         | SELECT * FROM bigquery_query('bq', 'SELECT * FROM quacking_dataset.duck_tbl WHERE duck_id = 123');                      |
+| bigquery_execute     | table         | Execute an arbitrary GoogleSQL query in BigQuery.                                        |         | CALL bigquery_execute('bq', 'CREATE SCHEMA deluxe_dataset OPTIONS(location="us", default_table_expiration_days=3.75);') |
+| bigquery_jobs        | table         | List jobs in a BigQuery project.                                                         |         | SELECT * FROM bigquery_jobs('bq');                                                                                      |
+| bigquery_clear_cache | table         | Clear the internal caches to refetch the most current project information from BigQuery. |         | CALL bigquery_clear_cache();                                                                                            |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|              name               |                         description                         | input_type | scope  |
-|---------------------------------|-------------------------------------------------------------|------------|--------|
-| bq_curl_ca_bundle_path          | Path to the CA bundle for curl                              | VARCHAR    | GLOBAL |
-| bq_debug_show_queries           | DEBUG SETTING: print all queries sent to BigQuery to stdout | BOOLEAN    | GLOBAL |
-| bq_experimental_filter_pushdown | Whether to use filter pushdown (currently experimental)     | BOOLEAN    | GLOBAL |
+|              name               |                                                                description                                                                 | input_type | scope  |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
+| bq_curl_ca_bundle_path          | Path to the CA bundle for curl                                                                                                             | VARCHAR    | GLOBAL |
+| bq_debug_show_queries           | DEBUG SETTING: print all queries sent to BigQuery to stdout                                                                                | BOOLEAN    | GLOBAL |
+| bq_experimental_filter_pushdown | Whether to use filter pushdown (currently experimental)                                                                                    | BOOLEAN    | GLOBAL |
+| bq_experimental_use_info_schema | Whether to fetch table infos from BQ information schema (currently experimental). Can be significantly faster than fetching from REST API. | BOOLEAN    | GLOBAL |
 
 
 
