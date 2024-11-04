@@ -51,7 +51,7 @@ title: Media
 
 | | | | |
 |:---|:---|:---|---:|
-| [Data Talks on the Rocks (episode 5)](https://www.youtube.com/watch?v=a-RmhY5RPVg) | Data Talks on the Rocks | Hannes Mühleisen  | 80min |
+| [Data Talks on the Rocks (episode 5)](https://www.youtube.com/watch?v=a-RmhY5RPVg) | Data Talks on the Rocks by [Rill Data](https://www.rilldata.com/) | Hannes Mühleisen  | 80min |
 | [DuckDB with Hannes Mühleisen](https://softwareengineeringdaily.com/2024/08/08/duckdb-with-hannes-muhleisen/) | Software Engineering Daily | Hannes Mühleisen | 50min |
 | [Implementing hardware-friendly databases](https://www.youtube.com/watch?v=pZV9FvdKmLc) | Developer Voices | Hannes Mühleisen | 80min |
 | [Deep dive into DuckDB](https://www.youtube.com/watch?v=f9QlkXW4H9A) | The Geek Narrator | Mark Raasveldt | 1h |
