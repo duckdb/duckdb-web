@@ -22,7 +22,7 @@ url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. htt
 # Set current version of DuckDB
 currentshortduckdbversion: "1.1"
 currentduckdbversion: 1.1.3
-currentduckdbhash: "f680b7d08f"
+currentduckdbhash: "19864453f7"
 currentsnapshotversion: 1.1.3-dev
 currentduckdbodbcversion: 1.1.0
 # Java
