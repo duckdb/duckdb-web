@@ -193,3 +193,36 @@ For instruction on reclaiming space, refer to the [“Reclaiming space” page](
 
 DuckDB does not support the [`to_date` PostgreSQL date formatting function](https://www.postgresql.org/docs/17/functions-formatting.html).
 Instead, please use the [`strptime` function]({% link docs/sql/functions/dateformat.md %}#strptime-examples).
+
+## Resolution of Type Names in the Schema
+
+For [`CREATE TABLE` statements]({% link docs/sql/statements/create_table.md %}), DuckDB attempts to resolve type names in the schema where a table is created. For example:
+
+```sql
+CREATE SCHEMA myschema;
+CREATE TYPE myschema.mytype AS ENUM ('as', 'df');
+CREATE TABLE myschema.mytable (v mytype);
+```
+
+PostgreSQL returns an error on the last statement:
+
+```console
+ERROR:  type "mytype" does not exist
+LINE 1: CREATE TABLE myschema.mytable (v mytype);
+                                         ^
+```
+
+DuckDB runs the statement and creates the table successfully, confirmed by the following query:
+
+```sql
+DESCRIBE myschema.mytable;
+```
+
+```text
+┌─────────────┬──────────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │   column_type    │  null   │   key   │ default │  extra  │
+│   varchar   │     varchar      │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼──────────────────┼─────────┼─────────┼─────────┼─────────┤
+│ v           │ ENUM('as', 'df') │ YES     │ NULL    │ NULL    │ NULL    │
+└─────────────┴──────────────────┴─────────┴─────────┴─────────┴─────────┘
+```
