@@ -3,7 +3,7 @@ layout: docu
 title: Node.js API (Neo)
 ---
 
-# DuckDB Node.js API
+# DuckDB Node.js API (Neo)
 
 An API for using [DuckDB](https://duckdb.org/) in [Node.js](https://nodejs.org/).
 
