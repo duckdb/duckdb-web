@@ -129,6 +129,24 @@ DuckDB can also run in [in-memory mode]({% link docs/connect/overview.md %}#in-m
 
 <div class="qa-wrap" markdown="1">
 
+### What disk should I run DuckDB on?
+
+<div class="answer" markdown="1">
+
+The type of storage used by DuckDB has a [big performance impact]({% link docs/guides/performance/environment.md %}#disk) on read-write workloads.
+To achieve optimal performance on these workloads, we recommend run DuckDB on SSD or NVMe disks.
+In the cloud, instance-attached storage (with local SSD or NVMe disks) yields better performance but network-attached cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/) also work.
+Based on our experience, we **advise against running DuckDB workloads on on-premises network-attached storage (NAS).**
+Such setups are often slow and result in spurious failures that are difficult to troubleshoot.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### Is DuckDB an in-memory database?
 
 <div class="answer" markdown="1">
