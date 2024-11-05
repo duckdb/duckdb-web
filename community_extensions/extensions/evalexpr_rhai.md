@@ -89,15 +89,15 @@ extension:
   - rustyconover
   name: evalexpr_rhai
   requires_toolchains: rust
-  version: 1.0.1
+  version: 1.0.2
 repo:
   github: rustyconover/duckdb-evalexpr-rhai-extension
-  ref: 3d234c59ce9b3d32b8800c608f818b7f55e39da8
+  ref: 7bc848761cdd896a9613ad1db4d43b1c9b8a4b66
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 294
-extension_download_count_pretty: 294
+extension_download_count: 363
+extension_download_count_pretty: 363
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---

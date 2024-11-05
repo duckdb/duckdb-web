@@ -88,10 +88,10 @@ docs:
   extended_description: |
     The HTTP Client Extension is experimental, use at your own risk!
 
-extension_star_count: 20
-extension_star_count_pretty: 20
-extension_download_count: 69
-extension_download_count_pretty: 69
+extension_star_count: 26
+extension_star_count_pretty: 26
+extension_download_count: 128
+extension_download_count_pretty: 128
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---
