@@ -27,7 +27,7 @@ SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3]) 
 Additionally, the overloaded `min_by(col, arg, n)` can also be accelerated with the `HNSW` index if the `arg` argument is a matching distance metric function. This can be used to do quick one-shot nearest neighbor searches. For example, to get the top 3 rows with the closest vectors to `[1, 2, 3]`:
 
 ```sql
-SELECT min_by(my_vector_table, array_distance(vec, [1, 2, 3]::FLOAT[3]), 3) as result FROM my_vector_table;
+SELECT min_by(my_vector_table, array_distance(vec, [1, 2, 3]::FLOAT[3]), 3) AS result FROM my_vector_table;
 ---- [{'vec': [1.0, 2.0, 3.0]}, {'vec': [1.0, 2.0, 4.0]}, {'vec': [2.0, 2.0, 3.0]}] 
 ```
 
@@ -117,7 +117,8 @@ To remedy the last point, you can call the `PRAGMA hnsw_compact_index('⟨index 
 
 ## Bonus: Vector Similarity Search Joins
 
-The `vss` extension also provides a couple of table macros to simplify matching multiple vectors against eachother, so called "fuzzy joins". These are: 
+The `vss` extension also provides a couple of table macros to simplify matching multiple vectors against eachother, so called "fuzzy joins". These are:
+
 * `vss_join(left_table, right_table, left_col, right_col, k, metric := 'l2sq')`
 * `vss_match(right_table", left_col, right_col, k, metric := 'l2sq')`
 
@@ -134,7 +135,7 @@ FROM range(1, 10) ra(a), range(1, 10) rb(b), range(1, 10) rc(c);
 
 INSERT INTO needle VALUES ([5, 5, 5]), ([1, 1, 1]);
 
-SELECT * FROM vss_join(needle, haystack, search_vec, vec, 3) as res;
+SELECT * FROM vss_join(needle, haystack, search_vec, vec, 3) AS res;
 ```
 
 ```text
@@ -157,7 +158,7 @@ SELECT * FROM vss_join(needle, haystack, search_vec, vec, 3) as res;
 -- Note that this requires us to specify the left table first, and then 
 -- the vss_match macro which references the search column from the left
 -- table (in this case, `search_vec`).
-SELECT * FROM needle, vss_match(haystack, search_vec, vec, 3) as res;
+SELECT * FROM needle, vss_match(haystack, search_vec, vec, 3) AS res;
 ```
 
 ```text
