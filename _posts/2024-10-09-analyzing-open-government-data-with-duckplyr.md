@@ -257,7 +257,7 @@ year   <- duckplyr_df_from_csv("DimenLookupYear8277.csv")
 
 This takes exactly 0 seconds, because duckplyr is not actually doing much. We detect the schema of the CSV files using our award-winning “sniffer”, and create the six placeholder objects for each of those files. Part of the unique design of duckplyr is that those objects are “Heisenbergian”, they behave like completely normal R `data.frame`s once they are treated as such, but they can *also* act as lazy evaluation placeholders when they are passed to downstream analysis steps. This is made possible by a little-known R feature known as `ALTREP` which allows R vectors to be computed on-demand among other things.
 
-Now we re-run the exact same dplyr pipeline as above. Only this time we are “done” in less than a second. This is because all we have done is *lazily* constructing a so-called relation tree which encapsulates the entirety of the transformations. This allows *holistic* optimization, for example pushing the year and ethnicity all the way down to the reading of the csv file *before* joining. We can also eliminate the reading of columns that are not used in the query at all.
+Now we re-run the exact same dplyr pipeline as above. Only this time we are “done” in less than a second. This is because all we have done is *lazily* constructing a so-called relation tree which encapsulates the entirety of the transformations. This allows *holistic* optimization, for example pushing the year and ethnicity all the way down to the reading of the CSV file *before* joining. We can also eliminate the reading of columns that are not used in the query at all.
 
 Only when we finally print the result
 
