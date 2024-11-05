@@ -269,5 +269,5 @@ FROM checksum('schedule');
 ## Closing Thoughts
 
 That’s it for today!
-We’ll be back soon with more DuckDB tricks and case studies. =
+We’ll be back soon with more DuckDB tricks and case studies.
 In the meantime, if you have a trick that would like to share, please share it with the DuckDB team on our social media sites, or submit it to the [DuckDB Snippets site](https://duckdbsnippets.com/) (maintained by our friends at MotherDuck).
