@@ -77,7 +77,7 @@ Databases typically prefer strictness in column definitions and flexibility in t
 
 No longer do you need to know all of your column names up front! DuckDB can select and even modify columns based on regular expression pattern matching, `EXCLUDE` or `REPLACE` modifiers, and even lambda functions (see the [section on lambda functions below](#list-lambda-functions) for details!).
 
-Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}), we can query a csv dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
+Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}), we can query a CSV dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
 
 ```sql
 INSTALL httpfs;
