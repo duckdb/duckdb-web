@@ -126,12 +126,11 @@ SELECT * FROM t1;
 We want to get a list of the top-3 `val` values in each group `grp`. The conventional way to do this is to use a window function in a subquery:
 
 ```sql
-SELECT array_agg(rs.val), rs.grp 
-FROM (
-    SELECT val, grp, row_number() OVER (PARTITION BY grp ORDER BY val DESC) as rid 
-    FROM t1 ORDER BY val DESC
-) AS rs 
-WHERE rid < 4 
+SELECT array_agg(rs.val), rs.grp
+FROM
+    (SELECT val, grp, row_number() OVER (PARTITION BY grp ORDER BY val DESC) AS rid
+    FROM t1 ORDER BY val DESC) AS rs
+WHERE rid < 4
 GROUP BY rs.grp;
 ```
 
