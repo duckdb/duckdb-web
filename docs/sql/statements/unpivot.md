@@ -201,7 +201,7 @@ DuckDB allows expressions within the `UNPIVOT` statements, provided that they on
 
 ```sql
 UNPIVOT
-    (SELECT 42 as col1, 'woot' as col2)
+    (SELECT 42 AS col1, 'woot' AS col2)
     ON
         (col1 * 2)::VARCHAR,
         col2;

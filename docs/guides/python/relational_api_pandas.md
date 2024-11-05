@@ -20,7 +20,7 @@ rel = con.from_df(input_df)
 
 # chain together relational operators (this is a lazy operation, so the operations are not yet executed)
 # equivalent to: SELECT i, j, i*2 AS two_i FROM input_df WHERE i >= 2 ORDER BY i DESC LIMIT 2
-transformed_rel = rel.filter('i >= 2').project('i, j, i*2 as two_i').order('i desc').limit(2)
+transformed_rel = rel.filter('i >= 2').project('i, j, i*2 AS two_i').order('i DESC').limit(2)
 
 # trigger execution by requesting .df() of the relation
 # .df() could have been added to the end of the chain above - it was separated for clarity
