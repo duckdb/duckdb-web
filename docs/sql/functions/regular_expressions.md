@@ -202,3 +202,8 @@ Binder Error: Not enough group names in regexp_extract
 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.
 If the number of column names is greater, then an error is generated.
+
+## Limitations
+
+Regular expressions only support 9 capture groups: `\1`, `\2`, `\3`, ..., `\9`.
+Capture groups with two or more digits are not supported.
