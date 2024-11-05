@@ -447,7 +447,7 @@ List comprehensions can also use the position of the list elements by adding a s
 In the following example, we use `x, i`, where `x` is the value and `i` is the position:
 
 ```sql
-SELECT [4, 5, 6] as l, [x FOR x, i IN l IF i != 2] filtered;
+SELECT [4, 5, 6] AS l, [x FOR x, i IN l IF i != 2] filtered;
 ```
 
 <div class="narrow_table monospace_table"></div>

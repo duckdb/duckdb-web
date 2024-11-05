@@ -56,7 +56,7 @@ INSTALL spatial;
 LOAD spatial;
 
 -- Create a table with 10_000_000 random points
-CREATE TABLE t1 AS SELECT point::GEOMETRY as geom
+CREATE TABLE t1 AS SELECT point::GEOMETRY AS geom
 FROM st_generatepoints({min_x: 0, min_y: 0, max_x: 100, max_y: 100}::BOX_2D, 10_000, 1337);
 
 -- Create an index on the table.
@@ -144,7 +144,7 @@ Example:
 
 ```sql
 -- Create a table with 64 random points
-CREATE TABLE t1 AS SELECT point::GEOMETRY as geom
+CREATE TABLE t1 AS SELECT point::GEOMETRY AS geom
 FROM st_generatepoints({min_x: 0, min_y: 0, max_x: 100, max_y: 100}::BOX_2D, 64, 1337);
 
 -- Create an R-tree index on the geometry column (with a low max_node_capacity for demonstration purposes)
@@ -154,10 +154,10 @@ CREATE INDEX my_idx ON t1 USING RTREE (geom) WITH (max_node_capacity = 4);
 -- decreases as we go deeper into the tree.
 SELECT 
   level, 
-  bounds::GEOMETRY as geom, 
-  CASE WHEN row_id IS NULL THEN st_area(geom) ELSE NULL END as area, 
+  bounds::GEOMETRY AS geom, 
+  CASE WHEN row_id IS NULL THEN st_area(geom) ELSE NULL END AS area, 
   row_id, 
-  CASE WHEN row_id IS NULL THEN 'branch' ELSE 'leaf' END as kind 
+  CASE WHEN row_id IS NULL THEN 'branch' ELSE 'leaf' END AS kind 
 FROM rtree_index_dump('my_idx') 
 ORDER BY area DESC;
 ```

@@ -154,7 +154,7 @@ SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth
 To keep track of each entry's position within the original list, `unnest` may be combined with [`generate_subscripts`]({% link docs/sql/functions/list.md %}#generate_subscripts):
 
 ```sql
-SELECT unnest(l) as x, generate_subscripts(l, 1) AS index
+SELECT unnest(l) AS x, generate_subscripts(l, 1) AS index
 FROM (VALUES ([1, 2, 3]), ([4, 5])) tbl(l);
 ```
 

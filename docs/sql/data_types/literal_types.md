@@ -89,7 +89,8 @@ SELECT 'Hello' ' ' 'World' AS greeting;
 
 ```console
 Parser Error: syntax error at or near "' '"
-LINE 1: SELECT 'Hello' ' ' 'World' as greeting;
+LINE 1: SELECT 'Hello' ' ' 'World' AS greeting;
+                       ^
 ```
 
 Also note that implicit concatenation only works with single-quoted string literals, and does not work with other kinds of string values.
