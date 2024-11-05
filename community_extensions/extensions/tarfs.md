@@ -28,8 +28,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 136
-extension_download_count_pretty: 136
+extension_download_count: 172
+extension_download_count_pretty: 172
 image: '/images/community_extensions/social_preview/preview_community_extension_tarfs.png'
 layout: community_extension_doc
 ---
