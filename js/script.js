@@ -237,6 +237,7 @@ $(document).ready(function(){
 		var strings = $typeElement.data('strings').split('|');
 		var typewriter = new Typewriter($typeElement[0], {
 			loop: true, 
+			delay: 50,
 			wrapperClassName: "typewrapper",
 			cursorClassName: "typecursor",
 			cursor: "|"
