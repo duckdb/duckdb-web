@@ -1,16 +1,32 @@
-const xhr = new XMLHttpRequest();
-xhr.open('GET', '/data/search_data.json');
-xhr.onreadystatechange = function(event) {
-	if (this.readyState === 4) {
-		const { data } = JSON.parse(this.responseText);
-		let documents = data.map((item, id) => ({id, ...item}));
+let searchDataLoaded = false; // Flag to prevent multiple loads
 
-		// Add documents to the index
-		miniSearch.addAll(documents)
-		miniPredictor.addAll(documents);
-	}
+function loadSearchData() {
+	if (searchDataLoaded) return; // Skip if already loaded
+
+	const xhr = new XMLHttpRequest();
+	xhr.open('GET', '/data/search_data.json');
+	xhr.onreadystatechange = function(event) {
+		if (this.readyState === 4) {
+			const { data } = JSON.parse(this.responseText);
+			let documents = data.map((item, id) => ({id, ...item}));
+
+			// Add documents to the index
+			miniSearch.addAll(documents);
+			miniPredictor.addAll(documents);
+
+			searchDataLoaded = true; // Mark data as loaded
+			
+			console.log("search_data.json successfully loaded and indexed.");
+		}
+	};
+	xhr.send();
 }
-xhr.send();
+
+// Event listeners to load search data only on interaction
+const text_div = document.getElementById("q");
+text_div.addEventListener('focus', loadSearchData);
+text_div.addEventListener('input', loadSearchData);
+text_div.addEventListener('keydown', loadSearchData);
 
 const tokenize = (string) => string.split(/[\s-.]+/); // search query tokenizer
 
@@ -77,7 +93,7 @@ function perform_search(query) {
 		} else {
 			search_html += "search_result_uneven";
 		}
-		search_html += "'>"
+		search_html += "'>";
 		search_html += "<a href='" + results[i].url + "'>";
 		search_html += "</a> ";
 		search_html += "<h2 class='search_title'>";
@@ -106,7 +122,6 @@ function on_update(e) {
 	perform_search(e.target.value);
 }
 
-let text_div = document.getElementById("q");
 text_div.addEventListener('keyup', on_update);
 text_div.addEventListener('input', on_update);
 
@@ -217,7 +232,7 @@ function addActive(x) {
 function removeActive(x) {
 	/*a function to remove the "active" class from all autocomplete items:*/
 	for (var i = 0; i < x.length; i++) {
-	x[i].classList.remove("autocomplete-active");
+		x[i].classList.remove("autocomplete-active");
 	}
 }
 function closeAllLists(elmnt) {

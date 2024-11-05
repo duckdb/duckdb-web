@@ -201,13 +201,13 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	</main>
 
 
-	<script src="{{ site.baseurl }}/js/minisearch.js?{{ site.data['hash'] }}"></script>
-	<script src="{{ site.baseurl }}/js/search.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/minisearch.js?{{ site.data['hash'] }}" defer></script>
+	<script src="{{ site.baseurl }}/js/search.js?{{ site.data['hash'] }}" defer></script>
 
-	<script src="{{ site.baseurl }}/js/lottie.min.js?{{ site.data['hash'] }}"></script>
-	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}"></script>
-	<script src="{{ site.baseurl }}/js/copy_button.js?{{ site.data['hash'] }}"></script>
-	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}"></script>
+	<script src="{{ site.baseurl }}/js/lottie.min.js?{{ site.data['hash'] }}" defer></script>
+	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}" defer></script>
+	<script src="{{ site.baseurl }}/js/copy_button.js?{{ site.data['hash'] }}" defer></script>
+	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}" defer></script>
 
 	{% assign startingUrlParts = startingUrl | split: "/"  %}
 	{% if startingUrlParts[1] == "archive" %}
@@ -217,12 +217,12 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	{% endif %}
 
 	{% if page.body_class == "installation" %}
-		<script src="{{ site.baseurl }}/js/js-yaml.min.js"></script>
-		<script src="{{ site.baseurl }}/js{{ version_url }}/installation.js?{{ site.data['hash'] }}"></script>
+		<script src="{{ site.baseurl }}/js/js-yaml.min.js" defer></script>
+		<script src="{{ site.baseurl }}/js{{ version_url }}/installation.js?{{ site.data['hash'] }}" defer></script>
 	{% endif %}
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-		<script src="{{ site.baseurl }}/js{{ version_url }}/railroad.js"></script>
-		<script src="{{ site.baseurl }}/js{{ version_url }}/{{ page.railroad }}"></script>
+		<script src="{{ site.baseurl }}/js{{ version_url }}/railroad.js" defer></script>
+		<script src="{{ site.baseurl }}/js{{ version_url }}/{{ page.railroad }}" defer></script>
 	{% endif %}
 
 </body>
