@@ -94,13 +94,16 @@ On Windows, DuckDB requires the [Microsoft Visual C++ Redistributable package](h
 To build DuckDB on Windows, we recommend using the Visual Studio compiler.
 To use it, follow the instructions in the [CI workflow](https://github.com/duckdb/duckdb/blob/52b43b166091c82b3f04bf8af15f0ace18207a64/.github/workflows/Windows.yml#L73):
 
-```bash
+```batch
 python scripts/windows_ci.py
 cmake \
-    -DCMAKE_BUILD_TYPE=Release -DCMAKE_GENERATOR_PLATFORM=x64 \
-    -DENABLE_EXTENSION_AUTOLOADING=1 -DENABLE_EXTENSION_AUTOINSTALL=1 \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_GENERATOR_PLATFORM=x64 \
+    -DENABLE_EXTENSION_AUTOLOADING=1 \
+    -DENABLE_EXTENSION_AUTOINSTALL=1 \
     -DDUCKDB_EXTENSION_CONFIGS="${GITHUB_WORKSPACE}/.github/config/bundled_extensions.cmake" \
-    -DDISABLE_UNITY=1 -DOVERRIDE_GIT_DESCRIBE="$OVERRIDE_GIT_DESCRIBE"
+    -DDISABLE_UNITY=1 \
+    -DOVERRIDE_GIT_DESCRIBE="$OVERRIDE_GIT_DESCRIBE"
 cmake --build . --config Release --parallel
 ```
 
