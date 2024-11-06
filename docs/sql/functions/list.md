@@ -138,7 +138,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate two lists. NULL inputs are skipped. See also `||`  |
+| **Description** | Concatenate two lists. `NULL` inputs are skipped. See also `||`  |
 | **Example** | `list_concat([2, 3], [4, 5, 6])` |
 | **Result** | `[2, 3, 4, 5, 6]` |
 | **Aliases** | `list_cat`, `array_concat`, `array_cat` |
@@ -411,8 +411,8 @@ The following operators are supported for lists:
 | `&&`  | Alias for [`list_has_any`](#list_has_anylist1-list2).                                                                   | `[1, 2, 3, 4, 5] && [2, 5, 5, 6]` | `true`               |
 | `@>`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **right** of the operator is the sublist. | `[1, 2, 3, 4] @> [3, 4, 3]`       | `true`               |
 | `<@`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **left** of the operator is the sublist.  | `[1, 4] <@ [1, 2, 3, 4]`          | `true`               |
-| `||`  | Similar to [`list_concat`](#list_concatlist1-list2), except any NULL input results in NULL.                                 | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
-| `<=>` | Alias for [`list_cosine_distance`](#list_cosine_distancelist1-list2).                                               | `[1, 2, 3] <=> [1, 2, 5]`         | `0.007416606` |
+| `||`  | Similar to [`list_concat`](#list_concatlist1-list2), except any `NULL` input results in `NULL`.                         | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
+| `<=>` | Alias for [`list_cosine_distance`](#list_cosine_distancelist1-list2).                                                   | `[1, 2, 3] <=> [1, 2, 5]`         | `0.007416606`        |
 | `<->` | Alias for [`list_distance`](#list_distancelist1-list2).                                                                 | `[1, 2, 3] <-> [1, 2, 5]`         | `2.0`                |
 
 <!-- markdownlint-enable MD056 -->

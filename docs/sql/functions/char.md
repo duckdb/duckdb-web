@@ -112,7 +112,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate two strings. Any NULL input results in NULL. See also [`concat(string, ...)`](#concatstring-). |
+| **Description** | Concatenate two strings. Any `NULL` input results in `NULL`. See also [`concat(string, ...)`](#concatstring-). |
 | **Example** | `'Duck' || 'DB'` |
 | **Result** | `DuckDB` |
 
@@ -220,7 +220,7 @@ SELECT
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate many strings, separated by `separator`. NULL inputs are skipped. |
+| **Description** | Concatenate many strings, separated by `separator`. `NULL` inputs are skipped. |
 | **Example** | `concat_ws(', ', 'Banana', 'Apple', NULL, 'Melon')` |
 | **Result** | `Banana, Apple, Melon` |
 
@@ -228,7 +228,7 @@ SELECT
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate many strings. NULL inputs are skipped. See also [`string || string`](#string--string). |
+| **Description** | Concatenate many strings. `NULL` inputs are skipped. See also [`string || string`](#string--string). |
 | **Example** | `concat('Hello', ' ', NULL, 'World')` |
 | **Result** | `Hello World` |
 

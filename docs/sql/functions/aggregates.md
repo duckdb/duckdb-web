@@ -146,7 +146,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the first non-null value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Description** | Returns the first non-`NULL` value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `any_value(A)` |
 | **Alias(es)** | - |
 
@@ -154,7 +154,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Description** | Returns the first value (`NULL` or non-`NULL`) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arbitrary(A)` |
 | **Alias(es)** | `first(A)` |
 
