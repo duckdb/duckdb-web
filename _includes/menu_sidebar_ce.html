@@ -77,6 +77,25 @@
 					</ul>
 				{% endif %}
 			{% endfor %}
+
+			{% assign urlContains = true %}
+			{% assign base_slash = '' %}
+			<li class="item-menu active opened">
+				 {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {{ item.page }}
+			</li>
+					<ul style="display: {% if urlContains %}block;{% else %}none{% endif %}">
+				{% assign mylist = site.data[menudocfile].extensions | sample: 5 %}
+				{% for entry in mylist %}
+						<li class="mainentry-menu
+								{%- if urlParts[2] == mainentry.url %} active{% endif -%}
+								{%- if mainentry.url %} {{ mainentry.url }}{% endif -%}
+								{%- if urlParts[2] %} {{ urlParts[2]}}{% endif -%}
+								opened
+							">
+							<a href="/community_extensions/extensions/{{ entry }}">{{ entry }}</a>
+						</li>
+						{% endfor %}
+					</ul>
 		{% endif %}
 
 	
