@@ -8,7 +8,11 @@ The `ALTER TABLE` statement changes the schema of an existing table in the catal
 
 ## Examples
 
-Add a new column with name `k` to the table `integers`, it will be filled with the default value NULL:
+```sql
+CREATE TABLE integers (i INTEGER, j INTEGER);
+```
+
+Add a new column with name `k` to the table `integers`, it will be filled with the default value `NULL`:
 
 ```sql
 ALTER TABLE integers ADD COLUMN k INTEGER;
@@ -53,13 +57,13 @@ ALTER TABLE integers ALTER COLUMN i DROP DEFAULT;
 Make a column not nullable:
 
 ```sql
-ALTER TABLE t ALTER COLUMN x SET NOT NULL;
+ALTER TABLE integers ALTER COLUMN i SET NOT NULL;
 ```
 
-Drop the not null constraint:
+Drop the not-`NULL` constraint:
 
 ```sql
-ALTER TABLE t ALTER COLUMN x DROP NOT NULL;
+ALTER TABLE integers ALTER COLUMN i DROP NOT NULL;
 ```
 
 Rename a table:
@@ -71,14 +75,21 @@ ALTER TABLE integers RENAME TO integers_old;
 Rename a column of a table:
 
 ```sql
-ALTER TABLE integers RENAME i TO j;
+ALTER TABLE integers RENAME i TO ii;
+```
+
+Add a primary key to a column of a table:
+
+```sql
+ALTER TABLE integers ADD PRIMARY KEY (i);
 ```
 
 ## Syntax
 
 <div id="rrdiagram"></div>
 
-`ALTER TABLE` changes the schema of an existing table. All the changes made by `ALTER TABLE` fully respect the transactional semantics, i.e., they will not be visible to other transactions until committed, and can be fully reverted through a rollback.
+`ALTER TABLE` changes the schema of an existing table.
+All the changes made by `ALTER TABLE` fully respect the transactional semantics, i.e., they will not be visible to other transactions until committed, and can be fully reverted through a rollback.
 
 ## `RENAME TABLE`
 
@@ -166,6 +177,20 @@ The `SET/DROP DEFAULT` clause modifies the `DEFAULT` value of an existing column
 
 > Warning At the moment DuckDB will not allow you to alter a table if there are any dependencies. That means that if you have an index on a column you will first need to drop the index, alter the table, and then recreate the index. Otherwise, you will get a `Dependency Error`.
 
+## `ADD PRIMARY KEY`
+
+Add a primary key to a column of a table:
+
+```sql
+ALTER TABLE integers ADD PRIMARY KEY (i);
+```
+
+Add a primary key to multiple columns of a table:
+
+```sql
+ALTER TABLE integers ADD PRIMARY KEY (i, j);
+```
+
 ## `ADD` / `DROP CONSTRAINT`
 
-> The `ADD CONSTRAINT` and `DROP CONSTRAINT` clauses are not yet supported in DuckDB.
+> `ADD CONSTRAINT` and `DROP CONSTRAINT` clauses are not yet supported in DuckDB.
