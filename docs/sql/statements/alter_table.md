@@ -8,7 +8,11 @@ The `ALTER TABLE` statement changes the schema of an existing table in the catal
 
 ## Examples
 
-Add a new column with name `k` to the table `integers`, it will be filled with the default value NULL:
+```sql
+CREATE TABLE integers (i INTEGER, j INTEGER);
+```
+
+Add a new column with name `k` to the table `integers`, it will be filled with the default value `NULL`:
 
 ```sql
 ALTER TABLE integers ADD COLUMN k INTEGER;
@@ -53,13 +57,13 @@ ALTER TABLE integers ALTER COLUMN i DROP DEFAULT;
 Make a column not nullable:
 
 ```sql
-ALTER TABLE t ALTER COLUMN x SET NOT NULL;
+ALTER TABLE integers ALTER COLUMN i SET NOT NULL;
 ```
 
-Drop the not null constraint:
+Drop the not-`NULL` constraint:
 
 ```sql
-ALTER TABLE t ALTER COLUMN x DROP NOT NULL;
+ALTER TABLE integers ALTER COLUMN i DROP NOT NULL;
 ```
 
 Rename a table:
@@ -71,10 +75,11 @@ ALTER TABLE integers RENAME TO integers_old;
 Rename a column of a table:
 
 ```sql
-ALTER TABLE integers RENAME i TO j;
+ALTER TABLE integers RENAME i TO ii;
 ```
 
 Add a primary key to a column of a table:
+
 ```sql
 ALTER TABLE integers ADD PRIMARY KEY (i);
 ```
@@ -83,7 +88,7 @@ ALTER TABLE integers ADD PRIMARY KEY (i);
 
 <div id="rrdiagram"></div>
 
-`ALTER TABLE` changes the schema of an existing table. 
+`ALTER TABLE` changes the schema of an existing table.
 All the changes made by `ALTER TABLE` fully respect the transactional semantics, i.e., they will not be visible to other transactions until committed, and can be fully reverted through a rollback.
 
 ## `RENAME TABLE`
@@ -181,6 +186,7 @@ ALTER TABLE integers ADD PRIMARY KEY (i);
 ```
 
 Add a primary key to multiple columns of a table:
+
 ```sql
 ALTER TABLE integers ADD PRIMARY KEY (i, j);
 ```
