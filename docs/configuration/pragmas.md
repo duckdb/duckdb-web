@@ -170,11 +170,11 @@ SET default_collation = 'nocase';
 
 ## Default Ordering for NULLs
 
-Set the default ordering for NULLs to be either `NULLS FIRST` or `NULLS LAST`:
+Set the default ordering for NULLs to be either `NULLS_FIRST`, `NULLS_LAST`, `NULLS_FIRST_ON_ASC_LAST_ON_DESC` or `NULLS_LAST_ON_ASC_FIRST_ON_DESC`:
 
 ```sql
-SET default_null_order = 'NULLS FIRST';
-SET default_null_order = 'NULLS LAST';
+SET default_null_order = 'NULLS_FIRST';
+SET default_null_order = 'NULLS_LAST_ON_ASC_FIRST_ON_DESC';
 ```
 
 Set the default result set ordering direction to `ASCENDING` or `DESCENDING`:

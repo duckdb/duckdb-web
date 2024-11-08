@@ -27,10 +27,10 @@ This is identical to the default sort order of PostgreSQL. The default sort orde
 
 > Using `ASC NULLS LAST` as the default sorting order was a breaking change in version 0.8.0. Prior to 0.8.0, DuckDB sorted using `ASC NULLS FIRST`.
 
-Change the default null sorting order to either `NULLS FIRST` and `NULLS LAST`:
+Change the default null sorting order to either `NULLS_FIRST`, `NULLS_LAST`, `NULLS_FIRST_ON_ASC_LAST_ON_DESC` or `NULLS_LAST_ON_ASC_FIRST_ON_DESC`:
 
 ```sql
-SET default_null_order = 'NULLS FIRST';
+SET default_null_order = 'NULLS_FIRST';
 ```
 
 Change the default sorting order to either `DESC` or `ASC`:
