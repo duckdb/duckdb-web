@@ -24,8 +24,8 @@ For an example, let’s repeat the [microbenchmark for timestamps]({% link docs/
 | `DATETIME` | yes | 1.3 GB | 0.6 s |
 | `DATETIME` | no  | 3.3 GB | 0.9 s |
 
-The results show that simply keeping the column order allows for improved compression, yielding a 2.5x smaller storage size.
-It also allows the computation to be 1.5x faster.
+The results show that simply keeping the column order allows for improved compression, yielding a 2.5× smaller storage size.
+It also allows the computation to be 1.5× faster.
 
 ### Ordered Integers
 

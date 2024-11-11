@@ -28,7 +28,7 @@ When deciding on whether to query these files directly or to first load them to 
 
 #### Microbenchmark: Running TPC-H on a DuckDB Database vs. Parquet
 
-The queries on the [TPC-H benchmark]({% link docs/extensions/tpch.md %}) run approximately 1.1-5.0x slower on Parquet files than on a DuckDB database.
+The queries on the [TPC-H benchmark]({% link docs/extensions/tpch.md %}) run approximately 1.1-5.0× slower on Parquet files than on a DuckDB database.
 
 > Bestpractice If you have the storage space available, and have a join-heavy workload and/or plan to run many queries on the same dataset, load the Parquet files into the database first. The compression algorithm and the row group sizes in the Parquet files have a large effect on performance: study these using the [`parquet_metadata` function]({% link docs/data/parquet/metadata.md %}#parquet-metadata).
 
@@ -57,7 +57,7 @@ We run a simple aggregation query over Parquet files using different row group s
 | 983040         | 0.97 s         |
 | 1966080        | 0.88 s         |
 
-The results show that row group sizes <5,000 have a strongly detrimental effect, making runtimes more than 5-10x larger than ideally-sized row groups, while row group sizes between 5,000 and 20,000 are still 1.5-2.5x off from best performance. Above row group size of 100,000, the differences are small: the gap is about 10% between the best and the worst runtime.
+The results show that row group sizes <5,000 have a strongly detrimental effect, making runtimes more than 5-10× larger than ideally-sized row groups, while row group sizes between 5,000 and 20,000 are still 1.5-2.5× off from best performance. Above row group size of 100,000, the differences are small: the gap is about 10% between the best and the worst runtime.
 
 ### Parquet File Sizes
 
