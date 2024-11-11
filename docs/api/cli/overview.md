@@ -259,7 +259,7 @@ COPY (SELECT 42 AS woot UNION ALL SELECT 43 AS woot) TO 'test.csv' (HEADER);
 First, read a file and pipe it to the `duckdb` CLI executable. As arguments to the DuckDB CLI, pass in the location of the database to open, in this case, an in-memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
 
 ```bash
-cat test.csv | duckdb "SELECT * FROM read_csv('/dev/stdin')"
+cat test.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
 | woot |
@@ -271,7 +271,7 @@ To write back to stdout, the copy command can be used with the `/dev/stdout` fil
 
 ```bash
 cat test.csv | \
-    duckdb "COPY (SELECT * FROM read_csv('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
+    duckdb -c "COPY (SELECT * FROM read_csv('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
 ```
 
 ```csv
