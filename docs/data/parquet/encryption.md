@@ -24,7 +24,7 @@ After specifying the key (e.g., `key256`), files can be encrypted as follows:
 COPY tbl TO 'tbl.parquet' (ENCRYPTION_CONFIG {footer_key: 'key256'});
 ```
 
-### Reading Encrpyted Parquet Files
+### Reading Encrypted Parquet Files
 
 An encrypted Parquet file using a specific key (e.g., `key256`), can then be read as follows:
 
