@@ -11,6 +11,8 @@ The values within those new columns are calculated using an aggregate function o
 DuckDB implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` syntax that automatically detects the columns to create while pivoting.
 `PIVOT_WIDER` may also be used in place of the `PIVOT` keyword.
 
+For details on how the `PIVOT` statement is implemented, see the [Pivot Internals site]({% link docs/internals/pivot.md %}#pivot).
+
 > The [`UNPIVOT` statement]({% link docs/sql/statements/unpivot.md %}) is the inverse of the `PIVOT` statement.
 
 ## Simplified `PIVOT` Syntax
@@ -49,6 +51,7 @@ INSERT INTO cities VALUES
 ```
 
 ```sql
+SELECT *
 FROM cities;
 ```
 
@@ -273,6 +276,7 @@ Each `PIVOT` can be treated as if it were a `SELECT` node, so they can be joined
 For example, if two `PIVOT` statements share the same `GROUP BY` expression, they can be joined together using the columns in the `GROUP BY` clause into a wider pivot.
 
 ```sql
+SELECT *
 FROM (PIVOT cities ON year USING sum(population) GROUP BY country) year_pivot
 JOIN (PIVOT cities ON name USING sum(population) GROUP BY country) name_pivot
 USING (country);
@@ -285,74 +289,6 @@ USING (country);
 | NL      | 1005 | 1065 | 1158 | 3228      | NULL          | NULL    |
 | US      | 8579 | 8783 | 9510 | NULL      | 24962         | 1910    |
 
-## Internals
-
-Pivoting is implemented as a combination of SQL query re-writing and a dedicated `PhysicalPivot` operator for higher performance.
-Each `PIVOT` is implemented as set of aggregations into lists and then the dedicated `PhysicalPivot` operator converts those lists into column names and values.
-Additional pre-processing steps are required if the columns to be created when pivoting are detected dynamically (which occurs when the `IN` clause is not in use).
-
-DuckDB, like most SQL engines, requires that all column names and types be known at the start of a query.
-In order to automatically detect the columns that should be created as a result of a `PIVOT` statement, it must be translated into multiple queries.
-[`ENUM` types]({% link docs/sql/data_types/enum.md %}) are used to find the distinct values that should become columns.
-Each `ENUM` is then injected into one of the `PIVOT` statement's `IN` clauses.
-
-After the `IN` clauses have been populated with `ENUM`s, the query is re-written again into a set of aggregations into lists.
-
-For example:
-
-```sql
-PIVOT cities
-ON year
-USING sum(population);
-```
-
-is initially translated into:
-
-```sql
-CREATE TEMPORARY TYPE __pivot_enum_0_0 AS ENUM (
-    SELECT DISTINCT
-        year::VARCHAR
-    FROM cities
-    ORDER BY
-        year
-    );
-PIVOT cities
-ON year IN __pivot_enum_0_0
-USING sum(population);
-```
-
-and finally translated into:
-
-```sql
-SELECT country, name, list(year), list(population_sum)
-FROM (
-    SELECT country, name, year, sum(population) AS population_sum
-    FROM cities
-    GROUP BY ALL
-)
-GROUP BY ALL;
-```
-
-This produces the result:
-
-<div class="narrow_table"></div>
-
-| country |     name      |    list("year")    | list(population_sum) |
-|---------|---------------|--------------------|----------------------|
-| NL      | Amsterdam     | [2000, 2010, 2020] | [1005, 1065, 1158]   |
-| US      | Seattle       | [2000, 2010, 2020] | [564, 608, 738]      |
-| US      | New York City | [2000, 2010, 2020] | [8015, 8175, 8772]   |
-
-The `PhysicalPivot` operator converts those lists into column names and values to return this result:
-
-<div class="narrow_table"></div>
-
-| country |     name      | 2000 | 2010 | 2020 |
-|---------|---------------|-----:|-----:|-----:|
-| NL      | Amsterdam     | 1005 | 1065 | 1158 |
-| US      | Seattle       | 564  | 608  | 738  |
-| US      | New York City | 8015 | 8175 | 8772 |
-
 ## Simplified `PIVOT` Full Syntax Diagram
 
 Below is the full syntax diagram of the `PIVOT` statement.
@@ -364,6 +300,7 @@ Below is the full syntax diagram of the `PIVOT` statement.
 The full syntax diagram is below, but the SQL Standard `PIVOT` syntax can be summarized as:
 
 ```sql
+SELECT *
 FROM ⟨dataset⟩
 PIVOT (
     ⟨values⟩
@@ -374,6 +311,7 @@ PIVOT (
     GROUP BY ⟨rows⟩
 );
 ```
+
 Unlike the simplified syntax, the `IN` clause must be specified for each column to be pivoted.
 If you are interested in dynamic pivoting, the simplified syntax is recommended.
 
@@ -384,6 +322,7 @@ Note that no commas separate the expressions in the `FOR` clause, but that `valu
 This example uses a single value expression, a single column expression, and a single row expression:
 
 ```sql
+SELECT *
 FROM cities
 PIVOT (
     sum(population)
@@ -403,6 +342,7 @@ PIVOT (
 This example is somewhat contrived, but serves as an example of using multiple value expressions and multiple columns in the `FOR` clause.
 
 ```sql
+SELECT *
 FROM cities
 PIVOT (
     sum(population) AS total,
