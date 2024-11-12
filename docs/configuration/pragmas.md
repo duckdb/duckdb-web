@@ -212,7 +212,7 @@ SET old_implicit_casting = true;
 
 ## Python: Scan All Dataframes
 
-Prior to version 1.1.0, DuckDB's [replacement scan mechanism]({% link docs/api/c/replacement_scans.md %}) scanned the global Python namespace. To revert to this old behavior, use th following setting:
+Prior to version 1.1.0, DuckDB's [replacement scan mechanism]({% link docs/api/c/replacement_scans.md %}) in Python scanned the global Python namespace. To revert to this old behavior, use the following setting:
 
 ```sql
 SET python_scan_all_frames = true;
@@ -232,7 +232,7 @@ CALL pragma_version();
 #### Platform
 
 `platform` returns an identifier for the platform the current DuckDB executable has been compiled for, e.g., `osx_arm64`.
-The format of this identifier matches the platform name as described [on the extension loading explainer]({% link docs/extensions/working_with_extensions.md %}#platforms):
+The format of this identifier matches the platform name as described in the [extension loading explainer]({% link docs/extensions/working_with_extensions.md %}#platforms):
 
 ```sql
 PRAGMA platform;

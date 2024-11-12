@@ -36,7 +36,7 @@ FROM 'data/json/with_list.json';
 | 4  | [Broadcast, News]                |
 | 5  | [Raising, Arizona]               |
 
-**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [hive-partitioned Parquet and CSV files]({% link docs/extensions/httpfs/overview.md %}#hive-partitioning) for a while. After this release [DuckDB will also be able to *write* hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
+**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [Hive-partitioned Parquet and CSV files]({% link docs/extensions/httpfs/overview.md %}#hive-partitioning) for a while. After this release [DuckDB will also be able to *write* Hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
 
 ```sql
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
