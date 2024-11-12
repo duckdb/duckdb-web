@@ -205,7 +205,7 @@ The query looks like this:
 
 ```sql
 SELECT
-   sum(size) AS size
+    sum(size) AS size
 FROM read_parquet(
     ['https://huggingface.co/datasets/vivym/midjourney-messages/resolve/main/data/' ||
         format('{:06d}', n) || '.parquet'
