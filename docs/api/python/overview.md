@@ -230,11 +230,11 @@ To load [community extensions]({% link docs/extensions/community_extensions.md %
 
 For example, install and load the `h3` community extension as follows:
 
-```python 
+```python
 import duckdb
 
 con = duckdb.connect()
-con.install_extension("h3", respository="community")
+con.install_extension("h3", repository="community")
 con.load_extension("h3")
 ```
 
