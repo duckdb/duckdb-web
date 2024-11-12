@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Community Extensions 
+title: Community Extensions
 ---
 
 DuckDB recently launched a [Community Extensions repository](https://github.com/duckdb/community-extensions).

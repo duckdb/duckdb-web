@@ -69,7 +69,7 @@ orders
 
 Note that currently the parallel writing is currently limited to non-insertion order preserving – which can be toggled by setting the `preserve_insertion_order` setting to false. In a future release we aim to alleviate this restriction and order parallel insertion order preserving writes as well.
 
-#### Multi-Database Support 
+#### Multi-Database Support
 
 **Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/duckdb/duckdb/pull/5764) to the same DuckDB instance. This easily allows data to be transferred between separate DuckDB database files, and also allows data from separate database files to be combined together in individual queries. Remote DuckDB instances (stored on a network accessible location like GitHub, for example) may also be attached.
 
@@ -82,7 +82,7 @@ DETACH new_db;
 
 See the [documentation for more information]({% link docs/sql/statements/attach.md %}).
 
-**SQLite Storage Back-end.** In addition to adding support for attaching DuckDB databases – this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
+**SQLite Storage Back-End.** In addition to adding support for attaching DuckDB databases – this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
@@ -118,7 +118,7 @@ FROM movies;
 
 See the [documentation for more information]({% link docs/sql/statements/insert.md %}#on-conflict-clause).
 
-**Lateral Joins.** Support for [lateral joins](https://github.com/duckdb/duckdb/pull/5393) is added in this release. Lateral joins are a more flexible variant of correlated subqueries that make working with nested data easier, as they allow [easier unnesting](https://github.com/duckdb/duckdb/pull/5485) of nested data.  
+**Lateral Joins.** Support for [lateral joins](https://github.com/duckdb/duckdb/pull/5393) is added in this release. Lateral joins are a more flexible variant of correlated subqueries that make working with nested data easier, as they allow [easier unnesting](https://github.com/duckdb/duckdb/pull/5485) of nested data.
 
 **Positional Joins.** While SQL formally models unordered sets, in practice the order of datasets does frequently have a meaning. DuckDB offers guarantees around maintaining the order of rows when loading data into tables or when exporting data back out to a file – as well as when executing queries such as `LIMIT` without a corresponding `ORDER BY` clause.
 

@@ -41,23 +41,23 @@ For more information, see the [“Profiling”]({% link docs/configuration/pragm
 The query tree has two types of nodes: the `QUERY_ROOT` and `OPERATOR` nodes.
 The `QUERY_ROOT` refers exclusively to the top-level node, and the metrics it contains are measured over the entire query.
 The `OPERATOR` nodes refer to the individual operators in the query plan.
-Some metrics are only available for `QUERY_ROOT` nodes, while others are only for `OPERATOR` nodes.  
+Some metrics are only available for `QUERY_ROOT` nodes, while others are only for `OPERATOR` nodes.
 The table below describes each metric and which nodes they are available for.
 
 Other than `QUERY_NAME` and `OPERATOR_TYPE`, it is possible to turn all metrics on or off.
 
 | Metric                  | Return type |   Unit   | Query | Operator | Description                                                                                                                   |
 |-------------------------|-------------|----------|:-----:|:--------:|-------------------------------------------------------------------------------------------------------------------------------|
-| `BLOCKED_THREAD_TIME`   | `double`    | seconds  |   ✅   |          | The total time threads are blocked.                                                                                          |
-| `EXTRA_INFO`            | `string`    |          |   ✅   |    ✅    | Unique operator metrics.                                                                                                     |
-| `LATENCY`               | `double`    | seconds  |   ✅   |          | The total elapsed query execution time.                                                                                      |
-| `OPERATOR_CARDINALITY`  | `uint64`    | absolute |        |    ✅    | The cardinality of each operator, i.e., the number of rows it returns to its parent. Operator equivalent of `ROWS_RETURNED`. |
-| `OPERATOR_ROWS_SCANNED` | `uint64`    | absolute |        |    ✅    | The total rows scanned by each operator.                                                                                     |
-| `OPERATOR_TIMING`       | `double`    | seconds  |        |    ✅    | The time taken by each operator. Operator equivalent of `LATENCY`.                                                           |
-| `OPERATOR_TYPE`         | `string`    |          |        |    ✅    | The name of each operator.                                                                                                   |
-| `QUERY_NAME`            | `string`    |          |   ✅   |          | The query string.                                                                                                            |
-| `RESULT_SET_SIZE`       | `uint64`    |  bytes   |   ✅   |    ✅    | The size of the result.                                                                                                      |
-| `ROWS_RETURNED`         | `uint64`    | absolute |   ✅   |          | The number of rows returned by the query.                                                                                    |
+| `BLOCKED_THREAD_TIME`   | `double`    | seconds  |   ✅  |          | The total time threads are blocked.                                                                                          |
+| `EXTRA_INFO`            | `string`    |          |   ✅  |    ✅    | Unique operator metrics.                                                                                                     |
+| `LATENCY`               | `double`    | seconds  |   ✅  |          | The total elapsed query execution time.                                                                                      |
+| `OPERATOR_CARDINALITY`  | `uint64`    | absolute |       |    ✅    | The cardinality of each operator, i.e., the number of rows it returns to its parent. Operator equivalent of `ROWS_RETURNED`. |
+| `OPERATOR_ROWS_SCANNED` | `uint64`    | absolute |       |    ✅    | The total rows scanned by each operator.                                                                                     |
+| `OPERATOR_TIMING`       | `double`    | seconds  |       |    ✅    | The time taken by each operator. Operator equivalent of `LATENCY`.                                                           |
+| `OPERATOR_TYPE`         | `string`    |          |       |    ✅    | The name of each operator.                                                                                                   |
+| `QUERY_NAME`            | `string`    |          |   ✅  |          | The query string.                                                                                                            |
+| `RESULT_SET_SIZE`       | `uint64`    |  bytes   |   ✅  |    ✅    | The size of the result.                                                                                                      |
+| `ROWS_RETURNED`         | `uint64`    | absolute |   ✅  |          | The number of rows returned by the query.                                                                                    |
 
 ### Cumulative Metrics
 
@@ -120,7 +120,7 @@ The following are the metrics supported in the physical planner:
 ## Custom Metrics Examples
 
 The following examples demonstrate how to enable custom profiling and set the output format to `json`.
-In the first example, we enable profiling and set the output to a file. 
+In the first example, we enable profiling and set the output to a file.
 We only enable `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING`.
 
 ```sql
@@ -224,7 +224,7 @@ The contents of the outputted file:
       "result_set_size": 32,
       "cpu_time": 0.000095,
       "children": [
-...        
+...
 ```
 
 ## Query Graphs

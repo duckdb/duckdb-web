@@ -230,7 +230,7 @@ The `STRUCT` type can be compared using all the [comparison operators]({% link d
 These comparisons can be used in [logical expressions]({% link docs/sql/expressions/logical_operators.md %})
 such as `WHERE` and `HAVING` clauses, and return [`BOOLEAN` values]({% link docs/sql/data_types/boolean.md %}).
 
-For comparisons, the keys of a `STRUCT` have a fixed positional order, from left to right. 
+For comparisons, the keys of a `STRUCT` have a fixed positional order, from left to right.
 Comparisons behave the same as row comparisons, therefore, matching keys must be at identical positions.
 
 Specifically, for any `STRUCT` comparison, the following rules apply:

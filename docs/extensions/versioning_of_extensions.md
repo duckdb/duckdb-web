@@ -21,7 +21,7 @@ Let's go over each of the 3 levels and describe their format:
 
 ### Unstable Extensions
 
-Unstable extensions are extensions that can't (or don't want to) give any guarantees regarding their current stability, 
+Unstable extensions are extensions that can't (or don't want to) give any guarantees regarding their current stability,
 or their goals of becoming stable. Unstable extensions are tagged with the **short git hash** of the extension.
 
 For example, at the time of writing this, the version of the `vss` extension is an unstable extension of version `690bfc5`.
@@ -54,25 +54,25 @@ Stable extensions are the final step of extension stability. This is denoted by 
 
 For example, at the time of writing this, the version of the `parquet` extension is a stable extension of version `v1.0.0`.
 
-What to expect from an extension that has a version number in the **stable** format? Essentially the same as pre-release extensions, but now the more 
+What to expect from an extension that has a version number in the **stable** format? Essentially the same as pre-release extensions, but now the more
 strict SemVer semantics apply: the API of the extension should now be stable and will only change in backwards incompatible ways when the major version is bumped.
 See the SemVer specification for details
 
 ## Release Cycle of Pre-Release and Stable Core Extensions
 
-In general for extensions the release cycle depends on their stability level. **unstable** extensions are often in 
-sync with DuckDB's release cycle, but may also be quietly updated between DuckDB releases. **pre-release** and **stable** 
+In general for extensions the release cycle depends on their stability level. **unstable** extensions are often in
+sync with DuckDB's release cycle, but may also be quietly updated between DuckDB releases. **pre-release** and **stable**
 extensions follow their own release cycle. These may or may not coincide with DuckDB releases. To find out more about the release cycle of a specific
-extension, refer to the documentation or GitHub page of the respective extension. Generally, **pre-release** and **stable** extensions will document 
-their releases as GitHub releases, an example of which you can see in the [delta extension](https://github.com/duckdb/duckdb_delta/releases). 
+extension, refer to the documentation or GitHub page of the respective extension. Generally, **pre-release** and **stable** extensions will document
+their releases as GitHub releases, an example of which you can see in the [delta extension](https://github.com/duckdb/duckdb_delta/releases).
 
-Finally, there is a small exception: All [in-tree]({% link docs/extensions/working_with_extensions.md %}#in-tree-vs-out-of-tree) extensions simply 
+Finally, there is a small exception: All [in-tree]({% link docs/extensions/working_with_extensions.md %}#in-tree-vs-out-of-tree) extensions simply
 follow DuckDB's release cycle.
 
 ## Nightly Builds
 
-Just like DuckDB itself, DuckDB's core extensions have nightly or dev builds that can be used to try out features before they are officially released. This 
-can be useful when your workflow depends on a new feature, or when you need to confirm that your stack is compatible with the upcoming version.
+Just like DuckDB itself, DuckDB's core extensions have nightly or dev builds that can be used to try out features before they are officially released.
+This can be useful when your workflow depends on a new feature, or when you need to confirm that your stack is compatible with the upcoming version.
 
 Nightly builds for extensions are slightly complicated due to the fact that currently DuckDB extensions binaries are tightly bound to a single DuckDB version. Because of this tight connection,
 there is a potential risk for a combinatory explosion. Therefore, not all combinations of nightly extension build and nightly DuckDB build are available.

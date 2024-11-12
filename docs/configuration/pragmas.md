@@ -342,7 +342,7 @@ SET enable_profiling = 'query_tree_optimizer';
 Database drivers and other applications can also access profiling information through API calls, in which case users can disable any other output.
 Even though the parameter reads `no_output`, it is essential to note that this **only** affects printing to the configurable output.
 When accessing profiling information through API calls, it is still crucial to enable profiling:
-    
+
 ```sql
 SET enable_profiling = 'no_output';
 ```
@@ -383,7 +383,7 @@ Using the `custom_profiling_settings` `PRAGMA`, each metric, including those fro
 This `PRAGMA` accepts a JSON object with metric names as keys and boolean values to toggle them on or off.
 Settings specified by this `PRAGMA` override the default behavior.
 
-> Note This only affects the metrics when the `enable_profiling` is set to `json` or `no_output`. 
+> Note This only affects the metrics when the `enable_profiling` is set to `json` or `no_output`.
 > The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
 
 In the following example, the `CPU_TIME` metric is disabled.

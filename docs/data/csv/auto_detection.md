@@ -110,7 +110,7 @@ The type detection works by attempting to convert the values in each column to t
 
 Note everything can be cast to `VARCHAR`. This type has the lowest priority – i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
 
-The set of candidate types that should be considered by the CSV reader can be explicitly specified using the [`auto_type_candidates`]({% link docs/data/csv/overview.md %}#auto_type_candidates-details) option. 
+The set of candidate types that should be considered by the CSV reader can be explicitly specified using the [`auto_type_candidates`]({% link docs/data/csv/overview.md %}#auto_type_candidates-details) option.
 
 In addition to the default set of candidate types, other types that may be specified using the `auto_type_candidates` options are:
 
@@ -135,7 +135,7 @@ The detected types can be individually overridden using the `types` option. This
 * A list of type definitions (e.g., `types = ['INTEGER', 'VARCHAR', 'DATE']`). This overrides the types of the columns in-order of occurrence in the CSV file.
 * Alternatively, `types` takes a `name` → `type` map which overrides options of individual columns (e.g., `types = {'quarter': 'INTEGER'}`).
 
-The set of column types that may be specified using the `types` option is not as limited as the types available for the `auto_type_candidates` option: any valid type definition is acceptable to the `types`-option. (To get a valid type definition, use the [`typeof()`]({% link docs/sql/functions/utility.md %}#typeofexpression) function, or use the `column_type` column  of the [`DESCRIBE`]({% link docs/guides/meta/describe.md %}) result.)  
+The set of column types that may be specified using the `types` option is not as limited as the types available for the `auto_type_candidates` option: any valid type definition is acceptable to the `types`-option. (To get a valid type definition, use the [`typeof()`]({% link docs/sql/functions/utility.md %}#typeofexpression) function, or use the `column_type` column  of the [`DESCRIBE`]({% link docs/guides/meta/describe.md %}) result.)
 
 The `sniff_csv()` function's `Column` field returns a struct with column names and types that can be used as a basis for overriding types.
 

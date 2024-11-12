@@ -78,7 +78,7 @@ In these cases, try the following workarounds:
    ORDER BY ALL;
    ```
 
-   You can also sort lists using [`list_sort`]({% link docs/sql/functions/list.md %}#list_sortlist) 
+   You can also sort lists using [`list_sort`]({% link docs/sql/functions/list.md %}#list_sortlist):
 
    ```sql
    SELECT list_sort(array_distinct(['A', 'A', 'B', NULL, NULL])) AS i

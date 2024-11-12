@@ -10,7 +10,7 @@ title: Integration with Ibis
 You can pip install Ibis with the DuckDB backend:
 
 ```bash
-pip install 'ibis-framework[duckdb,examples]' # examples is only required to access the sample data Ibis provides 
+pip install 'ibis-framework[duckdb,examples]' # examples is only required to access the sample data Ibis provides
 ```
 
 or use conda:

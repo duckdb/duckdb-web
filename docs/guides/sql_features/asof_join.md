@@ -153,11 +153,11 @@ ASOF JOIN prices p USING (ticker, "when");
 You will get back only the columns `h.ticker, h.when, h.shares, p.price`. The columns `ticker` and `when` will appear only once, with `ticker`
 and `when` coming from the left table (holdings).
 
-This behavior is fine for the `ticker` column because the value is the same in both tables. However, for the `when` column, the values might 
-differ between the two tables due to the `>=` condition used in the AsOf join. The AsOf join is designed to match each row in the left 
+This behavior is fine for the `ticker` column because the value is the same in both tables. However, for the `when` column, the values might
+differ between the two tables due to the `>=` condition used in the AsOf join. The AsOf join is designed to match each row in the left
 table (`holdings`) with the nearest preceding row in the right table (`prices`) based on the `when` column.
 
-If you want to retrieve the `when` column from both tables to see both timestamps, you need to list the columns explicitly rather than 
+If you want to retrieve the `when` column from both tables to see both timestamps, you need to list the columns explicitly rather than
 relying on `*`, like so:
 
 ```sql
@@ -166,7 +166,7 @@ FROM holdings h
 ASOF JOIN prices p USING (ticker, "when");
 ```
 
-This ensures that you get the complete information from both tables, avoiding any potential confusion caused by the default behavior of 
+This ensures that you get the complete information from both tables, avoiding any potential confusion caused by the default behavior of
 the `USING` keyword.
 
 ## See Also

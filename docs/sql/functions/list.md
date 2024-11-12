@@ -3,7 +3,7 @@ layout: docu
 title: List Functions
 ---
 
-<!-- markdownlint-disable MD001 -->
+<!-- markdownlint-disable MD001 MD056 -->
 
 | Name | Description |
 |:--|:-------|
@@ -796,7 +796,7 @@ SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 [NULL, 3, 2, 1]
 ```
 
-`list_reverse_sort` has an optional second parameter providing the `NULL` sort order. 
+`list_reverse_sort` has an optional second parameter providing the `NULL` sort order.
 It can be either `NULLS FIRST` or `NULLS LAST`.
 
 This query uses the default `NULL` sort order.
