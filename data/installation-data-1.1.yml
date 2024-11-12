@@ -125,7 +125,7 @@
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
-        <version>1.1.2</version>
+        <version>1.1.3</version>
     </dependency>
   link: ''
   note: ''
@@ -137,7 +137,7 @@
   architecture: universal
   has_sha_512_hash: 'yes'
   installation_code: ''
-  link: https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/1.1.2/duckdb_jdbc-1.1.2.jar
+  link: https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/1.1.3/duckdb_jdbc-1.1.3.jar
   note: ''
   usage_example: ''
 - variant: stable
