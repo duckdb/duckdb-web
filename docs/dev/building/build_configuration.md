@@ -44,8 +44,9 @@ This doesn't actually create a build, but uses the following format checkers to 
 
 The CI will also run this check, causing it to fail if this check fails.
 
-## Extension selection
-[Core DuckDB extensions]({% link docs/extensions/core_extensions.md %}) are that are the one maintaned by the DuckDB team, that are hosted in the duckdb GitHub repository, and are served by the `core` extension repository.
+## Extension Selection
+
+[Core DuckDB extensions]({% link docs/extensions/core_extensions.md %}) are the ones maintaned by the DuckDB team. These are hosted in the `duckdb` GitHub organization and are served by the `core` extension repository.
 
 Core extensions can be built as part of DuckDB via the `CORE_EXTENSION` flag, then listing the names of the extensions that are to be built.
 
