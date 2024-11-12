@@ -100,7 +100,7 @@ Additionally, you can also override the `ef_search` parameter set at index const
 
 Due to some known issues related to peristence of custom extension indexes, the `HNSW` index can only be created on tables in in-memory databases by default, unless the `SET hnsw_enable_experimental_persistence = ⟨bool⟩` configuration option is set to `true`.
 
-The reasoning for locking this feature behind an experimental flag is that “WAL” recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommitted changes to a `HNSW`-indexed table, you can end up with __data loss or corruption of the index__.
+The reasoning for locking this feature behind an experimental flag is that “WAL” recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommitted changes to a `HNSW`-indexed table, you can end up with **data loss or corruption of the index**.
 
 If you enable this option and experience an unexpected shutdown, you can try to recover the index by first starting DuckDB separately, loading the `vss` extension and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, allowing DuckDB's recovery process to proceed without issues. But we still recommend that you do not use this feature in production environments.
 
@@ -122,7 +122,7 @@ The `vss` extension also provides a couple of table macros to simplify matching 
 * `vss_join(left_table, right_table, left_col, right_col, k, metric := 'l2sq')`
 * `vss_match(right_table", left_col, right_col, k, metric := 'l2sq')`
 
-These __do not__ currently make use of the `HNSW` index but are provided as convenience utility functions for users who are ok with performing brute-force vector similarity searches without having to write out the join logic themselves. In the future these might become targets for index-based optimizations as well.
+These **do not** currently make use of the `HNSW` index but are provided as convenience utility functions for users who are ok with performing brute-force vector similarity searches without having to write out the join logic themselves. In the future these might become targets for index-based optimizations as well.
 
 These functions can be used as follows:
 
