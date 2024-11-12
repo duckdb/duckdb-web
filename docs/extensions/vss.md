@@ -28,7 +28,7 @@ Additionally, the overloaded `min_by(col, arg, n)` can also be accelerated with 
 
 ```sql
 SELECT min_by(my_vector_table, array_distance(vec, [1, 2, 3]::FLOAT[3]), 3) AS result FROM my_vector_table;
----- [{'vec': [1.0, 2.0, 3.0]}, {'vec': [1.0, 2.0, 4.0]}, {'vec': [2.0, 2.0, 3.0]}] 
+---- [{'vec': [1.0, 2.0, 3.0]}, {'vec': [1.0, 2.0, 4.0]}, {'vec': [2.0, 2.0, 3.0]}]
 ```
 
 Note how we pass the table name as the first argument to `min_by` to return a struct containing the entire matched row.
@@ -153,9 +153,9 @@ SELECT * FROM vss_join(needle, haystack, search_vec, vec, 3) AS res;
 ```
 
 ```sql
--- Alternatively, we can use the vss_match macro as a "lateral join" 
+-- Alternatively, we can use the vss_match macro as a "lateral join"
 -- to get the matches already grouped by the left table.
--- Note that this requires us to specify the left table first, and then 
+-- Note that this requires us to specify the left table first, and then
 -- the vss_match macro which references the search column from the left
 -- table (in this case, `search_vec`).
 SELECT * FROM needle, vss_match(haystack, search_vec, vec, 3) AS res;

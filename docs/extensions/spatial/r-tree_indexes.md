@@ -11,7 +11,7 @@ When working with geospatial datasets, it is very common that you want to filter
 
 ## How Do R-Tree Indexes Work?
 
-An R-tree is a balanced tree data structure that stores the approximate _minimum bounding rectangle_ of each geometry (and the internal ID of the corresponding row) in the leaf nodes, and the bounding rectangle enclosing all of the child nodes in each internal node. 
+An R-tree is a balanced tree data structure that stores the approximate _minimum bounding rectangle_ of each geometry (and the internal ID of the corresponding row) in the leaf nodes, and the bounding rectangle enclosing all of the child nodes in each internal node.
 
 > The _minimum bounding rectangle_ (MBR) of a geometry is the smallest rectangle that completely encloses the geometry. Usually when we talk about the bounding rectangle of a geometry (or the bounding "box" in the context of 2D geometry), we mean the minimum bounding rectangle. Additionally, we tend to assume that bounding boxes/rectangles are _axis-aligned,_ i.e., the rectangle is __not__ rotated - the sides are always parallel to the coordinate axes. The MBR of a point is the point itself.
 
@@ -23,7 +23,7 @@ Before you get started using the R-tree index, there are some limitations to be 
 
 - The R-tree index is only supported for the `GEOMETRY` data type.
 - The R-tree index will only be used to perform "index scans" when the table is filtered (using a `WHERE` clause) with one of the following spatial predicate functions (as they all imply intersection): `ST_Equals`, `ST_Intersects`, `ST_Touches`, `ST_Crosses`, `ST_Within`, `ST_Contains`, `ST_Overlaps`, `ST_Covers`, `ST_CoveredBy`, `ST_ContainsProperly`.
-- One of the arguments to the spatial predicate function must be a “constant” (i.e., a expression whose result is known at query planning time). This is because the query planner needs to know the bounding box of the query region _before_ the query itself is executed in order to use the R-tree index scan. 
+- One of the arguments to the spatial predicate function must be a “constant” (i.e., a expression whose result is known at query planning time). This is because the query planner needs to know the bounding box of the query region _before_ the query itself is executed in order to use the R-tree index scan.
 
 In the future we want to enable R-tree indexes to be used to accelerate additional predicate functions and more complex queries such a spatial joins.
 

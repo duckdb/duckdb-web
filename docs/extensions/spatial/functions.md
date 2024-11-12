@@ -3,7 +3,8 @@ layout: docu
 title: Spatial Functions
 ---
 
-## Function Index 
+## Function Index
+
 **[Scalar Functions](#scalar-functions)**
 
 | Function                                                      | Summary                                                                                                                                      |

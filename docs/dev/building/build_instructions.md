@@ -119,7 +119,7 @@ pacman -Syu git mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake mingw-w64-x86_
 git clone https://github.com/duckdb/duckdb
 cd duckdb
 cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DBUILD_EXTENSIONS="icu;parquet;json"
-cmake --build . --config Release 
+cmake --build . --config Release
 ```
 
 Once the build finishes successfully, you can find the `duckdb.exe` binary in the repository's directory:

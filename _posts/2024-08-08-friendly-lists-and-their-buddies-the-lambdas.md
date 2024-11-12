@@ -92,10 +92,10 @@ In SQL, it would look like this:
 
 ```sql
 WITH flattened_tbl AS (
-    SELECT unnest(l) AS elements, n, rowid 
+    SELECT unnest(l) AS elements, n, rowid
     FROM my_lists
 )
-SELECT array_agg(elements + n) AS result 
+SELECT array_agg(elements + n) AS result
 FROM flattened_tbl
 GROUP BY rowid
 ORDER BY rowid;
@@ -168,7 +168,7 @@ Firstly, we added 1M rows to our table `my_lists`, each containing five elements
 
 ```sql
 INSERT INTO my_lists
-    SELECT [r, r % 10, r + 5, r + 11, r % 2], r 
+    SELECT [r, r % 10, r + 5, r + 11, r % 2], r
     FROM range(1_000_000) AS tbl(r);
 ```
 
@@ -253,24 +253,24 @@ For our example, we assume that input BSNs are of type `INTEGER[]`.
 
 ```sql
 CREATE OR REPLACE TABLE bsn_tbl AS
-FROM VALUES 
-    ([2, 4, 6, 7, 4, 7, 5, 9, 6]), 
-    ([1, 2, 3, 4, 5, 6, 7, 8, 9]), 
-    ([7, 6, 7, 4, 4, 5, 2, 1, 1]), 
-    ([8, 7, 9, 0, 2, 3, 4, 1, 7]), 
-    ([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
-    tbl(bsn);
+    FROM VALUES
+        ([2, 4, 6, 7, 4, 7, 5, 9, 6]),
+        ([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+        ([7, 6, 7, 4, 4, 5, 2, 1, 1]),
+        ([8, 7, 9, 0, 2, 3, 4, 1, 7]),
+        ([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
+        tbl(bsn);
 ```
 
 #### Solution
 
-When this problem was initially proposed, DuckDB didn't have support for `list_reduce`. 
+When this problem was initially proposed, DuckDB didn't have support for `list_reduce`.
 Instead, the user came up with the following:
 
 ```sql
 CREATE OR REPLACE MACRO valid_bsn(bsn) AS (
     list_sum(
-        [array_extract(bsn, x)::INTEGER * (IF (x = 9, -1, 10 - x)) 
+        [array_extract(bsn, x)::INTEGER * (IF (x = 9, -1, 10 - x))
         FOR x IN range(1, 10, 1)]
     ) % 11 = 0
 );
@@ -281,7 +281,7 @@ We also added a check validating that the length is always nine digits.
 
 ```sql
 CREATE OR REPLACE MACRO valid_bsn(bsn) AS (
-    list_reduce(list_reverse(bsn), 
+    list_reduce(list_reverse(bsn),
         (x, y, i) -> IF (i = 1, -x, x) + y * (i + 1)) % 11 = 0
     AND len(bsn) = 9
 );
