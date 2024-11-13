@@ -5,6 +5,7 @@ author: Mark Raasveldt and Hannes Mühleisen
 thumb: "/images/blog/thumbs/240213.svg"
 image: "/images/blog/thumbs/240213.png"
 excerpt: "The DuckDB team is happy to announce the latest DuckDB release (0.10.0). This release is named Fusca after the [Velvet scoter](https://en.wikipedia.org/wiki/Velvet_scoter) native to Europe."
+tags: ["release"]
 ---
 
 <img src="/images/blog/velvet-scoter-duck.jpg"

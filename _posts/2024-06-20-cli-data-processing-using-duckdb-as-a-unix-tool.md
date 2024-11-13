@@ -5,6 +5,7 @@ author: "Gabor Szarnyas"
 thumb: "/images/blog/thumbs/240620.svg"
 image: "/images/blog/thumbs/240620.png"
 excerpt: "DuckDB's CLI client is portable to many platforms and architectures. It handles CSV files conveniently and offers users the same rich SQL syntax everywhere. These characteristics make DuckDB an ideal tool to complement traditional Unix tools for data processing in the command line."
+tags: ["using DuckDB"]
 ---
 
 In this blog post, we dive into the terminal to compare DuckDB with traditional tools used in Unix shells (Bash, Zsh, etc.).

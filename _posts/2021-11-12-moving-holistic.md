@@ -2,7 +2,8 @@
 layout: post
 title: "Fast Moving Holistic Aggregates"
 author: Richard Wesley
-excerpt: DuckDB, a free and Open-Source analytical data management system, has a windowing API that can compute complex moving aggregates like interquartile ranges and median absolute deviation much faster than the conventional approaches.
+excerpt: DuckDB, a free and open-source analytical data management system, has a windowing API that can compute complex moving aggregates like interquartile ranges and median absolute deviation much faster than the conventional approaches.
+tags: ["using DuckDB"]
 ---
 
 In a [previous post]({% post_url 2021-10-13-windowing %}),
@@ -13,7 +14,7 @@ and explain how DuckDB's performant implementations work.
 
 <!--more-->
 
-## What is an Aggregate Function?
+## What Is an Aggregate Function?
 
 When people think of aggregate functions, they typically have something simple in mind such as `SUM` or `AVG`.
 But more generally, what an aggregate function does is _summarise_ a set of values into a single value.

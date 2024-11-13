@@ -5,6 +5,7 @@ author: "Gabor Szarnyas"
 thumb: "/images/blog/thumbs/duckdb-tricks-1.svg"
 image: "/images/blog/thumbs/duckdb-tricks-1.png"
 excerpt: "We use a simple example data set to present a few tricks that are useful when using DuckDB."
+tags: ["using DuckDB"]
 ---
 
 In this blog post, we present five simple DuckDB operations that we found particularly useful for interactive use cases.

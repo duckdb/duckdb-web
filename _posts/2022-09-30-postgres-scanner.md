@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "Querying Postgres Tables Directly From DuckDB"
+title: "Querying Postgres Tables Directly from DuckDB"
 author: Hannes Mühleisen
 excerpt: DuckDB can now directly query tables stored in PostgreSQL and speed up complex analytical queries without duplicating data.
+tags: ["extensions"]
 ---
 
 <img src="/images/blog/elephant-duck.jpg"
@@ -29,27 +30,35 @@ Among other things, DuckDB's design is different from conventional data manageme
 ## Usage
 
 The Postgres Scanner DuckDB extension source code [is available on GitHub](https://github.com/duckdb/postgres_scanner), but it is directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
+
 ```sql
 INSTALL postgres_scanner;
 ```
+
 Then, whenever you want to use the extension, you need to first load it:
+
 ```sql
 LOAD postgres_scanner;
 ```
 
 To make a Postgres database accessible to DuckDB, use the `POSTGRES_ATTACH` command:
+
 ```sql
 CALL postgres_attach('dbname=myshinydb');
 ```
+
 `postgres_attach` takes a single required string parameter, which is the [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING). For example you can pass `'dbname=myshinydb'` to select a different database name. In the simplest case, the parameter is just `''`. There are three additional named parameters to the function:
- * `source_schema` the name of a non-standard schema name in Postgres to get tables from. Default is `public`.
- * `overwrite` whether we should overwrite existing views in the target schema, default is `false`.
- * `filter_pushdown` whether filter predicates that DuckDB derives from the query should be forwarded to Postgres, defaults to `false`. See below for a discussion of what this parameter controls.
+
+* `source_schema` the name of a non-standard schema name in Postgres to get tables from. Default is `public`.
+* `overwrite` whether we should overwrite existing views in the target schema, default is `false`.
+* `filter_pushdown` whether filter predicates that DuckDB derives from the query should be forwarded to Postgres, defaults to `false`. See below for a discussion of what this parameter controls.
 
 The tables in the database are registered as views in DuckDB, you can list them with
+
 ```sql
 PRAGMA show_tables;
 ```
+
 Then you can query those views normally using SQL. Again, no data is being copied, this is just a virtual view on the tables in your Postgres database. 
 
 If you prefer to not attach all tables, but just query a single table, that is possible using the `POSTGRES_SCAN` and `POSTGRES_SCAN_PUSHDOWN` table-producing functions directly, e.g.
@@ -57,7 +66,6 @@ If you prefer to not attach all tables, but just query a single table, that is p
 ```sql
 SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'mytable');
 SELECT * FROM postgres_scan_pushdown('dbname=myshinydb', 'public', 'mytable');
-
 ```
 
 Both functions takes three unnamed string parameters, the `libpq` connection string (see above), a Postgres schema name and a table name. The schema name is often `public`. As the name suggest, the variant with "pushdown" in the name will perform selection pushdown as described below.
@@ -82,7 +90,6 @@ COPY (SELECT * FROM lineitem) TO STDOUT (FORMAT binary);
 
 This query will start reading the contents of `lineitem` and write them directly to the protocol stream in binary format.
 
-
 ### Parallelization
 
 DuckDB supports automatic intra-query parallelization through pipeline parallelism, so we also want to parallelize scans on Postgres tables: Our scan operator opens multiple connections to Postgres, and reads subsets of the table from each. To efficiently split up reading the table, we use Postgres' rather obscure *TID Scan* (Tuple ID) operator, which allows a query to surgically read a specified range of tuple IDs from a table. The Tuple IDs have the form `(page, tuple)`. We parallelize our scan of a Postgres table based on database page ranges expressed in TIDs. Each scan task reads 1000 pages currently. For example, to read a table consisting of 2500 pages, we would start three scan tasks with TID ranges `[(0,0),(999,0)]`, `[(1000,0),(1999,0)]` and `[(2000,0),(UINT32_MAX,0)]`. Having an open bound for the last range is important because the number of pages (`relpages`) in a table in the `pg_class` table is merely an estimate. For a given page range (P_MIN, P_MAX), our query from above is thus extended to look like this:
@@ -96,15 +103,14 @@ COPY (
      ctid BETWEEN '(P_MIN,0)'::tid AND '(P_MAX,0)'::tid
    ) TO STDOUT (FORMAT binary);
 ```
+
 This way, we can efficiently scan the table in parallel while not relying on the schema in any way. Because page size is fixed in Postgres, this also has the added bonus of equalizing the effort to read a subset of the page independent of the number of columns in each row. 
 
 "But wait!", you will say, according to the documentation the tuple ID is not stable and may be changed by operations such as `VACUUM ALL`. How can you use it for synchronizing parallel scans? This is true, and could be problematic, but we found a solution: 
 
-
 ### Transactional Synchronization
 
 Of course a transactional database such as Postgres is expected to run transactions while we run our table scans for analytical purposes. Therefore we need to address concurrent changes to the table we are scanning in parallel. We solve this by first creating a new read-only transaction in DuckDB's bind phase, where query planning happens. We leave this transaction running until we are completely done reading the table. We use yet another little-known Postgres feature, `pg_export_snapshot()`, which allows us to get the current transaction context in one connection, and then import it into our parallel read connections using `SET TRANSACTION SNAPSHOT ...`. This way, all connections related to one single table scan will see the table state exactly as it appeared at the very beginning of our scan throughout the potentially lengthy read process.
-
 
 ### Projection and Selection Push-Down
 
@@ -124,7 +130,6 @@ COPY (
 ```
 
 As you can see, the projection and selection pushdown has expanded the queries ran against Postgres accordingly. Using the selection push-down is optional. There may be cases where running a filter in Postgres is actually slower than transferring the data and running the filter in DuckDB, for example when filters are not very selective (many rows match).
-
 
 ## Performance
 
@@ -155,7 +160,6 @@ To investigate the performance of the Postgres Scanner, we ran the well-known TP
 |21    |   0.09|            1.53|     0.35|
 |22    |   0.03|            0.15|     0.15|
 
-
 Stock Postgres is not able to finish queries 17 and 20 within a one-minute timeout because of correlated subqueries containing a query on the lineitem table. For the other queries, we can see that DuckDB with the Postgres Scanner not only finished all queries, it also was faster than stock Postgres on roughly half of them, which is astonishing given that DuckDB has to read its input data from Postgres through the client/server protocol as described above. Of course, stock DuckDB is still 10x faster with its own storage, but as discussed at the very beginning of this post this requires the data to be imported there first. 
 
 ## Other Use Cases
@@ -173,6 +177,7 @@ SELECT * FROM my_table_duckdb_cache;
 This provides faster query performance with fully up to date query results, at the cost of data duplication. It also avoids complex data replication technologies.
 
 DuckDB has built-in support to write query results to Parquet files. The Postgres scanner provides a rather simple way to write Postgres tables to Parquet files, it can even directly write to S3 if desired. For example,
+
 ```sql
 COPY (SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'lineitem')) TO 'lineitem.parquet' (FORMAT PARQUET);
 ```

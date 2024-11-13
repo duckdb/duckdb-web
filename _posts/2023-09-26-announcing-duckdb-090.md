@@ -5,6 +5,7 @@ author: Mark Raasveldt and Hannes Mühleisen
 thumb: "/images/blog/thumbs/230926.png"
 image: "/images/blog/thumbs/230926.png"
 excerpt: ""
+tags: ["release"]
 ---
 
 <img src="/images/blog/yellow-billed-duck.jpg"

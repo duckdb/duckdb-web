@@ -5,6 +5,7 @@ author: Mark Raasveldt and Hannes Mühleisen
 thumb: "/images/blog/thumbs/240603.svg"
 image: "/images/blog/thumbs/240603.png"
 excerpt: "The DuckDB team is <i>very happy</i> to announce that today we’re releasing DuckDB version 1.0.0, codename “Snow Duck” (anas nivis)."
+tags: ["release"]
 ---
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).

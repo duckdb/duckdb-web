@@ -5,6 +5,7 @@ author: "Gabor Szarnyas"
 thumb: "/images/blog/thumbs/survey.svg"
 image: "/images/blog/thumbs/survey.png"
 excerpt: "We share the findings from a survey of 500+ DuckDB users."
+tags: ["using DuckDB"]
 ---
 
 Earlier this year, we conducted a survey in the DuckDB community.

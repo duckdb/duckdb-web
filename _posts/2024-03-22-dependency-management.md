@@ -3,6 +3,7 @@ layout: post
 title: "Dependency Management in DuckDB Extensions"
 author: Sam Ansmink
 excerpt: While core DuckDB has zero external dependencies, building extensions with dependencies is now very simple, with built-in support for vcpkg, an open-source package manager with support for over 2000 C/C++ packages. Interested in building your own? Check out the [extension template](https://github.com/duckdb/extension-template).
+tags: ["extensions"]
 ---
 
 ## Introduction

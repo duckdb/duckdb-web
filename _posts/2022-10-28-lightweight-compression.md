@@ -3,6 +3,7 @@ layout: post
 title: "Lightweight Compression in DuckDB"
 author: Mark Raasveldt
 excerpt: DuckDB supports efficient lightweight compression that is automatically used to keep data size down without incurring high costs for compression and decompression.
+tags: ["deep dive"]
 ---
 
 <img src="/images/compression/matroshka-duck.png"
@@ -93,7 +94,6 @@ While this approach requires two passes over the data within a segment, this doe
 
 DuckDB implements several lightweight compression algorithms, and we are in the process of adding more to the system. We will go over a few of these compression algorithms and how they work in the following sections.
 
-
 ### Constant Encoding
 
 Constant encoding is the most straightforward compression algorithm in DuckDB. Constant encoding is used when every single value in a column segment is the same value. In that case, we store only that single value. This encoding is visualized below.
@@ -114,8 +114,7 @@ When applicable, this encoding technique leads to tremendous space savings. Whil
      width="100%"
      />
 
-RLE is powerful when there are many repeating values in the data. This might occur when data is sorted or partitioned on a particular attribute. It is also useful for columns that have many missing (`NULL`) values. 
-
+RLE is powerful when there are many repeating values in the data. This might occur when data is sorted or partitioned on a particular attribute. It is also useful for columns that have many missing (`NULL`) values.
 
 ### Bit Packing
 
@@ -140,7 +139,6 @@ Frame of Reference encoding is an extension of bit packing, where we also includ
      />
 
 While this might not seem particularly useful at a first glance, it is very powerful when storing dates and timestamps. That is because dates and timestamps are stored as Unix Timestamps in DuckDB, i.e., the offset since `1970-01-01` in either days (for dates) or microseconds (for timestamps). When we have a set of date or timestamp values, the absolute numbers might be very high, but the numbers are all very close together. By applying a frame before bit packing, we can often improve our compression ratio tremendously.
-
 
 ### Dictionary Encoding
 
@@ -196,4 +194,4 @@ ORDER BY row_group_id;
 
 ## Conclusion & Future Goals
 
-Compression has been tremendously successful in DuckDB, and we have made great strides in reducing the storage requirements of the system. We are still actively working on extending compression within DuckDB, and are looking to improve the compression ratio of the system even further, both by improving our existing techniques and implementing several others. Our goal is to achieve compression on par with Parquet with Snappy, while using only lightweight specialized compression techniques that are very fast to operate on. 
+Compression has been tremendously successful in DuckDB, and we have made great strides in reducing the storage requirements of the system. We are still actively working on extending compression within DuckDB, and are looking to improve the compression ratio of the system even further, both by improving our existing techniques and implementing several others. Our goal is to achieve compression on par with Parquet with Snappy, while using only lightweight specialized compression techniques that are very fast to operate on.

@@ -5,6 +5,7 @@ author: "Max Gabrielsson"
 thumb: "/images/blog/thumbs/vss.svg"
 image: "/images/blog/thumbs/vss.png"
 excerpt: "DuckDB is another step closer to becoming a vector database! In this post, we show the new performance optimizations implemented in the vector search extension."
+tags: ["extensions"]
 ---
 
 In the [previous blog post]({% post_url 2024-05-03-vector-similarity-search-vss %}), we introduced the DuckDB [Vector Similarity Search (VSS) extension]({% link docs/extensions/vss.md %}). While the extension is still quite experimental, we figured it would be interesting to dive into the details of some of the new features and improvements that we've been working on since the initial release.

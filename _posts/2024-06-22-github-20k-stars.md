@@ -5,6 +5,7 @@ author: "The DuckDB Team"
 thumb: "/images/blog/thumbs/240622.svg"
 image: "/images/blog/thumbs/240622.png"
 excerpt: ""
+tags: ["release"]
 ---
 
 DuckDB reached 20&nbsp;000 stars today on [GitHub](https://github.com/duckdb/duckdb).

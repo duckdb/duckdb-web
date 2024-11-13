@@ -5,6 +5,7 @@ author: Carlo Piovesan
 thumb: "/images/blog/thumbs/231218.png"
 image: "/images/blog/thumbs/231218.png"
 excerpt: DuckDB-Wasm users can now load DuckDB extensions, allowing them to run extensions in the browser.
+tags: ["extensions"]
 ---
 
 In this blog post, we will go over two exciting DuckDB features: the DuckDB-Wasm client and DuckDB extensions. I will discuss how these disjoint features have now been adapted to work together. These features are now available for DuckDB-Wasm users and you can try them out at [shell.duckdb.org](https://shell.duckdb.org).

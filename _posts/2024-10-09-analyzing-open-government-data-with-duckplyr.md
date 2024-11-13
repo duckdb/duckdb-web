@@ -5,6 +5,7 @@ author: "Hannes Mühleisen"
 thumb: "/images/blog/thumbs/duckplyr-2.svg"
 image: "/images/blog/thumbs/duckplyr-2.png"
 excerpt: "We use the duckplyr R library to clean and analyze an Open Data set published by the government of New Zealand."
+tags: ["using DuckDB"]
 ---
 
 <img src="/images/blog/duckplyr/duckplyr-logo.svg"

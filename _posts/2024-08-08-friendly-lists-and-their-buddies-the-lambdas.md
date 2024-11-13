@@ -5,6 +5,7 @@ author: "Tania Bogatsch and Maia de Graaf"
 thumb: "/images/blog/thumbs/240808.svg"
 image: "/images/blog/thumbs/240808.png"
 excerpt: ""
+tags: ["deep dive"]
 ---
 
 ## Introduction

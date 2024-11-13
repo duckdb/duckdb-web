@@ -5,6 +5,7 @@ author: The DuckDB team
 thumb: "/images/blog/thumbs/240909.svg"
 image: "/images/blog/thumbs/240909.png"
 excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 1.1.0, codenamed “Eatoni”."
+tags: ["release"]
 ---
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).

@@ -5,6 +5,7 @@ author: "Gabor Szarnyas"
 thumb: "/images/blog/thumbs/duckdb-tricks-2.svg"
 image: "/images/blog/thumbs/duckdb-tricks-2.png"
 excerpt: "We continue our “DuckDB tricks” series, focusing on queries that clean, transform and summarize data."
+tags: ["using DuckDB"]
 ---
 
 ## Overview
