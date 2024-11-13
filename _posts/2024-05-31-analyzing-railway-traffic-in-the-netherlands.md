@@ -5,6 +5,7 @@ author: Gabor Szarnyas
 thumb: "/images/blog/thumbs/240531.svg"
 image: "/images/blog/thumbs/240531.png"
 excerpt: "We use a real-world railway dataset to demonstrate some of DuckDB's key features, including querying different file formats, connecting to remote endpoints, and using advanced SQL features."
+tags: ["using DuckDB"]
 ---
 
 ## Introduction

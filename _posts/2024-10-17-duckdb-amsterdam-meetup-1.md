@@ -6,7 +6,7 @@ author: "DuckDB meetup organizers"
 thumb: "/images/blog/thumbs/duckdb-amsterdam-meetup-1.svg"
 image: "/images/blog/thumbs/duckdb-amsterdam-meetup-1.png"
 excerpt: ""
-tags: ["duckdb amsterdam meetup"]
+tags: ["meetup"]
 ---
 
 <img src="/images/blog/thumbs/duckdb-amsterdam-meetup-1.svg"

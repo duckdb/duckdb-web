@@ -2,7 +2,8 @@
 layout: post
 title: "Windowing in DuckDB"
 author: Richard Wesley
-excerpt: DuckDB, a free and Open-Source analytical data management system, has a state-of-the-art windowing engine that can compute complex moving aggregates like inter-quartile ranges as well as simpler moving averages.
+excerpt: DuckDB, a free and open-source analytical data management system, has a state-of-the-art windowing engine that can compute complex moving aggregates like inter-quartile ranges as well as simpler moving averages.
+tags: ["using DuckDB"]
 ---
 
 Window functions (those using the `OVER` clause) are important tools for analysing data series,
@@ -51,7 +52,7 @@ so let's look at a very simple example and ignore the partitioning and ordering 
 SELECT points,
     sum(points) OVER (
         ROWS BETWEEN 1 PRECEDING
-                 AND 1 FOLLOWING) we
+                 AND 1 FOLLOWING) AS we
 FROM results;
 ```
 

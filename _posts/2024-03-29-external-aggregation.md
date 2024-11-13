@@ -3,6 +3,7 @@ layout: post
 title: "No Memory? No Problem. External Aggregation in DuckDB"
 author: Laurens Kuiper
 excerpt: "Since the 0.9.0 release, DuckDB’s fully parallel aggregate hash table can efficiently aggregate over many more groups than fit in memory."
+tags: ["deep dive"]
 ---
 
 Most grouped aggregation queries yield just a few output rows.

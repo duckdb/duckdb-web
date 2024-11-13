@@ -5,7 +5,9 @@ author: Alex Monahan
 thumb: "/images/blog/thumbs/240628.svg"
 image: "/images/blog/thumbs/240628.png"
 excerpt: "In the last 3 years, DuckDB has become 3-25x faster and can analyze ~10x larger datasets all on the same hardware."
+tags: ["benchmark"]
 ---
+
 <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
 <script src="{{ site.baseurl }}/js/plotly-1.58.5.min.js"></script>
 

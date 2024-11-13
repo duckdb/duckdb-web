@@ -5,6 +5,7 @@ author: Richard Wesley
 thumb: "/images/blog/thumbs/230915.png"
 image: "/images/blog/thumbs/230915.png"
 excerpt: DuckDB supports AsOf Joins – a way to match nearby values. They are especially useful for searching event tables for temporal analytics.
+tags: ["deep dive"]
 ---
 
 Do you have time series data that you want to join,

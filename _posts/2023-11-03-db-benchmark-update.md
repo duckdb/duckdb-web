@@ -5,6 +5,7 @@ author: Tom Ebergen
 thumb: "/images/blog/thumbs/231103.png"
 image: "/images/blog/thumbs/231103.png"
 excerpt: The H2O.ai db-benchmark has been updated with new results. In addition, the AWS EC2 instance used for benchmarking has been changed to a c6id.metal for improved repeatability and fairness across libraries. DuckDB is the fastest library for both join and group by queries at almost every data size.
+tags: ["benchmark"]
 ---
 
 [Skip directly to the results](#results)
@@ -15,7 +16,7 @@ In April, DuckDB Labs published a [blog post reporting updated H2O.ai db-benchma
 
 ## New Benchmark Environment: c6id.metal Instance
 
-Initially, updating the results to the benchmark showed strange results. Even using the same library versions from the prior update, some solutions regressed and others improved. We believe this variance came from the AWS EC2 instance we chose: an m4.10xlarge. The m4.10xlarge has 40 virtual CPUs and EBS storage. EBS storage is highly available network block storage for EC2 instances. When running compute-heavy benchmarks, a machine like the m4.10xlarge can suffer from the following issues: 
+Initially, updating the results to the benchmark showed strange results. Even using the same library versions from the prior update, some solutions regressed and others improved. We believe this variance came from the AWS EC2 instance we chose: an m4.10xlarge. The m4.10xlarge has 40 virtual CPUs and EBS storage. EBS storage is highly available network block storage for EC2 instances. When running compute-heavy benchmarks, a machine like the m4.10xlarge can suffer from the following issues:
 
 * **Network storage** is an issue for benchmarking solutions that interact with storage frequently. For the 500MB and 5GB workloads, network storage was not an issue on the m4.10xlarge since all solutions could execute the queries in memory. For the 50GB workload, however, network storage was an issue for the solutions that could not execute queries in memory. While the m4.10xlarge has dedicated EBS bandwidth, any read/write from storage is still happening over the network, which is usually slower than physically mounted storage. Solutions that frequently read and write to storage for the 50GB queries end up doing this over the network. This network time becomes a chunk of the execution time of the query. If the network has variable performance, the query performance is then also variable.
 

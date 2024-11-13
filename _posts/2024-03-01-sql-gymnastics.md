@@ -6,6 +6,7 @@ avatar: "/images/blog/authors/alex_monahan.jpg"
 thumb: "/images/blog/thumbs/240301.png"
 image: "/images/blog/thumbs/240301.png"
 excerpt: "Combining multiple features of DuckDB’s [friendly SQL](/docs/guides/sql_features/friendly_sql) allows for highly flexible queries that can be reused across tables."
+tags: ["using DuckDB"]
 ---
 
 <img src="/images/blog/duck_gymnast.jpg"
@@ -150,7 +151,7 @@ Executing either of those queries will return this result:
 #### Understanding the Design
 
 The first step of our flexible [table macro]({% link docs/sql/statements/create_macro.md %}#table-macros) is to choose a specific table using DuckDB's [`FROM`-first syntax]({% post_url 2023-08-23-even-friendlier-sql %}#from-first-in-select-statements).
-Well that's not very dynamic! 
+Well that's not very dynamic!
 If we wanted to, we could work around this by creating a copy of this macro for each table we want to expose to our application.
 However, we will show another approach in our next example, and completely solve the issue in a follow up blog post with an in-development DuckDB feature.
 Stay tuned!
@@ -158,16 +159,16 @@ Stay tuned!
 Then we `SELECT` our grouping columns based on the list parameters that were passed in.
 The [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns-expression) will execute a [lambda function]({% link docs/sql/functions/lambda.md %}) to decide which columns meet the criteria to be selected.
 
-The first portion of the lambda function checks if a column name was passed in within the `included_columns` list. 
+The first portion of the lambda function checks if a column name was passed in within the `included_columns` list.
 However, if we choose not to use an inclusion rule (by passing in a blank `included_columns` list), we want to ignore that parameter.
 If the list is blank, `len(included_columns) = 0` will evaluate to `true` and effectively disable the filtering on `included_columns`.
 This is a common pattern for optional filtering that is generically useful across a variety of SQL queries.
 (Shout out to my mentor and friend Paul Bloomquist for teaching me this pattern!)
 
-We repeat that pattern for `excluded_columns` so that it will be used if populated, but ignored if left blank. 
+We repeat that pattern for `excluded_columns` so that it will be used if populated, but ignored if left blank.
 The `excluded_columns` list will also win ties, so that if a column is in both lists, it will be excluded.
 
-Next, we apply our aggregate function to the columns we want to aggregate. 
+Next, we apply our aggregate function to the columns we want to aggregate.
 It is easiest to follow the logic of this part of the query by working from the innermost portion outward.
 The `COLUMNS` expression will acquire the columns that are in our `aggregated_columns` list.
 Then, we do a little bit of gymnastics (it had to happen sometime...).
@@ -265,24 +266,24 @@ FROM dynamic_aggregates_any_cte_any_func(
 
 Instead of querying the very boldly named `example` table, we query the possibly more generically named `any_cte`.
 Note that `any_cte` has a different schema than our prior example – the columns in `any_cte` can be anything!
-When the macro is created, `any_cte` doesn't even exist. 
+When the macro is created, `any_cte` doesn't even exist.
 When the macro is executed, it searches for a table-like object named `any_cte`, and it was defined in the CTE as the macro was called.
 
-Similarly, `any_func` does not exist initially. 
+Similarly, `any_func` does not exist initially.
 It only needs to be created (or recreated) at some point before the macro is executed.
-Its only requirements are to be an aggregate function that operates on a single column. 
+Its only requirements are to be an aggregate function that operates on a single column.
 
-> `FUNCTION` and `MACRO` are synonyms in DuckDB and can be used interchangeably! 
+> `FUNCTION` and `MACRO` are synonyms in DuckDB and can be used interchangeably!
 
 #### Takeaways from Version 2
 
 A macro can act on any arbitrary table by using a CTE at the time it is called.
 This makes our macro far more reusable – it can work on any table!
-Not only that, but any custom aggregate function can be used. 
+Not only that, but any custom aggregate function can be used.
 
-Look how far we have stretched SQL – we have made a truly reusable SQL function! 
+Look how far we have stretched SQL – we have made a truly reusable SQL function!
 The table is dynamic, the grouping columns are dynamic, the aggregated columns are dynamic, and so is the aggregate function.
-Our daily gymnastics stretches have paid off. 
+Our daily gymnastics stretches have paid off.
 However, stay tuned for a way to achieve similar results with a simpler approach in a future post.
 
 ## Custom Summaries for Any Dataset
@@ -292,17 +293,17 @@ This query powers a portion of the MotherDuck Web UI's [Column Explorer](https:/
 [Hamilton Ulmer](https://www.linkedin.com/in/hamilton-ulmer-28b97817/) led the creation of this component and is the author of this query as well!
 The purpose of the Column Explorer, and this query, is to get a high-level overview of the data in all columns within a dataset as quickly and easily as possible.
 
-DuckDB has a built-in [`SUMMARIZE` keyword]({% link docs/guides/meta/summarize.md %}) that can calculate similar metrics across an entire table. 
-However, for larger datasets, `SUMMARIZE` can take a couple of seconds to load. 
-This query provides a custom summarization capability that can be tailored to the properties of your data that you are most interested in. 
+DuckDB has a built-in [`SUMMARIZE` keyword]({% link docs/guides/meta/summarize.md %}) that can calculate similar metrics across an entire table.
+However, for larger datasets, `SUMMARIZE` can take a couple of seconds to load.
+This query provides a custom summarization capability that can be tailored to the properties of your data that you are most interested in.
 
 Traditionally, databases required that every column be referred to explicitly, and work best when data is arranged in separate columns.
 This query takes advantage of DuckDB's ability to apply functions to all columns at once, its ability to [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) (or stack) columns, and its [`STRUCT`]({% link docs/sql/data_types/struct.md %}) data type to store key/value pairs.
 The result is a clean, pivoted summary of all the rows and columns in a table.
 
-Let's take a look at the entire function, then break it down piece by piece. 
+Let's take a look at the entire function, then break it down piece by piece.
 
-This [example dataset](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset) comes from [Hugging Face](https://huggingface.co/), which hosts [DuckDB-accessible Parquet files](https://huggingface.co/blog/hub-duckdb) for many of their datasets. 
+This [example dataset](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset) comes from [Hugging Face](https://huggingface.co/), which hosts [DuckDB-accessible Parquet files](https://huggingface.co/blog/hub-duckdb) for many of their datasets.
 First, we create a local table populated from this remote Parquet file.
 
 ### Creation
@@ -313,7 +314,7 @@ CREATE OR REPLACE TABLE spotify_tracks AS (
 );
 ```
 
-Then we create and execute our `custom_summarize` macro. 
+Then we create and execute our `custom_summarize` macro.
 We use the same `any_cte` trick from above to allow this to be reused on any query result or table.
 
 ```sql

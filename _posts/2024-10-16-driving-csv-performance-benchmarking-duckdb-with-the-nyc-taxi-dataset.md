@@ -5,6 +5,7 @@ author: "Pedro Holanda"
 thumb: "/images/blog/thumbs/taxi.svg"
 image: "/images/blog/thumbs/taxi.png"
 excerpt: "DuckDB's benchmark suite now includes the NYC Taxi Benchmark. We explain how our CSV reader performs on the Taxi Dataset and provide steps to reproduce the benchmark."
+tags: ["benchmark"]
 ---
 
 The [NYC taxi dataset](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) is a collection of many years of taxi rides that occurred in New York City. It is a very influential dataset, used for [database benchmarks](https://tech.marksblogg.com/benchmarks.html), [machine learning](https://www.r-bloggers.com/2018/01/new-york-city-taxi-limousine-commission-tlc-trip-data-analysis-using-sparklyr-and-google-bigquery-2/), [data visualization](https://www.kdnuggets.com/2017/02/data-science-nyc-taxi-trips.html), and more.

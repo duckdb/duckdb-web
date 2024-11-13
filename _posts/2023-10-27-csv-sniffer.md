@@ -6,6 +6,7 @@ author: Pedro Holanda
 thumb: "/images/blog/csv-sniffer/ducktetive.jpg"
 image: "/images/blog/csv-sniffer/ducktetive.jpg"
 excerpt: DuckDB is primarily focused on performance, leveraging the capabilities of modern file formats. At the same time, we also pay attention to flexible, non-performance-driven formats like CSV files. To create a nice and pleasant experience when reading from CSV files, DuckDB implements a CSV sniffer that automatically detects CSV dialect options, column types, and even skips dirty data. The sniffing process allows users to efficiently explore CSV files without needing to provide any input about the file format.
+tags: ["using DuckDB"]
 ---
 
 <img src="/images/blog/csv-sniffer/ducktetive.jpg"
@@ -167,7 +168,7 @@ The _Type Refinement_ phase performs the same tasks as type detection; the only 
 
 In this phase, we transition to a more efficient vectorized casting algorithm. The validation process remains the same as in type detection, with types from type candidate arrays being eliminated if a cast fails.
 
-## How Fast is the Sniffing?
+## How Fast Is the Sniffing?
 
 To analyze the impact of running DuckDB's automatic detection, we execute the sniffer on the [NYC taxi dataset](https://www.kaggle.com/datasets/elemento/nyc-yellow-taxi-trip-data/). The file consists of 19 columns, 10,906,858 tuples and is 1.72 GB in size.
 

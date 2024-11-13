@@ -3,6 +3,7 @@ layout: post
 title: "Correlated Subqueries in SQL"
 author: Mark Raasveldt
 excerpt: ""
+tags: ["using DuckDB"]
 ---
 
 Subqueries in SQL are a powerful abstraction that allow simple queries to be used as composable building blocks. They allow you to break down complex problems into smaller parts, and subsequently make it easier to write, understand and maintain large and complex queries.
@@ -259,10 +260,9 @@ WHERE distance=(
 
 We can see the drastic performance difference that subquery decorrelation has when we compare the run-time of this query in DuckDB with the run-time in Postgres and SQLite. When running the above query on the [`ontime` dataset](https://www.transtats.bts.gov/Homepage.asp) for `2017` with roughly `~4 million` rows, we get the following performance results:
 
-| DuckDB | Postgres | SQLite |
-|--------|----------|--------|
-| 0.06s  | >48 Hours    | >48 Hours  |
-
+| DuckDB | Postgres  | SQLite    |
+|--------|-----------|-----------|
+| 0.06 s | >48 hours | >48 hours |
 
 As Postgres and SQLite do not de-correlate the subquery, the query is not just *logically*, but *actually* executed once for every row. As a result, the subquery is executed *4 million times* in those systems, which takes an immense amount of time.
 
