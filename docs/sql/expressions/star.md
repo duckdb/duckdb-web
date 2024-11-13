@@ -177,12 +177,12 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 The matches of capture groups can be used to rename columns selected by a regular expression:
 
 ```sql
-SELECT COLUMNS('(\w{2}).*') AS '\1' FROM numbers;
+SELECT COLUMNS('(\w{3}).*') AS '\1' FROM numbers;
 ```
 
 <div class="narrow_table"></div>
 
-| id |  nu  |
+| id | num  |
 |---:|-----:|
 | 1  | 10   |
 | 2  | 20   |
