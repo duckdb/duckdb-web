@@ -1601,6 +1601,10 @@
             {
               "page": "Execution Format",
               "url": "vector"
+            },
+            {
+              "page": "Pivot",
+              "url": "pivot"
             }
           ]
         }

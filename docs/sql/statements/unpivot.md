@@ -12,6 +12,8 @@ DuckDB implements both the SQL Standard `UNPIVOT` syntax and a simplified `UNPIV
 Both can utilize a [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns) to automatically detect the columns to unpivot.
 `PIVOT_LONGER` may also be used in place of the `UNPIVOT` keyword.
 
+For details on how the `UNPIVOT` statement is implemented, see the [Pivot Internals site]({% link docs/internals/pivot.md %}#unpivot).
+
 > The [`PIVOT` statement]({% link docs/sql/statements/pivot.md %}) is the inverse of the `UNPIVOT` statement.
 
 ## Simplified `UNPIVOT` Syntax
@@ -212,58 +214,6 @@ UNPIVOT
 | col1 | 84    |
 | col2 | woot  |
 
-### Internals
-
-Unpivoting is implemented entirely as rewrites into SQL queries.
-Each `UNPIVOT` is implemented as set of `unnest` functions, operating on a list of the column names and a list of the column values.
-If dynamically unpivoting, the `COLUMNS` expression is evaluated first to calculate the column list.
-
-For example:
-
-```sql
-UNPIVOT monthly_sales
-ON jan, feb, mar, apr, may, jun
-INTO
-    NAME month
-    VALUE sales;
-```
-
-is translated into:
-
-```sql
-SELECT
-    empid,
-    dept,
-    unnest(['jan', 'feb', 'mar', 'apr', 'may', 'jun']) AS month,
-    unnest(["jan", "feb", "mar", "apr", "may", "jun"]) AS sales
-FROM monthly_sales;
-```
-
-Note the single quotes to build a list of text strings to populate `month`, and the double quotes to pull the column values for use in `sales`.
-This produces the same result as the initial example:
-
-<div class="narrow_table"></div>
-
-| empid |    dept     | month | sales |
-|------:|-------------|-------|------:|
-| 1     | electronics | jan   | 1     |
-| 1     | electronics | feb   | 2     |
-| 1     | electronics | mar   | 3     |
-| 1     | electronics | apr   | 4     |
-| 1     | electronics | may   | 5     |
-| 1     | electronics | jun   | 6     |
-| 2     | clothes     | jan   | 10    |
-| 2     | clothes     | feb   | 20    |
-| 2     | clothes     | mar   | 30    |
-| 2     | clothes     | apr   | 40    |
-| 2     | clothes     | may   | 50    |
-| 2     | clothes     | jun   | 60    |
-| 3     | cars        | jan   | 100   |
-| 3     | cars        | feb   | 200   |
-| 3     | cars        | mar   | 300   |
-| 3     | cars        | apr   | 400   |
-| 3     | cars        | may   | 500   |
-| 3     | cars        | jun   | 600   |
 
 ### Simplified `UNPIVOT` Full Syntax Diagram
 
