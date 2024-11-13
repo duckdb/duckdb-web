@@ -100,7 +100,7 @@ CREATE TABLE users AS
 SELECT * FROM get_users([1, 5]);
 ```
 
-To define macros on arbitrary tables, use the [`query_table` function](docs/guides/sql_features/query_and_query_table_functions). For example, the following macro computes a column-wise checksum on a table:
+To define macros on arbitrary tables, use the [`query_table` function]({% link docs/guides/sql_features/query_and_query_table_functions %}). For example, the following macro computes a column-wise checksum on a table:
 
 ```sql
 CREATE MACRO checksum(table_name) AS TABLE
