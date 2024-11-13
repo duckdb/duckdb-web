@@ -174,7 +174,12 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 | 2  | 20     |
 | 3  | NULL   |
 
-The matches of capture groups can be used to rename columns selected by a regular expression:
+### Renaming Columns using a `COLUMNS` expression
+
+The matches of capture groups can be used to rename columns selected by a regular expression.
+The capture groups are one-indexed; `\0` is the original column name.
+
+For example, to select the first three letters of colum names, run:
 
 ```sql
 SELECT COLUMNS('(\w{3}).*') AS '\1' FROM numbers;
@@ -188,7 +193,12 @@ SELECT COLUMNS('(\w{3}).*') AS '\1' FROM numbers;
 | 2  | 20   |
 | 3  | NULL |
 
-The capture groups are one-indexed; `\0` is the original column name.
+To remove a colon (`:`) character in the middle of a column name, run:
+
+```sql
+CREATE TABLE tbl ("Foo:Bar" INTEGER, "Foo:Baz" INTEGER, "Foo:Qux" INTEGER);
+SELECT COLUMNS('(\w*):(\w*)') AS '\1\2' FROM tbl;
+```
 
 ## `COLUMNS` Lambda Function
 
@@ -230,7 +240,7 @@ With `*COLUMNS`, the expression expands in its parent expression `coalesce`, res
 
 ```sql
 SELECT coalesce(*COLUMNS(['a', 'b', 'c'])) AS result
-FROM (SELECT NULL a, 42 b, true c);
+FROM (SELECT NULL AS a, 42 AS b, true AS c);
 ```
 
 | result |
@@ -241,7 +251,7 @@ FROM (SELECT NULL a, 42 b, true c);
 
 ```sql
 SELECT coalesce(*COLUMNS(*)) AS result
-FROM (SELECT NULL a, 42 b, true c);
+FROM (SELECT NULL a, 42 AS b, true AS c);
 ```
 
 | result |
