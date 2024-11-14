@@ -39,10 +39,10 @@ These are called _blocking operators_ as they require their entire input to be b
 and are the most memory-intensive operators in relational database systems.
 The main blocking operators are the following:
 
-* _sorting:_ [`ORDER BY`]({% link docs/sql/query_syntax/orderby.md %}),
-* _grouping:_ [`GROUP BY`]({% link docs/sql/query_syntax/groupby.md %}),
-* _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`]({% link docs/sql/functions/window_functions.md %}),
-* _joining:_ [`JOIN`]({% link docs/sql/query_syntax/from.md %}#joins).
+* _sorting:_ [`ORDER BY`]({% link docs/sql/query_syntax/orderby.md %})
+* _grouping:_ [`GROUP BY`]({% link docs/sql/query_syntax/groupby.md %})
+* _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`]({% link docs/sql/functions/window_functions.md %})
+* _joining:_ [`JOIN`]({% link docs/sql/query_syntax/from.md %}#joins)
 
 DuckDB supports larger-than-memory processing for all of these operators.
 
