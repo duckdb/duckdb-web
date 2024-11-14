@@ -108,4 +108,4 @@ spark_df = fa.fugue_sql(query, engine="spark")
 
 The output of the code above will be a Spark DataFrame.
 
-More information on Fugue can be found on their [Github](https://github.com/fugue-project/fugue/)
+More information on Fugue can be found on their [GitHub](https://github.com/fugue-project/fugue/)
