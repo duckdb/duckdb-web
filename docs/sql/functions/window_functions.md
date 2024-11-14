@@ -71,7 +71,7 @@ The table below shows the available general window functions.
 | [`nth_value(expr, nth[ IGNORE NULLS])`](#nth_valueexpr-nth-ignore-nulls) | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); `NULL` if no such row. |
 | [`ntile(num_buckets)`](#ntilenum_buckets) | An integer ranging from 1 to `num_buckets`, dividing the partition as equally as possible. |
 | [`percent_rank()`](#percent_rank) | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. |
-| [`rank_dense()`](#rank_dense) | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
+| [`rank_dense()`](#rank_dense) | The rank of the current row *without gaps. |
 | [`rank()`](#rank) | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
 | [`row_number()`](#row_number) | The number of the current row within the partition, counting from 1. |
 
@@ -151,10 +151,9 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
+| **Description** | The rank of the current row *without gaps*. |
 | **Return Type** | `BIGINT` |
 | **Example** | `rank_dense()` |
-| **Alias** | `rank()` |
 
 #### `rank()`
 
@@ -163,7 +162,6 @@ The table below shows the available general window functions.
 | **Description** | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
 | **Return Type** | `BIGINT` |
 | **Example** | `rank()` |
-| **Alias** | `rank_dense()` |
 
 #### `row_number()`
 
