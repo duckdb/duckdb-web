@@ -273,7 +273,7 @@ This function just computes the 1-based row number within the partition using th
 SELECT
     "Plant",
     "Date",
-    row_number() OVER (PARTITION BY "Plant" ORDER  BY "Date") AS "Row"
+    row_number() OVER (PARTITION BY "Plant" ORDER BY "Date") AS "Row"
 FROM "Generation History"
 ORDER BY 1, 2;
 ```

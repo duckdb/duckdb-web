@@ -75,7 +75,7 @@ then perform a group-by aggregation with a `count(*)`:
 ```sql
 SELECT
     month("Service:Date") AS month,
-    "Stop:station name" AS station,
+    "Stop:Station name" AS station,
     count(*) AS num_services
 FROM services
 GROUP BY month, station
@@ -90,7 +90,7 @@ At the same time, let's also turn this result into an intermediate table called 
 CREATE TABLE services_per_month AS
     SELECT
         month("Service:Date") AS month,
-        "Stop:station name" AS station,
+        "Stop:Station name" AS station,
         count(*) AS num_services
     FROM services
     GROUP BY ALL;
@@ -162,7 +162,7 @@ DuckDB supports querying remote files, including CSV and Parquet, via [the HTTP(
 For example, we can run the following query:
 
 ```sql
-SELECT "Service:Date", "Stop:station name"
+SELECT "Service:Date", "Stop:Station name"
 FROM 'https://blobs.duckdb.org/nl-railway/services-2023.parquet'
 LIMIT 3;
 ```
@@ -183,7 +183,7 @@ The rest of the query remains the same:
 WITH services_per_month AS (
     SELECT
         month("Service:Date") AS month,
-        "Stop:station name" AS station,
+        "Stop:Station name" AS station,
         count(*) AS num_services
     FROM 'https://blobs.duckdb.org/nl-railway/services-2023.parquet'
     GROUP BY ALL

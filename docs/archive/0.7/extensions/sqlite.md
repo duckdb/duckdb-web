@@ -76,8 +76,8 @@ FROM   category cat
               ON inv.inventory_id = ren.inventory_id 
        LEFT JOIN payment pay 
               ON ren.rental_id = pay.rental_id 
-GROUP  BY cat.name 
-ORDER  BY revenue DESC 
+GROUP BY cat.name 
+ORDER BY revenue DESC 
 LIMIT  5; 
 ```
 
