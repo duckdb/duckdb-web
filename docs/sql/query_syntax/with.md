@@ -317,6 +317,10 @@ ORDER BY length(path), path;
 | 1         | 8       | [1, 3, 8] |
 | 1         | 8       | [1, 5, 8] |
 
+## Limitations
+
+DuckDB does not support mutually recursive CTEs. See the [related issue and discussion in the DuckDB repository](https://github.com/duckdb/duckdb/issues/14716#issuecomment-2467952456).
+
 ## Syntax
 
 <div id="rrdiagram"></div>
