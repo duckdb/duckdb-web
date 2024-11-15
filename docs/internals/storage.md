@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Storage
+title: Storage Versions and Format
 redirect_from:
    - /internals/storage
 ---

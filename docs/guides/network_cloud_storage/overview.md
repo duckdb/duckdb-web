@@ -1,4 +1,4 @@
 ---
 layout: docu
-title: Cloud Storage
+title: Network and Cloud Storage
 ---

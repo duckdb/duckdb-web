@@ -447,7 +447,7 @@
                   "url": "alter_view"
                 },
                 {
-                  "page": "ATTACH / DETACH",
+                  "page": "ATTACH and DETACH",
                   "url": "attach"
                 },
                 {
@@ -511,7 +511,7 @@
                   "url": "drop"
                 },
                 {
-                  "page": "EXPORT / IMPORT DATABASE",
+                  "page": "EXPORT and IMPORT DATABASE",
                   "url": "export"
                 },
                 {
@@ -577,7 +577,7 @@
                   "url": "select"
                 },
                 {
-                  "page": "FROM & JOIN",
+                  "page": "FROM and JOIN",
                   "url": "from"
                 },
                 {
@@ -1189,7 +1189,7 @@
               ]
             },
             {
-              "page": "Network & Cloud Storage",
+              "page": "Network and Cloud Storage",
               "slug": "network_cloud_storage",
               "subsubfolderitems": [
                 {
@@ -1595,7 +1595,7 @@
               "url": "overview"
             },
             {
-              "page": "Storage Versions & Format",
+              "page": "Storage Versions and Format",
               "url": "storage"
             },
             {
