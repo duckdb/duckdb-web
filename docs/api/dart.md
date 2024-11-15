@@ -26,7 +26,7 @@ This will add a line like this to your package's `pubspec.yaml` (and run an impl
 
 ```text
 dependencies:
-  dart_duckdb: ^1.0.3
+  dart_duckdb: ^1.1.3
 ```
 
 Alternatively, your editor might support `flutter pub get.` Check the docs for your editor to learn more.
