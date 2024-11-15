@@ -90,6 +90,7 @@ The table below shows the available general window functions.
 | **Description** | The rank of the current row *without gaps;* this function counts peer groups. |
 | **Return Type** | `BIGINT` |
 | **Example** | `dense_rank()` |
+| **Aliases** | `rank_dense()` |
 
 #### `first_value(expr[ IGNORE NULLS])`
 
@@ -154,6 +155,7 @@ The table below shows the available general window functions.
 | **Description** | The rank of the current row *without gaps*. |
 | **Return Type** | `BIGINT` |
 | **Example** | `rank_dense()` |
+| **Aliases** | `dense_rank()` |
 
 #### `rank()`
 
