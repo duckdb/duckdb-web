@@ -4,11 +4,11 @@ title: Dart API
 github_repository: https://github.com/TigerEyeLabs/duckdb-dart
 ---
 
-DuckDB.dart is the native Dart API for [DuckDB](https://duckdb.org/).
+DuckDB.Dart is the native Dart API for [DuckDB](https://duckdb.org/).
 
 ## Installation
 
-DuckDB.dart can be installed from [pub.dev](https://pub.dev/packages/dart_duckdb). Please see the [API Reference](https://pub.dev/documentation/dart_duckdb/latest/) for details.
+DuckDB.Dart can be installed from [pub.dev](https://pub.dev/packages/dart_duckdb). Please see the [API Reference](https://pub.dev/documentation/dart_duckdb/latest/) for details.
 
 ### Use This Package as a Library
 
