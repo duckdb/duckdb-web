@@ -86,16 +86,16 @@ FROM tbl;
 
 ### `REPLACE` Clause
 
-`REPLACE` allows us to replace specific columns with different expressions.
+`REPLACE` allows us to replace specific values in columns as specified by an expression.
 
 ```sql
-SELECT * REPLACE (col / 1000 AS col)
+SELECT * REPLACE (col / 1_000 AS col)
 FROM tbl;
 ```
 
 ## `COLUMNS` Expression
 
-The `COLUMNS` expression can be used to execute the same expression on multiple columns. For example:
+The `COLUMNS` expression can be used to execute the same expression on the values in multiple columns. For example:
 
 ```sql
 CREATE TABLE numbers (id INTEGER, number INTEGER);
@@ -174,7 +174,7 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 | 2  | 20     |
 | 3  | NULL   |
 
-### Renaming Columns using a `COLUMNS` expression
+### Renaming Columns Using a `COLUMNS` Expression
 
 The matches of capture groups can be used to rename columns selected by a regular expression.
 The capture groups are one-indexed; `\0` is the original column name.
@@ -202,7 +202,7 @@ SELECT COLUMNS('(\w*):(\w*)') AS '\1\2' FROM tbl;
 
 ## `COLUMNS` Lambda Function
 
-`COLUMNS` also supports passing in a lambda function. The lambda function will be evaluated for all columns present in the `FROM` clause, and only columns that match the lambda function will be returned. This allows the execution of arbitrary expressions in order to select columns.
+`COLUMNS` also supports passing in a lambda function. The lambda function will be evaluated for all columns present in the `FROM` clause, and only columns that match the lambda function will be returned. This allows the execution of arbitrary expressions in order to select and rename columns.
 
 ```sql
 SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
@@ -211,7 +211,7 @@ SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 <div class="narrow_table"></div>
 
 | number |
-|--------|
+|-------:|
 | 10     |
 | 20     |
 | NULL   |
