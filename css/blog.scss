@@ -95,6 +95,9 @@ code, pre {
 	font-family: "JetBrainsMono-Regular","Lucida Console",monospace;
 	font-size: 16px;
 }
+div.small_code_block + .language-text code {
+	font-size: 12px;
+}
 h4 {
 	-webkit-margin-before:0em;
 			margin-block-start:0em;

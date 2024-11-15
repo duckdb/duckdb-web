@@ -49,6 +49,7 @@ LIMIT 5;
 
 Running this `EXPLAIN` query gives us the following plan.
 
+<div class="small_code_block"></div>
 ```text
 ┌───────────────────────────┐
 │           LIMIT           │
@@ -113,6 +114,7 @@ PRAGMA enable_optimizer;
 EXPLAIN ...
 ```
 
+<div class="small_code_block"></div>
 ```text
 ┌───────────────────────────┐
 │           TOP_N           │
