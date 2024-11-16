@@ -41,7 +41,12 @@ import 'package:dart_duckdb/dart_duckdb.dart';
 
 ## Usage Examples
 
-Here are some common use cases for DuckDB.Dart:
+See the example projects in the [`duckdb-dart` repository](https://github.com/TigerEyeLabs/duckdb-dart/):
+
+* [`cli`](https://github.com/TigerEyeLabs/duckdb-dart/tree/main/examples/cli): command-line application
+* [`duckdbexplorer`](https://github.com/TigerEyeLabs/duckdb-dart/tree/main/examples/duckdbexplorer): GUI application which builds for desktop operating systems as well as Android and iOS.
+
+Here are some common code snippets for DuckDB.Dart:
 
 ### Querying an In-Memory Database
 
