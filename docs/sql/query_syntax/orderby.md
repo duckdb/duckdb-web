@@ -10,7 +10,7 @@ In addition, every order clause can specify whether `NULL` values should be move
 
 The `ORDER BY` clause may contain one or more expressions, separated by commas.
 An error will be thrown if no expressions are included, since the `ORDER BY` clause should be removed in that situation.
-The expressions may begin with either an arbitrary scalar expression (which could be a column name), a column position number (Ex: `1`. Note that it is 1-indexed), or the keyword `ALL`.
+The expressions may begin with either an arbitrary scalar expression (which could be a column name), a column position number (where the indexing starts from 1), or the keyword `ALL`.
 Each expression can optionally be followed by an order modifier (`ASC` or `DESC`, default is `ASC`), and/or a `NULL` order modifier (`NULLS FIRST` or `NULLS LAST`, default is `NULLS LAST`).
 
 ## `ORDER BY ALL`
