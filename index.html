@@ -102,16 +102,15 @@ body_class: landing nowrap
 		<h1>Blog</h1>
 		<div class="newstileswrap">
 			{% for post in site.posts limit:2 %}
-				{% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
-				{% capture month %}{{post.date | date: "%B"}}{% endcapture %}
-				{% assign random_number = forloop.index | modulo: 5 %}
-				{% assign tag_classes = post.tags | join: ' ' %}
-				<div class="postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ post.title | escape }}">
-					{% if post.thumb %}
-						<div class="postimg custom" style="background-image: url('{{ post.thumb }}');">
-					{% else %}
-						<div class="postimg bg_{{ random_number }}">
-					{% endif %}
+				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
+				{% assign tag_classes = post.tags | join: ' ' | downcase | slugify %}
+				<div class="postpreview {{ tag_classes }}" data-title="{{ post.title | escape }}">
+					<div class="postimg custom">
+						{% if post.thumb %}
+							<img src="{{ post.thumb }}" alt="{{ post.title }}" class="zoom-image"/>
+						{% else %}
+							<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image"/>
+						{% endif %}
 						<a href="{{ post.url }}" class="blocklink"></a>
 					</div>
 					<div class="postdetails">
@@ -125,13 +124,15 @@ body_class: landing nowrap
 						<h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
 						<div class="meta">
 							<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
-							<div class="author">{{ post.author }}</div>
+							<div class="author">{{ post.author | default: "Unknown Author" }}</div>
 						</div>
 					</div>
 				</div>
 			{% endfor %}
 		</div>
-		<a href="{{ site.url }}{{ site.baseurl }}/news" class="button transparent arrow-right">News Archive <span></span></a>
+		<a href="{{ site.url }}{{ site.baseurl }}/news" class="button transparent arrow-right">
+			News Archive <span></span>
+		</a>
 	</div>
 </section>
 
@@ -141,15 +142,16 @@ body_class: landing nowrap
 	<div class="wrap">
 		<h1>Upcoming Events</h1>
 		<div class="newstileswrap">
-			{% for event in future_events limit:3 %}
-				{% assign random_number = forloop.index | modulo: 5 %}
+			{% for event in future_events limit:2 %}
+				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %} <!-- Generiert Werte von 1 bis 3 -->
 				{% assign tag_classes = event.tags | join: ' ' %}
 				<div class="eventpreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ event.title | escape }}">
-					{% if event.thumb %}
-						<div class="postimg custom" style="background-image: url('{{ event.thumb }}');">
-					{% else %}
-						<div class="postimg bg_{{ random_number }}">
-					{% endif %}
+					<div class="postimg custom">
+						{% if event.thumb %}
+							<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image">
+						{% else %}
+							<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+						{% endif %}
 						<a href="{{ event.url }}" class="blocklink"></a>
 					</div>
 					<div class="postdetails">
@@ -170,8 +172,9 @@ body_class: landing nowrap
 				</div>
 			{% endfor %}
 		</div>
-		<a href="/events" class="button transparent arrow-right">Events Archive <span></span></a>
-	</div>
+		<a href="/events" class="button transparent arrow-right">
+			Events Archive <span></span>
+		</a>
 </section>
 {% endif %}
 
