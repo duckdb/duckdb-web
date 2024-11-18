@@ -3,7 +3,7 @@ layout: docu
 title: Indexing
 ---
 
-DuckDB uses 1-based indexing except for [JSON files]({% link docs/data/json/overview.md %}), which use 0-based indexing.
+DuckDB uses 1-based indexing except for [JSON objects]({% link docs/data/json/overview.md %}), which use 0-based indexing.
 
 ## Examples
 
