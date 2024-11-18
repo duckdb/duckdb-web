@@ -1,0 +1,42 @@
+name: Generate and Update Community Extensions Docs
+on:
+  workflow_dispatch:
+  workflow_call:
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+  generate_docs:
+    uses: duckdb/community-extensions/.github/workflows/generate_docs.yml@main
+
+  deploy_docs:
+    needs:
+      - generate_docs
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: generated_markdowns
+
+    - uses: actions/checkout@v4
+      with:
+        path: 'web'
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Generate docs
+      run: |
+        unzip generated_md.zip
+        cp build/docs/*.md web/community_extensions/extensions/.
+        cp build/docs/extensions_list.md.tmp web/_includes/list_of_community_extensions.md
+
+    - name: Upload to duckdb/duckdb-web
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        cd web
+        git config user.email "some-user@some-domain.com"
+        git config user.name "Quack McQuacker"
+        git checkout -B update_community_extensions
+        git add --all community_extensions
+        git commit -m "[update docs bot] Update community_extensions"
+        git push -f --set-upstream origin update_community_extensions
