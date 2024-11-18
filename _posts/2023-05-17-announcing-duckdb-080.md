@@ -3,6 +3,8 @@ layout: post
 title: "Announcing DuckDB 0.8.0"
 author: Mark Raasveldt and Hannes Mühleisen
 excerpt: ""
+thumb: "/images/blog/thumbs/duckdb-release-0-8-0.svg"
+image: "/images/blog/thumbs/duckdb-release-0-8-0.png"
 tags: ["release"]
 ---
 

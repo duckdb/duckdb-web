@@ -47,6 +47,15 @@ plugins:
   - jekyll-git-hash
   - jekyll-last-modified-at
   - jekyll-toc
+
+collections:
+  media:
+    output: false
+    permalink: /media/:title/
+  events:
+    output: true
+    permalink: /events/:year/:month/:day/:title/
+
 excerpt_separator: <!--more-->
 future: true
 

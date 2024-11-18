@@ -4,7 +4,7 @@
 @import 'variables';
 
 body{
-	background-color: white;
+	background: var(--main-body-background-color, #FAFAFA);
 	font-size: 100%;
 }
 
@@ -197,7 +197,7 @@ body.documentation{
 	}
 	.headlinebar a,
 	.wrap a{
-		color: black;
+		color: var(--text-primary-color);
 		text-decoration: underline;
 		transition: color .3s;
 	  &:hover{
@@ -311,8 +311,7 @@ body.documentation{
 		}
 	}
    #sidebar{
-	  //background: $black50;
-		background: white;
+		background: transparent;
 		position: relative;
 		width: 22%;
 		padding: 100px 20px 20px 20px;

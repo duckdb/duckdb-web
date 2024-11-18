@@ -64,22 +64,57 @@ $(document).ready(function(){
 	return "undefined";
 	};
 	
-
-	if($('.archivedposts').length != 0){ // If Archive Page
-		var year = getUrlParameter('year');
-		var month = getUrlParameter('month');
-		$('.postpreview').hide();
-		$('.postpreview[data-year="'+year+'"][data-month="'+month+'"]').show();
-		
-		$('.collapse.show').removeClass('show');
-		$('.card-header[data-year="'+year+'"]').next('.collapse ').addClass('show');
-		$('.list-group a[data-year="'+year+'"][data-month="'+month+'"]').addClass('selected');
-	}
-	if($('.newsarchive').length != 0){ // If general Blog Page
-		$('.archivesAccordian .card-header').click(function(){
-			$(this).next('.collapse').slideToggle();
-			$(this).children('.theyear').toggleClass('opened');
-		})
+	
+	/** FILTER LINE  */
+	if ($('.filterbar').length !== 0) { 
+		var $grid = $('.newstiles').isotope({
+			itemSelector: '.postpreview',
+			layoutMode: 'fitRows',
+			fitRows: {
+				gutter: 20
+			},
+			getSortData: {
+				title: '[data-title]'
+			}
+		});
+	
+		function updateFilterHighlight($button) {
+			$('.filter-highlight').css({
+				left: $button.position().left,
+				width: $button.outerWidth()
+			});
+		}
+	
+		var $activeBtn = $('.filter-btn.active');
+		updateFilterHighlight($activeBtn);
+	
+		$('.filterbar').on('click', 'button.filter-btn', function() {
+			var filterValue = $(this).attr('data-filter');
+			$grid.isotope({ filter: filterValue });
+	
+			$('.filter-btn').removeClass('active');
+			$(this).addClass('active');
+	
+			updateFilterHighlight($(this));
+		});
+	
+		$('#search-input').on('input', function() {
+			var searchValue = $(this).val().toLowerCase();
+	
+			$grid.isotope({ filter: '*' });
+			$('.filter-btn').removeClass('active');
+			var $allButton = $('.filter-btn[data-filter="*"]');
+			$allButton.addClass('active');
+	
+			updateFilterHighlight($allButton);
+	
+			$grid.isotope({
+				filter: function() {
+					var title = $(this).attr('data-title').toLowerCase();
+					return title.includes(searchValue);
+				}
+			});
+		});
 	}
 
 	// Sidenavigation Documentation
@@ -738,5 +773,6 @@ $(document).ready(function(){
 		} 
 	});
 	// setWithExpiry('homeBanner', '', -1); // deletes content
+	
 	
 });
