@@ -907,6 +907,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Indexing",
+                  "url": "indexing"
+                },
+                {
                   "page": "Friendly SQL",
                   "url": "friendly_sql"
                 },
