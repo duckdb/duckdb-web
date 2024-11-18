@@ -34,6 +34,9 @@ body.landing{
 			margin-bottom: 25px;
 		}
 	}
+	section.blog + section.upcoming-events{
+		padding-top: 0;
+	}
 	.wrap{
 		max-width: $maxContentWidth;
 		margin: 0 auto;
