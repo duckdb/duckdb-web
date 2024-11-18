@@ -144,10 +144,6 @@ h1, h2, h3, h4, h5{
 	.wrap{
 		max-width: $maxContentWidth;
 	}
-	.newstiles{
-		
-
-	}
 	.postwrap{
 		position: relative;
 		.postcontent{
@@ -361,7 +357,7 @@ h1, h2, h3, h4, h5{
 					height: 100%;
 				}
 			}
-			>div:not(.icon){
+			>div:not(.icon):not(.scheduled){
 				display: flex;
 				align-items: center;
 				column-gap: 25px;
@@ -370,6 +366,9 @@ h1, h2, h3, h4, h5{
 				font-size: $fontSize14;
 				color: var(--main-text-secondary-color, #666);
 				font-weight: 400;
+			}
+			.scheduled + .venue{
+				margin-left: 25px;
 			}
 		}
 		.postpreview{
@@ -420,10 +419,6 @@ h1, h2, h3, h4, h5{
 			p > img{
 				max-width: 100%;
 			}
-			.eventdate{
-				font-size: $fontSizeh4;
-				margin-bottom: 10px;
-			}
 		}
 		.singleentry.contains_toc{
 			display: flex;
@@ -438,6 +433,9 @@ h1, h2, h3, h4, h5{
 			}
 			> .content{
 				width: 78vw;
+				@media only screen and (max-width: 1280px){
+					width: 100vw;
+				}
 			}
 			.contentwidth{
 				max-width: 720px;
@@ -537,11 +535,6 @@ footer{
 	position: relative;
 	z-index: 900;
 }
-@media only screen and (max-width: 1200px) {
-	.newswrap .postwrap{
-		margin: 0 15px;
-	}
-}
 
 
 @media only screen and (max-width: 940px) {
@@ -550,6 +543,11 @@ footer{
 	}
 	.filterbar{
 		gap: 40px;
+	}
+	.newswrap .postwrap .singleentry{
+		padding-left: 15px;
+		padding-right: 15px;
+		margin: 0;
 	}
 }
 
@@ -572,10 +570,7 @@ footer{
 }
 
 @media only screen and (max-width: 770px) {
-	.newswrap .postwrap .singleentry{
-		padding-left: 15px;
-		padding-right: 15px;
-	}
+	
 }
 
 @media only screen and (max-width: 660px) {

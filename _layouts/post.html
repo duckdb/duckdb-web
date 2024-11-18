@@ -81,13 +81,10 @@
 							
 							<div class="content">
 								<div class="contentwidth">
-									{% if page.event == true or page.collection == "events" %}
-										<div class="eventdate">{{ page.date | date: "%Y-%m-%d" }}</div>
-									{% endif %}
 									
 									<h1>{{ page.title }}</h1>
 									
-									{% if page.author %}
+									{% if page.author and page.event == false or page.collection != "events"%}
 										<div class="infoline">
 											<div class="icon">
 												{% assign author = site.data.authors[page.author] %}
@@ -104,6 +101,15 @@
 													</div>
 												{% endif %}
 											</div>
+										</div>
+									{% endif %}
+									{% if page.event == true or page.collection == "events" %}
+										<div class="infoline">
+											<div class="scheduled">
+												<span>Scheduled for</span>
+												<span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
+											</div>
+											<div class="venue"><span>at {{ page.venue }}</span></div>
 										</div>
 									{% endif %}
 									
