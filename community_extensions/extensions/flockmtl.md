@@ -18,7 +18,7 @@ extension:
     - queryproc
 
 repo:
-  github: dsg-polymtl/duckdb-flockmtl
+  github: dsg-polymtl/flockmtl-duckdb
   ref: 1bd8ac0f54f8bf4c7da1c3793b88e73daa127653
 
 docs:
@@ -50,10 +50,10 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 64
-extension_star_count_pretty: 64
-extension_download_count: 122
-extension_download_count_pretty: 122
+extension_star_count: 65
+extension_star_count_pretty: 65
+extension_download_count: 121
+extension_download_count_pretty: 121
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
 layout: community_extension_doc
 ---

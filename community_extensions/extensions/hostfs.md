@@ -58,10 +58,10 @@ docs:
   extended_description: >
     The HostFS extension allows you to navigate and explore the filesystem using SQL. It provides a set of functions to list files, get file metadata, and more. 
     For more information, please see the [HostFS documentation](https://github.com/gropaul/hostFS).
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 90
-extension_download_count_pretty: 90
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 100
+extension_download_count_pretty: 100
 image: '/images/community_extensions/social_preview/preview_community_extension_hostfs.png'
 layout: community_extension_doc
 ---
@@ -90,8 +90,8 @@ LOAD {{ page.extension.name }};
 |   function_name    | function_type | description | comment | example |
 |--------------------|---------------|-------------|---------|---------|
 | absolute_path      | scalar        |             |         |         |
-| cd                 | pragma        |             |         |         |
 | cd                 | table         |             |         |         |
+| cd                 | pragma        |             |         |         |
 | file_extension     | scalar        |             |         |         |
 | file_last_modified | scalar        |             |         |         |
 | file_name          | scalar        |             |         |         |
@@ -100,8 +100,8 @@ LOAD {{ page.extension.name }};
 | hsize              | scalar        |             |         |         |
 | is_dir             | scalar        |             |         |         |
 | is_file            | scalar        |             |         |         |
-| ls                 | pragma        |             |         |         |
 | ls                 | table         |             |         |         |
+| ls                 | pragma        |             |         |         |
 | lsr                | table         |             |         |         |
 | lsr                | pragma        |             |         |         |
 | path_exists        | scalar        |             |         |         |
