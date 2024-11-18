@@ -14,29 +14,28 @@ jobs:
       - generate_docs
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
+      with:
+        path: '.'
+        token: ${{ secrets.GITHUB_TOKEN }}
+
     - uses: actions/download-artifact@v4
       with:
         name: generated_markdowns
 
-    - uses: actions/checkout@v4
-      with:
-        path: 'web'
-        token: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Generate docs
       run: |
         unzip generated_md.zip
-        cp build/docs/*.md web/community_extensions/extensions/.
-        cp build/docs/extensions_list.md.tmp web/_includes/list_of_community_extensions.md
+        cp build/docs/*.md community_extensions/extensions/.
+        cp build/docs/extensions_list.md.tmp _includes/list_of_community_extensions.md
+        rm -r generated_md.zip
+        rm -rf build
 
-    - name: Upload to duckdb/duckdb-web
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        cd web
-        git config user.email "some-user@some-domain.com"
-        git config user.name "Quack McQuacker"
-        git checkout -B update_community_extensions
-        git add --all community_extensions
-        git commit -m "[update docs bot] Update community_extensions"
-        git push -f --set-upstream origin update_community_extensions
+    - uses: technote-space/create-pr-action@v2
+      with:
+          COMMIT_MESSAGE: "chore: auto update docs for community extensions"
+          COMMIT_NAME: "GitHub Actions"
+          COMMIT_EMAIL: "example@example.com"
+          PR_BRANCH_NAME: "chore-update-community-extensions-${PR_ID}"
+          PR_TITLE: "chore: auto update docs for community extensions"
+          GITHUB_TOKEN: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
