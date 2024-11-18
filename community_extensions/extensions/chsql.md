@@ -8,20 +8,21 @@ excerpt: |
 extension:
   name: chsql
   description: ClickHouse SQL Macros for DuckDB
-  version: 1.0.5
+  version: 1.0.6
   language: SQL & C++
   build: cmake
   license: MIT
   maintainers:
     - lmangani
+    - akvlad
 
 repo:
   github: quackscience/duckdb-extension-clickhouse-sql
-  ref: a000d4f2a5f9e1c13cddcd75ea2d3351466f1706
+  ref: 9ab2e8118dbb9e429fa8d2a9026ad019f5bf7706
 
 docs:
   hello_world: |
-    -- Use ClickHouse SQL function macros in DuckDB SQL queries
+    -- Use boring ClickHouse SQL function macros in DuckDB SQL queries. Examples:
     SELECT toString('world') AS hello, toInt8OrZero('world') AS zero;
 
     ┌─────────┬───────┐
@@ -39,8 +40,8 @@ docs:
     │ 10.0.0.1                   │                   167772161 │
     └────────────────────────────┴─────────────────────────────┘
 
-    -- Query a remote ClickHouse instance via HTTP/S API
-    SELECT * FROM ch_scan("SELECT number * 100 FROM numbers(3)","https://play.clickhouse.com");
+    -- Query a remote ClickHouse instance via HTTP/S API using multiple formats
+    SELECT * FROM ch_scan("SELECT number * 100 FROM numbers(3)","https://play.clickhouse.com", format := 'Parquet');
     ┌───────────────────────┐
     │ multiply(number, 100) │
     │        varchar        │
@@ -54,10 +55,10 @@ docs:
   extended_description: |
     This extension implements a growing number of [ClickHouse SQL Macros](https://duckdb.org/community_extensions/extensions/chsql#added-functions) and functions for DuckDB.
 
-extension_star_count: 37
-extension_star_count_pretty: 37
-extension_download_count: 200
-extension_download_count_pretty: 200
+extension_star_count: 40
+extension_star_count_pretty: 40
+extension_download_count: 148
+extension_download_count_pretty: 148
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql.png'
 layout: community_extension_doc
 ---
@@ -88,7 +89,6 @@ LOAD {{ page.extension.name }};
 | IPv4NumToString        | macro         | Cast IPv4 address from numeric to string format                                              |                                               | SELECT IPv4NumToString(2130706433);                                                                  |
 | IPv4StringToNum        | macro         | Cast IPv4 address from string to numeric format                                              |                                               | SELECT IPv4StringToNum('127.0.0.1');                                                                 |
 | arrayExists            | macro         | Check if any element of the array satisfies the condition                                    |                                               | SELECT arrayExists(x -> x = 1, [1, 2, 3]);                                                           |
-| arrayJoin              | macro         | Unroll an array into multiple rows                                                           |                                               | SELECT arrayJoin([1, 2, 3]);                                                                         |
 | arrayMap               | macro         | Applies a function to each element of an array                                               |                                               | SELECT arrayMap(x -> x + 1, [1, 2, 3]);                                                              |
 | bitCount               | macro         | Counts the number of set bits in an integer                                                  |                                               | SELECT bitCount(15);                                                                                 |
 | domain                 | macro         | Extracts the domain from a URL                                                               |                                               | SELECT domain('https://clickhouse.com/docs');                                                        |
@@ -140,7 +140,6 @@ LOAD {{ page.extension.name }};
 | toSecond               | macro         | Extracts the second from a DateTime value                                                    |                                               | SELECT toSecond(now());                                                                              |
 | toString               | macro         | Converts a value to a string                                                                 |                                               | SELECT toString(123);                                                                                |
 | toUInt16               | macro         | Converts a value to an unsigned 16-bit integer                                               |                                               | SELECT toUInt16('123');                                                                              |
-| toUInt16OrNull         | macro         | Converts to an unsigned 16-bit integer or returns NULL on failure                            |                                               | SELECT toUInt16OrNull('abc');                                                                        |
 | toUInt16OrZero         | macro         | Converts to an unsigned 16-bit integer or returns zero on failure                            |                                               | SELECT toUInt16OrZero('abc');                                                                        |
 | toUInt32               | macro         | Converts a value to an unsigned 32-bit integer                                               |                                               | SELECT toUInt32('123');                                                                              |
 | toUInt32OrNull         | macro         | Converts to an unsigned 32-bit integer or returns NULL on failure                            |                                               | SELECT toUInt32OrNull('abc');                                                                        |
@@ -166,13 +165,33 @@ LOAD {{ page.extension.name }};
 | tupleMultiply          | macro         | Performs element-wise multiplication between two tuples                                      |                                               | SELECT tupleMultiply((10, 20), (2, 5));                                                              |
 | tupleMultiplyByNumber  | macro         | Multiplies each element of a tuple by a number                                               |                                               | SELECT tupleMultiplyByNumber((10, 20), 3);                                                           |
 | tuplePlus              | macro         | Performs element-wise addition between two tuples                                            |                                               | SELECT tuplePlus((1, 2), (3, 4));                                                                    |
-| url                    | table_macro   | Performs queries against remote URLs using the specified format                              | Supports JSON, CSV, PARQUET, TEXT, BLOB       | SELECT url('https://urleng.com/test','JSON');                                                        |
-| ch_scan                | table_macro   | Query a remote ClickHouse server using HTTP/s API                                            | Returns the query results                     | SELECT * FROM ch_scan('SELECT version()','https://play.clickhouse.com');;                            |
+| url                    | table_macro   | Performs queries against remote URLs using the specified format                              | Supports JSON, CSV, PARQUET, TEXT, BLOB       | SELECT * FROM url('https://urleng.com/test','JSON');                                                 |
+| JSONExtract            | macro         | Extracts JSON data based on key from a JSON object                                           |                                               | SELECT JSONExtract(json_column, 'user.name');                                                        |
+| JSONExtractUInt        | macro         | Extracts JSON data as an unsigned integer from a JSON object                                 |                                               | SELECT JSONExtractUInt(json_column, 'user.age');                                                     |
+| JSONExtractInt         | macro         | Extracts JSON data as a 32-bit integer from a JSON object                                    |                                               | SELECT JSONExtractInt(json_column, 'user.balance');                                                  |
+| JSONExtractFloat       | macro         | Extracts JSON data as a double from a JSON object                                            |                                               | SELECT JSONExtractFloat(json_column, 'user.score');                                                  |
+| JSONExtractRaw         | macro         | Extracts raw JSON data based on key from a JSON object                                       |                                               | SELECT JSONExtractRaw(json_column, 'user.address');                                                  |
+| JSONHas                | macro         | Checks if a JSON key exists and is not null                                                  |                                               | SELECT JSONHas(json_column, 'user.active');                                                          |
+| JSONLength             | macro         | Returns the length of a JSON array                                                           |                                               | SELECT JSONLength(json_column, 'items');                                                             |
+| JSONType               | macro         | Determines the type of JSON element at the given path                                        |                                               | SELECT JSONType(json_column, 'user.data');                                                           |
+| JSONExtractKeys        | macro         | Extracts keys from a JSON object                                                             |                                               | SELECT JSONExtractKeys(json_column);                                                                 |
+| JSONExtractValues      | macro         | Extracts all values as text from a JSON object                                               |                                               | SELECT JSONExtractValues(json_column);                                                               |
+| equals                 | macro         | Checks if two values are equal                                                               |                                               | SELECT equals(column_a, column_b);                                                                   |
+| notEquals              | macro         | Checks if two values are not equal                                                           |                                               | SELECT notEquals(column_a, column_b);                                                                |
+| less                   | macro         | Checks if one value is less than another                                                     |                                               | SELECT less(column_a, column_b);                                                                     |
+| greater                | macro         | Checks if one value is greater than another                                                  |                                               | SELECT greater(column_a, column_b);                                                                  |
+| lessOrEquals           | macro         | Checks if one value is less than or equal to another                                         |                                               | SELECT lessOrEquals(column_a, column_b);                                                             |
+| greaterOrEquals        | macro         | Checks if one value is greater than or equal to another                                      |                                               | SELECT greaterOrEquals(column_a, column_b);                                                          |
+| dictGet                | macro         | Retrieves an attribute from a VARIABLE string or MAP                                         |                                               | SELECT dictGet('dictionary_name', 'attribute');                                                      |
+| arrayJoin              | macro         | Unroll an array into multiple rows                                                           |                                               | SELECT arrayJoin([1, 2, 3]);                                                                         |
+| ch_scan                | table_macro   | Query a remote ClickHouse server using HTTP/s API                                            | Returns the query results                     | SELECT * FROM ch_scan('SELECT version()','https://play.clickhouse.com', format := 'parquet');        |
 | empty                  | macro         | Check if a string is empty                                                                   |                                               | SELECT empty('');                                                                                    |
 | toFloat                | macro         | Converts a value to a float                                                                  |                                               | SELECT toFloat('123.45');                                                                            |
 | toInt128OrNull         | macro         | Converts to a 128-bit integer or returns NULL on failure                                     |                                               | SELECT toInt128OrNull('abc');                                                                        |
 | toInt128OrZero         | macro         | Converts to a 128-bit integer or returns zero on failure                                     |                                               | SELECT toInt128OrZero('abc');                                                                        |
+| toUInt16OrNull         | macro         | Converts to an unsigned 16-bit integer or returns NULL on failure                            |                                               | SELECT toUInt16OrNull('abc');                                                                        |
 | toUInt8                | macro         | Converts a value to an unsigned 8-bit integer                                                |                                               | SELECT toUInt8('123');                                                                               |
+| JSONExtractString      | macro         | Extracts JSON data as a VARCHAR from a JSON object                                           |                                               | SELECT JSONExtractString(json_column, 'user.email');                                                 |
 | chsql_openssl_version  | scalar        |                                                                                              |                                               |                                                                                                      |
 | chsql                  | scalar        |                                                                                              |                                               |                                                                                                      |
 
