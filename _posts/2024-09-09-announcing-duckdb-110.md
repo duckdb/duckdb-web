@@ -345,7 +345,7 @@ Previously, the filter on `i` could not be pushed into the scan on `tbl`. But we
 
 The blocking (non-streaming) version of the window operator [now processes input data in parallel](https://github.com/duckdb/duckdb/pull/12907). This greatly reduces the footprint of the window operator.
 
-See also [Richard's talk on the topic](https://www.youtube.com/watch?v=QubE0u8Kq7Y&list=PLzIMXBizEZjhbacz4PWGuCUSxizmLei8Y&index=8) at [DuckCon #5]({% post_url 2024-08-15-duckcon5 %}) in Seattle a few weeks ago.
+See also [Richard's talk on the topic](https://www.youtube.com/watch?v=QubE0u8Kq7Y&list=PLzIMXBizEZjhbacz4PWGuCUSxizmLei8Y&index=8) at [DuckCon #5](/events/2024-08-15-duckcon5/) in Seattle a few weeks ago.
 
 ## Spatial Features
 

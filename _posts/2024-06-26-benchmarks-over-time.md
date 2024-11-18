@@ -2,8 +2,8 @@
 layout: post
 title: "Benchmarking Ourselves over Time at DuckDB"
 author: Alex Monahan
-thumb: "/images/blog/thumbs/240628.svg"
-image: "/images/blog/thumbs/240628.png"
+thumb: "/images/blog/thumbs/benchmarking-duckdb.svg"
+image: "/images/blog/thumbs/benchmarking-duckdb.png"
 excerpt: "In the last 3 years, DuckDB has become 3-25x faster and can analyze ~10x larger datasets all on the same hardware."
 tags: ["benchmark"]
 ---
