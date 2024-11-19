@@ -93,18 +93,18 @@ Running this `EXPLAIN` query gives us the following plan.
 └─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
 │       CROSS_PRODUCT       │
-│    ────────────────────   ├──────────────────────────────┐
-└─────────────┬─────────────┘                              │
-┌─────────────┴─────────────┐                    ┌─────────┴──────────┐
-│       CROSS_PRODUCT       │                    │      SEQ_SCAN      │
-│    ────────────────────   ├─────────┐          │  ────────────────  │
-│                           │         │          │   taxi_data_2019   │
-└─────────────┬─────────────┘         │          └────────────────────┘
-┌─────────────┴─────────────┐┌────────┴─────────┐
-│          SEQ_SCAN         ││     SEQ_SCAN     │
-│    ────────────────────   ││  ──────────────  │
-│        zone_lookups       ││   zone_lookups   │
-└───────────────────────────┘└──────────────────┘
+│    ────────────────────   ├───────────────────────────────────────────┐
+└─────────────┬─────────────┘                                           │
+┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐
+│       CROSS_PRODUCT       │                             │          SEQ_SCAN         │
+│    ────────────────────   ├──────────────┐              │    ────────────────────   │
+│                           │              │              │       taxi_data_2019      │
+└─────────────┬─────────────┘              │              └───────────────────────────┘
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│          SEQ_SCAN         ││          SEQ_SCAN         │
+│    ────────────────────   ││    ────────────────────   │
+│        zone_lookups       ││        zone_lookups       │
+└───────────────────────────┘└───────────────────────────┘
 ```
 
 The cross products alone make this query extremely inefficient. The cross-products produce `256 * 256 * |taxi_data_2019|` rows of data, which is 5 trillion rows of data. The filter only matches 71 million rows, which is only 0.001% of the data. The aggregate produces 4,373 rows of data, which need to be sorted by the `ORDER BY` operation, which runs in `O(N * log N)`. Producing 5 trillion tuples alone is an enormous amount of data processing, which becomes clear when you try to run the query and notice it doesn't complete. With the optimizer enabled, the query plan produced is much more efficient because the operations are re-ordered to avoid many trillions of rows of intermediate data. Below is the query plan with the optimizer enabled:

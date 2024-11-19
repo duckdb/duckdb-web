@@ -108,7 +108,7 @@ The type detection works by attempting to convert the values in each column to t
 | TIMESTAMP |
 | VARCHAR   |
 
-Note everything can be cast to `VARCHAR`. This type has the lowest priority – i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
+Note everything can be cast to `VARCHAR`. This type has the lowest priority, i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
 
 The set of candidate types that should be considered by the CSV reader can be explicitly specified using the [`auto_type_candidates`]({% link docs/data/csv/overview.md %}#auto_type_candidates-details) option.
 
