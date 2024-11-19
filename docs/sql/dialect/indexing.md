@@ -26,7 +26,7 @@ FROM (SELECT ['first', 'second', 'third'] AS list);
 The index origin is 0 for JSON objects.
 
 ```sql
-SELECT json[1][1] AS element
+SELECT json[1] AS element
 FROM (SELECT '["first", "second", "third"]'::JSON AS json);
 ```
 
