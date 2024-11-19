@@ -64,7 +64,7 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Synchronize WAL with file for (optional) database without interrupting transactions. |
 | **Example** | `checkpoint(my_db)` |
-| **Result** | success boolean |
+| **Result** | success Boolean |
 
 #### `coalesce(expr, ...)`
 
@@ -143,7 +143,7 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Synchronize WAL with file for (optional) database interrupting transactions. |
 | **Example** | `force_checkpoint(my_db)` |
-| **Result** | success boolean |
+| **Result** | success Boolean |
 
 #### `gen_random_uuid()`
 

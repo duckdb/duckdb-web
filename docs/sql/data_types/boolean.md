@@ -8,7 +8,7 @@ blurb: The BOOLEAN type represents a statement of truth (“true” or “false�
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `BOOLEAN` | `BOOL` | logical boolean (`true`/`false`) |
+| `BOOLEAN` | `BOOL` | Logical Boolean (`true`/`false`) |
 
 The `BOOLEAN` type represents a statement of truth (“true” or “false”). In SQL, the `BOOLEAN` field can also have a third state “unknown” which is represented by the SQL `NULL` value.
 
@@ -18,7 +18,7 @@ Select the three possible values of a `BOOLEAN` column:
 SELECT true, false, NULL::BOOLEAN;
 ```
 
-Boolean values can be explicitly created using the literals `true` and `false`. However, they are most often created as a result of comparisons or conjunctions. For example, the comparison `i > 10` results in a boolean value. Boolean values can be used in the `WHERE` and `HAVING` clauses of a SQL statement to filter out tuples from the result. In this case, tuples for which the predicate evaluates to `true` will pass the filter, and tuples for which the predicate evaluates to `false` or `NULL` will be filtered out. Consider the following example:
+Boolean values can be explicitly created using the literals `true` and `false`. However, they are most often created as a result of comparisons or conjunctions. For example, the comparison `i > 10` results in a Boolean value. Boolean values can be used in the `WHERE` and `HAVING` clauses of a SQL statement to filter out tuples from the result. In this case, tuples for which the predicate evaluates to `true` will pass the filter, and tuples for which the predicate evaluates to `false` or `NULL` will be filtered out. Consider the following example:
 
 Create a table with the values 5, 15 and `NULL`:
 
@@ -41,7 +41,7 @@ In this case 5 and `NULL` are filtered out (`5 > 10` is `false` and `NULL > 10` 
 
 ## Conjunctions
 
-The `AND`/`OR` conjunctions can be used to combine boolean values.
+The `AND`/`OR` conjunctions can be used to combine Boolean values.
 
 Below is the truth table for the `AND` conjunction (i.e., `x AND y`).
 

@@ -380,7 +380,7 @@ SET profiling_mode = 'detailed';
 By default, profiling enables all metrics except those activated by detailed profiling.
 
 Using the `custom_profiling_settings` `PRAGMA`, each metric, including those from detailed profiling, can be individually enabled or disabled.
-This `PRAGMA` accepts a JSON object with metric names as keys and boolean values to toggle them on or off.
+This `PRAGMA` accepts a JSON object with metric names as keys and Boolean values to toggle them on or off.
 Settings specified by this `PRAGMA` override the default behavior.
 
 > Note This only affects the metrics when the `enable_profiling` is set to `json` or `no_output`.
