@@ -167,8 +167,8 @@ We will copy the example and modify it!
 {% raw %}
 ```cpp
 static const DefaultTableMacro ⟨your_extension_name⟩_table_macros[] = {
-	{DEFAULT_SCHEMA, "times_two_table", {"x", nullptr}, {{"two", "2"}, {nullptr, nullptr}}, R"(SELECT x * two as output_column;)"},
-	{
+    {DEFAULT_SCHEMA, "times_two_table", {"x", nullptr}, {{"two", "2"}, {nullptr, nullptr}}, R"(SELECT x * two as output_column;)"},
+    {
         DEFAULT_SCHEMA, // Leave the schema as the default
         "select_distinct_columns_from_table", // Function name
         {"table_name", "columns_list", nullptr}, // Parameters
@@ -181,8 +181,8 @@ static const DefaultTableMacro ⟨your_extension_name⟩_table_macros[] = {
             ORDER BY ALL
         )"
     },
-	{nullptr, nullptr, {nullptr}, {{nullptr, nullptr}}, nullptr}
-	};
+    {nullptr, nullptr, {nullptr}, {{nullptr, nullptr}}, nullptr}
+    };
 ```
 {% endraw %}
 

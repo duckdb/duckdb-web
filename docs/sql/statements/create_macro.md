@@ -171,9 +171,9 @@ SELECT add('hello', 3);
 
 ```console
 Binder Error: Could not choose a best candidate function for the function call "+(STRING_LITERAL, INTEGER_LITERAL)". In order to select one, please add explicit type casts.
-	Candidate functions:
-	+(DATE, INTEGER) -> DATE
-	+(INTEGER, INTEGER) -> INTEGER
+    Candidate functions:
+    +(DATE, INTEGER) -> DATE
+    +(INTEGER, INTEGER) -> INTEGER
 ```
 
 Macros can have default parameters.

@@ -79,17 +79,17 @@ To efficiently store strings, we make use of our `string_t` class.
 
 ```cpp
 struct string_t {
-	union {
-		struct {
-			uint32_t length;
-			char prefix[4];
-			char *ptr;
-		} pointer;
-		struct {
-			uint32_t length;
-			char inlined[12];
-		} inlined;
-	} value;
+    union {
+        struct {
+            uint32_t length;
+            char prefix[4];
+            char *ptr;
+        } pointer;
+        struct {
+            uint32_t length;
+            char inlined[12];
+        } inlined;
+    } value;
 };
 ```
 
@@ -101,8 +101,8 @@ List vectors are stored as a series of *list entries* together with a child Vect
 
 ```cpp
 struct list_entry_t {
-	idx_t offset;
-	idx_t length;
+    idx_t offset;
+    idx_t length;
 };
 ```
 

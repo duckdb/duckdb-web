@@ -21,9 +21,9 @@ import duckdb
 import pandas as pd
 
 df = pd.DataFrame({
-	'a': [1, 2, 3, 4],
-	'b': [True, None, False, True],
-	'c': [42, 21, 13, 14]
+    'a': [1, 2, 3, 4],
+    'b': [True, None, False, True],
+    'c': [42, 21, 13, 14]
 })
 
 # selecting a single column
@@ -55,9 +55,9 @@ import duckdb
 import pandas as pd
 
 df = pd.DataFrame({
-	'a': [1, 2, 3, 4],
-	'b': [True, None, False, True],
-	'c': [42, 21, 13, 14]
+    'a': [1, 2, 3, 4],
+    'b': [True, None, False, True],
+    'c': [42, 21, 13, 14]
 })
 
 star = duckdb.StarExpression(exclude = ['b'])
@@ -75,9 +75,9 @@ import duckdb
 import pandas as pd
 
 df = pd.DataFrame({
-	'a': [1, 2, 3, 4],
-	'b': [True, None, False, True],
-	'c': [42, 21, 13, 14]
+    'a': [1, 2, 3, 4],
+    'b': [True, None, False, True],
+    'c': [42, 21, 13, 14]
 })
 
 const = duckdb.ConstantExpression('hello')
