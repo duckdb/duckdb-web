@@ -19,8 +19,14 @@ jobs:
       - run: pip install wheel pip -U --break-system-packages
       - run: pip install -r requirements.txt -U --break-system-packages
       - run: pip install duckdb --pre -U --break-system-packages # grab the latest duckdb python dev version
-      - run: gh repo clone duckdb/duckdb
-      - run: gh repo clone duckdb/duckdb-node
+      - uses: actions/checkout@v4
+        with:
+          path: 'duckdb'
+          repository: 'duckdb/duckdb'
+      - uses: actions/checkout@v4
+        with:
+          path: 'duckdb-node'
+          repository: 'duckdb/duckdb-node'
       - name: Download latest duckdb cli binary
         run: |
           RUN_ID=$(gh run list --branch main --repo duckdb/duckdb --workflow LinuxRelease -q '.[] | select(.conclusion == "success").databaseId' --json conclusion,databaseId | head -n 1)
@@ -36,12 +42,22 @@ jobs:
             rm *.zip
             rm -rf duckdb duckdb-node
 
-      - name: Update docs
-        uses: technote-space/create-pr-action@v2
-        with:
-          COMMIT_MESSAGE: "chore: auto update docs"
-          COMMIT_NAME: "GitHub Actions"
-          COMMIT_EMAIL: "example@example.com"
-          PR_BRANCH_NAME: "chore-update-docs-${PR_ID}"
-          PR_TITLE: "chore: auto update docs"
-          GITHUB_TOKEN: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
+    - name: Send PR
+      run: |
+            git add --all .
+            git checkout -B auto_update_docs
+            git config user.email "quack.docs@somedomain.org"
+            git config user.name "Quack Mc Docs"
+            git commit -m "chore: update docs"
+            git push -f origin auto_update_docs
+            # Store the PAT in a file that can be accessed by the
+            # GitHub CLI.
+            echo "${{ secrets.GH_UPDATE_DOCS_TOKEN }}" > token.txt
+            # Authorize GitHub CLI for the current repository and
+            # create a pull-requests containing the updates.
+            gh auth login --with-token < token.txt
+            gh pr create \
+             --body "" \
+             --title "chore: update DuckDB docs" \
+             --head "auto_update_docs" \
+             --base "main"
