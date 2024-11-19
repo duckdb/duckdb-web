@@ -333,6 +333,8 @@ SELECT *
 FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
 ```
 
+<div class="center_aligned_header_table"></div>
+
 | i | j |
 |--:|--:|
 | 0 | 1 |
@@ -347,6 +349,8 @@ FROM
     generate_series(0, 1) t(i),
     LATERAL (SELECT i + 10 UNION ALL SELECT i + 100) t2(j);
 ```
+
+<div class="center_aligned_header_table"></div>
 
 | i |  j  |
 |--:|----:|
@@ -369,6 +373,8 @@ SELECT *
     FROM t1, LATERAL (SELECT i + j) t2(k)
     ORDER BY ALL;
 ```
+
+<div class="center_aligned_header_table"></div>
 
 | i | j | k |
 |--:|--:|--:|
@@ -407,6 +413,8 @@ SELECT *
 FROM t1
 POSITIONAL JOIN t2;
 ```
+
+<div class="center_aligned_header_table"></div>
 
 | x |  s   |
 |--:|------|
@@ -520,6 +528,8 @@ SELECT i, s
 FROM tbl;
 ```
 
+<div class="center_aligned_header_table"></div>
+
 | i | s |
 |--:|---|
 | 1 | a |
@@ -541,6 +551,8 @@ This is equivalent to:
 SELECT *
 FROM tbl;
 ```
+
+<div class="center_aligned_header_table"></div>
 
 | s | i |
 |---|--:|

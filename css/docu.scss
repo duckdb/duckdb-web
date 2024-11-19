@@ -907,6 +907,10 @@ table thead th {
 		min-width: 40px;
 	}
 }
+.center_aligned_header_table + table thead th {
+	text-align: center !important;
+}
+
 html.darkmode .nostroke_table + table,
 .nostroke_table + table{
 	tr{
