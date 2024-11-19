@@ -134,7 +134,7 @@ DuckDB can also run in [in-memory mode]({% link docs/connect/overview.md %}#in-m
 <div class="answer" markdown="1">
 
 The type of storage used to run DuckDB has a [significant performance impact]({% link docs/guides/performance/environment.md %}#disk).
-In general, using SSDs (SATA or NVMe SSDs) leadst to superior performance compared to HDDs.
+In general, using SSDs (SATA or NVMe SSDs) leads to superior performance compared to HDDs.
 The location of the storage varies greatly depending the workload.
 _For read-only workloads,_ the DuckDB database can be stored on local disks and remote endpoints such as [HTTPS]({% link docs/extensions/httpfs/https.md %}) and cloud object storage such as [AWS S3]({% link docs/extensions/httpfs/s3api.md %}) and similar providers.
 _For read-write workloads,_ storing the database on instance-attached storage yields the best performance.
