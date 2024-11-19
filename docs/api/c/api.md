@@ -137,6 +137,7 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">idx_t</span> <a href="#duckdb_nparams"><span class="nf">duckdb_nparams</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_parameter_name"><span class="nf">duckdb_parameter_name</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_type</span> <a href="#duckdb_param_type"><span class="nf">duckdb_param_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_param_logical_type"><span class="nf">duckdb_param_logical_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_clear_bindings"><span class="nf">duckdb_clear_bindings</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
 <span class="kt">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
 </code></pre></div></div>
@@ -247,6 +248,13 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">idx_t</span> <a href="#duckdb_get_map_size"><span class="nf">duckdb_get_map_size</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_map_key"><span class="nf">duckdb_get_map_key</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_map_value"><span class="nf">duckdb_get_map_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">bool</span> <a href="#duckdb_is_null_value"><span class="nf">duckdb_is_null_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_null_value"><span class="nf">duckdb_create_null_value</span></a>();
+<span class="kt">idx_t</span> <a href="#duckdb_get_list_size"><span class="nf">duckdb_get_list_size</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_get_list_child"><span class="nf">duckdb_get_list_child</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_enum_value"><span class="nf">duckdb_create_enum_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">uint64_t</span> <span class="nv">value</span>);
+<span class="kt">uint64_t</span> <a href="#duckdb_get_enum_value"><span class="nf">duckdb_get_enum_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_get_struct_child"><span class="nf">duckdb_get_struct_child</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 </code></pre></div></div>
 
 ### Logical Type Interface
@@ -427,6 +435,7 @@ This page contains the reference for DuckDB's C API.
 ### Appender
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_appender_create"><span class="nf">duckdb_appender_create</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">duckdb_appender</span> *<span class="nv">out_appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_create_ext"><span class="nf">duckdb_appender_create_ext</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">catalog</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">duckdb_appender</span> *<span class="nv">out_appender</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_appender_column_count"><span class="nf">duckdb_appender_column_count</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_appender_column_type"><span class="nf">duckdb_appender_column_type</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_appender_error"><span class="nf">duckdb_appender_error</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
@@ -463,9 +472,11 @@ This page contains the reference for DuckDB's C API.
 ### Table Description
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_table_description_create"><span class="nf">duckdb_table_description_create</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="nv">duckdb_table_description</span> *<span class="nv">out</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_table_description_create_ext"><span class="nf">duckdb_table_description_create_ext</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">catalog</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="nv">duckdb_table_description</span> *<span class="nv">out</span>);
 <span class="kt">void</span> <a href="#duckdb_table_description_destroy"><span class="nf">duckdb_table_description_destroy</span></a>(<span class="nv">duckdb_table_description</span> *<span class="nv">table_description</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_table_description_error"><span class="nf">duckdb_table_description_error</span></a>(<span class="nv">duckdb_table_description</span> <span class="nv">table_description</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_column_has_default"><span class="nf">duckdb_column_has_default</span></a>(<span class="nv">duckdb_table_description</span> <span class="nv">table_description</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">bool</span> *<span class="nv">out</span>);
+<span class="kt">char</span> *<a href="#duckdb_table_description_get_column_name"><span class="nf">duckdb_table_description_get_column_name</span></a>(<span class="nv">duckdb_table_description</span> <span class="nv">table_description</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 </code></pre></div></div>
 
 ### Arrow Interface
@@ -2303,6 +2314,33 @@ The parameter type
 
 <br>
 
+#### `duckdb_param_logical_type`
+
+Returns the parameter logical type for the parameter at the given index.
+
+Returns `nullptr` if the parameter index is out of range or the statement was not successfully prepared.
+
+The return type of this call should be destroyed with `duckdb_destroy_logical_type`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_param_logical_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `prepared_statement`: The prepared statement.
+* `param_idx`: The parameter index.
+
+##### Return Value
+
+The parameter logical type
+
+<br>
+
 #### `duckdb_clear_bindings`
 
 Clear the params bind to the prepared statement.
@@ -4086,6 +4124,155 @@ Returns the MAP value at index as a duckdb_value.
 ##### Return Value
 
 The value as a duckdb_value.
+
+<br>
+
+#### `duckdb_is_null_value`
+
+Returns whether the specified value is null value or not.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_null_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: The value to check.
+
+##### Return Value
+
+True if the value is null, otherwise false.
+
+<br>
+
+#### `duckdb_create_null_value`
+
+Creates a value representing a NULL value.
+
+
+##### Return Value
+
+The duckdb_value that represents NULL. This must be destroyed with `duckdb_destroy_value`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_null_value</span>(<span class="nv">
+</span>  <span class="nv">
+</span>);
+</code></pre></div></div>
+<br>
+
+#### `duckdb_get_list_size`
+
+Returns the number of elements in a LIST value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_get_list_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: The LIST value.
+
+##### Return Value
+
+The number of elements in the list.
+
+<br>
+
+#### `duckdb_get_list_child`
+
+Returns the LIST child at index as a duckdb_value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_get_list_child</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: The LIST value.
+* `index`: The index of the child.
+
+##### Return Value
+
+The child as a duckdb_value.
+
+<br>
+
+#### `duckdb_create_enum_value`
+
+Creates an enum value from a type and a value. Must be destroyed with `duckdb_destroy_value`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_enum_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">uint64_t</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `type`: The type of the enum
+* `value`: The value for the enum
+
+##### Return Value
+
+The enum value, or nullptr.
+
+<br>
+
+#### `duckdb_get_enum_value`
+
+Returns the enum value of the given value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> <span class="nv">duckdb_get_enum_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: A duckdb_value containing an enum
+
+##### Return Value
+
+A uint64_t, or MinValue<uint64> if the value cannot be converted
+
+<br>
+
+#### `duckdb_get_struct_child`
+
+Returns the STRUCT child at index as a duckdb_value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_get_struct_child</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: The STRUCT value.
+* `index`: The index of the child.
+
+##### Return Value
+
+The child as a duckdb_value.
 
 <br>
 
@@ -6846,9 +7033,41 @@ Note that the object must be destroyed with `duckdb_appender_destroy`.
 
 <br>
 
+#### `duckdb_appender_create_ext`
+
+Creates an appender object.
+
+Note that the object must be destroyed with `duckdb_appender_destroy`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_create_ext</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">catalog</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>,<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> *<span class="nv">out_appender
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `connection`: The connection context to create the appender in.
+* `catalog`: The catalog of the table to append to, or `nullptr` for the default catalog.
+* `schema`: The schema of the table to append to, or `nullptr` for the default schema.
+* `table`: The table name to append to.
+* `out_appender`: The resulting appender object.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
 #### `duckdb_appender_column_count`
 
-Returns the number of columns in the table that belongs to the appender.
+Returns the number of columns that belong to the appender.
+If there is no custom column configuration, then this equals the table's physical columns.
 
 ##### Syntax
 
@@ -6863,7 +7082,7 @@ Returns the number of columns in the table that belongs to the appender.
 
 ##### Return Value
 
-The number of columns in the table.
+The number of columns in the data chunks.
 
 <br>
 
@@ -7363,6 +7582,36 @@ resulting table_description, even if the function returns `DuckDBError`.
 
 <br>
 
+#### `duckdb_table_description_create_ext`
+
+Creates a table description object. Note that `duckdb_table_description_destroy` must be called on the resulting
+table_description, even if the function returns `DuckDBError`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_table_description_create_ext</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">catalog</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>,<span class="nv">
+</span>  <span class="nv">duckdb_table_description</span> *<span class="nv">out
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `connection`: The connection context.
+* `catalog`: The catalog (database) name of the table, or `nullptr` for the default catalog.
+* `schema`: The schema of the table, or `nullptr` for the default schema.
+* `table`: The table name.
+* `out`: The resulting table description object.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
 #### `duckdb_table_description_destroy`
 
 Destroy the TableDescription object.
@@ -7425,6 +7674,30 @@ Check if the column at 'index' index of the table has a DEFAULT expression.
 ##### Return Value
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+#### `duckdb_table_description_get_column_name`
+
+Obtain the column name at 'index'.
+The out result must be destroyed with `duckdb_free`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_table_description_get_column_name</span>(<span class="nv">
+</span>  <span class="nv">duckdb_table_description</span> <span class="nv">table_description</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `table_description`: The table_description to query.
+* `index`: The index of the column to query.
+
+##### Return Value
+
+The column name.
 
 <br>
 
