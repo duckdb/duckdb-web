@@ -23,19 +23,17 @@ jobs:
       with:
         name: generated_markdowns
 
-    - name: Generate docs
-      run: |
-        unzip generated_md.zip
-        cp build/docs/*.md community_extensions/extensions/.
-        cp build/docs/extensions_list.md.tmp _includes/list_of_community_extensions.md
-        rm -r generated_md.zip
-        rm -rf build
-
     - uses: technote-space/create-pr-action@v2
       with:
           COMMIT_MESSAGE: "chore: auto update docs for community extensions"
           COMMIT_NAME: "GitHub Actions"
           COMMIT_EMAIL: "example@example.com"
+          EXECUTE_COMMANDS: |
+            unzip generated_md.zip
+            cp build/docs/*.md community_extensions/extensions/.
+            cp build/docs/extensions_list.md.tmp _includes/list_of_community_extensions.md
+            rm -r generated_md.zip
+            rm -rf build
           PR_BRANCH_NAME: "chore-update-community-extensions-${PR_ID}"
           PR_TITLE: "chore: auto update docs for community extensions"
           GITHUB_TOKEN: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
