@@ -14,32 +14,32 @@ Catch tests reside in the test directory as well. Here is an example of a catch 
 #include "test_helpers.hpp"
 
 TEST_CASE("Test simple storage", "[storage]") {
-	auto config = GetTestConfig();
-	unique_ptr<QueryResult> result;
-	auto storage_database = TestCreatePath("storage_test");
+    auto config = GetTestConfig();
+    unique_ptr<QueryResult> result;
+    auto storage_database = TestCreatePath("storage_test");
 
-	// make sure the database does not exist
-	DeleteDatabase(storage_database);
-	{
-		// create a database and insert values
-		DuckDB db(storage_database, config.get());
-		Connection con(db);
-		REQUIRE_NO_FAIL(con.Query("CREATE TABLE test (a INTEGER, b INTEGER);"));
-		REQUIRE_NO_FAIL(con.Query("INSERT INTO test VALUES (11, 22), (13, 22), (12, 21), (NULL, NULL)"));
-		REQUIRE_NO_FAIL(con.Query("CREATE TABLE test2 (a INTEGER);"));
-		REQUIRE_NO_FAIL(con.Query("INSERT INTO test2 VALUES (13), (12), (11)"));
-	}
-	// reload the database from disk a few times
-	for (idx_t i = 0; i < 2; i++) {
-		DuckDB db(storage_database, config.get());
-		Connection con(db);
-		result = con.Query("SELECT * FROM test ORDER BY a");
-		REQUIRE(CHECK_COLUMN(result, 0, {Value(), 11, 12, 13}));
-		REQUIRE(CHECK_COLUMN(result, 1, {Value(), 22, 21, 22}));
-		result = con.Query("SELECT * FROM test2 ORDER BY a");
-		REQUIRE(CHECK_COLUMN(result, 0, {11, 12, 13}));
-	}
-	DeleteDatabase(storage_database);
+    // make sure the database does not exist
+    DeleteDatabase(storage_database);
+    {
+        // create a database and insert values
+        DuckDB db(storage_database, config.get());
+        Connection con(db);
+        REQUIRE_NO_FAIL(con.Query("CREATE TABLE test (a INTEGER, b INTEGER);"));
+        REQUIRE_NO_FAIL(con.Query("INSERT INTO test VALUES (11, 22), (13, 22), (12, 21), (NULL, NULL)"));
+        REQUIRE_NO_FAIL(con.Query("CREATE TABLE test2 (a INTEGER);"));
+        REQUIRE_NO_FAIL(con.Query("INSERT INTO test2 VALUES (13), (12), (11)"));
+    }
+    // reload the database from disk a few times
+    for (idx_t i = 0; i < 2; i++) {
+        DuckDB db(storage_database, config.get());
+        Connection con(db);
+        result = con.Query("SELECT * FROM test ORDER BY a");
+        REQUIRE(CHECK_COLUMN(result, 0, {Value(), 11, 12, 13}));
+        REQUIRE(CHECK_COLUMN(result, 1, {Value(), 22, 21, 22}));
+        result = con.Query("SELECT * FROM test2 ORDER BY a");
+        REQUIRE(CHECK_COLUMN(result, 0, {11, 12, 13}));
+    }
+    DeleteDatabase(storage_database);
 }
 ```
 

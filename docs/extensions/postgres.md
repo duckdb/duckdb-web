@@ -71,12 +71,12 @@ PostgreSQL connection information can also be specified with [secrets](/docs/con
 
 ```sql
 CREATE SECRET (
-	TYPE POSTGRES,
-	HOST '127.0.0.1',
+    TYPE POSTGRES,
+    HOST '127.0.0.1',
     PORT 5432,
-	DATABASE postgres,
+    DATABASE postgres,
     USER 'postgres',
-	PASSWORD ''
+    PASSWORD ''
 );
 ```
 
@@ -100,12 +100,12 @@ Named secrets can be used to manage connections to multiple Postgres database in
 
 ```sql
 CREATE SECRET postgres_secret_one (
-	TYPE POSTGRES,
-	HOST '127.0.0.1',
+    TYPE POSTGRES,
+    HOST '127.0.0.1',
     PORT 5432,
-	DATABASE postgres,
+    DATABASE postgres,
     USER 'postgres',
-	PASSWORD ''
+    PASSWORD ''
 );
 ```
 
