@@ -55,7 +55,7 @@ import 'package:dart_duckdb/dart_duckdb.dart';
 
 void main() {
   final db = duckdb.open(":memory:");
-  final connection = db.connect();
+  final connection = duckdb.connect(db);
 
   connection.execute('''
     CREATE TABLE users (id INTEGER, name VARCHAR, age INTEGER);
@@ -68,8 +68,8 @@ void main() {
     print(row);
   }
 
-  connection.close();
-  db.close();
+  connection.dispose();
+  db.dispose();
 }
 ```
 
@@ -80,12 +80,12 @@ import 'package:dart_duckdb/dart_duckdb.dart';
 
 void main() {
   final db = duckdb.open(":memory:");
-  final connection = db.connect();
+  final connection = duckdb.connect(db);
 
   await Isolate.spawn(backgroundTask, db.transferrable);
 
-  connection.close();
-  db.close();
+  connection.dispose();
+  db.dispose();
 }
 
 void backgroundTask(TransferableDatabase transferableDb) {
