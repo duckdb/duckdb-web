@@ -196,7 +196,7 @@ penguins.filter((penguins.species == "Gentoo") & (penguins.body_mass_g > 6000))
 └─────────┴────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┘
 ```
 
-You can use any boolean comparison in a filter (although if you try to do something like use `<` on a string, Ibis will yell at you).
+You can use any Boolean comparison in a filter (although if you try to do something like use `<` on a string, Ibis will yell at you).
 
 ### select
 

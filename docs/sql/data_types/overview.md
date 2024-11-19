@@ -13,7 +13,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `BIGINT` | `INT8`, `LONG` | signed eight-byte integer |
 | `BIT` | `BITSTRING` | string of 1s and 0s |
 | `BLOB` | `BYTEA`, `BINARY,` `VARBINARY` | variable-length binary data |
-| `BOOLEAN` | `BOOL`, `LOGICAL` | logical boolean (true/false) |
+| `BOOLEAN` | `BOOL`, `LOGICAL` | logical Boolean (true/false) |
 | `DATE` |   | calendar date (year, month day) |
 | `DECIMAL(prec, scale)` | `NUMERIC(prec, scale)` | fixed-precision number with the given width (precision) and scale, defaults to `prec = 18` and `scale = 3` |
 | `DOUBLE` | `FLOAT8`, | double precision floating-point number (8 bytes) |

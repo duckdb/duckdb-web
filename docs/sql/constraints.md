@@ -14,7 +14,7 @@ In SQL, constraints can be specified for tables. Constraints enforce certain pro
 
 ## Check Constraint
 
-Check constraints allow you to specify an arbitrary boolean expression. Any columns that *do not* satisfy this expression violate the constraint. For example, we could enforce that the `name` column does not contain spaces using the following `CHECK` constraint.
+Check constraints allow you to specify an arbitrary Boolean expression. Any columns that *do not* satisfy this expression violate the constraint. For example, we could enforce that the `name` column does not contain spaces using the following `CHECK` constraint.
 
 ```sql
 CREATE TABLE students (name VARCHAR CHECK (NOT contains(name, ' ')));
