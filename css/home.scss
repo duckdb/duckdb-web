@@ -659,6 +659,12 @@ body.landing{
 		section.blog .postpreview:nth-child(4){
 			display: none;
 		}
+		section.blog .newstileswrap{
+			row-gap: 0;
+		}
+		section.blog + section.upcoming-events{
+			margin-top: 40px;
+		}
 	}
 	header .headerline .headercontent .button{
 		display: none;

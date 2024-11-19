@@ -265,7 +265,7 @@ h1, h2, h3, h4, h5{
 				width: 22vw;
 				padding: 100px 20px 20px 20px;
 				z-index: 90;
-				  @media only screen and (max-width: 1280px) {
+				@media only screen and (max-width: 1280px) {
 					display: none;
 				}
 				.toc_menu{
@@ -535,150 +535,102 @@ footer{
 	position: relative;
 	z-index: 900;
 }
-
-
-@media only screen and (max-width: 940px) {
-	section.blog .postpreview, .post-list .newstiles .postpreview{
-		width: calc(50% - 10px);
+@media only screen and (max-width: 1280px) {
+	.postwrap {
+		margin: 0 15px;
 	}
-	.filterbar{
-		gap: 40px;
-	}
-	.newswrap .postwrap .singleentry{
-		padding-left: 15px;
-		padding-right: 15px;
-		margin: 0;
+	.recentposts {
+		width: calc(100% + 30px);
+		margin-left: -15px;
 	}
 }
 
 @media only screen and (max-width: 940px) {
-	.filterbar{
+
+	.filterbar {
 		gap: 20px;
-		.filtertags{
+		.filtertags {
 			width: calc(50% - 10px);
 			overflow: auto;
 		}
-		#search-input{
+		#search-input {
 			width: calc(50% - 10px);
 		}
 	}
-	section.blog .postpreview .postdetails, 
-	section.upcoming-events .postpreview .postdetails, 
-	.post-list .newstiles .postpreview .postdetails{
-		padding: 20px;
-	}
-}
-
-@media only screen and (max-width: 770px) {
 	
 }
 
+@media only screen and (max-width: 770px) {}
+
 @media only screen and (max-width: 660px) {
-	.newswrap .newstiles{
+	.newswrap .newstiles {
 		row-gap: 0;
 	}
-	section.blog .postpreview, 
-	.post-list .newstiles .postpreview{
-		width: 100%;
-		margin-bottom: 50px;
-	}
-	section.blog .postpreview{
-		margin-bottom: 0px;
-	}
-	.newswrap .postwrap .postcontent .singleentry{
+	
+	
+	.newswrap .postwrap .postcontent .singleentry {
 		padding-top: 50px;
 		padding-bottom: 50px;
-		.infoline span{
+		.infoline span {
 			font-size: 14px;
-			.author{
+			.author {
 				font-weight: 600;
 			}
 		}
-		p{
+		p {
 			font-size: 15px;
 			line-height: 23px;
-			margin-top: 20px;
-			margin-bottom: 20px;
+			margin: 20px 0;
 		}
 		h2 {
 			font-size: 25px;
 			line-height: 28px;
-			margin-top: 35px;
-			margin-bottom: 20px;
+			margin: 35px 0 20px;
 		}
 		h3 {
 			font-size: 20px;
 			line-height: 1.2;
-			margin-top: 35px;
-			margin-bottom: 20px;
+			margin: 35px 0 20px;
+
+			&:first-child {
+				margin-top: 0;
+			}
 		}
-		h2 + h3{
-			margin-top: 0px;
-		}
-		ul li{
+		ul li {
 			font-size: 15px;
 			line-height: 23px;
-		}
-		ul li ul {
-			margin-top: 0px;
+
+			ul {
+				margin-top: 0;
+			}
 		}
 	}
-	.filterbar{
+
+	.filterbar {
 		flex-wrap: wrap;
 		margin-bottom: 30px;
-		#search-input{
+		#search-input {
 			width: 100%;
 			max-width: 100%;
 		}
-		.filtertags{
+		.filtertags {
 			display: none;
 		}
 	}
-	code, pre{
+
+	code,
+	pre {
 		font-size: 14px;
 		line-height: 1.5em;
 	}
+
 	
-	.newswrap .postwrap .post-list h1,
-	.newswrap .postwrap .postcontent .recentposts h1{
-		font-size: 35px;
-	}
-	.newswrap .postwrap .post-list > section,
-	.newswrap .postwrap .postcontent .recentposts{
-		padding: 50px 15px;
-	}
-	.newswrap .postwrap .postcontent .recentposts .newstileswrap .postpreview:nth-child(3){
-		display: none;
-	}
-	.newswrap, section.blog .newstileswrap{
-		margin-bottom: 40px;
-		row-gap: 50px;
-	}
-	.newswrap .postwrap .post-list h3{
-		font-size: 19px;
-		line-height: 1.05;
-	}
-	section.blog .postpreview, 
-	.post-list .newstiles .postpreview{
-		margin-bottom: 10px;
-	}
-	section.blog .postpreview .meta, 
-	section.upcoming-events .postpreview .meta, 
-	.post-list .newstiles .postpreview .meta{
-		font-size: 11.5px;
-	}
-	section.blog .postpreview .postdetails .tags span, 
-	section.upcoming-events .postpreview .postdetails .tags span, 
-	.post-list .newstiles .postpreview .postdetails .tags span{
-		font-size: 11px;
-	}
-	.pagetitle{
-		padding: 35px 0;
-	}
 }
 
 @media print {
-	section.recentposts, div.toc_sidebar {
+
+	section.recentposts,
+	div.toc_sidebar {
 		display: none !important;
 	}
 }
