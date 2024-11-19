@@ -12,7 +12,6 @@ extension:
   language: C/C++
   build: CMake
   license: MIT
-  excluded_platforms: "wasm_threads;wasm_eh;wasm_mvp"
   requires_toolchains: "python3"
   maintainers:
     - samansmink

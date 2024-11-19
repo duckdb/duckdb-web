@@ -26,8 +26,8 @@ docs:
     This extension provides a duckdb file-system abstraction to read and glob files within __uncompressed__ tar archives.
     For more information and information regarding usage, limitations and performance, see the [tarfs README](https://github.com/Maxxen/duckdb_tarfs).
 
-extension_star_count:  
-extension_star_count_pretty: n/a
+extension_star_count: 8
+extension_star_count_pretty: 8
 extension_download_count: 176
 extension_download_count_pretty: 176
 image: '/images/community_extensions/social_preview/preview_community_extension_tarfs.png'
