@@ -7,6 +7,8 @@ DuckDB uses 1-based indexing except for [JSON objects]({% link docs/data/json/ov
 
 ## Examples
 
+The index origin is 1 for strings, lists, etc.
+
 ```sql
 SELECT list[1] AS element
 FROM (SELECT ['first', 'second', 'third'] AS list);
@@ -20,6 +22,8 @@ FROM (SELECT ['first', 'second', 'third'] AS list);
 │ first   │
 └─────────┘
 ```
+
+The index origin is 0 for JSON objects.
 
 ```sql
 SELECT json[1][1] AS element
