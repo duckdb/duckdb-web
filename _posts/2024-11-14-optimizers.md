@@ -16,7 +16,7 @@ Before any data is read from the database, the given SQL text must be parsed and
 
 ## Normal Queries vs. Optimized Queries
 
-To examine the effect of the DuckDB Optimizer, let's use a subset of the NYC taxi dataset. You can create native DuckDB tables with the following commands (note that [`taxi-data-2019.parquet`](https://blobs.duckdb.org/data/taxi-data-2019.zip) is approximately 1.3 GB):
+To examine the effect of the DuckDB query optimizer, let's use a subset of the NYC taxi dataset. You can create native DuckDB tables with the following commands (note that [`taxi-data-2019.parquet`](https://blobs.duckdb.org/data/taxi-data-2019.parquet) is approximately 1.3 GB):
 
 ```sql
 CREATE TABLE taxi_data_2019 AS

@@ -57,9 +57,9 @@ First, two books about DuckDB are expected to be released:
 * [**Getting Started with DuckDB**](https://www.packtpub.com/product/getting-started-with-duckdb/9781803241005), authored by Simon Aubury and Ned Letcher, and published by Packt Publishing
 * [**DuckDB in Action**](https://www.manning.com/books/duckdb-in-action), authored by Mark Needham, Michael Hunger and Michael Simons, and published by Manning Publications
 
-Second, we are holding our next user community meeting, [DuckCon #5](/events/2024-08-15-duckcon5/) in Seattle on August 15 with the regular "State of the Duck" update as well as three regular talks and several lightning talks.
+Second, we are holding our next user community meeting, [DuckCon #5]({% link _events/2024-08-15-duckcon5.md %}) in Seattle on August 15 with the regular "State of the Duck" update as well as three regular talks and several lightning talks.
 
-<div align="center"> <a href="/events/2024-08-15-duckcon5/"><img src="/images/duckcon5-splashscreen.svg"
+<div align="center"> <a href="{% link _events/2024-08-15-duckcon5.md %}"><img src="/images/duckcon5-splashscreen.svg"
      alt="DuckCon #5 Splashscreen"
      width="680"
      /></a></div>
