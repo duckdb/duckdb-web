@@ -42,8 +42,8 @@ jobs:
             rm *.zip
             rm -rf duckdb duckdb-node
 
-    - name: Send PR
-      run: |
+      - name: Send PR
+        run: |
             git add --all .
             git checkout -B auto_update_docs
             git config user.email "quack.docs@somedomain.org"
