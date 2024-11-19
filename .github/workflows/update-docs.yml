@@ -28,6 +28,8 @@ jobs:
           path: 'duckdb-node'
           repository: 'duckdb/duckdb-node'
       - name: Download latest duckdb cli binary
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           RUN_ID=$(gh run list --branch main --repo duckdb/duckdb --workflow LinuxRelease -q '.[] | select(.conclusion == "success").databaseId' --json conclusion,databaseId | head -n 1)
           gh run download $RUN_ID --repo duckdb/duckdb --name duckdb-binaries-linux
