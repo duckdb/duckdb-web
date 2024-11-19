@@ -17,23 +17,34 @@ jobs:
     - uses: actions/checkout@v4
       with:
         path: '.'
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
 
     - uses: actions/download-artifact@v4
       with:
         name: generated_markdowns
 
-    - uses: technote-space/create-pr-action@v2
-      with:
-          COMMIT_MESSAGE: "chore: auto update docs for community extensions"
-          COMMIT_NAME: "GitHub Actions"
-          COMMIT_EMAIL: "example@example.com"
-          EXECUTE_COMMANDS: |
+    - name: Send PR
+      run: |
             unzip generated_md.zip
             cp build/docs/*.md community_extensions/extensions/.
             cp build/docs/extensions_list.md.tmp _includes/list_of_community_extensions.md
             rm -r generated_md.zip
             rm -rf build
-          PR_BRANCH_NAME: "chore-update-community-extensions-${PR_ID}"
-          PR_TITLE: "chore: auto update docs for community extensions"
-          GITHUB_TOKEN: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
+            git add _includes/list_of_community_extensions.md
+            git add --all community_extensions
+            git checkout -B auto_update_community_extensions_docs
+            git config user.email "quack.docs@somedomain.org"
+            git config user.name "Quack Mc Docs"
+            git commit -m "chore: update Community Extensions docs"
+            git push origin auto_update_community_extensions_docs
+            # Store the PAT in a file that can be accessed by the
+            # GitHub CLI.
+            echo "${{ secrets.GH_UPDATE_DOCS_TOKEN }}" > token.txt
+            # Authorize GitHub CLI for the current repository and
+            # create a pull-requests containing the updates.
+            gh auth login --with-token < token.txt
+            gh pr create \
+             --body "" \
+             --title "chore: update Community Extensions docs" \
+             --head "auto_update_community_extensions_docs" \
+             --base "main"
