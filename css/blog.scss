@@ -152,10 +152,6 @@ h1, h2, h3, h4, h5{
 				margin-top: 60px;
 				font-weight: 500;
 			}
-			blockquote p {
-				margin-top: 0;
-				margin-bottom: 0;
-			}
 			p, ul li, ol li{
 				font-size: 19px;
 				line-height: 1.5;
@@ -200,8 +196,17 @@ h1, h2, h3, h4, h5{
 				margin-top: 60px;
 				font-weight: 500;
 			}
-			blockquote h4{
-				margin-top: 0;
+			blockquote{
+				h4{
+					font-size: 16.5px;
+					font-weight: 700;
+					line-height: 1;
+					margin-top: 0;
+				}
+				p{
+					font-size: 16.5px;
+					margin-top: .8em;
+				}
 			}
 			table{
 				text-align: left;
@@ -566,8 +571,12 @@ footer{
 	.newswrap .newstiles {
 		row-gap: 0;
 	}
-	
-	
+	.newswrap .postwrap .infoline > div:not(.icon):not(.scheduled){
+		flex-wrap: wrap;
+	}
+	.publishedinfo{
+		width: 100%;
+	}
 	.newswrap .postwrap .postcontent .singleentry {
 		padding-top: 50px;
 		padding-bottom: 50px;
