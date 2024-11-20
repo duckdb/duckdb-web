@@ -102,9 +102,10 @@ jobs:
         run: python3 concatenate_to_single_file.py
       - name: Convert with pandoc
         run: pandoc --defaults pandoc-configuration.yaml
-      - name: Move artifact
+      - name: Move artifacts
         run: |
           mkdir -p ../_pdf
+          mv duckdb-docs.md ../_pdf
           mv duckdb-docs.pdf ../_pdf
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
