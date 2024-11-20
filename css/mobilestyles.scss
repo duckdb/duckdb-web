@@ -188,6 +188,10 @@
 	header .headerline .headercontent .landingmenu nav .starcount {
 		display: none;
 	}
+	
+	.box-link.half-width{
+		width: 100%;
+	}
 }
 
 @media only screen and (max-width: 700px) {
@@ -477,12 +481,15 @@
 			font-size: 11px;
 		}
 	}
+	
 	.newswrap .postwrap .postcontent .recentposts{
 		padding: 50px 15px;
 	}
+	
 	.pagetitle {
 		padding: 35px 0;
 	}
+	
 }
 
 @media only screen and (max-height: 840px) {
