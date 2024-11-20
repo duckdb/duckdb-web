@@ -44,8 +44,11 @@ html.darkmode body{
 	.highlight button.copy span.copied{
 		background-image: url("data:image/svg+xml,%3Csvg width='13' height='10' viewBox='0 0 13 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m1 5.642 3.343 3.343 7.642-7.642' stroke='%23fff'/%3E%3C/svg%3E");
 	}
-	&.installation {
-		
+	.box-link .chevron{
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='12' fill='none' viewBox='0 0 7 12'%3E%3Cpath stroke='%234C4C4C' stroke-width='1.256' d='m1 11 5-5-5-5'/%3E%3C/svg%3E");
+	}
+	.box-link .symbol img{
+		filter: invert(100%) sepia(100%) saturate(1000%) hue-rotate(340deg) brightness(100%);
 	}
 	
 	/** SEARCH **/
