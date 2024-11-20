@@ -26,7 +26,7 @@ The reference manual for the DuckDB R API is available at [R.duckdb.org](https:/
 
 ## Basic API Usage
 
-The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.org/package=DBI) for R. If you are not familiar with DBI yet, see [here for an introduction](https://solutions.rstudio.com/db/r-packages/DBI/).
+The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.org/package=DBI) for R. If you are not familiar with DBI yet, see the [Using DBI page](https://solutions.rstudio.com/db/r-packages/DBI/) for an introduction.
 
 ### Startup & Shutdown
 
