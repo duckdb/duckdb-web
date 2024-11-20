@@ -8,8 +8,6 @@ html.disable-transitions * {
 }
 
 html.darkmode body{
-	background-color: #1F1F1F;
-	color: white;
 	::-moz-selection {
 	  background: #353535;
 	}
@@ -19,16 +17,6 @@ html.darkmode body{
 
 	/** DOCS SIDE NAVIGATION **/
 	.sidenavigation{
-		background: #292929;
-		color: white;
-		li{
-			a{
-				color: white;
-			}
-		}
-		li.active{
-			background: rgb(255 255 255 / 8%);
-		}
 		li.hasSub span{
 			background-image: url("data:image/svg+xml,%3Csvg width='7' height='11' viewBox='0 0 7 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 5.5L1 10' stroke='white' stroke-linecap='round'/%3E%3C/svg%3E%0A");
 		}
@@ -46,39 +34,8 @@ html.darkmode body{
 			background: #383838;
 		}
 	}
-	.sidenavigation::-webkit-scrollbar-thumb{
-		background: #111111;
-	}
-	.sidenavigation::-webkit-scrollbar-track{
-		background: #252525
-	}
-	pre.highlight::-webkit-scrollbar-thumb{
-		background: #111111;
-	}
-	pre.highlight::-webkit-scrollbar-track{
-		background: #252525;
-	}
 	
 	/** DOCS COLORS **/
-	code.language-plaintext{
-		background: #262626;
-		border: 1px solid #505050;
-	}
-	pre,
-	.pagemeta,
-	.highlight{
-		background: #262626;
-	}
-	div.highlight{
-		border: 1px solid #373737;
-	}
-	pre.highlight > button, 
-	.highlight button.copy{
-		background-color: #262626;
-		&:hover{
-			background-color: #373737;
-		}
-	}
 	pre.highlight > button span.copy, 
 	.highlight button.copy span.copy{
 		background-image: url("data:image/svg+xml,%3Csvg width='13' height='13' viewBox='0 0 13 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23fff' d='M3.5.5h9v9h-9z'/%3E%3Cpath d='M1 4v8h8' stroke='%23fff'/%3E%3C/svg%3E");
@@ -87,49 +44,8 @@ html.darkmode body{
 	.highlight button.copy span.copied{
 		background-image: url("data:image/svg+xml,%3Csvg width='13' height='10' viewBox='0 0 13 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m1 5.642 3.343 3.343 7.642-7.642' stroke='%23fff'/%3E%3C/svg%3E");
 	}
-	table tr{
-		border-bottom: 1px solid #5b5b5b;
-	}
-	table td{
-		border-bottom: 1px solid #5b5b5b;
-	}
-	.versionsidebar > ul li.current a,
-	.versionsidebar > ul li a:hover{
-		color: #c9c9c9!important; 
-		background-color: #3a3a3a;
-	}
 	&.installation {
-		.yourselection{
-			background: #282828;
-			border: 1px solid #373737;
-			.select.hide{
-				opacity: .3;
-			}
-		}
-		.select{
-			border-bottom: 1px solid #373737;
-		}
-		.select ul li.selected{
-			background: white;
-			color: black;
-			&:hover{
-				background: white;
-				color: black;
-			}
-		}
-		.select ul li{
-			background-color: #3f3f3f;
-		}
-		.select ul li:hover{
-			background-color: #515151;
-		}
-		.output .result{
-			background: #262626;
-			border-color: #403f3f;
-		}
-		.note.output .result{
-			color: white;
-		}
+		
 	}
 	
 	/** SEARCH **/
@@ -165,68 +81,24 @@ html.darkmode body{
 }
 
 html.darkmode body.documentation{
-	.toc_menu h5{
-		color: #ACACAC;
-	}	
-	.toc_menu ul#toc ul{
-		border-left: 1px solid #5a5a5a;
-	}
-	#sidebar{
-		background-color: #292929;
-	}
-	.toc_menu ul#toc a{
-		color: #ACACAC;
-	}
-	.toc_menu ul#toc li.current > a{
-		color: #7D66FF;
-	}
-	.headlinebar a, .wrap a{
-		color: white;
-	}
 	.wrap a:hover{
 		color: #4396D7;
 	}
-	.headlinebar div.version > div:first-child,
-	.versionsidebar,
-	.headlinebar div.mode{
-		border: 1px solid #373737;
-		color: #828282;
-		background-color: #262626;
-	}
 	.headlinebar div.version span.arrow{
 		background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='7.5' stroke='%23828282'/%3E%3Cpath d='M3.6875 6.54541L8.05098 10.9089L12.4145 6.54541' stroke='%23828282'/%3E%3C/svg%3E%0A");
-	}
-	blockquote{
-		background: #282828;
-	}
-	blockquote.default .symbol{
-		background-color: #6B6B6B;
 	}
 	.railroad-diagram path{
 		stroke: white;
 	}
 	.railroad-diagram rect{
-		fill: #262626;
-		stroke: #505050;
+		fill: #1a1a1a;
+		stroke: #333333;
 	}
 	g.non-terminal text,
 	g.terminal text{
 		fill: white;
 	}
-	main .wrap.frequentlyaskedquestions .qa-wrap{
-		background: #282828;
-		border: 1px solid #373737;
-	}
 	main .wrap.frequentlyaskedquestions h3::after{
 		background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='15' cy='15' r='15' fill='%23343434'/%3E%3Cpath d='M21.5 13L15 20L8.5 13' stroke='white' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
-	}
-	div.bodywrapper dt.sig-object{
-		background-color: #3d3d3d;
-	}
-	.language-console pre{
-		background-color: #2D1C1C;
-	}
-	.language-console div.highlight{
-		border-color: #462727;
 	}
 } 

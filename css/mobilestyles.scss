@@ -26,6 +26,8 @@
 	.searchoverlay>div .shortcuts {
 		display: none;
 	}
+	
+	
 }
 
 @media only screen and (max-width: 980px) {
@@ -297,7 +299,7 @@
 		max-width: 80%;
 		display: block;
 	}
-
+	
 	.pagehead h1 {
 		font-size: 35px;
 		padding: 50px 15px;
@@ -394,7 +396,9 @@
 		transform: translateX(100%);
 		transition: transform 0.5s;
 		padding-top: 14px;
-
+		background: var(--main-body-background-color, #FAFAFA);
+		border-left: 1px solid var(--main-codebox-border-color, #E6E6E6);
+		border-right: none;
 		&.slidein {
 			transform: translateX(0);
 		}
@@ -411,6 +415,10 @@
 
 		table {
 			border: 0;
+		}
+		
+		main .wrap #main_content_wrap{
+			padding-right: 0;
 		}
 	}
 

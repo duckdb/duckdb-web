@@ -571,9 +571,14 @@ footer{
 	.newswrap .newstiles {
 		row-gap: 0;
 	}
+	.newswrap .postwrap .infoline,
 	.newswrap .postwrap .infoline > div:not(.icon):not(.scheduled){
 		flex-wrap: wrap;
+		.scheduled + .venue{
+			margin-left: 0;
+		}
 	}
+	.infoline .scheduled,
 	.publishedinfo{
 		width: 100%;
 	}
