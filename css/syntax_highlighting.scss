@@ -86,7 +86,7 @@ th .k {
 
 // background
 .highlight {
-	background-color: $black50;
+	background: var(--doc-codebox-background-color, #F2F2F2);
 }
 
 // ??
@@ -174,11 +174,6 @@ html.darkmode,
 	th .k {
 		color: #fff;
 		font-family: $fontMonoBold;
-	}
-	
-	// background
-	.highlight {
-		background-color :#282c34;
 	}
 	
 	// ??

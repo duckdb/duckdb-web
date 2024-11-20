@@ -43,8 +43,8 @@ g.non-terminal text {
 }
 .railroad-diagram rect {
 	stroke-width: 1;
-	stroke: #E5E5E5;
-	fill: #F5F5F5;
+	stroke: #E6E6E6;
+	fill: #F2F2F2;
 }
 .expandable, .expanded {
 	cursor:pointer;
