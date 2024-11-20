@@ -20,20 +20,19 @@ The direction of this sort may be modified using either `ORDER BY ALL ASC` or `O
 Note that `ALL` may not be used in combination with other expressions in the `ORDER BY` clause – it must be by itself.
 See examples below.
 
-## NULL Order Modifier
+## `NULL` Order Modifier
 
-By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and null values are placed last.
-This is identical to the default sort order of PostgreSQL. The default sort order can be changed with the following configuration options.
+By default, DuckDB sorts `ASC` and `NULLS LAST`, i.e., the values are sorted in ascending order and `NULL` values are placed last.
+This is identical to the default sort order of PostgreSQL.
+The default sort order can be changed with the following configuration options.
 
-> Using `ASC NULLS LAST` as the default sorting order was a breaking change in version 0.8.0. Prior to 0.8.0, DuckDB sorted using `ASC NULLS FIRST`.
-
-Change the default null sorting order to either `NULLS_FIRST`, `NULLS_LAST`, `NULLS_FIRST_ON_ASC_LAST_ON_DESC` or `NULLS_LAST_ON_ASC_FIRST_ON_DESC`:
+Use the `default_null_order` option to change the default `NULL` sorting order to either `NULLS_FIRST`, `NULLS_LAST`, `NULLS_FIRST_ON_ASC_LAST_ON_DESC` or `NULLS_LAST_ON_ASC_FIRST_ON_DESC`:
 
 ```sql
 SET default_null_order = 'NULLS_FIRST';
 ```
 
-Change the default sorting order to either `DESC` or `ASC`:
+Use the `default_order` to change the direction of the default sorting order to either `DESC` or `ASC`:
 
 ```sql
 SET default_order = 'DESC';
