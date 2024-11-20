@@ -14,6 +14,7 @@ The **JSON** logical type is interpreted as JSON, i.e., parsed, in JSON function
 All JSON creation functions return values of this type.
 
 We also allow any of our types to be casted to JSON, and JSON to be casted back to any of our types, for example:
+
 ```sql
 -- Cast JSON to our STRUCT type
 SELECT '{"duck":42}'::JSON::STRUCT(duck INTEGER);
@@ -25,25 +26,27 @@ SELECT {duck: 42}::JSON;
 ```
 
 This works for our nested types as shown in the example, but also for non-nested types:
+
 ```sql
-select '2023-05-12'::DATE::JSON;
+SELECT '2023-05-12'::DATE::JSON;
 -- "2023-05-12"
 ```
 
 The only exception to this behavior is the cast from `VARCHAR` to `JSON`, which does not alter the data, but instead parses and validates the contents of the `VARCHAR` as JSON.
 
 ## JSON Table Functions
+
 The following two table functions are used to read JSON:
 
 | Function | Description |
 |:---|:---|
-| `read_json_objects(`*`filename`*`)`   | Read 1 JSON objects from **filename**, where **filename** can also be a list of files, or a glob pattern |
-| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_json_objects` with parameter **format** set to `'newline_delimited'` |
-| `read_json_objects_auto(`*`filename`*`)` | Alias for `read_json_objects` with parameter **format** set to `'auto'` |
+| `read_json_objects(`*`filename`*`)`      | Read a single JSON objects from **filename**, where **filename** can also be a list of files, or a glob pattern |
+| `read_ndjson_objects(`*`filename`*`)`    | Alias for `read_json_objects` with parameter **format** set to `'newline_delimited'`                            |
+| `read_json_objects_auto(`*`filename`*`)` | Alias for `read_json_objects` with parameter **format** set to `'auto'`                                         |
 
 These functions have the following parameters:
 
-| Name | Description | Type | Default
+| Name | Description | Type | Default |
 |:---|:---|:---|:---|
 | `maximum_object_size` | The maximum size of a JSON object (in bytes) | uinteger | `16777216` |
 | `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | varchar | `'array'` |
@@ -64,7 +67,7 @@ With `'unstructured'`, the top-level JSON is read, e.g.:
 ```
 Will result in two objects being read.
 
-With `'newline_delimited'`, [NDJSON](http://ndjson.org) is read, where each JSON is separated by a newline (`\n`), e.g.:
+With `'newline_delimited'`, [NDJSON](https://github.com/ndjson/ndjson-spec) is read, where each JSON is separated by a newline (`\n`), e.g.:
 ```json
 {"duck": 42}
 {"goose": [1,2,3]}
