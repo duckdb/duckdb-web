@@ -3,8 +3,6 @@ layout: docu
 title: Documentation
 ---
 
-Welcome to the DuckDB documentation!
-
 ## Connecting to DuckDB
 
 <div class="box-link-wrapper">
