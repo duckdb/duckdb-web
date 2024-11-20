@@ -3,7 +3,9 @@ layout: docu
 title: Browse Offline
 ---
 
-You can browse the DuckDB documentation offline in two formats:
+You can browse the DuckDB documentation offline in the following formats:
+
+* As a [single Markdown file](/duckdb-docs.md) (approx. 3 MB)
 
 * As a [single PDF file](/duckdb-docs.pdf) (approx. 4 MB)
 
