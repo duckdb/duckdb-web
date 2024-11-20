@@ -8,6 +8,10 @@
           "url": "/docs/",
           "subfolderitems": [
             {
+              "page": "Getting started",
+              "url": "/docs"
+            },
+            {
               "page": "Installation",
               "url": "/docs/installation/"
             },

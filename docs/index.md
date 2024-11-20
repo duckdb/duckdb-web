@@ -5,7 +5,7 @@ title: Documentation
 
 Welcome to the DuckDB documentation!
 
-## DuckDB connection overview
+## Connecting to DuckDB
 
 <div class="box-link-wrapper">
     <div class="box-link half-width">
@@ -51,7 +51,7 @@ Welcome to the DuckDB documentation!
     </div>
 </div>
 
-see all [client APIs]({% link docs/api/overview.md %})
+See all [client APIs]({% link docs/api/overview.md %}).
 
 ## SQL
 
