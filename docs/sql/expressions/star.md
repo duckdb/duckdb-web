@@ -60,6 +60,13 @@ SELECT COLUMNS('number\d+')
 FROM addresses;
 ```
 
+Select columns using a list:
+
+```sql
+SELECT COLUMNS(['city', 'zip_code'])
+FROM addresses;
+```
+
 ## Syntax
 
 <div id="rrdiagram"></div>
