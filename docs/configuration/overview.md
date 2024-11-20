@@ -38,7 +38,7 @@ Enable printing of a progress bar during long-running queries.
 SET enable_progress_bar = true;
 ```
 
-Set the default null order to NULLS LAST.
+Set the default null order to `NULLS LAST`.
 
 ```sql
 SET default_null_order = 'nulls_last';

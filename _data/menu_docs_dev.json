@@ -273,6 +273,10 @@
               ]
             },
             {
+              "page": "Dart",
+              "url": "dart"
+            },
+            {
               "page": "Go",
               "url": "go"
             },
