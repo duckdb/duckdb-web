@@ -926,6 +926,7 @@ section.upcoming-events,
 				justify-content: space-between;
 	}
 	.postpreview{
+		position: relative;
 		width: calc(50% - 10px);
 		border: 1px solid var(--main-blogpost-border-color, #F2F2F2);
 		background: var(--main-blogpost-background-color, #FFF);
@@ -1118,9 +1119,6 @@ body.installation{
 			opacity: 0.4;
 			pointer-events: none;
 		}
-	}
-	.wrap{
-		margin-bottom: 100px;
 	}
 	.select{
 		display: -webkit-box;

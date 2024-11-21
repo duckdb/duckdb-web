@@ -105,13 +105,13 @@ body_class: landing nowrap
 				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
 				{% assign tag_classes = post.tags | join: ' ' | downcase | slugify %}
 				<div class="postpreview {{ tag_classes }}" data-title="{{ post.title | escape }}">
+					<a href="{{ post.url }}" class="blocklink" title="{{ post.title }}"></a>
 					<div class="postimg custom">
 						{% if post.thumb %}
 							<img src="{{ post.thumb }}" alt="{{ post.title }}" class="zoom-image"/>
 						{% else %}
 							<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image"/>
 						{% endif %}
-						<a href="{{ post.url }}" class="blocklink"></a>
 					</div>
 					<div class="postdetails">
 						{% if post.tags %}
@@ -121,7 +121,7 @@ body_class: landing nowrap
 							{% endfor %}
 						</div>
 						{% endif %}
-						<h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+						<h3>{{ post.title }}</h3>
 						<div class="meta">
 							<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
 							<div class="author">{{ post.author | default: "Unknown Author" }}</div>
@@ -146,13 +146,13 @@ body_class: landing nowrap
 				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %} <!-- Generiert Werte von 1 bis 3 -->
 				{% assign tag_classes = event.tags | join: ' ' %}
 				<div class="eventpreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ event.title | escape }}">
+					<a href="{{ event.url }}" class="blocklink" title="{{ event.title }}"></a>
 					<div class="postimg custom">
 						{% if event.thumb %}
 							<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image">
 						{% else %}
 							<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
 						{% endif %}
-						<a href="{{ event.url }}" class="blocklink"></a>
 					</div>
 					<div class="postdetails">
 						{% if event.tags %}
@@ -163,7 +163,7 @@ body_class: landing nowrap
 							{% endfor %}
 						</div>
 						{% endif %}
-						<h3><a href="{{ event.url }}">{{ event.title }}</a></h3>
+						<h3>{{ event.title }}</h3>
 						<div class="meta">
 							<div class="venue">{{ event.venue | default: "Venue not specified" }}</div>
 							<div class="author">{{ event.author | default: "DuckDB" }}</div>

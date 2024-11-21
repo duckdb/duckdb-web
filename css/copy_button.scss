@@ -38,8 +38,11 @@ pre.highlight > button,
     }
 }
 
+.content.dark .highlight button.copy,
+.code.dark .highlight button.copy,
 .darkmode pre.highlight > button,
 .darkmode .highlight button.copy{
+    background: var(--grey-10);
     &:hover{
         background-color: #2b2b2b;
     }
