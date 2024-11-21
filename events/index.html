@@ -30,13 +30,13 @@ layoutpart: postsoverview
 			{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
 			{% assign tag_classes = event.tags | join: ' ' %}
 			<div class="eventpreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ event.title | escape }}">
+				<a href="/events/{{ event.date | date: '%Y/%m/%d' }}/{{ event.slug | default: event.title | slugify }}/" title="{{ event.title }}" class="blocklink"></a>
 				<div class="postimg custom">
 					{% if event.thumb %}
 						<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image">
 					{% else %}
 						<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
 					{% endif %}
-					<a href="/events/{{ event.date | date: '%Y/%m/%d' }}/{{ event.slug | default: event.title | slugify }}/" class="blocklink"></a>
 				</div>
 				<div class="postdetails">
 					{% if event.tags %}
@@ -47,7 +47,7 @@ layoutpart: postsoverview
 						{% endfor %}
 					</div>
 					{% endif %}
-					<h3><a href="{{ event.url }}">{{ event.title }}</a></h3>
+					<h3>{{ event.title }}</h3>
 					<div class="meta">
 						<div class="venue">{{ event.venue }}</div>
 						<div class="author">{{ event.author }}</div>
