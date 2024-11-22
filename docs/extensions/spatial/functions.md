@@ -720,12 +720,12 @@ The input geometry is assumed to be in the [EPSG:4326](https://en.wikipedia.org/
 -- Note: the coordinates are in WGS84 and [latitude, longitude] axis order
 -- Whats the distance between New York and Amsterdam (JFK and AMS airport)?
 SELECT st_distance_spheroid(
-st_point(40.6446, 73.7797),
+st_point(40.6446, -73.7797),
 st_point(52.3130, 4.7725)
 );
 ----
-5243187.666873225
--- Roughly 5243km!
+5863418.7459356235
+-- Roughly 5863km!
 ```
 
 ----
