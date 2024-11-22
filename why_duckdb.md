@@ -47,7 +47,7 @@ In addition to this test suite, we run various tests that stress DuckDB under he
 
 ## Peer-Reviewed Papers and Thesis Works
 
-* [Runtime-Extensible Parsers](https://www.cidrdb.org/cidr2025/papers.html) (CIDR 2025)
+* [Runtime-Extensible Parsers]({% link pdf/CIDR2025-muehleisen-raasveldt-extensible-parsers.pdf %}) (CIDR 2025)
 * [Robust External Hash Aggregation in the Solid State Age]({% link pdf/ICDE2024-kuiper-boncz-muehleisen-out-of-core.pdf %}) (ICDE 2024)
 * [These Rows Are Made for Sorting and That's Just What We'll Do]({% link pdf/ICDE2023-kuiper-muehleisen-sorting.pdf %}) (ICDE 2023)
 * [Join Order Optimization with (Almost) No Statistics](https://blobs.duckdb.org/papers/tom-ebergen-msc-thesis-join-order-optimization-with-almost-no-statistics.pdf) (Master thesis, 2022)
