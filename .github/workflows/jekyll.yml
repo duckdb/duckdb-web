@@ -105,6 +105,7 @@ jobs:
       - name: Move artifacts
         run: |
           mkdir -p ../_pdf
+          sed -i '1s/^.*$/# DuckDB Documentation/' duckdb-docs.md
           mv duckdb-docs.md ../_pdf
           mv duckdb-docs.pdf ../_pdf
       - name: Upload PDF artifact
