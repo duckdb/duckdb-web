@@ -8,7 +8,7 @@ tags: ["deep dive"]
 excerpt: "Despite their central role in processing queries, parsers have not received any noticeable attention in the data systems space. State-of-the art systems are content with ancient old parser generators. These generators create monolithic, inflexible and unforgiving parsers that hinder innovation in query languages and frustrate users. Instead, parsers should be rewritten using modern abstractions like Parser Expression Grammars (PEG), which allow dynamic changes to the accepted query syntax and better error recovery. In this post, we discuss how parsers could be re-designed using PEG, and validate our recommendations using experiments for both effectiveness and efficiency."
 ---
 
-> This post is a shortened version of our peer-reviewed research paper "Runtime-Extensible Parsers" that was accepted for publication and presentation at the [2025 Conference on Innovative Data Systems Research](https://www.cidrdb.org/cidr2025/index.html) (CIDR) that is going to be held in Amsterdam between January 19 and 22, 2025. You can [read the full paper here](https://hannes.muehleisen.org/publications/CIDR2025-muehleisen-raasveldt-extensible-parsers.pdf) if you prefer.
+> This post is a shortened version of our peer-reviewed research paper "Runtime-Extensible Parsers" that was accepted for publication and presentation at the [2025 Conference on Innovative Data Systems Research](https://www.cidrdb.org/cidr2025/index.html) (CIDR) that is going to be held in Amsterdam between January 19 and 22, 2025. You can [read the full paper](https://hannes.muehleisen.org/publications/CIDR2025-muehleisen-raasveldt-extensible-parsers.pdf) if you prefer.
 
 The parser is the DBMS component that is responsible for turning a query in string format into an internal representation which is usually tree-shaped. The parser defines which queries are going to be accepted at all. Every single SQL query starts its journey in a parser. Despite its prominent position in the stack, very little research has been published on parsing queries for data management systems. There seems to have been very little movement on the topic in the past decades and their implementations are largely stuck in sixty-year-old abstractions and technologies. 
 
@@ -29,6 +29,7 @@ at line 1.
 ```
 
 ### Parsing Expression Grammar
+
 [Parsing Expression Grammar](https://en.wikipedia.org/wiki/Parsing_expression_grammar) (PEG) parsers represent a more modern approach to parsing. PEG parsers are top-down parsers that effectively generate a recursive-descent style parser from a grammar. Through the "packrat" memoization technique PEG parsers exhibit linear time complexity in parsing at the expense of a grammar-dependent amount of extra memory. The biggest difference from a grammar author perspective is the choice operator where multiple syntax options can be matched. In LALR parsers options with similar syntax can create ambiguity and reduce conflicts. In PEG parsers the *first* matching option is always selected. Because of this, PEG parsers cannot be ambiguous by design.
 
 As their name suggests, parsing expression grammar consists of a set of *parsing expressions*. Expressions can contain references to other rules, or literal token references, both as actual strings or character classes similar to regular expressions. Expressions can be combined through sequences, quantifiers, optionals, groupings and both positive and negative look-ahead. Each expression can either match or not, but it is required to consume a part of the input if it matches. Expressions are able to look ahead and consider the remaining input but are not required to consume it. Lexical analysis is typically part of the PEG parser itself, which removes the need for a separate step.
@@ -91,11 +92,12 @@ Postgres takes on average 24 ms to parse this file using YACC. Note that this ti
 
 Overall, we can observe a ca. 10 times slowdown in parsing performance when using the `cpp-libpeg` parser. However, it should be noted that the *absolute duration* of those two processes is still tiny; at least for analytical queries, sub-millisecond parsing time is more than acceptable as parsing still only accounts for a tiny fraction of overall query processing time. Furthermore, there are still ample optimization opportunities in the experimental parsers we created using an off-the-shelf PEG library. For example, the library makes heavy use of recursive function calls, which can be optimized e.g., by using a loop abstraction.
 
-In the following, we present some experiments in extending the prototype parser with support for new statements, entirely new syntax and with improvements in error messages:
+In the following, we present some experiments in extending the prototype parser with support for new statements, entirely new syntax and with improvements in error messages.
 
 #### Adding the `UNPIVOT` Statement
 
 Let's assume we would want to add a new top-level `UNPIVOT` statement to turn columns into rows to a SQL dialect. `UNPIVOT` should work on the same level as e.g., `SELECT`, for example to unpivot a table `t1` on a specific list of columns or all columns (`*`), we would like to be able to write:
+
 ```sql
 UNPIVOT t1 ON (c1, c2, c3);
 UNPIVOT t1 ON (*);
@@ -105,7 +107,7 @@ It is clear that we would have to somehow modify the parser to allow this new sy
 
 In order to add `UNPIVOT`, we have to define a grammar rule and then modify `SingleStmt` to allow the statement in a global sequence of SQL statements. This is shown below. We define the new `UnpivotStatement` grammar rule by adding it to the dictionary, and we then modify the `SingleStmt` rule entry in the dictionary to also allow the new statement. 
 
-```
+```text
 UnpivotStatement <- 'UNPIVOT' Identifier 
     'ON' Parens(List(Identifier) / '*')
 
@@ -132,7 +134,7 @@ We can see that this new syntax adds the `GRAPH_TABLE` clause and the pattern ma
 
 Below we show a small set of grammar rules that are sufficient to extend our experimental parser with support for the SQL/PGQ `GRAPH_TABLE` clause and the containing property graph patterns. With this addition, the parser can parse the query above. Parser construction and parser execution timings were unaffected.
 
-```
+```text
 Name <- (Identifier? ':' Identifier) / Identifier
 Edge <- ('-' / '<-') '[' Name ']' ('->' / '-')
 Pattern <- Parens(Name WhereClause?) Edge 
