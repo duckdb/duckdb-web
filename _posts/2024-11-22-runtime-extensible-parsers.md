@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Runtime-Extensible SQL Parsers using PEG"
+title: "Runtime-Extensible SQL Parsers Using PEG"
 author: Hannes Mühleisen and Mark Raasveldt
 thumb: "/images/blog/thumbs/ast.svg"
 image: "/images/blog/thumbs/ast.png"
