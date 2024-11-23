@@ -35,11 +35,11 @@ def reduce_clutter_in_doc(doc_body):
 
 
 def replace_box_names(doc_body):
-    doc_body = doc_body.replace("> Bestpractice", "> **Best practice.  **")
-    doc_body = doc_body.replace("> Note",         "> **Note.  **")
-    doc_body = doc_body.replace("> Warning",      "> **Warning.  **")
-    doc_body = doc_body.replace("> Tip",          "> **Tip.  **")
-    doc_body = doc_body.replace("> Deprecated",   "> **Deprecated.  **")
+    doc_body = doc_body.replace("> Bestpractice", "> **Best practice.**")
+    doc_body = doc_body.replace("> Note",         "> **Note.**")
+    doc_body = doc_body.replace("> Warning",      "> **Warning.**")
+    doc_body = doc_body.replace("> Tip",          "> **Tip.**")
+    doc_body = doc_body.replace("> Deprecated",   "> **Deprecated.**")
     return doc_body
 
 
