@@ -60,8 +60,8 @@ docs:
 
     *Disclaimer*: As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 83
-extension_star_count_pretty: 83
+extension_star_count: 85
+extension_star_count_pretty: 85
 extension_download_count: 537
 extension_download_count_pretty: 537
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
@@ -111,10 +111,10 @@ LOAD {{ page.extension.name }};
 | iterativelength              | scalar        |             |         |         |
 | iterativelength2             | scalar        |             |         |         |
 | iterativelengthbidirectional | scalar        |             |         |         |
-| local_clustering_coefficient | scalar        |             |         |         |
 | local_clustering_coefficient | table         |             |         |         |
-| pagerank                     | table         |             |         |         |
+| local_clustering_coefficient | scalar        |             |         |         |
 | pagerank                     | scalar        |             |         |         |
+| pagerank                     | table         |             |         |         |
 | reachability                 | scalar        |             |         |         |
 | shortestpath                 | scalar        |             |         |         |
 | weakly_connected_component   | table         |             |         |         |
