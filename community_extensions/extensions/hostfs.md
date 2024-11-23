@@ -90,8 +90,8 @@ LOAD {{ page.extension.name }};
 |   function_name    | function_type | description | comment | example |
 |--------------------|---------------|-------------|---------|---------|
 | absolute_path      | scalar        |             |         |         |
-| cd                 | table         |             |         |         |
 | cd                 | pragma        |             |         |         |
+| cd                 | table         |             |         |         |
 | file_extension     | scalar        |             |         |         |
 | file_last_modified | scalar        |             |         |         |
 | file_name          | scalar        |             |         |         |
