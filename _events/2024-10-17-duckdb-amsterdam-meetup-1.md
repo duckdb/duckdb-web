@@ -7,6 +7,8 @@ thumb: "/images/blog/thumbs/duckdb-amsterdam-meetup-1.svg"
 image: "/images/blog/thumbs/duckdb-amsterdam-meetup-1.png"
 excerpt: ""
 tags: ["meetup"]
+redirect_from:
+  - 2024/10/17/duckdb-amsterdam-meetup-1
 ---
 
 <img src="/images/blog/thumbs/duckdb-amsterdam-meetup-1.svg"
