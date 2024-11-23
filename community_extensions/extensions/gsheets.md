@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: gsheets
   description: Read and write Google Sheets using SQL
-  version: 0.0.2
+  version: 0.0.3
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: evidence-dev/duckdb_gsheets
-  ref: 01bdf2872b78af1b9234792766392840fc4a91b7
+  ref: 5352ea30499a7f7f2dbfa45faf622906e0130cfb
 
 docs:
   hello_world: |
@@ -63,10 +63,10 @@ docs:
     The DuckDB GSheets Extension allows reading and writing of data in Google Sheets from DuckDB.
     For detailed setup and usage instructions, visit the docs at [duckdb-gsheets.com](https://duckdb-gsheets.com).
 
-extension_star_count: 132
-extension_star_count_pretty: 132
-extension_download_count: 174
-extension_download_count_pretty: 174
+extension_star_count: 143
+extension_star_count_pretty: 143
+extension_download_count: 212
+extension_download_count_pretty: 212
 image: '/images/community_extensions/social_preview/preview_community_extension_gsheets.png'
 layout: community_extension_doc
 ---
