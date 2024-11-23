@@ -128,6 +128,36 @@ Once the build finishes successfully, you can find the `duckdb.exe` binary in th
 ./duckdb.exe
 ```
 
+## Android
+
+DuckDB runs on Android. To build the command line client in the [Termux application](https://termux.dev/), install the following packages:
+
+```bash
+pkg install -y git ninja clang cmake python3
+```
+
+Clone the DuckDB repository and build it as follows:
+
+```bash
+mkdir build
+cd build
+export CXXFLAGS="-Wno-missing-template-arg-list-after-template-kw"
+export LDFLAGS="-llog"
+cmake \
+    -G "Ninja" \
+    -DBUILD_EXTENSIONS="" \
+    -DDUCKDB_EXPLICIT_PLATFORM=linux_arm64_android \
+    -DCMAKE_BUILD_TYPE=Release \
+    ..
+cmake --build . --config Release
+```
+
+Note that you can also use the Python client:
+
+```bash
+pip install --pre --upgrade duckdb
+```
+
 ## Raspberry Pi (32-bit)
 
 On 32-bit Raspberry Pi boards, you need to add the [`-latomic` link flag](https://github.com/duckdb/duckdb/issues/13855#issuecomment-2341539339).
