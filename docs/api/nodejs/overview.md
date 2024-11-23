@@ -6,6 +6,9 @@ redirect_from:
   - /docs/api/nodejs/
 ---
 
+> Deprecated The old DuckDB Node.js package is deprecated.
+> Please use the [DuckDB Node Neo package]({% link docs/api/node_neo/overview.md %}) instead.
+
 This package provides a Node.js API for DuckDB.
 The API for this client is somewhat compliant to the SQLite Node.js client for easier transition.
 
