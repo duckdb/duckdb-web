@@ -16,6 +16,7 @@ Client APIs:
 * [Crystal](https://github.com/amauryt/crystal-duckdb) by [amauryt](https://github.com/amauryt)
 * [Dart]({% link docs/api/dart.md %}) by [TigerEye](https://www.tigereye.com/)
 * [Elixir](https://github.com/AlexR2D2/duckdbex) by [AlexR2D2](https://github.com/AlexR2D2/duckdbex)
+* [Erlang](https://github.com/mmzeeman/educkdb) by [MM Zeeman](https://github.com/mmzeeman)
 * [Go]({% link docs/api/go.md %}) by [marcboeker](https://github.com/marcboeker)
 * [Java]({% link docs/api/java.md %})
 * [Julia]({% link docs/api/julia.md %})
