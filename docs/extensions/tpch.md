@@ -99,6 +99,19 @@ The data generator function `dbgen` has the following parameters:
 | `step`      | `UINTEGER` | Defines the partition to be generated, indexed from 0 to `children` - 1. Must be defined when the `children` arguments is defined |
 | `suffix`    | `VARCHAR`  | Append the `suffix` to table names                                                                                                |
 
+## Pre-Generated Data Sets
+
+Pre-generated DuckDB databases for TPC-H are available for download:
+
+* [`tpch-sf1.db`](https://blobs.duckdb.org/data/tpch-sf1.db) (250 MB)
+* [`tpch-sf3.db`](https://blobs.duckdb.org/data/tpch-sf3.db) (754 MB)
+* [`tpch-sf10.db`](https://blobs.duckdb.org/data/tpch-sf10.db) (2.5 GB)
+* [`tpch-sf30.db`](https://blobs.duckdb.org/data/tpch-sf30.db) (7.6 GB)
+* [`tpch-sf100.db`](https://blobs.duckdb.org/data/tpch-sf100.db) (26 GB)
+* [`tpch-sf300.db`](https://blobs.duckdb.org/data/tpch-sf300.db) (78 GB)
+* [`tpch-sf1000.db`](https://blobs.duckdb.org/data/tpch-sf1000.db) (265 GB)
+* [`tpch-sf3000.db`](https://blobs.duckdb.org/data/tpch-sf3000.db) (796 GB)
+
 ## Resource Usage of the Data Generator
 
 Generating TPC-H data sets for large scale factors takes a significant amount of time.
