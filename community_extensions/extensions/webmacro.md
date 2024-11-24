@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 122
-extension_download_count_pretty: 122
+extension_download_count: 169
+extension_download_count_pretty: 169
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---
