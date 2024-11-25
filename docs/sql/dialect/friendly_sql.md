@@ -36,7 +36,7 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
 
 ## Query Features
 
-* [Column aliases in `WHERE`, `GROUP BY`, and `HAVING`]({% post_url 2022-05-04-friendlier-sql %}#column-aliases-in-where--group-by--having). But column aliases cannot be used in the `ON` clause of the [JOIN Clauses]({% link docs/sql/query_syntax/from.md %}#joins).
+* [Column aliases in `WHERE`, `GROUP BY`, and `HAVING`]({% post_url 2022-05-04-friendlier-sql %}#column-aliases-in-where--group-by--having). (Note that column aliases cannot be used in the `ON` clause of [`JOIN` clauses]({% link docs/sql/query_syntax/from.md %}#joins).)
 * [`COLUMNS()` expression]({% link docs/sql/expressions/star.md %}#columns-expression) can be used to execute the same expression on multiple columns:
     * [with regular expressions]({% post_url 2023-08-23-even-friendlier-sql %}#columns-with-regular-expressions)
     * [with `EXCLUDE` and `REPLACE`]({% post_url 2023-08-23-even-friendlier-sql %}#columns-with-exclude-and-replace)
