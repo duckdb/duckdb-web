@@ -61,70 +61,15 @@
 	</header>
 	
 	<main>
+		
 		<div class="newswrap">
-			<div class="postwrap">
-				<div class="postcontent">
-					<div class="singleentry{% if page.toc != false %} contains_toc{% endif %}">
-						<div class="content">
-							<div class="contentwidth">
-								<h1>{{ page.title }}</h1>
-								
-								{% if page.author and page.event == false or page.collection != "events" %}
-									<div class="infoline">
-										<div class="icon">
-											{% assign author = site.data.authors[page.author] %}
-											{% if author %}
-												<img src="{{ author.picture }}" alt="Author Avatar">
-											{% endif %}
-										</div>
-										<div>
-											<span class="author">{{ page.author }}</span>
-											{% if page.event != true and page.collection != "events" %}
-												<div class="publishedinfo">
-													<span>Published on</span>
-													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
-												</div>
-											{% endif %}
-										</div>
-									</div>
-								{% endif %}
-								
-								{% if page.event == true or page.collection == "events" %}
-									<div class="infoline">
-										<div class="scheduled">
-											<span>Scheduled for</span>
-											<span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
-										</div>
-										<div class="venue"><span>at {{ page.venue }}</span></div>
-									</div>
-								{% endif %}
-								
-								{% if page.excerpt != "" %}
-									<div class="excerpt">
-										{{ '_TL;DR: ' | append: page.excerpt | append: '_' | markdownify }}
-									</div>
-								{% endif %}
-								
-								{% include anchor_headings.html html=content %}
-							</div>
-						</div>
-						
-						{% if page.toc != false %}
-							<div class="toc_sidebar">
-								{% assign toc_only = content | toc_only %}
-								{% assign toc_text_only = toc_only | strip_html | remove: ' ' %}
-								{% if toc_text_only.size > 10 %}
-									<div class="toc_menu">
-										<h5>In this article</h5>
-										{{ toc_only }}
-									</div>
-								{% endif %}
-							</div>
-						{% endif %}
-					</div>
+			<div class="postwrap postsoverview">
+				
+				<div class="wrap pagetitle">
+					<h1>{{ page.title }}</h1>
 				</div>
 				
-				{% include recent_posts_section.html %}
+				{% include anchor_headings.html html=content %}
 				
 			</div>
 		</div>

@@ -1,11 +1,11 @@
 ---
 layout: postarchive
-title: Events
+title: Media
 ---
 
 {% assign all_tags = "" %}
-{% for event in site.events %}
-	{% assign all_tags = all_tags | append: event.tags | join: "," | append: "," %}
+{% for event in site.media %}
+	{% assign all_tags = all_tags | append: media.tags | join: "," | append: "," %}
 {% endfor %}
 {% assign unique_tags = all_tags | split: "," | uniq | sort %}
 
@@ -16,7 +16,7 @@ title: Events
 		<div class="filtertags">
 			<div class="filter-highlight"></div>
 			<button type="button" class="filter-btn active" data-filter="*">All</button>
-			<button type="button" class="filter-btn" data-filter=".duckcon">DuckCon</button>
+			<button type="button" class="filter-btn" data-filter=".updates">Updates</button>
 		</div>
 		-->
 	</div>
@@ -24,32 +24,34 @@ title: Events
 
 <div class="post-list wrap">
 	<div class="newstiles">
-		{% assign sorted_events = site.events | sort: 'date' | reverse %}
-		{% for event in sorted_events %}
+		{% assign sorted_media = site.media | sort: 'date' | reverse %}
+		{% for media in sorted_media %}
 			{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
-			{% assign tag_classes = event.tags | join: ' ' %}
-			<div class="eventpreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ event.title | escape }}">
-				<a href="/events/{{ event.date | date: '%Y/%m/%d' }}/{{ event.slug | default: event.title | slugify }}/" title="{{ event.title }}" class="blocklink"></a>
+			{% assign tag_classes = media.tags | join: ' ' %}
+			<div class="mediapreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ media.title | escape }}">
+				<a href="/media/{{ media.slug | default: media.title | slugify }}/" title="{{ media.title }}" class="blocklink"></a>
 				<div class="postimg custom">
-					{% if event.thumb %}
-						<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image">
+					{% if media.thumb %}
+						<img src="{{ media.thumb }}" alt="{{ media.title }}" class="zoom-image">
 					{% else %}
 						<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
 					{% endif %}
 				</div>
 				<div class="postdetails">
-					{% if event.tags %}
+					{% if media.tags %}
 					<div class="tags">
-						<span class="eventdate">{{ event.date | date: "%Y-%m-%d" }}</span>
-						{% for tag in event.tags %}
+						{% for tag in media.tags %}
 							<span class="tag">{{ tag }}</span>
 						{% endfor %}
+						{% if media.length %}
+						  <span class="length">{{ media.length }}</span>
+						{% endif %}
 					</div>
 					{% endif %}
-					<h3>{{ event.title }}</h3>
+					<h3>{{ media.title }}</h3>
 					<div class="meta">
-						<div class="venue">{{ event.venue }}</div>
-						<div class="author">{{ event.author }}</div>
+						<div class="date">{{ media.date | date: "%Y-%m-%d" }}</div>
+						<div class="author">{{ media.author }}</div>
 					</div>
 				</div>
 			</div>
