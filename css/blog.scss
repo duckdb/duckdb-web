@@ -345,13 +345,14 @@ h1, h2, h3, h4, h5{
 					
 				}
 				> ul{
-					padding: 60px;
+					padding: 20px;
 					-ms-grid-columns: (1fr)[4];
 					grid-template-columns: repeat(4, 1fr);
 					list-style: none;
 					display: -ms-grid;
 					display: grid;
 					row-gap: 70px;
+					margin: 0;
 					li{
 						line-height: 1;
 						height: 70px;
@@ -376,6 +377,16 @@ h1, h2, h3, h4, h5{
 				ul li{
 					img{
 						height: 100%;
+					}
+				}
+				&.silver{
+					ul{
+						display: -webkit-box;
+						display: -ms-flexbox;
+						display: flex;
+						justify-content: center;
+						flex-wrap: wrap;
+						row-gap: 20px;
 					}
 				}
 				&.gold{
