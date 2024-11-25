@@ -58,6 +58,13 @@ The value class represents a single value of any type.
 <span class="kt">idx_t</span> <a href="#duckdb_get_map_size"><span class="nf">duckdb_get_map_size</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_map_key"><span class="nf">duckdb_get_map_key</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_map_value"><span class="nf">duckdb_get_map_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">bool</span> <a href="#duckdb_is_null_value"><span class="nf">duckdb_is_null_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_null_value"><span class="nf">duckdb_create_null_value</span></a>();
+<span class="kt">idx_t</span> <a href="#duckdb_get_list_size"><span class="nf">duckdb_get_list_size</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_get_list_child"><span class="nf">duckdb_get_list_child</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_enum_value"><span class="nf">duckdb_create_enum_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">uint64_t</span> <span class="nv">value</span>);
+<span class="kt">uint64_t</span> <a href="#duckdb_get_enum_value"><span class="nf">duckdb_get_enum_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_get_struct_child"><span class="nf">duckdb_get_struct_child</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 </code></pre></div></div>
 
 #### `duckdb_destroy_value`
@@ -456,7 +463,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_create_timestamp`
 
-Creates a value from a timestamp
+Creates a TIMESTAMP value from a duckdb_timestamp
 
 ##### Syntax
 
@@ -857,7 +864,7 @@ A duckdb_time_tz, or MinValue<time_tz> if the value cannot be converted
 
 #### `duckdb_get_timestamp`
 
-Returns the timestamp value of the given value.
+Returns the TIMESTAMP value of the given value.
 
 ##### Syntax
 
@@ -868,11 +875,11 @@ Returns the timestamp value of the given value.
 
 ##### Parameters
 
-* `val`: A duckdb_value containing a timestamp
+* `val`: A duckdb_value containing a TIMESTAMP
 
 ##### Return Value
 
-A duckdb_timestamp, or MinValue<timestamp> if the value cannot be converted
+A duckdb_timestamp, or MinValue<timestamp_t> if the value cannot be converted
 
 <br>
 
@@ -1101,5 +1108,154 @@ Returns the MAP value at index as a duckdb_value.
 ##### Return Value
 
 The value as a duckdb_value.
+
+<br>
+
+#### `duckdb_is_null_value`
+
+Returns whether the value's type is SQLNULL or not.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_null_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: The value to check.
+
+##### Return Value
+
+True, if the value's type is SQLNULL, otherwise false.
+
+<br>
+
+#### `duckdb_create_null_value`
+
+Creates a value of type SQLNULL.
+
+
+##### Return Value
+
+The duckdb_value representing SQLNULL. This must be destroyed with `duckdb_destroy_value`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_null_value</span>(<span class="nv">
+</span>  <span class="nv">
+</span>);
+</code></pre></div></div>
+<br>
+
+#### `duckdb_get_list_size`
+
+Returns the number of elements in a LIST value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_get_list_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: The LIST value.
+
+##### Return Value
+
+The number of elements in the list.
+
+<br>
+
+#### `duckdb_get_list_child`
+
+Returns the LIST child at index as a duckdb_value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_get_list_child</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: The LIST value.
+* `index`: The index of the child.
+
+##### Return Value
+
+The child as a duckdb_value.
+
+<br>
+
+#### `duckdb_create_enum_value`
+
+Creates an enum value from a type and a value. Must be destroyed with `duckdb_destroy_value`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_enum_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">uint64_t</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `type`: The type of the enum
+* `value`: The value for the enum
+
+##### Return Value
+
+The enum value, or nullptr.
+
+<br>
+
+#### `duckdb_get_enum_value`
+
+Returns the enum value of the given value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> <span class="nv">duckdb_get_enum_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: A duckdb_value containing an enum
+
+##### Return Value
+
+A uint64_t, or MinValue<uint64> if the value cannot be converted
+
+<br>
+
+#### `duckdb_get_struct_child`
+
+Returns the STRUCT child at index as a duckdb_value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_get_struct_child</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: The STRUCT value.
+* `index`: The index of the child.
+
+##### Return Value
+
+The child as a duckdb_value.
 
 <br>
