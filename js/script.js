@@ -775,4 +775,9 @@ $(document).ready(function(){
 	// setWithExpiry('homeBanner', '', -1); // deletes content
 	
 	
+	/** ADD WORD-BOXES TO CODE TABLES */
+	$('.monospace_table + table tbody td').each(function() {
+		$(this).wrapInner('<code class="language-plaintext"></code>');
+	});
+	
 });
