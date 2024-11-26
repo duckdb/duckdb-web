@@ -289,7 +289,7 @@ This distance can either be specified as an integral number of `ROWS`
 or as a `RANGE` delta expression.
 For a `RANGE` specification, there must  be only one ordering expression,
 and it has to support addition and subtraction (i.e., numbers or `INTERVAL`s).
-The default frame is from `UNBOUNDED PRECEDING` to `UNBOUNDED FOLLOWING` for all window functions, except it is `UNBOUNDED PRECEDING` to `CURRENT ROW` when an `ORDER BY` clause is present. If the `OVER` specification contains an `ORDER BY` clause or from `UNBOUNDED PRECEDING TO UNBOUNDED FOLLOWING` otherwise. 
+The default frame is from `UNBOUNDED PRECEDING` to `UNBOUNDED FOLLOWING` for all window functions, except it is `UNBOUNDED PRECEDING` to `CURRENT ROW` when an `ORDER BY` clause is present. 
 It is invalid for a frame to start after it ends.
 Using the [`EXCLUDE` clause](#exclude-clause), rows around the current row can be excluded from the frame.
 
