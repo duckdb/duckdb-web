@@ -6,7 +6,7 @@ thumb: "/images/media/thumbs/overview_latest_developments.png"
 image: "/images/media/thumbs/overview_latest_developments.png"
 excerpt: ""
 toc: false
-tags: ["DuckCon", "Updates"]
+tags: ["Talk", "Updates"]
 length: "30 min"
 ---
 
@@ -16,6 +16,7 @@ length: "30 min"
 
 Speakers: Hannes Mühleisen, Mark Raasveldt (DuckDB Labs)
 
+Event: [DuckCon #5]({% link _events/2024-08-15-duckcon5.md %})
 
 <div class="box-link-wrapper">
 	<div class="box-link full-width">
