@@ -14,7 +14,7 @@ length: "50 min"
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/-wCzn9gKoUk?si=7nUCLymvtVwG51nc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-Speakers: Hannes Mühleisen (DuckDB Labs)
+Speaker: Hannes Mühleisen (DuckDB Labs)
 
 
 <div class="box-link-wrapper">

@@ -17,4 +17,3 @@ length: "20 min"
 Speaker: Mark Raasveldt
 
 Event: [Dutch Seminar on Data Systems Design](https://dsdsd.da.cwi.nl/)
-
