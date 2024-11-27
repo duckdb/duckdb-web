@@ -63,10 +63,10 @@ docs:
   extended_description: |      
     For examples and instructions check out the `open_prompt` [README](https://github.com/quackscience/duckdb-extension-openprompt)
 
-extension_star_count: 23
-extension_star_count_pretty: 23
-extension_download_count: 199
-extension_download_count_pretty: 199
+extension_star_count: 24
+extension_star_count_pretty: 24
+extension_download_count: 179
+extension_download_count_pretty: 179
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---

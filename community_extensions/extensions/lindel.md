@@ -117,10 +117,10 @@ repo:
   github: rustyconover/duckdb-lindel-extension
   ref: a45b2840e748f4aa0552c599b48c19eba53bdc27
 
-extension_star_count: 33
-extension_star_count_pretty: 33
-extension_download_count: 212
-extension_download_count_pretty: 212
+extension_star_count: 35
+extension_star_count_pretty: 35
+extension_download_count: 204
+extension_download_count_pretty: 204
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---
