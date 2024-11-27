@@ -41,7 +41,7 @@ Because the row `(1, 'a')` occurs before `(3, 'c')` in the original table, it is
 
 ## Clauses
 
-The following clauses guarantee that the original row order is unaffected:
+The following clauses guarantee that the original row order is preserved:
 
 * `COPY` (see [Insertion Order](#insertion-order))
 * `FROM` with a single table
@@ -51,7 +51,7 @@ The following clauses guarantee that the original row order is unaffected:
 * `UNION ALL`
 * `WHERE`
 
-The following operations *do not* guarantee that the row order is unaffected:
+The following operations **do not** guarantee that the row order is preserved:
 
 * `FROM` with multiple tables and/or subqueries
 * `JOIN`
