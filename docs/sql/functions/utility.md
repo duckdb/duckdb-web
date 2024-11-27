@@ -235,7 +235,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return null if a = b, else return a. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. |
+| **Description** | Return `NULL` if a = b, else return a. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. |
 | **Example** | `nullif(1+1, 2)` |
 | **Result** | `NULL` |
 

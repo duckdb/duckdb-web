@@ -245,12 +245,12 @@ The `duckdb_sequences()` function provides metadata about the sequences availabl
 | `max_value` | The maximum value of the sequence. | `BIGINT` |
 | `increment_by` | The value that is added to the current value of the sequence to draw the next value from the sequence. | `BIGINT` |
 | `cycle` | Whether the sequence should start over when drawing the next value would result in a value outside the range. | `BOOLEAN` |
-| `last_value` | `null` if no value was ever drawn from the sequence using `nextval(...)`. `1` if a value was drawn. | `BIGINT` |
+| `last_value` | `NULL` if no value was ever drawn from the sequence using `nextval(...)`. `1` if a value was drawn. | `BIGINT` |
 | `sql` | The definition of this object, expressed as SQL DDL-statement. | `VARCHAR` |
 
 Attributes like `temporary`, `start_value` etc. correspond to the various options available in the [`CREATE SEQUENCE`]({% link docs/sql/statements/create_sequence.md %}) statement and are documented there in full. Note that the attributes will always be filled out in the `duckdb_sequences` resultset, even if they were not explicitly specified in the `CREATE SEQUENCE` statement.
 
-> 1. The column name `last_value` suggests that it contains the last value that was drawn from the sequence, but that is not the case. It's either `null` if a value was never drawn from the sequence, or `1` (when there was a value drawn, ever, from the sequence).
+> 1. The column name `last_value` suggests that it contains the last value that was drawn from the sequence, but that is not the case. It's either `NULL` if a value was never drawn from the sequence, or `1` (when there was a value drawn, ever, from the sequence).
 >
 > 2. If the sequence cycles, then the sequence will start over from the boundary of its range, not necessarily from the value specified as start value.
 

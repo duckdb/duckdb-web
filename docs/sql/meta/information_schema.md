@@ -37,11 +37,11 @@ The view that describes the catalog information for columns is `information_sche
 | `column_default` | Default expression of the column. |`VARCHAR`| `1.99` |
 | `is_nullable` | `YES` if the column is possibly nullable, `NO` if it is known not nullable. |`VARCHAR`| `'YES'` |
 | `data_type` | Data type of the column. |`VARCHAR`| `'DECIMAL(18, 2)'` |
-| `character_maximum_length` | If `data_type` identifies a character or bit string type, the declared maximum length; null for all other data types or if no maximum length was declared. |`INTEGER`| `255` |
-| `character_octet_length` | If `data_type` identifies a character type, the maximum possible length in octets (bytes) of a datum; null for all other data types. The maximum octet length depends on the declared character maximum length (see above) and the character encoding. |`INTEGER`| `1073741824` |
-| `numeric_precision` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) precision of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is null. |`INTEGER`| `18` |
-| `numeric_scale` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) scale of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is null. |`INTEGER`| `2` |
-| `datetime_precision` | If `data_type` identifies a date, time, timestamp, or interval type, this column contains the (declared or implicit) fractional seconds precision of the type for this column, that is, the number of decimal digits maintained following the decimal point in the seconds value. No fractional seconds are currently supported in DuckDB. For all other data types, this column is null. |`INTEGER`| `0` |
+| `character_maximum_length` | If `data_type` identifies a character or bit string type, the declared maximum length; `NULL` for all other data types or if no maximum length was declared. |`INTEGER`| `255` |
+| `character_octet_length` | If `data_type` identifies a character type, the maximum possible length in octets (bytes) of a datum; `NULL` for all other data types. The maximum octet length depends on the declared character maximum length (see above) and the character encoding. |`INTEGER`| `1073741824` |
+| `numeric_precision` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) precision of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is `NULL`. |`INTEGER`| `18` |
+| `numeric_scale` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) scale of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is `NULL`. |`INTEGER`| `2` |
+| `datetime_precision` | If `data_type` identifies a date, time, timestamp, or interval type, this column contains the (declared or implicit) fractional seconds precision of the type for this column, that is, the number of decimal digits maintained following the decimal point in the seconds value. No fractional seconds are currently supported in DuckDB. For all other data types, this column is `NULL`. |`INTEGER`| `0` |
 
 ### `constraint_column_usage`: Constraint Column Usage
 
@@ -64,7 +64,7 @@ This view describes all columns in the current database that are used by some co
 | `constraint_catalog` | Name of the database that contains the constraint (always the current database). | `VARCHAR` | `'my_db'` |
 | `constraint_schema` | Name of the schema that contains the constraint. | `VARCHAR` | `'main'` |
 | `constraint_name` | Name of the constraint. | `VARCHAR` | `'exams_exam_id_fkey'` |
-| `table_catalog` | Name of the database that contains the table that contains the column that is restricted by this constraint (always the current database).  | `VARCHAR` | `'my_db'` |
+| `table_catalog` | Name of the database that contains the table that contains the column that is restricted by this constraint (always the current database). | `VARCHAR` | `'my_db'` |
 | `table_schema` | Name of the schema that contains the table that contains the column that is restricted by this constraint. | `VARCHAR` | `'main'` |
 | `table_name` | Name of the table that contains the column that is restricted by this constraint. | `VARCHAR` | `'exams'` |
 | `column_name` | Name of the column that is restricted by this constraint. | `VARCHAR` | `'exam_id'` |
@@ -111,9 +111,9 @@ The view that describes the catalog information for tables and views is `informa
 | `table_type` | The type of table. One of: `BASE TABLE`, `LOCAL TEMPORARY`, `VIEW`. | `VARCHAR` | `'BASE TABLE'` |
 | `self_referencing_column_name` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
 | `reference_generation` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
-| `user_defined_type_catalog` | If the table is a typed table, the name of the database that contains the underlying data type (always the current database), else null. Currently unimplemented. | `VARCHAR` | `NULL` |
-| `user_defined_type_schema` | If the table is a typed table, the name of the schema that contains the underlying data type, else null. Currently unimplemented. | `VARCHAR` | `NULL` |
-| `user_defined_type_name` | If the table is a typed table, the name of the underlying data type, else null. Currently unimplemented. | `VARCHAR` | `NULL` |
+| `user_defined_type_catalog` | If the table is a typed table, the name of the database that contains the underlying data type (always the current database), else `NULL`. Currently unimplemented. | `VARCHAR` | `NULL` |
+| `user_defined_type_schema` | If the table is a typed table, the name of the schema that contains the underlying data type, else `NULL`. Currently unimplemented. | `VARCHAR` | `NULL` |
+| `user_defined_type_name` | If the table is a typed table, the name of the underlying data type, else `NULL`. Currently unimplemented. | `VARCHAR` | `NULL` |
 | `is_insertable_into` | `YES` if the table is insertable into, `NO` if not (Base tables are always insertable into, views not necessarily.)| `VARCHAR` | `'YES'` |
 | `is_typed` | `YES` if the table is a typed table, `NO` if not. | `VARCHAR` | `'NO'` |
 | `commit_action` | Not yet implemented. | `VARCHAR` | `'NO'` |
@@ -132,7 +132,7 @@ The view that describes the catalog information for tables and views is `informa
 | `is_deferrable` | `YES` if the constraint is deferrable, `NO` if not. | `VARCHAR` | `'NO'` |
 | `initially_deferred` | `YES` if the constraint is deferrable and initially deferred, `NO` if not. | `VARCHAR` | `'NO'` |
 | `enforced` | Always `YES`. | `VARCHAR` | `'YES'` |
-| `nulls_distinct` | If the constraint is a unique constraint, then `YES` if the constraint treats nulls as distinct or `NO` if it treats nulls as not distinct, otherwise `NULL` for other types of constraints. | `VARCHAR` | `'YES'` |
+| `nulls_distinct` | If the constraint is a unique constraint, then `YES` if the constraint treats `NULL`s as distinct or `NO` if it treats `NULL`s as not distinct, otherwise `NULL` for other types of constraints. | `VARCHAR` | `'YES'` |
 
 ## Catalog Functions
 

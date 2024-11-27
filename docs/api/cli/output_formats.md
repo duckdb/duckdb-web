@@ -10,26 +10,26 @@ The `markdown` mode is particularly useful for building documentation and the `l
 
 <div class="narrow_table"></div>
 
-|     Mode     |                 Description                  |
-|--------------|----------------------------------------------|
-| `ascii`      | Columns/rows delimited by 0x1F and 0x1E      |
-| `box`        | Tables using unicode box-drawing characters  |
-| `csv`        | Comma-separated values                       |
-| `column`     | Output in columns.  (See .width)             |
-| `duckbox`    | Tables with extensive features (default)     |
-| `html`       | HTML `<table>` code                          |
-| `insert`     | SQL insert statements for TABLE              |
-| `json`       | Results in a JSON array                      |
-| `jsonlines`  | Results in a NDJSON                          |
-| `latex`      | LaTeX tabular environment code               |
-| `line`       | One value per line                           |
-| `list`       | Values delimited by "\|"                     |
-| `markdown`   | Markdown table format                        |
-| `quote`      | Escape answers as for SQL                    |
-| `table`      | ASCII-art table                              |
-| `tabs`       | Tab-separated values                         |
-| `tcl`        | TCL list elements                            |
-| `trash`      | No output                                    |
+|     Mode     |                 Description                 |
+|--------------|---------------------------------------------|
+| `ascii`      | Columns/rows delimited by 0x1F and 0x1E     |
+| `box`        | Tables using unicode box-drawing characters |
+| `csv`        | Comma-separated values                      |
+| `column`     | Output in columns. (See .width)             |
+| `duckbox`    | Tables with extensive features (default)    |
+| `html`       | HTML `<table>` code                         |
+| `insert`     | SQL insert statements for TABLE             |
+| `json`       | Results in a JSON array                     |
+| `jsonlines`  | Results in a NDJSON                         |
+| `latex`      | LaTeX tabular environment code              |
+| `line`       | One value per line                          |
+| `list`       | Values delimited by "\|"                    |
+| `markdown`   | Markdown table format                       |
+| `quote`      | Escape answers as for SQL                   |
+| `table`      | ASCII-art table                             |
+| `tabs`       | Tab-separated values                        |
+| `tcl`        | TCL list elements                           |
+| `trash`      | No output                                   |
 
 Use `.mode` directly to query the appearance currently in use.
 

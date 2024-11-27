@@ -8,7 +8,7 @@ The following operations and components respect insertion order:
 
 * [The CSV reader]({% link docs/data/csv/overview.md %}#order-preservation)
 
-Preservation of insertion order is controlled by the  `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}).
+Preservation of insertion order is controlled by the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}).
 This setting is `true` by default, indicating that the order should be preserved.
 To change this setting, use:
 

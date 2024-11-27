@@ -581,7 +581,7 @@ FROM generate_series(DATE '1992-01-01', DATE '1992-03-01', INTERVAL '1' MONTH);
 
 ## Slicing
 
-The function [`list_slice`](#list_slicelist-begin-end) can be used to extract a sublist from a list.  The following variants exist:
+The function [`list_slice`](#list_slicelist-begin-end) can be used to extract a sublist from a list. The following variants exist:
 
 * `list_slice(list, begin, end)`
 * `list_slice(list, begin, end, step)`
