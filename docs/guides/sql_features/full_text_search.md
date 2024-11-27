@@ -19,6 +19,8 @@ CREATE TABLE corpus AS
 DESCRIBE corpus;
 ```
 
+<div class="narrow_table monospace_table"></div>
+
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|
 | line_id     | VARCHAR     | YES  | NULL | NULL    | NULL  |
@@ -37,7 +39,7 @@ First, we create the index, specifying the table name, the unique id column, and
 PRAGMA create_fts_index('corpus', 'line_id', 'text_entry');
 ```
 
-The table is now ready to query using the [Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25) ranking function.  Rows with no match return a null score.
+The table is now ready to query using the [Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25) ranking function. Rows with no match return a `NULL` score.
 
 What does Shakespeare say about butter?
 
@@ -71,7 +73,8 @@ Unlike standard indexes, full-text indexes don't auto-update as the underlying d
 
 ## Note on Generating the Corpus Table
 
-For more details, see the [“Generating a Shakespeare corpus for full-text searching from JSON” blog post](https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html)
+For more details, see the [“Generating a Shakespeare corpus for full-text searching from JSON” blog post](https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html).
+
 * The Columns are: line_id, play_name, line_number, speaker, text_entry.
 * We need a unique key for each row in order for full-text searching to work.
 * The line_id `KL/2.4.132` means King Lear, Act 2, Scene 4, Line 132.

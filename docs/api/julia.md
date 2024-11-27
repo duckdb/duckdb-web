@@ -100,7 +100,7 @@ DuckDB.close(appender)
 
 ## Concurrency
 
-Within a Julia process, tasks are able to concurrently read and write to the database, as long as each task maintains its own connection to the database.  In the example below, a single task is spawned to periodically read the database and many tasks are spawned to write to the database using both [`INSERT` statements]({% link docs/sql/statements/insert.md %}) as well as the [Appender API]({% link docs/data/appender.md %}).
+Within a Julia process, tasks are able to concurrently read and write to the database, as long as each task maintains its own connection to the database. In the example below, a single task is spawned to periodically read the database and many tasks are spawned to write to the database using both [`INSERT` statements]({% link docs/sql/statements/insert.md %}) as well as the [Appender API]({% link docs/data/appender.md %}).
 
 ```julia
 using Dates, DataFrames, DuckDB
