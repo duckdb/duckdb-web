@@ -50,6 +50,7 @@ The following clauses guarantee that the original row order is preserved:
 * `SELECT`
 * `UNION ALL`
 * `WHERE`
+* `ARRAY` 
 
 The following operations **do not** guarantee that the row order is preserved:
 
