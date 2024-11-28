@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: hostfs
   description: Navigate and explore the filesystem using SQL
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: gropaul/hostFS
-  ref: 1aa25bee5eb7b95f6d46504ed72336f90468588a
+  ref: 422dccbdbf5de509e03111ea78afe5f1c35fdde6
 
 docs:
   hello_world: |
@@ -58,10 +58,10 @@ docs:
   extended_description: >
     The HostFS extension allows you to navigate and explore the filesystem using SQL. It provides a set of functions to list files, get file metadata, and more. 
     For more information, please see the [HostFS documentation](https://github.com/gropaul/hostFS).
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 194
-extension_download_count_pretty: 194
+extension_star_count: 11
+extension_star_count_pretty: 11
+extension_download_count: 193
+extension_download_count_pretty: 193
 image: '/images/community_extensions/social_preview/preview_community_extension_hostfs.png'
 layout: community_extension_doc
 ---
@@ -90,8 +90,8 @@ LOAD {{ page.extension.name }};
 |   function_name    | function_type | description | comment | example |
 |--------------------|---------------|-------------|---------|---------|
 | absolute_path      | scalar        |             |         |         |
-| cd                 | table         |             |         |         |
 | cd                 | pragma        |             |         |         |
+| cd                 | table         |             |         |         |
 | file_extension     | scalar        |             |         |         |
 | file_last_modified | scalar        |             |         |         |
 | file_name          | scalar        |             |         |         |
@@ -106,8 +106,8 @@ LOAD {{ page.extension.name }};
 | lsr                | table         |             |         |         |
 | path_exists        | scalar        |             |         |         |
 | path_type          | scalar        |             |         |         |
-| pwd                | pragma        |             |         |         |
 | pwd                | scalar        |             |         |         |
+| pwd                | pragma        |             |         |         |
 
 
 

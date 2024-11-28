@@ -246,6 +246,7 @@ In query plans, the [hash join](https://en.wikipedia.org/wiki/Hash_join) operato
 the _probe side_ of the join is the left operand, while the _build side_ is the right operand.
 
 Join operators in the query plan show the join type used:
+
 * Inner joins are denoted as `INNER`.
 * Left outer joins and right outer joins are denoted as `LEFT` and `RIGHT`, respectively.
 * Full outer joins are denoted as `FULL`.

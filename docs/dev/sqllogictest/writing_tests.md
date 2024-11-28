@@ -33,7 +33,7 @@ DuckDB has built-in functions for generating test data.
 ### `test_all_types` Function
 
 The `test_all_types` table function generates a table whose columns correspond to types (`BOOL`, `TINYINT`, etc.).
-The table has three rows encoding the minimum value, the maximum value, and the null value for each type.
+The table has three rows encoding the minimum value, the maximum value, and the `NULL` value for each type.
 
 ```sql
 FROM test_all_types();
@@ -83,7 +83,7 @@ FROM test_vector_types(NULL::ROW(i INTEGER, j VARCHAR, k DOUBLE), NULL::TIMESTAM
 │                             test_vector                              │         test_vector2         │
 │                struct(i integer, j varchar, k double)                │          timestamp           │
 ├──────────────────────────────────────────────────────────────────────┼──────────────────────────────┤
-│ {'i': -2147483648, 'j': 🦆🦆🦆🦆🦆🦆, 'k': -1.7976931348623157e+308}   │ 290309-12-22 (BC) 00:00:00   │
+│ {'i': -2147483648, 'j': 🦆🦆🦆🦆🦆🦆, 'k': -1.7976931348623157e+308} │ 290309-12-22 (BC) 00:00:00   │
 │ {'i': 2147483647, 'j': goo\0se, 'k': 1.7976931348623157e+308}        │ 294247-01-10 04:00:54.775806 │
 │ {'i': NULL, 'j': NULL, 'k': NULL}                                    │ NULL                         │
 │                                                  ...                                                │

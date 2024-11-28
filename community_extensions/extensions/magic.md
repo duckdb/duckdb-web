@@ -18,20 +18,30 @@ extension:
 
 repo:
   github: carlopi/duckdb_magic
-  ref: 4568f1813a6e4555beb931349408e5d04b66c99e
+  ref: 134b696cb04e2d9cc106dccf2301e415442a1524
 
 docs:
   hello_world: |
-    SELECT file, magic_mime(file), magic_type(file) FROM glob('path/to/folder/**');
+    --- Discover autodetected types for files in a local folder
+    SELECT magic_mime(file), magic_type(file), file
+        FROM glob('path/to/folder/**');
+    
+    --- Discover autodetected types for a remote file
+    LOAD httpfs;  --- this needs to currently be explcit once per session
+    SELECT magic_mime(file), magic_type(file), file
+        FROM glob('https://raw.githubusercontent.com/duckdb/duckdb/main/data/parquet-testing/adam_genotypes.parquet');
+    
+    --- Read file without providing detail on type
+    FROM read_any('https://raw.githubusercontent.com/duckdb/duckdb/main/data/parquet-testing/adam_genotypes.parquet');
   extended_description: |
     Very experimental port of libmagic (that powers file UNIX utility), allow to classify files based on the the content of the header, accoring to the libmagic library.
     Packaged with version 5.45 of the magic library. The magic.mgc database is at the moment statically compiled in the library, so it's the same across platforms but immutable.
-    Currently not available in Windows and Wasm, due to different but likely solvable compile time problems to be sorted out independently.
+    Currently not available in Windows and Wasm, due to different but likely solvable vc-packaging issue, to be sorted out independently.
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 195
-extension_download_count_pretty: 195
+extension_download_count: 184
+extension_download_count_pretty: 184
 image: '/images/community_extensions/social_preview/preview_community_extension_magic.png'
 layout: community_extension_doc
 ---
@@ -61,6 +71,7 @@ LOAD {{ page.extension.name }};
 |---------------|---------------|-------------|---------|---------|
 | magic_mime    | scalar        |             |         |         |
 | magic_type    | scalar        |             |         |         |
+| read_any      | table_macro   |             |         |         |
 
 
 

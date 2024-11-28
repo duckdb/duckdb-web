@@ -104,8 +104,8 @@ Below is a complete list of the supported parameters that can be used for both t
 | `ENDPOINT`                    | Specify a custom S3 endpoint                                                          | `S3`, `GCS`, `R2` | `STRING`  | `s3.amazonaws.com` for `S3`,                |
 | `URL_STYLE`                   | Either `vhost` or `path`                                                              | `S3`, `GCS`, `R2` | `STRING`  | `vhost` for `S3`, `path` for `R2` and `GCS` |
 | `USE_SSL`                     | Whether to use HTTPS or HTTP                                                          | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
-| `URL_COMPATIBILITY_MODE`      | Can help when urls contain problematic characters.                                    | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
-| `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint url                              | `R2`              | `STRING`  | -                                           |
+| `URL_COMPATIBILITY_MODE`      | Can help when URLs contain problematic characters                                     | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
+| `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint URL                              | `R2`              | `STRING`  | -                                           |
 
 ### Platform-Specific Secret Types
 
@@ -122,7 +122,7 @@ CREATE SECRET secret5 (
 );
 ```
 
-Note the addition of the `ACCOUNT_ID` which is used to generate to correct endpoint url for you. Also note that for `R2` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `R2` secrets are only available when using urls starting with `r2://`, for example:
+Note the addition of the `ACCOUNT_ID` which is used to generate to correct endpoint URL for you. Also note that for `R2` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `R2` secrets are only available when using URLs starting with `r2://`, for example:
 
 ```sql
 SELECT *
@@ -141,7 +141,7 @@ CREATE SECRET secret6 (
 );
 ```
 
-Note that the above secret, will automatically have the correct Google Cloud Storage endpoint configured. Also note that for `GCS` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `GCS` secrets are only available when using urls starting with `gcs://` or `gs://`, for example:
+Note that the above secret, will automatically have the correct Google Cloud Storage endpoint configured. Also note that for `GCS` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `GCS` secrets are only available when using URLs starting with `gcs://` or `gs://`, for example:
 
 ```sql
 SELECT *

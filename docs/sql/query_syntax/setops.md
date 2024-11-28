@@ -6,7 +6,7 @@ railroad: query_syntax/setops.js
 
 Set operations allow queries to be combined according to [set operation semantics](https://en.wikipedia.org/wiki/Set_(mathematics)#Basic_operations). Set operations refer to the [`UNION [ALL]`](#union), [`INTERSECT [ALL]`](#intersect) and [`EXCEPT [ALL]`](#except) clauses. The vanilla variants use set semantics, i.e., they eliminate duplicates, while the variants with `ALL` use bag semantics.
 
-Traditional set operations unify queries **by column position**, and require the to-be-combined queries to have the same number of input columns. If the columns are not of the same type, casts may be added.  The result will use the column names from the first query.
+Traditional set operations unify queries **by column position**, and require the to-be-combined queries to have the same number of input columns. If the columns are not of the same type, casts may be added. The result will use the column names from the first query.
 
 DuckDB also supports [`UNION [ALL] BY NAME`](#union-all-by-name), which joins columns by name instead of by position. `UNION BY NAME` does not require the inputs to have the same number of columns. `NULL` values will be added in case of missing columns.
 

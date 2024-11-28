@@ -98,7 +98,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `delim` | Specifies the delimiter character that separates columns within each row (line) of the file. Alias for `sep`. | `VARCHAR` | `,` |
 | `escape` | Specifies the string that should appear before a data character sequence that matches the `quote` value. | `VARCHAR` | `"` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
-| `force_not_null` | Do not match the specified columns' values against the NULL string. In the default case where the `NULL` string is empty, this means that empty values will be read as zero-length strings rather than `NULL`s. | `VARCHAR[]` | `[]` |
+| `force_not_null` | Do not match the specified columns' values against the `NULL` string. In the default case where the `NULL` string is empty, this means that empty values will be read as zero-length strings rather than `NULL`s. | `VARCHAR[]` | `[]` |
 | `header` | Specifies that the file contains a header line with the names of each column in the file. | `BOOL` | `false` |
 | `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/data/partitioning/hive_partitioning.md %}). | `BOOL` | `false` |
 | `ignore_errors` | Option to ignore any parsing errors encountered – and instead ignore rows with errors. | `BOOL` | `false` |
@@ -106,7 +106,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `names` | The column names as a list, see [example]({% link docs/data/csv/tips.md %}#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
 | `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. Note that the CSV parser only distinguishes between single-character and double-character line delimiters. Therefore, it does not differentiate between `'\r'` and `'\n'`.| `VARCHAR` | (empty) |
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
-| `null_padding` | If this option is enabled, when a row lacks columns, it will pad the remaining columns on the right with null values. | `BOOL` | `false` |
+| `null_padding` | If this option is enabled, when a row lacks columns, it will pad the remaining columns on the right with `NULL` values. | `BOOL` | `false` |
 | `nullstr` | Specifies the string that represents a `NULL` value or (since v0.10.2) a list of strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
 | `parallel` | Whether or not the parallel CSV reader is used. | `BOOL` | `true` |
 | `quote` | Specifies the quoting string to be used when a data value is quoted. | `VARCHAR` | `"` |
@@ -220,6 +220,6 @@ iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
 
 ## Order Preservation
 
-The CSV reader respects the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}).
+The CSV reader respects the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}) to [preserve insertion order]({% link docs/sql/dialect/order_preservation.md %}).
 When `true` (the default), the order of the rows in the resultset returned by the CSV reader is the same as the order of the corresponding lines read from the file(s).
 When `false`, there is no guarantee that the order is preserved.

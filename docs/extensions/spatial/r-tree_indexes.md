@@ -123,9 +123,9 @@ Depending on you specific workload, you might want to experiment with the `max_n
 
 The following options can be passed to the `WITH` clause when creating an R-tree index: (e.g., `CREATE INDEX my_idx ON my_table USING RTREE (geom) WITH (⟨option⟩ = ⟨value⟩);`)
 
-| Option               | Description                                                                                   | Default |
-|----------------------|-----------------------------------------------------------------------------------------------|---------|
-| `max_node_capacity` | The maximum number of entries per node in the R-tree.                                          | `128`      |
+| Option               | Description                                                                                   | Default                   |
+|----------------------|-----------------------------------------------------------------------------------------------|---------------------------|
+| `max_node_capacity` | The maximum number of entries per node in the R-tree.                                          | `128`                     |
 | `min_node_capacity` | The minimum number of entries per node in the R-tree.                                          | `0.4 * max_node_capacity` |
 
 *Should a node fall under the minimum number of entries after a deletion, the node will be dissolved and all the entries reinserted from the top of the tree. This is a common operation in R-tree implementations to prevent the tree from becoming too unbalanced.

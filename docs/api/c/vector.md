@@ -47,7 +47,7 @@ For primitive types, the underlying array can be obtained using the `duckdb_vect
 | DUCKDB_TYPE_TIME_TZ      | duckdb_time_tz   |
 | DUCKDB_TYPE_TIMESTAMP_TZ | duckdb_timestamp |
 
-### Null Values
+### `NULL` Values
 
 Any value in a vector can be `NULL`. When a value is `NULL`, the values contained within the primary array at that index is undefined (and can be uninitialized). The validity mask is a bitmask consisting of `uint64_t` elements. For every `64` values in the vector, one `uint64_t` element exists (rounded up). The validity mask has its bit set to 1 if the value is valid, or set to 0 if the value is invalid (i.e .`NULL`).
 
@@ -439,9 +439,11 @@ The bit is set to 1 if the value is valid (i.e., not NULL) or 0 if the value is 
 
 Validity of a specific value can be obtained like this:
 
+```c
 idx_t entry_idx = row_idx / 64;
 idx_t idx_in_entry = row_idx % 64;
 bool is_valid = validity_mask[entry_idx] & (1 << idx_in_entry);
+```
 
 Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 
@@ -458,7 +460,7 @@ Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 
 ##### Return Value
 
-The pointer to the validity mask, or NULL if no validity mask is present
+The pointer to the validity mask, or `NULL` if no validity mask is present
 
 <br>
 
@@ -467,7 +469,7 @@ The pointer to the validity mask, or NULL if no validity mask is present
 Ensures the validity mask is writable by allocating it.
 
 After this function is called, `duckdb_vector_get_validity` will ALWAYS return non-NULL.
-This allows null values to be written to the vector, regardless of whether a validity mask was present before.
+This allows `NULL` values to be written to the vector, regardless of whether a validity mask was present before.
 
 ##### Syntax
 

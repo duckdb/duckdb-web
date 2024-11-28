@@ -60,7 +60,7 @@ CREATE OR REPLACE TABLE addresses AS
     SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111-0001';
 ```
 
-Select the addresses, ordered by city name using the default null order and default order:
+Select the addresses, ordered by city name using the default `NULL` order and default order:
 
 ```sql
 SELECT *

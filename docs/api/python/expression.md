@@ -25,14 +25,23 @@ df = pd.DataFrame({
     'b': [True, None, False, True],
     'c': [42, 21, 13, 14]
 })
+```
 
-# selecting a single column
+Selecting a single column:
+
+```python
 col = duckdb.ColumnExpression('a')
 res = duckdb.df(df).select(col).fetchall()
 print(res)
-# [(1,), (2,), (3,), (4,)]
+```
 
-# selecting multiple columns
+```text
+[(1,), (2,), (3,), (4,)]
+```
+
+Selecting multiple columns:
+
+```python
 col_list = [
         duckdb.ColumnExpression('a') * 10,
         duckdb.ColumnExpression('b').isnull(),
@@ -40,7 +49,10 @@ col_list = [
     ]
 res = duckdb.df(df).select(*col_list).fetchall()
 print(res)
-# [(10, False, 47), (20, True, 26), (30, False, 18), (40, False, 19)]
+```
+
+```text
+[(10, False, 47), (20, True, 26), (30, False, 18), (40, False, 19)]
 ```
 
 ## Star Expression
@@ -63,7 +75,10 @@ df = pd.DataFrame({
 star = duckdb.StarExpression(exclude = ['b'])
 res = duckdb.df(df).select(star).fetchall()
 print(res)
-# [(1, 42), (2, 21), (3, 13), (4, 14)]
+```
+
+```text
+[(1, 42), (2, 21), (3, 13), (4, 14)]
 ```
 
 ## Constant Expression
@@ -83,7 +98,11 @@ df = pd.DataFrame({
 const = duckdb.ConstantExpression('hello')
 res = duckdb.df(df).select(const).fetchall()
 print(res)
-# [('hello',), ('hello',), ('hello',), ('hello',)]
+```
+
+
+```text
+[('hello',), ('hello',), ('hello',), ('hello',)]
 ```
 
 ## Case Expression
@@ -115,7 +134,10 @@ case = \
     .otherwise(hello)
 res = duckdb.df(df).select(case).fetchall()
 print(res)
-# [('hello',), ('hello',), ('world',), ('hello',)]
+```
+
+```text
+[('hello',), ('hello',), ('world',), ('hello',)]
 ```
 
 ## Function Expression
@@ -144,29 +166,32 @@ df = pd.DataFrame({
 ends_with = FunctionExpression('ends_with', ColumnExpression('a'), ConstantExpression('est'))
 res = duckdb.df(df).select(ends_with).fetchall()
 print(res)
-# [(True,), (True,), (False,), (True,)]
+```
+
+```text
+[(True,), (True,), (False,), (True,)]
 ```
 
 ## Common Operations
 
 The Expression class also contains many operations that can be applied to any Expression type.
 
-| Operation                      | Description                                                                                                    |
-|--------------------------------|----------------------------------------------------------------------------------------------------------------|
-| `.alias(name: str)`            | Applies an alias to the expression.                                                                            |
-| `.cast(type: DuckDBPyType)`    | Applies a cast to the provided type on the expression.                                                         |
+| Operation                      | Description                                                                                                                 |
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `.alias(name: str)`            | Applies an alias to the expression.                                                                                         |
+| `.cast(type: DuckDBPyType)`    | Applies a cast to the provided type on the expression.                                                                      |
 | `.isin(*exprs: Expression)`    | Creates an [`IN` expression]({% link docs/sql/expressions/in.md %}#in) against the provided expressions as the list.        |
 | `.isnotin(*exprs: Expression)` | Creates a [`NOT IN` expression]({% link docs/sql/expressions/in.md %}#not-in) against the provided expressions as the list. |
-| `.isnotnull()`                 | Checks whether the expression is not `NULL`.                                                                   |
-| `.isnull()`                    | Checks whether the expression is `NULL`.                                                                       |
+| `.isnotnull()`                 | Checks whether the expression is not `NULL`.                                                                                |
+| `.isnull()`                    | Checks whether the expression is `NULL`.                                                                                    |
 
 ### Order Operations
 
 When expressions are provided to `DuckDBPyRelation.order()`, the following order operations can be applied.
 
-| Operation                      | Description                                                                                                    |
-|--------------------------------|----------------------------------------------------------------------------------------------------------------|
-| `.asc()`                       | Indicates that this expression should be sorted in ascending order.                                            |
-| `.desc()`                      | Indicates that this expression should be sorted in descending order.                                           |
-| `.nulls_first()`               | Indicates that the nulls in this expression should precede the non-null values.                                |
-| `.nulls_last()`                | Indicates that the nulls in this expression should come after the non-null values.                             |
+| Operation                      | Description                                                                        |
+|--------------------------------|------------------------------------------------------------------------------------|
+| `.asc()`                       | Indicates that this expression should be sorted in ascending order.                |
+| `.desc()`                      | Indicates that this expression should be sorted in descending order.               |
+| `.nulls_first()`               | Indicates that the nulls in this expression should precede the non-null values.    |
+| `.nulls_last()`                | Indicates that the nulls in this expression should come after the non-null values. |
