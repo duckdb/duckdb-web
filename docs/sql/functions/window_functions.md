@@ -22,6 +22,8 @@ SELECT row_number() OVER ()
 FROM sales;
 ```
 
+> Tip If you only need a number for each row in a table, you can use the [`rowid` pseudocolumn]({% link docs/sql/statements/select.md %}#row-ids).
+
 Generate a `row_number` column to enumerate rows, ordered by `time`:
 
 ```sql
