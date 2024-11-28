@@ -206,9 +206,9 @@ Partitioning breaks the relation up into independent, unrelated pieces.
 Partitioning is optional, and if none is specified then the entire relation is treated as a single partition.
 Window functions cannot access values outside of the partition containing the row they are being evaluated at.
 
-Ordering is also optional, but without it the results of [general-purpose window functions](#general-purpose-window-functions) and [order-sensitive aggregate functions](../aggregates#order-by-clause-in-aggregate-functions), and the order of [framing](#framing) are not well-defined.
-Each partition is ordered using the same ordering clause. 
-It is not currently possible to specify the aggregation order of [order-sensitive aggregate functions](../aggregates#order-by-clause-in-aggregate-functions) (e.g., `array_agg(x ORDER BY y)`) other than by the order in the `OVER` specification.
+Ordering is also optional, but without it the results of [general-purpose window functions](#general-purpose-window-functions) and [order-sensitive aggregate functions]({% link docs/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions), and the order of [framing](#framing) are not well-defined.
+Each partition is ordered using the same ordering clause.
+It is not currently possible to specify the aggregation order of [order-sensitive aggregate functions]({% link docs/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions) (e.g., `array_agg(x ORDER BY y)`) other than by the order in the `OVER` specification.
 
 Here is a table of power generation data, available as a CSV file ([`power-plant-generation-history.csv`](/data/power-plant-generation-history.csv)). To load the data, run:
 
