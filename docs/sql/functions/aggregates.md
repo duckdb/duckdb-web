@@ -550,7 +550,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The most frequent value. |
+| **Description** | The most frequent value. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Formula** | - |
 | **Alias(es)** | - |
 
