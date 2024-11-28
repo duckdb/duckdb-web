@@ -71,6 +71,7 @@ LOAD {{ page.extension.name }};
 |---------------|---------------|-------------|---------|---------|
 | magic_mime    | scalar        |             |         |         |
 | magic_type    | scalar        |             |         |         |
+| read_any      | table_macro   |             |         |         |
 
 
 

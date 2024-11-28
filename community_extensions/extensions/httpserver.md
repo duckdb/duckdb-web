@@ -52,8 +52,8 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 122
-extension_star_count_pretty: 122
+extension_star_count: 123
+extension_star_count_pretty: 123
 extension_download_count: 202
 extension_download_count_pretty: 202
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
