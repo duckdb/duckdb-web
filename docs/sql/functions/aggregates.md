@@ -464,7 +464,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | [`kurtosis(x)`](#kurtosisx) | The excess kurtosis (Fisher's definition) with bias correction according to the sample size. |
 | [`mad(x)`](#madx) | The median absolute deviation. Temporal types return a positive `INTERVAL`. |
 | [`median(x)`](#medianx) | The middle value of the set. For even value counts, quantitative values are averaged and ordinal values return the lower value. |
-| [`mode(x)`](#modex)| The most frequent value. |
+| [`mode(x)`](#modex)| The most frequent value. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`quantile_cont(x, pos)`](#quantile_contx-pos) | The interpolated `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `pos * (n_nonnull_values - 1)`th (zero-indexed) element (or an interpolation between the adjacent elements if the index is not an integer). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding interpolated quantiles. |
 | [`quantile_disc(x, pos)`](#quantile_discx-pos) | The discrete `pos`-quantile of `x` for `0 <= pos <= 1`, i.e., orders the values of `x` and returns the `greatest(ceil(pos * n_nonnull_values) - 1, 0)`th (zero-indexed) element. If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. |
 | [`regr_avgx(y, x)`](#regr_avgxy-x) | The average of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
