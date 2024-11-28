@@ -8,7 +8,7 @@ Samples are used to randomly select a subset of a dataset.
 
 ### Examples
 
-Select a sample of 5 rows from `tbl` using reservoir sampling:
+Select a sample of 5 rows from `tbl` using system sampling (cluster sampling):
 
 ```sql
 SELECT *
