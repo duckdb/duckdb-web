@@ -15,35 +15,35 @@ Window function are available in SQL since [SQL:2003](https://en.wikipedia.org/w
 
 ## Examples
 
-Generate a `row_number` column with containing incremental identifiers for each row:
+Generate a `row_number` column to enumerate rows:
 
 ```sql
 SELECT row_number() OVER ()
 FROM sales;
 ```
 
-Generate a `row_number` column, by order of time:
+Generate a `row_number` column to enumerate rows, ordered by `time`:
 
 ```sql
 SELECT row_number() OVER (ORDER BY time)
 FROM sales;
 ```
 
-Generate a `row_number` column, by order of time partitioned by region:
+Generate a `row_number` column to enumerate rows, ordered by `time` and partitioned by `region`:
 
 ```sql
 SELECT row_number() OVER (PARTITION BY region ORDER BY time)
 FROM sales;
 ```
 
-Compute the difference between the current amount, and the previous amount, by order of time:
+Compute the difference between the current and the previous-by-`time` `amount`:
 
 ```sql
 SELECT amount - lag(amount) OVER (ORDER BY time)
 FROM sales;
 ```
 
-Compute the percentage of the total amount of sales per region for each row:
+Compute the percentage of the total `amount` of sales per `region` for each row:
 
 ```sql
 SELECT amount / sum(amount) OVER (PARTITION BY region)
@@ -206,8 +206,9 @@ Partitioning breaks the relation up into independent, unrelated pieces.
 Partitioning is optional, and if none is specified then the entire relation is treated as a single partition.
 Window functions cannot access values outside of the partition containing the row they are being evaluated at.
 
-Ordering is also optional, but without it the results are not well-defined.
-Each partition is ordered using the same ordering clause.
+Ordering is also optional, but without it the results of [general-purpose window functions](#general-purpose-window-functions) and [order-sensitive aggregate functions](../aggregates#order-by-clause-in-aggregate-functions), and the order of [framing](#framing) are not well-defined.
+Each partition is ordered using the same ordering clause. 
+It is not currently possible to specify the aggregation order of [order-sensitive aggregate functions](../aggregates#order-by-clause-in-aggregate-functions) (e.g., `array_agg(x ORDER BY y)`) other than by the order in the `OVER BY` clause.
 
 Here is a table of power generation data, available as a CSV file ([`power-plant-generation-history.csv`](/data/power-plant-generation-history.csv)). To load the data, run:
 
@@ -284,7 +285,7 @@ so the `SELECT` also needs to be explicitly sorted if that is desired.
 ### Framing
 
 Framing specifies a set of rows relative to each row where the function is evaluated.
-The distance from the current row is given as an expression either `PRECEDING` or `FOLLOWING` the current row.
+The distance from the current row is given as an expression either `PRECEDING` or `FOLLOWING` the current row in the order specified by the `ORDER BY` clause in the `OVER` specification.
 This distance can either be specified as an integral number of `ROWS`
 or as a `RANGE` delta expression.
 For a `RANGE` specification, there must  be only one ordering expression,
