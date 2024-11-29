@@ -106,8 +106,8 @@ LOAD {{ page.extension.name }};
 | lsr                | table         |             |         |         |
 | path_exists        | scalar        |             |         |         |
 | path_type          | scalar        |             |         |         |
-| pwd                | scalar        |             |         |         |
 | pwd                | pragma        |             |         |         |
+| pwd                | scalar        |             |         |         |
 
 
 
