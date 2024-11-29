@@ -18,7 +18,7 @@ where we showcase [friendly SQL features]({% link docs/sql/dialect/friendly_sql.
 | [Exclude columns with pattern matching](#exclude-columns-with-pattern-matching) | `EXCLUDE` or `COLUMNS(...)` and `NOT SIMILAR TO` |
 | [Rename columns with pattern matching](#exclude-columns-with-pattern-matching) | `COLUMNS(...) AS ...` |
 | [Loading with globbing](#loading-with-globbing) | Read files with the same schema using globbing |
-| [Reording Parquet files](#reordering-parquet-files) | `COPY (...) TO`  |
+| [Reording Parquet files](#reordering-parquet-files) | `COPY (FROM ... ORDER BY ...) TO ...` |
 | [Hive partitioning](#hive-partitioning) | `hive_partitioning = true`  |
 
 ## Dataset
@@ -154,7 +154,6 @@ FROM (
 ORDER BY service_company;
 ```
 
-```text
 | Service_Company |
 |-----------------|
 | Arriva          |
@@ -163,7 +162,6 @@ ORDER BY service_company;
 | DB              |
 | Eu Sleeper      |
 | ...             |
-```
 
 > The returned column name preserves its original cases even though we used lowercase letters in the query.
 
@@ -287,7 +285,10 @@ We can now run the query on the Hive partitioned data set by passing the `hive_p
 
 ```sql
 SELECT avg(Stop_Arrival_delay)
-FROM read_parquet('services-parquet-hive/**/*.parquet', hive_partitioning = true)
+FROM read_parquet(
+         'services-parquet-hive/**/*.parquet',
+         hive_partitioning = true
+     )
 WHERE Service_Company = 'NS'
   AND Service_Type = 'Intercity direct'
   AND Stop_Departure_time IS NULL;
@@ -314,16 +315,16 @@ resulting in execution times around 150 milliseconds, more than 10× faster comp
 If all these formats and results got your head spinning, no worries.
 We got your covered with this summary table:
 
-| Format                      | Query runtime (ms) |
-|-----------------------------|-------------------:|
-| DuckDB's own storage format |                 35 |
-| CSV (vanilla)               |               1800 |
-| CSV (Hive-partitioned)      |                150 |
-| Parquet (vanilla)           |                 90 |
-| Parquet (reordered)         |                 35 |
-| Parquet (Hive-partitioned)  |                 20 |
+| Format                     | Query runtime (ms) |
+|----------------------------|-------------------:|
+| DuckDB file format         |                 35 |
+| CSV (vanilla)              |               1800 |
+| CSV (Hive-partitioned)     |                150 |
+| Parquet (vanilla)          |                 90 |
+| Parquet (reordered)        |                 35 |
+| Parquet (Hive-partitioned) |                 20 |
 
-Oh, and we forgot to report the query result. The average delay of Intercity Direct trains is 3 minutes!
+Oh, and we forgot to report the result. The average delay of Intercity Direct trains is 3 minutes!
 
 ## Closing Thoughts
 
