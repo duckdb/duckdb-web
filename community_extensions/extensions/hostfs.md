@@ -60,8 +60,8 @@ docs:
     For more information, please see the [HostFS documentation](https://github.com/gropaul/hostFS).
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 193
-extension_download_count_pretty: 193
+extension_download_count: 203
+extension_download_count_pretty: 203
 image: '/images/community_extensions/social_preview/preview_community_extension_hostfs.png'
 layout: community_extension_doc
 ---
@@ -90,8 +90,8 @@ LOAD {{ page.extension.name }};
 |   function_name    | function_type | description | comment | example |
 |--------------------|---------------|-------------|---------|---------|
 | absolute_path      | scalar        |             |         |         |
-| cd                 | pragma        |             |         |         |
 | cd                 | table         |             |         |         |
+| cd                 | pragma        |             |         |         |
 | file_extension     | scalar        |             |         |         |
 | file_last_modified | scalar        |             |         |         |
 | file_name          | scalar        |             |         |         |
@@ -106,8 +106,8 @@ LOAD {{ page.extension.name }};
 | lsr                | table         |             |         |         |
 | path_exists        | scalar        |             |         |         |
 | path_type          | scalar        |             |         |         |
-| pwd                | scalar        |             |         |         |
 | pwd                | pragma        |             |         |         |
+| pwd                | scalar        |             |         |         |
 
 
 
