@@ -50,7 +50,9 @@ The following clauses guarantee that the original row order is preserved:
 * `SELECT`
 * `UNION ALL`
 * `WHERE`
-* `row_number() OVER ()` (this allows turning the original row order into an explicit column that can be referenced in the operations below that don't preserve row order by default)
+* Window functions with an empty `OVER` clause
+
+> Tip `row_number() OVER ()` allows turning the original row order into an explicit column that can be referenced in the operations that don't preserve row order by default.
 
 The following operations **do not** guarantee that the row order is preserved:
 
