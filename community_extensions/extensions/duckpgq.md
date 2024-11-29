@@ -111,14 +111,14 @@ LOAD {{ page.extension.name }};
 | iterativelength              | scalar        |             |         |         |
 | iterativelength2             | scalar        |             |         |         |
 | iterativelengthbidirectional | scalar        |             |         |         |
-| local_clustering_coefficient | scalar        |             |         |         |
 | local_clustering_coefficient | table         |             |         |         |
-| pagerank                     | scalar        |             |         |         |
+| local_clustering_coefficient | scalar        |             |         |         |
 | pagerank                     | table         |             |         |         |
+| pagerank                     | scalar        |             |         |         |
 | reachability                 | scalar        |             |         |         |
 | shortestpath                 | scalar        |             |         |         |
-| weakly_connected_component   | table         |             |         |         |
 | weakly_connected_component   | scalar        |             |         |         |
+| weakly_connected_component   | table         |             |         |         |
 
 
 
