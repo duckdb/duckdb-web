@@ -85,9 +85,9 @@ FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 
 ### Selecting Metadata versions
 
-By default, the `iceberg` extension will look for a `version-hint.text` file to identify the proper metadata version to use. This can be overridedden by explicitly supplying a version number via the `version` parameter to iceberg table functions. By default, this will look for both `v{version}.metadata.json` and `{version}.metadata.json files, or `v{verison}.gz.metadata.json` and `{version}.gz.metadata.json` when `metadata_compression_codec='gzip'`. Other compression codecs are not supported.
+By default, the `iceberg` extension will look for a `version-hint.text` file to identify the proper metadata version to use. This can be overridden by explicitly supplying a version number via the `version` parameter to iceberg table functions. By default, this will look for both `v{version}.metadata.json` and `{version}.metadata.json files, or `v{verison}.gz.metadata.json` and `{version}.gz.metadata.json` when `metadata_compression_codec='gzip'`. Other compression codecs are not supported.
 
-Additionally, if any `.text` or .txt` file is provided as a version, it is opened and treated as a version-hint file. The `iceberg` extension will open this file and use the **entire contents** of the file as a provided version number.
+Additionally, if any `.text` or `.txt` file is provided as a version, it is opened and treated as a version-hint file. The `iceberg` extension will open this file and use the **entire contents** of the file as a provided version number.
 
 > The entire contents of the `version-hint.txt` file will be treated as a literal version name, with no encoding, escaping or trimming. This includes any whitespace, or unsafe characters  which will be explicitly passed formatted into filenames in the logic described below.
 
@@ -104,7 +104,7 @@ FROM iceberg_snapshots('data/iceberg/lineitem_iceberg', version='1', allow_moved
 
 ### Working with Alternative Metadata Naming Conventions
 
-The `iceberg` extension can handle different metadata naming convetions by specifying them as a comma-delimited list of format strings via the `version_name_format` parameter. Each format string must take two `%s` parameters. The first is location of the the version number in the metadata filename and the second is the location of the `metadata_compression_codec` extension. The behavior described above is provided by the default value of `"v%s%s.metadata.gz,%s%smetadata.gz`. In the event you had an alternatively named metadata file with such as `rev-2.metadata.json.gz`, the table could be read via the follow statement.
+The `iceberg` extension can handle different metadata naming convetions by specifying them as a comma-delimited list of format strings via the `version_name_format` parameter. Each format string must take two `%s` parameters. The first is the location of the version number in the metadata filename and the second is the location of the `metadata_compression_codec` extension. The behavior described above is provided by the default value of `"v%s%s.metadata.gz,%s%smetadata.gz`. In the event you had an alternatively named metadata file with such as `rev-2.metadata.json.gz`, the table could be read via the follow statement.
 
 ```sql
 SELECT *
