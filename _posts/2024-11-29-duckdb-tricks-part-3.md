@@ -18,7 +18,7 @@ where we showcase [friendly SQL features]({% link docs/sql/dialect/friendly_sql.
 | [Exclude columns with pattern matching](#exclude-columns-with-pattern-matching) | `EXCLUDE` or `COLUMNS(...)` and `NOT SIMILAR TO` |
 | [Rename columns with pattern matching](#exclude-columns-with-pattern-matching) | `COLUMNS(...) AS ...` |
 | [Loading with globbing](#loading-with-globbing) | Read files with the same schema using globbing |
-| [Reording Parquet files](#reordering-parquet-files) | `COPY (...) TO`  |
+| [Reording Parquet files](#reordering-parquet-files) | `COPY (FROM ... ORDER BY ...) TO ...` |
 | [Hive partitioning](#hive-partitioning) | `hive_partitioning = true`  |
 
 ## Dataset
