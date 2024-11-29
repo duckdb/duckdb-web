@@ -15,10 +15,10 @@ where we showcase [friendly SQL features]({% link docs/sql/dialect/friendly_sql.
 
 | Operation | SQL instructions |
 |-----------|------------------|
-| [Exclude columns with pattern matching](#exclude-columns-with-pattern-matching) | `EXCLUDE` or `COLUMNS(...)` and `NOT SIMILAR TO` |
-| [Rename columns with pattern matching](#exclude-columns-with-pattern-matching) | `COLUMNS(...) AS ...` |
+| [Excluding columns from a table](#excluding-columns-from-a-table) | `EXCLUDE` or `COLUMNS(…)` and `NOT SIMILAR TO` |
+| [Renaming columns with pattern matching](#renaming-columns-with-pattern-matching) | `COLUMNS(…) AS …` |
 | [Loading with globbing](#loading-with-globbing) | Read files with the same schema using globbing |
-| [Reording Parquet files](#reordering-parquet-files) | `COPY (FROM ... ORDER BY ...) TO ...` |
+| [Reordering Parquet files](#reordering-parquet-files) | `COPY (FROM … ORDER BY …) TO …` |
 | [Hive partitioning](#hive-partitioning) | `hive_partitioning = true`  |
 
 ## Dataset
@@ -33,7 +33,7 @@ curl https://blobs.duckdb.org/data/services-2024-01-to-10.tar.zst \
     | tar -xv --use-compress-program=unzstd
 ```
 
-## Exclude Columns with Pattern Matching
+## Excluding Columns from a Table
 
 Before creating a table, let's look at the data in the CSV files.
 We pick the CSV file for August and inspect it with the [`DESCRIBE` statement]({% link docs/guides/meta/describe.md %}).
@@ -51,7 +51,7 @@ The result is a table with the column names and the column types.
 | Service:Type                 | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | Service:Company              | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | Service:Train number         | BIGINT      | YES  | NULL | NULL    | NULL  |
-| ...                          | ...         | ...  | ...  | ...     | ...   |
+| …                          | …         | …  | …  | …     | …   |
 
 Now, let's use [`SUMMARIZE`]({% link docs/guides/meta/summarize.md %}) to inspect some statistics about the columns.
 
@@ -85,9 +85,9 @@ In both cases, the resulting table will contain the 5 remaining statistical colu
 | Service:Type                 | VARCHAR     | 20            | NULL                | NULL               | 1846574 | 0.00            |
 | Service:Company              | VARCHAR     | 12            | NULL                | NULL               | 1846574 | 0.00            |
 | Service:Train number         | BIGINT      | 17264         | 57781.81688196628   | 186353.76365744913 | 1846574 | 0.00            |
-| ...                          | ...         | ...           | ...                 | ...                | ...     | ...             |
+| …                          | …         | …           | …                 | …                | …     | …             |
 
-## Rename Columns with Pattern Matching
+## Renaming Columns with Pattern Matching
 
 Upon inspecting the columns, we see that their names contain spaces and semicolons (`:`).
 These special characters makes writing queries a bit tedious as they necessitate quoting column names with double quotes.
@@ -119,7 +119,7 @@ Add `DESCRIBE` at the beginning of the query and we can see the renamed columns:
 | Service_Type                 | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | Service_Company              | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | Service_Train_number         | BIGINT      | YES  | NULL | NULL    | NULL  |
-| ...                          | ...         | ...  | ...  | ...     | ...   |
+| …                          | …         | …  | …  | …     | …   |
 
 Let's break down the query starting with the first `COLUMNS` expression:
 
@@ -127,8 +127,8 @@ Let's break down the query starting with the first `COLUMNS` expression:
 SELECT COLUMNS('(\w*)\W*(\w*)\W*(\w*)') AS "\1_\2_\3"
 ```
 
-Here, we use regular expression with `(\w*)` groups that capture 0...n word characters (`[0-9A-Za-z_]`).
-Meanwhile, the expression `\W*` captures 0...n non-word characters (`[^0-9A-Za-z_]`).
+Here, we use regular expression with `(\w*)` groups that capture 0…n word characters (`[0-9A-Za-z_]`).
+Meanwhile, the expression `\W*` captures 0…n non-word characters (`[^0-9A-Za-z_]`).
 In the alias part we refer to the capture group `i` with `\i` so `"\1_\2_\3"` means that we only keep the word characters and separate their groups with underscores (`_`).
 However, because some column names contain words separated by a space, while others don't, after this `SELECT` statement we get column names with a trailing underscore (`_`), 
 e.g., `Service_Date_`.
@@ -161,7 +161,7 @@ ORDER BY service_company;
 | Breng           |
 | DB              |
 | Eu Sleeper      |
-| ...             |
+| …             |
 
 > The returned column name preserves its original cases even though we used lowercase letters in the query.
 
@@ -178,7 +178,7 @@ CREATE OR REPLACE TABLE services AS
     );
 ```
 
-In the inner `FROM` clause, we use the [`*` glob syntax]({% link docs/sql/functions/pattern_matching.md %}#globbing) to match all files
+In the inner `FROM` clause, we use the [`*` glob syntax]({% link docs/sql/functions/pattern_matching.md %}#globbing) to match all files.
 DuckDB automatically detects that all files have the same schema and unions them together.
 We have now a table with all the data from January to October, amounting to almost 20 million rows.
 
@@ -278,7 +278,7 @@ services-parquet-hive
 ├── Service_Company=Blauwnet
 │   ├── Service_Type=Intercity
 │   │   └── data_0.parquet
-...
+…
 ```
 
 We can now run the query on the Hive partitioned data set by passing the `hive_partitioning = true` flag:
