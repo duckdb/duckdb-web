@@ -23,7 +23,7 @@ where we showcase [friendly SQL features]({% link docs/sql/dialect/friendly_sql.
 
 ## Dataset
 
-We'll use a subset of the [Dutch railway services dataset](https://www.rijdendetreinen.nl/en/open-data/train-archive), which was a subject of a [blog post earlier this year]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}).
+We'll use a subset of the [Dutch railway services dataset](https://www.rijdendetreinen.nl/en/open-data/train-archive), which was already featured in a [blog post earlier this year]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}).
 This time, we'll use the CSV files between January and October 2024: [`services-2024-01-to-10.tar.zst`](https://blobs.duckdb.org/data/railway/services-2024-01-to-10.tar.zst).
 
 If you would like to follow the examples, you can download and decompress the dataset with the following command:
