@@ -32,6 +32,7 @@ they are always available.
 | [`isinf(timestamptz)`](#isinftimestamptz) | Returns true if the timestamp with time zone is infinite, false otherwise. |
 | [`least(timestamptz, timestamptz)`](#leasttimestamptz-timestamptz) | The earlier of two timestamps. |
 | [`now()`](#now) | Current date and time (start of current transaction). |
+| [`to_timestamp(double)`](#to_timestampdouble) | Converts seconds since the epoch to a timestamp with time zone. |
 | [`transaction_timestamp()`](#transaction_timestamp) | Current date and time (start of current transaction). |
 
 #### `current_timestamp`
@@ -89,6 +90,14 @@ they are always available.
 | **Description** | Current date and time (start of current transaction). |
 | **Example** | `now()` |
 | **Result** | `2022-10-08 12:44:46.122-07` |
+
+#### `to_timestamp(double)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts seconds since the epoch to a timestamp with time zone. |
+| **Example** | `to_timestamp(1284352323.5)` |
+| **Result** | `2010-09-13 04:32:03.5+00` |
 
 #### `transaction_timestamp()`
 
