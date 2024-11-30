@@ -17,7 +17,7 @@ The functions below are difficult to categorize into specific function types and
 | [`checkpoint(database)`](#checkpointdatabase) | Synchronize WAL with file for (optional) database without interrupting transactions. |
 | [`coalesce(expr, ...)`](#coalesceexpr-) | Return the first expression that evaluates to a non-`NULL` value. Accepts 1 or more parameters. Each expression can be a column, literal value, function result, or many others. |
 | [`constant_or_null(arg1, arg2)`](#constant_or_nullarg1-arg2) | If `arg2` is `NULL`, return `NULL`. Otherwise, return `arg1`. |
-| [`count_if(x)`](#count_ifx) | Returns 1 if `x` is `true` or a non-zero number. |
+| [`count_if(x)`](#count_ifx) | Aggregate function; rows contribute 1 if `x` is `true` or a non-zero number, else 0. |
 | [`current_catalog()`](#current_catalog) | Return the name of the currently active catalog. Default is memory. |
 | [`current_schema()`](#current_schema) | Return the name of the currently active schema. Default is main. |
 | [`current_schemas(boolean)`](#current_schemasboolean) | Return list of schemas. Pass a parameter of `true` to include implicit schemas. |
@@ -86,7 +86,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns 1 if `x` is `true` or a non-zero number. |
+| **Description** | Aggregate function; rows contribute 1 if `x` is `true` or a non-zero number, else 0. |
 | **Example** | `count_if(42)` |
 | **Result** | 1 |
 
@@ -211,7 +211,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the MD5 hash of the `string` as a `BIGINT`. |
+| **Description** | Returns the lower 8 bytes of the MD5 hash of `string` as a `BIGINT`. |
 | **Example** | `md5_number_lower('123')` |
 | **Result** | `8091599832034528150` |
 
@@ -219,7 +219,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the MD5 hash of the `string` as a `BIGINT`. |
+| **Description** | Returns the higher 8 bytes of the MD5 hash of `string` as a `BIGINT`. |
 | **Example** | `md5_number_higher('123')` |
 | **Result** | `6559309979213966368` |
 
@@ -247,27 +247,27 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `pg_typeof('abc')` |
 | **Result** | `varchar` |
 
-#### `query(`*`query_string_literal`*`)`
+#### `query(query_string_literal)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Table function that parses and executes the query defined in *`query_string_literal`*. Only literal strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
+| **Description** | Table function that parses and executes the query defined in `query_string_literal`. Only literal strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
 | **Example** | `query('SELECT 42 AS x')` |
 | **Result** | `42` |
 
-#### `query_table(`*`tbl_name`*`)`
+#### `query_table(tbl_name)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Table function that returns the table given in *`tbl_name`*. |
-| **Example** | `query(t1)` |
+| **Description** | Table function that returns the table given in `tbl_name`. |
+| **Example** | `query('t1')` |
 | **Result** | (the rows of `t1`) |
 
-#### `query_table(`*`tbl_names`*`, [`*`by_name`*`])`
+#### `query_table(tbl_names, [by_name])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Table function that returns the union of tables given in *`tbl_names`*. If the optional *`by_name`* parameter is set to `true`, it uses [`UNION ALL BY NAME`](../../sql/query_syntax/setops#union-all-by-name) semantics. |
+| **Description** | Table function that returns the union of tables given in `tbl_names`. If the optional `by_name` parameter is set to `true`, it uses [`UNION ALL BY NAME`](../../sql/query_syntax/setops#union-all-by-name) semantics. |
 | **Example** | `query(['t1', 't2'])` |
 | **Result** | (the union of the two tables) |
 
