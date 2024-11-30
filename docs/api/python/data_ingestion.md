@@ -127,7 +127,9 @@ duckdb.sql("SELECT * FROM read_json_auto('example.json')")
 
 DuckDB is automatically able to query certain Python variables by referring to their variable name (as if it was a table).
 These types include the following: Pandas DataFrame, Polars DataFrame, Polars LazyFrame, NumPy arrays, [relations]({% link docs/api/python/relational_api.md %}), and Arrow objects.
-Accessing these is made possible by [replacement scans]({% link docs/api/c/replacement_scans.md %}).
+
+Only variables that are visible to Python code at the location of the `duckdb.sql` call can be used in this manner. 
+Accessing these is made possible by [replacement scans]({% link docs/api/c/replacement_scans.md %}). To disable replacement scans entirely, use `SET python_enable_replacements=false`.
 
 DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides]({% link docs/guides/overview.md %}#python-client) for more examples.
 
