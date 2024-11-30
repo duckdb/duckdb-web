@@ -194,6 +194,16 @@ For instruction on reclaiming space, refer to the [“Reclaiming space” page](
 DuckDB does not support the [`to_date` PostgreSQL date formatting function](https://www.postgresql.org/docs/17/functions-formatting.html).
 Instead, please use the [`strptime` function]({% link docs/sql/functions/dateformat.md %}#strptime-examples).
 
+### current_date / current_time / current_timestamp
+
+DuckDB's `current_date` and `current_time` pseudo-columns return the current date (as `DATE`) and time (as `TIME`) in UTC, whereas PostgreSQL returns the current date (as `DATE`) in the configured local timezone and time as `TIMETZ`. For the current time in the configured timezone, still as regular `TIME`, DuckDB offers the function `current_localtime()`.
+
+Both DuckDB and PostgreSQL return `current_timestamp` as `TIMESTAMPTZ`. DuckDB additionally offers `current_localtimestamp()`, which returns the time in the configured timezone as `TIMESTAMP`.
+
+DuckDB does not currently offer `current_localdate()`; though this can be computed via `current_timestamp::DATE` or `current_localtimestamp()::DATE`.
+
+> See [the DuckDB blog entry on time zones](https://duckdb.org/2022/01/06/time-zones.html) for more information on timestamps and timezones and DuckDB's handling thereof.
+
 ## Resolution of Type Names in the Schema
 
 For [`CREATE TABLE` statements]({% link docs/sql/statements/create_table.md %}), DuckDB attempts to resolve type names in the schema where a table is created. For example:
