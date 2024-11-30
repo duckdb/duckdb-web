@@ -456,6 +456,8 @@ SELECT [4, 5, 6] AS l, [x FOR x, i IN l IF i != 2] filtered;
 |-----------|----------|
 | [4, 5, 6] | [4, 6]   |
 
+Under the hood, `[f(x) FOR x IN y IF g(x)]` is translated to `list_transform(list_filter(y, x -> f(x)), x -> f(x))`.
+
 ## Range Functions
 
 DuckDB offers two range functions, [`range(start, stop, step)`](#range) and [`generate_series(start, stop, step)`](#generate_series), and their variants with default arguments for `stop` and `step`. The two functions' behavior is different regarding their `stop` argument. This is documented below.
