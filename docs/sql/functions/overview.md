@@ -26,6 +26,12 @@ SELECT goose_name.replace('goose', 'duck') AS duck_name
 FROM unnest(['African goose', 'Faroese goose', 'Hungarian goose', 'Pomeranian goose']) breed(goose_name);
 ```
 
+> Tip To apply function chaining to a single value, use parentheses, e.g.:
+>
+> ```sql
+> SELECT ('hello world').replace(' ', '_');
+> ```
+
 ## Query Functions
 
 The `duckdb_functions()` table function shows the list of functions currently built into the system.
