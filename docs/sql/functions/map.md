@@ -73,7 +73,7 @@ title: Map Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of `element_at`. Return the value for a given key or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
+| **Description** | Return the value for a given key or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | **Example** | `map_extract(map([100, 5], [42, 43]), 100)` |
 | **Result** | `42` |
 | **Aliases** | `element_at(map, key)`, `map[key]` |
@@ -114,7 +114,7 @@ title: Map Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias for `element_at`. |
+| **Description** | Return the value for a given key or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | **Example** | `map([100, 5], ['a', 'b'])[100]` |
 | **Result** | `'a'` |
 | **Aliases** | `element_at(map, key)`, `map_extract(map, key)` |
