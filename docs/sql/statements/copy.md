@@ -200,7 +200,7 @@ Zero or more copy options may be provided as a part of the copy operation. The `
 
 Any option that is a Boolean can be enabled or disabled in multiple ways. You can write `true`, `ON`, or `1` to enable the option, and `false`, `OFF`, or `0` to disable it. The `BOOLEAN` value can also be omitted, e.g., by only passing `(HEADER)`, in which case `true` is assumed.
 
-The below options are applicable to all formats written with `COPY`.
+With few exceptions, the below options are applicable to all formats written with `COPY`.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
