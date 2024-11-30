@@ -14,7 +14,7 @@ Additionally, we recommend using the [Ninja build system](https://ninja-build.or
 
 Install Xcode and [Homebrew](https://brew.sh/). Then, install the required packages with:
 
-```bash
+```batch
 brew install git cmake ninja
 ```
 
@@ -24,19 +24,19 @@ Install the required packages with the package manager of your distribution.
 
 #### Ubuntu and Debian
 
-```bash
+```batch
 sudo apt-get update && sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
 #### Fedora, CentOS, and Red Hat
 
-```bash
+```batch
 sudo yum install -y git g++ cmake ninja-build openssl-devel
 ```
 
 #### Alpine Linux
 
-```bash
+```batch
 apk add g++ git make cmake ninja
 ```
 
@@ -47,7 +47,7 @@ There are no official binaries distributed for musl libc but DuckDB can be build
 
 Clone the DuckDB repository:
 
-```bash
+```batch
 git clone https://github.com/duckdb/duckdb
 ```
 
@@ -57,7 +57,7 @@ We recommend creating a full clone of the repository. Note that the directory us
 
 To build DuckDB, we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
 
-```bash
+```batch
 GEN=ninja make
 ```
 
@@ -65,7 +65,7 @@ GEN=ninja make
 
 Once the build finishes successfully, you can find the `duckdb` binary in the `build` directory:
 
-```bash
+```batch
 build/release/duckdb
 ```
 
@@ -73,13 +73,13 @@ build/release/duckdb
 
 For testing, it can be useful to build DuckDB with statically linked core extensions. To do so, run:
 
-```bash
+```batch
 CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
 ```
 
 This option also accepts out-of-tree extensions:
 
-```bash
+```batch
 CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch;delta' GEN=ninja make
 ```
 
@@ -132,13 +132,13 @@ Once the build finishes successfully, you can find the `duckdb.exe` binary in th
 
 DuckDB runs on Android. To build the command line client in the [Termux application](https://termux.dev/), install the following packages:
 
-```bash
+```batch
 pkg install -y git ninja clang cmake python3
 ```
 
 Clone the DuckDB repository and build it as follows:
 
-```bash
+```batch
 mkdir build
 cd build
 export CXXFLAGS="-Wno-missing-template-arg-list-after-template-kw"
@@ -154,7 +154,7 @@ cmake --build . --config Release
 
 Note that you can also use the Python client:
 
-```bash
+```batch
 pip install --pre --upgrade duckdb
 ```
 
@@ -181,6 +181,6 @@ Ninja parallelizes the build, which can cause out-of-memory issues on systems wi
 These issues have also been reported to occur on Alpine Linux, especially on machines with limited resources.
 In these cases, avoid using Ninja by setting the Makefile generator to empty (`GEN=`):
 
-```bash
+```batch
 GEN= make
 ```
