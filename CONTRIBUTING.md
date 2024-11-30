@@ -105,7 +105,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
    Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
    ```
    ````
-* To specify placeholders (or template-style code), use the left angle and right angle characters, `⟨` and `⟩`
+* To specify placeholders (or template-style code), use the left angle and right angle characters, `⟨` and `⟩`.
      * For example: `SELECT * FROM ⟨your_table_name⟩`.
      * These characters are known in LaTeX code as `\langle` and `\rangle`.
      * *Avoid* using artihmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
