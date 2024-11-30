@@ -8,17 +8,17 @@ title: Map Functions
 | Name | Description |
 |:--|:-------|
 | [`cardinality(map)`](#cardinalitymap) | Return the size of the map (or the number of entries in the map). |
-| [`element_at(map, key)`](#element_atmap-key) | Return the value for a given key or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
+| [`element_at(map, key)`](#element_atmap-key) | Return the value for a given key, or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | [`map_contains(map, key)`](#map_containsmap-key) | Checks if a map contains a given key. |
 | [`map_contains_entry(map, key, value)`](#map_contains_entrymap-key-value) | Check if a map contains a given key-value pair. |
 | [`map_contains_value(map, value)`](#map_contains_valuemap-value) | Checks if a map contains a given value. |
 | [`map_entries(map)`](#map_entriesmap) | Return a list of struct(k, v) for each key-value pair in the map. |
-| [`map_extract(map, key)`](#map_extractmap-key) | Return the value for a given key or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
+| [`map_extract(map, key)`](#map_extractmap-key) | Return the value for a given key, or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | [`map_from_entries(STRUCT(k, v)[])`](#map_from_entriesstructk-v) | Returns a map created from the entries of the array. |
 | [`map_keys(map)`](#map_keysmap) | Return a list of all keys in the map. |
 | [`map_values(map)`](#map_valuesmap) | Return a list of all values in the map. |
 | [`map()`](#map) | Returns an empty map. |
-| [`map[entry]`](#mapentry) | Return the value for a given key or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
+| [`map[entry]`](#mapentry) | Return the value for a given key, or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 
 #### `cardinality(map)`
 
@@ -32,7 +32,7 @@ title: Map Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return the value for a given key or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
+| **Description** | Return the value for a given key, or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | **Example** | `element_at(map([100, 5], [42, 43]), 100)` |
 | **Result** | `42` |
 | **Aliases** | `map_extract(map, key)`, `map[key]` |
@@ -73,7 +73,7 @@ title: Map Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return the value for a given key or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
+| **Description** | Return the value for a given key, or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | **Example** | `map_extract(map([100, 5], [42, 43]), 100)` |
 | **Result** | `42` |
 | **Aliases** | `element_at(map, key)`, `map[key]` |
@@ -114,7 +114,7 @@ title: Map Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return the value for a given key or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
+| **Description** | Return the value for a given key, or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | **Example** | `map([100, 5], ['a', 'b'])[100]` |
 | **Result** | `'a'` |
 | **Aliases** | `element_at(map, key)`, `map_extract(map, key)` |
