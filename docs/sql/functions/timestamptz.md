@@ -8,11 +8,12 @@ title: Timestamp with Time Zone Functions
 This section describes functions and operators for examining and manipulating [`TIMESTAMP WITH TIME ZONE`
 (or `TIMESTAMPTZ`) values]({% link docs/sql/data_types/timestamp.md %}).
 
-Despite the name, these values do not store a time zone – just an instant like `TIMESTAMP`.
-Instead, they request that the instant be binned and formatted using the current time zone.
+See also the related [`TIMESTAMP` functions]({% link docs/sql/functions/timestamptz.md %}).
 
-Time zone support is not built in but can be provided by an extension,
-such as the [ICU extension]({% link docs/extensions/icu.md %}) that ships with DuckDB.
+Despite the name, these values do not store a time zone – just an instant like `TIMESTAMP`.
+Instead, they request that the instant be binned and formatted using the current time zone, see the [blog post on DuckDB's timezone support](https://duckdb.org/2022/01/06/time-zones.html) for more information.
+
+Time zone support is provided by the built-in [ICU extension]({% link docs/extensions/icu.md %}).
 
 In the examples below, the current time zone is presumed to be `America/Los_Angeles`
 using the Gregorian calendar.
@@ -32,6 +33,7 @@ they are always available.
 | [`isinf(timestamptz)`](#isinftimestamptz) | Returns true if the timestamp with time zone is infinite, false otherwise. |
 | [`least(timestamptz, timestamptz)`](#leasttimestamptz-timestamptz) | The earlier of two timestamps. |
 | [`now()`](#now) | Current date and time (start of current transaction). |
+| [`to_timestamp(double)`](#to_timestampdouble) | Converts seconds since the epoch to a timestamp with time zone. |
 | [`transaction_timestamp()`](#transaction_timestamp) | Current date and time (start of current transaction). |
 
 #### `current_timestamp`
@@ -89,6 +91,14 @@ they are always available.
 | **Description** | Current date and time (start of current transaction). |
 | **Example** | `now()` |
 | **Result** | `2022-10-08 12:44:46.122-07` |
+
+#### `to_timestamp(double)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts seconds since the epoch to a timestamp with time zone. |
+| **Example** | `to_timestamp(1284352323.5)` |
+| **Result** | `2010-09-13 04:32:03.5+00` |
 
 #### `transaction_timestamp()`
 
