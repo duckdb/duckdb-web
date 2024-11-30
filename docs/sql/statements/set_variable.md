@@ -39,22 +39,22 @@ SET VARIABLE my_string = 'Hello world';
 SET VARIABLE my_map = MAP {'k1': 10, 'k2': 20};
 ```
 
-Variables can not only be set to constants:
+Variables can also be assigned to results of queries:
 
 ```sql
 -- write some CSV files
-COPY (SELECT 42 AS a) TO 'test.csv';
+COPY (SELECT 42 AS a) TO 'test1.csv';
 COPY (SELECT 84 AS a) TO 'test2.csv';
 
 -- add a list of CSV files to a table
 CREATE TABLE csv_files(file VARCHAR);
-INSERT INTO csv_files VALUES ('test.csv'), ('test2.csv');
+INSERT INTO csv_files VALUES ('test1.csv'), ('test2.csv');
 
 -- initialize a variable with the list of csv files
 SET VARIABLE list_of_files = (SELECT LIST(file) FROM csv_files);
 
 -- read the CSV files
-D SELECT * FROM read_csv(getvariable('list_of_files'), filename := True);
+SELECT * FROM read_csv(getvariable('list_of_files'), filename := True);
 ```
 
 | a    | filename    |
