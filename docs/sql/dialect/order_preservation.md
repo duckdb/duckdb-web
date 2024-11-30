@@ -52,7 +52,7 @@ The following clauses guarantee that the original row order is preserved:
 * `WHERE`
 * Window functions with an empty `OVER` clause
 
-> Tip `row_number() OVER ()` allows turning the original row order into an explicit column that can be referenced in the operations that don't preserve row order by default.
+> Tip `row_number() OVER ()` allows turning the original row order into an explicit column that can be referenced in the operations that don't preserve row order by default. On materialized tables, the `rowid` pseudo-column can be used to the same effect.
 
 The following operations **do not** guarantee that the row order is preserved:
 
