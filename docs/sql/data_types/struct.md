@@ -93,7 +93,7 @@ Bracket notation may also be used. Note that this uses single quotes (`'`) since
 SELECT a['x space'] FROM (SELECT {'x space': 1, 'y': 2, 'z': 3} AS a);
 ```
 
-The struct_extract function is also equivalent. This returns 1:
+The `struct_extract` function is also equivalent. This returns 1:
 
 ```sql
 SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3}, 'x space');
