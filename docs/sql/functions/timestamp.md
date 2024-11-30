@@ -6,6 +6,8 @@ title: Timestamp Functions
 <!-- markdownlint-disable MD001 -->
 
 This section describes functions and operators for examining and manipulating [`TIMESTAMP` values]({% link docs/sql/data_types/timestamp.md %}).
+See also the related [`TIMESTAMPTZ` functions]({% link docs/sql/functions/timestamptz.md %}).
+
 
 ## Timestamp Operators
 
@@ -28,7 +30,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`age(timestamp, timestamp)`](#agetimestamp-timestamp) | Subtract arguments, resulting in the time difference between the two timestamps. |
 | [`age(timestamp)`](#agetimestamp) | Subtract from current_date. |
 | [`century(timestamp)`](#centurytimestamp) | Extracts the century of a timestamp. |
-| [`current_timestamp`](#current_timestamp) | Returns the current timestamp (at the start of the transaction). |
+| [`current_localtimestamp()`](#current_localtimestamp) | Returns the current timestamp (at the start of the transaction). |
 | [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition]({% link docs/sql/functions/datepart.md %}) boundaries between the timestamps. |
 | [`date_part([part, ...], timestamp)`](#date_partpart--timestamp) | Get the listed [subfields]({% link docs/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
 | [`date_part(part, timestamp)`](#date_partpart-timestamp) | Get [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). |
@@ -60,7 +62,6 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`strptime(text, format)`](#strptimetext-format) | Converts the string `text` to timestamp according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). Throws an error on failure. To return `NULL` on failure, use [`try_strptime`](#try_strptimetext-format). |
 | [`time_bucket(bucket_width, timestamp[, offset])`](#time_bucketbucket_width-timestamp-offset) | Truncate `timestamp` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
 | [`time_bucket(bucket_width, timestamp[, origin])`](#time_bucketbucket_width-timestamp-origin) | Truncate `timestamp` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` timestamp. `origin` defaults to 2000-01-03 00:00:00 for buckets that don't include a month or year interval, and to 2000-01-01 00:00:00 for month and year buckets. |
-| [`to_timestamp(double)`](#to_timestampdouble) | Converts seconds since the epoch to a timestamp with time zone. |
 | [`try_strptime(text, format-list)`](#try_strptimetext-format-list) | Converts the string `text` to timestamp applying the [format strings]({% link docs/sql/functions/dateformat.md %}) in the list until one succeeds. Returns `NULL` on failure. |
 | [`try_strptime(text, format)`](#try_strptimetext-format) | Converts the string `text` to timestamp according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). Returns `NULL` on failure. |
 
@@ -94,13 +95,13 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Example** | `century(TIMESTAMP '1992-03-22')` |
 | **Result** | `20` |
 
-#### `current_timestamp`
+#### `current_localtimestamp()`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the current timestamp with time zone (at the start of the transaction). |
-| **Example** | `current_timestamp` |
-| **Result** | `2024-04-16T09:14:36.098Z` |
+| **Example** | `current_localimestamp()` |
+| **Result** | `2024-11-30 13:28:48.895` |
 
 #### `date_diff(part, startdate, enddate)`
 
@@ -349,14 +350,6 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Description** | Truncate `timestamp` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` timestamp. `origin` defaults to 2000-01-03 00:00:00 for buckets that don't include a month or year interval, and to 2000-01-01 00:00:00 for month and year buckets. |
 | **Example** | `time_bucket(INTERVAL '2 weeks', TIMESTAMP '1992-04-20 15:26:00', TIMESTAMP '1992-04-01 00:00:00')` |
 | **Result** | `1992-04-15 00:00:00` |
-
-#### `to_timestamp(double)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Converts seconds since the epoch to a timestamp with time zone. |
-| **Example** | `to_timestamp(1284352323.5)` |
-| **Result** | `2010-09-13 04:32:03.5+00` |
 
 #### `try_strptime(text, format-list)`
 
