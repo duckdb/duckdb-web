@@ -1,11 +1,11 @@
 ---
 layout: docu
 title: Timestamp Types
-blurb: A timestamp specifies a combination of a date (year, month, day) and a time (hour, minute, second, microsecond).
+blurb: A timestamp specifies a combination of a date (year, month, day) and a time (hour, minute, second, microsecond or nanosecond).
 ---
 
 Timestamps represent points in absolute time, usually called *instants*.
-DuckDB represents instants as the number of microseconds (µs) since `1970-01-01 00:00:00+00`.
+DuckDB represents instants as the number of microseconds (µs) (or nanoseconds, for `TIMESTAMP_NS`) since `1970-01-01 00:00:00+00`.
 
 ## Timestamp Types
 
@@ -15,18 +15,16 @@ DuckDB represents instants as the number of microseconds (µs) since `1970-01-01
 | `TIMESTAMP`    | `DATETIME`                 | timestamp with microsecond precision (ignores time zone) |
 | `TIMESTAMP_MS` |                            | timestamp with millisecond precision (ignores time zone) |
 | `TIMESTAMP_S`  |                            | timestamp with second precision (ignores time zone)      |
-| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE` | timestamp (uses time zone)                               |
+| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE` | timestamp with microsecond precision (uses time zone)                               |
 
-A timestamp specifies a combination of [`DATE`]({% link docs/sql/data_types/date.md %}) (year, month, day) and a [`TIME`]({% link docs/sql/data_types/time.md %}) (hour, minute, second, microsecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]`). Decimal places beyond the targeted sub-second precision are ignored.
-
-> Warning When defining timestamps using a `TIMESTAMP_NS` literal, the decimal places beyond _microseconds_ are ignored. Note that the `TIMESTAMP_NS` type is able to hold nanoseconds when created e.g., via the ingestion of Parquet files.
+A timestamp specifies a combination of [`DATE`]({% link docs/sql/data_types/date.md %}) (year, month, day) and a [`TIME`]({% link docs/sql/data_types/time.md %}) (hour, minute, second, microsecond or nanosecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]` (three extra decimal places supported by `TIMESTAMP_NS`). Decimal places beyond the targeted sub-second precision are ignored.
 
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789';
 ```
 
 ```text
-1992-09-20 11:30:00.123456
+1992-09-20 11:30:00.123456789
 ```
 
 ```sql
