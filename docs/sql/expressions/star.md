@@ -69,9 +69,9 @@ SELECT * RENAME (col1 AS height, col2 AS width)
 FROM tbl;
 ```
 
-### Pattern matching
+### Column Filtering via Pattern Matching Operators
 
-`LIKE`, `GLOB`, `SIMILAR TO` and their variants described at [pattern matching operators](#../functions/pattern_matching) allow us to select columns by matching their names to patterns.
+The [pattern matching operators]({% link docs/sql/functions/pattern_matching.md %}) `LIKE`, `GLOB`, `SIMILAR TO` and their variants allow us to select columns by matching their names to patterns.
 
 ```sql
 SELECT * LIKE 'col%'
@@ -155,9 +155,9 @@ WHERE COLUMNS(*) > 1; -- equivalent to: x > 1 AND y > 1 AND z > 1
 |--:|--:|--:|
 | 2 | 3 | 4 |
 
-### Pattern Matching in a `COLUMNS` Expression
+### Regular Expressions in a `COLUMNS` Expression
 
-`COLUMNS` expressions don't currently support the pattern matching operators, but they do supports regular expression matching simply passing a string constant in place of the star:
+`COLUMNS` expressions don't currently support the pattern matching operators, but they do supports regular expression matching by simply passing a string constant in place of the star:
 
 ```sql
 SELECT COLUMNS('(id|numbers?)') FROM numbers;
@@ -171,7 +171,7 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 | 2  | 20     |
 | 3  | NULL   |
 
-### Renaming Columns Using a `COLUMNS` Expression
+### Renaming Columns with Regular Expressions in a `COLUMNS` Expression
 
 The matches of capture groups in regular expressions can be used to rename matching columns.
 The capture groups are one-indexed; `\0` is the original column name.
