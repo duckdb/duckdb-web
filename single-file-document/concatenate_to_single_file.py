@@ -249,8 +249,8 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         of.write("\n")
 
 
-def add_to_documentation(docs_root, data, of):
-    chapter_json = [x for x in data["docsmenu"] if x["page"] == "Documentation"][0]
+def add_main_documentation(docs_root, menu, of):
+    chapter_json = [x for x in menu["docsmenu"] if x["page"] == "Documentation"][0]
     chapter_slug = chapter_json["slug"]
     main_level_pages = chapter_json["mainfolderitems"]
 
@@ -313,18 +313,14 @@ with open("../_config.yml") as config_file, open("metadata/metadata.yaml", "w") 
           ---
         """))
 
-docs_root = "../docs"
-
 # compile concatenated document
-with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.md", "w") as of:
-    data = json.load(menu_docs_file)
-
+with open(f"duckdb-docs.md", "w") as of:
     with open("cover-page.md") as cover_page_file:
         of.write(cover_page_file.read())
-        of.write("\n")
 
-    add_to_documentation(docs_root, data, of)
+    with open("../_data/menu_docs_dev.json") as menu_docs_file:
+        menu = json.load(menu_docs_file)
+        add_main_documentation("../docs", menu, of)
 
     with open("acknowledgments.md") as acknowledgments_file:
         of.write(acknowledgments_file.read())
-        of.write("\n")
