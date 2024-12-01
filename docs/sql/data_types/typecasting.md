@@ -12,11 +12,17 @@ Explicit typecasting is performed by using a `CAST` expression. For example, `CA
 
 ## Implicit Casting
 
-In many situations, the system will add casts by itself. This is called *implicit* casting. This happens for example when a function is called with an argument that does not match the type of the function, but can be casted to the desired type.
+When a function is called with an argument that does not match the type of the function, but can be casted to the desired type, the system will add an  *implicit* cast.
+
+Implicit casts can only be added for a number of type combinations, and is generally only possible when the cast cannot fail. For example, an implicit cast can be added from `INTEGER` to `DOUBLE` – but not from `DOUBLE` to `INTEGER`.
 
 Consider the function `sin(DOUBLE)`. This function takes as input argument a column of type `DOUBLE`, however, it can be called with an integer as well: `sin(1)`. The integer is converted into a double before being passed to the `sin` function.
 
-Implicit casts can only be added for a number of type combinations, and is generally only possible when the cast cannot fail. For example, an implicit cast can be added from `INTEGER` to `DOUBLE` – but not from `DOUBLE` to `INTEGER`.
+### Combination casting
+
+When values of different types need to be combined to an unspecified joint parent type, the system will perform implicit casts to an automatically selected parent type. The implicit casts performed in this situation are more lenient than regular implicit casts; for example, a `BOOL` value may be cast to `INT` (with `true` mapping to `1` and `false` to `0`) even though this is not possible for regular implicit casts.
+
+This *combination casting* occurs for comparisons (`==` / `<` / `>`), set operations (`UNION` / `EXCEPT` / `INTERSECT`), and nested type constructors (`list_value` / `[...]` / `MAP`).
 
 ## Casting Operations Matrix
 
