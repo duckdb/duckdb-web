@@ -73,7 +73,7 @@ FROM bigdata ORDER BY col DESC LIMIT 3;
 [**Pivot and Unpivot**](https://github.com/duckdb/duckdb/pull/6387). There are many shapes and sizes of data, and we do not always have control over the process in which data is generated. While SQL is well-suited for reshaping datasets, turning columns into rows or rows into columns is tedious in vanilla SQL. With this release, DuckDB introduces the `PIVOT` and `UNPIVOT` statements that allow reshaping data sets so that rows are turned into columns or vice versa. A key advantage of DuckDB's syntax is that the column names to pivot or unpivot can be automatically deduced. Here is a short example:
 
 ```sql
-CREATE TABLE sales(year INT, amount INT);
+CREATE TABLE sales(year INTEGER, amount INTEGER);
 INSERT INTO sales VALUES (2021, 42), (2022, 100), (2021, 42);
 PIVOT sales ON year USING sum(amount);
 ```

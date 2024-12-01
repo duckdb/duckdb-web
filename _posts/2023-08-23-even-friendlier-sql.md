@@ -373,7 +373,7 @@ Historically, databases are not well-suited for pivoting operations. However, Du
 For example, let’s take a look at some procurement forecast data just as the Earth-Romulan war was beginning:
 
 ```sql
-CREATE TABLE purchases (item VARCHAR, year INT, count INT);
+CREATE TABLE purchases (item VARCHAR, year INTEGER, count INTEGER);
 
 INSERT INTO purchases
     VALUES ('phasers', 2155, 1035),
@@ -569,7 +569,7 @@ SELECT 'First Contact';
 However, if a `UNION` type is used, each individual row retains its original data type. A `UNION` is defined using key-value pairs with the key as a name and the value as the data type. This also allows the specific data types to be pulled out as individual columns:
 ```sql
 CREATE TABLE movies (
-     movie UNION(num INT, name VARCHAR)
+     movie UNION(num INTEGER, name VARCHAR)
 );
 INSERT INTO movies VALUES
      ('The Motion Picture'), (2), (3), (4), (5), (6), ('First Contact');

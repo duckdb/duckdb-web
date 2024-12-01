@@ -200,14 +200,14 @@ We use the following queries from the benchmark to load the data:
 SET preserve_insertion_order = false;
 CREATE TABLE y (
     id1 VARCHAR, id2 VARCHAR, id3 VARCHAR,
-    id4 INT, id5 INT, id6 INT, v1 INT, v2 INT,
+    id4 INTEGER, id5 INTEGER, id6 INTEGER, v1 INTEGER, v2 INTEGER,
     v3 FLOAT);
 COPY y FROM 'G1_1e9_2e0_0_0.csv.zst' (FORMAT CSV, AUTO_DETECT true);
 CREATE TYPE id1ENUM AS ENUM (SELECT id1 FROM y);
 CREATE TYPE id2ENUM AS ENUM (SELECT id2 FROM y);
 CREATE TABLE x (
     id1 id1ENUM, id2 id2ENUM, id3 VARCHAR,
-    id4 INT, id5 INT, id6 INT, v1 INT, v2 INT,
+    id4 INTEGER, id5 INTEGER, id6 INTEGER, v1 INTEGER, v2 INTEGER,
     v3 FLOAT);
 INSERT INTO x (SELECT * FROM y);
 DROP TABLE IF EXISTS y;

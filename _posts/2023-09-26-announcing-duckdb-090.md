@@ -40,7 +40,7 @@ Below is a summary of those new features with examples, starting with a change i
 [**Struct Auto-Casting**](https://github.com/duckdb/duckdb/pull/8942). Previously the names of struct entries were ignored when determining auto-casting rules. As a result, struct field names could be silently renamed. Starting with this release, this will result in an error instead.
 
 ```sql
-CREATE TABLE structs(s STRUCT(i INT));
+CREATE TABLE structs(s STRUCT(i INTEGER));
 INSERT INTO structs VALUES ({'k': 42});
 ```
 
