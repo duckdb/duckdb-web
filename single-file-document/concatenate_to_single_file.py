@@ -191,6 +191,14 @@ def change_links(doc_body):
     return doc_body
 
 
+def cleanup_doc(doc_body):
+    doc_body = re.sub(r"<iframe.*</iframe>", "", doc_body)
+    doc_body = re.sub(r"{% include .*}", "", doc_body)
+    doc_body = doc_body.replace("{::nomarkdown}", "")
+    doc_body = doc_body.replace("{::/nomarkdown}", "")
+    return doc_body
+
+
 # add labels to sections within documents
 # e.g., the sql/statements/copy.md file's "Copy To" section gets the label {#sql:statements:copy::copy-to}
 def adjust_headers(doc_body, doc_header_label):
@@ -258,6 +266,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         doc_body = adjust_headers(doc_body, doc_header_label)
         doc_body = change_function_table_headers(doc_body)
         doc_body = change_links(doc_body)
+        doc_body = cleanup_doc(doc_body)
 
         # write to output
         of.write(doc_body)
@@ -326,6 +335,7 @@ def add_blog_posts(blog_root, of):
         doc_body = move_headers_down(doc_body)
         doc_body = adjust_links_in_doc_body(doc_body)
         doc_body = change_links(doc_body)
+        doc_body = cleanup_doc(doc_body)
 
         of.write(f"""## {doc_title}\n\n""")
         of.write(f"""**Publication date:** {doc_date}\n\n""")
