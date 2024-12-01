@@ -98,7 +98,7 @@ CREATE TABLE items AS
 FROM generate_series(1, 10_000) r(i);
 
 -- Collect the 5 closest items to each query embedding
-SELECT queries.id as id, list(inner_id) AS matches 
+SELECT queries.id AS id, list(inner_id) AS matches 
     FROM queries, LATERAL (
         SELECT
             items.id AS inner_id,

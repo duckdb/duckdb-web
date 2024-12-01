@@ -76,7 +76,7 @@ That's it, the function is then registered and ready to be called through SQL.
 con.execute("CREATE TABLE countries(country VARCHAR)")
 con.execute("INSERT INTO countries VALUES ('Brazil'), ('Germany'), ('Italy'), ('Argentina'), ('Uruguay'), ('France'), ('England'), ('Spain'), ('Netherlands')")
 # We can simply call the function through SQL, and even use the function return to eliminate the countries that never won a world cup
-con.sql("SELECT country, wc_titles(country) as world_cups from countries").fetchall()
+con.sql("SELECT country, wc_titles(country) AS world_cups FROM countries").fetchall()
 # [('Brazil', 5), ('Germany', 4), ('Italy', 4), ('Argentina', 2), ('Uruguay', 2), ('France', 2), ('England', 1), ('Spain', 1), ('Netherlands', None)]
 ```
 

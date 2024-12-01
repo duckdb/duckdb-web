@@ -142,7 +142,7 @@ INSERT INTO tbl2 FROM tbl1;
 ```sql
 CREATE TABLE obs(id INTEGER, val1 INTEGER, val2 INTEGER);
 INSERT INTO obs VALUES (1, 10, 100), (2, 20, NULL), (3, NULL, 300);
-SELECT min(COLUMNS(*)), count(*) from obs;
+SELECT min(COLUMNS(*)), count(*) FROM obs;
 ```
 ```text
 ┌─────────────┬───────────────┬───────────────┬──────────────┐
@@ -155,7 +155,7 @@ SELECT min(COLUMNS(*)), count(*) from obs;
 The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax]({% link docs/sql/query_syntax/select.md %}). In addition, the `COLUMNS` expression can take a regular expression as parameter:
 
 ```sql
-SELECT COLUMNS('val[0-9]+') from obs;
+SELECT COLUMNS('val[0-9]+') FROM obs;
 ```
 ```text
 ┌──────┬──────┐
