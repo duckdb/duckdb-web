@@ -1914,7 +1914,7 @@ function GenerateStarOptions(options) {
 					Keyword(")"),
 				]),
 				Sequence([
-					Optional(Keyword("NOT")),
+					Optional(Keyword("NOT"), "skip"),
 					Choice(0, [
 						Keyword("LIKE"),
 						Keyword("SIMILAR TO"),
@@ -1923,7 +1923,8 @@ function GenerateStarOptions(options) {
 					]),
 					Expression("pattern"),
 				]),
-			])
+			]),
+			"skip"
 		)	
 	]
 }
