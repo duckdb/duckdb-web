@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 import argparse
 import frontmatter
 import logging
+import glob
 
 
 # Function to convert a path (a link from in a Markdown document) to a label.
@@ -40,6 +41,17 @@ def replace_box_names(doc_body):
     doc_body = doc_body.replace("> Warning",      "> **Warning.**")
     doc_body = doc_body.replace("> Tip",          "> **Tip.**")
     doc_body = doc_body.replace("> Deprecated",   "> **Deprecated.**")
+    return doc_body
+
+
+def fix_language_tags_for_syntax_highlighting(doc_body):
+    # The Markdown pages use the additional language tags:
+    # - 'plsql' (to add the 'D' prompt to sql)
+    # - 'batch' (to remove the $ prompt from bash)
+    # We do not want explicit prompts in the single-file version of the documentation,
+    # so we unify these.
+    doc_body = doc_body.replace("```plsql", "```sql")
+    doc_body = doc_body.replace("```batch", "```bash")
     return doc_body
 
 
@@ -103,8 +115,11 @@ def adjust_links_in_doc_body(doc_body):
     # replace links to data sets to point to the website
     doc_body = doc_body.replace("](/data/", "](https://duckdb.org/data/")
 
-    # use relative path for images
+    # use relative path for images in Markdown
     doc_body = doc_body.replace("](/images", "](../images")
+    # replace <img> tags with Markdown
+    doc_body = doc_body.replace('"/images', '"../images')
+    doc_body = re.sub(r'<img src="([^"]*)".*/>', r'![](\1)', doc_body, flags=re.MULTILINE)
 
     # express HUGEINT limits as powers of two (upper and lower limits are ±2^127-1)
     doc_body = doc_body.replace("-170141183460469231731687303715884105727", "$-2^{127}-1$")
@@ -115,7 +130,7 @@ def adjust_links_in_doc_body(doc_body):
 
 
 # change links to filenames to links to headers
-def change_link(doc_body, doc_file_path):
+def change_links(doc_body):
     # match links but do not match image definitions (which start with a '!' character) within the link
     matches = re.findall(r"([^!]\[[^]!]*\])\(([^)]*)\)", doc_body)
     for match in matches:
@@ -242,7 +257,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         doc_body = adjust_links_in_doc_body(doc_body)
         doc_body = adjust_headers(doc_body, doc_header_label)
         doc_body = change_function_table_headers(doc_body)
-        doc_body = change_link(doc_body, doc_file_path)
+        doc_body = change_links(doc_body)
 
         # write to output
         of.write(doc_body)
@@ -292,6 +307,32 @@ def add_main_documentation(docs_root, menu, of):
                 concatenate_page_to_output(of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
 
 
+def add_blog_posts(blog_root, of):
+    of.write("# DuckDB Blog\n\n")
+
+    blog_post_files = sorted(glob.glob(f"{blog_root}/*.md"))
+    for blog_post_file in blog_post_files:
+        print(blog_post_file)
+        doc = frontmatter.load(blog_post_file)
+
+        doc_title = doc["title"]
+        doc_excerpt = doc["excerpt"]
+        doc_author = doc["author"]
+        doc_body = doc.content
+
+        doc_body = fix_language_tags_for_syntax_highlighting(doc_body)
+        doc_body = replace_box_names(doc_body)
+        doc_body = move_headers_down(doc_body)
+        doc_body = adjust_links_in_doc_body(doc_body)
+        doc_body = change_links(doc_body)
+
+        of.write(f"""## {doc_title}\n\n""")
+        of.write(f"""**Author(s):** {doc_author}\n\n""")
+        if doc_excerpt is not None and doc_excerpt != "":
+            of.write(f"""**TL;DR:** {doc_excerpt}\n\n""")
+        of.write(f"""{doc_body}\n\n""")
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--verbose", action="store_true")
 args = parser.parse_args()
@@ -321,6 +362,8 @@ with open(f"duckdb-docs.md", "w") as of:
     with open("../_data/menu_docs_dev.json") as menu_docs_file:
         menu = json.load(menu_docs_file)
         add_main_documentation("../docs", menu, of)
+
+    add_blog_posts("../_posts", of)
 
     with open("acknowledgments.md") as acknowledgments_file:
         of.write(acknowledgments_file.read())
