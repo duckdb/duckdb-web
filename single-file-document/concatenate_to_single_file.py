@@ -90,7 +90,7 @@ def adjust_links_in_doc_body(doc_body):
     # with a link to the Python guides section
     doc_body = doc_body.replace(
         "]({% link docs/guides/overview.md %}#python-client)",
-        "]({% link docs/python/overview.md %}#)"
+        "]({% link docs/python/overview.md %})"
     )
 
     # replace "`, `" (with its typical surroundings) with "`,` " to allow line breaking
