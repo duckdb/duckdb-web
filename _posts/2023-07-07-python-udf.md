@@ -145,7 +145,7 @@ res = con.sql("SELECT swap_case('PEDRO HOLANDA')").fetchall()
 ```
 
 
-### Predicting Taxi Fare costs (Ibis + PyArrow UDF)
+### Predicting Taxi Fare Costs (Ibis + PyArrow UDF)
 
 Python UDFs offer significant power as they enable users to leverage the extensive Python ecosystem and tools, including libraries like [PyTorch](https://pytorch.org/) and [Tensorflow](https://www.tensorflow.org/) that efficiently implement machine learning operations.
 
@@ -202,7 +202,7 @@ By utilizing Python UDFs in DuckDB with Ibis, you can seamlessly incorporate mac
 In this section, we will perform simple benchmark comparisons to demonstrate the performance differences between two different types of Python UDFs. The benchmark will measure the execution time, and peak memory consumption. The benchmarks are executed 5 times, and the median value is considered. The benchmark is conducted on a Mac Apple M1 with 16GB of RAM.
 
 
-### Built-In Python Vs PyArrow
+### Built-In Python vs. PyArrow
 
 To benchmark these UDF types, we create UDFs that take an integral column as input, add one to each value, and return the result. The code used for this benchmark section can be found [here](https://gist.github.com/pdet/ebd201475581756c29e4533a8fa4106e). 
 
@@ -250,7 +250,7 @@ We can observe a performance difference of more than one order of magnitude betw
 3) The PyArrow UDF is executed in a vectorized fashion, processing chunks of data instead of individual rows.
 
 
-### Python UDFs Vs External Functions
+### Python UDFs vs. External Functions
 
 Here we compare the usage of a Python UDF with an external function. In this case, we have a function that calculates the sum of the lengths of all strings in a column. You can find the code used for this benchmark section [here](https://gist.github.com/pdet/2907290725539d390df7981e799ed593).
 

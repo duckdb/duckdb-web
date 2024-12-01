@@ -122,7 +122,7 @@ SELECT this_is_the_way FROM mandalorian;
 <div class="narrow_table"></div>
 
 | THIS_IS_THE_WAY |
-|:---|
+|----------------:|
 | 1               |
 
 
@@ -274,7 +274,7 @@ JOIN sith_count_varchar s_char
 <div class="narrow_table"></div>
 
 | sith_count | sith_count |
-|:---|:---|
+|---:|---:|
 | 2  | 2  |
 
 ## Other Friendly Features
