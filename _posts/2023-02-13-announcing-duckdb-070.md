@@ -17,11 +17,11 @@ To install the new version, please visit the [installation guide]({% link docs/i
 
 <!--more-->
 
-#### What's in 0.7.0
+## What's in 0.7.0
 
 The new release contains many improvements to the JSON support, new SQL features, improvements to data ingestion and export, and other new features. Below is a summary of the most impactful changes, together with the linked PRs that implement the features.
 
-#### Data Ingestion/Export Improvements
+## Data Ingestion/Export Improvements
 
 **JSON Ingestion.** This version introduces the [`read_json` and `read_json_auto`](https://github.com/duckdb/duckdb/pull/5992) methods. These can be used to ingest JSON files into a tabular format. Similar to `read_csv`, the `read_json` method requires a schema to be specified, while the `read_json_auto` automatically infers the schema of the JSON from the file using sampling. Both [new-line delimited JSON](http://ndjson.org) and regular JSON are supported.
 
@@ -70,7 +70,7 @@ orders
 
 Note that currently the parallel writing is currently limited to non-insertion order preserving – which can be toggled by setting the `preserve_insertion_order` setting to false. In a future release we aim to alleviate this restriction and order parallel insertion order preserving writes as well.
 
-#### Multi-Database Support
+## Multi-Database Support
 
 **Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/duckdb/duckdb/pull/5764) to the same DuckDB instance. This easily allows data to be transferred between separate DuckDB database files, and also allows data from separate database files to be combined together in individual queries. Remote DuckDB instances (stored on a network accessible location like GitHub, for example) may also be attached.
 
@@ -94,7 +94,7 @@ SELECT * FROM sqlite.tbl;
 
 Using this, SQLite database files can be attached, queried and modified as if they are native DuckDB database files. This allows data to be quickly transferred between SQLite and DuckDB – and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
 
-#### New SQL Features
+## New SQL Features
 
 **Upsert Support.** [Upsert support](https://github.com/duckdb/duckdb/pull/5866) is added with this release using the `ON CONFLICT` clause, as well as the `SQLite` compatible `INSERT OR REPLACE`/`INSERT OR IGNORE` syntax.
 
@@ -137,7 +137,7 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 | 2 | 5 |
 | 3 | 6 |
 
-#### Python API Improvements
+## Python API Improvements
 
 **Query Building.** This release introduces easier incremental query building using the Python API by allowing relations to be queried. This allows you to decompose long SQL queries into multiple smaller SQL queries, and allows you to easily inspect query intermediates.
 
@@ -277,10 +277,10 @@ data = duckdb.query("SELECT * FROM read_csv_auto('gcs:///bucket/file.csv')").fet
 
 Have a look at the [guide]({% link docs/guides/python/filesystems.md %}) for more information
 
-#### Storage Improvements
+## Storage Improvements
 
 **Delta Compression.** Compression of numeric values in the storage is improved using the new [delta and delta-constant compression](https://github.com/duckdb/duckdb/pull/5491). This compression method is particularly effective when compressing values that are equally spaced out. For example, sequences of numbers (`1, 2, 3, ...`) or timestamps with a fixed interval between them (`12:00:01, 12:00:02, 12:00:03, ...`).
 
-#### Final Thoughts
+## Final Thoughts
 
 The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.7.0). We would like to thank all of the contributors for their hard work on improving DuckDB.

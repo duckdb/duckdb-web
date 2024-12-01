@@ -15,7 +15,7 @@ In this post, we will take a look at how DuckDB sorts, and how this compares to 
 
 Not interested in the implementation? [Jump straight to the experiments!](#comparison)
 
-#### Sorting Relational Data
+## Sorting Relational Data
 
 Sorting is one of the most well-studied problems in computer science, and it is an important aspect of data management. There are [entire communities](https://sortbenchmark.org) dedicated to who sorts fastest.
 Research into sorting algorithms tends to focus on sorting large arrays or key/value pairs.
@@ -66,7 +66,7 @@ If we have columnar storage, this comparator has to jump between columns, [causi
 2. Entirely sort the data by the first clause, then sort by the second clause, but only where the first clause was equal, and so on.
 This approach is especially inefficient when there are many duplicate values, as it requires multiple passes over the data.
 
-#### Binary String Comparison
+## Binary String Comparison
 
 The binary string comparison technique improves sorting performance by simplifying the comparator. It encodes *all* columns in the `ORDER BY` clause into a single binary sequence that, when compared using `memcmp` will yield the correct overall sorting order. Encoding the data is not free, but since we are using the comparator so much during sorting, it will pay off.
 Let us take another look at 3 rows of the example:
@@ -123,7 +123,7 @@ This can be done with a single `memcmp` in __C++__! The compiler will emit effic
 
 This technique solves one of the problems mentioned above, namely the function call overhead when using complex comparators.
 
-#### Radix Sort
+## Radix Sort
 
 Now that we have a cheap comparator, we have to choose our sorting algorithm.
 Every computer science student learns about [comparison-based](https://en.wikipedia.org/wiki/Sorting_algorithm#Comparison_sorts) sorting algorithms like [Quicksort](https://en.wikipedia.org/wiki/Quicksort) and [Merge sort](https://en.wikipedia.org/wiki/Merge_sort), which have _O (n_ log _n)_ time complexity, where _n_ is the number of records being sorted.
@@ -137,7 +137,7 @@ This algorithm sorts the data by computing the data distribution with [Counting 
 It may sound counter-intuitive to encode the sorting key columns such that we have a cheap comparator, and then choose a sorting algorithm that does not compare records.
 However, the encoding is necessary for Radix sort: Binary strings that produce a correct order with `memcmp` will produce a correct order if we do a byte-by-byte Radix sort.
 
-#### Two-Phase Parallel Sorting
+## Two-Phase Parallel Sorting
 
 DuckDB uses [Morsel-Driven Parallelism](https://15721.courses.cs.cmu.edu/spring2016/papers/p743-leis.pdf), a framework for parallel query execution.
 For the sorting operator, this means that multiple threads collect roughly an equal amount of data, in parallel, from the table.
@@ -168,7 +168,7 @@ If we know where the intersections are, we can merge partitions of the sorted da
 This allows us to use all available threads effectively for the entire merge phase.
 For another trick to improve merge sort, see [the appendix](#predication).
 
-#### Columns or Rows?
+## Columns or Rows?
 
 Besides comparisons, the other big cost of sorting is moving data around.
 DuckDB has a vectorized execution engine.
@@ -190,7 +190,7 @@ DuckDB has a unified internal row layout for these operators, and we decided to 
 This layout has only been used in memory so far.
 In the next section, we will explain how we got it to work on disk as well. We should note that we will only write sorting data to disk if main memory is not able to hold it.
 
-#### External Sorting
+## External Sorting
 
 The buffer manager can unload blocks from memory to disk.
 This is not something we actively do in our sorting implementation, but rather something that the buffer manager decides to do if memory would fill up otherwise.
@@ -235,7 +235,7 @@ All this reduces overhead when blocks need to be moved in and out of memory, whi
 
 <a name="comparison"></a>
 
-#### Comparison with Other Systems
+## Comparison with Other Systems
 
 Now that we have covered most of the techniques that are used in our sorting implementation, we want to know how we compare to other systems.
 DuckDB is often used for interactive data analysis, and is therefore often compared to tools like [dplyr](https://dplyr.tidyverse.org).
@@ -294,7 +294,7 @@ For instance, Pandas cannot read/write from/to disk, so both the input and outpu
 DuckDB will not write the output table to disk unless there is not enough room to keep it in memory, and therefore also may have an advantage.
 However, sorting dominates the total runtime, so these differences are not that impactful.
 
-#### Random Integers
+## Random Integers
 
 We will start with a simple example.
 We have generated the first 100 million integers and shuffled them, and we want to know how well the systems can sort them.
@@ -336,7 +336,7 @@ For DuckDB the slightly improved performance can be explained due to a better me
 
 Another interesting result is that DuckDB sorts data faster than some of the other systems can read already sorted data.
 
-#### TPC-DS
+## TPC-DS
 
 For the next comparison, we have improvised a relational sorting benchmark on two tables from the standard [TPC Decision Support benchmark (TPC-DS)](http://www.tpc.org/tpcds/).
 TPC-DS is challenging for sorting implementations because it has wide tables (with many columns, unlike the tables in [TPC-H](http://www.tpc.org/tpch/)), and a mix of fixed- and variable-sized types.
@@ -359,7 +359,7 @@ We will use `catalog_sales` table at SF10 and SF100, which does not fit in memor
 
 The data was generated using DuckDB's TPC-DS extension, then exported to CSV in a random order to undo any ordering patterns that could have been in the generated data.
  
-#### Catalog Sales (Numeric Types)
+## Catalog Sales (Numeric Types)
 
 Our first experiment on the `catalog_sales` table is selecting 1 column, then 2 columns, ..., up to all 34, always ordering by `cs_quantity` and `cs_item_sk`.
 This experiment will tell us how well the different systems can re-order payload columns.
@@ -400,7 +400,7 @@ UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to 
 
 DuckDB performs well both in-memory and external, and there is no clear visible point at which data no longer fits in memory: Runtime is fast and reliable.
 
-#### Customer (Strings & Integers)
+## Customer (Strings & Integers)
 
 Now that we have seen how the systems handle large amounts of fixed-size types, it is time to see some variable-size types!
 For our first experiment on the `customer` table, we will select all columns, and order them by either 3 integer columns (`c_birth_year`, `c_birth_month`, `c_birth_day`), or by 2 string columns (`c_first_name`, `c_last_name`).
@@ -426,7 +426,7 @@ Pandas has an advantage here because it already has the strings in memory, and m
 The database systems need to copy strings twice: Once when reading the input table, and again when creating the output table.
 Profiling in DuckDB reveals that the actual sorting takes less than a second at SF300, and most time is spent on (de)serializing strings.
 
-#### Conclusion
+## Conclusion
 
 DuckDB's new parallel sorting implementation can efficiently sort more data than fits in memory, making use of the speed of modern SSDs.
 Where other systems crash because they run out of memory, or switch to an external sorting strategy that is much slower, DuckDB's performance gracefully degrades as it goes over the memory limit.
@@ -447,7 +447,7 @@ Listen to Laurens' appearance on the Disseminate podcast:
 
 <a name="predication"></a>
 
-#### Appendix A: Predication
+## Appendix A: Predication
 
 Another technique we have used to speed up merge sort is _predication_.
 With this technique, we turn code with _if/else_ branches into code without branches.
@@ -501,7 +501,7 @@ With predicated code, the CPU does not have to predict which instructions to exe
 
 <a name="zigzag"></a>
 
-#### Appendix B: Zig-Zagging
+## Appendix B: Zig-Zagging
 
 A simple trick to reduce I/O is zig-zagging through the pairs of blocks to merge in the cascaded merge sort.
 This is illustrated in the image below (dashes arrows indicate in which order the blocks are merged).
@@ -513,7 +513,7 @@ Those blocks are likely still in memory, saving us some precious read/write oper
 
 <a name="x86"></a>
 
-#### Appendix C: x86 Experiment
+## Appendix C: x86 Experiment
 
 We also ran the `catalog_sales` SF100 experiment on a machine with x86 CPU architecture, to get a more fair comparison with HyPer (without Rosetta 2 emulation).
 The machine has an Intel(R) Xeon(R) W-2145 CPU @ 3.70GHz, which has 8 cores (up to 16 virtual threads), and 128 GB of RAM, so this time the data fits fully in memory.
