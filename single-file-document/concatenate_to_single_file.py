@@ -318,6 +318,7 @@ def add_blog_posts(blog_root, of):
         doc_title = doc["title"]
         doc_excerpt = doc["excerpt"]
         doc_author = doc["author"]
+        doc_date = blog_post_file.split("/")[-1][0:10]
         doc_body = doc.content
 
         doc_body = fix_language_tags_for_syntax_highlighting(doc_body)
@@ -327,6 +328,7 @@ def add_blog_posts(blog_root, of):
         doc_body = change_links(doc_body)
 
         of.write(f"""## {doc_title}\n\n""")
+        of.write(f"""**Publication date:** {doc_date}\n\n""")
         of.write(f"""**Author(s):** {doc_author}\n\n""")
         if doc_excerpt is not None and doc_excerpt != "":
             of.write(f"""**TL;DR:** {doc_excerpt}\n\n""")
