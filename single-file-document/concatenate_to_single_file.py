@@ -250,9 +250,6 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
 
 
 def add_to_documentation(docs_root, data, of):
-    # we use the docs/index.md as the baseline for paths
-    docs_index_file_path = "index.md"
-
     chapter_json = [x for x in data["docsmenu"] if x["page"] == "Documentation"][0]
     chapter_slug = chapter_json["slug"]
     main_level_pages = chapter_json["mainfolderitems"]
