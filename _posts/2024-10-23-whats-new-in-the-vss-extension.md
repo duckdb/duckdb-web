@@ -98,7 +98,7 @@ CREATE TABLE items AS
 FROM generate_series(1, 10_000) r(i);
 
 -- Collect the 5 closest items to each query embedding
-SELECT queries.id as id, list(inner_id) AS matches 
+SELECT queries.id AS id, list(inner_id) AS matches 
     FROM queries, LATERAL (
         SELECT
             items.id AS inner_id,
@@ -110,7 +110,7 @@ SELECT queries.id as id, list(inner_id) AS matches
 GROUP BY queries.id;
 ```
 
-Executing this on my Apple M3 Pro Macbook with 36 GB memory takes about 10 seconds.
+Executing this on my Apple M3 Pro-equipped MacBook with 36 GB memory takes about 10 seconds.
 
 If we `EXPLAIN` this query plan, we'll see a lot of advanced operators:
 

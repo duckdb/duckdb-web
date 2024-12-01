@@ -18,7 +18,7 @@ The Parquet format has a number of properties that make it suitable for analytic
 2. The file contains per-column statistics in every row group (min/max value, and the number of `NULL` values). These statistics allow the reader to skip row groups if they are not required.
 3. The columnar compression significantly reduces the file size of the format, which in turn reduces the storage requirement of data sets. This can often turn Big Data into Medium Data.
 
-#### DuckDB and Parquet
+## DuckDB and Parquet
 
 DuckDB's zero-dependency Parquet reader is able to directly execute SQL queries on Parquet files without any import or analysis step. Because of the natural columnar format of Parquet, this is very fast!
 
@@ -54,7 +54,7 @@ print(duckdb.query('''
    ''').fetchall())
 ```
 
-#### Automatic Filter & Projection Pushdown
+## Automatic Filter & Projection Pushdown
 
 Let us dive into the previous query to better understand the power of the Parquet format when combined with DuckDB's query optimizer.
 
@@ -72,7 +72,7 @@ In addition, only rows that have a `pickup_at` between the 15th and the 20th of 
 
 We can use the statistics inside the Parquet file to great advantage here. Any row groups that have a max value of `pickup_at` lower than `2019-04-15`, or a min value higher than `2019-04-20`, can be skipped. In some cases, that allows us to skip reading entire files.
 
-#### DuckDB versus Pandas
+## DuckDB versus Pandas
 
 To illustrate how effective these automatic optimizations are, we will run a number of queries on top of Parquet files using both Pandas and DuckDB.
 
@@ -80,7 +80,7 @@ In these queries, we use a part of the infamous New York Taxi dataset stored as 
 
 The examples are available [here as an interactive notebook over at Google Colab](https://colab.research.google.com/drive/1e1beWqYOcFidKl2IxHtxT5s9i_6KYuNY). The timings reported here are from this environment for reproducibility.
 
-#### Reading Multiple Parquet Files
+## Reading Multiple Parquet Files
 
 First we look at some rows in the dataset. There are three Parquet files in the `taxi/` folder. [DuckDB supports the globbing syntax]({% link docs/data/parquet/overview.md %}), which allows it to query all three files simultaneously.
 
@@ -122,7 +122,7 @@ Below are the timings for both of these queries.
 
 Pandas takes significantly longer to complete this query. That is because Pandas not only needs to read each of the three Parquet files in their entirety, it has to concatenate these three separate Pandas DataFrames together.
 
-#### Concatenate Into a Single File
+## Concatenate into a Single File
 
 We can address the concatenation issue by creating a single big Parquet file from the three smaller parts. We can use the `pyarrow` library for this, which has support for reading multiple Parquet files and streaming them into a single large file. Note that the `pyarrow` parquet reader is the very same parquet reader that is used by Pandas internally.
 
@@ -135,7 +135,7 @@ pq.write_table(pq.ParquetDataset('taxi/').read(), 'alltaxi.parquet', row_group_s
 
 Note that [DuckDB also has support for writing Parquet files]({% link docs/data/parquet/overview.md %}#writing-to-parquet-files) using the COPY statement.
 
-#### Querying the Large File
+## Querying the Large File
 
 Now let us repeat the previous experiment, but using the single file instead.
 
@@ -160,7 +160,7 @@ We can see that Pandas performs better than before, as the concatenation is avoi
 
 For DuckDB it does not really matter how many Parquet files need to be read in a query.
 
-#### Counting Rows
+## Counting Rows
 
 Now suppose we want to figure out how many rows are in our data set. We can do that using the following code:
 
@@ -196,7 +196,7 @@ len(pandas.read_parquet('alltaxi.parquet', columns=['vendor_id']))
 
 While this is much faster, this still takes more than a second as the entire `vendor_id` column has to be read into memory as a Pandas column only to count the number of rows.
 
-#### Filtering Rows
+## Filtering Rows
 
 It is common to use some sort of filtering predicate to only look at the interesting parts of a data set. For example, imagine we want to know how many taxi rides occur after the 30th of June 2019. We can do that using the following query in DuckDB:
 
@@ -263,7 +263,7 @@ print(len(df[['pickup_at']].query("pickup_at > '2019-06-30'")))
 | Pandas (projection & filter pushdown) | 0.07     |
 | Pandas (native)                       | 0.26     |
 
-#### Aggregates
+## Aggregates
 
 Finally lets look at a more complex aggregation. Say we want to compute the number of rides per passenger. With DuckDB and SQL, it looks like this:
 
@@ -324,7 +324,7 @@ df.groupby('passenger_count')
 
 We can see that DuckDB is faster than Pandas in all three scenarios, without needing to perform any manual optimizations and without needing to load the Parquet file into memory in its entirety.
 
-#### Conclusion
+## Conclusion
 
 DuckDB can efficiently run queries directly on top of Parquet files without requiring an initial loading phase. The system will automatically take advantage of all of Parquet's advanced features to speed up query execution.
 

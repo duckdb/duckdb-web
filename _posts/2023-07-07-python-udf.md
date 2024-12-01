@@ -76,7 +76,7 @@ That's it, the function is then registered and ready to be called through SQL.
 con.execute("CREATE TABLE countries(country VARCHAR)")
 con.execute("INSERT INTO countries VALUES ('Brazil'), ('Germany'), ('Italy'), ('Argentina'), ('Uruguay'), ('France'), ('England'), ('Spain'), ('Netherlands')")
 # We can simply call the function through SQL, and even use the function return to eliminate the countries that never won a world cup
-con.sql("SELECT country, wc_titles(country) as world_cups from countries").fetchall()
+con.sql("SELECT country, wc_titles(country) AS world_cups FROM countries").fetchall()
 # [('Brazil', 5), ('Germany', 4), ('Italy', 4), ('Argentina', 2), ('Uruguay', 2), ('France', 2), ('England', 1), ('Spain', 1), ('Netherlands', None)]
 ```
 
@@ -107,13 +107,13 @@ duckdb.create_function('random_date', random_date, [], DATE)
 
 # After registration, we can use the function directly via SQL
 # Notice that without side_effect=True, it's not guaranteed that the function will be re-evaluated.
-res = duckdb.sql('select random_date() from range (3)').fetchall()
+res = duckdb.sql('SELECT random_date() FROM range (3)').fetchall()
 # [(datetime.date(2003, 8, 3),), (datetime.date(2003, 8, 3),), (datetime.date(2003, 8, 3),)]
 
 # Now let's re-add the function with side-effects marked as true.
 duckdb.remove_function('random_date')
 duckdb.create_function('random_date', random_date, [], DATE, side_effects=True)
-res = duckdb.sql('select random_date() from range (3)').fetchall()
+res = duckdb.sql('SELECT random_date() FROM range (3)').fetchall()
 # [(datetime.date(2020, 11, 29),), (datetime.date(2009, 5, 18),), (datetime.date(2018, 5, 24),)]
 ```
 
@@ -140,12 +140,12 @@ con = duckdb.connect()
 # To register the function, we must define it's type to be 'arrow'
 con.create_function('swap_case', swap_case, [VARCHAR], VARCHAR, type='arrow')
 
-res = con.sql("select swap_case('PEDRO HOLANDA')").fetchall()
+res = con.sql("SELECT swap_case('PEDRO HOLANDA')").fetchall()
 # [('pedro holanda',)]
 ```
 
 
-### Predicting Taxi Fare costs (Ibis + PyArrow UDF)
+### Predicting Taxi Fare Costs (Ibis + PyArrow UDF)
 
 Python UDFs offer significant power as they enable users to leverage the extensive Python ecosystem and tools, including libraries like [PyTorch](https://pytorch.org/) and [Tensorflow](https://www.tensorflow.org/) that efficiently implement machine learning operations.
 
@@ -202,7 +202,7 @@ By utilizing Python UDFs in DuckDB with Ibis, you can seamlessly incorporate mac
 In this section, we will perform simple benchmark comparisons to demonstrate the performance differences between two different types of Python UDFs. The benchmark will measure the execution time, and peak memory consumption. The benchmarks are executed 5 times, and the median value is considered. The benchmark is conducted on a Mac Apple M1 with 16GB of RAM.
 
 
-### Built-In Python Vs PyArrow
+### Built-In Python vs. PyArrow
 
 To benchmark these UDF types, we create UDFs that take an integral column as input, add one to each value, and return the result. The code used for this benchmark section can be found [here](https://gist.github.com/pdet/ebd201475581756c29e4533a8fa4106e). 
 
@@ -227,13 +227,13 @@ con.create_function('add_arrow_type', add_arrow_type, ['BIGINT'], 'BIGINT', type
 
 # Integer View with 10,000,000 elements.
 con.sql("""
-     select i
-     from range(10000000) tbl(i);
+     SELECT i
+     FROM range(10000000) tbl(i);
 """).to_view("numbers")
 
 # Calls for both UDFs
-native_res = con.sql("select sum(add_built_in_type(i)) from numbers").fetchall()
-arrow_res = con.sql("select sum(add_arrow_type(i)) from numbers").fetchall()
+native_res = con.sql("SELECT sum(add_built_in_type(i)) FROM numbers").fetchall()
+arrow_res = con.sql("SELECT sum(add_arrow_type(i)) FROM numbers").fetchall()
 ```
 
 <div class="narrow_table"></div>
@@ -250,7 +250,7 @@ We can observe a performance difference of more than one order of magnitude betw
 3) The PyArrow UDF is executed in a vectorized fashion, processing chunks of data instead of individual rows.
 
 
-### Python UDFs Vs External Functions
+### Python UDFs vs. External Functions
 
 Here we compare the usage of a Python UDF with an external function. In this case, we have a function that calculates the sum of the lengths of all strings in a column. You can find the code used for this benchmark section [here](https://gist.github.com/pdet/2907290725539d390df7981e799ed593).
 
@@ -268,29 +268,29 @@ def string_length_arrow(x):
 
 # Same Function but external to the database
 def exec_external(con):
-     arrow_table = con.sql("select i from strings tbl(i)").arrow()
+     arrow_table = con.sql("SELECT i FROM strings tbl(i)").arrow()
      arrow_column = arrow_table['i']
      tuples = len(arrow_column)
      values = [len(i.as_py()) if i.as_py() != None else 0 for i in arrow_column]
      array = pa.array(values, type=pa.int32(), size=tuples)
      arrow_tbl = pa.Table.from_arrays([array], names=['i'])
-     return con.sql("select sum(i) from arrow_tbl").fetchall()
+     return con.sql("SELECT sum(i) FROM arrow_tbl").fetchall()
 
 
 con = duckdb.connect()
 con.create_function('strlen_arrow', string_length_arrow, ['VARCHAR'], int, type='arrow')
 
 con.sql("""
-     select
-          case when i != 0 and i % 42 = 0
-          then
+     SELECT
+          CASE WHEN i != 0 AND i % 42 = 0
+          THEN
                NULL
-          else
-               repeat(chr((65 + (i % 26))::INTEGER), (4 + (i % 12))) end
-          from range(10000000) tbl(i);
+          ELSE
+               repeat(chr((65 + (i % 26))::INTEGER), (4 + (i % 12))) END
+          FROM range(10000000) tbl(i);
 """).to_view("strings")
 
-con.sql("select sum(strlen_arrow(i)) from strings tbl(i)").fetchall()
+con.sql("SELECT sum(strlen_arrow(i)) FROM strings tbl(i)").fetchall()
 
 exec_external(con)
 ```
@@ -303,7 +303,7 @@ exec_external(con)
 | UDF         | 5.63     | 112.848                      |
 
 
-Here we can see that there is no significant regression in performance when utilizing UDFs. However, you still have the benefits of safer execution and the utilization of SQL. In our example, we can also notice that the external function materializes the entire query, resulting in a 5x higher peak memory consumption compared to the UDF approach.
+Here we can see that there is no significant regression in performance when utilizing UDFs. However, you still have the benefits of safer execution and the utilization of SQL. In our example, we can also notice that the external function materializes the entire query, resulting in a 5× higher peak memory consumption compared to the UDF approach.
 
 ## Conclusions and Further Development
 

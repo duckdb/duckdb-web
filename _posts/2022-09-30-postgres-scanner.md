@@ -125,7 +125,7 @@ COPY (
   WHERE 
     ctid BETWEEN '(0,0)'::tid AND '(1000,0)'::tid AND 
     ("l_shipdate" < '1998-09-02' AND "l_shipdate" IS NOT NULL)
-  ) TO STDOUT (FORMAT binary);
+  ) TO STDOUT (FORMAT BINARY);
 -- and so on
 ```
 
@@ -160,7 +160,7 @@ To investigate the performance of the Postgres Scanner, we ran the well-known TP
 |21    |   0.09|            1.53|     0.35|
 |22    |   0.03|            0.15|     0.15|
 
-Stock Postgres is not able to finish queries 17 and 20 within a one-minute timeout because of correlated subqueries containing a query on the lineitem table. For the other queries, we can see that DuckDB with the Postgres Scanner not only finished all queries, it also was faster than stock Postgres on roughly half of them, which is astonishing given that DuckDB has to read its input data from Postgres through the client/server protocol as described above. Of course, stock DuckDB is still 10x faster with its own storage, but as discussed at the very beginning of this post this requires the data to be imported there first. 
+Stock Postgres is not able to finish queries 17 and 20 within a one-minute timeout because of correlated subqueries containing a query on the lineitem table. For the other queries, we can see that DuckDB with the Postgres Scanner not only finished all queries, it also was faster than stock Postgres on roughly half of them, which is astonishing given that DuckDB has to read its input data from Postgres through the client/server protocol as described above. Of course, stock DuckDB is still 10× faster with its own storage, but as discussed at the very beginning of this post this requires the data to be imported there first. 
 
 ## Other Use Cases
 

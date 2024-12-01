@@ -312,7 +312,7 @@ We now measure the cold query time (i.e., the Database has just been restarted, 
 times = []
 for i in range (0, 50000000, 10000):
   cur_time = time.time()
-  con.execute("select x from integers where x = " + str(i))
+  con.execute("SELECT x FROM integers WHERE x = " + str(i))
   times.append(time.time() - cur_time)
 ```
 

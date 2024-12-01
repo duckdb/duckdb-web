@@ -213,8 +213,8 @@ For that reason, it is currently not supported to **write** to multiple attached
 
 ```sql
 BEGIN;
-CREATE TABLE postgres.new_table(i INT);
-CREATE TABLE mysql.new_table(i INT);
+CREATE TABLE postgres.new_table(i INTEGER);
+CREATE TABLE mysql.new_table(i INTEGER);
 ```
 ```console
 Error: Attempting to write to database "mysql" in a transaction that has

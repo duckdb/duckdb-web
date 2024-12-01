@@ -9,3 +9,4 @@ Code repositories:
 
 * DuckDB source code: [github.com/duckdb/duckdb](https://github.com/duckdb/duckdb)
 * DuckDB documentation source code: [github.com/duckdb/duckdb-web](https://github.com/duckdb/duckdb-web)
+

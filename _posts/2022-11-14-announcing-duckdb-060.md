@@ -17,11 +17,11 @@ To install the new version, please visit the [installation guide]({% link docs/i
 
 <!--more-->
 
-#### What's in 0.6.0
+## What's in 0.6.0
 
 The new release contains many improvements to the storage system, general performance improvements, memory management improvements and new features. Below is a summary of the most impactful changes, together with the linked PRs that implement the features.
 
-#### Storage Improvements
+## Storage Improvements
 
 As we are working towards stabilizing the storage format and moving towards version 1.0, we have been actively working on improving our storage format, including many [compression improvements]({% post_url 2022-10-28-lightweight-compression %}). 
 
@@ -42,7 +42,7 @@ DuckDB supports two modes – the [`order-preserving`](https://github.com/duckdb
 
 The order-preserving load preserves the insertion order so that e.g., the first line in your CSV file is the first line in the DuckDB table. The non-order-preserving load does not offer such guarantees – and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order = false` statement.
 
-#### Compression Improvements
+## Compression Improvements
 
 **FSST**. The [Fast Static Symbol Table](https://github.com/duckdb/duckdb/pull/4366) compression algorithm is introduced in this version. This state-of-the-art compression algorithm compresses data *inside* strings using a dictionary, while maintaining support for efficient scans and random look-ups. This greatly increases the compression ratio of strings that have many unique values but with common elements, such as e-mail addresses or URLs.
 
@@ -66,7 +66,7 @@ The compression ratio of a dataset containing temperatures of cities stored as d
 | Chimp             |  9.7 MB |
 | Patas             | 10.2 MB |
 
-#### Performance Improvements
+## Performance Improvements
 
 DuckDB aims to have very high performance for a wide variety of workloads. As such, we are always working to improve performance for various workloads. This release is no different.
 
@@ -97,14 +97,14 @@ The timings of creating an index on a single column with 16 million values is sh
 
 **Parallel count(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g., `count(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DuckDB can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
 
-#### SQL Syntax Improvements
+## SQL Syntax Improvements
 
 SQL is the primary way of interfacing with DuckDB – and DuckDB [tries to have an easy to use SQL dialect]({% post_url 2022-05-04-friendlier-sql %}). This release contains further improvements to the SQL dialect.
 
 **UNION Type**. This release introduces the [UNION type](https://github.com/duckdb/duckdb/pull/4966), which allows sum types to be stored and queried in DuckDB. For example:
 
 ```sql
-CREATE TABLE messages(u UNION(num INT, error VARCHAR));
+CREATE TABLE messages(u UNION(num INTEGER, error VARCHAR));
 INSERT INTO messages VALUES (42);
 INSERT INTO messages VALUES ('oh my globs');
 SELECT * FROM messages;
@@ -140,9 +140,9 @@ INSERT INTO tbl2 FROM tbl1;
 **COLUMNS Expression**. This release adds support for [the `COLUMNS` expression](https://github.com/duckdb/duckdb/pull/5120), inspired by [the ClickHouse syntax](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression). The `COLUMNS` expression allows you to execute expressions or functions on multiple columns without having to duplicate the full expression.
 
 ```sql
-CREATE TABLE obs(id INT, val1 INT, val2 INT);
+CREATE TABLE obs(id INTEGER, val1 INTEGER, val2 INTEGER);
 INSERT INTO obs VALUES (1, 10, 100), (2, 20, NULL), (3, NULL, 300);
-SELECT min(COLUMNS(*)), count(*) from obs;
+SELECT min(COLUMNS(*)), count(*) FROM obs;
 ```
 ```text
 ┌─────────────┬───────────────┬───────────────┬──────────────┐
@@ -155,7 +155,7 @@ SELECT min(COLUMNS(*)), count(*) from obs;
 The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax]({% link docs/sql/query_syntax/select.md %}). In addition, the `COLUMNS` expression can take a regular expression as parameter:
 
 ```sql
-SELECT COLUMNS('val[0-9]+') from obs;
+SELECT COLUMNS('val[0-9]+') FROM obs;
 ```
 ```text
 ┌──────┬──────┐
@@ -182,7 +182,7 @@ SELECT [x + 1 for x in [1, 2, 3]] AS l;
 
 Nested types and structures are very efficiently implemented in DuckDB, and are now also more elegant to work with.
 
-#### Memory Management Improvements
+## Memory Management Improvements
 
 When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques, and has support for an [efficient out-of-core sort]({% post_url 2021-08-27-external-sorting %}), [out-of-core window functions]({% post_url 2021-10-13-windowing %}) and [an out-of-core hash join](https://github.com/duckdb/duckdb/pull/4189).
 
@@ -203,7 +203,7 @@ This release further improves on that by greatly optimizing the [out-of-core has
 
 **jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/duckdb/duckdb/pull/4971) with the Linux version of DuckDB by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on macOS or Windows, and as such we continue using the standard allocators there (at least for now).
 
-#### Shell Improvements
+## Shell Improvements
 
 DuckDB has a command-line interface that is adapted from SQLite's command line interface, and therefore supports an extremely similar interface to SQLite. All of the tables in this blog post have been generated using the `.mode markdown` in the CLI.
 

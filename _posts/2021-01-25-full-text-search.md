@@ -6,7 +6,7 @@ excerpt: DuckDB now has full-text search functionality, similar to the FTS5 exte
 tags: ["extensions"]
 ---
 
-Searching through textual data stored in a database can be cumbersome, as SQL does not provide a good way of formulating questions such as "Give me all the documents about __Mallard Ducks__": string patterns with `LIKE` will only get you so far. Despite SQL's shortcomings here, storing textual data in a database is commonplace. Consider the table `products (id INT, name VARCHAR, description VARCHAR`) – it would be useful to search through the `name` and `description` columns for a website that sells these products.
+Searching through textual data stored in a database can be cumbersome, as SQL does not provide a good way of formulating questions such as "Give me all the documents about __Mallard Ducks__": string patterns with `LIKE` will only get you so far. Despite SQL's shortcomings here, storing textual data in a database is commonplace. Consider the table `products (id INTEGER, name VARCHAR, description VARCHAR`) – it would be useful to search through the `name` and `description` columns for a website that sells these products.
 
 <!--more-->
 
@@ -16,7 +16,7 @@ DuckDB's FTS implementation follows the paper "[Old Dogs Are Great at New Tricks
 
 Alright, enough about the "why", let's get to the "how".
 
-### Preparing the Data
+## Preparing the Data
 
 The TREC 2004 Robust Retrieval Track has 250 "topics" (search queries) over TREC disks 4 and 5. The data consist of many text files stored in SGML format, along with a corresponding DTD (document type definition) file. This format is rarely used anymore, but it is similar to XML. We will use OpenSP's command line tool `osx` to convert it to XML. Because there are many files, I wrote a bash script:
 
@@ -79,7 +79,7 @@ con.close()
 ```
 This is the end of my preparation script, so I closed the database connection.
 
-### Building the Search Engine
+## Building the Search Engine
 
 We can now build the inverted index and the retrieval model using a `PRAGMA` statement. The extension is [documented here]({% link docs/extensions/full_text_search.md %}). We create an index table on table `documents` or `main.documents` that we created with our script. The column that identifies our documents is called `docno`, and we wish to create an inverted index on the fields supplied. I supplied all fields by using the '\*' shortcut.
 ```python
@@ -89,7 +89,7 @@ con.execute("PRAGMA create_fts_index('documents', 'docno', '*', stopwords='engli
 
 Under the hood, a parameterized SQL script is called. The schema `fts_main_documents` is created, along with tables `docs`, `terms`, `dict`, and `stats`, that make up the inverted index. If you're curious what this look like, take a look at our source code under the `extension` folder in DuckDB's source code!
 
-### Running the Benchmark
+## Running the Benchmark
 
 The data is now fully prepared. Now we want to run the queries in the benchmark, one by one. We load the topics file as follows:
 ```python
@@ -139,7 +139,7 @@ with open('results', 'w+') as f:
         f.write(r + '\n')
 ```
 
-### Results
+## Results
 
 Now that we have created our 'results' file, we can compare them to the relevance assessments `qrels` using `trec_eval`.
 
