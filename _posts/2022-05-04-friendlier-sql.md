@@ -246,8 +246,7 @@ FROM (
         s1.tie_fighter,
         s2.tie_fighter
     FROM squadron_one s1
-    JOIN squadron_two s2
-      ON 1 = 1
+    CROSS JOIN squadron_two s2
     ) theyre_coming_in_too_fast;
 ```  
 
