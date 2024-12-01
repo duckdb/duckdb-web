@@ -304,9 +304,9 @@ The following table is a summary of the hardware used.
 
 | Specs       | `c6id.metal` | Laptop |  Ratio |
 |:------------|-------------:|-------:|-------:|
-| Memory      |       256 GB |  16 GB |    16x |
-| CPU cores   |           64 |      8 |     8x |
-| CPU threads |          128 |      8 |    16x |
+| Memory      |       256 GB |  16 GB |    16× |
+| CPU cores   |           64 |      8 |     8× |
+| CPU threads |          128 |      8 |    16× |
 | Hourly cost |        $6.45 |  $0.00 |    NaN |
 
 Although the CPU cores of the AWS EC2 instance are not directly comparable with those of my laptop, the instance clearly has much more compute power and memory available.
@@ -314,22 +314,22 @@ Despite the large differences in hardware, DuckDB can complete all 10 queries wi
 
 | Query | `c6id.metal` | Laptop |  Ratio |
 |------:|-------------:|-------:|-------:|
-|     1 |         0.08 |   0.74 |  9.25x |
-|     2 |         0.09 |   0.76 |  8.44x |
-|     3 |         8.01 | 156.63 | 19.55x |
-|     4 |         0.26 |   2.07 |  7.96x |
-|     5 |         6.72 | 145.00 | 21.58x |
-|     6 |        17.12 |  19.28 |  1.13x |
-|     7 |         6.33 | 124.85 | 19.72x |
-|     8 |         6.53 | 126.35 | 19.35x |
-|     9 |         0.32 |   1.90 |  5.94x |
-|    10 |         8.58 | 264.14 | 30.79x |
+|     1 |         0.08 |   0.74 |  9.25× |
+|     2 |         0.09 |   0.76 |  8.44× |
+|     3 |         8.01 | 156.63 | 19.55× |
+|     4 |         0.26 |   2.07 |  7.96× |
+|     5 |         6.72 | 145.00 | 21.58× |
+|     6 |        17.12 |  19.28 |  1.13× |
+|     7 |         6.33 | 124.85 | 19.72× |
+|     8 |         6.53 | 126.35 | 19.35× |
+|     9 |         0.32 |   1.90 |  5.94× |
+|    10 |         8.58 | 264.14 | 30.79× |
 
 The runtime of the queries is reported in seconds, and was obtained by taking the median of 3 runs on my laptop using DuckDB 0.10.1.
 The `c6id.metal` instance results were obtained from the [benchmark website](https://duckdblabs.github.io/db-benchmark/).
 Despite being unable to _fit_ all unique groups in my laptop's memory, DuckDB can _compute_ all unique groups and return them.
 The largest query, query 10, takes almost 4.5 minutes to complete.
-This is over 30x longer than with the beefy `c6id.metal` instance.
+This is over 30× longer than with the beefy `c6id.metal` instance.
 The large difference is, of course, explained by the large differences in hardware.
 Interestingly, this is still faster than Spark on the `c6id.metal` instance, which takes 603.05 seconds!
 

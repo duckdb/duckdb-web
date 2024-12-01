@@ -237,7 +237,7 @@ LIMIT 5;
 ```
 
 | id  | name_short |       name_long       | country | latitude | longitude |
-|----:|------------|-----------------------|---------|----------|-----------|
+|----:|------------|-----------------------|---------|---------:|----------:|
 | 266 | Den Bosch  | 's-Hertogenbosch      | NL      | 51.69    | 5.29      |
 | 269 | Dn Bosch O | 's-Hertogenbosch Oost | NL      | 51.70    | 5.32      |
 | 227 | 't Harde   | 't Harde              | NL      | 52.41    | 5.89      |

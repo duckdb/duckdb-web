@@ -303,7 +303,7 @@ exec_external(con)
 | UDF         | 5.63     | 112.848                      |
 
 
-Here we can see that there is no significant regression in performance when utilizing UDFs. However, you still have the benefits of safer execution and the utilization of SQL. In our example, we can also notice that the external function materializes the entire query, resulting in a 5x higher peak memory consumption compared to the UDF approach.
+Here we can see that there is no significant regression in performance when utilizing UDFs. However, you still have the benefits of safer execution and the utilization of SQL. In our example, we can also notice that the external function materializes the entire query, resulting in a 5× higher peak memory consumption compared to the UDF approach.
 
 ## Conclusions and Further Development
 

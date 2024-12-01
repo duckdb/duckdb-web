@@ -496,10 +496,10 @@ Running the benchmark, we get results like this:
 | IEJoin | 3.522 |
 | State Join | 192.460 |
 
-The runtime improvement of AsOf over IEJoin here is about 9x.
+The runtime improvement of AsOf over IEJoin here is about 9×.
 The horrible performance of the Hash Join is caused by the long (100K) bucket chains in the hash table.
 
-The second benchmark tests the case where the probe side is about 10x smaller than the build side:
+The second benchmark tests the case where the probe side is about 10× smaller than the build side:
 
 ```sql
 CREATE OR REPLACE TABLE probe AS
@@ -540,7 +540,7 @@ FROM probe p INNER JOIN state s
 | AsOf       |       0.077 |
 | IEJoin     |      49.508 |
 
-Now the runtime improvement of AsOf over IEJoin is huge (~500x)
+Now the runtime improvement of AsOf over IEJoin is huge (~500×)
 because it can leverage the partitioning to eliminate almost all of the equality mismatches.
 
 The Hash Join implementation does much better here because 
@@ -596,7 +596,7 @@ CREATE OR REPLACE TABLE probe1 AS
 ```
 
 The build tables are much larger and have approximately
-10/100/1000x the number of entries as the 15 element tables:
+10/100/1000× the number of entries as the 15 element tables:
 
 ```sql
 -- 10:1

@@ -284,7 +284,7 @@ JOIN (
  AND distance = min_distance;
 ```
 
-By performing the de-correlation manually, the performance of SQLite and Postgres improves significantly. However, both systems remain over 30x slower than DuckDB.
+By performing the de-correlation manually, the performance of SQLite and Postgres improves significantly. However, both systems remain over 30× slower than DuckDB.
 
 | DuckDB | Postgres | SQLite |
 |-------:|---------:|-------:|
