@@ -13,7 +13,7 @@ An elegant user experience is a key design goal of DuckDB. This goal guides much
 However, SQL is not famous for being user-friendly. DuckDB aims to change that! DuckDB includes both a Relational API for dataframe-style computation, and a highly Postgres-compatible version of SQL. If you prefer dataframe-style computation, we would love your feedback on [our roadmap](https://github.com/duckdb/duckdb/issues/2000). If you are a SQL fan, read on to see how DuckDB is bringing together both innovation and pragmatism to make it easier to write SQL in DuckDB than anywhere else. Please reach out on [GitHub](https://github.com/duckdb/duckdb/discussions) or [Discord](https://discord.gg/vukK4xp7Rd) and let us know what other features would simplify your SQL workflows. Join us as we teach an old dog new tricks!
 <!--more-->
 
-### `SELECT * EXCLUDE`
+## `SELECT * EXCLUDE`
 
 A traditional SQL `SELECT` query requires that requested columns be explicitly specified, with one notable exception: the `*` wildcard. `SELECT *` allows SQL to return all relevant columns. This adds tremendous flexibility, especially when building queries on top of one another. However, we are often interested in *almost* all columns. In DuckDB, simply specify which columns to `EXCLUDE`:
 
@@ -32,7 +32,7 @@ SELECT
 FROM star_wars sw, firefly ff;
 ```
 
-### `SELECT * REPLACE`
+## `SELECT * REPLACE`
 
 Similarly, we often wish to use all of the columns in a table, aside from a few small adjustments. This would also prevent the use of `*` and require a list of all columns, including those that remain unedited. In DuckDB, easily apply changes to a small number of columns with `REPLACE`:
 
@@ -44,7 +44,7 @@ FROM star_wars_owned_by_disney;
 
 This allows views, CTE's, or sub-queries to be built on one another in a highly concise way, while remaining adaptable to new underlying columns. 
 
-### `GROUP BY ALL`
+## `GROUP BY ALL`
 
 A common cause of repetitive and verbose SQL code is the need to specify columns in both the `SELECT` clause and the `GROUP BY` clause. In theory this adds flexibility to SQL, but in practice it rarely adds value. DuckDB now offers the `GROUP BY` we all expected when we first learned SQL – just `GROUP BY ALL` columns in the `SELECT` clause that aren't wrapped in an aggregate function!
 
@@ -75,7 +75,7 @@ GROUP BY ALL;
 
 Now that is some concise and flexible SQL! How many of your `GROUP BY` clauses could be re-written this way?
 
-### `ORDER BY ALL`
+## `ORDER BY ALL`
 
 Another common cause for repetition in SQL is the `ORDER BY` clause. DuckDB and other RDBMSs have previously tackled this issue by allowing queries to specify the numbers of columns to `ORDER BY` (For example, `ORDER BY 1, 2, 3`). However, frequently the goal is to order by all columns in the query from left to right, and maintaining that numeric list when adding or subtracting columns can be error prone. In DuckDB, simply `ORDER BY ALL`:
 
@@ -91,7 +91,7 @@ ORDER BY ALL;
 
 This is particularly useful when building summaries, as many other client tools automatically sort results in this manner. DuckDB also supports `ORDER BY ALL DESC` to sort each column in reverse order, and options to specify `NULLS FIRST` or `NULLS LAST`.
 
-### Column Aliases in `WHERE` / `GROUP BY` / `HAVING`
+## Column Aliases in `WHERE` / `GROUP BY` / `HAVING`
 
 In many SQL dialects, it is not possible to use an alias defined in a `SELECT` clause anywhere but in the `ORDER BY` clause of that statement. This commonly leads to verbose CTE's or subqueries in order to utilize those aliases. In DuckDB, a non-aggregate alias in the `SELECT` clause can be immediately used in the `WHERE` and `GROUP BY` clauses, and aggregate aliases can be used in the `HAVING` clause, even at the same query depth. No subquery needed!
 
@@ -110,7 +110,7 @@ HAVING
     total_oops > 0;
 ```
 
-### Case Insensitivity While Maintaining Case
+## Case Insensitivity While Maintaining Case
 
 DuckDB allows queries to be case insensitive, while maintaining the specified case as data flows into and out of the system. This simplifies queries within DuckDB while ensuring compatibility with external libraries.
 
@@ -126,7 +126,7 @@ SELECT this_is_the_way FROM mandalorian;
 | 1               |
 
 
-### Friendly Error Messages
+## Friendly Error Messages
 
 Regardless of expertise, and despite DuckDB's best efforts to understand our intentions, we all make mistakes in our SQL queries. Many RDBMSs leave you trying to use the force to detect an error. In DuckDB, if you make a typo on a column or table name, you will receive a helpful suggestion about the most similar name. Not only that, you will receive an arrow that points directly to the offending location within your query. 
 
@@ -156,7 +156,7 @@ LINE 1: SELECT long_ago FROM star_wars;
                ^
 ```
 
-### String Slicing
+## String Slicing
 
 Even as SQL fans, we know that SQL can learn a thing or two from newer languages. Instead of using bulky `SUBSTRING` functions, you can slice strings in DuckDB using bracket syntax. As a note, SQL is required to be 1-indexed, so that is a slight difference from other languages (although it keeps DuckDB internally consistent and similar to other DBs). 
 
@@ -170,7 +170,7 @@ SELECT 'I love you! I know'[:-3] AS nearly_soloed;
 |:---|
 | I love you! I k |
 
-### Simple List and Struct Creation
+## Simple List and Struct Creation
 
 DuckDB provides nested types to allow more flexible data structures than the purely relational model would allow, while retaining high performance. To make them as easy as possible to use, creating a `LIST` (array) or a `STRUCT` (object) uses simpler syntax than other SQL systems. Data types are automatically inferred.
 
@@ -180,7 +180,7 @@ SELECT
     {name: 'Star Destroyer', common_misconceptions: 'Can''t in fact destroy a star'} AS star_destroyer_facts;
 ```
 
-### List Slicing
+## List Slicing
 
 Bracket syntax may also be used to slice a `LIST`. Again, note that this is 1-indexed for SQL compatibility.
 
@@ -196,7 +196,7 @@ FROM (SELECT ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list);
 |:---|
 | [B-Wing]               |
 
-### Struct Dot Notation
+## Struct Dot Notation
 
 Use convenient dot notation to access the value of a specific key in a DuckDB `STRUCT` column. If keys contain spaces, double quotes can be used.
 
@@ -207,7 +207,7 @@ SELECT
 FROM (SELECT {name: 'Tatooine', 'Amount of sand': 'High'} AS planet);
 ```
 
-### Trailing Commas
+## Trailing Commas
 
 Have you ever removed your final column from a SQL `SELECT` and been met with an error, only to find you needed to remove the trailing comma as well!? Never? Ok, Jedi... On a more serious note, this feature is an example of DuckDB's responsiveness to the community. In under 2 days from seeing this issue in a tweet (not even about DuckDB!), this feature was already built, tested, and merged into the primary branch. You can include trailing commas in many places in your query, and we hope this saves you from the most boring but frustrating of errors! 
 
@@ -223,7 +223,7 @@ GROUP BY
 ;
 ```
 
-### Function Aliases from Other Databases
+## Function Aliases from Other Databases
 
 For many functions, DuckDB supports multiple names in order to align with other database systems. After all, ducks are pretty versatile – they can fly, swim, and walk! Most commonly, DuckDB supports PostgreSQL function names, but many SQLite names are supported, as well as some from other systems. If you are migrating your workloads to DuckDB and a different function name would be helpful, please reach out – they are very easy to add as long as the behavior is the same! See our [functions documentation]({% link docs/sql/functions/overview.md %}) for details.
 
@@ -234,7 +234,7 @@ SELECT
     substring('Obi-Wan Kenobi, you''re my only hope', 17, 100) AS sliced_quote_3;
 ```
 
-### Auto-Increment Duplicate Column Names
+## Auto-Increment Duplicate Column Names
 
 As you are building a query that joins similar tables, you'll often encounter duplicate column names. If the query is the final result, DuckDB will simply return the duplicated column names without modifications. However, if the query is used to create a table, or nested in a subquery or Common Table Expression (where duplicate columns are forbidden by other databases!), DuckDB will automatically assign new names to the repeated columns to make query prototyping easier.
 
@@ -256,7 +256,7 @@ FROM (
 |:---|:---|
 | green_one   | green_two     |
 
-### Implicit Type Casts
+## Implicit Type Casts
 
 DuckDB believes in using specific data types for performance, but attempts to automatically cast between types whenever necessary. For example, when joining between an integer and a varchar, DuckDB will automatically cast them to be the same type and complete the join successfully. A `List` or `IN` expression may also be created with a mixture of types, and they will be automatically cast as well. Also, `INT` and `BIGINT` are interchangeable, and thanks to DuckDB's new storage compression, a `BIGINT` usually doesn't even take up any extra space! Now you can store your data as the optimal data type, but use it easily for the best of both!
 
@@ -277,7 +277,7 @@ JOIN sith_count_varchar s_char
 |:---|:---|
 | 2  | 2  |
 
-### Other Friendly Features
+## Other Friendly Features
 
 There are many other features of DuckDB that make it easier to analyze data with SQL!  
   
@@ -287,7 +287,7 @@ DuckDB also implements multiple SQL clauses outside of the traditional core clau
   
 The [`DISTINCT ON` clause]({% link docs/sql/statements/select.md %}) allows DuckDB to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
 
-### Ideas for the Future
+## Ideas for the Future
 
 In addition to what has already been implemented, several other improvements have been suggested. Let us know if one would be particularly useful – we are flexible with our roadmap! If you would like to contribute, we are very open to PRs and you are welcome to reach out on [GitHub](https://github.com/duckdb/duckdb) or [Discord](https://discord.gg/vukK4xp7Rd) ahead of time to talk through a new feature's design. 
 
