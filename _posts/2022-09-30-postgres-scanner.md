@@ -125,7 +125,7 @@ COPY (
   WHERE 
     ctid BETWEEN '(0,0)'::tid AND '(1000,0)'::tid AND 
     ("l_shipdate" < '1998-09-02' AND "l_shipdate" IS NOT NULL)
-  ) TO STDOUT (FORMAT binary);
+  ) TO STDOUT (FORMAT BINARY);
 -- and so on
 ```
 

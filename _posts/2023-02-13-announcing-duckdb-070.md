@@ -214,7 +214,7 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 ```
 
 ```python
->>> duckdb.sql('select min(l_orderkey) from lineitem').show()
+>>> duckdb.sql('SELECT min(l_orderkey) FROM lineitem').show()
 ```
 
 ```text
@@ -230,7 +230,7 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 
 ```python
 import duckdb
-duckdb.sql('select 42').pl()
+duckdb.sql('SELECT 42').pl()
 ```
 
 ```text
@@ -250,7 +250,7 @@ In addition, Polars DataFrames can be directly queried using the SQL interface.
 import duckdb
 import polars as pl
 df = pl.DataFrame({'a': 42})
-duckdb.sql('select * from df').pl()
+duckdb.sql('SELECT * FROM df').pl()
 ```
 
 ```text
@@ -272,7 +272,7 @@ from fsspec import filesystem
 
 duckdb.register_filesystem(filesystem('gcs'))
 
-data = duckdb.query("select * from read_csv_auto('gcs:///bucket/file.csv')").fetchall()
+data = duckdb.query("SELECT * FROM read_csv_auto('gcs:///bucket/file.csv')").fetchall()
 ```
 
 Have a look at the [guide]({% link docs/guides/python/filesystems.md %}) for more information

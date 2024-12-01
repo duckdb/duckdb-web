@@ -169,7 +169,7 @@ def random_date():
      return fake.date_between()
 
 duckdb.create_function('random_date', random_date, [], DATE)
-res = duckdb.sql('select random_date()').fetchall()
+res = duckdb.sql('SELECT random_date()').fetchall()
 print(res)
 # [(datetime.date(2019, 5, 15),)]
 ```

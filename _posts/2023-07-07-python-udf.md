@@ -107,13 +107,13 @@ duckdb.create_function('random_date', random_date, [], DATE)
 
 # After registration, we can use the function directly via SQL
 # Notice that without side_effect=True, it's not guaranteed that the function will be re-evaluated.
-res = duckdb.sql('select random_date() from range (3)').fetchall()
+res = duckdb.sql('SELECT random_date() FROM range (3)').fetchall()
 # [(datetime.date(2003, 8, 3),), (datetime.date(2003, 8, 3),), (datetime.date(2003, 8, 3),)]
 
 # Now let's re-add the function with side-effects marked as true.
 duckdb.remove_function('random_date')
 duckdb.create_function('random_date', random_date, [], DATE, side_effects=True)
-res = duckdb.sql('select random_date() from range (3)').fetchall()
+res = duckdb.sql('SELECT random_date() FROM range (3)').fetchall()
 # [(datetime.date(2020, 11, 29),), (datetime.date(2009, 5, 18),), (datetime.date(2018, 5, 24),)]
 ```
 
@@ -140,7 +140,7 @@ con = duckdb.connect()
 # To register the function, we must define it's type to be 'arrow'
 con.create_function('swap_case', swap_case, [VARCHAR], VARCHAR, type='arrow')
 
-res = con.sql("select swap_case('PEDRO HOLANDA')").fetchall()
+res = con.sql("SELECT swap_case('PEDRO HOLANDA')").fetchall()
 # [('pedro holanda',)]
 ```
 
@@ -227,13 +227,13 @@ con.create_function('add_arrow_type', add_arrow_type, ['BIGINT'], 'BIGINT', type
 
 # Integer View with 10,000,000 elements.
 con.sql("""
-     select i
-     from range(10000000) tbl(i);
+     SELECT i
+     FROM range(10000000) tbl(i);
 """).to_view("numbers")
 
 # Calls for both UDFs
-native_res = con.sql("select sum(add_built_in_type(i)) from numbers").fetchall()
-arrow_res = con.sql("select sum(add_arrow_type(i)) from numbers").fetchall()
+native_res = con.sql("SELECT sum(add_built_in_type(i)) FROM numbers").fetchall()
+arrow_res = con.sql("SELECT sum(add_arrow_type(i)) FROM numbers").fetchall()
 ```
 
 <div class="narrow_table"></div>
@@ -268,29 +268,29 @@ def string_length_arrow(x):
 
 # Same Function but external to the database
 def exec_external(con):
-     arrow_table = con.sql("select i from strings tbl(i)").arrow()
+     arrow_table = con.sql("SELECT i FROM strings tbl(i)").arrow()
      arrow_column = arrow_table['i']
      tuples = len(arrow_column)
      values = [len(i.as_py()) if i.as_py() != None else 0 for i in arrow_column]
      array = pa.array(values, type=pa.int32(), size=tuples)
      arrow_tbl = pa.Table.from_arrays([array], names=['i'])
-     return con.sql("select sum(i) from arrow_tbl").fetchall()
+     return con.sql("SELECT sum(i) FROM arrow_tbl").fetchall()
 
 
 con = duckdb.connect()
 con.create_function('strlen_arrow', string_length_arrow, ['VARCHAR'], int, type='arrow')
 
 con.sql("""
-     select
-          case when i != 0 and i % 42 = 0
-          then
+     SELECT
+          CASE WHEN i != 0 AND i % 42 = 0
+          THEN
                NULL
-          else
-               repeat(chr((65 + (i % 26))::INTEGER), (4 + (i % 12))) end
-          from range(10000000) tbl(i);
+          ELSE
+               repeat(chr((65 + (i % 26))::INTEGER), (4 + (i % 12))) END
+          FROM range(10000000) tbl(i);
 """).to_view("strings")
 
-con.sql("select sum(strlen_arrow(i)) from strings tbl(i)").fetchall()
+con.sql("SELECT sum(strlen_arrow(i)) FROM strings tbl(i)").fetchall()
 
 exec_external(con)
 ```
