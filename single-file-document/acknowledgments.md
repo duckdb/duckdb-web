@@ -5,4 +5,3 @@ This document is built with [Pandoc](https://pandoc.org/) using the [Eisvogel te
 The emojis used in this document are provided by [Twemoji](https://twemoji.twitter.com/) under the [CC-BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
 
 The syntax highlighter uses the [Bluloco Light theme](https://github.com/uloco/theme-bluloco-light) by Umut Topuzoğlu.
-

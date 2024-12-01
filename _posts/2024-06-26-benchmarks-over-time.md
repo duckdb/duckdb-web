@@ -221,7 +221,7 @@ You can see that this was achieved while continuing to improve performance for t
 </script>
 
 Join operations are another area of focus for analytical databases, and DuckDB in particular.
-Join speeds have **improved by 4 in the last 3 years**!
+Join speeds have **improved by 4× in the last 3 years**!
 
 Version 0.6.1 in December 2022 introduced improvements to the out-of-core hash join that actually improved the smaller-than-memory case as well.
 Parallel data loading from 0.6.1 also helps in this benchmark as well, as some results are the same size as the input table.
@@ -398,7 +398,7 @@ Please let us know if you uncover any interesting findings!
 ## Conclusion
 
 In summary, not only is DuckDB's feature set growing substantially with each release, DuckDB is getting faster very fast!
-Overall, performance has improved by **14 times in only 3 years!**
+Overall, performance has **improved by 14× in only 3 years!**
 
 Yet query performance is only part of the story!
 The variety of workloads that DuckDB can handle is wide and growing wider thanks to a full-featured SQL dialect, including high performance window functions.
@@ -490,7 +490,7 @@ As older versions would not fail gracefully, the scale metrics were accumulated 
 
 #### Computing Resources
 
-All tests use a Macbook Pro M1 with 16GB of RAM.
+All tests use a MacBook Pro M1 with 16GB of RAM.
 In 2024, this is far from state of the art! 
 If you have more powerful hardware, you will see both improved performance and scalability.
 

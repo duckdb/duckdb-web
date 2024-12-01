@@ -110,7 +110,7 @@ SELECT queries.id AS id, list(inner_id) AS matches
 GROUP BY queries.id;
 ```
 
-Executing this on my Apple M3 Pro Macbook with 36 GB memory takes about 10 seconds.
+Executing this on my Apple M3 Pro-equipped MacBook with 36 GB memory takes about 10 seconds.
 
 If we `EXPLAIN` this query plan, we'll see a lot of advanced operators:
 

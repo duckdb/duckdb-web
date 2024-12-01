@@ -178,7 +178,7 @@ EXPLAIN ...
 └───────────────────────────┘└───────────────────────────┘
 ```
 
-Let's first look at the difference in execution times on my Macbook with an M1 Max and 32 GB of memory before talking about the optimizations that have taken place.
+Let's first look at the difference in execution times on my MacBook with an M1 Max and 32 GB of memory before talking about the optimizations that have taken place.
 
 |          | Unoptimized | Optimized |
 |----------|-------------|-----------|
