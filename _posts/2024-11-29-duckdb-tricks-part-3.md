@@ -68,7 +68,7 @@ SELECT * EXCLUDE(min, max, q25, q50, q75)
 FROM (SUMMARIZE FROM 'services-2024-08.csv');
 ```
 
-Alternatively, we can use the [`COLUMNS`](({% link docs/sql/expressions/star.md %}#columns)) expression with the [`NOT SIMILAR TO` operator]({% link docs/sql/functions/pattern_matching.md %}#similar-to).
+Alternatively, we can use the [`COLUMNS`]({% link docs/sql/expressions/star.md %}#columns) expression with the [`NOT SIMILAR TO` operator]({% link docs/sql/functions/pattern_matching.md %}#similar-to).
 This works with a regular expression:
 
 ```sql
