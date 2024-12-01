@@ -337,9 +337,14 @@ def add_blog_posts(blog_root, of):
         doc_body = change_links(doc_body)
         doc_body = cleanup_doc(doc_body)
 
+        if ',' in doc_author or ' and ' in doc_author:
+            author_field = "Authors"
+        else:
+            author_field = "Author"
+
         of.write(f"""## {doc_title}\n\n""")
         of.write(f"""**Publication date:** {doc_date}\n\n""")
-        of.write(f"""**Author(s):** {doc_author}\n\n""")
+        of.write(f"""**{author_field}:** {doc_author}\n\n""")
         if doc_excerpt is not None and doc_excerpt != "":
             of.write(f"""**TL;DR:** {doc_excerpt}\n\n""")
         of.write(f"""{doc_body}\n\n""")
