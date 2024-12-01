@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB Tricks – Part 3"
-author: "Andra Ionescu, Gabor Szarnyas"
+author: "Andra Ionescu and Gabor Szarnyas"
 thumb: "/images/blog/thumbs/duckdb-tricks.svg"
 image: "/images/blog/thumbs/duckdb-tricks.png"
 excerpt: "In this new installment of the DuckDB Tricks series, we present features for convenient handling of tables and performance optimization tips for Parquet and CSV files."
