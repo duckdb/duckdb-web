@@ -119,7 +119,7 @@ def adjust_links_in_doc_body(doc_body):
     doc_body = doc_body.replace("](/images", "](../images")
     # replace <img> tags with Markdown
     doc_body = doc_body.replace('"/images', '"../images')
-    doc_body = re.sub(r'<img src="([^"]*)".*/>', r'![](\1)', doc_body, flags=re.MULTILINE)
+    doc_body = re.sub(r'<img src="([^"]*)"[^§]*/>', r'![](\1)', doc_body, flags=re.MULTILINE)
 
     # express HUGEINT limits as powers of two (upper and lower limits are ±2^127-1)
     doc_body = doc_body.replace("-170141183460469231731687303715884105727", "$-2^{127}-1$")
