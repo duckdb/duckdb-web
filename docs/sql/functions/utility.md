@@ -24,6 +24,7 @@ The functions below are difficult to categorize into specific function types and
 | [`current_setting('setting_name')`](#current_settingsetting_name) | Return the current value of the configuration setting. |
 | [`currval('sequence_name')`](#currvalsequence_name) | Return the current value of the sequence. Note that `nextval` must be called at least once prior to calling `currval`. |
 | [`error(message)`](#errormessage) | Throws the given error `message`. |
+| [`equi_width_bins(min, max, bincount, nice := false)`](#equi_width_binsminmaxbincountnice) | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max`, and `bincount` may be adjusted to produce more aesthetically pleasing results. |
 | [`force_checkpoint(database)`](#force_checkpointdatabase) | Synchronize WAL with file for (optional) database interrupting transactions. |
 | [`gen_random_uuid()`](#gen_random_uuid) | Alias of `uuid`. Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`getenv(var)`](#getenvvar) | Returns the value of the environment variable `var`. Only available in the [command line client]({% link docs/api/cli/overview.md %}). |
@@ -137,6 +138,14 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Throws the given error `message`. |
 | **Example** | `error('access_mode')` |
+
+#### `equi_width_bins(min, max, bincount, nice := false)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max`, and `bincount` may be adjusted to produce more aesthetically pleasing results.  |
+| **Example** | `equi_width_bins(0.1, 2.7, 4, true)` |
+| **Result** | `[0.5, 1.0, 1.5, 2.0, 2.5, 3.0]` |
 
 #### `force_checkpoint(database)`
 
