@@ -332,7 +332,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a `MAP` of key-value pairs representing bucket boundaries and counts of elements in the corresponding left-open and right-closed partition of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than the largest boundary appear, see [`is_histogram_other_bin`]({% link docs/sql/functions/utility.md %}#ishistogramotherbinarg).  |
+| **Description** | Returns a `MAP` of key-value pairs representing bucket boundaries and counts of elements in the corresponding left-open and right-closed partition of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than the largest boundary appear, see [`is_histogram_other_bin`]({% link docs/sql/functions/utility.md %}#is_histogram_other_binarg).  |
 | **Example** | `histogram(A, [0, 1, 10])` |
 | **Alias(es)** | - |
 
@@ -340,7 +340,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/sql/functions/utility.md %}#ishistogramotherbinarg). |
+| **Description** | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/sql/functions/utility.md %}#is_histogram_other_binarg). |
 | **Example** | `histogram_exact(A, [0, 1, 10])` |
 | **Alias(es)** | - |
 
