@@ -128,6 +128,8 @@ The table below shows the available general aggregate functions.
 | [`fsum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
 | [`geomean(arg)`](#geomeanarg) | Calculates the geometric mean of all non-null values in `arg`. |
 | [`histogram(arg)`](#histogramarg) | Returns a `MAP` of key-value pairs representing buckets and counts. |
+| [`histogram(arg, boundaries)`](#histogramargboundaries) | Returns a `MAP` of key-value pairs representing bucket boundaries and counts of elements in the corresponding left-open and right-closed partition of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than the largest boundary appear. |
+| [`histogram_exact(arg, elements)`](#histogramargelements) | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear. |
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`max(arg)`](#maxarg) | Returns the maximum value present in `arg`. |
@@ -325,6 +327,24 @@ The table below shows the available general aggregate functions.
 | **Description** | Returns a `MAP` of key-value pairs representing buckets and counts. |
 | **Example** | `histogram(A)` |
 | **Alias(es)** | - |
+
+#### `histogram(arg, boundaries)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `MAP` of key-value pairs representing bucket boundaries and counts of elements in the corresponding left-open and right-closed partition of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than the largest boundary appear. |
+| **Example** | `histogram(A, [0, 1, 10])` |
+| **Alias(es)** | - |
+
+
+#### `histogram_exact(arg, elements)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear. |
+| **Example** | `histogram_exact(A, [0, 1, 10])` |
+| **Alias(es)** | - |
+
 
 #### `last(arg)`
 
