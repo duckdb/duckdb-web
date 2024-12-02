@@ -197,7 +197,7 @@ The functions below are difficult to categorize into specific function types and
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` when `arg` is the "catch-all element" of its datatype for the purpose of the [`histogram_exact`]({% link docs/sql/functions/aggregates.md %}#histogramexactargelements) function, which is equal to the "right-most boundary" of its datatype for the purpose of the [`histogram`]({% link docs/sql/functions/aggregates.md %}#histogramargboundaries) function. |
-| **Example** | `is_histogram_other_bin(NULL, '')` |
+| **Example** | `is_histogram_other_bin('')` |
 | **Result** | `true` |
 
 #### `md5(string)`
