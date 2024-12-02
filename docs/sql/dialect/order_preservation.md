@@ -67,9 +67,9 @@ The following operations **do not** guarantee that the row order is preserved:
 
 By default, the following components preserve insertion order:
 
-* [CSV reader]({% link docs/data/csv/overview.md %}#order-preservation)
-* [Parquet reader]({% link docs/data/parquet/overview.md %}#order-preservation)
-* [JSON reader]({% link docs/data/json/overview.md %}#order-preservation)
+* [CSV reader]({% link docs/data/csv/overview.md %}#order-preservation) (`read_csv` function)
+* [JSON reader]({% link docs/data/json/overview.md %}#order-preservation) (`read_json` function)
+* [Parquet reader]({% link docs/data/parquet/overview.md %}#order-preservation) (`read_parquet` function)
 
 Preservation of insertion order is controlled by the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}).
 This setting is `true` by default, indicating that the order should be preserved.
