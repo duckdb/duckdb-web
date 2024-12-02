@@ -141,7 +141,6 @@ Clone the DuckDB repository and build it as follows:
 ```batch
 mkdir build
 cd build
-export CXXFLAGS="-Wno-missing-template-arg-list-after-template-kw"
 export LDFLAGS="-llog"
 cmake \
     -G "Ninja" \
