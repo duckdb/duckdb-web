@@ -52,10 +52,10 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 125
-extension_star_count_pretty: 125
-extension_download_count: 205
-extension_download_count_pretty: 205
+extension_star_count: 126
+extension_star_count_pretty: 126
+extension_download_count: 208
+extension_download_count_pretty: 208
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---
