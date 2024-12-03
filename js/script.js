@@ -79,10 +79,13 @@ $(document).ready(function(){
 		});
 	
 		function updateFilterHighlight($button) {
-			$('.filter-highlight').css({
-				left: $button.position().left,
-				width: $button.outerWidth()
-			});
+			var $highlight = $('.filter-highlight');
+			if ($highlight.length) {
+				$highlight.css({
+					left: $button.position().left,
+					width: $button.outerWidth()
+				});
+			}
 		}
 	
 		var $activeBtn = $('.filter-btn.active');
@@ -91,10 +94,8 @@ $(document).ready(function(){
 		$('.filterbar').on('click', 'button.filter-btn', function() {
 			var filterValue = $(this).attr('data-filter');
 			$grid.isotope({ filter: filterValue });
-	
 			$('.filter-btn').removeClass('active');
 			$(this).addClass('active');
-	
 			updateFilterHighlight($(this));
 		});
 	

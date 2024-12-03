@@ -89,7 +89,7 @@
 				{% endif %}
 			{% endfor %}
 		</div>
-		<a href="{{ site.url }}{{ site.baseurl }}{% if page.collection == "events" %}/events{% elsif page.collection == "media" %}/media{% else %}/news{% endif %}" class="button transparent arrow-right">
+		<a href="{{ site.url }}{{ site.baseurl }}{% if page.collection == "events" %}/events/{% elsif page.collection == "media" %}/media/{% else %}/news/{% endif %}" class="button transparent arrow-right">
 			All {% if page.collection == "events" %}events{% elsif page.collection == "media" %}media{% else %}blog posts{% endif %} <span></span>
 		</a>
 	</div>

@@ -179,10 +179,13 @@
 			top: unset;
 			left: unset;
 			padding: 0;
+			opacity: 1;
+			visibility: visible;
 			ul{
 				padding: 0;
 				border: 0;
 				background: none;
+				transform: none;
 				li a{
 					padding: 10px 15px;
 				}
