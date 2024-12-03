@@ -332,7 +332,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a `MAP` of key-value pairs representing bucket boundaries and counts of elements in the corresponding left-open and right-closed partition of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than the largest boundary appear, see [`is_histogram_other_bin`]({% link docs/sql/functions/utility.md %}#is_histogram_other_binarg). Boundaries may be provided, e.g., via [`equi_width_bins`]({% link docs/sql/functions/utility.md %}#equi_width_binsminmaxbincountnice). |
+| **Description** | Returns a `MAP` of key-value pairs representing the provided upper `boundaries` and counts of elements in the corresponding left-open and right-closed partition of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than all provided `boundaries` appear, see [`is_histogram_other_bin`]({% link docs/sql/functions/utility.md %}#is_histogram_other_binarg). Boundaries may be provided, e.g., via [`equi_width_bins`]({% link docs/sql/functions/utility.md %}#equi_width_binsminmaxbincountnice). |
 | **Example** | `histogram(A, [0, 1, 10])` |
 | **Alias(es)** | - |
 
