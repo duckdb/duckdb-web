@@ -11,7 +11,7 @@ In this sense, we provide below a list of examples that may be surprising to som
 - The aggregate functions `sum()` and `list()` return `NULL` instead of `0` and `[]`, respectively, for empty groups. The SQL Standard commands, we obey.
 - One-based indexing (e.g., arrays, strings, window functions (`row_number()`, `rank()`, `dense_rank`). The SQL Standard dictates, we comply. 
 - `age(x) = current_date - x` instead of `current_timestamp - x`. PostgreSQL did it first. We have no explanation.
-- DuckDB's `1 = true` is common but violates PostgreSQL compatibility, whereas DuckDB's `'t' = true` is more quirky and was inherited from PostgreSQL. 
+- DuckDB's `1 = true` is common but violates PostgreSQL compatibility, whereas DuckDB's `'t' = true` is more quirky and was inherited from PostgreSQL. DuckDB's `1 = '1.1'` baffles the author.
 - `'NaN'::FLOAT = 'NaN'::FLOAT` and `'NaN'::FLOAT > 3` violate IEEE-754 but are necessary for a total order, which is crucial in SQL (also, beware the consequences for `greatest`/`least`/`ORDER BY`)
 - `concat(x, NULL) = x` (same for `string_concat` and `list_concat`). You can blame this one on PostgreSQL. If you prefer `NULL`s in, `NULL`s out, use `x || NULL`.
 - Case insensitivity and the resulting inability to `SELECT A FROM 'file.parquet'` when both `a` and `A` are in the file. That's actually a DuckDB thing. Great when not working with external data, who wants to need to remember the correct capitalization and otherwise get the wrong numbers?
