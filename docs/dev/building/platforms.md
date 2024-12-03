@@ -40,6 +40,6 @@ For most platforms, DuckDB can often be [built from source](#building-duckdb-fro
 
 ## Building DuckDB from Source
 
-DuckDB can be [built from source]({% link docs/dev/building/build_instructions.md %}) for several other platforms such as FreeBSD, Linux distributions using musl libc, and macOS 11.
+DuckDB can be [built from source]({% link docs/dev/building/build_instructions.md %}) for several other platforms such as Android, FreeBSD, macOS 11, and Linux distributions using musl libc.
 
 For details on free and commercial support, see the [support policy blog post](https://duckdblabs.com/news/2023/10/02/support-policy#platforms).

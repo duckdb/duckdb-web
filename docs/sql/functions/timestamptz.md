@@ -11,7 +11,7 @@ This section describes functions and operators for examining and manipulating [`
 See also the related [`TIMESTAMP` functions]({% link docs/sql/functions/timestamptz.md %}).
 
 Despite the name, these values do not store a time zone – just an instant like `TIMESTAMP`.
-Instead, they request that the instant be binned and formatted using the current time zone, see the [blog post on DuckDB's timezone support](https://duckdb.org/2022/01/06/time-zones.html) for more information.
+Instead, they request that the instant be binned and formatted using the current time zone, see the [blog post on DuckDB's timezone support]({% post_url 2022-01-06-time-zones %}) for more information.
 
 Time zone support is provided by the built-in [ICU extension]({% link docs/extensions/icu.md %}).
 
