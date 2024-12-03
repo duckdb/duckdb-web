@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB – An embeddable analytical database"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/overview_latest_developments.png"
-image: "/images/media/thumbs/overview_latest_developments.png"
+thumb: "/images/media/thumbs/2020-02-02-duckdb-an-embeddable-analytical-database.png"
+image: "/images/media/thumbs/2020-02-02-duckdb-an-embeddable-analytical-database.png"
 excerpt: ""
 toc: false
 tags: ["Talk", "Overview"]

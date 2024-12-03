@@ -2,8 +2,8 @@
 layout: post
 title: "A short summary of the last decades of data management"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/overview_latest_developments.png"
-image: "/images/media/thumbs/overview_latest_developments.png"
+thumb: "/images/media/thumbs/2024-06-11-a-short-summary-of-the-last-decades-of-data-management.png"
+image: "/images/media/thumbs/2024-06-11-a-short-summary-of-the-last-decades-of-data-management.png"
 excerpt: ""
 toc: false
 tags: ["Talk", "Landscape"]

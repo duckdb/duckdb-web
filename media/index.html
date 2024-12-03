@@ -12,13 +12,15 @@ title: Media
 <div class="wrap">
 	<div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
 		<input type="text" id="search-input" placeholder="Search...">
-		<!--
 		<div class="filtertags">
 			<div class="filter-highlight"></div>
 			<button type="button" class="filter-btn active" data-filter="*">All</button>
+			<button type="button" class="filter-btn" data-filter=".talk">Talk</button>
+			<button type="button" class="filter-btn" data-filter=".podcast">Podcast</button>
 			<button type="button" class="filter-btn" data-filter=".updates">Updates</button>
+			<button type="button" class="filter-btn" data-filter=".overview">Overview</button>
+			<button type="button" class="filter-btn" data-filter=".deep-dive">Deep Dive</button>
 		</div>
-		-->
 	</div>
 </div>
 
@@ -27,8 +29,12 @@ title: Media
 		{% assign sorted_media = site.media | sort: 'date' | reverse %}
 		{% for media in sorted_media %}
 			{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
-			{% assign tag_classes = media.tags | join: ' ' %}
-			<div class="mediapreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ media.title | escape }}">
+			{% assign tag_classes = "" %}
+			{% for tag in media.tags %}
+				{% assign slugified_tag = tag | slugify %}
+				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
+			{% endfor %}
+			<div class="mediapreview postpreview {{ tag_classes | downcase }}" data-title="{{ media.title | escape }}">
 				<a href="/media/{{ media.slug | default: media.title | slugify }}/" title="{{ media.title }}" class="blocklink"></a>
 				<div class="postimg custom">
 					{% if media.thumb %}

@@ -36,18 +36,28 @@
               "url": "/why_duckdb"
             },
             {
-              "page": "Media",
-              "url": "/media"
-            },
-            {
               "page": "FAQ",
               "url": "/faq"
             }
           ]
         },
         {
-          "page": "Blog",
-          "url": "/news/"
+          "page": "Resources",
+          "url": "#",
+          "subfolderitems": [
+            {
+              "page": "Blog",
+              "url": "/news/"
+            },
+            {
+              "page": "Events",
+              "url": "/events"
+            },
+            {
+              "page": "Media",
+              "url": "/media"
+            }
+          ]
         },
         {
           "page": "GitHub",

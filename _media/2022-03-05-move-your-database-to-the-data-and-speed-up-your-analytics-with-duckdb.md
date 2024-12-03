@@ -2,8 +2,8 @@
 layout: post
 title: "Move your database to the data and speed up your analytics with DuckDB"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/overview_latest_developments.png"
-image: "/images/media/thumbs/overview_latest_developments.png"
+thumb: "/images/media/thumbs/2022-03-05-move-your-database-to-the-data-and-speed-up-your-analytics-with-duckdb.png"
+image: "/images/media/thumbs/2022-03-05-move-your-database-to-the-data-and-speed-up-your-analytics-with-duckdb.png"
 excerpt: ""
 toc: false
 tags: ["Podcast"]

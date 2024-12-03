@@ -186,8 +186,10 @@ $docuh5: 18px;
   --doc-codebox-background-color: var(--grey-95);
   --doc-codebox-border-color: var(--grey-90);
   --doc-codebox-button-background-color-hover: var(--grey-transparent-85);
+  --doc-menu-info-deprecated-border-color: var(--purple-70);
   --doc-scrollbar-bg: var(--grey-90);
   --doc-scrollbar-slider: var(--grey-80);
+  --doc-search-background-color: var(--grey-transparent-90);
   --doc-sidebar-selected-background-color: var(--grey-95);
   --doc-sidebar-text-selected: var(--grey-05);
   --doc-sidebar-text-unselected: var(--grey-15);
@@ -214,7 +216,7 @@ $docuh5: 18px;
   --interactive-folderbox-text-color-hover: var(--grey-20);
   --main-blogpost-background-color: var(--grey-100);
   --main-blogpost-border-color: var(--grey-90);
-  --main-body-background-color: #fafafa;
+  --main-body-background-color: var(--grey-98);
   --main-codebox-border-color: var(--grey-90);
   --main-codebox-dropshadow: #0000000d;
   --main-codebox-main-background-color: var(--grey-transparent-98);
@@ -266,8 +268,10 @@ html.darkmode {
   --doc-codebox-background-color: var(--grey-10);
   --doc-codebox-border-color: var(--grey-20);
   --doc-codebox-button-background-color-hover: var(--grey-transparent-20);
+  --doc-menu-info-deprecated-border-color: var(--purple-80);
   --doc-scrollbar-bg: var(--grey-15);
   --doc-scrollbar-slider: var(--grey-20);
+  --doc-search-background-color: var(--grey-transparent-20);
   --doc-sidebar-selected-background-color: var(--grey-10);
   --doc-sidebar-text-selected: var(--grey-98);
   --doc-sidebar-text-unselected: var(--grey-85);
@@ -329,3 +333,4 @@ html.darkmode {
   --social-thumbnail-button-text-color: var(--grey-02);
   --social-thumbnail-text-color: var(--grey-95);
 }
+
