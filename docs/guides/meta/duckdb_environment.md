@@ -77,6 +77,6 @@ DuckDB has the following built-in table functions to obtain metadata about avail
 * [`duckdb_sequences()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_sequences): sequences
 * [`duckdb_settings()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_settings): settings
 * [`duckdb_tables()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_tables): base tables
+* [`duckdb_temporary_files()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_temporary_files): the temporary files DuckDB has written to disk, to offload data from memory
 * [`duckdb_types()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_types): data types
 * [`duckdb_views()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_views): views
-* [`duckdb_temporary_files()`]({% link docs/sql/meta/duckdb_table_functions.md %}#duckdb_temporary_files): the temporary files DuckDB has written to disk, to offload data from memory
