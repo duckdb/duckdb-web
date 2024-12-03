@@ -361,7 +361,7 @@ res = filtered_df[["total_amount", "passenger_count","year"]]
 new_table = pa.Table.from_pandas(res)
 ```
 
-|    Name     | Time (s) | Peak Memory Usage (GBs) |
+|    Name     | Time (s) | Peak memory usage (GBs) |
 |-------------|---------:|------------------------:|
 | DuckDB      | 0.05     | 0.3                     |
 | Pandas      | 146.91   | 248                     |

@@ -176,7 +176,7 @@ Below, you can see a similar snapshot for loading the 65 compressed files. We fr
 
 For completeness, we also provide the results of the four queries on a MacBook Pro with an M1 Pro CPU. This comparison demonstrates the time differences between querying a database that does not fit in memory using a purely in-memory connection (i.e., without storage) versus one where the data is first loaded and persisted in the database.
 
-| Name | Time – Without Storage (s)  | Time – With Storage (s) |
+| Name | Time – without storage (s)  | Time – with storage (s) |
 |------|----------------------------:|------------------------:|
 | Q 01 | 2.45                        | 1.45                    |
 | Q 02 | 3.89                        | 0.80                    |
