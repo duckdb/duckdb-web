@@ -21,7 +21,7 @@ Select all rows that match the given case-insensitive `LIKE` expression:
 ```sql
 SELECT *
 FROM table_name
-WHERE name ILIKE '%mark%';
+WHERE name LIKE '%mark%';
 ```
 
 Select all rows that match the given composite expression:
