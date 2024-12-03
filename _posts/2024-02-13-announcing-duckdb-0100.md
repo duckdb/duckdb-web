@@ -190,8 +190,8 @@ Below is a benchmark comparing the loading time of 11 million rows of the NYC Ta
 
 <div class="narrow_table"></div>
 
-| Version  | Load Time  |
-|----------|------------|
+| Version  | Load time  |
+|----------|-----------:|
 | v0.9.2   | 2.6s       |
 | v0.10.0  | 1.15s      |
 
@@ -199,8 +199,8 @@ Furthermore, many optimizations have been done that make running queries over CS
 
 <div class="narrow_table"></div>
 
-| Version  | Query Time |
-|----------|------------|
+| Version  | Query time |
+|----------|-----------:|
 | v0.9.2   | 1.8s       |
 | v0.10.0  | 0.3s       |
 
@@ -339,9 +339,9 @@ Floating point numbers are notoriously difficult to compress efficiently, both i
 <div class="narrow_table"></div>
 
 | Compression  | Load   | Query  | Size   |
-|:-------------|--------|--------|--------|
-| ALP          | 0.434s | 0.02s  | 184 MB |
-| Patas        | 0.603s | 0.08s  | 275 MB |
+|:-------------|--------|-------:|-------:|
+| ALP          | 0.434s | 0.020s | 184 MB |
+| Patas        | 0.603s | 0.080s | 275 MB |
 | Uncompressed | 0.316s | 0.012s | 489 MB |
 
 As a user, you don't have to do anything to make use of the new ALP compression method, DuckDB will automatically decide during checkpointing whether using ALP is beneficial for the specific dataset.
