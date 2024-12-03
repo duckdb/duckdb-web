@@ -134,7 +134,7 @@ The following options can be passed to the `WITH` clause when creating an R-tree
 
 The `rtree_index_dump(VARCHAR)` table function can be used to return all the nodes within an R-tree index which might come on handy when debugging, profiling or otherwise just inspecting the structure of the index. The function takes the name of the R-tree index as an argument and returns a table with the following columns:
 
-| Column Name | Type | Description |
+| Column name | Type | Description |
 |-------------|------|-------------|
 | `level`     | `INTEGER` | The level of the node in the R-tree. The root node has level 0. |
 | `bounds`    | `BOX_2DF` | The bounding box of the node. |

@@ -100,7 +100,7 @@ Enums are stored as unsigned integer values internally. The exact native type de
 
 <div class="narrow_table monospace_table"></div>
 
-| Dictionary Size | NativeType |
+| Dictionary size | NativeType |
 |-----------------|------------|
 | <= 255          | uint8_t    |
 | <= 65535        | uint16_t   |
