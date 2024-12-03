@@ -11,12 +11,12 @@ In this sense, we provide below a list of examples that may be surprising to som
 - The aggregate functions `sum()` and `list()` return `NULL` instead of `0` and `[]`, respectively, for empty groups. The SQL Standard commands, we obey.
 - One-based indexing (e.g., arrays, strings, window functions (`row_number()`, `rank()`, `dense_rank`). The SQL Standard dictates, we comply. 
 - `age(x) = current_date - x` instead of `current_timestamp - x`. PostgreSQL did it first. We have no explanation.
-- `1 = true` is common, but `'t' = true` was inherited from PostgreSQL. 
+- DuckDB's `1 = true` is common but violates PostgreSQL compatibility, whereas DuckDB's `'t' = true` is more quirky and was inherited from PostgreSQL. 
 - `'NaN'::FLOAT = 'NaN'::FLOAT` and `'NaN'::FLOAT > 3` violate IEEE-754 but are necessary for a total order, which is crucial in SQL (also, beware the consequences for `greatest`/`least`/`ORDER BY`)
 - `concat(x, NULL) = x` (same for `string_concat` and `list_concat`). You can blame this one on PostgreSQL. If you prefer `NULL`s in, `NULL`s out, use `x || NULL`.
-- Case insensitivity and the resulting inability to `SELECT A FROM 'file.parquet'` when both cases are in the file. That's actually a DuckDB thing. Great when not working with external data, you shoudln't want to need to remember the correct capitalization to avoid gettign the wrong data. 
+- Case insensitivity and the resulting inability to `SELECT A FROM 'file.parquet'` when both `a` and `A` are in the file. That's actually a DuckDB thing. Great when not working with external data, who wants to need to remember the correct capitalization and otherwise get the wrong numbers?
 - Automatic column deduplication. You thought `SELECT A FROM (SELECT *, 1 AS A FROM tbl)` will give you a bunch of `1`s? Think again, and remember the previous point. 
 - `list_extract` / `map_extract` return `NULL` on non-existing keys, `struct_extract` throws. The former follows has PostgreSQL precedence. The latter makes sense because keys of structs are like columns. 
-- USING SAMPLE precedence rules
+- `USING SAMPLE` precedence rules. TODO.
 - `SELECT CASE WHEN 0 > 1 THEN (SELECT sum(range) FROM range(0, 100000000000000000)) END` never completes to return the obvious `NULL` answer. DuckDB is ducklarative, not imperative. As such, it tries hard to do optimizations for you (e.g., constant folding) but sometimes gets it wrong (e.g., short-circuiting case expressions).
-- `1 IN (0, NULL)` is `NULL`. That one makes some sense. All operations including `NULL` return `NULL`, no? (Except `0 IN (0, NULL)`.). Surprising that `1 in [0, NULL]` is `false` though.
+- `1 IN (0, NULL)` is `NULL`. That one makes some sense when you interpret the `NULL`s in the input and output as `UNKNOWN`. Surprising that `1 in [0, NULL]` is `false` though.
