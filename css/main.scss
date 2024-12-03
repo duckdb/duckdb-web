@@ -1521,7 +1521,7 @@ div.bodywrapper{
 		text-decoration: none;
 	}
 	dt.sig-object{
-		background-color: whitesmoke;
+		background: var(--doc-codebox-background-color, #F2F2F2);
 		border-radius: 7px;
 		padding: 2px 5px 2px 5px;
 		display: inline-block;
