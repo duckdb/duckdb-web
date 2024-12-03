@@ -221,11 +221,11 @@ $docuh5: 18px;
   --main-codebox-dropshadow: #0000000d;
   --main-codebox-main-background-color: var(--grey-transparent-98);
   --main-codebox-sub-background-color: var(--grey-transparent-90);
-  --main-highlight-purple-text-color: var(--purple-70);
+  --main-highlight-purple-text-color: var(--purple-80);
   --main-highlight-yellow-background-color: var(--grey-10);
   --main-highlight-yellow-text-color: var(--yellow-50);
   --main-infobox-background-color: var(--purple-transparent-98);
-  --main-infobox-border-start-color: var(--purple-transparent-90);
+  --main-infobox-border-color: var(--purple-transparent-90);
   --main-marker-background-color: var(--yellow-transparent-60);
   --main-marker-border-color: var(--yellow-45);
   --main-section-background-gradient-end-color: var(--grey-95);
@@ -237,8 +237,8 @@ $docuh5: 18px;
   --menu-dropdown-border-color: var(--grey-90);
   --menu-dropdown-item-background-hover: var(--grey-90);
   --menu-topmenu-background-color: var(--grey-transparent-98);
-  --menu-topmenu-border-color: var(--grey-transparent-90);
-  --menu-topmenu-searchbar-border-color: var(--grey-90);
+  --menu-topmenu-border-color: #e6e6e64d;
+  --menu-topmenu-searchbar-border-color: var(--grey-transparent-85);
   --menu-topmenu-searchbar-shortcut-background-color: var(--grey-transparent-90);
   --menu-topmenu-searchbar-shortcut-text-color: var(--grey-60);
   --menu-topmenu-searchbar-text-color: var(--grey-transparent-30);
@@ -303,11 +303,11 @@ html.darkmode {
   --main-codebox-dropshadow: #fff10012;
   --main-codebox-main-background-color: var(--grey-transparent-05);
   --main-codebox-sub-background-color: var(--grey-transparent-20);
-  --main-highlight-purple-text-color: var(--purple-70);
+  --main-highlight-purple-text-color: var(--purple-80);
   --main-highlight-yellow-background-color: var(--yellow-50);
   --main-highlight-yellow-text-color: var(--grey-10);
   --main-infobox-background-color: var(--grey-transparent-15);
-  --main-infobox-border-start-color: var(--grey-transparent-20);
+  --main-infobox-border-color: var(--grey-transparent-20);
   --main-marker-background-color: var(--yellow-transparent-30);
   --main-marker-border-color: var(--yellow-transparent-40);
   --main-section-background-gradient-end-color: var(--grey-10);
@@ -319,8 +319,8 @@ html.darkmode {
   --menu-dropdown-border-color: var(--grey-20);
   --menu-dropdown-item-background-hover: var(--grey-15);
   --menu-topmenu-background-color: var(--grey-transparent-10);
-  --menu-topmenu-border-color: var(--grey-transparent-15);
-  --menu-topmenu-searchbar-border-color: var(--grey-20);
+  --menu-topmenu-border-color: #2626264d;
+  --menu-topmenu-searchbar-border-color: var(--grey-transparent-15);
   --menu-topmenu-searchbar-shortcut-background-color: var(--grey-transparent-30);
   --menu-topmenu-searchbar-shortcut-text-color: var(--grey-60);
   --menu-topmenu-searchbar-text-color: var(--grey-transparent-85);
@@ -333,4 +333,3 @@ html.darkmode {
   --social-thumbnail-button-text-color: var(--grey-02);
   --social-thumbnail-text-color: var(--grey-95);
 }
-

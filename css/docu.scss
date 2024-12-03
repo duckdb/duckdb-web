@@ -34,6 +34,8 @@ body.documentation{
 		margin-left: 2px;
 		font-family: $fontSans;
 		font-weight: 500;
+		-webkit-transition: background .2s;
+		-o-transition: background .2s;
 		transition: background .2s;
 		white-space: nowrap;
 	  &::after{
@@ -52,8 +54,12 @@ body.documentation{
 	main .wrap{
 		width: calc(100% - 275px);
 		min-height: 100vh; 
+		display: -webkit-box; 
+		display: -ms-flexbox; 
 		display: flex;
-		justify-content: space-between;
+		-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
+				justify-content: space-between;
 		max-width: unset;
 		margin-left: 275px;
 		padding: 0 0 0 30px;
@@ -78,7 +84,7 @@ body.documentation{
 					margin-top: 0px;
 				}
 			}
-		 	/*#all-available-extensions td > a:first-of-type{
+			 /*#all-available-extensions td > a:first-of-type{
 				margin-right: 8px;
 			}*/
 			table a.nobg:hover{
@@ -90,7 +96,7 @@ body.documentation{
 				margin-top: 0;
 				margin-bottom: 8px;
 			}
-		 	@media only screen and (max-width: 1200px) {
+			 @media only screen and (max-width: 1200px) {
 				width: 100%;
 				max-width: 100%;
 			}
@@ -205,6 +211,8 @@ body.documentation{
 	.wrap a{
 		color: var(--text-primary-color);
 		text-decoration: underline;
+		-webkit-transition: color .3s;
+		-o-transition: color .3s;
 		transition: color .3s;
 	  &:hover{
 			color: $blue;
@@ -212,10 +220,17 @@ body.documentation{
 	}
 	.headlinebar{
 		width: 100%;
-		flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
+				justify-content: space-between;
+		-webkit-box-align: center;
+			-ms-flex-align: center;
+				align-items: center;
 		position: relative;
 		margin-bottom: 20px;
 		z-index: 800;
@@ -242,7 +257,7 @@ body.documentation{
 		position: relative;
 		width: 22%;
 		padding: 100px 20px 20px 20px;
-	  	@media only screen and (max-width: 1200px) {
+		  @media only screen and (max-width: 1200px) {
 			display: none;
 		}
 	}
@@ -251,7 +266,7 @@ body.documentation{
 		top: 100px;
 		height: calc(100vh - 100px);
 		overflow: auto;
-	  	-ms-overflow-style: none; 
+		  -ms-overflow-style: none; 
 		scrollbar-width: none;
 		&::-webkit-scrollbar {
 			display: none;
@@ -297,7 +312,8 @@ body.documentation{
 			/*background: $black50;*/
 				border-radius: 100px;
 				display: inline-block;
-				text-overflow: ellipsis; 
+				-o-text-overflow: ellipsis;
+				   text-overflow: ellipsis; 
 				overflow: hidden; 
 				white-space: nowrap;
 				max-width: 100%;
@@ -317,7 +333,8 @@ body.documentation{
 			display: inline-block;
 			background-size: contain;
 			background-repeat: no-repeat;
-			flex-shrink: 0;
+			-ms-flex-negative: 0;
+				flex-shrink: 0;
 		}
 		a{
 			font-size: 13px;
@@ -325,6 +342,8 @@ body.documentation{
 			border: 1px solid white;
 			border-radius: 50px;
 			white-space: nowrap;
+			-webkit-transition: all .3s;
+			-o-transition: all .3s;
 			transition: all .3s;
 		 &:hover{
 				background: white;
@@ -333,9 +352,15 @@ body.documentation{
 			}
 		}
 		.content{
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
-			column-gap: 20px;
-			align-items: center;
+			-webkit-column-gap: 20px;
+			   -moz-column-gap: 20px;
+					column-gap: 20px;
+			-webkit-box-align: center;
+				-ms-flex-align: center;
+					align-items: center;
 		}
 	}
 	main .banner{
@@ -362,9 +387,15 @@ body.documentation{
 	}
 	div.versionselect{
 		position: relative;
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: flex-end;
-		align-items: flex-start;
+		-webkit-box-pack: end;
+			-ms-flex-pack: end;
+				justify-content: flex-end;
+		-webkit-box-align: start;
+			-ms-flex-align: start;
+				align-items: flex-start;
 		gap: 10px;
 	}
 	div.version{
@@ -385,9 +416,15 @@ body.documentation{
 			width: auto;
 			height: 40px;
 			color: var(--main-text-secondary-color, #666);
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
-			align-items: center;
+			-webkit-box-align: center;
+				-ms-flex-align: center;
+					align-items: center;
 			gap: 5px;
+			-webkit-transition: border .3s;
+			-o-transition: border .3s;
 			transition: border .3s;
 			&:hover{
 				border: 1px solid var(--menu-topmenu-text-color-hover, #6A58DA);
@@ -402,10 +439,16 @@ body.documentation{
 			background-size: contain;
 			background-repeat: no-repeat;
 			display: block;
+			-webkit-transition: -webkit-transform .3s;
+			transition: -webkit-transform .3s;
+			-o-transition: transform .3s;
 			transition: transform .3s;
+			transition: transform .3s, -webkit-transform .3s;
 		}
 		&.active span.arrow{
-			transform: rotate(-180deg);
+			-webkit-transform: rotate(-180deg);
+				-ms-transform: rotate(-180deg);
+					transform: rotate(-180deg);
 		}
 	}
 }
@@ -446,6 +489,8 @@ body.documentation{
 				display: inline-block;
 				width: 100%;
 				color: var(--main-text-primary-color, #F2F2F2)!important;
+				-webkit-transition: background-color .3s;
+				-o-transition: background-color .3s;
 				transition: background-color .3s;
 				white-space: nowrap;
 				&:hover{
@@ -462,7 +507,9 @@ body.documentation{
 		}
 	}
    &:hover{
-		transform: translateX(0px);
+		-webkit-transform: translateX(0px);
+			-ms-transform: translateX(0px);
+				transform: translateX(0px);
 	}
    >span{
 		font-size: 14px;
@@ -500,7 +547,7 @@ body.documentation{
 	a{
 		color: var(--doc-sidebar-text-unselected, #262626);
 		text-decoration: none;
-	    &:hover{
+		&:hover{
 			text-decoration: none;
 		}
 	}
@@ -700,7 +747,8 @@ code {
 }
 
 body.documentation code{
-	font-feature-settings: "ss19";
+	-webkit-font-feature-settings: "ss19";
+			font-feature-settings: "ss19";
 }
 pre code {
 	display: block;
@@ -708,7 +756,9 @@ pre code {
 				box-shadow: none;
 }
 pre.highlight{
-	tab-size: 4;
+	-moz-tab-size: 4;
+	  -o-tab-size: 4;
+		 tab-size: 4;
 	white-space: pre;
 	overflow-x: auto;
 	padding-bottom: 0px;
@@ -735,6 +785,8 @@ div.highlight{
 	position: relative;
 	border-radius: 10px;
 	overflow: hidden;
+	-webkit-transition: border-color .3s;
+	-o-transition: border-color .3s;
 	transition: border-color .3s;
 	background: var(--doc-codebox-background-color, #F2F2F2);
 	border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
@@ -800,7 +852,8 @@ table {
 	display: block;
 	overflow-x: auto;
 	font-variant-numeric: tabular-nums;
-	font-variant-ligatures: none;
+	-webkit-font-variant-ligatures: none;
+			font-variant-ligatures: none;
 	&::-webkit-scrollbar {
 		height: 5px;
 	}
@@ -1054,11 +1107,13 @@ body.documentation main .wrap a.pill{
 		background-repeat: no-repeat;
 		background-position: center center;
 		margin-left: auto;
-		flex-shrink: 0;
+		-ms-flex-negative: 0;
+			flex-shrink: 0;
 	}
 	.symbol{
 		display: block;
-		flex-shrink: 0;
+		-ms-flex-negative: 0;
+			flex-shrink: 0;
 		width: 40px;
 		height: 40px;
 		border-radius: 7.467px;
@@ -1277,8 +1332,12 @@ p img {
 	border-radius: 10px;
 	background: var(--doc-codebox-background-color, #F2F2F2);
 	padding: 20px;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: space-between;
+	-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+			justify-content: space-between;
 	margin-top: 45px;
 	width: 100%;
 	h5{
