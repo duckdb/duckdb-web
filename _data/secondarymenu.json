@@ -51,11 +51,11 @@
             },
             {
               "page": "Events",
-              "url": "/events"
+              "url": "/events/"
             },
             {
               "page": "Media",
-              "url": "/media"
+              "url": "/media/"
             }
           ]
         },
