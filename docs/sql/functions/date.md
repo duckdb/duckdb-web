@@ -31,7 +31,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 
 | Name | Description |
 |:--|:-------|
-| [`current_date`](#current_date) | Current date (at start of current transaction). |
+| [`current_date`](#current_date) | Current date (at start of current transaction) in UTC. |
 | [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date. |
 | [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition]({% link docs/sql/functions/datepart.md %}) boundaries between the dates. |
 | [`date_part(part, date)`](#date_partpart-date) | Get the [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). |
@@ -53,13 +53,13 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | [`strftime(date, format)`](#strftimedate-format) | Converts a date to a string according to the [format string]({% link docs/sql/functions/dateformat.md %}). |
 | [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
 | [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` date. `origin` defaults to 2000-01-03 for buckets that don't include a month or year interval, and to 2000-01-01 for month and year buckets. |
-| [`today()`](#today) | Current date (start of current transaction). |
+| [`today()`](#today) | Current date (start of current transaction) in UTC. |
 
 #### `current_date`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current date (at start of current transaction). |
+| **Description** | Current date (at start of current transaction) in UTC. |
 | **Example** | `current_date` |
 | **Result** | `2022-10-08` |
 
@@ -239,7 +239,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current date (start of current transaction). |
+| **Description** | Current date (start of current transaction) in UTC. |
 | **Example** | `today()` |
 | **Result** | `2022-10-08` |
 
