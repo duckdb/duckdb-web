@@ -50,7 +50,7 @@ plugins:
 
 collections:
   media:
-    output: false
+    output: true
     permalink: /media/:title/
   events:
     output: true

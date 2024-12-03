@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css?{{ site.data['hash'] }}">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/communityextensions.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/darkmode.css?{{ site.data['hash'] }}">
 
 	<link rel="icon" type="image/png" href="{{ site.baseurl }}/images/favicon_ce/favicon-48x48.png" sizes="48x48" />
 	<link rel="icon" type="image/svg+xml" href="{{ site.baseurl }}/images/favicon_ce/favicon.svg" />
@@ -21,6 +22,15 @@
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
 	{% seo title=false %}
+	
+	<script>
+		var userPrefersDark = localStorage.getItem('mode') === 'dark';
+		var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+		if (userPrefersDark || systemPrefersDark) {
+			document.documentElement.classList.add('darkmode');
+			document.documentElement.classList.add('disable-transitions');
+		}
+	</script>
 
 </head>
 
@@ -48,7 +58,9 @@
 						</div>
 					</nav>
 				</div>
-				<a class="button yellow" href="/docs/installation/" target="_blank">Install DuckDB</a>
+				<div class="options">
+					<button class="mode" data-mode="dark"></button>
+				</div>
 			</div>
 		</div>
 	</header>

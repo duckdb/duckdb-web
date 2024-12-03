@@ -1,19 +1,20 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{% if page.title == "DuckDB" %}
-    <title>{{ page.title }}</title>
+	<title>{{ page.title }}</title>
 	{% else %}
-    <title>{{ page.title }} – DuckDB</title>
+	<title>{{ page.title }} – DuckDB</title>
 	{% endif %}
 	
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css?{{ site.data['hash'] }}">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css?{{ site.data['hash'] }}">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css?{{ site.data['hash'] }}">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/blog.css?{{ site.data['hash'] }}">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/blog.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/darkmode.css?{{ site.data['hash'] }}">
 	
 	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon/favicon-32x32.png">
@@ -34,6 +35,15 @@
 	{% else %}
 		{% seo title=false %}
 	{% endif %}
+	
+	<script>
+		var userPrefersDark = localStorage.getItem('mode') === 'dark';
+		var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+		if (userPrefersDark || systemPrefersDark) {
+			document.documentElement.classList.add('darkmode');
+			document.documentElement.classList.add('disable-transitions');
+		}
+	</script>
 
 </head>
 <body {% if page.body_class %} class="{{ page.body_class }}" {% endif %}>
@@ -55,179 +65,84 @@
 						</div>
 					</div>
 				</div>
-				<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
+				<div class="options">
+					<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
+					<button class="mode" data-mode="dark"></button>
+				</div>
 			</div>
 		</div>
 	</header>
-
+	
 	<main>
-		
 		<div class="newswrap">
-		
 			<div class="postwrap">
-				{% if page.layoutpart == "postsoverview" %}
-				<div class="wrap pagetitle">
-					<h1>{{ page.title }}</h1>
-				</div>
-				{% endif %}
-				
 				<div class="postcontent">
-					
-					{% if page.layoutpart == "postsoverview" %}
-						{% include anchor_headings.html html=content %}
-					{% else %}
-					
-						<div class="singleentry{% if page.toc != false %} contains_toc{% endif %}">
-							
-							<div class="content">
-								<div class="contentwidth">
-									
-									<h1>{{ page.title }}</h1>
-									
-									{% if page.author and page.event == false or page.collection != "events"%}
-										<div class="infoline">
-											<div class="icon">
-												{% assign author = site.data.authors[page.author] %}
-												{% if author %}
-													<img src="{{ author.picture }}" alt="Author Avatar">
-												{% endif %}
-											</div>
-											<div>
-												<span class="author">{{ page.author }}</span>
-												{% if page.event != true and page.collection != "events" %}
-													<div class="publishedinfo">
-														<span>Published on</span>
-														<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
-													</div>
-												{% endif %}
-											</div>
+					<div class="singleentry{% if page.toc != false %} contains_toc{% endif %}">
+						<div class="content">
+							<div class="contentwidth">
+								<h1>{{ page.title }}</h1>
+								
+								{% if page.author and page.event == false or page.collection != "events" %}
+									<div class="infoline">
+										<div class="icon">
+											{% assign author = site.data.authors[page.author] %}
+											{% if author %}
+												<img src="{{ author.picture }}" alt="Author Avatar">
+											{% endif %}
 										</div>
-									{% endif %}
-									{% if page.event == true or page.collection == "events" %}
-										<div class="infoline">
-											<div class="scheduled">
-												<span>Scheduled for</span>
-												<span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
-											</div>
-											<div class="venue"><span>at {{ page.venue }}</span></div>
+										<div>
+											<span class="author">{{ page.author }}</span>
+											{% if page.event != true and page.collection != "events" %}
+												<div class="publishedinfo">
+													<span>Published on</span>
+													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
+												</div>
+											{% endif %}
 										</div>
-									{% endif %}
-									
-									{% if page.excerpt != "" %}
-										<div class="excerpt">
-											{{ '_TL;DR: ' | append: page.excerpt | append: '_' | markdownify }}
+									</div>
+								{% endif %}
+								
+								{% if page.event == true or page.collection == "events" %}
+									<div class="infoline">
+										<div class="scheduled">
+											<span>Scheduled for</span>
+											<span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
 										</div>
-									{% endif %}
-									
-									{% include anchor_headings.html html=content %}
-								</div>
+										<div class="venue"><span>at {{ page.venue }}</span></div>
+									</div>
+								{% endif %}
+								
+								{% if page.excerpt != "" %}
+									<div class="excerpt">
+										{{ '_TL;DR: ' | append: page.excerpt | append: '_' | markdownify }}
+									</div>
+								{% endif %}
+								
+								{% include anchor_headings.html html=content %}
 							</div>
-							
-							{% if page.toc != false %}
-								<div class="toc_sidebar">
-									{% assign toc_only = content | toc_only %}
-									{% assign toc_text_only = toc_only | strip_html | remove: ' ' %}
-									{% if toc_text_only.size > 10 %}
-										<div class="toc_menu">
-											<h5>In this article</h5>
-											{{ toc_only }}
-										</div>
-									{% endif %}
-								</div>
-							{% endif %}
 						</div>
 						
-						
-						<section class="blog recentposts">
-							<div class="wrap">
-								<h1>
-									{% if page.collection == "events" %}
-										Other Events
-									{% else %}
-										Recent Posts
-									{% endif %}
-								</h1>
-								<div class="newstileswrap">
-									{% if page.collection == "events" %}
-										{% assign items = site.events %}
-									{% else %}
-										{% assign items = site.posts %}
-									{% endif %}
-									{% for item in items limit:2 %}
-										{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
-										{% assign tag_classes = item.tags | default: "" | join: ' ' %}
-										<div class="postpreview {% if page.collection == 'events' %}eventpreview{% endif %} {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}">
-											<div class="postimg custom">
-												{% if item.thumb %}
-													<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
-												{% else %}
-													<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
-												{% endif %}
-												<a href="{{ item.url }}" class="blocklink"></a>
-											</div>
-											<div class="postdetails">
-												{% if item.tags %}
-												<div class="tags">
-													{% if page.collection == "events" %}
-														<span class="eventdate">{{ item.date | date: "%Y-%m-%d" }}</span>
-													{% endif %}
-													{% for tag in item.tags %}
-														<span class="tag">{{ tag }}</span>
-													{% endfor %}
-												</div>
-												{% endif %}
-												<h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
-												<div class="meta">
-													{% if page.collection == 'events' %}
-														<div class="venue">{{ item.venue }}</div>
-													{% else %}
-														<div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
-													{% endif %}
-													<div class="author">{{ item.author | default: "DuckDB" }}</div>
-												</div>
-											</div>
-										</div>
-									{% endfor %}
-								</div>
-								<a href="{{ site.url }}{{ site.baseurl }}{% if page.collection == "events" %}/events{% else %}/news{% endif %}" class="button transparent arrow-right">
-									All {% if page.collection == "events" %}events{% else %}blog posts{% endif %} <span></span>
-								</a>
+						{% if page.toc != false %}
+							<div class="toc_sidebar">
+								{% assign toc_only = content | toc_only %}
+								{% assign toc_text_only = toc_only | strip_html | remove: ' ' %}
+								{% if toc_text_only.size > 10 %}
+									<div class="toc_menu">
+										<h5>In this article</h5>
+										{{ toc_only }}
+									</div>
+								{% endif %}
 							</div>
-						</section>
-					{% endif %}
+						{% endif %}
+					</div>
 				</div>
+				
+				{% include recent_posts_section.html %}
+				
 			</div>
-			
-			{% comment %}
-			<div class="sidebar">
-				<div class="newsarchive">
-					<h1><a href="/news/">Archive</a></h1>
-					{% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
-					<ul>
-					{% for year in postsByYear %}
-						<li><a href="/news/#y{{year.name}}">{{year.name}}</a></li>
-					{% endfor %}
-					</ul>
-				</div>
-				<div class="latestnews">
-					<h1><a href="/news/">Latest</a></h1>
-					<ul>
-					  {% for post in site.posts limit:5 %}
-					    <li>
-					    	<a href="{{ post.url }}">{{ post.title }}</a>
-					    </li>
-					  {% endfor %}
-					</ul>
-				</div>
-			</div>
-			{% endcomment %}
-			
 		</div>
-		
-		
 	</main>
-
-		
+	
 	{% include footer.html %}
 	
 	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js" defer></script>
@@ -236,6 +151,6 @@
 	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}" defer></script>
 	<script src="{{ site.baseurl }}/js/copy_button.js" defer></script>
 	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}" defer></script>
-
+	
 </body>
 </html>
