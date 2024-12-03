@@ -97,7 +97,7 @@ Foreign keys define a column, or set of columns, that refer to a primary key or 
 
 ```sql
 CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
-CREATE TABLE exams (exam_id INTEGER REFERENCES students(id), grade INTEGER);
+CREATE TABLE exams (student_id INTEGER REFERENCES students(id), grade INTEGER);
 INSERT INTO students VALUES (1, 'Student 1');
 INSERT INTO exams VALUES (1, 10);
 INSERT INTO exams VALUES (2, 10);
