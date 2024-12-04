@@ -30,7 +30,8 @@ FROM sniff_csv('my_file.csv', sample_size = 1000);
 | `Quote` | quote character | `"` |
 | `Escape` | escape | `\` |
 | `NewLineDelimiter` | new-line delimiter | `\r\n` |
-| `SkipRow` | number of rows skipped | 1 |
+| `Comment` | comment character | `#` |
+| `SkipRows` | number of rows skipped | 1 |
 | `HasHeader` | whether the CSV has a header | `true` |
 | `Columns` | column types encoded as a `LIST` of `STRUCT`s | `({'name': 'VARCHAR', 'age': 'BIGINT'})` |
 | `DateFormat` | date Format | `%d/%m/%Y` |
