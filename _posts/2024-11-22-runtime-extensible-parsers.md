@@ -40,7 +40,7 @@ Another big advantage of PEG parsers is *error handling*: the paper ["Syntax Err
 
 A possible disadvantage of memoized packrat parsing is the memory required for memoization: the amount required is *proportional to the input size*, not the stack size. Of course, memory limitations have relaxed significantly since the invention of LALR parsers sixty years ago and queries typically are not "Big Data"` themselves.
 
-## Proof-Of-Concept Experiments
+## Proof-of-Concept Experiments
 
 To perform experiments on parser extensibility, we have implemented an – admittedly simplistic – experimental prototype PEG parser for enough of SQL to parse *all* the TPC-H and TPC-DS queries. This grammar is compatible with the `cpp-peglib` [single-header C++17 PEG execution engine](https://github.com/yhirose/cpp-peglib).
 
