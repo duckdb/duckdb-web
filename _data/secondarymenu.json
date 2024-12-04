@@ -56,6 +56,10 @@
             {
               "page": "Media",
               "url": "/media/"
+            },
+            {
+              "page": "Webshop",
+              "url": "https://shop.duckdb.org/"
             }
           ]
         },
