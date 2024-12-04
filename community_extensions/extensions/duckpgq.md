@@ -28,11 +28,11 @@ docs:
       VERTEX TABLES (
         Person
       )
-    EDGE TABLES (
-      Person_knows_person 	SOURCE KEY (Person1Id) REFERENCES Person (id)
+      EDGE TABLES (
+        Person_knows_person SOURCE KEY (Person1Id) REFERENCES Person (id)
                             DESTINATION KEY (Person2Id) REFERENCES Person (id)
-      LABEL knows
-    );
+        LABEL knows
+      );
 
     FROM GRAPH_TABLE (snb
       MATCH (a:Person)-[k:knows]->(b:Person)
@@ -58,11 +58,11 @@ docs:
     For more information, please see the [DuckPGQ documentation](https://www.notion.so/duckpgq/b8ac652667964f958bfada1c3e53f1bb?v=3b47a8d44bdf4e0c8b503bf23f1b76f2).
     
 
-    *Disclaimer*: As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
+    *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
 extension_star_count: 91
 extension_star_count_pretty: 91
-extension_download_count: 2269
+extension_download_count: 2270
 extension_download_count_pretty: 2.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
