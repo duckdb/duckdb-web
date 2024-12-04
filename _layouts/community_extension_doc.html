@@ -81,16 +81,40 @@
 					<div class="title">{{ page.title }}</div>
 				
 				</div>
+				
+				{% if page.extension_download_count %}
+				<div class="box-link-wrapper">
+					<div class="box-link auto-width downloads">
+						<a href="/community_extensions/download_metrics"></a>
+						<span class="symbol"><img src="/images/icons/download.svg"></span>
+						<span>Downloads</span>
+						<span class="week"><span class="num">{{ page.extension_download_count }}</span>this week</span>
+						<span class="chevron"></span>
+					</div>
+				</div>
+				{% endif %}
 
 				<p>{{ page.extension.description }}</p>
 				
-				{% if page.extension_star_count %}
-				<div class="external">
-					<a href="https://github.com/{{ page.repo.github }}" target="_blank" class="button transparent github">Extension repository on GitHub {% if page.extension_star_count %} <span class="starcount">{{ page.extension_star_count_pretty }}</span>{% endif %}</a>
-					<a href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank" class="button transparent github">Extension descriptor (YAML)</a>
-					<a href="/community_extensions/download_metrics" class="button transparent github">Weekly downloads 🔽 {% if page.extension_download_count_pretty %}{{ page.extension_download_count }}{% else %}n/a{% endif %}</a>
+				{% if page.repo.github %}
+				<div class="box-link-wrapper">
+					<div class="box-link half-width">
+						<a href="https://github.com/{{ page.repo.github }}" target="_blank"></a>
+						<span class="symbol"><img src="/images/icons/github.svg"></span>
+						<span>Extension repository on GitHub</span>
+						<span class="chevron"></span>
+					</div>
+					{% if page.extension.name %}
+					<div class="box-link half-width">
+						<a href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank"></a>
+						<span class="symbol"><img src="/images/icons/yaml.svg"></span>
+						<span>Extension descriptor (YAML)</span>
+						<span class="chevron"></span>
+					</div>
+					{% endif %}
 				</div>
 				{% endif %}
+				
 
 				{% assign ct = content | toc %}
 				{% include anchor_headings.html html=content %}

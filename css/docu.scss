@@ -1133,6 +1133,24 @@ body.documentation main .wrap a.pill{
 			margin: 0!important;
 		}	
 	}
+	&.downloads{
+		span.num{
+			color: var(--interactive-folderbox-text-color, #1A1A1A);
+			font-size: 18px;
+			font-weight: 600;
+			margin-right: .5em;
+		}
+		span.month, span.week{
+			color: var(--main-text-secondary-color, #666);
+			font-size: 12px;
+		}
+		span.month + span.week{
+			margin-left: 10px;
+		}
+		span.symbol + span + span{
+			margin-left: 15px;
+		}
+	}
 }
 
 
