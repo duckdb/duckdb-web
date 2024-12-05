@@ -22,7 +22,7 @@ For many years, CSV files have had a bad reputation for being slow and cumbersom
 4. Load the file into the table using a `COPY` statement and with the dialect set.
 5. Start querying it.
 
-Not only does is this process tedious, but parallelizing a CSV file reader is [far from trivial](https://www.microsoft.com/en-us/research/uploads/prod/2019/04/chunker-sigmod19.pdf). This means most systems either process it single-threaded or use a two-pass approach.
+Not only is this process tedious, but parallelizing a CSV file reader is [far from trivial](https://www.microsoft.com/en-us/research/uploads/prod/2019/04/chunker-sigmod19.pdf). This means most systems either process it single-threaded or use a two-pass approach.
 
 Additionally, [CSV files are wild](https://youtu.be/YrqSp8m7fmk?si=v5rmFWGJtpiU5_PX&t=624): although [RFC-4180](https://www.ietf.org/rfc/rfc4180.txt) exists as a CSV standard, it is [commonly ignored](https://aic.ai.wu.ac.at/~polleres/publications/mitl-etal-2016OBD.pdf). Systems must therefore be sufficiently robust to handle these files as if they come straight from the wild west.
 
@@ -121,7 +121,7 @@ Possible fixes:
 
 DuckDB provides detailed information about any errors encountered. It highlights the line of the CSV file where the issue occurred, presents the original line, and suggests possible fixes for the error, such as ignoring the problematic line or filling missing values with `NULL`. It also displays the full configuration used to scan the file and indicates whether the options were auto-detected or manually set.
 
-The bottom line here is that, even with the advancements in CSV usage, the restrictions of Parquet files make them much easier to operate on.
+The bottom line here is that, even with the advancements in CSV usage, the strictness of Parquet files make them much easier to operate on.
 
 Of course, if you need to open your file in a text editor or Excel, you will need to have your data in CSV format. Note that Parquet files do have some visualizers, like [TAD](https://www.tadviewer.com/).
 
