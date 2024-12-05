@@ -88,15 +88,14 @@ The CSV reader also has an extensive error-handling system and will always provi
 To give you an example of how the DuckDB error-reporting system works, consider the following CSV file:
 
 ```csv
-name;age
 Clint Eastwood;94
 Samuel L. Jackson
 ```
 
-In this file, the third line is missing the value for the `age` column.
+In this file, the second line is missing the value for the second column.
 
 ```console
-Invalid Input Error: CSV Error on Line: 3
+Invalid Input Error: CSV Error on Line: 2
 Original Line: Samuel L. Jackson
 Expected Number of Columns: 2 Found: 1
 Possible fixes:
