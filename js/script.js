@@ -7,7 +7,6 @@ $(document).ready(function(){
 				scrollTop: $(hash).offset().top-90
 			}, 300, 'swing');
 			if( $('.frequentlyaskedquestions').length ){
-				//console.log($('h3'+hash).parent('.qa-wrap'))
 				$('h3'+hash).parent('.qa-wrap').addClass('open');
 				$('h3'+hash).parent('.qa-wrap').find('.answer').slideToggle(300);
 			}
@@ -148,11 +147,15 @@ $(document).ready(function(){
     
     // FAQs
 	$('.qa-wrap').click(function(event) {
-		if ($(event.target).is('a') && !$(event.target).parent().is('h3')) {
-			return;
+		var $qaWrap = $(this);
+		if ($(event.target).is('h3') || $(event.target).closest('h3').length) {
+			$qaWrap.toggleClass('open');
+			$qaWrap.find('.answer').slideToggle(400);
+		} 
+		else if (!$qaWrap.hasClass('open')) {
+			$qaWrap.addClass('open');
+			$qaWrap.find('.answer').slideDown(400);
 		}
-		$(this).toggleClass('open');
-		$(this).find('.answer').slideToggle(400);
 	});
 	$('.qa-wrap .answer a').click(function(event) {
 		event.stopPropagation();
