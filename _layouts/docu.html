@@ -31,16 +31,8 @@
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
 	{% seo title=false %}
-	
-	<script>
-		var userPrefersDark = localStorage.getItem('mode') === 'dark';
-		var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-		if (userPrefersDark || systemPrefersDark) {
-			document.documentElement.classList.add('darkmode');
-			document.documentElement.classList.add('disable-transitions');
-		}
-	</script>
 
+	<script src="{{ site.baseurl }}/js/determine_color_scheme.js?{{ site.data['hash'] }}"></script>
 </head>
 
 {% capture issue_title %}Issue found on page '{{ page.title }}'{% endcapture %}
