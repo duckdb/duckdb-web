@@ -20,9 +20,9 @@ Return the following:
 
 ```sql
 SELECT
-    count(*) AS total_rows,
-    count(*) FILTER (i <= 5) AS lte_five,
-    count(*) FILTER (i % 2 = 1) AS odds
+    count() AS total_rows,
+    count() FILTER (i <= 5) AS lte_five,
+    count() FILTER (i % 2 = 1) AS odds
 FROM generate_series(1, 10) tbl(i);
 ```
 
@@ -31,6 +31,8 @@ FROM generate_series(1, 10) tbl(i);
 | total_rows | lte_five | odds |
 |:---|:---|:---|
 | 10 | 5 | 5 |
+
+> Simply counting rows that satisfy a condition can also be achieved without `FILTER` clause, using the boolean `sum` aggregate function, e.g., `sum(i <= 5)`.
 
 Different aggregate functions may be used, and multiple `WHERE` expressions are also permitted:
 
