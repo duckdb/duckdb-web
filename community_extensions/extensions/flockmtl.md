@@ -52,8 +52,8 @@ docs:
 
 extension_star_count: 69
 extension_star_count_pretty: 69
-extension_download_count: 188
-extension_download_count_pretty: 188
+extension_download_count: 192
+extension_download_count_pretty: 192
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
 layout: community_extension_doc
 ---
