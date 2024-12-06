@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB: Running TPC-H SF100 on mobile phones"
+title: "DuckDB: Running TPC-H SF100 on Mobile Phones"
 author: "Gabor Szarnyas, Laurens Kuiper, Hannes Mühleisen"
 thumb: "/images/blog/thumbs/mobile-benchmarks.svg"
 image: "/images/blog/thumbs/mobile-benchmarks.png"
