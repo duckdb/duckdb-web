@@ -13,7 +13,9 @@ A few weeks ago, we set out to perform a series of experiments to answer two sim
 1. Can DuckDB complete the TPC-H queries on the SF100 data set when running on a new smartphone?
 2. If so, can a run finish in less than 400 seconds – i.e., faster than the results in the research paper that originally introduced vectorized query processing?
 
-Our quest to answer these took us on an interesting journey. We had a lof of fun and learned the difference between a cold run and a _really cold_ run. Read on to find out.
+These questions took us on an interesting quest.
+Along the way, we had a lot of fun and learned the difference between a cold run and a _really cold_ run.
+Read on to find out more.
 
 ## A Song of Dry Ice and Fire
 
@@ -76,7 +78,7 @@ The table contains a summary of the DuckDB benchmark results.
 
 ## Historical Context
 
-So why did we embark on the journey of running these experiments in the first place?
+So why did we set out to run these these experiments in the first place?
 
 Just a few weeks ago, [CWI](https://cwi.nl/), the birthplace of DuckDB, held a ceremony for the [Dijkstra Fellowship](https://www.cwi.nl/en/events/dijkstra-awards/cwi-lectures-dijkstra-fellowship/).
 The fellowship was awarded to Marcin Żukowski for his pioneering role in the development of database management systems and his successful entrepreneurial career that resulted in systems such as [VectorWise](https://en.wikipedia.org/wiki/Actian_Vector) and [Snowflake](https://en.wikipedia.org/wiki/Snowflake_Inc.).
@@ -125,6 +127,7 @@ And here are all results in this post visualized on a plot:
     /></div>
 <div align="center">TPC-H SF100 total query runtimes for MonetDB/X100 and DuckDB</div>
 
-## Summary
+## Conclusion
 
-With our experiments concluded, we can confidently say that, yes, DuckDB can run TPC-H SF100 on a mobile phone and **can even outperform a research prototype running on a high-end workstation in 2004 – with a 2024 smartphone that fits in your pocket.**
+It was a long journey from the original vectorized execution paper to running an analytical database on a phone.
+But we can keep the conclusion short: yes, DuckDB can run TPC-H SF100 on a mobile phone and **can even outperform a research prototype running on a high-end workstation in 2004 – with a 2024 smartphone that fits in your pocket.**
