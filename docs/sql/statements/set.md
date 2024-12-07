@@ -38,10 +38,10 @@ Retrieve configuration value:
 SELECT current_setting('threads');
 ```
 
-Set the default catalog search path globally:
+Set the default sort order globally:
 
 ```sql
-SET GLOBAL search_path = 'db1,db2'
+SET GLOBAL sort_order = 'desc';
 ```
 
 Set the default collation for the session:
