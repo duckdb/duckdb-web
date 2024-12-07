@@ -25,7 +25,7 @@ jobs:
   build_pdf:
     runs-on: ubuntu-24.04
     container:
-      image: docker://pandoc/extra:3.1.1.0
+      image: docker://pandoc/extra:3.5
       options: --entrypoint=sh
     defaults:
       run:
@@ -36,9 +36,8 @@ jobs:
       - name: Setup Python
         run: |
           PYTHONUNBUFFERED=1
-          apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-          python3 -m ensurepip
+          apk add --update --no-cache python3 py3-pip
       - name: Install Python requirements
-        run: pip3 install -r requirements.txt
+        run: pip3 install -r requirements.txt --break-system-packages
       - name: Concatenate files
         run: python3 concatenate_to_single_file.py
