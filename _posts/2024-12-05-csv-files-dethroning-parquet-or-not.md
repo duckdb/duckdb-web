@@ -160,7 +160,7 @@ However, it is still important to consider this in the comparison. In practice, 
 
 We will run two different TPC-H queries on our files.
 
-**Query 01.** First, we run TPC-H Q01. This query operates solely on the `Lineitem` table, performing an aggregation and grouping with a filter. It filters on one column and projects 7 out of the 16 columns from `Lineitem`.
+**Query 01.** First, we run TPC-H Q01. This query operates solely on the `lineitem` table, performing an aggregation and grouping with a filter. It filters on one column and projects 7 out of the 16 columns from `lineitem`.
 
 Therefore, this query will stress the filter pushdown, which is [supported by the Parquet reader]({% link docs/data/parquet/overview.md %}#partial-reading) but not the CSV reader, and the projection pushdown, which is supported by both.
 

@@ -19,18 +19,18 @@ Column store formats, such as DuckDB's native file format or [Parquet]({% post_u
 
 DuckDB added support for compression [at the end of last year](https://github.com/duckdb/duckdb/pull/2099). As shown in the table below, the compression ratio of DuckDB has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DuckDB works, and the design choices and various trade-offs that we have made while implementing compression for DuckDB's storage format.
 
-|        Version         |  Taxi  | On&nbsp;Time | Lineitem |     Notes      |      Date      |
-|:-----------------------|-------:|-------------:|---------:|:---------------|:---------------|
-| DuckDB v0.2.8          | 15.3GB | 1.73GB       | 0.85GB   | Uncompressed   | July 2021      |
-| DuckDB v0.2.9          | 11.2GB | 1.25GB       | 0.79GB   | RLE + Constant | September 2021 |
-| DuckDB v0.3.2          | 10.8GB | 0.98GB       | 0.56GB   | Bitpacking     | February 2022  |
-| DuckDB v0.3.3          | 6.9GB  | 0.23GB       | 0.32GB   | Dictionary     | April 2022     |
-| DuckDB v0.5.0          | 6.6GB  | 0.21GB       | 0.29GB   | FOR            | September 2022 |
-| DuckDB dev             | 4.8GB  | 0.21GB       | 0.17GB   | FSST + Chimp   | `now()`        |
-| CSV                    | 17.0GB | 1.11GB       | 0.72GB   |                |                |
-| Parquet (Uncompressed) | 4.5GB  | 0.12GB       | 0.31GB   |                |                |
-| Parquet (Snappy)       | 3.2GB  | 0.11GB       | 0.18GB   |                |                |
-| Parquet (ZSTD)         | 2.6GB  | 0.08GB       | 0.15GB   |                |                |
+|        Version         |  Taxi  | On&nbsp;Time | `lineitem` |     Notes      |      Date      |
+|:-----------------------|-------:|-------------:|-----------:|:---------------|:---------------|
+| DuckDB v0.2.8          | 15.3GB | 1.73GB       | 0.85GB     | Uncompressed   | July 2021      |
+| DuckDB v0.2.9          | 11.2GB | 1.25GB       | 0.79GB     | RLE + Constant | September 2021 |
+| DuckDB v0.3.2          | 10.8GB | 0.98GB       | 0.56GB     | Bitpacking     | February 2022  |
+| DuckDB v0.3.3          | 6.9GB  | 0.23GB       | 0.32GB     | Dictionary     | April 2022     |
+| DuckDB v0.5.0          | 6.6GB  | 0.21GB       | 0.29GB     | FOR            | September 2022 |
+| DuckDB dev             | 4.8GB  | 0.21GB       | 0.17GB     | FSST + Chimp   | `now()`        |
+| CSV                    | 17.0GB | 1.11GB       | 0.72GB     |                |                |
+| Parquet (Uncompressed) | 4.5GB  | 0.12GB       | 0.31GB     |                |                |
+| Parquet (Snappy)       | 3.2GB  | 0.11GB       | 0.18GB     |                |                |
+| Parquet (ZSTD)         | 2.6GB  | 0.08GB       | 0.15GB     |                |                |
 
 ## Compression Intro
 
@@ -180,7 +180,7 @@ ORDER BY row_group_id;
 ```
 
 | row_group_id |    column_name     | column_id | segment_type | count | compression  |
-|--------------|:-------------------|-----------|:-------------|-------|:-------------|
+|-------------:|:-------------------|----------:|:-------------|------:|:-------------|
 | 4            | extra              | 13        | FLOAT        | 65536 | Chimp        |
 | 20           | tip_amount         | 15        | FLOAT        | 65536 | Chimp        |
 | 26           | pickup_latitude    | 6         | VALIDITY     | 65536 | Constant     |
