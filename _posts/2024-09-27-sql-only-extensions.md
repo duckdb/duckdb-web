@@ -131,7 +131,7 @@ git push
 
 #### Write Your SQL Macros
 
-It it likely a bit faster to iterate if you test your macros directly in DuckDB. 
+It is likely a bit faster to iterate if you test your macros directly in DuckDB. 
 After you have written your SQL, we will move it into the extension.
 The example we will use demonstrates how to pull a dynamic set of columns from a dynamic table name (or a view name!).
 

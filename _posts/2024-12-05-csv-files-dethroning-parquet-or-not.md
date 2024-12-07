@@ -64,7 +64,7 @@ Furthermore, the reader became one of the fastest CSV readers in analytical syst
 
 ## Comparing CSV and Parquet
 
-With the large boost boost in usability and performance for the CSV reader, one might ask: what is the actual difference in performance when loading a CSV file compared to a Parquet file into a table? Additionally, how do these formats differ when running queries directly on them?
+With the large boost in usability and performance for the CSV reader, one might ask: what is the actual difference in performance when loading a CSV file compared to a Parquet file into a table? Additionally, how do these formats differ when running queries directly on them?
 
 To find out, we will run a few examples using both CSV and Parquet files containing TPC-H data to shed light on their differences. All scripts used to generate the benchmarks of this blogpost can be found in a [repository](https://github.com/pdet/csv_vs_parquet).
 

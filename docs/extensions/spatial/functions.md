@@ -1702,7 +1702,7 @@ VARCHAR ST_QuadKey (col0 GEOMETRY, col1 INTEGER)
 #### Description
 
 Compute the [quadkey](https://learn.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system) for a given lon/lat point at a given level.
-Note that the the parameter order is **longitude**, **latitude**.
+Note that the parameter order is **longitude**, **latitude**.
 
 `level` has to be between 1 and 23, inclusive.
 

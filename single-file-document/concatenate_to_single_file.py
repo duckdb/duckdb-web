@@ -105,7 +105,7 @@ def adjust_links_in_doc_body(doc_body):
         "]({% link docs/python/overview.md %})"
     )
 
-    # replace "`, `" (with its typical surroundings) with "`,` " to allow line breaking
+    # replace "`, `" (with the surrounding characters used for emphasis) with "`,` " to allow line breaking
     # see https://stackoverflow.com/questions/76951040/pandoc-preserve-whitespace-in-inline-code
     doc_body = doc_body.replace("`*`, `*`", "`*`,` *`")
 
@@ -115,8 +115,11 @@ def adjust_links_in_doc_body(doc_body):
     # replace links to data sets to point to the website
     doc_body = doc_body.replace("](/data/", "](https://duckdb.org/data/")
 
+    # remove '<div>' HTML tags
+    doc_body = re.sub(r'<div[^>]*?>[\n ]*([^§]*?)[\n ]*</div>', r'\1', doc_body, flags=re.MULTILINE)
+
     # replace '<img>' HTML tags with Markdown's '![]()' construct
-    doc_body = re.sub(r'<img src="([^"]*)"[^§]*?/>', r'![](\1)', doc_body, flags=re.MULTILINE)
+    doc_body = re.sub(r'<img src="([^"]*)"[^§]*?/>', r'![](\1)\n', doc_body, flags=re.MULTILINE)
 
     # use relative path for images in Markdown
     doc_body = doc_body.replace("](/images", "](../images")
