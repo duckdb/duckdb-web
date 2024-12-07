@@ -80,7 +80,7 @@ On machines with the required CPU/FPU support, DuckDB follows the IEEE 754 speci
 * `NaN` compares equal to `NaN` and greater than any other floating point number.
 * Some floating point functions, like `sqrt` / `sin` / `asin` throw errors rather than return `NaN` for values outside their ranges of definition.
 
-To insert these values as literals in a SQL command, you must put quotes around them, you may use any capitalization, and you may abbreviate `Infinity` as `Inf`. For example:
+To insert these values as literals in a SQL command, you must put quotes around them, you may abbreviate `Infinity` as `Inf`, and  you may use any capitalization. For example:
 
 ```sql
 SELECT
