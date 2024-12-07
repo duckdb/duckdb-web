@@ -105,7 +105,7 @@ def adjust_links_in_doc_body(doc_body):
         "]({% link docs/python/overview.md %})"
     )
 
-    # replace "`, `" (with its typical surroundings) with "`,` " to allow line breaking
+    # replace "`, `" (with the surrounding characters used for emphasis) with "`,` " to allow line breaking
     # see https://stackoverflow.com/questions/76951040/pandoc-preserve-whitespace-in-inline-code
     doc_body = doc_body.replace("`*`, `*`", "`*`,` *`")
 
