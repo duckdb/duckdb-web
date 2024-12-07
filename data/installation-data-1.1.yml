@@ -294,7 +294,11 @@
   installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
   note: ''
-  usage_example: ./duckdb
+  usage_example: >-
+    wget https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip &&
+    unzip duckdb-binaries-osx.zip &&
+    unzip duckdb_cli-osx-universal.zip &&
+    ./duckdb
 - variant: nightly
   environment: Command line
   platform: Linux
@@ -304,7 +308,11 @@
   installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip'
   note: ''
-  usage_example: ./duckdb
+  usage_example: >-
+    wget https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip &&
+    unzip duckdb-binaries-linux.zip &&
+    unzip duckdb_cli-linux-amd64.zip &&
+    ./duckdb
 - variant: nightly
   environment: Command line
   platform: Linux
@@ -314,7 +322,11 @@
   installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip'
   note: ''
-  usage_example: ./duckdb
+  usage_example: >-
+    wget https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip &&
+    unzip duckdb-binaries-linux-aarch64.zip &&
+    unzip duckdb_cli-linux-aarch64.zip &&
+    ./duckdb
 - variant: nightly
   environment: Python
   platform: all
