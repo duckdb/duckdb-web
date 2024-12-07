@@ -75,16 +75,25 @@ In addition to ordinary numeric values, the floating-point types have several sp
 * `-Infinity`: negative infinity
 * `NaN`: not a number
 
-> On a machine whose floating-point arithmetic does not follow IEEE 754, these values will probably not work as expected.
+On machines with the required CPU/FPU support, DuckDB follows the IEEE 754 specification regarding these special values, with two exceptions:
 
-When writing these values as constants in a SQL command, you must put quotes around them, for example:
+* `NaN` compares equal to `NaN` and greater than any other floating point number.
+* Some floating point functions, like `sqrt` / `sin` / `asin` throw errors rather than return `NaN` for values outside their ranges of definition.
+
+To insert these values as literals in a SQL command, you must put quotes around them, you may abbreviate `Infinity` as `Inf`, and you may use any capitalization. For example:
 
 ```sql
-UPDATE table
-SET x = '-Infinity';
+SELECT
+    sqrt(2) > '-inf',
+    'nan' > sqrt(2)
 ```
 
-On input, these strings are recognized in a case-insensitive manner.
+<div class="narrow_table monospace_table"></div>
+
+| (sqrt(2) > '-inf') | ('nan' > sqrt(2)) |
+|-------------------:|------------------:|
+| true               | true              |
+
 
 ## Universally Unique Identifiers (`UUID`s)
 
