@@ -119,7 +119,7 @@ def adjust_links_in_doc_body(doc_body):
     doc_body = re.sub(r'<div[^>]*?>[\n ]*([^§]*?)[\n ]*</div>', r'\1', doc_body, flags=re.MULTILINE)
 
     # replace '<img>' HTML tags with Markdown's '![]()' construct
-    doc_body = re.sub(r'<img src="([^"]*)"[^§]*?/>', r'![](\1)', doc_body, flags=re.MULTILINE)
+    doc_body = re.sub(r'<img src="([^"]*)"[^§]*?/>', r'![](\1)\n', doc_body, flags=re.MULTILINE)
 
     # use relative path for images in Markdown
     doc_body = doc_body.replace("](/images", "](../images")
