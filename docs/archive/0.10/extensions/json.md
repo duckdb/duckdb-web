@@ -163,7 +163,7 @@ With `'unstructured'`, the top-level JSON is read, e.g.:
 
 will result in two objects being read.
 
-With `'newline_delimited'`, [NDJSON](http://ndjson.org) is read, where each JSON is separated by a newline (`\n`), e.g.:
+With `'newline_delimited'`, [NDJSON](https://github.com/ndjson/ndjson-spec) is read, where each JSON is separated by a newline (`\n`), e.g.:
 
 ```json
 {"duck": 42}

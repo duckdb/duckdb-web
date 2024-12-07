@@ -41,7 +41,7 @@ With `'unstructured'`, the top-level JSON is read, e.g.:
 
 will result in two objects being read.
 
-With `'newline_delimited'`, [NDJSON](http://ndjson.org) is read, where each JSON is separated by a newline (`\n`), e.g.:
+With `'newline_delimited'`, [NDJSON](https://github.com/ndjson/ndjson-spec) is read, where each JSON is separated by a newline (`\n`), e.g.:
 
 ```json
 {"duck": 42}
@@ -92,6 +92,21 @@ SELECT * FROM read_ndjson_objects('*.json.gz');
 {"duck":42,"goose":[1,2,3]}
 {"duck":43,"goose":[4,5,6],"swan":3.3}
 ```
+
+<!--
+
+add columns for parameters
+
+
+
+read_json vs read_ndjson
+read_*_objects vs vanilla reads
+
+
+todo: add `map_inference_threshold` and `field_appearance_threshold`
+
+-->
+
 
 DuckDB also supports reading JSON as a table, using the following functions:
 
