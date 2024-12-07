@@ -115,6 +115,9 @@ def adjust_links_in_doc_body(doc_body):
     # replace links to data sets to point to the website
     doc_body = doc_body.replace("](/data/", "](https://duckdb.org/data/")
 
+    # remove '<div>' HTML tags
+    doc_body = re.sub(r'<div[^>]*?>[\n ]*([^§]*?)[\n ]*</div>', r'\1', doc_body, flags=re.MULTILINE)
+
     # replace '<img>' HTML tags with Markdown's '![]()' construct
     doc_body = re.sub(r'<img src="([^"]*)"[^§]*?/>', r'![](\1)', doc_body, flags=re.MULTILINE)
 
