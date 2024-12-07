@@ -78,7 +78,7 @@ The table contains a summary of the DuckDB benchmark results.
 
 ## Historical Context
 
-So why did we set out to run these these experiments in the first place?
+So why did we set out to run these experiments in the first place?
 
 Just a few weeks ago, [CWI](https://cwi.nl/), the birthplace of DuckDB, held a ceremony for the [Dijkstra Fellowship](https://www.cwi.nl/en/events/dijkstra-awards/cwi-lectures-dijkstra-fellowship/).
 The fellowship was awarded to Marcin Żukowski for his pioneering role in the development of database management systems and his successful entrepreneurial career that resulted in systems such as [VectorWise](https://en.wikipedia.org/wiki/Actian_Vector) and [Snowflake](https://en.wikipedia.org/wiki/Snowflake_Inc.).
