@@ -178,13 +178,13 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
    ```sql
    CREATE TABLE integers(i INTEGER, j INTEGER);
 
-   INSERT INTO integers VALUES (1,1), (2,2), (3,3);
+   INSERT INTO integers VALUES (1, 1), (2, 2), (3, 3);
 
-   -- Creates index over i+j expression
-   CREATE INDEX i_index ON integers USING ART((i+j));
+   -- Creates index over the i + j expression
+   CREATE INDEX i_index ON integers USING ART((i + j));
 
    -- Uses ART index point query
-   SELECT i FROM integers WHERE i+j = 2;
+   SELECT i FROM integers WHERE i + j = 2;
    ```
 
 ## ART Storage
