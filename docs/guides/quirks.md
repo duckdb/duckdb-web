@@ -4,11 +4,11 @@ Some are vestiges of our feathered friend's evolution.
 Some are of the type that have divided programmers since the dawn of computers.
 Some are unavoidable because we strive to adhere to the SQL Standard and specifically to PostgreSQL's dialect (see the [PostgreSQL compatibility]() page for exceptions).
 Some, we may just not have come around to fixing yet and may never do because there are always bigger fires to put out or more useful features to add.  
-
+a
 Acknowledging and being open about these things is the best we can do. In this sense, we provide below a list of examples that may be surprising to some, in the hope that they won't run into them unprepared while investigating a misbehaving multi-page query on tens of terrabytes of parquet files scattered across S3: 
 
-- The aggregate functions `sum`, `list`, and `string_agg` return `NULL` instead of `0`, `[]` and `''`, respectively, for empty groups. The SQL Standard commands, we obey.
-- One-based indexing everywhere (e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`)). The SQL Standard dictates, we comply. Good for our R users and those with an SQL background, bad for everybody else.
+- The aggregate functions `sum`, `list`, and `string_agg` return `NULL` instead of `0`, `[]` and `''`, respectively, for empty groups. This is dictated by the SQL Standard commands and obeyed by all implementations we now.
+- One-based indexing everywhere (e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`)). Another SQL Standard requirement. Good for our R users and those with an SQL background, bad for everybody else.
 - DuckDB's `1 = true` is common but violates PostgreSQL compatibility, whereas DuckDB's `'t' = true` is more quirky and was inherited from PostgreSQL. DuckDB's `1 = '1.1'` is probably most difficult to justify.
 - `'NaN'::FLOAT = 'NaN'::FLOAT` and `'NaN'::FLOAT > 3` violate IEEE-754 but mean floating point data types are totally ordered, like all other datatypes (beware the consequences for `greatest`/`least`)
 - Case insensitivity and the resulting inability to `SELECT A FROM 'file.parquet'` when a column called `a` comes before `A` in the file. That's actually a DuckDB thing. Great when not working with external data: who wants to get the wrong numbers when they get the capitalization wrong?
