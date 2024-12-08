@@ -10,7 +10,7 @@ Some, we may just not have come around to fixing yet and may never do because th
 
 Acknowledging and being open about these things is the best we can do. In this sense, we provide below a list of examples that may be surprising to some, in the hope that they won't run into them unprepared while investigating a misbehaving multi-page query on tens of terrabytes of parquet files scattered across S3: 
 
-- The aggregate functions `sum()` and `list()` return `NULL` instead of `0` and `[]`, respectively, for empty groups. The SQL Standard commands, we obey.
+- The aggregate functions `sum`, `list`, and `string_agg` return `NULL` instead of `0`, `[]` and `''`, respectively, for empty groups. The SQL Standard commands, we obey.
 - One-based indexing (e.g., arrays, strings, window functions (`row_number()`, `rank()`, `dense_rank`). The SQL Standard dictates, we comply. 
 - `age(x) = current_date - x` instead of `current_timestamp - x`. PostgreSQL did it first. We have no explanation.
 - DuckDB's `1 = true` is common but violates PostgreSQL compatibility, whereas DuckDB's `'t' = true` is more quirky and was inherited from PostgreSQL. DuckDB's `1 = '1.1'` is probably most difficult to justify.
