@@ -3,8 +3,6 @@ layout: docu
 title: Node.js API (Neo)
 ---
 
-# DuckDB Node.js API (Neo)
-
 An API for using [DuckDB](https://duckdb.org/) in [Node.js](https://nodejs.org/).
 
 This is a high-level API meant for applications.
@@ -14,6 +12,7 @@ available separately as [@duckdb/duckdb-bindings](https://www.npmjs.com/package/
 ## Features
 
 ### Main differences from [duckdb-node](https://www.npmjs.com/package/duckdb)
+
 - Native support for Promises; no need for separate [duckdb-async](https://www.npmjs.com/package/duckdb-async) wrapper.
 - DuckDB-specific API; not based on the [SQLite Node API](https://www.npmjs.com/package/sqlite3).
 - Lossless & efficent support for values of all [DuckDB data types](https://duckdb.org/docs/sql/data_types/overview).
@@ -23,6 +22,7 @@ available separately as [@duckdb/duckdb-bindings](https://www.npmjs.com/package/
 ### Roadmap
 
 Some features are not yet complete:
+
 - Appending and binding advanced data types. (Additional DuckDB C API support needed.)
 - Writing to data chunk vectors. (Needs special handling in Node.)
 - User-defined types & functions. (Support for this was added to the DuckDB C API in v1.1.0.)
@@ -55,21 +55,25 @@ import { DuckDBInstance } from '@duckdb/node-api';
 ```
 
 Create with an in-memory database:
+
 ```ts
 const instance = await DuckDBInstance.create(':memory:');
 ```
 
 Equivalent to the above:
+
 ```ts
 const instance = await DuckDBInstance.create();
 ```
 
 Read from and write to a database file, which is created if needed:
+
 ```ts
 const instance = await DuckDBInstance.create('my_duckdb.db');
 ```
 
 Set configuration options:
+
 ```ts
 const instance = await DuckDBInstance.create('my_duckdb.db', {
   threads: '4'
@@ -100,17 +104,20 @@ const result = await prepared.run();
 ### Inspect Result
 
 Get column names and types:
+
 ```ts
 const columnNames = result.columnNames();
 const columnTypes = result.columnTypes();
 ```
 
 Fetch all chunks:
+
 ```ts
 const chunks = await result.fetchAllChunks();
 ```
 
 Fetch one chunk at a time:
+
 ```ts
 const chunks = [];
 while (true) {
@@ -124,18 +131,21 @@ while (true) {
 ```
 
 Read chunk data (column-major):
+
 ```ts
 // array of columns, each as an array of values
 const columns = chunk.getColumns(); 
 ```
 
 Read chunk data (row-major):
+
 ```ts
 // array of rows, each as an array of values
 const columns = chunk.getRows(); 
 ```
 
-Read chunk data (one value at a time)
+Read chunk data (one value at a time):
+
 ```ts
 const columns = [];
 const columnCount = chunk.columnCount;
@@ -154,13 +164,15 @@ for (let columnIndex = 0; columnIndex < columnCount; columnIndex++) {
 ### Result Reader
 
 Run and read all data:
+
 ```ts
 const reader = await connection.runAndReadAll('from test_all_types()');
 const rows = reader.getRows();
 // OR: const columns = reader.getColumns();
 ```
 
-Run and read up to (at lesat) some number of rows:
+Run and read up to (at least) some number of rows:
+
 ```ts
 const reader = await connection.runAndReadUtil('from range(5000)', 1000);
 const rows = reader.getRows();
@@ -168,6 +180,7 @@ const rows = reader.getRows();
 ```
 
 Read rows incrementally:
+
 ```ts
 const reader = await connection.runAndRead('from range(5000)');
 reader.readUntil(2000);
