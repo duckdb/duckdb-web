@@ -4,7 +4,7 @@ Some are vestiges of our feathered friend's evolution.
 Some are of the type that have divided programmers since the dawn of computers.
 Some are unavoidable because we strive to adhere to the SQL Standard and specifically to PostgreSQL's dialect (see the [PostgreSQL compatibility]() page for exceptions).
 Some, we just haven't come around to fixing yet and may never do because there are always bigger fires to put out or more useful features to add.  
-a
+
 Acknowledging and being open about these things is the best we can do. In this sense, we provide below a list of examples that may be surprising to some, in the hope that they won't run into them unprepared while investigating a misbehaving multi-page query on tens of terrabytes of parquet files scattered across S3: 
 
 - The aggregate functions `sum`, `list`, and `string_agg` return `NULL` instead of `0`, `[]` and `''`, respectively, for empty groups. This is dictated by the SQL Standard commands and obeyed by all implementations we now.
