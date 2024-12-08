@@ -44,11 +44,15 @@ SELECT 1 / 2 AS x;
 
 PostgreSQL returns:
 
+<div class="narrow_table"></div>
+
 |    x |
 | ---: |
 |    0 |
 
 DuckDB returns:
+
+<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -59,6 +63,8 @@ To perform integer division in DuckDB, use the `//` operator:
 ```sql
 SELECT 1 // 2 AS x;
 ```
+
+<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -81,6 +87,9 @@ ERROR:  UNION types boolean and integer cannot be matched
 ```
 
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
+
+
+<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -219,7 +228,7 @@ DuckDB runs the statement and creates the table successfully, confirmed by the f
 DESCRIBE myschema.mytable;
 ```
 
-<div class="monospace_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 | column_name |   column_type    | null | key  | default | extra |
 |-------------|------------------|------|------|---------|-------|
