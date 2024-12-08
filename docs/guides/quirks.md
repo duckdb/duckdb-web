@@ -5,7 +5,7 @@ Some are of the type that have divided programmers since the dawn of computers.
 Some are unavoidable because we strive to adhere to the SQL Standard and specifically to PostgreSQL's dialect (see the [PostgreSQL compatibility]() page for exceptions).
 Some, we just haven't come around to fixing yet and may never do because there are always bigger fires to put out or more useful features to add.  
 
-Acknowledging and being open about these things is the best we can do. In this sense, we provide below a list of examples that may be surprising to some, in the hope that they won't run into them unprepared while investigating a misbehaving multi-page query on tens of terrabytes of parquet files scattered across S3: 
+Acknowledging and being open about these things is the best we can do, which is why we compiled below a list of examples that may catch some users off guard: 
 
 - The aggregate functions `sum`, `list`, and `string_agg` return `NULL` instead of `0`, `[]` and `''`, respectively, for empty groups. This is dictated by the SQL Standard commands and obeyed by all implementations we now.
 - One-based indexing everywhere (e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`)). Another SQL Standard requirement. Good for our R users and those with an SQL background, bad for everybody else.
