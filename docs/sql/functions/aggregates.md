@@ -99,6 +99,16 @@ FROM tbl;
 |-----------|
 | 3, 2, 1   |
 
+
+### Handling `NULL` Values
+
+All general aggregate functions except for [`list`](#listarg) and [`first`](#firstarg) (and their aliases [`array_agg`](#array_aggarg) and [`arbitrary`](#arbitraryarg), respectively) ignore `NULL`s.
+To exclude `NULL`s from `list`, you can use a [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}).
+To ignore `NULL`s from `first`, you can use the [`any_value` aggregate](#any_valuearg).
+
+All general aggregate functions except [`count`](#countarg) return `NULL` on empty groups.
+In particular, [`list`](#listarg) does *not* return an empty list, [`sum`](#sumarg) does *not* return zero, and [`string_agg`](#string_aggarg-sep) does *not* return an empty string in this case.
+
 ## General Aggregate Functions
 
 The table below shows the available general aggregate functions.
@@ -447,15 +457,6 @@ The table below shows the available general aggregate functions.
 | **Description** | Calculates the sum of all non-null values in `arg`. |
 | **Example** | `sum(A)` |
 | **Alias(es)** | - |
-
-### Handling `NULL` Values
-
-All general aggregate functions except for [`list`](#listarg) and [`first`](#firstarg) (and their aliases [`array_agg`](#array_aggarg) and [`arbitrary`](#arbitraryarg), respectively) ignore `NULL`s.
-To exclude `NULL`s from `list`, you can use a [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}).
-To ignore `NULL`s from `first`, you can use the [`any_value` aggregate](#any_valuearg).
-
-All general aggregate functions except [`count`](#countarg) return `NULL` on empty groups and groups without non-`NULL` inputs.
-In particular, [`list`](#listarg) does *not* return an empty list, [`sum`](#sumarg) does *not* return zero, and [`string_agg`](#string_aggarg-sep) does *not* return an empty string in this case.
 
 ## Approximate Aggregates
 
