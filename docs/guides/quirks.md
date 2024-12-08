@@ -1,10 +1,10 @@
 Like any language, framework, or interface out there, DuckDB is not without quirks, idiosyncrasies, and inconsistencies.  
 
-Some are unavoidable because we strive to adhere to the SQL Standard and specifically to PostgreSQL's dialect (see the [PostgreSQL compatibility]() page for exceptions).
-
-Some are vestiges of our feathered friend's evolution, and the benefit of rectifying them has not been deemed worth the pain of migration (yet).
+Some are vestiges of our feathered friend's evolution.
 
 Some are of the type that have divided programmers since the dawn of computers.
+
+Some are unavoidable because we strive to adhere to the SQL Standard and specifically to PostgreSQL's dialect (see the [PostgreSQL compatibility]() page for exceptions).
 
 Some, we may just not have come around to fixing yet and may never do because there are always bigger fires to put out or more useful features to add.  
 
