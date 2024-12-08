@@ -157,8 +157,8 @@ INSERT INTO integers FROM range(10000000);
 
 | Version | Size |
 | -- | --: |
-| v0.8.0 | 278MB |
-| v0.9.0 | 78MB |
+| v0.8.0 | 278 MB |
+| v0.9.0 | 78 MB |
 
 In addition, due to improvements in the manner in which indexes are stored on disk they can now be written to disk incrementally instead of always requiring a full rewrite. This allows for much quicker checkpointing for tables that have indexes.
 

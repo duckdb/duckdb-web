@@ -143,18 +143,21 @@ LOAD icu;
 
 -- Show the current time zone. The default is set to ICU's current time zone.
 SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
-----
+```
+```text
 TimeZone    Europe/Amsterdam    The current time zone   VARCHAR
-
+```
+```sql
 -- Choose a time zone.
-SET TimeZone='America/Los_Angeles';
+SET TimeZone = 'America/Los_Angeles';
 
 -- Emulate Postgres' time zone table
 SELECT name, abbrev, utc_offset 
 FROM pg_timezone_names() 
 ORDER BY 1 
 LIMIT 5;
-----
+```
+```text
 ACT ACT 09:30:00
 AET AET 10:00:00
 AGT AGT -03:00:00
@@ -197,27 +200,34 @@ LOAD icu;
 
 -- Show the current calendar. The default is set to ICU's current locale.
 SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
-----
+```
+```text
 Calendar    gregorian   The current calendar    VARCHAR
-
+```
+```sql
 -- List the available calendars
 SELECT DISTINCT name FROM icu_calendar_names()
 ORDER BY 1 DESC LIMIT 5;
-----
+```
+```text
 roc
 persian
 japanese
 iso8601
 islamic-umalqura
-
+```
+```sql
 -- Choose a calendar
 SET Calendar = 'japanese';
 
 -- Extract the current Japanese era number using Tokyo time
 SET TimeZone = 'Asia/Tokyo';
 
-SELECT era('2019-05-01 00:00:00+10'::TIMESTAMPTZ), era('2019-05-01 00:00:00+09'::TIMESTAMPTZ);
-----
+SELECT
+     era('2019-05-01 00:00:00+10'::TIMESTAMPTZ),
+     era('2019-05-01 00:00:00+09'::TIMESTAMPTZ);
+```
+```text
 235  236
 ```
 

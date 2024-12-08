@@ -82,7 +82,7 @@ In this section, we will look at some basic examples of the code needed to read 
 
 First we need to install DuckDB and Arrow. The installation process for both libraries in Python and R is shown below.
 
-```bash
+```batch
 # Python Install
 pip install duckdb
 pip install pyarrow

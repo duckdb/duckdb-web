@@ -134,7 +134,7 @@ We can obtain a list of all flights on a given route past a certain date using t
 PREPARE flights_after_date AS
 SELECT uniquecarrier, origincityname, destcityname, flightdate, distance
 FROM ontime
-WHERE origin = ? AND dest = ? AND flightdate>?;
+WHERE origin = ? AND dest = ? AND flightdate > ?;
 ```
 
 ```sql

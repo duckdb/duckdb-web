@@ -189,10 +189,10 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
 
 ## ART Storage
 
-There are two main constraints when storing ART indexes, 
+There are two main constraints when storing ART indexes: 
 
-1) The index must be stored in an order that allows for lazy-loading. Otherwise, we would have to fully load the index, including nodes that might be unnecessary to queries that would be executed in that session;
-2) It must not increase the node size. Otherwise, we diminish the cache-conscious effectiveness of the ART index.
+1. The index must be stored in an order that allows for lazy-loading. Otherwise, we would have to fully load the index, including nodes that might be unnecessary to queries that would be executed in that session.
+2. It must not increase the node size. Otherwise, we diminish the cache-conscious effectiveness of the ART index.
 
 ### Post-Order Traversal
 
@@ -275,10 +275,10 @@ print("Storage time: " + str(time.time() - cur_time))
 
 Storage Time
 
-|    Name     | Time (s) |
-|-------------|----------|
-| Reconstruction  | 8.99   |
-| Storage      | 18.97    |
+|      Name      | Time (s) |
+|----------------|---------:|
+| Reconstruction | 8.99     |
+| Storage        | 18.97    |
 
 
 We can see storing the index is 2x more expensive than not storing the index. The reason is that our table consists of one column with 50,000,000 `int32_t` values. However, when storing the ART, we also store 50,000,000 `int64_t` values for their respective `row_ids` in the leaves. This increase in the elements is the main reason for the additional storage cost.
@@ -294,10 +294,10 @@ con = duckdb.connect("vault.db")
 print("Load time: " + str(time.time() - cur_time))
 ```
 
-|    Name     | Time (s) |
-|-------------|----------|
-| Reconstruction  | 7.75   |
-| Storage      | 0.06    |
+|      Name      | Time (s) |
+|----------------|---------:|
+| Reconstruction | 7.75     |
+| Storage        | 0.06     |
 
 Here we can see a two-order magnitude difference in the times of loading the database. This difference is basically due to the complete reconstruction of the ART index during loading. In contrast, in the `Storage` version, only the metadata information about the ART index is loaded at this point.
 

@@ -42,7 +42,7 @@ Regarding long-term plans, there are, of course, many things on the roadmap stil
 
 Of course, there will be issues found in today’s release. But rest assured, there will be a 1.0.1 release. There will be a 1.1.0. And there might also be a 2.0.0 at some point. We’re in this for the long run, all of us, together. We have the team and the structures and resources to do so.
 
-## Acknowledgements
+## Acknowledgments
 
 First of all, we are very, very grateful to you all. Our massive and heartfelt thanks go to everyone who has contributed code, filed issues or engaged in discussions, promoted DuckDB in their environment, and, of course, all DuckDB users. We could not have done it without you!
 

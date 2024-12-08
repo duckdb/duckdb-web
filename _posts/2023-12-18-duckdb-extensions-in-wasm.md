@@ -93,6 +93,7 @@ CREATE TABLE nyc AS
         count(*) AS count FROM
 st_read('https://raw.githubusercontent.com/duckdb/duckdb_spatial/main/test/data/nyc_taxi/taxi_zones/taxi_zones.shp')
 GROUP BY borough;
+
 SELECT borough, area, centroid::VARCHAR, count
 FROM nyc;
 ```
