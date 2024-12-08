@@ -34,7 +34,6 @@ Division of fixed-point decimals does not typically produce numbers with finite 
 
 Internally, decimals are represented as integers depending on their specified `WIDTH`.
 
-<div class="narrow_table"></div>
 
 | Width | Internal | Size (bytes) |
 |:---|:---|---:|
@@ -49,7 +48,6 @@ Performance can be impacted by using too large decimals when not required. In pa
 
 The data types `FLOAT` and `DOUBLE` precision are variable-precision numeric types. In practice, these types are usually implementations of IEEE Standard 754 for Binary Floating-Point Arithmetic (single and double precision, respectively), to the extent that the underlying processor, operating system, and compiler support it.
 
-<div class="narrow_table"></div>
 
 | Name | Aliases | Description |
 |:--|:--|:--------|

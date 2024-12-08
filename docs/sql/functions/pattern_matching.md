@@ -144,7 +144,6 @@ SELECT NOT 'best.txt' GLOB '*.txt';        -- false
 
 Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 
-<div class="narrow_table"></div>
 
 | GLOB-style | Symbolic-style |
 |:---|:---|

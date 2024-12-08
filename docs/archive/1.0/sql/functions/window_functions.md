@@ -218,7 +218,6 @@ CREATE TABLE "Generation History" AS
 
 After partitioning by plant and ordering by date, it will have this layout:
 
-<div class="narrow_table"></div>
 
 | Plant | Date | MWh |
 |:---|:---|---:|
@@ -264,7 +263,6 @@ ORDER BY 1, 2;
 
 The result will be the following:
 
-<div class="narrow_table"></div>
 
 | Plant | Date | Row |
 |:---|:---|---:|
@@ -336,7 +334,6 @@ and uses a `RANGE` frame of three days on either side of each day for the `avg`
 (to handle any missing days).
 This is the result:
 
-<div class="narrow_table"></div>
 
 | Plant | Date | MWh 7-day Moving Average |
 |:---|:---|---:|

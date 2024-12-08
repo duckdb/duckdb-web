@@ -64,7 +64,6 @@ SELECT 'A%c' ILIKE 'a$%c' ESCAPE '$'; -- true
 
 There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance PostgreSQL compatibility.
 
-<div class="narrow_table"></div>
 
 | LIKE-style | PostgreSQL-style |
 |:---|:---|
@@ -93,7 +92,6 @@ SELECT 'abc' NOT SIMILAR TO 'abc';   -- false
 
 There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
 
-<div class="narrow_table"></div>
 
 | `SIMILAR TO`-style | POSIX-style |
 |:---|:---|
@@ -138,7 +136,6 @@ SELECT NOT 'best.txt' GLOB '*.txt';        -- false
 
 Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 
-<div class="narrow_table"></div>
 
 | GLOB-style | Symbolic-style |
 |:---|:---|
@@ -155,7 +152,6 @@ Search the current directory for all files:
 SELECT * FROM glob('*');
 ```
 
-<div class="narrow_table"></div>
 
 |     file      |
 |---------------|

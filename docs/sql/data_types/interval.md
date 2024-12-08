@@ -6,7 +6,6 @@ blurb: Intervals represent periods of time measured in months, days, microsecond
 
 `INTERVAL`s represent periods of time that can be added to or subtracted from `DATE`, `TIMESTAMP`, `TIMESTAMPTZ`, or `TIME` values.
 
-<div class="narrow_table"></div>
 
 | Name | Description |
 |:---|:---|

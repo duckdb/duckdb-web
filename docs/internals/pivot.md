@@ -53,7 +53,6 @@ GROUP BY ALL;
 
 This produces the result:
 
-<div class="narrow_table"></div>
 
 | country |     name      |    list("year")    | list(population_sum) |
 |---------|---------------|--------------------|----------------------|
@@ -63,7 +62,6 @@ This produces the result:
 
 The `PhysicalPivot` operator converts those lists into column names and values to return this result:
 
-<div class="narrow_table"></div>
 
 | country |     name      | 2000 | 2010 | 2020 |
 |---------|---------------|-----:|-----:|-----:|
@@ -103,7 +101,6 @@ FROM monthly_sales;
 Note the single quotes to build a list of text strings to populate `month`, and the double quotes to pull the column values for use in `sales`.
 This produces the same result as the initial example:
 
-<div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
 |------:|-------------|-------|------:|

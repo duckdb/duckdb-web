@@ -23,7 +23,6 @@ SELECT extension_name, installed, description
 FROM duckdb_extensions();
 ```
 
-<div class="narrow_table"></div>
 
 | extension_name    | installed | description                                                  |
 |-------------------|-----------|--------------------------------------------------------------|

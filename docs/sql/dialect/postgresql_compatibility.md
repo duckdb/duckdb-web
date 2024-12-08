@@ -44,7 +44,6 @@ SELECT 1 / 2 AS x;
 
 PostgreSQL returns:
 
-<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -52,7 +51,6 @@ PostgreSQL returns:
 
 DuckDB returns:
 
-<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -64,7 +62,6 @@ To perform integer division in DuckDB, use the `//` operator:
 SELECT 1 // 2 AS x;
 ```
 
-<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -89,7 +86,6 @@ ERROR:  UNION types boolean and integer cannot be matched
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
 
 
-<div class="narrow_table"></div>
 
 |    x |
 | ---: |

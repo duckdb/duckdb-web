@@ -14,7 +14,6 @@ CREATE TABLE tbl(i INTEGER);
 SHOW TABLES;
 ```
 
-<div class="narrow_table"></div>
 
 | name |
 |------|
@@ -29,7 +28,6 @@ CREATE TABLE s1.tbl(v VARCHAR);
 SHOW ALL TABLES;
 ```
 
-<div class="narrow_table"></div>
 
 | database | schema | table_name | column_names | column_types | temporary |
 |----------|--------|------------|--------------|--------------|-----------|
@@ -43,7 +41,6 @@ CREATE TABLE tbl(i INTEGER PRIMARY KEY, j VARCHAR);
 DESCRIBE tbl;
 ```
 
-<div class="narrow_table"></div>
 
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|

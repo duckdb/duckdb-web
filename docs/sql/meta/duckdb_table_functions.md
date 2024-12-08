@@ -170,7 +170,6 @@ Note that `duckdb_indexes` only provides metadata about secondary indexes, i.e.,
 
 The `duckdb_keywords()` function provides metadata about DuckDB's keywords and reserved words.
 
-<div class="narrow_table"></div>
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -192,7 +191,6 @@ The `duckdb_memory()` function provides metadata about DuckDB's buffer manager.
 The `duckdb_optimizers()` function provides metadata about the optimization rules (e.g., `expression_rewriter`, `filter_pushdown`) available in the DuckDB instance.
 These can be selectively turned off using [`PRAGMA disabled_optimizers`]({% link docs/configuration/pragmas.md %}#selectively-disabling-optimizers).
 
-<div class="narrow_table"></div>
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -258,7 +256,6 @@ Attributes like `temporary`, `start_value` etc. correspond to the various option
 
 The `duckdb_settings()` function provides metadata about the settings available in the DuckDB instance.
 
-<div class="narrow_table"></div>
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -296,7 +293,6 @@ The [`information_schema.tables`]({% link docs/sql/meta/information_schema.md %}
 
 The `duckdb_temporary_files()` function provides metadata about the temporary files DuckDB has written to disk, to offload data from memory. This function mostly exists for debugging and testing purposes.
 
-<div class="narrow_table"></div>
 
 | Column | Description | Type |
 |:-|:---|:-|

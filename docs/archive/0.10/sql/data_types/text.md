@@ -7,7 +7,6 @@ title: Text Types
 In DuckDB, strings can be stored in the `VARCHAR` field.
 The field allows storage of Unicode characters. Internally, the data is encoded as UTF-8.
 
-<div class="narrow_table"></div>
 
 | Name | Aliases | Description |
 |:---|:---|:---|

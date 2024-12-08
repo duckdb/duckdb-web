@@ -32,7 +32,6 @@ SELECT * FROM postgres_scan('host=localhost port=5432 dbname=mydb', 'public', 'm
 
 The first parameter to the `postgres_scan` function is the [PostgreSQL connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), a list of connection arguments provided in `{key}={value}` format. Below is a list of valid arguments.
 
-<div class="narrow_table"></div>
 
 |    Name    |             Description              |    Default     |
 |------------|--------------------------------------|----------------|

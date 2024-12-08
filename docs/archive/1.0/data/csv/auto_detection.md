@@ -60,7 +60,6 @@ Dialect detection works by attempting to parse the samples using the set of cons
 
 The following dialects are considered for automatic dialect detection.
 
-<div class="narrow_table"></div>
 
 <!-- markdownlint-disable MD056 -->
 

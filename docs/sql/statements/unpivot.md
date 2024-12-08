@@ -47,7 +47,6 @@ INSERT INTO monthly_sales VALUES
 FROM monthly_sales;
 ```
 
-<div class="narrow_table"></div>
 
 | empid |    dept     | Jan | Feb | Mar | Apr | May | Jun |
 |------:|-------------|----:|----:|----:|----:|----:|----:|
@@ -73,7 +72,6 @@ INTO
     VALUE sales;
 ```
 
-<div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
 |------:|-------------|-------|------:|
@@ -112,7 +110,6 @@ INTO
     VALUE sales;
 ```
 
-<div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
 |------:|-------------|-------|------:|
@@ -154,7 +151,6 @@ UNPIVOT monthly_sales
         VALUE month_1_sales, month_2_sales, month_3_sales;
 ```
 
-<div class="narrow_table"></div>
 
 | empid |    dept     | quarter | month_1_sales | month_2_sales | month_3_sales |
 |------:|-------------|---------|--------------:|--------------:|--------------:|
@@ -246,7 +242,6 @@ FROM monthly_sales UNPIVOT (
 );
 ```
 
-<div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
 |------:|-------------|-------|------:|
@@ -305,7 +300,6 @@ UNPIVOT (
 );
 ```
 
-<div class="narrow_table"></div>
 
 | empid |    dept     | quarter | month_1_sales | month_2_sales | month_3_sales |
 |------:|-------------|---------|--------------:|--------------:|--------------:|

@@ -384,7 +384,6 @@ COPY test FROM 'my.json' (AUTO_DETECT true);
 
 The following functions are used to create JSON.
 
-<div class="narrow_table"></div>
 
 | Function | Description |
 |:--|:----|
@@ -820,7 +819,6 @@ true
 
 There are three JSON aggregate functions.
 
-<div class="narrow_table"></div>
 
 | Function | Description |
 |:---|:----|
@@ -871,7 +869,6 @@ SELECT json_group_structure(j) FROM example2;
 In many cases, it is inefficient to extract values from JSON one-by-one.
 Instead, we can “extract” all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
 
-<div class="narrow_table"></div>
 
 | Function | Description |
 |:---|:---|

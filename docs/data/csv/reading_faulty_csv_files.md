@@ -112,7 +112,6 @@ FROM read_csv(
 
 Outputs:
 
-<div class="narrow_table"></div>
 
 | name  | age |
 |-------|-----|
@@ -127,7 +126,6 @@ FROM read_csv('faulty.csv', columns = {'name': 'VARCHAR', 'age': 'INTEGER'});
 
 Outputs:
 
-<div class="narrow_table"></div>
 
 |     name     |
 |--------------|
@@ -148,7 +146,6 @@ Note that any of the errors described in our Structural Error section will be st
 
 The CSV Reject Scans Table returns the following information:
 
-<div class="narrow_table"></div>
 
 | Column name | Description | Type |
 |:--|:-----|:-|
@@ -170,7 +167,6 @@ The CSV Reject Scans Table returns the following information:
 
 The CSV Reject Errors Table returns the following information:
 
-<div class="narrow_table"></div>
 
 | Column name | Description | Type |
 |:--|:-----|:-|
@@ -187,7 +183,6 @@ The CSV Reject Errors Table returns the following information:
 
 ## Parameters
 
-<div class="narrow_table"></div>
 
 The parameters listed below are used in the `read_csv` function to configure the CSV Rejects Table.
 

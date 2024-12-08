@@ -24,7 +24,6 @@ which can be cumbersome and slow to implement in standard SQL.
 Let's start with a concrete example.
 Suppose we have a table of stock [`prices`](/data/prices.csv) with timestamps:
 
-<div class="narrow_table"></div>
 
 | ticker | when | price |
 | :----- | :--- | ----: |
@@ -40,7 +39,6 @@ Suppose we have a table of stock [`prices`](/data/prices.csv) with timestamps:
 
 We have another table containing portfolio [`holdings`](/data/holdings.csv) at various points in time:
 
-<div class="narrow_table"></div>
 
 | ticker | when | shares |
 | :----- | :--- | -----: |
@@ -76,7 +74,6 @@ ASOF JOIN prices p
 
 This attaches the value of the holding at that time to each row:
 
-<div class="narrow_table"></div>
 
 | ticker | when | value |
 | :----- | :--- | ----: |
@@ -107,7 +104,6 @@ ORDER BY ALL;
 As you might expect, this will produce `NULL` prices and values instead of dropping left side rows
 when there is no ticker or the time is before the prices begin.
 
-<div class="narrow_table"></div>
 
 | ticker | when | value |
 | :----- | :--- | ----: |

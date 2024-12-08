@@ -7,7 +7,6 @@ title: Creating JSON
 
 The following functions are used to create JSON.
 
-<div class="narrow_table"></div>
 
 | Function | Description |
 |:--|:----|

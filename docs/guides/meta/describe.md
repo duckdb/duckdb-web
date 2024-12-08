@@ -13,7 +13,6 @@ DESCRIBE tbl;
 SHOW tbl; -- equivalent to DESCRIBE tbl;
 ```
 
-<div class="narrow_table"></div>
 
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|
@@ -28,7 +27,6 @@ In order to view the schema of the result of a query, prepend `DESCRIBE` to a qu
 DESCRIBE SELECT * FROM tbl;
 ```
 
-<div class="narrow_table"></div>
 
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|

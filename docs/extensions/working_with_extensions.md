@@ -10,7 +10,6 @@ For platforms where packages for certain extensions are not available, users can
 
 All official extensions are distributed for the following platforms.
 
-<div class="narrow_table"></div>
 
 | Platform name      | Operating system | Architecture    | CPU types                      | Used by                    |
 |--------------------|------------------|-----------------|--------------------------------|----------------------------|

@@ -73,7 +73,6 @@ Some additional configuration options exist for the S3 upload, though the defaul
 
 Additionally, most of the configuration options can be set via environment variables:
 
-<div class="narrow_table"></div>
 
 | DuckDB setting         | Environment variable    | Note                                     |
 |:-----------------------|:------------------------|:-----------------------------------------|

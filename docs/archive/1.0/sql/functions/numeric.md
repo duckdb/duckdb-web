@@ -11,7 +11,6 @@ title: Numeric Functions
 
 The table below shows the available mathematical operators for [numeric types]({% link docs/archive/1.0/sql/data_types/numeric.md %}).
 
-<div class="narrow_table"></div>
 
 <!-- markdownlint-disable MD056 -->
 

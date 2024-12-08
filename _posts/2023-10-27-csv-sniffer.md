@@ -174,7 +174,6 @@ To analyze the impact of running DuckDB's automatic detection, we execute the sn
 
 The cost of sniffing the dialect column names and types is approximately 4% of the total cost of loading the data. 
 
-<div class="narrow_table"></div>
 
 |    Name     | Time (s) |
 |-------------|----------|

@@ -136,7 +136,6 @@ The `read_csv` automatically attempts to figure out the correct configuration of
 SELECT * FROM read_csv('flights.csv');
 ```
 
-<div class="narrow_table"></div>
 
 | FlightDate | UniqueCarrier | OriginCityName |  DestCityName   |
 |------------|---------------|----------------|-----------------|
@@ -154,7 +153,6 @@ CREATE TABLE ontime AS
 DESCRIBE ontime;
 ```
 
-<div class="narrow_table"></div>
 
 |  column_name   | column_type | null | key  | default | extra |
 |----------------|-------------|------|------|---------|-------|
@@ -190,7 +188,6 @@ COPY ontime FROM 'flights.csv';
 SELECT * FROM ontime;
 ```
 
-<div class="narrow_table"></div>
 
 | flightdate | uniquecarrier | origincityname |  destcityname   |
 |------------|---------------|----------------|-----------------|

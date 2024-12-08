@@ -6,7 +6,6 @@ blurb: A time instance represents the time of a day (hour, minute, second, micro
 
 The `TIME` and `TIMETZ` types specify the hour, minute, second, microsecond of a day.
 
-<div class="narrow_table"></div>
 
 | Name     | Aliases                  | Description                     |
 | :------- | :----------------------- | :------------------------------ |

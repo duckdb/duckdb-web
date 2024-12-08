@@ -38,7 +38,6 @@ CREATE INDEX i_index ON integers ((j + k));
 
 ### Parameters
 
-<div class="narrow_table"></div>
 
 | Name | Description |
 |:-|:-----|
@@ -68,7 +67,6 @@ DROP INDEX title_idx;
 
 ### Parameters
 
-<div class="narrow_table"></div>
 
 | Name | Description |
 |:---|:---|

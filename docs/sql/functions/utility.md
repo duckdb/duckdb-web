@@ -357,7 +357,6 @@ The functions below are difficult to categorize into specific function types and
 
 A table function is used in place of a table in a `FROM` clause.
 
-<div class="narrow_table"></div>
 
 | Name | Description |
 |:--|:-------|

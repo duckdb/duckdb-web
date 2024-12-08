@@ -55,7 +55,6 @@ SELECT *
 FROM cities;
 ```
 
-<div class="narrow_table"></div>
 
 | country |     name      | year | population |
 |---------|---------------|-----:|-----------:|
@@ -85,7 +84,6 @@ ON year
 USING sum(population);
 ```
 
-<div class="narrow_table"></div>
 
 | country |     name      | 2000 | 2010 | 2020 |
 |---------|---------------|-----:|-----:|-----:|
@@ -124,7 +122,6 @@ USING sum(population)
 GROUP BY country;
 ```
 
-<div class="narrow_table"></div>
 
 | country | 2000 | 2010 | 2020 |
 |---------|-----:|-----:|-----:|
@@ -143,7 +140,6 @@ USING sum(population)
 GROUP BY country;
 ```
 
-<div class="narrow_table"></div>
 
 | country | 2000 | 2010 |
 |---------|-----:|-----:|
@@ -168,7 +164,6 @@ ON country, name
 USING sum(population);
 ```
 
-<div class="narrow_table"></div>
 
 | year | NL_Amsterdam | NL_New York City | NL_Seattle | US_Amsterdam | US_New York City | US_Seattle |
 |-----:|-------------:|------------------|------------|--------------|-----------------:|-----------:|
@@ -189,7 +184,6 @@ ON country || '_' || name
 USING sum(population);
 ```
 
-<div class="narrow_table"></div>
 
 | year | NL_Amsterdam | US_New York City | US_Seattle |
 |-----:|-------------:|-----------------:|-----------:|
@@ -212,7 +206,6 @@ USING sum(population) AS total, max(population) AS max
 GROUP BY country;
 ```
 
-<div class="narrow_table"></div>
 
 | country | 2000_total | 2000_max | 2010_total | 2010_max | 2020_total | 2020_max |
 |---------|-----------:|---------:|-----------:|---------:|-----------:|---------:|
@@ -231,7 +224,6 @@ USING sum(population)
 GROUP BY country, name;
 ```
 
-<div class="narrow_table"></div>
 
 | country |     name      | 2000 | 2010 | 2020 |
 |---------|---------------|-----:|-----:|-----:|
@@ -282,7 +274,6 @@ JOIN (PIVOT cities ON name USING sum(population) GROUP BY country) name_pivot
 USING (country);
 ```
 
-<div class="narrow_table"></div>
 
 | country | 2000 | 2010 | 2020 | Amsterdam | New York City | Seattle |
 |---------|-----:|-----:|-----:|----------:|--------------:|--------:|
@@ -332,7 +323,6 @@ PIVOT (
 );
 ```
 
-<div class="narrow_table"></div>
 
 | country | 2000 | 2010 | 2020 |
 |---------|-----:|-----:|-----:|

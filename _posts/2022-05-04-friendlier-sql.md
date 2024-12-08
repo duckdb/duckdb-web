@@ -118,7 +118,6 @@ CREATE TABLE mandalorian AS SELECT 1 AS "THIS_IS_THE_WAY";
 SELECT this_is_the_way FROM mandalorian;
 ```  
 
-<div class="narrow_table"></div>
 
 | THIS_IS_THE_WAY |
 |----------------:|
@@ -163,7 +162,6 @@ Even as SQL fans, we know that SQL can learn a thing or two from newer languages
 SELECT 'I love you! I know'[:-3] AS nearly_soloed;
 ```  
 
-<div class="narrow_table"></div>
 
 |  nearly_soloed  |
 |:---|
@@ -189,7 +187,6 @@ SELECT
 FROM (SELECT ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list);
 ```  
 
-<div class="narrow_table"></div>
 
 | dont_forget_the_b_wing |
 |:---|
@@ -249,7 +246,6 @@ FROM (
     ) theyre_coming_in_too_fast;
 ```  
 
-<div class="narrow_table"></div>
 
 | tie_fighter | tie_fighter:1 |
 |:---|:---|
@@ -270,7 +266,6 @@ JOIN sith_count_varchar s_char
   ON s_int.sith_count = s_char.sith_count;
 ```
 
-<div class="narrow_table"></div>
 
 | sith_count | sith_count |
 |---:|---:|

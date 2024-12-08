@@ -255,7 +255,6 @@ FROM read_json(['my_file1.json', 'my_file2.json'],
                columns = {duck: 'INTEGER', goose: 'INTEGER[]', swan: 'DOUBLE'});
 ```
 
-<div class="narrow_table"></div>
 
 | duck | goose | swan |
 |:---|:---|:---|
@@ -269,7 +268,6 @@ SELECT goose, duck FROM read_json_auto('*.json.gz');
 SELECT goose, duck FROM '*.json.gz'; -- equivalent
 ```
 
-<div class="narrow_table"></div>
 
 | goose | duck |
 |:---|:---|
@@ -307,7 +305,6 @@ Can be queried exactly the same as a JSON file that contains `'unstructured'` JS
 
 Both can be read as the table:
 
-<div class="narrow_table"></div>
 
 | duck | goose |
 |:---|:---|
@@ -325,7 +322,6 @@ The `records` parameter specifies whether the JSON contains records that should 
 
 Results in two columns:
 
-<div class="narrow_table"></div>
 
 | duck | goose |
 |:---|:---|
@@ -334,7 +330,6 @@ Results in two columns:
 
 You can read the same file with `records` set to `'false'`, to get a single column, which is a `STRUCT` containing the data:
 
-<div class="narrow_table"></div>
 
 | json |
 |:---|
@@ -734,7 +729,6 @@ FROM extracted;
 
 The following functions are used to create JSON.
 
-<div class="narrow_table"></div>
 
 | Function | Description |
 |:--|:----|
@@ -808,7 +802,6 @@ SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
 
 There are three JSON aggregate functions.
 
-<div class="narrow_table"></div>
 
 | Function | Description |
 |:---|:----|
@@ -859,7 +852,6 @@ SELECT json_group_structure(j) FROM example2;
 In many cases, it is inefficient to extract values from JSON one-by-one.
 Instead, we can "extract" all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
 
-<div class="narrow_table"></div>
 
 | Function | Description |
 |:---|:---|

@@ -4,7 +4,6 @@ title: Date Types
 blurb: A date specifies a combination of year, month and day.
 ---
 
-<div class="narrow_table"></div>
 
 | Name   | Aliases | Description                     |
 |:-------|:--------|:--------------------------------|
@@ -20,7 +19,6 @@ SELECT DATE '1992-09-20';
 
 There are also three special date values that can be used on input:
 
-<div class="narrow_table"></div>
 
 | Input string | Description                       |
 |:-------------|:----------------------------------|

@@ -80,7 +80,6 @@ This function returns a table with columns `query_nr`, `scale_factor`, and `answ
 
 The data generator function `dbgen` has the following parameters:
 
-<div class="narrow_table"></div>
 
 | Name | Type | Description |
 |--|--|------------|

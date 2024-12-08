@@ -50,7 +50,6 @@ INSERT INTO Cities VALUES ('US', 'New York City', 2020, 8772);
 FROM Cities;
 ```
 
-<div class="narrow_table"></div>
 
 | Country |     Name      | Year | Population |
 |---------|---------------|-----:|-----------:|
@@ -80,7 +79,6 @@ ON Year
 USING sum(Population);
 ```
 
-<div class="narrow_table"></div>
 
 | Country |     Name      | 2000 | 2010 | 2020 |
 |---------|---------------|-----:|-----:|-----:|
@@ -114,7 +112,6 @@ USING sum(Population)
 GROUP BY Country;
 ```
 
-<div class="narrow_table"></div>
 
 | Country | 2000 | 2010 | 2020 |
 |---------|-----:|-----:|-----:|
@@ -133,7 +130,6 @@ USING sum(Population)
 GROUP BY Country;
 ```
 
-<div class="narrow_table"></div>
 
 | Country | 2000 | 2010 |
 |---------|-----:|-----:|
@@ -158,7 +154,6 @@ ON Country, Name
 USING sum(Population);
 ```
 
-<div class="narrow_table"></div>
 
 | Year | NL_Amsterdam | NL_New York City | NL_Seattle | US_Amsterdam | US_New York City | US_Seattle |
 |-----:|-------------:|------------------|------------|--------------|-----------------:|-----------:|
@@ -177,7 +172,6 @@ In this case, concatenating with an underscore is used to imitate the naming con
 PIVOT Cities ON Country || '_' || Name USING sum(Population);
 ```
 
-<div class="narrow_table"></div>
 
 | Year | NL_Amsterdam | US_New York City | US_Seattle |
 |-----:|-------------:|-----------------:|-----------:|
@@ -200,7 +194,6 @@ USING sum(Population) AS total, max(Population) AS max
 GROUP BY Country;
 ```
 
-<div class="narrow_table"></div>
 
 | Country | 2000_total | 2000_max | 2010_total | 2010_max | 2020_total | 2020_max |
 |---------|-----------:|---------:|-----------:|---------:|-----------:|---------:|
@@ -219,7 +212,6 @@ USING sum(Population)
 GROUP BY Country, Name;
 ```
 
-<div class="narrow_table"></div>
 
 | Country |     Name      | 2000 | 2010 | 2020 |
 |---------|---------------|-----:|-----:|-----:|
@@ -269,7 +261,6 @@ JOIN (PIVOT Cities ON Name USING sum(Population) GROUP BY Country) name_pivot
 USING (Country);
 ```
 
-<div class="narrow_table"></div>
 
 | Country | 2000 | 2010 | 2020 | Amsterdam | New York City | Seattle |
 |---------|-----:|-----:|-----:|----------:|--------------:|--------:|
@@ -326,7 +317,6 @@ GROUP BY ALL;
 
 This produces the result:
 
-<div class="narrow_table"></div>
 
 | Country |     Name      |    list("YEAR")    | list(population_sum) |
 |---------|---------------|--------------------|----------------------|
@@ -336,7 +326,6 @@ This produces the result:
 
 The `PhysicalPivot` operator converts those lists into column names and values to return this result:
 
-<div class="narrow_table"></div>
 
 | Country |     Name      | 2000 | 2010 | 2020 |
 |---------|---------------|-----:|-----:|-----:|
@@ -384,7 +373,6 @@ PIVOT (
 );
 ```
 
-<div class="narrow_table"></div>
 
 | Country | 2000 | 2010 | 2020 |
 |---------|-----:|-----:|-----:|
