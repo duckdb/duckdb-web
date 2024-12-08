@@ -18,7 +18,6 @@ LOAD arrow;
 
 ## Functions
 
-<div class="narrow_table"></div>
 
 | Function | Type | Description |
 |--|----|-------|

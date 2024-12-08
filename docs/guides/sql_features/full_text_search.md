@@ -19,7 +19,7 @@ CREATE TABLE corpus AS
 DESCRIBE corpus;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|

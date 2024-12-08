@@ -9,7 +9,6 @@ title: AutoComplete Extension
 
 This extension adds supports for autocomplete in the [CLI client](../api/cli).
 
-<div class="narrow_table"></div>
 
 | Function                                | Description                                            |
 |:----------------------------------------|:-------------------------------------------------------|
@@ -23,7 +22,6 @@ SELECT * FROM sql_auto_complete('SEL');
 
 Returns:
 
-<div class="narrow_table"></div>
 
 | suggestion  | suggestion_start |
 |-------------|------------------|

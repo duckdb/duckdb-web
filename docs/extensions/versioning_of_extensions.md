@@ -117,7 +117,6 @@ give the user information on which extensions were updated to/from which version
 UPDATE EXTENSIONS;
 ```
 
-<div class="narrow_table"></div>
 
 | extension_name | repository   | update_result         | previous_version | current_version |
 |:---------------|:-------------|:----------------------|:-----------------|:----------------|
@@ -135,7 +134,6 @@ The update statement can also be provided with a list of specific extensions to 
 UPDATE EXTENSIONS (httpfs, azure);
 ```
 
-<div class="narrow_table"></div>
 
 | extension_name | repository   | update_result         | previous_version | current_version |
 |:---------------|:-------------|:----------------------|:-----------------|:----------------|

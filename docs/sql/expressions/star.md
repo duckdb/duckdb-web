@@ -110,7 +110,6 @@ INSERT INTO numbers VALUES (1, 10), (2, 20), (3, NULL);
 SELECT min(COLUMNS(*)), count(COLUMNS(*)) FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | id | number | id | number |
 |---:|-------:|---:|-------:|
@@ -125,7 +124,6 @@ SELECT
 FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | id | min(number := (number + id)) | id |
 |---:|-----------------------------:|---:|
@@ -137,7 +135,6 @@ FROM numbers;
 SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | id | number |
 |---:|-------:|
@@ -159,7 +156,6 @@ FROM (
 WHERE COLUMNS(*) > 1; -- equivalent to: x > 1 AND y > 1 AND z > 1
 ```
 
-<div class="narrow_table"></div>
 
 | x | y | z |
 |--:|--:|--:|
@@ -173,7 +169,6 @@ WHERE COLUMNS(*) > 1; -- equivalent to: x > 1 AND y > 1 AND z > 1
 SELECT COLUMNS('(id|numbers?)') FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | id | number |
 |---:|-------:|
@@ -192,7 +187,6 @@ For example, to select the first three letters of colum names, run:
 SELECT COLUMNS('(\w{3}).*') AS '\1' FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | id | num  |
 |---:|-----:|
@@ -215,7 +209,6 @@ SELECT COLUMNS('(\w*):(\w*)') AS '\1\2' FROM tbl;
 SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | number |
 |-------:|
@@ -277,7 +270,6 @@ For example:
 SELECT st.* FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS st);
 ```
 
-<div class="narrow_table"></div>
 
 | x | y | z |
 |--:|--:|--:|

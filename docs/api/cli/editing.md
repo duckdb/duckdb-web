@@ -9,7 +9,6 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Moving
 
-<div class="narrow_table"></div>
 
 |       Key       |                                 Action                                 |
 |-----------------|------------------------------------------------------------------------|
@@ -30,7 +29,6 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## History
 
-<div class="narrow_table"></div>
 
 |     Key    |            Action              |
 |------------|--------------------------------|
@@ -45,7 +43,6 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Changing Text
 
-<div class="narrow_table"></div>
 
 |        Key        | Action                                                   |
 |-------------------|----------------------------------------------------------|
@@ -68,7 +65,6 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Completing
 
-<div class="narrow_table"></div>
 
 |      Key      |                          Action                        |
 |---------------|--------------------------------------------------------|
@@ -78,7 +74,6 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Miscellaneous
 
-<div class="narrow_table"></div>
 
 |    Key     |                           Action                                                   |
 |------------|------------------------------------------------------------------------------------|

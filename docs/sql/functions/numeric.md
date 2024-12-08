@@ -11,7 +11,6 @@ redirect_from:
 
 The table below shows the available mathematical operators for [numeric types]({% link docs/sql/data_types/numeric.md %}).
 
-<div class="narrow_table"></div>
 
 <!-- markdownlint-disable MD056 -->
 

@@ -14,7 +14,6 @@ This means that wherever a DuckDBPyType object is expected, it is also possible 
 
 The table below shows the mapping of Python Built-in types to DuckDB type.
 
-<div class="narrow_table"></div>
 
 | Built-in types | DuckDB type |
 |:---------------|:------------|
@@ -29,7 +28,6 @@ The table below shows the mapping of Python Built-in types to DuckDB type.
 
 The table below shows the mapping of Numpy DType to DuckDB type.
 
-<div class="narrow_table"></div>
 
 | Type        | DuckDB type |
 |:------------|:------------|
@@ -98,7 +96,6 @@ duckdb.typing.DuckDBPyType(Union[int, str, bool, bytearray])
 
 For the built-in types, you can use the constants defined in `duckdb.typing`:
 
-<div class="narrow_table"></div>
 
 | DuckDB type    |
 |:---------------|

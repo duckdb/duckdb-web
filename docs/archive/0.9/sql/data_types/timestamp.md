@@ -38,7 +38,6 @@ SELECT TIMESTAMP WITH TIME ZONE '1992-09-20 11:30:00.123456';
 
 There are also three special date values that can be used on input:
 
-<div class="narrow_table"></div>
 
 | Input String | Valid Types                           | Description                                    |
 |:-------------|:--------------------------------------|:-----------------------------------------------|
@@ -53,7 +52,6 @@ but `epoch` is simply a notational shorthand that will be converted to the time 
 SELECT '-infinity'::TIMESTAMP, 'epoch'::TIMESTAMP, 'infinity'::TIMESTAMP;
 ```
 
-<div class="narrow_table"></div>
 
 | Negative  | Epoch               | Positive |
 |:----------|:--------------------|:---------|

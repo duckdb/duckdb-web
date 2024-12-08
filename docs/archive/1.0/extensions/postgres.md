@@ -86,7 +86,7 @@ The tables in the PostgreSQL database can be read as if they were normal DuckDB 
 SHOW ALL TABLES;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | name  |
 | ----- |
@@ -96,7 +96,7 @@ SHOW ALL TABLES;
 SELECT * FROM uuids;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | u                                    |
 | ------------------------------------ |

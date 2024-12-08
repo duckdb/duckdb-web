@@ -42,7 +42,6 @@ CREATE OR REPLACE TABLE new AS
 SELECT * FROM original;
 ```
 
-<div class="narrow_table"></div>
 
 | key |      value       |
 |-----|------------------|
@@ -69,7 +68,6 @@ UPDATE original
 SELECT * FROM original;
 ```
 
-<div class="narrow_table"></div>
 
 | key |    value    |
 |-----|-------------|

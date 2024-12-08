@@ -9,7 +9,6 @@ redirect_from:
 title: Enum Types
 ---
 
-<div class="narrow_table"></div>
 
 | Name | Description |
 |:--|:-----|
@@ -58,7 +57,6 @@ CREATE TYPE birds AS ENUM (SELECT my_varchar FROM my_inputs);
 SELECT enum_range(NULL::birds) AS my_enum_range;
 ```
 
-<div class="narrow_table"></div>
 
 |  my_enum_range  |
 |-----------------|

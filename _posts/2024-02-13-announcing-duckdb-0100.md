@@ -187,7 +187,6 @@ We expect that as the format stabilizes and matures this will happen less freque
 
 Below is a benchmark comparing the loading time of 11 million rows of the NYC Taxi dataset from a CSV file on an M1 Max with 10 cores:
 
-<div class="narrow_table"></div>
 
 | Version  | Load time  |
 |----------|-----------:|
@@ -196,7 +195,6 @@ Below is a benchmark comparing the loading time of 11 million rows of the NYC Ta
 
 Furthermore, many optimizations have been done that make running queries over CSV files directly significantly faster as well. Below is a benchmark comparing the execution time of a `SELECT count(*)` query directly over the NYC Taxi CSV file.
 
-<div class="narrow_table"></div>
 
 | Version  | Query time |
 |----------|-----------:|
@@ -335,7 +333,6 @@ With the new version 0.10.0, this query completes in ca. 5s on a MacBook, while 
 
 Floating point numbers are notoriously difficult to compress efficiently, both in terms of compression ratio as well as speed of compression and decompression. In the past, DuckDB had support for the then state-of-the-art "[Chimp](https://github.com/duckdb/duckdb/pull/4878)" and the "[Patas](https://github.com/duckdb/duckdb/pull/5044)" compression methods. Turns out, those were not the last word in floating point compression. Researchers [Azim Afroozeh](https://www.cwi.nl/en/people/azim-afroozeh/), [Leonard Kuffo](https://www.cwi.nl/en/people/leonardo-xavier-kuffo-rivero/) and (the one and only) [Peter Boncz](https://homepages.cwi.nl/~boncz/) have recently published a paper titled "[ALP: Adaptive Lossless floating-Point Compression](https://dl.acm.org/doi/pdf/10.1145/3626717)" at SIGMOD, a top-tier academic conference for data management research. In an uncommon yet highly commendable move, they have also sent a [pull request](https://github.com/duckdb/duckdb/pull/9635) to DuckDB. The new compression scheme replaces Chimp and Patas. Inside DuckDB, ALP is **x2-4 times faster** than Patas (at decompression) achieving **compression ratios twice as high** (sometimes even much more).
 
-<div class="narrow_table"></div>
 
 | Compression  | Load    | Query   | Size   |
 |:-------------|--------:|--------:|-------:|

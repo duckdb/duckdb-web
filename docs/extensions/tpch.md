@@ -88,7 +88,6 @@ CALL dbgen(sf = 0);
 
 The data generator function `dbgen` has the following parameters:
 
-<div class="narrow_table"></div>
 
 | Name | Type | Description |
 |--|--|------------|

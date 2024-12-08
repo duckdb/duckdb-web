@@ -17,7 +17,6 @@ FROM duckdb_extensions()
 WHERE extension_name='parquet';
 ```
 
-<div class="narrow_table"></div>
 
 | extension_name    | extension_version | install_mode         |
 |:------------------|:------------------|:---------------------|
@@ -33,7 +32,6 @@ FROM duckdb_extensions()
 WHERE extension_name = 'azure';
 ```
 
-<div class="narrow_table"></div>
 
 | extension_name | extension_version | install_mode   |
 |:---------------|:------------------|:---------------|
@@ -50,7 +48,6 @@ give the user information on which extensions were updated to/from which version
 UPDATE EXTENSIONS;
 ```
 
-<div class="narrow_table"></div>
 
 | extension_name | repository   | update_result         | previous_version | current_version |
 |:---------------|:-------------|:----------------------|:-----------------|:----------------|
@@ -68,7 +65,6 @@ The update statement can also be provided with a list of specific extensions to 
 UPDATE EXTENSIONS (httpfs, azure);
 ```
 
-<div class="narrow_table"></div>
 
 | extension_name | repository   | update_result         | previous_version | current_version |
 |:---------------|:-------------|:----------------------|:-----------------|:----------------|

@@ -84,7 +84,6 @@ SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 
 Any file name input to the `read_parquet` function can either be an exact filename, or use a glob syntax to read multiple files that match a pattern.
 
-<div class="narrow_table"></div>
 
 |  Wildcard  |                        Description                        |
 |------------|-----------------------------------------------------------|
@@ -124,7 +123,6 @@ The `filename` argument can be used to add an extra `filename` column to the res
 SELECT * FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = true);
 ```
 
-<div class="narrow_table"></div>
 
 | FlightDate | OriginCityName |  DestCityName   | UniqueCarrier |   filename   |
 |------------|----------------|-----------------|---------------|--------------|
@@ -143,7 +141,6 @@ Search the current directory for all files.
 SELECT * FROM glob('*');
 ```
 
-<div class="narrow_table"></div>
 
 |     file      |
 |---------------|

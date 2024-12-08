@@ -92,7 +92,6 @@ Each line is a JSON.
 SELECT * FROM read_json_auto('records.json', format='newline_delimited');
 ```
 
-<div class="narrow_table"></div>
 
 |   key1   |   key2   |
 |----------|----------|
@@ -114,7 +113,6 @@ If the JSON file contains a JSON array of objects (pretty-printed or not), `arra
 SELECT * FROM read_json_auto('array.json', format='array');
 ```
 
-<div class="narrow_table"></div>
 
 |   key1   |   key2   |
 |----------|----------|
@@ -143,7 +141,6 @@ If the JSON file contains JSON that is not newline-delimited or an array, `unstr
 SELECT * FROM read_json_auto('unstructured.json', format='unstructured');
 ```
 
-<div class="narrow_table"></div>
 
 |   key1   |   key2   |
 |----------|----------|
@@ -166,7 +163,6 @@ Continuing with the same example file from before:
 SELECT * FROM read_json_auto('records.json', records=true);
 ```
 
-<div class="narrow_table"></div>
 
 |   key1   |   key2   |
 |----------|----------|
@@ -179,7 +175,6 @@ When `records=false`, the JSON extension will not unpack the top-level objects, 
 SELECT * FROM read_json_auto('records.json', records=false);
 ```
 
-<div class="narrow_table"></div>
 
 |                json                |
 |------------------------------------|
@@ -197,7 +192,6 @@ This is especially useful if we have non-object JSON, for example:
 SELECT * FROM read_json_auto('arrays.json', records=false);
 ```
 
-<div class="narrow_table"></div>
 
 |    json     |
 |-------------|
@@ -217,7 +211,6 @@ The `read_json_auto` is the simplest method of loading JSON files: it automatica
 SELECT * FROM read_json_auto('todos.json') LIMIT 5;
 ```
 
-<div class="narrow_table"></div>
 
 | userId | id |                              title                              | completed |
 |--------|----|-----------------------------------------------------------------|-----------|
@@ -236,7 +229,6 @@ CREATE TABLE todos AS SELECT * FROM read_json_auto('todos.json');
 DESCRIBE todos;
 ```
 
-<div class="narrow_table"></div>
 
 | column_name | column_type | null | key | default | extra |
 |-------------|-------------|------|-----|---------|-------|
@@ -267,7 +259,6 @@ COPY todos FROM 'todos.json';
 SELECT * FROM todos LIMIT 5;
 ```
 
-<div class="narrow_table"></div>
 
 | userId | id |                              title                              | completed |
 |--------|----|-----------------------------------------------------------------|-----------|

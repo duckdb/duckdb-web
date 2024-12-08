@@ -26,7 +26,6 @@ Dialect detection works by attempting to parse the samples using the set of cons
 
 The following dialects are considered for automatic dialect detection.
 
-<div class="narrow_table"></div>
 
 | Parameters | Considered values     |
 |------------|-----------------------|
@@ -58,7 +57,6 @@ After detecting the dialect, the system will attempt to figure out the types of 
 
 The type detection works by attempting to convert the values in each column to the candidate types. If the conversion is unsuccessful, the candidate type is removed from the set of candidate types for that column. After all samples have been handled - the remaining candidate type with the highest priority is chosen. The set of considered candidate types in order of priority is given below:
 
-<div class="narrow_table"></div>
 
 |   Types     |
 |-------------|
@@ -94,7 +92,6 @@ If the ambiguities cannot be resolved by looking at the data the system has a li
 
 The system considers the following formats for dates (`dateformat`). Higher entries are chosen over lower entries in case of ambiguities (i.e., ISO 8601 is preferred over `MM-DD-YYYY`).
 
-<div class="narrow_table"></div>
 
 | dateformat |
 |------------|
@@ -108,7 +105,6 @@ The system considers the following formats for dates (`dateformat`). Higher entr
 
 The system considers the following formats for timestamps (`timestampformat`). Higher entries are chosen over lower entries in case of ambiguities.
 
-<div class="narrow_table"></div>
 
 |   timestampformat      |
 |------------------------|

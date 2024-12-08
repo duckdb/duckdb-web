@@ -924,13 +924,6 @@ table thead th {
 .media_table + table td:nth-child(4) {
 	width: 80px;
 }
-.narrow_table + table{
-	width: auto;
-	min-width: auto;
-	td{
-		min-width: 40px;
-	}
-}
 .center_aligned_header_table + table thead th {
 	text-align: center !important;
 }
@@ -1013,7 +1006,6 @@ table{
 
 
 h4 + table,
-h4 + .narrow_table,
 h4 + .highlighter-rouge{
 	margin-top: 1em;
 }
@@ -1021,8 +1013,7 @@ form {
 	background: #f2f2f2;
 	padding: 20px;
 }
-.highlighter-rouge + table,
-.highlighter-rouge + .narrow_table{
+.highlighter-rouge + table {
 	margin-top: 25px;
 }
 .outer {

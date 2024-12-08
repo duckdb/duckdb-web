@@ -22,7 +22,7 @@ SELECT 'Infinity'::FLOAT - 'Infinity'::FLOAT AS x;
 SELECT 'Infinity'::FLOAT - 1.0 AS x;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | Expression              | PostgreSQL |    DuckDB |  IEEE 754 |
 | :---------------------- | ---------: | --------: | --------: |
@@ -44,7 +44,6 @@ SELECT 1 / 2 AS x;
 
 PostgreSQL returns:
 
-<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -52,7 +51,6 @@ PostgreSQL returns:
 
 DuckDB returns:
 
-<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -64,7 +62,6 @@ To perform integer division in DuckDB, use the `//` operator:
 SELECT 1 // 2 AS x;
 ```
 
-<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -89,7 +86,6 @@ ERROR:  UNION types boolean and integer cannot be matched
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
 
 
-<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -135,7 +131,7 @@ SELECT * FROM PreservedCase;
 SELECT table_name FROM duckdb_tables();
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | table_name    |
 | ------------- |
@@ -150,7 +146,7 @@ CREATE TABLE MyTaBLe(x INT);
 SELECT table_name FROM duckdb_tables();
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | table_name |
 | ---------- |
@@ -168,7 +164,7 @@ SELECT 1 == 1 AS t;
 
 DuckDB returns:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |    t |
 | ---: |
@@ -230,7 +226,7 @@ DuckDB runs the statement and creates the table successfully, confirmed by the f
 DESCRIBE myschema.mytable;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | column_name |   column_type    | null | key  | default | extra |
 |-------------|------------------|------|------|---------|-------|

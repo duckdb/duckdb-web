@@ -11,7 +11,6 @@ This section describes functions and operators for examining and manipulating [`
 
 The table below shows the available mathematical operators for `TIME` types.
 
-<div class="narrow_table"></div>
 
 | Operator | Description | Example | Result |
 |:-|:---|:----|:--|
