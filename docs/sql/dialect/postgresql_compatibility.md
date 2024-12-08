@@ -168,6 +168,8 @@ SELECT 1 == 1 AS t;
 
 DuckDB returns:
 
+<div class="narrow_table"></div>
+
 |    t |
 | ---: |
 | true |
