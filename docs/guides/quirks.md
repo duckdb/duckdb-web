@@ -7,7 +7,7 @@ Some, we just haven't come around to fixing yet and may never do because there a
 
 Acknowledging and being open about these quirks is the best we can do, which is why we compiled below a list of examples that may catch some users off guard: 
 
-- The aggregate functions `sum`, `list`, and `string_agg` return `NULL` instead of `0`, `[]` and `''`, respectively, for empty groups. This is dictated by the SQL Standard commands and obeyed by all implementations we now.
+- The aggregate functions `sum`, `list`, and `string_agg` return `NULL` instead of `0`, `[]` and `''`, respectively, for empty groups. This is dictated by the SQL Standard and obeyed by all SQL implementations we know.
 - One-based indexing everywhere (e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`)). Another SQL Standard requirement. Good for our R users and those with an SQL background, bad for everybody else.
 - DuckDB's `1 = true` is common but violates PostgreSQL compatibility, whereas DuckDB's `'t' = true` is more quirky and was inherited from PostgreSQL. DuckDB's `1 = '1.1'` is probably most difficult to justify.
 - `'NaN'::FLOAT = 'NaN'::FLOAT` and `'NaN'::FLOAT > 3` violate IEEE-754 but mean floating point data types are totally ordered, like all other datatypes (beware the consequences for `greatest`/`least`)
