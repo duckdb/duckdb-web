@@ -57,10 +57,10 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 22
-extension_star_count_pretty: 22
-extension_download_count: 189
-extension_download_count_pretty: 189
+extension_star_count: 23
+extension_star_count_pretty: 23
+extension_download_count: 204
+extension_download_count_pretty: 204
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---
