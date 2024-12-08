@@ -25,7 +25,7 @@ FROM (
     );
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | (a != b) | (c != d) | (c[0] = d[0]) | (a = c[0]) | (b != c[0]) |
 |----------|----------|---------------|------------|-------------|

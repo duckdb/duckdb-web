@@ -111,7 +111,7 @@ SELECT *
 FROM read_json('records.json', format = 'newline_delimited');
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |  key1  |  key2  |
 |--------|--------|
@@ -137,7 +137,7 @@ SELECT *
 FROM read_json('records-in-array.json', format = 'array');
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |  key1  |  key2  |
 |--------|--------|
@@ -170,7 +170,7 @@ SELECT *
 FROM read_json('unstructured.json', format = 'unstructured');
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |  key1  |  key2  |
 |--------|--------|
@@ -196,7 +196,7 @@ SELECT *
 FROM read_json('records.json', records = true);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |  key1  |  key2  |
 |--------|--------|
@@ -211,7 +211,7 @@ SELECT *
 FROM read_json('records.json', records = false);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |               json               |
 |----------------------------------|
@@ -232,7 +232,7 @@ SELECT *
 FROM read_json('arrays.json', records = false);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |   json    |
 |-----------|
@@ -254,7 +254,7 @@ FROM read_json('todos.json')
 LIMIT 5;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | userId | id |                              title                              | completed |
 |-------:|---:|-----------------------------------------------------------------|-----------|
@@ -275,7 +275,7 @@ CREATE TABLE todos AS
 DESCRIBE todos;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | column_name | column_type | null | key | default | extra |
 |-------------|-------------|------|-----|---------|-------|
@@ -305,7 +305,7 @@ COPY todos FROM 'todos.json';
 SELECT * FROM todos LIMIT 5;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | userId | id |                              title                              | completed |
 |--------|----|-----------------------------------------------------------------|-----------|

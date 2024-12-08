@@ -13,7 +13,7 @@ The `version()` function returns the version number of DuckDB.
 SELECT version() AS version;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | version |
 |-----------|
@@ -25,7 +25,7 @@ Using a `PRAGMA`:
 PRAGMA version;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | library_version | source_id  |
 |-----------------|------------|

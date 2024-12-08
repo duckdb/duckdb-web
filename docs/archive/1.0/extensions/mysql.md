@@ -33,7 +33,7 @@ USE mysqldb;
 
 The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below. Connection information can also be specified with [environment variables](https://dev.mysql.com/doc/refman/8.3/en/environment-variables.html). If no option is provided explicitly, the MySQL extension tries to read it from an environment variable.
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | Setting  |    Default     | Environment variable |
 |----------|----------------|----------------------|
@@ -52,7 +52,7 @@ The tables in the MySQL database can be read as if they were normal DuckDB table
 SHOW TABLES;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |      name       |
 |-----------------|
@@ -62,7 +62,7 @@ SHOW TABLES;
 SELECT * FROM signed_integers;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |  t   |   s    |    m     |      i      |          b           |
 |-----:|-------:|---------:|------------:|---------------------:|

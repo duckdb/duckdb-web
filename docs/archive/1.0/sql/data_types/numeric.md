@@ -90,7 +90,7 @@ SELECT 0.0 / 0.0 AS x;
 SELECT -1.0 / 0.0 AS x;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | Expression | DuckDB |  IEEE 754 |
 | :--------- | -----: | --------: |

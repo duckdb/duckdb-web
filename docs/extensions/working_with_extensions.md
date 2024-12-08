@@ -111,7 +111,7 @@ SELECT extension_name, extension_version, installed_from, install_mode FROM duck
 
 This outputs:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | extensions_name | extensions_version | installed_from | install_mode |
 |:----------------|:-------------------|:---------------|:-------------|

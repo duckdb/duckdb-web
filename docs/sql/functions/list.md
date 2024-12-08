@@ -426,7 +426,7 @@ SELECT [lower(x) FOR x IN strings] AS strings
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |     strings      |
 |------------------|
@@ -437,7 +437,7 @@ SELECT [upper(x) FOR x IN strings IF len(x) > 0] AS strings
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |    strings     |
 |----------------|
@@ -450,7 +450,7 @@ In the following example, we use `x, i`, where `x` is the value and `i` is the p
 SELECT [4, 5, 6] AS l, [x FOR x, i IN l IF i != 2] filtered;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |     l     | filtered |
 |-----------|----------|

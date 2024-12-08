@@ -86,7 +86,7 @@ SELECT
     'nan' > sqrt(2)
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | (sqrt(2) > '-inf') | ('nan' > sqrt(2)) |
 |-------------------:|------------------:|

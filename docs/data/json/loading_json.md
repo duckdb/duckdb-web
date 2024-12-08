@@ -122,7 +122,7 @@ Example usage:
 SELECT * FROM read_json('my_file1.json', columns = {duck: 'INTEGER'});
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | duck |
 |:---|
@@ -138,7 +138,7 @@ FROM read_json(
     );
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | duck | goose | swan |
 |:---|:---|:---|
@@ -152,7 +152,7 @@ SELECT goose, duck FROM read_json('*.json.gz');
 SELECT goose, duck FROM '*.json.gz'; -- equivalent
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | goose | duck |
 |:---|:---|
@@ -190,7 +190,7 @@ Can be queried exactly the same as a JSON file that contains `'unstructured'` JS
 
 Both can be read as the table:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | duck | goose |
 |:---|:---|
@@ -208,7 +208,7 @@ The `records` parameter specifies whether the JSON contains records that should 
 
 Results in two columns:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | duck | goose |
 |:---|:---|
@@ -217,7 +217,7 @@ Results in two columns:
 
 You can read the same file with `records` set to `'false'`, to get a single column, which is a `STRUCT` containing the data:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | json |
 |:---|
@@ -333,7 +333,7 @@ CREATE TABLE todos AS
 DESCRIBE todos;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | column_name | column_type | null | key | default | extra |
 |-------------|-------------|------|-----|---------|-------|

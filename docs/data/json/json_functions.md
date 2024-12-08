@@ -142,7 +142,7 @@ SELECT
 FROM example;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |   family   |           species            |
 |------------|------------------------------|

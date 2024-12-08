@@ -211,7 +211,7 @@ FROM reject_scans;
 
 Outputs:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | scan_id | file_id |             file_path             | delimiter | quote | escape | newline_delimiter | skip_rows | has_header |               columns                | date_format | timestamp_format |   user_arguments   |
 |---------|---------|-----------------------------------|-----------|-------|--------|-------------------|-----------|-----------:|--------------------------------------|-------------|------------------|--------------------|
@@ -223,7 +223,7 @@ FROM reject_errors;
 
 Outputs:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | scan_id | file_id | line | line_byte_position | byte_position | column_idx | column_name | error_type |      csv_line       |                                   error_message                                    |
 |---------|---------|------|--------------------|---------------|------------|-------------|------------|---------------------|------------------------------------------------------------------------------------|
