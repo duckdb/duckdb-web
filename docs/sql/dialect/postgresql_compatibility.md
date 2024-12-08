@@ -44,12 +44,9 @@ SELECT 1 / 2 AS x;
 
 PostgreSQL returns:
 
-```text
- x
----
- 0
-(1 row)
-```
+|    x |
+| ---: |
+|    0 |
 
 DuckDB returns:
 
@@ -162,14 +159,9 @@ SELECT 1 == 1 AS t;
 
 DuckDB returns:
 
-```text
-┌─────────┐
-│    t    │
-│ boolean │
-├─────────┤
-│ true    │
-└─────────┘
-```
+|    t |
+| ---: |
+| true |
 
 Postgres returns:
 
@@ -218,8 +210,7 @@ PostgreSQL returns an error on the last statement:
 
 ```console
 ERROR:  type "mytype" does not exist
-LINE 1: CREATE TABLE myschema.mytable (v mytype);
-                                         ^
+LINE 1: CREATE TABLE myschema.mytable (v mytype);                                      ^
 ```
 
 DuckDB runs the statement and creates the table successfully, confirmed by the following query:
@@ -228,11 +219,9 @@ DuckDB runs the statement and creates the table successfully, confirmed by the f
 DESCRIBE myschema.mytable;
 ```
 
-```text
-┌─────────────┬──────────────────┬─────────┬─────────┬─────────┬─────────┐
-│ column_name │   column_type    │  null   │   key   │ default │  extra  │
-│   varchar   │     varchar      │ varchar │ varchar │ varchar │ varchar │
-├─────────────┼──────────────────┼─────────┼─────────┼─────────┼─────────┤
-│ v           │ ENUM('as', 'df') │ YES     │ NULL    │ NULL    │ NULL    │
-└─────────────┴──────────────────┴─────────┴─────────┴─────────┴─────────┘
-```
+<div class="monospace_table"></div>
+
+| column_name |   column_type    | null | key  | default | extra |
+|-------------|------------------|------|------|---------|-------|
+| v           | ENUM('as', 'df') | YES  | NULL | NULL    | NULL  |
+
