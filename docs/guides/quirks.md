@@ -4,9 +4,9 @@ Some are unavoidable because we strive to adhere to the SQL Standard and specifi
 
 Some are vestiges of our feathered friend's evolution, and the benefit of righting them has not been deemed worth the pain of migration (yet).
 
-Some are of the type that programmers like to start holy wars about, and while we may have had our reasons to have picked one side over the other, we understand that both sides exist and a warning is the least we can offer.
+Some are of the type that have divided programmers since the dawn of computers.
 
-Finally, some we may just not have come around to fixing yet and may never do because there are always bigger fires to put out or more useful features to add.  
+Some, we may just not have come around to fixing yet and may never do because there are always bigger fires to put out or more useful features to add.  
 
 Acknowledging and being open about these things is the best we can do. In this sense, we provide below a list of examples that may be surprising to some, in the hope that they won't run into them unprepared while investigating a misbehaving multi-page query on tens of terrabytes of parquet files scattered across S3: 
 
