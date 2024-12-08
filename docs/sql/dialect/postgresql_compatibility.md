@@ -168,7 +168,7 @@ SELECT 1 == 1 AS t;
 
 DuckDB returns:
 
-<div class="narrow_table"></div>
+<div class="narrow_table monospace_table"></div>
 
 |    t |
 | ---: |
