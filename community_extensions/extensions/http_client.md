@@ -97,8 +97,8 @@ docs:
   extended_description: |
     The HTTP Client Extension is experimental, use at your own risk!
 
-extension_star_count: 43
-extension_star_count_pretty: 43
+extension_star_count: 44
+extension_star_count_pretty: 44
 extension_download_count: 219
 extension_download_count_pretty: 219
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
