@@ -21,7 +21,7 @@ GEN=ninja SKIP_EXTENSIONS="jemalloc" make
 ```
 
 The ARM64 (AArch64) DuckDB distribution on Linux does not ship with the `jemalloc` extension.
-To include it, build it as follows;
+To include it, build it as follows:
 
 ```bash
 GEN=ninja BUILD_JEMALLOC=1 make
