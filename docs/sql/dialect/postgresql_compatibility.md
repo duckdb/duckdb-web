@@ -221,7 +221,7 @@ PostgreSQL returns an error on the last statement:
 
 ```console
 ERROR:  type "mytype" does not exist
-LINE 1: CREATE TABLE myschema.mytable (v mytype);                                      ^
+LINE 1: CREATE TABLE myschema.mytable (v mytype);
 ```
 
 DuckDB runs the statement and creates the table successfully, confirmed by the following query:
