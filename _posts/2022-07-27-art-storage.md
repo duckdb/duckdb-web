@@ -11,8 +11,6 @@ tags: ["deep dive"]
      width=200
  />
 
-<!--more-->
-
 DuckDB uses [ART Indexes](https://db.in.tum.de/~leis/papers/ART.pdf) to keep primary key (PK), foreign key (FK), and unique constraints. They also speed up point-queries, range queries (with high selectivity), and joins. Before the bleeding edge version (or V0.4.1, depending on when you are reading this post), DuckDB did not persist ART indexes on disk. When storing a database file, only the information about existing PKs and FKs would be stored, with all other indexes being transient and non-existing when restarting the database. For PKs and FKs, they would be fully reconstructed when reloading the database, creating the inconvenience of high-loading times.
 
 A lot of scientific work has been published regarding ART Indexes, most notably on [synchronization](https://db.in.tum.de/~leis/papers/artsync.pdf), [cache-efficiency](https://dbis.uibk.ac.at/sites/default/files/2018-06/hot-height-optimized.pdf), and [evaluation](https://bigdata.uni-saarland.de/publications/ARCD15.pdf). However, up to this point, no public work exists on serializing and buffer managing an ART Tree. [Some say](https://twitter.com/muehlbau/status/1548024479971807233) that Hyper, the database in Tableau, persists ART indexes, but again, there is no public information on how that is done.
@@ -136,65 +134,65 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
 
 1. Data Constraints. Primary key, Foreign Keys, and Unique constraints are all maintained by an ART Index. When inserting data in a tuple with a constraint, this will effectively try to perform an insertion in the ART index and fail if the tuple already exists.
 
-    ```sql
-    CREATE TABLE integers(i INTEGER PRIMARY KEY);
-    -- Insert unique values into ART
-    INSERT INTO integers VALUES (3), (2);
-    -- Insert conflicting value in ART will fail
-    INSERT INTO integers VALUES (3);
-    
-    CREATE TABLE fk_integers(j INTEGER, FOREIGN KEY (j) REFERENCES integers(i));
-    -- This insert works normally
-    INSERT INTO fk_integers VALUES (2), (3);
-    -- This fails after checking the ART in integers
-    INSERT INTO fk_integers VALUES (4);
-    ```
+   ```sql
+   CREATE TABLE integers(i INTEGER PRIMARY KEY);
+   -- Insert unique values into ART
+   INSERT INTO integers VALUES (3), (2);
+   -- Insert conflicting value in ART will fail
+   INSERT INTO integers VALUES (3);
+   
+   CREATE TABLE fk_integers(j INTEGER, FOREIGN KEY (j) REFERENCES integers(i));
+   -- This insert works normally
+   INSERT INTO fk_integers VALUES (2), (3);
+   -- This fails after checking the ART in integers
+   INSERT INTO fk_integers VALUES (4);
+   ```
 
 2. Range Queries. Highly selective range queries on indexed columns will also use the ART index underneath.
 
-    ```sql
-    CREATE TABLE integers(i INTEGER PRIMARY KEY);
-    -- Insert unique values into ART
-    INSERT INTO integers VALUES (3), (2), (1), (8) , (10);
-    -- Range queries (if highly selective) will also use the ART index
-    SELECT * FROM integers WHERE i >= 8;
-    ```
+   ```sql
+   CREATE TABLE integers(i INTEGER PRIMARY KEY);
+   -- Insert unique values into ART
+   INSERT INTO integers VALUES (3), (2), (1), (8) , (10);
+   -- Range queries (if highly selective) will also use the ART index
+   SELECT * FROM integers WHERE i >= 8;
+   ```
 
 3. Joins. Joins with a small number of matches will also utilize existing ART indexes.
 
-    ```sql
-    -- Optionally you can always force index joins with the following pragma
-    PRAGMA force_index_join;
+   ```sql
+   -- Optionally you can always force index joins with the following pragma
+   PRAGMA force_index_join;
 
-    CREATE TABLE t1(i INTEGER PRIMARY KEY);
-    CREATE TABLE t2(i INTEGER PRIMARY KEY);
-    -- Insert unique values into ART
-    INSERT INTO t1 VALUES (3), (2), (1), (8), (10);
-    INSERT INTO t2 VALUES (3), (2), (1), (8), (10);
-    -- Joins will also use the ART index
-    SELECT * FROM t1 INNER JOIN t2 ON (t1.i = t2.i);
-    ```
+   CREATE TABLE t1(i INTEGER PRIMARY KEY);
+   CREATE TABLE t2(i INTEGER PRIMARY KEY);
+   -- Insert unique values into ART
+   INSERT INTO t1 VALUES (3), (2), (1), (8), (10);
+   INSERT INTO t2 VALUES (3), (2), (1), (8), (10);
+   -- Joins will also use the ART index
+   SELECT * FROM t1 INNER JOIN t2 ON (t1.i = t2.i);
+   ```
 
 4. Indexes over expressions. ART indexes can also be used to quickly look up expressions.
 
-    ```sql
-    CREATE TABLE integers(i INTEGER, j INTEGER);
+   ```sql
+   CREATE TABLE integers(i INTEGER, j INTEGER);
 
-    INSERT INTO integers VALUES (1,1), (2,2), (3,3);
+   INSERT INTO integers VALUES (1, 1), (2, 2), (3, 3);
 
-    -- Creates index over i+j expression
-    CREATE INDEX i_index ON integers USING ART((i+j));
+   -- Creates index over the i + j expression
+   CREATE INDEX i_index ON integers USING ART((i + j));
 
-    -- Uses ART index point query
-    SELECT i FROM integers WHERE i+j = 2;
-    ```
+   -- Uses ART index point query
+   SELECT i FROM integers WHERE i + j = 2;
+   ```
 
 ## ART Storage
 
-There are two main constraints when storing ART indexes, 
+There are two main constraints when storing ART indexes: 
 
-1) The index must be stored in an order that allows for lazy-loading. Otherwise, we would have to fully load the index, including nodes that might be unnecessary to queries that would be executed in that session;
-2) It must not increase the node size. Otherwise, we diminish the cache-conscious effectiveness of the ART index.
+1. The index must be stored in an order that allows for lazy-loading. Otherwise, we would have to fully load the index, including nodes that might be unnecessary to queries that would be executed in that session.
+2. It must not increase the node size. Otherwise, we diminish the cache-conscious effectiveness of the ART index.
 
 ### Post-Order Traversal
 
@@ -277,10 +275,10 @@ print("Storage time: " + str(time.time() - cur_time))
 
 Storage Time
 
-|    Name     | Time (s) |
-|-------------|----------|
-| Reconstruction  | 8.99   |
-| Storage      | 18.97    |
+|      Name      | Time (s) |
+|----------------|---------:|
+| Reconstruction | 8.99     |
+| Storage        | 18.97    |
 
 
 We can see storing the index is 2x more expensive than not storing the index. The reason is that our table consists of one column with 50,000,000 `int32_t` values. However, when storing the ART, we also store 50,000,000 `int64_t` values for their respective `row_ids` in the leaves. This increase in the elements is the main reason for the additional storage cost.
@@ -296,10 +294,10 @@ con = duckdb.connect("vault.db")
 print("Load time: " + str(time.time() - cur_time))
 ```
 
-|    Name     | Time (s) |
-|-------------|----------|
-| Reconstruction  | 7.75   |
-| Storage      | 0.06    |
+|      Name      | Time (s) |
+|----------------|---------:|
+| Reconstruction | 7.75     |
+| Storage        | 0.06     |
 
 Here we can see a two-order magnitude difference in the times of loading the database. This difference is basically due to the complete reconstruction of the ART index during loading. In contrast, in the `Storage` version, only the metadata information about the ART index is loaded at this point.
 

@@ -221,6 +221,6 @@ An obvious next step is to address the observed performance drawback observed in
 
 We plan to switch DuckDB's parser, which started as a fork of the Postgres YACC parser, to a PEG parser in the near future. As an initial step, we have performed an experiment where we found that it is possible to interpret the current Postgres YACC grammar with PEG. This should greatly simplify the transitioning process, since it ensures that the same grammar will be accepted in both parsing frameworks.
 
-## Acknowledgements
+## Acknowledgments
 
 We would like to thank [**Torsten Grust**](https://db.cs.uni-tuebingen.de/team/members/torsten-grust/), [**Gábor Szárnyas**](https://szarnyasg.github.io) and [**Daniël ten Wolde**](https://www.cwi.nl/en/people/daniel-ten-wolde/) for their valuable suggestions. We would also like to thank [**Carlo Piovesan**](https://github.com/carlopi) for his translation of the Postgres YACC grammar to PEG.

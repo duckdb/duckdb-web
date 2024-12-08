@@ -233,9 +233,18 @@ LIMIT 3;
 This release adds a *very cool* optimization for joins: DuckDB now [automatically creates filters](https://github.com/duckdb/duckdb/pull/12908) for the larger table in the join during execution. Say we are joining two tables `A` and `B`. `A` has 100 rows, and `B` has one million rows. We are joining on a shared key `i`. If there were any filter on `i`, DuckDB would already push that filter into the scan, greatly reducing the cost to complete the query. But we are now filtering on another column from `A`, namely `j`:
 
 ```sql
-CREATE TABLE A AS SELECT range i, range j FROM range(100);
-CREATE TABLE B AS SELECT a.range i FROM range(100) a, range(10_000) b;
-SELECT count(*) FROM A JOIN B USING (i) WHERE j > 90;
+CREATE TABLE A AS
+    SELECT range AS i, range AS j
+    FROM range(100);
+
+CREATE TABLE B AS
+    SELECT t1.range AS i
+    FROM range(100) t1, range(10_000) t2;
+
+SELECT count(*)
+FROM A
+JOIN B
+USING (i) WHERE j > 90;
 ```
 
 DuckDB will execute this join by building a hash table on the smaller table `A`, and then probe said hash table with the contents of `B`. DuckDB will now observe the values of `i` during construction of the hash table on `A`. It will then create a min-max range filter of those values of `i` and then *automatically* apply that filter to the values of `i` in `B`! That way, we early remove (in this case) 90% of data from the large table before even looking at the hash table. In this example, this leads to a roughly 10× improvement in query performance. The optimization can also be observed in the output of `EXPLAIN ANALYZE`.

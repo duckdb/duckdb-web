@@ -23,8 +23,6 @@ What is the craziest thing you have built with SQL?
 We want to hear about it! 
 Tag [DuckDB on X](https://twitter.com/duckdb) (the site formerly known as Twitter) or [LinkedIn](https://www.linkedin.com/company/duckdb/mycompany/), and join the [DuckDB Discord community](https://discord.duckdb.org/).
 
-<!--more-->
-
 ## Traditional SQL Is Too Rigid to Reuse
 
 SQL queries are typically crafted specifically for the unique tables within a database.
@@ -144,7 +142,7 @@ FROM dynamic_aggregates(
 Executing either of those queries will return this result:
 
 | col3 | col4 | list_aggregate(list(example.col1), 'min') | list_aggregate(list(example.col2), 'min') |
-|------|------|-------------------------------------------|-------------------------------------------|
+|-----:|-----:|------------------------------------------:|------------------------------------------:|
 | 0    | 1    | 2                                         | 0                                         |
 | 1    | 1    | 1                                         | 0                                         |
 
@@ -309,9 +307,8 @@ First, we create a local table populated from this remote Parquet file.
 ### Creation
 
 ```sql
-CREATE OR REPLACE TABLE spotify_tracks AS (
-    FROM 'https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset/resolve/refs%2Fconvert%2Fparquet/default/train/0000.parquet?download=true'
-);
+CREATE OR REPLACE TABLE spotify_tracks AS
+    FROM 'https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset/resolve/refs%2Fconvert%2Fparquet/default/train/0000.parquet?download=true';
 ```
 
 Then we create and execute our `custom_summarize` macro.
@@ -412,7 +409,7 @@ The query achieves this structure using the `COLUMNS(*)` expression to apply mul
 The keys of the struct represent the names of the metrics (and what we want to use as the column names in the final result). 
 We use this approach since we want to transpose the columns to rows and then split the summary metrics into their own columns.
 
-#### Stacked_metrics CTE
+#### `stacked_metrics` CTE
 
 Next, the data is unpivoted to reshape the table from one row and multiple columns to two columns and multiple rows. 
 

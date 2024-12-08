@@ -238,7 +238,7 @@ A summary of those steps is:
      ref: 3c8a5358e42ab8d11e0253c70f7cc7d37781b2ef
    ```
 
-2. Wait for approval from the maintainers
+2. Wait for approval from the maintainers.
 
 And there you have it!
 You have created a shareable DuckDB Community Extension.

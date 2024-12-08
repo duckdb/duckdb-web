@@ -131,7 +131,7 @@ Alternatively, you can prepare statements for parameterized queries using:
 ``` ts
 // Prepare query
 const stmt = await conn.prepare<{ v: arrow.Int32 }>(
-    `SELECT (v + ?) AS v FROM generate_series(0, 10000) as t(v);`
+    `SELECT (v + ?) AS v FROM generate_series(0, 10000) t(v);`
 );
 // ... and run the query with materialized results
 await stmt.query(234);

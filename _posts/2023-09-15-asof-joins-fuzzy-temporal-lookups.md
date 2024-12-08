@@ -15,8 +15,6 @@ using the times in another table?
 And did you end up writing convoluted (and slow) inequality joins to get your results?
 Then this post is for you!
 
-<!--more-->
-
 ## What Is an AsOf Join?
 
 Time series data is not always perfectly aligned.
@@ -131,15 +129,20 @@ These can both be fairly expensive operations, but the query would look like thi
 
 ```sql
 WITH state AS (
-    SELECT ticker, price, "when",
-        lead("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+    SELECT
+        ticker,
+        price,
+        "when",
+        lead("when", 1, 'infinity')
+            OVER (PARTITION BY ticker ORDER BY "when") AS end
     FROM prices
 )
 SELECT h.ticker, h.when, price * shares AS value
-FROM holdings h INNER JOIN state s
-  ON h.ticker = s.ticker
- AND h.when >= s.when
- AND h.when < s.end;
+FROM holdings h
+INNER JOIN state s
+        ON h.ticker = s.ticker
+      AND h.when >= s.when
+      AND h.when < s.end;
 ```
 
 The default value of `infinity` is used to make sure there is an end value for the last row that can be compared.
@@ -352,7 +355,9 @@ Our first query can then be written as:
 
 ```sql
 SELECT ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p USING(ticker, "when");
+FROM holdings h
+ASOF JOIN prices p
+    USING(ticker, "when");
 ```
 
 Be aware that if you don't explicitly list the columns in the `SELECT`,
@@ -373,8 +378,12 @@ Remember that we used this query to convert the event table to a state table:
 
 ```sql
 WITH state AS (
-    SELECT ticker, price, "when",
-      lead("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+    SELECT
+        ticker,
+        price,
+        "when",
+        lead("when", 1, 'infinity')
+            OVER (PARTITION BY ticker ORDER BY "when") AS end
     FROM prices
 );
 ```
@@ -463,7 +472,8 @@ The benchmark just does the join and sums up the `v` column:
 
 ```sql
 SELECT sum(v)
-FROM probe ASOF JOIN build USING(k, t);
+FROM probe
+ASOF JOIN build USING(k, t);
 ```
 
 The debugging `PRAGMA` does not allow us to use a hash join,
@@ -479,8 +489,11 @@ WITH state AS (
     FROM build
 )
 SELECT sum(v)
-FROM probe p INNER JOIN state s 
-  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
+FROM probe p
+INNER JOIN state s 
+        ON p.t >= s.begin
+       AND p.t < s.end
+       AND p.k = s.k;
 ```
 
 This works because the planner assumes that equality conditions are more selective
@@ -490,11 +503,11 @@ Running the benchmark, we get results like this:
 
 <div class="narrow_table"></div>
 
-| Algorithm | Median of 5 |
-| :-------- | ----------: |
-| AsOf | 0.425 |
-| IEJoin | 3.522 |
-| State Join | 192.460 |
+| Algorithm  | Median of 5 |
+| :--------- | ----------: |
+| AsOf       |     0.425 s |
+| IEJoin     |     3.522 s |
+| State Join |   192.460 s |
 
 The runtime improvement of AsOf over IEJoin here is about 9×.
 The horrible performance of the Hash Join is caused by the long (100K) bucket chains in the hash table.
@@ -504,12 +517,14 @@ The second benchmark tests the case where the probe side is about 10× smaller t
 ```sql
 CREATE OR REPLACE TABLE probe AS
     SELECT k, 
-      '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
+      '2021-01-01T00:00:00'::TIMESTAMP +
+          INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
     FROM range(0, 100_000) tbl(k);
 
 CREATE OR REPLACE TABLE build AS
     SELECT r % 100_000 AS k, 
-      '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
+      '2021-01-01T00:00:00'::TIMESTAMP +
+          INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
       (random() * 100_000)::INTEGER AS v
     FROM range(0, 1_000_000) tbl(r);
 
@@ -524,21 +539,25 @@ WITH state AS (
   SELECT k, 
     t AS begin, 
     v, 
-    lead(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
+    lead(t, 1, 'infinity'::TIMESTAMP)
+        OVER (PARTITION BY k ORDER BY t) AS end
   FROM build
 )
 SELECT sum(v)
-FROM probe p INNER JOIN state s
-  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
+FROM probe p
+INNER JOIN state s
+        ON p.t >= s.begin
+       AND p.t < s.end
+       AND p.k = s.k;
 ```
 
 <div class="narrow_table"></div>
 
-| Algorithm  | Median of 5 |
-| :--------- | ----------: |
-| State Join |       0.065 |
-| AsOf       |       0.077 |
-| IEJoin     |      49.508 |
+| Algorithm  | Median of 5 runs |
+| :--------- | ---------------: |
+| State Join |          0.065 s |
+| AsOf       |          0.077 s |
+| IEJoin     |         49.508 s |
 
 Now the runtime improvement of AsOf over IEJoin is huge (~500×)
 because it can leverage the partitioning to eliminate almost all of the equality mismatches.

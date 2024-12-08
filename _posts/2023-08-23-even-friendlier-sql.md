@@ -546,11 +546,11 @@ By default DuckDB will seek the common denominator of data types when combining 
 
 ```sql
 SELECT 'The Motion Picture' AS movie UNION ALL 
-SELECT 2 UNION ALL 
-SELECT 3 UNION ALL 
-SELECT 4 UNION ALL 
-SELECT 5 UNION ALL 
-SELECT 6 UNION ALL 
+SELECT 2 UNION ALL
+SELECT 3 UNION ALL
+SELECT 4 UNION ALL
+SELECT 5 UNION ALL
+SELECT 6 UNION ALL
 SELECT 'First Contact';
 ```
 

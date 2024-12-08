@@ -11,8 +11,6 @@ Sorting is also used within operators, such as window functions.
 DuckDB recently improved its sorting implementation, which is now able to sort data in parallel and sort more data than fits in memory.
 In this post, we will take a look at how DuckDB sorts, and how this compares to other data management systems.
 
-<!--more-->
-
 Not interested in the implementation? [Jump straight to the experiments!](#comparison)
 
 ## Sorting Relational Data
