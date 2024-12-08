@@ -44,14 +44,15 @@ SELECT 1 / 2 AS x;
 
 PostgreSQL returns:
 
-```text
- x
----
- 0
-(1 row)
-```
+<div class="narrow_table"></div>
+
+|    x |
+| ---: |
+|    0 |
 
 DuckDB returns:
+
+<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -62,6 +63,8 @@ To perform integer division in DuckDB, use the `//` operator:
 ```sql
 SELECT 1 // 2 AS x;
 ```
+
+<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -84,6 +87,9 @@ ERROR:  UNION types boolean and integer cannot be matched
 ```
 
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
+
+
+<div class="narrow_table"></div>
 
 |    x |
 | ---: |
@@ -162,14 +168,11 @@ SELECT 1 == 1 AS t;
 
 DuckDB returns:
 
-```text
-┌─────────┐
-│    t    │
-│ boolean │
-├─────────┤
-│ true    │
-└─────────┘
-```
+<div class="narrow_table monospace_table"></div>
+
+|    t |
+| ---: |
+| true |
 
 Postgres returns:
 
@@ -219,7 +222,6 @@ PostgreSQL returns an error on the last statement:
 ```console
 ERROR:  type "mytype" does not exist
 LINE 1: CREATE TABLE myschema.mytable (v mytype);
-                                         ^
 ```
 
 DuckDB runs the statement and creates the table successfully, confirmed by the following query:
@@ -228,11 +230,9 @@ DuckDB runs the statement and creates the table successfully, confirmed by the f
 DESCRIBE myschema.mytable;
 ```
 
-```text
-┌─────────────┬──────────────────┬─────────┬─────────┬─────────┬─────────┐
-│ column_name │   column_type    │  null   │   key   │ default │  extra  │
-│   varchar   │     varchar      │ varchar │ varchar │ varchar │ varchar │
-├─────────────┼──────────────────┼─────────┼─────────┼─────────┼─────────┤
-│ v           │ ENUM('as', 'df') │ YES     │ NULL    │ NULL    │ NULL    │
-└─────────────┴──────────────────┴─────────┴─────────┴─────────┴─────────┘
-```
+<div class="narrow_table monospace_table"></div>
+
+| column_name |   column_type    | null | key  | default | extra |
+|-------------|------------------|------|------|---------|-------|
+| v           | ENUM('as', 'df') | YES  | NULL | NULL    | NULL  |
+
