@@ -14,8 +14,6 @@ via the new `TIMESTAMP WITH TIME ZONE` (or `TIMESTAMPTZ` for short) data type. T
 
 In this post, we will describe how time works in DuckDB and what time zone functionality has been added.
 
-<!--more-->
-
 ## What is Time?
 
 >People assume that time is a strict progression of cause to effect,

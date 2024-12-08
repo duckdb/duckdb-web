@@ -15,8 +15,6 @@ The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been 
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
 
-<!--more-->
-
 ## What's in 0.7.0
 
 The new release contains many improvements to the JSON support, new SQL features, improvements to data ingestion and export, and other new features. Below is a summary of the most impactful changes, together with the linked PRs that implement the features.

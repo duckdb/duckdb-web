@@ -15,8 +15,6 @@ tags: ["release"]
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
 
-<!--more-->
-
 ## What's New in 0.10.0
 
 There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!

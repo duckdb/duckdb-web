@@ -13,8 +13,6 @@ However, even if the aggregation does not fit in memory, DuckDB can still comple
 
 Not interested in the implementation? [Jump straight to the experiments!](#experiments)
 
-<!--more-->
-
 ## Introduction
 
 Around two years ago, we published our first blog post on DuckDB’s hash aggregation, titled [“Parallel Grouped Aggregation in DuckDB”]({% post_url 2022-03-07-aggregate-hashtable %}).

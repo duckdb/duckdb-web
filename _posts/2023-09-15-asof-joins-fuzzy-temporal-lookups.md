@@ -15,8 +15,6 @@ using the times in another table?
 And did you end up writing convoluted (and slow) inequality joins to get your results?
 Then this post is for you!
 
-<!--more-->
-
 ## What Is an AsOf Join?
 
 Time series data is not always perfectly aligned.

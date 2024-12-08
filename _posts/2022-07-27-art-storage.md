@@ -11,8 +11,6 @@ tags: ["deep dive"]
      width=200
  />
 
-<!--more-->
-
 DuckDB uses [ART Indexes](https://db.in.tum.de/~leis/papers/ART.pdf) to keep primary key (PK), foreign key (FK), and unique constraints. They also speed up point-queries, range queries (with high selectivity), and joins. Before the bleeding edge version (or V0.4.1, depending on when you are reading this post), DuckDB did not persist ART indexes on disk. When storing a database file, only the information about existing PKs and FKs would be stored, with all other indexes being transient and non-existing when restarting the database. For PKs and FKs, they would be fully reconstructed when reloading the database, creating the inconvenience of high-loading times.
 
 A lot of scientific work has been published regarding ART Indexes, most notably on [synchronization](https://db.in.tum.de/~leis/papers/artsync.pdf), [cache-efficiency](https://dbis.uibk.ac.at/sites/default/files/2018-06/hot-height-optimized.pdf), and [evaluation](https://bigdata.uni-saarland.de/publications/ARCD15.pdf). However, up to this point, no public work exists on serializing and buffer managing an ART Tree. [Some say](https://twitter.com/muehlbau/status/1548024479971807233) that Hyper, the database in Tableau, persists ART indexes, but again, there is no public information on how that is done.

@@ -23,8 +23,6 @@ What is the craziest thing you have built with SQL?
 We want to hear about it! 
 Tag [DuckDB on X](https://twitter.com/duckdb) (the site formerly known as Twitter) or [LinkedIn](https://www.linkedin.com/company/duckdb/mycompany/), and join the [DuckDB Discord community](https://discord.duckdb.org/).
 
-<!--more-->
-
 ## Traditional SQL Is Too Rigid to Reuse
 
 SQL queries are typically crafted specifically for the unique tables within a database.
