@@ -17,7 +17,7 @@ Acknowledging and being open about these things is the best we can do. In this s
 - `'NaN'::FLOAT = 'NaN'::FLOAT` and `'NaN'::FLOAT > 3` violate IEEE-754 but are necessary for a total order, which is crucial in SQL (also, beware the consequences for `greatest`/`least`/`ORDER BY`)
 - `concat(x, NULL) = x` (same for `string_concat` and `list_concat`). You can blame this one on PostgreSQL. If you prefer `NULL`s in, `NULL`s out, use `x || NULL`.
 - Case insensitivity and the resulting inability to `SELECT A FROM 'file.parquet'` when both `a` and `A` are in the file. That's actually a DuckDB thing. Great when not working with external data, who wants to need to remember the correct capitalization and otherwise get the wrong numbers?
-- Automatic column deduplication. You thought `SELECT A FROM (SELECT *, 1 AS A FROM tbl)` will give you a bunch of `1`s? Think again, and remember the previous point. 
+- Automatic column deduplication. You thought `SELECT A FROM (SELECT *, 1 AS A FROM tbl)` will give you a bunch of `1`s? Not if `tbl` already contains a column named `A` (or even `a`, see previous point).
 - `list_extract` / `map_extract` return `NULL` on non-existing keys, `struct_extract` throws. The former follows has PostgreSQL precedence. The latter makes sense because keys of structs are like columns. 
 - `USING SAMPLE` precedence rules. TODO.
 - `SELECT CASE WHEN 0 > 1 THEN (SELECT sum(range) FROM range(0, 100000000000000000)) END` never completes to return the obvious `NULL` answer. DuckDB is ducklarative. As such, it tries hard to produce fast code for you (e.g., constant folding) but sometimes gets it wrong (e.g., short-circuiting case expressions).
