@@ -723,7 +723,10 @@ footer{
 			}
 		}
 	}
-
+	.newswrap .postwrap .postcontent iframe{
+		width: 100%;
+		height: auto;
+	}
 	.filterbar {
 		flex-wrap: wrap;
 		margin-bottom: 30px;
