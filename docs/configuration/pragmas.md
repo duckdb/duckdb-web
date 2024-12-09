@@ -136,7 +136,6 @@ Set the memory limit for the buffer manager:
 
 ```sql
 SET memory_limit = '1GB';
-SET max_memory = '1GB';
 ```
 
 > Warning The specified memory limit is only applied to the buffer manager.
