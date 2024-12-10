@@ -106,7 +106,7 @@ will result in two objects being read:
 └──────────────────────────────┘
 ```
 
-With `'newline_delimited'`, [NDJSON](http://ndjson.org) is read, where each JSON is separated by a newline (`\n`), e.g., for `birds-nd.json`:
+With `'newline_delimited'`, [NDJSON](https://github.com/ndjson/ndjson-spec) is read, where each JSON is separated by a newline (`\n`), e.g., for `birds-nd.json`:
 
 ```json
 {"duck": 42}
