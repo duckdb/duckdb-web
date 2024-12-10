@@ -15,6 +15,10 @@ If you would like to install or load it manually, please consult the [“Install
 JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 While it is not a very efficient format for tabular data, it is very commonly used, especially as a data interchange format.
 
+> Bestpractice DuckDB implements multiple interfaces for JSON extraction: [JSONPath](https://goessner.net/articles/JsonPath/) and [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901). Both of them work with the arrow operator (`->`) and the `json_extract` function call. It's best to pick one syntax and use it in your entire application.
+
+<!-- DuckDB mostly uses the PostgreSQL syntax, some functions from SQLite, and a few functions from other SQL systems -->
+
 ## Indexing
 
 > Warning Following [PostgreSQL's conventions]({% link docs/sql/dialect/postgresql_compatibility.md %}), DuckDB uses 1-based indexing for its [`ARRAY`]({% link docs/sql/data_types/array.md %}) and [`LIST`]({% link docs/sql/data_types/list.md %}) data types but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-JSON-PROCESSING).
