@@ -39,7 +39,11 @@ GEN=ninja BUILD_JEMALLOC=1 make
 
 On Windows, this extension is not available.
 
-## Configuration Flags
+## Configuration
+
+### Environment Variables
+
+The jemalloc allocator in DuckDB can be configured via the [`MALLOC_CONF` environment variable](https://jemalloc.net/jemalloc.3.html#environment).
 
 ### Background Threads
 
