@@ -41,8 +41,8 @@ docs:
 
 extension_star_count: 133
 extension_star_count_pretty: 133
-extension_download_count: 228
-extension_download_count_pretty: 228
+extension_download_count: 246
+extension_download_count_pretty: 246
 image: '/images/community_extensions/social_preview/preview_community_extension_scrooge.png'
 layout: community_extension_doc
 ---
