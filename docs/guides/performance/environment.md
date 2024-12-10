@@ -45,3 +45,7 @@ as well as spurious errors cased by the underlying file system.
 ## Operating System
 
 We recommend using the latest stable version of operating systems: macOS, Windows, and Linux are all well-tested and DuckDB can run on them with high performance. Among Linux distributions, we recommended using Ubuntu Linux LTS due to its stability and the fact that most of DuckDB’s Linux test suite jobs run on Ubuntu workers.
+
+## Memory Allocator
+
+If you have a many-core CPU running on a system where DuckDB ships with [`jemalloc`]({% link docs/extensions/jemalloc.md %}) as the default memory allocator, consider [enabling the allocator's background threads]({% link docs/extensions/jemalloc.md %}#background-threads).
