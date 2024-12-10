@@ -268,7 +268,7 @@ SELECT my_macro(32, 52);
 ```
 
 ```console
-Error: Binder Error: Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
+Binder Error: Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
 ```
 
 ### Using Subquery Macros

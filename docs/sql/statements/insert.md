@@ -353,7 +353,7 @@ INSERT INTO tbl
 This returns the following message.
 
 ```console
-Error: Invalid Input Error: ON CONFLICT DO UPDATE can not update the same row twice in the same command.
+Invalid Input Error: ON CONFLICT DO UPDATE can not update the same row twice in the same command.
 Ensure that no rows proposed for insertion within the same command have duplicate constrained values
 ```
 
