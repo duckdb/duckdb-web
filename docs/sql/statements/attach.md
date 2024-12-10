@@ -215,7 +215,7 @@ CREATE TABLE new_db.tbl (i INTEGER);
 ```
 
 ```console
-Error: Binder Error: Ambiguous reference to catalog or schema "new_db" -
+Binder Error: Ambiguous reference to catalog or schema "new_db" -
 use a fully qualified path like "memory.new_db"
 ```
 
