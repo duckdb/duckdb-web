@@ -44,8 +44,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 266
-extension_download_count_pretty: 266
+extension_download_count: 281
+extension_download_count_pretty: 281
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---
@@ -85,7 +85,4 @@ LOAD {{ page.extension.name }};
 | faiss_search_filter     | scalar        |             |         |         |
 | faiss_search_filter_set | scalar        |             |         |         |
 
-
-
----
 

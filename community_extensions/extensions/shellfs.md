@@ -150,8 +150,8 @@ repo:
 
 extension_star_count: 59
 extension_star_count_pretty: 59
-extension_download_count: 265
-extension_download_count_pretty: 265
+extension_download_count: 287
+extension_download_count_pretty: 287
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'
 layout: community_extension_doc
 ---
@@ -181,7 +181,4 @@ LOAD {{ page.extension.name }};
 |----------------|----------------|------------|--------|
 | ignore_sigpipe | Ignore SIGPIPE | BOOLEAN    | GLOBAL |
 
-
-
----
 

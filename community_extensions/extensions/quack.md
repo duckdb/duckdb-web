@@ -34,8 +34,8 @@ docs:
 
 extension_star_count: 155
 extension_star_count_pretty: 155
-extension_download_count: 414
-extension_download_count_pretty: 414
+extension_download_count: 357
+extension_download_count_pretty: 357
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
 layout: community_extension_doc
 ---
@@ -66,7 +66,4 @@ LOAD {{ page.extension.name }};
 | quack                 | scalar        |             |         |         |
 | quack_openssl_version | scalar        |             |         |         |
 
-
-
----
 
