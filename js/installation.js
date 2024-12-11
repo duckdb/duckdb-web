@@ -46,7 +46,7 @@ $(document).ready(function(){
 		markup = markup.replace( 'npm install', '<span class="nb">npm install</span>' );
 		markup = markup.replace( 'pip install', '<span class="nb">pip install</span>' );
 		markup = markup.replace( 'winget install', '<span class="nb">winget install</span>' );
-		markup = markup.replace( /([^."/])duckdb([^_])([^-])/, '$1<span class="nb">duckdb</span>$2$3' );
+		markup = markup.replace( /([^-._'"/])duckdb([^-._'"/])/, '$1<span class="nb">duckdb</span>$2$3' );
 		markup = markup.replace( /^duckdb$/, '<span class="nb">duckdb</span>' );
 		markup = markup.replace( 'go get', '<span class="nb">go get</span>' );
 		markup = markup.replace( '--upgrade', '<span class="nt">--upgrade</span>' );
