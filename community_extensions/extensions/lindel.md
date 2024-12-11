@@ -119,8 +119,8 @@ repo:
 
 extension_star_count: 36
 extension_star_count_pretty: 36
-extension_download_count: 288
-extension_download_count_pretty: 288
+extension_download_count: 307
+extension_download_count_pretty: 307
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---
@@ -153,7 +153,4 @@ LOAD {{ page.extension.name }};
 | morton_encode  | scalar        | Encode an array of values using Morton encoding                 |         | select morton_encode([43, 3]::integer[2]);                  |
 | morton_decode  | scalar        | Decode an array of values using Morton encoding                 |         | select morton_decode(7::uint16, 2, false, true) as values;  |
 
-
-
----
 

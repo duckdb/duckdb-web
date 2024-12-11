@@ -27,8 +27,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 263
-extension_download_count_pretty: 263
+extension_download_count: 281
+extension_download_count_pretty: 281
 image: '/images/community_extensions/social_preview/preview_community_extension_capi_quack.png'
 layout: community_extension_doc
 ---
@@ -58,7 +58,4 @@ LOAD {{ page.extension.name }};
 |---------------------------|---------------|-------------|---------|---------|
 | multiply_numbers_together | scalar        |             |         |         |
 
-
-
----
 

@@ -53,8 +53,8 @@ docs:
 
 extension_star_count: 71
 extension_star_count_pretty: 71
-extension_download_count: 587
-extension_download_count_pretty: 587
+extension_download_count: 622
+extension_download_count_pretty: 622
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
@@ -100,7 +100,4 @@ LOAD {{ page.extension.name }};
 | bq_experimental_filter_pushdown | Whether to use filter pushdown (currently experimental)                                                                                    | BOOLEAN    | GLOBAL |
 | bq_experimental_use_info_schema | Whether to fetch table infos from BQ information schema (currently experimental). Can be significantly faster than fetching from REST API. | BOOLEAN    | GLOBAL |
 
-
-
----
 
