@@ -52,7 +52,6 @@ jobs:
              --head "auto_update_community_extensions_docs" \
              --base "main" \
             || gh pr edit \
+             "auto_update_community_extensions_docs" \
              --body "" \
-             --title "chore: update Community Extensions docs" \
-             --head "auto_update_community_extensions_docs" \
-             --base "main"
+             --title "chore: update Community Extensions docs"
