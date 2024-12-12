@@ -257,7 +257,7 @@ The below options are applicable when writing CSV files.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
-| `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
+| `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use `gzip`, `file.csv.zst` will use `zstd`, and `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
 | `DELIM` or `SEP` | The character that is written to separate columns within each row. | `VARCHAR` | `,` |
 | `ESCAPE` | The character that should appear before a character that matches the `quote` value. | `VARCHAR` | `"` |
@@ -343,7 +343,7 @@ The below options are applicable when writing `JSON` files.
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `ARRAY` | Whether to write a JSON array. If `true`, a JSON array of records is written, if `false`, newline-delimited JSON is written | `BOOL` | `false` |
-| `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.json.gz` will use gzip, `file.json` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
+| `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.json.gz` will use `gzip`, `file.json.zst` will use `zstd`, and `file.json` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
 | `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
 
