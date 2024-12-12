@@ -53,8 +53,8 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 75
-extension_star_count_pretty: 75
+extension_star_count: 76
+extension_star_count_pretty: 76
 extension_download_count: 275
 extension_download_count_pretty: 275
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
@@ -84,9 +84,14 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | example |
 |-------------------|---------------|-------------|---------|---------|
+| fusion_relative   | scalar        |             |         |         |
 | llm_complete      | scalar        |             |         |         |
 | llm_complete_json | scalar        |             |         |         |
 | llm_embedding     | scalar        |             |         |         |
 | llm_filter        | scalar        |             |         |         |
+| llm_first         | aggregate     |             |         |         |
+| llm_last          | aggregate     |             |         |         |
+| llm_reduce        | aggregate     |             |         |         |
+| llm_rerank        | aggregate     |             |         |         |
 
 
