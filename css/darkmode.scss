@@ -7,6 +7,14 @@ html.disable-transitions * {
 	transition: none !important;
 }
 
+html.darkmode ::-moz-selection {
+  background: #353535;
+}
+
+html.darkmode ::selection {
+  background: #353535;
+}
+
 html.darkmode body{
 	::-moz-selection {
 	  background: #353535;
