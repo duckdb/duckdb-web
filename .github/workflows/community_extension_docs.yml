@@ -50,4 +50,9 @@ jobs:
              --body "" \
              --title "chore: update Community Extensions docs" \
              --head "auto_update_community_extensions_docs" \
+             --base "main" \
+            || gh pr edit \
+             --body "" \
+             --title "chore: update Community Extensions docs" \
+             --head "auto_update_community_extensions_docs" \
              --base "main"
