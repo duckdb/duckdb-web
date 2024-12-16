@@ -24,7 +24,7 @@ FROM tbl
 USING SAMPLE 10%;
 ```
 
-> Warning By default, when you specify a percentage, each *vector* is included in the sample with that probability. If your table contains less than 20k rows, you may specify the `bernoulli` sampling option instead, which applies the probability to each row independently. Even then, you'll sometimes get more and sometimes less than 10% of rows, but it is much less likely that you get no rows at all. To get exactly 10% of rows (up to rounding), you must specify the `reservoir` sampling option.
+> Warning By default, when you specify a percentage, each *vector* is included in the sample with that probability. If your table contains fewer than 10k rows, it makes sense to specify the `bernoulli` sampling option instead, which applies the probability to each row independently. Even then, you'll sometimes get more and sometimes less than the specified percentage of the number of rows, but it is much less likely that you get no rows at all. To get exactly 10% of rows (up to rounding), you must use the `reservoir` sampling option.
 
 Select a sample of *approximately* 10% of the table using `bernoulli` sampling:
 
