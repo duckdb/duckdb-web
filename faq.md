@@ -166,6 +166,22 @@ DuckDB can make use of available memory for caching, it also fully supports disk
 
 <div class="qa-wrap" markdown="1">
 
+### Is DuckDB built on Arrow?
+
+<div class="answer" markdown="1">
+
+DuckDB does not use the [Apache Arrow format](https://arrow.apache.org/) internally.
+However, DuckDB supports reading from / writing to Arrow using the [`arrow` extension]({% link docs/extensions/arrow.md %}).
+It can also run SQL queries directly on Arrow using [`pyarrow`]({% link docs/guides/python/sql_on_arrow.md %}).
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### Are DuckDB's database files portable between different DuckDB versions and clients?
 
 <div class="answer" markdown="1">

@@ -123,7 +123,7 @@ The Azure extension has two ways to configure the authentication. The preferred 
 
 Multiple [Secret Providers]({% link docs/configuration/secrets_manager.md %}#secret-providers) are available for the Azure extension:
 
-* If you need to define different secrets for different storage accounts, use [the `SCOPE` configuration]({% link docs/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type). Note that the `SCOPE` requires a trailing slash (`SCOPE 'azure://some_container/'`).
+* If you need to define different secrets for different storage accounts, use the [`SCOPE` configuration]({% link docs/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type). Note that the `SCOPE` requires a trailing slash (`SCOPE 'azure://some_container/'`).
 * If you use fully qualified path then the `ACCOUNT_NAME` attribute is optional.
 
 #### `CONFIG` Provider
