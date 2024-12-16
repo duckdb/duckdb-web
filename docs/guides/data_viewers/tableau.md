@@ -114,7 +114,7 @@ do shell script "\"/Applications/Tableau Desktop 2023.2.app/Contents/MacOS/Table
 quit
 ```
 
-Create this file with [the Script Editor](https://support.apple.com/guide/script-editor/welcome/mac)
+Create this file with the [Script Editor](https://support.apple.com/guide/script-editor/welcome/mac)
 (located in `/Applications/Utilities`)
 and [save it as a packaged application](https://support.apple.com/guide/script-editor/save-a-script-as-an-app-scpedt1072/mac):
 

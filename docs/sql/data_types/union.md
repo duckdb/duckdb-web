@@ -106,7 +106,7 @@ So how do we disambiguate if we want to create a `UNION` with multiple members o
 
 ## Comparison and Sorting
 
-Since `UNION` types are implemented on top of `STRUCT` types internally, they can be used with all the comparison operators as well as in both `WHERE` and `HAVING` clauses with [the same semantics as `STRUCT`s]({% link docs/sql/data_types/struct.md %}#comparison-operators). The “tag” is always stored as the first struct entry, which ensures that the `UNION` types are compared and ordered by “tag” first.
+Since `UNION` types are implemented on top of `STRUCT` types internally, they can be used with all the comparison operators as well as in both `WHERE` and `HAVING` clauses with the [same semantics as `STRUCT`s]({% link docs/sql/data_types/struct.md %}#comparison-operators). The “tag” is always stored as the first struct entry, which ensures that the `UNION` types are compared and ordered by “tag” first.
 
 ## Functions
 

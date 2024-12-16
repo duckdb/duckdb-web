@@ -201,7 +201,7 @@ Both DuckDB and PostgreSQL return `current_timestamp` as `TIMESTAMPTZ`. DuckDB a
 
 DuckDB does not currently offer `current_localdate()`; though this can be computed via `current_timestamp::DATE` or `current_localtimestamp()::DATE`.
 
-> See [the DuckDB blog entry on time zones]({% post_url 2022-01-06-time-zones %}) for more information on timestamps and timezones and DuckDB's handling thereof.
+> See the [DuckDB blog entry on time zones]({% post_url 2022-01-06-time-zones %}) for more information on timestamps and timezones and DuckDB's handling thereof.
 
 ## Resolution of Type Names in the Schema
 
