@@ -24,7 +24,7 @@ FROM tbl
 USING SAMPLE 10%;
 ```
 
-> Warning By default, when you specify a percentage, each *vector* is included in the sample with that probability. If your table contains fewer than 10k rows, it makes sense to specify the `bernoulli` sampling option instead, which applies the probability to each row independently. Even then, you'll sometimes get more and sometimes less than the specified percentage of the number of rows, but it is much less likely that you get no rows at all. To get exactly 10% of rows (up to rounding), you must use the `reservoir` sampling option.
+> Warning By default, when you specify a percentage, each [*vector*]({% docs/internals/vector.md %}) is included in the sample with that probability. If your table contains fewer than ~10k rows, it makes sense to specify the `bernoulli` sampling option instead, which applies the probability to each row independently. Even then, you'll sometimes get more and sometimes less than the specified percentage of the number of rows, but it is much less likely that you get no rows at all. To get exactly 10% of rows (up to rounding), you must use the `reservoir` sampling option.
 
 Select a sample of *approximately* 10% of the table using `bernoulli` sampling:
 
@@ -109,7 +109,7 @@ Because bernoulli sampling is completely independent (there is no shared state),
 
 System sampling is a variant of bernoulli sampling with one crucial difference: every *vector* is included with a chance equal to the sampling percentage. This is a form of cluster sampling. System sampling is more efficient than bernoulli sampling, as no per-tuple selections have to be performed.
 
-The *expected* number of rows is still equal to the specified percentage of the table, but the variance is `vectorSize` times higher. As such, system sampling is not suitable for data sets with fewer than 10k rows, where it can happen that all rows will be filtered out, or all the data will be included, even when you ask for `50 PERCENT`.
+The *expected* number of rows is still equal to the specified percentage of the table, but the variance is `vectorSize` times higher. As such, system sampling is not suitable for data sets with fewer than ~10k rows, where it can happen that all rows will be filtered out, or all the data will be included, even when you ask for `50 PERCENT`.
 
 ## Table Samples
 
