@@ -42,6 +42,20 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 
 <div class="qa-wrap" markdown="1">
 
+### Is DuckDB open-source?
+
+<div class="answer" markdown="1">
+
+DuckDB are fully open-source under the MIT license. All components of DuckDB are available in the free version under this license: there is no “enterprise version” of DuckDB.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### How are DuckDB, the DuckDB Foundation, DuckDB Labs, and MotherDuck related?
 
 <div class="answer" markdown="1">
