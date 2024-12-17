@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Vector Similarity Search Extension
-github_repository: https://github.com/duckdb/duckdb_vss
+github_repository: https://github.com/duckdb/duckdb-vss
 ---
 
 The `vss` extension is an experimental extension for DuckDB that adds indexing support to accelerate vector similarity search queries using DuckDB's new fixed-size `ARRAY` type.

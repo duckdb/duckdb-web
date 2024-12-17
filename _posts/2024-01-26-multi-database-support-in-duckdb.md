@@ -34,7 +34,7 @@ These extensions enable a number of useful features. For example, using these ex
 
 The [`ATTACH` statement]({% link docs/sql/statements/attach.md %}) can be used to attach a new database to the system. By default, a native DuckDB file will be attached. The `TYPE` parameter can be used to specify a different storage type. Alternatively, the `{type}:` prefix can be used.
 
-For example, using the SQLite extension, we can open [a SQLite database file](https://github.com/duckdb/sqlite_scanner/raw/main/data/db/sakila.db) and query it as we would query a DuckDB database.
+For example, using the SQLite extension, we can open [a SQLite database file](https://github.com/duckdb/duckdb-sqlite/raw/main/data/db/sakila.db) and query it as we would query a DuckDB database.
 
 ```sql
 ATTACH 'sakila.db' AS sakila (TYPE sqlite);
