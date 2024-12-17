@@ -203,7 +203,7 @@ $(document).ready(function(){
 		});
 
 		// Menu 1 Open Submenu
-		if ($landingMenu.length > 0) {
+		if ($landingMenu.length > 0 && $hamburger.is(":visible")) {
 			$landingMenu.on("click", ".hasSub", function(e) {
 				e.preventDefault();
 				const $submenu = $(this).next(".submenuwrap");

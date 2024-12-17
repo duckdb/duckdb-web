@@ -157,7 +157,8 @@ a, a:active, a:focus, button, button:active, button:focus {
   outline: none;
 }
 
-p a{
+p a,
+li a{
 	color: inherit;
 	text-decoration: underline;
 	-webkit-transition: color .3s;
