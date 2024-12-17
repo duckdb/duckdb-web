@@ -46,15 +46,18 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 
 <div class="answer" markdown="1">
 
-[**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.<br/>
+[**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.
+
 The [**DuckDB Foundation**]({% link foundation/index.html %}) is a non-profit organization that holds the intellectual property of the DuckDB project.
 Its statutes also ensure DuckDB remains open-source under the MIT license in perpetuity.
-Donations to the DuckDB Foundation directly fund DuckDB development.<br/>
+Donations to the DuckDB Foundation directly fund DuckDB development.
+
 [**DuckDB Labs**](https://duckdblabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
-DuckDB Labs employs the core contributors of the DuckDB project.<br/>
+DuckDB Labs employs the core contributors of the DuckDB project.
+
 [**MotherDuck**](https://motherduck.com/) is a venture-backed company creating a hybrid cloud/local platform using DuckDB.
 MotherDuck contracts with DuckDB Labs for development services, and DuckDB Labs owns a portion of MotherDuck.
-[See the partnership announcement for details](https://duckdblabs.com/news/2022/11/15/motherduck-partnership.html).
+[See the partnership announcement for details](https://duckdblabs.com/news/2022/11/15/motherduck-partnership).
 To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf) and the [MotherDuck documentation](https://motherduck.com/docs).
 
 </div>
@@ -69,19 +72,15 @@ To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://
 
 <div class="answer" markdown="1">
 
-You can download the DuckDB Logo here: <br/>
+You can download the DuckDB Logo here:
 
 - Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked.png) / [pdf](/images/logo-dl/DuckDB_Logo-stacked.pdf)
-<br/>
 - Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal.png) / [pdf](/images/logo-dl/DuckDB_Logo-horizontal.pdf)
-<br/>
 
 Inverted variants for dark backgrounds:
 
 - Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.png) / [pdf](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.pdf)
-<br/>
 - Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.png) / [pdf](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.pdf)
-<br/>
 
 The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
 
