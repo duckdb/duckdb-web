@@ -209,7 +209,9 @@ record_batch_reader <- duckdb::duckdb_fetch_record_batch(res)
 cur_batch <- record_batch_reader$read_next_batch()
 ```
 
-The preceding R code shows in low-level detail how the data is streaming. We provide the helper `to_arrow()` in the Arrow package which is a wrapper around this that makes it easy to incorporate this streaming into a dplyr pipeline. [^1]
+The preceding R code shows in low-level detail how the data is streaming. We provide the helper `to_arrow()` in the Arrow package which is a wrapper around this that makes it easy to incorporate this streaming into a dplyr pipeline.
+
+> In Arrow 6.0.0, `to_arrow()` currently returns the full table, but will allow full streaming in our upcoming 7.0.0 release.
 
 ## Benchmark Comparison
 
@@ -374,5 +376,3 @@ In the table above, we also depict the comparison of peak memory usage between D
 In this blog post, we mainly showcased how to execute queries on Arrow datasets with DuckDB. There are additional libraries that can also consume the Arrow format but they have different purposes and capabilities. As always, we are happy to hear if you want to see benchmarks with different tools for a post in the future! Feel free to drop us an [email](mailto:pedro@duckdblabs.com;jon@voltrondata.com) or share your thoughts directly in the Hacker News post.
 
 Last but not least, if you encounter any problems when using our integration, please open an issue in either [DuckDB's issue tracker](https://github.com/duckdb/duckdb/issues) or [Arrow's issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.
-
-[^1]: In Arrow 6.0.0, `to_arrow()` currently returns the full table, but will allow full streaming in our upcoming 7.0.0 release.
