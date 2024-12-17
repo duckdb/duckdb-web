@@ -26,11 +26,14 @@ SELECT goose_name.replace('goose', 'duck') AS duck_name
 FROM unnest(['African goose', 'Faroese goose', 'Hungarian goose', 'Pomeranian goose']) breed(goose_name);
 ```
 
-> Tip To apply function chaining to a single value, use parentheses, e.g.:
+> Tip To apply function chaining to literals, you must use parentheses, e.g.:
 >
 > ```sql
 > SELECT ('hello world').replace(' ', '_');
 > ```
+
+
+> Function chaining via the dot operator is limited to *scalar* functions; it is not available for *table* functions. For example, `SELECT 3.range()` is not supported.  
 
 ## Query Functions
 
