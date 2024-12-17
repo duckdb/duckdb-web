@@ -22,8 +22,8 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 | Name | Description |
 |:--|:-------|
-| [`regexp_extract(string, pattern[, group = 0][, options])`](#regexp_extractstring-pattern-group--0-options) | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `group`. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
-| [`regexp_extract(string, pattern, name_list[, options])`](#regexp_extractstring-pattern-name_list-options) | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list`. |
+| [`regexp_extract(string, pattern[, group = 0][, options])`](#regexp_extractstring-pattern-group--0-options) | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `group`; otherwise, returns the empty string. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
+| [`regexp_extract(string, pattern, name_list[, options])`](#regexp_extractstring-pattern-name_list-options) | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. |
 | [`regexp_extract_all(string, regex[, group = 0][, options])`](#regexp_extract_allstring-regex-group--0-options) | Finds non-overlapping occurrences of `regex` in `string` and returns the corresponding values of `group`. |
 | [`regexp_full_match(string, regex[, options])`](#regexp_full_matchstring-regex-options) | Returns `true` if the entire `string` matches the `regex`. |
 | [`regexp_matches(string, pattern[, options])`](#regexp_matchesstring-pattern-options) | Returns `true` if  `string` contains the regexp `pattern`, `false` otherwise. |
@@ -35,7 +35,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `group`. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
+| **Description** | If `string` contains the regexp `pattern`, returns the capturing group specified by optional parameter `group`; otherwise, returns the empty string. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract('abc', '([a-z])(b)', 1)` |
 | **Result** | `a` |
 
@@ -43,7 +43,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list`. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
+| **Description** | If `string` contains the regexp `pattern`, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y':'2023', 'm':'04', 'd':'15'}` |
 
