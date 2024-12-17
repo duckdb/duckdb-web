@@ -32,7 +32,7 @@ In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session sto
 | [excel]({% link docs/extensions/excel.md %})               | Adds support for Excel-like format strings                       |                 |
 | [fts]({% link docs/extensions/full_text_search.md %})      | Adds support for Full-Text Search Indexes                        |                 |
 | [icu]({% link docs/extensions/icu.md %})                   | Adds support for time zones and collations using the ICU library |                 |
-| [inet]({% link docs/data/json/inet.md %})                  | Adds support for IP-related data types and functions             |                 |
+| [inet]({% link docs/extensions/inet.md %})                 | Adds support for IP-related data types and functions             |                 |
 | [json]({% link docs/data/json/overview.md %})              | Adds support for JSON operations                                 |                 |
 | [parquet]({% link docs/data/parquet/overview.md %})        | Adds support for reading and writing Parquet files               |                 |
 | [sqlite]({% link docs/extensions/sqlite.md %})             | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
