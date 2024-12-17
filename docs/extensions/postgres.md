@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: PostgreSQL Extension
-github_repository: https://github.com/duckdb/postgres_scanner
+github_repository: https://github.com/duckdb/duckdb-postgres
 redirect_from:
   - docs/extensions/postgres_scanner
   - docs/extensions/postgresql
