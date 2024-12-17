@@ -33,7 +33,7 @@ FROM unnest(['African goose', 'Faroese goose', 'Hungarian goose', 'Pomeranian go
 > ```
 
 
-> Function chaining via the dot operator is limited to *scalar* functions; it is not available for *table* functions. For example, `SELECT 3.range()` is not supported.  
+> Function chaining via the dot operator is limited to *scalar* functions; it is not available for *table* functions. For example, `SELECT * FROM ('/myfile.parquet').read_parquet()` is not supported.  
 
 ## Query Functions
 
