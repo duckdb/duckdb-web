@@ -266,7 +266,6 @@ JOIN sith_count_varchar s_char
   ON s_int.sith_count = s_char.sith_count;
 ```
 
-
 | sith_count | sith_count |
 |---:|---:|
 | 2  | 2  |
@@ -274,11 +273,11 @@ JOIN sith_count_varchar s_char
 ## Other Friendly Features
 
 There are many other features of DuckDB that make it easier to analyze data with SQL!  
-  
+
 DuckDB [makes working with time easier in many ways]({% post_url 2022-01-06-time-zones %}), including by accepting multiple different syntaxes (from other databases) for the [`INTERVAL` data type]({% link docs/sql/data_types/interval.md %}) used to specify a length of time.  
-  
+
 DuckDB also implements multiple SQL clauses outside of the traditional core clauses including the [`SAMPLE` clause]({% link docs/sql/query_syntax/sample.md %}) for quickly selecting a random subset of your data and the [`QUALIFY` clause]({% link docs/sql/query_syntax/qualify.md %}) that allows filtering of the results of window functions (much like a `HAVING` clause does for aggregates).  
-  
+
 The [`DISTINCT ON` clause]({% link docs/sql/statements/select.md %}) allows DuckDB to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
 
 ## Ideas for the Future
