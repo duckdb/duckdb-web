@@ -5,7 +5,6 @@
   architecture: x86_64
   has_sha_512_hash: 'no'
   installation_code: winget install DuckDB.cli
-  link: ''
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
 
@@ -20,7 +19,6 @@
   download_method: Direct download
   architecture: x86_64
   has_sha_512_hash: 'yes'
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-windows-amd64.zip
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
@@ -36,7 +34,6 @@
   download_method: Direct download
   architecture: arm64
   has_sha_512_hash: 'yes'
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-windows-arm64.zip
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
@@ -53,7 +50,6 @@
   architecture: universal
   has_sha_512_hash: 'no'
   installation_code: brew install duckdb
-  link: ''
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
 
@@ -68,9 +64,7 @@
   download_method: Direct download
   architecture: universal
   has_sha_512_hash: 'yes'
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-osx-universal.zip
-  note: ''
   usage_example: >-
     wget https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-osx-universal.zip &&
     unzip duckdb_cli-osx-universal.zip &&
@@ -81,9 +75,7 @@
   download_method: Direct download
   architecture: x86_64
   has_sha_512_hash: 'yes'
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-amd64.zip
-  note: ''
   usage_example: >-
     wget https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-amd64.zip &&
     unzip duckdb_cli-linux-amd64.zip &&
@@ -94,9 +86,7 @@
   download_method: Direct download
   architecture: arm64
   has_sha_512_hash: 'yes'
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-aarch64.zip
-  note: ''
   usage_example: >-
     wget https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-aarch64.zip &&
     unzip duckdb_cli-linux-aarch64.zip &&
@@ -108,10 +98,8 @@
   architecture: universal
   has_sha_512_hash: 'no'
   installation_code: pip install duckdb --upgrade
-  link: ''
   note: >-
     The DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-  usage_example: ''
 - variant: stable
   environment: R
   platform: all
@@ -119,11 +107,9 @@
   architecture: universal
   has_sha_512_hash: 'no'
   installation_code: install.packages("duckdb")
-  link: ''
   note: >-
     On aarch64, if the DuckDB R package does not successfully compile, you
     may need to change your R environment's Make variables.
-  usage_example: ''
 - variant: stable
   environment: Java
   platform: all
@@ -136,146 +122,90 @@
         <artifactId>duckdb_jdbc</artifactId>
         <version>1.1.3</version>
     </dependency>
-  link: ''
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: Java
   platform: all
   download_method: Direct download
   architecture: universal
   has_sha_512_hash: 'yes'
-  installation_code: ''
   link: https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/1.1.3/duckdb_jdbc-1.1.3.jar
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: Node.js
   platform: all
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: ''
   installation_code: npm install duckdb
-  link: ''
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: Rust
   platform: all
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: ''
   installation_code: cargo add duckdb --features bundled
-  link: ''
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: Go
   platform: all
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: ''
   installation_code: go get github.com/marcboeker/go-duckdb
-  link: ''
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: C/C++
   platform: Windows
   download_method: Direct download
   architecture: x86_64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/libduckdb-windows-amd64.zip
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: C/C++
   platform: Windows
   download_method: Direct download
   architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/libduckdb-windows-arm64.zip
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: C/C++
   platform: macOS
   download_method: Direct download
   architecture: universal
-  has_sha_512_hash: ''
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/libduckdb-osx-universal.zip
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: C/C++
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/libduckdb-linux-amd64.zip
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: C/C++
   platform: Linux
   download_method: Direct download
   architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/libduckdb-linux-aarch64.zip
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: ODBC
   platform: Windows
   download_method: Direct download
   architecture: x86_64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.0/duckdb_odbc-windows-amd64.zip
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: ODBC
   platform: macOS
   download_method: Direct download
   architecture: universal
-  has_sha_512_hash: ''
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.0/duckdb_odbc-osx-universal.zip
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: ODBC
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.0/duckdb_odbc-linux-amd64.zip
-  note: ''
-  usage_example: ''
 - variant: stable
   environment: ODBC
   platform: Linux
   download_method: Direct download
   architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.0/duckdb_odbc-linux-aarch64.zip
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: Command line
   platform: Windows
   download_method: Direct download
   architecture: universal
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
@@ -290,10 +220,7 @@
   platform: macOS
   download_method: Direct download
   architecture: universal
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
-  note: ''
   usage_example: >-
     wget https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip &&
     unzip duckdb-binaries-osx.zip &&
@@ -304,10 +231,7 @@
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip'
-  note: ''
   usage_example: >-
     wget https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip &&
     unzip duckdb-binaries-linux.zip &&
@@ -318,10 +242,7 @@
   platform: Linux
   download_method: Direct download
   architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip'
-  note: ''
   usage_example: >-
     wget https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip &&
     unzip duckdb-binaries-linux-aarch64.zip &&
@@ -332,32 +253,25 @@
   platform: all
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: ''
   installation_code: pip install duckdb --pre --upgrade
-  link: ''
   note: >-
     The DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-  usage_example: ''
 - variant: nightly
   environment: R
   platform: all
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: ''
   installation_code: >-
     install.packages("duckdb", repos=c("https://duckdb.r-universe.dev",
     "https://cloud.r-project.org"))
-  link: ''
   note: >-
     On aarch64, if the DuckDB R package does not successfully compile, you
     may need to change your R environment's Make variables.
-  usage_example: ''
 - variant: nightly
   environment: Java
   platform: all
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: ''
   installation_code: >-
     <dependency>
         <groupId>org.duckdb</groupId>
@@ -375,106 +289,64 @@
             </snapshots>
         </repository>
     </repositories>
-  link: ''
   note: 'Nightly Java builds are served through the Sonatype snapshots repository.'
-  usage_example: ''
 - variant: nightly
   environment: Java
   platform: all
   download_method: Direct download
   architecture: universal
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/duckdb-java/latest/java-jars.zip'
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: Node.js
   platform: all
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: ''
   installation_code: npm install duckdb@next
-  link: ''
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: C/C++
   platform: Windows
   download_method: Direct download
   architecture: universal
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: C/C++
   platform: macOS
   download_method: Direct download
   architecture: universal
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: C/C++
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip'
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: C/C++
   platform: Linux
   download_method: Direct download
   architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip'
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: ODBC
   platform: Windows
   download_method: Direct download
   architecture: x86_64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/duckdb-odbc/latest/odbc-windows-amd64.zip'
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: ODBC
   platform: macOS
   download_method: Direct download
   architecture: universal
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/duckdb-odbc/latest/odbc-osx-universal.zip'
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: ODBC
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/duckdb-odbc/latest/odbc-linux-amd64.zip'
-  note: ''
-  usage_example: ''
 - variant: nightly
   environment: ODBC
   platform: Linux
   download_method: Direct download
   architecture: arm64
-  has_sha_512_hash: ''
-  installation_code: ''
   link: 'https://artifacts.duckdb.org/duckdb-odbc/latest/odbc-linux-aarch64.zip'
-  note: ''
-  usage_example: ''
