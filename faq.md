@@ -47,7 +47,7 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 
 <div class="answer" markdown="1">
 
-DuckDB is fully open-source under the MIT license. All components of DuckDB are available in the free version under this license: there is no “enterprise version” of DuckDB.
+DuckDB is fully open-source under the MIT license and its development takes place [on GitHub in the `duckdb/duckdb` repository](https://github.com/duckdb/duckdb). All components of DuckDB are available in the free version under this license: there is no “enterprise version” of DuckDB.
 
 </div>
 
