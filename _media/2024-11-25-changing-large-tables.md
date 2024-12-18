@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Opening & Changing Large Tables"
+title: "Changing Large Tables"
 author: Hannes Mühleisen
 excerpt: ""
 toc: false
