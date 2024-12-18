@@ -134,7 +134,7 @@
   platform: all
   download_method: Package manager
   architecture: universal
-  installation_code: npm install duckdb
+  installation_code: npm install @duckdb/node-api
 - variant: stable
   environment: Rust
   platform: all
@@ -302,6 +302,7 @@
   download_method: Package manager
   architecture: universal
   installation_code: npm install duckdb@next
+  note: The nightly release of the Node.js driver installs the old Node.js driver and not DuckDB Node Neo. For the Node Neo driver, the nightly release is currently not available.
 - variant: nightly
   environment: C/C++
   platform: Windows
