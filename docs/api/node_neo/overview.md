@@ -5,7 +5,7 @@ title: Node.js API (Neo)
 
 An API for using [DuckDB](https://duckdb.org/) in [Node.js](https://nodejs.org/).
 
-This is a high-level API meant for applications.
+The primary package, [@duckdb/duckdb-api](https://www.npmjs.com/package/@duckdb/node-api), is a high-level API meant for applications.
 It depends on low-level bindings that adhere closely to [DuckDB's C API](https://duckdb.org/docs/api/c/overview),
 available separately as [@duckdb/duckdb-bindings](https://www.npmjs.com/package/@duckdb/node-bindings).
 
@@ -32,8 +32,10 @@ Some features are not yet complete:
 
 ### Supported Platforms
 
+- Linux arm64 (experimental)
 - Linux x64
 - Mac OS X (Darwin) arm64 (Apple Silicon)
+- Mac OS X (Darwin) x64 (Intel)
 - Windows (Win32) x64
 
 ## Examples
