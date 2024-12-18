@@ -9,7 +9,7 @@ DuckDB supports `json` via the `JSON` logical type.
 The `JSON` logical type is interpreted as JSON, i.e., parsed, in JSON functions rather than interpreted as `VARCHAR`, i.e., a regular string (modulo the equality-comparison caveat at the bottom of this page).
 All JSON creation functions return values of this type.
 
-We also allow any of DuckDB's types to be casted to JSON, and JSON to be casted back to any of DuckDB's types, for example, to cast `JSON` to DuckDB's `STRUCT` type, run:
+We also allow any of DuckDB's types to be cast to JSON, and JSON to be cast back to any of DuckDB's types, for example, to cast `JSON` to DuckDB's `STRUCT` type, run:
 
 ```sql
 SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
