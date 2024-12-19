@@ -143,7 +143,7 @@ Read chunk data (row-major):
 
 ```ts
 // array of rows, each as an array of values
-const columns = chunk.getRows(); 
+const rows = chunk.getRows(); 
 ```
 
 Read chunk data (one value at a time):
