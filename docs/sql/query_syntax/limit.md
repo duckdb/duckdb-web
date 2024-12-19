@@ -41,7 +41,7 @@ Select the 10% rows from the addresses table:
 ```sql
 SELECT *
 FROM addresses
-LIMIT 10%
+LIMIT 10%;
 ```
 
 ## Syntax
