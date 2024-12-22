@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: open_prompt
   description: Interact with LLMs with a simple DuckDB Extension
-  version: 0.0.3
+  version: 0.0.4
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-openprompt
-  ref: 616bdfc4e7b01c4095a2dda8d4104c179922efd6
+  ref: e7e54de7cfc0bc61599c7ab018399508077202a5
 
 docs:
   hello_world: |
@@ -92,11 +92,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type | description | comment | example |
-|----------------|---------------|-------------|---------|---------|
-| open_prompt    | scalar        |             |         |         |
-| set_api_token  | scalar        |             |         |         |
-| set_api_url    | scalar        |             |         |         |
-| set_model_name | scalar        |             |         |         |
+|  function_name  | function_type | description | comment | example |
+|-----------------|---------------|-------------|---------|---------|
+| open_prompt     | scalar        |             |         |         |
+| set_api_timeout | scalar        |             |         |         |
+| set_api_token   | scalar        |             |         |         |
+| set_api_url     | scalar        |             |         |         |
+| set_model_name  | scalar        |             |         |         |
 
 
