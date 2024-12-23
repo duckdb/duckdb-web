@@ -578,6 +578,7 @@ body.documentation{
 			border-radius: 5px;
 		 &:hover{
 				background: rgba(0, 0, 0, 0.06);
+				color: var(--doc-sidebar-text-unselected, #262626);
 			}
 		}
 	}
