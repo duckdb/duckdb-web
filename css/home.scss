@@ -143,14 +143,14 @@ body.landing{
 			}
 		}
 		.content{
-			padding: 20px;
+			padding: 20px 40px;
 			font-family: "JetBrainsMono-Regular";
 			font-size: 14px;
 			position: relative;
 			.lines{
 				position: absolute;
 				top: 20px;
-				left: 12px;
+				left: 25px;
 				color: var(--main-text-tertiary-color, #B2B2B2);
 				font-size: 14px;
 				line-height: 17px;
@@ -176,7 +176,7 @@ body.landing{
 				margin: 0;
 			}
 			&.haslines{
-				padding-left: 45px;
+				padding-left: 60px;
 			}
 		}
 		.bottombar{
@@ -565,7 +565,7 @@ body.landing{
 			z-index: 1;
 		}
 		.window button.copy{
-			right: 20px;
+			right: 40px;
 			top: 15px;
 		}
 	}
