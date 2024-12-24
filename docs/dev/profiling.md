@@ -7,6 +7,8 @@ redirect_from:
 
 Profiling is essential to help understand why certain queries exhibit specific performance characteristics.
 DuckDB contains several built-in features to enable query profiling, which this page covers.
+For a high-level example of using `EXPLAIN`, see the [“Inspect Query Plans” page]({% link docs/guides/meta/explain.md %}).
+For an in-depth explanation, see the [“Profiling” page]({% link docs/dev/profiling.md %}) in the Developer Documentation.
 
 ## `EXPLAIN` Statement
 
