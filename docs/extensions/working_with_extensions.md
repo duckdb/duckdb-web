@@ -163,7 +163,7 @@ Any subsequent calls to `INSTALL ⟨extension_name⟩` will use the local versio
 FORCE INSTALL extension_name;
 ```
 
-Force installing can also be used to overwrite an extension with an extension with the same name from another repository,
+Force installing can also be used to overwrite an extension with an extension of the same name from another repository,
 
 For example, first, `spatial` is installed from the core repository:
 
