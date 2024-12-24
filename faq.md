@@ -281,7 +281,7 @@ DuckDB does not use *explicit SIMD* (single instruction, multiple data) instruct
 
 <div class="qa-wrap" markdown="1">
 
-### I would to benchmark DuckDB against another system. How do I proceed?
+### I would like to benchmark DuckDB against another system. How do I proceed?
 
 <div class="answer" markdown="1">
 
