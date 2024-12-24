@@ -125,7 +125,7 @@ const chunks = [];
 while (true) {
   const chunk = await result.fetchChunk();
   // Last chunk will have zero rows.
-  if (chunk.rowCount === 0) {
+  if (!chunk || chunk.rowCount === 0) {
     break;
   }
   chunks.push(chunk);
