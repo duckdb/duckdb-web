@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_download_count: 26
+extension_download_count_pretty: 26
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql_native.png'
 layout: community_extension_doc
 ---
