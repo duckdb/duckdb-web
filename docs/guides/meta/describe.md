@@ -5,7 +5,7 @@ title: Describe
 
 ## Describing a Table
 
-In order to view the schema of a table, use `DESCRIBE` or `SHOW` followed by the table name.
+In order to view the schema of a table, use the `DESCRIBE` statement (or its aliases `DESC` and `SHOW`) followed by the table name.
 
 ```sql
 CREATE TABLE tbl (i INTEGER PRIMARY KEY, j VARCHAR);
