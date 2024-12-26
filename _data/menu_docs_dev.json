@@ -533,6 +533,10 @@
                   "url": "insert"
                 },
                 {
+                  "page": "LOAD / INSTALL",
+                  "url": "load_and_install"
+                },
+                {
                   "page": "PIVOT",
                   "url": "pivot"
                 },
@@ -575,10 +579,6 @@
                 {
                   "page": "VACUUM",
                   "url": "vacuum"
-                },
-                {
-                  "page": "LOAD / INSTALL",
-                  "url": "load_and_install"
                 }
               ]
             },
