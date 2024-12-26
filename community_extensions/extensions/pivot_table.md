@@ -25,10 +25,10 @@ docs:
   extended_description: |
     This extension, pivot_table, allow you to pivot your data using a spreadsheet-like pivot API. It is also similar to the Pandas pivot_table function. It does this solely through SQL macros - there are no C++ functions as a part of this extension.
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 370
-extension_download_count_pretty: 370
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 368
+extension_download_count_pretty: 368
 image: '/images/community_extensions/social_preview/preview_community_extension_pivot_table.png'
 layout: community_extension_doc
 ---
