@@ -53,10 +53,10 @@ docs:
   extended_description: |
     The HTTP Client Extension is experimental, use at your own risk!
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 348
-extension_download_count_pretty: 348
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 346
+extension_download_count_pretty: 346
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---
