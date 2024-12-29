@@ -2,7 +2,7 @@ Like all programming languages and libraries, DuckDB has its share of idiosyncra
 Some are vestiges of our feathered friend's evolution; others are inevitable because we strive to adhere to the [SQL Standard](https://blog.ansi.org/sql-standard-iso-iec-9075-2023-ansi-x3-135/) and specifically to PostgreSQL's dialect (see the [PostgreSQL compatibility]({% link docs/sql/dialect/postgresql_compatibility.md %}) page for exceptions).
 The rest, we may simply have different preferences on or we may even agree on what should be done but just haven't come around to it yet—and may never—because there are always bigger fires to extinguish or more important features to add.  
 
-Acknowledging and being open about these quirks is the best we can do, which is why we have compiled below a list of examples that may catch some users off guard: 
+Acknowledging these quirks is the best we can do, which is why we have compiled below a list of examples that may catch some users off guard: 
 
 - The aggregate functions `sum`, `list`, and `string_agg` all return `NULL` instead of `0`, `[]` and `''`, respectively, for empty groups. This is dictated by the SQL Standard and obeyed by all SQL implementations we know.
 - One-based indexing everywhere (e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`)) is another SQL Standard requirement. Good for our R users and those with an SQL background, bad for everybody else.
