@@ -15,5 +15,5 @@ Acknowledging these quirks is the best we can do, which is why we have compiled 
 - `USING SAMPLE` is syntactically placed after the `WHERE` and `GROUP BY` clauses (same as the `LIMIT` clause) but is semantically applied before both (unlike the `LIMIT` clause).
 - `SELECT CASE WHEN 0 > 1 THEN (SELECT sum(range) FROM range(0, 100000000000000000)) END` never completes to return the obvious `NULL` answer. DuckDB is ducklarative, not imperative; as such, it tries hard to produce fast code for you (e.g., constant folding) but sometimes gets it wrong (e.g., short-circuiting case expressions).
 - `1 IN (0, NULL)` is `NULL`. That one makes some sense if you interpret the `NULL`s in the input and output as `UNKNOWN`. Alas, that's not really how `NULL`s work elsewhere: `1 in [0, NULL]` is `false`, `if(NULL > 1, 2, 3)` returns `3`, and most aggregate functions ignore  `NULL`s too even though, for example, the sum of `UNKNOWN` and `1` would be `UNKNOWN`.
-- `concat(x, NULL) = x` (same for `string_concat` and `list_concat`). If you prefer `NULL`s in, `NULL`s out, use `x || NULL`.
+- `concat(x, NULL) = x` (same for `list_concat`). If you prefer `NULL`s in, `NULL`s out, use `x || NULL`.
 - `age(x)` is `current_date - x` instead of `current_timestamp - x`. Another quirk inherited from PostgreSQL.
