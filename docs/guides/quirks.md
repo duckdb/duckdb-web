@@ -4,7 +4,7 @@ The rest may simply come down to different preferences, or we might even agree o
 
 Acknowledging these quirks is the best we can do, which is why we have compiled below a list of examples that may catch some users off guard: 
 
-- The aggregate functions `sum`, `list`, and `string_agg` all return `NULL` instead of `0`, `[]` and `''`, respectively, for empty groups. This is dictated by the SQL Standard and obeyed by all SQL implementations we know.
+- On empty groups, the aggregate functions `sum`, `list`, and `string_agg` all return `NULL` instead of `0`, `[]` and `''`, respectively. This is dictated by the SQL Standard and obeyed by all SQL implementations we know.
 - One-based indexing everywhere (e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`)) is another SQL Standard requirement. Good for our R users and those with an SQL background, bad for everybody else.
 - DuckDB's `1 = true` is common but violates PostgreSQL compatibility, whereas DuckDB's `'t' = true` is more quirky and was inherited from PostgreSQL. DuckDB's `1 = '1.1'` is probably most difficult to justify.
 - `-1^2 = 1`. PostgreSQL compatibility means the unary minus has higher precedence than the exponentiation operator. Use the `pow` function to avoid mistakes. 
