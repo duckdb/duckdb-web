@@ -1,6 +1,6 @@
 Like all programming languages and libraries, DuckDB has its share of idiosyncrasies and inconsistencies.  
 Some are vestiges of our feathered friend's evolution; others are inevitable because we strive to adhere to the [SQL Standard](https://blog.ansi.org/sql-standard-iso-iec-9075-2023-ansi-x3-135/) and specifically to PostgreSQL's dialect (see the [PostgreSQL compatibility]({% link docs/sql/dialect/postgresql_compatibility.md %}) page for exceptions).
-The rest may simply come down to different preferences, or we might even agree on what _should_ be done but just haven’t gotten around to it yet—and may never—because there are always bigger fires to put out or more important features to work on.
+The rest may simply come down to different preferences, or we may even agree on what _should_ be done but just haven’t gotten around to it yet—and might never—because there are always bigger fires to put out or more important features to work on.
 
 Acknowledging these quirks is the best we can do, which is why we have compiled below a list of examples that may catch some users off guard: 
 
