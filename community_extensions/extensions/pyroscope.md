@@ -33,10 +33,10 @@ docs:
   extended_description: |
     The Pyroscope Extension is experimental, use at your own risk!
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 301
-extension_download_count_pretty: 301
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: 296
+extension_download_count_pretty: 296
 image: '/images/community_extensions/social_preview/preview_community_extension_pyroscope.png'
 layout: community_extension_doc
 ---
