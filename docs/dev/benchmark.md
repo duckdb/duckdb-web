@@ -13,7 +13,7 @@ When making changes that have potential performance implications, it is importan
 To build the benchmark suite, run the following command in the [DuckDB repository](https://github.com/duckdb/duckdb):
 
 ```bash
-BUILD_BENCHMARK=1 BUILD_TPCH=1 make
+BUILD_BENCHMARK=1 CORE_EXTENSIONS='tpch' make
 ```
 
 ## Listing Benchmarks

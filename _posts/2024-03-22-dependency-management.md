@@ -3,6 +3,7 @@ layout: post
 title: "Dependency Management in DuckDB Extensions"
 author: Sam Ansmink
 excerpt: While core DuckDB has zero external dependencies, building extensions with dependencies is now very simple, with built-in support for vcpkg, an open-source package manager with support for over 2000 C/C++ packages. Interested in building your own? Check out the [extension template](https://github.com/duckdb/extension-template).
+tags: ["extensions"]
 ---
 
 ## Introduction
@@ -10,14 +11,14 @@ excerpt: While core DuckDB has zero external dependencies, building extensions w
 Ever since the birth of DuckDB, one of its main pillars has been its strict no-external-dependencies philosophy.
 Paraphrasing [this 2019 SIGMOD paper](https://hannes.muehleisen.org/publications/SIGMOD2019-demo-duckdb.pdf) on DuckDB:
 *To achieve the requirement of having practical “embeddability” and portability, the database needs to run in whatever
-environment the host does. Dependencies on external libraries (e.g. openssh) for either compile- or runtime have been
+environment the host does. Dependencies on external libraries (e.g., openssh) for either compile- or runtime have been
 found to be problematic.*
 
 In this blog post, we will cover how DuckDB manages to stay true to this philosophy without forcing DuckDB developers
 down the path of complete abstinence. Along the way, we will show practical examples of how external dependencies are
 possible, and how you can use this when creating your own DuckDB extension.
 
-## The difficulties of complete abstinence
+## The Difficulties of Complete Abstinence
 
 Having no external dependencies is conceptually very simple. However, in a real-world system with real-world
 requirements, it is difficult to achieve. Many features require complex implementations of protocols and algorithms, and
@@ -49,7 +50,7 @@ for some dependencies, this just doesn't work. Take, for example, the SDKs of la
 massive, very frequently updated, and packed with arguably essential functionality for an increasingly mature analytical
 database. This leaves an awkward choice: either not provide these essential features or break the no-dependency rule.
 
-## DuckDB extensions
+## DuckDB Extensions
 
 This is where extensions come in. Extensions provide an elegant solution to the dilemma of dependencies by allowing
 fine-grained breakage of the no-dependency rule. Moving dependencies out of DuckDB's core into extensions, the core
@@ -66,10 +67,10 @@ At DuckDB, this realization of the importance of extensions and its relation to 
 design since its early days. Today, many parts of DuckDB can be extended. For example, you can add functions (table,
 scalar, copy, aggregation), filesystems, parsers, optimizer rules, and much more. Many new features that are added to
 DuckDB are added in extensions and are grouped by either functionality or by set of dependencies. Some examples of
-extensions are the [SQLite](/docs/extensions/sqlite) extension for reading/writing to/from SQLite files or the
-[Spatial](/docs/extensions/spatial) extension which offers support for a wide range of geospatial processing
+extensions are the [SQLite]({% link docs/extensions/sqlite.md %}) extension for reading/writing to/from SQLite files or the
+[Spatial]({% link docs/extensions/spatial/overview.md %}) extension which offers support for a wide range of geospatial processing
 features. DuckDB's extensions are distributed as loadable binaries for most major platforms (including
-[DuckDB-Wasm](/2023/12/18/duckdb-extensions-in-wasm)), allowing loading and installing extensions with two simple SQL
+[DuckDB-Wasm]({% post_url 2023-12-18-duckdb-extensions-in-wasm %})), allowing loading and installing extensions with two simple SQL
 statements:
 
 ```sql
@@ -79,9 +80,9 @@ LOAD spatial;
 
 For most core extensions maintained by the DuckDB team, there is even an auto-install and auto-load feature which will detect the required extensions for
 a SQL statement and automatically install and load them. For a detailed description of which extensions are available
-and how to use them, check out the [docs](/docs/extensions/overview).
+and how to use them, check out the [docs]({% link docs/extensions/overview.md %}).
 
-## Dependency management
+## Dependency Management
 
 So far, we've seen how DuckDB avoids external dependencies in its core codebase by moving them out of the core repository into
 extensions. However, we're not out of the woods yet. As DuckDB is written in C++, the most natural way to write
@@ -114,9 +115,9 @@ one of DuckDB's extensions and how it uses vcpkg to manage its dependencies.
 
 ### Example: Azure extension
 
-The [Azure](/docs/extensions/azure) extension provides functionality related to [Microsoft Azure](https://azure.microsoft.com/),
+The [Azure]({% link docs/extensions/azure.md %}) extension provides functionality related to [Microsoft Azure](https://azure.microsoft.com/),
 one of the major cloud providers. DuckDB's Azure extension depends on the Azure C++ SDK to support reading directly from
-Azure Storage. To do so it adds a custom filesystem and [secret type](/docs/configuration/secrets_manager), which can be
+Azure Storage. To do so it adds a custom filesystem and [secret type]({% link docs/configuration/secrets_manager.md %}), which can be
 used to easily query from authenticated Azure containers:
 
 ```sql
@@ -156,24 +157,24 @@ And that's basically it! Every time the Azure extension is built, vcpkg will be 
 ensure `azure-identity-cpp`, `azure-storage-blobs-cpp` and `azure-storage-files-datalake-cpp` are built using the correct platform-specific flags and
 available in CMake through `find_package`.
 
-## Building your own DuckDB extension
+## Building Your Own DuckDB Extension
 
 Up until this part, we've focused on managing dependencies from a point-of-view of the developers of core DuckDB
 contributors. However, all of this applies to anyone who wants to build an extension. DuckDB maintains a [C++ Extension Template](https://github.com/duckdb/extension-template),
 which contains all the necessary build scripts, CI/CD pipeline and vcpkg configuration to build, test and deploy a DuckDB extension in
 minutes. It can automatically build the loadable extension binaries for all available platforms, including Wasm.
 
-### Setting up the extension template
+### Setting up the Extension Template
 
 To demonstrate how simple this process is, let's go through all the steps of building a DuckDB extension from scratch,
 including adding a vcpkg-managed external dependency.
 
 Firstly, you will need to install vcpkg:
 
-```bash
+```batch
 git clone https://github.com/Microsoft/vcpkg.git
 ./vcpkg/bootstrap-vcpkg.sh
-export vcpkg_TOOLCHAIN_PATH=`pwd`/vcpkg/scripts/buildsystems/vcpkg.cmake
+export VCPKG_TOOLCHAIN_PATH=`pwd`/vcpkg/scripts/buildsystems/vcpkg.cmake
 ```
 
 Then, you create a GitHub repository based on [the template](https://github.com/duckdb/extension-template) by clicking “Use this
@@ -181,7 +182,7 @@ template”.
 
 Now to clone your newly created extension repo (including its submodules) and initialize the template:
 
-```bash
+```batch
 git clone https://github.com/⟨your-username⟩/⟨your-extension-repo⟩ --recurse-submodules
 cd your-extension-repo
 ./scripts/bootstrap-template.py url_parser
@@ -189,11 +190,11 @@ cd your-extension-repo
 
 Finally, to confirm everything works as expected, run the tests:
 
-```bash
+```batch
 make test
 ```
 
-### Adding functionality
+### Adding Functionality
 
 In its current state, the extension is, of course, a little boring. Therefore, let's add some functionality! To keep
 things simple, we'll add a scalar function that parses a URL and returns the scheme. We'll call the
@@ -289,7 +290,7 @@ DuckDB-maintained extension and third-party extensions.
 
 If this blog post sparked your interest in creating your own DuckDB extension, check out
 the [C++ Extension Template](https://github.com/duckdb/extension-template),
-the [DuckDB docs on extensions](/docs/extensions/overview),
+the [DuckDB docs on extensions]({% link docs/extensions/overview.md %}),
 and the very handy [duckdb-extension-radar repository](https://github.com/mehd-io/duckdb-extension-radar) that tracks public DuckDB extensions.
 Additionally, DuckDB has a [Discord server](https://discord.duckdb.org) where you can ask for help on
 extensions or anything DuckDB-related in general.

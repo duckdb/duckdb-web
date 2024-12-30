@@ -4,17 +4,18 @@ title: Subqueries
 railroad: expressions/subqueries.js
 ---
 
+Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT ... FROM`, but in DuckDB other query constructs such as [`PIVOT`]({% link docs/sql/statements/pivot.md %}) can also appear as a subquery.
+
 ## Scalar Subquery
 
 <div id="rrdiagram1"></div>
 
-Scalar subqueries are subqueries that return a single value. They can be used anywhere where a regular expression can be used. If a scalar subquery returns more than a single value, the first value returned will be used.
+Scalar subqueries are subqueries that return a single value. They can be used anywhere where an expression can be used. If a scalar subquery returns more than a single value, an error is raised (unless `scalar_subquery_error_on_multiple_rows` is set to `false`, in which case a row is selected randomly).
 
 Consider the following table:
 
 ### Grades
 
-<div class="narrow_table"></div>
 
 | grade | course |
 |---:|:---|
@@ -31,15 +32,77 @@ We can run the following query to obtain the minimum grade:
 
 ```sql
 SELECT min(grade) FROM grades;
--- {7}
 ```
+
+| min(grade) |
+|-----------:|
+| 7          |
 
 By using a scalar subquery in the `WHERE` clause, we can figure out for which course this grade was obtained:
 
 ```sql
 SELECT course FROM grades WHERE grade = (SELECT min(grade) FROM grades);
--- {Math}
 ```
+
+| course |
+|--------|
+| Math   |
+
+## Subquery Comparisons: `ALL`, `ANY` and `SOME`
+
+In the section on [scalar subqueries](#scalar-subquery), a scalar expression was compared directly to a subquery using the equality [comparison operator]({% link docs/sql/expressions/comparison_operators.md %}#comparison-operators) (`=`).
+Such direct comparisons only make sense with scalar subqueries.
+
+Scalar expressions can still be compared to single-column subqueries returning multiple rows by specifying a quantifier. Available quantifiers are `ALL`, `ANY` and `SOME`. The quantifiers `ANY` and `SOME` are equivalent.
+
+### `ALL`
+
+The `ALL` quantifier specifies that the comparison as a whole evaluates to `true` when the individual comparison results of _the expression at the left hand side of the comparison operator_ with each of the values from _the subquery at the right hand side of the comparison operator_ **all** evaluate to `true`:
+
+```sql
+SELECT 6 <= ALL (SELECT grade FROM grades) AS adequate;
+```
+
+returns:
+
+| adequate |
+|----------|
+| true     |
+
+because 6 is less than or equal to each of the subquery results 7, 8 and 9.
+
+However, the following query
+
+```sql
+SELECT 8 >= ALL (SELECT grade FROM grades) AS excellent;
+```
+
+returns
+
+| excellent |
+|-----------|
+| false     |
+
+because 8 is not greater than or equal to the subquery result 7. And thus, because not all comparisons evaluate `true`, `>= ALL` as a whole evaluates to `false`.
+
+### `ANY`
+
+The `ANY` quantifier specifies that the comparison as a whole evaluates to `true` when at least one of the individual comparison results evaluates to `true`.
+For example:
+
+```sql
+SELECT 5 >= ANY (SELECT grade FROM grades) AS fail;
+```
+
+returns
+
+| fail  |
+|-------|
+| false |
+
+because no result of the subquery is less than or equal to 5.
+
+The quantifier `SOME` maybe used instead of `ANY`: `ANY` and `SOME` are interchangeable.
 
 ## `EXISTS`
 
@@ -50,12 +113,22 @@ The `EXISTS` operator tests for the existence of any row inside the subquery. It
 For example, we can use it to figure out if there are any grades present for a given course:
 
 ```sql
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'Math');
--- true
-
-SELECT EXISTS (SELECT * FROM grades WHERE course = 'History');
--- false
+SELECT EXISTS (FROM grades WHERE course = 'Math') AS math_grades_present;
 ```
+
+| math_grades_present |
+|--------------------:|
+| true                |
+
+```sql
+SELECT EXISTS (FROM grades WHERE course = 'History') AS history_grades_present;
+```
+
+| history_grades_present |
+|-----------------------:|
+| false                  |
+
+> The subqueries in the examples above make use of the fact that you can omit the `SELECT *` in DuckDB thanks to the [`FROM`-first syntax]({% link docs/sql/query_syntax/from.md %}). The `SELECT` clause is required in subqueries by other SQL systems but cannot fulfil any purpose in `EXISTS` and `NOT EXISTS` subqueries.
 
 ### `NOT EXISTS`
 
@@ -70,7 +143,7 @@ INSERT INTO interest VALUES (2, 'Music');
 
 SELECT *
 FROM Person
-WHERE NOT EXISTS (SELECT * FROM interest WHERE interest.PersonId = Person.id);
+WHERE NOT EXISTS (FROM interest WHERE interest.PersonId = Person.id);
 ```
 
 | id | name |
@@ -88,9 +161,12 @@ The `IN` operator checks containment of the left expression inside the result de
 We can use the `IN` operator in a similar manner as we used the `EXISTS` operator:
 
 ```sql
-SELECT 'Math' IN (SELECT course FROM grades);
--- true
+SELECT 'Math' IN (SELECT course FROM grades) AS math_grades_present;
 ```
+
+| math_grades_present |
+|--------------------:|
+| true                |
 
 ## Correlated Subqueries
 
@@ -107,8 +183,12 @@ WHERE grade =
     (SELECT min(grade)
      FROM grades
      WHERE grades.course = grades_parent.course);
--- {7, Math}, {8, CS}
 ```
+
+| grade | course |
+|------:|--------|
+| 7     | Math   |
+| 8     | CS     |
 
 The subquery uses a column from the parent query (`grades_parent.course`). Conceptually, we can see the subquery as a function where the correlated column is a parameter to that function:
 
@@ -128,6 +208,8 @@ Using the name of a subquery in the `SELECT` clause (without referring to a spec
 SELECT t
 FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
 ```
+
+<div class="monospace_table"></div>
 
 |           t           |
 |-----------------------|

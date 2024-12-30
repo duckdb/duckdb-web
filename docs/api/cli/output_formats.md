@@ -5,31 +5,40 @@ redirect_from:
   - /docs/api/cli/output-formats
 ---
 
-The `.mode` [dot command](dot_commands) may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal [output to a file](dot_commands#output-writing-results-to-a-file). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point.
+The `.mode` [dot command]({% link docs/api/cli/dot_commands.md %}) may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal [output to a file]({% link docs/api/cli/dot_commands.md %}#output-writing-results-to-a-file). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point.
 The `markdown` mode is particularly useful for building documentation and the `latex` mode is useful for writing academic papers.
 
-<div class="narrow_table"></div>
 
-|     Mode     |                 Description                  |
-|--------------|----------------------------------------------|
-| `ascii`      | Columns/rows delimited by 0x1F and 0x1E      |
-| `box`        | Tables using unicode box-drawing characters  |
-| `csv`        | Comma-separated values                       |
-| `column`     | Output in columns.  (See .width)             |
-| `duckbox`    | Tables with extensive features               |
-| `html`       | HTML `<table>` code                          |
-| `insert`     | SQL insert statements for TABLE              |
-| `json`       | Results in a JSON array                      |
-| `jsonlines`  | Results in a NDJSON                          |
-| `latex`      | LaTeX tabular environment code               |
-| `line`       | One value per line                           |
-| `list`       | Values delimited by "\|"                     |
-| `markdown`   | Markdown table format                        |
-| `quote`      | Escape answers as for SQL                    |
-| `table`      | ASCII-art table                              |
-| `tabs`       | Tab-separated values                         |
-| `tcl`        | TCL list elements                            |
-| `trash`      | No output                                    |
+|     Mode     |                 Description                 |
+|--------------|---------------------------------------------|
+| `ascii`      | Columns/rows delimited by 0x1F and 0x1E     |
+| `box`        | Tables using unicode box-drawing characters |
+| `csv`        | Comma-separated values                      |
+| `column`     | Output in columns. (See .width)             |
+| `duckbox`    | Tables with extensive features (default)    |
+| `html`       | HTML `<table>` code                         |
+| `insert`     | SQL insert statements for TABLE             |
+| `json`       | Results in a JSON array                     |
+| `jsonlines`  | Results in a NDJSON                         |
+| `latex`      | LaTeX tabular environment code              |
+| `line`       | One value per line                          |
+| `list`       | Values delimited by "\|"                    |
+| `markdown`   | Markdown table format                       |
+| `quote`      | Escape answers as for SQL                   |
+| `table`      | ASCII-art table                             |
+| `tabs`       | Tab-separated values                        |
+| `tcl`        | TCL list elements                           |
+| `trash`      | No output                                   |
+
+Use `.mode` directly to query the appearance currently in use.
+
+```sql
+.mode
+```
+
+```text
+current output mode: duckbox
+```
 
 ```sql
 .mode markdown

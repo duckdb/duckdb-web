@@ -3,7 +3,7 @@ layout: docu
 title: ADBC API
 ---
 
-[Arrow Database Connectivity (ADBC)](https://arrow.apache.org/adbc/), similarly to ODBC and JDBC, is a C-style API that enables code portability between different database systems. This allows developers to effortlessly build applications that communicate with database systems without using code specific to that system. The main difference between ADBC and ODBC/JDBC is that ADBC uses [Arrow](https://arrow.apache.org/) to transfer data between the database system and the application. DuckDB has an ADBC driver, which takes advantage of the [zero-copy integration between DuckDB and Arrow](/2021/12/03/duck-arrow) to efficiently transfer data.
+[Arrow Database Connectivity (ADBC)](https://arrow.apache.org/adbc/), similarly to ODBC and JDBC, is a C-style API that enables code portability between different database systems. This allows developers to effortlessly build applications that communicate with database systems without using code specific to that system. The main difference between ADBC and ODBC/JDBC is that ADBC uses [Arrow](https://arrow.apache.org/) to transfer data between the database system and the application. DuckDB has an ADBC driver, which takes advantage of the [zero-copy integration between DuckDB and Arrow]({% post_url 2021-12-03-duck-arrow %}) to efficiently transfer data.
 
 DuckDB's ADBC driver currently supports version 0.7 of ADBC.
 
@@ -36,7 +36,6 @@ A set of functions that create and destroy a connection to interact with a datab
 | `ConnectionInit` | Finish setting options and initialize the connection. | `(AdbcConnection*, AdbcDatabase*, AdbcError*)` | `AdbcConnectionInit(&adbc_connection, &adbc_database, &adbc_error)` |
 | `ConnectionRelease` | Destroy this connection. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionRelease(&adbc_connection, &adbc_error)` |
 
-
 A set of functions that retrieve metadata about the database. In general, these functions will return Arrow objects, specifically an ArrowArrayStream.
 
 | Function name | Description | Arguments | Example |
@@ -44,7 +43,6 @@ A set of functions that retrieve metadata about the database. In general, these 
 | `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables, and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
 | `ConnectionGetTableSchema` | Get the Arrow schema of a table. | `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` |
 | `ConnectionGetTableTypes` | Get a list of table types in the database. | `(AdbcConnection*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
-
 
 A set of functions with transaction semantics for the connection. By default, all connections start with auto-commit mode on, but this can be turned off via the ConnectionSetOption function.
 
@@ -76,7 +74,6 @@ Functions related to query execution:
 
 Functions related to binding, used for bulk insertion or in prepared statements.
 
-<div class="narrow_table"></div>
 
 | Function name | Description | Arguments | Example |
 |:---|:-|:---|:----|
@@ -110,12 +107,14 @@ AdbcDatabaseInit(&adbc_database, &adbc_error);
 ```
 
 After initializing the database, we must create and initialize a connection to it.
+
 ```cpp
 AdbcConnectionNew(&adbc_connection, &adbc_error);
 AdbcConnectionInit(&adbc_connection, &adbc_database, &adbc_error);
 ```
 
 We can now initialize our statement and run queries through our connection. After the `AdbcStatementExecuteQuery` the `arrow_stream` is populated with the result.
+
 ```cpp
 AdbcStatementNew(&adbc_connection, &adbc_statement, &adbc_error);
 AdbcStatementSetSqlQuery(&adbc_statement, "SELECT 42", &adbc_error);
@@ -125,6 +124,7 @@ arrow_stream.release(arrow_stream)
 ```
 
 Besides running queries, we can also ingest data via `arrow_streams`. For this we need to set an option with the table name we want to insert to, bind the stream and then execute the query.
+
 ```cpp
 StatementSetOption(&adbc_statement, ADBC_INGEST_OPTION_TARGET_TABLE, "AnswerToEverything", &adbc_error);
 StatementBindStream(&adbc_statement, &arrow_stream, &adbc_error);
@@ -135,13 +135,14 @@ StatementExecuteQuery(&adbc_statement, nullptr, nullptr, &adbc_error);
 
 The first thing to do is to use `pip` and install the ADBC Driver manager. You will also need to install the `pyarrow` to directly access Apache Arrow formatted result sets (such as using `fetch_arrow_table`).
 
-```shell
+```bash
 pip install adbc_driver_manager pyarrow
 ```
 
 > For details on the `adbc_driver_manager` package, see the [`adbc_driver_manager` package documentation](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
 
 As with C++, we need to provide initialization options consisting of the location of the libduckdb shared object and entrypoint function. Notice that the `path` argument for DuckDB is passed in through the `db_kwargs` dictionary.
+
 ```python
 import adbc_driver_duckdb.dbapi
 
@@ -165,4 +166,193 @@ data = pyarrow.record_batch(
 
 with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
     cur.adbc_ingest("AnswerToEverything", data)
+```
+
+### Go
+
+Make sure to download the `libduckdb` library first (i.e., the `.so` on Linux, `.dylib` on Mac or `.dll` on Windows) from the [releases page](https://github.com/duckdb/duckdb/releases), and put it on your `LD_LIBRARY_PATH` before you run the code (but if you don't, the error will explain your options regarding the location of this file.)
+
+The following example uses an in-memory DuckDB database to modify in-memory Arrow RecordBatches via SQL queries:
+
+{% raw %}
+```go
+package main
+
+import (
+    "bytes"
+    "context"
+    "fmt"
+    "io"
+
+    "github.com/apache/arrow-adbc/go/adbc"
+    "github.com/apache/arrow-adbc/go/adbc/drivermgr"
+    "github.com/apache/arrow/go/v17/arrow"
+    "github.com/apache/arrow/go/v17/arrow/array"
+    "github.com/apache/arrow/go/v17/arrow/ipc"
+    "github.com/apache/arrow/go/v17/arrow/memory"
+)
+
+func _makeSampleArrowRecord() arrow.Record {
+    b := array.NewFloat64Builder(memory.DefaultAllocator)
+    b.AppendValues([]float64{1, 2, 3}, nil)
+    col := b.NewArray()
+
+    defer col.Release()
+    defer b.Release()
+
+    schema := arrow.NewSchema([]arrow.Field{{Name: "column1", Type: arrow.PrimitiveTypes.Float64}}, nil)
+    return array.NewRecord(schema, []arrow.Array{col}, int64(col.Len()))
+}
+
+type DuckDBSQLRunner struct {
+    ctx  context.Context
+    conn adbc.Connection
+    db   adbc.Database
+}
+
+func NewDuckDBSQLRunner(ctx context.Context) (*DuckDBSQLRunner, error) {
+    var drv drivermgr.Driver
+    db, err := drv.NewDatabase(map[string]string{
+        "driver":     "duckdb",
+        "entrypoint": "duckdb_adbc_init",
+        "path":       ":memory:",
+    })
+    if err != nil {
+        return nil, fmt.Errorf("failed to create new in-memory DuckDB database: %w", err)
+    }
+    conn, err := db.Open(ctx)
+    if err != nil {
+        return nil, fmt.Errorf("failed to open connection to new in-memory DuckDB database: %w", err)
+    }
+    return &DuckDBSQLRunner{ctx: ctx, conn: conn, db: db}, nil
+}
+
+func serializeRecord(record arrow.Record) (io.Reader, error) {
+    buf := new(bytes.Buffer)
+    wr := ipc.NewWriter(buf, ipc.WithSchema(record.Schema()))
+    if err := wr.Write(record); err != nil {
+        return nil, fmt.Errorf("failed to write record: %w", err)
+    }
+    if err := wr.Close(); err != nil {
+        return nil, fmt.Errorf("failed to close writer: %w", err)
+    }
+    return buf, nil
+}
+
+func (r *DuckDBSQLRunner) importRecord(sr io.Reader) error {
+    rdr, err := ipc.NewReader(sr)
+    if err != nil {
+        return fmt.Errorf("failed to create IPC reader: %w", err)
+    }
+    defer rdr.Release()
+    stmt, err := r.conn.NewStatement()
+    if err != nil {
+        return fmt.Errorf("failed to create new statement: %w", err)
+    }
+    if err := stmt.SetOption(adbc.OptionKeyIngestMode, adbc.OptionValueIngestModeCreate); err != nil {
+        return fmt.Errorf("failed to set ingest mode: %w", err)
+    }
+    if err := stmt.SetOption(adbc.OptionKeyIngestTargetTable, "temp_table"); err != nil {
+        return fmt.Errorf("failed to set ingest target table: %w", err)
+    }
+    if err := stmt.BindStream(r.ctx, rdr); err != nil {
+        return fmt.Errorf("failed to bind stream: %w", err)
+    }
+    if _, err := stmt.ExecuteUpdate(r.ctx); err != nil {
+        return fmt.Errorf("failed to execute update: %w", err)
+    }
+    return stmt.Close()
+}
+
+func (r *DuckDBSQLRunner) runSQL(sql string) ([]arrow.Record, error) {
+    stmt, err := r.conn.NewStatement()
+    if err != nil {
+        return nil, fmt.Errorf("failed to create new statement: %w", err)
+    }
+    defer stmt.Close()
+
+    if err := stmt.SetSqlQuery(sql); err != nil {
+        return nil, fmt.Errorf("failed to set SQL query: %w", err)
+    }
+    out, n, err := stmt.ExecuteQuery(r.ctx)
+    if err != nil {
+        return nil, fmt.Errorf("failed to execute query: %w", err)
+    }
+    defer out.Release()
+
+    result := make([]arrow.Record, 0, n)
+    for out.Next() {
+        rec := out.Record()
+        rec.Retain() // .Next() will release the record, so we need to retain it
+        result = append(result, rec)
+    }
+    if out.Err() != nil {
+        return nil, out.Err()
+    }
+    return result, nil
+}
+
+func (r *DuckDBSQLRunner) RunSQLOnRecord(record arrow.Record, sql string) ([]arrow.Record, error) {
+    serializedRecord, err := serializeRecord(record)
+    if err != nil {
+        return nil, fmt.Errorf("failed to serialize record: %w", err)
+    }
+    if err := r.importRecord(serializedRecord); err != nil {
+        return nil, fmt.Errorf("failed to import record: %w", err)
+    }
+    result, err := r.runSQL(sql)
+    if err != nil {
+        return nil, fmt.Errorf("failed to run SQL: %w", err)
+    }
+
+    if _, err := r.runSQL("DROP TABLE temp_table"); err != nil {
+        return nil, fmt.Errorf("failed to drop temp table after running query: %w", err)
+    }
+    return result, nil
+}
+
+func (r *DuckDBSQLRunner) Close() {
+    r.conn.Close()
+    r.db.Close()
+}
+
+func main() {
+    rec := _makeSampleArrowRecord()
+    fmt.Println(rec)
+
+    runner, err := NewDuckDBSQLRunner(context.Background())
+    if err != nil {
+        panic(err)
+    }
+    defer runner.Close()
+
+    resultRecords, err := runner.RunSQLOnRecord(rec, "SELECT column1+1 FROM temp_table")
+    if err != nil {
+        panic(err)
+    }
+
+    for _, resultRecord := range resultRecords {
+        fmt.Println(resultRecord)
+        resultRecord.Release()
+    }
+}
+```
+{% endraw %}
+
+Running it produces the following output:
+
+```go
+record:
+  schema:
+  fields: 1
+    - column1: type=float64
+  rows: 3
+  col[0][column1]: [1 2 3]
+
+record:
+  schema:
+  fields: 1
+    - (column1 + 1): type=float64, nullable
+  rows: 3
+  col[0][(column1 + 1)]: [2 3 4]
 ```

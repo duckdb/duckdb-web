@@ -9,60 +9,61 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 
 ## Dot Commands
 
-<div class="narrow_table"></div>
 
 <!-- markdownlint-disable MD056 -->
 
 | Command | Description |
 |---|------|
-| `.bail on|off`           | Stop after hitting an error.  Default: `off`                                                                 |
-| `.binary on|off`         | Turn binary output on or off.  Default: `off`                                                                |
-| `.cd DIRECTORY`          | Change the working directory to `DIRECTORY`                                                                  |
-| `.changes on|off`        | Show number of rows changed by SQL                                                                           |
-| `.check GLOB`            | Fail if output since .testcase does not match                                                                |
-| `.columns`               | Column-wise rendering of query results                                                                       |
-| `.constant ?COLOR?`      | Sets the syntax highlighting color used for constant values                                                  |
-| `.constantcode ?CODE?`   | Sets the syntax highlighting terminal code used for constant values                                          |
-| `.databases`             | List names and files of attached databases                                                                   |
-| `.echo on|off`           | Turn command echo on or `off`                                                                                |
-| `.excel`                 | Display the output of next command in spreadsheet                                                            |
-| `.exit ?CODE?`           | Exit this program with return-code `CODE`                                                                    |
-| `.explain ?on|off|auto?` | Change the `EXPLAIN` formatting mode.  Default: `auto`                                                       |
-| `.fullschema ?--indent?` | Show schema and the content of `sqlite_stat` tables                                                          |
-| `.headers on|off`        | Turn display of headers on or `off`                                                                          |
-| `.help ?-all? ?PATTERN?` | Show help text for `PATTERN`                                                                                 |
-| `.highlight [on|off]`    | Toggle syntax highlighting in the shell `on`/`off`                                                           |
-| `.import FILE TABLE`     | Import data from `FILE` into `TABLE`                                                                         |
-| `.indexes ?TABLE?`       | Show names of indexes                                                                                        |
-| `.keyword ?COLOR?`       | Sets the syntax highlighting color used for keywords                                                         |
-| `.keywordcode ?CODE?`    | Sets the syntax highlighting terminal code used for keywords                                                 |
-| `.lint OPTIONS`          | Report potential schema issues.                                                                              |
-| `.log FILE|off`          | Turn logging on or off.  `FILE` can be `stderr`/`stdout`                                                     |
-| `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode](output-formats)                         |
-| `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode](output-formats)  |
-| `.mode MODE ?TABLE?`     | Set [output mode](output-formats)                                                                            |
-| `.nullvalue STRING`      | Use `STRING` in place of `NULL` values                                                                       |
-| `.once ?OPTIONS? ?FILE?` | Output for the next SQL command only to `FILE`                                                               |
-| `.open ?OPTIONS? ?FILE?` | Close existing database and reopen `FILE`                                                                    |
-| `.output ?FILE?`         | Send output to `FILE` or stdout if `FILE` is omitted                                                         |
-| `.parameter CMD ...`     | Manage SQL parameter bindings                                                                                |
-| `.print STRING...`       | Print literal `STRING`                                                                                       |
-| `.prompt MAIN CONTINUE`  | Replace the standard prompts                                                                                 |
-| `.quit`                  | Exit this program                                                                                            |
-| `.read FILE`             | Read input from `FILE`                                                                                       |
-| `.rows`                  | Row-wise rendering of query results (default)                                                                |
-| `.schema ?PATTERN?`      | Show the `CREATE` statements matching `PATTERN`                                                              |
-| `.separator COL ?ROW?`   | Change the column and row separators                                                                         |
-| `.sha3sum ...`           | Compute a SHA3 hash of database content                                                                      |
-| `.shell CMD ARGS...`     | Run `CMD ARGS...` in a system shell                                                                          |
-| `.show`                  | Show the current values for various settings                                                                 |
-| `.system CMD ARGS...`    | Run `CMD ARGS...` in a system shell                                                                          |
-| `.tables ?TABLE?`        | List names of tables [matching LIKE pattern](../../sql/functions/patternmatching) `TABLE`                    |
-| `.testcase NAME`         | Begin redirecting output to `NAME`                                                                           |
-| `.timer on|off`          | Turn SQL timer on or off                                                                                     |
-| `.width NUM1 NUM2 ...`   | Set minimum column widths for columnar output                                                                |
+| `.bail on|off`           | Stop after hitting an error. Default: `off`                                                                                            |
+| `.binary on|off`         | Turn binary output on or off. Default: `off`                                                                                           |
+| `.cd DIRECTORY`          | Change the working directory to `DIRECTORY`                                                                                            |
+| `.changes on|off`        | Show number of rows changed by SQL                                                                                                     |
+| `.check GLOB`            | Fail if output since .testcase does not match                                                                                          |
+| `.columns`               | Column-wise rendering of query results                                                                                                 |
+| `.constant ?COLOR?`      | Sets the syntax highlighting color used for constant values                                                                            |
+| `.constantcode ?CODE?`   | Sets the syntax highlighting terminal code used for constant values                                                                    |
+| `.databases`             | List names and files of attached databases                                                                                             |
+| `.echo on|off`           | Turn command echo on or `off`                                                                                                          |
+| `.excel`                 | Display the output of next command in spreadsheet                                                                                      |
+| `.exit ?CODE?`           | Exit this program with return-code `CODE`                                                                                              |
+| `.explain ?on|off|auto?` | Change the `EXPLAIN` formatting mode. Default: `auto`                                                                                  |
+| `.fullschema ?--indent?` | Show schema and the content of `sqlite_stat` tables                                                                                    |
+| `.headers on|off`        | Turn display of headers on or `off`                                                                                                    |
+| `.help ?-all? ?PATTERN?` | Show help text for `PATTERN`                                                                                                           |
+| `.highlight [on|off]`    | Toggle syntax highlighting in the shell `on`/`off`                                                                                     |
+| `.import FILE TABLE`     | Import data from `FILE` into `TABLE`                                                                                                   |
+| `.indexes ?TABLE?`       | Show names of indexes                                                                                                                  |
+| `.keyword ?COLOR?`       | Sets the syntax highlighting color used for keywords                                                                                   |
+| `.keywordcode ?CODE?`    | Sets the syntax highlighting terminal code used for keywords                                                                           |
+| `.lint OPTIONS`          | Report potential schema issues.                                                                                                        |
+| `.log FILE|off`          | Turn logging on or off. `FILE` can be `stderr`/`stdout`                                                                                |
+| `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %})                        |
+| `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %}) |
+| `.mode MODE ?TABLE?`     | Set [output mode]({% link docs/api/cli/output_formats.md %})                                                                           |
+| `.multiline`             | Set multi-line mode (default)                                                                                                          |
+| `.nullvalue STRING`      | Use `STRING` in place of `NULL` values                                                                                                 |
+| `.once ?OPTIONS? ?FILE?` | Output for the next SQL command only to `FILE`                                                                                         |
+| `.open ?OPTIONS? ?FILE?` | Close existing database and reopen `FILE`                                                                                              |
+| `.output ?FILE?`         | Send output to `FILE` or `stdout` if `FILE` is omitted                                                                                 |
+| `.parameter CMD ...`     | Manage SQL parameter bindings                                                                                                          |
+| `.print STRING...`       | Print literal `STRING`                                                                                                                 |
+| `.prompt MAIN CONTINUE`  | Replace the standard prompts                                                                                                           |
+| `.quit`                  | Exit this program                                                                                                                      |
+| `.read FILE`             | Read input from `FILE`                                                                                                                 |
+| `.rows`                  | Row-wise rendering of query results (default)                                                                                          |
+| `.schema ?PATTERN?`      | Show the `CREATE` statements matching `PATTERN`                                                                                        |
+| `.separator COL ?ROW?`   | Change the column and row separators                                                                                                   |
+| `.sha3sum ...`           | Compute a SHA3 hash of database content                                                                                                |
+| `.shell CMD ARGS...`     | Run `CMD ARGS...` in a system shell                                                                                                    |
+| `.show`                  | Show the current values for various settings                                                                                           |
+| `.singleline`            | Set single-line mode                                                                                                                   |
+| `.system CMD ARGS...`    | Run `CMD ARGS...` in a system shell                                                                                                    |
+| `.tables ?TABLE?`        | List names of tables [matching LIKE pattern]({% link docs/sql/functions/pattern_matching.md %}) `TABLE`                                |
+| `.testcase NAME`         | Begin redirecting output to `NAME`                                                                                                     |
+| `.timer on|off`          | Turn SQL timer on or off. SQL statements separated by `;` but *not* separated via newline are measured together.                       |
+| `.width NUM1 NUM2 ...`   | Set minimum column widths for columnar output                                                                                          |
 
-## Using the `.help` Commmand
+## Using the `.help` Command
 
 The `.help` text may be filtered by passing in a text string as the second argument.
 
@@ -106,7 +107,7 @@ The terminal will then display:
 | back to the terminal |
 ```
 
-A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet](../../sql/statements/copy#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
+A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet]({% link docs/sql/statements/copy.md %}#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
 
 ```sql
 .mode csv
@@ -137,8 +138,8 @@ The results then open in the default text file editor of the system, for example
 
 ## Querying the Database Schema
 
-All DuckDB clients support [querying the database schema with SQL](../../sql/information_schema), but the CLI has additional [dot commands](dot_commands) that can make it easier to understand the contents of a database.
-The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern](../../sql/functions/patternmatching#like).
+All DuckDB clients support [querying the database schema with SQL]({% link docs/sql/meta/information_schema.md %}), but the CLI has additional [dot commands]({% link docs/api/cli/dot_commands.md %}) that can make it easier to understand the contents of a database.
+The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern]({% link docs/sql/functions/pattern_matching.md %}#like).
 
 ```sql
 CREATE TABLE swimmers AS SELECT 'duck' AS animal;
@@ -151,7 +152,7 @@ CREATE TABLE walkers AS SELECT 'duck' AS animal;
 fliers    swimmers  walkers
 ```
 
-For example, to filter to only tables that contain an "l", use the `LIKE` pattern `%l%`.
+For example, to filter to only tables that contain an `l`, use the `LIKE` pattern `%l%`.
 
 ```sql
 .tables %l%
@@ -181,13 +182,13 @@ The CLI's syntax highlighter can be configured using the following commands.
 To turn off the highlighter:
 
 ```text
-.highlight on
+.highlight off
 ```
 
 To turn on the highlighter:
 
 ```text
-.highlight off
+.highlight on
 ```
 
 To configure the color used to highlight constants:
@@ -213,9 +214,9 @@ To configure the color used to highlight keywords:
 ## Importing Data from CSV
 
 > Deprecated This feature is only included for compatibility reasons and may be removed in the future.
-> Use the [`read_csv` function or the `COPY` statement](../../data/csv) to load CSV files.
+> Use the [`read_csv` function or the `COPY` statement]({% link docs/data/csv/overview.md %}) to load CSV files.
 
-DuckDB supports [SQL syntax to directly query or import CSV files](../../data/csv), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the CSV file, and the second is the name of the DuckDB table to create. Since DuckDB requires stricter typing than SQLite (upon which the DuckDB CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv` examples in the import docs](../../data/csv).
+DuckDB supports [SQL syntax to directly query or import CSV files]({% link docs/data/csv/overview.md %}), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the CSV file, and the second is the name of the DuckDB table to create. Since DuckDB requires stricter typing than SQLite (upon which the DuckDB CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv` examples in the import docs]({% link docs/data/csv/overview.md %}).
 
 In this example, a CSV file is generated by changing to CSV mode and setting an output file location:
 
@@ -227,15 +228,15 @@ SELECT 1 AS col_1, 2 AS col_2 UNION ALL SELECT 10 AS col1, 20 AS col_2;
 
 Now that the CSV has been written, a table can be created with the desired schema and the CSV can be imported. The output is reset to the terminal to avoid continuing to edit the output file specified above. The `--skip N` option is used to ignore the first row of data since it is a header row and the table has already been created with the correct column names.
 
-```sql
+```text
 .mode csv
 .output
-CREATE TABLE test_table (col_1 INT, col_2 INT);
+CREATE TABLE test_table (col_1 INTEGER, col_2 INTEGER);
 .import import_example.csv test_table --skip 1
 ```
 
 Note that the `.import` command utilizes the current `.mode` and `.separator` settings when identifying the structure of the data to import. The `--csv` option can be used to override that behavior.
 
-```sql
+```text
 .import import_example.csv test_table --skip 1 --csv
 ```

@@ -1,35 +1,66 @@
 ---
-layout: post
-title: News
-layoutpart: postsoverview
+layout: postarchive
+title: Blog
+excerpt: The blog contains use case descriptions, release announcements, benchmarks, etc. about DuckDB.
 ---
 
-<div class="post-list">
+{% assign all_tags = "" %}
 {% for post in site.posts %}
-	{% assign currentdate = post.date | date: "%Y" %}
-	{% assign random_number = forloop.index | modulo: 5 %}
-	{% if currentdate != date %}
-		{% unless forloop.first %}</section>{% endunless %}
-		<section><div class="wrap">
-			<h1 id="y{{post.date | date: '%Y'}}">{{ currentdate }}</h1>
-			<div class="newstiles">
-			{% assign date = currentdate %}
-	{% endif %}
-		<div class="postpreview" data-year="{{year}}" data-month="{{month}}">
-			{% if post.thumb %}
-			<div class="postimg custom" style="background-image: url('{{ post.thumb }}');">
-			{% else %}
-			<div class="postimg bg_{{ random_number }}">
-			{% endif %}
-				<a href="{{ post.url }}" class="blocklink"></a>
-			</div>
-			<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
-			<h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-		</div>
-	{% if forloop.last %}</div></div></section>{% endif %}
+	{% assign all_tags = all_tags | append: post.tags | join: "," | append: "," %}
 {% endfor %}
+{% assign unique_tags = all_tags | split: "," | uniq | sort %}
+
+<div class="wrap">
+	<div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
+		<input type="text" id="search-input" placeholder="Search...">
+		<div class="filtertags">
+			<div class="filter-highlight"></div>
+			<button type="button" class="filter-btn active" data-filter="*">All</button>
+			<button type="button" class="filter-btn" data-filter=".using-duckdb">Using DuckDB</button>
+			<button type="button" class="filter-btn" data-filter=".benchmark">Benchmarks</button>
+			<button type="button" class="filter-btn" data-filter=".deep-dive">Deep Dive</button>
+			<button type="button" class="filter-btn" data-filter=".extensions">Extensions</button>
+			<button type="button" class="filter-btn" data-filter=".release">Releases</button>
+		</div>
+	</div>
 </div>
 
+<div class="post-list wrap">
+	<div class="newstiles">
+		{% for post in site.posts %}
+			{% assign random_number = forloop.index | modulo: 3 | plus: 1 %} 
+			{% assign tag_classes = "" %}
+			{% for tag in post.tags %}
+				{% assign slugified_tag = tag | slugify %}
+				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
+			{% endfor %}
+			<div class="postpreview {{ tag_classes | downcase }}" data-title="{{ post.title | escape }}">
+				<a href="{{ post.url }}" title="{{ post.title }}" class="blocklink"></a>
+				<div class="postimg custom">
+					{% if post.thumb %}
+						<img src="{{ post.thumb }}" alt="{{ post.title }}" class="zoom-image">
+					{% else %}
+						<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+					{% endif %}
+				</div>
+				<div class="postdetails">
+					{% if post.tags %}
+					<div class="tags">
+						{% for tag in post.tags %}
+							<span class="tag">{{ tag }}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+					<h3>{{ post.title }}</h3>
+					<div class="meta">
+						<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
+						<div class="author">{{ post.author }}</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
 
 
 {% comment %}

@@ -6,7 +6,19 @@ github_repository: https://github.com/duckdb/duckdb-r
 
 ## Installation
 
-The DuckDB R API can be installed using `install.packages("duckdb")`. Please see the [installation page](../installation?environment=r) for details.
+### `duckdb`: R API
+
+The DuckDB R API can be installed using the following command:
+
+```r
+install.packages("duckdb")
+```
+
+Please see the [installation page]({% link docs/installation/index.html %}?environment=r) for details.
+
+### `duckplyr`: dplyr API
+
+DuckDB offers a [dplyr](https://dplyr.tidyverse.org/)-compatible API via the `duckplyr` package. It can be installed using `install.packages("duckplyr")`. For details, see the [`duckplyr` documentation](https://tidyverse.github.io/duckplyr/).
 
 ## Reference Manual
 
@@ -14,13 +26,13 @@ The reference manual for the DuckDB R API is available at [R.duckdb.org](https:/
 
 ## Basic API Usage
 
-The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.org/package=DBI) for R. If you are not familiar with DBI yet, see [here for an introduction](https://solutions.rstudio.com/db/r-packages/DBI/).
+The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.org/package=DBI) for R. If you are not familiar with DBI yet, see the [Using DBI page](https://solutions.rstudio.com/db/r-packages/DBI/) for an introduction.
 
 ### Startup & Shutdown
 
 To use DuckDB, you must first create a connection object that represents the database. The connection object takes as parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the R process). If you would like to connect to an existing database in read-only mode, set the `read_only` flag to `TRUE`. Read-only mode is required if multiple R processes want to access the same database file at the same time.
 
-```R
+```r
 library("duckdb")
 # to start an in-memory database
 con <- dbConnect(duckdb())
@@ -38,7 +50,7 @@ Connections are closed implicitly when they go out of scope or if they are expli
 
 DuckDB supports the standard DBI methods to send queries and retrieve result sets. `dbExecute()` is meant for queries where no results are expected like `CREATE TABLE` or `UPDATE` etc. and `dbGetQuery()` is meant to be used for queries that produce results (e.g., `SELECT`). Below an example.
 
-```R
+```r
 # create a table
 dbExecute(con, "CREATE TABLE items (item VARCHAR, value DECIMAL(10, 2), count INTEGER)")
 # insert two items into the table
@@ -54,7 +66,7 @@ print(res)
 
 DuckDB also supports prepared statements in the R API with the `dbExecute` and `dbGetQuery` methods. Here is an example:
 
-```R
+```r
 # prepared statement parameters are given as a list
 dbExecute(con, "INSERT INTO items VALUES (?, ?, ?)", list('laptop', 2000, 1))
 
@@ -77,7 +89,7 @@ print(res)
 
 To write a R data frame into DuckDB, use the standard DBI function `dbWriteTable()`. This creates a table in DuckDB and populates it with the data frame contents. For example:
 
-```R
+```r
 dbWriteTable(con, "iris_table", iris)
 res <- dbGetQuery(con, "SELECT * FROM iris_table LIMIT 1")
 print(res)
@@ -85,9 +97,9 @@ print(res)
 # 1          5.1         3.5          1.4         0.2  setosa
 ```
 
-It is also possible to "register" a R data frame as a virtual table, comparable to a SQL `VIEW`. This *does not actually transfer data* into DuckDB yet. Below is an example:
+It is also possible to “register” a R data frame as a virtual table, comparable to a SQL `VIEW`. This *does not actually transfer data* into DuckDB yet. Below is an example:
 
-```R
+```r
 duckdb_register(con, "iris_view", iris)
 res <- dbGetQuery(con, "SELECT * FROM iris_view LIMIT 1")
 print(res)
@@ -97,13 +109,13 @@ print(res)
 
 > DuckDB keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `duckdb_unregister()` method.
 
-Also refer to [the data import documentation](../data/overview) for more options of efficiently importing data.
+Also refer to the [data import documentation]({% link docs/data/overview.md %}) for more options of efficiently importing data.
 
 ## dbplyr
 
 DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Here is an example:
 
-```R
+```r
 library("duckdb")
 library("dplyr")
 con <- dbConnect(duckdb())
@@ -117,7 +129,7 @@ tbl(con, "flights") |>
 
 When using dbplyr, CSV and Parquet files can be read using the `dplyr::tbl` function.
 
-```R
+```r
 # Establish a CSV for the sake of this example
 write.csv(mtcars, "mtcars.csv")
 
@@ -128,7 +140,7 @@ tbl(con, "mtcars.csv") |>
   collect()
 ```
 
-```R
+```r
 # Establish a set of Parquet files
 dbExecute(con, "COPY flights TO 'dataset' (FORMAT PARQUET, PARTITION_BY (year, month))")
 
@@ -141,7 +153,7 @@ tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning = true)") |>
 
 ## Memory Limit
 
-You can use the [`memory_limit` configuration option](../configuration/pragmas) to limit the memory use of DuckDB, e.g.:
+You can use the [`memory_limit` configuration option]({% link docs/configuration/pragmas.md %}) to limit the memory use of DuckDB, e.g.:
 
 ```sql
 SET memory_limit = '2GB';
@@ -149,3 +161,27 @@ SET memory_limit = '2GB';
 
 Note that this limit is only applied to the memory DuckDB uses and it does not affect the memory use of other R libraries.
 Therefore, the total memory used by the R process may be higher than the configured `memory_limit`.
+
+## Troubleshooting
+
+### Warning When Installing on macOS
+
+On macOS, installing DuckDB may result in a warning `unable to load shared object '.../R_X11.so'`:
+
+```console
+Warning message:
+In doTryCatch(return(expr), name, parentenv, handler) :
+  unable to load shared object '/Library/Frameworks/R.framework/Resources/modules//R_X11.so':
+  dlopen(/Library/Frameworks/R.framework/Resources/modules//R_X11.so, 0x0006): Library not loaded: /opt/X11/lib/libSM.6.dylib
+  Referenced from: <31EADEB5-0A17-3546-9944-9B3747071FE8> /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/modules/R_X11.so
+  Reason: tried: '/opt/X11/lib/libSM.6.dylib' (no such file) ...
+> ')
+```
+
+Note that this is just a warning, so the simplest solution is to ignore it. Alternatively, you can install DuckDB from the [R-universe](https://r-universe.dev/search):
+
+```R
+install.packages("duckdb", repos = c("https://duckdb.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+You may also install the optional [`xquartz` dependency via Homebrew](https://formulae.brew.sh/cask/xquartz).

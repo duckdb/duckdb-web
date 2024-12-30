@@ -1,13 +1,16 @@
 ---
 layout: docu
 title: Numeric Functions
+redirect_from:
+  - docs/test/functions/math
 ---
+
+<!-- markdownlint-disable MD001 -->
 
 ## Numeric Operators
 
-The table below shows the available mathematical operators for numeric types.
+The table below shows the available mathematical operators for [numeric types]({% link docs/sql/data_types/numeric.md %}).
 
-<div class="narrow_table"></div>
 
 <!-- markdownlint-disable MD056 -->
 
@@ -89,9 +92,9 @@ The table below shows the available mathematical functions.
 | [`pow(x, y)`](#powx-y) | Computes `x` to the power of `y`. |
 | [`power(x, y)`](#powerx-y) | Alias of `pow`. computes `x` to the power of `y`. |
 | [`radians(x)`](#radiansx) | Converts degrees to radians. |
-| [`random()`](#random) | Returns a random number between 0 and 1. |
-| [`round_even(v NUMERIC, s INT)`](#round_evenv-numeric-s-int) | Alias of `roundbankers(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
-| [`round(v NUMERIC, s INT)`](#roundv-numeric-s-int) | Round to `s` decimal places. Values `s < 0` are allowed. |
+| [`random()`](#random) | Returns a random number `x` in the range `0.0 <= x < 1.0`. |
+| [`round_even(v NUMERIC, s INTEGER)`](#round_evenv-numeric-s-integer) | Alias of `roundbankers(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
+| [`round(v NUMERIC, s INTEGER)`](#roundv-numeric-s-integer) | Round to `s` decimal places. Values `s < 0` are allowed. |
 | [`setseed(x)`](#setseedx) | Sets the seed to be used for the random function. |
 | [`sign(x)`](#signx) | Returns the sign of `x` as -1, 0 or 1. |
 | [`signbit(x)`](#signbitx) | Returns whether the signbit is set or not. |
@@ -100,9 +103,9 @@ The table below shows the available mathematical functions.
 | [`subtract(x, y)`](#subtractx-y) | Alias for `x - y`. |
 | [`tan(x)`](#tanx) | Computes the tangent of `x`. |
 | [`trunc(x)`](#truncx) | Truncates the number. |
-| [`xor(x)`](#xorx) | Bitwise XOR. |
+| [`xor(x, y)`](#xorx-y) | Bitwise XOR. |
 
-### `@(x)`
+#### `@(x)`
 
 <div class="nostroke_table"></div>
 
@@ -111,7 +114,7 @@ The table below shows the available mathematical functions.
 | **Result** | `17.4` |
 | **Alias** | `abs` |
 
-### `abs(x)`
+#### `abs(x)`
 
 <div class="nostroke_table"></div>
 
@@ -120,7 +123,7 @@ The table below shows the available mathematical functions.
 | **Result** | `17.4` |
 | **Alias** | `@` |
 
-### `acos(x)`
+#### `acos(x)`
 
 <div class="nostroke_table"></div>
 
@@ -128,7 +131,7 @@ The table below shows the available mathematical functions.
 | **Example** | `acos(0.5)` |
 | **Result** | `1.0471975511965976` |
 
-### `add(x, y)`
+#### `add(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -136,7 +139,7 @@ The table below shows the available mathematical functions.
 | **Example** | `add(2, 3)` |
 | **Result** | `5` |
 
-### `asin(x)`
+#### `asin(x)`
 
 <div class="nostroke_table"></div>
 
@@ -144,7 +147,7 @@ The table below shows the available mathematical functions.
 | **Example** | `asin(0.5)` |
 | **Result** | `0.5235987755982989` |
 
-### `atan(x)`
+#### `atan(x)`
 
 <div class="nostroke_table"></div>
 
@@ -152,7 +155,7 @@ The table below shows the available mathematical functions.
 | **Example** | `atan(0.5)` |
 | **Result** | `0.4636476090008061` |
 
-### `atan2(y, x)`
+#### `atan2(y, x)`
 
 <div class="nostroke_table"></div>
 
@@ -160,7 +163,7 @@ The table below shows the available mathematical functions.
 | **Example** | `atan2(0.5, 0.5)` |
 | **Result** | `0.7853981633974483` |
 
-### `bit_count(x)`
+#### `bit_count(x)`
 
 <div class="nostroke_table"></div>
 
@@ -168,7 +171,7 @@ The table below shows the available mathematical functions.
 | **Example** | `bit_count(31)` |
 | **Result** | `5` |
 
-### `cbrt(x)`
+#### `cbrt(x)`
 
 <div class="nostroke_table"></div>
 
@@ -176,7 +179,7 @@ The table below shows the available mathematical functions.
 | **Example** | `cbrt(8)` |
 | **Result** | `2` |
 
-### `ceil(x)`
+#### `ceil(x)`
 
 <div class="nostroke_table"></div>
 
@@ -184,7 +187,7 @@ The table below shows the available mathematical functions.
 | **Example** | `ceil(17.4)` |
 | **Result** | `18` |
 
-### `ceiling(x)`
+#### `ceiling(x)`
 
 <div class="nostroke_table"></div>
 
@@ -192,7 +195,7 @@ The table below shows the available mathematical functions.
 | **Example** | `ceiling(17.4)` |
 | **Result** | `18` |
 
-### `cos(x)`
+#### `cos(x)`
 
 <div class="nostroke_table"></div>
 
@@ -200,7 +203,7 @@ The table below shows the available mathematical functions.
 | **Example** | `cos(90)` |
 | **Result** | `-0.4480736161291701` |
 
-### `cot(x)`
+#### `cot(x)`
 
 <div class="nostroke_table"></div>
 
@@ -208,7 +211,7 @@ The table below shows the available mathematical functions.
 | **Example** | `cot(0.5)` |
 | **Result** | `1.830487721712452` |
 
-### `degrees(x)`
+#### `degrees(x)`
 
 <div class="nostroke_table"></div>
 
@@ -216,7 +219,7 @@ The table below shows the available mathematical functions.
 | **Example** | `degrees(pi())` |
 | **Result** | `180` |
 
-### `divide(x, y)`
+#### `divide(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -224,7 +227,7 @@ The table below shows the available mathematical functions.
 | **Example** | `divide(5, 2)` |
 | **Result** | `2` |
 
-### `even(x)`
+#### `even(x)`
 
 <div class="nostroke_table"></div>
 
@@ -232,7 +235,7 @@ The table below shows the available mathematical functions.
 | **Example** | `even(2.9)` |
 | **Result** | `4` |
 
-### `exp(x)`
+#### `exp(x)`
 
 <div class="nostroke_table"></div>
 
@@ -240,7 +243,7 @@ The table below shows the available mathematical functions.
 | **Example** | `exp(0.693)` |
 | **Result** | `2` |
 
-### `factorial(x)`
+#### `factorial(x)`
 
 <div class="nostroke_table"></div>
 
@@ -248,7 +251,7 @@ The table below shows the available mathematical functions.
 | **Example** | `factorial(4)` |
 | **Result** | `24` |
 
-### `fdiv(x, y)`
+#### `fdiv(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -256,7 +259,7 @@ The table below shows the available mathematical functions.
 | **Example** | `fdiv(5, 2)` |
 | **Result** | `2.0` |
 
-### `floor(x)`
+#### `floor(x)`
 
 <div class="nostroke_table"></div>
 
@@ -264,7 +267,7 @@ The table below shows the available mathematical functions.
 | **Example** | `floor(17.4)` |
 | **Result** | `17` |
 
-### `fmod(x, y)`
+#### `fmod(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -272,7 +275,7 @@ The table below shows the available mathematical functions.
 | **Example** | `fmod(5, 2)` |
 | **Result** | `1.0` |
 
-### `gamma(x)`
+#### `gamma(x)`
 
 <div class="nostroke_table"></div>
 
@@ -280,7 +283,7 @@ The table below shows the available mathematical functions.
 | **Example** | `gamma(5.5)` |
 | **Result** | `52.34277778455352` |
 
-### `gcd(x, y)`
+#### `gcd(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -288,7 +291,7 @@ The table below shows the available mathematical functions.
 | **Example** | `gcd(42, 57)` |
 | **Result** | `3` |
 
-### `greatest_common_divisor(x, y)`
+#### `greatest_common_divisor(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -296,7 +299,7 @@ The table below shows the available mathematical functions.
 | **Example** | `greatest_common_divisor(42, 57)` |
 | **Result** | `3` |
 
-### `greatest(x1, x2, ...)`
+#### `greatest(x1, x2, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -304,7 +307,7 @@ The table below shows the available mathematical functions.
 | **Example** | `greatest(3, 2, 4, 4)` |
 | **Result** | `4` |
 
-### `isfinite(x)`
+#### `isfinite(x)`
 
 <div class="nostroke_table"></div>
 
@@ -312,7 +315,7 @@ The table below shows the available mathematical functions.
 | **Example** | `isfinite(5.5)` |
 | **Result** | `true` |
 
-### `isinf(x)`
+#### `isinf(x)`
 
 <div class="nostroke_table"></div>
 
@@ -320,7 +323,7 @@ The table below shows the available mathematical functions.
 | **Example** | `isinf('Infinity'::float)` |
 | **Result** | `true` |
 
-### `isnan(x)`
+#### `isnan(x)`
 
 <div class="nostroke_table"></div>
 
@@ -328,7 +331,7 @@ The table below shows the available mathematical functions.
 | **Example** | `isnan('NaN'::float)` |
 | **Result** | `true` |
 
-### `lcm(x, y)`
+#### `lcm(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -336,7 +339,7 @@ The table below shows the available mathematical functions.
 | **Example** | `lcm(42, 57)` |
 | **Result** | `798` |
 
-### `least_common_multiple(x, y)`
+#### `least_common_multiple(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -344,7 +347,7 @@ The table below shows the available mathematical functions.
 | **Example** | `least_common_multiple(42, 57)` |
 | **Result** | `798` |
 
-### `least(x1, x2, ...)`
+#### `least(x1, x2, ...)`
 
 <div class="nostroke_table"></div>
 
@@ -352,7 +355,7 @@ The table below shows the available mathematical functions.
 | **Example** | `least(3, 2, 4, 4)` |
 | **Result** | `2` |
 
-### `lgamma(x)`
+#### `lgamma(x)`
 
 <div class="nostroke_table"></div>
 
@@ -360,7 +363,7 @@ The table below shows the available mathematical functions.
 | **Example** | `lgamma(2)` |
 | **Result** | `0` |
 
-### `ln(x)`
+#### `ln(x)`
 
 <div class="nostroke_table"></div>
 
@@ -368,7 +371,7 @@ The table below shows the available mathematical functions.
 | **Example** | `ln(2)` |
 | **Result** | `0.693` |
 
-### `log(x)`
+#### `log(x)`
 
 <div class="nostroke_table"></div>
 
@@ -376,7 +379,7 @@ The table below shows the available mathematical functions.
 | **Example** | `log(100)` |
 | **Result** | `2` |
 
-### `log10(x)`
+#### `log10(x)`
 
 <div class="nostroke_table"></div>
 
@@ -384,7 +387,7 @@ The table below shows the available mathematical functions.
 | **Example** | `log10(1000)` |
 | **Result** | `3` |
 
-### `log2(x)`
+#### `log2(x)`
 
 <div class="nostroke_table"></div>
 
@@ -392,7 +395,7 @@ The table below shows the available mathematical functions.
 | **Example** | `log2(8)` |
 | **Result** | `3` |
 
-### `multiply(x, y)`
+#### `multiply(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -400,7 +403,7 @@ The table below shows the available mathematical functions.
 | **Example** | `multiply(2, 3)` |
 | **Result** | `6` |
 
-### `nextafter(x, y)`
+#### `nextafter(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -408,7 +411,7 @@ The table below shows the available mathematical functions.
 | **Example** | `nextafter(1::float, 2::float)` |
 | **Result** | `1.0000001` |
 
-### `pi()`
+#### `pi()`
 
 <div class="nostroke_table"></div>
 
@@ -416,7 +419,7 @@ The table below shows the available mathematical functions.
 | **Example** | `pi()` |
 | **Result** | `3.141592653589793` |
 
-### `pow(x, y)`
+#### `pow(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -424,7 +427,7 @@ The table below shows the available mathematical functions.
 | **Example** | `pow(2, 3)` |
 | **Result** | `8` |
 
-### `power(x, y)`
+#### `power(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -432,7 +435,7 @@ The table below shows the available mathematical functions.
 | **Example** | `power(2, 3)` |
 | **Result** | `8` |
 
-### `radians(x)`
+#### `radians(x)`
 
 <div class="nostroke_table"></div>
 
@@ -440,15 +443,15 @@ The table below shows the available mathematical functions.
 | **Example** | `radians(90)` |
 | **Result** | `1.5707963267948966` |
 
-### `random()`
+#### `random()`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a random number between 0 and 1. |
+| **Description** | Returns a random number `x` in the range `0.0 <= x < 1.0`. |
 | **Example** | `random()` |
 | **Result** | various |
 
-### `round_even(v NUMERIC, s INT)`
+#### `round_even(v NUMERIC, s INTEGER)`
 
 <div class="nostroke_table"></div>
 
@@ -456,7 +459,7 @@ The table below shows the available mathematical functions.
 | **Example** | `round_even(24.5, 0)` |
 | **Result** | `24.0` |
 
-### `round(v NUMERIC, s INT)`
+#### `round(v NUMERIC, s INTEGER)`
 
 <div class="nostroke_table"></div>
 
@@ -464,14 +467,14 @@ The table below shows the available mathematical functions.
 | **Example** | `round(42.4332, 2)` |
 | **Result** | `42.43` |
 
-### `setseed(x)`
+#### `setseed(x)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Sets the seed to be used for the random function. |
 | **Example** | `setseed(0.42)` |
 
-### `sign(x)`
+#### `sign(x)`
 
 <div class="nostroke_table"></div>
 
@@ -479,15 +482,15 @@ The table below shows the available mathematical functions.
 | **Example** | `sign(-349)` |
 | **Result** | `-1` |
 
-### `signbit(x)`
+#### `signbit(x)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Returns whether the signbit is set or not. |
-| **Example** | `signbit(-0.0)` |
+| **Example** | `signbit(-1.0)` |
 | **Result** | `true` |
 
-### `sin(x)`
+#### `sin(x)`
 
 <div class="nostroke_table"></div>
 
@@ -495,7 +498,7 @@ The table below shows the available mathematical functions.
 | **Example** | `sin(90)` |
 | **Result** | `0.8939966636005579` |
 
-### `sqrt(x)`
+#### `sqrt(x)`
 
 <div class="nostroke_table"></div>
 
@@ -503,7 +506,7 @@ The table below shows the available mathematical functions.
 | **Example** | `sqrt(9)` |
 | **Result** | `3` |
 
-### `subtract(x, y)`
+#### `subtract(x, y)`
 
 <div class="nostroke_table"></div>
 
@@ -511,7 +514,7 @@ The table below shows the available mathematical functions.
 | **Example** | `subtract(2, 3)` |
 | **Result** | `-1` |
 
-### `tan(x)`
+#### `tan(x)`
 
 <div class="nostroke_table"></div>
 
@@ -519,7 +522,7 @@ The table below shows the available mathematical functions.
 | **Example** | `tan(90)` |
 | **Result** | `-1.995200412208242` |
 
-### `trunc(x)`
+#### `trunc(x)`
 
 <div class="nostroke_table"></div>
 
@@ -527,7 +530,7 @@ The table below shows the available mathematical functions.
 | **Example** | `trunc(17.4)` |
 | **Result** | `17` |
 
-### `xor(x)`
+#### `xor(x, y)`
 
 <div class="nostroke_table"></div>
 

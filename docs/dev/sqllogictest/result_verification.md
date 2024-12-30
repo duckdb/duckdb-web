@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: sqllogictest - Result Verification
+title: Result Verification
 redirect_from:
   - /dev/sqllogictest/result_verification
 ---
@@ -17,7 +17,7 @@ SELECT 42, 84 UNION ALL SELECT 10, 20;
 
 For legacy reasons the letters `R` and `T` are also accepted to denote columns.
 
-> Deprecated DuckDB deprecated the usage of types in the SQLLogicTest. The DuckDB test runner does not use or need them internally – therefore, only `I` should be used to denote columns.
+> Deprecated DuckDB deprecated the usage of types in the sqllogictest. The DuckDB test runner does not use or need them internally – therefore, only `I` should be used to denote columns.
 
 ## NULL Values and Empty Strings
 
@@ -33,7 +33,7 @@ NULL
 
 ## Error Verification
 
-In order to signify that an error is expected, the `statement error` indicator can be used. The `statement error` also takes an optional expected result - which is interpreted as the *expected error message*. Similar to `query`, the expected error should be placed after the four dashes (`----`) following the query. The test passes if the error message *contains* the text under `statement error` - the entire error message does not need to be provided. It is recommended that you only use a subset of the error message, so that the test does not break unnecessarily if the formatting of error messages is changed.
+In order to signify that an error is expected, the `statement error` indicator can be used. The `statement error` also takes an optional expected result – which is interpreted as the *expected error message*. Similar to `query`, the expected error should be placed after the four dashes (`----`) following the query. The test passes if the error message *contains* the text under `statement error` – the entire error message does not need to be provided. It is recommended that you only use a subset of the error message, so that the test does not break unnecessarily if the formatting of error messages is changed.
 
 ```sql
 statement error
@@ -48,7 +48,7 @@ In certain cases result values might be very large or complex, and we might only
 
 ```sql
 query II
-EXPLAIN SELECT tbl.a FROM "data/parquet-testing/arrow/alltypes_plain.parquet" tbl(a) WHERE a=1 OR a=2
+EXPLAIN SELECT tbl.a FROM "data/parquet-testing/arrow/alltypes_plain.parquet" tbl(a) WHERE a = 1 OR a = 2
 ----
 physical_plan	<REGEX>:.*PARQUET_SCAN.*Filters: a=1 OR a=2.*
 ```

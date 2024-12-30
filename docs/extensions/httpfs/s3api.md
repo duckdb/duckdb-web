@@ -3,7 +3,7 @@ layout: docu
 title: S3 API Support
 ---
 
-The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
+The `httpfs` extension supports reading/writing/[globbing](#globbing) files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
 
 ## Platforms
 
@@ -11,7 +11,6 @@ The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Mi
 
 The following table shows which parts of the S3 API are required for each `httpfs` feature.
 
-<div class="narrow_table"></div>
 
 | Feature | Required S3 API features |
 |:---|:---|
@@ -22,10 +21,9 @@ The following table shows which parts of the S3 API are required for each `httpf
 
 ## Configuration and Authentication
 
-The preferred way to configure and authenticate to S3 endpoints is to use [secrets](../../sql/statements/create_secret). Multiple secret providers are available.
+The preferred way to configure and authenticate to S3 endpoints is to use [secrets]({% link docs/sql/statements/create_secret.md %}). Multiple secret providers are available.
 
-> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager](../../sql/statements/create_secret). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API](s3api-legacy-authentication).
-
+> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/sql/statements/create_secret.md %}). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API]({% link docs/extensions/httpfs/s3api_legacy_authentication.md %}).
 
 ### `CONFIG` Provider
 
@@ -62,7 +60,7 @@ CREATE SECRET secret2 (
 
 Again, to query a file using the above secret, simply query any `s3://` prefixed file.
 
-DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a `;` separated list of providers that will be tried in order. For example:
+DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a semicolon-separated list (`a;b;c`) of providers that will be tried in order. For example:
 
 ```sql
 CREATE SECRET secret3 (
@@ -72,7 +70,7 @@ CREATE SECRET secret3 (
 );
 ```
 
-The possible values for CHAIN are the following:
+The possible values for `CHAIN` are the following:
 
 * [`config`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_profile_config_file_a_w_s_credentials_provider.html)
 * [`sts`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_s_t_s_assume_role_web_identity_credentials_provider.html)
@@ -80,13 +78,12 @@ The possible values for CHAIN are the following:
 * [`env`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_environment_a_w_s_credentials_provider.html)
 * [`instance`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_instance_profile_credentials_provider.html)
 * [`process`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_process_credentials_provider.html)
-* [`task_role`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/namespace_aws_1_1_auth.html#a9515ae0d50cc264d79bd772e9b84bb09)
 
 The `CREDENTIAL_CHAIN` provider also allows overriding the automatically fetched config. For example, to automatically load credentials, and then override the region, run:
 
 ```sql
 CREATE SECRET secret4 (
-    TYPE AZURE,
+    TYPE S3,
     PROVIDER CREDENTIAL_CHAIN,
     CHAIN 'config',
     REGION 'eu-west-1'
@@ -95,7 +92,7 @@ CREATE SECRET secret4 (
 
 ### Overview of S3 Secret Parameters
 
-Below is a complete list of the supported parameters that can be used for both the `CONFIG` and `CREDENTIAL_CHAIN` providers: 
+Below is a complete list of the supported parameters that can be used for both the `CONFIG` and `CREDENTIAL_CHAIN` providers:
 
 | Name                          | Description                                                                           | Secret            | Type      | Default                                     |
 |:------------------------------|:--------------------------------------------------------------------------------------|:------------------|:----------|:--------------------------------------------|
@@ -106,9 +103,8 @@ Below is a complete list of the supported parameters that can be used for both t
 | `ENDPOINT`                    | Specify a custom S3 endpoint                                                          | `S3`, `GCS`, `R2` | `STRING`  | `s3.amazonaws.com` for `S3`,                |
 | `URL_STYLE`                   | Either `vhost` or `path`                                                              | `S3`, `GCS`, `R2` | `STRING`  | `vhost` for `S3`, `path` for `R2` and `GCS` |
 | `USE_SSL`                     | Whether to use HTTPS or HTTP                                                          | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
-| `URL_COMPATIBILITY_MODE`      | Can help when urls contain problematic characters.                                    | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
-| `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint url                              | `R2`              | `STRING`  | -                                           |
-
+| `URL_COMPATIBILITY_MODE`      | Can help when URLs contain problematic characters                                     | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
+| `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint URL                              | `R2`              | `STRING`  | -                                           |
 
 ### Platform-Specific Secret Types
 
@@ -125,7 +121,7 @@ CREATE SECRET secret5 (
 );
 ```
 
-Note the addition of the `ACCOUNT_ID` which is used to generate to correct endpoint url for you. Also note that for `R2` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `R2` secrets are only available when using urls starting with `r2://`, for example:
+Note the addition of the `ACCOUNT_ID` which is used to generate to correct endpoint URL for you. Also note that for `R2` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `R2` secrets are only available when using URLs starting with `r2://`, for example:
 
 ```sql
 SELECT *
@@ -144,7 +140,7 @@ CREATE SECRET secret6 (
 );
 ```
 
-Note that the above secret, will automatically have the correct Google Cloud Storage endpoint configured. Also note that for `GCS` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `GCS` secrets are only available when using urls starting with `gcs://` or `gs://`, for example:
+Note that the above secret, will automatically have the correct Google Cloud Storage endpoint configured. Also note that for `GCS` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `GCS` secrets are only available when using URLs starting with `gcs://` or `gs://`, for example:
 
 ```sql
 SELECT *
@@ -160,6 +156,12 @@ SELECT *
 FROM 's3://bucket/file.extension';
 ```
 
+### Partial Reading
+
+The `httpfs` extension supports [partial reading]({% link docs/extensions/httpfs/https.md %}#partial-reading) from S3 buckets.
+
+### Reading Multiple Files
+
 Multiple files are also possible, for example:
 
 ```sql
@@ -170,16 +172,16 @@ FROM read_parquet([
 ]);
 ```
 
-### Glob
+### Globbing
 
-File globbing is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
+File [globbing]({% link docs/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
 
 ```sql
 SELECT *
 FROM read_parquet('s3://bucket/*.parquet');
 ```
 
-This query matches all files in the root of the bucket with the [Parquet extension](../parquet).
+This query matches all files in the root of the bucket with the [Parquet extension]({% link docs/data/parquet/overview.md %}).
 
 Several features for matching are supported, such as `*` to match any number of any character, `?` for any single character or `[0-9]` for a single character in a range of characters:
 
@@ -196,7 +198,6 @@ FROM read_parquet('s3://bucket/*.parquet', filename = true);
 
 could for example result in:
 
-<div class="narrow_table"></div>
 
 | column_a | column_b | filename |
 |:---|:---|:---|
@@ -205,7 +206,7 @@ could for example result in:
 
 ### Hive Partitioning
 
-DuckDB also offers support for the [Hive partitioning scheme](../../data/partitioning/hive_partitioning), which is available when using HTTP(S) and S3 endpoints.
+DuckDB also offers support for the [Hive partitioning scheme]({% link docs/data/partitioning/hive_partitioning.md %}), which is available when using HTTP(S) and S3 endpoints.
 
 ## Writing
 
@@ -244,9 +245,8 @@ s3://my-bucket/partitioned/part_col_a=⟨val⟩/part_col_b=⟨val⟩/data_⟨thr
 
 Some additional configuration options exist for the S3 upload, though the default values should suffice for most use cases.
 
-<div class="narrow_table"></div>
 
-| Name | Description |  
+| Name | Description |
 |:---|:---|
 | `s3_uploader_max_parts_per_file` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
 | `s3_uploader_max_filesize` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |

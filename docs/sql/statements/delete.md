@@ -8,13 +8,21 @@ The `DELETE` statement removes rows from the table identified by the table-name.
 
 ## Examples
 
+Remove the rows matching the condition `i = 2` from the database:
+
 ```sql
--- remove the rows matching the condition "i = 2" from the database
 DELETE FROM tbl WHERE i = 2;
--- delete all rows in the table "tbl"
+```
+
+Delete all rows in the table `tbl`:
+
+```sql
 DELETE FROM tbl;
--- the TRUNCATE statement removes all rows from a table,
--- acting as an alias for DELETE FROM without a WHERE clause
+```
+
+The `TRUNCATE` statement removes all rows from a table, acting as an alias for `DELETE FROM` without a `WHERE` clause:
+
+```sql
 TRUNCATE tbl;
 ```
 
@@ -30,4 +38,4 @@ The `USING` clause allows deleting based on the content of other tables or subqu
 
 ## Limitations on Reclaiming Memory and Disk Space
 
-Running `DELETE` does not mean space is reclaimed. In general, rows are only marked as deleted. DuckDB reclaims space upon [performing a `CHECKPOINT`](checkpoint). [`VACUUM`](vacuum) currently does not reclaim space.
+Running `DELETE` does not mean space is reclaimed. In general, rows are only marked as deleted. DuckDB reclaims space upon [performing a `CHECKPOINT`]({% link docs/sql/statements/checkpoint.md %}). [`VACUUM`]({% link docs/sql/statements/vacuum.md %}) currently does not reclaim space.

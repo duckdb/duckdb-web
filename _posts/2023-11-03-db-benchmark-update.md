@@ -1,20 +1,22 @@
 ---
 layout: post
-title:  "Updates to the H2O.ai db-benchmark!"
+title: "Updates to the H2O.ai db-benchmark!"
 author: Tom Ebergen
-thumb: "/images/blog/thumbs/231103.png"
+thumb: "/images/blog/thumbs/h20-db-benchmark.svg"
+image: "/images/blog/thumbs/h20-db-benchmark.png"
 excerpt: The H2O.ai db-benchmark has been updated with new results. In addition, the AWS EC2 instance used for benchmarking has been changed to a c6id.metal for improved repeatability and fairness across libraries. DuckDB is the fastest library for both join and group by queries at almost every data size.
+tags: ["benchmark"]
 ---
 
 [Skip directly to the results](#results)
 
 ## The Benchmark Has Been Updated!
 
-In April, DuckDB Labs published a [blog post reporting updated H2O.ai db-benchmark results](https://duckdb.org/2023/04/14/h2oai.html). Since then, the results haven't been updated. The original plan was to update the results with every DuckDB release. DuckDB 0.9.1 was recently released, and DuckDB Labs has updated the benchmark. While updating the benchmark, however, we noticed that our initial setup did not lend itself to being fair to all solutions. The machine used had network storage and could suffer from noisy neighbors. To avoid these issues, the whole benchmark was re-run on a c6id.metal machine.
+In April, DuckDB Labs published a [blog post reporting updated H2O.ai db-benchmark results]({% post_url 2023-04-14-h2oai %}). Since then, the results haven't been updated. The original plan was to update the results with every DuckDB release. DuckDB 0.9.1 was recently released, and DuckDB Labs has updated the benchmark. While updating the benchmark, however, we noticed that our initial setup did not lend itself to being fair to all solutions. The machine used had network storage and could suffer from noisy neighbors. To avoid these issues, the whole benchmark was re-run on a c6id.metal machine.
 
 ## New Benchmark Environment: c6id.metal Instance
 
-Initially, updating the results to the benchmark showed strange results. Even using the same library versions from the prior update, some solutions regressed and others improved. We believe this variance came from the AWS EC2 instance we chose: an m4.10xlarge. The m4.10xlarge has 40 virtual CPUs and EBS storage. EBS storage is highly available network block storage for EC2 instances. When running compute-heavy benchmarks, a machine like the m4.10xlarge can suffer from the following issues: 
+Initially, updating the results to the benchmark showed strange results. Even using the same library versions from the prior update, some solutions regressed and others improved. We believe this variance came from the AWS EC2 instance we chose: an m4.10xlarge. The m4.10xlarge has 40 virtual CPUs and EBS storage. EBS storage is highly available network block storage for EC2 instances. When running compute-heavy benchmarks, a machine like the m4.10xlarge can suffer from the following issues:
 
 * **Network storage** is an issue for benchmarking solutions that interact with storage frequently. For the 500MB and 5GB workloads, network storage was not an issue on the m4.10xlarge since all solutions could execute the queries in memory. For the 50GB workload, however, network storage was an issue for the solutions that could not execute queries in memory. While the m4.10xlarge has dedicated EBS bandwidth, any read/write from storage is still happening over the network, which is usually slower than physically mounted storage. Solutions that frequently read and write to storage for the 50GB queries end up doing this over the network. This network time becomes a chunk of the execution time of the query. If the network has variable performance, the query performance is then also variable.
 
@@ -33,16 +35,15 @@ Moving forward we will update the benchmark when PRs with new performance number
 ### Updated Settings
 
 1. ClickHouse
-	* Storage: Any data this gets spilled to disk also needs to be on the NVMe drive. This has been changed in the new `format_and_mount.sh` script and the `clickhouse/clickhouse-mount-config.xml` file.
+    * Storage: Any data this gets spilled to disk also needs to be on the NVMe drive. This has been changed in the new `format_and_mount.sh` script and the `clickhouse/clickhouse-mount-config.xml` file.
 2. Julia (juliadf & juliads)
-	* Threads: The threads were hardcoded for juliadf/juliads to 20/40 threads. Now the max number of threads are used. No option was given to spill to disk, so this was not changed/researched.
+    * Threads: The threads were hardcoded for juliadf/juliads to 20/40 threads. Now the max number of threads are used. No option was given to spill to disk, so this was not changed/researched.
 3. DuckDB
-	* Storage: The DuckDB database file was specified to run on the NVMe mount.
+    * Storage: The DuckDB database file was specified to run on the NVMe mount.
 4. Spark
-	* Storage: There is an option to spill to disk. I was unsure of how to modify the storage location so that it was on the NVMe drive. Open to a PR with storage location changes and improved results!
+    * Storage: There is an option to spill to disk. I was unsure of how to modify the storage location so that it was on the NVMe drive. Open to a PR with storage location changes and improved results!
 
 Many solutions do not spill to disk, so they did not require any modification to use the instance storage. Other solutions use `parallel::ncores()` or default to a maximum number of cores for parallelism. Solution scripts were run in their current form on [github.com/duckdblabs/db-benchmark](https://github.com/duckdblabs/db-benchmark). Please read the [Updating the Benchmark](https://github.com/duckdblabs/db-benchmark#updating-the-benchmark) section on how to re-run your solution.
-
 
 ### Results
 

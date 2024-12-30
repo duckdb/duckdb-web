@@ -142,7 +142,6 @@ Compute relationships and spatial predicates between geometries.
 
 ## Spatial Aggregate Functions
 
-<div class="narrow_table"></div>
 
 | Aggregate functions                       | Implemented with |
 |-------------------------------------------|------------------|

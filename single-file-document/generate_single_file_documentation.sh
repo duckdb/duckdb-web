@@ -5,14 +5,14 @@ set -xeuo pipefail
 # navigate to the directory of the script
 cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-python3 concatenate_to_single_file.py
+python concatenate_to_single_file.py
 rm -f duckdb-docs.pdf
 
 if [ $# -ge 1 ] && [ $1 == "--docker" ]; then
     docker run \
         --volume "$(pwd)/..:/data" \
         --workdir /data/single-file-document \
-        pandoc/extra \
+        pandoc/extra:3.1.13 \
         --defaults pandoc-configuration.yaml
 else
     pandoc --defaults pandoc-configuration.yaml

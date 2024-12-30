@@ -15,20 +15,37 @@ For ideal performance, aggregation-heavy workloads require approx. 5 GB memory p
 
 > Bestpractice Aim for 5-10 GB memory per thread.
 
-> Tip If you have a limited amount of memory, try to [limit the number of threads](../../configuration/pragmas#threads), e.g., by issuing `SET threads = 4;`.
+> Tip If you have a limited amount of memory, try to [limit the number of threads]({% link docs/configuration/pragmas.md %}#threads), e.g., by issuing `SET threads = 4;`.
 
 ### Disk
 
-DuckDB is capable of operating both as an in-memory and as a disk-based database system. In the latter case, it can spill to disk to process larger-than-memory workloads (a.k.a. out-of-core processing). In these cases, a fast disk is highly beneficial. However, if the workload fits in memory, the disk speed only has a limited effect on performance.
+DuckDB is capable of operating both as an in-memory and as a disk-based database system. In both cases, it can spill to disk to process larger-than-memory workloads (a.k.a. out-of-core processing) for which a fast disk is highly beneficial. However, if the workload fits in memory, the disk speed only has a limited effect on performance.
 
-In general, network-based storage will result in slower DuckDB workloads than using local disks.
-This includes network disks such as [NFS](https://en.wikipedia.org/wiki/Network_File_System),
-network drives such as [SMB](https://en.wikipedia.org/wiki/Server_Message_Block) and [Samba](https://en.wikipedia.org/wiki/Samba_(software)),
-and network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/).
-However, different network disks can have vastly varying IO performance, ranging from very slow to almost as fast as local. Therefore, for optimal performance, only use network disks that can provide high IO performance.
+### Local Disk
 
-> Bestpractice Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they guarantee high IO.
+DuckDB's disk-based mode is designed to work best with SSD and NVMe disks. While HDDs are supported, they will result in low performance, especially for write operations.
+
+### Network-Attached Disks
+
+**Cloud disks.** DuckDB runs well on network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/) for both read-only and read-write workloads.
+
+**Network-attached storage.**
+Network-attached storage can serve DuckdB for read-only workloads.
+However, _it is not recommended to run DuckDB in read-write mode on network-attached storage (NAS)._
+These setups include [NFS](https://en.wikipedia.org/wiki/Network_File_System),
+network drives such as [SMB](https://en.wikipedia.org/wiki/Server_Message_Block) and
+[Samba](https://en.wikipedia.org/wiki/Samba_(software)).
+Based on user reports, running read-write workloads on network-attached storage can result in slow and unpredictable performance,
+as well as spurious errors cased by the underlying file system.
+
+> Warning Avoid running DuckDB in read-write mode on network-attached storage.
+
+> Bestpractice Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they are reliable (e.g., cloud disks) and guarantee high IO.
 
 ## Operating System
 
 We recommend using the latest stable version of operating systems: macOS, Windows, and Linux are all well-tested and DuckDB can run on them with high performance. Among Linux distributions, we recommended using Ubuntu Linux LTS due to its stability and the fact that most of DuckDB’s Linux test suite jobs run on Ubuntu workers.
+
+## Memory Allocator
+
+If you have a many-core CPU running on a system where DuckDB ships with [`jemalloc`]({% link docs/extensions/jemalloc.md %}) as the default memory allocator, consider [enabling the allocator's background threads]({% link docs/extensions/jemalloc.md %}#background-threads).

@@ -9,7 +9,7 @@ title: INSERT Statements
 
 If you must use `INSERT` statements to load data in a loop, avoid executing the statements in auto-commit mode. After every commit, the database is required to sync the changes made to disk to ensure no data is lost. In auto-commit mode every single statement will be wrapped in a separate transaction, meaning `fsync` will be called for every statement. This is typically unnecessary when bulk loading and will significantly slow down your program.
 
-> If you absolutely must use `INSERT` statements in a loop to load data, wrap them in calls to `BEGIN TRANSACTION` and `COMMIT`.
+> Tip If you absolutely must use `INSERT` statements in a loop to load data, wrap them in calls to `BEGIN TRANSACTION` and `COMMIT`.
 
 ## Syntax
 
@@ -20,4 +20,4 @@ CREATE TABLE people (id INTEGER, name VARCHAR);
 INSERT INTO people VALUES (1, 'Mark'), (2, 'Hannes');
 ```
 
-For a more detailed description together with syntax diagram can be found, see the [page on the `INSERT statement`](../sql/statements/insert).
+For a more detailed description together with syntax diagram can be found, see the [page on the `INSERT` statement]({% link docs/sql/statements/insert.md %}).

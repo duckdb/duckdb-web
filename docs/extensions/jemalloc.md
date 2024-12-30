@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: jemalloc Extension
+github_directory: https://github.com/duckdb/duckdb/tree/main/extension/jemalloc
 ---
 
 The `jemalloc` extension replaces the system's memory allocator with [jemalloc](https://jemalloc.net/).
@@ -12,19 +13,23 @@ The availability of the `jemalloc` extension depends on the operating system.
 
 ### Linux
 
-The Linux version of DuckDB ships with the `jemalloc` extension by default.
-
-> DuckDB v0.10.1 introduced a change: on ARM64 architecture, DuckDB is shipped without `jemalloc`, while on x86_64 (AMD64) architectures, it is shipped with `jemalloc`.
-
-To disable the `jemalloc` extension, [build DuckDB from source](/dev/building) and set the `SKIP_EXTENSIONS` flag as follows:
+On Linux, the AMD64 (x86_64) distribution of DuckDB ships with the `jemalloc` extension.
+To disable the `jemalloc` extension, [build DuckDB from source]({% link docs/dev/building/build_instructions.md %}) and set the `SKIP_EXTENSIONS` flag as follows:
 
 ```bash
 GEN=ninja SKIP_EXTENSIONS="jemalloc" make
 ```
 
+The ARM64 (AArch64) DuckDB distribution on Linux does not ship with the `jemalloc` extension.
+To include it, build it as follows:
+
+```bash
+GEN=ninja BUILD_JEMALLOC=1 make
+```
+
 ### macOS
 
-The macOS version of DuckDB does not ship with the `jemalloc` extension but can be [built from source](/dev/building) to include it:
+The macOS version of DuckDB does not ship with the `jemalloc` extension but can be [built from source]({% link docs/dev/building/build_instructions.md %}) to include it:
 
 ```bash
 GEN=ninja BUILD_JEMALLOC=1 make
@@ -34,6 +39,18 @@ GEN=ninja BUILD_JEMALLOC=1 make
 
 On Windows, this extension is not available.
 
-## GitHub
+## Configuration
 
-The `jemalloc` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/jemalloc).
+### Environment Variables
+
+The jemalloc allocator in DuckDB can be configured via the [`MALLOC_CONF` environment variable](https://jemalloc.net/jemalloc.3.html#environment).
+
+### Background Threads
+
+By default, jemalloc's [background threads](https://jemalloc.net/jemalloc.3.html#background_thread) are disabled. To enable them, use the following configuration option:
+
+```sql
+SET allocator_background_threads = true;
+```
+
+Background threads asynchronously purge outstanding allocations so that this doesn't have to be done synchronously by the foreground threads. This improves allocation performance, and should be noticeable in allocation-heavy workloads, especially on many-core CPUs.

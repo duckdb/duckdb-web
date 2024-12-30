@@ -3,14 +3,14 @@ layout: docu
 title: Integration with Ibis
 ---
 
-[Ibis](https://ibis-project.org) is a Python dataframe library that supports 15+ backends, with DuckDB as the default. Ibis with DuckDB provides a Pythonic interface for SQL with great performance.
+[Ibis](https://ibis-project.org) is a Python dataframe library that supports 20+ backends, with DuckDB as the default. Ibis with DuckDB provides a Pythonic interface for SQL with great performance.
 
 ## Installation
 
 You can pip install Ibis with the DuckDB backend:
 
 ```bash
-pip install 'ibis-framework[duckdb]'
+pip install 'ibis-framework[duckdb,examples]' # examples is only required to access the sample data Ibis provides
 ```
 
 or use conda:
@@ -196,7 +196,7 @@ penguins.filter((penguins.species == "Gentoo") & (penguins.body_mass_g > 6000))
 └─────────┴────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┘
 ```
 
-You can use any boolean comparison in a filter (although if you try to do something like use `<` on a string, Ibis will yell at you).
+You can use any Boolean comparison in a filter (although if you try to do something like use `<` on a string, Ibis will yell at you).
 
 ### select
 
@@ -528,7 +528,7 @@ penguins.group_by("species").aggregate()
 └───────────┘
 ```
 
-We grouped by the `species` column and handed it an "empty" aggregate command. The result of that is a column of the unique values in the `species` column.
+We grouped by the `species` column and handed it an “empty” aggregate command. The result of that is a column of the unique values in the `species` column.
 
 If we add a second column to the `group_by`, we'll get each unique pairing of the values in those columns.
 

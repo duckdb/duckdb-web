@@ -8,7 +8,6 @@ redirect_from:
 title: Date Types
 ---
 
-<div class="narrow_table"></div>
 
 | Name   | Aliases | Description                     |
 |:-------|:--------|:--------------------------------|
@@ -25,7 +24,6 @@ SELECT DATE '1992-09-20';
 
 There are also three special date values that can be used on input:
 
-<div class="narrow_table"></div>
 
 | Input String | Description                       |
 |:-------------|:----------------------------------|
@@ -40,7 +38,6 @@ but `epoch` is simply a notational shorthand that will be converted to the date 
 SELECT '-infinity'::DATE, 'epoch'::DATE, 'infinity'::DATE;
 ```
 
-<div class="narrow_table"></div>
 
 | Negative  | Epoch      | Positive |
 |:----------|:-----------|:---------|

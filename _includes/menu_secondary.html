@@ -18,6 +18,7 @@
 			    {% if mainentry.subfolderitems[0] %}</div>{% endif %}
 		
 				{% if mainentry.subfolderitems[0] %}
+				<div class="submenuwrap">
 					<ul>
 						{% for entry in mainentry.subfolderitems %}
 						<li>{% if entry.url %}<a href="{{ site.baseurl }}{{ entry.url | replace: '/docs', archive_url_slug }}">{{ entry.page }}</a> {% else %} {{ entry.page }} {% endif %}</li>
@@ -31,11 +32,12 @@
 						</li>
 						{% endfor %}
 					</ul>
+				</div>
 				{% endif %}
 			{% if mainentry.subfolderitems[0] %} </div> {% endif %}
 			{% endfor %}
 			{% endif %}
 		{% endfor %}
 	{% endif %}
-	<div class="onlymobile external"><a href="https://duckdblabs.com/support/" target="_blank">Support</a></div>
+	<div class="onlymobile external"><a href="https://duckdblabs.com/#support" target="_blank">Support</a></div>
 </nav>

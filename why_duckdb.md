@@ -15,9 +15,9 @@ For DuckDB, there is no DBMS server software to install, update and maintain. Du
 
 ## Portable
 
-Thanks to having no dependencies, DuckDB is extremely portable. It can be compiled for all major operating systems (Linux, macOS, Windows) and CPU architectures (x86, ARM). It can be deployed from small, resource-constrained edge devices to large multi-terabyte memory servers with 100+ CPU cores. Using [DuckDB-Wasm](/docs/api/wasm/overview), DuckDB can also run in web browsers and even on mobile phones.
+Thanks to having no dependencies, DuckDB is extremely portable. It can be compiled for all major operating systems (Linux, macOS, Windows) and CPU architectures (x86, ARM). It can be deployed from small, resource-constrained edge devices to large multi-terabyte memory servers with 100+ CPU cores. Using [DuckDB-Wasm]({% link docs/api/wasm/overview.md %}), DuckDB can also run in web browsers and even on mobile phones.
 
-DuckDB provides APIs for Java, C, C++, Go, Node.js and other languages.
+DuckDB provides [APIs for Java, C, C++, Go, Node.js and other languages]({% link docs/api/overview.md %}).
 
 ## Feature-Rich
 
@@ -29,15 +29,15 @@ DuckDB is deeply integrated into Python and R for efficient interactive data ana
 
 DuckDB is designed to support **analytical query workloads**, also known as [online analytical processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing). These workloads are characterized by complex, relatively long-running queries that process significant portions of the stored dataset, for example aggregations over entire tables or joins between several large tables. Changes to the data are expected to be rather large-scale as well, with several rows being appended, or large portions of tables being changed or added at the same time.
 
-To efficiently support this workload, it is critical to reduce the amount of CPU cycles that are expended per individual value. The state of the art in data management to achieve this are either [vectorized or just-in-time query execution engines](https://www.vldb.org/pvldb/vol11/p2209-kersten.pdf). DuckDB contains a **columnar-vectorized query execution engine**, where queries are still interpreted, but a large batch of values (a "vector") are processed in one operation. This greatly reduces overhead present in traditional systems such as PostgreSQL, MySQL or SQLite which process each row sequentially. Vectorized query execution leads to far better performance in OLAP queries.
+To efficiently support this workload, it is critical to reduce the amount of CPU cycles that are expended per individual value. The state of the art in data management to achieve this are either [vectorized or just-in-time query execution engines](https://www.vldb.org/pvldb/vol11/p2209-kersten.pdf). DuckDB uses a **columnar-vectorized query execution engine**, where queries are still interpreted, but a large batch of values (a "vector") are processed in one operation. This greatly reduces overhead present in traditional systems such as PostgreSQL, MySQL or SQLite which process each row sequentially. Vectorized query execution leads to far better performance in OLAP queries.
 
 ## Extensible
 
-DuckDB offers a [flexible extension mechanism](/docs/extensions/overview) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format](/docs/extensions/parquet), [JSON](/docs/extensions/json), [time zones](/docs/extensions/icu), and supports for the [HTTP(S) and S3 protocols](/docs/extensions/httpfs) are implemented as extensions. Extensions also [work in DuckDB Wasm](/2021/10/29/duckdb-wasm).
+DuckDB offers a [flexible extension mechanism]({% link docs/extensions/overview.md %}) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format]({% link docs/data/parquet/overview.md %}), [JSON]({% link docs/data/json/overview.md %}), [time zones]({% link docs/extensions/icu.md %}), and supports for the [HTTP(S) and S3 protocols]({% link docs/extensions/httpfs/overview.md %}) are implemented as extensions. Extensions also [work in DuckDB Wasm]({% post_url 2021-10-29-duckdb-wasm %}).
 
 ## Free
 
-DuckDB's development started while the main developers were public servants in the Netherlands. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in the Netherlands or elsewhere. This is why DuckDB is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License). DuckDB is open-source, the entire source code is freely available on GitHub. We invite contributions from anyone provided they adhere to our [Code of Conduct](../code_of_conduct).
+DuckDB's development started while the main developers were public servants in the Netherlands. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in the Netherlands or elsewhere. This is why DuckDB is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License). DuckDB is open-source, the entire source code is freely available on GitHub. We invite contributions from anyone provided they adhere to our [Code of Conduct]({% link code_of_conduct.md %}).
 
 ## Thorough Testing
 
@@ -47,11 +47,13 @@ In addition to this test suite, we run various tests that stress DuckDB under he
 
 ## Peer-Reviewed Papers and Thesis Works
 
-* [These Rows Are Made for Sorting and That's Just What We'll Do](/pdf/ICDE2023-kuiper-muehleisen-sorting.pdf) (ICDE 2023)
+* [Runtime-Extensible Parsers]({% link pdf/CIDR2025-muehleisen-raasveldt-extensible-parsers.pdf %}) (CIDR 2025)
+* [Robust External Hash Aggregation in the Solid State Age]({% link pdf/ICDE2024-kuiper-boncz-muehleisen-out-of-core.pdf %}) (ICDE 2024)
+* [These Rows Are Made for Sorting and That's Just What We'll Do]({% link pdf/ICDE2023-kuiper-muehleisen-sorting.pdf %}) (ICDE 2023)
 * [Join Order Optimization with (Almost) No Statistics](https://blobs.duckdb.org/papers/tom-ebergen-msc-thesis-join-order-optimization-with-almost-no-statistics.pdf) (Master thesis, 2022)
-* [DuckDB-Wasm: Fast Analytical Processing for the Web](/pdf/VLDB2022-kohn-duckdb-wasm.pdf) (VLDB 2022 Demo)
-* [Data Management for Data Science - Towards Embedded Analytics](/pdf/CIDR2020-raasveldt-muehleisen-duckdb.pdf) (CIDR 2020)
-* [DuckDB: an Embeddable Analytical Database](/pdf/SIGMOD2019-demo-duckdb.pdf) (SIGMOD 2019 Demo)
+* [DuckDB-Wasm: Fast Analytical Processing for the Web]({% link pdf/VLDB2022-kohn-duckdb-wasm.pdf %}) (VLDB 2022 Demo)
+* [Data Management for Data Science - Towards Embedded Analytics]({% link pdf/CIDR2020-raasveldt-muehleisen-duckdb.pdf %}) (CIDR 2020)
+* [DuckDB: an Embeddable Analytical Database]({% link pdf/SIGMOD2019-demo-duckdb.pdf %}) (SIGMOD 2019 Demo)
 
 ## Other Projects
 
@@ -59,9 +61,9 @@ To learn about projects using DuckDB, visit the [Awesome DuckDB repository](http
 
 ## Standing on the Shoulders of Giants
 
-DuckDB uses some components from various Open-Source projects and draws inspiration from scientific publications. We are very grateful for this. Here is an overview:
+DuckDB uses some components from various open-source projects and draws inspiration from scientific publications. We are very grateful for this. Here is an overview:
 
-* **Execution engine:** The vectorized execution engine is inspired by the paper [MonetDB/X100: Hyper-Pipelining Query Execution](http://cidrdb.org/cidr2005/papers/P19.pdf) by Peter Boncz, Marcin Zukowski and Niels Nes.
+* **Execution engine:** The vectorized execution engine is inspired by the paper [MonetDB/X100: Hyper-Pipelining Query Execution](http://cidrdb.org/cidr2005/papers/P19.pdf) by Peter Boncz, Marcin Zukowski and Niels Nes. MonetDB/X100 later became the [Vectorwise (Actian Vector) database system](https://ir.cwi.nl/pub/19958/19958B.pdf).
 * **Optimizer:** DuckDB's optimizer draws inspiration from the papers [Dynamic programming strikes back](https://15721.courses.cs.cmu.edu/spring2020/papers/20-optimizer2/p539-moerkotte.pdf) by Guido Moerkotte and Thomas Neumann as well as [Unnesting Arbitrary Queries](http://www.btw-2015.de/res/proceedings/Hauptband/Wiss/Neumann-Unnesting_Arbitrary_Querie.pdf) by Thomas Neumann and Alfons Kemper.
 * **Concurrency control:** Our MVCC implementation is inspired by the paper [Fast Serializable Multi-Version Concurrency Control for Main-Memory Database Systems](https://db.in.tum.de/~muehlbau/papers/mvcc.pdf) by Thomas Neumann, Tobias Mühlbauer and Alfons Kemper.
 * **Secondary indexes:** DuckDB has support for secondary indexes based on the paper [The Adaptive Radix Tree: ARTful Indexing for Main-Memory Databases](https://db.in.tum.de/~leis/papers/ART.pdf) by Viktor Leis, Alfons Kemper and Thomas Neumann.
@@ -69,7 +71,7 @@ DuckDB uses some components from various Open-Source projects and draws inspirat
 * **SQL inequality joins:** DuckDB's inequality join implementation uses the IEJoin algorithm as described in the paper [Lightning Fast and Space Efficient Inequality Joins](https://vldb.org/pvldb/vol8/p2074-khayyat.pdf)
 Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorge-Arnulfo Quiané-Ruiz, Nan Tang and Panos Kalnis.
 * **Compression of floating-point values:** DuckDB supports the multiple algorithms for compressing floating-point values:
-    * [Chimp](http://pages.cs.aueb.gr/~kotidis/Publications/chimp.pdf) by Panagiotis Liakos, Katia Papakonstantinopoulou and Yannis Kotidi
+    * [Chimp](https://vldb.org/pvldb/vol15/p3058-liakos.pdf) by Panagiotis Liakos, Katia Papakonstantinopoulou and Yannis Kotidi
     * [Patas](https://github.com/duckdb/duckdb/pull/5044), an in-house development, and
     * [ALP (adaptive lossless floating-point compression)](https://dl.acm.org/doi/pdf/10.1145/3626717) by Azim Afroozeh, Leonard Kuffo and Peter Boncz, who also [contributed their implementation](https://github.com/duckdb/duckdb/pull/9635).
 * **SQL Parser:** We use the PostgreSQL parser that was [repackaged as a stand-alone library](https://github.com/lfittl/libpg_query). The translation to our own parse tree is inspired by [Peloton](https://pelotondb.io).
@@ -81,5 +83,5 @@ Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorg
 * **Test framework:** DuckDB uses the [Catch2](https://github.com/catchorg/Catch2) unit test framework.
 * **Test cases:** We use the [SQL Logic Tests from SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki) to test DuckDB.
 * **Result validation:** [Manuel Rigger](https://www.manuelrigger.at) used his excellent [SQLancer](https://github.com/sqlancer/sqlancer) tool to verify DuckDB result correctness.
-* **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) to generate random queries for additional testing.
-* **JSON parser:** We use [yyjson](https://github.com/ibireme/yyjson), a high performance JSON library written in ANSI C, to parse JSON in DuckDB's [JSON Extension](docs/extensions/json).
+* **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) via the [`sqlsmith` extension]({% link docs/extensions/sqlsmith.md %}) to generate random queries for additional testing.
+* **JSON parser:** We use [yyjson](https://github.com/ibireme/yyjson), a high performance JSON library written in ANSI C, to parse JSON in DuckDB's [JSON Extension]({% link docs/data/json/overview.md %}).

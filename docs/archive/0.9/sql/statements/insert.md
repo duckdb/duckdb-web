@@ -111,7 +111,6 @@ INSERT INTO t1
     RETURNING *;
 ```
 
-<div class="narrow_table"></div>
 
 | i |
 |---|
@@ -125,7 +124,6 @@ INSERT INTO t2
     RETURNING *, i * j AS i_times_j;
 ```
 
-<div class="narrow_table"></div>
 
 | i | j | i_times_j |
 |---|---|---|
@@ -143,7 +141,6 @@ INSERT INTO t3
     RETURNING *;
 ```
 
-<div class="narrow_table"></div>
 
 | i | j |
 |---|---|

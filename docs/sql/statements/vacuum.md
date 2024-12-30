@@ -9,20 +9,34 @@ The `VACUUM ANALYZE` statement recomputes table statistics if they have become s
 
 ## Examples
 
+No-op:
+
 ```sql
--- No-op
 VACUUM;
--- Rebuild database statistics
+```
+
+Rebuild database statistics:
+
+```sql
 VACUUM ANALYZE;
--- Rebuild statistics for the table and column
+```
+
+Rebuild statistics for the table and column:
+
+```sql
 VACUUM ANALYZE memory.main.my_table(my_column);
--- Not supported
+```
+
+Not supported:
+
+```sql
 VACUUM FULL; -- error
 ```
 
 ## Reclaiming Space
 
-To reclaim space after deleting rows, use the [`CHECKPOINT` statement](checkpoint).
+The `VACUUM` statement does not reclaim space.
+For instruction on reclaiming space, refer to the [“Reclaiming space” page]({% link docs/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).
 
 ## Syntax
 

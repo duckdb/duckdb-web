@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: sqllogictest - Multiple Connections
+title: Multiple Connections
 redirect_from:
   - /dev/sqllogictest/multiple_connections
 ---
@@ -51,4 +51,3 @@ write-write conflict
 
 endloop
 ```
-

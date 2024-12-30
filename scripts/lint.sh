@@ -22,5 +22,4 @@ if ! $(which vale); then
 fi
 
 vale sync
-vale docs/ dev/ _posts/ --glob "!docs/archive/*"
-
+vale docs/ _posts/ --glob "!docs/archive/*"

@@ -15,7 +15,7 @@ For detailed information checkout out the [Common ODBC Component Files](https://
 
 # Step 1: Download ODBC Driver
 
-DuckDB releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip">Windows Asset</a> that contains the following artifacts:
+DuckDB releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_odbc-windows-amd64.zip">Windows Asset</a> that contains the following artifacts:
 
 **duckdb_odbc.dll**: the DuckDB driver compiled for Windows.
 

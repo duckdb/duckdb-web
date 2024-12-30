@@ -1,7 +1,7 @@
 ---
 ---
 
-@import 'variables';
+@use 'variables' as *;
 
 /* SYNTAX HIGHLIGHTING COLORS */
 
@@ -11,10 +11,15 @@
 	font-family: $fontMonoItalic;
 }
 
-// keywords and properties
-.highlight :is(.k, .kc, .kd, .kn, .kr, .kt, .kv, .py){
+// keywords
+.highlight :is(.k, .kc, .kd, .kn, .kr, .kt, .kv){
 	color: #0098dd;
 	font-family: $fontMonoBold;
+}
+
+// properties
+.highlight :is(.py) {
+	color: #976F4D;
 }
 
 // numbers
@@ -23,7 +28,7 @@
 }
 
 // foreground
-.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
+.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg){
 	color: #383a42;
 }
 
@@ -37,6 +42,12 @@
 .highlight :is(.nf, .na, .nt){
 	color: #23974a;
 	font-family: $fontMonoBold;
+}
+
+body.documentation .highlight code a{
+	text-decoration-color: #23974a;
+	text-underline-offset: .05em;
+	text-underline-offset: 0.17em;
 }
 
 // class names
@@ -59,6 +70,14 @@
 	color: #c5a332;
 }
 
+.language-bash code:before {
+	content: '$ ';
+}
+
+.language-plsql code:before {
+	content: 'D ';
+}
+
 // keywords in table headers
 th .k {
 	color: #fff;
@@ -67,12 +86,7 @@ th .k {
 
 // background
 .highlight {
-	background-color: $black50;
-}
-
-// ??
-.highlight :is(.n, .vg){
-	color: #383a42;
+	background: var(--doc-codebox-background-color, #F2F2F2);
 }
 
 // ??
@@ -83,18 +97,9 @@ th .k {
 	background: transparent;
 }
 
-.landing .highlight :is(.n, .vg){
-	color: #fff;
-}
 
-.landing .highlight :is(.g, .l, .no, .nd, .nx, .py, .w, .nn){
-	color: #aaaaaa;
-}
 
-.landing .highlight :is(.py){
-	color: #ce9887;
-}
-
+html.darkmode, 
 .dark{
 	// comments
 	.highlight :is(.c, .ch, .cm, .cp, .cpf, .cs, .c1){
@@ -107,20 +112,25 @@ th .k {
 		color: #10b1fe;
 		font-family: $fontMonoBold;
 	}
-	
+
+	// properties
+	.highlight :is(.py){
+		color: #BA9678;
+	}
+
 	// numbers
 	.highlight :is(.m, .mf, .mh, .mi, .mo, .il){
 		color: #ff78f8;
 	}
 	
 	// foreground
-	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn){
-		color: #abb2bf;
+	.highlight :is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg){
+		color: $black300;
 	}
 	
 	// type names
 	.highlight :is(.nb, .bp, .vcb){
-		color: #0098dd;
+		color: #10b1fe;
 		font-family: $fontMonoBold;
 	}
 	
@@ -156,23 +166,9 @@ th .k {
 		font-family: $fontMonoBold;
 	}
 	
-	// background
-	.highlight {
-		background-color :#282c34;
-	}
-	
-	// ??
-	.highlight :is(.n, .vg){
-		color: #ff78f8;
-	}
-	
 	// ??
 	.highlight :is(.gh, .gp){
-		
 	}
 	
 }
 
-.landing .dark .highlight{
-	background-color: transparent;
-}

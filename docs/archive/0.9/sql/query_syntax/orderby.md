@@ -87,7 +87,6 @@ FROM addresses
 ORDER BY ALL;
 ```
 
-<div class="narrow_table"></div>
 
 |        address         |   city    |    zip     |
 |------------------------|-----------|------------|
@@ -104,7 +103,6 @@ FROM addresses
 ORDER BY ALL DESC;
 ```
 
-<div class="narrow_table"></div>
 
 |        address         |   city    |    zip     |
 |------------------------|-----------|------------|

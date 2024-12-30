@@ -1,6 +1,7 @@
 ---
 ---
-@import 'variables';
+
+@use 'variables' as *;
 
 /** ADDITIONAL CSS FOR FOUNDATION PAGE **/
 
@@ -43,13 +44,15 @@ body.foundation{
 		line-height: 1;
 		margin: 0;
 	}
+	a{
+		color: inherit;
+	}
 	section{
 		padding: 105px 15px;
 		div p:last-of-type{
 			margin-bottom: 25px;
 		}
 	}
-	
 	
 	section.purpuse{
 		.flexwrap{
@@ -67,12 +70,7 @@ body.foundation{
 		}
 	}
 	
-	
 	section.membership{
-		background-color: #161616;
-		background-image: url("data:image/svg+xml,%3Csvg width='1440' height='534' viewBox='0 0 1440 534' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_2962_1757)'%3E%3Crect width='1440' height='534' fill='%23161616'/%3E%3Cpath d='M-132.959 846L330 846C418.366 846 490 774.366 490 686L490 616.769C490 528.404 418.366 456.769 330 456.769L190.824 456.769C116.053 456.769 55.4393 396.155 55.4393 321.385V321.385C55.4393 246.614 -5.17443 186 -79.9453 186L-367 186' stroke='url(%23paint0_linear_2962_1757)' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M1576.59 739L1110 739C1021.63 739 950 667.366 950 579L950 507.41C950 419.045 1021.63 347.41 1110 347.41L1250.89 347.41C1326.11 347.41 1387.1 286.429 1387.1 211.205V211.205C1387.1 135.981 1448.08 75.0001 1523.3 75L1812 75' stroke='url(%23paint1_linear_2962_1757)' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_2962_1757' x1='529.541' y1='707.641' x2='-113.34' y2='309.613' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23363636'/%3E%3Cstop offset='1' stop-color='%23747474'/%3E%3C/linearGradient%3E%3ClinearGradient id='paint1_linear_2962_1757' x1='910.229' y1='599.802' x2='1556.94' y2='199.493' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23363636'/%3E%3Cstop offset='1' stop-color='%23C09600' stop-opacity='0.7'/%3E%3C/linearGradient%3E%3CclipPath id='clip0_2962_1757'%3E%3Crect width='1440' height='534' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
-		background-size: cover;
-		background-position: center center;
 		.levels{
 			display: -webkit-box;
 			display: -ms-flexbox;
@@ -80,19 +78,19 @@ body.foundation{
 			-webkit-column-gap: 20px;
 			   -moz-column-gap: 20px;
 					column-gap: 20px;
-			color: white;
 			> div{
 				width: 33%;
 			}
 			.level{
-				border: 1px solid rgba(151, 151, 151, 0.2);
+				border: 1px solid var(--main-codebox-border-color, #E6E6E6);
+				background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.60));
+				box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.20) inset, 2px 2px 24px 0px var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.05));
 				-webkit-box-sizing: border-box;
 						box-sizing: border-box;
 				padding: 20px;
 				position: relative;
 				border-bottom-left-radius: 15px;
 				border-bottom-right-radius: 15px;
-				background-color: rgba(248, 248, 248, 0.05);
 				-webkit-backdrop-filter: blur(14px);
 						backdrop-filter: blur(14px);
 				.head{
@@ -206,7 +204,7 @@ body.foundation{
 		}
 		.supporterboard{
 			margin-top: 25px;
-			background-color: #F9F9F9;
+			background: var(--doc-codebox-background-color, #F2F2F2);
 			border-radius: 15px;
 			border-top: 15px solid #979797;
 			&:not(:first-of-type){
@@ -239,20 +237,23 @@ body.foundation{
 					display: flex;
 					-ms-flex-pack: distribute;
 						justify-content: space-around;
+					li{
+						height: 100px;
+					}
 				}
+			}
+			&.technical{
+				border-top: 15px solid $blue;
 			}
 		}
 	}
 	
 	section.about{
-		color: white;
-		background-color: #161616;
-		background-image: url("data:image/svg+xml,%3Csvg width='1440' height='519' viewBox='0 0 1440 519' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_2963_1908)'%3E%3Crect width='1440' height='519' fill='%23161616'/%3E%3Cpath d='M174.302 -290.024L976 -290.024C1064.37 -290.024 1136 -218.39 1136 -130.024L1136 150.335C1136 238.7 1064.37 310.335 976 310.335L625.144 310.335C536.778 310.335 465.144 381.969 465.144 470.335L465.144 567.976C465.144 656.341 393.509 727.976 305.144 727.976L-187 727.976' stroke='url(%23paint0_linear_2963_1908)' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_2963_1908' x1='1197.04' y1='-76.6153' x2='205.065' y2='538.079' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23292058'/%3E%3Cstop offset='1' stop-color='%235C4CB8'/%3E%3C/linearGradient%3E%3CclipPath id='clip0_2963_1908'%3E%3Crect width='1440' height='519' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
-		background-size: cover;
-		background-position: center center;
 		.teammembers{
 			margin-top: 70px;
-			border: 1px solid rgba(151, 151, 151, 0.2);
+			background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.60));
+			border: 1px solid var(--main-codebox-border-color, #E6E6E6);
+			box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.20) inset, 2px 2px 24px 0px var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.05));
 			padding: 50px;
 			-webkit-box-sizing: border-box;
 					box-sizing: border-box;
@@ -264,7 +265,6 @@ body.foundation{
 			-webkit-box-pack: justify;
 				-ms-flex-pack: justify;
 					justify-content: space-between;
-			background-color: rgba(248, 248, 248, 0.05);
 			-webkit-backdrop-filter: blur(14px);
 					backdrop-filter: blur(14px);
 			border-radius: 15px;
@@ -277,11 +277,11 @@ body.foundation{
 				display: -ms-flexbox;
 				display: flex;
 				-webkit-box-pack: justify;
-					-ms-flex-pack: justify;
-						justify-content: space-between;
+				   -ms-flex-pack: justify;
+				justify-content: space-between;
 				-webkit-box-align: center;
-					-ms-flex-align: center;
-						align-items: center;
+				   -ms-flex-align: center;
+				      align-items: center;
 				margin-top: 30px;
 				&:nth-child(1), &:nth-child(2), &:nth-child(3){
 					margin-top: 0;
@@ -788,6 +788,9 @@ body.foundation{
 		-ms-flex-wrap: wrap;
 			flex-wrap: wrap;
 	}
+	body.foundation section.supporters .supporterboard.gold ul li{
+		height: 80px;
+	}
 }
 
 @media only screen and (max-width: 700px) {
@@ -813,6 +816,10 @@ body.foundation{
 	body.foundation section.purpuse .flexwrap > div:first-child,
 	body.foundation section.purpuse .flexwrap > div:nth-child(2){
 		width: 100%;
+	}
+	body.foundation section.supporters .supporterboard.gold li{
+		width: 100%;
+		height: 80px;
 	}
 }
 
@@ -848,10 +855,6 @@ body.foundation{
 		li{
 			height: 60px;
 		}
-	}
-	body.foundation section.supporters .supporterboard.gold li{
-		width: 100%;
-		height: 80px;
 	}
 	body.foundation section,
 	.pagehead h1{

@@ -13,7 +13,7 @@ for I in `seq 1 5`; do
     echo "Load the table without PK constraint (dry run to fill caches)"
     rm -rf *.db*
     ${DUCKDB} ldbc_comment_pk.db -c ".read schema-without-pk.sql"
-    
+
     exec 3>&1 4>&2
     TIME=$( { time ${DUCKDB} ldbc_comment_pk.db -c "COPY Comment FROM 'Comment/part-*.csv.gz' (HEADER true, DELIMITER '|');" 1>&3 2>&4; } 2>&1)
     exec 3>&- 4>&-

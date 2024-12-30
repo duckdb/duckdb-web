@@ -1,0 +1,43 @@
+name: Build stable documentation
+on: pull_request
+
+jobs:
+  # Build job
+  build_html:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Python requirements
+        run: pip3 install -r requirements.txt --break-system-packages
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3' # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --config _config.yml,_config_exclude_archive.yml
+
+  build_pdf:
+    runs-on: ubuntu-24.04
+    container:
+      image: docker://pandoc/extra:3.5
+      options: --entrypoint=sh
+    defaults:
+      run:
+        working-directory: single-file-document
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        run: |
+          PYTHONUNBUFFERED=1
+          apk add --update --no-cache python3 py3-pip
+      - name: Install Python requirements
+        run: pip3 install -r requirements.txt --break-system-packages
+      - name: Concatenate files
+        run: python3 concatenate_to_single_file.py

@@ -1,13 +1,15 @@
 ---
 layout: docu
 title: inet Extension
+github_repository: https://github.com/duckdb/duckdb-inet
 ---
 
 The `inet` extension defines the `INET` data type for storing [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) Internet addresses. It supports the [CIDR notation](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) for subnet masks (e.g., `198.51.100.0/22`, `2001:db8:3c4d::/48`).
 
 ## Installing and Loading
 
-The `inet` extension will typically automatically load on first use, but to explicitly install and load the extension, run:
+The `inet` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL inet;
@@ -83,6 +85,30 @@ SELECT cidr, host(cidr) FROM tbl;
 | 127.0.0.1                      | 127.0.0.1                   |
 | 2001:db8:3c4d:15::1a2f:1a2b/96 | 2001:db8:3c4d:15::1a2f:1a2b |
 
-## GitHub
+## HTML Escape and Unescape Functions
 
-The `inet` extension is part of the [main DuckDB repository](https://github.com/duckdb/duckdb/tree/main/extension/inet).
+```sql
+SELECT html_escape('&');
+```
+
+```text
+┌──────────────────┐
+│ html_escape('&') │
+│     varchar      │
+├──────────────────┤
+│ &amp;            │
+└──────────────────┘
+```
+
+```sql
+SELECT html_unescape('&amp;');
+```
+
+```text
+┌────────────────────────┐
+│ html_unescape('&amp;') │
+│        varchar         │
+├────────────────────────┤
+│ &                      │
+└────────────────────────┘
+```

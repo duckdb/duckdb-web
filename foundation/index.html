@@ -10,6 +10,9 @@ pagehead:
   - "bg3"
 ---
 
+<div class="wrap pagetitle">
+	<h1>DuckDB Foundation</h1>
+</div>
 
 <section class="purpuse">
 	<div class="wrap flexwrap">
@@ -66,8 +69,9 @@ pagehead:
 	<div class="wrap">
 		<h1>Supporters</h1>
 		<p>Current foundation supporters that have chosen to be publicly named.</p>
+
 		{% if site.data.supporters.gold %}
-		<h3>Gold Supporters</h3>
+		<h3 id="gold-supporters">Gold Supporters</h3>
 		<div class="supporterboard gold">
 			<ul>
 				{% for supporter in site.data.supporters.gold %}
@@ -76,8 +80,9 @@ pagehead:
 			</ul> 
 		</div>
 		{% endif %}
+
 		{% if site.data.supporters.silver %}
-		<h3>Silver Supporters</h3>
+		<h3 id="silver-supporters">Silver Supporters</h3>
 		<div class="supporterboard silver">
 			<ul>
 				{% for supporter in site.data.supporters.silver %}
@@ -86,6 +91,18 @@ pagehead:
 			</ul>
 		</div>
 		{% endif %}
+		
+		{% if site.data.supporters.technical %}
+		<h3 id="technical-sponsors">Technical Sponsors</h3>
+		<div class="supporterboard technical">
+			<ul>
+				{% for supporter in site.data.supporters.technical %}
+				<li><a href="{{ supporter.url }}"><img src="{{ '/images/foundation/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></a></li>
+				{% endfor %} 
+			</ul>
+		</div>
+		{% endif %}
+
 	</div>
 </section>
 
@@ -95,19 +112,19 @@ pagehead:
 		<h1>Foundation Board</h1>
 		<div class="teammembers">
 			<div class="member">
-				<div class="portrait" style="background-image: url({{ '/images/team/hannes_muehleisen.jpg' | relative_url }})"></div>
+				<div class="portrait" style="background-image: url({{ '/images/foundation_board/hannes_muehleisen.jpg' | relative_url }})"></div>
 				<div class="info">
 					<span class="name">Hannes Mühleisen</span>
 				</div>
 			</div>
 			<div class="member">
-				<div class="portrait" style="background-image: url({{ '/images/team/mark_raasveldt.jpg' | relative_url }})"></div>
+				<div class="portrait" style="background-image: url({{ '/images/foundation_board/mark_raasveldt.jpg' | relative_url }})"></div>
 				<div class="info">
 					<span class="name">Mark Raasveldt</span>
 				</div>
 			</div>
 			<div class="member">
-				<div class="portrait" style="background-image: url({{ '/images/team/peter_boncz.jpg' | relative_url }})"></div>
+				<div class="portrait" style="background-image: url({{ '/images/foundation_board/peter_boncz.jpg' | relative_url }})"></div>
 				<div class="info">
 					<span class="name">Peter Boncz</span>
 				</div>

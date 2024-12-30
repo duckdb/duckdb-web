@@ -12,7 +12,7 @@ There are three syntaxes for denoting parameters in prepared statements:
 auto-incremented (`?`),
 positional (`$1`),
 and named (`$param`).
-Note that not all clients support all of these syntaxes, e.g., the [JDBC client](../../api/java) only supports auto-incremented parameters in prepared statements.
+Note that not all clients support all of these syntaxes, e.g., the [JDBC client]({% link docs/api/java.md %}) only supports auto-incremented parameters in prepared statements.
 
 ### Example Data Set
 
@@ -23,7 +23,7 @@ CREATE TABLE person (name VARCHAR, age BIGINT);
 INSERT INTO person VALUES ('Alice', 37), ('Ana', 35), ('Bob', 41), ('Bea', 25);
 ```
 
-In our example query, we'll look for people whose name starts with a "B" and are at least 40 years old.
+In our example query, we'll look for people whose name starts with a `B` and are at least 40 years old.
 This will return a single row `<'Bob', 41>`.
 
 ### Auto-Incremented Parameters: `?`
@@ -33,11 +33,11 @@ i.e., the position of the parameters in the query corresponds to their position 
 For example:
 
 ```sql
-PREPARE query_person AS 
-SELECT *
-FROM person
-WHERE starts_with(name, ?)
-  AND age >= ?;
+PREPARE query_person AS
+    SELECT *
+    FROM person
+    WHERE starts_with(name, ?)
+      AND age >= ?;
 ```
 
 Using the CLI client, the statement is executed as follows.
@@ -52,11 +52,11 @@ Prepared statements can use positional parameters, where parameters are denoted 
 For example:
 
 ```sql
-PREPARE query_person AS 
-SELECT *
-FROM person
-WHERE starts_with(name, $2)
-  AND age >= $1;
+PREPARE query_person AS
+    SELECT *
+    FROM person
+    WHERE starts_with(name, $2)
+      AND age >= $1;
 ```
 
 Using the CLI client, the statement is executed as follows.
@@ -72,15 +72,29 @@ DuckDB also supports names parameters where parameters are denoted with `$parame
 For example:
 
 ```sql
-PREPARE query_person AS 
-SELECT *
-FROM person
-WHERE starts_with(name, $name_start_letter)
-  AND age >= $minimum_age;
+PREPARE query_person AS
+    SELECT *
+    FROM person
+    WHERE starts_with(name, $name_start_letter)
+      AND age >= $minimum_age;
 ```
 
 Using the CLI client, the statement is executed as follows.
 
 ```sql
 EXECUTE query_person(name_start_letter := 'B', minimum_age := 40);
+```
+
+## Dropping Prepared Statements: `DEALLOCATE`
+
+To drop a prepared statement, use the `DEALLOCATE` statement:
+
+```sql
+DEALLOCATE query_person;
+```
+
+Alternatively, use:
+
+```sql
+DEALLOCATE PREPARE query_person;
 ```

@@ -4,7 +4,7 @@ title: Python Function API
 ---
 
 You can create a DuckDB user-defined function (UDF) from a Python function so it can be used in SQL queries.
-Similarly to regular [functions](../../sql/functions/overview), they need to have a name, a return type and parameter types.
+Similarly to regular [functions]({% link docs/sql/functions/overview.md %}), they need to have a name, a return type and parameter types.
 
 Here is an example using a Python function that calls a third-party library.
 
@@ -20,7 +20,10 @@ def generate_random_name():
 duckdb.create_function("random_name", generate_random_name, [], VARCHAR)
 res = duckdb.sql("SELECT random_name()").fetchall()
 print(res)
-# [('Gerald Ashley',)]
+```
+
+```text
+[('Gerald Ashley',)]
 ```
 
 ## Creating Functions
@@ -35,14 +38,14 @@ con.create_function(name, function, parameters, return_type)
 
 The `create_function` method takes the following parameters:
 
-1. **name**: A string representing the unique name of the UDF within the connection catalog.
-2. **function**: The Python function you wish to register as a UDF.
-3. **parameters**: Scalar functions can operate on one or more columns. This parameter takes a list of column types used as input.
-4. **return_type**: Scalar functions return one element per row. This parameter specifies the return type of the function.
-5. **type** (Optional): DuckDB supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type = 'arrow'` to use PyArrow Tables.
-6. **null_handling** (Optional): By default, null values are automatically handled as Null-In Null-Out. Users can specify a desired behavior for null values by setting `null_handling = 'special'`.
-7. **exception_handling** (Optional): By default, when an exception is thrown from the Python function, it will be re-thrown in Python. Users can disable this behavior, and instead return `null`, by setting this parameter to `'return_null'`
-8. **side_effects** (Optional): By default, functions are expected to produce the same result for the same input. If the result of a function is impacted by any type of randomness, `side_effects` must be set to `True`.
+1. `name` A string representing the unique name of the UDF within the connection catalog.
+2. `function` The Python function you wish to register as a UDF.
+3. `parameters` Scalar functions can operate on one or more columns. This parameter takes a list of column types used as input.
+4. `return_type` Scalar functions return one element per row. This parameter specifies the return type of the function.
+5. `type` (optional): DuckDB supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type = 'arrow'` to use PyArrow Tables.
+6. `null_handling` (optional): By default, `NULL` values are automatically handled as `NULL`-in `NULL`-out. Users can specify a desired behavior for `NULL` values by setting `null_handling = 'special'`.
+7. `exception_handling` (optional): By default, when an exception is thrown from the Python function, it will be re-thrown in Python. Users can disable this behavior, and instead return `NULL`, by setting this parameter to `'return_null'`
+8. `side_effects` (optional): By default, functions are expected to produce the same result for the same input. If the result of a function is impacted by any type of randomness, `side_effects` must be set to `True`.
 
 To unregister a UDF, you can call the `remove_function` method with the UDF name:
 
@@ -63,7 +66,7 @@ def my_function(x: int) -> str:
     return x
 
 duckdb.create_function("my_func", my_function)
-duckdb.sql("SELECT my_func(42)")
+print(duckdb.sql("SELECT my_func(42)"))
 ```
 
 ```text
@@ -77,7 +80,7 @@ duckdb.sql("SELECT my_func(42)")
 
 If only the parameter list types can be inferred, you'll need to pass in `None` as `parameters`.
 
-## Null Handling
+## `NULL` Handling
 
 By default when functions receive a `NULL` value, this instantly returns `NULL`, as part of the default `NULL`-handling.
 When this is not desired, you need to explicitly set this parameter to `"special"`.
@@ -92,19 +95,34 @@ def dont_intercept_null(x):
 duckdb.create_function("dont_intercept", dont_intercept_null, [BIGINT], BIGINT)
 res = duckdb.sql("SELECT dont_intercept(NULL)").fetchall()
 print(res)
-# [(None,)]
+```
 
-duckdb.remove_function("dont_intercept")
+```text
+[(None,)]
+```
+
+With `null_handling="special"`:
+
+```python
+import duckdb
+from duckdb.typing import *
+
+def dont_intercept_null(x):
+    return 5
+
 duckdb.create_function("dont_intercept", dont_intercept_null, [BIGINT], BIGINT, null_handling="special")
 res = duckdb.sql("SELECT dont_intercept(NULL)").fetchall()
 print(res)
-# [(5,)]
+```
+
+```text
+[(5,)]
 ```
 
 ## Exception Handling
 
 By default, when an exception is thrown from the Python function, we'll forward (re-throw) the exception.
-If you want to disable this behavior, and instead return null, you'll need to set this parameter to `"return_null"`
+If you want to disable this behavior, and instead return `NULL`, you'll need to set this parameter to `"return_null"`.
 
 ```python
 import duckdb
@@ -122,7 +140,18 @@ except duckdb.InvalidInputException as e:
 duckdb.create_function("doesnt_throw", will_throw, [], BIGINT, exception_handling="return_null")
 res = duckdb.sql("SELECT doesnt_throw()").fetchall()
 print(res)
-# [(None,)]
+```
+
+```console
+Invalid Input Error: Python exception occurred while executing the UDF: ValueError: ERROR
+
+At:
+  ...(5): will_throw
+  ...(9): <module>
+```
+
+```text
+[(None,)]
 ```
 
 ## Side Effects
@@ -130,7 +159,7 @@ print(res)
 By default DuckDB will assume the created function is a *pure* function, meaning it will produce the same output when given the same input.
 If your function does not follow that rule, for example when your function makes use of randomness, then you will need to mark this function as having `side_effects`.
 
-For example, this function will produce a new count for every invocation
+For example, this function will produce a new count for every invocation.
 
 ```python
 def count() -> int:
@@ -145,21 +174,27 @@ If we create this function without marking it as having side effects, the result
 
 ```python
 con = duckdb.connect()
-con.create_function("my_counter", count, side_effects = False)
+con.create_function("my_counter", count, side_effects=False)
 res = con.sql("SELECT my_counter() FROM range(10)").fetchall()
 print(res)
-# [(0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,)]
 ```
 
-Which is obviously not the desired result, when we add `side_effects = True`, the result is as we would expect:
+```text
+[(0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,)]
+```
+
+Which is obviously not the desired result, when we add `side_effects=True`, the result is as we would expect:
 
 ```python
 con.remove_function("my_counter")
 count.counter = 0
-con.create_function("my_counter", count, side_effects = True)
+con.create_function("my_counter", count, side_effects=True)
 res = con.sql("SELECT my_counter() FROM range(10)").fetchall()
 print(res)
-# [(0,), (1,), (2,), (3,), (4,), (5,), (6,), (7,), (8,), (9,)]
+```
+
+```text
+[(0,), (1,), (2,), (3,), (4,), (5,), (6,), (7,), (8,), (9,)]
 ```
 
 ## Python Function Types
@@ -190,5 +225,8 @@ def random_date():
 duckdb.create_function("random_date", random_date, [], DATE, type="native")
 res = duckdb.sql("SELECT random_date()").fetchall()
 print(res)
-# [(datetime.date(2019, 5, 15),)]
+```
+
+```text
+[(datetime.date(2019, 5, 15),)]
 ```

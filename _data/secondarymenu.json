@@ -8,15 +8,19 @@
           "url": "/docs/",
           "subfolderitems": [
             {
+              "page": "Getting Started",
+              "url": "/docs"
+            },
+            {
               "page": "Installation",
               "url": "/docs/installation/"
             },
             {
-              "page": "How-to guides",
+              "page": "Guides",
               "url": "/docs/guides/index"
             },
             {
-              "page": "Data import",
+              "page": "Data Import",
               "url": "/docs/data/overview"
             },
             {
@@ -24,16 +28,12 @@
               "url": "/docs/api/overview"
             },
             {
-              "page": "SQL",
+              "page": "SQL Introduction",
               "url": "/docs/sql/introduction"
             },
             {
               "page": "Why DuckDB",
               "url": "/why_duckdb"
-            },
-            {
-              "page": "Media",
-              "url": "/media"
             },
             {
               "page": "FAQ",
@@ -42,8 +42,26 @@
           ]
         },
         {
-          "page": "Blog",
-          "url": "/news/"
+          "page": "Resources",
+          "url": "#",
+          "subfolderitems": [
+            {
+              "page": "Blog",
+              "url": "/news/"
+            },
+            {
+              "page": "Media",
+              "url": "/media/"
+            },
+            {
+              "page": "Events",
+              "url": "/events/"
+            },
+            {
+              "page": "Webshop",
+              "url": "https://shop.duckdb.org/"
+            }
+          ]
         },
         {
           "page": "GitHub",

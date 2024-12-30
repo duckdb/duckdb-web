@@ -20,7 +20,7 @@ use duckdb::{params, Connection, Result};
 let conn = Connection::open_in_memory()?;
 ```
 
-You can `conn.close()` the `Connection` manually, or just leave it out of scope, we had implement the `Drop` trait which will automatically close the underlining db connection for you.
+The `Connection` will automatically close the underlying db connection for you when it goes out of scope (via `Drop`). You can also explicitly close the `Connection` with `conn.close()`. This is not much difference between these in the typical case, but in case there is an error, you'll have the chance to handle it with the explicit close.
 
 ### Querying
 
@@ -55,7 +55,7 @@ for person in person_iter {
 
 ## Appender
 
-The Rust client supports the [DuckDB Appender API](../data/appender) for bulk inserts. For example:
+The Rust client supports the [DuckDB Appender API]({% link docs/data/appender.md %}) for bulk inserts. For example:
 
 ```rust
 fn insert_rows(conn: &Connection) -> Result<()> {

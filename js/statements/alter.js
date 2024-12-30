@@ -40,11 +40,21 @@ function GenerateAlterTable(options = {}) {
 			Choice(0, [
 				Sequence([
 					Keyword("ADD"),
-					Optional("COLUMN"),
-					GenerateIfNotExists(),
-					Expression("column-name"),
-					Expression("type-name"),
-					Expandable("column-constraints", options, "column-constraints", GenerateColumnConstraints)
+					Choice(0, [
+						Sequence([
+							Optional("COLUMN"),
+							GenerateIfNotExists(),
+							Expression("column-name"),
+							Expression("type-name"),
+							Expandable("column-constraints", options, "column-constraints", GenerateColumnConstraints)
+						]),
+						Sequence([
+							Keyword("PRIMARY KEY"),
+							Keyword("("),
+							OneOrMore(Expression("column-name"), ","),
+							Keyword(")")
+						])
+					])
 				]),
 				Sequence([
 					Keyword("DROP"),

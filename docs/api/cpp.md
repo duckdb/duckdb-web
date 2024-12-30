@@ -3,22 +3,23 @@ layout: docu
 title: C++ API
 ---
 
+> Warning DuckDB's C++ API is internal.
+> It is not guaranteed to be stable and can change without notice.
+> If you would like to build an application on DuckDB, we recommend using the [C API]({% link docs/api/c/overview.md %}).
+
 ## Installation
 
-The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
+The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link docs/installation/index.html %}?environment=cplusplus) for details.
 
 ## Basic API Usage
 
 DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`.
-
-> The standard source distribution of `libduckdb` contains an "amalgamation" of the DuckDB sources, which combine all sources into two files `duckdb.hpp` and `duckdb.cpp`. The `duckdb.hpp` header is much larger in this case. Regardless of whether you are using the amalgamation or not, just include `duckdb.hpp`.
 
 ### Startup & Shutdown
 
 To use DuckDB, you must first initialize a `DuckDB` instance using its constructor. `DuckDB()` takes as parameter the database file to read and write from. The special value `nullptr` can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the process). The second parameter to the `DuckDB` constructor is an optional `DBConfig` object. In `DBConfig`, you can set various database parameters, for example the read/write mode or memory limits. The `DuckDB` constructor may throw exceptions, for example if the database file is not usable.
 
 With the `DuckDB` instance, you can create one or many `Connection` instances using the `Connection()` constructor. While connections should be thread-safe, they will be locked during querying. It is therefore recommended that each thread uses its own connection if you are in a multithreaded environment.
-
 
 ```cpp
 DuckDB db(nullptr);
@@ -36,13 +37,15 @@ con.Query("CREATE TABLE integers (i INTEGER, j INTEGER)");
 // insert three rows into the table
 con.Query("INSERT INTO integers VALUES (3, 4), (5, 6), (7, NULL)");
 
-MaterializedQueryResult result = con.Query("SELECT * FROM integers");
-if (!result->success) {
-    cerr << result->error;
+auto result = con.Query("SELECT * FROM integers");
+if (result->HasError()) {
+    cerr << result->GetError() << endl;
+} else {
+    cout << result->ToString() << endl;
 }
 ```
 
-The `MaterializedQueryResult` instance contains firstly two fields that indicate whether the query was successful. `Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues will lead to the `success` boolean field in the query result instance to be set to `false`. In this case an error message may be available in `error` as a string. If successful, other fields are set: the type of statement that was just executed (e.g., `StatementType::INSERT_STATEMENT`) is contained in `statement_type`. The high-level ("Logical type"/"SQL type") types of the result set columns are in `types`. The names of the result columns are in the `names` string vector. In case multiple result sets are returned, for example because the result set contained multiple statements, the result set can be chained using the `next` field.
+The `MaterializedQueryResult` instance contains firstly two fields that indicate whether the query was successful. `Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues will lead to the `success` Boolean field in the query result instance to be set to `false`. In this case an error message may be available in `error` as a string. If successful, other fields are set: the type of statement that was just executed (e.g., `StatementType::INSERT_STATEMENT`) is contained in `statement_type`. The high-level (“Logical type”/“SQL type”) types of the result set columns are in `types`. The names of the result columns are in the `names` string vector. In case multiple result sets are returned, for example because the result set contained multiple statements, the result set can be chained using the `next` field.
 
 DuckDB also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
 
@@ -51,7 +54,7 @@ std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT count(*) FROM a
 std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ```
 
-> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
+> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See the [data import documentation]({% link docs/data/overview.md %}) for better options.
 
 ### UDF API
 
@@ -202,7 +205,6 @@ There are different vector types to handle in a Vectorized UDF:
 - StructVector;
 - SequenceVector.
 
-
 The general API of the `CreateVectorizedFunction()` method is as follows:
 
 **1.**
@@ -217,7 +219,7 @@ void CreateVectorizedFunction(string name, scalar_function_t udf_func, LogicalTy
     - **Args** are the arguments up to 3 for the UDF function.
 - **name** is the name to register the UDF function;
 - **udf_func** is a _vectorized_ UDF function;
-- **varargs** The type of varargs to support, or LogicalTypeId::INVALID (default value) if the function does not accept variable length arguments. 
+- **varargs** The type of varargs to support, or LogicalTypeId::INVALID (default value) if the function does not accept variable length arguments.
 
 This method automatically discovers from the template typenames the corresponding LogicalTypes:
 

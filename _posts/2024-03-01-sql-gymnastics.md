@@ -1,10 +1,12 @@
 ---
 layout: post
-title: "SQL Gymnastics: Bending SQL into flexible new shapes"
+title: "SQL Gymnastics: Bending SQL into Flexible New Shapes"
 author: Alex Monahan
 avatar: "/images/blog/authors/alex_monahan.jpg"
-thumb: "/images/blog/thumbs/240301.png"
-excerpt: "Combining multiple features of DuckDB’s friendly SQL allows for highly flexible queries that can be reused across tables."
+thumb: "/images/blog/thumbs/sql-gym.svg"
+image: "/images/blog/thumbs/sql-gym.png"
+excerpt: "Combining multiple features of DuckDB’s [friendly SQL](/docs/guides/sql_features/friendly_sql) allows for highly flexible queries that can be reused across tables."
+tags: ["using DuckDB"]
 ---
 
 <img src="/images/blog/duck_gymnast.jpg"
@@ -12,7 +14,7 @@ excerpt: "Combining multiple features of DuckDB’s friendly SQL allows for high
      width="300"
      />
 
-DuckDB's [especially](/2022/05/04/friendlier-sql) [friendly](/2023/08/23/even-friendlier-sql) [SQL dialect](/docs/guides/sql_features/friendly_sql) simplifies common query operations.
+DuckDB's [especially]({% post_url 2022-05-04-friendlier-sql %}) [friendly]({% post_url 2023-08-23-even-friendlier-sql %}) [SQL dialect]({% link docs/sql/dialect/friendly_sql.md %}) simplifies common query operations.
 However, these features also unlock new and flexible ways to write advanced SQL! 
 In this post we will combine multiple friendly features to both move closer to real-world use cases and stretch your imagination.
 These queries are useful in their own right, but their component pieces are even more valuable to have in your toolbox.
@@ -21,9 +23,7 @@ What is the craziest thing you have built with SQL?
 We want to hear about it! 
 Tag [DuckDB on X](https://twitter.com/duckdb) (the site formerly known as Twitter) or [LinkedIn](https://www.linkedin.com/company/duckdb/mycompany/), and join the [DuckDB Discord community](https://discord.duckdb.org/).
 
-<!--more-->
-
-## Traditional SQL is too rigid to reuse
+## Traditional SQL Is Too Rigid to Reuse
 
 SQL queries are typically crafted specifically for the unique tables within a database.
 This limits reusability. 
@@ -31,11 +31,11 @@ For example, have you ever seen a library of high-level SQL helper functions?
 SQL as a language typically is not flexible enough to build reusable functions.
 Today, we are flying towards a more flexible future!
 
-## Dynamic aggregates macro
+## Dynamic Aggregates Macro
 
 In SQL, typically the columns to `SELECT` and `GROUP BY` must be specified individually. 
 However, in many business intelligence workloads, groupings and aggregate functions must be easily user-adjustable.
-Imagine an interactive charting workflow - first I want to plot total company revenue over time.
+Imagine an interactive charting workflow – first I want to plot total company revenue over time.
 Then if I see a dip in revenue in that first plot, I want to adjust the plot to group the revenue by business unit to see which section of the company caused the issue.
 This typically requires templated SQL, using a language that compiles down to SQL (like [Malloy](https://www.malloydata.dev/)), or building a SQL string using another programming language.
 How much we can do with just SQL?
@@ -68,7 +68,7 @@ FROM example;
 | 9    | 4    | 1    | 1    |
 | 10   | 0    | 0    | 1    |
 
-### Creating the macro
+### Creating the Macro
 
 The macro below accepts lists of columns to include or exclude, a list of columns to aggregate, and an aggregate function to apply.
 All of these can be passed in as parameters from the host language that is querying the database.
@@ -109,7 +109,7 @@ CREATE OR REPLACE MACRO dynamic_aggregates(
 );
 ```
 
-#### Executing the macro
+#### Executing the Macro
 
 Now we can use that macro for many different aggregation operations.
 For illustrative purposes, the 3 queries below show different ways to achieve identical results.
@@ -142,44 +142,44 @@ FROM dynamic_aggregates(
 Executing either of those queries will return this result:
 
 | col3 | col4 | list_aggregate(list(example.col1), 'min') | list_aggregate(list(example.col2), 'min') |
-|------|------|-------------------------------------------|-------------------------------------------|
+|-----:|-----:|------------------------------------------:|------------------------------------------:|
 | 0    | 1    | 2                                         | 0                                         |
 | 1    | 1    | 1                                         | 0                                         |
 
-#### Understanding the design
+#### Understanding the Design
 
-The first step of our flexible [table macro](/docs/sql/statements/create_macro#table-macros) is to choose a specific table using DuckDB's [`FROM`-first syntax](/2023/08/23/even-friendlier-sql#from-first-in-select-statements).
-Well that's not very dynamic! 
+The first step of our flexible [table macro]({% link docs/sql/statements/create_macro.md %}#table-macros) is to choose a specific table using DuckDB's [`FROM`-first syntax]({% post_url 2023-08-23-even-friendlier-sql %}#from-first-in-select-statements).
+Well that's not very dynamic!
 If we wanted to, we could work around this by creating a copy of this macro for each table we want to expose to our application.
 However, we will show another approach in our next example, and completely solve the issue in a follow up blog post with an in-development DuckDB feature.
 Stay tuned!
 
 Then we `SELECT` our grouping columns based on the list parameters that were passed in.
-The [`COLUMNS` expression](/docs/sql/expressions/star#columns-expression) will execute a [lambda function](/docs/sql/functions/lambda) to decide which columns meet the criteria to be selected.
+The [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns-expression) will execute a [lambda function]({% link docs/sql/functions/lambda.md %}) to decide which columns meet the criteria to be selected.
 
-The first portion of the lambda function checks if a column name was passed in within the `included_columns` list. 
+The first portion of the lambda function checks if a column name was passed in within the `included_columns` list.
 However, if we choose not to use an inclusion rule (by passing in a blank `included_columns` list), we want to ignore that parameter.
 If the list is blank, `len(included_columns) = 0` will evaluate to `true` and effectively disable the filtering on `included_columns`.
 This is a common pattern for optional filtering that is generically useful across a variety of SQL queries.
 (Shout out to my mentor and friend Paul Bloomquist for teaching me this pattern!)
 
-We repeat that pattern for `excluded_columns` so that it will be used if populated, but ignored if left blank. 
+We repeat that pattern for `excluded_columns` so that it will be used if populated, but ignored if left blank.
 The `excluded_columns` list will also win ties, so that if a column is in both lists, it will be excluded.
 
-Next, we apply our aggregate function to the columns we want to aggregate. 
+Next, we apply our aggregate function to the columns we want to aggregate.
 It is easiest to follow the logic of this part of the query by working from the innermost portion outward.
 The `COLUMNS` expression will acquire the columns that are in our `aggregated_columns` list.
 Then, we do a little bit of gymnastics (it had to happen sometime...).
 
 If we were to apply a typical aggregation function (like `sum` or `min`), it would need to be specified statically in our macro.
-To pass it in dynamically as a string (potentially all the way from the application code calling this SQL statement), we take advantage of a unique property of the [`list_aggregate` function](/docs/sql/functions/nested#list-aggregates).
+To pass it in dynamically as a string (potentially all the way from the application code calling this SQL statement), we take advantage of a unique property of the [`list_aggregate` function]({% link docs/sql/functions/nested.md %}#list-aggregates).
 It accepts the name of a function (as a string) in its second parameter.
-So, to use this unique property, we use the [`list` aggregate function](/docs/sql/aggregates#general-aggregate-functions) to transform all the values within each group into a list.
+So, to use this unique property, we use the [`list` aggregate function]({% link docs/sql/functions/aggregates.md %}#general-aggregate-functions) to transform all the values within each group into a list.
 Then we use the `list_aggregate` function to apply the `aggregate_function` we passed into the macro to each list.
 
 Almost done!
-Now [`GROUP BY ALL`](/docs/sql/query_syntax/groupby#group-by-all) will automatically choose to group by the columns returned by the first `COLUMNS` expression.
-The [`ORDER BY ALL`](/docs/sql/query_syntax/orderby#order-by-all) expression will order each column in ascending order, moving from left to right.
+Now [`GROUP BY ALL`]({% link docs/sql/query_syntax/groupby.md %}#group-by-all) will automatically choose to group by the columns returned by the first `COLUMNS` expression.
+The [`ORDER BY ALL`]({% link docs/sql/query_syntax/orderby.md %}#order-by-all) expression will order each column in ascending order, moving from left to right.
 
 We made it!
 
@@ -198,12 +198,12 @@ However, we still had to specify a table at the start.
 We are also limited to aggregate functions that are available to be used with `list_aggregate`.
 Let's relax those two constraints!
 
-### Creating version 2 of the macro
+### Creating Version 2 of the Macro
 
 This approach takes advantage of two key concepts:
 
 * Macros can be used to create temporary aggregate functions
-* A macro can query a [Common Table Expression (CTE) / `WITH` clause](/docs/sql/query_syntax/with) that is in scope during execution
+* A macro can query a [Common Table Expression (CTE) / `WITH` clause]({% link docs/sql/query_syntax/with.md %}) that is in scope during execution
 
 ```sql
 CREATE OR REPLACE MACRO dynamic_aggregates_any_cte_any_func(
@@ -229,7 +229,7 @@ CREATE OR REPLACE MACRO dynamic_aggregates_any_cte_any_func(
 );
 ```
 
-#### Executing version 2
+#### Executing Version 2
 
 When we call this macro, there is additional complexity.
 We no longer execute a single statement, and our logic is no longer completely parameterizable (so some templating or SQL construction will be needed).
@@ -260,59 +260,58 @@ FROM dynamic_aggregates_any_cte_any_func(
 | 0             | 1             | 502.0                | 200.0                      |
 | 1             | 1             | 490.0                | 200.0                      |
 
-#### Understanding version 2
+#### Understanding Version 2
 
 Instead of querying the very boldly named `example` table, we query the possibly more generically named `any_cte`.
 Note that `any_cte` has a different schema than our prior example – the columns in `any_cte` can be anything!
-When the macro is created, `any_cte` doesn't even exist. 
+When the macro is created, `any_cte` doesn't even exist.
 When the macro is executed, it searches for a table-like object named `any_cte`, and it was defined in the CTE as the macro was called.
 
-Similarly, `any_func` does not exist initially. 
+Similarly, `any_func` does not exist initially.
 It only needs to be created (or recreated) at some point before the macro is executed.
-Its only requirements are to be an aggregate function that operates on a single column. 
+Its only requirements are to be an aggregate function that operates on a single column.
 
-> `FUNCTION` and `MACRO` are synonyms in DuckDB and can be used interchangeably! 
+> `FUNCTION` and `MACRO` are synonyms in DuckDB and can be used interchangeably!
 
-#### Takeaways from version 2
+#### Takeaways from Version 2
 
 A macro can act on any arbitrary table by using a CTE at the time it is called.
 This makes our macro far more reusable – it can work on any table!
-Not only that, but any custom aggregate function can be used. 
+Not only that, but any custom aggregate function can be used.
 
-Look how far we have stretched SQL – we have made a truly reusable SQL function! 
+Look how far we have stretched SQL – we have made a truly reusable SQL function!
 The table is dynamic, the grouping columns are dynamic, the aggregated columns are dynamic, and so is the aggregate function.
-Our daily gymnastics stretches have paid off. 
+Our daily gymnastics stretches have paid off.
 However, stay tuned for a way to achieve similar results with a simpler approach in a future post.
 
-## Custom summaries for any dataset
+## Custom Summaries for Any Dataset
 
 Next we have a truly production-grade example!
 This query powers a portion of the MotherDuck Web UI's [Column Explorer](https://motherduck.com/blog/introducing-column-explorer/) component.
 [Hamilton Ulmer](https://www.linkedin.com/in/hamilton-ulmer-28b97817/) led the creation of this component and is the author of this query as well!
 The purpose of the Column Explorer, and this query, is to get a high-level overview of the data in all columns within a dataset as quickly and easily as possible.
 
-DuckDB has a built-in [`SUMMARIZE` keyword](/docs/guides/meta/summarize) that can calculate similar metrics across an entire table. 
-However, for larger datasets, `SUMMARIZE` can take a couple of seconds to load. 
-This query provides a custom summarization capability that can be tailored to the properties of your data that you are most interested in. 
+DuckDB has a built-in [`SUMMARIZE` keyword]({% link docs/guides/meta/summarize.md %}) that can calculate similar metrics across an entire table.
+However, for larger datasets, `SUMMARIZE` can take a couple of seconds to load.
+This query provides a custom summarization capability that can be tailored to the properties of your data that you are most interested in.
 
 Traditionally, databases required that every column be referred to explicitly, and work best when data is arranged in separate columns.
-This query takes advantage of DuckDB's ability to apply functions to all columns at once, its ability to [`UNPIVOT`](/docs/sql/statements/unpivot) (or stack) columns, and its [`STRUCT`](/docs/sql/data_types/struct) data type to store key/value pairs.
+This query takes advantage of DuckDB's ability to apply functions to all columns at once, its ability to [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) (or stack) columns, and its [`STRUCT`]({% link docs/sql/data_types/struct.md %}) data type to store key/value pairs.
 The result is a clean, pivoted summary of all the rows and columns in a table.
 
-Let's take a look at the entire function, then break it down piece by piece. 
+Let's take a look at the entire function, then break it down piece by piece.
 
-This [example dataset](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset) comes from [Hugging Face](https://huggingface.co/), which hosts [DuckDB-accessible Parquet files](https://huggingface.co/blog/hub-duckdb) for many of their datasets. 
+This [example dataset](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset) comes from [Hugging Face](https://huggingface.co/), which hosts [DuckDB-accessible Parquet files](https://huggingface.co/blog/hub-duckdb) for many of their datasets.
 First, we create a local table populated from this remote Parquet file.
 
 ### Creation
 
 ```sql
-CREATE OR REPLACE TABLE spotify_tracks AS (
-    FROM 'https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset/resolve/refs%2Fconvert%2Fparquet/default/train/0000.parquet?download=true'
-);
+CREATE OR REPLACE TABLE spotify_tracks AS
+    FROM 'https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset/resolve/refs%2Fconvert%2Fparquet/default/train/0000.parquet?download=true';
 ```
 
-Then we create and execute our `custom_summarize` macro. 
+Then we create and execute our `custom_summarize` macro.
 We use the same `any_cte` trick from above to allow this to be reused on any query result or table.
 
 ```sql
@@ -374,7 +373,7 @@ The result contains one row for every column in the raw dataset, and several col
 So how was this query constructed? 
 Let's break down each CTE step by step.
 
-### Step by step breakdown
+### Step by Step Breakdown
 
 #### Metrics CTE
 
@@ -410,7 +409,7 @@ The query achieves this structure using the `COLUMNS(*)` expression to apply mul
 The keys of the struct represent the names of the metrics (and what we want to use as the column names in the final result). 
 We use this approach since we want to transpose the columns to rows and then split the summary metrics into their own columns.
 
-#### Stacked_metrics CTE
+#### `stacked_metrics` CTE
 
 Next, the data is unpivoted to reshape the table from one row and multiple columns to two columns and multiple rows. 
 
@@ -429,10 +428,10 @@ ON COLUMNS(*);
 
 By unpivoting on `COLUMNS(*)`, we take all columns and pivot them downward into two columns: one for the auto-generated `name` of the column, and one for the `value` that was within that column.
 
-#### Return the results
+#### Return the Results
 
 The final step is the most gymnastics-like portion of this query.
-We explode the `value` column's struct format so that each key becomes its own column using the [`STRUCT.*` syntax](/docs/sql/data_types/struct#struct).
+We explode the `value` column's struct format so that each key becomes its own column using the [`STRUCT.*` syntax]({% link docs/sql/data_types/struct.md %}#struct).
 This is another way to make a query less reliant on column names – the split occurs automatically based on the keys in the struct.
 
 ```sql

@@ -1,10 +1,12 @@
 ---
 
 layout: post
-title:  "DuckDB's CSV Sniffer: Automatic Detection of Types and Dialects"
+title: "DuckDB's CSV Sniffer: Automatic Detection of Types and Dialects"
 author: Pedro Holanda
-thumb: "/images/blog/csv-sniffer/ducktetive.jpg"
+thumb: "/images/blog/thumbs/csv.svg"
+image: "/images/blog/thumbs/csv.png"
 excerpt: DuckDB is primarily focused on performance, leveraging the capabilities of modern file formats. At the same time, we also pay attention to flexible, non-performance-driven formats like CSV files. To create a nice and pleasant experience when reading from CSV files, DuckDB implements a CSV sniffer that automatically detects CSV dialect options, column types, and even skips dirty data. The sniffing process allows users to efficiently explore CSV files without needing to provide any input about the file format.
+tags: ["using DuckDB"]
 ---
 
 <img src="/images/blog/csv-sniffer/ducktetive.jpg"
@@ -16,7 +18,7 @@ There are many different file formats that users can choose from when storing th
 
 On the other side of the spectrum, there are files with the CSV (comma-separated values) format, which I like to refer to as the 'Woodstock of data'. CSV files offer the advantage of flexibility; they are structured as text files, allowing users to manipulate them with any text editor, and nearly any data system can read and execute queries on them.
 
-However, this flexibility comes at a cost. Reading a CSV file is not a trivial task, as users need a significant amount of prior knowledge about the file. For instance, [DuckDB's CSV reader](https://duckdb.org/docs/archive/0.9.1/data/csv/overview) offers more than 25 configuration options. I've found that people tend to think I'm not working hard enough if I don't introduce at least three new options with each release. *Just kidding.* These options include specifying the delimiter, quote and escape characters, determining the number of columns in the CSV file, and identifying whether a header is present while also defining column types. This can slow down an interactive data exploration process, and make analyzing new datasets a cumbersome and less enjoyable task.
+However, this flexibility comes at a cost. Reading a CSV file is not a trivial task, as users need a significant amount of prior knowledge about the file. For instance, [DuckDB's CSV reader]({% link docs/data/csv/overview.md %}) offers more than 25 configuration options. I've found that people tend to think I'm not working hard enough if I don't introduce at least three new options with each release. *Just kidding.* These options include specifying the delimiter, quote and escape characters, determining the number of columns in the CSV file, and identifying whether a header is present while also defining column types. This can slow down an interactive data exploration process, and make analyzing new datasets a cumbersome and less enjoyable task.
 
 One of the raison d'être of DuckDB is to be pleasant and easy to use, so we don't want our users to have to fiddle with CSV files and input options manually. Manual input should be reserved only for files with rather unusual choices for their CSV dialect (where a dialect comprises the combination of the delimiter, quote, escape, and newline values used to create that file) or for specifying column types.
 
@@ -25,7 +27,6 @@ Automatically detecting CSV options can be a daunting process. Not only are ther
 DuckDB implements a [multi-hypothesis CSV sniffer](https://hannes.muehleisen.org/publications/ssdbm2017-muehleisen-csvs.pdf) that automatically detects dialects, headers, date/time formats, column types, and identifies dirty rows to be skipped. Our ultimate goal is to automatically read anything resembling a CSV file, to never give up and never let you down! All of this is achieved without incurring a substantial initial cost when reading CSV files. In the bleeding edge version, the sniffer runs when reading a CSV file by default. Note that the sniffer will always prioritize any options set by the user (e.g., if the user sets `,` as the delimiter, the sniffer won't try any other options and will assume that the user input is correct).
 
 In this blog post, I will explain how the current implementation works, discuss its performance, and provide insights into what comes next!
-
 
 ## DuckDB's Automatic Detection
 
@@ -99,7 +100,6 @@ If `null_padding` is set to true, all lines would be accepted, resulting in the 
 
 If the `ignore_errors` option is set, then the configuration that yields the most columns with the least inconsistent rows will be picked.
 
-
 ### Type Detection
 
 After deciding the dialect that will be used, we detect the types of each column. Our _Type Detection_ considers the following types: `SQLNULL`, `BOOLEAN`, `BIGINT`, `DOUBLE`, `TIME`, `DATE`, `TIMESTAMP`, `VARCHAR`. These types are ordered in specificity, which means we first check if a column is a `SQLNULL`; if not, if it's a `BOOLEAN`, and so on, until it can only be a `VARCHAR`. DuckDB has more types than the ones used by default. Users can also define which types the sniffer should consider via the `auto_type_candidates` option.
@@ -168,13 +168,12 @@ The _Type Refinement_ phase performs the same tasks as type detection; the only 
 
 In this phase, we transition to a more efficient vectorized casting algorithm. The validation process remains the same as in type detection, with types from type candidate arrays being eliminated if a cast fails.
 
-## How Fast is the Sniffing?
+## How Fast Is the Sniffing?
 
 To analyze the impact of running DuckDB's automatic detection, we execute the sniffer on the [NYC taxi dataset](https://www.kaggle.com/datasets/elemento/nyc-yellow-taxi-trip-data/). The file consists of 19 columns, 10,906,858 tuples and is 1.72 GB in size.
 
 The cost of sniffing the dialect column names and types is approximately 4% of the total cost of loading the data. 
 
-<div class="narrow_table"></div>
 
 |    Name     | Time (s) |
 |-------------|----------|
