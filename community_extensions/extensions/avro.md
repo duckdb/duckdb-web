@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: avro
   description: Read Apache Avro (TM) files from DuckDB
-  version: 1.0.0
+  version: 1.1.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: hannes/duckdb_avro
-  ref: 7facc0badf31c7ec0a249cf47fb97d190550d3f2
+  ref: e5ed59b6ccf915c65e17eb6286b9a64f3ab09f59
 
 docs:
   hello_world: |
@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 10418
-extension_download_count_pretty: 10.4k
+extension_download_count: 10342
+extension_download_count_pretty: 10.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_avro.png'
 layout: community_extension_doc
 ---
