@@ -1,12 +1,12 @@
 Like all programming languages and libraries, DuckDB has its share of idiosyncrasies and inconsistencies.  
 Some are vestiges of our feathered friend's evolution; others are inevitable because we strive to adhere to the [SQL Standard](https://blog.ansi.org/sql-standard-iso-iec-9075-2023-ansi-x3-135/) and specifically to PostgreSQL's dialect (see the [PostgreSQL compatibility]({% link docs/sql/dialect/postgresql_compatibility.md %}) page for exceptions).
-The rest may simply come down to different preferences, or we may even agree on what _should_ be done but just haven’t gotten around to it yet—and might never—because there are always bigger fires to put out or more important features to work on.
+The rest may simply come down to different preferences, or we may even agree on what _should_ be done but just haven’t gotten around to it yet.
 
 Acknowledging these quirks is the best we can do, which is why we have compiled below a list of examples that may catch some users off guard: 
 
 - On empty groups, the aggregate functions `sum`, `list`, and `string_agg` all return `NULL` instead of `0`, `[]` and `''`, respectively. This is dictated by the SQL Standard and obeyed by all SQL implementations we know.
 - One-based indexing everywhere (e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`)) is another SQL Standard requirement. Good for our R users and those with an SQL background, bad for everybody else.
-- DuckDB's `1 = true` is common but violates PostgreSQL compatibility, whereas DuckDB's `'t' = true` is more quirky and was inherited from PostgreSQL. DuckDB's `1 = '1.1'` is probably most difficult to justify.
+- DuckDB's `1 = true` is common but violates PostgreSQL compatibility, whereas DuckDB's `'t' = true` is more quirky and was inherited from PostgreSQL. DuckDB's `1 = '1.1'` is perhaps most difficult to justify.
 - `-1^2 = 1`. PostgreSQL compatibility means the unary minus has higher precedence than the exponentiation operator. Use the `pow` function to avoid mistakes. 
 - `'NaN'::FLOAT = 'NaN'::FLOAT` and `'NaN'::FLOAT > 3` violate IEEE-754 but mean floating point data types have a total order, like all other datatypes (beware the consequences for `greatest`/`least`)
 - Automatic column deduplication. You thought `SELECT a FROM (SELECT *, 1 AS a FROM tbl)` will give you a bunch of `1`s? Not if `tbl` already contains a column named `a` (or even `A`, see point below).
