@@ -45,7 +45,7 @@ SELECT timezone('America/Denver', TIMESTAMPTZ '2001-02-16 04:38:40+01')
 Note that the displayed value is now independent of the system or configured time zone, since it specifically represents a local value of time without time zone information. 
 Even though no physical information is lost in the above conversion, the logical information that the timestamp was one observed in `'America/Denver'` is lost. Converting `2001-02-16 20:38:40` back to the original *instant* requires the time zone information.
 
-The difference between *local* and *instant* semantics also affects timestamp arithmetic, most notably when timestamps cross daylight saving time boundaries.
+The difference between *local* and *instant* semantics also affects timestamp arithmetic, most notably when timestamps cross daylight saving time boundaries. See [this DuckDB blog post](https://duckdb.org/2022/01/06/time-zones.html) for more information on the topic.
 
 > Warning It is possible to convert between `WITH TIME ZONE` and `WITHOUT TIME ZONE` types using regular explicit and even implicit casts. These conversions perform the same computation as the `timezone` function above, but using the system or configured time zone.
 
