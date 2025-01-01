@@ -1,25 +1,53 @@
 ---
 layout: docu
 title: Timestamp Types
-blurb: A timestamp specifies a combination of a date (year, month, day) and a time (hour, minute, second, microsecond or nanosecond).
+blurb: Timestamps represent points in time.
 ---
 
-Timestamps represent points in absolute time, usually called *instants*.
-DuckDB represents instants as the number of microseconds (µs) (or nanoseconds, for `TIMESTAMP_NS`) since `1970-01-01 00:00:00+00`.
+Timestamps represent points in time and are internally stored as the `INT64` number of seconds / milliseconds / microseconds / nanoseconds since `1970-01-01 00:00:00+00`, depending on the chosen variant. Informally speaking, they contain both [`DATE`]({% link docs/sql/data_types/date.md %}) (year, month, day) and [`TIME`]({% link docs/sql/data_types/time.md %}) (hour, minute, second, microsecond or nanosecond) information. 
 
 ## Timestamp Types
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `TIMESTAMP_NS` |                            | timestamp with nanosecond precision (ignores time zone)  |
-| `TIMESTAMP`    | `DATETIME`                 | timestamp with microsecond precision (ignores time zone) |
-| `TIMESTAMP_MS` |                            | timestamp with millisecond precision (ignores time zone) |
-| `TIMESTAMP_S`  |                            | timestamp with second precision (ignores time zone)      |
-| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE` | timestamp with microsecond precision (uses time zone)                               |
+| `TIMESTAMP_NS` |                                           | timestamp with nanosecond precision (local semantics)    |
+| `TIMESTAMP`    | `DATETIME`, `TIMESTAMP WITHOUT TIME ZONE` | timestamp with microsecond precision (local semantics)   |
+| `TIMESTAMP_MS` |                                           | timestamp with millisecond precision (local semantics)   |
+| `TIMESTAMP_S`  |                                           | timestamp with second precision (local semantics)        |
+| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | timestamp with microsecond precision (instant semantics) |
 
-A timestamp specifies a combination of [`DATE`]({% link docs/sql/data_types/date.md %}) (year, month, day) and a [`TIME`]({% link docs/sql/data_types/time.md %}) (hour, minute, second, microsecond or nanosecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]` (three extra decimal places supported by `TIMESTAMP_NS`). Decimal places beyond the targeted sub-second precision are ignored.
+> Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nano-second precision and instant semantics, e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), lose precision when read using DuckDB.
 
-> Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nano-second precision and "instant semantics", e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), lose precision when read using DuckDB.
+Timestamps can be created using the `TIMESTAMP` keyword (or its variants), where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]` (three extra decimal places supported by `TIMESTAMP_NS`). Decimal places beyond the targeted sub-second precision are ignored.
+
+The `WITH TIME ZONE` data types exhibit *instant* semantics, which means that they represent points in absolute time and are *displayed* in the system or a configured time zone. They require the [ICU extension]({% link docs/extensions/icu.md %}) to be installed. The `WITHOUT TIME ZONE` data types exhibit *local* semantics, which means they represent a local value of time for an unspecified observer. As such, a `WITHOUT TIME ZONE` data type together *with* a time zone defines an *instant* that can be stored in a `WITH TIME ZONE` data type:
+
+```sql
+SELECT timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')
+```
+
+```text
+2001-02-17 04:38:40+01  
+```
+
+Note that `WITH TIMEZONE` is a slight misnomer, however, since no time zone is actually stored in this data type: The computation above determines the *instant* in time at which an observer in the `'America/Denver'` time zone would observe the local time `2001-02-16 20:38:40`. The result is stored as microseconds since `1970-01-01 00:00:00+00` and *displayed* in the system time zone or the time zone configured via `SET TimeZone`, which is `'Europe/Berlin'` in the example above. Note that the offsets of `'America/Denver'` and `'Europe/Berlin'` with respect to Coordinated Universal Time (UTC) at the given instant are `-07:00` and `+01:00`, respectively.
+
+In the opposite direction, we can extract the local time for an observer in a given time zone at an instant in time specified by a `WITH TIME ZONE` data type:
+
+```sql
+SELECT timezone('America/Denver', TIMESTAMPTZ '2001-02-16 04:38:40+01')
+```
+
+```text
+2001-02-16 20:38:40
+```
+
+Note that the displayed value is now independent of the system or configured time zone, since it specifically represents a local value of time without time zone information. 
+Even though no physical information is lost in the above conversion, the logical information that the timestamp was one observed in `'America/Denver'` is lost. 
+
+> Bestpractice If in doubt, use `WITH TIME ZONE` data types when processing and storing timestamp data. If you prefer that your data be *displayed* in a specific timezone that is not your system time zone, you may configure that time zone using `SET TimeZone`. If you interact with external tooling that doesn't handle time zone offsets properly, consider using the `timezone` function above to convert your data to local `WITHOUT TIME ZONE` timestamps in a fixed time zone as the last step of your visualization pipeline.  
+
+### Examples
 
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789';
