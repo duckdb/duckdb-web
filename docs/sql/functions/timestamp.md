@@ -54,7 +54,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`last_day(timestamp)`](#last_daytimestamp) | The last day of the month. |
 | [`least(timestamp, timestamp)`](#leasttimestamp-timestamp) | The earlier of two timestamps. |
 | [`make_timestamp(bigint, bigint, bigint, bigint, bigint, double)`](#make_timestampbigint-bigint-bigint-bigint-bigint-double) | The timestamp for the given parts. |
-| [`make_timestamp(microseconds)`](#make_timestampmicroseconds) | The timestamp for the given number of µs since the epoch. |
+| [`make_timestamp(microseconds)`](#make_timestampmicroseconds) | Converts integer microseconds since the epoch to a timestamp. |
 | [`monthname(timestamp)`](#monthnametimestamp) | The (English) name of the month. |
 | [`strftime(timestamp, format)`](#strftimetimestamp-format) | Converts timestamp to string according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). |
 | [`strptime(text, format-list)`](#strptimetext-format-list) | Converts the string `text` to timestamp applying the [format strings]({% link docs/sql/functions/dateformat.md %}) in the list until one succeeds. Throws an error on failure. To return `NULL` on failure, use [`try_strptime`](#try_strptimetext-format-list). |
@@ -291,7 +291,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | The timestamp for the given number of µs since the epoch. |
+| **Description** | Converts integer microseconds since the epoch to a timestamp. |
 | **Example** | `make_timestamp(1667810584123456)` |
 | **Result** | `2022-11-07 08:43:04.123456` |
 
