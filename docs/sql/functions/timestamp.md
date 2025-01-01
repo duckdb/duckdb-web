@@ -194,7 +194,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts milliseconds since epoch to a timestamp. |
+| **Description** | Converts integer milliseconds since epoch to a timestamp. |
 | **Example** | `epoch_ms(701222400000)` |
 | **Result** | `1992-03-22 00:00:00` |
 
