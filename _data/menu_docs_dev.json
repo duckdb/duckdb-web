@@ -939,6 +939,10 @@
                 {
                   "page": "PostgreSQL Compatibility",
                   "url": "postgresql_compatibility"
+                },
+                {
+                  "page": "SQL Quirks",
+                  "url": "sql_quirks"
                 }
               ]
             },
