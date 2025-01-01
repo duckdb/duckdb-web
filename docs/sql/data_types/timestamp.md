@@ -20,7 +20,7 @@ Timestamps represent points in time and are internally stored as the `INT64` num
 
 Timestamps can be created using the `TIMESTAMP` keyword (or its variants), where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]` (three extra decimal places supported by `TIMESTAMP_NS`). Decimal places beyond the targeted sub-second precision are ignored.
 
-The `WITH TIME ZONE` data types exhibit *instant* semantics, which means that they represent points in absolute time and are *displayed* in the system or a configured time zone. They require the [ICU extension]({% link docs/extensions/icu.md %}) to be installed. The `WITHOUT TIME ZONE` data types exhibit *local* semantics, which means they represent a local value of time for an unspecified observer. As such, a `WITHOUT TIME ZONE` data type together *with* a time zone defines an *instant* that can be stored in a `WITH TIME ZONE` data type:
+The `WITH TIME ZONE` data types exhibit *instant* semantics, which means that they represent points in absolute time, called *instants*, and are *displayed* in the system or a configured time zone. They require the [ICU extension]({% link docs/extensions/icu.md %}) to be installed. The `WITHOUT TIME ZONE` data types exhibit *local* semantics, which means they represent a local value of time for an unspecified observer. As such, a `WITHOUT TIME ZONE` data type together *with* a time zone defines an *instant* that can be stored in a `WITH TIME ZONE` data type:
 
 ```sql
 SELECT timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')
@@ -30,9 +30,9 @@ SELECT timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')
 2001-02-17 04:38:40+01  
 ```
 
-Note that `WITH TIMEZONE` is a slight misnomer, however, since no time zone is actually stored in this data type: The computation above determines the *instant* in time at which an observer in the `'America/Denver'` time zone would observe the local time `2001-02-16 20:38:40`. The result is stored as microseconds since `1970-01-01 00:00:00+00` and *displayed* in the system time zone or the time zone configured via `SET TimeZone`, which is `'Europe/Berlin'` in the example above. Note that the offsets of `'America/Denver'` and `'Europe/Berlin'` with respect to Coordinated Universal Time (UTC) at the given instant are `-07:00` and `+01:00`, respectively.
+Note that `WITH TIMEZONE` is a slight misnomer, however, since no time zone is actually stored in this data type: The computation above determines the *instant* at which an observer in the `'America/Denver'` time zone would observe the local time `2001-02-16 20:38:40`. The result is stored as microseconds since `1970-01-01 00:00:00+00` and *displayed* in the system time zone or the time zone configured via `SET TimeZone`, which is `'Europe/Berlin'` in the example above. Note that the offsets of `'America/Denver'` and `'Europe/Berlin'` with respect to Coordinated Universal Time (UTC) at the given instant are `-07:00` and `+01:00`, respectively.
 
-In the opposite direction, we can extract the local time for an observer in a given time zone at an instant in time specified by a `WITH TIME ZONE` data type:
+In the opposite direction, we can extract the *local* time for an observer in a given time zone at a given *instant*:
 
 ```sql
 SELECT timezone('America/Denver', TIMESTAMPTZ '2001-02-16 04:38:40+01')
@@ -43,9 +43,15 @@ SELECT timezone('America/Denver', TIMESTAMPTZ '2001-02-16 04:38:40+01')
 ```
 
 Note that the displayed value is now independent of the system or configured time zone, since it specifically represents a local value of time without time zone information. 
-Even though no physical information is lost in the above conversion, the logical information that the timestamp was one observed in `'America/Denver'` is lost. 
+Even though no physical information is lost in the above conversion, the logical information that the timestamp was one observed in `'America/Denver'` is lost. Converting `2001-02-16 20:38:40` back to the original *instant* requires the time zone information.
 
-> Bestpractice If in doubt, use `WITH TIME ZONE` data types when processing and storing timestamp data. If you prefer that your data be *displayed* in a specific timezone that is not your system time zone, you may configure that time zone using `SET TimeZone`. If you interact with external tooling that doesn't handle time zone offsets properly, consider using the `timezone` function above to convert your data to local `WITHOUT TIME ZONE` timestamps in a fixed time zone as the last step of your visualization pipeline.  
+The difference between *local* and *instant* semantics also affects timestamp arithmetic, most notably when timestamps cross daylight saving time boundaries.
+
+> Warning It is possible to convert between `WITH TIME ZONE` and `WITHOUT TIME ZONE` types using regular explicit and even implicit casts. These conversions perform the same computation as the `timezone` function above, but using the system or configured time zone.
+
+> Bestpractice If in doubt, use `WITH TIME ZONE` data types to process and store timestamp data. If you prefer that your data be *displayed* in a specific timezone that is not your system time zone, you may configure that time zone using `SET TimeZone`. If you interact with external tooling that doesn't handle time zone offsets properly, consider using the `timezone` function above to convert your data to local `WITHOUT TIME ZONE` timestamps in a fixed time zone as the last step before leaving DuckDB.
+
+> Tip To avoid surprises from implicit conversions and avoid having to think about *local* and *instant* semantics altogether, you may set `SET TimeZone='UTC'`. All computations will then be performed in UTC. For example, there will be no special casing of Daylight Saving Times and all displayed timestamps, whether stored in `WITH TIME ZONE` or `WITHOUT TIME ZONE` columns will be interpretable as time in UTC.
 
 ### Examples
 
