@@ -51,8 +51,6 @@ The difference between *local* and *instant* semantics also affects timestamp ar
 
 > Bestpractice If in doubt, use `WITH TIME ZONE` data types to process and store timestamp data. If you prefer that your data be *displayed* in a specific time zone that is not your system time zone, you may configure that time zone using `SET TimeZone`. If you interact with external tooling that doesn't handle time zone offsets properly, convert your data to local `WITHOUT TIME ZONE` timestamps in a fixed time zone as the last step before leaving DuckDB. To convert `WITH TIME ZONE` to `WITHOUT TIME ZONE` data, use the `timezone` function with explicitly specified time zone instead of explicit or implicit casts. Similarly, to convert `WITH TIME ZONE` to `DATE` or `TIME` data, use the `timezone` function to create `WITHOUT TIME ZONE` data using an explicitly specified time zone, and then convert that to `DATE` or `TIME`. 
 
-> Tip To avoid surprises from implicit conversions and avoid having to think about *local* and *instant* semantics altogether, you may set `SET TimeZone='UTC'`. All computations will then be performed in UTC. For example, there will be no special casing of Daylight Saving Times and all displayed timestamps, whether stored in `WITH TIME ZONE` or `WITHOUT TIME ZONE` columns will be interpretable as time in UTC. You should still prefer `WITH TIME ZONE` data types to ensure your data is interpreted correctly when exported to external formats or when shared with users that don't set their time zone to `'UTC'`. 
-
 ### Examples
 
 ```sql
