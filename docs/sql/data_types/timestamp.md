@@ -16,7 +16,7 @@ Timestamps represent points in time and are internally stored as the `INT64` num
 | `TIMESTAMP_S`  |                                           | timestamp with second precision (local semantics)        |
 | `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | timestamp with microsecond precision (instant semantics) |
 
-> Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nano-second precision and instant semantics, e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), lose precision when read using DuckDB.
+> Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nano-second precision and instant semantics, e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
 
 Timestamps can be created using the `TIMESTAMP` keyword (or its variants), where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]` (three extra decimal places supported by `TIMESTAMP_NS`). Decimal places beyond the targeted sub-second precision are ignored.
 
