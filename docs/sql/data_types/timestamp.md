@@ -19,7 +19,7 @@ They can be created using the `TIMESTAMP` keyword followed by a string formatted
 
 > Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nanosecond precision and `WITH TIME ZONE` semantics, e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
 
-DuckDB distinguishes *naive* / `WITHOUT TIME ZONE` and *time zone aware* / `WITH TIME ZONE` (of which the only current representative is `TIMESTAMP WITH TIME ZONE`) timestamps. 
+DuckDB distinguishes *naive* (`WITHOUT TIME ZONE`) and *time zone aware* (`WITH TIME ZONE`, of which the only current representative is `TIMESTAMP WITH TIME ZONE`) timestamps. 
 
 Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information or UTC offsets. Instead, it stores the `INT64` number of non-leap seconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or *instant*, in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, binning (see below), and string formatting for this type are performed in a configured time zone, which defaults to the system time zone.  
 
