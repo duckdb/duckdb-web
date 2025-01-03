@@ -104,8 +104,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 312
-extension_download_count_pretty: 312
+extension_download_count: 321
+extension_download_count_pretty: 321
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql_native.png'
 layout: community_extension_doc
 ---
@@ -134,5 +134,6 @@ LOAD {{ page.extension.name }};
 |   function_name   | function_type | description | comment | example |
 |-------------------|---------------|-------------|---------|---------|
 | clickhouse_native | table         |             |         |         |
+| clickhouse_scan   | table         |             |         |         |
 
 
