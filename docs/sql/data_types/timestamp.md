@@ -21,13 +21,9 @@ They can be created using the `TIMESTAMP` keyword followed by a string formatted
 
 DuckDB distinguishes *naive* / `WITHOUT TIME ZONE` and *time zone aware* / `WITH TIME ZONE` (of which the only current representative is `TIMESTAMP WITH TIME ZONE`) timestamps. 
 
-Despite the name, the `TIMESTAMP WITH TIME ZONE` data type does not store time zone information or UTC offsets. Instead, it stores the `INT64` number of non-leap seconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or *instant*, in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, binning (see below), and string formatting for this type are performed in a configured time zone. The time zone used for this purpose can be configured by `SET TimeZone` (see https://duckdb.org/docs/sql/data_types/timezones.html for valid string values) and defaults to the system time zone.  
+Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information or UTC offsets. Instead, it stores the `INT64` number of non-leap seconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or *instant*, in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, binning (see below), and string formatting for this type are performed in a configured time zone, which defaults to the system time zone.  
 
-The corresponding *naive* `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC, whose implementation is significantly easier and faster. Accordingly, timestamps could be interpreted as timestamps in UTC, but more commonly they are used to represent *local* values of time as recorded by an observer in an unspecified time zone.  It is a common data cleaning step to disambiguate such observations, which often originate from strings formatted using a _local_ binning system, which can have "holes" or "collisions" around daylight savings time transitions. To perform this data cleaning step,
-the UTC offset to non-UTC strings: `2021-07-31 07:20:15 -07:00`.
-The DuckDB `VARCHAR` cast operation parses these offsets correctly and will generate the corresponding instant.
-
-Such strings can be converted to `TIMESTAMP WITHOUT TIMEZONE` values using an explicit cast. As such, it is a common data cleaning step to combine a `TIMESTAMP WITHOUT TIME ZONE` *with* a time zone specification to compute a `TIMESTAMP WITH TIME ZONE`. For this purpose, implicit or explicit casts use the configured time zone; if an alternative time zone is required, the `timezone` function can be used to convert between the two types using an arbitrary time zone specification:
+The corresponding *naive* `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC, whose implementation is significantly easier and faster. Accordingly, `TIMESTAMP`s could be interpreted as timestamps in UTC, but more commonly they are used to represent *local* values of time as recorded by an observer in an unspecified time zone.  It is a common data cleaning step to disambiguate such observations, which are often recorded in strings formatted using a _local_ binning system that may have "holes" or "collisions" around daylight savings time transitions, into unambiguous `TIMESTAMP WITH TIME ZONE` values. To perform this data cleaning step, it is sometimes possible to simply append a known UTC offset to the strings, followed by an explicit cast from `VARCHAR` to `TIMESTAMPTZ`. Alternatively, a `TIMESTAMP WITHOUT TIMEZONE` can be created first and then be combined with a time zone specification to compute a `TIMESTAMP WITH TIME ZONE`. For this purpose, you may use implicit or explicit casts from `TIMESTAMP` to `TIMESTAMPTZ`, which use the configured time zone; or the `timezone` function, which allows the specification of an arbitrary time zone specification:
 
 ```sql
 SELECT
@@ -43,7 +39,6 @@ SELECT
 Note that the second value, a naive `TIMESTAMP`, is displayed without time zone offset, following ISO 8601 rules for local times, while the first value, a `TIMESTAMP WITH TIME ZONE`, is displayed with the UTC offset of the configured time zone, which is `'Europe/Berlin'`. The UTC offsets of `'America/Denver'` and `'Europe/Berlin'` at the given point in absolute time are `-07:00` and `+01:00`, respectively.
 
 ### Examples
-
 
 
 ```sql
@@ -104,7 +99,7 @@ SELECT TIMESTAMP WITH TIME ZONE '1992-09-20 11:30:00.123456789';
 
 ## Special Values
 
-There are three special timestamp values that can be used with the `TIMESTAMP` / `TIMESTAMPTZ` keywords:
+Three special timestamp values can be used with the `TIMESTAMP` / `TIMESTAMPTZ` keywords:
 
 
 | Input string | Valid types                | Description                                    |
@@ -113,8 +108,8 @@ There are three special timestamp values that can be used with the `TIMESTAMP` /
 | `infinity`   | `TIMESTAMP`, `TIMESTAMPTZ` | later than all other timestamps               |
 | `-infinity`  | `TIMESTAMP`, `TIMESTAMPTZ` | earlier than all other timestamps             |
 
-The values `infinity` and `-infinity` are specially handled in the system and are displayed unchanged;
-the value `epoch` is simply a notational shorthand that is be converted to the timestamp value when read.
+The values `infinity` and `-infinity` are special cased and are displayed unchanged;
+the value `epoch` is simply a notational shorthand that is converted to the corresponding timestamp value when read.
 
 ```sql
 SELECT '-infinity'::TIMESTAMP, 'epoch'::TIMESTAMP, 'infinity'::TIMESTAMP;
