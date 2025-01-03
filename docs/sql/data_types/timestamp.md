@@ -89,10 +89,12 @@ SELECT
     timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40') AS aware1,
     timezone('America/Denver', TIMESTAMPTZ '2001-02-16 04:38:40') AS naive1,
     timezone('UTC', TIMESTAMP '2001-02-16 20:38:40+00:00') AS aware2,
-    timezone('UTC', TIMESTAMPTZ '2001-02-16 04:38:40 Europe/Berlin') AS naive2,
+    timezone('UTC', TIMESTAMPTZ '2001-02-16 04:38:40 Europe/Berlin') AS naive2
+;
 ```
 
 <div class="monospace_table"></div>
+
 | aware1                    | naive1              | aware2                    | naive2              |
 |--------------------------:|--------------------:|--------------------------:|--------------------:|
 | 2001-02-17 04:38:40+01:00 | 2001-02-15 20:38:40 | 2001-02-16 21:38:40+01:00 | 2001-02-16 03:38:40 |
