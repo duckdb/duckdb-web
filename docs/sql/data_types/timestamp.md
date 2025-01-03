@@ -19,28 +19,6 @@ They can be created using the `TIMESTAMP` keyword followed by a string formatted
 
 > Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nanosecond precision and `WITH TIME ZONE` semantics, e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
 
-DuckDB distinguishes *naive* (`WITHOUT TIME ZONE`) and *time zone aware* (`WITH TIME ZONE`, of which the only current representative is `TIMESTAMP WITH TIME ZONE`) timestamps. 
-
-Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information or UTC offsets. Instead, it stores the `INT64` number of non-leap seconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or *instant*, in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, binning (see below), and string formatting for this type are performed in a configured time zone, which defaults to the system time zone.  
-
-The corresponding *naive* `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC, whose implementation is significantly easier and faster. Accordingly, `TIMESTAMP`s could be interpreted as timestamps in UTC, but more commonly they are used to represent *local* values of time as recorded by an observer in an unspecified time zone.  It is a common data cleaning step to disambiguate such observations, which are often recorded in strings formatted using a _local_ binning system that may have "holes" or "collisions" around daylight savings time transitions, into unambiguous `TIMESTAMP WITH TIME ZONE` values. To perform this data cleaning step, it is sometimes possible to simply append a known UTC offset to the strings, followed by an explicit cast from `VARCHAR` to `TIMESTAMPTZ`. Alternatively, a `TIMESTAMP WITHOUT TIMEZONE` can be created first and then be combined with a time zone specification to compute a `TIMESTAMP WITH TIME ZONE`. For this purpose, you may use implicit or explicit casts from `TIMESTAMP` to `TIMESTAMPTZ`, which use the configured time zone; or the `timezone` function, which allows the specification of an arbitrary time zone specification:
-
-```sql
-SELECT
-    timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')
-    timezone('America/Denver', TIMESTAMPTZ '2001-02-16 04:38:40+01:00')
-```
-
-<div class="monospace_table"></div>
-| aware                     | naive               |
-|--------------------------:|--------------------:|
-| 2001-02-17 03:38:40+00:00 | 2001-02-15 20:38:40 |
-
-Note that the second value, a naive `TIMESTAMP`, is displayed without time zone offset, following ISO 8601 rules for local times, while the first value, a `TIMESTAMP WITH TIME ZONE`, is displayed with the UTC offset of the configured time zone, which is `'Europe/Berlin'`. The UTC offsets of `'America/Denver'` and `'Europe/Berlin'` at the given point in absolute time are `-07:00` and `+01:00`, respectively.
-
-### Examples
-
-
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789';
 ```
@@ -51,14 +29,6 @@ SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789';
 
 ```sql
 SELECT TIMESTAMP '1992-09-20 11:30:00.123456789';
-```
-
-```text
-1992-09-20 11:30:00.123456
-```
-
-```sql
-SELECT DATETIME '1992-09-20 11:30:00.123456789';
 ```
 
 ```text
@@ -89,13 +59,48 @@ SELECT TIMESTAMPTZ '1992-09-20 11:30:00.123456789';
 1992-09-20 11:30:00.123456+00
 ```
 
+
 ```sql
-SELECT TIMESTAMP WITH TIME ZONE '1992-09-20 11:30:00.123456789';
+SELECT TIMESTAMPTZ '1992-09-20 11:30:00.123456789+01:00';
 ```
 
 ```text
-1992-09-20 11:30:00.123456+00
+1992-09-20 10:30:00.123456+00
 ```
+
+DuckDB distinguishes *naive* (`WITHOUT TIME ZONE`) and *time zone aware* (`WITH TIME ZONE`, of which the only current representative is `TIMESTAMP WITH TIME ZONE`) timestamps. 
+
+Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information or UTC offsets. Instead, it stores the `INT64` number of non-leap seconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or *instant*, in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, binning (see below), and string formatting for this type are performed in a configured time zone, which defaults to the system time zone and is just `UTC+00:00` in the examples above.  
+
+The corresponding *naive* `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC, whose implementation is significantly easier and faster. Accordingly, `TIMESTAMP`s could be interpreted as timestamps in UTC, but more commonly they are used to represent *local* values of time recorded by an observer in an unspecified time zone. 
+
+It is a common data cleaning problem to disambiguate such observations, which are often recorded in strings without time zone specification or UTC offsets, into unambiguous `TIMESTAMP WITH TIME ZONE` instants. One possible solution to this problem is to append UTC offsets to the strings, followed by an explicit cast to `TIMESTAMPTZ`. Alternatively, a `TIMESTAMP WITHOUT TIMEZONE` can be created first and then be combined with a time zone specification to compute a `TIMESTAMP WITH TIME ZONE`.
+
+### Conversion Between Strings And Naive And Time Zone-Aware Timestamps
+
+The conversion between strings *without* UTC offsets or IANA time zone names and `WITHOUT TIME ZONE` types (either via a keyword constructor or an explicit or implicit cast) is unambiguous and straightforward. 
+The conversion between strings *with* UTC offsets or time zone names and `WITH TIME ZONE` types is also umambiguous, but requires the `ICU` extension to handle time zone names.
+
+When strings *without* UTC offsets or time zone names are passed to a `WITH TIME ZONE` type, the string is interpreted in the configured time zone. Conversely, when strings *with* UTC offsets are passed to a `WITHOUT TIME ZONE` type, the local time in the configured time zone at the instant specified by the string is stored.
+
+Finally, when `WITH TIME ZONE` and `WITHOUT TIME ZONE` types are cast to each other via explicit or implicit casts, the translation uses the configured time zone. To use an alternative time zone, the `timezone` function provided by the `ICU` extension may be used:
+
+```sql
+SELECT
+    timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40') AS aware1,
+    timezone('America/Denver', TIMESTAMPTZ '2001-02-16 04:38:40+01:00') AS naive1,
+    timezone('UTC', TIMESTAMP '2001-02-16 20:38:40+00:00') AS aware2,
+    timezone('UTC', TIMESTAMPTZ '2001-02-16 04:38:40 Europe/Berlin') AS naive2,
+   timezone('UTC', TIMESTAMP '2001-02-16 20:38:40+00:00') AS aware3,
+    timezone('UTC', TIMESTAMPTZ '2001-02-16 04:38:40 Europe/Berlin') AS naive3
+```
+
+<div class="monospace_table"></div>
+| aware1                    | naive1              | aware2                    | naive2              |
+|--------------------------:|--------------------:|--------------------------:|--------------------:|
+| 2001-02-17 04:38:40+01:00 | 2001-02-15 20:38:40 | 2001-02-16 21:38:40+01:00 | 2001-02-16 03:38:40 |
+
+Note that naive `TIMESTAMP`s are displayed without time zone specification in the results, following ISO 8601 rules for local times, while time-zone aware `TIMESTAMPTZ`s are displayed with the UTC offset of the configured time zone, which is `'Europe/Berlin'` in the example. The UTC offsets of `'America/Denver'` and `'Europe/Berlin'` at all involved points in time are `-07:00` and `+01:00`, respectively.
 
 ## Special Values
 
@@ -134,14 +139,14 @@ An instant is a point in absolute time, usually given as a count of some time in
 
 ### Temporal Binning
 
-Binning is a common practice with continuous data: A set of values is broken up into ranges and the binning maps each value to the range (or _bin_) that it falls into. _Temporal binning_ is simply applying this practice to instants, e.g., by binning instants into years, months, and days:
+Binning is a common practice with continuous data: A range of possible values is broken up into contiguous subsets and the binning operation maps values to the *bin* they fall into. *Temporal binning* is simply applying this practice to instants; for example, by binning instants into years, months, and days.
 
 <img src="/images/blog/timezones/tz-instants.svg"
      alt="Time Zone Instants at the Epoch"
      width=600
      />
 
-Temporal binning rules are complex, and generally come in two sets: _time zones_ and _calendars_.
+Temporal binning rules are complex, and generally come in two sets: *time zones* and *calendars*.
 For most tasks, the calendar will just be the widely used Gregorian calendar,
 but time zones apply locale-specific rules and can vary widely.
 For example, here is what the binning in the IANA `'America/Los_Angeles'` time zone looks like at the epoch:
