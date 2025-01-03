@@ -80,7 +80,7 @@ It is a common data cleaning problem to disambiguate such observations, which ma
 The conversion between strings *without* UTC offsets or IANA time zone names and `WITHOUT TIME ZONE` types (either via a keyword constructor or an explicit or implicit cast) is unambiguous and straightforward. 
 The conversion between strings *with* UTC offsets or time zone names and `WITH TIME ZONE` types is also umambiguous, but requires the `ICU` extension to handle time zone names.
 
-When strings *without* UTC offsets or time zone names are passed to a `WITH TIME ZONE` type, the string is interpreted in the configured time zone. Conversely, when strings *with* UTC offsets are passed to a `WITHOUT TIME ZONE` type, the local time in the configured time zone at the instant specified by the string is stored.
+When strings *without* UTC offsets or time zone names are converted to a `WITH TIME ZONE` type, the string is interpreted in the configured time zone. Conversely, when strings *with* UTC offsets are passed to a `WITHOUT TIME ZONE` type, the local time in the configured time zone at the instant specified by the string is stored.
 
 Finally, when `WITH TIME ZONE` and `WITHOUT TIME ZONE` types are cast to each other via explicit or implicit casts, the translation uses the configured time zone. To use an alternative time zone, the `timezone` function provided by the `ICU` extension may be used:
 
