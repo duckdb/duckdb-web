@@ -32,9 +32,7 @@ SELECT pretty_print_integer(25_500_000) AS x;
 
 As one would expect, the macro gets persisted in the database.
 But this also means that we can host it on an HTTPS endpoint and share it with anyone!
-We have published this macro on `blobs.duckdb.org`
-
-Let's start a new DuckDB session and try it:
+We have published this macro on `blobs.duckdb.org`. Let's start a new DuckDB session and try it:
 
 ```bash
 duckdb
