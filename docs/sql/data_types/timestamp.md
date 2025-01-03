@@ -1,27 +1,48 @@
 ---
 layout: docu
 title: Timestamp Types
-blurb: A timestamp specifies a combination of a date (year, month, day) and a time (hour, minute, second, microsecond or nanosecond).
+blurb: Timestamps represent points in time. 
 ---
 
-Timestamps represent points in absolute time, usually called *instants*.
-DuckDB represents instants as the number of microseconds (µs) (or nanoseconds, for `TIMESTAMP_NS`) since `1970-01-01 00:00:00+00`.
-
-A timestamp specifies a combination of [`DATE`]({% link docs/sql/data_types/date.md %}) (year, month, day) and a [`TIME`]({% link docs/sql/data_types/time.md %}) (hour, minute, second, microsecond or nanosecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]` (three extra decimal places supported by `TIMESTAMP_NS`). Decimal places beyond the targeted sub-second precision are ignored.
-
-(Note: To avoid confusion from different time notation conventions, we will be using ISO-8601 y-m-d notation in this documentation.)
+Timestamps represent points in time and thus combine [`DATE`]({% link docs/sql/data_types/date.md %}) and [`TIME`]({% link docs/sql/data_types/time.md %}) information.
+They can be created using the `TIMESTAMP` keyword followed by a string formatted according to the ISO 8601 format, `YYYY-MM-DD hh:mm:ss[.zzzzzzzzz][+-TT[:tt]]`, which is also the format we use in this documentation. Decimal places beyond the targeted sub-second precision are ignored.
 
 ## Timestamp Types
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `TIMESTAMP_NS` |                                           | timestamp with nanosecond precision (UTC)              |
-| `TIMESTAMP`    | `DATETIME`, `TIMESTAMP WITHOUT TIME ZONE` | timestamp with microsecond precision (UTC)             |
-| `TIMESTAMP_MS` |                                           | timestamp with millisecond precision (UTC)             |
-| `TIMESTAMP_S`  |                                           | timestamp with second precision (UTC)                  |
-| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | timestamp with microsecond precision (time-zone aware) |
+| `TIMESTAMP_NS` |                                           | naive timestamp with nanosecond precision              |
+| `TIMESTAMP`    | `DATETIME`, `TIMESTAMP WITHOUT TIME ZONE` | naive timestamp with microsecond precision             |
+| `TIMESTAMP_MS` |                                           | naive timestamp with millisecond precision             |
+| `TIMESTAMP_S`  |                                           | naive timestamp with second precision                  |
+| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | time zone aware timestamp with microsecond precision   |
 
-> Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nano-second precision and "instant semantics", e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), lose precision when read using DuckDB.
+> Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nano-second precision and `WITH TIME ZONE` semantics, e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
+
+DuckDB distinguishes *naive* / `WITHOUT TIME ZONE` and *time zone aware* / `WITH TIME ZONE` (of which there currently only exists `TIMESTAMP WITH TIME ZONE`) timestamps. 
+
+Despite the name, the `TIMESTAMP WITH TIME ZONE` data type does not store time zone information or UTC offsets. Instead, it stores the `INT64` number of non-leap seconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or *instant*, in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, binning (see below), and string formatting for this type are performed in a configured time zone. The time zone used for this purpose can be configured by `SET TimeZone` (see https://duckdb.org/docs/sql/data_types/timezones.html for valid string values) and defaults to the system time zone.  
+
+The corresponding *naive* `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC, whose implementation is significantly easier and faster. Accordingly, timestamps could be interpreted as timestamps in UTC, but more commonly they are used to represent *local* values of time as recorded by an observer in an unspecified time zone.  It is a common data cleaning step to disambiguate such observations, which often originate from strings formatted using a _local_ binning system, which can have "holes" or "collisions" around daylight savings time transitions. To perform this data cleaning step,
+the UTC offset to non-UTC strings: `2021-07-31 07:20:15 -07:00`.
+The DuckDB `VARCHAR` cast operation parses these offsets correctly and will generate the corresponding instant.
+
+Such strings can be converted to `TIMESTAMP WITHOUT TIMEZONE` values using an explicit cast. As such, it is a common data cleaning step to combine a `TIMESTAMP WITHOUT TIME ZONE` *with* a time zone specification to compute a `TIMESTAMP WITH TIME ZONE`. For this purpose, implicit or explicit casts use the configured time zone; if an alternative time zone is required, the `timezone` function can be used to convert between the two types using an arbitrary time zone specification:
+
+```sql
+SELECT
+    timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')
+    timezone('America/Denver', TIMESTAMPTZ '2001-02-16 04:38:40+01:00')
+```
+
+<div class="monospace_table"></div>
+| aware                     | naive               |
+|--------------------------:|--------------------:|
+| 2001-02-17 03:38:40+00:00 | 2001-02-15 20:38:40 |
+
+Note that the second value, a naive `TIMESTAMP`, is displayed without time zone offset, following ISO 8601 rules for local times, while the first value, a `TIMESTAMP WITH TIME ZONE`, is displayed with the UTC offset of the configured time zone, which is `'Europe/Berlin'`. The UTC offsets of `'America/Denver'` and `'Europe/Berlin'` at the given point in absolute time are `-07:00` and `+01:00`, respectively.
+
+### Examples
 
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789';
@@ -112,11 +133,11 @@ To understand time zones and the `WITH TIME ZONE` types, it helps to start with 
 
 ### Instants
 
-A common claim is that database time is "stored in UTC", but in reality, databases store instants. An instant is a point in universal time, usually given as a count of some time increment from a fixed point in time (called the _epoch_). This is similar to how positions on the earth's surface are given using latitude and longitude relative to the equator and the Greenwich Meridian. In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00 +00:00`, and the increment is microseconds (µs). 
+An instant is a point in absolute time, usually given as a count of some time increment from a fixed point in time (called the _epoch_). This is similar to how positions on the earth's surface are given using latitude and longitude relative to the equator and the Greenwich Meridian. In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00+00:00`, and the increment is in seconds, milliseconds, microseconds, or nanoseconds, depending on the specific data type. 
 
 ### Temporal Binning
 
-Binning is a common practice with continuous data: A set of values is broken up into ranges and the binning maps each value to the range (or _bin_) that it falls into. _Temporal binning_ is simply applying this practice to instants:
+Binning is a common practice with continuous data: A set of values is broken up into ranges and the binning maps each value to the range (or _bin_) that it falls into. _Temporal binning_ is simply applying this practice to instants, e.g., by binning instants into years, months, and days:
 
 <img src="/images/blog/timezones/tz-instants.svg"
      alt="Time Zone Instants at the Epoch"
@@ -126,7 +147,7 @@ Binning is a common practice with continuous data: A set of values is broken up 
 Temporal binning rules are complex, and generally come in two sets: _time zones_ and _calendars_.
 For most tasks, the calendar will just be the widely used Gregorian calendar,
 but time zones apply locale-specific rules and can vary widely.
-For example, here is what the binning from the UTC time zone looks like at the epoch:
+For example, here is what the binning in the IANA `'America/Los_Angeles'` time zone looks like at the epoch:
 
 <img src="/images/blog/timezones/tz-timezone.svg"
      alt="Two Time Zones at the Epoch"
@@ -134,16 +155,13 @@ For example, here is what the binning from the UTC time zone looks like at the e
      />
 
 The most common temporal binning problem occurs when daylight savings time changes.
-This example contains a daylight savings time change where the "hour" bin is two hours long.
-To distinguish the two hours, another bin containing the offset from UTC is needed:
+The example below contains a daylight savings time change where the "hour" bin is two hours long.
+To distinguish the two hours, another range of bins, containing the offset from UTC, is needed:
 
 <img src="/images/blog/timezones/tz-daylight.svg"
      alt="Two Time Zones at a Daylight Savings Time transition"
      width=600
      />
-
-This illustrates why temporal data should always be stored as instants. 
-For more on this subject, see the section on "naïve timestamps" below. 
 
 ### Time Zone Support
 
@@ -228,14 +246,3 @@ WHERE name = 'Calendar';
 | Calendar | gregorian | The current calendar | VARCHAR    |
 
 > If you find that your binning operations are not behaving as you expect, check these values and adjust them if needed.
-
-## Naïve Timestamps
-
-Timestamp values are sometimes created from a string formatted using a _local_ binning system instead of one that can represent instants.
-This results in the column values being offset from UTC, which can cause problems with daylight savings time.
-More generally, such string representations can have "holes" or "collisions" around DST transitions.
-These values are called *naïve* timestamps, and often constitute a data cleaning problem.
-
-A simple way to avoid this situation going forward is to add the UTC offset to non-UTC strings: `2021-07-31 07:20:15 -07:00`.
-The DuckDB `VARCHAR` cast operation parses these offsets correctly and will generate the corresponding instant.
-
