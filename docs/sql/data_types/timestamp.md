@@ -4,7 +4,7 @@ title: Timestamp Types
 blurb: Timestamps represent points in time. 
 ---
 
-Timestamps represent points in time and thus combine [`DATE`]({% link docs/sql/data_types/date.md %}) and [`TIME`]({% link docs/sql/data_types/time.md %}) information.
+Timestamps represent points in time. As such, they combine [`DATE`]({% link docs/sql/data_types/date.md %}) and [`TIME`]({% link docs/sql/data_types/time.md %}) information.
 They can be created using the `TIMESTAMP` keyword followed by a string formatted according to the ISO 8601 format, `YYYY-MM-DD hh:mm:ss[.zzzzzzzzz][+-TT[:tt]]`, which is also the format we use in this documentation. Decimal places beyond the targeted sub-second precision are ignored.
 
 ## Timestamp Types
@@ -17,9 +17,9 @@ They can be created using the `TIMESTAMP` keyword followed by a string formatted
 | `TIMESTAMP_S`  |                                           | naive timestamp with second precision                  |
 | `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | time zone aware timestamp with microsecond precision   |
 
-> Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nano-second precision and `WITH TIME ZONE` semantics, e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
+> Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nanosecond precision and `WITH TIME ZONE` semantics, e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
 
-DuckDB distinguishes *naive* / `WITHOUT TIME ZONE` and *time zone aware* / `WITH TIME ZONE` (of which there currently only exists `TIMESTAMP WITH TIME ZONE`) timestamps. 
+DuckDB distinguishes *naive* / `WITHOUT TIME ZONE` and *time zone aware* / `WITH TIME ZONE` (of which the only current representative is `TIMESTAMP WITH TIME ZONE`) timestamps. 
 
 Despite the name, the `TIMESTAMP WITH TIME ZONE` data type does not store time zone information or UTC offsets. Instead, it stores the `INT64` number of non-leap seconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or *instant*, in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, binning (see below), and string formatting for this type are performed in a configured time zone. The time zone used for this purpose can be configured by `SET TimeZone` (see https://duckdb.org/docs/sql/data_types/timezones.html for valid string values) and defaults to the system time zone.  
 
@@ -43,6 +43,8 @@ SELECT
 Note that the second value, a naive `TIMESTAMP`, is displayed without time zone offset, following ISO 8601 rules for local times, while the first value, a `TIMESTAMP WITH TIME ZONE`, is displayed with the UTC offset of the configured time zone, which is `'Europe/Berlin'`. The UTC offsets of `'America/Denver'` and `'Europe/Berlin'` at the given point in absolute time are `-07:00` and `+01:00`, respectively.
 
 ### Examples
+
+
 
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789';
@@ -102,17 +104,17 @@ SELECT TIMESTAMP WITH TIME ZONE '1992-09-20 11:30:00.123456789';
 
 ## Special Values
 
-There are also three special date values that can be used on input:
+There are three special timestamp values that can be used with the `TIMESTAMP` / `TIMESTAMPTZ` keywords:
 
 
 | Input string | Valid types                | Description                                    |
 |:-------------|:---------------------------|:-----------------------------------------------|
-| `epoch`      | `TIMESTAMP`, `TIMESTAMPTZ` | 1970-01-01 00:00:00+00 (Unix system time zero) |
-| `infinity`   | `TIMESTAMP`, `TIMESTAMPTZ` | later than all other time stamps               |
-| `-infinity`  | `TIMESTAMP`, `TIMESTAMPTZ` | earlier than all other time stamps             |
+| `epoch`      | `TIMESTAMP`, `TIMESTAMPTZ` | 1970-01-01 00:00:00[+00] (Unix system time zero) |
+| `infinity`   | `TIMESTAMP`, `TIMESTAMPTZ` | later than all other timestamps               |
+| `-infinity`  | `TIMESTAMP`, `TIMESTAMPTZ` | earlier than all other timestamps             |
 
-The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged;
-but `epoch` is simply a notational shorthand that will be converted to the time stamp value when read.
+The values `infinity` and `-infinity` are specially handled in the system and are displayed unchanged;
+the value `epoch` is simply a notational shorthand that is be converted to the timestamp value when read.
 
 ```sql
 SELECT '-infinity'::TIMESTAMP, 'epoch'::TIMESTAMP, 'infinity'::TIMESTAMP;
