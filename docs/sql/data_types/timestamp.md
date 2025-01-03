@@ -70,11 +70,11 @@ SELECT TIMESTAMPTZ '1992-09-20 11:30:00.123456789+01:00';
 
 DuckDB distinguishes *naive* (`WITHOUT TIME ZONE`) and *time zone aware* (`WITH TIME ZONE`, of which the only current representative is `TIMESTAMP WITH TIME ZONE`) timestamps. 
 
-Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information or UTC offsets. Instead, it stores the `INT64` number of non-leap seconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or *instant*, in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, binning (see below), and string formatting for this type are performed in a configured time zone, which defaults to the system time zone and is just `UTC+00:00` in the examples above.  
+Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information or UTC offsets. Instead, it stores the `INT64` number of non-leap seconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or *instant*, in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, [binning]({% link docs/sql/data_types/timestamp.md#conversion-between-strings-and-naive-and-time-zone-aware-timestamps }), and string formatting for this type are performed in a configured time zone, which defaults to the system time zone and is just `UTC+00:00` in the examples above.  
 
-The corresponding *naive* `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC, whose implementation is significantly easier and faster. Accordingly, `TIMESTAMP`s could be interpreted as timestamps in UTC, but more commonly they are used to represent *local* values of time recorded by an observer in an unspecified time zone. 
+The corresponding *naive* `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC without offsets or time zones. Accordingly, naive `TIMESTAMP`s could be interpreted as timestamps in UTC, but more commonly they are used to represent *local* values of time recorded by an observer in an unspecified time zone. 
 
-It is a common data cleaning problem to disambiguate such observations, which are often recorded in strings without time zone specification or UTC offsets, into unambiguous `TIMESTAMP WITH TIME ZONE` instants. One possible solution to this problem is to append UTC offsets to the strings, followed by an explicit cast to `TIMESTAMPTZ`. Alternatively, a `TIMESTAMP WITHOUT TIMEZONE` can be created first and then be combined with a time zone specification to compute a `TIMESTAMP WITH TIME ZONE`.
+It is a common data cleaning problem to disambiguate such observations, which are often stored in strings without time zone specification or UTC offsets, into unambiguous `TIMESTAMP WITH TIME ZONE` instants. One possible solution to this is to append UTC offsets to the strings, followed by an explicit cast to `TIMESTAMP WITH TIME ZONE`. Alternatively, a naive `TIMESTAMP WITHOUT TIME ZONE` can be created first and then be combined with a time zone specification to obtain a time zone aware `TIMESTAMP WITH TIME ZONE`.
 
 ### Conversion Between Strings And Naive And Time Zone-Aware Timestamps
 
@@ -88,11 +88,9 @@ Finally, when `WITH TIME ZONE` and `WITHOUT TIME ZONE` types are cast to each ot
 ```sql
 SELECT
     timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40') AS aware1,
-    timezone('America/Denver', TIMESTAMPTZ '2001-02-16 04:38:40+01:00') AS naive1,
+    timezone('America/Denver', TIMESTAMPTZ '2001-02-16 04:38:40') AS naive1,
     timezone('UTC', TIMESTAMP '2001-02-16 20:38:40+00:00') AS aware2,
     timezone('UTC', TIMESTAMPTZ '2001-02-16 04:38:40 Europe/Berlin') AS naive2,
-   timezone('UTC', TIMESTAMP '2001-02-16 20:38:40+00:00') AS aware3,
-    timezone('UTC', TIMESTAMPTZ '2001-02-16 04:38:40 Europe/Berlin') AS naive3
 ```
 
 <div class="monospace_table"></div>
