@@ -42,12 +42,11 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | Alias of `date_sub`. The number of complete [partitions]({% link docs/sql/functions/datepart.md %}) between the timestamps. |
 | [`datetrunc(part, timestamp)`](#datetruncpart-timestamp) | Alias of `date_trunc`. Truncate to specified [precision]({% link docs/sql/functions/datepart.md %}). |
 | [`dayname(timestamp)`](#daynametimestamp) | The (English) name of the weekday. |
-| [`epoch_ms(ms)`](#epoch_msms) | Converts ms since epoch to a timestamp. |
-| [`epoch_ms(timestamp)`](#epoch_mstimestamp) | Converts a timestamp to milliseconds since the epoch. |
-| [`epoch_ms(timestamp)`](#epoch_mstimestamp) | Return the total number of milliseconds since the epoch. |
-| [`epoch_ns(timestamp)`](#epoch_nstimestamp) | Return the total number of nanoseconds since the epoch. |
-| [`epoch_us(timestamp)`](#epoch_ustimestamp) | Return the total number of microseconds since the epoch. |
-| [`epoch(timestamp)`](#epochtimestamp) | Converts a timestamp to seconds since the epoch. |
+| [`epoch_ms(ms)`](#epoch_msms) | Converts integer milliseconds since the epoch to a timestamp. |
+| [`epoch_ms(timestamp)`](#epoch_mstimestamp) | Returns the total number of milliseconds since the epoch. |
+| [`epoch_ns(timestamp)`](#epoch_nstimestamp) | Returns the total number of nanoseconds since the epoch. |
+| [`epoch_us(timestamp)`](#epoch_ustimestamp) | Returns the total number of microseconds since the epoch. |
+| [`epoch(timestamp)`](#epochtimestamp) | Returns the total number of seconds since the epoch. |
 | [`extract(field FROM timestamp)`](#extractfield-from-timestamp) | Get [subfield]({% link docs/sql/functions/datepart.md %}) from a timestamp. |
 | [`greatest(timestamp, timestamp)`](#greatesttimestamp-timestamp) | The later of two timestamps. |
 | [`isfinite(timestamp)`](#isfinitetimestamp) | Returns true if the timestamp is finite, false otherwise. |
@@ -55,7 +54,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`last_day(timestamp)`](#last_daytimestamp) | The last day of the month. |
 | [`least(timestamp, timestamp)`](#leasttimestamp-timestamp) | The earlier of two timestamps. |
 | [`make_timestamp(bigint, bigint, bigint, bigint, bigint, double)`](#make_timestampbigint-bigint-bigint-bigint-bigint-double) | The timestamp for the given parts. |
-| [`make_timestamp(microseconds)`](#make_timestampmicroseconds) | The timestamp for the given number of µs since the epoch. |
+| [`make_timestamp(microseconds)`](#make_timestampmicroseconds) | Converts integer microseconds since the epoch to a timestamp. |
 | [`monthname(timestamp)`](#monthnametimestamp) | The (English) name of the month. |
 | [`strftime(timestamp, format)`](#strftimetimestamp-format) | Converts timestamp to string according to the [format string]({% link docs/sql/functions/dateformat.md %}#format-specifiers). |
 | [`strptime(text, format-list)`](#strptimetext-format-list) | Converts the string `text` to timestamp applying the [format strings]({% link docs/sql/functions/dateformat.md %}) in the list until one succeeds. Throws an error on failure. To return `NULL` on failure, use [`try_strptime`](#try_strptimetext-format-list). |
@@ -195,23 +194,16 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts ms since epoch to a timestamp. |
+| **Description** | Converts integer milliseconds since the epoch to a timestamp. |
 | **Example** | `epoch_ms(701222400000)` |
 | **Result** | `1992-03-22 00:00:00` |
 
-#### `epoch_ms(timestamp)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Converts a timestamp to milliseconds since the epoch. |
-| **Example** | `epoch_ms('2022-11-07 08:43:04.123456'::TIMESTAMP);` |
-| **Result** | `1667810584123` |
 
 #### `epoch_ms(timestamp)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return the total number of milliseconds since the epoch. |
+| **Description** | Returns the total number of milliseconds since the epoch. |
 | **Example** | `epoch_ms(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `1627991984123` |
 
@@ -227,7 +219,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return the total number of microseconds since the epoch. |
+| **Description** | Returns the total number of microseconds since the epoch. |
 | **Example** | `epoch_us(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `1627991984123456` |
 
@@ -235,7 +227,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts a timestamp to seconds since the epoch. |
+| **Description** | Returns the total number of seconds since the epoch. |
 | **Example** | `epoch('2022-11-07 08:43:04'::TIMESTAMP);` |
 | **Result** | `1667810584` |
 
@@ -299,7 +291,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | The timestamp for the given number of µs since the epoch. |
+| **Description** | Converts integer microseconds since the epoch to a timestamp. |
 | **Example** | `make_timestamp(1667810584123456)` |
 | **Result** | `2022-11-07 08:43:04.123456` |
 
