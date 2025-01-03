@@ -61,11 +61,11 @@ SELECT TIMESTAMPTZ '1992-09-20 11:30:00.123456789';
 
 
 ```sql
-SELECT TIMESTAMPTZ '1992-09-20 11:30:00.123456789+01:00';
+SELECT TIMESTAMPTZ '1992-09-20 12:30:00.123456789+01:00';
 ```
 
 ```text
-1992-09-20 10:30:00.123456+00
+1992-09-20 11:30:00.123456+00
 ```
 
 DuckDB distinguishes *naive* (`WITHOUT TIME ZONE`) and *time zone aware* (`WITH TIME ZONE`, of which the only current representative is `TIMESTAMP WITH TIME ZONE`) timestamps. 
