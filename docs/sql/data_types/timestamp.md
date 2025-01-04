@@ -72,8 +72,8 @@ DuckDB distinguishes *naive* (`WITHOUT TIME ZONE`) and *time zone aware* (`WITH 
 
 Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information. Instead, it stores the `INT64` number of non-leap microseconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or [*instant*]({% link docs/sql/data_types/timestamp.md#temporal-binning }), in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, [*binning*]({% link docs/sql/data_types/timestamp.md#temporal-binning }), and string formatting for this type are performed in a [configured time zone]({% link docs/sql/data_types/timestamp.md#time-zone-support}), which defaults to the system time zone and is just `UTC+00:00` in the examples above.  
 
-The corresponding *naive* `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC without offsets or time zones. Accordingly, naive `TIMESTAMP`s could be interpreted as UTC timestamps, but more commonly they are used to represent *local* values of time recorded by an observer in an unspecified time zone and operations on these types can be interpreted as mechanical manipulation of record fields.
-It is a common data cleaning problem to disambiguate such observations, which may also be stored in raw strings without time zone specification or UTC offsets, into unambiguous `TIMESTAMP WITH TIME ZONE` instants. One possible solution to this is to append UTC offsets to strings, followed by an explicit cast to `TIMESTAMP WITH TIME ZONE`. Alternatively, a naive `TIMESTAMP WITHOUT TIME ZONE` may be created first and then be combined with a time zone specification to obtain a time zone aware `TIMESTAMP WITH TIME ZONE`.
+The corresponding `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC without offsets or time zones. Accordingly, `TIMESTAMP`s could be interpreted as UTC timestamps, but more commonly they are used to represent *local* values of time recorded by an observer in an unspecified time zone and operations on these types can be interpreted as mechanical manipulation of record fields.
+It is a common data cleaning problem to disambiguate such observations, which may also be stored in raw strings without time zone specification or UTC offsets, into unambiguous `TIMESTAMP WITH TIME ZONE` instants. One possible solution to this is to append UTC offsets to strings, followed by an explicit cast to `TIMESTAMP WITH TIME ZONE`. Alternatively, a `TIMESTAMP WITHOUT TIME ZONE` may be created first and then be combined with a time zone specification to obtain a time zone aware `TIMESTAMP WITH TIME ZONE`.
 
 ## Conversion Between Strings And Naive And Time Zone-Aware Timestamps
 
@@ -98,7 +98,7 @@ SELECT
 |------------------------|---------------------|------------------------|---------------------|
 | 2001-02-17 04:38:40+01 | 2001-02-15 20:38:40 | 2001-02-16 21:38:40+01 | 2001-02-16 03:38:40 |
 
-Note that naive `TIMESTAMP`s are displayed without time zone specification in the results, following ISO 8601 rules for local times, while time-zone aware `TIMESTAMPTZ`s are displayed with the UTC offset of the configured time zone, which is `'Europe/Berlin'` in the example. The UTC offsets of `'America/Denver'` and `'Europe/Berlin'` at all involved points in time are `-07:00` and `+01:00`, respectively.
+Note that `TIMESTAMP`s are displayed without time zone specification in the results, following ISO 8601 rules for local times, while time-zone aware `TIMESTAMPTZ`s are displayed with the UTC offset of the configured time zone, which is `'Europe/Berlin'` in the example. The UTC offsets of `'America/Denver'` and `'Europe/Berlin'` at all involved points in time are `-07:00` and `+01:00`, respectively.
 
 ## Special Values
 
