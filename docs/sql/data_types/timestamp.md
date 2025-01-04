@@ -135,7 +135,7 @@ An instant is a point in absolute time, usually given as a count of some time in
 
 ### Temporal Binning
 
-Binning is a common practice with continuous data: A range of possible values is broken up into contiguous subsets and the binning operation maps values to the *bin* they fall into. *Temporal binning* is simply applying this practice to instants; for example, by binning instants into years, months, and days.
+Binning is a common practice with continuous data: A range of possible values is broken up into contiguous subsets and the binning operation maps actual values to the *bin* they fall into. *Temporal binning* is simply applying this practice to instants; for example, by binning instants into years, months, and days.
 
 <img src="/images/blog/timezones/tz-instants.svg"
      alt="Time Zone Instants at the Epoch"
