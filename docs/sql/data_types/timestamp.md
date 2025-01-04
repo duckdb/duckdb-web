@@ -98,7 +98,7 @@ SELECT
 |------------------------|---------------------|------------------------|---------------------|
 | 2001-02-17 04:38:40+01 | 2001-02-15 20:38:40 | 2001-02-16 21:38:40+01 | 2001-02-16 03:38:40 |
 
-Note that `TIMESTAMP`s are displayed without time zone specification in the results, following ISO 8601 rules for local times, while time-zone aware `TIMESTAMPTZ`s are displayed with the UTC offset of the configured time zone, which is `'Europe/Berlin'` in the example. The UTC offsets of `'America/Denver'` and `'Europe/Berlin'` at all involved points in time are `-07:00` and `+01:00`, respectively.
+Note that `TIMESTAMP`s are displayed without time zone specification in the results, following ISO 8601 rules for local times, while time-zone aware `TIMESTAMPTZ`s are displayed with the UTC offset of the configured time zone, which is `'Europe/Berlin'` in the example. The UTC offsets of `'America/Denver'` and `'Europe/Berlin'` at all involved instants are `-07:00` and `+01:00`, respectively.
 
 ## Special Values
 
