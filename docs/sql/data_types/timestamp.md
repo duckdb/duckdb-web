@@ -102,7 +102,7 @@ Note that `TIMESTAMP`s are displayed without time zone specification in the resu
 
 ## Special Values
 
-Three special values can be used with the timestamp keywords:
+Three special strings can be used to create timestamps:
 
 | Input string | Description                                      |
 |:-------------|:-------------------------------------------------|
