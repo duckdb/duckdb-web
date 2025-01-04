@@ -102,14 +102,13 @@ Note that `TIMESTAMP`s are displayed without time zone specification in the resu
 
 ## Special Values
 
-Three special timestamp values can be used with the `TIMESTAMP` / `TIMESTAMPTZ` keywords:
+Three special values can be used with the timestamp keywords:
 
-
-| Input string | Valid types                | Description                                    |
-|:-------------|:---------------------------|:-----------------------------------------------|
-| `epoch`      | `TIMESTAMP`, `TIMESTAMPTZ` | 1970-01-01 00:00:00[+00] (Unix system time zero) |
-| `infinity`   | `TIMESTAMP`, `TIMESTAMPTZ` | later than all other timestamps               |
-| `-infinity`  | `TIMESTAMP`, `TIMESTAMPTZ` | earlier than all other timestamps             |
+| Input string | Description                                      |
+|:-------------|:-------------------------------------------------|
+| `epoch`      | 1970-01-01 00:00:00[+00] (Unix system time zero) |
+| `infinity`   | later than all other timestamps                  |
+| `-infinity`  | earlier than all other timestamps                |
 
 The values `infinity` and `-infinity` are special cased and are displayed unchanged, whereas the value `epoch` is simply a notational shorthand that is converted to the corresponding timestamp value when read.
 
