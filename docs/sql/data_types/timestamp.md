@@ -5,7 +5,7 @@ blurb: Timestamps represent points in time.
 ---
 
 Timestamps represent points in time. As such, they combine [`DATE`]({% link docs/sql/data_types/date.md %}) and [`TIME`]({% link docs/sql/data_types/time.md %}) information.
-They can be created using the type keyword followed by a string formatted according to the ISO 8601 format, `YYYY-MM-DD hh:mm:ss[.zzzzzzzzz][+-TT[:tt]]`, which is also the format we use in this documentation. Decimal places beyond the supported precision are ignored.
+They can be created using the type name followed by a string formatted according to the ISO 8601 format, `YYYY-MM-DD hh:mm:ss[.zzzzzzzzz][+-TT[:tt]]`, which is also the format we use in this documentation. Decimal places beyond the supported precision are ignored.
 
 ## Timestamp Types
 
