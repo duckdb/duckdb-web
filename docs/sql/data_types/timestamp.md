@@ -70,7 +70,7 @@ SELECT TIMESTAMPTZ '1992-09-20 12:30:00.123456789+01:00';
 
 DuckDB distinguishes *naive* (`WITHOUT TIME ZONE`) and *time zone aware* (`WITH TIME ZONE`, of which the only current representative is `TIMESTAMP WITH TIME ZONE`) timestamps. 
 
-Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information. Instead, it stores the `INT64` number of non-leap microseconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or [*instant*]({% link docs/sql/data_types/timestamp.md#temporal-binning }), in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, [binning]({% link docs/sql/data_types/timestamp.md#temporal-binning }), and string formatting for this type are performed in a [configured time zone]({% link docs/sql/data_types/timestamp.md#time-zone-support}), which defaults to the system time zone and is just `UTC+00:00` in the examples above.  
+Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information. Instead, it stores the `INT64` number of non-leap microseconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or [*instant*]({% link docs/sql/data_types/timestamp.md#temporal-binning }), in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, [*binning*]({% link docs/sql/data_types/timestamp.md#temporal-binning }), and string formatting for this type are performed in a [configured time zone]({% link docs/sql/data_types/timestamp.md#time-zone-support}), which defaults to the system time zone and is just `UTC+00:00` in the examples above.  
 
 The corresponding *naive* `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC without offsets or time zones. Accordingly, naive `TIMESTAMP`s could be interpreted as UTC timestamps, but more commonly they are used to represent *local* values of time recorded by an observer in an unspecified time zone and operations on these types can be interpreted as mechanical manipulation of record fields.
 It is a common data cleaning problem to disambiguate such observations, which may also be stored in raw strings without time zone specification or UTC offsets, into unambiguous `TIMESTAMP WITH TIME ZONE` instants. One possible solution to this is to append UTC offsets to strings, followed by an explicit cast to `TIMESTAMP WITH TIME ZONE`. Alternatively, a naive `TIMESTAMP WITHOUT TIME ZONE` may be created first and then be combined with a time zone specification to obtain a time zone aware `TIMESTAMP WITH TIME ZONE`.
@@ -128,11 +128,11 @@ See [Timestamp Functions]({% link docs/sql/functions/timestamp.md %}).
 
 ## Time Zones
 
-To understand time zones and the `WITH TIME ZONE` types, it helps to start with two concepts: _instants_ and _temporal binning_.
+To understand time zones and the `WITH TIME ZONE` types, it helps to start with two concepts: *instants* and *temporal binning*.
 
 ### Instants
 
-An instant is a point in absolute time, usually given as a count of some time increment from a fixed point in time (called the _epoch_). This is similar to how positions on the earth's surface are given using latitude and longitude relative to the equator and the Greenwich Meridian. In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00+00:00`, and the increment is in seconds, milliseconds, microseconds, or nanoseconds, depending on the specific data type. 
+An instant is a point in absolute time, usually given as a count of some time increment from a fixed point in time (called the *epoch*). This is similar to how positions on the earth's surface are given using latitude and longitude relative to the equator and the Greenwich Meridian. In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00+00:00`, and the increment is in seconds, milliseconds, microseconds, or nanoseconds, depending on the specific data type. 
 
 ### Temporal Binning
 
