@@ -75,7 +75,7 @@ Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone informat
 The corresponding *naive* `TIMESTAMP WITHOUT TIME ZONE` stores the same raw `INT64` data, but arithmetic, binning, and string formatting follow the straightforward rules of UTC without offsets or time zones. Accordingly, naive `TIMESTAMP`s could be interpreted as UTC timestamps, but more commonly they are used to represent *local* values of time recorded by an observer in an unspecified time zone and operations on these types can be interpreted as mechanical manipulation of record fields.
 It is a common data cleaning problem to disambiguate such observations, which may also be stored in raw strings without time zone specification or UTC offsets, into unambiguous `TIMESTAMP WITH TIME ZONE` instants. One possible solution to this is to append UTC offsets to strings, followed by an explicit cast to `TIMESTAMP WITH TIME ZONE`. Alternatively, a naive `TIMESTAMP WITHOUT TIME ZONE` may be created first and then be combined with a time zone specification to obtain a time zone aware `TIMESTAMP WITH TIME ZONE`.
 
-### Conversion Between Strings And Naive And Time Zone-Aware Timestamps
+## Conversion Between Strings And Naive And Time Zone-Aware Timestamps
 
 The conversion between strings *without* UTC offsets or IANA time zone names and `WITHOUT TIME ZONE` types (either via a keyword constructor or an explicit or implicit cast) is unambiguous and straightforward. 
 The conversion between strings *with* UTC offsets or time zone names and `WITH TIME ZONE` types is also umambiguous, but requires the `ICU` extension to handle time zone names.
