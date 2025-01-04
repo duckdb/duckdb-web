@@ -146,7 +146,7 @@ Binning is a common practice with continuous data: A range of possible values is
 Temporal binning rules are complex, and generally come in two sets: *time zones* and *calendars*.
 For most tasks, the calendar will just be the widely used Gregorian calendar,
 but time zones apply locale-specific rules and can vary widely.
-For example, here is what binning near the epoch looks like for the IANA `'America/Los_Angeles'` time zone:
+For example, here is what binning for the `'America/Los_Angeles'` time zone looks like near the epoch:
 
 <img src="/images/blog/timezones/tz-timezone.svg"
      alt="Two Time Zones at the Epoch"
