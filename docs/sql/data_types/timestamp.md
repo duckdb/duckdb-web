@@ -68,7 +68,7 @@ SELECT TIMESTAMPTZ '1992-09-20 12:30:00.123456789+01:00';
 1992-09-20 11:30:00.123456+00
 ```
 
-DuckDB distinguishes *naive* (`WITHOUT TIME ZONE`) and *time zone aware* (`WITH TIME ZONE`, of which the only current representative is `TIMESTAMP WITH TIME ZONE`) timestamps. 
+DuckDB distinguishes timestamps `WITHOUT TIME ZONE` and `WITH TIME ZONE` (of which the only current representative is `TIMESTAMP WITH TIME ZONE`). 
 
 Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information. Instead, it stores the `INT64` number of non-leap microseconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point, or [*instant*]({% link docs/sql/data_types/timestamp.md#temporal-binning }), in absolute time. What makes `TIMESTAMP WITH TIME ZONE` *time zone aware* is that timestamp arithmetic, [*binning*]({% link docs/sql/data_types/timestamp.md#temporal-binning }), and string formatting for this type are performed in a [configured time zone]({% link docs/sql/data_types/timestamp.md#time-zone-support}), which defaults to the system time zone and is just `UTC+00:00` in the examples above.  
 
