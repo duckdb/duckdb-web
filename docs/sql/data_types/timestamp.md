@@ -111,8 +111,7 @@ Three special timestamp values can be used with the `TIMESTAMP` / `TIMESTAMPTZ` 
 | `infinity`   | `TIMESTAMP`, `TIMESTAMPTZ` | later than all other timestamps               |
 | `-infinity`  | `TIMESTAMP`, `TIMESTAMPTZ` | earlier than all other timestamps             |
 
-The values `infinity` and `-infinity` are special cased and are displayed unchanged;
-the value `epoch` is simply a notational shorthand that is converted to the corresponding timestamp value when read.
+The values `infinity` and `-infinity` are special cased and are displayed unchanged, whereas the value `epoch` is simply a notational shorthand that is converted to the corresponding timestamp value when read.
 
 ```sql
 SELECT '-infinity'::TIMESTAMP, 'epoch'::TIMESTAMP, 'infinity'::TIMESTAMP;
