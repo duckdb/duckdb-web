@@ -506,5 +506,5 @@ the result will be `NULL`.
 
 ## Calendars
 
-The ICU extension also supports [non-Gregorian calendars]({% link docs/sql/data_types/timestamp.md %}#calendars).
+The ICU extension also supports [non-Gregorian calendars]({% link docs/sql/data_types/timestamp.md %}#calendar-support).
 If such a calendar is current, then the display and binning operations will use that calendar.
