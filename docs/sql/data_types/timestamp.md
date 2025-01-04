@@ -154,7 +154,7 @@ For example, here is what binning for the `'America/Los_Angeles'` time zone look
 
 The most common temporal binning problem occurs when daylight savings time changes.
 The example below contains a daylight savings time change where the "hour" bin is two hours long.
-To distinguish the two hours, another range of bins, containing the offset from UTC, is needed:
+To distinguish the two hours, another range of bins containing the offset from UTC is needed:
 
 <img src="/images/blog/timezones/tz-daylight.svg"
      alt="Two Time Zones at a Daylight Savings Time transition"
