@@ -7,7 +7,7 @@ title: Building Extensions
 
 ## Building Extensions Using Build Flags
 
-To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be buiold.
+To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be build.
 
 Extension will in most cases by directly linked the resulting DuckDB executable.
 
