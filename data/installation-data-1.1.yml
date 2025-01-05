@@ -66,7 +66,7 @@
   has_sha_512_hash: 'yes'
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-osx-universal.zip
   installation_code: >-
-    wget https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-osx-universal.zip &&
+    curl --fail --location --progress-bar --output duckdb_cli-osx-universal.zip https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-osx-universal.zip &&
     unzip duckdb_cli-osx-universal.zip
   usage_example: ./duckdb
 - variant: stable
@@ -77,7 +77,7 @@
   has_sha_512_hash: 'yes'
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-amd64.zip
   installation_code: >-
-    wget https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-amd64.zip &&
+    curl --fail --location --progress-bar --output duckdb_cli-linux-amd64.zip https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-amd64.zip &&
     unzip duckdb_cli-linux-amd64.zip
   usage_example: ./duckdb
 - variant: stable
@@ -88,7 +88,7 @@
   has_sha_512_hash: 'yes'
   link: https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-aarch64.zip
   installation_code: >-
-    wget https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-aarch64.zip &&
+    curl --fail --location --progress-bar --output duckdb_cli-linux-aarch64.zip https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-aarch64.zip &&
     unzip duckdb_cli-linux-aarch64.zip
   usage_example: ./duckdb
 - variant: stable
@@ -222,7 +222,7 @@
   architecture: universal
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
   installation_code: >-
-    wget https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip &&
+    curl --fail --location --progress-bar --output duckdb-binaries-osx.zip https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip &&
     unzip duckdb-binaries-osx.zip &&
     unzip duckdb_cli-osx-universal.zip
   usage_example: ./duckdb
@@ -233,7 +233,7 @@
   architecture: x86_64
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip'
   installation_code: >-
-    wget https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip &&
+    curl --fail --location --progress-bar --output duckdb-binaries-linux.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip &&
     unzip duckdb-binaries-linux.zip &&
     unzip duckdb_cli-linux-amd64.zip
   usage_example: ./duckdb
@@ -244,7 +244,7 @@
   architecture: arm64
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip'
   installation_code: >-
-    wget https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip &&
+    curl --fail --location --progress-bar --output duckdb-binaries-linux-aarch64.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip &&
     unzip duckdb-binaries-linux-aarch64.zip &&
     unzip duckdb_cli-linux-aarch64.zip
   usage_example: ./duckdb
