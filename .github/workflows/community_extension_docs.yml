@@ -13,6 +13,7 @@ jobs:
     needs:
       - generate_docs
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web' }}
     steps:
     - uses: actions/checkout@v4
       with:
