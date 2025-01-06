@@ -221,7 +221,7 @@ Note that using remote paths for compressed files is currently not possible.
 
 ### Building and Installing Extensions from Source
 
-For building and installing extensions from source, see the [building guide]({% link docs/dev/building/build_instructions.md %}#building-and-installing-extensions-from-source).
+For building and installing extensions from source, see the [building guide]({% link docs/dev/building/overview.md %}).
 
 ### Statically Linking Extensions
 
