@@ -42,7 +42,7 @@ SET s3_access_key_id = '⟨AWS access key id⟩';
 SET s3_secret_access_key = '⟨AWS secret access key⟩';
 ```
 
-Alternatively, session tokens are also supported and can be used instead:
+Alternatively, temporary S3 credentials are also supported. They require setting an additional session token:
 
 ```sql
 SET s3_session_token = '⟨AWS session token⟩';
@@ -63,8 +63,8 @@ Multiple configurations per query are also allowed:
 
 ```sql
 SELECT *
-FROM 's3://bucket/file.parquet?s3_region=region&s3_session_token=session_token' t1
-INNER JOIN 's3://bucket/file.csv?s3_access_key_id=accessKey&s3_secret_access_key=secretKey' t2;
+FROM 's3://bucket/file.parquet?s3_access_key_id=accessKey1&s3_secret_access_key=secretKey1' t1
+INNER JOIN 's3://bucket/file.csv?s3_access_key_id=accessKey2&s3_secret_access_key=secretKey2' t2;
 ```
 
 ## Configuration
