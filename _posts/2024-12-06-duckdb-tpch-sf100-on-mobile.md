@@ -47,7 +47,7 @@ This helped a lot: DuckDB completed in 478.2 seconds. This is a more than 20% im
 
 In our next experiment, we picked up a [Samsung Galaxy S24 Ultra phone](https://www.gsmarena.com/samsung_galaxy_s24_ultra-12771.php), which runs Android 14. This phone is full of interesting hardware. First, it has an 8-core CPU with 4 different core types (1×3.39 GHz, 3×3.10 GHz, 2×2.90 GHz and 2×2.20 GHz). Second, it has a huge amount of RAM – 12 GB to be precise. Finally, its cooling system includes a [vapor chamber](https://www.sammobile.com/news/galaxy-s24-sustain-performance-bigger-vapor-chamber/) for improved heat dissipation.
 
-We ran DuckDB in the [Termux terminal emulator](https://termux.dev/en/). We compiled DuckDB [CLI client]({% link docs/api/cli/overview.md %}) from source following the [Android build instructions]({% link docs/dev/building/build_instructions.md %}#android) and ran the experiments from the command line.
+We ran DuckDB in the [Termux terminal emulator](https://termux.dev/en/). We compiled DuckDB [CLI client]({% link docs/api/cli/overview.md %}) from source following the [Android build instructions]({% link docs/dev/building/android.md %}) and ran the experiments from the command line.
 
 <div align="center">
     <img src="/images/blog/tpch-mobile/duckdb-termux-android-emulator.png"

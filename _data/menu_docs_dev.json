@@ -1566,19 +1566,15 @@
             },
             {
               "page": "Release Calendar",
-              "url": "release_calendar"
+            "url": "release_calendar"
             },
             {
-              "page": "Building",
+              "page": "Building DuckDB",
               "slug": "building",
               "subsubfolderitems": [
                 {
                   "page": "Overview",
                   "url": "overview"
-                },
-                {
-                  "page": "Build Instructions",
-                  "url": "build_instructions"
                 },
                 {
                   "page": "Build Configuration",
@@ -1589,8 +1585,24 @@
                   "url": "building_extensions"
                 },
                 {
-                  "page": "Platforms",
-                  "url": "platforms"
+                  "page": "Android",
+                  "url": "android"
+                },
+                {
+                  "page": "Linux",
+                  "url": "linux"
+                },
+                {
+                  "page": "macOS",
+                  "url": "macos"
+                },
+                {
+                  "page": "Raspberry Pi",
+                  "url": "raspberry_pi"
+                },
+                {
+                  "page": "Windows",
+                  "url": "windows"
                 },
                 {
                   "page": "Troubleshooting",

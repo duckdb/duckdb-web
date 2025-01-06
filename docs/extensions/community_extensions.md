@@ -36,7 +36,7 @@ For more details, see the [`h3` extension’s documentation]({% link community_e
 
 ## Developer Experience
 
-From the developer’s perspective, the Community Extensions repository performs the steps required for publishing extensions, including building the extensions for all relevant [platforms]({% link docs/dev/building/platforms.md %}), signing the extension binaries and serving them from the repository.
+From the developer’s perspective, the Community Extensions repository performs the steps required for publishing extensions, including building the extensions for all relevant [platforms]({% link docs/dev/building/overview.md %}#supported-platforms), signing the extension binaries and serving them from the repository.
 
 For the [maintainer of `h3`](https://github.com/isaacbrodsky/), the publication process required performing the following steps:
 

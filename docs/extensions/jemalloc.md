@@ -14,7 +14,7 @@ The availability of the `jemalloc` extension depends on the operating system.
 ### Linux
 
 On Linux, the AMD64 (x86_64) distribution of DuckDB ships with the `jemalloc` extension.
-To disable the `jemalloc` extension, [build DuckDB from source]({% link docs/dev/building/build_instructions.md %}) and set the `SKIP_EXTENSIONS` flag as follows:
+To disable the `jemalloc` extension, [build DuckDB from source]({% link docs/dev/building/overview.md %}) and set the `SKIP_EXTENSIONS` flag as follows:
 
 ```bash
 GEN=ninja SKIP_EXTENSIONS="jemalloc" make
@@ -29,7 +29,7 @@ GEN=ninja BUILD_JEMALLOC=1 make
 
 ### macOS
 
-The macOS version of DuckDB does not ship with the `jemalloc` extension but can be [built from source]({% link docs/dev/building/build_instructions.md %}) to include it:
+The macOS version of DuckDB does not ship with the `jemalloc` extension but can be [built from source]({% link docs/dev/building/macos.md %}) to include it:
 
 ```bash
 GEN=ninja BUILD_JEMALLOC=1 make
