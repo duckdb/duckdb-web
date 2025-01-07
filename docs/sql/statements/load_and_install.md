@@ -16,7 +16,7 @@ Install the [`httpfs`]({% link docs/extensions/httpfs/overview.md %}) extension:
 INSTALL httpfs;
 ```
 
-Install the `h3` [Community Extension]({% link docs/extensions/community_extensions.md %}):
+Install the [`h3` Community Extension]({% link community_extensions/extensions/h3.md %}):
 
 ```sql
 INSTALL h3 FROM community;
