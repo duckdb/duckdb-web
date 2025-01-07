@@ -189,7 +189,7 @@ CREATE TABLE t2 AS SELECT row('a');
 Invalid Input Error: A table cannot be created from an unnamed struct
 ```
 
-When casting structs, the names of fields have to match. Therefore, the following query will fail:
+When casting between structs, the names of at least one field have to match. Therefore, the following query will fail:
 
 ```sql
 SELECT a::STRUCT(y INTEGER) AS b
@@ -198,7 +198,7 @@ FROM
 ```
 
 ```console
-Mismatch Type Error: Type STRUCT(x INTEGER) does not match with STRUCT(y INTEGER). Cannot cast STRUCTs - element "x" in source struct was not found in target struct
+Binder Error: STRUCT to STRUCT cast must have at least one matching member
 ```
 
 A workaround for this is to use [`struct_pack`](#creating-structs) instead:
@@ -265,17 +265,6 @@ These queries return `NULL`.
 
 ```sql
 SELECT {'k1': 2, 'k2': 3} < {'k1': 2, 'k2': NULL} AS result;
-```
-
-This query returns a `Binder Error` because the keys do not match positionally.
-
-```sql
-SELECT {'k1': 2, 'k2': 3} < {'k2': 2, 'k1': 4} AS result;
-```
-
-```console
-Binder Error: Cannot compare values of type STRUCT(k1 INTEGER, k2 INTEGER)
-and type STRUCT(k2 INTEGER, k1 INTEGER) - an explicit cast is required
 ```
 
 ## Functions
