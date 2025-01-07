@@ -85,7 +85,8 @@ SELECT
     TIME '02:00:00' - INTERVAL '3 days 23 hours', -- wraps; equals TIME '03:00:00'
 ;
 ```
-> Warning Adding or subtracting an `INTERVAL` to a `DATE`s will return a `TIMESTAMP` with the time component set to `00:00:00.000000`.
+
+> Warning Addition or subtraction of an `INTERVAL` value with a `DATE` value will return a `TIMESTAMP` with the time component set to `00:00:00.000000`.
 
 Conversely, subtracting two `TIMESTAMP`s or two `TIMESTAMPTZ`s from one another creates an `INTERVAL` describing the difference between the timestamps with only the *days and microseconds* components. For example:
 
