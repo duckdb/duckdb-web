@@ -230,7 +230,7 @@ To statically link extensions, follow the [developer documentation's “Using ex
 ## In-Tree vs. Out-of-Tree
 
 Originally, DuckDB extensions lived exclusively in the DuckDB main repository, `github.com/duckdb/duckdb`. These extensions are called in-tree. Later, the concept
-of out-of-tree extensions was added, where extensions where separated into their own repository, which we call out-of-tree.
+of out-of-tree extensions was added, where extensions were separated into their own repository, which we call out-of-tree.
 
 While from a user's perspective, there are generally no noticeable differences, there are some minor differences related to versioning:
 
