@@ -197,7 +197,7 @@ Unlike PostgreSQL's `regexp_substr` function, DuckDB's `regexp_extract` returns 
 DuckDB does not support the [`to_date` PostgreSQL date formatting function](https://www.postgresql.org/docs/17/functions-formatting.html).
 Instead, please use the [`strptime` function]({% link docs/sql/functions/dateformat.md %}#strptime-examples).
 
-### current_date / current_time / current_timestamp
+### `current_date` / `current_time` / `current_timestamp`
 
 DuckDB's `current_date` and `current_time` pseudo-columns return the current date (as `DATE`) and time (as `TIME`) in UTC, whereas PostgreSQL returns the current date (as `DATE`) in the configured local timezone and time as `TIMETZ`. For the current time in the configured timezone, still as regular `TIME`, DuckDB offers the function `current_localtime()`.
 
