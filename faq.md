@@ -125,11 +125,11 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 <div class="answer" markdown="1">
 
-Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/extensions/core_extensions.md %}) or a [community extension]({% link docs/extensions/community_extensions.md %}). We recommend following these guidelines for feature requests:
+Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/extensions/core_extensions.md %}) or a [community extension]({% link community_extensions/index.md %}). We recommend following these guidelines for feature requests:
 
 * If you would like a feature to be implemented in DuckDB, please raise and issue in the [Ideas section in DuckDB's GitHub Discussions forum](https://github.com/duckdb/duckdb/discussions/categories/ideas). The DuckdB team monitors these ideas and, over time, implements the frequently requested features. For example, we recently published the [Avro Community Extension]({% link community_extensions/extensions/avro.md %}) to support reading Avro files, which was the most requested feature in the issue tracker.
 * If you would like to implement a feature in the main DuckDB project, please discuss it with the DuckDB team on GitHub Discussions or on [our Discord server](https://discord.duckdb.org/). The team can verify whether the idea and the proposed implementation line up with the project's long-term vision.
-* If you would like to implement a feature as an extension, consider submitting it to the [Community Extensions repository]({% link docs/extensions/community_extensions.md %}).
+* If you would like to implement a feature as an extension, consider submitting it to the [Community Extensions repository]({% link community_extensions/index.md %}).
 
 Please note that DuckDB Labs, the company that employs the main DuckDB contributors, provides [consultancy services for DuckDB](https://duckdblabs.com/support/), which can include implementing features in DuckDB or as DuckDB extensions.
 
