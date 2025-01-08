@@ -17,7 +17,7 @@ Currently, the following secret types are available:
 |---------------|-----------------------|---------------------------------------------------------------|
 | `AZURE`       | Azure Blob Storage    | [`azure`]({% link docs/extensions/azure.md %})                |
 | `GCS`         | Google Cloud Storage  | [`httpfs`]({% link docs/extensions/httpfs/s3api.md %})        |
-| `HTTP`        | `http(s)://`          | [`httpfs`]({% link docs/extensions/httpfs/s3api.md %})        |
+| `HTTP`        | HTTP and HTTPS        | [`httpfs`]({% link docs/extensions/httpfs/s3api.md %})        |
 | `HUGGINGFACE` | Hugging Face          | [`httpfs`]({% link docs/extensions/httpfs/hugging_face.md %}) |
 | `MYSQL`       | MySQL                 | [`mysql`]({% link docs/extensions/mysql.md %})                |
 | `POSTGRES`    | PostgreSQL            | [`postgres`]({% link docs/extensions/postgres.md %})          |
