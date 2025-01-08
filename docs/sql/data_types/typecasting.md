@@ -99,44 +99,16 @@ Arrays follow the same casting rules as lists. In addition, arrays can be implic
 
 ### Structs
 
-Structs can be cast to other structs as long as they share at least one child element.
-
-> The rationale behind this requirement is to help avoid unintended errors. If two structs do not have any elements in common, then the cast was likely not intended.
+Structs can be cast to other structs as long as the names of the child elements match.
 
 ```sql
 SELECT CAST({'a': 42} AS STRUCT(a VARCHAR));
-```
-
-Child elements that exist in the target struct, but that do not exist in the source struct, default to `NULL`.
-
-```sql
-SELECT CAST({'a': 42} AS STRUCT(a VARCHAR, b VARCHAR));
-```
-
-Child elements that only exist in the source struct are ignored.
-
-```sql
-SELECT CAST({'a': 42, 'b': 43} AS STRUCT(a VARCHAR));
 ```
 
 The names of the struct can also be in a different order. The fields of the struct will be reshuffled based on the names of the structs.
 
 ```sql
 SELECT CAST({'a': 42, 'b': 84} AS STRUCT(b VARCHAR, a VARCHAR));
-```
-
-Struct casting behaves differently when combined with the [`UNION [ALL] BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name) operation.
-In that case, the fields of the resulting struct are the superset of all fields of the input structs.
-This logic also applies recursively to potentially nested structs.
-
-```sql
-SELECT {'outer1': {'inner1': 42, 'inner2': 42}} AS c
-UNION ALL BY NAME 
-SELECT {'outer1': {'inner2': 'hello', 'inner3': 'world'}, 'outer2': '100'} AS c;
-```
-
-```sql
-SELECT [{'a': 42}, {'b': 84}];
 ```
 
 ### Unions
