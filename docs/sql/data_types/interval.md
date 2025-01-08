@@ -86,7 +86,7 @@ SELECT
 ;
 ```
 
-> Warning Addition or subtraction of an `INTERVAL` value with a `DATE` value will return a `TIMESTAMP` with the time component set to `00:00:00.000000`.
+> Adding an `INTERVAL` to a `DATE` returns a `TIMESTAMP` even when the `INTERVAL` has no microseconds component. The result is the same as if the `DATE` was cast to a `TIMESTAMP` (which sets the time component to `00:00:00`) before adding the `INTERVAL`.
 
 Conversely, subtracting two `TIMESTAMP`s or two `TIMESTAMPTZ`s from one another creates an `INTERVAL` describing the difference between the timestamps with only the *days and microseconds* components. For example:
 
