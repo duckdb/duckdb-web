@@ -153,7 +153,7 @@ The table below shows the available general aggregate functions.
 | [`product(arg)`](#productarg) | Calculates the product of all non-null values in `arg`. |
 | [`string_agg(arg, sep)`](#string_aggarg-sep) | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`sum(arg)`](#sumarg) | Calculates the sum of all non-null values in `arg`. |
-| [`weighted_avg(arg, weight)`](#weighted_avgarg-weight) | Calculates the weighted average all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the corresponding `arg` value will be skipped |
+| [`weighted_avg(arg, weight)`](#weighted_avgarg-weight) | Calculates the weighted average all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the corresponding `arg` value will be skipped. |
 
 #### `any_value(arg)`
 
