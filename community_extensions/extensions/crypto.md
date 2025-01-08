@@ -50,7 +50,7 @@ docs:
 extension:
   build: cmake
   description: Cryptographic hash functions and HMAC
-  excluded_platforms: windows_amd64_rtools;windows_amd64
+  excluded_platforms: windows_amd64_rtools;windows_amd64_mingw;windows_amd64
   language: C++
   license: MIT
   maintainers:
