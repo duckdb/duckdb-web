@@ -27,14 +27,13 @@ To comply with standard SQL, one-based indexing is used almost everywhere, e.g.,
 
 | Expression                 | Result  | Note                                                                          |
 |----------------------------|---------|-------------------------------------------------------------------------------|
-| `-1^2`                     | `1`     | PostgreSQL compatibility means the unary minus has higher precedence than the exponentiation operator. Use additional parentheses, e.g., `-(1^2)` or the [`pow` function]({% link docs/sql/functions/numeric.md %}#powx-y) to avoid mistakes. |
+| `-2^2`                     | `4.0`   | PostgreSQL compatibility means the unary minus has higher precedence than the exponentiation operator. Use additional parentheses, e.g., `-(2^2)` or the [`pow` function]({% link docs/sql/functions/numeric.md %}#powx-y), e.g. `-pow(2, 2)`, to avoid mistakes. |
 | `'t' = true`               | `true`  | Compatible with PostgreSQL.                                                   |
 | `1 = true`                 | `true`  | Not compatible with PostgreSQL.                                               |
 | `1 = '1.1'`                | `true`  | Not compatible with PostgreSQL.                                               |
 | `1 IN (0, NULL)`           | `NULL`  | Makes sense if you think of the `NULL`s in the input and output as `UNKNOWN`. |
 | `1 in [0, NULL]`           | `false` |                                                                               |
-| `if(NULL > 1, 2, 3)`       | `3`     | Even though `NULL > 1` is `NULL`.                                             |
-| `concat('abc', NULL)`      | `abc`   | `list_concat` behaves similarly.                                              |
+| `concat('abc', NULL)`      | `abc`   | Compatible with PostgreSQL. `list_concat` behaves similarly.                  |
 | `'abc' || NULL`            | `NULL`  |                                                                               |
 
 <!-- markdownlint-enable MD056 -->
