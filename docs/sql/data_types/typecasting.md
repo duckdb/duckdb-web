@@ -101,6 +101,8 @@ Arrays follow the same casting rules as lists. In addition, arrays can be implic
 
 Structs can be cast to other structs as long as they share at least one child element.
 
+> The rationale behind this requirement is to help avoid unintended errors. If two structs do not have any elements in common, then the cast was likely not intended.
+
 ```sql
 SELECT CAST({'a': 42} AS STRUCT(a VARCHAR));
 ```
