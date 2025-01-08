@@ -22,14 +22,15 @@ Additionally, we recommend using the [Ninja build system](https://ninja-build.or
 
 DuckDB fully supports Linux, macOS and Windows. Both AMD64 (x86_64) and ARM64 (AArch64) builds are available for these platforms.
 
-| Platform name      | Description                          |
-|--------------------|--------------------------------------|
-| `linux_amd64`      | Linux AMD64 (x86_64)                 |
-| `linux_arm64`      | Linux ARM64 (AArch64)                |
-| `osx_amd64`        | macOS 12+ AMD64 (Intel CPUs)         |
-| `osx_arm64`        | macOS 12+ ARM64 (Apple Silicon CPUs) |
-| `windows_amd64`    | Windows 10+ AMD64 (x86_64)           |
-| `windows_arm64`    | Windows 10+ ARM64 (AArch64)          |
+| Platform name      | Description                                                            |
+|--------------------|------------------------------------------------------------------------|
+| `linux_amd64`      | Linux AMD64 (x86_64) with [glibc](https://www.gnu.org/software/libc/)  |
+| `linux_arm64`      | Linux ARM64 (AArch64) with [glibc](https://www.gnu.org/software/libc/) |
+| `linux_amd64_musl` | Linux AMD64 (x86_64) with [musl libc](https://www.musl-libc.org/)      |
+| `osx_amd64`        | macOS 12+ AMD64 (Intel CPUs)                                           |
+| `osx_arm64`        | macOS 12+ ARM64 (Apple Silicon CPUs)                                   |
+| `windows_amd64`    | Windows 10+ AMD64 (x86_64)                                             |
+| `windows_arm64`    | Windows 10+ ARM64 (AArch64)                                            |
 
 For instructions to build from source, see:
 
