@@ -235,8 +235,6 @@ ATTACH 'database.db' AS ddb;
 COPY FROM DATABASE postgres TO ddb;
 ```
 
-Note that this statement is currently only available in the development build. It will be available in the next DuckDB release (v0.10).
-
 ## Directly Opening a Database
 
 The explicit `ATTACH` statement is not required to connect to a different database type. When instantiating a DuckDB instance a connection can be made directly to a different database type using the `{type}:` prefix. For example, to connect to a SQLite file, use `sqlite:file.db`. To connect to a Postgres instance, use `postgres:dbname=postgresscanner`. This can be done in any client, including the CLI. For instance:
