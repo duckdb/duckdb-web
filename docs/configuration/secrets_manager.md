@@ -9,15 +9,20 @@ The **Secrets manager** provides a unified user interface for secrets across all
 
 ## Types of Secrets
 
-Secrets are typed, their type identifies which service they are for. Currently, the following cloud services are available:
+Secrets are typed, their type identifies which service they are for.
+Most secrets are not included in DuckDB default, instead, they are registered by extensions.
+Currently, the following secret types are available:
 
-* AWS S3 (`S3`), through the [`httpfs` extension]({% link docs/extensions/httpfs/s3api.md %})
-* Azure Blob Storage (`AZURE`), through the [`azure` extension]({% link docs/extensions/azure.md %})
-* Cloudflare R2 (`R2`), through the [`httpfs` extension]({% link docs/extensions/httpfs/s3api.md %})
-* Google Cloud Storage (`GCS`), through the [`httpfs` extension]({% link docs/extensions/httpfs/s3api.md %})
-* Hugging Face (`HUGGINGFACE`), through the [`httpfs` extension]({% link docs/extensions/httpfs/hugging_face.md %})
-* MySQL (`MYSQL`), through the [`mysql` extension]({% link docs/extensions/mysql.md %})
-* PostgreSQL (`POSTGRES`), through the [`postgres` extension]({% link docs/extensions/postgres.md %})
+| Secret type   | Service / protocol    | Extension                                                     |
+|---------------|-----------------------|---------------------------------------------------------------|
+| `AZURE`       | Azure Blob Storage    | [`azure`]({% link docs/extensions/azure.md %})                |
+| `GCS`         | Google Cloud Storage  | [`httpfs`]({% link docs/extensions/httpfs/s3api.md %})        |
+| `HTTP`        | `http(s)://`          | [`httpfs`]({% link docs/extensions/httpfs/s3api.md %})        |
+| `HUGGINGFACE` | Hugging Face          | [`httpfs`]({% link docs/extensions/httpfs/hugging_face.md %}) |
+| `MYSQL`       | MySQL                 | [`mysql`]({% link docs/extensions/mysql.md %})                |
+| `POSTGRES`    | PostgreSQL            | [`postgres`]({% link docs/extensions/postgres.md %})          |
+| `R2`          | Cloudflare R2         | [`httpfs`]({% link docs/extensions/httpfs/s3api.md %})        |
+| `S3`          | AWS S3                | [`httpfs`]({% link docs/extensions/httpfs/s3api.md %})        |
 
 For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
