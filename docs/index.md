@@ -89,6 +89,10 @@ See all [client APIs]({% link docs/api/overview.md %}).
         <span>Building DuckDB</span>
         <span class="chevron"></span>
     </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/guides/offline-copy.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/doc.svg %}"></span>
+        <span>Offline copy of the documentation</span>
+        <span class="chevron"></span>
+    </div>
 </div>
-
-You can also [browse the DuckDB documentation offline]({% link docs/guides/offline-copy.md %}).
