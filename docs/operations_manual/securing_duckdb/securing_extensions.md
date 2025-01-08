@@ -21,9 +21,9 @@ DuckDB offers the following security levels for extensions.
 
 | Usable extensions | Description | Configuration |
 |-----|---|---|
-| `core` | Extensions can only be installed from the `core` repository. | `SET allow_community_extensions = false` |
-| `core` and `community` | Extensions can only be installed from the `core` and `community` repositories. | This is the default security level. |
-| any extension incl. unsigned | Any extensions can be installed. | `SET allow_unsigned_extensions = true` |
+| `core` | Extensions can only be loaded if signed from a `core` key. | `SET allow_community_extensions = false` |
+| `core` and `community` | Extensions can only be loaded if signed from a `core` or `community` key. | This is the default security level. |
+| any extension incl. unsigned | Any extensions can be loaded. | `SET allow_unsigned_extensions = true` |
 
 Security-related configuration settings [lock themselves]({% link docs/operations_manual/securing_duckdb/overview.md %}#locking-configurations), i.e., it is only possible to restrict capabilities in the current process.
 
