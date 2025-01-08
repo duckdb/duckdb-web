@@ -39,6 +39,29 @@ FROM read_parquet([
 ]);
 ```
 
+## Authenticating
+
+To authenticate for an HTTP(S) endpoint, create an `HTTP` secret using the [Secrets Manager]({% link docs/configuration/secrets_manager.md %}):
+
+```sql
+CREATE SECRET http_auth (
+    TYPE HTTP,
+    BEARER_TOKEN '⟨token⟩'
+);
+
+```
+
+Or:
+
+```sql
+CREATE SECRET http_auth (
+    TYPE HTTP,
+    EXTRA_HTTP_HEADERS MAP {
+        'Authorization': 'Bearer ⟨token⟩'
+    }
+);
+```
+
 ## Using a Custom Certificate File
 
 > This feature is currently only available in the nightly build. It will be [released]({% link docs/dev/release_calendar.md %}) in version 0.10.1.
