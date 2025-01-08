@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Browse Offline
+title: Browsing Offline
 ---
 
 You can browse the DuckDB documentation offline in the following formats:

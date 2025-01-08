@@ -9,7 +9,7 @@ title: Documentation
     <div class="box-link half-width">
         <a href="{% link docs/connect/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/link.svg %}"></span>
-        <span>DuckDB connection overview</span>
+        <span>DuckDB Connection Overview</span>
         <span class="chevron"></span>
     </div>
 </div>
@@ -20,7 +20,7 @@ title: Documentation
     <div class="box-link half-width">
         <a href="{% link docs/api/cli/overview.md %}"></a>
         <span class="symbol"><img src="{%link images/icons/cli.svg %}"></span>
-        <span>CLI (command line interface)</span>
+        <span>CLI (Command Line Interface)</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
@@ -83,6 +83,16 @@ See all [client APIs]({% link docs/api/overview.md %}).
         <span>Installation</span>
         <span class="chevron"></span>
     </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/dev/building/overview.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/wrench.svg %}"></span>
+        <span>Building DuckDB</span>
+        <span class="chevron"></span>
+    </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/guides/offline-copy.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/doc.svg %}"></span>
+        <span>Browsing Offline</span>
+        <span class="chevron"></span>
+    </div>
 </div>
-
-You can also [browse the DuckDB documentation offline]({% link docs/guides/offline-copy.md %}).
