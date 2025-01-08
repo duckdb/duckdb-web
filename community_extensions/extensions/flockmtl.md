@@ -53,10 +53,10 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 89
-extension_star_count_pretty: 89
-extension_download_count: 372
-extension_download_count_pretty: 372
+extension_star_count: 90
+extension_star_count_pretty: 90
+extension_download_count: 384
+extension_download_count_pretty: 384
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
 layout: community_extension_doc
 ---
