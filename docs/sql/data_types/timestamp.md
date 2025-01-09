@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Timestamp Types
-blurb: Timestamps represent points in time. 
+blurb: Timestamps represent points in time.
 ---
 
 Timestamps represent points in time. As such, they combine [`DATE`]({% link docs/sql/data_types/date.md %}) and [`TIME`]({% link docs/sql/data_types/time.md %}) information.
@@ -130,7 +130,7 @@ To understand time zones and the `WITH TIME ZONE` types, it helps to start with 
 
 ### Instants
 
-An instant is a point in absolute time, usually given as a count of some time increment from a fixed point in time (called the *epoch*). This is similar to how positions on the earth's surface are given using latitude and longitude relative to the equator and the Greenwich Meridian. In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00+00:00`, and the increment is in seconds, milliseconds, microseconds, or nanoseconds, depending on the specific data type. 
+An instant is a point in absolute time, usually given as a count of some time increment from a fixed point in time (called the *epoch*). This is similar to how positions on the earth's surface are given using latitude and longitude relative to the equator and the Greenwich Meridian. In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00+00:00`, and the increment is in seconds, milliseconds, microseconds, or nanoseconds, depending on the specific data type.
 
 ### Temporal Binning
 
